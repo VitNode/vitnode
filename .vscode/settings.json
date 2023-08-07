@@ -1,0 +1,16 @@
+{
+  "cSpell.words": ["testid", "stylelint", "vitnode"],
+  "stylelint.validate": ["css", "scss"],
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": true
+  }
+}

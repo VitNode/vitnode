@@ -1,0 +1,21 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CreateCoreMembersObj {
+  birthday: Int!
+  email: String!
+  first_name: String!
+  last_name: String!
+  name: String!
+  newsletter: Boolean
+}
+
+type Mutation {
+  create_core_members(birthday: Int!, email: String!, firstName: String!, lastName: String!, name: String!, newsletter: Boolean, password: String!): CreateCoreMembersObj!
+  signIn_core_sessions(email: String!, password: String!, remember: Boolean): String!
+}
+
+type Query {
+  show_core_members: String!
+}

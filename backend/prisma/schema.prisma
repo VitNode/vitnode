@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model core_members {
+  id                   String          @id @default(uuid())
+  name                 String          @unique @db.VarChar(255)
+  name_seo             String          @unique @db.VarChar(255)
+  email                String          @unique @db.VarChar(255)
+  password             String          @db.Text
+  group_id             Int             @default(3)
+  joined               Int
+  birthday             Int
+  first_name           String          @db.VarChar(255)
+  last_name            String          @db.VarChar(255)
+  avatar               String?         @db.VarChar(255)
+  image_cover          String?         @db.VarChar(255)
+  posts                Int             @default(0)
+  followers            Int             @default(0)
+  reactions            Int             @default(0)
+  newsletter           Boolean         @default(false)
+  hide_real_name       Int             @default(0) @db.SmallInt
+  avatar_color         String          @db.VarChar(6)
+  unread_notifications Int             @default(0)
+  core_sessions        core_sessions[]
+}
+
+model core_sessions {
+  refresh_token        String       @id @unique @db.VarChar(255)
+  access_token         String?      @unique @db.VarChar(255)
+  member               core_members @relation(references: [id], fields: [member_id])
+  member_id            String
+  ip_address           String?      @db.VarChar(46)
+  user_agent           String       @db.Text
+  uagent_browser       String       @db.VarChar(200)
+  uagent_version       String       @db.VarChar(100)
+  uagent_os            String       @db.VarChar(100)
+  uagent_device_vendor String?      @db.VarChar(200)
+  uagent_device_type   String?      @db.VarChar(200)
+  uagent_device_model  String?      @db.VarChar(200)
+  last_seen            Int
+  expires              Int
+
+  @@index([member_id])
+}

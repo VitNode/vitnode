@@ -1,0 +1,17 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgb(var(--text-color));
+
+  background-color: rgb(var(--body-background));
+}

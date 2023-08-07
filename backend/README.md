@@ -1,4 +1,4 @@
-# Vitnode
+# (Backend) VitNode
 
 ## ⚠️ Requirements for VSCode
 
@@ -13,3 +13,23 @@ Use commands:
 ```bash
 npm i
 ```
+
+## 🛠 Run
+
+```bash
+npm run dev
+```
+
+## 👍 Lint
+
+Commands:
+
+```bash
+npm run lint
+npm run lint:fix
+```
+
+## 👍 Groups
+
+- [3] User
+- [4] Admin

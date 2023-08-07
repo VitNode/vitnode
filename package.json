@@ -1,0 +1,12 @@
+{
+  "name": "vitnode",
+  "version": "1.0.0",
+  "description": "Frontend for VitNode app",
+  "author": "Maciej Piotr (aXenDev) Balcerzak",
+  "private": true,
+  "license": "UNLICENSED",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ]
+}

@@ -1,0 +1,3 @@
+query Test {
+  show_core_members
+}

@@ -1,0 +1,72 @@
+{
+  "env": {
+    "node": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/warnings",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "root": true,
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "typescript-sort-keys",
+    "sort-destructure-keys",
+    "@typescript-eslint/eslint-plugin"
+  ],
+  "rules": {
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "no-console": "error",
+    "no-useless-catch": "off",
+    "import/no-named-as-default-member": "off",
+    "typescript-sort-keys/interface": [
+      "warn",
+      "asc",
+      { "caseSensitive": true, "natural": false, "requiredFirst": true }
+    ],
+    "sort-destructure-keys/sort-destructure-keys": "warn",
+    "newline-before-return": "error",
+    "prettier/prettier": [
+      "warn",
+      {
+        "endOfLine": "auto",
+        "arrowParens": "avoid",
+        "trailingComma": "none"
+      }
+    ],
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", "internal"],
+        "pathGroups": [
+          {
+            "pattern": "~/**",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "../**",
+            "group": "internal"
+          },
+          {
+            "pattern": "./**",
+            "group": "internal"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": [],
+        "newlines-between": "always"
+      }
+    ]
+  }
+}
