@@ -5,13 +5,11 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_USER: vitnode
-      POSTGRES_PASSWORD: D)v,LjDE28DEsJR
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
       POSTGRES_DB: vitnode
     ports:
       - '5432:5432'
-    volumes:
-      - db-data:/var/lib/postgresql/data
 
   pgadmin:
     image: dpage/pgadmin4
@@ -21,9 +19,3 @@ services:
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
       - '5050:80'
-    volumes:
-      - pgadmin-data:/var/lib/pgadmin
-
-volumes:
-  db-data:
-  pgadmin-data:
