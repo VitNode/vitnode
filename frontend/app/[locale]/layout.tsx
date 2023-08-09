@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { Montserrat } from 'next/font/google';
+
 import { Providers } from './Providers';
 
 const montserrat = Montserrat({
