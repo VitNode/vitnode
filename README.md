@@ -1,4 +1,4 @@
-# Vitnode
+# VitNode
 
 ## ⚠️ Requirements for VSCode
 
@@ -12,6 +12,7 @@ Use commands:
 
 ```bash
 npm i
+npm run prepare
 ```
 
 ## Backend

@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["testid", "stylelint", "vitnode"],
+  "cSpell.words": ["commitlint", "stylelint", "testid", "vitnode"],
   "stylelint.validate": ["css", "scss"],
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"

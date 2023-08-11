@@ -4,7 +4,7 @@
   "description": "",
   "author": "Maciej Piotr (aXenDev) Balcerzak",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "GPL-3.0 license",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
