@@ -1,7 +1,7 @@
 import { ArgsType, Field, Int } from '@nestjs/graphql';
 import { IsEmail, IsStrongPassword, Matches, MaxLength, Min, MinLength } from 'class-validator';
 
-import { nameRegex } from '../../../../../utils/regex/name.regex';
+import { nameRegex } from '@/utils/regex/name.regex';
 
 @ArgsType()
 export class CreateCoreMembersArgs {

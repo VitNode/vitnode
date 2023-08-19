@@ -1,5 +1,6 @@
 import { Query, Resolver } from '@nestjs/graphql';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ShowCoreMembersService } from './show-core_members.service';
 
 @Resolver()

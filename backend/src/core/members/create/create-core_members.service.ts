@@ -4,12 +4,12 @@ import { genSalt, hash } from 'bcrypt';
 import { CreateCoreMembersArgs } from './dto/create-core_members.args';
 import { CreateCoreMembersObj } from './dto/create-core_members.obj';
 
-import { PrismaService } from '../../../prisma/prisma.service';
-import { CustomError } from '../../../../utils/errors/CustomError';
-import { removeSpecialCharacters } from '../../../../functions/removeSpecialCharacters';
-import { CONFIG_PASSWORD_SALT } from '../../../../config';
-import { getCurrentDate } from '../../../../functions/date';
-import { generateAvatarColor } from '../../../../functions/avatar/generateAvatarColor';
+import { PrismaService } from '@/src/prisma/prisma.service';
+import { CustomError } from '@/utils/errors/CustomError';
+import { removeSpecialCharacters } from '@/functions/removeSpecialCharacters';
+import { CONFIG_PASSWORD_SALT } from '@/config';
+import { getCurrentDate } from '@/functions/date';
+import { generateAvatarColor } from '@/functions/avatar/generateAvatarColor';
 
 @Injectable()
 export class CreateCoreMembersService {

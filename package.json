@@ -13,7 +13,7 @@
     "b:build": "cd backend && npm run build",
     "f:dev": "cd frontend && npm run dev",
     "f:build": "cd frontend && npm run build",
-    "docker:dev": "docker-compose -f ./deployments/docker-compose-dev.yml -p vitnode-dev up -d",
+    "docker": "docker-compose -f ./deployments/docker-compose.yml -p vitnode up -d",
     "lint": "cd backend && npm run lint && cd .. && cd frontend && npm run lint && cd ..",
     "lint:fix": "cd backend && npm run lint:fix && cd .. && cd frontend && npm run lint:fix && cd .."
   },

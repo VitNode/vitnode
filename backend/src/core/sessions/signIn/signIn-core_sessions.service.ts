@@ -3,8 +3,8 @@ import { compare } from 'bcrypt';
 
 import { SignInCoreSessionsArgs } from './dto/signIn-core_sessions.args';
 
-import { PrismaService } from '../../../prisma/prisma.service';
-import { AccessDeniedError } from '../../../../utils/errors/AccessDeniedError';
+import { PrismaService } from '@/src/prisma/prisma.service';
+import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 
 @Injectable()
 export class SignInCoreSessionsService {

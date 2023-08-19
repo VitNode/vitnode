@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["commitlint", "stylelint", "testid", "vitnode"],
+  "cSpell.words": ["commitlint", "nestjs", "stylelint", "testid", "vitnode"],
   "stylelint.validate": ["css", "scss"],
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -12,5 +12,6 @@
   "scss.validate": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.stylelint": true
-  }
+  },
+  "eslint.workingDirectories": ["frontend", "backend"]
 }
