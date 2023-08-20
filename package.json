@@ -6,7 +6,7 @@
   "private": true,
   "license": "GPL-3.0 license",
   "scripts": {
-    "prepare": "husky install && npm run b:init",
+    "prepare": "husky install",
     "b:init": "cd backend && npm run prisma:generate && npm run prisma:push",
     "b:prisma": "cd backend && npm run prisma:push && cd ..",
     "b:dev": "cd backend && npm run dev",
