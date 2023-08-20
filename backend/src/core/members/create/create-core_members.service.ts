@@ -7,7 +7,7 @@ import { CreateCoreMembersObj } from './dto/create-core_members.obj';
 import { PrismaService } from '@/src/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';
 import { removeSpecialCharacters } from '@/functions/removeSpecialCharacters';
-import { CONFIG_PASSWORD_SALT } from '@/config';
+import { CONFIG } from '@/config';
 import { getCurrentDate } from '@/functions/date';
 import { generateAvatarColor } from '@/functions/avatar/generateAvatarColor';
 
@@ -63,7 +63,7 @@ export class CreateCoreMembersService {
       });
     }
 
-    const passwordSalt = await genSalt(CONFIG_PASSWORD_SALT);
+    const passwordSalt = await genSalt(CONFIG.password_salt);
     const hashPassword = await hash(password, passwordSalt);
 
     const data = await this.prisma.core_members.create({

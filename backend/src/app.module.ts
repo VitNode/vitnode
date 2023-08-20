@@ -4,10 +4,13 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { JwtModule } from '@nestjs/jwt';
 
 import { CoreMembersModule } from './core/members/core_members.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { CoreSessionsModule } from './core/sessions/core_sessions.module';
+
+import { Ctx } from '@/utils/context.type';
 
 @Module({
   imports: [
@@ -16,8 +19,10 @@ import { CoreSessionsModule } from './core/sessions/core_sessions.module';
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      sortSchema: true
+      sortSchema: true,
+      context: ({ req, res }): Ctx => ({ req, res })
     }),
+    JwtModule.register({ global: true }),
     PrismaModule,
     CoreMembersModule,
     CoreSessionsModule

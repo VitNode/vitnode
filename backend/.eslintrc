@@ -30,6 +30,7 @@
     "no-console": "error",
     "no-useless-catch": "off",
     "import/no-named-as-default-member": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
     "typescript-sort-keys/interface": [
       "warn",
       "asc",
