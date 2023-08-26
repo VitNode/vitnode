@@ -1,7 +1,7 @@
 {
   "name": "vitnode",
   "version": "1.0.0",
-  "description": "Frontend for VitNode app",
+  "description": "VitNode app",
   "author": "Maciej Piotr (aXenDev) Balcerzak",
   "private": true,
   "license": "GPL-3.0 license",
@@ -19,7 +19,8 @@
   },
   "workspaces": [
     "frontend",
-    "backend"
+    "backend",
+    "docs"
   ],
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
