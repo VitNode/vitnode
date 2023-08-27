@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "author": "Maciej Piotr (aXenDev) Balcerzak",
-  "private": true,
   "license": "GPL-3.0 license",
   "scripts": {
     "build": "nest build",

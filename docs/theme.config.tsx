@@ -6,6 +6,9 @@ const config: DocsThemeConfig = {
   footer: {
     text: 'VitNode © 2023'
   },
+  project: {
+    link: 'https://github.com/aXenDeveloper/vitnode/'
+  },
   docsRepositoryBase: 'https://github.com/aXenDeveloper/vitnode/tree/canary/docs',
   useNextSeoProps() {
     return {

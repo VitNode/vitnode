@@ -1,5 +1,14 @@
 {
-  "cSpell.words": ["commitlint", "nestjs", "stylelint", "testid", "uagent", "vitnode"],
+  "cSpell.words": [
+    "clsx",
+    "commitlint",
+    "nestjs",
+    "nextra",
+    "stylelint",
+    "testid",
+    "uagent",
+    "vitnode"
+  ],
   "stylelint.validate": ["css", "scss"],
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"

@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Frontend for VitNode app",
   "author": "Maciej Piotr (aXenDev) Balcerzak",
-  "private": true,
   "license": "GPL-3.0 license",
   "scripts": {
     "dev": "next dev",

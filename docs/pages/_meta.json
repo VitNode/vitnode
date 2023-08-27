@@ -1,6 +1,9 @@
 {
   "index": "Introduction",
   "get_started": "Get Started",
+  "contribution": "Contribution",
+  "backend": "Backend",
+  "frontend": "Frontend",
   "about": {
     "title": "About",
     "type": "page"
