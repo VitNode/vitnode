@@ -10,7 +10,7 @@ import { CoreMembersModule } from './core/members/core_members.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { CoreSessionsModule } from './core/sessions/core_sessions.module';
 
-import { Ctx } from '@/utils/context.type';
+import { Ctx } from '@/types/context.type';
 
 @Module({
   imports: [

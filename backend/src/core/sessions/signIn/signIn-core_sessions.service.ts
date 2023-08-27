@@ -7,7 +7,7 @@ import { SignInCoreSessionsArgs } from './dto/signIn-core_sessions.args';
 
 import { PrismaService } from '@/src/prisma/prisma.service';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
-import { Ctx } from '@/utils/context.type';
+import { Ctx } from '@/types/context.type';
 import { CONFIG, CONFIG_COOKIE_ACCESS_TOKEN, CONFIG_COOKIE_REFRESH_TOKEN } from '@/config';
 import { convertUnixTime, getCurrentDate } from '@/functions/date';
 

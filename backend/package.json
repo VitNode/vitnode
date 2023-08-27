@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "author": "Maciej Piotr (aXenDev) Balcerzak",
-  "private": true,
   "license": "GPL-3.0 license",
   "scripts": {
     "build": "nest build",
@@ -12,8 +11,8 @@
     "dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
-    "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",

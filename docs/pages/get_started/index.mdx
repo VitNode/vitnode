@@ -1,0 +1,63 @@
+# Installation
+
+System Requirements:
+
+- [Node.js 16.14](https://nodejs.org/) or later,
+- [PostgreSQL 14](https://www.postgresql.org/) or later,
+- macOS, Windows with [WSL](https://learn.microsoft.com/en-us/windows/wsl/install), and Linux are supported
+- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
+
+## ⚠️ Requirements for VSCode
+
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [StyleLint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
+
+## Dev Server
+
+import { Steps } from 'nextra/components';
+
+<Steps>
+
+### Clone the repository
+
+```bash
+git clone https://github.com/aXenDeveloper/vitnode.git
+cd vitnode
+```
+
+### Install dependencies
+
+```bash
+npm install
+npm run prepare
+```
+
+### Docker
+
+```bash
+npm run docker
+```
+
+### Environment variables
+
+#### Backend
+
+Go to `backlend` folder and create new `.env` file. Copy the contents from `.env.example` file.
+
+Then fill the values:
+
+```bash
+DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE
+ACCESS_TOKEN_SECRET=SECRET
+REFRESH_TOKEN_SECRET=SECRET
+```
+
+import { Callout } from 'nextra/components';
+
+<Callout type="warning" emoji="⚠️">
+  Remember to change the values in `ACCESS_TOKEN_SECRET` and `REFRESH_TOKEN_SECRET`! You can
+  generate new secrets with [RandomKeygen](https://randomkeygen.com/).
+</Callout>
+
+</Steps>

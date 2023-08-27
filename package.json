@@ -1,12 +1,11 @@
 {
   "name": "vitnode",
   "version": "1.0.0",
-  "description": "Frontend for VitNode app",
+  "description": "VitNode app",
   "author": "Maciej Piotr (aXenDev) Balcerzak",
-  "private": true,
   "license": "GPL-3.0 license",
   "scripts": {
-    "prepare": "husky install && npm run b:init",
+    "prepare": "npx husky install",
     "b:init": "cd backend && npm run prisma:generate && npm run prisma:push",
     "b:prisma": "cd backend && npm run prisma:push && cd ..",
     "b:dev": "cd backend && npm run dev",
@@ -19,7 +18,8 @@
   },
   "workspaces": [
     "frontend",
-    "backend"
+    "backend",
+    "docs"
   ],
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",

@@ -1,7 +1,9 @@
 {
   "index": "Introduction",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
+  "get_started": "Get Started",
+  "contribution": "Contribution",
+  "backend": "Backend",
+  "frontend": "Frontend",
   "about": {
     "title": "About",
     "type": "page"
