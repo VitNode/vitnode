@@ -17,6 +17,7 @@ type Mutation {
 }
 
 type PageInfo {
+  count: Float!
   endCursor: String!
   hasNextPage: Boolean!
   hasPreviousPage: Boolean!
@@ -25,9 +26,31 @@ type PageInfo {
 }
 
 type Query {
-  show_core_members: ShowCoreMembersObj!
+  show_core_members(cursor: String, first: Int!): ShowCoreMembersObj!
+}
+
+type ShowCoreMembers {
+  avatar: String
+  avatar_color: String!
+  birthday: Int!
+  email: String!
+  first_name: String!
+  followers: Int!
+  group_id: Int!
+  hide_real_name: Boolean!
+  id: String!
+  image_cover: String
+  joined: Int!
+  last_name: String!
+  name: String!
+  name_seo: String!
+  newsletter: Boolean!
+  posts: Int!
+  reactions: Int!
+  unread_notifications: Int!
 }
 
 type ShowCoreMembersObj {
+  edges: [ShowCoreMembers!]!
   pageInfo: PageInfo!
 }

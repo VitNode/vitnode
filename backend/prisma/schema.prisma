@@ -27,7 +27,7 @@ model core_members {
   followers            Int             @default(0)
   reactions            Int             @default(0)
   newsletter           Boolean         @default(false)
-  hide_real_name       Int             @default(0) @db.SmallInt
+  hide_real_name       Boolean         @default(true)
   avatar_color         String          @db.VarChar(6)
   unread_notifications Int             @default(0)
   core_sessions        core_sessions[]

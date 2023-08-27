@@ -16,4 +16,7 @@ export class PageInfo {
 
   @Field(() => Number)
   totalCount: number;
+
+  @Field(() => Number)
+  count: number;
 }

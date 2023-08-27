@@ -66,24 +66,39 @@ export class CreateCoreMembersService {
     const passwordSalt = await genSalt(CONFIG.password_salt);
     const hashPassword = await hash(password, passwordSalt);
 
-    const data = await this.prisma.core_members.create({
+    return await this.prisma.core_members.create({
       data: {
         email,
         first_name: firstName,
         last_name: lastName,
         name,
         name_seo: convertToNameSEO,
-        newsletter: !!newsletter,
+        newsletter,
         password: hashPassword,
         joined: currentDate,
         avatar_color: generateAvatarColor(name),
         birthday
+      },
+      select: {
+        id: true,
+        name: true,
+        name_seo: true,
+        email: true,
+        group_id: true,
+        joined: true,
+        birthday: true,
+        first_name: true,
+        last_name: true,
+        avatar: true,
+        image_cover: true,
+        posts: true,
+        followers: true,
+        reactions: true,
+        newsletter: true,
+        hide_real_name: true,
+        avatar_color: true,
+        unread_notifications: true
       }
     });
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password: _password, ...rest } = data;
-
-    return { ...rest };
   }
 }
