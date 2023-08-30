@@ -1,0 +1,165 @@
+# Pagination
+
+VitNode provide a pagination system using `cursor` pagination to help you retrieve data from the `database`. The pagination system is based on the [Prisma pagination system](https://www.prisma.io/docs/concepts/components/prisma-client/pagination).
+
+import { Callout } from 'nextra/components';
+
+<Callout type="warning" emoji="⚠️">
+  VitNode doesn't support the `offset` pagination.
+</Callout>
+
+Here is an example of how to use the pagination system. We will use the `core_members` table as an example.
+
+## Data Transfer Object (DTO)
+
+We will create a `DTO` to create arguments and return values for the query.
+
+import { Steps } from 'nextra/components';
+
+<Steps>
+
+### Arguments
+
+File: `show/dto/show-core_members.args.ts`
+
+Arguments used as container for fields to create query in GraphQL schema.
+
+```tsx
+import { ArgsType, Field, Int } from '@nestjs/graphql';
+
+@ArgsType()
+export class ShowCoreMembersArgs {
+  @Field(() => String, { nullable: true })
+  cursor?: string;
+
+  @Field(() => Int)
+  first: number;
+}
+```
+
+### Object
+
+File: `show/dto/show-core_members.obj.ts`
+
+Object used as container for fields to create return values query in GraphQL schema.
+
+```tsx
+import { Field, Int, ObjectType } from '@nestjs/graphql';
+
+import { PageInfo } from '@/types/pagination.type';
+
+@ObjectType()
+export class ShowCoreMembersObj {
+  @Field(() => [ShowCoreMembers])
+  edges: ShowCoreMembers[];
+
+  @Field(() => PageInfo)
+  pageInfo: PageInfo;
+}
+```
+
+`ShowCoreMembers` object is used to create a list of `core_members` objects.
+
+</Steps>
+
+## Query GraphQL
+
+<Steps>
+### Service
+
+File: `show/show-core_members.service.ts`
+
+Inside service file we will create a `show` method that will return a `ShowCoreMembersObj` object.
+
+```tsx
+import { Injectable } from '@nestjs/common';
+
+import { ShowCoreMembersObj } from './dto/show-core_members.obj';
+import { ShowCoreMembersArgs } from './dto/show-core_members.args';
+
+import { PrismaService } from '@/src/prisma/prisma.service';
+
+@Injectable()
+export class ShowCoreMembersService {
+  constructor(private prisma: PrismaService) {}
+
+  async show({ cursor, first }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {}
+}
+```
+
+### Query from database
+
+Now we can create query using `Prisma` and pass `inputPagination` to the `findMany()` method to create the query.
+
+```tsx
+import { inputPagination } from '@/functions/pagination/inputPagination';
+
+const edges = await this.prisma.core_members.findMany({
+  ...inputPagination({ first, cursor })
+});
+```
+
+### Return values
+
+To complite the `show()` method we need to return a `ShowCoreMembersObj` object. VitNode provide a `outputPagination` function to create the `pageInfo` object.
+
+```tsx
+import { outputPagination } from '@/functions/pagination/outputPagination';
+
+const totalCount = await this.prisma.core_members.count();
+
+return outputPagination({ edges, totalCount, first, cursor });
+```
+
+Please remember to create a query `totalCount` to get the total count of the query.
+
+### Complite example
+
+```tsx
+import { Injectable } from '@nestjs/common';
+
+import { ShowCoreMembersObj } from './dto/show-core_members.obj';
+import { ShowCoreMembersArgs } from './dto/show-core_members.args';
+
+import { PrismaService } from '@/src/prisma/prisma.service';
+import { inputPagination } from '@/functions/pagination/inputPagination';
+import { outputPagination } from '@/functions/pagination/outputPagination';
+
+@Injectable()
+export class ShowCoreMembersService {
+  constructor(private prisma: PrismaService) {}
+
+  async show({ cursor, first }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
+    const edges = await this.prisma.core_members.findMany({
+      ...inputPagination({ first, cursor })
+    });
+
+    const totalCount = await this.prisma.core_members.count();
+
+    return outputPagination({ edges, totalCount, first, cursor });
+  }
+}
+```
+
+</Steps>
+
+<Callout type="info" emoji="ℹ️">
+  Remember if you want use `findMany()` query with `where` argument you need to pass `where`
+  argument to the `findMany()` and `count()` method.
+</Callout>
+
+## Output
+
+```JSON
+{
+  "edges": [],
+  "pageInfo": {
+    "hasNextPage": false,
+    "hasPreviousPage": false,
+    "startCursor": "",
+    "endCursor": "",
+    "totalCount": 0,
+    "count": 0
+  }
+}
+```
