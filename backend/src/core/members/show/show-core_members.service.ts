@@ -10,6 +10,7 @@ import { PrismaService } from '@/src/prisma/prisma.service';
 import { inputPagination } from '@/functions/database/pagination/inputPagination';
 import { outputPagination } from '@/functions/database/pagination/outputPagination';
 import { inputSorting } from '@/functions/database/inputSorting';
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
 export class ShowCoreMembersService {
@@ -43,7 +44,7 @@ export class ShowCoreMembersService {
           sortBy,
           defaultSortBy: {
             column: ShowCoreMembersSortingColumnEnum.joined,
-            direction: 'asc'
+            direction: SortDirectionEnum.asc
           }
         })
       }

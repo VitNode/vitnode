@@ -1,16 +1,16 @@
-import { Prisma } from '@prisma/client';
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 interface Args<T> {
   sortBy:
     | {
         column: T;
-        direction: Prisma.SortOrder;
+        direction: SortDirectionEnum;
       }[]
     | undefined;
 
   defaultSortBy?: {
     column: T;
-    direction: Prisma.SortOrder;
+    direction: SortDirectionEnum;
   };
 }
 

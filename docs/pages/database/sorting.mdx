@@ -187,7 +187,7 @@ The `inputSorting()` function has `defaultSortBy` argument. You can pass default
           sortBy,
           defaultSortBy: {
             column: ShowCoreMembersSortingColumnEnum.joined,
-            direction: 'asc'
+            direction: SortDirectionEnum.asc
           }
         })
       }
@@ -206,6 +206,7 @@ import {
 
 import { PrismaService } from '@/src/prisma/prisma.service';
 import { inputSorting } from '@/functions/database/inputSorting';
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
 export class ShowCoreMembersService {
@@ -222,7 +223,7 @@ export class ShowCoreMembersService {
           sortBy,
           defaultSortBy: {
             column: ShowCoreMembersSortingColumnEnum.joined,
-            direction: 'asc'
+            direction: SortDirectionEnum.asc
           }
         })
       }
