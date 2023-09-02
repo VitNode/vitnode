@@ -1,0 +1,23 @@
+# Queries
+
+One of the most important part of a website is the database. VitNode use [Prisma](https://www.prisma.io/) to interact with the database. Prisma is a modern database toolkit. It replaces traditional ORMs and makes database access easy with an auto-generated query builder for TypeScript & NodeJS.
+
+## Example
+
+```ts
+const edges = await this.prisma.core_members.findMany();
+```
+
+If you want more information about the query, you can read the [Prisma documentation](https://www.prisma.io/docs/concepts/components/prisma-client/relation-queries).
+
+## Helpers
+
+VitNode provide a few helpers functions to help you build your query. We recommend using this helpers functions to build your query.
+
+import { Cards, Card } from 'nextra/components';
+
+<Cards>
+  <Card title="Pagination" href="/database/pagination" />
+  <Card title="Ordering" href="/database/ordering" />
+  <Card title="Filters" href="/database/filters" />
+</Cards>

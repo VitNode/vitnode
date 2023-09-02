@@ -2,8 +2,16 @@
   "index": "Introduction",
   "get_started": "Get Started",
   "contribution": "Contribution",
-  "backend": "Backend",
-  "frontend": "Frontend",
+  "---": {
+    "type": "separator",
+    "title": "Backend"
+  },
+  "database": "Database",
+  "graphql": "GraphQL",
+  "----": {
+    "type": "separator",
+    "title": "Frontend"
+  },
   "about": {
     "title": "About",
     "type": "page"

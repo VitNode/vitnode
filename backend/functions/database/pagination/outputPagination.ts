@@ -1,4 +1,4 @@
-import { PageInfo } from '@/types/pagination.type';
+import { PageInfo } from '@/types/database/pagination.type';
 
 type DataInterface<T> = T & {
   id: string;

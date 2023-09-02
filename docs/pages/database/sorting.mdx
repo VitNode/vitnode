@@ -1,0 +1,237 @@
+# Sorting
+
+VitNode provide a sorting system to order the query result. The sorting system is based on the [Prisma filtering and sorting system](https://www.prisma.io/docs/concepts/components/prisma-client/filtering-and-sorting).
+
+Here is an example of how to use the sorting system. We will use the `core_members` table as an example.
+
+## Data Transfer Object (DTO)
+
+We will create a `DTO` to create arguments values for the query.
+
+import { Steps } from 'nextra/components';
+
+<Steps>
+
+### Initialize
+
+File: `show/dto/show-core_members.args.ts`
+
+Arguments used as container for fields to create query in GraphQL schema.
+
+```ts
+import { ArgsType, Field, Int } from '@nestjs/graphql';
+
+@ArgsType()
+export class ShowCoreMembersArgs {}
+```
+
+### Create a enum
+
+To restrict sorting by selected columns you have to create a enum.
+
+```ts
+export enum ShowCoreMembersSortingColumnEnum {
+  name = 'name',
+  name_seo = 'name_seo',
+  joined = 'joined',
+  birthday = 'birthday',
+  first_name = 'first_name',
+  last_name = 'last_name',
+  posts = 'posts',
+  followers = 'followers',
+  reactions = 'reactions'
+}
+```
+
+import { Callout } from 'nextra/components';
+
+<Callout type="warning" emoji="⚠️">
+  Remember to export the enum. It will be used in the next steps.
+</Callout>
+
+### Register the enum
+
+NestJS require to register the enum in the GraphQL schema. You can read more in [NestJS documentation](https://docs.nestjs.com/graphql/unions-and-enums).
+
+```ts
+import { registerEnumType } from '@nestjs/graphql';
+
+registerEnumType(ShowCoreMembersSortingColumnEnum, {
+  name: 'ShowCoreMembersSortingColumnEnum'
+});
+```
+
+### Create a input type
+
+Now you have to create a input type to use the enum in the args type.
+
+```ts
+import { InputType } from '@nestjs/graphql';
+
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+
+@InputType()
+class SortByArgs {
+  @Field(() => ShowCoreMembersSortingColumnEnum)
+  column: ShowCoreMembersSortingColumnEnum;
+
+  @Field(() => SortDirectionEnum)
+  direction: SortDirectionEnum;
+}
+```
+
+### Add input type to args type
+
+Now you have to add the input type to the args type as arry and make it optional _(If you want)_.
+
+```ts
+import { ArgsType, Field } from '@nestjs/graphql';
+
+@ArgsType()
+export class ShowCoreMembersArgs {
+  @Field(() => [SortByArgs], { nullable: true })
+  sortBy?: SortByArgs[];
+}
+```
+
+### Complite example
+
+```ts
+import { ArgsType, Field, InputType, registerEnumType } from '@nestjs/graphql';
+
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+
+export enum ShowCoreMembersSortingColumnEnum {
+  name = 'name',
+  name_seo = 'name_seo',
+  joined = 'joined',
+  birthday = 'birthday',
+  first_name = 'first_name',
+  last_name = 'last_name',
+  posts = 'posts',
+  followers = 'followers',
+  reactions = 'reactions'
+}
+
+registerEnumType(ShowCoreMembersSortingColumnEnum, {
+  name: 'ShowCoreMembersSortingColumnEnum'
+});
+
+@InputType()
+class SortByArgs {
+  @Field(() => ShowCoreMembersSortingColumnEnum)
+  column: ShowCoreMembersSortingColumnEnum;
+
+  @Field(() => SortDirectionEnum)
+  direction: SortDirectionEnum;
+}
+
+@ArgsType()
+export class ShowCoreMembersArgs {
+  @Field(() => [SortByArgs], { nullable: true })
+  sortBy?: SortByArgs[];
+}
+```
+
+</Steps>
+
+## Query GraphQL
+
+<Steps>
+### Service
+
+File: `show/show-core_members.service.ts`
+
+Inside service file we will create a `show` method that will return a `ShowCoreMembersObj` object.
+
+```ts
+import { Injectable } from '@nestjs/common';
+
+import { ShowCoreMembersObj } from './dto/show-core_members.obj';
+import { ShowCoreMembersArgs } from './dto/show-core_members.args';
+
+import { PrismaService } from '@/src/prisma/prisma.service';
+
+@Injectable()
+export class ShowCoreMembersService {
+  constructor(private prisma: PrismaService) {}
+
+  async show({ sortBy }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {}
+}
+```
+
+### Query from database
+
+Now we can create query using `Prisma` and pass `inputSorting()` to orderBy arguments in the `findMany()` method to create the query.
+
+```ts
+import { inputPagination } from '@/functions/database/pagination/inputPagination';
+
+const edges = await this.prisma.core_members.findMany({
+  orderBy: { ...inputSorting<ShowCoreMembersSortingColumnEnum>({ sortBy }) }
+});
+```
+
+<Callout type="info" emoji="ℹ️">
+  You can pass generic type to the `inputSorting()` function to get type checking. We're recommend
+  to use generic type.
+</Callout>
+
+### Default sorting (Optional)
+
+The `inputSorting()` function has `defaultSortBy` argument. You can pass default sorting to the function. If the `sortBy` argument is empty the function will use the `defaultSortBy` argument.
+
+```ts
+ orderBy: {
+        ...inputSorting<ShowCoreMembersSortingColumnEnum>({
+          sortBy,
+          defaultSortBy: {
+            column: ShowCoreMembersSortingColumnEnum.joined,
+            direction: SortDirectionEnum.asc
+          }
+        })
+      }
+```
+
+### Complite example
+
+```ts
+import { Injectable } from '@nestjs/common';
+
+import { ShowCoreMembersObj } from './dto/show-core_members.obj';
+import {
+  ShowCoreMembersArgs,
+  ShowCoreMembersSortingColumnEnum
+} from './dto/show-core_members.args';
+
+import { PrismaService } from '@/src/prisma/prisma.service';
+import { inputSorting } from '@/functions/database/inputSorting';
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+
+@Injectable()
+export class ShowCoreMembersService {
+  constructor(private prisma: PrismaService) {}
+
+  async show({ sortBy }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
+    const edges = await this.prisma.core_members.findMany({
+      select: {
+        id: true,
+        name: true
+      },
+      orderBy: {
+        ...inputSorting<ShowCoreMembersSortingColumnEnum>({
+          sortBy,
+          defaultSortBy: {
+            column: ShowCoreMembersSortingColumnEnum.joined,
+            direction: SortDirectionEnum.asc
+          }
+        })
+      }
+    });
+
+    return edges;
+  }
+}
+```
+
+</Steps>
