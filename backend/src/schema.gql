@@ -26,7 +26,7 @@ type PageInfo {
 }
 
 type Query {
-  show_core_members(cursor: String, first: Int!): ShowCoreMembersObj!
+  show_core_members(cursor: String, first: Int!, sortBy: [SortByArgs!]): ShowCoreMembersObj!
 }
 
 type ShowCoreMembers {
@@ -53,4 +53,26 @@ type ShowCoreMembers {
 type ShowCoreMembersObj {
   edges: [ShowCoreMembers!]!
   pageInfo: PageInfo!
+}
+
+enum ShowCoreMembersSortingColumnEnum {
+  birthday
+  first_name
+  followers
+  joined
+  last_name
+  name
+  name_seo
+  posts
+  reactions
+}
+
+input SortByArgs {
+  column: ShowCoreMembersSortingColumnEnum!
+  direction: SortingDirectionEnum!
+}
+
+enum SortingDirectionEnum {
+  asc
+  desc
 }

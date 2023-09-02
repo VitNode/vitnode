@@ -1,17 +1,21 @@
 import { Injectable } from '@nestjs/common';
 
 import { ShowCoreMembersObj } from './dto/show-core_members.obj';
-import { ShowCoreMembersArgs } from './dto/show-core_members.args';
+import {
+  ShowCoreMembersArgs,
+  ShowCoreMembersSortingColumnEnum
+} from './dto/show-core_members.args';
 
 import { PrismaService } from '@/src/prisma/prisma.service';
-import { inputPagination } from '@/functions/pagination/inputPagination';
-import { outputPagination } from '@/functions/pagination/outputPagination';
+import { inputPagination } from '@/functions/database/pagination/inputPagination';
+import { outputPagination } from '@/functions/database/pagination/outputPagination';
+import { inputSorting } from '@/functions/database/inputSorting';
 
 @Injectable()
 export class ShowCoreMembersService {
   constructor(private prisma: PrismaService) {}
 
-  async show({ cursor, first }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
+  async show({ cursor, first, sortBy }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
     const edges = await this.prisma.core_members.findMany({
       ...inputPagination({ first, cursor }),
       select: {
@@ -35,7 +39,13 @@ export class ShowCoreMembersService {
         unread_notifications: true
       },
       orderBy: {
-        joined: 'asc'
+        ...inputSorting<ShowCoreMembersSortingColumnEnum>({
+          sortBy,
+          defaultSortBy: {
+            column: ShowCoreMembersSortingColumnEnum.joined,
+            direction: 'asc'
+          }
+        })
       }
     });
 

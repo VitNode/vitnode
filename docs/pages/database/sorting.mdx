@@ -12,24 +12,124 @@ import { Steps } from 'nextra/components';
 
 <Steps>
 
-### Arguments
+### Initialize
 
 File: `show/dto/show-core_members.args.ts`
 
 Arguments used as container for fields to create query in GraphQL schema.
 
-```tsx
+```ts
 import { ArgsType, Field, Int } from '@nestjs/graphql';
 
 @ArgsType()
 export class ShowCoreMembersArgs {}
 ```
 
-### Object
+### Create a enum
 
-File: `show/dto/show-core_members.obj.ts`
+To restrict sorting by selected columns you have to create a enum.
 
-_You don't need to create a `DTO` for return values._
+```ts
+export enum ShowCoreMembersSortingColumnEnum {
+  name = 'name',
+  name_seo = 'name_seo',
+  joined = 'joined',
+  birthday = 'birthday',
+  first_name = 'first_name',
+  last_name = 'last_name',
+  posts = 'posts',
+  followers = 'followers',
+  reactions = 'reactions'
+}
+```
+
+import { Callout } from 'nextra/components';
+
+<Callout type="warning" emoji="⚠️">
+  Remember to export the enum. It will be used in the next steps.
+</Callout>
+
+### Register the enum
+
+NestJS require to register the enum in the GraphQL schema. You can read more in [NestJS documentation](https://docs.nestjs.com/graphql/unions-and-enums).
+
+```ts
+import { registerEnumType } from '@nestjs/graphql';
+
+registerEnumType(ShowCoreMembersSortingColumnEnum, {
+  name: 'ShowCoreMembersSortingColumnEnum'
+});
+```
+
+### Create a input type
+
+Now you have to create a input type to use the enum in the args type.
+
+```ts
+import { InputType } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
+
+@InputType()
+class SortByArgs {
+  @Field(() => ShowCoreMembersSortingColumnEnum)
+  column: ShowCoreMembersSortingColumnEnum;
+
+  @Field(() => Prisma.SortOrder)
+  direction: Prisma.SortOrder;
+}
+```
+
+### Add input type to args type
+
+Now you have to add the input type to the args type as arry and make it optional _(If you want)_.
+
+```ts
+import { ArgsType, Field } from '@nestjs/graphql';
+
+@ArgsType()
+export class ShowCoreMembersArgs {
+  @Field(() => [SortByArgs], { nullable: true })
+  sortBy?: SortByArgs[];
+}
+```
+
+### Complite example
+
+```ts
+import { ArgsType, Field, InputType, registerEnumType } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
+
+export enum ShowCoreMembersSortingColumnEnum {
+  name = 'name',
+  name_seo = 'name_seo',
+  joined = 'joined',
+  birthday = 'birthday',
+  first_name = 'first_name',
+  last_name = 'last_name',
+  posts = 'posts',
+  followers = 'followers',
+  reactions = 'reactions'
+}
+
+registerEnumType(ShowCoreMembersSortingColumnEnum, {
+  name: 'ShowCoreMembersSortingColumnEnum'
+});
+
+@InputType()
+class SortByArgs {
+  @Field(() => ShowCoreMembersSortingColumnEnum)
+  column: ShowCoreMembersSortingColumnEnum;
+
+  @Field(() => Prisma.SortOrder)
+  direction: Prisma.SortOrder;
+}
+
+@ArgsType()
+export class ShowCoreMembersArgs {
+  @Field(() => [SortByArgs], { nullable: true })
+  sortBy?: SortByArgs[];
+}
+```
 
 </Steps>
 
@@ -42,7 +142,7 @@ File: `show/show-core_members.service.ts`
 
 Inside service file we will create a `show` method that will return a `ShowCoreMembersObj` object.
 
-```tsx
+```ts
 import { Injectable } from '@nestjs/common';
 
 import { ShowCoreMembersObj } from './dto/show-core_members.obj';
@@ -54,60 +154,79 @@ import { PrismaService } from '@/src/prisma/prisma.service';
 export class ShowCoreMembersService {
   constructor(private prisma: PrismaService) {}
 
-  async show({ cursor, first }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {}
+  async show({ sortBy }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {}
 }
 ```
 
 ### Query from database
 
-Now we can create query using `Prisma` and pass `XXX` to the `findMany()` method to create the query.
+Now we can create query using `Prisma` and pass `inputSorting()` to orderBy arguments in the `findMany()` method to create the query.
 
-```tsx
-// import { inputPagination } from '@/functions/pagination/inputPagination';
+```ts
+import { inputPagination } from '@/functions/database/pagination/inputPagination';
 
-// const edges = await this.prisma.core_members.findMany({
-//   ...inputPagination({ first, cursor })
-// });
+const edges = await this.prisma.core_members.findMany({
+  orderBy: { ...inputSorting<ShowCoreMembersSortingColumnEnum>({ sortBy }) }
+});
 ```
 
-### Return values
+<Callout type="info" emoji="ℹ️">
+  You can pass generic type to the `inputSorting()` function to get type checking. We're recommend
+  to use generic type.
+</Callout>
 
-To complite the `show()` method we need to return a `ShowCoreMembersObj` object. VitNode provide a `outputPagination` function to create the `pageInfo` object.
+### Default sorting (Optional)
 
-```tsx
-import { outputPagination } from '@/functions/pagination/outputPagination';
+The `inputSorting()` function has `defaultSortBy` argument. You can pass default sorting to the function. If the `sortBy` argument is empty the function will use the `defaultSortBy` argument.
 
-const totalCount = await this.prisma.core_members.count();
-
-return outputPagination({ edges, totalCount, first, cursor });
+```ts
+ orderBy: {
+        ...inputSorting<ShowCoreMembersSortingColumnEnum>({
+          sortBy,
+          defaultSortBy: {
+            column: ShowCoreMembersSortingColumnEnum.joined,
+            direction: 'asc'
+          }
+        })
+      }
 ```
-
-Please remember to create a query `totalCount` to get the total count of the query.
 
 ### Complite example
 
-```tsx
+```ts
 import { Injectable } from '@nestjs/common';
 
 import { ShowCoreMembersObj } from './dto/show-core_members.obj';
-import { ShowCoreMembersArgs } from './dto/show-core_members.args';
+import {
+  ShowCoreMembersArgs,
+  ShowCoreMembersSortingColumnEnum
+} from './dto/show-core_members.args';
 
 import { PrismaService } from '@/src/prisma/prisma.service';
-import { inputPagination } from '@/functions/pagination/inputPagination';
-import { outputPagination } from '@/functions/pagination/outputPagination';
+import { inputSorting } from '@/functions/database/inputSorting';
 
 @Injectable()
 export class ShowCoreMembersService {
   constructor(private prisma: PrismaService) {}
 
-  async show({ cursor, first }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
+  async show({ sortBy }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
     const edges = await this.prisma.core_members.findMany({
-      ...inputPagination({ first, cursor })
+      select: {
+        id: true,
+        name: true
+      },
+      orderBy: {
+        ...inputSorting<ShowCoreMembersSortingColumnEnum>({
+          sortBy,
+          defaultSortBy: {
+            column: ShowCoreMembersSortingColumnEnum.joined,
+            direction: 'asc'
+          }
+        })
+      }
     });
 
-    const totalCount = await this.prisma.core_members.count();
-
-    return outputPagination({ edges, totalCount, first, cursor });
+    return edges;
   }
 }
 ```
