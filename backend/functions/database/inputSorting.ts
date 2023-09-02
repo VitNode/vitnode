@@ -14,7 +14,7 @@ interface Args<T> {
   };
 }
 
-export function inputSorting<T>({ sortBy, defaultSortBy }: Args<T>) {
+export function inputSorting<T>({ defaultSortBy, sortBy }: Args<T>) {
   if (sortBy.length <= 0)
     return {
       [`${defaultSortBy?.column}`]: defaultSortBy?.direction

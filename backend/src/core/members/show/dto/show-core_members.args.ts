@@ -1,5 +1,6 @@
 import { ArgsType, Field, InputType, Int, registerEnumType } from '@nestjs/graphql';
-import { Prisma } from '@prisma/client';
+
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 export enum ShowCoreMembersSortingColumnEnum {
   name = 'name',
@@ -22,8 +23,8 @@ class SortByArgs {
   @Field(() => ShowCoreMembersSortingColumnEnum)
   column: ShowCoreMembersSortingColumnEnum;
 
-  @Field(() => Prisma.SortOrder)
-  direction: Prisma.SortOrder;
+  @Field(() => SortDirectionEnum)
+  direction: SortDirectionEnum;
 }
 
 @ArgsType()

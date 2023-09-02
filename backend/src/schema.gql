@@ -69,10 +69,10 @@ enum ShowCoreMembersSortingColumnEnum {
 
 input SortByArgs {
   column: ShowCoreMembersSortingColumnEnum!
-  direction: SortingDirectionEnum!
+  direction: SortDirectionEnum!
 }
 
-enum SortingDirectionEnum {
+enum SortDirectionEnum {
   asc
   desc
 }
