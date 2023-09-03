@@ -16,7 +16,27 @@ import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 export class ShowCoreMembersService {
   constructor(private prisma: PrismaService) {}
 
-  async show({ cursor, first, sortBy }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
+  async show({
+    cursor,
+    first,
+    search = '',
+    sortBy
+  }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
+    const where = {
+      OR: [
+        {
+          name: {
+            contains: search
+          }
+        },
+        {
+          email: {
+            contains: search
+          }
+        }
+      ]
+    };
+
     const edges = await this.prisma.core_members.findMany({
       ...inputPagination({ first, cursor }),
       select: {
@@ -47,10 +67,13 @@ export class ShowCoreMembersService {
             direction: SortDirectionEnum.asc
           }
         })
-      }
+      },
+      where
     });
 
-    const totalCount = await this.prisma.core_members.count();
+    const totalCount = await this.prisma.core_members.count({
+      where
+    });
 
     return outputPagination({ edges, totalCount, first, cursor });
   }

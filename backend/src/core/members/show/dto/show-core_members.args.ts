@@ -37,4 +37,7 @@ export class ShowCoreMembersArgs {
 
   @Field(() => [SortByArgs], { nullable: true })
   sortBy?: SortByArgs[];
+
+  @Field(() => String, { nullable: true })
+  search?: string;
 }

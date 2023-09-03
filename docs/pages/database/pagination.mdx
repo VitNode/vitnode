@@ -108,7 +108,7 @@ import { outputPagination } from '@/functions/database/pagination/outputPaginati
 
 const totalCount = await this.prisma.core_members.count();
 
-return outputPagination({ edges, totalCount, first, cursor });
+return outputPagination({ edges, totalCount, first });
 ```
 
 Please remember to create a query `totalCount` to get the total count of the query.
@@ -136,7 +136,7 @@ export class ShowCoreMembersService {
 
     const totalCount = await this.prisma.core_members.count();
 
-    return outputPagination({ edges, totalCount, first, cursor });
+    return outputPagination({ edges, totalCount, first });
   }
 }
 ```
@@ -155,7 +155,6 @@ export class ShowCoreMembersService {
   "edges": [],
   "pageInfo": {
     "hasNextPage": false,
-    "hasPreviousPage": false,
     "startCursor": "",
     "endCursor": "",
     "totalCount": 0,
