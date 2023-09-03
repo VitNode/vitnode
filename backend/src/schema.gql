@@ -20,13 +20,12 @@ type PageInfo {
   count: Float!
   endCursor: String!
   hasNextPage: Boolean!
-  hasPreviousPage: Boolean!
   startCursor: String!
   totalCount: Float!
 }
 
 type Query {
-  show_core_members(cursor: String, first: Int!, sortBy: [SortByArgs!]): ShowCoreMembersObj!
+  show_core_members(cursor: String, first: Int!, search: String, sortBy: [SortByArgs!]): ShowCoreMembersObj!
 }
 
 type ShowCoreMembers {

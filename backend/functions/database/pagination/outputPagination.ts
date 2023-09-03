@@ -16,13 +16,12 @@ interface Return<T> {
   pageInfo: PageInfo;
 }
 
-export function outputPagination<T>({ cursor, edges, first, totalCount }: Args<T>): Return<T> {
+export function outputPagination<T>({ edges, first, totalCount }: Args<T>): Return<T> {
   return {
     pageInfo: {
       hasNextPage: edges.length === first,
-      hasPreviousPage: cursor !== null,
-      startCursor: edges.at(0).id,
-      endCursor: edges.at(-1).id,
+      startCursor: edges.at(0)?.id ?? '',
+      endCursor: edges.at(-1)?.id ?? '',
       totalCount,
       count: edges.length
     },

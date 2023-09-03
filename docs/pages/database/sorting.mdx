@@ -1,6 +1,6 @@
 # Sorting
 
-VitNode provide a sorting system to order the query result. The sorting system is based on the [Prisma filtering and sorting system](https://www.prisma.io/docs/concepts/components/prisma-client/filtering-and-sorting).
+VitNode provide a sorting system to order the query result. The sorting system is based on the [Prisma sorting system](https://www.prisma.io/docs/concepts/components/prisma-client/filtering-and-sorting#sorting).
 
 Here is an example of how to use the sorting system. We will use the `core_members` table as an example.
 
@@ -162,7 +162,7 @@ export class ShowCoreMembersService {
 
 ### Query from database
 
-Now we can create query using `Prisma` and pass `inputSorting()` to orderBy arguments in the `findMany()` method to create the query.
+Now we can create query using `Prisma` and pass `inputSorting()` function to orderBy arguments in the `findMany()` method to create the query.
 
 ```ts
 import { inputPagination } from '@/functions/database/pagination/inputPagination';
