@@ -5,6 +5,7 @@
     "nestjs",
     "nextra",
     "stylelint",
+    "tailwindcss",
     "testid",
     "uagent",
     "vitnode"

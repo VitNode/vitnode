@@ -36,7 +36,6 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-sort-destructure-keys": "^1.5.0",
     "eslint-plugin-typescript-sort-keys": "^3.0.0",
-    "prettier": "^3.0.3",
     "sass": "^1.66.1",
     "stylelint": "^15.10.3",
     "stylelint-config-clean-order": "^5.2.0",
