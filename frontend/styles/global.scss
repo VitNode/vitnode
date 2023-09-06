@@ -1,17 +1,26 @@
-*,
-*::after,
-*::before {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* stylelint-disable-next-line scss/at-rule-no-unknown */
+@tailwind base;
+/* stylelint-disable-next-line scss/at-rule-no-unknown */
+@tailwind components;
+/* stylelint-disable-next-line scss/at-rule-no-unknown */
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
 }
 
 body {
-  margin: 0;
-
-  font-size: 0.875rem;
-  line-height: 1.5;
-  color: rgb(var(--text-color));
-
-  background-color: rgb(var(--body-background));
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
+    rgb(var(--background-start-rgb));
 }
