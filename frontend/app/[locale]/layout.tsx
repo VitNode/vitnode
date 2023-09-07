@@ -4,6 +4,9 @@ import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { Montserrat } from 'next/font/google';
 
+import { Layout } from '@/components/layout/Layout';
+import { ThemeProvider } from './theme-provider';
+
 const montserrat = Montserrat({
   subsets: ['latin'],
   display: 'swap'
@@ -25,9 +28,11 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
   return (
     <html lang={locale} className={montserrat.className}>
       <body>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+        <ThemeProvider>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <Layout>{children}</Layout>
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
