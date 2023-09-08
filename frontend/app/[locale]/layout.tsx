@@ -28,7 +28,7 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
   return (
     <html lang={locale} className={montserrat.className}>
       <body>
-        <ThemeProvider>
+        <ThemeProvider attribute="class">
           <NextIntlClientProvider locale={locale} messages={messages}>
             <Layout>{children}</Layout>
           </NextIntlClientProvider>
