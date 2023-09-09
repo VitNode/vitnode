@@ -4,8 +4,8 @@ import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { Montserrat } from 'next/font/google';
 
-import { Layout } from '@/components/layout/test/Layout';
 import { ThemeProvider } from './theme-provider';
+import { Layout } from '@/themes/default/core/layout/layout';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
