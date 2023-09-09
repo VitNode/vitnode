@@ -1,0 +1,39 @@
+# Theme Mode
+
+We're support three theme modes: `light`, `dark` and `auto`. VitNode use Talwind CSS as default style. You can read more about it in [Talwind CSS Dark Theme Documentation](https://tailwindcss.com/docs/dark-mode).
+
+## Custom style
+
+For some reason you want to custom your own style, you can do it by create a custom `SCSS Module` file.
+
+### All themes
+
+```scss
+.test {
+  background-color: red;
+}
+```
+
+### Only dark theme
+
+```scss
+:is(.dark) .test {
+  background-color: orange;
+}
+```
+
+### Only light theme
+
+```scss
+:is(.light) .test {
+  background-color: blue;
+}
+```
+
+## Default Theme
+
+import { Callout } from 'nextra/components';
+
+<Callout type="warning" emoji="⚠️">
+  This page is in progress.
+</Callout>
