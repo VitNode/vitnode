@@ -1,5 +1,12 @@
 {
-  "global": {
-    "test": "Test EN"
+  "core": {
+    "test": "Test EN",
+    "user-bar": {
+      "sign-in": "Sign In",
+      "sign-up": "Sign Up"
+    },
+    "sign-in": {
+      "title": "Sign In"
+    }
   }
 }

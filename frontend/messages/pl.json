@@ -1,5 +1,12 @@
 {
-  "global": {
-    "test": "Test PL"
+  "core": {
+    "test": "Test PL",
+    "user-bar": {
+      "sign-in": "Zaloguj się",
+      "sign-up": "Zarejestruj się"
+    },
+    "sign-in": {
+      "title": "Zaloguj się"
+    }
   }
 }
