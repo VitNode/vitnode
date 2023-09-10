@@ -7,7 +7,18 @@
     },
     "sign-in": {
       "title": "Zaloguj się",
-      "desc": "Zaloguj się do swojego konta"
+      "desc": "Zaloguj się do swojego konta",
+      "form": {
+        "email": {
+          "label": "Email",
+          "empty": "Email jest wymagany"
+        },
+        "password": {
+          "label": "Hasło",
+          "empty": "Hasło jest wymagane"
+        },
+        "submit": "Zaloguj się"
+      }
     }
   }
 }

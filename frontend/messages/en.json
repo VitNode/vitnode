@@ -7,7 +7,18 @@
     },
     "sign-in": {
       "title": "Sign In",
-      "desc": "Sign in to your account"
+      "desc": "Sign in to your account",
+      "form": {
+        "email": {
+          "label": "Email",
+          "empty": "Email is required"
+        },
+        "password": {
+          "label": "Password",
+          "empty": "Password is required"
+        },
+        "submit": "Sign In"
+      }
     }
   }
 }
