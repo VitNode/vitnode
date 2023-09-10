@@ -1,5 +1,24 @@
 {
-  "global": {
-    "test": "Test PL"
+  "core": {
+    "test": "Test PL",
+    "user-bar": {
+      "sign-in": "Zaloguj się",
+      "sign-up": "Zarejestruj się"
+    },
+    "sign-in": {
+      "title": "Zaloguj się",
+      "desc": "Zaloguj się do swojego konta",
+      "form": {
+        "email": {
+          "label": "Email",
+          "empty": "Email jest wymagany"
+        },
+        "password": {
+          "label": "Hasło",
+          "empty": "Hasło jest wymagane"
+        },
+        "submit": "Zaloguj się"
+      }
+    }
   }
 }

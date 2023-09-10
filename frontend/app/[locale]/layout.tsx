@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-sync-scripts */
-import { ReactNode } from 'react';
+import { ReactNode, lazy } from 'react';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { Montserrat } from 'next/font/google';
 
-import { Layout } from '@/components/layout/Layout';
 import { ThemeProvider } from './theme-provider';
+import { CONFIG } from '@/config';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -24,6 +24,12 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
   } catch (error) {
     notFound();
   }
+
+  const Layout = lazy(() =>
+    import(`@/themes/${CONFIG.default_theme}/core/layout/layout`).then(module => ({
+      default: module.Layout
+    }))
+  );
 
   return (
     <html lang={locale} className={montserrat.className}>
