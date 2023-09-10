@@ -6,7 +6,8 @@
       "sign-up": "Sign Up"
     },
     "sign-in": {
-      "title": "Sign In"
+      "title": "Sign In",
+      "desc": "Sign in to your account"
     }
   }
 }

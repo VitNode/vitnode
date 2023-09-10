@@ -6,7 +6,8 @@
       "sign-up": "Zarejestruj się"
     },
     "sign-in": {
-      "title": "Zaloguj się"
+      "title": "Zaloguj się",
+      "desc": "Zaloguj się do swojego konta"
     }
   }
 }

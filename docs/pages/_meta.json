@@ -2,17 +2,8 @@
   "index": "Introduction",
   "get_started": "Get Started",
   "contribution": "Contribution",
-  "---": {
-    "type": "separator",
-    "title": "Backend"
-  },
-  "database": "Database",
-  "graphql": "GraphQL",
-  "----": {
-    "type": "separator",
-    "title": "Frontend"
-  },
-  "theme": "Theme Mode",
+  "backend": "Backend",
+  "frontend": "Frontend",
   "about": {
     "title": "About",
     "type": "page"
