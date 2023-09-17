@@ -8,7 +8,7 @@ export const UserBar = () => {
   const t = useTranslations('core');
 
   return (
-    <div className="flex gap-4 items-center justify-center">
+    <div className="hidden gap-4 items-center justify-center sm:flex">
       <Link
         href="/login"
         className={cn(
