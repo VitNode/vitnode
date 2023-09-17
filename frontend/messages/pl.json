@@ -5,19 +5,59 @@
       "sign-in": "Zaloguj się",
       "sign-up": "Zarejestruj się"
     },
+    "forms": {
+      "empty": "To pole jest wymagane."
+    },
     "sign-in": {
       "title": "Zaloguj się",
-      "desc": "Zaloguj się do swojego konta",
+      "desc": "Zaloguj się do swojego konta.",
       "form": {
         "email": {
-          "label": "Email",
-          "empty": "Email jest wymagany"
+          "label": "Email"
         },
         "password": {
-          "label": "Hasło",
-          "empty": "Hasło jest wymagane"
+          "label": "Hasło"
+        },
+        "remember": {
+          "label": "Zapamiętaj mnie",
+          "desc": "Niezalecane na współdzielonych komputerach"
         },
         "submit": "Zaloguj się"
+      }
+    },
+    "sign-up": {
+      "title": "Zarejestruj się",
+      "desc": "Zarejestruj się do swojego konta.",
+      "form": {
+        "nickname": {
+          "label": "Nick",
+          "desc": "Możesz użyć liter, cyfr i znaków specjalnych: .-_."
+        },
+        "email": {
+          "label": "Email"
+        },
+        "birthday": {
+          "label": "Data urodzenia",
+          "desc": "Domyślnie Twoja data urodzenia jest ukryta. Te dane są wymagane do weryfikacji wieku.",
+          "too_young": "Musisz mieć co najmniej {years} lat, aby założyć konto."
+        },
+        "password": {
+          "label": "Hasło"
+        },
+        "password_confirmation": {
+          "label": "Potwierdź hasło",
+          "not_match": "Hasła nie są takie same."
+        },
+        "terms": {
+          "label": "Akceptuję regulamin serwisu.",
+          "desc": "Akceptuję regulamin serwisu oraz politykę prywatności.",
+          "empty": "Musisz zaakceptować regulamin serwisu."
+        },
+        "newsletter": {
+          "label": "Newsletter",
+          "desc": "Otrzymuj informacje o nowych funkcjach, aktualizacjach i wydarzeniach związanych z aplikacją."
+        },
+        "submit": "Zarejestruj się"
       }
     }
   }

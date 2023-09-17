@@ -2,22 +2,62 @@
   "core": {
     "test": "Test EN",
     "user-bar": {
-      "sign-in": "Sign In",
-      "sign-up": "Sign Up"
+      "sign-in": "Login",
+      "sign-up": "Register"
+    },
+    "forms": {
+      "empty": "This field is required."
     },
     "sign-in": {
-      "title": "Sign In",
-      "desc": "Sign in to your account",
+      "title": "Login",
+      "desc": "Sign in to your account.",
       "form": {
         "email": {
-          "label": "Email",
-          "empty": "Email is required"
+          "label": "Email"
         },
         "password": {
-          "label": "Password",
-          "empty": "Password is required"
+          "label": "Password"
+        },
+        "remember": {
+          "label": "Remember me",
+          "desc": "Not recommended on shared computers."
         },
         "submit": "Sign In"
+      }
+    },
+    "sign-up": {
+      "title": "Register",
+      "desc": "Create a new account.",
+      "form": {
+        "nickname": {
+          "label": "Nickname",
+          "desc": "You can use letters, numbers and special characters: .-_."
+        },
+        "email": {
+          "label": "Email"
+        },
+        "birthday": {
+          "label": "Date of birth",
+          "desc": "By default, your date of birth is hidden. These details are required for age verification.",
+          "too_young": "You must be at least {years} years old to register."
+        },
+        "password": {
+          "label": "Password"
+        },
+        "password_confirmation": {
+          "label": "Confirm Password",
+          "not_match": "Passwords do not match."
+        },
+        "terms": {
+          "label": "Accept terms and conditions",
+          "desc": "You agree to our Terms of Service and Privacy Policy.",
+          "empty": "You must agree to the Terms of Service."
+        },
+        "newsletter": {
+          "label": "Newsletter",
+          "desc": "Receive information about new features, updates and events related to the application."
+        },
+        "submit": "Sign Up"
       }
     }
   }
