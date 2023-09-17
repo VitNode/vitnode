@@ -11,7 +11,7 @@ export const SignUpView = () => {
       <Card>
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl">{t('sign-up.title')}</CardTitle>
-          <CardDescription>{t('sign-in.desc')}</CardDescription>
+          <CardDescription>{t('sign-up.desc')}</CardDescription>
         </CardHeader>
         <FormSignUp />
       </Card>
