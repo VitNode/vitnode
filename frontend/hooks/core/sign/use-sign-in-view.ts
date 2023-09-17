@@ -8,11 +8,12 @@ export const useSignInView = () => {
 
   const formSchema = z.object({
     email: z.string().nonempty({
-      message: t('sign-in.form.email.empty')
+      message: t('forms.empty')
     }),
     password: z.string().nonempty({
-      message: t('sign-in.form.password.empty')
-    })
+      message: t('forms.empty')
+    }),
+    remember: z.boolean()
   });
 
   const form = useForm<z.infer<typeof formSchema>>({

@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { FormSignIn } from './forms/form-sign-in';
+import { FormSignIn } from './form/form-sign-in';
 
 export const SignInView = () => {
   const t = useTranslations('core');
