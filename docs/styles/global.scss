@@ -1,14 +1,14 @@
 :root {
-  --background: 216deg 12% 91%;
+  --background: 0 0% 98.04%;
   --foreground: 0 0% 3.9%;
   --card: 0 0% 100%;
   --border: 0 0% 85.99%;
 }
 
 .dark {
-  --background: 0 0% 3.9%;
+  --background: 0deg 0% 0%;
   --foreground: 0 0% 98%;
-  --card: 0 0.81% 6.62%;
+  --card: 0deg 0% 0%;
   --border: 0 0% 14.9%;
 }
 
@@ -18,8 +18,8 @@ body:first-of-type,
   color: hsl(var(--foreground));
 }
 
-:is(html[class~='dark'] .dark\:nx-bg-dark):first-of-type,
-.nx-bg-white:first-of-type {
+:is(html[class~='dark'] .dark\:nx-bg-dark).nx-bg-white,
+.nx-bg-white.dark\:nx-bg-dark {
   background-color: hsl(var(--background));
   box-shadow: none;
 }
@@ -27,8 +27,4 @@ body:first-of-type,
 .nextra-nav-container > div:first-of-type {
   background-color: hsl(var(--card) / 0.75);
   border-bottom: 1px solid hsl(var(--border));
-}
-
-.nextra-content {
-  background-color: hsl(var(--card));
 }
