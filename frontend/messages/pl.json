@@ -3,7 +3,10 @@
     "test": "Test PL",
     "user-bar": {
       "sign-in": "Zaloguj się",
-      "sign-up": "Zarejestruj się"
+      "sign-up": "Zarejestruj się",
+      "sign-out": "Wyloguj się",
+      "my_profile": "Mój profil",
+      "settings": "Ustawienia"
     },
     "forms": {
       "empty": "To pole jest wymagane."

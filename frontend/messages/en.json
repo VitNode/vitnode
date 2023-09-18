@@ -3,7 +3,10 @@
     "test": "Test EN",
     "user-bar": {
       "sign-in": "Login",
-      "sign-up": "Register"
+      "sign-up": "Register",
+      "sign-out": "Logout",
+      "my_profile": "My Profile",
+      "settings": "Settings"
     },
     "forms": {
       "empty": "This field is required."

@@ -2,16 +2,23 @@ import { useTranslations } from 'next-intl';
 import Link from 'next-intl/link';
 
 import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { AuthUserBar } from './auth/auth-user-bar';
+import { cx } from '@/functions/classnames';
+
+const session = true;
 
 export const UserBar = () => {
   const t = useTranslations('core');
+
+  if (session) {
+    return <AuthUserBar />;
+  }
 
   return (
     <div className="hidden gap-4 items-center justify-center sm:flex">
       <Link
         href="/login"
-        className={cn(
+        className={cx(
           buttonVariants({
             size: 'sm',
             variant: 'outline'
@@ -23,7 +30,7 @@ export const UserBar = () => {
 
       <Link
         href="/register"
-        className={cn(
+        className={cx(
           buttonVariants({
             size: 'sm'
           })

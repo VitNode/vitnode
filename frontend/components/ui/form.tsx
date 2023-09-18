@@ -18,8 +18,8 @@ import {
   useId
 } from 'react';
 
-import { cn } from '@/lib/utils';
 import { Label } from '@/components/ui/label';
+import { cx } from '@/functions/classnames';
 
 const Form = FormProvider;
 
@@ -80,7 +80,7 @@ const FormItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 
     return (
       <FormItemContext.Provider value={{ id }}>
-        <div ref={ref} className={cn('space-y-2', className)} {...props} />
+        <div ref={ref} className={cx('space-y-2', className)} {...props} />
       </FormItemContext.Provider>
     );
   }
@@ -96,7 +96,7 @@ const FormLabel = forwardRef<
   return (
     <Label
       ref={ref}
-      className={cn(error && 'text-destructive', className)}
+      className={cx(error && 'text-destructive', className)}
       htmlFor={formItemId}
       {...props}
     />
@@ -129,7 +129,7 @@ const FormDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLPara
       <p
         ref={ref}
         id={formDescriptionId}
-        className={cn('text-sm text-muted-foreground', className)}
+        className={cx('text-sm text-muted-foreground', className)}
         {...props}
       />
     );
@@ -150,7 +150,7 @@ const FormMessage = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagrap
       <p
         ref={ref}
         id={formMessageId}
-        className={cn('text-sm font-medium text-destructive', className)}
+        className={cx('text-sm font-medium text-destructive', className)}
         {...props}
       >
         {body}
