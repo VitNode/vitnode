@@ -1,11 +1,9 @@
-/* eslint-disable @next/next/no-sync-scripts */
-import { ReactNode, lazy } from 'react';
+import { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { Montserrat } from 'next/font/google';
 
 import { ThemeProvider } from './theme-provider';
-import { CONFIG } from '@/config';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -25,18 +23,12 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
     notFound();
   }
 
-  const Layout = lazy(() =>
-    import(`@/themes/${CONFIG.default_theme}/core/layout/layout`).then(module => ({
-      default: module.Layout
-    }))
-  );
-
   return (
     <html lang={locale} className={montserrat.className}>
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <NextIntlClientProvider locale={locale} messages={messages}>
-            <Layout>{children}</Layout>
+            {children}
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
