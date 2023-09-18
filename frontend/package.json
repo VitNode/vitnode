@@ -10,7 +10,8 @@
     "analyze": "cross-env ANALYZE=true npm run build",
     "start": "next start",
     "lint": "eslint . && stylelint \"**/*.{css,scss}\"",
-    "lint:fix": "eslint . --fix && stylelint \"**/*.{css,scss}\" --fix"
+    "lint:fix": "eslint . --fix && stylelint \"**/*.{css,scss}\" --fix",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.0.4",
@@ -24,6 +25,7 @@
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.4",
+    "graphql": "^16.8.0",
     "lucide-react": "^0.279.0",
     "next": "13.4.19",
     "next-intl": "^3.0.0-beta.16",
@@ -39,6 +41,10 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "5.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-document-nodes": "^4.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
     "@hookform/resolvers": "^3.3.1",
     "@next/bundle-analyzer": "^13.4.19",
     "@tanstack/eslint-plugin-query": "^5.0.0-beta.20",

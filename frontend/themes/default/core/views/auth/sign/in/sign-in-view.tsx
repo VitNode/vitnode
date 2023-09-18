@@ -6,6 +6,14 @@ import { FormSignIn } from './form/form-sign-in';
 export const SignInView = () => {
   const t = useTranslations('core');
 
+  // const { data } = useQuery({
+  //   queryKey: ['todos'],
+  //   queryFn: async () =>
+  //     await fetcher<Show_Core_MembersQuery, Show_Core_MembersQueryVariables>(Show_Core_Members, {
+  //       first: 5
+  //     })
+  // });
+
   return (
     <div className="max-w-[32rem] mx-auto py-10">
       <Card>

@@ -1,0 +1,11 @@
+query Show_core_members($first: Int!) {
+  show_core_members(first: $first) {
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      startCursor
+      totalCount
+    }
+  }
+}
