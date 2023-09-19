@@ -30,14 +30,18 @@ const getSession = async () => {
     return;
   }
 
-  return await fetcher<Authorization_Core_SessionsQuery, Authorization_Core_SessionsQueryVariables>(
-    {
+  try {
+    return await fetcher<
+      Authorization_Core_SessionsQuery,
+      Authorization_Core_SessionsQueryVariables
+    >({
       query: Authorization_Core_Sessions,
       headers: {
         Cookie: cookies().toString()
       }
-    }
-  );
+    });
+    // eslint-disable-next-line no-empty
+  } catch (err) {}
 };
 
 export default async function LocaleLayout({ children, params: { locale } }: Props) {

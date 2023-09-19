@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UAParser } from 'ua-parser-js';
+import { Response } from 'express';
 
 import { AuthorizationCoreSessionsObj } from './dto/authorization-core_sessions.obj';
 
@@ -17,6 +18,17 @@ export class AuthorizationCoreSessionsService {
     private jwtService: JwtService
   ) {}
 
+  private clearCookies({ cookie, res }: { cookie: string; res: Response }) {
+    res.cookie(cookie, '', {
+      httpOnly: true,
+      secure: true,
+      domain: CONFIG.cookie.domain,
+      path: '/',
+      expires: new Date(convertUnixTime(getCurrentDate())),
+      sameSite: 'none'
+    });
+  }
+
   async authorization({ req, res }: Ctx): Promise<AuthorizationCoreSessionsObj> {
     const tokens = {
       accessToken: req.cookies[CONFIG.access_token.name],
@@ -32,6 +44,7 @@ export class AuthorizationCoreSessionsService {
       });
 
       if (!session || session.access_token !== tokens.accessToken) {
+        this.clearCookies({ res, cookie: tokens.accessToken });
         throw new AccessDeniedError();
       }
 
@@ -69,28 +82,18 @@ export class AuthorizationCoreSessionsService {
       });
 
       if (!session || session.refresh_token !== tokens.refreshToken) {
+        this.clearCookies({ res, cookie: tokens.refreshToken });
+        this.clearCookies({ res, cookie: tokens.accessToken });
+        res.clearCookie(CONFIG.access_token.name);
+        res.clearCookie(CONFIG.refresh_token.name);
         throw new AccessDeniedError();
       }
 
       const decodeRefreshToken = this.jwtService.decode(tokens.refreshToken);
       // If refresh token is invalid or expired, clear cookies
       if (!decodeRefreshToken || decodeRefreshToken['exp'] < getCurrentDate()) {
-        res.cookie(tokens.refreshToken, '', {
-          httpOnly: true,
-          secure: true,
-          domain: CONFIG.cookie.domain,
-          path: '/',
-          expires: new Date(convertUnixTime(getCurrentDate())),
-          sameSite: 'none'
-        });
-        res.cookie(tokens.accessToken, '', {
-          httpOnly: true,
-          secure: true,
-          domain: CONFIG.cookie.domain,
-          path: '/',
-          expires: new Date(convertUnixTime(getCurrentDate())),
-          sameSite: 'none'
-        });
+        this.clearCookies({ res, cookie: tokens.refreshToken });
+        this.clearCookies({ res, cookie: tokens.accessToken });
 
         throw new AccessDeniedError();
       }
@@ -159,6 +162,8 @@ export class AuthorizationCoreSessionsService {
     }
 
     // Still here? Throw error
+    this.clearCookies({ res, cookie: tokens.refreshToken });
+    this.clearCookies({ res, cookie: tokens.accessToken });
     throw new AccessDeniedError();
   }
 }
