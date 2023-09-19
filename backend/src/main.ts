@@ -20,7 +20,7 @@ async function bootstrap() {
     }
 
     // eslint-disable-next-line no-console
-    console.log(`Application is running on: ${await app.getUrl()}`);
+    console.log(`Application is running on: http://localhost:8080/graphql`);
   });
 }
 bootstrap();

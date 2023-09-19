@@ -8,7 +8,7 @@ import { SignInCoreSessionsArgs } from './dto/signIn-core_sessions.args';
 import { PrismaService } from '@/src/prisma/prisma.service';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { Ctx } from '@/types/context.type';
-import { CONFIG, CONFIG_COOKIE_ACCESS_TOKEN, CONFIG_COOKIE_REFRESH_TOKEN } from '@/config';
+import { CONFIG } from '@/config';
 import { convertUnixTime, getCurrentDate } from '@/functions/date';
 
 interface CreateSessionArgs extends Ctx {
@@ -59,7 +59,7 @@ export class SignInCoreSessionsService {
     });
 
     // Create cookie for refresh token
-    res.cookie(CONFIG_COOKIE_REFRESH_TOKEN, refreshToken, {
+    res.cookie(CONFIG.refresh_token.name, refreshToken, {
       httpOnly: true,
       secure: true,
       domain: CONFIG.cookie.domain,
@@ -71,7 +71,14 @@ export class SignInCoreSessionsService {
     });
 
     // Reset access token cookie
-    res.clearCookie(CONFIG_COOKIE_ACCESS_TOKEN);
+    res.cookie(CONFIG.access_token.name, '', {
+      httpOnly: true,
+      secure: true,
+      domain: CONFIG.cookie.domain,
+      path: '/',
+      expires: new Date(convertUnixTime(getCurrentDate())),
+      sameSite: 'none'
+    });
   }
 
   async signIn({ email, password, remember }: SignInCoreSessionsArgs, ctx: Ctx) {
@@ -91,7 +98,6 @@ export class SignInCoreSessionsService {
       throw new AccessDeniedError();
     }
 
-    // TODO: Add create session
     await this.createSession({
       name: user.name,
       email: user.email,
