@@ -4,7 +4,7 @@ import { IsEmail, IsStrongPassword, Matches, MaxLength, Min, MinLength } from 'c
 import { nameRegex } from '@/utils/regex/name.regex';
 
 @ArgsType()
-export class CreateCoreMembersArgs {
+export class SignUpCoreMembersArgs {
   @Field(() => String)
   @IsEmail()
   email: string;

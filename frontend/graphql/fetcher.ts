@@ -3,25 +3,28 @@ import { DocumentNode } from 'graphql';
 import { CONFIG } from '@/config';
 import { getGqlString } from '@/functions/get-qql-string';
 
-interface OptionsFetcher {
+interface Args<TVariables> {
+  query: DocumentNode;
+  headers?: HeadersInit;
   signal?: AbortSignal;
   upload?: {
     files: File[];
     variable: string;
   };
+  variables?: TVariables;
 }
 
-export async function fetcher<TData, TVariables>(
-  query: DocumentNode,
-  variables?: TVariables,
-  options?: OptionsFetcher
-): Promise<TData> {
+export async function fetcher<TData, TVariables>({
+  headers,
+  query,
+  signal,
+  upload,
+  variables
+}: Args<TVariables>): Promise<TData> {
   const formData = new FormData();
 
-  if (options?.upload) {
-    const {
-      upload: { files, variable }
-    } = options;
+  if (upload) {
+    const { files, variable } = upload;
 
     formData.append(
       'operations',
@@ -48,13 +51,14 @@ export async function fetcher<TData, TVariables>(
     method: 'POST',
     credentials: 'include',
     mode: 'cors',
-    signal: options?.signal,
-    headers: options?.upload
+    signal,
+    headers: upload
       ? undefined
       : {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          ...headers
         },
-    body: options?.upload ? formData : JSON.stringify({ query: getGqlString(query), variables })
+    body: upload ? formData : JSON.stringify({ query: getGqlString(query), variables })
   });
 
   const json = await res.json();

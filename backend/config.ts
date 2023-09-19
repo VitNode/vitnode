@@ -17,6 +17,6 @@ export const CONFIG = {
     name: 'vitnode-acc-auth'
   },
   cookie: {
-    domain: ENVS.cookie_domain
+    domain: ENVS.cookie_domain ? ENVS.cookie_domain : 'localhost'
   }
 };

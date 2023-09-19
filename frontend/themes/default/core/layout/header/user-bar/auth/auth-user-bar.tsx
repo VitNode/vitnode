@@ -1,5 +1,3 @@
-'use client';
-
 import { Settings, User } from 'lucide-react';
 import { useRouter } from 'next-intl/client';
 import { useTranslations } from 'next-intl';
@@ -12,12 +10,18 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { useSession } from '@/hooks/core/use-session';
 
 export const AuthUserBar = () => {
   const t = useTranslations('core');
   const { push } = useRouter();
+  const { session } = useSession();
 
-  const id = 1;
+  if (!session) return null;
+
+  const {
+    authorization_core_sessions: { id }
+  } = session;
 
   return (
     <DropdownMenu>

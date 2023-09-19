@@ -12,17 +12,8 @@ type AuthorizationCoreSessionsObj {
   newsletter: Boolean
 }
 
-type CreateCoreMembersObj {
-  birthday: Int!
-  email: String!
-  first_name: String!
-  last_name: String!
-  name: String!
-  newsletter: Boolean
-}
-
 type Mutation {
-  create_core_members(birthday: Int!, email: String!, firstName: String!, lastName: String!, name: String!, newsletter: Boolean, password: String!): CreateCoreMembersObj!
+  create_core_members(birthday: Int!, email: String!, firstName: String!, lastName: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
   signIn_core_sessions(email: String!, password: String!, remember: Boolean): String!
 }
 
@@ -75,6 +66,15 @@ enum ShowCoreMembersSortingColumnEnum {
   name_seo
   posts
   reactions
+}
+
+type SignUpCoreMembersObj {
+  birthday: Int!
+  email: String!
+  first_name: String!
+  last_name: String!
+  name: String!
+  newsletter: Boolean
 }
 
 input SortByArgs {

@@ -26,19 +26,9 @@ export type AuthorizationCoreSessionsObj = {
   newsletter?: Maybe<Scalars['Boolean']['output']>;
 };
 
-export type CreateCoreMembersObj = {
-  __typename?: 'CreateCoreMembersObj';
-  birthday: Scalars['Int']['output'];
-  email: Scalars['String']['output'];
-  first_name: Scalars['String']['output'];
-  last_name: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-  newsletter?: Maybe<Scalars['Boolean']['output']>;
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
-  create_core_members: CreateCoreMembersObj;
+  create_core_members: SignUpCoreMembersObj;
   signIn_core_sessions: Scalars['String']['output'];
 };
 
@@ -123,6 +113,16 @@ export enum ShowCoreMembersSortingColumnEnum {
   Reactions = 'reactions'
 }
 
+export type SignUpCoreMembersObj = {
+  __typename?: 'SignUpCoreMembersObj';
+  birthday: Scalars['Int']['output'];
+  email: Scalars['String']['output'];
+  first_name: Scalars['String']['output'];
+  last_name: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  newsletter?: Maybe<Scalars['Boolean']['output']>;
+};
+
 export type SortByArgs = {
   column: ShowCoreMembersSortingColumnEnum;
   direction: SortDirectionEnum;
@@ -142,12 +142,10 @@ export type SignIn_Core_SessionsMutationVariables = Exact<{
 
 export type SignIn_Core_SessionsMutation = { __typename?: 'Mutation', signIn_core_sessions: string };
 
-export type Show_Core_MembersQueryVariables = Exact<{
-  first: Scalars['Int']['input'];
-}>;
+export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Show_Core_MembersQuery = { __typename?: 'Query', show_core_members: { __typename?: 'ShowCoreMembersObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number } } };
+export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', birthday: number, email: string, first_name: string, id: string, last_name: string, name: string, newsletter?: boolean | null } };
 
 
 export const SignIn_Core_Sessions = gql`
@@ -155,16 +153,16 @@ export const SignIn_Core_Sessions = gql`
   signIn_core_sessions(email: $email, password: $password, remember: $remember)
 }
     `;
-export const Show_Core_Members = gql`
-    query Show_core_members($first: Int!) {
-  show_core_members(first: $first) {
-    pageInfo {
-      count
-      endCursor
-      hasNextPage
-      startCursor
-      totalCount
-    }
+export const Authorization_Core_Sessions = gql`
+    query Authorization_core_sessions {
+  authorization_core_sessions {
+    birthday
+    email
+    first_name
+    id
+    last_name
+    name
+    newsletter
   }
 }
     `;

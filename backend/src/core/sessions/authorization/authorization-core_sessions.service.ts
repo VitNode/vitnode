@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UAParser } from 'ua-parser-js';
 
-import { AuthorizationCoreSessionsObj } from './dto/authorization-croe_sessions.obj';
+import { AuthorizationCoreSessionsObj } from './dto/authorization-core_sessions.obj';
 
 import { PrismaService } from '@/src/prisma/prisma.service';
 import { Ctx } from '@/types/context.type';

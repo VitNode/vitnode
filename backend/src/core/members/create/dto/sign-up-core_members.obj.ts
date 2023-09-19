@@ -4,7 +4,7 @@ import { IsEmail, Matches, MaxLength, Min, MinLength } from 'class-validator';
 import { nameRegex } from '@/utils/regex/name.regex';
 
 @ObjectType()
-export class CreateCoreMembersObj {
+export class SignUpCoreMembersObj {
   @Field(() => String)
   @IsEmail()
   email: string;
