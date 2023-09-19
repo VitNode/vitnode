@@ -1,6 +1,7 @@
 {
   "core": {
     "test": "Test PL",
+    "loading": "Czekaj, ładowanie...",
     "user-bar": {
       "sign-in": "Zaloguj się",
       "sign-up": "Zarejestruj się",
@@ -26,6 +27,10 @@
           "desc": "Niezalecane na współdzielonych komputerach"
         },
         "submit": "Zaloguj się"
+      },
+      "error": {
+        "title": "Nieprawidłowe dane logowania",
+        "desc": "Email lub hasło jest nieprawidłowe. Proszę spróbuj ponownie (upewnij się że caps lock jest wyłączony)."
       }
     },
     "sign-up": {

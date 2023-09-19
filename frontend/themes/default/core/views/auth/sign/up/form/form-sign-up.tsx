@@ -14,7 +14,7 @@ import {
   FormLabel,
   FormMessage
 } from '@/components/ui/form';
-import { useSignUpView } from '@/hooks/core/sign/use-sign-up-view';
+import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
 import { Checkbox } from '@/components/ui/checkbox';
 
 export const FormSignUp = () => {
@@ -127,7 +127,9 @@ export const FormSignUp = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full">{t('sign-up.form.submit')}</Button>
+          <Button type="submit" className="w-full">
+            {t('sign-up.form.submit')}
+          </Button>
         </CardFooter>
       </form>
     </Form>

@@ -1,6 +1,7 @@
 {
   "core": {
     "test": "Test EN",
+    "loading": "Please wait, loading...",
     "user-bar": {
       "sign-in": "Login",
       "sign-up": "Register",
@@ -26,6 +27,10 @@
           "desc": "Not recommended on shared computers."
         },
         "submit": "Sign In"
+      },
+      "error": {
+        "title": "Invalid credentials",
+        "desc": "The email address or password was incorrect. Please try again (make sure your caps lock is off)."
       }
     },
     "sign-up": {

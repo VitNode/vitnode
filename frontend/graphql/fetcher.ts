@@ -60,7 +60,7 @@ export async function fetcher<TData, TVariables>(
   const json = await res.json();
 
   if (json.errors) {
-    throw json.errors[0];
+    return Promise.reject(json.errors.at(0).extensions.code);
   }
 
   return json.data;

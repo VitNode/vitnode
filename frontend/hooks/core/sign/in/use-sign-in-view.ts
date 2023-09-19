@@ -3,8 +3,11 @@ import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { useSignInAPI } from './use-sign-in-api';
+
 export const useSignInView = () => {
   const t = useTranslations('core');
+  const mutation = useSignInAPI();
 
   const formSchema = z.object({
     email: z.string().nonempty({
@@ -20,17 +23,19 @@ export const useSignInView = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
-      password: ''
+      password: '',
+      remember: false
     }
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    // eslint-disable-next-line no-console
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    await mutation.mutateAsync({ ...values });
   };
 
   return {
     form,
-    onSubmit
+    onSubmit,
+    isPending: mutation.isPending,
+    error: mutation.error
   };
 };

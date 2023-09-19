@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
-import { Montserrat } from 'next/font/google';
+import { Inter } from 'next/font/google';
 
 import { ThemeProvider } from './theme-provider';
 
-const montserrat = Montserrat({
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap'
 });
@@ -24,7 +24,7 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
   }
 
   return (
-    <html lang={locale} className={montserrat.className}>
+    <html lang={locale} className={inter.className}>
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <NextIntlClientProvider locale={locale} messages={messages}>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { AlertCircle } from 'lucide-react';
 
 import { CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -14,18 +15,27 @@ import {
   FormLabel,
   FormMessage
 } from '@/components/ui/form';
-import { useSignInView } from '@/hooks/core/sign/use-sign-in-view';
+import { useSignInView } from '@/hooks/core/sign/in/use-sign-in-view';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 export const FormSignIn = () => {
   const t = useTranslations('core');
-  const { form, onSubmit } = useSignInView();
+  const { error, form, isPending, onSubmit } = useSignInView();
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <CardContent>
           <div className="space-y-4">
+            {error === 'ACCESS_DENIED' && (
+              <Alert variant="destructive">
+                <AlertCircle className="h-4 w-4" />
+                <AlertTitle>{t('sign-in.error.title')}</AlertTitle>
+                <AlertDescription>{t('sign-in.error.desc')}</AlertDescription>
+              </Alert>
+            )}
+
             <FormField
               control={form.control}
               name="email"
@@ -70,7 +80,7 @@ export const FormSignIn = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full" disabled={!form.formState.isValid}>
+          <Button type="submit" className="w-full" loading={isPending}>
             {t('sign-in.form.submit')}
           </Button>
         </CardFooter>

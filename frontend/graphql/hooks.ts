@@ -15,6 +15,17 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type AuthorizationCoreSessionsObj = {
+  __typename?: 'AuthorizationCoreSessionsObj';
+  birthday: Scalars['Int']['output'];
+  email: Scalars['String']['output'];
+  first_name: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  last_name: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  newsletter?: Maybe<Scalars['Boolean']['output']>;
+};
+
 export type CreateCoreMembersObj = {
   __typename?: 'CreateCoreMembersObj';
   birthday: Scalars['Int']['output'];
@@ -60,6 +71,7 @@ export type PageInfo = {
 
 export type Query = {
   __typename?: 'Query';
+  authorization_core_sessions: AuthorizationCoreSessionsObj;
   show_core_members: ShowCoreMembersObj;
 };
 
@@ -121,6 +133,15 @@ export enum SortDirectionEnum {
   Desc = 'desc'
 }
 
+export type SignIn_Core_SessionsMutationVariables = Exact<{
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+  remember?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
+
+
+export type SignIn_Core_SessionsMutation = { __typename?: 'Mutation', signIn_core_sessions: string };
+
 export type Show_Core_MembersQueryVariables = Exact<{
   first: Scalars['Int']['input'];
 }>;
@@ -129,6 +150,11 @@ export type Show_Core_MembersQueryVariables = Exact<{
 export type Show_Core_MembersQuery = { __typename?: 'Query', show_core_members: { __typename?: 'ShowCoreMembersObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number } } };
 
 
+export const SignIn_Core_Sessions = gql`
+    mutation SignIn_core_sessions($email: String!, $password: String!, $remember: Boolean) {
+  signIn_core_sessions(email: $email, password: $password, remember: $remember)
+}
+    `;
 export const Show_Core_Members = gql`
     query Show_core_members($first: Int!) {
   show_core_members(first: $first) {
