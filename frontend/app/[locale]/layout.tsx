@@ -26,7 +26,7 @@ interface Props {
 const getSession = async () => {
   const cookieStore = cookies();
 
-  if (!cookieStore.get(CONFIG.access_token) || !cookieStore.get(CONFIG.refresh_token)) {
+  if (!cookieStore.get(CONFIG.access_token) && !cookieStore.get(CONFIG.refresh_token)) {
     return;
   }
 

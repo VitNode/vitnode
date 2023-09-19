@@ -18,8 +18,8 @@ export const SignInView = () => {
     <div className="max-w-[32rem] mx-auto py-10">
       <Card>
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">{t('sign-in.title')}</CardTitle>
-          <CardDescription>{t('sign-in.desc')}</CardDescription>
+          <CardTitle className="text-2xl">{t('sign_in.title')}</CardTitle>
+          <CardDescription>{t('sign_in.desc')}</CardDescription>
         </CardHeader>
         <FormSignIn />
       </Card>

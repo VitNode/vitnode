@@ -31,8 +31,8 @@ export const FormSignIn = () => {
             {error === 'ACCESS_DENIED' && (
               <Alert variant="destructive">
                 <AlertCircle className="h-4 w-4" />
-                <AlertTitle>{t('sign-in.error.title')}</AlertTitle>
-                <AlertDescription>{t('sign-in.error.desc')}</AlertDescription>
+                <AlertTitle>{t('sign_in.error.title')}</AlertTitle>
+                <AlertDescription>{t('sign_in.error.desc')}</AlertDescription>
               </Alert>
             )}
 
@@ -41,7 +41,7 @@ export const FormSignIn = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('sign-in.form.email.label')}</FormLabel>
+                  <FormLabel>{t('sign_in.form.email.label')}</FormLabel>
                   <FormControl>
                     <Input {...field} type="email" />
                   </FormControl>
@@ -54,7 +54,7 @@ export const FormSignIn = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('sign-in.form.password.label')}</FormLabel>
+                  <FormLabel>{t('sign_in.form.password.label')}</FormLabel>
                   <FormControl>
                     <Input {...field} type="password" />
                   </FormControl>
@@ -71,8 +71,8 @@ export const FormSignIn = () => {
                     <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel>{t('sign-in.form.remember.label')}</FormLabel>
-                    <FormDescription>{t('sign-in.form.remember.desc')}</FormDescription>
+                    <FormLabel>{t('sign_in.form.remember.label')}</FormLabel>
+                    <FormDescription>{t('sign_in.form.remember.desc')}</FormDescription>
                   </div>
                 </FormItem>
               )}
@@ -81,7 +81,7 @@ export const FormSignIn = () => {
         </CardContent>
         <CardFooter>
           <Button type="submit" className="w-full" loading={isPending}>
-            {t('sign-in.form.submit')}
+            {t('sign_in.form.submit')}
           </Button>
         </CardFooter>
       </form>

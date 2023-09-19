@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { SessionContext } from '@/hooks/core/use-session';
@@ -17,6 +17,8 @@ interface Props {
 }
 
 export const SessionProvider = ({ children, initialDataSession }: Props) => {
+  const [enableSessionQuery, setEnableSessionQuery] = useState(!!initialDataSession);
+
   const { data } = useQuery({
     queryKey: ['Authorization'],
     queryFn: async () =>
@@ -24,8 +26,12 @@ export const SessionProvider = ({ children, initialDataSession }: Props) => {
         query: Authorization_Core_Sessions
       }),
     initialData: initialDataSession,
-    enabled: true // TODO: Change this line for more flexibility
+    enabled: enableSessionQuery
   });
 
-  return <SessionContext.Provider value={{ session: data }}>{children}</SessionContext.Provider>;
+  return (
+    <SessionContext.Provider value={{ session: data, setEnableSessionQuery }}>
+      {children}
+    </SessionContext.Provider>
+  );
 };

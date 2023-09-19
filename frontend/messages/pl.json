@@ -3,16 +3,16 @@
     "test": "Test PL",
     "loading": "Czekaj, ładowanie...",
     "user-bar": {
-      "sign-in": "Zaloguj się",
-      "sign-up": "Zarejestruj się",
-      "sign-out": "Wyloguj się",
+      "sign_in": "Zaloguj się",
+      "sign_up": "Zarejestruj się",
+      "log_out": "Wyloguj się",
       "my_profile": "Mój profil",
       "settings": "Ustawienia"
     },
     "forms": {
       "empty": "To pole jest wymagane."
     },
-    "sign-in": {
+    "sign_in": {
       "title": "Zaloguj się",
       "desc": "Zaloguj się do swojego konta.",
       "form": {
@@ -33,7 +33,7 @@
         "desc": "Email lub hasło jest nieprawidłowe. Proszę spróbuj ponownie (upewnij się że caps lock jest wyłączony)."
       }
     },
-    "sign-up": {
+    "sign_up": {
       "title": "Zarejestruj się",
       "desc": "Zarejestruj się do swojego konta.",
       "form": {

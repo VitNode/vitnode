@@ -27,7 +27,7 @@ export const UserBar = () => {
           })
         )}
       >
-        {t('user-bar.sign-in')}
+        {t('user-bar.sign_in')}
       </Link>
 
       <Link
@@ -38,7 +38,7 @@ export const UserBar = () => {
           })
         )}
       >
-        {t('user-bar.sign-up')}
+        {t('user-bar.sign_up')}
       </Link>
     </div>
   );

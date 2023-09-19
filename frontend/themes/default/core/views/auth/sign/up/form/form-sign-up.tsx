@@ -31,11 +31,11 @@ export const FormSignUp = () => {
               name="nickname"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('sign-up.form.nickname.label')}</FormLabel>
+                  <FormLabel>{t('sign_up.form.nickname.label')}</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
-                  <FormDescription>{t('sign-up.form.nickname.desc')}</FormDescription>
+                  <FormDescription>{t('sign_up.form.nickname.desc')}</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -45,7 +45,7 @@ export const FormSignUp = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('sign-up.form.email.label')}</FormLabel>
+                  <FormLabel>{t('sign_up.form.email.label')}</FormLabel>
                   <FormControl>
                     <Input {...field} type="email" />
                   </FormControl>
@@ -58,11 +58,11 @@ export const FormSignUp = () => {
               name="birthday"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('sign-up.form.birthday.label')}</FormLabel>
+                  <FormLabel>{t('sign_up.form.birthday.label')}</FormLabel>
                   <FormControl>
                     <Input {...field} type="date" />
                   </FormControl>
-                  <FormDescription>{t('sign-up.form.birthday.desc')}</FormDescription>
+                  <FormDescription>{t('sign_up.form.birthday.desc')}</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -73,7 +73,7 @@ export const FormSignUp = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('sign-up.form.password.label')}</FormLabel>
+                  <FormLabel>{t('sign_up.form.password.label')}</FormLabel>
                   <FormControl>
                     <Input {...field} type="password" />
                   </FormControl>
@@ -86,7 +86,7 @@ export const FormSignUp = () => {
               name="password_confirmation"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('sign-up.form.password_confirmation.label')}</FormLabel>
+                  <FormLabel>{t('sign_up.form.password_confirmation.label')}</FormLabel>
                   <FormControl>
                     <Input {...field} type="password" />
                   </FormControl>
@@ -103,8 +103,8 @@ export const FormSignUp = () => {
                     <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel>{t('sign-up.form.terms.label')}</FormLabel>
-                    <FormDescription>{t('sign-up.form.terms.desc')}</FormDescription>
+                    <FormLabel>{t('sign_up.form.terms.label')}</FormLabel>
+                    <FormDescription>{t('sign_up.form.terms.desc')}</FormDescription>
                   </div>
                 </FormItem>
               )}
@@ -118,8 +118,8 @@ export const FormSignUp = () => {
                     <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel>{t('sign-up.form.newsletter.label')}</FormLabel>
-                    <FormDescription>{t('sign-up.form.newsletter.desc')}</FormDescription>
+                    <FormLabel>{t('sign_up.form.newsletter.label')}</FormLabel>
+                    <FormDescription>{t('sign_up.form.newsletter.desc')}</FormDescription>
                   </div>
                 </FormItem>
               )}
@@ -128,7 +128,7 @@ export const FormSignUp = () => {
         </CardContent>
         <CardFooter>
           <Button type="submit" className="w-full">
-            {t('sign-up.form.submit')}
+            {t('sign_up.form.submit')}
           </Button>
         </CardFooter>
       </form>

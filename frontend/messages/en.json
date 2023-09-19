@@ -3,16 +3,16 @@
     "test": "Test EN",
     "loading": "Please wait, loading...",
     "user-bar": {
-      "sign-in": "Login",
-      "sign-up": "Register",
-      "sign-out": "Logout",
+      "sign_in": "Login",
+      "sign_up": "Register",
+      "log_out": "Log out",
       "my_profile": "My Profile",
       "settings": "Settings"
     },
     "forms": {
       "empty": "This field is required."
     },
-    "sign-in": {
+    "sign_in": {
       "title": "Login",
       "desc": "Sign in to your account.",
       "form": {
@@ -33,7 +33,7 @@
         "desc": "The email address or password was incorrect. Please try again (make sure your caps lock is off)."
       }
     },
-    "sign-up": {
+    "sign_up": {
       "title": "Register",
       "desc": "Create a new account.",
       "form": {
