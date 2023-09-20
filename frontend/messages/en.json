@@ -37,12 +37,14 @@
       "title": "Register",
       "desc": "Create a new account.",
       "form": {
-        "nickname": {
+        "name": {
           "label": "Nickname",
-          "desc": "You can use letters, numbers and special characters: .-_."
+          "desc": "You can use letters, numbers and special characters: .-_.",
+          "already_exists": "This nickname is already in use."
         },
         "email": {
-          "label": "Email"
+          "label": "Email",
+          "already_exists": "This email address is already in use."
         },
         "birthday": {
           "label": "Date of birth",

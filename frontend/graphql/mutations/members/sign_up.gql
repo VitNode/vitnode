@@ -1,0 +1,20 @@
+mutation SignUp_core_members(
+  $birthday: Int!
+  $email: String!
+  $name: String!
+  $password: String!
+  $newsletter: Boolean
+) {
+  signUp_core_members(
+    birthday: $birthday
+    email: $email
+    name: $name
+    password: $password
+    newsletter: $newsletter
+  ) {
+    birthday
+    email
+    name
+    newsletter
+  }
+}

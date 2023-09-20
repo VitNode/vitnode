@@ -29,12 +29,6 @@ export class SignUpCoreMembersArgs {
   @Min(10)
   birthday: number;
 
-  @Field(() => String)
-  firstName: string;
-
-  @Field(() => String)
-  lastName: string;
-
   @Field(() => Boolean, { nullable: true })
   newsletter?: boolean;
 }

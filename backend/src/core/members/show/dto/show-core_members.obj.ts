@@ -34,12 +34,6 @@ export class ShowCoreMembers {
   @Field(() => Int)
   birthday: number;
 
-  @Field(() => String)
-  first_name: string;
-
-  @Field(() => String)
-  last_name: string;
-
   @Field(() => String, { nullable: true })
   avatar?: string;
 
@@ -57,9 +51,6 @@ export class ShowCoreMembers {
 
   @Field(() => Boolean)
   newsletter: boolean;
-
-  @Field(() => Boolean)
-  hide_real_name: boolean;
 
   @Field(() => String)
   avatar_color: string;

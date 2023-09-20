@@ -3,10 +3,12 @@ import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import { getCurrentDate } from '@/functions/date';
+import { convertDateToUnixTime, getCurrentDate } from '@/functions/date';
+import { useSignUpAPI } from './use-sign-up-api';
 
 export const useSignUpView = () => {
   const t = useTranslations('core');
+  const { isPending, mutateAsync } = useSignUpAPI();
 
   // Check if birthday is valid 13 years old
   const oneDayUNIX = 86400;
@@ -15,7 +17,7 @@ export const useSignUpView = () => {
 
   const formSchema = z
     .object({
-      nickname: z.string().nonempty({
+      name: z.string().nonempty({
         message: t('forms.empty')
       }),
       email: z.string().nonempty({
@@ -23,10 +25,13 @@ export const useSignUpView = () => {
       }),
       birthday: z
         .string()
-        .transform(value => Math.floor(new Date(value).getTime() / 1000))
-        .refine(value => currentDate - value >= thirteenYearsInUNIX, {
-          message: t('sign_up.form.birthday.too_young', { years: 13 })
-        }),
+        .refine(
+          value =>
+            currentDate - Math.floor(new Date(value).getTime() / 1000) >= thirteenYearsInUNIX,
+          {
+            message: t('sign_up.form.birthday.too_young', { years: 13 })
+          }
+        ),
       password: z.string().nonempty({
         message: t('forms.empty')
       }),
@@ -46,22 +51,65 @@ export const useSignUpView = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      nickname: '',
+      name: '',
       email: '',
       password: '',
       password_confirmation: '',
-      birthday: currentDate,
-      terms: false
-    }
+      birthday: new Date().toDateString(),
+      terms: false,
+      newsletter: false
+    },
+    mode: 'onChange'
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    // eslint-disable-next-line no-console
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const { password_confirmation, terms, ...rest } = values;
+
+    try {
+      await mutateAsync({
+        ...rest,
+        birthday: convertDateToUnixTime(values.birthday)
+      });
+    } catch (error) {
+      const code = error as string;
+
+      console.log(code);
+
+      if (code === 'EMAIL_ALREADY_EXISTS') {
+        form.setError(
+          'email',
+          {
+            type: 'manual',
+            message: t('sign_up.form.email.already_exists')
+          },
+          {
+            shouldFocus: true
+          }
+        );
+
+        return;
+      }
+
+      if (code === 'NAME_ALREADY_EXISTS') {
+        form.setError(
+          'name',
+          {
+            type: 'manual',
+            message: t('sign_up.form.name.already_exists')
+          },
+          {
+            shouldFocus: true
+          }
+        );
+
+        return;
+      }
+    }
   };
 
   return {
     form,
-    onSubmit
+    onSubmit,
+    isPending
   };
 };
