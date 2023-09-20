@@ -30,6 +30,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   create_core_members: SignUpCoreMembersObj;
   signIn_core_sessions: Scalars['String']['output'];
+  signOut_core_sessions: Scalars['String']['output'];
 };
 
 
@@ -142,6 +143,11 @@ export type SignIn_Core_SessionsMutationVariables = Exact<{
 
 export type SignIn_Core_SessionsMutation = { __typename?: 'Mutation', signIn_core_sessions: string };
 
+export type SignOut_Core_SessionsMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SignOut_Core_SessionsMutation = { __typename?: 'Mutation', signOut_core_sessions: string };
+
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -151,6 +157,11 @@ export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authoriza
 export const SignIn_Core_Sessions = gql`
     mutation SignIn_core_sessions($email: String!, $password: String!, $remember: Boolean) {
   signIn_core_sessions(email: $email, password: $password, remember: $remember)
+}
+    `;
+export const SignOut_Core_Sessions = gql`
+    mutation SignOut_core_sessions {
+  signOut_core_sessions
 }
     `;
 export const Authorization_Core_Sessions = gql`

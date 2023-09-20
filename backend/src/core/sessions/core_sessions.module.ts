@@ -4,13 +4,17 @@ import { SignInCoreSessionsService } from './sign-in/sign-in-core_sessions.servi
 import { SignInCoreSessionsResolver } from './sign-in/sign-in-core_sessions.resolver';
 import { AuthorizationCoreSessionsService } from './authorization/authorization-core_sessions.service';
 import { AuthorizationCoreSessionsResolver } from './authorization/authorization-core_sessions.resolver';
+import { SignOutCoreSessionsService } from './sign-out/sign-out-core_sessions.service';
+import { SignOutCoreSessionsResolver } from './sign-out/sign-out-core_sessions.resolver';
 
 @Module({
   providers: [
     SignInCoreSessionsService,
     SignInCoreSessionsResolver,
     AuthorizationCoreSessionsService,
-    AuthorizationCoreSessionsResolver
+    AuthorizationCoreSessionsResolver,
+    SignOutCoreSessionsService,
+    SignOutCoreSessionsResolver
   ]
 })
 export class CoreSessionsModule {}

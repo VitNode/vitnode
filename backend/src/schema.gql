@@ -15,6 +15,7 @@ type AuthorizationCoreSessionsObj {
 type Mutation {
   create_core_members(birthday: Int!, email: String!, firstName: String!, lastName: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
   signIn_core_sessions(email: String!, password: String!, remember: Boolean): String!
+  signOut_core_sessions: String!
 }
 
 type PageInfo {

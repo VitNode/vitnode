@@ -12,11 +12,13 @@ import {
   DropdownMenuSeparator
 } from '@/components/ui/dropdown-menu';
 import { useSession } from '@/hooks/core/use-session';
+import { useSignOutAPI } from '@/hooks/core/sign/out/use-sign-out-api';
 
 export const AuthUserBar = () => {
   const t = useTranslations('core');
   const { push } = useRouter();
   const { session } = useSession();
+  const { mutateAsync } = useSignOutAPI();
 
   if (!session) return null;
 
@@ -42,7 +44,7 @@ export const AuthUserBar = () => {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={async () => await mutateAsync()}>
             <LogOut className="mr-2 h-4 w-4" />
             <span>{t('user-bar.log_out')}</span>
           </DropdownMenuItem>

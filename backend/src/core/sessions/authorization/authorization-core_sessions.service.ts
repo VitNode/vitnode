@@ -19,13 +19,11 @@ export class AuthorizationCoreSessionsService {
   ) {}
 
   private clearCookies({ cookie, res }: { cookie: string; res: Response }) {
-    res.cookie(cookie, '', {
+    res.clearCookie(cookie, {
       httpOnly: true,
       secure: true,
       domain: CONFIG.cookie.domain,
-      path: '/',
-      expires: new Date(convertUnixTime(getCurrentDate())),
-      sameSite: 'none'
+      path: '/'
     });
   }
 
