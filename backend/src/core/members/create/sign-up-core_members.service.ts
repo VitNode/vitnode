@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { genSalt, hash } from 'bcrypt';
 
-import { CreateCoreMembersArgs } from './dto/create-core_members.args';
-import { CreateCoreMembersObj } from './dto/create-core_members.obj';
+import { SignUpCoreMembersArgs } from './dto/sign-up-core_members.args';
+import { SignUpCoreMembersObj } from './dto/sign-up-core_members.obj';
 
 import { PrismaService } from '@/src/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';
@@ -12,10 +12,10 @@ import { getCurrentDate } from '@/functions/date';
 import { generateAvatarColor } from '@/functions/avatar/generateAvatarColor';
 
 @Injectable()
-export class CreateCoreMembersService {
+export class SignUpCoreMembersService {
   constructor(private prisma: PrismaService) {}
 
-  async create({
+  async signUp({
     birthday,
     email,
     firstName,
@@ -23,7 +23,7 @@ export class CreateCoreMembersService {
     name,
     newsletter,
     password
-  }: CreateCoreMembersArgs): Promise<CreateCoreMembersObj> {
+  }: SignUpCoreMembersArgs): Promise<SignUpCoreMembersObj> {
     const checkEmail = await this.prisma.core_members.findUnique({
       where: {
         email

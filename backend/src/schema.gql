@@ -2,18 +2,20 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type CreateCoreMembersObj {
+type AuthorizationCoreSessionsObj {
   birthday: Int!
   email: String!
   first_name: String!
+  id: String!
   last_name: String!
   name: String!
   newsletter: Boolean
 }
 
 type Mutation {
-  create_core_members(birthday: Int!, email: String!, firstName: String!, lastName: String!, name: String!, newsletter: Boolean, password: String!): CreateCoreMembersObj!
+  create_core_members(birthday: Int!, email: String!, firstName: String!, lastName: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
   signIn_core_sessions(email: String!, password: String!, remember: Boolean): String!
+  signOut_core_sessions: String!
 }
 
 type PageInfo {
@@ -25,6 +27,7 @@ type PageInfo {
 }
 
 type Query {
+  authorization_core_sessions: AuthorizationCoreSessionsObj!
   show_core_members(cursor: String, first: Int!, search: String, sortBy: [SortByArgs!]): ShowCoreMembersObj!
 }
 
@@ -64,6 +67,15 @@ enum ShowCoreMembersSortingColumnEnum {
   name_seo
   posts
   reactions
+}
+
+type SignUpCoreMembersObj {
+  birthday: Int!
+  email: String!
+  first_name: String!
+  last_name: String!
+  name: String!
+  newsletter: Boolean
 }
 
 input SortByArgs {

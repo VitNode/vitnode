@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
-import { CreateCoreMembersResolver } from './create/create-core_members.resolver';
-import { CreateCoreMembersService } from './create/create-core_members.service';
+import { SignUpCoreMembersResolver } from './create/sign-up-core_members.resolver';
+import { SignUpCoreMembersService } from './create/sign-up-core_members.service';
 import { ShowCoreMembersService } from './show/show-core_members.service';
 import { ShowCoreMembersResolver } from './show/show-core_members.resolver';
 
@@ -9,8 +9,8 @@ import { ShowCoreMembersResolver } from './show/show-core_members.resolver';
   providers: [
     ShowCoreMembersService,
     ShowCoreMembersResolver,
-    CreateCoreMembersResolver,
-    CreateCoreMembersService
+    SignUpCoreMembersResolver,
+    SignUpCoreMembersService
   ]
 })
 export class CoreMembersModule {}

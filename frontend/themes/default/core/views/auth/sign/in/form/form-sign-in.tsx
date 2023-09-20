@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { AlertCircle } from 'lucide-react';
 
 import { CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -14,24 +15,33 @@ import {
   FormLabel,
   FormMessage
 } from '@/components/ui/form';
-import { useSignInView } from '@/hooks/core/sign/use-sign-in-view';
+import { useSignInView } from '@/hooks/core/sign/in/use-sign-in-view';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 export const FormSignIn = () => {
   const t = useTranslations('core');
-  const { form, onSubmit } = useSignInView();
+  const { error, form, isPending, onSubmit } = useSignInView();
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <CardContent>
           <div className="space-y-4">
+            {error === 'ACCESS_DENIED' && (
+              <Alert variant="destructive">
+                <AlertCircle className="h-4 w-4" />
+                <AlertTitle>{t('sign_in.error.title')}</AlertTitle>
+                <AlertDescription>{t('sign_in.error.desc')}</AlertDescription>
+              </Alert>
+            )}
+
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('sign-in.form.email.label')}</FormLabel>
+                  <FormLabel>{t('sign_in.form.email.label')}</FormLabel>
                   <FormControl>
                     <Input {...field} type="email" />
                   </FormControl>
@@ -44,7 +54,7 @@ export const FormSignIn = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('sign-in.form.password.label')}</FormLabel>
+                  <FormLabel>{t('sign_in.form.password.label')}</FormLabel>
                   <FormControl>
                     <Input {...field} type="password" />
                   </FormControl>
@@ -61,8 +71,8 @@ export const FormSignIn = () => {
                     <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel>{t('sign-in.form.remember.label')}</FormLabel>
-                    <FormDescription>{t('sign-in.form.remember.desc')}</FormDescription>
+                    <FormLabel>{t('sign_in.form.remember.label')}</FormLabel>
+                    <FormDescription>{t('sign_in.form.remember.desc')}</FormDescription>
                   </div>
                 </FormItem>
               )}
@@ -70,8 +80,8 @@ export const FormSignIn = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full" disabled={!form.formState.isValid}>
-            {t('sign-in.form.submit')}
+          <Button type="submit" className="w-full" loading={isPending}>
+            {t('sign_in.form.submit')}
           </Button>
         </CardFooter>
       </form>

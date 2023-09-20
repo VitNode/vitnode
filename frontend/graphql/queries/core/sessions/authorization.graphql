@@ -1,0 +1,11 @@
+query Authorization_core_sessions {
+  authorization_core_sessions {
+    birthday
+    email
+    first_name
+    id
+    last_name
+    name
+    newsletter
+  }
+}

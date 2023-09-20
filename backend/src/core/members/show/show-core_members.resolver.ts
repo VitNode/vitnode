@@ -7,10 +7,10 @@ import { ShowCoreMembersArgs } from './dto/show-core_members.args';
 
 @Resolver()
 export class ShowCoreMembersResolver {
-  constructor(private readonly ShowCoreMembersService: ShowCoreMembersService) {}
+  constructor(private readonly service: ShowCoreMembersService) {}
 
   @Query(() => ShowCoreMembersObj)
   async show_core_members(@Args() args: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
-    return await this.ShowCoreMembersService.show(args);
+    return await this.service.show(args);
   }
 }

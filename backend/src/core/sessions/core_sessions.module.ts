@@ -1,9 +1,20 @@
 import { Module } from '@nestjs/common';
 
-import { SignInCoreSessionsService } from './signIn/signIn-core_sessions.service';
-import { SignInCoreSessionsResolver } from './signIn/signIn-core_sessions.resolver';
+import { SignInCoreSessionsService } from './sign-in/sign-in-core_sessions.service';
+import { SignInCoreSessionsResolver } from './sign-in/sign-in-core_sessions.resolver';
+import { AuthorizationCoreSessionsService } from './authorization/authorization-core_sessions.service';
+import { AuthorizationCoreSessionsResolver } from './authorization/authorization-core_sessions.resolver';
+import { SignOutCoreSessionsService } from './sign-out/sign-out-core_sessions.service';
+import { SignOutCoreSessionsResolver } from './sign-out/sign-out-core_sessions.resolver';
 
 @Module({
-  providers: [SignInCoreSessionsService, SignInCoreSessionsResolver]
+  providers: [
+    SignInCoreSessionsService,
+    SignInCoreSessionsResolver,
+    AuthorizationCoreSessionsService,
+    AuthorizationCoreSessionsResolver,
+    SignOutCoreSessionsService,
+    SignOutCoreSessionsResolver
+  ]
 })
 export class CoreSessionsModule {}

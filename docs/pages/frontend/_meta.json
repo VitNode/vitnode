@@ -1,5 +1,6 @@
 {
   "theme": "Theme Mode",
+  "graphql": "GraphQL",
   "forms": "Forms",
   "practices": "Best Practices"
 }

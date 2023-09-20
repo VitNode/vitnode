@@ -25,7 +25,7 @@ export const useSignUpView = () => {
         .string()
         .transform(value => Math.floor(new Date(value).getTime() / 1000))
         .refine(value => currentDate - value >= thirteenYearsInUNIX, {
-          message: t('sign-up.form.birthday.too_young', { years: 13 })
+          message: t('sign_up.form.birthday.too_young', { years: 13 })
         }),
       password: z.string().nonempty({
         message: t('forms.empty')
@@ -34,12 +34,12 @@ export const useSignUpView = () => {
         message: t('forms.empty')
       }),
       terms: z.boolean().refine(value => value, {
-        message: t('sign-up.form.terms.empty')
+        message: t('sign_up.form.terms.empty')
       }),
       newsletter: z.boolean()
     })
     .refine(data => data.password === data.password_confirmation, {
-      message: t('sign-up.form.password_confirmation.not_match'),
+      message: t('sign_up.form.password_confirmation.not_match'),
       path: ['password_confirmation']
     });
 

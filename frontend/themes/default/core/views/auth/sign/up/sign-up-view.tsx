@@ -10,8 +10,8 @@ export const SignUpView = () => {
     <div className="max-w-[32rem] mx-auto py-10">
       <Card>
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">{t('sign-up.title')}</CardTitle>
-          <CardDescription>{t('sign-up.desc')}</CardDescription>
+          <CardTitle className="text-2xl">{t('sign_up.title')}</CardTitle>
+          <CardDescription>{t('sign_up.desc')}</CardDescription>
         </CardHeader>
         <FormSignUp />
       </Card>

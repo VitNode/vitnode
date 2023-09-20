@@ -1,14 +1,16 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
 import Link from 'next-intl/link';
 
 import { buttonVariants } from '@/components/ui/button';
 import { AuthUserBar } from './auth/auth-user-bar';
 import { cx } from '@/functions/classnames';
-
-const session = true;
+import { useSession } from '@/hooks/core/use-session';
 
 export const UserBar = () => {
   const t = useTranslations('core');
+  const { session } = useSession();
 
   if (session) {
     return <AuthUserBar />;
@@ -25,7 +27,7 @@ export const UserBar = () => {
           })
         )}
       >
-        {t('user-bar.sign-in')}
+        {t('user-bar.sign_in')}
       </Link>
 
       <Link
@@ -36,7 +38,7 @@ export const UserBar = () => {
           })
         )}
       >
-        {t('user-bar.sign-up')}
+        {t('user-bar.sign_up')}
       </Link>
     </div>
   );
