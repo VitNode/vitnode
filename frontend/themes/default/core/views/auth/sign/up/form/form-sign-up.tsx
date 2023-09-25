@@ -19,7 +19,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 
 export const FormSignUp = () => {
   const t = useTranslations('core');
-  const { form, onSubmit, isPending } = useSignUpView();
+  const { form, isPending, onSubmit } = useSignUpView();
 
   return (
     <Form {...form}>

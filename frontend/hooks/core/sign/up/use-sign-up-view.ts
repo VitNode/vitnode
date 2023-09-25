@@ -63,6 +63,7 @@ export const useSignUpView = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password_confirmation, terms, ...rest } = values;
 
     try {
@@ -72,8 +73,6 @@ export const useSignUpView = () => {
       });
     } catch (error) {
       const code = error as string;
-
-      console.log(code);
 
       if (code === 'EMAIL_ALREADY_EXISTS') {
         form.setError(
