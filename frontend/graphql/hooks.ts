@@ -19,6 +19,7 @@ export type AuthorizationCoreSessionsObj = {
   __typename?: 'AuthorizationCoreSessionsObj';
   birthday: Scalars['Int']['output'];
   email: Scalars['String']['output'];
+  group_id: Scalars['Int']['output'];
   id: Scalars['String']['output'];
   name: Scalars['String']['output'];
   newsletter?: Maybe<Scalars['Boolean']['output']>;
@@ -153,7 +154,7 @@ export type SignUp_Core_MembersMutation = { __typename?: 'Mutation', signUp_core
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', birthday: number, email: string, id: string, name: string, newsletter?: boolean | null } };
+export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', birthday: number, email: string, id: string, name: string, newsletter?: boolean | null, group_id: number } };
 
 
 export const SignIn_Core_Sessions = gql`
@@ -190,6 +191,7 @@ export const Authorization_Core_Sessions = gql`
     id
     name
     newsletter
+    group_id
   }
 }
     `;

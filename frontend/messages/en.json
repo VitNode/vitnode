@@ -7,7 +7,9 @@
       "sign_up": "Register",
       "log_out": "Log out",
       "my_profile": "My Profile",
-      "settings": "Settings"
+      "settings": "Settings",
+      "mod_cp": "Moderator Panel",
+      "admin_cp": "Admin Panel"
     },
     "forms": {
       "empty": "This field is required."

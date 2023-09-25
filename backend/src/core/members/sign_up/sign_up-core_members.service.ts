@@ -74,7 +74,18 @@ export class SignUpCoreMembersService {
         password: hashPassword,
         joined: currentDate,
         avatar_color: generateAvatarColor(name),
-        birthday
+        birthday,
+        group: {
+          connectOrCreate: {
+            where: {
+              id: 3
+            },
+            create: {
+              id: 3,
+              name: 'Member'
+            }
+          }
+        }
       },
       select: {
         id: true,

@@ -1,4 +1,4 @@
-import { LogOut, Settings, User } from 'lucide-react';
+import { KeyRound, LogOut, Settings, Shield, User } from 'lucide-react';
 import { useRouter } from 'next-intl/client';
 import { useTranslations } from 'next-intl';
 
@@ -42,7 +42,22 @@ export const AuthUserBar = () => {
             <span>{t('user-bar.settings')}</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
+
         <DropdownMenuSeparator />
+
+        <DropdownMenuGroup>
+          <DropdownMenuItem onClick={() => push('/modcp')}>
+            <Shield className="mr-2 h-4 w-4" />
+            <span>{t('user-bar.mod_cp')}</span>
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => push('/admin')}>
+            <KeyRound className="mr-2 h-4 w-4" />
+            <span>{t('user-bar.admin_cp')}</span>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+
+        <DropdownMenuSeparator />
+
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={async () => await mutateAsync()}>
             <LogOut className="mr-2 h-4 w-4" />

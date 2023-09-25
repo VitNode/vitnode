@@ -16,6 +16,7 @@ model core_members {
   name_seo             String          @unique @db.VarChar(255)
   email                String          @unique @db.VarChar(255)
   password             String          @db.Text
+  group                core_groups     @relation(references: [id], fields: [group_id])
   group_id             Int             @default(3)
   joined               Int
   birthday             Int
@@ -28,6 +29,14 @@ model core_members {
   avatar_color         String          @db.VarChar(6)
   unread_notifications Int             @default(0)
   core_sessions        core_sessions[]
+
+  @@index([group_id])
+}
+
+model core_groups {
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(255)
+  core_members core_members[]
 }
 
 model core_sessions {

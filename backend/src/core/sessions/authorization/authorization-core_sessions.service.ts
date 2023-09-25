@@ -64,7 +64,8 @@ export class AuthorizationCoreSessionsService {
           email: user.email,
           name: user.name,
           birthday: user.birthday,
-          newsletter: user.newsletter
+          newsletter: user.newsletter,
+          group_id: user.group_id
         };
       }
     }
@@ -151,7 +152,8 @@ export class AuthorizationCoreSessionsService {
         email: user.email,
         name: user.name,
         birthday: user.birthday,
-        newsletter: user.newsletter
+        newsletter: user.newsletter,
+        group_id: user.group_id
       };
     }
 

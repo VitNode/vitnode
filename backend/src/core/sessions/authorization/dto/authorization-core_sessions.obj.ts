@@ -16,4 +16,7 @@ export class AuthorizationCoreSessionsObj {
 
   @Field(() => Boolean, { nullable: true })
   newsletter?: boolean;
+
+  @Field(() => Int)
+  group_id: number;
 }
