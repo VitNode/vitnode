@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { genSalt, hash } from 'bcrypt';
 
-import { SignUpCoreMembersArgs } from './dto/sign-up-core_members.args';
-import { SignUpCoreMembersObj } from './dto/sign-up-core_members.obj';
+import { SignUpCoreMembersArgs } from './dto/sign_up-core_members.args';
+import { SignUpCoreMembersObj } from './dto/sign_up-core_members.obj';
 
 import { PrismaService } from '@/src/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';
@@ -18,8 +18,6 @@ export class SignUpCoreMembersService {
   async signUp({
     birthday,
     email,
-    firstName,
-    lastName,
     name,
     newsletter,
     password
@@ -52,6 +50,7 @@ export class SignUpCoreMembersService {
     }
 
     // Check if birthday is valid 13 years old
+    // TODO: Fix this, not working properly
     const oneDayUNIX = 86400;
     const thirteenYearsInUNIX = oneDayUNIX * 365 * 13;
     const currentDate = getCurrentDate();
@@ -69,8 +68,6 @@ export class SignUpCoreMembersService {
     return await this.prisma.core_members.create({
       data: {
         email,
-        first_name: firstName,
-        last_name: lastName,
         name,
         name_seo: convertToNameSEO,
         newsletter,
@@ -87,15 +84,12 @@ export class SignUpCoreMembersService {
         group_id: true,
         joined: true,
         birthday: true,
-        first_name: true,
-        last_name: true,
         avatar: true,
         image_cover: true,
         posts: true,
         followers: true,
         reactions: true,
         newsletter: true,
-        hide_real_name: true,
         avatar_color: true,
         unread_notifications: true
       }

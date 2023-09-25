@@ -19,29 +19,16 @@ export type AuthorizationCoreSessionsObj = {
   __typename?: 'AuthorizationCoreSessionsObj';
   birthday: Scalars['Int']['output'];
   email: Scalars['String']['output'];
-  first_name: Scalars['String']['output'];
   id: Scalars['String']['output'];
-  last_name: Scalars['String']['output'];
   name: Scalars['String']['output'];
   newsletter?: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  create_core_members: SignUpCoreMembersObj;
   signIn_core_sessions: Scalars['String']['output'];
   signOut_core_sessions: Scalars['String']['output'];
-};
-
-
-export type MutationCreate_Core_MembersArgs = {
-  birthday: Scalars['Int']['input'];
-  email: Scalars['String']['input'];
-  firstName: Scalars['String']['input'];
-  lastName: Scalars['String']['input'];
-  name: Scalars['String']['input'];
-  newsletter?: InputMaybe<Scalars['Boolean']['input']>;
-  password: Scalars['String']['input'];
+  signUp_core_members: SignUpCoreMembersObj;
 };
 
 
@@ -49,6 +36,15 @@ export type MutationSignIn_Core_SessionsArgs = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
   remember?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type MutationSignUp_Core_MembersArgs = {
+  birthday: Scalars['Int']['input'];
+  email: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  newsletter?: InputMaybe<Scalars['Boolean']['input']>;
+  password: Scalars['String']['input'];
 };
 
 export type PageInfo = {
@@ -80,14 +76,11 @@ export type ShowCoreMembers = {
   avatar_color: Scalars['String']['output'];
   birthday: Scalars['Int']['output'];
   email: Scalars['String']['output'];
-  first_name: Scalars['String']['output'];
   followers: Scalars['Int']['output'];
   group_id: Scalars['Int']['output'];
-  hide_real_name: Scalars['Boolean']['output'];
   id: Scalars['String']['output'];
   image_cover?: Maybe<Scalars['String']['output']>;
   joined: Scalars['Int']['output'];
-  last_name: Scalars['String']['output'];
   name: Scalars['String']['output'];
   name_seo: Scalars['String']['output'];
   newsletter: Scalars['Boolean']['output'];
@@ -118,8 +111,6 @@ export type SignUpCoreMembersObj = {
   __typename?: 'SignUpCoreMembersObj';
   birthday: Scalars['Int']['output'];
   email: Scalars['String']['output'];
-  first_name: Scalars['String']['output'];
-  last_name: Scalars['String']['output'];
   name: Scalars['String']['output'];
   newsletter?: Maybe<Scalars['Boolean']['output']>;
 };
@@ -148,10 +139,21 @@ export type SignOut_Core_SessionsMutationVariables = Exact<{ [key: string]: neve
 
 export type SignOut_Core_SessionsMutation = { __typename?: 'Mutation', signOut_core_sessions: string };
 
+export type SignUp_Core_MembersMutationVariables = Exact<{
+  birthday: Scalars['Int']['input'];
+  email: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+  newsletter?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
+
+
+export type SignUp_Core_MembersMutation = { __typename?: 'Mutation', signUp_core_members: { __typename?: 'SignUpCoreMembersObj', birthday: number, email: string, name: string, newsletter?: boolean | null } };
+
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', birthday: number, email: string, first_name: string, id: string, last_name: string, name: string, newsletter?: boolean | null } };
+export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', birthday: number, email: string, id: string, name: string, newsletter?: boolean | null } };
 
 
 export const SignIn_Core_Sessions = gql`
@@ -164,14 +166,28 @@ export const SignOut_Core_Sessions = gql`
   signOut_core_sessions
 }
     `;
+export const SignUp_Core_Members = gql`
+    mutation SignUp_core_members($birthday: Int!, $email: String!, $name: String!, $password: String!, $newsletter: Boolean) {
+  signUp_core_members(
+    birthday: $birthday
+    email: $email
+    name: $name
+    password: $password
+    newsletter: $newsletter
+  ) {
+    birthday
+    email
+    name
+    newsletter
+  }
+}
+    `;
 export const Authorization_Core_Sessions = gql`
     query Authorization_core_sessions {
   authorization_core_sessions {
     birthday
     email
-    first_name
     id
-    last_name
     name
     newsletter
   }

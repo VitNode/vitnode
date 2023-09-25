@@ -19,15 +19,12 @@ model core_members {
   group_id             Int             @default(3)
   joined               Int
   birthday             Int
-  first_name           String          @db.VarChar(255)
-  last_name            String          @db.VarChar(255)
   avatar               String?         @db.VarChar(255)
   image_cover          String?         @db.VarChar(255)
   posts                Int             @default(0)
   followers            Int             @default(0)
   reactions            Int             @default(0)
   newsletter           Boolean         @default(false)
-  hide_real_name       Boolean         @default(true)
   avatar_color         String          @db.VarChar(6)
   unread_notifications Int             @default(0)
   core_sessions        core_sessions[]

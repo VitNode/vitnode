@@ -19,7 +19,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 
 export const FormSignUp = () => {
   const t = useTranslations('core');
-  const { form, onSubmit } = useSignUpView();
+  const { form, isPending, onSubmit } = useSignUpView();
 
   return (
     <Form {...form}>
@@ -28,14 +28,14 @@ export const FormSignUp = () => {
           <div className="space-y-4">
             <FormField
               control={form.control}
-              name="nickname"
+              name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('sign_up.form.nickname.label')}</FormLabel>
+                  <FormLabel>{t('sign_up.form.name.label')}</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
-                  <FormDescription>{t('sign_up.form.nickname.desc')}</FormDescription>
+                  <FormDescription>{t('sign_up.form.name.desc')}</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -127,7 +127,12 @@ export const FormSignUp = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button type="submit" className="w-full">
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={!form.formState.isValid}
+            loading={isPending}
+          >
             {t('sign_up.form.submit')}
           </Button>
         </CardFooter>

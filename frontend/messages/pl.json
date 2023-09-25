@@ -37,12 +37,14 @@
       "title": "Zarejestruj się",
       "desc": "Zarejestruj się do swojego konta.",
       "form": {
-        "nickname": {
+        "name": {
           "label": "Nick",
-          "desc": "Możesz użyć liter, cyfr i znaków specjalnych: .-_."
+          "desc": "Możesz użyć liter, cyfr i znaków specjalnych: .-_.",
+          "already_exists": "Ten nick jest już zajęty."
         },
         "email": {
-          "label": "Email"
+          "label": "Email",
+          "already_exists": "Ten email jest już zajęty."
         },
         "birthday": {
           "label": "Data urodzenia",
