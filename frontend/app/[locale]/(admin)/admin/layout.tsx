@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
-import { AdminLayout } from '@/admin/admin-layout';
+import { AdminLayout } from '@/admin/layout/admin-layout';
 
-import '@/admin/global.scss';
+import '@/admin/layout/global.scss';
 
 interface Props {
   children: ReactNode;
