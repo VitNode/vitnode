@@ -1,5 +1,8 @@
 import { ReactNode } from 'react';
-import '@/themes/default/core/layout/global.scss';
+
+import { AdminLayout } from '@/admin/admin-layout';
+
+import '@/admin/global.scss';
 
 interface Props {
   children: ReactNode;
@@ -7,5 +10,5 @@ interface Props {
 }
 
 export default function Layout({ children }: Props) {
-  return <>{children}</>;
+  return <AdminLayout>{children}</AdminLayout>;
 }
