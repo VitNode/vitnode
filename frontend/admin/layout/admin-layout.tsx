@@ -12,7 +12,7 @@ export const AdminLayout = ({ children }: Props) => {
     <>
       <NavAdmin />
       <HeaderAdmin />
-      <main className="ml-16">{children}</main>
+      <main className="ml-60">{children}</main>
     </>
   );
 };
