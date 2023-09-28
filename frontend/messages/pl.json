@@ -1,4 +1,18 @@
 {
+  "nav_admin": {
+    "core": {
+      "title": "Rdzeń",
+      "dashboard": "Pulpit",
+      "general": "Ogólne",
+      "email": "Email",
+      "webapp": "Web App"
+    },
+    "users": {
+      "title": "Użytkownicy",
+      "list": "Użytkownicy",
+      "groups": "Grupy"
+    }
+  },
   "core": {
     "test": "Test PL",
     "loading": "Czekaj, ładowanie...",

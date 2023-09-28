@@ -1,6 +1,6 @@
 'use client';
 
-import { Brush, Cpu, Users } from 'lucide-react';
+import { Cpu, Users } from 'lucide-react';
 import { useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 
@@ -14,23 +14,40 @@ export const ListNavAdmin = () => {
       <ItemListNavAdmin
         id="core"
         icon={Cpu}
-        title="Core"
-        activeItem={activeItem}
         setActiveItem={setActiveItem}
+        items={[
+          {
+            id: 'dashboard',
+            href: ''
+          },
+          {
+            id: 'general',
+            href: '/general'
+          },
+          {
+            id: 'email',
+            href: '/email'
+          },
+          {
+            id: 'webapp',
+            href: '/webapp'
+          }
+        ]}
       />
       <ItemListNavAdmin
         id="users"
         icon={Users}
-        title="Users"
-        activeItem={activeItem}
         setActiveItem={setActiveItem}
-      />
-      <ItemListNavAdmin
-        id="themes"
-        icon={Brush}
-        title="Themes"
-        activeItem={activeItem}
-        setActiveItem={setActiveItem}
+        items={[
+          {
+            id: 'list',
+            href: ''
+          },
+          {
+            id: 'groups',
+            href: '/groups'
+          }
+        ]}
       />
     </Accordion.Root>
   );
