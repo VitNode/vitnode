@@ -41,7 +41,8 @@ type PageInfo {
 }
 
 type Query {
-  authorization_core_sessions: AuthorizationAdminCoreSessionsObj!
+  authorization_admin_core_sessions: AuthorizationAdminCoreSessionsObj!
+  authorization_core_sessions: AuthorizationCoreSessionsObj!
   show_core_members(cursor: String, first: Int!, search: String, sortBy: [SortByArgs!]): ShowCoreMembersObj!
 }
 

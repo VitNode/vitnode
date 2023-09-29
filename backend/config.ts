@@ -10,13 +10,19 @@ export const CONFIG = {
     secret: ENVS.refresh_token,
     expiresIn: 60 * 60 * 24 * 365, // 365 days
     name: 'vitnode-ref-auth',
-    admin_name: 'vitnode-ref-auth-admin'
+    admin: {
+      name: 'vitnode-ref-auth-admin',
+      expiresIn: 60 * 60 * 24 // 24 hours
+    }
   },
   access_token: {
     secret: ENVS.access_token,
     expiresIn: 60 * 60 * 24, // 24 hours
     name: 'vitnode-acc-auth',
-    admin_name: 'vitnode-acc-auth-admin'
+    admin: {
+      name: 'vitnode-acc-auth-admin',
+      expiresIn: 60 * 5 // 5 min
+    }
   },
   cookie: {
     domain: ENVS.cookie_domain ? ENVS.cookie_domain : 'localhost'

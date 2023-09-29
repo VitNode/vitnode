@@ -1,7 +1,8 @@
-import Link from 'next-intl/link';
 import cx from 'clsx';
 import { Check } from 'lucide-react';
 import { ReactNode } from 'react';
+
+import { Link } from '@/i18n';
 
 interface Props {
   children: ReactNode;

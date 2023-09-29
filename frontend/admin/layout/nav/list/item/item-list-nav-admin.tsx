@@ -1,14 +1,15 @@
 import { LucideIcon, ChevronDown } from 'lucide-react';
 import { Dispatch, SetStateAction } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
-import { usePathname } from 'next-intl/client';
 import { useTranslations } from 'next-intl';
 
 import { buttonVariants } from '@/components/ui/button';
 import { cx } from '@/functions/classnames';
 import { LinkItemListNavAdmin } from './link/link-item-list-nav-admin';
+import { usePathname } from '@/i18n';
 
 interface Props {
+  activeItem: string;
   icon: LucideIcon;
   id: string;
   items: {
@@ -18,11 +19,11 @@ interface Props {
   setActiveItem: Dispatch<SetStateAction<string>>;
 }
 
-export const ItemListNavAdmin = ({ icon, id, items, setActiveItem }: Props) => {
+export const ItemListNavAdmin = ({ activeItem, icon, id, items, setActiveItem }: Props) => {
   const Icon = icon;
   const pathname = usePathname();
   const pathnameId = pathname.split('/').at(2);
-  const t = useTranslations('nav_admin');
+  const t = useTranslations('admin');
 
   return (
     <Accordion.Item value={id}>
@@ -40,10 +41,10 @@ export const ItemListNavAdmin = ({ icon, id, items, setActiveItem }: Props) => {
           <Icon className="w-5 h-5 flex-shrink-0" />
           {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
           {/* @ts-expect-error */}
-          <span>{t(`${id}.title`)}</span>
+          <span>{t(`nav.${id}.title`)}</span>
           <ChevronDown
             className={cx('w-5 h-5 ml-auto transition-transform flex-shrink-0', {
-              'transform rotate-180': id === pathnameId
+              'transform rotate-180': id === activeItem
             })}
           />
         </Accordion.Trigger>

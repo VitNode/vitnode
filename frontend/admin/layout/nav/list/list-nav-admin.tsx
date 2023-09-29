@@ -14,6 +14,7 @@ export const ListNavAdmin = () => {
       <ItemListNavAdmin
         id="core"
         icon={Cpu}
+        activeItem={activeItem}
         setActiveItem={setActiveItem}
         items={[
           {
@@ -37,6 +38,7 @@ export const ListNavAdmin = () => {
       <ItemListNavAdmin
         id="users"
         icon={Users}
+        activeItem={activeItem}
         setActiveItem={setActiveItem}
         items={[
           {

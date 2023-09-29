@@ -1,5 +1,4 @@
 import { KeyRound, LogOut, Settings, Shield, User } from 'lucide-react';
-import { useRouter } from 'next-intl/client';
 import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components/ui/button';
@@ -13,6 +12,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useSession } from '@/hooks/core/use-session';
 import { useSignOutAPI } from '@/hooks/core/sign/out/use-sign-out-api';
+import { useRouter } from '@/i18n';
 
 export const AuthUserBar = () => {
   const t = useTranslations('core');

@@ -1,5 +1,4 @@
 import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next-intl/client';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -7,6 +6,7 @@ import {
   SignIn_Core_SessionsMutation,
   SignIn_Core_SessionsMutationVariables
 } from '@/graphql/hooks';
+import { useRouter } from '@/i18n';
 
 import { useSession } from '../../use-session';
 
@@ -21,9 +21,9 @@ export const useSignInAPI = () => {
         query: SignIn_Core_Sessions,
         variables
       }),
-    onSuccess: () => {
+    onSuccess: (_data, variables) => {
       setEnableSessionQuery(true);
-      push('/');
+      push(variables.admin ? '/admin/core' : '/');
     }
   });
 };

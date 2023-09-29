@@ -29,8 +29,8 @@ export class AuthorizationAdminCoreSessionsService {
 
   async authorization({ req, res }: Ctx): Promise<AuthorizationAdminCoreSessionsObj> {
     const tokens = {
-      accessToken: req.cookies[CONFIG.access_token.admin_name],
-      refreshToken: req.cookies[CONFIG.refresh_token.admin_name]
+      accessToken: req.cookies[CONFIG.access_token.admin.name],
+      refreshToken: req.cookies[CONFIG.refresh_token.admin.name]
     };
 
     // If access token exists, check it
@@ -81,8 +81,8 @@ export class AuthorizationAdminCoreSessionsService {
       if (!session || session.refresh_token !== tokens.refreshToken) {
         this.clearCookies({ res, cookie: tokens.refreshToken });
         this.clearCookies({ res, cookie: tokens.accessToken });
-        res.clearCookie(CONFIG.access_token.admin_name);
-        res.clearCookie(CONFIG.refresh_token.admin_name);
+        res.clearCookie(CONFIG.access_token.admin.name);
+        res.clearCookie(CONFIG.refresh_token.admin.name);
         throw new AccessDeniedError();
       }
 
@@ -106,7 +106,7 @@ export class AuthorizationAdminCoreSessionsService {
       }
 
       // Check if user has access to admin cp
-      const accessToAdminCP = this.prisma.core_admin_access.findFirst({
+      const accessToAdminCP = await this.prisma.core_admin_access.findFirst({
         where: {
           OR: [
             {
@@ -131,14 +131,14 @@ export class AuthorizationAdminCoreSessionsService {
         },
         {
           secret: CONFIG.access_token.secret,
-          expiresIn: 60 * 15 // 15 min
+          expiresIn: 60 * 5 // 5 min
         }
       );
 
       // Update session
       const uaParser = new UAParser(req.headers['user-agent']);
       const uaParserResults = uaParser.getResult();
-      await this.prisma.core_sessions.update({
+      await this.prisma.core_admin_sessions.update({
         where: { refresh_token: session.refresh_token },
         data: {
           access_token: currentAccessToken,
@@ -156,12 +156,12 @@ export class AuthorizationAdminCoreSessionsService {
       });
 
       // Create cookie
-      res.cookie(CONFIG.access_token.admin_name, currentAccessToken, {
+      res.cookie(CONFIG.access_token.admin.name, currentAccessToken, {
         httpOnly: true,
         secure: true,
         domain: CONFIG.cookie.domain,
         path: '/admin',
-        expires: new Date(convertUnixTime(getCurrentDate() + 60 * 15)), // 15 min
+        expires: new Date(convertUnixTime(getCurrentDate() + CONFIG.access_token.admin.expiresIn)),
         sameSite: 'none'
       });
 

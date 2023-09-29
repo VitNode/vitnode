@@ -15,6 +15,41 @@ import { generateAvatarColor } from '@/functions/avatar/generateAvatarColor';
 export class SignUpCoreMembersService {
   constructor(private prisma: PrismaService) {}
 
+  protected async checkIfUserIsFirst(): Promise<boolean> {
+    const count = await this.prisma.core_members.count();
+    const result = count <= 0;
+
+    // If there is no user, create default records
+    if (result) {
+      await this.prisma.core_groups.createMany({
+        data: [
+          {
+            id: 1,
+            name: 'Administrator'
+          },
+          {
+            id: 2,
+            name: 'Moderator'
+          },
+          {
+            id: 3,
+            name: 'Member'
+          }
+        ]
+      });
+
+      // Create default admin
+      await this.prisma.core_admin_access.create({
+        data: {
+          group_id: 1,
+          permissions: '*'
+        }
+      });
+    }
+
+    return result;
+  }
+
   async signUp({
     birthday,
     email,
@@ -65,6 +100,8 @@ export class SignUpCoreMembersService {
     const passwordSalt = await genSalt(CONFIG.password_salt);
     const hashPassword = await hash(password, passwordSalt);
 
+    const isAdmin = await this.checkIfUserIsFirst();
+
     return await this.prisma.core_members.create({
       data: {
         email,
@@ -76,14 +113,8 @@ export class SignUpCoreMembersService {
         avatar_color: generateAvatarColor(name),
         birthday,
         group: {
-          connectOrCreate: {
-            where: {
-              id: 3
-            },
-            create: {
-              id: 3,
-              name: 'Member'
-            }
+          connect: {
+            id: isAdmin ? 1 : 3
           }
         }
       },

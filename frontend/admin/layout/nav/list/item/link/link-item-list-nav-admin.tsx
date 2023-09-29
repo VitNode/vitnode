@@ -1,9 +1,8 @@
-import Link from 'next-intl/link';
-import { usePathname } from 'next-intl/client';
 import { useTranslations } from 'next-intl';
 
 import { cx } from '@/functions/classnames';
 import { buttonVariants } from '@/components/ui/button';
+import { Link, usePathname } from '@/i18n';
 
 interface Props {
   href: string;
@@ -12,7 +11,7 @@ interface Props {
 }
 
 export const LinkItemListNavAdmin = ({ href, id, primaryId }: Props) => {
-  const t = useTranslations('nav_admin');
+  const t = useTranslations('admin');
   const pathname = usePathname();
 
   return (
@@ -29,7 +28,7 @@ export const LinkItemListNavAdmin = ({ href, id, primaryId }: Props) => {
       >
         {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
         {/* @ts-expect-error */}
-        <span className="ml-5">{t(`${primaryId}.${id}`)}</span>
+        <span className="ml-5">{t(`nav.${primaryId}.${id}`)}</span>
       </Link>
     </li>
   );

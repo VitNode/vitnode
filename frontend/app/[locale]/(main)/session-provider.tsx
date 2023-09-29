@@ -13,7 +13,7 @@ import {
 
 interface Props {
   children: ReactNode;
-  initialDataSession?: Authorization_Core_SessionsQuery;
+  initialDataSession: Authorization_Core_SessionsQuery | undefined;
 }
 
 export const SessionProvider = ({ children, initialDataSession }: Props) => {

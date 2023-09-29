@@ -1,12 +1,12 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import Link from 'next-intl/link';
 
 import { buttonVariants } from '@/components/ui/button';
 import { AuthUserBar } from './auth/auth-user-bar';
 import { cx } from '@/functions/classnames';
 import { useSession } from '@/hooks/core/use-session';
+import { Link } from '@/i18n';
 
 export const UserBar = () => {
   const t = useTranslations('core');

@@ -1,16 +1,19 @@
 {
-  "nav_admin": {
-    "core": {
-      "title": "Rdzeń",
-      "dashboard": "Pulpit",
-      "general": "Ogólne",
-      "email": "Email",
-      "webapp": "Web App"
-    },
-    "users": {
-      "title": "Użytkownicy",
-      "list": "Użytkownicy",
-      "groups": "Grupy"
+  "admin": {
+    "title": "Panel kontrolny administratora",
+    "nav": {
+      "core": {
+        "title": "Rdzeń",
+        "dashboard": "Pulpit",
+        "general": "Ogólne",
+        "email": "Email",
+        "webapp": "Web App"
+      },
+      "users": {
+        "title": "Użytkownicy",
+        "list": "Użytkownicy",
+        "groups": "Grupy"
+      }
     }
   },
   "core": {

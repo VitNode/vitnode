@@ -1,16 +1,19 @@
 {
-  "nav_admin": {
-    "core": {
-      "title": "Core",
-      "dashboard": "Dashboard",
-      "general": "General",
-      "email": "Email",
-      "webapp": "Web App"
-    },
-    "users": {
-      "title": "Users",
-      "list": "Users",
-      "groups": "Groups"
+  "admin": {
+    "title": "Admin Control Panel",
+    "nav": {
+      "core": {
+        "title": "Core",
+        "dashboard": "Dashboard",
+        "general": "General",
+        "email": "Email",
+        "webapp": "Web App"
+      },
+      "users": {
+        "title": "Users",
+        "list": "Users",
+        "groups": "Groups"
+      }
     }
   },
   "core": {

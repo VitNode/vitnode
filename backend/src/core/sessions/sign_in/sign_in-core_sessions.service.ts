@@ -54,7 +54,7 @@ export class SignInCoreSessionsService {
       member_id: userId,
       user_agent: req.headers['user-agent'],
       last_seen: getCurrentDate(),
-      expires: getCurrentDate() + 60 * 60 * 24 * 365, // 365 days
+      expires: getCurrentDate() + 60 * 60 * 24 * (admin ? 1 : 365), // 1 day for admin, 365 days for user
       uagent_browser: uaParserResults.browser.name ?? 'Uagent from tests',
       uagent_version: uaParserResults.browser.version ?? 'Uagent from tests',
       uagent_os: uaParserResults.os.name
@@ -76,8 +76,8 @@ export class SignInCoreSessionsService {
     }
 
     const cookiesName = {
-      refreshToken: admin ? CONFIG.refresh_token.admin_name : CONFIG.refresh_token.name,
-      accessToken: admin ? CONFIG.access_token.admin_name : CONFIG.access_token.name
+      refreshToken: admin ? CONFIG.refresh_token.admin.name : CONFIG.refresh_token.name,
+      accessToken: admin ? CONFIG.access_token.admin.name : CONFIG.access_token.name
     };
 
     // Create cookie for refresh token
@@ -85,10 +85,11 @@ export class SignInCoreSessionsService {
       httpOnly: true,
       secure: true,
       domain: CONFIG.cookie.domain,
-      path: admin ? '/admin' : '/',
-      expires: remember
-        ? new Date(convertUnixTime(getCurrentDate() + 60 * 60 * 24 * (admin ? 1 : 365))) // 1 day for admin, 365 days for user
-        : undefined,
+      path: '/',
+      expires:
+        remember && !admin
+          ? new Date(convertUnixTime(getCurrentDate() + CONFIG.refresh_token.expiresIn))
+          : undefined,
       sameSite: 'none'
     });
 
@@ -97,7 +98,7 @@ export class SignInCoreSessionsService {
       httpOnly: true,
       secure: true,
       domain: CONFIG.cookie.domain,
-      path: admin ? '/admin' : '/',
+      path: '/',
       sameSite: 'none'
     });
   }
@@ -121,7 +122,7 @@ export class SignInCoreSessionsService {
 
     // If admin mode is enabled, check if user has access to admin cp
     if (admin) {
-      const accessToAdminCP = this.prisma.core_admin_access.findFirst({
+      const accessToAdminCP = await this.prisma.core_admin_access.findFirst({
         where: {
           OR: [
             {
@@ -143,6 +144,7 @@ export class SignInCoreSessionsService {
       name: user.name,
       email: user.email,
       userId: user.id,
+      admin,
       ...ctx,
       remember
     });
