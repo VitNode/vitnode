@@ -10,4 +10,7 @@ export class SignInCoreSessionsArgs {
 
   @Field(() => Boolean, { nullable: true })
   remember?: boolean;
+
+  @Field(() => Boolean, { nullable: true })
+  admin?: boolean;
 }

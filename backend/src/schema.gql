@@ -18,7 +18,7 @@ type CreateCoreGroupsObj {
 
 type Mutation {
   create_core_groups(name: String!): CreateCoreGroupsObj!
-  signIn_core_sessions(email: String!, password: String!, remember: Boolean): String!
+  signIn_core_sessions(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   signOut_core_sessions: String!
   signUp_core_members(birthday: Int!, email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
 }

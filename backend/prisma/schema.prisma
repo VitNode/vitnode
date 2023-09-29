@@ -11,35 +11,66 @@ datasource db {
 }
 
 model core_members {
-  id                   String          @id @default(uuid())
-  name                 String          @unique @db.VarChar(255)
-  name_seo             String          @unique @db.VarChar(255)
-  email                String          @unique @db.VarChar(255)
-  password             String          @db.Text
-  group                core_groups     @relation(references: [id], fields: [group_id])
-  group_id             Int             @default(3)
+  id                   String                @id @default(uuid())
+  name                 String                @unique @db.VarChar(255)
+  name_seo             String                @unique @db.VarChar(255)
+  email                String                @unique @db.VarChar(255)
+  password             String                @db.Text
+  group                core_groups           @relation(references: [id], fields: [group_id])
+  group_id             Int                   @default(3)
   joined               Int
   birthday             Int
-  avatar               String?         @db.VarChar(255)
-  image_cover          String?         @db.VarChar(255)
-  posts                Int             @default(0)
-  followers            Int             @default(0)
-  reactions            Int             @default(0)
-  newsletter           Boolean         @default(false)
-  avatar_color         String          @db.VarChar(6)
-  unread_notifications Int             @default(0)
+  avatar               String?               @db.VarChar(255)
+  image_cover          String?               @db.VarChar(255)
+  posts                Int                   @default(0)
+  followers            Int                   @default(0)
+  reactions            Int                   @default(0)
+  newsletter           Boolean               @default(false)
+  avatar_color         String                @db.VarChar(6)
+  unread_notifications Int                   @default(0)
   core_sessions        core_sessions[]
+  core_admin_sessions  core_admin_sessions[]
+  core_admin_access    core_admin_access[]
 
   @@index([group_id])
 }
 
 model core_groups {
-  id           Int            @id @default(autoincrement())
-  name         String         @db.VarChar(255)
-  core_members core_members[]
+  id                Int                 @id @default(autoincrement())
+  name              String              @db.VarChar(255)
+  core_members      core_members[]
+  core_admin_access core_admin_access[]
 }
 
 model core_sessions {
+  refresh_token        String       @id @unique @db.VarChar(255)
+  access_token         String?      @unique @db.VarChar(255)
+  member               core_members @relation(references: [id], fields: [member_id])
+  member_id            String
+  ip_address           String?      @db.VarChar(46)
+  user_agent           String       @db.Text
+  uagent_browser       String       @db.VarChar(200)
+  uagent_version       String       @db.VarChar(100)
+  uagent_os            String       @db.VarChar(100)
+  uagent_device_vendor String?      @db.VarChar(200)
+  uagent_device_type   String?      @db.VarChar(200)
+  uagent_device_model  String?      @db.VarChar(200)
+  last_seen            Int
+  expires              Int
+
+  @@index([member_id])
+}
+
+model core_admin_access {
+  id          String        @id @default(uuid())
+  group       core_groups?  @relation(references: [id], fields: [group_id])
+  group_id    Int?
+  member      core_members? @relation(references: [id], fields: [member_id])
+  member_id   String?
+  permissions String        @db.Text
+}
+
+model core_admin_sessions {
   refresh_token        String       @id @unique @db.VarChar(255)
   access_token         String?      @unique @db.VarChar(255)
   member               core_members @relation(references: [id], fields: [member_id])
