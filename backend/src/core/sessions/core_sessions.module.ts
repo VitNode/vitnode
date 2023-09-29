@@ -6,6 +6,8 @@ import { AuthorizationCoreSessionsService } from './authorization/authorization-
 import { AuthorizationCoreSessionsResolver } from './authorization/authorization-core_sessions.resolver';
 import { SignOutCoreSessionsService } from './sign_out/sign_out-core_sessions.service';
 import { SignOutCoreSessionsResolver } from './sign_out/sign_out-core_sessions.resolver';
+import { AuthorizationAdminCoreSessionsResolver } from './admin_authorization/authorization_admin-core_sessions.resolver';
+import { AuthorizationAdminCoreSessionsService } from './admin_authorization/authorization_admin_authorization-core_sessions.service';
 
 @Module({
   providers: [
@@ -14,7 +16,9 @@ import { SignOutCoreSessionsResolver } from './sign_out/sign_out-core_sessions.r
     AuthorizationCoreSessionsService,
     AuthorizationCoreSessionsResolver,
     SignOutCoreSessionsService,
-    SignOutCoreSessionsResolver
+    SignOutCoreSessionsResolver,
+    AuthorizationAdminCoreSessionsResolver,
+    AuthorizationAdminCoreSessionsService
   ]
 })
 export class CoreSessionsModule {}

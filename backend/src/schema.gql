@@ -2,6 +2,15 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type AuthorizationAdminCoreSessionsObj {
+  birthday: Int!
+  email: String!
+  group_id: Int!
+  id: String!
+  name: String!
+  newsletter: Boolean
+}
+
 type AuthorizationCoreSessionsObj {
   birthday: Int!
   email: String!
@@ -32,7 +41,7 @@ type PageInfo {
 }
 
 type Query {
-  authorization_core_sessions: AuthorizationCoreSessionsObj!
+  authorization_core_sessions: AuthorizationAdminCoreSessionsObj!
   show_core_members(cursor: String, first: Int!, search: String, sortBy: [SortByArgs!]): ShowCoreMembersObj!
 }
 

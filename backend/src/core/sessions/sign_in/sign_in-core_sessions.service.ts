@@ -76,12 +76,12 @@ export class SignInCoreSessionsService {
     }
 
     const cookiesName = {
-      refresh: admin ? CONFIG.refresh_token.admin_name : CONFIG.refresh_token.name,
-      access: admin ? CONFIG.access_token.admin_name : CONFIG.access_token.name
+      refreshToken: admin ? CONFIG.refresh_token.admin_name : CONFIG.refresh_token.name,
+      accessToken: admin ? CONFIG.access_token.admin_name : CONFIG.access_token.name
     };
 
     // Create cookie for refresh token
-    res.cookie(cookiesName.refresh, refreshToken, {
+    res.cookie(cookiesName.refreshToken, refreshToken, {
       httpOnly: true,
       secure: true,
       domain: CONFIG.cookie.domain,
@@ -93,7 +93,13 @@ export class SignInCoreSessionsService {
     });
 
     // Reset access token cookie
-    res.clearCookie(cookiesName.access);
+    res.clearCookie(cookiesName.accessToken, {
+      httpOnly: true,
+      secure: true,
+      domain: CONFIG.cookie.domain,
+      path: admin ? '/admin' : '/',
+      sameSite: 'none'
+    });
   }
 
   async signIn({ admin, email, password, remember }: SignInCoreSessionsArgs, ctx: Ctx) {
@@ -117,7 +123,14 @@ export class SignInCoreSessionsService {
     if (admin) {
       const accessToAdminCP = this.prisma.core_admin_access.findFirst({
         where: {
-          member_id: user.id
+          OR: [
+            {
+              member_id: user.id
+            },
+            {
+              group_id: user.group_id
+            }
+          ]
         }
       });
 
