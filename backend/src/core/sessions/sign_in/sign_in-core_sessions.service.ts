@@ -13,8 +13,9 @@ import { convertUnixTime, getCurrentDate } from '@/functions/date';
 
 interface CreateSessionArgs extends Ctx {
   email: string;
-  memberId: string;
   name: string;
+  userId: string;
+  admin?: boolean;
   remember?: boolean;
 }
 
@@ -25,7 +26,15 @@ export class SignInCoreSessionsService {
     private jwtService: JwtService
   ) {}
 
-  private async createSession({ email, memberId, name, remember, req, res }: CreateSessionArgs) {
+  private async createSession({
+    admin,
+    email,
+    name,
+    remember,
+    req,
+    res,
+    userId
+  }: CreateSessionArgs) {
     const uaParser = new UAParser(req.headers['user-agent']);
     const uaParserResults = uaParser.getResult();
 
@@ -40,48 +49,61 @@ export class SignInCoreSessionsService {
       }
     );
 
-    await this.prisma.core_sessions.create({
-      data: {
-        refresh_token: refreshToken,
-        member_id: memberId,
-        user_agent: req.headers['user-agent'],
-        last_seen: getCurrentDate(),
-        expires: getCurrentDate() + 60 * 60 * 24 * 365, // 365 days
-        uagent_browser: uaParserResults.browser.name ?? 'Uagent from tests',
-        uagent_version: uaParserResults.browser.version ?? 'Uagent from tests',
-        uagent_os: uaParserResults.os.name
-          ? `${uaParserResults.os.name} ${uaParserResults.os.version}`
-          : 'Uagent from tests',
-        uagent_device_vendor: uaParserResults.device.vendor ?? 'Uagent from tests',
-        uagent_device_model: uaParserResults.device.model ?? 'Uagent from tests',
-        uagent_device_type: uaParserResults.device.type ?? 'Uagent from tests'
-      }
-    });
+    const data = {
+      refresh_token: refreshToken,
+      member_id: userId,
+      user_agent: req.headers['user-agent'],
+      last_seen: getCurrentDate(),
+      expires: getCurrentDate() + 60 * 60 * 24 * (admin ? 1 : 365), // 1 day for admin, 365 days for user
+      uagent_browser: uaParserResults.browser.name ?? 'Uagent from tests',
+      uagent_version: uaParserResults.browser.version ?? 'Uagent from tests',
+      uagent_os: uaParserResults.os.name
+        ? `${uaParserResults.os.name} ${uaParserResults.os.version}`
+        : 'Uagent from tests',
+      uagent_device_vendor: uaParserResults.device.vendor ?? 'Uagent from tests',
+      uagent_device_model: uaParserResults.device.model ?? 'Uagent from tests',
+      uagent_device_type: uaParserResults.device.type ?? 'Uagent from tests'
+    };
+
+    if (admin) {
+      await this.prisma.core_admin_sessions.create({
+        data
+      });
+    } else {
+      await this.prisma.core_sessions.create({
+        data
+      });
+    }
+
+    const cookiesName = {
+      refreshToken: admin ? CONFIG.refresh_token.admin.name : CONFIG.refresh_token.name,
+      accessToken: admin ? CONFIG.access_token.admin.name : CONFIG.access_token.name
+    };
 
     // Create cookie for refresh token
-    res.cookie(CONFIG.refresh_token.name, refreshToken, {
+    res.cookie(cookiesName.refreshToken, refreshToken, {
       httpOnly: true,
       secure: true,
       domain: CONFIG.cookie.domain,
       path: '/',
-      expires: remember
-        ? new Date(convertUnixTime(getCurrentDate() + 60 * 60 * 24 * 365)) // 365 days
-        : undefined,
+      expires:
+        remember && !admin
+          ? new Date(convertUnixTime(getCurrentDate() + CONFIG.refresh_token.expiresIn))
+          : undefined,
       sameSite: 'none'
     });
 
     // Reset access token cookie
-    res.cookie(CONFIG.access_token.name, '', {
+    res.clearCookie(cookiesName.accessToken, {
       httpOnly: true,
       secure: true,
       domain: CONFIG.cookie.domain,
       path: '/',
-      expires: new Date(convertUnixTime(getCurrentDate())),
       sameSite: 'none'
     });
   }
 
-  async signIn({ email, password, remember }: SignInCoreSessionsArgs, ctx: Ctx) {
+  async signIn({ admin, email, password, remember }: SignInCoreSessionsArgs, ctx: Ctx) {
     const user = await this.prisma.core_members.findUnique({
       where: {
         email
@@ -98,10 +120,31 @@ export class SignInCoreSessionsService {
       throw new AccessDeniedError();
     }
 
+    // If admin mode is enabled, check if user has access to admin cp
+    if (admin) {
+      const accessToAdminCP = await this.prisma.core_admin_access.findFirst({
+        where: {
+          OR: [
+            {
+              member_id: user.id
+            },
+            {
+              group_id: user.group_id
+            }
+          ]
+        }
+      });
+
+      if (!accessToAdminCP) {
+        throw new AccessDeniedError();
+      }
+    }
+
     await this.createSession({
       name: user.name,
       email: user.email,
-      memberId: user.id,
+      userId: user.id,
+      admin,
       ...ctx,
       remember
     });

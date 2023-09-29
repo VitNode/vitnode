@@ -1,4 +1,21 @@
 {
+  "admin": {
+    "title": "Panel kontrolny administratora",
+    "nav": {
+      "core": {
+        "title": "Rdzeń",
+        "dashboard": "Pulpit",
+        "general": "Ogólne",
+        "email": "Email",
+        "webapp": "Web App"
+      },
+      "users": {
+        "title": "Użytkownicy",
+        "list": "Użytkownicy",
+        "groups": "Grupy"
+      }
+    }
+  },
   "core": {
     "test": "Test PL",
     "loading": "Czekaj, ładowanie...",
@@ -7,7 +24,9 @@
       "sign_up": "Zarejestruj się",
       "log_out": "Wyloguj się",
       "my_profile": "Mój profil",
-      "settings": "Ustawienia"
+      "settings": "Ustawienia",
+      "mod_cp": "Moderator Panel",
+      "admin_cp": "Admin Panel"
     },
     "forms": {
       "empty": "To pole jest wymagane."

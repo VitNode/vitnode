@@ -5,5 +5,7 @@ query Authorization_core_sessions {
     id
     name
     newsletter
+    group_id
+    is_admin
   }
 }

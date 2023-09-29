@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next-intl/client';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -7,6 +6,7 @@ import {
   SignOut_Core_SessionsMutation,
   SignOut_Core_SessionsMutationVariables
 } from '@/graphql/hooks';
+import { useRouter } from '@/i18n';
 
 import { useSession } from '../../use-session';
 

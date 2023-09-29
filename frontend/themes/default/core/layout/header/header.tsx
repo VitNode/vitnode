@@ -1,5 +1,4 @@
-import Link from 'next-intl/link';
-
+import { Link } from '@/i18n';
 import { UserBar } from './user-bar/user-bar';
 
 export const Header = () => {

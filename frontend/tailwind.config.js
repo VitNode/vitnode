@@ -6,7 +6,8 @@ module.exports = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-    './themes/**/*.{ts,tsx}'
+    './themes/**/*.{ts,tsx}',
+    './admin/**/*.{ts,tsx}'
   ],
   theme: {
     container: {
@@ -70,6 +71,9 @@ module.exports = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out'
+      },
+      transitionProperty: {
+        width: 'width'
       }
     }
   },

@@ -16,4 +16,10 @@ export class AuthorizationCoreSessionsObj {
 
   @Field(() => Boolean, { nullable: true })
   newsletter?: boolean;
+
+  @Field(() => Int)
+  group_id: number;
+
+  @Field(() => Boolean)
+  is_admin: boolean;
 }

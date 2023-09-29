@@ -18,7 +18,32 @@ export class AuthorizationCoreSessionsService {
     private jwtService: JwtService
   ) {}
 
-  private clearCookies({ cookie, res }: { cookie: string; res: Response }) {
+  protected async isAdmin({
+    group_id,
+    user_id
+  }: {
+    group_id: number;
+    user_id: string;
+  }): Promise<boolean> {
+    return await this.prisma.core_admin_access
+      .findFirst({
+        where: {
+          OR: [
+            {
+              group_id
+            },
+            {
+              member_id: user_id
+            }
+          ]
+        }
+      })
+      .then(result => {
+        return !!result;
+      });
+  }
+
+  protected clearCookies({ cookie, res }: { cookie: string; res: Response }) {
     res.clearCookie(cookie, {
       httpOnly: true,
       secure: true,
@@ -64,7 +89,12 @@ export class AuthorizationCoreSessionsService {
           email: user.email,
           name: user.name,
           birthday: user.birthday,
-          newsletter: user.newsletter
+          newsletter: user.newsletter,
+          group_id: user.group_id,
+          is_admin: await this.isAdmin({
+            user_id: user.id,
+            group_id: user.group_id
+          })
         };
       }
     }
@@ -151,7 +181,12 @@ export class AuthorizationCoreSessionsService {
         email: user.email,
         name: user.name,
         birthday: user.birthday,
-        newsletter: user.newsletter
+        newsletter: user.newsletter,
+        group_id: user.group_id,
+        is_admin: await this.isAdmin({
+          user_id: user.id,
+          group_id: user.group_id
+        })
       };
     }
 

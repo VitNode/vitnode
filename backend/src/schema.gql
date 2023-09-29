@@ -2,16 +2,33 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type AuthorizationCoreSessionsObj {
+type AuthorizationAdminCoreSessionsObj {
   birthday: Int!
   email: String!
+  group_id: Int!
   id: String!
   name: String!
   newsletter: Boolean
 }
 
+type AuthorizationCoreSessionsObj {
+  birthday: Int!
+  email: String!
+  group_id: Int!
+  id: String!
+  is_admin: Boolean!
+  name: String!
+  newsletter: Boolean
+}
+
+type CreateCoreGroupsObj {
+  id: Int!
+  name: String!
+}
+
 type Mutation {
-  signIn_core_sessions(email: String!, password: String!, remember: Boolean): String!
+  create_core_groups(name: String!): CreateCoreGroupsObj!
+  signIn_core_sessions(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   signOut_core_sessions: String!
   signUp_core_members(birthday: Int!, email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
 }
@@ -25,6 +42,7 @@ type PageInfo {
 }
 
 type Query {
+  authorization_admin_core_sessions: AuthorizationAdminCoreSessionsObj!
   authorization_core_sessions: AuthorizationCoreSessionsObj!
   show_core_members(cursor: String, first: Int!, search: String, sortBy: [SortByArgs!]): ShowCoreMembersObj!
 }
@@ -67,6 +85,7 @@ enum ShowCoreMembersSortingColumnEnum {
 type SignUpCoreMembersObj {
   birthday: Int!
   email: String!
+  group_id: Int!
   name: String!
   newsletter: Boolean
 }

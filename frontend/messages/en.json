@@ -1,4 +1,21 @@
 {
+  "admin": {
+    "title": "Admin Control Panel",
+    "nav": {
+      "core": {
+        "title": "Core",
+        "dashboard": "Dashboard",
+        "general": "General",
+        "email": "Email",
+        "webapp": "Web App"
+      },
+      "users": {
+        "title": "Users",
+        "list": "Users",
+        "groups": "Groups"
+      }
+    }
+  },
   "core": {
     "test": "Test EN",
     "loading": "Please wait, loading...",
@@ -7,7 +24,9 @@
       "sign_up": "Register",
       "log_out": "Log out",
       "my_profile": "My Profile",
-      "settings": "Settings"
+      "settings": "Settings",
+      "mod_cp": "Moderator Panel",
+      "admin_cp": "Admin Panel"
     },
     "forms": {
       "empty": "This field is required."
