@@ -16,6 +16,7 @@ type AuthorizationCoreSessionsObj {
   email: String!
   group_id: Int!
   id: String!
+  is_admin: Boolean!
   name: String!
   newsletter: Boolean
 }

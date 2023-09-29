@@ -6,5 +6,6 @@ query Authorization_core_sessions {
     name
     newsletter
     group_id
+    is_admin
   }
 }

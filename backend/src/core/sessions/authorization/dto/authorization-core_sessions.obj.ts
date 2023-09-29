@@ -19,4 +19,7 @@ export class AuthorizationCoreSessionsObj {
 
   @Field(() => Int)
   group_id: number;
+
+  @Field(() => Boolean)
+  is_admin: boolean;
 }

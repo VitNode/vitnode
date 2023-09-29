@@ -1,11 +1,9 @@
 import { ReactNode } from 'react';
+import { cookies } from 'next/headers';
 
 import { AdminLayout } from '@/admin/layout/admin-layout';
-
-import '@/admin/layout/global.scss';
 import { SessionAdminProvider } from '../session-admin-provider';
 import { redirect } from '@/i18n';
-import { cookies } from 'next/headers';
 import { CONFIG } from '@/config';
 import { fetcher } from '@/graphql/fetcher';
 import {

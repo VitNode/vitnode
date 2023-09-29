@@ -23,7 +23,7 @@ export const AuthUserBar = () => {
   if (!session) return null;
 
   const {
-    authorization_core_sessions: { id, name }
+    authorization_core_sessions: { id, is_admin, name }
   } = session;
 
   return (
@@ -43,18 +43,22 @@ export const AuthUserBar = () => {
           </DropdownMenuItem>
         </DropdownMenuGroup>
 
-        <DropdownMenuSeparator />
+        {is_admin && (
+          <>
+            <DropdownMenuSeparator />
 
-        <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => push('/modcp')}>
-            <Shield className="mr-2 h-4 w-4" />
-            <span>{t('user-bar.mod_cp')}</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => push('/admin')}>
-            <KeyRound className="mr-2 h-4 w-4" />
-            <span>{t('user-bar.admin_cp')}</span>
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
+            <DropdownMenuGroup>
+              <DropdownMenuItem onClick={() => push('/modcp')}>
+                <Shield className="mr-2 h-4 w-4" />
+                <span>{t('user-bar.mod_cp')}</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => push('/admin')}>
+                <KeyRound className="mr-2 h-4 w-4" />
+                <span>{t('user-bar.admin_cp')}</span>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+          </>
+        )}
 
         <DropdownMenuSeparator />
 
