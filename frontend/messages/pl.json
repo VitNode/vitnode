@@ -88,6 +88,15 @@
         },
         "submit": "Zarejestruj się"
       }
+    },
+    "settings": {
+      "open_sheet": "Otwórz menu",
+      "overview": {
+        "title": "Przegląd"
+      },
+      "notifications": {
+        "title": "Powiadomienia"
+      }
     }
   }
 }

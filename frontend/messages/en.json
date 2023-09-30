@@ -88,6 +88,15 @@
         },
         "submit": "Sign Up"
       }
+    },
+    "settings": {
+      "open_sheet": "Open Menu",
+      "overview": {
+        "title": "Overview"
+      },
+      "notifications": {
+        "title": "Notifications"
+      }
     }
   }
 }
