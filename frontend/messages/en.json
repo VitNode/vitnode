@@ -90,12 +90,15 @@
       }
     },
     "settings": {
+      "title": "Settings",
+      "desc": "Manage your account settings.",
       "open_sheet": "Open Menu",
       "overview": {
         "title": "Overview"
       },
       "notifications": {
-        "title": "Notifications"
+        "title": "Notifications",
+        "desc": "Configure how you receive notifications."
       }
     }
   }
