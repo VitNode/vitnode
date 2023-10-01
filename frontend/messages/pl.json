@@ -88,6 +88,18 @@
         },
         "submit": "Zarejestruj się"
       }
+    },
+    "settings": {
+      "title": "Ustawienia",
+      "desc": "Zarządzaj ustawnieniami swojego konta.",
+      "open_sheet": "Otwórz menu",
+      "overview": {
+        "title": "Przegląd"
+      },
+      "notifications": {
+        "title": "Powiadomienia",
+        "desc": "Konfiguruj jak otrzymujesz powiadomienia."
+      }
     }
   }
 }

@@ -13,7 +13,7 @@ export const Layout = ({ children }: Props) => {
   return (
     <>
       <Header />
-      <div className="max-w-[120rem] mx-auto p-5">{children}</div>
+      <div className="container py-6">{children}</div>
       <Footer />
       <QuickMenu />
     </>
