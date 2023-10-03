@@ -9,7 +9,7 @@ interface Props {
 export const Loader = ({ small }: Props) => {
   return (
     <Loader2
-      className={cx('mr-2 h-4 w-4 animate-spin', {
+      className={cx('mr-2 h-10 w-10 animate-spin', {
         'h-4 w-4': small
       })}
     />

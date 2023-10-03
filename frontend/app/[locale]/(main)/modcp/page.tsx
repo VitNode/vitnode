@@ -1,3 +1,5 @@
+import { LoadingView } from '@/themes/default/core/views/global/loading/loading-view';
+
 export default function Page() {
-  return <div>ModCP</div>;
+  return <LoadingView global />;
 }

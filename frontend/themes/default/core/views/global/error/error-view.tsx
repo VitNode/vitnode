@@ -1,8 +1,9 @@
-import { AlertTriangle } from 'lucide-react';
+import { AlertTriangle, Home } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { ActionsError } from './actions/actions-error';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Link } from '@/i18n';
+import { buttonVariants } from '@/components/ui/button';
 
 interface Props {
   code: '404' | '500' | string;
@@ -11,7 +12,6 @@ interface Props {
 export const ErrorView = ({ code }: Props) => {
   const t = useTranslations('core');
 
-  // TODO: Add RWD
   return (
     <div className="mx-auto max-w-2xl">
       <Card>
@@ -23,9 +23,13 @@ export const ErrorView = ({ code }: Props) => {
           <p className="text-xl font-semibold tracking-tight mt-1">Test - {code}</p>
         </CardContent>
 
-        <ActionsError />
+        <CardFooter className="justify-center">
+          <Link href="/" className={buttonVariants({ variant: 'outline' })}>
+            <Home className="w-5 h-5" /> {t('errors.actions.back_home')}
+          </Link>
+        </CardFooter>
       </Card>
-      <div className="text-right pt-2 text-muted-foreground">
+      <div className="text-right pt-2 text-muted-foreground italic">
         {t.rich('errors.code', {
           code: () => <span className="font-semibold">{code}</span>
         })}

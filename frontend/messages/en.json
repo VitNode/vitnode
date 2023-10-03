@@ -105,7 +105,7 @@
       "title": "Oops! Something went wrong.",
       "code": "Error code: <code></code>",
       "actions": {
-        "back": "Go Back",
+        "back_home": "Home Page",
         "contact": "Contact with Us"
       }
     }
