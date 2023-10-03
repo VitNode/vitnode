@@ -100,6 +100,14 @@
         "title": "Powiadomienia",
         "desc": "Konfiguruj jak otrzymujesz powiadomienia."
       }
+    },
+    "errors": {
+      "title": "Ups! Coś poszło nie tak.",
+      "code": "Kod błędu: <code></code>",
+      "actions": {
+        "back_home": "Strona główna",
+        "contact": "Skontaktuj się z nami"
+      }
     }
   }
 }
