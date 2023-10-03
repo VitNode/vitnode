@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import * as cookieParser from 'cookie-parser';
+import { graphqlUploadExpress } from 'graphql-upload-minimal';
 
 import { AppModule } from './app.module';
 
@@ -10,6 +11,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cookieParser());
   app.useGlobalPipes(new ValidationPipe());
+  app.use(graphqlUploadExpress({ maxFiles: 100 }));
   app.enableCors({
     credentials: true,
     origin: ['http://localhost:3000', 'https://sandbox.embed.apollographql.com']
