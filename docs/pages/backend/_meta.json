@@ -1,4 +1,5 @@
 {
+  "authorization": "Authorization",
   "database": "Database",
   "graphql": "GraphQL",
   "practices": "Best Practices"

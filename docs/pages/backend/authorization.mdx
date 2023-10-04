@@ -1,0 +1,17 @@
+# Authorization
+
+In VitNode we're implementing a custom authorization system, which gives us more flexibility and control over the authorization process. Our system use Guards from NestJS to protect routes.
+
+## Sign In required
+
+To protect a route, you need to add the `@UseGuards(AuthStrategy)` decorator to the route handler. This will make sure that the user is authenticated before accessing the route.
+
+Here is an example for resolver:
+
+```typescript
+  @Query(() => ShowCoreMembersObj)
+  @UseGuards(AuthGuards)
+  async show_core_members(@Args() args: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
+    return await this.service.show(args);
+  }
+```

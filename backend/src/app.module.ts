@@ -8,7 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 
 import { CoreMembersModule } from './core/members/core_members.module';
 import { PrismaModule } from './prisma/prisma.module';
-import { CoreSessionsModule } from './core/sessions/core_sessions.module';
+import { CoreSessionsModule, GlobalCoreSessionsModule } from './core/sessions/core_sessions.module';
 import { CoreGroupsModule } from './core/groups/core_groups.module';
 
 import { Ctx } from '@/types/context.type';
@@ -27,7 +27,8 @@ import { Ctx } from '@/types/context.type';
     PrismaModule,
     CoreMembersModule,
     CoreSessionsModule,
-    CoreGroupsModule
+    CoreGroupsModule,
+    GlobalCoreSessionsModule
   ]
 })
 export class AppModule {}

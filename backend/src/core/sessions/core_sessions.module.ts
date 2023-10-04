@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 
 import { SignInCoreSessionsService } from './sign_in/sign_in-core_sessions.service';
 import { SignInCoreSessionsResolver } from './sign_in/sign_in-core_sessions.resolver';
@@ -22,3 +22,10 @@ import { AuthorizationAdminCoreSessionsService } from './admin_authorization/aut
   ]
 })
 export class CoreSessionsModule {}
+
+@Global()
+@Module({
+  providers: [AuthorizationCoreSessionsService, AuthorizationCoreSessionsResolver],
+  exports: [AuthorizationCoreSessionsService, AuthorizationCoreSessionsResolver]
+})
+export class GlobalCoreSessionsModule {}
