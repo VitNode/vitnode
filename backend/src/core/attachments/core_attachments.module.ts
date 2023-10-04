@@ -1,6 +1,10 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 
+import { UploadCoreAttachmentsService } from './upload/upload-core_attachments.service';
+
+@Global()
 @Module({
-  providers: []
+  providers: [UploadCoreAttachmentsService],
+  exports: [UploadCoreAttachmentsService]
 })
 export class CoreAttachmentsModule {}

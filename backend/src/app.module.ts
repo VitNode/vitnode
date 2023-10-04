@@ -10,6 +10,7 @@ import { CoreMembersModule } from './core/members/core_members.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { CoreSessionsModule, GlobalCoreSessionsModule } from './core/sessions/core_sessions.module';
 import { CoreGroupsModule } from './core/groups/core_groups.module';
+import { CoreAttachmentsModule } from './core/attachments/core_attachments.module';
 
 import { Ctx } from '@/types/context.type';
 
@@ -28,7 +29,8 @@ import { Ctx } from '@/types/context.type';
     CoreMembersModule,
     CoreSessionsModule,
     CoreGroupsModule,
-    GlobalCoreSessionsModule
+    GlobalCoreSessionsModule,
+    CoreAttachmentsModule
   ]
 })
 export class AppModule {}

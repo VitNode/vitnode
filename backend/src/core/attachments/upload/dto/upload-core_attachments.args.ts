@@ -1,8 +1,14 @@
 import { ArgsType, Field } from '@nestjs/graphql';
-import { GraphQLUpload, Upload } from 'graphql-upload-minimal';
+import { FileUpload, GraphQLUpload } from 'graphql-upload-minimal';
 
 @ArgsType()
 export class UploadCoreAttachmentsArgs {
   @Field(() => [GraphQLUpload])
-  files: Promise<Upload[]>;
+  files: Promise<FileUpload>[];
+
+  @Field(() => Number)
+  maxUploadSizeBytes: number;
+
+  @Field(() => [String])
+  acceptMimeType: string[];
 }

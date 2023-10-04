@@ -1,5 +1,5 @@
 import { ArgsType, Field } from '@nestjs/graphql';
-import { GraphQLUpload, Upload } from 'graphql-upload-minimal';
+import { FileUpload, GraphQLUpload } from 'graphql-upload-minimal';
 
 @ArgsType()
 export class UploadAvatarCoreMembersArgs {
@@ -7,5 +7,5 @@ export class UploadAvatarCoreMembersArgs {
   user_id: string;
 
   @Field(() => GraphQLUpload)
-  file: Promise<Upload>;
+  file: Promise<FileUpload>;
 }
