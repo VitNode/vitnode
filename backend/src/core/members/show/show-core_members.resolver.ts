@@ -5,7 +5,7 @@ import { ShowCoreMembersService } from './show-core_members.service';
 import { ShowCoreMembersObj } from './dto/show-core_members.obj';
 import { ShowCoreMembersArgs } from './dto/show-core_members.args';
 
-import { AuthGuards } from '@/utils/strategies/auth.guards';
+import { AuthGuards } from '@/utils/guards/auth.guards';
 
 @Resolver()
 export class ShowCoreMembersResolver {

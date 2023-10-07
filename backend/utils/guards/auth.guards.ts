@@ -7,17 +7,16 @@ import { AuthorizationCoreSessionsService } from '@/src/core/sessions/authorizat
 export class AuthGuards implements CanActivate {
   constructor(private service: AuthorizationCoreSessionsService) {}
 
-  // TODO: Throw error when user is banned
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const ctx = GqlExecutionContext.create(context);
     const req = ctx.getContext().req;
     const res = ctx.getContext().res;
-    const token = await this.service.authorization({
+    const data = await this.service.authorization({
       req,
       res
     });
-    req.user = token;
+    req.user = data;
 
-    return !!token;
+    return !!data;
   }
 }

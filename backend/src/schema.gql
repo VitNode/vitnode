@@ -11,16 +11,6 @@ type AuthorizationAdminCoreSessionsObj {
   newsletter: Boolean
 }
 
-type AuthorizationCoreSessionsObj {
-  birthday: Int!
-  email: String!
-  group_id: Int!
-  id: String!
-  is_admin: Boolean!
-  name: String!
-  newsletter: Boolean
-}
-
 type CreateCoreGroupsObj {
   id: Int!
   name: String!
@@ -31,7 +21,7 @@ type Mutation {
   signIn_core_sessions(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   signOut_core_sessions: String!
   signUp_core_members(birthday: Int!, email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
-  upload_avatar_core_members(file: Upload!, user_id: String!): String!
+  upload_avatar_core_members(file: Upload!): String!
 }
 
 type PageInfo {
@@ -44,7 +34,7 @@ type PageInfo {
 
 type Query {
   authorization_admin_core_sessions: AuthorizationAdminCoreSessionsObj!
-  authorization_core_sessions: AuthorizationCoreSessionsObj!
+  authorization_core_sessions: User!
   show_core_members(cursor: String, first: Int!, search: String, sortBy: [SortByArgs!]): ShowCoreMembersObj!
 }
 
@@ -103,3 +93,13 @@ enum SortDirectionEnum {
 
 """The `Upload` scalar type represents a file upload."""
 scalar Upload
+
+type User {
+  birthday: Int!
+  email: String!
+  group_id: Int!
+  id: String!
+  is_admin: Boolean!
+  name: String!
+  newsletter: Boolean
+}

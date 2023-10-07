@@ -8,11 +8,13 @@ import { UploadCoreAttachmentsService } from '../../../attachments/upload/upload
 export class UploadAvatarCoreMembersService {
   constructor(private readonly attachments: UploadCoreAttachmentsService) {}
 
-  async uploadAvatar({ file, user_id }: UploadAvatarCoreMembersArgs): Promise<string> {
+  async uploadAvatar({ file }: UploadAvatarCoreMembersArgs): Promise<string> {
     await this.attachments.upload({
       files: [file],
       maxUploadSizeBytes: 100,
-      acceptMimeType: ['image/png', 'image/jpeg']
+      acceptMimeType: ['image/png', 'image/jpeg'],
+      module: 'core_members',
+      module_id: '1' // TODO: Add user id form current user
     });
 
     return 'UploadAvatarCoreMembersService';

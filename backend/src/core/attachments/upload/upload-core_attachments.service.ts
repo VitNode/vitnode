@@ -66,7 +66,13 @@ export class UploadCoreAttachmentsService {
     );
   }
 
-  async upload({ acceptMimeType, files, maxUploadSizeBytes }: UploadCoreAttachmentsArgs) {
+  async upload({
+    acceptMimeType,
+    files,
+    maxUploadSizeBytes,
+    module,
+    module_id
+  }: UploadCoreAttachmentsArgs) {
     await this.checkAcceptMimeType({ files, acceptMimeType });
     await this.checkSizeFile({ files, maxUploadSizeBytes });
 

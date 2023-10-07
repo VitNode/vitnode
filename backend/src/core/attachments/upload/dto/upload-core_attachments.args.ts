@@ -11,4 +11,10 @@ export class UploadCoreAttachmentsArgs {
 
   @Field(() => [String])
   acceptMimeType: string[];
+
+  @Field(() => String)
+  module: string;
+
+  @Field(() => String)
+  module_id: string;
 }
