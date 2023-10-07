@@ -18,10 +18,10 @@ Here is an example for resolver:
   }
 ```
 
-Whan you are using `AuthGuards` you can access to the current user in the resolver by using the `@CurrentUser()` decorator.
+Whan you are using `AuthGuards` you can access to the current user in the resolver by using the `@CurrentUser()` decorator as param route.
 
 ```typescript
-  import { User, CurrentUser } from '@/utils/decorators/user.decorators';
+  import { CurrentUser, User } from '@/utils/decorators/user.decorator';
 
   @Query(() => ShowCoreMembersObj)
   @UseGuards(AuthGuards)
@@ -30,15 +30,18 @@ Whan you are using `AuthGuards` you can access to the current user in the resolv
   }
 ```
 
-## Current user withouth guards
+## Current user withouth protected route
 
-If you need to access the current user in a route that is not protected by `AuthGuards`, you can use the `@CurrentUser()` decorator.
+If you need to access to the current user in a route you need use the `@OptionalAuth()` decorator in route. You need change `@CurrentUser()` decorator to optional param route.
 
 ```typescript
-  import { User, CurrentUser } from '@/utils/decorators/user.decorators';
+  import { AuthGuards, OptionalAuth } from '@/utils/guards/auth.guards';
+  import { CurrentUser, User } from '@/utils/decorators/user.decorator';
 
   @Query(() => ShowCoreMembersObj)
-  async show_core_members(@Args() args: ShowCoreMembersArgs, @CurrentUser() user: User): Promise<ShowCoreMembersObj> {
+  @OptionalAuth()
+  @UseGuards(AuthGuards)
+  async show_core_members(@Args() args: ShowCoreMembersArgs, @CurrentUser() user?: User): Promise<ShowCoreMembersObj> {
     return await this.service.show(args);
   }
 ```

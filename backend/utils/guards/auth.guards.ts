@@ -1,22 +1,44 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
+import { Reflector } from '@nestjs/core';
 
-import { AuthorizationCoreSessionsService } from '@/src/core/sessions/authorization/authorization-core_sessions.service';
+import { InternalAuthorizationCoreSessionsService } from '@/src/core/sessions/authorization/internal/internal_authorization-core_sessions.service';
+import { Ctx } from '@/types/context.type';
 
 @Injectable()
 export class AuthGuards implements CanActivate {
-  constructor(private service: AuthorizationCoreSessionsService) {}
+  constructor(
+    private reflector: Reflector,
+    private service: InternalAuthorizationCoreSessionsService
+  ) {}
 
-  async canActivate(context: ExecutionContext): Promise<boolean> {
-    const ctx = GqlExecutionContext.create(context);
-    const req = ctx.getContext().req;
-    const res = ctx.getContext().res;
+  protected async getAuth({ req, res }: Ctx) {
     const data = await this.service.authorization({
       req,
       res
     });
     req.user = data;
 
-    return !!data;
+    return data;
+  }
+
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    const optionalAuth = this.reflector.get(OptionalAuth, context.getHandler());
+
+    const ctx = GqlExecutionContext.create(context).getContext();
+
+    // If optional auth decorator is not set, check auth
+    if (optionalAuth === undefined) {
+      return !!(await this.getAuth(ctx));
+    } else {
+      try {
+        return !!(await this.getAuth(ctx));
+      } catch (e) {
+        // Return true if auth is optional
+        return true;
+      }
+    }
   }
 }
+
+export const OptionalAuth = Reflector.createDecorator();

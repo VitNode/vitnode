@@ -1,8 +1,0 @@
-query Authorization_admin_core_sessions {
-  authorization_admin_core_sessions {
-    email
-    group_id
-    id
-    name
-  }
-}

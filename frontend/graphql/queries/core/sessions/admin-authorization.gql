@@ -1,0 +1,8 @@
+query Admin_authorization_core_sessions {
+  admin_authorization_core_sessions {
+    email
+    group_id
+    id
+    name
+  }
+}

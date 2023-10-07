@@ -6,8 +6,9 @@ import { AuthorizationCoreSessionsService } from './authorization/authorization-
 import { AuthorizationCoreSessionsResolver } from './authorization/authorization-core_sessions.resolver';
 import { SignOutCoreSessionsService } from './sign_out/sign_out-core_sessions.service';
 import { SignOutCoreSessionsResolver } from './sign_out/sign_out-core_sessions.resolver';
-import { AuthorizationAdminCoreSessionsResolver } from './admin_authorization/authorization_admin-core_sessions.resolver';
-import { AuthorizationAdminCoreSessionsService } from './admin_authorization/authorization_admin_authorization-core_sessions.service';
+import { AdminAuthorizationCoreSessionsResolver } from './admin_authorization/admin_authorization-core_sessions.resolver';
+import { AdminAuthorizationCoreSessionsService } from './admin_authorization/admin_authorization-core_sessions.service';
+import { InternalAuthorizationCoreSessionsService } from './authorization/internal/internal_authorization-core_sessions.service';
 
 @Module({
   providers: [
@@ -17,15 +18,23 @@ import { AuthorizationAdminCoreSessionsService } from './admin_authorization/aut
     AuthorizationCoreSessionsResolver,
     SignOutCoreSessionsService,
     SignOutCoreSessionsResolver,
-    AuthorizationAdminCoreSessionsResolver,
-    AuthorizationAdminCoreSessionsService
+    AdminAuthorizationCoreSessionsResolver,
+    AdminAuthorizationCoreSessionsService
   ]
 })
 export class CoreSessionsModule {}
 
 @Global()
 @Module({
-  providers: [AuthorizationCoreSessionsService, AuthorizationCoreSessionsResolver],
-  exports: [AuthorizationCoreSessionsService, AuthorizationCoreSessionsResolver]
+  providers: [
+    AuthorizationCoreSessionsService,
+    AuthorizationCoreSessionsResolver,
+    InternalAuthorizationCoreSessionsService
+  ],
+  exports: [
+    AuthorizationCoreSessionsService,
+    AuthorizationCoreSessionsResolver,
+    InternalAuthorizationCoreSessionsService
+  ]
 })
 export class GlobalCoreSessionsModule {}

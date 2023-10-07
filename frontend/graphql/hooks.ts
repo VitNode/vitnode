@@ -13,10 +13,11 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  Upload: { input: any; output: any; }
 };
 
-export type AuthorizationAdminCoreSessionsObj = {
-  __typename?: 'AuthorizationAdminCoreSessionsObj';
+export type AdminAuthorizationCoreSessionsObj = {
+  __typename?: 'AdminAuthorizationCoreSessionsObj';
   birthday: Scalars['Int']['output'];
   email: Scalars['String']['output'];
   group_id: Scalars['Int']['output'];
@@ -48,6 +49,7 @@ export type Mutation = {
   signIn_core_sessions: Scalars['String']['output'];
   signOut_core_sessions: Scalars['String']['output'];
   signUp_core_members: SignUpCoreMembersObj;
+  upload_avatar_core_members: Scalars['String']['output'];
 };
 
 
@@ -72,6 +74,11 @@ export type MutationSignUp_Core_MembersArgs = {
   password: Scalars['String']['input'];
 };
 
+
+export type MutationUpload_Avatar_Core_MembersArgs = {
+  file: Scalars['Upload']['input'];
+};
+
 export type PageInfo = {
   __typename?: 'PageInfo';
   count: Scalars['Float']['output'];
@@ -83,7 +90,7 @@ export type PageInfo = {
 
 export type Query = {
   __typename?: 'Query';
-  authorization_admin_core_sessions: AuthorizationAdminCoreSessionsObj;
+  admin_authorization_core_sessions: AdminAuthorizationCoreSessionsObj;
   authorization_core_sessions: AuthorizationCoreSessionsObj;
   show_core_members: ShowCoreMembersObj;
 };
@@ -178,10 +185,10 @@ export type SignUp_Core_MembersMutationVariables = Exact<{
 
 export type SignUp_Core_MembersMutation = { __typename?: 'Mutation', signUp_core_members: { __typename?: 'SignUpCoreMembersObj', birthday: number, email: string, name: string, newsletter?: boolean | null } };
 
-export type Authorization_Admin_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
+export type Admin_Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Authorization_Admin_Core_SessionsQuery = { __typename?: 'Query', authorization_admin_core_sessions: { __typename?: 'AuthorizationAdminCoreSessionsObj', email: string, group_id: number, id: string, name: string } };
+export type Admin_Authorization_Core_SessionsQuery = { __typename?: 'Query', admin_authorization_core_sessions: { __typename?: 'AdminAuthorizationCoreSessionsObj', email: string, group_id: number, id: string, name: string } };
 
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -220,9 +227,9 @@ export const SignUp_Core_Members = gql`
   }
 }
     `;
-export const Authorization_Admin_Core_Sessions = gql`
-    query Authorization_admin_core_sessions {
-  authorization_admin_core_sessions {
+export const Admin_Authorization_Core_Sessions = gql`
+    query Admin_authorization_core_sessions {
+  admin_authorization_core_sessions {
     email
     group_id
     id
