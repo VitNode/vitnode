@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { JwtModule } from '@nestjs/jwt';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 import { CoreMembersModule } from './core/members/core_members.module';
 import { PrismaModule } from '../prisma/prisma.module';
@@ -30,7 +31,11 @@ import { Ctx } from '@/types/context.type';
     CoreSessionsModule,
     CoreGroupsModule,
     GlobalCoreSessionsModule,
-    CoreAttachmentsModule
+    CoreAttachmentsModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '../public'),
+      serveRoot: '/public'
+    })
   ]
 })
 export class AppModule {}

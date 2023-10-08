@@ -12,6 +12,7 @@ type AdminAuthorizationCoreSessionsObj {
 }
 
 type AuthorizationCoreSessionsObj {
+  avatar: UploadCoreAttachmentsObj
   birthday: Int!
   email: String!
   group_id: Int!
@@ -104,3 +105,17 @@ enum SortDirectionEnum {
 
 """The `Upload` scalar type represents a file upload."""
 scalar Upload
+
+type UploadCoreAttachmentsObj {
+  created: Int!
+  description: String
+  extension: String!
+  file_size: Int!
+  member_id: String!
+  mimetype: String!
+  module: String!
+  module_id: String!
+  name: String!
+  path: String!
+  position: Int!
+}

@@ -28,6 +28,7 @@ export type AdminAuthorizationCoreSessionsObj = {
 
 export type AuthorizationCoreSessionsObj = {
   __typename?: 'AuthorizationCoreSessionsObj';
+  avatar?: Maybe<UploadCoreAttachmentsObj>;
   birthday: Scalars['Int']['output'];
   email: Scalars['String']['output'];
   group_id: Scalars['Int']['output'];
@@ -46,6 +47,7 @@ export type CreateCoreGroupsObj = {
 export type Mutation = {
   __typename?: 'Mutation';
   create_core_groups: CreateCoreGroupsObj;
+  delete_avatar_core_members: Scalars['String']['output'];
   signIn_core_sessions: Scalars['String']['output'];
   signOut_core_sessions: Scalars['String']['output'];
   signUp_core_members: SignUpCoreMembersObj;
@@ -159,6 +161,21 @@ export enum SortDirectionEnum {
   Desc = 'desc'
 }
 
+export type UploadCoreAttachmentsObj = {
+  __typename?: 'UploadCoreAttachmentsObj';
+  created: Scalars['Int']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  extension: Scalars['String']['output'];
+  file_size: Scalars['Int']['output'];
+  member_id: Scalars['String']['output'];
+  mimetype: Scalars['String']['output'];
+  module: Scalars['String']['output'];
+  module_id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  path: Scalars['String']['output'];
+  position: Scalars['Int']['output'];
+};
+
 export type SignIn_Core_SessionsMutationVariables = Exact<{
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
@@ -193,7 +210,7 @@ export type Admin_Authorization_Core_SessionsQuery = { __typename?: 'Query', adm
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', birthday: number, email: string, id: string, name: string, newsletter?: boolean | null, group_id: number, is_admin: boolean } };
+export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', birthday: number, email: string, id: string, name: string, newsletter?: boolean | null, group_id: number, is_admin: boolean, avatar?: { __typename?: 'UploadCoreAttachmentsObj', description?: string | null, name: string, path: string } | null } };
 
 
 export const SignIn_Core_Sessions = gql`
@@ -247,6 +264,11 @@ export const Authorization_Core_Sessions = gql`
     newsletter
     group_id
     is_admin
+    avatar {
+      description
+      name
+      path
+    }
   }
 }
     `;

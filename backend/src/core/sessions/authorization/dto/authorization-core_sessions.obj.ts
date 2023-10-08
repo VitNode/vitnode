@@ -1,5 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
+import { UploadCoreAttachmentsObj } from '../../../attachments/upload/dto/upload-core_attachments.obj';
+
 @ObjectType()
 export class AuthorizationCoreSessionsObj {
   @Field(() => String)
@@ -22,4 +24,7 @@ export class AuthorizationCoreSessionsObj {
 
   @Field(() => Boolean)
   is_admin: boolean;
+
+  @Field(() => UploadCoreAttachmentsObj, { nullable: true })
+  avatar?: UploadCoreAttachmentsObj;
 }

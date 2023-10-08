@@ -35,6 +35,13 @@ export class AuthorizationCoreSessionsService {
   async authorization({ req, res }: Ctx): Promise<AuthorizationCoreSessionsObj> {
     const currentUser = await this.service.authorization({ req, res });
 
-    return { ...currentUser, is_admin: await this.isAdmin(currentUser) };
+    const avatar = await this.prisma.core_attachments.findFirst({
+      where: {
+        module: 'core_members',
+        module_id: currentUser.id
+      }
+    });
+
+    return { ...currentUser, is_admin: await this.isAdmin(currentUser), avatar };
   }
 }
