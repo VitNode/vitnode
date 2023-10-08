@@ -13,7 +13,6 @@ export const useSignUpView = () => {
   // Check if birthday is valid 13 years old
   const oneDayUNIX = 86400;
   const thirteenYearsInUNIX = oneDayUNIX * 365 * 13;
-  const currentDate = currentDate();
 
   const formSchema = z
     .object({
@@ -27,7 +26,7 @@ export const useSignUpView = () => {
         .string()
         .refine(
           value =>
-            currentDate - Math.floor(new Date(value).getTime() / 1000) >= thirteenYearsInUNIX,
+            currentDate() - Math.floor(new Date(value).getTime() / 1000) >= thirteenYearsInUNIX,
           {
             message: t('sign_up.form.birthday.too_young', { years: 13 })
           }

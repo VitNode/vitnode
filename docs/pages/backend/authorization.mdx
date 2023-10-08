@@ -9,39 +9,47 @@ To protect a route, you need to add the `@UseGuards(AuthGuards)` decorator to th
 Here is an example for resolver:
 
 ```typescript
-  import { AuthGuards } from '@/utils/guards/auth.guards';
+import { AuthGuards } from '@/utils/guards/auth.guards';
 
-  @Query(() => ShowCoreMembersObj)
-  @UseGuards(AuthGuards)
-  async show_core_members(@Args() args: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
-    return await this.service.show(args);
-  }
+@Query(() => ShowCoreMembersObj)
+@UseGuards(AuthGuards)
+async show_core_members(@Args() args: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
+  return await this.service.show(args);
+}
 ```
+
+## Current user data
 
 Whan you are using `AuthGuards` you can access to the current user in the resolver by using the `@CurrentUser()` decorator as param route.
 
 ```typescript
-  import { CurrentUser, User } from '@/utils/decorators/user.decorator';
+import { CurrentUser, User } from '@/utils/decorators/user.decorator';
 
-  @Query(() => ShowCoreMembersObj)
-  @UseGuards(AuthGuards)
-  async show_core_members(@Args() args: ShowCoreMembersArgs, @CurrentUser() user: User): Promise<ShowCoreMembersObj> {
-    return await this.service.show(args);
-  }
+@Query(() => ShowCoreMembersObj)
+@UseGuards(AuthGuards)
+async show_core_members(
+  @Args() args: ShowCoreMembersArgs,
+  @CurrentUser() user: User
+): Promise<ShowCoreMembersObj> {
+  return await this.service.show(args);
+}
 ```
 
-## Current user withouth protected route
+## Current user data withouth protected route
 
 If you need to access to the current user in a route you need use the `@OptionalAuth()` decorator in route. You need change `@CurrentUser()` decorator to optional param route.
 
 ```typescript
-  import { AuthGuards, OptionalAuth } from '@/utils/guards/auth.guards';
-  import { CurrentUser, User } from '@/utils/decorators/user.decorator';
+import { AuthGuards, OptionalAuth } from '@/utils/guards/auth.guards';
+import { CurrentUser, User } from '@/utils/decorators/user.decorator';
 
-  @Query(() => ShowCoreMembersObj)
-  @OptionalAuth()
-  @UseGuards(AuthGuards)
-  async show_core_members(@Args() args: ShowCoreMembersArgs, @CurrentUser() user?: User): Promise<ShowCoreMembersObj> {
-    return await this.service.show(args);
-  }
+@Query(() => ShowCoreMembersObj)
+@OptionalAuth()
+@UseGuards(AuthGuards)
+async show_core_members(
+  @Args() args: ShowCoreMembersArgs,
+  @CurrentUser() user?: User
+): Promise<ShowCoreMembersObj> {
+  return await this.service.show(args);
+}
 ```

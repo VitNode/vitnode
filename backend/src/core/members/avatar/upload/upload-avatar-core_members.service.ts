@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { UploadAvatarCoreMembersArgs } from './dto/upload-avatar-core_members.args';
 
-import { UploadCoreAttachmentsService } from '../../../attachments/upload/upload-core_attachments.service';
+import { UploadCoreAttachmentsService } from '@/src/core/attachments/upload/upload-core_attachments.service';
 import { User } from '@/utils/decorators/user.decorator';
 
 @Injectable()

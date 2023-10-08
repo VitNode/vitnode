@@ -18,8 +18,7 @@
   },
   "workspaces": [
     "frontend",
-    "backend",
-    "docs"
+    "backend"
   ],
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",

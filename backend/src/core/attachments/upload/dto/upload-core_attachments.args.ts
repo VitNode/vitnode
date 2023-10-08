@@ -29,6 +29,6 @@ export class FilesObj {
   @Field(() => String, { nullable: true })
   description?: string;
 
-  @Field(() => Int, { nullable: true })
-  position?: number;
+  @Field(() => Int)
+  position: number;
 }
