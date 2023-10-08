@@ -3,39 +3,38 @@ import { JwtService } from '@nestjs/jwt';
 import { UAParser } from 'ua-parser-js';
 import { Response } from 'express';
 
-import { AuthorizationAdminCoreSessionsObj } from './dto/authorization_admin-core_sessions.obj';
-
-import { PrismaService } from '@/src/prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
 import { Ctx } from '@/types/context.type';
 import { CONFIG } from '@/config';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
-import { convertUnixTime, getCurrentDate } from '@/functions/date';
+import { convertUnixTime, currentDate } from '@/functions/date';
+import { User } from '@/utils/decorators/user.decorator';
 
 @Injectable()
-export class AuthorizationAdminCoreSessionsService {
+export class InternalAuthorizationCoreSessionsService {
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService
   ) {}
 
-  private clearCookies({ cookie, res }: { cookie: string; res: Response }) {
+  protected clearCookies({ cookie, res }: { cookie: string; res: Response }) {
     res.clearCookie(cookie, {
       httpOnly: true,
       secure: true,
       domain: CONFIG.cookie.domain,
-      path: '/admin'
+      path: '/'
     });
   }
 
-  async authorization({ req, res }: Ctx): Promise<AuthorizationAdminCoreSessionsObj> {
+  async authorization({ req, res }: Ctx): Promise<User> {
     const tokens = {
-      accessToken: req.cookies[CONFIG.access_token.admin.name],
-      refreshToken: req.cookies[CONFIG.refresh_token.admin.name]
+      accessToken: req.cookies[CONFIG.access_token.name],
+      refreshToken: req.cookies[CONFIG.refresh_token.name]
     };
 
     // If access token exists, check it
     if (tokens.accessToken) {
-      const session = await this.prisma.core_admin_sessions.findUnique({
+      const session = await this.prisma.core_sessions.findUnique({
         where: {
           access_token: tokens.accessToken
         }
@@ -48,7 +47,7 @@ export class AuthorizationAdminCoreSessionsService {
 
       const decodeAccessToken = this.jwtService.decode(tokens.accessToken);
       // If access token is invalid or expired, clear cookies
-      if (decodeAccessToken && decodeAccessToken['exp'] > getCurrentDate()) {
+      if (decodeAccessToken && decodeAccessToken['exp'] > currentDate()) {
         const user = await this.prisma.core_members.findUnique({
           where: {
             id: session.member_id
@@ -72,7 +71,7 @@ export class AuthorizationAdminCoreSessionsService {
 
     // You don't have access token, but you have refresh token
     if (tokens.refreshToken) {
-      const session = await this.prisma.core_admin_sessions.findUnique({
+      const session = await this.prisma.core_sessions.findUnique({
         where: {
           refresh_token: tokens.refreshToken
         }
@@ -81,14 +80,14 @@ export class AuthorizationAdminCoreSessionsService {
       if (!session || session.refresh_token !== tokens.refreshToken) {
         this.clearCookies({ res, cookie: tokens.refreshToken });
         this.clearCookies({ res, cookie: tokens.accessToken });
-        res.clearCookie(CONFIG.access_token.admin.name);
-        res.clearCookie(CONFIG.refresh_token.admin.name);
+        res.clearCookie(CONFIG.access_token.name);
+        res.clearCookie(CONFIG.refresh_token.name);
         throw new AccessDeniedError();
       }
 
       const decodeRefreshToken = this.jwtService.decode(tokens.refreshToken);
       // If refresh token is invalid or expired, clear cookies
-      if (!decodeRefreshToken || decodeRefreshToken['exp'] < getCurrentDate()) {
+      if (!decodeRefreshToken || decodeRefreshToken['exp'] < currentDate()) {
         this.clearCookies({ res, cookie: tokens.refreshToken });
         this.clearCookies({ res, cookie: tokens.accessToken });
 
@@ -105,24 +104,6 @@ export class AuthorizationAdminCoreSessionsService {
         throw new AccessDeniedError();
       }
 
-      // Check if user has access to admin cp
-      const accessToAdminCP = await this.prisma.core_admin_access.findFirst({
-        where: {
-          OR: [
-            {
-              member_id: user.id
-            },
-            {
-              group_id: user.group_id
-            }
-          ]
-        }
-      });
-
-      if (!accessToAdminCP) {
-        throw new AccessDeniedError();
-      }
-
       // Create new access token
       const currentAccessToken = this.jwtService.sign(
         {
@@ -131,18 +112,18 @@ export class AuthorizationAdminCoreSessionsService {
         },
         {
           secret: CONFIG.access_token.secret,
-          expiresIn: 60 * 5 // 5 min
+          expiresIn: 60 * 15 // 15 min
         }
       );
 
       // Update session
       const uaParser = new UAParser(req.headers['user-agent']);
       const uaParserResults = uaParser.getResult();
-      await this.prisma.core_admin_sessions.update({
+      await this.prisma.core_sessions.update({
         where: { refresh_token: session.refresh_token },
         data: {
           access_token: currentAccessToken,
-          last_seen: getCurrentDate(),
+          last_seen: currentDate(),
           ip_address: req.ip,
           member_id: user.id,
           user_agent: req.headers['user-agent'],
@@ -156,12 +137,12 @@ export class AuthorizationAdminCoreSessionsService {
       });
 
       // Create cookie
-      res.cookie(CONFIG.access_token.admin.name, currentAccessToken, {
+      res.cookie(CONFIG.access_token.name, currentAccessToken, {
         httpOnly: true,
         secure: true,
         domain: CONFIG.cookie.domain,
-        path: '/admin',
-        expires: new Date(convertUnixTime(getCurrentDate() + CONFIG.access_token.admin.expiresIn)),
+        path: '/',
+        expires: new Date(convertUnixTime(currentDate() + 60 * 15)), // 15 min
         sameSite: 'none'
       });
 

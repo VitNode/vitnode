@@ -31,6 +31,7 @@ model core_members {
   core_sessions        core_sessions[]
   core_admin_sessions  core_admin_sessions[]
   core_admin_access    core_admin_access[]
+  core_attachments     core_attachments[]
 
   @@index([group_id])
 }
@@ -85,6 +86,24 @@ model core_admin_sessions {
   uagent_device_model  String?      @db.VarChar(200)
   last_seen            Int
   expires              Int
+
+  @@index([member_id])
+}
+
+model core_attachments {
+  id          String       @id @default(uuid())
+  extension   String       @db.VarChar(50)
+  name        String       @db.VarChar(255)
+  path        String       @db.VarChar(255)
+  member      core_members @relation(references: [id], fields: [member_id])
+  member_id   String
+  created     Int
+  file_size   Int
+  position    Int
+  description String?      @db.VarChar(255)
+  module      String
+  module_id   String
+  mimetype    String
 
   @@index([member_id])
 }

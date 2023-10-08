@@ -2,7 +2,7 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type AuthorizationAdminCoreSessionsObj {
+type AdminAuthorizationCoreSessionsObj {
   birthday: Int!
   email: String!
   group_id: Int!
@@ -12,6 +12,7 @@ type AuthorizationAdminCoreSessionsObj {
 }
 
 type AuthorizationCoreSessionsObj {
+  avatar: UploadCoreAttachmentsObj
   birthday: Int!
   email: String!
   group_id: Int!
@@ -28,9 +29,11 @@ type CreateCoreGroupsObj {
 
 type Mutation {
   create_core_groups(name: String!): CreateCoreGroupsObj!
+  delete_avatar_core_members: String!
   signIn_core_sessions(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   signOut_core_sessions: String!
   signUp_core_members(birthday: Int!, email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
+  upload_avatar_core_members(file: Upload!): String!
 }
 
 type PageInfo {
@@ -42,7 +45,7 @@ type PageInfo {
 }
 
 type Query {
-  authorization_admin_core_sessions: AuthorizationAdminCoreSessionsObj!
+  admin_authorization_core_sessions: AdminAuthorizationCoreSessionsObj!
   authorization_core_sessions: AuthorizationCoreSessionsObj!
   show_core_members(cursor: String, first: Int!, search: String, sortBy: [SortByArgs!]): ShowCoreMembersObj!
 }
@@ -98,4 +101,21 @@ input SortByArgs {
 enum SortDirectionEnum {
   asc
   desc
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+type UploadCoreAttachmentsObj {
+  created: Int!
+  description: String
+  extension: String!
+  file_size: Int!
+  member_id: String!
+  mimetype: String!
+  module: String!
+  module_id: String!
+  name: String!
+  path: String!
+  position: Int!
 }

@@ -1,5 +1,7 @@
 {
-  "database": "Database",
   "graphql": "GraphQL",
+  "database": "Database",
+  "authorization": "Authorization",
+  "files": "Files",
   "practices": "Best Practices"
 }

@@ -6,7 +6,7 @@ import {
   ShowCoreMembersSortingColumnEnum
 } from './dto/show-core_members.args';
 
-import { PrismaService } from '@/src/prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
 import { inputPagination } from '@/functions/database/pagination/inputPagination';
 import { outputPagination } from '@/functions/database/pagination/outputPagination';
 import { inputSorting } from '@/functions/database/inputSorting';

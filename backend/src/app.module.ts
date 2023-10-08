@@ -5,11 +5,13 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { JwtModule } from '@nestjs/jwt';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 import { CoreMembersModule } from './core/members/core_members.module';
-import { PrismaModule } from './prisma/prisma.module';
-import { CoreSessionsModule } from './core/sessions/core_sessions.module';
+import { PrismaModule } from '../prisma/prisma.module';
+import { CoreSessionsModule, GlobalCoreSessionsModule } from './core/sessions/core_sessions.module';
 import { CoreGroupsModule } from './core/groups/core_groups.module';
+import { CoreAttachmentsModule } from './core/attachments/core_attachments.module';
 
 import { Ctx } from '@/types/context.type';
 
@@ -27,7 +29,13 @@ import { Ctx } from '@/types/context.type';
     PrismaModule,
     CoreMembersModule,
     CoreSessionsModule,
-    CoreGroupsModule
+    CoreGroupsModule,
+    GlobalCoreSessionsModule,
+    CoreAttachmentsModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '../public'),
+      serveRoot: '/public'
+    })
   ]
 })
 export class AppModule {}

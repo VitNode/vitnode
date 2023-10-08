@@ -7,9 +7,9 @@ import { redirect } from '@/i18n';
 import { CONFIG } from '@/config';
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Authorization_Admin_Core_Sessions,
-  Authorization_Admin_Core_SessionsQuery,
-  Authorization_Admin_Core_SessionsQueryVariables
+  Admin_Authorization_Core_Sessions,
+  Admin_Authorization_Core_SessionsQuery,
+  Admin_Authorization_Core_SessionsQueryVariables
 } from '@/graphql/hooks';
 
 const getSession = async () => {
@@ -21,10 +21,10 @@ const getSession = async () => {
 
   try {
     return await fetcher<
-      Authorization_Admin_Core_SessionsQuery,
-      Authorization_Admin_Core_SessionsQueryVariables
+      Admin_Authorization_Core_SessionsQuery,
+      Admin_Authorization_Core_SessionsQueryVariables
     >({
-      query: Authorization_Admin_Core_Sessions,
+      query: Admin_Authorization_Core_Sessions,
       headers: {
         Cookie: cookies().toString()
       }
