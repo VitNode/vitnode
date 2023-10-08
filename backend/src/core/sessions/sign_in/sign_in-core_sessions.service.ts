@@ -5,7 +5,7 @@ import { JwtService } from '@nestjs/jwt';
 
 import { SignInCoreSessionsArgs } from './dto/sign_in-core_sessions.args';
 
-import { PrismaService } from '@/src/prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { Ctx } from '@/types/context.type';
 import { CONFIG } from '@/config';

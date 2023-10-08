@@ -7,7 +7,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 import { JwtModule } from '@nestjs/jwt';
 
 import { CoreMembersModule } from './core/members/core_members.module';
-import { PrismaModule } from './prisma/prisma.module';
+import { PrismaModule } from '../prisma/prisma.module';
 import { CoreSessionsModule, GlobalCoreSessionsModule } from './core/sessions/core_sessions.module';
 import { CoreGroupsModule } from './core/groups/core_groups.module';
 import { CoreAttachmentsModule } from './core/attachments/core_attachments.module';

@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { InternalAuthorizationCoreSessionsService } from './internal/internal_authorization-core_sessions.service';
 import { AuthorizationCoreSessionsObj } from './dto/authorization-core_sessions.obj';
 
-import { PrismaService } from '@/src/prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
 import { Ctx } from '@/types/context.type';
 
 @Injectable()

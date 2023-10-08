@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UAParser } from 'ua-parser-js';
 import { Response } from 'express';
 
-import { PrismaService } from '@/src/prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
 import { Ctx } from '@/types/context.type';
 import { CONFIG } from '@/config';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';

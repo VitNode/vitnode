@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { FilesObj, UploadCoreAttachmentsArgs } from './dto/upload-core_attachments.args';
 import { UploadCoreAttachmentsObj } from './dto/upload-core_attachments.obj';
 
-import { PrismaService } from '@/src/prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';
 import { removeSpecialCharacters } from '@/functions/remove-special-characters';
 import { generateRandomString } from '@/functions/generate-random-string';

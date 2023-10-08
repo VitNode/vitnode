@@ -4,7 +4,7 @@ import { genSalt, hash } from 'bcrypt';
 import { SignUpCoreMembersArgs } from './dto/sign_up-core_members.args';
 import { SignUpCoreMembersObj } from './dto/sign_up-core_members.obj';
 
-import { PrismaService } from '@/src/prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';
 import { removeSpecialCharacters } from '@/functions/remove-special-characters';
 import { CONFIG } from '@/config';

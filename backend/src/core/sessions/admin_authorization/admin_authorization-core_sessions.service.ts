@@ -5,7 +5,7 @@ import { Response } from 'express';
 
 import { AdminAuthorizationCoreSessionsObj } from './dto/admin_authorization-core_sessions.obj';
 
-import { PrismaService } from '@/src/prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
 import { Ctx } from '@/types/context.type';
 import { CONFIG } from '@/config';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';

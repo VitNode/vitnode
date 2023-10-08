@@ -4,12 +4,14 @@ import { UploadAvatarCoreMembersArgs } from './dto/upload-avatar-core_members.ar
 
 import { UploadCoreAttachmentsService } from '@/src/core/attachments/upload/upload-core_attachments.service';
 import { User } from '@/utils/decorators/user.decorator';
-import { PrismaService } from '@/src/prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
+import { DeleteCoreAttachmentsService } from '../../../attachments/delete/delete-core_attachments.service';
 
 @Injectable()
 export class UploadAvatarCoreMembersService {
   constructor(
-    private readonly attachments: UploadCoreAttachmentsService,
+    private readonly uploadFile: UploadCoreAttachmentsService,
+    private readonly deleteFile: DeleteCoreAttachmentsService,
     private readonly prisma: PrismaService
   ) {}
 
@@ -22,9 +24,16 @@ export class UploadAvatarCoreMembersService {
       }
     });
 
-    // If the user already has an avatar, delete it
+    if (avatar) {
+      await this.deleteFile.deleteFile({
+        module: {
+          module: 'core_members',
+          id: id
+        }
+      });
+    }
 
-    await this.attachments.upload({
+    await this.uploadFile.upload({
       files: [
         {
           file,
