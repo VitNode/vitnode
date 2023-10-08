@@ -6,9 +6,9 @@ import { SignUpCoreMembersObj } from './dto/sign_up-core_members.obj';
 
 import { PrismaService } from '@/src/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';
-import { removeSpecialCharacters } from '@/functions/removeSpecialCharacters';
+import { removeSpecialCharacters } from '@/functions/remove-special-characters';
 import { CONFIG } from '@/config';
-import { getCurrentDate } from '@/functions/date';
+import { currentDate } from '@/functions/date';
 import { generateAvatarColor } from '@/functions/avatar/generateAvatarColor';
 
 @Injectable()
@@ -88,9 +88,9 @@ export class SignUpCoreMembersService {
     // TODO: Fix this, not working properly
     const oneDayUNIX = 86400;
     const thirteenYearsInUNIX = oneDayUNIX * 365 * 13;
-    const currentDate = getCurrentDate();
+    const dateNow = currentDate();
 
-    if (currentDate - birthday < thirteenYearsInUNIX) {
+    if (dateNow - birthday < thirteenYearsInUNIX) {
       throw new CustomError({
         message: 'You must be at least 13 years old',
         code: 'TOO_YOUNG'
@@ -109,7 +109,7 @@ export class SignUpCoreMembersService {
         name_seo: convertToNameSEO,
         newsletter,
         password: hashPassword,
-        joined: currentDate,
+        joined: dateNow,
         avatar_color: generateAvatarColor(name),
         birthday,
         group: {

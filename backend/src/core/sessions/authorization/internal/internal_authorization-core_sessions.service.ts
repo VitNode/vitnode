@@ -7,7 +7,7 @@ import { PrismaService } from '@/src/prisma/prisma.service';
 import { Ctx } from '@/types/context.type';
 import { CONFIG } from '@/config';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
-import { convertUnixTime, getCurrentDate } from '@/functions/date';
+import { convertUnixTime, currentDate } from '@/functions/date';
 import { User } from '@/utils/decorators/user.decorator';
 
 @Injectable()
@@ -47,7 +47,7 @@ export class InternalAuthorizationCoreSessionsService {
 
       const decodeAccessToken = this.jwtService.decode(tokens.accessToken);
       // If access token is invalid or expired, clear cookies
-      if (decodeAccessToken && decodeAccessToken['exp'] > getCurrentDate()) {
+      if (decodeAccessToken && decodeAccessToken['exp'] > currentDate()) {
         const user = await this.prisma.core_members.findUnique({
           where: {
             id: session.member_id
@@ -87,7 +87,7 @@ export class InternalAuthorizationCoreSessionsService {
 
       const decodeRefreshToken = this.jwtService.decode(tokens.refreshToken);
       // If refresh token is invalid or expired, clear cookies
-      if (!decodeRefreshToken || decodeRefreshToken['exp'] < getCurrentDate()) {
+      if (!decodeRefreshToken || decodeRefreshToken['exp'] < currentDate()) {
         this.clearCookies({ res, cookie: tokens.refreshToken });
         this.clearCookies({ res, cookie: tokens.accessToken });
 
@@ -123,7 +123,7 @@ export class InternalAuthorizationCoreSessionsService {
         where: { refresh_token: session.refresh_token },
         data: {
           access_token: currentAccessToken,
-          last_seen: getCurrentDate(),
+          last_seen: currentDate(),
           ip_address: req.ip,
           member_id: user.id,
           user_agent: req.headers['user-agent'],
@@ -142,7 +142,7 @@ export class InternalAuthorizationCoreSessionsService {
         secure: true,
         domain: CONFIG.cookie.domain,
         path: '/',
-        expires: new Date(convertUnixTime(getCurrentDate() + 60 * 15)), // 15 min
+        expires: new Date(convertUnixTime(currentDate() + 60 * 15)), // 15 min
         sameSite: 'none'
       });
 

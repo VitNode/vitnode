@@ -9,7 +9,7 @@ import { PrismaService } from '@/src/prisma/prisma.service';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { Ctx } from '@/types/context.type';
 import { CONFIG } from '@/config';
-import { convertUnixTime, getCurrentDate } from '@/functions/date';
+import { convertUnixTime, currentDate } from '@/functions/date';
 
 interface CreateSessionArgs extends Ctx {
   email: string;
@@ -53,8 +53,8 @@ export class SignInCoreSessionsService {
       refresh_token: refreshToken,
       member_id: userId,
       user_agent: req.headers['user-agent'],
-      last_seen: getCurrentDate(),
-      expires: getCurrentDate() + 60 * 60 * 24 * (admin ? 1 : 365), // 1 day for admin, 365 days for user
+      last_seen: currentDate(),
+      expires: currentDate() + 60 * 60 * 24 * (admin ? 1 : 365), // 1 day for admin, 365 days for user
       uagent_browser: uaParserResults.browser.name ?? 'Uagent from tests',
       uagent_version: uaParserResults.browser.version ?? 'Uagent from tests',
       uagent_os: uaParserResults.os.name
@@ -88,7 +88,7 @@ export class SignInCoreSessionsService {
       path: '/',
       expires:
         remember && !admin
-          ? new Date(convertUnixTime(getCurrentDate() + CONFIG.refresh_token.expiresIn))
+          ? new Date(convertUnixTime(currentDate() + CONFIG.refresh_token.expiresIn))
           : undefined,
       sameSite: 'none'
     });

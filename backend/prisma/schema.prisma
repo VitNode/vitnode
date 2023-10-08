@@ -94,11 +94,10 @@ model core_attachments {
   id          String       @id @default(uuid())
   extension   String       @db.VarChar(50)
   name        String       @db.VarChar(255)
-  location    String       @db.VarChar(255)
+  path        String       @db.VarChar(255)
   member      core_members @relation(references: [id], fields: [member_id])
   member_id   String
   created     Int
-  modify      Int?
   file_size   Int
   position    Int
   description String?      @db.VarChar(255)

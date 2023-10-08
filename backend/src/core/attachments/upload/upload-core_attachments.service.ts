@@ -1,69 +1,69 @@
-import { Injectable } from '@nestjs/common';
-import { FileUpload } from 'graphql-upload-minimal';
+import { createWriteStream, existsSync, mkdirSync, statSync } from 'fs';
 
-import { UploadCoreAttachmentsArgs } from './dto/upload-core_attachments.args';
+import { Injectable } from '@nestjs/common';
+
+import { FilesObj, UploadCoreAttachmentsArgs } from './dto/upload-core_attachments.args';
+import { UploadCoreAttachmentsObj } from './dto/upload-core_attachments.obj';
 
 import { PrismaService } from '@/src/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';
+import { removeSpecialCharacters } from '@/functions/remove-special-characters';
+import { generateRandomString } from '@/functions/generate-random-string';
+import { currentDate } from '@/functions/date';
 
 @Injectable()
 export class UploadCoreAttachmentsService {
   constructor(private readonly prisma: PrismaService) {}
 
   protected async checkSizeFile({
-    files,
+    file: { file },
     maxUploadSizeBytes
   }: {
-    files: Promise<FileUpload>[];
+    file: FilesObj;
     maxUploadSizeBytes: number;
   }) {
-    return await Promise.all(
-      files.map(async file => {
-        const { createReadStream, filename } = await file;
-        const stream = createReadStream();
-        const chunks = [];
+    const { createReadStream, filename } = await file;
+    const stream = createReadStream();
+    const chunks = [];
 
-        // Read the file data and calculate its size
-        for await (const chunk of stream) {
-          chunks.push(chunk);
-        }
+    // Read the file data and calculate its size
+    for await (const chunk of stream) {
+      chunks.push(chunk);
+    }
 
-        const size = Buffer.concat(chunks).length;
+    const fileSizeInBytes = Buffer.concat(chunks).length;
 
-        if (size > maxUploadSizeBytes) {
-          throw new Error(
-            `${filename} file size is too large! Accepted size is ${maxUploadSizeBytes} bytes, but ${size} bytes given.`
-          );
-        }
+    if (fileSizeInBytes > maxUploadSizeBytes) {
+      throw new CustomError({
+        code: 'FILE_TOO_LARGE',
+        message: `${filename} file is too large! We only accept files up to ${maxUploadSizeBytes} bytes.`
+      });
+    }
 
-        return size;
-      })
-    );
+    stream.destroy();
+
+    return fileSizeInBytes;
   }
 
   protected async checkAcceptMimeType({
     acceptMimeType,
-    files
+    file: { file }
   }: {
     acceptMimeType: string[];
-    files: Promise<FileUpload>[];
+    file: FilesObj;
   }) {
     if (acceptMimeType.length <= 0) return;
 
-    await Promise.all(
-      files.map(async file => {
-        const { mimetype } = await file;
+    const { filename, mimetype } = await file;
 
-        if (!acceptMimeType.includes(mimetype)) {
-          throw new CustomError({
-            code: 'INVALID_TYPE_FILE',
-            message: `Invalid file type! We only accept the following types: ${acceptMimeType.join(
-              ', '
-            )}.`
-          });
-        }
-      })
-    );
+    if (!acceptMimeType.includes(mimetype)) {
+      throw new CustomError({
+        code: 'INVALID_TYPE_FILE',
+        message: `${filename} file has invalid type! We only accept the following types: ${acceptMimeType.join(
+          ', '
+        )}.`
+      });
+    }
   }
 
   async upload({
@@ -72,14 +72,63 @@ export class UploadCoreAttachmentsService {
     maxUploadSizeBytes,
     module,
     module_id
-  }: UploadCoreAttachmentsArgs) {
-    await this.checkAcceptMimeType({ files, acceptMimeType });
-    await this.checkSizeFile({ files, maxUploadSizeBytes });
+  }: UploadCoreAttachmentsArgs): Promise<UploadCoreAttachmentsObj[]> {
+    // Validate files
+    await Promise.all(
+      files.map(async file => {
+        await this.checkAcceptMimeType({ file, acceptMimeType });
+        await this.checkSizeFile({ file, maxUploadSizeBytes });
+      })
+    );
 
-    // TODO: Upload to S3
+    // Create folders
+    const date = new Date();
+    const dir = `public/monthly_${date.getMonth() + 1}_${date.getFullYear()}/${module}`;
+    if (!existsSync(dir)) {
+      mkdirSync(dir, { recursive: true });
+    }
 
-    // TODO: Save to database
+    // Upload files
+    return await Promise.all(
+      files.map(async ({ description, file, position }) => {
+        const { createReadStream, filename, mimetype } = await file;
 
-    return 'UploadCoreAttachmentsService';
+        const stream = createReadStream();
+
+        // Generate file name
+        const currentFileName = `${date.getTime()}_${generateRandomString(
+          10
+        )}_${removeSpecialCharacters(filename)}`;
+        const path = `${dir}/${currentFileName}`;
+
+        // Save file to file system
+        await new Promise((resolve, reject) =>
+          stream
+            .pipe(createWriteStream(path))
+            .on('finish', () => resolve(path))
+            .on('error', reject)
+        );
+
+        // Get file stats
+        const stat = statSync(path);
+
+        // Save file to database
+        return await this.prisma.core_attachments.create({
+          data: {
+            module,
+            module_id,
+            name: currentFileName,
+            mimetype,
+            path,
+            created: currentDate(),
+            position,
+            description,
+            extension: filename.split('.').pop(),
+            file_size: stat.size,
+            member_id: module_id
+          }
+        });
+      })
+    );
   }
 }

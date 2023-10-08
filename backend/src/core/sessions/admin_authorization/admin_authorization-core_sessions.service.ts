@@ -9,7 +9,7 @@ import { PrismaService } from '@/src/prisma/prisma.service';
 import { Ctx } from '@/types/context.type';
 import { CONFIG } from '@/config';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
-import { convertUnixTime, getCurrentDate } from '@/functions/date';
+import { convertUnixTime, currentDate } from '@/functions/date';
 
 @Injectable()
 export class AdminAuthorizationCoreSessionsService {
@@ -48,7 +48,7 @@ export class AdminAuthorizationCoreSessionsService {
 
       const decodeAccessToken = this.jwtService.decode(tokens.accessToken);
       // If access token is invalid or expired, clear cookies
-      if (decodeAccessToken && decodeAccessToken['exp'] > getCurrentDate()) {
+      if (decodeAccessToken && decodeAccessToken['exp'] > currentDate()) {
         const user = await this.prisma.core_members.findUnique({
           where: {
             id: session.member_id
@@ -88,7 +88,7 @@ export class AdminAuthorizationCoreSessionsService {
 
       const decodeRefreshToken = this.jwtService.decode(tokens.refreshToken);
       // If refresh token is invalid or expired, clear cookies
-      if (!decodeRefreshToken || decodeRefreshToken['exp'] < getCurrentDate()) {
+      if (!decodeRefreshToken || decodeRefreshToken['exp'] < currentDate()) {
         this.clearCookies({ res, cookie: tokens.refreshToken });
         this.clearCookies({ res, cookie: tokens.accessToken });
 
@@ -142,7 +142,7 @@ export class AdminAuthorizationCoreSessionsService {
         where: { refresh_token: session.refresh_token },
         data: {
           access_token: currentAccessToken,
-          last_seen: getCurrentDate(),
+          last_seen: currentDate(),
           ip_address: req.ip,
           member_id: user.id,
           user_agent: req.headers['user-agent'],
@@ -161,7 +161,7 @@ export class AdminAuthorizationCoreSessionsService {
         secure: true,
         domain: CONFIG.cookie.domain,
         path: '/admin',
-        expires: new Date(convertUnixTime(getCurrentDate() + CONFIG.access_token.admin.expiresIn)),
+        expires: new Date(convertUnixTime(currentDate() + CONFIG.access_token.admin.expiresIn)),
         sameSite: 'none'
       });
 

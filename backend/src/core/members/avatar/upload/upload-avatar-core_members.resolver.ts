@@ -17,6 +17,6 @@ export class UploadAvatarCoreMembersResolver {
     @CurrentUser() currentUser: User,
     @Args() args: UploadAvatarCoreMembersArgs
   ): Promise<string> {
-    return await this.service.uploadAvatar(args);
+    return await this.service.uploadAvatar(currentUser, args);
   }
 }

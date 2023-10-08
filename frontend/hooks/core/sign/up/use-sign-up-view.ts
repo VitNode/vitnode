@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import { convertDateToUnixTime, getCurrentDate } from '@/functions/date';
+import { convertDateToUnixTime, currentDate } from '@/functions/date';
 import { useSignUpAPI } from './use-sign-up-api';
 
 export const useSignUpView = () => {
@@ -13,7 +13,7 @@ export const useSignUpView = () => {
   // Check if birthday is valid 13 years old
   const oneDayUNIX = 86400;
   const thirteenYearsInUNIX = oneDayUNIX * 365 * 13;
-  const currentDate = getCurrentDate();
+  const currentDate = currentDate();
 
   const formSchema = z
     .object({
