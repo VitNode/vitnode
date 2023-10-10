@@ -2,6 +2,7 @@
   "theme": "Theme Mode",
   "graphql": "GraphQL",
   "forms": "Forms",
+  "notifications": "Notifications",
   "offline": "Offline page",
   "practices": "Best Practices"
 }

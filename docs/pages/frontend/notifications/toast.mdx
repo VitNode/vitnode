@@ -1,0 +1,66 @@
+# Notifications Toast
+
+VitNode is integrated with [sonner](https://github.com/emilkowalski/sonner) liblary to provide toast notifications created by [Emil Kowalski](https://github.com/emilkowalski).
+
+## Usage
+
+```tsx
+import { Toaster, toast } from 'sonner';
+
+export const Example = () => {
+  return <button onClick={() => toast('My first toast')}>Give me a toast</button>;
+};
+```
+
+## API
+
+Below is the list of available methods supported by VitNode.
+
+### Tabs
+
+import { Tabs } from 'nextra/components';
+
+<Tabs items={['Default', 'Description', 'Success', 'Error', 'Action']}>
+<Tabs.Tab>
+
+```tsx
+toast('Event has been created');
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```tsx
+toast.message('Event has been created', {
+  description: 'Monday, January 3rd at 6:00pm'
+});
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```tsx
+toast.success('Event has been created');
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```tsx
+toast.error('Event has not been created');
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```tsx
+toast('Event has been created', {
+  action: {
+    label: 'Undo',
+    onClick: () => console.log('Undo')
+  }
+});
+```
+
+</Tabs.Tab>
+</Tabs>
