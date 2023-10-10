@@ -15,8 +15,7 @@ export const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
       <QueryClientProvider client={queryClient}>
         {children}
         <Toaster
-          position="bottom-center"
-          richColors
+          position="bottom-right"
           closeButton
           toastOptions={{
             duration: 5000000

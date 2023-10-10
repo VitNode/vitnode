@@ -30,7 +30,14 @@
   }
 
   :root [data-sonner-toaster][data-theme='light'] {
-    --normal-bg: red;
+    --normal-bg: hsl(var(--card));
+    --normal-border: hsl(var(--input));
+    --normal-text: inherit;
+    --gray1: hsl(var(--card));
+    --gray4: hsl(var(--input));
+    --gray12: inherit;
+    --gray2: hsl(var(--accent));
+    --gray5: hsl(var(--accent));
   }
 
   .dark {

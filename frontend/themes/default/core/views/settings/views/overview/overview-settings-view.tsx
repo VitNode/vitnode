@@ -10,7 +10,7 @@ export const OverviewSettingsView = () => {
     <Card>
       <HeaderOverviewSettings />
       <CardContent>
-        <button onClick={() => toast('This is a sonner toast')}>Render my toast</button>
+        <button onClick={() => toast.error('Event has not been created')}>Render my toast</button>
       </CardContent>
     </Card>
   );
