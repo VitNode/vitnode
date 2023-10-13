@@ -13,19 +13,18 @@ import {
 
 interface Props {
   children: ReactNode;
-  initialDataSession: Authorization_Core_SessionsQuery | undefined;
+  enableSession: boolean;
 }
 
-export const SessionProvider = ({ children, initialDataSession }: Props) => {
-  const [enableSessionQuery, setEnableSessionQuery] = useState(!!initialDataSession);
+export const SessionProvider = ({ children, enableSession }: Props) => {
+  const [enableSessionQuery, setEnableSessionQuery] = useState(enableSession);
 
   const { data } = useQuery({
     queryKey: ['Authorization'],
     queryFn: async () =>
-      await fetcher<Authorization_Core_SessionsQuery, Authorization_Core_SessionsQueryVariables>({
+      fetcher<Authorization_Core_SessionsQuery, Authorization_Core_SessionsQueryVariables>({
         query: Authorization_Core_Sessions
       }),
-    initialData: initialDataSession,
     enabled: enableSessionQuery
   });
 
