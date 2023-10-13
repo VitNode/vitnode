@@ -1,5 +1,6 @@
 import { ReactNode, lazy } from 'react';
 import { cookies } from 'next/headers';
+import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 
 import { CONFIG } from '@/config';
 import { fetcher } from '@/graphql/fetcher';
@@ -10,31 +11,21 @@ import {
 } from '@/graphql/hooks';
 import { SessionProvider } from './session-provider';
 
-const getSession = async () => {
-  const cookieStore = cookies();
-
-  if (!cookieStore.get(CONFIG.access_token) && !cookieStore.get(CONFIG.refresh_token)) {
-    return;
-  }
-
-  try {
-    return await fetcher<
-      Authorization_Core_SessionsQuery,
-      Authorization_Core_SessionsQueryVariables
-    >({
-      query: Authorization_Core_Sessions,
-      headers: {
-        Cookie: cookies().toString()
-      }
-    });
-    // eslint-disable-next-line no-empty
-  } catch (err) {}
-};
-
 interface Props {
   children: ReactNode;
   params: { locale: string };
 }
+
+const getData = async () => {
+  return await fetcher<Authorization_Core_SessionsQuery, Authorization_Core_SessionsQueryVariables>(
+    {
+      query: Authorization_Core_Sessions,
+      headers: {
+        Cookie: cookies().toString()
+      }
+    }
+  );
+};
 
 export default async function Layout({ children }: Props) {
   const Layout = lazy(() =>
@@ -43,9 +34,18 @@ export default async function Layout({ children }: Props) {
     }))
   );
 
+  const queryClient = new QueryClient();
+
+  const data = await queryClient.fetchQuery({
+    queryKey: ['Authorization'],
+    queryFn: getData
+  });
+
   return (
-    <SessionProvider initialDataSession={await getSession()}>
-      <Layout>{children}</Layout>
-    </SessionProvider>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <SessionProvider enableSession={!!data.authorization_core_sessions}>
+        <Layout>{children}</Layout>
+      </SessionProvider>
+    </HydrationBoundary>
   );
 }

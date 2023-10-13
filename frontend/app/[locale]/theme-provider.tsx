@@ -8,7 +8,17 @@ import { useState } from 'react';
 import { Toaster } from 'sonner';
 
 export const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            staleTime: 60 * 1000 * 5
+          }
+        }
+      })
+  );
 
   return (
     <NextThemesProvider {...props}>
