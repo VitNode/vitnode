@@ -8,11 +8,13 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  DropdownMenuSeparator
+  DropdownMenuSeparator,
+  DropdownMenuLabel
 } from '@/components/ui/dropdown-menu';
 import { useSession } from '@/hooks/core/use-session';
 import { useSignOutAPI } from '@/hooks/core/sign/out/use-sign-out-api';
 import { useRouter } from '@/i18n';
+import { AvatarUser } from '@/components/user/avatar/avatar-user';
 
 export const AuthUserBar = () => {
   const t = useTranslations('core');
@@ -23,15 +25,24 @@ export const AuthUserBar = () => {
   if (!session) return null;
 
   const {
-    authorization_core_sessions: { id, is_admin, name }
+    authorization_core_sessions: { email, id, is_admin, name }
   } = session;
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">{name}</Button>
+        <Button variant="ghost" className="rounded-full" size="icon">
+          <AvatarUser sizeInRem={1.75} />
+        </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent className="w-56" align="end">
+        <DropdownMenuLabel className="font-normal">
+          <div className="flex flex-col space-y-1">
+            <p className="font-medium leading-none text-base">{name}</p>
+            <p className="text-xs leading-none text-muted-foreground">{email}</p>
+          </div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={() => push(`/profiles/${id}`)}>
             <User className="mr-2 h-4 w-4" />

@@ -47,7 +47,7 @@ export async function fetcher<TData, TVariables>({
     formData.append('map', JSON.stringify(Object.fromEntries(preMap)));
   }
 
-  const res = await fetch(CONFIG.graphql_url, {
+  const res = await fetch(`${CONFIG.graphql_url}/graphql`, {
     method: 'POST',
     credentials: 'include',
     mode: 'cors',

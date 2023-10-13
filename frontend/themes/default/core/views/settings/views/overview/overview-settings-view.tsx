@@ -4,6 +4,7 @@ import { toast } from 'sonner';
 
 import { Card, CardContent } from '@/components/ui/card';
 import { HeaderOverviewSettings } from './header/header-overview-settings';
+import { AvatarUser } from '@/components/user/avatar/avatar-user';
 
 export const OverviewSettingsView = () => {
   return (
@@ -23,6 +24,8 @@ export const OverviewSettingsView = () => {
         >
           Render my toast
         </button>
+
+        <AvatarUser sizeInRem={20} />
       </CardContent>
     </Card>
   );

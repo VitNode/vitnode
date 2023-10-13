@@ -31,7 +31,7 @@ export const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
             duration: 5000000
           }}
         />
-        <ReactQueryDevtools initialIsOpen={false} />
+        <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
       </QueryClientProvider>
     </NextThemesProvider>
   );

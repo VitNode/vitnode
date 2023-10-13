@@ -12,7 +12,7 @@ type AdminAuthorizationCoreSessionsObj {
 }
 
 type AuthorizationCoreSessionsObj {
-  avatar: UploadCoreAttachmentsObj
+  avatar: AvatarObj!
   birthday: Int!
   email: String!
   group_id: Int!
@@ -20,6 +20,11 @@ type AuthorizationCoreSessionsObj {
   is_admin: Boolean!
   name: String!
   newsletter: Boolean
+}
+
+type AvatarObj {
+  color: String!
+  img: UploadCoreAttachmentsObj
 }
 
 type CreateCoreGroupsObj {
@@ -116,6 +121,6 @@ type UploadCoreAttachmentsObj {
   module: String!
   module_id: String!
   name: String!
-  path: String!
   position: Int!
+  url: String!
 }

@@ -28,7 +28,7 @@ export type AdminAuthorizationCoreSessionsObj = {
 
 export type AuthorizationCoreSessionsObj = {
   __typename?: 'AuthorizationCoreSessionsObj';
-  avatar?: Maybe<UploadCoreAttachmentsObj>;
+  avatar: AvatarObj;
   birthday: Scalars['Int']['output'];
   email: Scalars['String']['output'];
   group_id: Scalars['Int']['output'];
@@ -36,6 +36,12 @@ export type AuthorizationCoreSessionsObj = {
   is_admin: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
   newsletter?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type AvatarObj = {
+  __typename?: 'AvatarObj';
+  color: Scalars['String']['output'];
+  img?: Maybe<UploadCoreAttachmentsObj>;
 };
 
 export type CreateCoreGroupsObj = {
@@ -172,8 +178,8 @@ export type UploadCoreAttachmentsObj = {
   module: Scalars['String']['output'];
   module_id: Scalars['String']['output'];
   name: Scalars['String']['output'];
-  path: Scalars['String']['output'];
   position: Scalars['Int']['output'];
+  url: Scalars['String']['output'];
 };
 
 export type SignIn_Core_SessionsMutationVariables = Exact<{
@@ -210,7 +216,7 @@ export type Admin_Authorization_Core_SessionsQuery = { __typename?: 'Query', adm
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', birthday: number, email: string, id: string, name: string, newsletter?: boolean | null, group_id: number, is_admin: boolean, avatar?: { __typename?: 'UploadCoreAttachmentsObj', description?: string | null, name: string, path: string } | null } };
+export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', birthday: number, email: string, id: string, name: string, newsletter?: boolean | null, group_id: number, is_admin: boolean, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', description?: string | null, name: string, url: string } | null } } };
 
 
 export const SignIn_Core_Sessions = gql`
@@ -265,9 +271,12 @@ export const Authorization_Core_Sessions = gql`
     group_id
     is_admin
     avatar {
-      description
-      name
-      path
+      color
+      img {
+        description
+        name
+        url
+      }
     }
   }
 }

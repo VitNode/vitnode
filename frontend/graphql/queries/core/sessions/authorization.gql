@@ -8,9 +8,12 @@ query Authorization_core_sessions {
     group_id
     is_admin
     avatar {
-      description
-      name
-      path
+      color
+      img {
+        description
+        name
+        url
+      }
     }
   }
 }

@@ -4,7 +4,7 @@ const ENVS = {
 
 export const CONFIG = {
   default_theme: 'default',
-  graphql_url: ENVS.graphql_url ? ENVS.graphql_url : 'http://localhost:8080/graphql',
+  graphql_url: ENVS.graphql_url ? ENVS.graphql_url : 'http://localhost:8080',
   refresh_token: 'vitnode-ref-auth',
   access_token: 'vitnode-acc-auth',
   admin: {

@@ -42,6 +42,10 @@ export class AuthorizationCoreSessionsService {
       }
     });
 
-    return { ...currentUser, is_admin: await this.isAdmin(currentUser), avatar };
+    return {
+      ...currentUser,
+      is_admin: await this.isAdmin(currentUser),
+      avatar: { img: avatar, color: currentUser.avatar_color }
+    };
   }
 }
