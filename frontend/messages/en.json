@@ -93,6 +93,7 @@
       "title": "Settings",
       "desc": "Manage your account settings.",
       "open_sheet": "Open Menu",
+      "change_avatar": "Change Avatar",
       "overview": {
         "title": "Overview"
       },
