@@ -3,6 +3,7 @@
     "clsx",
     "Codegen",
     "commitlint",
+    "lucide",
     "nestjs",
     "nextra",
     "sonner",

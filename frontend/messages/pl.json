@@ -29,7 +29,16 @@
       "admin_cp": "Admin Panel"
     },
     "forms": {
-      "empty": "To pole jest wymagane."
+      "empty": "To pole jest wymagane.",
+      "files": {
+        "title": "Kliknij tutaj, aby przesłać lub przeciągnij i upuść tutaj",
+        "drop_here": "Upuść tutaj, aby przesłać",
+        "allow_size_per_file": "(max {size} MB na plik)",
+        "errors": {
+          "extension": "Plik {file} ma nieprawidłowe rozszerzenie.",
+          "max_size": "Plik {file} jest za duży."
+        }
+      }
     },
     "sign_in": {
       "title": "Zaloguj się",

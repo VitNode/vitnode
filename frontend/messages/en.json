@@ -29,7 +29,16 @@
       "admin_cp": "Admin Panel"
     },
     "forms": {
-      "empty": "This field is required."
+      "empty": "This field is required.",
+      "files": {
+        "title": "Click to upload or drag and drop here",
+        "drop_here": "Drop here to upload",
+        "allow_size_per_file": "(max {size} MB per file)",
+        "errors": {
+          "extension": "The file {file} have an invalid extension.",
+          "max_size": "The file {file} is too large."
+        }
+      }
     },
     "sign_in": {
       "title": "Login",
