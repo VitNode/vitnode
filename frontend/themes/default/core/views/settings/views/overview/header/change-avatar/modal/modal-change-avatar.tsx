@@ -6,7 +6,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Form, FormField } from '@/components/ui/form';
-import { FilesInput } from '@/components/ui/files-input';
+import { FilesInput } from '@/components/ui/files/files-input';
 
 interface FormType {
   file: File[];
