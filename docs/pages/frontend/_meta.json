@@ -3,6 +3,7 @@
   "graphql": "GraphQL",
   "forms": "Forms",
   "notifications": "Notifications",
+  "users": "Users",
   "offline": "Offline page",
   "practices": "Best Practices"
 }

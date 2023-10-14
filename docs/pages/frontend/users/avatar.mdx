@@ -1,0 +1,32 @@
+import { Callout } from 'nextra/components';
+
+# Avatar
+
+To use the Avatar component you have to import from `@/components/user/avatar/avatar-user`.
+Component requires `sizeInRem` prop to be passed.
+
+<Callout type="info" emoji="ℹ️">
+  Remember: 1rem === 16px
+</Callout>
+
+## Current User
+
+If you want to display the current user's avatar, you don't need to pass any props _(except for `sizeInRem` if you want to change the size)_.
+
+```tsx
+import { AvatarUser } from '@/components/user/avatar/avatar-user';
+
+<AvatarUser sizeInRem={1.75} />;
+```
+
+## Other Users
+
+<Callout type="warning" emoji="⚠️">
+  This page is in progress.
+</Callout>
+
+```tsx
+import { AvatarUser } from '@/components/user/avatar/avatar-user';
+
+<AvatarUser sizeInRem={1.75} />;
+```

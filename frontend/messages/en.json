@@ -93,7 +93,15 @@
       "title": "Settings",
       "desc": "Manage your account settings.",
       "open_sheet": "Open Menu",
-      "change_avatar": "Change Avatar",
+      "change_avatar": {
+        "title": "Change Avatar",
+        "desc": "Choose one option to change your avatar.",
+        "options": {
+          "upload": "Upload a new avatar",
+          "delete": "Delete avatar"
+        },
+        "submit": "Change Avatar"
+      },
       "overview": {
         "title": "Overview"
       },
