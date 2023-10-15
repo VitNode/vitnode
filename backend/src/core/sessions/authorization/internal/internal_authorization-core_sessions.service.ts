@@ -64,7 +64,9 @@ export class InternalAuthorizationCoreSessionsService {
           name: user.name,
           birthday: user.birthday,
           newsletter: user.newsletter,
-          group_id: user.group_id
+          group_id: user.group_id,
+          avatar_color: user.avatar_color,
+          name_seo: user.name_seo
         };
       }
     }
@@ -152,7 +154,9 @@ export class InternalAuthorizationCoreSessionsService {
         name: user.name,
         birthday: user.birthday,
         newsletter: user.newsletter,
-        group_id: user.group_id
+        group_id: user.group_id,
+        avatar_color: user.avatar_color,
+        name_seo: user.name_seo
       };
     }
 

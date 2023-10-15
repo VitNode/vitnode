@@ -1,0 +1,3 @@
+mutation Delete_avatar_core_members {
+  delete_avatar_core_members
+}

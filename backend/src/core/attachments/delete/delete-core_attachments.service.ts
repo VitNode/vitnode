@@ -40,7 +40,7 @@ export class DeleteCoreAttachmentsService {
     }
 
     // Remove file from server
-    unlink(file.path, err => {
+    unlink(file.url, err => {
       // eslint-disable-next-line no-console
       if (err) console.error(err);
     });

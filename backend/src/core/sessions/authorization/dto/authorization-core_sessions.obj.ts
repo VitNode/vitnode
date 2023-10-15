@@ -3,6 +3,14 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { UploadCoreAttachmentsObj } from '../../../attachments/upload/dto/upload-core_attachments.obj';
 
 @ObjectType()
+class AvatarObj {
+  @Field(() => String)
+  color: string;
+
+  @Field(() => UploadCoreAttachmentsObj, { nullable: true })
+  img?: UploadCoreAttachmentsObj;
+}
+@ObjectType()
 export class AuthorizationCoreSessionsObj {
   @Field(() => String)
   id: string;
@@ -12,6 +20,9 @@ export class AuthorizationCoreSessionsObj {
 
   @Field(() => String)
   name: string;
+
+  @Field(() => String)
+  name_seo: string;
 
   @Field(() => Int)
   birthday: number;
@@ -25,6 +36,6 @@ export class AuthorizationCoreSessionsObj {
   @Field(() => Boolean)
   is_admin: boolean;
 
-  @Field(() => UploadCoreAttachmentsObj, { nullable: true })
-  avatar?: UploadCoreAttachmentsObj;
+  @Field(() => AvatarObj)
+  avatar: AvatarObj;
 }

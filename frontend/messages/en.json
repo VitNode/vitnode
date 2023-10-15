@@ -29,7 +29,16 @@
       "admin_cp": "Admin Panel"
     },
     "forms": {
-      "empty": "This field is required."
+      "empty": "This field is required.",
+      "files": {
+        "title": "Click to upload or drag and drop here",
+        "drop_here": "Drop here to upload",
+        "allow_size_per_file": "(max {size} MB per file)",
+        "errors": {
+          "extension": "The file {file} have an invalid extension.",
+          "max_size": "The file {file} is too large."
+        }
+      }
     },
     "sign_in": {
       "title": "Login",
@@ -93,6 +102,23 @@
       "title": "Settings",
       "desc": "Manage your account settings.",
       "open_sheet": "Open Menu",
+      "change_avatar": {
+        "title": "Change Avatar",
+        "desc": "Choose one option to change your avatar.",
+        "options": {
+          "upload": {
+            "title": "Upload a new avatar",
+            "success": "Your avatar has been changed.",
+            "error": "An error occurred while uploading your avatar."
+          },
+          "delete": {
+            "title": "Delete avatar",
+            "success": "Your avatar has been deleted.",
+            "error": "An error occurred while deleting your avatar."
+          }
+        },
+        "submit": "Change Avatar"
+      },
       "overview": {
         "title": "Overview"
       },

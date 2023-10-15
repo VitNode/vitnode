@@ -15,7 +15,7 @@ export class UploadCoreAttachmentsObj {
   mimetype: string;
 
   @Field(() => String)
-  path: string;
+  url: string;
 
   @Field(() => Int)
   created: number;

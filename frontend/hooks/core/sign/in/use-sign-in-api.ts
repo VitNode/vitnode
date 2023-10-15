@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -7,10 +7,12 @@ import {
   SignIn_Core_SessionsMutationVariables
 } from '@/graphql/hooks';
 import { useRouter } from '@/i18n';
+import { APIKeys } from '@/graphql/api-keys';
 
 import { useSession } from '../../use-session';
 
 export const useSignInAPI = () => {
+  const queryClient = useQueryClient();
   const { setEnableSessionQuery } = useSession();
   const { push } = useRouter();
 
@@ -23,6 +25,9 @@ export const useSignInAPI = () => {
       }),
     onSuccess: (_data, variables) => {
       setEnableSessionQuery(true);
+      queryClient.resetQueries({
+        queryKey: [APIKeys.AUTHORIZATION]
+      });
       push(variables.admin ? '/admin/core' : '/');
     }
   });

@@ -29,7 +29,16 @@
       "admin_cp": "Admin Panel"
     },
     "forms": {
-      "empty": "To pole jest wymagane."
+      "empty": "To pole jest wymagane.",
+      "files": {
+        "title": "Kliknij tutaj, aby przesłać lub przeciągnij i upuść tutaj",
+        "drop_here": "Upuść tutaj, aby przesłać",
+        "allow_size_per_file": "(max {size} MB na plik)",
+        "errors": {
+          "extension": "Plik {file} ma nieprawidłowe rozszerzenie.",
+          "max_size": "Plik {file} jest za duży."
+        }
+      }
     },
     "sign_in": {
       "title": "Zaloguj się",
@@ -93,6 +102,23 @@
       "title": "Ustawienia",
       "desc": "Zarządzaj ustawnieniami swojego konta.",
       "open_sheet": "Otwórz menu",
+      "change_avatar": {
+        "title": "Zmień avatar",
+        "desc": "Wybierz jedną opcję, aby zmienić swój avatar.",
+        "options": {
+          "upload": {
+            "title": "Wyślij nowy avatar",
+            "success": "Twój avatar został zmieniony.",
+            "error": "Wystąpił błąd podczas zmiany avatara."
+          },
+          "delete": {
+            "title": "Usuń avatar",
+            "success": "Twój avatar został usunięty.",
+            "error": "Wystąpił błąd podczas usuwania avatara."
+          }
+        },
+        "submit": "Zmień avatar"
+      },
       "overview": {
         "title": "Przegląd"
       },

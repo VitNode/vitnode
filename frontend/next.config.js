@@ -6,5 +6,15 @@ const withNextIntl = require('next-intl/plugin')(
 );
 
 module.exports = withNextIntl({
-  // Other Next.js configuration ...
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {
+        hostname: 'localhost',
+        port: '8080',
+        protocol: 'http',
+        pathname: '/public/**'
+      }
+    ]
+  }
 });

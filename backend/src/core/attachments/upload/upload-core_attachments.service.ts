@@ -99,18 +99,18 @@ export class UploadCoreAttachmentsService {
         const currentFileName = `${date.getTime()}_${generateRandomString(
           10
         )}_${removeSpecialCharacters(filename)}`;
-        const path = `${dir}/${currentFileName}`;
+        const url = `${dir}/${currentFileName}`;
 
         // Save file to file system
         await new Promise((resolve, reject) =>
           stream
-            .pipe(createWriteStream(path))
-            .on('finish', () => resolve(path))
+            .pipe(createWriteStream(url))
+            .on('finish', () => resolve(url))
             .on('error', reject)
         );
 
         // Get file stats
-        const stat = statSync(path);
+        const stat = statSync(url);
 
         // Save file to database
         return await this.prisma.core_attachments.create({
@@ -119,7 +119,7 @@ export class UploadCoreAttachmentsService {
             module_id,
             name: currentFileName,
             mimetype,
-            path,
+            url,
             created: currentDate(),
             position,
             description,

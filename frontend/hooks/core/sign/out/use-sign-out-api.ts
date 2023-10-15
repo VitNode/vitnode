@@ -7,6 +7,7 @@ import {
   SignOut_Core_SessionsMutationVariables
 } from '@/graphql/hooks';
 import { useRouter } from '@/i18n';
+import { APIKeys } from '@/graphql/api-keys';
 
 import { useSession } from '../../use-session';
 
@@ -22,7 +23,7 @@ export const useSignOutAPI = () => {
         query: SignOut_Core_Sessions
       }),
     onSuccess: () => {
-      queryClient.setQueryData(['Authorization'], () => null);
+      queryClient.setQueryData([APIKeys.AUTHORIZATION], () => null);
 
       setEnableSessionQuery(false);
       push('/');
