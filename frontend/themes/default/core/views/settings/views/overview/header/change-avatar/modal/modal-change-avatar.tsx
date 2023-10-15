@@ -47,7 +47,7 @@ export const ModalChangeAvatar = () => {
                     </div>
 
                     <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="compact" id="r2" />
+                      <RadioGroupItem value="delete" id="r2" />
                       <Label htmlFor="r2">{t('settings.change_avatar.options.delete.title')}</Label>
                     </div>
                   </RadioGroup>

@@ -1,11 +1,15 @@
 import { useForm } from 'react-hook-form';
 
+import { useDeleteAvatarAPI } from './api/use-delete-avatar-api';
+
 interface FormType {
   file: File[];
-  type: 'upload' | 'compact';
+  type: 'upload' | 'delete';
 }
 
 export const useModalChangeAvatar = () => {
+  const { isPending, mutateAsync } = useDeleteAvatarAPI();
+
   const form = useForm<FormType>({
     defaultValues: {
       type: 'upload',
@@ -14,13 +18,15 @@ export const useModalChangeAvatar = () => {
     mode: 'onChange'
   });
 
-  const onSubmit = (data: FormType) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
+  const onSubmit = async ({ type }: FormType) => {
+    if (type === 'delete') {
+      await mutateAsync();
+    }
   };
 
   return {
     form,
-    onSubmit
+    onSubmit,
+    isPending
   };
 };

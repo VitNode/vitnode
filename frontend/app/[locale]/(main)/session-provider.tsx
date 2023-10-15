@@ -10,6 +10,7 @@ import {
   Authorization_Core_SessionsQuery,
   Authorization_Core_SessionsQueryVariables
 } from '@/graphql/hooks';
+import { APIKeys } from '@/graphql/api-keys';
 
 interface Props {
   children: ReactNode;
@@ -20,7 +21,7 @@ export const SessionProvider = ({ children, initialData }: Props) => {
   const [enableSessionQuery, setEnableSessionQuery] = useState(!!initialData);
 
   const { data } = useQuery({
-    queryKey: ['Authorization'],
+    queryKey: [APIKeys.AUTHORIZATION],
     queryFn: async () =>
       fetcher<Authorization_Core_SessionsQuery, Authorization_Core_SessionsQueryVariables>({
         query: Authorization_Core_Sessions

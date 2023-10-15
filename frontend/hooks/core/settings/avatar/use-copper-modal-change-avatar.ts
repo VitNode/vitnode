@@ -2,7 +2,6 @@ import { useRef } from 'react';
 import { ReactCropperElement } from 'react-cropper';
 
 import { useUploadAvatarAPI } from './api/use-upload-avatar-api';
-import { useDialog } from '@/components/ui/dialog';
 
 import { useSession } from '../../use-session';
 
@@ -10,7 +9,6 @@ export const useCopperModalChangeAvatar = () => {
   const cropperRef = useRef<ReactCropperElement>(null);
   const { isPending, mutateAsync } = useUploadAvatarAPI();
   const { session } = useSession();
-  const { setOpen } = useDialog();
 
   const onSubmit = async () => {
     if (!session) return;
@@ -25,7 +23,6 @@ export const useCopperModalChangeAvatar = () => {
     await mutateAsync({
       file
     });
-    setOpen(false);
   };
 
   return {

@@ -10,6 +10,7 @@ import {
   Admin_Authorization_Core_SessionsQueryVariables
 } from '@/graphql/hooks';
 import { SessionAdminContext } from '@/admin/hooks/use-session-admin';
+import { APIKeys } from '@/graphql/api-keys';
 
 interface Props {
   children: ReactNode;
@@ -20,7 +21,7 @@ export const SessionAdminProvider = ({ children, initialDataSession }: Props) =>
   const [enableSessionQuery, setEnableSessionQuery] = useState(!!initialDataSession);
 
   const { data } = useQuery({
-    queryKey: ['Authorization.Admin'],
+    queryKey: [APIKeys.AUTHORIZATION_ADMIN],
     queryFn: async () =>
       await fetcher<
         Admin_Authorization_Core_SessionsQuery,
