@@ -11,6 +11,7 @@ import {
   Authorization_Core_SessionsQueryVariables
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
+import { InternalErrorView } from '@/admin/views/global/internal-error-view';
 
 interface Props {
   children: ReactNode;
@@ -29,6 +30,8 @@ export const SessionProvider = ({ children, initialData }: Props) => {
     initialData,
     enabled: enableSessionQuery
   });
+
+  return <InternalErrorView />;
 
   return (
     <SessionContext.Provider value={{ session: data, setEnableSessionQuery }}>

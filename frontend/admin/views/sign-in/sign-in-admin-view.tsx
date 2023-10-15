@@ -7,7 +7,7 @@ export const SignInAdminView = () => {
   const t = useTranslations('admin');
 
   return (
-    <div className="max-w-[32rem] mx-auto py-10">
+    <div className="max-w-[32rem] mx-auto my-10 py-10">
       <Card>
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl">{t('title')}</CardTitle>
