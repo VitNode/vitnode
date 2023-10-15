@@ -46,10 +46,15 @@ export const useUploadAvatarAPI = () => {
           ...old,
           authorization_core_sessions: {
             ...old.authorization_core_sessions,
-            avatar: {
-              ...old.authorization_core_sessions.avatar,
-              img: data.upload_avatar_core_members
-            }
+            user: old.authorization_core_sessions.user
+              ? {
+                  ...old.authorization_core_sessions.user,
+                  avatar: {
+                    ...old.authorization_core_sessions.user.avatar,
+                    img: data.upload_avatar_core_members
+                  }
+                }
+              : null
           }
         };
       });

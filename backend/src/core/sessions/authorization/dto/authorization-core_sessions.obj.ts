@@ -10,8 +10,9 @@ class AvatarObj {
   @Field(() => UploadCoreAttachmentsObj, { nullable: true })
   img?: UploadCoreAttachmentsObj;
 }
+
 @ObjectType()
-export class AuthorizationCoreSessionsObj {
+class AuthorizationCurrentUserObj {
   @Field(() => String)
   id: string;
 
@@ -38,4 +39,9 @@ export class AuthorizationCoreSessionsObj {
 
   @Field(() => AvatarObj)
   avatar: AvatarObj;
+}
+@ObjectType()
+export class AuthorizationCoreSessionsObj {
+  @Field(() => AuthorizationCurrentUserObj, { nullable: true })
+  user?: AuthorizationCurrentUserObj;
 }

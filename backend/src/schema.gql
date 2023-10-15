@@ -12,6 +12,10 @@ type AdminAuthorizationCoreSessionsObj {
 }
 
 type AuthorizationCoreSessionsObj {
+  user: AuthorizationCurrentUserObj
+}
+
+type AuthorizationCurrentUserObj {
   avatar: AvatarObj!
   birthday: Int!
   email: String!

@@ -128,8 +128,9 @@
       }
     },
     "errors": {
-      "title": "Ups! Coś poszło nie tak.",
+      "title": "Ups! Coś poszło nie tak",
       "code": "Kod błędu: <code></code>",
+      "no_connection_api": "Brak połączenia z API",
       "actions": {
         "back_home": "Strona główna",
         "contact": "Skontaktuj się z nami"
