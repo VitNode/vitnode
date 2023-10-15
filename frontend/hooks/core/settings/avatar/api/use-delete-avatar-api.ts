@@ -40,10 +40,15 @@ export const useDeleteAvatarAPI = () => {
           ...old,
           authorization_core_sessions: {
             ...old.authorization_core_sessions,
-            avatar: {
-              ...old.authorization_core_sessions.avatar,
-              img: null
-            }
+            user: old.authorization_core_sessions.user
+              ? {
+                  ...old.authorization_core_sessions.user,
+                  avatar: {
+                    ...old.authorization_core_sessions.user.avatar,
+                    img: null
+                  }
+                }
+              : null
           }
         };
       });
