@@ -19,6 +19,7 @@ type AuthorizationCoreSessionsObj {
   id: String!
   is_admin: Boolean!
   name: String!
+  name_seo: String!
   newsletter: Boolean
 }
 
@@ -38,7 +39,7 @@ type Mutation {
   signIn_core_sessions(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   signOut_core_sessions: String!
   signUp_core_members(birthday: Int!, email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
-  upload_avatar_core_members(file: Upload!): String!
+  upload_avatar_core_members(file: Upload!): UploadCoreAttachmentsObj!
 }
 
 type PageInfo {

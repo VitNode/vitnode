@@ -1,30 +1,40 @@
 import { DocumentNode } from 'graphql';
 
-import { CONFIG } from '@/config';
 import { getGqlString } from '@/functions/get-qql-string';
+import { CONFIG } from '@/config';
 
 interface Args<TVariables> {
   query: DocumentNode;
   headers?: HeadersInit;
+  next?: NextFetchRequestConfig;
   signal?: AbortSignal;
-  upload?: {
-    files: File[];
+  uploads?: {
+    files: File | File[];
     variable: string;
-  };
+  }[];
   variables?: TVariables;
 }
 
 export async function fetcher<TData, TVariables>({
   headers,
+  next,
   query,
   signal,
-  upload,
+  uploads,
   variables
 }: Args<TVariables>): Promise<TData> {
   const formData = new FormData();
 
-  if (upload) {
-    const { files, variable } = upload;
+  if (uploads) {
+    const preVariables = {} as Record<string, unknown>;
+
+    uploads.forEach(({ files, variable }) => {
+      if (Array.isArray(files)) {
+        preVariables[variable] = files.map(() => null);
+      } else {
+        preVariables[variable] = null;
+      }
+    });
 
     formData.append(
       'operations',
@@ -32,19 +42,48 @@ export async function fetcher<TData, TVariables>({
         query: getGqlString(query),
         variables: {
           ...variables,
-          files: files.map(() => null)
+          ...preVariables
         }
       })
     );
 
     const preMap = new Map<string, string[]>();
 
-    files.forEach((file, index) => {
-      preMap.set(`${index + 1}`, [`variables.${variable}.${index}`]);
-      formData.append(`${index + 1}`, file);
-    });
+    // Map
+    let mapIndex = 0;
+    uploads.forEach(({ files, variable }) => {
+      if (Array.isArray(files)) {
+        files.forEach((_file, index) => {
+          preMap.set(`${mapIndex}`, [`variables.${variable}.${index}`]);
 
+          mapIndex += 1;
+        });
+      } else {
+        if (files) {
+          preMap.set(`${mapIndex}`, [`variables.${variable}`]);
+
+          mapIndex += 1;
+        }
+      }
+    });
     formData.append('map', JSON.stringify(Object.fromEntries(preMap)));
+
+    let currentIndex = 0;
+    uploads.forEach(({ files }) => {
+      if (Array.isArray(files)) {
+        files.forEach(file => {
+          formData.append(`${currentIndex}`, file);
+
+          currentIndex += 1;
+        });
+      } else {
+        if (files) {
+          formData.append(`${currentIndex}`, files);
+
+          currentIndex += 1;
+        }
+      }
+    });
   }
 
   const res = await fetch(`${CONFIG.graphql_url}/graphql`, {
@@ -52,19 +91,23 @@ export async function fetcher<TData, TVariables>({
     credentials: 'include',
     mode: 'cors',
     signal,
-    headers: upload
-      ? undefined
+    headers: uploads
+      ? {
+          'x-apollo-operation-name': '*',
+          ...headers
+        }
       : {
           'Content-Type': 'application/json',
           ...headers
         },
-    body: upload ? formData : JSON.stringify({ query: getGqlString(query), variables })
+    body: uploads ? formData : JSON.stringify({ query: getGqlString(query), variables }),
+    next
   });
 
   const json = await res.json();
 
   if (json.errors) {
-    return Promise.reject(json.errors.at(0).extensions.code);
+    return Promise.reject(json.errors.at(0));
   }
 
   return json.data;

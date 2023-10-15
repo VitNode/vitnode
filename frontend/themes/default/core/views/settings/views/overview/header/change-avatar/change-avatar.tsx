@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import { Suspense, lazy, useState } from 'react';
+import { Suspense, lazy } from 'react';
 import { Image } from 'lucide-react';
 
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
@@ -16,13 +16,12 @@ const ModalChangeAvatar = lazy(() =>
 
 export const ChangeAvatar = () => {
   const t = useTranslations('core');
-  const [openEditAvatar, setOpenEditAvatar] = useState(false);
 
   return (
     <div className="relative">
       <AvatarUser sizeInRem={5} />
       <TooltipProvider>
-        <Dialog open={openEditAvatar} onOpenChange={setOpenEditAvatar}>
+        <Dialog>
           <Tooltip>
             <TooltipTrigger asChild>
               <DialogTrigger asChild>

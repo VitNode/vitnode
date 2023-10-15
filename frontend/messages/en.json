@@ -106,8 +106,16 @@
         "title": "Change Avatar",
         "desc": "Choose one option to change your avatar.",
         "options": {
-          "upload": "Upload a new avatar",
-          "delete": "Delete avatar"
+          "upload": {
+            "title": "Upload a new avatar",
+            "success": "Your avatar has been changed.",
+            "error": "An error occurred while uploading your avatar."
+          },
+          "delete": {
+            "title": "Delete avatar",
+            "success": "Your avatar has been deleted.",
+            "error": "An error occurred while deleting your avatar."
+          }
         },
         "submit": "Change Avatar"
       },

@@ -35,6 +35,7 @@ export type AuthorizationCoreSessionsObj = {
   id: Scalars['String']['output'];
   is_admin: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
+  name_seo: Scalars['String']['output'];
   newsletter?: Maybe<Scalars['Boolean']['output']>;
 };
 
@@ -57,7 +58,7 @@ export type Mutation = {
   signIn_core_sessions: Scalars['String']['output'];
   signOut_core_sessions: Scalars['String']['output'];
   signUp_core_members: SignUpCoreMembersObj;
-  upload_avatar_core_members: Scalars['String']['output'];
+  upload_avatar_core_members: UploadCoreAttachmentsObj;
 };
 
 
@@ -197,6 +198,18 @@ export type SignOut_Core_SessionsMutationVariables = Exact<{ [key: string]: neve
 
 export type SignOut_Core_SessionsMutation = { __typename?: 'Mutation', signOut_core_sessions: string };
 
+export type Delete_Avatar_Core_MembersMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Delete_Avatar_Core_MembersMutation = { __typename?: 'Mutation', delete_avatar_core_members: string };
+
+export type Upload_Avatar_Core_MembersMutationVariables = Exact<{
+  file: Scalars['Upload']['input'];
+}>;
+
+
+export type Upload_Avatar_Core_MembersMutation = { __typename?: 'Mutation', upload_avatar_core_members: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } };
+
 export type SignUp_Core_MembersMutationVariables = Exact<{
   birthday: Scalars['Int']['input'];
   email: Scalars['String']['input'];
@@ -216,7 +229,7 @@ export type Admin_Authorization_Core_SessionsQuery = { __typename?: 'Query', adm
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', birthday: number, email: string, id: string, name: string, newsletter?: boolean | null, group_id: number, is_admin: boolean, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', description?: string | null, name: string, url: string } | null } } };
+export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', birthday: number, email: string, id: string, name: string, newsletter?: boolean | null, group_id: number, is_admin: boolean, name_seo: string, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', description?: string | null, name: string, url: string } | null } } };
 
 
 export const SignIn_Core_Sessions = gql`
@@ -232,6 +245,28 @@ export const SignIn_Core_Sessions = gql`
 export const SignOut_Core_Sessions = gql`
     mutation SignOut_core_sessions {
   signOut_core_sessions
+}
+    `;
+export const Delete_Avatar_Core_Members = gql`
+    mutation Delete_avatar_core_members {
+  delete_avatar_core_members
+}
+    `;
+export const Upload_Avatar_Core_Members = gql`
+    mutation Upload_avatar_core_members($file: Upload!) {
+  upload_avatar_core_members(file: $file) {
+    created
+    description
+    extension
+    file_size
+    member_id
+    mimetype
+    module
+    module_id
+    name
+    position
+    url
+  }
 }
     `;
 export const SignUp_Core_Members = gql`
@@ -278,6 +313,7 @@ export const Authorization_Core_Sessions = gql`
         url
       }
     }
+    name_seo
   }
 }
     `;

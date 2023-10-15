@@ -6,6 +6,8 @@ import { UploadCoreAttachmentsService } from '@/src/core/attachments/upload/uplo
 import { User } from '@/utils/decorators/user.decorator';
 import { PrismaService } from '@/prisma/prisma.service';
 import { DeleteCoreAttachmentsService } from '../../../attachments/delete/delete-core_attachments.service';
+import { UploadCoreAttachmentsObj } from '../../../attachments/upload/dto/upload-core_attachments.obj';
+import { CustomError } from '../../../../../utils/errors/CustomError';
 
 @Injectable()
 export class UploadAvatarCoreMembersService {
@@ -15,7 +17,10 @@ export class UploadAvatarCoreMembersService {
     private readonly prisma: PrismaService
   ) {}
 
-  async uploadAvatar({ id }: User, { file }: UploadAvatarCoreMembersArgs): Promise<string> {
+  async uploadAvatar(
+    { id }: User,
+    { file }: UploadAvatarCoreMembersArgs
+  ): Promise<UploadCoreAttachmentsObj> {
     // Check if the user already has an avatar
     const avatar = await this.prisma.core_attachments.findFirst({
       where: {
@@ -33,7 +38,7 @@ export class UploadAvatarCoreMembersService {
       });
     }
 
-    await this.uploadFile.upload({
+    const currentFile = await this.uploadFile.upload({
       files: [
         {
           file,
@@ -47,6 +52,14 @@ export class UploadAvatarCoreMembersService {
       module_id: id
     });
 
-    return 'Success!';
+    if (currentFile.length <= 0) {
+      throw new CustomError({
+        code: 'UNKNOWN_ERROR',
+        message:
+          'We could not upload your avatar and save it to database. This is error from engine.'
+      });
+    }
+
+    return currentFile[0];
   }
 }

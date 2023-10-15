@@ -21,6 +21,9 @@ export class AuthorizationCoreSessionsObj {
   @Field(() => String)
   name: string;
 
+  @Field(() => String)
+  name_seo: string;
+
   @Field(() => Int)
   birthday: number;
 

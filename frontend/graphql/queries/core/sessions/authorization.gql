@@ -15,5 +15,6 @@ query Authorization_core_sessions {
         url
       }
     }
+    name_seo
   }
 }

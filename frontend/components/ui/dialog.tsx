@@ -2,11 +2,48 @@
 
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
-import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef } from 'react';
+import {
+  ComponentPropsWithoutRef,
+  Dispatch,
+  ElementRef,
+  HTMLAttributes,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  forwardRef,
+  useContext,
+  useState
+} from 'react';
 
 import { cx } from '@/functions/classnames';
 
-const Dialog = DialogPrimitive.Root;
+interface DialogContextArgs {
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+export const DialogContext = createContext<DialogContextArgs>({
+  open: false,
+  setOpen: () => {}
+});
+
+export const useDialog = () => useContext(DialogContext);
+
+interface DialogProps extends Omit<DialogPrimitive.DialogProps, 'open' | 'onOpenChange'> {
+  children: ReactNode;
+}
+
+const Dialog = ({ children }: DialogProps) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <DialogContext.Provider value={{ open, setOpen }}>
+      <DialogPrimitive.Root open={open} onOpenChange={setOpen}>
+        {children}
+      </DialogPrimitive.Root>
+    </DialogContext.Provider>
+  );
+};
 
 const DialogTrigger = DialogPrimitive.Trigger;
 
