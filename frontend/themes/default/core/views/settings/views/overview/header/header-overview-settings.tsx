@@ -7,10 +7,7 @@ import { ChangeAvatar } from './change-avatar/change-avatar';
 export const HeaderOverviewSettings = () => {
   const { session } = useSession();
   if (!session) return null;
-
-  const {
-    authorization_core_sessions: { email, name }
-  } = session;
+  const { email, name } = session;
 
   return (
     <CardHeader>

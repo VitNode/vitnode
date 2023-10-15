@@ -23,10 +23,7 @@ export const AuthUserBar = () => {
   const { mutateAsync } = useSignOutAPI();
 
   if (!session) return null;
-
-  const {
-    authorization_core_sessions: { email, id, is_admin, name }
-  } = session;
+  const { email, id, is_admin, name } = session;
 
   return (
     <DropdownMenu>

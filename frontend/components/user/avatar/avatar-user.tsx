@@ -15,7 +15,7 @@ interface Props {
 const AvatarUser = forwardRef<HTMLDivElement, Props>(({ sizeInRem }, ref) => {
   const { session } = useSession();
   if (!session) return null;
-  const { avatar, name } = session.authorization_core_sessions;
+  const { avatar, name } = session;
 
   return (
     <Img

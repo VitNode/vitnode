@@ -28,6 +28,11 @@ export type AdminAuthorizationCoreSessionsObj = {
 
 export type AuthorizationCoreSessionsObj = {
   __typename?: 'AuthorizationCoreSessionsObj';
+  user?: Maybe<AuthorizationCurrentUserObj>;
+};
+
+export type AuthorizationCurrentUserObj = {
+  __typename?: 'AuthorizationCurrentUserObj';
   avatar: AvatarObj;
   birthday: Scalars['Int']['output'];
   email: Scalars['String']['output'];
@@ -229,7 +234,7 @@ export type Admin_Authorization_Core_SessionsQuery = { __typename?: 'Query', adm
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', birthday: number, email: string, id: string, name: string, newsletter?: boolean | null, group_id: number, is_admin: boolean, name_seo: string, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', description?: string | null, name: string, url: string } | null } } };
+export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null } };
 
 
 export const SignIn_Core_Sessions = gql`
@@ -298,22 +303,32 @@ export const Admin_Authorization_Core_Sessions = gql`
 export const Authorization_Core_Sessions = gql`
     query Authorization_core_sessions {
   authorization_core_sessions {
-    birthday
-    email
-    id
-    name
-    newsletter
-    group_id
-    is_admin
-    avatar {
-      color
-      img {
-        description
-        name
-        url
+    user {
+      avatar {
+        color
+        img {
+          created
+          description
+          extension
+          file_size
+          member_id
+          mimetype
+          module
+          module_id
+          name
+          position
+          url
+        }
       }
+      birthday
+      email
+      group_id
+      id
+      is_admin
+      name
+      name_seo
+      newsletter
     }
-    name_seo
   }
 }
     `;

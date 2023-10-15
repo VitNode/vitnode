@@ -9,6 +9,7 @@ import {
   Authorization_Core_SessionsQueryVariables
 } from '@/graphql/hooks';
 import { SessionProvider } from './session-provider';
+import { InternalErrorView } from '@/admin/views/global/internal-error-view';
 
 interface Props {
   children: ReactNode;
@@ -16,32 +17,32 @@ interface Props {
 }
 
 const getData = async () => {
-  try {
-    return await fetcher<
-      Authorization_Core_SessionsQuery,
-      Authorization_Core_SessionsQueryVariables
-    >({
+  return await fetcher<Authorization_Core_SessionsQuery, Authorization_Core_SessionsQueryVariables>(
+    {
       query: Authorization_Core_Sessions,
       headers: {
         Cookie: cookies().toString()
       }
-    });
-    // eslint-disable-next-line no-empty
-  } catch (error) {}
+    }
+  );
 };
 
 export default async function Layout({ children }: Props) {
-  const Layout = lazy(() =>
-    import(`@/themes/${CONFIG.default_theme}/core/layout/layout`).then(module => ({
-      default: module.Layout
-    }))
-  );
+  try {
+    const data = await getData();
 
-  const data = await getData();
+    const Layout = lazy(() =>
+      import(`@/themes/${CONFIG.default_theme}/core/layout/layout`).then(module => ({
+        default: module.Layout
+      }))
+    );
 
-  return (
-    <SessionProvider initialData={data}>
-      <Layout>{children}</Layout>
-    </SessionProvider>
-  );
+    return (
+      <SessionProvider initialData={data}>
+        <Layout>{children}</Layout>
+      </SessionProvider>
+    );
+  } catch (error) {
+    return <InternalErrorView />;
+  }
 }

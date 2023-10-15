@@ -9,11 +9,8 @@ import {
 import { useRouter } from '@/i18n';
 import { APIKeys } from '@/graphql/api-keys';
 
-import { useSession } from '../../use-session';
-
 export const useSignInAPI = () => {
   const queryClient = useQueryClient();
-  const { setEnableSessionQuery } = useSession();
   const { push } = useRouter();
 
   // TODO: Add notification toast when is an error
@@ -24,8 +21,7 @@ export const useSignInAPI = () => {
         variables
       }),
     onSuccess: (_data, variables) => {
-      setEnableSessionQuery(true);
-      queryClient.resetQueries({
+      queryClient.refetchQueries({
         queryKey: [APIKeys.AUTHORIZATION]
       });
       push(variables.admin ? '/admin/core' : '/');
