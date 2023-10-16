@@ -3,6 +3,8 @@ import { useTranslations } from 'next-intl';
 
 import { NavSettings } from './nav/nav-settings';
 
+import { HeaderContent } from '../../../../../components/header-content/header-content';
+
 interface Props {
   children: ReactNode;
 }
@@ -12,10 +14,7 @@ export const LayoutSettingsView = ({ children }: Props) => {
 
   return (
     <>
-      <div className="mb-5">
-        <h2 className="text-2xl font-bold tracking-tight">{t('settings.title')}</h2>
-        <p className="text-muted-foreground">{t('settings.desc')}</p>
-      </div>
+      <HeaderContent h2={t('settings.title')} desc={t('settings.desc')} />
 
       <div className="lg:gap-8 flex flex-col lg:flex-row gap-4">
         <NavSettings />
