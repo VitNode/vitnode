@@ -14,11 +14,24 @@
         "list": "Użytkownicy",
         "groups": "Grupy"
       }
+    },
+    "core": {
+      "general": {
+        "main": {
+          "title": "Ustawienia główne",
+          "form": {
+            "name": {
+              "label": "Nazwa strony"
+            }
+          }
+        }
+      }
     }
   },
   "core": {
     "test": "Test PL",
     "loading": "Czekaj, ładowanie...",
+    "save": "Zapisz",
     "user-bar": {
       "sign_in": "Zaloguj się",
       "sign_up": "Zarejestruj się",

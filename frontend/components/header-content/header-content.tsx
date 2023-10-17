@@ -23,13 +23,13 @@ export const HeaderContent = ({
 }: HeaderContentH1Props | HeaderContentH2Props) => {
   return (
     <div className="mb-5 flex gap-4 flex-col sm:flex-row">
-      <div>
+      <div className="space-y-1.5 text-center sm:text-left">
         {h1 ? (
-          <h1 className="text-2xl font-bold tracking-tight">{h1}</h1>
+          <h1 className="font-semibold tracking-tight text-2xl">{h1}</h1>
         ) : (
-          <h2 className="text-xl font-bold tracking-tight">{h2}</h2>
+          <h2 className="font-semibold tracking-tight text-xl">{h2}</h2>
         )}
-        {desc && <p className="text-muted-foreground">{desc}</p>}
+        {desc && <p className="text-sm text-muted-foreground">{desc}</p>}
       </div>
 
       {children && (
