@@ -58,6 +58,7 @@ type Query {
   authorization_admin_sessions: AuthorizationAdminSessionsObj!
   authorization_core_sessions: AuthorizationCoreSessionsObj!
   show_core_members(cursor: String, first: Int!, search: String, sortBy: [SortByArgs!]): ShowCoreMembersObj!
+  show_general_admin_settings: ShowGeneralAdminSettingsObj!
 }
 
 type ShowCoreMembers {
@@ -93,6 +94,10 @@ enum ShowCoreMembersSortingColumnEnum {
   name_seo
   posts
   reactions
+}
+
+type ShowGeneralAdminSettingsObj {
+  site_name: String!
 }
 
 type SignUpCoreMembersObj {
