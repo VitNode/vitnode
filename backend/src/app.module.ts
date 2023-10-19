@@ -7,11 +7,10 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 import { JwtModule } from '@nestjs/jwt';
 import { ServeStaticModule } from '@nestjs/serve-static';
 
-import { CoreMembersModule } from './core/members/core_members.module';
 import { PrismaModule } from '../prisma/prisma.module';
-import { CoreSessionsModule, GlobalCoreSessionsModule } from './core/sessions/core_sessions.module';
-import { CoreGroupsModule } from './core/groups/core_groups.module';
-import { CoreAttachmentsModule } from './core/attachments/core_attachments.module';
+import { GlobalCoreSessionsModule } from './core/sessions/core_sessions.module';
+import { CoreModule } from './core/core.module';
+import { AdminModule } from './admin/admin.module';
 
 import { Ctx } from '@/types/context.type';
 
@@ -27,11 +26,9 @@ import { Ctx } from '@/types/context.type';
     }),
     JwtModule.register({ global: true }),
     PrismaModule,
-    CoreMembersModule,
-    CoreSessionsModule,
-    CoreGroupsModule,
     GlobalCoreSessionsModule,
-    CoreAttachmentsModule,
+    CoreModule,
+    AdminModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '../public'),
       serveRoot: '/public'

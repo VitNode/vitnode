@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction, createContext, useContext } from 'react';
 
-import { Admin_Authorization_Core_SessionsQuery } from '@/graphql/hooks';
+import { Authorization_Admin_SessionsQuery } from '@/graphql/hooks';
 
 interface Args {
-  session: Admin_Authorization_Core_SessionsQuery | undefined;
+  session: Authorization_Admin_SessionsQuery | undefined;
   setEnableSessionQuery: Dispatch<SetStateAction<boolean>>;
 }
 

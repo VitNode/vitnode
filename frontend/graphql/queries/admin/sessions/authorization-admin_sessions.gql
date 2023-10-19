@@ -1,0 +1,8 @@
+query Authorization_admin_sessions {
+  authorization_admin_sessions {
+    email
+    group_id
+    id
+    name
+  }
+}

@@ -16,8 +16,8 @@ export type Scalars = {
   Upload: { input: any; output: any; }
 };
 
-export type AdminAuthorizationCoreSessionsObj = {
-  __typename?: 'AdminAuthorizationCoreSessionsObj';
+export type AuthorizationAdminSessionsObj = {
+  __typename?: 'AuthorizationAdminSessionsObj';
   birthday: Scalars['Int']['output'];
   email: Scalars['String']['output'];
   group_id: Scalars['Int']['output'];
@@ -104,7 +104,7 @@ export type PageInfo = {
 
 export type Query = {
   __typename?: 'Query';
-  admin_authorization_core_sessions: AdminAuthorizationCoreSessionsObj;
+  authorization_admin_sessions: AuthorizationAdminSessionsObj;
   authorization_core_sessions: AuthorizationCoreSessionsObj;
   show_core_members: ShowCoreMembersObj;
 };
@@ -188,21 +188,6 @@ export type UploadCoreAttachmentsObj = {
   url: Scalars['String']['output'];
 };
 
-export type SignIn_Core_SessionsMutationVariables = Exact<{
-  email: Scalars['String']['input'];
-  password: Scalars['String']['input'];
-  remember?: InputMaybe<Scalars['Boolean']['input']>;
-  admin?: InputMaybe<Scalars['Boolean']['input']>;
-}>;
-
-
-export type SignIn_Core_SessionsMutation = { __typename?: 'Mutation', signIn_core_sessions: string };
-
-export type SignOut_Core_SessionsMutationVariables = Exact<{ [key: string]: never; }>;
-
-
-export type SignOut_Core_SessionsMutation = { __typename?: 'Mutation', signOut_core_sessions: string };
-
 export type Delete_Avatar_Core_MembersMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -226,10 +211,25 @@ export type SignUp_Core_MembersMutationVariables = Exact<{
 
 export type SignUp_Core_MembersMutation = { __typename?: 'Mutation', signUp_core_members: { __typename?: 'SignUpCoreMembersObj', birthday: number, email: string, name: string, newsletter?: boolean | null } };
 
-export type Admin_Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
+export type SignIn_Core_SessionsMutationVariables = Exact<{
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+  remember?: InputMaybe<Scalars['Boolean']['input']>;
+  admin?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
 
 
-export type Admin_Authorization_Core_SessionsQuery = { __typename?: 'Query', admin_authorization_core_sessions: { __typename?: 'AdminAuthorizationCoreSessionsObj', email: string, group_id: number, id: string, name: string } };
+export type SignIn_Core_SessionsMutation = { __typename?: 'Mutation', signIn_core_sessions: string };
+
+export type SignOut_Core_SessionsMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SignOut_Core_SessionsMutation = { __typename?: 'Mutation', signOut_core_sessions: string };
+
+export type Authorization_Admin_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Authorization_Admin_SessionsQuery = { __typename?: 'Query', authorization_admin_sessions: { __typename?: 'AuthorizationAdminSessionsObj', email: string, group_id: number, id: string, name: string } };
 
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -237,21 +237,6 @@ export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: n
 export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null } };
 
 
-export const SignIn_Core_Sessions = gql`
-    mutation SignIn_core_sessions($email: String!, $password: String!, $remember: Boolean, $admin: Boolean) {
-  signIn_core_sessions(
-    email: $email
-    password: $password
-    remember: $remember
-    admin: $admin
-  )
-}
-    `;
-export const SignOut_Core_Sessions = gql`
-    mutation SignOut_core_sessions {
-  signOut_core_sessions
-}
-    `;
 export const Delete_Avatar_Core_Members = gql`
     mutation Delete_avatar_core_members {
   delete_avatar_core_members
@@ -290,9 +275,24 @@ export const SignUp_Core_Members = gql`
   }
 }
     `;
-export const Admin_Authorization_Core_Sessions = gql`
-    query Admin_authorization_core_sessions {
-  admin_authorization_core_sessions {
+export const SignIn_Core_Sessions = gql`
+    mutation SignIn_core_sessions($email: String!, $password: String!, $remember: Boolean, $admin: Boolean) {
+  signIn_core_sessions(
+    email: $email
+    password: $password
+    remember: $remember
+    admin: $admin
+  )
+}
+    `;
+export const SignOut_Core_Sessions = gql`
+    mutation SignOut_core_sessions {
+  signOut_core_sessions
+}
+    `;
+export const Authorization_Admin_Sessions = gql`
+    query Authorization_admin_sessions {
+  authorization_admin_sessions {
     email
     group_id
     id

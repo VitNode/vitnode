@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class AdminAuthorizationCoreSessionsObj {
+export class AuthorizationAdminSessionsObj {
   @Field(() => String)
   id: string;
 

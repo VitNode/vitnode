@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UAParser } from 'ua-parser-js';
 import { Response } from 'express';
 
-import { AdminAuthorizationCoreSessionsObj } from './dto/admin_authorization-core_sessions.obj';
+import { AuthorizationAdminSessionsObj } from './dto/authorization-admin_sessions.obj';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { Ctx } from '@/types/context.type';
@@ -12,7 +12,7 @@ import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { convertUnixTime, currentDate } from '@/functions/date';
 
 @Injectable()
-export class AdminAuthorizationCoreSessionsService {
+export class AuthorizationAdminSessionsService {
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService
@@ -27,7 +27,7 @@ export class AdminAuthorizationCoreSessionsService {
     });
   }
 
-  async authorization({ req, res }: Ctx): Promise<AdminAuthorizationCoreSessionsObj> {
+  async authorization({ req, res }: Ctx): Promise<AuthorizationAdminSessionsObj> {
     const tokens = {
       accessToken: req.cookies[CONFIG.access_token.admin.name],
       refreshToken: req.cookies[CONFIG.refresh_token.admin.name]
