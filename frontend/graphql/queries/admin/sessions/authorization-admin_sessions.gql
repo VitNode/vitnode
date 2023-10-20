@@ -1,6 +1,14 @@
-query Authorization_core_sessions {
-  authorization_core_sessions {
+query Authorization_admin_sessions {
+  authorization_admin_sessions {
     user {
+      birthday
+      email
+      group_id
+      id
+      is_admin
+      name
+      name_seo
+      newsletter
       avatar {
         color
         img {
@@ -17,14 +25,7 @@ query Authorization_core_sessions {
           url
         }
       }
-      birthday
-      email
-      group_id
-      id
-      is_admin
-      name
-      name_seo
-      newsletter
     }
+    side_name
   }
 }

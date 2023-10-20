@@ -3,16 +3,17 @@ import { JwtService } from '@nestjs/jwt';
 import { UAParser } from 'ua-parser-js';
 import { Response } from 'express';
 
-import { AdminAuthorizationCoreSessionsObj } from './dto/admin_authorization-core_sessions.obj';
+import { AuthorizationAdminSessionsObj } from './dto/authorization-admin_sessions.obj';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { Ctx } from '@/types/context.type';
 import { CONFIG } from '@/config';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { convertUnixTime, currentDate } from '@/functions/date';
+import * as data from '@/utils/config.json';
 
 @Injectable()
-export class AdminAuthorizationCoreSessionsService {
+export class AuthorizationAdminSessionsService {
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService
@@ -27,7 +28,11 @@ export class AdminAuthorizationCoreSessionsService {
     });
   }
 
-  async authorization({ req, res }: Ctx): Promise<AdminAuthorizationCoreSessionsObj> {
+  async authorization({ req, res }: Ctx): Promise<AuthorizationAdminSessionsObj> {
+    const others = {
+      side_name: data.side_name
+    };
+
     const tokens = {
       accessToken: req.cookies[CONFIG.access_token.admin.name],
       refreshToken: req.cookies[CONFIG.refresh_token.admin.name]
@@ -59,13 +64,26 @@ export class AdminAuthorizationCoreSessionsService {
           throw new AccessDeniedError();
         }
 
+        const avatar = await this.prisma.core_attachments.findFirst({
+          where: {
+            module: 'core_members',
+            module_id: user.id
+          }
+        });
+
         return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          birthday: user.birthday,
-          newsletter: user.newsletter,
-          group_id: user.group_id
+          user: {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            name_seo: user.name_seo,
+            birthday: user.birthday,
+            is_admin: true,
+            newsletter: user.newsletter,
+            group_id: user.group_id,
+            avatar: { img: avatar, color: user.avatar_color }
+          },
+          ...others
         };
       }
     }
@@ -165,13 +183,26 @@ export class AdminAuthorizationCoreSessionsService {
         sameSite: 'none'
       });
 
+      const avatar = await this.prisma.core_attachments.findFirst({
+        where: {
+          module: 'core_members',
+          module_id: user.id
+        }
+      });
+
       return {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        birthday: user.birthday,
-        newsletter: user.newsletter,
-        group_id: user.group_id
+        user: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          name_seo: user.name_seo,
+          birthday: user.birthday,
+          is_admin: true,
+          newsletter: user.newsletter,
+          group_id: user.group_id,
+          avatar: { img: avatar, color: user.avatar_color }
+        },
+        ...others
       };
     }
 

@@ -2,16 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type AdminAuthorizationCoreSessionsObj {
-  birthday: Int!
-  email: String!
-  group_id: Int!
-  id: String!
-  name: String!
-  newsletter: Boolean
+type AuthorizationAdminSessionsObj {
+  side_name: String!
+  user: AuthorizationCurrentUserObj
 }
 
 type AuthorizationCoreSessionsObj {
+  side_name: String!
   user: AuthorizationCurrentUserObj
 }
 
@@ -37,10 +34,16 @@ type CreateCoreGroupsObj {
   name: String!
 }
 
+type GeneralAdminSettingsObj {
+  side_name: String!
+}
+
 type Mutation {
   create_core_groups(name: String!): CreateCoreGroupsObj!
   delete_avatar_core_members: String!
+  edit_general_admin_settings(side_name: String!): GeneralAdminSettingsObj!
   signIn_core_sessions(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
+  signOut_admin_sessions: String!
   signOut_core_sessions: String!
   signUp_core_members(birthday: Int!, email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
   upload_avatar_core_members(file: Upload!): UploadCoreAttachmentsObj!
@@ -55,7 +58,7 @@ type PageInfo {
 }
 
 type Query {
-  admin_authorization_core_sessions: AdminAuthorizationCoreSessionsObj!
+  authorization_admin_sessions: AuthorizationAdminSessionsObj!
   authorization_core_sessions: AuthorizationCoreSessionsObj!
   show_core_members(cursor: String, first: Int!, search: String, sortBy: [SortByArgs!]): ShowCoreMembersObj!
 }

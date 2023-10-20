@@ -30,7 +30,4 @@ export class User {
 
   @Field(() => Int)
   group_id: number;
-
-  @Field(() => String)
-  avatar_color: string;
 }

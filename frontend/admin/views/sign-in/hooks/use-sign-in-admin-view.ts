@@ -35,6 +35,7 @@ export const useSignInAdminView = () => {
     form,
     onSubmit,
     isPending: mutation.isPending,
-    error: mutation.error
+    error: mutation.error,
+    isSuccess: mutation.isSuccess
   };
 };

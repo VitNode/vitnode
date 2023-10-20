@@ -1,6 +1,7 @@
 {
   "admin": {
     "title": "Admin Control Panel",
+    "title_short": "Admin",
     "nav": {
       "core": {
         "title": "Core",
@@ -14,11 +15,25 @@
         "list": "Users",
         "groups": "Groups"
       }
+    },
+    "core": {
+      "general": {
+        "main": {
+          "title": "Main Settings",
+          "form": {
+            "name": {
+              "label": "Name Site"
+            }
+          }
+        }
+      }
     }
   },
   "core": {
     "test": "Test EN",
     "loading": "Please wait, loading...",
+    "save": "Save",
+    "saved_success": "Saved successfully.",
     "user-bar": {
       "sign_in": "Login",
       "sign_up": "Register",
@@ -131,6 +146,8 @@
       "title": "Oops! Something went wrong",
       "code": "Error code: <code></code>",
       "no_connection_api": "No connection to the API",
+      "access_denied": "Access denied",
+      "internal_server_error": "Internal server error",
       "actions": {
         "back_home": "Home Page",
         "contact": "Contact with Us"

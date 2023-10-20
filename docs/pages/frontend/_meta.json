@@ -1,4 +1,5 @@
 {
+  "components": "Components",
   "theme": "Theme Mode",
   "graphql": "GraphQL",
   "forms": "Forms",
