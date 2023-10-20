@@ -10,6 +10,7 @@ import { Ctx } from '@/types/context.type';
 import { CONFIG } from '@/config';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { convertUnixTime, currentDate } from '@/functions/date';
+import * as data from '@/utils/config.json';
 
 @Injectable()
 export class AuthorizationAdminSessionsService {
@@ -28,6 +29,10 @@ export class AuthorizationAdminSessionsService {
   }
 
   async authorization({ req, res }: Ctx): Promise<AuthorizationAdminSessionsObj> {
+    const others = {
+      side_name: data.side_name
+    };
+
     const tokens = {
       accessToken: req.cookies[CONFIG.access_token.admin.name],
       refreshToken: req.cookies[CONFIG.refresh_token.admin.name]
@@ -59,13 +64,26 @@ export class AuthorizationAdminSessionsService {
           throw new AccessDeniedError();
         }
 
+        const avatar = await this.prisma.core_attachments.findFirst({
+          where: {
+            module: 'core_members',
+            module_id: user.id
+          }
+        });
+
         return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          birthday: user.birthday,
-          newsletter: user.newsletter,
-          group_id: user.group_id
+          user: {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            name_seo: user.name_seo,
+            birthday: user.birthday,
+            is_admin: true,
+            newsletter: user.newsletter,
+            group_id: user.group_id,
+            avatar: { img: avatar, color: user.avatar_color }
+          },
+          ...others
         };
       }
     }
@@ -165,13 +183,26 @@ export class AuthorizationAdminSessionsService {
         sameSite: 'none'
       });
 
+      const avatar = await this.prisma.core_attachments.findFirst({
+        where: {
+          module: 'core_members',
+          module_id: user.id
+        }
+      });
+
       return {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        birthday: user.birthday,
-        newsletter: user.newsletter,
-        group_id: user.group_id
+        user: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          name_seo: user.name_seo,
+          birthday: user.birthday,
+          is_admin: true,
+          newsletter: user.newsletter,
+          group_id: user.group_id,
+          avatar: { img: avatar, color: user.avatar_color }
+        },
+        ...others
       };
     }
 

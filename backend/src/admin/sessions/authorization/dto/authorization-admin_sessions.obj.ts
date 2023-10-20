@@ -1,22 +1,12 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
+
+import { AuthorizationCurrentUserObj } from '@/src/core/sessions/authorization/dto/authorization-core_sessions.obj';
 
 @ObjectType()
 export class AuthorizationAdminSessionsObj {
-  @Field(() => String)
-  id: string;
+  @Field(() => AuthorizationCurrentUserObj, { nullable: true })
+  user?: AuthorizationCurrentUserObj;
 
   @Field(() => String)
-  email: string;
-
-  @Field(() => String)
-  name: string;
-
-  @Field(() => Int)
-  birthday: number;
-
-  @Field(() => Boolean, { nullable: true })
-  newsletter?: boolean;
-
-  @Field(() => Int)
-  group_id: number;
+  side_name: string;
 }

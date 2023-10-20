@@ -1,8 +1,31 @@
 query Authorization_admin_sessions {
   authorization_admin_sessions {
-    email
-    group_id
-    id
-    name
+    user {
+      birthday
+      email
+      group_id
+      id
+      is_admin
+      name
+      name_seo
+      newsletter
+      avatar {
+        color
+        img {
+          created
+          description
+          extension
+          file_size
+          member_id
+          mimetype
+          module
+          module_id
+          name
+          position
+          url
+        }
+      }
+    }
+    side_name
   }
 }

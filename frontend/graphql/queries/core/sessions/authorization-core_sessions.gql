@@ -26,5 +26,6 @@ query Authorization_core_sessions {
       name_seo
       newsletter
     }
+    side_name
   }
 }

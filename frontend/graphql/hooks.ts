@@ -18,16 +18,13 @@ export type Scalars = {
 
 export type AuthorizationAdminSessionsObj = {
   __typename?: 'AuthorizationAdminSessionsObj';
-  birthday: Scalars['Int']['output'];
-  email: Scalars['String']['output'];
-  group_id: Scalars['Int']['output'];
-  id: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-  newsletter?: Maybe<Scalars['Boolean']['output']>;
+  side_name: Scalars['String']['output'];
+  user?: Maybe<AuthorizationCurrentUserObj>;
 };
 
 export type AuthorizationCoreSessionsObj = {
   __typename?: 'AuthorizationCoreSessionsObj';
+  side_name: Scalars['String']['output'];
   user?: Maybe<AuthorizationCurrentUserObj>;
 };
 
@@ -107,6 +104,7 @@ export type Query = {
   authorization_admin_sessions: AuthorizationAdminSessionsObj;
   authorization_core_sessions: AuthorizationCoreSessionsObj;
   show_core_members: ShowCoreMembersObj;
+  show_general_admin_settings: ShowGeneralAdminSettingsObj;
 };
 
 
@@ -153,6 +151,11 @@ export enum ShowCoreMembersSortingColumnEnum {
   Posts = 'posts',
   Reactions = 'reactions'
 }
+
+export type ShowGeneralAdminSettingsObj = {
+  __typename?: 'ShowGeneralAdminSettingsObj';
+  site_name: Scalars['String']['output'];
+};
 
 export type SignUpCoreMembersObj = {
   __typename?: 'SignUpCoreMembersObj';
@@ -229,12 +232,17 @@ export type SignOut_Core_SessionsMutation = { __typename?: 'Mutation', signOut_c
 export type Authorization_Admin_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Authorization_Admin_SessionsQuery = { __typename?: 'Query', authorization_admin_sessions: { __typename?: 'AuthorizationAdminSessionsObj', email: string, group_id: number, id: string, name: string } };
+export type Authorization_Admin_SessionsQuery = { __typename?: 'Query', authorization_admin_sessions: { __typename?: 'AuthorizationAdminSessionsObj', side_name: string, user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null } };
+
+export type Show_General_Admin_SettingsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Show_General_Admin_SettingsQuery = { __typename?: 'Query', show_general_admin_settings: { __typename?: 'ShowGeneralAdminSettingsObj', site_name: string } };
 
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null } };
+export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', side_name: string, user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null } };
 
 
 export const Delete_Avatar_Core_Members = gql`
@@ -293,10 +301,40 @@ export const SignOut_Core_Sessions = gql`
 export const Authorization_Admin_Sessions = gql`
     query Authorization_admin_sessions {
   authorization_admin_sessions {
-    email
-    group_id
-    id
-    name
+    user {
+      birthday
+      email
+      group_id
+      id
+      is_admin
+      name
+      name_seo
+      newsletter
+      avatar {
+        color
+        img {
+          created
+          description
+          extension
+          file_size
+          member_id
+          mimetype
+          module
+          module_id
+          name
+          position
+          url
+        }
+      }
+    }
+    side_name
+  }
+}
+    `;
+export const Show_General_Admin_Settings = gql`
+    query Show_general_admin_settings {
+  show_general_admin_settings {
+    site_name
   }
 }
     `;
@@ -329,6 +367,7 @@ export const Authorization_Core_Sessions = gql`
       name_seo
       newsletter
     }
+    side_name
   }
 }
     `;

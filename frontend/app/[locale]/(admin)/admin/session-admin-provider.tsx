@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { fetcher } from '@/graphql/fetcher';
@@ -18,20 +18,17 @@ interface Props {
 }
 
 export const SessionAdminProvider = ({ children, initialDataSession }: Props) => {
-  const [enableSessionQuery, setEnableSessionQuery] = useState(!!initialDataSession);
-
   const { data } = useQuery({
     queryKey: [APIKeys.AUTHORIZATION_ADMIN],
     queryFn: async () =>
       await fetcher<Authorization_Admin_SessionsQuery, Authorization_Admin_SessionsQueryVariables>({
         query: Authorization_Admin_Sessions
       }),
-    initialData: initialDataSession,
-    enabled: enableSessionQuery
+    initialData: initialDataSession
   });
 
   return (
-    <SessionAdminContext.Provider value={{ session: data, setEnableSessionQuery }}>
+    <SessionAdminContext.Provider value={{ session: data }}>
       {children}
     </SessionAdminContext.Provider>
   );

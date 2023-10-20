@@ -16,8 +16,10 @@ import {
 import { CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
 
 export const FormGeneralCoreAdmin = () => {
+  const { session } = useSessionAdmin();
   const t = useTranslations('admin');
   const tCore = useTranslations('core');
 
@@ -30,7 +32,7 @@ export const FormGeneralCoreAdmin = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: ''
+      name: session?.authorization_admin_sessions.side_name
     },
     mode: 'onChange'
   });

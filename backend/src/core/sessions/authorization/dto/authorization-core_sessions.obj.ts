@@ -12,7 +12,7 @@ class AvatarObj {
 }
 
 @ObjectType()
-class AuthorizationCurrentUserObj {
+export class AuthorizationCurrentUserObj {
   @Field(() => String)
   id: string;
 
@@ -44,4 +44,7 @@ class AuthorizationCurrentUserObj {
 export class AuthorizationCoreSessionsObj {
   @Field(() => AuthorizationCurrentUserObj, { nullable: true })
   user?: AuthorizationCurrentUserObj;
+
+  @Field(() => String)
+  side_name: string;
 }

@@ -1,6 +1,7 @@
 {
   "admin": {
     "title": "Panel kontrolny administratora",
+    "title_short": "Admin",
     "nav": {
       "core": {
         "title": "Rdzeń",
@@ -144,6 +145,7 @@
       "title": "Ups! Coś poszło nie tak",
       "code": "Kod błędu: <code></code>",
       "no_connection_api": "Brak połączenia z API",
+      "access_denied": "Brak dostępu",
       "actions": {
         "back_home": "Strona główna",
         "contact": "Skontaktuj się z nami"

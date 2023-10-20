@@ -3,15 +3,12 @@
 # ------------------------------------------------------
 
 type AuthorizationAdminSessionsObj {
-  birthday: Int!
-  email: String!
-  group_id: Int!
-  id: String!
-  name: String!
-  newsletter: Boolean
+  side_name: String!
+  user: AuthorizationCurrentUserObj
 }
 
 type AuthorizationCoreSessionsObj {
+  side_name: String!
   user: AuthorizationCurrentUserObj
 }
 
