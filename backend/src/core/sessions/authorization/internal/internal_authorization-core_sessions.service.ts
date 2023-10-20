@@ -3,12 +3,13 @@ import { JwtService } from '@nestjs/jwt';
 import { UAParser } from 'ua-parser-js';
 import { Response } from 'express';
 
+import { InternalAuthorizationCoreSessionObj } from './dto/internal_authorization-core_sessions.obj';
+
 import { PrismaService } from '@/prisma/prisma.service';
 import { Ctx } from '@/types/context.type';
 import { CONFIG } from '@/config';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { convertUnixTime, currentDate } from '@/functions/date';
-import { User } from '@/utils/decorators/user.decorator';
 
 @Injectable()
 export class InternalAuthorizationCoreSessionsService {
@@ -26,7 +27,7 @@ export class InternalAuthorizationCoreSessionsService {
     });
   }
 
-  async authorization({ req, res }: Ctx): Promise<User> {
+  async authorization({ req, res }: Ctx): Promise<InternalAuthorizationCoreSessionObj> {
     const tokens = {
       accessToken: req.cookies[CONFIG.access_token.name],
       refreshToken: req.cookies[CONFIG.refresh_token.name]

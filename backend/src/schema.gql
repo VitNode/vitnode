@@ -38,6 +38,7 @@ type Mutation {
   create_core_groups(name: String!): CreateCoreGroupsObj!
   delete_avatar_core_members: String!
   signIn_core_sessions(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
+  signOut_admin_sessions: String!
   signOut_core_sessions: String!
   signUp_core_members(birthday: Int!, email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
   upload_avatar_core_members(file: Upload!): UploadCoreAttachmentsObj!

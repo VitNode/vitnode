@@ -1,3 +1,5 @@
+import { Callout } from 'nextra/components';
+
 # Authorization
 
 In VitNode we're implementing a custom authorization system, which gives us more flexibility and control over the authorization process. Our system use [Guards](https://docs.nestjs.com/guards) from NestJS to protect routes.
@@ -17,6 +19,11 @@ async show_core_members(@Args() args: ShowCoreMembersArgs): Promise<ShowCoreMemb
   return await this.service.show(args);
 }
 ```
+
+<Callout type="info" emoji="ℹ️">
+  If you need to protected a route with admin permissions you need to use the
+  `@UseGuards(AdminAuthGuards)` decorator.
+</Callout>
 
 ## Current user data
 

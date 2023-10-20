@@ -11,6 +11,7 @@ import { PrismaModule } from '../prisma/prisma.module';
 import { GlobalCoreSessionsModule } from './core/sessions/core_sessions.module';
 import { CoreModule } from './core/core.module';
 import { AdminModule } from './admin/admin.module';
+import { GlobalAdminSessionsModule } from './admin/sessions/admin_sessions.module';
 
 import { Ctx } from '@/types/context.type';
 
@@ -27,6 +28,7 @@ import { Ctx } from '@/types/context.type';
     JwtModule.register({ global: true }),
     PrismaModule,
     GlobalCoreSessionsModule,
+    GlobalAdminSessionsModule,
     CoreModule,
     AdminModule,
     ServeStaticModule.forRoot({
