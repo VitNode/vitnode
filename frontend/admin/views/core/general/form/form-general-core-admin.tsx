@@ -17,11 +17,13 @@ import { CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
+import { useGeneralSettingsAdminAPI } from './hooks/use-general-settings-admin-api';
 
 export const FormGeneralCoreAdmin = () => {
   const { session } = useSessionAdmin();
   const t = useTranslations('admin');
   const tCore = useTranslations('core');
+  const { isPending, mutateAsync } = useGeneralSettingsAdminAPI();
 
   const formSchema = z.object({
     name: z.string().nonempty({
@@ -38,9 +40,9 @@ export const FormGeneralCoreAdmin = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // TODO: Connect with API
-    // eslint-disable-next-line no-console
-    console.log(values);
+    await mutateAsync({
+      sideName: values.name
+    });
   };
 
   return (
@@ -61,7 +63,9 @@ export const FormGeneralCoreAdmin = () => {
             )}
           />
 
-          <Button type="submit">{tCore('save')}</Button>
+          <Button type="submit" loading={isPending}>
+            {tCore('save')}
+          </Button>
         </form>
       </CardContent>
     </Form>

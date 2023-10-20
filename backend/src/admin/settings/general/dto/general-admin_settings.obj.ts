@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class ShowGeneralAdminSettingsObj {
+export class GeneralAdminSettingsObj {
   @Field(() => String)
-  site_name: string;
+  side_name: string;
 }

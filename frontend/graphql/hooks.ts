@@ -53,11 +53,18 @@ export type CreateCoreGroupsObj = {
   name: Scalars['String']['output'];
 };
 
+export type GeneralAdminSettingsObj = {
+  __typename?: 'GeneralAdminSettingsObj';
+  side_name: Scalars['String']['output'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   create_core_groups: CreateCoreGroupsObj;
   delete_avatar_core_members: Scalars['String']['output'];
+  edit_general_admin_settings: GeneralAdminSettingsObj;
   signIn_core_sessions: Scalars['String']['output'];
+  signOut_admin_sessions: Scalars['String']['output'];
   signOut_core_sessions: Scalars['String']['output'];
   signUp_core_members: SignUpCoreMembersObj;
   upload_avatar_core_members: UploadCoreAttachmentsObj;
@@ -66,6 +73,11 @@ export type Mutation = {
 
 export type MutationCreate_Core_GroupsArgs = {
   name: Scalars['String']['input'];
+};
+
+
+export type MutationEdit_General_Admin_SettingsArgs = {
+  side_name: Scalars['String']['input'];
 };
 
 
@@ -104,7 +116,6 @@ export type Query = {
   authorization_admin_sessions: AuthorizationAdminSessionsObj;
   authorization_core_sessions: AuthorizationCoreSessionsObj;
   show_core_members: ShowCoreMembersObj;
-  show_general_admin_settings: ShowGeneralAdminSettingsObj;
 };
 
 
@@ -152,11 +163,6 @@ export enum ShowCoreMembersSortingColumnEnum {
   Reactions = 'reactions'
 }
 
-export type ShowGeneralAdminSettingsObj = {
-  __typename?: 'ShowGeneralAdminSettingsObj';
-  site_name: Scalars['String']['output'];
-};
-
 export type SignUpCoreMembersObj = {
   __typename?: 'SignUpCoreMembersObj';
   birthday: Scalars['Int']['output'];
@@ -190,6 +196,13 @@ export type UploadCoreAttachmentsObj = {
   position: Scalars['Int']['output'];
   url: Scalars['String']['output'];
 };
+
+export type Edit_General_Admin_SettingsMutationVariables = Exact<{
+  sideName: Scalars['String']['input'];
+}>;
+
+
+export type Edit_General_Admin_SettingsMutation = { __typename?: 'Mutation', edit_general_admin_settings: { __typename?: 'GeneralAdminSettingsObj', side_name: string } };
 
 export type Delete_Avatar_Core_MembersMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -234,17 +247,19 @@ export type Authorization_Admin_SessionsQueryVariables = Exact<{ [key: string]: 
 
 export type Authorization_Admin_SessionsQuery = { __typename?: 'Query', authorization_admin_sessions: { __typename?: 'AuthorizationAdminSessionsObj', side_name: string, user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null } };
 
-export type Show_General_Admin_SettingsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Show_General_Admin_SettingsQuery = { __typename?: 'Query', show_general_admin_settings: { __typename?: 'ShowGeneralAdminSettingsObj', site_name: string } };
-
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', side_name: string, user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null } };
 
 
+export const Edit_General_Admin_Settings = gql`
+    mutation Edit_general_admin_settings($sideName: String!) {
+  edit_general_admin_settings(side_name: $sideName) {
+    side_name
+  }
+}
+    `;
 export const Delete_Avatar_Core_Members = gql`
     mutation Delete_avatar_core_members {
   delete_avatar_core_members
@@ -328,13 +343,6 @@ export const Authorization_Admin_Sessions = gql`
       }
     }
     side_name
-  }
-}
-    `;
-export const Show_General_Admin_Settings = gql`
-    query Show_general_admin_settings {
-  show_general_admin_settings {
-    site_name
   }
 }
     `;

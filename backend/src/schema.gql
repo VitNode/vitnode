@@ -34,9 +34,14 @@ type CreateCoreGroupsObj {
   name: String!
 }
 
+type GeneralAdminSettingsObj {
+  side_name: String!
+}
+
 type Mutation {
   create_core_groups(name: String!): CreateCoreGroupsObj!
   delete_avatar_core_members: String!
+  edit_general_admin_settings(side_name: String!): GeneralAdminSettingsObj!
   signIn_core_sessions(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   signOut_admin_sessions: String!
   signOut_core_sessions: String!
@@ -56,7 +61,6 @@ type Query {
   authorization_admin_sessions: AuthorizationAdminSessionsObj!
   authorization_core_sessions: AuthorizationCoreSessionsObj!
   show_core_members(cursor: String, first: Int!, search: String, sortBy: [SortByArgs!]): ShowCoreMembersObj!
-  show_general_admin_settings: ShowGeneralAdminSettingsObj!
 }
 
 type ShowCoreMembers {
@@ -92,10 +96,6 @@ enum ShowCoreMembersSortingColumnEnum {
   name_seo
   posts
   reactions
-}
-
-type ShowGeneralAdminSettingsObj {
-  site_name: String!
 }
 
 type SignUpCoreMembersObj {

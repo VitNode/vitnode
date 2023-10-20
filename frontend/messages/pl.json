@@ -33,6 +33,7 @@
     "test": "Test PL",
     "loading": "Czekaj, ładowanie...",
     "save": "Zapisz",
+    "saved_success": "Zapisano pomyślnie.",
     "user-bar": {
       "sign_in": "Zaloguj się",
       "sign_up": "Zarejestruj się",
@@ -146,6 +147,7 @@
       "code": "Kod błędu: <code></code>",
       "no_connection_api": "Brak połączenia z API",
       "access_denied": "Brak dostępu",
+      "internal_server_error": "Wewnętrzny błąd serwera",
       "actions": {
         "back_home": "Strona główna",
         "contact": "Skontaktuj się z nami"
