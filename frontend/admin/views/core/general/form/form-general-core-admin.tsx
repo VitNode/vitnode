@@ -20,7 +20,7 @@ import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
 import { useGeneralSettingsAdminAPI } from './hooks/use-general-settings-admin-api';
 
 export const FormGeneralCoreAdmin = () => {
-  const { session } = useSessionAdmin();
+  const { side_name } = useSessionAdmin();
   const t = useTranslations('admin');
   const tCore = useTranslations('core');
   const { isPending, mutateAsync } = useGeneralSettingsAdminAPI();
@@ -34,7 +34,7 @@ export const FormGeneralCoreAdmin = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: session?.authorization_admin_sessions.side_name
+      name: side_name
     },
     mode: 'onChange'
   });

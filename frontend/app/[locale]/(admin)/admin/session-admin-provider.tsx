@@ -12,6 +12,8 @@ import {
 import { SessionAdminContext } from '@/admin/hooks/use-session-admin';
 import { APIKeys } from '@/graphql/api-keys';
 
+import { ErrorView } from '../../../../themes/default/core/views/global/error/error-view';
+
 interface Props {
   children: ReactNode;
   initialDataSession: Authorization_Admin_SessionsQuery | undefined;
@@ -27,8 +29,15 @@ export const SessionAdminProvider = ({ children, initialDataSession }: Props) =>
     initialData: initialDataSession
   });
 
+  if (!data) return <ErrorView code="403" />;
+
   return (
-    <SessionAdminContext.Provider value={{ session: data }}>
+    <SessionAdminContext.Provider
+      value={{
+        session: data.authorization_admin_sessions.user,
+        side_name: data.authorization_admin_sessions.side_name
+      }}
+    >
       {children}
     </SessionAdminContext.Provider>
   );

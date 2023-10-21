@@ -1,6 +1,5 @@
 import { TabsTrigger, TabsTriggerProps } from './trigger-tabs';
-
-import { cx } from '../../functions/classnames';
+import { cx } from '@/functions/classnames';
 
 interface Props {
   items: Omit<TabsTriggerProps, 'className'>[];
@@ -8,6 +7,8 @@ interface Props {
 }
 
 export const Tabs = ({ className, items }: Props) => {
+  // TODO: Improve this component
+
   return (
     <div className={cx('flex', className)}>
       <div className="h-14 rounded-md bg-card p-2 text-muted-foreground flex overflow-x-auto">

@@ -1,13 +1,15 @@
 import { createContext, useContext } from 'react';
 
-import { Authorization_Admin_SessionsQuery } from '@/graphql/hooks';
+import { AuthorizationCurrentUserObj } from '@/graphql/hooks';
 
 interface Args {
-  session: Authorization_Admin_SessionsQuery | undefined;
+  session: AuthorizationCurrentUserObj | undefined | null;
+  side_name: string;
 }
 
 export const SessionAdminContext = createContext<Args>({
-  session: undefined
+  session: undefined,
+  side_name: ''
 });
 
 export const useSessionAdmin = () => useContext(SessionAdminContext);

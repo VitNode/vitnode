@@ -16,8 +16,10 @@
         "groups": "Grupy"
       }
     },
+    "home_page": "Strona główna",
     "core": {
       "general": {
+        "title": "Ogólne ustawienia",
         "main": {
           "title": "Ustawienia główne",
           "form": {
@@ -41,7 +43,13 @@
       "my_profile": "Mój profil",
       "settings": "Ustawienia",
       "mod_cp": "Moderator Panel",
-      "admin_cp": "Admin Panel"
+      "admin_cp": "Admin Panel",
+      "theme": {
+        "title": "Motyw",
+        "light": "Jasny",
+        "dark": "Ciemny",
+        "system": "System"
+      }
     },
     "forms": {
       "empty": "To pole jest wymagane.",

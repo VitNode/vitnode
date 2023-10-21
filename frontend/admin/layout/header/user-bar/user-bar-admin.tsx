@@ -1,41 +1,48 @@
-import { Check, KeyRound, LogOut, Moon, Settings, Shield, Sun, User } from 'lucide-react';
+'use client';
+
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
+import { Check, LogOut, Moon, Sun } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuSeparator,
   DropdownMenuLabel,
-  DropdownMenuSub,
-  DropdownMenuSubTrigger,
   DropdownMenuPortal,
-  DropdownMenuSubContent
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { useSession } from '@/hooks/core/use-session';
-import { useSignOutAPI } from '@/hooks/core/sign/out/use-sign-out-api';
-import { useRouter } from '@/i18n';
+import { Button } from '@/components/ui/button';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
+import { useSignOutAPI } from '@/hooks/core/sign/out/use-sign-out-api';
+import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
 
-export const AuthUserBar = () => {
+export const UserBarAdmin = () => {
   const t = useTranslations('core');
-  const { push } = useRouter();
-  const { session } = useSession();
+  const { session } = useSessionAdmin();
   const { mutateAsync } = useSignOutAPI();
   const { setTheme, theme } = useTheme();
 
   if (!session) return null;
-  const { email, id, is_admin, name } = session;
+  const { avatar, email, id, name } = session;
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="rounded-full" size="icon">
-          <AvatarUser sizeInRem={1.75} />
+          <AvatarUser
+            user={{
+              avatar,
+              name,
+              id
+            }}
+            sizeInRem={1.75}
+          />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end">
@@ -45,19 +52,6 @@ export const AuthUserBar = () => {
             <p className="text-xs leading-none text-muted-foreground">{email}</p>
           </div>
         </DropdownMenuLabel>
-
-        <DropdownMenuSeparator />
-
-        <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => push(`/profiles/${id}`)}>
-            <User className="mr-2 h-4 w-4" />
-            <span>{t('user-bar.my_profile')}</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => push('/settings')}>
-            <Settings className="mr-2 h-4 w-4" />
-            <span>{t('user-bar.settings')}</span>
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
 
@@ -86,23 +80,6 @@ export const AuthUserBar = () => {
             </DropdownMenuPortal>
           </DropdownMenuSub>
         </DropdownMenuGroup>
-
-        {is_admin && (
-          <>
-            <DropdownMenuSeparator />
-
-            <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => push('/modcp')}>
-                <Shield className="mr-2 h-4 w-4" />
-                <span>{t('user-bar.mod_cp')}</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => push('/admin')}>
-                <KeyRound className="mr-2 h-4 w-4" />
-                <span>{t('user-bar.admin_cp')}</span>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-          </>
-        )}
 
         <DropdownMenuSeparator />
 
