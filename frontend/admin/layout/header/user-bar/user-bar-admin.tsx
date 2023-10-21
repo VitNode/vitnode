@@ -45,7 +45,7 @@ export const UserBarAdmin = () => {
           />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end">
+      <DropdownMenuContent className="w-60" align="end">
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="font-medium leading-none text-base">{name}</p>
@@ -63,11 +63,7 @@ export const UserBarAdmin = () => {
               <span>{t('user-bar.theme.title')}</span>
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
-              <DropdownMenuSubContent>
-                <DropdownMenuItem onClick={() => setTheme('system')}>
-                  {theme === 'system' && <Check className="mr-2 h-4 w-4" />}
-                  <span>{t('user-bar.theme.system')}</span>
-                </DropdownMenuItem>
+              <DropdownMenuSubContent className="w-40">
                 <DropdownMenuItem onClick={() => setTheme('light')}>
                   {theme === 'light' && <Check className="mr-2 h-4 w-4" />}
                   <span>{t('user-bar.theme.light')}</span>
@@ -75,6 +71,10 @@ export const UserBarAdmin = () => {
                 <DropdownMenuItem onClick={() => setTheme('dark')}>
                   {theme === 'dark' && <Check className="mr-2 h-4 w-4" />}
                   <span>{t('user-bar.theme.dark')}</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme('system')}>
+                  {theme === 'system' && <Check className="mr-2 h-4 w-4" />}
+                  <span>{t('user-bar.theme.system')}</span>
                 </DropdownMenuItem>
               </DropdownMenuSubContent>
             </DropdownMenuPortal>

@@ -4,7 +4,7 @@ import { getTranslator } from 'next-intl/server';
 import { Metadata } from 'next';
 
 import { AdminLayout } from '@/admin/layout/admin-layout';
-import { SessionAdminProvider } from '../session-admin-provider';
+import { SessionAdminProvider } from './session-admin-provider';
 import { redirect } from '@/i18n';
 import { CONFIG } from '@/config';
 import { fetcher } from '@/graphql/fetcher';

@@ -38,7 +38,7 @@ export const AuthUserBar = () => {
           <AvatarUser sizeInRem={1.75} />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end">
+      <DropdownMenuContent className="w-72" align="end">
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="font-medium leading-none text-base">{name}</p>
@@ -69,11 +69,7 @@ export const AuthUserBar = () => {
               <span>{t('user-bar.theme.title')}</span>
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
-              <DropdownMenuSubContent>
-                <DropdownMenuItem onClick={() => setTheme('system')}>
-                  {theme === 'system' && <Check className="mr-2 h-4 w-4" />}
-                  <span>{t('user-bar.theme.system')}</span>
-                </DropdownMenuItem>
+              <DropdownMenuSubContent className="w-40">
                 <DropdownMenuItem onClick={() => setTheme('light')}>
                   {theme === 'light' && <Check className="mr-2 h-4 w-4" />}
                   <span>{t('user-bar.theme.light')}</span>
@@ -81,6 +77,10 @@ export const AuthUserBar = () => {
                 <DropdownMenuItem onClick={() => setTheme('dark')}>
                   {theme === 'dark' && <Check className="mr-2 h-4 w-4" />}
                   <span>{t('user-bar.theme.dark')}</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme('system')}>
+                  {theme === 'system' && <Check className="mr-2 h-4 w-4" />}
+                  <span>{t('user-bar.theme.system')}</span>
                 </DropdownMenuItem>
               </DropdownMenuSubContent>
             </DropdownMenuPortal>
@@ -96,7 +96,7 @@ export const AuthUserBar = () => {
                 <Shield className="mr-2 h-4 w-4" />
                 <span>{t('user-bar.mod_cp')}</span>
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => push('/admin')}>
+              <DropdownMenuItem onClick={() => window.open('/admin', '_blank')}>
                 <KeyRound className="mr-2 h-4 w-4" />
                 <span>{t('user-bar.admin_cp')}</span>
               </DropdownMenuItem>

@@ -12,8 +12,8 @@ export const HeaderAdmin = () => {
     <header className="h-16 sticky top-0 z-50 bg-card backdrop-blur flex items-center gap-4 justify-between px-5">
       <Link href="/admin/core">VitNode</Link>
 
-      <div className="flex items-center gap-4 justify-between">
-        <Link href="/" className={buttonVariants({ variant: 'ghost' })}>
+      <div className="items-center gap-4 justify-between hidden sm:flex">
+        <Link href="/" className={buttonVariants({ variant: 'ghost' })} target="_blank">
           <Home />
           <span>{t('home_page')}</span>
         </Link>

@@ -12,7 +12,7 @@ import {
 import { SessionAdminContext } from '@/admin/hooks/use-session-admin';
 import { APIKeys } from '@/graphql/api-keys';
 
-import { ErrorView } from '../../../../themes/default/core/views/global/error/error-view';
+import { ErrorView } from '../../../../../themes/default/core/views/global/error/error-view';
 
 interface Props {
   children: ReactNode;
