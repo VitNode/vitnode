@@ -1,19 +1,15 @@
 import { Moon, Sun } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { useTheme } from 'next-themes';
 
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 
-export const ThemeOptionsDrawerAdmin = () => {
-  const { setTheme } = useTheme();
-  const t = useTranslations('core');
+import { ItemsThemeUserBarAdmin } from '../../user-bar/theme/items/items-theme-user-bar-admin';
 
+export const ThemeOptionsDrawerAdmin = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -24,15 +20,7 @@ export const ThemeOptionsDrawerAdmin = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')}>
-          {t('user-bar.theme.light')}
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
-          {t('user-bar.theme.dark')}
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
-          {t('user-bar.theme.system')}
-        </DropdownMenuItem>
+        <ItemsThemeUserBarAdmin />
       </DropdownMenuContent>
     </DropdownMenu>
   );

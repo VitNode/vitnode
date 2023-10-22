@@ -1,8 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useTheme } from 'next-themes';
-import { Check, LogOut, Moon, Sun } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 
 import {
   DropdownMenu,
@@ -10,23 +9,19 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
 import { useSignOutAPI } from '@/hooks/core/sign/out/use-sign-out-api';
 import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
+import { ThemeUserBarAdmin } from './theme/theme-user-bar-admin';
 
 export const UserBarAdmin = () => {
   const t = useTranslations('core');
   const { session } = useSessionAdmin();
   const { mutateAsync } = useSignOutAPI();
-  const { setTheme, theme } = useTheme();
 
   if (!session) return null;
   const { avatar, email, id, name } = session;
@@ -54,33 +49,7 @@ export const UserBarAdmin = () => {
         </DropdownMenuLabel>
 
         <DropdownMenuSeparator />
-
-        <DropdownMenuGroup>
-          <DropdownMenuSub>
-            <DropdownMenuSubTrigger>
-              <Sun className="mr-2 h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute mr-2 h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              <span>{t('user-bar.theme.title')}</span>
-            </DropdownMenuSubTrigger>
-            <DropdownMenuPortal>
-              <DropdownMenuSubContent className="w-40">
-                <DropdownMenuItem onClick={() => setTheme('light')}>
-                  {theme === 'light' && <Check className="mr-2 h-4 w-4" />}
-                  <span>{t('user-bar.theme.light')}</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme('dark')}>
-                  {theme === 'dark' && <Check className="mr-2 h-4 w-4" />}
-                  <span>{t('user-bar.theme.dark')}</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme('system')}>
-                  {theme === 'system' && <Check className="mr-2 h-4 w-4" />}
-                  <span>{t('user-bar.theme.system')}</span>
-                </DropdownMenuItem>
-              </DropdownMenuSubContent>
-            </DropdownMenuPortal>
-          </DropdownMenuSub>
-        </DropdownMenuGroup>
-
+        <ThemeUserBarAdmin />
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
