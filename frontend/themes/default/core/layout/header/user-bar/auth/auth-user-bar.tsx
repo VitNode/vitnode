@@ -15,6 +15,7 @@ import { useSession } from '@/hooks/core/use-session';
 import { useSignOutAPI } from '@/hooks/core/sign/out/use-sign-out-api';
 import { useRouter } from '@/i18n';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
+import { ThemeAuthUserBar } from './theme-auth-user-bar';
 
 export const AuthUserBar = () => {
   const t = useTranslations('core');
@@ -32,14 +33,16 @@ export const AuthUserBar = () => {
           <AvatarUser sizeInRem={1.75} />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end">
+      <DropdownMenuContent className="w-72" align="end">
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="font-medium leading-none text-base">{name}</p>
             <p className="text-xs leading-none text-muted-foreground">{email}</p>
           </div>
         </DropdownMenuLabel>
+
         <DropdownMenuSeparator />
+
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={() => push(`/profiles/${id}`)}>
             <User className="mr-2 h-4 w-4" />
@@ -51,6 +54,10 @@ export const AuthUserBar = () => {
           </DropdownMenuItem>
         </DropdownMenuGroup>
 
+        <DropdownMenuSeparator />
+
+        <ThemeAuthUserBar />
+
         {is_admin && (
           <>
             <DropdownMenuSeparator />
@@ -60,7 +67,7 @@ export const AuthUserBar = () => {
                 <Shield className="mr-2 h-4 w-4" />
                 <span>{t('user-bar.mod_cp')}</span>
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => push('/admin')}>
+              <DropdownMenuItem onClick={() => window.open('/admin', '_blank')}>
                 <KeyRound className="mr-2 h-4 w-4" />
                 <span>{t('user-bar.admin_cp')}</span>
               </DropdownMenuItem>

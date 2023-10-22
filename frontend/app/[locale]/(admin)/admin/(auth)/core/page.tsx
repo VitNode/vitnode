@@ -2,7 +2,7 @@ import { Button } from '../../../../../../components/ui/button';
 
 export default function Page() {
   return (
-    <div className="p-6">
+    <div>
       <div className="p-6 bg-card flex gap-4">
         <Button variant="default">Test</Button>
         <Button variant="destructive">Test</Button>

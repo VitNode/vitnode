@@ -1,21 +1,35 @@
 'use client';
 
 import { Cpu, Users } from 'lucide-react';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
+import { useSelectedLayoutSegments } from 'next/navigation';
 
 import { ItemListNavAdmin } from './item/item-list-nav-admin';
+import { cx } from '@/functions/classnames';
 
-export const ListNavAdmin = () => {
-  const [activeItem, setActiveItem] = useState('core');
+interface Props {
+  children?: ReactNode;
+  className?: string;
+  onClickItem?: () => void;
+}
+
+export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
+  const segments = useSelectedLayoutSegments();
+  const [activeItem, setActiveItem] = useState(segments.at(0) ?? 'core');
 
   return (
-    <Accordion.Root type="single" defaultValue={activeItem} className="p-2 flex flex-col gap-2">
+    <Accordion.Root
+      type="single"
+      defaultValue={activeItem}
+      className={cx('flex flex-col gap-2', className)}
+    >
       <ItemListNavAdmin
         id="core"
         icon={Cpu}
         activeItem={activeItem}
         setActiveItem={setActiveItem}
+        onClickItem={onClickItem}
         items={[
           {
             id: 'dashboard',
@@ -40,6 +54,7 @@ export const ListNavAdmin = () => {
         icon={Users}
         activeItem={activeItem}
         setActiveItem={setActiveItem}
+        onClickItem={onClickItem}
         items={[
           {
             id: 'list',
@@ -51,6 +66,7 @@ export const ListNavAdmin = () => {
           }
         ]}
       />
+      {children}
     </Accordion.Root>
   );
 };

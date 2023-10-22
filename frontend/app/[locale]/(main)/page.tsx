@@ -1,13 +1,11 @@
 import { useTranslations } from 'next-intl';
 
-import { ModeToggle } from '@/components/modeToggle/mode-toggle';
-
 export default function Page() {
   const t = useTranslations('core');
 
   return (
     <h1>
-      {t('test')} <ModeToggle />
+      {t('test')}
       <br />
       <div className="bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
         <div>

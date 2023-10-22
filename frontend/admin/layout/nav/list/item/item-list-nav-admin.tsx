@@ -17,9 +17,17 @@ interface Props {
     id: string;
   }[];
   setActiveItem: Dispatch<SetStateAction<string>>;
+  onClickItem?: () => void;
 }
 
-export const ItemListNavAdmin = ({ activeItem, icon, id, items, setActiveItem }: Props) => {
+export const ItemListNavAdmin = ({
+  activeItem,
+  icon,
+  id,
+  items,
+  onClickItem,
+  setActiveItem
+}: Props) => {
   const Icon = icon;
   const pathname = usePathname();
   const pathnameId = pathname.split('/').at(2);
@@ -31,9 +39,9 @@ export const ItemListNavAdmin = ({ activeItem, icon, id, items, setActiveItem }:
         <Accordion.Trigger
           className={cx(
             'w-full justify-start flex gap-2',
-            buttonVariants({ variant: id === pathnameId ? 'outline' : 'ghost' }),
+            buttonVariants({ variant: id === pathnameId ? 'default' : 'ghost' }),
             {
-              'font-semibold text-inherit': id === pathnameId
+              'font-semibold': id === pathnameId
             }
           )}
           onClick={() => setActiveItem(id)}
@@ -51,13 +59,14 @@ export const ItemListNavAdmin = ({ activeItem, icon, id, items, setActiveItem }:
       </Accordion.Header>
 
       <Accordion.Content className="transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden">
-        <ul className="p-2">
+        <ul className="py-2">
           {items.map(el => (
             <LinkItemListNavAdmin
               key={el.id}
               href={`/admin/${id}${el.href}`}
               id={el.id}
               primaryId={id}
+              onClick={onClickItem}
             />
           ))}
         </ul>

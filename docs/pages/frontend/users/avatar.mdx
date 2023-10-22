@@ -6,7 +6,7 @@ To use the Avatar component you have to import from `@/components/user/avatar/av
 Component requires `sizeInRem` prop to be passed.
 
 <Callout type="info" emoji="ℹ️">
-  Remember: 1rem === 16px
+  1rem === 16px
 </Callout>
 
 ## Current User
@@ -21,12 +21,19 @@ import { AvatarUser } from '@/components/user/avatar/avatar-user';
 
 ## Other Users
 
-<Callout type="warning" emoji="⚠️">
-  This page is in progress.
-</Callout>
+If you want to display other user's avatar, you have to pass `user` prop with:
+
+- `id` - user's id
+- `name` - user's name
+- `avatar` - user's AvatarObj interface,
 
 ```tsx
-import { AvatarUser } from '@/components/user/avatar/avatar-user';
-
-<AvatarUser sizeInRem={1.75} />;
+<AvatarUser
+  user={{
+    avatar,
+    name,
+    id
+  }}
+  sizeInRem={1.75}
+/>
 ```

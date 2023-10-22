@@ -1,19 +1,15 @@
-'use client';
-
 import { Moon, Sun } from 'lucide-react';
-import { useTheme } from 'next-themes';
 
-import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
 
-export const ModeToggle = () => {
-  const { setTheme } = useTheme();
+import { ItemsThemeUserBarAdmin } from '../../user-bar/theme/items/items-theme-user-bar-admin';
 
+export const ThemeOptionsDrawerAdmin = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -24,9 +20,7 @@ export const ModeToggle = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')}>Light</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>Dark</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>System</DropdownMenuItem>
+        <ItemsThemeUserBarAdmin />
       </DropdownMenuContent>
     </DropdownMenu>
   );

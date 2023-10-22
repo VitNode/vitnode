@@ -8,9 +8,10 @@ interface Props {
   href: string;
   id: string;
   primaryId: string;
+  onClick?: () => void;
 }
 
-export const LinkItemListNavAdmin = ({ href, id, primaryId }: Props) => {
+export const LinkItemListNavAdmin = ({ href, id, onClick, primaryId }: Props) => {
   const t = useTranslations('admin');
   const pathname = usePathname();
 
@@ -19,16 +20,17 @@ export const LinkItemListNavAdmin = ({ href, id, primaryId }: Props) => {
       <Link
         href={href}
         className={cx(
-          buttonVariants({ variant: pathname === href ? 'outline' : 'ghost' }),
+          buttonVariants({ variant: 'ghost' }),
           'w-full justify-start text-muted-foreground',
           {
-            'font-semibold text-inherit': pathname === href
+            'font-semibold text-primary': pathname === href
           }
         )}
+        onClick={onClick}
       >
         {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
         {/* @ts-expect-error */}
-        <span className="ml-5">{t(`nav.${primaryId}.${id}`)}</span>
+        <span className="ml-7">{t(`nav.${primaryId}.${id}`)}</span>
       </Link>
     </li>
   );
