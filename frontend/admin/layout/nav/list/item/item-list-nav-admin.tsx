@@ -17,9 +17,17 @@ interface Props {
     id: string;
   }[];
   setActiveItem: Dispatch<SetStateAction<string>>;
+  onClickItem?: () => void;
 }
 
-export const ItemListNavAdmin = ({ activeItem, icon, id, items, setActiveItem }: Props) => {
+export const ItemListNavAdmin = ({
+  activeItem,
+  icon,
+  id,
+  items,
+  onClickItem,
+  setActiveItem
+}: Props) => {
   const Icon = icon;
   const pathname = usePathname();
   const pathnameId = pathname.split('/').at(2);
@@ -58,6 +66,7 @@ export const ItemListNavAdmin = ({ activeItem, icon, id, items, setActiveItem }:
               href={`/admin/${id}${el.href}`}
               id={el.id}
               primaryId={id}
+              onClick={onClickItem}
             />
           ))}
         </ul>

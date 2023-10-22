@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n';
 import { UserBarAdmin } from './user-bar/user-bar-admin';
 import { buttonVariants } from '@/components/ui/button';
+import { DrawerAdmin } from './drawer/drawer-admin';
 
 export const HeaderAdmin = () => {
   const t = useTranslations('admin');
@@ -19,6 +20,8 @@ export const HeaderAdmin = () => {
         </Link>
         <UserBarAdmin />
       </div>
+
+      <DrawerAdmin />
     </header>
   );
 };

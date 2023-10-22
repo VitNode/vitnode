@@ -8,9 +8,10 @@ interface Props {
   href: string;
   id: string;
   primaryId: string;
+  onClick?: () => void;
 }
 
-export const LinkItemListNavAdmin = ({ href, id, primaryId }: Props) => {
+export const LinkItemListNavAdmin = ({ href, id, onClick, primaryId }: Props) => {
   const t = useTranslations('admin');
   const pathname = usePathname();
 
@@ -25,6 +26,7 @@ export const LinkItemListNavAdmin = ({ href, id, primaryId }: Props) => {
             'font-semibold text-primary': pathname === href
           }
         )}
+        onClick={onClick}
       >
         {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
         {/* @ts-expect-error */}
