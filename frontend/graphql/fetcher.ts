@@ -112,3 +112,10 @@ export async function fetcher<TData, TVariables>({
 
   return json.data;
 }
+
+export interface ErrorType {
+  extensions: {
+    code: string;
+  };
+  message: string;
+}

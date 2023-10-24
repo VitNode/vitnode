@@ -1,0 +1,21 @@
+query Show_core_groups(
+  $first: Int!
+  $cursor: Int
+  $search: String
+  $sortBy: [ShowCoreGroupsSortByArgs!]
+) {
+  show_core_groups(first: $first, cursor: $cursor, search: $search, sortBy: $sortBy) {
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      startCursor
+      totalCount
+    }
+    edges {
+      created
+      id
+      name
+    }
+  }
+}

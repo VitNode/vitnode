@@ -7,11 +7,14 @@ import { DataTable } from '@/components/data-table/data-table';
 import { buttonVariants } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Link } from '@/i18n';
+import { useGroupsAdminAPI } from './hooks/use-groups-admin-api';
+import { Loader } from '@/components/loader/loader';
 
 export const TableGroupsUsersAdmin = () => {
   const t = useTranslations('admin');
+  const { isLoading } = useGroupsAdminAPI();
 
-  // return <Loader />;
+  if (isLoading) return <Loader />;
 
   return (
     <DataTable
