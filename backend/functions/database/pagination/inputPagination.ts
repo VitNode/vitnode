@@ -1,17 +1,17 @@
-interface Args {
-  cursor: string | undefined;
+interface Args<T> {
+  cursor: T | undefined;
   first: number;
 }
 
-interface Return {
+interface Return<T> {
   skip: number;
   take: number;
   cursor?: {
-    id: string;
+    id: T;
   };
 }
 
-export const inputPagination = ({ cursor, first }: Args): Return => {
+export function inputPagination<T>({ cursor, first }: Args<T>): Return<T> {
   if (!cursor) {
     return {
       take: first,
@@ -26,4 +26,4 @@ export const inputPagination = ({ cursor, first }: Args): Return => {
       id: cursor
     }
   };
-};
+}

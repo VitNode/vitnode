@@ -37,8 +37,9 @@ model core_members {
 }
 
 model core_groups {
-  id                Int                 @id @default(autoincrement())
+  id                Int                 @id @unique @default(autoincrement())
   name              String              @db.VarChar(255)
+  created           Int
   core_members      core_members[]
   core_admin_access core_admin_access[]
 }
@@ -63,12 +64,13 @@ model core_sessions {
 }
 
 model core_admin_access {
-  id          String        @id @default(uuid())
+  id          String        @id @unique @default(uuid())
   group       core_groups?  @relation(references: [id], fields: [group_id])
   group_id    Int?
   member      core_members? @relation(references: [id], fields: [member_id])
   member_id   String?
   permissions String        @db.Text
+  created     Int
 }
 
 model core_admin_sessions {

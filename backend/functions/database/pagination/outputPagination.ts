@@ -1,11 +1,11 @@
 import { PageInfo } from '@/types/database/pagination.type';
 
 type DataInterface<T> = T & {
-  id: string;
+  id: string | number;
 };
 
 interface Args<T> {
-  cursor: string | undefined;
+  cursor: string | number | undefined;
   edges: DataInterface<T>[];
   first: number;
   totalCount: number;
@@ -17,11 +17,16 @@ interface Return<T> {
 }
 
 export function outputPagination<T>({ edges, first, totalCount }: Args<T>): Return<T> {
+  const cursor = {
+    start: edges.at(0)?.id,
+    end: edges.at(-1)?.id
+  };
+
   return {
     pageInfo: {
       hasNextPage: edges.length === first,
-      startCursor: edges.at(0)?.id ?? '',
-      endCursor: edges.at(-1)?.id ?? '',
+      startCursor: cursor.start ? `${cursor.start}` : '',
+      endCursor: cursor.end ? `${cursor.end}` : '',
       totalCount,
       count: edges.length
     },
