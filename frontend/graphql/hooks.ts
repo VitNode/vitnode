@@ -283,14 +283,15 @@ export type Authorization_Admin_SessionsQueryVariables = Exact<{ [key: string]: 
 export type Authorization_Admin_SessionsQuery = { __typename?: 'Query', authorization_admin_sessions: { __typename?: 'AuthorizationAdminSessionsObj', side_name: string, user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null } };
 
 export type Show_Core_GroupsQueryVariables = Exact<{
-  first: Scalars['Int']['input'];
+  first?: InputMaybe<Scalars['Int']['input']>;
   cursor?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<Array<ShowCoreGroupsSortByArgs> | ShowCoreGroupsSortByArgs>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type Show_Core_GroupsQuery = { __typename?: 'Query', show_core_groups: { __typename?: 'ShowCoreGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number }, edges: Array<{ __typename?: 'ShowCoreGroups', created: number, id: number, name: string }> } };
+export type Show_Core_GroupsQuery = { __typename?: 'Query', show_core_groups: { __typename?: 'ShowCoreGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowCoreGroups', created: number, id: number, name: string }> } };
 
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -392,12 +393,13 @@ export const Authorization_Admin_Sessions = gql`
 }
     `;
 export const Show_Core_Groups = gql`
-    query Show_core_groups($first: Int!, $cursor: Int, $search: String, $sortBy: [ShowCoreGroupsSortByArgs!]) {
+    query Show_core_groups($first: Int, $cursor: Int, $search: String, $sortBy: [ShowCoreGroupsSortByArgs!], $last: Int) {
   show_core_groups(
     first: $first
     cursor: $cursor
     search: $search
     sortBy: $sortBy
+    last: $last
   ) {
     pageInfo {
       count
@@ -405,6 +407,7 @@ export const Show_Core_Groups = gql`
       hasNextPage
       startCursor
       totalCount
+      hasPreviousPage
     }
     edges {
       created

@@ -37,7 +37,7 @@ export function inputPagination<T>({ cursor, first, last }: Args<T>): Return<T> 
   }
 
   return {
-    take: first + 1 || -last - 1,
+    take: last ? -last - 1 : first + 1,
     skip: 1, // Skip the cursor
     cursor: {
       id: cursor

@@ -12,20 +12,16 @@ import { Loader } from '@/components/loader/loader';
 
 export const TableGroupsUsersAdmin = () => {
   const t = useTranslations('admin');
-  const { isLoading } = useGroupsAdminAPI();
+  const { data, isFetching, isLoading } = useGroupsAdminAPI();
 
-  if (isLoading) return <Loader />;
+  if (isLoading && !isFetching) return <Loader />;
+  if (!data) return <Loader />;
 
   return (
     <DataTable
-      pageInfo={{
-        hasNextPage: false,
-        hasPreviousPage: false,
-        endCursor: '',
-        startCursor: '',
-        count: 0,
-        totalCount: 0
-      }}
+      data={data.show_core_groups.edges}
+      pageInfo={data.show_core_groups.pageInfo}
+      defaultItemsPerPage={10}
       columns={[
         {
           header: t('users.groups.table.name'),
@@ -41,7 +37,7 @@ export const TableGroupsUsersAdmin = () => {
             const data = row.original;
 
             return (
-              <div>
+              <div className="flex items-center justify-end">
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
@@ -63,18 +59,6 @@ export const TableGroupsUsersAdmin = () => {
               </div>
             );
           }
-        }
-      ]}
-      data={[
-        {
-          id: '1',
-          name: 'Admin',
-          users: 1
-        },
-        {
-          id: '2',
-          name: 'User',
-          users: 1
         }
       ]}
     />

@@ -1,4 +1,5 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
+import { useSearchParams } from 'next/navigation';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -6,29 +7,30 @@ import {
   Show_Core_GroupsQuery,
   Show_Core_GroupsQueryVariables
 } from '@/graphql/hooks';
+import { APIKeys } from '@/graphql/api-keys';
 
 export const useGroupsAdminAPI = () => {
-  return useInfiniteQuery({
-    queryKey: [],
-    queryFn: async () =>
-      await fetcher<Show_Core_GroupsQuery, Show_Core_GroupsQueryVariables>({
+  const searchParams = useSearchParams();
+  const pagination = {
+    first: searchParams.get('first') ?? 0,
+    last: searchParams.get('last'),
+    cursor: searchParams.get('cursor')
+  };
+
+  return useQuery({
+    queryKey: [APIKeys.GROUPS, { ...pagination }],
+    queryFn: async () => {
+      const defaultFirst = !pagination.last ? 10 : null;
+
+      return await fetcher<Show_Core_GroupsQuery, Show_Core_GroupsQueryVariables>({
         query: Show_Core_Groups,
         variables: {
-          first: 10
+          first: pagination.first ? +pagination.first : defaultFirst,
+          last: pagination.last ? +pagination.last : null,
+          cursor: pagination.cursor ? +pagination.cursor : null
         }
-      }),
-    initialPageParam: {
-      cursor: ''
+      });
     },
-    getNextPageParam: lastPage => {
-      if (
-        lastPage.show_core_groups.pageInfo.hasNextPage &&
-        lastPage.show_core_groups.pageInfo.endCursor
-      ) {
-        return {
-          cursor: lastPage.show_core_groups.pageInfo.endCursor
-        };
-      }
-    }
+    placeholderData: previousData => previousData
   });
 };

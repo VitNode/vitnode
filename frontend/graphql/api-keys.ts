@@ -1,4 +1,5 @@
 export enum APIKeys {
   AUTHORIZATION = 'authorization',
-  AUTHORIZATION_ADMIN = 'authorization.admin'
+  AUTHORIZATION_ADMIN = 'authorization.admin',
+  GROUPS = 'groups'
 }

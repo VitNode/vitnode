@@ -51,7 +51,9 @@ export function outputPagination<T>({
       totalCount,
       count: currentEdges.length,
       hasPreviousPage:
-        last && cursor ? edges.at(0) && edges.length > last : edgesCursor.start !== undefined
+        last && cursor
+          ? !!edges.at(0) && edges.length > last
+          : edgesCursor.start !== undefined && !!cursor
     },
     edges: currentEdges
   };
