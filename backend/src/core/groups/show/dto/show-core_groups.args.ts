@@ -25,8 +25,11 @@ export class ShowCoreGroupsArgs {
   @Field(() => Int, { nullable: true })
   cursor?: number;
 
-  @Field(() => Int)
-  first: number;
+  @Field(() => Int, { nullable: true })
+  first?: number;
+
+  @Field(() => Int, { nullable: true })
+  last?: number;
 
   @Field(() => [ShowCoreGroupsSortByArgs], { nullable: true })
   sortBy?: ShowCoreGroupsSortByArgs[];

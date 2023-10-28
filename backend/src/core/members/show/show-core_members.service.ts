@@ -19,6 +19,7 @@ export class ShowCoreMembersService {
   async show({
     cursor,
     first,
+    last,
     search = '',
     sortBy
   }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
@@ -38,7 +39,7 @@ export class ShowCoreMembersService {
     };
 
     const edges = await this.prisma.core_members.findMany({
-      ...inputPagination({ first, cursor }),
+      ...inputPagination({ first, cursor, last }),
       select: {
         id: true,
         name: true,
@@ -56,15 +57,13 @@ export class ShowCoreMembersService {
         avatar_color: true,
         unread_notifications: true
       },
-      orderBy: {
-        ...inputSorting<ShowCoreMembersSortingColumnEnum>({
-          sortBy,
-          defaultSortBy: {
-            column: ShowCoreMembersSortingColumnEnum.joined,
-            direction: SortDirectionEnum.asc
-          }
-        })
-      },
+      orderBy: inputSorting<ShowCoreMembersSortingColumnEnum>({
+        sortBy,
+        defaultSortBy: {
+          column: ShowCoreMembersSortingColumnEnum.joined,
+          direction: SortDirectionEnum.asc
+        }
+      }),
       where
     });
 
@@ -72,6 +71,6 @@ export class ShowCoreMembersService {
       where
     });
 
-    return outputPagination({ edges, totalCount, first, cursor });
+    return outputPagination({ edges, totalCount, first, cursor, last });
   }
 }

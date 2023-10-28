@@ -1,18 +1,7 @@
 'use client';
 
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  DoubleArrowLeftIcon,
-  DoubleArrowRightIcon
-} from '@radix-ui/react-icons';
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-  getPaginationRowModel
-} from '@tanstack/react-table';
+import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import { useTranslations } from 'next-intl';
 
 import {
@@ -24,20 +13,25 @@ import {
   TableRow
 } from '@/components/ui/table';
 import { Button } from '../ui/button';
+import { PageInfo } from '@/graphql/hooks';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  // pageInfo: PageInfo;
+  pageInfo: PageInfo;
 }
 
-export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({
+  columns,
+  data,
+  pageInfo
+}: DataTableProps<TData, TValue>) {
   const t = useTranslations('core');
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel()
+    manualPagination: true
   });
 
   return (
@@ -85,18 +79,9 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
         <div className="flex items-center space-x-2">
           <Button
             variant="outline"
-            className="hidden h-8 w-8 p-0 lg:flex"
-            onClick={() => table.setPageIndex(0)}
-            disabled={!table.getCanPreviousPage()}
-          >
-            <span className="sr-only">{t('pagination.first')}</span>
-            <DoubleArrowLeftIcon className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="outline"
             className="h-8 w-8 p-0"
             onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
+            disabled={!pageInfo.hasNextPage}
           >
             <span className="sr-only">{t('pagination.previous')}</span>
             <ChevronLeftIcon className="h-4 w-4" />
@@ -105,19 +90,10 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
             variant="outline"
             className="h-8 w-8 p-0"
             onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
+            disabled={!pageInfo.hasNextPage}
           >
             <span className="sr-only">{t('pagination.next')}</span>
             <ChevronRightIcon className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="outline"
-            className="hidden h-8 w-8 p-0 lg:flex"
-            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-            disabled={!table.getCanNextPage()}
-          >
-            <span className="sr-only">{t('pagination.last')}</span>
-            <DoubleArrowRightIcon className="h-4 w-4" />
           </Button>
         </div>
       </div>

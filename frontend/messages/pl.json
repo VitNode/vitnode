@@ -53,8 +53,6 @@
     "saved_success": "Zapisano pomyślnie.",
     "no_results": "Brak wyników.",
     "pagination": {
-      "first": "Pierwsza strona",
-      "last": "Ostatnia strona",
       "previous": "Poprzednia strona",
       "next": "Następna strona"
     },

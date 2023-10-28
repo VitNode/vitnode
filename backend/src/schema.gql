@@ -53,6 +53,7 @@ type PageInfo {
   count: Float!
   endCursor: String!
   hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
   startCursor: String!
   totalCount: Float!
 }
@@ -60,8 +61,8 @@ type PageInfo {
 type Query {
   authorization_admin_sessions: AuthorizationAdminSessionsObj!
   authorization_core_sessions: AuthorizationCoreSessionsObj!
-  show_core_groups(cursor: Int, first: Int!, search: String, sortBy: [ShowCoreGroupsSortByArgs!]): ShowCoreGroupsObj!
-  show_core_members(cursor: String, first: Int!, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
+  show_core_groups(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowCoreGroupsSortByArgs!]): ShowCoreGroupsObj!
+  show_core_members(cursor: String, first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
 }
 
 type ShowCoreGroups {

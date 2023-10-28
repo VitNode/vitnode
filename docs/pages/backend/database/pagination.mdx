@@ -32,8 +32,11 @@ export class ShowCoreMembersArgs {
   @Field(() => String, { nullable: true })
   cursor?: string;
 
-  @Field(() => Int)
-  first: number;
+  @Field(() => Int, { nullable: true })
+  first?: number;
+
+  @Field(() => Int, { nullable: true })
+  last?: number;
 }
 ```
 
@@ -83,7 +86,7 @@ import { PrismaService } from '@/src/prisma/prisma.service';
 export class ShowCoreMembersService {
   constructor(private prisma: PrismaService) {}
 
-  async show({ cursor, first }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {}
+  async show({ cursor, first, last }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {}
 }
 ```
 
@@ -95,7 +98,7 @@ Now we can create query using `Prisma` and pass `inputPagination()` to the `find
 import { inputPagination } from '@/functions/database/pagination/inputPagination';
 
 const edges = await this.prisma.core_members.findMany({
-  ...inputPagination({ first, cursor })
+  ...inputPagination({ first, cursor, last })
 });
 ```
 
@@ -108,7 +111,7 @@ import { outputPagination } from '@/functions/database/pagination/outputPaginati
 
 const totalCount = await this.prisma.core_members.count();
 
-return outputPagination({ edges, totalCount, first });
+return outputPagination({ edges, totalCount, first, last });
 ```
 
 Please remember to create a query `totalCount` to get the total count of the query.
@@ -129,14 +132,14 @@ import { outputPagination } from '@/functions/database/pagination/outputPaginati
 export class ShowCoreMembersService {
   constructor(private prisma: PrismaService) {}
 
-  async show({ cursor, first }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
+  async show({ cursor, first, last }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
     const edges = await this.prisma.core_members.findMany({
-      ...inputPagination({ first, cursor })
+      ...inputPagination({ first, cursor, last })
     });
 
     const totalCount = await this.prisma.core_members.count();
 
-    return outputPagination({ edges, totalCount, first });
+    return outputPagination({ edges, totalCount, first, last });
   }
 }
 ```

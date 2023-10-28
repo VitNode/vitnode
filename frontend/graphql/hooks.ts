@@ -107,6 +107,7 @@ export type PageInfo = {
   count: Scalars['Float']['output'];
   endCursor: Scalars['String']['output'];
   hasNextPage: Scalars['Boolean']['output'];
+  hasPreviousPage: Scalars['Boolean']['output'];
   startCursor: Scalars['String']['output'];
   totalCount: Scalars['Float']['output'];
 };
@@ -122,7 +123,8 @@ export type Query = {
 
 export type QueryShow_Core_GroupsArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
-  first: Scalars['Int']['input'];
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<Array<ShowCoreGroupsSortByArgs>>;
 };
@@ -130,7 +132,8 @@ export type QueryShow_Core_GroupsArgs = {
 
 export type QueryShow_Core_MembersArgs = {
   cursor?: InputMaybe<Scalars['String']['input']>;
-  first: Scalars['Int']['input'];
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<Array<ShowCoreMembersSortByArgs>>;
 };

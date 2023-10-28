@@ -18,6 +18,14 @@ export const TableGroupsUsersAdmin = () => {
 
   return (
     <DataTable
+      pageInfo={{
+        hasNextPage: false,
+        hasPreviousPage: false,
+        endCursor: '',
+        startCursor: '',
+        count: 0,
+        totalCount: 0
+      }}
       columns={[
         {
           header: t('users.groups.table.name'),

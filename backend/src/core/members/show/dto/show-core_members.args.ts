@@ -32,8 +32,11 @@ export class ShowCoreMembersArgs {
   @Field(() => String, { nullable: true })
   cursor?: string;
 
-  @Field(() => Int)
-  first: number;
+  @Field(() => Int, { nullable: true })
+  first?: number;
+
+  @Field(() => Int, { nullable: true })
+  last?: number;
 
   @Field(() => [ShowCoreMembersSortByArgs], { nullable: true })
   sortBy?: ShowCoreMembersSortByArgs[];

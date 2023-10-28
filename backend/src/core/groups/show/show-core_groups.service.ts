@@ -16,6 +16,7 @@ export class ShowCoreGroupsService {
   async show({
     cursor,
     first,
+    last,
     search = '',
     sortBy
   }: ShowCoreGroupsArgs): Promise<ShowCoreGroupsObj> {
@@ -29,29 +30,26 @@ export class ShowCoreGroupsService {
       ]
     };
 
-    const edges = await this.prisma.core_groups.findMany({
-      ...inputPagination({ first, cursor }),
-      select: {
-        id: true,
-        name: true,
-        created: true
-      },
-      orderBy: {
-        ...inputSorting<ShowCoreGroupsSortingColumnEnum>({
+    const [edges, totalCount] = await this.prisma.$transaction([
+      this.prisma.core_groups.findMany({
+        ...inputPagination({ first, cursor, last }),
+        select: {
+          id: true,
+          name: true,
+          created: true
+        },
+        orderBy: inputSorting<ShowCoreGroupsSortingColumnEnum>({
           sortBy,
           defaultSortBy: {
             column: ShowCoreGroupsSortingColumnEnum.created,
             direction: SortDirectionEnum.asc
           }
-        })
-      },
-      where
-    });
+        }),
+        where
+      }),
+      this.prisma.core_groups.count()
+    ]);
 
-    const totalCount = await this.prisma.core_members.count({
-      where
-    });
-
-    return outputPagination({ edges, totalCount, first, cursor });
+    return outputPagination({ edges, totalCount, first, cursor, last });
   }
 }
