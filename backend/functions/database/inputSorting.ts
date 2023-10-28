@@ -14,15 +14,27 @@ interface Args<T> {
   };
 }
 
-export function inputSorting<T>({ defaultSortBy, sortBy }: Args<T>) {
-  if (!sortBy || sortBy.length <= 0)
-    return {
-      [`${defaultSortBy?.column}`]: defaultSortBy?.direction
-    };
+export function inputSorting<T>({
+  defaultSortBy,
+  sortBy
+}: Args<T>): Record<string, SortDirectionEnum>[] {
+  const sortById = {
+    id: SortDirectionEnum.asc
+  };
 
-  return sortBy
-    .map(item => ({
+  if (!sortBy || sortBy.length <= 0) {
+    return [
+      {
+        [`${defaultSortBy?.column}`]: defaultSortBy?.direction
+      },
+      sortById
+    ];
+  }
+
+  return [
+    ...sortBy.map(item => ({
       [`${item.column}`]: item.direction
-    }))
-    .reduce((acc, cur) => ({ ...acc, ...cur }));
+    })),
+    sortById
+  ];
 }

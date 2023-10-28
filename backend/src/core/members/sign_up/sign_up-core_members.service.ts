@@ -25,15 +25,18 @@ export class SignUpCoreMembersService {
         data: [
           {
             id: 1,
-            name: 'Administrator'
+            name: 'Administrator',
+            created: currentDate()
           },
           {
             id: 2,
-            name: 'Moderator'
+            name: 'Moderator',
+            created: currentDate()
           },
           {
             id: 3,
-            name: 'Member'
+            name: 'Member',
+            created: currentDate()
           }
         ]
       });
@@ -42,7 +45,8 @@ export class SignUpCoreMembersService {
       await this.prisma.core_admin_access.create({
         data: {
           group_id: 1,
-          permissions: '*'
+          permissions: '*',
+          created: currentDate()
         }
       });
     }

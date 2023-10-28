@@ -19,7 +19,7 @@ registerEnumType(ShowCoreMembersSortingColumnEnum, {
 });
 
 @InputType()
-class SortByArgs {
+class ShowCoreMembersSortByArgs {
   @Field(() => ShowCoreMembersSortingColumnEnum)
   column: ShowCoreMembersSortingColumnEnum;
 
@@ -32,11 +32,14 @@ export class ShowCoreMembersArgs {
   @Field(() => String, { nullable: true })
   cursor?: string;
 
-  @Field(() => Int)
-  first: number;
+  @Field(() => Int, { nullable: true })
+  first?: number;
 
-  @Field(() => [SortByArgs], { nullable: true })
-  sortBy?: SortByArgs[];
+  @Field(() => Int, { nullable: true })
+  last?: number;
+
+  @Field(() => [ShowCoreMembersSortByArgs], { nullable: true })
+  sortBy?: ShowCoreMembersSortByArgs[];
 
   @Field(() => String, { nullable: true })
   search?: string;

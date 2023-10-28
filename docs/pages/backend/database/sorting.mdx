@@ -165,10 +165,10 @@ export class ShowCoreMembersService {
 Now we can create query using `Prisma` and pass `inputSorting()` function to orderBy arguments in the `findMany()` method to create the query.
 
 ```ts
-import { inputPagination } from '@/functions/database/pagination/inputPagination';
+import { inputSorting } from '@/functions/database/inputSorting';
 
 const edges = await this.prisma.core_members.findMany({
-  orderBy: { ...inputSorting<ShowCoreMembersSortingColumnEnum>({ sortBy }) }
+  orderBy: inputSorting<ShowCoreMembersSortingColumnEnum>({ sortBy })
 });
 ```
 
@@ -182,15 +182,13 @@ const edges = await this.prisma.core_members.findMany({
 The `inputSorting()` function has `defaultSortBy` argument. You can pass default sorting to the function. If the `sortBy` argument is empty the function will use the `defaultSortBy` argument.
 
 ```ts
- orderBy: {
-        ...inputSorting<ShowCoreMembersSortingColumnEnum>({
-          sortBy,
-          defaultSortBy: {
-            column: ShowCoreMembersSortingColumnEnum.joined,
-            direction: SortDirectionEnum.asc
-          }
-        })
-      }
+orderBy: inputSorting<ShowCoreMembersSortingColumnEnum>({
+  sortBy,
+  defaultSortBy: {
+    column: ShowCoreMembersSortingColumnEnum.joined,
+    direction: SortDirectionEnum.asc
+  }
+});
 ```
 
 ### Complite example
@@ -218,15 +216,13 @@ export class ShowCoreMembersService {
         id: true,
         name: true
       },
-      orderBy: {
-        ...inputSorting<ShowCoreMembersSortingColumnEnum>({
-          sortBy,
-          defaultSortBy: {
-            column: ShowCoreMembersSortingColumnEnum.joined,
-            direction: SortDirectionEnum.asc
-          }
-        })
-      }
+      orderBy: inputSorting<ShowCoreMembersSortingColumnEnum>({
+        sortBy,
+        defaultSortBy: {
+          column: ShowCoreMembersSortingColumnEnum.joined,
+          direction: SortDirectionEnum.asc
+        }
+      })
     });
 
     return edges;

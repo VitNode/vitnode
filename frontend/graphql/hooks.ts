@@ -107,6 +107,7 @@ export type PageInfo = {
   count: Scalars['Float']['output'];
   endCursor: Scalars['String']['output'];
   hasNextPage: Scalars['Boolean']['output'];
+  hasPreviousPage: Scalars['Boolean']['output'];
   startCursor: Scalars['String']['output'];
   totalCount: Scalars['Float']['output'];
 };
@@ -115,16 +116,50 @@ export type Query = {
   __typename?: 'Query';
   authorization_admin_sessions: AuthorizationAdminSessionsObj;
   authorization_core_sessions: AuthorizationCoreSessionsObj;
+  show_core_groups: ShowCoreGroupsObj;
   show_core_members: ShowCoreMembersObj;
+};
+
+
+export type QueryShow_Core_GroupsArgs = {
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sortBy?: InputMaybe<Array<ShowCoreGroupsSortByArgs>>;
 };
 
 
 export type QueryShow_Core_MembersArgs = {
   cursor?: InputMaybe<Scalars['String']['input']>;
-  first: Scalars['Int']['input'];
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
-  sortBy?: InputMaybe<Array<SortByArgs>>;
+  sortBy?: InputMaybe<Array<ShowCoreMembersSortByArgs>>;
 };
+
+export type ShowCoreGroups = {
+  __typename?: 'ShowCoreGroups';
+  created: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type ShowCoreGroupsObj = {
+  __typename?: 'ShowCoreGroupsObj';
+  edges: Array<ShowCoreGroups>;
+  pageInfo: PageInfo;
+};
+
+export type ShowCoreGroupsSortByArgs = {
+  column: ShowCoreGroupsSortingColumnEnum;
+  direction: SortDirectionEnum;
+};
+
+export enum ShowCoreGroupsSortingColumnEnum {
+  Created = 'created',
+  Name = 'name'
+}
 
 export type ShowCoreMembers = {
   __typename?: 'ShowCoreMembers';
@@ -151,6 +186,11 @@ export type ShowCoreMembersObj = {
   pageInfo: PageInfo;
 };
 
+export type ShowCoreMembersSortByArgs = {
+  column: ShowCoreMembersSortingColumnEnum;
+  direction: SortDirectionEnum;
+};
+
 export enum ShowCoreMembersSortingColumnEnum {
   Birthday = 'birthday',
   FirstName = 'first_name',
@@ -170,11 +210,6 @@ export type SignUpCoreMembersObj = {
   group_id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   newsletter?: Maybe<Scalars['Boolean']['output']>;
-};
-
-export type SortByArgs = {
-  column: ShowCoreMembersSortingColumnEnum;
-  direction: SortDirectionEnum;
 };
 
 export enum SortDirectionEnum {
@@ -246,6 +281,17 @@ export type Authorization_Admin_SessionsQueryVariables = Exact<{ [key: string]: 
 
 
 export type Authorization_Admin_SessionsQuery = { __typename?: 'Query', authorization_admin_sessions: { __typename?: 'AuthorizationAdminSessionsObj', side_name: string, user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null } };
+
+export type Show_Core_GroupsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sortBy?: InputMaybe<Array<ShowCoreGroupsSortByArgs> | ShowCoreGroupsSortByArgs>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type Show_Core_GroupsQuery = { __typename?: 'Query', show_core_groups: { __typename?: 'ShowCoreGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowCoreGroups', created: number, id: number, name: string }> } };
 
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -343,6 +389,31 @@ export const Authorization_Admin_Sessions = gql`
       }
     }
     side_name
+  }
+}
+    `;
+export const Show_Core_Groups = gql`
+    query Show_core_groups($first: Int, $cursor: Int, $search: String, $sortBy: [ShowCoreGroupsSortByArgs!], $last: Int) {
+  show_core_groups(
+    first: $first
+    cursor: $cursor
+    search: $search
+    sortBy: $sortBy
+    last: $last
+  ) {
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      startCursor
+      totalCount
+      hasPreviousPage
+    }
+    edges {
+      created
+      id
+      name
+    }
   }
 }
     `;

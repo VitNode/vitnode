@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { fetcher } from '@/graphql/fetcher';
+import { ErrorType, fetcher } from '@/graphql/fetcher';
 import {
   SignIn_Core_Sessions,
   SignIn_Core_SessionsMutation,
@@ -14,7 +14,11 @@ export const useSignInAPI = () => {
   const { push } = useRouter();
 
   // TODO: Add notification toast when is an error
-  return useMutation<SignIn_Core_SessionsMutation, string, SignIn_Core_SessionsMutationVariables>({
+  return useMutation<
+    SignIn_Core_SessionsMutation,
+    ErrorType,
+    SignIn_Core_SessionsMutationVariables
+  >({
     mutationFn: async variables =>
       await fetcher({
         query: SignIn_Core_Sessions,

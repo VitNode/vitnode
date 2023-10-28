@@ -29,6 +29,21 @@
           }
         }
       }
+    },
+    "users": {
+      "groups": {
+        "title": "Groups",
+        "desc": "Test 123",
+        "table": {
+          "name": "Name",
+          "users": "Users"
+        },
+        "actions": {
+          "edit": {
+            "title": "Edit"
+          }
+        }
+      }
     }
   },
   "core": {
@@ -36,6 +51,11 @@
     "loading": "Please wait, loading...",
     "save": "Save",
     "saved_success": "Saved successfully.",
+    "no_results": "No results found.",
+    "pagination": {
+      "previous": "Previous page",
+      "next": "Next page"
+    },
     "user-bar": {
       "sign_in": "Login",
       "sign_up": "Register",

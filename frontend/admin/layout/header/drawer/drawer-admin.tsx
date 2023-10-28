@@ -27,7 +27,7 @@ export const DrawerAdmin = () => {
     <div className="flex sm:hidden">
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <Button variant="ghost" className="rounded-full" size="icon">
+          <Button variant="ghost" size="icon">
             <Menu />
           </Button>
         </SheetTrigger>

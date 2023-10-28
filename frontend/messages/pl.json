@@ -29,6 +29,21 @@
           }
         }
       }
+    },
+    "users": {
+      "groups": {
+        "title": "Grupy",
+        "desc": "Test 123",
+        "table": {
+          "name": "Nazwa",
+          "users": "Użytkownicy"
+        },
+        "actions": {
+          "edit": {
+            "title": "Edytuj"
+          }
+        }
+      }
     }
   },
   "core": {
@@ -36,6 +51,11 @@
     "loading": "Czekaj, ładowanie...",
     "save": "Zapisz",
     "saved_success": "Zapisano pomyślnie.",
+    "no_results": "Brak wyników.",
+    "pagination": {
+      "previous": "Poprzednia strona",
+      "next": "Następna strona"
+    },
     "user-bar": {
       "sign_in": "Zaloguj się",
       "sign_up": "Zarejestruj się",
