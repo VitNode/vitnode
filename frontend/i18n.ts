@@ -6,7 +6,7 @@ export default getRequestConfig(async ({ locale }) => ({
   timeZone: 'UTC'
 }));
 
-export const locales = ['en', 'pl'] as const;
+export const locales = ['en', 'pl'];
 
 export const { Link, redirect, usePathname, useRouter } = createSharedPathnamesNavigation({
   locales

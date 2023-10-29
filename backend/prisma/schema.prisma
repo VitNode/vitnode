@@ -40,6 +40,7 @@ model core_groups {
   id                Int                 @id @unique @default(autoincrement())
   name              String              @db.VarChar(255)
   created           Int
+  protected         Boolean             @default(false)
   core_members      core_members[]
   core_admin_access core_admin_access[]
 }
@@ -108,4 +109,13 @@ model core_attachments {
   mimetype    String
 
   @@index([member_id])
+}
+
+model core_languages {
+  tag       String  @id @unique @db.VarChar(32)
+  name      String  @db.VarChar(255)
+  timezone  String  @default("UTC") @db.VarChar(255)
+  protected Boolean @default(false)
+  default   Boolean @default(false)
+  enabled   Boolean @default(true)
 }
