@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { cookies } from 'next/headers';
 import { getTranslator } from 'next-intl/server';
 import { Metadata } from 'next';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
 import { AdminLayout } from '@/admin/layout/admin-layout';
 import { SessionAdminProvider } from './session-admin-provider';
@@ -13,6 +14,8 @@ import {
   Authorization_Admin_SessionsQuery,
   Authorization_Admin_SessionsQueryVariables
 } from '@/graphql/hooks';
+import getQueryClient from '@/functions/get-query-client';
+import { APIKeys } from '@/graphql/api-keys';
 
 const getData = async () => {
   const cookieStore = cookies();
@@ -67,12 +70,19 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 
 export default async function Layout({ children }: Props) {
   try {
-    const initialDataSession = await getData();
+    const queryClient = getQueryClient();
+    await queryClient.prefetchQuery({
+      queryKey: [APIKeys.AUTHORIZATION_ADMIN],
+      queryFn: getData
+    });
+    const dehydratedState = dehydrate(queryClient);
 
     return (
-      <SessionAdminProvider initialDataSession={initialDataSession}>
-        <AdminLayout>{children}</AdminLayout>
-      </SessionAdminProvider>
+      <HydrationBoundary state={dehydratedState}>
+        <SessionAdminProvider>
+          <AdminLayout>{children}</AdminLayout>
+        </SessionAdminProvider>
+      </HydrationBoundary>
     );
   } catch (error) {
     redirect('/admin');

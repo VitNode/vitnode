@@ -1,0 +1,129 @@
+import { Steps } from 'nextra/components';
+import { FileTree } from 'nextra/components';
+
+# Query in Frontend
+
+Frontend communicates with the backend via GraphQL and use SSR to fetching data. The GraphQL queries are defined in the `graphql/queries` folder. The queries are then used in the frontend components.
+
+## Generate GraphQL Types
+
+VitNode use [GraphQL Codegen](https://the-guild.dev/graphql/codegen) to generate types for GraphQL queries. The types are generated in the `graphql/hooks.ts` file.
+
+<Steps>
+### Find Query
+
+First we need to define the GraphQL query in the `graphql/queries` folder.  
+You can find list of available queries in your API. If you are running development server go to [http://localhost:8080/graphql](http://localhost:8080/graphql) to see the list of available queries.
+
+### Define Query
+
+When you find the query you want to use, copy the query and paste it in the `graphql/queries` folder by creating a new file with `.gql` extension. Remember to sort the query by module.
+
+For example file `graphql/queries/custom_app/authorization.gql`:
+
+```graphql
+query Authorization_custom_app {
+  authorization_custom_app {
+    user {
+      email
+      birthday
+    }
+  }
+}
+```
+
+### Generate Types
+
+After defining the query, you can generate the types by running the following command:
+
+```bash
+npm run codegen
+```
+
+The command will overwrite the `graphql/hooks.ts` file.
+
+</Steps>
+
+## Use Query in Component
+
+After generating the types, you can use the query in the frontend component.
+
+<Steps>
+
+### Create Folder for Hook
+
+Create a new hook inside your folder component. Your schema should be like this:
+
+<FileTree>
+  <FileTree.Folder name="views" defaultOpen>
+    <FileTree.Folder name="custom_app" defaultOpen>
+      <FileTree.Folder name="hooks" defaultOpen>
+        <FileTree.File name="use-overview-view-api.ts" />
+      </FileTree.Folder>
+      <FileTree.File name="overview-view.tsx" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+### Create Hook
+
+Inside your hook (for example `use-overview-view-api.ts` file) import `useQuery` from `@tanstack/react-query`.
+
+```ts
+import { useQuery } from '@tanstack/react-query';
+
+import { fetcher } from '@/graphql/fetcher';
+import {
+  Authorization_Custom_App,
+  Authorization_Custom_AppQuery,
+  Authorization_Custom_AppQueryVariables
+} from '@/graphql/hooks';
+
+export const useOverviewViewAPI = () => {
+  return useQuery({
+    queryKey: ['Authorization_Custom_App'],
+    queryFn: async () =>
+      await fetcher<Authorization_Custom_AppQuery, Authorization_Custom_AppQueryVariables>({
+        query: Authorization_Custom_App
+      }),
+    placeholderData: previousData => previousData
+  });
+};
+```
+
+**Remember:**
+
+- Fill the `queryKey` with the query name or any unique string you want,
+- Fill the `queryFn` with the query function that you want to use _(in this case we use `fetcher` function for fetching data from GraphQL)_,
+- If you want to cache data from the query, you can fill the `placeholderData` with the previous data _(like in example)_.
+
+You can read more about `useQuery` in [Tanstack Documentation](https://tanstack.com/query/latest/docs/react/reference/useQuery).
+
+### Use Hook
+
+After creating the hook, you can use the hook in your component (for example `overview-view.tsx` file).
+
+```tsx
+import { useOverviewViewAPI } from './hooks/use-overview-view-api';
+
+export const OverviewView = () => {
+  const { data, isLoading, isError } = useOverviewViewAPI();
+
+  if (isLoading) return <Loader />;
+  if (isError) return <ErrorView code="500" />;
+  if (!data) return null;
+
+  return (
+    <div>
+      <h1>Overview</h1>
+      <p>{data.authorization_custom_app.user.email}</p>
+    </div>
+  );
+};
+```
+
+</Steps>
+
+## Infinite Query
+
+If you want to use infinite query for example for infinite scroll you can use `useInfiniteQuery` from `@tanstack/react-query`. Read more about `useInfiniteQuery` in [Tanstack Documentation](https://tanstack.com/query/latest/docs/react/reference/useInfiniteQuery).

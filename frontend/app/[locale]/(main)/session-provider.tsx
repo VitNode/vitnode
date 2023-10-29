@@ -14,17 +14,15 @@ import { APIKeys } from '@/graphql/api-keys';
 
 interface Props {
   children: ReactNode;
-  initialData: Authorization_Core_SessionsQuery | undefined;
 }
 
-export const SessionProvider = ({ children, initialData }: Props) => {
+export const SessionProvider = ({ children }: Props) => {
   const { data } = useQuery({
     queryKey: [APIKeys.AUTHORIZATION],
     queryFn: async () =>
       fetcher<Authorization_Core_SessionsQuery, Authorization_Core_SessionsQueryVariables>({
         query: Authorization_Core_Sessions
-      }),
-    initialData
+      })
   });
 
   return (
