@@ -8,7 +8,8 @@
         "dashboard": "Pulpit",
         "general": "Ogólne",
         "email": "Email",
-        "webapp": "Web App"
+        "webapp": "Web App",
+        "langs": "Języki"
       },
       "users": {
         "title": "Użytkownicy",
@@ -27,6 +28,13 @@
               "label": "Nazwa strony"
             }
           }
+        }
+      },
+      "langs": {
+        "title": "Języki",
+        "table": {
+          "name": "Nazwa",
+          "key": "Klucz"
         }
       }
     },

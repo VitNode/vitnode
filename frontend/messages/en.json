@@ -8,7 +8,8 @@
         "dashboard": "Dashboard",
         "general": "General",
         "email": "Email",
-        "webapp": "Web App"
+        "webapp": "Web App",
+        "langs": "Languages"
       },
       "users": {
         "title": "Users",
@@ -27,6 +28,13 @@
               "label": "Name Site"
             }
           }
+        }
+      },
+      "langs": {
+        "title": "Languages",
+        "table": {
+          "name": "Name",
+          "key": "Key"
         }
       }
     },

@@ -67,7 +67,7 @@ export function DataTable<TData, TValue>({
       last: pagination.last ? pagination.last : `${defaultItemsPerPage}`
     };
 
-    if (nextPage) {
+    if (nextPage || (pageSize && !nextPage)) {
       params.set('first', pageSize ? pageSize : defaultPageSize.first);
       params.delete('last');
     } else {

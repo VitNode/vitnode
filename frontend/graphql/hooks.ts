@@ -117,6 +117,7 @@ export type Query = {
   authorization_admin_sessions: AuthorizationAdminSessionsObj;
   authorization_core_sessions: AuthorizationCoreSessionsObj;
   show_core_groups: ShowCoreGroupsObj;
+  show_core_languages: ShowCoreLanguagesObj;
   show_core_members: ShowCoreMembersObj;
 };
 
@@ -127,6 +128,13 @@ export type QueryShow_Core_GroupsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<Array<ShowCoreGroupsSortByArgs>>;
+};
+
+
+export type QueryShow_Core_LanguagesArgs = {
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -160,6 +168,22 @@ export enum ShowCoreGroupsSortingColumnEnum {
   Created = 'created',
   Name = 'name'
 }
+
+export type ShowCoreLanguages = {
+  __typename?: 'ShowCoreLanguages';
+  default: Scalars['Boolean']['output'];
+  enabled: Scalars['Boolean']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  protected: Scalars['Boolean']['output'];
+  timezone: Scalars['String']['output'];
+};
+
+export type ShowCoreLanguagesObj = {
+  __typename?: 'ShowCoreLanguagesObj';
+  edges: Array<ShowCoreLanguages>;
+  pageInfo: PageInfo;
+};
 
 export type ShowCoreMembers = {
   __typename?: 'ShowCoreMembers';
@@ -293,6 +317,15 @@ export type Show_Core_GroupsQueryVariables = Exact<{
 
 export type Show_Core_GroupsQuery = { __typename?: 'Query', show_core_groups: { __typename?: 'ShowCoreGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowCoreGroups', created: number, id: number, name: string }> } };
 
+export type Show_Core_LanguagesQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  cursor?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Show_Core_LanguagesQuery = { __typename?: 'Query', show_core_languages: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, enabled: boolean, id: string, name: string, protected: boolean, timezone: string }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
+
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -413,6 +446,28 @@ export const Show_Core_Groups = gql`
       created
       id
       name
+    }
+  }
+}
+    `;
+export const Show_Core_Languages = gql`
+    query Show_core_languages($first: Int, $last: Int, $cursor: String) {
+  show_core_languages(first: $first, last: $last, cursor: $cursor) {
+    edges {
+      default
+      enabled
+      id
+      name
+      protected
+      timezone
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
     }
   }
 }
