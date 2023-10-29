@@ -112,7 +112,7 @@ model core_attachments {
 }
 
 model core_languages {
-  tag       String  @id @unique @db.VarChar(32)
+  id        String  @id @unique @db.VarChar(32)
   name      String  @db.VarChar(255)
   timezone  String  @default("UTC") @db.VarChar(255)
   protected Boolean @default(false)

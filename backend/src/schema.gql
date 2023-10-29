@@ -62,6 +62,7 @@ type Query {
   authorization_admin_sessions: AuthorizationAdminSessionsObj!
   authorization_core_sessions: AuthorizationCoreSessionsObj!
   show_core_groups(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowCoreGroupsSortByArgs!]): ShowCoreGroupsObj!
+  show_core_languages(cursor: String, first: Int, last: Int): ShowCoreLanguagesObj!
   show_core_members(cursor: String, first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
 }
 
@@ -84,6 +85,20 @@ input ShowCoreGroupsSortByArgs {
 enum ShowCoreGroupsSortingColumnEnum {
   created
   name
+}
+
+type ShowCoreLanguages {
+  default: Boolean!
+  enabled: Boolean!
+  id: String!
+  name: String!
+  protected: Boolean!
+  timezone: String!
+}
+
+type ShowCoreLanguagesObj {
+  edges: [ShowCoreLanguages!]!
+  pageInfo: PageInfo!
 }
 
 type ShowCoreMembers {
