@@ -26,7 +26,7 @@ export const ContentTableLangsCoreAdmin = () => {
             const data = row.original;
 
             return (
-              <div className="flex items-center flex-wrap gap-4">
+              <div className="flex items-center gap-4">
                 <span>{data.name}</span>
                 {data.default && <Badge>{t('default')}</Badge>}
               </div>
@@ -39,12 +39,23 @@ export const ContentTableLangsCoreAdmin = () => {
           cell: ({ row }) => {
             const data = row.original;
 
-            return <Switch defaultChecked={data.enabled} />;
+            return (
+              <Switch defaultChecked={data.enabled} disabled={data.default || data.protected} />
+            );
           }
         },
         {
           header: t('core.langs.table.key'),
           accessorKey: 'id'
+        },
+        {
+          header: '',
+          accessorKey: 'actions',
+          cell: ({ row }) => {
+            const data = row.original;
+
+            return <div>Actions = {data.id}</div>;
+          }
         }
       ]}
     />

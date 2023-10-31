@@ -71,10 +71,8 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 export default async function Layout({ children }: Props) {
   try {
     const queryClient = getQueryClient();
-    await queryClient.prefetchQuery({
-      queryKey: [APIKeys.AUTHORIZATION_ADMIN],
-      queryFn: getData
-    });
+    const data = await getData();
+    await queryClient.setQueryData([APIKeys.AUTHORIZATION_ADMIN], data);
     const dehydratedState = dehydrate(queryClient);
 
     return (

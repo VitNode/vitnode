@@ -13,9 +13,8 @@ import {
 } from '@/graphql/hooks';
 import { SessionProvider } from './session-provider';
 import { InternalErrorView } from '@/admin/views/global/internal-error-view';
-
-import getQueryClient from '../../../functions/get-query-client';
-import { APIKeys } from '../../../graphql/api-keys';
+import getQueryClient from '@/functions/get-query-client';
+import { APIKeys } from '@/graphql/api-keys';
 
 interface Props {
   children: ReactNode;
@@ -56,10 +55,8 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 export default async function Layout({ children }: Props) {
   try {
     const queryClient = getQueryClient();
-    await queryClient.prefetchQuery({
-      queryKey: [APIKeys.AUTHORIZATION],
-      queryFn: getData
-    });
+    const data = await getData();
+    await queryClient.setQueryData([APIKeys.AUTHORIZATION], data);
     const dehydratedState = dehydrate(queryClient);
 
     const Layout = lazy(() =>
