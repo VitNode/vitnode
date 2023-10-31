@@ -26,11 +26,11 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
   return (
     <html lang={locale} className={inter.className}>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <NextIntlClientProvider timeZone="UTC" locale={locale} messages={messages}>
+        <NextIntlClientProvider timeZone="UTC" locale={locale} messages={messages}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}
-          </NextIntlClientProvider>
-        </ThemeProvider>
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

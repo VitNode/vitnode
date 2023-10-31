@@ -2,6 +2,7 @@
   "admin": {
     "title": "Panel kontrolny administratora",
     "title_short": "Admin",
+    "default": "Domyślny",
     "nav": {
       "core": {
         "title": "Rdzeń",
@@ -34,7 +35,8 @@
         "title": "Języki",
         "table": {
           "name": "Nazwa",
-          "key": "Klucz"
+          "key": "Klucz",
+          "enabled": "Włączony"
         }
       }
     },

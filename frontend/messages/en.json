@@ -2,6 +2,7 @@
   "admin": {
     "title": "Admin Control Panel",
     "title_short": "Admin",
+    "default": "Default",
     "nav": {
       "core": {
         "title": "Core",
@@ -34,7 +35,8 @@
         "title": "Languages",
         "table": {
           "name": "Name",
-          "key": "Key"
+          "key": "Key",
+          "enabled": "Enabled"
         }
       }
     },

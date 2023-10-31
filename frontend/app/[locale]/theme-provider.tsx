@@ -24,9 +24,11 @@ export const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
   return (
     <NextThemesProvider {...props}>
       <QueryClientProvider client={queryClient}>
-        {children}
-        <Toaster />
-        <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
+        <>
+          {children}
+          <Toaster />
+          <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
+        </>
       </QueryClientProvider>
     </NextThemesProvider>
   );
