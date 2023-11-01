@@ -1,9 +1,9 @@
+import configs from '~/config.json';
+
 import createMiddleware from 'next-intl/middleware';
 
-import { locales } from './i18n';
-
 export default createMiddleware({
-  locales,
+  locales: configs.locales,
   defaultLocale: 'en'
 });
 

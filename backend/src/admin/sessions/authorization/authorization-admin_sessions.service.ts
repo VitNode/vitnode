@@ -10,7 +10,7 @@ import { Ctx } from '@/types/context.type';
 import { CONFIG } from '@/config';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { convertUnixTime, currentDate } from '@/functions/date';
-import * as data from '@/utils/config.json';
+import * as config from '@/config.json';
 
 @Injectable()
 export class AuthorizationAdminSessionsService {
@@ -30,7 +30,7 @@ export class AuthorizationAdminSessionsService {
 
   async authorization({ req, res }: Ctx): Promise<AuthorizationAdminSessionsObj> {
     const others = {
-      side_name: data.side_name
+      side_name: config.side_name
     };
 
     const tokens = {

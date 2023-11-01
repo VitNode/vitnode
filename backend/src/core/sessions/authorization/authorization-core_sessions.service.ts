@@ -5,7 +5,7 @@ import { AuthorizationCoreSessionsObj } from './dto/authorization-core_sessions.
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { Ctx } from '@/types/context.type';
-import * as data from '@/utils/config.json';
+import * as config from '@/config.json';
 
 @Injectable()
 export class AuthorizationCoreSessionsService {
@@ -35,7 +35,7 @@ export class AuthorizationCoreSessionsService {
 
   async authorization({ req, res }: Ctx): Promise<AuthorizationCoreSessionsObj> {
     const others = {
-      side_name: data.side_name
+      side_name: config.side_name
     };
 
     try {

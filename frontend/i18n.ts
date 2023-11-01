@@ -1,3 +1,5 @@
+import configs from '~/config.json';
+
 import { getRequestConfig } from 'next-intl/server';
 import { createSharedPathnamesNavigation } from 'next-intl/navigation';
 
@@ -6,8 +8,6 @@ export default getRequestConfig(async ({ locale }) => ({
   timeZone: 'UTC'
 }));
 
-export const locales = ['en', 'pl'];
-
 export const { Link, redirect, usePathname, useRouter } = createSharedPathnamesNavigation({
-  locales
+  locales: configs.locales
 });
