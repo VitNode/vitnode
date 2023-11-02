@@ -1,3 +1,5 @@
+import * as config from '~/config.json';
+
 import { Injectable } from '@nestjs/common';
 
 import { ShowCoreLanguagesArgs } from './dto/show-core_languages.args';
@@ -6,7 +8,6 @@ import { ShowCoreLanguagesObj } from './dto/show-core_languages.obj';
 import { PrismaService } from '@/prisma/prisma.service';
 import { outputPagination } from '@/functions/database/pagination/outputPagination';
 import { inputPagination } from '@/functions/database/pagination/inputPagination';
-import * as config from '@/config.json';
 import { CustomError } from '@/utils/errors/CustomError';
 
 @Injectable()

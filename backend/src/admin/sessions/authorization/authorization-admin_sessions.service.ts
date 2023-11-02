@@ -1,3 +1,5 @@
+import * as config from '~/config.json';
+
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UAParser } from 'ua-parser-js';
@@ -10,7 +12,6 @@ import { Ctx } from '@/types/context.type';
 import { CONFIG } from '@/config';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { convertUnixTime, currentDate } from '@/functions/date';
-import * as config from '@/config.json';
 
 @Injectable()
 export class AuthorizationAdminSessionsService {

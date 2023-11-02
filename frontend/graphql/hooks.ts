@@ -62,6 +62,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   create_core_groups: CreateCoreGroupsObj;
   delete_avatar_core_members: Scalars['String']['output'];
+  edit_core_languages: ShowCoreLanguages;
   edit_general_admin_settings: GeneralAdminSettingsObj;
   signIn_core_sessions: Scalars['String']['output'];
   signOut_admin_sessions: Scalars['String']['output'];
@@ -73,6 +74,15 @@ export type Mutation = {
 
 export type MutationCreate_Core_GroupsArgs = {
   name: Scalars['String']['input'];
+};
+
+
+export type MutationEdit_Core_LanguagesArgs = {
+  default: Scalars['Boolean']['input'];
+  enabled: Scalars['Boolean']['input'];
+  id: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  timezone: Scalars['String']['input'];
 };
 
 
@@ -263,6 +273,17 @@ export type Edit_General_Admin_SettingsMutationVariables = Exact<{
 
 export type Edit_General_Admin_SettingsMutation = { __typename?: 'Mutation', edit_general_admin_settings: { __typename?: 'GeneralAdminSettingsObj', side_name: string } };
 
+export type Edit_Core_LanguagesMutationVariables = Exact<{
+  default: Scalars['Boolean']['input'];
+  enabled: Scalars['Boolean']['input'];
+  editCoreLanguagesId: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  timezone: Scalars['String']['input'];
+}>;
+
+
+export type Edit_Core_LanguagesMutation = { __typename?: 'Mutation', edit_core_languages: { __typename?: 'ShowCoreLanguages', default: boolean, enabled: boolean, id: string, name: string, protected: boolean, timezone: string } };
+
 export type Delete_Avatar_Core_MembersMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -336,6 +357,24 @@ export const Edit_General_Admin_Settings = gql`
     mutation Edit_general_admin_settings($sideName: String!) {
   edit_general_admin_settings(side_name: $sideName) {
     side_name
+  }
+}
+    `;
+export const Edit_Core_Languages = gql`
+    mutation Edit_core_languages($default: Boolean!, $enabled: Boolean!, $editCoreLanguagesId: String!, $name: String!, $timezone: String!) {
+  edit_core_languages(
+    default: $default
+    enabled: $enabled
+    id: $editCoreLanguagesId
+    name: $name
+    timezone: $timezone
+  ) {
+    default
+    enabled
+    id
+    name
+    protected
+    timezone
   }
 }
     `;

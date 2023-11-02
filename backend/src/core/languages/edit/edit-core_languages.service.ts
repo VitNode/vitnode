@@ -1,6 +1,8 @@
 import * as fs from 'fs';
 import { join } from 'path';
 
+import * as config from '~/config.json';
+
 import { Injectable } from '@nestjs/common';
 
 import { ShowCoreLanguages } from '../show/dto/show-core_languages.obj';
@@ -8,7 +10,6 @@ import { EditCoreLanguagesArgs } from './dto/edit-core_languages.args';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { NotFountError } from '@/utils/errors/not-found';
-import * as config from '@/config.json';
 
 @Injectable()
 export class EditCoreLanguageService {
@@ -63,9 +64,14 @@ export class EditCoreLanguageService {
     dataToEditConfig.languages.locales.find(locale => locale.key === edit.id).enabled =
       edit.enabled;
 
-    fs.writeFile(join('config.json'), JSON.stringify(dataToEditConfig, null, 2), 'utf8', err => {
-      if (err) throw err;
-    });
+    fs.writeFile(
+      join('..', 'config.json'),
+      JSON.stringify(dataToEditConfig, null, 2),
+      'utf8',
+      err => {
+        if (err) throw err;
+      }
+    );
 
     return edit;
   }

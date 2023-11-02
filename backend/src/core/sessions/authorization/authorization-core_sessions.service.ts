@@ -1,3 +1,5 @@
+import * as config from '~/config.json';
+
 import { Injectable } from '@nestjs/common';
 
 import { InternalAuthorizationCoreSessionsService } from './internal/internal_authorization-core_sessions.service';
@@ -5,7 +7,6 @@ import { AuthorizationCoreSessionsObj } from './dto/authorization-core_sessions.
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { Ctx } from '@/types/context.type';
-import * as config from '@/config.json';
 
 @Injectable()
 export class AuthorizationCoreSessionsService {
