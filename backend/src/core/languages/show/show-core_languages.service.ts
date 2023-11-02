@@ -31,8 +31,10 @@ export class ShowCoreLanguageService {
 
     // Check valid data with config
     edges.forEach(edge => {
+      const currentLanguage = config.languages.locales.find(locale => locale.key === edge.id);
+
       // Check key
-      if (!config.languages.locales.find(locale => locale.key === edge.id)) {
+      if (!currentLanguage) {
         throw new CustomError({
           code: 'INVALID_CONFIG_WITH_DATABASE',
           message: `Language "${edge.name}" is not found in config.json`
@@ -40,10 +42,10 @@ export class ShowCoreLanguageService {
       }
 
       // Check enabled status
-      if (!config.languages.locales.find(locale => locale.key === edge.id).enabled) {
+      if (currentLanguage.enabled !== edge.enabled) {
         throw new CustomError({
           code: 'INVALID_CONFIG_WITH_DATABASE',
-          message: `Language "${edge.name}" is not enabled in config.json`
+          message: `Language "${edge.name}" enabled status is not match with config.json`
         });
       }
     });
