@@ -9,5 +9,5 @@ export default getRequestConfig(async ({ locale }) => ({
 }));
 
 export const { Link, redirect, usePathname, useRouter } = createSharedPathnamesNavigation({
-  locales: configs.locales
+  locales: configs.languages.locales.filter(locale => locale.enabled).map(locale => locale.key)
 });

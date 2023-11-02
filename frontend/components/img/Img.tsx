@@ -89,9 +89,7 @@ const Img = forwardRef<HTMLDivElement, ImgProps>(
           style={{
             height: height !== undefined ? `${height}px` : undefined
           }}
-          /* istanbul ignore next */ onLoadingComplete={
-            /* istanbul ignore next */ () => setIsLoading(false)
-          }
+          /* istanbul ignore next */ onLoad={() => setIsLoading(false)}
         />
       </div>
     );

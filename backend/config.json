@@ -1,7 +1,16 @@
 {
   "side_name": "VitNode Community",
-  "locales": [
-    "en",
-    "pl"
-  ]
+  "languages": {
+    "locales": [
+      {
+        "key": "en",
+        "enabled": true
+      },
+      {
+        "key": "pl",
+        "enabled": true
+      }
+    ],
+    "default": "en"
+  }
 }
