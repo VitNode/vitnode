@@ -12,5 +12,6 @@
       }
     ],
     "default": "en"
-  }
+  },
+  "applications": ["core", "admin"]
 }

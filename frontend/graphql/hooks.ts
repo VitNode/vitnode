@@ -276,7 +276,7 @@ export type Edit_General_Admin_SettingsMutation = { __typename?: 'Mutation', edi
 export type Edit_Core_LanguagesMutationVariables = Exact<{
   default: Scalars['Boolean']['input'];
   enabled: Scalars['Boolean']['input'];
-  editCoreLanguagesId: Scalars['String']['input'];
+  id: Scalars['String']['input'];
   name: Scalars['String']['input'];
   timezone: Scalars['String']['input'];
 }>;
@@ -361,11 +361,11 @@ export const Edit_General_Admin_Settings = gql`
 }
     `;
 export const Edit_Core_Languages = gql`
-    mutation Edit_core_languages($default: Boolean!, $enabled: Boolean!, $editCoreLanguagesId: String!, $name: String!, $timezone: String!) {
+    mutation Edit_core_languages($default: Boolean!, $enabled: Boolean!, $id: String!, $name: String!, $timezone: String!) {
   edit_core_languages(
     default: $default
     enabled: $enabled
-    id: $editCoreLanguagesId
+    id: $id
     name: $name
     timezone: $timezone
   ) {

@@ -1,7 +1,5 @@
 import { ReactNode, lazy } from 'react';
 import { cookies } from 'next/headers';
-import { Metadata } from 'next';
-import { getTranslator } from 'next-intl/server';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
 import { CONFIG } from '@/config';
@@ -31,26 +29,6 @@ const getData = async () => {
     }
   );
 };
-
-export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
-  try {
-    const data = await getData();
-    const defaultTitle = data.authorization_core_sessions.side_name;
-
-    return {
-      title: {
-        default: defaultTitle,
-        template: `%s - ${defaultTitle}`
-      }
-    };
-  } catch (error) {
-    const t = await getTranslator(locale, 'core');
-
-    return {
-      title: t('errors.no_connection_api')
-    };
-  }
-}
 
 export default async function Layout({ children }: Props) {
   try {

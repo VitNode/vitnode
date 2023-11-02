@@ -1,14 +1,14 @@
 mutation Edit_core_languages(
   $default: Boolean!
   $enabled: Boolean!
-  $editCoreLanguagesId: String!
+  $id: String!
   $name: String!
   $timezone: String!
 ) {
   edit_core_languages(
     default: $default
     enabled: $enabled
-    id: $editCoreLanguagesId
+    id: $id
     name: $name
     timezone: $timezone
   ) {

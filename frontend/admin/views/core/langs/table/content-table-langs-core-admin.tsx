@@ -5,10 +5,12 @@ import { useLangsAdminAPI } from './hooks/use-langs-admin-api';
 import { DataTable } from '@/components/data-table/data-table';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
+import { useEditLangsAdminAPI } from './hooks/use-edit-langs-admin-api';
 
 export const ContentTableLangsCoreAdmin = () => {
   const t = useTranslations('admin');
   const { data, isFetching, isLoading } = useLangsAdminAPI();
+  const { mutateAsync } = useEditLangsAdminAPI();
 
   if (isLoading && !isFetching) return <Loader />;
   if (!data) return <Loader />;
@@ -40,7 +42,16 @@ export const ContentTableLangsCoreAdmin = () => {
             const data = row.original;
 
             return (
-              <Switch defaultChecked={data.enabled} disabled={data.default || data.protected} />
+              <Switch
+                checked={data.enabled}
+                disabled={data.default || data.protected}
+                onClick={async () => {
+                  await mutateAsync({
+                    ...data,
+                    enabled: !data.enabled
+                  });
+                }}
+              />
             );
           }
         },
