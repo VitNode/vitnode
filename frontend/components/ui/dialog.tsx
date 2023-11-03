@@ -7,7 +7,6 @@ import {
   Dispatch,
   ElementRef,
   HTMLAttributes,
-  ReactNode,
   SetStateAction,
   createContext,
   forwardRef,
@@ -29,11 +28,7 @@ export const DialogContext = createContext<DialogContextArgs>({
 
 export const useDialog = () => useContext(DialogContext);
 
-interface DialogProps extends Omit<DialogPrimitive.DialogProps, 'open' | 'onOpenChange'> {
-  children: ReactNode;
-}
-
-const Dialog = ({ children }: DialogProps) => {
+const Dialog = ({ children }: Omit<DialogPrimitive.DialogProps, 'open' | 'onOpenChange'>) => {
   const [open, setOpen] = useState(false);
 
   return (

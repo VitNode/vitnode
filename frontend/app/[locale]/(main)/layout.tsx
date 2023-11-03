@@ -1,7 +1,6 @@
 import { ReactNode, lazy } from 'react';
 import { cookies } from 'next/headers';
-import { Metadata } from 'next';
-import { getTranslator } from 'next-intl/server';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
 import { CONFIG } from '@/config';
 import { fetcher } from '@/graphql/fetcher';
@@ -12,6 +11,8 @@ import {
 } from '@/graphql/hooks';
 import { SessionProvider } from './session-provider';
 import { InternalErrorView } from '@/admin/views/global/internal-error-view';
+import getQueryClient from '@/functions/get-query-client';
+import { APIKeys } from '@/graphql/api-keys';
 
 interface Props {
   children: ReactNode;
@@ -29,29 +30,12 @@ const getData = async () => {
   );
 };
 
-export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
-  try {
-    const data = await getData();
-    const defaultTitle = data.authorization_core_sessions.side_name;
-
-    return {
-      title: {
-        default: defaultTitle,
-        template: `%s - ${defaultTitle}`
-      }
-    };
-  } catch (error) {
-    const t = await getTranslator(locale, 'core');
-
-    return {
-      title: t('errors.no_connection_api')
-    };
-  }
-}
-
 export default async function Layout({ children }: Props) {
   try {
+    const queryClient = getQueryClient();
     const data = await getData();
+    await queryClient.setQueryData([APIKeys.AUTHORIZATION], data);
+    const dehydratedState = dehydrate(queryClient);
 
     const Layout = lazy(() =>
       import(`@/themes/${CONFIG.default_theme}/core/layout/layout`).then(module => ({
@@ -60,9 +44,11 @@ export default async function Layout({ children }: Props) {
     );
 
     return (
-      <SessionProvider initialData={data}>
-        <Layout>{children}</Layout>
-      </SessionProvider>
+      <HydrationBoundary state={dehydratedState}>
+        <SessionProvider>
+          <Layout>{children}</Layout>
+        </SessionProvider>
+      </HydrationBoundary>
     );
   } catch (error) {
     return <InternalErrorView />;

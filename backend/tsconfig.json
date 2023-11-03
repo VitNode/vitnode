@@ -19,7 +19,8 @@
     "noFallthroughCasesInSwitch": false,
     "resolveJsonModule": true,
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "~/*": ["../*"]
     }
   }
 }

@@ -10,7 +10,6 @@ import { Ctx } from '@/types/context.type';
 import { CONFIG } from '@/config';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { convertUnixTime, currentDate } from '@/functions/date';
-import * as data from '@/utils/config.json';
 
 @Injectable()
 export class AuthorizationAdminSessionsService {
@@ -29,10 +28,6 @@ export class AuthorizationAdminSessionsService {
   }
 
   async authorization({ req, res }: Ctx): Promise<AuthorizationAdminSessionsObj> {
-    const others = {
-      side_name: data.side_name
-    };
-
     const tokens = {
       accessToken: req.cookies[CONFIG.access_token.admin.name],
       refreshToken: req.cookies[CONFIG.refresh_token.admin.name]
@@ -82,8 +77,7 @@ export class AuthorizationAdminSessionsService {
             newsletter: user.newsletter,
             group_id: user.group_id,
             avatar: { img: avatar, color: user.avatar_color }
-          },
-          ...others
+          }
         };
       }
     }
@@ -201,8 +195,7 @@ export class AuthorizationAdminSessionsService {
           newsletter: user.newsletter,
           group_id: user.group_id,
           avatar: { img: avatar, color: user.avatar_color }
-        },
-        ...others
+        }
       };
     }
 

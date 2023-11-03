@@ -18,13 +18,11 @@ export type Scalars = {
 
 export type AuthorizationAdminSessionsObj = {
   __typename?: 'AuthorizationAdminSessionsObj';
-  side_name: Scalars['String']['output'];
   user?: Maybe<AuthorizationCurrentUserObj>;
 };
 
 export type AuthorizationCoreSessionsObj = {
   __typename?: 'AuthorizationCoreSessionsObj';
-  side_name: Scalars['String']['output'];
   user?: Maybe<AuthorizationCurrentUserObj>;
 };
 
@@ -62,6 +60,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   create_core_groups: CreateCoreGroupsObj;
   delete_avatar_core_members: Scalars['String']['output'];
+  edit_core_languages: ShowCoreLanguages;
   edit_general_admin_settings: GeneralAdminSettingsObj;
   signIn_core_sessions: Scalars['String']['output'];
   signOut_admin_sessions: Scalars['String']['output'];
@@ -73,6 +72,15 @@ export type Mutation = {
 
 export type MutationCreate_Core_GroupsArgs = {
   name: Scalars['String']['input'];
+};
+
+
+export type MutationEdit_Core_LanguagesArgs = {
+  default: Scalars['Boolean']['input'];
+  enabled: Scalars['Boolean']['input'];
+  id: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  timezone: Scalars['String']['input'];
 };
 
 
@@ -117,6 +125,7 @@ export type Query = {
   authorization_admin_sessions: AuthorizationAdminSessionsObj;
   authorization_core_sessions: AuthorizationCoreSessionsObj;
   show_core_groups: ShowCoreGroupsObj;
+  show_core_languages: ShowCoreLanguagesObj;
   show_core_members: ShowCoreMembersObj;
 };
 
@@ -127,6 +136,13 @@ export type QueryShow_Core_GroupsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<Array<ShowCoreGroupsSortByArgs>>;
+};
+
+
+export type QueryShow_Core_LanguagesArgs = {
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -160,6 +176,22 @@ export enum ShowCoreGroupsSortingColumnEnum {
   Created = 'created',
   Name = 'name'
 }
+
+export type ShowCoreLanguages = {
+  __typename?: 'ShowCoreLanguages';
+  default: Scalars['Boolean']['output'];
+  enabled: Scalars['Boolean']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  protected: Scalars['Boolean']['output'];
+  timezone: Scalars['String']['output'];
+};
+
+export type ShowCoreLanguagesObj = {
+  __typename?: 'ShowCoreLanguagesObj';
+  edges: Array<ShowCoreLanguages>;
+  pageInfo: PageInfo;
+};
 
 export type ShowCoreMembers = {
   __typename?: 'ShowCoreMembers';
@@ -239,6 +271,17 @@ export type Edit_General_Admin_SettingsMutationVariables = Exact<{
 
 export type Edit_General_Admin_SettingsMutation = { __typename?: 'Mutation', edit_general_admin_settings: { __typename?: 'GeneralAdminSettingsObj', side_name: string } };
 
+export type Edit_Core_LanguagesMutationVariables = Exact<{
+  default: Scalars['Boolean']['input'];
+  enabled: Scalars['Boolean']['input'];
+  id: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  timezone: Scalars['String']['input'];
+}>;
+
+
+export type Edit_Core_LanguagesMutation = { __typename?: 'Mutation', edit_core_languages: { __typename?: 'ShowCoreLanguages', default: boolean, enabled: boolean, id: string, name: string, protected: boolean, timezone: string } };
+
 export type Delete_Avatar_Core_MembersMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -280,7 +323,7 @@ export type SignOut_Core_SessionsMutation = { __typename?: 'Mutation', signOut_c
 export type Authorization_Admin_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Authorization_Admin_SessionsQuery = { __typename?: 'Query', authorization_admin_sessions: { __typename?: 'AuthorizationAdminSessionsObj', side_name: string, user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null } };
+export type Authorization_Admin_SessionsQuery = { __typename?: 'Query', authorization_admin_sessions: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null } };
 
 export type Show_Core_GroupsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -293,16 +336,43 @@ export type Show_Core_GroupsQueryVariables = Exact<{
 
 export type Show_Core_GroupsQuery = { __typename?: 'Query', show_core_groups: { __typename?: 'ShowCoreGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowCoreGroups', created: number, id: number, name: string }> } };
 
+export type Show_Core_LanguagesQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  cursor?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Show_Core_LanguagesQuery = { __typename?: 'Query', show_core_languages: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, enabled: boolean, id: string, name: string, protected: boolean, timezone: string }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
+
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', side_name: string, user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null } };
+export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null } };
 
 
 export const Edit_General_Admin_Settings = gql`
     mutation Edit_general_admin_settings($sideName: String!) {
   edit_general_admin_settings(side_name: $sideName) {
     side_name
+  }
+}
+    `;
+export const Edit_Core_Languages = gql`
+    mutation Edit_core_languages($default: Boolean!, $enabled: Boolean!, $id: String!, $name: String!, $timezone: String!) {
+  edit_core_languages(
+    default: $default
+    enabled: $enabled
+    id: $id
+    name: $name
+    timezone: $timezone
+  ) {
+    default
+    enabled
+    id
+    name
+    protected
+    timezone
   }
 }
     `;
@@ -388,7 +458,6 @@ export const Authorization_Admin_Sessions = gql`
         }
       }
     }
-    side_name
   }
 }
     `;
@@ -413,6 +482,28 @@ export const Show_Core_Groups = gql`
       created
       id
       name
+    }
+  }
+}
+    `;
+export const Show_Core_Languages = gql`
+    query Show_core_languages($first: Int, $last: Int, $cursor: String) {
+  show_core_languages(first: $first, last: $last, cursor: $cursor) {
+    edges {
+      default
+      enabled
+      id
+      name
+      protected
+      timezone
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
     }
   }
 }
@@ -446,7 +537,6 @@ export const Authorization_Core_Sessions = gql`
       name_seo
       newsletter
     }
-    side_name
   }
 }
     `;

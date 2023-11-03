@@ -1,0 +1,69 @@
+{
+  "admin": {
+    "title": "Panel kontrolny administratora",
+    "title_short": "Admin",
+    "default": "Domyślny",
+    "nav": {
+      "core": {
+        "title": "Rdzeń",
+        "dashboard": "Pulpit",
+        "general": "Ogólne",
+        "email": "Email",
+        "webapp": "Web App",
+        "langs": "Języki"
+      },
+      "users": {
+        "title": "Użytkownicy",
+        "list": "Użytkownicy",
+        "groups": "Grupy"
+      }
+    },
+    "home_page": "Strona główna",
+    "core": {
+      "general": {
+        "title": "Ogólne ustawienia",
+        "main": {
+          "title": "Ustawienia główne",
+          "form": {
+            "name": {
+              "label": "Nazwa strony"
+            }
+          }
+        }
+      },
+      "langs": {
+        "title": "Języki",
+        "table": {
+          "name": "Nazwa",
+          "key": "Klucz",
+          "enabled": "Włączony"
+        },
+        "actions": {
+          "edit": {
+            "title": "Edytuj",
+            "forms": {
+              "name": "Name",
+              "timezone": "Timezone",
+              "submit": "Zapisz zmiany"
+            }
+          }
+        }
+      }
+    },
+    "users": {
+      "groups": {
+        "title": "Grupy",
+        "desc": "Test 123",
+        "table": {
+          "name": "Nazwa",
+          "users": "Użytkownicy"
+        },
+        "actions": {
+          "edit": {
+            "title": "Edytuj"
+          }
+        }
+      }
+    }
+  }
+}

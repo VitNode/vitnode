@@ -16,6 +16,11 @@
     "lint": "cd backend && npm run lint && cd .. && cd frontend && npm run lint && cd ..",
     "lint:fix": "cd backend && npm run lint:fix && cd .. && cd frontend && npm run lint:fix && cd .."
   },
+  "overrides": {
+    "next-intl": {
+      "next": "^14.0.0"
+    }
+  },
   "workspaces": [
     "frontend",
     "backend"

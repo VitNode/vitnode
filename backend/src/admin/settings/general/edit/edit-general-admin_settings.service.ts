@@ -9,9 +9,14 @@ import { EditGeneralAdminSettingsArgs } from './dto/edit-general-admin_settings.
 @Injectable()
 export class EditGeneralAdminSettingsService {
   async edit(data: EditGeneralAdminSettingsArgs): Promise<GeneralAdminSettingsObj> {
-    const urlToFile = join('utils', `config.json`);
+    const config = fs.readFileSync(join('..', 'config.json'), 'utf8');
 
-    fs.writeFile(urlToFile, JSON.stringify(data, null, 2), 'utf8', err => {
+    const newData = {
+      ...JSON.parse(config),
+      ...data
+    };
+
+    fs.writeFile(join('..', 'config.json'), JSON.stringify(newData, null, 2), 'utf8', err => {
       if (err) throw err;
     });
 

@@ -26,6 +26,5 @@ query Authorization_admin_sessions {
         }
       }
     }
-    side_name
   }
 }

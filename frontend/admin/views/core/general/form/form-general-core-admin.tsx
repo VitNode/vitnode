@@ -26,9 +26,13 @@ export const FormGeneralCoreAdmin = () => {
   const { isPending, mutateAsync } = useGeneralSettingsAdminAPI();
 
   const formSchema = z.object({
-    name: z.string().nonempty({
-      message: tCore('forms.empty')
-    })
+    name: z
+      .string({
+        required_error: tCore('forms.empty')
+      })
+      .min(1, {
+        message: tCore('forms.empty')
+      })
   });
 
   const form = useForm<z.infer<typeof formSchema>>({

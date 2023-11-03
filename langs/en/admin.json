@@ -1,0 +1,69 @@
+{
+  "admin": {
+    "title": "Admin Control Panel",
+    "title_short": "Admin",
+    "default": "Default",
+    "nav": {
+      "core": {
+        "title": "Core",
+        "dashboard": "Dashboard",
+        "general": "General",
+        "email": "Email",
+        "webapp": "Web App",
+        "langs": "Languages"
+      },
+      "users": {
+        "title": "Users",
+        "list": "Users",
+        "groups": "Groups"
+      }
+    },
+    "home_page": "Home Page",
+    "core": {
+      "general": {
+        "title": "General Settings",
+        "main": {
+          "title": "Main Settings",
+          "form": {
+            "name": {
+              "label": "Name Site"
+            }
+          }
+        }
+      },
+      "langs": {
+        "title": "Languages",
+        "table": {
+          "name": "Name",
+          "key": "Key",
+          "enabled": "Enabled"
+        },
+        "actions": {
+          "edit": {
+            "title": "Edit",
+            "forms": {
+              "name": "Name",
+              "timezone": "Timezone",
+              "submit": "Save changes"
+            }
+          }
+        }
+      }
+    },
+    "users": {
+      "groups": {
+        "title": "Groups",
+        "desc": "Test 123",
+        "table": {
+          "name": "Name",
+          "users": "Users"
+        },
+        "actions": {
+          "edit": {
+            "title": "Edit"
+          }
+        }
+      }
+    }
+  }
+}

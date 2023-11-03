@@ -10,12 +10,20 @@ export const useSignInView = () => {
   const mutation = useSignInAPI();
 
   const formSchema = z.object({
-    email: z.string().nonempty({
-      message: t('forms.empty')
-    }),
-    password: z.string().nonempty({
-      message: t('forms.empty')
-    }),
+    email: z
+      .string({
+        required_error: t('forms.empty')
+      })
+      .min(1, {
+        message: t('forms.empty')
+      }),
+    password: z
+      .string({
+        required_error: t('forms.empty')
+      })
+      .min(1, {
+        message: t('forms.empty')
+      }),
     remember: z.boolean()
   });
 

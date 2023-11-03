@@ -3,12 +3,10 @@
 # ------------------------------------------------------
 
 type AuthorizationAdminSessionsObj {
-  side_name: String!
   user: AuthorizationCurrentUserObj
 }
 
 type AuthorizationCoreSessionsObj {
-  side_name: String!
   user: AuthorizationCurrentUserObj
 }
 
@@ -41,6 +39,7 @@ type GeneralAdminSettingsObj {
 type Mutation {
   create_core_groups(name: String!): CreateCoreGroupsObj!
   delete_avatar_core_members: String!
+  edit_core_languages(default: Boolean!, enabled: Boolean!, id: String!, name: String!, timezone: String!): ShowCoreLanguages!
   edit_general_admin_settings(side_name: String!): GeneralAdminSettingsObj!
   signIn_core_sessions(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   signOut_admin_sessions: String!
@@ -62,6 +61,7 @@ type Query {
   authorization_admin_sessions: AuthorizationAdminSessionsObj!
   authorization_core_sessions: AuthorizationCoreSessionsObj!
   show_core_groups(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowCoreGroupsSortByArgs!]): ShowCoreGroupsObj!
+  show_core_languages(cursor: String, first: Int, last: Int): ShowCoreLanguagesObj!
   show_core_members(cursor: String, first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
 }
 
@@ -84,6 +84,20 @@ input ShowCoreGroupsSortByArgs {
 enum ShowCoreGroupsSortingColumnEnum {
   created
   name
+}
+
+type ShowCoreLanguages {
+  default: Boolean!
+  enabled: Boolean!
+  id: String!
+  name: String!
+  protected: Boolean!
+  timezone: String!
+}
+
+type ShowCoreLanguagesObj {
+  edges: [ShowCoreLanguages!]!
+  pageInfo: PageInfo!
 }
 
 type ShowCoreMembers {

@@ -1,7 +1,10 @@
+import configs from '~/config.json';
+
 import { ReactNode } from 'react';
 import { cookies } from 'next/headers';
 import { getTranslator } from 'next-intl/server';
 import { Metadata } from 'next';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
 import { AdminLayout } from '@/admin/layout/admin-layout';
 import { SessionAdminProvider } from './session-admin-provider';
@@ -13,6 +16,8 @@ import {
   Authorization_Admin_SessionsQuery,
   Authorization_Admin_SessionsQueryVariables
 } from '@/graphql/hooks';
+import getQueryClient from '@/functions/get-query-client';
+import { APIKeys } from '@/graphql/api-keys';
 
 const getData = async () => {
   const cookieStore = cookies();
@@ -38,41 +43,31 @@ interface Props {
 }
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
-  const t = await getTranslator(locale, 'core');
-  const tAdmin = await getTranslator(locale, 'admin');
+  const t = await getTranslator(locale, 'admin');
 
-  try {
-    const data = await getData();
-    if (!data) {
-      return {
-        title: `${t('errors.no_connection_api')} - ${tAdmin('title_short')}`
-      };
+  const defaultTitle = `${t('title_short')} - ${configs.side_name}`;
+
+  return {
+    title: {
+      default: defaultTitle,
+      template: `%s - ${defaultTitle}`
     }
-    const defaultTitle = `${tAdmin('title_short')} - ${
-      data.authorization_admin_sessions.side_name
-    }`;
-
-    return {
-      title: {
-        default: defaultTitle,
-        template: `%s - ${defaultTitle}`
-      }
-    };
-  } catch (error) {
-    return {
-      title: t('errors.no_connection_api')
-    };
-  }
+  };
 }
 
 export default async function Layout({ children }: Props) {
   try {
-    const initialDataSession = await getData();
+    const queryClient = getQueryClient();
+    const data = await getData();
+    await queryClient.setQueryData([APIKeys.AUTHORIZATION_ADMIN], data);
+    const dehydratedState = dehydrate(queryClient);
 
     return (
-      <SessionAdminProvider initialDataSession={initialDataSession}>
-        <AdminLayout>{children}</AdminLayout>
-      </SessionAdminProvider>
+      <HydrationBoundary state={dehydratedState}>
+        <SessionAdminProvider>
+          <AdminLayout>{children}</AdminLayout>
+        </SessionAdminProvider>
+      </HydrationBoundary>
     );
   } catch (error) {
     redirect('/admin');
