@@ -20,6 +20,7 @@ export const ContentTableGroupsUsersAdmin = () => {
       data={data.show_core_groups.edges}
       pageInfo={data.show_core_groups.pageInfo}
       defaultItemsPerPage={10}
+      isFetching={isFetching}
       columns={[
         {
           header: t('users.groups.table.name'),

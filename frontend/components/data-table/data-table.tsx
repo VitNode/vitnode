@@ -17,11 +17,13 @@ import { Button } from '../ui/button';
 import { PageInfo } from '@/graphql/hooks';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { usePathname, useRouter } from '@/i18n';
+import { GlobalLoader } from '../loader/global/global-loader';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   defaultItemsPerPage: number;
+  isFetching: boolean | undefined;
   pageInfo: PageInfo;
 }
 
@@ -29,6 +31,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
   defaultItemsPerPage,
+  isFetching,
   pageInfo
 }: DataTableProps<TData, TValue>) {
   const searchParams = useSearchParams();
@@ -79,7 +82,8 @@ export function DataTable<TData, TValue>({
   };
 
   return (
-    <div>
+    <>
+      {isFetching && <GlobalLoader />}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -175,6 +179,6 @@ export function DataTable<TData, TValue>({
           </Button>
         </div>
       </div>
-    </div>
+    </>
   );
 }

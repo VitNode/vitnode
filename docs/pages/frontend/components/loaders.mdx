@@ -1,0 +1,80 @@
+import { Callout } from 'nextra/components';
+
+# Loaders
+
+VitNode provides a few loaders to help you load any data to the frontend.
+
+## Loader
+
+This loader looks like a spinner and it's used to show that something is loading.
+
+```tsx
+import { Loader } from '@/components/loader/loader';
+
+export const TestComponent = () => {
+  if (isLoading) return <Loader />;
+
+  return <div>Test</div>;
+};
+```
+
+This component accepts also a smaller version by passing the `small` prop.
+
+<Callout type="info" emoji="ℹ️">
+  You can use `<Loader />` component to show a loader in the middle of the page when you're loading
+  data.
+</Callout>
+
+## Global Loader
+
+If you don't have space to put a loader in your page, you can use the global loader.
+This loader appears in the top of page.
+
+```tsx
+import { GlobalLoader } from '@/components/loader/global/global-loader';
+
+export const TestComponent = () => {
+  return <>{isLoading && <GlobalLoader />}</>;
+};
+```
+
+<Callout type="info" emoji="ℹ️">
+  You can use `<GlobalLoader />` component when your mutation is loading.
+</Callout>
+
+## Build-in Loaders
+
+We're modifying few components to help you load data to the frontend.
+
+### Button
+
+You can use the `loading` prop to show a loader inside the button.
+
+```tsx
+import { Button } from '@/components/ui/button';
+
+export const TestComponent = () => {
+  return (
+    <Button type="submit" loading={isPending}>
+      {t('save')}
+    </Button>
+  );
+};
+```
+
+### Data Table
+
+You can use the `isFetching` prop to show a global loader inside the data table.
+
+```tsx
+import { DataTable } from '@/components/data-table/data-table';
+
+export const TestComponent = () => {
+  return (
+    <DataTable
+      isFetching={isFetching}
+      ...
+    />
+  );
+};
+```
