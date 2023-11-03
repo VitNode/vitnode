@@ -1,8 +1,6 @@
 import * as fs from 'fs';
 import { join } from 'path';
 
-import * as config from '~/config.json';
-
 import { Injectable } from '@nestjs/common';
 
 import { ShowCoreLanguages } from '../show/dto/show-core_languages.obj';
@@ -10,12 +8,15 @@ import { EditCoreLanguagesArgs } from './dto/edit-core_languages.args';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { NotFountError } from '@/utils/errors/not-found';
+import { ConfigType } from '@/types/config.type';
 
 @Injectable()
 export class EditCoreLanguageService {
   constructor(private prisma: PrismaService) {}
 
   async edit({ id, ...rest }: EditCoreLanguagesArgs): Promise<ShowCoreLanguages> {
+    const configFile = fs.readFileSync(join('..', 'config.json'), 'utf8');
+    const config: ConfigType = JSON.parse(configFile);
     const language = await this.prisma.core_languages.findUnique({
       where: { id },
       select: {

@@ -18,13 +18,11 @@ export type Scalars = {
 
 export type AuthorizationAdminSessionsObj = {
   __typename?: 'AuthorizationAdminSessionsObj';
-  side_name: Scalars['String']['output'];
   user?: Maybe<AuthorizationCurrentUserObj>;
 };
 
 export type AuthorizationCoreSessionsObj = {
   __typename?: 'AuthorizationCoreSessionsObj';
-  side_name: Scalars['String']['output'];
   user?: Maybe<AuthorizationCurrentUserObj>;
 };
 
@@ -325,7 +323,7 @@ export type SignOut_Core_SessionsMutation = { __typename?: 'Mutation', signOut_c
 export type Authorization_Admin_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Authorization_Admin_SessionsQuery = { __typename?: 'Query', authorization_admin_sessions: { __typename?: 'AuthorizationAdminSessionsObj', side_name: string, user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null } };
+export type Authorization_Admin_SessionsQuery = { __typename?: 'Query', authorization_admin_sessions: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null } };
 
 export type Show_Core_GroupsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -350,7 +348,7 @@ export type Show_Core_LanguagesQuery = { __typename?: 'Query', show_core_languag
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', side_name: string, user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null } };
+export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null } };
 
 
 export const Edit_General_Admin_Settings = gql`
@@ -460,7 +458,6 @@ export const Authorization_Admin_Sessions = gql`
         }
       }
     }
-    side_name
   }
 }
     `;
@@ -540,7 +537,6 @@ export const Authorization_Core_Sessions = gql`
       name_seo
       newsletter
     }
-    side_name
   }
 }
     `;

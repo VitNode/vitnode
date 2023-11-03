@@ -1,5 +1,7 @@
 'use client';
 
+import configs from '~/config.json';
+
 import { ReactNode } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
@@ -32,7 +34,7 @@ export const SessionAdminProvider = ({ children }: Props) => {
     <SessionAdminContext.Provider
       value={{
         session: data.authorization_admin_sessions.user,
-        side_name: data.authorization_admin_sessions.side_name
+        side_name: configs.side_name
       }}
     >
       {children}

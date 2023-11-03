@@ -1,5 +1,3 @@
-import * as config from '~/config.json';
-
 import { Injectable } from '@nestjs/common';
 
 import { InternalAuthorizationCoreSessionsService } from './internal/internal_authorization-core_sessions.service';
@@ -35,10 +33,6 @@ export class AuthorizationCoreSessionsService {
   }
 
   async authorization({ req, res }: Ctx): Promise<AuthorizationCoreSessionsObj> {
-    const others = {
-      side_name: config.side_name
-    };
-
     try {
       const currentUser = await this.service.authorization({ req, res });
 
@@ -54,13 +48,11 @@ export class AuthorizationCoreSessionsService {
           ...currentUser,
           is_admin: await this.isAdmin(currentUser),
           avatar: { img: avatar, color: currentUser.avatar_color }
-        },
-        ...others
+        }
       };
     } catch (error) {
       return {
-        user: null,
-        ...others
+        user: null
       };
     }
   }

@@ -1,4 +1,5 @@
-import * as config from '~/config.json';
+import * as fs from 'fs';
+import { join } from 'path';
 
 import { Injectable } from '@nestjs/common';
 
@@ -9,12 +10,15 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { outputPagination } from '@/functions/database/pagination/outputPagination';
 import { inputPagination } from '@/functions/database/pagination/inputPagination';
 import { CustomError } from '@/utils/errors/CustomError';
+import { ConfigType } from '@/types/config.type';
 
 @Injectable()
 export class ShowCoreLanguageService {
   constructor(private prisma: PrismaService) {}
 
   async show({ cursor, first, last }: ShowCoreLanguagesArgs): Promise<ShowCoreLanguagesObj> {
+    const configFile = fs.readFileSync(join('..', 'config.json'), 'utf8');
+    const config: ConfigType = JSON.parse(configFile);
     const [edges, totalCount] = await this.prisma.$transaction([
       this.prisma.core_languages.findMany({
         ...inputPagination({ first, cursor, last }),
@@ -49,15 +53,15 @@ export class ShowCoreLanguageService {
           message: `Language "${edge.name}" enabled status is not match with config.json`
         });
       }
-    });
 
-    // Check valid default language
-    if (!edges.find(edge => edge.default && edge.id === config.languages.default)) {
-      throw new CustomError({
-        code: 'INVALID_CONFIG_WITH_DATABASE',
-        message: `Default language is not found in config.json`
-      });
-    }
+      // Check valid default language
+      if (edge.default && config.languages.default !== edge.id) {
+        throw new CustomError({
+          code: 'INVALID_CONFIG_WITH_DATABASE',
+          message: `Language "${edge.name}" is default but not match with config.json`
+        });
+      }
+    });
 
     return outputPagination({
       edges,

@@ -1,5 +1,5 @@
 {
-  "side_name": "VitNode Community 123",
+  "side_name": "VitNode Community",
   "languages": {
     "locales": [
       {
@@ -13,5 +13,8 @@
     ],
     "default": "en"
   },
-  "applications": ["core", "admin"]
+  "applications": [
+    "core",
+    "admin"
+  ]
 }

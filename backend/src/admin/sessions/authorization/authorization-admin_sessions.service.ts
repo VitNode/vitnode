@@ -1,5 +1,3 @@
-import * as config from '~/config.json';
-
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UAParser } from 'ua-parser-js';
@@ -30,10 +28,6 @@ export class AuthorizationAdminSessionsService {
   }
 
   async authorization({ req, res }: Ctx): Promise<AuthorizationAdminSessionsObj> {
-    const others = {
-      side_name: config.side_name
-    };
-
     const tokens = {
       accessToken: req.cookies[CONFIG.access_token.admin.name],
       refreshToken: req.cookies[CONFIG.refresh_token.admin.name]
@@ -83,8 +77,7 @@ export class AuthorizationAdminSessionsService {
             newsletter: user.newsletter,
             group_id: user.group_id,
             avatar: { img: avatar, color: user.avatar_color }
-          },
-          ...others
+          }
         };
       }
     }
@@ -202,8 +195,7 @@ export class AuthorizationAdminSessionsService {
           newsletter: user.newsletter,
           group_id: user.group_id,
           avatar: { img: avatar, color: user.avatar_color }
-        },
-        ...others
+        }
       };
     }
 

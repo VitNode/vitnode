@@ -3,12 +3,10 @@
 # ------------------------------------------------------
 
 type AuthorizationAdminSessionsObj {
-  side_name: String!
   user: AuthorizationCurrentUserObj
 }
 
 type AuthorizationCoreSessionsObj {
-  side_name: String!
   user: AuthorizationCurrentUserObj
 }
 

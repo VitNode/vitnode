@@ -24,7 +24,4 @@ export class AuthorizationCurrentUserObj extends User {
 export class AuthorizationCoreSessionsObj {
   @Field(() => AuthorizationCurrentUserObj, { nullable: true })
   user?: AuthorizationCurrentUserObj;
-
-  @Field(() => String)
-  side_name: string;
 }

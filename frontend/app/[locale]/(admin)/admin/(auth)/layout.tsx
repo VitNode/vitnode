@@ -1,3 +1,5 @@
+import configs from '~/config.json';
+
 import { ReactNode } from 'react';
 import { cookies } from 'next/headers';
 import { getTranslator } from 'next-intl/server';
@@ -41,31 +43,16 @@ interface Props {
 }
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
-  const t = await getTranslator(locale, 'core');
-  const tAdmin = await getTranslator(locale, 'admin');
+  const t = await getTranslator(locale, 'admin');
 
-  try {
-    const data = await getData();
-    if (!data) {
-      return {
-        title: `${t('errors.no_connection_api')} - ${tAdmin('title_short')}`
-      };
+  const defaultTitle = `${t('title_short')} - ${configs.side_name}`;
+
+  return {
+    title: {
+      default: defaultTitle,
+      template: `%s - ${defaultTitle}`
     }
-    const defaultTitle = `${tAdmin('title_short')} - ${
-      data.authorization_admin_sessions.side_name
-    }`;
-
-    return {
-      title: {
-        default: defaultTitle,
-        template: `%s - ${defaultTitle}`
-      }
-    };
-  } catch (error) {
-    return {
-      title: t('errors.no_connection_api')
-    };
-  }
+  };
 }
 
 export default async function Layout({ children }: Props) {
