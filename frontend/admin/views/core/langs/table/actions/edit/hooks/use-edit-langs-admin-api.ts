@@ -5,9 +5,11 @@ import { fetcher } from '@/graphql/fetcher';
 import {
   Edit_Core_Languages,
   Edit_Core_LanguagesMutation,
-  Edit_Core_LanguagesMutationVariables
+  Edit_Core_LanguagesMutationVariables,
+  Show_Core_LanguagesQuery
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
+import { useDialog } from '@/components/ui/dialog';
 
 export const useEditLangsAdminAPI = () => {
   const queryClient = useQueryClient();
@@ -17,6 +19,7 @@ export const useEditLangsAdminAPI = () => {
     last: searchParams.get('last'),
     cursor: searchParams.get('cursor')
   };
+  const { setOpen } = useDialog();
 
   return useMutation({
     mutationFn: async (variables: Edit_Core_LanguagesMutationVariables) =>
@@ -24,10 +27,29 @@ export const useEditLangsAdminAPI = () => {
         query: Edit_Core_Languages,
         variables
       }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: [APIKeys.LANGUAGES_ADMIN, { ...pagination }]
-      });
+    onSuccess: data => {
+      setOpen(false);
+
+      queryClient.setQueryData<Show_Core_LanguagesQuery>(
+        [APIKeys.LANGUAGES_ADMIN, { ...pagination }],
+        oldData => {
+          if (!oldData) return oldData;
+
+          return {
+            ...oldData,
+            show_core_languages: {
+              ...oldData.show_core_languages,
+              edges: oldData.show_core_languages.edges.map(edge => {
+                if (edge.id === data.edit_core_languages.id) {
+                  return data.edit_core_languages;
+                }
+
+                return edge;
+              })
+            }
+          };
+        }
+      );
     }
   });
 };

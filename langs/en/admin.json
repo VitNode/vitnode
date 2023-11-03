@@ -40,7 +40,12 @@
         },
         "actions": {
           "edit": {
-            "title": "Edit"
+            "title": "Edit",
+            "forms": {
+              "name": "Name",
+              "timezone": "Timezone",
+              "submit": "Save changes"
+            }
           }
         }
       }

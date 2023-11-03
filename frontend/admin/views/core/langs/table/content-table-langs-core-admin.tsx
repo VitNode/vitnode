@@ -5,7 +5,7 @@ import { useLangsAdminAPI } from './hooks/use-langs-admin-api';
 import { DataTable } from '@/components/data-table/data-table';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
-import { useEditLangsAdminAPI } from './hooks/use-edit-langs-admin-api';
+import { useEditLangsAdminAPI } from './actions/edit/hooks/use-edit-langs-admin-api';
 import { ActionsTableLangsCoreAdmin } from './actions/actions-table-langs-core-admin';
 
 export const ContentTableLangsCoreAdmin = () => {
@@ -46,8 +46,8 @@ export const ContentTableLangsCoreAdmin = () => {
 
               return (
                 <Switch
-                  checked={data.enabled}
                   disabled={data.default || data.protected}
+                  checked={data.enabled}
                   onClick={async () => {
                     await mutateAsync({
                       ...data,
@@ -66,9 +66,7 @@ export const ContentTableLangsCoreAdmin = () => {
             header: '',
             accessorKey: 'actions',
             cell: ({ row }) => {
-              //  const data = row.original;
-
-              return <ActionsTableLangsCoreAdmin />;
+              return <ActionsTableLangsCoreAdmin {...row.original} />;
             }
           }
         ]}

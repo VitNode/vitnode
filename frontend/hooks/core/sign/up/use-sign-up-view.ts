@@ -16,12 +16,20 @@ export const useSignUpView = () => {
 
   const formSchema = z
     .object({
-      name: z.string().nonempty({
-        message: t('forms.empty')
-      }),
-      email: z.string().nonempty({
-        message: t('forms.empty')
-      }),
+      name: z
+        .string({
+          required_error: t('forms.empty')
+        })
+        .min(1, {
+          message: t('forms.empty')
+        }),
+      email: z
+        .string({
+          required_error: t('forms.empty')
+        })
+        .min(1, {
+          message: t('forms.empty')
+        }),
       birthday: z
         .string()
         .refine(
@@ -31,12 +39,20 @@ export const useSignUpView = () => {
             message: t('sign_up.form.birthday.too_young', { years: 13 })
           }
         ),
-      password: z.string().nonempty({
-        message: t('forms.empty')
-      }),
-      password_confirmation: z.string().nonempty({
-        message: t('forms.empty')
-      }),
+      password: z
+        .string({
+          required_error: t('forms.empty')
+        })
+        .min(1, {
+          message: t('forms.empty')
+        }),
+      password_confirmation: z
+        .string({
+          required_error: t('forms.empty')
+        })
+        .min(1, {
+          message: t('forms.empty')
+        }),
       terms: z.boolean().refine(value => value, {
         message: t('sign_up.form.terms.empty')
       }),
