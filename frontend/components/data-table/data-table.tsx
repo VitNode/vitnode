@@ -150,7 +150,7 @@ export function DataTable<TData, TValue>({
         <div className="flex items-center space-x-2">
           <Button
             variant="outline"
-            className="h-8 w-8 p-0"
+            size="icon"
             disabled={!pageInfo.hasPreviousPage}
             onClick={() =>
               changeState({
@@ -164,7 +164,7 @@ export function DataTable<TData, TValue>({
           </Button>
           <Button
             variant="outline"
-            className="h-8 w-8 p-0"
+            size="icon"
             disabled={!pageInfo.hasNextPage}
             onClick={() =>
               changeState({

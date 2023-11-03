@@ -37,6 +37,11 @@
           "name": "Nazwa",
           "key": "Klucz",
           "enabled": "Włączony"
+        },
+        "actions": {
+          "edit": {
+            "title": "Edytuj"
+          }
         }
       }
     },

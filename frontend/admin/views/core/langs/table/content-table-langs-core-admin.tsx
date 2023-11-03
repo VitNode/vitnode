@@ -6,6 +6,7 @@ import { DataTable } from '@/components/data-table/data-table';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
 import { useEditLangsAdminAPI } from './hooks/use-edit-langs-admin-api';
+import { ActionsTableLangsCoreAdmin } from './actions/actions-table-langs-core-admin';
 
 export const ContentTableLangsCoreAdmin = () => {
   const t = useTranslations('admin');
@@ -65,9 +66,9 @@ export const ContentTableLangsCoreAdmin = () => {
             header: '',
             accessorKey: 'actions',
             cell: ({ row }) => {
-              const data = row.original;
+              //  const data = row.original;
 
-              return <div>Actions = {data.id}</div>;
+              return <ActionsTableLangsCoreAdmin />;
             }
           }
         ]}

@@ -44,8 +44,7 @@ export const ContentTableGroupsUsersAdmin = () => {
                         href={`/admin/users/groups/${data.id}`}
                         className={buttonVariants({
                           variant: 'ghost',
-                          size: 'icon',
-                          className: 'w-8 h-8 [&>svg]:w-4 [&>svg]:h-4'
+                          size: 'icon'
                         })}
                       >
                         <Pencil />
