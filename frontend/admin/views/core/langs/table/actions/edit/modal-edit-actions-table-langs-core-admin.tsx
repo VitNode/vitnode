@@ -58,7 +58,7 @@ export const ModalEditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => 
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{t('core.langs.actions.edit.title')}</DialogTitle>
+        <DialogTitle>{data.name}</DialogTitle>
       </DialogHeader>
 
       <Form {...form}>

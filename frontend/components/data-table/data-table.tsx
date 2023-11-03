@@ -4,6 +4,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
+import { useMemo } from 'react';
 
 import {
   Table,
@@ -24,7 +25,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   defaultItemsPerPage: number;
   isFetching: boolean | undefined;
-  pageInfo: PageInfo;
+  pageInfo?: PageInfo;
 }
 
 export function DataTable<TData, TValue>({
@@ -39,8 +40,8 @@ export function DataTable<TData, TValue>({
   const { push } = useRouter();
   const t = useTranslations('core');
   const table = useReactTable({
-    data,
-    columns,
+    data: useMemo(() => data, [data]),
+    columns: useMemo(() => columns, [columns]),
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true
   });
@@ -123,61 +124,63 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
 
-      <div className="flex items-center justify-end px-2 pt-4 gap-4 lg:gap-8">
-        <div className="flex items-center space-x-2">
-          <p className="text-sm font-medium">Rows per page</p>
-          <Select
-            value={`${pagination.first || pagination.last || defaultItemsPerPage}`}
-            onValueChange={value => {
-              changeState({ pageSize: value });
-            }}
-          >
-            <SelectTrigger className="h-8 w-[70px]">
-              <SelectValue
-                placeholder={pagination.first || pagination.last || defaultItemsPerPage}
-              />
-            </SelectTrigger>
-            <SelectContent side="top">
-              {[10, 20, 30, 40, 50].map(pageSize => (
-                <SelectItem key={pageSize} value={`${pageSize}`}>
-                  {pageSize}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+      {pageInfo && (
+        <div className="flex items-center justify-end px-2 pt-4 gap-4 lg:gap-8">
+          <div className="flex items-center space-x-2">
+            <p className="text-sm font-medium">Rows per page</p>
+            <Select
+              value={`${pagination.first || pagination.last || defaultItemsPerPage}`}
+              onValueChange={value => {
+                changeState({ pageSize: value });
+              }}
+            >
+              <SelectTrigger className="h-8 w-[70px]">
+                <SelectValue
+                  placeholder={pagination.first || pagination.last || defaultItemsPerPage}
+                />
+              </SelectTrigger>
+              <SelectContent side="top">
+                {[10, 20, 30, 40, 50].map(pageSize => (
+                  <SelectItem key={pageSize} value={`${pageSize}`}>
+                    {pageSize}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
-        <div className="flex items-center space-x-2">
-          <Button
-            variant="outline"
-            size="icon"
-            disabled={!pageInfo.hasPreviousPage}
-            onClick={() =>
-              changeState({
-                cursor: pageInfo.startCursor,
-                pageSize: pagination.last
-              })
-            }
-          >
-            <span className="sr-only">{t('pagination.previous')}</span>
-            <ChevronLeftIcon className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="outline"
-            disabled={!pageInfo.hasNextPage}
-            onClick={() =>
-              changeState({
-                cursor: pageInfo.endCursor,
-                pageSize: pagination.first,
-                nextPage: true
-              })
-            }
-          >
-            <span className="sr-only">{t('pagination.next')}</span>
-            <ChevronRightIcon className="h-4 w-4" />
-          </Button>
+          <div className="flex items-center space-x-2">
+            <Button
+              variant="outline"
+              size="icon"
+              disabled={!pageInfo.hasPreviousPage}
+              onClick={() =>
+                changeState({
+                  cursor: pageInfo.startCursor,
+                  pageSize: pagination.last
+                })
+              }
+            >
+              <span className="sr-only">{t('pagination.previous')}</span>
+              <ChevronLeftIcon className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="outline"
+              disabled={!pageInfo.hasNextPage}
+              onClick={() =>
+                changeState({
+                  cursor: pageInfo.endCursor,
+                  pageSize: pagination.first,
+                  nextPage: true
+                })
+              }
+            >
+              <span className="sr-only">{t('pagination.next')}</span>
+              <ChevronRightIcon className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

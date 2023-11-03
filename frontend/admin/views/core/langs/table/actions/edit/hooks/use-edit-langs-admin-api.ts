@@ -28,8 +28,6 @@ export const useEditLangsAdminAPI = () => {
         variables
       }),
     onSuccess: data => {
-      setOpen(false);
-
       queryClient.setQueryData<Show_Core_LanguagesQuery>(
         [APIKeys.LANGUAGES_ADMIN, { ...pagination }],
         oldData => {
@@ -50,6 +48,8 @@ export const useEditLangsAdminAPI = () => {
           };
         }
       );
+
+      setOpen(false);
     }
   });
 };
