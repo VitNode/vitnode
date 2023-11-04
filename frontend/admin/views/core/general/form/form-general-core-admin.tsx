@@ -13,7 +13,6 @@ import {
   FormLabel,
   FormMessage
 } from '@/components/ui/form';
-import { CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
@@ -51,27 +50,25 @@ export const FormGeneralCoreAdmin = () => {
 
   return (
     <Form {...form}>
-      <CardContent>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:max-w-2xl">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('core.general.main.form.name.label')}</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:max-w-2xl">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t('core.general.main.form.name.label')}</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-          <Button type="submit" loading={isPending}>
-            {tCore('save')}
-          </Button>
-        </form>
-      </CardContent>
+        <Button type="submit" loading={isPending}>
+          {tCore('save')}
+        </Button>
+      </form>
     </Form>
   );
 };

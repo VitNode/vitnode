@@ -13,9 +13,9 @@ import {
   SheetTrigger
 } from '@/components/ui/sheet';
 import { ThemeOptionsDrawerAdmin } from './options/theme-options-drawer-admin';
+import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
 
 import { ListNavAdmin } from '../../nav/list/list-nav-admin';
-import { useSessionAdmin } from '../../../hooks/use-session-admin';
 
 export const DrawerAdmin = () => {
   const { session } = useSessionAdmin();

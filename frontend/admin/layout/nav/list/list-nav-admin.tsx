@@ -1,6 +1,6 @@
 'use client';
 
-import { Cpu, Users } from 'lucide-react';
+import { AtSign, Boxes, Cog, Languages, LayoutDashboard, ScreenShare, Users } from 'lucide-react';
 import { ReactNode, useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { useSelectedLayoutSegments } from 'next/navigation';
@@ -16,57 +16,62 @@ interface Props {
 
 export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
   const segments = useSelectedLayoutSegments();
-  const [activeItem, setActiveItem] = useState(segments.at(0) ?? 'core');
+  const [activeItems, setActiveItems] = useState([segments.at(0) ?? 'core']);
 
   return (
     <Accordion.Root
-      type="single"
-      defaultValue={activeItem}
-      className={cx('flex flex-col gap-2', className)}
+      type="multiple"
+      defaultValue={activeItems}
+      className={cx('flex flex-col', className)}
     >
       <ItemListNavAdmin
         id="core"
-        icon={Cpu}
-        activeItem={activeItem}
-        setActiveItem={setActiveItem}
+        activeItems={activeItems}
+        setActiveItems={setActiveItems}
         onClickItem={onClickItem}
         items={[
           {
             id: 'dashboard',
-            href: ''
+            href: '',
+            icon: LayoutDashboard
           },
           {
             id: 'general',
-            href: '/general'
+            href: '/general',
+            icon: Cog
           },
           {
             id: 'email',
-            href: '/email'
+            href: '/email',
+            icon: AtSign
           },
           {
             id: 'webapp',
-            href: '/webapp'
+            href: '/webapp',
+            icon: ScreenShare
           },
           {
             id: 'langs',
-            href: '/langs'
+            href: '/langs',
+            icon: Languages
           }
         ]}
       />
       <ItemListNavAdmin
         id="users"
-        icon={Users}
-        activeItem={activeItem}
-        setActiveItem={setActiveItem}
+        activeItems={activeItems}
+        setActiveItems={setActiveItems}
         onClickItem={onClickItem}
         items={[
           {
             id: 'list',
-            href: ''
+            href: '',
+            icon: Users
           },
           {
             id: 'groups',
-            href: '/groups'
+            href: '/groups',
+            icon: Boxes
           }
         ]}
       />
