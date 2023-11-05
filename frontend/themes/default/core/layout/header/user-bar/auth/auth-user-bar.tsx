@@ -15,7 +15,6 @@ import { useSession } from '@/hooks/core/use-session';
 import { useSignOutAPI } from '@/hooks/core/sign/out/use-sign-out-api';
 import { useRouter } from '@/i18n';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
-import { ThemeAuthUserBar } from './theme-auth-user-bar';
 
 export const AuthUserBar = () => {
   const t = useTranslations('core');
@@ -33,7 +32,7 @@ export const AuthUserBar = () => {
           <AvatarUser sizeInRem={1.75} />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-72" align="end">
+      <DropdownMenuContent className="w-64" align="end">
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="font-medium leading-none text-base">{name}</p>
@@ -53,10 +52,6 @@ export const AuthUserBar = () => {
             <span>{t('user-bar.settings')}</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
-
-        <DropdownMenuSeparator />
-
-        <ThemeAuthUserBar />
 
         {is_admin && (
           <>

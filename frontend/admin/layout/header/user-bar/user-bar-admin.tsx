@@ -1,35 +1,44 @@
 'use client';
 
+import { Home, LogOut } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { LogOut } from 'lucide-react';
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
-import { useSignOutAPI } from '@/hooks/core/sign/out/use-sign-out-api';
 import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
-import { ThemeUserBarAdmin } from './theme/theme-user-bar-admin';
+import { ItemUserBarAdmin } from './item-user-bar-admin';
+import { useSignOutAdminAPI } from './hooks/use-sign-out-admin-api';
+import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
+import { Separator } from '@/components/ui/separator';
+
+import { ListNavAdmin } from '../../nav/list/list-nav-admin';
 
 export const UserBarAdmin = () => {
-  const t = useTranslations('core');
+  const t = useTranslations('admin');
+  const tCore = useTranslations('core');
   const { session } = useSessionAdmin();
-  const { mutateAsync } = useSignOutAPI();
+  const { mutateAsync } = useSignOutAdminAPI();
 
   if (!session) return null;
   const { avatar, email, id, name } = session;
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+    <Sheet>
+      <SheetTrigger asChild>
         <Button variant="ghost" className="rounded-full" size="icon">
+          <AvatarUser
+            user={{
+              avatar,
+              name,
+              id
+            }}
+            sizeInRem={2}
+          />
+        </Button>
+      </SheetTrigger>
+
+      <SheetContent className="p-0">
+        <SheetHeader className="p-4 flex-row items-center space-y-0 gap-2 text-left">
           <AvatarUser
             user={{
               avatar,
@@ -38,27 +47,32 @@ export const UserBarAdmin = () => {
             }}
             sizeInRem={1.75}
           />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-60" align="end">
-        <DropdownMenuLabel className="font-normal">
-          <div className="flex flex-col space-y-1">
+          <div className="flex flex-col">
             <p className="font-medium leading-none text-base">{name}</p>
             <p className="text-xs leading-none text-muted-foreground">{email}</p>
           </div>
-        </DropdownMenuLabel>
+        </SheetHeader>
 
-        <DropdownMenuSeparator />
-        <ThemeUserBarAdmin />
-        <DropdownMenuSeparator />
+        <div className="sm:hidden block">
+          <div className="p-2">
+            <ListNavAdmin />
+          </div>
 
-        <DropdownMenuGroup>
-          <DropdownMenuItem onClick={async () => await mutateAsync()}>
-            <LogOut className="mr-2 h-4 w-4" />
-            <span>{t('user-bar.log_out')}</span>
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
+          <Separator className="my-2" />
+        </div>
+
+        <div className="px-2">
+          <ItemUserBarAdmin href="/" target="_blank">
+            <Home /> <span>{t('home_page')}</span>
+          </ItemUserBarAdmin>
+
+          <Separator className="my-2" />
+
+          <ItemUserBarAdmin onClick={async () => await mutateAsync()}>
+            <LogOut /> <span>{tCore('user-bar.log_out')}</span>
+          </ItemUserBarAdmin>
+        </div>
+      </SheetContent>
+    </Sheet>
   );
 };

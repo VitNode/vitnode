@@ -264,6 +264,11 @@ export type UploadCoreAttachmentsObj = {
   url: Scalars['String']['output'];
 };
 
+export type SignOut_Admin_SessionsMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SignOut_Admin_SessionsMutation = { __typename?: 'Mutation', signOut_admin_sessions: string };
+
 export type Edit_General_Admin_SettingsMutationVariables = Exact<{
   sideName: Scalars['String']['input'];
 }>;
@@ -351,6 +356,11 @@ export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: n
 export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null } };
 
 
+export const SignOut_Admin_Sessions = gql`
+    mutation SignOut_admin_sessions {
+  signOut_admin_sessions
+}
+    `;
 export const Edit_General_Admin_Settings = gql`
     mutation Edit_general_admin_settings($sideName: String!) {
   edit_general_admin_settings(side_name: $sideName) {

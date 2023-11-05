@@ -166,6 +166,7 @@ export function DataTable<TData, TValue>({
             </Button>
             <Button
               variant="outline"
+              size="icon"
               disabled={!pageInfo.hasNextPage}
               onClick={() =>
                 changeState({

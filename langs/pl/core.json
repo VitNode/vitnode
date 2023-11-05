@@ -18,10 +18,10 @@
       "mod_cp": "Moderator Panel",
       "admin_cp": "Admin Panel",
       "theme": {
-        "title": "Motyw",
         "light": "Jasny",
         "dark": "Ciemny",
-        "system": "System"
+        "system": "System",
+        "toggle": "Przełącz motyw"
       }
     },
     "forms": {

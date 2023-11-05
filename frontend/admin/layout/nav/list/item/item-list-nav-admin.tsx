@@ -9,26 +9,24 @@ import { LinkItemListNavAdmin } from './link/link-item-list-nav-admin';
 import { usePathname } from '@/i18n';
 
 interface Props {
-  activeItem: string;
-  icon: LucideIcon;
+  activeItems: string[];
   id: string;
   items: {
     href: string;
+    icon: LucideIcon;
     id: string;
   }[];
-  setActiveItem: Dispatch<SetStateAction<string>>;
+  setActiveItems: Dispatch<SetStateAction<string[]>>;
   onClickItem?: () => void;
 }
 
 export const ItemListNavAdmin = ({
-  activeItem,
-  icon,
+  activeItems,
   id,
   items,
   onClickItem,
-  setActiveItem
+  setActiveItems
 }: Props) => {
-  const Icon = icon;
   const pathname = usePathname();
   const pathnameId = pathname.split('/').at(2);
   const t = useTranslations('admin');
@@ -39,20 +37,20 @@ export const ItemListNavAdmin = ({
         <Accordion.Trigger
           className={cx(
             'w-full justify-start flex gap-2',
-            buttonVariants({ variant: id === pathnameId ? 'default' : 'ghost' }),
-            {
-              'font-semibold': id === pathnameId
-            }
+            buttonVariants({ variant: id === pathnameId ? 'default' : 'ghost', size: 'sm' })
           )}
-          onClick={() => setActiveItem(id)}
+          onClick={() =>
+            setActiveItems(prev =>
+              prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
+            )
+          }
         >
-          <Icon className="w-5 h-5 flex-shrink-0" />
           {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
           {/* @ts-expect-error */}
           <span>{t(`nav.${id}.title`)}</span>
           <ChevronDown
             className={cx('w-5 h-5 ml-auto transition-transform flex-shrink-0', {
-              'transform rotate-180': id === activeItem
+              'transform rotate-180': activeItems.includes(id)
             })}
           />
         </Accordion.Trigger>
@@ -67,6 +65,7 @@ export const ItemListNavAdmin = ({
               id={el.id}
               primaryId={id}
               onClick={onClickItem}
+              icon={el.icon}
             />
           ))}
         </ul>

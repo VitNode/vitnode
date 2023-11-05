@@ -4,15 +4,15 @@ import { useTranslations } from 'next-intl';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Authorization_Core_SessionsQuery,
-  SignOut_Core_Sessions,
-  SignOut_Core_SessionsMutation,
-  SignOut_Core_SessionsMutationVariables
+  SignOut_Admin_Sessions,
+  SignOut_Admin_SessionsMutation,
+  SignOut_Admin_SessionsMutationVariables
 } from '@/graphql/hooks';
 import { useRouter } from '@/i18n';
 import { APIKeys } from '@/graphql/api-keys';
 import { useToast } from '@/components/ui/use-toast';
 
-export const useSignOutAPI = () => {
+export const useSignOutAdminAPI = () => {
   const t = useTranslations('core');
   const queryClient = useQueryClient();
   const { push } = useRouter();
@@ -20,8 +20,8 @@ export const useSignOutAPI = () => {
 
   return useMutation({
     mutationFn: async () =>
-      await fetcher<SignOut_Core_SessionsMutation, SignOut_Core_SessionsMutationVariables>({
-        query: SignOut_Core_Sessions
+      await fetcher<SignOut_Admin_SessionsMutation, SignOut_Admin_SessionsMutationVariables>({
+        query: SignOut_Admin_Sessions
       }),
     onError: () => {
       toast({
@@ -31,19 +31,22 @@ export const useSignOutAPI = () => {
       });
     },
     onSuccess: () => {
-      queryClient.setQueryData<Authorization_Core_SessionsQuery>([APIKeys.AUTHORIZATION], old => {
-        if (!old) return old;
+      queryClient.setQueryData<Authorization_Core_SessionsQuery>(
+        [APIKeys.AUTHORIZATION_ADMIN],
+        old => {
+          if (!old) return old;
 
-        return {
-          ...old,
-          authorization_core_sessions: {
-            ...old.authorization_core_sessions,
-            user: null
-          }
-        };
-      });
+          return {
+            ...old,
+            authorization_core_sessions: {
+              ...old.authorization_core_sessions,
+              user: null
+            }
+          };
+        }
+      );
 
-      push('/');
+      push('/admin');
     }
   });
 };
