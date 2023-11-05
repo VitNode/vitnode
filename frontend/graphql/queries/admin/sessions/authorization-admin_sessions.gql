@@ -27,4 +27,12 @@ query Authorization_admin_sessions {
       }
     }
   }
+  show_core_languages {
+    edges {
+      id
+      name
+      enabled
+      timezone
+    }
+  }
 }

@@ -22,6 +22,9 @@
         "dark": "Ciemny",
         "system": "System",
         "toggle": "Przełącz motyw"
+      },
+      "language": {
+        "change": "Zmień język"
       }
     },
     "forms": {

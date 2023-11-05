@@ -27,4 +27,12 @@ query Authorization_core_sessions {
       newsletter
     }
   }
+  show_core_languages {
+    edges {
+      id
+      name
+      enabled
+      timezone
+    }
+  }
 }

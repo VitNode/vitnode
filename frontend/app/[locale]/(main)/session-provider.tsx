@@ -26,7 +26,12 @@ export const SessionProvider = ({ children }: Props) => {
   });
 
   return (
-    <SessionContext.Provider value={{ session: data?.authorization_core_sessions.user }}>
+    <SessionContext.Provider
+      value={{
+        session: data?.authorization_core_sessions.user,
+        languages: data?.show_core_languages.edges ?? []
+      }}
+    >
       {children}
     </SessionContext.Provider>
   );

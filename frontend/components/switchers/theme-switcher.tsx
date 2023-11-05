@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 
-export const ThemeButton = () => {
+export const ThemeSwitcher = () => {
   const t = useTranslations('core');
   const { setTheme, theme } = useTheme();
 
