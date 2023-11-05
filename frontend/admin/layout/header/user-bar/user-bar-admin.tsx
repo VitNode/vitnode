@@ -6,7 +6,11 @@ import { AvatarUser } from '@/components/user/avatar/avatar-user';
 import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
 import { ContentUserBarAdmin } from './content-user-bar-admin';
 
-export const UserBarAdmin = () => {
+interface Props {
+  drawer?: boolean;
+}
+
+export const UserBarAdmin = ({ drawer }: Props) => {
   const { session } = useSessionAdmin();
 
   if (!session) return null;
@@ -27,7 +31,7 @@ export const UserBarAdmin = () => {
         </Button>
       </DropdownMenuTrigger>
 
-      <ContentUserBarAdmin />
+      <ContentUserBarAdmin drawer={drawer} />
     </DropdownMenu>
   );
 };

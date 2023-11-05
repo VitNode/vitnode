@@ -12,7 +12,11 @@ import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
 import { ThemeUserBarAdmin } from './theme/theme-user-bar-admin';
 import { useSignOutAdminAPI } from './hooks/use-sign-out-admin-api';
 
-export const ContentUserBarAdmin = () => {
+interface Props {
+  drawer?: boolean;
+}
+
+export const ContentUserBarAdmin = ({ drawer }: Props) => {
   const t = useTranslations('core');
   const { session } = useSessionAdmin();
   const { mutateAsync } = useSignOutAdminAPI();
@@ -21,7 +25,7 @@ export const ContentUserBarAdmin = () => {
   const { email, name } = session;
 
   return (
-    <DropdownMenuContent className="w-60" align="end">
+    <DropdownMenuContent className="w-60" align={drawer ? 'center' : 'end'}>
       <DropdownMenuLabel className="font-normal">
         <div className="flex flex-col space-y-1">
           <p className="font-medium leading-none text-base">{name}</p>
@@ -29,9 +33,13 @@ export const ContentUserBarAdmin = () => {
         </div>
       </DropdownMenuLabel>
 
-      <DropdownMenuSeparator />
-      <ThemeUserBarAdmin />
-      <DropdownMenuSeparator />
+      {!drawer && (
+        <>
+          <DropdownMenuSeparator />
+          <ThemeUserBarAdmin />
+          <DropdownMenuSeparator />
+        </>
+      )}
 
       <DropdownMenuGroup>
         <DropdownMenuItem onClick={async () => await mutateAsync()}>

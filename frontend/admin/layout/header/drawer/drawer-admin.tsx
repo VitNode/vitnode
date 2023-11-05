@@ -4,16 +4,10 @@ import { Menu } from 'lucide-react';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
-import {
-  Sheet,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger
-} from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { ThemeOptionsDrawerAdmin } from './options/theme-options-drawer-admin';
 import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
+import { UserBarAdmin } from '../user-bar/user-bar-admin';
 
 import { ListNavAdmin } from '../../nav/list/list-nav-admin';
 
@@ -34,18 +28,15 @@ export const DrawerAdmin = () => {
 
         <SheetContent className="p-0">
           <SheetHeader className="p-4">
-            <SheetTitle>{session.name}</SheetTitle>
+            <SheetTitle className="flex items-center justify-center gap-2">
+              <ThemeOptionsDrawerAdmin />
+              <UserBarAdmin drawer />
+            </SheetTitle>
           </SheetHeader>
 
           <div className="px-4">
             <ListNavAdmin onClickItem={() => setOpen(false)} />
           </div>
-
-          <SheetFooter className="sticky bottom-0 bg-card p-4 transition-colors duration-300">
-            <div>
-              <ThemeOptionsDrawerAdmin />
-            </div>
-          </SheetFooter>
         </SheetContent>
       </Sheet>
     </div>
