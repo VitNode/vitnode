@@ -1,0 +1,3 @@
+mutation SignOut_admin_sessions {
+  signOut_admin_sessions
+}

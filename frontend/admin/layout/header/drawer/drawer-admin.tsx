@@ -24,7 +24,7 @@ export const DrawerAdmin = () => {
   if (!session) return null;
 
   return (
-    <div className="flex sm:hidden">
+    <div className="ml-auto flex sm:hidden">
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button variant="ghost" size="icon">

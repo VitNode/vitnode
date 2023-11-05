@@ -10,7 +10,8 @@
         "general": "Ogólne",
         "email": "Email",
         "webapp": "Web App",
-        "langs": "Języki"
+        "langs": "Języki",
+        "plugins": "Wtyczki"
       },
       "users": {
         "title": "Użytkownicy",
