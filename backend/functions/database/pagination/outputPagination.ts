@@ -1,5 +1,4 @@
 import { PageInfo } from '@/types/database/pagination.type';
-import { CustomError } from '@/utils/errors/CustomError';
 
 type DataInterface<T> = T & {
   id: string | number;
@@ -26,10 +25,17 @@ export function outputPagination<T>({
   totalCount
 }: Args<T>): Return<T> {
   if (!first && !last) {
-    throw new CustomError({
-      code: 'PAGINATION_ERROR',
-      message: 'You must provide either first or last argument'
-    });
+    return {
+      edges,
+      pageInfo: {
+        totalCount,
+        count: edges.length,
+        hasNextPage: false,
+        hasPreviousPage: false,
+        startCursor: '',
+        endCursor: ''
+      }
+    };
   }
 
   let currentEdges: DataInterface<T>[] = edges;

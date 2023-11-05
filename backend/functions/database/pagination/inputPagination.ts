@@ -14,12 +14,9 @@ interface Return<T> {
   };
 }
 
-export function inputPagination<T>({ cursor, first, last }: Args<T>): Return<T> {
+export function inputPagination<T>({ cursor, first, last }: Args<T>): Return<T> | object {
   if (!first && !last) {
-    throw new CustomError({
-      code: 'PAGINATION_ERROR',
-      message: 'You must provide either first or last argument'
-    });
+    return {};
   }
 
   if (!cursor) {

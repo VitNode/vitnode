@@ -22,6 +22,9 @@
         "dark": "Dark",
         "system": "System",
         "toggle": "Toggle Theme"
+      },
+      "language": {
+        "change": "Change Language"
       }
     },
     "forms": {
