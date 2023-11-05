@@ -33,6 +33,7 @@ query Authorization_admin_sessions {
       name
       enabled
       timezone
+      default
     }
   }
 }

@@ -3,7 +3,7 @@ import { createContext, useContext } from 'react';
 import { AuthorizationCurrentUserObj, ShowCoreLanguages } from '@/graphql/hooks';
 
 interface Args {
-  languages: Omit<ShowCoreLanguages, 'default' | 'protected'>[];
+  languages: Omit<ShowCoreLanguages, 'protected'>[];
   session: AuthorizationCurrentUserObj | undefined | null;
 }
 
