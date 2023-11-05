@@ -11,6 +11,8 @@ import { useSignOutAdminAPI } from './hooks/use-sign-out-admin-api';
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
 import { Separator } from '@/components/ui/separator';
 
+import { ListNavAdmin } from '../../nav/list/list-nav-admin';
+
 export const UserBarAdmin = () => {
   const t = useTranslations('admin');
   const tCore = useTranslations('core');
@@ -50,6 +52,14 @@ export const UserBarAdmin = () => {
             <p className="text-xs leading-none text-muted-foreground">{email}</p>
           </div>
         </SheetHeader>
+
+        <div className="sm:hidden block">
+          <div className="p-2">
+            <ListNavAdmin />
+          </div>
+
+          <Separator className="my-2" />
+        </div>
 
         <div className="px-2">
           <ItemUserBarAdmin href="/" target="_blank">

@@ -1,6 +1,5 @@
 import { UserBarAdmin } from './user-bar/user-bar-admin';
-
-import { ThemeButton } from '../../../components/theme-button';
+import { ThemeButton } from '@/components/theme-button';
 
 export const HeaderAdmin = () => {
   return (
