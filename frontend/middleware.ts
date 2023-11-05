@@ -18,9 +18,10 @@ export default async function middleware(request: NextRequest) {
     query: Middleware_Core_Languages
   });
 
+  const enabledLanguages = data.show_core_languages.edges.filter(item => item.enabled);
   const handleI18nRouting = createIntlMiddleware({
-    locales: data.show_core_languages.edges.filter(item => item.enabled).map(edge => edge.id),
-    defaultLocale: data.show_core_languages.edges.find(edge => edge.default)?.id ?? 'en'
+    locales: enabledLanguages.length > 0 ? enabledLanguages.map(edge => edge.id) : ['en'],
+    defaultLocale: enabledLanguages.find(edge => edge.default)?.id || 'en'
   });
   const response = handleI18nRouting(request);
 

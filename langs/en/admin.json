@@ -8,10 +8,7 @@
         "title": "Core",
         "dashboard": "Dashboard",
         "general": "General",
-        "email": "Email",
-        "webapp": "Web App",
-        "langs": "Languages",
-        "plugins": "Plugins"
+        "langs": "Languages"
       },
       "users": {
         "title": "Users",

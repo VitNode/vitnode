@@ -8,10 +8,7 @@
         "title": "Rdzeń",
         "dashboard": "Pulpit",
         "general": "Ogólne",
-        "email": "Email",
-        "webapp": "Web App",
-        "langs": "Języki",
-        "plugins": "Wtyczki"
+        "langs": "Języki"
       },
       "users": {
         "title": "Użytkownicy",

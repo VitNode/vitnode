@@ -24,14 +24,14 @@ export const LinkItemListNavAdmin = ({ href, icon, id, onClick, primaryId }: Pro
         href={href}
         className={cx(
           buttonVariants({ variant: 'ghost', size: 'sm' }),
-          'w-full justify-start text-muted-foreground relative pl-4 hover:bg-secondary font-normal',
+          'w-full justify-start relative pl-4 hover:bg-secondary font-normal text-foreground',
           {
-            'text-foreground font-semibold': pathname === href
+            'font-semibold': pathname === href
           }
         )}
         onClick={onClick}
       >
-        <Icon className="w-5 h-5 flex-shrink-0" />
+        <Icon className="w-5 h-5 flex-shrink-0 text-muted-foreground" />
         {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
         {/* @ts-expect-error */}
         <span>{t(`nav.${primaryId}.${id}`)}</span>
