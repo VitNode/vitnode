@@ -23,10 +23,10 @@ export const LinkItemListNavAdmin = ({ href, icon, id, onClick, primaryId }: Pro
       <Link
         href={href}
         className={cx(
-          buttonVariants({ variant: 'ghost' }),
-          'w-full justify-start text-muted-foreground relative',
+          buttonVariants({ variant: 'ghost', size: 'sm' }),
+          'w-full justify-start text-muted-foreground relative pl-4 hover:bg-secondary font-normal',
           {
-            'font-bold text-foreground': pathname === href
+            'text-foreground font-semibold': pathname === href
           }
         )}
         onClick={onClick}
