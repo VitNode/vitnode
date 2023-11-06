@@ -20,5 +20,5 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 }
 
 export default function Layout({ children }: Props) {
-  return <>{children}</>;
+  return children;
 }
