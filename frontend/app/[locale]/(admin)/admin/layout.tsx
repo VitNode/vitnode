@@ -15,7 +15,8 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
   const t = await getTranslator(locale, 'admin');
 
   return {
-    title: t('title')
+    title: t('title'),
+    robots: 'noindex, nofollow'
   };
 }
 

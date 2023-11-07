@@ -62,6 +62,18 @@
           }
         }
       }
+    },
+    "configs": {
+      "mobile_not_supported": "This view is not supported on mobile devices.",
+      "install": {
+        "title": "Install {name}",
+        "steps": {
+          "step_1": {
+            "title": "Welcome",
+            "text": "Welcome to the installation wizard for {name}. This wizard will guide you through the installation process. Please make sure you have the following information before proceeding:"
+          }
+        }
+      }
     }
   }
 }

@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
 
-import { ConfigLayout } from '@/admin/configs/configs-layout';
+import { LayoutConfigs } from '@/admin/configs/layout-configs';
 
 interface Props {
   children: ReactNode;
 }
 
 export default function Layout({ children }: Props) {
-  return <ConfigLayout>{children}</ConfigLayout>;
+  return <LayoutConfigs>{children}</LayoutConfigs>;
 }

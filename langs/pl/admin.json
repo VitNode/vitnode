@@ -62,6 +62,18 @@
           }
         }
       }
+    },
+    "configs": {
+      "mobile_not_supported": "Ten widok nie jest obsługiwany na urządzeniach mobilnych.",
+      "install": {
+        "title": "Instalacja {name}",
+        "steps": {
+          "step_1": {
+            "title": "Witaj",
+            "text": "Witaj w kreatorze instalacji {name}. Ten kreator przeprowadzi Cię przez proces instalacji. Upewnij się, że masz następujące informacje przed przejściem dalej:"
+          }
+        }
+      }
     }
   }
 }
