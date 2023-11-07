@@ -1,55 +1,101 @@
+import { Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+
 # Installation
 
-import { Callout } from 'nextra/components';
+This guide will help you to install the project on your server.
 
-<Callout type="warning" emoji="⚠️">
-  This page is in progress.
-</Callout>
-
-System Requirements:
+## System Requirements
 
 - [Node.js 16.14](https://nodejs.org/) or later,
-- [PostgreSQL 14](https://www.postgresql.org/) or later,
-- macOS, Windows with [WSL](https://learn.microsoft.com/en-us/windows/wsl/install), and Linux are supported
-- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
+- [Database compatibility with Prisma](https://www.prisma.io/docs/reference/database-reference/supported-databases) (Recommended: `PostgreSQL`),
+- OS:
+  - `macOS`,
+  - `Windows` with [WSL](https://learn.microsoft.com/en-us/windows/wsl/install),
+  - and `Linux` (Recommended),
 
-## ⚠️ Requirements for VSCode
+Optional:
+
+- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
+- Package manager:
+  - [pnpm](https://pnpm.io/) (Recommended),
+  - [yarn](https://yarnpkg.com/).
+
+## Requirements for VSCode
 
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [StyleLint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
 
-## Dev Server
+## Main Steps
 
 import { Steps } from 'nextra/components';
 
 <Steps>
 
-### Clone the repository
+### Get files
+
+<Tabs items={['git', 'zip']}>
+  <Tabs.Tab>
 
 ```bash
 git clone https://github.com/aXenDeveloper/vitnode.git
 cd vitnode
 ```
 
+  </Tabs.Tab>
+  <Tabs.Tab>
+    1. Go to [GitHub VitNode](https://github.com/aXenDeveloper/vitnode),
+    2. Click on the green button `Code`,
+    3. Click on `Download ZIP`,
+    4. Unzip the file on your server,
+    5. Open the folder in the terminal.
+  </Tabs.Tab>
+</Tabs>
+
 ### Install dependencies
 
+<Tabs items={['pnpm', 'npm', 'yarn']}>
+  <Tabs.Tab>
+
+```bash
+pnpm install
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+  
 ```bash
 npm install
-npm run prepare
 ```
 
-### Docker
-
+  </Tabs.Tab>
+  <Tabs.Tab>
+  
 ```bash
-npm run docker
+yarn install
 ```
 
-### Environment variables
+  </Tabs.Tab>
+</Tabs>
 
-#### Backend
+</Steps>
 
-Go to `backlend` folder and create new `.env` file. Copy the contents from `.env.example` file.
+## Backend
+
+<Steps>
+
+### Prepere database
+
+VitNode uses Prisma to connect to the database, which means VitNode supports multiple databases like `PostgreSQL` (Recommended), `MySQL`, `MariaDB`, `Microsoft SQL Server`, `MongoDB` etc.
+
+You can read more about it [here](https://www.prisma.io/docs/reference/database-reference/supported-databases).
+
+When you choose the database, you need to create a database and user for VitNode. Save the credentials somewhere, you will need them in next step.
+
+### Environment variables for Backend
+
+Go to `backend` folder and create new `.env` file. Copy the contents from `.env.example` file.
 
 Then fill the values:
 
@@ -59,9 +105,165 @@ ACCESS_TOKEN_SECRET=SECRET
 REFRESH_TOKEN_SECRET=SECRET
 ```
 
+Description:
+
+- `DATABASE_URL` - URL to the database,
+- `ACCESS_TOKEN_SECRET` - Secret for access token,
+- `REFRESH_TOKEN_SECRET` - Secret for refresh token.
+
 <Callout type="warning" emoji="⚠️">
   Remember to change the values in `ACCESS_TOKEN_SECRET` and `REFRESH_TOKEN_SECRET`! You can
   generate new secrets with [RandomKeygen](https://randomkeygen.com/).
 </Callout>
+
+### Generate database schema
+
+<Tabs items={['pnpm', 'npm', 'yarn']}>
+  <Tabs.Tab>
+
+```bash
+pnpm run backend:init
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+  
+```bash
+npm run backend:init
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+  
+```bash
+yarn backend:init
+```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Build
+
+<Tabs items={['pnpm', 'npm', 'yarn']}>
+  <Tabs.Tab>
+
+```bash
+pnpm run backend:build
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+  
+```bash
+npm run backend:build
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+  
+```bash
+yarn backend:build
+```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Run
+
+<Tabs items={['pnpm', 'npm', 'yarn']}>
+  <Tabs.Tab>
+
+```bash
+pnpm run backend:start
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+  
+```bash
+npm run backend:start
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+  
+```bash
+yarn backend:start
+```
+
+  </Tabs.Tab>
+</Tabs>
+
+</Steps>
+
+## Frontend
+
+<Steps>
+
+### Environment variables for Frontend
+
+Go to `frontend` folder and create new `.env` file. Copy the contents from `.env.example` file.
+
+Then fill the values:
+
+```bash
+NEXT_PUBLIC_GRAPHQL_URL=http://localhost:8080
+```
+
+Description:
+
+- `NEXT_PUBLIC_GRAPHQL_URL` - URL to the backend.
+
+### Build
+
+<Tabs items={['pnpm', 'npm', 'yarn']}>
+  <Tabs.Tab>
+
+```bash
+pnpm run frontend:build
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+  
+```bash
+npm run frontend:build
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+  
+```bash
+yarn frontend:build
+```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Run
+
+<Tabs items={['pnpm', 'npm', 'yarn']}>
+  <Tabs.Tab>
+
+```bash
+pnpm run frontend:start
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+  
+```bash
+npm run frontend:start
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+  
+```bash
+yarn frontend:start
+```
+
+  </Tabs.Tab>
+</Tabs>
 
 </Steps>
