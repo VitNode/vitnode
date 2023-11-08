@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { getTranslator } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { cookies } from 'next/headers';
 
@@ -32,7 +32,7 @@ const getData = async () => {
 };
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
-  const t = await getTranslator(locale, 'admin');
+  const t = await getTranslations({ locale, namespace: 'admin' });
 
   return {
     title: t('users.groups.title')

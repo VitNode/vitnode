@@ -2,7 +2,7 @@ import configs from '~/config.json';
 
 import { ReactNode } from 'react';
 import { cookies } from 'next/headers';
-import { getTranslator } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
@@ -43,7 +43,7 @@ interface Props {
 }
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
-  const t = await getTranslator(locale, 'admin');
+  const t = await getTranslations({ locale, namespace: 'admin' });
 
   const defaultTitle = `${t('title_short')} - ${configs.side_name}`;
 

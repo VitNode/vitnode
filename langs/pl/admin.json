@@ -70,7 +70,12 @@
         "steps": {
           "step_1": {
             "title": "Witaj",
+            "desc": "Zanim zaczniesz...",
             "text": "Witaj w kreatorze instalacji {name}. Ten kreator przeprowadzi Cię przez proces instalacji. Upewnij się, że masz następujące informacje przed przejściem dalej:"
+          },
+          "step_2": {
+            "title": "Licencja",
+            "desc": "Przeczytaj uważnie"
           }
         }
       }
