@@ -1,13 +1,23 @@
 import { useTranslations } from 'next-intl';
 
-import { CardContent } from '@/components/ui/card';
+import { CardContent, CardFooter } from '@/components/ui/card';
+import { buttonVariants } from '@/components/ui/button';
+import { Link } from '@/i18n';
 
 export const InstallConfigsView = () => {
   const t = useTranslations('admin.configs.install');
 
   return (
-    <CardContent>
-      <div>{t('steps.step_1.text', { name: 'VitNode' })}</div>
-    </CardContent>
+    <>
+      <CardContent>
+        <p>{t('steps.step_1.text', { name: 'VitNode' })}</p>
+      </CardContent>
+
+      <CardFooter>
+        <Link href="/admin/install/license" className={buttonVariants()}>
+          {t('steps.next_step')}
+        </Link>
+      </CardFooter>
+    </>
   );
 };

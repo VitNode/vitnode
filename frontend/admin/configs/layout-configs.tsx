@@ -13,7 +13,7 @@ export const LayoutConfigs = ({ children }: Props) => {
   const t = useTranslations('admin.configs');
 
   return (
-    <div className="container my-10 py-10">
+    <div className="container my-10">
       <div className="flex items-center justify-center mb-5">VitNode</div>
 
       <Card className="hidden sm:flex">{children}</Card>

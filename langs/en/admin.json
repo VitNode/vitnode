@@ -68,14 +68,25 @@
       "install": {
         "title": "Install {name}",
         "steps": {
+          "next_step": "Next step",
           "step_1": {
             "title": "Welcome",
             "desc": "Before you begin...",
-            "text": "Welcome to the installation wizard for {name}. This wizard will guide you through the installation process. Please make sure you have the following information before proceeding:"
+            "text": "Welcome to the installation wizard for {name}. This wizard will guide you through the installation process."
           },
           "step_2": {
             "title": "License",
-            "desc": "Read carefully"
+            "desc": "Read carefully",
+            "link": "Click here to read the license agreement.",
+            "agree": "I agree to the terms of the license agreement."
+          },
+          "step_3": {
+            "title": "Database",
+            "desc": "Create schema and first records"
+          },
+          "step_4": {
+            "title": "Admin",
+            "desc": "Create admin account"
           }
         }
       }

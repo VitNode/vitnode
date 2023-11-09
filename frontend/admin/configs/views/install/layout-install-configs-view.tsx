@@ -19,9 +19,8 @@ export const LayoutInstallConfigsView = ({ children }: Props) => {
     [key: string]: number;
   } = {
     license: 2,
-    requirements: 3,
-    database: 4,
-    account: 5
+    database: 3,
+    account: 4
   };
 
   const activeStep = segment ? stepsNumber[segment] : 1;
@@ -40,28 +39,22 @@ export const LayoutInstallConfigsView = ({ children }: Props) => {
       checked: activeStep >= 3
     },
     {
-      id: 'requirements',
-      title: 'requirements',
-      description: 'requirements_description',
+      id: 'database',
+      title: t('steps.step_3.title'),
+      description: t('steps.step_3.desc'),
       checked: activeStep >= 4
     },
     {
-      id: 'database',
-      title: 'database',
-      description: 'database_description',
-      checked: activeStep >= 5
-    },
-    {
       id: 'account',
-      title: 'account',
-      description: 'account_description',
-      checked: activeStep >= 6
+      title: t('steps.step_4.title'),
+      description: t('steps.step_4.desc'),
+      checked: activeStep >= 5
     }
   ];
 
   return (
     <>
-      <Steps className="p-6" items={items} />
+      <Steps className="p-6 max-w-[16rem]" items={items} />
 
       <div>
         <CardHeader>

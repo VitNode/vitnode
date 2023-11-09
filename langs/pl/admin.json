@@ -68,14 +68,25 @@
       "install": {
         "title": "Instalacja {name}",
         "steps": {
+          "next_step": "Następny krok",
           "step_1": {
             "title": "Witaj",
             "desc": "Zanim zaczniesz...",
-            "text": "Witaj w kreatorze instalacji {name}. Ten kreator przeprowadzi Cię przez proces instalacji. Upewnij się, że masz następujące informacje przed przejściem dalej:"
+            "text": "Witaj w kreatorze instalacji {name}. Ten kreator przeprowadzi Cię przez proces instalacji."
           },
           "step_2": {
             "title": "Licencja",
-            "desc": "Przeczytaj uważnie"
+            "desc": "Przeczytaj uważnie",
+            "link": "Kliknij tutaj, aby przeczytać licencję.",
+            "agree": "Akceptuje warunki licencji"
+          },
+          "step_3": {
+            "title": "Baza danych",
+            "desc": "Stwórz schemat oraz pierwsze rekordy"
+          },
+          "step_4": {
+            "title": "Admin",
+            "desc": "Stwórz konto administratora"
           }
         }
       }
