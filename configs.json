@@ -13,8 +13,6 @@
     ],
     "default": "en"
   },
-  "applications": [
-    "core",
-    "admin"
-  ]
+  "applications": ["core", "admin"],
+  "agree_terms": false
 }

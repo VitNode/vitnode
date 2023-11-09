@@ -1,4 +1,5 @@
 export interface ConfigType {
+  agree_terms: boolean;
   applications: string[];
   languages: {
     default: string;

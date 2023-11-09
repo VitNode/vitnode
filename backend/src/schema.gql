@@ -36,6 +36,16 @@ type GeneralAdminSettingsObj {
   side_name: String!
 }
 
+enum LayoutAdminInstallEnum {
+  ADMIN
+  DATABASE
+  LICENSE
+}
+
+type LayoutAdminInstallObj {
+  status: LayoutAdminInstallEnum!
+}
+
 type Mutation {
   create_core_groups(name: String!): CreateCoreGroupsObj!
   delete_avatar_core_members: String!
@@ -60,6 +70,7 @@ type PageInfo {
 type Query {
   authorization_admin_sessions: AuthorizationAdminSessionsObj!
   authorization_core_sessions: AuthorizationCoreSessionsObj!
+  layout_admin_install: LayoutAdminInstallObj!
   show_core_groups(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowCoreGroupsSortByArgs!]): ShowCoreGroupsObj!
   show_core_languages(cursor: String, first: Int, last: Int): ShowCoreLanguagesObj!
   show_core_members(cursor: String, first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
