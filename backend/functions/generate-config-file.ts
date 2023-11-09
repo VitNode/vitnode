@@ -19,7 +19,6 @@ const DATA: ConfigType = {
     default: 'en'
   },
   applications: ['core', 'admin'],
-  agree_terms: false,
   finished_install: false
 };
 

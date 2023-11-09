@@ -37,9 +37,8 @@ type GeneralAdminSettingsObj {
 }
 
 enum LayoutAdminInstallEnum {
-  ADMIN
+  ACCOUNT
   DATABASE
-  LICENSE
 }
 
 type LayoutAdminInstallObj {

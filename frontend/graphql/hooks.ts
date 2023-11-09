@@ -56,6 +56,16 @@ export type GeneralAdminSettingsObj = {
   side_name: Scalars['String']['output'];
 };
 
+export enum LayoutAdminInstallEnum {
+  Account = 'ACCOUNT',
+  Database = 'DATABASE'
+}
+
+export type LayoutAdminInstallObj = {
+  __typename?: 'LayoutAdminInstallObj';
+  status: LayoutAdminInstallEnum;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   create_core_groups: CreateCoreGroupsObj;
@@ -124,6 +134,7 @@ export type Query = {
   __typename?: 'Query';
   authorization_admin_sessions: AuthorizationAdminSessionsObj;
   authorization_core_sessions: AuthorizationCoreSessionsObj;
+  layout_admin_install: LayoutAdminInstallObj;
   show_core_groups: ShowCoreGroupsObj;
   show_core_languages: ShowCoreLanguagesObj;
   show_core_members: ShowCoreMembersObj;
@@ -330,6 +341,11 @@ export type Authorization_Admin_SessionsQueryVariables = Exact<{ [key: string]: 
 
 export type Authorization_Admin_SessionsQuery = { __typename?: 'Query', authorization_admin_sessions: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null }, show_core_languages: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string, name: string, enabled: boolean, timezone: string, default: boolean }> } };
 
+export type Layout_Admin_InstallQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Layout_Admin_InstallQuery = { __typename?: 'Query', layout_admin_install: { __typename?: 'LayoutAdminInstallObj', status: LayoutAdminInstallEnum } };
+
 export type Show_Core_GroupsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -482,6 +498,13 @@ export const Authorization_Admin_Sessions = gql`
       timezone
       default
     }
+  }
+}
+    `;
+export const Layout_Admin_Install = gql`
+    query Layout_admin_install {
+  layout_admin_install {
+    status
   }
 }
     `;

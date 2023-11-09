@@ -1,13 +1,9 @@
-import * as fs from 'fs';
-import { join } from 'path';
-
 import { Injectable } from '@nestjs/common';
 
 import { LayoutAdminInstallEnum, LayoutAdminInstallObj } from './dto/layout-admin_install.obj';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
-import { ConfigType } from '@/types/config.type';
 
 @Injectable()
 export class LayoutAdminInstallService {
@@ -22,21 +18,12 @@ export class LayoutAdminInstallService {
     const languages = await this.prisma.core_languages.count();
     if (languages > 0) {
       return {
-        status: LayoutAdminInstallEnum.ADMIN
-      };
-    }
-
-    const configFile = fs.readFileSync(join('..', 'config.json'), 'utf8');
-    const config: ConfigType = JSON.parse(configFile);
-
-    if (config.agree_terms) {
-      return {
-        status: LayoutAdminInstallEnum.DATABASE
+        status: LayoutAdminInstallEnum.ACCOUNT
       };
     }
 
     return {
-      status: LayoutAdminInstallEnum.LICENSE
+      status: LayoutAdminInstallEnum.DATABASE
     };
   }
 }

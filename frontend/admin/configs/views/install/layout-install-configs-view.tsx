@@ -5,7 +5,10 @@ import { useTranslations } from 'next-intl';
 import { useSelectedLayoutSegment } from 'next/navigation';
 
 import { ItemStepProps, Steps } from '@/components/steps/steps';
-import { CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useLayoutInstallConfigsAPI } from './hooks/use-layout-install-configs-api';
+import { LoadingView } from '@/themes/default/core/views/global/loading/loading-view';
+import { InternalErrorView } from '@/admin/views/global/internal-error-view';
 
 interface Props {
   children: ReactNode;
@@ -14,6 +17,7 @@ interface Props {
 export const LayoutInstallConfigsView = ({ children }: Props) => {
   const t = useTranslations('admin.configs.install');
   const segment = useSelectedLayoutSegment();
+  const { data, isError, isLoading } = useLayoutInstallConfigsAPI();
 
   const stepsNumber: {
     [key: string]: number;
@@ -52,8 +56,11 @@ export const LayoutInstallConfigsView = ({ children }: Props) => {
     }
   ];
 
+  if (isLoading) return <LoadingView />;
+  if (isError || !data) return <InternalErrorView />;
+
   return (
-    <>
+    <Card className="hidden sm:flex">
       <Steps className="p-6 max-w-[16rem]" items={items} />
 
       <div>
@@ -65,6 +72,6 @@ export const LayoutInstallConfigsView = ({ children }: Props) => {
         </CardHeader>
         {children}
       </div>
-    </>
+    </Card>
   );
 };
