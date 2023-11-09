@@ -29,7 +29,7 @@ export class LayoutAdminInstallService {
     const configFile = fs.readFileSync(join('..', 'config.json'), 'utf8');
     const config: ConfigType = JSON.parse(configFile);
 
-    if (!config.agree_terms) {
+    if (config.agree_terms) {
       return {
         status: LayoutAdminInstallEnum.DATABASE
       };
