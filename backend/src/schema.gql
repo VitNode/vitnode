@@ -47,6 +47,7 @@ type LayoutAdminInstallObj {
 
 type Mutation {
   create_core_groups(name: String!): CreateCoreGroupsObj!
+  create_database_admin_install: String!
   delete_avatar_core_members: String!
   edit_core_languages(default: Boolean!, enabled: Boolean!, id: String!, name: String!, timezone: String!): ShowCoreLanguages!
   edit_general_admin_settings(side_name: String!): GeneralAdminSettingsObj!
