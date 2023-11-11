@@ -35,10 +35,13 @@ export const ItemListNavAdmin = ({
     <Accordion.Item value={id}>
       <Accordion.Header>
         <Accordion.Trigger
-          className={cx(
-            'w-full justify-start flex gap-2',
-            buttonVariants({ variant: id === pathnameId ? 'default' : 'ghost', size: 'sm' })
-          )}
+          className={buttonVariants({
+            variant: id === pathnameId ? 'default' : 'ghost',
+            size: 'sm',
+            className: cx('w-full justify-start flex gap-2', {
+              ['hover:bg-secondary ']: id !== pathnameId
+            })
+          })}
           onClick={() =>
             setActiveItems(prev =>
               prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]

@@ -15,45 +15,6 @@ import { generateAvatarColor } from '@/functions/avatar/generateAvatarColor';
 export class SignUpCoreMembersService {
   constructor(private prisma: PrismaService) {}
 
-  protected async checkIfUserIsFirst(): Promise<boolean> {
-    const count = await this.prisma.core_members.count();
-    const result = count <= 0;
-
-    // If there is no user, create default records
-    if (result) {
-      await this.prisma.core_groups.createMany({
-        data: [
-          {
-            id: 1,
-            name: 'Administrator',
-            created: currentDate()
-          },
-          {
-            id: 2,
-            name: 'Moderator',
-            created: currentDate()
-          },
-          {
-            id: 3,
-            name: 'Member',
-            created: currentDate()
-          }
-        ]
-      });
-
-      // Create default admin
-      await this.prisma.core_admin_access.create({
-        data: {
-          group_id: 1,
-          permissions: '*',
-          created: currentDate()
-        }
-      });
-    }
-
-    return result;
-  }
-
   async signUp({
     birthday,
     email,
@@ -61,6 +22,7 @@ export class SignUpCoreMembersService {
     newsletter,
     password
   }: SignUpCoreMembersArgs): Promise<SignUpCoreMembersObj> {
+    const isAdmin = !(await this.prisma.core_members.count());
     const checkEmail = await this.prisma.core_members.findUnique({
       where: {
         email
@@ -104,8 +66,6 @@ export class SignUpCoreMembersService {
     const passwordSalt = await genSalt(CONFIG.password_salt);
     const hashPassword = await hash(password, passwordSalt);
 
-    const isAdmin = await this.checkIfUserIsFirst();
-
     return await this.prisma.core_members.create({
       data: {
         email,
@@ -118,7 +78,7 @@ export class SignUpCoreMembersService {
         birthday,
         group: {
           connect: {
-            id: isAdmin ? 1 : 3
+            id: isAdmin ? 4 : 3
           }
         }
       },

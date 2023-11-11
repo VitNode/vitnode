@@ -11,22 +11,35 @@ import {
 export default async function middleware(request: NextRequest) {
   const defaultLocale = request.headers.get('x-default-locale') || 'en';
 
-  const data = await fetcher<
-    Middleware_Core_LanguagesQuery,
-    Middleware_Core_LanguagesQueryVariables
-  >({
-    query: Middleware_Core_Languages
-  });
+  try {
+    const data = await fetcher<
+      Middleware_Core_LanguagesQuery,
+      Middleware_Core_LanguagesQueryVariables
+    >({
+      query: Middleware_Core_Languages
+    });
 
-  const handleI18nRouting = createIntlMiddleware({
-    locales: data.show_core_languages.edges.filter(item => item.enabled).map(edge => edge.id),
-    defaultLocale: data.show_core_languages.edges.find(edge => edge.default)?.id ?? 'en'
-  });
-  const response = handleI18nRouting(request);
+    const enabledLanguages = data.show_core_languages.edges.filter(item => item.enabled);
+    const handleI18nRouting = createIntlMiddleware({
+      locales: enabledLanguages.length > 0 ? enabledLanguages.map(edge => edge.id) : ['en'],
+      defaultLocale: enabledLanguages.find(edge => edge.default)?.id || 'en'
+    });
+    const response = handleI18nRouting(request);
 
-  response.headers.set('x-default-locale', defaultLocale);
+    response.headers.set('x-default-locale', defaultLocale);
 
-  return response;
+    return response;
+  } catch (error) {
+    const handleI18nRouting = createIntlMiddleware({
+      locales: ['en'],
+      defaultLocale: 'en'
+    });
+    const response = handleI18nRouting(request);
+
+    response.headers.set('x-default-locale', defaultLocale);
+
+    return response;
+  }
 }
 
 export const config = {

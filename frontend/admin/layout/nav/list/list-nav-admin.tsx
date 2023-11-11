@@ -1,15 +1,6 @@
 'use client';
 
-import {
-  AtSign,
-  Boxes,
-  Group,
-  Languages,
-  LayoutDashboard,
-  ScreenShare,
-  Settings,
-  Users
-} from 'lucide-react';
+import { Group, Languages, LayoutDashboard, Settings, Users } from 'lucide-react';
 import { ReactNode, useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { useSelectedLayoutSegments } from 'next/navigation';
@@ -45,24 +36,9 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
             icon: LayoutDashboard
           },
           {
-            id: 'plugins',
-            href: '/plugins',
-            icon: Boxes
-          },
-          {
             id: 'general',
             href: '/general',
             icon: Settings
-          },
-          {
-            id: 'email',
-            href: '/email',
-            icon: AtSign
-          },
-          {
-            id: 'webapp',
-            href: '/webapp',
-            icon: ScreenShare
           },
           {
             id: 'langs',

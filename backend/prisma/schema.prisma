@@ -118,4 +118,5 @@ model core_languages {
   protected Boolean @default(false)
   default   Boolean @default(false)
   enabled   Boolean @default(true)
+  created   Int
 }

@@ -56,9 +56,21 @@ export type GeneralAdminSettingsObj = {
   side_name: Scalars['String']['output'];
 };
 
+export enum LayoutAdminInstallEnum {
+  Account = 'ACCOUNT',
+  Database = 'DATABASE',
+  Finish = 'FINISH'
+}
+
+export type LayoutAdminInstallObj = {
+  __typename?: 'LayoutAdminInstallObj';
+  status: LayoutAdminInstallEnum;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   create_core_groups: CreateCoreGroupsObj;
+  create_database_admin_install: Scalars['String']['output'];
   delete_avatar_core_members: Scalars['String']['output'];
   edit_core_languages: ShowCoreLanguages;
   edit_general_admin_settings: GeneralAdminSettingsObj;
@@ -124,6 +136,7 @@ export type Query = {
   __typename?: 'Query';
   authorization_admin_sessions: AuthorizationAdminSessionsObj;
   authorization_core_sessions: AuthorizationCoreSessionsObj;
+  layout_admin_install: LayoutAdminInstallObj;
   show_core_groups: ShowCoreGroupsObj;
   show_core_languages: ShowCoreLanguagesObj;
   show_core_members: ShowCoreMembersObj;
@@ -264,6 +277,11 @@ export type UploadCoreAttachmentsObj = {
   url: Scalars['String']['output'];
 };
 
+export type Create_Database_Admin_InstallMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Create_Database_Admin_InstallMutation = { __typename?: 'Mutation', create_database_admin_install: string };
+
 export type SignOut_Admin_SessionsMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -325,6 +343,11 @@ export type SignOut_Core_SessionsMutationVariables = Exact<{ [key: string]: neve
 
 export type SignOut_Core_SessionsMutation = { __typename?: 'Mutation', signOut_core_sessions: string };
 
+export type Layout_Admin_InstallQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Layout_Admin_InstallQuery = { __typename?: 'Query', layout_admin_install: { __typename?: 'LayoutAdminInstallObj', status: LayoutAdminInstallEnum } };
+
 export type Authorization_Admin_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -361,6 +384,11 @@ export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: n
 export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null }, show_core_languages: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string, name: string, enabled: boolean, timezone: string, default: boolean }> } };
 
 
+export const Create_Database_Admin_Install = gql`
+    mutation Create_database_admin_install {
+  create_database_admin_install
+}
+    `;
 export const SignOut_Admin_Sessions = gql`
     mutation SignOut_admin_sessions {
   signOut_admin_sessions
@@ -442,6 +470,13 @@ export const SignIn_Core_Sessions = gql`
 export const SignOut_Core_Sessions = gql`
     mutation SignOut_core_sessions {
   signOut_core_sessions
+}
+    `;
+export const Layout_Admin_Install = gql`
+    query Layout_admin_install {
+  layout_admin_install {
+    status
+  }
 }
     `;
 export const Authorization_Admin_Sessions = gql`
