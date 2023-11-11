@@ -69,23 +69,25 @@
         "title": "Instalacja {name}",
         "steps": {
           "next_step": "Następny krok",
-          "step_1": {
+          "welcome": {
             "title": "Witaj",
             "desc": "Zanim zaczniesz...",
             "text": "Witaj w kreatorze instalacji {name}. Ten kreator przeprowadzi Cię przez proces instalacji."
           },
-          "step_2": {
+          "license": {
             "title": "Licencja",
             "desc": "Przeczytaj uważnie",
             "link": "Kliknij tutaj, aby przeczytać licencję.",
             "agree": "Akceptuje warunki licencji"
           },
-          "step_3": {
+          "database": {
             "title": "Baza danych",
-            "desc": "Stwórz schemat oraz pierwsze rekordy"
+            "text": "Teraz VitNode potrzebuje stworzyć domyślne rekordy w Twojej bazie danych.",
+            "desc": "Stwórz schemat oraz pierwsze rekordy",
+            "submit": "Stwórz rekordy"
           },
-          "step_4": {
-            "title": "Admin",
+          "account": {
+            "title": "Konto admina",
             "desc": "Stwórz konto administratora"
           }
         }

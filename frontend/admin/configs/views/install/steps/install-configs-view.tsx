@@ -10,7 +10,7 @@ export const InstallConfigsView = () => {
   return (
     <>
       <CardContent>
-        <p>{t('steps.step_1.text', { name: 'VitNode' })}</p>
+        <p>{t('steps.welcome.text', { name: 'VitNode' })}</p>
       </CardContent>
 
       <CardFooter>

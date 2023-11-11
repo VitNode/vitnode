@@ -15,7 +15,7 @@ export const LicenseInstallConfigsView = () => {
           target="_blank"
           className="underline text-primary"
         >
-          {t('step_2.link')}
+          {t('license.link')}
         </Link>
       </CardContent>
 

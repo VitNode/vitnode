@@ -69,23 +69,25 @@
         "title": "Install {name}",
         "steps": {
           "next_step": "Next step",
-          "step_1": {
+          "welcome": {
             "title": "Welcome",
             "desc": "Before you begin...",
             "text": "Welcome to the installation wizard for {name}. This wizard will guide you through the installation process."
           },
-          "step_2": {
+          "license": {
             "title": "License",
             "desc": "Read carefully",
             "link": "Click here to read the license agreement.",
             "agree": "I agree to the terms of the license agreement."
           },
-          "step_3": {
+          "database": {
             "title": "Database",
-            "desc": "Create schema and first records"
+            "text": "Now VitNode needs to create default records in your database.",
+            "desc": "Create schema and first records",
+            "submit": "Create Records"
           },
-          "step_4": {
-            "title": "Admin",
+          "account": {
+            "title": "Admin Account",
             "desc": "Create admin account"
           }
         }

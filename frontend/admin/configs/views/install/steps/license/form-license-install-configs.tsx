@@ -44,7 +44,7 @@ export const FormLicenseInstallConfigs = () => {
               <FormControl>
                 <Checkbox checked={field.value} onCheckedChange={field.onChange} />
               </FormControl>
-              <FormLabel>{t('step_2.agree')}</FormLabel>
+              <FormLabel>{t('license.agree')}</FormLabel>
             </FormItem>
           )}
         />
