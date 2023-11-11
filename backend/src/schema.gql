@@ -39,6 +39,7 @@ type GeneralAdminSettingsObj {
 enum LayoutAdminInstallEnum {
   ACCOUNT
   DATABASE
+  FINISH
 }
 
 type LayoutAdminInstallObj {

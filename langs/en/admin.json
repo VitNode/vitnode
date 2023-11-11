@@ -90,6 +90,15 @@
             "title": "Admin Account",
             "desc": "Create admin account"
           }
+        },
+        "finish": {
+          "title": "Welcome to {name}!",
+          "desc": "Your website is ready.",
+          "text": "The installation process is complete. You can now use your website.",
+          "buttons": {
+            "home_page": "Home Page",
+            "admin_control_panel": "Admin Control Panel"
+          }
         }
       }
     }

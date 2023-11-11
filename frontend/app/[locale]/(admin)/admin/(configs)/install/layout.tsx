@@ -4,7 +4,7 @@ import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
 import { LayoutInstallConfigsView } from '@/admin/configs/views/install/layout-install-configs-view';
 import getQueryClient from '@/functions/get-query-client';
-import { fetcher } from '@/graphql/fetcher';
+import { ErrorType, fetcher } from '@/graphql/fetcher';
 import {
   Layout_Admin_Install,
   Layout_Admin_InstallQuery,
@@ -12,6 +12,7 @@ import {
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
 import { InternalErrorView } from '@/admin/views/global/internal-error-view';
+import { redirect } from '@/i18n';
 
 interface Props {
   children: ReactNode;
@@ -39,8 +40,11 @@ export default async function Layout({ children }: Props) {
       </HydrationBoundary>
     );
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
+    const code = error as ErrorType;
+
+    if (code.extensions?.code === 'ACCESS_DENIED') {
+      redirect('/admin');
+    }
 
     return <InternalErrorView />;
   }

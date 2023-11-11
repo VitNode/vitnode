@@ -3,8 +3,6 @@
 import { useTranslations } from 'next-intl';
 
 import { CardContent, CardFooter } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -15,15 +13,17 @@ import {
   FormMessage
 } from '@/components/ui/form';
 import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 
-export const FormSignUp = () => {
+export const AccountInstallConfigsView = () => {
   const t = useTranslations('core');
   const { form, isPending, onSubmit } = useSignUpView();
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="max-w-2xl" onSubmit={form.handleSubmit(onSubmit)}>
         <CardContent className="space-y-4">
           <FormField
             control={form.control}
@@ -104,21 +104,6 @@ export const FormSignUp = () => {
                 <div className="space-y-1 leading-none">
                   <FormLabel>{t('sign_up.form.terms.label')}</FormLabel>
                   <FormDescription>{t('sign_up.form.terms.desc')}</FormDescription>
-                </div>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="newsletter"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                <FormControl>
-                  <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                </FormControl>
-                <div className="space-y-1 leading-none">
-                  <FormLabel>{t('sign_up.form.newsletter.label')}</FormLabel>
-                  <FormDescription>{t('sign_up.form.newsletter.desc')}</FormDescription>
                 </div>
               </FormItem>
             )}

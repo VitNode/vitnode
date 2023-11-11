@@ -90,6 +90,15 @@
             "title": "Konto admina",
             "desc": "Stwórz konto administratora"
           }
+        },
+        "finish": {
+          "title": "Witaj w {name}!",
+          "desc": "Twoja strona jest gotowa.",
+          "text": "Proces instalacji jest gotowy. Możesz teraz użyć swojej strony internetowej.",
+          "buttons": {
+            "home_page": "Strona główna",
+            "admin_control_panel": "Panel kontrolny administratora"
+          }
         }
       }
     }

@@ -9,6 +9,8 @@ import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/ca
 import { useLayoutInstallConfigsAPI } from './hooks/use-layout-install-configs-api';
 import { LoadingView } from '@/themes/default/core/views/global/loading/loading-view';
 import { InternalErrorView } from '@/admin/views/global/internal-error-view';
+import { LayoutAdminInstallEnum } from '@/graphql/hooks';
+import { FinishInstallConfigsView } from './finish/finish-install-config-view';
 
 interface Props {
   children: ReactNode;
@@ -58,12 +60,15 @@ export const LayoutInstallConfigsView = ({ children }: Props) => {
 
   if (isLoading) return <LoadingView />;
   if (isError || !data) return <InternalErrorView />;
+  if (data.layout_admin_install.status === LayoutAdminInstallEnum.Finish) {
+    return <FinishInstallConfigsView />;
+  }
 
   return (
     <Card className="hidden sm:flex">
-      <Steps className="p-6 max-w-[16rem]" items={items} />
+      <Steps className="p-6 max-w-[16rem] pr-0" items={items} />
 
-      <div>
+      <div className="flex-grow">
         <CardHeader>
           <CardDescription>{t('title', { name: 'VitNode' })}</CardDescription>
           {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}

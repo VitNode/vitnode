@@ -22,6 +22,7 @@ export class SignUpCoreMembersService {
     newsletter,
     password
   }: SignUpCoreMembersArgs): Promise<SignUpCoreMembersObj> {
+    const isAdmin = !(await this.prisma.core_members.count());
     const checkEmail = await this.prisma.core_members.findUnique({
       where: {
         email
@@ -77,7 +78,7 @@ export class SignUpCoreMembersService {
         birthday,
         group: {
           connect: {
-            id: 3
+            id: isAdmin ? 4 : 3
           }
         }
       },

@@ -58,7 +58,8 @@ export type GeneralAdminSettingsObj = {
 
 export enum LayoutAdminInstallEnum {
   Account = 'ACCOUNT',
-  Database = 'DATABASE'
+  Database = 'DATABASE',
+  Finish = 'FINISH'
 }
 
 export type LayoutAdminInstallObj = {

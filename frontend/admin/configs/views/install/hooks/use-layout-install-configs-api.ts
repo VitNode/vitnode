@@ -39,7 +39,7 @@ export const useLayoutInstallConfigsAPI = () => {
     replace(
       segment ? redirectItems[current.data.layout_admin_install.status] : '/admin/install/database'
     );
-  }, [current.data, segment]);
+  }, [segment]);
 
   return current;
 };
