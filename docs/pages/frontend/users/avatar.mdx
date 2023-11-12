@@ -23,16 +23,16 @@ import { AvatarUser } from '@/components/user/avatar/avatar-user';
 
 If you want to display other user's avatar, you have to pass `user` prop with:
 
-- `id` - user's id
+- `name_seo` - user's id
 - `name` - user's name
-- `avatar` - user's AvatarObj interface,
+- `avatar` - user's `UploadCoreAttachmentsObj` interface,
 
 ```tsx
 <AvatarUser
   user={{
     avatar,
     name,
-    id
+    name_seo
   }}
   sizeInRem={1.75}
 />

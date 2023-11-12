@@ -4,21 +4,12 @@ import { UploadCoreAttachmentsObj } from '../../../attachments/upload/dto/upload
 import { User } from '@/utils/decorators/user.decorator';
 
 @ObjectType()
-class AvatarObj {
-  @Field(() => String)
-  color: string;
-
-  @Field(() => UploadCoreAttachmentsObj, { nullable: true })
-  img?: UploadCoreAttachmentsObj;
-}
-
-@ObjectType()
 export class AuthorizationCurrentUserObj extends User {
   @Field(() => Boolean)
   is_admin: boolean;
 
-  @Field(() => AvatarObj)
-  avatar: AvatarObj;
+  @Field(() => UploadCoreAttachmentsObj, { nullable: true })
+  avatar?: UploadCoreAttachmentsObj;
 }
 @ObjectType()
 export class AuthorizationCoreSessionsObj {

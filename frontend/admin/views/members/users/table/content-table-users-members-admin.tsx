@@ -13,6 +13,8 @@ import { buttonVariants } from '@/components/ui/button';
 import { DataTable } from '@/components/data-table/data-table';
 import { Loader } from '@/components/loader/loader';
 
+import { AvatarUser } from '../../../../../components/user/avatar/avatar-user';
+
 export const ContentTableUsersMembersAdmin = () => {
   const t = useTranslations('admin.members.users');
   const { data, isFetching, isLoading } = useUsersMembersAdminAPI();
@@ -21,7 +23,21 @@ export const ContentTableUsersMembersAdmin = () => {
     () => [
       {
         header: t('table.name'),
-        accessorKey: 'name'
+        accessorKey: 'name',
+        cell: ({ row }) => {
+          const data = row.original;
+
+          return (
+            <div className="flex items-center gap-2">
+              <AvatarUser user={data} sizeInRem={2} />
+
+              <div className="flex flex-col">
+                <span className="font-medium">{data.name}</span>
+                <span className="text-sm">{data.email}</span>
+              </div>
+            </div>
+          );
+        }
       },
       {
         header: t('table.groups'),
@@ -42,7 +58,7 @@ export const ContentTableUsersMembersAdmin = () => {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Link
-                      href={`/admin/users/groups/${data.id}`}
+                      href={`/admin/members/user/${data.id}`}
                       className={buttonVariants({
                         variant: 'ghost',
                         size: 'icon'

@@ -20,33 +20,19 @@ export const UserBarAdmin = () => {
   const { mutateAsync } = useSignOutAdminAPI();
 
   if (!session) return null;
-  const { avatar, email, id, name } = session;
+  const { email, name, ...rest } = session;
 
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="ghost" className="rounded-full" size="icon">
-          <AvatarUser
-            user={{
-              avatar,
-              name,
-              id
-            }}
-            sizeInRem={2}
-          />
+          <AvatarUser user={{ name, ...rest }} sizeInRem={2} />
         </Button>
       </SheetTrigger>
 
       <SheetContent className="p-0">
         <SheetHeader className="p-4 flex-row items-center space-y-0 gap-2 text-left">
-          <AvatarUser
-            user={{
-              avatar,
-              name,
-              id
-            }}
-            sizeInRem={1.75}
-          />
+          <AvatarUser user={{ name, ...rest }} sizeInRem={1.75} />
           <div className="flex flex-col">
             <p className="font-medium leading-none text-base">{name}</p>
             <p className="text-xs leading-none text-muted-foreground">{email}</p>

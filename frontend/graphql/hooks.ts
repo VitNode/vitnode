@@ -28,7 +28,8 @@ export type AuthorizationCoreSessionsObj = {
 
 export type AuthorizationCurrentUserObj = {
   __typename?: 'AuthorizationCurrentUserObj';
-  avatar: AvatarObj;
+  avatar?: Maybe<UploadCoreAttachmentsObj>;
+  avatar_color: Scalars['String']['output'];
   birthday: Scalars['Int']['output'];
   email: Scalars['String']['output'];
   group_id: Scalars['Int']['output'];
@@ -37,12 +38,6 @@ export type AuthorizationCurrentUserObj = {
   name: Scalars['String']['output'];
   name_seo: Scalars['String']['output'];
   newsletter?: Maybe<Scalars['Boolean']['output']>;
-};
-
-export type AvatarObj = {
-  __typename?: 'AvatarObj';
-  color: Scalars['String']['output'];
-  img?: Maybe<UploadCoreAttachmentsObj>;
 };
 
 export type CreateAdminGroupsObj = {
@@ -425,7 +420,7 @@ export type Show_Admin_MembersQuery = { __typename?: 'Query', show_admin_members
 export type Authorization_Admin_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Authorization_Admin_SessionsQuery = { __typename?: 'Query', authorization_admin_sessions: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', id: string, created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null }, show_core_languages: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string, name: string, enabled: boolean, timezone: string, default: boolean }> } };
+export type Authorization_Admin_SessionsQuery = { __typename?: 'Query', authorization_admin_sessions: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } | null }, show_core_languages: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string, name: string, enabled: boolean, timezone: string, default: boolean }> } };
 
 export type Middleware_Core_LanguagesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -444,7 +439,7 @@ export type Show_Core_LanguagesQuery = { __typename?: 'Query', show_core_languag
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', id: string, created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null }, show_core_languages: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string, name: string, enabled: boolean, timezone: string, default: boolean }> } };
+export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } | null }, show_core_languages: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string, name: string, enabled: boolean, timezone: string, default: boolean }> } };
 
 
 export const Create_Database_Admin_Install = gql`
@@ -625,22 +620,20 @@ export const Authorization_Admin_Sessions = gql`
       name
       name_seo
       newsletter
+      avatar_color
       avatar {
-        color
-        img {
-          id
-          created
-          description
-          extension
-          file_size
-          member_id
-          mimetype
-          module
-          module_id
-          name
-          position
-          url
-        }
+        created
+        description
+        extension
+        file_size
+        id
+        member_id
+        mimetype
+        module
+        module_id
+        name
+        position
+        url
       }
     }
   }
@@ -692,23 +685,6 @@ export const Authorization_Core_Sessions = gql`
     query Authorization_core_sessions {
   authorization_core_sessions {
     user {
-      avatar {
-        color
-        img {
-          id
-          created
-          description
-          extension
-          file_size
-          member_id
-          mimetype
-          module
-          module_id
-          name
-          position
-          url
-        }
-      }
       birthday
       email
       group_id
@@ -717,6 +693,21 @@ export const Authorization_Core_Sessions = gql`
       name
       name_seo
       newsletter
+      avatar_color
+      avatar {
+        created
+        description
+        extension
+        file_size
+        id
+        member_id
+        mimetype
+        module
+        module_id
+        name
+        position
+        url
+      }
     }
   }
   show_core_languages {

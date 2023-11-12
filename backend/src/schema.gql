@@ -11,7 +11,8 @@ type AuthorizationCoreSessionsObj {
 }
 
 type AuthorizationCurrentUserObj {
-  avatar: AvatarObj!
+  avatar: UploadCoreAttachmentsObj
+  avatar_color: String!
   birthday: Int!
   email: String!
   group_id: Int!
@@ -20,11 +21,6 @@ type AuthorizationCurrentUserObj {
   name: String!
   name_seo: String!
   newsletter: Boolean
-}
-
-type AvatarObj {
-  color: String!
-  img: UploadCoreAttachmentsObj
 }
 
 type CreateAdminGroupsObj {

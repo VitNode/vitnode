@@ -36,7 +36,7 @@ export const ContentTableGroupsMembersAdmin = () => {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Link
-                      href={`/admin/users/groups/${data.id}`}
+                      href={`/admin/members/groups/${data.id}`}
                       className={buttonVariants({
                         variant: 'ghost',
                         size: 'icon'
