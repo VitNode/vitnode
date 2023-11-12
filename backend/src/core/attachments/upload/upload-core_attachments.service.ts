@@ -125,7 +125,11 @@ export class UploadCoreAttachmentsService {
             description,
             extension: filename.split('.').pop(),
             file_size: stat.size,
-            member_id: module_id
+            member: {
+              connect: {
+                id: module_id
+              }
+            }
           }
         });
       })

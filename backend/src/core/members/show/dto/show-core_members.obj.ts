@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { PageInfo } from '@/types/database/pagination.type';
+import { UploadCoreAttachmentsObj } from '../../../attachments/upload/dto/upload-core_attachments.obj';
 
 @ObjectType()
 export class ShowCoreMembersObj {
@@ -34,11 +35,11 @@ export class ShowCoreMembers {
   @Field(() => Int)
   birthday: number;
 
-  @Field(() => String, { nullable: true })
-  avatar?: string;
+  @Field(() => UploadCoreAttachmentsObj, { nullable: true })
+  avatar?: UploadCoreAttachmentsObj;
 
-  @Field(() => String, { nullable: true })
-  image_cover?: string;
+  @Field(() => UploadCoreAttachmentsObj, { nullable: true })
+  image_cover?: UploadCoreAttachmentsObj;
 
   @Field(() => Int)
   posts: number;

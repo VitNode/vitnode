@@ -20,56 +20,58 @@ export class ShowCoreMembersService {
     cursor,
     first,
     last,
-    search = '',
+    search,
     sortBy
   }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
     const where = {
       OR: [
         {
           name: {
-            contains: search
+            contains: search ?? ''
           }
         },
         {
           email: {
-            contains: search
+            contains: search ?? ''
           }
         }
       ]
     };
 
-    const edges = await this.prisma.core_members.findMany({
-      ...inputPagination({ first, cursor, last }),
-      select: {
-        id: true,
-        name: true,
-        name_seo: true,
-        email: true,
-        group_id: true,
-        joined: true,
-        birthday: true,
-        avatar: true,
-        image_cover: true,
-        posts: true,
-        followers: true,
-        reactions: true,
-        newsletter: true,
-        avatar_color: true,
-        unread_notifications: true
-      },
-      orderBy: inputSorting<ShowCoreMembersSortingColumnEnum>({
-        sortBy,
-        defaultSortBy: {
-          column: ShowCoreMembersSortingColumnEnum.joined,
-          direction: SortDirectionEnum.asc
-        }
+    const [edges, totalCount] = await this.prisma.$transaction([
+      this.prisma.core_members.findMany({
+        ...inputPagination({ first, cursor, last }),
+        select: {
+          id: true,
+          name: true,
+          name_seo: true,
+          email: true,
+          group_id: true,
+          joined: true,
+          birthday: true,
+          avatar_id: true,
+          posts: true,
+          followers: true,
+          reactions: true,
+          newsletter: true,
+          avatar_color: true,
+          unread_notifications: true,
+          avatar: true,
+          cover: true
+        },
+        orderBy: inputSorting<ShowCoreMembersSortingColumnEnum>({
+          sortBy,
+          defaultSortBy: {
+            column: ShowCoreMembersSortingColumnEnum.joined,
+            direction: SortDirectionEnum.asc
+          }
+        }),
+        where
       }),
-      where
-    });
-
-    const totalCount = await this.prisma.core_members.count({
-      where
-    });
+      this.prisma.core_members.count({
+        where
+      })
+    ]);
 
     return outputPagination({ edges, totalCount, first, cursor, last });
   }

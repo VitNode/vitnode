@@ -132,6 +132,8 @@
       "no_connection_api": "No connection to the API",
       "access_denied": "Access denied",
       "internal_server_error": "Internal server error",
+      "404": "Page not found",
+      "500": "Internal server error",
       "actions": {
         "back_home": "Home Page",
         "contact": "Contact with Us"

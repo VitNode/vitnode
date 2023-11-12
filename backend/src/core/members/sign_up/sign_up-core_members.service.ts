@@ -90,8 +90,6 @@ export class SignUpCoreMembersService {
         group_id: true,
         joined: true,
         birthday: true,
-        avatar: true,
-        image_cover: true,
         posts: true,
         followers: true,
         reactions: true,

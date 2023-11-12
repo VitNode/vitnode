@@ -115,14 +115,14 @@ type ShowCoreLanguagesObj {
 }
 
 type ShowCoreMembers {
-  avatar: String
+  avatar: UploadCoreAttachmentsObj
   avatar_color: String!
   birthday: Int!
   email: String!
   followers: Int!
   group_id: Int!
   id: String!
-  image_cover: String
+  image_cover: UploadCoreAttachmentsObj
   joined: Int!
   name: String!
   name_seo: String!
@@ -175,6 +175,7 @@ type UploadCoreAttachmentsObj {
   description: String
   extension: String!
   file_size: Int!
+  id: String!
   member_id: String!
   mimetype: String!
   module: String!

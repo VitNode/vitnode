@@ -52,6 +52,16 @@ export class UploadAvatarCoreMembersService {
       module_id: id
     });
 
+    // Update user
+    await this.prisma.core_members.update({
+      where: {
+        id
+      },
+      data: {
+        avatar_id: currentFile[0].id
+      }
+    });
+
     if (currentFile.length <= 0) {
       throw new CustomError({
         code: 'UNKNOWN_ERROR',

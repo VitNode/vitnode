@@ -3,6 +3,9 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 @ObjectType()
 export class UploadCoreAttachmentsObj {
   @Field(() => String)
+  id: string;
+
+  @Field(() => String)
   module: string;
 
   @Field(() => String)
