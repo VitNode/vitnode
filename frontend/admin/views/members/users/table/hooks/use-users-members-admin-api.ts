@@ -13,7 +13,7 @@ import { APIKeys } from '@/graphql/api-keys';
 export interface UsersMembersAdminAPIDataType
   extends Pick<
     ShowAdminMembers,
-    'avatar_color' | 'email' | 'group' | 'id' | 'joined' | 'name' | 'name_seo' | 'avatar'
+    'avatar_color' | 'email' | 'group' | 'id' | 'joined' | 'name' | 'avatar'
   > {}
 
 export const useUsersMembersAdminAPI = () => {

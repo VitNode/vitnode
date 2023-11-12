@@ -32,7 +32,7 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
         items={[
           {
             id: 'dashboard',
-            href: '',
+            href: '/dashboard',
             icon: LayoutDashboard
           },
           {
@@ -55,7 +55,7 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
         items={[
           {
             id: 'list',
-            href: '',
+            href: '/users',
             icon: Users
           },
           {

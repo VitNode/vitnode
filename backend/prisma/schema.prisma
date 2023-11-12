@@ -11,9 +11,8 @@ datasource db {
 }
 
 model core_members {
-  id                   String            @id @default(uuid())
+  id                   String            @id @unique @db.VarChar(255)
   name                 String            @unique @db.VarChar(255)
-  name_seo             String            @unique @db.VarChar(255)
   email                String            @unique @db.VarChar(255)
   password             String            @db.Text
   group                core_groups       @relation("core_members_group", references: [id], fields: [group_id])

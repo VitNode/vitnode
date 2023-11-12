@@ -5,10 +5,13 @@ import { cx } from '@/functions/classnames';
 import { buttonVariants } from '@/components/ui/button';
 import { Link, usePathname } from '@/i18n';
 
-interface Props {
+export interface ItemListNavAdminProps {
   href: string;
   icon: LucideIcon;
   id: string;
+}
+
+interface Props extends ItemListNavAdminProps {
   primaryId: string;
   onClick?: () => void;
 }
@@ -18,6 +21,8 @@ export const LinkItemListNavAdmin = ({ href, icon, id, onClick, primaryId }: Pro
   const pathname = usePathname();
   const Icon = icon;
 
+  const active = pathname.startsWith(href);
+
   return (
     <li>
       <Link
@@ -26,7 +31,7 @@ export const LinkItemListNavAdmin = ({ href, icon, id, onClick, primaryId }: Pro
           buttonVariants({ variant: 'ghost', size: 'sm' }),
           'w-full justify-start relative pl-4 hover:bg-secondary font-normal text-foreground',
           {
-            'font-semibold': pathname === href
+            'font-semibold': active
           }
         )}
         onClick={onClick}
@@ -35,7 +40,7 @@ export const LinkItemListNavAdmin = ({ href, icon, id, onClick, primaryId }: Pro
         {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
         {/* @ts-expect-error */}
         <span>{t(`nav.${primaryId}.${id}`)}</span>
-        {pathname === href && (
+        {active && (
           <div className="absolute top-1/2 left-1 w-1 h-[calc(100%_-_0.5rem)] bg-primary rounded-md -translate-y-1/2" />
         )}
       </Link>

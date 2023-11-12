@@ -63,7 +63,7 @@ export const ContentTableUsersMembersAdmin = () => {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Link
-                      href={`/admin/members/user/${data.id}`}
+                      href={`/admin/members/users/${data.id}`}
                       className={buttonVariants({
                         variant: 'ghost',
                         size: 'icon'

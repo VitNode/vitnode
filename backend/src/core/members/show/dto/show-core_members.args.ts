@@ -4,7 +4,6 @@ import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 export enum ShowCoreMembersSortingColumnEnum {
   name = 'name',
-  name_seo = 'name_seo',
   joined = 'joined',
   birthday = 'birthday',
   first_name = 'first_name',

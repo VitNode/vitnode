@@ -19,7 +19,6 @@ type AuthorizationCurrentUserObj {
   id: String!
   is_admin: Boolean!
   name: String!
-  name_seo: String!
   newsletter: Boolean
 }
 
@@ -112,7 +111,6 @@ type ShowAdminMembers {
   image_cover: UploadCoreAttachmentsObj
   joined: Int!
   name: String!
-  name_seo: String!
   newsletter: Boolean!
   posts: Int!
   reactions: Int!
@@ -135,7 +133,6 @@ enum ShowAdminMembersSortingColumnEnum {
   joined
   last_name
   name
-  name_seo
   posts
   reactions
 }
@@ -164,7 +161,6 @@ type ShowCoreMembers {
   image_cover: UploadCoreAttachmentsObj
   joined: Int!
   name: String!
-  name_seo: String!
   posts: Int!
   reactions: Int!
 }
@@ -186,7 +182,6 @@ enum ShowCoreMembersSortingColumnEnum {
   joined
   last_name
   name
-  name_seo
   posts
   reactions
 }

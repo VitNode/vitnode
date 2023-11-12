@@ -26,9 +26,6 @@ export class ShowCoreMembers {
   @Field(() => String)
   name: string;
 
-  @Field(() => String)
-  name_seo: string;
-
   @Field(() => Int)
   joined: number;
 

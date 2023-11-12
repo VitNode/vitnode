@@ -40,7 +40,6 @@ query Show_admin_members(
       id
       joined
       name
-      name_seo
       group {
         name
       }

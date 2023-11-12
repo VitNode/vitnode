@@ -16,7 +16,7 @@ export const useCopperModalChangeAvatar = () => {
     const cropper = cropperRef.current?.cropper;
     if (!cropper) return;
     const blob = await fetch(cropper.getCroppedCanvas().toDataURL()).then(res => res.blob());
-    const file = new File([blob], `${session.name_seo}.webp`, {
+    const file = new File([blob], `${session.id}.webp`, {
       type: blob.type
     });
 

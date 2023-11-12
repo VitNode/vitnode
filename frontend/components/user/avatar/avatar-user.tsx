@@ -13,8 +13,8 @@ interface Props {
   sizeInRem: number;
   user?: {
     avatar_color: string;
+    id: string;
     name: string;
-    name_seo: string;
     avatar?: Maybe<UploadCoreAttachmentsObj>;
   };
 }
@@ -22,13 +22,13 @@ interface Props {
 const AvatarUser = forwardRef<HTMLDivElement, Props>(({ sizeInRem, user }, ref) => {
   const { session } = useSession();
   const current = {
-    name_seo: user?.name_seo || session?.name_seo,
+    id: user?.id || session?.id,
     name: user?.name || session?.name,
     avatar: user?.avatar || session?.avatar,
     avatar_color: user?.avatar_color || session?.avatar_color
   };
 
-  if (!current.name_seo || !current.name || !current.avatar_color) return null;
+  if (!current.id || !current.name || !current.avatar_color) return null;
 
   return (
     <Img

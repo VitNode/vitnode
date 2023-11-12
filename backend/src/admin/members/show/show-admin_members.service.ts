@@ -44,7 +44,6 @@ export class ShowAdminMembersService {
         select: {
           id: true,
           name: true,
-          name_seo: true,
           email: true,
           joined: true,
           birthday: true,

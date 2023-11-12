@@ -7,7 +7,6 @@ query Authorization_core_sessions {
       id
       is_admin
       name
-      name_seo
       newsletter
       avatar_color
       avatar {

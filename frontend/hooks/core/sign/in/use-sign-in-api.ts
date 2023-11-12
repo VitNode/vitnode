@@ -28,7 +28,7 @@ export const useSignInAPI = () => {
       queryClient.refetchQueries({
         queryKey: [APIKeys.AUTHORIZATION]
       });
-      push(variables.admin ? '/admin/core' : '/');
+      push(variables.admin ? '/admin/core/dashboard' : '/');
     }
   });
 };

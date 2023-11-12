@@ -19,9 +19,6 @@ export class User {
   @Field(() => String)
   name: string;
 
-  @Field(() => String)
-  name_seo: string;
-
   @Field(() => Int)
   birthday: number;
 

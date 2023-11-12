@@ -44,7 +44,6 @@ export class ShowCoreMembersService {
         select: {
           id: true,
           name: true,
-          name_seo: true,
           joined: true,
           birthday: true,
           posts: true,
