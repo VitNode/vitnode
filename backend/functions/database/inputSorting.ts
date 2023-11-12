@@ -19,7 +19,7 @@ export function inputSorting<T>({
   sortBy
 }: Args<T>): Record<string, SortDirectionEnum>[] {
   const sortById = {
-    id: SortDirectionEnum.asc
+    id: SortDirectionEnum.desc
   };
 
   if (!sortBy || sortBy.length <= 0) {

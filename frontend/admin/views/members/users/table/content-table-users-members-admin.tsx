@@ -12,8 +12,7 @@ import { Link } from '@/i18n';
 import { buttonVariants } from '@/components/ui/button';
 import { DataTable } from '@/components/data-table/data-table';
 import { Loader } from '@/components/loader/loader';
-
-import { AvatarUser } from '../../../../../components/user/avatar/avatar-user';
+import { AvatarUser } from '@/components/user/avatar/avatar-user';
 
 export const ContentTableUsersMembersAdmin = () => {
   const t = useTranslations('admin.members.users');
@@ -28,20 +27,26 @@ export const ContentTableUsersMembersAdmin = () => {
           const data = row.original;
 
           return (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <AvatarUser user={data} sizeInRem={2} />
 
-              <div className="flex flex-col">
-                <span className="font-medium">{data.name}</span>
-                <span className="text-sm">{data.email}</span>
-              </div>
+              <span>{data.name}</span>
             </div>
           );
         }
       },
       {
-        header: t('table.groups'),
-        accessorKey: 'groups'
+        header: t('table.email'),
+        accessorKey: 'email'
+      },
+      {
+        header: t('table.group'),
+        accessorKey: 'group',
+        cell: ({ row }) => {
+          const data = row.original;
+
+          return data.group.name;
+        }
       },
       {
         header: t('table.joined'),

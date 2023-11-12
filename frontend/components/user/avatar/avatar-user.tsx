@@ -28,11 +28,11 @@ const AvatarUser = forwardRef<HTMLDivElement, Props>(({ sizeInRem, user }, ref) 
     avatar_color: user?.avatar_color || session?.avatar_color
   };
 
-  if (!current.avatar || !current.name_seo || !current.name || !current.avatar_color) return null;
+  if (!current.name_seo || !current.name || !current.avatar_color) return null;
 
   return (
     <Img
-      className="rounded-full"
+      className="rounded-full flex-shrink-0"
       imageClassName="object-cover"
       src={
         current.avatar

@@ -13,6 +13,12 @@ export class ShowCoreMembersObj {
 }
 
 @ObjectType()
+export class GroupShowCoreMembers {
+  @Field(() => String)
+  name: string;
+}
+
+@ObjectType()
 export class ShowCoreMembers {
   @Field(() => String)
   id: string;
@@ -22,9 +28,6 @@ export class ShowCoreMembers {
 
   @Field(() => String)
   name_seo: string;
-
-  @Field(() => Int)
-  group_id: number;
 
   @Field(() => Int)
   joined: number;
@@ -37,6 +40,9 @@ export class ShowCoreMembers {
 
   @Field(() => UploadCoreAttachmentsObj, { nullable: true })
   image_cover?: UploadCoreAttachmentsObj;
+
+  @Field(() => GroupShowCoreMembers)
+  group: GroupShowCoreMembers;
 
   @Field(() => Int)
   posts: number;

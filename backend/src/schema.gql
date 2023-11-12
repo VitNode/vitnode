@@ -32,6 +32,10 @@ type GeneralAdminSettingsObj {
   side_name: String!
 }
 
+type GroupShowCoreMembers {
+  name: String!
+}
+
 enum LayoutAdminInstallEnum {
   ACCOUNT
   DATABASE
@@ -103,7 +107,7 @@ type ShowAdminMembers {
   birthday: Int!
   email: String!
   followers: Int!
-  group_id: Int!
+  group: GroupShowCoreMembers!
   id: String!
   image_cover: UploadCoreAttachmentsObj
   joined: Int!
@@ -112,7 +116,6 @@ type ShowAdminMembers {
   newsletter: Boolean!
   posts: Int!
   reactions: Int!
-  unread_notifications: Int!
 }
 
 type ShowAdminMembersObj {
@@ -156,7 +159,7 @@ type ShowCoreMembers {
   avatar_color: String!
   birthday: Int!
   followers: Int!
-  group_id: Int!
+  group: GroupShowCoreMembers!
   id: String!
   image_cover: UploadCoreAttachmentsObj
   joined: Int!

@@ -45,22 +45,25 @@ export class ShowCoreMembersService {
           id: true,
           name: true,
           name_seo: true,
-          group_id: true,
           joined: true,
           birthday: true,
-          avatar_id: true,
           posts: true,
           followers: true,
           reactions: true,
           avatar_color: true,
           avatar: true,
-          cover: true
+          cover: true,
+          group: {
+            select: {
+              name: true
+            }
+          }
         },
         orderBy: inputSorting<ShowCoreMembersSortingColumnEnum>({
           sortBy,
           defaultSortBy: {
             column: ShowCoreMembersSortingColumnEnum.joined,
-            direction: SortDirectionEnum.asc
+            direction: SortDirectionEnum.desc
           }
         }),
         where

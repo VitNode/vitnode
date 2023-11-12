@@ -46,7 +46,7 @@ export class ShowAdminGroupsService {
           sortBy,
           defaultSortBy: {
             column: ShowAdminGroupsSortingColumnEnum.created,
-            direction: SortDirectionEnum.asc
+            direction: SortDirectionEnum.desc
           }
         }),
         where

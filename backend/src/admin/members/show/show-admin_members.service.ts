@@ -46,10 +46,8 @@ export class ShowAdminMembersService {
           name: true,
           name_seo: true,
           email: true,
-          group_id: true,
           joined: true,
           birthday: true,
-          avatar_id: true,
           posts: true,
           followers: true,
           reactions: true,
@@ -57,13 +55,18 @@ export class ShowAdminMembersService {
           avatar_color: true,
           unread_notifications: true,
           avatar: true,
-          cover: true
+          cover: true,
+          group: {
+            select: {
+              name: true
+            }
+          }
         },
         orderBy: inputSorting<ShowAdminMembersSortingColumnEnum>({
           sortBy,
           defaultSortBy: {
             column: ShowAdminMembersSortingColumnEnum.joined,
-            direction: SortDirectionEnum.asc
+            direction: SortDirectionEnum.desc
           }
         }),
         where

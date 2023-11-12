@@ -37,11 +37,13 @@ query Show_admin_members(
       }
       avatar_color
       email
-      group_id
       id
       joined
       name
       name_seo
+      group {
+        name
+      }
     }
   }
 }

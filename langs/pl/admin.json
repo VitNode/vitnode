@@ -54,7 +54,8 @@
         "desc": "Test 123",
         "table": {
           "name": "Nazwa",
-          "groups": "Grupy",
+          "email": "Email",
+          "group": "Grupa",
           "joined": "Dołączył"
         },
         "actions": {

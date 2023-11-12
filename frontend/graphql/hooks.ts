@@ -51,6 +51,11 @@ export type GeneralAdminSettingsObj = {
   side_name: Scalars['String']['output'];
 };
 
+export type GroupShowCoreMembers = {
+  __typename?: 'GroupShowCoreMembers';
+  name: Scalars['String']['output'];
+};
+
 export enum LayoutAdminInstallEnum {
   Account = 'ACCOUNT',
   Database = 'DATABASE',
@@ -204,7 +209,7 @@ export type ShowAdminMembers = {
   birthday: Scalars['Int']['output'];
   email: Scalars['String']['output'];
   followers: Scalars['Int']['output'];
-  group_id: Scalars['Int']['output'];
+  group: GroupShowCoreMembers;
   id: Scalars['String']['output'];
   image_cover?: Maybe<UploadCoreAttachmentsObj>;
   joined: Scalars['Int']['output'];
@@ -213,7 +218,6 @@ export type ShowAdminMembers = {
   newsletter: Scalars['Boolean']['output'];
   posts: Scalars['Int']['output'];
   reactions: Scalars['Int']['output'];
-  unread_notifications: Scalars['Int']['output'];
 };
 
 export type ShowAdminMembersObj = {
@@ -261,7 +265,7 @@ export type ShowCoreMembers = {
   avatar_color: Scalars['String']['output'];
   birthday: Scalars['Int']['output'];
   followers: Scalars['Int']['output'];
-  group_id: Scalars['Int']['output'];
+  group: GroupShowCoreMembers;
   id: Scalars['String']['output'];
   image_cover?: Maybe<UploadCoreAttachmentsObj>;
   joined: Scalars['Int']['output'];
@@ -415,7 +419,7 @@ export type Show_Admin_MembersQueryVariables = Exact<{
 }>;
 
 
-export type Show_Admin_MembersQuery = { __typename?: 'Query', show_admin_members: { __typename?: 'ShowAdminMembersObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminMembers', avatar_color: string, email: string, group_id: number, id: string, joined: number, name: string, name_seo: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null }> } };
+export type Show_Admin_MembersQuery = { __typename?: 'Query', show_admin_members: { __typename?: 'ShowAdminMembersObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminMembers', avatar_color: string, email: string, id: string, joined: number, name: string, name_seo: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupShowCoreMembers', name: string } }> } };
 
 export type Authorization_Admin_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -599,11 +603,13 @@ export const Show_Admin_Members = gql`
       }
       avatar_color
       email
-      group_id
       id
       joined
       name
       name_seo
+      group {
+        name
+      }
     }
   }
 }

@@ -186,7 +186,7 @@ orderBy: inputSorting<ShowCoreMembersSortingColumnEnum>({
   sortBy,
   defaultSortBy: {
     column: ShowCoreMembersSortingColumnEnum.joined,
-    direction: SortDirectionEnum.asc
+    direction: SortDirectionEnum.desc
   }
 });
 ```
@@ -220,7 +220,7 @@ export class ShowCoreMembersService {
         sortBy,
         defaultSortBy: {
           column: ShowCoreMembersSortingColumnEnum.joined,
-          direction: SortDirectionEnum.asc
+          direction: SortDirectionEnum.desc
         }
       })
     });
