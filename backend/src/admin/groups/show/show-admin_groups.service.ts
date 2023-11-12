@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
-import { ShowCoreGroupsObj } from './dto/show-core_groups.obj';
-import { ShowCoreGroupsArgs, ShowCoreGroupsSortingColumnEnum } from './dto/show-core_groups.args';
+import {
+  ShowAdminGroupsArgs,
+  ShowAdminGroupsSortingColumnEnum
+} from './dto/show-admin_groups.args';
+import { ShowAdminGroupsObj } from './dto/show-admin_groups.obj';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { inputPagination } from '@/functions/database/pagination/inputPagination';
@@ -10,7 +13,7 @@ import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 import { outputPagination } from '@/functions/database/pagination/outputPagination';
 
 @Injectable()
-export class ShowCoreGroupsService {
+export class ShowAdminGroupsService {
   constructor(private prisma: PrismaService) {}
 
   async show({
@@ -19,7 +22,7 @@ export class ShowCoreGroupsService {
     last,
     search = '',
     sortBy
-  }: ShowCoreGroupsArgs): Promise<ShowCoreGroupsObj> {
+  }: ShowAdminGroupsArgs): Promise<ShowAdminGroupsObj> {
     const where = {
       OR: [
         {
@@ -39,10 +42,10 @@ export class ShowCoreGroupsService {
           created: true,
           protected: true
         },
-        orderBy: inputSorting<ShowCoreGroupsSortingColumnEnum>({
+        orderBy: inputSorting<ShowAdminGroupsSortingColumnEnum>({
           sortBy,
           defaultSortBy: {
-            column: ShowCoreGroupsSortingColumnEnum.created,
+            column: ShowAdminGroupsSortingColumnEnum.created,
             direction: SortDirectionEnum.asc
           }
         }),

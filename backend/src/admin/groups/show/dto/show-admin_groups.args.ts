@@ -2,26 +2,26 @@ import { ArgsType, Field, InputType, Int, registerEnumType } from '@nestjs/graph
 
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
-export enum ShowCoreGroupsSortingColumnEnum {
+export enum ShowAdminGroupsSortingColumnEnum {
   name = 'name',
   created = 'created'
 }
 
-registerEnumType(ShowCoreGroupsSortingColumnEnum, {
-  name: 'ShowCoreGroupsSortingColumnEnum'
+registerEnumType(ShowAdminGroupsSortingColumnEnum, {
+  name: 'ShowAdminGroupsSortingColumnEnum'
 });
 
 @InputType()
-class ShowCoreGroupsSortByArgs {
-  @Field(() => ShowCoreGroupsSortingColumnEnum)
-  column: ShowCoreGroupsSortingColumnEnum;
+class ShowAdminGroupsSortByArgs {
+  @Field(() => ShowAdminGroupsSortingColumnEnum)
+  column: ShowAdminGroupsSortingColumnEnum;
 
   @Field(() => SortDirectionEnum)
   direction: SortDirectionEnum;
 }
 
 @ArgsType()
-export class ShowCoreGroupsArgs {
+export class ShowAdminGroupsArgs {
   @Field(() => Int, { nullable: true })
   cursor?: number;
 
@@ -31,8 +31,8 @@ export class ShowCoreGroupsArgs {
   @Field(() => Int, { nullable: true })
   last?: number;
 
-  @Field(() => [ShowCoreGroupsSortByArgs], { nullable: true })
-  sortBy?: ShowCoreGroupsSortByArgs[];
+  @Field(() => [ShowAdminGroupsSortByArgs], { nullable: true })
+  sortBy?: ShowAdminGroupsSortByArgs[];
 
   @Field(() => String, { nullable: true })
   search?: string;

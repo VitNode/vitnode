@@ -3,9 +3,9 @@ import { useSearchParams } from 'next/navigation';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Show_Core_Groups,
-  Show_Core_GroupsQuery,
-  Show_Core_GroupsQueryVariables
+  Show_Admin_Groups,
+  Show_Admin_GroupsQuery,
+  Show_Admin_GroupsQueryVariables
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
 
@@ -22,8 +22,8 @@ export const useGroupsAdminAPI = () => {
     queryFn: async () => {
       const defaultFirst = !pagination.last ? 10 : null;
 
-      return await fetcher<Show_Core_GroupsQuery, Show_Core_GroupsQueryVariables>({
-        query: Show_Core_Groups,
+      return await fetcher<Show_Admin_GroupsQuery, Show_Admin_GroupsQueryVariables>({
+        query: Show_Admin_Groups,
         variables: {
           first: pagination.first ? +pagination.first : defaultFirst,
           last: pagination.last ? +pagination.last : null,

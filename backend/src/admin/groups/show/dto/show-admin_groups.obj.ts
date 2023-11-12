@@ -3,16 +3,16 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { PageInfo } from '@/types/database/pagination.type';
 
 @ObjectType()
-export class ShowCoreGroupsObj {
-  @Field(() => [ShowCoreGroups])
-  edges: ShowCoreGroups[];
+export class ShowAdminGroupsObj {
+  @Field(() => [ShowAdminGroups])
+  edges: ShowAdminGroups[];
 
   @Field(() => PageInfo)
   pageInfo: PageInfo;
 }
 
 @ObjectType()
-export class ShowCoreGroups {
+export class ShowAdminGroups {
   @Field(() => Int)
   id: number;
 

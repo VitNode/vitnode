@@ -45,8 +45,8 @@ export type AvatarObj = {
   img?: Maybe<UploadCoreAttachmentsObj>;
 };
 
-export type CreateCoreGroupsObj = {
-  __typename?: 'CreateCoreGroupsObj';
+export type CreateAdminGroupsObj = {
+  __typename?: 'CreateAdminGroupsObj';
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
 };
@@ -69,7 +69,7 @@ export type LayoutAdminInstallObj = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  create_core_groups: CreateCoreGroupsObj;
+  create_admin_groups: CreateAdminGroupsObj;
   create_database_admin_install: Scalars['String']['output'];
   delete_avatar_core_members: Scalars['String']['output'];
   edit_core_languages: ShowCoreLanguages;
@@ -82,7 +82,7 @@ export type Mutation = {
 };
 
 
-export type MutationCreate_Core_GroupsArgs = {
+export type MutationCreate_Admin_GroupsArgs = {
   name: Scalars['String']['input'];
 };
 
@@ -137,18 +137,18 @@ export type Query = {
   authorization_admin_sessions: AuthorizationAdminSessionsObj;
   authorization_core_sessions: AuthorizationCoreSessionsObj;
   layout_admin_install: LayoutAdminInstallObj;
-  show_core_groups: ShowCoreGroupsObj;
+  show_admin_groups: ShowAdminGroupsObj;
   show_core_languages: ShowCoreLanguagesObj;
   show_core_members: ShowCoreMembersObj;
 };
 
 
-export type QueryShow_Core_GroupsArgs = {
+export type QueryShow_Admin_GroupsArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
-  sortBy?: InputMaybe<Array<ShowCoreGroupsSortByArgs>>;
+  sortBy?: InputMaybe<Array<ShowAdminGroupsSortByArgs>>;
 };
 
 
@@ -167,8 +167,8 @@ export type QueryShow_Core_MembersArgs = {
   sortBy?: InputMaybe<Array<ShowCoreMembersSortByArgs>>;
 };
 
-export type ShowCoreGroups = {
-  __typename?: 'ShowCoreGroups';
+export type ShowAdminGroups = {
+  __typename?: 'ShowAdminGroups';
   created: Scalars['Int']['output'];
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
@@ -176,18 +176,18 @@ export type ShowCoreGroups = {
   usersCount: Scalars['Int']['output'];
 };
 
-export type ShowCoreGroupsObj = {
-  __typename?: 'ShowCoreGroupsObj';
-  edges: Array<ShowCoreGroups>;
+export type ShowAdminGroupsObj = {
+  __typename?: 'ShowAdminGroupsObj';
+  edges: Array<ShowAdminGroups>;
   pageInfo: PageInfo;
 };
 
-export type ShowCoreGroupsSortByArgs = {
-  column: ShowCoreGroupsSortingColumnEnum;
+export type ShowAdminGroupsSortByArgs = {
+  column: ShowAdminGroupsSortingColumnEnum;
   direction: SortDirectionEnum;
 };
 
-export enum ShowCoreGroupsSortingColumnEnum {
+export enum ShowAdminGroupsSortingColumnEnum {
   Created = 'created',
   Name = 'name'
 }
@@ -210,14 +210,14 @@ export type ShowCoreLanguagesObj = {
 
 export type ShowCoreMembers = {
   __typename?: 'ShowCoreMembers';
-  avatar?: Maybe<Scalars['String']['output']>;
+  avatar?: Maybe<UploadCoreAttachmentsObj>;
   avatar_color: Scalars['String']['output'];
   birthday: Scalars['Int']['output'];
   email: Scalars['String']['output'];
   followers: Scalars['Int']['output'];
   group_id: Scalars['Int']['output'];
   id: Scalars['String']['output'];
-  image_cover?: Maybe<Scalars['String']['output']>;
+  image_cover?: Maybe<UploadCoreAttachmentsObj>;
   joined: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   name_seo: Scalars['String']['output'];
@@ -270,6 +270,7 @@ export type UploadCoreAttachmentsObj = {
   description?: Maybe<Scalars['String']['output']>;
   extension: Scalars['String']['output'];
   file_size: Scalars['Int']['output'];
+  id: Scalars['String']['output'];
   member_id: Scalars['String']['output'];
   mimetype: Scalars['String']['output'];
   module: Scalars['String']['output'];
@@ -350,21 +351,21 @@ export type Layout_Admin_InstallQueryVariables = Exact<{ [key: string]: never; }
 
 export type Layout_Admin_InstallQuery = { __typename?: 'Query', layout_admin_install: { __typename?: 'LayoutAdminInstallObj', status: LayoutAdminInstallEnum } };
 
-export type Authorization_Admin_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Authorization_Admin_SessionsQuery = { __typename?: 'Query', authorization_admin_sessions: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null }, show_core_languages: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string, name: string, enabled: boolean, timezone: string, default: boolean }> } };
-
-export type Show_Core_GroupsQueryVariables = Exact<{
+export type Show_Admin_GroupsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   cursor?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
-  sortBy?: InputMaybe<Array<ShowCoreGroupsSortByArgs> | ShowCoreGroupsSortByArgs>;
+  sortBy?: InputMaybe<Array<ShowAdminGroupsSortByArgs> | ShowAdminGroupsSortByArgs>;
   last?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type Show_Core_GroupsQuery = { __typename?: 'Query', show_core_groups: { __typename?: 'ShowCoreGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowCoreGroups', created: number, id: number, name: string, usersCount: number, protected: boolean }> } };
+export type Show_Admin_GroupsQuery = { __typename?: 'Query', show_admin_groups: { __typename?: 'ShowAdminGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowAdminGroups', created: number, id: number, name: string, usersCount: number, protected: boolean }> } };
+
+export type Authorization_Admin_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Authorization_Admin_SessionsQuery = { __typename?: 'Query', authorization_admin_sessions: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, name_seo: string, newsletter?: boolean | null, avatar: { __typename?: 'AvatarObj', color: string, img?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } } | null }, show_core_languages: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string, name: string, enabled: boolean, timezone: string, default: boolean }> } };
 
 export type Middleware_Core_LanguagesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -481,6 +482,33 @@ export const Layout_Admin_Install = gql`
   }
 }
     `;
+export const Show_Admin_Groups = gql`
+    query Show_admin_groups($first: Int, $cursor: Int, $search: String, $sortBy: [ShowAdminGroupsSortByArgs!], $last: Int) {
+  show_admin_groups(
+    first: $first
+    cursor: $cursor
+    search: $search
+    sortBy: $sortBy
+    last: $last
+  ) {
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      startCursor
+      totalCount
+      hasPreviousPage
+    }
+    edges {
+      created
+      id
+      name
+      usersCount
+      protected
+    }
+  }
+}
+    `;
 export const Authorization_Admin_Sessions = gql`
     query Authorization_admin_sessions {
   authorization_admin_sessions {
@@ -518,33 +546,6 @@ export const Authorization_Admin_Sessions = gql`
       enabled
       timezone
       default
-    }
-  }
-}
-    `;
-export const Show_Core_Groups = gql`
-    query Show_core_groups($first: Int, $cursor: Int, $search: String, $sortBy: [ShowCoreGroupsSortByArgs!], $last: Int) {
-  show_core_groups(
-    first: $first
-    cursor: $cursor
-    search: $search
-    sortBy: $sortBy
-    last: $last
-  ) {
-    pageInfo {
-      count
-      endCursor
-      hasNextPage
-      startCursor
-      totalCount
-      hasPreviousPage
-    }
-    edges {
-      created
-      id
-      name
-      usersCount
-      protected
     }
   }
 }

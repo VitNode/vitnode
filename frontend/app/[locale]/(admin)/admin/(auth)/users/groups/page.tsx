@@ -7,9 +7,9 @@ import { GroupsUsersAdminView } from '@/admin/views/users/groups/groups-users-ad
 import getQueryClient from '@/functions/get-query-client';
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Show_Core_Groups,
-  Show_Core_GroupsQuery,
-  Show_Core_GroupsQueryVariables
+  Show_Admin_Groups,
+  Show_Admin_GroupsQuery,
+  Show_Admin_GroupsQueryVariables
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
 
@@ -20,8 +20,8 @@ interface Props {
 }
 
 const getData = async () => {
-  return await fetcher<Show_Core_GroupsQuery, Show_Core_GroupsQueryVariables>({
-    query: Show_Core_Groups,
+  return await fetcher<Show_Admin_GroupsQuery, Show_Admin_GroupsQueryVariables>({
+    query: Show_Admin_Groups,
     variables: {
       first: 10
     },

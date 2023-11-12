@@ -9,13 +9,13 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { Link } from '@/i18n';
 import { useGroupsAdminAPI } from './hooks/use-groups-admin-api';
 import { Loader } from '@/components/loader/loader';
-import { ShowCoreGroups } from '@/graphql/hooks';
+import { ShowAdminGroups } from '@/graphql/hooks';
 
 export const ContentTableGroupsUsersAdmin = () => {
   const t = useTranslations('admin');
   const { data, isFetching, isLoading } = useGroupsAdminAPI();
 
-  const columns: ColumnDef<ShowCoreGroups>[] = useMemo(
+  const columns: ColumnDef<ShowAdminGroups>[] = useMemo(
     () => [
       {
         header: t('users.groups.table.name'),
@@ -61,8 +61,8 @@ export const ContentTableGroupsUsersAdmin = () => {
 
   return (
     <DataTable
-      data={data?.show_core_groups.edges ?? []}
-      pageInfo={data?.show_core_groups.pageInfo}
+      data={data?.show_admin_groups.edges ?? []}
+      pageInfo={data?.show_admin_groups.pageInfo}
       defaultItemsPerPage={10}
       isFetching={isFetching}
       columns={columns}
