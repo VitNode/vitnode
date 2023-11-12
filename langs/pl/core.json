@@ -132,6 +132,8 @@
       "no_connection_api": "Brak połączenia z API",
       "access_denied": "Brak dostępu",
       "internal_server_error": "Wewnętrzny błąd serwera",
+      "404": "Nie znaleziono strony",
+      "500": "Wewnętrzny błąd serwera",
       "actions": {
         "back_home": "Strona główna",
         "contact": "Skontaktuj się z nami"

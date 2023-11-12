@@ -5,16 +5,17 @@ import { forwardRef } from 'react';
 import { CONFIG } from '@/config';
 import { generateLetterPhoto } from '@/functions/generate-letter-photo';
 import { useSession } from '@/hooks/core/use-session';
-import { AvatarObj } from '@/graphql/hooks';
+import { Maybe, UploadCoreAttachmentsObj } from '@/graphql/hooks';
 
 import { Img } from '../../img/Img';
 
 interface Props {
   sizeInRem: number;
   user?: {
-    avatar: AvatarObj;
+    avatar_color: string;
     id: string;
     name: string;
+    avatar?: Maybe<UploadCoreAttachmentsObj>;
   };
 }
 
@@ -23,25 +24,26 @@ const AvatarUser = forwardRef<HTMLDivElement, Props>(({ sizeInRem, user }, ref) 
   const current = {
     id: user?.id || session?.id,
     name: user?.name || session?.name,
-    avatar: user?.avatar || session?.avatar
+    avatar: user?.avatar || session?.avatar,
+    avatar_color: user?.avatar_color || session?.avatar_color
   };
 
-  if (!current.avatar || !current.id || !current.name) return null;
+  if (!current.id || !current.name || !current.avatar_color) return null;
 
   return (
     <Img
-      className="rounded-full"
+      className="rounded-full flex-shrink-0"
       imageClassName="object-cover"
       src={
-        current.avatar.img
-          ? `${CONFIG.graphql_url}/${current.avatar.img.url}`
-          : generateLetterPhoto(current.name.slice(0, 1), current.avatar.color)
+        current.avatar
+          ? `${CONFIG.graphql_url}/${current.avatar.url}`
+          : generateLetterPhoto(current.name.slice(0, 1), current.avatar_color)
       }
       alt={current.name}
       ref={ref}
       width={sizeInRem * 16}
       height={sizeInRem * 16}
-      priority={!current.avatar.img}
+      priority={!current.avatar}
     />
   );
 });

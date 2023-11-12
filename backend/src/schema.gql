@@ -11,29 +11,28 @@ type AuthorizationCoreSessionsObj {
 }
 
 type AuthorizationCurrentUserObj {
-  avatar: AvatarObj!
+  avatar: UploadCoreAttachmentsObj
+  avatar_color: String!
   birthday: Int!
   email: String!
   group_id: Int!
   id: String!
   is_admin: Boolean!
   name: String!
-  name_seo: String!
   newsletter: Boolean
 }
 
-type AvatarObj {
-  color: String!
-  img: UploadCoreAttachmentsObj
-}
-
-type CreateCoreGroupsObj {
+type CreateAdminGroupsObj {
   id: Int!
   name: String!
 }
 
 type GeneralAdminSettingsObj {
   side_name: String!
+}
+
+type GroupShowCoreMembers {
+  name: String!
 }
 
 enum LayoutAdminInstallEnum {
@@ -47,7 +46,7 @@ type LayoutAdminInstallObj {
 }
 
 type Mutation {
-  create_core_groups(name: String!): CreateCoreGroupsObj!
+  create_admin_groups(name: String!): CreateAdminGroupsObj!
   create_database_admin_install: String!
   delete_avatar_core_members: String!
   edit_core_languages(default: Boolean!, enabled: Boolean!, id: String!, name: String!, timezone: String!): ShowCoreLanguages!
@@ -72,30 +71,70 @@ type Query {
   authorization_admin_sessions: AuthorizationAdminSessionsObj!
   authorization_core_sessions: AuthorizationCoreSessionsObj!
   layout_admin_install: LayoutAdminInstallObj!
-  show_core_groups(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowCoreGroupsSortByArgs!]): ShowCoreGroupsObj!
+  show_admin_groups(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
+  show_admin_members(cursor: String, first: Int, last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   show_core_languages(cursor: String, first: Int, last: Int): ShowCoreLanguagesObj!
   show_core_members(cursor: String, first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
 }
 
-type ShowCoreGroups {
+type ShowAdminGroups {
   created: Int!
   id: Int!
   name: String!
+  protected: Boolean!
+  usersCount: Int!
 }
 
-type ShowCoreGroupsObj {
-  edges: [ShowCoreGroups!]!
+type ShowAdminGroupsObj {
+  edges: [ShowAdminGroups!]!
   pageInfo: PageInfo!
 }
 
-input ShowCoreGroupsSortByArgs {
-  column: ShowCoreGroupsSortingColumnEnum!
+input ShowAdminGroupsSortByArgs {
+  column: ShowAdminGroupsSortingColumnEnum!
   direction: SortDirectionEnum!
 }
 
-enum ShowCoreGroupsSortingColumnEnum {
+enum ShowAdminGroupsSortingColumnEnum {
   created
   name
+}
+
+type ShowAdminMembers {
+  avatar: UploadCoreAttachmentsObj
+  avatar_color: String!
+  birthday: Int!
+  email: String!
+  followers: Int!
+  group: GroupShowCoreMembers!
+  id: String!
+  image_cover: UploadCoreAttachmentsObj
+  joined: Int!
+  name: String!
+  newsletter: Boolean!
+  posts: Int!
+  reactions: Int!
+}
+
+type ShowAdminMembersObj {
+  edges: [ShowAdminMembers!]!
+  pageInfo: PageInfo!
+}
+
+input ShowAdminMembersSortByArgs {
+  column: ShowAdminMembersSortingColumnEnum!
+  direction: SortDirectionEnum!
+}
+
+enum ShowAdminMembersSortingColumnEnum {
+  birthday
+  first_name
+  followers
+  joined
+  last_name
+  name
+  posts
+  reactions
 }
 
 type ShowCoreLanguages {
@@ -113,21 +152,17 @@ type ShowCoreLanguagesObj {
 }
 
 type ShowCoreMembers {
-  avatar: String
+  avatar: UploadCoreAttachmentsObj
   avatar_color: String!
   birthday: Int!
-  email: String!
   followers: Int!
-  group_id: Int!
+  group: GroupShowCoreMembers!
   id: String!
-  image_cover: String
+  image_cover: UploadCoreAttachmentsObj
   joined: Int!
   name: String!
-  name_seo: String!
-  newsletter: Boolean!
   posts: Int!
   reactions: Int!
-  unread_notifications: Int!
 }
 
 type ShowCoreMembersObj {
@@ -147,7 +182,6 @@ enum ShowCoreMembersSortingColumnEnum {
   joined
   last_name
   name
-  name_seo
   posts
   reactions
 }
@@ -173,6 +207,7 @@ type UploadCoreAttachmentsObj {
   description: String
   extension: String!
   file_size: Int!
+  id: String!
   member_id: String!
   mimetype: String!
   module: String!

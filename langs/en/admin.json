@@ -10,8 +10,8 @@
         "general": "General",
         "langs": "Languages"
       },
-      "users": {
-        "title": "Users",
+      "members": {
+        "title": "Members",
         "list": "Users",
         "groups": "Groups"
       }
@@ -48,13 +48,28 @@
         }
       }
     },
-    "users": {
+    "members": {
+      "users": {
+        "title": "Users",
+        "desc": "Test 123",
+        "table": {
+          "name": "Name",
+          "email": "Email",
+          "group": "Group",
+          "joined": "Joined"
+        },
+        "actions": {
+          "edit": {
+            "title": "Edit"
+          }
+        }
+      },
       "groups": {
         "title": "Groups",
         "desc": "Test 123",
         "table": {
           "name": "Name",
-          "users": "Users"
+          "users_count": "Users"
         },
         "actions": {
           "edit": {

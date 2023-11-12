@@ -52,6 +52,9 @@ export class AuthorizationAdminSessionsService {
         const user = await this.prisma.core_members.findUnique({
           where: {
             id: session.member_id
+          },
+          include: {
+            avatar: true
           }
         });
 
@@ -59,24 +62,17 @@ export class AuthorizationAdminSessionsService {
           throw new AccessDeniedError();
         }
 
-        const avatar = await this.prisma.core_attachments.findFirst({
-          where: {
-            module: 'core_members',
-            module_id: user.id
-          }
-        });
-
         return {
           user: {
             id: user.id,
             email: user.email,
             name: user.name,
-            name_seo: user.name_seo,
             birthday: user.birthday,
             is_admin: true,
             newsletter: user.newsletter,
             group_id: user.group_id,
-            avatar: { img: avatar, color: user.avatar_color }
+            avatar: user.avatar,
+            avatar_color: user.avatar_color
           }
         };
       }
@@ -110,6 +106,9 @@ export class AuthorizationAdminSessionsService {
       const user = await this.prisma.core_members.findUnique({
         where: {
           id: session.member_id
+        },
+        include: {
+          avatar: true
         }
       });
 
@@ -177,24 +176,17 @@ export class AuthorizationAdminSessionsService {
         sameSite: 'none'
       });
 
-      const avatar = await this.prisma.core_attachments.findFirst({
-        where: {
-          module: 'core_members',
-          module_id: user.id
-        }
-      });
-
       return {
         user: {
           id: user.id,
           email: user.email,
           name: user.name,
-          name_seo: user.name_seo,
           birthday: user.birthday,
           is_admin: true,
           newsletter: user.newsletter,
           group_id: user.group_id,
-          avatar: { img: avatar, color: user.avatar_color }
+          avatar: user.avatar,
+          avatar_color: user.avatar_color
         }
       };
     }

@@ -1,3 +1,6 @@
+// TODO: Change default theme
+import { ErrorView } from '@/themes/default/core/views/global/error/error-view';
+
 export default function NotFoundPage() {
-  return <div>Error 404!</div>;
+  return <ErrorView code="404" />;
 }

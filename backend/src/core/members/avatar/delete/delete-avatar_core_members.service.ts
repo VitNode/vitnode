@@ -36,6 +36,16 @@ export class DeleteAvatarCoreMembersService {
       }
     });
 
+    // Update user
+    await this.prisma.core_members.update({
+      where: {
+        id
+      },
+      data: {
+        avatar_id: null
+      }
+    });
+
     return 'Success!';
   }
 }

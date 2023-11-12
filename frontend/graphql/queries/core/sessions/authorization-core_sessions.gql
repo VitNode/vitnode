@@ -1,30 +1,28 @@
 query Authorization_core_sessions {
   authorization_core_sessions {
     user {
-      avatar {
-        color
-        img {
-          created
-          description
-          extension
-          file_size
-          member_id
-          mimetype
-          module
-          module_id
-          name
-          position
-          url
-        }
-      }
       birthday
       email
       group_id
       id
       is_admin
       name
-      name_seo
       newsletter
+      avatar_color
+      avatar {
+        created
+        description
+        extension
+        file_size
+        id
+        member_id
+        mimetype
+        module
+        module_id
+        name
+        position
+        url
+      }
     }
   }
   show_core_languages {

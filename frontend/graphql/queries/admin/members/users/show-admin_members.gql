@@ -1,0 +1,48 @@
+query Show_admin_members(
+  $cursor: String
+  $first: Int
+  $last: Int
+  $search: String
+  $sortBy: [ShowAdminMembersSortByArgs!]
+) {
+  show_admin_members(
+    cursor: $cursor
+    first: $first
+    last: $last
+    search: $search
+    sortBy: $sortBy
+  ) {
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+    edges {
+      avatar {
+        created
+        description
+        extension
+        file_size
+        id
+        member_id
+        mimetype
+        module
+        module_id
+        name
+        position
+        url
+      }
+      avatar_color
+      email
+      id
+      joined
+      name
+      group {
+        name
+      }
+    }
+  }
+}

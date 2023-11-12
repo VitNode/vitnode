@@ -10,7 +10,7 @@
         "general": "Ogólne",
         "langs": "Języki"
       },
-      "users": {
+      "members": {
         "title": "Użytkownicy",
         "list": "Użytkownicy",
         "groups": "Grupy"
@@ -48,13 +48,28 @@
         }
       }
     },
-    "users": {
+    "members": {
+      "users": {
+        "title": "Użytkownicy",
+        "desc": "Test 123",
+        "table": {
+          "name": "Nazwa",
+          "email": "Email",
+          "group": "Grupa",
+          "joined": "Dołączył"
+        },
+        "actions": {
+          "edit": {
+            "title": "Edytuj"
+          }
+        }
+      },
       "groups": {
         "title": "Grupy",
         "desc": "Test 123",
         "table": {
           "name": "Nazwa",
-          "users": "Użytkownicy"
+          "users_count": "Użytkownicy"
         },
         "actions": {
           "edit": {

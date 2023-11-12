@@ -39,7 +39,7 @@ export class SignUpCoreMembersService {
     const convertToNameSEO = removeSpecialCharacters(name);
     const checkNameSEO = await this.prisma.core_members.findUnique({
       where: {
-        name_seo: convertToNameSEO
+        id: convertToNameSEO
       }
     });
 
@@ -70,7 +70,7 @@ export class SignUpCoreMembersService {
       data: {
         email,
         name,
-        name_seo: convertToNameSEO,
+        id: convertToNameSEO,
         newsletter,
         password: hashPassword,
         joined: dateNow,
@@ -85,13 +85,10 @@ export class SignUpCoreMembersService {
       select: {
         id: true,
         name: true,
-        name_seo: true,
         email: true,
         group_id: true,
         joined: true,
         birthday: true,
-        avatar: true,
-        image_cover: true,
         posts: true,
         followers: true,
         reactions: true,

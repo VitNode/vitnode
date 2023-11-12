@@ -36,6 +36,8 @@ export class AuthorizationCoreSessionsService {
     try {
       const currentUser = await this.service.authorization({ req, res });
 
+      currentUser.avatar_color;
+
       const avatar = await this.prisma.core_attachments.findFirst({
         where: {
           module: 'core_members',
@@ -47,7 +49,8 @@ export class AuthorizationCoreSessionsService {
         user: {
           ...currentUser,
           is_admin: await this.isAdmin(currentUser),
-          avatar: { img: avatar, color: currentUser.avatar_color }
+          avatar,
+          avatar_color: currentUser.avatar_color
         }
       };
     } catch (error) {

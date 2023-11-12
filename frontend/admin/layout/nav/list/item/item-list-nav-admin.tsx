@@ -5,17 +5,13 @@ import { useTranslations } from 'next-intl';
 
 import { buttonVariants } from '@/components/ui/button';
 import { cx } from '@/functions/classnames';
-import { LinkItemListNavAdmin } from './link/link-item-list-nav-admin';
+import { ItemListNavAdminProps, LinkItemListNavAdmin } from './link/link-item-list-nav-admin';
 import { usePathname } from '@/i18n';
 
 interface Props {
   activeItems: string[];
   id: string;
-  items: {
-    href: string;
-    icon: LucideIcon;
-    id: string;
-  }[];
+  items: ItemListNavAdminProps[];
   setActiveItems: Dispatch<SetStateAction<string[]>>;
   onClickItem?: () => void;
 }
