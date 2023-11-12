@@ -36,9 +36,9 @@ export const useLayoutInstallConfigsAPI = () => {
       [LayoutAdminInstallEnum.Database]: '/admin/install/database'
     };
 
-    replace(
-      segment ? redirectItems[current.data.layout_admin_install.status] : '/admin/install/database'
-    );
+    const path = redirectItems[current.data.layout_admin_install.status];
+
+    replace(segment && path ? path : '/admin/install/database');
   }, [segment]);
 
   return current;

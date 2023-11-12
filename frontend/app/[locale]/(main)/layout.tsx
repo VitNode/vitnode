@@ -1,6 +1,7 @@
 import { ReactNode, lazy } from 'react';
 import { cookies } from 'next/headers';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import { isRedirectError } from 'next/dist/client/components/redirect';
 
 import { CONFIG } from '@/config';
 import { fetcher } from '@/graphql/fetcher';
@@ -13,6 +14,7 @@ import { SessionProvider } from './session-provider';
 import { InternalErrorView } from '@/admin/views/global/internal-error-view';
 import getQueryClient from '@/functions/get-query-client';
 import { APIKeys } from '@/graphql/api-keys';
+import { redirect } from '@/i18n';
 
 interface Props {
   children: ReactNode;
@@ -20,14 +22,21 @@ interface Props {
 }
 
 const getData = async () => {
-  return await fetcher<Authorization_Core_SessionsQuery, Authorization_Core_SessionsQueryVariables>(
-    {
-      query: Authorization_Core_Sessions,
-      headers: {
-        Cookie: cookies().toString()
-      }
+  const current = await fetcher<
+    Authorization_Core_SessionsQuery,
+    Authorization_Core_SessionsQueryVariables
+  >({
+    query: Authorization_Core_Sessions,
+    headers: {
+      Cookie: cookies().toString()
     }
-  );
+  });
+
+  if (current.show_core_languages.edges.length <= 0) {
+    redirect('/admin/install');
+  }
+
+  return current;
 };
 
 export default async function Layout({ children }: Props) {
@@ -51,8 +60,10 @@ export default async function Layout({ children }: Props) {
       </HydrationBoundary>
     );
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
+    // Redirect from catch
+    if (isRedirectError(error)) {
+      redirect('/admin/install');
+    }
 
     return <InternalErrorView />;
   }
