@@ -20,5 +20,11 @@ export class ShowCoreGroups {
   name: string;
 
   @Field(() => Int)
+  usersCount: number;
+
+  @Field(() => Int)
   created: number;
+
+  @Field(() => Boolean)
+  protected: boolean;
 }

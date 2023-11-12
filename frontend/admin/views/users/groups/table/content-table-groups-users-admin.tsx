@@ -22,8 +22,8 @@ export const ContentTableGroupsUsersAdmin = () => {
         accessorKey: 'name'
       },
       {
-        header: t('users.groups.table.users'),
-        accessorKey: 'users'
+        header: t('users.groups.table.users_count'),
+        accessorKey: 'usersCount'
       },
       {
         id: 'actions',

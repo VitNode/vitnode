@@ -54,7 +54,7 @@
         "desc": "Test 123",
         "table": {
           "name": "Name",
-          "users": "Users"
+          "users_count": "Users"
         },
         "actions": {
           "edit": {

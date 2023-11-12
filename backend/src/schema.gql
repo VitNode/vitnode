@@ -81,6 +81,8 @@ type ShowCoreGroups {
   created: Int!
   id: Int!
   name: String!
+  protected: Boolean!
+  usersCount: Int!
 }
 
 type ShowCoreGroupsObj {

@@ -18,6 +18,8 @@ query Show_core_groups(
       created
       id
       name
+      usersCount
+      protected
     }
   }
 }

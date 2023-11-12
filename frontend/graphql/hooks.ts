@@ -172,6 +172,8 @@ export type ShowCoreGroups = {
   created: Scalars['Int']['output'];
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
+  protected: Scalars['Boolean']['output'];
+  usersCount: Scalars['Int']['output'];
 };
 
 export type ShowCoreGroupsObj = {
@@ -362,7 +364,7 @@ export type Show_Core_GroupsQueryVariables = Exact<{
 }>;
 
 
-export type Show_Core_GroupsQuery = { __typename?: 'Query', show_core_groups: { __typename?: 'ShowCoreGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowCoreGroups', created: number, id: number, name: string }> } };
+export type Show_Core_GroupsQuery = { __typename?: 'Query', show_core_groups: { __typename?: 'ShowCoreGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowCoreGroups', created: number, id: number, name: string, usersCount: number, protected: boolean }> } };
 
 export type Middleware_Core_LanguagesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -541,6 +543,8 @@ export const Show_Core_Groups = gql`
       created
       id
       name
+      usersCount
+      protected
     }
   }
 }

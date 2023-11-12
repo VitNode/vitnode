@@ -36,7 +36,8 @@ export class ShowCoreGroupsService {
         select: {
           id: true,
           name: true,
-          created: true
+          created: true,
+          protected: true
         },
         orderBy: inputSorting<ShowCoreGroupsSortingColumnEnum>({
           sortBy,
@@ -50,6 +51,19 @@ export class ShowCoreGroupsService {
       this.prisma.core_groups.count()
     ]);
 
-    return outputPagination({ edges, totalCount, first, cursor, last });
+    const currentEdges = await Promise.all(
+      edges.map(async edge => {
+        return {
+          ...edge,
+          usersCount: await this.prisma.core_members.count({
+            where: {
+              group_id: edge.id
+            }
+          })
+        };
+      })
+    );
+
+    return outputPagination({ edges: currentEdges, totalCount, first, cursor, last });
   }
 }
