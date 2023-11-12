@@ -1,5 +1,6 @@
 mutation Upload_avatar_core_members($file: Upload!) {
   upload_avatar_core_members(file: $file) {
+    id
     created
     description
     extension

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
-import { ShowCoreMembersObj } from './dto/show-core_members.obj';
+import { ShowAdminMembersObj } from './dto/show-admin_members.obj';
 import {
-  ShowCoreMembersArgs,
-  ShowCoreMembersSortingColumnEnum
-} from './dto/show-core_members.args';
+  ShowAdminMembersArgs,
+  ShowAdminMembersSortingColumnEnum
+} from './dto/show-admin_members.args';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { inputPagination } from '@/functions/database/pagination/inputPagination';
@@ -13,7 +13,7 @@ import { inputSorting } from '@/functions/database/inputSorting';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
-export class ShowCoreMembersService {
+export class ShowAdminMembersService {
   constructor(private prisma: PrismaService) {}
 
   async show({
@@ -22,7 +22,7 @@ export class ShowCoreMembersService {
     last,
     search,
     sortBy
-  }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
+  }: ShowAdminMembersArgs): Promise<ShowAdminMembersObj> {
     const where = {
       OR: [
         {
@@ -45,6 +45,7 @@ export class ShowCoreMembersService {
           id: true,
           name: true,
           name_seo: true,
+          email: true,
           group_id: true,
           joined: true,
           birthday: true,
@@ -52,14 +53,16 @@ export class ShowCoreMembersService {
           posts: true,
           followers: true,
           reactions: true,
+          newsletter: true,
           avatar_color: true,
+          unread_notifications: true,
           avatar: true,
           cover: true
         },
-        orderBy: inputSorting<ShowCoreMembersSortingColumnEnum>({
+        orderBy: inputSorting<ShowAdminMembersSortingColumnEnum>({
           sortBy,
           defaultSortBy: {
-            column: ShowCoreMembersSortingColumnEnum.joined,
+            column: ShowAdminMembersSortingColumnEnum.joined,
             direction: SortDirectionEnum.asc
           }
         }),

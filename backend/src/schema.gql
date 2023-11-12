@@ -73,6 +73,7 @@ type Query {
   authorization_core_sessions: AuthorizationCoreSessionsObj!
   layout_admin_install: LayoutAdminInstallObj!
   show_admin_groups(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
+  show_admin_members(cursor: String, first: Int, last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   show_core_languages(cursor: String, first: Int, last: Int): ShowCoreLanguagesObj!
   show_core_members(cursor: String, first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
 }
@@ -100,6 +101,46 @@ enum ShowAdminGroupsSortingColumnEnum {
   name
 }
 
+type ShowAdminMembers {
+  avatar: UploadCoreAttachmentsObj
+  avatar_color: String!
+  birthday: Int!
+  email: String!
+  followers: Int!
+  group_id: Int!
+  id: String!
+  image_cover: UploadCoreAttachmentsObj
+  joined: Int!
+  name: String!
+  name_seo: String!
+  newsletter: Boolean!
+  posts: Int!
+  reactions: Int!
+  unread_notifications: Int!
+}
+
+type ShowAdminMembersObj {
+  edges: [ShowAdminMembers!]!
+  pageInfo: PageInfo!
+}
+
+input ShowAdminMembersSortByArgs {
+  column: ShowAdminMembersSortingColumnEnum!
+  direction: SortDirectionEnum!
+}
+
+enum ShowAdminMembersSortingColumnEnum {
+  birthday
+  first_name
+  followers
+  joined
+  last_name
+  name
+  name_seo
+  posts
+  reactions
+}
+
 type ShowCoreLanguages {
   default: Boolean!
   enabled: Boolean!
@@ -118,7 +159,6 @@ type ShowCoreMembers {
   avatar: UploadCoreAttachmentsObj
   avatar_color: String!
   birthday: Int!
-  email: String!
   followers: Int!
   group_id: Int!
   id: String!
@@ -126,10 +166,8 @@ type ShowCoreMembers {
   joined: Int!
   name: String!
   name_seo: String!
-  newsletter: Boolean!
   posts: Int!
   reactions: Int!
-  unread_notifications: Int!
 }
 
 type ShowCoreMembersObj {

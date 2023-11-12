@@ -12,6 +12,7 @@ query Authorization_admin_sessions {
       avatar {
         color
         img {
+          id
           created
           description
           extension

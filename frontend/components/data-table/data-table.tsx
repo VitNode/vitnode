@@ -20,21 +20,21 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { usePathname, useRouter } from '@/i18n';
 import { GlobalLoader } from '../loader/global/global-loader';
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
+interface DataTableProps<TData> {
+  columns: ColumnDef<TData>[];
   data: TData[];
   defaultItemsPerPage: number;
   isFetching: boolean | undefined;
   pageInfo?: PageInfo;
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData>({
   columns,
   data,
   defaultItemsPerPage,
   isFetching,
   pageInfo
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<TData>) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { push } = useRouter();

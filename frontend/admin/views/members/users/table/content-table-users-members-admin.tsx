@@ -1,29 +1,35 @@
 import { useTranslations } from 'next-intl';
-import { Pencil } from 'lucide-react';
-import { ColumnDef } from '@tanstack/react-table';
 import { useMemo } from 'react';
+import { ColumnDef } from '@tanstack/react-table';
+import { Pencil } from 'lucide-react';
 
-import { DataTable } from '@/components/data-table/data-table';
-import { buttonVariants } from '@/components/ui/button';
+import {
+  UsersMembersAdminAPIDataType,
+  useUsersMembersAdminAPI
+} from './hooks/use-users-members-admin-api';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Link } from '@/i18n';
-import { useGroupsAdminAPI } from './hooks/use-groups-admin-api';
+import { buttonVariants } from '@/components/ui/button';
+import { DataTable } from '@/components/data-table/data-table';
 import { Loader } from '@/components/loader/loader';
-import { ShowAdminGroups } from '@/graphql/hooks';
 
-export const ContentTableGroupsUsersAdmin = () => {
-  const t = useTranslations('admin');
-  const { data, isFetching, isLoading } = useGroupsAdminAPI();
+export const ContentTableUsersMembersAdmin = () => {
+  const t = useTranslations('admin.members.users');
+  const { data, isFetching, isLoading } = useUsersMembersAdminAPI();
 
-  const columns: ColumnDef<ShowAdminGroups>[] = useMemo(
+  const columns: ColumnDef<UsersMembersAdminAPIDataType>[] = useMemo(
     () => [
       {
-        header: t('users.groups.table.name'),
+        header: t('table.name'),
         accessorKey: 'name'
       },
       {
-        header: t('users.groups.table.users_count'),
-        accessorKey: 'usersCount'
+        header: t('table.groups'),
+        accessorKey: 'groups'
+      },
+      {
+        header: t('table.joined'),
+        accessorKey: 'joined'
       },
       {
         id: 'actions',
@@ -43,10 +49,10 @@ export const ContentTableGroupsUsersAdmin = () => {
                       })}
                     >
                       <Pencil />
-                      <span className="sr-only">{t('users.groups.actions.edit.title')}</span>
+                      <span className="sr-only">{t('actions.edit.title')}</span>
                     </Link>
                   </TooltipTrigger>
-                  <TooltipContent>{t('users.groups.actions.edit.title')}</TooltipContent>
+                  <TooltipContent>{t('actions.edit.title')}</TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             </div>
@@ -57,12 +63,12 @@ export const ContentTableGroupsUsersAdmin = () => {
     []
   );
 
-  if (isLoading && !isFetching) return <Loader />;
+  if (isLoading && isFetching) return <Loader />;
 
   return (
     <DataTable
-      data={data?.show_admin_groups.edges ?? []}
-      pageInfo={data?.show_admin_groups.pageInfo}
+      data={data?.show_admin_members.edges ?? []}
+      pageInfo={data?.show_admin_members.pageInfo}
       defaultItemsPerPage={10}
       isFetching={isFetching}
       columns={columns}

@@ -48,7 +48,7 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
         ]}
       />
       <ItemListNavAdmin
-        id="users"
+        id="members"
         activeItems={activeItems}
         setActiveItems={setActiveItems}
         onClickItem={onClickItem}

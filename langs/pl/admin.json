@@ -10,7 +10,7 @@
         "general": "Ogólne",
         "langs": "Języki"
       },
-      "users": {
+      "members": {
         "title": "Użytkownicy",
         "list": "Użytkownicy",
         "groups": "Grupy"
@@ -48,7 +48,21 @@
         }
       }
     },
-    "users": {
+    "members": {
+      "users": {
+        "title": "Użytkownicy",
+        "desc": "Test 123",
+        "table": {
+          "name": "Nazwa",
+          "groups": "Grupy",
+          "joined": "Dołączył"
+        },
+        "actions": {
+          "edit": {
+            "title": "Edytuj"
+          }
+        }
+      },
       "groups": {
         "title": "Grupy",
         "desc": "Test 123",

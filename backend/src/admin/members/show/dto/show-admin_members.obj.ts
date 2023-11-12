@@ -1,19 +1,19 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { PageInfo } from '@/types/database/pagination.type';
-import { UploadCoreAttachmentsObj } from '../../../attachments/upload/dto/upload-core_attachments.obj';
+import { UploadCoreAttachmentsObj } from '@/src/core/attachments/upload/dto/upload-core_attachments.obj';
 
 @ObjectType()
-export class ShowCoreMembersObj {
-  @Field(() => [ShowCoreMembers])
-  edges: ShowCoreMembers[];
+export class ShowAdminMembersObj {
+  @Field(() => [ShowAdminMembers])
+  edges: ShowAdminMembers[];
 
   @Field(() => PageInfo)
   pageInfo: PageInfo;
 }
 
 @ObjectType()
-export class ShowCoreMembers {
+export class ShowAdminMembers {
   @Field(() => String)
   id: string;
 
@@ -22,6 +22,9 @@ export class ShowCoreMembers {
 
   @Field(() => String)
   name_seo: string;
+
+  @Field(() => String)
+  email: string;
 
   @Field(() => Int)
   group_id: number;
@@ -47,6 +50,12 @@ export class ShowCoreMembers {
   @Field(() => Int)
   reactions: number;
 
+  @Field(() => Boolean)
+  newsletter: boolean;
+
   @Field(() => String)
   avatar_color: string;
+
+  @Field(() => Int)
+  unread_notifications: number;
 }

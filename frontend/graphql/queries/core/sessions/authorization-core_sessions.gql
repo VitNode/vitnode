@@ -4,6 +4,7 @@ query Authorization_core_sessions {
       avatar {
         color
         img {
+          id
           created
           description
           extension

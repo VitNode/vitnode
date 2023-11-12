@@ -3,13 +3,20 @@ import { useSearchParams } from 'next/navigation';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Show_Admin_Groups,
-  Show_Admin_GroupsQuery,
-  Show_Admin_GroupsQueryVariables
+  ShowAdminMembers,
+  Show_Admin_Members,
+  Show_Admin_MembersQuery,
+  Show_Admin_MembersQueryVariables
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
 
-export const useGroupsAdminAPI = () => {
+export interface UsersMembersAdminAPIDataType
+  extends Pick<
+    ShowAdminMembers,
+    'avatar_color' | 'email' | 'group_id' | 'id' | 'joined' | 'name' | 'name_seo' | 'avatar'
+  > {}
+
+export const useUsersMembersAdminAPI = () => {
   const searchParams = useSearchParams();
   const pagination = {
     first: searchParams.get('first') ?? 0,
@@ -18,16 +25,16 @@ export const useGroupsAdminAPI = () => {
   };
 
   return useQuery({
-    queryKey: [APIKeys.GROUPS, { ...pagination }],
+    queryKey: [APIKeys.USERS_MEMBERS, { ...pagination }],
     queryFn: async () => {
       const defaultFirst = !pagination.last ? 10 : null;
 
-      return await fetcher<Show_Admin_GroupsQuery, Show_Admin_GroupsQueryVariables>({
-        query: Show_Admin_Groups,
+      return await fetcher<Show_Admin_MembersQuery, Show_Admin_MembersQueryVariables>({
+        query: Show_Admin_Members,
         variables: {
           first: pagination.first ? +pagination.first : defaultFirst,
           last: pagination.last ? +pagination.last : null,
-          cursor: pagination.cursor ? +pagination.cursor : null
+          cursor: pagination.cursor
         }
       });
     },
