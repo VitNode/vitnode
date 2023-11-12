@@ -13,6 +13,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { DataTable } from '@/components/data-table/data-table';
 import { Loader } from '@/components/loader/loader';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
+import { DateFormat } from '@/components/date-format/date-format';
 
 export const ContentTableUsersMembersAdmin = () => {
   const t = useTranslations('admin.members.users');
@@ -50,7 +51,12 @@ export const ContentTableUsersMembersAdmin = () => {
       },
       {
         header: t('table.joined'),
-        accessorKey: 'joined'
+        accessorKey: 'joined',
+        cell: ({ row }) => {
+          const data = row.original;
+
+          return <DateFormat date={data.joined} />;
+        }
       },
       {
         id: 'actions',

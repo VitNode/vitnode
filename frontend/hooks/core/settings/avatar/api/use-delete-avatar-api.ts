@@ -10,8 +10,7 @@ import {
 } from '@/graphql/hooks';
 import { useToast } from '@/components/ui/use-toast';
 import { useDialog } from '@/components/ui/dialog';
-
-import { APIKeys } from '../../../../../graphql/api-keys';
+import { APIKeys } from '@/graphql/api-keys';
 
 export const useDeleteAvatarAPI = () => {
   const t = useTranslations('core');
@@ -43,10 +42,7 @@ export const useDeleteAvatarAPI = () => {
             user: old.authorization_core_sessions.user
               ? {
                   ...old.authorization_core_sessions.user,
-                  avatar: {
-                    ...old.authorization_core_sessions.user.avatar,
-                    img: null
-                  }
+                  avatar: null
                 }
               : null
           }
