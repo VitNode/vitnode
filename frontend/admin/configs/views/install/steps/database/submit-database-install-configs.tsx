@@ -10,7 +10,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 export const SubmitDatabaseInstallConfigs = () => {
   const t = useTranslations('admin.configs.install.steps.database');
   const tCore = useTranslations('core');
-  const { isError, isPending, mutateAsync } = useCreateDatabaseInstallConfigsAPI();
+  const { isError, isPending, isSuccess, mutateAsync } = useCreateDatabaseInstallConfigsAPI();
 
   return (
     <>
@@ -22,7 +22,7 @@ export const SubmitDatabaseInstallConfigs = () => {
         </Alert>
       )}
 
-      <Button onClick={async () => await mutateAsync()} loading={isPending}>
+      <Button onClick={async () => await mutateAsync()} loading={isPending || isSuccess}>
         {t('submit')}
       </Button>
     </>

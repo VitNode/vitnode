@@ -19,7 +19,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 
 export const AccountInstallConfigsView = () => {
   const t = useTranslations('core');
-  const { form, isPending, onSubmit } = useSignUpView();
+  const { form, isPending, isSuccess, onSubmit } = useSignUpView();
 
   return (
     <Form {...form}>
@@ -114,7 +114,7 @@ export const AccountInstallConfigsView = () => {
             type="submit"
             className="w-full"
             disabled={!form.formState.isValid}
-            loading={isPending}
+            loading={isPending || isSuccess}
           >
             {t('sign_up.form.submit')}
           </Button>
