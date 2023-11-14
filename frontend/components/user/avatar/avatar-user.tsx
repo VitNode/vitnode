@@ -8,9 +8,11 @@ import { useSession } from '@/hooks/core/use-session';
 import { Maybe, UploadCoreAttachmentsObj } from '@/graphql/hooks';
 
 import { Img } from '../../img/Img';
+import { cx } from '../../../functions/classnames';
 
 interface Props {
   sizeInRem: number;
+  className?: string;
   user?: {
     avatar_color: string;
     id: string;
@@ -19,7 +21,7 @@ interface Props {
   };
 }
 
-const AvatarUser = forwardRef<HTMLDivElement, Props>(({ sizeInRem, user }, ref) => {
+const AvatarUser = forwardRef<HTMLDivElement, Props>(({ className, sizeInRem, user }, ref) => {
   const { session } = useSession();
   const current = {
     id: user?.id || session?.id,
@@ -32,7 +34,7 @@ const AvatarUser = forwardRef<HTMLDivElement, Props>(({ sizeInRem, user }, ref) 
 
   return (
     <Img
-      className="rounded-full flex-shrink-0"
+      className={cx('rounded-full flex-shrink-0', className)}
       imageClassName="object-cover"
       src={
         current.avatar

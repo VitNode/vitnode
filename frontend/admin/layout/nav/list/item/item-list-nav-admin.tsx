@@ -1,4 +1,4 @@
-import { LucideIcon, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { Dispatch, SetStateAction } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { useTranslations } from 'next-intl';

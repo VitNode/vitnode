@@ -1,5 +1,5 @@
-import { ErrorView } from '@/themes/default/core/views/global/error/error-view';
+import { ProfileView } from '@/themes/default/core/views/profile/profile-view';
 
 export default function Page() {
-  return <ErrorView code="404" />;
+  return <ProfileView />;
 }
