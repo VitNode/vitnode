@@ -17,5 +17,5 @@ export const AvatarProfile = () => {
 
   if (!data) return null;
 
-  return <AvatarUser className="border-card border-4" sizeInRem={8} {...data} />;
+  return <AvatarUser className="border-card border-4" sizeInRem={8} user={data} />;
 };
