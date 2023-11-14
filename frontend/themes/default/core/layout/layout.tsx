@@ -14,7 +14,7 @@ export const Layout = ({ children }: Props) => {
   return (
     <>
       <Header />
-      <div className="container py-6">{children}</div>
+      {children}
       <Footer />
       <QuickMenu />
     </>

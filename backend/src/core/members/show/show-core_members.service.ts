@@ -18,25 +18,28 @@ export class ShowCoreMembersService {
 
   async show({
     cursor,
+    findByIds,
     first,
     last,
     search,
     sortBy
   }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
-    const where = {
-      OR: [
-        {
-          name: {
-            contains: search ?? ''
-          }
-        },
-        {
-          email: {
-            contains: search ?? ''
-          }
-        }
-      ]
-    };
+    const where = findByIds
+      ? { id: { in: findByIds } }
+      : {
+          OR: [
+            {
+              name: {
+                contains: search ?? ''
+              }
+            },
+            {
+              email: {
+                contains: search ?? ''
+              }
+            }
+          ]
+        };
 
     const [edges, totalCount] = await this.prisma.$transaction([
       this.prisma.core_members.findMany({

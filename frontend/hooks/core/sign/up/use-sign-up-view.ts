@@ -8,7 +8,7 @@ import { useSignUpAPI } from './use-sign-up-api';
 
 export const useSignUpView = () => {
   const t = useTranslations('core');
-  const { isPending, mutateAsync } = useSignUpAPI();
+  const { mutateAsync, ...api } = useSignUpAPI();
 
   // Check if birthday is valid 13 years old
   const oneDayUNIX = 86400;
@@ -124,6 +124,6 @@ export const useSignUpView = () => {
   return {
     form,
     onSubmit,
-    isPending
+    ...api
   };
 };

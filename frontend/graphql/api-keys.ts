@@ -4,5 +4,6 @@ export enum APIKeys {
   GROUPS_MEMBERS = 'groups.members',
   USERS_MEMBERS = 'users.members',
   LANGUAGES_ADMIN = 'languages.admin',
-  LAYOUT_ADMIN_INSTALL = 'layout.admin_install'
+  LAYOUT_ADMIN_INSTALL = 'layout.admin_install',
+  PROFILE = 'profile'
 }

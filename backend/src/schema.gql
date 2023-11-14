@@ -74,7 +74,7 @@ type Query {
   show_admin_groups(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
   show_admin_members(cursor: String, first: Int, last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   show_core_languages(cursor: String, first: Int, last: Int): ShowCoreLanguagesObj!
-  show_core_members(cursor: String, first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
+  show_core_members(cursor: String, findByIds: [String!], first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
 }
 
 type ShowAdminGroups {

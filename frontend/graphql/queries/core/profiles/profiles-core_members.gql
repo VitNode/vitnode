@@ -1,0 +1,45 @@
+query Profiles_core_members($first: Int, $findByIds: [String!]) {
+  show_core_members(first: $first, findByIds: $findByIds) {
+    edges {
+      avatar {
+        created
+        description
+        extension
+        file_size
+        id
+        member_id
+        mimetype
+        module
+        module_id
+        name
+        position
+        url
+      }
+      avatar_color
+      birthday
+      followers
+      group {
+        name
+      }
+      id
+      image_cover {
+        created
+        description
+        extension
+        file_size
+        id
+        member_id
+        mimetype
+        module
+        module_id
+        name
+        position
+        url
+      }
+      joined
+      name
+      posts
+      reactions
+    }
+  }
+}
