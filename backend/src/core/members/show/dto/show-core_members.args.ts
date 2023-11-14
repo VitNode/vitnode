@@ -42,4 +42,7 @@ export class ShowCoreMembersArgs {
 
   @Field(() => String, { nullable: true })
   search?: string;
+
+  @Field(() => [String], { nullable: true })
+  findByIds?: string[];
 }

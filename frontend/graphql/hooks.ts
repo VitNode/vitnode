@@ -170,6 +170,7 @@ export type QueryShow_Core_LanguagesArgs = {
 
 export type QueryShow_Core_MembersArgs = {
   cursor?: InputMaybe<Scalars['String']['input']>;
+  findByIds?: InputMaybe<Array<Scalars['String']['input']>>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
@@ -435,6 +436,14 @@ export type Show_Core_LanguagesQueryVariables = Exact<{
 
 export type Show_Core_LanguagesQuery = { __typename?: 'Query', show_core_languages: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, enabled: boolean, id: string, name: string, protected: boolean, timezone: string }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
 
+export type Profiles_Core_MembersQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  findByIds?: InputMaybe<Array<Scalars['String']['input']> | Scalars['String']['input']>;
+}>;
+
+
+export type Profiles_Core_MembersQuery = { __typename?: 'Query', show_core_members: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, birthday: number, followers: number, id: string, joined: number, name: string, posts: number, reactions: number, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupShowCoreMembers', name: string }, image_cover?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null }> } };
+
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -676,6 +685,53 @@ export const Show_Core_Languages = gql`
       hasPreviousPage
       startCursor
       totalCount
+    }
+  }
+}
+    `;
+export const Profiles_Core_Members = gql`
+    query Profiles_core_members($first: Int, $findByIds: [String!]) {
+  show_core_members(first: $first, findByIds: $findByIds) {
+    edges {
+      avatar {
+        created
+        description
+        extension
+        file_size
+        id
+        member_id
+        mimetype
+        module
+        module_id
+        name
+        position
+        url
+      }
+      avatar_color
+      birthday
+      followers
+      group {
+        name
+      }
+      id
+      image_cover {
+        created
+        description
+        extension
+        file_size
+        id
+        member_id
+        mimetype
+        module
+        module_id
+        name
+        position
+        url
+      }
+      joined
+      name
+      posts
+      reactions
     }
   }
 }

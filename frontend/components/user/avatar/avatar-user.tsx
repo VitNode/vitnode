@@ -6,9 +6,9 @@ import { CONFIG } from '@/config';
 import { generateLetterPhoto } from '@/functions/generate-letter-photo';
 import { useSession } from '@/hooks/core/use-session';
 import { Maybe, UploadCoreAttachmentsObj } from '@/graphql/hooks';
+import { cx } from '@/functions/classnames';
 
 import { Img } from '../../img/Img';
-import { cx } from '../../../functions/classnames';
 
 interface Props {
   sizeInRem: number;

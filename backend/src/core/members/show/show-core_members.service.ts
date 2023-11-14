@@ -18,6 +18,7 @@ export class ShowCoreMembersService {
 
   async show({
     cursor,
+    findByIds,
     first,
     last,
     search,
@@ -33,6 +34,11 @@ export class ShowCoreMembersService {
         {
           email: {
             contains: search ?? ''
+          }
+        },
+        {
+          id: {
+            in: findByIds ?? []
           }
         }
       ]
