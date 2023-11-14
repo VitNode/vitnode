@@ -52,6 +52,7 @@
       "users": {
         "title": "Użytkownicy",
         "desc": "Test 123",
+        "search_placeholder": "Szukaj po nazwie lub emailu...",
         "table": {
           "name": "Nazwa",
           "email": "Email",

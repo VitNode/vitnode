@@ -13,8 +13,8 @@ import { ShowCoreLanguages } from '@/graphql/hooks';
 
 export const ContentTableLangsCoreAdmin = () => {
   const t = useTranslations('admin');
-  const { data, isFetching, isLoading } = useLangsAdminAPI();
-  const { isPending, mutateAsync } = useEditLangsAdminAPI();
+  const { data, isFetching, isLoading, isPending } = useLangsAdminAPI();
+  const { mutateAsync } = useEditLangsAdminAPI();
 
   const columns: ColumnDef<ShowCoreLanguages>[] = useMemo(
     () => [
@@ -67,7 +67,7 @@ export const ContentTableLangsCoreAdmin = () => {
     []
   );
 
-  if (isLoading && !isFetching) return <Loader />;
+  if ((isLoading && !isFetching) || isPending) return <Loader />;
 
   return (
     <>
@@ -75,7 +75,6 @@ export const ContentTableLangsCoreAdmin = () => {
         data={data?.show_core_languages.edges ?? []}
         pageInfo={data?.show_core_languages.pageInfo}
         defaultItemsPerPage={10}
-        isFetching={isFetching || isPending}
         columns={columns}
       />
     </>

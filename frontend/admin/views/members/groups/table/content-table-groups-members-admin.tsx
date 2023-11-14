@@ -13,7 +13,7 @@ import { ShowAdminGroups } from '@/graphql/hooks';
 
 export const ContentTableGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.groups');
-  const { data, isFetching, isLoading } = useGroupMembersAdminAPI();
+  const { data, isFetching, isLoading, isPending } = useGroupMembersAdminAPI();
 
   const columns: ColumnDef<ShowAdminGroups>[] = useMemo(
     () => [
@@ -57,14 +57,13 @@ export const ContentTableGroupsMembersAdmin = () => {
     []
   );
 
-  if (isLoading && !isFetching) return <Loader />;
+  if ((isLoading && !isFetching) || isPending) return <Loader />;
 
   return (
     <DataTable
       data={data?.show_admin_groups.edges ?? []}
       pageInfo={data?.show_admin_groups.pageInfo}
       defaultItemsPerPage={10}
-      isFetching={isFetching}
       columns={columns}
     />
   );

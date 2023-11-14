@@ -17,7 +17,7 @@ import { DateFormat } from '@/components/date-format/date-format';
 
 export const ContentTableUsersMembersAdmin = () => {
   const t = useTranslations('admin.members.users');
-  const { data, isFetching, isLoading } = useUsersMembersAdminAPI();
+  const { data, isFetching, isLoading, isPending } = useUsersMembersAdminAPI();
 
   const columns: ColumnDef<UsersMembersAdminAPIDataType>[] = useMemo(
     () => [
@@ -90,15 +90,15 @@ export const ContentTableUsersMembersAdmin = () => {
     []
   );
 
-  if (isLoading && isFetching) return <Loader />;
+  if ((isLoading && !isFetching) || isPending) return <Loader />;
 
   return (
     <DataTable
       data={data?.show_admin_members.edges ?? []}
       pageInfo={data?.show_admin_members.pageInfo}
       defaultItemsPerPage={10}
-      isFetching={isFetching}
       columns={columns}
+      searchPlaceholder={t('search_placeholder')}
     />
   );
 };
