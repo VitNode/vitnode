@@ -5,6 +5,7 @@
     "save": "Save",
     "saved_success": "Saved successfully.",
     "no_results": "No results found.",
+    "clear": "Clear",
     "pagination": {
       "previous": "Previous page",
       "next": "Next page"

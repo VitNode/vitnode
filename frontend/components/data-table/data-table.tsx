@@ -19,11 +19,13 @@ import { PageInfo } from '@/graphql/hooks';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { usePathname, useRouter } from '@/i18n';
 import { ToolbarDataTable, ToolbarDataTableProps } from './toolbar/toolbar-data-table';
+import { GlobalLoader } from '../loader/global/global-loader';
 
 interface DataTableProps<TData> extends ToolbarDataTableProps {
   columns: ColumnDef<TData>[];
   data: TData[];
   defaultItemsPerPage: number;
+  isFetching: boolean | undefined;
   pageInfo?: PageInfo;
   searchPlaceholder?: string;
 }
@@ -32,6 +34,7 @@ export function DataTable<TData>({
   columns,
   data,
   defaultItemsPerPage,
+  isFetching,
   pageInfo,
   ...props
 }: DataTableProps<TData>) {
@@ -84,6 +87,8 @@ export function DataTable<TData>({
 
   return (
     <div className="flex flex-col gap-4">
+      {isFetching && <GlobalLoader />}
+
       <ToolbarDataTable {...props} />
 
       <div className="rounded-md border">

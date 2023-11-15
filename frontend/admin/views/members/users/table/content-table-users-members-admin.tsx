@@ -98,7 +98,26 @@ export const ContentTableUsersMembersAdmin = () => {
       pageInfo={data?.show_admin_members.pageInfo}
       defaultItemsPerPage={10}
       columns={columns}
+      isFetching={isFetching}
       searchPlaceholder={t('search_placeholder')}
+      filters={[
+        {
+          title: 'test123',
+          id: 'test123',
+          options: [
+            {
+              label: 'All',
+              value: 'all',
+              icon: Pencil
+            },
+            {
+              label: '123',
+              value: '123',
+              icon: Pencil
+            }
+          ]
+        }
+      ]}
     />
   );
 };

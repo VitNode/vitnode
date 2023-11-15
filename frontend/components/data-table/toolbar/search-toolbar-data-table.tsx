@@ -1,5 +1,5 @@
 import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { usePathname, useRouter } from '@/i18n';
 
@@ -14,6 +14,13 @@ export const SearchToolbarDataTable = ({ searchPlaceholder }: Props) => {
   const pathname = usePathname();
   const { push } = useRouter();
   const [value, setValue] = useState(searchParams.get('search') ?? '');
+
+  // Update the value if the search param changes
+  useEffect(() => {
+    if (searchParams.get('search') === value) return;
+
+    setValue(searchParams.get('search') ?? '');
+  }, [searchParams.get('search')]);
 
   return (
     <Input
@@ -30,7 +37,7 @@ export const SearchToolbarDataTable = ({ searchPlaceholder }: Props) => {
 
         push(params.toString() ? `${pathname}?${params.toString()}` : pathname);
       }}
-      className="w-[150px] lg:w-[250px]"
+      className="w-[150px] lg:w-[250px] flex-grow"
     />
   );
 };

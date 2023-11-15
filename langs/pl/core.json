@@ -5,6 +5,7 @@
     "save": "Zapisz",
     "saved_success": "Zapisano pomyślnie.",
     "no_results": "Brak wyników.",
+    "clear": "Wyczyść",
     "pagination": {
       "previous": "Poprzednia strona",
       "next": "Następna strona"
