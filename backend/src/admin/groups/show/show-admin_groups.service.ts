@@ -20,14 +20,14 @@ export class ShowAdminGroupsService {
     cursor,
     first,
     last,
-    search = '',
+    search,
     sortBy
   }: ShowAdminGroupsArgs): Promise<ShowAdminGroupsObj> {
     const where = {
       OR: [
         {
           name: {
-            contains: search
+            contains: search ?? ''
           }
         }
       ]

@@ -395,6 +395,14 @@ export type Layout_Admin_InstallQueryVariables = Exact<{ [key: string]: never; }
 
 export type Layout_Admin_InstallQuery = { __typename?: 'Query', layout_admin_install: { __typename?: 'LayoutAdminInstallObj', status: LayoutAdminInstallEnum } };
 
+export type Short_Show_Groups_Admin_MembersQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Short_Show_Groups_Admin_MembersQuery = { __typename?: 'Query', show_admin_groups: { __typename?: 'ShowAdminGroupsObj', edges: Array<{ __typename?: 'ShowAdminGroups', id: number, name: string }> } };
+
 export type Show_Admin_GroupsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -543,6 +551,16 @@ export const Layout_Admin_Install = gql`
     query Layout_admin_install {
   layout_admin_install {
     status
+  }
+}
+    `;
+export const Short_Show_Groups_Admin_Members = gql`
+    query Short_show_groups_admin_members($first: Int, $search: String) {
+  show_admin_groups(first: $first, search: $search) {
+    edges {
+      id
+      name
+    }
   }
 }
     `;

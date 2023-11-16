@@ -14,10 +14,17 @@ import { DataTable } from '@/components/data-table/data-table';
 import { Loader } from '@/components/loader/loader';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
 import { DateFormat } from '@/components/date-format/date-format';
+import { useShortShowGroupsAdminAPI } from '@/admin/hooks/api/use-short-show-groups-admin-api';
 
 export const ContentTableUsersMembersAdmin = () => {
   const t = useTranslations('admin.members.users');
   const { data, isFetching, isLoading, isPending } = useUsersMembersAdminAPI();
+  const {
+    data: groupsData,
+    isFetching: groupsIsFetching,
+    setTextSearch,
+    textSearch
+  } = useShortShowGroupsAdminAPI();
 
   const columns: ColumnDef<UsersMembersAdminAPIDataType>[] = useMemo(
     () => [
@@ -104,18 +111,16 @@ export const ContentTableUsersMembersAdmin = () => {
         {
           title: 'test123',
           id: 'test123',
-          options: [
-            {
-              label: 'All',
-              value: 'all',
-              icon: Pencil
-            },
-            {
-              label: '123',
-              value: '123',
-              icon: Pencil
-            }
-          ]
+          isFetching: groupsIsFetching,
+          searchState: {
+            value: textSearch,
+            onChange: setTextSearch
+          },
+          options:
+            groupsData?.show_admin_groups.edges.map(group => ({
+              label: group.name,
+              value: `${group.id}`
+            })) ?? []
         }
       ]}
     />

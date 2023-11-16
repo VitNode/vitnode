@@ -1,45 +1,27 @@
 import { Filter } from 'lucide-react';
-import { ComponentType } from 'react';
 
-import { FilterToolbarDataTable } from './filter-toolbar-data-table';
+import {
+  FilterToolbarDataTable,
+  FilterToolbarDataTableProps
+} from './filter/filter-toolbar-data-table';
 import { SearchToolbarDataTable } from './search-toolbar-data-table';
 
 import { Button } from '../../ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '../../ui/sheet';
 
 export interface ToolbarDataTableProps {
-  filters?: {
-    id: string;
-    options: {
-      label: string | number;
-      value: string | number;
-      icon?: ComponentType<{ className?: string }>;
-    }[];
-    title: string;
-  }[];
+  filters?: FilterToolbarDataTableProps[];
   searchPlaceholder?: string;
 }
 
 export const ToolbarDataTable = ({ filters, searchPlaceholder }: ToolbarDataTableProps) => {
-  // if (!searchPlaceholder) return null;
+  if (!searchPlaceholder && filters && filters.length <= 0) return null;
 
   return (
     <div className="flex gap-2 items-center flex-wrap">
       {searchPlaceholder && <SearchToolbarDataTable searchPlaceholder={searchPlaceholder} />}
 
-      {filters &&
-        filters.map(filter => (
-          <FilterToolbarDataTable
-            key={filter.id}
-            id={filter.id}
-            title={filter.title}
-            options={filter.options.map(option => ({
-              label: `${option.label}`,
-              value: `${option.value}`,
-              icon: option.icon
-            }))}
-          />
-        ))}
+      {filters && filters.map(filter => <FilterToolbarDataTable key={filter.id} {...filter} />)}
 
       <Sheet>
         <SheetTrigger asChild>

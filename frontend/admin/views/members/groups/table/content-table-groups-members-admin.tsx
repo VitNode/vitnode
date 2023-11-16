@@ -65,6 +65,7 @@ export const ContentTableGroupsMembersAdmin = () => {
       pageInfo={data?.show_admin_groups.pageInfo}
       defaultItemsPerPage={10}
       columns={columns}
+      isFetching={isFetching}
     />
   );
 };

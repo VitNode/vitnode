@@ -76,6 +76,7 @@ export const ContentTableLangsCoreAdmin = () => {
         pageInfo={data?.show_core_languages.pageInfo}
         defaultItemsPerPage={10}
         columns={columns}
+        isFetching={isFetching}
       />
     </>
   );
