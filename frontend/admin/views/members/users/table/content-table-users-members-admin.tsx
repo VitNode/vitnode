@@ -14,17 +14,11 @@ import { DataTable } from '@/components/data-table/data-table';
 import { Loader } from '@/components/loader/loader';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
 import { DateFormat } from '@/components/date-format/date-format';
-import { useShortShowGroupsAdminAPI } from '@/admin/hooks/api/use-short-show-groups-admin-api';
+import { GroupsFiltersUsersMembersAdmin } from './filters/groups-filters-users-members-admin';
 
 export const ContentTableUsersMembersAdmin = () => {
   const t = useTranslations('admin.members.users');
   const { data, isFetching, isLoading, isPending } = useUsersMembersAdminAPI();
-  const {
-    data: groupsData,
-    isFetching: groupsIsFetching,
-    setTextSearch,
-    textSearch
-  } = useShortShowGroupsAdminAPI();
 
   const columns: ColumnDef<UsersMembersAdminAPIDataType>[] = useMemo(
     () => [
@@ -107,22 +101,7 @@ export const ContentTableUsersMembersAdmin = () => {
       columns={columns}
       isFetching={isFetching}
       searchPlaceholder={t('search_placeholder')}
-      filters={[
-        {
-          title: 'test123',
-          id: 'test123',
-          isFetching: groupsIsFetching,
-          searchState: {
-            value: textSearch,
-            onChange: setTextSearch
-          },
-          options:
-            groupsData?.show_admin_groups.edges.map(group => ({
-              label: group.name,
-              value: `${group.id}`
-            })) ?? []
-        }
-      ]}
+      filters={<GroupsFiltersUsersMembersAdmin />}
     />
   );
 };

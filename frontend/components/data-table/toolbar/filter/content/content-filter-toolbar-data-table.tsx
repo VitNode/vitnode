@@ -1,8 +1,8 @@
 import { Search } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
+import { ComponentType } from 'react';
 
-import { FilterToolbarDataTableProps } from '../filter-toolbar-data-table';
 import { Input } from '@/components/ui/input';
 import { cx } from '@/functions/classnames';
 import {
@@ -17,14 +17,27 @@ import {
 } from '@/components/ui/command';
 import { ListContentFilterToolbarDataTable } from './list-content-filter-toolbar-data-table';
 import { usePathname, useRouter } from '@/i18n';
+import { useFilterToolbarDataTable } from '../hooks/use-filter-toolbar-data-table';
+
+export interface ContentFilterToolbarDataTableProps {
+  options: {
+    label: string;
+    value: string;
+    icon?: ComponentType<{ className?: string }>;
+  }[];
+  isFetching?: boolean;
+  searchState?: {
+    onChange: (value: string) => void;
+    value: string;
+  };
+}
 
 export const ContentFilterToolbarDataTable = ({
-  id,
   searchState,
-  title,
   ...props
-}: FilterToolbarDataTableProps) => {
+}: ContentFilterToolbarDataTableProps) => {
   const t = useTranslations('core');
+  const { id, title } = useFilterToolbarDataTable();
   const searchParams = useSearchParams();
   const selectedValues = searchParams.getAll(id);
   const { push } = useRouter();
@@ -53,7 +66,7 @@ export const ContentFilterToolbarDataTable = ({
         {!searchState && <CommandEmpty>{t('no_results')}</CommandEmpty>}
 
         <CommandGroup>
-          <ListContentFilterToolbarDataTable id={id} {...props} />
+          <ListContentFilterToolbarDataTable {...props} />
         </CommandGroup>
 
         {selectedValues.length > 0 && (

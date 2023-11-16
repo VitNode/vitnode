@@ -14,7 +14,7 @@ export const useShortShowGroupsAdminAPI = () => {
 
   const api = useQuery({
     queryKey: [APIKeys.SHORT_GROUPS_MEMBERS, { textSearch }],
-    queryFn: async () =>
+    queryFn: async ({ signal }) =>
       await fetcher<
         Short_Show_Groups_Admin_MembersQuery,
         Short_Show_Groups_Admin_MembersQueryVariables
@@ -23,7 +23,8 @@ export const useShortShowGroupsAdminAPI = () => {
         variables: {
           first: 10,
           search: textSearch
-        }
+        },
+        signal
       })
   });
 

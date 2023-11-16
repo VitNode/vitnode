@@ -2,18 +2,19 @@ import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { CheckIcon } from '@radix-ui/react-icons';
 
-import { FilterToolbarDataTableProps } from '../filter-toolbar-data-table';
 import { CommandGroup, CommandItem } from '@/components/ui/command';
 import { Loader } from '@/components/loader/loader';
 import { usePathname, useRouter } from '@/i18n';
 import { cx } from '@/functions/classnames';
+import { ContentFilterToolbarDataTableProps } from './content-filter-toolbar-data-table';
+import { useFilterToolbarDataTable } from '../hooks/use-filter-toolbar-data-table';
 
 export const ListContentFilterToolbarDataTable = ({
-  id,
   isFetching,
   options
-}: Pick<FilterToolbarDataTableProps, 'isFetching' | 'options' | 'id'>) => {
+}: Pick<ContentFilterToolbarDataTableProps, 'isFetching' | 'options'>) => {
   const t = useTranslations('core');
+  const { id } = useFilterToolbarDataTable();
   const { push } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

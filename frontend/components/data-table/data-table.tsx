@@ -4,7 +4,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
-import { useMemo } from 'react';
+import { ReactNode, useMemo } from 'react';
 
 import {
   Table,
@@ -26,6 +26,7 @@ interface DataTableProps<TData> extends ToolbarDataTableProps {
   data: TData[];
   defaultItemsPerPage: number;
   isFetching: boolean | undefined;
+  filters?: ReactNode;
   pageInfo?: PageInfo;
   searchPlaceholder?: string;
 }
