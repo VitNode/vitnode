@@ -12,10 +12,12 @@ export const ContentGroupsFiltersUsersMembersAdmin = () => {
         onChange: setTextSearch
       }}
       options={
-        data?.show_admin_groups.edges.map(group => ({
-          label: group.name,
-          value: `${group.id}`
-        })) ?? []
+        data?.show_admin_groups.edges
+          .filter(item => item.id !== 1)
+          .map(group => ({
+            label: group.name,
+            value: `${group.id}`
+          })) ?? []
       }
     />
   );

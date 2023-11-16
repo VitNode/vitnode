@@ -26,8 +26,6 @@ export const useUsersMembersAdminAPI = () => {
     groups: searchParams.getAll('groups') ?? []
   };
 
-  console.log(params);
-
   return useQuery({
     queryKey: [APIKeys.USERS_MEMBERS, { ...params }],
     queryFn: async ({ signal }) => {

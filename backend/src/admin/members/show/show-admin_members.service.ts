@@ -41,7 +41,7 @@ export class ShowAdminMembersService {
         {
           group: {
             id: {
-              in: groups ?? undefined
+              in: groups.length > 0 ? groups : undefined
             }
           }
         }
