@@ -19,6 +19,7 @@ export class ShowAdminMembersService {
   async show({
     cursor,
     first,
+    groups,
     last,
     search,
     sortBy
@@ -33,6 +34,15 @@ export class ShowAdminMembersService {
         {
           email: {
             contains: search ?? ''
+          }
+        }
+      ],
+      AND: [
+        {
+          group: {
+            id: {
+              in: groups ?? undefined
+            }
           }
         }
       ]

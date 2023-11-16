@@ -155,6 +155,7 @@ export type QueryShow_Admin_GroupsArgs = {
 export type QueryShow_Admin_MembersArgs = {
   cursor?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
+  groups?: InputMaybe<Array<Scalars['Int']['input']>>;
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<Array<ShowAdminMembersSortByArgs>>;
@@ -420,6 +421,7 @@ export type Show_Admin_MembersQueryVariables = Exact<{
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<Array<ShowAdminMembersSortByArgs> | ShowAdminMembersSortByArgs>;
+  groups?: InputMaybe<Array<Scalars['Int']['input']> | Scalars['Int']['input']>;
 }>;
 
 
@@ -592,13 +594,14 @@ export const Show_Admin_Groups = gql`
 }
     `;
 export const Show_Admin_Members = gql`
-    query Show_admin_members($cursor: String, $first: Int, $last: Int, $search: String, $sortBy: [ShowAdminMembersSortByArgs!]) {
+    query Show_admin_members($cursor: String, $first: Int, $last: Int, $search: String, $sortBy: [ShowAdminMembersSortByArgs!], $groups: [Int!]) {
   show_admin_members(
     cursor: $cursor
     first: $first
     last: $last
     search: $search
     sortBy: $sortBy
+    groups: $groups
   ) {
     pageInfo {
       count

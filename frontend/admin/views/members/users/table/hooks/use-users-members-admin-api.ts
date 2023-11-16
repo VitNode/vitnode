@@ -22,8 +22,11 @@ export const useUsersMembersAdminAPI = () => {
     first: searchParams.get('first') ?? 0,
     last: searchParams.get('last'),
     cursor: searchParams.get('cursor'),
-    search: searchParams.get('search') ?? ''
+    search: searchParams.get('search') ?? '',
+    groups: searchParams.getAll('groups') ?? []
   };
+
+  console.log(params);
 
   return useQuery({
     queryKey: [APIKeys.USERS_MEMBERS, { ...params }],
@@ -36,7 +39,8 @@ export const useUsersMembersAdminAPI = () => {
           first: params.first ? +params.first : defaultFirst,
           last: params.last ? +params.last : null,
           cursor: params.cursor,
-          search: params.search
+          search: params.search,
+          groups: params.groups.map(group => +group)
         },
         signal
       });
