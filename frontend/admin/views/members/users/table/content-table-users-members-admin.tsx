@@ -20,6 +20,7 @@ import { useTextLang } from '@/hooks/use-text-lang';
 
 export const ContentTableUsersMembersAdmin = () => {
   const t = useTranslations('admin.members.users');
+  const tCore = useTranslations('core');
   const { data, isFetching, isLoading, isPending } = useUsersMembersAdminAPI();
   const { convertText } = useTextLang();
 
@@ -80,10 +81,10 @@ export const ContentTableUsersMembersAdmin = () => {
                       })}
                     >
                       <Pencil />
-                      <span className="sr-only">{t('actions.edit.title')}</span>
+                      <span className="sr-only">{tCore('edit')}</span>
                     </Link>
                   </TooltipTrigger>
-                  <TooltipContent>{t('actions.edit.title')}</TooltipContent>
+                  <TooltipContent>{tCore('edit')}</TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             </div>

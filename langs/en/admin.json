@@ -38,12 +38,9 @@
         },
         "actions": {
           "edit": {
-            "title": "Edit",
-            "forms": {
-              "name": "Name",
-              "timezone": "Timezone",
-              "submit": "Save changes"
-            }
+            "name": "Name",
+            "timezone": "Timezone",
+            "submit": "Save changes"
           }
         }
       }
@@ -60,11 +57,6 @@
           "email": "Email",
           "group": "Group",
           "joined": "Joined"
-        },
-        "actions": {
-          "edit": {
-            "title": "Edit"
-          }
         }
       },
       "groups": {
@@ -72,11 +64,6 @@
         "table": {
           "name": "Name",
           "users_count": "Users"
-        },
-        "actions": {
-          "edit": {
-            "title": "Edit"
-          }
         }
       }
     },

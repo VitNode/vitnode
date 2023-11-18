@@ -63,8 +63,7 @@ export class CreateDatabaseAdminInstallService {
         },
         {
           id: 2,
-          created: currentDate(),
-          protected: true
+          created: currentDate()
         },
         {
           id: 3,

@@ -9,6 +9,9 @@
     "filters": "Filters",
     "search": "Search",
     "version": "Version: {version}",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
     "pagination": {
       "previous": "Previous page",
       "next": "Next page"

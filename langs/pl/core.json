@@ -9,6 +9,9 @@
     "filters": "Filtry",
     "search": "Szukaj",
     "version": "Wersja: {version}",
+    "delete": "Usuń",
+    "edit": "Edytuj",
+    "create": "Utwórz",
     "pagination": {
       "previous": "Poprzednia strona",
       "next": "Następna strona"

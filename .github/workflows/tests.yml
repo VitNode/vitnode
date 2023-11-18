@@ -26,5 +26,5 @@ jobs:
           cache: 'npm'
       - run: npm install
       - run: npm run lint
-      - run: npm run b:build --if-present
-      - run: npm run f:build --if-present
+      - run: npm run backend:build --if-present
+      - run: npm run frontend:build --if-present

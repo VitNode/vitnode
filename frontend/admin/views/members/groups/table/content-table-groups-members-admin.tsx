@@ -1,16 +1,14 @@
 import { useTranslations } from 'next-intl';
-import { Pencil } from 'lucide-react';
 import { ColumnDef } from '@tanstack/react-table';
 import { useMemo } from 'react';
 
 import { DataTable } from '@/components/data-table/data-table';
-import { buttonVariants } from '@/components/ui/button';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Link } from '@/i18n';
 import { useGroupMembersAdminAPI } from './hooks/use-groups-members-admin-api';
 import { Loader } from '@/components/loader/loader';
 import { ShowAdminGroups } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/use-text-lang';
+import { ActionsTableGroupsMembersAdmin } from './actions/actions-table-groups-members-admin';
 
 export const ContentTableGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.groups');
@@ -48,27 +46,7 @@ export const ContentTableGroupsMembersAdmin = () => {
         cell: ({ row }) => {
           const data = row.original;
 
-          return (
-            <div className="flex items-center justify-end">
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link
-                      href={`/admin/members/groups/${data.id}`}
-                      className={buttonVariants({
-                        variant: 'ghost',
-                        size: 'icon'
-                      })}
-                    >
-                      <Pencil />
-                      <span className="sr-only">{t('actions.edit.title')}</span>
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent>{t('actions.edit.title')}</TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </div>
-          );
+          return <ActionsTableGroupsMembersAdmin data={data} />;
         }
       }
     ],

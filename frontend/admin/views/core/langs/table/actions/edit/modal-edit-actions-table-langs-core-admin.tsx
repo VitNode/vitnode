@@ -68,7 +68,7 @@ export const ModalEditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => 
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('core.langs.actions.edit.forms.name')}</FormLabel>
+                <FormLabel>{t('core.langs.actions.edit.name')}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -82,7 +82,7 @@ export const ModalEditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => 
             name="timezone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('core.langs.actions.edit.forms.timezone')}</FormLabel>
+                <FormLabel>{t('core.langs.actions.edit.timezone')}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -94,7 +94,7 @@ export const ModalEditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => 
 
         <DialogFooter>
           <Button type="submit" onClick={form.handleSubmit(onSubmit)} loading={isPending}>
-            {t('core.langs.actions.edit.forms.submit')}
+            {t('core.langs.actions.edit.submit')}
           </Button>
         </DialogFooter>
       </Form>
