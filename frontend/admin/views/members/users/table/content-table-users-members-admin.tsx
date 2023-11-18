@@ -15,6 +15,7 @@ import { Loader } from '@/components/loader/loader';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
 import { DateFormat } from '@/components/date-format/date-format';
 import { GroupsFiltersUsersMembersAdmin } from './filters/groups-filters-users-members-admin';
+import { AdvancedFiltersUsersMembersAdmin } from './filters/advanced/advanced-filters-users-members-admin';
 
 export const ContentTableUsersMembersAdmin = () => {
   const t = useTranslations('admin.members.users');
@@ -102,6 +103,7 @@ export const ContentTableUsersMembersAdmin = () => {
       isFetching={isFetching}
       searchPlaceholder={t('search_placeholder')}
       filters={<GroupsFiltersUsersMembersAdmin />}
+      advancedFilters={<AdvancedFiltersUsersMembersAdmin />}
     />
   );
 };

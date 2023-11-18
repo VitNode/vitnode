@@ -51,7 +51,6 @@
     "members": {
       "users": {
         "title": "Users",
-        "desc": "Test 123",
         "search_placeholder": "Search by name or email...",
         "filters": {
           "groups": "Groups"
