@@ -21,12 +21,14 @@ const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 CardHeader.displayName = 'CardHeader';
 
 const CardTitle = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLHeadingElement>>(
-  ({ className, ...props }, ref) => (
+  ({ children, className, ...props }, ref) => (
     <h1
       ref={ref}
       className={cx('text-2xl font-semibold leading-none tracking-tight', className)}
       {...props}
-    />
+    >
+      {children}
+    </h1>
   )
 );
 CardTitle.displayName = 'CardTitle';

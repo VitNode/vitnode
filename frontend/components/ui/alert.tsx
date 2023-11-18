@@ -28,12 +28,14 @@ const Alert = forwardRef<
 Alert.displayName = 'Alert';
 
 const AlertTitle = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLHeadingElement>>(
-  ({ className, ...props }, ref) => (
+  ({ children, className, ...props }, ref) => (
     <h5
       ref={ref}
       className={cx('mb-1 font-bold leading-none tracking-tight', className)}
       {...props}
-    />
+    >
+      {children}
+    </h5>
   )
 );
 AlertTitle.displayName = 'AlertTitle';

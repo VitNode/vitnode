@@ -81,8 +81,7 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
     return (
       <>
         {((stateValue && stateValue.length <= 0 && !multiple) || multiple) && (
-          <label
-            htmlFor="dropzone-file"
+          <div
             className={cx(
               'flex flex-col items-center justify-center w-full m-h-32 rounded-md bg-background border border-input px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 text-center',
               className,
@@ -90,6 +89,7 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
                 'opacity-50 cursor-not-allowed': disabled
               }
             )}
+            role="button"
             tabIndex={disabled ? -1 : 0}
             onClick={() => currentRef.current?.click()}
             onKeyDown={e => {
@@ -142,7 +142,7 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
               value=""
               {...props}
             />
-          </label>
+          </div>
         )}
 
         <PreviewFilesInput value={stateValue} onChange={onChange} />
