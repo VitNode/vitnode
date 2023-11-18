@@ -6,7 +6,7 @@
   "license": "GPL-3.0 license",
   "scripts": {
     "prepare": "npx husky install",
-    "backend:init": "cd backend && npm run prisma:generate && npm run prisma:push && cd ..",
+    "backend:init": "cd backend && npm run prisma:generate && cd ..",
     "backend:prisma": "cd backend && npm run prisma:push && cd ..",
     "backend:build": "cd backend && npm run build && cd ..",
     "backend:start": "cd backend && npm run start",
