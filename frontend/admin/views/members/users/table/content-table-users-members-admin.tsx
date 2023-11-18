@@ -14,10 +14,12 @@ import { DataTable } from '@/components/data-table/data-table';
 import { Loader } from '@/components/loader/loader';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
 import { DateFormat } from '@/components/date-format/date-format';
+import { GroupsFiltersUsersMembersAdmin } from './filters/groups-filters-users-members-admin';
+import { AdvancedFiltersUsersMembersAdmin } from './filters/advanced/advanced-filters-users-members-admin';
 
 export const ContentTableUsersMembersAdmin = () => {
   const t = useTranslations('admin.members.users');
-  const { data, isFetching, isLoading } = useUsersMembersAdminAPI();
+  const { data, isFetching, isLoading, isPending } = useUsersMembersAdminAPI();
 
   const columns: ColumnDef<UsersMembersAdminAPIDataType>[] = useMemo(
     () => [
@@ -90,15 +92,18 @@ export const ContentTableUsersMembersAdmin = () => {
     []
   );
 
-  if (isLoading && isFetching) return <Loader />;
+  if ((isLoading && !isFetching) || isPending) return <Loader />;
 
   return (
     <DataTable
       data={data?.show_admin_members.edges ?? []}
       pageInfo={data?.show_admin_members.pageInfo}
       defaultItemsPerPage={10}
-      isFetching={isFetching}
       columns={columns}
+      isFetching={isFetching}
+      searchPlaceholder={t('search_placeholder')}
+      filters={<GroupsFiltersUsersMembersAdmin />}
+      advancedFilters={<AdvancedFiltersUsersMembersAdmin />}
     />
   );
 };

@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 
 import { ShowAdminMembersObj } from './dto/show-admin_members.obj';
 import {
@@ -19,20 +20,38 @@ export class ShowAdminMembersService {
   async show({
     cursor,
     first,
+    groups,
     last,
     search,
     sortBy
   }: ShowAdminMembersArgs): Promise<ShowAdminMembersObj> {
-    const where = {
+    const where: Prisma.core_membersWhereInput = {
       OR: [
         {
           name: {
-            contains: search ?? ''
+            contains: search ?? '',
+            mode: 'insensitive'
           }
         },
         {
           email: {
-            contains: search ?? ''
+            contains: search ?? '',
+            mode: 'insensitive'
+          }
+        },
+        {
+          id: {
+            contains: search ?? '',
+            mode: 'insensitive'
+          }
+        }
+      ],
+      AND: [
+        {
+          group: {
+            id: {
+              in: groups && groups.length > 0 ? groups : undefined
+            }
           }
         }
       ]

@@ -4,6 +4,7 @@ query Show_admin_members(
   $last: Int
   $search: String
   $sortBy: [ShowAdminMembersSortByArgs!]
+  $groups: [Int!]
 ) {
   show_admin_members(
     cursor: $cursor
@@ -11,6 +12,7 @@ query Show_admin_members(
     last: $last
     search: $search
     sortBy: $sortBy
+    groups: $groups
   ) {
     pageInfo {
       count

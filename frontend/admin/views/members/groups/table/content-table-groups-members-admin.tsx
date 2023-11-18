@@ -13,7 +13,7 @@ import { ShowAdminGroups } from '@/graphql/hooks';
 
 export const ContentTableGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.groups');
-  const { data, isFetching, isLoading } = useGroupMembersAdminAPI();
+  const { data, isFetching, isLoading, isPending } = useGroupMembersAdminAPI();
 
   const columns: ColumnDef<ShowAdminGroups>[] = useMemo(
     () => [
@@ -23,7 +23,14 @@ export const ContentTableGroupsMembersAdmin = () => {
       },
       {
         header: t('table.users_count'),
-        accessorKey: 'usersCount'
+        accessorKey: 'usersCount',
+        cell: ({ row }) => {
+          const data = row.original;
+
+          return data.id !== 1 ? (
+            <Link href={`/admin/members/users?groups=${data.id}`}>{data.usersCount}</Link>
+          ) : null;
+        }
       },
       {
         id: 'actions',
@@ -57,15 +64,15 @@ export const ContentTableGroupsMembersAdmin = () => {
     []
   );
 
-  if (isLoading && !isFetching) return <Loader />;
+  if ((isLoading && !isFetching) || isPending) return <Loader />;
 
   return (
     <DataTable
       data={data?.show_admin_groups.edges ?? []}
       pageInfo={data?.show_admin_groups.pageInfo}
       defaultItemsPerPage={10}
-      isFetching={isFetching}
       columns={columns}
+      isFetching={isFetching}
     />
   );
 };

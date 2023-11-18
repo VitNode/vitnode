@@ -2,5 +2,6 @@
   "dialog": "Dialog",
   "tabs": "Tabs",
   "loaders": "Loaders",
-  "date": "Date Format"
+  "date": "Date Format",
+  "table": "Table"
 }

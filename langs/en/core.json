@@ -5,6 +5,9 @@
     "save": "Save",
     "saved_success": "Saved successfully.",
     "no_results": "No results found.",
+    "clear": "Clear",
+    "filters": "Filters",
+    "search": "Search",
     "pagination": {
       "previous": "Previous page",
       "next": "Next page"

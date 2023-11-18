@@ -75,7 +75,7 @@ module.exports = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'global-loader': 'global-loader 2s ease-in-out infinite'
+        'global-loader': 'global-loader 1s ease-in-out infinite'
       },
       transitionProperty: {
         width: 'width'

@@ -8,7 +8,7 @@ export const UsersMembersAdminView = () => {
 
   return (
     <>
-      <HeaderContent h1={t('title')} desc={t('desc')} />
+      <HeaderContent h1={t('title')} />
       <TableUsersMembersAdmin />
     </>
   );

@@ -18,24 +18,29 @@ export interface UsersMembersAdminAPIDataType
 
 export const useUsersMembersAdminAPI = () => {
   const searchParams = useSearchParams();
-  const pagination = {
+  const params = {
     first: searchParams.get('first') ?? 0,
     last: searchParams.get('last'),
-    cursor: searchParams.get('cursor')
+    cursor: searchParams.get('cursor'),
+    search: searchParams.get('search') ?? '',
+    groups: searchParams.getAll('groups') ?? []
   };
 
   return useQuery({
-    queryKey: [APIKeys.USERS_MEMBERS, { ...pagination }],
-    queryFn: async () => {
-      const defaultFirst = !pagination.last ? 10 : null;
+    queryKey: [APIKeys.USERS_MEMBERS, { ...params }],
+    queryFn: async ({ signal }) => {
+      const defaultFirst = !params.last ? 10 : null;
 
       return await fetcher<Show_Admin_MembersQuery, Show_Admin_MembersQueryVariables>({
         query: Show_Admin_Members,
         variables: {
-          first: pagination.first ? +pagination.first : defaultFirst,
-          last: pagination.last ? +pagination.last : null,
-          cursor: pagination.cursor
-        }
+          first: params.first ? +params.first : defaultFirst,
+          last: params.last ? +params.last : null,
+          cursor: params.cursor,
+          search: params.search,
+          groups: params.groups.map(group => +group)
+        },
+        signal
       });
     },
     placeholderData: previousData => previousData
