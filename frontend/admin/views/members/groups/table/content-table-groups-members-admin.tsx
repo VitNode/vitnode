@@ -10,16 +10,27 @@ import { Link } from '@/i18n';
 import { useGroupMembersAdminAPI } from './hooks/use-groups-members-admin-api';
 import { Loader } from '@/components/loader/loader';
 import { ShowAdminGroups } from '@/graphql/hooks';
+import { useTextLang } from '@/hooks/use-text-lang';
 
 export const ContentTableGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.groups');
   const { data, isFetching, isLoading, isPending } = useGroupMembersAdminAPI();
+  const { convertText } = useTextLang();
 
   const columns: ColumnDef<ShowAdminGroups>[] = useMemo(
     () => [
       {
         header: t('table.name'),
-        accessorKey: 'name'
+        accessorKey: 'name',
+        cell: ({ row }) => {
+          const data = row.original;
+
+          return (
+            <div className="flex items-center gap-4">
+              <span>{convertText(data.name)}</span>
+            </div>
+          );
+        }
       },
       {
         header: t('table.users_count'),

@@ -22,17 +22,12 @@ type AuthorizationCurrentUserObj {
   newsletter: Boolean
 }
 
-type CreateAdminGroupsObj {
-  id: Int!
-  name: String!
-}
-
 type GeneralAdminSettingsObj {
   side_name: String!
 }
 
 type GroupShowCoreMembers {
-  name: String!
+  name: [TextLanguage!]!
 }
 
 enum LayoutAdminInstallEnum {
@@ -46,7 +41,6 @@ type LayoutAdminInstallObj {
 }
 
 type Mutation {
-  create_admin_groups(name: String!): CreateAdminGroupsObj!
   create_database_admin_install: String!
   delete_avatar_core_members: String!
   edit_core_languages(default: Boolean!, enabled: Boolean!, id: String!, name: String!, timezone: String!): ShowCoreLanguages!
@@ -80,7 +74,7 @@ type Query {
 type ShowAdminGroups {
   created: Int!
   id: Int!
-  name: String!
+  name: [TextLanguage!]!
   protected: Boolean!
   usersCount: Int!
 }
@@ -197,6 +191,11 @@ type SignUpCoreMembersObj {
 enum SortDirectionEnum {
   asc
   desc
+}
+
+type TextLanguage {
+  id_language: String!
+  name: String!
 }
 
 """The `Upload` scalar type represents a file upload."""

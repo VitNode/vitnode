@@ -58,27 +58,68 @@ export class CreateDatabaseAdminInstallService {
       data: [
         {
           id: 1,
-          name: 'Guest',
           created: currentDate(),
           protected: true
         },
         {
           id: 2,
-          name: 'Moderator',
           created: currentDate(),
           protected: true
         },
         {
           id: 3,
-          name: 'Member',
           created: currentDate(),
           protected: true
         },
         {
           id: 4,
-          name: 'Administrator',
           created: currentDate(),
           protected: true
+        }
+      ]
+    });
+
+    await this.prisma.core_groups_languages.createMany({
+      data: [
+        {
+          group_id: 1,
+          name: 'Guest',
+          id_language: 'en'
+        },
+        {
+          group_id: 2,
+          name: 'Moderator',
+          id_language: 'en'
+        },
+        {
+          group_id: 3,
+          name: 'Member',
+          id_language: 'en'
+        },
+        {
+          group_id: 4,
+          name: 'Administrator',
+          id_language: 'en'
+        },
+        {
+          group_id: 1,
+          name: 'Gość',
+          id_language: 'pl'
+        },
+        {
+          group_id: 2,
+          name: 'Moderator',
+          id_language: 'pl'
+        },
+        {
+          group_id: 3,
+          name: 'Użytkownik',
+          id_language: 'pl'
+        },
+        {
+          group_id: 4,
+          name: 'Administrator',
+          id_language: 'pl'
         }
       ]
     });

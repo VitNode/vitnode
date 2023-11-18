@@ -4,10 +4,10 @@ import * as cookieParser from 'cookie-parser';
 
 import { AppModule } from './app.module';
 import { generateConfigFile } from '../functions/generate-config-file';
+import { RedisIoAdapter } from './redis.adapter';
 
 import { CONFIG } from '@/config';
 import { graphqlUploadExpress } from '@/utils/graphql-upload/graphqlUploadExpress';
-import { RedisIoAdapter } from './redis.adapter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

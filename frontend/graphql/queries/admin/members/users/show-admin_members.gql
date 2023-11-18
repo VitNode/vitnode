@@ -43,7 +43,10 @@ query Show_admin_members(
       joined
       name
       group {
-        name
+        name {
+          id_language
+          name
+        }
       }
     }
   }
