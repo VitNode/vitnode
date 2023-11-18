@@ -7,6 +7,7 @@ import { generateConfigFile } from '../functions/generate-config-file';
 
 import { CONFIG } from '@/config';
 import { graphqlUploadExpress } from '@/utils/graphql-upload/graphqlUploadExpress';
+import { RedisIoAdapter } from './redis.adapter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -17,7 +18,13 @@ async function bootstrap() {
     credentials: true,
     origin: ['http://localhost:3000', 'https://sandbox.embed.apollographql.com']
   });
-  await app.listen(8080, null, async () => {
+
+  // Redis
+  const redisIoAdapter = new RedisIoAdapter(app);
+  await redisIoAdapter.connectToRedis();
+  app.useWebSocketAdapter(redisIoAdapter);
+
+  await app.listen(CONFIG.port, null, async () => {
     if (!CONFIG.refresh_token.secret || !CONFIG.access_token.secret) {
       throw new Error('Access or Refresh token secret is not defined in .env file');
     }
@@ -25,7 +32,7 @@ async function bootstrap() {
     generateConfigFile();
 
     // eslint-disable-next-line no-console
-    console.log(`Application is running on: http://localhost:8080/graphql`);
+    console.log(`Application is running on: http://localhost:${CONFIG.port}/graphql`);
   });
 }
 bootstrap();
