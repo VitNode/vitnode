@@ -69,7 +69,6 @@
       },
       "groups": {
         "title": "Grupy",
-        "desc": "Test 123",
         "table": {
           "name": "Nazwa",
           "users_count": "Użytkownicy"

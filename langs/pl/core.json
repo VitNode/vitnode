@@ -8,6 +8,7 @@
     "clear": "Wyczyść",
     "filters": "Filtry",
     "search": "Szukaj",
+    "version": "Wersja: {version}",
     "pagination": {
       "previous": "Poprzednia strona",
       "next": "Następna strona"
