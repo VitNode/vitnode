@@ -11,14 +11,14 @@
   },
   "dependencies": {
     "clsx": "^2.0.0",
-    "next": "^14.0.2",
+    "next": "^14.0.3",
     "nextra": "^2.13.2",
     "nextra-theme-docs": "^2.13.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/node": "^20.9.0",
+    "@types/node": "^20.9.1",
     "sass": "^1.69.5",
     "typescript": "^5.2.2"
   }

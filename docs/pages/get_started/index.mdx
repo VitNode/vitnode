@@ -9,6 +9,7 @@ This guide will help you to install the project on your server.
 
 - [Node.js 16.14](https://nodejs.org/) or later,
 - [Database compatibility with Prisma](https://www.prisma.io/docs/reference/database-reference/supported-databases) (Recommended: `PostgreSQL`),
+- [Redis](https://redis.io/),
 - OS:
   - `Linux` (Recommended),
   - `Windows` with [WSL](https://learn.microsoft.com/en-us/windows/wsl/install),
@@ -100,16 +101,36 @@ Go to `backend` folder and create new `.env` file. Copy the contents from `.env.
 Then fill the values:
 
 ```bash
-DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE
+# General
+# PORT=8080
+
+# Tokens
 ACCESS_TOKEN_SECRET=SECRET
 REFRESH_TOKEN_SECRET=SECRET
+
+# Database
+DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE
+
+# Redis
+REDIS_URL=redis://HOST:PORT
+# REDIS_PASSWORD=PASSWORD
+
+# Frontend
+COOKIE_DOMAIN=localhost
 ```
+
+<Callout type="info" emoji="ℹ️">
+  Commented out values are optional
+</Callout>
 
 Description:
 
-- `DATABASE_URL` - URL to the database,
 - `ACCESS_TOKEN_SECRET` - Secret for access token,
-- `REFRESH_TOKEN_SECRET` - Secret for refresh token.
+- `REFRESH_TOKEN_SECRET` - Secret for refresh token,
+- `DATABASE_URL` - URL to the database,
+- `REDIS_URL` - URL to the Redis,
+- `REDIS_PASSWORD` - Password to the Redis _(optional)_,
+- `COOKIE_DOMAIN` - Domain for cookies _(Domian where is your frontend)_.
 
 <Callout type="warning" emoji="⚠️">
   Remember to change the values in `ACCESS_TOKEN_SECRET` and `REFRESH_TOKEN_SECRET`! You can
@@ -264,6 +285,11 @@ yarn frontend:start
 ```
 
   </Tabs.Tab>
+
+### Finish
+
+Now when you open your website in the browser, you should see the wizard install page. Follow the instructions on the screen.
+
 </Tabs>
 
 </Steps>
