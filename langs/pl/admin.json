@@ -1,0 +1,110 @@
+{
+  "admin": {
+    "title": "Panel kontrolny administratora",
+    "title_short": "Admin",
+    "default": "Domyślny",
+    "nav": {
+      "core": {
+        "title": "Rdzeń",
+        "dashboard": "Pulpit",
+        "general": "Ogólne",
+        "langs": "Języki"
+      },
+      "members": {
+        "title": "Użytkownicy",
+        "list": "Użytkownicy",
+        "groups": "Grupy"
+      }
+    },
+    "home_page": "Strona główna",
+    "core": {
+      "general": {
+        "title": "Ogólne ustawienia",
+        "main": {
+          "title": "Ustawienia główne",
+          "form": {
+            "name": {
+              "label": "Nazwa strony"
+            }
+          }
+        }
+      },
+      "langs": {
+        "title": "Języki",
+        "table": {
+          "name": "Nazwa",
+          "key": "Klucz",
+          "enabled": "Włączony"
+        },
+        "actions": {
+          "edit": {
+            "name": "Name",
+            "timezone": "Timezone",
+            "submit": "Zapisz zmiany"
+          }
+        }
+      }
+    },
+    "members": {
+      "users": {
+        "title": "Użytkownicy",
+        "search_placeholder": "Szukaj po nazwie lub emailu...",
+        "filters": {
+          "groups": "Grupy"
+        },
+        "table": {
+          "name": "Nazwa",
+          "email": "Email",
+          "group": "Grupa",
+          "joined": "Dołączył"
+        }
+      },
+      "groups": {
+        "title": "Grupy",
+        "table": {
+          "name": "Nazwa",
+          "users_count": "Użytkownicy"
+        }
+      }
+    },
+    "configs": {
+      "mobile_not_supported": "Ten widok nie jest obsługiwany na urządzeniach mobilnych.",
+      "install": {
+        "title": "Instalacja {name}",
+        "steps": {
+          "next_step": "Następny krok",
+          "welcome": {
+            "title": "Witaj",
+            "desc": "Zanim zaczniesz...",
+            "text": "Witaj w kreatorze instalacji {name}. Ten kreator przeprowadzi Cię przez proces instalacji."
+          },
+          "license": {
+            "title": "Licencja",
+            "desc": "Przeczytaj uważnie",
+            "link": "Kliknij tutaj, aby przeczytać licencję.",
+            "agree": "Akceptuje warunki licencji"
+          },
+          "database": {
+            "title": "Baza danych",
+            "text": "Teraz VitNode potrzebuje stworzyć domyślne rekordy w Twojej bazie danych.",
+            "desc": "Stwórz schemat oraz pierwsze rekordy",
+            "submit": "Stwórz rekordy"
+          },
+          "account": {
+            "title": "Konto admina",
+            "desc": "Stwórz konto administratora"
+          }
+        },
+        "finish": {
+          "title": "Witaj w {name}!",
+          "desc": "Twoja strona jest gotowa.",
+          "text": "Proces instalacji jest gotowy. Możesz teraz użyć swojej strony internetowej.",
+          "buttons": {
+            "home_page": "Strona główna",
+            "admin_control_panel": "Panel kontrolny administratora"
+          }
+        }
+      }
+    }
+  }
+}

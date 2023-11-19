@@ -1,9 +1,10 @@
 'use client';
 
+import corePackages from '~/package.json';
+
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 
-import corePackages from '@/package.json';
 import { Tabs } from '@/components/tabs/tabs';
 import { HeaderContent } from '@/components/header-content/header-content';
 

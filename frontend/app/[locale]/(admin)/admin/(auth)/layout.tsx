@@ -1,10 +1,11 @@
+import configs from '~/config.json';
+
 import { ReactNode } from 'react';
 import { cookies } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
-import configs from '@/config.json';
 import { AdminLayout } from '@/admin/layout/admin-layout';
 import { SessionAdminProvider } from './session-admin-provider';
 import { redirect } from '@/i18n';

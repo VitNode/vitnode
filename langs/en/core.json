@@ -1,0 +1,150 @@
+{
+  "core": {
+    "test": "Test EN",
+    "loading": "Please wait, loading...",
+    "save": "Save",
+    "saved_success": "Saved successfully.",
+    "no_results": "No results found.",
+    "clear": "Clear",
+    "filters": "Filters",
+    "search": "Search",
+    "version": "Version: {version}",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "pagination": {
+      "previous": "Previous page",
+      "next": "Next page"
+    },
+    "user-bar": {
+      "sign_in": "Login",
+      "sign_up": "Register",
+      "log_out": "Log out",
+      "my_profile": "My Profile",
+      "settings": "Settings",
+      "mod_cp": "Moderator Panel",
+      "admin_cp": "Admin Panel",
+      "theme": {
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System",
+        "toggle": "Toggle Theme"
+      },
+      "language": {
+        "change": "Change Language"
+      }
+    },
+    "forms": {
+      "empty": "This field is required.",
+      "files": {
+        "title": "Click to upload or drag and drop here",
+        "drop_here": "Drop here to upload",
+        "allow_size_per_file": "(max {size} MB per file)",
+        "errors": {
+          "extension": "The file {file} have an invalid extension.",
+          "max_size": "The file {file} is too large."
+        }
+      }
+    },
+    "sign_in": {
+      "title": "Login",
+      "desc": "Sign in to your account.",
+      "form": {
+        "email": {
+          "label": "Email"
+        },
+        "password": {
+          "label": "Password"
+        },
+        "remember": {
+          "label": "Remember me",
+          "desc": "Not recommended on shared computers."
+        },
+        "submit": "Sign In"
+      },
+      "error": {
+        "title": "Invalid credentials",
+        "desc": "The email address or password was incorrect. Please try again (make sure your caps lock is off)."
+      }
+    },
+    "sign_up": {
+      "title": "Register",
+      "desc": "Create a new account.",
+      "form": {
+        "name": {
+          "label": "Nickname",
+          "desc": "You can use letters, numbers and special characters: .-_.",
+          "already_exists": "This nickname is already in use."
+        },
+        "email": {
+          "label": "Email",
+          "already_exists": "This email address is already in use."
+        },
+        "birthday": {
+          "label": "Date of birth",
+          "desc": "By default, your date of birth is hidden. These details are required for age verification.",
+          "too_young": "You must be at least {years} years old to register."
+        },
+        "password": {
+          "label": "Password"
+        },
+        "password_confirmation": {
+          "label": "Confirm Password",
+          "not_match": "Passwords do not match."
+        },
+        "terms": {
+          "label": "Accept terms and conditions",
+          "desc": "You agree to our Terms of Service and Privacy Policy.",
+          "empty": "You must agree to the Terms of Service."
+        },
+        "newsletter": {
+          "label": "Newsletter",
+          "desc": "Receive information about new features, updates and events related to the application."
+        },
+        "submit": "Sign Up"
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "desc": "Manage your account settings.",
+      "open_sheet": "Open Menu",
+      "change_avatar": {
+        "title": "Change Avatar",
+        "desc": "Choose one option to change your avatar.",
+        "options": {
+          "upload": {
+            "title": "Upload a new avatar",
+            "success": "Your avatar has been changed.",
+            "error": "An error occurred while uploading your avatar."
+          },
+          "delete": {
+            "title": "Delete avatar",
+            "success": "Your avatar has been deleted.",
+            "error": "An error occurred while deleting your avatar."
+          }
+        },
+        "submit": "Change Avatar"
+      },
+      "overview": {
+        "title": "Overview"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "desc": "Configure how you receive notifications."
+      }
+    },
+    "errors": {
+      "title": "Oops! Something went wrong",
+      "code": "Error code: <code></code>",
+      "no_connection_api": "No connection to the API",
+      "access_denied": "Access denied",
+      "internal_server_error": "Internal server error",
+      "404": "Page not found",
+      "500": "Internal server error",
+      "actions": {
+        "back_home": "Home Page",
+        "contact": "Contact with Us"
+      }
+    }
+  }
+}
