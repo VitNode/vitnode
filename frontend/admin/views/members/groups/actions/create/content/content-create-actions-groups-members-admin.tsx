@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
-export const ContentCreateGroupsMembersAdmin = () => {
+export const ContentCreateActionsGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.groups.create.form');
   const form = useFormContext();
 
