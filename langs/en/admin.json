@@ -64,6 +64,14 @@
         "table": {
           "name": "Name",
           "users_count": "Users"
+        },
+        "create": {
+          "title": "Create Group",
+          "form": {
+            "name": {
+              "label": "Name"
+            }
+          }
         }
       }
     },
