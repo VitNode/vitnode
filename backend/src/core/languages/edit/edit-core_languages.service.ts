@@ -15,7 +15,7 @@ export class EditCoreLanguageService {
   constructor(private prisma: PrismaService) {}
 
   async edit({ id, ...rest }: EditCoreLanguagesArgs): Promise<ShowCoreLanguages> {
-    const configFile = fs.readFileSync(join('..', 'config.json'), 'utf8');
+    const configFile = fs.readFileSync(join('..', 'frontend', 'config.json'), 'utf8');
     const config: ConfigType = JSON.parse(configFile);
     const language = await this.prisma.core_languages.findUnique({
       where: { id },
@@ -66,7 +66,7 @@ export class EditCoreLanguageService {
       edit.enabled;
 
     fs.writeFile(
-      join('..', 'config.json'),
+      join('..', 'frontend', 'config.json'),
       JSON.stringify(dataToEditConfig, null, 2),
       'utf8',
       err => {

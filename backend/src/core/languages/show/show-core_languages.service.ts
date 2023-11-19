@@ -17,7 +17,7 @@ export class ShowCoreLanguageService {
   constructor(private prisma: PrismaService) {}
 
   async show({ cursor, first, last }: ShowCoreLanguagesArgs): Promise<ShowCoreLanguagesObj> {
-    const configFile = fs.readFileSync(join('..', 'config.json'), 'utf8');
+    const configFile = fs.readFileSync(join('..', 'frontend', 'config.json'), 'utf8');
     const config: ConfigType = JSON.parse(configFile);
     const [edges, totalCount] = await this.prisma.$transaction([
       this.prisma.core_languages.findMany({

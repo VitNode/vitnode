@@ -1,10 +1,9 @@
 'use client';
 
-import configs from '~/config.json';
-
 import { ReactNode } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
+import configs from '@/config.json';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Authorization_Admin_Sessions,

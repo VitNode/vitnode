@@ -19,8 +19,8 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
   let messages;
   try {
     messages = {
-      ...(await import(`~/langs/${locale}/core.json`)).default,
-      ...(await import(`~/langs/${locale}/admin.json`)).default
+      ...(await import(`@/langs/${locale}/core.json`)).default,
+      ...(await import(`@/langs/${locale}/admin.json`)).default
     };
   } catch (error) {
     notFound();

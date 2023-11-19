@@ -21,7 +21,7 @@ export class CreateDatabaseAdminInstallService {
   }
 
   async create(): Promise<string> {
-    const configFile = fs.readFileSync(join('..', 'config.json'), 'utf8');
+    const configFile = fs.readFileSync(join('..', 'frontend', 'config.json'), 'utf8');
     const config: ConfigType = JSON.parse(configFile);
 
     if (config.finished_install) {

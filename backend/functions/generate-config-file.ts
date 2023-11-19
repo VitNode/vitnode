@@ -23,7 +23,7 @@ const DATA: ConfigType = {
 };
 
 export const generateConfigFile = (): void => {
-  const configPath = join('..', 'config.json');
+  const configPath = join('..', 'frontend', 'config.json');
   const config = fs.existsSync(configPath);
   if (config) return;
 
