@@ -26,7 +26,12 @@ export const LanguageProvider = ({ children }: Props) => {
   });
 
   return (
-    <GlobalsContext.Provider value={{ languages: data?.show_core_languages.edges ?? [] }}>
+    <GlobalsContext.Provider
+      value={{
+        languages: data?.show_core_languages.edges.filter(item => item.enabled) ?? [],
+        defaultLanguage: data?.show_core_languages.edges.find(item => item.default)?.id ?? 'en'
+      }}
+    >
       {children}
     </GlobalsContext.Provider>
   );

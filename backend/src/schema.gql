@@ -195,7 +195,7 @@ enum SortDirectionEnum {
 
 type TextLanguage {
   id_language: String!
-  name: String!
+  value: String!
 }
 
 """The `Upload` scalar type represents a file upload."""

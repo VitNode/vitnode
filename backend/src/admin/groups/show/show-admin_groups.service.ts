@@ -27,7 +27,7 @@ export class ShowAdminGroupsService {
     const where: Prisma.core_groupsWhereInput = {
       name: {
         some: {
-          name: {
+          value: {
             contains: search,
             mode: 'insensitive'
           }
@@ -45,7 +45,7 @@ export class ShowAdminGroupsService {
           name: {
             select: {
               id_language: true,
-              name: true
+              value: true
             }
           }
         },

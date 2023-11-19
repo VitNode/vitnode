@@ -21,7 +21,7 @@ query Profiles_core_members($first: Int, $findByIds: [String!]) {
       group {
         name {
           id_language
-          name
+          value
         }
       }
       id

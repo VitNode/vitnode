@@ -82,42 +82,42 @@ export class CreateDatabaseAdminInstallService {
       data: [
         {
           group_id: 1,
-          name: 'Guest',
+          value: 'Guest',
           id_language: 'en'
         },
         {
           group_id: 2,
-          name: 'Moderator',
+          value: 'Moderator',
           id_language: 'en'
         },
         {
           group_id: 3,
-          name: 'Member',
+          value: 'Member',
           id_language: 'en'
         },
         {
           group_id: 4,
-          name: 'Administrator',
+          value: 'Administrator',
           id_language: 'en'
         },
         {
           group_id: 1,
-          name: 'Gość',
+          value: 'Gość',
           id_language: 'pl'
         },
         {
           group_id: 2,
-          name: 'Moderator',
+          value: 'Moderator',
           id_language: 'pl'
         },
         {
           group_id: 3,
-          name: 'Użytkownik',
+          value: 'Użytkownik',
           id_language: 'pl'
         },
         {
           group_id: 4,
-          name: 'Administrator',
+          value: 'Administrator',
           id_language: 'pl'
         }
       ]

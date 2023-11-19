@@ -21,7 +21,7 @@ query Show_admin_groups(
       protected
       name {
         id_language
-        name
+        value
       }
     }
   }

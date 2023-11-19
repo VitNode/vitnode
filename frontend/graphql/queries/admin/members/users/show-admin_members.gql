@@ -45,7 +45,7 @@ query Show_admin_members(
       group {
         name {
           id_language
-          name
+          value
         }
       }
     }

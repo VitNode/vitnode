@@ -4,7 +4,7 @@ query Short_show_groups_admin_members($first: Int, $search: String) {
       id
       name {
         id_language
-        name
+        value
       }
     }
   }

@@ -52,7 +52,7 @@ model core_groups_languages {
   id          String @id @unique @default(uuid())
   id_language String @db.VarChar(32)
   group_id    Int
-  name        String @db.VarChar(255)
+  value       String @db.VarChar(255)
 
   group    core_groups    @relation("core_groups_languages_group", references: [id], fields: [group_id])
   language core_languages @relation("core_groups_languages_language", references: [id], fields: [id_language])
