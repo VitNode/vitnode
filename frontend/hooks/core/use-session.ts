@@ -1,15 +1,13 @@
 import { createContext, useContext } from 'react';
 
-import { AuthorizationCurrentUserObj, ShowCoreLanguages } from '@/graphql/hooks';
+import { AuthorizationCurrentUserObj } from '@/graphql/hooks';
 
 interface Args {
-  languages: Omit<ShowCoreLanguages, 'protected'>[];
   session: AuthorizationCurrentUserObj | undefined | null;
 }
 
 export const SessionContext = createContext<Args>({
-  session: null,
-  languages: []
+  session: null
 });
 
 export const useSession = () => useContext(SessionContext);

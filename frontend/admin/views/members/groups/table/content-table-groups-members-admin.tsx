@@ -7,7 +7,7 @@ import { Link } from '@/i18n';
 import { useGroupMembersAdminAPI } from './hooks/use-groups-members-admin-api';
 import { Loader } from '@/components/loader/loader';
 import { ShowAdminGroups } from '@/graphql/hooks';
-import { useTextLang } from '@/hooks/use-text-lang';
+import { useTextLang } from '@/hooks/core/use-text-lang';
 import { ActionsTableGroupsMembersAdmin } from './actions/actions-table-groups-members-admin';
 
 export const ContentTableGroupsMembersAdmin = () => {

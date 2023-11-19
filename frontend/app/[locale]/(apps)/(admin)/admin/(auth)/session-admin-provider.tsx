@@ -34,8 +34,7 @@ export const SessionAdminProvider = ({ children }: Props) => {
     <SessionAdminContext.Provider
       value={{
         session: data.authorization_admin_sessions.user,
-        side_name: configs.side_name,
-        languages: data?.show_core_languages.edges ?? []
+        side_name: configs.side_name
       }}
     >
       {children}

@@ -28,10 +28,6 @@ query Authorization_core_sessions {
   show_core_languages {
     edges {
       id
-      name
-      enabled
-      timezone
-      default
     }
   }
 }

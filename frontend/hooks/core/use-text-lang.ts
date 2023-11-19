@@ -1,6 +1,6 @@
 import { useLocale } from 'next-intl';
 
-import { TextLanguage } from '../graphql/hooks';
+import { TextLanguage } from '@/graphql/hooks';
 
 export const useTextLang = () => {
   const locale = useLocale();
