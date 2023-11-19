@@ -19,7 +19,10 @@ query Profiles_core_members($first: Int, $findByIds: [String!]) {
       birthday
       followers
       group {
-        name
+        name {
+          id_language
+          name
+        }
       }
       id
       image_cover {

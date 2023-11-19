@@ -7,13 +7,11 @@ interface Props {
 }
 
 export const Tabs = ({ className, items }: Props) => {
-  // TODO: Improve this component
-
   return (
     <div className={cx('flex', className)}>
-      <div className="h-14 rounded-md bg-card p-2 text-muted-foreground flex overflow-x-auto">
+      <div className="flex rounded-md bg-muted p-1 text-muted-foreground overflow-x-auto">
         {items.map(el => (
-          <TabsTrigger key={el.href} {...el} />
+          <TabsTrigger key={el.id} {...el} />
         ))}
       </div>
     </div>

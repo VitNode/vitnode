@@ -8,8 +8,9 @@ This guide will help you to install the project on your server.
 ## System Requirements
 
 - [Node.js 16.14](https://nodejs.org/) or later,
-- [Database compatibility with Prisma](https://www.prisma.io/docs/reference/database-reference/supported-databases) (Recommended: `PostgreSQL`),
+- [Database SQL compatibility with Prisma](https://www.prisma.io/docs/reference/database-reference/supported-databases) (Recommended: `PostgreSQL`),
 - [Redis](https://redis.io/),
+- [pnpm](https://pnpm.io/),
 - OS:
   - `Linux` (Recommended),
   - `Windows` with [WSL](https://learn.microsoft.com/en-us/windows/wsl/install),
@@ -18,9 +19,6 @@ This guide will help you to install the project on your server.
 Optional:
 
 - [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
-- Package manager:
-  - [pnpm](https://pnpm.io/) (Recommended),
-  - [yarn](https://yarnpkg.com/).
 
 ## Requirements for VSCode
 
@@ -56,29 +54,9 @@ cd vitnode
 
 ### Install dependencies
 
-<Tabs items={['pnpm', 'npm', 'yarn']}>
-  <Tabs.Tab>
-
 ```bash
 pnpm install
 ```
-
-  </Tabs.Tab>
-  <Tabs.Tab>
-  
-```bash
-npm install
-```
-
-  </Tabs.Tab>
-  <Tabs.Tab>
-  
-```bash
-yarn install
-```
-
-  </Tabs.Tab>
-</Tabs>
 
 </Steps>
 
@@ -88,9 +66,14 @@ yarn install
 
 ### Prepere database
 
-VitNode uses Prisma to connect to the database, which means VitNode supports multiple databases like `PostgreSQL` (Recommended), `MySQL`, `MariaDB`, `Microsoft SQL Server`, `MongoDB` etc.
+VitNode uses Prisma to connect to the database, which means VitNode supports multiple databases like `PostgreSQL` (Recommended), `MySQL`, `MariaDB`, `Microsoft SQL Server` etc.
 
 You can read more about it [here](https://www.prisma.io/docs/reference/database-reference/supported-databases).
+
+<Callout type="error" emoji="❌">
+  VitNode doesn't support no-SQL versions which means `MongoDB` database cannot be used.
+</Callout>
+
 
 When you choose the database, you need to create a database and user for VitNode. Save the credentials somewhere, you will need them in next step.
 
@@ -139,81 +122,21 @@ Description:
 
 ### Generate database schema
 
-<Tabs items={['pnpm', 'npm', 'yarn']}>
-  <Tabs.Tab>
-
 ```bash
-pnpm run backend:init
+pnpm backend:init
 ```
-
-  </Tabs.Tab>
-  <Tabs.Tab>
-  
-```bash
-npm run backend:init
-```
-
-  </Tabs.Tab>
-  <Tabs.Tab>
-  
-```bash
-yarn backend:init
-```
-
-  </Tabs.Tab>
-</Tabs>
 
 ### Build
 
-<Tabs items={['pnpm', 'npm', 'yarn']}>
-  <Tabs.Tab>
-
 ```bash
-pnpm run backend:build
+pnpm backend:build
 ```
-
-  </Tabs.Tab>
-  <Tabs.Tab>
-  
-```bash
-npm run backend:build
-```
-
-  </Tabs.Tab>
-  <Tabs.Tab>
-  
-```bash
-yarn backend:build
-```
-
-  </Tabs.Tab>
-</Tabs>
 
 ### Run
 
-<Tabs items={['pnpm', 'npm', 'yarn']}>
-  <Tabs.Tab>
-
 ```bash
-pnpm run backend:start
+pnpm backend:start
 ```
-
-  </Tabs.Tab>
-  <Tabs.Tab>
-  
-```bash
-npm run backend:start
-```
-
-  </Tabs.Tab>
-  <Tabs.Tab>
-  
-```bash
-yarn backend:start
-```
-
-  </Tabs.Tab>
-</Tabs>
 
 </Steps>
 
@@ -237,59 +160,18 @@ Description:
 
 ### Build
 
-<Tabs items={['pnpm', 'npm', 'yarn']}>
-  <Tabs.Tab>
-
 ```bash
-pnpm run frontend:build
+pnpm frontend:build
 ```
-
-  </Tabs.Tab>
-  <Tabs.Tab>
-  
-```bash
-npm run frontend:build
-```
-
-  </Tabs.Tab>
-  <Tabs.Tab>
-  
-```bash
-yarn frontend:build
-```
-
-  </Tabs.Tab>
-</Tabs>
 
 ### Run
 
-<Tabs items={['pnpm', 'npm', 'yarn']}>
-  <Tabs.Tab>
-
 ```bash
-pnpm run frontend:start
+pnpm frontend:start
 ```
-
-  </Tabs.Tab>
-  <Tabs.Tab>
-  
-```bash
-npm run frontend:start
-```
-
-  </Tabs.Tab>
-  <Tabs.Tab>
-  
-```bash
-yarn frontend:start
-```
-
-  </Tabs.Tab>
 
 ### Finish
 
 Now when you open your website in the browser, you should see the wizard install page. Follow the instructions on the screen.
-
-</Tabs>
 
 </Steps>

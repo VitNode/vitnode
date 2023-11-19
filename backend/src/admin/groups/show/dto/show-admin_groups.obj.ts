@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { PageInfo } from '@/types/database/pagination.type';
+import { TextLanguage } from '@/types/database/text-language.type';
 
 @ObjectType()
 export class ShowAdminGroupsObj {
@@ -16,8 +17,8 @@ export class ShowAdminGroups {
   @Field(() => Int)
   id: number;
 
-  @Field(() => String)
-  name: string;
+  @Field(() => [TextLanguage])
+  name: TextLanguage[];
 
   @Field(() => Int)
   usersCount: number;

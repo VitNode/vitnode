@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 
 import {
   ShowAdminGroupsArgs,
@@ -23,14 +24,15 @@ export class ShowAdminGroupsService {
     search,
     sortBy
   }: ShowAdminGroupsArgs): Promise<ShowAdminGroupsObj> {
-    const where = {
-      OR: [
-        {
+    const where: Prisma.core_groupsWhereInput = {
+      name: {
+        some: {
           name: {
-            contains: search ?? ''
+            contains: search,
+            mode: 'insensitive'
           }
         }
-      ]
+      }
     };
 
     const [edges, totalCount] = await this.prisma.$transaction([
@@ -38,9 +40,14 @@ export class ShowAdminGroupsService {
         ...inputPagination({ first, cursor, last }),
         select: {
           id: true,
-          name: true,
           created: true,
-          protected: true
+          protected: true,
+          name: {
+            select: {
+              id_language: true,
+              name: true
+            }
+          }
         },
         orderBy: inputSorting<ShowAdminGroupsSortingColumnEnum>({
           sortBy,

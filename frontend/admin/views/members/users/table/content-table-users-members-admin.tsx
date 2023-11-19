@@ -16,10 +16,13 @@ import { AvatarUser } from '@/components/user/avatar/avatar-user';
 import { DateFormat } from '@/components/date-format/date-format';
 import { GroupsFiltersUsersMembersAdmin } from './filters/groups-filters-users-members-admin';
 import { AdvancedFiltersUsersMembersAdmin } from './filters/advanced/advanced-filters-users-members-admin';
+import { useTextLang } from '@/hooks/use-text-lang';
 
 export const ContentTableUsersMembersAdmin = () => {
   const t = useTranslations('admin.members.users');
+  const tCore = useTranslations('core');
   const { data, isFetching, isLoading, isPending } = useUsersMembersAdminAPI();
+  const { convertText } = useTextLang();
 
   const columns: ColumnDef<UsersMembersAdminAPIDataType>[] = useMemo(
     () => [
@@ -48,7 +51,7 @@ export const ContentTableUsersMembersAdmin = () => {
         cell: ({ row }) => {
           const data = row.original;
 
-          return data.group.name;
+          return convertText(data.group.name);
         }
       },
       {
@@ -78,10 +81,10 @@ export const ContentTableUsersMembersAdmin = () => {
                       })}
                     >
                       <Pencil />
-                      <span className="sr-only">{t('actions.edit.title')}</span>
+                      <span className="sr-only">{tCore('edit')}</span>
                     </Link>
                   </TooltipTrigger>
-                  <TooltipContent>{t('actions.edit.title')}</TooltipContent>
+                  <TooltipContent>{tCore('edit')}</TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             </div>

@@ -17,9 +17,12 @@ query Show_admin_groups(
     edges {
       created
       id
-      name
       usersCount
       protected
+      name {
+        id_language
+        name
+      }
     }
   }
 }

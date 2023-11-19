@@ -22,15 +22,11 @@ const DATA: ConfigType = {
   finished_install: false
 };
 
-export const generateConfigFile = (): void => {
-  const configPath = join('..', 'config.json');
-  const config = fs.existsSync(configPath);
-  if (config) return;
+const configPath = join('..', 'config.json');
 
-  fs.writeFile(configPath, JSON.stringify(DATA, null, 2), 'utf8', err => {
-    if (err) throw err;
-  });
+fs.writeFile(configPath, JSON.stringify(DATA, null, 2), 'utf8', err => {
+  if (err) throw err;
+});
 
-  // eslint-disable-next-line no-console
-  console.log('[First Install VitNode] - Config file has been generated');
-};
+// eslint-disable-next-line no-console
+console.log('[First Install VitNode] - Config file has been generated');

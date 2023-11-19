@@ -6,10 +6,7 @@ const config: CodegenConfig = {
   documents: ['graphql/**/*.gql'],
   generates: {
     'graphql/hooks.ts': {
-      plugins: ['typescript', 'typescript-operations', 'typescript-document-nodes'],
-      config: {
-        fetcher: './fetcher#fetcher'
-      }
+      plugins: ['typescript', 'typescript-operations', 'typescript-document-nodes']
     }
   }
 };

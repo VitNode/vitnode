@@ -57,7 +57,12 @@ export class ShowCoreMembersService {
           cover: true,
           group: {
             select: {
-              name: true
+              name: {
+                select: {
+                  name: true,
+                  id_language: true
+                }
+              }
             }
           }
         },

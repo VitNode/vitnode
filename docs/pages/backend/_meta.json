@@ -3,5 +3,6 @@
   "database": "Database",
   "authorization": "Authorization",
   "files": "Files",
+  "i18n": "Internationalization",
   "practices": "Best Practices"
 }

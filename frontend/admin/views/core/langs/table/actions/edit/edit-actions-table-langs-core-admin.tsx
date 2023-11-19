@@ -15,7 +15,7 @@ const ModalEditActionsTableLangsCoreAdmin = lazy(() =>
 );
 
 export const EditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
-  const t = useTranslations('admin');
+  const t = useTranslations('core');
 
   return (
     <TooltipProvider>
@@ -25,7 +25,7 @@ export const EditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
             <DialogTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Pencil />
-                <span className="sr-only">{t('core.langs.actions.edit.title')}</span>
+                <span className="sr-only">{t('edit')}</span>
               </Button>
             </DialogTrigger>
           </TooltipTrigger>
@@ -37,7 +37,7 @@ export const EditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
           </DialogContent>
 
           <TooltipContent>
-            <p>{t('core.langs.actions.edit.title')}</p>
+            <p>{t('edit')}</p>
           </TooltipContent>
         </Tooltip>
       </Dialog>

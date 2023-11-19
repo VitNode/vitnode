@@ -39,13 +39,25 @@ model core_members {
 }
 
 model core_groups {
-  id        Int     @id @unique @default(autoincrement())
-  name      String  @db.VarChar(255)
+  id        Int                     @id @unique @default(autoincrement())
+  name      core_groups_languages[] @relation("core_groups_languages_group")
   created   Int
-  protected Boolean @default(false)
+  protected Boolean                 @default(false)
 
   members      core_members[]      @relation("core_members_group")
   admin_access core_admin_access[] @relation("core_admin_access_group")
+}
+
+model core_groups_languages {
+  id          String @id @unique @default(uuid())
+  id_language String @db.VarChar(32)
+  group_id    Int
+  name        String @db.VarChar(255)
+
+  group    core_groups    @relation("core_groups_languages_group", references: [id], fields: [group_id])
+  language core_languages @relation("core_groups_languages_language", references: [id], fields: [id_language])
+
+  @@index([id_language])
 }
 
 model core_sessions {
@@ -125,4 +137,6 @@ model core_languages {
   default   Boolean @default(false)
   enabled   Boolean @default(true)
   created   Int
+
+  groups core_groups_languages[] @relation("core_groups_languages_language")
 }
