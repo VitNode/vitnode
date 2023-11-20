@@ -65,6 +65,7 @@ export type Mutation = {
   create_admin_groups: ShowAdminGroups;
   create_database_admin_install: Scalars['String']['output'];
   delete_avatar_core_members: Scalars['String']['output'];
+  edit_admin_groups: ShowAdminGroups;
   edit_core_languages: ShowCoreLanguages;
   edit_general_admin_settings: GeneralAdminSettingsObj;
   signIn_core_sessions: Scalars['String']['output'];
@@ -76,6 +77,12 @@ export type Mutation = {
 
 
 export type MutationCreate_Admin_GroupsArgs = {
+  name: Array<TextLanguageInput>;
+};
+
+
+export type MutationEdit_Admin_GroupsArgs = {
+  id: Scalars['String']['input'];
   name: Array<TextLanguageInput>;
 };
 
@@ -182,7 +189,7 @@ export type ShowAdminGroups = {
   protected: Scalars['Boolean']['output'];
   root: Scalars['Boolean']['output'];
   updated: Scalars['Int']['output'];
-  usersCount: Scalars['Int']['output'];
+  users_count: Scalars['Int']['output'];
 };
 
 export type ShowAdminGroupsObj = {
@@ -344,7 +351,15 @@ export type Create_Admin_GroupsMutationVariables = Exact<{
 }>;
 
 
-export type Create_Admin_GroupsMutation = { __typename?: 'Mutation', create_admin_groups: { __typename?: 'ShowAdminGroups', created: number, id: string, protected: boolean, usersCount: number, guest: boolean, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
+export type Create_Admin_GroupsMutation = { __typename?: 'Mutation', create_admin_groups: { __typename?: 'ShowAdminGroups', created: number, id: string, protected: boolean, users_count: number, guest: boolean, updated: number, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
+
+export type Edit_Admin_GroupsMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+  name: Array<TextLanguageInput> | TextLanguageInput;
+}>;
+
+
+export type Edit_Admin_GroupsMutation = { __typename?: 'Mutation', edit_admin_groups: { __typename?: 'ShowAdminGroups', created: number, id: string, protected: boolean, users_count: number, guest: boolean, updated: number, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
 
 export type SignOut_Admin_SessionsMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -429,7 +444,7 @@ export type Show_Admin_GroupsQueryVariables = Exact<{
 }>;
 
 
-export type Show_Admin_GroupsQuery = { __typename?: 'Query', show_admin_groups: { __typename?: 'ShowAdminGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowAdminGroups', created: number, updated: number, id: string, usersCount: number, protected: boolean, guest: boolean, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> } };
+export type Show_Admin_GroupsQuery = { __typename?: 'Query', show_admin_groups: { __typename?: 'ShowAdminGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowAdminGroups', created: number, updated: number, id: string, users_count: number, protected: boolean, guest: boolean, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> } };
 
 export type Show_Admin_MembersQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['String']['input']>;
@@ -491,8 +506,25 @@ export const Create_Admin_Groups = gql`
       value
     }
     protected
-    usersCount
+    users_count
     guest
+    updated
+  }
+}
+    `;
+export const Edit_Admin_Groups = gql`
+    mutation Edit_admin_groups($id: String!, $name: [TextLanguageInput!]!) {
+  edit_admin_groups(id: $id, name: $name) {
+    created
+    id
+    name {
+      id_language
+      value
+    }
+    protected
+    users_count
+    guest
+    updated
   }
 }
     `;
@@ -622,7 +654,7 @@ export const Show_Admin_Groups = gql`
       created
       updated
       id
-      usersCount
+      users_count
       protected
       guest
       name {

@@ -33,12 +33,12 @@ export const ContentTableGroupsMembersAdmin = () => {
       },
       {
         header: t('table.users_count'),
-        accessorKey: 'usersCount',
+        accessorKey: 'users_count',
         cell: ({ row }) => {
           const data = row.original;
 
           return !data.guest ? (
-            <Link href={`/admin/members/users?groups=${data.id}`}>{data.usersCount}</Link>
+            <Link href={`/admin/members/users?groups=${data.id}`}>{data.users_count}</Link>
           ) : null;
         }
       },

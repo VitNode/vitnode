@@ -44,6 +44,7 @@ type Mutation {
   create_admin_groups(name: [TextLanguageInput!]!): ShowAdminGroups!
   create_database_admin_install: String!
   delete_avatar_core_members: String!
+  edit_admin_groups(id: String!, name: [TextLanguageInput!]!): ShowAdminGroups!
   edit_core_languages(default: Boolean!, enabled: Boolean!, id: String!, name: String!, timezone: String!): ShowCoreLanguages!
   edit_general_admin_settings(side_name: String!): GeneralAdminSettingsObj!
   signIn_core_sessions(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
@@ -81,7 +82,7 @@ type ShowAdminGroups {
   protected: Boolean!
   root: Boolean!
   updated: Int!
-  usersCount: Int!
+  users_count: Int!
 }
 
 type ShowAdminGroupsObj {

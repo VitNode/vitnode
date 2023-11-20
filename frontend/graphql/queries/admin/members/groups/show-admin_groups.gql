@@ -18,7 +18,7 @@ query Show_admin_groups(
       created
       updated
       id
-      usersCount
+      users_count
       protected
       guest
       name {

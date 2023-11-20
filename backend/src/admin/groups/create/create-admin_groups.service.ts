@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { ShowAdminGroups } from '../show/dto/show-admin_groups.obj';
-import { CreateAdminGroupsArgs } from './dto/show-admin_groups.args';
+import { CreateAdminGroupsArgs } from './dto/create-admin_groups.args';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { currentDate } from '@/functions/date';
@@ -32,7 +32,7 @@ export class CreateAdminGroupsService {
           name: true
         }
       })),
-      usersCount: 0
+      users_count: 0
     };
   }
 }

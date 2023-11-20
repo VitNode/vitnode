@@ -66,14 +66,19 @@
           "users_count": "Users",
           "updated": "Updated"
         },
-        "create": {
-          "title": "Create Group",
+        "create_edit": {
           "form": {
             "name": {
               "label": "Name"
             }
-          },
+          }
+        },
+        "create": {
+          "title": "Create Group",
           "success": "Group created"
+        },
+        "edit": {
+          "success": "Group updated"
         }
       }
     },

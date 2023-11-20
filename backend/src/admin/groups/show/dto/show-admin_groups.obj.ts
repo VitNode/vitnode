@@ -21,7 +21,7 @@ export class ShowAdminGroups {
   name: TextLanguage[];
 
   @Field(() => Int)
-  usersCount: number;
+  users_count: number;
 
   @Field(() => Int)
   created: number;

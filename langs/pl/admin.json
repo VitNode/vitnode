@@ -66,14 +66,19 @@
           "users_count": "Użytkownicy",
           "updated": "Zaktualizowano"
         },
-        "create": {
-          "title": "Stwórz grupę",
+        "create_edit": {
           "form": {
             "name": {
               "label": "Nazwa"
             }
-          },
+          }
+        },
+        "create": {
+          "title": "Stwórz grupę",
           "success": "Grupa została stworzona"
+        },
+        "edit": {
+          "success": "Grupa została zaktualizowana"
         }
       }
     },

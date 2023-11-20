@@ -69,7 +69,7 @@ export class ShowAdminGroupsService {
       edges.map(async edge => {
         return {
           ...edge,
-          usersCount: await this.prisma.core_members.count({
+          users_count: await this.prisma.core_members.count({
             where: {
               group_id: edge.id
             }

@@ -1,5 +1,5 @@
-mutation Create_admin_groups($name: [TextLanguageInput!]!) {
-  create_admin_groups(name: $name) {
+mutation Edit_admin_groups($id: String!, $name: [TextLanguageInput!]!) {
+  edit_admin_groups(id: $id, name: $name) {
     created
     id
     name {

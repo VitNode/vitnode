@@ -5,7 +5,7 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/comp
 import { TextInputLanguage } from '@/components/text-input-language';
 
 export const MainContentCreateEditFormGroupsMembersAdmin = () => {
-  const t = useTranslations('admin.members.groups.create.form');
+  const t = useTranslations('admin.members.groups.create_edit.form');
   const form = useFormContext();
 
   return (
