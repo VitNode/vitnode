@@ -80,6 +80,7 @@ type ShowAdminGroups {
   name: [TextLanguage!]!
   protected: Boolean!
   root: Boolean!
+  updated: Int!
   usersCount: Int!
 }
 
@@ -95,6 +96,7 @@ input ShowAdminGroupsSortByArgs {
 
 enum ShowAdminGroupsSortingColumnEnum {
   created
+  updated
 }
 
 type ShowAdminMembers {

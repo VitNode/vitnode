@@ -45,6 +45,7 @@ export class ShowAdminGroupsService {
           default: true,
           root: true,
           guest: true,
+          updated: true,
           name: {
             select: {
               id_language: true,
@@ -55,7 +56,7 @@ export class ShowAdminGroupsService {
         orderBy: inputSorting<ShowAdminGroupsSortingColumnEnum>({
           sortBy,
           defaultSortBy: {
-            column: ShowAdminGroupsSortingColumnEnum.created,
+            column: ShowAdminGroupsSortingColumnEnum.updated,
             direction: SortDirectionEnum.desc
           }
         }),

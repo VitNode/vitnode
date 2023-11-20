@@ -16,6 +16,7 @@ query Show_admin_groups(
     }
     edges {
       created
+      updated
       id
       usersCount
       protected

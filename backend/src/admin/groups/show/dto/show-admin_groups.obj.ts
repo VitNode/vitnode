@@ -26,6 +26,9 @@ export class ShowAdminGroups {
   @Field(() => Int)
   created: number;
 
+  @Field(() => Int)
+  updated: number;
+
   @Field(() => Boolean)
   protected: boolean;
 

@@ -181,6 +181,7 @@ export type ShowAdminGroups = {
   name: Array<TextLanguage>;
   protected: Scalars['Boolean']['output'];
   root: Scalars['Boolean']['output'];
+  updated: Scalars['Int']['output'];
   usersCount: Scalars['Int']['output'];
 };
 
@@ -196,7 +197,8 @@ export type ShowAdminGroupsSortByArgs = {
 };
 
 export enum ShowAdminGroupsSortingColumnEnum {
-  Created = 'created'
+  Created = 'created',
+  Updated = 'updated'
 }
 
 export type ShowAdminMembers = {
@@ -427,7 +429,7 @@ export type Show_Admin_GroupsQueryVariables = Exact<{
 }>;
 
 
-export type Show_Admin_GroupsQuery = { __typename?: 'Query', show_admin_groups: { __typename?: 'ShowAdminGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowAdminGroups', created: number, id: string, usersCount: number, protected: boolean, guest: boolean, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> } };
+export type Show_Admin_GroupsQuery = { __typename?: 'Query', show_admin_groups: { __typename?: 'ShowAdminGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowAdminGroups', created: number, updated: number, id: string, usersCount: number, protected: boolean, guest: boolean, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> } };
 
 export type Show_Admin_MembersQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['String']['input']>;
@@ -618,6 +620,7 @@ export const Show_Admin_Groups = gql`
     }
     edges {
       created
+      updated
       id
       usersCount
       protected

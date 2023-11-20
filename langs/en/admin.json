@@ -63,7 +63,8 @@
         "title": "Groups",
         "table": {
           "name": "Name",
-          "users_count": "Users"
+          "users_count": "Users",
+          "updated": "Updated"
         },
         "create": {
           "title": "Create Group",

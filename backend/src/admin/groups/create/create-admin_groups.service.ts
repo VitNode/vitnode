@@ -25,7 +25,8 @@ export class CreateAdminGroupsService {
           name: {
             create: name
           },
-          created: currentDate()
+          created: currentDate(),
+          updated: currentDate()
         },
         include: {
           name: true

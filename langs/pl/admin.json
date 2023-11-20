@@ -63,7 +63,8 @@
         "title": "Grupy",
         "table": {
           "name": "Nazwa",
-          "users_count": "Użytkownicy"
+          "users_count": "Użytkownicy",
+          "updated": "Zaktualizowano"
         },
         "create": {
           "title": "Stwórz grupę",

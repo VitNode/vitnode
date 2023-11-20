@@ -58,6 +58,7 @@ export class CreateDatabaseAdminInstallService {
       this.prisma.core_groups.create({
         data: {
           created: currentDate(),
+          updated: currentDate(),
           protected: true,
           guest: true,
           name: {
@@ -77,6 +78,7 @@ export class CreateDatabaseAdminInstallService {
       this.prisma.core_groups.create({
         data: {
           created: currentDate(),
+          updated: currentDate(),
           name: {
             create: [
               {
@@ -94,6 +96,7 @@ export class CreateDatabaseAdminInstallService {
       this.prisma.core_groups.create({
         data: {
           created: currentDate(),
+          updated: currentDate(),
           protected: true,
           default: true,
           name: {
@@ -113,6 +116,7 @@ export class CreateDatabaseAdminInstallService {
       this.prisma.core_groups.create({
         data: {
           created: currentDate(),
+          updated: currentDate(),
           protected: true,
           root: true,
           name: {
@@ -131,7 +135,8 @@ export class CreateDatabaseAdminInstallService {
             create: [
               {
                 permissions: '*',
-                created: currentDate()
+                created: currentDate(),
+                updated: currentDate()
               }
             ]
           }

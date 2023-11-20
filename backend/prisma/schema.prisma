@@ -42,6 +42,7 @@ model core_groups {
   id        String                  @id @unique @default(uuid())
   name      core_groups_languages[] @relation("core_groups_languages_group")
   created   Int
+  updated   Int
   protected Boolean                 @default(false)
   default   Boolean                 @default(false)
   root      Boolean                 @default(false)
@@ -71,6 +72,7 @@ model core_admin_permissions {
   member_id   String?
   permissions String        @db.Text
   created     Int
+  updated     Int
 }
 
 model core_sessions {
