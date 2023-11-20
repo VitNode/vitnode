@@ -8,27 +8,28 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Loader } from '@/components/loader/loader';
 
-const CreateActionsGroupsMembersDialogAdmin = lazy(() =>
-  import('./create/create-actions-groups-members-dialog-admin').then(module => ({
-    default: module.CreateActionsGroupsMembersDialogAdmin
+const CreateEditFormGroupsMembersAdmin = lazy(() =>
+  import('../create-edit-form/create-edit-form-groups-members-admin').then(module => ({
+    default: module.CreateEditFormGroupsMembersAdmin
   }))
 );
 
 export const ActionsGroupsMembersAdmin = () => {
-  const t = useTranslations('core');
+  const t = useTranslations('admin.members.groups');
+  const tCore = useTranslations('core');
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button>
           <Plus />
-          {t('create')}
+          {tCore('create')}
         </Button>
       </DialogTrigger>
 
-      <DialogContent onPointerDownOutside={e => e.preventDefault()} className="max-w-3xl">
+      <DialogContent className="max-w-3xl">
         <Suspense fallback={<Loader />}>
-          <CreateActionsGroupsMembersDialogAdmin />
+          <CreateEditFormGroupsMembersAdmin title={t('create.title')} />
         </Suspense>
       </DialogContent>
     </Dialog>

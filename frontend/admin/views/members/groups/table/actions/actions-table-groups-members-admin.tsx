@@ -1,10 +1,10 @@
-import { Pencil, Trash2 } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-import { Button, buttonVariants } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Link } from '@/i18n';
 import { ShowAdminGroups } from '@/graphql/hooks';
+import { EditGroupsMembersDialogAdmin } from './edit/edit-groups-members-dialog-admin';
 
 interface Props {
   data: Omit<ShowAdminGroups, 'default' | 'root'>;
@@ -15,23 +15,7 @@ export const ActionsTableGroupsMembersAdmin = ({ data }: Props) => {
 
   return (
     <div className="flex items-center justify-end">
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Link
-              href={`/admin/members/groups/${data.id}`}
-              className={buttonVariants({
-                variant: 'ghost',
-                size: 'icon'
-              })}
-            >
-              <Pencil />
-              <span className="sr-only">{t('edit')}</span>
-            </Link>
-          </TooltipTrigger>
-          <TooltipContent>{t('edit')}</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      <EditGroupsMembersDialogAdmin data={data} />
 
       {!data.protected && (
         <TooltipProvider>

@@ -11,6 +11,7 @@
     "version": "Wersja: {version}",
     "delete": "Usuń",
     "edit": "Edytuj",
+    "edit_with_value": "Edytuj - {value}",
     "create": "Utwórz",
     "pagination": {
       "previous": "Poprzednia strona",
