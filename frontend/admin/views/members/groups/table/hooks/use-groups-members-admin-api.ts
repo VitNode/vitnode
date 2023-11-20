@@ -14,7 +14,7 @@ export const useGroupMembersAdminAPI = () => {
   const pagination = {
     first: searchParams.get('first') ?? 0,
     last: searchParams.get('last'),
-    cursor: searchParams.get('cursor')
+    cursor: searchParams.get('cursor') ?? null
   };
 
   return useQuery({
@@ -27,7 +27,7 @@ export const useGroupMembersAdminAPI = () => {
         variables: {
           first: pagination.first ? +pagination.first : defaultFirst,
           last: pagination.last ? +pagination.last : null,
-          cursor: pagination.cursor ? +pagination.cursor : null
+          cursor: pagination.cursor
         }
       });
     },

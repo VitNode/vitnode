@@ -1,6 +1,6 @@
 query Show_admin_groups(
   $first: Int
-  $cursor: Int
+  $cursor: String
   $search: String
   $sortBy: [ShowAdminGroupsSortByArgs!]
   $last: Int
@@ -19,6 +19,7 @@ query Show_admin_groups(
       id
       usersCount
       protected
+      guest
       name {
         id_language
         value

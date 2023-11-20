@@ -117,7 +117,7 @@ export class AuthorizationAdminSessionsService {
       }
 
       // Check if user has access to admin cp
-      const accessToAdminCP = await this.prisma.core_admin_access.findFirst({
+      const accessToAdminCP = await this.prisma.core_admin_permissions.findFirst({
         where: {
           OR: [
             {

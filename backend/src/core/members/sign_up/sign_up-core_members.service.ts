@@ -22,7 +22,34 @@ export class SignUpCoreMembersService {
     newsletter,
     password
   }: SignUpCoreMembersArgs): Promise<SignUpCoreMembersObj> {
-    const isAdmin = !(await this.prisma.core_members.count());
+    const isAdmin = async (): Promise<string> => {
+      const count = await this.prisma.core_members.count();
+
+      if (!count) {
+        return (
+          await this.prisma.core_groups.findFirst({
+            where: {
+              default: false,
+              root: true
+            },
+            select: {
+              id: true
+            }
+          })
+        ).id;
+      }
+
+      return (
+        await this.prisma.core_groups.findFirst({
+          where: {
+            default: true
+          },
+          select: {
+            id: true
+          }
+        })
+      ).id;
+    };
     const checkEmail = await this.prisma.core_members.findUnique({
       where: {
         email
@@ -78,7 +105,7 @@ export class SignUpCoreMembersService {
         birthday,
         group: {
           connect: {
-            id: isAdmin ? 4 : 3
+            id: await isAdmin()
           }
         }
       },

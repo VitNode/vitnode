@@ -42,6 +42,9 @@ export class ShowAdminGroupsService {
           id: true,
           created: true,
           protected: true,
+          default: true,
+          root: true,
+          guest: true,
           name: {
             select: {
               id_language: true,

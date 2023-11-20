@@ -54,88 +54,90 @@ export class CreateDatabaseAdminInstallService {
       this.throwError();
     }
 
-    await this.prisma.core_groups.createMany({
-      data: [
-        {
-          id: 1,
+    await this.prisma.$transaction([
+      this.prisma.core_groups.create({
+        data: {
           created: currentDate(),
-          protected: true
-        },
-        {
-          id: 2,
-          created: currentDate()
-        },
-        {
-          id: 3,
-          created: currentDate(),
-          protected: true
-        },
-        {
-          id: 4,
-          created: currentDate(),
-          protected: true
+          protected: true,
+          guest: true,
+          name: {
+            create: [
+              {
+                id_language: 'en',
+                value: 'Guest'
+              },
+              {
+                id_language: 'pl',
+                value: 'Gość'
+              }
+            ]
+          }
         }
-      ]
-    });
-
-    await this.prisma.core_groups_languages.createMany({
-      data: [
-        {
-          group_id: 1,
-          value: 'Guest',
-          id_language: 'en'
-        },
-        {
-          group_id: 2,
-          value: 'Moderator',
-          id_language: 'en'
-        },
-        {
-          group_id: 3,
-          value: 'Member',
-          id_language: 'en'
-        },
-        {
-          group_id: 4,
-          value: 'Administrator',
-          id_language: 'en'
-        },
-        {
-          group_id: 1,
-          value: 'Gość',
-          id_language: 'pl'
-        },
-        {
-          group_id: 2,
-          value: 'Moderator',
-          id_language: 'pl'
-        },
-        {
-          group_id: 3,
-          value: 'Użytkownik',
-          id_language: 'pl'
-        },
-        {
-          group_id: 4,
-          value: 'Administrator',
-          id_language: 'pl'
+      }),
+      this.prisma.core_groups.create({
+        data: {
+          created: currentDate(),
+          name: {
+            create: [
+              {
+                id_language: 'en',
+                value: 'Moderator'
+              },
+              {
+                id_language: 'pl',
+                value: 'Moderator'
+              }
+            ]
+          }
         }
-      ]
-    });
-
-    // Create default permissions for admin
-    const permissionCount = await this.prisma.core_admin_access.count();
-    if (permissionCount > 0) {
-      this.throwError();
-    }
-
-    await this.prisma.core_admin_access.create({
-      data: {
-        group_id: 4,
-        permissions: '*',
-        created: currentDate()
-      }
-    });
+      }),
+      this.prisma.core_groups.create({
+        data: {
+          created: currentDate(),
+          protected: true,
+          default: true,
+          name: {
+            create: [
+              {
+                id_language: 'en',
+                value: 'Member'
+              },
+              {
+                id_language: 'pl',
+                value: 'Użytkownik'
+              }
+            ]
+          }
+        }
+      }),
+      this.prisma.core_groups.create({
+        data: {
+          created: currentDate(),
+          protected: true,
+          root: true,
+          name: {
+            create: [
+              {
+                id_language: 'en',
+                value: 'Administrator'
+              },
+              {
+                id_language: 'pl',
+                value: 'Administrator'
+              }
+            ]
+          },
+          admin_permissions: {
+            create: [
+              {
+                permissions: '*',
+                created: currentDate()
+              }
+            ]
+          }
+        }
+      })
+    ]);
 
     return 'Success!';
   }

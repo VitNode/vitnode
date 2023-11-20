@@ -43,6 +43,6 @@ export class ShowAdminMembersArgs {
   @Field(() => String, { nullable: true })
   search?: string;
 
-  @Field(() => [Int], { nullable: true })
-  groups?: number[];
+  @Field(() => [String], { nullable: true })
+  groups?: string[];
 }

@@ -32,7 +32,7 @@ export type AuthorizationCurrentUserObj = {
   avatar_color: Scalars['String']['output'];
   birthday: Scalars['Int']['output'];
   email: Scalars['String']['output'];
-  group_id: Scalars['Int']['output'];
+  group_id: Scalars['String']['output'];
   id: Scalars['String']['output'];
   is_admin: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
@@ -62,6 +62,7 @@ export type LayoutAdminInstallObj = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  create_admin_groups: ShowAdminGroups;
   create_database_admin_install: Scalars['String']['output'];
   delete_avatar_core_members: Scalars['String']['output'];
   edit_core_languages: ShowCoreLanguages;
@@ -71,6 +72,11 @@ export type Mutation = {
   signOut_core_sessions: Scalars['String']['output'];
   signUp_core_members: SignUpCoreMembersObj;
   upload_avatar_core_members: UploadCoreAttachmentsObj;
+};
+
+
+export type MutationCreate_Admin_GroupsArgs = {
+  name: Array<TextLanguageInput>;
 };
 
 
@@ -132,7 +138,7 @@ export type Query = {
 
 
 export type QueryShow_Admin_GroupsArgs = {
-  cursor?: InputMaybe<Scalars['Int']['input']>;
+  cursor?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
@@ -143,7 +149,7 @@ export type QueryShow_Admin_GroupsArgs = {
 export type QueryShow_Admin_MembersArgs = {
   cursor?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
-  groups?: InputMaybe<Array<Scalars['Int']['input']>>;
+  groups?: InputMaybe<Array<Scalars['String']['input']>>;
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<Array<ShowAdminMembersSortByArgs>>;
@@ -169,9 +175,12 @@ export type QueryShow_Core_MembersArgs = {
 export type ShowAdminGroups = {
   __typename?: 'ShowAdminGroups';
   created: Scalars['Int']['output'];
-  id: Scalars['Int']['output'];
+  default: Scalars['Boolean']['output'];
+  guest: Scalars['Boolean']['output'];
+  id: Scalars['String']['output'];
   name: Array<TextLanguage>;
   protected: Scalars['Boolean']['output'];
+  root: Scalars['Boolean']['output'];
   usersCount: Scalars['Int']['output'];
 };
 
@@ -187,8 +196,7 @@ export type ShowAdminGroupsSortByArgs = {
 };
 
 export enum ShowAdminGroupsSortingColumnEnum {
-  Created = 'created',
-  Name = 'name'
+  Created = 'created'
 }
 
 export type ShowAdminMembers = {
@@ -287,7 +295,7 @@ export type SignUpCoreMembersObj = {
   __typename?: 'SignUpCoreMembersObj';
   birthday: Scalars['Int']['output'];
   email: Scalars['String']['output'];
-  group_id: Scalars['Int']['output'];
+  group_id: Scalars['String']['output'];
   name: Scalars['String']['output'];
   newsletter?: Maybe<Scalars['Boolean']['output']>;
 };
@@ -301,6 +309,11 @@ export type TextLanguage = {
   __typename?: 'TextLanguage';
   id_language: Scalars['String']['output'];
   value: Scalars['String']['output'];
+};
+
+export type TextLanguageInput = {
+  id_language: Scalars['String']['input'];
+  value: Scalars['String']['input'];
 };
 
 export type UploadCoreAttachmentsObj = {
@@ -396,18 +409,18 @@ export type Short_Show_Groups_Admin_MembersQueryVariables = Exact<{
 }>;
 
 
-export type Short_Show_Groups_Admin_MembersQuery = { __typename?: 'Query', show_admin_groups: { __typename?: 'ShowAdminGroupsObj', edges: Array<{ __typename?: 'ShowAdminGroups', id: number, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> } };
+export type Short_Show_Groups_Admin_MembersQuery = { __typename?: 'Query', show_admin_groups: { __typename?: 'ShowAdminGroupsObj', edges: Array<{ __typename?: 'ShowAdminGroups', id: string, guest: boolean, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> } };
 
 export type Show_Admin_GroupsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
-  cursor?: InputMaybe<Scalars['Int']['input']>;
+  cursor?: InputMaybe<Scalars['String']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<Array<ShowAdminGroupsSortByArgs> | ShowAdminGroupsSortByArgs>;
   last?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type Show_Admin_GroupsQuery = { __typename?: 'Query', show_admin_groups: { __typename?: 'ShowAdminGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowAdminGroups', created: number, id: number, usersCount: number, protected: boolean, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> } };
+export type Show_Admin_GroupsQuery = { __typename?: 'Query', show_admin_groups: { __typename?: 'ShowAdminGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowAdminGroups', created: number, id: string, usersCount: number, protected: boolean, guest: boolean, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> } };
 
 export type Show_Admin_MembersQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['String']['input']>;
@@ -415,7 +428,7 @@ export type Show_Admin_MembersQueryVariables = Exact<{
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<Array<ShowAdminMembersSortByArgs> | ShowAdminMembersSortByArgs>;
-  groups?: InputMaybe<Array<Scalars['Int']['input']> | Scalars['Int']['input']>;
+  groups?: InputMaybe<Array<Scalars['String']['input']> | Scalars['String']['input']>;
 }>;
 
 
@@ -424,7 +437,7 @@ export type Show_Admin_MembersQuery = { __typename?: 'Query', show_admin_members
 export type Authorization_Admin_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Authorization_Admin_SessionsQuery = { __typename?: 'Query', authorization_admin_sessions: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, newsletter?: boolean | null, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } | null } };
+export type Authorization_Admin_SessionsQuery = { __typename?: 'Query', authorization_admin_sessions: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: string, id: string, is_admin: boolean, name: string, newsletter?: boolean | null, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } | null } };
 
 export type Middleware_Core_LanguagesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -451,7 +464,7 @@ export type Profiles_Core_MembersQuery = { __typename?: 'Query', show_core_membe
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: number, id: string, is_admin: boolean, name: string, newsletter?: boolean | null, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } | null }, show_core_languages: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string }> } };
+export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: string, id: string, is_admin: boolean, name: string, newsletter?: boolean | null, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } | null }, show_core_languages: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string }> } };
 
 
 export const Create_Database_Admin_Install = gql`
@@ -559,12 +572,13 @@ export const Short_Show_Groups_Admin_Members = gql`
         id_language
         value
       }
+      guest
     }
   }
 }
     `;
 export const Show_Admin_Groups = gql`
-    query Show_admin_groups($first: Int, $cursor: Int, $search: String, $sortBy: [ShowAdminGroupsSortByArgs!], $last: Int) {
+    query Show_admin_groups($first: Int, $cursor: String, $search: String, $sortBy: [ShowAdminGroupsSortByArgs!], $last: Int) {
   show_admin_groups(
     first: $first
     cursor: $cursor
@@ -585,6 +599,7 @@ export const Show_Admin_Groups = gql`
       id
       usersCount
       protected
+      guest
       name {
         id_language
         value
@@ -594,7 +609,7 @@ export const Show_Admin_Groups = gql`
 }
     `;
 export const Show_Admin_Members = gql`
-    query Show_admin_members($cursor: String, $first: Int, $last: Int, $search: String, $sortBy: [ShowAdminMembersSortByArgs!], $groups: [Int!]) {
+    query Show_admin_members($cursor: String, $first: Int, $last: Int, $search: String, $sortBy: [ShowAdminMembersSortByArgs!], $groups: [String!]) {
   show_admin_members(
     cursor: $cursor
     first: $first

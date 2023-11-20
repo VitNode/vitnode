@@ -38,7 +38,7 @@ export const useUsersMembersAdminAPI = () => {
           last: params.last ? +params.last : null,
           cursor: params.cursor,
           search: params.search,
-          groups: params.groups.map(group => +group)
+          groups: params.groups
         },
         signal
       });

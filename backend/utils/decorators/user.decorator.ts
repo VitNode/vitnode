@@ -25,8 +25,8 @@ export class User {
   @Field(() => Boolean, { nullable: true })
   newsletter?: boolean;
 
-  @Field(() => Int)
-  group_id: number;
+  @Field(() => String)
+  group_id: string;
 
   @Field(() => String)
   avatar_color: string;

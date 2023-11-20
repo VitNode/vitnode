@@ -16,7 +16,7 @@ model core_members {
   email                String            @unique @db.VarChar(255)
   password             String            @db.Text
   group                core_groups       @relation("core_members_group", references: [id], fields: [group_id])
-  group_id             Int               @default(3)
+  group_id             String
   joined               Int
   birthday             Int
   avatar               core_attachments? @relation("core_members_avatar", fields: [avatar_id], references: [id])
@@ -30,34 +30,47 @@ model core_members {
   avatar_color         String            @db.VarChar(6)
   unread_notifications Int               @default(0)
 
-  attachments    core_attachments[]    @relation("core_attachments_member")
-  sessions       core_sessions[]       @relation("core_sessions_member")
-  admin_sessions core_admin_sessions[] @relation("core_admin_sessions_member")
-  admin_access   core_admin_access[]   @relation("core_admin_access_member")
+  attachments       core_attachments[]       @relation("core_attachments_member")
+  sessions          core_sessions[]          @relation("core_sessions_member")
+  admin_sessions    core_admin_sessions[]    @relation("core_admin_sessions_member")
+  admin_permissions core_admin_permissions[] @relation("core_admin_permissions_member")
 
   @@index([group_id])
 }
 
 model core_groups {
-  id        Int                     @id @unique @default(autoincrement())
+  id        String                  @id @unique @default(uuid())
   name      core_groups_languages[] @relation("core_groups_languages_group")
   created   Int
   protected Boolean                 @default(false)
+  default   Boolean                 @default(false)
+  root      Boolean                 @default(false)
+  guest     Boolean                 @default(false)
 
-  members      core_members[]      @relation("core_members_group")
-  admin_access core_admin_access[] @relation("core_admin_access_group")
+  members           core_members[]           @relation("core_members_group")
+  admin_permissions core_admin_permissions[] @relation("core_admin_permissions_group")
 }
 
 model core_groups_languages {
   id          String @id @unique @default(uuid())
   id_language String @db.VarChar(32)
-  group_id    Int
+  group_id    String
   value       String @db.VarChar(255)
 
   group    core_groups    @relation("core_groups_languages_group", references: [id], fields: [group_id])
   language core_languages @relation("core_groups_languages_language", references: [id], fields: [id_language])
 
   @@index([id_language])
+}
+
+model core_admin_permissions {
+  id          String        @id @unique @default(uuid())
+  group       core_groups?  @relation("core_admin_permissions_group", references: [id], fields: [group_id])
+  group_id    String?
+  member      core_members? @relation("core_admin_permissions_member", references: [id], fields: [member_id])
+  member_id   String?
+  permissions String        @db.Text
+  created     Int
 }
 
 model core_sessions {
@@ -77,16 +90,6 @@ model core_sessions {
   expires              Int
 
   @@index([member_id])
-}
-
-model core_admin_access {
-  id          String        @id @unique @default(uuid())
-  group       core_groups?  @relation("core_admin_access_group", references: [id], fields: [group_id])
-  group_id    Int?
-  member      core_members? @relation("core_admin_access_member", references: [id], fields: [member_id])
-  member_id   String?
-  permissions String        @db.Text
-  created     Int
 }
 
 model core_admin_sessions {

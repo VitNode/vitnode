@@ -7,7 +7,7 @@ import { Link } from '@/i18n';
 import { ShowAdminGroups } from '@/graphql/hooks';
 
 interface Props {
-  data: ShowAdminGroups;
+  data: Omit<ShowAdminGroups, 'default' | 'root'>;
 }
 
 export const ActionsTableGroupsMembersAdmin = ({ data }: Props) => {

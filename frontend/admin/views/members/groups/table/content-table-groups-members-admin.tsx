@@ -15,7 +15,7 @@ export const ContentTableGroupsMembersAdmin = () => {
   const { data, isFetching, isLoading, isPending } = useGroupMembersAdminAPI();
   const { convertText } = useTextLang();
 
-  const columns: ColumnDef<ShowAdminGroups>[] = useMemo(
+  const columns: ColumnDef<Omit<ShowAdminGroups, 'default' | 'root'>>[] = useMemo(
     () => [
       {
         header: t('table.name'),
@@ -36,7 +36,7 @@ export const ContentTableGroupsMembersAdmin = () => {
         cell: ({ row }) => {
           const data = row.original;
 
-          return data.id !== 1 ? (
+          return !data.guest ? (
             <Link href={`/admin/members/users?groups=${data.id}`}>{data.usersCount}</Link>
           ) : null;
         }
