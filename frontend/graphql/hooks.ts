@@ -337,6 +337,13 @@ export type Create_Database_Admin_InstallMutationVariables = Exact<{ [key: strin
 
 export type Create_Database_Admin_InstallMutation = { __typename?: 'Mutation', create_database_admin_install: string };
 
+export type Create_Admin_GroupsMutationVariables = Exact<{
+  name: Array<TextLanguageInput> | TextLanguageInput;
+}>;
+
+
+export type Create_Admin_GroupsMutation = { __typename?: 'Mutation', create_admin_groups: { __typename?: 'ShowAdminGroups', created: number, id: string, protected: boolean, usersCount: number, guest: boolean, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
+
 export type SignOut_Admin_SessionsMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -470,6 +477,21 @@ export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authoriza
 export const Create_Database_Admin_Install = gql`
     mutation Create_database_admin_install {
   create_database_admin_install
+}
+    `;
+export const Create_Admin_Groups = gql`
+    mutation Create_admin_groups($name: [TextLanguageInput!]!) {
+  create_admin_groups(name: $name) {
+    created
+    id
+    name {
+      id_language
+      value
+    }
+    protected
+    usersCount
+    guest
+  }
 }
     `;
 export const SignOut_Admin_Sessions = gql`

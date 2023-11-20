@@ -1,0 +1,13 @@
+mutation Create_admin_groups($name: [TextLanguageInput!]!) {
+  create_admin_groups(name: $name) {
+    created
+    id
+    name {
+      id_language
+      value
+    }
+    protected
+    usersCount
+    guest
+  }
+}

@@ -4,9 +4,11 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 import { zodTextInputLanguageType } from '@/components/text-input-language';
+import { useCreateGroupAdminAPI } from './use-create-group-admin-api';
 
 export const useFormCreateGroupAdmin = () => {
   const tCore = useTranslations('core');
+  const { mutateAsync, ...rest } = useCreateGroupAdminAPI();
 
   const formSchema = z.object({
     name: zodTextInputLanguageType.min(1, tCore('forms.empty')),
@@ -23,9 +25,10 @@ export const useFormCreateGroupAdmin = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // eslint-disable-next-line no-console
-    console.log(values);
+    await mutateAsync({
+      name: values.name
+    });
   };
 
-  return { form, formSchema, onSubmit };
+  return { form, formSchema, onSubmit, ...rest };
 };

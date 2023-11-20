@@ -28,7 +28,7 @@ export const CreateActionsGroupsMembersDialogAdmin = () => {
   const t = useTranslations('admin.members.groups');
   const tCore = useTranslations('core');
   const [activeTab, setActiveTab] = useState<TabsEnum>(TabsEnum.MAIN);
-  const { form, onSubmit } = useFormCreateGroupAdmin();
+  const { form, isPending, onSubmit } = useFormCreateGroupAdmin();
 
   return (
     <>
@@ -60,7 +60,7 @@ export const CreateActionsGroupsMembersDialogAdmin = () => {
             {activeTab === TabsEnum.CONTENT && <ContentCreateActionsGroupsMembersAdmin />}
           </Suspense>
 
-          <Button disabled={!form.formState.isValid} type="submit">
+          <Button disabled={!form.formState.isValid} loading={isPending} type="submit">
             {tCore('save')}
           </Button>
         </form>

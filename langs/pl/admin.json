@@ -71,7 +71,8 @@
             "name": {
               "label": "Nazwa"
             }
-          }
+          },
+          "success": "Grupa została stworzona"
         }
       }
     },
