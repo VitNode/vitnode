@@ -1,7 +1,262 @@
-# Internationalization (i18n)
-
+import { Steps } from 'nextra/components';
 import { Callout } from 'nextra/components';
 
-<Callout type="warning" emoji="⚠️">
-  This page is in progress.
+# Internationalization (i18n)
+
+Create a new multilanguage input in backend maight be a bit tricky, because VitNode dosn't provide any functions for that. But don't worry, it's not that hard. You have to follow few rules and you will be fine.
+
+## Database schema
+
+For exaple we use `core_groups` table.
+
+<Steps>
+
+### Main table
+
+Create a schema `core_groups` in `schema.prisma` file, but without `name`. This is the only difference.
+
+```prisma
+model core_groups {
+  id        String                  @id @unique @default(uuid())
+  created   Int
+  updated   Int
+  protected Boolean                 @default(false)
+  default   Boolean                 @default(false)
+  root      Boolean                 @default(false)
+  guest     Boolean                 @default(false)
+}
+```
+
+### Translation table
+
+Create a schema `core_groups_languages` in `schema.prisma` file for translation table.
+The translation table must have:
+
+- `id_language` with type `String` and `@db.VarChar(32)` value,
+- `value` with type `String` and any string value,
+- any fields for relation with main table (in our case `group_id`).
+
+```prisma
+model core_groups_languages {
+  id          String @id @unique @default(uuid())
+  id_language String @db.VarChar(32)
+  group_id    String
+  value       String @db.VarChar(255)
+}
+```
+
+### Relation
+
+Add relation to main table. Remember to add `@relation` and `@relation` name.
+
+```prisma
+model core_groups {
+  id        String                  @id @unique @default(uuid())
+  name      core_groups_languages[] @relation("core_groups_languages_group")
+  ...
+}
+```
+
+Next step is to add relation to translation table.
+
+Remember to add relation for `core_languages` table:
+
+```prisma
+language core_languages @relation("core_groups_languages_language", references: [id], fields: [id_language])
+```
+
+Here is the full code:
+
+```prisma
+model core_groups_languages {
+  id          String @id @unique @default(uuid())
+  id_language String @db.VarChar(32)
+  group_id    String
+  value       String @db.VarChar(255)
+
+  group    core_groups    @relation("core_groups_languages_group", references: [id], fields: [group_id])
+  language core_languages @relation("core_groups_languages_language", references: [id], fields: [id_language])
+
+  @@index([id_language])
+}
+```
+
+<Callout type="info" emoji="ℹ️">
+  For better performance you can add index to `id_language` field by adding `@@index([id_language])`
+  to the end of the schema.
 </Callout>
+
+</Steps>
+
+## Input field mutation
+
+For your mutation we're created for you a new type `TextLanguageInput`.
+
+Here is a code for example:
+
+```ts
+import { ArgsType, Field } from '@nestjs/graphql';
+
+import { TextLanguageInput } from '@/types/database/text-language.type';
+
+@ArgsType()
+export class CreateAdminGroupsArgs {
+  @Field(() => [TextLanguageInput])
+  name: TextLanguageInput[];
+}
+```
+
+## Object field mutation
+
+For your mutation we're created for you a new type `TextLanguage`.
+
+Here is a code for example:
+
+```ts
+import { Field, ObjectType } from '@nestjs/graphql';
+
+import { TextLanguage } from '@/types/database/text-language.type';
+
+@ObjectType()
+export class ShowAdminGroups {
+  @Field(() => [TextLanguage])
+  name: TextLanguage[];
+}
+```
+
+## Create Mutation
+
+It's no difference between normal and multilanguage mutation for create data, but thanks to `prisma` you can create data in one request and it will be saved in two tables.
+
+For our example we use `mockValues` array with `TextLanguage` type.
+
+```ts
+const mockValues: TextLanguage[] = [
+  {
+    id_language: 'en',
+    value: 'English Group'
+  }
+];
+```
+
+<Steps>
+
+### Check if translation exists
+
+Trim and filter empty values.
+
+```ts
+const transformText = mockValues.filter(item => item.value.trim().length > 0);
+```
+
+If there is no translation, throw an error.
+
+```ts
+import { CustomError } from '@/utils/errors/CustomError';
+
+if (!transformName.length) {
+  throw new CustomError({
+    code: 'BAD_REQUEST',
+    message: 'mockValues is required'
+  });
+}
+```
+
+### Create records in database
+
+```ts
+await this.prisma.core_groups.create({
+  data: {
+    name: {
+      create: transformText
+    },
+    created: currentDate(),
+    updated: currentDate()
+  }
+});
+```
+
+</Steps>
+
+You can read more about [CRUD in Prisma here](https://www.prisma.io/docs/concepts/components/prisma-client/crud#create).
+
+## Update Mutation
+
+In this case update data is a bit different.
+
+You have to check if the translation:
+
+- exists, update it,
+- doesn't exist, create it,
+- exists, but the value is empty or not passed, delete it.
+
+It may sound complicated, but it's not. We will show you how to do it.
+
+<Callout type="warning" emoji="⚠️">
+  Remember to always check if redord exists before you update it. If it doesn't exist, you have to
+  throw an error.
+</Callout>
+
+<Steps>
+
+### Get translation
+
+```ts
+const groupNames = await this.prisma.core_groups_languages.findMany({
+  where: {
+    group_id: id
+  }
+});
+```
+
+### Process data
+
+```ts
+const updatedName = await Promise.all(
+  mockValues.map(async item => {
+    const nameExist = groupNames.find(name => name.id_language === item.id_language);
+
+    if (nameExist) {
+      // If value is empty, do nothing
+      if (!nameExist.value.trim()) return;
+
+      return await this.prisma.core_groups_languages.update({
+        where: {
+          id: nameExist.id
+        },
+        data: item
+      });
+    }
+
+    return await this.prisma.core_groups_languages.create({
+      data: {
+        ...item,
+        group_id: id
+      }
+    });
+  })
+);
+```
+
+### Delete remaining translations
+
+```ts
+Promise.all(
+  groupNames.map(async item => {
+    const nameExist = updatedName.find(name => name.id === item.id);
+    if (nameExist) return;
+
+    await this.prisma.core_groups_languages.delete({
+      where: {
+        id: item.id
+      }
+    });
+  })
+);
+```
+
+</Steps>
+
+## Delete Mutation
+
+test

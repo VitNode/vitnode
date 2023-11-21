@@ -35,7 +35,7 @@ export class EditAdminGroupsService {
 
         if (nameExist) {
           // If value is empty, do nothing
-          if (!nameExist.value) return;
+          if (!nameExist.value.trim()) return;
 
           return await this.prisma.core_groups_languages.update({
             where: {

@@ -12,7 +12,9 @@ export class CreateAdminGroupsService {
   constructor(private prisma: PrismaService) {}
 
   async create({ name }: CreateAdminGroupsArgs): Promise<ShowAdminGroups> {
-    if (!name.length) {
+    const transformName = name.filter(item => item.value.trim().length > 0);
+
+    if (!transformName.length) {
       throw new CustomError({
         code: 'BAD_REQUEST',
         message: 'Name is required'
@@ -23,7 +25,7 @@ export class CreateAdminGroupsService {
       ...(await this.prisma.core_groups.create({
         data: {
           name: {
-            create: name
+            create: transformName
           },
           created: currentDate(),
           updated: currentDate()
