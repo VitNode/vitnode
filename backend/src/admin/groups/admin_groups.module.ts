@@ -6,6 +6,8 @@ import { CreateAdminGroupsService } from './create/create-admin_groups.service';
 import { CreateAdminGroupsResolver } from './create/create-admin_groups.resolver';
 import { EditAdminGroupsService } from './edit/edit-admin_groups.service';
 import { EditAdminGroupsResolver } from './edit/edit-admin_groups.resolver';
+import { DeleteAdminGroupsResolver } from './delete/delete-admin_groups.resolver';
+import { DeleteAdminGroupsService } from './delete/delete-admin_groups.service';
 
 @Module({
   providers: [
@@ -14,7 +16,9 @@ import { EditAdminGroupsResolver } from './edit/edit-admin_groups.resolver';
     CreateAdminGroupsService,
     CreateAdminGroupsResolver,
     EditAdminGroupsService,
-    EditAdminGroupsResolver
+    EditAdminGroupsResolver,
+    DeleteAdminGroupsResolver,
+    DeleteAdminGroupsService
   ]
 })
 export class AdminGroupsModule {}

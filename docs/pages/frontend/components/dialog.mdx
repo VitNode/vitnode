@@ -158,3 +158,36 @@ export const Test = () => {
   );
 };
 ```
+
+## Alert Dialog
+
+In this component rules are the same.
+
+## Hook State
+
+We're created context to control dialog state `open` and `setOpen`. You can use it as hook inside dialog component.
+
+import { Tabs } from 'nextra/components';
+ 
+<Tabs items={['Dialog', 'AlertDialog']}>
+  <Tabs.Tab>
+  
+  ```tsx
+  import { useDialog } from '@/components/ui/dialog';
+  
+  const { open, setOpen } = useDialog();
+  ```
+  
+  </Tabs.Tab>
+  <Tabs.Tab>
+  
+  ```tsx
+  import { useAlertDialog } from '@/components/ui/alert-dialog';
+  
+  const { open, setOpen } = useAlertDialog();
+  ```
+  
+  </Tabs.Tab>
+</Tabs
+
+>

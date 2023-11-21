@@ -79,6 +79,12 @@
         },
         "edit": {
           "success": "Grupa została zaktualizowana"
+        },
+        "delete": {
+          "text": "Ta akcja usunie tą grupę permanentnie. Wszyscy użytkownicy zostaną przeniesieni do domyślnej grupy.",
+          "form_confirm_text": "Wpisz nazwę grupy <text></text>, aby potwierdzić.",
+          "submit": "Tak, usuń grupę",
+          "success": "Grupa została usunięta"
         }
       }
     },
