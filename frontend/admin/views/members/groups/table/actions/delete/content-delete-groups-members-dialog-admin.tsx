@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -15,6 +14,8 @@ import { ShowAdminGroups } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useDeleteGroupAdminAPI } from './hooks/use-delete-group-admin-api';
+import { Button } from '@/components/ui/button';
 
 interface Props {
   data: Pick<ShowAdminGroups, 'id' | 'name'>;
@@ -25,6 +26,7 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
   const tCore = useTranslations('core');
   const { convertText } = useTextLang();
   const name = convertText(data.name);
+  const { isPending, mutateAsync } = useDeleteGroupAdminAPI();
 
   const formSchema = z.object({
     name: z.string().refine(value => value === name)
@@ -38,8 +40,9 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // eslint-disable-next-line no-console
-    console.log(values);
+    if (values.name !== name) return;
+
+    await mutateAsync({ id: data.id });
   };
 
   return (
@@ -71,10 +74,19 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
         </AlertDialogHeader>
 
         <AlertDialogFooter className="mt-6">
-          <AlertDialogCancel>{tCore('cancel')}</AlertDialogCancel>
-          <AlertDialogAction type="submit" disabled={!form.formState.isValid}>
+          <AlertDialogCancel asChild>
+            <Button type="button" variant="outline">
+              {tCore('cancel')}
+            </Button>
+          </AlertDialogCancel>
+          <Button
+            variant="destructive"
+            type="submit"
+            disabled={!form.formState.isValid}
+            loading={isPending}
+          >
             {t('submit')}
-          </AlertDialogAction>
+          </Button>
         </AlertDialogFooter>
       </form>
     </Form>

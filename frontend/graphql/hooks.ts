@@ -64,6 +64,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   create_admin_groups: ShowAdminGroups;
   create_database_admin_install: Scalars['String']['output'];
+  delete_admin_groups: Scalars['String']['output'];
   delete_avatar_core_members: Scalars['String']['output'];
   edit_admin_groups: ShowAdminGroups;
   edit_core_languages: ShowCoreLanguages;
@@ -78,6 +79,11 @@ export type Mutation = {
 
 export type MutationCreate_Admin_GroupsArgs = {
   name: Array<TextLanguageInput>;
+};
+
+
+export type MutationDelete_Admin_GroupsArgs = {
+  id: Scalars['String']['input'];
 };
 
 
@@ -353,6 +359,13 @@ export type Create_Admin_GroupsMutationVariables = Exact<{
 
 export type Create_Admin_GroupsMutation = { __typename?: 'Mutation', create_admin_groups: { __typename?: 'ShowAdminGroups', created: number, id: string, protected: boolean, users_count: number, guest: boolean, updated: number, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
 
+export type Delete_Admin_GroupsMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type Delete_Admin_GroupsMutation = { __typename?: 'Mutation', delete_admin_groups: string };
+
 export type Edit_Admin_GroupsMutationVariables = Exact<{
   id: Scalars['String']['input'];
   name: Array<TextLanguageInput> | TextLanguageInput;
@@ -510,6 +523,11 @@ export const Create_Admin_Groups = gql`
     guest
     updated
   }
+}
+    `;
+export const Delete_Admin_Groups = gql`
+    mutation Delete_admin_groups($id: String!) {
+  delete_admin_groups(id: $id)
 }
     `;
 export const Edit_Admin_Groups = gql`

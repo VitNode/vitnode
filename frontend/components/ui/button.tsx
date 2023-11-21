@@ -41,7 +41,7 @@ export interface ButtonProps
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ asChild = false, className, loading, size, variant, ...props }, ref) => {
+  ({ asChild = false, className, loading, size, type = 'button', variant, ...props }, ref) => {
     const t = useTranslations('core');
     const Comp = asChild ? Slot : 'button';
 
@@ -60,7 +60,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     return (
-      <Comp className={cx(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+      <Comp
+        className={cx(buttonVariants({ variant, size, className }))}
+        type={type}
+        ref={ref}
+        {...props}
+      />
     );
   }
 );

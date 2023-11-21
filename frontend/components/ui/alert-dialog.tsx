@@ -1,12 +1,46 @@
 'use client';
 
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
-import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef } from 'react';
+import {
+  ComponentPropsWithoutRef,
+  Dispatch,
+  ElementRef,
+  HTMLAttributes,
+  SetStateAction,
+  createContext,
+  forwardRef,
+  useContext,
+  useState
+} from 'react';
 
 import { buttonVariants } from '@/components/ui/button';
 import { cx } from '@/functions/classnames';
 
-const AlertDialog = AlertDialogPrimitive.Root;
+interface AlertDialogContextArgs {
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+export const AlertDialogContext = createContext<AlertDialogContextArgs>({
+  open: false,
+  setOpen: () => {}
+});
+
+export const useAlertDialog = () => useContext(AlertDialogContext);
+
+const AlertDialog = ({
+  children
+}: Omit<AlertDialogPrimitive.DialogProps, 'open' | 'onOpenChange'>) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <AlertDialogContext.Provider value={{ open, setOpen }}>
+      <AlertDialogPrimitive.Root open={open} onOpenChange={setOpen}>
+        {children}
+      </AlertDialogPrimitive.Root>
+    </AlertDialogContext.Provider>
+  );
+};
 
 const AlertDialogTrigger = AlertDialogPrimitive.Trigger;
 

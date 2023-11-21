@@ -74,12 +74,14 @@ model core_groups_languages {
   group_id    String
   value       String @db.VarChar(255)
 
-  group    core_groups    @relation("core_groups_languages_group", references: [id], fields: [group_id])
+  group    core_groups    @relation("core_groups_languages_group", references: [id], fields: [group_id], onDelete: Cascade)
   language core_languages @relation("core_groups_languages_language", references: [id], fields: [id_language])
 
   @@index([id_language])
 }
 ```
+
+Remember to add `onDelete: Cascade` actions into relation. We want to delete translation when we delete main table.
 
 <Callout type="info" emoji="ℹ️">
   For better performance you can add index to `id_language` field by adding `@@index([id_language])`
@@ -259,4 +261,4 @@ Promise.all(
 
 ## Delete Mutation
 
-test
+If you add `onDelete: Cascade` action to relation, you don't have to do anything. Prisma will delete translation for you.
