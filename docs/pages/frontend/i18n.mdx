@@ -1,7 +1,91 @@
 # Internationalization (i18n)
 
-import { Callout } from 'nextra/components';
+VitNode uses not only native i18n form [next-intl](https://github.com/amannn/next-intl), but also database which can store your translations. It gives your full control for your translations without restart your server.
 
-<Callout type="warning" emoji="⚠️">
-  This page is in progress.
-</Callout>
+Each translations are stored in database as `array`.
+
+```ts
+[
+  {
+    id_language: 'en',
+    value: 'Hello world'
+  },
+  {
+    id_language: 'pl',
+    value: 'Witaj świecie'
+  }
+];
+```
+
+## Display text
+
+To display text you can use `useTextLang` hook.
+
+```tsx
+import { useTextLang } from '@/hooks/core/use-text-lang';
+
+const { convertText } = useTextLang();
+
+const text = convertText(value);
+```
+
+`value` is `TextLanguage[]` interface form `GraphQL backend`.
+
+## TextInputLanguage
+
+Example use in form field:
+
+```tsx
+import { useFormContext } from 'react-hook-form';
+import { useTranslations } from 'next-intl';
+
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { TextInputLanguage } from '@/components/text-input-language';
+
+export const MainCreateActionsGroupsMembersAdmin = () => {
+  const t = useTranslations('admin.members.groups.create.form');
+  const form = useFormContext();
+
+  return (
+    <FormField
+      control={form.control}
+      name="name"
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel>{t('name.label')}</FormLabel>
+          <FormControl>
+            <TextInputLanguage {...field} />
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+};
+```
+
+### Using with form in zod
+
+```tsx
+import * as z from 'zod';
+
+import { zodTextInputLanguageType } from '@/components/text-input-language';
+
+const formSchema = z.object({
+  name: zodTextInputLanguageType
+});
+```
+
+If you want to make field required, you can use `.min(1, tCore('forms.empty'))` from `zod` library:
+
+```tsx
+import { useTranslations } from 'next-intl';
+import * as z from 'zod';
+
+import { zodTextInputLanguageType } from '@/components/text-input-language';
+
+const tCore = useTranslations('core');
+const formSchema = z.object({
+  name: zodTextInputLanguageType.min(1, tCore('forms.empty'))
+});
+```

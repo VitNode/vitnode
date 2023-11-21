@@ -2,7 +2,7 @@
 
 import { useProfileView } from '@/hooks/core/profiles/use-profile-view';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useTextLang } from '@/hooks/use-text-lang';
+import { useTextLang } from '@/hooks/core/use-text-lang';
 
 export const NameProfile = () => {
   const { data, isLoading } = useProfileView();

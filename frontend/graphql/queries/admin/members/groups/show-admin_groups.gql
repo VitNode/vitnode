@@ -1,6 +1,6 @@
 query Show_admin_groups(
   $first: Int
-  $cursor: Int
+  $cursor: String
   $search: String
   $sortBy: [ShowAdminGroupsSortByArgs!]
   $last: Int
@@ -16,12 +16,14 @@ query Show_admin_groups(
     }
     edges {
       created
+      updated
       id
-      usersCount
+      users_count
       protected
+      guest
       name {
         id_language
-        name
+        value
       }
     }
   }

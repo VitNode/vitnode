@@ -2,6 +2,7 @@
   "graphql": "GraphQL",
   "database": "Database",
   "authorization": "Authorization",
+  "errors": "Errors",
   "files": "Files",
   "i18n": "Internationalization",
   "practices": "Best Practices"

@@ -3,8 +3,8 @@ import { ArgsType, Field, InputType, Int, registerEnumType } from '@nestjs/graph
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 export enum ShowAdminGroupsSortingColumnEnum {
-  name = 'name',
-  created = 'created'
+  created = 'created',
+  updated = 'updated'
 }
 
 registerEnumType(ShowAdminGroupsSortingColumnEnum, {
@@ -22,8 +22,8 @@ class ShowAdminGroupsSortByArgs {
 
 @ArgsType()
 export class ShowAdminGroupsArgs {
-  @Field(() => Int, { nullable: true })
-  cursor?: number;
+  @Field(() => String, { nullable: true })
+  cursor?: string;
 
   @Field(() => Int, { nullable: true })
   first?: number;

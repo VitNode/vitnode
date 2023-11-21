@@ -13,8 +13,8 @@ export class AuthorizationCoreSessionsService {
     private readonly service: InternalAuthorizationCoreSessionsService
   ) {}
 
-  protected async isAdmin({ group_id, id }: { group_id: number; id: string }): Promise<boolean> {
-    return await this.prisma.core_admin_access
+  protected async isAdmin({ group_id, id }: { group_id: string; id: string }): Promise<boolean> {
+    return await this.prisma.core_admin_permissions
       .findFirst({
         where: {
           OR: [

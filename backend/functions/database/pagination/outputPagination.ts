@@ -1,11 +1,11 @@
 import { PageInfo } from '@/types/database/pagination.type';
 
 type DataInterface<T> = T & {
-  id: string | number;
+  id: string;
 };
 
 interface Args<T> {
-  cursor: string | number | undefined;
+  cursor: string | undefined;
   edges: DataInterface<T>[];
   first: number | undefined;
   last: number | undefined;

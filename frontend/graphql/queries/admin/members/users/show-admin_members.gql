@@ -4,7 +4,7 @@ query Show_admin_members(
   $last: Int
   $search: String
   $sortBy: [ShowAdminMembersSortByArgs!]
-  $groups: [Int!]
+  $groups: [String!]
 ) {
   show_admin_members(
     cursor: $cursor
@@ -45,7 +45,7 @@ query Show_admin_members(
       group {
         name {
           id_language
-          name
+          value
         }
       }
     }

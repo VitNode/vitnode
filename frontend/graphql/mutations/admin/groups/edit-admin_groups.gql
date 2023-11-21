@@ -1,0 +1,14 @@
+mutation Edit_admin_groups($id: String!, $name: [TextLanguageInput!]!) {
+  edit_admin_groups(id: $id, name: $name) {
+    created
+    id
+    name {
+      id_language
+      value
+    }
+    protected
+    users_count
+    guest
+    updated
+  }
+}

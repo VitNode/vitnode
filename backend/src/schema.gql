@@ -15,7 +15,7 @@ type AuthorizationCurrentUserObj {
   avatar_color: String!
   birthday: Int!
   email: String!
-  group_id: Int!
+  group_id: String!
   id: String!
   is_admin: Boolean!
   name: String!
@@ -41,8 +41,10 @@ type LayoutAdminInstallObj {
 }
 
 type Mutation {
+  create_admin_groups(name: [TextLanguageInput!]!): ShowAdminGroups!
   create_database_admin_install: String!
   delete_avatar_core_members: String!
+  edit_admin_groups(id: String!, name: [TextLanguageInput!]!): ShowAdminGroups!
   edit_core_languages(default: Boolean!, enabled: Boolean!, id: String!, name: String!, timezone: String!): ShowCoreLanguages!
   edit_general_admin_settings(side_name: String!): GeneralAdminSettingsObj!
   signIn_core_sessions(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
@@ -65,18 +67,22 @@ type Query {
   authorization_admin_sessions: AuthorizationAdminSessionsObj!
   authorization_core_sessions: AuthorizationCoreSessionsObj!
   layout_admin_install: LayoutAdminInstallObj!
-  show_admin_groups(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
-  show_admin_members(cursor: String, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
+  show_admin_groups(cursor: String, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
+  show_admin_members(cursor: String, first: Int, groups: [String!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   show_core_languages(cursor: String, first: Int, last: Int): ShowCoreLanguagesObj!
   show_core_members(cursor: String, findByIds: [String!], first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
 }
 
 type ShowAdminGroups {
   created: Int!
-  id: Int!
+  default: Boolean!
+  guest: Boolean!
+  id: String!
   name: [TextLanguage!]!
   protected: Boolean!
-  usersCount: Int!
+  root: Boolean!
+  updated: Int!
+  users_count: Int!
 }
 
 type ShowAdminGroupsObj {
@@ -91,7 +97,7 @@ input ShowAdminGroupsSortByArgs {
 
 enum ShowAdminGroupsSortingColumnEnum {
   created
-  name
+  updated
 }
 
 type ShowAdminMembers {
@@ -183,7 +189,7 @@ enum ShowCoreMembersSortingColumnEnum {
 type SignUpCoreMembersObj {
   birthday: Int!
   email: String!
-  group_id: Int!
+  group_id: String!
   name: String!
   newsletter: Boolean
 }
@@ -195,7 +201,12 @@ enum SortDirectionEnum {
 
 type TextLanguage {
   id_language: String!
-  name: String!
+  value: String!
+}
+
+input TextLanguageInput {
+  id_language: String!
+  value: String!
 }
 
 """The `Upload` scalar type represents a file upload."""

@@ -10,19 +10,16 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
-
-import { useSession } from '../../hooks/core/use-session';
-import { usePathname, useRouter } from '../../i18n';
+import { usePathname, useRouter } from '@/i18n';
+import { useGlobals } from '@/hooks/core/use-globals';
 
 export const LanguageSwitcher = () => {
   const t = useTranslations('core');
-  const { languages } = useSession();
-  const { languages: languagesAdmin } = useSessionAdmin();
+  const { languages } = useGlobals();
   const locale = useLocale();
   const { replace } = useRouter();
   const pathname = usePathname();
-  const enableLocales = [...languages, ...languagesAdmin].filter(lang => lang.enabled);
+  const enableLocales = languages.filter(lang => lang.enabled);
 
   if (enableLocales.length <= 1) return null;
 

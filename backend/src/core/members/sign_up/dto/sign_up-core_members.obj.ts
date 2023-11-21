@@ -22,6 +22,6 @@ export class SignUpCoreMembersObj {
   @Field(() => Boolean, { nullable: true })
   newsletter?: boolean;
 
-  @Field(() => Int)
-  group_id: number;
+  @Field(() => String)
+  group_id: string;
 }

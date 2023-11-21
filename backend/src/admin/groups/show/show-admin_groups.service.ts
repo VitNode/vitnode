@@ -27,7 +27,7 @@ export class ShowAdminGroupsService {
     const where: Prisma.core_groupsWhereInput = {
       name: {
         some: {
-          name: {
+          value: {
             contains: search,
             mode: 'insensitive'
           }
@@ -42,17 +42,21 @@ export class ShowAdminGroupsService {
           id: true,
           created: true,
           protected: true,
+          default: true,
+          root: true,
+          guest: true,
+          updated: true,
           name: {
             select: {
               id_language: true,
-              name: true
+              value: true
             }
           }
         },
         orderBy: inputSorting<ShowAdminGroupsSortingColumnEnum>({
           sortBy,
           defaultSortBy: {
-            column: ShowAdminGroupsSortingColumnEnum.created,
+            column: ShowAdminGroupsSortingColumnEnum.updated,
             direction: SortDirectionEnum.desc
           }
         }),
@@ -65,7 +69,7 @@ export class ShowAdminGroupsService {
       edges.map(async edge => {
         return {
           ...edge,
-          usersCount: await this.prisma.core_members.count({
+          users_count: await this.prisma.core_members.count({
             where: {
               group_id: edge.id
             }

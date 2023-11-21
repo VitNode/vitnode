@@ -14,18 +14,30 @@ export class ShowAdminGroupsObj {
 
 @ObjectType()
 export class ShowAdminGroups {
-  @Field(() => Int)
-  id: number;
+  @Field(() => String)
+  id: string;
 
   @Field(() => [TextLanguage])
   name: TextLanguage[];
 
   @Field(() => Int)
-  usersCount: number;
+  users_count: number;
 
   @Field(() => Int)
   created: number;
 
+  @Field(() => Int)
+  updated: number;
+
   @Field(() => Boolean)
   protected: boolean;
+
+  @Field(() => Boolean)
+  root: boolean;
+
+  @Field(() => Boolean)
+  default: boolean;
+
+  @Field(() => Boolean)
+  guest: boolean;
 }

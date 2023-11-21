@@ -63,7 +63,22 @@
         "title": "Grupy",
         "table": {
           "name": "Nazwa",
-          "users_count": "Użytkownicy"
+          "users_count": "Użytkownicy",
+          "updated": "Zaktualizowano"
+        },
+        "create_edit": {
+          "form": {
+            "name": {
+              "label": "Nazwa"
+            }
+          }
+        },
+        "create": {
+          "title": "Stwórz grupę",
+          "success": "Grupa została stworzona"
+        },
+        "edit": {
+          "success": "Grupa została zaktualizowana"
         }
       }
     },

@@ -59,7 +59,7 @@ export class ShowCoreMembersService {
             select: {
               name: {
                 select: {
-                  name: true,
+                  value: true,
                   id_language: true
                 }
               }
