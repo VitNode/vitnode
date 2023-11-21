@@ -23,10 +23,11 @@ const DATA: ConfigType = {
 };
 
 const configPath = join('..', 'config.json');
+if (!fs.existsSync(configPath)) {
+  fs.writeFile(configPath, JSON.stringify(DATA, null, 2), 'utf8', err => {
+    if (err) throw err;
+  });
 
-fs.writeFile(configPath, JSON.stringify(DATA, null, 2), 'utf8', err => {
-  if (err) throw err;
-});
-
-// eslint-disable-next-line no-console
-console.log('[First Install VitNode] - Config file has been generated');
+  // eslint-disable-next-line no-console
+  console.log('[First Install VitNode] - Config file has been generated');
+}

@@ -10,7 +10,7 @@ import { ShowAdminGroups } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 
 const CreateEditFormGroupsMembersAdmin = lazy(() =>
-  import('../../../create-edit-form/create-edit-form-groups-members-admin').then(module => ({
+  import('../../create-edit-form/create-edit-form-groups-members-admin').then(module => ({
     default: module.CreateEditFormGroupsMembersAdmin
   }))
 );

@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { ShowAdminGroups } from '@/graphql/hooks';
-import { EditGroupsMembersDialogAdmin } from './edit/edit-groups-members-dialog-admin';
+import { EditGroupsMembersDialogAdmin } from './edit-groups-members-dialog-admin';
 
 interface Props {
   data: Omit<ShowAdminGroups, 'default' | 'root'>;
