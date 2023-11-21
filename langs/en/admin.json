@@ -79,6 +79,12 @@
         },
         "edit": {
           "success": "Group updated"
+        },
+        "delete": {
+          "text": "This action cannot be undone. This will permanently delete this group and all users in it will be moved to the default group.",
+          "form_confirm_text": "Type the name of the group <text></text> to confirm.",
+          "submit": "Yes, delete group",
+          "success": "Group deleted"
         }
       }
     },

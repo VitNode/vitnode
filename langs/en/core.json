@@ -13,6 +13,8 @@
     "edit": "Edit",
     "edit_with_value": "Edit - {value}",
     "create": "Create",
+    "are_you_absolutely_sure": "Are you absolutely sure?",
+    "cancel": "Cancel",
     "pagination": {
       "previous": "Previous page",
       "next": "Next page"

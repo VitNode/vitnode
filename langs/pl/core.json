@@ -13,6 +13,8 @@
     "edit": "Edytuj",
     "edit_with_value": "Edytuj - {value}",
     "create": "Utwórz",
+    "are_you_absolutely_sure": "Czy jesteś absolutnie pewien?",
+    "cancel": "Anuluj",
     "pagination": {
       "previous": "Poprzednia strona",
       "next": "Następna strona"
