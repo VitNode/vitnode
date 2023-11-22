@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { TextLanguageInput } from '@/components/text-language-input';
 import { Separator } from '@/components/ui/separator';
-import { IconPickerInput } from '@/components/icon-pick-input';
+import { IconPickerInput } from '@/components/icon-pick-input/icon-pick-input';
 
 export const MainContentCreateEditFormGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.groups.create_edit.form');
@@ -27,9 +27,19 @@ export const MainContentCreateEditFormGroupsMembersAdmin = () => {
       />
       <Separator />
 
-      <div>
-        <IconPickerInput />
-      </div>
+      <FormField
+        control={form.control}
+        name="icon"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Icon</FormLabel>
+            <FormControl>
+              <IconPickerInput {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
     </>
   );
 };
