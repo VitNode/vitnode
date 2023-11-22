@@ -47,7 +47,6 @@
     "react-day-picker": "^8.9.1",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.47.0",
-    "react-virtuoso": "^4.6.2",
     "server-only": "^0.0.1",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.4"
