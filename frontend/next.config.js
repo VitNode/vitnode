@@ -4,17 +4,23 @@ const withNextIntl = require('next-intl/plugin')(
   // This is the default (also the `src` folder is supported out of the box)
   './i18n.ts'
 );
-
-module.exports = withNextIntl({
-  images: {
-    formats: ['image/avif', 'image/webp'],
-    remotePatterns: [
-      {
-        hostname: 'localhost',
-        port: '8080',
-        protocol: 'http',
-        pathname: '/public/**'
-      }
-    ]
-  }
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true'
 });
+
+module.exports = withBundleAnalyzer(
+  withNextIntl({
+    transpilePackages: ['lucide-react'],
+    images: {
+      formats: ['image/avif', 'image/webp'],
+      remotePatterns: [
+        {
+          hostname: 'localhost',
+          port: '8080',
+          protocol: 'http',
+          pathname: '/public/**'
+        }
+      ]
+    }
+  })
+);

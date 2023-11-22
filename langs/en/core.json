@@ -19,6 +19,10 @@
       "previous": "Previous page",
       "next": "Next page"
     },
+    "icon_picker": {
+      "title": "Choose an icon",
+      "placeholder": "Search icon..."
+    },
     "user-bar": {
       "sign_in": "Login",
       "sign_up": "Register",
