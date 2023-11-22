@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 import { useCreateGroupAdminAPI } from './use-create-group-admin-api';
-import { zodTextInputLanguageType } from '@/components/text-input-language';
+import { zodTextLanguageInputType } from '@/components/text-language-input';
 import { ShowAdminGroups } from '@/graphql/hooks';
 import { useEditGroupAdminAPI } from './use-edit-group-admin-api';
 
@@ -20,7 +20,7 @@ export const useCreateEditFormGroupsMembersAdmin = ({
   const { isPending: editIsPending, mutateAsync: editMutateAsync } = useEditGroupAdminAPI();
 
   const formSchema = z.object({
-    name: zodTextInputLanguageType.min(1, tCore('forms.empty')),
+    name: zodTextLanguageInputType.min(1, tCore('forms.empty')),
     test: z.string()
   });
 

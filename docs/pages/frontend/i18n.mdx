@@ -40,7 +40,7 @@ import { useFormContext } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { TextInputLanguage } from '@/components/text-input-language';
+import { TextLanguageInput } from '@/components/text-language-input';
 
 export const MainCreateActionsGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.groups.create.form');
@@ -54,7 +54,7 @@ export const MainCreateActionsGroupsMembersAdmin = () => {
         <FormItem>
           <FormLabel>{t('name.label')}</FormLabel>
           <FormControl>
-            <TextInputLanguage {...field} />
+            <TextLanguageInput {...field} />
           </FormControl>
           <FormMessage />
         </FormItem>
@@ -69,10 +69,10 @@ export const MainCreateActionsGroupsMembersAdmin = () => {
 ```tsx
 import * as z from 'zod';
 
-import { zodTextInputLanguageType } from '@/components/text-input-language';
+import { zodTextLanguageInputType } from '@/components/text-language-input';
 
 const formSchema = z.object({
-  name: zodTextInputLanguageType
+  name: zodTextLanguageInputType
 });
 ```
 
@@ -82,10 +82,10 @@ If you want to make field required, you can use `.min(1, tCore('forms.empty'))` 
 import { useTranslations } from 'next-intl';
 import * as z from 'zod';
 
-import { zodTextInputLanguageType } from '@/components/text-input-language';
+import { zodTextLanguageInputType } from '@/components/text-language-input';
 
 const tCore = useTranslations('core');
 const formSchema = z.object({
-  name: zodTextInputLanguageType.min(1, tCore('forms.empty'))
+  name: zodTextLanguageInputType.min(1, tCore('forms.empty'))
 });
 ```

@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation';
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { SheetClose, SheetFooter } from '@/components/ui/sheet';
-import { CalendarPick } from '@/components/calendar-pick';
+import { CalendarPicker } from '@/components/calendar-picker';
 import { usePathname, useRouter } from '@/i18n';
 import { convertDateToUnixTime } from '@/functions/date';
 
@@ -56,7 +56,7 @@ export const AdvancedFiltersUsersMembersAdmin = () => {
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <FormLabel>{t('table.joined')}</FormLabel>
-              <CalendarPick selected={field.value} onSelect={field.onChange} />
+              <CalendarPicker selected={field.value} onSelect={field.onChange} />
               <FormMessage />
             </FormItem>
           )}

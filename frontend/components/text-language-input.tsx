@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { FormControl } from './ui/form';
 import { TextLanguage } from '@/graphql/hooks';
 
-export const zodTextInputLanguageType = z.array(
+export const zodTextLanguageInputType = z.array(
   z.object({
     id_language: z.string(),
     value: z.string()
@@ -19,7 +19,7 @@ interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' |
   value: TextLanguage[];
 }
 
-export const TextInputLanguage = ({ onChange, value, ...props }: Props) => {
+export const TextLanguageInput = ({ onChange, value, ...props }: Props) => {
   const { defaultLanguage, languages } = useGlobals();
   const [selectedLanguage, setSelectedLanguage] = useState(defaultLanguage);
   const valueAsArray = Array.isArray(value) ? value : [];
