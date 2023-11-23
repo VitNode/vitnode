@@ -6,16 +6,15 @@ import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { TRANSFORMERS } from '@lexical/markdown';
 import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
-import { Italic } from 'lucide-react';
 import { CodeNode } from '@lexical/code';
 import { AutoLinkNode, LinkNode } from '@lexical/link';
 import { ListNode, ListItemNode } from '@lexical/list';
 import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { HorizontalRuleNode } from '@lexical/react/LexicalHorizontalRuleNode';
 
-import { Toggle } from '../ui/toggle';
 import { OnChangePluginEditor } from './plugins/on-change-plugin-editor';
 import { AutoLinkPluginEditor } from './plugins/auto-link-plugin-editor';
+import { ToolbarEditor } from './toolbar/toolbar-editor';
 
 interface Props {
   id: string;
@@ -47,11 +46,7 @@ export const Editor = ({ id }: Props) => {
     <div>
       <LexicalComposer initialConfig={initialConfig}>
         <div className="border border-input rounded-md bg-background ring-offset-background [&:has(div:focus)]:ring-2 [&:has(div:focus)]:ring-ring [&:has(div:focus)]:ring-offset-2">
-          <div className="border-b-2 rounded-t-md p-2">
-            <Toggle aria-label="Toggle italic">
-              <Italic className="h-4 w-4" />
-            </Toggle>
-          </div>
+          <ToolbarEditor />
           <RichTextPlugin
             contentEditable={
               <ContentEditable className="p-3 text-sm border-0 focus:border-0 focus:outline-none min-h-[10rem] resize-y overflow-auto" />

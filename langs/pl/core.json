@@ -19,6 +19,9 @@
       "previous": "Poprzednia strona",
       "next": "Następna strona"
     },
+    "editor": {
+      "remove_formatting": "Usuń formatowanie"
+    },
     "icon_picker": {
       "title": "Wybierz ikonę",
       "placeholder": "Wyszukaj ikonę..."
