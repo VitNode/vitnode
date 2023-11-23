@@ -1,8 +1,7 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useEffect } from 'react';
 import { $rootTextContent } from '@lexical/text';
-import { $createTextNode, $getRoot, $getSelection } from 'lexical';
-import { $createParagraphNode } from 'lexical';
+import { $createTextNode, $getRoot, $getSelection, $createParagraphNode } from 'lexical';
 
 interface Props {
   onChange: (editorState: string) => void;
