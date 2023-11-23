@@ -56,11 +56,11 @@ export const DashboardCoreAdminView = () => {
       <br />
       <br />
 
-      <Input />
+      <Editor id="text_editor_vitnode" />
 
       <br />
 
-      <Editor id="text_editor_vitnode" />
+      <Input />
     </>
   );
 };

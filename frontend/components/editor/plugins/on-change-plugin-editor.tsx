@@ -1,6 +1,8 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useEffect } from 'react';
 import { $rootTextContent } from '@lexical/text';
+import { $createTextNode, $getRoot, $getSelection } from 'lexical';
+import { $createParagraphNode } from 'lexical';
 
 interface Props {
   onChange: (editorState: string) => void;
@@ -27,7 +29,9 @@ export const OnChangePluginEditor = ({ onChange, state }: Props) => {
 
   // Set the initial editor state
   useEffect(() => {
-    if (!state) return;
+    if (!state) {
+      return;
+    }
 
     const initialEditorState = editor.parseEditorState(state);
     editor.setEditorState(initialEditorState);

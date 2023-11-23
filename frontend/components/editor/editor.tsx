@@ -26,15 +26,17 @@ export const Editor = ({ id }: Props) => {
   return (
     <div>
       <LexicalComposer initialConfig={initialConfig}>
-        <PlainTextPlugin
-          contentEditable={
-            <ContentEditable className="relative flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
-          }
-          placeholder={null}
-          ErrorBoundary={LexicalErrorBoundary}
-        />
-        <OnChangePluginEditor state={editorState} onChange={setEditorState} />
-        <HistoryPlugin />
+        <div className="border border-input rounded-md bg-background ring-offset-background [&:has(div:focus)]:ring-2 [&:has(div:focus)]:ring-ring [&:has(div:focus)]:ring-offset-2">
+          <PlainTextPlugin
+            contentEditable={
+              <ContentEditable className="p-3 text-sm border-0 focus:border-0 focus:outline-none min-h-[10rem] resize-y overflow-auto" />
+            }
+            placeholder={null}
+            ErrorBoundary={LexicalErrorBoundary}
+          />
+          <OnChangePluginEditor state={editorState} onChange={setEditorState} />
+          <HistoryPlugin />
+        </div>
       </LexicalComposer>
     </div>
   );
