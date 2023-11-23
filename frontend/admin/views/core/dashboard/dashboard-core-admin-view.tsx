@@ -7,6 +7,9 @@ import { useTranslations } from 'next-intl';
 
 import { Tabs } from '@/components/tabs/tabs';
 import { HeaderContent } from '@/components/header-content/header-content';
+import { Editor } from '@/components/editor/editor';
+
+import { Input } from '../../../../components/ui/input';
 
 export const DashboardCoreAdminView = () => {
   const t = useTranslations('core');
@@ -50,6 +53,14 @@ export const DashboardCoreAdminView = () => {
           }
         ]}
       />
+      <br />
+      <br />
+
+      <Input />
+
+      <br />
+
+      <Editor id="text_editor_vitnode" />
     </>
   );
 };
