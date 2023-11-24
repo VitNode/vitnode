@@ -15,6 +15,7 @@ import { HorizontalRuleNode } from '@lexical/react/LexicalHorizontalRuleNode';
 import { OnChangePluginEditor } from './plugins/on-change-plugin-editor';
 import { AutoLinkPluginEditor } from './plugins/auto-link-plugin-editor';
 import { ToolbarEditor } from './toolbar/toolbar-editor';
+import { themeEditor } from './theme-editor';
 
 interface Props {
   id: string;
@@ -25,7 +26,7 @@ export const Editor = ({ id }: Props) => {
 
   const initialConfig: InitialConfigType = {
     namespace: id,
-    theme: {},
+    theme: themeEditor,
     onError: error => {
       // eslint-disable-next-line no-console
       console.error(error);
@@ -43,23 +44,21 @@ export const Editor = ({ id }: Props) => {
   };
 
   return (
-    <div>
-      <LexicalComposer initialConfig={initialConfig}>
-        <div className="border border-input rounded-md bg-background ring-offset-background [&:has(div:focus)]:ring-2 [&:has(div:focus)]:ring-ring [&:has(div:focus)]:ring-offset-2">
-          <ToolbarEditor />
-          <RichTextPlugin
-            contentEditable={
-              <ContentEditable className="p-3 text-sm border-0 focus:border-0 focus:outline-none min-h-[10rem] resize-y overflow-auto" />
-            }
-            placeholder={null}
-            ErrorBoundary={LexicalErrorBoundary}
-          />
-          <OnChangePluginEditor state={editorState} onChange={setEditorState} />
-          <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
-          <AutoLinkPluginEditor />
-          <HistoryPlugin />
-        </div>
-      </LexicalComposer>
-    </div>
+    <LexicalComposer initialConfig={initialConfig}>
+      <div className="border border-input rounded-md bg-background ring-offset-background">
+        <ToolbarEditor />
+        <RichTextPlugin
+          contentEditable={
+            <ContentEditable className="p-3 text-sm border-0 focus:border-0 focus:outline-none min-h-[10rem] resize-y overflow-auto" />
+          }
+          placeholder={null}
+          ErrorBoundary={LexicalErrorBoundary}
+        />
+        <OnChangePluginEditor state={editorState} onChange={setEditorState} />
+        <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+        <AutoLinkPluginEditor />
+        <HistoryPlugin />
+      </div>
+    </LexicalComposer>
   );
 };
