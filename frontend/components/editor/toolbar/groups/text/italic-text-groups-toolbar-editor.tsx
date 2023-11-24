@@ -27,7 +27,7 @@ export const ItalicTextGroupsToolbarEditor = () => {
           </div>
         </TooltipTrigger>
 
-        <TooltipContent>{t('italic')}</TooltipContent>
+        <TooltipContent side="bottom">{t('italic')}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

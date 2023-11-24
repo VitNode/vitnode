@@ -27,7 +27,7 @@ export const BoldTextGroupsToolbarEditor = () => {
           </div>
         </TooltipTrigger>
 
-        <TooltipContent>{t('bold')}</TooltipContent>
+        <TooltipContent side="bottom">{t('bold')}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

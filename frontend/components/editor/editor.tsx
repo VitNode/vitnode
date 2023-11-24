@@ -16,12 +16,15 @@ import { OnChangePluginEditor } from './plugins/on-change-plugin-editor';
 import { AutoLinkPluginEditor } from './plugins/auto-link-plugin-editor';
 import { ToolbarEditor } from './toolbar/toolbar-editor';
 import { themeEditor } from './theme-editor';
+import { cx } from '@/functions/classnames';
 
 interface Props {
   id: string;
+  className?: string;
+  toolbarClassName?: string;
 }
 
-export const Editor = ({ id }: Props) => {
+export const Editor = ({ className, id, toolbarClassName }: Props) => {
   const [editorState, setEditorState] = useState('');
 
   const initialConfig: InitialConfigType = {
@@ -45,8 +48,13 @@ export const Editor = ({ id }: Props) => {
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <div className="border border-input rounded-md bg-background ring-offset-background">
-        <ToolbarEditor />
+      <div
+        className={cx(
+          'relative border border-input rounded-md bg-background ring-offset-background',
+          className
+        )}
+      >
+        <ToolbarEditor className={toolbarClassName} />
         <RichTextPlugin
           contentEditable={
             <ContentEditable className="p-3 text-sm border-0 focus:border-0 focus:outline-none min-h-[10rem] resize-y overflow-auto" />

@@ -27,7 +27,7 @@ export const UnderlineTextGroupsToolbarEditor = () => {
           </div>
         </TooltipTrigger>
 
-        <TooltipContent>{t('underline')}</TooltipContent>
+        <TooltipContent side="bottom">{t('underline')}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );
