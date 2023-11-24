@@ -20,7 +20,12 @@
       "next": "Next page"
     },
     "editor": {
-      "remove_formatting": "Remove Formatting"
+      "remove_formatting": "Remove Formatting",
+      "text": {
+        "bold": "Bold",
+        "italic": "Italic",
+        "underline": "Underline"
+      }
     },
     "icon_picker": {
       "title": "Choose an icon",

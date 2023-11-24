@@ -1,37 +1,28 @@
-import { Bold } from 'lucide-react';
+import { COMMAND_PRIORITY_CRITICAL, SELECTION_CHANGE_COMMAND } from 'lexical';
 import { useEffect, useState } from 'react';
-import {
-  $getSelection,
-  $isRangeSelection,
-  COMMAND_PRIORITY_CRITICAL,
-  FORMAT_TEXT_COMMAND,
-  SELECTION_CHANGE_COMMAND
-} from 'lexical';
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { mergeRegister } from '@lexical/utils';
 
 import { ClearFormattingToolbarEditor } from './clear-formatting-toolbar-editor';
-
-import { Toggle } from '../../ui/toggle';
+import { useProcessToolbarEditor } from './hooks/use-process-toolbar-editor';
+import { SeparatorToolbarEditor } from './separator-toolbar-editor';
+import { TextGroupsToolbarEditor } from './groups/text/text-groups-toolbar-editor';
+import { ToolbarEditorContext } from './hooks/use-toolbar-editor';
 
 export const ToolbarEditor = () => {
   const [isBold, setIsBold] = useState(false);
-  const [editor] = useLexicalComposerContext();
-
-  const onChange = () => {
-    const selection = $getSelection();
-
-    if ($isRangeSelection(selection)) {
-      // Update text format
-      setIsBold(selection.hasFormat('bold'));
-    }
-  };
+  const [isItalic, setIsItalic] = useState(false);
+  const [isUnderline, setIsUnderline] = useState(false);
+  const { editor, handleChange } = useProcessToolbarEditor({
+    setIsBold,
+    setIsItalic,
+    setIsUnderline
+  });
 
   useEffect(() => {
     return editor.registerCommand(
       SELECTION_CHANGE_COMMAND,
       () => {
-        onChange();
+        handleChange();
 
         return false;
       },
@@ -43,24 +34,21 @@ export const ToolbarEditor = () => {
     return mergeRegister(
       editor.registerUpdateListener(({ editorState }) => {
         editorState.read(() => {
-          onChange();
+          handleChange();
         });
       })
     );
   }, [editor]);
 
   return (
-    <div className="border-b-2 rounded-t-md p-2">
-      <ClearFormattingToolbarEditor />
-      <Toggle
-        aria-label="Toggle bold"
-        onClick={() => {
-          editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
-        }}
-        pressed={isBold}
-      >
-        <Bold />
-      </Toggle>
-    </div>
+    <ToolbarEditorContext.Provider value={{ isBold, isItalic, isUnderline }}>
+      <div className="border-b-2 rounded-t-md p-2 flex items-center">
+        <ClearFormattingToolbarEditor />
+
+        <SeparatorToolbarEditor />
+
+        <TextGroupsToolbarEditor />
+      </div>
+    </ToolbarEditorContext.Provider>
   );
 };

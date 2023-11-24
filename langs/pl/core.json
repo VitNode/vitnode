@@ -20,7 +20,12 @@
       "next": "Następna strona"
     },
     "editor": {
-      "remove_formatting": "Usuń formatowanie"
+      "remove_formatting": "Usuń formatowanie",
+      "text": {
+        "bold": "Pogrubienie",
+        "italic": "Kursywa",
+        "underline": "Podkreślenie"
+      }
     },
     "icon_picker": {
       "title": "Wybierz ikonę",

@@ -17,5 +17,10 @@ export const themeEditor: EditorThemeClasses = {
     h4: 'text-xl',
     h5: 'text-lg',
     h6: 'text-base'
+  },
+  text: {
+    bold: 'font-bold',
+    italic: 'italic',
+    underline: 'underline'
   }
 };
