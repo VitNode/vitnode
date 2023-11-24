@@ -21,6 +21,7 @@
     },
     "editor": {
       "remove_formatting": "Remove Formatting",
+      "mixed": "Mixed",
       "text": {
         "bold": "Bold",
         "italic": "Italic",

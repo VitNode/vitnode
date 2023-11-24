@@ -11,6 +11,7 @@ import { AutoLinkNode, LinkNode } from '@lexical/link';
 import { ListNode, ListItemNode } from '@lexical/list';
 import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { HorizontalRuleNode } from '@lexical/react/LexicalHorizontalRuleNode';
+import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 
 import { OnChangePluginEditor } from './plugins/on-change-plugin-editor';
 import { AutoLinkPluginEditor } from './plugins/auto-link-plugin-editor';
@@ -54,6 +55,7 @@ export const Editor = ({ className, id, toolbarClassName }: Props) => {
           className
         )}
       >
+        <AutoFocusPlugin />
         <ToolbarEditor className={toolbarClassName} />
         <RichTextPlugin
           contentEditable={

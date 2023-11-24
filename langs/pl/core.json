@@ -21,6 +21,7 @@
     },
     "editor": {
       "remove_formatting": "Usuń formatowanie",
+      "mixed": "Mieszane",
       "text": {
         "bold": "Pogrubienie",
         "italic": "Kursywa",

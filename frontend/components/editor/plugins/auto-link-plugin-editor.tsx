@@ -18,6 +18,8 @@ const EMAIL_REGEX =
 
 const MATCHERS = [
   createLinkMatcherWithRegExp(URL_REGEX, text => {
+    if (text.startsWith('http:')) return text;
+
     return text.startsWith('http') ? text : `https://${text}`;
   }),
   createLinkMatcherWithRegExp(EMAIL_REGEX, text => {

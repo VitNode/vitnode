@@ -9,6 +9,7 @@ import {
 } from 'lexical';
 import { $getSelectionStyleValueForProperty, $patchStyleText } from '@lexical/selection';
 import { mergeRegister } from '@lexical/utils';
+import { useTranslations } from 'next-intl';
 
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
 import { buttonVariants } from '@/components/ui/button';
@@ -29,6 +30,7 @@ const AVAILABLE_FONT_SIZE = [
 const DEFAULT_FONT_SIZE = '16px';
 
 export const FontSizeGroupsToolbarEditor = () => {
+  const t = useTranslations('core.editor');
   const [fontSize, setFontSize] = useState(DEFAULT_FONT_SIZE);
   const [editor] = useLexicalComposerContext();
 
@@ -80,10 +82,10 @@ export const FontSizeGroupsToolbarEditor = () => {
         })}
       >
         <Type />
-        {fontSize}
+        {fontSize ? fontSize : t('mixed')}
       </SelectTrigger>
 
-      <SelectContent>
+      <SelectContent onCloseAutoFocus={() => editor.focus()}>
         {AVAILABLE_FONT_SIZE.map(size => (
           <SelectItem key={size} value={size}>
             {size}
