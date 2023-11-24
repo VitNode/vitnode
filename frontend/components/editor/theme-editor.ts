@@ -21,6 +21,7 @@ export const themeEditor: EditorThemeClasses = {
   text: {
     bold: 'font-bold',
     italic: 'italic',
-    underline: 'underline'
+    underline: 'underline',
+    strikethrough: 'line-through'
   }
 };

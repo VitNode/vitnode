@@ -1,5 +1,6 @@
 import { BoldTextGroupsToolbarEditor } from './bold-text-groups-toolbar-editor';
 import { ItalicTextGroupsToolbarEditor } from './italic-text-groups-toolbar-editor';
+import { StrikethroughTextGroupsToolbarEditor } from './strikethrough-text-groups-toolbar-editor';
 import { UnderlineTextGroupsToolbarEditor } from './underline-text-groups-toolbar-editor';
 
 export const TextGroupsToolbarEditor = () => {
@@ -8,6 +9,7 @@ export const TextGroupsToolbarEditor = () => {
       <BoldTextGroupsToolbarEditor />
       <ItalicTextGroupsToolbarEditor />
       <UnderlineTextGroupsToolbarEditor />
+      <StrikethroughTextGroupsToolbarEditor />
     </>
   );
 };

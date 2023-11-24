@@ -24,7 +24,8 @@
       "text": {
         "bold": "Pogrubienie",
         "italic": "Kursywa",
-        "underline": "Podkreślenie"
+        "underline": "Podkreślenie",
+        "strikethrough": "Przekreślenie"
       },
       "move": {
         "undo": "Cofnij",

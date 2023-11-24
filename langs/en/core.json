@@ -24,7 +24,8 @@
       "text": {
         "bold": "Bold",
         "italic": "Italic",
-        "underline": "Underline"
+        "underline": "Underline",
+        "strikethrough": "Strikethrough"
       },
       "move": {
         "undo": "Undo",
