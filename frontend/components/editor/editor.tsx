@@ -57,7 +57,7 @@ export const Editor = ({ className, id, toolbarClassName }: Props) => {
         <ToolbarEditor className={toolbarClassName} />
         <RichTextPlugin
           contentEditable={
-            <ContentEditable className="p-3 text-sm border-0 focus:border-0 focus:outline-none min-h-[10rem] resize-y overflow-auto" />
+            <ContentEditable className="p-3 border-0 focus:border-0 focus:outline-none min-h-[10rem] resize-y overflow-auto" />
           }
           placeholder={null}
           ErrorBoundary={LexicalErrorBoundary}

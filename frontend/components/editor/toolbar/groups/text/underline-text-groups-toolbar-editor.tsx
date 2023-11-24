@@ -1,17 +1,27 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { Underline } from 'lucide-react';
-import { FORMAT_TEXT_COMMAND } from 'lexical';
+import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND } from 'lexical';
 import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 
 import { Toggle } from '@/components/ui/toggle';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
-import { useToolbarEditor } from '../../hooks/use-toolbar-editor';
+import { useUpdateStateEditor } from '../../hooks/use-update-state-editor';
 
 export const UnderlineTextGroupsToolbarEditor = () => {
   const t = useTranslations('core.editor.text');
+  const [isUnderline, setIsUnderline] = useState(false);
   const [editor] = useLexicalComposerContext();
-  const { isUnderline } = useToolbarEditor();
+
+  const handleChange = () => {
+    const selection = $getSelection();
+    if (!$isRangeSelection(selection)) return false;
+
+    setIsUnderline(selection.hasFormat('underline'));
+  };
+
+  useUpdateStateEditor({ handleChange });
 
   return (
     <TooltipProvider>

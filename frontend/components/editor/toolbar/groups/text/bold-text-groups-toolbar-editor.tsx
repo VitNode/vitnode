@@ -1,17 +1,27 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { Bold } from 'lucide-react';
-import { FORMAT_TEXT_COMMAND } from 'lexical';
+import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND } from 'lexical';
 import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 
 import { Toggle } from '@/components/ui/toggle';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
-import { useToolbarEditor } from '../../hooks/use-toolbar-editor';
+import { useUpdateStateEditor } from '../../hooks/use-update-state-editor';
 
 export const BoldTextGroupsToolbarEditor = () => {
   const t = useTranslations('core.editor.text');
+  const [isBold, setIsBold] = useState(false);
   const [editor] = useLexicalComposerContext();
-  const { isBold } = useToolbarEditor();
+
+  const handleChange = () => {
+    const selection = $getSelection();
+    if (!$isRangeSelection(selection)) return false;
+
+    setIsBold(selection.hasFormat('bold'));
+  };
+
+  useUpdateStateEditor({ handleChange });
 
   return (
     <TooltipProvider>
