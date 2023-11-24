@@ -25,6 +25,10 @@
         "bold": "Bold",
         "italic": "Italic",
         "underline": "Underline"
+      },
+      "move": {
+        "undo": "Undo",
+        "redo": "Redo"
       }
     },
     "icon_picker": {

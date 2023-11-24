@@ -25,6 +25,10 @@
         "bold": "Pogrubienie",
         "italic": "Kursywa",
         "underline": "Podkreślenie"
+      },
+      "move": {
+        "undo": "Cofnij",
+        "redo": "Ponów"
       }
     },
     "icon_picker": {

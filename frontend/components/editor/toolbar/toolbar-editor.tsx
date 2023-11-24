@@ -13,6 +13,7 @@ import { SeparatorToolbarEditor } from './separator-toolbar-editor';
 import { TextGroupsToolbarEditor } from './groups/text/text-groups-toolbar-editor';
 import { ToolbarEditorContext } from './hooks/use-toolbar-editor';
 import { cx } from '@/functions/classnames';
+import { MoveGroupsToolbarEditor } from './groups/move/move-groups-toolbar-editor';
 
 interface Props {
   className?: string;
@@ -65,8 +66,10 @@ export const ToolbarEditor = ({ className }: Props) => {
           className
         )}
       >
-        <ClearFormattingToolbarEditor />
+        <MoveGroupsToolbarEditor />
+        <SeparatorToolbarEditor />
 
+        <ClearFormattingToolbarEditor />
         <SeparatorToolbarEditor />
 
         <TextGroupsToolbarEditor />
