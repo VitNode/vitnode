@@ -27,6 +27,7 @@
       "font_color": "Font Color",
       "font_background_color": "Font Background Color",
       "set_default_color": "Set Default Color",
+      "markdown_is_supported": "Markdown is supported",
       "text": {
         "bold": "Bold",
         "italic": "Italic",

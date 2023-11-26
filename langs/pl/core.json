@@ -27,6 +27,7 @@
       "font_color": "Kolor czcionki",
       "font_background_color": "Kolor tła czcionki",
       "set_default_color": "Ustaw domyślny kolor",
+      "markdown_is_supported": "Markdown jest obsługiwany",
       "text": {
         "bold": "Pogrubienie",
         "italic": "Kursywa",

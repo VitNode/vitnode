@@ -12,6 +12,7 @@ import { ListNode, ListItemNode } from '@lexical/list';
 import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { HorizontalRuleNode } from '@lexical/react/LexicalHorizontalRuleNode';
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
+import { useTranslations } from 'next-intl';
 
 import { OnChangePluginEditor } from './plugins/on-change-plugin-editor';
 import { AutoLinkPluginEditor } from './plugins/auto-link-plugin-editor';
@@ -19,6 +20,7 @@ import { ToolbarEditor } from './toolbar/toolbar-editor';
 import { themeEditor } from './theme-editor';
 import { cx } from '@/functions/classnames';
 import { DraggableBlockPluginEditor } from './plugins/draggable-block-plugin-editor';
+import { buttonVariants } from '../ui/button';
 
 interface Props {
   id: string;
@@ -27,6 +29,7 @@ interface Props {
 }
 
 export const Editor = ({ className, id, toolbarClassName }: Props) => {
+  const t = useTranslations('core.editor');
   const [editorState, setEditorState] = useState('');
   const floatingAnchorElem = useRef<HTMLDivElement>(null);
 
@@ -76,6 +79,20 @@ export const Editor = ({ className, id, toolbarClassName }: Props) => {
         {floatingAnchorElem.current && (
           <DraggableBlockPluginEditor anchorElem={floatingAnchorElem.current} />
         )}
+
+        <div className="bg-background rounded-b-md border-t-2 p-2">
+          <a
+            href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax"
+            target="_bland"
+            rel="nofollow noreferrer"
+            className={buttonVariants({
+              variant: 'outline',
+              size: 'sm'
+            })}
+          >
+            {t('markdown_is_supported')}
+          </a>
+        </div>
       </div>
     </LexicalComposer>
   );
