@@ -14,14 +14,14 @@ export const ItalicTextGroupsToolbarEditor = () => {
   const [isItalic, setIsItalic] = useState(false);
   const [editor] = useLexicalComposerContext();
 
-  const handleChange = () => {
-    const selection = $getSelection();
-    if (!$isRangeSelection(selection)) return false;
+  useUpdateStateEditor({
+    handleChange: () => {
+      const selection = $getSelection();
+      if (!$isRangeSelection(selection)) return false;
 
-    setIsItalic(selection.hasFormat('italic'));
-  };
-
-  useUpdateStateEditor({ handleChange });
+      setIsItalic(selection.hasFormat('italic'));
+    }
+  });
 
   return (
     <TooltipProvider>

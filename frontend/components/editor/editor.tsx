@@ -51,7 +51,7 @@ export const Editor = ({ className, id, toolbarClassName }: Props) => {
     <LexicalComposer initialConfig={initialConfig}>
       <div
         className={cx(
-          'relative border border-input rounded-md bg-background ring-offset-background',
+          'relative border border-input rounded-md bg-card ring-offset-background',
           className
         )}
       >

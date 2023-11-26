@@ -14,14 +14,14 @@ export const BoldTextGroupsToolbarEditor = () => {
   const [isBold, setIsBold] = useState(false);
   const [editor] = useLexicalComposerContext();
 
-  const handleChange = () => {
-    const selection = $getSelection();
-    if (!$isRangeSelection(selection)) return false;
+  useUpdateStateEditor({
+    handleChange: () => {
+      const selection = $getSelection();
+      if (!$isRangeSelection(selection)) return false;
 
-    setIsBold(selection.hasFormat('bold'));
-  };
-
-  useUpdateStateEditor({ handleChange });
+      setIsBold(selection.hasFormat('bold'));
+    }
+  });
 
   return (
     <TooltipProvider>

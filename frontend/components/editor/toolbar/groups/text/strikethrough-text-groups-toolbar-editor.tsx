@@ -14,14 +14,14 @@ export const StrikethroughTextGroupsToolbarEditor = () => {
   const [isStrikethrough, setIsStrikethrough] = useState(false);
   const [editor] = useLexicalComposerContext();
 
-  const handleChange = () => {
-    const selection = $getSelection();
-    if (!$isRangeSelection(selection)) return false;
+  useUpdateStateEditor({
+    handleChange: () => {
+      const selection = $getSelection();
+      if (!$isRangeSelection(selection)) return false;
 
-    setIsStrikethrough(selection.hasFormat('strikethrough'));
-  };
-
-  useUpdateStateEditor({ handleChange });
+      setIsStrikethrough(selection.hasFormat('strikethrough'));
+    }
+  });
 
   return (
     <TooltipProvider>

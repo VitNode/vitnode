@@ -15,6 +15,7 @@
     "create": "Utwórz",
     "are_you_absolutely_sure": "Czy jesteś absolutnie pewien?",
     "cancel": "Anuluj",
+    "confirm": "Zatwierdź",
     "pagination": {
       "previous": "Poprzednia strona",
       "next": "Następna strona"
@@ -22,6 +23,9 @@
     "editor": {
       "remove_formatting": "Usuń formatowanie",
       "mixed": "Mieszane",
+      "font_size": "Rozmiar czcionki",
+      "font_color": "Kolor czcionki",
+      "set_default_color": "Ustaw domyślny kolor",
       "text": {
         "bold": "Pogrubienie",
         "italic": "Kursywa",

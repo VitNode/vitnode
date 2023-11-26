@@ -14,14 +14,14 @@ export const UnderlineTextGroupsToolbarEditor = () => {
   const [isUnderline, setIsUnderline] = useState(false);
   const [editor] = useLexicalComposerContext();
 
-  const handleChange = () => {
-    const selection = $getSelection();
-    if (!$isRangeSelection(selection)) return false;
+  useUpdateStateEditor({
+    handleChange: () => {
+      const selection = $getSelection();
+      if (!$isRangeSelection(selection)) return false;
 
-    setIsUnderline(selection.hasFormat('underline'));
-  };
-
-  useUpdateStateEditor({ handleChange });
+      setIsUnderline(selection.hasFormat('underline'));
+    }
+  });
 
   return (
     <TooltipProvider>

@@ -15,6 +15,7 @@
     "create": "Create",
     "are_you_absolutely_sure": "Are you absolutely sure?",
     "cancel": "Cancel",
+    "confirm": "Confirm",
     "pagination": {
       "previous": "Previous page",
       "next": "Next page"
@@ -22,6 +23,9 @@
     "editor": {
       "remove_formatting": "Remove Formatting",
       "mixed": "Mixed",
+      "font_size": "Font Size",
+      "font_color": "Font Color",
+      "set_default_color": "Set Default Color",
       "text": {
         "bold": "Bold",
         "italic": "Italic",
