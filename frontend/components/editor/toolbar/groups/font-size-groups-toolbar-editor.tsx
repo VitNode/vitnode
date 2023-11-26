@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/u
 import { buttonVariants } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useUpdateStateEditor } from '../hooks/use-update-state-editor';
+import { BLOCK_NAMES, useEditor } from '../hooks/use-editor';
 
 const AVAILABLE_FONT_SIZE = [
   '10px',
@@ -29,6 +30,7 @@ export const FontSizeGroupsToolbarEditor = () => {
   const t = useTranslations('core.editor');
   const [fontSize, setFontSize] = useState(DEFAULT_FONT_SIZE);
   const [editor] = useLexicalComposerContext();
+  const { blockType } = useEditor();
 
   useUpdateStateEditor({
     handleChange: () => {
@@ -38,6 +40,8 @@ export const FontSizeGroupsToolbarEditor = () => {
       setFontSize($getSelectionStyleValueForProperty(selection, 'font-size', DEFAULT_FONT_SIZE));
     }
   });
+
+  if (blockType === BLOCK_NAMES.CODE) return null;
 
   return (
     <Select

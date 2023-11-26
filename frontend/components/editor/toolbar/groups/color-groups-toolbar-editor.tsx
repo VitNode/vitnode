@@ -10,6 +10,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { BLOCK_NAMES, useEditor } from '../hooks/use-editor';
 
 const basicColors = [
   '#d0021b',
@@ -36,6 +37,7 @@ export const ColorGroupsToolbarEditor = ({ type }: Props) => {
   const [fontColor, setFontColor] = useState('');
   const [customColor, setCustomColor] = useState('');
   const [editor] = useLexicalComposerContext();
+  const { blockType } = useEditor();
 
   useUpdateStateEditor({
     handleChange: () => {
@@ -54,6 +56,8 @@ export const ColorGroupsToolbarEditor = ({ type }: Props) => {
       $patchStyleText(selection, { [type]: color });
     });
   };
+
+  if (blockType === BLOCK_NAMES.CODE) return null;
 
   return (
     <Popover>

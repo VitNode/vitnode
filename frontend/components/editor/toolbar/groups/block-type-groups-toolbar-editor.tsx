@@ -1,14 +1,4 @@
-import {
-  Code,
-  Heading1Icon,
-  Heading2Icon,
-  Heading3Icon,
-  List,
-  ListFilter,
-  ListOrdered,
-  LucideIcon
-} from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useTranslations } from 'next-intl';
 import {
@@ -32,54 +22,14 @@ import { useUpdateStateEditor } from '../hooks/use-update-state-editor';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { buttonVariants } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
-
-enum ROOT_NAMES {
-  NORMAL = 'normal',
-  H1 = 'h1',
-  H2 = 'h2',
-  H3 = 'h3',
-  BULLET = 'bullet',
-  NUMBER = 'number',
-  CODE = 'code'
-}
-
-const AVAILABLE_ROOTS: { icon: LucideIcon; value: ROOT_NAMES }[] = [
-  {
-    value: ROOT_NAMES.NORMAL,
-    icon: ListFilter
-  },
-  {
-    value: ROOT_NAMES.H1,
-    icon: Heading1Icon
-  },
-  {
-    value: ROOT_NAMES.H2,
-    icon: Heading2Icon
-  },
-  {
-    value: ROOT_NAMES.H3,
-    icon: Heading3Icon
-  },
-  {
-    value: ROOT_NAMES.BULLET,
-    icon: List
-  },
-  {
-    value: ROOT_NAMES.NUMBER,
-    icon: ListOrdered
-  },
-  {
-    value: ROOT_NAMES.CODE,
-    icon: Code
-  }
-];
+import { AVAILABLE_BLOCKS, BLOCK_NAMES, useEditor } from '../hooks/use-editor';
 
 export const BlockTypeGroupsToolbarEditor = () => {
   const t = useTranslations('core.editor.roots');
-  const [blockType, setBlockType] = useState<string>(ROOT_NAMES.NORMAL);
+  const { blockType, setBlockType } = useEditor();
   const [editor] = useLexicalComposerContext();
   const currentRoot = useMemo(() => {
-    return AVAILABLE_ROOTS.find(item => item.value === blockType) ?? AVAILABLE_ROOTS[0];
+    return AVAILABLE_BLOCKS.find(item => item.value === blockType) ?? AVAILABLE_BLOCKS[0];
   }, [blockType]);
 
   useUpdateStateEditor({
@@ -119,14 +69,15 @@ export const BlockTypeGroupsToolbarEditor = () => {
       setBlockType(type);
     }
   });
-  const onValueChange = (value: ROOT_NAMES) => {
-    if (value === ROOT_NAMES.BULLET) {
+
+  const onValueChange = (value: BLOCK_NAMES) => {
+    if (value === BLOCK_NAMES.BULLET) {
       editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined);
 
       return;
     }
 
-    if (value === ROOT_NAMES.NUMBER) {
+    if (value === BLOCK_NAMES.NUMBER) {
       editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined);
 
       return;
@@ -136,13 +87,13 @@ export const BlockTypeGroupsToolbarEditor = () => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
-      if (value === ROOT_NAMES.NORMAL) {
+      if (value === BLOCK_NAMES.PARAGRAPH) {
         $setBlocksType(selection, () => $createParagraphNode());
 
         return true;
       }
 
-      if (value === ROOT_NAMES.H1 || value === ROOT_NAMES.H2 || value === ROOT_NAMES.H3) {
+      if (value === BLOCK_NAMES.H1 || value === BLOCK_NAMES.H2 || value === BLOCK_NAMES.H3) {
         $setBlocksType(selection, () => $createHeadingNode(value));
 
         return true;
@@ -172,7 +123,7 @@ export const BlockTypeGroupsToolbarEditor = () => {
       </TooltipProvider>
 
       <SelectContent onCloseAutoFocus={() => editor.focus()}>
-        {AVAILABLE_ROOTS.map(item => (
+        {AVAILABLE_BLOCKS.map(item => (
           <SelectItem key={item.value} value={item.value}>
             <div className="flex items-center gap-2">
               <item.icon />
