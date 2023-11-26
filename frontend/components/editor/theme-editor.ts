@@ -4,9 +4,6 @@ import { EditorThemeClasses } from 'lexical';
  * ! IMPORTANT
  * ! This file is used to generate the theme editor
  * ! Do not modify this file !!!
- *
- * You can add your own theme classes, but do not modify the existing ones
- * ? If you want to modify the existing ones, you have to reinstall VitNode
  */
 
 export const themeEditor: EditorThemeClasses = {
@@ -23,5 +20,17 @@ export const themeEditor: EditorThemeClasses = {
     italic: 'italic',
     underline: 'underline',
     strikethrough: 'line-through'
-  }
+  },
+  list: {
+    ul: 'list-disc ml-6',
+    ulDepth: ['list-disc', 'list-disc', 'list-disc', 'list-disc', 'list-disc'],
+    ol: 'list-decimal ml-6',
+    olDepth: ['list-decimal', 'list-decimal', 'list-decimal', 'list-decimal', 'list-decimal'],
+    nested: {
+      listitem: 'list-none'
+    }
+  },
+  paragraph: 'my-2',
+  ltr: 'text-left',
+  rtl: 'text-right'
 };
