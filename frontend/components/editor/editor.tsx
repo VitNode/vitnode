@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { InitialConfigType, LexicalComposer } from '@lexical/react/LexicalComposer';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
@@ -18,6 +18,7 @@ import { AutoLinkPluginEditor } from './plugins/auto-link-plugin-editor';
 import { ToolbarEditor } from './toolbar/toolbar-editor';
 import { themeEditor } from './theme-editor';
 import { cx } from '@/functions/classnames';
+import { DraggableBlockPluginEditor } from './plugins/draggable-block-plugin-editor';
 
 interface Props {
   id: string;
@@ -27,6 +28,7 @@ interface Props {
 
 export const Editor = ({ className, id, toolbarClassName }: Props) => {
   const [editorState, setEditorState] = useState('');
+  const floatingAnchorElem = useRef<HTMLDivElement>(null);
 
   const initialConfig: InitialConfigType = {
     namespace: id,
@@ -59,7 +61,9 @@ export const Editor = ({ className, id, toolbarClassName }: Props) => {
         <ToolbarEditor className={toolbarClassName} />
         <RichTextPlugin
           contentEditable={
-            <ContentEditable className="p-3 border-0 focus:border-0 focus:outline-none min-h-[10rem] resize-y overflow-auto" />
+            <div className="relative" ref={floatingAnchorElem}>
+              <ContentEditable className="py-4 px-7 border-0 focus:border-0 focus:outline-none min-h-[10rem] resize-y overflow-auto" />
+            </div>
           }
           placeholder={null}
           ErrorBoundary={LexicalErrorBoundary}
@@ -68,6 +72,10 @@ export const Editor = ({ className, id, toolbarClassName }: Props) => {
         <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
         <AutoLinkPluginEditor />
         <HistoryPlugin />
+
+        {floatingAnchorElem.current && (
+          <DraggableBlockPluginEditor anchorElem={floatingAnchorElem.current} />
+        )}
       </div>
     </LexicalComposer>
   );
