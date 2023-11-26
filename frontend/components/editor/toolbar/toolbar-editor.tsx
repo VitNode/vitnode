@@ -4,7 +4,7 @@ import { TextGroupsToolbarEditor } from './groups/text/text-groups-toolbar-edito
 import { cx } from '@/functions/classnames';
 import { MoveGroupsToolbarEditor } from './groups/move/move-groups-toolbar-editor';
 import { FontSizeGroupsToolbarEditor } from './groups/font-size-groups-toolbar-editor';
-import { FontColorGroupsToolbarEditor } from './groups/font-color-groups-toolbar-editor';
+import { ColorGroupsToolbarEditor } from './groups/color-groups-toolbar-editor';
 
 interface Props {
   className?: string;
@@ -24,7 +24,8 @@ export const ToolbarEditor = ({ className }: Props) => {
         <SeparatorToolbarEditor />
 
         <FontSizeGroupsToolbarEditor />
-        <FontColorGroupsToolbarEditor />
+        <ColorGroupsToolbarEditor type="color" />
+        <ColorGroupsToolbarEditor type="background-color" />
       </div>
     </div>
   );

@@ -63,6 +63,7 @@
 
 a {
   @apply text-primary;
-  @apply hover:underline;
+  @apply underline;
+  @apply hover:no-underline;
   @apply cursor-pointer;
 }

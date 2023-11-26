@@ -7,7 +7,7 @@ import { cx } from '@/functions/classnames';
 import { Loader } from '../loader/loader';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 text-center rounded-md text-sm font-medium ring-offset-background transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&>svg]:w-4 [&>svg]:h-4 [&>svg]:flex-shrink-0 hover:no-underline',
+  'inline-flex items-center justify-center gap-2 text-center rounded-md text-sm font-medium ring-offset-background transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&>svg]:w-4 [&>svg]:h-4 [&>svg]:flex-shrink-0 no-underline',
   {
     variants: {
       variant: {

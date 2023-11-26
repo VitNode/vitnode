@@ -27,7 +27,11 @@ const basicColors = [
   '#9b9b9b'
 ];
 
-export const FontColorGroupsToolbarEditor = () => {
+interface Props {
+  type: 'color' | 'background-color';
+}
+
+export const ColorGroupsToolbarEditor = ({ type }: Props) => {
   const t = useTranslations('core.editor');
   const [fontColor, setFontColor] = useState('');
   const [customColor, setCustomColor] = useState('');
@@ -38,7 +42,7 @@ export const FontColorGroupsToolbarEditor = () => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
-      setFontColor($getSelectionStyleValueForProperty(selection, 'color', ''));
+      setFontColor($getSelectionStyleValueForProperty(selection, type, ''));
     }
   });
 
@@ -47,7 +51,7 @@ export const FontColorGroupsToolbarEditor = () => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
-      $patchStyleText(selection, { color });
+      $patchStyleText(selection, { [type]: color });
     });
   };
 
@@ -58,7 +62,7 @@ export const FontColorGroupsToolbarEditor = () => {
           <TooltipTrigger asChild>
             <PopoverTrigger asChild>
               <Button variant="ghost" className="[&>svg]:w-5 [&>svg]:h-5">
-                <Baseline />
+                {type === 'color' ? <Baseline /> : <Palette />}
                 <div
                   className="w-5 h-5 border rounded-md"
                   style={{ backgroundColor: fontColor ? fontColor : 'hsl(var(--foreground))' }}
@@ -130,7 +134,9 @@ export const FontColorGroupsToolbarEditor = () => {
             )}
           </PopoverContent>
 
-          <TooltipContent side="bottom">{t('font_color')}</TooltipContent>
+          <TooltipContent side="bottom">
+            {t(type === 'color' ? 'font_color' : 'font_background_color')}
+          </TooltipContent>
         </Tooltip>
       </TooltipProvider>
     </Popover>
