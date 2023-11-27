@@ -20,6 +20,7 @@ export const themeEditor: EditorThemeClasses = {
     bold: `${PREFIX}_text--bold`,
     italic: `${PREFIX}_text--italic`,
     underline: `${PREFIX}_text--underline`,
+    underlineStrikethrough: `${PREFIX}_text--underlineStrikethrough`,
     strikethrough: `${PREFIX}_text--strikethrough`,
     code: `${PREFIX}_text--code`
   },

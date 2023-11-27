@@ -6,8 +6,8 @@ import { $isHeadingNode, $isQuoteNode } from '@lexical/rich-text';
 import { $getNearestBlockElementAncestorOrThrow } from '@lexical/utils';
 import { useTranslations } from 'next-intl';
 
-import { Button } from '../../../ui/button';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../../ui/tooltip';
+import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 export const ClearFormattingButtonEditor = () => {
   const t = useTranslations('core.editor');

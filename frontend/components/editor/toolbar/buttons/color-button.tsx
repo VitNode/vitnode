@@ -121,7 +121,7 @@ export const ColorButtonEditor = ({ type }: Props) => {
                 <Button
                   size="icon"
                   className="flex-shrink-0"
-                  variant="outline"
+                  variant="ghost"
                   onClick={() => setCustomColor('')}
                 >
                   <X />

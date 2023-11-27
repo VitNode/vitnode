@@ -14,6 +14,7 @@ import { UndoMoveButtonEditor } from './buttons/undo-move-button';
 import { RedoMoveButtonEditor } from './buttons/redo-move-button';
 import { SubscriptButtonEditor } from './buttons/subscript-button';
 import { SuperscriptButtonEditor } from './buttons/superscript-button';
+import { LinkButtonEditor } from './buttons/link-button';
 
 interface Props {
   className?: string;
@@ -40,6 +41,7 @@ export const ToolbarEditor = ({ className }: Props) => {
             <UnderlineButtonEditor />
             <StrikethroughButtonEditor />
             <CodeButtonEditor />
+            <LinkButtonEditor />
             <SeparatorToolbarEditor />
 
             <SuperscriptButtonEditor />

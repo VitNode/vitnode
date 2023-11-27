@@ -1,5 +1,5 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { Subscript, Superscript } from 'lucide-react';
+import { Superscript } from 'lucide-react';
 import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND } from 'lexical';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';

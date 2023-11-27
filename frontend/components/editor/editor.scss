@@ -28,6 +28,10 @@
 
     &--underline {
       @apply underline;
+
+      &Strikethrough {
+        text-decoration: underline line-through;
+      }
     }
 
     &--strikethrough {

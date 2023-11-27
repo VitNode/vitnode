@@ -27,6 +27,7 @@
       "font_color": "Kolor czcionki",
       "font_background_color": "Kolor tła czcionki",
       "set_default_color": "Ustaw domyślny kolor",
+      "link": "Link",
       "text": {
         "bold": "Pogrubienie",
         "italic": "Kursywa",

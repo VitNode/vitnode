@@ -14,6 +14,7 @@ import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
 import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
+import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 
 import { OnChangePluginEditor } from './plugins/on-change-plugin-editor';
 import { AutoLinkPluginEditor } from './plugins/auto-link-plugin-editor';
@@ -90,6 +91,7 @@ export const Editor = ({ className, id, toolbarClassName }: Props) => {
           <ListPlugin />
           <CheckListPlugin />
           <TabIndentationPlugin />
+          <LinkPlugin />
 
           {floatingAnchorElem.current && (
             <>
