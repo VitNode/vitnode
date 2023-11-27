@@ -24,6 +24,9 @@ import { DraggableBlockPluginEditor } from './plugins/draggable-block-plugin-edi
 import { MARKDOWN_TRANSFORMERS_EDITOR } from './markdown-transformers-editor';
 import { BLOCK_NAMES, EditorContext } from './toolbar/hooks/use-editor';
 import { CodeHighlightPluginEditor } from './plugins/code-highlight-plugin-editor';
+import { CodeActionMenuPluginEditor } from './plugins/code/code-action-menu-plugin-editor';
+
+import './editor.scss';
 
 interface Props {
   id: string;
@@ -89,7 +92,10 @@ export const Editor = ({ className, id, toolbarClassName }: Props) => {
           <TabIndentationPlugin />
 
           {floatingAnchorElem.current && (
-            <DraggableBlockPluginEditor anchorElem={floatingAnchorElem.current} />
+            <>
+              <DraggableBlockPluginEditor anchorElem={floatingAnchorElem.current} />
+              <CodeActionMenuPluginEditor anchorElem={floatingAnchorElem.current} />
+            </>
           )}
         </div>
       </LexicalComposer>

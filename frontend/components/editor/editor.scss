@@ -1,0 +1,81 @@
+.vitnode-editor {
+  &_heading {
+    &--1 {
+      @apply text-4xl;
+    }
+
+    &--2 {
+      @apply text-3xl;
+    }
+
+    &--3 {
+      @apply text-2xl;
+    }
+
+    &--4 {
+      @apply text-xl;
+    }
+  }
+
+  &_text {
+    &--bold {
+      @apply font-bold;
+    }
+
+    &--italic {
+      @apply italic;
+    }
+
+    &--underline {
+      @apply underline;
+    }
+
+    &--strikethrough {
+      @apply line-through;
+    }
+
+    &--code {
+      @apply font-mono bg-muted rounded-md p-1.5;
+    }
+  }
+
+  &_list {
+    &--ul {
+      @apply list-disc ml-6;
+
+      &Depth {
+        @apply list-disc;
+      }
+    }
+
+    &--ol {
+      @apply list-decimal ml-6;
+
+      &Depth {
+        @apply list-decimal;
+      }
+    }
+
+    &--nested {
+      &-listitem {
+        @apply list-none;
+      }
+    }
+  }
+
+  &_paragraph {
+    @apply my-2;
+  }
+
+  &_ltr {
+    @apply text-left;
+  }
+
+  &_rtl {
+    @apply text-right;
+  }
+
+  &_code {
+    @apply font-mono bg-muted rounded-md p-2 pl-14 block relative before:content-[attr(data-gutter)] before:absolute before:top-0 before:left-0 before:min-w-[3rem] before:text-right before:whitespace-pre-wrap before:py-2 before:px-1 before:bg-background/40 before:border-r before:border-input before:text-muted-foreground;
+  }
+}
