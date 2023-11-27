@@ -25,7 +25,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
 import { AVAILABLE_BLOCKS, BLOCK_NAMES, useEditor } from '../hooks/use-editor';
 
-export const BlockTypeGroupsToolbarEditor = () => {
+export const BlockTypeButtonEditor = () => {
   const t = useTranslations('core.editor.roots');
   const { blockType, setBlockType } = useEditor();
   const [editor] = useLexicalComposerContext();

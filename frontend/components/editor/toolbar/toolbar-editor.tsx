@@ -1,12 +1,19 @@
-import { ClearFormattingToolbarEditor } from './clear-formatting-toolbar-editor';
+import { ClearFormattingButtonEditor } from './buttons/clear-formatting-button';
 import { SeparatorToolbarEditor } from './separator-toolbar-editor';
-import { TextGroupsToolbarEditor } from './groups/text/text-groups-toolbar-editor';
 import { cx } from '@/functions/classnames';
-import { MoveGroupsToolbarEditor } from './groups/move/move-groups-toolbar-editor';
-import { FontSizeGroupsToolbarEditor } from './groups/font-size-groups-toolbar-editor';
-import { ColorGroupsToolbarEditor } from './groups/color-groups-toolbar-editor';
-import { BlockTypeGroupsToolbarEditor } from './groups/block-type-groups-toolbar-editor';
 import { BLOCK_NAMES, useEditor } from './hooks/use-editor';
+import { BoldButtonEditor } from './buttons/bold-button';
+import { ItalicButtonEditor } from './buttons/italic-button';
+import { UnderlineButtonEditor } from './buttons/underline-button';
+import { StrikethroughButtonEditor } from './buttons/strikethrough-button';
+import { CodeButtonEditor } from './buttons/code-button';
+import { FontSizeButtonEditor } from './buttons/font-size-button';
+import { ColorButtonEditor } from './buttons/color-button';
+import { BlockTypeButtonEditor } from './buttons/block-type-button';
+import { UndoMoveButtonEditor } from './buttons/undo-move-button';
+import { RedoMoveButtonEditor } from './buttons/redo-move-button';
+import { SubscriptButtonEditor } from './buttons/subscript-button';
+import { SuperscriptButtonEditor } from './buttons/superscript-button';
 
 interface Props {
   className?: string;
@@ -18,21 +25,30 @@ export const ToolbarEditor = ({ className }: Props) => {
   return (
     <div className={cx('border-b-2 rounded-t-md sticky top-16 bg-background z-10', className)}>
       <div className="flex items-center p-2 overflow-x-auto [&>*]:flex-shrink-0">
-        <MoveGroupsToolbarEditor />
+        <UndoMoveButtonEditor />
+        <RedoMoveButtonEditor />
         <SeparatorToolbarEditor />
-        <BlockTypeGroupsToolbarEditor />
+        <BlockTypeButtonEditor />
 
         {blockType !== BLOCK_NAMES.CODE && (
           <>
-            <ClearFormattingToolbarEditor />
+            <ClearFormattingButtonEditor />
             <SeparatorToolbarEditor />
 
-            <TextGroupsToolbarEditor />
+            <BoldButtonEditor />
+            <ItalicButtonEditor />
+            <UnderlineButtonEditor />
+            <StrikethroughButtonEditor />
+            <CodeButtonEditor />
             <SeparatorToolbarEditor />
 
-            <FontSizeGroupsToolbarEditor />
-            <ColorGroupsToolbarEditor type="color" />
-            <ColorGroupsToolbarEditor type="background-color" />
+            <SuperscriptButtonEditor />
+            <SubscriptButtonEditor />
+            <SeparatorToolbarEditor />
+
+            <FontSizeButtonEditor />
+            <ColorButtonEditor type="color" />
+            <ColorButtonEditor type="background-color" />
           </>
         )}
       </div>

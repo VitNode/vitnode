@@ -32,7 +32,9 @@
         "italic": "Kursywa",
         "underline": "Podkreślenie",
         "strikethrough": "Przekreślenie",
-        "code": "Kod"
+        "code": "Kod",
+        "subscript": "Indeks dolny",
+        "superscript": "Indeks górny"
       },
       "move": {
         "undo": "Cofnij",

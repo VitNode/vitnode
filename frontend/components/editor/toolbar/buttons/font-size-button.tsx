@@ -25,7 +25,7 @@ const AVAILABLE_FONT_SIZE = [
 
 const DEFAULT_FONT_SIZE = '16px';
 
-export const FontSizeGroupsToolbarEditor = () => {
+export const FontSizeButtonEditor = () => {
   const t = useTranslations('core.editor');
   const [fontSize, setFontSize] = useState(DEFAULT_FONT_SIZE);
   const [editor] = useLexicalComposerContext();

@@ -31,7 +31,7 @@ interface Props {
   type: 'color' | 'background-color';
 }
 
-export const ColorGroupsToolbarEditor = ({ type }: Props) => {
+export const ColorButtonEditor = ({ type }: Props) => {
   const t = useTranslations('core.editor');
   const [fontColor, setFontColor] = useState('');
   const [customColor, setCustomColor] = useState('');

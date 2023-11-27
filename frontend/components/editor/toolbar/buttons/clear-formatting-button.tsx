@@ -6,10 +6,10 @@ import { $isHeadingNode, $isQuoteNode } from '@lexical/rich-text';
 import { $getNearestBlockElementAncestorOrThrow } from '@lexical/utils';
 import { useTranslations } from 'next-intl';
 
-import { Button } from '../../ui/button';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui/tooltip';
+import { Button } from '../../../ui/button';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../../ui/tooltip';
 
-export const ClearFormattingToolbarEditor = () => {
+export const ClearFormattingButtonEditor = () => {
   const t = useTranslations('core.editor');
   const [editor] = useLexicalComposerContext();
 
@@ -66,7 +66,7 @@ export const ClearFormattingToolbarEditor = () => {
             <RemoveFormatting className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
-        <TooltipContent>{t('remove_formatting')}</TooltipContent>
+        <TooltipContent side="bottom">{t('remove_formatting')}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

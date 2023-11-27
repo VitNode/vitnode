@@ -6,10 +6,9 @@ import { useState } from 'react';
 
 import { Toggle } from '@/components/ui/toggle';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { useUpdateStateEditor } from '../hooks/use-update-state-editor';
 
-import { useUpdateStateEditor } from '../../hooks/use-update-state-editor';
-
-export const StrikethroughTextGroupsToolbarEditor = () => {
+export const StrikethroughButtonEditor = () => {
   const t = useTranslations('core.editor.text');
   const [isStrikethrough, setIsStrikethrough] = useState(false);
   const [editor] = useLexicalComposerContext();

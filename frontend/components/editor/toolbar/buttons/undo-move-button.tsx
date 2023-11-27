@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
 
-export const UndoMoveGroupsToolbarEditor = () => {
+export const UndoMoveButtonEditor = () => {
   const t = useTranslations('core.editor.move');
   const [editor] = useLexicalComposerContext();
   const [canUndo, setCanUndo] = useState(false);

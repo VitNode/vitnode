@@ -1,17 +1,16 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { Bold } from 'lucide-react';
+import { Underline } from 'lucide-react';
 import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND } from 'lexical';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import { Toggle } from '@/components/ui/toggle';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { useUpdateStateEditor } from '../hooks/use-update-state-editor';
 
-import { useUpdateStateEditor } from '../../hooks/use-update-state-editor';
-
-export const BoldTextGroupsToolbarEditor = () => {
+export const UnderlineButtonEditor = () => {
   const t = useTranslations('core.editor.text');
-  const [isBold, setIsBold] = useState(false);
+  const [isUnderline, setIsUnderline] = useState(false);
   const [editor] = useLexicalComposerContext();
 
   useUpdateStateEditor({
@@ -19,7 +18,7 @@ export const BoldTextGroupsToolbarEditor = () => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
-      setIsBold(selection.hasFormat('bold'));
+      setIsUnderline(selection.hasFormat('underline'));
     }
   });
 
@@ -29,16 +28,16 @@ export const BoldTextGroupsToolbarEditor = () => {
         <TooltipTrigger asChild>
           <div>
             <Toggle
-              aria-label={t('bold')}
-              onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold')}
-              pressed={isBold}
+              aria-label={t('underline')}
+              onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline')}
+              pressed={isUnderline}
             >
-              <Bold />
+              <Underline />
             </Toggle>
           </div>
         </TooltipTrigger>
 
-        <TooltipContent side="bottom">{t('bold')}</TooltipContent>
+        <TooltipContent side="bottom">{t('underline')}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

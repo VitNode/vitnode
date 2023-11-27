@@ -1,17 +1,16 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { Italic } from 'lucide-react';
+import { Bold } from 'lucide-react';
 import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND } from 'lexical';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import { Toggle } from '@/components/ui/toggle';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { useUpdateStateEditor } from '../hooks/use-update-state-editor';
 
-import { useUpdateStateEditor } from '../../hooks/use-update-state-editor';
-
-export const ItalicTextGroupsToolbarEditor = () => {
+export const BoldButtonEditor = () => {
   const t = useTranslations('core.editor.text');
-  const [isItalic, setIsItalic] = useState(false);
+  const [isBold, setIsBold] = useState(false);
   const [editor] = useLexicalComposerContext();
 
   useUpdateStateEditor({
@@ -19,7 +18,7 @@ export const ItalicTextGroupsToolbarEditor = () => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
-      setIsItalic(selection.hasFormat('italic'));
+      setIsBold(selection.hasFormat('bold'));
     }
   });
 
@@ -29,16 +28,16 @@ export const ItalicTextGroupsToolbarEditor = () => {
         <TooltipTrigger asChild>
           <div>
             <Toggle
-              aria-label={t('italic')}
-              onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic')}
-              pressed={isItalic}
+              aria-label={t('bold')}
+              onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold')}
+              pressed={isBold}
             >
-              <Italic />
+              <Bold />
             </Toggle>
           </div>
         </TooltipTrigger>
 
-        <TooltipContent side="bottom">{t('italic')}</TooltipContent>
+        <TooltipContent side="bottom">{t('bold')}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

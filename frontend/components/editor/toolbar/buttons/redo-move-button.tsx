@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
 
-export const RedoMoveGroupsToolbarEditor = () => {
+export const RedoMoveButtonEditor = () => {
   const t = useTranslations('core.editor.move');
   const [editor] = useLexicalComposerContext();
   const [canRedo, setCanRedo] = useState(false);
