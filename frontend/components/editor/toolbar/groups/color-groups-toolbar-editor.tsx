@@ -10,7 +10,6 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { BLOCK_NAMES, useEditor } from '../hooks/use-editor';
 
 const basicColors = [
   '#d0021b',
@@ -37,7 +36,6 @@ export const ColorGroupsToolbarEditor = ({ type }: Props) => {
   const [fontColor, setFontColor] = useState('');
   const [customColor, setCustomColor] = useState('');
   const [editor] = useLexicalComposerContext();
-  const { blockType } = useEditor();
 
   useUpdateStateEditor({
     handleChange: () => {
@@ -57,8 +55,6 @@ export const ColorGroupsToolbarEditor = ({ type }: Props) => {
     });
   };
 
-  if (blockType === BLOCK_NAMES.CODE) return null;
-
   return (
     <Popover>
       <TooltipProvider>
@@ -69,7 +65,11 @@ export const ColorGroupsToolbarEditor = ({ type }: Props) => {
                 {type === 'color' ? <Baseline /> : <Palette />}
                 <div
                   className="w-5 h-5 border rounded-md"
-                  style={{ backgroundColor: fontColor ? fontColor : 'hsl(var(--foreground))' }}
+                  style={{
+                    backgroundColor: fontColor
+                      ? fontColor
+                      : `hsl(var(--${type === 'color' ? 'foreground' : 'card'}))`
+                  }}
                 />
               </Button>
             </PopoverTrigger>

@@ -5,7 +5,7 @@ import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
-import { CodeNode } from '@lexical/code';
+import { CodeHighlightNode, CodeNode } from '@lexical/code';
 import { AutoLinkNode, LinkNode } from '@lexical/link';
 import { ListNode, ListItemNode } from '@lexical/list';
 import { HeadingNode, QuoteNode } from '@lexical/rich-text';
@@ -23,6 +23,7 @@ import { cx } from '@/functions/classnames';
 import { DraggableBlockPluginEditor } from './plugins/draggable-block-plugin-editor';
 import { MARKDOWN_TRANSFORMERS_EDITOR } from './markdown-transformers-editor';
 import { BLOCK_NAMES, EditorContext } from './toolbar/hooks/use-editor';
+import { CodeHighlightPluginEditor } from './plugins/code-highlight-plugin-editor';
 
 interface Props {
   id: string;
@@ -50,7 +51,8 @@ export const Editor = ({ className, id, toolbarClassName }: Props) => {
       ListNode,
       ListItemNode,
       QuoteNode,
-      AutoLinkNode
+      AutoLinkNode,
+      CodeHighlightNode
     ]
   };
 
@@ -63,8 +65,13 @@ export const Editor = ({ className, id, toolbarClassName }: Props) => {
             className
           )}
         >
-          <AutoFocusPlugin />
           <ToolbarEditor className={toolbarClassName} />
+
+          {/* Custom Plugins */}
+          <OnChangePluginEditor state={editorState} onChange={setEditorState} />
+          <AutoLinkPluginEditor />
+          <CodeHighlightPluginEditor />
+
           <RichTextPlugin
             contentEditable={
               <div className="relative" ref={floatingAnchorElem}>
@@ -74,9 +81,8 @@ export const Editor = ({ className, id, toolbarClassName }: Props) => {
             placeholder={null}
             ErrorBoundary={LexicalErrorBoundary}
           />
-          <OnChangePluginEditor state={editorState} onChange={setEditorState} />
           <MarkdownShortcutPlugin transformers={MARKDOWN_TRANSFORMERS_EDITOR} />
-          <AutoLinkPluginEditor />
+          <AutoFocusPlugin />
           <HistoryPlugin />
           <ListPlugin />
           <CheckListPlugin />

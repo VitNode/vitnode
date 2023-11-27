@@ -6,28 +6,35 @@ import { MoveGroupsToolbarEditor } from './groups/move/move-groups-toolbar-edito
 import { FontSizeGroupsToolbarEditor } from './groups/font-size-groups-toolbar-editor';
 import { ColorGroupsToolbarEditor } from './groups/color-groups-toolbar-editor';
 import { BlockTypeGroupsToolbarEditor } from './groups/block-type-groups-toolbar-editor';
+import { BLOCK_NAMES, useEditor } from './hooks/use-editor';
 
 interface Props {
   className?: string;
 }
 
 export const ToolbarEditor = ({ className }: Props) => {
+  const { blockType } = useEditor();
+
   return (
     <div className={cx('border-b-2 rounded-t-md sticky top-16 bg-background z-10', className)}>
       <div className="flex items-center p-2 overflow-x-auto [&>*]:flex-shrink-0">
         <MoveGroupsToolbarEditor />
+        <SeparatorToolbarEditor />
         <BlockTypeGroupsToolbarEditor />
-        <SeparatorToolbarEditor />
 
-        <ClearFormattingToolbarEditor />
-        <SeparatorToolbarEditor />
+        {blockType !== BLOCK_NAMES.CODE && (
+          <>
+            <ClearFormattingToolbarEditor />
+            <SeparatorToolbarEditor />
 
-        <TextGroupsToolbarEditor />
-        <SeparatorToolbarEditor />
+            <TextGroupsToolbarEditor />
+            <SeparatorToolbarEditor />
 
-        <FontSizeGroupsToolbarEditor />
-        <ColorGroupsToolbarEditor type="color" />
-        <ColorGroupsToolbarEditor type="background-color" />
+            <FontSizeGroupsToolbarEditor />
+            <ColorGroupsToolbarEditor type="color" />
+            <ColorGroupsToolbarEditor type="background-color" />
+          </>
+        )}
       </div>
     </div>
   );

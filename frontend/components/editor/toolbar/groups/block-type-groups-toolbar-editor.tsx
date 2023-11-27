@@ -17,6 +17,7 @@ import {
   ListNode,
   ListType
 } from '@lexical/list';
+import { $createCodeNode } from '@lexical/code';
 
 import { useUpdateStateEditor } from '../hooks/use-update-state-editor';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -67,6 +68,12 @@ export const BlockTypeGroupsToolbarEditor = () => {
       // Headings
       const type = $isHeadingNode(element) ? element.getTag() : element.getType();
       setBlockType(type);
+
+      // Code
+      // if ($isCodeNode(element)) {
+      //   const language = element.getLanguage();
+      //   setCodeLanguage(language ? CODE_LANGUAGE_MAP[language] || language : '');
+      // }
     }
   });
 
@@ -74,16 +81,34 @@ export const BlockTypeGroupsToolbarEditor = () => {
     if (value === BLOCK_NAMES.BULLET) {
       editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined);
 
-      return;
+      return true;
     }
 
     if (value === BLOCK_NAMES.NUMBER) {
       editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined);
 
-      return;
+      return true;
     }
 
     editor.update(() => {
+      if (value === BLOCK_NAMES.CODE) {
+        let selection = $getSelection();
+        if (!$isRangeSelection(selection)) return false;
+
+        if (selection.isCollapsed()) {
+          $setBlocksType(selection, () => $createCodeNode());
+        } else {
+          const textContent = selection.getTextContent();
+          const codeNode = $createCodeNode();
+          selection.insertNodes([codeNode]);
+
+          selection = $getSelection();
+          if ($isRangeSelection(selection)) selection.insertRawText(textContent);
+        }
+
+        return true;
+      }
+
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
