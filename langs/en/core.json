@@ -31,7 +31,8 @@
         "bold": "Bold",
         "italic": "Italic",
         "underline": "Underline",
-        "strikethrough": "Strikethrough"
+        "strikethrough": "Strikethrough",
+        "code": "Code"
       },
       "move": {
         "undo": "Undo",

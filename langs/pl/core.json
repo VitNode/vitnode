@@ -31,7 +31,8 @@
         "bold": "Pogrubienie",
         "italic": "Kursywa",
         "underline": "Podkreślenie",
-        "strikethrough": "Przekreślenie"
+        "strikethrough": "Przekreślenie",
+        "code": "Kod"
       },
       "move": {
         "undo": "Cofnij",
