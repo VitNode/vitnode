@@ -1,10 +1,11 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useEffect, useRef, useState } from 'react';
-import { $isCodeNode, CodeNode, getLanguageFriendlyName } from '@lexical/code';
+import { $isCodeNode, CodeNode, getLanguageFriendlyName, normalizeCodeLang } from '@lexical/code';
 import { $getNearestNodeFromDOMNode } from 'lexical';
 
 import { useDebounce } from '@/hooks/core/use-debounce';
 import { getMouseInfo } from './utils-code-action-menu-plugin-editor';
+import { PrettierButtonCodeAction, canBePrettier } from './prettier/prettier-button-code-action';
 
 interface Position {
   right: string;
@@ -118,8 +119,19 @@ export const ContainerCodeActionMenuPluginEditor = ({ anchorElem }: Props) => {
   if (!isShown) return null;
 
   return (
-    <div className="vitnode-editor_code--menu absolute p-2" style={{ ...position }}>
-      <span className="text-sm text-muted-foreground">{getLanguageFriendlyName(lang)}</span>
+    <div
+      className="vitnode-editor_code--menu absolute p-2 flex items-center gap-2"
+      style={{ ...position }}
+    >
+      <span className="text-sm text-muted-foreground pointer-events-none">
+        {getLanguageFriendlyName(lang)}
+      </span>
+      {canBePrettier(normalizeCodeLang(lang)) && (
+        <PrettierButtonCodeAction
+          codeDOMNode={codeDOMNodeRef.current}
+          lang={normalizeCodeLang(lang)}
+        />
+      )}
     </div>
   );
 };

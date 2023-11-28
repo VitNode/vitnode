@@ -28,6 +28,9 @@
       "font_background_color": "Kolor tła czcionki",
       "set_default_color": "Ustaw domyślny kolor",
       "link": "Link",
+      "prettier": {
+        "format_code": "Formatuj kod"
+      },
       "text": {
         "bold": "Pogrubienie",
         "italic": "Kursywa",

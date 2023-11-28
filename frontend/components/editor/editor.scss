@@ -80,6 +80,6 @@
   }
 
   &_code {
-    @apply font-mono bg-muted rounded-md p-2 pl-14 block relative before:content-[attr(data-gutter)] before:absolute before:top-0 before:left-0 before:min-w-[3rem] before:text-right before:whitespace-pre-wrap before:py-2 before:px-1 before:bg-background/40 before:border-r before:border-input before:text-muted-foreground;
+    @apply font-mono bg-muted rounded-md px-2 py-3 pl-14 block relative before:content-[attr(data-gutter)] before:absolute before:top-0 before:left-0 before:min-w-[3rem] before:text-right before:whitespace-pre-wrap before:py-3 before:px-1 before:bg-background/40 before:border-r before:border-input before:text-muted-foreground;
   }
 }
