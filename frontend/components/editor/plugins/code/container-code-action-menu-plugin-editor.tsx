@@ -1,11 +1,24 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { $isCodeNode, CodeNode, getLanguageFriendlyName, normalizeCodeLang } from '@lexical/code';
 import { $getNearestNodeFromDOMNode } from 'lexical';
 
 import { useDebounce } from '@/hooks/core/use-debounce';
 import { getMouseInfo } from './utils-code-action-menu-plugin-editor';
-import { PrettierButtonCodeAction, canBePrettier } from './prettier/prettier-button-code-action';
+import {
+  PrettierButtonCodeAction,
+  PrettierFormatError,
+  canBePrettier
+} from './prettier/prettier-button-code-action';
+
+import { AlertDialog, AlertDialogContent } from '../../../ui/alert-dialog';
+import { Loader } from '../../../loader/loader';
+
+const PrettierAlertDialog = lazy(() =>
+  import('./prettier/prettier-alert-dialog').then(module => ({
+    default: module.PrettierAlertDialog
+  }))
+);
 
 interface Position {
   right: string;
@@ -29,6 +42,7 @@ export const ContainerCodeActionMenuPluginEditor = ({ anchorElem }: Props) => {
   const codeSetRef = useRef<Set<string>>(new Set());
   const [shouldListenMouseMove, setShouldListenMouseMove] = useState(false);
   const codeDOMNodeRef = useRef<HTMLElement | null>(null);
+  const [prettierError, setPrettierError] = useState<PrettierFormatError | null>(null);
 
   const debouncedOnMouseMove = useDebounce(
     (event: MouseEvent) => {
@@ -116,22 +130,33 @@ export const ContainerCodeActionMenuPluginEditor = ({ anchorElem }: Props) => {
     });
   });
 
-  if (!isShown) return null;
+  // if (!isShown) return null;
 
   return (
-    <div
-      className="vitnode-editor_code--menu absolute p-2 flex items-center gap-2"
-      style={{ ...position }}
-    >
-      <span className="text-sm text-muted-foreground pointer-events-none">
-        {getLanguageFriendlyName(lang)}
-      </span>
-      {canBePrettier(normalizeCodeLang(lang)) && (
-        <PrettierButtonCodeAction
-          codeDOMNode={codeDOMNodeRef.current}
-          lang={normalizeCodeLang(lang)}
-        />
+    <AlertDialog>
+      {isShown && (
+        <div
+          className="vitnode-editor_code--menu absolute p-2 flex items-center gap-2"
+          style={{ ...position }}
+        >
+          <span className="text-sm text-muted-foreground pointer-events-none">
+            {getLanguageFriendlyName(lang)}
+          </span>
+          {canBePrettier(normalizeCodeLang(lang)) && (
+            <PrettierButtonCodeAction
+              codeDOMNode={codeDOMNodeRef.current}
+              lang={normalizeCodeLang(lang)}
+              setPrettierError={setPrettierError}
+            />
+          )}
+        </div>
       )}
-    </div>
+
+      <AlertDialogContent className="select-auto">
+        <Suspense fallback={<Loader />}>
+          <PrettierAlertDialog prettierError={prettierError} />
+        </Suspense>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };

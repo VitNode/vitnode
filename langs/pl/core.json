@@ -16,6 +16,7 @@
     "are_you_absolutely_sure": "Czy jesteś absolutnie pewien?",
     "cancel": "Anuluj",
     "confirm": "Zatwierdź",
+    "close": "Zamknij",
     "pagination": {
       "previous": "Poprzednia strona",
       "next": "Następna strona"
@@ -29,7 +30,8 @@
       "set_default_color": "Ustaw domyślny kolor",
       "link": "Link",
       "prettier": {
-        "format_code": "Formatuj kod"
+        "format_code": "Formatuj kod",
+        "error_title": "Błąd Prettier"
       },
       "text": {
         "bold": "Pogrubienie",

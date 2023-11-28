@@ -16,6 +16,7 @@
     "are_you_absolutely_sure": "Are you absolutely sure?",
     "cancel": "Cancel",
     "confirm": "Confirm",
+    "close": "Close",
     "pagination": {
       "previous": "Previous page",
       "next": "Next page"
@@ -29,7 +30,8 @@
       "set_default_color": "Set Default Color",
       "link": "Link",
       "prettier": {
-        "format_code": "Format Code"
+        "format_code": "Format Code",
+        "error_title": "Prettier Error"
       },
       "text": {
         "bold": "Bold",
