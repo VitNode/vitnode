@@ -1,6 +1,6 @@
 'use client';
 
-import { Group, Languages, LayoutDashboard, Settings, Users } from 'lucide-react';
+import { Group, Languages, LayoutDashboard, MessagesSquare, Settings, Users } from 'lucide-react';
 import { ReactNode, useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { useSelectedLayoutSegments } from 'next/navigation';
@@ -62,6 +62,19 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
             id: 'groups',
             href: '/groups',
             icon: Group
+          }
+        ]}
+      />
+      <ItemListNavAdmin
+        id="forum"
+        activeItems={activeItems}
+        setActiveItems={setActiveItems}
+        onClickItem={onClickItem}
+        items={[
+          {
+            id: 'forums',
+            href: '/forums',
+            icon: MessagesSquare
           }
         ]}
       />
