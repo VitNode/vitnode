@@ -10,9 +10,9 @@ import {
   PrettierFormatError,
   canBePrettier
 } from './prettier/prettier-button-code-action';
-
-import { AlertDialog, AlertDialogContent } from '../../../ui/alert-dialog';
-import { Loader } from '../../../loader/loader';
+import { AlertDialog, AlertDialogContent } from '@/components/ui/alert-dialog';
+import { Loader } from '@/components/loader/loader';
+import { CopyButtonCodeAction } from './copy/copy-button-code-action';
 
 const PrettierAlertDialog = lazy(() =>
   import('./prettier/prettier-alert-dialog').then(module => ({
@@ -130,8 +130,6 @@ export const ContainerCodeActionMenuPluginEditor = ({ anchorElem }: Props) => {
     });
   });
 
-  // if (!isShown) return null;
-
   return (
     <AlertDialog>
       {isShown && (
@@ -142,12 +140,17 @@ export const ContainerCodeActionMenuPluginEditor = ({ anchorElem }: Props) => {
           <span className="text-sm text-muted-foreground pointer-events-none">
             {getLanguageFriendlyName(lang)}
           </span>
-          {canBePrettier(normalizeCodeLang(lang)) && (
-            <PrettierButtonCodeAction
-              codeDOMNode={codeDOMNodeRef.current}
-              lang={normalizeCodeLang(lang)}
-              setPrettierError={setPrettierError}
-            />
+          {codeDOMNodeRef.current && (
+            <>
+              {canBePrettier(normalizeCodeLang(lang)) && (
+                <PrettierButtonCodeAction
+                  codeDOMNode={codeDOMNodeRef.current}
+                  lang={normalizeCodeLang(lang)}
+                  setPrettierError={setPrettierError}
+                />
+              )}
+              <CopyButtonCodeAction codeDOMNode={codeDOMNodeRef.current} />
+            </>
           )}
         </div>
       )}

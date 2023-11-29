@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom';
 
-import { ContainerCodeActionMenuPluginEditor } from './container-code-action-menu-plugin-editor';
+import { ContainerCodeActionMenuPluginEditor } from './container';
 
 interface Props {
   anchorElem?: HTMLElement;

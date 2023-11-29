@@ -10,8 +10,7 @@ import { Options } from 'prettier';
 import { PrettierIcon } from './prettier-icon';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
-
-import { useAlertDialog } from '../../../../ui/alert-dialog';
+import { useAlertDialog } from '@/components/ui/alert-dialog';
 
 const PRETTIER_OPTIONS_BY_LANG: Record<string, Options> = {
   css: {
@@ -76,7 +75,7 @@ export interface PrettierFormatError {
   codeFrame: string;
 }
 interface Props {
-  codeDOMNode: HTMLElement | null;
+  codeDOMNode: HTMLElement;
   lang: string;
   setPrettierError: (error: PrettierFormatError | null) => void;
 }
@@ -95,8 +94,6 @@ export const PrettierButtonCodeAction = ({ codeDOMNode, lang, setPrettierError }
             variant="outline"
             size="icon"
             onClick={async () => {
-              if (!codeDOMNode) return;
-
               try {
                 let content = '';
 

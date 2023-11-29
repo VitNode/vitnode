@@ -2,14 +2,13 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import { PrettierFormatError } from './prettier-button-code-action';
-
 import {
   AlertDialogCancel,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle
-} from '../../../../ui/alert-dialog';
-import { Textarea } from '../../../../ui/textarea';
+} from '@/components/ui/alert-dialog';
+import { Textarea } from '@/components/ui/textarea';
 
 interface Props {
   prettierError: PrettierFormatError | null;

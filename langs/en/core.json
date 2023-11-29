@@ -29,6 +29,7 @@
       "font_background_color": "Font Background Color",
       "set_default_color": "Set Default Color",
       "link": "Link",
+      "copy_code": "Copy Code",
       "prettier": {
         "format_code": "Format Code",
         "error_title": "Prettier Error"
