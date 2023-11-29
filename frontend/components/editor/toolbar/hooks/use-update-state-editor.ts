@@ -11,6 +11,8 @@ export const useUpdateStateEditor = ({ handleChange }: Args) => {
   const [editor] = useLexicalComposerContext();
 
   useEffect(() => {
+    editor.update(handleChange);
+
     return mergeRegister(
       editor.registerCommand(
         SELECTION_CHANGE_COMMAND,

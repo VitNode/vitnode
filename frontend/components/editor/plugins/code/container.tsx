@@ -64,7 +64,6 @@ export const ContainerCodeActionMenuPluginEditor = ({ anchorElem }: Props) => {
 
       editor.update(() => {
         const maybeCodeNode = $getNearestNodeFromDOMNode(codeDOMNode);
-
         if ($isCodeNode(maybeCodeNode)) {
           codeNode = maybeCodeNode;
           _lang = codeNode.getLanguage() || '';

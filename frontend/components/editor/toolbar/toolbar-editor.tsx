@@ -15,6 +15,7 @@ import { RedoMoveButtonEditor } from './buttons/redo-move-button';
 import { SubscriptButtonEditor } from './buttons/subscript-button';
 import { SuperscriptButtonEditor } from './buttons/superscript-button';
 import { LinkButtonEditor } from './buttons/link-button';
+import { LangCodeBlockButtonEditor } from './buttons/code-block/lang-code-block-button';
 
 interface Props {
   className?: string;
@@ -31,7 +32,7 @@ export const ToolbarEditor = ({ className }: Props) => {
         <SeparatorToolbarEditor />
         <BlockTypeButtonEditor />
 
-        {blockType !== BLOCK_NAMES.CODE && (
+        {blockType !== BLOCK_NAMES.CODE ? (
           <>
             <ClearFormattingButtonEditor />
             <SeparatorToolbarEditor />
@@ -52,6 +53,8 @@ export const ToolbarEditor = ({ className }: Props) => {
             <ColorButtonEditor type="color" />
             <ColorButtonEditor type="background-color" />
           </>
+        ) : (
+          <LangCodeBlockButtonEditor />
         )}
       </div>
     </div>
