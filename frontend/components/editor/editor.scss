@@ -81,5 +81,125 @@
 
   &_code {
     @apply font-mono bg-muted rounded-md px-2 py-3 pl-14 block relative before:content-[attr(data-gutter)] before:absolute before:top-0 before:left-0 before:min-w-[3rem] before:text-right before:whitespace-pre-wrap before:py-3 before:px-1 before:bg-background/40 before:border-r before:border-input before:text-muted-foreground;
+
+    &--atrule {
+      @apply text-orange-700 dark:text-orange-500;
+    }
+
+    &--attr {
+      @apply text-pink-700 dark:text-pink-400;
+    }
+
+    &--boolean {
+      @apply text-pink-700 dark:text-pink-400;
+    }
+
+    &--builtin {
+      @apply text-teal-700 dark:text-teal-500;
+    }
+
+    &--cdata {
+      @apply text-green-700 dark:text-green-500;
+    }
+
+    &--char {
+      @apply text-green-700 dark:text-green-500;
+    }
+
+    &--class {
+      @apply text-orange-700 dark:text-orange-500;
+    }
+
+    &--class-name {
+      @apply text-orange-700 dark:text-orange-500;
+    }
+
+    &--comment {
+      @apply text-gray-600 dark:text-gray-400;
+    }
+
+    &--constant {
+      @apply text-red-700 dark:text-red-400;
+    }
+
+    &--deleted {
+      @apply text-red-700 dark:text-red-400;
+    }
+
+    &--doctype {
+      @apply text-blue-600 dark:text-blue-400;
+    }
+
+    &--entity {
+      @apply text-blue-600 dark:text-blue-400;
+    }
+
+    &--function {
+      @apply text-blue-600 dark:text-blue-400;
+    }
+
+    &--important {
+      @apply text-red-700 dark:text-red-400;
+    }
+
+    &--inserted {
+      @apply text-blue-600 dark:text-blue-400;
+    }
+
+    &--keyword {
+      @apply text-purple-600 dark:text-purple-400;
+    }
+
+    &--namespace {
+      @apply text-blue-600 dark:text-blue-400;
+    }
+
+    &--number {
+      @apply text-orange-700 dark:text-orange-500;
+    }
+
+    &--operator {
+      @apply text-purple-600 dark:text-purple-400;
+    }
+
+    &--prolog {
+      @apply text-blue-600 dark:text-blue-400;
+    }
+
+    &--property {
+      @apply text-orange-700 dark:text-orange-500;
+    }
+
+    &--punctuation {
+      @apply text-gray-600 dark:text-gray-400;
+    }
+
+    &--regex {
+      @apply text-red-700 dark:text-red-400;
+    }
+
+    &--selector {
+      @apply text-red-700 dark:text-red-400;
+    }
+
+    &--string {
+      @apply text-green-700 dark:text-green-500;
+    }
+
+    &--symbol {
+      @apply text-red-700 dark:text-red-400;
+    }
+
+    &--tag {
+      @apply text-sky-700 dark:text-sky-500;
+    }
+
+    &--url {
+      @apply text-green-700 dark:text-green-500;
+    }
+
+    &--variable {
+      @apply text-orange-700 dark:text-orange-500;
+    }
   }
 }

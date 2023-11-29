@@ -1,11 +1,14 @@
 import { useTranslations } from 'next-intl';
+import { Options } from 'prettier';
 import { format } from 'prettier/standalone';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $getNearestNodeFromDOMNode } from 'lexical';
 import { $isCodeNode } from '@lexical/code';
 import * as prettierPluginBabel from 'prettier/plugins/babel';
 import * as prettierPluginEstree from 'prettier/plugins/estree';
-import { Options } from 'prettier';
+import * as prettierPluginMarkdown from 'prettier/parser-markdown';
+import * as prettierPluginHtml from 'prettier/parser-html';
+import * as prettierPluginCss from 'prettier/parser-postcss';
 
 import { PrettierIcon } from './prettier-icon';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -14,16 +17,24 @@ import { useAlertDialog } from '@/components/ui/alert-dialog';
 
 const PRETTIER_OPTIONS_BY_LANG: Record<string, Options> = {
   css: {
-    parser: 'css'
+    parser: 'css',
+    plugins: [prettierPluginCss]
   },
   html: {
-    parser: 'html'
+    parser: 'html',
+    plugins: [prettierPluginHtml]
   },
   js: {
-    parser: 'babel'
+    parser: 'babel',
+    plugins: [prettierPluginBabel, prettierPluginEstree]
+  },
+  ts: {
+    parser: 'babel',
+    plugins: [prettierPluginBabel, prettierPluginEstree]
   },
   markdown: {
-    parser: 'markdown'
+    parser: 'markdown',
+    plugins: [prettierPluginMarkdown]
   }
 };
 
@@ -33,14 +44,17 @@ export const canBePrettier = (lang: string): boolean => {
   return LANG_CAN_BE_PRETTIER.includes(lang);
 };
 
-// export const getPrettierOptions = (lang: string): Options => {
-//   const options = PRETTIER_OPTIONS_BY_LANG[lang];
+export const getPrettierOptions = (lang: string): Options => {
+  const options = PRETTIER_OPTIONS_BY_LANG[lang];
 
-//   if (!options) {
-//     throw new Error(`CodeActionMenuPlugin: Prettier does not support this language: ${lang}`);
-//   }
+  if (!options) {
+    // eslint-disable-next-line no-console
+    console.error(`PrettierButtonCodeAction: Prettier does not support this language: ${lang}`);
+  }
 
-//   return {
+  return options;
+};
+
 //     ...options,
 //     plugins: [parserBabel, prettierPluginEstree]
 //   };
@@ -70,6 +84,8 @@ export const canBePrettier = (lang: string): boolean => {
 export interface PrettierFormatError {
   cause: {
     code: string;
+    name: string;
+    reason: string;
     reasonCode: string;
   };
   codeFrame: string;
@@ -104,10 +120,7 @@ export const PrettierButtonCodeAction = ({ codeDOMNode, lang, setPrettierError }
                   content = codeNode.getTextContent();
                 });
 
-                const parsed = await format(content, {
-                  parser: 'babel',
-                  plugins: [prettierPluginBabel, prettierPluginEstree]
-                });
+                const parsed = await format(content, getPrettierOptions(lang));
 
                 if (parsed === '') return;
 
@@ -119,10 +132,17 @@ export const PrettierButtonCodeAction = ({ codeDOMNode, lang, setPrettierError }
                   selection.insertText(parsed);
                 });
               } catch (error) {
+                // eslint-disable-next-line no-console
+                console.error(JSON.stringify(error));
+
                 const currentError = error as PrettierFormatError;
 
-                setPrettierError(currentError);
-                setOpen(true);
+                if (currentError?.cause) {
+                  setPrettierError(currentError);
+                  setOpen(true);
+
+                  return;
+                }
               }
             }}
           >

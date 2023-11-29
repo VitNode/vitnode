@@ -28,7 +28,8 @@ export const PrettierAlertDialog = ({ prettierError }: Props) => {
       </AlertDialogHeader>
 
       <p>
-        {prettierError.cause.code}: {prettierError.cause.reasonCode}
+        {prettierError.cause.code ?? prettierError.cause.name}:{' '}
+        {prettierError.cause.reasonCode ?? prettierError.cause.reason}
       </p>
 
       <Textarea onChange={e => setValue(e.target.value)} value={value} />
