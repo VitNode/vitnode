@@ -15,9 +15,49 @@
     "create": "Utwórz",
     "are_you_absolutely_sure": "Czy jesteś absolutnie pewien?",
     "cancel": "Anuluj",
+    "confirm": "Zatwierdź",
+    "close": "Zamknij",
     "pagination": {
       "previous": "Poprzednia strona",
       "next": "Następna strona"
+    },
+    "editor": {
+      "remove_formatting": "Usuń formatowanie",
+      "mixed": "Mieszane",
+      "font_size": "Rozmiar czcionki",
+      "font_color": "Kolor czcionki",
+      "font_background_color": "Kolor tła czcionki",
+      "set_default_color": "Ustaw domyślny kolor",
+      "link": "Link",
+      "copy_code": "Kopiuj kod",
+      "code_language": "Język kodu",
+      "prettier": {
+        "format_code": "Formatuj kod",
+        "error_title": "Błąd Prettier"
+      },
+      "text": {
+        "bold": "Pogrubienie",
+        "italic": "Kursywa",
+        "underline": "Podkreślenie",
+        "strikethrough": "Przekreślenie",
+        "code": "Kod",
+        "subscript": "Indeks dolny",
+        "superscript": "Indeks górny"
+      },
+      "move": {
+        "undo": "Cofnij",
+        "redo": "Ponów"
+      },
+      "roots": {
+        "title": "Typ bloku",
+        "paragraph": "Normalny",
+        "h1": "Nagłówek H1",
+        "h2": "Nagłówek H2",
+        "h3": "Nagłówek H3",
+        "bullet": "Lista punktowana",
+        "number": "Lista numerowana",
+        "code": "Blok kodu"
+      }
     },
     "icon_picker": {
       "title": "Wybierz ikonę",

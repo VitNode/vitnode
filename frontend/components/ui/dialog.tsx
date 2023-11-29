@@ -28,12 +28,15 @@ export const DialogContext = createContext<DialogContextArgs>({
 
 export const useDialog = () => useContext(DialogContext);
 
-const Dialog = ({ children }: Omit<DialogPrimitive.DialogProps, 'open' | 'onOpenChange'>) => {
+const Dialog = ({
+  children,
+  ...props
+}: Omit<DialogPrimitive.DialogProps, 'open' | 'onOpenChange'>) => {
   const [open, setOpen] = useState(false);
 
   return (
     <DialogContext.Provider value={{ open, setOpen }}>
-      <DialogPrimitive.Root open={open} onOpenChange={setOpen}>
+      <DialogPrimitive.Root open={open} onOpenChange={setOpen} {...props}>
         {children}
       </DialogPrimitive.Root>
     </DialogContext.Provider>

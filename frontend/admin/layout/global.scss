@@ -60,3 +60,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+a {
+  @apply text-primary;
+  @apply underline;
+  @apply hover:no-underline;
+  @apply cursor-pointer;
+}

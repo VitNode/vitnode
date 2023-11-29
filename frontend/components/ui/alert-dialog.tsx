@@ -29,13 +29,14 @@ export const AlertDialogContext = createContext<AlertDialogContextArgs>({
 export const useAlertDialog = () => useContext(AlertDialogContext);
 
 const AlertDialog = ({
-  children
+  children,
+  ...props
 }: Omit<AlertDialogPrimitive.DialogProps, 'open' | 'onOpenChange'>) => {
   const [open, setOpen] = useState(false);
 
   return (
     <AlertDialogContext.Provider value={{ open, setOpen }}>
-      <AlertDialogPrimitive.Root open={open} onOpenChange={setOpen}>
+      <AlertDialogPrimitive.Root open={open} onOpenChange={setOpen} {...props}>
         {children}
       </AlertDialogPrimitive.Root>
     </AlertDialogContext.Provider>

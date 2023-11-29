@@ -15,9 +15,49 @@
     "create": "Create",
     "are_you_absolutely_sure": "Are you absolutely sure?",
     "cancel": "Cancel",
+    "confirm": "Confirm",
+    "close": "Close",
     "pagination": {
       "previous": "Previous page",
       "next": "Next page"
+    },
+    "editor": {
+      "remove_formatting": "Remove Formatting",
+      "mixed": "Mixed",
+      "font_size": "Font Size",
+      "font_color": "Font Color",
+      "font_background_color": "Font Background Color",
+      "set_default_color": "Set Default Color",
+      "link": "Link",
+      "copy_code": "Copy Code",
+      "code_language": "Code Language",
+      "prettier": {
+        "format_code": "Format Code",
+        "error_title": "Prettier Error"
+      },
+      "text": {
+        "bold": "Bold",
+        "italic": "Italic",
+        "underline": "Underline",
+        "strikethrough": "Strikethrough",
+        "code": "Code",
+        "subscript": "Subscript",
+        "superscript": "Superscript"
+      },
+      "move": {
+        "undo": "Undo",
+        "redo": "Redo"
+      },
+      "roots": {
+        "title": "Block Type",
+        "paragraph": "Normal",
+        "h1": "Heading H1",
+        "h2": "Heading H2",
+        "h3": "Heading H3",
+        "bullet": "Bullet List",
+        "number": "Ordered List",
+        "code": "Code Block"
+      }
     },
     "icon_picker": {
       "title": "Choose an icon",
