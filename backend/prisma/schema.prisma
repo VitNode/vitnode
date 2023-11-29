@@ -19,9 +19,9 @@ model core_languages {
   enabled   Boolean @default(true)
   created   Int
 
-  groups                        core_groups_languages[]         @relation("core_groups_languages_language")
-  forums_categories_names       forums_categories_names[]       @relation("forums_categories_names_language")
-  forums_categories_description forums_categories_description[] @relation("forums_categories_description_language")
+  groups                    core_groups_languages[]    @relation("core_groups_languages_language")
+  forums_forums_names       forum_forums_names[]       @relation("forums_forums_names_language")
+  forums_forums_description forum_forums_description[] @relation("forums_forums_description_language")
 }
 
 model core_members {
@@ -148,35 +148,40 @@ model core_attachments {
   @@index([member_id])
 }
 
-model forums_categories {
-  id       String @id @unique @default(uuid())
-  created  Int
-  position Int    @default(0)
+model forum_forums {
+  id          String  @id @unique @default(uuid())
+  created     Int
+  parent_id   String?
+  position    Int     @default(0)
+  is_category Boolean @default(false)
+  views       Int     @default(0)
 
-  name        forums_categories_names[]       @relation("forums_categories_names_category")
-  description forums_categories_description[] @relation("forums_categories_description_category")
+  parent      forum_forums?              @relation("forums_forums_parent", references: [id], fields: [parent_id], onDelete: Cascade)
+  children    forum_forums[]             @relation("forums_forums_parent")
+  name        forum_forums_names[]       @relation("forums_forums_names_forum")
+  description forum_forums_description[] @relation("forums_forums_description_forum")
 }
 
-model forums_categories_names {
+model forum_forums_names {
   id          String @id @unique @default(uuid())
   id_language String @db.VarChar(32)
-  category_id String
+  forum_id    String
   value       String @db.VarChar(255)
 
-  category forums_categories @relation("forums_categories_names_category", references: [id], fields: [category_id], onDelete: Cascade)
-  language core_languages    @relation("forums_categories_names_language", references: [id], fields: [id_language])
+  forum    forum_forums   @relation("forums_forums_names_forum", references: [id], fields: [forum_id], onDelete: Cascade)
+  language core_languages @relation("forums_forums_names_language", references: [id], fields: [id_language])
 
   @@index([id_language])
 }
 
-model forums_categories_description {
+model forum_forums_description {
   id          String @id @unique @default(uuid())
   id_language String @db.VarChar(32)
-  category_id String
+  forum_id    String
   value       String @db.Text
 
-  category forums_categories @relation("forums_categories_description_category", references: [id], fields: [category_id], onDelete: Cascade)
-  language core_languages    @relation("forums_categories_description_language", references: [id], fields: [id_language])
+  forum    forum_forums   @relation("forums_forums_description_forum", references: [id], fields: [forum_id], onDelete: Cascade)
+  language core_languages @relation("forums_forums_description_language", references: [id], fields: [id_language])
 
   @@index([id_language])
 }

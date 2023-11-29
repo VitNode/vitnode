@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 
-import { CategoriesForumModule } from './categories/forum_categories.module';
+import { ForumsForumModule } from './categories/forum_forums.module';
 
 @Module({
-  imports: [CategoriesForumModule]
+  imports: [ForumsForumModule]
 })
 export class ForumModule {}

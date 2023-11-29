@@ -1,7 +1,7 @@
 import { ArgsType, Field, Int } from '@nestjs/graphql';
 
 @ArgsType()
-export class ShowForumCategoriesArgs {
+export class ShowForumForumsArgs {
   @Field(() => String, { nullable: true })
   cursor?: string;
 

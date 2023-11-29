@@ -72,7 +72,7 @@ type Query {
   show_admin_members(cursor: String, first: Int, groups: [String!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   show_core_languages(cursor: String, first: Int, last: Int): ShowCoreLanguagesObj!
   show_core_members(cursor: String, findByIds: [String!], first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
-  show_forum_categories(cursor: String, first: Int, last: Int, search: String): ShowForumCategoriesObj!
+  show_forum_forums(cursor: String, first: Int, last: Int, search: String): ShowForumForumsObj!
 }
 
 type ShowAdminGroups {
@@ -188,17 +188,30 @@ enum ShowCoreMembersSortingColumnEnum {
   reactions
 }
 
-type ShowForumCategories {
+type ShowForumForums {
   created: Int!
   description: [TextLanguage!]!
   id: String!
+  is_category: Boolean!
   name: [TextLanguage!]!
   position: Int!
+  views: Int!
 }
 
-type ShowForumCategoriesObj {
-  edges: [ShowForumCategories!]!
+type ShowForumForumsObj {
+  edges: [ShowForumForumsWithParent!]!
   pageInfo: PageInfo!
+}
+
+type ShowForumForumsWithParent {
+  created: Int!
+  description: [TextLanguage!]!
+  id: String!
+  is_category: Boolean!
+  name: [TextLanguage!]!
+  parent: ShowForumForums!
+  position: Int!
+  views: Int!
 }
 
 type SignUpCoreMembersObj {

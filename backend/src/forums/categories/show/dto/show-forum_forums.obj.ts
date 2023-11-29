@@ -4,16 +4,16 @@ import { PageInfo } from '@/types/database/pagination.type';
 import { TextLanguage } from '@/types/database/text-language.type';
 
 @ObjectType()
-export class ShowForumCategoriesObj {
-  @Field(() => [ShowForumCategories])
-  edges: ShowForumCategories[];
+export class ShowForumForumsObj {
+  @Field(() => [ShowForumForumsWithParent])
+  edges: ShowForumForumsWithParent[];
 
   @Field(() => PageInfo)
   pageInfo: PageInfo;
 }
 
 @ObjectType()
-export class ShowForumCategories {
+class ShowForumForums {
   @Field(() => String)
   id: string;
 
@@ -28,4 +28,16 @@ export class ShowForumCategories {
 
   @Field(() => Int)
   created: number;
+
+  @Field(() => Int)
+  views: number;
+
+  @Field(() => Boolean)
+  is_category: boolean;
+}
+
+@ObjectType()
+export class ShowForumForumsWithParent extends ShowForumForums {
+  @Field(() => ShowForumForums)
+  parent: ShowForumForums;
 }
