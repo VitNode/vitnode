@@ -14,6 +14,10 @@
         "title": "Użytkownicy",
         "list": "Użytkownicy",
         "groups": "Grupy"
+      },
+      "forum": {
+        "title": "Forum",
+        "forums": "Fora"
       }
     },
     "home_page": "Strona główna",
@@ -125,6 +129,11 @@
             "admin_control_panel": "Panel kontrolny administratora"
           }
         }
+      }
+    },
+    "forum": {
+      "forums": {
+        "title": "Forums"
       }
     }
   }
