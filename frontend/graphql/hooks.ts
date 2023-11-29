@@ -147,6 +147,7 @@ export type Query = {
   show_admin_members: ShowAdminMembersObj;
   show_core_languages: ShowCoreLanguagesObj;
   show_core_members: ShowCoreMembersObj;
+  show_forum_categories: ShowForumCategoriesObj;
 };
 
 
@@ -183,6 +184,14 @@ export type QueryShow_Core_MembersArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<Array<ShowCoreMembersSortByArgs>>;
+};
+
+
+export type QueryShow_Forum_CategoriesArgs = {
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ShowAdminGroups = {
@@ -305,6 +314,21 @@ export enum ShowCoreMembersSortingColumnEnum {
   Posts = 'posts',
   Reactions = 'reactions'
 }
+
+export type ShowForumCategories = {
+  __typename?: 'ShowForumCategories';
+  created: Scalars['Int']['output'];
+  description: Array<TextLanguage>;
+  id: Scalars['String']['output'];
+  name: Array<TextLanguage>;
+  position: Scalars['Int']['output'];
+};
+
+export type ShowForumCategoriesObj = {
+  __typename?: 'ShowForumCategoriesObj';
+  edges: Array<ShowForumCategories>;
+  pageInfo: PageInfo;
+};
 
 export type SignUpCoreMembersObj = {
   __typename?: 'SignUpCoreMembersObj';

@@ -10,6 +10,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model core_languages {
+  id        String  @id @unique @db.VarChar(32)
+  name      String  @db.VarChar(255)
+  timezone  String  @default("UTC") @db.VarChar(255)
+  protected Boolean @default(false)
+  default   Boolean @default(false)
+  enabled   Boolean @default(true)
+  created   Int
+
+  groups                        core_groups_languages[]         @relation("core_groups_languages_language")
+  forums_categories_names       forums_categories_names[]       @relation("forums_categories_names_language")
+  forums_categories_description forums_categories_description[] @relation("forums_categories_description_language")
+}
+
 model core_members {
   id                   String            @id @unique @db.VarChar(255)
   name                 String            @unique @db.VarChar(255)
@@ -134,14 +148,35 @@ model core_attachments {
   @@index([member_id])
 }
 
-model core_languages {
-  id        String  @id @unique @db.VarChar(32)
-  name      String  @db.VarChar(255)
-  timezone  String  @default("UTC") @db.VarChar(255)
-  protected Boolean @default(false)
-  default   Boolean @default(false)
-  enabled   Boolean @default(true)
-  created   Int
+model forums_categories {
+  id       String @id @unique @default(uuid())
+  created  Int
+  position Int    @default(0)
 
-  groups core_groups_languages[] @relation("core_groups_languages_language")
+  name        forums_categories_names[]       @relation("forums_categories_names_category")
+  description forums_categories_description[] @relation("forums_categories_description_category")
+}
+
+model forums_categories_names {
+  id          String @id @unique @default(uuid())
+  id_language String @db.VarChar(32)
+  category_id String
+  value       String @db.VarChar(255)
+
+  category forums_categories @relation("forums_categories_names_category", references: [id], fields: [category_id], onDelete: Cascade)
+  language core_languages    @relation("forums_categories_names_language", references: [id], fields: [id_language])
+
+  @@index([id_language])
+}
+
+model forums_categories_description {
+  id          String @id @unique @default(uuid())
+  id_language String @db.VarChar(32)
+  category_id String
+  value       String @db.Text
+
+  category forums_categories @relation("forums_categories_description_category", references: [id], fields: [category_id], onDelete: Cascade)
+  language core_languages    @relation("forums_categories_description_language", references: [id], fields: [id_language])
+
+  @@index([id_language])
 }

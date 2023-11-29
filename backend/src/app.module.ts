@@ -12,6 +12,7 @@ import { GlobalCoreSessionsModule } from './core/sessions/core_sessions.module';
 import { CoreModule } from './core/core.module';
 import { AdminModule } from './admin/admin.module';
 import { GlobalAdminSessionsModule } from './admin/sessions/admin_sessions.module';
+import { ForumModule } from './forums/forum.module';
 
 import { Ctx } from '@/types/context.type';
 
@@ -31,6 +32,7 @@ import { Ctx } from '@/types/context.type';
     GlobalAdminSessionsModule,
     CoreModule,
     AdminModule,
+    ForumModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '../public'),
       serveRoot: '/public'
