@@ -15,12 +15,12 @@ export interface CreateEditFormGroupsMembersAdminArgs {
 export const useCreateEditFormGroupsMembersAdmin = ({
   data
 }: CreateEditFormGroupsMembersAdminArgs) => {
-  const tCore = useTranslations('core');
+  const t = useTranslations('core');
   const { isPending, mutateAsync } = useCreateGroupAdminAPI();
   const { isPending: editIsPending, mutateAsync: editMutateAsync } = useEditGroupAdminAPI();
 
   const formSchema = z.object({
-    name: zodTextLanguageInputType.min(1, tCore('forms.empty')),
+    name: zodTextLanguageInputType.min(1, t('forms.empty')),
     test: z.string()
   });
 

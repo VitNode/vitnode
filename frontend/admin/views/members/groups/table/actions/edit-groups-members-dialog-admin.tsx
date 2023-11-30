@@ -7,7 +7,6 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Loader } from '@/components/loader/loader';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { ShowAdminGroups } from '@/graphql/hooks';
-import { useTextLang } from '@/hooks/core/use-text-lang';
 
 const CreateEditFormGroupsMembersAdmin = lazy(() =>
   import('../../create-edit-form/create-edit-form-groups-members-admin').then(module => ({
@@ -21,7 +20,6 @@ interface Props {
 
 export const EditGroupsMembersDialogAdmin = ({ data }: Props) => {
   const t = useTranslations('core');
-  const { convertText } = useTextLang();
 
   return (
     <Dialog>
@@ -41,10 +39,7 @@ export const EditGroupsMembersDialogAdmin = ({ data }: Props) => {
 
       <DialogContent className="max-w-3xl">
         <Suspense fallback={<Loader />}>
-          <CreateEditFormGroupsMembersAdmin
-            title={t('edit_with_value', { value: convertText(data.name) })}
-            data={data}
-          />
+          <CreateEditFormGroupsMembersAdmin data={data} />
         </Suspense>
       </DialogContent>
     </Dialog>

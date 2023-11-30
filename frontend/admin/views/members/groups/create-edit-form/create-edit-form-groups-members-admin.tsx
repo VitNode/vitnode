@@ -10,6 +10,7 @@ import {
   CreateEditFormGroupsMembersAdminArgs,
   useCreateEditFormGroupsMembersAdmin
 } from './hooks/use-create-edit-form-groups-members-admin';
+import { useTextLang } from '@/hooks/core/use-text-lang';
 
 const MainContentCreateEditFormGroupsMembersAdmin = lazy(() =>
   import('./content/main-content-create-edit-form-groups-members-admin').then(module => ({
@@ -27,14 +28,14 @@ enum TabsEnum {
   CONTENT = 'content'
 }
 
-interface Props extends CreateEditFormGroupsMembersAdminArgs {
-  title: string;
-}
-
-export const CreateEditFormGroupsMembersAdmin = ({ data, title }: Props) => {
-  const t = useTranslations('core');
+export const CreateEditFormGroupsMembersAdmin = ({
+  data
+}: CreateEditFormGroupsMembersAdminArgs) => {
+  const t = useTranslations('admin.members.groups');
+  const tCore = useTranslations('core');
   const [activeTab, setActiveTab] = useState<TabsEnum>(TabsEnum.MAIN);
   const { form, isPending, onSubmit } = useCreateEditFormGroupsMembersAdmin({ data });
+  const { convertText } = useTextLang();
 
   const tabsContent = {
     [TabsEnum.MAIN]: <MainContentCreateEditFormGroupsMembersAdmin />,
@@ -44,7 +45,9 @@ export const CreateEditFormGroupsMembersAdmin = ({ data, title }: Props) => {
   return (
     <>
       <DialogHeader className="flex flex-col gap-4">
-        <DialogTitle>{title}</DialogTitle>
+        <DialogTitle>
+          {data ? tCore('edit_with_value', { value: convertText(data.name) }) : t('create.title')}
+        </DialogTitle>
 
         <Tabs
           items={[
@@ -69,7 +72,7 @@ export const CreateEditFormGroupsMembersAdmin = ({ data, title }: Props) => {
           <Suspense fallback={<Loader />}>{tabsContent[activeTab]}</Suspense>
 
           <Button disabled={!form.formState.isValid} loading={isPending} type="submit">
-            {t('save')}
+            {tCore('save')}
           </Button>
         </form>
       </Form>

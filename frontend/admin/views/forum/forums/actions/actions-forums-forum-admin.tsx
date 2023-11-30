@@ -1,20 +1,20 @@
 'use client';
 
-import { Plus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { Plus } from 'lucide-react';
 import { Suspense, lazy } from 'react';
 
-import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/loader/loader';
 
-const CreateEditFormGroupsMembersAdmin = lazy(() =>
-  import('../create-edit-form/create-edit-form-groups-members-admin').then(module => ({
-    default: module.CreateEditFormGroupsMembersAdmin
+const CreateEditFormForumAdmin = lazy(() =>
+  import('../create-edit-form/create-edit-form-forum-admin').then(module => ({
+    default: module.CreateEditFormForumAdmin
   }))
 );
 
-export const ActionsGroupsMembersAdmin = () => {
+export const ActionsForumsForumAdmin = () => {
   const t = useTranslations('core');
 
   return (
@@ -28,7 +28,7 @@ export const ActionsGroupsMembersAdmin = () => {
 
       <DialogContent className="max-w-3xl">
         <Suspense fallback={<Loader />}>
-          <CreateEditFormGroupsMembersAdmin />
+          <CreateEditFormForumAdmin />
         </Suspense>
       </DialogContent>
     </Dialog>

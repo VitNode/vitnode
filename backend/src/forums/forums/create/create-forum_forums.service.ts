@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { forum_forums } from '@prisma/client';
 
 import { ShowForumForumsWithParent } from '../show/dto/show-forum_forums.obj';
 import { CreateForumForumsArgs } from './dto/create-forum_forums.args';

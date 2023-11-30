@@ -133,7 +133,17 @@
     },
     "forum": {
       "forums": {
-        "title": "Forums"
+        "title": "Forums",
+        "create": {
+          "title": "Create Forum"
+        },
+        "create_edit": {
+          "form": {
+            "name": {
+              "label": "Name"
+            }
+          }
+        }
       }
     }
   }
