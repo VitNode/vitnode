@@ -16,20 +16,27 @@ import { SubscriptButtonEditor } from './buttons/subscript-button';
 import { SuperscriptButtonEditor } from './buttons/superscript-button';
 import { LinkButtonEditor } from './buttons/link-button';
 import { LangCodeBlockButtonEditor } from './buttons/code-block/lang-code-block-button';
+import { LanguageButtonEditor } from './buttons/language-button';
 
 interface Props {
+  selectedLanguage: string;
+  setSelectedLanguage: (value: string) => void;
   className?: string;
 }
 
-export const ToolbarEditor = ({ className }: Props) => {
+export const ToolbarEditor = ({ className, selectedLanguage, setSelectedLanguage }: Props) => {
   const { blockType } = useEditor();
 
   return (
     <div className={cx('border-b-2 rounded-t-md sticky top-16 bg-background z-10', className)}>
-      <div className="flex items-center p-2 overflow-x-auto [&>*]:flex-shrink-0">
+      <div className="flex items-center p-2 overflow-x-auto [&>*]:flex-shrink-0 flex-wrap gap-1">
         <UndoMoveButtonEditor />
         <RedoMoveButtonEditor />
         <SeparatorToolbarEditor />
+        <LanguageButtonEditor
+          selectedLanguage={selectedLanguage}
+          setSelectedLanguage={setSelectedLanguage}
+        />
         <BlockTypeButtonEditor />
 
         {blockType !== BLOCK_NAMES.CODE ? (

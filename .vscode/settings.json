@@ -3,6 +3,7 @@
     "clsx",
     "Codegen",
     "commitlint",
+    "hookform",
     "lucide",
     "nestjs",
     "nextra",

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { ForumsForumModule } from './categories/forum_forums.module';
+import { ForumsForumModule } from './forums/forum_forums.module';
 
 @Module({
   imports: [ForumsForumModule]

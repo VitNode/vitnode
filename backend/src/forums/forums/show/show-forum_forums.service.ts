@@ -18,14 +18,9 @@ export class ShowForumForumsService {
         ...inputPagination({ first, cursor, last }),
         include: {
           parent: {
-            select: {
-              id: true,
+            include: {
               name: true,
-              description: true,
-              position: true,
-              created: true,
-              views: true,
-              is_category: true
+              description: true
             }
           },
           name: true,

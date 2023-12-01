@@ -21,7 +21,11 @@ import { usePathname, useRouter } from '@/i18n';
 import { ToolbarDataTable, ToolbarDataTableProps } from './toolbar/toolbar-data-table';
 import { GlobalLoader } from '../loader/global/global-loader';
 
-interface DataTableProps<TData> extends ToolbarDataTableProps {
+interface TDataMin {
+  id: string;
+}
+
+interface DataTableProps<TData extends TDataMin> extends ToolbarDataTableProps {
   columns: ColumnDef<TData>[];
   data: TData[];
   defaultItemsPerPage: number;
@@ -31,7 +35,7 @@ interface DataTableProps<TData> extends ToolbarDataTableProps {
   searchPlaceholder?: string;
 }
 
-export function DataTable<TData>({
+export function DataTable<TData extends TDataMin>({
   columns,
   data,
   defaultItemsPerPage,
@@ -47,7 +51,8 @@ export function DataTable<TData>({
     data: useMemo(() => data, [data]),
     columns: useMemo(() => columns, [columns]),
     getCoreRowModel: getCoreRowModel(),
-    manualPagination: true
+    manualPagination: true,
+    getRowId: row => row.id
   });
   const pagination = {
     first: searchParams.get('first'),

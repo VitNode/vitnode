@@ -1,39 +1,58 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { $rootTextContent } from '@lexical/text';
+import { CLEAR_EDITOR_COMMAND } from 'lexical';
+
+import { TextLanguage } from '@/graphql/hooks';
 
 interface Props {
-  onChange: (editorState: string) => void;
-  state: string;
+  onChange: (value: TextLanguage[]) => void;
+  selectedLanguage: string;
+  value: TextLanguage[];
 }
 
-export const OnChangePluginEditor = ({ onChange, state }: Props) => {
+export const OnChangePluginEditor = ({ onChange, selectedLanguage, value }: Props) => {
+  const [firstRender, setFirstRender] = useState(true);
   const [editor] = useLexicalComposerContext();
 
-  // Update the editor state when the editor state changes
+  // Set the initial editor value
   useEffect(() => {
-    return editor.registerUpdateListener(({ editorState }) => {
-      const text = editorState.read($rootTextContent);
-
-      if (text.length > 0) {
-        onChange(JSON.stringify(editorState.toJSON()));
+    if (value) {
+      const currentValue = value.find(item => item.id_language === selectedLanguage)?.value;
+      if (!currentValue) {
+        editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined);
 
         return;
       }
 
-      onChange('');
-    });
-  }, [editor, onChange]);
-
-  // Set the initial editor state
-  useEffect(() => {
-    if (!state) {
-      return;
+      const initialEditorState = editor.parseEditorState(currentValue);
+      editor.setEditorState(initialEditorState);
     }
 
-    const initialEditorState = editor.parseEditorState(state);
-    editor.setEditorState(initialEditorState);
-  }, []);
+    if (firstRender) {
+      setFirstRender(false);
+    }
+  }, [selectedLanguage]);
+
+  // Update the editor value when the editor value changes
+  useEffect(() => {
+    if (firstRender) return;
+
+    return editor.registerUpdateListener(({ editorState }) => {
+      const text = editorState.read($rootTextContent);
+      const valueAsArray = Array.isArray(value) ? value : [];
+
+      onChange([
+        ...valueAsArray.filter(item => item.id_language !== selectedLanguage),
+        {
+          id_language: selectedLanguage,
+          value: text.length > 0 ? JSON.stringify(editorState.toJSON()) : ''
+        }
+      ]);
+
+      // console.log('OnChangePluginEditor', JSON.stringify(editorState.toJSON()));
+    });
+  }, [editor, onChange, firstRender, selectedLanguage]);
 
   return null;
 };
