@@ -1,0 +1,27 @@
+mutation Create_forum_forums(
+  $name: [TextLanguageInput!]!
+  $description: [TextLanguageInput!]!
+  $parentId: String
+  $isCategory: Boolean
+) {
+  create_forum_forums(
+    name: $name
+    description: $description
+    parent_id: $parentId
+    is_category: $isCategory
+  ) {
+    created
+    description {
+      id_language
+      value
+    }
+    id
+    is_category
+    name {
+      id_language
+      value
+    }
+    position
+    views
+  }
+}

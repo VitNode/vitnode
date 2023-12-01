@@ -13,7 +13,7 @@ export class CreateForumForumsService {
 
   async create({
     description,
-    is_category = false,
+    is_category,
     name,
     parent_id,
     position

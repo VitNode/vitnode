@@ -4,9 +4,11 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { zodTextLanguageInputType } from '@/components/text-language-input';
+import { useCreateForumAdminAPI } from './use-create-forum-admin-api';
 
 export const useCreateEditFormForumAdmin = () => {
   const t = useTranslations('core');
+  const { isPending, mutateAsync } = useCreateForumAdminAPI();
 
   const formSchema = z.object({
     name: zodTextLanguageInputType.min(1, t('forms.empty')),
@@ -34,9 +36,12 @@ export const useCreateEditFormForumAdmin = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // eslint-disable-next-line no-console
-    console.log(values);
+    await mutateAsync({
+      name: values.name,
+      description: values.description,
+      isCategory: true
+    });
   };
 
-  return { form, onSubmit, isPending: false };
+  return { form, onSubmit, isPending };
 };

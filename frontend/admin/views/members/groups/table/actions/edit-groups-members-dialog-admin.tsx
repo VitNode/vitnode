@@ -37,7 +37,7 @@ export const EditGroupsMembersDialogAdmin = ({ data }: Props) => {
         </Tooltip>
       </TooltipProvider>
 
-      <DialogContent className="max-w-3xl">
+      <DialogContent className="max-w-4xl">
         <Suspense fallback={<Loader />}>
           <CreateEditFormGroupsMembersAdmin data={data} />
         </Suspense>
