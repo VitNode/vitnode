@@ -3,10 +3,11 @@ import { Suspense, lazy, useState } from 'react';
 
 import { DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useCreateEditFormForumAdmin } from './hooks/use-create-edit-form-forum-admin.ts';
-import { Form } from '@/components/ui/form';
+import { Form, FormField, FormItem } from '@/components/ui/form';
 import { Tabs } from '@/components/tabs/tabs';
 import { Loader } from '@/components/loader/loader';
 import { Button } from '@/components/ui/button';
+import { Editor } from '@/components/editor/editor';
 
 const MainContentCreateEditFormForumAdmin = lazy(() =>
   import('./content/main').then(module => ({
@@ -56,6 +57,16 @@ export const CreateEditFormForumAdmin = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <Suspense fallback={<Loader />}>{tabsContent[activeTab]}</Suspense>
+
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <Editor id="forum_create" onChange={field.onChange} value={field.value} />
+              </FormItem>
+            )}
+          />
 
           <Button disabled={!form.formState.isValid} loading={isPending} type="submit">
             {tCore('save')}

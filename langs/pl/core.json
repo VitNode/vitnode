@@ -31,6 +31,7 @@
       "link": "Link",
       "copy_code": "Kopiuj kod",
       "code_language": "Język kodu",
+      "change_language": "Zmień język",
       "prettier": {
         "format_code": "Formatuj kod",
         "error_title": "Błąd Prettier"

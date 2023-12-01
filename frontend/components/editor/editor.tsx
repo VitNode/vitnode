@@ -15,6 +15,7 @@ import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
 import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
+import { ClearEditorPlugin } from '@lexical/react/LexicalClearEditorPlugin';
 
 import { OnChangePluginEditor } from './plugins/on-change-plugin-editor';
 import { AutoLinkPluginEditor } from './plugins/auto-link-plugin-editor';
@@ -26,19 +27,23 @@ import { MARKDOWN_TRANSFORMERS_EDITOR } from './markdown-transformers-editor';
 import { BLOCK_NAMES, EditorContext } from './toolbar/hooks/use-editor';
 import { CodeHighlightPluginEditor } from './plugins/code-highlight-plugin-editor';
 import { CodeActionMenuPluginEditor } from './plugins/code/code-action-menu-plugin-editor';
-
+import { useGlobals } from '@/hooks/core/use-globals';
+import { TextLanguage } from '@/graphql/hooks';
 import './editor.scss';
 
 interface Props {
   id: string;
+  onChange: (value: TextLanguage[]) => void;
+  value: TextLanguage[];
   className?: string;
   toolbarClassName?: string;
 }
 
-export const Editor = ({ className, id, toolbarClassName }: Props) => {
-  const [editorState, setEditorState] = useState('');
+export const Editor = ({ className, id, onChange, toolbarClassName, value }: Props) => {
   const [blockType, setBlockType] = useState<string>(BLOCK_NAMES.PARAGRAPH);
   const floatingAnchorElem = useRef<HTMLDivElement>(null);
+  const { defaultLanguage } = useGlobals();
+  const [selectedLanguage, setSelectedLanguage] = useState(defaultLanguage);
 
   const initialConfig: InitialConfigType = {
     namespace: id,
@@ -69,13 +74,19 @@ export const Editor = ({ className, id, toolbarClassName }: Props) => {
             className
           )}
         >
-          <ToolbarEditor className={toolbarClassName} />
+          <ToolbarEditor
+            className={toolbarClassName}
+            selectedLanguage={selectedLanguage}
+            setSelectedLanguage={setSelectedLanguage}
+          />
 
-          {/* Custom Plugins */}
-          <OnChangePluginEditor state={editorState} onChange={setEditorState} />
+          <OnChangePluginEditor
+            value={value}
+            onChange={onChange}
+            selectedLanguage={selectedLanguage}
+          />
           <AutoLinkPluginEditor />
           <CodeHighlightPluginEditor />
-
           <RichTextPlugin
             contentEditable={
               <div className="relative" ref={floatingAnchorElem}>
@@ -92,6 +103,7 @@ export const Editor = ({ className, id, toolbarClassName }: Props) => {
           <CheckListPlugin />
           <TabIndentationPlugin />
           <LinkPlugin />
+          <ClearEditorPlugin />
 
           {floatingAnchorElem.current && (
             <>
