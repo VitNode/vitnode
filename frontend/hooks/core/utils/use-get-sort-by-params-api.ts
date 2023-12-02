@@ -2,19 +2,31 @@ import { useSearchParams } from 'next/navigation';
 
 import { SortDirectionEnum } from '@/graphql/hooks';
 
-export const useGetSortByParamsAPI = (): {
-  column: string;
+export function useGetSortByParamsAPI<T extends { [key: string]: unknown }>({
+  constEnum
+}: {
+  constEnum: T;
+}): {
+  column: keyof T;
   direction: SortDirectionEnum;
-} | null => {
+} | null {
   const searchParams = useSearchParams();
+  const sort = {
+    by: searchParams.get('sortBy')?.toLowerCase(),
+    direction: searchParams.get('sortDirection')?.toLowerCase()
+  };
 
-  if (!searchParams.get('sortBy') || !searchParams.get('sortDirection')) {
+  if (
+    !sort.by ||
+    !sort.direction ||
+    !(sort.by in constEnum) ||
+    !(sort.direction in SortDirectionEnum)
+  ) {
     return null;
   }
 
   return {
-    column: searchParams.get('sortBy') ?? '',
-    direction:
-      searchParams.get('sortDirection') === 'asc' ? SortDirectionEnum.Asc : SortDirectionEnum.Desc
+    column: sort.by as keyof T,
+    direction: sort.direction === 'asc' ? SortDirectionEnum.asc : SortDirectionEnum.desc
   };
-};
+}

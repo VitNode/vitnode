@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { fetcher } from '@/graphql/fetcher';
 import {
   ShowAdminMembers,
+  ShowAdminMembersSortingColumnEnum,
   Show_Admin_Members,
   Show_Admin_MembersQuery,
   Show_Admin_MembersQueryVariables
@@ -25,7 +26,7 @@ export const useUsersMembersAdminAPI = () => {
     cursor: searchParams.get('cursor'),
     search: searchParams.get('search') ?? '',
     groups: searchParams.getAll('groups') ?? [],
-    sortBy: useGetSortByParamsAPI()
+    sortBy: useGetSortByParamsAPI({ constEnum: ShowAdminMembersSortingColumnEnum })
   };
 
   return useQuery({

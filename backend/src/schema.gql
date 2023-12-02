@@ -94,8 +94,13 @@ type ShowAdminGroupsObj {
 }
 
 input ShowAdminGroupsSortByArgs {
-  column: String!
+  column: ShowAdminGroupsSortingColumnEnum!
   direction: SortDirectionEnum!
+}
+
+enum ShowAdminGroupsSortingColumnEnum {
+  created
+  updated
 }
 
 type ShowAdminMembers {
@@ -120,8 +125,19 @@ type ShowAdminMembersObj {
 }
 
 input ShowAdminMembersSortByArgs {
-  column: String!
+  column: ShowAdminMembersSortingColumnEnum!
   direction: SortDirectionEnum!
+}
+
+enum ShowAdminMembersSortingColumnEnum {
+  birthday
+  first_name
+  followers
+  joined
+  last_name
+  name
+  posts
+  reactions
 }
 
 type ShowCoreLanguages {
@@ -158,8 +174,19 @@ type ShowCoreMembersObj {
 }
 
 input ShowCoreMembersSortByArgs {
-  column: String!
+  column: ShowCoreMembersSortingColumnEnum!
   direction: SortDirectionEnum!
+}
+
+enum ShowCoreMembersSortingColumnEnum {
+  birthday
+  first_name
+  followers
+  joined
+  last_name
+  name
+  posts
+  reactions
 }
 
 type ShowForumForums {

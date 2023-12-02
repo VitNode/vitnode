@@ -5,7 +5,8 @@ import { fetcher } from '@/graphql/fetcher';
 import {
   Show_Admin_Groups,
   Show_Admin_GroupsQuery,
-  Show_Admin_GroupsQueryVariables
+  Show_Admin_GroupsQueryVariables,
+  ShowAdminGroupsSortingColumnEnum
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
 import { useGetSortByParamsAPI } from '@/hooks/core/utils/use-get-sort-by-params-api';
@@ -16,7 +17,7 @@ export const useGroupMembersAdminAPI = () => {
     first: searchParams.get('first') ?? 0,
     last: searchParams.get('last'),
     cursor: searchParams.get('cursor') ?? null,
-    sortBy: useGetSortByParamsAPI()
+    sortBy: useGetSortByParamsAPI({ constEnum: ShowAdminGroupsSortingColumnEnum })
   };
 
   return useQuery({

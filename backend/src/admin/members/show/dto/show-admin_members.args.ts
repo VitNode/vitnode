@@ -1,22 +1,26 @@
-import { ArgsType, Field, InputType, Int } from '@nestjs/graphql';
-import { IsIn } from 'class-validator';
+import { ArgsType, Field, InputType, Int, registerEnumType } from '@nestjs/graphql';
 
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
+export enum ShowAdminMembersSortingColumnEnum {
+  name = 'name',
+  joined = 'joined',
+  birthday = 'birthday',
+  first_name = 'first_name',
+  last_name = 'last_name',
+  posts = 'posts',
+  followers = 'followers',
+  reactions = 'reactions'
+}
+
+registerEnumType(ShowAdminMembersSortingColumnEnum, {
+  name: 'ShowAdminMembersSortingColumnEnum'
+});
+
 @InputType()
 class ShowAdminMembersSortByArgs {
-  @IsIn([
-    'name',
-    'joined',
-    'birthday',
-    'first_name',
-    'last_name',
-    'posts',
-    'followers',
-    'reactions'
-  ])
-  @Field(() => String)
-  column: string;
+  @Field(() => ShowAdminMembersSortingColumnEnum)
+  column: ShowAdminMembersSortingColumnEnum;
 
   @Field(() => SortDirectionEnum)
   direction: SortDirectionEnum;

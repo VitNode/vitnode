@@ -49,15 +49,16 @@ export type GroupShowCoreMembers = {
   name: Array<TextLanguage>;
 };
 
-export enum LayoutAdminInstallEnum {
-  Account = 'ACCOUNT',
-  Database = 'DATABASE',
-  Finish = 'FINISH'
-}
+export const LayoutAdminInstallEnum = {
+  account: 'ACCOUNT',
+  database: 'DATABASE',
+  finish: 'FINISH'
+} as const;
 
+export type LayoutAdminInstallEnum = typeof LayoutAdminInstallEnum[keyof typeof LayoutAdminInstallEnum];
 export type LayoutAdminInstallObj = {
   __typename?: 'LayoutAdminInstallObj';
-  status: LayoutAdminInstallEnum;
+  status: LayoutAdminInstallEnum | `${LayoutAdminInstallEnum}`;
 };
 
 export type Mutation = {
@@ -224,10 +225,16 @@ export type ShowAdminGroupsObj = {
 };
 
 export type ShowAdminGroupsSortByArgs = {
-  column: Scalars['String']['input'];
-  direction: SortDirectionEnum;
+  column: ShowAdminGroupsSortingColumnEnum | `${ShowAdminGroupsSortingColumnEnum}`;
+  direction: SortDirectionEnum | `${SortDirectionEnum}`;
 };
 
+export const ShowAdminGroupsSortingColumnEnum = {
+  created: 'created',
+  updated: 'updated'
+} as const;
+
+export type ShowAdminGroupsSortingColumnEnum = typeof ShowAdminGroupsSortingColumnEnum[keyof typeof ShowAdminGroupsSortingColumnEnum];
 export type ShowAdminMembers = {
   __typename?: 'ShowAdminMembers';
   avatar?: Maybe<UploadCoreAttachmentsObj>;
@@ -252,10 +259,22 @@ export type ShowAdminMembersObj = {
 };
 
 export type ShowAdminMembersSortByArgs = {
-  column: Scalars['String']['input'];
-  direction: SortDirectionEnum;
+  column: ShowAdminMembersSortingColumnEnum | `${ShowAdminMembersSortingColumnEnum}`;
+  direction: SortDirectionEnum | `${SortDirectionEnum}`;
 };
 
+export const ShowAdminMembersSortingColumnEnum = {
+  birthday: 'birthday',
+  first_name: 'first_name',
+  followers: 'followers',
+  joined: 'joined',
+  last_name: 'last_name',
+  name: 'name',
+  posts: 'posts',
+  reactions: 'reactions'
+} as const;
+
+export type ShowAdminMembersSortingColumnEnum = typeof ShowAdminMembersSortingColumnEnum[keyof typeof ShowAdminMembersSortingColumnEnum];
 export type ShowCoreLanguages = {
   __typename?: 'ShowCoreLanguages';
   default: Scalars['Boolean']['output'];
@@ -294,10 +313,22 @@ export type ShowCoreMembersObj = {
 };
 
 export type ShowCoreMembersSortByArgs = {
-  column: Scalars['String']['input'];
-  direction: SortDirectionEnum;
+  column: ShowCoreMembersSortingColumnEnum | `${ShowCoreMembersSortingColumnEnum}`;
+  direction: SortDirectionEnum | `${SortDirectionEnum}`;
 };
 
+export const ShowCoreMembersSortingColumnEnum = {
+  birthday: 'birthday',
+  first_name: 'first_name',
+  followers: 'followers',
+  joined: 'joined',
+  last_name: 'last_name',
+  name: 'name',
+  posts: 'posts',
+  reactions: 'reactions'
+} as const;
+
+export type ShowCoreMembersSortingColumnEnum = typeof ShowCoreMembersSortingColumnEnum[keyof typeof ShowCoreMembersSortingColumnEnum];
 export type ShowForumForums = {
   __typename?: 'ShowForumForums';
   created: Scalars['Int']['output'];
@@ -336,11 +367,12 @@ export type SignUpCoreMembersObj = {
   newsletter?: Maybe<Scalars['Boolean']['output']>;
 };
 
-export enum SortDirectionEnum {
-  Asc = 'asc',
-  Desc = 'desc'
-}
+export const SortDirectionEnum = {
+  asc: 'asc',
+  desc: 'desc'
+} as const;
 
+export type SortDirectionEnum = typeof SortDirectionEnum[keyof typeof SortDirectionEnum];
 export type TextLanguage = {
   __typename?: 'TextLanguage';
   id_language: Scalars['String']['output'];
