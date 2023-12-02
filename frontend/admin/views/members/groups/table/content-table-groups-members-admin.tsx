@@ -10,6 +10,7 @@ import { ShowAdminGroups } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { ActionsTableGroupsMembersAdmin } from './actions/actions-table-groups-members-admin';
 import { DateFormat } from '@/components/date-format/date-format';
+import { HeaderSortingDataTable } from '@/components/data-table/header-sorting-data-table';
 
 export const ContentTableGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.groups');
@@ -43,7 +44,9 @@ export const ContentTableGroupsMembersAdmin = () => {
         }
       },
       {
-        header: t('table.updated'),
+        header: val => {
+          return <HeaderSortingDataTable {...val}>{t('table.updated')}</HeaderSortingDataTable>;
+        },
         accessorKey: 'updated',
         cell: ({ row }) => {
           const data = row.original;
@@ -72,6 +75,10 @@ export const ContentTableGroupsMembersAdmin = () => {
       defaultItemsPerPage={10}
       columns={columns}
       isFetching={isFetching}
+      defaultSorting={{
+        sortBy: 'updated',
+        sortDirection: 'desc'
+      }}
     />
   );
 };

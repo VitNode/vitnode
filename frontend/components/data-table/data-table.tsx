@@ -1,7 +1,13 @@
 'use client';
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
-import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import {
+  ColumnDef,
+  SortingState,
+  flexRender,
+  getCoreRowModel,
+  useReactTable
+} from '@tanstack/react-table';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { ReactNode, useMemo } from 'react';
@@ -30,6 +36,7 @@ interface DataTableProps<TData extends TDataMin> extends ToolbarDataTableProps {
   data: TData[];
   defaultItemsPerPage: number;
   isFetching: boolean | undefined;
+  defaultSorting?: { sortBy: keyof TData; sortDirection: 'desc' | 'asc' };
   filters?: ReactNode;
   pageInfo?: PageInfo;
   searchPlaceholder?: string;
@@ -39,6 +46,7 @@ export function DataTable<TData extends TDataMin>({
   columns,
   data,
   defaultItemsPerPage,
+  defaultSorting,
   isFetching,
   pageInfo,
   ...props
@@ -47,13 +55,37 @@ export function DataTable<TData extends TDataMin>({
   const pathname = usePathname();
   const { push } = useRouter();
   const t = useTranslations('core');
+
   const table = useReactTable({
     data: useMemo(() => data, [data]),
     columns: useMemo(() => columns, [columns]),
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
-    getRowId: row => row.id
+    getRowId: row => row.id,
+    onSortingChange: data => {
+      const fnSorting = data as () => SortingState;
+      const sorting = fnSorting();
+
+      const params = new URLSearchParams(searchParams);
+      params.set('sortBy', sorting[0].id);
+      params.set('sortDirection', sorting[0].desc ? 'desc' : 'asc');
+
+      push(`${pathname}?${params.toString()}`);
+    },
+    state: {
+      sorting: defaultSorting
+        ? [
+            {
+              id: defaultSorting.sortBy.toString(),
+              desc: defaultSorting.sortDirection === 'desc'
+            }
+          ]
+        : []
+    }
   });
+
+  // console.log(sorting[0].);
+
   const pagination = {
     first: searchParams.get('first'),
     last: searchParams.get('last'),
