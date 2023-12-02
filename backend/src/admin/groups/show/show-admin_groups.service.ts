@@ -1,10 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma, core_groups } from '@prisma/client';
 
-import {
-  ShowAdminGroupsArgs,
-  ShowAdminGroupsSortingColumnEnum
-} from './dto/show-admin_groups.args';
+import { ShowAdminGroupsArgs } from './dto/show-admin_groups.args';
 import { ShowAdminGroupsObj } from './dto/show-admin_groups.obj';
 
 import { PrismaService } from '@/prisma/prisma.service';
@@ -53,10 +50,10 @@ export class ShowAdminGroupsService {
             }
           }
         },
-        orderBy: inputSorting<ShowAdminGroupsSortingColumnEnum>({
+        orderBy: inputSorting<keyof core_groups>({
           sortBy,
           defaultSortBy: {
-            column: ShowAdminGroupsSortingColumnEnum.updated,
+            column: 'updated',
             direction: SortDirectionEnum.desc
           }
         }),

@@ -44,7 +44,7 @@ export default async function Page() {
   await queryClient.prefetchQuery({
     queryKey: [
       APIKeys.USERS_MEMBERS,
-      { cursor: null, first: 0, last: null, search: '', groups: [] }
+      { cursor: null, first: 0, last: null, search: '', groups: [], sortBy: null }
     ],
     queryFn: getData
   });

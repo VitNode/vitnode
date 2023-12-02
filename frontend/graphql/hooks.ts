@@ -224,14 +224,9 @@ export type ShowAdminGroupsObj = {
 };
 
 export type ShowAdminGroupsSortByArgs = {
-  column: ShowAdminGroupsSortingColumnEnum;
+  column: Scalars['String']['input'];
   direction: SortDirectionEnum;
 };
-
-export enum ShowAdminGroupsSortingColumnEnum {
-  Created = 'created',
-  Updated = 'updated'
-}
 
 export type ShowAdminMembers = {
   __typename?: 'ShowAdminMembers';
@@ -257,20 +252,9 @@ export type ShowAdminMembersObj = {
 };
 
 export type ShowAdminMembersSortByArgs = {
-  column: ShowAdminMembersSortingColumnEnum;
+  column: Scalars['String']['input'];
   direction: SortDirectionEnum;
 };
-
-export enum ShowAdminMembersSortingColumnEnum {
-  Birthday = 'birthday',
-  FirstName = 'first_name',
-  Followers = 'followers',
-  Joined = 'joined',
-  LastName = 'last_name',
-  Name = 'name',
-  Posts = 'posts',
-  Reactions = 'reactions'
-}
 
 export type ShowCoreLanguages = {
   __typename?: 'ShowCoreLanguages';
@@ -310,20 +294,9 @@ export type ShowCoreMembersObj = {
 };
 
 export type ShowCoreMembersSortByArgs = {
-  column: ShowCoreMembersSortingColumnEnum;
+  column: Scalars['String']['input'];
   direction: SortDirectionEnum;
 };
-
-export enum ShowCoreMembersSortingColumnEnum {
-  Birthday = 'birthday',
-  FirstName = 'first_name',
-  Followers = 'followers',
-  Joined = 'joined',
-  LastName = 'last_name',
-  Name = 'name',
-  Posts = 'posts',
-  Reactions = 'reactions'
-}
 
 export type ShowForumForums = {
   __typename?: 'ShowForumForums';

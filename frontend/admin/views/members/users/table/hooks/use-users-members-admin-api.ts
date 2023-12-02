@@ -9,6 +9,7 @@ import {
   Show_Admin_MembersQueryVariables
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
+import { useGetSortByParamsAPI } from '@/hooks/core/utils/use-get-sort-by-params-api';
 
 export interface UsersMembersAdminAPIDataType
   extends Pick<
@@ -23,7 +24,8 @@ export const useUsersMembersAdminAPI = () => {
     last: searchParams.get('last'),
     cursor: searchParams.get('cursor'),
     search: searchParams.get('search') ?? '',
-    groups: searchParams.getAll('groups') ?? []
+    groups: searchParams.getAll('groups') ?? [],
+    sortBy: useGetSortByParamsAPI()
   };
 
   return useQuery({
@@ -38,7 +40,8 @@ export const useUsersMembersAdminAPI = () => {
           last: params.last ? +params.last : null,
           cursor: params.cursor,
           search: params.search,
-          groups: params.groups
+          groups: params.groups,
+          sortBy: params.sortBy
         },
         signal
       });

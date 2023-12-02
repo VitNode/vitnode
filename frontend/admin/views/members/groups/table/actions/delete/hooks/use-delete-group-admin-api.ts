@@ -38,7 +38,7 @@ export const useDeleteGroupAdminAPI = () => {
       push(pathname);
 
       queryClient.resetQueries({
-        queryKey: [APIKeys.GROUPS_MEMBERS, { cursor: null, first: 0, last: null }]
+        queryKey: [APIKeys.GROUPS_MEMBERS, { cursor: null, first: 0, last: null, sortBy: null }]
       });
 
       toast({

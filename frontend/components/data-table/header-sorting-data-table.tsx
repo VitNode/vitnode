@@ -25,7 +25,7 @@ export function HeaderSortingDataTable<T>({ children, column, table }: Props<T>)
     const sortDirection = searchParams.get('sortDirection');
 
     if (defaultSortingState[0].id === column.id && !sortBy) {
-      return getSortDirectionIcon(defaultSortingState[0].desc ? 'asc' : 'desc');
+      return getSortDirectionIcon(defaultSortingState[0].desc ? 'desc' : 'asc');
     }
 
     if (column.id === sortBy && sortDirection) {
@@ -40,18 +40,15 @@ export function HeaderSortingDataTable<T>({ children, column, table }: Props<T>)
       variant="ghost"
       className="-ml-4"
       onClick={() => {
-        // column.toggleSorting(searchParams.get('sortDirection') === 'asc', false);
-        // console.log(column.id);
-
         const params = new URLSearchParams(searchParams);
         params.set('sortBy', column.id);
 
         const sortDirection = () => {
-          if (column.id === searchParams.get('sortBy')) {
+          if (column.id === searchParams.get('sortBy') && searchParams.get('sortDirection')) {
             return searchParams.get('sortDirection') === 'asc' ? 'desc' : 'asc';
           }
 
-          return defaultSortingState[0].desc ? 'desc' : 'asc';
+          return defaultSortingState[0].desc ? 'asc' : 'desc';
         };
         params.set('sortDirection', sortDirection());
 

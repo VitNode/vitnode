@@ -8,13 +8,15 @@ import {
   Show_Admin_GroupsQueryVariables
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
+import { useGetSortByParamsAPI } from '@/hooks/core/utils/use-get-sort-by-params-api';
 
 export const useGroupMembersAdminAPI = () => {
   const searchParams = useSearchParams();
   const pagination = {
     first: searchParams.get('first') ?? 0,
     last: searchParams.get('last'),
-    cursor: searchParams.get('cursor') ?? null
+    cursor: searchParams.get('cursor') ?? null,
+    sortBy: useGetSortByParamsAPI()
   };
 
   return useQuery({
@@ -27,7 +29,8 @@ export const useGroupMembersAdminAPI = () => {
         variables: {
           first: pagination.first ? +pagination.first : defaultFirst,
           last: pagination.last ? +pagination.last : null,
-          cursor: pagination.cursor
+          cursor: pagination.cursor,
+          sortBy: pagination.sortBy
         }
       });
     },

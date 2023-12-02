@@ -5,6 +5,7 @@ import * as z from 'zod';
 
 import { convertDateToUnixTime, currentDate } from '@/functions/date';
 import { useSignUpAPI } from './use-sign-up-api';
+import { ErrorType } from '@/graphql/fetcher';
 
 export const useSignUpView = () => {
   const t = useTranslations('core');
@@ -87,7 +88,9 @@ export const useSignUpView = () => {
         birthday: convertDateToUnixTime(values.birthday)
       });
     } catch (error) {
-      const code = error as string;
+      const {
+        extensions: { code }
+      } = error as ErrorType;
 
       if (code === 'EMAIL_ALREADY_EXISTS') {
         form.setError(

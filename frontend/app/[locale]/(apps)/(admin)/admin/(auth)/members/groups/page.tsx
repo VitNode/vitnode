@@ -42,7 +42,7 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 export default async function Page() {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
-    queryKey: [APIKeys.GROUPS_MEMBERS, { cursor: null, first: 0, last: null }],
+    queryKey: [APIKeys.GROUPS_MEMBERS, { cursor: null, first: 0, last: null, sortBy: null }],
     queryFn: getData
   });
   const dehydratedState = dehydrate(queryClient);
