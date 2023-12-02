@@ -39,8 +39,8 @@ export const useEditGroupAdminAPI = () => {
     onSuccess: data => {
       push(pathname);
 
-      queryClient.resetQueries({
-        queryKey: [APIKeys.GROUPS_MEMBERS, { cursor: null, first: 0, last: null }]
+      queryClient.refetchQueries({
+        queryKey: [APIKeys.GROUPS_MEMBERS]
       });
 
       toast({

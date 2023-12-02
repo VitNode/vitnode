@@ -6,7 +6,14 @@ const config: CodegenConfig = {
   documents: ['graphql/**/*.gql'],
   generates: {
     'graphql/hooks.ts': {
-      plugins: ['typescript', 'typescript-operations', 'typescript-document-nodes']
+      plugins: ['typescript', 'typescript-operations', 'typescript-document-nodes'],
+      config: {
+        enumsAsConst: true,
+        allowEnumStringTypes: true,
+        namingConvention: {
+          enumValues: 'change-case-all#lowerCase'
+        }
+      }
     }
   }
 };

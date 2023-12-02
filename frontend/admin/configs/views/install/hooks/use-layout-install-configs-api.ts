@@ -32,8 +32,8 @@ export const useLayoutInstallConfigsAPI = () => {
     const redirectItems: {
       [key: string]: string;
     } = {
-      [LayoutAdminInstallEnum.Account]: '/admin/install/account',
-      [LayoutAdminInstallEnum.Database]: '/admin/install/database'
+      [LayoutAdminInstallEnum.account]: '/admin/install/account',
+      [LayoutAdminInstallEnum.database]: '/admin/install/database'
     };
 
     const path = redirectItems[current.data.layout_admin_install.status];

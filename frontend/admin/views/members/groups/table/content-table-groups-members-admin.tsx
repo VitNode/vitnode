@@ -10,10 +10,11 @@ import { ShowAdminGroups } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { ActionsTableGroupsMembersAdmin } from './actions/actions-table-groups-members-admin';
 import { DateFormat } from '@/components/date-format/date-format';
+import { HeaderSortingDataTable } from '@/components/data-table/header-sorting-data-table';
 
 export const ContentTableGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.groups');
-  const { data, isFetching, isLoading, isPending } = useGroupMembersAdminAPI();
+  const { data, defaultPageSize, isFetching, isLoading, isPending } = useGroupMembersAdminAPI();
   const { convertText } = useTextLang();
 
   const columns: ColumnDef<Omit<ShowAdminGroups, 'default' | 'root'>>[] = useMemo(
@@ -43,7 +44,9 @@ export const ContentTableGroupsMembersAdmin = () => {
         }
       },
       {
-        header: t('table.updated'),
+        header: val => {
+          return <HeaderSortingDataTable {...val}>{t('table.updated')}</HeaderSortingDataTable>;
+        },
         accessorKey: 'updated',
         cell: ({ row }) => {
           const data = row.original;
@@ -69,9 +72,13 @@ export const ContentTableGroupsMembersAdmin = () => {
     <DataTable
       data={data?.show_admin_groups.edges ?? []}
       pageInfo={data?.show_admin_groups.pageInfo}
-      defaultItemsPerPage={10}
+      defaultPageSize={defaultPageSize}
       columns={columns}
       isFetching={isFetching}
+      defaultSorting={{
+        sortBy: 'updated',
+        sortDirection: 'desc'
+      }}
     />
   );
 };

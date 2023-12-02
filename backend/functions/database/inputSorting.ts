@@ -3,7 +3,7 @@ import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 interface Args<T> {
   sortBy:
     | {
-        column: T;
+        column: string;
         direction: SortDirectionEnum;
       }[]
     | undefined;

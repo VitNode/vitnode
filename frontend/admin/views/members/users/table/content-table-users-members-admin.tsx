@@ -17,11 +17,12 @@ import { DateFormat } from '@/components/date-format/date-format';
 import { GroupsFiltersUsersMembersAdmin } from './filters/groups-filters-users-members-admin';
 import { AdvancedFiltersUsersMembersAdmin } from './filters/advanced/advanced-filters-users-members-admin';
 import { useTextLang } from '@/hooks/core/use-text-lang';
+import { HeaderSortingDataTable } from '@/components/data-table/header-sorting-data-table';
 
 export const ContentTableUsersMembersAdmin = () => {
   const t = useTranslations('admin.members.users');
   const tCore = useTranslations('core');
-  const { data, isFetching, isLoading, isPending } = useUsersMembersAdminAPI();
+  const { data, defaultPageSize, isFetching, isLoading, isPending } = useUsersMembersAdminAPI();
   const { convertText } = useTextLang();
 
   const columns: ColumnDef<UsersMembersAdminAPIDataType>[] = useMemo(
@@ -55,7 +56,9 @@ export const ContentTableUsersMembersAdmin = () => {
         }
       },
       {
-        header: t('table.joined'),
+        header: val => {
+          return <HeaderSortingDataTable {...val}>{t('table.joined')}</HeaderSortingDataTable>;
+        },
         accessorKey: 'joined',
         cell: ({ row }) => {
           const data = row.original;
@@ -101,12 +104,16 @@ export const ContentTableUsersMembersAdmin = () => {
     <DataTable
       data={data?.show_admin_members.edges ?? []}
       pageInfo={data?.show_admin_members.pageInfo}
-      defaultItemsPerPage={10}
+      defaultPageSize={defaultPageSize}
       columns={columns}
       isFetching={isFetching}
       searchPlaceholder={t('search_placeholder')}
       filters={<GroupsFiltersUsersMembersAdmin />}
       advancedFilters={<AdvancedFiltersUsersMembersAdmin />}
+      defaultSorting={{
+        sortBy: 'joined',
+        sortDirection: 'desc'
+      }}
     />
   );
 };

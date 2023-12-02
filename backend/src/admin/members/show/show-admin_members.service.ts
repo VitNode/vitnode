@@ -1,11 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma, core_members } from '@prisma/client';
 
 import { ShowAdminMembersObj } from './dto/show-admin_members.obj';
-import {
-  ShowAdminMembersArgs,
-  ShowAdminMembersSortingColumnEnum
-} from './dto/show-admin_members.args';
+import { ShowAdminMembersArgs } from './dto/show-admin_members.args';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { inputPagination } from '@/functions/database/pagination/inputPagination';
@@ -80,10 +77,10 @@ export class ShowAdminMembersService {
             }
           }
         },
-        orderBy: inputSorting<ShowAdminMembersSortingColumnEnum>({
+        orderBy: inputSorting<keyof core_members>({
           sortBy,
           defaultSortBy: {
-            column: ShowAdminMembersSortingColumnEnum.joined,
+            column: 'joined',
             direction: SortDirectionEnum.desc
           }
         }),

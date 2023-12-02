@@ -30,7 +30,7 @@ export const useCreateDatabaseInstallConfigsAPI = () => {
         return {
           ...old,
           layout_admin_install: {
-            status: LayoutAdminInstallEnum.Account
+            status: LayoutAdminInstallEnum.account
           }
         };
       });

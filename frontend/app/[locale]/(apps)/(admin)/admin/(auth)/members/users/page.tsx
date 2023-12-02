@@ -12,6 +12,7 @@ import {
 } from '@/graphql/hooks';
 import getQueryClient from '@/functions/get-query-client';
 import { APIKeys } from '@/graphql/api-keys';
+import { emptyPagination } from '@/hooks/core/utils/use-pagination-api';
 
 interface Props {
   params: {
@@ -42,10 +43,7 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 export default async function Page() {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
-    queryKey: [
-      APIKeys.USERS_MEMBERS,
-      { cursor: null, first: 0, last: null, search: '', groups: [] }
-    ],
+    queryKey: [APIKeys.USERS_MEMBERS, { ...emptyPagination, groups: [] }],
     queryFn: getData
   });
   const dehydratedState = dehydrate(queryClient);

@@ -12,14 +12,15 @@ import { ActionsTableLangsCoreAdmin } from './actions/actions-table-langs-core-a
 import { ShowCoreLanguages } from '@/graphql/hooks';
 
 export const ContentTableLangsCoreAdmin = () => {
-  const t = useTranslations('admin');
-  const { data, isFetching, isLoading, isPending } = useLangsAdminAPI();
+  const t = useTranslations('admin.core.langs');
+  const tAdmin = useTranslations('admin');
+  const { data, defaultPageSize, isFetching, isLoading, isPending } = useLangsAdminAPI();
   const { mutateAsync } = useEditLangsAdminAPI();
 
   const columns: ColumnDef<ShowCoreLanguages>[] = useMemo(
     () => [
       {
-        header: t('core.langs.table.name'),
+        header: t('table.name'),
         accessorKey: 'name',
         cell: ({ row }) => {
           const data = row.original;
@@ -27,13 +28,13 @@ export const ContentTableLangsCoreAdmin = () => {
           return (
             <div className="flex items-center gap-4">
               <span>{data.name}</span>
-              {data.default && <Badge>{t('default')}</Badge>}
+              {data.default && <Badge>{tAdmin('default')}</Badge>}
             </div>
           );
         }
       },
       {
-        header: t('core.langs.table.enabled'),
+        header: t('table.enabled'),
         accessorKey: 'enabled',
         cell: ({ row }) => {
           const data = row.original;
@@ -53,7 +54,7 @@ export const ContentTableLangsCoreAdmin = () => {
         }
       },
       {
-        header: t('core.langs.table.key'),
+        header: t('table.key'),
         accessorKey: 'id'
       },
       {
@@ -74,7 +75,7 @@ export const ContentTableLangsCoreAdmin = () => {
       <DataTable
         data={data?.show_core_languages.edges ?? []}
         pageInfo={data?.show_core_languages.pageInfo}
-        defaultItemsPerPage={10}
+        defaultPageSize={defaultPageSize}
         columns={columns}
         isFetching={isFetching}
       />
