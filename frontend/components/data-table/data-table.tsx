@@ -34,7 +34,7 @@ interface TDataMin {
 interface DataTableProps<TData extends TDataMin> extends ToolbarDataTableProps {
   columns: ColumnDef<TData>[];
   data: TData[];
-  defaultItemsPerPage: number;
+  defaultPageSize: number;
   isFetching: boolean | undefined;
   defaultSorting?: { sortBy: keyof TData; sortDirection: 'desc' | 'asc' };
   filters?: ReactNode;
@@ -45,7 +45,7 @@ interface DataTableProps<TData extends TDataMin> extends ToolbarDataTableProps {
 export function DataTable<TData extends TDataMin>({
   columns,
   data,
-  defaultItemsPerPage,
+  defaultPageSize,
   defaultSorting,
   isFetching,
   pageInfo,
@@ -84,13 +84,23 @@ export function DataTable<TData extends TDataMin>({
     }
   });
 
-  // console.log(sorting[0].);
-
   const pagination = {
     first: searchParams.get('first'),
     last: searchParams.get('last'),
     cursor: searchParams.get('cursor')
   };
+  const enablePageSize = [10, 20, 30, 40, 50];
+  const pageSizeValue = useMemo(() => {
+    if (enablePageSize.includes(Number(pagination.first))) {
+      return Number(pagination.first);
+    }
+
+    if (enablePageSize.includes(Number(pagination.last))) {
+      return Number(pagination.last);
+    }
+
+    return defaultPageSize;
+  }, [pagination, defaultPageSize]);
 
   const changeState = ({
     cursor,
@@ -105,18 +115,20 @@ export function DataTable<TData extends TDataMin>({
 
     if (cursor) {
       params.set('cursor', `${cursor}`);
+    } else {
+      params.delete('cursor');
     }
 
-    const defaultPageSize = {
-      first: pagination.first ? pagination.first : `${defaultItemsPerPage}`,
-      last: pagination.last ? pagination.last : `${defaultItemsPerPage}`
+    const currentDefaultPageSize = {
+      first: pagination.first ? pagination.first : `${defaultPageSize}`,
+      last: pagination.last ? pagination.last : `${defaultPageSize}`
     };
 
-    if (nextPage || (pageSize && !nextPage)) {
-      params.set('first', pageSize ? pageSize : defaultPageSize.first);
+    if (nextPage || (pageSize && !nextPage) || (!cursor && !nextPage && pageSize)) {
+      params.set('first', pageSize ? pageSize : currentDefaultPageSize.first);
       params.delete('last');
     } else {
-      params.set('last', pageSize ? pageSize : defaultPageSize.last);
+      params.set('last', pageSize ? pageSize : currentDefaultPageSize.last);
       params.delete('first');
     }
 
@@ -173,18 +185,16 @@ export function DataTable<TData extends TDataMin>({
           <div className="flex items-center space-x-2">
             <p className="text-sm font-medium">Rows per page</p>
             <Select
-              value={`${pagination.first || pagination.last || defaultItemsPerPage}`}
+              value={`${pageSizeValue}`}
               onValueChange={value => {
                 changeState({ pageSize: value });
               }}
             >
               <SelectTrigger className="h-8 w-[70px]">
-                <SelectValue
-                  placeholder={pagination.first || pagination.last || defaultItemsPerPage}
-                />
+                <SelectValue placeholder={pageSizeValue} />
               </SelectTrigger>
               <SelectContent side="top">
-                {[10, 20, 30, 40, 50].map(pageSize => (
+                {enablePageSize.map(pageSize => (
                   <SelectItem key={pageSize} value={`${pageSize}`}>
                     {pageSize}
                   </SelectItem>

@@ -5,7 +5,7 @@ import { SortDirectionEnum } from '@/graphql/hooks';
 export function useGetSortByParamsAPI<T extends { [key: string]: unknown }>({
   constEnum
 }: {
-  constEnum: T;
+  constEnum?: T;
 }): {
   column: keyof T;
   direction: SortDirectionEnum;
@@ -17,6 +17,7 @@ export function useGetSortByParamsAPI<T extends { [key: string]: unknown }>({
   };
 
   if (
+    !constEnum ||
     !sort.by ||
     !sort.direction ||
     !(sort.by in constEnum) ||

@@ -10,7 +10,7 @@ import {
   Show_Admin_MembersQueryVariables
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
-import { useGetSortByParamsAPI } from '@/hooks/core/utils/use-get-sort-by-params-api';
+import { usePaginationAPI } from '@/hooks/core/utils/use-pagination-api';
 
 export interface UsersMembersAdminAPIDataType
   extends Pick<
@@ -19,34 +19,28 @@ export interface UsersMembersAdminAPIDataType
   > {}
 
 export const useUsersMembersAdminAPI = () => {
+  const defaultPageSize = 10;
   const searchParams = useSearchParams();
-  const params = {
-    first: searchParams.get('first') ?? 0,
-    last: searchParams.get('last'),
-    cursor: searchParams.get('cursor'),
-    search: searchParams.get('search') ?? '',
-    groups: searchParams.getAll('groups') ?? [],
-    sortBy: useGetSortByParamsAPI({ constEnum: ShowAdminMembersSortingColumnEnum })
+  const variables = {
+    ...usePaginationAPI({
+      sortByEnum: ShowAdminMembersSortingColumnEnum,
+      search: true,
+      defaultPageSize
+    }),
+    groups: searchParams.getAll('groups') ?? []
   };
 
-  return useQuery({
-    queryKey: [APIKeys.USERS_MEMBERS, { ...params }],
+  const query = useQuery({
+    queryKey: [APIKeys.USERS_MEMBERS, { ...variables }],
     queryFn: async ({ signal }) => {
-      const defaultFirst = !params.last ? 10 : null;
-
       return await fetcher<Show_Admin_MembersQuery, Show_Admin_MembersQueryVariables>({
         query: Show_Admin_Members,
-        variables: {
-          first: params.first ? +params.first : defaultFirst,
-          last: params.last ? +params.last : null,
-          cursor: params.cursor,
-          search: params.search,
-          groups: params.groups,
-          sortBy: params.sortBy
-        },
+        variables,
         signal
       });
     },
     placeholderData: previousData => previousData
   });
+
+  return { ...query, defaultPageSize };
 };

@@ -40,7 +40,7 @@ export const useSignUpAPI = () => {
           return {
             ...old,
             layout_admin_install: {
-              status: LayoutAdminInstallEnum.Finish
+              status: LayoutAdminInstallEnum.finish
             }
           };
         });

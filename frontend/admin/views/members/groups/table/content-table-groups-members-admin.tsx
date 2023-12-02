@@ -14,7 +14,7 @@ import { HeaderSortingDataTable } from '@/components/data-table/header-sorting-d
 
 export const ContentTableGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.groups');
-  const { data, isFetching, isLoading, isPending } = useGroupMembersAdminAPI();
+  const { data, defaultPageSize, isFetching, isLoading, isPending } = useGroupMembersAdminAPI();
   const { convertText } = useTextLang();
 
   const columns: ColumnDef<Omit<ShowAdminGroups, 'default' | 'root'>>[] = useMemo(
@@ -72,7 +72,7 @@ export const ContentTableGroupsMembersAdmin = () => {
     <DataTable
       data={data?.show_admin_groups.edges ?? []}
       pageInfo={data?.show_admin_groups.pageInfo}
-      defaultItemsPerPage={10}
+      defaultPageSize={defaultPageSize}
       columns={columns}
       isFetching={isFetching}
       defaultSorting={{

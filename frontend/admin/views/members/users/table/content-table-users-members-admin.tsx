@@ -22,7 +22,7 @@ import { HeaderSortingDataTable } from '@/components/data-table/header-sorting-d
 export const ContentTableUsersMembersAdmin = () => {
   const t = useTranslations('admin.members.users');
   const tCore = useTranslations('core');
-  const { data, isFetching, isLoading, isPending } = useUsersMembersAdminAPI();
+  const { data, defaultPageSize, isFetching, isLoading, isPending } = useUsersMembersAdminAPI();
   const { convertText } = useTextLang();
 
   const columns: ColumnDef<UsersMembersAdminAPIDataType>[] = useMemo(
@@ -104,7 +104,7 @@ export const ContentTableUsersMembersAdmin = () => {
     <DataTable
       data={data?.show_admin_members.edges ?? []}
       pageInfo={data?.show_admin_members.pageInfo}
-      defaultItemsPerPage={10}
+      defaultPageSize={defaultPageSize}
       columns={columns}
       isFetching={isFetching}
       searchPlaceholder={t('search_placeholder')}

@@ -14,7 +14,7 @@ import { ShowCoreLanguages } from '@/graphql/hooks';
 export const ContentTableLangsCoreAdmin = () => {
   const t = useTranslations('admin.core.langs');
   const tAdmin = useTranslations('admin');
-  const { data, isFetching, isLoading, isPending } = useLangsAdminAPI();
+  const { data, defaultPageSize, isFetching, isLoading, isPending } = useLangsAdminAPI();
   const { mutateAsync } = useEditLangsAdminAPI();
 
   const columns: ColumnDef<ShowCoreLanguages>[] = useMemo(
@@ -75,7 +75,7 @@ export const ContentTableLangsCoreAdmin = () => {
       <DataTable
         data={data?.show_core_languages.edges ?? []}
         pageInfo={data?.show_core_languages.pageInfo}
-        defaultItemsPerPage={10}
+        defaultPageSize={defaultPageSize}
         columns={columns}
         isFetching={isFetching}
       />
