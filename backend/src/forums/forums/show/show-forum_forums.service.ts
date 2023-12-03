@@ -13,9 +13,16 @@ export class ShowForumForumsService {
   constructor(private prisma: PrismaService) {}
 
   async show({ cursor, first, last }: ShowForumForumsArgs): Promise<ShowForumForumsObj> {
+    const where = {
+      parent_id: {
+        in: null
+      }
+    };
+
     const [edges, totalCount] = await this.prisma.$transaction([
       this.prisma.forum_forums.findMany({
         ...inputPagination({ first, cursor, last }),
+        where,
         include: {
           parent: {
             include: {
@@ -33,14 +40,14 @@ export class ShowForumForumsService {
         },
         orderBy: [
           {
-            position: SortDirectionEnum.desc
+            position: SortDirectionEnum.asc
           },
           {
-            created: SortDirectionEnum.asc
+            created: SortDirectionEnum.desc
           }
         ]
       }),
-      this.prisma.forum_forums.count()
+      this.prisma.forum_forums.count({ where })
     ]);
 
     return outputPagination({

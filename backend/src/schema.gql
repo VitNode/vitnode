@@ -43,7 +43,7 @@ type LayoutAdminInstallObj {
 type Mutation {
   create_admin_groups(name: [TextLanguageInput!]!): ShowAdminGroups!
   create_database_admin_install: String!
-  create_forum_forums(description: [TextLanguageInput!]!, is_category: Boolean, name: [TextLanguageInput!]!, parent_id: String, position: Float): ShowForumForumsWithParent!
+  create_forum_forums(description: [TextLanguageInput!]!, is_category: Boolean, name: [TextLanguageInput!]!, parent_id: String): ShowForumForumsWithParent!
   delete_admin_groups(id: String!): String!
   delete_avatar_core_members: String!
   edit_admin_groups(id: String!, name: [TextLanguageInput!]!): ShowAdminGroups!
@@ -215,7 +215,7 @@ type ShowForumForumsWithParent {
   id: String!
   is_category: Boolean!
   name: [TextLanguage!]!
-  parent: ShowForumForums!
+  parent: ShowForumForums
   position: Int!
   views: Int!
 }

@@ -15,8 +15,7 @@ export class CreateForumForumsService {
     description,
     is_category,
     name,
-    parent_id,
-    position
+    parent_id
   }: CreateForumForumsArgs): Promise<ShowForumForumsWithParent> {
     if (!parent_id && !is_category) {
       throw new CustomError({
@@ -40,6 +39,15 @@ export class CreateForumForumsService {
       }
     }
 
+    const theMostHighestPosition = await this.prisma.forum_forums.findFirst({
+      where: {
+        parent_id: parent_id || null
+      },
+      orderBy: {
+        position: 'desc'
+      }
+    });
+
     const forum = await this.prisma.forum_forums.create({
       data: {
         name: {
@@ -48,7 +56,7 @@ export class CreateForumForumsService {
         description: {
           create: description
         },
-        position,
+        position: theMostHighestPosition ? theMostHighestPosition.position + 1 : 0,
         is_category,
         created: currentDate(),
         parent: parent_id

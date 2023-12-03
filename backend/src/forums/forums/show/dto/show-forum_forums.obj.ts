@@ -43,8 +43,8 @@ class ShowForumForums {
 
 @ObjectType()
 export class ShowForumForumsWithParent extends ShowForumForums {
-  @Field(() => ShowForumForums)
-  parent: ShowForumForums;
+  @Field(() => ShowForumForums, { nullable: true })
+  parent: ShowForumForums | null;
 
   @Field(() => ShowForumForumsCount)
   _count: ShowForumForumsCount;
