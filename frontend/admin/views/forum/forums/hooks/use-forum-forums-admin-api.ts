@@ -1,4 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
 
 import { APIKeys } from '@/graphql/api-keys';
 import { fetcher } from '@/graphql/fetcher';
@@ -31,7 +32,9 @@ export const useForumForumsAdminAPI = () => {
     }
   });
 
-  const data = query.data?.pages.flatMap(({ show_forum_forums: { edges } }) => edges) ?? [];
+  const data = useMemo(() => {
+    return query.data?.pages.flatMap(({ show_forum_forums: { edges } }) => edges) ?? [];
+  }, [query.data]);
 
   return {
     ...query,

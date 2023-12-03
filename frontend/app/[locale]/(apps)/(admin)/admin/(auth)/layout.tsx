@@ -70,6 +70,10 @@ export default async function Layout({ children }: Props) {
       </HydrationBoundary>
     );
   } catch (error) {
+    const errors = error as { errors: string[] };
+    // eslint-disable-next-line no-console
+    console.log(error, errors);
+
     redirect('/admin');
   }
 }
