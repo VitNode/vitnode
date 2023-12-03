@@ -67,6 +67,11 @@ export class CreateForumForumsService {
             name: true,
             description: true
           }
+        },
+        _count: {
+          select: {
+            children: true
+          }
         }
       }
     });

@@ -24,20 +24,31 @@ export class ShowForumForumsService {
             }
           },
           name: true,
-          description: true
+          description: true,
+          _count: {
+            select: {
+              children: true
+            }
+          }
         },
         orderBy: [
           {
             position: SortDirectionEnum.desc
           },
           {
-            created: SortDirectionEnum.desc
+            created: SortDirectionEnum.asc
           }
         ]
       }),
       this.prisma.forum_forums.count()
     ]);
 
-    return outputPagination({ edges, totalCount, first, cursor, last });
+    return outputPagination({
+      edges,
+      totalCount,
+      first,
+      cursor,
+      last
+    });
   }
 }

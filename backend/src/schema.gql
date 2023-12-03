@@ -199,12 +199,17 @@ type ShowForumForums {
   views: Int!
 }
 
+type ShowForumForumsCount {
+  children: Int!
+}
+
 type ShowForumForumsObj {
   edges: [ShowForumForumsWithParent!]!
   pageInfo: PageInfo!
 }
 
 type ShowForumForumsWithParent {
+  _count: ShowForumForumsCount!
   created: Int!
   description: [TextLanguage!]!
   id: String!

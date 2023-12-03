@@ -7,5 +7,6 @@ export enum APIKeys {
   LANGUAGES_ADMIN = 'languages.admin',
   LAYOUT_ADMIN_INSTALL = 'layout.admin_install',
   PROFILE = 'profile',
-  LANGUAGES = 'languages'
+  LANGUAGES = 'languages',
+  FORUMS_ADMIN = 'forums.admin'
 }
