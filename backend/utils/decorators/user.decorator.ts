@@ -23,7 +23,7 @@ export class User {
   birthday: number;
 
   @Field(() => Boolean, { nullable: true })
-  newsletter?: boolean;
+  newsletter: boolean | null;
 
   @Field(() => String)
   group_id: string;

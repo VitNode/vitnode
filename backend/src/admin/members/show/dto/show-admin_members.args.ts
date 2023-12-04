@@ -29,20 +29,20 @@ class ShowAdminMembersSortByArgs {
 @ArgsType()
 export class ShowAdminMembersArgs {
   @Field(() => String, { nullable: true })
-  cursor?: string;
+  cursor: string | null;
 
   @Field(() => Int, { nullable: true })
-  first?: number;
+  first: number | null;
 
   @Field(() => Int, { nullable: true })
-  last?: number;
+  last: number | null;
 
   @Field(() => [ShowAdminMembersSortByArgs], { nullable: true })
-  sortBy?: ShowAdminMembersSortByArgs[];
+  sortBy: ShowAdminMembersSortByArgs[] | null;
 
   @Field(() => String, { nullable: true })
-  search?: string;
+  search: string | null;
 
   @Field(() => [String], { nullable: true })
-  groups?: string[];
+  groups: string[] | null;
 }

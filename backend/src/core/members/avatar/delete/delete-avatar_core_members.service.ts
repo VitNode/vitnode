@@ -33,7 +33,8 @@ export class DeleteAvatarCoreMembersService {
       module: {
         module: 'core_members',
         id: id
-      }
+      },
+      id: null
     });
 
     // Update user

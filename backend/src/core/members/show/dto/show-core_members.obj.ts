@@ -34,10 +34,7 @@ export class ShowCoreMembers {
   birthday: number;
 
   @Field(() => UploadCoreAttachmentsObj, { nullable: true })
-  avatar?: UploadCoreAttachmentsObj;
-
-  @Field(() => UploadCoreAttachmentsObj, { nullable: true })
-  image_cover?: UploadCoreAttachmentsObj;
+  avatar: UploadCoreAttachmentsObj | null;
 
   @Field(() => GroupShowCoreMembers)
   group: GroupShowCoreMembers;

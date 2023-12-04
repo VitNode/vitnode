@@ -9,10 +9,10 @@ export class AuthorizationCurrentUserObj extends User {
   is_admin: boolean;
 
   @Field(() => UploadCoreAttachmentsObj, { nullable: true })
-  avatar?: UploadCoreAttachmentsObj;
+  avatar: UploadCoreAttachmentsObj | null;
 }
 @ObjectType()
 export class AuthorizationCoreSessionsObj {
   @Field(() => AuthorizationCurrentUserObj, { nullable: true })
-  user?: AuthorizationCurrentUserObj;
+  user: AuthorizationCurrentUserObj | null;
 }

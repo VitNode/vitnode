@@ -12,11 +12,13 @@ import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 export class ShowForumForumsService {
   constructor(private prisma: PrismaService) {}
 
-  async show({ cursor, first, last }: ShowForumForumsArgs): Promise<ShowForumForumsObj> {
+  async show({ cursor, first, last, parent_id }: ShowForumForumsArgs): Promise<ShowForumForumsObj> {
     const where = {
-      parent_id: {
-        in: null
-      }
+      parent_id: parent_id
+        ? parent_id
+        : {
+            in: null
+          }
     };
 
     const [edges, totalCount] = await this.prisma.$transaction([

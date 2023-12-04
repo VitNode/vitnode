@@ -27,7 +27,7 @@ export class FilesObj {
   file: Promise<FileUpload>;
 
   @Field(() => String, { nullable: true })
-  description?: string;
+  description: string | null;
 
   @Field(() => Int)
   position: number;

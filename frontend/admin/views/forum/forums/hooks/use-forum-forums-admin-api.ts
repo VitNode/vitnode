@@ -4,10 +4,15 @@ import { useMemo } from 'react';
 import { APIKeys } from '@/graphql/api-keys';
 import { fetcher } from '@/graphql/fetcher';
 import {
+  ShowForumForumsWithParent,
   Show_Forum_Forums,
   Show_Forum_ForumsQuery,
   Show_Forum_ForumsQueryVariables
 } from '@/graphql/hooks';
+
+export interface Show_Forum_ForumsQueryItem extends Omit<ShowForumForumsWithParent, 'parent'> {
+  children: Show_Forum_ForumsQueryItem[];
+}
 
 export const useForumForumsAdminAPI = () => {
   const query = useInfiniteQuery({
@@ -32,8 +37,12 @@ export const useForumForumsAdminAPI = () => {
     }
   });
 
-  const data = useMemo(() => {
-    return query.data?.pages.flatMap(({ show_forum_forums: { edges } }) => edges) ?? [];
+  const data: Show_Forum_ForumsQueryItem[] = useMemo(() => {
+    return (
+      query.data?.pages.flatMap(({ show_forum_forums: { edges } }) =>
+        edges.map(edge => ({ ...edge, children: [] }))
+      ) ?? []
+    );
   }, [query.data]);
 
   return {
