@@ -10,9 +10,7 @@ import {
   Show_Forum_ForumsQueryVariables
 } from '@/graphql/hooks';
 
-export interface Show_Forum_ForumsQueryItem extends Omit<ShowForumForumsWithParent, 'parent'> {
-  children: Show_Forum_ForumsQueryItem[];
-}
+export interface Show_Forum_ForumsQueryItem extends Omit<ShowForumForumsWithParent, 'parent'> {}
 
 export const useForumForumsAdminAPI = () => {
   const query = useInfiniteQuery({
@@ -38,11 +36,7 @@ export const useForumForumsAdminAPI = () => {
   });
 
   const data: Show_Forum_ForumsQueryItem[] = useMemo(() => {
-    return (
-      query.data?.pages.flatMap(({ show_forum_forums: { edges } }) =>
-        edges.map(edge => ({ ...edge, children: [] }))
-      ) ?? []
-    );
+    return query.data?.pages.flatMap(({ show_forum_forums: { edges } }) => edges) ?? [];
   }, [query.data]);
 
   return {

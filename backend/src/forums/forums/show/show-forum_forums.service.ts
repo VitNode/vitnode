@@ -29,7 +29,24 @@ export class ShowForumForumsService {
           parent: {
             include: {
               name: true,
-              description: true
+              description: true,
+              _count: {
+                select: {
+                  children: true
+                }
+              }
+            }
+          },
+          children: {
+            include: {
+              name: true,
+              description: true,
+              parent: true,
+              _count: {
+                select: {
+                  children: true
+                }
+              }
             }
           },
           name: true,

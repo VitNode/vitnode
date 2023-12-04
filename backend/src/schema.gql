@@ -188,6 +188,7 @@ enum ShowCoreMembersSortingColumnEnum {
 }
 
 type ShowForumForums {
+  _count: ShowForumForumsCount!
   created: Int!
   description: [TextLanguage!]!
   id: String!
@@ -208,6 +209,7 @@ type ShowForumForumsObj {
 
 type ShowForumForumsWithParent {
   _count: ShowForumForumsCount!
+  children: [ShowForumForums!]
   created: Int!
   description: [TextLanguage!]!
   id: String!

@@ -39,6 +39,9 @@ class ShowForumForums {
 
   @Field(() => Boolean)
   is_category: boolean;
+
+  @Field(() => ShowForumForumsCount)
+  _count: ShowForumForumsCount;
 }
 
 @ObjectType()
@@ -46,6 +49,6 @@ export class ShowForumForumsWithParent extends ShowForumForums {
   @Field(() => ShowForumForums, { nullable: true })
   parent: ShowForumForums | null;
 
-  @Field(() => ShowForumForumsCount)
-  _count: ShowForumForumsCount;
+  @Field(() => [ShowForumForums], { nullable: true })
+  children: ShowForumForums[] | null;
 }

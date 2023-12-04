@@ -25,20 +25,6 @@ query Profiles_core_members($first: Int, $findByIds: [String!]) {
         }
       }
       id
-      image_cover {
-        created
-        description
-        extension
-        file_size
-        id
-        member_id
-        mimetype
-        module
-        module_id
-        name
-        position
-        url
-      }
       joined
       name
       posts

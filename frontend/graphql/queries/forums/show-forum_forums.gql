@@ -17,6 +17,24 @@ query Show_forum_forums($first: Int, $cursor: String) {
       _count {
         children
       }
+      children {
+        created
+        description {
+          id_language
+          value
+        }
+        id
+        is_category
+        name {
+          id_language
+          value
+        }
+        position
+        views
+        _count {
+          children
+        }
+      }
     }
     pageInfo {
       count

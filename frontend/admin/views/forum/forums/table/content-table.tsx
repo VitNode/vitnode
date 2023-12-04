@@ -41,7 +41,7 @@ const flatten = (
     return [
       ...acc,
       { ...item, parentId, depth, index },
-      ...flatten(item.children, item.id, depth + 1)
+      ...flatten((item.children ?? []) as Show_Forum_ForumsQueryItem[], item.id, depth + 1)
     ];
   }, []);
 };

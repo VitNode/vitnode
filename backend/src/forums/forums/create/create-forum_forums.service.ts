@@ -73,7 +73,23 @@ export class CreateForumForumsService {
         parent: {
           include: {
             name: true,
-            description: true
+            description: true,
+            _count: {
+              select: {
+                children: true
+              }
+            }
+          }
+        },
+        children: {
+          include: {
+            name: true,
+            description: true,
+            _count: {
+              select: {
+                children: true
+              }
+            }
           }
         },
         _count: {
