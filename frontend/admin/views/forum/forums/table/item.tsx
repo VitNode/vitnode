@@ -1,7 +1,8 @@
 import { ChevronRight, Menu, User } from 'lucide-react';
-import { CSSProperties, useEffect, useState } from 'react';
+import { CSSProperties } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { UniqueIdentifier } from '@dnd-kit/core';
 
 import { Button } from '@/components/ui/button';
 import { useTextLang } from '@/hooks/core/use-text-lang';
@@ -10,6 +11,7 @@ import { Show_Forum_ForumsQueryFlattenedItem } from './content-table';
 
 interface Props extends Show_Forum_ForumsQueryFlattenedItem {
   indentationWidth: number;
+  onCollapse?: (id: UniqueIdentifier) => void;
 }
 
 export const ItemTableForumsForumAdmin = ({
@@ -17,28 +19,17 @@ export const ItemTableForumsForumAdmin = ({
   depth,
   id,
   indentationWidth,
-  name
+  isOpenChildren,
+  name,
+  onCollapse
 }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
   const { convertText } = useTextLang();
-  const {
-    attributes,
-    isDragging,
-    listeners,
-    setDraggableNodeRef,
-    setDroppableNodeRef,
-    transform,
-    transition
-  } = useSortable({
-    id,
-    animateLayoutChanges: ({ isSorting, wasDragging }) => (isSorting || wasDragging ? false : true)
-  });
-
-  useEffect(() => {
-    if (isDragging && isOpen) {
-      setIsOpen(false);
-    }
-  }, [isDragging]);
+  const { attributes, listeners, setDraggableNodeRef, setDroppableNodeRef, transform, transition } =
+    useSortable({
+      id,
+      animateLayoutChanges: ({ isSorting, wasDragging }) =>
+        isSorting || wasDragging ? false : true
+    });
 
   return (
     <div
@@ -50,14 +41,12 @@ export const ItemTableForumsForumAdmin = ({
         } as CSSProperties
       }
       onClick={() => {
-        if (childrenCount > 0) {
-          setIsOpen(prev => !prev);
-        }
+        if (childrenCount > 0) onCollapse?.(id);
       }}
       role={childrenCount > 0 ? 'button' : undefined}
       tabIndex={childrenCount > 0 ? 0 : -1}
       onKeyDown={e => {
-        if (e.key === 'Enter' && childrenCount > 0) setIsOpen(prev => !prev);
+        if (e.key === 'Enter' && childrenCount > 0) onCollapse?.(id);
       }}
     >
       <div
@@ -77,7 +66,7 @@ export const ItemTableForumsForumAdmin = ({
         {childrenCount > 0 && (
           <ChevronRight
             className={cx('transition-transform', {
-              'rotate-90': isOpen
+              'rotate-90': isOpenChildren
             })}
           />
         )}

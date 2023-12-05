@@ -16,7 +16,7 @@ import {
   verticalListSortingStrategy
 } from '@dnd-kit/sortable';
 import { useQueryClient } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { ItemTableForumsForumAdmin } from './item';
 import {
@@ -26,25 +26,12 @@ import {
 import { ShowForumForumsWithParent } from '@/graphql/hooks';
 
 export interface Show_Forum_ForumsQueryFlattenedItem
-  extends Omit<ShowForumForumsWithParent, 'parent' | 'children'> {
+  extends Omit<ShowForumForumsWithParent, 'parent'> {
   depth: number;
   index: number;
+  isOpenChildren: boolean;
   parentId: string | null;
 }
-
-const flatten = (
-  items: Show_Forum_ForumsQueryItem[],
-  parentId: string | null = null,
-  depth = 0
-): Show_Forum_ForumsQueryFlattenedItem[] => {
-  return items.reduce<Show_Forum_ForumsQueryFlattenedItem[]>((acc, item, index) => {
-    return [
-      ...acc,
-      { ...item, parentId, depth, index },
-      ...flatten((item.children ?? []) as Show_Forum_ForumsQueryItem[], item.id, depth + 1)
-    ];
-  }, []);
-};
 
 const getDragDepth = (offset: number, indentationWidth: number) => {
   return Math.round(offset / indentationWidth);
@@ -66,6 +53,24 @@ const getMinDepth = ({ nextItem }: { nextItem: Show_Forum_ForumsQueryFlattenedIt
   return 0;
 };
 
+export function removeChildrenOf(
+  items: Show_Forum_ForumsQueryFlattenedItem[],
+  ids: UniqueIdentifier[]
+) {
+  const excludeParentIds = [...ids];
+
+  return items.filter(item => {
+    if (item.parentId && excludeParentIds.includes(item.parentId)) {
+      if ((item.children?.length ?? 0) > 0 && item._count.children > 0) {
+        excludeParentIds.push(item.id);
+      }
+
+      return false;
+    }
+
+    return true;
+  });
+}
 interface Projection {
   depth: number;
   maxDepth: number;
@@ -133,6 +138,7 @@ export const ContentTableForumsForumAdmin = () => {
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
   const [projected, setProjected] = useState<Projection | null>();
+  const [isOpenChildren, setIsOpenChildren] = useState<UniqueIdentifier[]>([]);
 
   const resetState = () => {
     setOverId(null);
@@ -146,12 +152,47 @@ export const ContentTableForumsForumAdmin = () => {
     })
   );
 
+  const flatten = useCallback(
+    (
+      items: Show_Forum_ForumsQueryItem[],
+      parentId: string | null = null,
+      depth = 0
+    ): Show_Forum_ForumsQueryFlattenedItem[] => {
+      const tree = items.reduce<Show_Forum_ForumsQueryFlattenedItem[]>((acc, item, index) => {
+        return [
+          ...acc,
+          { ...item, parentId, depth, index, isOpenChildren: isOpenChildren.includes(item.id) },
+          ...flatten((item.children ?? []) as Show_Forum_ForumsQueryItem[], item.id, depth + 1)
+        ];
+      }, []);
+
+      const collapsedItems = tree.reduce<UniqueIdentifier[]>(
+        (acc, { children, id, isOpenChildren }) =>
+          !isOpenChildren && children?.length ? [...acc, id] : acc,
+        []
+      );
+
+      return removeChildrenOf(tree, activeId ? [activeId, ...collapsedItems] : collapsedItems);
+    },
+    [data, activeId, isOpenChildren]
+  );
+
   // DndKit doesn't support nested sortable, so we need to flatten the data in one array
   const flattenedItems: Show_Forum_ForumsQueryFlattenedItem[] = useMemo(() => {
     return flatten(data);
-  }, [data]);
+  }, [data, activeId, isOpenChildren]);
 
   const sortedIds = useMemo(() => flattenedItems.map(({ id }) => id), [flattenedItems]);
+
+  const handleCollapse = (id: UniqueIdentifier) => {
+    setIsOpenChildren(prev => {
+      if (prev.includes(id)) {
+        return prev.filter(i => i !== id);
+      }
+
+      return [...prev, id];
+    });
+  };
 
   return (
     <DndContext
@@ -230,20 +271,18 @@ export const ContentTableForumsForumAdmin = () => {
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
         <Virtuoso
           useWindowScroll
+          data={flattenedItems}
+          overscan={200}
           totalCount={flattenedItems.length}
           className="rounded-md border overflow-hidden"
-          components={{
-            Item: ({ ...props }) => {
-              return <div {...props} className="[&:not(:last-child)]:border-b relative" />;
-            }
-          }}
-          itemContent={index => {
-            const item = flattenedItems[index];
+          itemContent={(index, item) => {
+            // const item = flattenedItems[index];
 
             return (
               <ItemTableForumsForumAdmin
                 key={item.id}
                 indentationWidth={indentationWidth}
+                onCollapse={handleCollapse}
                 {...item}
               />
             );
