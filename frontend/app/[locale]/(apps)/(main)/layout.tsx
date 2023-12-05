@@ -11,7 +11,7 @@ import {
   Authorization_Core_SessionsQueryVariables
 } from '@/graphql/hooks';
 import { SessionProvider } from './session-provider';
-import { InternalErrorView } from '@/admin/views/global/internal-error-view';
+import { InternalErrorView } from '@/admin/global/internal-error-view';
 import getQueryClient from '@/functions/get-query-client';
 import { APIKeys } from '@/graphql/api-keys';
 import { redirect } from '@/i18n';

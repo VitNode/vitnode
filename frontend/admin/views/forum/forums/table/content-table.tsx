@@ -11,138 +11,39 @@ import {
 } from '@dnd-kit/core';
 import {
   SortableContext,
-  arrayMove,
   sortableKeyboardCoordinates,
   verticalListSortingStrategy
 } from '@dnd-kit/sortable';
 import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useMemo, useState } from 'react';
 
-import { ItemTableForumsForumAdmin } from './item';
+import { ItemTableForumsForumAdmin } from './item/item';
 import {
   Show_Forum_ForumsQueryItem,
   useForumForumsAdminAPI
 } from '../hooks/use-forum-forums-admin-api';
-import { ShowForumForumsWithParent } from '@/graphql/hooks';
-
-export interface Show_Forum_ForumsQueryFlattenedItem
-  extends Omit<ShowForumForumsWithParent, 'parent'> {
-  depth: number;
-  index: number;
-  isOpenChildren: boolean;
-  parentId: string | null;
-}
-
-const getDragDepth = (offset: number, indentationWidth: number) => {
-  return Math.round(offset / indentationWidth);
-};
-
-const getMaxDepth = ({ previousItem }: { previousItem: Show_Forum_ForumsQueryFlattenedItem }) => {
-  if (previousItem) {
-    return previousItem.depth + 1;
-  }
-
-  return 0;
-};
-
-const getMinDepth = ({ nextItem }: { nextItem: Show_Forum_ForumsQueryFlattenedItem }) => {
-  if (nextItem) {
-    return nextItem.depth;
-  }
-
-  return 0;
-};
-
-export function removeChildrenOf(
-  items: Show_Forum_ForumsQueryFlattenedItem[],
-  ids: UniqueIdentifier[]
-) {
-  const excludeParentIds = [...ids];
-
-  return items.filter(item => {
-    if (item.parentId && excludeParentIds.includes(item.parentId)) {
-      if ((item.children?.length ?? 0) > 0 && item._count.children > 0) {
-        excludeParentIds.push(item.id);
-      }
-
-      return false;
-    }
-
-    return true;
-  });
-}
-interface Projection {
-  depth: number;
-  maxDepth: number;
-  minDepth: number;
-  parentId: string | null;
-}
-
-const getProjection = (
-  items: Show_Forum_ForumsQueryFlattenedItem[],
-  activeId: UniqueIdentifier,
-  overId: UniqueIdentifier,
-  dragOffset: number,
-  indentationWidth: number
-): Projection => {
-  const overItemIndex = items.findIndex(({ id }) => id === overId);
-  const activeItemIndex = items.findIndex(({ id }) => id === activeId);
-  const activeItem = items[activeItemIndex];
-  const newItems = arrayMove(items, activeItemIndex, overItemIndex);
-  const previousItem = newItems[overItemIndex - 1];
-  const nextItem = newItems[overItemIndex + 1];
-  const dragDepth = getDragDepth(dragOffset, indentationWidth);
-  const projectedDepth = activeItem.depth + dragDepth;
-  const maxDepth = getMaxDepth({
-    previousItem
-  });
-  const minDepth = getMinDepth({ nextItem });
-  let depth = projectedDepth;
-
-  if (projectedDepth >= maxDepth) {
-    depth = maxDepth;
-  } else if (projectedDepth < minDepth) {
-    depth = minDepth;
-  }
-
-  const getParentId = () => {
-    if (depth === 0 || !previousItem) {
-      return null;
-    }
-
-    if (depth === previousItem.depth) {
-      return previousItem.parentId;
-    }
-
-    if (depth > previousItem.depth) {
-      return previousItem.id;
-    }
-
-    const newParent = newItems
-      .slice(0, overItemIndex)
-      .reverse()
-      .find(item => item.depth === depth)?.parentId;
-
-    return newParent ?? null;
-  };
-
-  return { depth, maxDepth, minDepth, parentId: getParentId() };
-};
+import { getForumProjection, removeChildrenOf } from './functions';
+import { Show_Forum_ForumsQueryFlattenedItem, Show_Forum_ForumsQueryWithProjection } from './types';
+import { GlobalLoader } from '@/components/loader/global/global-loader';
+import { Loader } from '@/components/loader/loader';
+import { ErrorAdminView } from '@/admin/global/error-admin-view';
 
 const indentationWidth = 20;
 
 export const ContentTableForumsForumAdmin = () => {
-  const { data } = useForumForumsAdminAPI();
+  const { data, fetchNextPage, hasNextPage, isError, isFetching, isLoading } =
+    useForumForumsAdminAPI();
   const queryClient = useQueryClient();
 
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
-  const [projected, setProjected] = useState<Projection | null>();
+  const [projected, setProjected] = useState<Show_Forum_ForumsQueryWithProjection | null>();
   const [isOpenChildren, setIsOpenChildren] = useState<UniqueIdentifier[]>([]);
 
   const resetState = () => {
     setOverId(null);
     setActiveId(null);
+    setProjected(null);
   };
 
   const sensors = useSensors(
@@ -194,6 +95,9 @@ export const ContentTableForumsForumAdmin = () => {
     });
   };
 
+  if (isLoading) return <Loader />;
+  if (isError) return <ErrorAdminView />;
+
   return (
     <DndContext
       sensors={sensors}
@@ -208,7 +112,7 @@ export const ContentTableForumsForumAdmin = () => {
       onDragMove={({ delta }) => {
         if (!activeId || !overId) return;
 
-        const currentProjection = getProjection(
+        const currentProjection = getForumProjection(
           flattenedItems,
           activeId,
           overId,
@@ -270,20 +174,25 @@ export const ContentTableForumsForumAdmin = () => {
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
+        {isFetching && <GlobalLoader />}
         <Virtuoso
           useWindowScroll
           data={flattenedItems}
           overscan={200}
           totalCount={flattenedItems.length}
-          className="rounded-md border overflow-hidden"
-          itemContent={(index, item) => {
-            // const item = flattenedItems[index];
-
+          className="rounded-md"
+          endReached={() => {
+            if (hasNextPage) {
+              fetchNextPage();
+            }
+          }}
+          itemContent={(_index, item) => {
             return (
               <ItemTableForumsForumAdmin
                 key={item.id}
                 indentationWidth={indentationWidth}
                 onCollapse={handleCollapse}
+                isDropHere={projected?.parentId === item.id}
                 {...item}
               />
             );
