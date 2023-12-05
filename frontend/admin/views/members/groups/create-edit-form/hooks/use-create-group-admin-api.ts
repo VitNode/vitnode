@@ -40,7 +40,7 @@ export const useCreateGroupAdminAPI = () => {
       push(pathname);
 
       queryClient.refetchQueries({
-        queryKey: [APIKeys.GROUPS_MEMBERS]
+        queryKey: [APIKeys.GROUPS_MEMBERS_ADMIN]
       });
 
       toast({

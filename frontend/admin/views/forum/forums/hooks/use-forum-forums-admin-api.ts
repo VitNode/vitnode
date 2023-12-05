@@ -5,9 +5,9 @@ import { APIKeys } from '@/graphql/api-keys';
 import { fetcher } from '@/graphql/fetcher';
 import {
   ShowForumForumsWithParent,
-  Show_Forum_Forums,
-  Show_Forum_ForumsQuery,
-  Show_Forum_ForumsQueryVariables
+  Show_Forum_Forums_Admin,
+  Show_Forum_Forums_AdminQuery,
+  Show_Forum_Forums_AdminQueryVariables
 } from '@/graphql/hooks';
 
 export interface Show_Forum_ForumsQueryItem extends Omit<ShowForumForumsWithParent, 'parent'> {}
@@ -16,8 +16,8 @@ export const useForumForumsAdminAPI = () => {
   const query = useInfiniteQuery({
     queryKey: [APIKeys.FORUMS_ADMIN],
     queryFn: async ({ pageParam, signal }) =>
-      await fetcher<Show_Forum_ForumsQuery, Show_Forum_ForumsQueryVariables>({
-        query: Show_Forum_Forums,
+      await fetcher<Show_Forum_Forums_AdminQuery, Show_Forum_Forums_AdminQueryVariables>({
+        query: Show_Forum_Forums_Admin,
         variables: pageParam,
         signal
       }),

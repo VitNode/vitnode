@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { cx } from '@/functions/classnames';
 import { Show_Forum_ForumsQueryFlattenedItem } from './content-table';
+import { useChildrenForumForumsAdminAPI } from '../hooks/use-children-forum-forums-admin-api';
+import { GlobalLoader } from '@/components/loader/global/global-loader';
 
 interface Props extends Show_Forum_ForumsQueryFlattenedItem {
   indentationWidth: number;
@@ -31,6 +33,11 @@ export const ItemTableForumsForumAdmin = ({
         isSorting || wasDragging ? false : true
     });
 
+  const { isLoading } = useChildrenForumForumsAdminAPI({
+    parentId: id,
+    enabled: childrenCount > 0 && isOpenChildren
+  });
+
   return (
     <div
       ref={setDroppableNodeRef}
@@ -49,6 +56,7 @@ export const ItemTableForumsForumAdmin = ({
         if (e.key === 'Enter' && childrenCount > 0) onCollapse?.(id);
       }}
     >
+      {isLoading && <GlobalLoader />}
       <div
         className="p-4 flex gap-4 bg-card items-center transition-[background-color,opacity] relative"
         style={{

@@ -220,6 +220,7 @@ export const ContentTableForumsForumAdmin = () => {
           return;
         }
 
+        // console.log(currentProjection);
         setProjected(currentProjection);
       }}
       onDragStart={({ active: { id: activeId } }) => {

@@ -508,6 +508,15 @@ export type Layout_Admin_InstallQueryVariables = Exact<{ [key: string]: never; }
 
 export type Layout_Admin_InstallQuery = { __typename?: 'Query', layout_admin_install: { __typename?: 'LayoutAdminInstallObj', status: LayoutAdminInstallEnum } };
 
+export type Show_Forum_Forums_AdminQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  parentId?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Show_Forum_Forums_AdminQuery = { __typename?: 'Query', show_forum_forums: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, is_category: boolean, position: number, views: number, created: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, _count: { __typename?: 'ShowForumForumsCount', children: number } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
+
 export type Short_Show_Groups_Admin_MembersQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
@@ -570,14 +579,6 @@ export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: n
 
 
 export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: string, id: string, is_admin: boolean, name: string, newsletter?: boolean | null, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } | null }, show_core_languages: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string }> } };
-
-export type Show_Forum_ForumsQueryVariables = Exact<{
-  first?: InputMaybe<Scalars['Int']['input']>;
-  cursor?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type Show_Forum_ForumsQuery = { __typename?: 'Query', show_forum_forums: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, is_category: boolean, position: number, views: number, created: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, _count: { __typename?: 'ShowForumForumsCount', children: number }, children?: Array<{ __typename?: 'ShowForumForums', created: number, id: string, is_category: boolean, position: number, views: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, _count: { __typename?: 'ShowForumForumsCount', children: number } }> | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
 
 
 export const Create_Database_Admin_Install = gql`
@@ -734,6 +735,38 @@ export const Layout_Admin_Install = gql`
     query Layout_admin_install {
   layout_admin_install {
     status
+  }
+}
+    `;
+export const Show_Forum_Forums_Admin = gql`
+    query Show_forum_forums_admin($first: Int, $cursor: String, $parentId: String) {
+  show_forum_forums(first: $first, cursor: $cursor, parent_id: $parentId) {
+    edges {
+      id
+      is_category
+      description {
+        id_language
+        value
+      }
+      name {
+        id_language
+        value
+      }
+      position
+      views
+      created
+      _count {
+        children
+      }
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
   }
 }
     `;
@@ -963,56 +996,6 @@ export const Authorization_Core_Sessions = gql`
   show_core_languages {
     edges {
       id
-    }
-  }
-}
-    `;
-export const Show_Forum_Forums = gql`
-    query Show_forum_forums($first: Int, $cursor: String) {
-  show_forum_forums(first: $first, cursor: $cursor) {
-    edges {
-      id
-      is_category
-      description {
-        id_language
-        value
-      }
-      name {
-        id_language
-        value
-      }
-      position
-      views
-      created
-      _count {
-        children
-      }
-      children {
-        created
-        description {
-          id_language
-          value
-        }
-        id
-        is_category
-        name {
-          id_language
-          value
-        }
-        position
-        views
-        _count {
-          children
-        }
-      }
-    }
-    pageInfo {
-      count
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-      totalCount
     }
   }
 }
