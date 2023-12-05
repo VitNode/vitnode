@@ -41,6 +41,7 @@ type LayoutAdminInstallObj {
 }
 
 type Mutation {
+  changePosition_forum_forums(id: String!, index_to_move: Int!, parent_id: String): String!
   create_admin_groups(name: [TextLanguageInput!]!): ShowAdminGroups!
   create_database_admin_install: String!
   create_forum_forums(description: [TextLanguageInput!]!, is_category: Boolean, name: [TextLanguageInput!]!, parent_id: String): ShowForumForumsWithParent!

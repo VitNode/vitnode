@@ -141,36 +141,11 @@ export const ContentTableForumsForumAdmin = () => {
         // eslint-disable-next-line no-console
         console.log({ depth, parentId });
 
-        // const findIndex = {
-        //   active: data.findIndex(i => i.id === active.id),
-        //   over: data.findIndex(i => i.id === over?.id)
-        // };
-        // const newEdges = arrayMove(data, findIndex.active, findIndex.over);
-
-        // queryClient.setQueryData<InfiniteData<Show_Forum_ForumsQuery>>(
-        //   [APIKeys.FORUMS_ADMIN],
-        //   old => {
-        //     const currentOld = {
-        //       pageParams: old?.pageParams.at(-1),
-        //       page: old?.pages.at(-1)
-        //     };
-
-        //     if (!currentOld.pageParams || !currentOld.page) return old;
-
-        //     return {
-        //       pageParams: [currentOld.pageParams],
-        //       pages: [
-        //         {
-        //           ...currentOld.page,
-        //           show_forum_forums: {
-        //             ...currentOld.page.show_forum_forums,
-        //             edges: newEdges
-        //           }
-        //         }
-        //       ]
-        //     };
-        //   }
-        // );
+        // -1 means that the item is the last one
+        const indexToMove =
+          active.id === over.id ? -1 : flattenedItems.find(i => i.id === over.id)?.position;
+        // console.log('active.id', active.id);
+        // console.log('indexToMove', indexToMove);
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>

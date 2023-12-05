@@ -67,7 +67,7 @@ export const ItemTableForumsForumAdmin = ({
       {isLoading && <GlobalLoader />}
       <div
         className={cx(
-          'p-2 flex gap-4 bg-card items-center transition-[background-color,opacity] relative border',
+          'p-4 flex gap-4 bg-card items-center transition-[background-color,opacity] relative border',
           {
             'animate-pulse bg-primary/20': isDropHere,
             'z-10': isDragging
@@ -98,7 +98,9 @@ export const ItemTableForumsForumAdmin = ({
         )}
 
         <div className="flex-grow flex flex-col">
-          <span>{convertText(name)}</span>
+          <span>
+            {convertText(name)} - {id}
+          </span>
           {childrenCount > 0 && (
             <span className="text-sm text-muted-foreground">SubForums: {childrenCount}</span>
           )}
