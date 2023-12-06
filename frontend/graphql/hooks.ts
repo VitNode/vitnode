@@ -63,6 +63,7 @@ export type LayoutAdminInstallObj = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  changePosition_forum_forums: Scalars['String']['output'];
   create_admin_groups: ShowAdminGroups;
   create_database_admin_install: Scalars['String']['output'];
   create_forum_forums: ShowForumForumsWithParent;
@@ -76,6 +77,13 @@ export type Mutation = {
   signOut_core_sessions: Scalars['String']['output'];
   signUp_core_members: SignUpCoreMembersObj;
   upload_avatar_core_members: UploadCoreAttachmentsObj;
+};
+
+
+export type MutationChangePosition_Forum_ForumsArgs = {
+  id: Scalars['String']['input'];
+  index_to_move: Scalars['Int']['input'];
+  parent_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -410,6 +418,25 @@ export type Create_Database_Admin_InstallMutationVariables = Exact<{ [key: strin
 
 export type Create_Database_Admin_InstallMutation = { __typename?: 'Mutation', create_database_admin_install: string };
 
+export type ChangePosition_Forum_ForumsMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+  indexToMove: Scalars['Int']['input'];
+  parentId?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type ChangePosition_Forum_ForumsMutation = { __typename?: 'Mutation', changePosition_forum_forums: string };
+
+export type Create_Forum_ForumsMutationVariables = Exact<{
+  name: Array<TextLanguageInput> | TextLanguageInput;
+  description: Array<TextLanguageInput> | TextLanguageInput;
+  parentId?: InputMaybe<Scalars['String']['input']>;
+  isCategory?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
+
+
+export type Create_Forum_ForumsMutation = { __typename?: 'Mutation', create_forum_forums: { __typename?: 'ShowForumForumsWithParent', created: number, id: string, is_category: boolean, position: number, views: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
+
 export type Create_Admin_GroupsMutationVariables = Exact<{
   name: Array<TextLanguageInput> | TextLanguageInput;
 }>;
@@ -493,16 +520,6 @@ export type SignOut_Core_SessionsMutationVariables = Exact<{ [key: string]: neve
 
 export type SignOut_Core_SessionsMutation = { __typename?: 'Mutation', signOut_core_sessions: string };
 
-export type Create_Forum_ForumsMutationVariables = Exact<{
-  name: Array<TextLanguageInput> | TextLanguageInput;
-  description: Array<TextLanguageInput> | TextLanguageInput;
-  parentId?: InputMaybe<Scalars['String']['input']>;
-  isCategory?: InputMaybe<Scalars['Boolean']['input']>;
-}>;
-
-
-export type Create_Forum_ForumsMutation = { __typename?: 'Mutation', create_forum_forums: { __typename?: 'ShowForumForumsWithParent', created: number, id: string, is_category: boolean, position: number, views: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
-
 export type Layout_Admin_InstallQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -584,6 +601,39 @@ export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authoriza
 export const Create_Database_Admin_Install = gql`
     mutation Create_database_admin_install {
   create_database_admin_install
+}
+    `;
+export const ChangePosition_Forum_Forums = gql`
+    mutation ChangePosition_forum_forums($id: String!, $indexToMove: Int!, $parentId: String) {
+  changePosition_forum_forums(
+    id: $id
+    index_to_move: $indexToMove
+    parent_id: $parentId
+  )
+}
+    `;
+export const Create_Forum_Forums = gql`
+    mutation Create_forum_forums($name: [TextLanguageInput!]!, $description: [TextLanguageInput!]!, $parentId: String, $isCategory: Boolean) {
+  create_forum_forums(
+    name: $name
+    description: $description
+    parent_id: $parentId
+    is_category: $isCategory
+  ) {
+    created
+    description {
+      id_language
+      value
+    }
+    id
+    is_category
+    name {
+      id_language
+      value
+    }
+    position
+    views
+  }
 }
     `;
 export const Create_Admin_Groups = gql`
@@ -705,30 +755,6 @@ export const SignIn_Core_Sessions = gql`
 export const SignOut_Core_Sessions = gql`
     mutation SignOut_core_sessions {
   signOut_core_sessions
-}
-    `;
-export const Create_Forum_Forums = gql`
-    mutation Create_forum_forums($name: [TextLanguageInput!]!, $description: [TextLanguageInput!]!, $parentId: String, $isCategory: Boolean) {
-  create_forum_forums(
-    name: $name
-    description: $description
-    parent_id: $parentId
-    is_category: $isCategory
-  ) {
-    created
-    description {
-      id_language
-      value
-    }
-    id
-    is_category
-    name {
-      id_language
-      value
-    }
-    position
-    views
-  }
 }
     `;
 export const Layout_Admin_Install = gql`

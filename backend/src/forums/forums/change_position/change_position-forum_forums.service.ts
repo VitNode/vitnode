@@ -4,6 +4,7 @@ import { ChangePositionForumForumsArgs } from './dto/change_position-forum_forum
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';
+import { SortDirectionEnum } from '../../../../types/database/sortDirection.type';
 
 @Injectable()
 export class ChangePositionForumForumsService {
@@ -23,9 +24,10 @@ export class ChangePositionForumForumsService {
 
     const allChildrenParent = await this.prisma.forum_forums.findMany({
       where: {
-        parent: {
-          id: parent_id
-        }
+        parent_id
+      },
+      orderBy: {
+        position: SortDirectionEnum.asc
       }
     });
 
@@ -34,10 +36,16 @@ export class ChangePositionForumForumsService {
     allChildrenParent
       .filter(item => item.id !== id)
       .forEach(item => {
+        // Skip the item that we want to move
+        if (index_to_move === index) {
+          index++;
+        }
+
         newChildrenIndexes.push({
           id: item.id,
-          position: index_to_move === index ? index++ + 1 : index++
+          position: index
         });
+        index++;
       });
 
     // If index_to_move is below 0, it means that the item is at the end of the list
@@ -50,7 +58,10 @@ export class ChangePositionForumForumsService {
       newChildrenIndexes.map(async item => {
         await this.prisma.forum_forums.update({
           where: { id: item.id },
-          data: { position: item.position, parent: { connect: { id: parent_id } } }
+          data: {
+            position: item.position,
+            parent: parent_id ? { connect: { id: parent_id } } : { disconnect: true }
+          }
         });
       })
     );

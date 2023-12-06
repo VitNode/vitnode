@@ -60,9 +60,6 @@ export class ShowForumForumsService {
         orderBy: [
           {
             position: SortDirectionEnum.asc
-          },
-          {
-            created: SortDirectionEnum.desc
           }
         ]
       }),

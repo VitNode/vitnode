@@ -14,7 +14,6 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy
 } from '@dnd-kit/sortable';
-import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useMemo, useState } from 'react';
 
 import { ItemTableForumsForumAdmin } from './item/item';
@@ -27,13 +26,14 @@ import { Show_Forum_ForumsQueryFlattenedItem, Show_Forum_ForumsQueryWithProjecti
 import { GlobalLoader } from '@/components/loader/global/global-loader';
 import { Loader } from '@/components/loader/loader';
 import { ErrorAdminView } from '@/admin/global/error-admin-view';
+import { useChangePositionForumAdminAPI } from '../hooks/use-change-position-forum-admin-api';
 
 const indentationWidth = 20;
 
 export const ContentTableForumsForumAdmin = () => {
   const { data, fetchNextPage, hasNextPage, isError, isFetching, isLoading } =
     useForumForumsAdminAPI();
-  const queryClient = useQueryClient();
+  const { mutateAsync } = useChangePositionForumAdminAPI();
 
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
@@ -131,21 +131,27 @@ export const ContentTableForumsForumAdmin = () => {
         setActiveId(activeId);
         setOverId(activeId);
       }}
-      onDragEnd={({ active, over }) => {
+      onDragEnd={async ({ active, over }) => {
         resetState();
 
         if (!projected || !over) return;
-        const { depth, parentId } = projected;
-
-        // TODO: Remove this
-        // eslint-disable-next-line no-console
-        console.log({ depth, parentId });
+        const { parentId } = projected;
 
         // -1 means that the item is the last one
+        const findActive = flattenedItems.find(i => i.id === active.id);
         const indexToMove =
-          active.id === over.id ? -1 : flattenedItems.find(i => i.id === over.id)?.position;
-        // console.log('active.id', active.id);
-        // console.log('indexToMove', indexToMove);
+          active.id === over.id ? -1 : flattenedItems.find(i => i.id === over.id)?.position ?? -1;
+
+        // Do nothing if drag and drop on the same item on the same level
+        if (findActive?.parentId === parentId && active.id === over.id) {
+          return;
+        }
+
+        await mutateAsync({
+          id: `${active.id}`,
+          parentId,
+          indexToMove
+        });
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>

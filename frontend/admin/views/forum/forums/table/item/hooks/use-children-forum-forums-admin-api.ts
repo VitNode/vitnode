@@ -35,7 +35,7 @@ const updateState = ({
       };
     }
 
-    if (edge._count.children > 0) {
+    if (edge._count.children > 0 && edge.children) {
       return {
         ...edge,
         children: updateState({
