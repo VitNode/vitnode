@@ -3,10 +3,10 @@ import { ArgsType, Field, ObjectType } from '@nestjs/graphql';
 @ArgsType()
 export class DeleteCoreAttachmentsArgs {
   @Field(() => String, { nullable: true })
-  id?: string;
+  id: string | null;
 
   @Field(() => [Module], { nullable: true })
-  module?: Module;
+  module: Module | null;
 }
 
 @ObjectType()

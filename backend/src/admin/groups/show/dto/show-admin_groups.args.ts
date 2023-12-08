@@ -23,17 +23,17 @@ class ShowAdminGroupsSortByArgs {
 @ArgsType()
 export class ShowAdminGroupsArgs {
   @Field(() => String, { nullable: true })
-  cursor?: string;
+  cursor: string | null;
 
   @Field(() => Int, { nullable: true })
-  first?: number;
+  first: number | null;
 
   @Field(() => Int, { nullable: true })
-  last?: number;
+  last: number | null;
 
   @Field(() => [ShowAdminGroupsSortByArgs], { nullable: true })
-  sortBy?: ShowAdminGroupsSortByArgs[];
+  sortBy: ShowAdminGroupsSortByArgs[] | null;
 
   @Field(() => String, { nullable: true })
-  search?: string;
+  search: string | null;
 }

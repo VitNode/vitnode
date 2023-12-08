@@ -152,7 +152,7 @@ model forum_forums {
   id          String  @id @unique @default(uuid())
   created     Int
   parent_id   String?
-  position    Int     @default(0)
+  position    Int
   is_category Boolean @default(false)
   views       Int     @default(0)
 

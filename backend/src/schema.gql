@@ -41,9 +41,10 @@ type LayoutAdminInstallObj {
 }
 
 type Mutation {
+  changePosition_forum_forums(id: String!, index_to_move: Int!, parent_id: String): String!
   create_admin_groups(name: [TextLanguageInput!]!): ShowAdminGroups!
   create_database_admin_install: String!
-  create_forum_forums(description: [TextLanguageInput!]!, is_category: Boolean, name: [TextLanguageInput!]!, parent_id: String, position: Float): ShowForumForumsWithParent!
+  create_forum_forums(description: [TextLanguageInput!]!, is_category: Boolean, name: [TextLanguageInput!]!, parent_id: String): ShowForumForumsWithParent!
   delete_admin_groups(id: String!): String!
   delete_avatar_core_members: String!
   edit_admin_groups(id: String!, name: [TextLanguageInput!]!): ShowAdminGroups!
@@ -73,7 +74,7 @@ type Query {
   show_admin_members(cursor: String, first: Int, groups: [String!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   show_core_languages(cursor: String, first: Int, last: Int): ShowCoreLanguagesObj!
   show_core_members(cursor: String, findByIds: [String!], first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
-  show_forum_forums(cursor: String, first: Int, last: Int, search: String): ShowForumForumsObj!
+  show_forum_forums(cursor: String, first: Int, last: Int, parent_id: String): ShowForumForumsObj!
 }
 
 type ShowAdminGroups {
@@ -111,7 +112,6 @@ type ShowAdminMembers {
   followers: Int!
   group: GroupShowCoreMembers!
   id: String!
-  image_cover: UploadCoreAttachmentsObj
   joined: Int!
   name: String!
   newsletter: Boolean!
@@ -161,7 +161,6 @@ type ShowCoreMembers {
   followers: Int!
   group: GroupShowCoreMembers!
   id: String!
-  image_cover: UploadCoreAttachmentsObj
   joined: Int!
   name: String!
   posts: Int!
@@ -190,6 +189,7 @@ enum ShowCoreMembersSortingColumnEnum {
 }
 
 type ShowForumForums {
+  _count: ShowForumForumsCount!
   created: Int!
   description: [TextLanguage!]!
   id: String!
@@ -199,18 +199,24 @@ type ShowForumForums {
   views: Int!
 }
 
+type ShowForumForumsCount {
+  children: Int!
+}
+
 type ShowForumForumsObj {
   edges: [ShowForumForumsWithParent!]!
   pageInfo: PageInfo!
 }
 
 type ShowForumForumsWithParent {
+  _count: ShowForumForumsCount!
+  children: [ShowForumForums!]
   created: Int!
   description: [TextLanguage!]!
   id: String!
   is_category: Boolean!
   name: [TextLanguage!]!
-  parent: ShowForumForums!
+  parent: ShowForumForums
   position: Int!
   views: Int!
 }

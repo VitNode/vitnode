@@ -63,6 +63,7 @@ export type LayoutAdminInstallObj = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  changePosition_forum_forums: Scalars['String']['output'];
   create_admin_groups: ShowAdminGroups;
   create_database_admin_install: Scalars['String']['output'];
   create_forum_forums: ShowForumForumsWithParent;
@@ -79,6 +80,13 @@ export type Mutation = {
 };
 
 
+export type MutationChangePosition_Forum_ForumsArgs = {
+  id: Scalars['String']['input'];
+  index_to_move: Scalars['Int']['input'];
+  parent_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+
 export type MutationCreate_Admin_GroupsArgs = {
   name: Array<TextLanguageInput>;
 };
@@ -89,7 +97,6 @@ export type MutationCreate_Forum_ForumsArgs = {
   is_category?: InputMaybe<Scalars['Boolean']['input']>;
   name: Array<TextLanguageInput>;
   parent_id?: InputMaybe<Scalars['String']['input']>;
-  position?: InputMaybe<Scalars['Float']['input']>;
 };
 
 
@@ -202,7 +209,7 @@ export type QueryShow_Forum_ForumsArgs = {
   cursor?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
+  parent_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ShowAdminGroups = {
@@ -244,7 +251,6 @@ export type ShowAdminMembers = {
   followers: Scalars['Int']['output'];
   group: GroupShowCoreMembers;
   id: Scalars['String']['output'];
-  image_cover?: Maybe<UploadCoreAttachmentsObj>;
   joined: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   newsletter: Scalars['Boolean']['output'];
@@ -299,7 +305,6 @@ export type ShowCoreMembers = {
   followers: Scalars['Int']['output'];
   group: GroupShowCoreMembers;
   id: Scalars['String']['output'];
-  image_cover?: Maybe<UploadCoreAttachmentsObj>;
   joined: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   posts: Scalars['Int']['output'];
@@ -331,6 +336,7 @@ export const ShowCoreMembersSortingColumnEnum = {
 export type ShowCoreMembersSortingColumnEnum = typeof ShowCoreMembersSortingColumnEnum[keyof typeof ShowCoreMembersSortingColumnEnum];
 export type ShowForumForums = {
   __typename?: 'ShowForumForums';
+  _count: ShowForumForumsCount;
   created: Scalars['Int']['output'];
   description: Array<TextLanguage>;
   id: Scalars['String']['output'];
@@ -338,6 +344,11 @@ export type ShowForumForums = {
   name: Array<TextLanguage>;
   position: Scalars['Int']['output'];
   views: Scalars['Int']['output'];
+};
+
+export type ShowForumForumsCount = {
+  __typename?: 'ShowForumForumsCount';
+  children: Scalars['Int']['output'];
 };
 
 export type ShowForumForumsObj = {
@@ -348,12 +359,14 @@ export type ShowForumForumsObj = {
 
 export type ShowForumForumsWithParent = {
   __typename?: 'ShowForumForumsWithParent';
+  _count: ShowForumForumsCount;
+  children?: Maybe<Array<ShowForumForums>>;
   created: Scalars['Int']['output'];
   description: Array<TextLanguage>;
   id: Scalars['String']['output'];
   is_category: Scalars['Boolean']['output'];
   name: Array<TextLanguage>;
-  parent: ShowForumForums;
+  parent?: Maybe<ShowForumForums>;
   position: Scalars['Int']['output'];
   views: Scalars['Int']['output'];
 };
@@ -404,6 +417,25 @@ export type Create_Database_Admin_InstallMutationVariables = Exact<{ [key: strin
 
 
 export type Create_Database_Admin_InstallMutation = { __typename?: 'Mutation', create_database_admin_install: string };
+
+export type ChangePosition_Forum_ForumsMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+  indexToMove: Scalars['Int']['input'];
+  parentId?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type ChangePosition_Forum_ForumsMutation = { __typename?: 'Mutation', changePosition_forum_forums: string };
+
+export type Create_Forum_ForumsMutationVariables = Exact<{
+  name: Array<TextLanguageInput> | TextLanguageInput;
+  description: Array<TextLanguageInput> | TextLanguageInput;
+  parentId?: InputMaybe<Scalars['String']['input']>;
+  isCategory?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
+
+
+export type Create_Forum_ForumsMutation = { __typename?: 'Mutation', create_forum_forums: { __typename?: 'ShowForumForumsWithParent', created: number, id: string, is_category: boolean, position: number, views: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
 
 export type Create_Admin_GroupsMutationVariables = Exact<{
   name: Array<TextLanguageInput> | TextLanguageInput;
@@ -488,20 +520,19 @@ export type SignOut_Core_SessionsMutationVariables = Exact<{ [key: string]: neve
 
 export type SignOut_Core_SessionsMutation = { __typename?: 'Mutation', signOut_core_sessions: string };
 
-export type Create_Forum_ForumsMutationVariables = Exact<{
-  name: Array<TextLanguageInput> | TextLanguageInput;
-  description: Array<TextLanguageInput> | TextLanguageInput;
-  parentId?: InputMaybe<Scalars['String']['input']>;
-  isCategory?: InputMaybe<Scalars['Boolean']['input']>;
-}>;
-
-
-export type Create_Forum_ForumsMutation = { __typename?: 'Mutation', create_forum_forums: { __typename?: 'ShowForumForumsWithParent', created: number, id: string, is_category: boolean, position: number, views: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
-
 export type Layout_Admin_InstallQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type Layout_Admin_InstallQuery = { __typename?: 'Query', layout_admin_install: { __typename?: 'LayoutAdminInstallObj', status: LayoutAdminInstallEnum } };
+
+export type Show_Forum_Forums_AdminQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  parentId?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Show_Forum_Forums_AdminQuery = { __typename?: 'Query', show_forum_forums: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, is_category: boolean, position: number, views: number, created: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', created: number, id: string, is_category: boolean, position: number, views: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, _count: { __typename?: 'ShowForumForumsCount', children: number } }> | null, _count: { __typename?: 'ShowForumForumsCount', children: number } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
 
 export type Short_Show_Groups_Admin_MembersQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -559,7 +590,7 @@ export type Profiles_Core_MembersQueryVariables = Exact<{
 }>;
 
 
-export type Profiles_Core_MembersQuery = { __typename?: 'Query', show_core_members: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, birthday: number, followers: number, id: string, joined: number, name: string, posts: number, reactions: number, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupShowCoreMembers', name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }, image_cover?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null }> } };
+export type Profiles_Core_MembersQuery = { __typename?: 'Query', show_core_members: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, birthday: number, followers: number, id: string, joined: number, name: string, posts: number, reactions: number, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupShowCoreMembers', name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } }> } };
 
 export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -570,6 +601,39 @@ export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authoriza
 export const Create_Database_Admin_Install = gql`
     mutation Create_database_admin_install {
   create_database_admin_install
+}
+    `;
+export const ChangePosition_Forum_Forums = gql`
+    mutation ChangePosition_forum_forums($id: String!, $indexToMove: Int!, $parentId: String) {
+  changePosition_forum_forums(
+    id: $id
+    index_to_move: $indexToMove
+    parent_id: $parentId
+  )
+}
+    `;
+export const Create_Forum_Forums = gql`
+    mutation Create_forum_forums($name: [TextLanguageInput!]!, $description: [TextLanguageInput!]!, $parentId: String, $isCategory: Boolean) {
+  create_forum_forums(
+    name: $name
+    description: $description
+    parent_id: $parentId
+    is_category: $isCategory
+  ) {
+    created
+    description {
+      id_language
+      value
+    }
+    id
+    is_category
+    name {
+      id_language
+      value
+    }
+    position
+    views
+  }
 }
     `;
 export const Create_Admin_Groups = gql`
@@ -693,34 +757,60 @@ export const SignOut_Core_Sessions = gql`
   signOut_core_sessions
 }
     `;
-export const Create_Forum_Forums = gql`
-    mutation Create_forum_forums($name: [TextLanguageInput!]!, $description: [TextLanguageInput!]!, $parentId: String, $isCategory: Boolean) {
-  create_forum_forums(
-    name: $name
-    description: $description
-    parent_id: $parentId
-    is_category: $isCategory
-  ) {
-    created
-    description {
-      id_language
-      value
-    }
-    id
-    is_category
-    name {
-      id_language
-      value
-    }
-    position
-    views
-  }
-}
-    `;
 export const Layout_Admin_Install = gql`
     query Layout_admin_install {
   layout_admin_install {
     status
+  }
+}
+    `;
+export const Show_Forum_Forums_Admin = gql`
+    query Show_forum_forums_admin($first: Int, $cursor: String, $parentId: String) {
+  show_forum_forums(first: $first, cursor: $cursor, parent_id: $parentId) {
+    edges {
+      id
+      is_category
+      description {
+        id_language
+        value
+      }
+      name {
+        id_language
+        value
+      }
+      position
+      views
+      created
+      children {
+        created
+        description {
+          id_language
+          value
+        }
+        id
+        is_category
+        name {
+          id_language
+          value
+        }
+        position
+        views
+        _count {
+          children
+        }
+      }
+      _count {
+        children
+      }
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
   }
 }
     `;
@@ -911,20 +1001,6 @@ export const Profiles_Core_Members = gql`
         }
       }
       id
-      image_cover {
-        created
-        description
-        extension
-        file_size
-        id
-        member_id
-        mimetype
-        module
-        module_id
-        name
-        position
-        url
-      }
       joined
       name
       posts

@@ -3,14 +3,14 @@ import { ArgsType, Field, Int } from '@nestjs/graphql';
 @ArgsType()
 export class ShowForumForumsArgs {
   @Field(() => String, { nullable: true })
-  cursor?: string;
+  cursor: string | null;
 
   @Field(() => Int, { nullable: true })
-  first?: number;
+  first: number | null;
 
   @Field(() => Int, { nullable: true })
-  last?: number;
+  last: number | null;
 
   @Field(() => String, { nullable: true })
-  search?: string;
+  parent_id: string | null;
 }

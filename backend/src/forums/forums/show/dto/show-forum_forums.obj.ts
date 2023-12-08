@@ -13,6 +13,11 @@ export class ShowForumForumsObj {
 }
 
 @ObjectType()
+class ShowForumForumsCount {
+  @Field(() => Int)
+  children: number;
+}
+@ObjectType()
 class ShowForumForums {
   @Field(() => String)
   id: string;
@@ -34,10 +39,16 @@ class ShowForumForums {
 
   @Field(() => Boolean)
   is_category: boolean;
+
+  @Field(() => ShowForumForumsCount)
+  _count: ShowForumForumsCount;
 }
 
 @ObjectType()
 export class ShowForumForumsWithParent extends ShowForumForums {
-  @Field(() => ShowForumForums)
-  parent: ShowForumForums;
+  @Field(() => ShowForumForums, { nullable: true })
+  parent: ShowForumForums | null;
+
+  @Field(() => [ShowForumForums], { nullable: true })
+  children: ShowForumForums[] | null;
 }

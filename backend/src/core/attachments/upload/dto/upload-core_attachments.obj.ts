@@ -27,7 +27,7 @@ export class UploadCoreAttachmentsObj {
   position: number;
 
   @Field(() => String, { nullable: true })
-  description?: string;
+  description: string | null;
 
   @Field(() => String)
   extension: string;

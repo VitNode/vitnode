@@ -11,11 +11,8 @@ export class CreateForumForumsArgs {
   description: TextLanguageInput[];
 
   @Field(() => String, { nullable: true })
-  parent_id?: string;
+  parent_id: string | null;
 
   @Field(() => Boolean, { nullable: true })
-  is_category?: boolean;
-
-  @Field(() => Number, { nullable: true })
-  position?: number;
+  is_category: boolean | null;
 }

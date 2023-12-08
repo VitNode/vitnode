@@ -12,32 +12,66 @@ import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 export class ShowForumForumsService {
   constructor(private prisma: PrismaService) {}
 
-  async show({ cursor, first, last }: ShowForumForumsArgs): Promise<ShowForumForumsObj> {
+  async show({ cursor, first, last, parent_id }: ShowForumForumsArgs): Promise<ShowForumForumsObj> {
+    const where = {
+      parent_id: parent_id
+        ? parent_id
+        : {
+            in: null
+          }
+    };
+
     const [edges, totalCount] = await this.prisma.$transaction([
       this.prisma.forum_forums.findMany({
         ...inputPagination({ first, cursor, last }),
+        where,
         include: {
           parent: {
             include: {
               name: true,
-              description: true
+              description: true,
+              _count: {
+                select: {
+                  children: true
+                }
+              }
+            }
+          },
+          children: {
+            include: {
+              name: true,
+              description: true,
+              parent: true,
+              _count: {
+                select: {
+                  children: true
+                }
+              }
             }
           },
           name: true,
-          description: true
+          description: true,
+          _count: {
+            select: {
+              children: true
+            }
+          }
         },
         orderBy: [
           {
-            position: SortDirectionEnum.desc
-          },
-          {
-            created: SortDirectionEnum.desc
+            position: SortDirectionEnum.asc
           }
         ]
       }),
-      this.prisma.forum_forums.count()
+      this.prisma.forum_forums.count({ where })
     ]);
 
-    return outputPagination({ edges, totalCount, first, cursor, last });
+    return outputPagination({
+      edges,
+      totalCount,
+      first,
+      cursor,
+      last
+    });
   }
 }

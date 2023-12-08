@@ -43,7 +43,7 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 export default async function Page() {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
-    queryKey: [APIKeys.GROUPS_MEMBERS, { ...emptyPagination }],
+    queryKey: [APIKeys.GROUPS_MEMBERS_ADMIN, { ...emptyPagination }],
     queryFn: getData
   });
   const dehydratedState = dehydrate(queryClient);

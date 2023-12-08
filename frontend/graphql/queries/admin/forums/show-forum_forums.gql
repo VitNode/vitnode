@@ -1,0 +1,48 @@
+query Show_forum_forums_admin($first: Int, $cursor: String, $parentId: String) {
+  show_forum_forums(first: $first, cursor: $cursor, parent_id: $parentId) {
+    edges {
+      id
+      is_category
+      description {
+        id_language
+        value
+      }
+      name {
+        id_language
+        value
+      }
+      position
+      views
+      created
+      children {
+        created
+        description {
+          id_language
+          value
+        }
+        id
+        is_category
+        name {
+          id_language
+          value
+        }
+        position
+        views
+        _count {
+          children
+        }
+      }
+      _count {
+        children
+      }
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+  }
+}

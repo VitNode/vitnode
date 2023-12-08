@@ -35,7 +35,7 @@ import { ArgsType, Field } from '@nestjs/graphql';
 @ArgsType()
 export class ShowCoreMembersArgs {
   @Field(() => String, { nullable: true })
-  search?: string;
+  search: string | null;
 }
 ```
 

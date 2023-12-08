@@ -5,5 +5,5 @@ import { AuthorizationCurrentUserObj } from '@/src/core/sessions/authorization/d
 @ObjectType()
 export class AuthorizationAdminSessionsObj {
   @Field(() => AuthorizationCurrentUserObj, { nullable: true })
-  user?: AuthorizationCurrentUserObj;
+  user: AuthorizationCurrentUserObj | null;
 }

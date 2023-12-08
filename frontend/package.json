@@ -38,6 +38,7 @@
     "cmdk": "^0.2.0",
     "cropperjs": "^1.6.1",
     "date-fns": "^2.30.0",
+    "framer-motion": "^10.16.12",
     "graphql": "^16.8.0",
     "graphql-tag": "^2.12.6",
     "lexical": "^0.12.4",
@@ -51,11 +52,15 @@
     "react-day-picker": "^8.9.1",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.47.0",
+    "react-virtuoso": "^4.6.2",
     "server-only": "^0.0.1",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@dnd-kit/core": "^6.1.0",
+    "@dnd-kit/sortable": "^8.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
     "@graphql-codegen/cli": "5.0.0",
     "@graphql-codegen/typescript": "^4.0.1",
     "@graphql-codegen/typescript-document-nodes": "^4.0.1",

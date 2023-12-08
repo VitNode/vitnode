@@ -3,11 +3,11 @@ import { ArgsType, Field, Int } from '@nestjs/graphql';
 @ArgsType()
 export class ShowCoreLanguagesArgs {
   @Field(() => String, { nullable: true })
-  cursor?: string;
+  cursor: string | null;
 
   @Field(() => Int, { nullable: true })
-  first?: number;
+  first: number | null;
 
   @Field(() => Int, { nullable: true })
-  last?: number;
+  last: number | null;
 }

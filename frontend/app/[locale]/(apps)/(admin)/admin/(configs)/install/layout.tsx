@@ -11,7 +11,7 @@ import {
   Layout_Admin_InstallQueryVariables
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
-import { InternalErrorView } from '@/admin/views/global/internal-error-view';
+import { InternalErrorView } from '@/admin/global/internal-error-view';
 import { redirect } from '@/i18n';
 
 interface Props {

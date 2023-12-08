@@ -89,7 +89,7 @@ import { ArgsType, Field } from '@nestjs/graphql';
 @ArgsType()
 export class ShowCoreMembersArgs {
   @Field(() => [SortByArgs], { nullable: true })
-  sortBy?: SortByArgs[];
+  sortBy: SortByArgs[] | null;
 }
 ```
 
@@ -127,7 +127,7 @@ class SortByArgs {
 @ArgsType()
 export class ShowCoreMembersArgs {
   @Field(() => [SortByArgs], { nullable: true })
-  sortBy?: SortByArgs[];
+  sortBy: SortByArgs[] | null;
 }
 ```
 

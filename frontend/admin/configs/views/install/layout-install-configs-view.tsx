@@ -8,7 +8,7 @@ import { ItemStepProps, Steps } from '@/components/steps/steps';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useLayoutInstallConfigsAPI } from './hooks/use-layout-install-configs-api';
 import { LoadingView } from '@/themes/default/core/views/global/loading/loading-view';
-import { InternalErrorView } from '@/admin/views/global/internal-error-view';
+import { InternalErrorView } from '@/admin/global/internal-error-view';
 import { LayoutAdminInstallEnum } from '@/graphql/hooks';
 import { FinishInstallConfigsView } from './finish/finish-install-config-view';
 

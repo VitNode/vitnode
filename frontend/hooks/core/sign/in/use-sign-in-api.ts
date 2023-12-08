@@ -26,7 +26,7 @@ export const useSignInAPI = () => {
       }),
     onSuccess: (_data, variables) => {
       queryClient.refetchQueries({
-        queryKey: [APIKeys.AUTHORIZATION]
+        queryKey: [variables.admin ? APIKeys.AUTHORIZATION_ADMIN : APIKeys.AUTHORIZATION]
       });
       push(variables.admin ? '/admin/core/dashboard' : '/');
     }
