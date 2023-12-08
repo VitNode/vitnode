@@ -13,12 +13,13 @@ import { Show_Forum_ForumsQueryFlattenedItem } from '../types';
 
 interface Props extends Show_Forum_ForumsQueryFlattenedItem {
   indentationWidth: number;
+  isOpenChildren: boolean;
   isDropHere?: boolean;
   onCollapse?: (id: UniqueIdentifier) => void;
 }
 
 export const ItemTableForumsForumAdmin = ({
-  _count: { children: childrenCount },
+  children,
   depth,
   id,
   indentationWidth,
@@ -40,10 +41,12 @@ export const ItemTableForumsForumAdmin = ({
     id,
     animateLayoutChanges: ({ isSorting, wasDragging }) => (isSorting || wasDragging ? false : true)
   });
+  const childrenCount = children?.length ?? 0;
+  const allowOpenChildren = childrenCount > 0;
 
   const { isLoading } = useChildrenForumForumsAdminAPI({
     parentId: id,
-    enabled: childrenCount > 0 && isOpenChildren
+    enabled: allowOpenChildren && isOpenChildren
   });
 
   return (
@@ -56,12 +59,12 @@ export const ItemTableForumsForumAdmin = ({
         } as CSSProperties
       }
       onClick={() => {
-        if (childrenCount > 0) onCollapse?.(id);
+        if (allowOpenChildren) onCollapse?.(id);
       }}
-      role={childrenCount > 0 ? 'button' : undefined}
-      tabIndex={childrenCount > 0 ? 0 : -1}
+      role={allowOpenChildren ? 'button' : undefined}
+      tabIndex={allowOpenChildren ? 0 : -1}
       onKeyDown={e => {
-        if (e.key === 'Enter' && childrenCount > 0) onCollapse?.(id);
+        if (e.key === 'Enter' && allowOpenChildren) onCollapse?.(id);
       }}
     >
       {isLoading && <GlobalLoader />}
@@ -98,12 +101,7 @@ export const ItemTableForumsForumAdmin = ({
         )}
 
         <div className="flex-grow flex flex-col">
-          <span>
-            {convertText(name)} - {id}
-          </span>
-          {childrenCount > 0 && (
-            <span className="text-sm text-muted-foreground">SubForums: {childrenCount}</span>
-          )}
+          <span>{convertText(name)}</span>
         </div>
 
         <div className="flex-shrink-0">

@@ -1,5 +1,4 @@
 import { InfiniteData, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useEffect } from 'react';
 
 import { APIKeys } from '@/graphql/api-keys';
 import { fetcher } from '@/graphql/fetcher';
@@ -35,7 +34,7 @@ const updateState = ({
       };
     }
 
-    if (edge._count.children > 0 && edge.children) {
+    if ((edge.children ?? []).length > 0) {
       return {
         ...edge,
         children: updateState({
@@ -52,45 +51,47 @@ const updateState = ({
 
 export const useChildrenForumForumsAdminAPI = ({ enabled, parentId }: Args) => {
   const queryClient = useQueryClient();
-  const query = useQuery({
+  const { isFetching, isLoading } = useQuery({
     queryKey: [APIKeys.FORUMS_CHILDREN_ADMIN, { parentId }],
-    queryFn: async () =>
-      await fetcher<Show_Forum_Forums_AdminQuery, Show_Forum_Forums_AdminQueryVariables>({
+    queryFn: async () => {
+      const data = await fetcher<
+        Show_Forum_Forums_AdminQuery,
+        Show_Forum_Forums_AdminQueryVariables
+      >({
         query: Show_Forum_Forums_Admin,
         variables: {
           parentId
         }
-      }),
+      });
+
+      queryClient.setQueryData<InfiniteData<Show_Forum_Forums_AdminQuery>>(
+        [APIKeys.FORUMS_ADMIN],
+        old => {
+          if (!old) return old;
+
+          return {
+            ...old,
+            pages: old.pages.map(page => ({
+              ...page,
+              show_forum_forums: {
+                ...page.show_forum_forums,
+                edges: updateState({
+                  parentId,
+                  edges: page.show_forum_forums.edges,
+                  data
+                })
+              }
+            }))
+          };
+        }
+      );
+
+      return data;
+    },
     enabled
   });
 
-  useEffect(() => {
-    if (!query.data) return;
-
-    queryClient.setQueryData<InfiniteData<Show_Forum_Forums_AdminQuery>>(
-      [APIKeys.FORUMS_ADMIN],
-      old => {
-        if (!old) return old;
-
-        return {
-          ...old,
-          pages: old.pages.map(page => ({
-            ...page,
-            show_forum_forums: {
-              ...page.show_forum_forums,
-              edges: updateState({
-                parentId,
-                edges: page.show_forum_forums.edges,
-                data: query.data
-              })
-            }
-          }))
-        };
-      }
-    );
-  }, [query.data]);
-
   return {
-    isLoading: query.isLoading || query.isFetching
+    isLoading: isLoading || isFetching
   };
 };

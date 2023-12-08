@@ -4,7 +4,7 @@ import { ChangePositionForumForumsArgs } from './dto/change_position-forum_forum
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';
-import { SortDirectionEnum } from '../../../../types/database/sortDirection.type';
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
 export class ChangePositionForumForumsService {

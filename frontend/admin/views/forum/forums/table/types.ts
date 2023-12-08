@@ -1,10 +1,9 @@
-import { ShowForumForumsWithParent } from '../../../../../graphql/hooks';
+import { ShowForumForumsWithParent } from '@/graphql/hooks';
 
 export interface Show_Forum_ForumsQueryFlattenedItem
   extends Omit<ShowForumForumsWithParent, 'parent'> {
   depth: number;
   index: number;
-  isOpenChildren: boolean;
   parentId: string | null;
 }
 

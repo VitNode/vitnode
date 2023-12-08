@@ -15,7 +15,7 @@ export const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
         defaultOptions: {
           queries: {
             refetchOnWindowFocus: false,
-            staleTime: 60 * 1000 * 5
+            staleTime: Infinity
           }
         }
       })

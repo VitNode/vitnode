@@ -2,36 +2,39 @@ import { UniqueIdentifier } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 
 import { Show_Forum_ForumsQueryFlattenedItem, Show_Forum_ForumsQueryWithProjection } from './types';
+import { Show_Forum_ForumsQueryItem } from '../hooks/use-forum-forums-admin-api';
+import { ShowForumForums } from '@/graphql/hooks';
 
-const getDragDepth = (offset: number, indentationWidth: number) => {
+const getDragDepth = ({
+  indentationWidth,
+  offset
+}: {
+  indentationWidth: number;
+  offset: number;
+}) => {
   return Math.round(offset / indentationWidth);
 };
 
 const getMaxDepth = ({ previousItem }: { previousItem: Show_Forum_ForumsQueryFlattenedItem }) => {
-  if (previousItem) {
-    return previousItem.depth + 1;
-  }
-
-  return 0;
+  return previousItem ? previousItem.depth + 1 : 0;
 };
 
 const getMinDepth = ({ nextItem }: { nextItem: Show_Forum_ForumsQueryFlattenedItem }) => {
-  if (nextItem) {
-    return nextItem.depth;
-  }
-
-  return 0;
+  return nextItem ? nextItem.depth : 0;
 };
 
-export function removeChildrenOf(
-  items: Show_Forum_ForumsQueryFlattenedItem[],
-  ids: UniqueIdentifier[]
-) {
+export const removeChildrenOf = ({
+  ids,
+  items
+}: {
+  ids: UniqueIdentifier[];
+  items: Show_Forum_ForumsQueryFlattenedItem[];
+}) => {
   const excludeParentIds = [...ids];
 
   return items.filter(item => {
     if (item.parentId && excludeParentIds.includes(item.parentId)) {
-      if ((item.children?.length ?? 0) > 0 && item._count.children > 0) {
+      if ((item.children?.length ?? 0) > 0) {
         excludeParentIds.push(item.id);
       }
 
@@ -40,7 +43,7 @@ export function removeChildrenOf(
 
     return true;
   });
-}
+};
 
 export const getForumProjection = (
   items: Show_Forum_ForumsQueryFlattenedItem[],
@@ -55,7 +58,10 @@ export const getForumProjection = (
   const newItems = arrayMove(items, activeItemIndex, overItemIndex);
   const previousItem = newItems[overItemIndex - 1];
   const nextItem = newItems[overItemIndex + 1];
-  const dragDepth = getDragDepth(dragOffset, indentationWidth);
+  const dragDepth = getDragDepth({
+    offset: dragOffset,
+    indentationWidth
+  });
   const projectedDepth = activeItem.depth + dragDepth;
   const maxDepth = getMaxDepth({
     previousItem
@@ -91,4 +97,42 @@ export const getForumProjection = (
   };
 
   return { depth, maxDepth, minDepth, parentId: getParentId() };
+};
+
+export const flattenTree = (
+  items: Show_Forum_ForumsQueryItem[],
+  parentId: string | null = null,
+  depth = 0
+): Show_Forum_ForumsQueryFlattenedItem[] => {
+  return items.reduce<Show_Forum_ForumsQueryFlattenedItem[]>((acc, item, index) => {
+    return [
+      ...acc,
+      { ...item, parentId, depth, index },
+      ...flattenTree((item.children ?? []) as Show_Forum_ForumsQueryItem[], item.id, depth + 1)
+    ];
+  }, []);
+};
+
+export const buildTree = (
+  flattenedItems: Show_Forum_ForumsQueryFlattenedItem[]
+): Show_Forum_ForumsQueryItem[] => {
+  const root: { children: Show_Forum_ForumsQueryItem[]; id: string } = { id: 'root', children: [] };
+  const nodes: Record<string, Show_Forum_ForumsQueryItem> = { [root.id]: root } as Record<
+    string,
+    Show_Forum_ForumsQueryItem
+  >;
+  const items = flattenedItems.map(item => ({ ...item, children: [] }));
+
+  for (const item of items) {
+    const { id } = item;
+    const parentId = item.parentId ?? root.id;
+    const parent = nodes[parentId] ?? items.find(({ id }) => id === parentId);
+
+    nodes[id] = item;
+
+    parent.children = parent.children ?? [];
+    parent.children.push(item as ShowForumForums);
+  }
+
+  return root.children as Show_Forum_ForumsQueryItem[];
 };
