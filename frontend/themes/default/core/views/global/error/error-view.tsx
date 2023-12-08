@@ -1,3 +1,5 @@
+'use client';
+
 import { AlertTriangle, Home } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
