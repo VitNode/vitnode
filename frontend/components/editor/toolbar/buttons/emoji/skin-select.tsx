@@ -9,10 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-
-import { useSession } from '../../../../../hooks/core/use-session';
-import { useSessionAdmin } from '../../../../../admin/hooks/use-session-admin';
-import { CONFIG } from '../../../../../config';
+import { CONFIG } from '@/config';
 
 const skinToneEmoji = [
   '43.55deg 100% 61.37%',
@@ -30,9 +27,6 @@ interface Props {
 
 export const SkinSelectEmojiButtonEditor = ({ setSkinToneIndex, skinToneIndex }: Props) => {
   const t = useTranslations('core.editor.emoji');
-  const { session } = useSession();
-  const { session: adminSession } = useSessionAdmin();
-  const userId = session?.id ?? adminSession?.id;
 
   return (
     <DropdownMenu>
@@ -59,7 +53,7 @@ export const SkinSelectEmojiButtonEditor = ({ setSkinToneIndex, skinToneIndex }:
             key={item}
             className="flex gap-2"
             onClick={() => {
-              localStorage.setItem(`${CONFIG.editor.skin_tone}-${userId}`, index.toString());
+              localStorage.setItem(CONFIG.editor.skin_tone, index.toString());
               setSkinToneIndex(index);
             }}
           >

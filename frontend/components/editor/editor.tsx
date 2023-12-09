@@ -31,6 +31,7 @@ import { useGlobals } from '@/hooks/core/use-globals';
 import { TextLanguage } from '@/graphql/hooks';
 import './editor.scss';
 import { EmojiPluginEditor } from './plugins/emoji';
+import { EmojiNode } from './nodes/EmojiNode';
 
 interface Props {
   id: string;
@@ -62,7 +63,8 @@ export const Editor = ({ className, id, onChange, toolbarClassName, value }: Pro
       ListItemNode,
       QuoteNode,
       AutoLinkNode,
-      CodeHighlightNode
+      CodeHighlightNode,
+      EmojiNode
     ]
   };
 

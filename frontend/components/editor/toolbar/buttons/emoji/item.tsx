@@ -11,6 +11,8 @@ interface Props {
 
 export const ItemEmojiButtonEditor = ({ emoji, skinToneIndex }: Props) => {
   const [editor] = useLexicalComposerContext();
+  const icon =
+    emoji.skins.length > skinToneIndex ? emoji.skins[skinToneIndex].native : emoji.skins[0].native;
 
   return (
     <Button
@@ -28,13 +30,11 @@ export const ItemEmojiButtonEditor = ({ emoji, skinToneIndex }: Props) => {
             return;
           }
 
-          selection.insertNodes([$createTextNode(emoji.skins[skinToneIndex].native)]);
+          selection.insertNodes([$createTextNode(icon)]);
         });
       }}
     >
-      {emoji.skins.length > skinToneIndex
-        ? emoji.skins[skinToneIndex].native
-        : emoji.skins[0].native}
+      {icon}
     </Button>
   );
 };
