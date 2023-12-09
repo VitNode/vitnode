@@ -50,6 +50,15 @@
           "symbols": "Symbols",
           "flags": "Flags",
           "customs": "Customs"
+        },
+        "skin": {
+          "title": "Skin Tone",
+          "skin_0": "Default",
+          "skin_1": "Light",
+          "skin_2": "Medium-Light",
+          "skin_3": "Medium",
+          "skin_4": "Medium-Dark",
+          "skin_5": "Dark"
         }
       },
       "text": {

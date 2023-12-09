@@ -108,7 +108,7 @@ export const TabsEmojiButtonEditor = ({
 
               {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
               {/* @ts-expect-error */}
-              <TooltipContent>{t(`categories.${category.id}`)}</TooltipContent>
+              <TooltipContent side="bottom">{t(`categories.${category.id}`)}</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         );

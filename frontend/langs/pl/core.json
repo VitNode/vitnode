@@ -50,6 +50,15 @@
           "symbols": "Symbole",
           "flags": "Flagi",
           "customs": "Niestandardowe"
+        },
+        "skin": {
+          "title": "Odcień skóry",
+          "skin_0": "Domyślny",
+          "skin_1": "Jasny",
+          "skin_2": "Średni jasny",
+          "skin_3": "Średni",
+          "skin_4": "Średni ciemny",
+          "skin_5": "Ciemny"
         }
       },
       "text": {

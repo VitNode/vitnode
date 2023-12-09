@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl';
 import { ItemEmojiButtonEditor } from './item';
 import { TabsEmojiButtonEditor } from './tabs';
 import { Input } from '@/components/ui/input';
+import { SkinSelectEmojiButtonEditor } from './skin-select';
 
 init({ data });
 
@@ -17,6 +18,7 @@ export const ContentEmojiButtonEditor = () => {
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState<string[] | null>(null);
   const [activeCategory, setActiveCategory] = useState('all');
+  const [skinToneIndex, setSkinToneIndex] = useState(0);
   const t = useTranslations('core');
 
   async function search(value: string) {
@@ -52,7 +54,7 @@ export const ContentEmojiButtonEditor = () => {
         }}
       />
 
-      <div className="px-2 py-3.5">
+      <div className="px-2 py-3.5 flex gap-2">
         <Input
           className="h-9"
           onChange={async e => {
@@ -60,6 +62,10 @@ export const ContentEmojiButtonEditor = () => {
           }}
           value={searchValue}
           placeholder={t('search_placeholder')}
+        />
+        <SkinSelectEmojiButtonEditor
+          skinToneIndex={skinToneIndex}
+          setSkinToneIndex={setSkinToneIndex}
         />
       </div>
 
@@ -79,40 +85,14 @@ export const ContentEmojiButtonEditor = () => {
               List
             }}
             overscan={200}
-            itemContent={(index, id) => {
+            itemContent={(_index, id) => {
               const emoji = emojiMart.emojis[id];
 
-              return <ItemEmojiButtonEditor key={id} emoji={emoji} />;
+              return <ItemEmojiButtonEditor key={id} emoji={emoji} skinToneIndex={skinToneIndex} />;
             }}
           />
         )}
       </div>
-
-      {/* <div>
-        {searchResults.length > 0 || searchValue.length > 0 ? (
-          <div className="flex flex-wrap p-4">
-            {searchResults.map(emoji => (
-              <ItemEmojiButtonEditor key={emoji.id} emoji={emoji} />
-            ))}
-          </div>
-        ) : (
-          emojiMart.categories.map(category => (
-            <div className="relative" key={category.id}>
-              <div className="px-4 py-2 bg-background/80 backdrop-blur sticky top-16">
-                {t(`categories.${category.id}`)}
-              </div>
-
-              <div className="flex flex-wrap px-4">
-                {category.emojis.map(id => {
-                  const emoji = emojiMart.emojis[id];
-
-                  return <ItemEmojiButtonEditor key={id} emoji={emoji} />;
-                })}
-              </div>
-            </div>
-          ))
-        )}
-      </div> */}
     </>
   );
 };

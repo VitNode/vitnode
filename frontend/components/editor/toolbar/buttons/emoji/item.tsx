@@ -1,14 +1,15 @@
 import { Emoji } from '@emoji-mart/data';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { $createTextNode, $getRoot, $getSelection, $isRangeSelection } from 'lexical';
+import { $createTextNode, $getSelection, $isRangeSelection } from 'lexical';
 
 import { Button } from '@/components/ui/button';
 
 interface Props {
   emoji: Emoji;
+  skinToneIndex: number;
 }
 
-export const ItemEmojiButtonEditor = ({ emoji }: Props) => {
+export const ItemEmojiButtonEditor = ({ emoji, skinToneIndex }: Props) => {
   const [editor] = useLexicalComposerContext();
 
   return (
@@ -27,11 +28,13 @@ export const ItemEmojiButtonEditor = ({ emoji }: Props) => {
             return;
           }
 
-          selection.insertNodes([$createTextNode(emoji.skins[0].native)]);
+          selection.insertNodes([$createTextNode(emoji.skins[skinToneIndex].native)]);
         });
       }}
     >
-      {emoji.skins[0].native}
+      {emoji.skins.length > skinToneIndex
+        ? emoji.skins[skinToneIndex].native
+        : emoji.skins[0].native}
     </Button>
   );
 };
