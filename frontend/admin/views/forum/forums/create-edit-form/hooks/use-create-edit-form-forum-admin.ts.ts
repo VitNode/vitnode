@@ -19,18 +19,7 @@ export const useCreateEditFormForumAdmin = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: [],
-      description: [
-        {
-          id_language: 'en',
-          value:
-            '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"dupa123 EN","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
-        },
-        {
-          id_language: 'pl',
-          value:
-            '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"dupa123 PL","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
-        }
-      ]
+      description: []
     },
     mode: 'onChange'
   });
