@@ -17,19 +17,21 @@ import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { ClearEditorPlugin } from '@lexical/react/LexicalClearEditorPlugin';
 
-import { OnChangePluginEditor } from './plugins/on-change-plugin-editor';
-import { AutoLinkPluginEditor } from './plugins/auto-link-plugin-editor';
+import { OnChangePluginEditor } from './plugins/on-change';
+import { AutoLinkPluginEditor } from './plugins/auto-link';
 import { ToolbarEditor } from './toolbar/toolbar-editor';
 import { themeEditor } from './theme-editor';
 import { cx } from '@/functions/classnames';
-import { DraggableBlockPluginEditor } from './plugins/draggable-block-plugin-editor';
+import { DraggableBlockPluginEditor } from './plugins/draggable-block';
 import { MARKDOWN_TRANSFORMERS_EDITOR } from './markdown-transformers-editor';
 import { BLOCK_NAMES, EditorContext } from './toolbar/hooks/use-editor';
-import { CodeHighlightPluginEditor } from './plugins/code-highlight-plugin-editor';
-import { CodeActionMenuPluginEditor } from './plugins/code/code-action-menu-plugin-editor';
+import { CodeHighlightPluginEditor } from './plugins/code-highlight';
+import { CodeActionMenuPluginEditor } from './plugins/code/code-action-menu';
 import { useGlobals } from '@/hooks/core/use-globals';
 import { TextLanguage } from '@/graphql/hooks';
 import './editor.scss';
+import { EmojiPluginEditor } from './plugins/emoji';
+import { EmojiNode } from './nodes/EmojiNode';
 
 interface Props {
   id: string;
@@ -61,7 +63,8 @@ export const Editor = ({ className, id, onChange, toolbarClassName, value }: Pro
       ListItemNode,
       QuoteNode,
       AutoLinkNode,
-      CodeHighlightNode
+      CodeHighlightNode,
+      EmojiNode
     ]
   };
 
@@ -104,6 +107,7 @@ export const Editor = ({ className, id, onChange, toolbarClassName, value }: Pro
           <TabIndentationPlugin />
           <LinkPlugin />
           <ClearEditorPlugin />
+          <EmojiPluginEditor />
 
           {floatingAnchorElem.current && (
             <>

@@ -19,8 +19,8 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
   let messages;
   try {
     messages = {
-      ...(await import(`~/langs/${locale}/core.json`)).default,
-      ...(await import(`~/langs/${locale}/admin.json`)).default
+      ...(await import(`@/langs/${locale}/core.json`)).default,
+      ...(await import(`@/langs/${locale}/admin.json`)).default
     };
   } catch (error) {
     notFound();
@@ -30,9 +30,7 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
     <html lang={locale} className={inter.className}>
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <NextIntlClientProvider timeZone="UTC" locale={locale} messages={messages}>
-            {children}
-          </NextIntlClientProvider>
+          <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -10,5 +10,8 @@ export const CONFIG = {
   admin: {
     refresh_token: 'vitnode-ref-auth-admin',
     access_token: 'vitnode-acc-auth-admin'
+  },
+  editor: {
+    skin_tone: 'vitnode-skin-tone'
   }
 };

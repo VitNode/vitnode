@@ -75,7 +75,7 @@ export const ColorButtonEditor = ({ type }: Props) => {
             </PopoverTrigger>
           </TooltipTrigger>
 
-          <PopoverContent className="p-2 w-64 flex flex-col gap-2">
+          <PopoverContent className="p-4 w-72 flex flex-col gap-2">
             {!customColor ? (
               <>
                 <div className="flex flex-wrap justify-center items-center gap-1.5">

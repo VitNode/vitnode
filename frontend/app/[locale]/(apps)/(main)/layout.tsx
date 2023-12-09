@@ -1,4 +1,4 @@
-import { ReactNode, lazy } from 'react';
+import { LazyExoticComponent, ReactNode, lazy } from 'react';
 import { cookies } from 'next/headers';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import { isRedirectError } from 'next/dist/client/components/redirect';
@@ -46,11 +46,12 @@ export default async function Layout({ children }: Props) {
     await queryClient.setQueryData([APIKeys.AUTHORIZATION], data);
     const dehydratedState = dehydrate(queryClient);
 
-    const Layout = lazy(() =>
-      import(`@/themes/${CONFIG.default_theme}/core/layout/layout`).then(module => ({
-        default: module.Layout
-      }))
-    );
+    const Layout: LazyExoticComponent<({ children }: { children: ReactNode }) => JSX.Element> =
+      lazy(() =>
+        import(`@/themes/${CONFIG.default_theme}/core/layout/layout`).then(module => ({
+          default: module.Layout
+        }))
+      );
 
     return (
       <HydrationBoundary state={dehydratedState}>
