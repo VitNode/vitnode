@@ -9,16 +9,26 @@ import { TabsEmojiButtonEditor } from './tabs';
 import { Input } from '@/components/ui/input';
 import { SkinSelectEmojiButtonEditor } from './skin-select';
 
+import { useSession } from '../../../../../hooks/core/use-session';
+import { useSessionAdmin } from '../../../../../admin/hooks/use-session-admin';
+import { CONFIG } from '../../../../../config';
+
 init({ data });
 
 const emojiMart = data as EmojiMartData;
 const emojis = emojiMart.categories.flatMap(item => item.emojis);
 
 export const ContentEmojiButtonEditor = () => {
+  const { session } = useSession();
+  const { session: adminSession } = useSessionAdmin();
+  const userId = session?.id ?? adminSession?.id;
+  const localStorageSkinToneIndex = localStorage.getItem(`${CONFIG.editor.skin_tone}-${userId}`);
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState<string[] | null>(null);
   const [activeCategory, setActiveCategory] = useState('all');
-  const [skinToneIndex, setSkinToneIndex] = useState(0);
+  const [skinToneIndex, setSkinToneIndex] = useState(
+    localStorageSkinToneIndex ? +localStorageSkinToneIndex : 0
+  );
   const t = useTranslations('core');
 
   async function search(value: string) {
