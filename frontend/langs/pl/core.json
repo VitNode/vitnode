@@ -8,6 +8,7 @@
     "clear": "Wyczyść",
     "filters": "Filtry",
     "search": "Szukaj",
+    "search_placeholder": "Szukaj...",
     "version": "Wersja: {version}",
     "delete": "Usuń",
     "edit": "Edytuj",
@@ -35,6 +36,21 @@
       "prettier": {
         "format_code": "Formatuj kod",
         "error_title": "Błąd Prettier"
+      },
+      "emoji": {
+        "title": "Emoji",
+        "categories": {
+          "all": "Wszystkie",
+          "people": "Emotki i ludzie",
+          "nature": "Zwierzęta i natura",
+          "foods": "Jedzenie i napoje",
+          "activity": "Aktywność",
+          "places": "Podróże i miejsca",
+          "objects": "Obiekty",
+          "symbols": "Symbole",
+          "flags": "Flagi",
+          "customs": "Niestandardowe"
+        }
       },
       "text": {
         "bold": "Pogrubienie",

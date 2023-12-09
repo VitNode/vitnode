@@ -17,6 +17,7 @@ import { SuperscriptButtonEditor } from './buttons/superscript-button';
 import { LinkButtonEditor } from './buttons/link-button';
 import { LangCodeBlockButtonEditor } from './buttons/code-block/lang-code-block-button';
 import { LanguageButtonEditor } from './buttons/language-button';
+import { EmojiButtonEditor } from './buttons/emoji/emoji-button';
 
 interface Props {
   selectedLanguage: string;
@@ -59,6 +60,7 @@ export const ToolbarEditor = ({ className, selectedLanguage, setSelectedLanguage
             <FontSizeButtonEditor />
             <ColorButtonEditor type="color" />
             <ColorButtonEditor type="background-color" />
+            <EmojiButtonEditor />
           </>
         ) : (
           <LangCodeBlockButtonEditor />
