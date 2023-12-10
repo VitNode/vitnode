@@ -138,11 +138,8 @@
           "title": "Stwórz forum"
         },
         "create_edit": {
-          "form": {
-            "name": {
-              "label": "Nazwa"
-            }
-          }
+          "name": "Nazwa",
+          "desc": "Opis"
         }
       }
     }

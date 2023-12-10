@@ -12,7 +12,7 @@ export const useCreateEditFormForumAdmin = () => {
 
   const formSchema = z.object({
     name: zodTextLanguageInputType.min(1, t('forms.empty')),
-    description: zodTextLanguageInputType.min(1, t('forms.empty'))
+    description: zodTextLanguageInputType
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
