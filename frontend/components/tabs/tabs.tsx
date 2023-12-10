@@ -9,7 +9,7 @@ interface Props {
 export const Tabs = ({ className, items }: Props) => {
   return (
     <div className={cx('flex', className)}>
-      <div className="flex rounded-md bg-muted p-1 text-muted-foreground overflow-x-auto">
+      <div className="flex rounded-md bg-background p-2 text-muted-foreground overflow-x-auto">
         {items.map(el => (
           <TabsTrigger key={el.id} {...el} />
         ))}
