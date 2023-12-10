@@ -6,9 +6,9 @@ import { isRedirectError } from 'next/dist/client/components/redirect';
 import { CONFIG } from '@/config';
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Authorization_Core_Sessions,
-  Authorization_Core_SessionsQuery,
-  Authorization_Core_SessionsQueryVariables
+  Core_Sessions__Authorization,
+  Core_Sessions__AuthorizationQuery,
+  Core_Sessions__AuthorizationQueryVariables
 } from '@/graphql/hooks';
 import { SessionProvider } from './session-provider';
 import { InternalErrorView } from '@/admin/global/internal-error-view';
@@ -23,16 +23,16 @@ interface Props {
 
 const getData = async () => {
   const current = await fetcher<
-    Authorization_Core_SessionsQuery,
-    Authorization_Core_SessionsQueryVariables
+    Core_Sessions__AuthorizationQuery,
+    Core_Sessions__AuthorizationQueryVariables
   >({
-    query: Authorization_Core_Sessions,
+    query: Core_Sessions__Authorization,
     headers: {
       Cookie: cookies().toString()
     }
   });
 
-  if (current.show_core_languages.edges.length <= 0) {
+  if (current.core_languages__show.edges.length <= 0) {
     redirect('/admin/install');
   }
 

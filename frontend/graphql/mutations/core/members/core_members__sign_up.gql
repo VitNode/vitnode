@@ -1,11 +1,11 @@
-mutation SignUp_core_members(
+mutation Core_members__sign_up(
   $birthday: Int!
   $email: String!
   $name: String!
   $password: String!
   $newsletter: Boolean
 ) {
-  signUp_core_members(
+  core_members__sign_up(
     birthday: $birthday
     email: $email
     name: $name

@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 
-import { ShowCoreLanguageService } from './show/show-core_languages.service';
-import { ShowCoreLanguagesResolver } from './show/show-core_languages.resolver';
-import { EditCoreLanguagesResolver } from './edit/edit-core_languages.resolver';
-import { EditCoreLanguageService } from './edit/edit-core_languages.service';
+import { ShowCoreLanguageService } from './show/show.service';
+import { ShowCoreLanguagesResolver } from './show/show.resolver';
+import { EditCoreLanguagesResolver } from './edit/edit.resolver';
+import { EditCoreLanguageService } from './edit/edit.service';
 
 @Module({
   providers: [

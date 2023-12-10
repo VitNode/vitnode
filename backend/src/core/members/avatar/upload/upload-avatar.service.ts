@@ -7,7 +7,7 @@ import { User } from '@/utils/decorators/user.decorator';
 import { PrismaService } from '@/prisma/prisma.service';
 import { DeleteCoreAttachmentsService } from '../../../attachments/delete/delete-core_attachments.service';
 import { UploadCoreAttachmentsObj } from '../../../attachments/upload/dto/upload-core_attachments.obj';
-import { CustomError } from '../../../../../utils/errors/CustomError';
+import { CustomError } from '@/utils/errors/CustomError';
 
 @Injectable()
 export class UploadAvatarCoreMembersService {

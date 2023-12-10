@@ -4,9 +4,9 @@ import { useParams } from 'next/navigation';
 import { APIKeys } from '@/graphql/api-keys';
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Profiles_Core_Members,
-  Profiles_Core_MembersQuery,
-  Profiles_Core_MembersQueryVariables
+  Core_Members__Profiles,
+  Core_Members__ProfilesQuery,
+  Core_Members__ProfilesQueryVariables
 } from '@/graphql/hooks';
 
 export const useProfileAPI = () => {
@@ -15,8 +15,8 @@ export const useProfileAPI = () => {
   const current = useQuery({
     queryKey: [APIKeys.PROFILE, { id }],
     queryFn: async () =>
-      await fetcher<Profiles_Core_MembersQuery, Profiles_Core_MembersQueryVariables>({
-        query: Profiles_Core_Members,
+      await fetcher<Core_Members__ProfilesQuery, Core_Members__ProfilesQueryVariables>({
+        query: Core_Members__Profiles,
         variables: {
           first: 1,
           findByIds: Array.isArray(id) ? id : [id]
@@ -24,7 +24,7 @@ export const useProfileAPI = () => {
       })
   });
 
-  const data = current.data?.show_core_members.edges.at(0);
+  const data = current.data?.core_members__show.edges.at(0);
 
   return { ...current, data };
 };

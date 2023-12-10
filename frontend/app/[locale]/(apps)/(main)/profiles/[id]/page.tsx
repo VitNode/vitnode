@@ -6,16 +6,16 @@ import { ProfileView } from '@/themes/default/core/views/profile/profile-view';
 import getQueryClient from '@/functions/get-query-client';
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Profiles_Core_Members,
-  Profiles_Core_MembersQuery,
-  Profiles_Core_MembersQueryVariables
+  Core_Members__Profiles,
+  Core_Members__ProfilesQuery,
+  Core_Members__ProfilesQueryVariables
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
 import { ErrorView } from '@/themes/default/core/views/global/error/error-view';
 
 const getData = async ({ id }: { id: string }) => {
-  return await fetcher<Profiles_Core_MembersQuery, Profiles_Core_MembersQueryVariables>({
-    query: Profiles_Core_Members,
+  return await fetcher<Core_Members__ProfilesQuery, Core_Members__ProfilesQueryVariables>({
+    query: Core_Members__Profiles,
     variables: {
       first: 1,
       findByIds: [id]
@@ -32,7 +32,7 @@ interface Props {
 
 export async function generateMetadata({ params: { id } }: Props): Promise<Metadata> {
   const api = await getData({ id });
-  const data = api.show_core_members.edges.at(0);
+  const data = api.core_members__show.edges.at(0);
   if (!data) return {};
 
   return {
@@ -46,7 +46,7 @@ export default async function Page({ params: { id } }: Props) {
   await queryClient.setQueryData([APIKeys.PROFILE], data);
   const dehydratedState = dehydrate(queryClient);
 
-  if (data.show_core_members.edges.length <= 0) {
+  if (data.core_members__show.edges.length <= 0) {
     return <ErrorView className="py-6" code="404" />;
   }
 

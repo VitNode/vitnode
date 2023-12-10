@@ -3,9 +3,9 @@ import { NextRequest } from 'next/server';
 
 import { fetcher } from './graphql/fetcher';
 import {
-  Middleware_Core_Languages,
-  Middleware_Core_LanguagesQuery,
-  Middleware_Core_LanguagesQueryVariables
+  Core_Languages__Middleware,
+  Core_Languages__MiddlewareQuery,
+  Core_Languages__MiddlewareQueryVariables
 } from './graphql/hooks';
 
 export default async function middleware(request: NextRequest) {
@@ -13,13 +13,13 @@ export default async function middleware(request: NextRequest) {
 
   try {
     const data = await fetcher<
-      Middleware_Core_LanguagesQuery,
-      Middleware_Core_LanguagesQueryVariables
+      Core_Languages__MiddlewareQuery,
+      Core_Languages__MiddlewareQueryVariables
     >({
-      query: Middleware_Core_Languages
+      query: Core_Languages__Middleware
     });
 
-    const enabledLanguages = data.show_core_languages.edges.filter(item => item.enabled);
+    const enabledLanguages = data.core_languages__show.edges.filter(item => item.enabled);
     const handleI18nRouting = createIntlMiddleware({
       locales: enabledLanguages.length > 0 ? enabledLanguages.map(edge => edge.id) : ['en'],
       defaultLocale: enabledLanguages.find(edge => edge.default)?.id || 'en'

@@ -6,9 +6,9 @@ import { useQuery } from '@tanstack/react-query';
 import { SessionContext } from '@/hooks/core/use-session';
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Authorization_Core_Sessions,
-  Authorization_Core_SessionsQuery,
-  Authorization_Core_SessionsQueryVariables
+  Core_Sessions__Authorization,
+  Core_Sessions__AuthorizationQuery,
+  Core_Sessions__AuthorizationQueryVariables
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
 
@@ -20,15 +20,15 @@ export const SessionProvider = ({ children }: Props) => {
   const { data } = useQuery({
     queryKey: [APIKeys.AUTHORIZATION],
     queryFn: async () =>
-      fetcher<Authorization_Core_SessionsQuery, Authorization_Core_SessionsQueryVariables>({
-        query: Authorization_Core_Sessions
+      fetcher<Core_Sessions__AuthorizationQuery, Core_Sessions__AuthorizationQueryVariables>({
+        query: Core_Sessions__Authorization
       })
   });
 
   return (
     <SessionContext.Provider
       value={{
-        session: data?.authorization_core_sessions.user
+        session: data?.core_sessions__authorization.user
       }}
     >
       {children}

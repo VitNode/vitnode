@@ -1,5 +1,5 @@
-query Authorization_core_sessions {
-  authorization_core_sessions {
+query Core_sessions__authorization {
+  core_sessions__authorization {
     user {
       birthday
       email
@@ -25,7 +25,7 @@ query Authorization_core_sessions {
       }
     }
   }
-  show_core_languages {
+  core_languages__show {
     edges {
       id
     }

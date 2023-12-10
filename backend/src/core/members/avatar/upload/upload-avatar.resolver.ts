@@ -1,7 +1,7 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
-import { UploadAvatarCoreMembersService } from './upload-avatar-core_members.service';
+import { UploadAvatarCoreMembersService } from './upload-avatar.service';
 import { UploadAvatarCoreMembersArgs } from './dto/upload-avatar-core_members.args';
 
 import { User, CurrentUser } from '@/utils/decorators/user.decorator';
@@ -14,7 +14,7 @@ export class UploadAvatarCoreMembersResolver {
 
   @Mutation(() => UploadCoreAttachmentsObj)
   @UseGuards(AuthGuards)
-  async upload_avatar_core_members(
+  async core_members__avatar__upload(
     @CurrentUser() currentUser: User,
     @Args() args: UploadAvatarCoreMembersArgs
   ): Promise<UploadCoreAttachmentsObj> {

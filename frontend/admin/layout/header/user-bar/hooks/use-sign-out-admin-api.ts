@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Authorization_Core_SessionsQuery,
+  Core_Sessions__AuthorizationQuery,
   Admin_Sessions__Sign_Out,
   Admin_Sessions__Sign_OutMutation,
   Admin_Sessions__Sign_OutMutationVariables
@@ -31,15 +31,15 @@ export const useSignOutAdminAPI = () => {
       });
     },
     onSuccess: () => {
-      queryClient.setQueryData<Authorization_Core_SessionsQuery>(
+      queryClient.setQueryData<Core_Sessions__AuthorizationQuery>(
         [APIKeys.AUTHORIZATION_ADMIN],
         old => {
           if (!old) return old;
 
           return {
             ...old,
-            authorization_core_sessions: {
-              ...old.authorization_core_sessions,
+            core_sessions__authorization: {
+              ...old.core_sessions__authorization,
               user: null
             }
           };

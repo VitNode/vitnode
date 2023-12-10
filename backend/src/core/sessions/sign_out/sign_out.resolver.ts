@@ -1,6 +1,6 @@
 import { Context, Mutation, Resolver } from '@nestjs/graphql';
 
-import { SignOutCoreSessionsService } from './sign_out-core_sessions.service';
+import { SignOutCoreSessionsService } from './sign_out.service';
 
 import { Ctx } from '@/types/context.type';
 
@@ -9,7 +9,7 @@ export class SignOutCoreSessionsResolver {
   constructor(private readonly service: SignOutCoreSessionsService) {}
 
   @Mutation(() => String)
-  async signOut_core_sessions(@Context() context: Ctx): Promise<string> {
+  async core_sessions__sign_out(@Context() context: Ctx): Promise<string> {
     return await this.service.signOut(context);
   }
 }

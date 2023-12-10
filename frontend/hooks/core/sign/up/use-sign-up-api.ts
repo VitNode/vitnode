@@ -5,9 +5,9 @@ import { fetcher } from '@/graphql/fetcher';
 import {
   LayoutAdminInstallEnum,
   Admin_Install__LayoutQuery,
-  SignUp_Core_Members,
-  SignUp_Core_MembersMutation,
-  SignUp_Core_MembersMutationVariables
+  Core_Members__Sign_Up,
+  Core_Members__Sign_UpMutation,
+  Core_Members__Sign_UpMutationVariables
 } from '@/graphql/hooks';
 import { usePathname } from '@/i18n';
 import { APIKeys } from '@/graphql/api-keys';
@@ -20,9 +20,9 @@ export const useSignUpAPI = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (variables: SignUp_Core_MembersMutationVariables) =>
-      await fetcher<SignUp_Core_MembersMutation, SignUp_Core_MembersMutationVariables>({
-        query: SignUp_Core_Members,
+    mutationFn: async (variables: Core_Members__Sign_UpMutationVariables) =>
+      await fetcher<Core_Members__Sign_UpMutation, Core_Members__Sign_UpMutationVariables>({
+        query: Core_Members__Sign_Up,
         variables
       }),
     onError: () => {

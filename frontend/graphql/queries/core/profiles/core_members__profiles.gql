@@ -1,5 +1,5 @@
-query Profiles_core_members($first: Int, $findByIds: [String!]) {
-  show_core_members(first: $first, findByIds: $findByIds) {
+query Core_members__profiles($first: Int, $findByIds: [String!]) {
+  core_members__show(first: $first, findByIds: $findByIds) {
     edges {
       avatar {
         created

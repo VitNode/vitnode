@@ -6,9 +6,9 @@ import { ReactNode } from 'react';
 import { APIKeys } from '@/graphql/api-keys';
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Middleware_Core_Languages,
-  Middleware_Core_LanguagesQuery,
-  Middleware_Core_LanguagesQueryVariables
+  Core_Languages__Middleware,
+  Core_Languages__MiddlewareQuery,
+  Core_Languages__MiddlewareQueryVariables
 } from '@/graphql/hooks';
 import { GlobalsContext } from '@/hooks/core/use-globals';
 
@@ -20,16 +20,16 @@ export const LanguageProvider = ({ children }: Props) => {
   const { data } = useQuery({
     queryKey: [APIKeys.LANGUAGES],
     queryFn: async () =>
-      await fetcher<Middleware_Core_LanguagesQuery, Middleware_Core_LanguagesQueryVariables>({
-        query: Middleware_Core_Languages
+      await fetcher<Core_Languages__MiddlewareQuery, Core_Languages__MiddlewareQueryVariables>({
+        query: Core_Languages__Middleware
       })
   });
 
   return (
     <GlobalsContext.Provider
       value={{
-        languages: data?.show_core_languages.edges.filter(item => item.enabled) ?? [],
-        defaultLanguage: data?.show_core_languages.edges.find(item => item.default)?.id ?? 'en'
+        languages: data?.core_languages__show.edges.filter(item => item.enabled) ?? [],
+        defaultLanguage: data?.core_languages__show.edges.find(item => item.default)?.id ?? 'en'
       }}
     >
       {children}

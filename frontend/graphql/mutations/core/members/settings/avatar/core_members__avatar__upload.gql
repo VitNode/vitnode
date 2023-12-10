@@ -1,5 +1,5 @@
-mutation Upload_avatar_core_members($file: Upload!) {
-  upload_avatar_core_members(file: $file) {
+mutation Core_members__avatar__upload($file: Upload!) {
+  core_members__avatar__upload(file: $file) {
     id
     created
     description

@@ -73,8 +73,8 @@ export const ContentTableLangsCoreAdmin = () => {
   return (
     <>
       <DataTable
-        data={data?.show_core_languages.edges ?? []}
-        pageInfo={data?.show_core_languages.pageInfo}
+        data={data?.core_languages__show.edges ?? []}
+        pageInfo={data?.core_languages__show.pageInfo}
         defaultPageSize={defaultPageSize}
         columns={columns}
         isFetching={isFetching}
