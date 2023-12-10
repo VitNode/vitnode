@@ -21,13 +21,16 @@ import { InfiniteData, useQueryClient } from '@tanstack/react-query';
 import { ItemTableForumsForumAdmin } from './item/item';
 import { useForumForumsAdminAPI } from '../hooks/use-forum-forums-admin-api';
 import { buildTree, flattenTree, getForumProjection, removeChildrenOf } from './functions';
-import { Show_Forum_ForumsQueryFlattenedItem, Show_Forum_ForumsQueryWithProjection } from './types';
+import {
+  Forum_Forums__Admin__ShowFlattenedItem,
+  Forum_Forums__Admin__ShowWithProjection
+} from './types';
 import { GlobalLoader } from '@/components/loader/global/global-loader';
 import { Loader } from '@/components/loader/loader';
 import { ErrorAdminView } from '@/admin/global/error-admin-view';
 import { useChangePositionForumAdminAPI } from '../hooks/use-change-position-forum-admin-api';
 import { APIKeys } from '@/graphql/api-keys';
-import { Show_Forum_Forums_AdminQuery } from '@/graphql/hooks';
+import { Forum_Forums__Admin__ShowQuery } from '@/graphql/hooks';
 
 const indentationWidth = 20;
 
@@ -38,7 +41,7 @@ export const ContentTableForumsForumAdmin = () => {
   const queryClient = useQueryClient();
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
-  const [projected, setProjected] = useState<Show_Forum_ForumsQueryWithProjection | null>();
+  const [projected, setProjected] = useState<Forum_Forums__Admin__ShowWithProjection | null>();
   const [isOpenChildren, setIsOpenChildren] = useState<UniqueIdentifier[]>([]);
 
   const resetState = () => {
@@ -55,7 +58,7 @@ export const ContentTableForumsForumAdmin = () => {
   );
 
   // DndKit doesn't support nested sortable, so we need to flatten the data in one array
-  const flattenedItems: Show_Forum_ForumsQueryFlattenedItem[] = useMemo(() => {
+  const flattenedItems: Forum_Forums__Admin__ShowFlattenedItem[] = useMemo(() => {
     const tree = flattenTree(data);
 
     const collapsedItems = tree.reduce<UniqueIdentifier[]>(
@@ -112,7 +115,7 @@ export const ContentTableForumsForumAdmin = () => {
 
         if (!projected || !over) return;
         const { depth, parentId } = projected;
-        const clonedItems: Show_Forum_ForumsQueryFlattenedItem[] = JSON.parse(
+        const clonedItems: Forum_Forums__Admin__ShowFlattenedItem[] = JSON.parse(
           JSON.stringify(flattenTree(data))
         );
 
@@ -135,7 +138,7 @@ export const ContentTableForumsForumAdmin = () => {
           };
         });
 
-        queryClient.setQueryData<InfiniteData<Show_Forum_Forums_AdminQuery>>(
+        queryClient.setQueryData<InfiniteData<Forum_Forums__Admin__ShowQuery>>(
           [APIKeys.FORUMS_ADMIN],
           old => {
             const lastPage = old?.pages.at(-1);
@@ -146,8 +149,8 @@ export const ContentTableForumsForumAdmin = () => {
               pages: [
                 {
                   ...lastPage,
-                  show_forum_forums: {
-                    ...lastPage.show_forum_forums,
+                  forum_forums__admin__show: {
+                    ...lastPage.forum_forums__admin__show,
                     edges: buildTree(sortedItems)
                   }
                 }

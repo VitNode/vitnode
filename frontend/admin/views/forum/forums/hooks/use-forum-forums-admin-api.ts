@@ -5,19 +5,20 @@ import { APIKeys } from '@/graphql/api-keys';
 import { fetcher } from '@/graphql/fetcher';
 import {
   ShowForumForumsWithParent,
-  Show_Forum_Forums_Admin,
-  Show_Forum_Forums_AdminQuery,
-  Show_Forum_Forums_AdminQueryVariables
+  Forum_Forums__Admin__Show,
+  Forum_Forums__Admin__ShowQuery,
+  Forum_Forums__Admin__ShowQueryVariables
 } from '@/graphql/hooks';
 
-export interface Show_Forum_ForumsQueryItem extends Omit<ShowForumForumsWithParent, 'parent'> {}
+export interface Forum_Forums__Admin__ShowQueryItem
+  extends Omit<ShowForumForumsWithParent, 'parent'> {}
 
 export const useForumForumsAdminAPI = () => {
   const query = useInfiniteQuery({
     queryKey: [APIKeys.FORUMS_ADMIN],
     queryFn: async ({ pageParam, signal }) =>
-      await fetcher<Show_Forum_Forums_AdminQuery, Show_Forum_Forums_AdminQueryVariables>({
-        query: Show_Forum_Forums_Admin,
+      await fetcher<Forum_Forums__Admin__ShowQuery, Forum_Forums__Admin__ShowQueryVariables>({
+        query: Forum_Forums__Admin__Show,
         variables: pageParam,
         signal
       }),
@@ -25,7 +26,7 @@ export const useForumForumsAdminAPI = () => {
       first: 10,
       cursor: ''
     },
-    getNextPageParam: ({ show_forum_forums: { pageInfo } }) => {
+    getNextPageParam: ({ forum_forums__admin__show: { pageInfo } }) => {
       if (pageInfo.hasNextPage) {
         return {
           first: 10,
@@ -35,8 +36,8 @@ export const useForumForumsAdminAPI = () => {
     }
   });
 
-  const data: Show_Forum_ForumsQueryItem[] = useMemo(() => {
-    return query.data?.pages.flatMap(({ show_forum_forums: { edges } }) => edges) ?? [];
+  const data: Forum_Forums__Admin__ShowQueryItem[] = useMemo(() => {
+    return query.data?.pages.flatMap(({ forum_forums__admin__show: { edges } }) => edges) ?? [];
   }, [query.data]);
 
   return {

@@ -1,13 +1,13 @@
 import { ShowForumForumsWithParent } from '@/graphql/hooks';
 
-export interface Show_Forum_ForumsQueryFlattenedItem
+export interface Forum_Forums__Admin__ShowFlattenedItem
   extends Omit<ShowForumForumsWithParent, 'parent'> {
   depth: number;
   index: number;
   parentId: string | null;
 }
 
-export interface Show_Forum_ForumsQueryWithProjection {
+export interface Forum_Forums__Admin__ShowWithProjection {
   depth: number;
   maxDepth: number;
   minDepth: number;
