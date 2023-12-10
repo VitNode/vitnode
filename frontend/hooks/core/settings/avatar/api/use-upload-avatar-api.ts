@@ -10,7 +10,6 @@ import {
 } from '@/graphql/hooks';
 import { useToast } from '@/components/ui/use-toast';
 import { useDialog } from '@/components/ui/dialog';
-
 import { APIKeys } from '@/graphql/api-keys';
 
 export const useUploadAvatarAPI = () => {

@@ -2,8 +2,8 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
 import { EditCoreLanguageService } from './edit.service';
-import { ShowCoreLanguages } from '../show/dto/show-core_languages.obj';
-import { EditCoreLanguagesArgs } from './dto/edit-core_languages.args';
+import { ShowCoreLanguages } from '../show/dto/show.obj';
+import { EditCoreLanguagesArgs } from './dto/edit.args';
 
 import { AdminAuthGuards } from '@/utils/guards/admin-auth.guards';
 

@@ -2,7 +2,7 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
 import { DeleteAdminGroupsService } from './delete.service';
-import { DeleteAdminGroupsArgs } from './dto/delete-admin_groups.args';
+import { DeleteAdminGroupsArgs } from './dto/delete.args';
 
 import { AdminAuthGuards } from '@/utils/guards/admin-auth.guards';
 

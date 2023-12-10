@@ -2,8 +2,8 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
 import { ShowCoreMembersService } from './show.service';
-import { ShowCoreMembersObj } from './dto/show-core_members.obj';
-import { ShowCoreMembersArgs } from './dto/show-core_members.args';
+import { ShowCoreMembersObj } from './dto/show.obj';
+import { ShowCoreMembersArgs } from './dto/show.args';
 
 import { AuthGuards } from '@/utils/guards/auth.guards';
 

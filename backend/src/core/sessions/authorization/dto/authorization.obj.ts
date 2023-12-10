@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
-import { UploadCoreAttachmentsObj } from '../../../attachments/upload/dto/upload-core_attachments.obj';
+import { UploadCoreAttachmentsObj } from '../../../attachments/upload/dto/upload.obj';
 import { User } from '@/utils/decorators/user.decorator';
 
 @ObjectType()

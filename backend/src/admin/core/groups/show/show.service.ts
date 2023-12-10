@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma, core_groups } from '@prisma/client';
 
-import { ShowAdminGroupsArgs } from './dto/show-admin_groups.args';
-import { ShowAdminGroupsObj } from './dto/show-admin_groups.obj';
+import { ShowAdminGroupsArgs } from './dto/show.args';
+import { ShowAdminGroupsObj } from './dto/show.obj';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { inputPagination } from '@/functions/database/pagination/inputPagination';

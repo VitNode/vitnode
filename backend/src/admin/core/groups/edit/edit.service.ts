@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import { EditAdminGroupsArgs } from './dto/edit-admin_groups.args';
-import { ShowAdminGroups } from '../show/dto/show-admin_groups.obj';
+import { EditAdminGroupsArgs } from './dto/edit.args';
+import { ShowAdminGroups } from '../show/dto/show.obj';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { NotFountError } from '@/utils/errors/not-found';

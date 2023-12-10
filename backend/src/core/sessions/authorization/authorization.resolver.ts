@@ -1,7 +1,7 @@
 import { Context, Query, Resolver } from '@nestjs/graphql';
 
 import { AuthorizationCoreSessionsService } from './authorization.service';
-import { AuthorizationCoreSessionsObj } from './dto/authorization-core_sessions.obj';
+import { AuthorizationCoreSessionsObj } from './dto/authorization.obj';
 
 import { Ctx } from '@/types/context.type';
 

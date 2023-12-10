@@ -1,7 +1,7 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 import { ChangePositionForumForumsService } from './change_position.service';
-import { ChangePositionForumForumsArgs } from './dto/change_position-forum_forums.args';
+import { ChangePositionForumForumsArgs } from './dto/change_position.args';
 
 @Resolver()
 export class ChangePositionForumCategoriesResolver {

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { LayoutAdminInstallEnum, LayoutAdminInstallObj } from './dto/layout-admin_install.obj';
+import { LayoutAdminInstallEnum, LayoutAdminInstallObj } from './dto/layout.obj';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';

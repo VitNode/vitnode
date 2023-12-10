@@ -2,8 +2,8 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
 import { CreateAdminGroupsService } from './create.service';
-import { CreateAdminGroupsArgs } from './dto/create-admin_groups.args';
-import { ShowAdminGroups } from '../show/dto/show-admin_groups.obj';
+import { CreateAdminGroupsArgs } from './dto/create.args';
+import { ShowAdminGroups } from '../show/dto/show.obj';
 
 import { AdminAuthGuards } from '@/utils/guards/admin-auth.guards';
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { DeleteAdminGroupsArgs } from './dto/delete-admin_groups.args';
+import { DeleteAdminGroupsArgs } from './dto/delete.args';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { NotFountError } from '@/utils/errors/not-found';

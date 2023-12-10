@@ -2,9 +2,9 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
 import { CreateForumForumsService } from './create.service';
-import { CreateForumForumsArgs } from './dto/create-forum_forums.args';
+import { CreateForumForumsArgs } from './dto/create.args';
 
-import { ShowForumForumsWithParent } from '../../../../forums/forums/show/dto/show-forum_forums.obj';
+import { ShowForumForumsWithParent } from '../../../../forums/forums/show/dto/show.obj';
 import { AdminAuthGuards } from '@/utils/guards/admin-auth.guards';
 
 @Resolver()

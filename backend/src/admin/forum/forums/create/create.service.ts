@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
-import { CreateForumForumsArgs } from './dto/create-forum_forums.args';
+import { CreateForumForumsArgs } from './dto/create.args';
 
-import { ShowForumForumsWithParent } from '../../../../forums/forums/show/dto/show-forum_forums.obj';
+import { ShowForumForumsWithParent } from '../../../../forums/forums/show/dto/show.obj';
 import { PrismaService } from '@/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';
 import { currentDate } from '@/functions/date';

@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 
-import { UploadAvatarCoreMembersArgs } from './dto/upload-avatar-core_members.args';
+import { UploadAvatarCoreMembersArgs } from './dto/upload.args';
 
-import { UploadCoreAttachmentsService } from '@/src/core/attachments/upload/upload-core_attachments.service';
+import { UploadCoreAttachmentsService } from '@/src/core/attachments/upload/upload.service';
 import { User } from '@/utils/decorators/user.decorator';
 import { PrismaService } from '@/prisma/prisma.service';
-import { DeleteCoreAttachmentsService } from '../../../attachments/delete/delete-core_attachments.service';
-import { UploadCoreAttachmentsObj } from '../../../attachments/upload/dto/upload-core_attachments.obj';
+import { DeleteCoreAttachmentsService } from '../../../attachments/delete/delete.service';
+import { UploadCoreAttachmentsObj } from '../../../attachments/upload/dto/upload.obj';
 import { CustomError } from '@/utils/errors/CustomError';
 
 @Injectable()

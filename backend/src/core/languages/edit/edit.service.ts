@@ -3,8 +3,8 @@ import { join } from 'path';
 
 import { Injectable } from '@nestjs/common';
 
-import { ShowCoreLanguages } from '../show/dto/show-core_languages.obj';
-import { EditCoreLanguagesArgs } from './dto/edit-core_languages.args';
+import { ShowCoreLanguages } from '../show/dto/show.obj';
+import { EditCoreLanguagesArgs } from './dto/edit.args';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { NotFountError } from '@/utils/errors/not-found';

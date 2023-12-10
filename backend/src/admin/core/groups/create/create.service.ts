@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import { ShowAdminGroups } from '../show/dto/show-admin_groups.obj';
-import { CreateAdminGroupsArgs } from './dto/create-admin_groups.args';
+import { ShowAdminGroups } from '../show/dto/show.obj';
+import { CreateAdminGroupsArgs } from './dto/create.args';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { currentDate } from '@/functions/date';

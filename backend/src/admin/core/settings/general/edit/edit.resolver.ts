@@ -1,9 +1,9 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
-import { GeneralAdminSettingsObj } from '../dto/general-admin_settings.obj';
+import { GeneralAdminSettingsObj } from '../dto/general.obj';
 import { EditGeneralAdminSettingsService } from './edit.service';
-import { EditGeneralAdminSettingsArgs } from './dto/edit-general-admin_settings.args';
+import { EditGeneralAdminSettingsArgs } from './dto/edit.args';
 
 import { AdminAuthGuards } from '@/utils/guards/admin-auth.guards';
 

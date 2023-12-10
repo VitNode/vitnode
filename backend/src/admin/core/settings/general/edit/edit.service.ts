@@ -3,8 +3,8 @@ import { join } from 'path';
 
 import { Injectable } from '@nestjs/common';
 
-import { GeneralAdminSettingsObj } from '../dto/general-admin_settings.obj';
-import { EditGeneralAdminSettingsArgs } from './dto/edit-general-admin_settings.args';
+import { GeneralAdminSettingsObj } from '../dto/general.obj';
+import { EditGeneralAdminSettingsArgs } from './dto/edit.args';
 
 @Injectable()
 export class EditGeneralAdminSettingsService {

@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UAParser } from 'ua-parser-js';
 import { Response } from 'express';
 
-import { InternalAuthorizationCoreSessionObj } from './dto/internal_authorization-core_sessions.obj';
+import { InternalAuthorizationCoreSessionObj } from './dto/internal_authorization.obj';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { Ctx } from '@/types/context.type';

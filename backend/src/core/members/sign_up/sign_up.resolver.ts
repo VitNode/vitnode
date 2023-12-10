@@ -1,8 +1,8 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { SignUpCoreMembersObj } from './dto/sign_up-core_members.obj';
+import { SignUpCoreMembersObj } from './dto/sign_up.obj';
 import { SignUpCoreMembersService } from './sign_up.service';
-import { SignUpCoreMembersArgs } from './dto/sign_up-core_members.args';
+import { SignUpCoreMembersArgs } from './dto/sign_up.args';
 
 @Resolver()
 export class SignUpCoreMembersResolver {

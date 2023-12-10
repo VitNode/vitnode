@@ -1,8 +1,8 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 
 import { ShowCoreLanguageService } from './show.service';
-import { ShowCoreLanguagesArgs } from './dto/show-core_languages.args';
-import { ShowCoreLanguagesObj } from './dto/show-core_languages.obj';
+import { ShowCoreLanguagesArgs } from './dto/show.args';
+import { ShowCoreLanguagesObj } from './dto/show.obj';
 
 @Resolver()
 export class ShowCoreLanguagesResolver {

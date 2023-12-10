@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { core_members } from '@prisma/client';
 
-import { ShowCoreMembersObj } from './dto/show-core_members.obj';
-import { ShowCoreMembersArgs } from './dto/show-core_members.args';
+import { ShowCoreMembersObj } from './dto/show.obj';
+import { ShowCoreMembersArgs } from './dto/show.args';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { inputPagination } from '@/functions/database/pagination/inputPagination';

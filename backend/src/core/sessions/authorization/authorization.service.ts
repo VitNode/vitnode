@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { InternalAuthorizationCoreSessionsService } from './internal/internal_authorization.service';
-import { AuthorizationCoreSessionsObj } from './dto/authorization-core_sessions.obj';
+import { AuthorizationCoreSessionsObj } from './dto/authorization.obj';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { Ctx } from '@/types/context.type';

@@ -1,7 +1,7 @@
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 
 import { SignInCoreSessionsService } from './sign_in.service';
-import { SignInCoreSessionsArgs } from './dto/sign_in-core_sessions.args';
+import { SignInCoreSessionsArgs } from './dto/sign_in.args';
 
 import { Ctx } from '@/types/context.type';
 

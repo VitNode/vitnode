@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { ChangePositionForumForumsArgs } from './dto/change_position-forum_forums.args';
+import { ChangePositionForumForumsArgs } from './dto/change_position.args';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';

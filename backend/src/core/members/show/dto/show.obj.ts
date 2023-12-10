@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { PageInfo } from '@/types/database/pagination.type';
-import { UploadCoreAttachmentsObj } from '../../../attachments/upload/dto/upload-core_attachments.obj';
+import { UploadCoreAttachmentsObj } from '../../../attachments/upload/dto/upload.obj';
 import { TextLanguage } from '../../../../../types/database/text-language.type';
 
 @ObjectType()

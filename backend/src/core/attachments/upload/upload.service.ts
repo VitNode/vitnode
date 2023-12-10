@@ -2,8 +2,8 @@ import { createWriteStream, existsSync, mkdirSync, statSync } from 'fs';
 
 import { Injectable } from '@nestjs/common';
 
-import { FilesObj, UploadCoreAttachmentsArgs } from './dto/upload-core_attachments.args';
-import { UploadCoreAttachmentsObj } from './dto/upload-core_attachments.obj';
+import { FilesObj, UploadCoreAttachmentsArgs } from './dto/upload.args';
+import { UploadCoreAttachmentsObj } from './dto/upload.obj';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';

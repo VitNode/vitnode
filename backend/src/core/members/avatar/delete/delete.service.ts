@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { DeleteCoreAttachmentsService } from '../../../attachments/delete/delete-core_attachments.service';
+import { DeleteCoreAttachmentsService } from '../../../attachments/delete/delete.service';
 import { User } from '@/utils/decorators/user.decorator';
 import { PrismaService } from '@/prisma/prisma.service';
 

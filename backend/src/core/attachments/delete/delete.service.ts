@@ -2,7 +2,7 @@ import { unlink } from 'fs';
 
 import { Injectable } from '@nestjs/common';
 
-import { DeleteCoreAttachmentsArgs } from './dto/delete-core_attachments.args';
+import { DeleteCoreAttachmentsArgs } from './dto/delete.args';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';

@@ -3,7 +3,7 @@ import { compare } from 'bcrypt';
 import { UAParser } from 'ua-parser-js';
 import { JwtService } from '@nestjs/jwt';
 
-import { SignInCoreSessionsArgs } from './dto/sign_in-core_sessions.args';
+import { SignInCoreSessionsArgs } from './dto/sign_in.args';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
