@@ -1,3 +1,0 @@
-mutation ChangePosition_forum_forums($id: String!, $indexToMove: Int!, $parentId: String) {
-  changePosition_forum_forums(id: $id, index_to_move: $indexToMove, parent_id: $parentId)
-}

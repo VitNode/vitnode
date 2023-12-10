@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { fetcher } from '@/graphql/fetcher';
 import {
   LayoutAdminInstallEnum,
-  Layout_Admin_InstallQuery,
+  Admin_Install__LayoutQuery,
   SignUp_Core_Members,
   SignUp_Core_MembersMutation,
   SignUp_Core_MembersMutationVariables
@@ -34,16 +34,19 @@ export const useSignUpAPI = () => {
     },
     onSuccess: () => {
       if (pathname === '/admin/install/account') {
-        queryClient.setQueryData<Layout_Admin_InstallQuery>([APIKeys.LAYOUT_ADMIN_INSTALL], old => {
-          if (!old) return old;
+        queryClient.setQueryData<Admin_Install__LayoutQuery>(
+          [APIKeys.LAYOUT_ADMIN_INSTALL],
+          old => {
+            if (!old) return old;
 
-          return {
-            ...old,
-            layout_admin_install: {
-              status: LayoutAdminInstallEnum.finish
-            }
-          };
-        });
+            return {
+              ...old,
+              layout_admin_install: {
+                status: LayoutAdminInstallEnum.finish
+              }
+            };
+          }
+        );
       }
     }
   });

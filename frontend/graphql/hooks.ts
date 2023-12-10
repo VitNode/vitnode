@@ -63,50 +63,40 @@ export type LayoutAdminInstallObj = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  changePosition_forum_forums: Scalars['String']['output'];
-  create_admin_groups: ShowAdminGroups;
-  create_database_admin_install: Scalars['String']['output'];
-  create_forum_forums: ShowForumForumsWithParent;
-  delete_admin_groups: Scalars['String']['output'];
+  admin_install__create_database: Scalars['String']['output'];
+  admin_sessions__sign_out: Scalars['String']['output'];
+  admin_settings__general__edit: GeneralAdminSettingsObj;
+  core_groups__admin__delete: Scalars['String']['output'];
+  core_groups__admin__edit: ShowAdminGroups;
+  core_groups__admin_create: ShowAdminGroups;
   delete_avatar_core_members: Scalars['String']['output'];
-  edit_admin_groups: ShowAdminGroups;
   edit_core_languages: ShowCoreLanguages;
-  edit_general_admin_settings: GeneralAdminSettingsObj;
+  forum_forums__admin__change_position: Scalars['String']['output'];
+  forum_forums__admin__create: ShowForumForumsWithParent;
   signIn_core_sessions: Scalars['String']['output'];
-  signOut_admin_sessions: Scalars['String']['output'];
   signOut_core_sessions: Scalars['String']['output'];
   signUp_core_members: SignUpCoreMembersObj;
   upload_avatar_core_members: UploadCoreAttachmentsObj;
 };
 
 
-export type MutationChangePosition_Forum_ForumsArgs = {
-  id: Scalars['String']['input'];
-  index_to_move: Scalars['Int']['input'];
-  parent_id?: InputMaybe<Scalars['String']['input']>;
+export type MutationAdmin_Settings__General__EditArgs = {
+  side_name: Scalars['String']['input'];
 };
 
 
-export type MutationCreate_Admin_GroupsArgs = {
+export type MutationCore_Groups__Admin__DeleteArgs = {
+  id: Scalars['String']['input'];
+};
+
+
+export type MutationCore_Groups__Admin__EditArgs = {
+  id: Scalars['String']['input'];
   name: Array<TextLanguageInput>;
 };
 
 
-export type MutationCreate_Forum_ForumsArgs = {
-  description: Array<TextLanguageInput>;
-  is_category?: InputMaybe<Scalars['Boolean']['input']>;
-  name: Array<TextLanguageInput>;
-  parent_id?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type MutationDelete_Admin_GroupsArgs = {
-  id: Scalars['String']['input'];
-};
-
-
-export type MutationEdit_Admin_GroupsArgs = {
-  id: Scalars['String']['input'];
+export type MutationCore_Groups__Admin_CreateArgs = {
   name: Array<TextLanguageInput>;
 };
 
@@ -120,8 +110,18 @@ export type MutationEdit_Core_LanguagesArgs = {
 };
 
 
-export type MutationEdit_General_Admin_SettingsArgs = {
-  side_name: Scalars['String']['input'];
+export type MutationForum_Forums__Admin__Change_PositionArgs = {
+  id: Scalars['String']['input'];
+  index_to_move: Scalars['Int']['input'];
+  parent_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type MutationForum_Forums__Admin__CreateArgs = {
+  description: Array<TextLanguageInput>;
+  is_category?: InputMaybe<Scalars['Boolean']['input']>;
+  name: Array<TextLanguageInput>;
+  parent_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -158,18 +158,18 @@ export type PageInfo = {
 
 export type Query = {
   __typename?: 'Query';
-  authorization_admin_sessions: AuthorizationAdminSessionsObj;
+  admin_install__layout: LayoutAdminInstallObj;
+  admin_sessions__authorization: AuthorizationAdminSessionsObj;
   authorization_core_sessions: AuthorizationCoreSessionsObj;
-  layout_admin_install: LayoutAdminInstallObj;
-  show_admin_groups: ShowAdminGroupsObj;
-  show_admin_members: ShowAdminMembersObj;
+  core_groups__admin__show: ShowAdminGroupsObj;
+  core_members__admin__show: ShowAdminMembersObj;
   show_core_languages: ShowCoreLanguagesObj;
   show_core_members: ShowCoreMembersObj;
   show_forum_forums: ShowForumForumsObj;
 };
 
 
-export type QueryShow_Admin_GroupsArgs = {
+export type QueryCore_Groups__Admin__ShowArgs = {
   cursor?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
@@ -178,7 +178,7 @@ export type QueryShow_Admin_GroupsArgs = {
 };
 
 
-export type QueryShow_Admin_MembersArgs = {
+export type QueryCore_Members__Admin__ShowArgs = {
   cursor?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   groups?: InputMaybe<Array<Scalars['String']['input']>>;
@@ -413,21 +413,21 @@ export type UploadCoreAttachmentsObj = {
   url: Scalars['String']['output'];
 };
 
-export type Create_Database_Admin_InstallMutationVariables = Exact<{ [key: string]: never; }>;
+export type Admin_Install__Create_DatabaseMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Create_Database_Admin_InstallMutation = { __typename?: 'Mutation', create_database_admin_install: string };
+export type Admin_Install__Create_DatabaseMutation = { __typename?: 'Mutation', admin_install__create_database: string };
 
-export type ChangePosition_Forum_ForumsMutationVariables = Exact<{
+export type Forum_Forums__Admin__Change_PositionMutationVariables = Exact<{
   id: Scalars['String']['input'];
   indexToMove: Scalars['Int']['input'];
   parentId?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type ChangePosition_Forum_ForumsMutation = { __typename?: 'Mutation', changePosition_forum_forums: string };
+export type Forum_Forums__Admin__Change_PositionMutation = { __typename?: 'Mutation', forum_forums__admin__change_position: string };
 
-export type Create_Forum_ForumsMutationVariables = Exact<{
+export type Forum_Forums__Admin__CreateMutationVariables = Exact<{
   name: Array<TextLanguageInput> | TextLanguageInput;
   description: Array<TextLanguageInput> | TextLanguageInput;
   parentId?: InputMaybe<Scalars['String']['input']>;
@@ -435,41 +435,41 @@ export type Create_Forum_ForumsMutationVariables = Exact<{
 }>;
 
 
-export type Create_Forum_ForumsMutation = { __typename?: 'Mutation', create_forum_forums: { __typename?: 'ShowForumForumsWithParent', created: number, id: string, is_category: boolean, position: number, views: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
+export type Forum_Forums__Admin__CreateMutation = { __typename?: 'Mutation', forum_forums__admin__create: { __typename?: 'ShowForumForumsWithParent', created: number, id: string, is_category: boolean, position: number, views: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
 
-export type Create_Admin_GroupsMutationVariables = Exact<{
-  name: Array<TextLanguageInput> | TextLanguageInput;
-}>;
-
-
-export type Create_Admin_GroupsMutation = { __typename?: 'Mutation', create_admin_groups: { __typename?: 'ShowAdminGroups', created: number, id: string, protected: boolean, users_count: number, guest: boolean, updated: number, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
-
-export type Delete_Admin_GroupsMutationVariables = Exact<{
+export type Core_Groups__Admin__DeleteMutationVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
 
 
-export type Delete_Admin_GroupsMutation = { __typename?: 'Mutation', delete_admin_groups: string };
+export type Core_Groups__Admin__DeleteMutation = { __typename?: 'Mutation', core_groups__admin__delete: string };
 
-export type Edit_Admin_GroupsMutationVariables = Exact<{
+export type Core_Groups__Admin__EditMutationVariables = Exact<{
   id: Scalars['String']['input'];
   name: Array<TextLanguageInput> | TextLanguageInput;
 }>;
 
 
-export type Edit_Admin_GroupsMutation = { __typename?: 'Mutation', edit_admin_groups: { __typename?: 'ShowAdminGroups', created: number, id: string, protected: boolean, users_count: number, guest: boolean, updated: number, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
+export type Core_Groups__Admin__EditMutation = { __typename?: 'Mutation', core_groups__admin__edit: { __typename?: 'ShowAdminGroups', created: number, id: string, protected: boolean, users_count: number, guest: boolean, updated: number, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
 
-export type SignOut_Admin_SessionsMutationVariables = Exact<{ [key: string]: never; }>;
+export type Core_Groups__Admin_CreateMutationVariables = Exact<{
+  name: Array<TextLanguageInput> | TextLanguageInput;
+}>;
 
 
-export type SignOut_Admin_SessionsMutation = { __typename?: 'Mutation', signOut_admin_sessions: string };
+export type Core_Groups__Admin_CreateMutation = { __typename?: 'Mutation', core_groups__admin_create: { __typename?: 'ShowAdminGroups', created: number, id: string, protected: boolean, users_count: number, guest: boolean, updated: number, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
 
-export type Edit_General_Admin_SettingsMutationVariables = Exact<{
+export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Admin_Sessions__Sign_OutMutation = { __typename?: 'Mutation', admin_sessions__sign_out: string };
+
+export type Admin_Settings__General__EditMutationVariables = Exact<{
   sideName: Scalars['String']['input'];
 }>;
 
 
-export type Edit_General_Admin_SettingsMutation = { __typename?: 'Mutation', edit_general_admin_settings: { __typename?: 'GeneralAdminSettingsObj', side_name: string } };
+export type Admin_Settings__General__EditMutation = { __typename?: 'Mutation', admin_settings__general__edit: { __typename?: 'GeneralAdminSettingsObj', side_name: string } };
 
 export type Edit_Core_LanguagesMutationVariables = Exact<{
   default: Scalars['Boolean']['input'];
@@ -520,10 +520,10 @@ export type SignOut_Core_SessionsMutationVariables = Exact<{ [key: string]: neve
 
 export type SignOut_Core_SessionsMutation = { __typename?: 'Mutation', signOut_core_sessions: string };
 
-export type Layout_Admin_InstallQueryVariables = Exact<{ [key: string]: never; }>;
+export type Admin_Install__LayoutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Layout_Admin_InstallQuery = { __typename?: 'Query', layout_admin_install: { __typename?: 'LayoutAdminInstallObj', status: LayoutAdminInstallEnum } };
+export type Admin_Install__LayoutQuery = { __typename?: 'Query', admin_install__layout: { __typename?: 'LayoutAdminInstallObj', status: LayoutAdminInstallEnum } };
 
 export type Show_Forum_Forums_AdminQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -534,15 +534,7 @@ export type Show_Forum_Forums_AdminQueryVariables = Exact<{
 
 export type Show_Forum_Forums_AdminQuery = { __typename?: 'Query', show_forum_forums: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, is_category: boolean, position: number, views: number, created: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', created: number, id: string, is_category: boolean, position: number, views: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, _count: { __typename?: 'ShowForumForumsCount', children: number } }> | null, _count: { __typename?: 'ShowForumForumsCount', children: number } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
 
-export type Short_Show_Groups_Admin_MembersQueryVariables = Exact<{
-  first?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type Short_Show_Groups_Admin_MembersQuery = { __typename?: 'Query', show_admin_groups: { __typename?: 'ShowAdminGroupsObj', edges: Array<{ __typename?: 'ShowAdminGroups', id: string, guest: boolean, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> } };
-
-export type Show_Admin_GroupsQueryVariables = Exact<{
+export type Core_Groups__Admin__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   cursor?: InputMaybe<Scalars['String']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
@@ -551,9 +543,17 @@ export type Show_Admin_GroupsQueryVariables = Exact<{
 }>;
 
 
-export type Show_Admin_GroupsQuery = { __typename?: 'Query', show_admin_groups: { __typename?: 'ShowAdminGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowAdminGroups', created: number, updated: number, id: string, users_count: number, protected: boolean, guest: boolean, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> } };
+export type Core_Groups__Admin__ShowQuery = { __typename?: 'Query', core_groups__admin__show: { __typename?: 'ShowAdminGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowAdminGroups', created: number, updated: number, id: string, users_count: number, protected: boolean, guest: boolean, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> } };
 
-export type Show_Admin_MembersQueryVariables = Exact<{
+export type Core_Groups__Admin__Show_ShortQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Core_Groups__Admin__Show_ShortQuery = { __typename?: 'Query', core_groups__admin__show: { __typename?: 'ShowAdminGroupsObj', edges: Array<{ __typename?: 'ShowAdminGroups', id: string, guest: boolean, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> } };
+
+export type Core_Members__Admin__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
@@ -563,12 +563,12 @@ export type Show_Admin_MembersQueryVariables = Exact<{
 }>;
 
 
-export type Show_Admin_MembersQuery = { __typename?: 'Query', show_admin_members: { __typename?: 'ShowAdminMembersObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminMembers', avatar_color: string, email: string, id: string, joined: number, name: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupShowCoreMembers', name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } }> } };
+export type Core_Members__Admin__ShowQuery = { __typename?: 'Query', core_members__admin__show: { __typename?: 'ShowAdminMembersObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminMembers', avatar_color: string, email: string, id: string, joined: number, name: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupShowCoreMembers', name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } }> } };
 
-export type Authorization_Admin_SessionsQueryVariables = Exact<{ [key: string]: never; }>;
+export type Admin_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Authorization_Admin_SessionsQuery = { __typename?: 'Query', authorization_admin_sessions: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: string, id: string, is_admin: boolean, name: string, newsletter?: boolean | null, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } | null } };
+export type Admin_Sessions__AuthorizationQuery = { __typename?: 'Query', admin_sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: string, id: string, is_admin: boolean, name: string, newsletter?: boolean | null, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } | null } };
 
 export type Middleware_Core_LanguagesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -598,23 +598,23 @@ export type Authorization_Core_SessionsQueryVariables = Exact<{ [key: string]: n
 export type Authorization_Core_SessionsQuery = { __typename?: 'Query', authorization_core_sessions: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: string, id: string, is_admin: boolean, name: string, newsletter?: boolean | null, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } | null }, show_core_languages: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string }> } };
 
 
-export const Create_Database_Admin_Install = gql`
-    mutation Create_database_admin_install {
-  create_database_admin_install
+export const Admin_Install__Create_Database = gql`
+    mutation Admin_install__create_database {
+  admin_install__create_database
 }
     `;
-export const ChangePosition_Forum_Forums = gql`
-    mutation ChangePosition_forum_forums($id: String!, $indexToMove: Int!, $parentId: String) {
-  changePosition_forum_forums(
+export const Forum_Forums__Admin__Change_Position = gql`
+    mutation Forum_forums__admin__change_position($id: String!, $indexToMove: Int!, $parentId: String) {
+  forum_forums__admin__change_position(
     id: $id
     index_to_move: $indexToMove
     parent_id: $parentId
   )
 }
     `;
-export const Create_Forum_Forums = gql`
-    mutation Create_forum_forums($name: [TextLanguageInput!]!, $description: [TextLanguageInput!]!, $parentId: String, $isCategory: Boolean) {
-  create_forum_forums(
+export const Forum_Forums__Admin__Create = gql`
+    mutation Forum_forums__admin__create($name: [TextLanguageInput!]!, $description: [TextLanguageInput!]!, $parentId: String, $isCategory: Boolean) {
+  forum_forums__admin__create(
     name: $name
     description: $description
     parent_id: $parentId
@@ -636,9 +636,14 @@ export const Create_Forum_Forums = gql`
   }
 }
     `;
-export const Create_Admin_Groups = gql`
-    mutation Create_admin_groups($name: [TextLanguageInput!]!) {
-  create_admin_groups(name: $name) {
+export const Core_Groups__Admin__Delete = gql`
+    mutation Core_groups__admin__delete($id: String!) {
+  core_groups__admin__delete(id: $id)
+}
+    `;
+export const Core_Groups__Admin__Edit = gql`
+    mutation Core_groups__admin__edit($id: String!, $name: [TextLanguageInput!]!) {
+  core_groups__admin__edit(id: $id, name: $name) {
     created
     id
     name {
@@ -652,14 +657,9 @@ export const Create_Admin_Groups = gql`
   }
 }
     `;
-export const Delete_Admin_Groups = gql`
-    mutation Delete_admin_groups($id: String!) {
-  delete_admin_groups(id: $id)
-}
-    `;
-export const Edit_Admin_Groups = gql`
-    mutation Edit_admin_groups($id: String!, $name: [TextLanguageInput!]!) {
-  edit_admin_groups(id: $id, name: $name) {
+export const Core_Groups__Admin_Create = gql`
+    mutation core_groups__admin_create($name: [TextLanguageInput!]!) {
+  core_groups__admin_create(name: $name) {
     created
     id
     name {
@@ -673,14 +673,14 @@ export const Edit_Admin_Groups = gql`
   }
 }
     `;
-export const SignOut_Admin_Sessions = gql`
-    mutation SignOut_admin_sessions {
-  signOut_admin_sessions
+export const Admin_Sessions__Sign_Out = gql`
+    mutation Admin_sessions__sign_out {
+  admin_sessions__sign_out
 }
     `;
-export const Edit_General_Admin_Settings = gql`
-    mutation Edit_general_admin_settings($sideName: String!) {
-  edit_general_admin_settings(side_name: $sideName) {
+export const Admin_Settings__General__Edit = gql`
+    mutation Admin_settings__general__edit($sideName: String!) {
+  admin_settings__general__edit(side_name: $sideName) {
     side_name
   }
 }
@@ -757,9 +757,9 @@ export const SignOut_Core_Sessions = gql`
   signOut_core_sessions
 }
     `;
-export const Layout_Admin_Install = gql`
-    query Layout_admin_install {
-  layout_admin_install {
+export const Admin_Install__Layout = gql`
+    query Admin_install__layout {
+  admin_install__layout {
     status
   }
 }
@@ -814,23 +814,9 @@ export const Show_Forum_Forums_Admin = gql`
   }
 }
     `;
-export const Short_Show_Groups_Admin_Members = gql`
-    query Short_show_groups_admin_members($first: Int, $search: String) {
-  show_admin_groups(first: $first, search: $search) {
-    edges {
-      id
-      name {
-        id_language
-        value
-      }
-      guest
-    }
-  }
-}
-    `;
-export const Show_Admin_Groups = gql`
-    query Show_admin_groups($first: Int, $cursor: String, $search: String, $sortBy: [ShowAdminGroupsSortByArgs!], $last: Int) {
-  show_admin_groups(
+export const Core_Groups__Admin__Show = gql`
+    query Core_groups__admin__show($first: Int, $cursor: String, $search: String, $sortBy: [ShowAdminGroupsSortByArgs!], $last: Int) {
+  core_groups__admin__show(
     first: $first
     cursor: $cursor
     search: $search
@@ -860,9 +846,23 @@ export const Show_Admin_Groups = gql`
   }
 }
     `;
-export const Show_Admin_Members = gql`
-    query Show_admin_members($cursor: String, $first: Int, $last: Int, $search: String, $sortBy: [ShowAdminMembersSortByArgs!], $groups: [String!]) {
-  show_admin_members(
+export const Core_Groups__Admin__Show_Short = gql`
+    query Core_groups__admin__show_short($first: Int, $search: String) {
+  core_groups__admin__show(first: $first, search: $search) {
+    edges {
+      id
+      name {
+        id_language
+        value
+      }
+      guest
+    }
+  }
+}
+    `;
+export const Core_Members__Admin__Show = gql`
+    query Core_members__admin__show($cursor: String, $first: Int, $last: Int, $search: String, $sortBy: [ShowAdminMembersSortByArgs!], $groups: [String!]) {
+  core_members__admin__show(
     cursor: $cursor
     first: $first
     last: $last
@@ -908,9 +908,9 @@ export const Show_Admin_Members = gql`
   }
 }
     `;
-export const Authorization_Admin_Sessions = gql`
-    query Authorization_admin_sessions {
-  authorization_admin_sessions {
+export const Admin_Sessions__Authorization = gql`
+    query Admin_sessions__authorization {
+  admin_sessions__authorization {
     user {
       birthday
       email

@@ -2,9 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Show_Admin_Groups,
-  Show_Admin_GroupsQuery,
-  Show_Admin_GroupsQueryVariables,
+  Core_Groups__Admin__Show,
+  Core_Groups__Admin__ShowQuery,
+  Core_Groups__Admin__ShowQueryVariables,
   ShowAdminGroupsSortingColumnEnum
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
@@ -20,8 +20,8 @@ export const useGroupMembersAdminAPI = () => {
   const query = useQuery({
     queryKey: [APIKeys.GROUPS_MEMBERS_ADMIN, { ...variables }],
     queryFn: async () => {
-      return await fetcher<Show_Admin_GroupsQuery, Show_Admin_GroupsQueryVariables>({
-        query: Show_Admin_Groups,
+      return await fetcher<Core_Groups__Admin__ShowQuery, Core_Groups__Admin__ShowQueryVariables>({
+        query: Core_Groups__Admin__Show,
         variables
       });
     },

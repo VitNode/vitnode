@@ -3,9 +3,9 @@ import { useTranslations } from 'next-intl';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Create_Admin_Groups,
-  Create_Admin_GroupsMutation,
-  Create_Admin_GroupsMutationVariables
+  Core_Groups__Admin_Create,
+  Core_Groups__Admin_CreateMutation,
+  Core_Groups__Admin_CreateMutationVariables
 } from '@/graphql/hooks';
 import { useToast } from '@/components/ui/use-toast';
 import { APIKeys } from '@/graphql/api-keys';
@@ -24,9 +24,9 @@ export const useCreateGroupAdminAPI = () => {
   const { push } = useRouter();
 
   return useMutation({
-    mutationFn: async (variables: Create_Admin_GroupsMutationVariables) =>
-      await fetcher<Create_Admin_GroupsMutation, Create_Admin_GroupsMutationVariables>({
-        query: Create_Admin_Groups,
+    mutationFn: async (variables: Core_Groups__Admin_CreateMutationVariables) =>
+      await fetcher<Core_Groups__Admin_CreateMutation, Core_Groups__Admin_CreateMutationVariables>({
+        query: Core_Groups__Admin_Create,
         variables
       }),
     onError: () => {
@@ -45,7 +45,7 @@ export const useCreateGroupAdminAPI = () => {
 
       toast({
         title: t('success'),
-        description: convertText(data.create_admin_groups.name)
+        description: convertText(data.core_groups__admin_create.name)
       });
 
       setOpen(false);

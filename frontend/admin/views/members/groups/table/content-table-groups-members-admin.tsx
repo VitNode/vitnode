@@ -70,8 +70,8 @@ export const ContentTableGroupsMembersAdmin = () => {
 
   return (
     <DataTable
-      data={data?.show_admin_groups.edges ?? []}
-      pageInfo={data?.show_admin_groups.pageInfo}
+      data={data?.core_groups__admin__show.edges ?? []}
+      pageInfo={data?.core_groups__admin__show.pageInfo}
       defaultPageSize={defaultPageSize}
       columns={columns}
       isFetching={isFetching}

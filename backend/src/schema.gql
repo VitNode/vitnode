@@ -41,17 +41,17 @@ type LayoutAdminInstallObj {
 }
 
 type Mutation {
-  changePosition_forum_forums(id: String!, index_to_move: Int!, parent_id: String): String!
-  create_admin_groups(name: [TextLanguageInput!]!): ShowAdminGroups!
-  create_database_admin_install: String!
-  create_forum_forums(description: [TextLanguageInput!]!, is_category: Boolean, name: [TextLanguageInput!]!, parent_id: String): ShowForumForumsWithParent!
-  delete_admin_groups(id: String!): String!
+  admin_install__create_database: String!
+  admin_sessions__sign_out: String!
+  admin_settings__general__edit(side_name: String!): GeneralAdminSettingsObj!
+  core_groups__admin__delete(id: String!): String!
+  core_groups__admin__edit(id: String!, name: [TextLanguageInput!]!): ShowAdminGroups!
+  core_groups__admin_create(name: [TextLanguageInput!]!): ShowAdminGroups!
   delete_avatar_core_members: String!
-  edit_admin_groups(id: String!, name: [TextLanguageInput!]!): ShowAdminGroups!
   edit_core_languages(default: Boolean!, enabled: Boolean!, id: String!, name: String!, timezone: String!): ShowCoreLanguages!
-  edit_general_admin_settings(side_name: String!): GeneralAdminSettingsObj!
+  forum_forums__admin__change_position(id: String!, index_to_move: Int!, parent_id: String): String!
+  forum_forums__admin__create(description: [TextLanguageInput!]!, is_category: Boolean, name: [TextLanguageInput!]!, parent_id: String): ShowForumForumsWithParent!
   signIn_core_sessions(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
-  signOut_admin_sessions: String!
   signOut_core_sessions: String!
   signUp_core_members(birthday: Int!, email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
   upload_avatar_core_members(file: Upload!): UploadCoreAttachmentsObj!
@@ -67,11 +67,11 @@ type PageInfo {
 }
 
 type Query {
-  authorization_admin_sessions: AuthorizationAdminSessionsObj!
+  admin_install__layout: LayoutAdminInstallObj!
+  admin_sessions__authorization: AuthorizationAdminSessionsObj!
   authorization_core_sessions: AuthorizationCoreSessionsObj!
-  layout_admin_install: LayoutAdminInstallObj!
-  show_admin_groups(cursor: String, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
-  show_admin_members(cursor: String, first: Int, groups: [String!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
+  core_groups__admin__show(cursor: String, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
+  core_members__admin__show(cursor: String, first: Int, groups: [String!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   show_core_languages(cursor: String, first: Int, last: Int): ShowCoreLanguagesObj!
   show_core_members(cursor: String, findByIds: [String!], first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   show_forum_forums(cursor: String, first: Int, last: Int, parent_id: String): ShowForumForumsObj!

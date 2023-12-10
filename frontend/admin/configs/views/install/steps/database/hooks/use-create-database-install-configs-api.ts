@@ -2,11 +2,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Create_Database_Admin_Install,
-  Create_Database_Admin_InstallMutation,
-  Create_Database_Admin_InstallMutationVariables,
+  Admin_Install__Create_Database,
+  Admin_Install__Create_DatabaseMutation,
+  Admin_Install__Create_DatabaseMutationVariables,
   LayoutAdminInstallEnum,
-  Layout_Admin_InstallQuery
+  Admin_Install__LayoutQuery
 } from '@/graphql/hooks';
 import { useRouter } from '@/i18n';
 import { APIKeys } from '@/graphql/api-keys';
@@ -18,13 +18,13 @@ export const useCreateDatabaseInstallConfigsAPI = () => {
   return useMutation({
     mutationFn: async () =>
       await fetcher<
-        Create_Database_Admin_InstallMutation,
-        Create_Database_Admin_InstallMutationVariables
+        Admin_Install__Create_DatabaseMutation,
+        Admin_Install__Create_DatabaseMutationVariables
       >({
-        query: Create_Database_Admin_Install
+        query: Admin_Install__Create_Database
       }),
     onSuccess: () => {
-      queryClient.setQueryData<Layout_Admin_InstallQuery>([APIKeys.LAYOUT_ADMIN_INSTALL], old => {
+      queryClient.setQueryData<Admin_Install__LayoutQuery>([APIKeys.LAYOUT_ADMIN_INSTALL], old => {
         if (!old) return old;
 
         return {

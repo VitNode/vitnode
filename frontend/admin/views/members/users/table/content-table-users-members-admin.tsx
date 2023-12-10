@@ -102,8 +102,8 @@ export const ContentTableUsersMembersAdmin = () => {
 
   return (
     <DataTable
-      data={data?.show_admin_members.edges ?? []}
-      pageInfo={data?.show_admin_members.pageInfo}
+      data={data?.core_members__admin__show.edges ?? []}
+      pageInfo={data?.core_members__admin__show.pageInfo}
       defaultPageSize={defaultPageSize}
       columns={columns}
       isFetching={isFetching}

@@ -4,9 +4,9 @@ import { useTranslations } from 'next-intl';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Authorization_Core_SessionsQuery,
-  SignOut_Admin_Sessions,
-  SignOut_Admin_SessionsMutation,
-  SignOut_Admin_SessionsMutationVariables
+  Admin_Sessions__Sign_Out,
+  Admin_Sessions__Sign_OutMutation,
+  Admin_Sessions__Sign_OutMutationVariables
 } from '@/graphql/hooks';
 import { useRouter } from '@/i18n';
 import { APIKeys } from '@/graphql/api-keys';
@@ -20,8 +20,8 @@ export const useSignOutAdminAPI = () => {
 
   return useMutation({
     mutationFn: async () =>
-      await fetcher<SignOut_Admin_SessionsMutation, SignOut_Admin_SessionsMutationVariables>({
-        query: SignOut_Admin_Sessions
+      await fetcher<Admin_Sessions__Sign_OutMutation, Admin_Sessions__Sign_OutMutationVariables>({
+        query: Admin_Sessions__Sign_Out
       }),
     onError: () => {
       toast({

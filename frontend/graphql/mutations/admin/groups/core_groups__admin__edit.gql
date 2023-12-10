@@ -1,0 +1,14 @@
+mutation Core_groups__admin__edit($id: String!, $name: [TextLanguageInput!]!) {
+  core_groups__admin__edit(id: $id, name: $name) {
+    created
+    id
+    name {
+      id_language
+      value
+    }
+    protected
+    users_count
+    guest
+    updated
+  }
+}

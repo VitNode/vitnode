@@ -3,9 +3,9 @@ import { useTranslations } from 'next-intl';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Edit_General_Admin_Settings,
-  Edit_General_Admin_SettingsMutation,
-  Edit_General_Admin_SettingsMutationVariables
+  Admin_Settings__General__Edit,
+  Admin_Settings__General__EditMutation,
+  Admin_Settings__General__EditMutationVariables
 } from '@/graphql/hooks';
 import { useToast } from '@/components/ui/use-toast';
 
@@ -15,12 +15,12 @@ export const useGeneralSettingsAdminAPI = () => {
   // const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (variables: Edit_General_Admin_SettingsMutationVariables) =>
+    mutationFn: async (variables: Admin_Settings__General__EditMutationVariables) =>
       await fetcher<
-        Edit_General_Admin_SettingsMutation,
-        Edit_General_Admin_SettingsMutationVariables
+        Admin_Settings__General__EditMutation,
+        Admin_Settings__General__EditMutationVariables
       >({
-        query: Edit_General_Admin_Settings,
+        query: Admin_Settings__General__Edit,
         variables
       }),
     onError: () => {

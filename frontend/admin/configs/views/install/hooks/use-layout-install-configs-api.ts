@@ -6,9 +6,9 @@ import { APIKeys } from '@/graphql/api-keys';
 import { fetcher } from '@/graphql/fetcher';
 import {
   LayoutAdminInstallEnum,
-  Layout_Admin_Install,
-  Layout_Admin_InstallQuery,
-  Layout_Admin_InstallQueryVariables
+  Admin_Install__Layout,
+  Admin_Install__LayoutQuery,
+  Admin_Install__LayoutQueryVariables
 } from '@/graphql/hooks';
 import { useRouter } from '@/i18n';
 
@@ -19,8 +19,8 @@ export const useLayoutInstallConfigsAPI = () => {
   const current = useQuery({
     queryKey: [APIKeys.LAYOUT_ADMIN_INSTALL],
     queryFn: async () =>
-      await fetcher<Layout_Admin_InstallQuery, Layout_Admin_InstallQueryVariables>({
-        query: Layout_Admin_Install
+      await fetcher<Admin_Install__LayoutQuery, Admin_Install__LayoutQueryVariables>({
+        query: Admin_Install__Layout
       })
   });
 
@@ -36,7 +36,7 @@ export const useLayoutInstallConfigsAPI = () => {
       [LayoutAdminInstallEnum.database]: '/admin/install/database'
     };
 
-    const path = redirectItems[current.data.layout_admin_install.status];
+    const path = redirectItems[current.data.admin_install__layout.status];
 
     replace(segment && path ? path : '/admin/install/database');
   }, [segment]);

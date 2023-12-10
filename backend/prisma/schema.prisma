@@ -62,8 +62,9 @@ model core_groups {
   root      Boolean                 @default(false)
   guest     Boolean                 @default(false)
 
-  members           core_members[]           @relation("core_members_group")
-  admin_permissions core_admin_permissions[] @relation("core_admin_permissions_group")
+  members            core_members[]             @relation("core_members_group")
+  admin_permissions  core_admin_permissions[]   @relation("core_admin_permissions_group")
+  forums_permissions forum_forums_permissions[] @relation("forums_forums_permissions_group")
 }
 
 model core_groups_languages {
@@ -160,6 +161,7 @@ model forum_forums {
   children    forum_forums[]             @relation("forums_forums_parent")
   name        forum_forums_names[]       @relation("forums_forums_names_forum")
   description forum_forums_description[] @relation("forums_forums_description_forum")
+  permissions forum_forums_permissions[] @relation("forums_forums_permissions_forum")
 }
 
 model forum_forums_names {
@@ -184,4 +186,16 @@ model forum_forums_description {
   language core_languages @relation("forums_forums_description_language", references: [id], fields: [id_language])
 
   @@index([id_language])
+}
+
+model forum_forums_permissions {
+  id        String       @id @unique @default(uuid())
+  forum     forum_forums @relation("forums_forums_permissions_forum", references: [id], fields: [forum_id])
+  forum_id  String
+  group     core_groups  @relation("forums_forums_permissions_group", references: [id], fields: [group_id])
+  group_id  String
+  can_view  Boolean      @default(false)
+  can_read  Boolean      @default(false)
+  can_reply Boolean      @default(false)
+  can_start Boolean      @default(false)
 }

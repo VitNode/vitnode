@@ -1,0 +1,3 @@
+mutation Core_groups__admin__delete($id: String!) {
+  core_groups__admin__delete(id: $id)
+}

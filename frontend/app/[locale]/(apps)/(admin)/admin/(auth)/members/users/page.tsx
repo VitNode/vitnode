@@ -6,9 +6,9 @@ import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import { UsersMembersAdminView } from '@/admin/views/members/users/users-members-admin-view';
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Show_Admin_Members,
-  Show_Admin_MembersQuery,
-  Show_Admin_MembersQueryVariables
+  Core_Members__Admin__Show,
+  Core_Members__Admin__ShowQuery,
+  Core_Members__Admin__ShowQueryVariables
 } from '@/graphql/hooks';
 import getQueryClient from '@/functions/get-query-client';
 import { APIKeys } from '@/graphql/api-keys';
@@ -21,8 +21,8 @@ interface Props {
 }
 
 const getData = async () => {
-  return await fetcher<Show_Admin_MembersQuery, Show_Admin_MembersQueryVariables>({
-    query: Show_Admin_Members,
+  return await fetcher<Core_Members__Admin__ShowQuery, Core_Members__Admin__ShowQueryVariables>({
+    query: Core_Members__Admin__Show,
     variables: {
       first: 10
     },

@@ -1,3 +1,0 @@
-mutation Create_database_admin_install {
-  create_database_admin_install
-}

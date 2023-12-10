@@ -1,5 +1,0 @@
-mutation Edit_general_admin_settings($sideName: String!) {
-  edit_general_admin_settings(side_name: $sideName) {
-    side_name
-  }
-}

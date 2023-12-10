@@ -2,9 +2,9 @@ import { useMutation } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 
 import {
-  Create_Forum_Forums,
-  Create_Forum_ForumsMutation,
-  Create_Forum_ForumsMutationVariables
+  Forum_Forums__Admin__Create,
+  Forum_Forums__Admin__CreateMutation,
+  Forum_Forums__Admin__CreateMutationVariables
 } from '@/graphql/hooks';
 import { fetcher } from '@/graphql/fetcher';
 import { useToast } from '@/components/ui/use-toast';
@@ -16,9 +16,12 @@ export const useCreateForumAdminAPI = () => {
   const { setOpen } = useDialog();
 
   return useMutation({
-    mutationFn: async (variables: Create_Forum_ForumsMutationVariables) =>
-      await fetcher<Create_Forum_ForumsMutation, Create_Forum_ForumsMutationVariables>({
-        query: Create_Forum_Forums,
+    mutationFn: async (variables: Forum_Forums__Admin__CreateMutationVariables) =>
+      await fetcher<
+        Forum_Forums__Admin__CreateMutation,
+        Forum_Forums__Admin__CreateMutationVariables
+      >({
+        query: Forum_Forums__Admin__Create,
         variables
       }),
     onError: () => {

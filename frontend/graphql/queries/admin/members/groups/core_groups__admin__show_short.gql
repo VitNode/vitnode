@@ -1,0 +1,12 @@
+query Core_groups__admin__show_short($first: Int, $search: String) {
+  core_groups__admin__show(first: $first, search: $search) {
+    edges {
+      id
+      name {
+        id_language
+        value
+      }
+      guest
+    }
+  }
+}

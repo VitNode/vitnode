@@ -3,9 +3,9 @@ import { useTranslations } from 'next-intl';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Edit_Admin_Groups,
-  Edit_Admin_GroupsMutation,
-  Edit_Admin_GroupsMutationVariables
+  Core_Groups__Admin__Edit,
+  Core_Groups__Admin__EditMutation,
+  Core_Groups__Admin__EditMutationVariables
 } from '@/graphql/hooks';
 import { useToast } from '@/components/ui/use-toast';
 import { APIKeys } from '@/graphql/api-keys';
@@ -24,9 +24,9 @@ export const useEditGroupAdminAPI = () => {
   const { push } = useRouter();
 
   return useMutation({
-    mutationFn: async (variables: Edit_Admin_GroupsMutationVariables) =>
-      await fetcher<Edit_Admin_GroupsMutation, Edit_Admin_GroupsMutationVariables>({
-        query: Edit_Admin_Groups,
+    mutationFn: async (variables: Core_Groups__Admin__EditMutationVariables) =>
+      await fetcher<Core_Groups__Admin__EditMutation, Core_Groups__Admin__EditMutationVariables>({
+        query: Core_Groups__Admin__Edit,
         variables
       }),
     onError: () => {
@@ -45,7 +45,7 @@ export const useEditGroupAdminAPI = () => {
 
       toast({
         title: t('success'),
-        description: convertText(data.edit_admin_groups.name)
+        description: convertText(data.core_groups__admin__edit.name)
       });
 
       setOpen(false);
