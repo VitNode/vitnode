@@ -1,0 +1,20 @@
+query Core_languages__show($first: Int, $last: Int, $cursor: String) {
+  core_languages__show(first: $first, last: $last, cursor: $cursor) {
+    edges {
+      default
+      enabled
+      id
+      name
+      protected
+      timezone
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+  }
+}

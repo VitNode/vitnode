@@ -4,11 +4,11 @@ import { useLocale } from 'next-intl';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Edit_Core_Languages,
-  Edit_Core_LanguagesMutation,
-  Edit_Core_LanguagesMutationVariables,
-  Middleware_Core_LanguagesQuery,
-  Show_Core_LanguagesQuery
+  Core_Languages__Edit,
+  Core_Languages__EditMutation,
+  Core_Languages__EditMutationVariables,
+  Core_Languages__MiddlewareQuery,
+  Core_Languages__ShowQuery
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
 import { useDialog } from '@/components/ui/dialog';
@@ -30,24 +30,24 @@ export const useEditLangsAdminAPI = () => {
   const { languages } = useGlobals();
 
   return useMutation({
-    mutationFn: async (variables: Edit_Core_LanguagesMutationVariables) =>
-      await fetcher<Edit_Core_LanguagesMutation, Edit_Core_LanguagesMutationVariables>({
-        query: Edit_Core_Languages,
+    mutationFn: async (variables: Core_Languages__EditMutationVariables) =>
+      await fetcher<Core_Languages__EditMutation, Core_Languages__EditMutationVariables>({
+        query: Core_Languages__Edit,
         variables
       }),
     onSuccess: data => {
-      queryClient.setQueryData<Show_Core_LanguagesQuery>(
+      queryClient.setQueryData<Core_Languages__ShowQuery>(
         [APIKeys.LANGUAGES_ADMIN, { ...pagination }],
         oldData => {
           if (!oldData) return oldData;
 
           return {
             ...oldData,
-            show_core_languages: {
-              ...oldData.show_core_languages,
-              edges: oldData.show_core_languages.edges.map(edge => {
-                if (edge.id === data.edit_core_languages.id) {
-                  return data.edit_core_languages;
+            core_languages__show: {
+              ...oldData.core_languages__show,
+              edges: oldData.core_languages__show.edges.map(edge => {
+                if (edge.id === data.core_languages__edit.id) {
+                  return data.core_languages__edit;
                 }
 
                 return edge;
@@ -58,16 +58,16 @@ export const useEditLangsAdminAPI = () => {
       );
 
       // Update languages
-      queryClient.setQueryData<Middleware_Core_LanguagesQuery>([APIKeys.LANGUAGES], oldData => {
+      queryClient.setQueryData<Core_Languages__MiddlewareQuery>([APIKeys.LANGUAGES], oldData => {
         if (!oldData) return oldData;
 
         return {
           ...oldData,
-          show_core_languages: {
-            ...oldData.show_core_languages,
-            edges: oldData.show_core_languages.edges.map(edge => {
-              if (edge.id === data.edit_core_languages.id) {
-                return data.edit_core_languages;
+          core_languages__show: {
+            ...oldData.core_languages__show,
+            edges: oldData.core_languages__show.edges.map(edge => {
+              if (edge.id === data.core_languages__edit.id) {
+                return data.core_languages__edit;
               }
 
               return edge;
@@ -78,7 +78,7 @@ export const useEditLangsAdminAPI = () => {
 
       setOpen(false);
 
-      if (locale === data.edit_core_languages.id) {
+      if (locale === data.core_languages__edit.id) {
         const defaultLocale = languages.find(item => item.enabled)?.id ?? 'en';
         replace(pathname, { locale: defaultLocale });
       }

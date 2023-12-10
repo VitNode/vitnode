@@ -1,7 +1,7 @@
 import { Global, Module } from '@nestjs/common';
 
-import { UploadCoreAttachmentsService } from './upload/upload-core_attachments.service';
-import { DeleteCoreAttachmentsService } from './delete/delete-core_attachments.service';
+import { UploadCoreAttachmentsService } from './upload/upload.service';
+import { DeleteCoreAttachmentsService } from './delete/delete.service';
 
 @Global()
 @Module({

@@ -6,15 +6,15 @@ import { LanguageProvider } from './language-provider';
 import getQueryClient from '@/functions/get-query-client';
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Middleware_Core_Languages,
-  Middleware_Core_LanguagesQuery,
-  Middleware_Core_LanguagesQueryVariables
+  Core_Languages__Middleware,
+  Core_Languages__MiddlewareQuery,
+  Core_Languages__MiddlewareQueryVariables
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
 
 const getData = async () => {
-  return await fetcher<Middleware_Core_LanguagesQuery, Middleware_Core_LanguagesQueryVariables>({
-    query: Middleware_Core_Languages,
+  return await fetcher<Core_Languages__MiddlewareQuery, Core_Languages__MiddlewareQueryVariables>({
+    query: Core_Languages__Middleware,
     headers: {
       Cookie: cookies().toString()
     }

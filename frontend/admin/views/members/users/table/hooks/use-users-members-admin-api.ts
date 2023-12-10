@@ -5,9 +5,9 @@ import { fetcher } from '@/graphql/fetcher';
 import {
   ShowAdminMembers,
   ShowAdminMembersSortingColumnEnum,
-  Show_Admin_Members,
-  Show_Admin_MembersQuery,
-  Show_Admin_MembersQueryVariables
+  Core_Members__Admin__Show,
+  Core_Members__Admin__ShowQuery,
+  Core_Members__Admin__ShowQueryVariables
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
 import { usePaginationAPI } from '@/hooks/core/utils/use-pagination-api';
@@ -33,11 +33,13 @@ export const useUsersMembersAdminAPI = () => {
   const query = useQuery({
     queryKey: [APIKeys.USERS_MEMBERS, { ...variables }],
     queryFn: async ({ signal }) => {
-      return await fetcher<Show_Admin_MembersQuery, Show_Admin_MembersQueryVariables>({
-        query: Show_Admin_Members,
-        variables,
-        signal
-      });
+      return await fetcher<Core_Members__Admin__ShowQuery, Core_Members__Admin__ShowQueryVariables>(
+        {
+          query: Core_Members__Admin__Show,
+          variables,
+          signal
+        }
+      );
     },
     placeholderData: previousData => previousData
   });

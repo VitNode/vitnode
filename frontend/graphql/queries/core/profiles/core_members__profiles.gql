@@ -1,0 +1,34 @@
+query Core_members__profiles($first: Int, $findByIds: [String!]) {
+  core_members__show(first: $first, findByIds: $findByIds) {
+    edges {
+      avatar {
+        created
+        description
+        extension
+        file_size
+        id
+        member_id
+        mimetype
+        module
+        module_id
+        name
+        position
+        url
+      }
+      avatar_color
+      birthday
+      followers
+      group {
+        name {
+          id_language
+          value
+        }
+      }
+      id
+      joined
+      name
+      posts
+      reactions
+    }
+  }
+}

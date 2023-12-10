@@ -4,10 +4,10 @@ import { useTranslations } from 'next-intl';
 import { fetcher } from '@/graphql/fetcher';
 import {
   LayoutAdminInstallEnum,
-  Layout_Admin_InstallQuery,
-  SignUp_Core_Members,
-  SignUp_Core_MembersMutation,
-  SignUp_Core_MembersMutationVariables
+  Admin_Install__LayoutQuery,
+  Core_Members__Sign_Up,
+  Core_Members__Sign_UpMutation,
+  Core_Members__Sign_UpMutationVariables
 } from '@/graphql/hooks';
 import { usePathname } from '@/i18n';
 import { APIKeys } from '@/graphql/api-keys';
@@ -20,9 +20,9 @@ export const useSignUpAPI = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (variables: SignUp_Core_MembersMutationVariables) =>
-      await fetcher<SignUp_Core_MembersMutation, SignUp_Core_MembersMutationVariables>({
-        query: SignUp_Core_Members,
+    mutationFn: async (variables: Core_Members__Sign_UpMutationVariables) =>
+      await fetcher<Core_Members__Sign_UpMutation, Core_Members__Sign_UpMutationVariables>({
+        query: Core_Members__Sign_Up,
         variables
       }),
     onError: () => {
@@ -34,16 +34,19 @@ export const useSignUpAPI = () => {
     },
     onSuccess: () => {
       if (pathname === '/admin/install/account') {
-        queryClient.setQueryData<Layout_Admin_InstallQuery>([APIKeys.LAYOUT_ADMIN_INSTALL], old => {
-          if (!old) return old;
+        queryClient.setQueryData<Admin_Install__LayoutQuery>(
+          [APIKeys.LAYOUT_ADMIN_INSTALL],
+          old => {
+            if (!old) return old;
 
-          return {
-            ...old,
-            layout_admin_install: {
-              status: LayoutAdminInstallEnum.finish
-            }
-          };
-        });
+            return {
+              ...old,
+              layout_admin_install: {
+                status: LayoutAdminInstallEnum.finish
+              }
+            };
+          }
+        );
       }
     }
   });

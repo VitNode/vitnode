@@ -51,7 +51,7 @@ export class UploadAvatarCoreMembersResolver {
 
   @Mutation(() => String)
   @UseGuards(AuthGuards)
-  async upload_avatar_core_members(
+  async core_members__avatar__upload(
     @CurrentUser() currentUser: User,
     @Args() args: UploadAvatarCoreMembersArgs
   ): Promise<string> {

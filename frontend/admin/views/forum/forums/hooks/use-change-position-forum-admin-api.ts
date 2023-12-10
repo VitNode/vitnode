@@ -2,19 +2,19 @@ import { useMutation } from '@tanstack/react-query';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
-  ChangePosition_Forum_Forums,
-  ChangePosition_Forum_ForumsMutation,
-  ChangePosition_Forum_ForumsMutationVariables
+  Forum_Forums__Admin__Change_Position,
+  Forum_Forums__Admin__Change_PositionMutation,
+  Forum_Forums__Admin__Change_PositionMutationVariables
 } from '@/graphql/hooks';
 
 export const useChangePositionForumAdminAPI = () => {
   return useMutation({
-    mutationFn: async (variables: ChangePosition_Forum_ForumsMutationVariables) =>
+    mutationFn: async (variables: Forum_Forums__Admin__Change_PositionMutationVariables) =>
       await fetcher<
-        ChangePosition_Forum_ForumsMutation,
-        ChangePosition_Forum_ForumsMutationVariables
+        Forum_Forums__Admin__Change_PositionMutation,
+        Forum_Forums__Admin__Change_PositionMutationVariables
       >({
-        query: ChangePosition_Forum_Forums,
+        query: Forum_Forums__Admin__Change_Position,
         variables
       })
   });

@@ -1,5 +1,0 @@
-query Layout_admin_install {
-  layout_admin_install {
-    status
-  }
-}

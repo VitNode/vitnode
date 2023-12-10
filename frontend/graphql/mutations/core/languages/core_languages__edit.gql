@@ -1,0 +1,22 @@
+mutation Core_languages__edit(
+  $default: Boolean!
+  $enabled: Boolean!
+  $id: String!
+  $name: String!
+  $timezone: String!
+) {
+  core_languages__edit(
+    default: $default
+    enabled: $enabled
+    id: $id
+    name: $name
+    timezone: $timezone
+  ) {
+    default
+    enabled
+    id
+    name
+    protected
+    timezone
+  }
+}

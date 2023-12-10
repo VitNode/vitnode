@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import { ShowForumForumsArgs } from './dto/show-forum_forums.args';
-import { ShowForumForumsObj } from './dto/show-forum_forums.obj';
+import { ShowForumForumsArgs } from './dto/show.args';
+import { ShowForumForumsObj } from './dto/show.obj';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { outputPagination } from '@/functions/database/pagination/outputPagination';

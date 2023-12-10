@@ -15,7 +15,7 @@ import { AuthGuards } from '@/utils/guards/auth.guards';
 
 @Query(() => ShowCoreMembersObj)
 @UseGuards(AuthGuards)
-async show_core_members(@Args() args: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
+async core_members__show(@Args() args: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
   return await this.service.show(args);
 }
 ```
@@ -34,7 +34,7 @@ import { CurrentUser, User } from '@/utils/decorators/user.decorator';
 
 @Query(() => ShowCoreMembersObj)
 @UseGuards(AuthGuards)
-async show_core_members(
+async core_members__show(
   @Args() args: ShowCoreMembersArgs,
   @CurrentUser() user: User
 ): Promise<ShowCoreMembersObj> {
@@ -53,7 +53,7 @@ import { CurrentUser, User } from '@/utils/decorators/user.decorator';
 @Query(() => ShowCoreMembersObj)
 @OptionalAuth()
 @UseGuards(AuthGuards)
-async show_core_members(
+async core_members__show(
   @Args() args: ShowCoreMembersArgs,
   @CurrentUser() user?: User
 ): Promise<ShowCoreMembersObj> {

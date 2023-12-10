@@ -60,7 +60,7 @@ export const LayoutInstallConfigsView = ({ children }: Props) => {
 
   if (isLoading) return <LoadingView />;
   if (isError || !data) return <InternalErrorView />;
-  if (data.layout_admin_install.status === LayoutAdminInstallEnum.finish) {
+  if (data.admin_install__layout.status === LayoutAdminInstallEnum.finish) {
     return <FinishInstallConfigsView />;
   }
 

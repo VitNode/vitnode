@@ -1,0 +1,11 @@
+query Core_languages__middleware {
+  core_languages__show {
+    edges {
+      id
+      name
+      enabled
+      timezone
+      default
+    }
+  }
+}

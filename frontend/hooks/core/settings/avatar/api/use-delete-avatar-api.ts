@@ -3,10 +3,10 @@ import { useTranslations } from 'next-intl';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Authorization_Core_SessionsQuery,
-  Delete_Avatar_Core_Members,
-  Delete_Avatar_Core_MembersMutation,
-  Delete_Avatar_Core_MembersMutationVariables
+  Core_Sessions__AuthorizationQuery,
+  Core_Members__Avatar__Delete,
+  Core_Members__Avatar__DeleteMutation,
+  Core_Members__Avatar__DeleteMutationVariables
 } from '@/graphql/hooks';
 import { useToast } from '@/components/ui/use-toast';
 import { useDialog } from '@/components/ui/dialog';
@@ -21,10 +21,10 @@ export const useDeleteAvatarAPI = () => {
   return useMutation({
     mutationFn: async () =>
       await fetcher<
-        Delete_Avatar_Core_MembersMutation,
-        Delete_Avatar_Core_MembersMutationVariables
+        Core_Members__Avatar__DeleteMutation,
+        Core_Members__Avatar__DeleteMutationVariables
       >({
-        query: Delete_Avatar_Core_Members
+        query: Core_Members__Avatar__Delete
       }),
     onSuccess: () => {
       toast({
@@ -32,16 +32,16 @@ export const useDeleteAvatarAPI = () => {
         description: t('settings.change_avatar.options.delete.success')
       });
 
-      queryClient.setQueryData<Authorization_Core_SessionsQuery>([APIKeys.AUTHORIZATION], old => {
+      queryClient.setQueryData<Core_Sessions__AuthorizationQuery>([APIKeys.AUTHORIZATION], old => {
         if (!old) return old;
 
         return {
           ...old,
-          authorization_core_sessions: {
-            ...old.authorization_core_sessions,
-            user: old.authorization_core_sessions.user
+          core_sessions__authorization: {
+            ...old.core_sessions__authorization,
+            user: old.core_sessions__authorization.user
               ? {
-                  ...old.authorization_core_sessions.user,
+                  ...old.core_sessions__authorization.user,
                   avatar: null
                 }
               : null

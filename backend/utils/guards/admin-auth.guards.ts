@@ -3,7 +3,7 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { Reflector } from '@nestjs/core';
 
 import { Ctx } from '@/types/context.type';
-import { AuthorizationAdminSessionsService } from '@/src/admin/sessions/authorization/authorization-admin_sessions.service';
+import { AuthorizationAdminSessionsService } from '@/src/admin/core/sessions/authorization/authorization.service';
 
 @Injectable()
 export class AdminAuthGuards implements CanActivate {

@@ -1,0 +1,53 @@
+query Core_members__admin__show(
+  $cursor: String
+  $first: Int
+  $last: Int
+  $search: String
+  $sortBy: [ShowAdminMembersSortByArgs!]
+  $groups: [String!]
+) {
+  core_members__admin__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+    search: $search
+    sortBy: $sortBy
+    groups: $groups
+  ) {
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+    edges {
+      avatar {
+        created
+        description
+        extension
+        file_size
+        id
+        member_id
+        mimetype
+        module
+        module_id
+        name
+        position
+        url
+      }
+      avatar_color
+      email
+      id
+      joined
+      name
+      group {
+        name {
+          id_language
+          value
+        }
+      }
+    }
+  }
+}

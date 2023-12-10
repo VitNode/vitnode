@@ -7,9 +7,9 @@ import { useQuery } from '@tanstack/react-query';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Authorization_Admin_Sessions,
-  Authorization_Admin_SessionsQuery,
-  Authorization_Admin_SessionsQueryVariables
+  Admin_Sessions__Authorization,
+  Admin_Sessions__AuthorizationQuery,
+  Admin_Sessions__AuthorizationQueryVariables
 } from '@/graphql/hooks';
 import { SessionAdminContext } from '@/admin/hooks/use-session-admin';
 import { APIKeys } from '@/graphql/api-keys';
@@ -23,8 +23,11 @@ export const SessionAdminProvider = ({ children }: Props) => {
   const { data } = useQuery({
     queryKey: [APIKeys.AUTHORIZATION_ADMIN],
     queryFn: async () =>
-      await fetcher<Authorization_Admin_SessionsQuery, Authorization_Admin_SessionsQueryVariables>({
-        query: Authorization_Admin_Sessions
+      await fetcher<
+        Admin_Sessions__AuthorizationQuery,
+        Admin_Sessions__AuthorizationQueryVariables
+      >({
+        query: Admin_Sessions__Authorization
       })
   });
 
@@ -33,7 +36,7 @@ export const SessionAdminProvider = ({ children }: Props) => {
   return (
     <SessionAdminContext.Provider
       value={{
-        session: data.authorization_admin_sessions.user,
+        session: data.admin_sessions__authorization.user,
         side_name: configs.side_name
       }}
     >

@@ -7,9 +7,9 @@ import { GroupsMembersAdminView } from '@/admin/views/members/groups/groups-memb
 import getQueryClient from '@/functions/get-query-client';
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Show_Admin_Groups,
-  Show_Admin_GroupsQuery,
-  Show_Admin_GroupsQueryVariables
+  Core_Groups__Admin__Show,
+  Core_Groups__Admin__ShowQuery,
+  Core_Groups__Admin__ShowQueryVariables
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
 import { emptyPagination } from '@/hooks/core/utils/use-pagination-api';
@@ -21,8 +21,8 @@ interface Props {
 }
 
 const getData = async () => {
-  return await fetcher<Show_Admin_GroupsQuery, Show_Admin_GroupsQueryVariables>({
-    query: Show_Admin_Groups,
+  return await fetcher<Core_Groups__Admin__ShowQuery, Core_Groups__Admin__ShowQueryVariables>({
+    query: Core_Groups__Admin__Show,
     variables: {
       first: 10
     },

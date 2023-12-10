@@ -1,8 +1,8 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 
 import { ShowForumForumsService } from './show-forum_forums.service';
-import { ShowForumForumsObj } from './dto/show-forum_forums.obj';
-import { ShowForumForumsArgs } from './dto/show-forum_forums.args';
+import { ShowForumForumsObj } from './dto/show.obj';
+import { ShowForumForumsArgs } from './dto/show.args';
 
 @Resolver()
 export class ShowForumCategoriesResolver {

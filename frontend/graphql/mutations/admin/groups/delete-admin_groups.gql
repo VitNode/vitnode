@@ -1,3 +1,0 @@
-mutation Delete_admin_groups($id: String!) {
-  delete_admin_groups(id: $id)
-}

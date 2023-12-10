@@ -3,9 +3,9 @@ import { useTranslations } from 'next-intl';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Delete_Admin_Groups,
-  Delete_Admin_GroupsMutation,
-  Delete_Admin_GroupsMutationVariables
+  Core_Groups__Admin__Delete,
+  Core_Groups__Admin__DeleteMutation,
+  Core_Groups__Admin__DeleteMutationVariables
 } from '@/graphql/hooks';
 import { useToast } from '@/components/ui/use-toast';
 import { APIKeys } from '@/graphql/api-keys';
@@ -22,9 +22,12 @@ export const useDeleteGroupAdminAPI = () => {
   const { push } = useRouter();
 
   return useMutation({
-    mutationFn: async (variables: Delete_Admin_GroupsMutationVariables) =>
-      await fetcher<Delete_Admin_GroupsMutation, Delete_Admin_GroupsMutationVariables>({
-        query: Delete_Admin_Groups,
+    mutationFn: async (variables: Core_Groups__Admin__DeleteMutationVariables) =>
+      await fetcher<
+        Core_Groups__Admin__DeleteMutation,
+        Core_Groups__Admin__DeleteMutationVariables
+      >({
+        query: Core_Groups__Admin__Delete,
         variables
       }),
     onError: () => {

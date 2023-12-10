@@ -6,9 +6,9 @@ import { LayoutInstallConfigsView } from '@/admin/configs/views/install/layout-i
 import getQueryClient from '@/functions/get-query-client';
 import { ErrorType, fetcher } from '@/graphql/fetcher';
 import {
-  Layout_Admin_Install,
-  Layout_Admin_InstallQuery,
-  Layout_Admin_InstallQueryVariables
+  Admin_Install__Layout,
+  Admin_Install__LayoutQuery,
+  Admin_Install__LayoutQueryVariables
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
 import { InternalErrorView } from '@/admin/global/internal-error-view';
@@ -19,8 +19,8 @@ interface Props {
 }
 
 const getData = async () => {
-  return await fetcher<Layout_Admin_InstallQuery, Layout_Admin_InstallQueryVariables>({
-    query: Layout_Admin_Install,
+  return await fetcher<Admin_Install__LayoutQuery, Admin_Install__LayoutQueryVariables>({
+    query: Admin_Install__Layout,
     headers: {
       Cookie: cookies().toString()
     }

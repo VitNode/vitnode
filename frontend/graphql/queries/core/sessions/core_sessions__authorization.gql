@@ -1,0 +1,33 @@
+query Core_sessions__authorization {
+  core_sessions__authorization {
+    user {
+      birthday
+      email
+      group_id
+      id
+      is_admin
+      name
+      newsletter
+      avatar_color
+      avatar {
+        created
+        description
+        extension
+        file_size
+        id
+        member_id
+        mimetype
+        module
+        module_id
+        name
+        position
+        url
+      }
+    }
+  }
+  core_languages__show {
+    edges {
+      id
+    }
+  }
+}

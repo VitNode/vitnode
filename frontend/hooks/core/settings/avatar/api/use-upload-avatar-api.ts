@@ -3,15 +3,14 @@ import { useTranslations } from 'next-intl';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Authorization_Core_SessionsQuery,
-  Upload_Avatar_Core_Members,
-  Upload_Avatar_Core_MembersMutation,
-  Upload_Avatar_Core_MembersMutationVariables
+  Core_Sessions__AuthorizationQuery,
+  Core_Members__Avatar__Upload,
+  Core_Members__Avatar__UploadMutation,
+  Core_Members__Avatar__UploadMutationVariables
 } from '@/graphql/hooks';
 import { useToast } from '@/components/ui/use-toast';
 import { useDialog } from '@/components/ui/dialog';
-
-import { APIKeys } from '../../../../../graphql/api-keys';
+import { APIKeys } from '@/graphql/api-keys';
 
 export const useUploadAvatarAPI = () => {
   const t = useTranslations('core');
@@ -20,12 +19,12 @@ export const useUploadAvatarAPI = () => {
   const { setOpen } = useDialog();
 
   return useMutation({
-    mutationFn: async ({ file }: Upload_Avatar_Core_MembersMutationVariables) =>
+    mutationFn: async ({ file }: Core_Members__Avatar__UploadMutationVariables) =>
       await fetcher<
-        Upload_Avatar_Core_MembersMutation,
-        Upload_Avatar_Core_MembersMutationVariables
+        Core_Members__Avatar__UploadMutation,
+        Core_Members__Avatar__UploadMutationVariables
       >({
-        query: Upload_Avatar_Core_Members,
+        query: Core_Members__Avatar__Upload,
         uploads: [
           {
             files: file,
@@ -39,17 +38,17 @@ export const useUploadAvatarAPI = () => {
         description: t('settings.change_avatar.options.upload.success')
       });
 
-      queryClient.setQueryData<Authorization_Core_SessionsQuery>([APIKeys.AUTHORIZATION], old => {
+      queryClient.setQueryData<Core_Sessions__AuthorizationQuery>([APIKeys.AUTHORIZATION], old => {
         if (!old) return old;
 
         return {
           ...old,
-          authorization_core_sessions: {
-            ...old.authorization_core_sessions,
-            user: old.authorization_core_sessions.user
+          core_sessions__authorization: {
+            ...old.core_sessions__authorization,
+            user: old.core_sessions__authorization.user
               ? {
-                  ...old.authorization_core_sessions.user,
-                  avatar: data.upload_avatar_core_members
+                  ...old.core_sessions__authorization.user,
+                  avatar: data.core_members__avatar__upload
                 }
               : null
           }

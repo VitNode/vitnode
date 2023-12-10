@@ -1,0 +1,5 @@
+mutation Admin_settings__general__edit($sideName: String!) {
+  admin_settings__general__edit(side_name: $sideName) {
+    side_name
+  }
+}
