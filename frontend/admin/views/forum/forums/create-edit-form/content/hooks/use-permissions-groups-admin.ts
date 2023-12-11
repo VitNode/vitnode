@@ -13,7 +13,7 @@ interface Args {
 }
 
 export const usePermissionsGroupsAdminAPI = ({ searchValue }: Args) => {
-  return useQuery({
+  const query = useQuery({
     queryKey: [APIKeys.GROUPS_MEMBERS_FORUMS_ADMIN, { search: searchValue }],
     queryFn: async () => {
       return await fetcher<
@@ -28,4 +28,6 @@ export const usePermissionsGroupsAdminAPI = ({ searchValue }: Args) => {
     },
     placeholderData: previousData => previousData
   });
+
+  return { ...query, data: query.data?.core_groups__admin__show.edges ?? [] };
 };

@@ -14,7 +14,7 @@ const MainContentCreateEditFormForumAdmin = lazy(() =>
   }))
 );
 const PermissionsContentCreateEditFormForumAdmin = lazy(() =>
-  import('./content/permissions').then(module => ({
+  import('./content/permissions/permissions').then(module => ({
     default: module.PermissionsContentCreateEditFormForumAdmin
   }))
 );

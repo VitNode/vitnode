@@ -12,14 +12,36 @@ export const useCreateEditFormForumAdmin = () => {
 
   const formSchema = z.object({
     name: zodTextLanguageInputType.min(1, t('forms.empty')),
-    description: zodTextLanguageInputType
+    description: zodTextLanguageInputType,
+    permissions: z.object({
+      can_all_view: z.boolean(),
+      can_all_read: z.boolean(),
+      can_all_create: z.boolean(),
+      can_all_reply: z.boolean(),
+      groups: z.array(
+        z.object({
+          id: z.string(),
+          view: z.boolean(),
+          read: z.boolean(),
+          create: z.boolean(),
+          reply: z.boolean()
+        })
+      )
+    })
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: [],
-      description: []
+      description: [],
+      permissions: {
+        can_all_view: false,
+        can_all_read: false,
+        can_all_create: false,
+        can_all_reply: false,
+        groups: []
+      }
     },
     mode: 'onChange'
   });
