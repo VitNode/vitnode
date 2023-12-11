@@ -154,7 +154,6 @@ model forum_forums {
   created        Int
   parent_id      String?
   position       Int
-  is_category    Boolean @default(false)
   views          Int     @default(0)
   can_all_view   Boolean @default(false)
   can_all_read   Boolean @default(false)

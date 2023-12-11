@@ -49,9 +49,6 @@ export class CreateForumForumsArgs {
   @Field(() => String, { nullable: true })
   parent_id: string | null;
 
-  @Field(() => Boolean, { nullable: true })
-  is_category: boolean | null;
-
   @Field(() => PermissionsCreateForumForums)
   permissions: PermissionsCreateForumForums;
 }

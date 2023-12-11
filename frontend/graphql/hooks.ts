@@ -149,7 +149,6 @@ export type MutationForum_Forums__Admin__Change_PositionArgs = {
 
 export type MutationForum_Forums__Admin__CreateArgs = {
   description: Array<TextLanguageInput>;
-  is_category?: InputMaybe<Scalars['Boolean']['input']>;
   name: Array<TextLanguageInput>;
   parent_id?: InputMaybe<Scalars['String']['input']>;
   permissions: PermissionsCreateForumForums;
@@ -366,7 +365,6 @@ export type ShowForumForums = {
   created: Scalars['Int']['output'];
   description: Array<TextLanguage>;
   id: Scalars['String']['output'];
-  is_category: Scalars['Boolean']['output'];
   name: Array<TextLanguage>;
   position: Scalars['Int']['output'];
   views: Scalars['Int']['output'];
@@ -390,7 +388,6 @@ export type ShowForumForumsWithParent = {
   created: Scalars['Int']['output'];
   description: Array<TextLanguage>;
   id: Scalars['String']['output'];
-  is_category: Scalars['Boolean']['output'];
   name: Array<TextLanguage>;
   parent?: Maybe<ShowForumForums>;
   position: Scalars['Int']['output'];
@@ -457,12 +454,11 @@ export type Forum_Forums__Admin__CreateMutationVariables = Exact<{
   name: Array<TextLanguageInput> | TextLanguageInput;
   description: Array<TextLanguageInput> | TextLanguageInput;
   parentId?: InputMaybe<Scalars['String']['input']>;
-  isCategory?: InputMaybe<Scalars['Boolean']['input']>;
   permissions: PermissionsCreateForumForums;
 }>;
 
 
-export type Forum_Forums__Admin__CreateMutation = { __typename?: 'Mutation', forum_forums__admin__create: { __typename?: 'ShowForumForumsWithParent', created: number, id: string, is_category: boolean, position: number, views: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
+export type Forum_Forums__Admin__CreateMutation = { __typename?: 'Mutation', forum_forums__admin__create: { __typename?: 'ShowForumForumsWithParent', created: number, id: string, position: number, views: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
 
 export type Core_Groups__Admin__DeleteMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -559,7 +555,7 @@ export type Forum_Forums__Admin__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Forum_Forums__Admin__ShowQuery = { __typename?: 'Query', forum_forums__admin__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, is_category: boolean, position: number, views: number, created: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', created: number, id: string, is_category: boolean, position: number, views: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, _count: { __typename?: 'ShowForumForumsCount', children: number } }> | null, _count: { __typename?: 'ShowForumForumsCount', children: number } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
+export type Forum_Forums__Admin__ShowQuery = { __typename?: 'Query', forum_forums__admin__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, position: number, views: number, created: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', created: number, id: string, position: number, views: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, _count: { __typename?: 'ShowForumForumsCount', children: number } }> | null, _count: { __typename?: 'ShowForumForumsCount', children: number } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
 
 export type Core_Groups__Admin__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -640,12 +636,11 @@ export const Forum_Forums__Admin__Change_Position = gql`
 }
     `;
 export const Forum_Forums__Admin__Create = gql`
-    mutation Forum_forums__admin__create($name: [TextLanguageInput!]!, $description: [TextLanguageInput!]!, $parentId: String, $isCategory: Boolean, $permissions: PermissionsCreateForumForums!) {
+    mutation Forum_forums__admin__create($name: [TextLanguageInput!]!, $description: [TextLanguageInput!]!, $parentId: String, $permissions: PermissionsCreateForumForums!) {
   forum_forums__admin__create(
     name: $name
     description: $description
     parent_id: $parentId
-    is_category: $isCategory
     permissions: $permissions
   ) {
     created
@@ -654,7 +649,6 @@ export const Forum_Forums__Admin__Create = gql`
       value
     }
     id
-    is_category
     name {
       id_language
       value
@@ -797,7 +791,6 @@ export const Forum_Forums__Admin__Show = gql`
   forum_forums__admin__show(first: $first, cursor: $cursor, parent_id: $parentId) {
     edges {
       id
-      is_category
       description {
         id_language
         value
@@ -816,7 +809,6 @@ export const Forum_Forums__Admin__Show = gql`
           value
         }
         id
-        is_category
         name {
           id_language
           value

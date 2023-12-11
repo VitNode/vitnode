@@ -13,17 +13,9 @@ export class CreateForumForumsService {
 
   async create({
     description,
-    is_category,
     name,
     parent_id
   }: CreateForumForumsArgs): Promise<ShowForumForumsWithParent> {
-    if (!parent_id && !is_category) {
-      throw new CustomError({
-        code: 'FORUMS_CREATE_WITHOUT_CATEGORY',
-        message: "You can't create a forum without a category"
-      });
-    }
-
     if (parent_id) {
       const parent = await this.prisma.forum_forums.findUnique({
         where: {
@@ -57,7 +49,6 @@ export class CreateForumForumsService {
           create: description
         },
         position: theMostHighestPosition ? theMostHighestPosition.position + 1 : 0,
-        is_category,
         created: currentDate(),
         parent: parent_id
           ? {

@@ -62,7 +62,7 @@ type Mutation {
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
   forum_forums__admin__change_position(id: String!, index_to_move: Int!, parent_id: String): String!
-  forum_forums__admin__create(description: [TextLanguageInput!]!, is_category: Boolean, name: [TextLanguageInput!]!, parent_id: String, permissions: PermissionsCreateForumForums!): ShowForumForumsWithParent!
+  forum_forums__admin__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: String, permissions: PermissionsCreateForumForums!): ShowForumForumsWithParent!
 }
 
 type PageInfo {
@@ -210,7 +210,6 @@ type ShowForumForums {
   created: Int!
   description: [TextLanguage!]!
   id: String!
-  is_category: Boolean!
   name: [TextLanguage!]!
   position: Int!
   views: Int!
@@ -231,7 +230,6 @@ type ShowForumForumsWithParent {
   created: Int!
   description: [TextLanguage!]!
   id: String!
-  is_category: Boolean!
   name: [TextLanguage!]!
   parent: ShowForumForums
   position: Int!

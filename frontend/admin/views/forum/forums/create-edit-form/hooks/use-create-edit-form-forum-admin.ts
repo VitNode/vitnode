@@ -50,7 +50,6 @@ export const useCreateEditFormForumAdmin = () => {
     await mutateAsync({
       name: values.name,
       description: values.description,
-      isCategory: true,
       permissions: values.permissions
     });
   };

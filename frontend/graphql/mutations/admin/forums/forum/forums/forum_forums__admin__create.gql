@@ -2,14 +2,12 @@ mutation Forum_forums__admin__create(
   $name: [TextLanguageInput!]!
   $description: [TextLanguageInput!]!
   $parentId: String
-  $isCategory: Boolean
   $permissions: PermissionsCreateForumForums!
 ) {
   forum_forums__admin__create(
     name: $name
     description: $description
     parent_id: $parentId
-    is_category: $isCategory
     permissions: $permissions
   ) {
     created
@@ -18,7 +16,6 @@ mutation Forum_forums__admin__create(
       value
     }
     id
-    is_category
     name {
       id_language
       value

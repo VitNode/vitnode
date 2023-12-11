@@ -37,9 +37,6 @@ class ShowForumForums {
   @Field(() => Int)
   views: number;
 
-  @Field(() => Boolean)
-  is_category: boolean;
-
   @Field(() => ShowForumForumsCount)
   _count: ShowForumForumsCount;
 }
