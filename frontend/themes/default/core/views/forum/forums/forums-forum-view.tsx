@@ -1,13 +1,25 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+'use client';
+
+import { Components, Virtuoso } from 'react-virtuoso';
+import { forwardRef } from 'react';
+
+import { CategoryForum } from './item';
 
 export const ForumsForumView = () => {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>ForumsForumView</CardTitle>
-      </CardHeader>
+  const List: Components['List'] = forwardRef((props, ref) => {
+    return <div className="flex flex-col gap-4" {...props} ref={ref} />;
+  });
 
-      <CardContent>ForumsForumView</CardContent>
-    </Card>
+  List.displayName = 'List';
+
+  return (
+    <Virtuoso
+      totalCount={200}
+      useWindowScroll
+      components={{
+        List
+      }}
+      itemContent={index => <CategoryForum index={index} />}
+    />
   );
 };
