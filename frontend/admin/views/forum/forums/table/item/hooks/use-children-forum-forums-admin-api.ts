@@ -6,9 +6,9 @@ import {
   Maybe,
   ShowForumForums,
   ShowForumForumsWithParent,
-  Show_Forum_Forums_Admin,
-  Show_Forum_Forums_AdminQuery,
-  Show_Forum_Forums_AdminQueryVariables
+  Forum_Forums__Admin__Show,
+  Forum_Forums__Admin__ShowQuery,
+  Forum_Forums__Admin__ShowQueryVariables
 } from '@/graphql/hooks';
 
 interface Args {
@@ -22,7 +22,7 @@ const updateState = ({
   edges,
   parentId
 }: {
-  data: Show_Forum_Forums_AdminQuery;
+  data: Forum_Forums__Admin__ShowQuery;
   edges: ShowForumForumsWithParent[];
   parentId: string;
 }): ShowForumForumsWithParent[] => {
@@ -30,7 +30,7 @@ const updateState = ({
     if (edge.id === parentId) {
       return {
         ...edge,
-        children: data.show_forum_forums.edges as unknown as Maybe<ShowForumForums[]>
+        children: data.forum_forums__admin__show.edges as unknown as Maybe<ShowForumForums[]>
       };
     }
 
@@ -55,16 +55,16 @@ export const useChildrenForumForumsAdminAPI = ({ enabled, parentId }: Args) => {
     queryKey: [APIKeys.FORUMS_CHILDREN_ADMIN, { parentId }],
     queryFn: async () => {
       const data = await fetcher<
-        Show_Forum_Forums_AdminQuery,
-        Show_Forum_Forums_AdminQueryVariables
+        Forum_Forums__Admin__ShowQuery,
+        Forum_Forums__Admin__ShowQueryVariables
       >({
-        query: Show_Forum_Forums_Admin,
+        query: Forum_Forums__Admin__Show,
         variables: {
           parentId
         }
       });
 
-      queryClient.setQueryData<InfiniteData<Show_Forum_Forums_AdminQuery>>(
+      queryClient.setQueryData<InfiniteData<Forum_Forums__Admin__ShowQuery>>(
         [APIKeys.FORUMS_ADMIN],
         old => {
           if (!old) return old;
@@ -73,11 +73,11 @@ export const useChildrenForumForumsAdminAPI = ({ enabled, parentId }: Args) => {
             ...old,
             pages: old.pages.map(page => ({
               ...page,
-              show_forum_forums: {
-                ...page.show_forum_forums,
+              forum_forums__admin__show: {
+                ...page.forum_forums__admin__show,
                 edges: updateState({
                   parentId,
-                  edges: page.show_forum_forums.edges,
+                  edges: page.forum_forums__admin__show.edges,
                   data
                 })
               }

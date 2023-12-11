@@ -26,7 +26,7 @@ export const ActionsForumsForumAdmin = () => {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-w-4xl">
+      <DialogContent className="max-w-6xl">
         <Suspense fallback={<Loader />}>
           <CreateEditFormForumAdmin />
         </Suspense>

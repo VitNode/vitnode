@@ -138,11 +138,12 @@
           "title": "Stwórz forum"
         },
         "create_edit": {
-          "form": {
-            "name": {
-              "label": "Nazwa"
-            }
-          }
+          "tabs": {
+            "main": "Główne",
+            "permissions": "Uprawnienia"
+          },
+          "name": "Nazwa",
+          "desc": "Opis"
         }
       }
     }

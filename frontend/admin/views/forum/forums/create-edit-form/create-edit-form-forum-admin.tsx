@@ -2,22 +2,26 @@ import { useTranslations } from 'next-intl';
 import { Suspense, lazy, useState } from 'react';
 
 import { DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useCreateEditFormForumAdmin } from './hooks/use-create-edit-form-forum-admin.ts';
-import { Form, FormField, FormItem } from '@/components/ui/form';
+import { useCreateEditFormForumAdmin } from './hooks/use-create-edit-form-forum-admin';
+import { Form } from '@/components/ui/form';
 import { Tabs } from '@/components/tabs/tabs';
 import { Loader } from '@/components/loader/loader';
 import { Button } from '@/components/ui/button';
-import { Editor } from '@/components/editor/editor';
 
 const MainContentCreateEditFormForumAdmin = lazy(() =>
   import('./content/main').then(module => ({
     default: module.MainContentCreateEditFormForumAdmin
   }))
 );
+const PermissionsContentCreateEditFormForumAdmin = lazy(() =>
+  import('./content/permissions/permissions').then(module => ({
+    default: module.PermissionsContentCreateEditFormForumAdmin
+  }))
+);
 
 enum TabsEnum {
   MAIN = 'main',
-  CONTENT = 'content'
+  PERMISSIONS = 'permissions'
 }
 
 export const CreateEditFormForumAdmin = () => {
@@ -28,7 +32,7 @@ export const CreateEditFormForumAdmin = () => {
 
   const tabsContent = {
     [TabsEnum.MAIN]: <MainContentCreateEditFormForumAdmin />,
-    [TabsEnum.CONTENT]: <div>test</div>
+    [TabsEnum.PERMISSIONS]: <PermissionsContentCreateEditFormForumAdmin />
   };
 
   return (
@@ -41,15 +45,15 @@ export const CreateEditFormForumAdmin = () => {
         items={[
           {
             id: 'main',
-            text: 'Main',
+            text: t('create_edit.tabs.main'),
             active: activeTab === TabsEnum.MAIN,
             onClick: () => setActiveTab(TabsEnum.MAIN)
           },
           {
-            id: 'content',
-            text: 'Content',
-            active: activeTab === TabsEnum.CONTENT,
-            onClick: () => setActiveTab(TabsEnum.CONTENT)
+            id: 'permissions',
+            text: t('create_edit.tabs.permissions'),
+            active: activeTab === TabsEnum.PERMISSIONS,
+            onClick: () => setActiveTab(TabsEnum.PERMISSIONS)
           }
         ]}
       />
@@ -57,16 +61,6 @@ export const CreateEditFormForumAdmin = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <Suspense fallback={<Loader />}>{tabsContent[activeTab]}</Suspense>
-
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <Editor id="forum_create" onChange={field.onChange} value={field.value} />
-              </FormItem>
-            )}
-          />
 
           <Button disabled={!form.formState.isValid} loading={isPending} type="submit">
             {tCore('save')}

@@ -9,9 +9,9 @@ import { useTextLang } from '@/hooks/core/use-text-lang';
 import { cx } from '@/functions/classnames';
 import { useChildrenForumForumsAdminAPI } from './hooks/use-children-forum-forums-admin-api';
 import { GlobalLoader } from '@/components/loader/global/global-loader';
-import { Show_Forum_ForumsQueryFlattenedItem } from '../types';
+import { Forum_Forums__Admin__ShowFlattenedItem } from '../types';
 
-interface Props extends Show_Forum_ForumsQueryFlattenedItem {
+interface Props extends Forum_Forums__Admin__ShowFlattenedItem {
   indentationWidth: number;
   isOpenChildren: boolean;
   isDropHere?: boolean;

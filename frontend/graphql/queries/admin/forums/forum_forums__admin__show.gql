@@ -1,8 +1,7 @@
-query Show_forum_forums_admin($first: Int, $cursor: String, $parentId: String) {
-  show_forum_forums(first: $first, cursor: $cursor, parent_id: $parentId) {
+query Forum_forums__admin__show($first: Int, $cursor: String, $parentId: String) {
+  forum_forums__admin__show(first: $first, cursor: $cursor, parent_id: $parentId) {
     edges {
       id
-      is_category
       description {
         id_language
         value
@@ -21,7 +20,6 @@ query Show_forum_forums_admin($first: Int, $cursor: String, $parentId: String) {
           value
         }
         id
-        is_category
         name {
           id_language
           value

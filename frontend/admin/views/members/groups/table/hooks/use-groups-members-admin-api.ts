@@ -11,7 +11,7 @@ import { APIKeys } from '@/graphql/api-keys';
 import { usePaginationAPI } from '@/hooks/core/utils/use-pagination-api';
 
 export const useGroupMembersAdminAPI = () => {
-  const defaultPageSize = 10;
+  const defaultPageSize = 25;
   const variables = usePaginationAPI({
     sortByEnum: ShowAdminGroupsSortingColumnEnum,
     defaultPageSize
