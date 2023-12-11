@@ -3,12 +3,14 @@ mutation Forum_forums__admin__create(
   $description: [TextLanguageInput!]!
   $parentId: String
   $isCategory: Boolean
+  $permissions: PermissionsCreateForumForums!
 ) {
   forum_forums__admin__create(
     name: $name
     description: $description
     parent_id: $parentId
     is_category: $isCategory
+    permissions: $permissions
   ) {
     created
     description {

@@ -49,6 +49,14 @@ export type GroupShowCoreMembers = {
   name: Array<TextLanguage>;
 };
 
+export type GroupsPermissionsCreateForumForums = {
+  create: Scalars['Boolean']['input'];
+  id: Scalars['String']['input'];
+  read: Scalars['Boolean']['input'];
+  reply: Scalars['Boolean']['input'];
+  view: Scalars['Boolean']['input'];
+};
+
 export const LayoutAdminInstallEnum = {
   account: 'ACCOUNT',
   database: 'DATABASE',
@@ -144,6 +152,7 @@ export type MutationForum_Forums__Admin__CreateArgs = {
   is_category?: InputMaybe<Scalars['Boolean']['input']>;
   name: Array<TextLanguageInput>;
   parent_id?: InputMaybe<Scalars['String']['input']>;
+  permissions: PermissionsCreateForumForums;
 };
 
 export type PageInfo = {
@@ -154,6 +163,14 @@ export type PageInfo = {
   hasPreviousPage: Scalars['Boolean']['output'];
   startCursor: Scalars['String']['output'];
   totalCount: Scalars['Float']['output'];
+};
+
+export type PermissionsCreateForumForums = {
+  can_all_create: Scalars['Boolean']['input'];
+  can_all_read: Scalars['Boolean']['input'];
+  can_all_reply: Scalars['Boolean']['input'];
+  can_all_view: Scalars['Boolean']['input'];
+  groups: Array<GroupsPermissionsCreateForumForums>;
 };
 
 export type Query = {
@@ -441,6 +458,7 @@ export type Forum_Forums__Admin__CreateMutationVariables = Exact<{
   description: Array<TextLanguageInput> | TextLanguageInput;
   parentId?: InputMaybe<Scalars['String']['input']>;
   isCategory?: InputMaybe<Scalars['Boolean']['input']>;
+  permissions: PermissionsCreateForumForums;
 }>;
 
 
@@ -622,12 +640,13 @@ export const Forum_Forums__Admin__Change_Position = gql`
 }
     `;
 export const Forum_Forums__Admin__Create = gql`
-    mutation Forum_forums__admin__create($name: [TextLanguageInput!]!, $description: [TextLanguageInput!]!, $parentId: String, $isCategory: Boolean) {
+    mutation Forum_forums__admin__create($name: [TextLanguageInput!]!, $description: [TextLanguageInput!]!, $parentId: String, $isCategory: Boolean, $permissions: PermissionsCreateForumForums!) {
   forum_forums__admin__create(
     name: $name
     description: $description
     parent_id: $parentId
     is_category: $isCategory
+    permissions: $permissions
   ) {
     created
     description {

@@ -30,6 +30,14 @@ type GroupShowCoreMembers {
   name: [TextLanguage!]!
 }
 
+input GroupsPermissionsCreateForumForums {
+  create: Boolean!
+  id: String!
+  read: Boolean!
+  reply: Boolean!
+  view: Boolean!
+}
+
 enum LayoutAdminInstallEnum {
   ACCOUNT
   DATABASE
@@ -54,7 +62,7 @@ type Mutation {
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
   forum_forums__admin__change_position(id: String!, index_to_move: Int!, parent_id: String): String!
-  forum_forums__admin__create(description: [TextLanguageInput!]!, is_category: Boolean, name: [TextLanguageInput!]!, parent_id: String): ShowForumForumsWithParent!
+  forum_forums__admin__create(description: [TextLanguageInput!]!, is_category: Boolean, name: [TextLanguageInput!]!, parent_id: String, permissions: PermissionsCreateForumForums!): ShowForumForumsWithParent!
 }
 
 type PageInfo {
@@ -64,6 +72,14 @@ type PageInfo {
   hasPreviousPage: Boolean!
   startCursor: String!
   totalCount: Float!
+}
+
+input PermissionsCreateForumForums {
+  can_all_create: Boolean!
+  can_all_read: Boolean!
+  can_all_reply: Boolean!
+  can_all_view: Boolean!
+  groups: [GroupsPermissionsCreateForumForums!]!
 }
 
 type Query {
