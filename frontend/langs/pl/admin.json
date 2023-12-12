@@ -146,7 +146,7 @@
           "desc": "Opis",
           "name_seo": {
             "label": "Nazwa SEO",
-            "desc": "Twój link URL: <link></link>",
+            "desc": "Rekomendowane dla SEO. Twój link URL: <link></link>",
             "random": "randomowa_liczba",
             "already_exists": "Ta nazwa SEO jest już zajęta."
           }

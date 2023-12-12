@@ -16,26 +16,26 @@ export class ShowForumForumsService {
   async show({
     cursor,
     first,
-    ids,
     last,
+    name_seo,
     parent_id
   }: ShowForumForumsArgs): Promise<ShowForumForumsObj> {
-    const where: Prisma.forum_forumsWhereInput = {
-      OR: [
-        {
-          id: {
-            in: ids
+    const whereWithoutNameSEO: Prisma.forum_forumsWhereInput = {
+      parent_id: parent_id
+        ? parent_id
+        : {
+            in: null
           }
-        },
-        {
-          parent_id: parent_id
-            ? parent_id
-            : {
-                in: null
-              }
-        }
-      ]
     };
+
+    const whereWithNameSEO: Prisma.forum_forumsWhereInput = {
+      name_seo,
+      parent_id: {
+        not: null
+      }
+    };
+
+    const where = name_seo ? whereWithNameSEO : whereWithoutNameSEO;
 
     const [edges, totalCount] = await this.prisma.$transaction([
       this.prisma.forum_forums.findMany({

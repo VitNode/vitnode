@@ -226,8 +226,8 @@ export type QueryCore_Members__ShowArgs = {
 export type QueryForum_Forums__Admin__ShowArgs = {
   cursor?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
-  ids?: InputMaybe<Array<Scalars['String']['input']>>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  name_seo?: InputMaybe<Scalars['String']['input']>;
   parent_id?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -235,8 +235,8 @@ export type QueryForum_Forums__Admin__ShowArgs = {
 export type QueryForum_Forums__ShowArgs = {
   cursor?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
-  ids?: InputMaybe<Array<Scalars['String']['input']>>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  name_seo?: InputMaybe<Scalars['String']['input']>;
   parent_id?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -646,6 +646,13 @@ export type Forum_Forums__ShowQueryVariables = Exact<{
 
 
 export type Forum_Forums__ShowQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number }, edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, name_seo: string, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForumsChildren', id: string, name_seo: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', id: string, name_seo: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null }> } };
+
+export type Forum_Forums__Show_ItemQueryVariables = Exact<{
+  nameSeo?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Forum_Forums__Show_ItemQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number }, edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, name_seo: string, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForumsChildren', id: string, name_seo: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', id: string, name_seo: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null }> } };
 
 
 export const Admin_Install__Create_Database = gql`
@@ -1097,6 +1104,52 @@ export const Core_Sessions__Authorization = gql`
 export const Forum_Forums__Show = gql`
     query Forum_forums__show($cursor: String, $first: Int) {
   forum_forums__show(cursor: $cursor, first: $first) {
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+    edges {
+      id
+      name_seo
+      description {
+        id_language
+        value
+      }
+      name {
+        id_language
+        value
+      }
+      children {
+        id
+        name_seo
+        name {
+          id_language
+          value
+        }
+        children {
+          id
+          name_seo
+          name {
+            id_language
+            value
+          }
+        }
+        description {
+          id_language
+          value
+        }
+      }
+    }
+  }
+}
+    `;
+export const Forum_Forums__Show_Item = gql`
+    query Forum_forums__show_item($nameSeo: String) {
+  forum_forums__show(name_seo: $nameSeo) {
     pageInfo {
       count
       endCursor

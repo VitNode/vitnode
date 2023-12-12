@@ -13,10 +13,11 @@ import { useTextLang } from '@/hooks/core/use-text-lang';
 interface Props {
   id: string;
   name: TextLanguage[];
+  name_seo: string;
   children?: ItemForumProps[] | null;
 }
 
-export const CategoryForum = ({ children, id, name }: Props) => {
+export const CategoryForum = ({ children, name, name_seo }: Props) => {
   const [isClose, setClose] = useState(false);
   const { convertText } = useTextLang();
 
@@ -30,7 +31,7 @@ export const CategoryForum = ({ children, id, name }: Props) => {
         >
           <div>
             <h2 className="font-medium text-xl">
-              <Link href={`/forum/${id}`} className="text-foreground no-underline">
+              <Link href={`/forum/${name_seo}`} className="text-foreground no-underline">
                 {convertText(name)}
               </Link>
             </h2>

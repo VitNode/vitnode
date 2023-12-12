@@ -1,0 +1,44 @@
+query Forum_forums__show_item($nameSeo: String) {
+  forum_forums__show(name_seo: $nameSeo) {
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+    edges {
+      id
+      name_seo
+      description {
+        id_language
+        value
+      }
+      name {
+        id_language
+        value
+      }
+      children {
+        id
+        name_seo
+        name {
+          id_language
+          value
+        }
+        children {
+          id
+          name_seo
+          name {
+            id_language
+            value
+          }
+        }
+        description {
+          id_language
+          value
+        }
+      }
+    }
+  }
+}

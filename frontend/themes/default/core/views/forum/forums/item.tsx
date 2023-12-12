@@ -9,10 +9,11 @@ export interface ItemForumProps {
   description: TextLanguage[];
   id: string;
   name: TextLanguage[];
+  name_seo: string;
   children?: Omit<ItemForumProps, 'description'>[] | null;
 }
 
-export const ItemForum = ({ children, id, name }: ItemForumProps) => {
+export const ItemForum = ({ children, name, name_seo }: ItemForumProps) => {
   const { convertText } = useTextLang();
 
   return (
@@ -24,7 +25,7 @@ export const ItemForum = ({ children, id, name }: ItemForumProps) => {
 
         <div className="flex flex-col justify-center">
           <h3 className="text-lg font-medium">
-            <Link href={`/forum/${id}`} className="text-foreground no-underline">
+            <Link href={`/forum/${name_seo}`} className="text-foreground no-underline">
               {convertText(name)}
             </Link>
           </h3>
@@ -35,7 +36,7 @@ export const ItemForum = ({ children, id, name }: ItemForumProps) => {
               {children.map(child => (
                 <Link
                   key={child.id}
-                  href={`/forum/${child.id}`}
+                  href={`/forum/${child.name_seo}`}
                   className={buttonVariants({
                     variant: 'ghost',
                     size: 'sm',

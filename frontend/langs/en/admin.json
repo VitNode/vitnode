@@ -146,7 +146,7 @@
           "desc": "Description",
           "name_seo": {
             "label": "Name SEO",
-            "desc": "Your link URL: <link></link>",
+            "desc": "Recommend for SEO. Your link URL: <link></link>",
             "random": "random_number",
             "already_exists": "This name SEO already exists"
           }
