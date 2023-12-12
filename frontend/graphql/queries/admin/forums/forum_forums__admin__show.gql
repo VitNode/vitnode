@@ -16,6 +16,7 @@ query Forum_forums__admin__show($first: Int, $cursor: String, $parentId: String)
       created
       children {
         created
+        name_seo
         description {
           id_language
           value
