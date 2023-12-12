@@ -6,6 +6,7 @@ import { ShowForumForumsWithParent } from '../../../../forums/forums/show/dto/sh
 import { PrismaService } from '@/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';
 import { currentDate } from '@/functions/date';
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
 export class CreateForumForumsService {
@@ -73,12 +74,33 @@ export class CreateForumForumsService {
           }
         },
         children: {
+          orderBy: [
+            {
+              position: SortDirectionEnum.asc
+            }
+          ],
           include: {
             name: true,
             description: true,
             _count: {
               select: {
                 children: true
+              }
+            },
+            children: {
+              orderBy: [
+                {
+                  position: SortDirectionEnum.asc
+                }
+              ],
+              include: {
+                name: true,
+                description: true,
+                _count: {
+                  select: {
+                    children: true
+                  }
+                }
               }
             }
           }

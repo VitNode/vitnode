@@ -91,7 +91,7 @@ type Query {
   core_members__show(cursor: String, findByIds: [String!], first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   forum_forums__admin__show(cursor: String, first: Int, last: Int, parent_id: String): ShowForumForumsObj!
-  show_forum_forums(cursor: String, first: Int, last: Int, parent_id: String): ShowForumForumsObj!
+  forum_forums__show(cursor: String, first: Int, last: Int, parent_id: String): ShowForumForumsObj!
 }
 
 type ShowAdminGroups {
@@ -215,6 +215,17 @@ type ShowForumForums {
   views: Int!
 }
 
+type ShowForumForumsChildren {
+  _count: ShowForumForumsCount!
+  children: [ShowForumForums!]
+  created: Int!
+  description: [TextLanguage!]!
+  id: String!
+  name: [TextLanguage!]!
+  position: Int!
+  views: Int!
+}
+
 type ShowForumForumsCount {
   children: Int!
 }
@@ -226,7 +237,7 @@ type ShowForumForumsObj {
 
 type ShowForumForumsWithParent {
   _count: ShowForumForumsCount!
-  children: [ShowForumForums!]
+  children: [ShowForumForumsChildren!]
   created: Int!
   description: [TextLanguage!]!
   id: String!

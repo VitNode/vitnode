@@ -6,31 +6,36 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from '@/i18n';
 import { cx } from '@/functions/classnames';
-import { ItemForum } from './item';
+import { ItemForum, ItemForumProps } from './item';
+import { TextLanguage } from '@/graphql/hooks';
+import { useTextLang } from '@/hooks/core/use-text-lang';
 
 interface Props {
-  index: number;
+  id: string;
+  name: TextLanguage[];
+  children?: ItemForumProps[] | null;
 }
 
-export const CategoryForum = ({ index }: Props) => {
+export const CategoryForum = ({ children, id, name }: Props) => {
   const [isClose, setClose] = useState(false);
+  const { convertText } = useTextLang();
 
   return (
     <Card>
       <CardContent className="p-0">
         <div
           className={cx('px-6 py-4 flex items-start gap-4 justify-between', {
-            'border-b': !isClose
+            'border-b': !isClose && children && children.length > 0
           })}
         >
           <div>
             <h2 className="font-medium text-xl">
-              <Link href="/forum/test" className="text-foreground no-underline">
-                Test {index}
+              <Link href={`/forum/${id}`} className="text-foreground no-underline">
+                {convertText(name)}
               </Link>
             </h2>
 
-            <p className="text-muted-foreground text-sm">Test description {index}</p>
+            <p className="text-muted-foreground text-sm">Test description s</p>
           </div>
 
           <Button
@@ -48,7 +53,7 @@ export const CategoryForum = ({ index }: Props) => {
         </div>
 
         <AnimatePresence initial={false}>
-          {!isClose && (
+          {!isClose && children && children.length > 0 && (
             <motion.div
               key="content"
               initial="collapsed"
@@ -59,9 +64,9 @@ export const CategoryForum = ({ index }: Props) => {
                 collapsed: { opacity: 0, height: 0 }
               }}
             >
-              <ItemForum />
-              <ItemForum />
-              <ItemForum />
+              {children.map(child => (
+                <ItemForum key={child.id} {...child} />
+              ))}
             </motion.div>
           )}
         </AnimatePresence>

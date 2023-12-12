@@ -182,7 +182,7 @@ export type Query = {
   core_members__show: ShowCoreMembersObj;
   core_sessions__authorization: AuthorizationCoreSessionsObj;
   forum_forums__admin__show: ShowForumForumsObj;
-  show_forum_forums: ShowForumForumsObj;
+  forum_forums__show: ShowForumForumsObj;
 };
 
 
@@ -230,7 +230,7 @@ export type QueryForum_Forums__Admin__ShowArgs = {
 };
 
 
-export type QueryShow_Forum_ForumsArgs = {
+export type QueryForum_Forums__ShowArgs = {
   cursor?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
@@ -370,6 +370,18 @@ export type ShowForumForums = {
   views: Scalars['Int']['output'];
 };
 
+export type ShowForumForumsChildren = {
+  __typename?: 'ShowForumForumsChildren';
+  _count: ShowForumForumsCount;
+  children?: Maybe<Array<ShowForumForums>>;
+  created: Scalars['Int']['output'];
+  description: Array<TextLanguage>;
+  id: Scalars['String']['output'];
+  name: Array<TextLanguage>;
+  position: Scalars['Int']['output'];
+  views: Scalars['Int']['output'];
+};
+
 export type ShowForumForumsCount = {
   __typename?: 'ShowForumForumsCount';
   children: Scalars['Int']['output'];
@@ -384,7 +396,7 @@ export type ShowForumForumsObj = {
 export type ShowForumForumsWithParent = {
   __typename?: 'ShowForumForumsWithParent';
   _count: ShowForumForumsCount;
-  children?: Maybe<Array<ShowForumForums>>;
+  children?: Maybe<Array<ShowForumForumsChildren>>;
   created: Scalars['Int']['output'];
   description: Array<TextLanguage>;
   id: Scalars['String']['output'];
@@ -555,7 +567,7 @@ export type Forum_Forums__Admin__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Forum_Forums__Admin__ShowQuery = { __typename?: 'Query', forum_forums__admin__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, position: number, views: number, created: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', created: number, id: string, position: number, views: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, _count: { __typename?: 'ShowForumForumsCount', children: number } }> | null, _count: { __typename?: 'ShowForumForumsCount', children: number } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
+export type Forum_Forums__Admin__ShowQuery = { __typename?: 'Query', forum_forums__admin__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, position: number, views: number, created: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForumsChildren', created: number, id: string, position: number, views: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, _count: { __typename?: 'ShowForumForumsCount', children: number } }> | null, _count: { __typename?: 'ShowForumForumsCount', children: number } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
 
 export type Core_Groups__Admin__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -619,6 +631,14 @@ export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: 
 
 
 export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: string, id: string, is_admin: boolean, name: string, newsletter?: boolean | null, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } | null }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string }> } };
+
+export type Forum_Forums__ShowQueryVariables = Exact<{
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type Forum_Forums__ShowQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number }, edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForumsChildren', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null }> } };
 
 
 export const Admin_Install__Create_Database = gql`
@@ -1060,6 +1080,49 @@ export const Core_Sessions__Authorization = gql`
   core_languages__show {
     edges {
       id
+    }
+  }
+}
+    `;
+export const Forum_Forums__Show = gql`
+    query Forum_forums__show($cursor: String, $first: Int) {
+  forum_forums__show(cursor: $cursor, first: $first) {
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+    edges {
+      id
+      description {
+        id_language
+        value
+      }
+      name {
+        id_language
+        value
+      }
+      children {
+        id
+        name {
+          id_language
+          value
+        }
+        children {
+          id
+          name {
+            id_language
+            value
+          }
+        }
+        description {
+          id_language
+          value
+        }
+      }
     }
   }
 }

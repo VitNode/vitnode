@@ -38,6 +38,11 @@ export class ShowForumForumsService {
             }
           },
           children: {
+            orderBy: [
+              {
+                position: SortDirectionEnum.asc
+              }
+            ],
             include: {
               name: true,
               description: true,
@@ -45,6 +50,23 @@ export class ShowForumForumsService {
               _count: {
                 select: {
                   children: true
+                }
+              },
+              children: {
+                orderBy: [
+                  {
+                    position: SortDirectionEnum.asc
+                  }
+                ],
+                include: {
+                  name: true,
+                  description: true,
+                  parent: true,
+                  _count: {
+                    select: {
+                      children: true
+                    }
+                  }
                 }
               }
             }
