@@ -8,7 +8,6 @@ import { useCreateForumAdminAPI } from './use-create-forum-admin-api';
 
 export const useCreateEditFormForumAdmin = () => {
   const t = useTranslations('core');
-  const { isPending, mutateAsync } = useCreateForumAdminAPI();
 
   const formSchema = z.object({
     name: zodTextLanguageInputType.min(1, t('forms.empty')),
@@ -27,7 +26,8 @@ export const useCreateEditFormForumAdmin = () => {
           reply: z.boolean()
         })
       )
-    })
+    }),
+    name_seo: z.string().optional()
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -41,16 +41,19 @@ export const useCreateEditFormForumAdmin = () => {
         can_all_create: false,
         can_all_reply: false,
         groups: []
-      }
+      },
+      name_seo: ''
     },
     mode: 'onChange'
   });
+  const { isPending, mutateAsync } = useCreateForumAdminAPI({ setError: form.setError });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     await mutateAsync({
       name: values.name,
       description: values.description,
-      permissions: values.permissions
+      permissions: values.permissions,
+      nameSeo: values.name_seo
     });
   };
 

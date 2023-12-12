@@ -37,6 +37,11 @@ export class ShowForumForumsAdminService {
             }
           },
           children: {
+            orderBy: [
+              {
+                position: SortDirectionEnum.asc
+              }
+            ],
             include: {
               name: true,
               description: true,
@@ -44,6 +49,23 @@ export class ShowForumForumsAdminService {
               _count: {
                 select: {
                   children: true
+                }
+              },
+              children: {
+                orderBy: [
+                  {
+                    position: SortDirectionEnum.asc
+                  }
+                ],
+                include: {
+                  name: true,
+                  description: true,
+                  parent: true,
+                  _count: {
+                    select: {
+                      children: true
+                    }
+                  }
                 }
               }
             }

@@ -13,4 +13,7 @@ export class ShowForumForumsArgs {
 
   @Field(() => String, { nullable: true })
   parent_id: string | null;
+
+  @Field(() => String, { nullable: true })
+  name_seo: string | null;
 }

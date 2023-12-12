@@ -37,8 +37,17 @@ class ShowForumForums {
   @Field(() => Int)
   views: number;
 
+  @Field(() => String)
+  name_seo: string;
+
   @Field(() => ShowForumForumsCount)
   _count: ShowForumForumsCount;
+}
+
+@ObjectType()
+class ShowForumForumsChildren extends ShowForumForums {
+  @Field(() => [ShowForumForums], { nullable: true })
+  children: ShowForumForums[] | null;
 }
 
 @ObjectType()
@@ -46,6 +55,6 @@ export class ShowForumForumsWithParent extends ShowForumForums {
   @Field(() => ShowForumForums, { nullable: true })
   parent: ShowForumForums | null;
 
-  @Field(() => [ShowForumForums], { nullable: true })
-  children: ShowForumForums[] | null;
+  @Field(() => [ShowForumForumsChildren], { nullable: true })
+  children: ShowForumForumsChildren[] | null;
 }

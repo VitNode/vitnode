@@ -61,7 +61,7 @@ const Img = forwardRef<HTMLDivElement, ImgProps>(
 
     return (
       <div
-        className={cx(className, 'relative', 'overflow-hidden', 'leading-[0] w-fit')}
+        className={cx('relative overflow-hidden leading-[0] w-fit', className)}
         style={{
           height: !height ? (heightLoading && isLoading ? `${heightLoading}px` : '100%') : undefined
         }}

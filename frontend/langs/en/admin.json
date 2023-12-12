@@ -143,7 +143,13 @@
             "permissions": "Permissions"
           },
           "name": "Name",
-          "desc": "Description"
+          "desc": "Description",
+          "name_seo": {
+            "label": "Name SEO",
+            "desc": "Recommend for SEO. Your link URL: <link></link>",
+            "random": "random_number",
+            "already_exists": "This name SEO already exists"
+          }
         }
       }
     }

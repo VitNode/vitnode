@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 
 import { ShowForumForumsArgs } from './dto/show.args';
 import { ShowForumForumsObj } from './dto/show.obj';
@@ -12,14 +13,26 @@ import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 export class ShowForumForumsService {
   constructor(private prisma: PrismaService) {}
 
-  async show({ cursor, first, last, parent_id }: ShowForumForumsArgs): Promise<ShowForumForumsObj> {
-    const where = {
+  async show({
+    cursor,
+    first,
+    last,
+    name_seo,
+    parent_id
+  }: ShowForumForumsArgs): Promise<ShowForumForumsObj> {
+    const whereWithoutNameSEO: Prisma.forum_forumsWhereInput = {
       parent_id: parent_id
         ? parent_id
         : {
             in: null
           }
     };
+
+    const whereWithNameSEO: Prisma.forum_forumsWhereInput = {
+      name_seo
+    };
+
+    const where = name_seo ? whereWithNameSEO : whereWithoutNameSEO;
 
     const [edges, totalCount] = await this.prisma.$transaction([
       this.prisma.forum_forums.findMany({
@@ -38,6 +51,11 @@ export class ShowForumForumsService {
             }
           },
           children: {
+            orderBy: [
+              {
+                position: SortDirectionEnum.asc
+              }
+            ],
             include: {
               name: true,
               description: true,
@@ -45,6 +63,23 @@ export class ShowForumForumsService {
               _count: {
                 select: {
                   children: true
+                }
+              },
+              children: {
+                orderBy: [
+                  {
+                    position: SortDirectionEnum.asc
+                  }
+                ],
+                include: {
+                  name: true,
+                  description: true,
+                  parent: true,
+                  _count: {
+                    select: {
+                      children: true
+                    }
+                  }
                 }
               }
             }

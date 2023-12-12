@@ -8,6 +8,7 @@ import { usePermissionsGroupsAdminAPI } from '../hooks/use-permissions-groups-ad
 import { GlobalLoader } from '@/components/loader/global/global-loader';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
+import { Loader } from '@/components/loader/loader';
 
 interface Props {
   field: ControllerRenderProps<FieldValues, 'permissions'>;
@@ -19,7 +20,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
   permissions
 }: Props) => {
   const [searchValue, setSearchValue] = useState('');
-  const { data, isFetching } = usePermissionsGroupsAdminAPI({
+  const { data, isError, isFetching, isLoading } = usePermissionsGroupsAdminAPI({
     searchValue
   });
   const { convertText } = useTextLang();
@@ -41,6 +42,10 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
       [value]: !field.value[value]
     });
   };
+
+  if (isLoading) return <Loader />;
+  // TODO: Add error component
+  if (isError) return <div>error</div>;
 
   return (
     <>

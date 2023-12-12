@@ -4,11 +4,11 @@ import { APIKeys } from '@/graphql/api-keys';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Maybe,
-  ShowForumForums,
   ShowForumForumsWithParent,
   Forum_Forums__Admin__Show,
   Forum_Forums__Admin__ShowQuery,
-  Forum_Forums__Admin__ShowQueryVariables
+  Forum_Forums__Admin__ShowQueryVariables,
+  ShowForumForumsChildren
 } from '@/graphql/hooks';
 
 interface Args {
@@ -30,7 +30,9 @@ const updateState = ({
     if (edge.id === parentId) {
       return {
         ...edge,
-        children: data.forum_forums__admin__show.edges as unknown as Maybe<ShowForumForums[]>
+        children: data.forum_forums__admin__show.edges as unknown as Maybe<
+          ShowForumForumsChildren[]
+        >
       };
     }
 
@@ -41,7 +43,7 @@ const updateState = ({
           parentId,
           edges: edge.children as unknown as ShowForumForumsWithParent[],
           data
-        }) as unknown as Maybe<ShowForumForums[]>
+        }) as unknown as Maybe<ShowForumForumsChildren[]>
       };
     }
 
