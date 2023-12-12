@@ -5,11 +5,6 @@ import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
-import { CodeHighlightNode, CodeNode } from '@lexical/code';
-import { AutoLinkNode, LinkNode } from '@lexical/link';
-import { ListNode, ListItemNode } from '@lexical/list';
-import { HeadingNode, QuoteNode } from '@lexical/rich-text';
-import { HorizontalRuleNode } from '@lexical/react/LexicalHorizontalRuleNode';
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
@@ -20,7 +15,6 @@ import { ClearEditorPlugin } from '@lexical/react/LexicalClearEditorPlugin';
 import { OnChangePluginEditor } from './plugins/on-change';
 import { AutoLinkPluginEditor } from './plugins/auto-link';
 import { ToolbarEditor } from './toolbar/toolbar-editor';
-import { themeEditor } from './theme-editor';
 import { cx } from '@/functions/classnames';
 import { DraggableBlockPluginEditor } from './plugins/draggable-block';
 import { MARKDOWN_TRANSFORMERS_EDITOR } from './markdown-transformers-editor';
@@ -31,7 +25,7 @@ import { useGlobals } from '@/hooks/core/use-globals';
 import { TextLanguage } from '@/graphql/hooks';
 import './editor.scss';
 import { EmojiPluginEditor } from './plugins/emoji';
-import { EmojiNode } from './nodes/EmojiNode';
+import { initialConfigEditor } from './initial-config';
 
 interface Props {
   id: string;
@@ -48,24 +42,8 @@ export const Editor = ({ className, id, onChange, toolbarClassName, value }: Pro
   const [selectedLanguage, setSelectedLanguage] = useState(defaultLanguage);
 
   const initialConfig: InitialConfigType = {
-    namespace: id,
-    theme: themeEditor,
-    onError: error => {
-      // eslint-disable-next-line no-console
-      console.error(error);
-    },
-    nodes: [
-      HorizontalRuleNode,
-      CodeNode,
-      HeadingNode,
-      LinkNode,
-      ListNode,
-      ListItemNode,
-      QuoteNode,
-      AutoLinkNode,
-      CodeHighlightNode,
-      EmojiNode
-    ]
+    ...initialConfigEditor,
+    namespace: id
   };
 
   return (
@@ -82,7 +60,6 @@ export const Editor = ({ className, id, onChange, toolbarClassName, value }: Pro
             selectedLanguage={selectedLanguage}
             setSelectedLanguage={setSelectedLanguage}
           />
-
           <OnChangePluginEditor
             value={value}
             onChange={onChange}

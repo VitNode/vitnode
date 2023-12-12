@@ -9,15 +9,17 @@ import { cx } from '@/functions/classnames';
 import { ItemForum, ItemForumProps } from './item';
 import { TextLanguage } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
+import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
 
 interface Props {
+  description: TextLanguage[];
   id: string;
   name: TextLanguage[];
   name_seo: string;
   children?: ItemForumProps[] | null;
 }
 
-export const CategoryForum = ({ children, name, name_seo }: Props) => {
+export const CategoryForum = ({ children, description, id, name, name_seo }: Props) => {
   const [isClose, setClose] = useState(false);
   const { convertText } = useTextLang();
 
@@ -36,7 +38,9 @@ export const CategoryForum = ({ children, name, name_seo }: Props) => {
               </Link>
             </h2>
 
-            <p className="text-muted-foreground text-sm">Test description s</p>
+            <p className="text-muted-foreground text-sm [&_p]:m-0">
+              <ReadOnlyEditor id={`${id}_description`} value={description} />
+            </p>
           </div>
 
           <Button

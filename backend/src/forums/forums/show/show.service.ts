@@ -29,10 +29,7 @@ export class ShowForumForumsService {
     };
 
     const whereWithNameSEO: Prisma.forum_forumsWhereInput = {
-      name_seo,
-      parent_id: {
-        not: null
-      }
+      name_seo
     };
 
     const where = name_seo ? whereWithNameSEO : whereWithoutNameSEO;
