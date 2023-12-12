@@ -3,7 +3,7 @@
 import { Components, Virtuoso } from 'react-virtuoso';
 import { forwardRef } from 'react';
 
-import { CategoryForum } from './item';
+import { CategoryForum } from './category';
 
 export const ForumsForumView = () => {
   const List: Components['List'] = forwardRef((props, ref) => {
@@ -14,7 +14,7 @@ export const ForumsForumView = () => {
 
   return (
     <Virtuoso
-      totalCount={200}
+      totalCount={10}
       useWindowScroll
       components={{
         List

@@ -1,79 +1,51 @@
-import { ChevronDown } from 'lucide-react';
-import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { Folder, MessagesSquare } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { Link } from '@/i18n';
-import { cx } from '@/functions/classnames';
+import { buttonVariants } from '@/components/ui/button';
 
-interface Props {
-  index: number;
-}
-
-export const CategoryForum = ({ index }: Props) => {
-  const [isClose, setClose] = useState(false);
-
+export const ItemForum = () => {
   return (
-    <Card>
-      <CardContent className="p-0">
-        <div
-          className={cx('px-6 py-4 flex items-start gap-4 justify-between', {
-            'border-b': !isClose
-          })}
-        >
-          <div>
-            <Link href="#">
-              <h2 className="font-semibold text-lg">Test {index}</h2>
-            </Link>
-            <p className="text-muted-foreground text-sm">Test description {index}</p>
-          </div>
-
-          <Button
-            className="transition-transform text-muted-foreground hover:text-foreground flex-shrink-0"
-            variant="ghost"
-            size="icon"
-            onClick={() => setClose(prev => !prev)}
-          >
-            <ChevronDown
-              className={cx('transition-transform', {
-                'transform rotate-90': isClose
-              })}
-            />
-          </Button>
+    <div className="px-6 py-4 [&:not(:last-child)]:border-b hover:bg-muted/50 flex gap-4 cursor-pointer flex-col md:flex-row">
+      <div className="flex gap-4 flex-1">
+        <div className="bg-primary/20 w-10 h-10 rounded-md flex items-center justify-center [&>svg]:w-5 [&>svg]:h-5 text-primary flex-shrink-0">
+          <MessagesSquare />
         </div>
 
-        <AnimatePresence initial={false}>
-          {!isClose && (
-            <motion.div
-              key="content"
-              initial="collapsed"
-              animate="open"
-              exit="collapsed"
-              variants={{
-                open: { opacity: 1, height: 'auto' },
-                collapsed: { opacity: 0, height: 0 }
-              }}
+        <div className="flex flex-col justify-center">
+          <h3 className="text-lg font-medium">
+            <Link href="/forum/test" className="text-foreground no-underline">
+              Test 123
+            </Link>
+          </h3>
+          <p className="text-muted-foreground text-sm">Description test 123</p>
+
+          <div className="flex mt-2 flex-wrap">
+            <Link
+              href="/forum/test"
+              className={buttonVariants({
+                variant: 'ghost',
+                size: 'sm',
+                className: 'h-auto min-h-[2.25rem] font-normal'
+              })}
             >
-              <div className="p-6">
-                <div>Test 123 {index}</div>
-                <div>Test 123 {index}</div>
-                <div>Test 123 {index}</div>
-                <div>Test 123 {index}</div>
-                <div>Test 123 {index}</div>
-                <div>Test 123 {index}</div>
-                <div>Test 123 {index}</div>
-                <div>Test 123 {index}</div>
-                <div>Test 123 {index}</div>
-                <div>Test 123 {index}</div>
-                <div>Test 123 {index}</div>
-                <div>Test 123 {index}</div>
-                <div>Test 123 {index}</div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </CardContent>
-    </Card>
+              <Folder />
+              <span>Test123 :D</span>
+            </Link>
+
+            <Link
+              href="/forum/test"
+              className={buttonVariants({
+                variant: 'ghost',
+                size: 'sm',
+                className: 'h-auto min-h-[2.25rem] font-normal'
+              })}
+            >
+              <Folder />
+              <span>Test123 :D</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
