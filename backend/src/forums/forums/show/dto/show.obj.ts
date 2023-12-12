@@ -37,6 +37,9 @@ class ShowForumForums {
   @Field(() => Int)
   views: number;
 
+  @Field(() => String)
+  name_seo: string;
+
   @Field(() => ShowForumForumsCount)
   _count: ShowForumForumsCount;
 }

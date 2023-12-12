@@ -10,6 +10,7 @@ query Forum_forums__show($cursor: String, $first: Int) {
     }
     edges {
       id
+      name_seo
       description {
         id_language
         value
@@ -20,12 +21,14 @@ query Forum_forums__show($cursor: String, $first: Int) {
       }
       children {
         id
+        name_seo
         name {
           id_language
           value
         }
         children {
           id
+          name_seo
           name {
             id_language
             value
