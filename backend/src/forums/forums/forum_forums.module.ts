@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 
-import { ShowForumCategoriesResolver } from './show/show.resolver';
+import { ShowForumForumsResolver } from './show/show.resolver';
 import { ShowForumForumsService } from './show/show.service';
 
 @Module({
-  providers: [ShowForumCategoriesResolver, ShowForumForumsService]
+  providers: [ShowForumForumsResolver, ShowForumForumsService]
 })
 export class ForumsForumModule {}

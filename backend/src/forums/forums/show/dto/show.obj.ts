@@ -4,15 +4,6 @@ import { PageInfo } from '@/types/database/pagination.type';
 import { TextLanguage } from '@/types/database/text-language.type';
 
 @ObjectType()
-export class ShowForumForumsObj {
-  @Field(() => [ShowForumForumsWithParent])
-  edges: ShowForumForumsWithParent[];
-
-  @Field(() => PageInfo)
-  pageInfo: PageInfo;
-}
-
-@ObjectType()
 class ShowForumForumsCount {
   @Field(() => Int)
   children: number;
@@ -54,4 +45,13 @@ export class ShowForumForumsWithParent extends ShowForumForums {
 
   @Field(() => [ShowForumForumsChildren], { nullable: true })
   children: ShowForumForumsChildren[] | null;
+}
+
+@ObjectType()
+export class ShowForumForumsObj {
+  @Field(() => [ShowForumForumsWithParent])
+  edges: ShowForumForumsWithParent[];
+
+  @Field(() => PageInfo)
+  pageInfo: PageInfo;
 }

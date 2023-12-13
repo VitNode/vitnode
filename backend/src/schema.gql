@@ -92,6 +92,7 @@ type Query {
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   forum_forums__admin__show(cursor: String, first: Int, last: Int, name_seo: String, parent_id: String): ShowForumForumsObj!
   forum_forums__show(cursor: String, first: Int, last: Int, name_seo: String, parent_id: String): ShowForumForumsObj!
+  forum_topics__show(cursor: String, first: Int, last: Int): ShowTopicsForumsObj!
 }
 
 type ShowAdminGroups {
@@ -245,6 +246,19 @@ type ShowForumForumsWithParent {
   name_seo: String!
   parent: ShowForumForums
   position: Int!
+}
+
+type ShowTopicsForums {
+  content: [TextLanguage!]!
+  created: Int!
+  id: String!
+  name: [TextLanguage!]!
+  updated: Int
+}
+
+type ShowTopicsForumsObj {
+  edges: [ShowTopicsForums!]!
+  pageInfo: PageInfo!
 }
 
 type SignUpCoreMembersObj {
