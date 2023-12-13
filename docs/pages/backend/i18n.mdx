@@ -108,6 +108,24 @@ export class CreateAdminGroupsArgs {
 }
 ```
 
+If you want to change this field to `required`, you have to add some decorators form `class-validator`.
+
+```ts
+import { ArgsType, Field } from '@nestjs/graphql';
+import { ArrayMinSize, IsArray, ValidateNested } from 'class-validator';
+
+import { TextLanguageInput } from '@/types/database/text-language.type';
+
+@ArgsType()
+export class CreateAdminGroupsArgs {
+  @IsArray()
+  @ValidateNested({ each: true })
+  @ArrayMinSize(1)
+  @Field(() => [TextLanguageInput])
+  name: TextLanguageInput[];
+}
+```
+
 ## Object field mutation
 
 For your mutation we're created for you a new type `TextLanguage`.

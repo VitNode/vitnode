@@ -1,7 +1,7 @@
 import { ArgsType, Field, Int } from '@nestjs/graphql';
 
 @ArgsType()
-export class ShowForumForumsArgs {
+export class ShowTopicsForumsArgs {
   @Field(() => String, { nullable: true })
   cursor: string | null;
 
@@ -12,8 +12,5 @@ export class ShowForumForumsArgs {
   last: number | null;
 
   @Field(() => String, { nullable: true })
-  parent_id: string | null;
-
-  @Field(() => [String], { nullable: true })
-  ids: string[] | null;
+  forum_id: string | null;
 }

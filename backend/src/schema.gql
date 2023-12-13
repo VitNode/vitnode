@@ -22,6 +22,16 @@ type AuthorizationCurrentUserObj {
   newsletter: Boolean
 }
 
+type ChildrenShowForumForums {
+  _count: ShowForumForumsCount!
+  children: [ShowForumForums!]
+  created: Int!
+  description: [TextLanguage!]!
+  id: String!
+  name: [TextLanguage!]!
+  position: Int!
+}
+
 type GeneralAdminSettingsObj {
   side_name: String!
 }
@@ -62,7 +72,8 @@ type Mutation {
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
   forum_forums__admin__change_position(id: String!, index_to_move: Int!, parent_id: String): String!
-  forum_forums__admin__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, name_seo: String, parent_id: String, permissions: PermissionsCreateForumForums!): ShowForumForumsWithParent!
+  forum_forums__admin__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: String, permissions: PermissionsCreateForumForums!): ShowForumForumsWithParent!
+  forum_topics__create(content: [TextLanguageInput!]!, forum_id: String!, name: [TextLanguageInput!]!): ShowTopicsForums!
 }
 
 type PageInfo {
@@ -90,8 +101,9 @@ type Query {
   core_members__admin__show(cursor: String, first: Int, groups: [String!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   core_members__show(cursor: String, findByIds: [String!], first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
-  forum_forums__admin__show(cursor: String, first: Int, last: Int, name_seo: String, parent_id: String): ShowForumForumsObj!
-  forum_forums__show(cursor: String, first: Int, last: Int, name_seo: String, parent_id: String): ShowForumForumsObj!
+  forum_forums__admin__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsObj!
+  forum_forums__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsObj!
+  forum_topics__show(cursor: String, first: Int, forum_id: String, last: Int): ShowTopicsForumsObj!
 }
 
 type ShowAdminGroups {
@@ -211,21 +223,7 @@ type ShowForumForums {
   description: [TextLanguage!]!
   id: String!
   name: [TextLanguage!]!
-  name_seo: String!
   position: Int!
-  views: Int!
-}
-
-type ShowForumForumsChildren {
-  _count: ShowForumForumsCount!
-  children: [ShowForumForums!]
-  created: Int!
-  description: [TextLanguage!]!
-  id: String!
-  name: [TextLanguage!]!
-  name_seo: String!
-  position: Int!
-  views: Int!
 }
 
 type ShowForumForumsCount {
@@ -239,15 +237,26 @@ type ShowForumForumsObj {
 
 type ShowForumForumsWithParent {
   _count: ShowForumForumsCount!
-  children: [ShowForumForumsChildren!]
+  children: [ChildrenShowForumForums!]
   created: Int!
   description: [TextLanguage!]!
   id: String!
   name: [TextLanguage!]!
-  name_seo: String!
   parent: ShowForumForums
   position: Int!
-  views: Int!
+}
+
+type ShowTopicsForums {
+  content: [TextLanguage!]!
+  created: Int!
+  id: String!
+  name: [TextLanguage!]!
+  updated: Int
+}
+
+type ShowTopicsForumsObj {
+  edges: [ShowTopicsForums!]!
+  pageInfo: PageInfo!
 }
 
 type SignUpCoreMembersObj {

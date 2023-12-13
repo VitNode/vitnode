@@ -1,17 +1,9 @@
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from '@/components/ui/form';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { TextLanguageInput } from '@/components/text-language-input';
 import { Editor } from '@/components/editor/editor';
-import { Input } from '@/components/ui/input';
 
 export const MainContentCreateEditFormForumAdmin = () => {
   const t = useTranslations('admin.forum.forums.create_edit');
@@ -28,32 +20,6 @@ export const MainContentCreateEditFormForumAdmin = () => {
             <FormControl>
               <TextLanguageInput {...field} />
             </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
-        name="name_seo"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>{t('name_seo.label')}</FormLabel>
-            <FormControl>
-              <Input {...field} />
-            </FormControl>
-            <FormDescription>
-              {t.rich('name_seo.desc', {
-                link: () => (
-                  <span className="italic">
-                    {`https://${window.location.host}/forum/`}
-                    <span className="font-bold">
-                      {field.value ? field.value : t('name_seo.random')}
-                    </span>
-                  </span>
-                )
-              })}
-            </FormDescription>
             <FormMessage />
           </FormItem>
         )}

@@ -7,7 +7,6 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';
 import { currentDate } from '@/functions/date';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
-import { removeSpecialCharacters } from '@/functions/remove-special-characters';
 
 @Injectable()
 export class CreateForumForumsService {
@@ -16,24 +15,8 @@ export class CreateForumForumsService {
   async create({
     description,
     name,
-    name_seo,
     parent_id
   }: CreateForumForumsArgs): Promise<ShowForumForumsWithParent> {
-    if (name_seo) {
-      const checkNameSEO = await this.prisma.forum_forums.findFirst({
-        where: {
-          name_seo
-        }
-      });
-
-      if (checkNameSEO) {
-        throw new CustomError({
-          code: 'FORUM_NAME_SEO_ALREADY_EXISTS',
-          message: 'Name SEO already exists'
-        });
-      }
-    }
-
     if (parent_id) {
       const parent = await this.prisma.forum_forums.findUnique({
         where: {
@@ -58,23 +41,6 @@ export class CreateForumForumsService {
       }
     });
 
-    let defaultNameSEO = '';
-
-    if (!name_seo) {
-      const languageDefault = await this.prisma.core_languages.findFirst({
-        where: {
-          default: true
-        }
-      });
-
-      const findNameWithDefaultLang = name.find(item => item.id_language === languageDefault.id);
-      if (findNameWithDefaultLang) {
-        defaultNameSEO = findNameWithDefaultLang.value;
-      } else {
-        defaultNameSEO = name[0].value;
-      }
-    }
-    const date = new Date();
     const forum = await this.prisma.forum_forums.create({
       data: {
         name: {
@@ -83,9 +49,6 @@ export class CreateForumForumsService {
         description: {
           create: description
         },
-        name_seo: removeSpecialCharacters(
-          name_seo ? name_seo : `${defaultNameSEO}-${date.getTime()}`
-        ),
         position: theMostHighestPosition ? theMostHighestPosition.position + 1 : 0,
         created: currentDate(),
         parent: parent_id

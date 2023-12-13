@@ -4,15 +4,6 @@ import { PageInfo } from '@/types/database/pagination.type';
 import { TextLanguage } from '@/types/database/text-language.type';
 
 @ObjectType()
-export class ShowForumForumsObj {
-  @Field(() => [ShowForumForumsWithParent])
-  edges: ShowForumForumsWithParent[];
-
-  @Field(() => PageInfo)
-  pageInfo: PageInfo;
-}
-
-@ObjectType()
 class ShowForumForumsCount {
   @Field(() => Int)
   children: number;
@@ -34,18 +25,12 @@ class ShowForumForums {
   @Field(() => Int)
   created: number;
 
-  @Field(() => Int)
-  views: number;
-
-  @Field(() => String)
-  name_seo: string;
-
   @Field(() => ShowForumForumsCount)
   _count: ShowForumForumsCount;
 }
 
 @ObjectType()
-class ShowForumForumsChildren extends ShowForumForums {
+export class ChildrenShowForumForums extends ShowForumForums {
   @Field(() => [ShowForumForums], { nullable: true })
   children: ShowForumForums[] | null;
 }
@@ -55,6 +40,15 @@ export class ShowForumForumsWithParent extends ShowForumForums {
   @Field(() => ShowForumForums, { nullable: true })
   parent: ShowForumForums | null;
 
-  @Field(() => [ShowForumForumsChildren], { nullable: true })
-  children: ShowForumForumsChildren[] | null;
+  @Field(() => [ChildrenShowForumForums], { nullable: true })
+  children: ChildrenShowForumForums[] | null;
+}
+
+@ObjectType()
+export class ShowForumForumsObj {
+  @Field(() => [ShowForumForumsWithParent])
+  edges: ShowForumForumsWithParent[];
+
+  @Field(() => PageInfo)
+  pageInfo: PageInfo;
 }

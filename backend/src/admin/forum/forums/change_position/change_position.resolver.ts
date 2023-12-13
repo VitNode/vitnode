@@ -4,7 +4,7 @@ import { ChangePositionForumForumsService } from './change_position.service';
 import { ChangePositionForumForumsArgs } from './dto/change_position.args';
 
 @Resolver()
-export class ChangePositionForumCategoriesResolver {
+export class ChangePositionForumForumsResolver {
   constructor(private readonly service: ChangePositionForumForumsService) {}
 
   @Mutation(() => String)

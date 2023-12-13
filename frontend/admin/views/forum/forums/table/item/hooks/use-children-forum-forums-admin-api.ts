@@ -8,7 +8,7 @@ import {
   Forum_Forums__Admin__Show,
   Forum_Forums__Admin__ShowQuery,
   Forum_Forums__Admin__ShowQueryVariables,
-  ShowForumForumsChildren
+  ChildrenShowForumForums
 } from '@/graphql/hooks';
 
 interface Args {
@@ -31,7 +31,7 @@ const updateState = ({
       return {
         ...edge,
         children: data.forum_forums__admin__show.edges as unknown as Maybe<
-          ShowForumForumsChildren[]
+          ChildrenShowForumForums[]
         >
       };
     }
@@ -43,7 +43,7 @@ const updateState = ({
           parentId,
           edges: edge.children as unknown as ShowForumForumsWithParent[],
           data
-        }) as unknown as Maybe<ShowForumForumsChildren[]>
+        }) as unknown as Maybe<ChildrenShowForumForums[]>
       };
     }
 

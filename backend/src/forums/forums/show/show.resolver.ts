@@ -5,7 +5,7 @@ import { ShowForumForumsObj } from './dto/show.obj';
 import { ShowForumForumsArgs } from './dto/show.args';
 
 @Resolver()
-export class ShowForumCategoriesResolver {
+export class ShowForumForumsResolver {
   constructor(private readonly service: ShowForumForumsService) {}
 
   @Query(() => ShowForumForumsObj)

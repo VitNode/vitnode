@@ -143,13 +143,7 @@
             "permissions": "Uprawnienia"
           },
           "name": "Nazwa",
-          "desc": "Opis",
-          "name_seo": {
-            "label": "Nazwa SEO",
-            "desc": "Rekomendowane dla SEO. Twój link URL: <link></link>",
-            "random": "randomowa_liczba",
-            "already_exists": "Ta nazwa SEO jest już zajęta."
-          }
+          "desc": "Opis"
         }
       }
     }

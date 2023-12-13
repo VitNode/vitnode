@@ -14,10 +14,15 @@ export const LoadReadOnlyEditor = ({ value }: Props) => {
 
   // Set the initial editor value
   useEffect(() => {
-    if (value) {
+    if (value.length > 0) {
       const currentValue = value.find(item => item.id_language === locale)?.value;
+
       if (!currentValue) {
-        // editor.dispatchCommand(CLEAR_EDITOR_COMMAN, undefined);
+        const lastValue = value.at(-1)?.value;
+        if (!lastValue) return;
+
+        const initialEditorState = editor.parseEditorState(lastValue);
+        editor.setEditorState(initialEditorState);
 
         return;
       }

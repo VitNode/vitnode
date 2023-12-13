@@ -1,5 +1,5 @@
-query Forum_forums__show_item($nameSeo: String) {
-  forum_forums__show(name_seo: $nameSeo) {
+query Forum_forums__show_item($cursor: String, $first: Int, $last: Int, $forumId: String!) {
+  forum_forums__show(ids: [$forumId]) {
     pageInfo {
       count
       endCursor
@@ -10,7 +10,6 @@ query Forum_forums__show_item($nameSeo: String) {
     }
     edges {
       id
-      name_seo
       description {
         id_language
         value
@@ -21,14 +20,12 @@ query Forum_forums__show_item($nameSeo: String) {
       }
       children {
         id
-        name_seo
         name {
           id_language
           value
         }
         children {
           id
-          name_seo
           name {
             id_language
             value
@@ -38,6 +35,29 @@ query Forum_forums__show_item($nameSeo: String) {
           id_language
           value
         }
+      }
+    }
+  }
+  forum_topics__show(cursor: $cursor, first: $first, last: $last, forum_id: $forumId) {
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+    edges {
+      content {
+        value
+        id_language
+      }
+      created
+      id
+      updated
+      name {
+        id_language
+        value
       }
     }
   }

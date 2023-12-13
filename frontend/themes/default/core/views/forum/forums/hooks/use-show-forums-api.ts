@@ -7,10 +7,11 @@ import {
   Forum_Forums__ShowQuery,
   Forum_Forums__ShowQueryVariables
 } from '@/graphql/hooks';
+import { APIKeys } from '@/graphql/api-keys';
 
 export const useShowForumsAPI = () => {
   const query = useInfiniteQuery({
-    queryKey: ['test'],
+    queryKey: [APIKeys.FORUMS],
     queryFn: async () =>
       await fetcher<Forum_Forums__ShowQuery, Forum_Forums__ShowQueryVariables>({
         query: Forum_Forums__Show
