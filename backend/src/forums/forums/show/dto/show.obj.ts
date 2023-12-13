@@ -34,9 +34,6 @@ class ShowForumForums {
   @Field(() => Int)
   created: number;
 
-  @Field(() => Int)
-  views: number;
-
   @Field(() => String)
   name_seo: string;
 

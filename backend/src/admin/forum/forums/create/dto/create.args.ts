@@ -1,4 +1,5 @@
 import { ArgsType, Field, InputType } from '@nestjs/graphql';
+import { ArrayMinSize, IsArray, ValidateNested } from 'class-validator';
 
 import { TextLanguageInput } from '@/types/database/text-language.type';
 
@@ -40,9 +41,13 @@ class PermissionsCreateForumForums {
 
 @ArgsType()
 export class CreateForumForumsArgs {
+  @IsArray()
+  @ValidateNested({ each: true })
+  @ArrayMinSize(1)
   @Field(() => [TextLanguageInput])
   name: TextLanguageInput[];
 
+  @IsArray()
   @Field(() => [TextLanguageInput])
   description: TextLanguageInput[];
 

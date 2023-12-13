@@ -213,7 +213,6 @@ type ShowForumForums {
   name: [TextLanguage!]!
   name_seo: String!
   position: Int!
-  views: Int!
 }
 
 type ShowForumForumsChildren {
@@ -225,7 +224,6 @@ type ShowForumForumsChildren {
   name: [TextLanguage!]!
   name_seo: String!
   position: Int!
-  views: Int!
 }
 
 type ShowForumForumsCount {
@@ -247,7 +245,6 @@ type ShowForumForumsWithParent {
   name_seo: String!
   parent: ShowForumForums
   position: Int!
-  views: Int!
 }
 
 type SignUpCoreMembersObj {

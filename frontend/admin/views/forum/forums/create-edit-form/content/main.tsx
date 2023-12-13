@@ -12,6 +12,7 @@ import {
 import { TextLanguageInput } from '@/components/text-language-input';
 import { Editor } from '@/components/editor/editor';
 import { Input } from '@/components/ui/input';
+import { convertTextToTextSEO } from '@/functions/seo';
 
 export const MainContentCreateEditFormForumAdmin = () => {
   const t = useTranslations('admin.forum.forums.create_edit');
@@ -48,7 +49,7 @@ export const MainContentCreateEditFormForumAdmin = () => {
                   <span className="italic">
                     {`https://${window.location.host}/forum/`}
                     <span className="font-bold">
-                      {field.value ? field.value : t('name_seo.random')}
+                      {field.value ? convertTextToTextSEO(field.value) : t('name_seo.random')}
                     </span>
                   </span>
                 )

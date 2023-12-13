@@ -23,7 +23,6 @@ mutation Forum_forums__admin__create(
       value
     }
     position
-    views
     name_seo
   }
 }

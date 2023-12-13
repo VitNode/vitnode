@@ -12,7 +12,6 @@ query Forum_forums__admin__show($first: Int, $cursor: String, $parentId: String)
         value
       }
       position
-      views
       created
       children {
         created
@@ -27,7 +26,6 @@ query Forum_forums__admin__show($first: Int, $cursor: String, $parentId: String)
           value
         }
         position
-        views
         _count {
           children
         }

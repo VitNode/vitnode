@@ -22,6 +22,8 @@ model core_languages {
   groups                    core_groups_languages[]    @relation("core_groups_languages_language")
   forums_forums_names       forum_forums_names[]       @relation("forums_forums_names_language")
   forums_forums_description forum_forums_description[] @relation("forums_forums_description_language")
+  forum_topics_name         forum_topics_name[]        @relation("forum_topics_name_language")
+  forum_topics_content      forum_topics_content[]     @relation("forum_topics_content_language")
 }
 
 model core_members {
@@ -48,6 +50,7 @@ model core_members {
   sessions          core_sessions[]          @relation("core_sessions_member")
   admin_sessions    core_admin_sessions[]    @relation("core_admin_sessions_member")
   admin_permissions core_admin_permissions[] @relation("core_admin_permissions_member")
+  topics            forum_topics[]           @relation("forum_topics_author")
 
   @@index([group_id])
 }
@@ -155,7 +158,6 @@ model forum_forums {
   created        Int
   parent_id      String?
   position       Int
-  views          Int     @default(0)
   can_all_view   Boolean @default(false)
   can_all_read   Boolean @default(false)
   can_all_create Boolean @default(false)
@@ -166,6 +168,7 @@ model forum_forums {
   name        forum_forums_names[]       @relation("forums_forums_names_forum")
   description forum_forums_description[] @relation("forums_forums_description_forum")
   permissions forum_forums_permissions[] @relation("forums_forums_permissions_forum")
+  topics      forum_topics[]             @relation("forum_topics_forum")
 }
 
 model forum_forums_names {
@@ -202,4 +205,41 @@ model forum_forums_permissions {
   can_read  Boolean      @default(false)
   can_reply Boolean      @default(false)
   can_start Boolean      @default(false)
+}
+
+model forum_topics {
+  id        String       @id @unique @default(uuid())
+  forum     forum_forums @relation("forum_topics_forum", references: [id], fields: [forum_id], onDelete: Cascade)
+  forum_id  String
+  views     Int          @default(0)
+  author    core_members @relation("forum_topics_author", references: [id], fields: [author_id], onDelete: Cascade)
+  author_id String
+  url       String       @unique @db.VarChar(255)
+  created   Int
+  updated   Int?
+
+  name    forum_topics_name[]    @relation("forum_topics_name_topic")
+  content forum_topics_content[] @relation("forum_topics_content_topic")
+}
+
+model forum_topics_name {
+  id          String @id @unique @default(uuid())
+  id_language String @db.VarChar(32)
+  topic_id    String
+  value       String @db.VarChar(255)
+
+  topic    forum_topics   @relation("forum_topics_name_topic", references: [id], fields: [topic_id], onDelete: Cascade)
+  language core_languages @relation("forum_topics_name_language", references: [id], fields: [id_language], onDelete: Cascade)
+
+  @@index([id_language])
+}
+
+model forum_topics_content {
+  id          String @id @unique @default(uuid())
+  id_language String @db.VarChar(32)
+  topic_id    String
+  value       String @db.Text
+
+  topic    forum_topics   @relation("forum_topics_content_topic", references: [id], fields: [topic_id], onDelete: Cascade)
+  language core_languages @relation("forum_topics_content_language", references: [id], fields: [id_language], onDelete: Cascade)
 }

@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { zodTextLanguageInputType } from '@/components/text-language-input';
 import { useCreateForumAdminAPI } from './use-create-forum-admin-api';
+import { convertTextToTextSEO } from '@/functions/seo';
 
 export const useCreateEditFormForumAdmin = () => {
   const t = useTranslations('core');
@@ -53,7 +54,7 @@ export const useCreateEditFormForumAdmin = () => {
       name: values.name,
       description: values.description,
       permissions: values.permissions,
-      nameSeo: values.name_seo
+      nameSeo: convertTextToTextSEO(values.name_seo)
     });
   };
 

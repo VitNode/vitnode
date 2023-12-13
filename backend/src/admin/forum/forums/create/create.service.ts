@@ -7,7 +7,7 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';
 import { currentDate } from '@/functions/date';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
-import { removeSpecialCharacters } from '@/functions/remove-special-characters';
+import { convertTextToTextSEO } from '@/functions/seo';
 
 @Injectable()
 export class CreateForumForumsService {
@@ -83,9 +83,7 @@ export class CreateForumForumsService {
         description: {
           create: description
         },
-        name_seo: removeSpecialCharacters(
-          name_seo ? name_seo : `${defaultNameSEO}-${date.getTime()}`
-        ),
+        name_seo: convertTextToTextSEO(name_seo ? name_seo : `${defaultNameSEO}-${date.getTime()}`),
         position: theMostHighestPosition ? theMostHighestPosition.position + 1 : 0,
         created: currentDate(),
         parent: parent_id

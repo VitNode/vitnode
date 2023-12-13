@@ -371,7 +371,6 @@ export type ShowForumForums = {
   name: Array<TextLanguage>;
   name_seo: Scalars['String']['output'];
   position: Scalars['Int']['output'];
-  views: Scalars['Int']['output'];
 };
 
 export type ShowForumForumsChildren = {
@@ -384,7 +383,6 @@ export type ShowForumForumsChildren = {
   name: Array<TextLanguage>;
   name_seo: Scalars['String']['output'];
   position: Scalars['Int']['output'];
-  views: Scalars['Int']['output'];
 };
 
 export type ShowForumForumsCount = {
@@ -409,7 +407,6 @@ export type ShowForumForumsWithParent = {
   name_seo: Scalars['String']['output'];
   parent?: Maybe<ShowForumForums>;
   position: Scalars['Int']['output'];
-  views: Scalars['Int']['output'];
 };
 
 export type SignUpCoreMembersObj = {
@@ -477,7 +474,7 @@ export type Forum_Forums__Admin__CreateMutationVariables = Exact<{
 }>;
 
 
-export type Forum_Forums__Admin__CreateMutation = { __typename?: 'Mutation', forum_forums__admin__create: { __typename?: 'ShowForumForumsWithParent', created: number, id: string, position: number, views: number, name_seo: string, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
+export type Forum_Forums__Admin__CreateMutation = { __typename?: 'Mutation', forum_forums__admin__create: { __typename?: 'ShowForumForumsWithParent', created: number, id: string, position: number, name_seo: string, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
 
 export type Core_Groups__Admin__DeleteMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -574,7 +571,7 @@ export type Forum_Forums__Admin__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Forum_Forums__Admin__ShowQuery = { __typename?: 'Query', forum_forums__admin__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, name_seo: string, position: number, views: number, created: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForumsChildren', created: number, name_seo: string, id: string, position: number, views: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, _count: { __typename?: 'ShowForumForumsCount', children: number } }> | null, _count: { __typename?: 'ShowForumForumsCount', children: number } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
+export type Forum_Forums__Admin__ShowQuery = { __typename?: 'Query', forum_forums__admin__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, name_seo: string, position: number, created: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForumsChildren', created: number, name_seo: string, id: string, position: number, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, _count: { __typename?: 'ShowForumForumsCount', children: number } }> | null, _count: { __typename?: 'ShowForumForumsCount', children: number } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
 
 export type Core_Groups__Admin__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -689,7 +686,6 @@ export const Forum_Forums__Admin__Create = gql`
       value
     }
     position
-    views
     name_seo
   }
 }
@@ -837,7 +833,6 @@ export const Forum_Forums__Admin__Show = gql`
         value
       }
       position
-      views
       created
       children {
         created
@@ -852,7 +847,6 @@ export const Forum_Forums__Admin__Show = gql`
           value
         }
         position
-        views
         _count {
           children
         }
