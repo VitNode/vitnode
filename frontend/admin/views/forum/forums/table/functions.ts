@@ -6,7 +6,7 @@ import {
   Forum_Forums__Admin__ShowWithProjection
 } from './types';
 import { Forum_Forums__Admin__ShowQueryItem } from '../hooks/use-forum-forums-admin-api';
-import { ShowForumForumsChildren } from '@/graphql/hooks';
+import { ChildrenShowForumForums } from '@/graphql/hooks';
 
 const getDragDepth = ({
   indentationWidth,
@@ -145,7 +145,7 @@ export const buildTree = (
     nodes[id] = item;
 
     parent.children = parent.children ?? [];
-    parent.children.push(item as ShowForumForumsChildren);
+    parent.children.push(item as ChildrenShowForumForums);
   }
 
   return root.children as Forum_Forums__Admin__ShowQueryItem[];

@@ -47,18 +47,20 @@ export const CategoryForum = ({ children, description, id, name }: Props) => {
             />
           </div>
 
-          <Button
-            className="transition-transform text-muted-foreground hover:text-foreground flex-shrink-0"
-            variant="ghost"
-            size="icon"
-            onClick={() => setClose(prev => !prev)}
-          >
-            <ChevronDown
-              className={cx('transition-transform', {
-                'transform rotate-90': isClose
-              })}
-            />
-          </Button>
+          {children && children.length > 0 && (
+            <Button
+              className="transition-transform text-muted-foreground hover:text-foreground flex-shrink-0"
+              variant="ghost"
+              size="icon"
+              onClick={() => setClose(prev => !prev)}
+            >
+              <ChevronDown
+                className={cx('transition-transform', {
+                  'transform rotate-90': isClose
+                })}
+              />
+            </Button>
+          )}
         </div>
 
         <AnimatePresence initial={false}>
