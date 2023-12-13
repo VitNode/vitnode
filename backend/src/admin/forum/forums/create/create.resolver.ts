@@ -8,7 +8,7 @@ import { ShowForumForumsWithParent } from '../../../../forums/forums/show/dto/sh
 import { AdminAuthGuards } from '@/utils/guards/admin-auth.guards';
 
 @Resolver()
-export class CreateForumCategoriesResolver {
+export class CreateForumForumsResolver {
   constructor(private readonly service: CreateForumForumsService) {}
 
   @Mutation(() => ShowForumForumsWithParent)

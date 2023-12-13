@@ -13,7 +13,7 @@ export class ShowTopicsForumsObj {
 }
 
 @ObjectType()
-class ShowTopicsForums {
+export class ShowTopicsForums {
   @Field(() => String)
   id: string;
 

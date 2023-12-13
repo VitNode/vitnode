@@ -63,6 +63,7 @@ type Mutation {
   core_sessions__sign_out: String!
   forum_forums__admin__change_position(id: String!, index_to_move: Int!, parent_id: String): String!
   forum_forums__admin__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, name_seo: String, parent_id: String, permissions: PermissionsCreateForumForums!): ShowForumForumsWithParent!
+  forum_topics__create(content: [TextLanguageInput!]!, forum_id: String!, name: [TextLanguageInput!]!): ShowTopicsForums!
 }
 
 type PageInfo {
