@@ -24,6 +24,17 @@ export function outputPagination<T>({
   last,
   totalCount
 }: Args<T>): Return<T> {
+  let currentEdges: DataInterface<T>[] = edges;
+
+  if (cursor) {
+    currentEdges = first ? edges.slice(0, first) : edges.slice(-last);
+  }
+
+  const edgesCursor = {
+    start: currentEdges.at(0)?.id ?? '',
+    end: currentEdges.at(-1)?.id ?? ''
+  };
+
   if (!first && !last) {
     return {
       edges,
@@ -32,28 +43,17 @@ export function outputPagination<T>({
         count: edges.length,
         hasNextPage: false,
         hasPreviousPage: false,
-        startCursor: '',
-        endCursor: ''
+        startCursor: edgesCursor.start,
+        endCursor: edgesCursor.end
       }
     };
   }
 
-  let currentEdges: DataInterface<T>[] = edges;
-
-  if (cursor) {
-    currentEdges = first ? edges.slice(0, first) : edges.slice(-last);
-  }
-
-  const edgesCursor = {
-    start: currentEdges.at(0)?.id,
-    end: currentEdges.at(-1)?.id
-  };
-
   return {
     pageInfo: {
       hasNextPage: cursor ? !!edges.at(first) : currentEdges.length === first,
-      startCursor: edgesCursor.start ? `${edgesCursor.start}` : '',
-      endCursor: edgesCursor.end ? `${edgesCursor.end}` : '',
+      startCursor: edgesCursor.start,
+      endCursor: edgesCursor.end,
       totalCount,
       count: currentEdges.length,
       hasPreviousPage:

@@ -14,7 +14,7 @@ export interface ItemForumProps {
 }
 
 export const ItemForum = ({ children, description, id, name }: ItemForumProps) => {
-  const { convertText } = useTextLang();
+  const { convertNameToLink, convertText } = useTextLang();
 
   return (
     <div className="px-6 py-4 [&:not(:last-child)]:border-b hover:bg-muted/50 flex gap-4 cursor-pointer flex-col md:flex-row">
@@ -25,22 +25,26 @@ export const ItemForum = ({ children, description, id, name }: ItemForumProps) =
 
         <div className="flex flex-col justify-center">
           <h3 className="text-lg font-medium">
-            <Link href={`/forum/${id}`} className="text-foreground no-underline">
+            <Link
+              href={`/forum/${convertNameToLink({ id, name })}`}
+              className="text-foreground no-underline"
+            >
               {convertText(name)}
             </Link>
           </h3>
-          {description.length > 0 && (
-            <p className="text-muted-foreground text-sm [&_p]:m-0">
-              <ReadOnlyEditor id={`${id}_description`} value={description} />
-            </p>
-          )}
+
+          <ReadOnlyEditor
+            id={`${id}_description`}
+            className="text-muted-foreground text-sm [&_p]:m-0"
+            value={description}
+          />
 
           {children && children.length > 0 && (
             <div className="flex mt-2 flex-wrap">
               {children.map(child => (
                 <Link
                   key={child.id}
-                  href={`/forum/${child.id}`}
+                  href={`/forum/${convertNameToLink({ id: child.id, name: child.name })}`}
                   className={buttonVariants({
                     variant: 'ghost',
                     size: 'sm',

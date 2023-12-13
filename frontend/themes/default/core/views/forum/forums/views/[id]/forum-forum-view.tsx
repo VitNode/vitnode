@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useItemShowForumsAPI } from './hooks/use-item-show-forums-api';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
@@ -18,11 +18,12 @@ export const ForumForumView = () => {
       <Card>
         <CardHeader className="border-b">
           <CardTitle>{convertText(data.name)}</CardTitle>
-          {data.description.length > 0 && (
-            <CardDescription className="[&_p]:m-0">
-              <ReadOnlyEditor id={`${data.id}_description`} value={data.description} />
-            </CardDescription>
-          )}
+
+          <ReadOnlyEditor
+            id={`${data.id}_description`}
+            className="text-sm text-muted-foreground [&_p]:m-0"
+            value={data.description}
+          />
         </CardHeader>
 
         {data.children && data.children.length > 0 && (

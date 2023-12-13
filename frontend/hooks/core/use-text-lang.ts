@@ -2,6 +2,8 @@ import { useLocale } from 'next-intl';
 
 import { TextLanguage } from '@/graphql/hooks';
 
+import { removeSpecialCharacters } from '../../functions/remove-special-characters';
+
 export const useTextLang = () => {
   const locale = useLocale();
 
@@ -23,7 +25,14 @@ export const useTextLang = () => {
     return text[0].value;
   };
 
+  const convertNameToLink = ({ id, name }: { id: string; name: TextLanguage[] }) => {
+    const text = removeSpecialCharacters(convertText(name)).replace(/\//g, '-');
+
+    return `${text}-${id}`;
+  };
+
   return {
-    convertText
+    convertText,
+    convertNameToLink
   };
 };

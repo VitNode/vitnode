@@ -30,7 +30,7 @@ class ShowForumForums {
 }
 
 @ObjectType()
-class ShowForumForumsChildren extends ShowForumForums {
+export class ChildrenShowForumForums extends ShowForumForums {
   @Field(() => [ShowForumForums], { nullable: true })
   children: ShowForumForums[] | null;
 }
@@ -40,8 +40,8 @@ export class ShowForumForumsWithParent extends ShowForumForums {
   @Field(() => ShowForumForums, { nullable: true })
   parent: ShowForumForums | null;
 
-  @Field(() => [ShowForumForumsChildren], { nullable: true })
-  children: ShowForumForumsChildren[] | null;
+  @Field(() => [ChildrenShowForumForums], { nullable: true })
+  children: ChildrenShowForumForums[] | null;
 }
 
 @ObjectType()

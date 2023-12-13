@@ -4,15 +4,6 @@ import { PageInfo } from '@/types/database/pagination.type';
 import { TextLanguage } from '@/types/database/text-language.type';
 
 @ObjectType()
-export class ShowTopicsForumsObj {
-  @Field(() => [ShowTopicsForums])
-  edges: ShowTopicsForums[];
-
-  @Field(() => PageInfo)
-  pageInfo: PageInfo;
-}
-
-@ObjectType()
 export class ShowTopicsForums {
   @Field(() => String)
   id: string;
@@ -28,4 +19,13 @@ export class ShowTopicsForums {
 
   @Field(() => Int)
   created: number;
+}
+
+@ObjectType()
+export class ShowTopicsForumsObj {
+  @Field(() => [ShowTopicsForums])
+  edges: ShowTopicsForums[];
+
+  @Field(() => PageInfo)
+  pageInfo: PageInfo;
 }

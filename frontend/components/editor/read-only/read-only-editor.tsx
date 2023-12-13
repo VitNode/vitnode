@@ -11,9 +11,10 @@ import '../editor.scss';
 interface Props {
   id: string;
   value: TextLanguage[];
+  className?: string;
 }
 
-export const ReadOnlyEditor = ({ id, value }: Props) => {
+export const ReadOnlyEditor = ({ className, id, value }: Props) => {
   if (value.length <= 0) return null;
 
   const initialConfig: InitialConfigType = {
@@ -26,7 +27,7 @@ export const ReadOnlyEditor = ({ id, value }: Props) => {
     <LexicalComposer initialConfig={initialConfig}>
       <LoadReadOnlyEditor value={value} />
       <RichTextPlugin
-        contentEditable={<ContentEditable />}
+        contentEditable={<ContentEditable className={className} />}
         placeholder={null}
         ErrorBoundary={LexicalErrorBoundary}
       />

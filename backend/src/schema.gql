@@ -22,6 +22,16 @@ type AuthorizationCurrentUserObj {
   newsletter: Boolean
 }
 
+type ChildrenShowForumForums {
+  _count: ShowForumForumsCount!
+  children: [ShowForumForums!]
+  created: Int!
+  description: [TextLanguage!]!
+  id: String!
+  name: [TextLanguage!]!
+  position: Int!
+}
+
 type GeneralAdminSettingsObj {
   side_name: String!
 }
@@ -91,9 +101,9 @@ type Query {
   core_members__admin__show(cursor: String, first: Int, groups: [String!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   core_members__show(cursor: String, findByIds: [String!], first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
-  forum_forums__admin__show(cursor: String, first: Int, last: Int, parent_id: String): ShowForumForumsObj!
-  forum_forums__show(cursor: String, first: Int, last: Int, parent_id: String): ShowForumForumsObj!
-  forum_topics__show(cursor: String, first: Int, last: Int): ShowTopicsForumsObj!
+  forum_forums__admin__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsObj!
+  forum_forums__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsObj!
+  forum_topics__show(cursor: String, first: Int, forum_id: String, last: Int): ShowTopicsForumsObj!
 }
 
 type ShowAdminGroups {
@@ -216,16 +226,6 @@ type ShowForumForums {
   position: Int!
 }
 
-type ShowForumForumsChildren {
-  _count: ShowForumForumsCount!
-  children: [ShowForumForums!]
-  created: Int!
-  description: [TextLanguage!]!
-  id: String!
-  name: [TextLanguage!]!
-  position: Int!
-}
-
 type ShowForumForumsCount {
   children: Int!
 }
@@ -237,7 +237,7 @@ type ShowForumForumsObj {
 
 type ShowForumForumsWithParent {
   _count: ShowForumForumsCount!
-  children: [ShowForumForumsChildren!]
+  children: [ChildrenShowForumForums!]
   created: Int!
   description: [TextLanguage!]!
   id: String!

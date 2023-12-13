@@ -26,3 +26,13 @@ Test
 - `HTML` tags are not allowed. Users can use `Markdown` instead,
 - `Font Family` is not implemented. Users don't like to change it when they are writing,
 - `Code Block` has prettier support. Users can format code by pressing a button in the toolbar,
+
+## Read only mode
+
+To display content form editor you have to use `ReadOnlyEditor` component with unique `id: string` and `value: TextLanguage[]` props.
+
+```tsx
+import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
+
+<ReadOnlyEditor id={`${id}_value`} value={value} />;
+```

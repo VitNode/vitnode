@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 
 import { ShowTopicsForumsArgs } from './dto/show.args';
 import { ShowTopicsForumsObj } from './dto/show.obj';
@@ -12,10 +13,20 @@ import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 export class ShowTopicsForumsService {
   constructor(private prisma: PrismaService) {}
 
-  async show({ cursor, first, last }: ShowTopicsForumsArgs): Promise<ShowTopicsForumsObj> {
+  async show({
+    cursor,
+    first,
+    forum_id,
+    last
+  }: ShowTopicsForumsArgs): Promise<ShowTopicsForumsObj> {
+    const where: Prisma.forum_topicsWhereInput = {
+      forum_id
+    };
+
     const [edges, totalCount] = await this.prisma.$transaction([
       this.prisma.forum_topics.findMany({
         ...inputPagination({ first, cursor, last }),
+        where,
         include: {
           name: true,
           content: true
@@ -26,7 +37,7 @@ export class ShowTopicsForumsService {
           }
         ]
       }),
-      this.prisma.forum_forums.count()
+      this.prisma.forum_topics.count({ where })
     ]);
 
     return outputPagination({

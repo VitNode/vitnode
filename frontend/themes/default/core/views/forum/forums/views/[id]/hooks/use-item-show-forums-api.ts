@@ -9,15 +9,20 @@ import {
   Forum_Forums__Show_ItemQueryVariables
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
+import { getUuidFromString } from '@/functions/url';
 
 export const useItemShowForumsAPI = () => {
   const { id } = useParams();
+  const forumId = getUuidFromString(Array.isArray(id) ? id[0] : id);
 
   const query = useQuery({
-    queryKey: [APIKeys.FORUMS_ITEM, { id }],
+    queryKey: [APIKeys.FORUMS_ITEM, { id: forumId }],
     queryFn: async () =>
       await fetcher<Forum_Forums__Show_ItemQuery, Forum_Forums__Show_ItemQueryVariables>({
-        query: Forum_Forums__Show_Item
+        query: Forum_Forums__Show_Item,
+        variables: {
+          forumId: getUuidFromString(forumId)
+        }
       }),
     placeholderData: previousData => previousData
   });

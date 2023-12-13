@@ -20,7 +20,7 @@ interface Props {
 
 export const CategoryForum = ({ children, description, id, name }: Props) => {
   const [isClose, setClose] = useState(false);
-  const { convertText } = useTextLang();
+  const { convertNameToLink, convertText } = useTextLang();
 
   return (
     <Card>
@@ -32,16 +32,19 @@ export const CategoryForum = ({ children, description, id, name }: Props) => {
         >
           <div>
             <h2 className="font-medium text-xl">
-              <Link href={`/forum/${id}`} className="text-foreground no-underline">
+              <Link
+                href={`/forum/${convertNameToLink({ id, name })}`}
+                className="text-foreground no-underline"
+              >
                 {convertText(name)}
               </Link>
             </h2>
 
-            {description.length > 0 && (
-              <p className="text-muted-foreground text-sm [&_p]:m-0">
-                <ReadOnlyEditor id={`${id}_description`} value={description} />
-              </p>
-            )}
+            <ReadOnlyEditor
+              id={`${id}_description`}
+              className="text-muted-foreground text-sm [&_p]:m-0"
+              value={description}
+            />
           </div>
 
           <Button

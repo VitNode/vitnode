@@ -1,5 +1,5 @@
-query Forum_forums__show_item {
-  forum_forums__show {
+query Forum_forums__show_item($cursor: String, $first: Int, $last: Int, $forumId: String!) {
+  forum_forums__show(ids: [$forumId]) {
     pageInfo {
       count
       endCursor
@@ -35,6 +35,29 @@ query Forum_forums__show_item {
           id_language
           value
         }
+      }
+    }
+  }
+  forum_topics__show(cursor: $cursor, first: $first, last: $last, forum_id: $forumId) {
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+    edges {
+      content {
+        value
+        id_language
+      }
+      created
+      id
+      updated
+      name {
+        id_language
+        value
       }
     }
   }
