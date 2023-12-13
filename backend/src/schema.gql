@@ -62,7 +62,7 @@ type Mutation {
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
   forum_forums__admin__change_position(id: String!, index_to_move: Int!, parent_id: String): String!
-  forum_forums__admin__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, name_seo: String, parent_id: String, permissions: PermissionsCreateForumForums!): ShowForumForumsWithParent!
+  forum_forums__admin__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: String, permissions: PermissionsCreateForumForums!): ShowForumForumsWithParent!
   forum_topics__create(content: [TextLanguageInput!]!, forum_id: String!, name: [TextLanguageInput!]!): ShowTopicsForums!
 }
 
@@ -91,8 +91,8 @@ type Query {
   core_members__admin__show(cursor: String, first: Int, groups: [String!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   core_members__show(cursor: String, findByIds: [String!], first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
-  forum_forums__admin__show(cursor: String, first: Int, last: Int, name_seo: String, parent_id: String): ShowForumForumsObj!
-  forum_forums__show(cursor: String, first: Int, last: Int, name_seo: String, parent_id: String): ShowForumForumsObj!
+  forum_forums__admin__show(cursor: String, first: Int, last: Int, parent_id: String): ShowForumForumsObj!
+  forum_forums__show(cursor: String, first: Int, last: Int, parent_id: String): ShowForumForumsObj!
   forum_topics__show(cursor: String, first: Int, last: Int): ShowTopicsForumsObj!
 }
 
@@ -213,7 +213,6 @@ type ShowForumForums {
   description: [TextLanguage!]!
   id: String!
   name: [TextLanguage!]!
-  name_seo: String!
   position: Int!
 }
 
@@ -224,7 +223,6 @@ type ShowForumForumsChildren {
   description: [TextLanguage!]!
   id: String!
   name: [TextLanguage!]!
-  name_seo: String!
   position: Int!
 }
 
@@ -244,7 +242,6 @@ type ShowForumForumsWithParent {
   description: [TextLanguage!]!
   id: String!
   name: [TextLanguage!]!
-  name_seo: String!
   parent: ShowForumForums
   position: Int!
 }

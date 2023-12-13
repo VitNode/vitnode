@@ -10,5 +10,7 @@ export enum APIKeys {
   PROFILE = 'profile',
   LANGUAGES = 'languages',
   FORUMS_ADMIN = 'forums.admin',
-  FORUMS_CHILDREN_ADMIN = 'forums.children.admin'
+  FORUMS_CHILDREN_ADMIN = 'forums.children.admin',
+  FORUMS = 'forums',
+  FORUMS_ITEM = 'forums.item'
 }

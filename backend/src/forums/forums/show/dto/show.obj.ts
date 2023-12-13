@@ -25,9 +25,6 @@ class ShowForumForums {
   @Field(() => Int)
   created: number;
 
-  @Field(() => String)
-  name_seo: string;
-
   @Field(() => ShowForumForumsCount)
   _count: ShowForumForumsCount;
 }

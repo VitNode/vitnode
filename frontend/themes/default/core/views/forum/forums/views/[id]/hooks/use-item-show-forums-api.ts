@@ -8,18 +8,16 @@ import {
   Forum_Forums__Show_ItemQuery,
   Forum_Forums__Show_ItemQueryVariables
 } from '@/graphql/hooks';
+import { APIKeys } from '@/graphql/api-keys';
 
 export const useItemShowForumsAPI = () => {
-  const { forum_name_seo } = useParams();
+  const { id } = useParams();
 
   const query = useQuery({
-    queryKey: ['item-show-forums', { name_seo: forum_name_seo }],
+    queryKey: [APIKeys.FORUMS_ITEM, { id }],
     queryFn: async () =>
       await fetcher<Forum_Forums__Show_ItemQuery, Forum_Forums__Show_ItemQueryVariables>({
-        query: Forum_Forums__Show_Item,
-        variables: {
-          nameSeo: Array.isArray(forum_name_seo) ? forum_name_seo.at(0) : forum_name_seo
-        }
+        query: Forum_Forums__Show_Item
       }),
     placeholderData: previousData => previousData
   });

@@ -1,5 +1,5 @@
-query Forum_forums__show_item($nameSeo: String) {
-  forum_forums__show(name_seo: $nameSeo) {
+query Forum_forums__show_item {
+  forum_forums__show {
     pageInfo {
       count
       endCursor
@@ -10,7 +10,6 @@ query Forum_forums__show_item($nameSeo: String) {
     }
     edges {
       id
-      name_seo
       description {
         id_language
         value
@@ -21,14 +20,12 @@ query Forum_forums__show_item($nameSeo: String) {
       }
       children {
         id
-        name_seo
         name {
           id_language
           value
         }
         children {
           id
-          name_seo
           name {
             id_language
             value

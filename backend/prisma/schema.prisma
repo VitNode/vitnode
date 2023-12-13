@@ -154,7 +154,6 @@ model core_attachments {
 
 model forum_forums {
   id             String  @id @unique @default(uuid())
-  name_seo       String  @unique @db.VarChar(255)
   created        Int
   parent_id      String?
   position       Int
@@ -214,7 +213,6 @@ model forum_topics {
   views     Int          @default(0)
   author    core_members @relation("forum_topics_author", references: [id], fields: [author_id], onDelete: Cascade)
   author_id String
-  url       String       @unique @db.VarChar(255)
   created   Int
   updated   Int?
 

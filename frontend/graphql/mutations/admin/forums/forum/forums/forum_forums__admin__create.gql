@@ -3,14 +3,12 @@ mutation Forum_forums__admin__create(
   $description: [TextLanguageInput!]!
   $parentId: String
   $permissions: PermissionsCreateForumForums!
-  $nameSeo: String
 ) {
   forum_forums__admin__create(
     name: $name
     description: $description
     parent_id: $parentId
     permissions: $permissions
-    name_seo: $nameSeo
   ) {
     created
     description {
@@ -23,6 +21,5 @@ mutation Forum_forums__admin__create(
       value
     }
     position
-    name_seo
   }
 }

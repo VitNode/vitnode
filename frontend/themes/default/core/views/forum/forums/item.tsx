@@ -10,11 +10,10 @@ export interface ItemForumProps {
   description: TextLanguage[];
   id: string;
   name: TextLanguage[];
-  name_seo: string;
   children?: Omit<ItemForumProps, 'description'>[] | null;
 }
 
-export const ItemForum = ({ children, description, id, name, name_seo }: ItemForumProps) => {
+export const ItemForum = ({ children, description, id, name }: ItemForumProps) => {
   const { convertText } = useTextLang();
 
   return (
@@ -26,20 +25,22 @@ export const ItemForum = ({ children, description, id, name, name_seo }: ItemFor
 
         <div className="flex flex-col justify-center">
           <h3 className="text-lg font-medium">
-            <Link href={`/forum/${name_seo}`} className="text-foreground no-underline">
+            <Link href={`/forum/${id}`} className="text-foreground no-underline">
               {convertText(name)}
             </Link>
           </h3>
-          <p className="text-muted-foreground text-sm [&_p]:m-0">
-            <ReadOnlyEditor id={`${id}_description`} value={description} />
-          </p>
+          {description.length > 0 && (
+            <p className="text-muted-foreground text-sm [&_p]:m-0">
+              <ReadOnlyEditor id={`${id}_description`} value={description} />
+            </p>
+          )}
 
           {children && children.length > 0 && (
             <div className="flex mt-2 flex-wrap">
               {children.map(child => (
                 <Link
                   key={child.id}
-                  href={`/forum/${child.name_seo}`}
+                  href={`/forum/${child.id}`}
                   className={buttonVariants({
                     variant: 'ghost',
                     size: 'sm',

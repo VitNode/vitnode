@@ -56,7 +56,4 @@ export class CreateForumForumsArgs {
 
   @Field(() => PermissionsCreateForumForums)
   permissions: PermissionsCreateForumForums;
-
-  @Field(() => String, { nullable: true })
-  name_seo: string | null;
 }

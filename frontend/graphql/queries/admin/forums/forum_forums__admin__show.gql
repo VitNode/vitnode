@@ -2,7 +2,6 @@ query Forum_forums__admin__show($first: Int, $cursor: String, $parentId: String)
   forum_forums__admin__show(first: $first, cursor: $cursor, parent_id: $parentId) {
     edges {
       id
-      name_seo
       description {
         id_language
         value
@@ -15,7 +14,6 @@ query Forum_forums__admin__show($first: Int, $cursor: String, $parentId: String)
       created
       children {
         created
-        name_seo
         description {
           id_language
           value

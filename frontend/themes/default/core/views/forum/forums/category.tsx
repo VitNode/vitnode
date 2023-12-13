@@ -15,11 +15,10 @@ interface Props {
   description: TextLanguage[];
   id: string;
   name: TextLanguage[];
-  name_seo: string;
   children?: ItemForumProps[] | null;
 }
 
-export const CategoryForum = ({ children, description, id, name, name_seo }: Props) => {
+export const CategoryForum = ({ children, description, id, name }: Props) => {
   const [isClose, setClose] = useState(false);
   const { convertText } = useTextLang();
 
@@ -27,20 +26,22 @@ export const CategoryForum = ({ children, description, id, name, name_seo }: Pro
     <Card>
       <CardContent className="p-0">
         <div
-          className={cx('px-6 py-4 flex items-start gap-4 justify-between', {
+          className={cx('px-6 py-4 flex items-center gap-4 justify-between', {
             'border-b': !isClose && children && children.length > 0
           })}
         >
           <div>
             <h2 className="font-medium text-xl">
-              <Link href={`/forum/${name_seo}`} className="text-foreground no-underline">
+              <Link href={`/forum/${id}`} className="text-foreground no-underline">
                 {convertText(name)}
               </Link>
             </h2>
 
-            <p className="text-muted-foreground text-sm [&_p]:m-0">
-              <ReadOnlyEditor id={`${id}_description`} value={description} />
-            </p>
+            {description.length > 0 && (
+              <p className="text-muted-foreground text-sm [&_p]:m-0">
+                <ReadOnlyEditor id={`${id}_description`} value={description} />
+              </p>
+            )}
           </div>
 
           <Button
