@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from '@/i18n';
 import { cx } from '@/functions/classnames';
-import { ItemForum, ItemForumProps } from './item';
+import { ItemForum, ItemForumProps } from './item-forum';
 import { TextLanguage } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
@@ -31,14 +31,12 @@ export const CategoryForum = ({ children, description, id, name }: Props) => {
           })}
         >
           <div>
-            <h2 className="font-medium text-xl">
-              <Link
-                href={`/forum/${convertNameToLink({ id, name })}`}
-                className="text-foreground no-underline"
-              >
-                {convertText(name)}
-              </Link>
-            </h2>
+            <Link
+              href={`/forum/${convertNameToLink({ id, name })}`}
+              className="font-medium text-xl text-foreground no-underline"
+            >
+              {convertText(name)}
+            </Link>
 
             <ReadOnlyEditor
               id={`${id}_description`}
@@ -70,6 +68,7 @@ export const CategoryForum = ({ children, description, id, name }: Props) => {
               initial="collapsed"
               animate="open"
               exit="collapsed"
+              className="overflow-hidden"
               variants={{
                 open: { opacity: 1, height: 'auto' },
                 collapsed: { opacity: 0, height: 0 }

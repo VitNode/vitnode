@@ -24,14 +24,12 @@ export const ItemForum = ({ children, description, id, name }: ItemForumProps) =
         </div>
 
         <div className="flex flex-col justify-center">
-          <h3 className="text-lg font-medium">
-            <Link
-              href={`/forum/${convertNameToLink({ id, name })}`}
-              className="text-foreground no-underline"
-            >
-              {convertText(name)}
-            </Link>
-          </h3>
+          <Link
+            href={`/forum/${convertNameToLink({ id, name })}`}
+            className="text-lg font-medium text-foreground no-underline"
+          >
+            {convertText(name)}
+          </Link>
 
           <ReadOnlyEditor
             id={`${id}_description`}
