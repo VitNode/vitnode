@@ -1,15 +1,13 @@
 import { ChevronDown } from 'lucide-react';
-import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from '@/i18n';
 import { cx } from '@/functions/classnames';
-import { ItemForum, ItemForumProps } from './item-forum';
+import { ItemForum, ItemForumProps } from '../item/item-forum';
 import { TextLanguage } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
-import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
+import { DescriptionItemForum } from '../item/description';
 
 interface Props {
   description: TextLanguage[];
@@ -19,7 +17,6 @@ interface Props {
 }
 
 export const CategoryForum = ({ children, description, id, name }: Props) => {
-  const [isClose, setClose] = useState(false);
   const { convertNameToLink, convertText } = useTextLang();
 
   return (
@@ -27,7 +24,7 @@ export const CategoryForum = ({ children, description, id, name }: Props) => {
       <CardContent className="p-0">
         <div
           className={cx('px-6 py-4 flex items-center gap-4 justify-between', {
-            'border-b': !isClose && children && children.length > 0
+            //  'border-b': children && children.length > 0
           })}
         >
           <div>
@@ -38,11 +35,7 @@ export const CategoryForum = ({ children, description, id, name }: Props) => {
               {convertText(name)}
             </Link>
 
-            <ReadOnlyEditor
-              id={`${id}_description`}
-              className="text-muted-foreground text-sm [&_p]:m-0"
-              value={description}
-            />
+            {description.length > 0 && <DescriptionItemForum id={id} description={description} />}
           </div>
 
           {children && children.length > 0 && (
@@ -50,36 +43,23 @@ export const CategoryForum = ({ children, description, id, name }: Props) => {
               className="transition-transform text-muted-foreground hover:text-foreground flex-shrink-0"
               variant="ghost"
               size="icon"
-              onClick={() => setClose(prev => !prev)}
+              // onClick={() => setClose(prev => !prev)}
             >
               <ChevronDown
                 className={cx('transition-transform', {
-                  'transform rotate-90': isClose
+                  //  'transform rotate-90': isClose
                 })}
               />
             </Button>
           )}
         </div>
 
-        <AnimatePresence initial={false}>
-          {!isClose && children && children.length > 0 && (
-            <motion.div
-              key="content"
-              initial="collapsed"
-              animate="open"
-              exit="collapsed"
-              className="overflow-hidden"
-              variants={{
-                open: { opacity: 1, height: 'auto' },
-                collapsed: { opacity: 0, height: 0 }
-              }}
-            >
-              {children.map(child => (
-                <ItemForum key={child.id} {...child} />
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* <AnimatePresence initial={false}> */}
+        {/* {!isClose && children && children.length > 0 && ( */}
+        {children &&
+          children.length > 0 &&
+          children.map(child => <ItemForum key={child.id} {...child} />)}
+        {/* </AnimatePresence> */}
       </CardContent>
     </Card>
   );

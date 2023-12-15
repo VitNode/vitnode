@@ -1,13 +1,5 @@
-query Forum_forums__show($cursor: String, $first: Int) {
-  forum_forums__show(cursor: $cursor, first: $first) {
-    pageInfo {
-      count
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-      totalCount
-    }
+query Forum_forums__show {
+  forum_forums__show {
     edges {
       id
       description {

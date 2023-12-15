@@ -6,7 +6,7 @@ import { useTextLang } from '@/hooks/core/use-text-lang';
 import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
 import { ActionsForumsForum } from './actions/actions';
 
-import { ItemForum } from '../../list/item-forum';
+import { ItemForum } from '../../item/item-forum';
 
 export const ForumForumView = () => {
   const { data } = useItemShowForumsAPI();
