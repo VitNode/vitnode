@@ -16,17 +16,17 @@ export const OnChangePluginEditor = ({ onChange, selectedLanguage, value }: Prop
 
   // Set the initial editor value
   useEffect(() => {
-    if (value) {
-      const currentValue = value.find(item => item.id_language === selectedLanguage)?.value;
-      if (!currentValue) {
-        editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined);
+    if (!value || value.length <= 0) return;
 
-        return;
-      }
+    const currentValue = value.find(item => item.id_language === selectedLanguage)?.value;
+    if (!currentValue) {
+      editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined);
 
-      const initialEditorState = editor.parseEditorState(currentValue);
-      editor.setEditorState(initialEditorState);
+      return;
     }
+
+    const initialEditorState = editor.parseEditorState(currentValue);
+    editor.setEditorState(initialEditorState);
   }, [selectedLanguage]);
 
   // Update the editor value when the editor value changes

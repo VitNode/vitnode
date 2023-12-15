@@ -29,8 +29,7 @@ export const useCreateEditFormGroupsMembersAdmin = ({
     defaultValues: {
       name: data?.name ?? [],
       test: ''
-    },
-    mode: 'onChange'
+    }
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {

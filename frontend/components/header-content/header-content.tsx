@@ -1,7 +1,10 @@
 import { ReactNode } from 'react';
 
+import { cx } from '@/functions/classnames';
+
 interface HeaderContentProps {
   children?: ReactNode;
+  className?: string;
   desc?: string;
 }
 
@@ -17,12 +20,13 @@ interface HeaderContentH2Props extends HeaderContentProps {
 
 export const HeaderContent = ({
   children,
+  className,
   desc,
   h1,
   h2
 }: HeaderContentH1Props | HeaderContentH2Props) => {
   return (
-    <div className="mb-5 flex gap-4 flex-col sm:flex-row">
+    <div className={cx('mb-5 flex gap-4 flex-col sm:flex-row', className)}>
       <div className="space-y-1.5 text-center sm:text-left">
         {h1 ? (
           <h1 className="font-semibold tracking-tight text-2xl">{h1}</h1>

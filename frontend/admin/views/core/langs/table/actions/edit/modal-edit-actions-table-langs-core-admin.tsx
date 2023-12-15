@@ -44,8 +44,7 @@ export const ModalEditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => 
     defaultValues: {
       name: data.name,
       timezone: data.timezone
-    },
-    mode: 'onChange'
+    }
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {

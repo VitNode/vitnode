@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useItemShowForumsAPI } from '@/hooks/forums/forum/use-item-show-forums-api';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
+import { ActionsForumsForum } from './actions/actions';
 
 import { ItemForum } from '../../list/item-forum';
 
@@ -35,9 +36,7 @@ export const ForumForumView = () => {
         )}
       </Card>
 
-      <Card className="mt-10">
-        <CardContent className="p-6">Topics</CardContent>
-      </Card>
+      <ActionsForumsForum />
     </>
   );
 };

@@ -74,8 +74,7 @@ export const useSignUpView = () => {
       birthday: new Date().toDateString(),
       terms: false,
       newsletter: false
-    },
-    mode: 'onChange'
+    }
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
