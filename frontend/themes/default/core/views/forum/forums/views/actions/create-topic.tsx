@@ -56,7 +56,11 @@ export const CreateTopic = () => {
             )}
           />
 
-          <Button disabled={!form.formState.isValid} type="submit">
+          <Button
+            disabled={!form.formState.isValid}
+            loading={form.formState.isSubmitting}
+            type="submit"
+          >
             {tCore('save')}
           </Button>
         </form>

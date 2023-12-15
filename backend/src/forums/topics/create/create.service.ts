@@ -14,7 +14,7 @@ export class CreateForumTopicsService {
 
   async create(
     { id }: User,
-    { content, forum_id, name }: CreateForumTopicsArgs
+    { content, forum_id, title }: CreateForumTopicsArgs
   ): Promise<ShowTopicsForums> {
     const forum = await this.prisma.forum_forums.findUnique({
       where: {
@@ -33,8 +33,8 @@ export class CreateForumTopicsService {
             id: forum_id
           }
         },
-        name: {
-          create: name
+        title: {
+          create: title
         },
         content: {
           create: content
@@ -47,7 +47,7 @@ export class CreateForumTopicsService {
         }
       },
       include: {
-        name: true,
+        title: true,
         content: true
       }
     });

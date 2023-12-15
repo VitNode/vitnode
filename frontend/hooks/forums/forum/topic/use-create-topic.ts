@@ -4,9 +4,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 
 import { zodTextLanguageInputType } from '@/components/text-language-input';
+import { mutationApi } from './mutation-api';
+import { useToast } from '@/components/ui/use-toast';
 
 export const useCreateTopic = () => {
   const t = useTranslations('core');
+  const { toast } = useToast();
 
   const formSchema = z.object({
     title: zodTextLanguageInputType.min(1, t('forms.empty')),
@@ -22,9 +25,18 @@ export const useCreateTopic = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // TODO: Add mutation
-    // eslint-disable-next-line no-console
-    console.log(values);
+    try {
+      await mutationApi({ ...values, forumId: '1' });
+      // TODO: Add redirect to the topic page
+    } catch (err) {
+      toast({
+        title: t('errors.title'),
+        description: t('errors.internal_server_error'),
+        variant: 'destructive'
+      });
+
+      return;
+    }
   };
 
   return { form, onSubmit };

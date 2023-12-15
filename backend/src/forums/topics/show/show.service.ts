@@ -28,7 +28,7 @@ export class ShowTopicsForumsService {
         ...inputPagination({ first, cursor, last }),
         where,
         include: {
-          name: true,
+          title: true,
           content: true
         },
         orderBy: [

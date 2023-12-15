@@ -1,13 +1,5 @@
 query Forum_forums__show_item($cursor: String, $first: Int, $last: Int, $forumId: String!) {
   forum_forums__show(ids: [$forumId]) {
-    pageInfo {
-      count
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-      totalCount
-    }
     edges {
       id
       description {
@@ -55,7 +47,7 @@ query Forum_forums__show_item($cursor: String, $first: Int, $last: Int, $forumId
       created
       id
       updated
-      name {
+      title {
         id_language
         value
       }
