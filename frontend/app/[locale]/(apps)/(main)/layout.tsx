@@ -1,6 +1,5 @@
 import { LazyExoticComponent, ReactNode, lazy } from 'react';
 import { cookies } from 'next/headers';
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import { isRedirectError } from 'next/dist/client/components/redirect';
 
 import { CONFIG } from '@/config';
@@ -12,8 +11,6 @@ import {
 } from '@/graphql/hooks';
 import { SessionProvider } from './session-provider';
 import { InternalErrorView } from '@/admin/global/internal-error-view';
-import getQueryClient from '@/functions/get-query-client';
-import { APIKeys } from '@/graphql/api-keys';
 import { redirect } from '@/i18n';
 
 interface Props {
@@ -41,10 +38,7 @@ const getData = async () => {
 
 export default async function Layout({ children }: Props) {
   try {
-    const queryClient = getQueryClient();
     const data = await getData();
-    await queryClient.setQueryData([APIKeys.AUTHORIZATION], data);
-    const dehydratedState = dehydrate(queryClient);
 
     const Layout: LazyExoticComponent<({ children }: { children: ReactNode }) => JSX.Element> =
       lazy(() =>
@@ -54,11 +48,9 @@ export default async function Layout({ children }: Props) {
       );
 
     return (
-      <HydrationBoundary state={dehydratedState}>
-        <SessionProvider>
-          <Layout>{children}</Layout>
-        </SessionProvider>
-      </HydrationBoundary>
+      <SessionProvider data={data}>
+        <Layout>{children}</Layout>
+      </SessionProvider>
     );
   } catch (error) {
     // Redirect from catch
