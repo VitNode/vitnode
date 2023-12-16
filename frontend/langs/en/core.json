@@ -156,10 +156,6 @@
         "password": {
           "label": "Password"
         },
-        "password_confirmation": {
-          "label": "Confirm Password",
-          "not_match": "Passwords do not match."
-        },
         "terms": {
           "label": "Accept terms and conditions",
           "desc": "You agree to our Terms of Service and Privacy Policy.",

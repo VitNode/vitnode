@@ -41,6 +41,7 @@ export const AccountInstallConfigsView = () => {
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="email"
@@ -68,19 +69,7 @@ export const AccountInstallConfigsView = () => {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="password_confirmation"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('sign_up.form.password_confirmation.label')}</FormLabel>
-                <FormControl>
-                  <Input {...field} type="password" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+
           <FormField
             control={form.control}
             name="terms"

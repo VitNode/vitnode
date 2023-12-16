@@ -39,6 +39,7 @@ export const FormSignUp = () => {
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="email"
@@ -66,19 +67,7 @@ export const FormSignUp = () => {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="password_confirmation"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('sign_up.form.password_confirmation.label')}</FormLabel>
-                <FormControl>
-                  <Input {...field} type="password" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+
           <FormField
             control={form.control}
             name="terms"
@@ -94,6 +83,7 @@ export const FormSignUp = () => {
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="newsletter"
@@ -110,6 +100,7 @@ export const FormSignUp = () => {
             )}
           />
         </CardContent>
+
         <CardFooter>
           <Button
             type="submit"

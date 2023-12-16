@@ -3,7 +3,6 @@ import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import { convertDateToUnixTime, currentDate } from '@/functions/date';
 import { ErrorType } from '@/graphql/fetcher';
 import { mutationApi } from './mutation-api';
 import { useToast } from '@/components/ui/use-toast';
@@ -16,53 +15,39 @@ export const useSignUpView = ({ installPage }: Args) => {
   const t = useTranslations('core');
   const { toast } = useToast();
 
-  const formSchema = z
-    .object({
-      name: z
-        .string({
-          required_error: t('forms.empty')
-        })
-        .min(1, {
-          message: t('forms.empty')
-        }),
-      email: z
-        .string({
-          required_error: t('forms.empty')
-        })
-        .min(1, {
-          message: t('forms.empty')
-        }),
-      password: z
-        .string({
-          required_error: t('forms.empty')
-        })
-        .min(1, {
-          message: t('forms.empty')
-        }),
-      password_confirmation: z
-        .string({
-          required_error: t('forms.empty')
-        })
-        .min(1, {
-          message: t('forms.empty')
-        }),
-      terms: z.boolean().refine(value => value, {
-        message: t('sign_up.form.terms.empty')
+  const formSchema = z.object({
+    name: z
+      .string({
+        required_error: t('forms.empty')
+      })
+      .min(1, {
+        message: t('forms.empty')
       }),
-      newsletter: z.boolean()
-    })
-    .refine(data => data.password === data.password_confirmation, {
-      message: t('sign_up.form.password_confirmation.not_match'),
-      path: ['password_confirmation']
-    });
-
+    email: z
+      .string({
+        required_error: t('forms.empty')
+      })
+      .min(1, {
+        message: t('forms.empty')
+      }),
+    password: z
+      .string({
+        required_error: t('forms.empty')
+      })
+      .min(1, {
+        message: t('forms.empty')
+      }),
+    terms: z.boolean().refine(value => value, {
+      message: t('sign_up.form.terms.empty')
+    }),
+    newsletter: z.boolean()
+  });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
       email: '',
       password: '',
-      password_confirmation: '',
       terms: false,
       newsletter: false
     }
@@ -70,7 +55,7 @@ export const useSignUpView = ({ installPage }: Args) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password_confirmation, terms, ...rest } = values;
+    const { terms, ...rest } = values;
 
     try {
       await mutationApi({

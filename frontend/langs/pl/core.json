@@ -156,10 +156,6 @@
         "password": {
           "label": "Hasło"
         },
-        "password_confirmation": {
-          "label": "Potwierdź hasło",
-          "not_match": "Hasła nie są takie same."
-        },
         "terms": {
           "label": "Akceptuję regulamin serwisu.",
           "desc": "Akceptuję regulamin serwisu oraz politykę prywatności.",
