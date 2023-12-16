@@ -41,8 +41,7 @@ export const useCreateEditFormForumAdmin = () => {
         can_all_reply: false,
         groups: []
       }
-    },
-    mode: 'onChange'
+    }
   });
   const { isPending, mutateAsync } = useCreateForumAdminAPI();
 

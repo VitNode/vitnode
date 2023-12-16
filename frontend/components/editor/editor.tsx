@@ -31,11 +31,12 @@ interface Props {
   id: string;
   onChange: (value: TextLanguage[]) => void;
   value: TextLanguage[];
+  autoFocus?: boolean;
   className?: string;
   toolbarClassName?: string;
 }
 
-export const Editor = ({ className, id, onChange, toolbarClassName, value }: Props) => {
+export const Editor = ({ autoFocus, className, id, onChange, toolbarClassName, value }: Props) => {
   const [blockType, setBlockType] = useState<string>(BLOCK_NAMES.PARAGRAPH);
   const floatingAnchorElem = useRef<HTMLDivElement>(null);
   const { defaultLanguage } = useGlobals();
@@ -77,7 +78,7 @@ export const Editor = ({ className, id, onChange, toolbarClassName, value }: Pro
             ErrorBoundary={LexicalErrorBoundary}
           />
           <MarkdownShortcutPlugin transformers={MARKDOWN_TRANSFORMERS_EDITOR} />
-          <AutoFocusPlugin />
+          {autoFocus && <AutoFocusPlugin />}
           <HistoryPlugin />
           <ListPlugin />
           <CheckListPlugin />

@@ -38,8 +38,7 @@ export const FormGeneralCoreAdmin = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: side_name
-    },
-    mode: 'onChange'
+    }
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {

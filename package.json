@@ -10,17 +10,19 @@
     "backend:prisma": "cd backend && pnpm prisma:push && cd ..",
     "backend:build": "cd backend && pnpm build && cd ..",
     "backend:start": "cd backend && pnpm start",
+    "backend:dev": "cd backend && pnpm dev",
     "frontend:build": "cd frontend && pnpm build && cd ..",
     "frontend:start": "cd frontend && pnpm start",
+    "frontend:dev": "cd frontend && pnpm dev",
     "docker": "docker-compose -f ./deployments/docker-compose.yml -p vitnode up -d",
     "lint": "cd backend && pnpm lint && cd .. && cd frontend && pnpm lint && cd ..",
     "lint:fix": "cd backend && pnpm lint:fix && cd .. && cd frontend && pnpm lint:fix && cd .."
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.7.1",
-    "@commitlint/config-conventional": "^17.7.0",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
     "husky": "^8.0.3",
-    "prettier": "^3.0.1",
-    "prettier-plugin-tailwindcss": "^0.5.4"
+    "prettier": "^3.1.1",
+    "prettier-plugin-tailwindcss": "^0.5.9"
   }
 }

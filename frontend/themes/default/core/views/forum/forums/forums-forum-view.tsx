@@ -1,28 +1,12 @@
-'use client';
+import { Forum_Forums__ShowQuery } from '@/graphql/hooks';
+import { CategoryForum } from './list/category';
 
-import { Components, Virtuoso } from 'react-virtuoso';
-import { forwardRef } from 'react';
-
-import { CategoryForum } from './category';
-import { useShowForumsAPI } from './hooks/use-show-forums-api';
-
-export const ForumsForumView = () => {
-  const { data } = useShowForumsAPI();
-
-  const List: Components['List'] = forwardRef((props, ref) => {
-    return <div className="flex flex-col gap-4" {...props} ref={ref} />;
-  });
-
-  List.displayName = 'List';
-
+export const ForumsForumView = ({ forum_forums__show: { edges } }: Forum_Forums__ShowQuery) => {
   return (
-    <Virtuoso
-      data={data}
-      useWindowScroll
-      components={{
-        List
-      }}
-      itemContent={(index, data) => <CategoryForum {...data} />}
-    />
+    <div className="flex flex-col gap-4">
+      {edges.map(edge => (
+        <CategoryForum key={edge.id} {...edge} />
+      ))}
+    </div>
   );
 };

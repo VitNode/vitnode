@@ -4,7 +4,7 @@ import { Link } from '@/i18n';
 import { buttonVariants } from '@/components/ui/button';
 import { TextLanguage } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
-import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
+import { DescriptionItemForum } from './description';
 
 export interface ItemForumProps {
   description: TextLanguage[];
@@ -17,27 +17,21 @@ export const ItemForum = ({ children, description, id, name }: ItemForumProps) =
   const { convertNameToLink, convertText } = useTextLang();
 
   return (
-    <div className="px-6 py-4 [&:not(:last-child)]:border-b hover:bg-muted/50 flex gap-4 cursor-pointer flex-col md:flex-row">
+    <div className="px-6 py-4 border-t hover:bg-muted/50 flex gap-4 cursor-pointer flex-col md:flex-row">
       <div className="flex gap-4 flex-1">
         <div className="bg-primary/20 w-10 h-10 rounded-md flex items-center justify-center [&>svg]:w-5 [&>svg]:h-5 text-primary flex-shrink-0">
           <MessagesSquare />
         </div>
 
         <div className="flex flex-col justify-center">
-          <h3 className="text-lg font-medium">
-            <Link
-              href={`/forum/${convertNameToLink({ id, name })}`}
-              className="text-foreground no-underline"
-            >
-              {convertText(name)}
-            </Link>
-          </h3>
+          <Link
+            href={`/forum/${convertNameToLink({ id, name })}`}
+            className="text-lg font-medium text-foreground no-underline"
+          >
+            {convertText(name)}
+          </Link>
 
-          <ReadOnlyEditor
-            id={`${id}_description`}
-            className="text-muted-foreground text-sm [&_p]:m-0"
-            value={description}
-          />
+          {description.length > 0 && <DescriptionItemForum id={id} description={description} />}
 
           {children && children.length > 0 && (
             <div className="flex mt-2 flex-wrap">

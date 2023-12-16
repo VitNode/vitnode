@@ -18,7 +18,7 @@ const DATA: ConfigType = {
     ],
     default: 'en'
   },
-  applications: ['core', 'admin'],
+  applications: ['core', 'admin', 'forum'],
   finished_install: false
 };
 

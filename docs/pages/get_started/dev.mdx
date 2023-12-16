@@ -1,7 +1,142 @@
 import { Callout } from 'nextra/components';
+import { Steps } from 'nextra/components';
+import { Tabs } from 'nextra/components';
 
 # Developer Mode
 
-<Callout type="warning" emoji="⚠️">
-  This page is in progress.
+This guide will help you to install the project on your local machine.
+
+<Callout type="error" emoji="❌">
+  This tutorial is for development purposes only. Do not use these credentials in production.
 </Callout>
+
+## Prerequisites
+
+- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
+
+## Main Steps
+
+<Steps>
+### Get files
+
+<Tabs items={['git', 'zip']}>
+  <Tabs.Tab>
+
+```bash
+git clone https://github.com/aXenDeveloper/vitnode.git
+cd vitnode
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    1. Go to [GitHub VitNode](https://github.com/aXenDeveloper/vitnode),
+    2. Click on the green button `Code`,
+    3. Click on `Download ZIP`,
+    4. Unzip the file on your server,
+    5. Open the folder in the terminal.
+  </Tabs.Tab>
+</Tabs>
+
+### Install dependencies
+
+```bash
+pnpm install
+```
+
+### Prepere docker containers
+
+```bash
+pnpm docker
+```
+
+### Environment variables for Backend
+
+Go to `backend` folder and create new `.env` file. Copy the contents from `.env.example` file.
+
+Then fill the values:
+
+```bash
+# General
+# PORT=8080
+
+# Tokens
+ACCESS_TOKEN_SECRET=SECRET
+REFRESH_TOKEN_SECRET=SECRET
+
+# Database
+DATABASE_URL=postgresql://root:root@localhost:5432/vitnode
+
+# Redis
+# REDIS_URL=redis://HOST:PORT
+# REDIS_PASSWORD=PASSWORD
+
+# Frontend
+# COOKIE_DOMAIN=localhost
+```
+
+<Callout type="info" emoji="ℹ️">
+  Commented out values are optional
+</Callout>
+
+`DATABASE_URL` has already been filled with correct values which sets in `/deployments/docker-compose.yml`, but you can change it if you want.
+
+### Generate database schema
+
+Before you move on, make sure you have a database in Docker.
+
+```bash
+pnpm backend:prisma
+```
+
+### Run backend
+
+```bash
+pnpm backend:dev
+```
+
+### Run frontend
+
+```bash
+pnpm frontend:dev
+```
+
+<Callout type="error" emoji="❌">
+  Frontend should be running on port `3000`, because CORS is enabled only for this port on
+  `localhost`.
+</Callout>
+
+</Steps>
+
+## PGAdmin
+
+You can use PGAdmin to manage your database. VitNode has this image in Docker Compose. To use it, you need to go to `http://localhost:5050` and login with credentials:
+
+- Email: `admin@admin.com`
+- Password: `admin`
+
+<Steps>
+
+### Check database IP
+
+```bash
+docker ps
+docker inspect <container_id_with_postgres>
+```
+
+Now you need to find `IPAddress` in `Networks` section. It should be something like this:
+
+```bash
+"IPAddress": "172.18.0.2",
+```
+
+### Add server
+
+Click on `Add New Server` button and fill the values:
+
+- Name: `VitNode`
+- Host name/address: `172.18.0.2` **(your IP to database from previous step)**
+- Port: `5432`
+- Username: `root`
+- Password: `root`
+
+</Steps>

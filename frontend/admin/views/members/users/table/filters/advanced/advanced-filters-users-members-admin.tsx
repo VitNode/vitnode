@@ -28,8 +28,7 @@ export const AdvancedFiltersUsersMembersAdmin = () => {
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    mode: 'onChange'
+    resolver: zodResolver(formSchema)
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {

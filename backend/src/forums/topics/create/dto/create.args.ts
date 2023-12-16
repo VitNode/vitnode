@@ -9,7 +9,7 @@ export class CreateForumTopicsArgs {
   @ValidateNested({ each: true })
   @ArrayMinSize(1)
   @Field(() => [TextLanguageInput])
-  name: TextLanguageInput[];
+  title: TextLanguageInput[];
 
   @IsArray()
   @ValidateNested({ each: true })

@@ -31,8 +31,7 @@ export const useSignInAdminView = () => {
     defaultValues: {
       email: '',
       password: ''
-    },
-    mode: 'onChange'
+    }
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {

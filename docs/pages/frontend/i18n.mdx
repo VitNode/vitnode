@@ -76,7 +76,7 @@ const formSchema = z.object({
 });
 ```
 
-If you want to make field required, you can use `.min(1, tCore('forms.empty'))` from `zod` library:
+If you want to make field required, you can use `.min(1, t('forms.empty'))` from `zod` library:
 
 ```tsx
 import { useTranslations } from 'next-intl';
@@ -84,8 +84,8 @@ import * as z from 'zod';
 
 import { zodTextLanguageInputType } from '@/components/text-language-input';
 
-const tCore = useTranslations('core');
+const t = useTranslations('core');
 const formSchema = z.object({
-  name: zodTextLanguageInputType.min(1, tCore('forms.empty'))
+  name: zodTextLanguageInputType.min(1, t('forms.empty'))
 });
 ```

@@ -9,7 +9,7 @@ export class ShowTopicsForums {
   id: string;
 
   @Field(() => [TextLanguage])
-  name: TextLanguage[];
+  title: TextLanguage[];
 
   @Field(() => [TextLanguage])
   content: TextLanguage[];

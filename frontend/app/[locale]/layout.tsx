@@ -1,6 +1,8 @@
+import configs from '~/config.json';
+
 import { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
-import { NextIntlClientProvider } from 'next-intl';
+import { AbstractIntlMessages, NextIntlClientProvider } from 'next-intl';
 import { Inter } from 'next/font/google';
 
 import { ThemeProvider } from './theme-provider';
@@ -16,11 +18,18 @@ interface Props {
 }
 
 export default async function LocaleLayout({ children, params: { locale } }: Props) {
-  let messages;
+  let messages: AbstractIntlMessages;
   try {
+    const messagesFormApps = await Promise.all(
+      configs.applications.map(async app => {
+        return {
+          ...(await import(`@/langs/${locale}/${app}.json`)).default
+        };
+      })
+    );
+
     messages = {
-      ...(await import(`@/langs/${locale}/core.json`)).default,
-      ...(await import(`@/langs/${locale}/admin.json`)).default
+      ...messagesFormApps.reduce((acc, messages) => ({ ...acc, ...messages }), {})
     };
   } catch (error) {
     notFound();

@@ -25,8 +25,7 @@ export const FormLicenseInstallConfigs = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       agree: false
-    },
-    mode: 'onChange'
+    }
   });
 
   const onSubmit = () => {

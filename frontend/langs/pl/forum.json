@@ -1,0 +1,14 @@
+{
+  "forum": {
+    "forum": "Forum",
+    "topics": {
+      "create": {
+        "title": "Stwórz temat",
+        "form": {
+          "title": "Tytuł",
+          "content": "Treść"
+        }
+      }
+    }
+  }
+}
