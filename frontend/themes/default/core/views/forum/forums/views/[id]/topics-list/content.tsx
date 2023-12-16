@@ -1,10 +1,10 @@
 import { Virtuoso } from 'react-virtuoso';
+import { useTranslations } from 'next-intl';
 
 import { ShowTopicsForums } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { Link } from '@/i18n';
 import { DateFormat } from '@/components/date-format/date-format';
-import { useTranslations } from 'next-intl';
 
 export interface TopicsListForumProps {
   data: Pick<ShowTopicsForums, 'id' | 'created' | 'title' | 'updated' | 'author'>[];
@@ -12,7 +12,7 @@ export interface TopicsListForumProps {
 
 export const ContentTopicsListForum = ({ data }: TopicsListForumProps) => {
   const t = useTranslations('forum');
-  const { convertText, convertNameToLink } = useTextLang();
+  const { convertNameToLink, convertText } = useTextLang();
 
   return (
     <Virtuoso
