@@ -13,7 +13,6 @@ type AuthorizationCoreSessionsObj {
 type AuthorizationCurrentUserObj {
   avatar: UploadCoreAttachmentsObj
   avatar_color: String!
-  birthday: Int!
   email: String!
   group_id: String!
   id: String!
@@ -68,7 +67,7 @@ type Mutation {
   core_languages__edit(default: Boolean!, enabled: Boolean!, id: String!, name: String!, timezone: String!): ShowCoreLanguages!
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadCoreAttachmentsObj!
-  core_members__sign_up(birthday: Int!, email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
+  core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
   forum_forums__admin__change_position(id: String!, index_to_move: Int!, parent_id: String): String!
@@ -136,7 +135,6 @@ enum ShowAdminGroupsSortingColumnEnum {
 type ShowAdminMembers {
   avatar: UploadCoreAttachmentsObj
   avatar_color: String!
-  birthday: Int!
   email: String!
   followers: Int!
   group: GroupShowCoreMembers!
@@ -159,7 +157,6 @@ input ShowAdminMembersSortByArgs {
 }
 
 enum ShowAdminMembersSortingColumnEnum {
-  birthday
   first_name
   followers
   joined
@@ -186,7 +183,6 @@ type ShowCoreLanguagesObj {
 type ShowCoreMembers {
   avatar: UploadCoreAttachmentsObj
   avatar_color: String!
-  birthday: Int!
   followers: Int!
   group: GroupShowCoreMembers!
   id: String!
@@ -207,7 +203,6 @@ input ShowCoreMembersSortByArgs {
 }
 
 enum ShowCoreMembersSortingColumnEnum {
-  birthday
   first_name
   followers
   joined
@@ -260,7 +255,6 @@ type ShowTopicsForumsObj {
 }
 
 type SignUpCoreMembersObj {
-  birthday: Int!
   email: String!
   group_id: String!
   name: String!

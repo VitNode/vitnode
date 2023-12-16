@@ -153,11 +153,6 @@
           "label": "Email",
           "already_exists": "Ten email jest już zajęty."
         },
-        "birthday": {
-          "label": "Data urodzenia",
-          "desc": "Domyślnie Twoja data urodzenia jest ukryta. Te dane są wymagane do weryfikacji wieku.",
-          "too_young": "Musisz mieć co najmniej {years} lat, aby założyć konto."
-        },
         "password": {
           "label": "Hasło"
         },

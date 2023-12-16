@@ -16,7 +16,6 @@ query Core_members__profiles($first: Int, $findByIds: [String!]) {
         url
       }
       avatar_color
-      birthday
       followers
       group {
         name {

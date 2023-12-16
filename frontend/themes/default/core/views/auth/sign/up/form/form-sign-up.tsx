@@ -52,20 +52,6 @@ export const FormSignUp = () => {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="birthday"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('sign_up.form.birthday.label')}</FormLabel>
-                <FormControl>
-                  <Input {...field} type="date" />
-                </FormControl>
-                <FormDescription>{t('sign_up.form.birthday.desc')}</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
           <FormField
             control={form.control}

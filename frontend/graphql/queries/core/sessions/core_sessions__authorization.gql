@@ -1,7 +1,6 @@
 query Core_sessions__authorization {
   core_sessions__authorization {
     user {
-      birthday
       email
       group_id
       id

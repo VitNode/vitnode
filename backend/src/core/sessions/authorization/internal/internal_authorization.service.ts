@@ -63,7 +63,6 @@ export class InternalAuthorizationCoreSessionsService {
           id: user.id,
           email: user.email,
           name: user.name,
-          birthday: user.birthday,
           newsletter: user.newsletter,
           group_id: user.group_id,
           avatar_color: user.avatar_color
@@ -152,7 +151,6 @@ export class InternalAuthorizationCoreSessionsService {
         id: user.id,
         email: user.email,
         name: user.name,
-        birthday: user.birthday,
         newsletter: user.newsletter,
         group_id: user.group_id,
         avatar_color: user.avatar_color

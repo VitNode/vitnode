@@ -16,10 +16,6 @@ export const useSignUpView = ({ installPage }: Args) => {
   const t = useTranslations('core');
   const { toast } = useToast();
 
-  // Check if birthday is valid 13 years old
-  const oneDayUNIX = 86400;
-  const thirteenYearsInUNIX = oneDayUNIX * 365 * 13;
-
   const formSchema = z
     .object({
       name: z
@@ -36,15 +32,6 @@ export const useSignUpView = ({ installPage }: Args) => {
         .min(1, {
           message: t('forms.empty')
         }),
-      birthday: z
-        .string()
-        .refine(
-          value =>
-            currentDate() - Math.floor(new Date(value).getTime() / 1000) >= thirteenYearsInUNIX,
-          {
-            message: t('sign_up.form.birthday.too_young', { years: 13 })
-          }
-        ),
       password: z
         .string({
           required_error: t('forms.empty')
@@ -76,7 +63,6 @@ export const useSignUpView = ({ installPage }: Args) => {
       email: '',
       password: '',
       password_confirmation: '',
-      birthday: new Date().toDateString(),
       terms: false,
       newsletter: false
     }
@@ -88,10 +74,7 @@ export const useSignUpView = ({ installPage }: Args) => {
 
     try {
       await mutationApi({
-        variables: {
-          ...rest,
-          birthday: convertDateToUnixTime(values.birthday)
-        },
+        variables: rest,
         installPage
       });
     } catch (error) {

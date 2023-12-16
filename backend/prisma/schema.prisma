@@ -34,7 +34,6 @@ model core_members {
   group                core_groups       @relation("core_members_group", references: [id], fields: [group_id])
   group_id             String
   joined               Int
-  birthday             Int
   avatar               core_attachments? @relation("core_members_avatar", fields: [avatar_id], references: [id])
   avatar_id            String?           @unique @db.VarChar(255)
   cover                core_attachments? @relation("core_members_cover", fields: [cover_id], references: [id])

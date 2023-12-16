@@ -1,5 +1,5 @@
-import { ArgsType, Field, Int } from '@nestjs/graphql';
-import { IsEmail, IsStrongPassword, Matches, MaxLength, Min, MinLength } from 'class-validator';
+import { ArgsType, Field } from '@nestjs/graphql';
+import { IsEmail, IsStrongPassword, Matches, MaxLength, MinLength } from 'class-validator';
 
 import { nameRegex } from '@/utils/regex/name.regex';
 
@@ -24,10 +24,6 @@ export class SignUpCoreMembersArgs {
     minSymbols: 1
   })
   password: string;
-
-  @Field(() => Int)
-  @Min(10)
-  birthday: number;
 
   @Field(() => Boolean, { nullable: true })
   newsletter: boolean | null;

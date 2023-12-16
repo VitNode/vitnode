@@ -46,7 +46,6 @@ export class ShowCoreMembersService {
           id: true,
           name: true,
           joined: true,
-          birthday: true,
           posts: true,
           followers: true,
           reactions: true,

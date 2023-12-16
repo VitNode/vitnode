@@ -16,7 +16,6 @@ export class SignUpCoreMembersService {
   constructor(private prisma: PrismaService) {}
 
   async signUp({
-    birthday,
     email: emailRaw,
     name,
     newsletter,
@@ -79,18 +78,7 @@ export class SignUpCoreMembersService {
       });
     }
 
-    // Check if birthday is valid 13 years old
-    // TODO: Fix this, not working properly
-    const oneDayUNIX = 86400;
-    const thirteenYearsInUNIX = oneDayUNIX * 365 * 13;
     const dateNow = currentDate();
-
-    if (dateNow - birthday < thirteenYearsInUNIX) {
-      throw new CustomError({
-        message: 'You must be at least 13 years old',
-        code: 'TOO_YOUNG'
-      });
-    }
 
     const passwordSalt = await genSalt(CONFIG.password_salt);
     const hashPassword = await hash(password, passwordSalt);
@@ -104,7 +92,6 @@ export class SignUpCoreMembersService {
         password: hashPassword,
         joined: dateNow,
         avatar_color: generateAvatarColor(name),
-        birthday,
         group: {
           connect: {
             id: await isAdmin()
@@ -117,7 +104,6 @@ export class SignUpCoreMembersService {
         email: true,
         group_id: true,
         joined: true,
-        birthday: true,
         posts: true,
         followers: true,
         reactions: true,
