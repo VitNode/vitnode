@@ -7,6 +7,8 @@ import { ErrorType } from '@/graphql/fetcher';
 import { mutationApi } from './mutation-api';
 import { useToast } from '@/components/ui/use-toast';
 
+const nameRegex = /^[A-Za-z0-9._@-]*$/;
+
 interface Args {
   installPage?: boolean;
 }
@@ -22,6 +24,9 @@ export const useSignUpView = ({ installPage }: Args) => {
       })
       .min(1, {
         message: t('forms.empty')
+      })
+      .refine(value => nameRegex.test(value), {
+        message: t('sign_up.form.name.invalid')
       }),
     email: z
       .string({
@@ -50,7 +55,8 @@ export const useSignUpView = ({ installPage }: Args) => {
       password: '',
       terms: false,
       newsletter: false
-    }
+    },
+    mode: 'onChange'
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {

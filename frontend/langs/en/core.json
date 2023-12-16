@@ -146,8 +146,9 @@
       "form": {
         "name": {
           "label": "Nickname",
-          "desc": "You can use letters, numbers and special characters: .-_.",
-          "already_exists": "This nickname is already in use."
+          "desc": "You can use letters, numbers and special characters: @.-_.",
+          "already_exists": "This nickname is already in use.",
+          "invalid": "This nickname is invalid."
         },
         "email": {
           "label": "Email",

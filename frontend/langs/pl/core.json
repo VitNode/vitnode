@@ -146,8 +146,9 @@
       "form": {
         "name": {
           "label": "Nick",
-          "desc": "Możesz użyć liter, cyfr i znaków specjalnych: .-_.",
-          "already_exists": "Ten nick jest już zajęty."
+          "desc": "Możesz użyć liter, cyfr i znaków specjalnych: @.-_.",
+          "already_exists": "Ten nick jest już zajęty.",
+          "invalid": "Ten nick jest nieprawidłowy."
         },
         "email": {
           "label": "Email",
