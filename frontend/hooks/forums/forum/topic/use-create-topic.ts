@@ -7,7 +7,11 @@ import { zodTextLanguageInputType } from '@/components/text-language-input';
 import { mutationApi } from './mutation-api';
 import { useToast } from '@/components/ui/use-toast';
 
-export const useCreateTopic = () => {
+interface Props {
+  forumId: string;
+}
+
+export const useCreateTopic = ({ forumId }: Props) => {
   const t = useTranslations('core');
   const { toast } = useToast();
 
@@ -26,7 +30,7 @@ export const useCreateTopic = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await mutationApi({ ...values, forumId: '1' });
+      await mutationApi({ ...values, forumId });
       // TODO: Add redirect to the topic page
     } catch (err) {
       toast({

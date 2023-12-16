@@ -14,11 +14,15 @@ import { Editor } from '@/components/editor/editor';
 import { Button } from '@/components/ui/button';
 import { useCreateTopic } from '@/hooks/forums/forum/topic/use-create-topic';
 
-export const CreateTopic = () => {
+interface Props {
+  defaultForumId: string;
+}
+
+export const CreateTopic = ({ defaultForumId }: Props) => {
   const t = useTranslations('forum.topics.create');
   const tCore = useTranslations('core');
 
-  const { form, onSubmit } = useCreateTopic();
+  const { form, onSubmit } = useCreateTopic({ forumId: defaultForumId });
 
   return (
     <>

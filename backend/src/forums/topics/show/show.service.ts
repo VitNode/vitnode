@@ -33,7 +33,7 @@ export class ShowTopicsForumsService {
         },
         orderBy: [
           {
-            created: SortDirectionEnum.asc
+            created: SortDirectionEnum.desc
           }
         ]
       }),
