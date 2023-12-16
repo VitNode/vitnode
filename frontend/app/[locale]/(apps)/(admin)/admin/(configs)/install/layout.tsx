@@ -6,12 +6,10 @@ import { ErrorType, fetcher } from '@/graphql/fetcher';
 import {
   Admin_Install__Layout,
   Admin_Install__LayoutQuery,
-  Admin_Install__LayoutQueryVariables,
-  LayoutAdminInstallEnum
+  Admin_Install__LayoutQueryVariables
 } from '@/graphql/hooks';
 import { InternalErrorView } from '@/admin/global/internal-error-view';
 import { redirect } from '@/i18n';
-import { FinishInstallConfigsView } from '@/admin/configs/views/install/finish/finish-install-config-view';
 import { RedirectsInstallConfigsLayout } from '@/admin/configs/views/install/redirects-install-configs-layout';
 
 interface Props {
@@ -30,10 +28,6 @@ const getData = async () => {
 export default async function Layout({ children }: Props) {
   try {
     const data = await getData();
-
-    if (data.admin_install__layout.status === LayoutAdminInstallEnum.finish) {
-      return <FinishInstallConfigsView />;
-    }
 
     return (
       <RedirectsInstallConfigsLayout data={data}>

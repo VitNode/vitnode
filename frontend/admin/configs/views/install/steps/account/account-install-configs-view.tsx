@@ -19,7 +19,9 @@ import { Checkbox } from '@/components/ui/checkbox';
 
 export const AccountInstallConfigsView = () => {
   const t = useTranslations('core');
-  const { form, onSubmit } = useSignUpView();
+  const { form, onSubmit } = useSignUpView({
+    installPage: true
+  });
 
   return (
     <Form {...form}>

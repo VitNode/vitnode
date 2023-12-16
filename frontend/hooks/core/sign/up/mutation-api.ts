@@ -1,6 +1,7 @@
 'use server';
 
 import { cookies } from 'next/headers';
+import { revalidatePath } from 'next/cache';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -9,7 +10,12 @@ import {
   Core_Members__Sign_UpMutationVariables
 } from '@/graphql/hooks';
 
-export const mutationApi = async (variables: Core_Members__Sign_UpMutationVariables) => {
+interface Args {
+  variables: Core_Members__Sign_UpMutationVariables;
+  installPage?: boolean;
+}
+
+export const mutationApi = async ({ installPage, variables }: Args) => {
   const mutation = fetcher<Core_Members__Sign_UpMutation, Core_Members__Sign_UpMutationVariables>({
     query: Core_Members__Sign_Up,
     variables,
@@ -17,6 +23,10 @@ export const mutationApi = async (variables: Core_Members__Sign_UpMutationVariab
       Cookie: cookies().toString()
     }
   });
+
+  if (installPage) {
+    revalidatePath('/admin/(configs)/install/', 'layout');
+  }
 
   return mutation;
 };

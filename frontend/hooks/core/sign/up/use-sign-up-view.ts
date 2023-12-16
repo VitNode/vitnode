@@ -8,7 +8,11 @@ import { ErrorType } from '@/graphql/fetcher';
 import { mutationApi } from './mutation-api';
 import { useToast } from '@/components/ui/use-toast';
 
-export const useSignUpView = () => {
+interface Args {
+  installPage?: boolean;
+}
+
+export const useSignUpView = ({ installPage }: Args) => {
   const t = useTranslations('core');
   const { toast } = useToast();
 
@@ -84,8 +88,11 @@ export const useSignUpView = () => {
 
     try {
       await mutationApi({
-        ...rest,
-        birthday: convertDateToUnixTime(values.birthday)
+        variables: {
+          ...rest,
+          birthday: convertDateToUnixTime(values.birthday)
+        },
+        installPage
       });
     } catch (error) {
       const {

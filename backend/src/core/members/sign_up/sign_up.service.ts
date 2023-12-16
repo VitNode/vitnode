@@ -17,11 +17,13 @@ export class SignUpCoreMembersService {
 
   async signUp({
     birthday,
-    email,
+    email: emailRaw,
     name,
     newsletter,
     password
   }: SignUpCoreMembersArgs): Promise<SignUpCoreMembersObj> {
+    const email = emailRaw.toLowerCase();
+
     const isAdmin = async (): Promise<string> => {
       const count = await this.prisma.core_members.count();
 
