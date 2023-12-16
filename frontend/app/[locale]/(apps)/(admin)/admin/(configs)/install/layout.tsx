@@ -1,18 +1,18 @@
 import { ReactNode } from 'react';
 import { cookies } from 'next/headers';
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
 import { LayoutInstallConfigsView } from '@/admin/configs/views/install/layout-install-configs-view';
-import getQueryClient from '@/functions/get-query-client';
 import { ErrorType, fetcher } from '@/graphql/fetcher';
 import {
   Admin_Install__Layout,
   Admin_Install__LayoutQuery,
-  Admin_Install__LayoutQueryVariables
+  Admin_Install__LayoutQueryVariables,
+  LayoutAdminInstallEnum
 } from '@/graphql/hooks';
-import { APIKeys } from '@/graphql/api-keys';
 import { InternalErrorView } from '@/admin/global/internal-error-view';
 import { redirect } from '@/i18n';
+import { FinishInstallConfigsView } from '@/admin/configs/views/install/finish/finish-install-config-view';
+import { RedirectsInstallConfigsLayout } from '@/admin/configs/views/install/redirects-install-configs-layout';
 
 interface Props {
   children: ReactNode;
@@ -29,15 +29,16 @@ const getData = async () => {
 
 export default async function Layout({ children }: Props) {
   try {
-    const queryClient = getQueryClient();
     const data = await getData();
-    await queryClient.setQueryData([APIKeys.LAYOUT_ADMIN_INSTALL], data);
-    const dehydratedState = dehydrate(queryClient);
+
+    if (data.admin_install__layout.status === LayoutAdminInstallEnum.finish) {
+      return <FinishInstallConfigsView />;
+    }
 
     return (
-      <HydrationBoundary state={dehydratedState}>
+      <RedirectsInstallConfigsLayout data={data}>
         <LayoutInstallConfigsView>{children}</LayoutInstallConfigsView>
-      </HydrationBoundary>
+      </RedirectsInstallConfigsLayout>
     );
   } catch (error) {
     const code = error as ErrorType;

@@ -1,30 +1,38 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { AlertCircle } from 'lucide-react';
+import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
-import { useCreateDatabaseInstallConfigsAPI } from './hooks/use-create-database-install-configs-api';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { mutationApi } from './mutation-api';
+import { useToast } from '@/components/ui/use-toast';
 
 export const SubmitDatabaseInstallConfigs = () => {
+  const [isPending, setPending] = useState(false);
   const t = useTranslations('admin.configs.install.steps.database');
   const tCore = useTranslations('core');
-  const { isError, isPending, isSuccess, mutateAsync } = useCreateDatabaseInstallConfigsAPI();
+  const { toast } = useToast();
 
   return (
-    <>
-      {isError && (
-        <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
-          <AlertTitle>{tCore('errors.title')}</AlertTitle>
-          <AlertDescription>{tCore('errors.internal_server_error')}</AlertDescription>
-        </Alert>
-      )}
+    <Button
+      onClick={async () => {
+        setPending(true);
 
-      <Button onClick={async () => await mutateAsync()} loading={isPending || isSuccess}>
-        {t('submit')}
-      </Button>
-    </>
+        try {
+          await mutationApi();
+        } catch (error) {
+          toast({
+            title: tCore('errors.title'),
+            description: tCore('errors.internal_server_error'),
+            variant: 'destructive'
+          });
+
+          setPending(false);
+        }
+      }}
+      loading={isPending}
+    >
+      {t('submit')}
+    </Button>
   );
 };
