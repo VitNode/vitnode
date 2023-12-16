@@ -29,7 +29,7 @@ export const ToolbarEditor = ({ className, selectedLanguage, setSelectedLanguage
   const { blockType } = useEditor();
 
   return (
-    <div className={cx('border-b-2 rounded-t-md sticky top-16 bg-background z-10', className)}>
+    <div className={cx('border-b-2 rounded-t-md sticky top-0 bg-background z-10', className)}>
       <div className="flex items-center p-2 overflow-x-auto [&>*]:flex-shrink-0 flex-wrap gap-1">
         <UndoMoveButtonEditor />
         <RedoMoveButtonEditor />

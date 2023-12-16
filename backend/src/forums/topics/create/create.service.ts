@@ -48,7 +48,12 @@ export class CreateForumTopicsService {
       },
       include: {
         title: true,
-        content: true
+        content: true,
+        author: {
+          include: {
+            avatar: true
+          }
+        }
       }
     });
 

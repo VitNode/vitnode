@@ -105,6 +105,12 @@ type Query {
   forum_topics__show(cursor: String, first: Int, forum_id: String, last: Int): ShowTopicsForumsObj!
 }
 
+type ShortUser {
+  avatar: UploadCoreAttachmentsObj
+  id: String!
+  name: String!
+}
+
 type ShowAdminGroups {
   created: Int!
   default: Boolean!
@@ -242,6 +248,7 @@ type ShowForumForumsWithParent {
 }
 
 type ShowTopicsForums {
+  author: ShortUser!
   content: [TextLanguage!]!
   created: Int!
   id: String!

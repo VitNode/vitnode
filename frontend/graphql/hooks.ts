@@ -265,6 +265,13 @@ export type QueryForum_Topics__ShowArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type ShortUser = {
+  __typename?: 'ShortUser';
+  avatar?: Maybe<UploadCoreAttachmentsObj>;
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+};
+
 export type ShowAdminGroups = {
   __typename?: 'ShowAdminGroups';
   created: Scalars['Int']['output'];
@@ -418,6 +425,7 @@ export type ShowForumForumsWithParent = {
 
 export type ShowTopicsForums = {
   __typename?: 'ShowTopicsForums';
+  author: ShortUser;
   content: Array<TextLanguage>;
   created: Scalars['Int']['output'];
   id: Scalars['String']['output'];
@@ -677,7 +685,7 @@ export type Forum_Forums__Show_ItemQueryVariables = Exact<{
 }>;
 
 
-export type Forum_Forums__Show_ItemQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ChildrenShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null }> }, forum_topics__show: { __typename?: 'ShowTopicsForumsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number }, edges: Array<{ __typename?: 'ShowTopicsForums', created: number, id: string, updated?: number | null, content: Array<{ __typename?: 'TextLanguage', value: string, id_language: string }>, title: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> } };
+export type Forum_Forums__Show_ItemQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ChildrenShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null }> }, forum_topics__show: { __typename?: 'ShowTopicsForumsObj', edges: Array<{ __typename?: 'ShowTopicsForums', created: number, id: string, updated?: number | null, content: Array<{ __typename?: 'TextLanguage', value: string, id_language: string }>, title: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, author: { __typename?: 'ShortUser', id: string, name: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
 
 
 export const Admin_Install__Create_Database = gql`
@@ -1206,14 +1214,6 @@ export const Forum_Forums__Show_Item = gql`
     last: $last
     forum_id: $forumId
   ) {
-    pageInfo {
-      count
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-      totalCount
-    }
     edges {
       content {
         value
@@ -1226,6 +1226,32 @@ export const Forum_Forums__Show_Item = gql`
         id_language
         value
       }
+      author {
+        avatar {
+          created
+          description
+          extension
+          file_size
+          id
+          member_id
+          mimetype
+          module
+          module_id
+          name
+          position
+          url
+        }
+        id
+        name
+      }
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
     }
   }
 }

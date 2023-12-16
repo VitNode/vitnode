@@ -1,6 +1,6 @@
 'use client';
 
-import { useProfileView } from '@/hooks/core/profiles/use-profile-view';
+import { useProfileView } from '@/hooks/core/profile/use-profile-view';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 

@@ -1,6 +1,7 @@
 {
   "forum": {
     "forum": "Forum",
+    "by": "By <user></user>, <date></date>",
     "topics": {
       "create": {
         "title": "Create Topic",

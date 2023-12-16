@@ -40,7 +40,13 @@ export const ForumForumView = ({ data: { forum_forums__show, forum_topics__show 
 
       <ActionsForumsForum />
 
-      <TopicsListForum data={forum_topics__show.edges} />
+      {forum_topics__show.edges.length > 0 && (
+        <Card>
+          <CardContent className="p-0">
+            <TopicsListForum data={forum_topics__show.edges} />
+          </CardContent>
+        </Card>
+      )}
     </>
   );
 };
