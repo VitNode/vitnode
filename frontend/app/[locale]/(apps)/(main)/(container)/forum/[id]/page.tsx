@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers';
+import { notFound } from 'next/navigation';
 
 import { ForumForumView } from '@/themes/default/core/views/forum/forums/views/[id]/forum-forum-view';
 import { fetcher } from '@/graphql/fetcher';
@@ -30,5 +31,9 @@ interface Props {
 export default async function Page({ params: { id } }: Props) {
   const data = await getData({ id });
 
-  return <ForumForumView {...data} />;
+  if (data.forum_forums__show.edges.length === 0) {
+    notFound();
+  }
+
+  return <ForumForumView data={data} />;
 }

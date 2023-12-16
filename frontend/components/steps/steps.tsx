@@ -17,7 +17,7 @@ interface Props {
 }
 
 export const Steps = ({ className, items }: Props) => {
-  if (items.length <= 0) return null;
+  if (items.length === 0) return null;
 
   return (
     <div className={className}>

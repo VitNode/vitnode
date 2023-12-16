@@ -11,7 +11,7 @@ import { Loader } from '@/components/loader/loader';
 import { getUuidFromString } from '@/functions/url';
 
 const CreateTopic = lazy(() =>
-  import('../../actions/create-topic').then(module => ({
+  import('../../../actions/create-topic').then(module => ({
     default: module.CreateTopic
   }))
 );

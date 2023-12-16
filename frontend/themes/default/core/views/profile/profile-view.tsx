@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { DataWrapperProfileView } from '@/hooks/core/profiles/use-profile-view';
+import { DataWrapperProfileView } from '@/hooks/core/profile/use-profile-view';
 import { NameProfile } from './name-profile';
 import { AvatarProfile } from './avatar-profile';
 

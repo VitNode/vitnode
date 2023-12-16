@@ -3,88 +3,70 @@ import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import { convertDateToUnixTime, currentDate } from '@/functions/date';
-import { useSignUpAPI } from './use-sign-up-api';
 import { ErrorType } from '@/graphql/fetcher';
+import { mutationApi } from './mutation-api';
+import { useToast } from '@/components/ui/use-toast';
 
-export const useSignUpView = () => {
+const nameRegex = /^[A-Za-z0-9._@-]*$/;
+
+interface Args {
+  installPage?: boolean;
+}
+
+export const useSignUpView = ({ installPage }: Args) => {
   const t = useTranslations('core');
-  const { mutateAsync, ...api } = useSignUpAPI();
+  const { toast } = useToast();
 
-  // Check if birthday is valid 13 years old
-  const oneDayUNIX = 86400;
-  const thirteenYearsInUNIX = oneDayUNIX * 365 * 13;
-
-  const formSchema = z
-    .object({
-      name: z
-        .string({
-          required_error: t('forms.empty')
-        })
-        .min(1, {
-          message: t('forms.empty')
-        }),
-      email: z
-        .string({
-          required_error: t('forms.empty')
-        })
-        .min(1, {
-          message: t('forms.empty')
-        }),
-      birthday: z
-        .string()
-        .refine(
-          value =>
-            currentDate() - Math.floor(new Date(value).getTime() / 1000) >= thirteenYearsInUNIX,
-          {
-            message: t('sign_up.form.birthday.too_young', { years: 13 })
-          }
-        ),
-      password: z
-        .string({
-          required_error: t('forms.empty')
-        })
-        .min(1, {
-          message: t('forms.empty')
-        }),
-      password_confirmation: z
-        .string({
-          required_error: t('forms.empty')
-        })
-        .min(1, {
-          message: t('forms.empty')
-        }),
-      terms: z.boolean().refine(value => value, {
-        message: t('sign_up.form.terms.empty')
+  const formSchema = z.object({
+    name: z
+      .string({
+        required_error: t('forms.empty')
+      })
+      .min(1, {
+        message: t('forms.empty')
+      })
+      .refine(value => nameRegex.test(value), {
+        message: t('sign_up.form.name.invalid')
       }),
-      newsletter: z.boolean()
-    })
-    .refine(data => data.password === data.password_confirmation, {
-      message: t('sign_up.form.password_confirmation.not_match'),
-      path: ['password_confirmation']
-    });
-
+    email: z
+      .string({
+        required_error: t('forms.empty')
+      })
+      .min(1, {
+        message: t('forms.empty')
+      }),
+    password: z
+      .string({
+        required_error: t('forms.empty')
+      })
+      .min(1, {
+        message: t('forms.empty')
+      }),
+    terms: z.boolean().refine(value => value, {
+      message: t('sign_up.form.terms.empty')
+    }),
+    newsletter: z.boolean()
+  });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
       email: '',
       password: '',
-      password_confirmation: '',
-      birthday: new Date().toDateString(),
       terms: false,
       newsletter: false
-    }
+    },
+    mode: 'onChange'
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password_confirmation, terms, ...rest } = values;
+    const { terms, ...rest } = values;
 
     try {
-      await mutateAsync({
-        ...rest,
-        birthday: convertDateToUnixTime(values.birthday)
+      await mutationApi({
+        variables: rest,
+        installPage
       });
     } catch (error) {
       const {
@@ -120,12 +102,17 @@ export const useSignUpView = () => {
 
         return;
       }
+
+      toast({
+        title: t('errors.title'),
+        description: t('errors.internal_server_error'),
+        variant: 'destructive'
+      });
     }
   };
 
   return {
     form,
-    onSubmit,
-    ...api
+    onSubmit
   };
 };

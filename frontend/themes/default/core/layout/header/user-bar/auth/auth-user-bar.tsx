@@ -43,7 +43,7 @@ export const AuthUserBar = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => push(`/profiles/${id}`)}>
+          <DropdownMenuItem onClick={() => push(`/profile/${id}`)}>
             <User className="mr-2 h-4 w-4" />
             <span>{t('user-bar.my_profile')}</span>
           </DropdownMenuItem>

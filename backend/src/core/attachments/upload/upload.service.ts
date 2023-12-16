@@ -52,7 +52,7 @@ export class UploadCoreAttachmentsService {
     acceptMimeType: string[];
     file: FilesObj;
   }) {
-    if (acceptMimeType.length <= 0) return;
+    if (acceptMimeType.length === 0) return;
 
     const { filename, mimetype } = await file;
 

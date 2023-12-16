@@ -29,7 +29,12 @@ export class ShowTopicsForumsService {
         where,
         include: {
           title: true,
-          content: true
+          content: true,
+          author: {
+            include: {
+              avatar: true
+            }
+          }
         },
         orderBy: [
           {

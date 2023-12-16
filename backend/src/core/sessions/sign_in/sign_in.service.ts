@@ -103,7 +103,8 @@ export class SignInCoreSessionsService {
     });
   }
 
-  async signIn({ admin, email, password, remember }: SignInCoreSessionsArgs, ctx: Ctx) {
+  async signIn({ admin, email: emailRaw, password, remember }: SignInCoreSessionsArgs, ctx: Ctx) {
+    const email = emailRaw.toLowerCase();
     const user = await this.prisma.core_members.findUnique({
       where: {
         email

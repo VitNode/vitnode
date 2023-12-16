@@ -19,7 +19,9 @@ import { Checkbox } from '@/components/ui/checkbox';
 
 export const AccountInstallConfigsView = () => {
   const t = useTranslations('core');
-  const { form, isPending, isSuccess, onSubmit } = useSignUpView();
+  const { form, onSubmit } = useSignUpView({
+    installPage: true
+  });
 
   return (
     <Form {...form}>
@@ -39,6 +41,7 @@ export const AccountInstallConfigsView = () => {
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="email"
@@ -48,20 +51,6 @@ export const AccountInstallConfigsView = () => {
                 <FormControl>
                   <Input {...field} type="email" />
                 </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="birthday"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('sign_up.form.birthday.label')}</FormLabel>
-                <FormControl>
-                  <Input {...field} type="date" />
-                </FormControl>
-                <FormDescription>{t('sign_up.form.birthday.desc')}</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -80,19 +69,7 @@ export const AccountInstallConfigsView = () => {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="password_confirmation"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('sign_up.form.password_confirmation.label')}</FormLabel>
-                <FormControl>
-                  <Input {...field} type="password" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+
           <FormField
             control={form.control}
             name="terms"
@@ -114,7 +91,7 @@ export const AccountInstallConfigsView = () => {
             type="submit"
             className="w-full"
             disabled={!form.formState.isValid}
-            loading={isPending || isSuccess}
+            loading={form.formState.isSubmitting}
           >
             {t('sign_up.form.submit')}
           </Button>

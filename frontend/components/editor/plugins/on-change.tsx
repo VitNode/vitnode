@@ -16,7 +16,7 @@ export const OnChangePluginEditor = ({ onChange, selectedLanguage, value }: Prop
 
   // Set the initial editor value
   useEffect(() => {
-    if (!value || value.length <= 0) return;
+    if (!value || value.length === 0) return;
 
     const currentValue = value.find(item => item.id_language === selectedLanguage)?.value;
     if (!currentValue) {
@@ -35,7 +35,7 @@ export const OnChangePluginEditor = ({ onChange, selectedLanguage, value }: Prop
       const text = editorState.read($rootTextContent);
       const valueAsArray = Array.isArray(value) ? value : [];
 
-      if (text.length <= 0) {
+      if (text.length === 0) {
         onChange(valueAsArray.filter(item => item.id_language !== selectedLanguage));
 
         return;

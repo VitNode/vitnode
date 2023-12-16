@@ -33,7 +33,8 @@ export const useSignInView = () => {
       email: '',
       password: '',
       remember: false
-    }
+    },
+    mode: 'onChange'
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {

@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 import { PageInfo } from '@/types/database/pagination.type';
 import { ShowCoreMembers } from '@/src/core/members/show/dto/show.obj';
@@ -16,9 +16,6 @@ export class ShowAdminMembersObj {
 export class ShowAdminMembers extends ShowCoreMembers {
   @Field(() => String)
   email: string;
-
-  @Field(() => Int)
-  birthday: number;
 
   @Field(() => Boolean)
   newsletter: boolean;

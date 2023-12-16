@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { core_members } from '@prisma/client';
+import { Prisma, core_members } from '@prisma/client';
 
 import { ShowCoreMembersObj } from './dto/show.obj';
 import { ShowCoreMembersArgs } from './dto/show.args';
@@ -22,17 +22,12 @@ export class ShowCoreMembersService {
     search,
     sortBy
   }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
-    const where = findByIds
+    const where: Prisma.core_membersWhereInput = findByIds
       ? { id: { in: findByIds } }
       : {
           OR: [
             {
               name: {
-                contains: search ?? ''
-              }
-            },
-            {
-              email: {
                 contains: search ?? ''
               }
             }
@@ -42,11 +37,11 @@ export class ShowCoreMembersService {
     const [edges, totalCount] = await this.prisma.$transaction([
       this.prisma.core_members.findMany({
         ...inputPagination({ first, cursor, last }),
+        where,
         select: {
           id: true,
           name: true,
           joined: true,
-          birthday: true,
           posts: true,
           followers: true,
           reactions: true,
@@ -70,8 +65,7 @@ export class ShowCoreMembersService {
             column: 'joined',
             direction: SortDirectionEnum.desc
           }
-        }),
-        where
+        })
       }),
       this.prisma.core_members.count({
         where

@@ -6,11 +6,6 @@ import { useSelectedLayoutSegment } from 'next/navigation';
 
 import { ItemStepProps, Steps } from '@/components/steps/steps';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { useLayoutInstallConfigsAPI } from './hooks/use-layout-install-configs-api';
-import { LoadingView } from '@/themes/default/core/views/global/loading/loading-view';
-import { InternalErrorView } from '@/admin/global/internal-error-view';
-import { LayoutAdminInstallEnum } from '@/graphql/hooks';
-import { FinishInstallConfigsView } from './finish/finish-install-config-view';
 
 interface Props {
   children: ReactNode;
@@ -19,7 +14,7 @@ interface Props {
 export const LayoutInstallConfigsView = ({ children }: Props) => {
   const t = useTranslations('admin.configs.install');
   const segment = useSelectedLayoutSegment();
-  const { data, isError, isLoading } = useLayoutInstallConfigsAPI();
+  // const { data, isError, isLoading } = useLayoutInstallConfigsAPI();
 
   const stepsNumber: {
     [key: string]: number;
@@ -57,12 +52,6 @@ export const LayoutInstallConfigsView = ({ children }: Props) => {
       checked: activeStep >= 5
     }
   ];
-
-  if (isLoading) return <LoadingView />;
-  if (isError || !data) return <InternalErrorView />;
-  if (data.admin_install__layout.status === LayoutAdminInstallEnum.finish) {
-    return <FinishInstallConfigsView />;
-  }
 
   return (
     <Card className="hidden sm:flex">

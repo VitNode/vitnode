@@ -32,7 +32,7 @@ const getData = async () => {
     }
   });
 
-  if (current.core_languages__show.edges.length <= 0) {
+  if (current.core_languages__show.edges.length === 0) {
     redirect('/admin/install');
   }
 

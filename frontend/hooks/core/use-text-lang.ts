@@ -8,7 +8,7 @@ export const useTextLang = () => {
   const locale = useLocale();
 
   const convertText = (text: TextLanguage[]): string => {
-    if (text.length <= 0) {
+    if (text.length === 0) {
       return '';
     }
 

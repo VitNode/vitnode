@@ -1,7 +1,6 @@
 query Admin_sessions__authorization {
   admin_sessions__authorization {
     user {
-      birthday
       email
       group_id
       id

@@ -12,7 +12,18 @@ export class LayoutAdminInstallService {
   async layout(): Promise<LayoutAdminInstallObj> {
     const users = await this.prisma.core_members.count();
     if (users > 0) {
-      throw new AccessDeniedError();
+      const [sessionCount, sessionCountAdmin] = await this.prisma.$transaction([
+        this.prisma.core_sessions.count(),
+        this.prisma.core_admin_sessions.count()
+      ]);
+
+      if (sessionCount > 0 || sessionCountAdmin > 0) {
+        throw new AccessDeniedError();
+      }
+
+      return {
+        status: LayoutAdminInstallEnum.FINISH
+      };
     }
 
     const languages = await this.prisma.core_languages.count();

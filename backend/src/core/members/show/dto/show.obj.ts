@@ -30,9 +30,6 @@ export class ShowCoreMembers {
   @Field(() => Int)
   joined: number;
 
-  @Field(() => Int)
-  birthday: number;
-
   @Field(() => UploadCoreAttachmentsObj, { nullable: true })
   avatar: UploadCoreAttachmentsObj | null;
 

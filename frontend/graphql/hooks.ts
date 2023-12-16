@@ -30,7 +30,6 @@ export type AuthorizationCurrentUserObj = {
   __typename?: 'AuthorizationCurrentUserObj';
   avatar?: Maybe<UploadCoreAttachmentsObj>;
   avatar_color: Scalars['String']['output'];
-  birthday: Scalars['Int']['output'];
   email: Scalars['String']['output'];
   group_id: Scalars['String']['output'];
   id: Scalars['String']['output'];
@@ -136,7 +135,6 @@ export type MutationCore_Members__Avatar__UploadArgs = {
 
 
 export type MutationCore_Members__Sign_UpArgs = {
-  birthday: Scalars['Int']['input'];
   email: Scalars['String']['input'];
   name: Scalars['String']['input'];
   newsletter?: InputMaybe<Scalars['Boolean']['input']>;
@@ -267,6 +265,13 @@ export type QueryForum_Topics__ShowArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type ShortUser = {
+  __typename?: 'ShortUser';
+  avatar?: Maybe<UploadCoreAttachmentsObj>;
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+};
+
 export type ShowAdminGroups = {
   __typename?: 'ShowAdminGroups';
   created: Scalars['Int']['output'];
@@ -301,7 +306,6 @@ export type ShowAdminMembers = {
   __typename?: 'ShowAdminMembers';
   avatar?: Maybe<UploadCoreAttachmentsObj>;
   avatar_color: Scalars['String']['output'];
-  birthday: Scalars['Int']['output'];
   email: Scalars['String']['output'];
   followers: Scalars['Int']['output'];
   group: GroupShowCoreMembers;
@@ -325,7 +329,6 @@ export type ShowAdminMembersSortByArgs = {
 };
 
 export const ShowAdminMembersSortingColumnEnum = {
-  birthday: 'birthday',
   first_name: 'first_name',
   followers: 'followers',
   joined: 'joined',
@@ -356,7 +359,6 @@ export type ShowCoreMembers = {
   __typename?: 'ShowCoreMembers';
   avatar?: Maybe<UploadCoreAttachmentsObj>;
   avatar_color: Scalars['String']['output'];
-  birthday: Scalars['Int']['output'];
   followers: Scalars['Int']['output'];
   group: GroupShowCoreMembers;
   id: Scalars['String']['output'];
@@ -378,7 +380,6 @@ export type ShowCoreMembersSortByArgs = {
 };
 
 export const ShowCoreMembersSortingColumnEnum = {
-  birthday: 'birthday',
   first_name: 'first_name',
   followers: 'followers',
   joined: 'joined',
@@ -424,6 +425,7 @@ export type ShowForumForumsWithParent = {
 
 export type ShowTopicsForums = {
   __typename?: 'ShowTopicsForums';
+  author: ShortUser;
   content: Array<TextLanguage>;
   created: Scalars['Int']['output'];
   id: Scalars['String']['output'];
@@ -439,7 +441,6 @@ export type ShowTopicsForumsObj = {
 
 export type SignUpCoreMembersObj = {
   __typename?: 'SignUpCoreMembersObj';
-  birthday: Scalars['Int']['output'];
   email: Scalars['String']['output'];
   group_id: Scalars['String']['output'];
   name: Scalars['String']['output'];
@@ -549,7 +550,6 @@ export type Core_Languages__EditMutationVariables = Exact<{
 export type Core_Languages__EditMutation = { __typename?: 'Mutation', core_languages__edit: { __typename?: 'ShowCoreLanguages', default: boolean, enabled: boolean, id: string, name: string, protected: boolean, timezone: string } };
 
 export type Core_Members__Sign_UpMutationVariables = Exact<{
-  birthday: Scalars['Int']['input'];
   email: Scalars['String']['input'];
   name: Scalars['String']['input'];
   password: Scalars['String']['input'];
@@ -557,7 +557,7 @@ export type Core_Members__Sign_UpMutationVariables = Exact<{
 }>;
 
 
-export type Core_Members__Sign_UpMutation = { __typename?: 'Mutation', core_members__sign_up: { __typename?: 'SignUpCoreMembersObj', birthday: number, email: string, name: string, newsletter?: boolean | null } };
+export type Core_Members__Sign_UpMutation = { __typename?: 'Mutation', core_members__sign_up: { __typename?: 'SignUpCoreMembersObj', email: string, name: string, newsletter?: boolean | null } };
 
 export type Core_Members__Avatar__DeleteMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -643,7 +643,7 @@ export type Core_Members__Admin__ShowQuery = { __typename?: 'Query', core_member
 export type Admin_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Admin_Sessions__AuthorizationQuery = { __typename?: 'Query', admin_sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: string, id: string, is_admin: boolean, name: string, newsletter?: boolean | null, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } | null } };
+export type Admin_Sessions__AuthorizationQuery = { __typename?: 'Query', admin_sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, group_id: string, id: string, is_admin: boolean, name: string, newsletter?: boolean | null, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } | null } };
 
 export type Core_Languages__MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -665,12 +665,12 @@ export type Core_Members__ProfilesQueryVariables = Exact<{
 }>;
 
 
-export type Core_Members__ProfilesQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, birthday: number, followers: number, id: string, joined: number, name: string, posts: number, reactions: number, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupShowCoreMembers', name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } }> } };
+export type Core_Members__ProfilesQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, followers: number, id: string, joined: number, name: string, posts: number, reactions: number, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupShowCoreMembers', name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } }> } };
 
 export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', birthday: number, email: string, group_id: string, id: string, is_admin: boolean, name: string, newsletter?: boolean | null, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } | null }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string }> } };
+export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, group_id: string, id: string, is_admin: boolean, name: string, newsletter?: boolean | null, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } | null }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string }> } };
 
 export type Forum_Forums__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -685,7 +685,7 @@ export type Forum_Forums__Show_ItemQueryVariables = Exact<{
 }>;
 
 
-export type Forum_Forums__Show_ItemQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ChildrenShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null }> }, forum_topics__show: { __typename?: 'ShowTopicsForumsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number }, edges: Array<{ __typename?: 'ShowTopicsForums', created: number, id: string, updated?: number | null, content: Array<{ __typename?: 'TextLanguage', value: string, id_language: string }>, title: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> } };
+export type Forum_Forums__Show_ItemQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ChildrenShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null }> }, forum_topics__show: { __typename?: 'ShowTopicsForumsObj', edges: Array<{ __typename?: 'ShowTopicsForums', created: number, id: string, updated?: number | null, content: Array<{ __typename?: 'TextLanguage', value: string, id_language: string }>, title: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, author: { __typename?: 'ShortUser', id: string, name: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
 
 
 export const Admin_Install__Create_Database = gql`
@@ -792,15 +792,13 @@ export const Core_Languages__Edit = gql`
 }
     `;
 export const Core_Members__Sign_Up = gql`
-    mutation Core_members__sign_up($birthday: Int!, $email: String!, $name: String!, $password: String!, $newsletter: Boolean) {
+    mutation Core_members__sign_up($email: String!, $name: String!, $password: String!, $newsletter: Boolean) {
   core_members__sign_up(
-    birthday: $birthday
     email: $email
     name: $name
     password: $password
     newsletter: $newsletter
   ) {
-    birthday
     email
     name
     newsletter
@@ -1013,7 +1011,6 @@ export const Admin_Sessions__Authorization = gql`
     query Admin_sessions__authorization {
   admin_sessions__authorization {
     user {
-      birthday
       email
       group_id
       id
@@ -1093,7 +1090,6 @@ export const Core_Members__Profiles = gql`
         url
       }
       avatar_color
-      birthday
       followers
       group {
         name {
@@ -1114,7 +1110,6 @@ export const Core_Sessions__Authorization = gql`
     query Core_sessions__authorization {
   core_sessions__authorization {
     user {
-      birthday
       email
       group_id
       id
@@ -1219,14 +1214,6 @@ export const Forum_Forums__Show_Item = gql`
     last: $last
     forum_id: $forumId
   ) {
-    pageInfo {
-      count
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-      totalCount
-    }
     edges {
       content {
         value
@@ -1239,6 +1226,32 @@ export const Forum_Forums__Show_Item = gql`
         id_language
         value
       }
+      author {
+        avatar {
+          created
+          description
+          extension
+          file_size
+          id
+          member_id
+          mimetype
+          module
+          module_id
+          name
+          position
+          url
+        }
+        id
+        name
+      }
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
     }
   }
 }

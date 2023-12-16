@@ -74,7 +74,7 @@ export const ModalChangeAvatar = () => {
               <Button
                 type="submit"
                 onClick={form.handleSubmit(onSubmit)}
-                disabled={form.watch('type') === 'upload' && form.watch('file').length <= 0}
+                disabled={form.watch('type') === 'upload' && form.watch('file').length === 0}
               >
                 {t('settings.change_avatar.submit')}
               </Button>

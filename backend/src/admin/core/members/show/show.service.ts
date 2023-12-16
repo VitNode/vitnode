@@ -62,7 +62,6 @@ export class ShowAdminMembersService {
           name: true,
           email: true,
           joined: true,
-          birthday: true,
           posts: true,
           followers: true,
           reactions: true,

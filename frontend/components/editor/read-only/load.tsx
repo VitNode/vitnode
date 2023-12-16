@@ -31,7 +31,7 @@ export const LoadReadOnlyEditor = ({ value }: Props) => {
 
   // Set the initial editor value
   useEffect(() => {
-    if (value.length <= 0) return;
+    if (value.length === 0) return;
 
     const currentValue = value.find(item => item.id_language === locale)?.value;
     const lastValue = value.at(-1)?.value;

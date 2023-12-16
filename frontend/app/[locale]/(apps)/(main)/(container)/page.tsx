@@ -21,5 +21,5 @@ const getData = async () => {
 export default async function Page() {
   const data = await getData();
 
-  return <ForumsForumView {...data} />;
+  return <ForumsForumView data={data} />;
 }
