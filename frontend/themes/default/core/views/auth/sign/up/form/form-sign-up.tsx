@@ -19,7 +19,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 
 export const FormSignUp = () => {
   const t = useTranslations('core');
-  const { form, isPending, onSubmit } = useSignUpView();
+  const { form, onSubmit } = useSignUpView();
 
   return (
     <Form {...form}>
@@ -129,7 +129,7 @@ export const FormSignUp = () => {
             type="submit"
             className="w-full"
             disabled={!form.formState.isValid}
-            loading={isPending}
+            loading={form.formState.isSubmitting}
           >
             {t('sign_up.form.submit')}
           </Button>

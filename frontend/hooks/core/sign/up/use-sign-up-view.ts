@@ -4,12 +4,13 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 import { convertDateToUnixTime, currentDate } from '@/functions/date';
-import { useSignUpAPI } from './use-sign-up-api';
 import { ErrorType } from '@/graphql/fetcher';
+import { mutationApi } from './mutation-api';
+import { useToast } from '@/components/ui/use-toast';
 
 export const useSignUpView = () => {
   const t = useTranslations('core');
-  const { mutateAsync, ...api } = useSignUpAPI();
+  const { toast } = useToast();
 
   // Check if birthday is valid 13 years old
   const oneDayUNIX = 86400;
@@ -82,7 +83,7 @@ export const useSignUpView = () => {
     const { password_confirmation, terms, ...rest } = values;
 
     try {
-      await mutateAsync({
+      await mutationApi({
         ...rest,
         birthday: convertDateToUnixTime(values.birthday)
       });
@@ -120,12 +121,17 @@ export const useSignUpView = () => {
 
         return;
       }
+
+      toast({
+        title: t('errors.title'),
+        description: t('errors.internal_server_error'),
+        variant: 'destructive'
+      });
     }
   };
 
   return {
     form,
-    onSubmit,
-    ...api
+    onSubmit
   };
 };
