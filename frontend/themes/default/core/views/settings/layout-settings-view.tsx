@@ -2,8 +2,7 @@ import { ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 
 import { NavSettings } from './nav/nav-settings';
-
-import { HeaderContent } from '../../../../../components/header-content/header-content';
+import { HeaderContent } from '@/components/header-content/header-content';
 
 interface Props {
   children: ReactNode;

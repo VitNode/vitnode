@@ -46,7 +46,7 @@ export default async function Page({ params: { id } }: Props) {
   await queryClient.setQueryData([APIKeys.PROFILE], data);
   const dehydratedState = dehydrate(queryClient);
 
-  if (data.core_members__show.edges.length <= 0) {
+  if (data.core_members__show.edges.length === 0) {
     return <ErrorView className="py-6" code="404" />;
   }
 

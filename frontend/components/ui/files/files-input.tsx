@@ -36,7 +36,7 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
     const { toast } = useToast();
 
     const handleUploadFile = (files: FileList | null) => {
-      if (!files || files.length <= 0) return;
+      if (!files || files.length === 0) return;
 
       // Validate files
       const currentFiles = Array.from(files).filter(file => {
@@ -64,7 +64,7 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
         return file;
       });
 
-      if (currentFiles.length <= 0) return;
+      if (currentFiles.length === 0) return;
 
       if (multiple) {
         onChange([...(stateValue || []), ...currentFiles]);
@@ -80,7 +80,7 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <>
-        {((stateValue && stateValue.length <= 0 && !multiple) || multiple) && (
+        {((stateValue && stateValue.length === 0 && !multiple) || multiple) && (
           <div
             className={cx(
               'flex flex-col items-center justify-center w-full m-h-32 rounded-md bg-background border border-input px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 text-center',

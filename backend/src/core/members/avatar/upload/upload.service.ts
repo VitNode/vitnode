@@ -63,7 +63,7 @@ export class UploadAvatarCoreMembersService {
       }
     });
 
-    if (currentFile.length <= 0) {
+    if (currentFile.length === 0) {
       throw new CustomError({
         code: 'UNKNOWN_ERROR',
         message:

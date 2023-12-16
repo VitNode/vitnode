@@ -22,7 +22,7 @@ export function inputSorting<T>({
     id: SortDirectionEnum.desc
   };
 
-  if (!sortBy || sortBy.length <= 0) {
+  if (!sortBy || sortBy.length === 0) {
     return [
       {
         [`${defaultSortBy?.column}`]: defaultSortBy?.direction

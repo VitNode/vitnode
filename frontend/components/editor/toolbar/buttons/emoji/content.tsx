@@ -52,7 +52,7 @@ export const ContentEmojiButtonEditor = () => {
         setActiveCategory={setActiveCategory}
         searchValue={searchValue}
         onResetSearch={async () => {
-          if (searchValue.length <= 0) return;
+          if (searchValue.length === 0) return;
 
           await search('');
         }}

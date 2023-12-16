@@ -17,6 +17,7 @@ import {
 } from '@dnd-kit/sortable';
 import { useMemo, useState } from 'react';
 import { InfiniteData, useQueryClient } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
 
 import { ItemTableForumsForumAdmin } from './item/item';
 import { useForumForumsAdminAPI } from '../hooks/use-forum-forums-admin-api';
@@ -35,6 +36,7 @@ import { Forum_Forums__Admin__ShowQuery } from '@/graphql/hooks';
 const indentationWidth = 20;
 
 export const ContentTableForumsForumAdmin = () => {
+  const t = useTranslations('core');
   const { data, fetchNextPage, hasNextPage, isError, isFetching, isLoading } =
     useForumForumsAdminAPI();
   const { mutateAsync } = useChangePositionForumAdminAPI();
@@ -77,6 +79,7 @@ export const ContentTableForumsForumAdmin = () => {
 
   if (isLoading) return <Loader />;
   if (isError) return <ErrorAdminView />;
+  if (!data || data.length === 0) return <div className="text-center">{t('no_results')}</div>;
 
   return (
     <DndContext

@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const PreviewFilesInput = ({ onChange, value }: Props) => {
-  if (!value || value.length <= 0) return null;
+  if (!value || value.length === 0) return null;
 
   return (
     <ul className="flex flex-col gap-4">

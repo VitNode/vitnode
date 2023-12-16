@@ -21,7 +21,8 @@ export const ListContentFilterToolbarDataTable = ({
   const selectedValues = searchParams.getAll(id);
 
   if (isFetching) return <Loader />;
-  if (options.length <= 0) return <div className="py-6 text-center text-sm">{t('no_results')}</div>;
+  if (options.length === 0)
+    return <div className="py-6 text-center text-sm">{t('no_results')}</div>;
 
   return (
     <CommandGroup>
