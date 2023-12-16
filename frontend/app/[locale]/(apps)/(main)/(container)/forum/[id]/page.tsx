@@ -30,5 +30,5 @@ interface Props {
 export default async function Page({ params: { id } }: Props) {
   const data = await getData({ id });
 
-  return <ForumForumView {...data} />;
+  return <ForumForumView data={data} />;
 }

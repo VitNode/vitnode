@@ -1,20 +1,17 @@
-'use client';
-
-import { Virtuoso } from 'react-virtuoso';
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { ActionsForumsForum } from './actions/actions';
 import { Forum_Forums__Show_ItemQuery } from '@/graphql/hooks';
+import { TopicsListForum } from './topics-list/topics-list';
 
 import { ItemForum } from '../../item/item-forum';
 import { DescriptionItemForum } from '../../item/description';
 
-export const ForumForumView = ({
-  forum_forums__show,
-  forum_topics__show
-}: Forum_Forums__Show_ItemQuery) => {
-  // const { data } = useItemShowForumsAPI();
+interface Props {
+  data: Forum_Forums__Show_ItemQuery;
+}
+
+export const ForumForumView = ({ data: { forum_forums__show, forum_topics__show } }: Props) => {
   const { convertText } = useTextLang();
 
   const { edges } = forum_forums__show;
@@ -43,15 +40,7 @@ export const ForumForumView = ({
 
       <ActionsForumsForum />
 
-      <Virtuoso
-        data={forum_topics__show.edges}
-        useWindowScroll
-        itemContent={(index, data) => (
-          <div>
-            {index} - {convertText(data.title)}
-          </div>
-        )}
-      />
+      <TopicsListForum data={forum_topics__show.edges} />
     </>
   );
 };
