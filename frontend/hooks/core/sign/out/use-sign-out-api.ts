@@ -8,9 +8,8 @@ export const useSignOutAPI = () => {
   const { toast } = useToast();
 
   const onSubmit = async () => {
-    try {
-      await mutationApi();
-    } catch (error) {
+    const mutation = await mutationApi();
+    if (mutation?.error) {
       toast({
         title: t('errors.title'),
         description: t('errors.internal_server_error'),

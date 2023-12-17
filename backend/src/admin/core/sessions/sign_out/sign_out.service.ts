@@ -29,14 +29,14 @@ export class SignOutAdminSessionsService {
       httpOnly: true,
       secure: true,
       domain: CONFIG.cookie.domain,
-      path: '/admin'
+      path: '/'
     });
 
     res.clearCookie(CONFIG.refresh_token.admin.name, {
       httpOnly: true,
       secure: true,
       domain: CONFIG.cookie.domain,
-      path: '/admin'
+      path: '/'
     });
 
     return 'You are logged out';

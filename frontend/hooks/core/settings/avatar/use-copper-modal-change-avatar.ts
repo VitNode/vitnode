@@ -27,23 +27,24 @@ export const useCopperModalChangeAvatar = () => {
     });
 
     setPending(true);
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-      await mutationUploadApi(formData);
 
-      toast({
-        title: t('settings.change_avatar.options.upload.title'),
-        description: t('settings.change_avatar.options.upload.success')
-      });
-      setOpen(false);
-    } catch (error) {
+    const formData = new FormData();
+    formData.append('file', file);
+    const mutation = await mutationUploadApi(formData);
+    if (mutation.error) {
       toast({
         title: t('errors.title'),
         description: t('settings.change_avatar.options.upload.error'),
         variant: 'destructive'
       });
+    } else {
+      toast({
+        title: t('settings.change_avatar.options.upload.title'),
+        description: t('settings.change_avatar.options.upload.success')
+      });
+      setOpen(false);
     }
+
     setPending(false);
   };
 

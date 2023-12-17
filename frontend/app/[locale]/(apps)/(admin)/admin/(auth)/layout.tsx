@@ -56,7 +56,6 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 export default async function Layout({ children }: Props) {
   try {
     const data = await getData();
-
     if (!data) return <ErrorAdminView />;
 
     return (

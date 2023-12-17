@@ -28,21 +28,22 @@ export const useModalChangeAvatar = () => {
   const onSubmit = async ({ type }: FormType) => {
     if (type === 'delete') {
       setPending(true);
-      try {
-        await mutationDeleteApi();
 
-        toast({
-          title: t('settings.change_avatar.options.delete.title'),
-          description: t('settings.change_avatar.options.delete.success')
-        });
-        setOpen(false);
-      } catch (error) {
+      const mutation = await mutationDeleteApi();
+      if (mutation.error) {
         toast({
           title: t('errors.title'),
           description: t('settings.change_avatar.options.delete.error'),
           variant: 'destructive'
         });
+      } else {
+        toast({
+          title: t('settings.change_avatar.options.delete.title'),
+          description: t('settings.change_avatar.options.delete.success')
+        });
+        setOpen(false);
       }
+
       setPending(false);
     }
   };

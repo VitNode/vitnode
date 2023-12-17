@@ -11,18 +11,21 @@ import {
 import { fetcher } from '@/graphql/fetcher';
 
 export const mutationApi = async (variables: Forum_Topics__CreateMutationVariables) => {
-  const mutation = await fetcher<
-    Forum_Topics__CreateMutation,
-    Forum_Topics__CreateMutationVariables
-  >({
-    query: Forum_Topics__Create,
-    variables,
-    headers: {
-      Cookie: cookies().toString()
-    }
-  });
+  try {
+    const data = await fetcher<Forum_Topics__CreateMutation, Forum_Topics__CreateMutationVariables>(
+      {
+        query: Forum_Topics__Create,
+        variables,
+        headers: {
+          Cookie: cookies().toString()
+        }
+      }
+    );
 
-  revalidatePath('/forum/[id]', 'page');
+    revalidatePath('/forum/[id]', 'page');
 
-  return mutation;
+    return { data };
+  } catch (error) {
+    return { error };
+  }
 };

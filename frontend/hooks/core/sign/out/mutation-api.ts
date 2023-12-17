@@ -12,13 +12,18 @@ import {
 import { redirect } from '@/i18n';
 
 export const mutationApi = async () => {
-  await fetcher<Core_Sessions__Sign_OutMutation, Core_Sessions__Sign_OutMutationVariables>({
-    query: Core_Sessions__Sign_Out,
-    headers: {
-      Cookie: cookies().toString()
-    }
-  });
+  try {
+    await fetcher<Core_Sessions__Sign_OutMutation, Core_Sessions__Sign_OutMutationVariables>({
+      query: Core_Sessions__Sign_Out,
+      headers: {
+        Cookie: cookies().toString()
+      }
+    });
 
-  revalidatePath('/', 'layout');
+    revalidatePath('/', 'layout');
+  } catch (error) {
+    return { error };
+  }
+
   redirect('/');
 };

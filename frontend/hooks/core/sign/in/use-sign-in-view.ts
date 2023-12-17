@@ -41,7 +41,7 @@ export const useSignInView = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setError(null);
-    const mutation = await mutationApi({ ...values });
+    const mutation = await mutationApi(values);
 
     if (mutation?.error) {
       const error = mutation.error as ErrorType;

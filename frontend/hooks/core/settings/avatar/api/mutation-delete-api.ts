@@ -11,17 +11,21 @@ import {
 } from '@/graphql/hooks';
 
 export const mutationDeleteApi = async () => {
-  const mutation = await fetcher<
-    Core_Members__Avatar__DeleteMutation,
-    Core_Members__Avatar__DeleteMutationVariables
-  >({
-    query: Core_Members__Avatar__Delete,
-    headers: {
-      Cookie: cookies().toString()
-    }
-  });
+  try {
+    const data = await fetcher<
+      Core_Members__Avatar__DeleteMutation,
+      Core_Members__Avatar__DeleteMutationVariables
+    >({
+      query: Core_Members__Avatar__Delete,
+      headers: {
+        Cookie: cookies().toString()
+      }
+    });
 
-  revalidatePath('/', 'layout');
+    revalidatePath('/', 'layout');
 
-  return mutation;
+    return { data };
+  } catch (error) {
+    return { error };
+  }
 };

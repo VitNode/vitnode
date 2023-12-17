@@ -23,7 +23,7 @@ export class AuthorizationAdminSessionsService {
       httpOnly: true,
       secure: true,
       domain: CONFIG.cookie.domain,
-      path: '/admin'
+      path: '/'
     });
   }
 
@@ -170,7 +170,7 @@ export class AuthorizationAdminSessionsService {
         httpOnly: true,
         secure: true,
         domain: CONFIG.cookie.domain,
-        path: '/admin',
+        path: '/',
         expires: new Date(convertUnixTime(currentDate() + CONFIG.access_token.admin.expiresIn)),
         sameSite: 'none'
       });

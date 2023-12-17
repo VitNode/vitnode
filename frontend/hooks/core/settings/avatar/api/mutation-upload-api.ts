@@ -11,25 +11,29 @@ import {
 } from '@/graphql/hooks';
 
 export const mutationUploadApi = async (formData: FormData) => {
-  const files = formData.get('file') as File;
+  try {
+    const files = formData.get('file') as File;
 
-  const mutation = await fetcher<
-    Core_Members__Avatar__UploadMutation,
-    Core_Members__Avatar__UploadMutationVariables
-  >({
-    query: Core_Members__Avatar__Upload,
-    uploads: [
-      {
-        files,
-        variable: 'file'
+    const data = await fetcher<
+      Core_Members__Avatar__UploadMutation,
+      Core_Members__Avatar__UploadMutationVariables
+    >({
+      query: Core_Members__Avatar__Upload,
+      uploads: [
+        {
+          files,
+          variable: 'file'
+        }
+      ],
+      headers: {
+        Cookie: cookies().toString()
       }
-    ],
-    headers: {
-      Cookie: cookies().toString()
-    }
-  });
+    });
 
-  revalidatePath('/', 'layout');
+    revalidatePath('/', 'layout');
 
-  return mutation;
+    return { data };
+  } catch (error) {
+    return { error };
+  }
 };
