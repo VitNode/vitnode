@@ -86,8 +86,7 @@ Then fill the values:
 # PORT=8080
 
 # Tokens
-ACCESS_TOKEN_SECRET=SECRET
-REFRESH_TOKEN_SECRET=SECRET
+LOGIN_TOKEN_SECRET=SECRET
 
 # Database
 DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE
@@ -106,16 +105,15 @@ COOKIE_DOMAIN=localhost
 
 Description:
 
-- `ACCESS_TOKEN_SECRET` - Secret for access token,
-- `REFRESH_TOKEN_SECRET` - Secret for refresh token,
+- `LOGIN_TOKEN_SECRET` - Secret for login token,
 - `DATABASE_URL` - URL to the database,
 - `REDIS_URL` - URL to the Redis,
 - `REDIS_PASSWORD` - Password to the Redis _(optional)_,
 - `COOKIE_DOMAIN` - Domain for cookies _(Domian where is your frontend)_.
 
 <Callout type="warning" emoji="⚠️">
-  Remember to change the values in `ACCESS_TOKEN_SECRET` and `REFRESH_TOKEN_SECRET`! You can
-  generate new secrets with [RandomKeygen](https://randomkeygen.com/).
+  Remember to change the value in `LOGIN_TOKEN_SECRET`! You can generate new secrets with
+  [RandomKeygen](https://randomkeygen.com/).
 </Callout>
 
 ### Generate database schema

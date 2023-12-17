@@ -10,6 +10,7 @@ import {
   Core_Sessions__Sign_OutMutationVariables
 } from '@/graphql/hooks';
 import { redirect } from '@/i18n';
+import { CONFIG } from '@/config';
 
 export const mutationApi = async () => {
   try {
@@ -19,6 +20,8 @@ export const mutationApi = async () => {
         Cookie: cookies().toString()
       }
     });
+
+    cookies().delete(CONFIG.login_token.name);
 
     revalidatePath('/', 'layout');
   } catch (error) {

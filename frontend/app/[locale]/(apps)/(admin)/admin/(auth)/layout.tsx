@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { cookies } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
+import { isRedirectError } from 'next/dist/client/components/redirect';
 
 import { AdminLayout } from '@/admin/layout/admin-layout';
 import { SessionAdminProvider } from './session-admin-provider';
@@ -15,12 +16,11 @@ import {
   Admin_Sessions__AuthorizationQuery,
   Admin_Sessions__AuthorizationQueryVariables
 } from '@/graphql/hooks';
-import { ErrorAdminView } from '@/admin/global/error-admin-view';
 
 const getData = async () => {
   const cookieStore = cookies();
 
-  if (!cookieStore.get(CONFIG.admin.access_token) && !cookieStore.get(CONFIG.admin.refresh_token)) {
+  if (!cookieStore.get(CONFIG.login_token.admin.name)) {
     return;
   }
 
@@ -56,7 +56,9 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 export default async function Layout({ children }: Props) {
   try {
     const data = await getData();
-    if (!data) return <ErrorAdminView />;
+    if (!data) {
+      return redirect('/admin');
+    }
 
     return (
       <SessionAdminProvider data={data}>
@@ -64,10 +66,10 @@ export default async function Layout({ children }: Props) {
       </SessionAdminProvider>
     );
   } catch (error) {
-    const errors = error as { errors: string[] };
-    // eslint-disable-next-line no-console
-    console.log(error, errors);
+    if (isRedirectError(error)) {
+      redirect('/admin');
+    }
 
-    redirect('/admin');
+    throw error;
   }
 }

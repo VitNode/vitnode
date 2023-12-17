@@ -11,8 +11,7 @@ import {
 } from '@/graphql/hooks';
 import { redirect } from '@/i18n';
 import { convertUnixTime, currentDate } from '@/functions/date';
-
-import { CONFIG } from '../../../../config';
+import { CONFIG } from '@/config';
 
 export const mutationApi = async (variables: Core_Sessions__Sign_InMutationVariables) => {
   try {
@@ -28,7 +27,7 @@ export const mutationApi = async (variables: Core_Sessions__Sign_InMutationVaria
     });
 
     cookies().set(
-      variables.admin ? CONFIG.admin.refresh_token : CONFIG.refresh_token,
+      variables.admin ? CONFIG.login_token.admin.name : CONFIG.login_token.name,
       mutation.core_sessions__sign_in,
       {
         httpOnly: true,
@@ -36,7 +35,7 @@ export const mutationApi = async (variables: Core_Sessions__Sign_InMutationVaria
         path: '/',
         expires:
           variables.remember && !variables.admin
-            ? new Date(convertUnixTime(currentDate() + 60 * 60 * 24 * 90))
+            ? new Date(convertUnixTime(currentDate() + CONFIG.login_token.expiresInRemember))
             : undefined,
         sameSite: 'none'
       }

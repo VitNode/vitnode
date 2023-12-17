@@ -14,7 +14,6 @@ interface Props {
 export const LayoutInstallConfigsView = ({ children }: Props) => {
   const t = useTranslations('admin.configs.install');
   const segment = useSelectedLayoutSegment();
-  // const { data, isError, isLoading } = useLayoutInstallConfigsAPI();
 
   const stepsNumber: {
     [key: string]: number;
