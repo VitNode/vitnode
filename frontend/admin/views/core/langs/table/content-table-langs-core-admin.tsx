@@ -7,15 +7,17 @@ import { useLangsAdminAPI } from './hooks/use-langs-admin-api';
 import { DataTable } from '@/components/data-table/data-table';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
-import { useEditLangsAdminAPI } from './actions/edit/hooks/use-edit-langs-admin-api';
 import { ActionsTableLangsCoreAdmin } from './actions/actions-table-langs-core-admin';
 import { ShowCoreLanguages } from '@/graphql/hooks';
+import { mutationApi } from './actions/edit/mutation-api';
+import { useToast } from '@/components/ui/use-toast';
 
 export const ContentTableLangsCoreAdmin = () => {
   const t = useTranslations('admin.core.langs');
   const tAdmin = useTranslations('admin');
+  const tCore = useTranslations('core');
+  const { toast } = useToast();
   const { data, defaultPageSize, isFetching, isLoading, isPending } = useLangsAdminAPI();
-  const { mutateAsync } = useEditLangsAdminAPI();
 
   const columns: ColumnDef<ShowCoreLanguages>[] = useMemo(
     () => [
@@ -44,10 +46,17 @@ export const ContentTableLangsCoreAdmin = () => {
               disabled={data.default || data.protected}
               checked={data.enabled}
               onClick={async () => {
-                await mutateAsync({
+                const mutation = await mutationApi({
                   ...data,
                   enabled: !data.enabled
                 });
+                if (mutation.error) {
+                  toast({
+                    title: tCore('errors.title'),
+                    description: tCore('errors.internal_server_error'),
+                    variant: 'destructive'
+                  });
+                }
               }}
             />
           );

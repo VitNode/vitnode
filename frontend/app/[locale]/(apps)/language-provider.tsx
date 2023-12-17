@@ -1,30 +1,16 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
 import { ReactNode } from 'react';
 
-import { APIKeys } from '@/graphql/api-keys';
-import { fetcher } from '@/graphql/fetcher';
-import {
-  Core_Languages__Middleware,
-  Core_Languages__MiddlewareQuery,
-  Core_Languages__MiddlewareQueryVariables
-} from '@/graphql/hooks';
+import { Core_Languages__MiddlewareQuery } from '@/graphql/hooks';
 import { GlobalsContext } from '@/hooks/core/use-globals';
 
 interface Props {
   children: ReactNode;
+  data: Core_Languages__MiddlewareQuery;
 }
 
-export const LanguageProvider = ({ children }: Props) => {
-  const { data } = useQuery({
-    queryKey: [APIKeys.LANGUAGES],
-    queryFn: async () =>
-      await fetcher<Core_Languages__MiddlewareQuery, Core_Languages__MiddlewareQueryVariables>({
-        query: Core_Languages__Middleware
-      })
-  });
-
+export const LanguageProvider = ({ children, data }: Props) => {
   return (
     <GlobalsContext.Provider
       value={{
