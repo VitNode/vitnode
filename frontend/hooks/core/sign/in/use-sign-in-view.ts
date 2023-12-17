@@ -2,12 +2,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
+import { useState } from 'react';
 
-import { useSignInAPI } from './use-sign-in-api';
+import { mutationApi } from './mutation-api';
+import { ErrorType } from '@/graphql/fetcher';
 
 export const useSignInView = () => {
+  const [error, setError] = useState<ErrorType | null>(null);
   const t = useTranslations('core');
-  const mutation = useSignInAPI();
 
   const formSchema = z.object({
     email: z
@@ -38,13 +40,21 @@ export const useSignInView = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    await mutation.mutateAsync({ ...values });
+    setError(null);
+    const mutation = await mutationApi({ ...values });
+
+    if (mutation?.error) {
+      const error = mutation.error as ErrorType;
+
+      if (error?.extensions) {
+        setError(error);
+      }
+    }
   };
 
   return {
     form,
     onSubmit,
-    isPending: mutation.isPending,
-    error: mutation.error
+    error
   };
 };

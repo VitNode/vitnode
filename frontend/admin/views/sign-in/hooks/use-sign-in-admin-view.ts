@@ -3,11 +3,9 @@ import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import { useSignInAPI } from '@/hooks/core/sign/in/use-sign-in-api';
-
 export const useSignInAdminView = () => {
   const t = useTranslations('core');
-  const mutation = useSignInAPI();
+  // const mutation = useSignInAPI();
 
   const formSchema = z.object({
     email: z
@@ -35,14 +33,11 @@ export const useSignInAdminView = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    await mutation.mutateAsync({ ...values, admin: true });
+    //  await mutation.mutateAsync({ ...values, admin: true });
   };
 
   return {
     form,
-    onSubmit,
-    isPending: mutation.isPending,
-    error: mutation.error,
-    isSuccess: mutation.isSuccess
+    onSubmit
   };
 };

@@ -101,6 +101,8 @@ export class SignInCoreSessionsService {
       path: '/',
       sameSite: 'none'
     });
+
+    return refreshToken;
   }
 
   async signIn({ admin, email: emailRaw, password, remember }: SignInCoreSessionsArgs, ctx: Ctx) {
@@ -141,7 +143,7 @@ export class SignInCoreSessionsService {
       }
     }
 
-    await this.createSession({
+    return await this.createSession({
       name: user.name,
       email: user.email,
       userId: user.id,
@@ -149,7 +151,5 @@ export class SignInCoreSessionsService {
       ...ctx,
       remember
     });
-
-    return 'Success!';
   }
 }

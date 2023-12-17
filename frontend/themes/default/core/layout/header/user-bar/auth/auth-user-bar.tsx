@@ -20,7 +20,7 @@ export const AuthUserBar = () => {
   const t = useTranslations('core');
   const { push } = useRouter();
   const { session } = useSession();
-  const { mutateAsync } = useSignOutAPI();
+  const { onSubmit } = useSignOutAPI();
 
   if (!session) return null;
   const { email, id, is_admin, name } = session;
@@ -73,7 +73,7 @@ export const AuthUserBar = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={async () => await mutateAsync()}>
+          <DropdownMenuItem onClick={async () => await onSubmit()}>
             <LogOut className="mr-2 h-4 w-4" />
             <span>{t('user-bar.log_out')}</span>
           </DropdownMenuItem>

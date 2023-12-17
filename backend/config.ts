@@ -16,7 +16,7 @@ export const CONFIG = {
   port: ENVS.port ? ENVS.port : 8080,
   refresh_token: {
     secret: ENVS.tokens.refresh,
-    expiresIn: 60 * 60 * 24 * 365, // 365 days
+    expiresIn: 60 * 60 * 24 * 90, // 90 days
     name: 'vitnode-ref-auth',
     admin: {
       name: 'vitnode-ref-auth-admin',
