@@ -16,17 +16,21 @@ interface Args {
 }
 
 export const mutationApi = async ({ installPage, variables }: Args) => {
-  const mutation = fetcher<Core_Members__Sign_UpMutation, Core_Members__Sign_UpMutationVariables>({
-    query: Core_Members__Sign_Up,
-    variables,
-    headers: {
-      Cookie: cookies().toString()
+  try {
+    const data = fetcher<Core_Members__Sign_UpMutation, Core_Members__Sign_UpMutationVariables>({
+      query: Core_Members__Sign_Up,
+      variables,
+      headers: {
+        Cookie: cookies().toString()
+      }
+    });
+
+    if (installPage) {
+      revalidatePath('/admin/(configs)/install/', 'layout');
     }
-  });
 
-  if (installPage) {
-    revalidatePath('/admin/(configs)/install/', 'layout');
+    return { data };
+  } catch (error) {
+    return { error };
   }
-
-  return mutation;
 };

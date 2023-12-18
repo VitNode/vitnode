@@ -1,7 +1,6 @@
 export const ENVS = {
   tokens: {
-    refresh: process.env.REFRESH_TOKEN_SECRET,
-    access: process.env.ACCESS_TOKEN_SECRET
+    login: process.env.LOGIN_TOKEN_SECRET
   },
   redis: {
     url: process.env.REDIS_URL,
@@ -14,22 +13,14 @@ export const ENVS = {
 export const CONFIG = {
   password_salt: 10,
   port: ENVS.port ? ENVS.port : 8080,
-  refresh_token: {
-    secret: ENVS.tokens.refresh,
-    expiresIn: 60 * 60 * 24 * 365, // 365 days
-    name: 'vitnode-ref-auth',
+  login_token: {
+    secret: ENVS.tokens.login,
+    expiresIn: 60 * 60 * 24, // 24 days
+    expiresInRemember: 60 * 60 * 24 * 90, // 90 days
+    name: 'vitnode-login-token',
     admin: {
-      name: 'vitnode-ref-auth-admin',
-      expiresIn: 60 * 60 * 24 // 24 hours
-    }
-  },
-  access_token: {
-    secret: ENVS.tokens.access,
-    expiresIn: 60 * 60 * 24, // 24 hours
-    name: 'vitnode-acc-auth',
-    admin: {
-      name: 'vitnode-acc-auth-admin',
-      expiresIn: 60 * 5 // 5 min
+      name: 'vitnode-login-token-admin',
+      expiresIn: 60 * 60 * 24 // 1 day
     }
   },
   redis: {

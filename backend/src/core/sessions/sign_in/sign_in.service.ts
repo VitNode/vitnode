@@ -9,7 +9,7 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { Ctx } from '@/types/context.type';
 import { CONFIG } from '@/config';
-import { convertUnixTime, currentDate } from '@/functions/date';
+import { currentDate } from '@/functions/date';
 
 interface CreateSessionArgs extends Ctx {
   email: string;
@@ -26,35 +26,30 @@ export class SignInCoreSessionsService {
     private jwtService: JwtService
   ) {}
 
-  private async createSession({
-    admin,
-    email,
-    name,
-    remember,
-    req,
-    res,
-    userId
-  }: CreateSessionArgs) {
+  private async createSession({ admin, email, name, remember, req, userId }: CreateSessionArgs) {
     const uaParser = new UAParser(req.headers['user-agent']);
     const uaParserResults = uaParser.getResult();
 
-    const refreshToken = this.jwtService.sign(
+    const login_token = this.jwtService.sign(
       {
         name,
         email
       },
       {
-        secret: CONFIG.refresh_token.secret,
-        expiresIn: CONFIG.refresh_token.expiresIn
+        secret: CONFIG.login_token.secret,
+        expiresIn: CONFIG.login_token.expiresIn
       }
     );
 
+    const expires = remember ? CONFIG.login_token.expiresInRemember : CONFIG.login_token.expiresIn;
+
     const data = {
-      refresh_token: refreshToken,
+      login_token: login_token,
       member_id: userId,
       user_agent: req.headers['user-agent'],
       last_seen: currentDate(),
-      expires: currentDate() + 60 * 60 * 24 * (admin ? 1 : 365), // 1 day for admin, 365 days for user
+      expires: currentDate() + expires,
+      created: currentDate(),
       uagent_browser: uaParserResults.browser.name ?? 'Uagent from tests',
       uagent_version: uaParserResults.browser.version ?? 'Uagent from tests',
       uagent_os: uaParserResults.os.name
@@ -67,40 +62,20 @@ export class SignInCoreSessionsService {
 
     if (admin) {
       await this.prisma.core_admin_sessions.create({
-        data
+        data: {
+          ...data,
+          expires: currentDate() + CONFIG.login_token.admin.expiresIn
+        }
       });
-    } else {
-      await this.prisma.core_sessions.create({
-        data
-      });
+
+      return login_token;
     }
 
-    const cookiesName = {
-      refreshToken: admin ? CONFIG.refresh_token.admin.name : CONFIG.refresh_token.name,
-      accessToken: admin ? CONFIG.access_token.admin.name : CONFIG.access_token.name
-    };
-
-    // Create cookie for refresh token
-    res.cookie(cookiesName.refreshToken, refreshToken, {
-      httpOnly: true,
-      secure: true,
-      domain: CONFIG.cookie.domain,
-      path: '/',
-      expires:
-        remember && !admin
-          ? new Date(convertUnixTime(currentDate() + CONFIG.refresh_token.expiresIn))
-          : undefined,
-      sameSite: 'none'
+    await this.prisma.core_sessions.create({
+      data
     });
 
-    // Reset access token cookie
-    res.clearCookie(cookiesName.accessToken, {
-      httpOnly: true,
-      secure: true,
-      domain: CONFIG.cookie.domain,
-      path: '/',
-      sameSite: 'none'
-    });
+    return login_token;
   }
 
   async signIn({ admin, email: emailRaw, password, remember }: SignInCoreSessionsArgs, ctx: Ctx) {
@@ -141,7 +116,7 @@ export class SignInCoreSessionsService {
       }
     }
 
-    await this.createSession({
+    return await this.createSession({
       name: user.name,
       email: user.email,
       userId: user.id,
@@ -149,7 +124,5 @@ export class SignInCoreSessionsService {
       ...ctx,
       remember
     });
-
-    return 'Success!';
   }
 }

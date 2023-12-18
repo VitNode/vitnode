@@ -21,7 +21,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 export const FormSignIn = () => {
   const t = useTranslations('core');
-  const { error, form, isPending, onSubmit } = useSignInView();
+  const { error, form, onSubmit } = useSignInView();
 
   return (
     <Form {...form}>
@@ -80,7 +80,7 @@ export const FormSignIn = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button type="submit" className="w-full" loading={isPending}>
+          <Button type="submit" className="w-full" loading={form.formState.isSubmitting}>
             {t('sign_in.form.submit')}
           </Button>
         </CardFooter>

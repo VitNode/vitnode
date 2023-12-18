@@ -93,8 +93,7 @@ model core_admin_permissions {
 }
 
 model core_sessions {
-  refresh_token        String       @id @unique @db.VarChar(255)
-  access_token         String?      @unique @db.VarChar(255)
+  login_token          String       @id @unique @db.VarChar(255)
   member               core_members @relation("core_sessions_member", references: [id], fields: [member_id], onDelete: Cascade)
   member_id            String
   ip_address           String?      @db.VarChar(46)
@@ -106,14 +105,14 @@ model core_sessions {
   uagent_device_type   String?      @db.VarChar(200)
   uagent_device_model  String?      @db.VarChar(200)
   last_seen            Int
+  created              Int
   expires              Int
 
   @@index([member_id])
 }
 
 model core_admin_sessions {
-  refresh_token        String       @id @unique @db.VarChar(255)
-  access_token         String?      @unique @db.VarChar(255)
+  login_token          String       @id @unique @db.VarChar(255)
   member               core_members @relation("core_admin_sessions_member", references: [id], fields: [member_id], onDelete: Cascade)
   member_id            String
   ip_address           String?      @db.VarChar(46)
@@ -125,6 +124,7 @@ model core_admin_sessions {
   uagent_device_type   String?      @db.VarChar(200)
   uagent_device_model  String?      @db.VarChar(200)
   last_seen            Int
+  created              Int
   expires              Int
 
   @@index([member_id])

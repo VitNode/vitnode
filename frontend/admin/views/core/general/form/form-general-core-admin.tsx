@@ -16,13 +16,14 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
-import { useGeneralSettingsAdminAPI } from './hooks/use-general-settings-admin-api';
+import { mutationApi } from './mutation-api';
+import { useToast } from '@/components/ui/use-toast';
 
 export const FormGeneralCoreAdmin = () => {
   const { side_name } = useSessionAdmin();
   const t = useTranslations('admin');
   const tCore = useTranslations('core');
-  const { isPending, mutateAsync } = useGeneralSettingsAdminAPI();
+  const { toast } = useToast();
 
   const formSchema = z.object({
     name: z
@@ -42,8 +43,21 @@ export const FormGeneralCoreAdmin = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    await mutateAsync({
+    const mutation = await mutationApi({
       sideName: values.name
+    });
+    if (mutation.error) {
+      toast({
+        title: tCore('errors.title'),
+        description: tCore('errors.internal_server_error'),
+        variant: 'destructive'
+      });
+
+      return;
+    }
+
+    toast({
+      title: tCore('saved_success')
     });
   };
 
@@ -64,7 +78,7 @@ export const FormGeneralCoreAdmin = () => {
           )}
         />
 
-        <Button type="submit" loading={isPending}>
+        <Button type="submit" loading={form.formState.isSubmitting}>
           {tCore('save')}
         </Button>
       </form>

@@ -3,7 +3,7 @@ import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { DialogFooter, DialogHeader, DialogTitle, useDialog } from '@/components/ui/dialog';
 import { ShowCoreLanguages } from '@/graphql/hooks';
 import {
   Form,
@@ -15,12 +15,14 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useEditLangsAdminAPI } from './hooks/use-edit-langs-admin-api';
+import { mutationApi } from './mutation-api';
+import { useToast } from '@/components/ui/use-toast';
 
 export const ModalEditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
   const t = useTranslations('admin');
   const tCore = useTranslations('core');
-  const { isPending, mutateAsync } = useEditLangsAdminAPI();
+  const { setOpen } = useDialog();
+  const { toast } = useToast();
 
   const formSchema = z.object({
     name: z
@@ -48,10 +50,24 @@ export const ModalEditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => 
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    await mutateAsync({
+    const mutation = await mutationApi({
       ...data,
       ...values
     });
+    if (mutation.error) {
+      toast({
+        title: tCore('errors.title'),
+        description: tCore('errors.internal_server_error'),
+        variant: 'destructive'
+      });
+
+      return;
+    }
+
+    toast({
+      title: tCore('saved_success')
+    });
+    setOpen(false);
   };
 
   return (
@@ -92,7 +108,11 @@ export const ModalEditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => 
         </form>
 
         <DialogFooter>
-          <Button type="submit" onClick={form.handleSubmit(onSubmit)} loading={isPending}>
+          <Button
+            type="submit"
+            onClick={form.handleSubmit(onSubmit)}
+            loading={form.formState.isSubmitting}
+          >
             {t('core.langs.actions.edit.submit')}
           </Button>
         </DialogFooter>

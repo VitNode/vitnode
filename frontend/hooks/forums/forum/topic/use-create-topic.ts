@@ -29,17 +29,14 @@ export const useCreateTopic = ({ forumId }: Props) => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      await mutationApi({ ...values, forumId });
-      // TODO: Add redirect to the topic page
-    } catch (err) {
+    const mutation = await mutationApi({ ...values, forumId });
+    // TODO: Add redirect to the topic page
+    if (mutation.error) {
       toast({
         title: t('errors.title'),
         description: t('errors.internal_server_error'),
         variant: 'destructive'
       });
-
-      return;
     }
   };
 

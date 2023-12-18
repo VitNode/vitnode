@@ -32,7 +32,7 @@ export const CropperModalChangeAvatar = ({ file }: Props) => {
       />
 
       <DialogFooter>
-        <Button type="submit" onClick={onSubmit} loading={isPending}>
+        <Button onClick={onSubmit} loading={isPending}>
           {t('settings.change_avatar.submit')}
         </Button>
       </DialogFooter>

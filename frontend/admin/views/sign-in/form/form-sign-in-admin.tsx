@@ -19,7 +19,7 @@ import { useSignInAdminView } from '../hooks/use-sign-in-admin-view';
 
 export const FormSignInAdmin = () => {
   const t = useTranslations('core');
-  const { error, form, isPending, isSuccess, onSubmit } = useSignInAdminView();
+  const { error, form, onSubmit } = useSignInAdminView();
 
   return (
     <Form {...form}>
@@ -63,7 +63,7 @@ export const FormSignInAdmin = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button type="submit" className="w-full" loading={isPending || isSuccess}>
+          <Button type="submit" className="w-full" loading={form.formState.isSubmitting}>
             {t('sign_in.form.submit')}
           </Button>
         </CardFooter>

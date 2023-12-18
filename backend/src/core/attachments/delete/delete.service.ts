@@ -12,24 +12,26 @@ export class DeleteCoreAttachmentsService {
   constructor(private readonly prisma: PrismaService) {}
 
   async deleteFile({ id, module }: DeleteCoreAttachmentsArgs) {
+    if (!module && !id) {
+      throw new CustomError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'Module and id are required'
+      });
+    }
+
     const file = await this.prisma.core_attachments.findFirst({
-      where: {
-        OR: [
-          {
-            id
-          },
-          {
+      where: id
+        ? { id }
+        : {
             AND: [
               {
                 module: module.module
               },
               {
-                module_id: id
+                module_id: module.id
               }
             ]
           }
-        ]
-      }
     });
 
     if (!file) {

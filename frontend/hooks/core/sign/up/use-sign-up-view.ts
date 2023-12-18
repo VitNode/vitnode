@@ -63,51 +63,55 @@ export const useSignUpView = ({ installPage }: Args) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { terms, ...rest } = values;
 
-    try {
-      await mutationApi({
-        variables: rest,
-        installPage
-      });
-    } catch (error) {
-      const {
-        extensions: { code }
-      } = error as ErrorType;
+    const mutation = await mutationApi({
+      variables: rest,
+      installPage
+    });
 
-      if (code === 'EMAIL_ALREADY_EXISTS') {
-        form.setError(
-          'email',
-          {
-            type: 'manual',
-            message: t('sign_up.form.email.already_exists')
-          },
-          {
-            shouldFocus: true
-          }
-        );
+    if (mutation.error) {
+      const error = mutation.error as ErrorType;
 
-        return;
+      if (error?.extensions) {
+        const {
+          extensions: { code }
+        } = error as ErrorType;
+
+        if (code === 'EMAIL_ALREADY_EXISTS') {
+          form.setError(
+            'email',
+            {
+              type: 'manual',
+              message: t('sign_up.form.email.already_exists')
+            },
+            {
+              shouldFocus: true
+            }
+          );
+
+          return;
+        }
+
+        if (code === 'NAME_ALREADY_EXISTS') {
+          form.setError(
+            'name',
+            {
+              type: 'manual',
+              message: t('sign_up.form.name.already_exists')
+            },
+            {
+              shouldFocus: true
+            }
+          );
+
+          return;
+        }
+
+        toast({
+          title: t('errors.title'),
+          description: t('errors.internal_server_error'),
+          variant: 'destructive'
+        });
       }
-
-      if (code === 'NAME_ALREADY_EXISTS') {
-        form.setError(
-          'name',
-          {
-            type: 'manual',
-            message: t('sign_up.form.name.already_exists')
-          },
-          {
-            shouldFocus: true
-          }
-        );
-
-        return;
-      }
-
-      toast({
-        title: t('errors.title'),
-        description: t('errors.internal_server_error'),
-        variant: 'destructive'
-      });
     }
   };
 

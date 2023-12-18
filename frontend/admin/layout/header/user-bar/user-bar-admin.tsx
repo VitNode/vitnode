@@ -7,9 +7,10 @@ import { Button } from '@/components/ui/button';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
 import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
 import { ItemUserBarAdmin } from './item-user-bar-admin';
-import { useSignOutAdminAPI } from './hooks/use-sign-out-admin-api';
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
 import { Separator } from '@/components/ui/separator';
+import { mutationApi } from './mutation-api';
+import { useToast } from '@/components/ui/use-toast';
 
 import { ListNavAdmin } from '../../nav/list/list-nav-admin';
 
@@ -17,7 +18,7 @@ export const UserBarAdmin = () => {
   const t = useTranslations('admin');
   const tCore = useTranslations('core');
   const { session } = useSessionAdmin();
-  const { mutateAsync } = useSignOutAdminAPI();
+  const { toast } = useToast();
 
   if (!session) return null;
   const { email, name, ...rest } = session;
@@ -54,7 +55,18 @@ export const UserBarAdmin = () => {
 
           <Separator className="my-2" />
 
-          <ItemUserBarAdmin onClick={async () => await mutateAsync()}>
+          <ItemUserBarAdmin
+            onClick={async () => {
+              const mutation = await mutationApi();
+              if (mutation?.error) {
+                toast({
+                  title: tCore('errors.title'),
+                  description: tCore('errors.internal_server_error'),
+                  variant: 'destructive'
+                });
+              }
+            }}
+          >
             <LogOut /> <span>{tCore('user-bar.log_out')}</span>
           </ItemUserBarAdmin>
         </div>

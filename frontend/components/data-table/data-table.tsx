@@ -34,7 +34,7 @@ interface TDataMin {
 interface DataTableProps<TData extends TDataMin> extends ToolbarDataTableProps {
   columns: ColumnDef<TData>[];
   data: TData[];
-  defaultPageSize: number;
+  defaultPageSize: 10 | 20 | 30 | 40 | 50;
   isFetching: boolean | undefined;
   defaultSorting?: { sortBy: keyof TData; sortDirection: 'desc' | 'asc' };
   filters?: ReactNode;

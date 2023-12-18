@@ -3,7 +3,7 @@ import { useSearchParams } from 'next/navigation';
 import { useGetSortByParamsAPI } from './use-get-sort-by-params-api';
 
 interface Args<T> {
-  defaultPageSize: number;
+  defaultPageSize: 10 | 20 | 30 | 40 | 50;
   search?: boolean;
   sortByEnum?: T;
 }
@@ -29,10 +29,12 @@ export function usePaginationAPI<T extends { [key: string]: unknown }>({
   };
 }
 
-export const emptyPagination = {
-  first: 0,
-  last: 0,
-  cursor: null,
-  search: '',
-  sortBy: null
+export const emptyPagination = ({ first }: { first: 10 | 20 | 30 | 40 | 50 }) => {
+  return {
+    first,
+    last: 0,
+    cursor: null,
+    search: '',
+    sortBy: null
+  };
 };

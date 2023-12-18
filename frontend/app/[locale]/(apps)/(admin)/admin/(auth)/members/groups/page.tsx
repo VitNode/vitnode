@@ -20,11 +20,13 @@ interface Props {
   };
 }
 
+const FIRST = 10;
+
 const getData = async () => {
   return await fetcher<Core_Groups__Admin__ShowQuery, Core_Groups__Admin__ShowQueryVariables>({
     query: Core_Groups__Admin__Show,
     variables: {
-      first: 10
+      first: FIRST
     },
     headers: {
       Cookie: cookies().toString()
@@ -43,7 +45,7 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 export default async function Page() {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
-    queryKey: [APIKeys.GROUPS_MEMBERS_ADMIN, { ...emptyPagination }],
+    queryKey: [APIKeys.GROUPS_MEMBERS_ADMIN, { ...emptyPagination({ first: FIRST }) }],
     queryFn: getData
   });
   const dehydratedState = dehydrate(queryClient);

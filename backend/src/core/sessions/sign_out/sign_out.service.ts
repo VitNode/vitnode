@@ -8,35 +8,17 @@ import { PrismaService } from '@/prisma/prisma.service';
 export class SignOutCoreSessionsService {
   constructor(private prisma: PrismaService) {}
 
-  async signOut({ req, res }: Ctx) {
-    const tokens = {
-      accessToken: req.cookies[CONFIG.access_token.name],
-      refreshToken: req.cookies[CONFIG.refresh_token.name]
-    };
+  async signOut({ req }: Ctx) {
+    const login_token = req.cookies[CONFIG.login_token.name];
 
-    if (!tokens.accessToken && !tokens.refreshToken) {
+    if (!login_token) {
       return 'You are not logged in';
     }
 
-    await this.prisma.core_sessions.deleteMany({
+    await this.prisma.core_sessions.delete({
       where: {
-        access_token: tokens.accessToken,
-        refresh_token: tokens.refreshToken
+        login_token
       }
-    });
-
-    res.clearCookie(CONFIG.access_token.name, {
-      httpOnly: true,
-      secure: true,
-      domain: CONFIG.cookie.domain,
-      path: '/'
-    });
-
-    res.clearCookie(CONFIG.refresh_token.name, {
-      httpOnly: true,
-      secure: true,
-      domain: CONFIG.cookie.domain,
-      path: '/'
     });
 
     return 'You are logged out';

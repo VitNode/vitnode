@@ -19,10 +19,12 @@ import { AdvancedFiltersUsersMembersAdmin } from './filters/advanced/advanced-fi
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { HeaderSortingDataTable } from '@/components/data-table/header-sorting-data-table';
 
+import { ErrorAdminView } from '../../../../global/error-admin-view';
+
 export const ContentTableUsersMembersAdmin = () => {
   const t = useTranslations('admin.members.users');
   const tCore = useTranslations('core');
-  const { data, defaultPageSize, isFetching, isLoading, isPending } = useUsersMembersAdminAPI();
+  const { data, defaultPageSize, isError, isFetching, isLoading } = useUsersMembersAdminAPI();
   const { convertText } = useTextLang();
 
   const columns: ColumnDef<UsersMembersAdminAPIDataType>[] = useMemo(
@@ -98,12 +100,16 @@ export const ContentTableUsersMembersAdmin = () => {
     []
   );
 
-  if ((isLoading && !isFetching) || isPending) return <Loader />;
+  if (isLoading) return <Loader />;
+  if (isError) return <ErrorAdminView />;
+  if (!data || data.core_members__admin__show.edges.length === 0) {
+    return <div className="text-center">{tCore('no_results')}</div>;
+  }
 
   return (
     <DataTable
-      data={data?.core_members__admin__show.edges ?? []}
-      pageInfo={data?.core_members__admin__show.pageInfo}
+      data={data.core_members__admin__show.edges}
+      pageInfo={data.core_members__admin__show.pageInfo}
       defaultPageSize={defaultPageSize}
       columns={columns}
       isFetching={isFetching}

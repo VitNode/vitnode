@@ -19,7 +19,7 @@ export interface UsersMembersAdminAPIDataType
   > {}
 
 export const useUsersMembersAdminAPI = () => {
-  const defaultPageSize = 10;
+  const defaultPageSize = 10 as const;
   const searchParams = useSearchParams();
   const variables = {
     ...usePaginationAPI({
@@ -32,15 +32,12 @@ export const useUsersMembersAdminAPI = () => {
 
   const query = useQuery({
     queryKey: [APIKeys.USERS_MEMBERS, { ...variables }],
-    queryFn: async ({ signal }) => {
-      return await fetcher<Core_Members__Admin__ShowQuery, Core_Members__Admin__ShowQueryVariables>(
-        {
-          query: Core_Members__Admin__Show,
-          variables,
-          signal
-        }
-      );
-    },
+    queryFn: async ({ signal }) =>
+      await fetcher<Core_Members__Admin__ShowQuery, Core_Members__Admin__ShowQueryVariables>({
+        query: Core_Members__Admin__Show,
+        variables,
+        signal
+      }),
     placeholderData: previousData => previousData
   });
 
