@@ -7,7 +7,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { zodTextLanguageInputType } from '@/components/text-language-input';
 import { ShowAdminGroups } from '@/graphql/hooks';
 import { mutationCreateApi } from './mutation-create-api';
-import { mutationEditApi } from './mutation-edit-ap';
+import { mutationEditApi } from './mutation-edit-api';
 import { useToast } from '@/components/ui/use-toast';
 import { useDialog } from '@/components/ui/dialog';
 import { useTextLang } from '@/hooks/core/use-text-lang';

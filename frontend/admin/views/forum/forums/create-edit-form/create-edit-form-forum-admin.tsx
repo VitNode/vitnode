@@ -27,7 +27,7 @@ enum TabsEnum {
 export const CreateEditFormForumAdmin = () => {
   const t = useTranslations('admin.forum.forums');
   const tCore = useTranslations('core');
-  const { form, isPending, onSubmit } = useCreateEditFormForumAdmin();
+  const { form, onSubmit } = useCreateEditFormForumAdmin();
   const [activeTab, setActiveTab] = useState<TabsEnum>(TabsEnum.MAIN);
 
   const tabsContent = {
@@ -62,7 +62,11 @@ export const CreateEditFormForumAdmin = () => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <Suspense fallback={<Loader />}>{tabsContent[activeTab]}</Suspense>
 
-          <Button disabled={!form.formState.isValid} loading={isPending} type="submit">
+          <Button
+            disabled={!form.formState.isValid}
+            loading={form.formState.isSubmitting}
+            type="submit"
+          >
             {tCore('save')}
           </Button>
         </form>

@@ -12,9 +12,12 @@ import { ActionsTableGroupsMembersAdmin } from './actions/actions-table-groups-m
 import { DateFormat } from '@/components/date-format/date-format';
 import { HeaderSortingDataTable } from '@/components/data-table/header-sorting-data-table';
 
+import { ErrorAdminView } from '../../../../global/error-admin-view';
+
 export const ContentTableGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.groups');
-  const { data, defaultPageSize, isFetching, isLoading, isPending } = useGroupMembersAdminAPI();
+  const tCore = useTranslations('core');
+  const { data, defaultPageSize, isError, isFetching, isLoading } = useGroupMembersAdminAPI();
   const { convertText } = useTextLang();
 
   const columns: ColumnDef<Omit<ShowAdminGroups, 'default' | 'root'>>[] = useMemo(
@@ -66,12 +69,16 @@ export const ContentTableGroupsMembersAdmin = () => {
     []
   );
 
-  if ((isLoading && !isFetching) || isPending) return <Loader />;
+  if (isLoading) return <Loader />;
+  if (isError) return <ErrorAdminView />;
+  if (!data || data.core_groups__admin__show.edges.length === 0) {
+    return <div className="text-center">{tCore('no_results')}</div>;
+  }
 
   return (
     <DataTable
-      data={data?.core_groups__admin__show.edges ?? []}
-      pageInfo={data?.core_groups__admin__show.pageInfo}
+      data={data.core_groups__admin__show.edges}
+      pageInfo={data.core_groups__admin__show.pageInfo}
       defaultPageSize={defaultPageSize}
       columns={columns}
       isFetching={isFetching}

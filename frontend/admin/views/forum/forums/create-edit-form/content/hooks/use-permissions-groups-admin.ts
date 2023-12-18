@@ -26,7 +26,8 @@ export const usePermissionsGroupsAdminAPI = ({ searchValue }: Args) => {
         }
       });
     },
-    placeholderData: previousData => previousData
+    placeholderData: previousData => previousData,
+    refetchOnMount: true
   });
 
   return { ...query, data: query.data?.core_groups__admin__show.edges ?? [] };

@@ -29,9 +29,9 @@ import {
 import { GlobalLoader } from '@/components/loader/global/global-loader';
 import { Loader } from '@/components/loader/loader';
 import { ErrorAdminView } from '@/admin/global/error-admin-view';
-import { useChangePositionForumAdminAPI } from '../hooks/use-change-position-forum-admin-api';
 import { APIKeys } from '@/graphql/api-keys';
 import { Forum_Forums__Admin__ShowQuery } from '@/graphql/hooks';
+import { mutationChangePositionApi } from '../hooks/mutation-change-position-api';
 
 const indentationWidth = 20;
 
@@ -39,7 +39,6 @@ export const ContentTableForumsForumAdmin = () => {
   const t = useTranslations('core');
   const { data, fetchNextPage, hasNextPage, isError, isFetching, isLoading } =
     useForumForumsAdminAPI();
-  const { mutateAsync } = useChangePositionForumAdminAPI();
   const queryClient = useQueryClient();
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
@@ -162,8 +161,6 @@ export const ContentTableForumsForumAdmin = () => {
           }
         );
 
-        // Update position of the item in the database
-
         // -1 means that the item is the last one
         const findActive = flattenedItems.find(i => i.id === active.id);
         if (!findActive) return;
@@ -175,7 +172,7 @@ export const ContentTableForumsForumAdmin = () => {
 
           if (findParentPosition === undefined) return;
 
-          await mutateAsync({
+          await mutationChangePositionApi({
             id: `${active.id}`,
             parentId,
             indexToMove: findParentPosition + 1
@@ -192,7 +189,7 @@ export const ContentTableForumsForumAdmin = () => {
           return;
         }
 
-        await mutateAsync({
+        await mutationChangePositionApi({
           id: `${active.id}`,
           parentId,
           indexToMove
@@ -201,16 +198,6 @@ export const ContentTableForumsForumAdmin = () => {
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
         {isFetching && <GlobalLoader />}
-        {/* {flattenedItems.map(item => (
-          <ItemTableForumsForumAdmin
-            key={item.id}
-            indentationWidth={indentationWidth}
-            onCollapse={handleCollapse}
-            isOpenChildren={isOpenChildren.includes(item.id)}
-            isDropHere={projected?.parentId === item.id}
-            {...item}
-          />
-        ))} */}
 
         <Virtuoso
           useWindowScroll
