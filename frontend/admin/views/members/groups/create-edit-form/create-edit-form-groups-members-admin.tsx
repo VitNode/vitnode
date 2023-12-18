@@ -34,7 +34,7 @@ export const CreateEditFormGroupsMembersAdmin = ({
   const t = useTranslations('admin.members.groups');
   const tCore = useTranslations('core');
   const [activeTab, setActiveTab] = useState<TabsEnum>(TabsEnum.MAIN);
-  const { form, isPending, onSubmit } = useCreateEditFormGroupsMembersAdmin({ data });
+  const { form, onSubmit } = useCreateEditFormGroupsMembersAdmin({ data });
   const { convertText } = useTextLang();
 
   const tabsContent = {
@@ -71,7 +71,11 @@ export const CreateEditFormGroupsMembersAdmin = ({
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <Suspense fallback={<Loader />}>{tabsContent[activeTab]}</Suspense>
 
-          <Button disabled={!form.formState.isValid} loading={isPending} type="submit">
+          <Button
+            disabled={!form.formState.isValid}
+            loading={form.formState.isSubmitted}
+            type="submit"
+          >
             {tCore('save')}
           </Button>
         </form>

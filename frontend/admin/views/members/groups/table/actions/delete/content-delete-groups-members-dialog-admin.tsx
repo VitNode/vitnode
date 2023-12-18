@@ -2,20 +2,25 @@ import { useTranslations } from 'next-intl';
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 
 import {
   AlertDialogCancel,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle
+  AlertDialogTitle,
+  useAlertDialog
 } from '@/components/ui/alert-dialog';
 import { ShowAdminGroups } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useDeleteGroupAdminAPI } from './hooks/use-delete-group-admin-api';
 import { Button } from '@/components/ui/button';
+import { mutationApi } from './mutation-api';
+import { useToast } from '@/components/ui/use-toast';
+import { usePathname, useRouter } from '@/i18n';
+import { APIKeys } from '@/graphql/api-keys';
 
 interface Props {
   data: Pick<ShowAdminGroups, 'id' | 'name'>;
@@ -26,7 +31,11 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
   const tCore = useTranslations('core');
   const { convertText } = useTextLang();
   const name = convertText(data.name);
-  const { isPending, mutateAsync } = useDeleteGroupAdminAPI();
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+  const { setOpen } = useAlertDialog();
+  const pathname = usePathname();
+  const { push } = useRouter();
 
   const formSchema = z.object({
     name: z.string().refine(value => value === name)
@@ -42,7 +51,25 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (values.name !== name) return;
 
-    await mutateAsync({ id: data.id });
+    const mutation = await mutationApi({ id: data.id });
+    if (mutation.error) {
+      toast({
+        title: tCore('errors.title'),
+        description: tCore('errors.internal_server_error'),
+        variant: 'destructive'
+      });
+    } else {
+      push(pathname);
+      queryClient.refetchQueries({
+        queryKey: [APIKeys.GROUPS_MEMBERS_ADMIN]
+      });
+
+      toast({
+        title: t('success')
+      });
+
+      setOpen(false);
+    }
   };
 
   return (
@@ -83,7 +110,7 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
             variant="destructive"
             type="submit"
             disabled={!form.formState.isValid}
-            loading={isPending}
+            loading={form.formState.isSubmitting}
           >
             {t('submit')}
           </Button>
