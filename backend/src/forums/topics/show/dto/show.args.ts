@@ -11,6 +11,6 @@ export class ShowTopicsForumsArgs {
   @Field(() => Int, { nullable: true })
   last: number | null;
 
-  @Field(() => String, { nullable: true })
-  forum_id: string | null;
+  @Field(() => String)
+  forum_id: string;
 }

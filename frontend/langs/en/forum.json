@@ -3,6 +3,7 @@
     "forum": "Forum",
     "by": "By <user></user>, <date></date>",
     "topics": {
+      "date_and_forum_format": "<date></date>, <forum></forum>",
       "create": {
         "title": "Create Topic",
         "form": {

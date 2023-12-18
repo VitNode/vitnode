@@ -54,7 +54,7 @@ export const LayoutInstallConfigsView = ({ children }: Props) => {
 
   return (
     <Card className="hidden sm:flex">
-      <Steps className="p-6 max-w-[16rem] pr-0" items={items} />
+      <Steps className="p-5 max-w-[16rem] pr-0" items={items} />
 
       <div className="flex-grow">
         <CardHeader>

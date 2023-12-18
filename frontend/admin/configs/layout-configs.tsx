@@ -17,7 +17,7 @@ export const LayoutConfigs = ({ children }: Props) => {
       <div className="flex items-center justify-center mb-5">VitNode</div>
 
       {children}
-      <Card className="sm:hidden p-6 text-center">{t('mobile_not_supported')}</Card>
+      <Card className="sm:hidden p-5 text-center">{t('mobile_not_supported')}</Card>
 
       <div className="mt-5 flex flex-col justify-center items-center gap-4">
         <div className="text-center text-muted-foreground">

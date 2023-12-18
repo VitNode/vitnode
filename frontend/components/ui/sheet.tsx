@@ -34,7 +34,7 @@ const SheetOverlay = forwardRef<
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName;
 
 const sheetVariants = cva(
-  'fixed z-50 gap-4 bg-popover p-6 shadow-lg ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out duration-300 overflow-y-auto',
+  'fixed z-50 gap-4 bg-popover p-5 shadow-lg ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out duration-300 overflow-y-auto',
   {
     variants: {
       side: {
