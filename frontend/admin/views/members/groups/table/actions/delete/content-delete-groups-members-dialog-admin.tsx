@@ -58,18 +58,20 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
         description: tCore('errors.internal_server_error'),
         variant: 'destructive'
       });
-    } else {
-      push(pathname);
-      queryClient.refetchQueries({
-        queryKey: [APIKeys.GROUPS_MEMBERS_ADMIN]
-      });
 
-      toast({
-        title: t('success')
-      });
-
-      setOpen(false);
+      return;
     }
+
+    push(pathname);
+    queryClient.refetchQueries({
+      queryKey: [APIKeys.GROUPS_MEMBERS_ADMIN]
+    });
+
+    toast({
+      title: t('success')
+    });
+
+    setOpen(false);
   };
 
   return (

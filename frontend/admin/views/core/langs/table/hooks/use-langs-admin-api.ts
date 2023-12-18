@@ -10,7 +10,7 @@ import {
 import { usePaginationAPI } from '@/hooks/core/utils/use-pagination-api';
 
 export const useLangsAdminAPI = () => {
-  const defaultPageSize = 10;
+  const defaultPageSize = 10 as const;
   const variables = usePaginationAPI({
     defaultPageSize
   });

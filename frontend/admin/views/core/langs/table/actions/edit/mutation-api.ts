@@ -1,6 +1,7 @@
 'use server';
 
 import { cookies } from 'next/headers';
+import { revalidatePath } from 'next/cache';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -20,6 +21,8 @@ export const mutationApi = async (variables: Core_Languages__EditMutationVariabl
         }
       }
     );
+
+    revalidatePath('/admin', 'layout');
 
     return { data };
   } catch (error) {

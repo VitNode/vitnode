@@ -37,6 +37,8 @@ export const useCopperModalChangeAvatar = () => {
         description: t('settings.change_avatar.options.upload.error'),
         variant: 'destructive'
       });
+
+      return;
     } else {
       toast({
         title: t('settings.change_avatar.options.upload.title'),

@@ -60,12 +60,14 @@ export const ModalEditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => 
         description: tCore('errors.internal_server_error'),
         variant: 'destructive'
       });
-    } else {
-      toast({
-        title: tCore('saved_success')
-      });
-      setOpen(false);
+
+      return;
     }
+
+    toast({
+      title: tCore('saved_success')
+    });
+    setOpen(false);
   };
 
   return (

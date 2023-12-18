@@ -25,7 +25,8 @@ export const useShortShowGroupsAdminAPI = () => {
           search: textSearch
         },
         signal
-      })
+      }),
+    refetchOnMount: true
   });
 
   return { ...api, setTextSearch, textSearch };
