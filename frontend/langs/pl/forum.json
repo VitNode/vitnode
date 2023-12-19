@@ -3,7 +3,8 @@
     "forum": "Forum",
     "by": "Przez <user></user>, <date></date>",
     "topics": {
-      "date_and_forum_format": "<date></date>, <forum></forum>",
+      "username_format": "<user></user> <date></date>",
+      "user_wrote_in_forum": "<user></user> napisał w <forum></forum>",
       "create": {
         "title": "Stwórz temat",
         "form": {

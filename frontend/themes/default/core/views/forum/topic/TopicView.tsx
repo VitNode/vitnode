@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
-import { MoreHorizontal, MoreVertical } from 'lucide-react';
+import { ChevronDown, MessagesSquare, MoreHorizontal, Settings } from 'lucide-react';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
 import { DateFormat } from '@/components/date-format/date-format';
 import { badgeVariants } from '@/components/ui/badge';
@@ -12,62 +12,72 @@ export const TopicView = () => {
   const t = useTranslations('forum.topics');
 
   return (
-    <>
-      <Card className="p-5">
-        <CardHeader className="p-0 pb-5 gap-4 sm:flex-row flex-wrap items-center">
-          <CardTitle className="leading-tight">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry
-          </CardTitle>
-
-          <div className="ml-auto">
-            <Button variant="ghost" size="icon">
-              <MoreVertical />
-            </Button>
-          </div>
-        </CardHeader>
-        <CardContent className="border-t p-0 pt-5 flex gap-4 flex-wrap">
-          <div className="flex gap-3 items-center">
-            <AvatarUser sizeInRem={2.5} />
-            <div>
-              <div className="font-bold">Lorem Ipsum is simply dummy text of the </div>
-              <div className="text-sm text-muted-foreground">
-                {t.rich('date_and_forum_format', {
-                  date: () => <DateFormat date={1702920914} />,
-                  forum: () => (
-                    <Link href="#" className={badgeVariants()}>
-                      Test
-                    </Link>
-                  )
-                })}
-              </div>
+    <div className="flex flex-col md:flex-row gap-5">
+      <div className="flex-1">
+        <div className="flex flex-col gap-2">
+          <div className="flex gap-4 items-center sm:flex-row flex-col">
+            <div className="order-1 sm:order-2">
+              <Button variant="outline" size="sm">
+                <Settings /> Actions <ChevronDown />
+              </Button>
             </div>
-          </div>
-        </CardContent>
-      </Card>
 
-      <Card className="mt-6">
-        <CardContent className="p-0">
-          <div className="p-5">
-            <Button variant="ghost" size="icon">
-              <MoreHorizontal />
-            </Button>
+            <h1 className="text-2xl font-semibold tracking-tight leading-tight sm:order-1 order-2 flex-1">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry
+            </h1>
           </div>
 
-          <div className="p-5 pt-0">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-            has been the standard dummy text ever since the 1500s, when an unknown printer took a
-            galley of type and scrambled it to make a type specimen book. It has survived not only
-            five centuries, but also the leap into electronic typesetting, remaining essentially
-            unchanged. It was popularised in the 1960s with the release of Letraset sheets
-            containing Lorem Ipsum passages, and more recently with desktop publishing software like
-            Aldus PageMaker including versions of Lorem Ipsum.
+          <div>
+            {t.rich('user_wrote_in_forum', {
+              user: () => <span className="font-semibold">aXenDeveloper</span>,
+              forum: () => (
+                <Link href="#" className={badgeVariants()}>
+                  <MessagesSquare /> Test forum
+                </Link>
+              )
+            })}
           </div>
-        </CardContent>
-      </Card>
+        </div>
 
-      <Card className="mt-6">
-        <CardContent className="p-0">Post</CardContent>
-      </Card>
-    </>
+        <Card className="mt-6">
+          <CardContent className="p-0">
+            <div className="p-4 pb-0 flex gap-4 items-center">
+              <div className="flex-1 flex gap-2 items-center">
+                <AvatarUser sizeInRem={2} />
+                <div className="flex flex-col leading-none">
+                  <div>
+                    {t.rich('username_format', {
+                      user: () => <span className="font-semibold">aXenDeveloper</span>,
+                      date: () => (
+                        <span className="text-muted-foreground text-sm">
+                          <DateFormat date={1702920914} />
+                        </span>
+                      )
+                    })}
+                  </div>
+                  <div className="text-muted-foreground text-sm">Administrator</div>
+                </div>
+              </div>
+
+              <Button variant="ghost" size="icon">
+                <MoreHorizontal />
+              </Button>
+            </div>
+
+            <div className="p-4">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+              has been the standard dummy text ever since the 1500s, when an unknown printer took a
+              galley of type and scrambled it to make a type specimen book. It has survived not only
+              five centuries, but also the leap into electronic typesetting, remaining essentially
+              unchanged. It was popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop publishing software
+              like Aldus PageMaker including versions of Lorem Ipsum.
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="w-1/4">Sidebar</div>
+    </div>
   );
 };
