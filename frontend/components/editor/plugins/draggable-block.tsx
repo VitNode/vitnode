@@ -14,11 +14,11 @@ import {
   COMMAND_PRIORITY_HIGH,
   COMMAND_PRIORITY_LOW,
   DRAGOVER_COMMAND,
-  DROP_COMMAND,
-  LexicalEditor
+  DROP_COMMAND
 } from 'lexical';
-import * as React from 'react';
-import { DragEvent as ReactDragEvent, useEffect, useRef, useState } from 'react';
+import type { LexicalEditor } from 'lexical';
+import type { DragEvent as ReactDragEvent } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { GripVertical } from 'lucide-react';
 

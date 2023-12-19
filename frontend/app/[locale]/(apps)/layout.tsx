@@ -1,12 +1,12 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { cookies } from 'next/headers';
 
 import { LanguageProvider } from './language-provider';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Languages__Middleware,
-  Core_Languages__MiddlewareQuery,
-  Core_Languages__MiddlewareQueryVariables
+  type Core_Languages__MiddlewareQuery,
+  type Core_Languages__MiddlewareQueryVariables
 } from '@/graphql/hooks';
 
 const getData = async () => {

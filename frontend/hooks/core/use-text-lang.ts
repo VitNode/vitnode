@@ -1,8 +1,7 @@
 import { useLocale } from 'next-intl';
 
-import { TextLanguage } from '@/graphql/hooks';
-
-import { removeSpecialCharacters } from '../../functions/remove-special-characters';
+import type { TextLanguage } from '@/graphql/hooks';
+import { removeSpecialCharacters } from '@/functions/remove-special-characters';
 
 export const useTextLang = () => {
   const locale = useLocale();

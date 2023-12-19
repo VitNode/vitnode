@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { cookies } from 'next/headers';
@@ -6,8 +6,8 @@ import { cookies } from 'next/headers';
 import { GroupsMembersAdminView } from '@/admin/views/members/groups/groups-members-admin-view';
 import getQueryClient from '@/functions/get-query-client';
 import { fetcher } from '@/graphql/fetcher';
-import {
-  Core_Groups__Admin__Show,
+import { Core_Groups__Admin__Show } from '@/graphql/hooks';
+import type {
   Core_Groups__Admin__ShowQuery,
   Core_Groups__Admin__ShowQueryVariables
 } from '@/graphql/hooks';

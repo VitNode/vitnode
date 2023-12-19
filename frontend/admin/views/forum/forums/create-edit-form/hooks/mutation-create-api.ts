@@ -5,8 +5,8 @@ import { cookies } from 'next/headers';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Forum_Forums__Admin__Create,
-  Forum_Forums__Admin__CreateMutation,
-  Forum_Forums__Admin__CreateMutationVariables
+  type Forum_Forums__Admin__CreateMutation,
+  type Forum_Forums__Admin__CreateMutationVariables
 } from '@/graphql/hooks';
 
 export const mutationCreateApi = async (

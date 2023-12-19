@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useLocale } from 'next-intl';
 import { $createParagraphNode, $createTextNode, $getRoot } from 'lexical';
 
-import { TextLanguage } from '@/graphql/hooks';
+import type { TextLanguage } from '@/graphql/hooks';
 
 interface Props {
   value: TextLanguage[];

@@ -6,8 +6,8 @@ import { cookies } from 'next/headers';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Members__Avatar__Delete,
-  Core_Members__Avatar__DeleteMutation,
-  Core_Members__Avatar__DeleteMutationVariables
+  type Core_Members__Avatar__DeleteMutation,
+  type Core_Members__Avatar__DeleteMutationVariables
 } from '@/graphql/hooks';
 
 export const mutationDeleteApi = async () => {

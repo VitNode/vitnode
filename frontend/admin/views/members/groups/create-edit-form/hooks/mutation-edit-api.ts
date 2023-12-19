@@ -3,8 +3,8 @@
 import { cookies } from 'next/headers';
 
 import { fetcher } from '@/graphql/fetcher';
-import {
-  Core_Groups__Admin__Edit,
+import { Core_Groups__Admin__Edit } from '@/graphql/hooks';
+import type {
   Core_Groups__Admin__EditMutation,
   Core_Groups__Admin__EditMutationVariables
 } from '@/graphql/hooks';

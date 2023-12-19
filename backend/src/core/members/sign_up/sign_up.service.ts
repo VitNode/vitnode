@@ -97,19 +97,6 @@ export class SignUpCoreMembersService {
             id: await isAdmin()
           }
         }
-      },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        group_id: true,
-        joined: true,
-        posts: true,
-        followers: true,
-        reactions: true,
-        newsletter: true,
-        avatar_color: true,
-        unread_notifications: true
       }
     });
   }

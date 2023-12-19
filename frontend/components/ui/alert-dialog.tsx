@@ -1,16 +1,13 @@
 'use client';
 
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
-import {
+import { createContext, forwardRef, useContext, useState } from 'react';
+import type {
   ComponentPropsWithoutRef,
   Dispatch,
   ElementRef,
   HTMLAttributes,
-  SetStateAction,
-  createContext,
-  forwardRef,
-  useContext,
-  useState
+  SetStateAction
 } from 'react';
 
 import { buttonVariants } from '@/components/ui/button';

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Loader } from '@/components/loader/loader';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { ShowAdminGroups } from '@/graphql/hooks';
+import type { ShowAdminGroups } from '@/graphql/hooks';
 
 const CreateEditFormGroupsMembersAdmin = lazy(() =>
   import('../../create-edit-form/create-edit-form-groups-members-admin').then(module => ({

@@ -1,12 +1,12 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { cookies } from 'next/headers';
 
 import { LayoutInstallConfigsView } from '@/admin/configs/views/install/layout-install-configs-view';
-import { ErrorType, fetcher } from '@/graphql/fetcher';
+import { fetcher, type ErrorType } from '@/graphql/fetcher';
 import {
   Admin_Install__Layout,
-  Admin_Install__LayoutQuery,
-  Admin_Install__LayoutQueryVariables
+  type Admin_Install__LayoutQuery,
+  type Admin_Install__LayoutQueryVariables
 } from '@/graphql/hooks';
 import { InternalErrorView } from '@/admin/global/internal-error-view';
 import { redirect } from '@/i18n';

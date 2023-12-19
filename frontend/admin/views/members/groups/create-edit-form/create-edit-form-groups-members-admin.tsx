@@ -7,8 +7,8 @@ import { Form } from '@/components/ui/form';
 import { Loader } from '@/components/loader/loader';
 import { Button } from '@/components/ui/button';
 import {
-  CreateEditFormGroupsMembersAdminArgs,
-  useCreateEditFormGroupsMembersAdmin
+  useCreateEditFormGroupsMembersAdmin,
+  type CreateEditFormGroupsMembersAdminArgs
 } from './hooks/use-create-edit-form-groups-members-admin';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 

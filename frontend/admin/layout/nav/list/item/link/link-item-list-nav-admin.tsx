@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import { LucideIcon } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
 import { cx } from '@/functions/classnames';
 import { buttonVariants } from '@/components/ui/button';

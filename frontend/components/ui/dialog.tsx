@@ -3,15 +3,15 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
 import {
-  ComponentPropsWithoutRef,
-  Dispatch,
-  ElementRef,
-  HTMLAttributes,
-  SetStateAction,
   createContext,
   forwardRef,
   useContext,
-  useState
+  useState,
+  type ComponentPropsWithoutRef,
+  type Dispatch,
+  type ElementRef,
+  type HTMLAttributes,
+  type SetStateAction
 } from 'react';
 
 import { cx } from '@/functions/classnames';

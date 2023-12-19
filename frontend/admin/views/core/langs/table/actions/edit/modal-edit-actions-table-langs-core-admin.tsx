@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { DialogFooter, DialogHeader, DialogTitle, useDialog } from '@/components/ui/dialog';
-import { ShowCoreLanguages } from '@/graphql/hooks';
+import type { ShowCoreLanguages } from '@/graphql/hooks';
 import {
   Form,
   FormControl,

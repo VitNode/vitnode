@@ -1,4 +1,4 @@
-import { DocumentNode } from 'graphql';
+import type { DocumentNode } from 'graphql';
 
 import { getGqlString } from '@/functions/get-qql-string';
 import { CONFIG } from '@/config';

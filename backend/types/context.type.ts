@@ -1,9 +1,11 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 
-import { User } from '@/utils/decorators/user.decorator';
+import type { User } from '@/utils/decorators/user.decorator';
 
 export interface AuthRequest extends Request {
-  user?: User;
+  user?: {
+    id: User['id'];
+  };
 }
 
 export interface Ctx {

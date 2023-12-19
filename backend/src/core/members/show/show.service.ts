@@ -38,24 +38,12 @@ export class ShowCoreMembersService {
       this.prisma.core_members.findMany({
         ...inputPagination({ first, cursor, last }),
         where,
-        select: {
-          id: true,
-          name: true,
-          joined: true,
-          posts: true,
-          followers: true,
-          reactions: true,
-          avatar_color: true,
+        include: {
           avatar: true,
           cover: true,
           group: {
-            select: {
-              name: {
-                select: {
-                  value: true,
-                  id_language: true
-                }
-              }
+            include: {
+              name: true
             }
           }
         },

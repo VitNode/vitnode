@@ -1,8 +1,10 @@
 'use client';
 
-import { ReactNode, useEffect } from 'react';
+import type { ReactNode } from 'react';
+import { useEffect } from 'react';
 
-import { Admin_Install__LayoutQuery, LayoutAdminInstallEnum } from '@/graphql/hooks';
+import { LayoutAdminInstallEnum } from '@/graphql/hooks';
+import type { Admin_Install__LayoutQuery } from '@/graphql/hooks';
 import { usePathname, useRouter } from '@/i18n';
 import { FinishInstallConfigsView } from './finish/finish-install-config-view';
 

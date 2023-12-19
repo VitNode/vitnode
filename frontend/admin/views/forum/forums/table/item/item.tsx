@@ -1,15 +1,15 @@
 import { ChevronRight, Menu, User } from 'lucide-react';
-import { CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { UniqueIdentifier } from '@dnd-kit/core';
+import type { UniqueIdentifier } from '@dnd-kit/core';
 
 import { Button } from '@/components/ui/button';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { cx } from '@/functions/classnames';
 import { useChildrenForumForumsAdminAPI } from './hooks/use-children-forum-forums-admin-api';
 import { GlobalLoader } from '@/components/loader/global/global-loader';
-import { Forum_Forums__Admin__ShowFlattenedItem } from '../types';
+import type { Forum_Forums__Admin__ShowFlattenedItem } from '../types';
 
 interface Props extends Forum_Forums__Admin__ShowFlattenedItem {
   indentationWidth: number;

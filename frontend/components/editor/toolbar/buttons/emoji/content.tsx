@@ -1,7 +1,8 @@
-import { CSSProperties, ReactNode, forwardRef, useState } from 'react';
-import data, { Emoji, EmojiMartData } from '@emoji-mart/data';
+import { forwardRef, useState, type CSSProperties, type ReactNode } from 'react';
+import data from '@emoji-mart/data';
+import type { Emoji, EmojiMartData } from '@emoji-mart/data';
 import { init, SearchIndex } from 'emoji-mart';
-import { Components, VirtuosoGrid } from 'react-virtuoso';
+import { VirtuosoGrid, type Components } from 'react-virtuoso';
 import { useTranslations } from 'next-intl';
 
 import { ItemEmojiButtonEditor } from './item';

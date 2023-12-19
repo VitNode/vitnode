@@ -6,8 +6,8 @@ import { cookies } from 'next/headers';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Admin_Sessions__Sign_Out,
-  Admin_Sessions__Sign_OutMutation,
-  Admin_Sessions__Sign_OutMutationVariables
+  type Admin_Sessions__Sign_OutMutation,
+  type Admin_Sessions__Sign_OutMutationVariables
 } from '@/graphql/hooks';
 import { redirect } from '@/i18n';
 import { CONFIG } from '@/config';

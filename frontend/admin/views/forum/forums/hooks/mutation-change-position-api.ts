@@ -3,8 +3,8 @@
 import { cookies } from 'next/headers';
 
 import { fetcher } from '@/graphql/fetcher';
-import {
-  Forum_Forums__Admin__Change_Position,
+import { Forum_Forums__Admin__Change_Position } from '@/graphql/hooks';
+import type {
   Forum_Forums__Admin__Change_PositionMutation,
   Forum_Forums__Admin__Change_PositionMutationVariables
 } from '@/graphql/hooks';

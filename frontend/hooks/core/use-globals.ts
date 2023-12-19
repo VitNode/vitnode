@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 
-import { ShowCoreLanguages } from '@/graphql/hooks';
+import type { ShowCoreLanguages } from '@/graphql/hooks';
 
 interface Args {
   defaultLanguage: string;

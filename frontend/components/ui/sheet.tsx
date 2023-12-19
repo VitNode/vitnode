@@ -3,7 +3,12 @@
 import * as SheetPrimitive from '@radix-ui/react-dialog';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
-import { ComponentPropsWithoutRef, ElementRef, forwardRef, HTMLAttributes } from 'react';
+import {
+  forwardRef,
+  type ComponentPropsWithoutRef,
+  type ElementRef,
+  type HTMLAttributes
+} from 'react';
 
 import { cx } from '@/functions/classnames';
 

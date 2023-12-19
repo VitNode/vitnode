@@ -1,12 +1,12 @@
-import { UniqueIdentifier } from '@dnd-kit/core';
+import type { UniqueIdentifier } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 
-import {
+import type {
   Forum_Forums__Admin__ShowFlattenedItem,
   Forum_Forums__Admin__ShowWithProjection
 } from './types';
-import { Forum_Forums__Admin__ShowQueryItem } from '../hooks/use-forum-forums-admin-api';
-import { ChildrenShowForumForums } from '@/graphql/hooks';
+import type { Forum_Forums__Admin__ShowQueryItem } from '../hooks/use-forum-forums-admin-api';
+import type { ChildrenShowForumForums } from '@/graphql/hooks';
 
 const getDragDepth = ({
   indentationWidth,

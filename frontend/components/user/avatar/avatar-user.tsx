@@ -5,7 +5,7 @@ import { forwardRef } from 'react';
 import { CONFIG } from '@/config';
 import { generateLetterPhoto } from '@/functions/generate-letter-photo';
 import { useSession } from '@/hooks/core/use-session';
-import { Maybe, UploadCoreAttachmentsObj } from '@/graphql/hooks';
+import type { Maybe, UploadCoreAttachmentsObj } from '@/graphql/hooks';
 import { cx } from '@/functions/classnames';
 
 import { Img } from '../../img/Img';

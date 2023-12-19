@@ -1,8 +1,8 @@
 import configs from '~/config.json';
 
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
-import { AbstractIntlMessages, NextIntlClientProvider } from 'next-intl';
+import { NextIntlClientProvider, type AbstractIntlMessages } from 'next-intl';
 import { Inter } from 'next/font/google';
 
 import { ThemeProvider } from './theme-provider';

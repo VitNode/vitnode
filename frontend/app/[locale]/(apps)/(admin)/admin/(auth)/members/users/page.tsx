@@ -1,14 +1,14 @@
 import { cookies } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
 import { UsersMembersAdminView } from '@/admin/views/members/users/users-members-admin-view';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Members__Admin__Show,
-  Core_Members__Admin__ShowQuery,
-  Core_Members__Admin__ShowQueryVariables
+  type Core_Members__Admin__ShowQuery,
+  type Core_Members__Admin__ShowQueryVariables
 } from '@/graphql/hooks';
 import getQueryClient from '@/functions/get-query-client';
 import { APIKeys } from '@/graphql/api-keys';

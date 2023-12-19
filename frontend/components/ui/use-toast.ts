@@ -1,6 +1,6 @@
 // Inspired by react-hot-toast library
 
-import { ReactNode, useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 
 import type { ToastActionElement, ToastProps } from '@/components/ui/toast';
 

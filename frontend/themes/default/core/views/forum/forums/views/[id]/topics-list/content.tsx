@@ -1,7 +1,7 @@
 import { Virtuoso } from 'react-virtuoso';
 import { useTranslations } from 'next-intl';
 
-import { ShowTopicsForums } from '@/graphql/hooks';
+import type { ShowTopicsForums } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { Link } from '@/i18n';
 import { DateFormat } from '@/components/date-format/date-format';

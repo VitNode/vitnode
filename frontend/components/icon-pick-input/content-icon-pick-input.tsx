@@ -6,7 +6,7 @@ import { DialogClose } from '@radix-ui/react-dialog';
 import { DialogHeader, DialogTitle } from '../ui/dialog';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import { IconDynamic, IconDynamicNames } from '../icon-dynamic';
+import { IconDynamic, type IconDynamicNames } from '../icon-dynamic';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 
 const IconNamesArray = Object.keys(Lucide.icons) as IconDynamicNames[];

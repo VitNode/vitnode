@@ -1,8 +1,8 @@
 'use client';
 
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
-import { Core_Languages__MiddlewareQuery } from '@/graphql/hooks';
+import type { Core_Languages__MiddlewareQuery } from '@/graphql/hooks';
 import { GlobalsContext } from '@/hooks/core/use-globals';
 
 interface Props {

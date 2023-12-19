@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation';
 
 import { ForumForumView } from '@/themes/default/core/views/forum/forums/views/[id]/forum-forum-view';
 import { fetcher } from '@/graphql/fetcher';
-import {
-  Forum_Forums__Show_Item,
+import { Forum_Forums__Show_Item } from '@/graphql/hooks';
+import type {
   Forum_Forums__Show_ItemQuery,
   Forum_Forums__Show_ItemQueryVariables
 } from '@/graphql/hooks';

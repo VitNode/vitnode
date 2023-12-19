@@ -60,6 +60,14 @@ query Forum_forums__show_item($cursor: String, $first: Int, $last: Int, $forumId
         }
         id
         name
+        avatar_color
+        group {
+          id
+          name {
+            id_language
+            value
+          }
+        }
       }
     }
     pageInfo {

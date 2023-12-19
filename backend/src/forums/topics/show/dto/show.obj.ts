@@ -2,7 +2,7 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { PageInfo } from '@/types/database/pagination.type';
 import { TextLanguage } from '@/types/database/text-language.type';
-import { ShortUser } from '../../../../../utils/decorators/user.decorator';
+import { User } from '@/utils/decorators/user.decorator';
 
 @ObjectType()
 export class ShowTopicsForums {
@@ -21,8 +21,8 @@ export class ShowTopicsForums {
   @Field(() => Int)
   created: number;
 
-  @Field(() => ShortUser)
-  author: ShortUser;
+  @Field(() => User)
+  author: User;
 }
 
 @ObjectType()

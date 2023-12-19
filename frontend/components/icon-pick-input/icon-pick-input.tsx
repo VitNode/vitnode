@@ -5,7 +5,8 @@ import { Plus } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
 import { Loader } from '../loader/loader';
-import { IconDynamic, IconDynamicNames } from '../icon-dynamic';
+import { IconDynamic } from '../icon-dynamic';
+import type { IconDynamicNames } from '../icon-dynamic';
 import { cx } from '@/functions/classnames';
 
 const ContentIconPickInput = lazy(() =>

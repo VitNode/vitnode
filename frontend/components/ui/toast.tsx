@@ -1,7 +1,12 @@
 import * as ToastPrimitives from '@radix-ui/react-toast';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
-import { ComponentPropsWithoutRef, ElementRef, forwardRef, ReactElement } from 'react';
+import {
+  type ComponentPropsWithoutRef,
+  type ElementRef,
+  forwardRef,
+  type ReactElement
+} from 'react';
 
 import { cx } from '@/functions/classnames';
 

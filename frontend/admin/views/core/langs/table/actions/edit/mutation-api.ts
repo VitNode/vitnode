@@ -6,8 +6,8 @@ import { revalidatePath } from 'next/cache';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Languages__Edit,
-  Core_Languages__EditMutation,
-  Core_Languages__EditMutationVariables
+  type Core_Languages__EditMutation,
+  type Core_Languages__EditMutationVariables
 } from '@/graphql/hooks';
 
 export const mutationApi = async (variables: Core_Languages__EditMutationVariables) => {

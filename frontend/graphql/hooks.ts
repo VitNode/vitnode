@@ -30,12 +30,13 @@ export type AuthorizationCurrentUserObj = {
   __typename?: 'AuthorizationCurrentUserObj';
   avatar?: Maybe<UploadCoreAttachmentsObj>;
   avatar_color: Scalars['String']['output'];
+  cover?: Maybe<UploadCoreAttachmentsObj>;
   email: Scalars['String']['output'];
-  group_id: Scalars['String']['output'];
+  group: GroupUser;
   id: Scalars['String']['output'];
   is_admin: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
-  newsletter?: Maybe<Scalars['Boolean']['output']>;
+  newsletter: Scalars['Boolean']['output'];
 };
 
 export type ChildrenShowForumForums = {
@@ -54,8 +55,9 @@ export type GeneralAdminSettingsObj = {
   side_name: Scalars['String']['output'];
 };
 
-export type GroupShowCoreMembers = {
-  __typename?: 'GroupShowCoreMembers';
+export type GroupUser = {
+  __typename?: 'GroupUser';
+  id: Scalars['String']['output'];
   name: Array<TextLanguage>;
 };
 
@@ -200,6 +202,7 @@ export type Query = {
   core_sessions__authorization: AuthorizationCoreSessionsObj;
   forum_forums__admin__show: ShowForumForumsObj;
   forum_forums__show: ShowForumForumsObj;
+  forum_posts__show: Scalars['String']['output'];
   forum_topics__show: ShowTopicsForumsObj;
 };
 
@@ -262,14 +265,8 @@ export type QueryForum_Topics__ShowArgs = {
   cursor?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   forum_id?: InputMaybe<Scalars['String']['input']>;
+  ids?: InputMaybe<Array<Scalars['String']['input']>>;
   last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-export type ShortUser = {
-  __typename?: 'ShortUser';
-  avatar?: Maybe<UploadCoreAttachmentsObj>;
-  id: Scalars['String']['output'];
-  name: Scalars['String']['output'];
 };
 
 export type ShowAdminGroups = {
@@ -306,15 +303,14 @@ export type ShowAdminMembers = {
   __typename?: 'ShowAdminMembers';
   avatar?: Maybe<UploadCoreAttachmentsObj>;
   avatar_color: Scalars['String']['output'];
+  cover?: Maybe<UploadCoreAttachmentsObj>;
   email: Scalars['String']['output'];
-  followers: Scalars['Int']['output'];
-  group: GroupShowCoreMembers;
+  group: GroupUser;
   id: Scalars['String']['output'];
   joined: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   newsletter: Scalars['Boolean']['output'];
   posts: Scalars['Int']['output'];
-  reactions: Scalars['Int']['output'];
 };
 
 export type ShowAdminMembersObj = {
@@ -359,13 +355,12 @@ export type ShowCoreMembers = {
   __typename?: 'ShowCoreMembers';
   avatar?: Maybe<UploadCoreAttachmentsObj>;
   avatar_color: Scalars['String']['output'];
-  followers: Scalars['Int']['output'];
-  group: GroupShowCoreMembers;
+  cover?: Maybe<UploadCoreAttachmentsObj>;
+  group: GroupUser;
   id: Scalars['String']['output'];
   joined: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   posts: Scalars['Int']['output'];
-  reactions: Scalars['Int']['output'];
 };
 
 export type ShowCoreMembersObj = {
@@ -425,7 +420,7 @@ export type ShowForumForumsWithParent = {
 
 export type ShowTopicsForums = {
   __typename?: 'ShowTopicsForums';
-  author: ShortUser;
+  author: User;
   content: Array<TextLanguage>;
   created: Scalars['Int']['output'];
   id: Scalars['String']['output'];
@@ -478,6 +473,16 @@ export type UploadCoreAttachmentsObj = {
   name: Scalars['String']['output'];
   position: Scalars['Int']['output'];
   url: Scalars['String']['output'];
+};
+
+export type User = {
+  __typename?: 'User';
+  avatar?: Maybe<UploadCoreAttachmentsObj>;
+  avatar_color: Scalars['String']['output'];
+  cover?: Maybe<UploadCoreAttachmentsObj>;
+  group: GroupUser;
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
 };
 
 export type Admin_Install__Create_DatabaseMutationVariables = Exact<{ [key: string]: never; }>;
@@ -638,12 +643,12 @@ export type Core_Members__Admin__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Core_Members__Admin__ShowQuery = { __typename?: 'Query', core_members__admin__show: { __typename?: 'ShowAdminMembersObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminMembers', avatar_color: string, email: string, id: string, joined: number, name: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupShowCoreMembers', name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } }> } };
+export type Core_Members__Admin__ShowQuery = { __typename?: 'Query', core_members__admin__show: { __typename?: 'ShowAdminMembersObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminMembers', avatar_color: string, email: string, id: string, name: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } }> } };
 
 export type Admin_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Admin_Sessions__AuthorizationQuery = { __typename?: 'Query', admin_sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, group_id: string, id: string, is_admin: boolean, name: string, newsletter?: boolean | null, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } | null } };
+export type Admin_Sessions__AuthorizationQuery = { __typename?: 'Query', admin_sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: string, is_admin: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } } | null } };
 
 export type Core_Languages__MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -665,12 +670,12 @@ export type Core_Members__ProfilesQueryVariables = Exact<{
 }>;
 
 
-export type Core_Members__ProfilesQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, followers: number, id: string, joined: number, name: string, posts: number, reactions: number, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupShowCoreMembers', name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } }> } };
+export type Core_Members__ProfilesQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, id: string, joined: number, name: string, posts: number, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } }> } };
 
 export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, group_id: string, id: string, is_admin: boolean, name: string, newsletter?: boolean | null, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } | null }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string }> } };
+export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: string, is_admin: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } } | null }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string }> } };
 
 export type Forum_Forums__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -685,7 +690,7 @@ export type Forum_Forums__Show_ItemQueryVariables = Exact<{
 }>;
 
 
-export type Forum_Forums__Show_ItemQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ChildrenShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null }> }, forum_topics__show: { __typename?: 'ShowTopicsForumsObj', edges: Array<{ __typename?: 'ShowTopicsForums', created: number, id: string, updated?: number | null, content: Array<{ __typename?: 'TextLanguage', value: string, id_language: string }>, title: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, author: { __typename?: 'ShortUser', id: string, name: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
+export type Forum_Forums__Show_ItemQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ChildrenShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null }> }, forum_topics__show: { __typename?: 'ShowTopicsForumsObj', edges: Array<{ __typename?: 'ShowTopicsForums', created: number, id: string, updated?: number | null, content: Array<{ __typename?: 'TextLanguage', value: string, id_language: string }>, title: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, author: { __typename?: 'User', id: string, name: string, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
 
 
 export const Admin_Install__Create_Database = gql`
@@ -995,9 +1000,9 @@ export const Core_Members__Admin__Show = gql`
       avatar_color
       email
       id
-      joined
       name
       group {
+        id
         name {
           id_language
           value
@@ -1012,7 +1017,6 @@ export const Admin_Sessions__Authorization = gql`
   admin_sessions__authorization {
     user {
       email
-      group_id
       id
       is_admin
       name
@@ -1031,6 +1035,13 @@ export const Admin_Sessions__Authorization = gql`
         name
         position
         url
+      }
+      group {
+        name {
+          id_language
+          value
+        }
+        id
       }
     }
   }
@@ -1090,7 +1101,6 @@ export const Core_Members__Profiles = gql`
         url
       }
       avatar_color
-      followers
       group {
         name {
           id_language
@@ -1101,7 +1111,6 @@ export const Core_Members__Profiles = gql`
       joined
       name
       posts
-      reactions
     }
   }
 }
@@ -1111,7 +1120,6 @@ export const Core_Sessions__Authorization = gql`
   core_sessions__authorization {
     user {
       email
-      group_id
       id
       is_admin
       name
@@ -1130,6 +1138,13 @@ export const Core_Sessions__Authorization = gql`
         name
         position
         url
+      }
+      group {
+        name {
+          id_language
+          value
+        }
+        id
       }
     }
   }
@@ -1243,6 +1258,14 @@ export const Forum_Forums__Show_Item = gql`
         }
         id
         name
+        avatar_color
+        group {
+          id
+          name {
+            id_language
+            value
+          }
+        }
       }
     }
     pageInfo {

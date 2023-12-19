@@ -12,7 +12,7 @@ import {
   AlertDialogTitle,
   useAlertDialog
 } from '@/components/ui/alert-dialog';
-import { ShowAdminGroups } from '@/graphql/hooks';
+import type { ShowAdminGroups } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';

@@ -4,10 +4,10 @@ import { useMemo } from 'react';
 import { APIKeys } from '@/graphql/api-keys';
 import { fetcher } from '@/graphql/fetcher';
 import {
-  ShowForumForumsWithParent,
   Forum_Forums__Admin__Show,
-  Forum_Forums__Admin__ShowQuery,
-  Forum_Forums__Admin__ShowQueryVariables
+  type ShowForumForumsWithParent,
+  type Forum_Forums__Admin__ShowQuery,
+  type Forum_Forums__Admin__ShowQueryVariables
 } from '@/graphql/hooks';
 
 export interface Forum_Forums__Admin__ShowQueryItem

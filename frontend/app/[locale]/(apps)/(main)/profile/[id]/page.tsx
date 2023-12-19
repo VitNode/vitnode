@@ -1,13 +1,13 @@
 import { cookies } from 'next/headers';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { ProfileView } from '@/themes/default/core/views/profile/profile-view';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Members__Profiles,
-  Core_Members__ProfilesQuery,
-  Core_Members__ProfilesQueryVariables
+  type Core_Members__ProfilesQuery,
+  type Core_Members__ProfilesQueryVariables
 } from '@/graphql/hooks';
 
 const getData = async ({ id }: { id: string }) => {

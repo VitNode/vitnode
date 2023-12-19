@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 
 import { APIKeys } from '@/graphql/api-keys';
 import { fetcher } from '@/graphql/fetcher';
-import {
-  Core_Languages__Show,
+import { Core_Languages__Show } from '@/graphql/hooks';
+import type {
   Core_Languages__ShowQuery,
   Core_Languages__ShowQueryVariables
 } from '@/graphql/hooks';

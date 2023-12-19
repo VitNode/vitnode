@@ -1,14 +1,15 @@
-import { InfiniteData, useQuery, useQueryClient } from '@tanstack/react-query';
+import type { InfiniteData } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { APIKeys } from '@/graphql/api-keys';
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Maybe,
-  ShowForumForumsWithParent,
   Forum_Forums__Admin__Show,
-  Forum_Forums__Admin__ShowQuery,
-  Forum_Forums__Admin__ShowQueryVariables,
-  ChildrenShowForumForums
+  type Maybe,
+  type ShowForumForumsWithParent,
+  type Forum_Forums__Admin__ShowQuery,
+  type Forum_Forums__Admin__ShowQueryVariables,
+  type ChildrenShowForumForums
 } from '@/graphql/hooks';
 
 interface Args {

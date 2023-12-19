@@ -2,7 +2,7 @@
 
 import { Suspense, lazy } from 'react';
 
-import { TextLanguage } from '@/graphql/hooks';
+import type { TextLanguage } from '@/graphql/hooks';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const ReadOnlyEditor = lazy(() =>

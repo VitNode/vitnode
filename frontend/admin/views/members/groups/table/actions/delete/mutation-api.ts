@@ -5,8 +5,8 @@ import { cookies } from 'next/headers';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Groups__Admin__Delete,
-  Core_Groups__Admin__DeleteMutation,
-  Core_Groups__Admin__DeleteMutationVariables
+  type Core_Groups__Admin__DeleteMutation,
+  type Core_Groups__Admin__DeleteMutationVariables
 } from '@/graphql/hooks';
 
 export const mutationApi = async (variables: Core_Groups__Admin__DeleteMutationVariables) => {

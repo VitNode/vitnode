@@ -1,4 +1,4 @@
-import { TabsTrigger, TabsTriggerProps } from './trigger-tabs';
+import { TabsTrigger, type TabsTriggerProps } from './trigger-tabs';
 import { cx } from '@/functions/classnames';
 
 interface Props {

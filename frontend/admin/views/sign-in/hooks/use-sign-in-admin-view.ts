@@ -5,7 +5,7 @@ import * as z from 'zod';
 import { useState } from 'react';
 
 import { mutationApi } from '@/hooks/core/sign/in/mutation-api';
-import { ErrorType } from '@/graphql/fetcher';
+import type { ErrorType } from '@/graphql/fetcher';
 
 export const useSignInAdminView = () => {
   const t = useTranslations('core');

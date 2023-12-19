@@ -2,7 +2,7 @@
 
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
+import { type ComponentPropsWithoutRef, type ElementRef, forwardRef } from 'react';
 
 import { cx } from '@/functions/classnames';
 

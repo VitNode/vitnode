@@ -1,7 +1,7 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useEffect } from 'react';
 import { TextNode } from 'lexical';
-import data, { Emoji, EmojiMartData } from '@emoji-mart/data';
+import data, { type Emoji, type EmojiMartData } from '@emoji-mart/data';
 import { values } from 'lodash';
 
 import { $createEmojiNode, EmojiNode } from '../nodes/EmojiNode';

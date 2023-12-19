@@ -1,7 +1,7 @@
 'use client';
 
 import * as SeparatorPrimitive from '@radix-ui/react-separator';
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
+import { type ComponentPropsWithoutRef, type ElementRef, forwardRef } from 'react';
 
 import { cx } from '@/functions/classnames';
 

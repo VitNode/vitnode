@@ -1,4 +1,4 @@
-import { InitialConfigType } from '@lexical/react/LexicalComposer';
+import type { InitialConfigType } from '@lexical/react/LexicalComposer';
 import { HorizontalRuleNode } from '@lexical/react/LexicalHorizontalRuleNode';
 import { CodeHighlightNode, CodeNode } from '@lexical/code';
 import { HeadingNode, QuoteNode } from '@lexical/rich-text';

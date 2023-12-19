@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import { Options } from 'prettier';
+import type { Options } from 'prettier';
 import { format } from 'prettier/standalone';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $getNearestNodeFromDOMNode } from 'lexical';

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import { LayoutSettingsView } from '@/themes/default/core/views/settings/layout-settings-view';
 

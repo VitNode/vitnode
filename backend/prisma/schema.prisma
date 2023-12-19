@@ -28,23 +28,20 @@ model core_languages {
 }
 
 model core_members {
-  id                   String            @id @unique @db.VarChar(255)
-  name                 String            @unique @db.VarChar(255)
-  email                String            @unique @db.VarChar(255)
-  password             String            @db.Text
-  group                core_groups       @relation("core_members_group", references: [id], fields: [group_id])
-  group_id             String
-  joined               Int
-  avatar               core_attachments? @relation("core_members_avatar", fields: [avatar_id], references: [id])
-  avatar_id            String?           @unique @db.VarChar(255)
-  cover                core_attachments? @relation("core_members_cover", fields: [cover_id], references: [id])
-  cover_id             String?           @unique @db.VarChar(255)
-  posts                Int               @default(0)
-  followers            Int               @default(0)
-  reactions            Int               @default(0)
-  newsletter           Boolean           @default(false)
-  avatar_color         String            @db.VarChar(6)
-  unread_notifications Int               @default(0)
+  id           String            @id @unique @db.VarChar(255)
+  name         String            @unique @db.VarChar(255)
+  email        String            @unique @db.VarChar(255)
+  password     String            @db.Text
+  group        core_groups       @relation("core_members_group", references: [id], fields: [group_id])
+  group_id     String
+  joined       Int
+  avatar       core_attachments? @relation("core_members_avatar", fields: [avatar_id], references: [id])
+  avatar_id    String?           @unique @db.VarChar(255)
+  cover        core_attachments? @relation("core_members_cover", fields: [cover_id], references: [id])
+  cover_id     String?           @unique @db.VarChar(255)
+  posts        Int               @default(0)
+  newsletter   Boolean           @default(false)
+  avatar_color String            @db.VarChar(6)
 
   attachments       core_attachments[]       @relation("core_attachments_member")
   sessions          core_sessions[]          @relation("core_sessions_member")

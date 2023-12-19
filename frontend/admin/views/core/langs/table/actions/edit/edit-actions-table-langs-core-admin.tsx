@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Loader } from '@/components/loader/loader';
-import { ShowCoreLanguages } from '@/graphql/hooks';
+import type { ShowCoreLanguages } from '@/graphql/hooks';
 
 const ModalEditActionsTableLangsCoreAdmin = lazy(() =>
   import('./modal-edit-actions-table-langs-core-admin').then(module => ({

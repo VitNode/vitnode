@@ -4,8 +4,8 @@ import { cookies } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 
 import { fetcher } from '@/graphql/fetcher';
-import {
-  Core_Members__Sign_Up,
+import { Core_Members__Sign_Up } from '@/graphql/hooks';
+import type {
   Core_Members__Sign_UpMutation,
   Core_Members__Sign_UpMutationVariables
 } from '@/graphql/hooks';

@@ -36,21 +36,26 @@ export class AuthorizationCoreSessionsService {
     try {
       const currentUser = await this.service.authorization({ req, res });
 
-      currentUser.avatar_color;
-
-      const avatar = await this.prisma.core_attachments.findFirst({
+      const user = await this.prisma.core_members.findUnique({
         where: {
-          module: 'core_members',
-          module_id: currentUser.id
+          id: currentUser.id
+        },
+        include: {
+          avatar: true,
+          cover: true,
+          group: {
+            include: {
+              name: true
+            }
+          }
         }
       });
 
       return {
         user: {
-          ...currentUser,
-          is_admin: await this.isAdmin(currentUser),
-          avatar,
-          avatar_color: currentUser.avatar_color
+          ...user,
+          is_admin: await this.isAdmin({ group_id: user.group.id, id: user.id }),
+          avatar_color: user.avatar_color
         }
       };
     } catch (error) {

@@ -14,9 +14,9 @@ import {
   $isListNode,
   INSERT_ORDERED_LIST_COMMAND,
   INSERT_UNORDERED_LIST_COMMAND,
-  ListNode,
-  ListType
+  ListNode
 } from '@lexical/list';
+import type { ListType } from '@lexical/list';
 import { $createCodeNode } from '@lexical/code';
 
 import { useUpdateStateEditor } from '../hooks/use-update-state-editor';

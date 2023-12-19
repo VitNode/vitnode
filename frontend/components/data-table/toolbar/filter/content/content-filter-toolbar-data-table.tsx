@@ -1,7 +1,7 @@
 import { Search } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
-import { ComponentType } from 'react';
+import type { ComponentType } from 'react';
 
 import { Input } from '@/components/ui/input';
 import { cx } from '@/functions/classnames';

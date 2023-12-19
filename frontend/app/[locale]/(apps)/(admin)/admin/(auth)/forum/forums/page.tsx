@@ -7,8 +7,8 @@ import { fetcher } from '@/graphql/fetcher';
 import { APIKeys } from '@/graphql/api-keys';
 import {
   Forum_Forums__Admin__Show,
-  Forum_Forums__Admin__ShowQuery,
-  Forum_Forums__Admin__ShowQueryVariables
+  type Forum_Forums__Admin__ShowQuery,
+  type Forum_Forums__Admin__ShowQueryVariables
 } from '@/graphql/hooks';
 
 export default async function Page() {

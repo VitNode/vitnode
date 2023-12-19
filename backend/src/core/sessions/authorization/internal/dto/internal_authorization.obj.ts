@@ -1,9 +1,6 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { ObjectType, PickType } from '@nestjs/graphql';
 
 import { User } from '@/utils/decorators/user.decorator';
 
 @ObjectType()
-export class InternalAuthorizationCoreSessionObj extends User {
-  @Field(() => String)
-  avatar_color: string;
-}
+export class InternalAuthorizationCoreSessionObj extends PickType(User, ['id'] as const) {}

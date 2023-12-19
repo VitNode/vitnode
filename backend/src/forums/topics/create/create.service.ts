@@ -51,7 +51,13 @@ export class CreateForumTopicsService {
         content: true,
         author: {
           include: {
-            avatar: true
+            avatar: true,
+            cover: true,
+            group: {
+              include: {
+                name: true
+              }
+            }
           }
         }
       }
