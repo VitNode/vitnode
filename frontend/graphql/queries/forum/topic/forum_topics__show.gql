@@ -1,0 +1,64 @@
+query Forum_topics__show($ids: [String!], $first: Int) {
+  forum_topics__show(ids: $ids, first: $first) {
+    edges {
+      content {
+        id_language
+        value
+      }
+      created
+      id
+      updated
+      title {
+        id_language
+        value
+      }
+      author {
+        avatar {
+          created
+          description
+          extension
+          file_size
+          id
+          member_id
+          mimetype
+          module
+          module_id
+          name
+          position
+          url
+        }
+        avatar_color
+        cover {
+          created
+          description
+          extension
+          file_size
+          id
+          member_id
+          mimetype
+          module
+          module_id
+          name
+          position
+          url
+        }
+        group {
+          id
+          name {
+            id_language
+            value
+          }
+        }
+        id
+        name
+      }
+      forum {
+        id
+        name {
+          id_language
+          value
+        }
+      }
+    }
+  }
+}

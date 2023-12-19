@@ -40,7 +40,7 @@ query Core_members__admin__show(
       avatar_color
       email
       id
-
+      joined
       name
       group {
         id

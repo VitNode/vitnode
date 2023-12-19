@@ -7,3 +7,17 @@ VitNode is a headless CMS built with [NextJS](https://nextjs.org/) and [NestJS](
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [StyleLint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
+
+## Browser Support
+
+### Minimum
+
+| Chrome | Firefox | Edge  | Safari | iOS Safari | Opera |
+| :----- | :------ | :---- | :----- | :--------- | ----- |
+| >= 91  | >= 90   | >= 91 | >= 16  | >= 15      | >= 77 |
+
+### Recommended
+
+| Chrome | Firefox | Edge   | Safari  | iOS Safari | Opera  |
+| :----- | :------ | :----- | :------ | :--------- | ------ |
+| >= 115 | >= 121  | >= 120 | >= 17.2 | >= 17.2    | >= 101 |

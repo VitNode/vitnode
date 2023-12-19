@@ -32,6 +32,11 @@ type ChildrenShowForumForums {
   position: Int!
 }
 
+type ForumTopicsForums {
+  id: String!
+  name: [TextLanguage!]!
+}
+
 type GeneralAdminSettingsObj {
   side_name: String!
 }
@@ -246,6 +251,7 @@ type ShowTopicsForums {
   author: User!
   content: [TextLanguage!]!
   created: Int!
+  forum: ForumTopicsForums!
   id: String!
   title: [TextLanguage!]!
   updated: Int

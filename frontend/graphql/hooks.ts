@@ -50,6 +50,12 @@ export type ChildrenShowForumForums = {
   position: Scalars['Int']['output'];
 };
 
+export type ForumTopicsForums = {
+  __typename?: 'ForumTopicsForums';
+  id: Scalars['String']['output'];
+  name: Array<TextLanguage>;
+};
+
 export type GeneralAdminSettingsObj = {
   __typename?: 'GeneralAdminSettingsObj';
   side_name: Scalars['String']['output'];
@@ -423,6 +429,7 @@ export type ShowTopicsForums = {
   author: User;
   content: Array<TextLanguage>;
   created: Scalars['Int']['output'];
+  forum: ForumTopicsForums;
   id: Scalars['String']['output'];
   title: Array<TextLanguage>;
   updated?: Maybe<Scalars['Int']['output']>;
@@ -643,7 +650,7 @@ export type Core_Members__Admin__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Core_Members__Admin__ShowQuery = { __typename?: 'Query', core_members__admin__show: { __typename?: 'ShowAdminMembersObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminMembers', avatar_color: string, email: string, id: string, name: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } }> } };
+export type Core_Members__Admin__ShowQuery = { __typename?: 'Query', core_members__admin__show: { __typename?: 'ShowAdminMembersObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminMembers', avatar_color: string, email: string, id: string, joined: number, name: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } }> } };
 
 export type Admin_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -691,6 +698,14 @@ export type Forum_Forums__Show_ItemQueryVariables = Exact<{
 
 
 export type Forum_Forums__Show_ItemQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ChildrenShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null, description: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> | null }> }, forum_topics__show: { __typename?: 'ShowTopicsForumsObj', edges: Array<{ __typename?: 'ShowTopicsForums', created: number, id: string, updated?: number | null, content: Array<{ __typename?: 'TextLanguage', value: string, id_language: string }>, title: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, author: { __typename?: 'User', id: string, name: string, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
+
+export type Forum_Topics__ShowQueryVariables = Exact<{
+  ids?: InputMaybe<Array<Scalars['String']['input']> | Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type Forum_Topics__ShowQuery = { __typename?: 'Query', forum_topics__show: { __typename?: 'ShowTopicsForumsObj', edges: Array<{ __typename?: 'ShowTopicsForums', created: number, id: string, updated?: number | null, content: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, title: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }>, author: { __typename?: 'User', avatar_color: string, id: string, name: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, cover?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } }, forum: { __typename?: 'ForumTopicsForums', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } }> } };
 
 
 export const Admin_Install__Create_Database = gql`
@@ -1000,6 +1015,7 @@ export const Core_Members__Admin__Show = gql`
       avatar_color
       email
       id
+      joined
       name
       group {
         id
@@ -1275,6 +1291,72 @@ export const Forum_Forums__Show_Item = gql`
       hasPreviousPage
       startCursor
       totalCount
+    }
+  }
+}
+    `;
+export const Forum_Topics__Show = gql`
+    query Forum_topics__show($ids: [String!], $first: Int) {
+  forum_topics__show(ids: $ids, first: $first) {
+    edges {
+      content {
+        id_language
+        value
+      }
+      created
+      id
+      updated
+      title {
+        id_language
+        value
+      }
+      author {
+        avatar {
+          created
+          description
+          extension
+          file_size
+          id
+          member_id
+          mimetype
+          module
+          module_id
+          name
+          position
+          url
+        }
+        avatar_color
+        cover {
+          created
+          description
+          extension
+          file_size
+          id
+          member_id
+          mimetype
+          module
+          module_id
+          name
+          position
+          url
+        }
+        group {
+          id
+          name {
+            id_language
+            value
+          }
+        }
+        id
+        name
+      }
+      forum {
+        id
+        name {
+          id_language
+          value
+        }
+      }
     }
   }
 }

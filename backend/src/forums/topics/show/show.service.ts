@@ -41,6 +41,11 @@ export class ShowTopicsForumsService {
                 }
               }
             }
+          },
+          forum: {
+            include: {
+              name: true
+            }
           }
         },
         orderBy: [

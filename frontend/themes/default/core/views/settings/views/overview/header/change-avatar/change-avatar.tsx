@@ -7,6 +7,7 @@ import { AvatarUser } from '@/components/user/avatar/avatar-user';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/loader/loader';
+import { useSession } from '@/hooks/core/use-session';
 
 const ModalChangeAvatar = lazy(() =>
   import('./modal/modal-change-avatar').then(module => ({
@@ -16,10 +17,12 @@ const ModalChangeAvatar = lazy(() =>
 
 export const ChangeAvatar = () => {
   const t = useTranslations('core');
+  const { session } = useSession();
+  if (!session) return null;
 
   return (
     <div className="relative">
-      <AvatarUser sizeInRem={5} />
+      <AvatarUser sizeInRem={5} user={session} />
       <TooltipProvider>
         <Dialog>
           <Tooltip>

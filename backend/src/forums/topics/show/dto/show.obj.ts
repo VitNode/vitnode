@@ -5,6 +5,15 @@ import { TextLanguage } from '@/types/database/text-language.type';
 import { User } from '@/utils/decorators/user.decorator';
 
 @ObjectType()
+export class ForumTopicsForums {
+  @Field(() => String)
+  id: string;
+
+  @Field(() => [TextLanguage])
+  name: TextLanguage[];
+}
+
+@ObjectType()
 export class ShowTopicsForums {
   @Field(() => String)
   id: string;
@@ -23,6 +32,9 @@ export class ShowTopicsForums {
 
   @Field(() => User)
   author: User;
+
+  @Field(() => ForumTopicsForums)
+  forum: ForumTopicsForums;
 }
 
 @ObjectType()

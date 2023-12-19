@@ -59,6 +59,11 @@ export class CreateForumTopicsService {
               }
             }
           }
+        },
+        forum: {
+          include: {
+            name: true
+          }
         }
       }
     });
