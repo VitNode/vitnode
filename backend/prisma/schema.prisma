@@ -24,6 +24,7 @@ model core_languages {
   forums_forums_description forum_forums_description[] @relation("forums_forums_description_language")
   forum_topics_title        forum_topics_title[]       @relation("forum_topics_title_language")
   forum_topics_content      forum_topics_content[]     @relation("forum_topics_content_language")
+  forum_posts_content       forum_posts_content[]      @relation("forum_posts_content_language")
 }
 
 model core_members {
@@ -49,7 +50,8 @@ model core_members {
   sessions          core_sessions[]          @relation("core_sessions_member")
   admin_sessions    core_admin_sessions[]    @relation("core_admin_sessions_member")
   admin_permissions core_admin_permissions[] @relation("core_admin_permissions_member")
-  topics            forum_topics[]           @relation("forum_topics_author")
+  forum_topics      forum_topics[]           @relation("forum_topics_author")
+  forum_posts       forum_posts[]            @relation("forum_posts_author")
 
   @@index([group_id])
 }
@@ -217,6 +219,7 @@ model forum_topics {
 
   title   forum_topics_title[]   @relation("forum_topics_title_topic")
   content forum_topics_content[] @relation("forum_topics_content_topic")
+  posts   forum_posts[]          @relation("forum_posts_topic")
 }
 
 model forum_topics_title {
@@ -239,4 +242,26 @@ model forum_topics_content {
 
   topic    forum_topics   @relation("forum_topics_content_topic", references: [id], fields: [topic_id], onDelete: Cascade)
   language core_languages @relation("forum_topics_content_language", references: [id], fields: [id_language], onDelete: Cascade)
+}
+
+model forum_posts {
+  id        String       @id @unique @default(uuid())
+  topic     forum_topics @relation("forum_posts_topic", references: [id], fields: [topic_id], onDelete: Cascade)
+  topic_id  String
+  author    core_members @relation("forum_posts_author", references: [id], fields: [author_id], onDelete: Cascade)
+  author_id String
+  created   Int
+  updated   Int?
+
+  content forum_posts_content[] @relation("forum_posts_content_post")
+}
+
+model forum_posts_content {
+  id          String @id @unique @default(uuid())
+  id_language String @db.VarChar(32)
+  post_id     String
+  value       String @db.Text
+
+  post     forum_posts    @relation("forum_posts_content_post", references: [id], fields: [post_id], onDelete: Cascade)
+  language core_languages @relation("forum_posts_content_language", references: [id], fields: [id_language], onDelete: Cascade)
 }

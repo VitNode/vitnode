@@ -102,6 +102,7 @@ type Query {
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   forum_forums__admin__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsObj!
   forum_forums__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsObj!
+  forum_posts__show: String!
   forum_topics__show(cursor: String, first: Int, forum_id: String!, last: Int): ShowTopicsForumsObj!
 }
 
