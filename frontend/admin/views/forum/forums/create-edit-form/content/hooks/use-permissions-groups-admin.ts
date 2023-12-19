@@ -3,8 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Groups__Admin__Show_Short,
-  Core_Groups__Admin__Show_ShortQuery,
-  Core_Groups__Admin__Show_ShortQueryVariables
+  type Core_Groups__Admin__Show_ShortQuery,
+  type Core_Groups__Admin__Show_ShortQueryVariables
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
 

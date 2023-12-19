@@ -1,5 +1,6 @@
 import { Filter } from 'lucide-react';
-import { ReactNode, Suspense } from 'react';
+import type { ReactNode } from 'react';
+import { Suspense } from 'react';
 import { useTranslations } from 'next-intl';
 
 import { Button } from '../../../ui/button';

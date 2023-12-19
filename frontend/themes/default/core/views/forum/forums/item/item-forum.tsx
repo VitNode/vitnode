@@ -2,7 +2,7 @@ import { Folder, MessagesSquare } from 'lucide-react';
 
 import { Link } from '@/i18n';
 import { buttonVariants } from '@/components/ui/button';
-import { TextLanguage } from '@/graphql/hooks';
+import type { TextLanguage } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { DescriptionItemForum } from './description';
 

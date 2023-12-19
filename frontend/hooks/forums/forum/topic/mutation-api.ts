@@ -5,8 +5,8 @@ import { revalidatePath } from 'next/cache';
 
 import {
   Forum_Topics__Create,
-  Forum_Topics__CreateMutation,
-  Forum_Topics__CreateMutationVariables
+  type Forum_Topics__CreateMutation,
+  type Forum_Topics__CreateMutationVariables
 } from '@/graphql/hooks';
 import { fetcher } from '@/graphql/fetcher';
 

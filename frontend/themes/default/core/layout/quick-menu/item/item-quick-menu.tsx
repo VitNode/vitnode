@@ -1,6 +1,6 @@
 import cx from 'clsx';
 import { Check } from 'lucide-react';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import { Link } from '@/i18n';
 

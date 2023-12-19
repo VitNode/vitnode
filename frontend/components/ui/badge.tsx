@@ -1,10 +1,10 @@
 import { cva, type VariantProps } from 'class-variance-authority';
-import { HTMLAttributes } from 'react';
+import type { HTMLAttributes } from 'react';
 
 import { cx } from '@/functions/classnames';
 
 const badgeVariants = cva(
-  'inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+  'inline-flex items-center justify-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 no-underline [&>svg]:w-3 [&>svg]:h-3 [&>svg]:flex-shrink-0',
   {
     variants: {
       variant: {

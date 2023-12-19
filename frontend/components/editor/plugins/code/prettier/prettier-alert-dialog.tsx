@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
-import { PrettierFormatError } from './prettier-button-code-action';
+import type { PrettierFormatError } from './prettier-button-code-action';
 import {
   AlertDialogCancel,
   AlertDialogFooter,

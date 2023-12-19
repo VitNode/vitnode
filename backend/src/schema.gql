@@ -13,12 +13,13 @@ type AuthorizationCoreSessionsObj {
 type AuthorizationCurrentUserObj {
   avatar: UploadCoreAttachmentsObj
   avatar_color: String!
+  cover: UploadCoreAttachmentsObj
   email: String!
-  group_id: String!
+  group: GroupUser!
   id: String!
   is_admin: Boolean!
   name: String!
-  newsletter: Boolean
+  newsletter: Boolean!
 }
 
 type ChildrenShowForumForums {
@@ -31,11 +32,17 @@ type ChildrenShowForumForums {
   position: Int!
 }
 
+type ForumTopicsForums {
+  id: String!
+  name: [TextLanguage!]!
+}
+
 type GeneralAdminSettingsObj {
   side_name: String!
 }
 
-type GroupShowCoreMembers {
+type GroupUser {
+  id: String!
   name: [TextLanguage!]!
 }
 
@@ -102,13 +109,8 @@ type Query {
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   forum_forums__admin__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsObj!
   forum_forums__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsObj!
-  forum_topics__show(cursor: String, first: Int, forum_id: String, last: Int): ShowTopicsForumsObj!
-}
-
-type ShortUser {
-  avatar: UploadCoreAttachmentsObj
-  id: String!
-  name: String!
+  forum_posts__show: String!
+  forum_topics__show(cursor: String, first: Int, forum_id: String, ids: [String!], last: Int): ShowTopicsForumsObj!
 }
 
 type ShowAdminGroups {
@@ -141,15 +143,14 @@ enum ShowAdminGroupsSortingColumnEnum {
 type ShowAdminMembers {
   avatar: UploadCoreAttachmentsObj
   avatar_color: String!
+  cover: UploadCoreAttachmentsObj
   email: String!
-  followers: Int!
-  group: GroupShowCoreMembers!
+  group: GroupUser!
   id: String!
   joined: Int!
   name: String!
   newsletter: Boolean!
   posts: Int!
-  reactions: Int!
 }
 
 type ShowAdminMembersObj {
@@ -189,13 +190,12 @@ type ShowCoreLanguagesObj {
 type ShowCoreMembers {
   avatar: UploadCoreAttachmentsObj
   avatar_color: String!
-  followers: Int!
-  group: GroupShowCoreMembers!
+  cover: UploadCoreAttachmentsObj
+  group: GroupUser!
   id: String!
   joined: Int!
   name: String!
   posts: Int!
-  reactions: Int!
 }
 
 type ShowCoreMembersObj {
@@ -248,9 +248,10 @@ type ShowForumForumsWithParent {
 }
 
 type ShowTopicsForums {
-  author: ShortUser!
+  author: User!
   content: [TextLanguage!]!
   created: Int!
+  forum: ForumTopicsForums!
   id: String!
   title: [TextLanguage!]!
   updated: Int
@@ -299,4 +300,13 @@ type UploadCoreAttachmentsObj {
   name: String!
   position: Int!
   url: String!
+}
+
+type User {
+  avatar: UploadCoreAttachmentsObj
+  avatar_color: String!
+  cover: UploadCoreAttachmentsObj
+  group: GroupUser!
+  id: String!
+  name: String!
 }

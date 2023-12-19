@@ -13,4 +13,7 @@ export class ShowTopicsForumsArgs {
 
   @Field(() => String, { nullable: true })
   forum_id: string | null;
+
+  @Field(() => [String], { nullable: true })
+  ids: string[] | null;
 }

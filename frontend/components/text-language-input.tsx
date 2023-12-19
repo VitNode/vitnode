@@ -1,11 +1,11 @@
-import { InputHTMLAttributes, forwardRef, useState } from 'react';
+import { forwardRef, useState, type InputHTMLAttributes } from 'react';
 import * as z from 'zod';
 
 import { useGlobals } from '@/hooks/core/use-globals';
 import { Input } from './ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { FormControl } from './ui/form';
-import { TextLanguage } from '@/graphql/hooks';
+import type { TextLanguage } from '@/graphql/hooks';
 
 export const zodTextLanguageInputType = z.array(
   z.object({

@@ -6,8 +6,8 @@ import { cookies } from 'next/headers';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Sessions__Sign_In,
-  Core_Sessions__Sign_InMutation,
-  Core_Sessions__Sign_InMutationVariables
+  type Core_Sessions__Sign_InMutation,
+  type Core_Sessions__Sign_InMutationVariables
 } from '@/graphql/hooks';
 import { redirect } from '@/i18n';
 import { convertUnixTime, currentDate } from '@/functions/date';

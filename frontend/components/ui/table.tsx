@@ -1,4 +1,9 @@
-import { HTMLAttributes, TdHTMLAttributes, ThHTMLAttributes, forwardRef } from 'react';
+import {
+  forwardRef,
+  type HTMLAttributes,
+  type TdHTMLAttributes,
+  type ThHTMLAttributes
+} from 'react';
 
 import { cx } from '@/functions/classnames';
 

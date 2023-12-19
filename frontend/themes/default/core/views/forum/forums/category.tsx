@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from '@/i18n';
 import { cx } from '@/functions/classnames';
-import { ItemForum, ItemForumProps } from './item/item-forum';
-import { TextLanguage } from '@/graphql/hooks';
+import { ItemForum, type ItemForumProps } from './item/item-forum';
+import type { TextLanguage } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { DescriptionItemForum } from './item/description';
 

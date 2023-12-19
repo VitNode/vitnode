@@ -1,4 +1,4 @@
-import { Emoji } from '@emoji-mart/data';
+import type { Emoji } from '@emoji-mart/data';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $createTextNode, $getSelection, $isRangeSelection } from 'lexical';
 

@@ -4,8 +4,8 @@ import { ForumsForumView } from '@/themes/default/core/views/forum/forums/forums
 import { fetcher } from '@/graphql/fetcher';
 import {
   Forum_Forums__Show,
-  Forum_Forums__ShowQuery,
-  Forum_Forums__ShowQueryVariables
+  type Forum_Forums__ShowQuery,
+  type Forum_Forums__ShowQueryVariables
 } from '@/graphql/hooks';
 
 const getData = async () => {

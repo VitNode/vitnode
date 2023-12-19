@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { ReactCropperElement } from 'react-cropper';
+import { type ReactCropperElement } from 'react-cropper';
 import { useTranslations } from 'next-intl';
 
 import { mutationUploadApi } from './api/mutation-upload-api';

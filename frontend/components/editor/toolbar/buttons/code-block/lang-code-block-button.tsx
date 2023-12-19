@@ -7,13 +7,8 @@ import {
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import {
-  $getNodeByKey,
-  $getSelection,
-  $isRangeSelection,
-  $isRootOrShadowRoot,
-  NodeKey
-} from 'lexical';
+import { $getNodeByKey, $getSelection, $isRangeSelection, $isRootOrShadowRoot } from 'lexical';
+import type { NodeKey } from 'lexical';
 import { $findMatchingParent } from '@lexical/utils';
 
 import { buttonVariants } from '@/components/ui/button';

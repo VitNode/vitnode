@@ -7,8 +7,8 @@ import { useDebounce } from '@/hooks/core/use-debounce';
 import { getMouseInfo } from './utils-code-action-menu-plugin-editor';
 import {
   PrettierButtonCodeAction,
-  PrettierFormatError,
-  canBePrettier
+  canBePrettier,
+  type PrettierFormatError
 } from './prettier/prettier-button-code-action';
 import { AlertDialog, AlertDialogContent } from '@/components/ui/alert-dialog';
 import { Loader } from '@/components/loader/loader';

@@ -1,4 +1,4 @@
-import { LazyExoticComponent, ReactNode, lazy } from 'react';
+import { lazy, type LazyExoticComponent, type ReactNode } from 'react';
 import { cookies } from 'next/headers';
 import { isRedirectError } from 'next/dist/client/components/redirect';
 
@@ -6,8 +6,8 @@ import { CONFIG } from '@/config';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Sessions__Authorization,
-  Core_Sessions__AuthorizationQuery,
-  Core_Sessions__AuthorizationQueryVariables
+  type Core_Sessions__AuthorizationQuery,
+  type Core_Sessions__AuthorizationQueryVariables
 } from '@/graphql/hooks';
 import { SessionProvider } from './session-provider';
 import { InternalErrorView } from '@/admin/global/internal-error-view';

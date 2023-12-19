@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
-import { InitialConfigType, LexicalComposer } from '@lexical/react/LexicalComposer';
+import { LexicalComposer, type InitialConfigType } from '@lexical/react/LexicalComposer';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
@@ -22,7 +22,7 @@ import { BLOCK_NAMES, EditorContext } from './toolbar/hooks/use-editor';
 import { CodeHighlightPluginEditor } from './plugins/code-highlight';
 import { CodeActionMenuPluginEditor } from './plugins/code/code-action-menu';
 import { useGlobals } from '@/hooks/core/use-globals';
-import { TextLanguage } from '@/graphql/hooks';
+import type { TextLanguage } from '@/graphql/hooks';
 import './editor.scss';
 import { EmojiPluginEditor } from './plugins/emoji';
 import { initialConfigEditor } from './initial-config';

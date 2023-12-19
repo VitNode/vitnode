@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import { SearchToolbarDataTable } from './search-toolbar-data-table';
 import { AdvancedFilterToolbarDataTable } from './advanced-filter/advanced-filter-toolbar-data-table';

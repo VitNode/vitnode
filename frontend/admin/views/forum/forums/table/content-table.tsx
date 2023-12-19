@@ -7,7 +7,7 @@ import {
   useSensor,
   useSensors,
   MeasuringStrategy,
-  UniqueIdentifier
+  type UniqueIdentifier
 } from '@dnd-kit/core';
 import {
   SortableContext,
@@ -16,13 +16,13 @@ import {
   verticalListSortingStrategy
 } from '@dnd-kit/sortable';
 import { useMemo, useState } from 'react';
-import { InfiniteData, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient, type InfiniteData } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 
 import { ItemTableForumsForumAdmin } from './item/item';
 import { useForumForumsAdminAPI } from '../hooks/use-forum-forums-admin-api';
 import { buildTree, flattenTree, getForumProjection, removeChildrenOf } from './functions';
-import {
+import type {
   Forum_Forums__Admin__ShowFlattenedItem,
   Forum_Forums__Admin__ShowWithProjection
 } from './types';
@@ -30,7 +30,7 @@ import { GlobalLoader } from '@/components/loader/global/global-loader';
 import { Loader } from '@/components/loader/loader';
 import { ErrorAdminView } from '@/admin/global/error-admin-view';
 import { APIKeys } from '@/graphql/api-keys';
-import { Forum_Forums__Admin__ShowQuery } from '@/graphql/hooks';
+import type { Forum_Forums__Admin__ShowQuery } from '@/graphql/hooks';
 import { mutationChangePositionApi } from '../hooks/mutation-change-position-api';
 
 const indentationWidth = 20;

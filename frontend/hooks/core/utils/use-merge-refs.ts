@@ -1,4 +1,4 @@
-import { Ref, RefCallback, useMemo } from 'react';
+import { type Ref, type RefCallback, useMemo } from 'react';
 
 /**
  * Merges an array of refs into a single memoized callback ref or `null`.

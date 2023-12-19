@@ -1,10 +1,10 @@
 'use client';
 
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import { useSelectedLayoutSegment } from 'next/navigation';
 
-import { ItemStepProps, Steps } from '@/components/steps/steps';
+import { Steps, type ItemStepProps } from '@/components/steps/steps';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface Props {
@@ -54,7 +54,7 @@ export const LayoutInstallConfigsView = ({ children }: Props) => {
 
   return (
     <Card className="hidden sm:flex">
-      <Steps className="p-6 max-w-[16rem] pr-0" items={items} />
+      <Steps className="p-5 max-w-[16rem] pr-0" items={items} />
 
       <div className="flex-grow">
         <CardHeader>

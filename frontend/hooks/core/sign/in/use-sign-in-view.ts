@@ -5,7 +5,7 @@ import * as z from 'zod';
 import { useState } from 'react';
 
 import { mutationApi } from './mutation-api';
-import { ErrorType } from '@/graphql/fetcher';
+import type { ErrorType } from '@/graphql/fetcher';
 
 export const useSignInView = () => {
   const [error, setError] = useState<ErrorType | null>(null);

@@ -2,9 +2,9 @@
 
 import configs from '~/config.json';
 
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
-import { Admin_Sessions__AuthorizationQuery } from '@/graphql/hooks';
+import type { Admin_Sessions__AuthorizationQuery } from '@/graphql/hooks';
 import { SessionAdminContext } from '@/admin/hooks/use-session-admin';
 
 interface Props {

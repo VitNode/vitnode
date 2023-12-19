@@ -5,7 +5,7 @@ import * as z from 'zod';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { zodTextLanguageInputType } from '@/components/text-language-input';
-import { ShowAdminGroups } from '@/graphql/hooks';
+import type { ShowAdminGroups } from '@/graphql/hooks';
 import { mutationCreateApi } from './mutation-create-api';
 import { mutationEditApi } from './mutation-edit-api';
 import { useToast } from '@/components/ui/use-toast';

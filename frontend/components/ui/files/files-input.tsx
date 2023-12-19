@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, forwardRef, useRef, useState } from 'react';
+import { type InputHTMLAttributes, forwardRef, useRef, useState } from 'react';
 import { Upload } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 

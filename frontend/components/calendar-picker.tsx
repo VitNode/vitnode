@@ -1,5 +1,5 @@
 import { CalendarIcon } from 'lucide-react';
-import { SelectRangeEventHandler } from 'react-day-picker';
+import type { SelectRangeEventHandler } from 'react-day-picker';
 import { format } from 'date-fns';
 
 import { cx } from '../functions/classnames';

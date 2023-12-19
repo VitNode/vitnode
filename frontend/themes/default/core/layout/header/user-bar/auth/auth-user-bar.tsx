@@ -29,7 +29,7 @@ export const AuthUserBar = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="rounded-full" size="icon">
-          <AvatarUser sizeInRem={1.75} />
+          <AvatarUser user={session} sizeInRem={1.75} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-64" align="end">

@@ -4,7 +4,7 @@ import { Suspense, lazy } from 'react';
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
-import { ShowAdminGroups } from '@/graphql/hooks';
+import type { ShowAdminGroups } from '@/graphql/hooks';
 import { AlertDialog, AlertDialogContent, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { Loader } from '@/components/loader/loader';
 

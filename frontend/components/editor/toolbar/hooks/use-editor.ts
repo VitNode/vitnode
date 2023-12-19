@@ -5,9 +5,9 @@ import {
   Heading3Icon,
   List,
   ListFilter,
-  ListOrdered,
-  LucideIcon
+  ListOrdered
 } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { createContext, useContext } from 'react';
 
 export enum BLOCK_NAMES {

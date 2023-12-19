@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import { ColumnDef } from '@tanstack/react-table';
+import type { ColumnDef } from '@tanstack/react-table';
 import { useMemo } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -9,7 +9,7 @@ import { DataTable } from '@/components/data-table/data-table';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
 import { ActionsTableLangsCoreAdmin } from './actions/actions-table-langs-core-admin';
-import { Core_Languages__ShowQuery, ShowCoreLanguages } from '@/graphql/hooks';
+import type { Core_Languages__ShowQuery, ShowCoreLanguages } from '@/graphql/hooks';
 import { mutationApi } from './actions/edit/mutation-api';
 import { useToast } from '@/components/ui/use-toast';
 import { APIKeys } from '@/graphql/api-keys';

@@ -43,6 +43,7 @@ query Core_members__admin__show(
       joined
       name
       group {
+        id
         name {
           id_language
           value

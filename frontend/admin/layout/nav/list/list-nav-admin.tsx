@@ -1,7 +1,8 @@
 'use client';
 
 import { Group, Languages, LayoutDashboard, MessagesSquare, Settings, Users } from 'lucide-react';
-import { ReactNode, useState } from 'react';
+import type { ReactNode } from 'react';
+import { useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { useSelectedLayoutSegments } from 'next/navigation';
 

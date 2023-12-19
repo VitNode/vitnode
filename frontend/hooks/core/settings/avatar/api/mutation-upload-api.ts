@@ -6,8 +6,8 @@ import { revalidatePath } from 'next/cache';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Members__Avatar__Upload,
-  Core_Members__Avatar__UploadMutation,
-  Core_Members__Avatar__UploadMutationVariables
+  type Core_Members__Avatar__UploadMutation,
+  type Core_Members__Avatar__UploadMutationVariables
 } from '@/graphql/hooks';
 
 export const mutationUploadApi = async (formData: FormData) => {

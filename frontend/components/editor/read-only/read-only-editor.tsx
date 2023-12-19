@@ -1,12 +1,12 @@
 'use client';
 
-import { InitialConfigType, LexicalComposer } from '@lexical/react/LexicalComposer';
+import { LexicalComposer, type InitialConfigType } from '@lexical/react/LexicalComposer';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 
 import { initialConfigEditor } from '../initial-config';
-import { TextLanguage } from '@/graphql/hooks';
+import type { TextLanguage } from '@/graphql/hooks';
 import { LoadReadOnlyEditor } from './load';
 import '../editor.scss';
 

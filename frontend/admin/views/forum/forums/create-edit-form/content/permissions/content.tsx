@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { TableVirtuoso } from 'react-virtuoso';
-import { ControllerRenderProps, FieldValues } from 'react-hook-form';
+import type { ControllerRenderProps, FieldValues } from 'react-hook-form';
 import { keyBy, mapValues } from 'lodash';
 
 import { useTextLang } from '@/hooks/core/use-text-lang';

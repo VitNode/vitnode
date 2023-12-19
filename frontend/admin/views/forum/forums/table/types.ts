@@ -1,4 +1,4 @@
-import { ShowForumForumsWithParent } from '@/graphql/hooks';
+import type { ShowForumForumsWithParent } from '@/graphql/hooks';
 
 export interface Forum_Forums__Admin__ShowFlattenedItem
   extends Omit<ShowForumForumsWithParent, 'parent'> {

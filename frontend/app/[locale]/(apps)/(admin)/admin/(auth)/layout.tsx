@@ -1,9 +1,9 @@
 import configs from '~/config.json';
 
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { cookies } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { isRedirectError } from 'next/dist/client/components/redirect';
 
 import { AdminLayout } from '@/admin/layout/admin-layout';
@@ -13,8 +13,8 @@ import { CONFIG } from '@/config';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Admin_Sessions__Authorization,
-  Admin_Sessions__AuthorizationQuery,
-  Admin_Sessions__AuthorizationQueryVariables
+  type Admin_Sessions__AuthorizationQuery,
+  type Admin_Sessions__AuthorizationQueryVariables
 } from '@/graphql/hooks';
 
 const getData = async () => {

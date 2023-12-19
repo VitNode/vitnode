@@ -1,6 +1,6 @@
 import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react';
-import { HeaderContext } from '@tanstack/react-table';
-import { ReactNode } from 'react';
+import type { HeaderContext } from '@tanstack/react-table';
+import type { ReactNode } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import { Button } from '../ui/button';

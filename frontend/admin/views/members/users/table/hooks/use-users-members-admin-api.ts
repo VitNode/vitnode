@@ -3,11 +3,11 @@ import { useSearchParams } from 'next/navigation';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
-  ShowAdminMembers,
   ShowAdminMembersSortingColumnEnum,
   Core_Members__Admin__Show,
-  Core_Members__Admin__ShowQuery,
-  Core_Members__Admin__ShowQueryVariables
+  type ShowAdminMembers,
+  type Core_Members__Admin__ShowQuery,
+  type Core_Members__Admin__ShowQueryVariables
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
 import { usePaginationAPI } from '@/hooks/core/utils/use-pagination-api';

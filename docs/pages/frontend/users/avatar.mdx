@@ -1,6 +1,6 @@
 import { Callout } from 'nextra/components';
 
-# Avatar
+# Avatar User
 
 To use the Avatar component you have to import from `@/components/user/avatar/avatar-user`.
 Component requires `sizeInRem` prop to be passed.
@@ -11,29 +11,37 @@ Component requires `sizeInRem` prop to be passed.
 
 ## Current User
 
-If you want to display the current user's avatar, you don't need to pass any props _(except for `sizeInRem` if you want to change the size)_.
-
-```tsx
-import { AvatarUser } from '@/components/user/avatar/avatar-user';
-
-<AvatarUser sizeInRem={1.75} />;
-```
-
-## Other Users
-
-If you want to display other user's avatar, you have to pass `user` prop with:
+If you want to display the user avatar, you need to pass a user object with:
 
 - `id` - user's id
 - `name` - user's name
 - `avatar` - user's `UploadCoreAttachmentsObj` interface,
+- `avatar_color` - user's avatar color
 
 ```tsx
+import { AvatarUser } from '@/components/user/avatar/avatar-user';
+
 <AvatarUser
   user={{
     avatar,
     name,
-    id
+    id,
+    avatar_color
   }}
   sizeInRem={1.75}
-/>
+/>;
+```
+
+## Current User
+
+If you want to display the user avatar, you need to pass a user object form `useSession` or `useSessionAdmin` _(if you want to use in AdminCP)_ hook.
+
+```tsx
+import { AvatarUser } from '@/components/user/avatar/avatar-user';
+import { useSession } from '@/hooks/core/use-session';
+
+const { session } = useSession();
+if (!session) return null;
+
+return <AvatarUser user={session} sizeInRem={1.75} />;
 ```

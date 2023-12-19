@@ -1,11 +1,11 @@
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
-import { ColumnDef } from '@tanstack/react-table';
+import type { ColumnDef } from '@tanstack/react-table';
 import { Pencil } from 'lucide-react';
 
 import {
-  UsersMembersAdminAPIDataType,
-  useUsersMembersAdminAPI
+  useUsersMembersAdminAPI,
+  type UsersMembersAdminAPIDataType
 } from './hooks/use-users-members-admin-api';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Link } from '@/i18n';

@@ -6,6 +6,10 @@ import * as z from 'zod';
 import { zodTextLanguageInputType } from '@/components/text-language-input';
 import { mutationApi } from './mutation-api';
 import { useToast } from '@/components/ui/use-toast';
+import { useDialog } from '@/components/ui/dialog';
+import { useRouter } from '@/i18n';
+
+import { useTextLang } from '../../../core/use-text-lang';
 
 interface Props {
   forumId: string;
@@ -14,6 +18,9 @@ interface Props {
 export const useCreateTopic = ({ forumId }: Props) => {
   const t = useTranslations('core');
   const { toast } = useToast();
+  const { setOpen } = useDialog();
+  const { push } = useRouter();
+  const { convertNameToLink } = useTextLang();
 
   const formSchema = z.object({
     title: zodTextLanguageInputType.min(1, t('forms.empty')),
@@ -37,7 +44,19 @@ export const useCreateTopic = ({ forumId }: Props) => {
         description: t('errors.internal_server_error'),
         variant: 'destructive'
       });
+
+      return;
     }
+
+    if (mutation.data) {
+      const {
+        forum_topics__create: { id, title }
+      } = mutation.data;
+
+      push(`/topic/${convertNameToLink({ id, name: title })}`);
+    }
+
+    setOpen(false);
   };
 
   return { form, onSubmit };

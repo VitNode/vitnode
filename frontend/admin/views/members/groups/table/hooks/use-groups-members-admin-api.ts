@@ -1,11 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { fetcher } from '@/graphql/fetcher';
-import {
-  Core_Groups__Admin__Show,
+import { Core_Groups__Admin__Show, ShowAdminGroupsSortingColumnEnum } from '@/graphql/hooks';
+import type {
   Core_Groups__Admin__ShowQuery,
-  Core_Groups__Admin__ShowQueryVariables,
-  ShowAdminGroupsSortingColumnEnum
+  Core_Groups__Admin__ShowQueryVariables
 } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
 import { usePaginationAPI } from '@/hooks/core/utils/use-pagination-api';

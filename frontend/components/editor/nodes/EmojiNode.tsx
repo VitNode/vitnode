@@ -5,8 +5,14 @@
  *
  */
 
-import type { EditorConfig, LexicalNode, NodeKey, SerializedTextNode } from 'lexical';
-import { $applyNodeReplacement, TextNode } from 'lexical';
+import {
+  $applyNodeReplacement,
+  TextNode,
+  type EditorConfig,
+  type LexicalNode,
+  type NodeKey,
+  type SerializedTextNode
+} from 'lexical';
 
 export type SerializedEmojiNode = SerializedTextNode;
 

@@ -17,10 +17,11 @@ export class ShowTopicsForumsService {
     cursor,
     first,
     forum_id,
+    ids,
     last
   }: ShowTopicsForumsArgs): Promise<ShowTopicsForumsObj> {
     const where: Prisma.forum_topicsWhereInput = {
-      forum_id
+      AND: [{ forum_id }, { id: ids ? { in: ids } : undefined }]
     };
 
     const [edges, totalCount] = await this.prisma.$transaction([
@@ -32,7 +33,18 @@ export class ShowTopicsForumsService {
           content: true,
           author: {
             include: {
-              avatar: true
+              avatar: true,
+              cover: true,
+              group: {
+                include: {
+                  name: true
+                }
+              }
+            }
+          },
+          forum: {
+            include: {
+              name: true
             }
           }
         },

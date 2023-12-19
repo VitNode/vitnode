@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Core_Members__ProfilesQuery } from '@/graphql/hooks';
+import type { Core_Members__ProfilesQuery } from '@/graphql/hooks';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 

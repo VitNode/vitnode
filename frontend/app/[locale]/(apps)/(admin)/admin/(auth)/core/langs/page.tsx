@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { cookies } from 'next/headers';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
@@ -7,8 +7,8 @@ import { LangsCoreAdminView } from '@/admin/views/core/langs/langs-core-admin-vi
 import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Languages__Show,
-  Core_Languages__ShowQuery,
-  Core_Languages__ShowQueryVariables
+  type Core_Languages__ShowQuery,
+  type Core_Languages__ShowQueryVariables
 } from '@/graphql/hooks';
 import getQueryClient from '@/functions/get-query-client';
 import { APIKeys } from '@/graphql/api-keys';

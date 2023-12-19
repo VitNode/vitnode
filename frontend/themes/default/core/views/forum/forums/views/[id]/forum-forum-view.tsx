@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { ActionsForumsForum } from './actions/actions';
-import { Forum_Forums__Show_ItemQuery } from '@/graphql/hooks';
+import type { Forum_Forums__Show_ItemQuery } from '@/graphql/hooks';
 import { TopicsListForum } from './topics-list/topics-list';
 
 import { ItemForum } from '../../item/item-forum';

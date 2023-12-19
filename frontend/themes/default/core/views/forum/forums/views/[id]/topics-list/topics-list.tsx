@@ -3,7 +3,7 @@
 import { Suspense, lazy } from 'react';
 
 import { Loader } from '@/components/loader/loader';
-import { TopicsListForumProps } from './content';
+import { type TopicsListForumProps } from './content';
 
 const ContentTopicsListForum = lazy(() =>
   import('./content').then(module => ({

@@ -2,7 +2,6 @@ query Core_sessions__authorization {
   core_sessions__authorization {
     user {
       email
-      group_id
       id
       is_admin
       name
@@ -21,6 +20,13 @@ query Core_sessions__authorization {
         name
         position
         url
+      }
+      group {
+        name {
+          id_language
+          value
+        }
+        id
       }
     }
   }

@@ -2,15 +2,15 @@
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import {
-  ColumnDef,
-  SortingState,
   flexRender,
   getCoreRowModel,
-  useReactTable
+  useReactTable,
+  type ColumnDef,
+  type SortingState
 } from '@tanstack/react-table';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
-import { ReactNode, useMemo } from 'react';
+import { useMemo, type ReactNode } from 'react';
 
 import {
   Table,
@@ -21,10 +21,11 @@ import {
   TableRow
 } from '@/components/ui/table';
 import { Button } from '../ui/button';
-import { PageInfo } from '@/graphql/hooks';
+import type { PageInfo } from '@/graphql/hooks';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { usePathname, useRouter } from '@/i18n';
-import { ToolbarDataTable, ToolbarDataTableProps } from './toolbar/toolbar-data-table';
+import { ToolbarDataTable } from './toolbar/toolbar-data-table';
+import type { ToolbarDataTableProps } from './toolbar/toolbar-data-table';
 import { GlobalLoader } from '../loader/global/global-loader';
 
 interface TDataMin {

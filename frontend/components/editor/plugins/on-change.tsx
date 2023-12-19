@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { $rootTextContent } from '@lexical/text';
 import { CLEAR_EDITOR_COMMAND } from 'lexical';
 
-import { TextLanguage } from '@/graphql/hooks';
+import type { TextLanguage } from '@/graphql/hooks';
 
 interface Props {
   onChange: (value: TextLanguage[]) => void;

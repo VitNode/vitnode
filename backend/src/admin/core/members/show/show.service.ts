@@ -57,21 +57,11 @@ export class ShowAdminMembersService {
     const [edges, totalCount] = await this.prisma.$transaction([
       this.prisma.core_members.findMany({
         ...inputPagination({ first, cursor, last }),
-        select: {
-          id: true,
-          name: true,
-          email: true,
-          joined: true,
-          posts: true,
-          followers: true,
-          reactions: true,
-          newsletter: true,
-          avatar_color: true,
-          unread_notifications: true,
+        include: {
           avatar: true,
           cover: true,
           group: {
-            select: {
+            include: {
               name: true
             }
           }

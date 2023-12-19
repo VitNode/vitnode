@@ -3,7 +3,7 @@
 import { Link, usePathname } from '@/i18n';
 import { cx } from '@/functions/classnames';
 import { buttonVariants } from '@/components/ui/button';
-import { LinkItemNavSettingsProps } from '@/hooks/core/settings/use-settings-view';
+import { type LinkItemNavSettingsProps } from '@/hooks/core/settings/use-settings-view';
 
 export const LinkItemNavSettings = ({ children, href, onClick }: LinkItemNavSettingsProps) => {
   const pathname = usePathname();

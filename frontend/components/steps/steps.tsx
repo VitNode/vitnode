@@ -21,7 +21,7 @@ export const Steps = ({ className, items }: Props) => {
 
   return (
     <div className={className}>
-      <ol className={cx('relative flex flex-col gap-6 border-l-2 ml-4')}>
+      <ol className={cx('relative flex flex-col gap-5 border-l-2 ml-4')}>
         {items.map((item, index) => (
           <li key={item.id}>
             <span

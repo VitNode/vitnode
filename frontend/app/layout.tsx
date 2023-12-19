@@ -1,7 +1,7 @@
 import config from '~/config.json';
 
-import { Metadata } from 'next';
-import { ReactNode } from 'react';
+import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 
 export function generateMetadata(): Metadata {
   const defaultTitle = config.side_name;
