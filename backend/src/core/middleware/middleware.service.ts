@@ -32,7 +32,8 @@ export class CoreMiddlewareService {
     const device = await this.prisma.core_sessions_known_devices.create({
       data: {
         ...this.getUserAgentData(req.headers['user-agent']),
-        last_seen: currentDate()
+        last_seen: currentDate(),
+        ip_address: req.ip
       }
     });
 
@@ -64,8 +65,8 @@ export class CoreMiddlewareService {
       return await this.createKnowDevice({ req, res });
     }
 
-    // Not update when last seen is less than 1 hour
-    if (device.last_seen > currentDate() - 3600) {
+    // Not update when last seen is less than 15 minutes
+    if (device.last_seen > currentDate() - 60 * 15) {
       return know_device_id;
     }
 
@@ -74,7 +75,9 @@ export class CoreMiddlewareService {
         id: device.id
       },
       data: {
-        last_seen: currentDate()
+        ...this.getUserAgentData(req.headers['user-agent']),
+        last_seen: currentDate(),
+        ip_address: req.ip
       }
     });
 

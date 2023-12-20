@@ -16,7 +16,7 @@ export const CONFIG = {
   cookies: {
     login_token: {
       secret: ENVS.tokens.login,
-      expiresIn: 60 * 60 * 24, // 24 days
+      expiresIn: 60 * 60 * 24 * 7, // 7 days
       expiresInRemember: 60 * 60 * 24 * 90, // 90 days
       name: 'vitnode-login-token',
       admin: {

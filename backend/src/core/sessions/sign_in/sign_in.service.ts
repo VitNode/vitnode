@@ -35,6 +35,20 @@ export class SignInCoreSessionsService {
     res,
     userId
   }: CreateSessionArgs) {
+    const know_device_id: string | undefined = req.cookies[CONFIG.cookies.known_device.name];
+    if (!know_device_id) {
+      throw new AccessDeniedError();
+    }
+
+    const device = await this.prisma.core_sessions_known_devices.findFirst({
+      where: {
+        id: know_device_id
+      }
+    });
+    if (!device) {
+      throw new AccessDeniedError();
+    }
+
     const login_token = this.jwtService.sign(
       {
         name,
@@ -50,31 +64,51 @@ export class SignInCoreSessionsService {
       ? CONFIG.cookies.login_token.expiresInRemember
       : CONFIG.cookies.login_token.expiresIn;
 
-    const data: Prisma.core_sessionsCreateInput = {
-      login_token: login_token,
+    const data:
+      | Omit<Prisma.core_sessionsCreateInput, 'expires'>
+      | Omit<Prisma.core_admin_sessionsCreateInput, 'expires'> = {
+      login_token,
       member: {
         connect: {
           id: userId
         }
       },
       last_seen: currentDate(),
-      expires: currentDate() + expires,
-      created: currentDate()
+      known_devices: {
+        connect: {
+          id: know_device_id
+        }
+      }
     };
 
-    // if (admin) {
-    //   await this.prisma.core_admin_sessions.create({
-    //     data: {
-    //       ...data,
-    //       expires: currentDate() + CONFIG.cookies.login_token.admin.expiresIn
-    //     }
-    //   });
+    if (admin) {
+      await this.prisma.core_admin_sessions.create({
+        data: {
+          ...data,
+          expires: currentDate() + CONFIG.cookies.login_token.admin.expiresIn
+        }
+      });
 
-    //   return login_token;
-    // }
+      // Set cookie for session
+      res.cookie(CONFIG.cookies.login_token.admin.name, login_token, {
+        httpOnly: true,
+        secure: true,
+        domain: CONFIG.cookie.domain,
+        path: '/',
+        expires: remember
+          ? new Date(convertUnixTime(currentDate() + CONFIG.cookies.login_token.admin.expiresIn))
+          : null,
+        sameSite: 'none'
+      });
+
+      return login_token;
+    }
 
     await this.prisma.core_sessions.create({
-      data
+      data: {
+        ...data,
+        expires: currentDate() + expires
+      }
     });
 
     // Set cookie for session
@@ -83,7 +117,9 @@ export class SignInCoreSessionsService {
       secure: true,
       domain: CONFIG.cookie.domain,
       path: '/',
-      expires: new Date(convertUnixTime(currentDate() + CONFIG.cookies.login_token.expiresIn)),
+      expires: remember
+        ? new Date(convertUnixTime(currentDate() + CONFIG.cookies.login_token.expiresIn))
+        : null,
       sameSite: 'none'
     });
 

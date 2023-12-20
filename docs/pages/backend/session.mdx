@@ -17,4 +17,18 @@ VitNode save device information like:
 
 ## Guest Session
 
-Guest session is a session without user account. It is created when user is not logged in.
+Guest session is a session without user account. It is created using middelware when user enter the website.
+
+Session after 90 days of inactivity is deleted.
+
+## User Session
+
+### Remember
+
+User can choose to remember session. If user choose to remember session, session will be stored in database and will be valid for 90 days. After 90 days of inactivity session will be deleted and user will be logged out.
+
+### No-remember
+
+If user choose to not remember session, session will be stored max for 7 days. After 7 days session will be deleted and user will be logged out.
+
+Session storage in cookie only for session duration. After session duration cookie will be deleted _(User closed the browser)_.
