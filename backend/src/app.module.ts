@@ -6,6 +6,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { JwtModule } from '@nestjs/jwt';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { ScheduleModule } from '@nestjs/schedule';
 
 import { PrismaModule } from '../prisma/prisma.module';
 import { GlobalCoreSessionsModule } from './core/sessions/core_sessions.module';
@@ -36,7 +37,8 @@ import { Ctx } from '@/types/context.type';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '../public'),
       serveRoot: '/public'
-    })
+    }),
+    ScheduleModule.forRoot()
   ]
 })
 export class AppModule {}

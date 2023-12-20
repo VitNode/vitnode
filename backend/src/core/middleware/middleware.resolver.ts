@@ -3,7 +3,7 @@ import { Context, Query, Resolver } from '@nestjs/graphql';
 import { CoreMiddlewareService } from '../middleware/middleware.service';
 import { CoreMiddlewareObj } from './dto/middleware.obj';
 
-import { Ctx } from '../../../types/context.type';
+import { Ctx } from '@/types/context.type';
 
 @Resolver()
 export class CoreMiddlewareResolver {
