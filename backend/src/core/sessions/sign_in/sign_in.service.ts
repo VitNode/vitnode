@@ -95,9 +95,9 @@ export class SignInCoreSessionsService {
         secure: true,
         domain: CONFIG.cookie.domain,
         path: '/',
-        expires: remember
-          ? new Date(convertUnixTime(currentDate() + CONFIG.cookies.login_token.admin.expiresIn))
-          : null,
+        expires: new Date(
+          convertUnixTime(currentDate() + CONFIG.cookies.login_token.admin.expiresIn)
+        ),
         sameSite: 'none'
       });
 

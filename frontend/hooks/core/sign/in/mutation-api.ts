@@ -10,7 +10,7 @@ import {
   type Core_Sessions__Sign_InMutationVariables
 } from '@/graphql/hooks';
 import { redirect } from '@/i18n';
-import { cookieFromStringToObject } from '@/functions/cookie-from-string-to-object';
+import { setCookieFromApi } from '@/functions/cookie-from-string-to-object';
 
 export const mutationApi = async (variables: Core_Sessions__Sign_InMutationVariables) => {
   try {
@@ -27,21 +27,7 @@ export const mutationApi = async (variables: Core_Sessions__Sign_InMutationVaria
     });
 
     // Set cookie
-    cookieFromStringToObject(res.headers.getSetCookie()).forEach(cookie => {
-      const key = Object.keys(cookie)[0];
-      const value = Object.values(cookie)[0];
-
-      if (typeof value !== 'string' || typeof key !== 'string') return;
-
-      cookies().set(key, value, {
-        domain: cookie.Domain,
-        path: cookie.Path,
-        expires: new Date(cookie.Expires),
-        secure: cookie.Secure,
-        httpOnly: cookie.HttpOnly,
-        sameSite: cookie.SameSite
-      });
-    });
+    setCookieFromApi({ res });
   } catch (error) {
     return { error };
   }

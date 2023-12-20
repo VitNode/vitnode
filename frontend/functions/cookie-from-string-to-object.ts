@@ -1,4 +1,6 @@
-export const cookieFromStringToObject = (
+import { cookies } from 'next/headers';
+
+const cookieFromStringToObject = (
   str: string[]
 ): {
   [key: string]: string | boolean | 'lax' | 'strict' | 'none' | undefined;
@@ -22,4 +24,22 @@ export const cookieFromStringToObject = (
       })
     )
   );
+};
+
+export const setCookieFromApi = ({ res }: { res: Response }) => {
+  return cookieFromStringToObject(res.headers.getSetCookie()).forEach(cookie => {
+    const key = Object.keys(cookie)[0];
+    const value = Object.values(cookie)[0];
+
+    if (typeof value !== 'string' || typeof key !== 'string') return;
+
+    cookies().set(key, value, {
+      domain: cookie.Domain,
+      path: cookie.Path,
+      expires: new Date(cookie.Expires),
+      secure: cookie.Secure,
+      httpOnly: cookie.HttpOnly,
+      sameSite: cookie.SameSite
+    });
+  });
 };

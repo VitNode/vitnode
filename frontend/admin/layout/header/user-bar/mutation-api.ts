@@ -10,19 +10,22 @@ import {
   type Admin_Sessions__Sign_OutMutationVariables
 } from '@/graphql/hooks';
 import { redirect } from '@/i18n';
-import { CONFIG } from '@/config';
+import { setCookieFromApi } from '@/functions/cookie-from-string-to-object';
 
 export const mutationApi = async () => {
   try {
-    async () =>
-      await fetcher<Admin_Sessions__Sign_OutMutation, Admin_Sessions__Sign_OutMutationVariables>({
-        query: Admin_Sessions__Sign_Out,
-        headers: {
-          Cookie: cookies().toString()
-        }
-      });
+    const { res } = await fetcher<
+      Admin_Sessions__Sign_OutMutation,
+      Admin_Sessions__Sign_OutMutationVariables
+    >({
+      query: Admin_Sessions__Sign_Out,
+      headers: {
+        Cookie: cookies().toString()
+      }
+    });
 
-    cookies().delete(CONFIG.cookies.login_token.admin.name);
+    // Set cookie
+    setCookieFromApi({ res });
 
     revalidatePath('/admin', 'layout');
   } catch (error) {

@@ -9,7 +9,6 @@ import { isRedirectError } from 'next/dist/client/components/redirect';
 import { AdminLayout } from '@/admin/layout/admin-layout';
 import { SessionAdminProvider } from './session-admin-provider';
 import { redirect } from '@/i18n';
-import { CONFIG } from '@/config';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Admin_Sessions__Authorization,
@@ -20,7 +19,7 @@ import {
 const getData = async () => {
   const cookieStore = cookies();
 
-  if (!cookieStore.get(CONFIG.cookies.login_token.admin.name)) {
+  if (!cookieStore.get('vitnode-login-token-admin')) {
     return;
   }
 
