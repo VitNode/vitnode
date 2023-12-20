@@ -12,15 +12,16 @@ import { fetcher } from '@/graphql/fetcher';
 
 export const mutationApi = async (variables: Forum_Topics__CreateMutationVariables) => {
   try {
-    const data = await fetcher<Forum_Topics__CreateMutation, Forum_Topics__CreateMutationVariables>(
-      {
-        query: Forum_Topics__Create,
-        variables,
-        headers: {
-          Cookie: cookies().toString()
-        }
+    const { data } = await fetcher<
+      Forum_Topics__CreateMutation,
+      Forum_Topics__CreateMutationVariables
+    >({
+      query: Forum_Topics__Create,
+      variables,
+      headers: {
+        Cookie: cookies().toString()
       }
-    );
+    });
 
     revalidatePath('/forum/[id]', 'page');
 

@@ -7,6 +7,7 @@ import { AuthorizationCoreSessionsResolver } from './authorization/authorization
 import { SignOutCoreSessionsService } from './sign_out/sign_out.service';
 import { SignOutCoreSessionsResolver } from './sign_out/sign_out.resolver';
 import { InternalAuthorizationCoreSessionsService } from './authorization/internal/internal_authorization.service';
+import { CoreSessionsCron } from './core_sessions.cron';
 
 @Module({
   providers: [
@@ -15,7 +16,8 @@ import { InternalAuthorizationCoreSessionsService } from './authorization/intern
     AuthorizationCoreSessionsService,
     AuthorizationCoreSessionsResolver,
     SignOutCoreSessionsService,
-    SignOutCoreSessionsResolver
+    SignOutCoreSessionsResolver,
+    CoreSessionsCron
   ]
 })
 export class CoreSessionsModule {}

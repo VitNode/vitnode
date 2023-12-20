@@ -5,5 +5,7 @@
   "errors": "Errors",
   "files": "Files",
   "i18n": "Internationalization",
-  "practices": "Best Practices"
+  "practices": "Best Practices",
+  "sessions": "Sessions",
+  "cron": "Task Scheduling (CRON)"
 }

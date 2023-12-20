@@ -22,7 +22,10 @@ export async function fetcher<TData, TVariables>({
   signal,
   uploads,
   variables
-}: Args<TVariables>): Promise<TData> {
+}: Args<TVariables>): Promise<{
+  data: TData;
+  res: Response;
+}> {
   const formData = new FormData();
 
   if (uploads) {
@@ -110,7 +113,10 @@ export async function fetcher<TData, TVariables>({
     return Promise.reject(json.errors.at(0));
   }
 
-  return json.data;
+  return {
+    data: json.data,
+    res
+  };
 }
 
 export interface ErrorType {

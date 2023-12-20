@@ -57,7 +57,7 @@ export const useChildrenForumForumsAdminAPI = ({ enabled, parentId }: Args) => {
   const { isFetching, isLoading } = useQuery({
     queryKey: [APIKeys.FORUMS_CHILDREN_ADMIN, { parentId }],
     queryFn: async () => {
-      const data = await fetcher<
+      const { data } = await fetcher<
         Forum_Forums__Admin__ShowQuery,
         Forum_Forums__Admin__ShowQueryVariables
       >({

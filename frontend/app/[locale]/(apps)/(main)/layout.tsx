@@ -1,5 +1,5 @@
 import { lazy, type LazyExoticComponent, type ReactNode } from 'react';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { isRedirectError } from 'next/dist/client/components/redirect';
 
 import { CONFIG } from '@/config';
@@ -19,21 +19,22 @@ interface Props {
 }
 
 const getData = async () => {
-  const current = await fetcher<
+  const { data } = await fetcher<
     Core_Sessions__AuthorizationQuery,
     Core_Sessions__AuthorizationQueryVariables
   >({
     query: Core_Sessions__Authorization,
     headers: {
-      Cookie: cookies().toString()
+      Cookie: cookies().toString(),
+      ['user-agent']: headers().get('user-agent') ?? 'node'
     }
   });
 
-  if (current.core_languages__show.edges.length === 0) {
+  if (data.core_languages__show.edges.length === 0) {
     redirect('/admin/install');
   }
 
-  return current;
+  return data;
 };
 
 export default async function Layout({ children }: Props) {

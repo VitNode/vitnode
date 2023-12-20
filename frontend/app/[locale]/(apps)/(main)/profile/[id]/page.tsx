@@ -11,16 +11,20 @@ import {
 } from '@/graphql/hooks';
 
 const getData = async ({ id }: { id: string }) => {
-  return await fetcher<Core_Members__ProfilesQuery, Core_Members__ProfilesQueryVariables>({
-    query: Core_Members__Profiles,
-    variables: {
-      first: 1,
-      findByIds: [id]
-    },
-    headers: {
-      Cookie: cookies().toString()
+  const { data } = await fetcher<Core_Members__ProfilesQuery, Core_Members__ProfilesQueryVariables>(
+    {
+      query: Core_Members__Profiles,
+      variables: {
+        first: 1,
+        findByIds: [id]
+      },
+      headers: {
+        Cookie: cookies().toString()
+      }
     }
-  });
+  );
+
+  return data;
 };
 
 interface Props {

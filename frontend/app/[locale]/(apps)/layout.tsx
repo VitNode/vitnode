@@ -10,12 +10,17 @@ import {
 } from '@/graphql/hooks';
 
 const getData = async () => {
-  return await fetcher<Core_Languages__MiddlewareQuery, Core_Languages__MiddlewareQueryVariables>({
+  const { data } = await fetcher<
+    Core_Languages__MiddlewareQuery,
+    Core_Languages__MiddlewareQueryVariables
+  >({
     query: Core_Languages__Middleware,
     headers: {
       Cookie: cookies().toString()
     }
   });
+
+  return data;
 };
 
 interface Props {

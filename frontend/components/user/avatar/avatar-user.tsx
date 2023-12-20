@@ -1,5 +1,3 @@
-'use client';
-
 import { forwardRef } from 'react';
 
 import { CONFIG } from '@/config';
@@ -20,7 +18,7 @@ interface Props {
   className?: string;
 }
 
-const AvatarUser = forwardRef<HTMLDivElement, Props>(
+const AvatarUser = forwardRef<HTMLImageElement, Props>(
   ({ className, sizeInRem, user: { avatar, avatar_color, name } }, ref) => {
     return (
       <Img

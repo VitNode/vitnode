@@ -11,7 +11,7 @@ import {
 
 export const mutationApi = async (variables: Admin_Settings__General__EditMutationVariables) => {
   try {
-    const data = await fetcher<
+    const { data } = await fetcher<
       Admin_Settings__General__EditMutation,
       Admin_Settings__General__EditMutationVariables
     >({

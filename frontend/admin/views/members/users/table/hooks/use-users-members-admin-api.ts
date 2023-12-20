@@ -32,12 +32,18 @@ export const useUsersMembersAdminAPI = () => {
 
   const query = useQuery({
     queryKey: [APIKeys.USERS_MEMBERS, { ...variables }],
-    queryFn: async ({ signal }) =>
-      await fetcher<Core_Members__Admin__ShowQuery, Core_Members__Admin__ShowQueryVariables>({
+    queryFn: async ({ signal }) => {
+      const { data } = await fetcher<
+        Core_Members__Admin__ShowQuery,
+        Core_Members__Admin__ShowQueryVariables
+      >({
         query: Core_Members__Admin__Show,
         variables,
         signal
-      }),
+      });
+
+      return data;
+    },
     placeholderData: previousData => previousData
   });
 

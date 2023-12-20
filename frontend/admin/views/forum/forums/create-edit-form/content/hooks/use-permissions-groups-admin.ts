@@ -16,7 +16,7 @@ export const usePermissionsGroupsAdminAPI = ({ searchValue }: Args) => {
   const query = useQuery({
     queryKey: [APIKeys.GROUPS_MEMBERS_FORUMS_ADMIN, { search: searchValue }],
     queryFn: async () => {
-      return await fetcher<
+      const { data } = await fetcher<
         Core_Groups__Admin__Show_ShortQuery,
         Core_Groups__Admin__Show_ShortQueryVariables
       >({
@@ -25,6 +25,8 @@ export const usePermissionsGroupsAdminAPI = ({ searchValue }: Args) => {
           search: searchValue
         }
       });
+
+      return data;
     },
     placeholderData: previousData => previousData,
     refetchOnMount: true

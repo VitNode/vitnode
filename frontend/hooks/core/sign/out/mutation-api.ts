@@ -10,18 +10,22 @@ import {
   type Core_Sessions__Sign_OutMutationVariables
 } from '@/graphql/hooks';
 import { redirect } from '@/i18n';
-import { CONFIG } from '@/config';
+import { setCookieFromApi } from '@/functions/cookie-from-string-to-object';
 
 export const mutationApi = async () => {
   try {
-    await fetcher<Core_Sessions__Sign_OutMutation, Core_Sessions__Sign_OutMutationVariables>({
+    const { res } = await fetcher<
+      Core_Sessions__Sign_OutMutation,
+      Core_Sessions__Sign_OutMutationVariables
+    >({
       query: Core_Sessions__Sign_Out,
       headers: {
         Cookie: cookies().toString()
       }
     });
 
-    cookies().delete(CONFIG.login_token.name);
+    // Set cookie
+    setCookieFromApi({ res });
 
     revalidatePath('/', 'layout');
   } catch (error) {

@@ -16,12 +16,18 @@ export interface Forum_Forums__Admin__ShowQueryItem
 export const useForumForumsAdminAPI = () => {
   const query = useInfiniteQuery({
     queryKey: [APIKeys.FORUMS_ADMIN],
-    queryFn: async ({ pageParam, signal }) =>
-      await fetcher<Forum_Forums__Admin__ShowQuery, Forum_Forums__Admin__ShowQueryVariables>({
+    queryFn: async ({ pageParam, signal }) => {
+      const { data } = await fetcher<
+        Forum_Forums__Admin__ShowQuery,
+        Forum_Forums__Admin__ShowQueryVariables
+      >({
         query: Forum_Forums__Admin__Show,
         variables: pageParam,
         signal
-      }),
+      });
+
+      return data;
+    },
     initialPageParam: {
       first: 10,
       cursor: ''

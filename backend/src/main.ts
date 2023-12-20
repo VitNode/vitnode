@@ -24,7 +24,7 @@ async function bootstrap() {
   app.useWebSocketAdapter(redisIoAdapter);
 
   await app.listen(CONFIG.port, null, async () => {
-    if (!CONFIG.login_token.secret) {
+    if (!CONFIG.cookies.login_token.secret) {
       throw new Error('Login token secret is not defined in .env file');
     }
 

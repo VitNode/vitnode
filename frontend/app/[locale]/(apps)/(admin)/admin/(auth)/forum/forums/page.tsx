@@ -15,14 +15,20 @@ export default async function Page() {
   const queryClient = getQueryClient();
   await queryClient.prefetchInfiniteQuery({
     queryKey: [APIKeys.FORUMS_ADMIN],
-    queryFn: async ({ pageParam }) =>
-      await fetcher<Forum_Forums__Admin__ShowQuery, Forum_Forums__Admin__ShowQueryVariables>({
+    queryFn: async ({ pageParam }) => {
+      const { data } = await fetcher<
+        Forum_Forums__Admin__ShowQuery,
+        Forum_Forums__Admin__ShowQueryVariables
+      >({
         query: Forum_Forums__Admin__Show,
         variables: pageParam,
         headers: {
           Cookie: cookies().toString()
         }
-      }),
+      });
+
+      return data;
+    },
     initialPageParam: {
       first: 10,
       cursor: ''

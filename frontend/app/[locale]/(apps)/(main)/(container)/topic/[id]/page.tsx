@@ -11,7 +11,7 @@ import {
 import { getUuidFromString } from '@/functions/url';
 
 const getData = async ({ id }: { id: string }) => {
-  return await fetcher<Forum_Topics__ShowQuery, Forum_Topics__ShowQueryVariables>({
+  const { data } = await fetcher<Forum_Topics__ShowQuery, Forum_Topics__ShowQueryVariables>({
     query: Forum_Topics__Show,
     variables: {
       ids: [getUuidFromString(id)]
@@ -20,6 +20,8 @@ const getData = async ({ id }: { id: string }) => {
       Cookie: cookies().toString()
     }
   });
+
+  return data;
 };
 
 interface Props {

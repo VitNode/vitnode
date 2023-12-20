@@ -12,15 +12,16 @@ import {
 
 export const mutationApi = async (variables: Core_Languages__EditMutationVariables) => {
   try {
-    const data = await fetcher<Core_Languages__EditMutation, Core_Languages__EditMutationVariables>(
-      {
-        query: Core_Languages__Edit,
-        variables,
-        headers: {
-          Cookie: cookies().toString()
-        }
+    const { data } = await fetcher<
+      Core_Languages__EditMutation,
+      Core_Languages__EditMutationVariables
+    >({
+      query: Core_Languages__Edit,
+      variables,
+      headers: {
+        Cookie: cookies().toString()
       }
-    );
+    });
 
     revalidatePath('/admin', 'layout');
 

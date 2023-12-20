@@ -92,41 +92,46 @@ model core_admin_permissions {
 }
 
 model core_sessions {
-  login_token          String       @id @unique @db.VarChar(255)
-  member               core_members @relation("core_sessions_member", references: [id], fields: [member_id], onDelete: Cascade)
-  member_id            String
-  ip_address           String?      @db.VarChar(46)
-  user_agent           String       @db.Text
-  uagent_browser       String       @db.VarChar(200)
-  uagent_version       String       @db.VarChar(100)
-  uagent_os            String       @db.VarChar(100)
-  uagent_device_vendor String?      @db.VarChar(200)
-  uagent_device_type   String?      @db.VarChar(200)
-  uagent_device_model  String?      @db.VarChar(200)
-  last_seen            Int
-  created              Int
-  expires              Int
+  login_token String       @id @unique @db.VarChar(255)
+  member      core_members @relation("core_sessions_member", references: [id], fields: [member_id], onDelete: Cascade)
+  member_id   String
+  last_seen   Int
+  expires     Int
+
+  known_devices core_sessions_known_devices[] @relation("core_sessions_known_devices")
 
   @@index([member_id])
 }
 
 model core_admin_sessions {
-  login_token          String       @id @unique @db.VarChar(255)
-  member               core_members @relation("core_admin_sessions_member", references: [id], fields: [member_id], onDelete: Cascade)
-  member_id            String
-  ip_address           String?      @db.VarChar(46)
-  user_agent           String       @db.Text
-  uagent_browser       String       @db.VarChar(200)
-  uagent_version       String       @db.VarChar(100)
-  uagent_os            String       @db.VarChar(100)
-  uagent_device_vendor String?      @db.VarChar(200)
-  uagent_device_type   String?      @db.VarChar(200)
-  uagent_device_model  String?      @db.VarChar(200)
-  last_seen            Int
-  created              Int
-  expires              Int
+  login_token String       @id @unique @db.VarChar(255)
+  member      core_members @relation("core_admin_sessions_member", references: [id], fields: [member_id], onDelete: Cascade)
+  member_id   String
+  last_seen   Int
+  expires     Int
+
+  known_devices core_sessions_known_devices[] @relation("core_admin_sessions_known_devices")
 
   @@index([member_id])
+}
+
+model core_sessions_known_devices {
+  id                   String  @id @unique @default(uuid())
+  ip_address           String? @db.VarChar(46)
+  user_agent           String  @db.Text
+  uagent_browser       String  @db.VarChar(200)
+  uagent_version       String  @db.VarChar(100)
+  uagent_os            String  @db.VarChar(100)
+  uagent_device_vendor String? @db.VarChar(200)
+  uagent_device_type   String? @db.VarChar(200)
+  uagent_device_model  String? @db.VarChar(200)
+  last_seen            Int
+
+  session    core_sessions? @relation("core_sessions_known_devices", references: [login_token], fields: [session_id], onDelete: SetNull)
+  session_id String?        @db.VarChar(255)
+
+  admin_session    core_admin_sessions? @relation("core_admin_sessions_known_devices", references: [login_token], fields: [admin_session_id], onDelete: SetNull)
+  admin_session_id String?              @db.VarChar(255)
 }
 
 model core_attachments {

@@ -13,7 +13,7 @@ export const mutationCreateApi = async (
   variables: Forum_Forums__Admin__CreateMutationVariables
 ) => {
   try {
-    const data = await fetcher<
+    const { data } = await fetcher<
       Forum_Forums__Admin__CreateMutation,
       Forum_Forums__Admin__CreateMutationVariables
     >({

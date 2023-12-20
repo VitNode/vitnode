@@ -1,0 +1,40 @@
+import { Steps } from 'nextra/components';
+
+# Task Scheduling (CRON)
+
+VitNode using [@nestjs/schedule](https://docs.nestjs.com/techniques/task-scheduling) to schedule tasks.
+
+## Usage
+
+<Steps>
+
+### Create a service
+
+Create a service with `.cron.ts` extension in your module folder.
+
+For example in `core_members` create a file `core_members.cron.ts` with the following content:
+
+```ts
+@Injectable()
+export class CoreMembersCron {
+  constructor(private prisma: PrismaService) {}
+
+  @Cron('45 * * * * *')
+  async exampleCron() {
+    ...
+  }
+}
+```
+
+### Register the service
+
+Register the service in your module `providers` array.
+
+```ts
+@Module({
+  providers: [CoreMembersCron]
+})
+export class CoreMembersModule {}
+```
+
+</Steps>

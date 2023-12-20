@@ -1,7 +1,7 @@
 import configs from '~/config.json';
 
 import type { ReactNode } from 'react';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
 import { isRedirectError } from 'next/dist/client/components/redirect';
@@ -9,7 +9,6 @@ import { isRedirectError } from 'next/dist/client/components/redirect';
 import { AdminLayout } from '@/admin/layout/admin-layout';
 import { SessionAdminProvider } from './session-admin-provider';
 import { redirect } from '@/i18n';
-import { CONFIG } from '@/config';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Admin_Sessions__Authorization,
@@ -20,19 +19,22 @@ import {
 const getData = async () => {
   const cookieStore = cookies();
 
-  if (!cookieStore.get(CONFIG.login_token.admin.name)) {
+  if (!cookieStore.get('vitnode-login-token-admin')) {
     return;
   }
 
-  return await fetcher<
+  const { data } = await fetcher<
     Admin_Sessions__AuthorizationQuery,
     Admin_Sessions__AuthorizationQueryVariables
   >({
     query: Admin_Sessions__Authorization,
     headers: {
-      Cookie: cookies().toString()
+      Cookie: cookies().toString(),
+      ['user-agent']: headers().get('user-agent') ?? 'node'
     }
   });
+
+  return data;
 };
 
 interface Props {

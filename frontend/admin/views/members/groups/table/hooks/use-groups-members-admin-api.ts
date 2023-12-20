@@ -19,10 +19,15 @@ export const useGroupMembersAdminAPI = () => {
   const query = useQuery({
     queryKey: [APIKeys.GROUPS_MEMBERS_ADMIN, { ...variables }],
     queryFn: async () => {
-      return await fetcher<Core_Groups__Admin__ShowQuery, Core_Groups__Admin__ShowQueryVariables>({
+      const { data } = await fetcher<
+        Core_Groups__Admin__ShowQuery,
+        Core_Groups__Admin__ShowQueryVariables
+      >({
         query: Core_Groups__Admin__Show,
         variables
       });
+
+      return data;
     },
     placeholderData: previousData => previousData
   });
