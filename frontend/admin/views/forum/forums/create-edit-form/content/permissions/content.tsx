@@ -10,6 +10,8 @@ import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
 import { Loader } from '@/components/loader/loader';
 
+import type { ShowAdminGroups } from '../../../../../../../graphql/hooks';
+
 interface Props {
   field: ControllerRenderProps<FieldValues, 'permissions'>;
   permissions: { id: string; title: string; disableForGuest?: boolean }[];
@@ -156,7 +158,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
                           field.onChange({
                             ...field.value,
                             [`can_all_${permission.id}`]: false,
-                            groups: data.map(group => {
+                            groups: data.map((group: Pick<ShowAdminGroups, 'id'>) => {
                               if (group.id === item.id) {
                                 return {
                                   id: group.id,

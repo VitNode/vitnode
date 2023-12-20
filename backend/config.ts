@@ -13,14 +13,20 @@ export const ENVS = {
 export const CONFIG = {
   password_salt: 10,
   port: ENVS.port ? ENVS.port : 8080,
-  login_token: {
-    secret: ENVS.tokens.login,
-    expiresIn: 60 * 60 * 24, // 24 days
-    expiresInRemember: 60 * 60 * 24 * 90, // 90 days
-    name: 'vitnode-login-token',
-    admin: {
-      name: 'vitnode-login-token-admin',
-      expiresIn: 60 * 60 * 24 // 1 day
+  cookies: {
+    login_token: {
+      secret: ENVS.tokens.login,
+      expiresIn: 60 * 60 * 24, // 24 days
+      expiresInRemember: 60 * 60 * 24 * 90, // 90 days
+      name: 'vitnode-login-token',
+      admin: {
+        name: 'vitnode-login-token-admin',
+        expiresIn: 60 * 60 * 24 // 1 day
+      }
+    },
+    known_device: {
+      name: 'vitnode-device',
+      expiresIn: 60 * 60 * 24 * 365 // 1 year
     }
   },
   redis: {

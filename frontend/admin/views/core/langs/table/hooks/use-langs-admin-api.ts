@@ -18,10 +18,14 @@ export const useLangsAdminAPI = () => {
   const query = useQuery({
     queryKey: [APIKeys.LANGUAGES_ADMIN, { ...variables }],
     queryFn: async () => {
-      return await fetcher<Core_Languages__ShowQuery, Core_Languages__ShowQueryVariables>({
-        query: Core_Languages__Show,
-        variables
-      });
+      const { data } = await fetcher<Core_Languages__ShowQuery, Core_Languages__ShowQueryVariables>(
+        {
+          query: Core_Languages__Show,
+          variables
+        }
+      );
+
+      return data;
     },
     placeholderData: previousData => previousData
   });

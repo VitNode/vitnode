@@ -21,7 +21,7 @@ export const mutationApi = async () => {
       }
     });
 
-    cookies().delete(CONFIG.login_token.name);
+    cookies().delete(CONFIG.cookies.login_token.name);
 
     revalidatePath('/', 'layout');
   } catch (error) {

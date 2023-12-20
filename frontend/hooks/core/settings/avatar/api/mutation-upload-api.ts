@@ -14,7 +14,7 @@ export const mutationUploadApi = async (formData: FormData) => {
   try {
     const files = formData.get('file') as File;
 
-    const data = await fetcher<
+    const { data } = await fetcher<
       Core_Members__Avatar__UploadMutation,
       Core_Members__Avatar__UploadMutationVariables
     >({

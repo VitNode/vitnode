@@ -50,6 +50,12 @@ export type ChildrenShowForumForums = {
   position: Scalars['Int']['output'];
 };
 
+export type CoreMiddlewareObj = {
+  __typename?: 'CoreMiddlewareObj';
+  default_language: Scalars['String']['output'];
+  languages: Array<LanguageCoreMiddlewareObj>;
+};
+
 export type ForumTopicsForums = {
   __typename?: 'ForumTopicsForums';
   id: Scalars['String']['output'];
@@ -73,6 +79,15 @@ export type GroupsPermissionsCreateForumForums = {
   read: Scalars['Boolean']['input'];
   reply: Scalars['Boolean']['input'];
   view: Scalars['Boolean']['input'];
+};
+
+export type LanguageCoreMiddlewareObj = {
+  __typename?: 'LanguageCoreMiddlewareObj';
+  default: Scalars['Boolean']['output'];
+  enabled: Scalars['Boolean']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  timezone: Scalars['String']['output'];
 };
 
 export const LayoutAdminInstallEnum = {
@@ -205,6 +220,7 @@ export type Query = {
   core_languages__show: ShowCoreLanguagesObj;
   core_members__admin__show: ShowAdminMembersObj;
   core_members__show: ShowCoreMembersObj;
+  core_middleware: CoreMiddlewareObj;
   core_sessions__authorization: AuthorizationCoreSessionsObj;
   forum_forums__admin__show: ShowForumForumsObj;
   forum_forums__show: ShowForumForumsObj;
@@ -657,6 +673,11 @@ export type Admin_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]:
 
 export type Admin_Sessions__AuthorizationQuery = { __typename?: 'Query', admin_sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: string, is_admin: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } } | null } };
 
+export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Core_MiddlewareQuery = { __typename?: 'Query', core_middleware: { __typename?: 'CoreMiddlewareObj', default_language: string, languages: Array<{ __typename?: 'LanguageCoreMiddlewareObj', default: boolean, id: string, name: string, timezone: string }> } };
+
 export type Core_Languages__MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1059,6 +1080,19 @@ export const Admin_Sessions__Authorization = gql`
         }
         id
       }
+    }
+  }
+}
+    `;
+export const Core_Middleware = gql`
+    query Core_middleware {
+  core_middleware {
+    default_language
+    languages {
+      default
+      id
+      name
+      timezone
     }
   }
 }

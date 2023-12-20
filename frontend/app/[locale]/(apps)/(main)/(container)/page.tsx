@@ -9,13 +9,15 @@ import {
 } from '@/graphql/hooks';
 
 const getData = async () => {
-  return await fetcher<Forum_Forums__ShowQuery, Forum_Forums__ShowQueryVariables>({
+  const { data } = await fetcher<Forum_Forums__ShowQuery, Forum_Forums__ShowQueryVariables>({
     query: Forum_Forums__Show,
 
     headers: {
       Cookie: cookies().toString()
     }
   });
+
+  return data;
 };
 
 export default async function Page() {

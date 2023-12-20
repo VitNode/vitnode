@@ -34,16 +34,21 @@ export default async function Page() {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
     queryKey: [APIKeys.LANGUAGES_ADMIN, { ...emptyPagination({ first: FIRST }) }],
-    queryFn: async () =>
-      await fetcher<Core_Languages__ShowQuery, Core_Languages__ShowQueryVariables>({
-        query: Core_Languages__Show,
-        variables: {
-          first: FIRST
-        },
-        headers: {
-          Cookie: cookies().toString()
+    queryFn: async () => {
+      const { data } = await fetcher<Core_Languages__ShowQuery, Core_Languages__ShowQueryVariables>(
+        {
+          query: Core_Languages__Show,
+          variables: {
+            first: FIRST
+          },
+          headers: {
+            Cookie: cookies().toString()
+          }
         }
-      })
+      );
+
+      return data;
+    }
   });
   const dehydratedState = dehydrate(queryClient);
 

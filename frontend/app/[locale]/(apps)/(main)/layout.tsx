@@ -19,7 +19,7 @@ interface Props {
 }
 
 const getData = async () => {
-  const current = await fetcher<
+  const { data } = await fetcher<
     Core_Sessions__AuthorizationQuery,
     Core_Sessions__AuthorizationQueryVariables
   >({
@@ -30,11 +30,11 @@ const getData = async () => {
     }
   });
 
-  if (current.core_languages__show.edges.length === 0) {
+  if (data.core_languages__show.edges.length === 0) {
     redirect('/admin/install');
   }
 
-  return current;
+  return data;
 };
 
 export default async function Layout({ children }: Props) {

@@ -22,7 +22,7 @@ export const mutationApi = async () => {
         }
       });
 
-    cookies().delete(CONFIG.login_token.admin.name);
+    cookies().delete(CONFIG.cookies.login_token.admin.name);
 
     revalidatePath('/admin', 'layout');
   } catch (error) {

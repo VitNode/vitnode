@@ -20,11 +20,11 @@ import {
 const getData = async () => {
   const cookieStore = cookies();
 
-  if (!cookieStore.get(CONFIG.login_token.admin.name)) {
+  if (!cookieStore.get(CONFIG.cookies.login_token.admin.name)) {
     return;
   }
 
-  return await fetcher<
+  const { data } = await fetcher<
     Admin_Sessions__AuthorizationQuery,
     Admin_Sessions__AuthorizationQueryVariables
   >({
@@ -34,6 +34,8 @@ const getData = async () => {
       ['user-agent']: headers().get('user-agent') ?? 'node'
     }
   });
+
+  return data;
 };
 
 interface Props {

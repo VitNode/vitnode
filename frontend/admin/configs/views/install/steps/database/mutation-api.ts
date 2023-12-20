@@ -12,7 +12,7 @@ import {
 
 export const mutationApi = async () => {
   try {
-    const mutation = await fetcher<
+    const { data } = await fetcher<
       Admin_Install__Create_DatabaseMutation,
       Admin_Install__Create_DatabaseMutationVariables
     >({
@@ -24,7 +24,7 @@ export const mutationApi = async () => {
 
     revalidatePath('/admin/(configs)/install/', 'layout');
 
-    return { data: mutation };
+    return { data };
   } catch (error) {
     return { error };
   }

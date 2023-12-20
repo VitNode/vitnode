@@ -12,7 +12,7 @@ import {
 
 export const mutationDeleteApi = async () => {
   try {
-    const data = await fetcher<
+    const { data } = await fetcher<
       Core_Members__Avatar__DeleteMutation,
       Core_Members__Avatar__DeleteMutationVariables
     >({

@@ -17,12 +17,14 @@ interface Props {
 }
 
 const getData = async () => {
-  return await fetcher<Admin_Install__LayoutQuery, Admin_Install__LayoutQueryVariables>({
+  const { data } = await fetcher<Admin_Install__LayoutQuery, Admin_Install__LayoutQueryVariables>({
     query: Admin_Install__Layout,
     headers: {
       Cookie: cookies().toString()
     }
   });
+
+  return data;
 };
 
 export default async function Layout({ children }: Props) {

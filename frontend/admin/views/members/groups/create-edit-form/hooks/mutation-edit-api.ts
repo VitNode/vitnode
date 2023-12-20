@@ -11,7 +11,7 @@ import type {
 
 export const mutationEditApi = async (variables: Core_Groups__Admin__EditMutationVariables) => {
   try {
-    const data = await fetcher<
+    const { data } = await fetcher<
       Core_Groups__Admin__EditMutation,
       Core_Groups__Admin__EditMutationVariables
     >({

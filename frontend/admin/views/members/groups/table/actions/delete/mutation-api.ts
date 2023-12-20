@@ -11,7 +11,7 @@ import {
 
 export const mutationApi = async (variables: Core_Groups__Admin__DeleteMutationVariables) => {
   try {
-    const data = await fetcher<
+    const { data } = await fetcher<
       Core_Groups__Admin__DeleteMutation,
       Core_Groups__Admin__DeleteMutationVariables
     >({

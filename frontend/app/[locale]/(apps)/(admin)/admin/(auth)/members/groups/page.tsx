@@ -23,7 +23,10 @@ interface Props {
 const FIRST = 10;
 
 const getData = async () => {
-  return await fetcher<Core_Groups__Admin__ShowQuery, Core_Groups__Admin__ShowQueryVariables>({
+  const { data } = await fetcher<
+    Core_Groups__Admin__ShowQuery,
+    Core_Groups__Admin__ShowQueryVariables
+  >({
     query: Core_Groups__Admin__Show,
     variables: {
       first: FIRST
@@ -32,6 +35,8 @@ const getData = async () => {
       Cookie: cookies().toString()
     }
   });
+
+  return data;
 };
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {

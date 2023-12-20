@@ -9,7 +9,7 @@ export class SignOutAdminSessionsService {
   constructor(private prisma: PrismaService) {}
 
   async signOut({ req }: Ctx) {
-    const login_token = req.cookies[CONFIG.login_token.admin.name];
+    const login_token = req.cookies[CONFIG.cookies.login_token.admin.name];
 
     if (login_token) {
       return 'You are not logged in';

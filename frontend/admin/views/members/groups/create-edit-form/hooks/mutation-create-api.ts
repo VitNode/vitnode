@@ -11,7 +11,7 @@ import {
 
 export const mutationCreateApi = async (variables: Core_Groups__Admin_CreateMutationVariables) => {
   try {
-    const data = await fetcher<
+    const { data } = await fetcher<
       Core_Groups__Admin_CreateMutation,
       Core_Groups__Admin_CreateMutationVariables
     >({

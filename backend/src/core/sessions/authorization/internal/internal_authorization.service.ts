@@ -17,7 +17,7 @@ export class InternalAuthorizationCoreSessionsService {
   ) {}
 
   async authorization({ req }: Ctx): Promise<InternalAuthorizationCoreSessionObj> {
-    const login_token = req.cookies[CONFIG.login_token.name];
+    const login_token = req.cookies[CONFIG.cookies.login_token.name];
 
     if (!login_token) {
       throw new AccessDeniedError();

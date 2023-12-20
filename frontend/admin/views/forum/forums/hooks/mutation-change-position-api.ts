@@ -13,7 +13,7 @@ export const mutationChangePositionApi = async (
   variables: Forum_Forums__Admin__Change_PositionMutationVariables
 ) => {
   try {
-    const data = await fetcher<
+    const { data } = await fetcher<
       Forum_Forums__Admin__Change_PositionMutation,
       Forum_Forums__Admin__Change_PositionMutationVariables
     >({

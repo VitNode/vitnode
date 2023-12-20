@@ -1,0 +1,11 @@
+query Core_middleware {
+  core_middleware {
+    default_language
+    languages {
+      default
+      id
+      name
+      timezone
+    }
+  }
+}

@@ -1,7 +1,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -10,36 +10,38 @@ import {
   type Core_Sessions__Sign_InMutationVariables
 } from '@/graphql/hooks';
 import { redirect } from '@/i18n';
-import { convertUnixTime, currentDate } from '@/functions/date';
-import { CONFIG } from '@/config';
+import { cookieFromStringToObject } from '@/functions/cookie-from-string-to-object';
 
 export const mutationApi = async (variables: Core_Sessions__Sign_InMutationVariables) => {
   try {
-    const mutation = await fetcher<
+    const { res } = await fetcher<
       Core_Sessions__Sign_InMutation,
       Core_Sessions__Sign_InMutationVariables
     >({
       query: Core_Sessions__Sign_In,
       variables,
       headers: {
-        Cookie: cookies().toString()
+        Cookie: cookies().toString(),
+        ['user-agent']: headers().get('user-agent') ?? 'node'
       }
     });
 
-    cookies().set(
-      variables.admin ? CONFIG.login_token.admin.name : CONFIG.login_token.name,
-      mutation.core_sessions__sign_in,
-      {
-        httpOnly: true,
-        secure: true,
-        path: '/',
-        expires:
-          variables.remember && !variables.admin
-            ? new Date(convertUnixTime(currentDate() + CONFIG.login_token.expiresInRemember))
-            : undefined,
-        sameSite: 'none'
-      }
-    );
+    // Set cookie
+    cookieFromStringToObject(res.headers.getSetCookie()).forEach(cookie => {
+      const key = Object.keys(cookie)[0];
+      const value = Object.values(cookie)[0];
+
+      if (typeof value !== 'string' || typeof key !== 'string') return;
+
+      cookies().set(key, value, {
+        domain: cookie.Domain,
+        path: cookie.Path,
+        expires: new Date(cookie.Expires),
+        secure: cookie.Secure,
+        httpOnly: cookie.HttpOnly,
+        sameSite: cookie.SameSite
+      });
+    });
   } catch (error) {
     return { error };
   }
