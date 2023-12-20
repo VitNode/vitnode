@@ -1,7 +1,7 @@
 import configs from '~/config.json';
 
 import type { ReactNode } from 'react';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
 import { isRedirectError } from 'next/dist/client/components/redirect';
@@ -30,7 +30,8 @@ const getData = async () => {
   >({
     query: Admin_Sessions__Authorization,
     headers: {
-      Cookie: cookies().toString()
+      Cookie: cookies().toString(),
+      ['user-agent']: headers().get('user-agent') ?? 'node'
     }
   });
 };

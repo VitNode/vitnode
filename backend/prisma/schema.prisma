@@ -49,6 +49,7 @@ model core_members {
   admin_permissions core_admin_permissions[] @relation("core_admin_permissions_member")
   forum_topics      forum_topics[]           @relation("forum_topics_author")
   forum_posts       forum_posts[]            @relation("forum_posts_author")
+  known_devices     core_sessions_devices[]  @relation("core_sessions_devices_member")
 
   @@index([group_id])
 }
@@ -122,11 +123,17 @@ model core_admin_sessions {
   uagent_device_vendor String?      @db.VarChar(200)
   uagent_device_type   String?      @db.VarChar(200)
   uagent_device_model  String?      @db.VarChar(200)
-  last_seen            Int
   created              Int
   expires              Int
 
   @@index([member_id])
+}
+
+model core_sessions_devices {
+  id        String       @id @unique @default(uuid())
+  member    core_members @relation("core_sessions_devices_member", references: [id], fields: [member_id], onDelete: Cascade)
+  member_id String
+  last_seen Int
 }
 
 model core_attachments {

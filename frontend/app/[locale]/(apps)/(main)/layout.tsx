@@ -1,5 +1,5 @@
 import { lazy, type LazyExoticComponent, type ReactNode } from 'react';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { isRedirectError } from 'next/dist/client/components/redirect';
 
 import { CONFIG } from '@/config';
@@ -25,7 +25,8 @@ const getData = async () => {
   >({
     query: Core_Sessions__Authorization,
     headers: {
-      Cookie: cookies().toString()
+      Cookie: cookies().toString(),
+      ['user-agent']: headers().get('user-agent') ?? 'node'
     }
   });
 
