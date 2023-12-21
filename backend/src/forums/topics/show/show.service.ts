@@ -24,19 +24,21 @@ export class ShowTopicsForumsService {
         { id: ids ? { in: ids } : undefined },
         {
           OR: [
-            {
-              forum: {
-                permissions: {
-                  some: {
-                    group_id: user.group.id,
-                    can_read: true
+            user
+              ? {
+                  forum: {
+                    permissions: {
+                      some: {
+                        group_id: user.group.id,
+                        can_view: true
+                      }
+                    }
                   }
                 }
-              }
-            },
+              : {},
             {
               forum: {
-                can_all_read: true
+                can_all_view: true
               }
             }
           ]

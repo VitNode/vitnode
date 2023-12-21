@@ -8,6 +8,7 @@ import {
   type Core_Languages__MiddlewareQuery,
   type Core_Languages__MiddlewareQueryVariables
 } from '@/graphql/hooks';
+import { InternalErrorView } from '@/admin/global/internal-error-view';
 
 const getData = async () => {
   const { data } = await fetcher<
@@ -28,7 +29,11 @@ interface Props {
 }
 
 export default async function LocaleLayout({ children }: Props) {
-  const data = await getData();
+  try {
+    const data = await getData();
 
-  return <LanguageProvider data={data}>{children}</LanguageProvider>;
+    return <LanguageProvider data={data}>{children}</LanguageProvider>;
+  } catch (e) {
+    return <InternalErrorView />;
+  }
 }
