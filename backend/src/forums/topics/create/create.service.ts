@@ -7,6 +7,7 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { NotFountError } from '@/utils/errors/not-found';
 import { currentDate } from '@/functions/date';
 import { User } from '@/utils/decorators/user.decorator';
+import { Ctx } from '@/types/context.type';
 
 @Injectable()
 export class CreateForumTopicsService {
@@ -14,7 +15,8 @@ export class CreateForumTopicsService {
 
   async create(
     { id }: User,
-    { content, forum_id, title }: CreateForumTopicsArgs
+    { content, forum_id, title }: CreateForumTopicsArgs,
+    { req }: Ctx
   ): Promise<ShowTopicsForums> {
     const forum = await this.prisma.forum_forums.findUnique({
       where: {
@@ -28,6 +30,7 @@ export class CreateForumTopicsService {
 
     const topic = await this.prisma.forum_topics.create({
       data: {
+        ip_address: req.ip,
         forum: {
           connect: {
             id: forum_id

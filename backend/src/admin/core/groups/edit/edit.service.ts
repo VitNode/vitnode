@@ -22,7 +22,7 @@ export class EditAdminGroupsService {
       throw new NotFountError('Group');
     }
 
-    const groupNames = await this.prisma.core_groups_languages.findMany({
+    const groupNames = await this.prisma.core_groups_names.findMany({
       where: {
         group_id: id
       }
@@ -37,7 +37,7 @@ export class EditAdminGroupsService {
           // If value is empty, do nothing
           if (!nameExist.value.trim()) return;
 
-          return await this.prisma.core_groups_languages.update({
+          return await this.prisma.core_groups_names.update({
             where: {
               id: nameExist.id
             },
@@ -45,7 +45,7 @@ export class EditAdminGroupsService {
           });
         }
 
-        return await this.prisma.core_groups_languages.create({
+        return await this.prisma.core_groups_names.create({
           data: {
             ...item,
             group_id: id
@@ -60,7 +60,7 @@ export class EditAdminGroupsService {
         const nameExist = updatedName.find(name => name.id === item.id);
         if (nameExist) return;
 
-        await this.prisma.core_groups_languages.delete({
+        await this.prisma.core_groups_names.delete({
           where: {
             id: item.id
           }

@@ -102,14 +102,11 @@ export const ContentTableUsersMembersAdmin = () => {
 
   if (isLoading) return <Loader />;
   if (isError) return <ErrorAdminView />;
-  if (!data || data.core_members__admin__show.edges.length === 0) {
-    return <div className="text-center">{tCore('no_results')}</div>;
-  }
 
   return (
     <DataTable
-      data={data.core_members__admin__show.edges}
-      pageInfo={data.core_members__admin__show.pageInfo}
+      data={data?.core_members__admin__show.edges ?? []}
+      pageInfo={data?.core_members__admin__show.pageInfo}
       defaultPageSize={defaultPageSize}
       columns={columns}
       isFetching={isFetching}

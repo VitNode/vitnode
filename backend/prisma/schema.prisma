@@ -19,7 +19,7 @@ model core_languages {
   enabled   Boolean @default(true)
   created   Int
 
-  groups                    core_groups_languages[]    @relation("core_groups_languages_language")
+  groups                    core_groups_names[]        @relation("core_groups_names_language")
   forums_forums_names       forum_forums_names[]       @relation("forums_forums_names_language")
   forums_forums_description forum_forums_description[] @relation("forums_forums_description_language")
   forum_topics_title        forum_topics_title[]       @relation("forum_topics_title_language")
@@ -54,28 +54,28 @@ model core_members {
 }
 
 model core_groups {
-  id        String                  @id @unique @default(uuid())
-  name      core_groups_languages[] @relation("core_groups_languages_group")
+  id        String              @id @unique @default(uuid())
+  name      core_groups_names[] @relation("core_groups_names_group")
   created   Int
   updated   Int
-  protected Boolean                 @default(false)
-  default   Boolean                 @default(false)
-  root      Boolean                 @default(false)
-  guest     Boolean                 @default(false)
+  protected Boolean             @default(false)
+  default   Boolean             @default(false)
+  root      Boolean             @default(false)
+  guest     Boolean             @default(false)
 
   members            core_members[]             @relation("core_members_group")
   admin_permissions  core_admin_permissions[]   @relation("core_admin_permissions_group")
   forums_permissions forum_forums_permissions[] @relation("forums_forums_permissions_group")
 }
 
-model core_groups_languages {
+model core_groups_names {
   id          String @id @unique @default(uuid())
   id_language String @db.VarChar(32)
   group_id    String
   value       String @db.VarChar(255)
 
-  group    core_groups    @relation("core_groups_languages_group", references: [id], fields: [group_id], onDelete: Cascade)
-  language core_languages @relation("core_groups_languages_language", references: [id], fields: [id_language], onDelete: Cascade)
+  group    core_groups    @relation("core_groups_names_group", references: [id], fields: [group_id], onDelete: Cascade)
+  language core_languages @relation("core_groups_names_language", references: [id], fields: [id_language], onDelete: Cascade)
 
   @@index([id_language])
 }
@@ -210,14 +210,15 @@ model forum_forums_permissions {
 }
 
 model forum_topics {
-  id        String       @id @unique @default(uuid())
-  forum     forum_forums @relation("forum_topics_forum", references: [id], fields: [forum_id], onDelete: Cascade)
-  forum_id  String
-  views     Int          @default(0)
-  author    core_members @relation("forum_topics_author", references: [id], fields: [author_id], onDelete: Cascade)
-  author_id String
-  created   Int
-  updated   Int?
+  id         String       @id @unique @default(uuid())
+  forum      forum_forums @relation("forum_topics_forum", references: [id], fields: [forum_id], onDelete: Cascade)
+  forum_id   String
+  views      Int          @default(0)
+  author     core_members @relation("forum_topics_author", references: [id], fields: [author_id], onDelete: Cascade)
+  author_id  String
+  ip_address String       @db.VarChar(46)
+  created    Int
+  updated    Int?
 
   title   forum_topics_title[]   @relation("forum_topics_title_topic")
   content forum_topics_content[] @relation("forum_topics_content_topic")
@@ -247,13 +248,14 @@ model forum_topics_content {
 }
 
 model forum_posts {
-  id        String       @id @unique @default(uuid())
-  topic     forum_topics @relation("forum_posts_topic", references: [id], fields: [topic_id], onDelete: Cascade)
-  topic_id  String
-  author    core_members @relation("forum_posts_author", references: [id], fields: [author_id], onDelete: Cascade)
-  author_id String
-  created   Int
-  updated   Int?
+  id         String       @id @unique @default(uuid())
+  topic      forum_topics @relation("forum_posts_topic", references: [id], fields: [topic_id], onDelete: Cascade)
+  topic_id   String
+  author     core_members @relation("forum_posts_author", references: [id], fields: [author_id], onDelete: Cascade)
+  author_id  String
+  ip_address String       @db.VarChar(46)
+  created    Int
+  updated    Int?
 
   content forum_posts_content[] @relation("forum_posts_content_post")
 }
