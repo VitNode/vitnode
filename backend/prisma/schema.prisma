@@ -198,15 +198,15 @@ model forum_forums_description {
 }
 
 model forum_forums_permissions {
-  id        String       @id @unique @default(uuid())
-  forum     forum_forums @relation("forums_forums_permissions_forum", references: [id], fields: [forum_id], onDelete: Cascade)
-  forum_id  String
-  group     core_groups  @relation("forums_forums_permissions_group", references: [id], fields: [group_id], onDelete: Cascade)
-  group_id  String
-  can_view  Boolean      @default(false)
-  can_read  Boolean      @default(false)
-  can_reply Boolean      @default(false)
-  can_start Boolean      @default(false)
+  id         String       @id @unique @default(uuid())
+  forum      forum_forums @relation("forums_forums_permissions_forum", references: [id], fields: [forum_id], onDelete: Cascade)
+  forum_id   String
+  group      core_groups  @relation("forums_forums_permissions_group", references: [id], fields: [group_id], onDelete: Cascade)
+  group_id   String
+  can_view   Boolean      @default(false)
+  can_read   Boolean      @default(false)
+  can_reply  Boolean      @default(false)
+  can_create Boolean      @default(false)
 }
 
 model forum_topics {

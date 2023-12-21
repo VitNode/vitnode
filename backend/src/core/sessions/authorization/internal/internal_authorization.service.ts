@@ -28,7 +28,17 @@ export class InternalAuthorizationCoreSessionsService {
         login_token
       },
       include: {
-        member: true
+        member: {
+          include: {
+            group: {
+              include: {
+                name: true
+              }
+            },
+            avatar: true,
+            cover: true
+          }
+        }
       }
     });
 

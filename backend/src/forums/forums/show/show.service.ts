@@ -8,18 +8,16 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { outputPagination } from '@/functions/database/pagination/outputPagination';
 import { inputPagination } from '@/functions/database/pagination/inputPagination';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+import { User } from '@/utils/decorators/user.decorator';
 
 @Injectable()
 export class ShowForumForumsService {
   constructor(private prisma: PrismaService) {}
 
-  async show({
-    cursor,
-    first,
-    ids,
-    last,
-    parent_id
-  }: ShowForumForumsArgs): Promise<ShowForumForumsObj> {
+  async show(
+    { cursor, first, ids, last, parent_id }: ShowForumForumsArgs,
+    user?: User
+  ): Promise<ShowForumForumsObj> {
     const whereWithoutIds: Prisma.forum_forumsWhereInput = {
       parent_id: parent_id
         ? parent_id
@@ -34,7 +32,27 @@ export class ShowForumForumsService {
       }
     };
 
-    const where = ids?.length ? whereWithIds : whereWithoutIds;
+    const where: Prisma.forum_forumsWhereInput = {
+      AND: [
+        ids?.length ? whereWithIds : whereWithoutIds,
+        {
+          OR: [
+            user
+              ? {
+                  permissions: {
+                    some: {
+                      AND: [{ group_id: user.group.id }, { can_view: true }]
+                    }
+                  }
+                }
+              : {},
+            {
+              can_all_view: true
+            }
+          ]
+        }
+      ]
+    };
 
     const [edges, totalCount] = await this.prisma.$transaction([
       this.prisma.forum_forums.findMany({

@@ -15,7 +15,8 @@ export class CreateForumForumsService {
   async create({
     description,
     name,
-    parent_id
+    parent_id,
+    permissions
   }: CreateForumForumsArgs): Promise<ShowForumForumsWithParent> {
     if (parent_id) {
       const parent = await this.prisma.forum_forums.findUnique({
@@ -57,7 +58,22 @@ export class CreateForumForumsService {
                 id: parent_id
               }
             }
-          : undefined
+          : undefined,
+        can_all_create: permissions.can_all_create,
+        can_all_read: permissions.can_all_read,
+        can_all_reply: permissions.can_all_reply,
+        can_all_view: permissions.can_all_view,
+        permissions: {
+          createMany: {
+            data: permissions.groups.map(group => ({
+              group_id: group.id,
+              can_create: group.create,
+              can_read: group.read,
+              can_reply: group.reply,
+              can_view: group.view
+            }))
+          }
+        }
       },
       include: {
         name: true,

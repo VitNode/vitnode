@@ -8,20 +8,40 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { outputPagination } from '@/functions/database/pagination/outputPagination';
 import { inputPagination } from '@/functions/database/pagination/inputPagination';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+import { User } from '../../../../utils/decorators/user.decorator';
 
 @Injectable()
 export class ShowTopicsForumsService {
   constructor(private prisma: PrismaService) {}
 
-  async show({
-    cursor,
-    first,
-    forum_id,
-    ids,
-    last
-  }: ShowTopicsForumsArgs): Promise<ShowTopicsForumsObj> {
+  async show(
+    { cursor, first, forum_id, ids, last }: ShowTopicsForumsArgs,
+    user?: User
+  ): Promise<ShowTopicsForumsObj> {
     const where: Prisma.forum_topicsWhereInput = {
-      AND: [{ forum_id }, { id: ids ? { in: ids } : undefined }]
+      AND: [
+        { forum_id },
+        { id: ids ? { in: ids } : undefined },
+        {
+          OR: [
+            {
+              forum: {
+                permissions: {
+                  some: {
+                    group_id: user.group.id,
+                    can_read: true
+                  }
+                }
+              }
+            },
+            {
+              forum: {
+                can_all_read: true
+              }
+            }
+          ]
+        }
+      ]
     };
 
     const [edges, totalCount] = await this.prisma.$transaction([
