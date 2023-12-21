@@ -109,6 +109,7 @@
     },
     "forms": {
       "empty": "To pole jest wymagane.",
+      "max_length": "To pole może zawierać maksymalnie {length} znaków.",
       "files": {
         "title": "Kliknij tutaj, aby przesłać lub przeciągnij i upuść tutaj",
         "drop_here": "Upuść tutaj, aby przesłać",
@@ -155,7 +156,8 @@
           "already_exists": "Ten email jest już zajęty."
         },
         "password": {
-          "label": "Hasło"
+          "label": "Hasło",
+          "invalid": "Wymagane co najmniej 8 znaków, co najmniej jedna wielka litera, jedna mała litera, jedna cyfra i jeden znak specjalny."
         },
         "terms": {
           "label": "Akceptuję regulamin serwisu.",

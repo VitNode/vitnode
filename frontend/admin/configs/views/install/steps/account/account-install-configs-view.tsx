@@ -16,6 +16,7 @@ import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Progress } from '@/components/ui/progress';
 
 export const AccountInstallConfigsView = () => {
   const t = useTranslations('core');
@@ -59,15 +60,39 @@ export const AccountInstallConfigsView = () => {
           <FormField
             control={form.control}
             name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('sign_up.form.password.label')}</FormLabel>
-                <FormControl>
-                  <Input {...field} type="password" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            render={({ field, fieldState }) => {
+              const value = field.value;
+              const regexArray = [
+                /^.{8,}$/, // Min 8 characters
+                /[a-z]/, // Min 1 lowercase
+                /[A-Z]/, // Min 1 uppercase
+                /\d/, // Min 1 digit
+                /\W|_/ // Min 1 special character
+              ];
+
+              const passRegexPassword = regexArray.reduce((acc, regex) => {
+                return acc + Number(regex.test(value));
+              }, 0);
+
+              return (
+                <FormItem>
+                  <FormLabel>{t('sign_up.form.password.label')}</FormLabel>
+                  <FormControl>
+                    <Input {...field} type="password" />
+                  </FormControl>
+                  {(fieldState.invalid || value.length > 0) && (
+                    <div className="mt-1">
+                      <div className="flex justify-between text-xs font-semibold mb-2">
+                        <span>Weak</span>
+                        <span>Strong</span>
+                      </div>
+                      <Progress value={(100 / regexArray.length) * passRegexPassword} />
+                    </div>
+                  )}
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
           />
 
           <FormField

@@ -3,9 +3,9 @@ import { useTextLang } from '@/hooks/core/use-text-lang';
 import { ActionsForumsForum } from './actions/actions';
 import type { Forum_Forums__Show_ItemQuery } from '@/graphql/hooks';
 import { TopicsListForum } from './topics-list/topics-list';
+import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
 
 import { ItemForum } from '../../item/item-forum';
-import { DescriptionItemForum } from '../../item/description';
 
 interface Props {
   data: Forum_Forums__Show_ItemQuery;
@@ -25,7 +25,11 @@ export const ForumForumView = ({ data: { forum_forums__show, forum_topics__show 
           <CardTitle>{convertText(forumData.name)}</CardTitle>
 
           {forumData.description.length > 0 && (
-            <DescriptionItemForum id={forumData.id} description={forumData.description} />
+            <ReadOnlyEditor
+              id={`${forumData.id}_description`}
+              className="text-muted-foreground text-sm [&_p]:m-0"
+              value={forumData.description}
+            />
           )}
         </CardHeader>
 
