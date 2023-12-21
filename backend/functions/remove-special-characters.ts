@@ -1,6 +1,5 @@
 export const removeSpecialCharacters = (text: string) =>
   text
-    .toLowerCase()
     .normalize('NFD')
     .replace(/\p{Diacritic}/gu, '')
     .replace(/\s/g, '-')

@@ -17,6 +17,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
+import { removeSpecialCharacters } from '@/functions/remove-special-characters';
 
 export const AccountInstallConfigsView = () => {
   const t = useTranslations('core');
@@ -38,6 +39,15 @@ export const AccountInstallConfigsView = () => {
                   <Input {...field} />
                 </FormControl>
                 <FormDescription>{t('sign_up.form.name.desc')}</FormDescription>
+                {field.value.length > 0 && (
+                  <FormDescription>
+                    {t.rich('sign_up.form.name.your_id', {
+                      id: () => (
+                        <span className="font-medium">{removeSpecialCharacters(field.value)}</span>
+                      )
+                    })}
+                  </FormDescription>
+                )}
                 <FormMessage />
               </FormItem>
             )}

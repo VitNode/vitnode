@@ -149,7 +149,8 @@
           "label": "Nickname",
           "desc": "You can use letters, numbers and special characters: @.-_.",
           "already_exists": "This nickname is already in use.",
-          "invalid": "This nickname is invalid."
+          "invalid": "This nickname is invalid.",
+          "your_id": "Your ID: <id></id>"
         },
         "email": {
           "label": "Email",

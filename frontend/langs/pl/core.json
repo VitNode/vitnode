@@ -149,7 +149,8 @@
           "label": "Nick",
           "desc": "Możesz użyć liter, cyfr i znaków specjalnych: @.-_.",
           "already_exists": "Ten nick jest już zajęty.",
-          "invalid": "Ten nick jest nieprawidłowy."
+          "invalid": "Ten nick jest nieprawidłowy.",
+          "your_id": "Twoje ID: <id></id>"
         },
         "email": {
           "label": "Email",
