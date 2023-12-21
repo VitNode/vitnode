@@ -23,7 +23,7 @@ export class ShowCoreMembersService {
     sortBy
   }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
     const where: Prisma.core_membersWhereInput = findByIds
-      ? { id: { in: findByIds } }
+      ? { id: { in: findByIds, mode: 'insensitive' } }
       : {
           OR: [
             {

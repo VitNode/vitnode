@@ -158,7 +158,7 @@
         },
         "password": {
           "label": "Hasło",
-          "invalid": "Wymagane co najmniej 8 znaków, co najmniej jedna wielka litera, jedna mała litera, jedna cyfra i jeden znak specjalny."
+          "invalid": "Min. 8 znaków, mała i wielka litera, cyfra oraz znak specjalny."
         },
         "terms": {
           "label": "Akceptuję regulamin serwisu.",

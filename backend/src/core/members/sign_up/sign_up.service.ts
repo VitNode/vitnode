@@ -65,9 +65,12 @@ export class SignUpCoreMembersService {
     }
 
     const convertToNameSEO = removeSpecialCharacters(name);
-    const checkNameSEO = await this.prisma.core_members.findUnique({
+    const checkNameSEO = await this.prisma.core_members.findFirst({
       where: {
-        id: convertToNameSEO
+        id: {
+          equals: convertToNameSEO,
+          mode: 'insensitive'
+        }
       }
     });
 

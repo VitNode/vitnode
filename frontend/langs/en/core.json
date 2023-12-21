@@ -158,7 +158,7 @@
         },
         "password": {
           "label": "Password",
-          "invalid": "Required least 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character."
+          "invalid": "Min 8 characters, lowercase uppercase letter, number and special character."
         },
         "terms": {
           "label": "Accept terms and conditions",
