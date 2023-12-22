@@ -3,6 +3,7 @@
     "forum": "Forum",
     "by": "Przez <user></user>, <date></date>",
     "topics": {
+      "not_found": "Nie znaleziono tematów w tym forum.",
       "username_format": "<user></user> <date></date>",
       "user_wrote_in_forum": "<user></user> napisał w <forum></forum>",
       "create": {
