@@ -6,6 +6,12 @@
       "not_found": "Nie znaleziono tematów w tym forum.",
       "username_format": "<user></user> <date></date>",
       "user_wrote_in_forum": "<user></user> napisał w <forum></forum>",
+      "open": "Otwarty",
+      "actions": {
+        "title": "Akcje",
+        "lock": "Zablokuj",
+        "unlock": "Odblokuj"
+      },
       "create": {
         "title": "Stwórz temat",
         "form": {

@@ -44,11 +44,11 @@ export const AuthUserBar = () => {
 
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={() => push(`/profile/${id}`)}>
-            <User className="mr-2 h-4 w-4" />
+            <User />
             <span>{t('user-bar.my_profile')}</span>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => push('/settings')}>
-            <Settings className="mr-2 h-4 w-4" />
+            <Settings />
             <span>{t('user-bar.settings')}</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
@@ -59,11 +59,11 @@ export const AuthUserBar = () => {
 
             <DropdownMenuGroup>
               <DropdownMenuItem onClick={() => push('/modcp')}>
-                <Shield className="mr-2 h-4 w-4" />
+                <Shield />
                 <span>{t('user-bar.mod_cp')}</span>
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => window.open('/admin', '_blank')}>
-                <KeyRound className="mr-2 h-4 w-4" />
+                <KeyRound />
                 <span>{t('user-bar.admin_cp')}</span>
               </DropdownMenuItem>
             </DropdownMenuGroup>
@@ -74,7 +74,7 @@ export const AuthUserBar = () => {
 
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={async () => await onSubmit()}>
-            <LogOut className="mr-2 h-4 w-4" />
+            <LogOut />
             <span>{t('user-bar.log_out')}</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>

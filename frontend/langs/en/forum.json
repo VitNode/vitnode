@@ -7,6 +7,12 @@
       "not_found": "No topics found in this forum.",
       "username_format": "<user></user> <date></date>",
       "user_wrote_in_forum": "<user></user> wrote in <forum></forum>",
+      "open": "Open",
+      "actions": {
+        "title": "Actions",
+        "lock": "Lock",
+        "unlock": "Unlock"
+      },
       "create": {
         "title": "Create Topic",
         "form": {
