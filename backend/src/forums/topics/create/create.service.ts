@@ -8,21 +8,33 @@ import { NotFountError } from '@/utils/errors/not-found';
 import { currentDate } from '@/functions/date';
 import { User } from '@/utils/decorators/user.decorator';
 import { Ctx } from '@/types/context.type';
+import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 
 @Injectable()
 export class CreateForumTopicsService {
   constructor(private prisma: PrismaService) {}
 
   async create(
-    { id }: User,
+    { group, id }: User,
     { content, forum_id, title }: CreateForumTopicsArgs,
     { req }: Ctx
   ): Promise<ShowTopicsForums> {
     const forum = await this.prisma.forum_forums.findUnique({
       where: {
         id: forum_id
+      },
+      include: {
+        permissions: {
+          where: {
+            group_id: group.id
+          }
+        }
       }
     });
+
+    if (!(forum.permissions.at(0)?.can_create || forum.can_all_create)) {
+      throw new AccessDeniedError();
+    }
 
     if (!forum) {
       throw new NotFountError('Forum');

@@ -25,18 +25,22 @@ export const ForumForumView = ({ data: { forum_forums__show, forum_topics__show 
   return (
     <>
       <Card className="mb-8">
-        <CardHeader>
-          <HeaderContent h1={convertText(forumData.name)} className="m-0">
-            <ActionsForumsForum />
+        <CardHeader className="py-4">
+          <HeaderContent
+            h1={convertText(forumData.name)}
+            desc={
+              forumData.description.length > 0 && (
+                <ReadOnlyEditor
+                  id={`${forumData.id}_description`}
+                  className="[&_p]:m-0"
+                  value={forumData.description}
+                />
+              )
+            }
+            className="m-0"
+          >
+            <ActionsForumsForum permissions={forumData.permissions} />
           </HeaderContent>
-
-          {forumData.description.length > 0 && (
-            <ReadOnlyEditor
-              id={`${forumData.id}_description`}
-              className="text-muted-foreground text-sm [&_p]:m-0"
-              value={forumData.description}
-            />
-          )}
         </CardHeader>
 
         {forumData.children && forumData.children.length > 0 && (
@@ -55,7 +59,7 @@ export const ForumForumView = ({ data: { forum_forums__show, forum_topics__show 
           ) : (
             <div className="p-5 flex flex-col items-center justify-center gap-4 text-center">
               <span>{t('not_found')}</span>
-              <ActionsForumsForum />
+              <ActionsForumsForum permissions={forumData.permissions} />
             </div>
           )}
         </CardContent>

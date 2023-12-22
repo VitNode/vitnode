@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
 import { CreateForumForumsArgs } from './dto/create.args';
+import { CreateForumForumsObj } from './dto/create.obj';
 
-import { ShowForumForumsWithParent } from '../../../../forums/forums/show/dto/show.obj';
 import { PrismaService } from '@/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';
 import { currentDate } from '@/functions/date';
@@ -17,7 +17,7 @@ export class CreateForumForumsService {
     name,
     parent_id,
     permissions
-  }: CreateForumForumsArgs): Promise<ShowForumForumsWithParent> {
+  }: CreateForumForumsArgs): Promise<CreateForumForumsObj> {
     if (parent_id) {
       const parent = await this.prisma.forum_forums.findUnique({
         where: {

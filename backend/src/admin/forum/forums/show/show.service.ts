@@ -1,17 +1,23 @@
 import { Injectable } from '@nestjs/common';
 
+import { ShowForumForumsAdminObj } from './dto/show.obj';
+
 import { PrismaService } from '@/prisma/prisma.service';
 import { outputPagination } from '@/functions/database/pagination/outputPagination';
 import { inputPagination } from '@/functions/database/pagination/inputPagination';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 import { ShowForumForumsArgs } from '../../../../forums/forums/show/dto/show.args';
-import { ShowForumForumsObj } from '../../../../forums/forums/show/dto/show.obj';
 
 @Injectable()
 export class ShowForumForumsAdminService {
   constructor(private prisma: PrismaService) {}
 
-  async show({ cursor, first, last, parent_id }: ShowForumForumsArgs): Promise<ShowForumForumsObj> {
+  async show({
+    cursor,
+    first,
+    last,
+    parent_id
+  }: ShowForumForumsArgs): Promise<ShowForumForumsAdminObj> {
     const where = {
       parent_id: parent_id
         ? parent_id

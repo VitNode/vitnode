@@ -207,6 +207,7 @@
       "no_connection_api": "No connection to the API",
       "access_denied": "Access denied",
       "internal_server_error": "Internal server error",
+      "403": "Access denied",
       "404": "Page not found",
       "500": "Internal server error",
       "actions": {

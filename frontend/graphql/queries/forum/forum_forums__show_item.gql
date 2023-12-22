@@ -28,6 +28,9 @@ query Forum_forums__show_item($cursor: String, $first: Int, $last: Int, $forumId
           value
         }
       }
+      permissions {
+        can_create
+      }
     }
   }
   forum_topics__show(cursor: $cursor, first: $first, last: $last, forum_id: $forumId) {

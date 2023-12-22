@@ -37,14 +37,14 @@ export class ShowTopicsForumsService {
                           }
                         })
                       ).id,
-                    can_view: true
+                    can_read: true
                   }
                 }
               }
             },
             {
               forum: {
-                can_all_view: true
+                can_all_read: true
               }
             }
           ]

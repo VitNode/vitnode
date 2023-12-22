@@ -9,7 +9,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { cx } from '@/functions/classnames';
 
 interface Props {
-  code: '404' | '500' | string;
+  code: '403' | '404' | '500' | string;
   className?: string;
 }
 
