@@ -219,6 +219,7 @@ model forum_topics {
   ip_address String       @db.VarChar(46)
   created    Int
   updated    Int?
+  locked     Boolean      @default(false)
 
   title   forum_topics_title[]   @relation("forum_topics_title_topic")
   content forum_topics_content[] @relation("forum_topics_content_topic")

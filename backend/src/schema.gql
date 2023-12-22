@@ -301,6 +301,7 @@ type ShowTopicsForums {
   created: Int!
   forum: ForumTopicsForums!
   id: String!
+  locked: Boolean!
   title: [TextLanguage!]!
   updated: Int
 }

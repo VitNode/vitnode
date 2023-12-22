@@ -29,7 +29,7 @@ export const TopicView = ({ data: dataApi }: Props) => {
   const data = edges.at(0);
 
   if (!data) return null;
-  const { author, content, forum, id, title } = data;
+  const { author, content, forum, id, locked, title } = data;
 
   return (
     <div className="flex flex-col md:flex-row gap-5">
@@ -37,7 +37,7 @@ export const TopicView = ({ data: dataApi }: Props) => {
         <div className="flex flex-col gap-1">
           <div className="flex gap-4 items-center sm:flex-row flex-col">
             <div className="order-1 sm:order-2">
-              <ActionsTopic />
+              <ActionsTopic state={{ locked }} />
             </div>
 
             <h1 className="text-2xl font-semibold tracking-tight leading-tight sm:order-1 order-2 flex-1">
@@ -46,9 +46,11 @@ export const TopicView = ({ data: dataApi }: Props) => {
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
-            <TitleIconTopic>
-              <BookOpen /> {t('open')}
-            </TitleIconTopic>
+            {!locked && (
+              <TitleIconTopic>
+                <BookOpen /> {t('open')}
+              </TitleIconTopic>
+            )}
 
             <span>
               {t.rich('user_wrote_in_forum', {

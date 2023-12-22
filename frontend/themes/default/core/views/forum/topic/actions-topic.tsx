@@ -11,7 +11,13 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 
-export const ActionsTopic = () => {
+interface Props {
+  state: {
+    locked: boolean;
+  };
+}
+
+export const ActionsTopic = ({ state }: Props) => {
   const t = useTranslations('forum.topics.actions');
 
   return (
@@ -23,12 +29,15 @@ export const ActionsTopic = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
-        <DropdownMenuItem>
-          <Lock /> {t('lock')}
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Unlock /> {t('unlock')}
-        </DropdownMenuItem>
+        {state.locked ? (
+          <DropdownMenuItem>
+            <Unlock /> {t('unlock')}
+          </DropdownMenuItem>
+        ) : (
+          <DropdownMenuItem>
+            <Lock /> {t('lock')}
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

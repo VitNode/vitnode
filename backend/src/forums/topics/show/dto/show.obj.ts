@@ -30,6 +30,9 @@ export class ShowTopicsForums {
   @Field(() => Int)
   created: number;
 
+  @Field(() => Boolean)
+  locked: boolean;
+
   @Field(() => User)
   author: User;
 
