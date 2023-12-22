@@ -37,15 +37,22 @@ export class ShowForumForumsService {
         ids?.length ? whereWithIds : whereWithoutIds,
         {
           OR: [
-            user
-              ? {
-                  permissions: {
-                    some: {
-                      AND: [{ group_id: user.group.id }, { can_view: true }]
-                    }
-                  }
+            {
+              permissions: {
+                some: {
+                  group_id:
+                    user?.group.id ??
+                    (
+                      await this.prisma.core_groups.findFirst({
+                        where: {
+                          guest: true
+                        }
+                      })
+                    ).id,
+                  can_view: true
                 }
-              : {},
+              }
+            },
             {
               can_all_view: true
             }

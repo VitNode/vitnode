@@ -8,7 +8,7 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { outputPagination } from '@/functions/database/pagination/outputPagination';
 import { inputPagination } from '@/functions/database/pagination/inputPagination';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
-import { User } from '../../../../utils/decorators/user.decorator';
+import { User } from '@/utils/decorators/user.decorator';
 
 @Injectable()
 export class ShowTopicsForumsService {
@@ -24,18 +24,24 @@ export class ShowTopicsForumsService {
         { id: ids ? { in: ids } : undefined },
         {
           OR: [
-            user
-              ? {
-                  forum: {
-                    permissions: {
-                      some: {
-                        group_id: user.group.id,
-                        can_view: true
-                      }
-                    }
+            {
+              forum: {
+                permissions: {
+                  some: {
+                    group_id:
+                      user?.group.id ??
+                      (
+                        await this.prisma.core_groups.findFirst({
+                          where: {
+                            guest: true
+                          }
+                        })
+                      ).id,
+                    can_view: true
                   }
                 }
-              : {},
+              }
+            },
             {
               forum: {
                 can_all_view: true
