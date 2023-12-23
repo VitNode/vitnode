@@ -6,7 +6,7 @@ import type {
   Forum_Forums__Admin__ShowWithProjection
 } from './types';
 import type { Forum_Forums__Admin__ShowQueryItem } from '../hooks/use-forum-forums-admin-api';
-import type { ChildrenShowForumForums } from '@/graphql/hooks';
+import type { ChildrenShowForumForums, ShowForumForumsAdmin } from '@/graphql/hooks';
 
 const getDragDepth = ({
   indentationWidth,
@@ -115,11 +115,7 @@ export const flattenTree = (
     return [
       ...acc,
       { ...item, parentId, depth, index },
-      ...flattenTree(
-        (item.children ?? []) as Forum_Forums__Admin__ShowQueryItem[],
-        item.id,
-        depth + 1
-      )
+      ...flattenTree((item.children ?? []) as ShowForumForumsAdmin[], item.id, depth + 1)
     ];
   }, []);
 };

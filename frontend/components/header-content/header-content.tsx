@@ -5,7 +5,7 @@ import { cx } from '@/functions/classnames';
 interface HeaderContentProps {
   children?: ReactNode;
   className?: string;
-  desc?: string;
+  desc?: ReactNode;
 }
 
 interface HeaderContentH1Props extends HeaderContentProps {
@@ -26,14 +26,18 @@ export const HeaderContent = ({
   h2
 }: HeaderContentH1Props | HeaderContentH2Props) => {
   return (
-    <div className={cx('mb-5 flex gap-4 flex-col sm:flex-row', className)}>
-      <div className="space-y-1.5 text-center sm:text-left">
+    <div className={cx('mb-5 flex gap-4 flex-col sm:flex-row items-center', className)}>
+      <div className="space-y-1 text-center sm:text-left">
         {h1 ? (
           <h1 className="font-semibold tracking-tight text-2xl">{h1}</h1>
         ) : (
           <h2 className="font-semibold tracking-tight text-xl">{h2}</h2>
         )}
-        {desc && <p className="text-sm text-muted-foreground">{desc}</p>}
+        {desc && (
+          <div className="text-sm text-muted-foreground [&_p]:text-center sm:[&_p]:text-left">
+            {desc}
+          </div>
+        )}
       </div>
 
       {children && (

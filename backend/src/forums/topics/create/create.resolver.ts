@@ -1,4 +1,4 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
 import { CreateForumTopicsService } from './create.service';
@@ -7,6 +7,7 @@ import { ShowTopicsForums } from '../show/dto/show.obj';
 
 import { AuthGuards } from '@/utils/guards/auth.guards';
 import { CurrentUser, User } from '@/utils/decorators/user.decorator';
+import { Ctx } from '@/types/context.type';
 
 @Resolver()
 export class CreateForumTopicsResolver {
@@ -16,8 +17,9 @@ export class CreateForumTopicsResolver {
   @UseGuards(AuthGuards)
   async forum_topics__create(
     @CurrentUser() user: User,
-    @Args() args: CreateForumTopicsArgs
+    @Args() args: CreateForumTopicsArgs,
+    @Context() context: Ctx
   ): Promise<ShowTopicsForums> {
-    return await this.service.create(user, args);
+    return await this.service.create(user, args, context);
   }
 }

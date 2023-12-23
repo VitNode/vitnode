@@ -17,8 +17,6 @@ interface Props {
 }
 
 export const ReadOnlyEditor = ({ className, id, value }: Props) => {
-  if (value.length === 0) return null;
-
   const initialConfig: InitialConfigType = {
     ...initialConfigEditor,
     namespace: id,

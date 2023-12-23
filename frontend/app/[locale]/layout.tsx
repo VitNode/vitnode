@@ -9,7 +9,8 @@ import { ThemeProvider } from './theme-provider';
 
 const inter = Inter({
   subsets: ['latin'],
-  display: 'swap'
+  display: 'swap',
+  variable: '--font-inter'
 });
 
 interface Props {
@@ -36,7 +37,7 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
   }
 
   return (
-    <html lang={locale} className={inter.className}>
+    <html lang={locale} className={inter.variable}>
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>

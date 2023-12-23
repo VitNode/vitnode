@@ -13,7 +13,8 @@
       "members": {
         "title": "Members",
         "list": "Users",
-        "groups": "Groups"
+        "groups": "Groups",
+        "staff": "Staff"
       },
       "forum": {
         "title": "Forum",

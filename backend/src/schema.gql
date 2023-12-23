@@ -37,6 +37,17 @@ type CoreMiddlewareObj {
   languages: [LanguageCoreMiddlewareObj!]!
 }
 
+type CreateForumForumsObj {
+  _count: ShowForumForumsCount!
+  children: [ChildrenShowForumForums!]
+  created: Int!
+  description: [TextLanguage!]!
+  id: String!
+  name: [TextLanguage!]!
+  parent: ShowForumForums
+  position: Int!
+}
+
 type ForumTopicsForums {
   id: String!
   name: [TextLanguage!]!
@@ -91,7 +102,7 @@ type Mutation {
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
   forum_forums__admin__change_position(id: String!, index_to_move: Int!, parent_id: String): String!
-  forum_forums__admin__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: String, permissions: PermissionsCreateForumForums!): ShowForumForumsWithParent!
+  forum_forums__admin__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: String, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
   forum_topics__create(content: [TextLanguageInput!]!, forum_id: String!, title: [TextLanguageInput!]!): ShowTopicsForums!
 }
 
@@ -112,6 +123,12 @@ input PermissionsCreateForumForums {
   groups: [GroupsPermissionsCreateForumForums!]!
 }
 
+type PermissionsForumForumsCount {
+  can_create: Boolean!
+  can_read: Boolean!
+  can_reply: Boolean!
+}
+
 type Query {
   admin_install__layout: LayoutAdminInstallObj!
   admin_sessions__authorization: AuthorizationAdminSessionsObj!
@@ -121,7 +138,7 @@ type Query {
   core_members__show(cursor: String, findByIds: [String!], first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_middleware: CoreMiddlewareObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
-  forum_forums__admin__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsObj!
+  forum_forums__admin__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsAdminObj!
   forum_forums__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsObj!
   forum_posts__show: String!
   forum_topics__show(cursor: String, first: Int, forum_id: String, ids: [String!], last: Int): ShowTopicsForumsObj!
@@ -241,6 +258,22 @@ type ShowForumForums {
   position: Int!
 }
 
+type ShowForumForumsAdmin {
+  _count: ShowForumForumsCount!
+  children: [ChildrenShowForumForums!]
+  created: Int!
+  description: [TextLanguage!]!
+  id: String!
+  name: [TextLanguage!]!
+  parent: ShowForumForums
+  position: Int!
+}
+
+type ShowForumForumsAdminObj {
+  edges: [ShowForumForumsAdmin!]!
+  pageInfo: PageInfo!
+}
+
 type ShowForumForumsCount {
   children: Int!
 }
@@ -258,6 +291,7 @@ type ShowForumForumsWithParent {
   id: String!
   name: [TextLanguage!]!
   parent: ShowForumForums
+  permissions: PermissionsForumForumsCount!
   position: Int!
 }
 
@@ -267,6 +301,7 @@ type ShowTopicsForums {
   created: Int!
   forum: ForumTopicsForums!
   id: String!
+  locked: Boolean!
   title: [TextLanguage!]!
   updated: Int
 }

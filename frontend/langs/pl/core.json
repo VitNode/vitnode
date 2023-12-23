@@ -109,6 +109,7 @@
     },
     "forms": {
       "empty": "To pole jest wymagane.",
+      "max_length": "To pole może zawierać maksymalnie {length} znaków.",
       "files": {
         "title": "Kliknij tutaj, aby przesłać lub przeciągnij i upuść tutaj",
         "drop_here": "Upuść tutaj, aby przesłać",
@@ -148,14 +149,16 @@
           "label": "Nick",
           "desc": "Możesz użyć liter, cyfr i znaków specjalnych: @.-_.",
           "already_exists": "Ten nick jest już zajęty.",
-          "invalid": "Ten nick jest nieprawidłowy."
+          "invalid": "Ten nick jest nieprawidłowy.",
+          "your_id": "Twoje ID: <id></id>"
         },
         "email": {
           "label": "Email",
           "already_exists": "Ten email jest już zajęty."
         },
         "password": {
-          "label": "Hasło"
+          "label": "Hasło",
+          "invalid": "Min. 8 znaków, mała i wielka litera, cyfra oraz znak specjalny."
         },
         "terms": {
           "label": "Akceptuję regulamin serwisu.",
@@ -204,6 +207,7 @@
       "no_connection_api": "Brak połączenia z API",
       "access_denied": "Brak dostępu",
       "internal_server_error": "Wewnętrzny błąd serwera",
+      "403": "Brak dostępu",
       "404": "Nie znaleziono strony",
       "500": "Wewnętrzny błąd serwera",
       "actions": {

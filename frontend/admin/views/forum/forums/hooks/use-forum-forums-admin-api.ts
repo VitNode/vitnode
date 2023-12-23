@@ -5,13 +5,13 @@ import { APIKeys } from '@/graphql/api-keys';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Forum_Forums__Admin__Show,
-  type ShowForumForumsWithParent,
   type Forum_Forums__Admin__ShowQuery,
-  type Forum_Forums__Admin__ShowQueryVariables
+  type Forum_Forums__Admin__ShowQueryVariables,
+  type ShowForumForumsAdmin
 } from '@/graphql/hooks';
 
 export interface Forum_Forums__Admin__ShowQueryItem
-  extends Omit<ShowForumForumsWithParent, 'parent'> {}
+  extends Omit<ShowForumForumsAdmin, 'parent' | 'permissions'> {}
 
 export const useForumForumsAdminAPI = () => {
   const query = useInfiniteQuery({
@@ -42,7 +42,7 @@ export const useForumForumsAdminAPI = () => {
     }
   });
 
-  const data: Forum_Forums__Admin__ShowQueryItem[] = useMemo(() => {
+  const data: ShowForumForumsAdmin[] = useMemo(() => {
     return query.data?.pages.flatMap(({ forum_forums__admin__show: { edges } }) => edges) ?? [];
   }, [query.data]);
 

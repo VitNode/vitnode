@@ -6,10 +6,10 @@ import { fetcher } from '@/graphql/fetcher';
 import {
   Forum_Forums__Admin__Show,
   type Maybe,
-  type ShowForumForumsWithParent,
   type Forum_Forums__Admin__ShowQuery,
   type Forum_Forums__Admin__ShowQueryVariables,
-  type ChildrenShowForumForums
+  type ChildrenShowForumForums,
+  type ShowForumForumsAdmin
 } from '@/graphql/hooks';
 
 interface Args {
@@ -24,9 +24,9 @@ const updateState = ({
   parentId
 }: {
   data: Forum_Forums__Admin__ShowQuery;
-  edges: ShowForumForumsWithParent[];
+  edges: Omit<ShowForumForumsAdmin, 'permissions'>[];
   parentId: string;
-}): ShowForumForumsWithParent[] => {
+}): Omit<ShowForumForumsAdmin, 'permissions'>[] => {
   return edges.map(edge => {
     if (edge.id === parentId) {
       return {
@@ -42,7 +42,7 @@ const updateState = ({
         ...edge,
         children: updateState({
           parentId,
-          edges: edge.children as unknown as ShowForumForumsWithParent[],
+          edges: edge.children as unknown as ShowForumForumsAdmin[],
           data
         }) as unknown as Maybe<ChildrenShowForumForums[]>
       };

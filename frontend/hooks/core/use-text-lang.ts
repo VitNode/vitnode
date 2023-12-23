@@ -25,7 +25,7 @@ export const useTextLang = () => {
   };
 
   const convertNameToLink = ({ id, name }: { id: string; name: TextLanguage[] }) => {
-    const text = removeSpecialCharacters(convertText(name)).replace(/\//g, '-');
+    const text = removeSpecialCharacters(convertText(name)).replace(/\//g, '-').toLowerCase();
 
     return `${text}-${id}`;
   };

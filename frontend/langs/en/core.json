@@ -109,6 +109,7 @@
     },
     "forms": {
       "empty": "This field is required.",
+      "max_length": "This field must be less than {length} characters.",
       "files": {
         "title": "Click to upload or drag and drop here",
         "drop_here": "Drop here to upload",
@@ -148,14 +149,16 @@
           "label": "Nickname",
           "desc": "You can use letters, numbers and special characters: @.-_.",
           "already_exists": "This nickname is already in use.",
-          "invalid": "This nickname is invalid."
+          "invalid": "This nickname is invalid.",
+          "your_id": "Your ID: <id></id>"
         },
         "email": {
           "label": "Email",
           "already_exists": "This email address is already in use."
         },
         "password": {
-          "label": "Password"
+          "label": "Password",
+          "invalid": "Min 8 characters, lowercase uppercase letter, number and special character."
         },
         "terms": {
           "label": "Accept terms and conditions",
@@ -204,6 +207,7 @@
       "no_connection_api": "No connection to the API",
       "access_denied": "Access denied",
       "internal_server_error": "Internal server error",
+      "403": "Access denied",
       "404": "Page not found",
       "500": "Internal server error",
       "actions": {

@@ -1,11 +1,14 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useTranslations } from 'next-intl';
+
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { ActionsForumsForum } from './actions/actions';
 import type { Forum_Forums__Show_ItemQuery } from '@/graphql/hooks';
 import { TopicsListForum } from './topics-list/topics-list';
+import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
+import { HeaderContent } from '@/components/header-content/header-content';
 
 import { ItemForum } from '../../item/item-forum';
-import { DescriptionItemForum } from '../../item/description';
 
 interface Props {
   data: Forum_Forums__Show_ItemQuery;
@@ -13,6 +16,7 @@ interface Props {
 
 export const ForumForumView = ({ data: { forum_forums__show, forum_topics__show } }: Props) => {
   const { convertText } = useTextLang();
+  const t = useTranslations('forum.topics');
 
   const { edges } = forum_forums__show;
   const forumData = edges.at(0);
@@ -20,17 +24,27 @@ export const ForumForumView = ({ data: { forum_forums__show, forum_topics__show 
 
   return (
     <>
-      <Card>
-        <CardHeader className="border-b">
-          <CardTitle>{convertText(forumData.name)}</CardTitle>
-
-          {forumData.description.length > 0 && (
-            <DescriptionItemForum id={forumData.id} description={forumData.description} />
-          )}
+      <Card className="mb-8">
+        <CardHeader className="py-4">
+          <HeaderContent
+            h1={convertText(forumData.name)}
+            desc={
+              forumData.description.length > 0 && (
+                <ReadOnlyEditor
+                  id={`${forumData.id}_description`}
+                  className="[&_p]:m-0"
+                  value={forumData.description}
+                />
+              )
+            }
+            className="m-0"
+          >
+            <ActionsForumsForum permissions={forumData.permissions} />
+          </HeaderContent>
         </CardHeader>
 
         {forumData.children && forumData.children.length > 0 && (
-          <CardContent className="p-0">
+          <CardContent className="p-0 border-t">
             {forumData.children.map(child => (
               <ItemForum key={child.id} {...child} />
             ))}
@@ -38,15 +52,18 @@ export const ForumForumView = ({ data: { forum_forums__show, forum_topics__show 
         )}
       </Card>
 
-      <ActionsForumsForum />
-
-      {forum_topics__show.edges.length > 0 && (
-        <Card>
-          <CardContent className="p-0">
+      <Card>
+        <CardContent className="p-0">
+          {forum_topics__show.edges.length > 0 ? (
             <TopicsListForum data={forum_topics__show.edges} />
-          </CardContent>
-        </Card>
-      )}
+          ) : (
+            <div className="p-5 flex flex-col items-center justify-center gap-4 text-center">
+              <span>{t('not_found')}</span>
+              <ActionsForumsForum permissions={forumData.permissions} />
+            </div>
+          )}
+        </CardContent>
+      </Card>
     </>
   );
 };

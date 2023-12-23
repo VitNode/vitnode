@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import { ChevronDown, MessagesSquare, MoreHorizontal, Settings } from 'lucide-react';
+import { BookOpen, MessagesSquare, MoreHorizontal } from 'lucide-react';
 
 import { Card, CardContent } from '@/components/ui/card';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
@@ -12,6 +12,8 @@ import { useTextLang } from '@/hooks/core/use-text-lang';
 import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
 import { LinkUser } from '@/components/user/link/link-user';
 import { GroupUser } from '@/components/user/group-user';
+import { ActionsTopic } from './actions-topic';
+import { TitleIconTopic } from './title-icon';
 
 interface Props {
   data: Forum_Topics__ShowQuery;
@@ -27,7 +29,7 @@ export const TopicView = ({ data: dataApi }: Props) => {
   const data = edges.at(0);
 
   if (!data) return null;
-  const { author, content, forum, id, title } = data;
+  const { author, content, forum, id, locked, title } = data;
 
   return (
     <div className="flex flex-col md:flex-row gap-5">
@@ -35,9 +37,7 @@ export const TopicView = ({ data: dataApi }: Props) => {
         <div className="flex flex-col gap-1">
           <div className="flex gap-4 items-center sm:flex-row flex-col">
             <div className="order-1 sm:order-2">
-              <Button variant="outline" size="sm">
-                <Settings /> Actions <ChevronDown />
-              </Button>
+              <ActionsTopic state={{ locked }} />
             </div>
 
             <h1 className="text-2xl font-semibold tracking-tight leading-tight sm:order-1 order-2 flex-1">
@@ -45,18 +45,28 @@ export const TopicView = ({ data: dataApi }: Props) => {
             </h1>
           </div>
 
-          <div>
-            {t.rich('user_wrote_in_forum', {
-              user: () => <LinkUser className="font-semibold" user={author} />,
-              forum: () => (
-                <Link
-                  href={`/forum/${convertNameToLink({ ...forum })}`}
-                  className={badgeVariants()}
-                >
-                  <MessagesSquare /> {convertText(forum.name)}
-                </Link>
-              )
-            })}
+          <div className="flex items-center gap-2 flex-wrap">
+            {!locked && (
+              <TitleIconTopic>
+                <BookOpen /> {t('open')}
+              </TitleIconTopic>
+            )}
+
+            <span>
+              {t.rich('user_wrote_in_forum', {
+                user: () => <LinkUser className="font-semibold" user={author} />,
+                forum: () => (
+                  <Link
+                    href={`/forum/${convertNameToLink({ ...forum })}`}
+                    className={badgeVariants({
+                      className: '[&>svg]:size-3'
+                    })}
+                  >
+                    <MessagesSquare /> {convertText(forum.name)}
+                  </Link>
+                )
+              })}
+            </span>
           </div>
         </div>
 

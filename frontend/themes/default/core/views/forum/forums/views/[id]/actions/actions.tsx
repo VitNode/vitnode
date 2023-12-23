@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Loader } from '@/components/loader/loader';
 import { getUuidFromString } from '@/functions/url';
+import type { PermissionsForumForumsCount } from '@/graphql/hooks';
 
 const CreateTopic = lazy(() =>
   import('../../../actions/create-topic').then(module => ({
@@ -16,9 +17,15 @@ const CreateTopic = lazy(() =>
   }))
 );
 
-export const ActionsForumsForum = () => {
+interface Props {
+  permissions: Pick<PermissionsForumForumsCount, 'can_create'>;
+}
+
+export const ActionsForumsForum = ({ permissions }: Props) => {
   const t = useTranslations('forum.topics.create');
   const { id } = useParams();
+
+  if (!permissions.can_create) return null;
 
   return (
     <Dialog>

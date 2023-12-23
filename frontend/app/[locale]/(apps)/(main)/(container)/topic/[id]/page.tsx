@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
-import { TopicView } from '@/themes/default/core/views/forum/topic/TopicView';
+import { TopicView } from '@/themes/default/core/views/forum/topic/topic-view';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Forum_Topics__Show,

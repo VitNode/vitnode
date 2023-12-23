@@ -29,7 +29,7 @@ model core_groups {
 
 ### Translation table
 
-Create a schema `core_groups_languages` in `schema.prisma` file for translation table.
+Create a schema `core_groups_names` in `schema.prisma` file for translation table.
 The translation table must have:
 
 - `id_language` with type `String` and `@db.VarChar(32)` value,
@@ -37,7 +37,7 @@ The translation table must have:
 - any fields for relation with main table (in our case `group_id`).
 
 ```prisma
-model core_groups_languages {
+model core_groups_names {
   id          String @id @unique @default(uuid())
   id_language String @db.VarChar(32)
   group_id    String
@@ -52,7 +52,7 @@ Add relation to main table. Remember to add `@relation` and `@relation` name.
 ```prisma
 model core_groups {
   id        String                  @id @unique @default(uuid())
-  name      core_groups_languages[] @relation("core_groups_languages_group")
+  name      core_groups_names[] @relation("core_groups_names_group")
   ...
 }
 ```
@@ -62,20 +62,20 @@ Next step is to add relation to translation table.
 Remember to add relation for `core_languages` table:
 
 ```prisma
-language core_languages @relation("core_groups_languages_language", references: [id], fields: [id_language])
+language core_languages @relation("core_groups_names_language", references: [id], fields: [id_language])
 ```
 
 Here is the full code:
 
 ```prisma
-model core_groups_languages {
+model core_groups_names {
   id          String @id @unique @default(uuid())
   id_language String @db.VarChar(32)
   group_id    String
   value       String @db.VarChar(255)
 
-  group    core_groups    @relation("core_groups_languages_group", references: [id], fields: [group_id], onDelete: Cascade)
-  language core_languages @relation("core_groups_languages_language", references: [id], fields: [id_language])
+  group    core_groups    @relation("core_groups_names_group", references: [id], fields: [group_id], onDelete: Cascade)
+  language core_languages @relation("core_groups_names_language", references: [id], fields: [id_language])
 
   @@index([id_language])
 }
@@ -222,7 +222,7 @@ It may sound complicated, but it's not. We will show you how to do it.
 ### Get translation
 
 ```ts
-const groupNames = await this.prisma.core_groups_languages.findMany({
+const groupNames = await this.prisma.core_groups_names.findMany({
   where: {
     group_id: id
   }
@@ -240,7 +240,7 @@ const updatedName = await Promise.all(
       // If value is empty, do nothing
       if (!nameExist.value.trim()) return;
 
-      return await this.prisma.core_groups_languages.update({
+      return await this.prisma.core_groups_names.update({
         where: {
           id: nameExist.id
         },
@@ -248,7 +248,7 @@ const updatedName = await Promise.all(
       });
     }
 
-    return await this.prisma.core_groups_languages.create({
+    return await this.prisma.core_groups_names.create({
       data: {
         ...item,
         group_id: id
@@ -266,7 +266,7 @@ Promise.all(
     const nameExist = updatedName.find(name => name.id === item.id);
     if (nameExist) return;
 
-    await this.prisma.core_groups_languages.delete({
+    await this.prisma.core_groups_names.delete({
       where: {
         id: item.id
       }

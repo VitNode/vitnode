@@ -1,6 +1,14 @@
 'use client';
 
-import { Group, Languages, LayoutDashboard, MessagesSquare, Settings, Users } from 'lucide-react';
+import {
+  Group,
+  Languages,
+  LayoutDashboard,
+  MessagesSquare,
+  Settings,
+  UserCog,
+  Users
+} from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
@@ -63,6 +71,11 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
             id: 'groups',
             href: '/groups',
             icon: Group
+          },
+          {
+            id: 'staff',
+            href: '/staff',
+            icon: UserCog
           }
         ]}
       />

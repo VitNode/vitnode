@@ -4,7 +4,7 @@ import { Link } from '@/i18n';
 import { buttonVariants } from '@/components/ui/button';
 import type { TextLanguage } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
-import { DescriptionItemForum } from './description';
+import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
 
 export interface ItemForumProps {
   description: TextLanguage[];
@@ -31,7 +31,13 @@ export const ItemForum = ({ children, description, id, name }: ItemForumProps) =
             {convertText(name)}
           </Link>
 
-          {description.length > 0 && <DescriptionItemForum id={id} description={description} />}
+          {description.length > 0 && (
+            <ReadOnlyEditor
+              id={`${id}_description`}
+              className="text-muted-foreground text-sm [&_p]:m-0"
+              value={description}
+            />
+          )}
 
           {children && children.length > 0 && (
             <div className="flex mt-2 flex-wrap">
