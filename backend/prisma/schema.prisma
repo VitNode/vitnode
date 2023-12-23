@@ -49,6 +49,7 @@ model core_members {
   admin_permissions core_admin_permissions[] @relation("core_admin_permissions_member")
   forum_topics      forum_topics[]           @relation("forum_topics_author")
   forum_posts       forum_posts[]            @relation("forum_posts_author")
+  forum_logs        forum_logs[]             @relation("forum_logs_member")
 
   @@index([group_id])
 }
@@ -171,6 +172,7 @@ model forum_forums {
   description forum_forums_description[] @relation("forums_forums_description_forum")
   permissions forum_forums_permissions[] @relation("forums_forums_permissions_forum")
   topics      forum_topics[]             @relation("forum_topics_forum")
+  logs        forum_logs[]               @relation("forum_logs_forum")
 }
 
 model forum_forums_names {
@@ -224,6 +226,7 @@ model forum_topics {
   title   forum_topics_title[]   @relation("forum_topics_title_topic")
   content forum_topics_content[] @relation("forum_topics_content_topic")
   posts   forum_posts[]          @relation("forum_posts_topic")
+  logs    forum_logs[]           @relation("forum_logs_topic")
 }
 
 model forum_topics_title {
@@ -269,4 +272,22 @@ model forum_posts_content {
 
   post     forum_posts    @relation("forum_posts_content_post", references: [id], fields: [post_id], onDelete: Cascade)
   language core_languages @relation("forum_posts_content_language", references: [id], fields: [id_language], onDelete: Cascade)
+}
+
+enum ForumActions {
+  ADDED
+  ADMIN
+}
+
+model forum_logs {
+  id         String        @id @unique @default(uuid())
+  member     core_members  @relation("forum_logs_member", references: [id], fields: [member_id], onDelete: Cascade)
+  member_id  String
+  ip_address String        @db.VarChar(46)
+  created    Int
+  action     String        @db.VarChar(255)
+  forum      forum_forums? @relation("forum_logs_forum", references: [id], fields: [forum_id], onDelete: Cascade)
+  forum_id   String?
+  topic      forum_topics? @relation("forum_logs_topic", references: [id], fields: [topic_id], onDelete: Cascade)
+  topic_id   String?
 }
