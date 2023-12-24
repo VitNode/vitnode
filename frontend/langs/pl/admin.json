@@ -91,6 +91,14 @@
           "submit": "Tak, usuń grupę",
           "success": "Grupa została usunięta"
         }
+      },
+      "staff": {
+        "moderators": {
+          "title": "Moderatorzy"
+        },
+        "administrators": {
+          "title": "Administratorzy"
+        }
       }
     },
     "configs": {

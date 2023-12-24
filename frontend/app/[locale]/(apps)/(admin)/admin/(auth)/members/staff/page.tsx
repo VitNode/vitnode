@@ -1,5 +1,5 @@
-import { StaffAdminView } from '@/admin/views/members/staff/staff-admin-view';
+import { redirect } from '@/i18n';
 
 export default function Page() {
-  return <StaffAdminView />;
+  redirect('/admin/members/staff/moderators');
 }

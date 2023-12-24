@@ -91,6 +91,14 @@
           "submit": "Yes, delete group",
           "success": "Group has been deleted"
         }
+      },
+      "staff": {
+        "moderators": {
+          "title": "Moderators"
+        },
+        "administrators": {
+          "title": "Administrators"
+        }
       }
     },
     "configs": {
