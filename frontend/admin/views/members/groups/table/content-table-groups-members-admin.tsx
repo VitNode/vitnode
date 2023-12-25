@@ -4,19 +4,15 @@ import { useMemo } from 'react';
 
 import { DataTable } from '@/components/data-table/data-table';
 import { Link } from '@/i18n';
-import { useGroupMembersAdminAPI } from './hooks/use-groups-members-admin-api';
-import { Loader } from '@/components/loader/loader';
 import type { ShowAdminGroups } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { ActionsTableGroupsMembersAdmin } from './actions/actions-table-groups-members-admin';
 import { DateFormat } from '@/components/date-format/date-format';
 import { HeaderSortingDataTable } from '@/components/data-table/header-sorting-data-table';
+import type { GroupsMembersAdminViewProps } from '../groups-members-admin-view';
 
-import { ErrorAdminView } from '../../../../global/error-admin-view';
-
-export const ContentTableGroupsMembersAdmin = () => {
+export const ContentTableGroupsMembersAdmin = ({ data }: GroupsMembersAdminViewProps) => {
   const t = useTranslations('admin.members.groups');
-  const { data, defaultPageSize, isError, isFetching, isLoading } = useGroupMembersAdminAPI();
   const { convertText } = useTextLang();
 
   const columns: ColumnDef<Omit<ShowAdminGroups, 'default' | 'root'>>[] = useMemo(
@@ -68,16 +64,12 @@ export const ContentTableGroupsMembersAdmin = () => {
     []
   );
 
-  if (isLoading) return <Loader />;
-  if (isError) return <ErrorAdminView />;
-
   return (
     <DataTable
       data={data?.core_groups__admin__show.edges ?? []}
       pageInfo={data?.core_groups__admin__show.pageInfo}
-      defaultPageSize={defaultPageSize}
+      defaultPageSize={10}
       columns={columns}
-      isFetching={isFetching}
       defaultSorting={{
         sortBy: 'updated',
         sortDirection: 'desc'

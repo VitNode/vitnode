@@ -1,6 +1,7 @@
 'use server';
 
 import { cookies } from 'next/headers';
+import { revalidatePath } from 'next/cache';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -21,6 +22,8 @@ export const mutationApi = async (variables: Core_Groups__Admin__DeleteMutationV
         Cookie: cookies().toString()
       }
     });
+
+    revalidatePath('/admin/members/groups', 'page');
 
     return { data };
   } catch (error) {

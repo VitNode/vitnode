@@ -24,6 +24,7 @@ export const mutationApi = async (variables: Core_Languages__EditMutationVariabl
     });
 
     revalidatePath('/admin', 'layout');
+    revalidatePath('/admin/core/langs', 'page');
 
     return { data };
   } catch (error) {

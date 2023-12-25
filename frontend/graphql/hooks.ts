@@ -241,6 +241,7 @@ export type Query = {
   core_members__show: ShowCoreMembersObj;
   core_middleware: CoreMiddlewareObj;
   core_sessions__authorization: AuthorizationCoreSessionsObj;
+  core_staff_administrators__admin__show: ShowAdminStaffAdministratorsObj;
   forum_forums__admin__show: ShowForumForumsAdminObj;
   forum_forums__show: ShowForumForumsObj;
   forum_posts__show: Scalars['String']['output'];
@@ -281,6 +282,13 @@ export type QueryCore_Members__ShowArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<Array<ShowCoreMembersSortByArgs>>;
+};
+
+
+export type QueryCore_Staff_Administrators__Admin__ShowArgs = {
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -376,6 +384,20 @@ export const ShowAdminMembersSortingColumnEnum = {
 } as const;
 
 export type ShowAdminMembersSortingColumnEnum = typeof ShowAdminMembersSortingColumnEnum[keyof typeof ShowAdminMembersSortingColumnEnum];
+export type ShowAdminStaffAdministrators = {
+  __typename?: 'ShowAdminStaffAdministrators';
+  created: Scalars['Int']['output'];
+  id: Scalars['String']['output'];
+  unrestricted: Scalars['Boolean']['output'];
+  user_or_group: UserOrGroupCoreStaffUnion;
+};
+
+export type ShowAdminStaffAdministratorsObj = {
+  __typename?: 'ShowAdminStaffAdministratorsObj';
+  edges: Array<ShowAdminStaffAdministrators>;
+  pageInfo: PageInfo;
+};
+
 export type ShowCoreLanguages = {
   __typename?: 'ShowCoreLanguages';
   default: Scalars['Boolean']['output'];
@@ -547,6 +569,8 @@ export type User = {
   name: Scalars['String']['output'];
 };
 
+export type UserOrGroupCoreStaffUnion = GroupUser | User;
+
 export type Admin_Install__Create_DatabaseMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -694,6 +718,11 @@ export type Core_Groups__Admin__Show_ShortQueryVariables = Exact<{
 
 
 export type Core_Groups__Admin__Show_ShortQuery = { __typename?: 'Query', core_groups__admin__show: { __typename?: 'ShowAdminGroupsObj', edges: Array<{ __typename?: 'ShowAdminGroups', id: string, guest: boolean, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> } };
+
+export type Core_Staff_Administrators__Admin__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Core_Staff_Administrators__Admin__ShowQuery = { __typename?: 'Query', core_staff_administrators__admin__show: { __typename?: 'ShowAdminStaffAdministratorsObj', edges: Array<{ __typename?: 'ShowAdminStaffAdministrators', created: number, id: string, unrestricted: boolean, user_or_group: { __typename: 'GroupUser', id: string, groupName: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } | { __typename: 'User', avatar_color: string, id: string, name: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, cover?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } } }> } };
 
 export type Core_Members__Admin__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['String']['input']>;
@@ -1035,6 +1064,67 @@ export const Core_Groups__Admin__Show_Short = gql`
         value
       }
       guest
+    }
+  }
+}
+    `;
+export const Core_Staff_Administrators__Admin__Show = gql`
+    query Core_staff_administrators__admin__show {
+  core_staff_administrators__admin__show {
+    edges {
+      created
+      id
+      unrestricted
+      user_or_group {
+        __typename
+        ... on GroupUser {
+          id
+          groupName: name {
+            id_language
+            value
+          }
+        }
+        ... on User {
+          avatar {
+            created
+            description
+            extension
+            file_size
+            id
+            member_id
+            mimetype
+            module
+            module_id
+            name
+            position
+            url
+          }
+          avatar_color
+          cover {
+            created
+            description
+            extension
+            file_size
+            id
+            member_id
+            mimetype
+            module
+            module_id
+            name
+            position
+            url
+          }
+          group {
+            id
+            name {
+              id_language
+              value
+            }
+          }
+          id
+          name
+        }
+      }
     }
   }
 }

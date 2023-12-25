@@ -26,7 +26,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { usePathname, useRouter } from '@/i18n';
 import { ToolbarDataTable } from './toolbar/toolbar-data-table';
 import type { ToolbarDataTableProps } from './toolbar/toolbar-data-table';
-import { GlobalLoader } from '../loader/global/global-loader';
 
 interface TDataMin {
   id: string;
@@ -36,7 +35,6 @@ interface DataTableProps<TData extends TDataMin> extends ToolbarDataTableProps {
   columns: ColumnDef<TData>[];
   data: TData[];
   defaultPageSize: 10 | 20 | 30 | 40 | 50;
-  isFetching: boolean | undefined;
   defaultSorting?: { sortBy: keyof TData; sortDirection: 'desc' | 'asc' };
   filters?: ReactNode;
   pageInfo?: PageInfo;
@@ -48,7 +46,6 @@ export function DataTable<TData extends TDataMin>({
   data,
   defaultPageSize,
   defaultSorting,
-  isFetching,
   pageInfo,
   ...props
 }: DataTableProps<TData>) {
@@ -138,8 +135,6 @@ export function DataTable<TData extends TDataMin>({
 
   return (
     <div className="flex flex-col gap-4">
-      {isFetching && <GlobalLoader />}
-
       <ToolbarDataTable {...props} />
 
       <div className="rounded-md border">

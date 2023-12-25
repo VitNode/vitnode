@@ -1,6 +1,7 @@
 'use server';
 
 import { cookies } from 'next/headers';
+import { revalidatePath } from 'next/cache';
 
 import { fetcher } from '@/graphql/fetcher';
 import { Core_Groups__Admin__Edit } from '@/graphql/hooks';
@@ -21,6 +22,8 @@ export const mutationEditApi = async (variables: Core_Groups__Admin__EditMutatio
         Cookie: cookies().toString()
       }
     });
+
+    revalidatePath('/admin/members/groups', 'page');
 
     return { data };
   } catch (error) {

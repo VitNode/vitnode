@@ -3,28 +3,28 @@ import { useMemo } from 'react';
 import type { ColumnDef } from '@tanstack/react-table';
 import { Pencil } from 'lucide-react';
 
-import {
-  useUsersMembersAdminAPI,
-  type UsersMembersAdminAPIDataType
-} from './hooks/use-users-members-admin-api';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Link } from '@/i18n';
 import { buttonVariants } from '@/components/ui/button';
 import { DataTable } from '@/components/data-table/data-table';
-import { Loader } from '@/components/loader/loader';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
 import { DateFormat } from '@/components/date-format/date-format';
 import { GroupsFiltersUsersMembersAdmin } from './filters/groups-filters-users-members-admin';
 import { AdvancedFiltersUsersMembersAdmin } from './filters/advanced/advanced-filters-users-members-admin';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { HeaderSortingDataTable } from '@/components/data-table/header-sorting-data-table';
+import type { UsersMembersAdminViewProps } from '../users-members-admin-view';
+import type { ShowAdminMembers } from '@/graphql/hooks';
 
-import { ErrorAdminView } from '../../../../global/error-admin-view';
+interface UsersMembersAdminAPIDataType
+  extends Pick<
+    ShowAdminMembers,
+    'avatar_color' | 'email' | 'group' | 'id' | 'joined' | 'name' | 'avatar'
+  > {}
 
-export const ContentTableUsersMembersAdmin = () => {
+export const ContentTableUsersMembersAdmin = ({ data }: UsersMembersAdminViewProps) => {
   const t = useTranslations('admin.members.users');
   const tCore = useTranslations('core');
-  const { data, defaultPageSize, isError, isFetching, isLoading } = useUsersMembersAdminAPI();
   const { convertText } = useTextLang();
 
   const columns: ColumnDef<UsersMembersAdminAPIDataType>[] = useMemo(
@@ -100,16 +100,12 @@ export const ContentTableUsersMembersAdmin = () => {
     []
   );
 
-  if (isLoading) return <Loader />;
-  if (isError) return <ErrorAdminView />;
-
   return (
     <DataTable
       data={data?.core_members__admin__show.edges ?? []}
       pageInfo={data?.core_members__admin__show.pageInfo}
-      defaultPageSize={defaultPageSize}
+      defaultPageSize={10}
       columns={columns}
-      isFetching={isFetching}
       searchPlaceholder={t('search_placeholder')}
       filters={<GroupsFiltersUsersMembersAdmin />}
       advancedFilters={<AdvancedFiltersUsersMembersAdmin />}
