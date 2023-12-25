@@ -18,6 +18,11 @@
     "cancel": "Cancel",
     "confirm": "Confirm",
     "close": "Close",
+    "default": "Default",
+    "user_input": {
+      "placeholder": "Click to chose user...",
+      "search": "Search user..."
+    },
     "pagination": {
       "previous": "Previous page",
       "next": "Next page"

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { ModeratorsStaffAdminView } from '@/admin/views/members/staff/views/moderators-view';
+import { ModeratorsStaffAdminView } from '@/admin/views/members/staff/views/moderators/moderators-view';
 
 interface Props {
   params: {

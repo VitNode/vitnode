@@ -6,7 +6,7 @@ import { Loader } from '@/components/loader/loader';
 import type { GroupsMembersAdminViewProps } from '../groups-members-admin-view';
 
 const ContentTableGroupsMembersAdmin = lazy(() =>
-  import('./content-table-groups-members-admin').then(module => ({
+  import('./content').then(module => ({
     default: module.ContentTableGroupsMembersAdmin
   }))
 );

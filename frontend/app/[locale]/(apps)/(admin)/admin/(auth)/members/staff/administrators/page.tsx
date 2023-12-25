@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { cookies } from 'next/headers';
 
-import { AdministratorsStaffAdminView } from '@/admin/views/members/staff/views/administrators-view';
+import { AdministratorsStaffAdminView } from '@/admin/views/members/staff/views/administrators/administrators-view';
 import {
   Core_Staff_Administrators__Admin__Show,
   type Core_Staff_Administrators__Admin__ShowQuery,

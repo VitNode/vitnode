@@ -10,12 +10,13 @@ import { ActionsTableGroupsMembersAdmin } from './actions/actions-table-groups-m
 import { DateFormat } from '@/components/date-format/date-format';
 import { HeaderSortingDataTable } from '@/components/data-table/header-sorting-data-table';
 import type { GroupsMembersAdminViewProps } from '../groups-members-admin-view';
+import { Badge } from '@/components/ui/badge';
 
 export const ContentTableGroupsMembersAdmin = ({ data }: GroupsMembersAdminViewProps) => {
   const t = useTranslations('admin.members.groups');
   const { convertText } = useTextLang();
 
-  const columns: ColumnDef<Omit<ShowAdminGroups, 'default' | 'root'>>[] = useMemo(
+  const columns: ColumnDef<ShowAdminGroups>[] = useMemo(
     () => [
       {
         header: t('table.name'),
@@ -26,6 +27,8 @@ export const ContentTableGroupsMembersAdmin = ({ data }: GroupsMembersAdminViewP
           return (
             <div className="flex items-center gap-4">
               <span>{convertText(data.name)}</span>
+              {data.default && <Badge>{t('default')}</Badge>}
+              {data.root && <Badge>{t('root')}</Badge>}
             </div>
           );
         }

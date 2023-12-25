@@ -67,6 +67,8 @@
       "groups": {
         "title": "Groups",
         "search_placeholder": "Search by name...",
+        "default": "Default",
+        "root": "Admin Root",
         "table": {
           "name": "Name",
           "users_count": "Users",
@@ -103,11 +105,19 @@
           "restricted": "Restricted",
           "user": "User",
           "group": "Group",
+          "add": "Add Administrator",
           "table": {
             "administrator": "Administrator",
             "type": "Type",
             "updated": "Updated",
             "permissions": "Permissions"
+          },
+          "create_edit": {
+            "type": {
+              "title": "Type",
+              "user": "User",
+              "group": "Group"
+            }
           }
         }
       }
