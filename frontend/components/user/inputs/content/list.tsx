@@ -7,7 +7,7 @@ import { cx } from '@/functions/classnames';
 import { CommandGroup, CommandItem } from '@/components/ui/command';
 
 import { AvatarUser } from '../../avatar/avatar-user';
-import { GroupUser } from '../../group-user';
+import { GroupFormat } from '../../../groups/group-format';
 
 interface Props {
   edges: Pick<ShowCoreMembers, 'id' | 'name' | 'avatar_color' | 'avatar' | 'group'>[];
@@ -49,7 +49,7 @@ export const UserInputContentList = ({ edges, onSelect, values }: Props) => {
           <AvatarUser sizeInRem={1.75} user={item} />
           <div className="flex flex-col">
             <span>{item.name}</span>
-            <GroupUser className="text-xs" group={item.group} />
+            <GroupFormat className="text-xs" group={item.group} />
           </div>
         </CommandItem>
       ))}

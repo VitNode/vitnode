@@ -10,7 +10,7 @@ import { DateFormat } from '@/components/date-format/date-format';
 import { HeaderSortingDataTable } from '@/components/data-table/header-sorting-data-table';
 import { Badge } from '@/components/ui/badge';
 import { LinkUser } from '@/components/user/link/link-user';
-import { GroupUser } from '@/components/user/group-user';
+import { GroupFormat } from '@/components/groups/group-format';
 
 export const ContentTableAdministratorsStaffAdmin = ({
   data
@@ -31,7 +31,7 @@ export const ContentTableAdministratorsStaffAdmin = ({
 
           if (data.user_or_group.__typename === 'StaffGroupUser') {
             return (
-              <GroupUser
+              <GroupFormat
                 group={{
                   ...data.user_or_group,
                   name: data.user_or_group.group_name

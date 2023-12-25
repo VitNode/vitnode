@@ -1,46 +1,47 @@
-import { Suspense, forwardRef, lazy, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { Suspense, forwardRef, useState } from 'react';
 import { X } from 'lucide-react';
 
-import { cx } from '@/functions/classnames';
-import { Button } from '@/components/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Loader } from '@/components/loader/loader';
-import { Badge } from '@/components/ui/badge';
+import { GroupInputContent } from './content/content';
 
-const UserInputContent = lazy(() =>
-  import('./content/content').then(module => ({
-    default: module.UserInputContent
-  }))
-);
+import type { TextLanguage } from '../../../graphql/hooks';
+import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover';
+import { Button } from '../../ui/button';
+import { cx } from '../../../functions/classnames';
+import { Badge } from '../../ui/badge';
+import { Loader } from '../../loader/loader';
+import { useTextLang } from '../../../hooks/core/use-text-lang';
 
-export interface UserInputItem {
+export interface GroupInputItem {
   id: string;
-  name: string;
+  name: TextLanguage[];
 }
 
 interface Props {
-  onChange: (value?: UserInputItem | UserInputItem[]) => void;
+  onChange: (value?: GroupInputItem | GroupInputItem[]) => void;
   className?: string;
+  disabled?: boolean;
+  onBlur?: () => void;
 }
 
 interface MultiProps extends Props {
   className?: string;
   multiple?: true;
-  value?: UserInputItem[];
+  value?: GroupInputItem[];
 }
 
 interface SingleProps extends Props {
   className?: string;
   multiple?: never;
-  value?: UserInputItem;
+  value?: GroupInputItem;
 }
 
-export const UserInput = forwardRef<HTMLButtonElement, SingleProps | MultiProps>(
+export const GroupInput = forwardRef<HTMLButtonElement, SingleProps | MultiProps>(
   ({ className, multiple, onChange, value: currentValue, ...rest }, ref) => {
-    const t = useTranslations('core.user_input');
+    const t = useTranslations('core.group_input');
     const values = Array.isArray(currentValue) ? currentValue : currentValue ? [currentValue] : [];
     const [open, setOpen] = useState(false);
+    const { convertText } = useTextLang();
 
     return (
       <Popover open={open} onOpenChange={setOpen}>
@@ -84,7 +85,7 @@ export const UserInput = forwardRef<HTMLButtonElement, SingleProps | MultiProps>
                         }
                       }}
                     >
-                      {item.name} <X />
+                      {convertText(item.name)} <X />
                     </Badge>
                   );
                 })}
@@ -93,7 +94,7 @@ export const UserInput = forwardRef<HTMLButtonElement, SingleProps | MultiProps>
 
         <PopoverContent className="p-0 w-64" align="start">
           <Suspense fallback={<Loader className="p-4" />}>
-            <UserInputContent
+            <GroupInputContent
               values={values}
               onSelect={item => {
                 if (multiple) {
@@ -118,4 +119,4 @@ export const UserInput = forwardRef<HTMLButtonElement, SingleProps | MultiProps>
   }
 );
 
-UserInput.displayName = 'UserInput';
+GroupInput.displayName = 'GroupInput';

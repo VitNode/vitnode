@@ -8,7 +8,7 @@ interface Props {
   className?: string;
 }
 
-export const GroupUser = ({ className, group: { name } }: Props) => {
+export const GroupFormat = ({ className, group: { name } }: Props) => {
   const { convertText } = useTextLang();
 
   return <span className={className}>{convertText(name)}</span>;

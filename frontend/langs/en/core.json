@@ -21,7 +21,11 @@
     "default": "Default",
     "user_input": {
       "placeholder": "Click to chose user...",
-      "search": "Search user..."
+      "search": "Search users..."
+    },
+    "group_input": {
+      "placeholder": "Click to chose group...",
+      "search": "Search group..."
     },
     "pagination": {
       "previous": "Previous page",

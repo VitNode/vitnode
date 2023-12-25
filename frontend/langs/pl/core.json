@@ -23,6 +23,10 @@
       "placeholder": "Kliknij, aby wybrać użytkownika...",
       "search": "Search user..."
     },
+    "group_input": {
+      "placeholder": "Kliknij, aby wybrać grupę...",
+      "search": "Search groups..."
+    },
     "pagination": {
       "previous": "Poprzednia strona",
       "next": "Następna strona"

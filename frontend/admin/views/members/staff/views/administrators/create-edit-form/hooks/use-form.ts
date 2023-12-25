@@ -2,6 +2,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { zodTextLanguageInputType } from '@/components/text-language-input';
+
 export const useFormCreateEditFormGroupsMembersAdmin = () => {
   const formSchema = z.object({
     type: z.enum(['group', 'user']),
@@ -9,6 +11,12 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
       .object({
         id: z.string(),
         name: z.string()
+      })
+      .optional(),
+    group: z
+      .object({
+        id: z.string(),
+        name: zodTextLanguageInputType
       })
       .optional()
   });
