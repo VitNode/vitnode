@@ -89,6 +89,8 @@ model core_admin_permissions {
   member_id    String?
   unrestricted Boolean       @default(false)
   created      Int
+  updated      Int
+  protected    Boolean       @default(false)
 }
 
 model core_sessions {

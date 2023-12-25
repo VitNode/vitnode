@@ -55,7 +55,8 @@ export class ShowAdminStaffAdministratorsService {
         return {
           ...edge,
           user_or_group: {
-            ...edge.group
+            ...edge.group,
+            group_name: edge.group.name
           }
         };
       }),

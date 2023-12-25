@@ -98,7 +98,17 @@
           "title": "Moderators"
         },
         "administrators": {
-          "title": "Administrators"
+          "title": "Administrators",
+          "unrestricted": "Unrestricted",
+          "restricted": "Restricted",
+          "user": "User",
+          "group": "Group",
+          "table": {
+            "administrator": "Administrator",
+            "type": "Type",
+            "updated": "Updated",
+            "permissions": "Permissions"
+          }
         }
       }
     },

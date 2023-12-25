@@ -135,7 +135,9 @@ export class CreateDatabaseAdminInstallService {
             create: [
               {
                 unrestricted: true,
-                created: currentDate()
+                created: currentDate(),
+                updated: currentDate(),
+                protected: true
               }
             ]
           }

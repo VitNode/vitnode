@@ -98,7 +98,17 @@
           "title": "Moderatorzy"
         },
         "administrators": {
-          "title": "Administratorzy"
+          "title": "Administratorzy",
+          "unrestricted": "Nieograniczone",
+          "restricted": "Ograniczone",
+          "user": "Użytkownik",
+          "group": "Grupa",
+          "table": {
+            "administrator": "Administrator",
+            "type": "Typ",
+            "updated": "Zaktualizowano",
+            "permissions": "Uprawnienia"
+          }
         }
       }
     },

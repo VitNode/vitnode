@@ -388,7 +388,9 @@ export type ShowAdminStaffAdministrators = {
   __typename?: 'ShowAdminStaffAdministrators';
   created: Scalars['Int']['output'];
   id: Scalars['String']['output'];
+  protected: Scalars['Boolean']['output'];
   unrestricted: Scalars['Boolean']['output'];
+  updated: Scalars['Int']['output'];
   user_or_group: UserOrGroupCoreStaffUnion;
 };
 
@@ -532,6 +534,12 @@ export const SortDirectionEnum = {
 } as const;
 
 export type SortDirectionEnum = typeof SortDirectionEnum[keyof typeof SortDirectionEnum];
+export type StaffGroupUser = {
+  __typename?: 'StaffGroupUser';
+  group_name: Array<TextLanguage>;
+  id: Scalars['String']['output'];
+};
+
 export type TextLanguage = {
   __typename?: 'TextLanguage';
   id_language: Scalars['String']['output'];
@@ -569,7 +577,7 @@ export type User = {
   name: Scalars['String']['output'];
 };
 
-export type UserOrGroupCoreStaffUnion = GroupUser | User;
+export type UserOrGroupCoreStaffUnion = StaffGroupUser | User;
 
 export type Admin_Install__Create_DatabaseMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -719,10 +727,14 @@ export type Core_Groups__Admin__Show_ShortQueryVariables = Exact<{
 
 export type Core_Groups__Admin__Show_ShortQuery = { __typename?: 'Query', core_groups__admin__show: { __typename?: 'ShowAdminGroupsObj', edges: Array<{ __typename?: 'ShowAdminGroups', id: string, guest: boolean, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> }> } };
 
-export type Core_Staff_Administrators__Admin__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+export type Core_Staff_Administrators__Admin__ShowQueryVariables = Exact<{
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+}>;
 
 
-export type Core_Staff_Administrators__Admin__ShowQuery = { __typename?: 'Query', core_staff_administrators__admin__show: { __typename?: 'ShowAdminStaffAdministratorsObj', edges: Array<{ __typename?: 'ShowAdminStaffAdministrators', created: number, id: string, unrestricted: boolean, user_or_group: { __typename: 'GroupUser', id: string, groupName: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } | { __typename: 'User', avatar_color: string, id: string, name: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, cover?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } } }> } };
+export type Core_Staff_Administrators__Admin__ShowQuery = { __typename?: 'Query', core_staff_administrators__admin__show: { __typename?: 'ShowAdminStaffAdministratorsObj', edges: Array<{ __typename?: 'ShowAdminStaffAdministrators', created: number, id: string, unrestricted: boolean, updated: number, protected: boolean, user_or_group: { __typename: 'StaffGroupUser', id: string, group_name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } | { __typename: 'User', avatar_color: string, id: string, name: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, cover?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
 
 export type Core_Members__Admin__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['String']['input']>;
@@ -1069,21 +1081,18 @@ export const Core_Groups__Admin__Show_Short = gql`
 }
     `;
 export const Core_Staff_Administrators__Admin__Show = gql`
-    query Core_staff_administrators__admin__show {
-  core_staff_administrators__admin__show {
+    query Core_staff_administrators__admin__show($cursor: String, $first: Int, $last: Int) {
+  core_staff_administrators__admin__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+  ) {
     edges {
       created
       id
       unrestricted
       user_or_group {
         __typename
-        ... on GroupUser {
-          id
-          groupName: name {
-            id_language
-            value
-          }
-        }
         ... on User {
           avatar {
             created
@@ -1124,7 +1133,24 @@ export const Core_Staff_Administrators__Admin__Show = gql`
           id
           name
         }
+        ... on StaffGroupUser {
+          group_name {
+            id_language
+            value
+          }
+          id
+        }
       }
+      updated
+      protected
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
     }
   }
 }
