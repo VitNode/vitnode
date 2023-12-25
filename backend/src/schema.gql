@@ -138,6 +138,7 @@ type Query {
   core_members__show(cursor: String, findByIds: [String!], first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_middleware: CoreMiddlewareObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
+  core_staff_administrators__admin__show(cursor: String, first: Int, last: Int): ShowAdminStaffAdministratorsObj!
   forum_forums__admin__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsAdminObj!
   forum_forums__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsObj!
   forum_posts__show: String!
@@ -202,6 +203,18 @@ enum ShowAdminMembersSortingColumnEnum {
   name
   posts
   reactions
+}
+
+type ShowAdminStaffAdministrators {
+  created: Int!
+  id: String!
+  unrestricted: Boolean!
+  user_or_group: UserOrGroupCoreStaffUnion!
+}
+
+type ShowAdminStaffAdministratorsObj {
+  edges: [ShowAdminStaffAdministrators!]!
+  pageInfo: PageInfo!
 }
 
 type ShowCoreLanguages {
@@ -359,3 +372,5 @@ type User {
   id: String!
   name: String!
 }
+
+union UserOrGroupCoreStaffUnion = GroupUser | User

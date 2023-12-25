@@ -134,9 +134,8 @@ export class CreateDatabaseAdminInstallService {
           admin_permissions: {
             create: [
               {
-                permissions: '*',
-                created: currentDate(),
-                updated: currentDate()
+                unrestricted: true,
+                created: currentDate()
               }
             ]
           }

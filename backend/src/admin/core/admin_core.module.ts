@@ -5,6 +5,7 @@ import { AdminSessionsModule } from './sessions/admin_sessions.module';
 import { AdminInstallModule } from './install/admin_install.module';
 import { AdminGroupsModule } from './groups/admin_groups.module';
 import { AdminMembersModule } from './members/core_members.module';
+import { AdminStaffModule } from './staff/admin_staff.module';
 
 @Module({
   imports: [
@@ -12,7 +13,8 @@ import { AdminMembersModule } from './members/core_members.module';
     AdminSessionsModule,
     AdminInstallModule,
     AdminGroupsModule,
-    AdminMembersModule
+    AdminMembersModule,
+    AdminStaffModule
   ]
 })
 export class AdminCoreModule {}
