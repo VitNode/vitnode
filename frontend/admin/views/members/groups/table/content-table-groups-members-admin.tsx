@@ -70,6 +70,7 @@ export const ContentTableGroupsMembersAdmin = ({ data }: GroupsMembersAdminViewP
       pageInfo={data?.core_groups__admin__show.pageInfo}
       defaultPageSize={10}
       columns={columns}
+      searchPlaceholder={t('search_placeholder')}
       defaultSorting={{
         sortBy: 'updated',
         sortDirection: 'desc'

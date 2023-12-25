@@ -66,6 +66,7 @@
       },
       "groups": {
         "title": "Grupy",
+        "search_placeholder": "Szukaj po nazwie...",
         "table": {
           "name": "Nazwa",
           "users_count": "Użytkownicy",

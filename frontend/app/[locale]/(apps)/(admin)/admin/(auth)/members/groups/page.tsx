@@ -47,6 +47,7 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 export default async function Page({ searchParams }: Props) {
   const variables = usePaginationAPISsr({
     searchParams,
+    search: true,
     sortByEnum: ShowAdminGroupsSortingColumnEnum,
     defaultPageSize: 10
   });
