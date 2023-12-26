@@ -6,8 +6,8 @@ import { removeSpecialCharacters } from '@/functions/remove-special-characters';
 export const useTextLang = () => {
   const locale = useLocale();
 
-  const convertText = (text: TextLanguage[]): string => {
-    if (text.length === 0) {
+  const convertText = (text?: TextLanguage[]): string => {
+    if (!text || text.length === 0) {
       return '';
     }
 

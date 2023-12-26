@@ -66,6 +66,9 @@
       },
       "groups": {
         "title": "Groups",
+        "search_placeholder": "Search by name...",
+        "default": "Default",
+        "root": "Admin Root",
         "table": {
           "name": "Name",
           "users_count": "Users",
@@ -90,6 +93,39 @@
           "form_confirm_text": "Type the name of the group <text></text> to confirm.",
           "submit": "Yes, delete group",
           "success": "Group has been deleted"
+        }
+      },
+      "staff": {
+        "moderators": {
+          "title": "Moderators"
+        },
+        "administrators": {
+          "title": "Administrators",
+          "unrestricted": "Unrestricted",
+          "restricted": "Restricted",
+          "user": "User",
+          "group": "Group",
+          "add": {
+            "title": "Add Administrator",
+            "success": "Administrator has been added"
+          },
+          "table": {
+            "administrator": "Administrator",
+            "type": "Type",
+            "updated": "Updated",
+            "permissions": "Permissions"
+          },
+          "create_edit": {
+            "type": {
+              "title": "Type",
+              "user": "User",
+              "group": "Group"
+            },
+            "unrestricted": {
+              "title": "Unrestricted",
+              "desc": "Unrestricted administrators have full access to the admin control panel (AdminCP)."
+            }
+          }
         }
       }
     },

@@ -66,6 +66,9 @@
       },
       "groups": {
         "title": "Grupy",
+        "search_placeholder": "Szukaj po nazwie...",
+        "default": "Domyślna",
+        "root": "Admin Root",
         "table": {
           "name": "Nazwa",
           "users_count": "Użytkownicy",
@@ -90,6 +93,39 @@
           "form_confirm_text": "Wpisz nazwę grupy <text></text>, aby potwierdzić.",
           "submit": "Tak, usuń grupę",
           "success": "Grupa została usunięta"
+        }
+      },
+      "staff": {
+        "moderators": {
+          "title": "Moderatorzy"
+        },
+        "administrators": {
+          "title": "Administratorzy",
+          "unrestricted": "Nieograniczone",
+          "restricted": "Ograniczone",
+          "user": "Użytkownik",
+          "group": "Grupa",
+          "add": {
+            "title": "Dodaj administratora",
+            "success": "Administrator został dodany"
+          },
+          "table": {
+            "administrator": "Administrator",
+            "type": "Typ",
+            "updated": "Zaktualizowano",
+            "permissions": "Uprawnienia"
+          },
+          "create_edit": {
+            "type": {
+              "title": "Typ",
+              "user": "Użytkownik",
+              "group": "Grupa"
+            },
+            "unrestricted": {
+              "title": "Nieograniczone",
+              "desc": "Administratorzy z nieograniczonymi uprawnieniami mogą zarządzać wszystkimi ustawieniami w panelu administratora (AdminCP)."
+            }
+          }
         }
       }
     },

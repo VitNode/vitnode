@@ -1,4 +1,6 @@
-import { Link } from '@/i18n';
+'use client';
+
+import { Link, usePathname } from '@/i18n';
 import { buttonVariants } from '../ui/button';
 
 export interface TabsTriggerProps {
@@ -10,7 +12,15 @@ export interface TabsTriggerProps {
   onClick?: () => void;
 }
 
-export const TabsTrigger = ({ active, className, href, onClick, text }: TabsTriggerProps) => {
+export const TabsTrigger = ({
+  active: activeFromProps,
+  className,
+  href,
+  onClick,
+  text
+}: TabsTriggerProps) => {
+  const pathname = usePathname();
+  const active = activeFromProps || (href && pathname.includes(href));
   const dataState = active ? 'active' : 'inactive';
 
   if (href) {

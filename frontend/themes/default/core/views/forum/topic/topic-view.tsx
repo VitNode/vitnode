@@ -11,7 +11,7 @@ import type { Forum_Topics__ShowQuery } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
 import { LinkUser } from '@/components/user/link/link-user';
-import { GroupUser } from '@/components/user/group-user';
+import { GroupFormat } from '@/components/groups/group-format';
 import { ActionsTopic } from './actions-topic';
 import { TitleIconTopic } from './title-icon';
 
@@ -86,7 +86,7 @@ export const TopicView = ({ data: dataApi }: Props) => {
                       )
                     })}
                   </div>
-                  <GroupUser className="text-muted-foreground text-sm" group={author.group} />
+                  <GroupFormat className="text-muted-foreground text-sm" group={author.group} />
                 </div>
               </div>
 

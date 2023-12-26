@@ -82,14 +82,15 @@ model core_groups_names {
 }
 
 model core_admin_permissions {
-  id          String        @id @unique @default(uuid())
-  group       core_groups?  @relation("core_admin_permissions_group", references: [id], fields: [group_id], onDelete: Cascade)
-  group_id    String?
-  member      core_members? @relation("core_admin_permissions_member", references: [id], fields: [member_id], onDelete: Cascade)
-  member_id   String?
-  permissions String        @db.Text
-  created     Int
-  updated     Int
+  id           String        @id @unique @default(uuid())
+  group        core_groups?  @relation("core_admin_permissions_group", references: [id], fields: [group_id], onDelete: Cascade)
+  group_id     String?
+  member       core_members? @relation("core_admin_permissions_member", references: [id], fields: [member_id], onDelete: Cascade)
+  member_id    String?
+  unrestricted Boolean       @default(false)
+  created      Int
+  updated      Int
+  protected    Boolean       @default(false)
 }
 
 model core_sessions {

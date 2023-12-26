@@ -1,0 +1,79 @@
+query Core_staff_administrators__admin__show(
+  $cursor: String
+  $first: Int
+  $last: Int
+  $sortBy: [ShowAdminStaffAdministratorsSortByArgs!]
+) {
+  core_staff_administrators__admin__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+    sortBy: $sortBy
+  ) {
+    edges {
+      created
+      id
+      unrestricted
+      user_or_group {
+        __typename
+        ... on User {
+          avatar {
+            created
+            description
+            extension
+            file_size
+            id
+            member_id
+            mimetype
+            module
+            module_id
+            name
+            position
+            url
+          }
+          avatar_color
+          cover {
+            created
+            description
+            extension
+            file_size
+            id
+            member_id
+            mimetype
+            module
+            module_id
+            name
+            position
+            url
+          }
+          group {
+            id
+            name {
+              id_language
+              value
+            }
+          }
+          id
+          name
+        }
+        ... on StaffGroupUser {
+          group_name {
+            id_language
+            value
+          }
+          id
+        }
+      }
+      updated
+      protected
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+  }
+}
