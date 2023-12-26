@@ -9,6 +9,7 @@ import { Form, FormField } from '@/components/ui/form';
 import { FilesInput } from '@/components/ui/files/files-input';
 import { Loader } from '@/components/loader/loader';
 import { useModalChangeAvatar } from '@/hooks/core/settings/avatar/use-modal-change-avatar';
+import { useSession } from '@/hooks/core/use-session';
 
 const CropperModalChangeAvatar = lazy(() =>
   import('./cropper/cropper-modal-change-avatar').then(module => ({
@@ -18,8 +19,12 @@ const CropperModalChangeAvatar = lazy(() =>
 
 export const ModalChangeAvatar = () => {
   const t = useTranslations('core');
+  const { session } = useSession();
 
   const { form, onSubmit } = useModalChangeAvatar();
+
+  if (!session) return null;
+  const { avatar } = session;
 
   return (
     <>
@@ -36,23 +41,29 @@ export const ModalChangeAvatar = () => {
         <>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
-              <FormField
-                control={form.control}
-                name="type"
-                render={({ field }) => (
-                  <RadioGroup onValueChange={field.onChange} defaultValue={field.value}>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="upload" id="r1" />
-                      <Label htmlFor="r1">{t('settings.change_avatar.options.upload.title')}</Label>
-                    </div>
+              {avatar && (
+                <FormField
+                  control={form.control}
+                  name="type"
+                  render={({ field }) => (
+                    <RadioGroup onValueChange={field.onChange} defaultValue={field.value}>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="upload" id="r1" />
+                        <Label htmlFor="r1">
+                          {t('settings.change_avatar.options.upload.title')}
+                        </Label>
+                      </div>
 
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="delete" id="r2" />
-                      <Label htmlFor="r2">{t('settings.change_avatar.options.delete.title')}</Label>
-                    </div>
-                  </RadioGroup>
-                )}
-              />
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="delete" id="r2" />
+                        <Label htmlFor="r2">
+                          {t('settings.change_avatar.options.delete.title')}
+                        </Label>
+                      </div>
+                    </RadioGroup>
+                  )}
+                />
+              )}
 
               {form.watch('type') === 'upload' && (
                 <FormField

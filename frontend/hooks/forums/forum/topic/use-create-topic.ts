@@ -2,10 +2,10 @@ import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { toast } from 'sonner';
 
 import { zodTextLanguageInputType } from '@/components/text-language-input';
 import { mutationApi } from './mutation-api';
-import { useToast } from '@/components/ui/use-toast';
 import { useDialog } from '@/components/ui/dialog';
 import { useRouter } from '@/i18n';
 
@@ -17,7 +17,6 @@ interface Props {
 
 export const useCreateTopic = ({ forumId }: Props) => {
   const t = useTranslations('core');
-  const { toast } = useToast();
   const { setOpen } = useDialog();
   const { push } = useRouter();
   const { convertNameToLink } = useTextLang();
@@ -37,12 +36,9 @@ export const useCreateTopic = ({ forumId }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const mutation = await mutationApi({ ...values, forumId });
-    // TODO: Add redirect to the topic page
     if (mutation.error) {
-      toast({
-        title: t('errors.title'),
-        description: t('errors.internal_server_error'),
-        variant: 'destructive'
+      toast.error(t('errors.title'), {
+        description: t('errors.internal_server_error')
       });
 
       return;

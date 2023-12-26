@@ -2,10 +2,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
+import { toast } from 'sonner';
 
 import type { ErrorType } from '@/graphql/fetcher';
 import { mutationApi } from './mutation-api';
-import { useToast } from '@/components/ui/use-toast';
 
 const nameRegex = /^[A-Za-z0-9._@ -]*$/;
 
@@ -15,7 +15,6 @@ interface Args {
 
 export const useSignUpView = ({ installPage }: Args) => {
   const t = useTranslations('core');
-  const { toast } = useToast();
 
   const formSchema = z.object({
     name: z
@@ -112,10 +111,8 @@ export const useSignUpView = ({ installPage }: Args) => {
           return;
         }
 
-        toast({
-          title: t('errors.title'),
-          description: t('errors.internal_server_error'),
-          variant: 'destructive'
+        toast.error(t('errors.title'), {
+          description: t('errors.internal_server_error')
         });
       }
     }

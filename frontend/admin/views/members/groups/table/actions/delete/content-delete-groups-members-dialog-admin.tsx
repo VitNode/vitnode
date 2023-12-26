@@ -3,6 +3,7 @@ import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 import {
   AlertDialogCancel,
@@ -18,7 +19,6 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { mutationApi } from './mutation-api';
-import { useToast } from '@/components/ui/use-toast';
 import { usePathname, useRouter } from '@/i18n';
 import { APIKeys } from '@/graphql/api-keys';
 
@@ -32,7 +32,6 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
   const { convertText } = useTextLang();
   const name = convertText(data.name);
   const queryClient = useQueryClient();
-  const { toast } = useToast();
   const { setOpen } = useAlertDialog();
   const pathname = usePathname();
   const { push } = useRouter();
@@ -53,10 +52,8 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
 
     const mutation = await mutationApi({ id: data.id });
     if (mutation.error) {
-      toast({
-        title: tCore('errors.title'),
-        description: tCore('errors.internal_server_error'),
-        variant: 'destructive'
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error')
       });
 
       return;
@@ -67,9 +64,7 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
       queryKey: [APIKeys.GROUPS_MEMBERS_ADMIN]
     });
 
-    toast({
-      title: t('success')
-    });
+    toast.success(t('success'));
 
     setOpen(false);
   };

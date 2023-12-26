@@ -1,8 +1,8 @@
 import { type InputHTMLAttributes, forwardRef, useRef, useState } from 'react';
 import { Upload } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
-import { useToast } from '@/components/ui/use-toast';
 import { useMergeRefs } from '@/hooks/core/utils/use-merge-refs';
 import { cx } from '@/functions/classnames';
 import { PreviewFilesInput } from './preview/preview-files-input';
@@ -33,7 +33,6 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
     const [isDrag, setDrag] = useState(false);
     const currentRef = useRef<HTMLInputElement>(null);
     const inputRef = useMergeRefs([ref, currentRef]);
-    const { toast } = useToast();
 
     const handleUploadFile = (files: FileList | null) => {
       if (!files || files.length === 0) return;
@@ -44,19 +43,13 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
         const extensionType = splitFileName.at(-1);
 
         if (extensionType && !acceptExtensions.includes(extensionType)) {
-          toast({
-            variant: 'destructive',
-            description: t('forms.files.errors.extension', { file: file.name })
-          });
+          toast.error(t('forms.files.errors.extension', { file: file.name }));
 
           return;
         }
 
         if (maxFileSizeInMb && file.size > maxFileSizeInMb * 1024 * 1024) {
-          toast({
-            variant: 'destructive',
-            description: t('forms.files.errors.max_size', { file: file.name })
-          });
+          toast.error(t('forms.files.errors.max_size', { file: file.name }));
 
           return;
         }

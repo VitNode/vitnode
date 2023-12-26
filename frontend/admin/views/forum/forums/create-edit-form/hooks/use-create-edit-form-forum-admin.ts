@@ -3,16 +3,15 @@ import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 import { zodTextLanguageInputType } from '@/components/text-language-input';
-import { useToast } from '@/components/ui/use-toast';
 import { useDialog } from '@/components/ui/dialog';
 import { mutationCreateApi } from './mutation-create-api';
 import { APIKeys } from '@/graphql/api-keys';
 
 export const useCreateEditFormForumAdmin = () => {
   const t = useTranslations('core');
-  const { toast } = useToast();
   const { setOpen } = useDialog();
   const queryClient = useQueryClient();
 
@@ -59,10 +58,8 @@ export const useCreateEditFormForumAdmin = () => {
     });
 
     if (mutation.error) {
-      toast({
-        title: t('errors.title'),
-        description: t('errors.internal_server_error'),
-        variant: 'destructive'
+      toast.error(t('errors.title'), {
+        description: t('errors.internal_server_error')
       });
 
       return;

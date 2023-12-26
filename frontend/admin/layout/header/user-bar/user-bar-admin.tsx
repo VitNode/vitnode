@@ -2,6 +2,7 @@
 
 import { Home, LogOut } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
@@ -10,7 +11,6 @@ import { ItemUserBarAdmin } from './item-user-bar-admin';
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
 import { Separator } from '@/components/ui/separator';
 import { mutationApi } from './mutation-api';
-import { useToast } from '@/components/ui/use-toast';
 
 import { ListNavAdmin } from '../../nav/list/list-nav-admin';
 
@@ -18,7 +18,6 @@ export const UserBarAdmin = () => {
   const t = useTranslations('admin');
   const tCore = useTranslations('core');
   const { session } = useSessionAdmin();
-  const { toast } = useToast();
 
   if (!session) return null;
   const { email, name, ...rest } = session;
@@ -59,10 +58,8 @@ export const UserBarAdmin = () => {
             onClick={async () => {
               const mutation = await mutationApi();
               if (mutation?.error) {
-                toast({
-                  title: tCore('errors.title'),
-                  description: tCore('errors.internal_server_error'),
-                  variant: 'destructive'
+                toast.error(tCore('errors.title'), {
+                  description: tCore('errors.internal_server_error')
                 });
               }
             }}
