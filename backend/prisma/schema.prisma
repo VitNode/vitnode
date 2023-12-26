@@ -50,6 +50,7 @@ model core_members {
   forum_topics      forum_topics[]           @relation("forum_topics_author")
   forum_posts       forum_posts[]            @relation("forum_posts_author")
   forum_logs        forum_logs[]             @relation("forum_logs_member")
+  mod_permissions   core_mod_permissions[]   @relation("core_mod_permissions_member")
 
   @@index([group_id])
 }
@@ -67,6 +68,7 @@ model core_groups {
   members            core_members[]             @relation("core_members_group")
   admin_permissions  core_admin_permissions[]   @relation("core_admin_permissions_group")
   forums_permissions forum_forums_permissions[] @relation("forums_forums_permissions_group")
+  mod_permissions    core_mod_permissions[]     @relation("core_mod_permissions_group")
 }
 
 model core_groups_names {
@@ -86,6 +88,18 @@ model core_admin_permissions {
   group        core_groups?  @relation("core_admin_permissions_group", references: [id], fields: [group_id], onDelete: Cascade)
   group_id     String?
   member       core_members? @relation("core_admin_permissions_member", references: [id], fields: [member_id], onDelete: Cascade)
+  member_id    String?
+  unrestricted Boolean       @default(false)
+  created      Int
+  updated      Int
+  protected    Boolean       @default(false)
+}
+
+model core_mod_permissions {
+  id           String        @id @unique @default(uuid())
+  group        core_groups?  @relation("core_mod_permissions_group", references: [id], fields: [group_id], onDelete: Cascade)
+  group_id     String?
+  member       core_members? @relation("core_mod_permissions_member", references: [id], fields: [member_id], onDelete: Cascade)
   member_id    String?
   unrestricted Boolean       @default(false)
   created      Int

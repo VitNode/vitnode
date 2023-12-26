@@ -90,6 +90,16 @@ export class CreateDatabaseAdminInstallService {
                 value: 'Moderator'
               }
             ]
+          },
+          mod_permissions: {
+            create: [
+              {
+                unrestricted: true,
+                created: currentDate(),
+                updated: currentDate(),
+                protected: true
+              }
+            ]
           }
         }
       }),
@@ -132,6 +142,16 @@ export class CreateDatabaseAdminInstallService {
             ]
           },
           admin_permissions: {
+            create: [
+              {
+                unrestricted: true,
+                created: currentDate(),
+                updated: currentDate(),
+                protected: true
+              }
+            ]
+          },
+          mod_permissions: {
             create: [
               {
                 unrestricted: true,

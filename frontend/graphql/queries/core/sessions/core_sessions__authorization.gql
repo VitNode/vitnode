@@ -4,6 +4,7 @@ query Core_sessions__authorization {
       email
       id
       is_admin
+      is_mod
       name
       newsletter
       avatar_color

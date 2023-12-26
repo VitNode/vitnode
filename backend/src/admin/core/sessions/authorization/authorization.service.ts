@@ -58,7 +58,8 @@ export class AuthorizationAdminSessionsService {
     return {
       user: {
         ...member,
-        is_admin: true
+        is_admin: true,
+        is_mod: true
       }
     };
   }

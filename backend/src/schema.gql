@@ -18,6 +18,7 @@ type AuthorizationCurrentUserObj {
   group: GroupUser!
   id: String!
   is_admin: Boolean!
+  is_mod: Boolean!
   name: String!
   newsletter: Boolean!
 }
