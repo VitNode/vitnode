@@ -29,7 +29,7 @@ export class AuthorizationCoreSessionsService {
   }
 
   protected async isMod({ group_id, id }: { group_id: string; id: string }): Promise<boolean> {
-    return !!(await this.prisma.core_mod_permissions.findFirst({
+    return !!(await this.prisma.core_moderator_permissions.findFirst({
       where: {
         OR: [
           {

@@ -141,6 +141,7 @@ type Query {
   core_middleware: CoreMiddlewareObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_staff_administrators__admin__show(cursor: String, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
+  core_staff_moderators__admin__show(cursor: String, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
   forum_forums__admin__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsAdminObj!
   forum_forums__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsObj!
   forum_posts__show: String!
@@ -227,6 +228,29 @@ input ShowAdminStaffAdministratorsSortByArgs {
 }
 
 enum ShowAdminStaffAdministratorsSortingColumnEnum {
+  updated
+}
+
+type ShowAdminStaffModerators {
+  created: Int!
+  id: String!
+  protected: Boolean!
+  unrestricted: Boolean!
+  updated: Int!
+  user_or_group: UserOrGroupCoreStaffUnion!
+}
+
+type ShowAdminStaffModeratorsObj {
+  edges: [ShowAdminStaffModerators!]!
+  pageInfo: PageInfo!
+}
+
+input ShowAdminStaffModeratorsSortByArgs {
+  column: ShowAdminStaffModeratorsSortingColumnEnum!
+  direction: SortDirectionEnum!
+}
+
+enum ShowAdminStaffModeratorsSortingColumnEnum {
   updated
 }
 

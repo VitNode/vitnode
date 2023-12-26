@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { core_admin_permissions } from '@prisma/client';
+import { core_moderator_permissions } from '@prisma/client';
 
-import { ShowAdminStaffAdministratorsArgs } from './dto/show.args';
-import { ShowAdminStaffAdministratorsObj } from './dto/show.obj';
+import { ShowAdminStaffModeratorsArgs } from './dto/show.args';
+import { ShowAdminStaffModeratorsObj } from './dto/show.obj';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { outputPagination } from '@/functions/database/pagination/outputPagination';
@@ -11,7 +11,7 @@ import { inputSorting } from '@/functions/database/inputSorting';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
-export class ShowAdminStaffAdministratorsService {
+export class ShowAdminStaffModeratorsService {
   constructor(private prisma: PrismaService) {}
 
   async show({
@@ -19,11 +19,11 @@ export class ShowAdminStaffAdministratorsService {
     first,
     last,
     sortBy
-  }: ShowAdminStaffAdministratorsArgs): Promise<ShowAdminStaffAdministratorsObj> {
+  }: ShowAdminStaffModeratorsArgs): Promise<ShowAdminStaffModeratorsObj> {
     const [edges, totalCount] = await this.prisma.$transaction([
-      this.prisma.core_admin_permissions.findMany({
+      this.prisma.core_moderator_permissions.findMany({
         ...inputPagination({ first, cursor, last }),
-        orderBy: inputSorting<keyof core_admin_permissions>({
+        orderBy: inputSorting<keyof core_moderator_permissions>({
           sortBy,
           defaultSortBy: {
             column: 'updated',
@@ -49,7 +49,7 @@ export class ShowAdminStaffAdministratorsService {
           }
         }
       }),
-      this.prisma.core_admin_permissions.count({})
+      this.prisma.core_moderator_permissions.count({})
     ]);
 
     return outputPagination({

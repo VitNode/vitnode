@@ -2,7 +2,7 @@ import { Field, Int, ObjectType, OmitType, createUnionType } from '@nestjs/graph
 
 import { PageInfo } from '@/types/database/pagination.type';
 import { GroupUser, User } from '@/utils/decorators/user.decorator';
-import { TextLanguage } from '../../../../../../../types/database/text-language.type';
+import { TextLanguage } from '@/types/database/text-language.type';
 
 @ObjectType()
 export class ShowAdminStaffAdministratorsObj {
@@ -19,7 +19,7 @@ export class StaffGroupUser extends OmitType(GroupUser, ['name'] as const) {
   group_name: TextLanguage[];
 }
 
-const UserOrGroupCoreStaffUnion = createUnionType({
+export const UserOrGroupCoreStaffUnion = createUnionType({
   name: 'UserOrGroupCoreStaffUnion',
   types: () => [User, StaffGroupUser] as const,
   resolveType(value) {

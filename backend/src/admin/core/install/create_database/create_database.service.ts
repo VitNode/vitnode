@@ -91,7 +91,7 @@ export class CreateDatabaseAdminInstallService {
               }
             ]
           },
-          mod_permissions: {
+          moderator_permissions: {
             create: [
               {
                 unrestricted: true,
@@ -151,7 +151,7 @@ export class CreateDatabaseAdminInstallService {
               }
             ]
           },
-          mod_permissions: {
+          moderator_permissions: {
             create: [
               {
                 unrestricted: true,
