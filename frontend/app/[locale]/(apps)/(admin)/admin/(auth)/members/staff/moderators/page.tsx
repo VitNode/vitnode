@@ -1,12 +1,41 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { cookies } from 'next/headers';
 
 import { ModeratorsStaffAdminView } from '@/admin/views/members/staff/views/moderators/moderators-view';
+
+import { fetcher } from '../../../../../../../../../graphql/fetcher';
+import {
+  Core_Staff_Moderators__Admin__Show,
+  ShowAdminStaffModeratorsSortingColumnEnum,
+  type Core_Staff_Moderators__Admin__ShowQuery,
+  type Core_Staff_Moderators__Admin__ShowQueryVariables
+} from '../../../../../../../../../graphql/hooks';
+import {
+  usePaginationAPISsr,
+  type SearchParamsPagination
+} from '../../../../../../../../../hooks/core/utils/use-pagination-api-ssr';
+
+const getData = async (variables: Core_Staff_Moderators__Admin__ShowQueryVariables) => {
+  const { data } = await fetcher<
+    Core_Staff_Moderators__Admin__ShowQuery,
+    Core_Staff_Moderators__Admin__ShowQueryVariables
+  >({
+    query: Core_Staff_Moderators__Admin__Show,
+    variables,
+    headers: {
+      Cookie: cookies().toString()
+    }
+  });
+
+  return data;
+};
 
 interface Props {
   params: {
     locale: string;
   };
+  searchParams: SearchParamsPagination;
 }
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
@@ -17,6 +46,15 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
   };
 }
 
-export default function Page() {
-  return <ModeratorsStaffAdminView />;
+export default async function Page({ searchParams }: Props) {
+  const variables = usePaginationAPISsr({
+    searchParams,
+    search: true,
+    sortByEnum: ShowAdminStaffModeratorsSortingColumnEnum,
+    defaultPageSize: 10
+  });
+
+  const data = await getData(variables);
+
+  return <ModeratorsStaffAdminView data={data} />;
 }

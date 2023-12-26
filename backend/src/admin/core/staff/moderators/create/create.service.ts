@@ -1,21 +1,21 @@
 import { Injectable } from '@nestjs/common';
 
-import { ShowAdminStaffAdministrators } from '../show/dto/show.obj';
-import { CreateAdminStaffAdministratorsArgs } from './dto/create.args';
+import { ShowAdminStaffModerators } from '../show/dto/show.obj';
+import { CreateAdminStaffModeratorsArgs } from './dto/create.args';
 
 import { PrismaService } from '@/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';
 import { currentDate } from '@/functions/date';
 
 @Injectable()
-export class CreateAdminStaffAdministratorsService {
+export class CreateAdminStaffModeratorsService {
   constructor(private prisma: PrismaService) {}
 
   async create({
     group_id,
     member_id,
     unrestricted
-  }: CreateAdminStaffAdministratorsArgs): Promise<ShowAdminStaffAdministrators> {
+  }: CreateAdminStaffModeratorsArgs): Promise<ShowAdminStaffModerators> {
     if (!group_id && !member_id) {
       throw new CustomError({
         code: 'BAD_REQUEST',
@@ -23,7 +23,7 @@ export class CreateAdminStaffAdministratorsService {
       });
     }
 
-    const findPermission = await this.prisma.core_admin_permissions.findFirst({
+    const findPermission = await this.prisma.core_moderator_permissions.findFirst({
       where: {
         OR: [
           {
@@ -45,7 +45,7 @@ export class CreateAdminStaffAdministratorsService {
 
     const connectIfDefined = (id: string) => (id ? { connect: { id } } : undefined);
 
-    const data = await this.prisma.core_admin_permissions.create({
+    const data = await this.prisma.core_moderator_permissions.create({
       data: {
         unrestricted,
         created: currentDate(),

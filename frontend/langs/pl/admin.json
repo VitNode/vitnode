@@ -96,35 +96,41 @@
         }
       },
       "staff": {
+        "unrestricted": "Nieograniczone",
+        "restricted": "Ograniczone",
+        "user": "Użytkownik",
+        "group": "Grupa",
+        "already_exists": "Te uprawnienie już istnieje na liście.",
+        "table": {
+          "administrator": "Administrator",
+          "moderator": "Moderator",
+          "type": "Typ",
+          "updated": "Zaktualizowano",
+          "permissions": "Uprawnienia"
+        },
+        "create_edit": {
+          "type": {
+            "title": "Typ",
+            "user": "Użytkownik",
+            "group": "Grupa"
+          },
+          "unrestricted": {
+            "title": "Nieograniczone",
+            "desc": "Administratorzy z nieograniczonymi uprawnieniami mogą zarządzać wszystkimi ustawieniami w panelu administratora (AdminCP)."
+          }
+        },
         "moderators": {
-          "title": "Moderatorzy"
+          "title": "Moderatorzy",
+          "add": {
+            "title": "Dodaj moderatora",
+            "success": "Moderator został dodany"
+          }
         },
         "administrators": {
           "title": "Administratorzy",
-          "unrestricted": "Nieograniczone",
-          "restricted": "Ograniczone",
-          "user": "Użytkownik",
-          "group": "Grupa",
           "add": {
             "title": "Dodaj administratora",
             "success": "Administrator został dodany"
-          },
-          "table": {
-            "administrator": "Administrator",
-            "type": "Typ",
-            "updated": "Zaktualizowano",
-            "permissions": "Uprawnienia"
-          },
-          "create_edit": {
-            "type": {
-              "title": "Typ",
-              "user": "Użytkownik",
-              "group": "Grupa"
-            },
-            "unrestricted": {
-              "title": "Nieograniczone",
-              "desc": "Administratorzy z nieograniczonymi uprawnieniami mogą zarządzać wszystkimi ustawieniami w panelu administratora (AdminCP)."
-            }
           }
         }
       }

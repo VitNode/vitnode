@@ -130,6 +130,7 @@ export type Mutation = {
   core_sessions__sign_in: Scalars['String']['output'];
   core_sessions__sign_out: Scalars['String']['output'];
   core_staff_administrators__admin__create: ShowAdminStaffAdministrators;
+  core_staff_moderators__admin__create: ShowAdminStaffModerators;
   forum_forums__admin__change_position: Scalars['String']['output'];
   forum_forums__admin__create: CreateForumForumsObj;
   forum_topics__create: ShowTopicsForums;
@@ -188,6 +189,13 @@ export type MutationCore_Sessions__Sign_InArgs = {
 
 
 export type MutationCore_Staff_Administrators__Admin__CreateArgs = {
+  group_id?: InputMaybe<Scalars['String']['input']>;
+  member_id?: InputMaybe<Scalars['String']['input']>;
+  unrestricted: Scalars['Boolean']['input'];
+};
+
+
+export type MutationCore_Staff_Moderators__Admin__CreateArgs = {
   group_id?: InputMaybe<Scalars['String']['input']>;
   member_id?: InputMaybe<Scalars['String']['input']>;
   unrestricted: Scalars['Boolean']['input'];
@@ -689,6 +697,15 @@ export type Core_Staff_Administrators__Admin__CreateMutationVariables = Exact<{
 
 export type Core_Staff_Administrators__Admin__CreateMutation = { __typename?: 'Mutation', core_staff_administrators__admin__create: { __typename?: 'ShowAdminStaffAdministrators', created: number, id: string, protected: boolean, unrestricted: boolean, updated: number } };
 
+export type Core_Staff_Moderators__Admin__CreateMutationVariables = Exact<{
+  groupId?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['String']['input']>;
+  unrestricted: Scalars['Boolean']['input'];
+}>;
+
+
+export type Core_Staff_Moderators__Admin__CreateMutation = { __typename?: 'Mutation', core_staff_moderators__admin__create: { __typename?: 'ShowAdminStaffModerators', created: number, id: string, protected: boolean, unrestricted: boolean, updated: number } };
+
 export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -968,6 +985,21 @@ export const Core_Groups__Admin_Create = gql`
 export const Core_Staff_Administrators__Admin__Create = gql`
     mutation Core_staff_administrators__admin__create($groupId: String, $memberId: String, $unrestricted: Boolean!) {
   core_staff_administrators__admin__create(
+    group_id: $groupId
+    member_id: $memberId
+    unrestricted: $unrestricted
+  ) {
+    created
+    id
+    protected
+    unrestricted
+    updated
+  }
+}
+    `;
+export const Core_Staff_Moderators__Admin__Create = gql`
+    mutation Core_staff_moderators__admin__create($groupId: String, $memberId: String, $unrestricted: Boolean!) {
+  core_staff_moderators__admin__create(
     group_id: $groupId
     member_id: $memberId
     unrestricted: $unrestricted

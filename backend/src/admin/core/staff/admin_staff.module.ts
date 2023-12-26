@@ -6,6 +6,8 @@ import { CreateAdminStaffAdministratorsService } from './administrators/create/c
 import { CreateAdminStaffAdministratorResolver } from './administrators/create/create.resolver';
 import { ShowAdminStaffModeratorsService } from './moderators/show/show.service';
 import { ShowAdminStaffModeratorsResolver } from './moderators/show/show.resolver';
+import { CreateAdminStaffModeratorsService } from './moderators/create/create.service';
+import { CreateAdminStaffModeratorsResolver } from './moderators/create/create.resolver';
 
 @Module({
   providers: [
@@ -14,7 +16,9 @@ import { ShowAdminStaffModeratorsResolver } from './moderators/show/show.resolve
     CreateAdminStaffAdministratorsService,
     CreateAdminStaffAdministratorResolver,
     ShowAdminStaffModeratorsResolver,
-    ShowAdminStaffModeratorsService
+    ShowAdminStaffModeratorsService,
+    CreateAdminStaffModeratorsService,
+    CreateAdminStaffModeratorsResolver
   ]
 })
 export class AdminStaffModule {}

@@ -73,7 +73,7 @@ export const CreateEditFormGroupsMembersAdmin = ({
 
           <Button
             disabled={!form.formState.isValid}
-            loading={form.formState.isSubmitted}
+            loading={form.formState.isSubmitting}
             type="submit"
           >
             {tCore('save')}

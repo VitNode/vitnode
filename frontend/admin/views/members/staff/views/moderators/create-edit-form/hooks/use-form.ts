@@ -8,7 +8,8 @@ import { mutationApi } from './mutation-api';
 import { useToast } from '@/components/ui/use-toast';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { useDialog } from '@/components/ui/dialog';
-import type { ErrorType } from '@/graphql/fetcher';
+
+import type { ErrorType } from '../../../../../../../../graphql/fetcher';
 
 export const useFormCreateEditFormGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.staff');
@@ -74,7 +75,7 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
 
     setOpen(false);
     toast({
-      title: t('administrators.add.success'),
+      title: t('moderators.add.success'),
       description: values.type === 'group' ? convertText(values.group?.name) : values.user?.name
     });
   };
