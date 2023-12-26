@@ -1,5 +1,15 @@
-query Core_staff_administrators__admin__show($cursor: String, $first: Int, $last: Int) {
-  core_staff_administrators__admin__show(cursor: $cursor, first: $first, last: $last) {
+query Core_staff_administrators__admin__show(
+  $cursor: String
+  $first: Int
+  $last: Int
+  $sortBy: [ShowAdminStaffAdministratorsSortByArgs!]
+) {
+  core_staff_administrators__admin__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+    sortBy: $sortBy
+  ) {
     edges {
       created
       id

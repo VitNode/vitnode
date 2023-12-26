@@ -128,6 +128,7 @@ export type Mutation = {
   core_members__sign_up: SignUpCoreMembersObj;
   core_sessions__sign_in: Scalars['String']['output'];
   core_sessions__sign_out: Scalars['String']['output'];
+  core_staff_administrators__admin__create: ShowAdminStaffAdministrators;
   forum_forums__admin__change_position: Scalars['String']['output'];
   forum_forums__admin__create: CreateForumForumsObj;
   forum_topics__create: ShowTopicsForums;
@@ -182,6 +183,13 @@ export type MutationCore_Sessions__Sign_InArgs = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
   remember?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type MutationCore_Staff_Administrators__Admin__CreateArgs = {
+  group_id?: InputMaybe<Scalars['String']['input']>;
+  member_id?: InputMaybe<Scalars['String']['input']>;
+  unrestricted: Scalars['Boolean']['input'];
 };
 
 
@@ -289,6 +297,7 @@ export type QueryCore_Staff_Administrators__Admin__ShowArgs = {
   cursor?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<Array<ShowAdminStaffAdministratorsSortByArgs>>;
 };
 
 
@@ -400,6 +409,16 @@ export type ShowAdminStaffAdministratorsObj = {
   pageInfo: PageInfo;
 };
 
+export type ShowAdminStaffAdministratorsSortByArgs = {
+  column: ShowAdminStaffAdministratorsSortingColumnEnum | `${ShowAdminStaffAdministratorsSortingColumnEnum}`;
+  direction: SortDirectionEnum | `${SortDirectionEnum}`;
+};
+
+export const ShowAdminStaffAdministratorsSortingColumnEnum = {
+  updated: 'updated'
+} as const;
+
+export type ShowAdminStaffAdministratorsSortingColumnEnum = typeof ShowAdminStaffAdministratorsSortingColumnEnum[keyof typeof ShowAdminStaffAdministratorsSortingColumnEnum];
 export type ShowCoreLanguages = {
   __typename?: 'ShowCoreLanguages';
   default: Scalars['Boolean']['output'];
@@ -625,6 +644,15 @@ export type Core_Groups__Admin_CreateMutationVariables = Exact<{
 
 export type Core_Groups__Admin_CreateMutation = { __typename?: 'Mutation', core_groups__admin_create: { __typename?: 'ShowAdminGroups', created: number, id: string, protected: boolean, users_count: number, guest: boolean, updated: number, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } };
 
+export type Core_Staff_Administrators__Admin__CreateMutationVariables = Exact<{
+  groupId?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['String']['input']>;
+  unrestricted: Scalars['Boolean']['input'];
+}>;
+
+
+export type Core_Staff_Administrators__Admin__CreateMutation = { __typename?: 'Mutation', core_staff_administrators__admin__create: { __typename?: 'ShowAdminStaffAdministrators', created: number, id: string, protected: boolean, unrestricted: boolean, updated: number } };
+
 export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -731,6 +759,7 @@ export type Core_Staff_Administrators__Admin__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<Array<ShowAdminStaffAdministratorsSortByArgs> | ShowAdminStaffAdministratorsSortByArgs>;
 }>;
 
 
@@ -886,6 +915,21 @@ export const Core_Groups__Admin_Create = gql`
     protected
     users_count
     guest
+    updated
+  }
+}
+    `;
+export const Core_Staff_Administrators__Admin__Create = gql`
+    mutation Core_staff_administrators__admin__create($groupId: String, $memberId: String, $unrestricted: Boolean!) {
+  core_staff_administrators__admin__create(
+    group_id: $groupId
+    member_id: $memberId
+    unrestricted: $unrestricted
+  ) {
+    created
+    id
+    protected
+    unrestricted
     updated
   }
 }
@@ -1091,11 +1135,12 @@ export const Core_Groups__Admin__Show_Short = gql`
 }
     `;
 export const Core_Staff_Administrators__Admin__Show = gql`
-    query Core_staff_administrators__admin__show($cursor: String, $first: Int, $last: Int) {
+    query Core_staff_administrators__admin__show($cursor: String, $first: Int, $last: Int, $sortBy: [ShowAdminStaffAdministratorsSortByArgs!]) {
   core_staff_administrators__admin__show(
     cursor: $cursor
     first: $first
     last: $last
+    sortBy: $sortBy
   ) {
     edges {
       created

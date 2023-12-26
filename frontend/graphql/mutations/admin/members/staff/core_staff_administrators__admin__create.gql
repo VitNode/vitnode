@@ -1,0 +1,17 @@
+mutation Core_staff_administrators__admin__create(
+  $groupId: String
+  $memberId: String
+  $unrestricted: Boolean!
+) {
+  core_staff_administrators__admin__create(
+    group_id: $groupId
+    member_id: $memberId
+    unrestricted: $unrestricted
+  ) {
+    created
+    id
+    protected
+    unrestricted
+    updated
+  }
+}

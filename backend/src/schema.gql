@@ -101,6 +101,7 @@ type Mutation {
   core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
+  core_staff_administrators__admin__create(group_id: String, member_id: String, unrestricted: Boolean!): ShowAdminStaffAdministrators!
   forum_forums__admin__change_position(id: String!, index_to_move: Int!, parent_id: String): String!
   forum_forums__admin__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: String, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
   forum_topics__create(content: [TextLanguageInput!]!, forum_id: String!, title: [TextLanguageInput!]!): ShowTopicsForums!
@@ -138,7 +139,7 @@ type Query {
   core_members__show(cursor: String, findByIds: [String!], first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_middleware: CoreMiddlewareObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
-  core_staff_administrators__admin__show(cursor: String, first: Int, last: Int): ShowAdminStaffAdministratorsObj!
+  core_staff_administrators__admin__show(cursor: String, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
   forum_forums__admin__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsAdminObj!
   forum_forums__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsObj!
   forum_posts__show: String!
@@ -217,6 +218,15 @@ type ShowAdminStaffAdministrators {
 type ShowAdminStaffAdministratorsObj {
   edges: [ShowAdminStaffAdministrators!]!
   pageInfo: PageInfo!
+}
+
+input ShowAdminStaffAdministratorsSortByArgs {
+  column: ShowAdminStaffAdministratorsSortingColumnEnum!
+  direction: SortDirectionEnum!
+}
+
+enum ShowAdminStaffAdministratorsSortingColumnEnum {
+  updated
 }
 
 type ShowCoreLanguages {

@@ -5,6 +5,7 @@ import { cookies } from 'next/headers';
 import { AdministratorsStaffAdminView } from '@/admin/views/members/staff/views/administrators/administrators-view';
 import {
   Core_Staff_Administrators__Admin__Show,
+  ShowAdminStaffAdministratorsSortingColumnEnum,
   type Core_Staff_Administrators__Admin__ShowQuery,
   type Core_Staff_Administrators__Admin__ShowQueryVariables
 } from '@/graphql/hooks';
@@ -48,6 +49,7 @@ export default async function Page({ searchParams }: Props) {
   const variables = usePaginationAPISsr({
     searchParams,
     search: true,
+    sortByEnum: ShowAdminStaffAdministratorsSortingColumnEnum,
     defaultPageSize: 10
   });
 

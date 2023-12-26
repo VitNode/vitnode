@@ -105,7 +105,10 @@
           "restricted": "Ograniczone",
           "user": "Użytkownik",
           "group": "Grupa",
-          "add": "Dodaj administratora",
+          "add": {
+            "title": "Dodaj administratora",
+            "success": "Administrator został dodany"
+          },
           "table": {
             "administrator": "Administrator",
             "type": "Typ",
@@ -117,6 +120,10 @@
               "title": "Typ",
               "user": "Użytkownik",
               "group": "Grupa"
+            },
+            "unrestricted": {
+              "title": "Nieograniczone",
+              "desc": "Administratorzy z nieograniczonymi uprawnieniami mogą zarządzać wszystkimi ustawieniami w panelu administratora (AdminCP)."
             }
           }
         }
