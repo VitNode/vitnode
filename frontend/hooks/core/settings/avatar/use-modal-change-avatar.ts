@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 import { mutationDeleteApi } from './api/mutation-delete-api';
-import { useToast } from '@/components/ui/use-toast';
 import { useDialog } from '@/components/ui/dialog';
 
 interface FormType {
@@ -14,7 +14,6 @@ interface FormType {
 export const useModalChangeAvatar = () => {
   const [isPending, setPending] = useState(false);
   const t = useTranslations('core');
-  const { toast } = useToast();
   const { setOpen } = useDialog();
 
   const form = useForm<FormType>({
@@ -31,14 +30,11 @@ export const useModalChangeAvatar = () => {
 
       const mutation = await mutationDeleteApi();
       if (mutation.error) {
-        toast({
-          title: t('errors.title'),
-          description: t('settings.change_avatar.options.delete.error'),
-          variant: 'destructive'
+        toast.error(t('errors.title'), {
+          description: t('settings.change_avatar.options.delete.error')
         });
       } else {
-        toast({
-          title: t('settings.change_avatar.options.delete.title'),
+        toast.success(t('settings.change_avatar.options.delete.title'), {
           description: t('settings.change_avatar.options.delete.success')
         });
         setOpen(false);

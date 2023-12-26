@@ -3,12 +3,12 @@ import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 import { zodTextLanguageInputType } from '@/components/text-language-input';
 import type { ShowAdminGroups } from '@/graphql/hooks';
 import { mutationCreateApi } from './mutation-create-api';
 import { mutationEditApi } from './mutation-edit-api';
-import { useToast } from '@/components/ui/use-toast';
 import { useDialog } from '@/components/ui/dialog';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { usePathname, useRouter } from '@/i18n';
@@ -23,7 +23,6 @@ export const useCreateEditFormGroupsMembersAdmin = ({
 }: CreateEditFormGroupsMembersAdminArgs) => {
   const t = useTranslations('admin.members.groups');
   const tCore = useTranslations('core');
-  const { toast } = useToast();
   const { setOpen } = useDialog();
   const queryClient = useQueryClient();
   const { convertText } = useTextLang();
@@ -65,10 +64,8 @@ export const useCreateEditFormGroupsMembersAdmin = ({
     }
 
     if (isError) {
-      toast({
-        title: tCore('errors.title'),
-        description: tCore('errors.internal_server_error'),
-        variant: 'destructive'
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error')
       });
 
       return;
@@ -80,8 +77,7 @@ export const useCreateEditFormGroupsMembersAdmin = ({
       queryKey: [APIKeys.GROUPS_MEMBERS_ADMIN]
     });
 
-    toast({
-      title: data ? t('edit.success') : t('create.success'),
+    toast.success(data ? t('edit.success') : t('create.success'), {
       description: convertText(values.name)
     });
 

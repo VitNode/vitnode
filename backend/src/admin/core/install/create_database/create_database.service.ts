@@ -77,6 +77,7 @@ export class CreateDatabaseAdminInstallService {
       }),
       this.prisma.core_groups.create({
         data: {
+          protected: true,
           created: currentDate(),
           updated: currentDate(),
           name: {

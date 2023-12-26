@@ -2,6 +2,7 @@ import { useTranslations } from 'next-intl';
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
 
 import { DialogFooter, DialogHeader, DialogTitle, useDialog } from '@/components/ui/dialog';
 import type { ShowCoreLanguages } from '@/graphql/hooks';
@@ -16,13 +17,11 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { mutationApi } from './mutation-api';
-import { useToast } from '@/components/ui/use-toast';
 
 export const ModalEditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
   const t = useTranslations('admin');
   const tCore = useTranslations('core');
   const { setOpen } = useDialog();
-  const { toast } = useToast();
 
   const formSchema = z.object({
     name: z
@@ -55,18 +54,14 @@ export const ModalEditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => 
       ...values
     });
     if (mutation.error) {
-      toast({
-        title: tCore('errors.title'),
-        description: tCore('errors.internal_server_error'),
-        variant: 'destructive'
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error')
       });
 
       return;
     }
 
-    toast({
-      title: tCore('saved_success')
-    });
+    toast(tCore('saved_success'));
     setOpen(false);
   };
 

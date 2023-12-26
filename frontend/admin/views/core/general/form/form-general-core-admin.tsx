@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
+import { toast } from 'sonner';
 
 import {
   Form,
@@ -17,13 +18,11 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
 import { mutationApi } from './mutation-api';
-import { useToast } from '@/components/ui/use-toast';
 
 export const FormGeneralCoreAdmin = () => {
   const { side_name } = useSessionAdmin();
   const t = useTranslations('admin');
   const tCore = useTranslations('core');
-  const { toast } = useToast();
 
   const formSchema = z.object({
     name: z
@@ -47,18 +46,14 @@ export const FormGeneralCoreAdmin = () => {
       sideName: values.name
     });
     if (mutation.error) {
-      toast({
-        title: tCore('errors.title'),
-        description: tCore('errors.internal_server_error'),
-        variant: 'destructive'
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error')
       });
 
       return;
     }
 
-    toast({
-      title: tCore('saved_success')
-    });
+    toast.success(tCore('saved_success'));
   };
 
   return (

@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
 import { type ReactCropperElement } from 'react-cropper';
 import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
 import { mutationUploadApi } from './api/mutation-upload-api';
-import { useToast } from '@/components/ui/use-toast';
 import { useDialog } from '@/components/ui/dialog';
 
 import { useSession } from '../../use-session';
@@ -13,7 +13,6 @@ export const useCopperModalChangeAvatar = () => {
   const cropperRef = useRef<ReactCropperElement>(null);
   const [isPending, setPending] = useState(false);
   const { session } = useSession();
-  const { toast } = useToast();
   const { setOpen } = useDialog();
 
   const onSubmit = async () => {
@@ -32,16 +31,13 @@ export const useCopperModalChangeAvatar = () => {
     formData.append('file', file);
     const mutation = await mutationUploadApi(formData);
     if (mutation.error) {
-      toast({
-        title: t('errors.title'),
-        description: t('settings.change_avatar.options.upload.error'),
-        variant: 'destructive'
+      toast.error(t('errors.title'), {
+        description: t('settings.change_avatar.options.upload.error')
       });
 
       return;
     } else {
-      toast({
-        title: t('settings.change_avatar.options.upload.title'),
+      toast.success(t('settings.change_avatar.options.upload.title'), {
         description: t('settings.change_avatar.options.upload.success')
       });
       setOpen(false);

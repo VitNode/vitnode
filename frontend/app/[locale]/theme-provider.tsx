@@ -6,7 +6,7 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { type ThemeProviderProps } from 'next-themes/dist/types';
 import { useState } from 'react';
 
-import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from '@/components/ui/sonner';
 
 export const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
   const [queryClient] = useState(
@@ -25,7 +25,7 @@ export const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
       <QueryClientProvider client={queryClient}>
         <>
           {children}
-          <Toaster />
+          <Toaster position="bottom-center" closeButton />
           <ReactQueryDevtools initialIsOpen={false} />
         </>
       </QueryClientProvider>

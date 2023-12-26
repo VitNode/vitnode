@@ -2,10 +2,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
 import { zodTextLanguageInputType } from '@/components/text-language-input';
 import { mutationApi } from './mutation-api';
-import { useToast } from '@/components/ui/use-toast';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { useDialog } from '@/components/ui/dialog';
 import type { ErrorType } from '@/graphql/fetcher';
@@ -13,7 +13,6 @@ import type { ErrorType } from '@/graphql/fetcher';
 export const useFormCreateEditFormGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.staff');
   const tCore = useTranslations('core');
-  const { toast } = useToast();
   const { convertText } = useTextLang();
   const { setOpen } = useDialog();
 
@@ -63,18 +62,15 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
         return;
       }
 
-      toast({
-        title: tCore('errors.title'),
-        description: tCore('errors.internal_server_error'),
-        variant: 'destructive'
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error')
       });
 
       return;
     }
 
     setOpen(false);
-    toast({
-      title: t('administrators.add.success'),
+    toast.success(t('administrators.add.success'), {
       description: values.type === 'group' ? convertText(values.group?.name) : values.user?.name
     });
   };

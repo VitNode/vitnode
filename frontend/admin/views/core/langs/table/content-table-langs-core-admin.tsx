@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 import type { ColumnDef } from '@tanstack/react-table';
 import { useMemo } from 'react';
+import { toast } from 'sonner';
 
 import { DataTable } from '@/components/data-table/data-table';
 import { Badge } from '@/components/ui/badge';
@@ -8,14 +9,12 @@ import { Switch } from '@/components/ui/switch';
 import { ActionsTableLangsCoreAdmin } from './actions/actions-table-langs-core-admin';
 import type { ShowCoreLanguages } from '@/graphql/hooks';
 import { mutationApi } from './actions/edit/mutation-api';
-import { useToast } from '@/components/ui/use-toast';
 import type { LangsCoreAdminViewProps } from '../langs-core-admin-view';
 
 export const ContentTableLangsCoreAdmin = ({ data }: LangsCoreAdminViewProps) => {
   const t = useTranslations('admin.core.langs');
   const tAdmin = useTranslations('admin');
   const tCore = useTranslations('core');
-  const { toast } = useToast();
 
   const columns: ColumnDef<ShowCoreLanguages>[] = useMemo(
     () => [
@@ -49,10 +48,8 @@ export const ContentTableLangsCoreAdmin = ({ data }: LangsCoreAdminViewProps) =>
                   enabled: !data.enabled
                 });
                 if (mutation.error) {
-                  toast({
-                    title: tCore('errors.title'),
-                    description: tCore('errors.internal_server_error'),
-                    variant: 'destructive'
+                  toast.error(tCore('errors.title'), {
+                    description: tCore('errors.internal_server_error')
                   });
 
                   return;
