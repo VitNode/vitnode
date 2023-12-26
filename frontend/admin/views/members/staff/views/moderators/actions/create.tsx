@@ -6,13 +6,13 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/loader/loader';
 
-const CreateEditFormAdministratorsStaffAdmin = lazy(() =>
-  import('../../create-edit-form/create-edit-form').then(module => ({
-    default: module.CreateEditFormAdministratorsStaffAdmin
+const CreateEditFormModeratorsStaffAdmin = lazy(() =>
+  import('../create-edit-form/create-edit-form').then(module => ({
+    default: module.CreateEditFormModeratorsStaffAdmin
   }))
 );
 
-export const CreateActionsTableAdministratorsStaffAdmin = () => {
+export const CreateActionsTableModeratorsStaffAdmin = () => {
   const t = useTranslations('core');
 
   return (
@@ -27,7 +27,7 @@ export const CreateActionsTableAdministratorsStaffAdmin = () => {
 
         <DialogContent className="max-w-4xl">
           <Suspense fallback={<Loader />}>
-            <CreateEditFormAdministratorsStaffAdmin />
+            <CreateEditFormModeratorsStaffAdmin />
           </Suspense>
         </DialogContent>
       </Dialog>

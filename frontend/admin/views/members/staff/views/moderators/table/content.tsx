@@ -3,24 +3,22 @@ import type { ColumnDef } from '@tanstack/react-table';
 import { useMemo } from 'react';
 import { InfinityIcon, ShieldAlert } from 'lucide-react';
 
-import type { AdministratorsStaffAdminViewProps } from '../administrators-view';
 import { DataTable } from '@/components/data-table/data-table';
-import type { ShowAdminStaffAdministrators } from '@/graphql/hooks';
+import type { ShowAdminStaffModerators } from '@/graphql/hooks';
 import { DateFormat } from '@/components/date-format/date-format';
 import { HeaderSortingDataTable } from '@/components/data-table/header-sorting-data-table';
 import { Badge } from '@/components/ui/badge';
 import { LinkUser } from '@/components/user/link/link-user';
 import { GroupFormat } from '@/components/groups/group-format';
+import type { ModeratorsStaffAdminViewProps } from '../moderators-view';
 
-export const ContentTableAdministratorsStaffAdmin = ({
-  data
-}: AdministratorsStaffAdminViewProps) => {
+export const ContentTableModeratorsStaffAdmin = ({ data }: ModeratorsStaffAdminViewProps) => {
   const t = useTranslations('admin.members.staff');
 
-  const columns: ColumnDef<ShowAdminStaffAdministrators>[] = useMemo(
+  const columns: ColumnDef<ShowAdminStaffModerators>[] = useMemo(
     () => [
       {
-        header: t('table.administrator'),
+        header: t('table.moderator'),
         accessorKey: 'name',
         cell: ({ row }) => {
           const data = row.original;
@@ -98,8 +96,8 @@ export const ContentTableAdministratorsStaffAdmin = ({
 
   return (
     <DataTable
-      data={data?.core_staff_administrators__admin__show.edges ?? []}
-      pageInfo={data?.core_staff_administrators__admin__show.pageInfo}
+      data={data?.core_staff_moderators__admin__show.edges ?? []}
+      pageInfo={data?.core_staff_moderators__admin__show.pageInfo}
       defaultPageSize={10}
       columns={columns}
       defaultSorting={{

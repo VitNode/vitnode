@@ -18,6 +18,7 @@ type AuthorizationCurrentUserObj {
   group: GroupUser!
   id: String!
   is_admin: Boolean!
+  is_mod: Boolean!
   name: String!
   newsletter: Boolean!
 }
@@ -102,6 +103,7 @@ type Mutation {
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
   core_staff_administrators__admin__create(group_id: String, member_id: String, unrestricted: Boolean!): ShowAdminStaffAdministrators!
+  core_staff_moderators__admin__create(group_id: String, member_id: String, unrestricted: Boolean!): ShowAdminStaffModerators!
   forum_forums__admin__change_position(id: String!, index_to_move: Int!, parent_id: String): String!
   forum_forums__admin__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: String, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
   forum_topics__create(content: [TextLanguageInput!]!, forum_id: String!, title: [TextLanguageInput!]!): ShowTopicsForums!
@@ -140,6 +142,7 @@ type Query {
   core_middleware: CoreMiddlewareObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_staff_administrators__admin__show(cursor: String, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
+  core_staff_moderators__admin__show(cursor: String, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
   forum_forums__admin__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsAdminObj!
   forum_forums__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsObj!
   forum_posts__show: String!
@@ -226,6 +229,29 @@ input ShowAdminStaffAdministratorsSortByArgs {
 }
 
 enum ShowAdminStaffAdministratorsSortingColumnEnum {
+  updated
+}
+
+type ShowAdminStaffModerators {
+  created: Int!
+  id: String!
+  protected: Boolean!
+  unrestricted: Boolean!
+  updated: Int!
+  user_or_group: UserOrGroupCoreStaffUnion!
+}
+
+type ShowAdminStaffModeratorsObj {
+  edges: [ShowAdminStaffModerators!]!
+  pageInfo: PageInfo!
+}
+
+input ShowAdminStaffModeratorsSortByArgs {
+  column: ShowAdminStaffModeratorsSortingColumnEnum!
+  direction: SortDirectionEnum!
+}
+
+enum ShowAdminStaffModeratorsSortingColumnEnum {
   updated
 }
 

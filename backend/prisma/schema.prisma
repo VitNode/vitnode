@@ -43,13 +43,14 @@ model core_members {
   newsletter   Boolean           @default(false)
   avatar_color String            @db.VarChar(6)
 
-  attachments       core_attachments[]       @relation("core_attachments_member")
-  sessions          core_sessions[]          @relation("core_sessions_member")
-  admin_sessions    core_admin_sessions[]    @relation("core_admin_sessions_member")
-  admin_permissions core_admin_permissions[] @relation("core_admin_permissions_member")
-  forum_topics      forum_topics[]           @relation("forum_topics_author")
-  forum_posts       forum_posts[]            @relation("forum_posts_author")
-  forum_logs        forum_logs[]             @relation("forum_logs_member")
+  attachments           core_attachments[]           @relation("core_attachments_member")
+  sessions              core_sessions[]              @relation("core_sessions_member")
+  admin_sessions        core_admin_sessions[]        @relation("core_admin_sessions_member")
+  admin_permissions     core_admin_permissions[]     @relation("core_admin_permissions_member")
+  forum_topics          forum_topics[]               @relation("forum_topics_author")
+  forum_posts           forum_posts[]                @relation("forum_posts_author")
+  forum_logs            forum_logs[]                 @relation("forum_logs_member")
+  moderator_permissions core_moderator_permissions[] @relation("core_moderator_permissions_member")
 
   @@index([group_id])
 }
@@ -64,9 +65,10 @@ model core_groups {
   root      Boolean             @default(false)
   guest     Boolean             @default(false)
 
-  members            core_members[]             @relation("core_members_group")
-  admin_permissions  core_admin_permissions[]   @relation("core_admin_permissions_group")
-  forums_permissions forum_forums_permissions[] @relation("forums_forums_permissions_group")
+  members               core_members[]               @relation("core_members_group")
+  admin_permissions     core_admin_permissions[]     @relation("core_admin_permissions_group")
+  forums_permissions    forum_forums_permissions[]   @relation("forums_forums_permissions_group")
+  moderator_permissions core_moderator_permissions[] @relation("core_moderator_permissions_group")
 }
 
 model core_groups_names {
@@ -84,9 +86,21 @@ model core_groups_names {
 model core_admin_permissions {
   id           String        @id @unique @default(uuid())
   group        core_groups?  @relation("core_admin_permissions_group", references: [id], fields: [group_id], onDelete: Cascade)
-  group_id     String?
+  group_id     String?       @unique
   member       core_members? @relation("core_admin_permissions_member", references: [id], fields: [member_id], onDelete: Cascade)
-  member_id    String?
+  member_id    String?       @unique
+  unrestricted Boolean       @default(false)
+  created      Int
+  updated      Int
+  protected    Boolean       @default(false)
+}
+
+model core_moderator_permissions {
+  id           String        @id @unique @default(uuid())
+  group        core_groups?  @relation("core_moderator_permissions_group", references: [id], fields: [group_id], onDelete: Cascade)
+  group_id     String?       @unique
+  member       core_members? @relation("core_moderator_permissions_member", references: [id], fields: [member_id], onDelete: Cascade)
+  member_id    String?       @unique
   unrestricted Boolean       @default(false)
   created      Int
   updated      Int

@@ -7,6 +7,9 @@ export class AuthorizationCurrentUserObj extends User {
   @Field(() => Boolean)
   is_admin: boolean;
 
+  @Field(() => Boolean)
+  is_mod: boolean;
+
   @Field(() => String)
   email: string;
 

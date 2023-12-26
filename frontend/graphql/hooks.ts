@@ -35,6 +35,7 @@ export type AuthorizationCurrentUserObj = {
   group: GroupUser;
   id: Scalars['String']['output'];
   is_admin: Scalars['Boolean']['output'];
+  is_mod: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
   newsletter: Scalars['Boolean']['output'];
 };
@@ -129,6 +130,7 @@ export type Mutation = {
   core_sessions__sign_in: Scalars['String']['output'];
   core_sessions__sign_out: Scalars['String']['output'];
   core_staff_administrators__admin__create: ShowAdminStaffAdministrators;
+  core_staff_moderators__admin__create: ShowAdminStaffModerators;
   forum_forums__admin__change_position: Scalars['String']['output'];
   forum_forums__admin__create: CreateForumForumsObj;
   forum_topics__create: ShowTopicsForums;
@@ -193,6 +195,13 @@ export type MutationCore_Staff_Administrators__Admin__CreateArgs = {
 };
 
 
+export type MutationCore_Staff_Moderators__Admin__CreateArgs = {
+  group_id?: InputMaybe<Scalars['String']['input']>;
+  member_id?: InputMaybe<Scalars['String']['input']>;
+  unrestricted: Scalars['Boolean']['input'];
+};
+
+
 export type MutationForum_Forums__Admin__Change_PositionArgs = {
   id: Scalars['String']['input'];
   index_to_move: Scalars['Int']['input'];
@@ -250,6 +259,7 @@ export type Query = {
   core_middleware: CoreMiddlewareObj;
   core_sessions__authorization: AuthorizationCoreSessionsObj;
   core_staff_administrators__admin__show: ShowAdminStaffAdministratorsObj;
+  core_staff_moderators__admin__show: ShowAdminStaffModeratorsObj;
   forum_forums__admin__show: ShowForumForumsAdminObj;
   forum_forums__show: ShowForumForumsObj;
   forum_posts__show: Scalars['String']['output'];
@@ -298,6 +308,14 @@ export type QueryCore_Staff_Administrators__Admin__ShowArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   sortBy?: InputMaybe<Array<ShowAdminStaffAdministratorsSortByArgs>>;
+};
+
+
+export type QueryCore_Staff_Moderators__Admin__ShowArgs = {
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<Array<ShowAdminStaffModeratorsSortByArgs>>;
 };
 
 
@@ -419,6 +437,32 @@ export const ShowAdminStaffAdministratorsSortingColumnEnum = {
 } as const;
 
 export type ShowAdminStaffAdministratorsSortingColumnEnum = typeof ShowAdminStaffAdministratorsSortingColumnEnum[keyof typeof ShowAdminStaffAdministratorsSortingColumnEnum];
+export type ShowAdminStaffModerators = {
+  __typename?: 'ShowAdminStaffModerators';
+  created: Scalars['Int']['output'];
+  id: Scalars['String']['output'];
+  protected: Scalars['Boolean']['output'];
+  unrestricted: Scalars['Boolean']['output'];
+  updated: Scalars['Int']['output'];
+  user_or_group: UserOrGroupCoreStaffUnion;
+};
+
+export type ShowAdminStaffModeratorsObj = {
+  __typename?: 'ShowAdminStaffModeratorsObj';
+  edges: Array<ShowAdminStaffModerators>;
+  pageInfo: PageInfo;
+};
+
+export type ShowAdminStaffModeratorsSortByArgs = {
+  column: ShowAdminStaffModeratorsSortingColumnEnum | `${ShowAdminStaffModeratorsSortingColumnEnum}`;
+  direction: SortDirectionEnum | `${SortDirectionEnum}`;
+};
+
+export const ShowAdminStaffModeratorsSortingColumnEnum = {
+  updated: 'updated'
+} as const;
+
+export type ShowAdminStaffModeratorsSortingColumnEnum = typeof ShowAdminStaffModeratorsSortingColumnEnum[keyof typeof ShowAdminStaffModeratorsSortingColumnEnum];
 export type ShowCoreLanguages = {
   __typename?: 'ShowCoreLanguages';
   default: Scalars['Boolean']['output'];
@@ -653,6 +697,15 @@ export type Core_Staff_Administrators__Admin__CreateMutationVariables = Exact<{
 
 export type Core_Staff_Administrators__Admin__CreateMutation = { __typename?: 'Mutation', core_staff_administrators__admin__create: { __typename?: 'ShowAdminStaffAdministrators', created: number, id: string, protected: boolean, unrestricted: boolean, updated: number } };
 
+export type Core_Staff_Moderators__Admin__CreateMutationVariables = Exact<{
+  groupId?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['String']['input']>;
+  unrestricted: Scalars['Boolean']['input'];
+}>;
+
+
+export type Core_Staff_Moderators__Admin__CreateMutation = { __typename?: 'Mutation', core_staff_moderators__admin__create: { __typename?: 'ShowAdminStaffModerators', created: number, id: string, protected: boolean, unrestricted: boolean, updated: number } };
+
 export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -765,6 +818,16 @@ export type Core_Staff_Administrators__Admin__ShowQueryVariables = Exact<{
 
 export type Core_Staff_Administrators__Admin__ShowQuery = { __typename?: 'Query', core_staff_administrators__admin__show: { __typename?: 'ShowAdminStaffAdministratorsObj', edges: Array<{ __typename?: 'ShowAdminStaffAdministrators', created: number, id: string, unrestricted: boolean, updated: number, protected: boolean, user_or_group: { __typename: 'StaffGroupUser', id: string, group_name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } | { __typename: 'User', avatar_color: string, id: string, name: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, cover?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
 
+export type Core_Staff_Moderators__Admin__ShowQueryVariables = Exact<{
+  sortBy?: InputMaybe<Array<ShowAdminStaffModeratorsSortByArgs> | ShowAdminStaffModeratorsSortByArgs>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  cursor?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Core_Staff_Moderators__Admin__ShowQuery = { __typename?: 'Query', core_staff_moderators__admin__show: { __typename?: 'ShowAdminStaffModeratorsObj', edges: Array<{ __typename?: 'ShowAdminStaffModerators', created: number, id: string, unrestricted: boolean, updated: number, protected: boolean, user_or_group: { __typename: 'StaffGroupUser', id: string, group_name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } | { __typename: 'User', avatar_color: string, id: string, name: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, cover?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
+
 export type Core_Members__Admin__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -780,7 +843,7 @@ export type Core_Members__Admin__ShowQuery = { __typename?: 'Query', core_member
 export type Admin_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Admin_Sessions__AuthorizationQuery = { __typename?: 'Query', admin_sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: string, is_admin: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } } | null } };
+export type Admin_Sessions__AuthorizationQuery = { __typename?: 'Query', admin_sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } } | null } };
 
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -820,7 +883,7 @@ export type Core_Members__ProfilesQuery = { __typename?: 'Query', core_members__
 export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: string, is_admin: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } } | null }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string }> } };
+export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'UploadCoreAttachmentsObj', created: number, description?: string | null, extension: string, file_size: number, id: string, member_id: string, mimetype: string, module: string, module_id: string, name: string, position: number, url: string } | null, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', id_language: string, value: string }> } } | null }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string }> } };
 
 export type Forum_Forums__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -922,6 +985,21 @@ export const Core_Groups__Admin_Create = gql`
 export const Core_Staff_Administrators__Admin__Create = gql`
     mutation Core_staff_administrators__admin__create($groupId: String, $memberId: String, $unrestricted: Boolean!) {
   core_staff_administrators__admin__create(
+    group_id: $groupId
+    member_id: $memberId
+    unrestricted: $unrestricted
+  ) {
+    created
+    id
+    protected
+    unrestricted
+    updated
+  }
+}
+    `;
+export const Core_Staff_Moderators__Admin__Create = gql`
+    mutation Core_staff_moderators__admin__create($groupId: String, $memberId: String, $unrestricted: Boolean!) {
+  core_staff_moderators__admin__create(
     group_id: $groupId
     member_id: $memberId
     unrestricted: $unrestricted
@@ -1210,6 +1288,82 @@ export const Core_Staff_Administrators__Admin__Show = gql`
   }
 }
     `;
+export const Core_Staff_Moderators__Admin__Show = gql`
+    query Core_staff_moderators__admin__show($sortBy: [ShowAdminStaffModeratorsSortByArgs!], $last: Int, $first: Int, $cursor: String) {
+  core_staff_moderators__admin__show(
+    sortBy: $sortBy
+    last: $last
+    first: $first
+    cursor: $cursor
+  ) {
+    edges {
+      created
+      id
+      unrestricted
+      user_or_group {
+        __typename
+        ... on User {
+          avatar {
+            created
+            description
+            extension
+            file_size
+            id
+            member_id
+            mimetype
+            module
+            module_id
+            name
+            position
+            url
+          }
+          avatar_color
+          cover {
+            created
+            description
+            extension
+            file_size
+            id
+            member_id
+            mimetype
+            module
+            module_id
+            name
+            position
+            url
+          }
+          group {
+            id
+            name {
+              id_language
+              value
+            }
+          }
+          id
+          name
+        }
+        ... on StaffGroupUser {
+          group_name {
+            id_language
+            value
+          }
+          id
+        }
+      }
+      updated
+      protected
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+  }
+}
+    `;
 export const Core_Members__Admin__Show = gql`
     query Core_members__admin__show($cursor: String, $first: Int, $last: Int, $search: String, $sortBy: [ShowAdminMembersSortByArgs!], $groups: [String!]) {
   core_members__admin__show(
@@ -1266,6 +1420,7 @@ export const Admin_Sessions__Authorization = gql`
       email
       id
       is_admin
+      is_mod
       name
       newsletter
       avatar_color
@@ -1414,6 +1569,7 @@ export const Core_Sessions__Authorization = gql`
       email
       id
       is_admin
+      is_mod
       name
       newsletter
       avatar_color

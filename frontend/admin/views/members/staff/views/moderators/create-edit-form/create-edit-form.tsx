@@ -18,7 +18,7 @@ import { GroupInput } from '@/components/groups/input/group-input';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 
-export const CreateEditFormAdministratorsStaffAdmin = () => {
+export const CreateEditFormModeratorsStaffAdmin = () => {
   const t = useTranslations('admin.members.staff');
   const tCore = useTranslations('core');
   const { form, onSubmit } = useFormCreateEditFormGroupsMembersAdmin();
@@ -26,7 +26,7 @@ export const CreateEditFormAdministratorsStaffAdmin = () => {
   return (
     <Form {...form}>
       <DialogHeader className="flex flex-col gap-4">
-        <DialogTitle>{t('administrators.add.title')}</DialogTitle>
+        <DialogTitle>{t('moderators.add.title')}</DialogTitle>
       </DialogHeader>
 
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

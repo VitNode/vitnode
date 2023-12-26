@@ -50,8 +50,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         <Comp
           className={cx(buttonVariants({ variant, size, className }))}
           ref={ref}
-          disabled
           {...props}
+          disabled
         >
           <Loader small />
           {t('loading')}

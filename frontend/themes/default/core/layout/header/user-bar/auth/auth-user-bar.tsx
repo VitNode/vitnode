@@ -23,7 +23,7 @@ export const AuthUserBar = () => {
   const { onSubmit } = useSignOutAPI();
 
   if (!session) return null;
-  const { email, id, is_admin, name } = session;
+  const { email, id, is_admin, is_mod, name } = session;
 
   return (
     <DropdownMenu>
@@ -53,19 +53,24 @@ export const AuthUserBar = () => {
           </DropdownMenuItem>
         </DropdownMenuGroup>
 
-        {is_admin && (
+        {(is_admin || is_mod) && (
           <>
             <DropdownMenuSeparator />
 
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => push('/modcp')}>
-                <Shield />
-                <span>{t('user-bar.mod_cp')}</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => window.open('/admin', '_blank')}>
-                <KeyRound />
-                <span>{t('user-bar.admin_cp')}</span>
-              </DropdownMenuItem>
+              {is_mod && (
+                <DropdownMenuItem onClick={() => push('/modcp')}>
+                  <Shield />
+                  <span>{t('user-bar.mod_cp')}</span>
+                </DropdownMenuItem>
+              )}
+
+              {is_admin && (
+                <DropdownMenuItem onClick={() => window.open('/admin', '_blank')}>
+                  <KeyRound />
+                  <span>{t('user-bar.admin_cp')}</span>
+                </DropdownMenuItem>
+              )}
             </DropdownMenuGroup>
           </>
         )}
