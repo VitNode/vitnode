@@ -1,11 +1,11 @@
 'use client';
 
-import { CreateActionsTableModeratorsStaffAdmin } from './create';
+import { CreateActionsModeratorsStaffAdmin } from './create';
 
-export const ActionsTableModeratorsStaffAdmin = () => {
+export const ActionsModeratorsStaffAdmin = () => {
   return (
     <>
-      <CreateActionsTableModeratorsStaffAdmin />
+      <CreateActionsModeratorsStaffAdmin />
     </>
   );
 };
