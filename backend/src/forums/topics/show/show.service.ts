@@ -58,21 +58,31 @@ export class ShowTopicsForumsService {
         where,
         include: {
           title: true,
-          content: true,
-          author: {
-            include: {
-              avatar: true,
-              cover: true,
-              group: {
-                include: {
-                  name: true
-                }
-              }
-            }
-          },
           forum: {
             include: {
               name: true
+            }
+          },
+          posts: {
+            take: 1,
+            orderBy: [
+              {
+                created: SortDirectionEnum.desc
+              }
+            ],
+            include: {
+              content: true,
+              author: {
+                include: {
+                  avatar: true,
+                  cover: true,
+                  group: {
+                    include: {
+                      name: true
+                    }
+                  }
+                }
+              }
             }
           }
         },
@@ -86,7 +96,14 @@ export class ShowTopicsForumsService {
     ]);
 
     return outputPagination({
-      edges,
+      edges: edges
+        .map(edge => {
+          const post = edge.posts.at(0);
+          if (!post) return null;
+
+          return { ...edge, author: post.author, content: post.content };
+        })
+        .filter(edge => edge !== null),
       totalCount,
       first,
       cursor,

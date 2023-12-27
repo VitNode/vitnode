@@ -24,9 +24,6 @@ export class ShowTopicsForums {
   @Field(() => [TextLanguage])
   content: TextLanguage[];
 
-  @Field(() => Int, { nullable: true })
-  updated: number | null;
-
   @Field(() => Int)
   created: number;
 

@@ -7,7 +7,7 @@ import { Link } from '@/i18n';
 import { DateFormat } from '@/components/date-format/date-format';
 
 export interface TopicsListForumProps {
-  data: Pick<ShowTopicsForums, 'id' | 'created' | 'title' | 'updated' | 'author'>[];
+  data: Pick<ShowTopicsForums, 'id' | 'created' | 'title' | 'author'>[];
 }
 
 export const ContentTopicsListForum = ({ data }: TopicsListForumProps) => {

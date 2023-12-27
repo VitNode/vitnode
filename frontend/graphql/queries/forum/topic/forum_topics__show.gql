@@ -8,7 +8,6 @@ query Forum_topics__show($ids: [String!], $first: Int) {
       created
       id
       locked
-      updated
       title {
         id_language
         value

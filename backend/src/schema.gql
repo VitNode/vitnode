@@ -145,7 +145,7 @@ type Query {
   core_staff_moderators__admin__show(cursor: String, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
   forum_forums__admin__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsAdminObj!
   forum_forums__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsObj!
-  forum_posts__show: String!
+  forum_posts__show(cursor: String, first: Int, last: Int, topic_id: String): ShowPostsForumsObj!
   forum_topics__show(cursor: String, first: Int, forum_id: String, ids: [String!], last: Int): ShowTopicsForumsObj!
 }
 
@@ -346,6 +346,16 @@ type ShowForumForumsWithParent {
   position: Int!
 }
 
+type ShowPostsForums {
+  content: [TextLanguage!]!
+  id: String!
+}
+
+type ShowPostsForumsObj {
+  edges: [ShowPostsForums!]!
+  pageInfo: PageInfo!
+}
+
 type ShowTopicsForums {
   author: User!
   content: [TextLanguage!]!
@@ -354,7 +364,6 @@ type ShowTopicsForums {
   id: String!
   locked: Boolean!
   title: [TextLanguage!]!
-  updated: Int
 }
 
 type ShowTopicsForumsObj {
