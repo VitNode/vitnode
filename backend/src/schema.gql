@@ -105,6 +105,7 @@ type Mutation {
   core_staff_administrators__admin__create(group_id: String, member_id: String, unrestricted: Boolean!): ShowAdminStaffAdministrators!
   core_staff_administrators__admin__delete(id: String!): String!
   core_staff_moderators__admin__create(group_id: String, member_id: String, unrestricted: Boolean!): ShowAdminStaffModerators!
+  core_staff_moderators__admin__delete(id: String!): String!
   forum_forums__admin__change_position(id: String!, index_to_move: Int!, parent_id: String): String!
   forum_forums__admin__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: String, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
   forum_topics__create(content: [TextLanguageInput!]!, forum_id: String!, title: [TextLanguageInput!]!): ShowTopicsForums!

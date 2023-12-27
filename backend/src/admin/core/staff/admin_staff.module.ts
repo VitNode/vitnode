@@ -9,7 +9,9 @@ import { ShowAdminStaffModeratorsResolver } from './moderators/show/show.resolve
 import { CreateAdminStaffModeratorsService } from './moderators/create/create.service';
 import { CreateAdminStaffModeratorsResolver } from './moderators/create/create.resolver';
 import { DeleteAdminStaffAdministratorsService } from './administrators/delete/delete.service';
-import { DeleteAdminStaffAdministratorResolver } from './administrators/delete/delete.resolver';
+import { DeleteAdminStaffAdministratorsResolver } from './administrators/delete/delete.resolver';
+import { DeleteAdminStaffModeratorsService } from './moderators/delete/delete.service';
+import { DeleteAdminStaffModeratorsResolver } from './moderators/delete/delete.resolver';
 
 @Module({
   providers: [
@@ -22,7 +24,9 @@ import { DeleteAdminStaffAdministratorResolver } from './administrators/delete/d
     CreateAdminStaffModeratorsService,
     CreateAdminStaffModeratorsResolver,
     DeleteAdminStaffAdministratorsService,
-    DeleteAdminStaffAdministratorResolver
+    DeleteAdminStaffAdministratorsResolver,
+    DeleteAdminStaffModeratorsService,
+    DeleteAdminStaffModeratorsResolver
   ]
 })
 export class AdminStaffModule {}

@@ -7,7 +7,7 @@ import { DeleteAdminStaffAdministratorsArgs } from './dto/delete.args';
 import { AdminAuthGuards } from '@/utils/guards/admin-auth.guards';
 
 @Resolver()
-export class DeleteAdminStaffAdministratorResolver {
+export class DeleteAdminStaffAdministratorsResolver {
   constructor(private readonly service: DeleteAdminStaffAdministratorsService) {}
 
   @Mutation(() => String)
