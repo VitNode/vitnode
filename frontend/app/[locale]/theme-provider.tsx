@@ -25,7 +25,7 @@ export const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
       <QueryClientProvider client={queryClient}>
         <>
           {children}
-          <Toaster position="bottom-center" closeButton />
+          <Toaster position="top-right" closeButton />
           <ReactQueryDevtools initialIsOpen={false} />
         </>
       </QueryClientProvider>

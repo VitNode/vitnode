@@ -9,7 +9,7 @@ import { outputPagination } from '@/functions/database/pagination/outputPaginati
 import { inputPagination } from '@/functions/database/pagination/inputPagination';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 import { User } from '@/utils/decorators/user.decorator';
-import { AccessDeniedError } from '../../../../utils/errors/AccessDeniedError';
+import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 
 @Injectable()
 export class ShowForumForumsService {
@@ -28,7 +28,7 @@ export class ShowForumForumsService {
           id: true
         }
       })
-    ).id;
+    )?.id;
 
     const permissionCanView: Prisma.forum_forumsWhereInput[] = [
       {

@@ -5,12 +5,12 @@ export class ShowPostsForumsArgs {
   @Field(() => String, { nullable: true })
   cursor: string | null;
 
+  @Field(() => String, { nullable: true })
+  cursor_meta_tag: string | null;
+
   @Field(() => Int, { nullable: true })
   first: number | null;
 
-  @Field(() => Int, { nullable: true })
-  last: number | null;
-
-  @Field(() => String, { nullable: true })
-  topic_id: string | null;
+  @Field(() => String)
+  topic_id: string;
 }
