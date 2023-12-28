@@ -1,23 +1,22 @@
-'use client';
-
-import { ChevronDown, Lock, Settings, Unlock } from 'lucide-react';
+import { ChevronDown, Settings } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { LockToggleActionsTopic } from '@/themes/default/core/views/forum/topic/actions/lock-toggle/lock-toggle';
 
 interface Props {
+  id: string;
   state: {
     locked: boolean;
   };
 }
 
-export const ActionsTopic = ({ state }: Props) => {
+export const ActionsTopic = ({ id, state }: Props) => {
   const t = useTranslations('forum.topics.actions');
 
   return (
@@ -29,15 +28,7 @@ export const ActionsTopic = ({ state }: Props) => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
-        {state.locked ? (
-          <DropdownMenuItem>
-            <Unlock /> {t('unlock')}
-          </DropdownMenuItem>
-        ) : (
-          <DropdownMenuItem>
-            <Lock /> {t('lock')}
-          </DropdownMenuItem>
-        )}
+        <LockToggleActionsTopic id={id} locked={state.locked} />
       </DropdownMenuContent>
     </DropdownMenu>
   );

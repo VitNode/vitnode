@@ -1,12 +1,12 @@
 import { useTranslations } from 'next-intl';
-import { BookOpen, Lock, MessagesSquare } from 'lucide-react';
+import { Lock, MessagesSquare } from 'lucide-react';
 
 import { badgeVariants } from '@/components/ui/badge';
 import { Link } from '@/i18n';
 import type { Forum_Topics__ShowQuery } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { LinkUser } from '@/components/user/link/link-user';
-import { ActionsTopic } from './actions-topic';
+import { ActionsTopic } from './actions/actions-topic';
 import { TitleIconTopic } from './title-icon';
 import { PostTopic } from './post/post';
 
@@ -32,7 +32,7 @@ export const TopicView = ({ data: dataApi }: Props) => {
         <div className="flex flex-col gap-1">
           <div className="flex gap-4 items-center sm:flex-row flex-col">
             <div className="order-1 sm:order-2">
-              <ActionsTopic state={{ locked }} />
+              <ActionsTopic id={id} state={{ locked }} />
             </div>
 
             <h1 className="text-2xl font-semibold tracking-tight leading-tight sm:order-1 order-2 flex-1">
@@ -41,17 +41,11 @@ export const TopicView = ({ data: dataApi }: Props) => {
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
-            <TitleIconTopic variant={locked ? 'secondary' : 'default'}>
-              {locked ? (
-                <>
-                  <Lock /> {t('closed')}
-                </>
-              ) : (
-                <>
-                  <BookOpen /> {t('open')}
-                </>
-              )}
-            </TitleIconTopic>
+            {locked && (
+              <TitleIconTopic variant="secondary">
+                <Lock /> {t('closed')}
+              </TitleIconTopic>
+            )}
 
             <span>
               {t.rich('user_wrote_in_forum', {
