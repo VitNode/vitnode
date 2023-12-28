@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import { BookOpen, MessagesSquare } from 'lucide-react';
+import { BookOpen, Lock, MessagesSquare } from 'lucide-react';
 
 import { badgeVariants } from '@/components/ui/badge';
 import { Link } from '@/i18n';
@@ -41,11 +41,17 @@ export const TopicView = ({ data: dataApi }: Props) => {
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
-            {!locked && (
-              <TitleIconTopic>
-                <BookOpen /> {t('open')}
-              </TitleIconTopic>
-            )}
+            <TitleIconTopic variant={locked ? 'secondary' : 'default'}>
+              {locked ? (
+                <>
+                  <Lock /> {t('closed')}
+                </>
+              ) : (
+                <>
+                  <BookOpen /> {t('open')}
+                </>
+              )}
+            </TitleIconTopic>
 
             <span>
               {t.rich('user_wrote_in_forum', {

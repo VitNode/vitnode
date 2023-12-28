@@ -7,6 +7,7 @@
       "username_format": "<user></user>, <group></group>",
       "user_wrote_in_forum": "<user></user> wrote in <forum></forum>",
       "open": "Open",
+      "closed": "Closed",
       "actions": {
         "title": "Actions",
         "lock": "Lock",

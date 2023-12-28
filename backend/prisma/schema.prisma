@@ -47,8 +47,8 @@ model core_members {
   admin_sessions        core_admin_sessions[]        @relation("core_admin_sessions_member")
   admin_permissions     core_admin_permissions[]     @relation("core_admin_permissions_member")
   forum_posts           forum_posts[]                @relation("forum_posts_author")
-  forum_logs            forum_logs[]                 @relation("forum_logs_member")
   moderator_permissions core_moderator_permissions[] @relation("core_moderator_permissions_member")
+  topics_logs           forum_topics_logs[]          @relation("forum_topics_logs_member")
 
   @@index([group_id])
 }
@@ -185,7 +185,6 @@ model forum_forums {
   description forum_forums_description[] @relation("forums_forums_description_forum")
   permissions forum_forums_permissions[] @relation("forums_forums_permissions_forum")
   topics      forum_topics[]             @relation("forum_topics_forum")
-  logs        forum_logs[]               @relation("forum_logs_forum")
 }
 
 model forum_forums_names {
@@ -235,7 +234,7 @@ model forum_topics {
 
   title forum_topics_title[] @relation("forum_topics_title_topic")
   posts forum_posts[]        @relation("forum_posts_topic")
-  logs  forum_logs[]         @relation("forum_logs_topic")
+  logs  forum_topics_logs[]  @relation("forum_topics_logs_topic")
 }
 
 model forum_topics_title {
@@ -273,20 +272,18 @@ model forum_posts_content {
   language core_languages @relation("forum_posts_content_language", references: [id], fields: [id_language], onDelete: Cascade)
 }
 
-enum ForumActions {
-  ADDED
-  ADMIN
+enum ForumTopicsActions {
+  lock
+  unlock
 }
 
-model forum_logs {
-  id         String        @id @unique @default(uuid())
-  member     core_members  @relation("forum_logs_member", references: [id], fields: [member_id], onDelete: Cascade)
+model forum_topics_logs {
+  id         String             @id @unique @default(uuid())
+  member     core_members       @relation("forum_topics_logs_member", references: [id], fields: [member_id], onDelete: Cascade)
   member_id  String
-  ip_address String        @db.VarChar(46)
+  ip_address String             @db.VarChar(46)
   created    Int
-  action     String        @db.VarChar(255)
-  forum      forum_forums? @relation("forum_logs_forum", references: [id], fields: [forum_id], onDelete: Cascade)
-  forum_id   String?
-  topic      forum_topics? @relation("forum_logs_topic", references: [id], fields: [topic_id], onDelete: Cascade)
+  action     ForumTopicsActions
+  topic      forum_topics?      @relation("forum_topics_logs_topic", references: [id], fields: [topic_id], onDelete: SetNull)
   topic_id   String?
 }

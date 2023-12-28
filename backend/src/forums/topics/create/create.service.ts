@@ -4,7 +4,6 @@ import { CreateForumTopicsArgs } from './dto/create.args';
 import { ShowTopicsForums } from '../show/dto/show.obj';
 
 import { PrismaService } from '@/prisma/prisma.service';
-import { NotFountError } from '@/utils/errors/not-found';
 import { currentDate } from '@/functions/date';
 import { User } from '@/utils/decorators/user.decorator';
 import { Ctx } from '@/types/context.type';
@@ -20,7 +19,7 @@ export class CreateForumTopicsService {
     { content, forum_id, title }: CreateForumTopicsArgs,
     { req }: Ctx
   ): Promise<ShowTopicsForums> {
-    const forum = await this.prisma.forum_forums.findUnique({
+    const forum = await this.prisma.forum_forums.findUniqueOrThrow({
       where: {
         id: forum_id
       },
@@ -35,10 +34,6 @@ export class CreateForumTopicsService {
 
     if (!(forum.permissions.at(0)?.can_create || forum.can_all_create)) {
       throw new AccessDeniedError();
-    }
-
-    if (!forum) {
-      throw new NotFountError('Forum');
     }
 
     const topic = await this.prisma.forum_topics.create({

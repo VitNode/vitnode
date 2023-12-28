@@ -3,7 +3,6 @@ import { Injectable } from '@nestjs/common';
 import { DeleteAdminGroupsArgs } from './dto/delete.args';
 
 import { PrismaService } from '@/prisma/prisma.service';
-import { NotFountError } from '@/utils/errors/not-found';
 import { CustomError } from '@/utils/errors/CustomError';
 
 @Injectable()
@@ -11,13 +10,9 @@ export class DeleteAdminGroupsService {
   constructor(private prisma: PrismaService) {}
 
   async delete({ id }: DeleteAdminGroupsArgs): Promise<string> {
-    const group = await this.prisma.core_groups.findUnique({
+    await this.prisma.core_groups.findUniqueOrThrow({
       where: { id }
     });
-
-    if (!group) {
-      throw new NotFountError('Group');
-    }
 
     // Find default group
     const defaultGroup = await this.prisma.core_groups.findFirst({
