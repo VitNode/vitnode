@@ -17,7 +17,18 @@ export class ShowPostsForumsService {
       this.prisma.forum_posts.findMany({
         ...inputPagination({ first, cursor, last }),
         include: {
-          content: true
+          content: true,
+          author: {
+            include: {
+              avatar: true,
+              cover: true,
+              group: {
+                include: {
+                  name: true
+                }
+              }
+            }
+          }
         },
         orderBy: [
           {
