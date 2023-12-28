@@ -133,6 +133,8 @@ export type Mutation = {
   core_staff_moderators__admin__create: ShowAdminStaffModerators;
   forum_forums__admin__change_position: Scalars['String']['output'];
   forum_forums__admin__create: CreateForumForumsObj;
+  forum_posts__create: ShowPostsForums;
+  forum_topics__actions__lock_toggle: Scalars['Boolean']['output'];
   forum_topics__create: ShowTopicsForums;
 };
 
@@ -214,6 +216,17 @@ export type MutationForum_Forums__Admin__CreateArgs = {
   name: Array<TextLanguageInput>;
   parent_id?: InputMaybe<Scalars['String']['input']>;
   permissions: PermissionsCreateForumForums;
+};
+
+
+export type MutationForum_Posts__CreateArgs = {
+  content: Array<TextLanguageInput>;
+  topic_id: Scalars['String']['input'];
+};
+
+
+export type MutationForum_Topics__Actions__Lock_ToggleArgs = {
+  id: Scalars['String']['input'];
 };
 
 
@@ -575,6 +588,7 @@ export type ShowForumForumsWithParent = {
 
 export type ShowPostsForums = {
   __typename?: 'ShowPostsForums';
+  author: User;
   content: Array<TextLanguage>;
   id: Scalars['String']['output'];
 };
@@ -784,6 +798,13 @@ export type Core_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: ne
 
 
 export type Core_Sessions__Sign_OutMutation = { __typename?: 'Mutation', core_sessions__sign_out: string };
+
+export type Forum_Topics__Actions__Lock_ToggleMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type Forum_Topics__Actions__Lock_ToggleMutation = { __typename?: 'Mutation', forum_topics__actions__lock_toggle: boolean };
 
 export type Forum_Topics__CreateMutationVariables = Exact<{
   content: Array<TextLanguageInput> | TextLanguageInput;
@@ -1111,6 +1132,11 @@ export const Core_Sessions__Sign_In = gql`
 export const Core_Sessions__Sign_Out = gql`
     mutation Core_sessions__sign_out {
   core_sessions__sign_out
+}
+    `;
+export const Forum_Topics__Actions__Lock_Toggle = gql`
+    mutation Forum_topics__actions__lock_toggle($id: String!) {
+  forum_topics__actions__lock_toggle(id: $id)
 }
     `;
 export const Forum_Topics__Create = gql`

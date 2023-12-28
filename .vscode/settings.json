@@ -28,6 +28,5 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.stylelint": "explicit"
   },
-  "eslint.workingDirectories": ["frontend", "backend"],
-  "typescript.preferences.importModuleSpecifier": "non-relative"
+  "eslint.workingDirectories": ["frontend", "backend"]
 }
