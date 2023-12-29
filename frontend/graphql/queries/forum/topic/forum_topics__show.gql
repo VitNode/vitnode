@@ -62,10 +62,64 @@ query Forum_topics__show(
           id_language
         }
         id
+        author {
+          avatar {
+            created
+            description
+            extension
+            file_size
+            id
+            member_id
+            mimetype
+            module
+            module_id
+            name
+            position
+            url
+          }
+          avatar_color
+          group {
+            id
+            name {
+              id_language
+              value
+            }
+          }
+          id
+          name
+        }
+        created
       }
       ... on ShowPostsForumsMetaTags {
         action
         id
+        member {
+          avatar {
+            created
+            description
+            extension
+            file_size
+            id
+            member_id
+            mimetype
+            module
+            module_id
+            name
+            position
+            url
+          }
+          avatar_color
+          group {
+            id
+            name {
+              id_language
+              value
+            }
+          }
+          id
+          name
+        }
+        created
       }
     }
     pageInfo {

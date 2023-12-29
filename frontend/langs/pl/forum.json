@@ -11,7 +11,11 @@
       "actions": {
         "title": "Akcje",
         "lock": "Zablokuj",
-        "unlock": "Odblokuj"
+        "unlock": "Odblokuj",
+        "meta": {
+          "meta_lock": "<user></user> zablokował ten temat <date></date>.",
+          "meta_unlock": "<user></user> odblokował ten temat <date></date>."
+        }
       },
       "create": {
         "title": "Stwórz temat",

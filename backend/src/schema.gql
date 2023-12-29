@@ -48,6 +48,11 @@ type CreateForumForumsObj {
   position: Int!
 }
 
+enum ForumTopicsActions {
+  lock
+  unlock
+}
+
 type ForumTopicsForums {
   id: String!
   name: [TextLanguage!]!
@@ -348,11 +353,13 @@ type ShowForumForumsWithParent {
 type ShowPostsForums {
   author: User!
   content: [TextLanguage!]!
+  created: Int!
   id: String!
 }
 
 type ShowPostsForumsMetaTags {
-  action: String!
+  action: ForumTopicsActions!
+  created: Int!
   id: String!
   member: User!
 }

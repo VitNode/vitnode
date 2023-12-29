@@ -9,6 +9,7 @@ import { LinkUser } from '@/components/user/link/link-user';
 import { ActionsTopic } from './actions/actions-topic';
 import { TitleIconTopic } from './title-icon';
 import { PostTopic } from './post/post';
+import { MetaTagTopic } from './meta-tags/meta-tag';
 
 interface Props {
   data: Forum_Topics__ShowQuery;
@@ -28,8 +29,8 @@ export const TopicView = ({ data: dataApi }: Props) => {
 
   return (
     <div className="flex flex-col md:flex-row gap-5">
-      <div className="flex-1 flex flex-col gap-5">
-        <div className="flex flex-col gap-1">
+      <div className="flex-1">
+        <div className="flex flex-col gap-1 mb-5">
           <div className="flex gap-4 items-center sm:flex-row flex-col">
             <div className="order-1 sm:order-2">
               <ActionsTopic id={id} state={{ locked }} />
@@ -42,7 +43,7 @@ export const TopicView = ({ data: dataApi }: Props) => {
 
           <div className="flex items-center gap-2 flex-wrap">
             {locked && (
-              <TitleIconTopic variant="secondary">
+              <TitleIconTopic variant="destructive">
                 <Lock /> {t('closed')}
               </TitleIconTopic>
             )}
@@ -67,17 +68,21 @@ export const TopicView = ({ data: dataApi }: Props) => {
 
         <PostTopic id={id} content={content} author={author} created={created} />
 
-        {edgesPosts.map(edge => {
-          if (edge.__typename === 'ShowPostsForums') {
-            return <div key={edge.id}>Post</div>;
-          }
+        {edgesPosts.length > 0 && (
+          <div className="flex flex-col gap-5 relative after:absolute after:top-0 after:left-6 after:w-1 after:h-full after:block after:-z-10 after:bg-border pt-5">
+            {edgesPosts.map(edge => {
+              if (edge.__typename === 'ShowPostsForums') {
+                return <PostTopic key={edge.id} {...edge} />;
+              }
 
-          if (edge.__typename === 'ShowPostsForumsMetaTags') {
-            return <div key={edge.id}>MetaTag</div>;
-          }
+              if (edge.__typename === 'ShowPostsForumsMetaTags') {
+                return <MetaTagTopic key={edge.id} {...edge} />;
+              }
 
-          return null;
-        })}
+              return null;
+            })}
+          </div>
+        )}
       </div>
 
       <div className="w-1/4">Sidebar</div>
