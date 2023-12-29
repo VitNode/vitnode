@@ -5,12 +5,17 @@ import { ShowTopicsForumsService } from './show/show.service';
 import { CreateForumTopicsResolver } from './create/create.resolver';
 import { CreateForumTopicsService } from './create/create.service';
 
+import { LockToggleForumTopicsResolver } from '@/src/forums/topics/actions/lock_unlock/lock_toggle.resolver';
+import { LockToggleForumTopicsService } from '@/src/forums/topics/actions/lock_unlock/lock_toggle.service';
+
 @Module({
   providers: [
     ShowTopicsForumsResolver,
     ShowTopicsForumsService,
     CreateForumTopicsResolver,
-    CreateForumTopicsService
+    CreateForumTopicsService,
+    LockToggleForumTopicsResolver,
+    LockToggleForumTopicsService
   ]
 })
 export class TopicsForumModule {}

@@ -8,14 +8,12 @@
     "nestjs",
     "nextra",
     "sonner",
-    "stylelint",
     "tailwindcss",
     "tanstack",
     "testid",
     "uagent",
     "vitnode"
   ],
-  "stylelint.validate": ["css", "scss"],
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -25,8 +23,5 @@
   "css.validate": false,
   "less.validate": false,
   "scss.validate": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.stylelint": "explicit"
-  },
   "eslint.workingDirectories": ["frontend", "backend"]
 }

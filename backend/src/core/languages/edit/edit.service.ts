@@ -7,7 +7,6 @@ import { ShowCoreLanguages } from '../show/dto/show.obj';
 import { EditCoreLanguagesArgs } from './dto/edit.args';
 
 import { PrismaService } from '@/prisma/prisma.service';
-import { NotFountError } from '@/utils/errors/not-found';
 import { ConfigType } from '@/types/config.type';
 
 @Injectable()
@@ -17,7 +16,8 @@ export class EditCoreLanguageService {
   async edit({ id, ...rest }: EditCoreLanguagesArgs): Promise<ShowCoreLanguages> {
     const configFile = fs.readFileSync(join('..', 'config.json'), 'utf8');
     const config: ConfigType = JSON.parse(configFile);
-    const language = await this.prisma.core_languages.findUnique({
+
+    await this.prisma.core_languages.findUniqueOrThrow({
       where: { id },
       select: {
         id: true,
@@ -28,8 +28,6 @@ export class EditCoreLanguageService {
         enabled: true
       }
     });
-
-    if (!language) throw new NotFountError('Language');
 
     const dataToEditConfig = config;
 

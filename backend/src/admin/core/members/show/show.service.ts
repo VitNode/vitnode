@@ -59,7 +59,6 @@ export class ShowAdminMembersService {
         ...inputPagination({ first, cursor, last }),
         include: {
           avatar: true,
-          cover: true,
           group: {
             include: {
               name: true

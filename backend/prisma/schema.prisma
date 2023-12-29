@@ -23,7 +23,6 @@ model core_languages {
   forums_forums_names       forum_forums_names[]       @relation("forums_forums_names_language")
   forums_forums_description forum_forums_description[] @relation("forums_forums_description_language")
   forum_topics_title        forum_topics_title[]       @relation("forum_topics_title_language")
-  forum_topics_content      forum_topics_content[]     @relation("forum_topics_content_language")
   forum_posts_content       forum_posts_content[]      @relation("forum_posts_content_language")
 }
 
@@ -47,10 +46,9 @@ model core_members {
   sessions              core_sessions[]              @relation("core_sessions_member")
   admin_sessions        core_admin_sessions[]        @relation("core_admin_sessions_member")
   admin_permissions     core_admin_permissions[]     @relation("core_admin_permissions_member")
-  forum_topics          forum_topics[]               @relation("forum_topics_author")
   forum_posts           forum_posts[]                @relation("forum_posts_author")
-  forum_logs            forum_logs[]                 @relation("forum_logs_member")
   moderator_permissions core_moderator_permissions[] @relation("core_moderator_permissions_member")
+  topics_logs           forum_topics_logs[]          @relation("forum_topics_logs_member")
 
   @@index([group_id])
 }
@@ -187,7 +185,6 @@ model forum_forums {
   description forum_forums_description[] @relation("forums_forums_description_forum")
   permissions forum_forums_permissions[] @relation("forums_forums_permissions_forum")
   topics      forum_topics[]             @relation("forum_topics_forum")
-  logs        forum_logs[]               @relation("forum_logs_forum")
 }
 
 model forum_forums_names {
@@ -231,17 +228,13 @@ model forum_topics {
   forum      forum_forums @relation("forum_topics_forum", references: [id], fields: [forum_id], onDelete: Cascade)
   forum_id   String
   views      Int          @default(0)
-  author     core_members @relation("forum_topics_author", references: [id], fields: [author_id], onDelete: Cascade)
-  author_id  String
   ip_address String       @db.VarChar(46)
   created    Int
-  updated    Int?
   locked     Boolean      @default(false)
 
-  title   forum_topics_title[]   @relation("forum_topics_title_topic")
-  content forum_topics_content[] @relation("forum_topics_content_topic")
-  posts   forum_posts[]          @relation("forum_posts_topic")
-  logs    forum_logs[]           @relation("forum_logs_topic")
+  title forum_topics_title[] @relation("forum_topics_title_topic")
+  posts forum_posts[]        @relation("forum_posts_topic")
+  logs  forum_topics_logs[]  @relation("forum_topics_logs_topic")
 }
 
 model forum_topics_title {
@@ -256,16 +249,6 @@ model forum_topics_title {
   @@index([id_language])
 }
 
-model forum_topics_content {
-  id          String @id @unique @default(uuid())
-  id_language String @db.VarChar(32)
-  topic_id    String
-  value       String @db.Text
-
-  topic    forum_topics   @relation("forum_topics_content_topic", references: [id], fields: [topic_id], onDelete: Cascade)
-  language core_languages @relation("forum_topics_content_language", references: [id], fields: [id_language], onDelete: Cascade)
-}
-
 model forum_posts {
   id         String       @id @unique @default(uuid())
   topic      forum_topics @relation("forum_posts_topic", references: [id], fields: [topic_id], onDelete: Cascade)
@@ -276,7 +259,8 @@ model forum_posts {
   created    Int
   updated    Int?
 
-  content forum_posts_content[] @relation("forum_posts_content_post")
+  content  forum_posts_content[]  @relation("forum_posts_content_post")
+  timeline forum_posts_timeline[] @relation("forum_posts_timeline_post")
 }
 
 model forum_posts_content {
@@ -289,20 +273,29 @@ model forum_posts_content {
   language core_languages @relation("forum_posts_content_language", references: [id], fields: [id_language], onDelete: Cascade)
 }
 
-enum ForumActions {
-  ADDED
-  ADMIN
+enum ForumTopicsActions {
+  lock
+  unlock
 }
 
-model forum_logs {
-  id         String        @id @unique @default(uuid())
-  member     core_members  @relation("forum_logs_member", references: [id], fields: [member_id], onDelete: Cascade)
+model forum_topics_logs {
+  id         String             @id @unique @default(uuid())
+  member     core_members       @relation("forum_topics_logs_member", references: [id], fields: [member_id], onDelete: Cascade)
   member_id  String
-  ip_address String        @db.VarChar(46)
+  ip_address String             @db.VarChar(46)
   created    Int
-  action     String        @db.VarChar(255)
-  forum      forum_forums? @relation("forum_logs_forum", references: [id], fields: [forum_id], onDelete: Cascade)
-  forum_id   String?
-  topic      forum_topics? @relation("forum_logs_topic", references: [id], fields: [topic_id], onDelete: Cascade)
+  action     ForumTopicsActions
+  topic      forum_topics?      @relation("forum_topics_logs_topic", references: [id], fields: [topic_id], onDelete: SetNull)
   topic_id   String?
+
+  timeline forum_posts_timeline[] @relation("forum_posts_timeline_log")
+}
+
+model forum_posts_timeline {
+  id      String             @id @unique @default(uuid())
+  post    forum_posts?       @relation("forum_posts_timeline_post", references: [id], fields: [post_id], onDelete: Cascade)
+  post_id String?
+  log     forum_topics_logs? @relation("forum_posts_timeline_log", references: [id], fields: [log_id], onDelete: Cascade)
+  log_id  String?
+  created Int
 }
