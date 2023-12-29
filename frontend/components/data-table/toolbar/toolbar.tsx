@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { SearchToolbarDataTable } from './search-toolbar-data-table';
+import { SearchToolbarDataTable } from './search';
 import { AdvancedFilterToolbarDataTable } from './advanced-filter/advanced-filter-toolbar-data-table';
 
 export interface ToolbarDataTableProps {
