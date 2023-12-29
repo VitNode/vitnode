@@ -1,11 +1,13 @@
 'use client';
 
+import type { ReactNode } from 'react';
+
 import { Link, usePathname } from '@/i18n';
 import { buttonVariants } from '../ui/button';
 
 export interface TabsTriggerProps {
+  children: ReactNode;
   id: string;
-  text: string;
   active?: boolean;
   className?: string;
   href?: string;
@@ -14,10 +16,10 @@ export interface TabsTriggerProps {
 
 export const TabsTrigger = ({
   active: activeFromProps,
+  children,
   className,
   href,
-  onClick,
-  text
+  onClick
 }: TabsTriggerProps) => {
   const pathname = usePathname();
   const active = activeFromProps || (href && pathname.includes(href));
@@ -34,7 +36,7 @@ export const TabsTrigger = ({
         })}
         onClick={onClick}
       >
-        {text}
+        {children}
       </Link>
     );
   }
@@ -49,7 +51,7 @@ export const TabsTrigger = ({
       })}
       onClick={onClick}
     >
-      {text}
+      {children}
     </button>
   );
 };

@@ -11,6 +11,7 @@ import {
   type CreateEditFormGroupsMembersAdminArgs
 } from './hooks/use-create-edit-form-groups-members-admin';
 import { useTextLang } from '@/hooks/core/use-text-lang';
+import { TabsTrigger } from '@/components/tabs/tabs-trigger';
 
 const MainContentCreateEditFormGroupsMembersAdmin = lazy(() =>
   import('./content/main-content-create-edit-form-groups-members-admin').then(module => ({
@@ -49,22 +50,22 @@ export const CreateEditFormGroupsMembersAdmin = ({
           {data ? tCore('edit_with_value', { value: convertText(data.name) }) : t('create.title')}
         </DialogTitle>
 
-        <Tabs
-          items={[
-            {
-              id: 'main',
-              text: 'Main',
-              active: activeTab === TabsEnum.MAIN,
-              onClick: () => setActiveTab(TabsEnum.MAIN)
-            },
-            {
-              id: 'content',
-              text: 'Content',
-              active: activeTab === TabsEnum.CONTENT,
-              onClick: () => setActiveTab(TabsEnum.CONTENT)
-            }
-          ]}
-        />
+        <Tabs>
+          <TabsTrigger
+            id="main"
+            active={activeTab === TabsEnum.MAIN}
+            onClick={() => setActiveTab(TabsEnum.MAIN)}
+          >
+            Main
+          </TabsTrigger>
+          <TabsTrigger
+            id="content"
+            active={activeTab === TabsEnum.CONTENT}
+            onClick={() => setActiveTab(TabsEnum.CONTENT)}
+          >
+            Content
+          </TabsTrigger>
+        </Tabs>
       </DialogHeader>
 
       <Form {...form}>

@@ -3,7 +3,7 @@
 import { forwardRef, useEffect, useState } from 'react';
 import Image, { type StaticImageData } from 'next/image';
 
-import { Skeleton } from '../ui/skeleton';
+import { Skeleton } from './ui/skeleton';
 import { cx } from '@/functions/classnames';
 
 interface InitialProps {

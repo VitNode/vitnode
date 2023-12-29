@@ -5,7 +5,7 @@ import { generateLetterPhoto } from '@/functions/generate-letter-photo';
 import type { Maybe, UploadCoreAttachmentsObj } from '@/graphql/hooks';
 import { cx } from '@/functions/classnames';
 
-import { Img } from '../../img/imgs';
+import { Img } from '../../img';
 
 interface Props {
   sizeInRem: number;

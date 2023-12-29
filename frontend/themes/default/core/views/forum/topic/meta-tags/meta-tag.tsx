@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { DateFormat } from '@/components/date-format/date-format';
 import type { ShowPostsForumsMetaTags } from '@/graphql/hooks';
 import { cx } from '@/functions/classnames';
-import { LinkUser } from '@/components/user/link/link-user';
+import { UserLink } from '@/components/user/link/user-link';
 
 const icon: {
   [key: string]: LucideIcon;
@@ -36,7 +36,7 @@ export const MetaTagTopic = ({
 
       <span className="text-muted-foreground">
         {t.rich(`meta_${action}`, {
-          user: () => <LinkUser user={member} />,
+          user: () => <UserLink user={member} />,
           date: () => <DateFormat date={created} />
         })}
       </span>

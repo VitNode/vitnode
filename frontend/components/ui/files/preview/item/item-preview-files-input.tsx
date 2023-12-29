@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { X } from 'lucide-react';
 
-import { Img } from '@/components/img/imgs';
+import { Img } from '@/components/img';
 
 interface Props {
   file: File;

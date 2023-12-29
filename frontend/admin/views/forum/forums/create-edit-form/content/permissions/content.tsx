@@ -5,12 +5,10 @@ import { keyBy, mapValues } from 'lodash';
 
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { usePermissionsGroupsAdminAPI } from '../hooks/use-permissions-groups-admin';
-import { GlobalLoader } from '@/components/loader/global/global-loader';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
 import { Loader } from '@/components/loader/loader';
-
-import type { ShowAdminGroups } from '../../../../../../../graphql/hooks';
+import type { ShowAdminGroups } from '@/graphql/hooks';
 
 interface Props {
   field: ControllerRenderProps<FieldValues, 'permissions'>;
@@ -22,7 +20,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
   permissions
 }: Props) => {
   const [searchValue, setSearchValue] = useState('');
-  const { data, isError, isFetching, isLoading } = usePermissionsGroupsAdminAPI({
+  const { data, isError, isLoading } = usePermissionsGroupsAdminAPI({
     searchValue
   });
   const { convertText } = useTextLang();
@@ -51,8 +49,6 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
 
   return (
     <>
-      {isFetching && <GlobalLoader />}
-
       <Input
         value={searchValue}
         onChange={e => setSearchValue(e.target.value)}

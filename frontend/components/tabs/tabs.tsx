@@ -1,18 +1,17 @@
-import { TabsTrigger, type TabsTriggerProps } from './trigger-tabs';
+import type { ReactNode } from 'react';
+
 import { cx } from '@/functions/classnames';
 
 interface Props {
-  items: Omit<TabsTriggerProps, 'className'>[];
+  children: ReactNode;
   className?: string;
 }
 
-export const Tabs = ({ className, items }: Props) => {
+export const Tabs = ({ children, className }: Props) => {
   return (
     <div className={cx('flex', className)}>
       <div className="flex rounded-md bg-background p-2 text-muted-foreground overflow-x-auto">
-        {items.map(el => (
-          <TabsTrigger key={el.id} {...el} />
-        ))}
+        {children}
       </div>
     </div>
   );
