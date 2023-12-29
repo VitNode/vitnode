@@ -2,13 +2,29 @@
 
 VitNode is a headless CMS built with [NextJS](https://nextjs.org/) and [NestJS](https://nestjs.com/). It is designed to be a scalable and flexible platform for creating community-driven websites and applications. VitNode uses [Tailwind CSS](https://tailwindcss.com/) and [Shadcn UI](https://ui.shadcn.com/) for its frontend styling, which makes it easy to customize the look and feel of the website.
 
-## ⚠️ Requirements for VSCode
+## ⚠️ System Requirements
+
+- [Node.js 16.14+](https://nodejs.org/) or later,
+- [PostgreSQL 16+](https://www.postgresql.org/),
+- [Redis 7+](https://redis.io/),
+- [pnpm 9+](https://pnpm.io/),
+- OS:
+  - `Linux` (Recommended),
+  - `Windows` with [WSL](https://learn.microsoft.com/en-us/windows/wsl/install),
+  - `macOS`
+
+## 🪚 Extensions for VSCode
 
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-- [StyleLint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
+- [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+- [Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma)
 
-## Browser Support
+## 🚀 Installation
+
+Click to see the [installation guide](https://vitnode.com/get_started).
+
+## 🖥️ Browser Support
 
 ### Minimum
 
