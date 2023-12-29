@@ -50,6 +50,18 @@ export class CreateForumsPostsService {
       }
     });
 
+    // Add post to timeline
+    await this.prisma.forum_posts_timeline.create({
+      data: {
+        created: currentDate(),
+        post: {
+          connect: {
+            id: data.id
+          }
+        }
+      }
+    });
+
     return data;
   }
 }

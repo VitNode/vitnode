@@ -57,22 +57,27 @@ export class LockToggleForumTopicsService {
         }
       });
 
-      // Create log
-      await prisma.forum_topics_logs.create({
+      // Create log and add log to timeline
+      await this.prisma.forum_posts_timeline.create({
         data: {
-          member: {
-            connect: {
-              id: member_id
-            }
-          },
-          topic: {
-            connect: {
-              id
-            }
-          },
           created: currentDate(),
-          action: topic.locked ? 'unlock' : 'lock',
-          ip_address: req.ip
+          log: {
+            create: {
+              member: {
+                connect: {
+                  id: member_id
+                }
+              },
+              topic: {
+                connect: {
+                  id
+                }
+              },
+              created: currentDate(),
+              action: topic.locked ? 'unlock' : 'lock',
+              ip_address: req.ip
+            }
+          }
         }
       });
 

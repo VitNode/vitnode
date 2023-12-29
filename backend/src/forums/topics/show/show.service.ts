@@ -67,7 +67,7 @@ export class ShowTopicsForumsService {
             take: 1,
             orderBy: [
               {
-                created: SortDirectionEnum.desc
+                created: SortDirectionEnum.asc
               }
             ],
             include: {

@@ -40,5 +40,8 @@ const PostsWithMetaTagsUnion = createUnionType({
 @ObjectType()
 export class ShowPostsForumsObj {
   @Field(() => [PostsWithMetaTagsUnion])
-  posts: (ShowPostsForums | ShowPostsForumsMetaTags)[];
+  edges: (ShowPostsForums | ShowPostsForumsMetaTags)[];
+
+  @Field(() => PageInfo)
+  pageInfo: PageInfo;
 }

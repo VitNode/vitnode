@@ -259,7 +259,8 @@ model forum_posts {
   created    Int
   updated    Int?
 
-  content forum_posts_content[] @relation("forum_posts_content_post")
+  content  forum_posts_content[]  @relation("forum_posts_content_post")
+  timeline forum_posts_timeline[] @relation("forum_posts_timeline_post")
 }
 
 model forum_posts_content {
@@ -286,4 +287,15 @@ model forum_topics_logs {
   action     ForumTopicsActions
   topic      forum_topics?      @relation("forum_topics_logs_topic", references: [id], fields: [topic_id], onDelete: SetNull)
   topic_id   String?
+
+  timeline forum_posts_timeline[] @relation("forum_posts_timeline_log")
+}
+
+model forum_posts_timeline {
+  id      String             @id @unique @default(uuid())
+  post    forum_posts?       @relation("forum_posts_timeline_post", references: [id], fields: [post_id], onDelete: Cascade)
+  post_id String?
+  log     forum_topics_logs? @relation("forum_posts_timeline_log", references: [id], fields: [log_id], onDelete: Cascade)
+  log_id  String?
+  created Int
 }

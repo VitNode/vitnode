@@ -147,7 +147,7 @@ type Query {
   core_staff_moderators__admin__show(cursor: String, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
   forum_forums__admin__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsAdminObj!
   forum_forums__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsObj!
-  forum_posts__show(cursor: String, cursor_meta_tag: String, first: Int, topic_id: String!): ShowPostsForumsObj!
+  forum_posts__show(cursor: String, first: Int, last: Int, topic_id: String!): ShowPostsForumsObj!
   forum_topics__show(cursor: String, first: Int, forum_id: String, ids: [String!], last: Int): ShowTopicsForumsObj!
 }
 
@@ -359,7 +359,8 @@ type ShowPostsForumsMetaTags {
 }
 
 type ShowPostsForumsObj {
-  posts: [postsWithMetaTagsUnion!]!
+  edges: [postsWithMetaTagsUnion!]!
+  pageInfo: PageInfo!
 }
 
 type ShowTopicsForums {
