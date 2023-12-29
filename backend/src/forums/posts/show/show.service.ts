@@ -41,10 +41,33 @@ export class ShowPostsForumsService {
         include: {
           post: {
             include: {
-              content: true
+              content: true,
+              author: {
+                include: {
+                  avatar: true,
+                  group: {
+                    include: {
+                      name: true
+                    }
+                  }
+                }
+              }
             }
           },
-          log: true
+          log: {
+            include: {
+              member: {
+                include: {
+                  avatar: true,
+                  group: {
+                    include: {
+                      name: true
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }),
       this.prisma.forum_posts_timeline.count({ where })

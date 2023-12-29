@@ -40,7 +40,6 @@ export class ShowCoreMembersService {
         where,
         include: {
           avatar: true,
-          cover: true,
           group: {
             include: {
               name: true

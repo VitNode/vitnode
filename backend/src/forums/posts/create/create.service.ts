@@ -39,7 +39,6 @@ export class CreateForumsPostsService {
         author: {
           include: {
             avatar: true,
-            cover: true,
             group: {
               include: {
                 name: true

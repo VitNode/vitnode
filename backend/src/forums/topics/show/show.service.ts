@@ -15,13 +15,13 @@ export class ShowTopicsForumsService {
   constructor(private prisma: PrismaService) {}
 
   async show(
-    { cursor, first, forum_id, ids, last }: ShowTopicsForumsArgs,
+    { cursor, first, forum_id, id, last }: ShowTopicsForumsArgs,
     user?: User
   ): Promise<ShowTopicsForumsObj> {
     const where: Prisma.forum_topicsWhereInput = {
       AND: [
         { forum_id },
-        { id: ids ? { in: ids } : undefined },
+        { id },
         {
           OR: [
             {
@@ -75,7 +75,6 @@ export class ShowTopicsForumsService {
               author: {
                 include: {
                   avatar: true,
-                  cover: true,
                   group: {
                     include: {
                       name: true

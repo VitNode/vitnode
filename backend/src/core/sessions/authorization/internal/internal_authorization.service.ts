@@ -35,8 +35,7 @@ export class InternalAuthorizationCoreSessionsService {
                 name: true
               }
             },
-            avatar: true,
-            cover: true
+            avatar: true
           }
         }
       }

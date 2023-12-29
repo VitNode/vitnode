@@ -19,10 +19,10 @@ export const TopicView = ({ data: dataApi }: Props) => {
   const { convertNameToLink, convertText } = useTextLang();
 
   const {
+    forum_posts__show: { edges: edgesPosts },
     forum_topics__show: { edges }
   } = dataApi;
   const data = edges.at(0);
-
   if (!data) return null;
   const { author, content, created, forum, id, locked, title } = data;
 
@@ -66,6 +66,18 @@ export const TopicView = ({ data: dataApi }: Props) => {
         </div>
 
         <PostTopic id={id} content={content} author={author} created={created} />
+
+        {edgesPosts.map(edge => {
+          if (edge.__typename === 'ShowPostsForums') {
+            return <div key={edge.id}>Post</div>;
+          }
+
+          if (edge.__typename === 'ShowPostsForumsMetaTags') {
+            return <div key={edge.id}>MetaTag</div>;
+          }
+
+          return null;
+        })}
       </div>
 
       <div className="w-1/4">Sidebar</div>
