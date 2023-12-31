@@ -42,7 +42,7 @@ Click to see the [installation guide](https://vitnode.com/get_started).
 
 | Chrome | Firefox | Edge  | Safari | iOS Safari | Opera |
 | :----- | :------ | :---- | :----- | :--------- | ----- |
-| >= 91  | >= 90   | >= 91 | >= 16  | >= 15      | >= 77 |
+| >= 91  | >= 103  | >= 91 | >= 16  | >= 15      | >= 77 |
 
 ### Recommended
 
