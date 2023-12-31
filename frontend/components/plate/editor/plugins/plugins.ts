@@ -15,6 +15,15 @@ import {
   createUnderlinePlugin
 } from '@udecode/plate-basic-marks';
 import { createPlugins } from '@udecode/plate-common';
+import { withProps } from '@udecode/cn';
+import {
+  ELEMENT_H1,
+  ELEMENT_H2,
+  ELEMENT_H3,
+  ELEMENT_H4,
+  createHeadingPlugin
+} from '@udecode/plate-heading';
+import { createParagraphPlugin } from '@udecode/plate-paragraph';
 
 import { BoldLeafEditor } from '../components/leaf/bold';
 import { ItalicLeafEditor } from '../components/leaf/italic';
@@ -23,6 +32,7 @@ import { StrikethroughLeafEditor } from '../components/leaf/strikethrough';
 import { SubscriptLeafEditor } from '../components/leaf/subscript';
 import { SuperscriptLeafEditor } from '../components/leaf/superscript';
 import { CodeLeafEditor } from '../components/leaf/code';
+import { HeadingElementEditor } from '../components/elements/heading';
 
 export const pluginsEditor = createPlugins(
   [
@@ -32,7 +42,9 @@ export const pluginsEditor = createPlugins(
     createStrikethroughPlugin(),
     createSubscriptPlugin(),
     createSuperscriptPlugin(),
-    createCodePlugin()
+    createCodePlugin(),
+    createParagraphPlugin(),
+    createHeadingPlugin()
   ],
   {
     components: {
@@ -42,7 +54,11 @@ export const pluginsEditor = createPlugins(
       [MARK_STRIKETHROUGH]: StrikethroughLeafEditor,
       [MARK_SUBSCRIPT]: SubscriptLeafEditor,
       [MARK_SUPERSCRIPT]: SuperscriptLeafEditor,
-      [MARK_CODE]: CodeLeafEditor
+      [MARK_CODE]: CodeLeafEditor,
+      [ELEMENT_H1]: withProps(HeadingElementEditor, { heading: 'h1' }),
+      [ELEMENT_H2]: withProps(HeadingElementEditor, { heading: 'h2' }),
+      [ELEMENT_H3]: withProps(HeadingElementEditor, { heading: 'h3' }),
+      [ELEMENT_H4]: withProps(HeadingElementEditor, { heading: 'h4' })
     }
   }
 );

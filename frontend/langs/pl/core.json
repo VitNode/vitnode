@@ -85,10 +85,11 @@
       },
       "roots": {
         "title": "Typ bloku",
-        "paragraph": "Normalny",
+        "paragraph": "Akapit",
         "h1": "Nagłówek H1",
         "h2": "Nagłówek H2",
         "h3": "Nagłówek H3",
+        "h4": "Nagłówek H4",
         "bullet": "Lista punktowana",
         "number": "Lista numerowana",
         "code": "Blok kodu"

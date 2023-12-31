@@ -427,6 +427,9 @@ importers:
       '@typescript-eslint/eslint-plugin':
         specifier: ^6.16.0
         version: 6.16.0(@typescript-eslint/parser@6.16.0)(eslint@8.56.0)(typescript@5.3.3)
+      '@udecode/cn':
+        specifier: ^29.0.1
+        version: 29.0.1(@types/react@18.2.46)(class-variance-authority@0.7.0)(react-dom@18.2.0)(react@18.2.0)(tailwind-merge@2.2.0)
       '@udecode/plate-autoformat':
         specifier: ^29.0.1
         version: 29.0.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.100.0)(slate-hyperscript@0.100.0)(slate-react@0.101.5)(slate@0.101.5)
@@ -5717,6 +5720,23 @@ packages:
       eslint-visitor-keys: 3.4.3
     dev: true
 
+  /@udecode/cn@29.0.1(@types/react@18.2.46)(class-variance-authority@0.7.0)(react-dom@18.2.0)(react@18.2.0)(tailwind-merge@2.2.0):
+    resolution: {integrity: sha512-U41vXvTBKU+06CiQivy4pIWB7RzfaB3DlqkQMNv8UNK164pJhM3v6P0D45kFpbU2uOSOCGpYRSo4kMp9y8RtcQ==}
+    peerDependencies:
+      class-variance-authority: '>=0.7.0'
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+      tailwind-merge: '>=2.2.0'
+    dependencies:
+      '@udecode/react-utils': 29.0.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
+      class-variance-authority: 0.7.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      tailwind-merge: 2.2.0
+    transitivePeerDependencies:
+      - '@types/react'
+    dev: true
+
   /@udecode/plate-autoformat@29.0.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.100.0)(slate-hyperscript@0.100.0)(slate-react@0.101.5)(slate@0.101.5):
     resolution: {integrity: sha512-qefQTAtZK4EeodNlxDU8zw/3qvfGIwnVguXJkHEi9Vt37fhN2i/eDcGWDyPy5DImz742OK09RabuGivYTpjmbw==}
     peerDependencies:
@@ -7383,7 +7403,6 @@ packages:
     resolution: {integrity: sha512-jFI8IQw4hczaL4ALINxqLEXQbWcNjoSkloa4IaufXCJr6QawJyw7tuRysRsrE8w2p/4gGaxKIt/hX3qz/IbD1A==}
     dependencies:
       clsx: 2.0.0
-    dev: false
 
   /classnames@2.5.0:
     resolution: {integrity: sha512-FQuRlyKinxrb5gwJlfVASbSrDlikDJ07426TrfPsdGLvtochowmkbnSFdQGJ2aoXrSetq5KqGV9emvWpy+91xA==}
@@ -7462,7 +7481,6 @@ packages:
   /clsx@2.0.0:
     resolution: {integrity: sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==}
     engines: {node: '>=6'}
-    dev: false
 
   /cluster-key-slot@1.1.2:
     resolution: {integrity: sha512-RMr0FhtfXemyinomL4hrWcYJxmX6deFdCxpJzhDttxgO1+bcCnkk+9drydLVDmAMG7NE6aN/fl4F7ucU/90gAA==}

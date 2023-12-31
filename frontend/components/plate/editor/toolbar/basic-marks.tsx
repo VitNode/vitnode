@@ -8,9 +8,9 @@ import {
 import { Bold, Code, Italic, Strikethrough, Underline } from 'lucide-react';
 
 import { ToggleGroup } from '@/components/ui/toolbar';
-import { MarkButton } from '../mark-button';
+import { MarkButton } from './mark-button';
 
-export const BasicToolbarEditor = () => {
+export const BasicMarksToolbarEditor = () => {
   return (
     <ToggleGroup type="multiple">
       <MarkButton nodeType={MARK_BOLD}>

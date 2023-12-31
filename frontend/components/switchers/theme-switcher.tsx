@@ -27,15 +27,15 @@ export const ThemeSwitcher = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem onClick={() => setTheme('light')}>
-          {theme === 'light' && <Check className="mr-2 h-4 w-4" />}
+          {theme === 'light' && <Check className="h-4 w-4" />}
           <span>{t('user-bar.theme.light')}</span>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme('dark')}>
-          {theme === 'dark' && <Check className="mr-2 h-4 w-4" />}
+          {theme === 'dark' && <Check className="h-4 w-4" />}
           <span>{t('user-bar.theme.dark')}</span>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme('system')}>
-          {theme === 'system' && <Check className="mr-2 h-4 w-4" />}
+          {theme === 'system' && <Check className="h-4 w-4" />}
           <span>{t('user-bar.theme.system')}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>

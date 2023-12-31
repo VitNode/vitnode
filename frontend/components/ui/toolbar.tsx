@@ -15,17 +15,21 @@ export interface ToolbarButtonProps
 
 export const ToolbarButton = forwardRef<ElementRef<typeof Toolbar.Button>, ToolbarButtonProps>(
   ({ className, pressed, size, ...props }, ref) => {
-    const buttonClass = buttonVariants({
-      variant: 'ghost',
-      size,
-      className: cx(className, {
-        'h-9 w-9 [&>svg]:w-5 [&>svg]:h-5': size === 'icon'
+    const buttonClass = cx(
+      buttonVariants({
+        variant: 'ghost',
+        size,
+        className: cx(className, {
+          'size-9 [&>svg]:size-5': size === 'icon'
+        })
       })
-    });
+    );
 
-    const toggleClass = toggleVariants({
-      className: cx(className, 'h-9 w-9 [&>svg]:w-5 [&>svg]:h-5')
-    });
+    const toggleClass = cx(
+      toggleVariants({
+        className: cx(className, 'size-9 [&>svg]:size-5')
+      })
+    );
 
     return (
       <Toolbar.Button
@@ -49,7 +53,20 @@ ToolbarButton.displayName = Toolbar.Button.displayName;
 
 // ToggleGroup.displayName = Toolbar.ToggleGroup.displayName;
 
-export const ToggleGroup = Toolbar.ToggleGroup;
+export const ToggleGroup = forwardRef<
+  ElementRef<typeof Toolbar.ToggleGroup>,
+  ComponentPropsWithoutRef<typeof Toolbar.ToggleGroup>
+>(({ className, ...props }, ref) => {
+  return (
+    <Toolbar.ToggleGroup
+      ref={ref}
+      className={cx('flex items-center gap-1 flex-wrap', className)}
+      {...props}
+    />
+  );
+});
+
+ToggleGroup.displayName = Toolbar.ToggleGroup.displayName;
 
 interface ToggleItemProps extends ComponentPropsWithoutRef<typeof Toolbar.ToggleItem> {}
 
@@ -68,3 +85,15 @@ export const ToggleItem = forwardRef<ElementRef<typeof Toolbar.ToggleItem>, Togg
 );
 
 ToggleItem.displayName = Toolbar.ToggleItem.displayName;
+
+export const ToolbarSeparator = forwardRef<
+  ElementRef<typeof Toolbar.Separator>,
+  ComponentPropsWithoutRef<typeof Toolbar.Separator>
+>(({ className, ...props }, ref) => (
+  <Toolbar.Separator
+    ref={ref}
+    className={cx('w-[1px] h-8 shrink-0 bg-border', className)}
+    {...props}
+  />
+));
+ToolbarSeparator.displayName = Toolbar.Separator.displayName;

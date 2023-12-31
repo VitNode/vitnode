@@ -37,7 +37,7 @@ export const LanguageSwitcher = () => {
             key={language.id}
             onClick={() => replace(pathname, { locale: language.id })}
           >
-            {locale === language.id && <Check className="mr-2 h-4 w-4" />}
+            {locale === language.id && <Check className="h-4 w-4" />}
             <span>{language.name}</span>
           </DropdownMenuItem>
         ))}
