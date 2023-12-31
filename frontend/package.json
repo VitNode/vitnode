@@ -106,6 +106,7 @@
     "@udecode/plate-heading": "^29.0.1",
     "@udecode/plate-highlight": "^29.0.1",
     "@udecode/plate-horizontal-rule": "^29.0.1",
+    "@udecode/plate-indent": "^29.0.1",
     "@udecode/plate-indent-list": "^29.0.1",
     "@udecode/plate-link": "^29.0.1",
     "@udecode/plate-list": "^29.0.1",
