@@ -14,7 +14,13 @@ import {
   createSuperscriptPlugin,
   createUnderlinePlugin
 } from '@udecode/plate-basic-marks';
-import { createPlugins } from '@udecode/plate-common';
+import {
+  createPlugins,
+  PlateElement,
+  type PlatePlugin,
+  isBlockAboveEmpty,
+  isSelectionAtBlockStart
+} from '@udecode/plate-common';
 import { withProps } from '@udecode/cn';
 import {
   ELEMENT_H1,
@@ -26,10 +32,16 @@ import {
 import { ELEMENT_PARAGRAPH, createParagraphPlugin } from '@udecode/plate-paragraph';
 import { createIndentPlugin } from '@udecode/plate-indent';
 import { createIndentListPlugin } from '@udecode/plate-indent-list';
-import { createAutoformatPlugin } from '@udecode/plate-autoformat';
-import { ELEMENT_OL, ELEMENT_UL, createListPlugin } from '@udecode/plate-list';
+import { createAutoformatPlugin, type AutoformatPlugin } from '@udecode/plate-autoformat';
+import { ELEMENT_LI, ELEMENT_OL, ELEMENT_UL, createListPlugin } from '@udecode/plate-list';
 import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
-import { ELEMENT_CODE_BLOCK } from '@udecode/plate-code-block';
+import {
+  ELEMENT_CODE_BLOCK,
+  isCodeBlockEmpty,
+  isSelectionAtCodeBlockStart,
+  unwrapCodeBlock
+} from '@udecode/plate-code-block';
+import { createResetNodePlugin } from '@udecode/plate-reset-node';
 
 import { BoldLeafEditor } from '../components/leaf/bold';
 import { ItalicLeafEditor } from '../components/leaf/italic';
@@ -41,6 +53,27 @@ import { CodeLeafEditor } from '../components/leaf/code';
 import { ListElement } from '@/components/plate-ui/list-element';
 import { HeadingElement } from '@/components/plate-ui/heading-element';
 import { ParagraphElement } from '@/components/plate-ui/paragraph-element';
+import { autoformatRules } from './format/format';
+
+const autoformatPlugin: Partial<PlatePlugin<AutoformatPlugin>> = {
+  options: {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    rules: autoformatRules as unknown,
+    enableUndoOnDelete: true
+  }
+};
+
+const resetBlockTypesCommonRule = {
+  types: [ELEMENT_BLOCKQUOTE],
+  defaultType: ELEMENT_PARAGRAPH
+};
+
+const resetBlockTypesCodeBlockRule = {
+  types: [ELEMENT_CODE_BLOCK],
+  defaultType: ELEMENT_PARAGRAPH,
+  onReset: unwrapCodeBlock
+};
 
 export const pluginsEditor = createPlugins(
   [
@@ -54,13 +87,6 @@ export const pluginsEditor = createPlugins(
     createParagraphPlugin(),
     createHeadingPlugin(),
     createListPlugin(),
-    createIndentPlugin({
-      inject: {
-        props: {
-          validTypes: [ELEMENT_PARAGRAPH, ELEMENT_H1]
-        }
-      }
-    }),
     createIndentListPlugin({
       inject: {
         props: {
@@ -96,7 +122,33 @@ export const pluginsEditor = createPlugins(
         }
       }
     }),
-    createAutoformatPlugin()
+    createAutoformatPlugin(autoformatPlugin),
+    createResetNodePlugin({
+      options: {
+        rules: [
+          {
+            ...resetBlockTypesCommonRule,
+            hotkey: 'Enter',
+            predicate: isBlockAboveEmpty
+          },
+          {
+            ...resetBlockTypesCommonRule,
+            hotkey: 'Backspace',
+            predicate: isSelectionAtBlockStart
+          },
+          {
+            ...resetBlockTypesCodeBlockRule,
+            hotkey: 'Enter',
+            predicate: isCodeBlockEmpty
+          },
+          {
+            ...resetBlockTypesCodeBlockRule,
+            hotkey: 'Backspace',
+            predicate: isSelectionAtCodeBlockStart
+          }
+        ]
+      }
+    })
   ],
   {
     components: {
@@ -113,6 +165,7 @@ export const pluginsEditor = createPlugins(
       [ELEMENT_H4]: withProps(HeadingElement, { variant: 'h4' }),
       [ELEMENT_UL]: withProps(ListElement, { variant: 'ul' }),
       [ELEMENT_OL]: withProps(ListElement, { variant: 'ol' }),
+      [ELEMENT_LI]: withProps(PlateElement, { as: 'li' }),
       [ELEMENT_PARAGRAPH]: ParagraphElement
     }
   }

@@ -76,10 +76,10 @@ export const BasicElementsToolbarEditor = () => {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton className="w-32 p-1">
+        <ToolbarButton className="w-32 p-3 justify-start">
           {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
           {/* @ts-expect-error */}
-          {t(selectedItem.id)} <ChevronDown />
+          {t(selectedItem.id)} <ChevronDown className="ml-auto" />
         </ToolbarButton>
       </DropdownMenuTrigger>
 
