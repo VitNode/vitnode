@@ -7,12 +7,11 @@ import {
 } from '@udecode/plate-basic-marks';
 import { Bold, Code, Italic, Strikethrough, Underline } from 'lucide-react';
 
-import { ToggleGroup } from '@/components/ui/toolbar';
 import { MarkButton } from './mark-button';
 
 export const BasicMarksToolbarEditor = () => {
   return (
-    <ToggleGroup type="multiple">
+    <>
       <MarkButton nodeType={MARK_BOLD}>
         <Bold />
       </MarkButton>
@@ -28,6 +27,6 @@ export const BasicMarksToolbarEditor = () => {
       <MarkButton nodeType={MARK_CODE}>
         <Code />
       </MarkButton>
-    </ToggleGroup>
+    </>
   );
 };

@@ -14,7 +14,6 @@ import {
   focusEditor
 } from '@udecode/plate-common';
 
-import { ToolbarButton } from '@/components/ui/toolbar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,6 +21,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { ToolbarButton } from '@/components/plate-ui/toolbar';
 
 export const BasicElementsToolbarEditor = () => {
   const items = [

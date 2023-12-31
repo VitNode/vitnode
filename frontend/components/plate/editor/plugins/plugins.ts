@@ -42,6 +42,8 @@ import {
   unwrapCodeBlock
 } from '@udecode/plate-code-block';
 import { createResetNodePlugin } from '@udecode/plate-reset-node';
+import { createComboboxPlugin } from '@udecode/plate-combobox';
+import { createEmojiPlugin } from '@udecode/plate-emoji';
 
 import { BoldLeafEditor } from '../components/leaf/bold';
 import { ItalicLeafEditor } from '../components/leaf/italic';
@@ -54,6 +56,7 @@ import { ListElement } from '@/components/plate-ui/list-element';
 import { HeadingElement } from '@/components/plate-ui/heading-element';
 import { ParagraphElement } from '@/components/plate-ui/paragraph-element';
 import { autoformatRules } from './format/format';
+import { EmojiCombobox } from '@/components/plate-ui/emoji-combobox';
 
 const autoformatPlugin: Partial<PlatePlugin<AutoformatPlugin>> = {
   options: {
@@ -77,6 +80,10 @@ const resetBlockTypesCodeBlockRule = {
 
 export const pluginsEditor = createPlugins(
   [
+    createComboboxPlugin(),
+    createEmojiPlugin({
+      renderAfterEditable: EmojiCombobox
+    }),
     createBoldPlugin(),
     createItalicPlugin(),
     createUnderlinePlugin(),

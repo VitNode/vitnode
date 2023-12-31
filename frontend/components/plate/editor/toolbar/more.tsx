@@ -3,13 +3,13 @@ import { focusEditor, toggleMark, useEditorRef } from '@udecode/plate-common';
 import { MoreHorizontal, Subscript, Superscript } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-import { ToolbarButton } from '@/components/ui/toolbar';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { ToolbarButton } from '@/components/plate-ui/toolbar';
 
 export const MoreToolbarEditor = () => {
   const t = useTranslations('core.editor.text');
@@ -18,7 +18,7 @@ export const MoreToolbarEditor = () => {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton size="icon">
+        <ToolbarButton>
           <MoreHorizontal />
         </ToolbarButton>
       </DropdownMenuTrigger>

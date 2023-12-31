@@ -1,7 +1,7 @@
 import { useMarkToolbarButton, useMarkToolbarButtonState } from '@udecode/plate-common';
 import type { ReactNode } from 'react';
 
-import { ToolbarButton } from '@/components/ui/toolbar';
+import { ToolbarButton } from '@/components/plate-ui/toolbar';
 
 interface Props {
   children: ReactNode;
@@ -13,5 +13,5 @@ export const MarkButton = ({ clear, nodeType, ...rest }: Props) => {
   const state = useMarkToolbarButtonState({ nodeType, clear });
   const { props } = useMarkToolbarButton(state);
 
-  return <ToolbarButton size="icon" value="bold" {...props} {...rest} />;
+  return <ToolbarButton {...props} {...rest} />;
 };

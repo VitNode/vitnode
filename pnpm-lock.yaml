@@ -240,6 +240,9 @@ importers:
       '@radix-ui/react-tooltip':
         specifier: ^1.0.7
         version: 1.0.7(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
+      '@udecode/plate-floating':
+        specifier: ^29.0.1
+        version: 29.0.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.100.0)(slate-hyperscript@0.100.0)(slate-react@0.101.5)(slate@0.101.5)
       '@udecode/plate-reset-node':
         specifier: ^29.0.1
         version: 29.0.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.100.0)(slate-hyperscript@0.100.0)(slate-react@0.101.5)(slate@0.101.5)
@@ -445,10 +448,16 @@ importers:
       '@udecode/plate-code-block':
         specifier: ^29.0.1
         version: 29.0.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.100.0)(slate-hyperscript@0.100.0)(slate-react@0.101.5)(slate@0.101.5)
+      '@udecode/plate-combobox':
+        specifier: ^29.0.1
+        version: 29.0.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.100.0)(slate-hyperscript@0.100.0)(slate-react@0.101.5)(slate@0.101.5)
       '@udecode/plate-comments':
         specifier: ^29.0.1
         version: 29.0.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.100.0)(slate-hyperscript@0.100.0)(slate-react@0.101.5)(slate@0.101.5)
       '@udecode/plate-common':
+        specifier: ^29.0.1
+        version: 29.0.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.100.0)(slate-hyperscript@0.100.0)(slate-react@0.101.5)(slate@0.101.5)
+      '@udecode/plate-emoji':
         specifier: ^29.0.1
         version: 29.0.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.100.0)(slate-hyperscript@0.100.0)(slate-react@0.101.5)(slate@0.101.5)
       '@udecode/plate-excalidraw':
@@ -1786,7 +1795,6 @@ packages:
       '@floating-ui/dom': 1.5.3
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-    dev: true
 
   /@floating-ui/react-dom@2.0.4(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-CF8k2rgKeh/49UrnIBs4BdxPUV6vize/Db1d/YbCLyp9GiVZ0BEwf5AiDSxJRCr6yOkGqTFHtmrULxkEfYZ7dQ==}
@@ -1809,7 +1817,6 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       tabbable: 6.2.0
-    dev: true
 
   /@floating-ui/utils@0.1.6:
     resolution: {integrity: sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==}
@@ -5953,6 +5960,32 @@ packages:
       - react-native
       - scheduler
 
+  /@udecode/plate-emoji@29.0.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.100.0)(slate-hyperscript@0.100.0)(slate-react@0.101.5)(slate@0.101.5):
+    resolution: {integrity: sha512-HDr/whlnccf9M2LaIvh7zOUamfwhzXg9YnkHRyD+YbH4ul+D57vIW66E01lSrmIX52kewKGzGy/TSao0lBX+Yg==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+      slate: '>=0.94.0'
+      slate-history: '>=0.93.0'
+      slate-hyperscript: '>=0.66.0'
+      slate-react: '>=0.99.0'
+    dependencies:
+      '@emoji-mart/data': 1.1.2
+      '@udecode/plate-combobox': 29.0.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.100.0)(slate-hyperscript@0.100.0)(slate-react@0.101.5)(slate@0.101.5)
+      '@udecode/plate-common': 29.0.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.100.0)(slate-hyperscript@0.100.0)(slate-react@0.101.5)(slate@0.101.5)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      slate: 0.101.5
+      slate-history: 0.100.0(slate@0.101.5)
+      slate-hyperscript: 0.100.0(slate@0.101.5)
+      slate-react: 0.101.5(react-dom@18.2.0)(react@18.2.0)(slate@0.101.5)
+    transitivePeerDependencies:
+      - '@types/react'
+      - immer
+      - react-native
+      - scheduler
+    dev: true
+
   /@udecode/plate-excalidraw@29.0.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.100.0)(slate-hyperscript@0.100.0)(slate-react@0.101.5)(slate@0.101.5):
     resolution: {integrity: sha512-8pKt5hdS/lz+iYnaA9eJsErtITun6Jb4X7GbvucfdaRS49ZVXktrUo+GO8e3Eg/4th+3IxIqItQd+ataOdkNjw==}
     peerDependencies:
@@ -6002,7 +6035,6 @@ packages:
       - immer
       - react-native
       - scheduler
-    dev: true
 
   /@udecode/plate-heading@29.0.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.100.0)(slate-hyperscript@0.100.0)(slate-react@0.101.5)(slate@0.101.5):
     resolution: {integrity: sha512-FB05cHzQTJMv3oah5qkdBu1f9JkoGuJEag9fSAkeV7aP4xHM1Jmy41wd8eXCTOlfOFrR8uwNrb40Nb3KE7Im9g==}
@@ -13064,7 +13096,6 @@ packages:
 
   /tabbable@6.2.0:
     resolution: {integrity: sha512-Cat63mxsVJlzYvN51JmVXIgNoUokrIaT2zLclCXjRd8boZ0004U4KCs/sToJ75C6sdlByWxpYnb5Boif1VSFew==}
-    dev: true
 
   /tailwind-merge@2.2.0:
     resolution: {integrity: sha512-SqqhhaL0T06SW59+JVNfAqKdqLs0497esifRrZ7jOaefP3o64fdFNDMrAQWZFMxTLJPiHVjRLUywT8uFz1xNWQ==}
