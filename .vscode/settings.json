@@ -12,6 +12,7 @@
     "tanstack",
     "testid",
     "uagent",
+    "udecode",
     "vitnode"
   ],
   "[css]": {
