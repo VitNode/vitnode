@@ -4,6 +4,7 @@ import { BasicElementsToolbarEditor } from './basic-elements';
 import { ListToolbarEditor } from './list';
 import { Toolbar, ToolbarSeparator } from '@/components/plate-ui/toolbar';
 import { EmojiDropdownMenu } from '@/components/plate-ui/emoji/emoji-dropdown-menu';
+import { AlignToolbarEditor } from './align';
 
 export const ToolbarEditor = () => {
   return (
@@ -14,6 +15,7 @@ export const ToolbarEditor = () => {
       <MoreToolbarEditor />
       <ToolbarSeparator />
       <ListToolbarEditor />
+      <AlignToolbarEditor />
     </Toolbar>
   );
 };

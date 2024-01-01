@@ -47,6 +47,12 @@
         "format_code": "Formatuj kod",
         "error_title": "Błąd Prettier"
       },
+      "align": {
+        "left": "Wyrównaj do lewej",
+        "center": "Wyrównaj do środka",
+        "right": "Wyrównaj do prawej",
+        "justify": "Wyjustuj"
+      },
       "emoji": {
         "title": "Emoji",
         "pick": "Wybierz emoji",

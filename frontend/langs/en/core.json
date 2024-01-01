@@ -47,6 +47,12 @@
         "format_code": "Format Code",
         "error_title": "Prettier Error"
       },
+      "align": {
+        "left": "Align Left",
+        "center": "Align Center",
+        "right": "Align Right",
+        "justify": "Justify"
+      },
       "emoji": {
         "title": "Emoji",
         "pick": "Pick an emoji",

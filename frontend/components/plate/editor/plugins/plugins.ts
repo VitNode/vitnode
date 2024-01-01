@@ -35,6 +35,7 @@ import { createIndentListPlugin } from '@udecode/plate-indent-list';
 import { createAutoformatPlugin, type AutoformatPlugin } from '@udecode/plate-autoformat';
 import { ELEMENT_LI, ELEMENT_OL, ELEMENT_UL, createListPlugin } from '@udecode/plate-list';
 import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
+import { createAlignPlugin } from '@udecode/plate-alignment';
 import {
   ELEMENT_CODE_BLOCK,
   isCodeBlockEmpty,
@@ -45,18 +46,19 @@ import { createResetNodePlugin } from '@udecode/plate-reset-node';
 import { createComboboxPlugin } from '@udecode/plate-combobox';
 import { createEmojiPlugin } from '@udecode/plate-emoji';
 
-import { BoldLeafEditor } from '../components/leaf/bold';
-import { ItalicLeafEditor } from '../components/leaf/italic';
-import { UnderlineLeafEditor } from '../components/leaf/underline';
-import { StrikethroughLeafEditor } from '../components/leaf/strikethrough';
-import { SubscriptLeafEditor } from '../components/leaf/subscript';
-import { SuperscriptLeafEditor } from '../components/leaf/superscript';
-import { CodeLeafEditor } from '../components/leaf/code';
 import { ListElement } from '@/components/plate-ui/list-element';
 import { HeadingElement } from '@/components/plate-ui/heading-element';
 import { ParagraphElement } from '@/components/plate-ui/paragraph-element';
 import { autoformatRules } from './format/format';
 import { EmojiCombobox } from '@/components/plate-ui/emoji/emoji-combobox';
+
+import { BoldLeafEditor } from '../../../plate-ui/basic/bold';
+import { ItalicLeafEditor } from '../../../plate-ui/basic/italic';
+import { UnderlineLeafEditor } from '../../../plate-ui/basic/underline';
+import { StrikethroughLeafEditor } from '../../../plate-ui/basic/strikethrough';
+import { SubscriptLeafEditor } from '../../../plate-ui/basic/subscript';
+import { SuperscriptLeafEditor } from '../../../plate-ui/basic/superscript';
+import { CodeLeafEditor } from '../../../plate-ui/basic/code';
 
 const autoformatPlugin: Partial<PlatePlugin<AutoformatPlugin>> = {
   options: {
@@ -80,6 +82,13 @@ const resetBlockTypesCodeBlockRule = {
 
 export const pluginsEditor = createPlugins(
   [
+    createAlignPlugin({
+      inject: {
+        props: {
+          validTypes: [ELEMENT_PARAGRAPH, ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4]
+        }
+      }
+    }),
     createComboboxPlugin(),
     createEmojiPlugin({
       renderAfterEditable: EmojiCombobox

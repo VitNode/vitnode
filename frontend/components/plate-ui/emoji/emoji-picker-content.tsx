@@ -156,14 +156,7 @@ export function EmojiPickerContent({
 
   return (
     <div
-      className={cn(
-        'h-full min-h-[50%] overflow-y-auto overflow-x-hidden px-3'
-        // '[&::-webkit-scrollbar]:w-4',
-        // '[&::-webkit-scrollbar-button]:hidden [&::-webkit-scrollbar-button]:h-0 [&::-webkit-scrollbar-button]:w-0',
-        // ':hover:[&::-webkit-scrollbar-thumb]:bg-[#f3f4f6]',
-        // '[&::-webkit-scrollbar-thumb]:min-h-[65px] [&::-webkit-scrollbar-thumb]:rounded-2xl [&::-webkit-scrollbar-thumb]:border-4 [&::-webkit-scrollbar-thumb]:border-white',
-        // '[&::-webkit-scrollbar-track]:border-0'
-      )}
+      className={cn('h-full min-h-[50%] overflow-y-auto overflow-x-hidden px-3')}
       data-id="scroll"
       ref={refs.current.contentRoot}
     >

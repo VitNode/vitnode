@@ -3,9 +3,11 @@ import {
   MARK_CODE,
   MARK_ITALIC,
   MARK_STRIKETHROUGH,
+  MARK_SUBSCRIPT,
+  MARK_SUPERSCRIPT,
   MARK_UNDERLINE
 } from '@udecode/plate-basic-marks';
-import { Bold, Code, Italic, Strikethrough, Underline } from 'lucide-react';
+import { Bold, Code, Italic, Strikethrough, Subscript, Superscript, Underline } from 'lucide-react';
 
 import { MarkButton } from './mark-button';
 
@@ -26,6 +28,12 @@ export const BasicMarksToolbarEditor = () => {
       </MarkButton>
       <MarkButton nodeType={MARK_CODE}>
         <Code />
+      </MarkButton>
+      <MarkButton nodeType={MARK_SUBSCRIPT}>
+        <Subscript />
+      </MarkButton>
+      <MarkButton nodeType={MARK_SUPERSCRIPT}>
+        <Superscript />
       </MarkButton>
     </>
   );
