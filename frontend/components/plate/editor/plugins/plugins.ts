@@ -45,6 +45,11 @@ import {
 import { createResetNodePlugin } from '@udecode/plate-reset-node';
 import { createComboboxPlugin } from '@udecode/plate-combobox';
 import { createEmojiPlugin } from '@udecode/plate-emoji';
+import {
+  createFontBackgroundColorPlugin,
+  createFontColorPlugin,
+  createFontSizePlugin
+} from '@udecode/plate-font';
 
 import { ListElement } from '@/components/plate-ui/list-element';
 import { HeadingElement } from '@/components/plate-ui/heading-element';
@@ -82,6 +87,9 @@ const resetBlockTypesCodeBlockRule = {
 
 export const pluginsEditor = createPlugins(
   [
+    createFontColorPlugin(),
+    createFontBackgroundColorPlugin(),
+    createFontSizePlugin(),
     createAlignPlugin({
       inject: {
         props: {

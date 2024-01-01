@@ -38,6 +38,7 @@
       "font_size": "Font Size",
       "font_color": "Font Color",
       "font_background_color": "Font Background Color",
+      "custom_color": "Custom Color",
       "set_default_color": "Set Default Color",
       "link": "Link",
       "copy_code": "Copy Code",

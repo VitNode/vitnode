@@ -108,6 +108,7 @@
     "@udecode/plate-common": "^29.0.1",
     "@udecode/plate-emoji": "^29.0.1",
     "@udecode/plate-excalidraw": "^29.0.1",
+    "@udecode/plate-font": "^29.0.1",
     "@udecode/plate-heading": "^29.0.1",
     "@udecode/plate-highlight": "^29.0.1",
     "@udecode/plate-horizontal-rule": "^29.0.1",
