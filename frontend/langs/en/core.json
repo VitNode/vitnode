@@ -5,6 +5,7 @@
     "save": "Save",
     "saved_success": "Saved successfully.",
     "no_results": "No results found.",
+    "results": "Results",
     "clear": "Clear",
     "filters": "Filters",
     "search": "Search",
@@ -48,8 +49,14 @@
       },
       "emoji": {
         "title": "Emoji",
+        "pick": "Pick an emoji",
+        "no_results": {
+          "title": "Oh no!",
+          "desc": "That emoji couldn't be found."
+        },
         "categories": {
           "all": "All",
+          "frequent": "Frequent Used",
           "people": "Smileys & People",
           "nature": "Animals & Nature",
           "foods": "Food & Drink",

@@ -5,6 +5,7 @@
     "save": "Zapisz",
     "saved_success": "Zapisano pomyślnie.",
     "no_results": "Brak wyników.",
+    "results": "Wyniki",
     "clear": "Wyczyść",
     "filters": "Filtry",
     "search": "Szukaj",
@@ -48,8 +49,14 @@
       },
       "emoji": {
         "title": "Emoji",
+        "pick": "Wybierz emoji",
+        "no_results": {
+          "title": "Oh nie!",
+          "desc": "Nie znaleziono takiego emoji."
+        },
         "categories": {
           "all": "Wszystkie",
+          "frequent": "Ostatnio używane",
           "people": "Emotki i ludzie",
           "nature": "Zwierzęta i natura",
           "foods": "Jedzenie i napoje",

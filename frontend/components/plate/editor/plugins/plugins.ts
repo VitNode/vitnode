@@ -56,7 +56,7 @@ import { ListElement } from '@/components/plate-ui/list-element';
 import { HeadingElement } from '@/components/plate-ui/heading-element';
 import { ParagraphElement } from '@/components/plate-ui/paragraph-element';
 import { autoformatRules } from './format/format';
-import { EmojiCombobox } from '@/components/plate-ui/emoji-combobox';
+import { EmojiCombobox } from '@/components/plate-ui/emoji/emoji-combobox';
 
 const autoformatPlugin: Partial<PlatePlugin<AutoformatPlugin>> = {
   options: {

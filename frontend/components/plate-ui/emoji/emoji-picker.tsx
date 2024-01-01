@@ -4,7 +4,6 @@ import { EmojiSettings, type UseEmojiPickerType } from '@udecode/plate-emoji';
 import { EmojiPickerContent } from './emoji-picker-content';
 import { EmojiPickerNavigation } from './emoji-picker-navigation';
 import { EmojiPickerPreview } from './emoji-picker-preview';
-import { EmojiPickerSearchAndClear } from './emoji-picker-search-and-clear';
 import { EmojiPickerSearchBar } from './emoji-picker-search-bar';
 
 export function EmojiPicker({
@@ -14,8 +13,6 @@ export function EmojiPicker({
   focusedCategory,
   handleCategoryClick,
   hasFound,
-  i18n,
-  icons,
   isSearching,
   onMouseOver,
   onSelectEmoji,
@@ -27,28 +24,18 @@ export function EmojiPicker({
   visibleCategories
 }: UseEmojiPickerType) {
   return (
-    <div
-      className={cn(
-        'flex flex-col rounded bg-background',
-        'h-[350px] w-[316px] shadow-[rgb(15_15_15_/_5%)_0_0_0_1px,_rgb(15_15_15_/_10%)_0_3px_6px,_rgb(15_15_15_/_20%)_0_9px_24px]'
-      )}
-    >
+    <div className={cn('flex flex-col rounded bg-popover h-[350px] w-[316px] shadow-md')}>
       <EmojiPickerNavigation
-        i18n={i18n}
         emojiLibrary={emojiLibrary}
-        icons={icons}
         focusedCategory={focusedCategory}
         onClick={handleCategoryClick}
       />
-      <EmojiPickerSearchBar i18n={i18n} setSearch={setSearch} searchValue={searchValue}>
-        <EmojiPickerSearchAndClear
-          i18n={i18n}
-          clearSearch={clearSearch}
-          searchValue={searchValue}
-        />
-      </EmojiPickerSearchBar>
+      <EmojiPickerSearchBar
+        setSearch={setSearch}
+        searchValue={searchValue}
+        clearSearch={clearSearch}
+      />
       <EmojiPickerContent
-        i18n={i18n}
         emojiLibrary={emojiLibrary}
         isSearching={isSearching}
         searchResult={searchResult}
@@ -58,7 +45,7 @@ export function EmojiPicker({
         onMouseOver={onMouseOver}
         refs={refs}
       />
-      <EmojiPickerPreview i18n={i18n} emoji={emoji} hasFound={hasFound} isSearching={isSearching} />
+      <EmojiPickerPreview emoji={emoji} hasFound={hasFound} isSearching={isSearching} />
     </div>
   );
 }

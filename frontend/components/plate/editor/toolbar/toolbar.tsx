@@ -3,7 +3,7 @@ import { MoreToolbarEditor } from './more';
 import { BasicElementsToolbarEditor } from './basic-elements';
 import { ListToolbarEditor } from './list';
 import { Toolbar, ToolbarSeparator } from '@/components/plate-ui/toolbar';
-import { EmojiDropdownMenu } from '@/components/plate-ui/emoji-dropdown-menu';
+import { EmojiDropdownMenu } from '@/components/plate-ui/emoji/emoji-dropdown-menu';
 
 export const ToolbarEditor = () => {
   return (

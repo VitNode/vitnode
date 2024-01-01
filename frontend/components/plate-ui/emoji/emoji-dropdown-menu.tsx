@@ -5,7 +5,7 @@ import { Smile } from 'lucide-react';
 import { emojiCategoryIcons, emojiSearchIcons } from './emoji-icons';
 import { EmojiPicker } from './emoji-picker';
 import { EmojiToolbarDropdown } from './emoji-toolbar-dropdown';
-import { ToolbarButton } from './toolbar';
+import { ToolbarButton } from '../toolbar';
 
 type EmojiDropdownMenuProps = {
   options?: EmojiDropdownMenuOptions;
