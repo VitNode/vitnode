@@ -48,6 +48,9 @@
         "format_code": "Formatuj kod",
         "error_title": "Błąd Prettier"
       },
+      "code_block": {
+        "title": "Blok kodu"
+      },
       "align": {
         "left": "Wyrównaj do lewej",
         "center": "Wyrównaj do środka",

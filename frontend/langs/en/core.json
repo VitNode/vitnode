@@ -48,6 +48,9 @@
         "format_code": "Format Code",
         "error_title": "Prettier Error"
       },
+      "code_block": {
+        "title": "Code Block"
+      },
       "align": {
         "left": "Align Left",
         "center": "Align Center",

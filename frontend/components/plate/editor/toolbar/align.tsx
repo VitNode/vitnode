@@ -39,8 +39,8 @@ export const AlignToolbarEditor = () => {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton className="w-16">
-          {defaultIcon} <ChevronDown className="ml-auto" />
+        <ToolbarButton className="w-16 gap-1">
+          {defaultIcon} <ChevronDown />
         </ToolbarButton>
       </DropdownMenuTrigger>
 

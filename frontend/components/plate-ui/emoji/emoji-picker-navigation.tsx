@@ -45,7 +45,7 @@ export function EmojiPickerNavigation({
 
   return (
     <nav id="emoji-nav" className="mb-2.5 border-0 border-solid border-b">
-      <div className="relative flex">
+      <div className="relative flex px-1">
         {emojiLibrary
           .getGrid()
           .sections()

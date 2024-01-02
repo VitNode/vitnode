@@ -27,6 +27,7 @@ import {
   ELEMENT_H2,
   ELEMENT_H3,
   ELEMENT_H4,
+  KEYS_HEADING,
   createHeadingPlugin
 } from '@udecode/plate-heading';
 import { ELEMENT_PARAGRAPH, createParagraphPlugin } from '@udecode/plate-paragraph';
@@ -36,8 +37,12 @@ import { createAutoformatPlugin, type AutoformatPlugin } from '@udecode/plate-au
 import { ELEMENT_LI, ELEMENT_OL, ELEMENT_UL, createListPlugin } from '@udecode/plate-list';
 import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
 import { createAlignPlugin } from '@udecode/plate-alignment';
+import { createExitBreakPlugin, createSoftBreakPlugin } from '@udecode/plate-break';
 import {
   ELEMENT_CODE_BLOCK,
+  ELEMENT_CODE_LINE,
+  ELEMENT_CODE_SYNTAX,
+  createCodeBlockPlugin,
   isCodeBlockEmpty,
   isSelectionAtCodeBlockStart,
   unwrapCodeBlock
@@ -50,12 +55,16 @@ import {
   createFontColorPlugin,
   createFontSizePlugin
 } from '@udecode/plate-font';
+import { ELEMENT_TD } from '@udecode/plate-table';
 
 import { ListElement } from '@/components/plate-ui/list-element';
 import { HeadingElement } from '@/components/plate-ui/heading-element';
 import { ParagraphElement } from '@/components/plate-ui/paragraph-element';
 import { autoformatRules } from './format/format';
 import { EmojiCombobox } from '@/components/plate-ui/emoji/emoji-combobox';
+import { CodeBlockElement } from '@/components/plate-ui/code/code-block';
+import { CodeLineElement } from '@/components/plate-ui/code/code-line-element';
+import { CodeSyntaxLeaf } from '@/components/plate-ui/code/code-syntax-leaf';
 
 import { BoldLeafEditor } from '../../../plate-ui/basic/bold';
 import { ItalicLeafEditor } from '../../../plate-ui/basic/italic';
@@ -87,6 +96,43 @@ const resetBlockTypesCodeBlockRule = {
 
 export const pluginsEditor = createPlugins(
   [
+    createSoftBreakPlugin({
+      options: {
+        rules: [
+          { hotkey: 'shift+enter' },
+          {
+            hotkey: 'enter',
+            query: {
+              allow: [ELEMENT_CODE_BLOCK, ELEMENT_BLOCKQUOTE, ELEMENT_TD]
+            }
+          }
+        ]
+      }
+    }),
+    createExitBreakPlugin({
+      options: {
+        rules: [
+          {
+            hotkey: 'mod+enter'
+          },
+          {
+            hotkey: 'mod+shift+enter',
+            before: true
+          },
+          {
+            hotkey: 'enter',
+            query: {
+              start: true,
+              end: true,
+              allow: KEYS_HEADING
+            },
+            relative: true,
+            level: 1
+          }
+        ]
+      }
+    }),
+    createCodeBlockPlugin(),
     createFontColorPlugin(),
     createFontBackgroundColorPlugin(),
     createFontSizePlugin(),
@@ -190,7 +236,10 @@ export const pluginsEditor = createPlugins(
       [ELEMENT_UL]: withProps(ListElement, { variant: 'ul' }),
       [ELEMENT_OL]: withProps(ListElement, { variant: 'ol' }),
       [ELEMENT_LI]: withProps(PlateElement, { as: 'li' }),
-      [ELEMENT_PARAGRAPH]: ParagraphElement
+      [ELEMENT_PARAGRAPH]: ParagraphElement,
+      [ELEMENT_CODE_BLOCK]: CodeBlockElement,
+      [ELEMENT_CODE_LINE]: CodeLineElement,
+      [ELEMENT_CODE_SYNTAX]: CodeSyntaxLeaf
     }
   }
 );

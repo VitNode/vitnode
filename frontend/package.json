@@ -102,6 +102,7 @@
     "@udecode/plate-autoformat": "^29.0.1",
     "@udecode/plate-basic-marks": "^29.0.1",
     "@udecode/plate-block-quote": "^29.0.1",
+    "@udecode/plate-break": "^29.0.1",
     "@udecode/plate-code-block": "^29.0.1",
     "@udecode/plate-combobox": "^29.0.1",
     "@udecode/plate-comments": "^29.0.1",

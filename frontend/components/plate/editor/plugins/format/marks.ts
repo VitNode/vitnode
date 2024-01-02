@@ -65,16 +65,6 @@ export const autoformatMarks: AutoformatRule[] = [
     type: MARK_SUBSCRIPT,
     match: '~'
   },
-  // {
-  //   mode: 'mark',
-  //   type: MARK_HIGHLIGHT,
-  //   match: '=='
-  // },
-  // {
-  //   mode: 'mark',
-  //   type: MARK_HIGHLIGHT,
-  //   match: '≡'
-  // },
   {
     mode: 'mark',
     type: MARK_CODE,
