@@ -136,6 +136,11 @@
           "add": {
             "title": "Dodaj administratora",
             "success": "Administrator został dodany"
+          },
+          "delete": {
+            "desc": "Ta akcja pozbawi użytkownika lub użytkowników tej grupy dostepu do panelu administratora (AdminCP).",
+            "submit": "Tak, usuń uprawnienia",
+            "success": "Uprawnienia zostały usunięte"
           }
         }
       }

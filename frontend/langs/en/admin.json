@@ -136,6 +136,11 @@
           "add": {
             "title": "Add Administrator",
             "success": "Administrator has been added"
+          },
+          "delete": {
+            "desc": "This action will deprive the user or users of this group of access to the administrator panel (AdminCP).",
+            "submit": "Yes, delete permissions",
+            "success": "Permissions has been deleted"
           }
         }
       }

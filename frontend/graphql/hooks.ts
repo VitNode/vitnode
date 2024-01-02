@@ -755,6 +755,13 @@ export type Core_Staff_Administrators__Admin__CreateMutationVariables = Exact<{
 
 export type Core_Staff_Administrators__Admin__CreateMutation = { __typename?: 'Mutation', core_staff_administrators__admin__create: { __typename?: 'ShowAdminStaffAdministrators', created: number, id: string, protected: boolean, unrestricted: boolean, updated: number } };
 
+export type Core_Staff_Administrators__Admin__DeleteMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type Core_Staff_Administrators__Admin__DeleteMutation = { __typename?: 'Mutation', core_staff_administrators__admin__delete: string };
+
 export type Core_Staff_Moderators__Admin__CreateMutationVariables = Exact<{
   groupId?: InputMaybe<Scalars['String']['input']>;
   memberId?: InputMaybe<Scalars['String']['input']>;
@@ -1070,6 +1077,11 @@ export const Core_Staff_Administrators__Admin__Create = gql`
     unrestricted
     updated
   }
+}
+    `;
+export const Core_Staff_Administrators__Admin__Delete = gql`
+    mutation Core_staff_administrators__admin__delete($id: String!) {
+  core_staff_administrators__admin__delete(id: $id)
 }
     `;
 export const Core_Staff_Moderators__Admin__Create = gql`
