@@ -56,6 +56,7 @@ import {
   createFontSizePlugin
 } from '@udecode/plate-font';
 import { ELEMENT_TD } from '@udecode/plate-table';
+import { ELEMENT_HR, createHorizontalRulePlugin } from '@udecode/plate-horizontal-rule';
 
 import { ListElement } from '@/components/plate-ui/list-element';
 import { HeadingElement } from '@/components/plate-ui/heading-element';
@@ -65,6 +66,7 @@ import { EmojiCombobox } from '@/components/plate-ui/emoji/emoji-combobox';
 import { CodeBlockElement } from '@/components/plate-ui/code/code-block';
 import { CodeLineElement } from '@/components/plate-ui/code/code-line-element';
 import { CodeSyntaxLeaf } from '@/components/plate-ui/code/code-syntax-leaf';
+import { HrElement } from '@/components/plate-ui/hr';
 
 import { BoldLeafEditor } from '../../../plate-ui/basic/bold';
 import { ItalicLeafEditor } from '../../../plate-ui/basic/italic';
@@ -96,6 +98,7 @@ const resetBlockTypesCodeBlockRule = {
 
 export const pluginsEditor = createPlugins(
   [
+    createHorizontalRulePlugin(),
     createSoftBreakPlugin({
       options: {
         rules: [
@@ -239,7 +242,8 @@ export const pluginsEditor = createPlugins(
       [ELEMENT_PARAGRAPH]: ParagraphElement,
       [ELEMENT_CODE_BLOCK]: CodeBlockElement,
       [ELEMENT_CODE_LINE]: CodeLineElement,
-      [ELEMENT_CODE_SYNTAX]: CodeSyntaxLeaf
+      [ELEMENT_CODE_SYNTAX]: CodeSyntaxLeaf,
+      [ELEMENT_HR]: HrElement
     }
   }
 );

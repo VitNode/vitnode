@@ -44,6 +44,7 @@
       "copy_code": "Kopiuj kod",
       "code_language": "Język kodu",
       "change_language": "Zmień język",
+      "divider": "Linia podziału",
       "prettier": {
         "format_code": "Formatuj kod",
         "error_title": "Błąd Prettier"
