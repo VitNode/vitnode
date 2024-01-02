@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { LinkUser } from '@/components/user/link/link-user';
 import { GroupFormat } from '@/components/groups/group-format';
 import type { ModeratorsStaffAdminViewProps } from '../moderators-view';
+import { ActionsTableModeratorsStaffAdmin } from './actions/actions';
 
 export const ContentTableModeratorsStaffAdmin = ({ data }: ModeratorsStaffAdminViewProps) => {
   const t = useTranslations('admin.members.staff');
@@ -87,7 +88,7 @@ export const ContentTableModeratorsStaffAdmin = ({ data }: ModeratorsStaffAdminV
 
           if (data.protected) return null;
 
-          return <div>actions</div>;
+          return <ActionsTableModeratorsStaffAdmin data={data} />;
         }
       }
     ],

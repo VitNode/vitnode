@@ -1,24 +1,24 @@
-import { useTranslations } from 'next-intl';
 import { Trash2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { Suspense, lazy } from 'react';
 
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Button } from '@/components/ui/button';
-import type { ShowAdminGroups } from '@/graphql/hooks';
 import { AlertDialog, AlertDialogContent, AlertDialogTrigger } from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Loader } from '@/components/loader/loader';
+import type { ShowAdminStaffModerators } from '@/graphql/hooks';
 
-const ContentDeleteGroupsMembersDialogAdmin = lazy(() =>
-  import('./content-delete-groups-members-dialog-admin').then(module => ({
-    default: module.ContentDeleteGroupsMembersDialogAdmin
+const ContentDeleteActionsTableModeratorsStaffAdmin = lazy(() =>
+  import('./content').then(module => ({
+    default: module.ContentDeleteActionsTableModeratorsStaffAdmin
   }))
 );
 
 interface Props {
-  data: Pick<ShowAdminGroups, 'id' | 'name' | 'protected'>;
+  data: Pick<ShowAdminStaffModerators, 'id'>;
 }
 
-export const DeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
+export const DeleteActionsTableModeratorsStaffAdmin = (props: Props) => {
   const t = useTranslations('core');
 
   return (
@@ -40,7 +40,7 @@ export const DeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
 
       <AlertDialogContent>
         <Suspense fallback={<Loader />}>
-          <ContentDeleteGroupsMembersDialogAdmin data={data} />
+          <ContentDeleteActionsTableModeratorsStaffAdmin {...props} />
         </Suspense>
       </AlertDialogContent>
     </AlertDialog>

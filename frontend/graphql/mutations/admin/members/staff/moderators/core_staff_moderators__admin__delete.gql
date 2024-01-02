@@ -1,0 +1,3 @@
+mutation Core_staff_moderators__admin__delete($id: String!) {
+  core_staff_moderators__admin__delete(id: $id)
+}
