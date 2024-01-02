@@ -57,7 +57,6 @@ export class CreateAdminStaffModeratorsService {
         member: {
           include: {
             avatar: true,
-            cover: true,
             group: {
               include: {
                 name: true

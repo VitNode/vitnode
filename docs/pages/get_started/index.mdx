@@ -6,26 +6,32 @@ import { Steps } from 'nextra/components';
 
 This guide will help you to install the project on your server.
 
-## System Requirements
+## ⚠️ System Requirements
 
-- [Node.js 16.14](https://nodejs.org/) or later,
-- [Database SQL compatibility with Prisma](https://www.prisma.io/docs/reference/database-reference/supported-databases) (Recommended: `PostgreSQL`),
-- [Redis](https://redis.io/),
-- [pnpm](https://pnpm.io/),
+- [Node.js 16.14+](https://nodejs.org/) or later,
+- [PostgreSQL 16+](https://www.postgresql.org/),
+- [Redis 7+](https://redis.io/),
+- [pnpm 9+](https://pnpm.io/),
 - OS:
   - `Linux` (Recommended),
   - `Windows` with [WSL](https://learn.microsoft.com/en-us/windows/wsl/install),
   - `macOS`
 
-Optional:
+## ⚠️ Hardware Requirements
 
-- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
+|         | Minimum        | Recommended    |
+| :------ | :------------- | :------------- |
+| CPU     | 1GHz (2+ core) | 1GHz (4+ core) |
+| RAM     | 4GB            | 8GB            |
+| Storage | 10GB           | 20GB           |
+| Network | 100Mbps        | 1Gbps          |
 
-## Requirements for VSCode
+## 🪚 Extensions for VSCode
 
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-- [StyleLint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
+- [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+- [Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma)
 
 ## Main Steps
 
@@ -65,15 +71,7 @@ pnpm install
 
 ### Prepere database
 
-VitNode uses Prisma to connect to the database, which means VitNode supports multiple databases like `PostgreSQL` (Recommended), `MySQL`, `MariaDB`, `Microsoft SQL Server` etc.
-
-You can read more about it [here](https://www.prisma.io/docs/reference/database-reference/supported-databases).
-
-<Callout type="error" emoji="❌">
-  VitNode doesn't support no-SQL versions which means `MongoDB` database cannot be used.
-</Callout>
-
-When you choose the database, you need to create a database and user for VitNode. Save the credentials somewhere, you will need them in next step.
+Install `PostgreSQL` on your server.
 
 ### Environment variables for Backend
 

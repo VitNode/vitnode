@@ -15,13 +15,13 @@ export class ShowTopicsForumsService {
   constructor(private prisma: PrismaService) {}
 
   async show(
-    { cursor, first, forum_id, ids, last }: ShowTopicsForumsArgs,
+    { cursor, first, forum_id, id, last }: ShowTopicsForumsArgs,
     user?: User
   ): Promise<ShowTopicsForumsObj> {
     const where: Prisma.forum_topicsWhereInput = {
       AND: [
         { forum_id },
-        { id: ids ? { in: ids } : undefined },
+        { id },
         {
           OR: [
             {
@@ -58,21 +58,30 @@ export class ShowTopicsForumsService {
         where,
         include: {
           title: true,
-          content: true,
-          author: {
-            include: {
-              avatar: true,
-              cover: true,
-              group: {
-                include: {
-                  name: true
-                }
-              }
-            }
-          },
           forum: {
             include: {
               name: true
+            }
+          },
+          posts: {
+            take: 1,
+            orderBy: [
+              {
+                created: SortDirectionEnum.asc
+              }
+            ],
+            include: {
+              content: true,
+              author: {
+                include: {
+                  avatar: true,
+                  group: {
+                    include: {
+                      name: true
+                    }
+                  }
+                }
+              }
             }
           }
         },
@@ -86,7 +95,14 @@ export class ShowTopicsForumsService {
     ]);
 
     return outputPagination({
-      edges,
+      edges: edges
+        .map(edge => {
+          const post = edge.posts.at(0);
+          if (!post) return null;
+
+          return { ...edge, author: post.author, content: post.content };
+        })
+        .filter(edge => edge !== null),
       totalCount,
       first,
       cursor,

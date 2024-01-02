@@ -15,7 +15,7 @@ import {
   CommandSeparator,
   commandInputClassName
 } from '@/components/ui/command';
-import { ListContentFilterToolbarDataTable } from './list-content-filter-toolbar-data-table';
+import { ListContentFilterToolbarDataTable } from './list';
 import { usePathname, useRouter } from '@/i18n';
 import { useFilterToolbarDataTable } from '../hooks/use-filter-toolbar-data-table';
 

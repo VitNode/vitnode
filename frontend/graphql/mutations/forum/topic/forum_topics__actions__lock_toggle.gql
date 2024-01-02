@@ -1,0 +1,3 @@
+mutation Forum_topics__actions__lock_toggle($id: String!) {
+  forum_topics__actions__lock_toggle(id: $id)
+}

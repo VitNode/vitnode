@@ -7,9 +7,10 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/
 
 interface Props {
   date: number;
+  className?: string;
 }
 
-export const DateFormat = ({ date }: Props) => {
+export const DateFormat = ({ className, date }: Props) => {
   const locale = useLocale();
   const currentTime = convertUnixTime(date);
 
@@ -46,7 +47,7 @@ export const DateFormat = ({ date }: Props) => {
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <span>{getDateWithFormatDistance()}</span>
+            <span className={className}>{getDateWithFormatDistance()}</span>
           </TooltipTrigger>
           <TooltipContent>
             <span>{fullDate}</span>
@@ -56,5 +57,5 @@ export const DateFormat = ({ date }: Props) => {
     );
   }
 
-  return <span>{fullDate}</span>;
+  return <span className={className}>{fullDate}</span>;
 };

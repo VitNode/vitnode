@@ -53,7 +53,6 @@ export class AuthorizationCoreSessionsService {
         },
         include: {
           avatar: true,
-          cover: true,
           group: {
             include: {
               name: true

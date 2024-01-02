@@ -13,7 +13,6 @@ type AuthorizationCoreSessionsObj {
 type AuthorizationCurrentUserObj {
   avatar: UploadCoreAttachmentsObj
   avatar_color: String!
-  cover: UploadCoreAttachmentsObj
   email: String!
   group: GroupUser!
   id: String!
@@ -47,6 +46,11 @@ type CreateForumForumsObj {
   name: [TextLanguage!]!
   parent: ShowForumForums
   position: Int!
+}
+
+enum ForumTopicsActions {
+  lock
+  unlock
 }
 
 type ForumTopicsForums {
@@ -108,6 +112,8 @@ type Mutation {
   core_staff_moderators__admin__delete(id: String!): String!
   forum_forums__admin__change_position(id: String!, index_to_move: Int!, parent_id: String): String!
   forum_forums__admin__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: String, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
+  forum_posts__create(content: [TextLanguageInput!]!, topic_id: String!): ShowPostsForums!
+  forum_topics__actions__lock_toggle(id: String!): Boolean!
   forum_topics__create(content: [TextLanguageInput!]!, forum_id: String!, title: [TextLanguageInput!]!): ShowTopicsForums!
 }
 
@@ -147,8 +153,8 @@ type Query {
   core_staff_moderators__admin__show(cursor: String, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
   forum_forums__admin__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsAdminObj!
   forum_forums__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsObj!
-  forum_posts__show: String!
-  forum_topics__show(cursor: String, first: Int, forum_id: String, ids: [String!], last: Int): ShowTopicsForumsObj!
+  forum_posts__show(cursor: String, first: Int, last: Int, topic_id: String!): ShowPostsForumsObj!
+  forum_topics__show(cursor: String, first: Int, forum_id: String, id: String, last: Int): ShowTopicsForumsObj!
 }
 
 type ShowAdminGroups {
@@ -181,7 +187,6 @@ enum ShowAdminGroupsSortingColumnEnum {
 type ShowAdminMembers {
   avatar: UploadCoreAttachmentsObj
   avatar_color: String!
-  cover: UploadCoreAttachmentsObj
   email: String!
   group: GroupUser!
   id: String!
@@ -274,7 +279,6 @@ type ShowCoreLanguagesObj {
 type ShowCoreMembers {
   avatar: UploadCoreAttachmentsObj
   avatar_color: String!
-  cover: UploadCoreAttachmentsObj
   group: GroupUser!
   id: String!
   joined: Int!
@@ -348,6 +352,25 @@ type ShowForumForumsWithParent {
   position: Int!
 }
 
+type ShowPostsForums {
+  author: User!
+  content: [TextLanguage!]!
+  created: Int!
+  id: String!
+}
+
+type ShowPostsForumsMetaTags {
+  action: ForumTopicsActions!
+  created: Int!
+  id: String!
+  member: User!
+}
+
+type ShowPostsForumsObj {
+  edges: [postsWithMetaTagsUnion!]!
+  pageInfo: PageInfo!
+}
+
 type ShowTopicsForums {
   author: User!
   content: [TextLanguage!]!
@@ -356,7 +379,6 @@ type ShowTopicsForums {
   id: String!
   locked: Boolean!
   title: [TextLanguage!]!
-  updated: Int
 }
 
 type ShowTopicsForumsObj {
@@ -412,10 +434,11 @@ type UploadCoreAttachmentsObj {
 type User {
   avatar: UploadCoreAttachmentsObj
   avatar_color: String!
-  cover: UploadCoreAttachmentsObj
   group: GroupUser!
   id: String!
   name: String!
 }
 
 union UserOrGroupCoreStaffUnion = StaffGroupUser | User
+
+union postsWithMetaTagsUnion = ShowPostsForums | ShowPostsForumsMetaTags

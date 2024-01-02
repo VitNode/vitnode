@@ -32,20 +32,6 @@ query Core_staff_administrators__admin__show(
             url
           }
           avatar_color
-          cover {
-            created
-            description
-            extension
-            file_size
-            id
-            member_id
-            mimetype
-            module
-            module_id
-            name
-            position
-            url
-          }
           group {
             id
             name {

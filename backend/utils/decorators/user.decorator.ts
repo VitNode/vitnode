@@ -34,9 +34,6 @@ export class User {
   @Field(() => UploadCoreAttachmentsObj, { nullable: true })
   avatar: UploadCoreAttachmentsObj | null;
 
-  @Field(() => UploadCoreAttachmentsObj, { nullable: true })
-  cover: UploadCoreAttachmentsObj | null;
-
   @Field(() => GroupUser)
   group: GroupUser;
 }

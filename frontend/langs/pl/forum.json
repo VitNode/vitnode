@@ -4,13 +4,18 @@
     "by": "Przez <user></user>, <date></date>",
     "topics": {
       "not_found": "Nie znaleziono tematów w tym forum.",
-      "username_format": "<user></user> <date></date>",
+      "username_format": "<user></user>, <group></group>",
       "user_wrote_in_forum": "<user></user> napisał w <forum></forum>",
       "open": "Otwarty",
+      "closed": "Zamknięty",
       "actions": {
         "title": "Akcje",
         "lock": "Zablokuj",
-        "unlock": "Odblokuj"
+        "unlock": "Odblokuj",
+        "meta": {
+          "meta_lock": "<user></user> zablokował ten temat <date></date>.",
+          "meta_unlock": "<user></user> odblokował ten temat <date></date>."
+        }
       },
       "create": {
         "title": "Stwórz temat",

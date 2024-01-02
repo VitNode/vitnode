@@ -1,4 +1,4 @@
-import { ContentFilterToolbarDataTable } from '@/components/data-table/toolbar/filter/content/content-filter-toolbar-data-table';
+import { ContentFilterToolbarDataTable } from '@/components/data-table/toolbar/filter/content/content';
 import { useShortShowGroupsAdminAPI } from '@/admin/hooks/api/use-short-show-groups-admin-api';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 

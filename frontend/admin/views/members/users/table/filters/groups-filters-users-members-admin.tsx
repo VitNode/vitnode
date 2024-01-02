@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import { useTranslations } from 'next-intl';
 
-import { FilterToolbarDataTable } from '@/components/data-table/toolbar/filter/filter-toolbar-data-table';
+import { FilterToolbarDataTable } from '@/components/data-table/toolbar/filter/filter';
 
 const ContentGroupsFiltersUsersMembersAdmin = lazy(() =>
   import('./content-groups-filters-users-members-admin').then(module => ({

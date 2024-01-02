@@ -44,11 +44,9 @@ export const TestComponent = () => {
 
 ## Build-in Loaders
 
-We're modifying few components to help you load data to the frontend.
+We're modifying few components to help you load data to the frontend. You can use the `loading` prop to show a loader inside the component.
 
 ### Button
-
-You can use the `loading` prop to show a loader inside the button.
 
 ```tsx
 import { Button } from '@/components/ui/button';
@@ -59,5 +57,15 @@ export const TestComponent = () => {
       {t('save')}
     </Button>
   );
+};
+```
+
+### DropdownMenuItem
+
+```tsx
+import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
+
+export const TestComponent = () => {
+  return <DropdownMenuItem loading={isPending}>{t('testing')}</DropdownMenuItem>;
 };
 ```

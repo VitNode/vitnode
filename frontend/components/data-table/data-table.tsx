@@ -24,8 +24,8 @@ import { Button } from '../ui/button';
 import type { PageInfo } from '@/graphql/hooks';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { usePathname, useRouter } from '@/i18n';
-import { ToolbarDataTable } from './toolbar/toolbar-data-table';
-import type { ToolbarDataTableProps } from './toolbar/toolbar-data-table';
+import { ToolbarDataTable } from './toolbar/toolbar';
+import type { ToolbarDataTableProps } from './toolbar/toolbar';
 
 interface TDataMin {
   id: string;

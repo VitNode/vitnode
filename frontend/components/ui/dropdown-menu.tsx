@@ -8,8 +8,10 @@ import {
   type ElementRef,
   type HTMLAttributes
 } from 'react';
+import { useTranslations } from 'next-intl';
 
 import { cx } from '@/functions/classnames';
+import { Loader } from '@/components/loader/loader';
 
 const DropdownMenu = DropdownMenuPrimitive.Root;
 
@@ -85,18 +87,28 @@ const DropdownMenuItem = forwardRef<
   ElementRef<typeof DropdownMenuPrimitive.Item>,
   ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> & {
     inset?: boolean;
+    loading?: boolean;
   }
->(({ className, inset, ...props }, ref) => (
-  <DropdownMenuPrimitive.Item
-    ref={ref}
-    className={cx(
-      'relative flex select-none items-center gap-2 rounded-sm px-3 py-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 cursor-pointer [&>svg]:size-4 [&>svg]:flex-shrink-0',
-      inset && 'pl-8',
-      className
-    )}
-    {...props}
-  />
-));
+>(({ className, inset, loading, ...props }, ref) => {
+  const t = useTranslations('core');
+
+  const currentClassName = cx(
+    'relative flex select-none items-center gap-2 rounded-sm px-3 py-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 cursor-pointer [&>svg]:size-4 [&>svg]:flex-shrink-0',
+    inset && 'pl-8',
+    className
+  );
+
+  if (loading) {
+    return (
+      <DropdownMenuPrimitive.Item ref={ref} className={currentClassName} {...props} disabled>
+        <Loader small />
+        {t('loading')}
+      </DropdownMenuPrimitive.Item>
+    );
+  }
+
+  return <DropdownMenuPrimitive.Item ref={ref} className={currentClassName} {...props} />;
+});
 DropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName;
 
 const DropdownMenuCheckboxItem = forwardRef<

@@ -12,7 +12,7 @@ import { DateFormat } from '@/components/date-format/date-format';
 import { GroupsFiltersUsersMembersAdmin } from './filters/groups-filters-users-members-admin';
 import { AdvancedFiltersUsersMembersAdmin } from './filters/advanced/advanced-filters-users-members-admin';
 import { useTextLang } from '@/hooks/core/use-text-lang';
-import { HeaderSortingDataTable } from '@/components/data-table/header-sorting-data-table';
+import { HeaderSortingDataTable } from '@/components/data-table/header';
 import type { UsersMembersAdminViewProps } from '../users-members-admin-view';
 import type { ShowAdminMembers } from '@/graphql/hooks';
 

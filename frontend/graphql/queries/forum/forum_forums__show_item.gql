@@ -35,13 +35,8 @@ query Forum_forums__show_item($cursor: String, $first: Int, $last: Int, $forumId
   }
   forum_topics__show(cursor: $cursor, first: $first, last: $last, forum_id: $forumId) {
     edges {
-      content {
-        value
-        id_language
-      }
       created
       id
-      updated
       title {
         id_language
         value

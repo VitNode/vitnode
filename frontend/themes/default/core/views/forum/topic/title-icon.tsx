@@ -1,17 +1,17 @@
 import type { ReactNode } from 'react';
 
 import { cx } from '@/functions/classnames';
-import { Badge } from '@/components/ui/badge';
+import { Badge, type BadgeProps } from '@/components/ui/badge';
 
-interface Props {
+interface Props extends Pick<BadgeProps, 'variant'> {
   children: ReactNode;
   className?: string;
 }
 
-export const TitleIconTopic = ({ children, className }: Props) => {
+export const TitleIconTopic = ({ children, className, variant = 'default' }: Props) => {
   return (
     <Badge
-      variant="default"
+      variant={variant}
       className={cx('px-3 py-1 [&>svg]:size-4 flex-shrink-0 text-sm', className)}
     >
       {children}

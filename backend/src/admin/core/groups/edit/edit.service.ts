@@ -4,7 +4,6 @@ import { EditAdminGroupsArgs } from './dto/edit.args';
 import { ShowAdminGroups } from '../show/dto/show.obj';
 
 import { PrismaService } from '@/prisma/prisma.service';
-import { NotFountError } from '@/utils/errors/not-found';
 import { currentDate } from '@/functions/date';
 
 @Injectable()
@@ -12,15 +11,11 @@ export class EditAdminGroupsService {
   constructor(private prisma: PrismaService) {}
 
   async edit({ id, name }: EditAdminGroupsArgs): Promise<ShowAdminGroups> {
-    const group = await this.prisma.core_groups.findUnique({
+    await this.prisma.core_groups.findUniqueOrThrow({
       where: {
         id
       }
     });
-
-    if (!group) {
-      throw new NotFountError('Group');
-    }
 
     const groupNames = await this.prisma.core_groups_names.findMany({
       where: {

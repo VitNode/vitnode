@@ -1,5 +1,11 @@
-query Forum_topics__show($ids: [String!], $first: Int) {
-  forum_topics__show(ids: $ids, first: $first) {
+query Forum_topics__show(
+  $id: String!
+  $first: Int
+  $cursor: String
+  $forumPostsShowFirst2: Int
+  $last: Int
+) {
+  forum_topics__show(id: $id, first: $first) {
     edges {
       content {
         id_language
@@ -8,7 +14,6 @@ query Forum_topics__show($ids: [String!], $first: Int) {
       created
       id
       locked
-      updated
       title {
         id_language
         value
@@ -29,20 +34,6 @@ query Forum_topics__show($ids: [String!], $first: Int) {
           url
         }
         avatar_color
-        cover {
-          created
-          description
-          extension
-          file_size
-          id
-          member_id
-          mimetype
-          module
-          module_id
-          name
-          position
-          url
-        }
         group {
           id
           name {
@@ -60,6 +51,84 @@ query Forum_topics__show($ids: [String!], $first: Int) {
           value
         }
       }
+    }
+  }
+  forum_posts__show(topic_id: $id, cursor: $cursor, first: $forumPostsShowFirst2, last: $last) {
+    edges {
+      __typename
+      ... on ShowPostsForums {
+        content {
+          value
+          id_language
+        }
+        id
+        author {
+          avatar {
+            created
+            description
+            extension
+            file_size
+            id
+            member_id
+            mimetype
+            module
+            module_id
+            name
+            position
+            url
+          }
+          avatar_color
+          group {
+            id
+            name {
+              id_language
+              value
+            }
+          }
+          id
+          name
+        }
+        created
+      }
+      ... on ShowPostsForumsMetaTags {
+        action
+        id
+        member {
+          avatar {
+            created
+            description
+            extension
+            file_size
+            id
+            member_id
+            mimetype
+            module
+            module_id
+            name
+            position
+            url
+          }
+          avatar_color
+          group {
+            id
+            name {
+              id_language
+              value
+            }
+          }
+          id
+          name
+        }
+        created
+      }
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
     }
   }
 }

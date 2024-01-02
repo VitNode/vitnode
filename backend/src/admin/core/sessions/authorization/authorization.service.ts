@@ -33,7 +33,6 @@ export class AuthorizationAdminSessionsService {
         member: {
           include: {
             avatar: true,
-            cover: true,
             group: {
               include: {
                 name: true
