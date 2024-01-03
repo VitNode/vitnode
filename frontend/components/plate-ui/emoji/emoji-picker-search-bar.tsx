@@ -19,7 +19,7 @@ export function EmojiPickerSearchBar({
   const t = useTranslations('core');
 
   return (
-    <div className="flex items-center px-2 mb-1">
+    <div className="flex items-center px-2 mb-1 gap-2">
       <div className="relative flex grow">
         <Input
           type="text"
@@ -33,7 +33,7 @@ export function EmojiPickerSearchBar({
 
         {searchValue && (
           <Button
-            aria-label={t('clear')}
+            tooltip={t('clear')}
             type="button"
             variant="ghost"
             size="icon"
@@ -44,6 +44,8 @@ export function EmojiPickerSearchBar({
           </Button>
         )}
       </div>
+
+      {/* <EmojiSkinTone /> */}
     </div>
   );
 }

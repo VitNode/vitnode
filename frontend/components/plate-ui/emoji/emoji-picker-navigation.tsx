@@ -56,10 +56,10 @@ export function EmojiPickerNavigation({
             return (
               <Button
                 key={id}
+                variant="ghost"
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-expect-error
-                aria-label={t(id)}
-                variant="ghost"
+                tooltip={t(id)}
                 className={cx('w-9 h-10 rounded-b-none relative', {
                   'text-primary': active
                 })}

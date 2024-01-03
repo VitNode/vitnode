@@ -43,7 +43,7 @@ export const Editor = () => {
           setSelectedLanguage={setSelectedLanguage}
         />
 
-        <PlateContent className="focus-visible:outline-none px-3 py-2" value={''} />
+        <PlateContent className="focus-visible:outline-none px-3 py-2" />
       </div>
     </Plate>
   );

@@ -14,8 +14,8 @@ export function EmojiComboboxItem({ item }: ComboboxItemProps<EmojiItemData>) {
   } = item;
 
   return (
-    <div>
-      {emoji} :{id}:
+    <div className="flex items-center gap-2">
+      <span className="text-xl">{emoji}</span> <span>:{id}:</span>
     </div>
   );
 }
