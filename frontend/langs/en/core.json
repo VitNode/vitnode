@@ -45,6 +45,7 @@
       "code_language": "Code Language",
       "change_language": "Change Language",
       "divider": "Divider",
+      "insert": "Insert",
       "link": {
         "title": "Link",
         "paste_link": "Paste link",
@@ -61,6 +62,7 @@
         "title": "Code Block"
       },
       "align": {
+        "title": "Align Text",
         "left": "Align Left",
         "center": "Align Center",
         "right": "Align Right",
@@ -116,9 +118,11 @@
         "h2": "Heading H2",
         "h3": "Heading H3",
         "h4": "Heading H4",
-        "bullet": "Bullet List",
-        "number": "Ordered List",
         "code": "Code Block"
+      },
+      "list": {
+        "bullet": "Bullet List",
+        "number": "Ordered List"
       }
     },
     "icon_picker": {

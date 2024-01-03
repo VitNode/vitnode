@@ -28,10 +28,9 @@ export const ToolbarLink = withCn(
   'font-medium underline underline-offset-4'
 );
 
-export const ToolbarSeparator = withCn(
-  ToolbarPrimitive.Separator,
-  'my-1 w-[1px] shrink-0 bg-border'
-);
+export const ToolbarSeparator = () => {
+  return <Separator className="h-7" orientation="vertical" />;
+};
 
 export const ToolbarButton = withRef<
   typeof ToolbarPrimitive.Button,

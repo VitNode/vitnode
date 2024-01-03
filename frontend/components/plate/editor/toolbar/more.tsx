@@ -24,7 +24,7 @@ export const MoreToolbarEditor = () => {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton className="w-16 gap-1">
+        <ToolbarButton tooltip={t('insert')} className="w-16 gap-1">
           <Plus /> <ChevronDown />
         </ToolbarButton>
       </DropdownMenuTrigger>

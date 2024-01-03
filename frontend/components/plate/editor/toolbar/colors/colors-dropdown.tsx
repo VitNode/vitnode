@@ -22,10 +22,17 @@ interface Props {
   children: ReactNode;
   customDefaultColor: string;
   nodeType: string;
+  tooltip: string;
 }
 
-export const DropdownColorsToolbarEditor = ({ children, customDefaultColor, nodeType }: Props) => {
+export const DropdownColorsToolbarEditor = ({
+  children,
+  customDefaultColor,
+  nodeType,
+  tooltip
+}: Props) => {
   const t = useTranslations('core.editor');
+  const tCore = useTranslations('core');
   const state = useColorDropdownMenuState({
     nodeType,
     colors: DEFAULT_COLORS,
@@ -45,7 +52,7 @@ export const DropdownColorsToolbarEditor = ({ children, customDefaultColor, node
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton size="sm" className="w-16 gap-1">
+        <ToolbarButton tooltip={tooltip} size="sm" className="w-16 gap-1">
           <div
             className="size-5 rounded-sm border"
             style={{ backgroundColor: state.color ? state.color : customDefaultColor }}
@@ -71,6 +78,7 @@ export const DropdownColorsToolbarEditor = ({ children, customDefaultColor, node
                 size="icon"
                 variant="outline"
                 className="flex-shrink-0"
+                tooltip={tCore('confirm')}
                 onClick={() => {
                   inputProps.onChange({
                     target: { value: customColor }
@@ -92,6 +100,7 @@ export const DropdownColorsToolbarEditor = ({ children, customDefaultColor, node
                   'text-black': item.isBrightColor,
                   'text-white': !item.isBrightColor
                 })}
+                tooltip=""
                 onClick={() => state.updateColorAndClose(item.value)}
                 style={{ backgroundColor: item.value }}
               >

@@ -65,7 +65,7 @@ export function LinkFloatingToolbar({ state }: LinkFloatingToolbarProps) {
   if (hidden) return null;
 
   const input = (
-    <div className="flex w-72 flex-col p-1 gap-2">
+    <div className="flex w-72 flex-col p-1 gap-1">
       <div className="flex items-center gap-2">
         <div className="flex items-center justify-center text-muted-foreground size-9 [&>svg]:size-4 flex-shrink-0">
           <Link />

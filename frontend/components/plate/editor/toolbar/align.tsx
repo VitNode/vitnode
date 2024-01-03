@@ -39,7 +39,7 @@ export const AlignToolbarEditor = () => {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton className="w-16 gap-1">
+        <ToolbarButton tooltip={t('title')} className="w-16 gap-1">
           {defaultIcon} <ChevronDown />
         </ToolbarButton>
       </DropdownMenuTrigger>

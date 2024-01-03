@@ -45,6 +45,7 @@
       "code_language": "Język kodu",
       "change_language": "Zmień język",
       "divider": "Linia podziału",
+      "insert": "Wstaw",
       "link": {
         "title": "Link",
         "paste_link": "Wklej link",
@@ -61,6 +62,7 @@
         "title": "Blok kodu"
       },
       "align": {
+        "title": "Wyrównanie tekstu",
         "left": "Wyrównaj do lewej",
         "center": "Wyrównaj do środka",
         "right": "Wyrównaj do prawej",
@@ -116,9 +118,11 @@
         "h2": "Nagłówek H2",
         "h3": "Nagłówek H3",
         "h4": "Nagłówek H4",
-        "bullet": "Lista punktowana",
-        "number": "Lista numerowana",
         "code": "Blok kodu"
+      },
+      "list": {
+        "bullet": "Lista punktowana",
+        "number": "Lista numerowana"
       }
     },
     "icon_picker": {
