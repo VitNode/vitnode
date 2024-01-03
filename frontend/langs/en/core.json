@@ -1,6 +1,7 @@
 {
   "core": {
     "test": "Test EN",
+    "open_menu": "Open Menu",
     "loading": "Please wait, loading...",
     "save": "Save",
     "saved_success": "Saved successfully.",
@@ -40,11 +41,18 @@
       "font_background_color": "Font Background Color",
       "custom_color": "Custom Color",
       "set_default_color": "Set Default Color",
-      "link": "Link",
       "copy_code": "Copy Code",
       "code_language": "Code Language",
       "change_language": "Change Language",
       "divider": "Divider",
+      "link": {
+        "title": "Link",
+        "paste_link": "Paste link",
+        "link_text": "Link text",
+        "edit_link": "Edit link",
+        "open_link_in_new_tab": "Open link in new tab",
+        "unlink": "Unlink"
+      },
       "prettier": {
         "format_code": "Format Code",
         "error_title": "Prettier Error"

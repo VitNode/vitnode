@@ -29,9 +29,8 @@ export const DeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
         <Tooltip>
           <AlertDialogTrigger asChild>
             <TooltipTrigger asChild>
-              <Button variant="destructiveGhost" size="icon">
+              <Button variant="destructiveGhost" size="icon" tooltip={t('delete')}>
                 <Trash2 />
-                <span className="sr-only">{t('delete')}</span>
               </Button>
             </TooltipTrigger>
           </AlertDialogTrigger>

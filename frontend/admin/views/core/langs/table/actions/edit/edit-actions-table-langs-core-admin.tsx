@@ -23,9 +23,8 @@ export const EditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
         <Tooltip>
           <TooltipTrigger asChild>
             <DialogTrigger asChild>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" tooltip={t('edit')}>
                 <Pencil />
-                <span className="sr-only">{t('edit')}</span>
               </Button>
             </DialogTrigger>
           </TooltipTrigger>

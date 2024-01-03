@@ -6,6 +6,7 @@ import { ToolbarButton } from '@/components/plate-ui/toolbar';
 interface Props {
   children: ReactNode;
   nodeType: string;
+  tooltip: string;
   clear?: string | string[];
 }
 

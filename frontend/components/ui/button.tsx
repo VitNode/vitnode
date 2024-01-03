@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 
 import { cx } from '@/functions/classnames';
 import { Loader } from '../loader/loader';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip';
 
 const buttonVariants = cva(
   'inline-flex items-center justify-center gap-2 text-center rounded-md text-sm font-medium ring-offset-background transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&>svg]:size-4 [&>svg]:flex-shrink-0 no-underline',
@@ -35,38 +36,65 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+    Omit<VariantProps<typeof buttonVariants>, 'size'> {
   asChild?: boolean;
   loading?: boolean;
+  size?: 'default' | 'sm' | 'lg';
+  tooltip?: string;
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ asChild = false, className, loading, size, type = 'button', variant, ...props }, ref) => {
+interface IconButtonProps extends Omit<ButtonProps, 'size'> {
+  size: 'icon';
+  tooltip: string;
+}
+
+const Button = forwardRef<HTMLButtonElement, IconButtonProps | ButtonProps>(
+  (
+    { asChild = false, className, loading, size, tooltip, type = 'button', variant, ...props },
+    ref
+  ) => {
     const t = useTranslations('core');
     const Comp = asChild ? Slot : 'button';
 
-    if (loading) {
+    const content = () => {
+      if (loading) {
+        return (
+          <Comp
+            className={cx(buttonVariants({ variant, size, className }))}
+            ref={ref}
+            {...props}
+            disabled
+          >
+            <Loader small />
+            {t('loading')}
+          </Comp>
+        );
+      }
+
       return (
         <Comp
           className={cx(buttonVariants({ variant, size, className }))}
+          type={type}
           ref={ref}
+          aria-label={tooltip}
           {...props}
-          disabled
-        >
-          <Loader small />
-          {t('loading')}
-        </Comp>
+        />
+      );
+    };
+
+    if (tooltip) {
+      return (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>{content()}</TooltipTrigger>
+
+            <TooltipContent>{tooltip}</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       );
     }
 
-    return (
-      <Comp
-        className={cx(buttonVariants({ variant, size, className }))}
-        type={type}
-        ref={ref}
-        {...props}
-      />
-    );
+    return content();
   }
 );
 Button.displayName = 'Button';

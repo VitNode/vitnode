@@ -1,6 +1,7 @@
 {
   "core": {
     "test": "Test PL",
+    "open_menu": "Otwórz menu",
     "loading": "Czekaj, ładowanie...",
     "save": "Zapisz",
     "saved_success": "Zapisano pomyślnie.",
@@ -40,11 +41,18 @@
       "font_background_color": "Kolor tła czcionki",
       "custom_color": "Niestandardowy kolor",
       "set_default_color": "Ustaw domyślny kolor",
-      "link": "Link",
       "copy_code": "Kopiuj kod",
       "code_language": "Język kodu",
       "change_language": "Zmień język",
       "divider": "Linia podziału",
+      "link": {
+        "title": "Link",
+        "paste_link": "Wklej link",
+        "link_text": "Tekst linku",
+        "edit_link": "Edytuj link",
+        "open_link_in_new_tab": "Otwórz link w nowej karcie",
+        "unlink": "Usuń link"
+      },
       "prettier": {
         "format_code": "Formatuj kod",
         "error_title": "Błąd Prettier"

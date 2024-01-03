@@ -1,4 +1,9 @@
-import { insertEmptyElement, useEditorRef } from '@udecode/plate-common';
+import {
+  ELEMENT_DEFAULT,
+  focusEditor,
+  insertEmptyElement,
+  useEditorRef
+} from '@udecode/plate-common';
 import { ChevronDown, Code2, Minus, Plus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { insertEmptyCodeBlock } from '@udecode/plate-code-block';
@@ -28,6 +33,7 @@ export const MoreToolbarEditor = () => {
         <DropdownMenuItem
           onSelect={() => {
             insertEmptyCodeBlock(editor);
+            focusEditor(editor);
           }}
         >
           <Code2 /> {t('code_block.title')}
@@ -38,6 +44,8 @@ export const MoreToolbarEditor = () => {
               select: true,
               nextBlock: true
             });
+            insertEmptyElement(editor, ELEMENT_DEFAULT);
+            focusEditor(editor);
           }}
         >
           <Minus /> {t('divider')}

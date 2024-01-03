@@ -19,7 +19,8 @@ import {
   PlateElement,
   type PlatePlugin,
   isBlockAboveEmpty,
-  isSelectionAtBlockStart
+  isSelectionAtBlockStart,
+  type RenderAfterEditable
 } from '@udecode/plate-common';
 import { withProps } from '@udecode/cn';
 import {
@@ -57,6 +58,7 @@ import {
 } from '@udecode/plate-font';
 import { ELEMENT_TD } from '@udecode/plate-table';
 import { ELEMENT_HR, createHorizontalRulePlugin } from '@udecode/plate-horizontal-rule';
+import { ELEMENT_LINK, createLinkPlugin } from '@udecode/plate-link';
 
 import { ListElement } from '@/components/plate-ui/list-element';
 import { HeadingElement } from '@/components/plate-ui/heading-element';
@@ -66,7 +68,9 @@ import { EmojiCombobox } from '@/components/plate-ui/emoji/emoji-combobox';
 import { CodeBlockElement } from '@/components/plate-ui/code/code-block';
 import { CodeLineElement } from '@/components/plate-ui/code/code-line-element';
 import { CodeSyntaxLeaf } from '@/components/plate-ui/code/code-syntax-leaf';
-import { HrElement } from '@/components/plate-ui/hr';
+import { HrElement } from '@/components/plate-ui/hr-element';
+import { LinkElement } from '@/components/plate-ui/link-element';
+import { LinkFloatingToolbar } from '@/components/plate-ui/link-floating-toolbar';
 
 import { BoldLeafEditor } from '../../../plate-ui/basic/bold';
 import { ItalicLeafEditor } from '../../../plate-ui/basic/italic';
@@ -98,6 +102,9 @@ const resetBlockTypesCodeBlockRule = {
 
 export const pluginsEditor = createPlugins(
   [
+    createLinkPlugin({
+      renderAfterEditable: LinkFloatingToolbar as RenderAfterEditable
+    }),
     createHorizontalRulePlugin(),
     createSoftBreakPlugin({
       options: {
@@ -127,7 +134,7 @@ export const pluginsEditor = createPlugins(
             query: {
               start: true,
               end: true,
-              allow: KEYS_HEADING
+              allow: [...KEYS_HEADING, ELEMENT_CODE_BLOCK]
             },
             relative: true,
             level: 1
@@ -243,7 +250,8 @@ export const pluginsEditor = createPlugins(
       [ELEMENT_CODE_BLOCK]: CodeBlockElement,
       [ELEMENT_CODE_LINE]: CodeLineElement,
       [ELEMENT_CODE_SYNTAX]: CodeSyntaxLeaf,
-      [ELEMENT_HR]: HrElement
+      [ELEMENT_HR]: HrElement,
+      [ELEMENT_LINK]: LinkElement
     }
   }
 );
