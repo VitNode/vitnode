@@ -36,7 +36,7 @@ const IconPickerInput = forwardRef<HTMLButtonElement, Props>(({ onChange, value 
           {value ? (
             <>
               <IconDynamic name={value as IconDynamicNames} />
-              <span className="overflow-hidden whitespace-nowrap text-ellipsis">{value}</span>
+              <span className="truncate">{value}</span>
             </>
           ) : (
             <>

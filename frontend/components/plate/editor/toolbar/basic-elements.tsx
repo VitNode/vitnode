@@ -53,7 +53,6 @@ export const BasicElementsToolbarEditor = () => {
   ];
 
   const defaultItem = items.find(item => item.value === ELEMENT_PARAGRAPH)!;
-
   const t = useTranslations('core.editor.roots');
   const editor = useEditorRef();
 
