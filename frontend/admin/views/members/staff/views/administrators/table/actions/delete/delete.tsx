@@ -1,24 +1,24 @@
-import { useTranslations } from 'next-intl';
 import { Trash2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { Suspense, lazy } from 'react';
 
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Button } from '@/components/ui/button';
-import type { ShowAdminGroups } from '@/graphql/hooks';
 import { AlertDialog, AlertDialogContent, AlertDialogTrigger } from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Loader } from '@/components/loader/loader';
+import type { ShowAdminStaffAdministrators } from '@/graphql/hooks';
 
-const ContentDeleteGroupsMembersDialogAdmin = lazy(() =>
-  import('./content-delete-groups-members-dialog-admin').then(module => ({
-    default: module.ContentDeleteGroupsMembersDialogAdmin
+const ContentDeleteActionsTableAdministratorsStaffAdmin = lazy(() =>
+  import('./content').then(module => ({
+    default: module.ContentDeleteActionsAdminsitratorsStaffAdmin
   }))
 );
 
 interface Props {
-  data: Pick<ShowAdminGroups, 'id' | 'name' | 'protected'>;
+  data: Pick<ShowAdminStaffAdministrators, 'id'>;
 }
 
-export const DeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
+export const DeleteActionsTableAdministratorsStaffAdmin = (props: Props) => {
   const t = useTranslations('core');
 
   return (
@@ -27,8 +27,9 @@ export const DeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
         <Tooltip>
           <AlertDialogTrigger asChild>
             <TooltipTrigger asChild>
-              <Button variant="destructiveGhost" size="icon" tooltip={t('delete')}>
+              <Button variant="destructiveGhost" size="icon">
                 <Trash2 />
+                <span className="sr-only">{t('delete')}</span>
               </Button>
             </TooltipTrigger>
           </AlertDialogTrigger>
@@ -39,7 +40,7 @@ export const DeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
 
       <AlertDialogContent>
         <Suspense fallback={<Loader />}>
-          <ContentDeleteGroupsMembersDialogAdmin data={data} />
+          <ContentDeleteActionsTableAdministratorsStaffAdmin {...props} />
         </Suspense>
       </AlertDialogContent>
     </AlertDialog>

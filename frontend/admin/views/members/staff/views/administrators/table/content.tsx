@@ -11,6 +11,7 @@ import { HeaderSortingDataTable } from '@/components/data-table/header';
 import { Badge } from '@/components/ui/badge';
 import { UserLink } from '@/components/user/link/user-link';
 import { GroupFormat } from '@/components/groups/group-format';
+import { ActionsTableAdministratorsStaffAdmin } from './actions/actions';
 
 export const ContentTableAdministratorsStaffAdmin = ({
   data
@@ -89,7 +90,7 @@ export const ContentTableAdministratorsStaffAdmin = ({
 
           if (data.protected) return null;
 
-          return <div>actions</div>;
+          return <ActionsTableAdministratorsStaffAdmin data={data} />;
         }
       }
     ],

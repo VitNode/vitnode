@@ -12,7 +12,7 @@ const CreateEditFormModeratorsStaffAdmin = lazy(() =>
   }))
 );
 
-export const CreateActionsTableModeratorsStaffAdmin = () => {
+export const CreateActionsModeratorsStaffAdmin = () => {
   const t = useTranslations('core');
 
   return (

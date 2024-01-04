@@ -11,7 +11,7 @@ export const ActionsTableGroupsMembersAdmin = ({ data }: Props) => {
     <div className="flex items-center justify-end">
       <EditGroupsMembersDialogAdmin data={data} />
 
-      <DeleteGroupsMembersDialogAdmin data={data} />
+      {!data.protected && <DeleteGroupsMembersDialogAdmin data={data} />}
     </div>
   );
 };
