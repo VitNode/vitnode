@@ -4,7 +4,6 @@ import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext
 import { CAN_UNDO_COMMAND, COMMAND_PRIORITY_CRITICAL, UNDO_COMMAND } from 'lexical';
 import { useEffect, useState } from 'react';
 
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
 
 export const UndoMoveButtonEditor = () => {
@@ -25,21 +24,14 @@ export const UndoMoveButtonEditor = () => {
   }, [editor]);
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => editor.dispatchCommand(UNDO_COMMAND, undefined)}
-            aria-label={t('undo')}
-            disabled={!canUndo}
-          >
-            <Undo />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent side="bottom">{t('undo')}</TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={() => editor.dispatchCommand(UNDO_COMMAND, undefined)}
+      tooltip={t('undo')}
+      disabled={!canUndo}
+    >
+      <Undo />
+    </Button>
   );
 };

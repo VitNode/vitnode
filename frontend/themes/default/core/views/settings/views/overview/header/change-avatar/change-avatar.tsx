@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { Suspense, lazy } from 'react';
-import { Image } from 'lucide-react';
+import { ImageIcon } from 'lucide-react';
 
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
@@ -32,9 +32,9 @@ export const ChangeAvatar = () => {
                   variant="outline"
                   size="icon"
                   className="absolute bottom-[-0.5rem] left-[-0.5rem]"
+                  tooltip=""
                 >
-                  {/* eslint-disable-next-line jsx-a11y/alt-text */}
-                  <Image size={20} />
+                  <ImageIcon size={20} />
                 </Button>
               </DialogTrigger>
             </TooltipTrigger>

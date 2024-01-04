@@ -11,7 +11,6 @@ import * as prettierPluginHtml from 'prettier/parser-html';
 import * as prettierPluginCss from 'prettier/parser-postcss';
 
 import { PrettierIcon } from './prettier-icon';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
 import { useAlertDialog } from '@/components/ui/alert-dialog';
 
@@ -55,32 +54,6 @@ export const getPrettierOptions = (lang: string): Options => {
   return options;
 };
 
-//     ...options,
-//     plugins: [parserBabel, prettierPluginEstree]
-//   };
-// };
-
-// const loadPrettierFormat = async () => {
-//   const { format } = await import('prettier/standalone');
-
-//   return format;
-// };
-
-// const PRETTIER_PARSER_MODULES = {
-//   css: () => import('prettier/parser-postcss'),
-//   html: () => import('prettier/parser-html'),
-//   js: () => import('prettier/parser-babel'),
-//   markdown: () => import('prettier/parser-markdown')
-// } as const;
-
-// type LanguagesType = keyof typeof PRETTIER_PARSER_MODULES;
-
-// const loadPrettierParserByLang = async (lang: string) => {
-//   const dynamicImport = PRETTIER_PARSER_MODULES[lang as LanguagesType];
-
-//   return await dynamicImport();
-// };
-
 export interface PrettierFormatError {
   cause: {
     code: string;
@@ -102,55 +75,49 @@ export const PrettierButtonCodeAction = ({ codeDOMNode, lang, setPrettierError }
   const { setOpen } = useAlertDialog();
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            className="w-8 h-8 [&>svg]:pointer-events-none [&>svg]:fill-foreground [&>svg]:w-4 [&>svg]:h-4"
-            variant="outline"
-            size="icon"
-            onClick={async () => {
-              try {
-                let content = '';
+    <Button
+      className="w-8 h-8 [&>svg]:pointer-events-none [&>svg]:fill-foreground [&>svg]:w-4 [&>svg]:h-4"
+      variant="outline"
+      size="icon"
+      tooltip={t('format_code')}
+      onClick={async () => {
+        try {
+          let content = '';
 
-                editor.update(() => {
-                  const codeNode = $getNearestNodeFromDOMNode(codeDOMNode);
-                  if (!$isCodeNode(codeNode)) return;
+          editor.update(() => {
+            const codeNode = $getNearestNodeFromDOMNode(codeDOMNode);
+            if (!$isCodeNode(codeNode)) return;
 
-                  content = codeNode.getTextContent();
-                });
+            content = codeNode.getTextContent();
+          });
 
-                const parsed = await format(content, getPrettierOptions(lang));
+          const parsed = await format(content, getPrettierOptions(lang));
 
-                if (parsed === '') return;
+          if (parsed === '') return;
 
-                editor.update(async () => {
-                  const codeNode = $getNearestNodeFromDOMNode(codeDOMNode);
-                  if (!$isCodeNode(codeNode)) return;
+          editor.update(async () => {
+            const codeNode = $getNearestNodeFromDOMNode(codeDOMNode);
+            if (!$isCodeNode(codeNode)) return;
 
-                  const selection = codeNode.select(0);
-                  selection.insertText(parsed);
-                });
-              } catch (error) {
-                // eslint-disable-next-line no-console
-                console.error(JSON.stringify(error));
+            const selection = codeNode.select(0);
+            selection.insertText(parsed);
+          });
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.error(JSON.stringify(error));
 
-                const currentError = error as PrettierFormatError;
+          const currentError = error as PrettierFormatError;
 
-                if (currentError?.cause) {
-                  setPrettierError(currentError);
-                  setOpen(true);
+          if (currentError?.cause) {
+            setPrettierError(currentError);
+            setOpen(true);
 
-                  return;
-                }
-              }
-            }}
-          >
-            <PrettierIcon />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent side="bottom">{t('format_code')}</TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+            return;
+          }
+        }
+      }}
+    >
+      <PrettierIcon />
+    </Button>
   );
 };

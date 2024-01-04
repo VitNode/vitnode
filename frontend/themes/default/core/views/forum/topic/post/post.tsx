@@ -19,6 +19,7 @@ interface Props {
 
 export const PostTopic = ({ author, content, created, id }: Props) => {
   const t = useTranslations('forum.topics');
+  const tCore = useTranslations('core');
 
   return (
     <Card>
@@ -37,7 +38,7 @@ export const PostTopic = ({ author, content, created, id }: Props) => {
             </div>
           </div>
 
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" tooltip={tCore('open_menu')}>
             <MoreHorizontal />
           </Button>
         </div>

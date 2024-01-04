@@ -1,4 +1,4 @@
-import { ChevronRight, Menu, User } from 'lucide-react';
+import { ChevronRight, Menu } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -9,6 +9,7 @@ import { useTextLang } from '@/hooks/core/use-text-lang';
 import { cx } from '@/functions/classnames';
 import { useChildrenForumForumsAdminAPI } from './hooks/use-children-forum-forums-admin-api';
 import type { Forum_Forums__Admin__ShowFlattenedItem } from '../types';
+import { useTranslations } from 'next-intl';
 
 interface Props extends Forum_Forums__Admin__ShowFlattenedItem {
   indentationWidth: number;
@@ -27,6 +28,7 @@ export const ItemTableForumsForumAdmin = ({
   name,
   onCollapse
 }: Props) => {
+  const t = useTranslations('core');
   const { convertText } = useTextLang();
   const {
     attributes,
@@ -84,6 +86,7 @@ export const ItemTableForumsForumAdmin = ({
           className="sm:flex hidden flex-shrink-0 focus:outline-none text-muted-foreground hover:text-foreground"
           variant="ghost"
           size="icon"
+          tooltip={t('open_menu')}
           {...attributes}
           {...listeners}
         >
@@ -100,12 +103,6 @@ export const ItemTableForumsForumAdmin = ({
 
         <div className="flex-grow flex flex-col">
           <span>{convertText(name)}</span>
-        </div>
-
-        <div className="flex-shrink-0">
-          <Button variant="ghost" size="icon">
-            <User />
-          </Button>
         </div>
       </div>
     </div>

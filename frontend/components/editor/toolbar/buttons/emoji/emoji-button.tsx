@@ -3,7 +3,6 @@ import { useTranslations } from 'next-intl';
 import { Suspense, lazy } from 'react';
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/loader/loader';
 
@@ -18,25 +17,17 @@ export const EmojiButtonEditor = () => {
 
   return (
     <Popover modal>
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <PopoverTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Smile />
-              </Button>
-            </PopoverTrigger>
-          </TooltipTrigger>
+      <PopoverTrigger asChild>
+        <Button variant="ghost" size="icon" tooltip={t('title')}>
+          <Smile />
+        </Button>
+      </PopoverTrigger>
 
-          <PopoverContent className="p-0 w-[23rem] overflow-y-auto">
-            <Suspense fallback={<Loader className="p-4" />}>
-              <ContentEmojiButtonEditor />
-            </Suspense>
-          </PopoverContent>
-
-          <TooltipContent side="bottom">{t('title')}</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      <PopoverContent className="p-0 w-[23rem] overflow-y-auto">
+        <Suspense fallback={<Loader className="p-4" />}>
+          <ContentEmojiButtonEditor />
+        </Suspense>
+      </PopoverContent>
     </Popover>
   );
 };

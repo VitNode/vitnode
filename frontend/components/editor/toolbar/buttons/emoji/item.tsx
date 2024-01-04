@@ -23,6 +23,7 @@ export const ItemEmojiButtonEditor = ({ emoji, skinToneIndex }: Props) => {
         fontFamily:
           '"EmojiMart", "Segoe UI Emoji", "Segoe UI Symbol", "Segoe UI", "Apple Color Emoji", "Twemoji Mozilla", "Noto Color Emoji", "Android Emoji"'
       }}
+      tooltip=""
       onClick={() => {
         editor.update(() => {
           const selection = $getSelection();

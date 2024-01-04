@@ -49,6 +49,7 @@ export const CategoryForum = ({ children, description, id, name }: Props) => {
               className="transition-transform text-muted-foreground hover:text-foreground flex-shrink-0"
               variant="ghost"
               size="icon"
+              tooltip=""
               // onClick={() => setClose(prev => !prev)}
             >
               <ChevronDown

@@ -39,45 +39,19 @@
       "font_size": "Rozmiar czcionki",
       "font_color": "Kolor czcionki",
       "font_background_color": "Kolor tła czcionki",
-      "custom_color": "Niestandardowy kolor",
       "set_default_color": "Ustaw domyślny kolor",
+      "link": "Link",
       "copy_code": "Kopiuj kod",
       "code_language": "Język kodu",
       "change_language": "Zmień język",
-      "divider": "Linia podziału",
-      "insert": "Wstaw",
-      "link": {
-        "title": "Link",
-        "paste_link": "Wklej link",
-        "link_text": "Tekst linku",
-        "edit_link": "Edytuj link",
-        "open_link_in_new_tab": "Otwórz link w nowej karcie",
-        "unlink": "Usuń link"
-      },
       "prettier": {
         "format_code": "Formatuj kod",
         "error_title": "Błąd Prettier"
       },
-      "code_block": {
-        "title": "Blok kodu"
-      },
-      "align": {
-        "title": "Wyrównanie tekstu",
-        "left": "Wyrównaj do lewej",
-        "center": "Wyrównaj do środka",
-        "right": "Wyrównaj do prawej",
-        "justify": "Wyjustuj"
-      },
       "emoji": {
         "title": "Emoji",
-        "pick": "Wybierz emoji",
-        "no_results": {
-          "title": "Oh nie!",
-          "desc": "Nie znaleziono takiego emoji."
-        },
         "categories": {
           "all": "Wszystkie",
-          "frequent": "Ostatnio używane",
           "people": "Emotki i ludzie",
           "nature": "Zwierzęta i natura",
           "foods": "Jedzenie i napoje",
@@ -113,16 +87,13 @@
       },
       "roots": {
         "title": "Typ bloku",
-        "paragraph": "Akapit",
+        "paragraph": "Normalny",
         "h1": "Nagłówek H1",
         "h2": "Nagłówek H2",
         "h3": "Nagłówek H3",
-        "h4": "Nagłówek H4",
-        "code": "Blok kodu"
-      },
-      "list": {
         "bullet": "Lista punktowana",
-        "number": "Lista numerowana"
+        "number": "Lista numerowana",
+        "code": "Blok kodu"
       }
     },
     "icon_picker": {

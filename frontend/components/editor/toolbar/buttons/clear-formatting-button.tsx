@@ -7,7 +7,6 @@ import { $getNearestBlockElementAncestorOrThrow } from '@lexical/utils';
 import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components/ui/button';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 export const ClearFormattingButtonEditor = () => {
   const t = useTranslations('core.editor');
@@ -54,20 +53,8 @@ export const ClearFormattingButtonEditor = () => {
   };
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={clearFormatting}
-            aria-label={t('remove_formatting')}
-          >
-            <RemoveFormatting className="h-4 w-4" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent side="bottom">{t('remove_formatting')}</TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Button variant="ghost" size="icon" onClick={clearFormatting} tooltip={t('remove_formatting')}>
+      <RemoveFormatting className="h-4 w-4" />
+    </Button>
   );
 };

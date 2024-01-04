@@ -6,7 +6,6 @@ import { $getNearestNodeFromDOMNode, $getSelection, $setSelection } from 'lexica
 import { $isCodeNode } from '@lexical/code';
 
 import { useDebounce } from '@/hooks/core/use-debounce';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components//ui/tooltip';
 import { Button } from '@/components/ui/button';
 
 interface Props {
@@ -23,42 +22,36 @@ export const CopyButtonCodeAction = ({ codeDOMNode }: Props) => {
   }, 1000);
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            className="w-8 h-8 [&>svg]:pointer-events-none [&>svg]:w-4 [&>svg]:h-4"
-            variant="outline"
-            size="icon"
-            onClick={async () => {
-              let content = '';
+    <Button
+      className="w-8 h-8 [&>svg]:pointer-events-none [&>svg]:w-4 [&>svg]:h-4"
+      variant="outline"
+      size="icon"
+      tooltip={t('copy_code')}
+      onClick={async () => {
+        let content = '';
 
-              editor.update(() => {
-                const codeNode = $getNearestNodeFromDOMNode(codeDOMNode);
+        editor.update(() => {
+          const codeNode = $getNearestNodeFromDOMNode(codeDOMNode);
 
-                if ($isCodeNode(codeNode)) {
-                  content = codeNode.getTextContent();
-                }
+          if ($isCodeNode(codeNode)) {
+            content = codeNode.getTextContent();
+          }
 
-                const selection = $getSelection();
-                $setSelection(selection);
-              });
+          const selection = $getSelection();
+          $setSelection(selection);
+        });
 
-              try {
-                await navigator.clipboard.writeText(content);
-                setCopyCompleted(true);
-                removeSuccessIcon();
-              } catch (err) {
-                // eslint-disable-next-line no-console
-                console.error(err);
-              }
-            }}
-          >
-            {isCopyCompleted ? <CheckCircle className="text-primary" /> : <Copy />}
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent side="bottom">{t('copy_code')}</TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+        try {
+          await navigator.clipboard.writeText(content);
+          setCopyCompleted(true);
+          removeSuccessIcon();
+        } catch (err) {
+          // eslint-disable-next-line no-console
+          console.error(err);
+        }
+      }}
+    >
+      {isCopyCompleted ? <CheckCircle className="text-primary" /> : <Copy />}
+    </Button>
   );
 };

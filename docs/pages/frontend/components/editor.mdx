@@ -1,60 +1,40 @@
 import { Callout } from 'nextra/components';
 
-# WYSIWYG Editor
+# Editor
 
-WYSIWYG Editor is a rich text editor that uses [PlateJS](https://platejs.org/) library.
+WYSIWYG Editor is a rich text editor that uses [Lexical](https://lexical.dev/) library.
 
-## Support Shortcuts and Markdown
-
-| Description   | Shortcut (Mac OS) | Shortcut (Other)   | Markdown            |
-| ------------- | ----------------- | ------------------ | ------------------- |
-| Bold          | `Cmd + B`         | `Ctrl + B`         | `**bold**`          |
-| Italic        | `Cmd + I`         | `Ctrl + I`         | `*italic*`          |
-| Underline     | `Cmd + U`         | `Ctrl + U`         | `__underline__`     |
-| Strikethrough | `Cmd + Shift + S` | `Ctrl + Shift + S` | `~~strikethrough~~` |
-| Subscript     | `Cmd + ,`         | `Ctrl + ,`         | `~subscript~`       |
-| Superscript   | `Cmd + .`         | `Ctrl + .`         | `^superscript^`     |
-| Code          | `Cmd + E`         | `Ctrl+  E`         | `` `code` ``        |
-| Paragraph     | `Cmd + Opt + 0`   | `Ctrl + Alt + 0`   |                     |
-| Heading 1     | `Cmd + Opt + 1`   | `Ctrl + Alt + 1`   | `# Heading 1`       |
-| Heading 2     | `Cmd + Opt + 2`   | `Ctrl + Alt + 2`   | `## Heading 2`      |
-| Heading 3     | `Cmd + Opt + 3`   | `Ctrl + Alt + 3`   | `### Heading 3`     |
-| Heading 4     | Unsupported       | Unsupported        | `#### Heading 4`    |
-
-## Support Markdown
-
-| Description       | Markdown             |
-| ----------------- | -------------------- |
-| Ul List           | `- item`             |
-| Ol List           | `1. item`            |
-| Emoticons         | `:name_of_emoticon:` |
-| Code Block        | ` ```code``` `       |
-| Divider (Line HR) | `---`                |
-
-## Other Features
-
-- Align Text,
-- Emoji Picker _(When user type `:` character, emoji picker will be displayed)_,
-- Color Picker for text and background,
-- Internationalization (i18n)
-
-## Good to know
-
-- `HTML` tags are not allowed. Users can use `Markdown` instead,
-- `Font Family` is not implemented. Users don't like to change it when they are writing
+<Callout type="info" emoji="ℹ️">
+  Editor has uncontroller state. All source-code for Editor is based on change state and passing it
+  to external state.
+</Callout>
 
 ## Using in Form
 
 Editor is working only in `Form` component. If you don't know how to use `Form` please read [Forms documentation](/frontend/forms).
 
----
+## Plugins
+
+- **History** - Undo/redo changes _(For example go back by pressing `Ctrl+Z` or `Cmd+Z` on Mac)_
+- **RichText** - Entering text, deleting characters, copy + paste etc.
+- **Markdown** - Write markdown
+- **AutoLinkPluginEditor** - Automatically convert URLs to links
+
+## Good to know
+
+- Convert `http` URLs to links is not working for users safety. Users need to use `https` instead,
+- `HTML` tags are not allowed. Users can use `Markdown` instead,
+- `Font Family` is not implemented. Users don't like to change it when they are writing,
+- `Code Block` has prettier support. Users can format code by pressing a button in the toolbar,
 
 ## Read only mode
 
-To display content form editor you have to use `ReadOnlyEditor` component with `value: TextLanguage[]` prop.
+To display content form editor you have to use `ReadOnlyEditor` component with unique `id: string` and `value: TextLanguage[]` props.
 
 ```tsx
 import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
 
-<ReadOnlyEditor value={value} />;
+<ReadOnlyEditor id={`${id}_value`} value={value} />;
 ```
+
+=
