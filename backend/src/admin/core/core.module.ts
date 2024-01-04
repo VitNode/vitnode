@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 
-import { AdminSettingsModule } from './settings/admin_settings.module';
-import { AdminSessionsModule } from './sessions/admin_sessions.module';
-import { AdminInstallModule } from './install/admin_install.module';
-import { AdminGroupsModule } from './groups/admin_groups.module';
-import { AdminMembersModule } from './members/core_members.module';
-import { AdminStaffModule } from './staff/admin_staff.module';
+import { AdminSettingsModule } from './settings/settings.module';
+import { AdminSessionsModule } from './sessions/sessions.module';
+import { AdminInstallModule } from './install/install.module';
+import { AdminGroupsModule } from './groups/groups.module';
+import { AdminMembersModule } from './members/members.module';
+import { AdminStaffModule } from './staff/staff.module';
+import { AdminPluginsModule } from './plugins/plugins.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { AdminStaffModule } from './staff/admin_staff.module';
     AdminInstallModule,
     AdminGroupsModule,
     AdminMembersModule,
-    AdminStaffModule
+    AdminStaffModule,
+    AdminPluginsModule
   ]
 })
 export class AdminCoreModule {}

@@ -94,6 +94,7 @@ type LayoutAdminInstallObj {
 }
 
 type Mutation {
+  admin_core_plugins__test: String!
   admin_install__create_database: String!
   admin_sessions__sign_out: String!
   admin_settings__general__edit(side_name: String!): GeneralAdminSettingsObj!
