@@ -6,17 +6,42 @@ import { CLEAR_EDITOR_COMMAND } from 'lexical';
 import type { TextLanguage } from '@/graphql/hooks';
 
 interface Props {
-  onChange: (value: TextLanguage[]) => void;
   selectedLanguage: string;
-  value: TextLanguage[];
 }
 
-export const OnChangePluginEditor = ({ onChange, selectedLanguage, value }: Props) => {
+interface WithLanguage extends Props {
+  onChange: (value: TextLanguage[]) => void;
+  value: TextLanguage[];
+  disableLanguage?: never;
+}
+
+interface WithoutLanguage extends Props {
+  disableLanguage: true;
+  onChange: (value: string) => void;
+  value: string;
+}
+
+export const OnChangePluginEditor = ({
+  disableLanguage,
+  onChange,
+  selectedLanguage,
+  value
+}: WithLanguage | WithoutLanguage) => {
   const [editor] = useLexicalComposerContext();
 
   // Set the initial editor value
   useEffect(() => {
     if (!value || value.length === 0) return;
+
+    if (disableLanguage && typeof value === 'string') {
+      const initialEditorState = editor.parseEditorState(value);
+      editor.setEditorState(initialEditorState);
+
+      return;
+    }
+
+    // If the value is not an array, we don't know what to do with it
+    if (!Array.isArray(value)) return;
 
     const currentValue = value.find(item => item.id_language === selectedLanguage)?.value;
     if (!currentValue) {
@@ -34,6 +59,12 @@ export const OnChangePluginEditor = ({ onChange, selectedLanguage, value }: Prop
     return editor.registerUpdateListener(({ editorState }) => {
       const text = editorState.read($rootTextContent);
       const valueAsArray = Array.isArray(value) ? value : [];
+
+      if (disableLanguage || typeof value === 'string') {
+        onChange(text as TextLanguage[] & string);
+
+        return;
+      }
 
       if (text.length === 0) {
         onChange(valueAsArray.filter(item => item.id_language !== selectedLanguage));

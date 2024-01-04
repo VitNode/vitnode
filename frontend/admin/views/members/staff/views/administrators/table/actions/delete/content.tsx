@@ -18,7 +18,7 @@ interface Props {
   data: Pick<ShowAdminStaffAdministrators, 'id'>;
 }
 
-export const ContentDeleteActionsAdminsitratorsStaffAdmin = ({ data: { id } }: Props) => {
+export const ContentDeleteActionsAdministratorsStaffAdmin = ({ data: { id } }: Props) => {
   const t = useTranslations('admin.members.staff.administrators.delete');
   const tCore = useTranslations('core');
   const { setOpen } = useAlertDialog();

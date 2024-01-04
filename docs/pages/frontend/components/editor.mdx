@@ -13,6 +13,70 @@ WYSIWYG Editor is a rich text editor that uses [Lexical](https://lexical.dev/) l
 
 Editor is working only in `Form` component. If you don't know how to use `Form` please read [Forms documentation](/frontend/forms).
 
+```tsx
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from '@/components/ui/form';
+import { Editor } from '@/components/editor/editor';
+```
+
+```tsx
+<FormField
+  control={form.control}
+  name="content"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>{t('form.content')}</FormLabel>
+      <FormControl>
+        <Editor id="topic_create" onChange={field.onChange} value={field.value} />
+      </FormControl>
+      <FormMessage />
+    </FormItem>
+  )}
+/>
+```
+
+### Form Schema
+
+```ts
+import { zodTextLanguageInputType } from '@/components/text-language-input';
+```
+
+```ts
+const formSchema = z.object({
+  content: zodTextLanguageInputType
+});
+```
+
+You can set this field as **required**:
+
+```ts
+const formSchema = z.object({
+  content: zodTextLanguageInputType.min(1, t('forms.empty'))
+});
+```
+
+### Editor without i18n
+
+If you don't want to use i18n in Editor you need to pass `disableLanguage` props.
+
+```tsx
+<Editor id="topic_create" onChange={field.onChange} value={field.value} disableLanguage />
+```
+
+#### Form Schema
+
+```ts
+const formSchema = z.object({
+  content: z.string()
+});
+```
+
 ## Plugins
 
 - **History** - Undo/redo changes _(For example go back by pressing `Ctrl+Z` or `Cmd+Z` on Mac)_
@@ -36,5 +100,3 @@ import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
 
 <ReadOnlyEditor id={`${id}_value`} value={value} />;
 ```
-
-=

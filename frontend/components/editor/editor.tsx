@@ -29,14 +29,31 @@ import { initialConfigEditor } from './initial-config';
 
 interface Props {
   id: string;
-  onChange: (value: TextLanguage[]) => void;
-  value: TextLanguage[];
   autoFocus?: boolean;
   className?: string;
   toolbarClassName?: string;
 }
+interface WithLanguage extends Props {
+  onChange: (value: TextLanguage[]) => void;
+  value: TextLanguage[];
+  disableLanguage?: never;
+}
 
-export const Editor = ({ autoFocus, className, id, onChange, toolbarClassName, value }: Props) => {
+interface WithoutLanguage extends Props {
+  disableLanguage: true;
+  onChange: (value: string) => void;
+  value: string;
+}
+
+export const Editor = ({
+  autoFocus,
+  className,
+  disableLanguage,
+  id,
+  onChange,
+  toolbarClassName,
+  value
+}: WithLanguage | WithoutLanguage) => {
   const [blockType, setBlockType] = useState<string>(BLOCK_NAMES.PARAGRAPH);
   const floatingAnchorElem = useRef<HTMLDivElement>(null);
   const { defaultLanguage } = useGlobals();
@@ -60,12 +77,22 @@ export const Editor = ({ autoFocus, className, id, onChange, toolbarClassName, v
             className={toolbarClassName}
             selectedLanguage={selectedLanguage}
             setSelectedLanguage={setSelectedLanguage}
+            disableLanguage={disableLanguage}
           />
-          <OnChangePluginEditor
-            value={value}
-            onChange={onChange}
-            selectedLanguage={selectedLanguage}
-          />
+          {disableLanguage ? (
+            <OnChangePluginEditor
+              value={value}
+              onChange={onChange}
+              selectedLanguage={selectedLanguage}
+              disableLanguage
+            />
+          ) : (
+            <OnChangePluginEditor
+              value={value}
+              onChange={onChange}
+              selectedLanguage={selectedLanguage}
+            />
+          )}
           <AutoLinkPluginEditor />
           <CodeHighlightPluginEditor />
           <RichTextPlugin

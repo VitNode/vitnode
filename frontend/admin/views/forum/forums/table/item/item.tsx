@@ -3,13 +3,13 @@ import type { CSSProperties } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import type { UniqueIdentifier } from '@dnd-kit/core';
+import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components/ui/button';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { cx } from '@/functions/classnames';
 import { useChildrenForumForumsAdminAPI } from './hooks/use-children-forum-forums-admin-api';
 import type { Forum_Forums__Admin__ShowFlattenedItem } from '../types';
-import { useTranslations } from 'next-intl';
 
 interface Props extends Forum_Forums__Admin__ShowFlattenedItem {
   indentationWidth: number;
