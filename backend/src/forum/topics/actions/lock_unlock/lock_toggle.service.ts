@@ -4,7 +4,7 @@ import { currentDate } from '@/functions/date';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Ctx } from '@/types/context.type';
 import { User } from '@/utils/decorators/user.decorator';
-import { LockToggleForumTopicsArgs } from '@/src/forums/topics/actions/lock_unlock/dto/lock_toggle.args';
+import { LockToggleForumTopicsArgs } from '@/src/forum/topics/actions/lock_unlock/dto/lock_toggle.args';
 
 @Injectable()
 export class LockToggleForumTopicsService {

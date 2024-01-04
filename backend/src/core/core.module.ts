@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 
-import { CoreAttachmentsModule } from './attachments/core_attachments.module';
-import { CoreSessionsModule } from './sessions/core_sessions.module';
-import { CoreMembersModule } from './members/core_members.module';
-import { CoreLanguagesModule } from './languages/core_languages.module';
-import { CoreMiddlewareModule } from './middleware/core_middleware.module';
+import { CoreAttachmentsModule } from './attachments/attachments.module';
+import { CoreSessionsModule } from './sessions/sessions.module';
+import { CoreMembersModule } from './members/members.module';
+import { CoreLanguagesModule } from './languages/languages.module';
+import { CoreMiddlewareModule } from './middleware/middleware.module';
 
 @Module({
   imports: [

@@ -9,11 +9,11 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { ScheduleModule } from '@nestjs/schedule';
 
 import { PrismaModule } from '../prisma/prisma.module';
-import { GlobalCoreSessionsModule } from './core/sessions/core_sessions.module';
+import { GlobalCoreSessionsModule } from './core/sessions/sessions.module';
 import { CoreModule } from './core/core.module';
 import { AdminModule } from './admin/admin.module';
 import { GlobalAdminSessionsModule } from './admin/core/sessions/admin_sessions.module';
-import { ForumModule } from './forums/forum.module';
+import { ModulesModule } from './modules.module';
 
 import { Ctx } from '@/types/context.type';
 
@@ -33,7 +33,7 @@ import { Ctx } from '@/types/context.type';
     GlobalAdminSessionsModule,
     CoreModule,
     AdminModule,
-    ForumModule,
+    ModulesModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '../public'),
       serveRoot: '/public'

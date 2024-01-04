@@ -5,8 +5,8 @@ import { ShowTopicsForumsService } from './show/show.service';
 import { CreateForumTopicsResolver } from './create/create.resolver';
 import { CreateForumTopicsService } from './create/create.service';
 
-import { LockToggleForumTopicsResolver } from '@/src/forums/topics/actions/lock_unlock/lock_toggle.resolver';
-import { LockToggleForumTopicsService } from '@/src/forums/topics/actions/lock_unlock/lock_toggle.service';
+import { LockToggleForumTopicsResolver } from '@/src/forum/topics/actions/lock_unlock/lock_toggle.resolver';
+import { LockToggleForumTopicsService } from '@/src/forum/topics/actions/lock_unlock/lock_toggle.service';
 
 @Module({
   providers: [

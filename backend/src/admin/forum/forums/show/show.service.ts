@@ -6,7 +6,7 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { outputPagination } from '@/functions/database/pagination/outputPagination';
 import { inputPagination } from '@/functions/database/pagination/inputPagination';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
-import { ShowForumForumsArgs } from '../../../../forums/forums/show/dto/show.args';
+import { ShowForumForumsArgs } from '../../../../forum/forums/show/dto/show.args';
 
 @Injectable()
 export class ShowForumForumsAdminService {

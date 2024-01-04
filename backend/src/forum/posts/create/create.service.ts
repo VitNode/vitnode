@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 
 import { currentDate } from '@/functions/date';
 import { PrismaService } from '@/prisma/prisma.service';
-import { CreatePostsForumsArgs } from '@/src/forums/posts/create/dto/create.args';
-import { ShowPostsForums } from '@/src/forums/posts/show/dto/show.obj';
+import { CreatePostsForumsArgs } from '@/src/forum/posts/create/dto/create.args';
+import { ShowPostsForums } from '@/src/forum/posts/show/dto/show.obj';
 import { Ctx } from '@/types/context.type';
 import { User } from '@/utils/decorators/user.decorator';
 
