@@ -2,7 +2,6 @@ import { useTranslations } from 'next-intl';
 import { Check } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,22 +29,19 @@ export const SkinSelectEmojiButtonEditor = ({ setSkinToneIndex, skinToneIndex }:
 
   return (
     <DropdownMenu>
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <DropdownMenuTrigger asChild>
-              <Button className="flex-shrink-0 w-9 h-9" size="icon" variant="ghost">
-                <div
-                  className="w-5 h-5 rounded-md"
-                  style={{ backgroundColor: `hsl(${skinToneEmoji[skinToneIndex]})` }}
-                />
-              </Button>
-            </DropdownMenuTrigger>
-          </TooltipTrigger>
-
-          <TooltipContent>{t('skin.title')}</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      <DropdownMenuTrigger asChild>
+        <Button
+          className="flex-shrink-0 w-9 h-9"
+          size="icon"
+          variant="ghost"
+          tooltip={t('skin.title')}
+        >
+          <div
+            className="w-5 h-5 rounded-md"
+            style={{ backgroundColor: `hsl(${skinToneEmoji[skinToneIndex]})` }}
+          />
+        </Button>
+      </DropdownMenuTrigger>
 
       <DropdownMenuContent>
         {skinToneEmoji.map((item, index) => (

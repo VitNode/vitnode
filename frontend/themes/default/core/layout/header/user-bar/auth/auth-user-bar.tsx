@@ -28,7 +28,7 @@ export const AuthUserBar = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="rounded-full" size="icon">
+        <Button variant="ghost" className="rounded-full" size="icon" tooltip="">
           <AvatarUser user={session} sizeInRem={1.75} />
         </Button>
       </DropdownMenuTrigger>

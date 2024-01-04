@@ -6,6 +6,6 @@ export const CONFIG = {
   default_theme: 'default',
   graphql_url: ENVS.graphql_url ? ENVS.graphql_url : 'http://localhost:8080',
   editor: {
-    skin_tone: 'vitnode-skin-tone'
+    skin_tone: 'emoji:skin-tone'
   }
 };

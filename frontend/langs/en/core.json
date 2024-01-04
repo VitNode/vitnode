@@ -1,10 +1,12 @@
 {
   "core": {
     "test": "Test EN",
+    "open_menu": "Open Menu",
     "loading": "Please wait, loading...",
     "save": "Save",
     "saved_success": "Saved successfully.",
     "no_results": "No results found.",
+    "results": "Results",
     "clear": "Clear",
     "filters": "Filters",
     "search": "Search",

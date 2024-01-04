@@ -25,23 +25,6 @@ This component accepts also a smaller version by passing the `small` prop.
   data.
 </Callout>
 
-## Global Loader
-
-If you don't have space to put a loader in your page, you can use the global loader.
-This loader appears in the top of page.
-
-```tsx
-import { GlobalLoader } from '@/components/loader/global/global-loader';
-
-export const TestComponent = () => {
-  return <>{isLoading && <GlobalLoader />}</>;
-};
-```
-
-<Callout type="info" emoji="ℹ️">
-  You can use `<GlobalLoader />` component when your mutation is loading.
-</Callout>
-
 ## Build-in Loaders
 
 We're modifying few components to help you load data to the frontend. You can use the `loading` prop to show a loader inside the component.
@@ -50,7 +33,9 @@ We're modifying few components to help you load data to the frontend. You can us
 
 ```tsx
 import { Button } from '@/components/ui/button';
+```
 
+```tsx
 export const TestComponent = () => {
   return (
     <Button type="submit" loading={isPending}>
@@ -64,7 +49,9 @@ export const TestComponent = () => {
 
 ```tsx
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
+```
 
+```tsx
 export const TestComponent = () => {
   return <DropdownMenuItem loading={isPending}>{t('testing')}</DropdownMenuItem>;
 };

@@ -33,6 +33,7 @@ interface Props {
 
 export const ColorButtonEditor = ({ type }: Props) => {
   const t = useTranslations('core.editor');
+  const tCore = useTranslations('core');
   const [fontColor, setFontColor] = useState('');
   const [customColor, setCustomColor] = useState('');
   const [editor] = useLexicalComposerContext();
@@ -86,6 +87,7 @@ export const ColorButtonEditor = ({ type }: Props) => {
                       key={color}
                       style={{ backgroundColor: color }}
                       onClick={() => updateColor(color)}
+                      tooltip=""
                     />
                   ))}
 
@@ -94,6 +96,7 @@ export const ColorButtonEditor = ({ type }: Props) => {
                     className="w-7 h-7 border [&>svg]:w-4 [&>svg]:h-4"
                     size="icon"
                     onClick={() => setCustomColor(fontColor ? fontColor : '#000000')}
+                    tooltip=""
                   >
                     <Palette />
                   </Button>
@@ -123,6 +126,7 @@ export const ColorButtonEditor = ({ type }: Props) => {
                   className="flex-shrink-0"
                   variant="ghost"
                   onClick={() => setCustomColor('')}
+                  tooltip={tCore('cancel')}
                 >
                   <X />
                 </Button>
@@ -131,6 +135,7 @@ export const ColorButtonEditor = ({ type }: Props) => {
                   size="icon"
                   className="flex-shrink-0"
                   onClick={() => updateColor(customColor)}
+                  tooltip={tCore('confirm')}
                 >
                   <Check />
                 </Button>

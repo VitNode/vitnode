@@ -4,13 +4,12 @@ import { Suspense, lazy } from 'react';
 
 import { AlertDialog, AlertDialogContent, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Loader } from '@/components/loader/loader';
 import type { ShowAdminStaffAdministrators } from '@/graphql/hooks';
 
 const ContentDeleteActionsTableAdministratorsStaffAdmin = lazy(() =>
   import('./content').then(module => ({
-    default: module.ContentDeleteActionsAdminsitratorsStaffAdmin
+    default: module.ContentDeleteActionsAdministratorsStaffAdmin
   }))
 );
 
@@ -23,20 +22,11 @@ export const DeleteActionsTableAdministratorsStaffAdmin = (props: Props) => {
 
   return (
     <AlertDialog>
-      <TooltipProvider>
-        <Tooltip>
-          <AlertDialogTrigger asChild>
-            <TooltipTrigger asChild>
-              <Button variant="destructiveGhost" size="icon">
-                <Trash2 />
-                <span className="sr-only">{t('delete')}</span>
-              </Button>
-            </TooltipTrigger>
-          </AlertDialogTrigger>
-
-          <TooltipContent>{t('delete')}</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      <AlertDialogTrigger asChild>
+        <Button variant="destructiveGhost" size="icon" tooltip={t('delete')}>
+          <Trash2 />
+        </Button>
+      </AlertDialogTrigger>
 
       <AlertDialogContent>
         <Suspense fallback={<Loader />}>

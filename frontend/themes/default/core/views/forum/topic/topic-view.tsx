@@ -5,7 +5,7 @@ import { badgeVariants } from '@/components/ui/badge';
 import { Link } from '@/i18n';
 import type { Forum_Topics__ShowQuery } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
-import { LinkUser } from '@/components/user/link/link-user';
+import { UserLink } from '@/components/user/link/user-link';
 import { ActionsTopic } from './actions/actions-topic';
 import { TitleIconTopic } from './title-icon';
 import { PostTopic } from './post/post';
@@ -50,7 +50,7 @@ export const TopicView = ({ data: dataApi }: Props) => {
 
             <span>
               {t.rich('user_wrote_in_forum', {
-                user: () => <LinkUser className="font-semibold" user={author} />,
+                user: () => <UserLink className="font-semibold" user={author} />,
                 forum: () => (
                   <Link
                     href={`/forum/${convertNameToLink({ ...forum })}`}

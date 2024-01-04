@@ -50,6 +50,7 @@ export const sanitizeUrl = (url: string) => {
 
 export const LinkButtonEditor = () => {
   const t = useTranslations('core.editor');
+  const tCore = useTranslations('core');
   const [isLink, setIsLink] = useState(false);
   const [linkUrl, setLinkUrl] = useState('https://');
   const [editor] = useLexicalComposerContext();
@@ -111,6 +112,7 @@ export const LinkButtonEditor = () => {
               variant="ghost"
               size="icon"
               onClick={() => editor.dispatchCommand(TOGGLE_LINK_COMMAND, null)}
+              tooltip={tCore('delete')}
             >
               <X />
             </Button>
@@ -122,6 +124,7 @@ export const LinkButtonEditor = () => {
                 onClick={() => {
                   editor.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl(linkUrl));
                 }}
+                tooltip={tCore('confirm')}
               >
                 <Check />
               </Button>

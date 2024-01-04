@@ -1,14 +1,14 @@
-import { ChevronRight, Menu, User } from 'lucide-react';
+import { ChevronRight, Menu } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import type { UniqueIdentifier } from '@dnd-kit/core';
+import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components/ui/button';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { cx } from '@/functions/classnames';
 import { useChildrenForumForumsAdminAPI } from './hooks/use-children-forum-forums-admin-api';
-import { GlobalLoader } from '@/components/loader/global/global-loader';
 import type { Forum_Forums__Admin__ShowFlattenedItem } from '../types';
 
 interface Props extends Forum_Forums__Admin__ShowFlattenedItem {
@@ -28,6 +28,7 @@ export const ItemTableForumsForumAdmin = ({
   name,
   onCollapse
 }: Props) => {
+  const t = useTranslations('core');
   const { convertText } = useTextLang();
   const {
     attributes,
@@ -44,7 +45,7 @@ export const ItemTableForumsForumAdmin = ({
   const childrenCount = children?.length ?? 0;
   const allowOpenChildren = childrenCount > 0;
 
-  const { isLoading } = useChildrenForumForumsAdminAPI({
+  useChildrenForumForumsAdminAPI({
     parentId: id,
     enabled: allowOpenChildren && isOpenChildren
   });
@@ -67,7 +68,6 @@ export const ItemTableForumsForumAdmin = ({
         if (e.key === 'Enter' && allowOpenChildren) onCollapse?.(id);
       }}
     >
-      {isLoading && <GlobalLoader />}
       <div
         className={cx(
           'p-4 flex gap-4 bg-card items-center transition-[background-color,opacity] relative border',
@@ -86,6 +86,7 @@ export const ItemTableForumsForumAdmin = ({
           className="sm:flex hidden flex-shrink-0 focus:outline-none text-muted-foreground hover:text-foreground"
           variant="ghost"
           size="icon"
+          tooltip={t('open_menu')}
           {...attributes}
           {...listeners}
         >
@@ -102,12 +103,6 @@ export const ItemTableForumsForumAdmin = ({
 
         <div className="flex-grow flex flex-col">
           <span>{convertText(name)}</span>
-        </div>
-
-        <div className="flex-shrink-0">
-          <Button variant="ghost" size="icon">
-            <User />
-          </Button>
         </div>
       </div>
     </div>

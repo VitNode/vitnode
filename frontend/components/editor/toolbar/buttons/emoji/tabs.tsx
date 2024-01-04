@@ -15,7 +15,6 @@ import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components/ui/button';
 import { cx } from '@/functions/classnames';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const categories = [
   {
@@ -82,35 +81,29 @@ export const TabsEmojiButtonEditor = ({
         const Icon = category.icon;
 
         return (
-          <TooltipProvider key={category.id}>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  className={cx('w-9 h-9 rounded-b-none relative', {
-                    'text-primary': active
-                  })}
-                  size="icon"
-                  variant="ghost"
-                  onClick={() => {
-                    setActiveCategory(category.id);
-                    onResetSearch();
-                  }}
-                >
-                  <Icon />
-                  {active && (
-                    <motion.div
-                      className="absolute bottom-0 left-0 w-full h-1 bg-primary rounded-t-md"
-                      layoutId="underline"
-                    />
-                  )}
-                </Button>
-              </TooltipTrigger>
-
-              {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-              {/* @ts-expect-error */}
-              <TooltipContent side="bottom">{t(`categories.${category.id}`)}</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <Button
+            key={category.id}
+            className={cx('w-9 h-9 rounded-b-none relative', {
+              'text-primary': active
+            })}
+            size="icon"
+            variant="ghost"
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
+            tooltip={t(`categories.${category.id}`)}
+            onClick={() => {
+              setActiveCategory(category.id);
+              onResetSearch();
+            }}
+          >
+            <Icon />
+            {active && (
+              <motion.div
+                className="absolute bottom-0 left-0 w-full h-1 bg-primary rounded-t-md"
+                layoutId="underline"
+              />
+            )}
+          </Button>
         );
       })}
     </div>

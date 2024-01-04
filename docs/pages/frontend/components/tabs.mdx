@@ -2,6 +2,26 @@ import { Callout } from 'nextra/components';
 
 # Tabs
 
-<Callout type="warning" emoji="⚠️">
-  This page is in progress.
-</Callout>
+A set of layered sections of content—known as tab panels—that are displayed one at a time.
+
+## Usage
+
+```tsx
+import { Tabs } from '@/components/tabs/tabs';
+import { TabsTrigger } from '@/components/tabs/tabs-trigger';
+```
+
+```tsx
+<Tabs className="mb-5">
+  <TabsTrigger id="moderators" href="/admin/members/staff/moderators">
+    {t('moderators.title')}
+  </TabsTrigger>
+  <TabsTrigger
+    id="content"
+    active={activeTab === TabsEnum.CONTENT}
+    onClick={() => setActiveTab(TabsEnum.CONTENT)}
+  >
+    Content
+  </TabsTrigger>
+</Tabs>
+```

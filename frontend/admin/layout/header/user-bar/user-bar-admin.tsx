@@ -25,7 +25,7 @@ export const UserBarAdmin = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" className="rounded-full" size="icon">
+        <Button variant="ghost" className="rounded-full" size="icon" tooltip={tCore('open_menu')}>
           <AvatarUser user={{ name, ...rest }} sizeInRem={2} />
         </Button>
       </SheetTrigger>

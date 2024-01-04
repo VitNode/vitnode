@@ -17,7 +17,7 @@ export const AdvancedFilterToolbarDataTable = ({ children }: Props) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button className="ml-auto" variant="outline" size="icon">
+        <Button className="ml-auto" variant="outline" size="icon" tooltip={t('filters')}>
           <Filter />
         </Button>
       </SheetTrigger>

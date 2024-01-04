@@ -10,9 +10,9 @@ import {
   FormLabel,
   FormMessage
 } from '@/components/ui/form';
-import { Editor } from '@/components/editor/editor';
 import { Button } from '@/components/ui/button';
 import { useCreateTopic } from '@/hooks/forums/forum/topic/use-create-topic';
+import { Editor } from '@/components/editor/editor';
 
 interface Props {
   defaultForumId: string;

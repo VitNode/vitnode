@@ -7,6 +7,7 @@ import { Form } from '@/components/ui/form';
 import { Tabs } from '@/components/tabs/tabs';
 import { Loader } from '@/components/loader/loader';
 import { Button } from '@/components/ui/button';
+import { TabsTrigger } from '@/components/tabs/tabs-trigger';
 
 const MainContentCreateEditFormForumAdmin = lazy(() =>
   import('./content/main').then(module => ({
@@ -41,22 +42,22 @@ export const CreateEditFormForumAdmin = () => {
         <DialogTitle>{t('create.title')}</DialogTitle>
       </DialogHeader>
 
-      <Tabs
-        items={[
-          {
-            id: 'main',
-            text: t('create_edit.tabs.main'),
-            active: activeTab === TabsEnum.MAIN,
-            onClick: () => setActiveTab(TabsEnum.MAIN)
-          },
-          {
-            id: 'permissions',
-            text: t('create_edit.tabs.permissions'),
-            active: activeTab === TabsEnum.PERMISSIONS,
-            onClick: () => setActiveTab(TabsEnum.PERMISSIONS)
-          }
-        ]}
-      />
+      <Tabs>
+        <TabsTrigger
+          id="main"
+          active={activeTab === TabsEnum.MAIN}
+          onClick={() => setActiveTab(TabsEnum.MAIN)}
+        >
+          {t('create_edit.tabs.main')}
+        </TabsTrigger>
+        <TabsTrigger
+          id="permissions"
+          active={activeTab === TabsEnum.PERMISSIONS}
+          onClick={() => setActiveTab(TabsEnum.PERMISSIONS)}
+        >
+          {t('create_edit.tabs.permissions')}
+        </TabsTrigger>
+      </Tabs>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

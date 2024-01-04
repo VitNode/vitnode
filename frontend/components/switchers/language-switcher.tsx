@@ -1,12 +1,13 @@
 'use client';
 
-import { Check, Languages } from 'lucide-react';
+import { Languages } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
@@ -26,21 +27,23 @@ export const LanguageSwitcher = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <Languages className="h-[1.2rem] w-[1.2rem]" />
-          <span className="sr-only">{t('user-bar.language.change')}</span>
+        <Button variant="outline" size="icon" tooltip={t('user-bar.language.change')}>
+          <Languages className="size-[1.2rem]" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        {enableLocales.map(language => (
-          <DropdownMenuItem
-            key={language.id}
-            onClick={() => replace(pathname, { locale: language.id })}
-          >
-            {locale === language.id && <Check className="mr-2 h-4 w-4" />}
-            <span>{language.name}</span>
-          </DropdownMenuItem>
-        ))}
+        <DropdownMenuRadioGroup
+          value={locale}
+          onValueChange={id => {
+            replace(pathname, { locale: id });
+          }}
+        >
+          {enableLocales.map(language => (
+            <DropdownMenuRadioItem key={language.id} value={language.id}>
+              {language.name}
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );

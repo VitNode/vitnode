@@ -3,7 +3,7 @@ import { MoreHorizontal } from 'lucide-react';
 
 import { Card, CardContent } from '@/components/ui/card';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
-import { LinkUser } from '@/components/user/link/link-user';
+import { UserLink } from '@/components/user/link/user-link';
 import { DateFormat } from '@/components/date-format/date-format';
 import { GroupFormat } from '@/components/groups/group-format';
 import { Button } from '@/components/ui/button';
@@ -19,6 +19,7 @@ interface Props {
 
 export const PostTopic = ({ author, content, created, id }: Props) => {
   const t = useTranslations('forum.topics');
+  const tCore = useTranslations('core');
 
   return (
     <Card>
@@ -29,7 +30,7 @@ export const PostTopic = ({ author, content, created, id }: Props) => {
             <div className="flex flex-col leading-none">
               <div>
                 {t.rich('username_format', {
-                  user: () => <LinkUser className="font-semibold" user={author} />,
+                  user: () => <UserLink className="font-semibold" user={author} />,
                   group: () => <GroupFormat className="text-sm" group={author.group} />
                 })}
               </div>
@@ -37,7 +38,7 @@ export const PostTopic = ({ author, content, created, id }: Props) => {
             </div>
           </div>
 
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" tooltip={tCore('open_menu')}>
             <MoreHorizontal />
           </Button>
         </div>

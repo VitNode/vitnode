@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { X } from 'lucide-react';
 
-import { Img } from '@/components/img/imgs';
+import { Img } from '@/components/img';
 
 interface Props {
   file: File;
@@ -45,7 +45,7 @@ export const ItemPreviewFilesInput = ({ file, index, onChange, value }: Props) =
         height={64}
       />
       <div className="mr-6 overflow-hidden">
-        <p className="overflow-hidden whitespace-nowrap text-ellipsis">{file.name}</p>
+        <p className="truncate">{file.name}</p>
         <p className="text-sm text-muted-foreground">{size}</p>
       </div>
       <button

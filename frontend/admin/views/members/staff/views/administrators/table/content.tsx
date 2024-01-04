@@ -9,7 +9,7 @@ import type { ShowAdminStaffAdministrators } from '@/graphql/hooks';
 import { DateFormat } from '@/components/date-format/date-format';
 import { HeaderSortingDataTable } from '@/components/data-table/header';
 import { Badge } from '@/components/ui/badge';
-import { LinkUser } from '@/components/user/link/link-user';
+import { UserLink } from '@/components/user/link/user-link';
 import { GroupFormat } from '@/components/groups/group-format';
 import { ActionsTableAdministratorsStaffAdmin } from './actions/actions';
 
@@ -27,7 +27,7 @@ export const ContentTableAdministratorsStaffAdmin = ({
           const data = row.original;
 
           if (data.user_or_group.__typename === 'User') {
-            return <LinkUser user={data.user_or_group} />;
+            return <UserLink user={data.user_or_group} />;
           }
 
           if (data.user_or_group.__typename === 'StaffGroupUser') {

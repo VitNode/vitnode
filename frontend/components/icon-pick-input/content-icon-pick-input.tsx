@@ -47,6 +47,7 @@ export const ContentIconPickInput = ({ onChange }: Props) => {
                         variant="outline"
                         size="icon"
                         onClick={() => onChange(name)}
+                        tooltip=""
                       >
                         <IconDynamic name={name} />
                       </Button>

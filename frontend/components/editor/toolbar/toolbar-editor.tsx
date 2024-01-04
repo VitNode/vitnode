@@ -23,9 +23,15 @@ interface Props {
   selectedLanguage: string;
   setSelectedLanguage: (value: string) => void;
   className?: string;
+  disableLanguage?: boolean;
 }
 
-export const ToolbarEditor = ({ className, selectedLanguage, setSelectedLanguage }: Props) => {
+export const ToolbarEditor = ({
+  className,
+  disableLanguage,
+  selectedLanguage,
+  setSelectedLanguage
+}: Props) => {
   const { blockType } = useEditor();
 
   return (
@@ -34,10 +40,12 @@ export const ToolbarEditor = ({ className, selectedLanguage, setSelectedLanguage
         <UndoMoveButtonEditor />
         <RedoMoveButtonEditor />
         <SeparatorToolbarEditor />
-        <LanguageButtonEditor
-          selectedLanguage={selectedLanguage}
-          setSelectedLanguage={setSelectedLanguage}
-        />
+        {!disableLanguage && (
+          <LanguageButtonEditor
+            selectedLanguage={selectedLanguage}
+            setSelectedLanguage={setSelectedLanguage}
+          />
+        )}
         <BlockTypeButtonEditor />
 
         {blockType !== BLOCK_NAMES.CODE ? (

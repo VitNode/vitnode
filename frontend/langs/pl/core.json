@@ -1,10 +1,12 @@
 {
   "core": {
     "test": "Test PL",
+    "open_menu": "Otwórz menu",
     "loading": "Czekaj, ładowanie...",
     "save": "Zapisz",
     "saved_success": "Zapisano pomyślnie.",
     "no_results": "Brak wyników.",
+    "results": "Wyniki",
     "clear": "Wyczyść",
     "filters": "Filtry",
     "search": "Szukaj",

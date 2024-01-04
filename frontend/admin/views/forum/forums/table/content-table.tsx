@@ -26,7 +26,6 @@ import type {
   Forum_Forums__Admin__ShowFlattenedItem,
   Forum_Forums__Admin__ShowWithProjection
 } from './types';
-import { GlobalLoader } from '@/components/loader/global/global-loader';
 import { Loader } from '@/components/loader/loader';
 import { ErrorAdminView } from '@/admin/global/error-admin-view';
 import { APIKeys } from '@/graphql/api-keys';
@@ -37,8 +36,7 @@ const indentationWidth = 20;
 
 export const ContentTableForumsForumAdmin = () => {
   const t = useTranslations('core');
-  const { data, fetchNextPage, hasNextPage, isError, isFetching, isLoading } =
-    useForumForumsAdminAPI();
+  const { data, fetchNextPage, hasNextPage, isError, isLoading } = useForumForumsAdminAPI();
   const queryClient = useQueryClient();
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
@@ -197,8 +195,6 @@ export const ContentTableForumsForumAdmin = () => {
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
-        {isFetching && <GlobalLoader />}
-
         <Virtuoso
           useWindowScroll
           data={flattenedItems}
