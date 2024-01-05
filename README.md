@@ -21,7 +21,7 @@ VitNode is a headless CMS built with [NextJS](https://nextjs.org/) and [NestJS](
 |         | Minimum        | Recommended    |
 | :------ | :------------- | :------------- |
 | CPU     | 1GHz (2+ core) | 1GHz (4+ core) |
-| RAM     | 4GB            | 8GB            |
+| RAM     | 1GB            | 4GB            |
 | Storage | 10GB           | 20GB           |
 | Network | 100Mbps        | 1Gbps          |
 
