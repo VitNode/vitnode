@@ -1,8 +1,7 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { NodePgDatabase, drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 
-import { DrizzleOptions } from './drizzle.module';
 import tableCore from '../src/core/database/schema/index';
 
 const schema = {
@@ -10,10 +9,10 @@ const schema = {
 };
 
 @Injectable()
-export class DrizzleService {
+export class DatabaseService {
   public db: NodePgDatabase<typeof schema>;
 
-  constructor(@Inject('DRIZZLE_OPTIONS') private options: DrizzleOptions) {
+  constructor() {
     const pool = new Pool({
       host: 'localhost',
       port: 5432,

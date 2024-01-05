@@ -5,12 +5,12 @@ import { Injectable } from '@nestjs/common';
 import * as archiver from 'archiver';
 import { eq } from 'drizzle-orm';
 
-import { DrizzleService } from '@/database/drizzle.service';
+import { DatabaseService } from '@/database/database.service';
 import { coreGroups } from '@/src/core/database/schema/groups';
 
 @Injectable()
 export class TestPluginsService {
-  constructor(private drizzle: DrizzleService) {}
+  constructor(private databaseService: DatabaseService) {}
 
   async test(): Promise<string> {
     const output = 'public/temp/output.zip';
@@ -81,7 +81,7 @@ export class TestPluginsService {
     //   })
     //   .returning();
 
-    const test = await this.drizzle.db.query.coreGroups.findFirst({
+    const test = await this.databaseService.db.query.coreGroups.findFirst({
       where: eq(coreGroups.id, 'ab8da3a8-cd3e-483a-9042-c5c326cf8de2'),
       with: {
         name: true
