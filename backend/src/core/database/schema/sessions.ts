@@ -1,33 +1,32 @@
 import { integer, pgTable, text, uuid, varchar } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
-import { coreUsers } from './users';
+import { core_users } from './users';
 
-export const coreSessions = pgTable('core_sessions', {
+export const core_sessions = pgTable('core_sessions', {
   login_token: varchar('login_token', { length: 255 }).primaryKey(),
   user_id: varchar('user_id')
     .notNull()
-    .references(() => coreUsers.id, {
+    .references(() => core_users.id, {
       onDelete: 'cascade'
     }),
   last_seen: integer('last_seen').notNull(),
   expires: integer('expires').notNull()
 });
 
-export const relationsCoreSessions = relations(coreSessions, ({ many, one }) => ({
-  user: one(coreUsers, {
-    fields: [coreSessions.user_id],
-    references: [coreUsers.id]
+export const relations_core_sessions = relations(core_sessions, ({ many, one }) => ({
+  user: one(core_users, {
+    fields: [core_sessions.user_id],
+    references: [core_users.id]
   }),
-  sessions: many(coreSessionsKnownDevices)
+  sessions: many(core_sessions_known_devices)
 }));
 
-// ! Known Devices
-export const coreSessionsKnownDevices = pgTable('core_sessions_known_devices', {
+export const core_sessions_known_devices = pgTable('core_sessions_known_devices', {
   id: uuid('id').defaultRandom().primaryKey(),
   session_id: varchar('session_id')
     .notNull()
-    .references(() => coreSessions.login_token, {
+    .references(() => core_sessions.login_token, {
       onDelete: 'cascade'
     }),
   ip_address: varchar('ip_address', { length: 255 }),
@@ -41,9 +40,12 @@ export const coreSessionsKnownDevices = pgTable('core_sessions_known_devices', {
   last_seen: integer('last_seen').notNull()
 });
 
-export const relationsCoreSessionsKnownDevices = relations(coreSessionsKnownDevices, ({ one }) => ({
-  session: one(coreSessions, {
-    fields: [coreSessionsKnownDevices.session_id],
-    references: [coreSessions.login_token]
+export const relations_core_sessions_known_devices = relations(
+  core_sessions_known_devices,
+  ({ one }) => ({
+    session: one(core_sessions, {
+      fields: [core_sessions_known_devices.session_id],
+      references: [core_sessions.login_token]
+    })
   })
-}));
+);

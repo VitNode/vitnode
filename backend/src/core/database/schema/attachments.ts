@@ -1,16 +1,16 @@
 import { integer, pgTable, text, uuid, varchar } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
-import { coreUsers } from './users';
+import { core_users } from './users';
 
-export const coreAttachments = pgTable('core_attachments', {
+export const core_attachments = pgTable('core_attachments', {
   id: uuid('id').defaultRandom().primaryKey(),
   extension: varchar('extension', { length: 32 }).notNull(),
   name: varchar('name', { length: 255 }).notNull(),
   url: varchar('url', { length: 255 }).notNull(),
   user_id: varchar('user_id')
     .notNull()
-    .references(() => coreUsers.id, {
+    .references(() => core_users.id, {
       onDelete: 'cascade'
     }),
   created: integer('created').notNull(),
@@ -22,9 +22,9 @@ export const coreAttachments = pgTable('core_attachments', {
   mimetype: varchar('mimetype', { length: 255 })
 });
 
-export const relationsCoreAttachments = relations(coreAttachments, ({ one }) => ({
-  user: one(coreUsers, {
-    fields: [coreAttachments.user_id],
-    references: [coreUsers.id]
+export const relations_core_attachments = relations(core_attachments, ({ one }) => ({
+  user: one(core_users, {
+    fields: [core_attachments.user_id],
+    references: [core_users.id]
   })
 }));

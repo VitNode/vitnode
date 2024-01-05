@@ -6,7 +6,7 @@ import * as archiver from 'archiver';
 import { eq } from 'drizzle-orm';
 
 import { DatabaseService } from '@/database/database.service';
-import { coreGroups } from '@/src/core/database/schema/groups';
+import { core_groups } from '@/src/core/database/schema/groups';
 
 @Injectable()
 export class TestPluginsService {
@@ -81,8 +81,8 @@ export class TestPluginsService {
     //   })
     //   .returning();
 
-    const test = await this.databaseService.db.query.coreGroups.findFirst({
-      where: eq(coreGroups.id, 'ab8da3a8-cd3e-483a-9042-c5c326cf8de2'),
+    const test = await this.databaseService.db.query.core_groups.findFirst({
+      where: eq(core_groups.id, 'ab8da3a8-cd3e-483a-9042-c5c326cf8de2'),
       with: {
         name: true
       }

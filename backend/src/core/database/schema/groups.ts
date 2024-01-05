@@ -1,9 +1,9 @@
 import { relations } from 'drizzle-orm';
 import { boolean, integer, pgTable, uuid, varchar } from 'drizzle-orm/pg-core';
 
-import { coreLanguages } from './languages';
+import { core_languages } from './languages';
 
-export const coreGroups = pgTable('core_groups', {
+export const core_groups = pgTable('core_groups', {
   id: uuid('id').defaultRandom().primaryKey(),
   created: integer('created').notNull(),
   updated: integer('updated').notNull(),
@@ -13,28 +13,28 @@ export const coreGroups = pgTable('core_groups', {
   guest: boolean('guest').notNull().default(false)
 });
 
-export const relationsCoreGroups = relations(coreGroups, ({ many }) => ({
-  name: many(coreGroupsNames)
+export const relations_core_groups = relations(core_groups, ({ many }) => ({
+  name: many(core_groups_names)
 }));
 
-export const coreGroupsNames = pgTable('core_groups_names', {
+export const core_groups_names = pgTable('core_groups_names', {
   id: uuid('id').defaultRandom().primaryKey(),
   group_id: uuid('group_id')
     .notNull()
-    .references(() => coreGroups.id, {
+    .references(() => core_groups.id, {
       onDelete: 'cascade'
     }),
   id_language: varchar('id_language', { length: 32 })
     .notNull()
-    .references(() => coreLanguages.id, {
+    .references(() => core_languages.id, {
       onDelete: 'cascade'
     }),
   value: varchar('value', { length: 255 }).notNull()
 });
 
-export const relationsCoreGroupsNames = relations(coreGroupsNames, ({ one }) => ({
-  group: one(coreGroups, {
-    fields: [coreGroupsNames.group_id],
-    references: [coreGroups.id]
+export const relations_core_groups_names = relations(core_groups_names, ({ one }) => ({
+  group: one(core_groups, {
+    fields: [core_groups_names.group_id],
+    references: [core_groups.id]
   })
 }));
