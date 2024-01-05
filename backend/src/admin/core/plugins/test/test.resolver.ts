@@ -12,6 +12,6 @@ export class TestPluginsResolver {
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
   async admin_core_plugins__test(): Promise<string> {
-    return await this.service.test();
+    return await this.service.test2();
   }
 }

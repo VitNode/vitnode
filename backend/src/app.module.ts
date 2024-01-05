@@ -16,6 +16,7 @@ import { GlobalAdminSessionsModule } from './admin/core/sessions/sessions.module
 import { ModulesModule } from './modules.module';
 
 import { Ctx } from '@/types/context.type';
+import { DrizzleModule } from '@/database/drizzle.module';
 
 @Module({
   imports: [
@@ -38,7 +39,8 @@ import { Ctx } from '@/types/context.type';
       rootPath: join(__dirname, '..', '../public'),
       serveRoot: '/public'
     }),
-    ScheduleModule.forRoot()
+    ScheduleModule.forRoot(),
+    DrizzleModule.forRoot({ url: './config 123' })
   ]
 })
 export class AppModule {}
