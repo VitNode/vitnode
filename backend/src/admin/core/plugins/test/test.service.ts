@@ -3,10 +3,11 @@ import * as path from 'path';
 
 import { Injectable } from '@nestjs/common';
 import * as archiver from 'archiver';
-import { eq } from 'drizzle-orm';
+import { count, eq } from 'drizzle-orm';
 
 import { DatabaseService } from '@/database/database.service';
 import { core_groups } from '@/src/core/database/schema/groups';
+import { outputPagination, inputPagination } from '@/functions/database/pagination';
 
 @Injectable()
 export class TestPluginsService {
@@ -81,15 +82,18 @@ export class TestPluginsService {
     //   })
     //   .returning();
 
-    const test = await this.databaseService.db.query.core_groups.findFirst({
-      where: eq(core_groups.id, 'ab8da3a8-cd3e-483a-9042-c5c326cf8de2'),
-      with: {
-        name: true
-      }
+    const cursor = 'ab8da3a8-cd3e-483a-9042-c5c32cf8de2';
+    const first = 2;
+    const last = null;
+
+    const edges = await this.databaseService.db.query.core_groups.findMany({
+      orderBy: (table, { asc }) => [asc(table.created)],
+      ...inputPagination({ cursor, first, last, where: eq(core_groups.protected, false) })
     });
+    const totalCount = await this.databaseService.db.select({ count: count() }).from(core_groups);
 
     // eslint-disable-next-line no-console
-    console.log(test);
+    console.log(outputPagination({ totalCount, edges, cursor, first, last }));
 
     return 'test';
   }
