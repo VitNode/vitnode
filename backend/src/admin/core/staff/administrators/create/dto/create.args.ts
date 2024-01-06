@@ -6,7 +6,7 @@ export class CreateAdminStaffAdministratorsArgs {
   group_id: string | null;
 
   @Field(() => String, { nullable: true })
-  member_id: string | null;
+  user_id: string | null;
 
   @Field(() => Boolean)
   unrestricted: boolean;

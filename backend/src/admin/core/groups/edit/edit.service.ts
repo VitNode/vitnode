@@ -1,51 +1,58 @@
 import { Injectable } from '@nestjs/common';
+import { count, eq } from 'drizzle-orm';
 
 import { EditAdminGroupsArgs } from './dto/edit.args';
 import { ShowAdminGroups } from '../show/dto/show.obj';
 
-import { PrismaService } from '@/prisma/prisma.service';
 import { currentDate } from '@/functions/date';
+import { DatabaseService } from '@/database/database.service';
+import { NotFoundError } from '@/utils/errors/not-found-error';
+import { core_groups, core_groups_names } from '@/src/core/database/schema/groups';
+import { core_users } from '@/src/core/database/schema/users';
 
 @Injectable()
 export class EditAdminGroupsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private databaseService: DatabaseService) {}
 
   async edit({ id, name }: EditAdminGroupsArgs): Promise<ShowAdminGroups> {
-    await this.prisma.core_groups.findUniqueOrThrow({
-      where: {
-        id
-      }
+    const group = await this.databaseService.db.query.core_groups.findFirst({
+      where: (table, { eq }) => eq(table.id, id)
     });
 
-    const groupNames = await this.prisma.core_groups_names.findMany({
-      where: {
-        group_id: id
-      }
+    if (!group) {
+      throw new NotFoundError('Group');
+    }
+
+    const groupNames = await this.databaseService.db.query.core_groups_names.findMany({
+      where: (table, { eq }) => eq(table.group_id, id)
     });
 
     // Update name languages
     const updatedName = await Promise.all(
       name.map(async item => {
-        const nameExist = groupNames.find(name => name.id_language === item.id_language);
+        const nameExist = groupNames.find(name => name.language_id === item.language_id);
 
         if (nameExist) {
           // If value is empty, do nothing
           if (!nameExist.value.trim()) return;
 
-          return await this.prisma.core_groups_names.update({
-            where: {
-              id: nameExist.id
-            },
-            data: item
-          });
+          return await this.databaseService.db
+            .update(core_groups_names)
+            .set({
+              value: item.value
+            })
+            .where(eq(core_groups_names.id, nameExist.id))
+            .returning()[0];
         }
 
-        return await this.prisma.core_groups_names.create({
-          data: {
-            ...item,
-            group_id: id
-          }
-        });
+        return await this.databaseService.db
+          .insert(core_groups_names)
+          .values({
+            group_id: id,
+            language_id: item.language_id,
+            value: item.value
+          })
+          .returning()[0];
       })
     );
 
@@ -55,33 +62,28 @@ export class EditAdminGroupsService {
         const nameExist = updatedName.find(name => name.id === item.id);
         if (nameExist) return;
 
-        await this.prisma.core_groups_names.delete({
-          where: {
-            id: item.id
-          }
-        });
+        await this.databaseService.db
+          .delete(core_groups_names)
+          .where(eq(core_groups_names.id, item.id));
       })
     );
 
-    const users_count = await this.prisma.core_members.count({
-      where: {
-        group_id: id
-      }
-    });
+    const usersCount = await this.databaseService.db
+      .select({ count: count() })
+      .from(core_users)
+      .where(eq(core_users.group_id, id));
+
+    const updateGroup = await this.databaseService.db
+      .update(core_groups)
+      .set({
+        updated: currentDate()
+      })
+      .where(eq(core_groups.id, id))
+      .returning()[0];
 
     return {
-      users_count,
-      ...(await this.prisma.core_groups.update({
-        where: {
-          id
-        },
-        include: {
-          name: true
-        },
-        data: {
-          updated: currentDate()
-        }
-      }))
+      users_count: usersCount[0].count,
+      ...updateGroup
     };
   }
 }

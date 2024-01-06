@@ -3,38 +3,31 @@ import { Injectable } from '@nestjs/common';
 import { ShowAdminStaffModerators } from '../show/dto/show.obj';
 import { CreateAdminStaffModeratorsArgs } from './dto/create.args';
 
-import { PrismaService } from '@/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';
 import { currentDate } from '@/functions/date';
+import { DatabaseService } from '@/database/database.service';
+import { core_moderators_permissions } from '@/src/core/database/schema/moderators';
 
 @Injectable()
 export class CreateAdminStaffModeratorsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private databaseService: DatabaseService) {}
 
   async create({
     group_id,
-    member_id,
-    unrestricted
+    unrestricted,
+    user_id
   }: CreateAdminStaffModeratorsArgs): Promise<ShowAdminStaffModerators> {
-    if (!group_id && !member_id) {
+    if (!group_id && !user_id) {
       throw new CustomError({
         code: 'BAD_REQUEST',
-        message: 'You must provide either a group_id or a member_id.'
+        message: 'You must provide either a group_id or a user_id.'
       });
     }
 
-    const findPermission = await this.prisma.core_moderator_permissions.findFirst({
-      where: {
-        OR: [
-          {
-            member_id: member_id
-          },
-          {
-            group_id: group_id
-          }
-        ]
-      }
-    });
+    const findPermission =
+      await this.databaseService.db.query.core_moderators_permissions.findFirst({
+        where: (table, { eq, or }) => or(eq(table.user_id, user_id), eq(table.group_id, group_id))
+      });
 
     if (findPermission) {
       throw new CustomError({
@@ -43,40 +36,43 @@ export class CreateAdminStaffModeratorsService {
       });
     }
 
-    const connectIfDefined = (id: string) => (id ? { connect: { id } } : undefined);
-
-    const data = await this.prisma.core_moderator_permissions.create({
-      data: {
-        unrestricted,
+    const permission = await this.databaseService.db
+      .insert(core_moderators_permissions)
+      .values({
         created: currentDate(),
         updated: currentDate(),
-        member: connectIfDefined(member_id),
-        group: connectIfDefined(group_id)
-      },
-      include: {
-        member: {
-          include: {
+        user_id,
+        group_id,
+        unrestricted
+      })
+      .returning();
+
+    const data = await this.databaseService.db.query.core_moderators_permissions.findFirst({
+      where: (table, { eq }) => eq(table.id, permission[0].id),
+      with: {
+        user: {
+          with: {
             avatar: true,
             group: {
-              include: {
+              with: {
                 name: true
               }
             }
           }
         },
         group: {
-          include: {
+          with: {
             name: true
           }
         }
       }
     });
 
-    if (data.member) {
+    if (data.user) {
       return {
         ...data,
         user_or_group: {
-          ...data.member
+          ...data.user
         }
       };
     }

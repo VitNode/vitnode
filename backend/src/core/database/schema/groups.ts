@@ -24,7 +24,7 @@ export const core_groups_names = pgTable('core_groups_names', {
     .references(() => core_groups.id, {
       onDelete: 'cascade'
     }),
-  id_language: varchar('id_language', { length: 32 })
+  language_id: varchar('language_id', { length: 32 })
     .notNull()
     .references(() => core_languages.id, {
       onDelete: 'cascade'

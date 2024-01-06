@@ -1,18 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma, core_members } from '@prisma/client';
+import { and, count, eq, inArray, or } from 'drizzle-orm';
 
 import { ShowAdminMembersObj } from './dto/show.obj';
 import { ShowAdminMembersArgs } from './dto/show.args';
 
-import { PrismaService } from '@/prisma/prisma.service';
-import { inputPagination } from '@/functions/database/pagination/inputPagination';
-import { outputPagination } from '@/functions/database/pagination/outputPagination';
-import { inputSorting } from '@/functions/database/inputSorting';
-import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+import { DatabaseService } from '@/database/database.service';
+import { outputPagination, inputPagination } from '@/functions/database/pagination';
+import { core_users } from '@/src/core/database/schema/users';
 
 @Injectable()
 export class ShowAdminMembersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private databaseService: DatabaseService) {}
 
   async show({
     cursor,
@@ -22,62 +20,38 @@ export class ShowAdminMembersService {
     search,
     sortBy
   }: ShowAdminMembersArgs): Promise<ShowAdminMembersObj> {
-    const where: Prisma.core_membersWhereInput = {
-      OR: [
-        {
-          name: {
-            contains: search ?? '',
-            mode: 'insensitive'
-          }
-        },
-        {
-          email: {
-            contains: search ?? '',
-            mode: 'insensitive'
-          }
-        },
-        {
-          id: {
-            contains: search ?? '',
-            mode: 'insensitive'
-          }
-        }
-      ],
-      AND: [
-        {
-          group: {
-            id: {
-              in: groups && groups.length > 0 ? groups : undefined
-            }
-          }
-        }
-      ]
-    };
+    const where = or(
+      eq(core_users.name, search ?? ''),
+      eq(core_users.email, search ?? ''),
+      eq(core_users.id, search ?? ''),
+      and(inArray(core_users.group_id, groups && groups.length > 0 ? groups : undefined))
+    );
 
-    const [edges, totalCount] = await this.prisma.$transaction([
-      this.prisma.core_members.findMany({
-        ...inputPagination({ first, cursor, last }),
-        include: {
-          avatar: true,
-          group: {
-            include: {
-              name: true
-            }
-          }
-        },
-        orderBy: inputSorting<keyof core_members>({
-          sortBy,
-          defaultSortBy: {
-            column: 'joined',
-            direction: SortDirectionEnum.desc
-          }
-        }),
+    const edges = await this.databaseService.db.query.core_users.findMany({
+      ...inputPagination({
+        cursor,
+        first,
+        last,
         where
       }),
-      this.prisma.core_members.count({
-        where
-      })
-    ]);
+      orderBy: (table, { asc }) => [asc(table.joined)],
+      columns: {
+        password: false
+      },
+      with: {
+        group: {
+          with: {
+            name: true
+          }
+        },
+        avatar: true
+      }
+    });
+
+    const totalCount = await this.databaseService.db
+      .select({ count: count() })
+      .from(core_users)
+      .where(where);
 
     return outputPagination({ edges, totalCount, first, cursor, last });
   }

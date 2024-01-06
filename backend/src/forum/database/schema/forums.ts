@@ -33,7 +33,7 @@ export const forum_forums_name = pgTable('forum_forums_name', {
     .references(() => forum_forums.id, {
       onDelete: 'cascade'
     }),
-  id_language: varchar('id_language')
+  language_id: varchar('language_id')
     .notNull()
     .references(() => core_languages.id, {
       onDelete: 'cascade'
@@ -47,7 +47,7 @@ export const forum_forums_description = pgTable('forum_forums_description', {
     .references(() => forum_forums.id, {
       onDelete: 'cascade'
     }),
-  id_language: varchar('id_language')
+  language_id: varchar('language_id')
     .notNull()
     .references(() => core_languages.id, {
       onDelete: 'cascade'

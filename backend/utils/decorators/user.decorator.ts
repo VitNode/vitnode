@@ -21,6 +21,12 @@ export class GroupUser {
 }
 
 @ObjectType()
+export class AvatarUser {
+  @Field(() => String, { nullable: true })
+  url: string | null;
+}
+
+@ObjectType()
 export class User {
   @Field(() => String)
   id: string;
@@ -31,8 +37,8 @@ export class User {
   @Field(() => String)
   avatar_color: string;
 
-  @Field(() => UploadCoreAttachmentsObj, { nullable: true })
-  avatar: UploadCoreAttachmentsObj | null;
+  @Field(() => AvatarUser, { nullable: true })
+  avatar: AvatarUser | null;
 
   @Field(() => GroupUser)
   group: GroupUser;

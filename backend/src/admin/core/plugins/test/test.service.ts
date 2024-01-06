@@ -77,7 +77,7 @@ export class TestPluginsService {
     //   .insert(tableCoreGroupsNames)
     //   .values({
     //     group_id: group[0].id,
-    //     id_language: 'en',
+    //     language_id: 'en',
     //     value: 'test'
     //   })
     //   .returning();

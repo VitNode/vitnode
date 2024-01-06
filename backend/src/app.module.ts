@@ -8,7 +8,6 @@ import { JwtModule } from '@nestjs/jwt';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { ScheduleModule } from '@nestjs/schedule';
 
-import { PrismaModule } from '../prisma/prisma.module';
 import { GlobalCoreSessionsModule } from './core/sessions/sessions.module';
 import { CoreModule } from './core/core.module';
 import { AdminModule } from './admin/admin.module';
@@ -29,7 +28,6 @@ import { DatabaseModule } from '@/database/database.module';
       context: ({ req, res }): Ctx => ({ req, res })
     }),
     JwtModule.register({ global: true }),
-    PrismaModule,
     GlobalCoreSessionsModule,
     GlobalAdminSessionsModule,
     CoreModule,

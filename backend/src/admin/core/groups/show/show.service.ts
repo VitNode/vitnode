@@ -1,18 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma, core_groups } from '@prisma/client';
+import { count, eq, like } from 'drizzle-orm';
 
 import { ShowAdminGroupsArgs } from './dto/show.args';
 import { ShowAdminGroupsObj } from './dto/show.obj';
 
-import { PrismaService } from '@/prisma/prisma.service';
-import { inputPagination } from '@/functions/database/pagination/inputPagination';
-import { inputSorting } from '@/functions/database/inputSorting';
-import { SortDirectionEnum } from '@/types/database/sortDirection.type';
-import { outputPagination } from '@/functions/database/pagination/outputPagination';
+import { DatabaseService } from '@/database/database.service';
+import { core_groups, core_groups_names } from '@/src/core/database/schema/groups';
+import { outputPagination, inputPagination } from '@/functions/database/pagination';
 
 @Injectable()
 export class ShowAdminGroupsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private databaseService: DatabaseService) {}
 
   async show({
     cursor,
@@ -21,56 +19,41 @@ export class ShowAdminGroupsService {
     search,
     sortBy
   }: ShowAdminGroupsArgs): Promise<ShowAdminGroupsObj> {
-    const where: Prisma.core_groupsWhereInput = {
-      name: {
-        some: {
-          value: {
-            contains: search,
-            mode: 'insensitive'
+    const where = like(core_groups_names.value, `%${search}%`);
+
+    const edges = await this.databaseService.db.query.core_groups.findMany({
+      ...inputPagination({
+        cursor,
+        first,
+        last,
+        where
+      }),
+      orderBy: (table, { asc }) => [asc(table.updated)],
+      with: {
+        name: {
+          columns: {
+            value: true,
+            language_id: true
           }
         }
       }
-    };
+    });
 
-    const [edges, totalCount] = await this.prisma.$transaction([
-      this.prisma.core_groups.findMany({
-        ...inputPagination({ first, cursor, last }),
-        select: {
-          id: true,
-          created: true,
-          protected: true,
-          default: true,
-          root: true,
-          guest: true,
-          updated: true,
-          name: {
-            select: {
-              id_language: true,
-              value: true
-            }
-          }
-        },
-        orderBy: inputSorting<keyof core_groups>({
-          sortBy,
-          defaultSortBy: {
-            column: 'updated',
-            direction: SortDirectionEnum.desc
-          }
-        }),
-        where
-      }),
-      this.prisma.core_groups.count()
-    ]);
+    const totalCount = await this.databaseService.db
+      .select({ count: count() })
+      .from(core_groups)
+      .where(where);
 
     const currentEdges = await Promise.all(
       edges.map(async edge => {
+        const usersCount = await this.databaseService.db
+          .select({ count: count() })
+          .from(core_groups)
+          .where(eq(core_groups.id, edge.id));
+
         return {
           ...edge,
-          users_count: await this.prisma.core_members.count({
-            where: {
-              group_id: edge.id
-            }
-          })
+          users_count: usersCount[0].count
         };
       })
     );

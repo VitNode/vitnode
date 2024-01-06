@@ -1,18 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { core_admin_permissions } from '@prisma/client';
+import { count } from 'drizzle-orm';
 
 import { ShowAdminStaffAdministratorsArgs } from './dto/show.args';
 import { ShowAdminStaffAdministratorsObj } from './dto/show.obj';
 
-import { PrismaService } from '@/prisma/prisma.service';
-import { outputPagination } from '@/functions/database/pagination/outputPagination';
-import { inputPagination } from '@/functions/database/pagination/inputPagination';
-import { inputSorting } from '@/functions/database/inputSorting';
-import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+import { DatabaseService } from '@/database/database.service';
+import { outputPagination, inputPagination } from '@/functions/database/pagination';
+import { core_admin_permissions } from '@/src/core/database/schema/admins';
 
 @Injectable()
 export class ShowAdminStaffAdministratorsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private databaseService: DatabaseService) {}
 
   async show({
     cursor,
@@ -20,44 +18,43 @@ export class ShowAdminStaffAdministratorsService {
     last,
     sortBy
   }: ShowAdminStaffAdministratorsArgs): Promise<ShowAdminStaffAdministratorsObj> {
-    const [edges, totalCount] = await this.prisma.$transaction([
-      this.prisma.core_admin_permissions.findMany({
-        ...inputPagination({ first, cursor, last }),
-        orderBy: inputSorting<keyof core_admin_permissions>({
-          sortBy,
-          defaultSortBy: {
-            column: 'updated',
-            direction: SortDirectionEnum.desc
+    const edges = await this.databaseService.db.query.core_admin_permissions.findMany({
+      ...inputPagination({
+        cursor,
+        first,
+        last
+      }),
+      orderBy: (table, { asc }) => [asc(table.updated)],
+      with: {
+        group: {
+          with: {
+            name: true
           }
-        }),
-        include: {
-          group: {
-            include: {
-              name: true
-            }
-          },
-          member: {
-            include: {
-              avatar: true,
-              group: {
-                include: {
-                  name: true
-                }
+        },
+        user: {
+          with: {
+            avatar: true,
+            group: {
+              with: {
+                name: true
               }
             }
           }
         }
-      }),
-      this.prisma.core_admin_permissions.count({})
-    ]);
+      }
+    });
+
+    const totalCount = await this.databaseService.db
+      .select({ count: count() })
+      .from(core_admin_permissions);
 
     return outputPagination({
       edges: edges.map(edge => {
-        if (edge.member) {
+        if (edge.user) {
           return {
             ...edge,
             user_or_group: {
-              ...edge.member
+              ...edge.user
             }
           };
         }
