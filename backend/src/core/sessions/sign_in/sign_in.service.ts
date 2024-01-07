@@ -1,15 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { compare } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { Prisma } from '@prisma/client';
 
 import { SignInCoreSessionsArgs } from './dto/sign_in.args';
 
-import { PrismaService } from '@/prisma/prisma.service';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { Ctx } from '@/types/context.type';
 import { CONFIG } from '@/config';
 import { convertUnixTime, currentDate } from '@/functions/date';
+import { DatabaseService } from '@/database/database.service';
+import { core_admin_sessions } from '@/src/admin/core/database/schema/admins';
+import { core_sessions } from '@/src/admin/core/database/schema/sessions';
 
 interface CreateSessionArgs extends Ctx {
   email: string;
@@ -22,7 +23,7 @@ interface CreateSessionArgs extends Ctx {
 @Injectable()
 export class SignInCoreSessionsService {
   constructor(
-    private prisma: PrismaService,
+    private databaseService: DatabaseService,
     private jwtService: JwtService
   ) {}
 
@@ -40,11 +41,10 @@ export class SignInCoreSessionsService {
       throw new AccessDeniedError();
     }
 
-    const device = await this.prisma.core_sessions_known_devices.findFirst({
-      where: {
-        id: know_device_id
-      }
+    const device = await this.databaseService.db.query.core_sessions_known_devices.findFirst({
+      where: (table, { eq }) => eq(table.id, know_device_id)
     });
+
     if (!device) {
       throw new AccessDeniedError();
     }
@@ -64,29 +64,12 @@ export class SignInCoreSessionsService {
       ? CONFIG.cookies.login_token.expiresInRemember
       : CONFIG.cookies.login_token.expiresIn;
 
-    const data:
-      | Omit<Prisma.core_sessionsCreateInput, 'expires'>
-      | Omit<Prisma.core_admin_sessionsCreateInput, 'expires'> = {
-      login_token,
-      member: {
-        connect: {
-          id: userId
-        }
-      },
-      last_seen: currentDate(),
-      known_devices: {
-        connect: {
-          id: know_device_id
-        }
-      }
-    };
-
     if (admin) {
-      await this.prisma.core_admin_sessions.create({
-        data: {
-          ...data,
-          expires: currentDate() + CONFIG.cookies.login_token.admin.expiresIn
-        }
+      await this.databaseService.db.insert(core_admin_sessions).values({
+        login_token,
+        user_id: userId,
+        last_seen: currentDate(),
+        expires: currentDate() + CONFIG.cookies.login_token.admin.expiresIn
       });
 
       // Set cookie for session
@@ -104,11 +87,11 @@ export class SignInCoreSessionsService {
       return login_token;
     }
 
-    await this.prisma.core_sessions.create({
-      data: {
-        ...data,
-        expires: currentDate() + expires
-      }
+    await this.databaseService.db.insert(core_sessions).values({
+      login_token,
+      user_id: userId,
+      last_seen: currentDate(),
+      expires: currentDate() + expires
     });
 
     // Set cookie for session
@@ -128,10 +111,8 @@ export class SignInCoreSessionsService {
 
   async signIn({ admin, email: emailRaw, password, remember }: SignInCoreSessionsArgs, ctx: Ctx) {
     const email = emailRaw.toLowerCase();
-    const user = await this.prisma.core_members.findUnique({
-      where: {
-        email
-      }
+    const user = await this.databaseService.db.query.core_users.findFirst({
+      where: (table, { eq }) => eq(table.email, email)
     });
     if (!user) throw new AccessDeniedError();
 
@@ -140,17 +121,9 @@ export class SignInCoreSessionsService {
 
     // If admin mode is enabled, check if user has access to admin cp
     if (admin) {
-      const accessToAdminCP = await this.prisma.core_admin_permissions.findFirst({
-        where: {
-          OR: [
-            {
-              member_id: user.id
-            },
-            {
-              group_id: user.group_id
-            }
-          ]
-        }
+      const accessToAdminCP = await this.databaseService.db.query.core_admin_permissions.findFirst({
+        where: (table, { eq, or }) =>
+          or(eq(table.group_id, user.group_id), eq(table.user_id, user.id))
       });
       if (!accessToAdminCP) throw new AccessDeniedError();
     }

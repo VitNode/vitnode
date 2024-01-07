@@ -1,36 +1,31 @@
 import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
+import { and, eq, lt, or } from 'drizzle-orm';
 
-import { PrismaService } from '@/prisma/prisma.service';
 import { currentDate } from '@/functions/date';
 import { CONFIG } from '@/config';
+import { DatabaseService } from '@/database/database.service';
+import { core_sessions_known_devices } from '@/src/admin/core/database/schema/sessions';
 
 @Injectable()
 export class CoreMiddlewareCron {
-  constructor(private prisma: PrismaService) {}
+  constructor(private databaseService: DatabaseService) {}
 
   @Cron(CronExpression.EVERY_HOUR)
   async clearKnowDevices() {
-    await this.prisma.core_sessions_known_devices.deleteMany({
-      where: {
-        AND: [
-          {
-            session: {
-              is: null
-            }
-          },
-          {
-            last_seen: {
-              lt: currentDate() - CONFIG.cookies.login_token.expiresInRemember
-            }
-          }
-        ],
-        OR: [
-          {
-            ip_address: null
-          }
-        ]
-      }
-    });
+    await this.databaseService.db
+      .delete(core_sessions_known_devices)
+      .where(
+        or(
+          eq(core_sessions_known_devices.ip_address, null),
+          and(
+            eq(core_sessions_known_devices.session_id, null),
+            lt(
+              core_sessions_known_devices.last_seen,
+              currentDate() - CONFIG.cookies.login_token.expiresInRemember
+            )
+          )
+        )
+      );
   }
 }

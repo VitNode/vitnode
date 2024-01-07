@@ -13,6 +13,7 @@ export class EditCoreLanguagesResolver {
 
   @Mutation(() => ShowCoreLanguages)
   @UseGuards(AdminAuthGuards)
+  // TODO: Move this to admin folder
   async core_languages__edit(@Args() args: EditCoreLanguagesArgs): Promise<ShowCoreLanguages> {
     return await this.service.edit(args);
   }

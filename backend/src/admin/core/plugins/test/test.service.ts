@@ -6,7 +6,7 @@ import * as archiver from 'archiver';
 import { count, eq } from 'drizzle-orm';
 
 import { DatabaseService } from '@/database/database.service';
-import { core_groups } from '@/src/core/database/schema/groups';
+import { core_groups } from '@/src/admin/core/database/schema/groups';
 import { outputPagination, inputPagination } from '@/functions/database/pagination';
 
 @Injectable()

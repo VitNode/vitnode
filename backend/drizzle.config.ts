@@ -1,7 +1,7 @@
 import type { Config } from 'drizzle-kit';
 
 export default {
-  schema: './src/**/database/schema/*.ts',
+  schema: './src/admin/**/database/schema/*.ts',
   out: './drizzle',
   driver: 'pg',
   dbCredentials: {

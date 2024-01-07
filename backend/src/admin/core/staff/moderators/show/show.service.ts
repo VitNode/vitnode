@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { count } from 'drizzle-orm';
 
 import { ShowAdminStaffModeratorsArgs } from './dto/show.args';
 import { ShowAdminStaffModeratorsObj } from './dto/show.obj';
 
 import { DatabaseService } from '@/database/database.service';
 import { outputPagination, inputPagination } from '@/functions/database/pagination';
-import { core_moderators_permissions } from '@/src/core/database/schema/moderators';
-import { count } from 'drizzle-orm';
+import { core_moderators_permissions } from '@/src/admin/core/database/schema/moderators';
 
 @Injectable()
 export class ShowAdminStaffModeratorsService {

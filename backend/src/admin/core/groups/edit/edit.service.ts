@@ -7,8 +7,8 @@ import { ShowAdminGroups } from '../show/dto/show.obj';
 import { currentDate } from '@/functions/date';
 import { DatabaseService } from '@/database/database.service';
 import { NotFoundError } from '@/utils/errors/not-found-error';
-import { core_groups, core_groups_names } from '@/src/core/database/schema/groups';
-import { core_users } from '@/src/core/database/schema/users';
+import { core_groups, core_groups_names } from '@/src/admin/core/database/schema/groups';
+import { core_users } from '@/src/admin/core/database/schema/users';
 
 @Injectable()
 export class EditAdminGroupsService {

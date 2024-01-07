@@ -1,15 +1,14 @@
 import { relations } from 'drizzle-orm';
 import { boolean, integer, pgTable, uuid, varchar } from 'drizzle-orm/pg-core';
 
-import { core_groups } from '@/src/core/database/schema/groups';
-import { core_languages } from '@/src/core/database/schema/languages';
+import { core_groups } from '@/src/admin/core/database/schema/groups';
+import { core_languages } from '@/src/admin/core/database/schema/languages';
 
 export const forum_forums = pgTable('forum_forums', {
   id: uuid('id').defaultRandom().primaryKey(),
   created: integer('created').notNull(),
-  parent_id: uuid('parent_id').references(() => forum_forums.id, {
-    onDelete: 'cascade'
-  }),
+  // ! Warning: this is a recursive relation. It's not supported by drizzle-orm yet.
+  parent_id: uuid('parent_id'),
   position: integer('position').notNull().default(0),
   can_all_view: boolean('can_all_view').notNull().default(false),
   can_all_read: boolean('can_all_read').notNull().default(false),

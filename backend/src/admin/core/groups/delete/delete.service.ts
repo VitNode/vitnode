@@ -5,8 +5,8 @@ import { DeleteAdminGroupsArgs } from './dto/delete.args';
 
 import { DatabaseService } from '@/database/database.service';
 import { NotFoundError } from '@/utils/errors/not-found-error';
-import { core_members } from '@/src/core/database/schema/users';
-import { core_groups } from '@/src/core/database/schema/groups';
+import { core_users } from '@/src/admin/core/database/schema/users';
+import { core_groups } from '@/src/admin/core/database/schema/groups';
 
 @Injectable()
 export class DeleteAdminGroupsService {
@@ -31,15 +31,12 @@ export class DeleteAdminGroupsService {
     }
 
     // Move users to default group
-
     await this.databaseService.db
-      .update(core_members)
+      .update(core_users)
       .set({
-        group: {
-          id: defaultGroup.id
-        }
+        group_id: defaultGroup.id
       })
-      .where(eq(core_members.group.id, id));
+      .where(eq(core_users.group_id, id));
 
     // Delete group
     await this.databaseService.db.delete(core_groups).where(eq(core_groups.id, id));

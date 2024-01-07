@@ -9,9 +9,9 @@ import { ConfigType } from '@/types/config.type';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { currentDate } from '@/functions/date';
 import { DatabaseService } from '@/database/database.service';
-import { core_languages } from '@/src/core/database/schema/languages';
-import { core_groups, core_groups_names } from '@/src/core/database/schema/groups';
-import { core_admin_permissions } from '@/src/core/database/schema/admins';
+import { core_languages } from '@/src/admin/core/database/schema/languages';
+import { core_groups, core_groups_names } from '@/src/admin/core/database/schema/groups';
+import { core_admin_permissions } from '@/src/admin/core/database/schema/admins';
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {

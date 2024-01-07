@@ -6,7 +6,7 @@ import { ShowAdminMembersArgs } from './dto/show.args';
 
 import { DatabaseService } from '@/database/database.service';
 import { outputPagination, inputPagination } from '@/functions/database/pagination';
-import { core_users } from '@/src/core/database/schema/users';
+import { core_users } from '@/src/admin/core/database/schema/users';
 
 @Injectable()
 export class ShowAdminMembersService {

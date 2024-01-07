@@ -6,7 +6,7 @@ import { ShowAdminStaffAdministratorsObj } from './dto/show.obj';
 
 import { DatabaseService } from '@/database/database.service';
 import { outputPagination, inputPagination } from '@/functions/database/pagination';
-import { core_admin_permissions } from '@/src/core/database/schema/admins';
+import { core_admin_permissions } from '@/src/admin/core/database/schema/admins';
 
 @Injectable()
 export class ShowAdminStaffAdministratorsService {

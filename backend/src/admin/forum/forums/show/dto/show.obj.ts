@@ -4,7 +4,9 @@ import { ShowForumForumsWithParent } from '../../../../../forum/forums/show/dto/
 import { PageInfo } from '@/types/database/pagination.type';
 
 @ObjectType()
-class ShowForumForumsAdmin extends OmitType(ShowForumForumsWithParent, ['permissions'] as const) {}
+export class ShowForumForumsAdmin extends OmitType(ShowForumForumsWithParent, [
+  'permissions'
+] as const) {}
 
 @ObjectType()
 export class ShowForumForumsAdminObj {

@@ -3,16 +3,16 @@ import { JwtService } from '@nestjs/jwt';
 
 import { InternalAuthorizationCoreSessionObj } from './dto/internal_authorization.obj';
 
-import { PrismaService } from '@/prisma/prisma.service';
 import { Ctx } from '@/types/context.type';
 import { CONFIG } from '@/config';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { currentDate } from '@/functions/date';
+import { DatabaseService } from '@/database/database.service';
 
 @Injectable()
 export class InternalAuthorizationCoreSessionsService {
   constructor(
-    private prisma: PrismaService,
+    private databaseService: DatabaseService,
     private jwtService: JwtService
   ) {}
 
@@ -23,19 +23,17 @@ export class InternalAuthorizationCoreSessionsService {
       throw new AccessDeniedError();
     }
 
-    const session = await this.prisma.core_sessions.findUnique({
-      where: {
-        login_token
-      },
-      include: {
-        member: {
-          include: {
+    const session = await this.databaseService.db.query.core_sessions.findFirst({
+      where: (table, { eq }) => eq(table.login_token, login_token),
+      with: {
+        user: {
+          with: {
+            avatar: true,
             group: {
-              include: {
+              with: {
                 name: true
               }
-            },
-            avatar: true
+            }
           }
         }
       }
@@ -50,6 +48,6 @@ export class InternalAuthorizationCoreSessionsService {
       throw new AccessDeniedError();
     }
 
-    return session.member;
+    return session.user;
   }
 }

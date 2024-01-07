@@ -5,7 +5,7 @@ import { ShowAdminGroupsArgs } from './dto/show.args';
 import { ShowAdminGroupsObj } from './dto/show.obj';
 
 import { DatabaseService } from '@/database/database.service';
-import { core_groups, core_groups_names } from '@/src/core/database/schema/groups';
+import { core_groups, core_groups_names } from '@/src/admin/core/database/schema/groups';
 import { outputPagination, inputPagination } from '@/functions/database/pagination';
 
 @Injectable()

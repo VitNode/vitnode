@@ -3,7 +3,7 @@ import { relations } from 'drizzle-orm';
 
 import { forum_forums } from './forums';
 
-import { core_languages } from '@/src/core/database/schema/languages';
+import { core_languages } from '@/src/admin/core/database/schema/languages';
 
 export const forum_topics = pgTable('forum_topics', {
   id: uuid('id').defaultRandom().primaryKey(),

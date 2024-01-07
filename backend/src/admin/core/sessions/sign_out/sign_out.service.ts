@@ -4,7 +4,7 @@ import { eq } from 'drizzle-orm';
 import { Ctx } from '@/types/context.type';
 import { CONFIG } from '@/config';
 import { DatabaseService } from '@/database/database.service';
-import { core_admin_sessions } from '@/src/core/database/schema/admins';
+import { core_admin_sessions } from '@/src/admin/core/database/schema/admins';
 
 @Injectable()
 export class SignOutAdminSessionsService {

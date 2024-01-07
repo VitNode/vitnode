@@ -6,7 +6,7 @@ import { CreateAdminGroupsArgs } from './dto/create.args';
 import { currentDate } from '@/functions/date';
 import { CustomError } from '@/utils/errors/CustomError';
 import { DatabaseService } from '@/database/database.service';
-import { core_groups, core_groups_names } from '@/src/core/database/schema/groups';
+import { core_groups, core_groups_names } from '@/src/admin/core/database/schema/groups';
 
 @Injectable()
 export class CreateAdminGroupsService {

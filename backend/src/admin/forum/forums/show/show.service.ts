@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
+import { count, eq } from 'drizzle-orm';
 
 import { ShowForumForumsAdminObj } from './dto/show.obj';
 
-import { PrismaService } from '@/prisma/prisma.service';
-import { outputPagination } from '@/functions/database/pagination/outputPagination';
-import { inputPagination } from '@/functions/database/pagination/inputPagination';
-import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 import { ShowForumForumsArgs } from '../../../../forum/forums/show/dto/show.args';
+import { DatabaseService } from '@/database/database.service';
+import { outputPagination, inputPagination } from '@/functions/database/pagination';
+import { forum_forums } from '@/src/admin/forum/database/schema/forums';
 
 @Injectable()
 export class ShowForumForumsAdminService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private databaseService: DatabaseService) {}
 
   async show({
     cursor,
@@ -18,80 +18,48 @@ export class ShowForumForumsAdminService {
     last,
     parent_id
   }: ShowForumForumsArgs): Promise<ShowForumForumsAdminObj> {
-    const where = {
-      parent_id: parent_id
-        ? parent_id
-        : {
-            in: null
-          }
-    };
+    const where = eq(forum_forums.parent_id, parent_id);
 
-    const [edges, totalCount] = await this.prisma.$transaction([
-      this.prisma.forum_forums.findMany({
-        ...inputPagination({ first, cursor, last }),
-        where,
-        include: {
-          parent: {
-            include: {
-              name: true,
-              description: true,
-              _count: {
-                select: {
-                  children: true
-                }
-              }
-            }
-          },
-          children: {
-            orderBy: [
-              {
-                position: SortDirectionEnum.asc
-              }
-            ],
-            include: {
-              name: true,
-              description: true,
-              parent: true,
-              _count: {
-                select: {
-                  children: true
-                }
-              },
-              children: {
-                orderBy: [
-                  {
-                    position: SortDirectionEnum.asc
-                  }
-                ],
-                include: {
-                  name: true,
-                  description: true,
-                  parent: true,
-                  _count: {
-                    select: {
-                      children: true
-                    }
-                  }
-                }
-              }
-            }
-          },
-          name: true,
-          description: true,
-          _count: {
-            select: {
-              children: true
-            }
-          }
-        },
-        orderBy: [
-          {
-            position: SortDirectionEnum.asc
-          }
-        ]
+    const forums = await this.databaseService.db.query.forum_forums.findMany({
+      ...inputPagination({
+        cursor,
+        first,
+        last,
+        where
       }),
-      this.prisma.forum_forums.count({ where })
-    ]);
+      orderBy: (table, { asc }) => [asc(table.position)],
+      with: {
+        name: true,
+        description: true,
+        parent: {
+          with: {
+            name: true,
+            description: true
+          }
+        }
+      }
+    });
+
+    const totalCount = await this.databaseService.db
+      .select({ count: count() })
+      .from(forum_forums)
+      .where(where);
+
+    const edges = await Promise.all(
+      forums.map(async forum => {
+        const childrenCount = await this.databaseService.db
+          .select({ count: count() })
+          .from(forum_forums)
+          .where(eq(forum_forums.parent_id, forum.id));
+
+        return {
+          ...forum,
+          parent: { ...forum.parent, _count: { children: 0 } },
+          children: [],
+          _count: { children: childrenCount[0].count }
+        };
+      })
+    );
 
     return outputPagination({
       edges,
