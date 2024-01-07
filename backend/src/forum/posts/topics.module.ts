@@ -12,6 +12,7 @@ import { CreateForumsPostsService } from '@/src/forum/posts/create/create.servic
     ShowPostsForumsService,
     CreateForumPostsResolver,
     CreateForumsPostsService
-  ]
+  ],
+  exports: [CreateForumsPostsService]
 })
 export class PostsForumModule {}

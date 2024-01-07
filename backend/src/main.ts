@@ -24,10 +24,6 @@ async function bootstrap() {
   app.useWebSocketAdapter(redisIoAdapter);
 
   await app.listen(CONFIG.port, null, async () => {
-    if (!CONFIG.cookies.login_token.secret) {
-      throw new Error('Login token secret is not defined in .env file');
-    }
-
     // eslint-disable-next-line no-console
     console.log(`Application is running on: http://localhost:${CONFIG.port}/graphql`);
   });

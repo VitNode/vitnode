@@ -3,31 +3,31 @@ import { Injectable } from '@nestjs/common';
 import { CreateForumTopicsArgs } from './dto/create.args';
 import { ShowTopicsForums } from '../show/dto/show.obj';
 
-import { PrismaService } from '@/prisma/prisma.service';
 import { currentDate } from '@/functions/date';
 import { User } from '@/utils/decorators/user.decorator';
 import { Ctx } from '@/types/context.type';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
-import { CustomError } from '../../../../utils/errors/CustomError';
+import { DatabaseService } from '@/database/database.service';
+import { forum_topics, forum_topics_titles } from '@/src/admin/forum/database/schema/topics';
+import { CreateForumsPostsService } from '../../posts/create/create.service';
 
 @Injectable()
 export class CreateForumTopicsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private createPostService: CreateForumsPostsService
+  ) {}
 
   async create(
-    { group, id }: User,
+    user: User,
     { content, forum_id, title }: CreateForumTopicsArgs,
-    { req }: Ctx
+    { req, res }: Ctx
   ): Promise<ShowTopicsForums> {
-    const forum = await this.prisma.forum_forums.findUniqueOrThrow({
-      where: {
-        id: forum_id
-      },
-      include: {
+    const forum = await this.databaseService.db.query.forum_forums.findFirst({
+      where: (table, { eq }) => eq(table.id, forum_id),
+      with: {
         permissions: {
-          where: {
-            group_id: group.id
-          }
+          where: (table, { eq }) => eq(table.group_id, user.group.id)
         }
       }
     });
@@ -36,77 +36,42 @@ export class CreateForumTopicsService {
       throw new AccessDeniedError();
     }
 
-    const topic = await this.prisma.forum_topics.create({
-      data: {
+    const data = await this.databaseService.db
+      .insert(forum_topics)
+      .values({
         ip_address: req.ip,
-        forum: {
-          connect: {
-            id: forum_id
-          }
-        },
-        title: {
-          create: title
-        },
         created: currentDate(),
-        posts: {
-          create: {
-            ip_address: req.ip,
-            content: {
-              create: content
-            },
-            created: currentDate(),
-            author: {
-              connect: {
-                id
-              }
-            }
-          }
-        }
-      },
-      include: {
+        forum_id
+      })
+      .returning();
+
+    // Create title
+    await this.databaseService.db.insert(forum_topics_titles).values(
+      title.map(item => ({
+        ...item,
+        topic_id: data[0].id
+      }))
+    );
+
+    // Create first post
+    const post = await this.createPostService.create(
+      user,
+      { content, topic_id: data[0].id },
+      { req, res }
+    );
+
+    const topic = await this.databaseService.db.query.forum_topics.findFirst({
+      where: (table, { eq }) => eq(table.id, data[0].id),
+      with: {
         title: true,
         forum: {
-          include: {
+          with: {
             name: true
-          }
-        },
-        posts: {
-          where: {
-            AND: [
-              {
-                ip_address: req.ip
-              },
-              {
-                created: currentDate()
-              }
-            ]
-          },
-          include: {
-            content: true,
-            author: {
-              include: {
-                avatar: true,
-                group: {
-                  include: {
-                    name: true
-                  }
-                }
-              }
-            }
           }
         }
       }
     });
 
-    const post = topic.posts.at(0);
-
-    if (!post) {
-      throw new CustomError({
-        code: 'INTERNAL_SERVER_ERROR',
-        message: 'Something went wrong with creating post in topic.'
-      });
-    }
-
-    return { ...topic, author: post.author, content: post.content };
+    return { ...topic, user: post.user, content: post.content };
   }
 }

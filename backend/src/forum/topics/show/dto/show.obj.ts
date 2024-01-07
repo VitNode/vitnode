@@ -31,7 +31,7 @@ export class ShowTopicsForums {
   locked: boolean;
 
   @Field(() => User)
-  author: User;
+  user: User;
 
   @Field(() => ForumTopicsForums)
   forum: ForumTopicsForums;

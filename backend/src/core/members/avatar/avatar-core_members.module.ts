@@ -1,16 +1,11 @@
 import { Module } from '@nestjs/common';
 
-import { UploadAvatarCoreMembersService } from './upload/upload.service';
-import { UploadAvatarCoreMembersResolver } from './upload/upload.resolver';
-import { DeleteAvatarCoreMembersResolver } from './delete/delete.resolver';
-import { DeleteAvatarCoreMembersService } from './delete/delete.service';
+// import { UploadAvatarCoreMembersService } from './upload/upload.service';
+// import { UploadAvatarCoreMembersResolver } from './upload/upload.resolver';
+// import { DeleteAvatarCoreMembersResolver } from './delete/delete.resolver';
+// import { DeleteAvatarCoreMembersService } from './delete/delete.service';
 
 @Module({
-  providers: [
-    UploadAvatarCoreMembersService,
-    UploadAvatarCoreMembersResolver,
-    DeleteAvatarCoreMembersResolver,
-    DeleteAvatarCoreMembersService
-  ]
+  providers: []
 })
 export class AvatarCoreMembers {}

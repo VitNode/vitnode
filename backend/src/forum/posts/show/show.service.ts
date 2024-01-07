@@ -1,84 +1,73 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { count, eq, or } from 'drizzle-orm';
 
 import { ShowPostsForumsArgs } from './dto/show.args';
 import { ShowPostsForumsObj } from './dto/show.obj';
 
-import { PrismaService } from '@/prisma/prisma.service';
-import { SortDirectionEnum } from '@/types/database/sortDirection.type';
-import { outputPagination } from '@/functions/database/pagination/outputPagination';
-import { inputPagination } from '@/functions/database/pagination/inputPagination';
+import { outputPagination, inputPagination } from '@/functions/database/pagination';
+import { DatabaseService } from '@/database/database.service';
+import { forum_posts, forum_posts_timeline } from '@/src/admin/forum/database/schema/posts';
+import { forum_topics_logs } from '@/src/admin/forum/database/schema/topics';
 
 @Injectable()
 export class ShowPostsForumsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private databaseService: DatabaseService) {}
 
   async show({ cursor, first, last, topic_id }: ShowPostsForumsArgs): Promise<ShowPostsForumsObj> {
-    const where: Prisma.forum_posts_timelineWhereInput = {
-      OR: [
-        {
-          post: {
-            topic: {
-              id: topic_id
+    // TODO: Check permissions if user can view this topic
+
+    const edges = await this.databaseService.db.query.forum_posts_timeline.findMany({
+      ...inputPagination({
+        cursor,
+        first,
+        last,
+        where: or(eq(forum_posts.topic_id, topic_id), eq(forum_topics_logs.topic_id, topic_id))
+      }),
+      orderBy: (table, { asc }) => [asc(table.created)],
+      with: {
+        post: {
+          with: {
+            content: true,
+            user: {
+              with: {
+                avatar: true,
+                group: {
+                  with: {
+                    name: true
+                  }
+                }
+              }
             }
           }
         },
-        {
-          log: {
-            topic: {
-              id: topic_id
+        topic_log: {
+          with: {
+            content: true,
+            user: {
+              with: {
+                avatar: true,
+                group: {
+                  with: {
+                    name: true
+                  }
+                }
+              }
             }
           }
         }
-      ]
-    };
+      }
+    });
 
-    const [edges, totalCount] = await this.prisma.$transaction([
-      this.prisma.forum_posts_timeline.findMany({
-        ...inputPagination({ first, cursor, last }),
-        where,
-        orderBy: { created: SortDirectionEnum.asc },
-        include: {
-          post: {
-            include: {
-              content: true,
-              author: {
-                include: {
-                  avatar: true,
-                  group: {
-                    include: {
-                      name: true
-                    }
-                  }
-                }
-              }
-            }
-          },
-          log: {
-            include: {
-              member: {
-                include: {
-                  avatar: true,
-                  group: {
-                    include: {
-                      name: true
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }),
-      this.prisma.forum_posts_timeline.count({ where })
-    ]);
+    const totalCount = await this.databaseService.db
+      .select({ count: count() })
+      .from(forum_posts_timeline);
 
     return outputPagination({
       edges: edges.map(edge => {
-        if (edge.log) {
+        if (edge.topic_log) {
           return {
             ...edge,
-            ...edge.log
+            ...edge.topic_log
           };
         }
 

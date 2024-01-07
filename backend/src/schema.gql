@@ -11,7 +11,7 @@ type AuthorizationCoreSessionsObj {
 }
 
 type AuthorizationCurrentUserObj {
-  avatar: UploadCoreAttachmentsObj
+  avatar: AvatarUser
   avatar_color: String!
   email: String!
   group: GroupUser!
@@ -20,6 +20,10 @@ type AuthorizationCurrentUserObj {
   is_mod: Boolean!
   name: String!
   newsletter: Boolean!
+}
+
+type AvatarUser {
+  url: String
 }
 
 type ChildrenShowForumForums {
@@ -92,14 +96,12 @@ type Mutation {
   core_groups__admin__edit(id: String!, name: [TextLanguageInput!]!): ShowAdminGroups!
   core_groups__admin_create(name: [TextLanguageInput!]!): ShowAdminGroups!
   core_languages__edit(default: Boolean!, enabled: Boolean!, id: String!, name: String!, timezone: String!): ShowCoreLanguages!
-  core_members__avatar__delete: String!
-  core_members__avatar__upload(file: Upload!): UploadCoreAttachmentsObj!
   core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
-  core_staff_administrators__admin__create(group_id: String, member_id: String, unrestricted: Boolean!): ShowAdminStaffAdministrators!
+  core_staff_administrators__admin__create(group_id: String, unrestricted: Boolean!, user_id: String): ShowAdminStaffAdministrators!
   core_staff_administrators__admin__delete(id: String!): String!
-  core_staff_moderators__admin__create(group_id: String, member_id: String, unrestricted: Boolean!): ShowAdminStaffModerators!
+  core_staff_moderators__admin__create(group_id: String, unrestricted: Boolean!, user_id: String): ShowAdminStaffModerators!
   core_staff_moderators__admin__delete(id: String!): String!
   forum_forums__admin__change_position(id: String!, index_to_move: Int!, parent_id: String): String!
   forum_forums__admin__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: String, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
@@ -170,7 +172,7 @@ enum ShowAdminGroupsSortingColumnEnum {
 }
 
 type ShowAdminMembers {
-  avatar: UploadCoreAttachmentsObj
+  avatar: AvatarUser
   avatar_color: String!
   email: String!
   group: GroupUser!
@@ -262,7 +264,7 @@ type ShowCoreLanguagesObj {
 }
 
 type ShowCoreMembers {
-  avatar: UploadCoreAttachmentsObj
+  avatar: AvatarUser
   avatar_color: String!
   group: GroupUser!
   id: String!
@@ -359,26 +361,8 @@ input TextLanguageInput {
   value: String!
 }
 
-"""The `Upload` scalar type represents a file upload."""
-scalar Upload
-
-type UploadCoreAttachmentsObj {
-  created: Int!
-  description: String
-  extension: String!
-  file_size: Int!
-  id: String!
-  member_id: String!
-  mimetype: String!
-  module: String!
-  module_id: String!
-  name: String!
-  position: Int!
-  url: String!
-}
-
 type User {
-  avatar: UploadCoreAttachmentsObj
+  avatar: AvatarUser
   avatar_color: String!
   group: GroupUser!
   id: String!

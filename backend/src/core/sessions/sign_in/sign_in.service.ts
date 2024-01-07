@@ -36,6 +36,10 @@ export class SignInCoreSessionsService {
     res,
     userId
   }: CreateSessionArgs) {
+    if (!CONFIG.cookies.login_token.secret) {
+      throw new Error('Login token secret is not defined in .env file');
+    }
+
     const know_device_id: string | undefined = req.cookies[CONFIG.cookies.known_device.name];
     if (!know_device_id) {
       throw new AccessDeniedError();

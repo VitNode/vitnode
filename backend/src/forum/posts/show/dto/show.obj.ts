@@ -1,12 +1,12 @@
 import { Field, Int, ObjectType, createUnionType, registerEnumType } from '@nestjs/graphql';
-import { ForumTopicsActions } from '@prisma/client';
 
 import { PageInfo } from '@/types/database/pagination.type';
 import { TextLanguage } from '@/types/database/text-language.type';
 import { User } from '@/utils/decorators/user.decorator';
+import { forum_topics_logs_actions_enum } from '@/src/admin/forum/database/schema/topics';
 
-registerEnumType(ForumTopicsActions, {
-  name: 'ForumTopicsActions'
+registerEnumType(forum_topics_logs_actions_enum, {
+  name: 'Forum_topics_logs_actions_enum'
 });
 
 @ObjectType()
@@ -14,8 +14,8 @@ export class ShowPostsForumsMetaTags {
   @Field(() => String)
   id: string;
 
-  @Field(() => ForumTopicsActions)
-  action: ForumTopicsActions;
+  @Field(() => forum_topics_logs_actions_enum)
+  action: typeof forum_topics_logs_actions_enum;
 
   @Field(() => User)
   member: User;
@@ -33,7 +33,7 @@ export class ShowPostsForums {
   content: TextLanguage[];
 
   @Field(() => User)
-  author: User;
+  user: User;
 
   @Field(() => Int)
   created: number;
