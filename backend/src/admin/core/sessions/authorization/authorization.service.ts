@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 
 import { AuthorizationAdminSessionsObj } from './dto/authorization.obj';
 
 import { Ctx } from '@/types/context.type';
-import { CONFIG } from '@/config';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { currentDate } from '@/functions/date';
 import { DatabaseService } from '@/database/database.service';
@@ -13,11 +13,13 @@ import { DatabaseService } from '@/database/database.service';
 export class AuthorizationAdminSessionsService {
   constructor(
     private databaseService: DatabaseService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private configService: ConfigService
   ) {}
 
   async authorization({ req }: Ctx): Promise<AuthorizationAdminSessionsObj> {
-    const login_token = req.cookies[CONFIG.cookies.login_token.admin.name];
+    const login_token =
+      req.cookies[this.configService.getOrThrow('cookies.login_token.admin.name')];
 
     if (!login_token) {
       throw new AccessDeniedError();

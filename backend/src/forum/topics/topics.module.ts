@@ -4,6 +4,7 @@ import { ShowTopicsForumsResolver } from './show/show.resolver';
 import { ShowTopicsForumsService } from './show/show.service';
 import { CreateForumTopicsResolver } from './create/create.resolver';
 import { CreateForumTopicsService } from './create/create.service';
+import { PostsForumModule } from '../posts/topics.module';
 
 import { LockToggleForumTopicsResolver } from '@/src/forum/topics/actions/lock_unlock/lock_toggle.resolver';
 import { LockToggleForumTopicsService } from '@/src/forum/topics/actions/lock_unlock/lock_toggle.service';
@@ -16,6 +17,7 @@ import { LockToggleForumTopicsService } from '@/src/forum/topics/actions/lock_un
     CreateForumTopicsService,
     LockToggleForumTopicsResolver,
     LockToggleForumTopicsService
-  ]
+  ],
+  imports: [PostsForumModule]
 })
 export class TopicsForumModule {}

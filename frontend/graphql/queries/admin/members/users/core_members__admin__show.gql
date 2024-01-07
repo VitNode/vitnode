@@ -23,20 +23,6 @@ query Core_members__admin__show(
       totalCount
     }
     edges {
-      avatar {
-        created
-        description
-        extension
-        file_size
-        id
-        member_id
-        mimetype
-        module
-        module_id
-        name
-        position
-        url
-      }
       avatar_color
       email
       id
@@ -45,7 +31,7 @@ query Core_members__admin__show(
       group {
         id
         name {
-          id_language
+          language_id
           value
         }
       }

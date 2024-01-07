@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { genSalt, hash } from 'bcrypt';
 import { count } from 'drizzle-orm';
+import { ConfigService } from '@nestjs/config';
 
 import { SignUpCoreMembersArgs } from './dto/sign_up.args';
 import { SignUpCoreMembersObj } from './dto/sign_up.obj';
 
 import { CustomError } from '@/utils/errors/CustomError';
 import { removeSpecialCharacters } from '@/functions/remove-special-characters';
-import { CONFIG } from '@/config';
 import { currentDate } from '@/functions/date';
 import { generateAvatarColor } from '@/functions/avatar/generateAvatarColor';
 import { DatabaseService } from '@/database/database.service';
@@ -15,7 +15,10 @@ import { core_users } from '@/src/admin/core/database/schema/users';
 
 @Injectable()
 export class SignUpCoreMembersService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private configService: ConfigService
+  ) {}
 
   protected getGroupId = async (): Promise<string> => {
     const countUsers = await this.databaseService.db.select({ count: count() }).from(core_users);
@@ -69,7 +72,7 @@ export class SignUpCoreMembersService {
 
     const dateNow = currentDate();
 
-    const passwordSalt = await genSalt(CONFIG.password_salt);
+    const passwordSalt = await genSalt(this.configService.getOrThrow('password_salt'));
     const hashPassword = await hash(password, passwordSalt);
 
     const user = await this.databaseService.db

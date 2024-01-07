@@ -33,7 +33,7 @@ export const LoadReadOnlyEditor = ({ value }: Props) => {
   useEffect(() => {
     if (value.length === 0) return;
 
-    const currentValue = value.find(item => item.id_language === locale)?.value;
+    const currentValue = value.find(item => item.language_id === locale)?.value;
     const lastValue = value.at(-1)?.value;
 
     if (!currentValue && lastValue) {

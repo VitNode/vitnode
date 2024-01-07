@@ -14,13 +14,17 @@ import { CoreModule } from './core/core.module';
 import { AdminModule } from './admin/admin.module';
 import { GlobalAdminSessionsModule } from './admin/core/sessions/sessions.module';
 import { ModulesModule } from './modules.module';
+import { configuration } from './configuration';
 
 import { Ctx } from '@/types/context.type';
 import { DatabaseModule } from '@/database/database.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [configuration]
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       playground: false,

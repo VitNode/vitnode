@@ -36,5 +36,5 @@ export class UploadCoreAttachmentsObj {
   file_size: number;
 
   @Field(() => String)
-  member_id: string;
+  user_id: string;
 }

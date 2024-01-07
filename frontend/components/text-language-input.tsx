@@ -9,7 +9,7 @@ import type { TextLanguage } from '@/graphql/hooks';
 
 export const zodTextLanguageInputType = z.array(
   z.object({
-    id_language: z.string(),
+    language_id: z.string(),
     value: z.string()
   })
 );
@@ -25,7 +25,7 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
     const [selectedLanguage, setSelectedLanguage] = useState(defaultLanguage);
     const valueAsArray = Array.isArray(value) ? value : [];
     const currentValue =
-      valueAsArray.find(item => item.id_language === selectedLanguage)?.value ?? '';
+      valueAsArray.find(item => item.language_id === selectedLanguage)?.value ?? '';
 
     return (
       <div className="flex gap-2">
@@ -35,9 +35,9 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
           onChange={e => {
             if (e.target.value) {
               onChange([
-                ...valueAsArray.filter(item => item.id_language !== selectedLanguage),
+                ...valueAsArray.filter(item => item.language_id !== selectedLanguage),
                 {
-                  id_language: selectedLanguage,
+                  language_id: selectedLanguage,
                   value: e.target.value
                 }
               ]);
@@ -45,7 +45,7 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
               return;
             }
 
-            onChange(valueAsArray.filter(item => item.id_language !== selectedLanguage));
+            onChange(valueAsArray.filter(item => item.language_id !== selectedLanguage));
           }}
           value={currentValue}
           ref={ref}

@@ -40,6 +40,17 @@ export const forum_forums_name = pgTable('forum_forums_name', {
   value: varchar('value').notNull()
 });
 
+export const relations_forum_forums_name = relations(forum_forums_name, ({ one }) => ({
+  forum: one(forum_forums, {
+    fields: [forum_forums_name.forum_id],
+    references: [forum_forums.id]
+  }),
+  language: one(core_languages, {
+    fields: [forum_forums_name.language_id],
+    references: [core_languages.id]
+  })
+}));
+
 export const forum_forums_description = pgTable('forum_forums_description', {
   forum_id: uuid('forum_id')
     .notNull()
@@ -54,6 +65,20 @@ export const forum_forums_description = pgTable('forum_forums_description', {
   value: varchar('value').notNull()
 });
 
+export const relations_forum_forums_description = relations(
+  forum_forums_description,
+  ({ one }) => ({
+    forum: one(forum_forums, {
+      fields: [forum_forums_description.forum_id],
+      references: [forum_forums.id]
+    }),
+    language: one(core_languages, {
+      fields: [forum_forums_description.language_id],
+      references: [core_languages.id]
+    })
+  })
+);
+
 export const forum_forums_permissions = pgTable('forum_forums_permissions', {
   forum_id: uuid('forum_id').references(() => forum_forums.id, {
     onDelete: 'cascade'
@@ -66,3 +91,17 @@ export const forum_forums_permissions = pgTable('forum_forums_permissions', {
   can_create: boolean('can_create').notNull().default(false),
   can_reply: boolean('can_reply').notNull().default(false)
 });
+
+export const relations_forum_forums_permissions = relations(
+  forum_forums_permissions,
+  ({ one }) => ({
+    forum: one(forum_forums, {
+      fields: [forum_forums_permissions.forum_id],
+      references: [forum_forums.id]
+    }),
+    group: one(core_groups, {
+      fields: [forum_forums_permissions.group_id],
+      references: [core_groups.id]
+    })
+  })
+);

@@ -5,7 +5,6 @@ import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 import { RedisIoAdapter } from './redis.adapter';
 
-import { CONFIG } from '@/config';
 import { graphqlUploadExpress } from '@/utils/graphql-upload/graphqlUploadExpress';
 
 async function bootstrap() {
@@ -23,9 +22,9 @@ async function bootstrap() {
   await redisIoAdapter.connectToRedis();
   app.useWebSocketAdapter(redisIoAdapter);
 
-  await app.listen(CONFIG.port, null, async () => {
+  await app.listen(process.env.PORT ?? '8080', null, async () => {
     // eslint-disable-next-line no-console
-    console.log(`Application is running on: http://localhost:${CONFIG.port}/graphql`);
+    console.log(`Application is running on: http://localhost:${process.env.PORT ?? 8080}/graphql`);
   });
 }
 bootstrap();

@@ -3,28 +3,28 @@ query Forum_forums__show_item($cursor: String, $first: Int, $last: Int, $forumId
     edges {
       id
       description {
-        id_language
+        language_id
         value
       }
       name {
-        id_language
+        language_id
         value
       }
       children {
         id
         name {
-          id_language
+          language_id
           value
         }
         children {
           id
           name {
-            id_language
+            language_id
             value
           }
         }
         description {
-          id_language
+          language_id
           value
         }
       }
@@ -38,31 +38,17 @@ query Forum_forums__show_item($cursor: String, $first: Int, $last: Int, $forumId
       created
       id
       title {
-        id_language
+        language_id
         value
       }
-      author {
-        avatar {
-          created
-          description
-          extension
-          file_size
-          id
-          member_id
-          mimetype
-          module
-          module_id
-          name
-          position
-          url
-        }
+      user {
         id
         name
         avatar_color
         group {
           id
           name {
-            id_language
+            language_id
             value
           }
         }

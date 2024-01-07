@@ -1,24 +1,10 @@
 query Core_members__profiles($first: Int, $findByIds: [String!]) {
   core_members__show(first: $first, findByIds: $findByIds) {
     edges {
-      avatar {
-        created
-        description
-        extension
-        file_size
-        id
-        member_id
-        mimetype
-        module
-        module_id
-        name
-        position
-        url
-      }
       avatar_color
       group {
         name {
-          id_language
+          language_id
           value
         }
       }

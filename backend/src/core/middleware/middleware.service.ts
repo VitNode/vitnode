@@ -1,18 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { UAParser } from 'ua-parser-js';
 import { eq } from 'drizzle-orm';
+import { ConfigService } from '@nestjs/config';
 
 import { CoreMiddlewareObj } from './dto/middleware.obj';
 
 import { Ctx } from '@/types/context.type';
-import { CONFIG } from '@/config';
 import { convertUnixTime, currentDate } from '@/functions/date';
 import { DatabaseService } from '@/database/database.service';
 import { core_sessions_known_devices } from '@/src/admin/core/database/schema/sessions';
 
 @Injectable()
 export class CoreMiddlewareService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private configService: ConfigService
+  ) {}
 
   protected getUserAgentData(userAgent: string) {
     const user_parser = new UAParser(userAgent).getResult();
@@ -31,22 +34,28 @@ export class CoreMiddlewareService {
   }
 
   protected async createKnowDevice({ req, res }: Ctx): Promise<string> {
-    const device = await this.databaseService.db
+    const dataDevice = await this.databaseService.db
       .insert(core_sessions_known_devices)
       .values({
         ...this.getUserAgentData(req.headers['user-agent']),
         last_seen: currentDate(),
         ip_address: req.ip
       })
-      .returning()[0];
+      .returning();
+
+    const device = dataDevice[0];
 
     // Set cookie
-    res.cookie(CONFIG.cookies.known_device.name, device.id, {
+    res.cookie(this.configService.getOrThrow('cookies.known_device.name'), device.id, {
       httpOnly: true,
       secure: true,
-      domain: CONFIG.cookie.domain,
+      domain: this.configService.getOrThrow('cookies.domain'),
       path: '/',
-      expires: new Date(convertUnixTime(currentDate() + CONFIG.cookies.known_device.expiresIn)),
+      expires: new Date(
+        convertUnixTime(
+          currentDate() + this.configService.getOrThrow('cookies.known_device.expiresIn')
+        )
+      ),
       sameSite: 'none'
     });
 
@@ -54,7 +63,8 @@ export class CoreMiddlewareService {
   }
 
   protected async checkDevice({ req, res }: Ctx): Promise<string> {
-    const know_device_id: string | undefined = req.cookies[CONFIG.cookies.known_device.name];
+    const know_device_id: string | undefined =
+      req.cookies[this.configService.getOrThrow('cookies.known_device.name')];
     if (!know_device_id) {
       return await this.createKnowDevice({ req, res });
     }
@@ -82,12 +92,16 @@ export class CoreMiddlewareService {
       .where(eq(core_sessions_known_devices.id, device.id));
 
     // Update sign in date
-    res.cookie(CONFIG.cookies.known_device.name, know_device_id, {
+    res.cookie(this.configService.getOrThrow('cookies.known_device.name'), know_device_id, {
       httpOnly: true,
       secure: true,
-      domain: CONFIG.cookie.domain,
+      domain: this.configService.getOrThrow('cookies.domain'),
       path: '/',
-      expires: new Date(convertUnixTime(currentDate() + CONFIG.cookies.known_device.expiresIn)),
+      expires: new Date(
+        convertUnixTime(
+          currentDate() + this.configService.getOrThrow('cookies.known_device.expiresIn')
+        )
+      ),
       sameSite: 'none'
     });
 

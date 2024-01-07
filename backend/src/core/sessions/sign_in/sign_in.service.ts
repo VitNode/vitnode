@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { compare } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 
 import { SignInCoreSessionsArgs } from './dto/sign_in.args';
 
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { Ctx } from '@/types/context.type';
-import { CONFIG } from '@/config';
 import { convertUnixTime, currentDate } from '@/functions/date';
 import { DatabaseService } from '@/database/database.service';
 import { core_admin_sessions } from '@/src/admin/core/database/schema/admins';
@@ -24,7 +24,8 @@ interface CreateSessionArgs extends Ctx {
 export class SignInCoreSessionsService {
   constructor(
     private databaseService: DatabaseService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private configService: ConfigService
   ) {}
 
   protected async createSession({
@@ -36,11 +37,10 @@ export class SignInCoreSessionsService {
     res,
     userId
   }: CreateSessionArgs) {
-    if (!CONFIG.cookies.login_token.secret) {
-      throw new Error('Login token secret is not defined in .env file');
-    }
+    const loginTokenSecret = this.configService.getOrThrow('login_token_secret');
 
-    const know_device_id: string | undefined = req.cookies[CONFIG.cookies.known_device.name];
+    const know_device_id: string | undefined =
+      req.cookies[this.configService.getOrThrow('cookies.known_device.name')];
     if (!know_device_id) {
       throw new AccessDeniedError();
     }
@@ -59,31 +59,34 @@ export class SignInCoreSessionsService {
         email
       },
       {
-        secret: CONFIG.cookies.login_token.secret,
-        expiresIn: CONFIG.cookies.login_token.expiresIn
+        secret: loginTokenSecret,
+        expiresIn: this.configService.getOrThrow('cookies.login_token.expiresIn')
       }
     );
 
-    const expires = remember
-      ? CONFIG.cookies.login_token.expiresInRemember
-      : CONFIG.cookies.login_token.expiresIn;
+    const expires = this.configService.getOrThrow(
+      `cookies.login_token.${remember ? 'expiresInRemember' : 'expiresIn'}`
+    );
 
     if (admin) {
       await this.databaseService.db.insert(core_admin_sessions).values({
         login_token,
         user_id: userId,
         last_seen: currentDate(),
-        expires: currentDate() + CONFIG.cookies.login_token.admin.expiresIn
+        expires:
+          currentDate() + this.configService.getOrThrow('cookies.login_token.admin.expiresIn')
       });
 
       // Set cookie for session
-      res.cookie(CONFIG.cookies.login_token.admin.name, login_token, {
+      res.cookie(this.configService.getOrThrow('cookies.login_token.admin.name'), login_token, {
         httpOnly: true,
         secure: true,
-        domain: CONFIG.cookie.domain,
+        domain: this.configService.getOrThrow('cookies.domain'),
         path: '/',
         expires: new Date(
-          convertUnixTime(currentDate() + CONFIG.cookies.login_token.admin.expiresIn)
+          convertUnixTime(
+            currentDate() + this.configService.getOrThrow('cookies.login_token.admin.expiresIn')
+          )
         ),
         sameSite: 'none'
       });
@@ -99,13 +102,17 @@ export class SignInCoreSessionsService {
     });
 
     // Set cookie for session
-    res.cookie(CONFIG.cookies.login_token.name, login_token, {
+    res.cookie(this.configService.getOrThrow('cookies.login_token.name'), login_token, {
       httpOnly: true,
       secure: true,
-      domain: CONFIG.cookie.domain,
+      domain: this.configService.getOrThrow('cookies.domain'),
       path: '/',
       expires: remember
-        ? new Date(convertUnixTime(currentDate() + CONFIG.cookies.login_token.expiresIn))
+        ? new Date(
+            convertUnixTime(
+              currentDate() + this.configService.getOrThrow('cookies.login_token.expiresInRemember')
+            )
+          )
         : null,
       sameSite: 'none'
     });

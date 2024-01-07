@@ -12,12 +12,12 @@ mutation Forum_forums__admin__create(
   ) {
     created
     description {
-      id_language
+      language_id
       value
     }
     id
     name {
-      id_language
+      language_id
       value
     }
     position

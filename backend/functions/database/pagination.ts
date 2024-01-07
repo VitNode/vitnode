@@ -42,7 +42,7 @@ export function outputPagination<T>({
     end: currentEdges.at(-1)?.id ?? ''
   };
 
-  if (!isUUID(cursor)) {
+  if (cursor && !isUUID(cursor)) {
     return {
       edges: [],
       pageInfo: {

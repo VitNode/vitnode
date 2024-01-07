@@ -15,7 +15,7 @@ export const useTextLang = () => {
       return text[0].value;
     }
 
-    const textFromLang = text.find(t => t.id_language === locale);
+    const textFromLang = text.find(t => t.language_id === locale);
 
     if (textFromLang) {
       return textFromLang.value;

@@ -1,16 +1,16 @@
-mutation Core_members__avatar__upload($file: Upload!) {
-  core_members__avatar__upload(file: $file) {
-    id
-    created
-    description
-    extension
-    file_size
-    member_id
-    mimetype
-    module
-    module_id
-    name
-    position
-    url
-  }
-}
+# mutation Core_members__avatar__upload($file: Upload!) {
+#   core_members__avatar__upload(file: $file) {
+#     id
+#     created
+#     description
+#     extension
+#     file_size
+#     user_id
+#     mimetype
+#     module
+#     module_id
+#     name
+#     position
+#     url
+#   }
+# }

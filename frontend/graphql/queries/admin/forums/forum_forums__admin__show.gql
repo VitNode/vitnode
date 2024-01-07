@@ -3,11 +3,11 @@ query Forum_forums__admin__show($first: Int, $cursor: String, $parentId: String)
     edges {
       id
       description {
-        id_language
+        language_id
         value
       }
       name {
-        id_language
+        language_id
         value
       }
       position
@@ -15,12 +15,12 @@ query Forum_forums__admin__show($first: Int, $cursor: String, $parentId: String)
       children {
         created
         description {
-          id_language
+          language_id
           value
         }
         id
         name {
-          id_language
+          language_id
           value
         }
         position

@@ -8,36 +8,22 @@ query Forum_topics__show(
   forum_topics__show(id: $id, first: $first) {
     edges {
       content {
-        id_language
+        language_id
         value
       }
       created
       id
       locked
       title {
-        id_language
+        language_id
         value
       }
-      author {
-        avatar {
-          created
-          description
-          extension
-          file_size
-          id
-          member_id
-          mimetype
-          module
-          module_id
-          name
-          position
-          url
-        }
+      user {
         avatar_color
         group {
           id
           name {
-            id_language
+            language_id
             value
           }
         }
@@ -47,7 +33,7 @@ query Forum_topics__show(
       forum {
         id
         name {
-          id_language
+          language_id
           value
         }
       }
@@ -59,29 +45,15 @@ query Forum_topics__show(
       ... on ShowPostsForums {
         content {
           value
-          id_language
+          language_id
         }
         id
-        author {
-          avatar {
-            created
-            description
-            extension
-            file_size
-            id
-            member_id
-            mimetype
-            module
-            module_id
-            name
-            position
-            url
-          }
+        user {
           avatar_color
           group {
             id
             name {
-              id_language
+              language_id
               value
             }
           }
@@ -94,25 +66,11 @@ query Forum_topics__show(
         action
         id
         member {
-          avatar {
-            created
-            description
-            extension
-            file_size
-            id
-            member_id
-            mimetype
-            module
-            module_id
-            name
-            position
-            url
-          }
           avatar_color
           group {
             id
             name {
-              id_language
+              language_id
               value
             }
           }
