@@ -1,15 +1,15 @@
-import { boolean, integer, pgTable, uuid, varchar } from 'drizzle-orm/pg-core';
+import { boolean, integer, pgTable, serial } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 import { core_groups } from './groups';
 import { core_users } from './users';
 
 export const core_moderators_permissions = pgTable('core_moderators_permissions', {
-  id: uuid('id').defaultRandom().primaryKey(),
-  group_id: uuid('group_id').references(() => core_groups.id, {
+  id: serial('id').primaryKey(),
+  group_id: serial('group_id').references(() => core_groups.id, {
     onDelete: 'cascade'
   }),
-  user_id: varchar('user_id').references(() => core_users.id, {
+  user_id: serial('user_id').references(() => core_users.id, {
     onDelete: 'cascade'
   }),
   unrestricted: boolean('unrestricted').notNull().default(false),

@@ -1,4 +1,4 @@
-import { boolean, integer, pgEnum, pgTable, uuid, varchar } from 'drizzle-orm/pg-core';
+import { boolean, integer, pgEnum, pgTable, serial, varchar } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 import { forum_forums } from './forums';
@@ -8,8 +8,8 @@ import { core_languages } from '@/src/admin/core/database/schema/languages';
 import { core_users } from '@/src/admin/core/database/schema/users';
 
 export const forum_topics = pgTable('forum_topics', {
-  id: uuid('id').defaultRandom().primaryKey(),
-  forum_id: uuid('forum_id')
+  id: serial('id').primaryKey(),
+  forum_id: serial('forum_id')
     .notNull()
     .references(() => forum_forums.id, {
       onDelete: 'cascade'
@@ -30,12 +30,12 @@ export const relations_forum_topics = relations(forum_topics, ({ many, one }) =>
 }));
 
 export const forum_topics_titles = pgTable('forum_topics_titles', {
-  topic_id: uuid('topic_id')
+  topic_id: serial('topic_id')
     .notNull()
     .references(() => forum_topics.id, {
       onDelete: 'cascade'
     }),
-  language_id: varchar('language_id')
+  language_id: serial('language_id')
     .notNull()
     .references(() => core_languages.id, {
       onDelete: 'cascade'
@@ -46,14 +46,14 @@ export const forum_topics_titles = pgTable('forum_topics_titles', {
 export const forum_topics_logs_actions_enum = pgEnum('actions', ['lock', 'unlock']);
 
 export const forum_topics_logs = pgTable('forum_topics_logs', {
-  id: uuid('id').defaultRandom().primaryKey(),
-  user_id: varchar('user_id').references(() => core_users.id, {
+  id: serial('id').primaryKey(),
+  user_id: serial('user_id').references(() => core_users.id, {
     onDelete: 'cascade'
   }),
   ip_address: varchar('ip_address', { length: 45 }).notNull(),
   created: integer('created').notNull(),
   action: forum_topics_logs_actions_enum('action').notNull(),
-  topic_id: uuid('topic_id').references(() => forum_topics.id, {
+  topic_id: serial('topic_id').references(() => forum_topics.id, {
     onDelete: 'cascade'
   })
 });

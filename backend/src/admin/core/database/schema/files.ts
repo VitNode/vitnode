@@ -1,14 +1,14 @@
-import { integer, pgTable, text, uuid, varchar } from 'drizzle-orm/pg-core';
+import { integer, pgTable, serial, text, varchar } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 import { core_users } from './users';
 
 export const core_files = pgTable('core_files', {
-  id: uuid('id').defaultRandom().primaryKey(),
+  id: serial('id').primaryKey(),
   extension: varchar('extension', { length: 32 }).notNull(),
   name: varchar('name', { length: 255 }).notNull(),
   url: varchar('url', { length: 255 }).notNull(),
-  user_id: varchar('user_id')
+  user_id: serial('user_id')
     .notNull()
     .references(() => core_users.id, {
       onDelete: 'cascade'
@@ -30,7 +30,7 @@ export const relations_core_files = relations(core_files, ({ one }) => ({
 }));
 
 export const core_files_avatars = pgTable('core_files_avatars', {
-  id: uuid('id').defaultRandom().primaryKey(),
+  id: serial('id').primaryKey(),
   url: varchar('url', { length: 255 }).notNull(),
   created: integer('created').notNull(),
   file_size: integer('file_size').notNull()
@@ -44,7 +44,7 @@ export const relations_core_files_avatars = relations(core_files_avatars, ({ one
 }));
 
 export const core_files_covers = pgTable('core_files_covers', {
-  id: uuid('id').defaultRandom().primaryKey(),
+  id: serial('id').primaryKey(),
   url: varchar('url', { length: 255 }).notNull(),
   created: integer('created').notNull(),
   file_size: integer('file_size').notNull()

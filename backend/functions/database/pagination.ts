@@ -1,9 +1,11 @@
-import { Operators, SQL, TableRelationalConfig } from 'drizzle-orm';
+import { Operators, SQL, TableRelationalConfig, and, eq, lte } from 'drizzle-orm';
 
 import { isUUID } from '../is-uuid';
 
 import { PageInfo } from '@/types/database/pagination.type';
 import { CustomError } from '@/utils/errors/CustomError';
+import { DatabaseService } from '@/database/database.service';
+import { PgTableWithColumns, TableConfig } from 'drizzle-orm/pg-core';
 
 type DataInterface<T> = T & {
   id: string;
@@ -136,5 +138,47 @@ export function inputPagination<T extends TableRelationalConfig>({
 
       return where ? and(whereCursor, where) : whereCursor;
     }
+  };
+}
+
+interface InputPaginationCursorArgs<T extends TableConfig> {
+  databaseService: DatabaseService;
+  cursor: string | null;
+  database: PgTableWithColumns<T>;
+  first: number | null;
+  last?: number | null;
+}
+
+export async function inputPaginationCursor<T extends TableConfig>({
+  databaseService,
+  database,
+  cursor: cursorId,
+  first,
+  last
+}: InputPaginationCursorArgs<T>) {
+  // Check if database has `created` and `id` columns
+  if (!database['created'] || !database['id']) {
+    throw new CustomError({
+      code: 'PAGINATION_ERROR',
+      message: 'You must provide `created` and `id` columns in database'
+    });
+  }
+
+  const cursor = await databaseService.db
+    .select()
+    .from(database)
+    .where(eq(database.id, cursorId))
+    .limit(1);
+
+  if (cursor.length === 0) {
+    return {
+      limit: first || last,
+      where: undefined
+    };
+  }
+
+  return {
+    limit: (last || first) + 1,
+    where: and(lte(database['created'], cursor[0]['created']), eq(database['id'], cursorId))
   };
 }

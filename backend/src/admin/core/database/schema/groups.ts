@@ -1,10 +1,10 @@
 import { relations } from 'drizzle-orm';
-import { boolean, integer, pgTable, uuid, varchar } from 'drizzle-orm/pg-core';
+import { boolean, integer, pgTable, serial, varchar } from 'drizzle-orm/pg-core';
 
 import { core_languages } from './languages';
 
 export const core_groups = pgTable('core_groups', {
-  id: uuid('id').defaultRandom().primaryKey(),
+  id: serial('id').primaryKey(),
   created: integer('created').notNull(),
   updated: integer('updated').notNull(),
   protected: boolean('protected').notNull().default(false),
@@ -18,13 +18,13 @@ export const relations_core_groups = relations(core_groups, ({ many }) => ({
 }));
 
 export const core_groups_names = pgTable('core_groups_names', {
-  id: uuid('id').defaultRandom().primaryKey(),
-  group_id: uuid('group_id')
+  id: serial('id').primaryKey(),
+  group_id: serial('group_id')
     .notNull()
     .references(() => core_groups.id, {
       onDelete: 'cascade'
     }),
-  language_id: varchar('language_id', { length: 32 })
+  language_id: serial('language_id')
     .notNull()
     .references(() => core_languages.id, {
       onDelete: 'cascade'

@@ -1,15 +1,15 @@
-import { boolean, integer, pgTable, uuid, varchar } from 'drizzle-orm/pg-core';
+import { boolean, integer, pgTable, serial, varchar } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 import { core_groups } from './groups';
 import { core_users } from './users';
 
 export const core_admin_permissions = pgTable('core_admin_permissions', {
-  id: uuid('id').defaultRandom().primaryKey(),
-  group_id: uuid('group_id').references(() => core_groups.id, {
+  id: serial('id').primaryKey(),
+  group_id: serial('group_id').references(() => core_groups.id, {
     onDelete: 'cascade'
   }),
-  user_id: varchar('user_id').references(() => core_users.id, {
+  user_id: serial('user_id').references(() => core_users.id, {
     onDelete: 'cascade'
   }),
   unrestricted: boolean('unrestricted').notNull().default(false),
@@ -31,7 +31,7 @@ export const relations_core_admin_permissions = relations(core_admin_permissions
 
 export const core_admin_sessions = pgTable('core_admin_sessions', {
   login_token: varchar('login_token', { length: 255 }).primaryKey(),
-  user_id: varchar('user_id')
+  user_id: serial('user_id')
     .notNull()
     .references(() => core_users.id, {
       onDelete: 'cascade'

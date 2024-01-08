@@ -1,4 +1,4 @@
-import { integer, pgTable, text, uuid, varchar } from 'drizzle-orm/pg-core';
+import { integer, pgTable, serial, text, varchar } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 import { core_users } from './users';
@@ -6,7 +6,7 @@ import { core_admin_sessions } from './admins';
 
 export const core_sessions = pgTable('core_sessions', {
   login_token: varchar('login_token', { length: 255 }).primaryKey(),
-  user_id: varchar('user_id')
+  user_id: serial('user_id')
     .notNull()
     .references(() => core_users.id, {
       onDelete: 'cascade'
@@ -24,7 +24,7 @@ export const relations_core_sessions = relations(core_sessions, ({ many, one }) 
 }));
 
 export const core_sessions_known_devices = pgTable('core_sessions_known_devices', {
-  id: uuid('id').defaultRandom().primaryKey(),
+  id: serial('id').primaryKey(),
   session_id: varchar('session_id').references(() => core_sessions.login_token, {
     onDelete: 'cascade'
   }),

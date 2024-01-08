@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { and, count, eq, inArray, or } from 'drizzle-orm';
+import { and, count, ilike, inArray, or } from 'drizzle-orm';
 
 import { ShowAdminMembersObj } from './dto/show.obj';
 import { ShowAdminMembersArgs } from './dto/show.args';
@@ -20,11 +20,13 @@ export class ShowAdminMembersService {
     search,
     sortBy
   }: ShowAdminMembersArgs): Promise<ShowAdminMembersObj> {
-    const where = or(
-      eq(core_users.name, search ?? ''),
-      eq(core_users.email, search ?? ''),
-      eq(core_users.id, search ?? ''),
-      and(inArray(core_users.group_id, groups && groups.length > 0 ? groups : undefined))
+    const where = and(
+      or(
+        ilike(core_users.name, `%${search}%`),
+        ilike(core_users.email, `%${search}%`),
+        ilike(core_users.id, `%${search}%`)
+      ),
+      groups && groups.length > 0 ? inArray(core_users.group_id, groups) : undefined
     );
 
     const edges = await this.databaseService.db.query.core_users.findMany({

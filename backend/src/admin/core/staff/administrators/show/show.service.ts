@@ -24,7 +24,7 @@ export class ShowAdminStaffAdministratorsService {
         first,
         last
       }),
-      orderBy: (table, { asc }) => [asc(table.updated)],
+      orderBy: (table, { desc }) => [desc(table.updated)],
       with: {
         group: {
           with: {

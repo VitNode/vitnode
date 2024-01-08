@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { IsEmail, Matches, MaxLength, MinLength } from 'class-validator';
 
 import { nameRegex } from '@/utils/regex/name.regex';
@@ -18,6 +18,6 @@ export class SignUpCoreMembersObj {
   @Field(() => Boolean, { nullable: true })
   newsletter: boolean | null;
 
-  @Field(() => String)
-  group_id: string;
+  @Field(() => Int)
+  group_id: number;
 }

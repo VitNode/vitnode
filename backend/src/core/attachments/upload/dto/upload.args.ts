@@ -17,8 +17,8 @@ export class UploadCoreAttachmentsArgs {
   @Field(() => String)
   module: string;
 
-  @Field(() => String)
-  module_id: string;
+  @Field(() => Int)
+  module_id: number;
 }
 
 @ObjectType()

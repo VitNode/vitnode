@@ -36,23 +36,27 @@ export class EditAdminGroupsService {
           // If value is empty, do nothing
           if (!nameExist.value.trim()) return;
 
-          return await this.databaseService.db
+          const update = await this.databaseService.db
             .update(core_groups_names)
             .set({
               value: item.value
             })
             .where(eq(core_groups_names.id, nameExist.id))
-            .returning()[0];
+            .returning();
+
+          return update[0];
         }
 
-        return await this.databaseService.db
+        const update = await this.databaseService.db
           .insert(core_groups_names)
           .values({
             group_id: id,
             language_id: item.language_id,
             value: item.value
           })
-          .returning()[0];
+          .returning();
+
+        return update[0];
       })
     );
 
@@ -73,13 +77,20 @@ export class EditAdminGroupsService {
       .from(core_users)
       .where(eq(core_users.group_id, id));
 
-    const updateGroup = await this.databaseService.db
+    await this.databaseService.db
       .update(core_groups)
       .set({
         updated: currentDate()
       })
       .where(eq(core_groups.id, id))
-      .returning()[0];
+      .returning();
+
+    const updateGroup = await this.databaseService.db.query.core_groups.findFirst({
+      where: (table, { eq }) => eq(table.id, id),
+      with: {
+        name: true
+      }
+    });
 
     return {
       users_count: usersCount[0].count,

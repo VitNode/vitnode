@@ -1,4 +1,4 @@
-import { integer, pgTable, text, uuid, varchar } from 'drizzle-orm/pg-core';
+import { integer, pgTable, serial, text, varchar } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 import { forum_forums } from './forums';
@@ -8,11 +8,11 @@ import { core_users } from '@/src/admin/core/database/schema/users';
 import { core_languages } from '@/src/admin/core/database/schema/languages';
 
 export const forum_posts = pgTable('forum_posts', {
-  id: uuid('id').defaultRandom().primaryKey(),
-  topic_id: uuid('topic_id').references(() => forum_topics.id, {
+  id: serial('id').primaryKey(),
+  topic_id: serial('topic_id').references(() => forum_topics.id, {
     onDelete: 'cascade'
   }),
-  user_id: varchar('user_id').references(() => core_users.id, {
+  user_id: serial('user_id').references(() => core_users.id, {
     onDelete: 'cascade'
   }),
   ip_address: varchar('ip_address', { length: 45 }),
@@ -33,11 +33,11 @@ export const relations_forum_posts = relations(forum_posts, ({ many, one }) => (
 }));
 
 export const forum_posts_content = pgTable('forum_posts_content', {
-  id: uuid('id').defaultRandom().primaryKey(),
-  topic_id: uuid('topic_id').references(() => forum_forums.id, {
+  id: serial('id').primaryKey(),
+  topic_id: serial('topic_id').references(() => forum_forums.id, {
     onDelete: 'cascade'
   }),
-  language_id: varchar('language_id')
+  language_id: serial('language_id')
     .notNull()
     .references(() => core_languages.id, {
       onDelete: 'cascade'
@@ -46,18 +46,18 @@ export const forum_posts_content = pgTable('forum_posts_content', {
 });
 
 export const forum_posts_timeline = pgTable('forum_posts_timeline', {
-  id: uuid('id').defaultRandom().primaryKey(),
-  post_id: uuid('post_id').references(() => forum_posts.id, {
+  id: serial('id').primaryKey(),
+  post_id: serial('post_id').references(() => forum_posts.id, {
     onDelete: 'cascade'
   }),
   log: text('log'),
-  topic_log_id: uuid('topic_log_id').references(() => forum_topics_logs.id, {
+  topic_log_id: serial('topic_log_id').references(() => forum_topics_logs.id, {
     onDelete: 'cascade'
   }),
   created: integer('created').notNull()
 });
 
-export const relations_forum_posts_timeline = relations(forum_posts_timeline, ({ many, one }) => ({
+export const relations_forum_posts_timeline = relations(forum_posts_timeline, ({ one }) => ({
   post: one(forum_posts, {
     fields: [forum_posts_timeline.post_id],
     references: [forum_posts.id]

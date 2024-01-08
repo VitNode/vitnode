@@ -14,8 +14,8 @@ export class ShowAdminGroupsObj {
 
 @ObjectType()
 export class ShowAdminGroups {
-  @Field(() => String)
-  id: string;
+  @Field(() => Int)
+  id: number;
 
   @Field(() => [TextLanguage])
   name: TextLanguage[];

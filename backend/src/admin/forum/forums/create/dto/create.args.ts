@@ -1,12 +1,12 @@
-import { ArgsType, Field, InputType } from '@nestjs/graphql';
+import { ArgsType, Field, InputType, Int } from '@nestjs/graphql';
 import { ArrayMinSize, IsArray, ValidateNested } from 'class-validator';
 
 import { TextLanguageInput } from '@/types/database/text-language.type';
 
 @InputType()
 class GroupsPermissionsCreateForumForums {
-  @Field(() => String)
-  id: string;
+  @Field(() => Int)
+  id: number;
 
   @Field(() => Boolean)
   view: boolean;
@@ -51,8 +51,8 @@ export class CreateForumForumsArgs {
   @Field(() => [TextLanguageInput])
   description: TextLanguageInput[];
 
-  @Field(() => String, { nullable: true })
-  parent_id: string | null;
+  @Field(() => Int, { nullable: true })
+  parent_id: number | null;
 
   @Field(() => PermissionsCreateForumForums)
   permissions: PermissionsCreateForumForums;

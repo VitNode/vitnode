@@ -1,12 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { count, eq, like } from 'drizzle-orm';
+import { count, eq, ilike, inArray } from 'drizzle-orm';
 
 import { ShowAdminGroupsArgs } from './dto/show.args';
 import { ShowAdminGroupsObj } from './dto/show.obj';
 
 import { DatabaseService } from '@/database/database.service';
 import { core_groups, core_groups_names } from '@/src/admin/core/database/schema/groups';
-import { outputPagination, inputPagination } from '@/functions/database/pagination';
+import {
+  outputPagination,
+  inputPagination,
+  inputPaginationCursor
+} from '@/functions/database/pagination';
 
 @Injectable()
 export class ShowAdminGroupsService {
@@ -19,16 +23,34 @@ export class ShowAdminGroupsService {
     search,
     sortBy
   }: ShowAdminGroupsArgs): Promise<ShowAdminGroupsObj> {
-    const where = like(core_groups_names.value, `%${search}%`);
+    let filtersName: string[] = [];
+
+    if (search) {
+      filtersName = await this.databaseService.db
+        .select({ group_id: core_groups_names.group_id })
+        .from(core_groups_names)
+        .where(ilike(core_groups_names.value, `%${search}%`))
+        .then(res => res.map(({ group_id }) => group_id));
+    }
+
+    const pagination = await inputPaginationCursor({
+      databaseService: this.databaseService,
+      cursor,
+      database: core_groups,
+      first,
+      last
+    });
 
     const edges = await this.databaseService.db.query.core_groups.findMany({
-      ...inputPagination({
-        cursor,
-        first,
-        last,
-        where
-      }),
-      orderBy: (table, { asc }) => [asc(table.updated)],
+      // ...inputPagination({
+      //   cursor,
+      //   first,
+      //   last,
+      //   where: search && filtersName.length > 0 ? inArray(core_groups.id, filtersName) : undefined
+      // }),
+      limit: pagination.limit,
+      where: pagination.where,
+      orderBy: (table, { desc }) => [desc(table.updated)],
       with: {
         name: {
           columns: {
@@ -39,10 +61,7 @@ export class ShowAdminGroupsService {
       }
     });
 
-    const totalCount = await this.databaseService.db
-      .select({ count: count() })
-      .from(core_groups)
-      .where(where);
+    const totalCount = await this.databaseService.db.select({ count: count() }).from(core_groups);
 
     const currentEdges = await Promise.all(
       edges.map(async edge => {
@@ -58,6 +77,14 @@ export class ShowAdminGroupsService {
       })
     );
 
-    return outputPagination({ edges: currentEdges, totalCount, first, cursor, last });
+    const test = outputPagination({
+      edges: search && filtersName.length === 0 ? [] : currentEdges,
+      totalCount,
+      first,
+      cursor,
+      last
+    });
+
+    return test;
   }
 }

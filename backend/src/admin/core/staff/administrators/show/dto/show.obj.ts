@@ -37,8 +37,8 @@ export const UserOrGroupCoreStaffUnion = createUnionType({
 
 @ObjectType()
 export class ShowAdminStaffAdministrators {
-  @Field(() => String)
-  id: string;
+  @Field(() => Int)
+  id: number;
 
   @Field(() => Boolean)
   unrestricted: boolean;

@@ -30,7 +30,7 @@ export class DeleteAdminStaffAdministratorsService {
 
     await this.databaseService.db
       .delete(core_admin_permissions)
-      .where(eq(core_admin_permissions, id));
+      .where(eq(core_admin_permissions.id, id));
 
     return 'Success!';
   }

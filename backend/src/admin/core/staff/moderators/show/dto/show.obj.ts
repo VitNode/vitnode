@@ -18,8 +18,8 @@ export class ShowAdminStaffModeratorsObj {
 
 @ObjectType()
 export class ShowAdminStaffModerators {
-  @Field(() => String)
-  id: string;
+  @Field(() => Int)
+  id: number;
 
   @Field(() => Boolean)
   unrestricted: boolean;

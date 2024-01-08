@@ -30,8 +30,6 @@ const getData = async () => {
     }
   });
 
-  console.log(data);
-
   if (data.core_languages__show.edges.length === 0) {
     redirect('/admin/install');
   }
