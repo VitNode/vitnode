@@ -75,7 +75,7 @@ export const OnChangePluginEditor = ({
       onChange([
         ...valueAsArray.filter(item => item.language_id !== selectedLanguage),
         {
-          language_id: selectedLanguage,
+          language_code: selectedLanguage,
           value: JSON.stringify(editorState.toJSON())
         }
       ]);

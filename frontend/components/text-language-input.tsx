@@ -9,7 +9,7 @@ import type { TextLanguage } from '@/graphql/hooks';
 
 export const zodTextLanguageInputType = z.array(
   z.object({
-    language_id: z.string(),
+    language_code: z.string(),
     value: z.string()
   })
 );
@@ -37,7 +37,7 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
               onChange([
                 ...valueAsArray.filter(item => item.language_id !== selectedLanguage),
                 {
-                  language_id: selectedLanguage,
+                  language_code: selectedLanguage,
                   value: e.target.value
                 }
               ]);

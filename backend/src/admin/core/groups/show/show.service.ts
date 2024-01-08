@@ -55,7 +55,7 @@ export class ShowAdminGroupsService {
         name: {
           columns: {
             value: true,
-            language_id: true
+            language_code: true
           }
         }
       }

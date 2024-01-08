@@ -32,9 +32,9 @@ export const forum_forums_name = pgTable('forum_forums_name', {
     .references(() => forum_forums.id, {
       onDelete: 'cascade'
     }),
-  language_id: serial('language_id')
+  language_code: varchar('language_code')
     .notNull()
-    .references(() => core_languages.id, {
+    .references(() => core_languages.code, {
       onDelete: 'cascade'
     }),
   value: varchar('value').notNull()
@@ -46,7 +46,7 @@ export const relations_forum_forums_name = relations(forum_forums_name, ({ one }
     references: [forum_forums.id]
   }),
   language: one(core_languages, {
-    fields: [forum_forums_name.language_id],
+    fields: [forum_forums_name.language_code],
     references: [core_languages.id]
   })
 }));
@@ -57,9 +57,9 @@ export const forum_forums_description = pgTable('forum_forums_description', {
     .references(() => forum_forums.id, {
       onDelete: 'cascade'
     }),
-  language_id: serial('language_id')
+  language_code: varchar('language_code')
     .notNull()
-    .references(() => core_languages.id, {
+    .references(() => core_languages.code, {
       onDelete: 'cascade'
     }),
   value: varchar('value').notNull()
@@ -73,7 +73,7 @@ export const relations_forum_forums_description = relations(
       references: [forum_forums.id]
     }),
     language: one(core_languages, {
-      fields: [forum_forums_description.language_id],
+      fields: [forum_forums_description.language_code],
       references: [core_languages.id]
     })
   })

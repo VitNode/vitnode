@@ -37,9 +37,9 @@ export const forum_posts_content = pgTable('forum_posts_content', {
   topic_id: serial('topic_id').references(() => forum_forums.id, {
     onDelete: 'cascade'
   }),
-  language_id: serial('language_id')
+  language_code: varchar('language_code')
     .notNull()
-    .references(() => core_languages.id, {
+    .references(() => core_languages.code, {
       onDelete: 'cascade'
     }),
   value: varchar('value').notNull()

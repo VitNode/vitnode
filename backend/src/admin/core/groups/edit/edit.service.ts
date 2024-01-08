@@ -51,7 +51,7 @@ export class EditAdminGroupsService {
           .insert(core_groups_names)
           .values({
             group_id: id,
-            language_id: item.language_id,
+            language_code: item.language_code,
             value: item.value
           })
           .returning();

@@ -35,7 +35,7 @@ export class CreateAdminGroupsService {
       .values(
         transformName.map(item => ({
           group_id: group[0].id,
-          language_id: item.language_id,
+          language_code: item.language_code,
           value: item.value
         }))
       )

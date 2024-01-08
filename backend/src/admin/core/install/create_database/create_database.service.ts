@@ -83,12 +83,12 @@ export class CreateDatabaseAdminInstallService {
     await this.databaseService.db.insert(core_groups_names).values([
       {
         group_id: guestGroup[0].id,
-        language_id: 'en',
+        language_code: 'en',
         value: 'Guest'
       },
       {
         group_id: guestGroup[0].id,
-        language_id: 'pl',
+        language_code: 'pl',
         value: 'Gość'
       }
     ]);
@@ -106,12 +106,12 @@ export class CreateDatabaseAdminInstallService {
     await this.databaseService.db.insert(core_groups_names).values([
       {
         group_id: memberGroup[0].id,
-        language_id: 'en',
+        language_code: 'en',
         value: 'Member'
       },
       {
         group_id: memberGroup[0].id,
-        language_id: 'pl',
+        language_code: 'pl',
         value: 'Użytkownik'
       }
     ]);
@@ -128,12 +128,12 @@ export class CreateDatabaseAdminInstallService {
     await this.databaseService.db.insert(core_groups_names).values([
       {
         group_id: moderatorGroup[0].id,
-        language_id: 'en',
+        language_code: 'en',
         value: 'Moderator'
       },
       {
         group_id: moderatorGroup[0].id,
-        language_id: 'pl',
+        language_code: 'pl',
         value: 'Moderator'
       }
     ]);
@@ -159,12 +159,12 @@ export class CreateDatabaseAdminInstallService {
     await this.databaseService.db.insert(core_groups_names).values([
       {
         group_id: adminGroup[0].id,
-        language_id: 'en',
+        language_code: 'en',
         value: 'Administrator'
       },
       {
         group_id: adminGroup[0].id,
-        language_id: 'pl',
+        language_code: 'pl',
         value: 'Administrator'
       }
     ]);
