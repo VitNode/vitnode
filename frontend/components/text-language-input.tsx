@@ -25,7 +25,7 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
     const [selectedLanguage, setSelectedLanguage] = useState(defaultLanguage);
     const valueAsArray = Array.isArray(value) ? value : [];
     const currentValue =
-      valueAsArray.find(item => item.language_id === selectedLanguage)?.value ?? '';
+      valueAsArray.find(item => item.language_code === selectedLanguage)?.value ?? '';
 
     return (
       <div className="flex gap-2">
@@ -35,7 +35,7 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
           onChange={e => {
             if (e.target.value) {
               onChange([
-                ...valueAsArray.filter(item => item.language_id !== selectedLanguage),
+                ...valueAsArray.filter(item => item.language_code !== selectedLanguage),
                 {
                   language_code: selectedLanguage,
                   value: e.target.value
@@ -45,7 +45,7 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
               return;
             }
 
-            onChange(valueAsArray.filter(item => item.language_id !== selectedLanguage));
+            onChange(valueAsArray.filter(item => item.language_code !== selectedLanguage));
           }}
           value={currentValue}
           ref={ref}
@@ -61,7 +61,7 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
             </FormControl>
             <SelectContent>
               {languages.map(language => (
-                <SelectItem key={language.id} value={language.id}>
+                <SelectItem key={language.id} value={language.code}>
                   {language.name}
                 </SelectItem>
               ))}
