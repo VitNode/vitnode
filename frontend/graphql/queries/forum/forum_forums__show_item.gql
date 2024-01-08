@@ -1,30 +1,30 @@
-query Forum_forums__show_item($cursor: String, $first: Int, $last: Int, $forumId: String!) {
+query Forum_forums__show_item($cursor: Int, $first: Int, $last: Int, $forumId: Int!) {
   forum_forums__show(ids: [$forumId]) {
     edges {
       id
       description {
-        language_id
+        language_code
         value
       }
       name {
-        language_id
+        language_code
         value
       }
       children {
         id
         name {
-          language_id
+          language_code
           value
         }
         children {
           id
           name {
-            language_id
+            language_code
             value
           }
         }
         description {
-          language_id
+          language_code
           value
         }
       }
@@ -38,7 +38,7 @@ query Forum_forums__show_item($cursor: String, $first: Int, $last: Int, $forumId
       created
       id
       title {
-        language_id
+        language_code
         value
       }
       user {
@@ -48,7 +48,7 @@ query Forum_forums__show_item($cursor: String, $first: Int, $last: Int, $forumId
         group {
           id
           name {
-            language_id
+            language_code
             value
           }
         }

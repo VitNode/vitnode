@@ -1,13 +1,13 @@
-query Forum_forums__admin__show($first: Int, $cursor: String, $parentId: String) {
+query Forum_forums__admin__show($first: Int, $cursor: Int, $parentId: Int) {
   forum_forums__admin__show(first: $first, cursor: $cursor, parent_id: $parentId) {
     edges {
       id
       description {
-        language_id
+        language_code
         value
       }
       name {
-        language_id
+        language_code
         value
       }
       position
@@ -15,12 +15,12 @@ query Forum_forums__admin__show($first: Int, $cursor: String, $parentId: String)
       children {
         created
         description {
-          language_id
+          language_code
           value
         }
         id
         name {
-          language_id
+          language_code
           value
         }
         position

@@ -20,7 +20,7 @@ export class SignUpCoreMembersService {
     private configService: ConfigService
   ) {}
 
-  protected getGroupId = async (): Promise<string> => {
+  protected getGroupId = async (): Promise<number> => {
     const countUsers = await this.databaseService.db.select({ count: count() }).from(core_users);
 
     // If no users, return root group
@@ -60,7 +60,7 @@ export class SignUpCoreMembersService {
 
     const convertToNameSEO = removeSpecialCharacters(name);
     const checkNameSEO = await this.databaseService.db.query.core_users.findFirst({
-      where: (table, { ilike }) => ilike(table.id, convertToNameSEO)
+      where: (table, { ilike }) => ilike(table.name_seo, convertToNameSEO)
     });
 
     if (checkNameSEO) {
@@ -80,7 +80,7 @@ export class SignUpCoreMembersService {
       .values({
         email,
         name,
-        id: convertToNameSEO,
+        name_seo: convertToNameSEO,
         newsletter,
         password: hashPassword,
         joined: dateNow,

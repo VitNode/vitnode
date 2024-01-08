@@ -23,23 +23,23 @@ export class ShowAdminGroupsService {
     search,
     sortBy
   }: ShowAdminGroupsArgs): Promise<ShowAdminGroupsObj> {
-    let filtersName: string[] = [];
+    // let filtersName: string[] = [];
 
-    if (search) {
-      filtersName = await this.databaseService.db
-        .select({ group_id: core_groups_names.group_id })
-        .from(core_groups_names)
-        .where(ilike(core_groups_names.value, `%${search}%`))
-        .then(res => res.map(({ group_id }) => group_id));
-    }
+    // if (search) {
+    //   filtersName = await this.databaseService.db
+    //     .select({ group_id: core_groups_names.group_id })
+    //     .from(core_groups_names)
+    //     .where(ilike(core_groups_names.value, `%${search}%`))
+    //     .then(res => res.map(({ group_id }) => group_id));
+    // }
 
-    const pagination = await inputPaginationCursor({
-      databaseService: this.databaseService,
-      cursor,
-      database: core_groups,
-      first,
-      last
-    });
+    // const pagination = await inputPaginationCursor({
+    //   databaseService: this.databaseService,
+    //   cursor,
+    //   database: core_groups,
+    //   first,
+    //   last
+    // });
 
     const edges = await this.databaseService.db.query.core_groups.findMany({
       // ...inputPagination({
@@ -48,8 +48,6 @@ export class ShowAdminGroupsService {
       //   last,
       //   where: search && filtersName.length > 0 ? inArray(core_groups.id, filtersName) : undefined
       // }),
-      limit: pagination.limit,
-      where: pagination.where,
       orderBy: (table, { desc }) => [desc(table.updated)],
       with: {
         name: {
@@ -78,7 +76,7 @@ export class ShowAdminGroupsService {
     );
 
     const test = outputPagination({
-      edges: search && filtersName.length === 0 ? [] : currentEdges,
+      edges: currentEdges,
       totalCount,
       first,
       cursor,

@@ -1,5 +1,5 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { Field, GqlExecutionContext, ObjectType } from '@nestjs/graphql';
+import { Field, GqlExecutionContext, Int, ObjectType } from '@nestjs/graphql';
 
 import { UploadCoreAttachmentsObj } from '@/src/core/attachments/upload/dto/upload.obj';
 import { TextLanguage } from '@/types/database/text-language.type';
@@ -13,8 +13,8 @@ export const CurrentUser = createParamDecorator((_data: unknown, context: Execut
 
 @ObjectType()
 export class GroupUser {
-  @Field(() => String)
-  id: string;
+  @Field(() => Int)
+  id: number;
 
   @Field(() => [TextLanguage])
   name: TextLanguage[];
@@ -28,8 +28,11 @@ export class AvatarUser {
 
 @ObjectType()
 export class User {
+  @Field(() => Int)
+  id: number;
+
   @Field(() => String)
-  id: string;
+  name_seo: string;
 
   @Field(() => String)
   name: string;

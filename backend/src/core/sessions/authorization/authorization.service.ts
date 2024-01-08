@@ -17,8 +17,8 @@ export class AuthorizationCoreSessionsService {
     group_id,
     user_id
   }: {
-    group_id: string;
-    user_id: string;
+    group_id: number;
+    user_id: number;
   }): Promise<boolean> {
     return !!(await this.databaseService.db.query.core_admin_permissions.findFirst({
       where: (table, { eq, or }) => or(eq(table.group_id, group_id), eq(table.user_id, user_id))
@@ -29,8 +29,8 @@ export class AuthorizationCoreSessionsService {
     group_id,
     user_id
   }: {
-    group_id: string;
-    user_id: string;
+    group_id: number;
+    user_id: number;
   }): Promise<boolean> {
     return !!(await this.databaseService.db.query.core_moderators_permissions.findFirst({
       where: (table, { eq, or }) => or(eq(table.group_id, group_id), eq(table.user_id, user_id))

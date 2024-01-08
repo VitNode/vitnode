@@ -1,5 +1,5 @@
 query Core_members__admin__show(
-  $cursor: String
+  $cursor: Int
   $first: Int
   $last: Int
   $search: String
@@ -31,7 +31,7 @@ query Core_members__admin__show(
       group {
         id
         name {
-          language_id
+          language_code
           value
         }
       }

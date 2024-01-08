@@ -11,8 +11,8 @@ registerEnumType(forum_topics_logs_actions_enum, {
 
 @ObjectType()
 export class ShowPostsForumsMetaTags {
-  @Field(() => String)
-  id: string;
+  @Field(() => Int)
+  id: number;
 
   @Field(() => forum_topics_logs_actions_enum)
   action: typeof forum_topics_logs_actions_enum;
@@ -26,8 +26,8 @@ export class ShowPostsForumsMetaTags {
 
 @ObjectType()
 export class ShowPostsForums {
-  @Field(() => String)
-  id: string;
+  @Field(() => Int)
+  id: number;
 
   @Field(() => [TextLanguage])
   content: TextLanguage[];

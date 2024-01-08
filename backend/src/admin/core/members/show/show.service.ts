@@ -20,22 +20,22 @@ export class ShowAdminMembersService {
     search,
     sortBy
   }: ShowAdminMembersArgs): Promise<ShowAdminMembersObj> {
-    const where = and(
-      or(
-        ilike(core_users.name, `%${search}%`),
-        ilike(core_users.email, `%${search}%`),
-        ilike(core_users.id, `%${search}%`)
-      ),
-      groups && groups.length > 0 ? inArray(core_users.group_id, groups) : undefined
-    );
+    // const where = and(
+    //   or(
+    //     ilike(core_users.name, `%${search}%`),
+    //     ilike(core_users.email, `%${search}%`),
+    //     ilike(core_users.id, `%${search}%`)
+    //   ),
+    //   groups && groups.length > 0 ? inArray(core_users.group_id, groups) : undefined
+    // );
 
     const edges = await this.databaseService.db.query.core_users.findMany({
-      ...inputPagination({
-        cursor,
-        first,
-        last,
-        where
-      }),
+      // ...inputPagination({
+      //   cursor,
+      //   first,
+      //   last,
+      //   where
+      // }),
       orderBy: (table, { asc }) => [asc(table.joined)],
       columns: {
         password: false
@@ -50,10 +50,8 @@ export class ShowAdminMembersService {
       }
     });
 
-    const totalCount = await this.databaseService.db
-      .select({ count: count() })
-      .from(core_users)
-      .where(where);
+    const totalCount = await this.databaseService.db.select({ count: count() }).from(core_users);
+    // .where(where);
 
     return outputPagination({ edges, totalCount, first, cursor, last });
   }

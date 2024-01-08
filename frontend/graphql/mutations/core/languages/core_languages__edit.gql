@@ -1,9 +1,10 @@
 mutation Core_languages__edit(
   $default: Boolean!
   $enabled: Boolean!
-  $id: String!
+  $id: Int!
   $name: String!
   $timezone: String!
+  $code: String!
 ) {
   core_languages__edit(
     default: $default
@@ -11,7 +12,9 @@ mutation Core_languages__edit(
     id: $id
     name: $name
     timezone: $timezone
+    code: $code
   ) {
+    code
     default
     enabled
     id

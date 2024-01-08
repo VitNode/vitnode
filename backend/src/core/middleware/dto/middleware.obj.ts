@@ -1,9 +1,12 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 class LanguageCoreMiddlewareObj {
+  @Field(() => Int)
+  id: number;
+
   @Field(() => String)
-  id: string;
+  code: string;
 
   @Field(() => String)
   name: string;

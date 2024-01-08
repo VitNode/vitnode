@@ -30,7 +30,7 @@ export class EditAdminGroupsService {
     // Update name languages
     const updatedName = await Promise.all(
       name.map(async item => {
-        const nameExist = groupNames.find(name => name.language_id === item.language_id);
+        const nameExist = groupNames.find(name => name.language_code === item.language_code);
 
         if (nameExist) {
           // If value is empty, do nothing

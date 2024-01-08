@@ -10,7 +10,7 @@ query Admin_sessions__authorization {
       avatar_color
       group {
         name {
-          language_id
+          language_code
           value
         }
         id

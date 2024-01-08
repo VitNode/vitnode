@@ -22,8 +22,8 @@ class ShowForumForumsCount {
 }
 @ObjectType()
 class ShowForumForums {
-  @Field(() => String)
-  id: string;
+  @Field(() => Int)
+  id: number;
 
   @Field(() => [TextLanguage])
   name: TextLanguage[];

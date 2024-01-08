@@ -1,4 +1,4 @@
-import { ArgsType, Field } from '@nestjs/graphql';
+import { ArgsType, Field, Int } from '@nestjs/graphql';
 
 import { TextLanguageInput } from '@/types/database/text-language.type';
 
@@ -7,6 +7,6 @@ export class CreatePostsForumsArgs {
   @Field(() => [TextLanguageInput])
   content: TextLanguageInput[];
 
-  @Field(() => String)
-  topic_id: string;
+  @Field(() => Int)
+  topic_id: number;
 }

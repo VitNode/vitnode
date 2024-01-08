@@ -1,5 +1,5 @@
 query Core_staff_administrators__admin__show(
-  $cursor: String
+  $cursor: Int
   $first: Int
   $last: Int
   $sortBy: [ShowAdminStaffAdministratorsSortByArgs!]
@@ -21,7 +21,7 @@ query Core_staff_administrators__admin__show(
           group {
             id
             name {
-              language_id
+              language_code
               value
             }
           }
@@ -30,7 +30,7 @@ query Core_staff_administrators__admin__show(
         }
         ... on StaffGroupUser {
           group_name {
-            language_id
+            language_code
             value
           }
           id

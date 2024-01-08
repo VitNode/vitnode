@@ -26,7 +26,7 @@ export class ChangePositionForumForumsService {
     });
 
     let index = 0;
-    const newChildrenIndexes: { id: string; position: number }[] = [];
+    const newChildrenIndexes: { id: number; position: number }[] = [];
     allChildrenParent
       .filter(item => item.id !== id)
       .forEach(item => {

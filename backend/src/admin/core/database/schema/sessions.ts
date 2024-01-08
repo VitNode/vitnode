@@ -6,7 +6,7 @@ import { core_admin_sessions } from './admins';
 
 export const core_sessions = pgTable('core_sessions', {
   login_token: varchar('login_token', { length: 255 }).primaryKey(),
-  user_id: serial('user_id')
+  user_id: integer('user_id')
     .notNull()
     .references(() => core_users.id, {
       onDelete: 'cascade'

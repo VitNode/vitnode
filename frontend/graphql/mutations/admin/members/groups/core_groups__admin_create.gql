@@ -3,7 +3,7 @@ mutation core_groups__admin_create($name: [TextLanguageInput!]!) {
     created
     id
     name {
-      language_id
+      language_code
       value
     }
     protected

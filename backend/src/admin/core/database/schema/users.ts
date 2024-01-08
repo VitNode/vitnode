@@ -6,7 +6,7 @@ import { core_files_avatars, core_files_covers } from './files';
 
 export const core_users = pgTable('core_users', {
   id: serial('id').primaryKey(),
-  name_id: varchar('name_id', { length: 255 }).unique(),
+  name_seo: varchar('name_seo', { length: 255 }).unique(),
   name: varchar('name', { length: 255 }).notNull().unique(),
   email: varchar('email', { length: 255 }).notNull().unique(),
   password: text('password').notNull(),
@@ -14,9 +14,9 @@ export const core_users = pgTable('core_users', {
   posts: integer('posts').notNull().default(0),
   newsletter: boolean('newsletter').notNull().default(false),
   avatar_color: varchar('avatar_color', { length: 6 }).notNull(),
-  group_id: serial('group_id').references(() => core_groups.id),
-  avatar_id: serial('avatar_id').references(() => core_files_avatars.id),
-  cover_id: serial('cover_id').references(() => core_files_covers.id)
+  group_id: integer('group_id').references(() => core_groups.id),
+  avatar_id: integer('avatar_id').references(() => core_files_avatars.id),
+  cover_id: integer('cover_id').references(() => core_files_covers.id)
 });
 
 export const relations_core_users = relations(core_users, ({ one }) => ({

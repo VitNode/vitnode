@@ -35,7 +35,7 @@ export class ShowCoreLanguageService {
 
     // Check valid data with config
     edges.forEach(edge => {
-      const currentLanguage = config.languages.locales.find(locale => locale.key === edge.id);
+      const currentLanguage = config.languages.locales.find(locale => locale.key === edge.code);
 
       // Check key
       if (!currentLanguage) {
@@ -54,7 +54,7 @@ export class ShowCoreLanguageService {
       }
 
       // Check valid default language
-      if (edge.default && config.languages.default !== edge.id) {
+      if (edge.default && config.languages.default !== edge.code) {
         throw new CustomError({
           code: 'INVALID_CONFIG_WITH_DATABASE',
           message: `Language "${edge.name}" is default but not match with config.json`

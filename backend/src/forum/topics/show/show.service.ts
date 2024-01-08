@@ -19,24 +19,24 @@ export class ShowTopicsForumsService {
     { cursor, first, forum_id, id, last }: ShowTopicsForumsArgs,
     user?: User
   ): Promise<ShowTopicsForumsObj> {
-    const where = and(
-      eq(forum_forums.id, forum_id),
-      eq(forum_topics.id, id),
-      or(
-        eq(forum_forums.can_all_read, true),
-        and(
-          eq(forum_forums_permissions.group_id, user?.group.id),
-          eq(forum_forums_permissions.can_read, true)
-        )
-      )
-    );
+    // const where = and(
+    //   eq(forum_forums.id, forum_id),
+    //   eq(forum_topics.id, id),
+    //   or(
+    //     eq(forum_forums.can_all_read, true),
+    //     and(
+    //       eq(forum_forums_permissions.group_id, user?.group.id),
+    //       eq(forum_forums_permissions.can_read, true)
+    //     )
+    //   )
+    // );
 
     const edges = await this.databaseService.db.query.forum_topics.findMany({
       ...inputPagination({
         cursor,
         first,
-        last,
-        where
+        last
+        //  where
       }),
       orderBy: (table, { asc }) => [asc(table.created)],
       with: {
@@ -64,10 +64,8 @@ export class ShowTopicsForumsService {
       }
     });
 
-    const totalCount = await this.databaseService.db
-      .select({ count: count() })
-      .from(forum_topics)
-      .where(where);
+    const totalCount = await this.databaseService.db.select({ count: count() }).from(forum_topics);
+    // .where(where);
 
     // const [edges, totalCount] = await this.prisma.$transaction([
     //   this.prisma.forum_topics.findMany({

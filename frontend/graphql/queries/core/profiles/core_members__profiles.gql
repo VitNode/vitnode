@@ -1,10 +1,10 @@
-query Core_members__profiles($first: Int, $findByIds: [String!]) {
+query Core_members__profiles($first: Int, $findByIds: [Int!]) {
   core_members__show(first: $first, findByIds: $findByIds) {
     edges {
       avatar_color
       group {
         name {
-          language_id
+          language_code
           value
         }
       }

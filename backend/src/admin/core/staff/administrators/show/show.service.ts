@@ -19,11 +19,11 @@ export class ShowAdminStaffAdministratorsService {
     sortBy
   }: ShowAdminStaffAdministratorsArgs): Promise<ShowAdminStaffAdministratorsObj> {
     const edges = await this.databaseService.db.query.core_admin_permissions.findMany({
-      ...inputPagination({
-        cursor,
-        first,
-        last
-      }),
+      // ...inputPagination({
+      //   cursor,
+      //   first,
+      //   last
+      // }),
       orderBy: (table, { desc }) => [desc(table.updated)],
       with: {
         group: {

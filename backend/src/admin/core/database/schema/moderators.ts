@@ -6,10 +6,10 @@ import { core_users } from './users';
 
 export const core_moderators_permissions = pgTable('core_moderators_permissions', {
   id: serial('id').primaryKey(),
-  group_id: serial('group_id').references(() => core_groups.id, {
+  group_id: integer('group_id').references(() => core_groups.id, {
     onDelete: 'cascade'
   }),
-  user_id: serial('user_id').references(() => core_users.id, {
+  user_id: integer('user_id').references(() => core_users.id, {
     onDelete: 'cascade'
   }),
   unrestricted: boolean('unrestricted').notNull().default(false),

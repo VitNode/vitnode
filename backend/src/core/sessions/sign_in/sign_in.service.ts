@@ -15,7 +15,7 @@ import { core_sessions } from '@/src/admin/core/database/schema/sessions';
 interface CreateSessionArgs extends Ctx {
   email: string;
   name: string;
-  userId: string;
+  userId: number;
   admin?: boolean;
   remember?: boolean;
 }
@@ -39,8 +39,8 @@ export class SignInCoreSessionsService {
   }: CreateSessionArgs) {
     const loginTokenSecret = this.configService.getOrThrow('login_token_secret');
 
-    const know_device_id: string | undefined =
-      req.cookies[this.configService.getOrThrow('cookies.known_device.name')];
+    const know_device_id: number | undefined =
+      +req.cookies[this.configService.getOrThrow('cookies.known_device.name')];
     if (!know_device_id) {
       throw new AccessDeniedError();
     }

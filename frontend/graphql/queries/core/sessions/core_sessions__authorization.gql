@@ -10,7 +10,7 @@ query Core_sessions__authorization {
       avatar_color
       group {
         name {
-          language_id
+          language_code
           value
         }
         id
@@ -19,7 +19,7 @@ query Core_sessions__authorization {
   }
   core_languages__show {
     edges {
-      id
+      code
     }
   }
 }

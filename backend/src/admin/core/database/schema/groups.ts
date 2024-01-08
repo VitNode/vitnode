@@ -19,7 +19,7 @@ export const relations_core_groups = relations(core_groups, ({ many }) => ({
 
 export const core_groups_names = pgTable('core_groups_names', {
   id: serial('id').primaryKey(),
-  group_id: serial('group_id')
+  group_id: integer('group_id')
     .notNull()
     .references(() => core_groups.id, {
       onDelete: 'cascade'

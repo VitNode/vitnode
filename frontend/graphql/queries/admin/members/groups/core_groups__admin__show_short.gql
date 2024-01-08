@@ -3,7 +3,7 @@ query Core_groups__admin__show_short($first: Int, $search: String) {
     edges {
       id
       name {
-        language_id
+        language_code
         value
       }
       guest

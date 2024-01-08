@@ -8,7 +8,7 @@ export const forum_forums = pgTable('forum_forums', {
   id: serial('id').primaryKey(),
   created: integer('created').notNull(),
   // ! Warning: this is a recursive relation. It's not supported by drizzle-orm yet.
-  parent_id: serial('parent_id'),
+  parent_id: integer('parent_id'),
   position: integer('position').notNull().default(0),
   can_all_view: boolean('can_all_view').notNull().default(false),
   can_all_read: boolean('can_all_read').notNull().default(false),
@@ -27,7 +27,8 @@ export const relations_forum_forums = relations(forum_forums, ({ many, one }) =>
 }));
 
 export const forum_forums_name = pgTable('forum_forums_name', {
-  forum_id: serial('forum_id')
+  id: serial('id').primaryKey(),
+  forum_id: integer('forum_id')
     .notNull()
     .references(() => forum_forums.id, {
       onDelete: 'cascade'
@@ -52,7 +53,8 @@ export const relations_forum_forums_name = relations(forum_forums_name, ({ one }
 }));
 
 export const forum_forums_description = pgTable('forum_forums_description', {
-  forum_id: serial('forum_id')
+  id: serial('id').primaryKey(),
+  forum_id: integer('forum_id')
     .notNull()
     .references(() => forum_forums.id, {
       onDelete: 'cascade'
@@ -80,10 +82,11 @@ export const relations_forum_forums_description = relations(
 );
 
 export const forum_forums_permissions = pgTable('forum_forums_permissions', {
-  forum_id: serial('forum_id').references(() => forum_forums.id, {
+  id: serial('id').primaryKey(),
+  forum_id: integer('forum_id').references(() => forum_forums.id, {
     onDelete: 'cascade'
   }),
-  group_id: serial('group_id').references(() => core_groups.id, {
+  group_id: integer('group_id').references(() => core_groups.id, {
     onDelete: 'cascade'
   }),
   can_view: boolean('can_view').notNull().default(false),

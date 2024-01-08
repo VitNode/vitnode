@@ -16,7 +16,7 @@ import { core_languages } from '@/src/admin/core/database/schema/languages';
 export class EditCoreLanguageService {
   constructor(private databaseService: DatabaseService) {}
 
-  async edit({ id, ...rest }: EditCoreLanguagesArgs): Promise<ShowCoreLanguages> {
+  async edit({ code, id, ...rest }: EditCoreLanguagesArgs): Promise<ShowCoreLanguages> {
     const configFile = fs.readFileSync(join('..', 'config.json'), 'utf8');
     const config: ConfigType = JSON.parse(configFile);
 
@@ -32,7 +32,7 @@ export class EditCoreLanguageService {
 
     // Edit default language
     if (rest.default) {
-      dataToEditConfig.languages.default = id;
+      dataToEditConfig.languages.default = code;
 
       // Disable previous default language
       await this.databaseService.db
@@ -41,18 +41,20 @@ export class EditCoreLanguageService {
         .where(eq(core_languages.default, true));
     }
 
-    const edit = await this.databaseService.db
+    const editData = await this.databaseService.db
       .update(core_languages)
       .set(rest)
       .where(eq(core_languages.id, id))
-      .returning()[0];
+      .returning();
+
+    const edit = editData[0];
 
     if (rest.default) {
-      dataToEditConfig.languages.default = edit.default ? edit.id : config.languages.default;
+      dataToEditConfig.languages.default = edit.default ? edit.code : config.languages.default;
     }
 
     // Edit enabled status
-    dataToEditConfig.languages.locales.find(locale => locale.key === edit.id).enabled =
+    dataToEditConfig.languages.locales.find(locale => locale.key === edit.code).enabled =
       edit.enabled;
 
     fs.writeFile(

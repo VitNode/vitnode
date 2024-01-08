@@ -17,6 +17,9 @@ export class ShowCoreLanguages {
   id: number;
 
   @Field(() => String)
+  code: string;
+
+  @Field(() => String)
   name: string;
 
   @Field(() => String)

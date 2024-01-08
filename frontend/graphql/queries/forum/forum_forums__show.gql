@@ -3,28 +3,28 @@ query Forum_forums__show {
     edges {
       id
       description {
-        language_id
+        language_code
         value
       }
       name {
-        language_id
+        language_code
         value
       }
       children {
         id
         name {
-          language_id
+          language_code
           value
         }
         children {
           id
           name {
-            language_id
+            language_code
             value
           }
         }
         description {
-          language_id
+          language_code
           value
         }
       }

@@ -21,12 +21,12 @@ export class ShowForumForumsAdminService {
     const where = eq(forum_forums.parent_id, parent_id);
 
     const forums = await this.databaseService.db.query.forum_forums.findMany({
-      ...inputPagination({
-        cursor,
-        first,
-        last,
-        where
-      }),
+      // ...inputPagination({
+      //   cursor,
+      //   first,
+      //   last,
+      //   where
+      // }),
       orderBy: (table, { asc }) => [asc(table.position)],
       with: {
         name: true,

@@ -2,7 +2,7 @@ query Core_staff_moderators__admin__show(
   $sortBy: [ShowAdminStaffModeratorsSortByArgs!]
   $last: Int
   $first: Int
-  $cursor: String
+  $cursor: Int
 ) {
   core_staff_moderators__admin__show(sortBy: $sortBy, last: $last, first: $first, cursor: $cursor) {
     edges {
@@ -16,7 +16,7 @@ query Core_staff_moderators__admin__show(
           group {
             id
             name {
-              language_id
+              language_code
               value
             }
           }
@@ -25,7 +25,7 @@ query Core_staff_moderators__admin__show(
         }
         ... on StaffGroupUser {
           group_name {
-            language_id
+            language_code
             value
           }
           id

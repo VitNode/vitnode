@@ -1,7 +1,7 @@
 mutation Forum_forums__admin__create(
   $name: [TextLanguageInput!]!
   $description: [TextLanguageInput!]!
-  $parentId: String
+  $parentId: Int
   $permissions: PermissionsCreateForumForums!
 ) {
   forum_forums__admin__create(
@@ -12,12 +12,12 @@ mutation Forum_forums__admin__create(
   ) {
     created
     description {
-      language_id
+      language_code
       value
     }
     id
     name {
-      language_id
+      language_code
       value
     }
     position

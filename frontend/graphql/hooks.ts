@@ -31,10 +31,11 @@ export type AuthorizationCurrentUserObj = {
   avatar_color: Scalars['String']['output'];
   email: Scalars['String']['output'];
   group: GroupUser;
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   is_admin: Scalars['Boolean']['output'];
   is_mod: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
+  name_id: Scalars['String']['output'];
   newsletter: Scalars['Boolean']['output'];
 };
 
@@ -49,7 +50,7 @@ export type ChildrenShowForumForums = {
   children?: Maybe<Array<ShowForumForums>>;
   created: Scalars['Int']['output'];
   description: Array<TextLanguage>;
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   name: Array<TextLanguage>;
   position: Scalars['Int']['output'];
 };
@@ -66,7 +67,7 @@ export type CreateForumForumsObj = {
   children?: Maybe<Array<ChildrenShowForumForums>>;
   created: Scalars['Int']['output'];
   description: Array<TextLanguage>;
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   name: Array<TextLanguage>;
   parent?: Maybe<ShowForumForums>;
   position: Scalars['Int']['output'];
@@ -74,7 +75,7 @@ export type CreateForumForumsObj = {
 
 export type ForumTopicsForums = {
   __typename?: 'ForumTopicsForums';
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   name: Array<TextLanguage>;
 };
 
@@ -91,13 +92,13 @@ export type GeneralAdminSettingsObj = {
 
 export type GroupUser = {
   __typename?: 'GroupUser';
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   name: Array<TextLanguage>;
 };
 
 export type GroupsPermissionsCreateForumForums = {
   create: Scalars['Boolean']['input'];
-  id: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
   read: Scalars['Boolean']['input'];
   reply: Scalars['Boolean']['input'];
   view: Scalars['Boolean']['input'];
@@ -105,9 +106,10 @@ export type GroupsPermissionsCreateForumForums = {
 
 export type LanguageCoreMiddlewareObj = {
   __typename?: 'LanguageCoreMiddlewareObj';
+  code: Scalars['String']['output'];
   default: Scalars['Boolean']['output'];
   enabled: Scalars['Boolean']['output'];
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   timezone: Scalars['String']['output'];
 };
@@ -155,12 +157,12 @@ export type MutationAdmin_Settings__General__EditArgs = {
 
 
 export type MutationCore_Groups__Admin__DeleteArgs = {
-  id: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
 };
 
 
 export type MutationCore_Groups__Admin__EditArgs = {
-  id: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
   name: Array<TextLanguageInput>;
 };
 
@@ -171,9 +173,10 @@ export type MutationCore_Groups__Admin_CreateArgs = {
 
 
 export type MutationCore_Languages__EditArgs = {
+  code: Scalars['String']['input'];
   default: Scalars['Boolean']['input'];
   enabled: Scalars['Boolean']['input'];
-  id: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
   name: Scalars['String']['input'];
   timezone: Scalars['String']['input'];
 };
@@ -196,68 +199,68 @@ export type MutationCore_Sessions__Sign_InArgs = {
 
 
 export type MutationCore_Staff_Administrators__Admin__CreateArgs = {
-  group_id?: InputMaybe<Scalars['String']['input']>;
+  group_id?: InputMaybe<Scalars['Int']['input']>;
   unrestricted: Scalars['Boolean']['input'];
-  user_id?: InputMaybe<Scalars['String']['input']>;
+  user_id?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type MutationCore_Staff_Administrators__Admin__DeleteArgs = {
-  id: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
 };
 
 
 export type MutationCore_Staff_Moderators__Admin__CreateArgs = {
-  group_id?: InputMaybe<Scalars['String']['input']>;
+  group_id?: InputMaybe<Scalars['Int']['input']>;
   unrestricted: Scalars['Boolean']['input'];
-  user_id?: InputMaybe<Scalars['String']['input']>;
+  user_id?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type MutationCore_Staff_Moderators__Admin__DeleteArgs = {
-  id: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
 };
 
 
 export type MutationForum_Forums__Admin__Change_PositionArgs = {
-  id: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
   index_to_move: Scalars['Int']['input'];
-  parent_id?: InputMaybe<Scalars['String']['input']>;
+  parent_id?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type MutationForum_Forums__Admin__CreateArgs = {
   description: Array<TextLanguageInput>;
   name: Array<TextLanguageInput>;
-  parent_id?: InputMaybe<Scalars['String']['input']>;
+  parent_id?: InputMaybe<Scalars['Int']['input']>;
   permissions: PermissionsCreateForumForums;
 };
 
 
 export type MutationForum_Posts__CreateArgs = {
   content: Array<TextLanguageInput>;
-  topic_id: Scalars['String']['input'];
+  topic_id: Scalars['Int']['input'];
 };
 
 
 export type MutationForum_Topics__Actions__Lock_ToggleArgs = {
-  id: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
 };
 
 
 export type MutationForum_Topics__CreateArgs = {
   content: Array<TextLanguageInput>;
-  forum_id: Scalars['String']['input'];
+  forum_id: Scalars['Int']['input'];
   title: Array<TextLanguageInput>;
 };
 
 export type PageInfo = {
   __typename?: 'PageInfo';
   count: Scalars['Float']['output'];
-  endCursor: Scalars['String']['output'];
+  endCursor?: Maybe<Scalars['Int']['output']>;
   hasNextPage: Scalars['Boolean']['output'];
   hasPreviousPage: Scalars['Boolean']['output'];
-  startCursor: Scalars['String']['output'];
+  startCursor?: Maybe<Scalars['Int']['output']>;
   totalCount: Scalars['Float']['output'];
 };
 
@@ -296,7 +299,7 @@ export type Query = {
 
 
 export type QueryCore_Groups__Admin__ShowArgs = {
-  cursor?: InputMaybe<Scalars['String']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
@@ -305,14 +308,14 @@ export type QueryCore_Groups__Admin__ShowArgs = {
 
 
 export type QueryCore_Languages__ShowArgs = {
-  cursor?: InputMaybe<Scalars['String']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryCore_Members__Admin__ShowArgs = {
-  cursor?: InputMaybe<Scalars['String']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   groups?: InputMaybe<Array<Scalars['String']['input']>>;
   last?: InputMaybe<Scalars['Int']['input']>;
@@ -322,8 +325,8 @@ export type QueryCore_Members__Admin__ShowArgs = {
 
 
 export type QueryCore_Members__ShowArgs = {
-  cursor?: InputMaybe<Scalars['String']['input']>;
-  findByIds?: InputMaybe<Array<Scalars['String']['input']>>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  findByIds?: InputMaybe<Array<Scalars['Int']['input']>>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
@@ -332,7 +335,7 @@ export type QueryCore_Members__ShowArgs = {
 
 
 export type QueryCore_Staff_Administrators__Admin__ShowArgs = {
-  cursor?: InputMaybe<Scalars['String']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   sortBy?: InputMaybe<Array<ShowAdminStaffAdministratorsSortByArgs>>;
@@ -340,7 +343,7 @@ export type QueryCore_Staff_Administrators__Admin__ShowArgs = {
 
 
 export type QueryCore_Staff_Moderators__Admin__ShowArgs = {
-  cursor?: InputMaybe<Scalars['String']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   sortBy?: InputMaybe<Array<ShowAdminStaffModeratorsSortByArgs>>;
@@ -348,36 +351,36 @@ export type QueryCore_Staff_Moderators__Admin__ShowArgs = {
 
 
 export type QueryForum_Forums__Admin__ShowArgs = {
-  cursor?: InputMaybe<Scalars['String']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
-  ids?: InputMaybe<Array<Scalars['String']['input']>>;
+  ids?: InputMaybe<Array<Scalars['Int']['input']>>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  parent_id?: InputMaybe<Scalars['String']['input']>;
+  parent_id?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryForum_Forums__ShowArgs = {
-  cursor?: InputMaybe<Scalars['String']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
-  ids?: InputMaybe<Array<Scalars['String']['input']>>;
+  ids?: InputMaybe<Array<Scalars['Int']['input']>>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  parent_id?: InputMaybe<Scalars['String']['input']>;
+  parent_id?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryForum_Posts__ShowArgs = {
-  cursor?: InputMaybe<Scalars['String']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  topic_id: Scalars['String']['input'];
+  topic_id: Scalars['Int']['input'];
 };
 
 
 export type QueryForum_Topics__ShowArgs = {
-  cursor?: InputMaybe<Scalars['String']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
-  forum_id?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['String']['input']>;
+  forum_id?: InputMaybe<Scalars['Int']['input']>;
+  id?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
@@ -386,7 +389,7 @@ export type ShowAdminGroups = {
   created: Scalars['Int']['output'];
   default: Scalars['Boolean']['output'];
   guest: Scalars['Boolean']['output'];
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   name: Array<TextLanguage>;
   protected: Scalars['Boolean']['output'];
   root: Scalars['Boolean']['output'];
@@ -417,9 +420,10 @@ export type ShowAdminMembers = {
   avatar_color: Scalars['String']['output'];
   email: Scalars['String']['output'];
   group: GroupUser;
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   joined: Scalars['Int']['output'];
   name: Scalars['String']['output'];
+  name_id: Scalars['String']['output'];
   newsletter: Scalars['Boolean']['output'];
   posts: Scalars['Int']['output'];
 };
@@ -449,7 +453,7 @@ export type ShowAdminMembersSortingColumnEnum = typeof ShowAdminMembersSortingCo
 export type ShowAdminStaffAdministrators = {
   __typename?: 'ShowAdminStaffAdministrators';
   created: Scalars['Int']['output'];
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   protected: Scalars['Boolean']['output'];
   unrestricted: Scalars['Boolean']['output'];
   updated: Scalars['Int']['output'];
@@ -475,7 +479,7 @@ export type ShowAdminStaffAdministratorsSortingColumnEnum = typeof ShowAdminStaf
 export type ShowAdminStaffModerators = {
   __typename?: 'ShowAdminStaffModerators';
   created: Scalars['Int']['output'];
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   protected: Scalars['Boolean']['output'];
   unrestricted: Scalars['Boolean']['output'];
   updated: Scalars['Int']['output'];
@@ -500,9 +504,10 @@ export const ShowAdminStaffModeratorsSortingColumnEnum = {
 export type ShowAdminStaffModeratorsSortingColumnEnum = typeof ShowAdminStaffModeratorsSortingColumnEnum[keyof typeof ShowAdminStaffModeratorsSortingColumnEnum];
 export type ShowCoreLanguages = {
   __typename?: 'ShowCoreLanguages';
+  code: Scalars['String']['output'];
   default: Scalars['Boolean']['output'];
   enabled: Scalars['Boolean']['output'];
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   protected: Scalars['Boolean']['output'];
   timezone: Scalars['String']['output'];
@@ -519,9 +524,10 @@ export type ShowCoreMembers = {
   avatar?: Maybe<AvatarUser>;
   avatar_color: Scalars['String']['output'];
   group: GroupUser;
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   joined: Scalars['Int']['output'];
   name: Scalars['String']['output'];
+  name_id: Scalars['String']['output'];
   posts: Scalars['Int']['output'];
 };
 
@@ -552,7 +558,7 @@ export type ShowForumForums = {
   _count: ShowForumForumsCount;
   created: Scalars['Int']['output'];
   description: Array<TextLanguage>;
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   name: Array<TextLanguage>;
   position: Scalars['Int']['output'];
 };
@@ -563,7 +569,7 @@ export type ShowForumForumsAdmin = {
   children?: Maybe<Array<ChildrenShowForumForums>>;
   created: Scalars['Int']['output'];
   description: Array<TextLanguage>;
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   name: Array<TextLanguage>;
   parent?: Maybe<ShowForumForums>;
   position: Scalars['Int']['output'];
@@ -592,7 +598,7 @@ export type ShowForumForumsWithParent = {
   children?: Maybe<Array<ChildrenShowForumForums>>;
   created: Scalars['Int']['output'];
   description: Array<TextLanguage>;
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   name: Array<TextLanguage>;
   parent?: Maybe<ShowForumForums>;
   permissions: PermissionsForumForumsCount;
@@ -603,7 +609,7 @@ export type ShowPostsForums = {
   __typename?: 'ShowPostsForums';
   content: Array<TextLanguage>;
   created: Scalars['Int']['output'];
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   user: User;
 };
 
@@ -611,7 +617,7 @@ export type ShowPostsForumsMetaTags = {
   __typename?: 'ShowPostsForumsMetaTags';
   action: Forum_Topics_Logs_Actions_Enum | `${Forum_Topics_Logs_Actions_Enum}`;
   created: Scalars['Int']['output'];
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   member: User;
 };
 
@@ -626,7 +632,7 @@ export type ShowTopicsForums = {
   content: Array<TextLanguage>;
   created: Scalars['Int']['output'];
   forum: ForumTopicsForums;
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   locked: Scalars['Boolean']['output'];
   title: Array<TextLanguage>;
   user: User;
@@ -641,7 +647,7 @@ export type ShowTopicsForumsObj = {
 export type SignUpCoreMembersObj = {
   __typename?: 'SignUpCoreMembersObj';
   email: Scalars['String']['output'];
-  group_id: Scalars['String']['output'];
+  group_id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   newsletter?: Maybe<Scalars['Boolean']['output']>;
 };
@@ -655,17 +661,17 @@ export type SortDirectionEnum = typeof SortDirectionEnum[keyof typeof SortDirect
 export type StaffGroupUser = {
   __typename?: 'StaffGroupUser';
   group_name: Array<TextLanguage>;
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
 };
 
 export type TextLanguage = {
   __typename?: 'TextLanguage';
-  language_id: Scalars['String']['output'];
+  language_code: Scalars['String']['output'];
   value: Scalars['String']['output'];
 };
 
 export type TextLanguageInput = {
-  language_id: Scalars['String']['input'];
+  language_code: Scalars['String']['input'];
   value: Scalars['String']['input'];
 };
 
@@ -674,8 +680,9 @@ export type User = {
   avatar?: Maybe<AvatarUser>;
   avatar_color: Scalars['String']['output'];
   group: GroupUser;
-  id: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
+  name_id: Scalars['String']['output'];
 };
 
 export type UserOrGroupCoreStaffUnion = StaffGroupUser | User;
@@ -688,9 +695,9 @@ export type Admin_Install__Create_DatabaseMutationVariables = Exact<{ [key: stri
 export type Admin_Install__Create_DatabaseMutation = { __typename?: 'Mutation', admin_install__create_database: string };
 
 export type Forum_Forums__Admin__Change_PositionMutationVariables = Exact<{
-  id: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
   indexToMove: Scalars['Int']['input'];
-  parentId?: InputMaybe<Scalars['String']['input']>;
+  parentId?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
@@ -699,62 +706,62 @@ export type Forum_Forums__Admin__Change_PositionMutation = { __typename?: 'Mutat
 export type Forum_Forums__Admin__CreateMutationVariables = Exact<{
   name: Array<TextLanguageInput> | TextLanguageInput;
   description: Array<TextLanguageInput> | TextLanguageInput;
-  parentId?: InputMaybe<Scalars['String']['input']>;
+  parentId?: InputMaybe<Scalars['Int']['input']>;
   permissions: PermissionsCreateForumForums;
 }>;
 
 
-export type Forum_Forums__Admin__CreateMutation = { __typename?: 'Mutation', forum_forums__admin__create: { __typename?: 'CreateForumForumsObj', created: number, id: string, position: number, description: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> } };
+export type Forum_Forums__Admin__CreateMutation = { __typename?: 'Mutation', forum_forums__admin__create: { __typename?: 'CreateForumForumsObj', created: number, id: number, position: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
 export type Core_Groups__Admin__DeleteMutationVariables = Exact<{
-  id: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
 }>;
 
 
 export type Core_Groups__Admin__DeleteMutation = { __typename?: 'Mutation', core_groups__admin__delete: string };
 
 export type Core_Groups__Admin__EditMutationVariables = Exact<{
-  id: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
   name: Array<TextLanguageInput> | TextLanguageInput;
 }>;
 
 
-export type Core_Groups__Admin__EditMutation = { __typename?: 'Mutation', core_groups__admin__edit: { __typename?: 'ShowAdminGroups', created: number, id: string, protected: boolean, users_count: number, guest: boolean, updated: number, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> } };
+export type Core_Groups__Admin__EditMutation = { __typename?: 'Mutation', core_groups__admin__edit: { __typename?: 'ShowAdminGroups', created: number, id: number, protected: boolean, users_count: number, guest: boolean, updated: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
 export type Core_Groups__Admin_CreateMutationVariables = Exact<{
   name: Array<TextLanguageInput> | TextLanguageInput;
 }>;
 
 
-export type Core_Groups__Admin_CreateMutation = { __typename?: 'Mutation', core_groups__admin_create: { __typename?: 'ShowAdminGroups', created: number, id: string, protected: boolean, users_count: number, guest: boolean, updated: number, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> } };
+export type Core_Groups__Admin_CreateMutation = { __typename?: 'Mutation', core_groups__admin_create: { __typename?: 'ShowAdminGroups', created: number, id: number, protected: boolean, users_count: number, guest: boolean, updated: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
 export type Core_Staff_Administrators__Admin__CreateMutationVariables = Exact<{
-  groupId?: InputMaybe<Scalars['String']['input']>;
-  userId?: InputMaybe<Scalars['String']['input']>;
+  groupId?: InputMaybe<Scalars['Int']['input']>;
+  userId?: InputMaybe<Scalars['Int']['input']>;
   unrestricted: Scalars['Boolean']['input'];
 }>;
 
 
-export type Core_Staff_Administrators__Admin__CreateMutation = { __typename?: 'Mutation', core_staff_administrators__admin__create: { __typename?: 'ShowAdminStaffAdministrators', created: number, id: string, protected: boolean, unrestricted: boolean, updated: number } };
+export type Core_Staff_Administrators__Admin__CreateMutation = { __typename?: 'Mutation', core_staff_administrators__admin__create: { __typename?: 'ShowAdminStaffAdministrators', created: number, id: number, protected: boolean, unrestricted: boolean, updated: number } };
 
 export type Core_Staff_Administrators__Admin__DeleteMutationVariables = Exact<{
-  id: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
 }>;
 
 
 export type Core_Staff_Administrators__Admin__DeleteMutation = { __typename?: 'Mutation', core_staff_administrators__admin__delete: string };
 
 export type Core_Staff_Moderators__Admin__CreateMutationVariables = Exact<{
-  groupId?: InputMaybe<Scalars['String']['input']>;
-  userId?: InputMaybe<Scalars['String']['input']>;
+  groupId?: InputMaybe<Scalars['Int']['input']>;
+  userId?: InputMaybe<Scalars['Int']['input']>;
   unrestricted: Scalars['Boolean']['input'];
 }>;
 
 
-export type Core_Staff_Moderators__Admin__CreateMutation = { __typename?: 'Mutation', core_staff_moderators__admin__create: { __typename?: 'ShowAdminStaffModerators', created: number, id: string, protected: boolean, unrestricted: boolean, updated: number } };
+export type Core_Staff_Moderators__Admin__CreateMutation = { __typename?: 'Mutation', core_staff_moderators__admin__create: { __typename?: 'ShowAdminStaffModerators', created: number, id: number, protected: boolean, unrestricted: boolean, updated: number } };
 
 export type Core_Staff_Moderators__Admin__DeleteMutationVariables = Exact<{
-  id: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
 }>;
 
 
@@ -775,13 +782,14 @@ export type Admin_Settings__General__EditMutation = { __typename?: 'Mutation', a
 export type Core_Languages__EditMutationVariables = Exact<{
   default: Scalars['Boolean']['input'];
   enabled: Scalars['Boolean']['input'];
-  id: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
   name: Scalars['String']['input'];
   timezone: Scalars['String']['input'];
+  code: Scalars['String']['input'];
 }>;
 
 
-export type Core_Languages__EditMutation = { __typename?: 'Mutation', core_languages__edit: { __typename?: 'ShowCoreLanguages', default: boolean, enabled: boolean, id: string, name: string, protected: boolean, timezone: string } };
+export type Core_Languages__EditMutation = { __typename?: 'Mutation', core_languages__edit: { __typename?: 'ShowCoreLanguages', code: string, default: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string } };
 
 export type Core_Members__Sign_UpMutationVariables = Exact<{
   email: Scalars['String']['input'];
@@ -809,7 +817,7 @@ export type Core_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: ne
 export type Core_Sessions__Sign_OutMutation = { __typename?: 'Mutation', core_sessions__sign_out: string };
 
 export type Forum_Topics__Actions__Lock_ToggleMutationVariables = Exact<{
-  id: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
 }>;
 
 
@@ -817,12 +825,12 @@ export type Forum_Topics__Actions__Lock_ToggleMutation = { __typename?: 'Mutatio
 
 export type Forum_Topics__CreateMutationVariables = Exact<{
   content: Array<TextLanguageInput> | TextLanguageInput;
-  forumId: Scalars['String']['input'];
+  forumId: Scalars['Int']['input'];
   title: Array<TextLanguageInput> | TextLanguageInput;
 }>;
 
 
-export type Forum_Topics__CreateMutation = { __typename?: 'Mutation', forum_topics__create: { __typename?: 'ShowTopicsForums', created: number, id: string, title: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> } };
+export type Forum_Topics__CreateMutation = { __typename?: 'Mutation', forum_topics__create: { __typename?: 'ShowTopicsForums', created: number, id: number, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
 export type Admin_Install__LayoutQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -831,23 +839,23 @@ export type Admin_Install__LayoutQuery = { __typename?: 'Query', admin_install__
 
 export type Forum_Forums__Admin__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
-  cursor?: InputMaybe<Scalars['String']['input']>;
-  parentId?: InputMaybe<Scalars['String']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  parentId?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type Forum_Forums__Admin__ShowQuery = { __typename?: 'Query', forum_forums__admin__show: { __typename?: 'ShowForumForumsAdminObj', edges: Array<{ __typename?: 'ShowForumForumsAdmin', id: string, position: number, created: number, description: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }>, children?: Array<{ __typename?: 'ChildrenShowForumForums', created: number, id: string, position: number, description: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }>, _count: { __typename?: 'ShowForumForumsCount', children: number } }> | null, _count: { __typename?: 'ShowForumForumsCount', children: number } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
+export type Forum_Forums__Admin__ShowQuery = { __typename?: 'Query', forum_forums__admin__show: { __typename?: 'ShowForumForumsAdminObj', edges: Array<{ __typename?: 'ShowForumForumsAdmin', id: number, position: number, created: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, children?: Array<{ __typename?: 'ChildrenShowForumForums', created: number, id: number, position: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, _count: { __typename?: 'ShowForumForumsCount', children: number } }> | null, _count: { __typename?: 'ShowForumForumsCount', children: number } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Core_Groups__Admin__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
-  cursor?: InputMaybe<Scalars['String']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<Array<ShowAdminGroupsSortByArgs> | ShowAdminGroupsSortByArgs>;
   last?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type Core_Groups__Admin__ShowQuery = { __typename?: 'Query', core_groups__admin__show: { __typename?: 'ShowAdminGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, startCursor: string, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowAdminGroups', created: number, updated: number, id: string, users_count: number, protected: boolean, guest: boolean, root: boolean, default: boolean, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> }> } };
+export type Core_Groups__Admin__ShowQuery = { __typename?: 'Query', core_groups__admin__show: { __typename?: 'ShowAdminGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, startCursor?: number | null, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowAdminGroups', created: number, updated: number, id: number, users_count: number, protected: boolean, guest: boolean, root: boolean, default: boolean, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
 export type Core_Groups__Admin__Show_ShortQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -855,30 +863,30 @@ export type Core_Groups__Admin__Show_ShortQueryVariables = Exact<{
 }>;
 
 
-export type Core_Groups__Admin__Show_ShortQuery = { __typename?: 'Query', core_groups__admin__show: { __typename?: 'ShowAdminGroupsObj', edges: Array<{ __typename?: 'ShowAdminGroups', id: string, guest: boolean, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> }> } };
+export type Core_Groups__Admin__Show_ShortQuery = { __typename?: 'Query', core_groups__admin__show: { __typename?: 'ShowAdminGroupsObj', edges: Array<{ __typename?: 'ShowAdminGroups', id: number, guest: boolean, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
 export type Core_Staff_Administrators__Admin__ShowQueryVariables = Exact<{
-  cursor?: InputMaybe<Scalars['String']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   sortBy?: InputMaybe<Array<ShowAdminStaffAdministratorsSortByArgs> | ShowAdminStaffAdministratorsSortByArgs>;
 }>;
 
 
-export type Core_Staff_Administrators__Admin__ShowQuery = { __typename?: 'Query', core_staff_administrators__admin__show: { __typename?: 'ShowAdminStaffAdministratorsObj', edges: Array<{ __typename?: 'ShowAdminStaffAdministrators', created: number, id: string, unrestricted: boolean, updated: number, protected: boolean, user_or_group: { __typename: 'StaffGroupUser', id: string, group_name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> } | { __typename: 'User', avatar_color: string, id: string, name: string, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
+export type Core_Staff_Administrators__Admin__ShowQuery = { __typename?: 'Query', core_staff_administrators__admin__show: { __typename?: 'ShowAdminStaffAdministratorsObj', edges: Array<{ __typename?: 'ShowAdminStaffAdministrators', created: number, id: number, unrestricted: boolean, updated: number, protected: boolean, user_or_group: { __typename: 'StaffGroupUser', id: number, group_name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } | { __typename: 'User', avatar_color: string, id: number, name: string, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Core_Staff_Moderators__Admin__ShowQueryVariables = Exact<{
   sortBy?: InputMaybe<Array<ShowAdminStaffModeratorsSortByArgs> | ShowAdminStaffModeratorsSortByArgs>;
   last?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
-  cursor?: InputMaybe<Scalars['String']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type Core_Staff_Moderators__Admin__ShowQuery = { __typename?: 'Query', core_staff_moderators__admin__show: { __typename?: 'ShowAdminStaffModeratorsObj', edges: Array<{ __typename?: 'ShowAdminStaffModerators', created: number, id: string, unrestricted: boolean, updated: number, protected: boolean, user_or_group: { __typename: 'StaffGroupUser', id: string, group_name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> } | { __typename: 'User', avatar_color: string, id: string, name: string, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
+export type Core_Staff_Moderators__Admin__ShowQuery = { __typename?: 'Query', core_staff_moderators__admin__show: { __typename?: 'ShowAdminStaffModeratorsObj', edges: Array<{ __typename?: 'ShowAdminStaffModerators', created: number, id: number, unrestricted: boolean, updated: number, protected: boolean, user_or_group: { __typename: 'StaffGroupUser', id: number, group_name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } | { __typename: 'User', avatar_color: string, id: number, name: string, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Core_Members__Admin__ShowQueryVariables = Exact<{
-  cursor?: InputMaybe<Scalars['String']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
@@ -887,31 +895,31 @@ export type Core_Members__Admin__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Core_Members__Admin__ShowQuery = { __typename?: 'Query', core_members__admin__show: { __typename?: 'ShowAdminMembersObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminMembers', avatar_color: string, email: string, id: string, joined: number, name: string, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> } }> } };
+export type Core_Members__Admin__ShowQuery = { __typename?: 'Query', core_members__admin__show: { __typename?: 'ShowAdminMembersObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminMembers', avatar_color: string, email: string, id: number, joined: number, name: string, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
 
 export type Admin_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Admin_Sessions__AuthorizationQuery = { __typename?: 'Query', admin_sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> } } | null } };
+export type Admin_Sessions__AuthorizationQuery = { __typename?: 'Query', admin_sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null } };
 
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_MiddlewareQuery = { __typename?: 'Query', core_middleware: { __typename?: 'CoreMiddlewareObj', default_language: string, languages: Array<{ __typename?: 'LanguageCoreMiddlewareObj', default: boolean, id: string, name: string, timezone: string }> } };
+export type Core_MiddlewareQuery = { __typename?: 'Query', core_middleware: { __typename?: 'CoreMiddlewareObj', default_language: string, languages: Array<{ __typename?: 'LanguageCoreMiddlewareObj', default: boolean, code: string, id: number, name: string, timezone: string }> } };
 
 export type Core_Languages__MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_Languages__MiddlewareQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string, name: string, enabled: boolean, timezone: string, default: boolean }> } };
+export type Core_Languages__MiddlewareQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: number, code: string, name: string, enabled: boolean, timezone: string, default: boolean }> } };
 
 export type Core_Languages__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  cursor?: InputMaybe<Scalars['String']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type Core_Languages__ShowQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, enabled: boolean, id: string, name: string, protected: boolean, timezone: string }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
+export type Core_Languages__ShowQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string, default: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Core_Members__Show__SearchQueryVariables = Exact<{
   search?: InputMaybe<Scalars['String']['input']>;
@@ -919,46 +927,46 @@ export type Core_Members__Show__SearchQueryVariables = Exact<{
 }>;
 
 
-export type Core_Members__Show__SearchQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, id: string, name: string, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> } }> } };
+export type Core_Members__Show__SearchQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, id: number, name: string, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
 
 export type Core_Members__ProfilesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
-  findByIds?: InputMaybe<Array<Scalars['String']['input']> | Scalars['String']['input']>;
+  findByIds?: InputMaybe<Array<Scalars['Int']['input']> | Scalars['Int']['input']>;
 }>;
 
 
-export type Core_Members__ProfilesQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, id: string, joined: number, name: string, posts: number, group: { __typename?: 'GroupUser', name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> } }> } };
+export type Core_Members__ProfilesQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, id: number, joined: number, name: string, posts: number, group: { __typename?: 'GroupUser', name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
 
 export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> } } | null }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: string }> } };
+export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string }> } };
 
 export type Forum_Forums__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Forum_Forums__ShowQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, description: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }>, children?: Array<{ __typename?: 'ChildrenShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> }> | null, description: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> }> | null }> } };
+export type Forum_Forums__ShowQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, children?: Array<{ __typename?: 'ChildrenShowForumForums', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> | null, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> | null }> } };
 
 export type Forum_Forums__Show_ItemQueryVariables = Exact<{
-  cursor?: InputMaybe<Scalars['String']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  forumId: Scalars['String']['input'];
+  forumId: Scalars['Int']['input'];
 }>;
 
 
-export type Forum_Forums__Show_ItemQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: string, description: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }>, children?: Array<{ __typename?: 'ChildrenShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', id: string, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> }> | null, description: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> }> | null, permissions: { __typename?: 'PermissionsForumForumsCount', can_create: boolean } }> }, forum_topics__show: { __typename?: 'ShowTopicsForumsObj', edges: Array<{ __typename?: 'ShowTopicsForums', created: number, id: string, title: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }>, user: { __typename?: 'User', id: string, name: string, avatar_color: string, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
+export type Forum_Forums__Show_ItemQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithParent', id: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, children?: Array<{ __typename?: 'ChildrenShowForumForums', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, children?: Array<{ __typename?: 'ShowForumForums', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> | null, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> | null, permissions: { __typename?: 'PermissionsForumForumsCount', can_create: boolean } }> }, forum_topics__show: { __typename?: 'ShowTopicsForumsObj', edges: Array<{ __typename?: 'ShowTopicsForums', created: number, id: number, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, user: { __typename?: 'User', id: number, name: string, avatar_color: string, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Forum_Topics__ShowQueryVariables = Exact<{
-  id: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
   first?: InputMaybe<Scalars['Int']['input']>;
-  cursor?: InputMaybe<Scalars['String']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
   forumPostsShowFirst2?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type Forum_Topics__ShowQuery = { __typename?: 'Query', forum_topics__show: { __typename?: 'ShowTopicsForumsObj', edges: Array<{ __typename?: 'ShowTopicsForums', created: number, id: string, locked: boolean, content: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }>, title: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }>, user: { __typename?: 'User', avatar_color: string, id: string, name: string, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> } }, forum: { __typename?: 'ForumTopicsForums', id: string, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> } }> }, forum_posts__show: { __typename?: 'ShowPostsForumsObj', edges: Array<{ __typename: 'ShowPostsForums', id: string, created: number, content: Array<{ __typename?: 'TextLanguage', value: string, language_id: string }>, user: { __typename?: 'User', avatar_color: string, id: string, name: string, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> } } } | { __typename: 'ShowPostsForumsMetaTags', action: Forum_Topics_Logs_Actions_Enum, id: string, created: number, member: { __typename?: 'User', avatar_color: string, id: string, name: string, group: { __typename?: 'GroupUser', id: string, name: Array<{ __typename?: 'TextLanguage', language_id: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor: string, hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string, totalCount: number } } };
+export type Forum_Topics__ShowQuery = { __typename?: 'Query', forum_topics__show: { __typename?: 'ShowTopicsForumsObj', edges: Array<{ __typename?: 'ShowTopicsForums', created: number, id: number, locked: boolean, content: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, user: { __typename?: 'User', avatar_color: string, id: number, name: string, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }, forum: { __typename?: 'ForumTopicsForums', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> }, forum_posts__show: { __typename?: 'ShowPostsForumsObj', edges: Array<{ __typename: 'ShowPostsForums', id: number, created: number, content: Array<{ __typename?: 'TextLanguage', value: string, language_code: string }>, user: { __typename?: 'User', avatar_color: string, id: number, name: string, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } } | { __typename: 'ShowPostsForumsMetaTags', action: Forum_Topics_Logs_Actions_Enum, id: number, created: number, member: { __typename?: 'User', avatar_color: string, id: number, name: string, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 
 export const Admin_Install__Create_Database = gql`
@@ -967,7 +975,7 @@ export const Admin_Install__Create_Database = gql`
 }
     `;
 export const Forum_Forums__Admin__Change_Position = gql`
-    mutation Forum_forums__admin__change_position($id: String!, $indexToMove: Int!, $parentId: String) {
+    mutation Forum_forums__admin__change_position($id: Int!, $indexToMove: Int!, $parentId: Int) {
   forum_forums__admin__change_position(
     id: $id
     index_to_move: $indexToMove
@@ -976,7 +984,7 @@ export const Forum_Forums__Admin__Change_Position = gql`
 }
     `;
 export const Forum_Forums__Admin__Create = gql`
-    mutation Forum_forums__admin__create($name: [TextLanguageInput!]!, $description: [TextLanguageInput!]!, $parentId: String, $permissions: PermissionsCreateForumForums!) {
+    mutation Forum_forums__admin__create($name: [TextLanguageInput!]!, $description: [TextLanguageInput!]!, $parentId: Int, $permissions: PermissionsCreateForumForums!) {
   forum_forums__admin__create(
     name: $name
     description: $description
@@ -985,12 +993,12 @@ export const Forum_Forums__Admin__Create = gql`
   ) {
     created
     description {
-      language_id
+      language_code
       value
     }
     id
     name {
-      language_id
+      language_code
       value
     }
     position
@@ -998,17 +1006,17 @@ export const Forum_Forums__Admin__Create = gql`
 }
     `;
 export const Core_Groups__Admin__Delete = gql`
-    mutation Core_groups__admin__delete($id: String!) {
+    mutation Core_groups__admin__delete($id: Int!) {
   core_groups__admin__delete(id: $id)
 }
     `;
 export const Core_Groups__Admin__Edit = gql`
-    mutation Core_groups__admin__edit($id: String!, $name: [TextLanguageInput!]!) {
+    mutation Core_groups__admin__edit($id: Int!, $name: [TextLanguageInput!]!) {
   core_groups__admin__edit(id: $id, name: $name) {
     created
     id
     name {
-      language_id
+      language_code
       value
     }
     protected
@@ -1024,7 +1032,7 @@ export const Core_Groups__Admin_Create = gql`
     created
     id
     name {
-      language_id
+      language_code
       value
     }
     protected
@@ -1035,7 +1043,7 @@ export const Core_Groups__Admin_Create = gql`
 }
     `;
 export const Core_Staff_Administrators__Admin__Create = gql`
-    mutation Core_staff_administrators__admin__create($groupId: String, $userId: String, $unrestricted: Boolean!) {
+    mutation Core_staff_administrators__admin__create($groupId: Int, $userId: Int, $unrestricted: Boolean!) {
   core_staff_administrators__admin__create(
     group_id: $groupId
     user_id: $userId
@@ -1050,12 +1058,12 @@ export const Core_Staff_Administrators__Admin__Create = gql`
 }
     `;
 export const Core_Staff_Administrators__Admin__Delete = gql`
-    mutation Core_staff_administrators__admin__delete($id: String!) {
+    mutation Core_staff_administrators__admin__delete($id: Int!) {
   core_staff_administrators__admin__delete(id: $id)
 }
     `;
 export const Core_Staff_Moderators__Admin__Create = gql`
-    mutation Core_staff_moderators__admin__create($groupId: String, $userId: String, $unrestricted: Boolean!) {
+    mutation Core_staff_moderators__admin__create($groupId: Int, $userId: Int, $unrestricted: Boolean!) {
   core_staff_moderators__admin__create(
     group_id: $groupId
     user_id: $userId
@@ -1070,7 +1078,7 @@ export const Core_Staff_Moderators__Admin__Create = gql`
 }
     `;
 export const Core_Staff_Moderators__Admin__Delete = gql`
-    mutation Core_staff_moderators__admin__delete($id: String!) {
+    mutation Core_staff_moderators__admin__delete($id: Int!) {
   core_staff_moderators__admin__delete(id: $id)
 }
     `;
@@ -1087,14 +1095,16 @@ export const Admin_Settings__General__Edit = gql`
 }
     `;
 export const Core_Languages__Edit = gql`
-    mutation Core_languages__edit($default: Boolean!, $enabled: Boolean!, $id: String!, $name: String!, $timezone: String!) {
+    mutation Core_languages__edit($default: Boolean!, $enabled: Boolean!, $id: Int!, $name: String!, $timezone: String!, $code: String!) {
   core_languages__edit(
     default: $default
     enabled: $enabled
     id: $id
     name: $name
     timezone: $timezone
+    code: $code
   ) {
+    code
     default
     enabled
     id
@@ -1134,17 +1144,17 @@ export const Core_Sessions__Sign_Out = gql`
 }
     `;
 export const Forum_Topics__Actions__Lock_Toggle = gql`
-    mutation Forum_topics__actions__lock_toggle($id: String!) {
+    mutation Forum_topics__actions__lock_toggle($id: Int!) {
   forum_topics__actions__lock_toggle(id: $id)
 }
     `;
 export const Forum_Topics__Create = gql`
-    mutation Forum_topics__create($content: [TextLanguageInput!]!, $forumId: String!, $title: [TextLanguageInput!]!) {
+    mutation Forum_topics__create($content: [TextLanguageInput!]!, $forumId: Int!, $title: [TextLanguageInput!]!) {
   forum_topics__create(content: $content, forum_id: $forumId, title: $title) {
     created
     id
     title {
-      language_id
+      language_code
       value
     }
   }
@@ -1158,16 +1168,16 @@ export const Admin_Install__Layout = gql`
 }
     `;
 export const Forum_Forums__Admin__Show = gql`
-    query Forum_forums__admin__show($first: Int, $cursor: String, $parentId: String) {
+    query Forum_forums__admin__show($first: Int, $cursor: Int, $parentId: Int) {
   forum_forums__admin__show(first: $first, cursor: $cursor, parent_id: $parentId) {
     edges {
       id
       description {
-        language_id
+        language_code
         value
       }
       name {
-        language_id
+        language_code
         value
       }
       position
@@ -1175,12 +1185,12 @@ export const Forum_Forums__Admin__Show = gql`
       children {
         created
         description {
-          language_id
+          language_code
           value
         }
         id
         name {
-          language_id
+          language_code
           value
         }
         position
@@ -1204,7 +1214,7 @@ export const Forum_Forums__Admin__Show = gql`
 }
     `;
 export const Core_Groups__Admin__Show = gql`
-    query Core_groups__admin__show($first: Int, $cursor: String, $search: String, $sortBy: [ShowAdminGroupsSortByArgs!], $last: Int) {
+    query Core_groups__admin__show($first: Int, $cursor: Int, $search: String, $sortBy: [ShowAdminGroupsSortByArgs!], $last: Int) {
   core_groups__admin__show(
     first: $first
     cursor: $cursor
@@ -1228,7 +1238,7 @@ export const Core_Groups__Admin__Show = gql`
       protected
       guest
       name {
-        language_id
+        language_code
         value
       }
       root
@@ -1243,7 +1253,7 @@ export const Core_Groups__Admin__Show_Short = gql`
     edges {
       id
       name {
-        language_id
+        language_code
         value
       }
       guest
@@ -1252,7 +1262,7 @@ export const Core_Groups__Admin__Show_Short = gql`
 }
     `;
 export const Core_Staff_Administrators__Admin__Show = gql`
-    query Core_staff_administrators__admin__show($cursor: String, $first: Int, $last: Int, $sortBy: [ShowAdminStaffAdministratorsSortByArgs!]) {
+    query Core_staff_administrators__admin__show($cursor: Int, $first: Int, $last: Int, $sortBy: [ShowAdminStaffAdministratorsSortByArgs!]) {
   core_staff_administrators__admin__show(
     cursor: $cursor
     first: $first
@@ -1270,7 +1280,7 @@ export const Core_Staff_Administrators__Admin__Show = gql`
           group {
             id
             name {
-              language_id
+              language_code
               value
             }
           }
@@ -1279,7 +1289,7 @@ export const Core_Staff_Administrators__Admin__Show = gql`
         }
         ... on StaffGroupUser {
           group_name {
-            language_id
+            language_code
             value
           }
           id
@@ -1300,7 +1310,7 @@ export const Core_Staff_Administrators__Admin__Show = gql`
 }
     `;
 export const Core_Staff_Moderators__Admin__Show = gql`
-    query Core_staff_moderators__admin__show($sortBy: [ShowAdminStaffModeratorsSortByArgs!], $last: Int, $first: Int, $cursor: String) {
+    query Core_staff_moderators__admin__show($sortBy: [ShowAdminStaffModeratorsSortByArgs!], $last: Int, $first: Int, $cursor: Int) {
   core_staff_moderators__admin__show(
     sortBy: $sortBy
     last: $last
@@ -1318,7 +1328,7 @@ export const Core_Staff_Moderators__Admin__Show = gql`
           group {
             id
             name {
-              language_id
+              language_code
               value
             }
           }
@@ -1327,7 +1337,7 @@ export const Core_Staff_Moderators__Admin__Show = gql`
         }
         ... on StaffGroupUser {
           group_name {
-            language_id
+            language_code
             value
           }
           id
@@ -1348,7 +1358,7 @@ export const Core_Staff_Moderators__Admin__Show = gql`
 }
     `;
 export const Core_Members__Admin__Show = gql`
-    query Core_members__admin__show($cursor: String, $first: Int, $last: Int, $search: String, $sortBy: [ShowAdminMembersSortByArgs!], $groups: [String!]) {
+    query Core_members__admin__show($cursor: Int, $first: Int, $last: Int, $search: String, $sortBy: [ShowAdminMembersSortByArgs!], $groups: [String!]) {
   core_members__admin__show(
     cursor: $cursor
     first: $first
@@ -1374,7 +1384,7 @@ export const Core_Members__Admin__Show = gql`
       group {
         id
         name {
-          language_id
+          language_code
           value
         }
       }
@@ -1395,7 +1405,7 @@ export const Admin_Sessions__Authorization = gql`
       avatar_color
       group {
         name {
-          language_id
+          language_code
           value
         }
         id
@@ -1410,6 +1420,7 @@ export const Core_Middleware = gql`
     default_language
     languages {
       default
+      code
       id
       name
       timezone
@@ -1422,6 +1433,7 @@ export const Core_Languages__Middleware = gql`
   core_languages__show {
     edges {
       id
+      code
       name
       enabled
       timezone
@@ -1431,9 +1443,10 @@ export const Core_Languages__Middleware = gql`
 }
     `;
 export const Core_Languages__Show = gql`
-    query Core_languages__show($first: Int, $last: Int, $cursor: String) {
+    query Core_languages__show($first: Int, $last: Int, $cursor: Int) {
   core_languages__show(first: $first, last: $last, cursor: $cursor) {
     edges {
+      code
       default
       enabled
       id
@@ -1460,7 +1473,7 @@ export const Core_Members__Show__Search = gql`
       group {
         id
         name {
-          language_id
+          language_code
           value
         }
       }
@@ -1471,13 +1484,13 @@ export const Core_Members__Show__Search = gql`
 }
     `;
 export const Core_Members__Profiles = gql`
-    query Core_members__profiles($first: Int, $findByIds: [String!]) {
+    query Core_members__profiles($first: Int, $findByIds: [Int!]) {
   core_members__show(first: $first, findByIds: $findByIds) {
     edges {
       avatar_color
       group {
         name {
-          language_id
+          language_code
           value
         }
       }
@@ -1502,7 +1515,7 @@ export const Core_Sessions__Authorization = gql`
       avatar_color
       group {
         name {
-          language_id
+          language_code
           value
         }
         id
@@ -1511,7 +1524,7 @@ export const Core_Sessions__Authorization = gql`
   }
   core_languages__show {
     edges {
-      id
+      code
     }
   }
 }
@@ -1522,28 +1535,28 @@ export const Forum_Forums__Show = gql`
     edges {
       id
       description {
-        language_id
+        language_code
         value
       }
       name {
-        language_id
+        language_code
         value
       }
       children {
         id
         name {
-          language_id
+          language_code
           value
         }
         children {
           id
           name {
-            language_id
+            language_code
             value
           }
         }
         description {
-          language_id
+          language_code
           value
         }
       }
@@ -1552,33 +1565,33 @@ export const Forum_Forums__Show = gql`
 }
     `;
 export const Forum_Forums__Show_Item = gql`
-    query Forum_forums__show_item($cursor: String, $first: Int, $last: Int, $forumId: String!) {
+    query Forum_forums__show_item($cursor: Int, $first: Int, $last: Int, $forumId: Int!) {
   forum_forums__show(ids: [$forumId]) {
     edges {
       id
       description {
-        language_id
+        language_code
         value
       }
       name {
-        language_id
+        language_code
         value
       }
       children {
         id
         name {
-          language_id
+          language_code
           value
         }
         children {
           id
           name {
-            language_id
+            language_code
             value
           }
         }
         description {
-          language_id
+          language_code
           value
         }
       }
@@ -1597,7 +1610,7 @@ export const Forum_Forums__Show_Item = gql`
       created
       id
       title {
-        language_id
+        language_code
         value
       }
       user {
@@ -1607,7 +1620,7 @@ export const Forum_Forums__Show_Item = gql`
         group {
           id
           name {
-            language_id
+            language_code
             value
           }
         }
@@ -1625,18 +1638,18 @@ export const Forum_Forums__Show_Item = gql`
 }
     `;
 export const Forum_Topics__Show = gql`
-    query Forum_topics__show($id: String!, $first: Int, $cursor: String, $forumPostsShowFirst2: Int, $last: Int) {
+    query Forum_topics__show($id: Int!, $first: Int, $cursor: Int, $forumPostsShowFirst2: Int, $last: Int) {
   forum_topics__show(id: $id, first: $first) {
     edges {
       content {
-        language_id
+        language_code
         value
       }
       created
       id
       locked
       title {
-        language_id
+        language_code
         value
       }
       user {
@@ -1644,7 +1657,7 @@ export const Forum_Topics__Show = gql`
         group {
           id
           name {
-            language_id
+            language_code
             value
           }
         }
@@ -1654,7 +1667,7 @@ export const Forum_Topics__Show = gql`
       forum {
         id
         name {
-          language_id
+          language_code
           value
         }
       }
@@ -1671,7 +1684,7 @@ export const Forum_Topics__Show = gql`
       ... on ShowPostsForums {
         content {
           value
-          language_id
+          language_code
         }
         id
         user {
@@ -1679,7 +1692,7 @@ export const Forum_Topics__Show = gql`
           group {
             id
             name {
-              language_id
+              language_code
               value
             }
           }
@@ -1696,7 +1709,7 @@ export const Forum_Topics__Show = gql`
           group {
             id
             name {
-              language_id
+              language_code
               value
             }
           }

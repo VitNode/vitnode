@@ -1,18 +1,16 @@
 import { Operators, SQL, TableRelationalConfig, and, eq, lte } from 'drizzle-orm';
-
-import { isUUID } from '../is-uuid';
+import { PgTableWithColumns, TableConfig } from 'drizzle-orm/pg-core';
 
 import { PageInfo } from '@/types/database/pagination.type';
 import { CustomError } from '@/utils/errors/CustomError';
 import { DatabaseService } from '@/database/database.service';
-import { PgTableWithColumns, TableConfig } from 'drizzle-orm/pg-core';
 
 type DataInterface<T> = T & {
-  id: string;
+  id: number;
 };
 
 interface OutputPaginationArgs<T> {
-  cursor: string | undefined;
+  cursor: number | null;
   edges: DataInterface<T>[];
   first: number | null;
   last: number | null;
@@ -40,11 +38,11 @@ export function outputPagination<T>({
   }
 
   const edgesCursor = {
-    start: currentEdges.at(0)?.id ?? '',
-    end: currentEdges.at(-1)?.id ?? ''
+    start: currentEdges.at(0)?.id,
+    end: currentEdges.at(-1)?.id
   };
 
-  if (cursor && !isUUID(cursor)) {
+  if (cursor) {
     return {
       edges: [],
       pageInfo: {
@@ -52,8 +50,8 @@ export function outputPagination<T>({
         count: 0,
         hasNextPage: false,
         hasPreviousPage: false,
-        startCursor: '',
-        endCursor: ''
+        startCursor: null,
+        endCursor: null
       }
     };
   }
@@ -90,7 +88,7 @@ export function outputPagination<T>({
 
 // Input
 interface InputPaginationArgs {
-  cursor: string | undefined;
+  cursor: number | null;
   first: number | null;
   last: number | null;
   where?: SQL;
@@ -130,10 +128,6 @@ export function inputPagination<T extends TableRelationalConfig>({
   return {
     limit: (last || first) + 1,
     where: (table, { and, gt, lt }) => {
-      if (!isUUID(cursor)) {
-        return where;
-      }
-
       const whereCursor = last ? lt(table.id, cursor) : gt(table.id, cursor);
 
       return where ? and(whereCursor, where) : whereCursor;
@@ -142,17 +136,17 @@ export function inputPagination<T extends TableRelationalConfig>({
 }
 
 interface InputPaginationCursorArgs<T extends TableConfig> {
-  databaseService: DatabaseService;
-  cursor: string | null;
+  cursor: number | null;
   database: PgTableWithColumns<T>;
+  databaseService: DatabaseService;
   first: number | null;
   last?: number | null;
 }
 
 export async function inputPaginationCursor<T extends TableConfig>({
-  databaseService,
-  database,
   cursor: cursorId,
+  database,
+  databaseService,
   first,
   last
 }: InputPaginationCursorArgs<T>) {

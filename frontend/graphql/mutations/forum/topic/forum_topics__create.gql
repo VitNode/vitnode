@@ -1,13 +1,13 @@
 mutation Forum_topics__create(
   $content: [TextLanguageInput!]!
-  $forumId: String!
+  $forumId: Int!
   $title: [TextLanguageInput!]!
 ) {
   forum_topics__create(content: $content, forum_id: $forumId, title: $title) {
     created
     id
     title {
-      language_id
+      language_code
       value
     }
   }

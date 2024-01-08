@@ -6,6 +6,9 @@ export class EditCoreLanguagesArgs {
   id: number;
 
   @Field(() => String)
+  code: string;
+
+  @Field(() => String)
   name: string;
 
   @Field(() => String)

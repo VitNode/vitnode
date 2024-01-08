@@ -6,8 +6,8 @@ import { User } from '@/utils/decorators/user.decorator';
 
 @ObjectType()
 export class ForumTopicsForums {
-  @Field(() => String)
-  id: string;
+  @Field(() => Int)
+  id: number;
 
   @Field(() => [TextLanguage])
   name: TextLanguage[];
@@ -15,8 +15,8 @@ export class ForumTopicsForums {
 
 @ObjectType()
 export class ShowTopicsForums {
-  @Field(() => String)
-  id: string;
+  @Field(() => Int)
+  id: number;
 
   @Field(() => [TextLanguage])
   title: TextLanguage[];

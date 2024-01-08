@@ -8,7 +8,7 @@ export const core_files = pgTable('core_files', {
   extension: varchar('extension', { length: 32 }).notNull(),
   name: varchar('name', { length: 255 }).notNull(),
   url: varchar('url', { length: 255 }).notNull(),
-  user_id: serial('user_id')
+  user_id: integer('user_id')
     .notNull()
     .references(() => core_users.id, {
       onDelete: 'cascade'

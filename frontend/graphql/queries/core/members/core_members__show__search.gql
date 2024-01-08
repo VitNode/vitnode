@@ -5,7 +5,7 @@ query Core_members__show__search($search: String, $first: Int) {
       group {
         id
         name {
-          language_id
+          language_code
           value
         }
       }

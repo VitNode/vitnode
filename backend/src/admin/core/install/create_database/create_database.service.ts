@@ -45,7 +45,7 @@ export class CreateDatabaseAdminInstallService {
 
     await this.databaseService.db.insert(core_languages).values([
       {
-        id: 'en',
+        code: 'en',
         name: 'English',
         default: true,
         protected: true,
@@ -53,7 +53,7 @@ export class CreateDatabaseAdminInstallService {
         created: currentDate()
       },
       {
-        id: 'pl',
+        code: 'pl',
         name: 'Polski (Polish)',
         timezone: 'Europe/Warsaw',
         created: currentDate()

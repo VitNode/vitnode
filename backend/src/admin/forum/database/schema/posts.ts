@@ -9,10 +9,10 @@ import { core_languages } from '@/src/admin/core/database/schema/languages';
 
 export const forum_posts = pgTable('forum_posts', {
   id: serial('id').primaryKey(),
-  topic_id: serial('topic_id').references(() => forum_topics.id, {
+  topic_id: integer('topic_id').references(() => forum_topics.id, {
     onDelete: 'cascade'
   }),
-  user_id: serial('user_id').references(() => core_users.id, {
+  user_id: integer('user_id').references(() => core_users.id, {
     onDelete: 'cascade'
   }),
   ip_address: varchar('ip_address', { length: 45 }),
@@ -34,7 +34,7 @@ export const relations_forum_posts = relations(forum_posts, ({ many, one }) => (
 
 export const forum_posts_content = pgTable('forum_posts_content', {
   id: serial('id').primaryKey(),
-  topic_id: serial('topic_id').references(() => forum_forums.id, {
+  topic_id: integer('topic_id').references(() => forum_forums.id, {
     onDelete: 'cascade'
   }),
   language_code: varchar('language_code')
@@ -47,11 +47,11 @@ export const forum_posts_content = pgTable('forum_posts_content', {
 
 export const forum_posts_timeline = pgTable('forum_posts_timeline', {
   id: serial('id').primaryKey(),
-  post_id: serial('post_id').references(() => forum_posts.id, {
+  post_id: integer('post_id').references(() => forum_posts.id, {
     onDelete: 'cascade'
   }),
   log: text('log'),
-  topic_log_id: serial('topic_log_id').references(() => forum_topics_logs.id, {
+  topic_log_id: integer('topic_log_id').references(() => forum_topics_logs.id, {
     onDelete: 'cascade'
   }),
   created: integer('created').notNull()

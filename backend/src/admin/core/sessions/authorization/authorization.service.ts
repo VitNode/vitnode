@@ -26,7 +26,6 @@ export class AuthorizationAdminSessionsService {
     }
 
     // If access token exists, check it
-
     const session = await this.databaseService.db.query.core_admin_sessions.findFirst({
       where: (table, { eq }) => eq(table.login_token, login_token),
       with: {

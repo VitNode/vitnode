@@ -33,7 +33,7 @@ export class CoreMiddlewareService {
     };
   }
 
-  protected async createKnowDevice({ req, res }: Ctx): Promise<string> {
+  protected async createKnowDevice({ req, res }: Ctx): Promise<number> {
     const dataDevice = await this.databaseService.db
       .insert(core_sessions_known_devices)
       .values({
@@ -62,9 +62,9 @@ export class CoreMiddlewareService {
     return device.id;
   }
 
-  protected async checkDevice({ req, res }: Ctx): Promise<string> {
-    const know_device_id: string | undefined =
-      req.cookies[this.configService.getOrThrow('cookies.known_device.name')];
+  protected async checkDevice({ req, res }: Ctx): Promise<number> {
+    const know_device_id: number | undefined =
+      +req.cookies[this.configService.getOrThrow('cookies.known_device.name')];
     if (!know_device_id) {
       return await this.createKnowDevice({ req, res });
     }
@@ -115,7 +115,7 @@ export class CoreMiddlewareService {
       where: (table, { eq }) => eq(table.enabled, true)
     });
 
-    const default_language = languages.find(language => language.default)?.id ?? 'en';
+    const default_language = languages.find(language => language.default)?.code ?? 'en';
 
     return {
       languages,
