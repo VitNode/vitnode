@@ -1,16 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { count, eq, ilike, inArray } from 'drizzle-orm';
+import { count, eq } from 'drizzle-orm';
 
 import { ShowAdminGroupsArgs } from './dto/show.args';
 import { ShowAdminGroupsObj } from './dto/show.obj';
 
 import { DatabaseService } from '@/database/database.service';
-import {
-  core_groups,
-  core_members,
-  core_groups_names
-} from '@/src/admin/core/database/schema/groups';
+import { core_groups } from '@/src/admin/core/database/schema/groups';
 import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
 export class ShowAdminGroupsService {
@@ -67,7 +64,12 @@ export class ShowAdminGroupsService {
       first,
       last,
       primaryCursor: { order: 'ASC', key: 'id', schema: core_groups.id },
-      cursors: [{ order: 'DESC', key: 'updated', schema: core_groups.updated }]
+      cursors: [{ order: 'DESC', key: 'updated', schema: core_groups.updated }],
+      defaultSortBy: {
+        direction: SortDirectionEnum.desc,
+        column: 'updated'
+      },
+      sortBy
     });
 
     const edges = await this.databaseService.db.query.core_groups.findMany({

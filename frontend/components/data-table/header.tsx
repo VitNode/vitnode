@@ -51,6 +51,9 @@ export function HeaderSortingDataTable<T>({ children, column, table }: Props<T>)
           return defaultSortingState[0].desc ? 'asc' : 'desc';
         };
         params.set('sortDirection', sortDirection());
+        params.delete('cursor');
+        params.delete('first');
+        params.delete('last');
 
         push(`${pathname}?${params.toString()}`);
       }}
