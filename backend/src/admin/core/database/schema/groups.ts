@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm';
-import { boolean, integer, pgTable, serial, varchar } from 'drizzle-orm/pg-core';
+import { boolean, integer, pgTable, serial, uuid, varchar } from 'drizzle-orm/pg-core';
 
 import { core_languages } from './languages';
 
@@ -16,6 +16,12 @@ export const core_groups = pgTable('core_groups', {
 export const relations_core_groups = relations(core_groups, ({ many }) => ({
   name: many(core_groups_names)
 }));
+
+export const core_members = pgTable('core_members', {
+  id: serial('id').primaryKey(),
+  joined: integer('joined').notNull(),
+  posts: integer('posts').notNull().default(0)
+});
 
 export const core_groups_names = pgTable('core_groups_names', {
   id: serial('id').primaryKey(),

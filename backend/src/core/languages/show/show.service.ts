@@ -10,7 +10,7 @@ import { ShowCoreLanguagesObj } from './dto/show.obj';
 import { CustomError } from '@/utils/errors/CustomError';
 import { ConfigType } from '@/types/config.type';
 import { DatabaseService } from '@/database/database.service';
-import { outputPagination, inputPagination } from '@/functions/database/pagination';
+import { outputPagination } from '@/functions/database/pagination';
 import { core_languages } from '@/src/admin/core/database/schema/languages';
 
 @Injectable()
@@ -22,11 +22,15 @@ export class ShowCoreLanguageService {
     const config: ConfigType = JSON.parse(configFile);
 
     const edges = await this.databaseService.db.query.core_languages.findMany({
-      ...inputPagination({
-        cursor,
-        first,
-        last
-      })
+      columns: {
+        id: true,
+        code: true,
+        name: true,
+        default: true,
+        enabled: true,
+        timezone: true,
+        protected: true
+      }
     });
 
     const totalCount = await this.databaseService.db

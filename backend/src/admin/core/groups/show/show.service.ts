@@ -5,12 +5,12 @@ import { ShowAdminGroupsArgs } from './dto/show.args';
 import { ShowAdminGroupsObj } from './dto/show.obj';
 
 import { DatabaseService } from '@/database/database.service';
-import { core_groups, core_groups_names } from '@/src/admin/core/database/schema/groups';
 import {
-  outputPagination,
-  inputPagination,
-  inputPaginationCursor
-} from '@/functions/database/pagination';
+  core_groups,
+  core_members,
+  core_groups_names
+} from '@/src/admin/core/database/schema/groups';
+import { outputPagination } from '@/functions/database/pagination';
 
 @Injectable()
 export class ShowAdminGroupsService {
@@ -41,6 +41,25 @@ export class ShowAdminGroupsService {
     //   last
     // });
 
+    // const test123 = await this.databaseService.db.query.core_members.findMany(
+    //   withCursorPagination({
+    //     // where: eq(schema.post.status, 'published'), // 'where' is optional
+    //     limit: 5,
+    //     cursors: [
+    //       [
+    //         core_members.joined, // Column to use for cursor
+    //         'desc' // Sort order ('asc' or 'desc')
+    //         // '1704743328' // Cursor value
+    //       ],
+    //       [
+    //         core_members.id, // Column to use for cursor
+    //         'asc' // Sort order ('asc' or 'desc')
+    //         // '11' // Cursor value
+    //       ]
+    //     ]
+    //   })
+    // );
+
     const edges = await this.databaseService.db.query.core_groups.findMany({
       // ...inputPagination({
       //   cursor,
@@ -48,7 +67,9 @@ export class ShowAdminGroupsService {
       //   last,
       //   where: search && filtersName.length > 0 ? inArray(core_groups.id, filtersName) : undefined
       // }),
-      orderBy: (table, { desc }) => [desc(table.updated)],
+      where: (table, { gt }) => gt(table.id, 0),
+      limit: 10,
+      orderBy: (table, { desc, asc }) => [desc(table.updated), asc(table.id)],
       with: {
         name: {
           columns: {

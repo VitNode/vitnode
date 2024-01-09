@@ -7,7 +7,7 @@ import { ShowForumForumsObj } from './dto/show.obj';
 import { User } from '@/utils/decorators/user.decorator';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { DatabaseService } from '@/database/database.service';
-import { outputPagination, inputPagination } from '@/functions/database/pagination';
+import { outputPagination } from '@/functions/database/pagination';
 import { forum_forums } from '@/src/admin/forum/database/schema/forums';
 
 @Injectable()
@@ -60,11 +60,11 @@ export class ShowForumForumsService {
     // };
 
     const forums = await this.databaseService.db.query.forum_forums.findMany({
-      ...inputPagination({
-        cursor,
-        first,
-        last
-      }),
+      // ...inputPagination({
+      //   cursor,
+      //   first,
+      //   last
+      // }),
       orderBy: (table, { asc }) => [asc(table.position)],
       with: {
         name: true,

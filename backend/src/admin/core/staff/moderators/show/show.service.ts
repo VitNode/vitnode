@@ -5,7 +5,7 @@ import { ShowAdminStaffModeratorsArgs } from './dto/show.args';
 import { ShowAdminStaffModeratorsObj } from './dto/show.obj';
 
 import { DatabaseService } from '@/database/database.service';
-import { outputPagination, inputPagination } from '@/functions/database/pagination';
+import { outputPagination } from '@/functions/database/pagination';
 import { core_moderators_permissions } from '@/src/admin/core/database/schema/moderators';
 
 @Injectable()
@@ -19,11 +19,11 @@ export class ShowAdminStaffModeratorsService {
     sortBy
   }: ShowAdminStaffModeratorsArgs): Promise<ShowAdminStaffModeratorsObj> {
     const edges = await this.databaseService.db.query.core_moderators_permissions.findMany({
-      ...inputPagination({
-        cursor,
-        first,
-        last
-      }),
+      // ...inputPagination({
+      //   cursor,
+      //   first,
+      //   last
+      // }),
       orderBy: (table, { desc }) => [desc(table.updated)],
       with: {
         group: {

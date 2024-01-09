@@ -1,5 +1,19 @@
-import { Operators, SQL, TableRelationalConfig, and, eq, lte } from 'drizzle-orm';
-import { PgTableWithColumns, TableConfig } from 'drizzle-orm/pg-core';
+import {
+  AnyColumn,
+  Operators,
+  SQL,
+  SQLWrapper,
+  TableRelationalConfig,
+  and,
+  asc,
+  desc,
+  eq,
+  gt,
+  lt,
+  lte,
+  or
+} from 'drizzle-orm';
+import { PgColumn, PgTableWithColumns, TableConfig } from 'drizzle-orm/pg-core';
 
 import { PageInfo } from '@/types/database/pagination.type';
 import { CustomError } from '@/utils/errors/CustomError';
@@ -42,20 +56,6 @@ export function outputPagination<T>({
     end: currentEdges.at(-1)?.id
   };
 
-  if (cursor) {
-    return {
-      edges: [],
-      pageInfo: {
-        totalCount: 0,
-        count: 0,
-        hasNextPage: false,
-        hasPreviousPage: false,
-        startCursor: null,
-        endCursor: null
-      }
-    };
-  }
-
   if (!first && !last) {
     return {
       edges,
@@ -86,61 +86,62 @@ export function outputPagination<T>({
   };
 }
 
-// Input
-interface InputPaginationArgs {
-  cursor: number | null;
-  first: number | null;
-  last: number | null;
-  where?: SQL;
-}
-
-interface InputPaginationReturn<T extends TableRelationalConfig> {
-  limit: number;
-  where?: (table: T['columns'], operators: Operators) => SQL | SQL;
-}
-
-export function inputPagination<T extends TableRelationalConfig>({
-  cursor,
-  first,
-  last,
-  where
-}: InputPaginationArgs): InputPaginationReturn<T> {
-  if (!first && !last) {
-    return {
-      limit: 0
-    };
-  }
-
-  if (!cursor) {
-    if (!first) {
-      throw new CustomError({
-        code: 'PAGINATION_ERROR',
-        message: 'You must provide first argument when cursor is not provided'
-      });
-    }
-
-    return {
-      limit: first || last,
-      where: () => where
-    };
-  }
-
-  return {
-    limit: (last || first) + 1,
-    where: (table, { and, gt, lt }) => {
-      const whereCursor = last ? lt(table.id, cursor) : gt(table.id, cursor);
-
-      return where ? and(whereCursor, where) : whereCursor;
-    }
-  };
-}
+// Input Pagination Cursor
+export type Cursor = { order?: 'ASC' | 'DESC'; key: string; schema: AnyColumn };
 
 interface InputPaginationCursorArgs<T extends TableConfig> {
   cursor: number | null;
   database: PgTableWithColumns<T>;
   databaseService: DatabaseService;
   first: number | null;
-  last?: number | null;
+  last: number | null;
+  primaryCursor: Cursor;
+  cursors?: Cursor[];
+}
+
+interface Return {
+  orderBy: SQL<unknown>[];
+  where: SQL<unknown>;
+  limit: number;
+}
+
+function parse<T extends Record<string, unknown> = Record<string, unknown>>(
+  {
+    primaryCursor,
+    cursors = []
+  }: {
+    primaryCursor: Cursor;
+    cursors?: Cursor[];
+  },
+  cursor?: string | null
+): T | null {
+  if (!cursor) {
+    return null;
+  }
+
+  const keys = [primaryCursor, ...cursors].map(cursor => cursor.key);
+  const data = JSON.parse(atob(cursor)) as T;
+
+  const item = keys.reduce(
+    (acc, key) => {
+      const value = data[key];
+      acc[key] = value;
+
+      return acc;
+    },
+    {} as Record<string, unknown>
+  );
+
+  return item as T;
+}
+
+function generateSubArrays<T>(arr: ReadonlyArray<T>): T[][] {
+  const subArrays: T[][] = [];
+  for (let i = 0; i < arr.length; i++) {
+    subArrays.push([...arr.slice(0, i + 1)]);
+  }
+
+  return subArrays;
 }
 
 export async function inputPaginationCursor<T extends TableConfig>({
@@ -148,31 +149,81 @@ export async function inputPaginationCursor<T extends TableConfig>({
   database,
   databaseService,
   first,
-  last
-}: InputPaginationCursorArgs<T>) {
-  // Check if database has `created` and `id` columns
-  if (!database['created'] || !database['id']) {
+  last,
+  cursors = [],
+  primaryCursor
+}: InputPaginationCursorArgs<T>): Promise<Return> {
+  const orderBy: SQL[] = [];
+  for (const { order = 'ASC', schema } of [...cursors, primaryCursor]) {
+    const fn = order === 'ASC' ? asc : desc;
+    const sql = fn(schema);
+    orderBy.push(sql);
+  }
+
+  if (!cursorId) {
+    return {
+      where: undefined,
+      orderBy,
+      limit: (first || last) ?? 0
+    };
+  }
+
+  if (!database[primaryCursor.key]) {
     throw new CustomError({
       code: 'PAGINATION_ERROR',
-      message: 'You must provide `created` and `id` columns in database'
+      message: `You must provide \`${primaryCursor.key}\` column in database`
     });
   }
 
-  const cursor = await databaseService.db
+  const cursorData = await databaseService.db
     .select()
     .from(database)
     .where(eq(database.id, cursorId))
     .limit(1);
 
-  if (cursor.length === 0) {
-    return {
-      limit: first || last,
-      where: undefined
-    };
+  const cursorItem = cursorData[0];
+
+  if (!cursorItem) {
+    throw new CustomError({
+      code: 'PAGINATION_ERROR',
+      message: `Cursor item not found`
+    });
   }
 
+  const where = (cursorItem?: Record<string, unknown> | string | null) => {
+    const data =
+      typeof cursorItem === 'string' ? parse({ primaryCursor, cursors }, cursorItem) : cursorItem;
+
+    if (!data) {
+      return undefined;
+    }
+
+    const matrix = generateSubArrays([...cursors, primaryCursor]);
+
+    const ors: SQL[] = [];
+    for (const posibilities of matrix) {
+      const ands: SQL[] = [];
+      for (const cursor of posibilities) {
+        const lastValue = cursor === posibilities?.at(-1);
+        const { order = 'ASC', schema, key } = cursor;
+        const fn = order === 'ASC' ? gt : lt;
+        const sql = !lastValue ? eq(schema, data[key]) : fn(schema, data[key]);
+        ands.push(sql);
+      }
+      const _and = and(...ands);
+      if (!_and) {
+        continue;
+      }
+      ors.push(_and);
+    }
+    const where = or(...ors);
+
+    return where;
+  };
+
   return {
-    limit: (last || first) + 1,
-    where: and(lte(database['created'], cursor[0]['created']), eq(database['id'], cursorId))
+    where: where(cursorItem),
+    orderBy,
+    limit: first || last ? (first || last) + 1 : 0
   };
 }

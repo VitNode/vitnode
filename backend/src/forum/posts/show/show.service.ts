@@ -4,7 +4,7 @@ import { count, eq, or } from 'drizzle-orm';
 import { ShowPostsForumsArgs } from './dto/show.args';
 import { ShowPostsForumsObj } from './dto/show.obj';
 
-import { outputPagination, inputPagination } from '@/functions/database/pagination';
+import { outputPagination } from '@/functions/database/pagination';
 import { DatabaseService } from '@/database/database.service';
 import { forum_posts, forum_posts_timeline } from '@/src/admin/forum/database/schema/posts';
 import { forum_topics_logs } from '@/src/admin/forum/database/schema/topics';
@@ -17,12 +17,12 @@ export class ShowPostsForumsService {
     // TODO: Check permissions if user can view this topic
 
     const edges = await this.databaseService.db.query.forum_posts_timeline.findMany({
-      ...inputPagination({
-        cursor,
-        first,
-        last,
-        where: or(eq(forum_posts.topic_id, topic_id), eq(forum_topics_logs.topic_id, topic_id))
-      }),
+      // ...inputPagination({
+      //   cursor,
+      //   first,
+      //   last,
+      //   where: or(eq(forum_posts.topic_id, topic_id), eq(forum_topics_logs.topic_id, topic_id))
+      // }),
       orderBy: (table, { asc }) => [asc(table.created)],
       with: {
         post: {

@@ -7,7 +7,7 @@ import { ShowTopicsForumsObj } from './dto/show.obj';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 import { User } from '@/utils/decorators/user.decorator';
 import { DatabaseService } from '@/database/database.service';
-import { outputPagination, inputPagination } from '@/functions/database/pagination';
+import { outputPagination } from '@/functions/database/pagination';
 import { forum_topics } from '@/src/admin/forum/database/schema/topics';
 import { forum_forums, forum_forums_permissions } from '@/src/admin/forum/database/schema/forums';
 
@@ -32,12 +32,12 @@ export class ShowTopicsForumsService {
     // );
 
     const edges = await this.databaseService.db.query.forum_topics.findMany({
-      ...inputPagination({
-        cursor,
-        first,
-        last
-        //  where
-      }),
+      // ...inputPagination({
+      //   cursor,
+      //   first,
+      //   last
+      //   //  where
+      // }),
       orderBy: (table, { asc }) => [asc(table.created)],
       with: {
         forum: {

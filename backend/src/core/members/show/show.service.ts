@@ -5,7 +5,7 @@ import { ShowCoreMembersObj } from './dto/show.obj';
 import { ShowCoreMembersArgs } from './dto/show.args';
 
 import { DatabaseService } from '@/database/database.service';
-import { outputPagination, inputPagination } from '@/functions/database/pagination';
+import { outputPagination } from '@/functions/database/pagination';
 import { core_users } from '@/src/admin/core/database/schema/users';
 
 @Injectable()
@@ -34,11 +34,11 @@ export class ShowCoreMembersService {
     //     };
 
     const edges = await this.databaseService.db.query.core_users.findMany({
-      ...inputPagination({
-        cursor,
-        first,
-        last
-      }),
+      // ...inputPagination({
+      //   cursor,
+      //   first,
+      //   last
+      // }),
       orderBy: (table, { asc }) => [asc(table.joined)],
       with: {
         avatar: true,

@@ -5,7 +5,7 @@ import { ShowForumForumsAdminObj } from './dto/show.obj';
 
 import { ShowForumForumsArgs } from '../../../../forum/forums/show/dto/show.args';
 import { DatabaseService } from '@/database/database.service';
-import { outputPagination, inputPagination } from '@/functions/database/pagination';
+import { outputPagination } from '@/functions/database/pagination';
 import { forum_forums } from '@/src/admin/forum/database/schema/forums';
 
 @Injectable()
