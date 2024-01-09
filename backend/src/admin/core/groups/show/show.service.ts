@@ -10,7 +10,7 @@ import {
   core_members,
   core_groups_names
 } from '@/src/admin/core/database/schema/groups';
-import { outputPagination } from '@/functions/database/pagination';
+import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
 
 @Injectable()
 export class ShowAdminGroupsService {
@@ -60,16 +60,18 @@ export class ShowAdminGroupsService {
     //   })
     // );
 
+    const pagination = await inputPaginationCursor({
+      cursor,
+      database: core_groups,
+      databaseService: this.databaseService,
+      first,
+      last,
+      primaryCursor: { order: 'ASC', key: 'id', schema: core_groups.id },
+      cursors: [{ order: 'DESC', key: 'updated', schema: core_groups.updated }]
+    });
+
     const edges = await this.databaseService.db.query.core_groups.findMany({
-      // ...inputPagination({
-      //   cursor,
-      //   first,
-      //   last,
-      //   where: search && filtersName.length > 0 ? inArray(core_groups.id, filtersName) : undefined
-      // }),
-      where: (table, { gt }) => gt(table.id, 0),
-      limit: 10,
-      orderBy: (table, { desc, asc }) => [desc(table.updated), asc(table.id)],
+      ...pagination,
       with: {
         name: {
           columns: {

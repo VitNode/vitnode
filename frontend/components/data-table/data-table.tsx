@@ -53,6 +53,11 @@ export function DataTable<TData extends TDataMin>({
   const pathname = usePathname();
   const { push } = useRouter();
   const t = useTranslations('core');
+  const pagination = {
+    first: searchParams.get('first'),
+    last: searchParams.get('last'),
+    cursor: searchParams.get('cursor')
+  };
 
   const table = useReactTable({
     data: useMemo(() => data, [data]),
@@ -82,11 +87,6 @@ export function DataTable<TData extends TDataMin>({
     }
   });
 
-  const pagination = {
-    first: searchParams.get('first'),
-    last: searchParams.get('last'),
-    cursor: searchParams.get('cursor')
-  };
   const enablePageSize = [10, 20, 30, 40, 50];
   const pageSizeValue = useMemo(() => {
     if (enablePageSize.includes(Number(pagination.first))) {

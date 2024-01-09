@@ -1,19 +1,5 @@
-import {
-  AnyColumn,
-  Operators,
-  SQL,
-  SQLWrapper,
-  TableRelationalConfig,
-  and,
-  asc,
-  desc,
-  eq,
-  gt,
-  lt,
-  lte,
-  or
-} from 'drizzle-orm';
-import { PgColumn, PgTableWithColumns, TableConfig } from 'drizzle-orm/pg-core';
+import { AnyColumn, SQL, and, asc, desc, eq, gt, lt, or } from 'drizzle-orm';
+import { PgTableWithColumns, TableConfig } from 'drizzle-orm/pg-core';
 
 import { PageInfo } from '@/types/database/pagination.type';
 import { CustomError } from '@/utils/errors/CustomError';
@@ -49,6 +35,10 @@ export function outputPagination<T>({
 
   if (cursor) {
     currentEdges = first ? edges.slice(0, first) : edges.slice(-last);
+  }
+
+  if (last) {
+    currentEdges = currentEdges.reverse();
   }
 
   const edgesCursor = {
@@ -87,7 +77,7 @@ export function outputPagination<T>({
 }
 
 // Input Pagination Cursor
-export type Cursor = { order?: 'ASC' | 'DESC'; key: string; schema: AnyColumn };
+export type Cursor = { key: string; schema: AnyColumn; order?: 'ASC' | 'DESC' };
 
 interface InputPaginationCursorArgs<T extends TableConfig> {
   cursor: number | null;
@@ -100,39 +90,9 @@ interface InputPaginationCursorArgs<T extends TableConfig> {
 }
 
 interface Return {
+  limit: number;
   orderBy: SQL<unknown>[];
   where: SQL<unknown>;
-  limit: number;
-}
-
-function parse<T extends Record<string, unknown> = Record<string, unknown>>(
-  {
-    primaryCursor,
-    cursors = []
-  }: {
-    primaryCursor: Cursor;
-    cursors?: Cursor[];
-  },
-  cursor?: string | null
-): T | null {
-  if (!cursor) {
-    return null;
-  }
-
-  const keys = [primaryCursor, ...cursors].map(cursor => cursor.key);
-  const data = JSON.parse(atob(cursor)) as T;
-
-  const item = keys.reduce(
-    (acc, key) => {
-      const value = data[key];
-      acc[key] = value;
-
-      return acc;
-    },
-    {} as Record<string, unknown>
-  );
-
-  return item as T;
 }
 
 function generateSubArrays<T>(arr: ReadonlyArray<T>): T[][] {
@@ -146,16 +106,16 @@ function generateSubArrays<T>(arr: ReadonlyArray<T>): T[][] {
 
 export async function inputPaginationCursor<T extends TableConfig>({
   cursor: cursorId,
+  cursors = [],
   database,
   databaseService,
   first,
   last,
-  cursors = [],
   primaryCursor
 }: InputPaginationCursorArgs<T>): Promise<Return> {
   const orderBy: SQL[] = [];
   for (const { order = 'ASC', schema } of [...cursors, primaryCursor]) {
-    const fn = order === 'ASC' ? asc : desc;
+    const fn = last ? (order === 'ASC' ? desc : asc) : order === 'ASC' ? asc : desc;
     const sql = fn(schema);
     orderBy.push(sql);
   }
@@ -190,11 +150,8 @@ export async function inputPaginationCursor<T extends TableConfig>({
     });
   }
 
-  const where = (cursorItem?: Record<string, unknown> | string | null) => {
-    const data =
-      typeof cursorItem === 'string' ? parse({ primaryCursor, cursors }, cursorItem) : cursorItem;
-
-    if (!data) {
+  const where = (cursorItem?: Record<string, unknown>) => {
+    if (!cursorItem) {
       return undefined;
     }
 
@@ -205,9 +162,9 @@ export async function inputPaginationCursor<T extends TableConfig>({
       const ands: SQL[] = [];
       for (const cursor of posibilities) {
         const lastValue = cursor === posibilities?.at(-1);
-        const { order = 'ASC', schema, key } = cursor;
-        const fn = order === 'ASC' ? gt : lt;
-        const sql = !lastValue ? eq(schema, data[key]) : fn(schema, data[key]);
+        const { key, order = 'ASC', schema } = cursor;
+        const fn = last ? (order === 'ASC' ? lt : gt) : order === 'ASC' ? gt : lt;
+        const sql = !lastValue ? eq(schema, cursorItem[key]) : fn(schema, cursorItem[key]);
         ands.push(sql);
       }
       const _and = and(...ands);
