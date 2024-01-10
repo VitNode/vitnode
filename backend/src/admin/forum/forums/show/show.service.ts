@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { count, eq } from 'drizzle-orm';
+import { and, count, eq, isNull } from 'drizzle-orm';
 
 import { ShowForumForumsAdminObj } from './dto/show.obj';
 
@@ -32,10 +32,13 @@ export class ShowForumForumsAdminService {
       }
     });
 
-    const where = eq(forum_forums.parent_id, parent_id);
+    const where = !parent_id
+      ? isNull(forum_forums.parent_id)
+      : eq(forum_forums.parent_id, parent_id);
 
     const forums = await this.databaseService.db.query.forum_forums.findMany({
       ...pagination,
+      where: and(pagination.where, where),
       with: {
         name: true,
         description: true,
@@ -55,16 +58,37 @@ export class ShowForumForumsAdminService {
 
     const edges = await Promise.all(
       forums.map(async forum => {
-        const childrenCount = await this.databaseService.db
-          .select({ count: count() })
-          .from(forum_forums)
-          .where(eq(forum_forums.parent_id, forum.id));
+        const children = await this.databaseService.db.query.forum_forums.findMany({
+          where: eq(forum_forums.parent_id, forum.id),
+          with: {
+            name: true,
+            description: true,
+            permissions: true
+          }
+        });
 
         return {
           ...forum,
-          parent: { ...forum.parent, _count: { children: 0 } },
-          children: [],
-          _count: { children: childrenCount[0].count }
+          parent: forum.parent_id ? { ...forum.parent, _count: { children: 0 } } : null,
+          _count: { children: children.length },
+          children: await Promise.all(
+            children.map(async child => {
+              const children = await this.databaseService.db.query.forum_forums.findMany({
+                where: eq(forum_forums.parent_id, child.id),
+                with: {
+                  name: true,
+                  description: true,
+                  permissions: true
+                }
+              });
+
+              return {
+                ...child,
+                children,
+                _count: { children: children.length }
+              };
+            })
+          )
         };
       })
     );

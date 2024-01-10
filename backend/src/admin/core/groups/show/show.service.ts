@@ -45,14 +45,11 @@ export class ShowAdminGroupsService {
       sortBy
     });
 
-    const where = and(
-      pagination.where,
-      filtersName.length > 0 ? inArray(core_groups.id, filtersName) : undefined
-    );
+    const where = filtersName.length > 0 ? inArray(core_groups.id, filtersName) : undefined;
 
     const edges = await this.databaseService.db.query.core_groups.findMany({
       ...pagination,
-      where,
+      where: and(pagination.where, where),
       with: {
         name: {
           columns: {

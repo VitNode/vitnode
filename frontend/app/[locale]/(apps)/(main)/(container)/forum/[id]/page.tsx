@@ -9,7 +9,7 @@ import type {
   Forum_Forums__Show_ItemQuery,
   Forum_Forums__Show_ItemQueryVariables
 } from '@/graphql/hooks';
-import { getUuidFromString } from '@/functions/url';
+import { getIdFormString } from '@/functions/url';
 import { ErrorView } from '@/themes/default/core/views/global/error/error-view';
 
 const getData = async ({ id }: { id: string }) => {
@@ -19,7 +19,7 @@ const getData = async ({ id }: { id: string }) => {
   >({
     query: Forum_Forums__Show_Item,
     variables: {
-      forumId: getUuidFromString(id)
+      forumId: getIdFormString(id)
     },
     headers: {
       Cookie: cookies().toString()

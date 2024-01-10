@@ -18,7 +18,7 @@ export const core_admin_permissions = pgTable('core_admin_permissions', {
   protected: boolean('protected').notNull().default(false)
 });
 
-export const relations_core_admin_permissions = relations(core_admin_permissions, ({ one }) => ({
+export const core_admin_permissions_relations = relations(core_admin_permissions, ({ one }) => ({
   group: one(core_groups, {
     fields: [core_admin_permissions.group_id],
     references: [core_groups.id]
@@ -40,7 +40,7 @@ export const core_admin_sessions = pgTable('core_admin_sessions', {
   expires: integer('expires').notNull()
 });
 
-export const relations_core_admin_sessions = relations(core_admin_sessions, ({ one }) => ({
+export const core_admin_sessions_relations = relations(core_admin_sessions, ({ one }) => ({
   user: one(core_users, {
     fields: [core_admin_sessions.user_id],
     references: [core_users.id]

@@ -18,7 +18,7 @@ export const core_moderators_permissions = pgTable('core_moderators_permissions'
   protected: boolean('protected').notNull().default(false)
 });
 
-export const relations_core_moderators_permissions = relations(
+export const core_moderators_permissions_relations = relations(
   core_moderators_permissions,
   ({ one }) => ({
     group: one(core_groups, {

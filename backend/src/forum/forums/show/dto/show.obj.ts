@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType, OmitType } from '@nestjs/graphql';
 
 import { PageInfo } from '@/types/database/pagination.type';
 import { TextLanguage } from '@/types/database/text-language.type';
@@ -42,6 +42,9 @@ class ShowForumForums {
 }
 
 @ObjectType()
+class LastChildShowForumForums extends OmitType(ShowForumForums, ['_count'] as const) {}
+
+@ObjectType()
 export class FirstShowForumForums extends ShowForumForums {
   @Field(() => PermissionsForumForumsCount)
   permissions: PermissionsForumForumsCount;
@@ -49,8 +52,8 @@ export class FirstShowForumForums extends ShowForumForums {
 
 @ObjectType()
 export class ChildrenShowForumForums extends ShowForumForums {
-  @Field(() => [ShowForumForums], { nullable: true })
-  children: ShowForumForums[] | null;
+  @Field(() => [LastChildShowForumForums], { nullable: true })
+  children: LastChildShowForumForums[] | null;
 }
 
 @ObjectType()

@@ -1,7 +1,6 @@
 import { integer, pgTable, serial, text, varchar } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
-import { forum_forums } from './forums';
 import { forum_topics, forum_topics_logs } from './topics';
 
 import { core_users } from '@/src/admin/core/database/schema/users';
@@ -20,10 +19,10 @@ export const forum_posts = pgTable('forum_posts', {
   updated: integer('updated').notNull()
 });
 
-export const relations_forum_posts = relations(forum_posts, ({ many, one }) => ({
-  topic: one(forum_forums, {
+export const forum_posts_relations = relations(forum_posts, ({ many, one }) => ({
+  topic: one(forum_topics, {
     fields: [forum_posts.topic_id],
-    references: [forum_forums.id]
+    references: [forum_topics.id]
   }),
   user: one(core_users, {
     fields: [forum_posts.user_id],
@@ -34,7 +33,7 @@ export const relations_forum_posts = relations(forum_posts, ({ many, one }) => (
 
 export const forum_posts_content = pgTable('forum_posts_content', {
   id: serial('id').primaryKey(),
-  topic_id: integer('topic_id').references(() => forum_forums.id, {
+  post_id: integer('post_id').references(() => forum_posts.id, {
     onDelete: 'cascade'
   }),
   language_code: varchar('language_code')
@@ -44,6 +43,17 @@ export const forum_posts_content = pgTable('forum_posts_content', {
     }),
   value: varchar('value').notNull()
 });
+
+export const forum_posts_content_relations = relations(forum_posts_content, ({ one }) => ({
+  post: one(forum_posts, {
+    fields: [forum_posts_content.post_id],
+    references: [forum_posts.id]
+  }),
+  language: one(core_languages, {
+    fields: [forum_posts_content.language_code],
+    references: [core_languages.code]
+  })
+}));
 
 export const forum_posts_timeline = pgTable('forum_posts_timeline', {
   id: serial('id').primaryKey(),
@@ -57,7 +67,7 @@ export const forum_posts_timeline = pgTable('forum_posts_timeline', {
   created: integer('created').notNull()
 });
 
-export const relations_forum_posts_timeline = relations(forum_posts_timeline, ({ one }) => ({
+export const forum_posts_timeline_relations = relations(forum_posts_timeline, ({ one }) => ({
   post: one(forum_posts, {
     fields: [forum_posts_timeline.post_id],
     references: [forum_posts.id]

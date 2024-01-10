@@ -29,7 +29,7 @@ type AvatarUser {
 
 type ChildrenShowForumForums {
   _count: ShowForumForumsCount!
-  children: [ShowForumForums!]
+  children: [LastChildShowForumForums!]
   created: Int!
   description: [TextLanguage!]!
   id: Int!
@@ -87,6 +87,14 @@ type LanguageCoreMiddlewareObj {
   id: Int!
   name: String!
   timezone: String!
+}
+
+type LastChildShowForumForums {
+  created: Int!
+  description: [TextLanguage!]!
+  id: Int!
+  name: [TextLanguage!]!
+  position: Int!
 }
 
 enum LayoutAdminInstallEnum {

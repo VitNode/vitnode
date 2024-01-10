@@ -15,7 +15,7 @@ export const core_sessions = pgTable('core_sessions', {
   expires: integer('expires').notNull()
 });
 
-export const relations_core_sessions = relations(core_sessions, ({ many, one }) => ({
+export const core_sessions_relations = relations(core_sessions, ({ many, one }) => ({
   user: one(core_users, {
     fields: [core_sessions.user_id],
     references: [core_users.id]
@@ -39,7 +39,7 @@ export const core_sessions_known_devices = pgTable('core_sessions_known_devices'
   last_seen: integer('last_seen').notNull()
 });
 
-export const relations_core_sessions_known_devices = relations(
+export const core_sessions_known_devices_relations = relations(
   core_sessions_known_devices,
   ({ one }) => ({
     session: one(core_sessions, {

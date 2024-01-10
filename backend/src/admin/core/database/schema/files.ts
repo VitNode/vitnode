@@ -22,7 +22,7 @@ export const core_files = pgTable('core_files', {
   mimetype: varchar('mimetype', { length: 255 })
 });
 
-export const relations_core_files = relations(core_files, ({ one }) => ({
+export const core_files_relations = relations(core_files, ({ one }) => ({
   user: one(core_users, {
     fields: [core_files.user_id],
     references: [core_users.id]
@@ -36,7 +36,7 @@ export const core_files_avatars = pgTable('core_files_avatars', {
   file_size: integer('file_size').notNull()
 });
 
-export const relations_core_files_avatars = relations(core_files_avatars, ({ one }) => ({
+export const core_files_avatars_relations = relations(core_files_avatars, ({ one }) => ({
   user: one(core_users, {
     fields: [core_files_avatars.id],
     references: [core_users.avatar_id]
@@ -50,7 +50,7 @@ export const core_files_covers = pgTable('core_files_covers', {
   file_size: integer('file_size').notNull()
 });
 
-export const relations_core_files_covers = relations(core_files_covers, ({ one }) => ({
+export const core_files_covers_relations = relations(core_files_covers, ({ one }) => ({
   user: one(core_users, {
     fields: [core_files_covers.id],
     references: [core_users.cover_id]

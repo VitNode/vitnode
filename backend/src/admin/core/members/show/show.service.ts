@@ -21,15 +21,6 @@ export class ShowAdminMembersService {
     search,
     sortBy
   }: ShowAdminMembersArgs): Promise<ShowAdminMembersObj> {
-    const whereSearch = and(
-      or(
-        ilike(core_users.name, `%${search}%`),
-        ilike(core_users.email, `%${search}%`),
-        Number(search) ? eq(core_users.id, Number(search)) : undefined
-      ),
-      groups && groups.length > 0 ? inArray(core_users.group_id, groups) : undefined
-    );
-
     const pagination = await inputPaginationCursor({
       cursor,
       database: core_users,
@@ -44,11 +35,18 @@ export class ShowAdminMembersService {
       sortBy
     });
 
-    const where = and(pagination.where, whereSearch);
+    const where = and(
+      or(
+        ilike(core_users.name, `%${search}%`),
+        ilike(core_users.email, `%${search}%`),
+        Number(search) ? eq(core_users.id, Number(search)) : undefined
+      ),
+      groups && groups.length > 0 ? inArray(core_users.group_id, groups) : undefined
+    );
 
     const edges = await this.databaseService.db.query.core_users.findMany({
       ...pagination,
-      where,
+      where: and(pagination.where, where),
       columns: {
         password: false
       },

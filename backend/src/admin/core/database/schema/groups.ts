@@ -13,7 +13,7 @@ export const core_groups = pgTable('core_groups', {
   guest: boolean('guest').notNull().default(false)
 });
 
-export const relations_core_groups = relations(core_groups, ({ many }) => ({
+export const core_groups_relations = relations(core_groups, ({ many }) => ({
   name: many(core_groups_names)
 }));
 
@@ -38,7 +38,7 @@ export const core_groups_names = pgTable('core_groups_names', {
   value: varchar('value', { length: 255 }).notNull()
 });
 
-export const relations_core_groups_names = relations(core_groups_names, ({ one }) => ({
+export const core_groups_names_relations = relations(core_groups_names, ({ one }) => ({
   group: one(core_groups, {
     fields: [core_groups_names.group_id],
     references: [core_groups.id]

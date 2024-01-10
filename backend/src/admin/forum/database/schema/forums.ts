@@ -16,7 +16,7 @@ export const forum_forums = pgTable('forum_forums', {
   can_all_reply: boolean('can_all_reply').notNull().default(false)
 });
 
-export const relations_forum_forums = relations(forum_forums, ({ many, one }) => ({
+export const forum_forums_relations = relations(forum_forums, ({ many, one }) => ({
   parent: one(forum_forums, {
     fields: [forum_forums.parent_id],
     references: [forum_forums.id]
@@ -41,7 +41,7 @@ export const forum_forums_name = pgTable('forum_forums_name', {
   value: varchar('value').notNull()
 });
 
-export const relations_forum_forums_name = relations(forum_forums_name, ({ one }) => ({
+export const forum_forums_name_relations = relations(forum_forums_name, ({ one }) => ({
   forum: one(forum_forums, {
     fields: [forum_forums_name.forum_id],
     references: [forum_forums.id]
@@ -67,7 +67,7 @@ export const forum_forums_description = pgTable('forum_forums_description', {
   value: varchar('value').notNull()
 });
 
-export const relations_forum_forums_description = relations(
+export const forum_forums_description_relations = relations(
   forum_forums_description,
   ({ one }) => ({
     forum: one(forum_forums, {
@@ -95,7 +95,7 @@ export const forum_forums_permissions = pgTable('forum_forums_permissions', {
   can_reply: boolean('can_reply').notNull().default(false)
 });
 
-export const relations_forum_forums_permissions = relations(
+export const forum_forums_permissions_relations = relations(
   forum_forums_permissions,
   ({ one }) => ({
     forum: one(forum_forums, {

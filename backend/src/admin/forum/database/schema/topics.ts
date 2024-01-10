@@ -19,7 +19,7 @@ export const forum_topics = pgTable('forum_topics', {
   locked: boolean('locked').notNull().default(false)
 });
 
-export const relations_forum_topics = relations(forum_topics, ({ many, one }) => ({
+export const forum_topics_relations = relations(forum_topics, ({ many, one }) => ({
   forum: one(forum_forums, {
     fields: [forum_topics.forum_id],
     references: [forum_forums.id]
@@ -43,6 +43,17 @@ export const forum_topics_titles = pgTable('forum_topics_titles', {
     }),
   value: varchar('value').notNull()
 });
+
+export const forum_topics_titles_relations = relations(forum_topics_titles, ({ one }) => ({
+  topic: one(forum_topics, {
+    fields: [forum_topics_titles.topic_id],
+    references: [forum_topics.id]
+  }),
+  language: one(core_languages, {
+    fields: [forum_topics_titles.language_code],
+    references: [core_languages.code]
+  })
+}));
 
 export const forum_topics_logs_actions_enum = pgEnum('actions', ['lock', 'unlock']);
 

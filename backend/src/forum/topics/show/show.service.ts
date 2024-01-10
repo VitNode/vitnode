@@ -72,49 +72,6 @@ export class ShowTopicsForumsService {
     });
 
     const totalCount = await this.databaseService.db.select({ count: count() }).from(forum_topics);
-    // .where(where);
-
-    // const [edges, totalCount] = await this.prisma.$transaction([
-    //   this.prisma.forum_topics.findMany({
-    //     ...inputPagination({ first, cursor, last }),
-    //     where,
-    //     include: {
-    //       title: true,
-    //       forum: {
-    //         include: {
-    //           name: true
-    //         }
-    //       },
-    //       posts: {
-    //         take: 1,
-    //         orderBy: [
-    //           {
-    //             created: SortDirectionEnum.asc
-    //           }
-    //         ],
-    //         include: {
-    //           content: true,
-    //           author: {
-    //             include: {
-    //               avatar: true,
-    //               group: {
-    //                 include: {
-    //                   name: true
-    //                 }
-    //               }
-    //             }
-    //           }
-    //         }
-    //       }
-    //     },
-    //     orderBy: [
-    //       {
-    //         created: SortDirectionEnum.desc
-    //       }
-    //     ]
-    //   }),
-    //   this.prisma.forum_topics.count({ where })
-    // ]);
 
     return outputPagination({
       edges: edges

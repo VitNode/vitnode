@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { count, eq } from 'drizzle-orm';
+import { and, count, eq, inArray, isNull, or } from 'drizzle-orm';
 
 import { ShowForumForumsArgs } from './dto/show.args';
 import { ShowForumForumsObj } from './dto/show.obj';
@@ -19,47 +19,6 @@ export class ShowForumForumsService {
     { cursor, first, ids, last, parent_id }: ShowForumForumsArgs,
     user?: User
   ): Promise<ShowForumForumsObj> {
-    const guestGroupId = await this.databaseService.db.query.core_groups.findFirst({
-      where: (table, { eq }) => eq(table.guest, true)
-    });
-
-    // const permissionCanView: Prisma.forum_forumsWhereInput[] = [
-    //   {
-    //     permissions: {
-    //       some: {
-    //         group_id: user?.group.id ?? guestGroupId,
-    //         can_view: true
-    //       }
-    //     }
-    //   },
-    //   {
-    //     can_all_view: true
-    //   }
-    // ];
-
-    // const whereWithoutIds: Prisma.forum_forumsWhereInput = {
-    //   parent_id: parent_id
-    //     ? parent_id
-    //     : {
-    //         in: null
-    //       }
-    // };
-
-    // const whereWithIds: Prisma.forum_forumsWhereInput = {
-    //   id: {
-    //     in: ids
-    //   }
-    // };
-
-    // const where: Prisma.forum_forumsWhereInput = {
-    //   AND: [
-    //     ids?.length ? whereWithIds : whereWithoutIds,
-    //     {
-    //       OR: permissionCanView
-    //     }
-    //   ]
-    // };
-
     const pagination = await inputPaginationCursor({
       cursor,
       database: forum_forums,
@@ -73,8 +32,37 @@ export class ShowForumForumsService {
       }
     });
 
+    const forumIdsWithAccess =
+      await this.databaseService.db.query.forum_forums_permissions.findMany({
+        columns: {
+          forum_id: true
+        },
+        where: (table, { eq }) => eq(table.group_id, user?.group.id ?? 1) // 1 - guest group id
+      });
+
+    const wherePermissions = and(
+      or(
+        eq(forum_forums.can_all_view, true),
+        inArray(
+          forum_forums.id,
+          forumIdsWithAccess.map(({ forum_id }) => forum_id)
+        )
+      )
+    );
+
+    const whereParent = !parent_id
+      ? isNull(forum_forums.parent_id)
+      : eq(forum_forums.parent_id, parent_id);
+
+    const where = and(
+      pagination.where,
+      wherePermissions,
+      ids?.length > 0 ? inArray(forum_forums.id, ids) : whereParent
+    );
+
     const forums = await this.databaseService.db.query.forum_forums.findMany({
       ...pagination,
+      where,
       with: {
         name: true,
         description: true,
@@ -91,96 +79,45 @@ export class ShowForumForumsService {
 
     const edges = await Promise.all(
       forums.map(async forum => {
-        const countChildren = await this.databaseService.db
-          .select({ count: count() })
-          .from(forum_forums)
-          .where(eq(forum_forums.parent_id, forum.id));
+        const children = await this.databaseService.db.query.forum_forums.findMany({
+          where: and(eq(forum_forums.parent_id, forum.id), wherePermissions),
+          with: {
+            name: true,
+            description: true,
+            permissions: true
+          }
+        });
 
         return {
           ...forum,
-          parent: { ...forum.parent, _count: { children: 0 } },
-          _count: { children: countChildren[0].count },
-          children: []
+          parent: forum.parent_id ? { ...forum.parent, _count: { children: 0 } } : null,
+          _count: { children: children.length },
+          children: await Promise.all(
+            children.map(async child => {
+              const children = await this.databaseService.db.query.forum_forums.findMany({
+                where: and(eq(forum_forums.parent_id, child.id), wherePermissions),
+                with: {
+                  name: true,
+                  description: true,
+                  permissions: true
+                }
+              });
+
+              return {
+                ...child,
+                children,
+                _count: { children: children.length }
+              };
+            })
+          )
         };
       })
     );
 
-    const totalCount = await this.databaseService.db.select({ count: count() }).from(forum_forums);
-
-    // const [edges, totalCount] = await this.prisma.$transaction([
-    //   this.prisma.forum_forums.findMany({
-    //     ...inputPagination({ first, cursor, last }),
-    //     where,
-    //     include: {
-    //       permissions: {
-    //         where: {
-    //           group_id: user?.group.id ?? guestGroupId
-    //         }
-    //       },
-    //       parent: {
-    //         include: {
-    //           name: true,
-    //           description: true,
-    //           _count: {
-    //             select: {
-    //               children: true
-    //             }
-    //           }
-    //         }
-    //       },
-    //       children: {
-    //         where: {
-    //           OR: permissionCanView
-    //         },
-    //         orderBy: [
-    //           {
-    //             position: SortDirectionEnum.asc
-    //           }
-    //         ],
-    //         include: {
-    //           name: true,
-    //           description: true,
-    //           parent: true,
-    //           _count: {
-    //             select: {
-    //               children: true
-    //             }
-    //           },
-    //           children: {
-    //             orderBy: [
-    //               {
-    //                 position: SortDirectionEnum.asc
-    //               }
-    //             ],
-    //             include: {
-    //               name: true,
-    //               description: true,
-    //               parent: true,
-    //               _count: {
-    //                 select: {
-    //                   children: true
-    //                 }
-    //               }
-    //             }
-    //           }
-    //         }
-    //       },
-    //       name: true,
-    //       description: true,
-    //       _count: {
-    //         select: {
-    //           children: true
-    //         }
-    //       }
-    //     },
-    //     orderBy: [
-    //       {
-    //         position: SortDirectionEnum.asc
-    //       }
-    //     ]
-    //   }),
-    //   this.prisma.forum_forums.count({ where })
-    // ]);
+    const totalCount = await this.databaseService.db
+      .select({ count: count() })
+      .from(forum_forums)
+      .where(where);
 
     if (edges.length === 1 && ids?.length > 0) {
       const firstEdge = edges.at(0);

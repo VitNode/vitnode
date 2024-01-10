@@ -19,7 +19,7 @@ export const core_users = pgTable('core_users', {
   cover_id: integer('cover_id').references(() => core_files_covers.id)
 });
 
-export const relations_core_users = relations(core_users, ({ one }) => ({
+export const core_users_relations = relations(core_users, ({ one }) => ({
   group: one(core_groups, {
     fields: [core_users.group_id],
     references: [core_groups.id]
