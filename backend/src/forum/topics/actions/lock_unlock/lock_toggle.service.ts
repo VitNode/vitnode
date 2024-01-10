@@ -60,7 +60,8 @@ export class LockToggleForumTopicsService {
     // Add log to timeline
     await this.databaseService.db.insert(forum_posts_timeline).values({
       created: currentDate(),
-      topic_log_id: log[0].id
+      topic_log_id: log[0].id,
+      topic_id: id
     });
 
     return !topic.locked;

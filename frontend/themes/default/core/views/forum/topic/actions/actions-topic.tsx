@@ -10,7 +10,7 @@ import {
 import { LockToggleActionsTopic } from '@/themes/default/core/views/forum/topic/actions/lock-toggle/lock-toggle';
 
 interface Props {
-  id: string;
+  id: number;
   state: {
     locked: boolean;
   };

@@ -45,7 +45,8 @@ export class CreateForumsPostsService {
     // Add post to timeline
     await this.databaseService.db.insert(forum_posts_timeline).values({
       created: currentDate(),
-      post_id: post.id
+      post_id: post.id,
+      topic_id: id
     });
 
     const data = await this.databaseService.db.query.forum_posts.findFirst({

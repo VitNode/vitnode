@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { count, eq, or } from 'drizzle-orm';
+import { and, count, eq } from 'drizzle-orm';
 
 import { ShowPostsForumsArgs } from './dto/show.args';
 import { ShowPostsForumsObj } from './dto/show.obj';
 
 import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
 import { DatabaseService } from '@/database/database.service';
-import { forum_posts, forum_posts_timeline } from '@/src/admin/forum/database/schema/posts';
-import { forum_topics_logs } from '@/src/admin/forum/database/schema/topics';
+import { forum_posts_timeline } from '@/src/admin/forum/database/schema/posts';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
@@ -30,8 +29,11 @@ export class ShowPostsForumsService {
       }
     });
 
+    const where = eq(forum_posts_timeline.topic_id, topic_id);
+
     const edges = await this.databaseService.db.query.forum_posts_timeline.findMany({
       ...pagination,
+      where: and(pagination.where, where),
       with: {
         post: {
           with: {
@@ -50,7 +52,11 @@ export class ShowPostsForumsService {
         },
         topic_log: {
           with: {
-            content: true,
+            topic: {
+              with: {
+                title: true
+              }
+            },
             user: {
               with: {
                 avatar: true,
@@ -68,7 +74,8 @@ export class ShowPostsForumsService {
 
     const totalCount = await this.databaseService.db
       .select({ count: count() })
-      .from(forum_posts_timeline);
+      .from(forum_posts_timeline)
+      .where(where);
 
     return outputPagination({
       edges: edges.map(edge => {

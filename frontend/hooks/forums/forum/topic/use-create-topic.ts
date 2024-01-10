@@ -12,7 +12,7 @@ import { useRouter } from '@/i18n';
 import { useTextLang } from '../../../core/use-text-lang';
 
 interface Props {
-  forumId: string;
+  forumId: number;
 }
 
 export const useCreateTopic = ({ forumId }: Props) => {

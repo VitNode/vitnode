@@ -79,12 +79,6 @@ export type ForumTopicsForums = {
   name: Array<TextLanguage>;
 };
 
-export const Forum_Topics_Logs_Actions_Enum = {
-  enumname: 'enumName',
-  enumvalues: 'enumValues'
-} as const;
-
-export type Forum_Topics_Logs_Actions_Enum = typeof Forum_Topics_Logs_Actions_Enum[keyof typeof Forum_Topics_Logs_Actions_Enum];
 export type GeneralAdminSettingsObj = {
   __typename?: 'GeneralAdminSettingsObj';
   side_name: Scalars['String']['output'];
@@ -624,10 +618,10 @@ export type ShowPostsForums = {
 
 export type ShowPostsForumsMetaTags = {
   __typename?: 'ShowPostsForumsMetaTags';
-  action: Forum_Topics_Logs_Actions_Enum | `${Forum_Topics_Logs_Actions_Enum}`;
+  action: TopicActions | `${TopicActions}`;
   created: Scalars['Int']['output'];
   id: Scalars['Int']['output'];
-  member: User;
+  user: User;
 };
 
 export type ShowPostsForumsObj = {
@@ -684,6 +678,12 @@ export type TextLanguageInput = {
   value: Scalars['String']['input'];
 };
 
+export const TopicActions = {
+  lock: 'lock',
+  unlock: 'unlock'
+} as const;
+
+export type TopicActions = typeof TopicActions[keyof typeof TopicActions];
 export type User = {
   __typename?: 'User';
   avatar?: Maybe<AvatarUser>;
@@ -975,7 +975,7 @@ export type Forum_Topics__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Forum_Topics__ShowQuery = { __typename?: 'Query', forum_topics__show: { __typename?: 'ShowTopicsForumsObj', edges: Array<{ __typename?: 'ShowTopicsForums', created: number, id: number, locked: boolean, content: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, user: { __typename?: 'User', avatar_color: string, id: number, name_seo: string, name: string, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }, forum: { __typename?: 'ForumTopicsForums', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> }, forum_posts__show: { __typename?: 'ShowPostsForumsObj', edges: Array<{ __typename: 'ShowPostsForums', id: number, created: number, content: Array<{ __typename?: 'TextLanguage', value: string, language_code: string }>, user: { __typename?: 'User', avatar_color: string, id: number, name_seo: string, name: string, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } } | { __typename: 'ShowPostsForumsMetaTags', action: Forum_Topics_Logs_Actions_Enum, id: number, created: number, member: { __typename?: 'User', avatar_color: string, id: number, name: string, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Forum_Topics__ShowQuery = { __typename?: 'Query', forum_topics__show: { __typename?: 'ShowTopicsForumsObj', edges: Array<{ __typename?: 'ShowTopicsForums', created: number, id: number, locked: boolean, content: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, user: { __typename?: 'User', avatar_color: string, id: number, name_seo: string, name: string, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }, forum: { __typename?: 'ForumTopicsForums', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> }, forum_posts__show: { __typename?: 'ShowPostsForumsObj', edges: Array<{ __typename: 'ShowPostsForums', id: number, created: number, content: Array<{ __typename?: 'TextLanguage', value: string, language_code: string }>, user: { __typename?: 'User', avatar_color: string, id: number, name_seo: string, name: string, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } } | { __typename: 'ShowPostsForumsMetaTags', action: TopicActions, id: number, created: number, user: { __typename?: 'User', avatar_color: string, id: number, name_seo: string, name: string, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 
 export const Admin_Install__Create_Database = gql`
@@ -1720,7 +1720,7 @@ export const Forum_Topics__Show = gql`
       ... on ShowPostsForumsMetaTags {
         action
         id
-        member {
+        user {
           avatar_color
           group {
             id
@@ -1730,6 +1730,7 @@ export const Forum_Topics__Show = gql`
             }
           }
           id
+          name_seo
           name
         }
         created

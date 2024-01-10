@@ -67,7 +67,7 @@ query Forum_topics__show(
       ... on ShowPostsForumsMetaTags {
         action
         id
-        member {
+        user {
           avatar_color
           group {
             id
@@ -77,6 +77,7 @@ query Forum_topics__show(
             }
           }
           id
+          name_seo
           name
         }
         created

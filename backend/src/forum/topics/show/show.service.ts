@@ -9,7 +9,6 @@ import { User } from '@/utils/decorators/user.decorator';
 import { DatabaseService } from '@/database/database.service';
 import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
 import { forum_topics } from '@/src/admin/forum/database/schema/topics';
-import { forum_forums, forum_forums_permissions } from '@/src/admin/forum/database/schema/forums';
 
 @Injectable()
 export class ShowTopicsForumsService {
@@ -19,6 +18,7 @@ export class ShowTopicsForumsService {
     { cursor, first, forum_id, id, last }: ShowTopicsForumsArgs,
     user?: User
   ): Promise<ShowTopicsForumsObj> {
+    // TODO: Fix permissions
     // const where = and(
     //   eq(forum_forums.id, forum_id),
     //   eq(forum_topics.id, id),
@@ -44,8 +44,14 @@ export class ShowTopicsForumsService {
       }
     });
 
+    const where = or(
+      forum_id ? eq(forum_topics.forum_id, forum_id) : undefined,
+      id ? eq(forum_topics.id, id) : undefined
+    );
+
     const edges = await this.databaseService.db.query.forum_topics.findMany({
       ...pagination,
+      where: and(pagination.where, where),
       with: {
         forum: {
           with: {
@@ -71,7 +77,10 @@ export class ShowTopicsForumsService {
       }
     });
 
-    const totalCount = await this.databaseService.db.select({ count: count() }).from(forum_topics);
+    const totalCount = await this.databaseService.db
+      .select({ count: count() })
+      .from(forum_topics)
+      .where(where);
 
     return outputPagination({
       edges: edges

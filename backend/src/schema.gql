@@ -58,11 +58,6 @@ type ForumTopicsForums {
   name: [TextLanguage!]!
 }
 
-enum Forum_topics_logs_actions_enum {
-  enumName
-  enumValues
-}
-
 type GeneralAdminSettingsObj {
   side_name: String!
 }
@@ -376,10 +371,10 @@ type ShowPostsForums {
 }
 
 type ShowPostsForumsMetaTags {
-  action: Forum_topics_logs_actions_enum!
+  action: TopicActions!
   created: Int!
   id: Int!
-  member: User!
+  user: User!
 }
 
 type ShowPostsForumsObj {
@@ -427,6 +422,11 @@ type TextLanguage {
 input TextLanguageInput {
   language_code: String!
   value: String!
+}
+
+enum TopicActions {
+  lock
+  unlock
 }
 
 type User {

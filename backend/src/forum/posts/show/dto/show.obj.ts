@@ -3,10 +3,14 @@ import { Field, Int, ObjectType, createUnionType, registerEnumType } from '@nest
 import { PageInfo } from '@/types/database/pagination.type';
 import { TextLanguage } from '@/types/database/text-language.type';
 import { User } from '@/utils/decorators/user.decorator';
-import { forum_topics_logs_actions_enum } from '@/src/admin/forum/database/schema/topics';
 
-registerEnumType(forum_topics_logs_actions_enum, {
-  name: 'Forum_topics_logs_actions_enum'
+enum TopicActions {
+  lock = 'lock',
+  unlock = 'unlock'
+}
+
+registerEnumType(TopicActions, {
+  name: 'TopicActions'
 });
 
 @ObjectType()
@@ -14,11 +18,11 @@ export class ShowPostsForumsMetaTags {
   @Field(() => Int)
   id: number;
 
-  @Field(() => forum_topics_logs_actions_enum)
-  action: typeof forum_topics_logs_actions_enum;
+  @Field(() => TopicActions)
+  action: string;
 
   @Field(() => User)
-  member: User;
+  user: User;
 
   @Field(() => Int)
   created: number;

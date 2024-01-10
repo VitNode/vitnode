@@ -28,7 +28,8 @@ export const forum_posts_relations = relations(forum_posts, ({ many, one }) => (
     fields: [forum_posts.user_id],
     references: [core_users.id]
   }),
-  content: many(forum_posts_content)
+  content: many(forum_posts_content),
+  timeline: many(forum_posts_timeline)
 }));
 
 export const forum_posts_content = pgTable('forum_posts_content', {
@@ -64,7 +65,12 @@ export const forum_posts_timeline = pgTable('forum_posts_timeline', {
   topic_log_id: integer('topic_log_id').references(() => forum_topics_logs.id, {
     onDelete: 'cascade'
   }),
-  created: integer('created').notNull()
+  created: integer('created').notNull(),
+  topic_id: integer('topic_id')
+    .notNull()
+    .references(() => forum_topics.id, {
+      onDelete: 'cascade'
+    })
 });
 
 export const forum_posts_timeline_relations = relations(forum_posts_timeline, ({ one }) => ({
@@ -75,5 +81,9 @@ export const forum_posts_timeline_relations = relations(forum_posts_timeline, ({
   topic_log: one(forum_topics_logs, {
     fields: [forum_posts_timeline.topic_log_id],
     references: [forum_topics_logs.id]
+  }),
+  topic: one(forum_topics, {
+    fields: [forum_posts_timeline.topic_id],
+    references: [forum_topics.id]
   })
 }));

@@ -25,7 +25,7 @@ export const TopicView = ({ data: dataApi }: Props) => {
   } = dataApi;
   const data = edges.at(0);
   if (!data) return null;
-  const { author, content, created, forum, id, locked, title } = data;
+  const { content, created, forum, id, locked, title, user } = data;
 
   return (
     <div className="flex flex-col md:flex-row gap-5">
@@ -50,7 +50,7 @@ export const TopicView = ({ data: dataApi }: Props) => {
 
             <span>
               {t.rich('user_wrote_in_forum', {
-                user: () => <UserLink className="font-semibold" user={author} />,
+                user: () => <UserLink className="font-semibold" user={user} />,
                 forum: () => (
                   <Link
                     href={`/forum/${convertNameToLink({ ...forum })}`}
@@ -66,7 +66,7 @@ export const TopicView = ({ data: dataApi }: Props) => {
           </div>
         </div>
 
-        <PostTopic id={id} content={content} author={author} created={created} />
+        <PostTopic id={id} content={content} user={user} created={created} />
 
         {edgesPosts.length > 0 && (
           <div className="flex flex-col gap-5 relative after:absolute after:top-0 after:left-6 after:w-1 after:h-full after:block after:-z-10 after:bg-border pt-5">

@@ -2,7 +2,7 @@ import { boolean, integer, pgEnum, pgTable, serial, varchar } from 'drizzle-orm/
 import { relations } from 'drizzle-orm';
 
 import { forum_forums } from './forums';
-import { forum_posts } from './posts';
+import { forum_posts, forum_posts_timeline } from './posts';
 
 import { core_languages } from '@/src/admin/core/database/schema/languages';
 import { core_users } from '@/src/admin/core/database/schema/users';
@@ -26,7 +26,8 @@ export const forum_topics_relations = relations(forum_topics, ({ many, one }) =>
   }),
   title: many(forum_topics_titles),
   logs: many(forum_topics_logs),
-  posts: many(forum_posts)
+  posts: many(forum_posts),
+  timeline: many(forum_posts_timeline)
 }));
 
 export const forum_topics_titles = pgTable('forum_topics_titles', {
@@ -69,3 +70,14 @@ export const forum_topics_logs = pgTable('forum_topics_logs', {
     onDelete: 'cascade'
   })
 });
+
+export const forum_topics_logs_relations = relations(forum_topics_logs, ({ one }) => ({
+  user: one(core_users, {
+    fields: [forum_topics_logs.user_id],
+    references: [core_users.id]
+  }),
+  topic: one(forum_topics, {
+    fields: [forum_topics_logs.topic_id],
+    references: [forum_topics.id]
+  })
+}));

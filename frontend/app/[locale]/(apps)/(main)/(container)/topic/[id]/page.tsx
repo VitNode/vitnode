@@ -8,13 +8,13 @@ import {
   type Forum_Topics__ShowQuery,
   type Forum_Topics__ShowQueryVariables
 } from '@/graphql/hooks';
-import { getUuidFromString } from '@/functions/url';
+import { getIdFormString } from '@/functions/url';
 
 const getData = async ({ id }: { id: string }) => {
   const { data } = await fetcher<Forum_Topics__ShowQuery, Forum_Topics__ShowQueryVariables>({
     query: Forum_Topics__Show,
     variables: {
-      id: getUuidFromString(id)
+      id: getIdFormString(id)
     },
     headers: {
       Cookie: cookies().toString()
