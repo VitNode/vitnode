@@ -4,7 +4,7 @@ import { Link } from '@/i18n';
 
 interface Props extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href' | 'children'> {
   user: {
-    id: string;
+    id: number;
     name: string;
   };
 }

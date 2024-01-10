@@ -7,7 +7,7 @@ import { ShowTopicsForumsObj } from './dto/show.obj';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 import { User } from '@/utils/decorators/user.decorator';
 import { DatabaseService } from '@/database/database.service';
-import { outputPagination } from '@/functions/database/pagination';
+import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
 import { forum_topics } from '@/src/admin/forum/database/schema/topics';
 import { forum_forums, forum_forums_permissions } from '@/src/admin/forum/database/schema/forums';
 
@@ -31,14 +31,21 @@ export class ShowTopicsForumsService {
     //   )
     // );
 
+    const pagination = await inputPaginationCursor({
+      cursor,
+      database: forum_topics,
+      databaseService: this.databaseService,
+      first,
+      last,
+      primaryCursor: { order: 'ASC', key: 'id', schema: forum_topics.id },
+      defaultSortBy: {
+        direction: SortDirectionEnum.asc,
+        column: 'created'
+      }
+    });
+
     const edges = await this.databaseService.db.query.forum_topics.findMany({
-      // ...inputPagination({
-      //   cursor,
-      //   first,
-      //   last
-      //   //  where
-      // }),
-      orderBy: (table, { asc }) => [asc(table.created)],
+      ...pagination,
       with: {
         forum: {
           with: {

@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { and, count, ilike, inArray, or } from 'drizzle-orm';
+import { and, count, eq, ilike, inArray, or } from 'drizzle-orm';
 
 import { ShowAdminMembersObj } from './dto/show.obj';
 import { ShowAdminMembersArgs } from './dto/show.args';
 
 import { DatabaseService } from '@/database/database.service';
-import { outputPagination } from '@/functions/database/pagination';
+import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
 import { core_users } from '@/src/admin/core/database/schema/users';
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
 export class ShowAdminMembersService {
@@ -20,23 +21,34 @@ export class ShowAdminMembersService {
     search,
     sortBy
   }: ShowAdminMembersArgs): Promise<ShowAdminMembersObj> {
-    // const where = and(
-    //   or(
-    //     ilike(core_users.name, `%${search}%`),
-    //     ilike(core_users.email, `%${search}%`),
-    //     ilike(core_users.id, `%${search}%`)
-    //   ),
-    //   groups && groups.length > 0 ? inArray(core_users.group_id, groups) : undefined
-    // );
+    const whereSearch = and(
+      or(
+        ilike(core_users.name, `%${search}%`),
+        ilike(core_users.email, `%${search}%`),
+        Number(search) ? eq(core_users.id, Number(search)) : undefined
+      ),
+      groups && groups.length > 0 ? inArray(core_users.group_id, groups) : undefined
+    );
+
+    const pagination = await inputPaginationCursor({
+      cursor,
+      database: core_users,
+      databaseService: this.databaseService,
+      first,
+      last,
+      primaryCursor: { order: 'ASC', key: 'id', schema: core_users.id },
+      defaultSortBy: {
+        direction: SortDirectionEnum.desc,
+        column: 'joined'
+      },
+      sortBy
+    });
+
+    const where = and(pagination.where, whereSearch);
 
     const edges = await this.databaseService.db.query.core_users.findMany({
-      // ...inputPagination({
-      //   cursor,
-      //   first,
-      //   last,
-      //   where
-      // }),
-      orderBy: (table, { asc }) => [asc(table.joined)],
+      ...pagination,
+      where,
       columns: {
         password: false
       },
@@ -50,8 +62,10 @@ export class ShowAdminMembersService {
       }
     });
 
-    const totalCount = await this.databaseService.db.select({ count: count() }).from(core_users);
-    // .where(where);
+    const totalCount = await this.databaseService.db
+      .select({ count: count() })
+      .from(core_users)
+      .where(where);
 
     return outputPagination({ edges, totalCount, first, cursor, last });
   }

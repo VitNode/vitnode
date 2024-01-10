@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { count, eq } from 'drizzle-orm';
+import { and, count, eq, ilike, inArray } from 'drizzle-orm';
 
 import { ShowAdminGroupsArgs } from './dto/show.args';
 import { ShowAdminGroupsObj } from './dto/show.obj';
 
 import { DatabaseService } from '@/database/database.service';
-import { core_groups } from '@/src/admin/core/database/schema/groups';
+import { core_groups, core_groups_names } from '@/src/admin/core/database/schema/groups';
 import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+import { core_users } from '../../database/schema/users';
 
 @Injectable()
 export class ShowAdminGroupsService {
@@ -20,42 +21,15 @@ export class ShowAdminGroupsService {
     search,
     sortBy
   }: ShowAdminGroupsArgs): Promise<ShowAdminGroupsObj> {
-    // let filtersName: string[] = [];
+    let filtersName: number[] = [];
 
-    // if (search) {
-    //   filtersName = await this.databaseService.db
-    //     .select({ group_id: core_groups_names.group_id })
-    //     .from(core_groups_names)
-    //     .where(ilike(core_groups_names.value, `%${search}%`))
-    //     .then(res => res.map(({ group_id }) => group_id));
-    // }
-
-    // const pagination = await inputPaginationCursor({
-    //   databaseService: this.databaseService,
-    //   cursor,
-    //   database: core_groups,
-    //   first,
-    //   last
-    // });
-
-    // const test123 = await this.databaseService.db.query.core_members.findMany(
-    //   withCursorPagination({
-    //     // where: eq(schema.post.status, 'published'), // 'where' is optional
-    //     limit: 5,
-    //     cursors: [
-    //       [
-    //         core_members.joined, // Column to use for cursor
-    //         'desc' // Sort order ('asc' or 'desc')
-    //         // '1704743328' // Cursor value
-    //       ],
-    //       [
-    //         core_members.id, // Column to use for cursor
-    //         'asc' // Sort order ('asc' or 'desc')
-    //         // '11' // Cursor value
-    //       ]
-    //     ]
-    //   })
-    // );
+    if (search) {
+      filtersName = await this.databaseService.db
+        .select({ group_id: core_groups_names.group_id })
+        .from(core_groups_names)
+        .where(ilike(core_groups_names.value, `%${search}%`))
+        .then(res => res.map(({ group_id }) => group_id));
+    }
 
     const pagination = await inputPaginationCursor({
       cursor,
@@ -64,7 +38,6 @@ export class ShowAdminGroupsService {
       first,
       last,
       primaryCursor: { order: 'ASC', key: 'id', schema: core_groups.id },
-      cursors: [{ order: 'DESC', key: 'updated', schema: core_groups.updated }],
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
         column: 'updated'
@@ -72,8 +45,14 @@ export class ShowAdminGroupsService {
       sortBy
     });
 
+    const where = and(
+      pagination.where,
+      filtersName.length > 0 ? inArray(core_groups.id, filtersName) : undefined
+    );
+
     const edges = await this.databaseService.db.query.core_groups.findMany({
       ...pagination,
+      where,
       with: {
         name: {
           columns: {
@@ -84,14 +63,17 @@ export class ShowAdminGroupsService {
       }
     });
 
-    const totalCount = await this.databaseService.db.select({ count: count() }).from(core_groups);
+    const totalCount = await this.databaseService.db
+      .select({ count: count() })
+      .from(core_groups)
+      .where(where);
 
     const currentEdges = await Promise.all(
       edges.map(async edge => {
         const usersCount = await this.databaseService.db
           .select({ count: count() })
-          .from(core_groups)
-          .where(eq(core_groups.id, edge.id));
+          .from(core_users)
+          .where(eq(core_users.group_id, edge.id));
 
         return {
           ...edge,
@@ -101,7 +83,7 @@ export class ShowAdminGroupsService {
     );
 
     const test = outputPagination({
-      edges: currentEdges,
+      edges: search && filtersName.length === 0 ? [] : currentEdges,
       totalCount,
       first,
       cursor,

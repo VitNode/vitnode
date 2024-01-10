@@ -91,7 +91,6 @@ interface InputPaginationCursorArgs<T extends TableConfig> {
   first: number | null;
   last: number | null;
   primaryCursor: Cursor;
-  cursors?: Cursor[];
   sortBy?: {
     column: string;
     direction: SortDirectionEnum;

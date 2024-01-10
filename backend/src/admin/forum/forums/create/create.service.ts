@@ -65,24 +65,28 @@ export class CreateForumForumsService {
     );
 
     // Set description
-    await this.databaseService.db.insert(forum_forums_description).values(
-      description.map(item => ({
-        forum_id: data[0].id,
-        ...item
-      }))
-    );
+    if (description.length > 0) {
+      await this.databaseService.db.insert(forum_forums_description).values(
+        description.map(item => ({
+          forum_id: data[0].id,
+          ...item
+        }))
+      );
+    }
 
     // Set permissions
-    await this.databaseService.db.insert(forum_forums_permissions).values(
-      permissions.groups.map(item => ({
-        forum_id: data[0].id,
-        group_id: item.id,
-        can_create: item.create,
-        can_read: item.read,
-        can_reply: item.reply,
-        can_view: item.view
-      }))
-    );
+    if (permissions.groups.length > 0) {
+      await this.databaseService.db.insert(forum_forums_permissions).values(
+        permissions.groups.map(item => ({
+          forum_id: data[0].id,
+          group_id: item.id,
+          can_create: item.create,
+          can_read: item.read,
+          can_reply: item.reply,
+          can_view: item.view
+        }))
+      );
+    }
 
     const forum = await this.databaseService.db.query.forum_forums.findFirst({
       where: (table, { eq }) => eq(table.id, data[0].id),

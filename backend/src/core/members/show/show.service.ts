@@ -5,8 +5,9 @@ import { ShowCoreMembersObj } from './dto/show.obj';
 import { ShowCoreMembersArgs } from './dto/show.args';
 
 import { DatabaseService } from '@/database/database.service';
-import { outputPagination } from '@/functions/database/pagination';
+import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
 import { core_users } from '@/src/admin/core/database/schema/users';
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
 export class ShowCoreMembersService {
@@ -33,13 +34,22 @@ export class ShowCoreMembersService {
     //       ]
     //     };
 
+    const pagination = await inputPaginationCursor({
+      cursor,
+      database: core_users,
+      databaseService: this.databaseService,
+      first,
+      last,
+      primaryCursor: { order: 'ASC', key: 'id', schema: core_users.id },
+      defaultSortBy: {
+        direction: SortDirectionEnum.desc,
+        column: 'joined'
+      },
+      sortBy
+    });
+
     const edges = await this.databaseService.db.query.core_users.findMany({
-      // ...inputPagination({
-      //   cursor,
-      //   first,
-      //   last
-      // }),
-      orderBy: (table, { asc }) => [asc(table.joined)],
+      ...pagination,
       with: {
         avatar: true,
         group: {

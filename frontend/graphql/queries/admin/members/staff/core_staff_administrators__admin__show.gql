@@ -25,6 +25,7 @@ query Core_staff_administrators__admin__show(
               value
             }
           }
+          name_seo
           id
           name
         }

@@ -10,8 +10,9 @@ import { ShowCoreLanguagesObj } from './dto/show.obj';
 import { CustomError } from '@/utils/errors/CustomError';
 import { ConfigType } from '@/types/config.type';
 import { DatabaseService } from '@/database/database.service';
-import { outputPagination } from '@/functions/database/pagination';
+import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
 import { core_languages } from '@/src/admin/core/database/schema/languages';
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
 export class ShowCoreLanguageService {
@@ -21,7 +22,21 @@ export class ShowCoreLanguageService {
     const configFile = fs.readFileSync(join('..', 'config.json'), 'utf8');
     const config: ConfigType = JSON.parse(configFile);
 
+    const pagination = await inputPaginationCursor({
+      cursor,
+      database: core_languages,
+      databaseService: this.databaseService,
+      first,
+      last,
+      primaryCursor: { order: 'ASC', key: 'id', schema: core_languages.id },
+      defaultSortBy: {
+        direction: SortDirectionEnum.asc,
+        column: 'id'
+      }
+    });
+
     const edges = await this.databaseService.db.query.core_languages.findMany({
+      ...pagination,
       columns: {
         id: true,
         code: true,

@@ -13,7 +13,7 @@ import { Loader } from '../../loader/loader';
 import { useTextLang } from '../../../hooks/core/use-text-lang';
 
 export interface GroupInputItem {
-  id: string;
+  id: number;
   name: TextLanguage[];
 }
 

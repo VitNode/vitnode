@@ -4,7 +4,7 @@ query Core_members__admin__show(
   $last: Int
   $search: String
   $sortBy: [ShowAdminMembersSortByArgs!]
-  $groups: [String!]
+  $groups: [Int!]
 ) {
   core_members__admin__show(
     cursor: $cursor

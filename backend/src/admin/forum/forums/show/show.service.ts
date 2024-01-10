@@ -5,8 +5,9 @@ import { ShowForumForumsAdminObj } from './dto/show.obj';
 
 import { ShowForumForumsArgs } from '../../../../forum/forums/show/dto/show.args';
 import { DatabaseService } from '@/database/database.service';
-import { outputPagination } from '@/functions/database/pagination';
+import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
 import { forum_forums } from '@/src/admin/forum/database/schema/forums';
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
 export class ShowForumForumsAdminService {
@@ -18,16 +19,23 @@ export class ShowForumForumsAdminService {
     last,
     parent_id
   }: ShowForumForumsArgs): Promise<ShowForumForumsAdminObj> {
+    const pagination = await inputPaginationCursor({
+      cursor,
+      database: forum_forums,
+      databaseService: this.databaseService,
+      first,
+      last,
+      primaryCursor: { order: 'ASC', key: 'id', schema: forum_forums.id },
+      defaultSortBy: {
+        direction: SortDirectionEnum.asc,
+        column: 'position'
+      }
+    });
+
     const where = eq(forum_forums.parent_id, parent_id);
 
     const forums = await this.databaseService.db.query.forum_forums.findMany({
-      // ...inputPagination({
-      //   cursor,
-      //   first,
-      //   last,
-      //   where
-      // }),
-      orderBy: (table, { asc }) => [asc(table.position)],
+      ...pagination,
       with: {
         name: true,
         description: true,

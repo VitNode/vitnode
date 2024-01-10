@@ -21,6 +21,7 @@ query Core_staff_moderators__admin__show(
             }
           }
           id
+          name_seo
           name
         }
         ... on StaffGroupUser {

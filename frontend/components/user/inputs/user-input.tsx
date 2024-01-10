@@ -15,7 +15,7 @@ const UserInputContent = lazy(() =>
 );
 
 export interface UserInputItem {
-  id: string;
+  id: number;
   name: string;
 }
 

@@ -11,7 +11,7 @@ interface Props {
   sizeInRem: number;
   user: {
     avatar_color: string;
-    id: string;
+    id: number;
     name: string;
     avatar?: Maybe<UploadCoreAttachmentsObj>;
   };

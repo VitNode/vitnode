@@ -57,7 +57,9 @@ export default async function Page({ searchParams }: Props) {
       search: true,
       defaultPageSize: 10
     }),
-    groups: searchParams.groups
+    groups: Array.isArray(searchParams.groups)
+      ? searchParams.groups?.map(group => Number(group))
+      : Number(searchParams.groups)
   };
   const data = await getData(variables);
 

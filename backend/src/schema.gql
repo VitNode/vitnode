@@ -150,7 +150,7 @@ type Query {
   admin_sessions__authorization: AuthorizationAdminSessionsObj!
   core_groups__admin__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
   core_languages__show(cursor: Int, first: Int, last: Int): ShowCoreLanguagesObj!
-  core_members__admin__show(cursor: Int, first: Int, groups: [String!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
+  core_members__admin__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   core_members__show(cursor: Int, findByIds: [Int!], first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_middleware: CoreMiddlewareObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!

@@ -3,6 +3,7 @@ query Admin_sessions__authorization {
     user {
       email
       id
+      name_seo
       is_admin
       is_mod
       name

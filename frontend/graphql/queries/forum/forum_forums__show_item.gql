@@ -43,6 +43,7 @@ query Forum_forums__show_item($cursor: Int, $first: Int, $last: Int, $forumId: I
       }
       user {
         id
+        name_seo
         name
         avatar_color
         group {

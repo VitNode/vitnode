@@ -28,6 +28,7 @@ query Forum_topics__show(
           }
         }
         id
+        name_seo
         name
       }
       forum {
@@ -58,6 +59,7 @@ query Forum_topics__show(
             }
           }
           id
+          name_seo
           name
         }
         created

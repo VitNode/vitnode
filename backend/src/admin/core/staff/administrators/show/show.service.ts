@@ -5,8 +5,9 @@ import { ShowAdminStaffAdministratorsArgs } from './dto/show.args';
 import { ShowAdminStaffAdministratorsObj } from './dto/show.obj';
 
 import { DatabaseService } from '@/database/database.service';
-import { outputPagination } from '@/functions/database/pagination';
+import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
 import { core_admin_permissions } from '@/src/admin/core/database/schema/admins';
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
 export class ShowAdminStaffAdministratorsService {
@@ -18,13 +19,22 @@ export class ShowAdminStaffAdministratorsService {
     last,
     sortBy
   }: ShowAdminStaffAdministratorsArgs): Promise<ShowAdminStaffAdministratorsObj> {
+    const pagination = await inputPaginationCursor({
+      cursor,
+      database: core_admin_permissions,
+      databaseService: this.databaseService,
+      first,
+      last,
+      primaryCursor: { order: 'ASC', key: 'id', schema: core_admin_permissions.id },
+      defaultSortBy: {
+        direction: SortDirectionEnum.desc,
+        column: 'updated'
+      },
+      sortBy
+    });
+
     const edges = await this.databaseService.db.query.core_admin_permissions.findMany({
-      // ...inputPagination({
-      //   cursor,
-      //   first,
-      //   last
-      // }),
-      orderBy: (table, { desc }) => [desc(table.updated)],
+      ...pagination,
       with: {
         group: {
           with: {

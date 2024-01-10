@@ -7,8 +7,9 @@ import { ShowForumForumsObj } from './dto/show.obj';
 import { User } from '@/utils/decorators/user.decorator';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { DatabaseService } from '@/database/database.service';
-import { outputPagination } from '@/functions/database/pagination';
+import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
 import { forum_forums } from '@/src/admin/forum/database/schema/forums';
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
 export class ShowForumForumsService {
@@ -59,13 +60,21 @@ export class ShowForumForumsService {
     //   ]
     // };
 
+    const pagination = await inputPaginationCursor({
+      cursor,
+      database: forum_forums,
+      databaseService: this.databaseService,
+      first,
+      last,
+      primaryCursor: { order: 'ASC', key: 'id', schema: forum_forums.id },
+      defaultSortBy: {
+        direction: SortDirectionEnum.asc,
+        column: 'position'
+      }
+    });
+
     const forums = await this.databaseService.db.query.forum_forums.findMany({
-      // ...inputPagination({
-      //   cursor,
-      //   first,
-      //   last
-      // }),
-      orderBy: (table, { asc }) => [asc(table.position)],
+      ...pagination,
       with: {
         name: true,
         description: true,
