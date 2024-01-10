@@ -329,9 +329,9 @@ export type QueryCore_Members__Admin__ShowArgs = {
 
 export type QueryCore_Members__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
-  findByIds?: InputMaybe<Array<Scalars['Int']['input']>>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  name_seo?: InputMaybe<Scalars['String']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<Array<ShowCoreMembersSortByArgs>>;
 };
@@ -940,7 +940,7 @@ export type Core_Members__Show__SearchQuery = { __typename?: 'Query', core_membe
 
 export type Core_Members__ProfilesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
-  findByIds?: InputMaybe<Array<Scalars['Int']['input']> | Scalars['Int']['input']>;
+  nameSeo: Scalars['String']['input'];
 }>;
 
 
@@ -1496,8 +1496,8 @@ export const Core_Members__Show__Search = gql`
 }
     `;
 export const Core_Members__Profiles = gql`
-    query Core_members__profiles($first: Int, $findByIds: [Int!]) {
-  core_members__show(first: $first, findByIds: $findByIds) {
+    query Core_members__profiles($first: Int, $nameSeo: String!) {
+  core_members__show(first: $first, name_seo: $nameSeo) {
     edges {
       avatar_color
       group {

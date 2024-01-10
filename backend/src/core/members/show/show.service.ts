@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { count } from 'drizzle-orm';
+import { and, count, eq, ilike, or } from 'drizzle-orm';
 
 import { ShowCoreMembersObj } from './dto/show.obj';
 import { ShowCoreMembersArgs } from './dto/show.args';
@@ -15,9 +15,9 @@ export class ShowCoreMembersService {
 
   async show({
     cursor,
-    findByIds,
     first,
     last,
+    name_seo,
     search,
     sortBy
   }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
@@ -48,8 +48,18 @@ export class ShowCoreMembersService {
       sortBy
     });
 
+    const where = or(
+      eq(core_users.name_seo, name_seo),
+      or(
+        ilike(core_users.name, `%${search}%`),
+        ilike(core_users.email, `%${search}%`),
+        Number(search) ? eq(core_users.id, Number(search)) : undefined
+      )
+    );
+
     const edges = await this.databaseService.db.query.core_users.findMany({
       ...pagination,
+      where: and(pagination.where, where),
       with: {
         avatar: true,
         group: {
@@ -60,7 +70,10 @@ export class ShowCoreMembersService {
       }
     });
 
-    const totalCount = await this.databaseService.db.select({ count: count() }).from(core_users);
+    const totalCount = await this.databaseService.db
+      .select({ count: count() })
+      .from(core_users)
+      .where(where);
 
     return outputPagination({ edges, totalCount, first, cursor, last });
   }

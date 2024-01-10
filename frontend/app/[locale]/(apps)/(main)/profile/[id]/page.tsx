@@ -16,7 +16,7 @@ const getData = async ({ id }: { id: string }) => {
       query: Core_Members__Profiles,
       variables: {
         first: 1,
-        findByIds: [id]
+        nameSeo: id
       },
       headers: {
         Cookie: cookies().toString()

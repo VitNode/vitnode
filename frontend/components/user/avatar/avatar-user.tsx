@@ -7,6 +7,8 @@ import { cx } from '@/functions/classnames';
 
 import { Img } from '../../img';
 
+// Pick<User, 'name' | 'name_seo'>
+
 interface Props {
   sizeInRem: number;
   user: {

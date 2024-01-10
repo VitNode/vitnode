@@ -42,6 +42,6 @@ export class ShowCoreMembersArgs {
   @Field(() => String, { nullable: true })
   search: string | null;
 
-  @Field(() => [Int], { nullable: true })
-  findByIds: number[] | null;
+  @Field(() => String, { nullable: true })
+  name_seo: string | null;
 }

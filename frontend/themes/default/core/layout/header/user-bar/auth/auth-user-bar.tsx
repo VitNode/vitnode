@@ -23,7 +23,7 @@ export const AuthUserBar = () => {
   const { onSubmit } = useSignOutAPI();
 
   if (!session) return null;
-  const { email, id, is_admin, is_mod, name } = session;
+  const { email, name_seo, is_admin, is_mod, name } = session;
 
   return (
     <DropdownMenu>
@@ -43,7 +43,7 @@ export const AuthUserBar = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => push(`/profile/${id}`)}>
+          <DropdownMenuItem onClick={() => push(`/profile/${name_seo}`)}>
             <User />
             <span>{t('user-bar.my_profile')}</span>
           </DropdownMenuItem>
