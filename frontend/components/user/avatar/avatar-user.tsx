@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 
 import { CONFIG } from '@/config';
 import { generateLetterPhoto } from '@/functions/generate-letter-photo';
-import type { Maybe, UploadCoreAttachmentsObj } from '@/graphql/hooks';
+import type { Maybe, AvatarUser as AvatarUserType } from '@/graphql/hooks';
 import { cx } from '@/functions/classnames';
 
 import { Img } from '../../img';
@@ -15,7 +15,7 @@ interface Props {
     avatar_color: string;
     name: string;
     name_seo: string;
-    avatar?: Maybe<UploadCoreAttachmentsObj>;
+    avatar?: Maybe<Pick<AvatarUserType, 'dir_folder' | 'name'>>;
   };
   className?: string;
 }
@@ -28,7 +28,7 @@ const AvatarUser = forwardRef<HTMLImageElement, Props>(
         imageClassName="object-cover"
         src={
           avatar
-            ? `${CONFIG.graphql_url}/${avatar.url}`
+            ? `${CONFIG.graphql_url}/${avatar.dir_folder}/${avatar.name}`
             : generateLetterPhoto(name.slice(0, 1), avatar_color)
         }
         alt={name}

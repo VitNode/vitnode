@@ -8,7 +8,7 @@ interface Props extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href' | '
 }
 
 export const UserLink = forwardRef<HTMLAnchorElement, Props>(
-  ({ user: { name_seo, name }, ...props }, ref) => {
+  ({ user: { name, name_seo }, ...props }, ref) => {
     return (
       <Link href={`/profile/${name_seo}`} ref={ref} {...props}>
         {name}

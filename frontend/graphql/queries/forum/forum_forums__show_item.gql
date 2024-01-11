@@ -46,6 +46,10 @@ query Forum_forums__show_item($cursor: Int, $first: Int, $last: Int, $forumId: I
         name_seo
         name
         avatar_color
+        avatar {
+          dir_folder
+          name
+        }
         group {
           id
           name {

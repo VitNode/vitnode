@@ -23,7 +23,7 @@ export const AuthUserBar = () => {
   const { onSubmit } = useSignOutAPI();
 
   if (!session) return null;
-  const { email, name_seo, is_admin, is_mod, name } = session;
+  const { email, is_admin, is_mod, name, name_seo } = session;
 
   return (
     <DropdownMenu>

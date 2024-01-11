@@ -18,6 +18,10 @@ query Core_staff_administrators__admin__show(
         __typename
         ... on User {
           avatar_color
+          avatar {
+            dir_folder
+            name
+          }
           group {
             id
             name {

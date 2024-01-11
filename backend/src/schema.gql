@@ -24,7 +24,9 @@ type AuthorizationCurrentUserObj {
 }
 
 type AvatarUser {
-  url: String
+  dir_folder: String!
+  id: Int!
+  name: String!
 }
 
 type ChildrenShowForumForums {
@@ -111,6 +113,8 @@ type Mutation {
   core_groups__admin__edit(id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
   core_groups__admin_create(name: [TextLanguageInput!]!): ShowAdminGroups!
   core_languages__edit(code: String!, default: Boolean!, enabled: Boolean!, id: Int!, name: String!, timezone: String!): ShowCoreLanguages!
+  core_members__avatar__delete: String!
+  core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
   core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
@@ -427,6 +431,19 @@ input TextLanguageInput {
 enum TopicActions {
   lock
   unlock
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+type UploadAvatarCoreMembersObj {
+  dir_folder: String!
+  extension: String!
+  id: Int!
+  mimetype: String!
+  module_name: String!
+  name: String!
+  size: Int!
 }
 
 type User {

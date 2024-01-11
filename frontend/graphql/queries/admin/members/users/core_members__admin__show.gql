@@ -24,6 +24,10 @@ query Core_members__admin__show(
     }
     edges {
       avatar_color
+      avatar {
+        dir_folder
+        name
+      }
       email
       id
       joined

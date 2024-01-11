@@ -1,76 +1,85 @@
-// import { Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 
-// import { UploadAvatarCoreMembersArgs } from './dto/upload.args';
+import { UploadAvatarCoreMembersArgs } from './dto/upload.args';
+import { UploadAvatarCoreMembersObj } from './dto/upload.obj';
 
-// import { UploadCoreAttachmentsService } from '@/src/core/attachments/upload/upload.service';
-// import { User } from '@/utils/decorators/user.decorator';
-// import { PrismaService } from '@/prisma/prisma.service';
-// import { DeleteCoreAttachmentsService } from '../../../attachments/delete/delete.service';
-// import { UploadCoreAttachmentsObj } from '../../../attachments/upload/dto/upload.obj';
-// import { CustomError } from '@/utils/errors/CustomError';
+import { User } from '@/utils/decorators/user.decorator';
+import { CustomError } from '@/utils/errors/CustomError';
+import { UploadCoreFilesService } from '@/src/core/files/upload/upload.service';
+import { DatabaseService } from '@/database/database.service';
+import { core_files_avatars } from '@/src/admin/core/database/schema/files';
+import { currentDate } from '@/functions/date';
+import { DeleteCoreFilesService } from '@/src/core/files/delete/delete.service';
 
-// @Injectable()
-// export class UploadAvatarCoreMembersService {
-//   constructor(
-//     private readonly uploadFile: UploadCoreAttachmentsService,
-//     private readonly deleteFile: DeleteCoreAttachmentsService,
-//     private readonly prisma: PrismaService
-//   ) {}
+@Injectable()
+export class UploadAvatarCoreMembersService {
+  constructor(
+    private readonly uploadFile: UploadCoreFilesService,
+    private readonly deleteFile: DeleteCoreFilesService,
+    private readonly databaseService: DatabaseService
+  ) {}
 
-//   async uploadAvatar(
-//     { id }: User,
-//     { file }: UploadAvatarCoreMembersArgs
-//   ): Promise<UploadCoreAttachmentsObj> {
-//     // Check if the user already has an avatar
-//     const avatar = await this.prisma.core_attachments.findFirst({
-//       where: {
-//         module: 'core_members',
-//         module_id: id
-//       }
-//     });
+  async uploadAvatar(
+    { avatar, id }: User,
+    { file }: UploadAvatarCoreMembersArgs
+  ): Promise<UploadAvatarCoreMembersObj> {
+    if (avatar) {
+      // Check if avatar exists
+      this.deleteFile.checkIfFileExists({
+        dir_folder: avatar.dir_folder,
+        name: avatar.name
+      });
 
-//     if (avatar) {
-//       await this.deleteFile.deleteFile({
-//         module: {
-//           module: 'core_members',
-//           id: id
-//         },
-//         id: null
-//       });
-//     }
+      // Delete from database
+      await this.databaseService.db
+        .delete(core_files_avatars)
+        .where(eq(core_files_avatars.id, avatar.id));
 
-//     const currentFile = await this.uploadFile.upload({
-//       files: [
-//         {
-//           file,
-//           description: 'Avatar',
-//           position: 0
-//         }
-//       ],
-//       maxUploadSizeBytes: 1e6, // 1MB
-//       acceptMimeType: ['image/png', 'image/jpeg'],
-//       module: 'core_members',
-//       module_id: id
-//     });
+      // Delete from server
+      this.deleteFile.delete({
+        dir_folder: avatar.dir_folder,
+        name: avatar.name
+      });
+    }
 
-//     // Update user
-//     await this.prisma.core_members.update({
-//       where: {
-//         id
-//       },
-//       data: {
-//         avatar_id: currentFile[0].id
-//       }
-//     });
+    const uploadFiles = await this.uploadFile.upload({
+      files: [file],
+      maxUploadSizeBytes: 1e6, // 1MB,
+      acceptMimeType: ['image/png', 'image/jpeg'],
+      module_name: 'avatars'
+    });
 
-//     if (currentFile.length === 0) {
-//       throw new CustomError({
-//         code: 'UNKNOWN_ERROR',
-//         message:
-//           'We could not upload your avatar and save it to database. This is error from engine.'
-//       });
-//     }
+    const uploadFile = uploadFiles[0];
 
-//     return currentFile[0];
-//   }
-// }
+    if (!uploadFile) {
+      throw new CustomError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'We could not upload your avatar. This is error from engine.'
+      });
+    }
+
+    // Save to database
+    const recordFromDb = await this.databaseService.db
+      .insert(core_files_avatars)
+      .values({
+        user_id: id,
+        created: currentDate(),
+        ...uploadFile,
+        file_size: uploadFile.size
+      })
+      .returning();
+
+    if (recordFromDb.length === 0) {
+      throw new CustomError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'We could not upload your avatar. This is error from engine.'
+      });
+    }
+
+    return {
+      ...recordFromDb[0],
+      ...uploadFile
+    };
+  }
+}

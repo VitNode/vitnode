@@ -43,10 +43,12 @@ export class ShowForumForumsService {
     const wherePermissions = and(
       or(
         eq(forum_forums.can_all_view, true),
-        inArray(
-          forum_forums.id,
-          forumIdsWithAccess.map(({ forum_id }) => forum_id)
-        )
+        forumIdsWithAccess.length > 0
+          ? inArray(
+              forum_forums.id,
+              forumIdsWithAccess.map(({ forum_id }) => forum_id)
+            )
+          : undefined
       )
     );
 

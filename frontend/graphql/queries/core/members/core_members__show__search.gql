@@ -2,6 +2,10 @@ query Core_members__show__search($search: String, $first: Int) {
   core_members__show(search: $search, first: $first) {
     edges {
       avatar_color
+      avatar {
+        dir_folder
+        name
+      }
       group {
         id
         name {
@@ -11,6 +15,7 @@ query Core_members__show__search($search: String, $first: Int) {
       }
       id
       name
+      name_seo
     }
   }
 }

@@ -2,6 +2,10 @@ query Core_members__profiles($first: Int, $nameSeo: String!) {
   core_members__show(first: $first, name_seo: $nameSeo) {
     edges {
       avatar_color
+      avatar {
+        dir_folder
+        name
+      }
       group {
         name {
           language_code

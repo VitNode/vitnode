@@ -31,28 +31,20 @@ export const core_files_relations = relations(core_files, ({ one }) => ({
 
 export const core_files_avatars = pgTable('core_files_avatars', {
   id: serial('id').primaryKey(),
-  url: varchar('url', { length: 255 }).notNull(),
+  dir_folder: varchar('dir_folder', { length: 255 }).notNull(),
+  name: varchar('name', { length: 255 }).notNull(),
   created: integer('created').notNull(),
-  file_size: integer('file_size').notNull()
+  file_size: integer('file_size').notNull(),
+  mimetype: varchar('mimetype', { length: 255 }).notNull(),
+  extension: varchar('extension', { length: 32 }).notNull(),
+  user_id: integer('user_id').references(() => core_users.id, {
+    onDelete: 'cascade'
+  })
 });
 
 export const core_files_avatars_relations = relations(core_files_avatars, ({ one }) => ({
   user: one(core_users, {
-    fields: [core_files_avatars.id],
-    references: [core_users.avatar_id]
-  })
-}));
-
-export const core_files_covers = pgTable('core_files_covers', {
-  id: serial('id').primaryKey(),
-  url: varchar('url', { length: 255 }).notNull(),
-  created: integer('created').notNull(),
-  file_size: integer('file_size').notNull()
-});
-
-export const core_files_covers_relations = relations(core_files_covers, ({ one }) => ({
-  user: one(core_users, {
-    fields: [core_files_covers.id],
-    references: [core_users.cover_id]
+    fields: [core_files_avatars.user_id],
+    references: [core_users.id]
   })
 }));

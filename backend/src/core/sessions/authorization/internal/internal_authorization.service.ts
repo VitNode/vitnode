@@ -2,12 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 
-import { InternalAuthorizationCoreSessionObj } from './dto/internal_authorization.obj';
-
 import { Ctx } from '@/types/context.type';
 import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 import { currentDate } from '@/functions/date';
 import { DatabaseService } from '@/database/database.service';
+import { User } from '@/utils/decorators/user.decorator';
 
 @Injectable()
 export class InternalAuthorizationCoreSessionsService {
@@ -17,7 +16,7 @@ export class InternalAuthorizationCoreSessionsService {
     private configService: ConfigService
   ) {}
 
-  async authorization({ req }: Ctx): Promise<InternalAuthorizationCoreSessionObj> {
+  async authorization({ req }: Ctx): Promise<User> {
     const login_token = req.cookies[this.configService.getOrThrow('cookies.login_token.name')];
 
     if (!login_token) {

@@ -9,6 +9,10 @@ query Core_sessions__authorization {
       name
       newsletter
       avatar_color
+      avatar {
+        dir_folder
+        name
+      }
       group {
         name {
           language_code

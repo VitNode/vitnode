@@ -2,7 +2,7 @@ import { relations } from 'drizzle-orm';
 import { boolean, integer, pgTable, serial, text, varchar } from 'drizzle-orm/pg-core';
 
 import { core_groups } from './groups';
-import { core_files_avatars, core_files_covers } from './files';
+import { core_files_avatars } from './files';
 
 export const core_users = pgTable('core_users', {
   id: serial('id').primaryKey(),
@@ -14,9 +14,7 @@ export const core_users = pgTable('core_users', {
   posts: integer('posts').notNull().default(0),
   newsletter: boolean('newsletter').notNull().default(false),
   avatar_color: varchar('avatar_color', { length: 6 }).notNull(),
-  group_id: integer('group_id').references(() => core_groups.id),
-  avatar_id: integer('avatar_id').references(() => core_files_avatars.id),
-  cover_id: integer('cover_id').references(() => core_files_covers.id)
+  group_id: integer('group_id').references(() => core_groups.id)
 });
 
 export const core_users_relations = relations(core_users, ({ one }) => ({
@@ -25,11 +23,7 @@ export const core_users_relations = relations(core_users, ({ one }) => ({
     references: [core_groups.id]
   }),
   avatar: one(core_files_avatars, {
-    fields: [core_users.avatar_id],
-    references: [core_files_avatars.id]
-  }),
-  cover: one(core_files_covers, {
-    fields: [core_users.cover_id],
-    references: [core_files_covers.id]
+    fields: [core_users.id],
+    references: [core_files_avatars.user_id]
   })
 }));
