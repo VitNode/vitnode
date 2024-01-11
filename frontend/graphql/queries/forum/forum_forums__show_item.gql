@@ -47,6 +47,7 @@ query Forum_forums__show_item($cursor: Int, $first: Int, $last: Int, $forumId: I
         name
         avatar_color
         avatar {
+          id
           dir_folder
           name
         }

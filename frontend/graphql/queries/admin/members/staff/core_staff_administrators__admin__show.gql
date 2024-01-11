@@ -19,6 +19,7 @@ query Core_staff_administrators__admin__show(
         ... on User {
           avatar_color
           avatar {
+            id
             dir_folder
             name
           }

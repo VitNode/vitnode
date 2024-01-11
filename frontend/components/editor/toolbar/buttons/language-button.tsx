@@ -45,7 +45,7 @@ export const LanguageButtonEditor = ({ selectedLanguage, setSelectedLanguage }: 
 
       <SelectContent onCloseAutoFocus={() => editor.focus()}>
         {languages.map(language => (
-          <SelectItem key={language.id} value={language.id}>
+          <SelectItem key={language.id} value={`${language.id}`}>
             {language.name}
           </SelectItem>
         ))}

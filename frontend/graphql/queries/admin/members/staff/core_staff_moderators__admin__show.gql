@@ -14,6 +14,7 @@ query Core_staff_moderators__admin__show(
         ... on User {
           avatar_color
           avatar {
+            id
             dir_folder
             name
           }

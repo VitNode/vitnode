@@ -8,7 +8,7 @@ import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
 
 export interface ItemForumProps {
   description: TextLanguage[];
-  id: string;
+  id: number;
   name: TextLanguage[];
   children?: Omit<ItemForumProps, 'description'>[] | null;
 }

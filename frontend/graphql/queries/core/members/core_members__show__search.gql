@@ -3,6 +3,7 @@ query Core_members__show__search($search: String, $first: Int) {
     edges {
       avatar_color
       avatar {
+        id
         dir_folder
         name
       }

@@ -21,6 +21,7 @@ query Forum_topics__show(
       user {
         avatar_color
         avatar {
+          id
           dir_folder
           name
         }
@@ -56,6 +57,7 @@ query Forum_topics__show(
         user {
           avatar_color
           avatar {
+            id
             dir_folder
             name
           }
@@ -78,6 +80,7 @@ query Forum_topics__show(
         user {
           avatar_color
           avatar {
+            id
             dir_folder
             name
           }

@@ -10,6 +10,7 @@ query Admin_sessions__authorization {
       newsletter
       avatar_color
       avatar {
+        id
         dir_folder
         name
       }

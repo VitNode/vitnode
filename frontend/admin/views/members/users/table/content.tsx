@@ -19,7 +19,7 @@ import type { ShowAdminMembers } from '@/graphql/hooks';
 interface UsersMembersAdminAPIDataType
   extends Pick<
     ShowAdminMembers,
-    'avatar_color' | 'email' | 'group' | 'id' | 'joined' | 'name' | 'avatar'
+    'avatar_color' | 'email' | 'group' | 'id' | 'joined' | 'name' | 'avatar' | 'name_seo'
   > {}
 
 export const ContentTableUsersMembersAdmin = ({ data }: UsersMembersAdminViewProps) => {

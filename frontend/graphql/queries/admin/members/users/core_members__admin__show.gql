@@ -25,11 +25,13 @@ query Core_members__admin__show(
     edges {
       avatar_color
       avatar {
+        id
         dir_folder
         name
       }
       email
       id
+      name_seo
       joined
       name
       group {
