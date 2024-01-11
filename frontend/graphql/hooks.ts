@@ -858,6 +858,14 @@ export type Core_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: ne
 
 export type Core_Sessions__Sign_OutMutation = { __typename?: 'Mutation', core_sessions__sign_out: string };
 
+export type Forum_Posts__CreateMutationVariables = Exact<{
+  content: Array<TextLanguageInput> | TextLanguageInput;
+  topicId: Scalars['Int']['input'];
+}>;
+
+
+export type Forum_Posts__CreateMutation = { __typename?: 'Mutation', forum_posts__create: { __typename?: 'ShowPostsForums', created: number, id: number, content: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, user: { __typename?: 'User', avatar_color: string, id: number, name: string, name_seo: string, avatar?: { __typename?: 'AvatarUser', dir_folder: string, id: number, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } } };
+
 export type Forum_Topics__Actions__Lock_ToggleMutationVariables = Exact<{
   id: Scalars['Int']['input'];
 }>;
@@ -1201,6 +1209,36 @@ export const Core_Sessions__Sign_In = gql`
 export const Core_Sessions__Sign_Out = gql`
     mutation Core_sessions__sign_out {
   core_sessions__sign_out
+}
+    `;
+export const Forum_Posts__Create = gql`
+    mutation Forum_posts__create($content: [TextLanguageInput!]!, $topicId: Int!) {
+  forum_posts__create(content: $content, topic_id: $topicId) {
+    content {
+      language_code
+      value
+    }
+    created
+    id
+    user {
+      avatar {
+        dir_folder
+        id
+        name
+      }
+      avatar_color
+      group {
+        id
+        name {
+          language_code
+          value
+        }
+      }
+      id
+      name
+      name_seo
+    }
+  }
 }
     `;
 export const Forum_Topics__Actions__Lock_Toggle = gql`
