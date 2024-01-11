@@ -8,7 +8,8 @@ import { $createEmojiNode, EmojiNode } from '../nodes/EmojiNode';
 import { CONFIG } from '@/config';
 
 const convertEmoji = (emoji: Emoji[]) => {
-  const localStorageSkinToneIndex = localStorage.getItem(CONFIG.editor.skin_tone);
+  const localStorageSkinToneIndex =
+    typeof window !== 'undefined' ? localStorage.getItem(CONFIG.editor.skin_tone) : null;
   const result: Map<string, string> = new Map();
 
   emoji.forEach(item => {

@@ -23,6 +23,10 @@
           "title": "Title",
           "content": "Content"
         }
+      },
+      "post": {
+        "placeholder": "Write your reply here...",
+        "submit": "Submit Post"
       }
     }
   }

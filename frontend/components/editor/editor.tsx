@@ -29,8 +29,8 @@ import { initialConfigEditor } from './initial-config';
 
 interface Props {
   id: string;
-  autoFocus?: boolean;
   className?: string;
+  enableAutoFocus?: boolean;
   toolbarClassName?: string;
 }
 interface WithLanguage extends Props {
@@ -46,9 +46,9 @@ interface WithoutLanguage extends Props {
 }
 
 export const Editor = ({
-  autoFocus,
   className,
   disableLanguage,
+  enableAutoFocus,
   id,
   onChange,
   toolbarClassName,
@@ -105,7 +105,7 @@ export const Editor = ({
             ErrorBoundary={LexicalErrorBoundary}
           />
           <MarkdownShortcutPlugin transformers={MARKDOWN_TRANSFORMERS_EDITOR} />
-          {autoFocus && <AutoFocusPlugin />}
+          {enableAutoFocus && <AutoFocusPlugin />}
           <HistoryPlugin />
           <ListPlugin />
           <CheckListPlugin />

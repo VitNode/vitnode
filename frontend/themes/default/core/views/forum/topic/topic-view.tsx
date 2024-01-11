@@ -10,6 +10,7 @@ import { ActionsTopic } from './actions/actions-topic';
 import { TitleIconTopic } from './title-icon';
 import { PostTopic } from './post/post';
 import { MetaTagTopic } from './meta-tags/meta-tag';
+import { CreatePost } from './post/create/create-post';
 
 interface Props {
   data: Forum_Topics__ShowQuery;
@@ -83,6 +84,8 @@ export const TopicView = ({ data: dataApi }: Props) => {
             })}
           </div>
         )}
+
+        <CreatePost className="mt-5" />
       </div>
 
       <div className="w-1/4">Sidebar</div>
