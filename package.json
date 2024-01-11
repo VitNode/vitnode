@@ -6,6 +6,7 @@
   "license": "GPL-3.0 license",
   "scripts": {
     "prepare": "npx husky install",
+    "backend:init": "cd backend && pnpm config:init && cd ..",
     "backend:build": "cd backend && pnpm build && cd ..",
     "backend:start": "cd backend && pnpm start",
     "backend:dev": "cd backend && pnpm dev",

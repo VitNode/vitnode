@@ -30,7 +30,6 @@ VitNode is a headless CMS built with [NextJS](https://nextjs.org/) and [NestJS](
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
-- [Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma)
 
 ## 🚀 Installation
 

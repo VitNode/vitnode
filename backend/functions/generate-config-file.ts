@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import * as fs from 'fs';
 import { join } from 'path';
 
@@ -28,6 +29,7 @@ if (!fs.existsSync(configPath)) {
     if (err) throw err;
   });
 
-  // eslint-disable-next-line no-console
   console.log('[First Install VitNode] - Config file has been generated');
+} else {
+  console.log('[First Install VitNode] - Config file already exists');
 }

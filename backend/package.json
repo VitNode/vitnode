@@ -5,6 +5,7 @@
   "author": "Maciej Piotr (aXenDev) Balcerzak",
   "license": "GPL-3.0 license",
   "scripts": {
+    "config:init": "ts-node functions/generate-config-file.ts",
     "db": "drizzle-kit push:pg",
     "migrate": "drizzle-kit generate:pg --out src/forum/database/migrations --schema src/forum/database/schema.ts",
     "build": "nest build",
