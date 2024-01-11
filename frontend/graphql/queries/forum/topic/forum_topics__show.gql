@@ -1,11 +1,5 @@
-query Forum_topics__show(
-  $id: Int!
-  $first: Int
-  $cursor: Int
-  $forumPostsShowFirst2: Int
-  $last: Int
-) {
-  forum_topics__show(id: $id, first: $first) {
+query Forum_topics__show($id: Int!, $first: Int, $cursor: Int, $last: Int) {
+  forum_topics__show(id: $id) {
     edges {
       content {
         language_code
@@ -45,7 +39,7 @@ query Forum_topics__show(
       }
     }
   }
-  forum_posts__show(topic_id: $id, cursor: $cursor, first: $forumPostsShowFirst2, last: $last) {
+  forum_posts__show(topic_id: $id, cursor: $cursor, first: $first, last: $last) {
     edges {
       __typename
       ... on ShowPostsForums {

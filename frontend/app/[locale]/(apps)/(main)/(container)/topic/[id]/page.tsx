@@ -14,7 +14,8 @@ const getData = async ({ id }: { id: string }) => {
   const { data } = await fetcher<Forum_Topics__ShowQuery, Forum_Topics__ShowQueryVariables>({
     query: Forum_Topics__Show,
     variables: {
-      id: getIdFormString(id)
+      id: getIdFormString(id),
+      first: 10
     },
     headers: {
       Cookie: cookies().toString()

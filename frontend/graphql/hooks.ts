@@ -1011,7 +1011,6 @@ export type Forum_Topics__ShowQueryVariables = Exact<{
   id: Scalars['Int']['input'];
   first?: InputMaybe<Scalars['Int']['input']>;
   cursor?: InputMaybe<Scalars['Int']['input']>;
-  forumPostsShowFirst2?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
@@ -1784,8 +1783,8 @@ export const Forum_Forums__Show_Item = gql`
 }
     `;
 export const Forum_Topics__Show = gql`
-    query Forum_topics__show($id: Int!, $first: Int, $cursor: Int, $forumPostsShowFirst2: Int, $last: Int) {
-  forum_topics__show(id: $id, first: $first) {
+    query Forum_topics__show($id: Int!, $first: Int, $cursor: Int, $last: Int) {
+  forum_topics__show(id: $id) {
     edges {
       content {
         language_code
@@ -1825,12 +1824,7 @@ export const Forum_Topics__Show = gql`
       }
     }
   }
-  forum_posts__show(
-    topic_id: $id
-    cursor: $cursor
-    first: $forumPostsShowFirst2
-    last: $last
-  ) {
+  forum_posts__show(topic_id: $id, cursor: $cursor, first: $first, last: $last) {
     edges {
       __typename
       ... on ShowPostsForums {
