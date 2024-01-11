@@ -3,43 +3,37 @@ import { Injectable } from '@nestjs/common';
 import { InternalAuthorizationCoreSessionsService } from './internal/internal_authorization.service';
 import { AuthorizationCoreSessionsObj } from './dto/authorization.obj';
 
-import { PrismaService } from '@/prisma/prisma.service';
 import { Ctx } from '@/types/context.type';
+import { DatabaseService } from '@/database/database.service';
 
 @Injectable()
 export class AuthorizationCoreSessionsService {
   constructor(
-    private prisma: PrismaService,
+    private databaseService: DatabaseService,
     private readonly service: InternalAuthorizationCoreSessionsService
   ) {}
 
-  protected async isAdmin({ group_id, id }: { group_id: string; id: string }): Promise<boolean> {
-    return !!(await this.prisma.core_admin_permissions.findFirst({
-      where: {
-        OR: [
-          {
-            group_id
-          },
-          {
-            member_id: id
-          }
-        ]
-      }
+  protected async isAdmin({
+    group_id,
+    user_id
+  }: {
+    group_id: number;
+    user_id: number;
+  }): Promise<boolean> {
+    return !!(await this.databaseService.db.query.core_admin_permissions.findFirst({
+      where: (table, { eq, or }) => or(eq(table.group_id, group_id), eq(table.user_id, user_id))
     }));
   }
 
-  protected async isMod({ group_id, id }: { group_id: string; id: string }): Promise<boolean> {
-    return !!(await this.prisma.core_moderator_permissions.findFirst({
-      where: {
-        OR: [
-          {
-            group_id
-          },
-          {
-            member_id: id
-          }
-        ]
-      }
+  protected async isMod({
+    group_id,
+    user_id
+  }: {
+    group_id: number;
+    user_id: number;
+  }): Promise<boolean> {
+    return !!(await this.databaseService.db.query.core_moderators_permissions.findFirst({
+      where: (table, { eq, or }) => or(eq(table.group_id, group_id), eq(table.user_id, user_id))
     }));
   }
 
@@ -47,14 +41,12 @@ export class AuthorizationCoreSessionsService {
     try {
       const currentUser = await this.service.authorization({ req, res });
 
-      const user = await this.prisma.core_members.findUnique({
-        where: {
-          id: currentUser.id
-        },
-        include: {
+      const user = await this.databaseService.db.query.core_users.findFirst({
+        where: (table, { eq }) => eq(table.id, currentUser.id),
+        with: {
           avatar: true,
           group: {
-            include: {
+            with: {
               name: true
             }
           }
@@ -64,8 +56,8 @@ export class AuthorizationCoreSessionsService {
       return {
         user: {
           ...user,
-          is_admin: await this.isAdmin({ group_id: user.group.id, id: user.id }),
-          is_mod: await this.isMod({ group_id: user.group.id, id: user.id }),
+          is_admin: await this.isAdmin({ group_id: user.group.id, user_id: user.id }),
+          is_mod: await this.isMod({ group_id: user.group.id, user_id: user.id }),
           avatar_color: user.avatar_color
         }
       };

@@ -5,6 +5,7 @@ import { $isDecoratorBlockNode } from '@lexical/react/LexicalDecoratorBlockNode'
 import { $isHeadingNode, $isQuoteNode } from '@lexical/rich-text';
 import { $getNearestBlockElementAncestorOrThrow } from '@lexical/utils';
 import { useTranslations } from 'next-intl';
+import { useCallback } from 'react';
 
 import { Button } from '@/components/ui/button';
 
@@ -12,7 +13,7 @@ export const ClearFormattingButtonEditor = () => {
   const t = useTranslations('core.editor');
   const [editor] = useLexicalComposerContext();
 
-  const clearFormatting = () => {
+  const clearFormatting = useCallback(() => {
     editor.update(() => {
       const selection = $getSelection();
       if ($isRangeSelection(selection)) {
@@ -28,20 +29,23 @@ export const ClearFormattingButtonEditor = () => {
           // We split the first and last node by the selection
           // So that we don't format unselected text inside those nodes
           if ($isTextNode(node)) {
+            // Use a separate variable to ensure TS does not lose the refinement
+            let textNode = node;
             if (idx === 0 && anchor.offset !== 0) {
-              node = node.splitText(anchor.offset)[1] || node;
+              textNode = textNode.splitText(anchor.offset)[1] || textNode;
             }
             if (idx === nodes.length - 1) {
-              node = node.splitText(focus.offset)[0] || node;
+              textNode = textNode.splitText(focus.offset)[0] || textNode;
             }
 
-            if (node.__style !== '') {
-              node.setStyle('');
+            if (textNode.__style !== '') {
+              textNode.setStyle('');
             }
-            if (node.__format !== 0) {
-              node.setFormat(0);
-              $getNearestBlockElementAncestorOrThrow(node).setFormat('');
+            if (textNode.__format !== 0) {
+              textNode.setFormat(0);
+              $getNearestBlockElementAncestorOrThrow(textNode).setFormat('');
             }
+            node = textNode;
           } else if ($isHeadingNode(node) || $isQuoteNode(node)) {
             node.replace($createParagraphNode(), true);
           } else if ($isDecoratorBlockNode(node)) {
@@ -50,7 +54,7 @@ export const ClearFormattingButtonEditor = () => {
         });
       }
     });
-  };
+  }, [editor]);
 
   return (
     <Button variant="ghost" size="icon" onClick={clearFormatting} tooltip={t('remove_formatting')}>

@@ -6,7 +6,7 @@ export class TextLanguage {
   value: string;
 
   @Field(() => String)
-  id_language: string;
+  language_code: string;
 }
 
 @InputType()
@@ -15,5 +15,5 @@ export class TextLanguageInput {
   value: string;
 
   @Field(() => String)
-  id_language: string;
+  language_code: string;
 }

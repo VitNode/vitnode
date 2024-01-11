@@ -1,50 +1,37 @@
 import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 
-import { DeleteCoreAttachmentsService } from '../../../attachments/delete/delete.service';
 import { User } from '@/utils/decorators/user.decorator';
-import { PrismaService } from '@/prisma/prisma.service';
-
+import { DeleteCoreFilesService } from '@/src/core/files/delete/delete.service';
+import { DatabaseService } from '@/database/database.service';
+import { core_files_avatars } from '@/src/admin/core/database/schema/files';
 @Injectable()
 export class DeleteAvatarCoreMembersService {
   constructor(
-    private readonly service: DeleteCoreAttachmentsService,
-    private readonly prisma: PrismaService
+    private readonly deleteFile: DeleteCoreFilesService,
+    private readonly databaseService: DatabaseService
   ) {}
 
-  async deleteAvatar({ id }: User): Promise<string> {
-    const file = await this.prisma.core_attachments.findFirst({
-      where: {
-        AND: [
-          {
-            module: 'core_members'
-          },
-          {
-            module_id: id
-          }
-        ]
-      }
-    });
-
-    if (!file) {
+  async deleteAvatar({ avatar }: User): Promise<string> {
+    if (!avatar) {
       return 'Avatar not found';
     }
 
-    await this.service.deleteFile({
-      module: {
-        module: 'core_members',
-        id: id
-      },
-      id: null
+    // Check if avatar exists
+    this.deleteFile.checkIfFileExists({
+      dir_folder: avatar.dir_folder,
+      name: avatar.name
     });
 
-    // Update user
-    await this.prisma.core_members.update({
-      where: {
-        id
-      },
-      data: {
-        avatar_id: null
-      }
+    // Delete from database
+    await this.databaseService.db
+      .delete(core_files_avatars)
+      .where(eq(core_files_avatars.id, avatar.id));
+
+    // Delete from server
+    this.deleteFile.delete({
+      dir_folder: avatar.dir_folder,
+      name: avatar.name
     });
 
     return 'Success!';

@@ -1,9 +1,12 @@
-import { ArgsType, Field } from '@nestjs/graphql';
+import { ArgsType, Field, Int } from '@nestjs/graphql';
 
 @ArgsType()
 export class EditCoreLanguagesArgs {
+  @Field(() => Int)
+  id: number;
+
   @Field(() => String)
-  id: string;
+  code: string;
 
   @Field(() => String)
   name: string;

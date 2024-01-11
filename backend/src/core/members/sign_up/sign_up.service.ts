@@ -1,19 +1,43 @@
 import { Injectable } from '@nestjs/common';
 import { genSalt, hash } from 'bcrypt';
+import { count } from 'drizzle-orm';
+import { ConfigService } from '@nestjs/config';
 
 import { SignUpCoreMembersArgs } from './dto/sign_up.args';
 import { SignUpCoreMembersObj } from './dto/sign_up.obj';
 
-import { PrismaService } from '@/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';
 import { removeSpecialCharacters } from '@/functions/remove-special-characters';
-import { CONFIG } from '@/config';
 import { currentDate } from '@/functions/date';
 import { generateAvatarColor } from '@/functions/avatar/generateAvatarColor';
+import { DatabaseService } from '@/database/database.service';
+import { core_users } from '@/src/admin/core/database/schema/users';
 
 @Injectable()
 export class SignUpCoreMembersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private configService: ConfigService
+  ) {}
+
+  protected getGroupId = async (): Promise<number> => {
+    const countUsers = await this.databaseService.db.select({ count: count() }).from(core_users);
+
+    // If no users, return root group
+    if (countUsers[0].count === 0) {
+      const rootGroup = await this.databaseService.db.query.core_groups.findFirst({
+        where: (table, { and, eq }) => and(eq(table.default, false), eq(table.root, true))
+      });
+
+      return rootGroup.id;
+    }
+
+    const defaultGroup = await this.databaseService.db.query.core_groups.findFirst({
+      where: (table, { and, eq }) => and(eq(table.default, true), eq(table.root, false))
+    });
+
+    return defaultGroup.id;
+  };
 
   async signUp({
     email: emailRaw,
@@ -23,38 +47,8 @@ export class SignUpCoreMembersService {
   }: SignUpCoreMembersArgs): Promise<SignUpCoreMembersObj> {
     const email = emailRaw.toLowerCase();
 
-    const isAdmin = async (): Promise<string> => {
-      const count = await this.prisma.core_members.count();
-
-      if (!count) {
-        return (
-          await this.prisma.core_groups.findFirst({
-            where: {
-              default: false,
-              root: true
-            },
-            select: {
-              id: true
-            }
-          })
-        ).id;
-      }
-
-      return (
-        await this.prisma.core_groups.findFirst({
-          where: {
-            default: true
-          },
-          select: {
-            id: true
-          }
-        })
-      ).id;
-    };
-    const checkEmail = await this.prisma.core_members.findUnique({
-      where: {
-        email
-      }
+    const checkEmail = await this.databaseService.db.query.core_users.findFirst({
+      where: (table, { eq }) => eq(table.email, email)
     });
 
     if (checkEmail) {
@@ -65,13 +59,8 @@ export class SignUpCoreMembersService {
     }
 
     const convertToNameSEO = removeSpecialCharacters(name);
-    const checkNameSEO = await this.prisma.core_members.findFirst({
-      where: {
-        id: {
-          equals: convertToNameSEO,
-          mode: 'insensitive'
-        }
-      }
+    const checkNameSEO = await this.databaseService.db.query.core_users.findFirst({
+      where: (table, { ilike }) => ilike(table.name_seo, convertToNameSEO)
     });
 
     if (checkNameSEO) {
@@ -83,24 +72,26 @@ export class SignUpCoreMembersService {
 
     const dateNow = currentDate();
 
-    const passwordSalt = await genSalt(CONFIG.password_salt);
+    const passwordSalt = await genSalt(this.configService.getOrThrow('password_salt'));
     const hashPassword = await hash(password, passwordSalt);
 
-    return await this.prisma.core_members.create({
-      data: {
+    const user = await this.databaseService.db
+      .insert(core_users)
+      .values({
         email,
         name,
-        id: convertToNameSEO,
+        name_seo: convertToNameSEO,
         newsletter,
         password: hashPassword,
         joined: dateNow,
         avatar_color: generateAvatarColor(name),
-        group: {
-          connect: {
-            id: await isAdmin()
-          }
-        }
-      }
-    });
+        group_id: await this.getGroupId()
+      })
+      .returning();
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: _, ...rest } = user[0];
+
+    return { ...rest };
   }
 }

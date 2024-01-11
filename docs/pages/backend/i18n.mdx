@@ -32,14 +32,14 @@ model core_groups {
 Create a schema `core_groups_names` in `schema.prisma` file for translation table.
 The translation table must have:
 
-- `id_language` with type `String` and `@db.VarChar(32)` value,
+- `language_id` with type `String` and `@db.VarChar(32)` value,
 - `value` with type `String` and any string value,
 - any fields for relation with main table (in our case `group_id`).
 
 ```prisma
 model core_groups_names {
   id          String @id @unique @default(uuid())
-  id_language String @db.VarChar(32)
+  language_id String @db.VarChar(32)
   group_id    String
   value       String @db.VarChar(255)
 }
@@ -62,7 +62,7 @@ Next step is to add relation to translation table.
 Remember to add relation for `core_languages` table:
 
 ```prisma
-language core_languages @relation("core_groups_names_language", references: [id], fields: [id_language])
+language core_languages @relation("core_groups_names_language", references: [id], fields: [language_id])
 ```
 
 Here is the full code:
@@ -70,21 +70,21 @@ Here is the full code:
 ```prisma
 model core_groups_names {
   id          String @id @unique @default(uuid())
-  id_language String @db.VarChar(32)
+  language_id String @db.VarChar(32)
   group_id    String
   value       String @db.VarChar(255)
 
   group    core_groups    @relation("core_groups_names_group", references: [id], fields: [group_id], onDelete: Cascade)
-  language core_languages @relation("core_groups_names_language", references: [id], fields: [id_language])
+  language core_languages @relation("core_groups_names_language", references: [id], fields: [language_id])
 
-  @@index([id_language])
+  @@index([language_id])
 }
 ```
 
 Remember to add `onDelete: Cascade` actions into relation. We want to delete translation when we delete main table.
 
 <Callout type="info" emoji="ℹ️">
-  For better performance you can add index to `id_language` field by adding `@@index([id_language])`
+  For better performance you can add index to `language_id` field by adding `@@index([language_id])`
   to the end of the schema.
 </Callout>
 
@@ -153,7 +153,7 @@ For our example we use `mockValues` array with `TextLanguage` type.
 ```ts
 const mockValues: TextLanguage[] = [
   {
-    id_language: 'en',
+    language_id: 'en',
     value: 'English Group'
   }
 ];
@@ -234,7 +234,7 @@ const groupNames = await this.prisma.core_groups_names.findMany({
 ```ts
 const updatedName = await Promise.all(
   mockValues.map(async item => {
-    const nameExist = groupNames.find(name => name.id_language === item.id_language);
+    const nameExist = groupNames.find(name => name.language_id === item.language_id);
 
     if (nameExist) {
       // If value is empty, do nothing

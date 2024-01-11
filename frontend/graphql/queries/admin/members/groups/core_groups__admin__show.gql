@@ -1,6 +1,6 @@
 query Core_groups__admin__show(
   $first: Int
-  $cursor: String
+  $cursor: Int
   $search: String
   $sortBy: [ShowAdminGroupsSortByArgs!]
   $last: Int
@@ -28,7 +28,7 @@ query Core_groups__admin__show(
       protected
       guest
       name {
-        id_language
+        language_code
         value
       }
       root

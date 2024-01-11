@@ -25,7 +25,7 @@ export const useCreateEditFormForumAdmin = () => {
       can_all_reply: z.boolean(),
       groups: z.array(
         z.object({
-          id: z.string(),
+          id: z.number(),
           view: z.boolean(),
           read: z.boolean(),
           create: z.boolean(),

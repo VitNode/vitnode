@@ -11,23 +11,30 @@ type AuthorizationCoreSessionsObj {
 }
 
 type AuthorizationCurrentUserObj {
-  avatar: UploadCoreAttachmentsObj
+  avatar: AvatarUser
   avatar_color: String!
   email: String!
   group: GroupUser!
-  id: String!
+  id: Int!
   is_admin: Boolean!
   is_mod: Boolean!
   name: String!
+  name_seo: String!
   newsletter: Boolean!
+}
+
+type AvatarUser {
+  dir_folder: String!
+  id: Int!
+  name: String!
 }
 
 type ChildrenShowForumForums {
   _count: ShowForumForumsCount!
-  children: [ShowForumForums!]
+  children: [LastChildShowForumForums!]
   created: Int!
   description: [TextLanguage!]!
-  id: String!
+  id: Int!
   name: [TextLanguage!]!
   position: Int!
 }
@@ -42,19 +49,14 @@ type CreateForumForumsObj {
   children: [ChildrenShowForumForums!]
   created: Int!
   description: [TextLanguage!]!
-  id: String!
+  id: Int!
   name: [TextLanguage!]!
   parent: ShowForumForums
   position: Int!
 }
 
-enum ForumTopicsActions {
-  lock
-  unlock
-}
-
 type ForumTopicsForums {
-  id: String!
+  id: Int!
   name: [TextLanguage!]!
 }
 
@@ -63,24 +65,33 @@ type GeneralAdminSettingsObj {
 }
 
 type GroupUser {
-  id: String!
+  id: Int!
   name: [TextLanguage!]!
 }
 
 input GroupsPermissionsCreateForumForums {
   create: Boolean!
-  id: String!
+  id: Int!
   read: Boolean!
   reply: Boolean!
   view: Boolean!
 }
 
 type LanguageCoreMiddlewareObj {
+  code: String!
   default: Boolean!
   enabled: Boolean!
-  id: String!
+  id: Int!
   name: String!
   timezone: String!
+}
+
+type LastChildShowForumForums {
+  created: Int!
+  description: [TextLanguage!]!
+  id: Int!
+  name: [TextLanguage!]!
+  position: Int!
 }
 
 enum LayoutAdminInstallEnum {
@@ -94,35 +105,36 @@ type LayoutAdminInstallObj {
 }
 
 type Mutation {
+  admin_core_plugins__test: String!
   admin_install__create_database: String!
   admin_sessions__sign_out: String!
   admin_settings__general__edit(side_name: String!): GeneralAdminSettingsObj!
-  core_groups__admin__delete(id: String!): String!
-  core_groups__admin__edit(id: String!, name: [TextLanguageInput!]!): ShowAdminGroups!
+  core_groups__admin__delete(id: Int!): String!
+  core_groups__admin__edit(id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
   core_groups__admin_create(name: [TextLanguageInput!]!): ShowAdminGroups!
-  core_languages__edit(default: Boolean!, enabled: Boolean!, id: String!, name: String!, timezone: String!): ShowCoreLanguages!
+  core_languages__edit(code: String!, default: Boolean!, enabled: Boolean!, id: Int!, name: String!, timezone: String!): ShowCoreLanguages!
   core_members__avatar__delete: String!
-  core_members__avatar__upload(file: Upload!): UploadCoreAttachmentsObj!
+  core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
   core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
-  core_staff_administrators__admin__create(group_id: String, member_id: String, unrestricted: Boolean!): ShowAdminStaffAdministrators!
-  core_staff_administrators__admin__delete(id: String!): String!
-  core_staff_moderators__admin__create(group_id: String, member_id: String, unrestricted: Boolean!): ShowAdminStaffModerators!
-  core_staff_moderators__admin__delete(id: String!): String!
-  forum_forums__admin__change_position(id: String!, index_to_move: Int!, parent_id: String): String!
-  forum_forums__admin__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: String, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
-  forum_posts__create(content: [TextLanguageInput!]!, topic_id: String!): ShowPostsForums!
-  forum_topics__actions__lock_toggle(id: String!): Boolean!
-  forum_topics__create(content: [TextLanguageInput!]!, forum_id: String!, title: [TextLanguageInput!]!): ShowTopicsForums!
+  core_staff_administrators__admin__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffAdministrators!
+  core_staff_administrators__admin__delete(id: Int!): String!
+  core_staff_moderators__admin__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffModerators!
+  core_staff_moderators__admin__delete(id: Int!): String!
+  forum_forums__admin__change_position(id: Int!, index_to_move: Int!, parent_id: Int): String!
+  forum_forums__admin__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
+  forum_posts__create(content: [TextLanguageInput!]!, topic_id: Int!): ShowPostsForums!
+  forum_topics__actions__lock_toggle(id: Int!): Boolean!
+  forum_topics__create(content: [TextLanguageInput!]!, forum_id: Int!, title: [TextLanguageInput!]!): ShowTopicsForums!
 }
 
 type PageInfo {
   count: Float!
-  endCursor: String!
+  endCursor: Int
   hasNextPage: Boolean!
   hasPreviousPage: Boolean!
-  startCursor: String!
+  startCursor: Int
   totalCount: Float!
 }
 
@@ -143,25 +155,25 @@ type PermissionsForumForumsCount {
 type Query {
   admin_install__layout: LayoutAdminInstallObj!
   admin_sessions__authorization: AuthorizationAdminSessionsObj!
-  core_groups__admin__show(cursor: String, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
-  core_languages__show(cursor: String, first: Int, last: Int): ShowCoreLanguagesObj!
-  core_members__admin__show(cursor: String, first: Int, groups: [String!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
-  core_members__show(cursor: String, findByIds: [String!], first: Int, last: Int, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
+  core_groups__admin__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
+  core_languages__show(cursor: Int, first: Int, last: Int): ShowCoreLanguagesObj!
+  core_members__admin__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
+  core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_middleware: CoreMiddlewareObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
-  core_staff_administrators__admin__show(cursor: String, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
-  core_staff_moderators__admin__show(cursor: String, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
-  forum_forums__admin__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsAdminObj!
-  forum_forums__show(cursor: String, first: Int, ids: [String!], last: Int, parent_id: String): ShowForumForumsObj!
-  forum_posts__show(cursor: String, first: Int, last: Int, topic_id: String!): ShowPostsForumsObj!
-  forum_topics__show(cursor: String, first: Int, forum_id: String, id: String, last: Int): ShowTopicsForumsObj!
+  core_staff_administrators__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
+  core_staff_moderators__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
+  forum_forums__admin__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsAdminObj!
+  forum_forums__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsObj!
+  forum_posts__show(cursor: Int, first: Int, last: Int, topic_id: Int!): ShowPostsForumsObj!
+  forum_topics__show(cursor: Int, first: Int, forum_id: Int, id: Int, last: Int): ShowTopicsForumsObj!
 }
 
 type ShowAdminGroups {
   created: Int!
   default: Boolean!
   guest: Boolean!
-  id: String!
+  id: Int!
   name: [TextLanguage!]!
   protected: Boolean!
   root: Boolean!
@@ -185,13 +197,14 @@ enum ShowAdminGroupsSortingColumnEnum {
 }
 
 type ShowAdminMembers {
-  avatar: UploadCoreAttachmentsObj
+  avatar: AvatarUser
   avatar_color: String!
   email: String!
   group: GroupUser!
-  id: String!
+  id: Int!
   joined: Int!
   name: String!
+  name_seo: String!
   newsletter: Boolean!
   posts: Int!
 }
@@ -218,7 +231,7 @@ enum ShowAdminMembersSortingColumnEnum {
 
 type ShowAdminStaffAdministrators {
   created: Int!
-  id: String!
+  id: Int!
   protected: Boolean!
   unrestricted: Boolean!
   updated: Int!
@@ -241,7 +254,7 @@ enum ShowAdminStaffAdministratorsSortingColumnEnum {
 
 type ShowAdminStaffModerators {
   created: Int!
-  id: String!
+  id: Int!
   protected: Boolean!
   unrestricted: Boolean!
   updated: Int!
@@ -263,9 +276,10 @@ enum ShowAdminStaffModeratorsSortingColumnEnum {
 }
 
 type ShowCoreLanguages {
+  code: String!
   default: Boolean!
   enabled: Boolean!
-  id: String!
+  id: Int!
   name: String!
   protected: Boolean!
   timezone: String!
@@ -277,12 +291,13 @@ type ShowCoreLanguagesObj {
 }
 
 type ShowCoreMembers {
-  avatar: UploadCoreAttachmentsObj
+  avatar: AvatarUser
   avatar_color: String!
   group: GroupUser!
-  id: String!
+  id: Int!
   joined: Int!
   name: String!
+  name_seo: String!
   posts: Int!
 }
 
@@ -310,7 +325,7 @@ type ShowForumForums {
   _count: ShowForumForumsCount!
   created: Int!
   description: [TextLanguage!]!
-  id: String!
+  id: Int!
   name: [TextLanguage!]!
   position: Int!
 }
@@ -320,7 +335,7 @@ type ShowForumForumsAdmin {
   children: [ChildrenShowForumForums!]
   created: Int!
   description: [TextLanguage!]!
-  id: String!
+  id: Int!
   name: [TextLanguage!]!
   parent: ShowForumForums
   position: Int!
@@ -345,7 +360,7 @@ type ShowForumForumsWithParent {
   children: [ChildrenShowForumForums!]
   created: Int!
   description: [TextLanguage!]!
-  id: String!
+  id: Int!
   name: [TextLanguage!]!
   parent: ShowForumForums
   permissions: PermissionsForumForumsCount!
@@ -353,17 +368,17 @@ type ShowForumForumsWithParent {
 }
 
 type ShowPostsForums {
-  author: User!
   content: [TextLanguage!]!
   created: Int!
-  id: String!
+  id: Int!
+  user: User!
 }
 
 type ShowPostsForumsMetaTags {
-  action: ForumTopicsActions!
+  action: TopicActions!
   created: Int!
-  id: String!
-  member: User!
+  id: Int!
+  user: User!
 }
 
 type ShowPostsForumsObj {
@@ -372,13 +387,13 @@ type ShowPostsForumsObj {
 }
 
 type ShowTopicsForums {
-  author: User!
   content: [TextLanguage!]!
   created: Int!
   forum: ForumTopicsForums!
-  id: String!
+  id: Int!
   locked: Boolean!
   title: [TextLanguage!]!
+  user: User!
 }
 
 type ShowTopicsForumsObj {
@@ -388,7 +403,7 @@ type ShowTopicsForumsObj {
 
 type SignUpCoreMembersObj {
   email: String!
-  group_id: String!
+  group_id: Int!
   name: String!
   newsletter: Boolean
 }
@@ -400,43 +415,44 @@ enum SortDirectionEnum {
 
 type StaffGroupUser {
   group_name: [TextLanguage!]!
-  id: String!
+  id: Int!
 }
 
 type TextLanguage {
-  id_language: String!
+  language_code: String!
   value: String!
 }
 
 input TextLanguageInput {
-  id_language: String!
+  language_code: String!
   value: String!
+}
+
+enum TopicActions {
+  lock
+  unlock
 }
 
 """The `Upload` scalar type represents a file upload."""
 scalar Upload
 
-type UploadCoreAttachmentsObj {
-  created: Int!
-  description: String
+type UploadAvatarCoreMembersObj {
+  dir_folder: String!
   extension: String!
-  file_size: Int!
-  id: String!
-  member_id: String!
+  id: Int!
   mimetype: String!
-  module: String!
-  module_id: String!
+  module_name: String!
   name: String!
-  position: Int!
-  url: String!
+  size: Int!
 }
 
 type User {
-  avatar: UploadCoreAttachmentsObj
+  avatar: AvatarUser
   avatar_color: String!
   group: GroupUser!
-  id: String!
+  id: Int!
   name: String!
+  name_seo: String!
 }
 
 union UserOrGroupCoreStaffUnion = StaffGroupUser | User

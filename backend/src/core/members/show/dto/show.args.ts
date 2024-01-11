@@ -27,8 +27,8 @@ class ShowCoreMembersSortByArgs {
 
 @ArgsType()
 export class ShowCoreMembersArgs {
-  @Field(() => String, { nullable: true })
-  cursor: string | null;
+  @Field(() => Int, { nullable: true })
+  cursor: number | null;
 
   @Field(() => Int, { nullable: true })
   first: number | null;
@@ -42,6 +42,6 @@ export class ShowCoreMembersArgs {
   @Field(() => String, { nullable: true })
   search: string | null;
 
-  @Field(() => [String], { nullable: true })
-  findByIds: string[] | null;
+  @Field(() => String, { nullable: true })
+  name_seo: string | null;
 }

@@ -15,7 +15,7 @@ import { useCreateTopic } from '@/hooks/forums/forum/topic/use-create-topic';
 import { Editor } from '@/components/editor/editor';
 
 interface Props {
-  defaultForumId: string;
+  defaultForumId: number;
 }
 
 export const CreateTopic = ({ defaultForumId }: Props) => {

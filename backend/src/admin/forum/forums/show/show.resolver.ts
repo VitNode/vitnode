@@ -4,7 +4,7 @@ import { UseGuards } from '@nestjs/common';
 import { ShowForumForumsAdminService } from './show.service';
 import { ShowForumForumsAdminObj } from './dto/show.obj';
 
-import { ShowForumForumsArgs } from '../../../../forums/forums/show/dto/show.args';
+import { ShowForumForumsArgs } from '../../../../forum/forums/show/dto/show.args';
 import { AdminAuthGuards } from '@/utils/guards/admin-auth.guards';
 
 @Resolver()

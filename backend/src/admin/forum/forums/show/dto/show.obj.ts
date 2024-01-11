@@ -1,10 +1,12 @@
 import { Field, ObjectType, OmitType } from '@nestjs/graphql';
 
-import { ShowForumForumsWithParent } from '../../../../../forums/forums/show/dto/show.obj';
+import { ShowForumForumsWithParent } from '../../../../../forum/forums/show/dto/show.obj';
 import { PageInfo } from '@/types/database/pagination.type';
 
 @ObjectType()
-class ShowForumForumsAdmin extends OmitType(ShowForumForumsWithParent, ['permissions'] as const) {}
+export class ShowForumForumsAdmin extends OmitType(ShowForumForumsWithParent, [
+  'permissions'
+] as const) {}
 
 @ObjectType()
 export class ShowForumForumsAdminObj {

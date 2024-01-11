@@ -43,7 +43,7 @@ export const OnChangePluginEditor = ({
     // If the value is not an array, we don't know what to do with it
     if (!Array.isArray(value)) return;
 
-    const currentValue = value.find(item => item.id_language === selectedLanguage)?.value;
+    const currentValue = value.find(item => item.language_code === selectedLanguage)?.value;
     if (!currentValue) {
       editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined);
 
@@ -67,15 +67,15 @@ export const OnChangePluginEditor = ({
       }
 
       if (text.length === 0) {
-        onChange(valueAsArray.filter(item => item.id_language !== selectedLanguage));
+        onChange(valueAsArray.filter(item => item.language_code !== selectedLanguage));
 
         return;
       }
 
       onChange([
-        ...valueAsArray.filter(item => item.id_language !== selectedLanguage),
+        ...valueAsArray.filter(item => item.language_code !== selectedLanguage),
         {
-          id_language: selectedLanguage,
+          language_code: selectedLanguage,
           value: JSON.stringify(editorState.toJSON())
         }
       ]);

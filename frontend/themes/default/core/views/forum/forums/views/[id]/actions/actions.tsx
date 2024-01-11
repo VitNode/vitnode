@@ -8,7 +8,7 @@ import { useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Loader } from '@/components/loader/loader';
-import { getUuidFromString } from '@/functions/url';
+import { getIdFormString } from '@/functions/url';
 import type { PermissionsForumForumsCount } from '@/graphql/hooks';
 
 const CreateTopic = lazy(() =>
@@ -38,7 +38,7 @@ export const ActionsForumsForum = ({ permissions }: Props) => {
 
       <DialogContent className="max-w-6xl">
         <Suspense fallback={<Loader />}>
-          <CreateTopic defaultForumId={getUuidFromString(id)} />
+          <CreateTopic defaultForumId={getIdFormString(id)} />
         </Suspense>
       </DialogContent>
     </Dialog>

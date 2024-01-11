@@ -22,8 +22,8 @@ class ShowAdminGroupsSortByArgs {
 
 @ArgsType()
 export class ShowAdminGroupsArgs {
-  @Field(() => String, { nullable: true })
-  cursor: string | null;
+  @Field(() => Int, { nullable: true })
+  cursor: number | null;
 
   @Field(() => Int, { nullable: true })
   first: number | null;

@@ -21,7 +21,7 @@ export default async function middleware(request: NextRequest) {
 
     const languages = data.core_middleware.languages;
     const handleI18nRouting = createIntlMiddleware({
-      locales: languages.length > 0 ? languages.map(edge => edge.id) : ['en'],
+      locales: languages.length > 0 ? languages.map(edge => edge.code) : ['en'],
       defaultLocale: data.core_middleware.default_language
     });
 

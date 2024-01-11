@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
-import { AdminCoreModule } from './core/admin_core.module';
-import { AdminForumModule } from './forum/admin_forum.module';
+import { AdminCoreModule } from './core/core.module';
+import { AdminForumModule } from './forum/forum.module';
 
 @Module({
   imports: [AdminCoreModule, AdminForumModule]

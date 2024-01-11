@@ -10,7 +10,7 @@ import { AvatarUser } from '../../avatar/avatar-user';
 import { GroupFormat } from '../../../groups/group-format';
 
 interface Props {
-  edges: Pick<ShowCoreMembers, 'id' | 'name' | 'avatar_color' | 'avatar' | 'group'>[];
+  edges: Pick<ShowCoreMembers, 'id' | 'name' | 'avatar_color' | 'avatar' | 'group' | 'name_seo'>[];
   onSelect: (value: UserInputItem) => void;
   values: UserInputItem[];
   multiple?: boolean;

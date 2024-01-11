@@ -1,53 +1,45 @@
 query Forum_topics__show(
-  $id: String!
+  $id: Int!
   $first: Int
-  $cursor: String
+  $cursor: Int
   $forumPostsShowFirst2: Int
   $last: Int
 ) {
   forum_topics__show(id: $id, first: $first) {
     edges {
       content {
-        id_language
+        language_code
         value
       }
       created
       id
       locked
       title {
-        id_language
+        language_code
         value
       }
-      author {
-        avatar {
-          created
-          description
-          extension
-          file_size
-          id
-          member_id
-          mimetype
-          module
-          module_id
-          name
-          position
-          url
-        }
+      user {
         avatar_color
+        avatar {
+          id
+          dir_folder
+          name
+        }
         group {
           id
           name {
-            id_language
+            language_code
             value
           }
         }
         id
+        name_seo
         name
       }
       forum {
         id
         name {
-          id_language
+          language_code
           value
         }
       }
@@ -59,33 +51,25 @@ query Forum_topics__show(
       ... on ShowPostsForums {
         content {
           value
-          id_language
+          language_code
         }
         id
-        author {
-          avatar {
-            created
-            description
-            extension
-            file_size
-            id
-            member_id
-            mimetype
-            module
-            module_id
-            name
-            position
-            url
-          }
+        user {
           avatar_color
+          avatar {
+            id
+            dir_folder
+            name
+          }
           group {
             id
             name {
-              id_language
+              language_code
               value
             }
           }
           id
+          name_seo
           name
         }
         created
@@ -93,30 +77,22 @@ query Forum_topics__show(
       ... on ShowPostsForumsMetaTags {
         action
         id
-        member {
-          avatar {
-            created
-            description
-            extension
-            file_size
-            id
-            member_id
-            mimetype
-            module
-            module_id
-            name
-            position
-            url
-          }
+        user {
           avatar_color
+          avatar {
+            id
+            dir_folder
+            name
+          }
           group {
             id
             name {
-              id_language
+              language_code
               value
             }
           }
           id
+          name_seo
           name
         }
         created

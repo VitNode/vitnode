@@ -1,9 +1,9 @@
-mutation Core_groups__admin__edit($id: String!, $name: [TextLanguageInput!]!) {
+mutation Core_groups__admin__edit($id: Int!, $name: [TextLanguageInput!]!) {
   core_groups__admin__edit(id: $id, name: $name) {
     created
     id
     name {
-      id_language
+      language_code
       value
     }
     protected

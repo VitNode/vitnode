@@ -1,6 +1,7 @@
-query Core_languages__show($first: Int, $last: Int, $cursor: String) {
+query Core_languages__show($first: Int, $last: Int, $cursor: Int) {
   core_languages__show(first: $first, last: $last, cursor: $cursor) {
     edges {
+      code
       default
       enabled
       id

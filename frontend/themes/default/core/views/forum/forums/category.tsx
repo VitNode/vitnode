@@ -11,7 +11,7 @@ import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
 
 interface Props {
   description: TextLanguage[];
-  id: string;
+  id: number;
   name: TextLanguage[];
   children?: ItemForumProps[] | null;
 }

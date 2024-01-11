@@ -28,7 +28,7 @@ import { ToolbarDataTable } from './toolbar/toolbar';
 import type { ToolbarDataTableProps } from './toolbar/toolbar';
 
 interface TDataMin {
-  id: string;
+  id: number;
 }
 
 interface DataTableProps<TData extends TDataMin> extends ToolbarDataTableProps {
@@ -53,13 +53,18 @@ export function DataTable<TData extends TDataMin>({
   const pathname = usePathname();
   const { push } = useRouter();
   const t = useTranslations('core');
+  const pagination = {
+    first: searchParams.get('first'),
+    last: searchParams.get('last'),
+    cursor: searchParams.get('cursor')
+  };
 
   const table = useReactTable({
     data: useMemo(() => data, [data]),
     columns: useMemo(() => columns, [columns]),
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
-    getRowId: row => row.id,
+    getRowId: row => row.id.toString(),
     onSortingChange: data => {
       const fnSorting = data as () => SortingState;
       const sorting = fnSorting();
@@ -82,11 +87,6 @@ export function DataTable<TData extends TDataMin>({
     }
   });
 
-  const pagination = {
-    first: searchParams.get('first'),
-    last: searchParams.get('last'),
-    cursor: searchParams.get('cursor')
-  };
   const enablePageSize = [10, 20, 30, 40, 50];
   const pageSizeValue = useMemo(() => {
     if (enablePageSize.includes(Number(pagination.first))) {
@@ -105,7 +105,7 @@ export function DataTable<TData extends TDataMin>({
     nextPage,
     pageSize
   }: {
-    cursor?: string | number;
+    cursor?: number | null;
     nextPage?: boolean;
     pageSize?: string | null;
   }) => {

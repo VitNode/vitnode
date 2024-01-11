@@ -30,8 +30,7 @@ export default async function Page() {
       return data;
     },
     initialPageParam: {
-      first: 10,
-      cursor: ''
+      first: 10
     },
     getNextPageParam: ({ forum_forums__admin__show: { pageInfo } }) => {
       if (pageInfo.hasNextPage) {

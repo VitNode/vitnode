@@ -1,16 +1,11 @@
 mutation Core_members__avatar__upload($file: Upload!) {
   core_members__avatar__upload(file: $file) {
-    id
-    created
-    description
+    dir_folder
     extension
-    file_size
-    member_id
+    id
     mimetype
-    module
-    module_id
+    module_name
     name
-    position
-    url
+    size
   }
 }

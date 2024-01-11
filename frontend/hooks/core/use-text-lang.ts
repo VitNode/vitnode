@@ -15,7 +15,7 @@ export const useTextLang = () => {
       return text[0].value;
     }
 
-    const textFromLang = text.find(t => t.id_language === locale);
+    const textFromLang = text.find(t => t.language_code === locale);
 
     if (textFromLang) {
       return textFromLang.value;
@@ -24,7 +24,7 @@ export const useTextLang = () => {
     return text[0].value;
   };
 
-  const convertNameToLink = ({ id, name }: { id: string; name: TextLanguage[] }) => {
+  const convertNameToLink = ({ id, name }: { id: number; name: TextLanguage[] }) => {
     const text = removeSpecialCharacters(convertText(name)).replace(/\//g, '-').toLowerCase();
 
     return `${text}-${id}`;

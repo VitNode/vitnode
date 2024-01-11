@@ -3,6 +3,7 @@ query Core_middleware {
     default_language
     languages {
       default
+      code
       id
       name
       timezone

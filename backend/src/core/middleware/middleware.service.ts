@@ -1,16 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { UAParser } from 'ua-parser-js';
+import { eq } from 'drizzle-orm';
+import { ConfigService } from '@nestjs/config';
 
 import { CoreMiddlewareObj } from './dto/middleware.obj';
 
-import { PrismaService } from '@/prisma/prisma.service';
 import { Ctx } from '@/types/context.type';
-import { CONFIG } from '@/config';
 import { convertUnixTime, currentDate } from '@/functions/date';
+import { DatabaseService } from '@/database/database.service';
+import { core_sessions_known_devices } from '@/src/admin/core/database/schema/sessions';
 
 @Injectable()
 export class CoreMiddlewareService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private configService: ConfigService
+  ) {}
 
   protected getUserAgentData(userAgent: string) {
     const user_parser = new UAParser(userAgent).getResult();
@@ -28,39 +33,46 @@ export class CoreMiddlewareService {
     };
   }
 
-  protected async createKnowDevice({ req, res }: Ctx): Promise<string> {
-    const device = await this.prisma.core_sessions_known_devices.create({
-      data: {
+  protected async createKnowDevice({ req, res }: Ctx): Promise<number> {
+    const dataDevice = await this.databaseService.db
+      .insert(core_sessions_known_devices)
+      .values({
         ...this.getUserAgentData(req.headers['user-agent']),
         last_seen: currentDate(),
         ip_address: req.ip
-      }
-    });
+      })
+      .returning();
+
+    const device = dataDevice[0];
 
     // Set cookie
-    res.cookie(CONFIG.cookies.known_device.name, device.id, {
+    res.cookie(this.configService.getOrThrow('cookies.known_device.name'), device.id, {
       httpOnly: true,
       secure: true,
-      domain: CONFIG.cookie.domain,
+      domain: this.configService.getOrThrow('cookies.domain'),
       path: '/',
-      expires: new Date(convertUnixTime(currentDate() + CONFIG.cookies.known_device.expiresIn)),
+      expires: new Date(
+        convertUnixTime(
+          currentDate() + this.configService.getOrThrow('cookies.known_device.expiresIn')
+        )
+      ),
       sameSite: 'none'
     });
 
     return device.id;
   }
 
-  protected async checkDevice({ req, res }: Ctx): Promise<string> {
-    const know_device_id: string | undefined = req.cookies[CONFIG.cookies.known_device.name];
+  protected async checkDevice({ req, res }: Ctx): Promise<number> {
+    const know_device_id: number | undefined =
+      +req.cookies[this.configService.getOrThrow('cookies.known_device.name')];
     if (!know_device_id) {
       return await this.createKnowDevice({ req, res });
     }
 
-    const device = await this.prisma.core_sessions_known_devices.findFirst({
-      where: {
-        id: know_device_id
-      }
+    const device = await this.databaseService.db.query.core_sessions_known_devices.findFirst({
+      where: (table, { eq }) => eq(table.id, know_device_id)
     });
+
     if (!device) {
       return await this.createKnowDevice({ req, res });
     }
@@ -70,24 +82,26 @@ export class CoreMiddlewareService {
       return know_device_id;
     }
 
-    await this.prisma.core_sessions_known_devices.update({
-      where: {
-        id: device.id
-      },
-      data: {
+    await this.databaseService.db
+      .update(core_sessions_known_devices)
+      .set({
         ...this.getUserAgentData(req.headers['user-agent']),
         last_seen: currentDate(),
         ip_address: req.ip
-      }
-    });
+      })
+      .where(eq(core_sessions_known_devices.id, device.id));
 
     // Update sign in date
-    res.cookie(CONFIG.cookies.known_device.name, know_device_id, {
+    res.cookie(this.configService.getOrThrow('cookies.known_device.name'), know_device_id, {
       httpOnly: true,
       secure: true,
-      domain: CONFIG.cookie.domain,
+      domain: this.configService.getOrThrow('cookies.domain'),
       path: '/',
-      expires: new Date(convertUnixTime(currentDate() + CONFIG.cookies.known_device.expiresIn)),
+      expires: new Date(
+        convertUnixTime(
+          currentDate() + this.configService.getOrThrow('cookies.known_device.expiresIn')
+        )
+      ),
       sameSite: 'none'
     });
 
@@ -97,12 +111,11 @@ export class CoreMiddlewareService {
   async middleware(context: Ctx): Promise<CoreMiddlewareObj> {
     await this.checkDevice(context);
 
-    const languages = await this.prisma.core_languages.findMany({
-      where: {
-        enabled: true
-      }
+    const languages = await this.databaseService.db.query.core_languages.findMany({
+      where: (table, { eq }) => eq(table.enabled, true)
     });
-    const default_language = languages.find(language => language.default)?.id ?? 'en';
+
+    const default_language = languages.find(language => language.default)?.code ?? 'en';
 
     return {
       languages,

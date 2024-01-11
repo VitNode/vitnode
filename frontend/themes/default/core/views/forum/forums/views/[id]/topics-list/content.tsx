@@ -7,7 +7,7 @@ import { Link } from '@/i18n';
 import { DateFormat } from '@/components/date-format/date-format';
 
 export interface TopicsListForumProps {
-  data: Pick<ShowTopicsForums, 'id' | 'created' | 'title' | 'author'>[];
+  data: Pick<ShowTopicsForums, 'id' | 'created' | 'title' | 'user'>[];
 }
 
 export const ContentTopicsListForum = ({ data }: TopicsListForumProps) => {
@@ -31,7 +31,7 @@ export const ContentTopicsListForum = ({ data }: TopicsListForumProps) => {
             </h3>
             <span className="text-sm text-muted-foreground">
               {t.rich('by', {
-                user: () => <Link href={`/profile/${data.author.id}`}>{data.author.name}</Link>,
+                user: () => <Link href={`/profile/${data.user.name_seo}`}>{data.user.name}</Link>,
                 date: () => <DateFormat date={data.created} />
               })}
             </span>

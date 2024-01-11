@@ -1,30 +1,33 @@
 import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
+import { ConfigService } from '@nestjs/config';
 
 import { Ctx } from '@/types/context.type';
-import { CONFIG } from '@/config';
-import { PrismaService } from '@/prisma/prisma.service';
+import { DatabaseService } from '@/database/database.service';
+import { core_sessions } from '@/src/admin/core/database/schema/sessions';
 
 @Injectable()
 export class SignOutCoreSessionsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private configService: ConfigService
+  ) {}
 
   async signOut({ req, res }: Ctx) {
-    const login_token = req.cookies[CONFIG.cookies.login_token.name];
+    const login_token = req.cookies[this.configService.getOrThrow('cookies.login_token.name')];
 
     if (!login_token) {
       return 'You are not logged in';
     }
 
-    await this.prisma.core_sessions.delete({
-      where: {
-        login_token
-      }
-    });
+    await this.databaseService.db
+      .delete(core_sessions)
+      .where(eq(core_sessions.login_token, login_token));
 
-    res.clearCookie(CONFIG.cookies.login_token.name, {
+    res.clearCookie(this.configService.getOrThrow('cookies.login_token.name'), {
       httpOnly: true,
       secure: true,
-      domain: CONFIG.cookie.domain,
+      domain: this.configService.getOrThrow('cookies.domain'),
       path: '/',
       sameSite: 'none'
     });

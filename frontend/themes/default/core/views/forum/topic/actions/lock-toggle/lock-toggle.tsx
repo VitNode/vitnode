@@ -8,7 +8,7 @@ import { mutationApi } from './mutation-api';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 
 interface Props {
-  id: string;
+  id: number;
   locked: boolean;
 }
 

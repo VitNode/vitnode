@@ -171,7 +171,7 @@ export const ContentTableForumsForumAdmin = () => {
           if (findParentPosition === undefined) return;
 
           await mutationChangePositionApi({
-            id: `${active.id}`,
+            id: Number(active.id),
             parentId,
             indexToMove: findParentPosition + 1
           });
@@ -188,7 +188,7 @@ export const ContentTableForumsForumAdmin = () => {
         }
 
         await mutationChangePositionApi({
-          id: `${active.id}`,
+          id: Number(active.id),
           parentId,
           indexToMove
         });

@@ -84,7 +84,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
           </tr>
         )}
         itemContent={(index, item) => {
-          const findItem = field.value.groups.find((group: { id: string }) => group.id === item.id);
+          const findItem = field.value.groups.find((group: { id: number }) => group.id === item.id);
           // Check if:
           // 1. The permission is enabled for all groups
           // 2. The all permissions is enabled for the current group
@@ -106,7 +106,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
                           ...field.value,
                           groups: [
                             ...field.value.groups.filter(
-                              (group: { id: string }) => group.id !== item.id
+                              (group: { id: number }) => group.id !== item.id
                             )
                           ]
                         });
@@ -120,7 +120,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
                         ...field.value,
                         groups: [
                           ...field.value.groups.filter(
-                            (group: { id: string }) => group.id !== item.id
+                            (group: { id: number }) => group.id !== item.id
                           ),
                           {
                             id: item.id,
@@ -197,7 +197,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
                           ...field.value,
                           groups: [
                             ...field.value.groups.filter(
-                              (group: { id: string }) => group.id !== item.id
+                              (group: { id: number }) => group.id !== item.id
                             ),
                             {
                               ...findItem,

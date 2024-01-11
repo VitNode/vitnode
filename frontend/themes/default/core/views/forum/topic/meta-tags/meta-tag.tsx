@@ -16,8 +16,8 @@ const icon: {
 export const MetaTagTopic = ({
   action,
   created,
-  member
-}: Pick<ShowPostsForumsMetaTags, 'created' | 'action' | 'member'>) => {
+  user
+}: Pick<ShowPostsForumsMetaTags, 'created' | 'action' | 'user'>) => {
   const t = useTranslations('forum.topics.actions.meta');
   const Icon = icon[action] ? icon[action] : Tag;
 
@@ -36,7 +36,7 @@ export const MetaTagTopic = ({
 
       <span className="text-muted-foreground">
         {t.rich(`meta_${action}`, {
-          user: () => <UserLink user={member} />,
+          user: () => <UserLink user={user} />,
           date: () => <DateFormat date={created} />
         })}
       </span>

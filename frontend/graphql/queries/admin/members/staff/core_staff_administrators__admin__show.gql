@@ -1,5 +1,5 @@
 query Core_staff_administrators__admin__show(
-  $cursor: String
+  $cursor: Int
   $first: Int
   $last: Int
   $sortBy: [ShowAdminStaffAdministratorsSortByArgs!]
@@ -17,34 +17,26 @@ query Core_staff_administrators__admin__show(
       user_or_group {
         __typename
         ... on User {
-          avatar {
-            created
-            description
-            extension
-            file_size
-            id
-            member_id
-            mimetype
-            module
-            module_id
-            name
-            position
-            url
-          }
           avatar_color
+          avatar {
+            id
+            dir_folder
+            name
+          }
           group {
             id
             name {
-              id_language
+              language_code
               value
             }
           }
+          name_seo
           id
           name
         }
         ... on StaffGroupUser {
           group_name {
-            id_language
+            language_code
             value
           }
           id

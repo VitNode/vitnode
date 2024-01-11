@@ -1,17 +1,20 @@
 import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 
 import { DeleteAdminStaffModeratorsArgs } from './dto/delete.args';
 
-import { PrismaService } from '@/prisma/prisma.service';
 import { CustomError } from '@/utils/errors/CustomError';
+import { DatabaseService } from '@/database/database.service';
+import { core_moderators_permissions } from '@/src/admin/core/database/schema/moderators';
 
 @Injectable()
 export class DeleteAdminStaffModeratorsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private databaseService: DatabaseService) {}
   async delete({ id }: DeleteAdminStaffModeratorsArgs): Promise<string> {
-    const permission = await this.prisma.core_moderator_permissions.findUniqueOrThrow({
-      where: { id }
+    const permission = await this.databaseService.db.query.core_moderators_permissions.findFirst({
+      where: (table, { eq }) => eq(table.id, id)
     });
+
     if (permission.protected) {
       throw new CustomError({
         code: 'BAD_REQUEST',
@@ -19,9 +22,9 @@ export class DeleteAdminStaffModeratorsService {
       });
     }
 
-    await this.prisma.core_moderator_permissions.delete({
-      where: { id }
-    });
+    await this.databaseService.db
+      .delete(core_moderators_permissions)
+      .where(eq(core_moderators_permissions.id, id));
 
     return 'Success!';
   }

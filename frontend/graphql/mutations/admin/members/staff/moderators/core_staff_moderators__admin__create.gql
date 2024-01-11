@@ -1,11 +1,11 @@
 mutation Core_staff_moderators__admin__create(
-  $groupId: String
-  $memberId: String
+  $groupId: Int
+  $userId: Int
   $unrestricted: Boolean!
 ) {
   core_staff_moderators__admin__create(
     group_id: $groupId
-    member_id: $memberId
+    user_id: $userId
     unrestricted: $unrestricted
   ) {
     created

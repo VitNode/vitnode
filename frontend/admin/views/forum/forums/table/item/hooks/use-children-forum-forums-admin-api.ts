@@ -13,7 +13,7 @@ import {
 } from '@/graphql/hooks';
 
 interface Args {
-  parentId: string;
+  parentId: number;
   enabled?: boolean;
 }
 
@@ -25,7 +25,7 @@ const updateState = ({
 }: {
   data: Forum_Forums__Admin__ShowQuery;
   edges: Omit<ShowForumForumsAdmin, 'permissions'>[];
-  parentId: string;
+  parentId: number;
 }): Omit<ShowForumForumsAdmin, 'permissions'>[] => {
   return edges.map(edge => {
     if (edge.id === parentId) {

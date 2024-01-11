@@ -21,7 +21,7 @@ export const useShortShowGroupsAdminAPI = () => {
       >({
         query: Core_Groups__Admin__Show_Short,
         variables: {
-          first: 10,
+          first: 25,
           search: textSearch
         },
         signal

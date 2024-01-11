@@ -20,13 +20,13 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
     type: z.enum(['group', 'user']),
     user: z
       .object({
-        id: z.string(),
+        id: z.number(),
         name: z.string()
       })
       .optional(),
     group: z
       .object({
-        id: z.string(),
+        id: z.number(),
         name: zodTextLanguageInputType
       })
       .optional(),
@@ -47,7 +47,7 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
 
     const mutation = await mutationApi({
       groupId: values.type === 'group' ? values.group?.id : undefined,
-      memberId: values.type === 'user' ? values.user?.id : undefined,
+      userId: values.type === 'user' ? values.user?.id : undefined,
       unrestricted: values.unrestricted
     });
 

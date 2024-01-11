@@ -108,7 +108,7 @@ export const getForumProjection = (
 
 export const flattenTree = (
   items: Forum_Forums__Admin__ShowQueryItem[],
-  parentId: string | null = null,
+  parentId: number | null = null,
   depth = 0
 ): Forum_Forums__Admin__ShowFlattenedItem[] => {
   return items.reduce<Forum_Forums__Admin__ShowFlattenedItem[]>((acc, item, index) => {
@@ -127,10 +127,9 @@ export const buildTree = (
     id: 'root',
     children: []
   };
-  const nodes: Record<string, Forum_Forums__Admin__ShowQueryItem> = { [root.id]: root } as Record<
-    string,
-    Forum_Forums__Admin__ShowQueryItem
-  >;
+  const nodes: Record<string, Forum_Forums__Admin__ShowQueryItem> = {
+    [root.id]: root
+  } as unknown as Record<string, Forum_Forums__Admin__ShowQueryItem>;
   const items = flattenedItems.map(item => ({ ...item, children: [] }));
 
   for (const item of items) {

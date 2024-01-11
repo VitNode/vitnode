@@ -1,18 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma, core_members } from '@prisma/client';
+import { and, count, eq, ilike, inArray, or } from 'drizzle-orm';
 
 import { ShowAdminMembersObj } from './dto/show.obj';
 import { ShowAdminMembersArgs } from './dto/show.args';
 
-import { PrismaService } from '@/prisma/prisma.service';
-import { inputPagination } from '@/functions/database/pagination/inputPagination';
-import { outputPagination } from '@/functions/database/pagination/outputPagination';
-import { inputSorting } from '@/functions/database/inputSorting';
+import { DatabaseService } from '@/database/database.service';
+import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
+import { core_users } from '@/src/admin/core/database/schema/users';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
 export class ShowAdminMembersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private databaseService: DatabaseService) {}
 
   async show({
     cursor,
@@ -22,62 +21,49 @@ export class ShowAdminMembersService {
     search,
     sortBy
   }: ShowAdminMembersArgs): Promise<ShowAdminMembersObj> {
-    const where: Prisma.core_membersWhereInput = {
-      OR: [
-        {
-          name: {
-            contains: search ?? '',
-            mode: 'insensitive'
-          }
-        },
-        {
-          email: {
-            contains: search ?? '',
-            mode: 'insensitive'
-          }
-        },
-        {
-          id: {
-            contains: search ?? '',
-            mode: 'insensitive'
-          }
-        }
-      ],
-      AND: [
-        {
-          group: {
-            id: {
-              in: groups && groups.length > 0 ? groups : undefined
-            }
-          }
-        }
-      ]
-    };
+    const pagination = await inputPaginationCursor({
+      cursor,
+      database: core_users,
+      databaseService: this.databaseService,
+      first,
+      last,
+      primaryCursor: { order: 'ASC', key: 'id', schema: core_users.id },
+      defaultSortBy: {
+        direction: SortDirectionEnum.desc,
+        column: 'joined'
+      },
+      sortBy
+    });
 
-    const [edges, totalCount] = await this.prisma.$transaction([
-      this.prisma.core_members.findMany({
-        ...inputPagination({ first, cursor, last }),
-        include: {
-          avatar: true,
-          group: {
-            include: {
-              name: true
-            }
+    const where = and(
+      or(
+        ilike(core_users.name, `%${search}%`),
+        ilike(core_users.email, `%${search}%`),
+        Number(search) ? eq(core_users.id, Number(search)) : undefined
+      ),
+      groups && groups.length > 0 ? inArray(core_users.group_id, groups) : undefined
+    );
+
+    const edges = await this.databaseService.db.query.core_users.findMany({
+      ...pagination,
+      where: and(pagination.where, where),
+      columns: {
+        password: false
+      },
+      with: {
+        group: {
+          with: {
+            name: true
           }
         },
-        orderBy: inputSorting<keyof core_members>({
-          sortBy,
-          defaultSortBy: {
-            column: 'joined',
-            direction: SortDirectionEnum.desc
-          }
-        }),
-        where
-      }),
-      this.prisma.core_members.count({
-        where
-      })
-    ]);
+        avatar: true
+      }
+    });
+
+    const totalCount = await this.databaseService.db
+      .select({ count: count() })
+      .from(core_users)
+      .where(where);
 
     return outputPagination({ edges, totalCount, first, cursor, last });
   }

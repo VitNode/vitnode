@@ -1,18 +1,16 @@
 import { forwardRef, type AnchorHTMLAttributes } from 'react';
 
 import { Link } from '@/i18n';
+import type { User } from '@/graphql/hooks';
 
 interface Props extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href' | 'children'> {
-  user: {
-    id: string;
-    name: string;
-  };
+  user: Pick<User, 'name' | 'name_seo'>;
 }
 
 export const UserLink = forwardRef<HTMLAnchorElement, Props>(
-  ({ user: { id, name }, ...props }, ref) => {
+  ({ user: { name, name_seo }, ...props }, ref) => {
     return (
-      <Link href={`/profile/${id}`} ref={ref} {...props}>
+      <Link href={`/profile/${name_seo}`} ref={ref} {...props}>
         {name}
       </Link>
     );

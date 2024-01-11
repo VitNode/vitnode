@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { PageInfo } from '@/types/database/pagination.type';
 
@@ -13,8 +13,11 @@ export class ShowCoreLanguagesObj {
 
 @ObjectType()
 export class ShowCoreLanguages {
+  @Field(() => Int)
+  id: number;
+
   @Field(() => String)
-  id: string;
+  code: string;
 
   @Field(() => String)
   name: string;

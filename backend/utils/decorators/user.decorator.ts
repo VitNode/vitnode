@@ -1,7 +1,6 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { Field, GqlExecutionContext, ObjectType } from '@nestjs/graphql';
+import { Field, GqlExecutionContext, Int, ObjectType } from '@nestjs/graphql';
 
-import { UploadCoreAttachmentsObj } from '@/src/core/attachments/upload/dto/upload.obj';
 import { TextLanguage } from '@/types/database/text-language.type';
 
 export const CurrentUser = createParamDecorator((_data: unknown, context: ExecutionContext) => {
@@ -13,17 +12,32 @@ export const CurrentUser = createParamDecorator((_data: unknown, context: Execut
 
 @ObjectType()
 export class GroupUser {
-  @Field(() => String)
-  id: string;
+  @Field(() => Int)
+  id: number;
 
   @Field(() => [TextLanguage])
   name: TextLanguage[];
 }
 
 @ObjectType()
-export class User {
+export class AvatarUser {
+  @Field(() => Int)
+  id: number;
+
   @Field(() => String)
-  id: string;
+  dir_folder: string;
+
+  @Field(() => String)
+  name: string;
+}
+
+@ObjectType()
+export class User {
+  @Field(() => Int)
+  id: number;
+
+  @Field(() => String)
+  name_seo: string;
 
   @Field(() => String)
   name: string;
@@ -31,8 +45,8 @@ export class User {
   @Field(() => String)
   avatar_color: string;
 
-  @Field(() => UploadCoreAttachmentsObj, { nullable: true })
-  avatar: UploadCoreAttachmentsObj | null;
+  @Field(() => AvatarUser, { nullable: true })
+  avatar: AvatarUser | null;
 
   @Field(() => GroupUser)
   group: GroupUser;
