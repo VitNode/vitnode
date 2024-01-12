@@ -44,6 +44,8 @@ export default async function Page({ params: { id } }: Props) {
     if (error.extensions.code === 'ACCESS_DENIED') {
       return <ErrorView code="403" />;
     }
+
+    throw e;
   }
 
   if (!data || data.forum_forums__show.edges.length === 0) {
