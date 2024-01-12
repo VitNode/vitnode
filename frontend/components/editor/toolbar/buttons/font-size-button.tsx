@@ -59,6 +59,7 @@ export const FontSizeButtonEditor = () => {
             <SelectTrigger
               className={buttonVariants({
                 variant: 'ghost',
+                size: 'sm',
                 className: 'w-auto border-0 [&>svg]:w-5 [&>svg]:h-5'
               })}
             >

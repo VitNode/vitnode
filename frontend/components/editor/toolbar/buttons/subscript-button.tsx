@@ -31,6 +31,7 @@ export const SubscriptButtonEditor = () => {
               aria-label={t('subscript')}
               onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'subscript')}
               pressed={isSubscript}
+              className="size-9"
             >
               <Subscript />
             </Toggle>

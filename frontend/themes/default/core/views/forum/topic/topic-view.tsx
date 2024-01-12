@@ -11,6 +11,7 @@ import { TitleIconTopic } from './title-icon';
 import { PostTopic } from './post/post';
 import { MetaTagTopic } from './meta-tags/meta-tag';
 import { CreatePost } from './post/create/create-post';
+import { Pagination } from '@/components/data-table/pagination';
 
 interface Props {
   data: Forum_Topics__ShowQuery;
@@ -84,6 +85,8 @@ export const TopicView = ({ data: dataApi }: Props) => {
             })}
           </div>
         )}
+
+        <Pagination />
 
         <CreatePost className="mt-5" />
       </div>

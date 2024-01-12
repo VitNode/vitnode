@@ -12,11 +12,7 @@ import { Button } from '@/components/ui/button';
 import { mutationApi } from './mutation-api';
 import { getIdFormString } from '@/functions/url';
 
-interface Props {
-  className?: string;
-}
-
-export const ContentCreatePost = ({ className }: Props) => {
+export const ContentCreatePost = () => {
   const t = useTranslations('forum.topics.post');
   const tCore = useTranslations('core');
   const { id } = useParams();
@@ -48,7 +44,7 @@ export const ContentCreatePost = ({ className }: Props) => {
 
   return (
     <Form {...form}>
-      <form className={className} onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="flex-1" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name="content"

@@ -87,7 +87,8 @@ export const LangCodeBlockButtonEditor = () => {
             <SelectTrigger
               className={buttonVariants({
                 variant: 'ghost',
-                className: 'w-auto border-0'
+                className: 'w-auto border-0',
+                size: 'sm'
               })}
             >
               {getLanguageFriendlyName(codeLanguage)}

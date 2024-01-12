@@ -62,10 +62,10 @@ export const ColorButtonEditor = ({ type }: Props) => {
         <Tooltip>
           <TooltipTrigger asChild>
             <PopoverTrigger asChild>
-              <Button variant="ghost" className="[&>svg]:w-5 [&>svg]:h-5">
+              <Button size="sm" variant="ghost" className="[&>svg]:w-5 [&>svg]:h-5">
                 {type === 'color' ? <Baseline /> : <Palette />}
                 <div
-                  className="w-5 h-5 border rounded-md"
+                  className="size-5 border rounded-md"
                   style={{
                     backgroundColor: fontColor
                       ? fontColor

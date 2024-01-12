@@ -27,7 +27,7 @@ export const MetaTagTopic = ({
         className={cx(
           'border size-8 bg-border [&>svg]:size-4 flex items-center justify-center rounded-full',
           {
-            'bg-destructive border-destructive': action === 'lock'
+            'bg-destructive border-destructive text-white': action === 'lock'
           }
         )}
       >

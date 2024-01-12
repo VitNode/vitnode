@@ -57,8 +57,14 @@ export const ClearFormattingButtonEditor = () => {
   }, [editor]);
 
   return (
-    <Button variant="ghost" size="icon" onClick={clearFormatting} tooltip={t('remove_formatting')}>
-      <RemoveFormatting className="h-4 w-4" />
+    <Button
+      variant="ghost"
+      className="size-9"
+      size="icon"
+      onClick={clearFormatting}
+      tooltip={t('remove_formatting')}
+    >
+      <RemoveFormatting />
     </Button>
   );
 };

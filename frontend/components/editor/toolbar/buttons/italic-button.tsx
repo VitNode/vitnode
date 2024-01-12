@@ -31,6 +31,7 @@ export const ItalicButtonEditor = () => {
               aria-label={t('italic')}
               onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic')}
               pressed={isItalic}
+              className="size-9"
             >
               <Italic />
             </Toggle>

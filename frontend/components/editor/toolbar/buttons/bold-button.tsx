@@ -31,6 +31,7 @@ export const BoldButtonEditor = () => {
               aria-label={t('bold')}
               onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold')}
               pressed={isBold}
+              className="size-9"
             >
               <Bold />
             </Toggle>

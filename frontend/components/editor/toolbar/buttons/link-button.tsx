@@ -99,6 +99,7 @@ export const LinkButtonEditor = () => {
                       editor.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl('https://'));
                     }
                   }}
+                  className="size-9"
                 >
                   <Link />
                 </Toggle>

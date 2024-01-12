@@ -31,6 +31,7 @@ export const StrikethroughButtonEditor = () => {
               aria-label={t('strikethrough')}
               onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough')}
               pressed={isStrikethrough}
+              className="size-9"
             >
               <Strikethrough />
             </Toggle>

@@ -212,7 +212,7 @@ export function DataTable<TData extends TDataMin>({
                 })
               }
             >
-              <ChevronLeftIcon className="h-4 w-4" />
+              <ChevronLeftIcon className="size-4" />
             </Button>
             <Button
               variant="outline"
@@ -227,7 +227,7 @@ export function DataTable<TData extends TDataMin>({
                 })
               }
             >
-              <ChevronRightIcon className="h-4 w-4" />
+              <ChevronRightIcon className="size-4" />
             </Button>
           </div>
         </div>

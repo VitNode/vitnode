@@ -26,6 +26,7 @@ import type { TextLanguage } from '@/graphql/hooks';
 import './editor.scss';
 import { EmojiPluginEditor } from './plugins/emoji';
 import { initialConfigEditor } from './initial-config';
+import { BottomToolbarEditor } from './toolbar/bottom-toolbar-editor';
 
 interface Props {
   id: string;
@@ -120,6 +121,7 @@ export const Editor = ({
               <CodeActionMenuPluginEditor anchorElem={floatingAnchorElem.current} />
             </>
           )}
+          <BottomToolbarEditor />
         </div>
       </LexicalComposer>
     </EditorContext.Provider>

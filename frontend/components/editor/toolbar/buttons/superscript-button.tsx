@@ -31,6 +31,7 @@ export const SuperscriptButtonEditor = () => {
               aria-label={t('superscript')}
               onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'superscript')}
               pressed={isSuperscript}
+              className="size-9"
             >
               <Superscript />
             </Toggle>

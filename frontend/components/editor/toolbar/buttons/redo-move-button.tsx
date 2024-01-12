@@ -27,6 +27,7 @@ export const RedoMoveButtonEditor = () => {
     <Button
       variant="ghost"
       size="icon"
+      className="size-9"
       onClick={() => editor.dispatchCommand(REDO_COMMAND, undefined)}
       tooltip={t('redo')}
       disabled={!canRedo}
