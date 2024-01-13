@@ -74,12 +74,7 @@ export const Editor = ({
             className
           )}
         >
-          <ToolbarEditor
-            className={toolbarClassName}
-            selectedLanguage={selectedLanguage}
-            setSelectedLanguage={setSelectedLanguage}
-            disableLanguage={disableLanguage}
-          />
+          <ToolbarEditor className={toolbarClassName} />
           {disableLanguage ? (
             <OnChangePluginEditor
               value={value}
@@ -121,7 +116,11 @@ export const Editor = ({
               <CodeActionMenuPluginEditor anchorElem={floatingAnchorElem.current} />
             </>
           )}
-          <BottomToolbarEditor />
+          <BottomToolbarEditor
+            selectedLanguage={selectedLanguage}
+            setSelectedLanguage={setSelectedLanguage}
+            disableLanguage={disableLanguage}
+          />
         </div>
       </LexicalComposer>
     </EditorContext.Provider>

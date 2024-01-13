@@ -38,7 +38,7 @@ export const SubscriptButtonEditor = () => {
           </div>
         </TooltipTrigger>
 
-        <TooltipContent side="bottom">{t('subscript')}</TooltipContent>
+        <TooltipContent>{t('subscript')}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

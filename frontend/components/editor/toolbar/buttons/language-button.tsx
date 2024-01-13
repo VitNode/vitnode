@@ -40,7 +40,7 @@ export const LanguageButtonEditor = ({ selectedLanguage, setSelectedLanguage }: 
             </SelectTrigger>
           </TooltipTrigger>
 
-          <TooltipContent side="bottom">{t('change_language')}</TooltipContent>
+          <TooltipContent side="top">{t('change_language')}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 

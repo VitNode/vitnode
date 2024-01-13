@@ -38,7 +38,7 @@ export const StrikethroughButtonEditor = () => {
           </div>
         </TooltipTrigger>
 
-        <TooltipContent side="bottom">{t('strikethrough')}</TooltipContent>
+        <TooltipContent>{t('strikethrough')}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

@@ -38,7 +38,7 @@ export const ItalicButtonEditor = () => {
           </div>
         </TooltipTrigger>
 
-        <TooltipContent side="bottom">{t('italic')}</TooltipContent>
+        <TooltipContent>{t('italic')}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

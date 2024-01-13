@@ -143,7 +143,7 @@ export const ColorButtonEditor = ({ type }: Props) => {
             )}
           </PopoverContent>
 
-          <TooltipContent side="bottom">
+          <TooltipContent>
             {t(type === 'color' ? 'font_color' : 'font_background_color')}
           </TooltipContent>
         </Tooltip>

@@ -68,7 +68,7 @@ export const FontSizeButtonEditor = () => {
             </SelectTrigger>
           </TooltipTrigger>
 
-          <TooltipContent side="bottom">{t('font_size')}</TooltipContent>
+          <TooltipContent>{t('font_size')}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 

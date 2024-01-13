@@ -16,22 +16,13 @@ import { SubscriptButtonEditor } from './buttons/subscript-button';
 import { SuperscriptButtonEditor } from './buttons/superscript-button';
 import { LinkButtonEditor } from './buttons/link-button';
 import { LangCodeBlockButtonEditor } from './buttons/code-block/lang-code-block-button';
-import { LanguageButtonEditor } from './buttons/language-button';
 import { EmojiButtonEditor } from './buttons/emoji/emoji-button';
 
 interface Props {
-  selectedLanguage: string;
-  setSelectedLanguage: (value: string) => void;
   className?: string;
-  disableLanguage?: boolean;
 }
 
-export const ToolbarEditor = ({
-  className,
-  disableLanguage,
-  selectedLanguage,
-  setSelectedLanguage
-}: Props) => {
+export const ToolbarEditor = ({ className }: Props) => {
   const { blockType } = useEditor();
 
   return (
@@ -40,12 +31,6 @@ export const ToolbarEditor = ({
         <UndoMoveButtonEditor />
         <RedoMoveButtonEditor />
         <SeparatorToolbarEditor />
-        {!disableLanguage && (
-          <LanguageButtonEditor
-            selectedLanguage={selectedLanguage}
-            setSelectedLanguage={setSelectedLanguage}
-          />
-        )}
         <BlockTypeButtonEditor />
 
         {blockType !== BLOCK_NAMES.CODE ? (

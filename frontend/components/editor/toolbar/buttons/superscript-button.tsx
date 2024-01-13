@@ -38,7 +38,7 @@ export const SuperscriptButtonEditor = () => {
           </div>
         </TooltipTrigger>
 
-        <TooltipContent side="bottom">{t('superscript')}</TooltipContent>
+        <TooltipContent>{t('superscript')}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

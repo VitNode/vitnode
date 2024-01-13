@@ -144,7 +144,7 @@ export const BlockTypeButtonEditor = () => {
             </SelectTrigger>
           </TooltipTrigger>
 
-          <TooltipContent side="bottom">{t('title')}</TooltipContent>
+          <TooltipContent>{t('title')}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 

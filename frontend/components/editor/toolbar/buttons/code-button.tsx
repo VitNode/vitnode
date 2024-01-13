@@ -38,7 +38,7 @@ export const CodeButtonEditor = () => {
           </div>
         </TooltipTrigger>
 
-        <TooltipContent side="bottom">{t('code')}</TooltipContent>
+        <TooltipContent>{t('code')}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

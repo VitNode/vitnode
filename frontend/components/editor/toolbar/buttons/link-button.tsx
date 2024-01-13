@@ -132,7 +132,7 @@ export const LinkButtonEditor = () => {
             </PopoverClose>
           </PopoverContent>
 
-          <TooltipContent side="bottom">{t('link')}</TooltipContent>
+          <TooltipContent>{t('link')}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
     </Popover>

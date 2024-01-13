@@ -38,7 +38,7 @@ export const BoldButtonEditor = () => {
           </div>
         </TooltipTrigger>
 
-        <TooltipContent side="bottom">{t('bold')}</TooltipContent>
+        <TooltipContent>{t('bold')}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

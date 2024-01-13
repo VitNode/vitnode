@@ -95,7 +95,7 @@ export const LangCodeBlockButtonEditor = () => {
             </SelectTrigger>
           </TooltipTrigger>
 
-          <TooltipContent side="bottom">{t('code_language')}</TooltipContent>
+          <TooltipContent>{t('code_language')}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 

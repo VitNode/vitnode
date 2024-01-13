@@ -38,7 +38,7 @@ export const UnderlineButtonEditor = () => {
           </div>
         </TooltipTrigger>
 
-        <TooltipContent side="bottom">{t('underline')}</TooltipContent>
+        <TooltipContent>{t('underline')}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

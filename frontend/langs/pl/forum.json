@@ -13,8 +13,8 @@
         "lock": "Zablokuj",
         "unlock": "Odblokuj",
         "meta": {
-          "meta_lock": "<user></user> zablokował ten temat <date></date>.",
-          "meta_unlock": "<user></user> odblokował ten temat <date></date>."
+          "meta_lock": "<user></user> zablokował ten temat - <date></date>.",
+          "meta_unlock": "<user></user> odblokował ten temat - <date></date>."
         }
       },
       "sorting": {
