@@ -1,4 +1,10 @@
-query Forum_topics__show($id: Int!, $first: Int, $cursor: Int, $last: Int) {
+query Forum_topics__show(
+  $id: Int!
+  $first: Int
+  $cursor: Int
+  $last: Int
+  $sortBy: ShowPostsForumsSortingEnum
+) {
   forum_topics__show(id: $id) {
     edges {
       content {
@@ -39,7 +45,7 @@ query Forum_topics__show($id: Int!, $first: Int, $cursor: Int, $last: Int) {
       }
     }
   }
-  forum_posts__show(topic_id: $id, cursor: $cursor, first: $first, last: $last) {
+  forum_posts__show(topic_id: $id, cursor: $cursor, first: $first, last: $last, sortBy: $sortBy) {
     edges {
       __typename
       ... on ShowPostsForums {

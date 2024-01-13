@@ -385,6 +385,7 @@ export type QueryForum_Posts__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<ShowPostsForumsSortingEnum>;
   topic_id: Scalars['Int']['input'];
 };
 
@@ -640,6 +641,12 @@ export type ShowPostsForumsObj = {
   pageInfo: PageInfo;
 };
 
+export const ShowPostsForumsSortingEnum = {
+  newest: 'newest',
+  oldest: 'oldest'
+} as const;
+
+export type ShowPostsForumsSortingEnum = typeof ShowPostsForumsSortingEnum[keyof typeof ShowPostsForumsSortingEnum];
 export type ShowTopicsForums = {
   __typename?: 'ShowTopicsForums';
   content: Array<TextLanguage>;
@@ -1012,6 +1019,7 @@ export type Forum_Topics__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   cursor?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<ShowPostsForumsSortingEnum>;
 }>;
 
 
@@ -1783,7 +1791,7 @@ export const Forum_Forums__Show_Item = gql`
 }
     `;
 export const Forum_Topics__Show = gql`
-    query Forum_topics__show($id: Int!, $first: Int, $cursor: Int, $last: Int) {
+    query Forum_topics__show($id: Int!, $first: Int, $cursor: Int, $last: Int, $sortBy: ShowPostsForumsSortingEnum) {
   forum_topics__show(id: $id) {
     edges {
       content {
@@ -1824,7 +1832,13 @@ export const Forum_Topics__Show = gql`
       }
     }
   }
-  forum_posts__show(topic_id: $id, cursor: $cursor, first: $first, last: $last) {
+  forum_posts__show(
+    topic_id: $id
+    cursor: $cursor
+    first: $first
+    last: $last
+    sortBy: $sortBy
+  ) {
     edges {
       __typename
       ... on ShowPostsForums {

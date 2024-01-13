@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { and, count, eq } from 'drizzle-orm';
 
-import { ShowPostsForumsArgs } from './dto/show.args';
+import { ShowPostsForumsArgs, ShowPostsForumsSortingEnum } from './dto/show.args';
 import { ShowPostsForumsObj } from './dto/show.obj';
 
 import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
@@ -13,7 +13,13 @@ import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 export class ShowPostsForumsService {
   constructor(private databaseService: DatabaseService) {}
 
-  async show({ cursor, first, last, topic_id }: ShowPostsForumsArgs): Promise<ShowPostsForumsObj> {
+  async show({
+    cursor,
+    first,
+    last,
+    sortBy,
+    topic_id
+  }: ShowPostsForumsArgs): Promise<ShowPostsForumsObj> {
     // TODO: Check permissions if user can view this topic
 
     const pagination = await inputPaginationCursor({
@@ -24,7 +30,10 @@ export class ShowPostsForumsService {
       last,
       primaryCursor: { order: 'ASC', key: 'id', schema: forum_posts_timeline.id },
       defaultSortBy: {
-        direction: SortDirectionEnum.asc,
+        direction:
+          sortBy === ShowPostsForumsSortingEnum.newest
+            ? SortDirectionEnum.desc
+            : SortDirectionEnum.asc,
         column: 'created'
       }
     });

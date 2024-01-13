@@ -30,7 +30,7 @@ export class ShowCoreMembersArgs {}
 To restrict sorting by selected columns you have to create a enum.
 
 ```ts
-export enum ShowCoreMembersSortingColumnEnum {
+enum ShowCoreMembersSortingColumnEnum {
   name = 'name',
   joined = 'joined',
   first_name = 'first_name',
@@ -99,7 +99,7 @@ import { ArgsType, Field, InputType, registerEnumType } from '@nestjs/graphql';
 
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
-export enum ShowCoreMembersSortingColumnEnum {
+enum ShowCoreMembersSortingColumnEnum {
   name = 'name',
   joined = 'joined',
   first_name = 'first_name',

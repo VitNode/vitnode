@@ -165,7 +165,7 @@ type Query {
   core_staff_moderators__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
   forum_forums__admin__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsAdminObj!
   forum_forums__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsObj!
-  forum_posts__show(cursor: Int, first: Int, last: Int, topic_id: Int!): ShowPostsForumsObj!
+  forum_posts__show(cursor: Int, first: Int, last: Int, sortBy: ShowPostsForumsSortingEnum, topic_id: Int!): ShowPostsForumsObj!
   forum_topics__show(cursor: Int, first: Int, forum_id: Int, id: Int, last: Int): ShowTopicsForumsObj!
 }
 
@@ -384,6 +384,11 @@ type ShowPostsForumsMetaTags {
 type ShowPostsForumsObj {
   edges: [postsWithMetaTagsUnion!]!
   pageInfo: PageInfo!
+}
+
+enum ShowPostsForumsSortingEnum {
+  newest
+  oldest
 }
 
 type ShowTopicsForums {
