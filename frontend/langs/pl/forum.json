@@ -17,6 +17,12 @@
           "meta_unlock": "<user></user> odblokował ten temat <date></date>."
         }
       },
+      "sorting": {
+        "newest": "Najnowsze",
+        "oldest": "Najstarsze",
+        "popular": "Popularne"
+      },
+      "comments_count": "{count, plural, =1 {# komentarz} few {# komentarze} many {# komentarzy} other {# komentarzy}}",
       "create": {
         "title": "Stwórz temat",
         "form": {

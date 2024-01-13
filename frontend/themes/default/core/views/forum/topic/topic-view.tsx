@@ -11,7 +11,7 @@ import { TitleIconTopic } from './title-icon';
 import { PostTopic } from './post/post';
 import { MetaTagTopic } from './meta-tags/meta-tag';
 import { CreatePost } from './post/create/create-post';
-import { Pagination } from '@/components/data-table/pagination';
+import { HeaderPosts } from './post/header/header-posts';
 
 interface Props {
   data: Forum_Topics__ShowQuery;
@@ -22,7 +22,7 @@ export const TopicView = ({ data: dataApi }: Props) => {
   const { convertNameToLink, convertText } = useTextLang();
 
   const {
-    forum_posts__show: { edges: edgesPosts },
+    forum_posts__show: { edges: edgesPosts, pageInfo },
     forum_topics__show: { edges }
   } = dataApi;
   const data = edges.at(0);
@@ -70,8 +70,10 @@ export const TopicView = ({ data: dataApi }: Props) => {
 
         <PostTopic id={id} content={content} user={user} created={created} />
 
+        <HeaderPosts totalComments={pageInfo.totalCount} />
+
         {edgesPosts.length > 0 && (
-          <div className="flex flex-col gap-5 relative after:absolute after:top-0 after:left-6 after:w-1 after:h-full after:block after:-z-10 after:bg-border pt-5">
+          <div className="flex flex-col gap-5 relative after:absolute after:top-0 after:left-6 after:w-1 after:h-full after:block after:-z-10 after:bg-border">
             {edgesPosts.map(edge => {
               if (edge.__typename === 'ShowPostsForums') {
                 return <PostTopic key={edge.id} {...edge} />;
@@ -85,8 +87,6 @@ export const TopicView = ({ data: dataApi }: Props) => {
             })}
           </div>
         )}
-
-        <Pagination />
 
         <CreatePost className="mt-5" />
       </div>

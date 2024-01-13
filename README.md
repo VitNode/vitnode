@@ -7,7 +7,7 @@ VitNode is a headless CMS built with [NextJS](https://nextjs.org/) and [NestJS](
 
 ## ⚠️ System Requirements
 
-- [Node.js 16.14+](https://nodejs.org/) or later,
+- [Node.js 20+](https://nodejs.org/) or later,
 - [PostgreSQL 16+](https://www.postgresql.org/),
 - [Redis 7+](https://redis.io/),
 - [pnpm 9+](https://pnpm.io/),

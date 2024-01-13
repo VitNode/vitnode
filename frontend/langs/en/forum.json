@@ -17,6 +17,12 @@
           "meta_unlock": "<user></user> unlocked this topic <date></date>."
         }
       },
+      "sorting": {
+        "newest": "Newest",
+        "oldest": "Oldest",
+        "popular": "Popular"
+      },
+      "comments_count": "{count, plural, =1 {# comment} other {# comments}}",
       "create": {
         "title": "Create Topic",
         "form": {
