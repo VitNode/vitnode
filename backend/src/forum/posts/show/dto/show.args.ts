@@ -20,6 +20,9 @@ export class ShowPostsForumsArgs {
   @Field(() => Int, { nullable: true })
   last: number | null;
 
+  @Field(() => Int, { nullable: true })
+  firstEdges: number | null;
+
   @Field(() => Int)
   topic_id: number;
 

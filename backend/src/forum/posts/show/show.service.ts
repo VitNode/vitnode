@@ -17,7 +17,7 @@ export class ShowPostsForumsService {
   constructor(private databaseService: DatabaseService) {}
 
   async show(
-    { cursor, first, last, sortBy, topic_id }: ShowPostsForumsArgs,
+    { cursor, first, firstEdges, last, sortBy, topic_id }: ShowPostsForumsArgs,
     user: User | null
   ): Promise<ShowPostsForumsObj> {
     const topic = await this.databaseService.db.query.forum_topics.findFirst({
@@ -42,10 +42,10 @@ export class ShowPostsForumsService {
     }
 
     const pagination = await inputPaginationCursor({
-      cursor,
       database: forum_posts_timeline,
       databaseService: this.databaseService,
-      first,
+      cursor,
+      first: first ?? firstEdges,
       last,
       primaryCursor: { order: 'ASC', key: 'id', schema: forum_posts_timeline.id },
       defaultSortBy: {
@@ -105,7 +105,7 @@ export class ShowPostsForumsService {
       .from(forum_posts_timeline)
       .where(where);
 
-    return outputPagination({
+    const output = outputPagination({
       edges: edges.map(edge => {
         if (edge.topic_log) {
           return {
@@ -124,5 +124,90 @@ export class ShowPostsForumsService {
       cursor,
       last
     });
+
+    // Get first edges
+    const currentTotalCount = totalCount[0].count;
+    const currentFirst = currentTotalCount - firstEdges;
+    if (output.edges.length && firstEdges && currentTotalCount > firstEdges && currentFirst > 0) {
+      const lastEdgesPagination = await inputPaginationCursor({
+        database: forum_posts_timeline,
+        databaseService: this.databaseService,
+        cursor,
+        first: currentFirst >= firstEdges ? firstEdges : currentFirst,
+        last: null,
+        primaryCursor: { order: 'ASC', key: 'id', schema: forum_posts_timeline.id },
+        defaultSortBy: {
+          direction:
+            sortBy === ShowPostsForumsSortingEnum.newest
+              ? SortDirectionEnum.asc
+              : SortDirectionEnum.desc,
+          column: 'created'
+        }
+      });
+
+      const lastEdges = await this.databaseService.db.query.forum_posts_timeline.findMany({
+        ...lastEdgesPagination,
+        where: and(lastEdgesPagination.where, where),
+        with: {
+          post: {
+            with: {
+              content: true,
+              user: {
+                with: {
+                  avatar: true,
+                  group: {
+                    with: {
+                      name: true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          topic_log: {
+            with: {
+              topic: {
+                with: {
+                  title: true
+                }
+              },
+              user: {
+                with: {
+                  avatar: true,
+                  group: {
+                    with: {
+                      name: true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+
+      return {
+        ...output,
+        lastEdges: lastEdges.reverse().map(edge => {
+          if (edge.topic_log) {
+            return {
+              ...edge,
+              ...edge.topic_log
+            };
+          }
+
+          return {
+            ...edge,
+            ...edge.post
+          };
+        })
+      };
+    }
+
+    // Get next edges
+    return {
+      ...output,
+      lastEdges: []
+    };
   }
 }

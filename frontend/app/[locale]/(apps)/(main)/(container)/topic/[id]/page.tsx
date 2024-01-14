@@ -25,7 +25,7 @@ const getData = async ({ id, sort }: { id: string; sort: string | undefined }) =
     variables: {
       id: getIdFormString(id),
       sortBy,
-      first: 10
+      firstEdges: 10
     },
     headers: {
       Cookie: cookies().toString()

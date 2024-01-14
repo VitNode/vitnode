@@ -24,7 +24,7 @@ export const TopicView = ({ data: dataApi }: Props) => {
   const { convertNameToLink, convertText } = useTextLang();
 
   const {
-    forum_posts__show: { edges: edgesPosts, pageInfo },
+    forum_posts__show: { edges: edgesPosts, lastEdges, pageInfo },
     forum_topics__show: { edges }
   } = dataApi;
   const data = edges.at(0);
@@ -75,9 +75,20 @@ export const TopicView = ({ data: dataApi }: Props) => {
 
           <HeaderPosts totalComments={pageInfo.totalCount} />
 
-          {edgesPosts.length > 0 && <ListPosts edges={edgesPosts} />}
+          {edgesPosts.length > 0 && (
+            <>
+              <ListPosts
+                edges={pageInfo.totalCount <= 20 ? [...edgesPosts, ...lastEdges] : edgesPosts}
+              />
 
-          <LoadMorePosts count={100} />
+              {pageInfo.totalCount > 20 && (
+                <>
+                  <LoadMorePosts count={pageInfo.totalCount - 20} />
+                  <ListPosts edges={lastEdges} />
+                </>
+              )}
+            </>
+          )}
 
           <CreatePost className="mt-5" />
         </WrapperPosts>

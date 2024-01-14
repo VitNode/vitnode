@@ -67,7 +67,7 @@ export const Editor = ({
 
   return (
     <EditorContext.Provider value={{ blockType, setBlockType }}>
-      <LexicalComposer initialConfig={initialConfig}>
+      <LexicalComposer key={id} initialConfig={initialConfig}>
         <div
           className={cx(
             'relative border border-input rounded-md bg-card ring-offset-background',

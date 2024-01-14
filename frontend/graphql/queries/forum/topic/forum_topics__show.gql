@@ -4,6 +4,7 @@ query Forum_topics__show(
   $cursor: Int
   $last: Int
   $sortBy: ShowPostsForumsSortingEnum
+  $firstEdges: Int
 ) {
   forum_topics__show(id: $id) {
     edges {
@@ -45,7 +46,14 @@ query Forum_topics__show(
       }
     }
   }
-  forum_posts__show(topic_id: $id, cursor: $cursor, first: $first, last: $last, sortBy: $sortBy) {
+  forum_posts__show(
+    topic_id: $id
+    cursor: $cursor
+    first: $first
+    last: $last
+    sortBy: $sortBy
+    firstEdges: $firstEdges
+  ) {
     edges {
       __typename
       ... on ShowPostsForums {
@@ -105,6 +113,58 @@ query Forum_topics__show(
       hasPreviousPage
       startCursor
       totalCount
+    }
+    lastEdges {
+      __typename
+      ... on ShowPostsForums {
+        content {
+          value
+          language_code
+        }
+        id
+        user {
+          avatar_color
+          avatar {
+            id
+            dir_folder
+            name
+          }
+          group {
+            id
+            name {
+              language_code
+              value
+            }
+          }
+          id
+          name_seo
+          name
+        }
+        created
+      }
+      ... on ShowPostsForumsMetaTags {
+        action
+        id
+        user {
+          avatar_color
+          avatar {
+            id
+            dir_folder
+            name
+          }
+          group {
+            id
+            name {
+              language_code
+              value
+            }
+          }
+          id
+          name_seo
+          name
+        }
+        created
+      }
     }
   }
 }
