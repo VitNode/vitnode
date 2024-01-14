@@ -8,12 +8,13 @@ import { useTextLang } from '@/hooks/core/use-text-lang';
 import { UserLink } from '@/components/user/link/user-link';
 import { ActionsTopic } from './actions/actions-topic';
 import { TitleIconTopic } from './title-icon';
-import { PostTopic } from './posts/post';
+import { PostTopic } from './posts/post/post';
 import { CreatePost } from './posts/create/create-post';
 import { HeaderPosts } from './posts/header/header-posts';
-import { LoadMorePosts } from './load-more/load-more-posts';
+import { LoadMorePosts } from './posts/load-more/load-more-posts';
 import { WrapperPosts } from './posts/wrapper/wrapper';
 import { ListPosts } from './posts/list';
+import { AnimatePresenceClient } from '@/components/animations/animate-presence';
 
 interface Props {
   data: Forum_Topics__ShowQuery;
@@ -71,24 +72,26 @@ export const TopicView = ({ data: dataApi }: Props) => {
         </div>
 
         <WrapperPosts>
-          <PostTopic id={id} content={content} user={user} created={created} />
+          <AnimatePresenceClient initial={false}>
+            <PostTopic id={id} content={content} user={user} created={created} />
 
-          <HeaderPosts totalComments={pageInfo.totalCount} />
+            <HeaderPosts totalComments={pageInfo.totalCount} />
 
-          {edgesPosts.length > 0 && (
-            <>
-              <ListPosts
-                edges={pageInfo.totalCount <= 20 ? [...edgesPosts, ...lastEdges] : edgesPosts}
-              />
+            {edgesPosts.length > 0 && (
+              <>
+                <ListPosts
+                  edges={pageInfo.totalCount <= 20 ? [...edgesPosts, ...lastEdges] : edgesPosts}
+                />
 
-              {pageInfo.totalCount > 20 && (
-                <>
-                  <LoadMorePosts count={pageInfo.totalCount - 20} />
-                  <ListPosts edges={lastEdges} />
-                </>
-              )}
-            </>
-          )}
+                {pageInfo.totalCount > 20 && (
+                  <>
+                    <LoadMorePosts count={pageInfo.totalCount - 20} />
+                    <ListPosts edges={lastEdges} />
+                  </>
+                )}
+              </>
+            )}
+          </AnimatePresenceClient>
 
           <CreatePost className="mt-5" />
         </WrapperPosts>

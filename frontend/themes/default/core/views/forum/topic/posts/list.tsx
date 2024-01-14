@@ -1,5 +1,5 @@
 import type { ShowPostsForums, ShowPostsForumsMetaTags } from '@/graphql/hooks';
-import { PostTopic } from './post';
+import { PostTopic } from './post/post';
 import { MetaTagTopic } from './meta-tags/meta-tag';
 
 interface Props {
