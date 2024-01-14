@@ -26,11 +26,12 @@ import type { TextLanguage } from '@/graphql/hooks';
 import './editor.scss';
 import { EmojiPluginEditor } from './plugins/emoji';
 import { initialConfigEditor } from './initial-config';
+import { BottomToolbarEditor } from './toolbar/bottom-toolbar-editor';
 
 interface Props {
   id: string;
-  autoFocus?: boolean;
   className?: string;
+  enableAutoFocus?: boolean;
   toolbarClassName?: string;
 }
 interface WithLanguage extends Props {
@@ -46,9 +47,9 @@ interface WithoutLanguage extends Props {
 }
 
 export const Editor = ({
-  autoFocus,
   className,
   disableLanguage,
+  enableAutoFocus,
   id,
   onChange,
   toolbarClassName,
@@ -66,19 +67,14 @@ export const Editor = ({
 
   return (
     <EditorContext.Provider value={{ blockType, setBlockType }}>
-      <LexicalComposer initialConfig={initialConfig}>
+      <LexicalComposer key={id} initialConfig={initialConfig}>
         <div
           className={cx(
             'relative border border-input rounded-md bg-card ring-offset-background',
             className
           )}
         >
-          <ToolbarEditor
-            className={toolbarClassName}
-            selectedLanguage={selectedLanguage}
-            setSelectedLanguage={setSelectedLanguage}
-            disableLanguage={disableLanguage}
-          />
+          <ToolbarEditor className={toolbarClassName} />
           {disableLanguage ? (
             <OnChangePluginEditor
               value={value}
@@ -105,7 +101,7 @@ export const Editor = ({
             ErrorBoundary={LexicalErrorBoundary}
           />
           <MarkdownShortcutPlugin transformers={MARKDOWN_TRANSFORMERS_EDITOR} />
-          {autoFocus && <AutoFocusPlugin />}
+          {enableAutoFocus && <AutoFocusPlugin />}
           <HistoryPlugin />
           <ListPlugin />
           <CheckListPlugin />
@@ -120,6 +116,11 @@ export const Editor = ({
               <CodeActionMenuPluginEditor anchorElem={floatingAnchorElem.current} />
             </>
           )}
+          <BottomToolbarEditor
+            selectedLanguage={selectedLanguage}
+            setSelectedLanguage={setSelectedLanguage}
+            disableLanguage={disableLanguage}
+          />
         </div>
       </LexicalComposer>
     </EditorContext.Provider>

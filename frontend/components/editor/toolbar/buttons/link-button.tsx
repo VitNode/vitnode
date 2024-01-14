@@ -99,6 +99,7 @@ export const LinkButtonEditor = () => {
                       editor.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl('https://'));
                     }
                   }}
+                  className="size-9"
                 >
                   <Link />
                 </Toggle>
@@ -131,7 +132,7 @@ export const LinkButtonEditor = () => {
             </PopoverClose>
           </PopoverContent>
 
-          <TooltipContent side="bottom">{t('link')}</TooltipContent>
+          <TooltipContent>{t('link')}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
     </Popover>

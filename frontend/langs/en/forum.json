@@ -13,16 +13,27 @@
         "lock": "Lock",
         "unlock": "Unlock",
         "meta": {
-          "meta_lock": "<user></user> locked this topic <date></date>.",
-          "meta_unlock": "<user></user> unlocked this topic <date></date>."
+          "meta_lock": "<user></user> locked this topic - <date></date>.",
+          "meta_unlock": "<user></user> unlocked this topic - <date></date>."
         }
       },
+      "sorting": {
+        "newest": "Newest",
+        "oldest": "Oldest",
+        "popular": "Popular"
+      },
+      "comments_count": "{count, plural, =1 {# comment} other {# comments}}",
+      "load_more_comments": "Load more comments ({count})",
       "create": {
         "title": "Create Topic",
         "form": {
           "title": "Title",
           "content": "Content"
         }
+      },
+      "post": {
+        "placeholder": "Write your reply here...",
+        "submit": "Submit Post"
       }
     }
   }

@@ -2,7 +2,7 @@ import { ArgsType, Field, InputType, Int, registerEnumType } from '@nestjs/graph
 
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
-export enum ShowAdminStaffAdministratorsSortingColumnEnum {
+enum ShowAdminStaffAdministratorsSortingColumnEnum {
   updated = 'updated'
 }
 

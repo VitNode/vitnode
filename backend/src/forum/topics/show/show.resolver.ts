@@ -17,7 +17,7 @@ export class ShowTopicsForumsResolver {
   @UseGuards(AuthGuards)
   async forum_topics__show(
     @Args() args: ShowTopicsForumsArgs,
-    @CurrentUser() user?: User
+    @CurrentUser() user: User | null
   ): Promise<ShowTopicsForumsObj> {
     return await this.service.show(args, user);
   }

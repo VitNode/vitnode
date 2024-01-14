@@ -30,8 +30,8 @@
       "search": "Search group..."
     },
     "pagination": {
-      "previous": "Previous page",
-      "next": "Next page"
+      "previous": "Previous",
+      "next": "Next"
     },
     "editor": {
       "remove_formatting": "Remove Formatting",

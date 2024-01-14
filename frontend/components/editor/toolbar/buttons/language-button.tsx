@@ -32,6 +32,7 @@ export const LanguageButtonEditor = ({ selectedLanguage, setSelectedLanguage }: 
             <SelectTrigger
               className={buttonVariants({
                 variant: 'ghost',
+                size: 'sm',
                 className: 'w-auto border-0 [&>svg]:w-5 [&>svg]:h-5'
               })}
             >
@@ -39,13 +40,13 @@ export const LanguageButtonEditor = ({ selectedLanguage, setSelectedLanguage }: 
             </SelectTrigger>
           </TooltipTrigger>
 
-          <TooltipContent side="bottom">{t('change_language')}</TooltipContent>
+          <TooltipContent side="top">{t('change_language')}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 
       <SelectContent onCloseAutoFocus={() => editor.focus()}>
         {languages.map(language => (
-          <SelectItem key={language.id} value={`${language.id}`}>
+          <SelectItem key={language.id} value={`${language.code}`}>
             {language.name}
           </SelectItem>
         ))}

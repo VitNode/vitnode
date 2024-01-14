@@ -31,13 +31,14 @@ export const CodeButtonEditor = () => {
               aria-label={t('code')}
               onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code')}
               pressed={isCode}
+              className="size-9"
             >
               <Code />
             </Toggle>
           </div>
         </TooltipTrigger>
 
-        <TooltipContent side="bottom">{t('code')}</TooltipContent>
+        <TooltipContent>{t('code')}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

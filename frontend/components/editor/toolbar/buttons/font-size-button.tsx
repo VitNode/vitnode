@@ -59,6 +59,7 @@ export const FontSizeButtonEditor = () => {
             <SelectTrigger
               className={buttonVariants({
                 variant: 'ghost',
+                size: 'sm',
                 className: 'w-auto border-0 [&>svg]:w-5 [&>svg]:h-5'
               })}
             >
@@ -67,7 +68,7 @@ export const FontSizeButtonEditor = () => {
             </SelectTrigger>
           </TooltipTrigger>
 
-          <TooltipContent side="bottom">{t('font_size')}</TooltipContent>
+          <TooltipContent>{t('font_size')}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 

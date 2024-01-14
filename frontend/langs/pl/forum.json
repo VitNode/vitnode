@@ -13,16 +13,27 @@
         "lock": "Zablokuj",
         "unlock": "Odblokuj",
         "meta": {
-          "meta_lock": "<user></user> zablokował ten temat <date></date>.",
-          "meta_unlock": "<user></user> odblokował ten temat <date></date>."
+          "meta_lock": "<user></user> zablokował ten temat - <date></date>.",
+          "meta_unlock": "<user></user> odblokował ten temat - <date></date>."
         }
       },
+      "sorting": {
+        "newest": "Najnowsze",
+        "oldest": "Najstarsze",
+        "popular": "Popularne"
+      },
+      "comments_count": "{count, plural, =1 {# komentarz} few {# komentarze} many {# komentarzy} other {# komentarzy}}",
+      "load_more_comments": "Załaduj więcej komentarzy ({count})",
       "create": {
         "title": "Stwórz temat",
         "form": {
           "title": "Tytuł",
           "content": "Treść"
         }
+      },
+      "post": {
+        "placeholder": "Napisz odpowiedź tutaj...",
+        "submit": "Dodaj post"
       }
     }
   }

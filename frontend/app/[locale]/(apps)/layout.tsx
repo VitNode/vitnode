@@ -34,6 +34,6 @@ export default async function LocaleLayout({ children }: Props) {
 
     return <LanguageProvider data={data}>{children}</LanguageProvider>;
   } catch (e) {
-    return <InternalErrorView />;
+    return <InternalErrorView showPoweredBy />;
   }
 }

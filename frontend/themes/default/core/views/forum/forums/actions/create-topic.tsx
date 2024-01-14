@@ -11,7 +11,7 @@ import {
   FormMessage
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
-import { useCreateTopic } from '@/hooks/forums/forum/topic/use-create-topic';
+import { useCreateTopic } from '@/hooks/forums/forum/topics/create/use-create-topic';
 import { Editor } from '@/components/editor/editor';
 
 interface Props {

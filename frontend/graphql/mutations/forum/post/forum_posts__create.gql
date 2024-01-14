@@ -1,0 +1,28 @@
+mutation Forum_posts__create($content: [TextLanguageInput!]!, $topicId: Int!) {
+  forum_posts__create(content: $content, topic_id: $topicId) {
+    content {
+      language_code
+      value
+    }
+    created
+    id
+    user {
+      avatar {
+        dir_folder
+        id
+        name
+      }
+      avatar_color
+      group {
+        id
+        name {
+          language_code
+          value
+        }
+      }
+      id
+      name
+      name_seo
+    }
+  }
+}

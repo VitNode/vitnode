@@ -27,6 +27,7 @@ export const UndoMoveButtonEditor = () => {
     <Button
       variant="ghost"
       size="icon"
+      className="size-9"
       onClick={() => editor.dispatchCommand(UNDO_COMMAND, undefined)}
       tooltip={t('undo')}
       disabled={!canUndo}

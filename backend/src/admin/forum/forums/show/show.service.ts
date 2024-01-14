@@ -60,6 +60,7 @@ export class ShowForumForumsAdminService {
       forums.map(async forum => {
         const children = await this.databaseService.db.query.forum_forums.findMany({
           where: eq(forum_forums.parent_id, forum.id),
+          orderBy: (table, { asc }) => [asc(table.position)],
           with: {
             name: true,
             description: true,
@@ -75,6 +76,7 @@ export class ShowForumForumsAdminService {
             children.map(async child => {
               const children = await this.databaseService.db.query.forum_forums.findMany({
                 where: eq(forum_forums.parent_id, child.id),
+                orderBy: (table, { asc }) => [asc(table.position)],
                 with: {
                   name: true,
                   description: true,

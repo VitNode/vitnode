@@ -2,10 +2,14 @@ import { WifiOff } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-
+import { PoweredByVitNode } from './powered-by';
 import '@/admin/layout/global.scss';
 
-export const InternalErrorView = () => {
+interface Props {
+  showPoweredBy?: boolean;
+}
+
+export const InternalErrorView = ({ showPoweredBy }: Props) => {
   const t = useTranslations('core');
 
   return (
@@ -27,6 +31,12 @@ export const InternalErrorView = () => {
           code: () => <span className="font-semibold">{500}</span>
         })}
       </div>
+
+      {showPoweredBy && (
+        <footer className="text-center p-5 text-sm">
+          <PoweredByVitNode className="text-muted-foreground no-underline" />
+        </footer>
+      )}
     </div>
   );
 };

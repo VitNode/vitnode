@@ -9,7 +9,7 @@ import { mutationApi } from './mutation-api';
 import { useDialog } from '@/components/ui/dialog';
 import { useRouter } from '@/i18n';
 
-import { useTextLang } from '../../../core/use-text-lang';
+import { useTextLang } from '../../../../core/use-text-lang';
 
 interface Props {
   forumId: number;

@@ -31,13 +31,14 @@ export const UnderlineButtonEditor = () => {
               aria-label={t('underline')}
               onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline')}
               pressed={isUnderline}
+              className="size-9"
             >
               <Underline />
             </Toggle>
           </div>
         </TooltipTrigger>
 
-        <TooltipContent side="bottom">{t('underline')}</TooltipContent>
+        <TooltipContent>{t('underline')}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

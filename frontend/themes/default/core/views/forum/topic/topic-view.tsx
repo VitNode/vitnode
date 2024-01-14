@@ -8,8 +8,13 @@ import { useTextLang } from '@/hooks/core/use-text-lang';
 import { UserLink } from '@/components/user/link/user-link';
 import { ActionsTopic } from './actions/actions-topic';
 import { TitleIconTopic } from './title-icon';
-import { PostTopic } from './post/post';
-import { MetaTagTopic } from './meta-tags/meta-tag';
+import { PostTopic } from './posts/post/post';
+import { CreatePost } from './posts/create/create-post';
+import { HeaderPosts } from './posts/header/header-posts';
+import { LoadMorePosts } from './posts/load-more/load-more-posts';
+import { WrapperPosts } from './posts/wrapper/wrapper';
+import { ListPosts } from './posts/list';
+import { AnimatePresenceClient } from '@/components/animations/animate-presence';
 
 interface Props {
   data: Forum_Topics__ShowQuery;
@@ -20,7 +25,7 @@ export const TopicView = ({ data: dataApi }: Props) => {
   const { convertNameToLink, convertText } = useTextLang();
 
   const {
-    forum_posts__show: { edges: edgesPosts },
+    forum_posts__show: { edges: edgesPosts, lastEdges, pageInfo },
     forum_topics__show: { edges }
   } = dataApi;
   const data = edges.at(0);
@@ -66,23 +71,30 @@ export const TopicView = ({ data: dataApi }: Props) => {
           </div>
         </div>
 
-        <PostTopic id={id} content={content} user={user} created={created} />
+        <WrapperPosts>
+          <AnimatePresenceClient initial={false}>
+            <PostTopic id={id} content={content} user={user} created={created} />
 
-        {edgesPosts.length > 0 && (
-          <div className="flex flex-col gap-5 relative after:absolute after:top-0 after:left-6 after:w-1 after:h-full after:block after:-z-10 after:bg-border pt-5">
-            {edgesPosts.map(edge => {
-              if (edge.__typename === 'ShowPostsForums') {
-                return <PostTopic key={edge.id} {...edge} />;
-              }
+            <HeaderPosts totalComments={pageInfo.totalCount} />
 
-              if (edge.__typename === 'ShowPostsForumsMetaTags') {
-                return <MetaTagTopic key={edge.id} {...edge} />;
-              }
+            {edgesPosts.length > 0 && (
+              <>
+                <ListPosts
+                  edges={pageInfo.totalCount <= 20 ? [...edgesPosts, ...lastEdges] : edgesPosts}
+                />
 
-              return null;
-            })}
-          </div>
-        )}
+                {pageInfo.totalCount > 20 && (
+                  <>
+                    <LoadMorePosts count={pageInfo.totalCount - 20} />
+                    <ListPosts edges={lastEdges} />
+                  </>
+                )}
+              </>
+            )}
+          </AnimatePresenceClient>
+
+          <CreatePost className="mt-5" />
+        </WrapperPosts>
       </div>
 
       <div className="w-1/4">Sidebar</div>

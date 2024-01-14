@@ -31,13 +31,14 @@ export const ItalicButtonEditor = () => {
               aria-label={t('italic')}
               onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic')}
               pressed={isItalic}
+              className="size-9"
             >
               <Italic />
             </Toggle>
           </div>
         </TooltipTrigger>
 
-        <TooltipContent side="bottom">{t('italic')}</TooltipContent>
+        <TooltipContent>{t('italic')}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

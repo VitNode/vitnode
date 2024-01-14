@@ -11,6 +11,7 @@ import {
   forum_posts_content,
   forum_posts_timeline
 } from '@/src/admin/forum/database/schema/posts';
+import { NotFoundError } from '@/utils/errors/not-found-error';
 
 @Injectable()
 export class CreateForumsPostsService {
@@ -19,8 +20,17 @@ export class CreateForumsPostsService {
   async create(
     { id }: User,
     { content, topic_id }: CreatePostsForumsArgs,
-    { req }: Ctx
+    { req }: Ctx,
+    skipTimeLine = false
   ): Promise<ShowPostsForums> {
+    const topic = await this.databaseService.db.query.forum_topics.findFirst({
+      where: (table, { eq }) => eq(table.id, topic_id)
+    });
+
+    if (!topic) {
+      throw new NotFoundError('Topic');
+    }
+
     const createPost = await this.databaseService.db
       .insert(forum_posts)
       .values({
@@ -43,11 +53,13 @@ export class CreateForumsPostsService {
     );
 
     // Add post to timeline
-    await this.databaseService.db.insert(forum_posts_timeline).values({
-      created: currentDate(),
-      post_id: post.id,
-      topic_id: id
-    });
+    if (!skipTimeLine) {
+      await this.databaseService.db.insert(forum_posts_timeline).values({
+        created: currentDate(),
+        post_id: post.id,
+        topic_id
+      });
+    }
 
     const data = await this.databaseService.db.query.forum_posts.findFirst({
       where: (table, { eq }) => eq(table.id, post.id),

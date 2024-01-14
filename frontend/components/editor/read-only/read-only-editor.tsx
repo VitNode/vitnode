@@ -24,7 +24,7 @@ export const ReadOnlyEditor = ({ className, id, value }: Props) => {
   };
 
   return (
-    <LexicalComposer initialConfig={initialConfig}>
+    <LexicalComposer key={id} initialConfig={initialConfig}>
       <LoadReadOnlyEditor value={value} />
       <RichTextPlugin
         contentEditable={<ContentEditable className={className} />}

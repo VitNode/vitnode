@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { and, count, eq, or } from 'drizzle-orm';
+import { and, asc, count, eq, or } from 'drizzle-orm';
 
 import { ShowTopicsForumsArgs } from './dto/show.args';
 import { ShowTopicsForumsObj } from './dto/show.obj';
@@ -9,6 +9,10 @@ import { User } from '@/utils/decorators/user.decorator';
 import { DatabaseService } from '@/database/database.service';
 import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
 import { forum_topics } from '@/src/admin/forum/database/schema/topics';
+import { forum_posts } from '@/src/admin/forum/database/schema/posts';
+import { CustomError } from '@/utils/errors/CustomError';
+import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
+import { forum_forums_permissions } from '@/src/admin/forum/database/schema/forums';
 
 @Injectable()
 export class ShowTopicsForumsService {
@@ -16,20 +20,14 @@ export class ShowTopicsForumsService {
 
   async show(
     { cursor, first, forum_id, id, last }: ShowTopicsForumsArgs,
-    user?: User
+    user: User | null
   ): Promise<ShowTopicsForumsObj> {
-    // TODO: Fix permissions
-    // const where = and(
-    //   eq(forum_forums.id, forum_id),
-    //   eq(forum_topics.id, id),
-    //   or(
-    //     eq(forum_forums.can_all_read, true),
-    //     and(
-    //       eq(forum_forums_permissions.group_id, user?.group.id),
-    //       eq(forum_forums_permissions.can_read, true)
-    //     )
-    //   )
-    // );
+    if (!forum_id && !id) {
+      throw new CustomError({
+        code: 'FORUM_TOPIC_SHOW_NO_ID',
+        message: 'No forum_id or id provided'
+      });
+    }
 
     const pagination = await inputPaginationCursor({
       cursor,
@@ -44,22 +42,30 @@ export class ShowTopicsForumsService {
       }
     });
 
-    const where = or(
-      forum_id ? eq(forum_topics.forum_id, forum_id) : undefined,
-      id ? eq(forum_topics.id, id) : undefined
+    const where = and(
+      or(
+        forum_id ? eq(forum_topics.forum_id, forum_id) : undefined,
+        id ? eq(forum_topics.id, id) : undefined
+      )
     );
 
     const edges = await this.databaseService.db.query.forum_topics.findMany({
       ...pagination,
       where: and(pagination.where, where),
+      limit: id ? 1 : pagination.limit,
       with: {
         forum: {
           with: {
-            name: true
+            name: true,
+            permissions: {
+              where: eq(forum_forums_permissions.group_id, user?.group.id ?? 1) // 1 = guest
+            }
           }
         },
         title: true,
         posts: {
+          orderBy: [asc(forum_posts.created)],
+          limit: 1,
           with: {
             content: true,
             user: {
@@ -85,6 +91,15 @@ export class ShowTopicsForumsService {
     return outputPagination({
       edges: edges
         .map(edge => {
+          // Check permissions
+          if (!edge.forum.can_all_view && !edge.forum.permissions.length) {
+            if (id && edges.length === 1) {
+              throw new AccessDeniedError();
+            }
+
+            return null;
+          }
+
           const post = edge.posts.at(0);
           if (!post) return null;
 

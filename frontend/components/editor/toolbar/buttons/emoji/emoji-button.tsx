@@ -18,7 +18,7 @@ export const EmojiButtonEditor = () => {
   return (
     <Popover modal>
       <PopoverTrigger asChild>
-        <Button variant="ghost" size="icon" tooltip={t('title')}>
+        <Button variant="ghost" size="icon" className="size-9" tooltip={t('title')}>
           <Smile />
         </Button>
       </PopoverTrigger>

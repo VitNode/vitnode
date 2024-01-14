@@ -87,14 +87,15 @@ export const LangCodeBlockButtonEditor = () => {
             <SelectTrigger
               className={buttonVariants({
                 variant: 'ghost',
-                className: 'w-auto border-0'
+                className: 'w-auto border-0',
+                size: 'sm'
               })}
             >
               {getLanguageFriendlyName(codeLanguage)}
             </SelectTrigger>
           </TooltipTrigger>
 
-          <TooltipContent side="bottom">{t('code_language')}</TooltipContent>
+          <TooltipContent>{t('code_language')}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 

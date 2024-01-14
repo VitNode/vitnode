@@ -1,6 +1,5 @@
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
-import { isRedirectError } from 'next/dist/client/components/redirect';
 
 import { ForumForumView } from '@/themes/default/core/views/forum/forums/views/[id]/forum-forum-view';
 import { fetcher, type ErrorType } from '@/graphql/fetcher';
@@ -36,25 +35,22 @@ interface Props {
 }
 
 export default async function Page({ params: { id } }: Props) {
+  let data: Forum_Forums__Show_ItemQuery | undefined;
   try {
-    const data = await getData({ id });
-
-    if (data.forum_forums__show.edges.length === 0) {
-      notFound();
-    }
-
-    return <ForumForumView data={data} />;
+    data = await getData({ id });
   } catch (e) {
-    if (isRedirectError(e)) {
-      notFound();
-    }
-
     const error = e as ErrorType;
 
-    if (error.extensions.code === 'ACCESS_DENIED') {
+    if (error.extensions?.code === 'ACCESS_DENIED') {
       return <ErrorView code="403" />;
     }
 
-    throw error;
+    throw e;
   }
+
+  if (!data || data.forum_forums__show.edges.length === 0) {
+    notFound();
+  }
+
+  return <ForumForumView data={data} />;
 }

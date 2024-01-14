@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 
 import { currentDate } from '@/functions/date';
 import { Ctx } from '@/types/context.type';
@@ -41,9 +42,12 @@ export class LockToggleForumTopicsService {
     }
 
     // Update topic
-    await this.databaseService.db.update(forum_topics).set({
-      locked: !topic.locked
-    });
+    await this.databaseService.db
+      .update(forum_topics)
+      .set({
+        locked: !topic.locked
+      })
+      .where(eq(forum_topics.id, id));
 
     // Create log
     const log = await this.databaseService.db

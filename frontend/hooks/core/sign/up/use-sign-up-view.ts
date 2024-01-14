@@ -77,10 +77,7 @@ export const useSignUpView = ({ installPage }: Args) => {
       const error = mutation.error as ErrorType;
 
       if (error?.extensions) {
-        const {
-          extensions: { code }
-        } = error as ErrorType;
-
+        const { code } = error.extensions;
         if (code === 'EMAIL_ALREADY_EXISTS') {
           form.setError(
             'email',

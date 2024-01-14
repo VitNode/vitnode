@@ -64,6 +64,9 @@ export class ShowPostsForumsObj {
   @Field(() => [PostsWithMetaTagsUnion])
   edges: (ShowPostsForums | ShowPostsForumsMetaTags)[];
 
+  @Field(() => [PostsWithMetaTagsUnion])
+  lastEdges: (ShowPostsForums | ShowPostsForumsMetaTags)[];
+
   @Field(() => PageInfo)
   pageInfo: PageInfo;
 }
