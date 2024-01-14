@@ -55,7 +55,7 @@ import { CurrentUser, User } from '@/utils/decorators/user.decorator';
 @UseGuards(AuthGuards)
 async core_members__show(
   @Args() args: ShowCoreMembersArgs,
-  @CurrentUser() user?: User
+  @CurrentUser() user: User | null
 ): Promise<ShowCoreMembersObj> {
   return await this.service.show(args);
 }

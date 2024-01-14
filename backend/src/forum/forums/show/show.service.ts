@@ -17,7 +17,7 @@ export class ShowForumForumsService {
 
   async show(
     { cursor, first, ids, last, parent_id }: ShowForumForumsArgs,
-    user?: User
+    user: User | null
   ): Promise<ShowForumForumsObj> {
     const pagination = await inputPaginationCursor({
       cursor,

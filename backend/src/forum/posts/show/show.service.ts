@@ -18,7 +18,7 @@ export class ShowPostsForumsService {
 
   async show(
     { cursor, first, last, sortBy, topic_id }: ShowPostsForumsArgs,
-    user?: User
+    user: User | null
   ): Promise<ShowPostsForumsObj> {
     const topic = await this.databaseService.db.query.forum_topics.findFirst({
       where: (table, { eq }) => eq(table.id, topic_id),

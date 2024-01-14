@@ -12,6 +12,7 @@ import { PostTopic } from './post/post';
 import { MetaTagTopic } from './meta-tags/meta-tag';
 import { CreatePost } from './post/create/create-post';
 import { HeaderPosts } from './post/header/header-posts';
+import { LoadMorePosts } from './load-more/load-more-posts';
 
 interface Props {
   data: Forum_Topics__ShowQuery;
@@ -87,6 +88,8 @@ export const TopicView = ({ data: dataApi }: Props) => {
             })}
           </div>
         )}
+
+        <LoadMorePosts count={100} />
 
         <CreatePost className="mt-5" />
       </div>

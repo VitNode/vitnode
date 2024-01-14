@@ -23,6 +23,7 @@
         "popular": "Popular"
       },
       "comments_count": "{count, plural, =1 {# comment} other {# comments}}",
+      "load_more_comments": "Load more comments ({count})",
       "create": {
         "title": "Create Topic",
         "form": {

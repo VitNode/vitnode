@@ -20,7 +20,7 @@ export class ShowTopicsForumsService {
 
   async show(
     { cursor, first, forum_id, id, last }: ShowTopicsForumsArgs,
-    user?: User
+    user: User | null
   ): Promise<ShowTopicsForumsObj> {
     if (!forum_id && !id) {
       throw new CustomError({

@@ -23,6 +23,7 @@
         "popular": "Popularne"
       },
       "comments_count": "{count, plural, =1 {# komentarz} few {# komentarze} many {# komentarzy} other {# komentarzy}}",
+      "load_more_comments": "Załaduj więcej komentarzy ({count})",
       "create": {
         "title": "Stwórz temat",
         "form": {
