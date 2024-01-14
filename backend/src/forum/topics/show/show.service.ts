@@ -92,7 +92,7 @@ export class ShowTopicsForumsService {
       edges: edges
         .map(edge => {
           // Check permissions
-          if (!edge.forum.can_all_view && edge.forum.permissions.length === 0) {
+          if (!edge.forum.can_all_view && !edge.forum.permissions.length) {
             if (id && edges.length === 1) {
               throw new AccessDeniedError();
             }

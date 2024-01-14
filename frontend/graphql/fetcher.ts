@@ -120,8 +120,8 @@ export async function fetcher<TData, TVariables>({
 }
 
 export interface ErrorType {
-  extensions: {
+  message: string;
+  extensions?: {
     code: string;
   };
-  message: string;
 }

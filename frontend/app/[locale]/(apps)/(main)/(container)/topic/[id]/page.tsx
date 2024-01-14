@@ -51,7 +51,7 @@ export default async function Page({ params: { id }, searchParams: { sort } }: P
   } catch (e) {
     const error = e as ErrorType;
 
-    if (error.extensions.code === 'ACCESS_DENIED') {
+    if (error.extensions?.code === 'ACCESS_DENIED') {
       return <ErrorView code="403" />;
     }
 

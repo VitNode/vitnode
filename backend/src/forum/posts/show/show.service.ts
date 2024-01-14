@@ -8,19 +8,38 @@ import { inputPaginationCursor, outputPagination } from '@/functions/database/pa
 import { DatabaseService } from '@/database/database.service';
 import { forum_posts_timeline } from '@/src/admin/forum/database/schema/posts';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+import { NotFoundError } from '@/utils/errors/not-found-error';
+import { User } from '@/utils/decorators/user.decorator';
+import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
 
 @Injectable()
 export class ShowPostsForumsService {
   constructor(private databaseService: DatabaseService) {}
 
-  async show({
-    cursor,
-    first,
-    last,
-    sortBy,
-    topic_id
-  }: ShowPostsForumsArgs): Promise<ShowPostsForumsObj> {
-    // TODO: Check permissions if user can view this topic
+  async show(
+    { cursor, first, last, sortBy, topic_id }: ShowPostsForumsArgs,
+    user?: User
+  ): Promise<ShowPostsForumsObj> {
+    const topic = await this.databaseService.db.query.forum_topics.findFirst({
+      where: (table, { eq }) => eq(table.id, topic_id),
+      with: {
+        forum: {
+          with: {
+            permissions: {
+              where: (table, { eq }) => eq(table.group_id, user?.group.id ?? 1) // 1 = guest
+            }
+          }
+        }
+      }
+    });
+
+    if (!topic) {
+      throw new NotFoundError('Topic');
+    }
+
+    if (!topic.forum.can_all_read && !topic.forum.permissions.length) {
+      throw new AccessDeniedError();
+    }
 
     const pagination = await inputPaginationCursor({
       cursor,

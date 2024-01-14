@@ -19,9 +19,9 @@ export const Layout = ({ children }: Props) => {
    * ! Thank you for your support!
    */
   const poweredBy = (
-    <div className="text-center p-5 text-sm">
+    <footer className="text-center p-5 text-sm">
       <PoweredByVitNode className="text-muted-foreground no-underline" />
-    </div>
+    </footer>
   );
 
   return (
