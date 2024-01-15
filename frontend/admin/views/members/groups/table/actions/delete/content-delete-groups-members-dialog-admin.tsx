@@ -2,7 +2,6 @@ import { useTranslations } from 'next-intl';
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import {
@@ -20,7 +19,6 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { mutationApi } from './mutation-api';
 import { usePathname, useRouter } from '@/i18n';
-import { APIKeys } from '@/graphql/api-keys';
 
 interface Props {
   data: Pick<ShowAdminGroups, 'id' | 'name'>;
@@ -31,7 +29,6 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
   const tCore = useTranslations('core');
   const { convertText } = useTextLang();
   const name = convertText(data.name);
-  const queryClient = useQueryClient();
   const { setOpen } = useAlertDialog();
   const pathname = usePathname();
   const { push } = useRouter();
@@ -60,9 +57,6 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
     }
 
     push(pathname);
-    queryClient.refetchQueries({
-      queryKey: [APIKeys.GROUPS_MEMBERS_ADMIN]
-    });
 
     toast.success(t('success'));
 

@@ -52,15 +52,6 @@ export class CreateForumsPostsService {
       }))
     );
 
-    // Add post to timeline
-    if (!skipTimeLine) {
-      await this.databaseService.db.insert(forum_posts_timeline).values({
-        created: currentDate(),
-        post_id: post.id,
-        topic_id
-      });
-    }
-
     const data = await this.databaseService.db.query.forum_posts.findFirst({
       where: (table, { eq }) => eq(table.id, post.id),
       with: {
@@ -78,6 +69,29 @@ export class CreateForumsPostsService {
       }
     });
 
-    return data;
+    // Add post to timeline
+    if (!skipTimeLine) {
+      const timelineItem = await this.databaseService.db
+        .insert(forum_posts_timeline)
+        .values({
+          created: currentDate(),
+          post_id: post.id,
+          topic_id
+        })
+        .returning();
+
+      const { id } = timelineItem[0];
+
+      return {
+        post_id: data.id,
+        ...data,
+        id
+      };
+    }
+
+    return {
+      post_id: post.id,
+      ...data
+    };
   }
 }

@@ -13,18 +13,25 @@ import { DivMotion } from '@/components/animations/div-motion';
 interface Props {
   content: TextLanguage[];
   created: number;
-  id: number;
+  post_id: number;
   user: User;
+  disableInitialAnimation?: boolean;
 }
 
-export const PostTopic = ({ content, created, id, user }: Props) => {
+export const PostTopic = ({
+  content,
+  created,
+  disableInitialAnimation,
+  post_id: id,
+  user
+}: Props) => {
   const t = useTranslations('forum.topics');
   const tCore = useTranslations('core');
 
   return (
     <DivMotion
       key={`post_${id}`}
-      initial={{ opacity: 0, y: 50 }}
+      initial={disableInitialAnimation ? false : { opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 50 }}
       className="rounded-lg border bg-card text-card-foreground shadow-sm"

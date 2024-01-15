@@ -16,10 +16,10 @@ const icon: {
 
 export const MetaTagTopic = ({
   action,
+  action_id: id,
   created,
-  id,
   user
-}: Pick<ShowPostsForumsMetaTags, 'created' | 'action' | 'user' | 'id'>) => {
+}: Pick<ShowPostsForumsMetaTags, 'created' | 'action' | 'user' | 'action_id'>) => {
   const t = useTranslations('forum.topics.actions.meta');
   const Icon = icon[action] ? icon[action] : Tag;
 

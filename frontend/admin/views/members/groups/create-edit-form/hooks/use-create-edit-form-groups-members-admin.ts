@@ -2,7 +2,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import { zodTextLanguageInputType } from '@/components/text-language-input';
@@ -12,7 +11,6 @@ import { mutationEditApi } from './mutation-edit-api';
 import { useDialog } from '@/components/ui/dialog';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 import { usePathname, useRouter } from '@/i18n';
-import { APIKeys } from '@/graphql/api-keys';
 
 export interface CreateEditFormGroupsMembersAdminArgs {
   data?: Pick<ShowAdminGroups, 'name' | 'id'>;
@@ -24,7 +22,6 @@ export const useCreateEditFormGroupsMembersAdmin = ({
   const t = useTranslations('admin.members.groups');
   const tCore = useTranslations('core');
   const { setOpen } = useDialog();
-  const queryClient = useQueryClient();
   const { convertText } = useTextLang();
   const pathname = usePathname();
   const { push } = useRouter();
@@ -72,10 +69,6 @@ export const useCreateEditFormGroupsMembersAdmin = ({
     }
 
     push(pathname);
-
-    queryClient.refetchQueries({
-      queryKey: [APIKeys.GROUPS_MEMBERS_ADMIN]
-    });
 
     toast.success(data ? t('edit.success') : t('create.success'), {
       description: convertText(values.name)

@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { Lock, MessagesSquare } from 'lucide-react';
+import { Fragment } from 'react';
 
 import { badgeVariants } from '@/components/ui/badge';
 import { Link } from '@/i18n';
@@ -72,22 +73,33 @@ export const TopicView = ({ data: dataApi }: Props) => {
         </div>
 
         <WrapperPosts>
-          <AnimatePresenceClient initial={false}>
-            <PostTopic id={id} content={content} user={user} created={created} />
+          <PostTopic
+            post_id={id}
+            content={content}
+            user={user}
+            created={created}
+            disableInitialAnimation
+          />
 
-            <HeaderPosts totalComments={pageInfo.totalCount} />
+          <HeaderPosts totalComments={pageInfo.totalCount} />
 
+          <AnimatePresenceClient key={`topic_posts_${id}`} initial={false}>
             {edgesPosts.length > 0 && (
               <>
                 <ListPosts
+                  id="first"
                   edges={pageInfo.totalCount <= 20 ? [...edgesPosts, ...lastEdges] : edgesPosts}
                 />
 
-                {pageInfo.totalCount > 20 && (
-                  <>
-                    <LoadMorePosts count={pageInfo.totalCount - 20} />
-                    <ListPosts edges={lastEdges} />
-                  </>
+                {pageInfo.totalCount > 20 && pageInfo.endCursor && (
+                  <Fragment key="test">
+                    <LoadMorePosts
+                      totalCount={pageInfo.totalCount}
+                      endCursor={pageInfo.endCursor}
+                      initialCount={edgesPosts.length + lastEdges.length}
+                    />
+                    <ListPosts id="last" edges={lastEdges} />
+                  </Fragment>
                 )}
               </>
             )}

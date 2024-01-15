@@ -371,11 +371,13 @@ type ShowPostsForums {
   content: [TextLanguage!]!
   created: Int!
   id: Int!
+  post_id: Int!
   user: User!
 }
 
 type ShowPostsForumsMetaTags {
   action: TopicActions!
+  action_id: Int!
   created: Int!
   id: Int!
   user: User!

@@ -14,33 +14,36 @@ registerEnumType(TopicActions, {
 });
 
 @ObjectType()
-export class ShowPostsForumsMetaTags {
+class ShowPostsForumsItemCommon {
   @Field(() => Int)
   id: number;
-
-  @Field(() => TopicActions)
-  action: string;
-
-  @Field(() => User)
-  user: User;
 
   @Field(() => Int)
   created: number;
 }
 
 @ObjectType()
-export class ShowPostsForums {
+export class ShowPostsForumsMetaTags extends ShowPostsForumsItemCommon {
   @Field(() => Int)
-  id: number;
+  action_id: number;
+
+  @Field(() => TopicActions)
+  action: string;
+
+  @Field(() => User)
+  user: User;
+}
+
+@ObjectType()
+export class ShowPostsForums extends ShowPostsForumsItemCommon {
+  @Field(() => Int)
+  post_id: number;
 
   @Field(() => [TextLanguage])
   content: TextLanguage[];
 
   @Field(() => User)
   user: User;
-
-  @Field(() => Int)
-  created: number;
 }
 
 const PostsWithMetaTagsUnion = createUnionType({
