@@ -1,0 +1,72 @@
+query Forum_posts__show_more(
+  $id: Int!
+  $first: Int
+  $cursor: Int
+  $last: Int
+  $sortBy: ShowPostsForumsSortingEnum
+) {
+  forum_posts__show(topic_id: $id, cursor: $cursor, first: $first, last: $last, sortBy: $sortBy) {
+    edges {
+      __typename
+      ... on ShowPostsForums {
+        content {
+          value
+          language_code
+        }
+        id
+        user {
+          avatar_color
+          avatar {
+            id
+            dir_folder
+            name
+          }
+          group {
+            id
+            name {
+              language_code
+              value
+            }
+          }
+          id
+          name_seo
+          name
+        }
+        created
+        post_id
+      }
+      ... on ShowPostsForumsMetaTags {
+        action
+        id
+        user {
+          avatar_color
+          avatar {
+            id
+            dir_folder
+            name
+          }
+          group {
+            id
+            name {
+              language_code
+              value
+            }
+          }
+          id
+          name_seo
+          name
+        }
+        created
+        action_id
+      }
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+  }
+}

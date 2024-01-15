@@ -1,25 +1,43 @@
-import { useTranslations } from 'next-intl';
+'use client';
 
-import { Button } from '@/components/ui/button';
+import { useMorePosts } from '@/hooks/forums/forum/posts/use-more-posts';
+import { ButtonLoadMorePosts } from './button';
+import { ListPosts } from '../list';
+import { cx } from '@/functions/classnames';
 
 interface Props {
-  count: number;
+  endCursor: number;
+  initialCount: number;
+  totalCount: number;
 }
 
-export const LoadMorePosts = ({ count }: Props) => {
-  const t = useTranslations('forum.topics');
+export const LoadMorePosts = ({ endCursor, initialCount, totalCount }: Props) => {
+  const { data, fetchNextPage, isFetching } = useMorePosts({
+    totalCount,
+    initialCount,
+    endCursor
+  });
+  const countToLoad = totalCount - data.length - 20;
 
   return (
-    <div className="relative py-5">
-      <div className="absolute inset-0 flex items-center">
-        <span className="w-full border-t-4 border-dashed" />
-      </div>
+    <>
+      {data.length > 0 && (
+        <ListPosts
+          id="load_more_posts"
+          className={cx('py-5', {
+            'pb-0': countToLoad > 0
+          })}
+          edges={data}
+        />
+      )}
 
-      <div className="relative flex justify-center">
-        <Button variant="outline" size="sm">
-          {t('load_more_comments', { count })}
-        </Button>
-      </div>
-    </div>
+      {countToLoad > 0 && (
+        <ButtonLoadMorePosts
+          count={countToLoad}
+          fetchNextPage={fetchNextPage}
+          isFetching={isFetching}
+        />
+      )}
+    </>
   );
 };

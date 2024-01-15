@@ -108,15 +108,21 @@ export class ShowPostsForumsService {
     const output = outputPagination({
       edges: edges.map(edge => {
         if (edge.topic_log) {
+          const { id, ...actions } = edge.topic_log;
+
           return {
             ...edge,
-            ...edge.topic_log
+            action_id: id,
+            ...actions
           };
         }
 
+        const { id, ...post } = edge.post;
+
         return {
           ...edge,
-          ...edge.post
+          post_id: id,
+          ...post
         };
       }),
       totalCount,
@@ -190,15 +196,21 @@ export class ShowPostsForumsService {
         ...output,
         lastEdges: lastEdges.reverse().map(edge => {
           if (edge.topic_log) {
+            const { id, ...actions } = edge.topic_log;
+
             return {
               ...edge,
-              ...edge.topic_log
+              action_id: id,
+              ...actions
             };
           }
 
+          const { id, ...post } = edge.post;
+
           return {
             ...edge,
-            ...edge.post
+            post_id: id,
+            ...post
           };
         })
       };

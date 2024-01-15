@@ -81,6 +81,7 @@ query Forum_topics__show(
           name
         }
         created
+        post_id
       }
       ... on ShowPostsForumsMetaTags {
         action
@@ -104,6 +105,7 @@ query Forum_topics__show(
           name
         }
         created
+        action_id
       }
     }
     pageInfo {
@@ -141,6 +143,7 @@ query Forum_topics__show(
           name
         }
         created
+        post_id
       }
       ... on ShowPostsForumsMetaTags {
         action
@@ -164,6 +167,7 @@ query Forum_topics__show(
           name
         }
         created
+        action_id
       }
     }
   }
