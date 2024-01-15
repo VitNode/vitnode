@@ -7,17 +7,18 @@ import { cx } from '@/functions/classnames';
 
 interface Props {
   endCursor: number;
+  firstEdges: number;
   initialCount: number;
   totalCount: number;
 }
 
-export const LoadMorePosts = ({ endCursor, initialCount, totalCount }: Props) => {
+export const LoadMorePosts = ({ endCursor, firstEdges, initialCount, totalCount }: Props) => {
   const { data, fetchNextPage, isFetching } = useMorePosts({
     totalCount,
     initialCount,
     endCursor
   });
-  const countToLoad = totalCount - data.length - 20;
+  const countToLoad = totalCount - data.length - firstEdges * 2;
 
   return (
     <>

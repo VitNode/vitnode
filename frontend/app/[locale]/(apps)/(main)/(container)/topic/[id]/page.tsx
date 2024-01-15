@@ -12,6 +12,8 @@ import {
 import { getIdFormString } from '@/functions/url';
 import { ErrorView } from '@/themes/default/core/views/global/error/error-view';
 
+const firstEdges = 25;
+
 const getData = async ({ id, sort }: { id: string; sort: string | undefined }) => {
   let sortBy: ShowPostsForumsSortingEnum | undefined;
   if (sort === ShowPostsForumsSortingEnum.newest) {
@@ -25,7 +27,7 @@ const getData = async ({ id, sort }: { id: string; sort: string | undefined }) =
     variables: {
       id: getIdFormString(id),
       sortBy,
-      firstEdges: 10
+      firstEdges
     },
     headers: {
       Cookie: cookies().toString()
@@ -62,5 +64,5 @@ export default async function Page({ params: { id }, searchParams: { sort } }: P
     notFound();
   }
 
-  return <TopicView data={data} />;
+  return <TopicView data={data} firstEdges={firstEdges} />;
 }

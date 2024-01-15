@@ -59,6 +59,18 @@ query Forum_forums__show_item($cursor: Int, $first: Int, $last: Int, $forumId: I
           }
         }
       }
+      content {
+        language_code
+        value
+      }
+      forum {
+        id
+        name {
+          language_code
+          value
+        }
+      }
+      locked
     }
     pageInfo {
       count
