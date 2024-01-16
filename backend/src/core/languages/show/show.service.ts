@@ -12,7 +12,7 @@ import { DatabaseService } from '@/database/database.service';
 import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
 import { core_languages } from '@/src/admin/core/database/schema/languages';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
-import { configPath } from '@/functions/generate-config-file';
+import { configPath } from '@/config';
 
 @Injectable()
 export class ShowCoreLanguageService {

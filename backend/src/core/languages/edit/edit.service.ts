@@ -10,7 +10,7 @@ import { ConfigType } from '@/types/config.type';
 import { DatabaseService } from '@/database/database.service';
 import { NotFoundError } from '@/utils/errors/not-found-error';
 import { core_languages } from '@/src/admin/core/database/schema/languages';
-import { configPath } from '@/functions/generate-config-file';
+import { configPath } from '@/config';
 
 @Injectable()
 export class EditCoreLanguageService {
