@@ -23,7 +23,9 @@ To display text you can use `useTextLang` hook.
 
 ```tsx
 import { useTextLang } from '@/hooks/core/use-text-lang';
+```
 
+```tsx
 const { convertText } = useTextLang();
 
 const text = convertText(value);
@@ -41,7 +43,9 @@ import { useTranslations } from 'next-intl';
 
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { TextLanguageInput } from '@/components/text-language-input';
+```
 
+```tsx
 export const MainCreateActionsGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.groups.create.form');
   const form = useFormContext();
@@ -70,7 +74,9 @@ export const MainCreateActionsGroupsMembersAdmin = () => {
 import * as z from 'zod';
 
 import { zodTextLanguageInputType } from '@/components/text-language-input';
+```
 
+```tsx
 const formSchema = z.object({
   name: zodTextLanguageInputType
 });
@@ -83,7 +89,9 @@ import { useTranslations } from 'next-intl';
 import * as z from 'zod';
 
 import { zodTextLanguageInputType } from '@/components/text-language-input';
+```
 
+```tsx
 const t = useTranslations('core');
 const formSchema = z.object({
   name: zodTextLanguageInputType.min(1, t('forms.empty'))

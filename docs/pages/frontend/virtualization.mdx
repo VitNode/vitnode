@@ -1,11 +1,65 @@
+import { Callout } from 'nextra/components';
+
 # Virtualization
 
-Test
+VitNode has [react-virtuoso](https://virtuoso.dev/) lib for virtualization. It is a React component that uses virtual rendering to be efficient with large data sets. It renders only the items currently visible in the list.
+
+<Callout type="info" emoji="ℹ️">
+  This is a `client` component. Make sure to use it only in client code.
+</Callout>
 
 ## Example use
 
-Test
+```tsx
+'use client';
 
-## Use useCallback to avoid unnecessary re-renders for components
+import { Virtuoso } from 'react-virtuoso';
 
-Test
+import { type ShowTopicsForumsObj } from '@/graphql/hooks';
+import { ItemTopicListForum } from './item';
+import { useTopicsList } from '@/hooks/forums/forum/use-topics-list';
+import { Loader } from '@/components/loader/loader';
+```
+
+```tsx
+<Virtuoso
+  data={data}
+  useWindowScroll
+  endReached={() => {
+    if (hasNextPage) {
+      fetchNextPage();
+    }
+  }}
+  components={{
+    Footer: () => {
+      if (!isFetching) return null;
+
+      return <Loader className="mt-4" />;
+    }
+  }}
+  itemContent={(index, data) => <ItemTopicListForum {...data} />}
+/>
+```
+
+## Use forwardRef for components
+
+If you want to use `List` component inside `Virtuoso` component, you should use `forwardRef` to avoid unnecessary re-renders for components.
+
+```tsx
+import { forwardRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { VirtuosoGrid, type Components } from 'react-virtuoso';
+```
+
+```tsx
+const List: Components['List'] = forwardRef(
+  ({ children, style }: { children?: ReactNode; style?: CSSProperties }, ref) => {
+    return (
+      <div className="flex flex-wrap items-center relative" style={style} ref={ref}>
+        {children}
+      </div>
+    );
+  }
+);
+
+List.displayName = 'List';
+```
