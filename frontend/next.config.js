@@ -10,6 +10,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 module.exports = withBundleAnalyzer(
   withNextIntl({
+    output: 'standalone',
     transpilePackages: ['lucide-react'],
     images: {
       formats: ['image/avif', 'image/webp'],
