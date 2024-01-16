@@ -8,10 +8,8 @@ README.md
 frontend/.next
 .git
 .gitignore
-.prettierrc
 commitlint.config.js
 LICENSE.md
-prettier.config.mjs
 .github
 .husky
 .vscode

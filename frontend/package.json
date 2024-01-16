@@ -9,7 +9,7 @@
     "dev:turbo": "next dev --turbo",
     "build": "next build",
     "analyze": "cross-env ANALYZE=true pnpm build",
-    "start": "next start",
+    "start": "node .next/standalone/frontend/server.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix --fix",
     "codegen": "graphql-codegen --config codegen.ts"
