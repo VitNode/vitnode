@@ -1,5 +1,4 @@
-import type { InfiniteData } from '@tanstack/react-query';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient, type InfiniteData } from '@tanstack/react-query';
 
 import { APIKeys } from '@/graphql/api-keys';
 import { fetcher } from '@/graphql/fetcher';

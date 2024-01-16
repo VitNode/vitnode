@@ -48,7 +48,7 @@ export const useTopicsList = ({ initData }: Args) => {
     getNextPageParam: ({ forum_topics__show: { pageInfo } }) => {
       if (pageInfo.hasNextPage) {
         return {
-          first: 10,
+          first: FIRST,
           cursor: pageInfo.endCursor
         };
       }

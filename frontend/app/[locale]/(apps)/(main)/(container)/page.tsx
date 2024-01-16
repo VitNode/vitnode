@@ -11,7 +11,6 @@ import {
 const getData = async () => {
   const { data } = await fetcher<Forum_Forums__ShowQuery, Forum_Forums__ShowQueryVariables>({
     query: Forum_Forums__Show,
-
     headers: {
       Cookie: cookies().toString()
     }
