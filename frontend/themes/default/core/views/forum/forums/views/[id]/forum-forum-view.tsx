@@ -55,7 +55,7 @@ export const ForumForumView = ({ data: { forum_forums__show, forum_topics__show 
       <Card>
         <CardContent className="p-0">
           {forum_topics__show.edges.length > 0 ? (
-            <TopicsListForum data={forum_topics__show.edges} />
+            <TopicsListForum initData={forum_topics__show} />
           ) : (
             <div className="p-5 flex flex-col items-center justify-center gap-4 text-center">
               <span>{t('not_found')}</span>

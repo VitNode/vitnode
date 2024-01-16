@@ -18,7 +18,8 @@ const getData = async ({ id }: { id: string }) => {
   >({
     query: Forum_Forums__Show_Item,
     variables: {
-      forumId: getIdFormString(id)
+      forumId: getIdFormString(id),
+      first: 25
     },
     headers: {
       Cookie: cookies().toString()

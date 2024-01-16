@@ -12,7 +12,7 @@ const allowedSorting = ['oldest', 'newest'];
 export const SortingHeaderPosts = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const { push } = useRouter();
+  const { replace } = useRouter();
   const t = useTranslations('forum.topics.sorting');
   const sortValue = allowedSorting.includes(searchParams.get('sort') ?? '')
     ? searchParams.get('sort') ?? 'oldest'
@@ -25,13 +25,13 @@ export const SortingHeaderPosts = () => {
 
     if (value !== 'oldest') {
       newSearchParams.set('sort', value);
-      push(`${pathname}?${newSearchParams.toString()}`);
+      replace(`${pathname}?${newSearchParams.toString()}`);
 
       return;
     }
 
     newSearchParams.delete('sort');
-    push(pathname);
+    replace(pathname);
   };
 
   return (

@@ -37,7 +37,7 @@ export class ShowTopicsForumsService {
       last,
       primaryCursor: { order: 'ASC', key: 'id', schema: forum_topics.id },
       defaultSortBy: {
-        direction: SortDirectionEnum.asc,
+        direction: SortDirectionEnum.desc,
         column: 'created'
       }
     });

@@ -1,15 +1,51 @@
-# Best practices
-
 import { Callout } from 'nextra/components';
 
-<Callout type="warning" emoji="⚠️">
-  This page is in progress.
-</Callout>
+# Best practices
 
 ## Use rem instead of px
 
-test
+<Callout type="error" emoji="❌">
+  Avoid
+  
+```tsx
+<div className="w-[16px]" />
+```
+
+</Callout>
+
+<Callout type="default" emoji="✅">
+  Do this instead
+  
+```tsx
+<div className="w-5" />
+```
+
+or
+
+```tsx
+<div className="w-[1rem]" />
+```
+
+</Callout>
+
+Ref: [width - TailwindCSS](https://tailwindcss.com/docs/width)
 
 ## cx instead of classnames
 
-test
+<Callout type="error" emoji="❌">
+Avoid
+
+```tsx
+import cs from 'classnames';
+```
+
+</Callout>
+
+<Callout type="default" emoji="✅">
+  Do this instead
+  
+```tsx
+import { cx } from '@/functions/classnames';
+```
+
+</Callout>

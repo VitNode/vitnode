@@ -1,6 +1,5 @@
 import { useTranslations } from 'next-intl';
 import { Lock, MessagesSquare } from 'lucide-react';
-import { Fragment } from 'react';
 
 import { badgeVariants } from '@/components/ui/badge';
 import { Link } from '@/i18n';
@@ -19,9 +18,10 @@ import { AnimatePresenceClient } from '@/components/animations/animate-presence'
 
 interface Props {
   data: Forum_Topics__ShowQuery;
+  firstEdges: number;
 }
 
-export const TopicView = ({ data: dataApi }: Props) => {
+export const TopicView = ({ data: dataApi, firstEdges }: Props) => {
   const t = useTranslations('forum.topics');
   const { convertNameToLink, convertText } = useTextLang();
 
@@ -88,18 +88,23 @@ export const TopicView = ({ data: dataApi }: Props) => {
               <>
                 <ListPosts
                   id="first"
-                  edges={pageInfo.totalCount <= 20 ? [...edgesPosts, ...lastEdges] : edgesPosts}
+                  edges={
+                    pageInfo.totalCount <= firstEdges * 2
+                      ? [...edgesPosts, ...lastEdges]
+                      : edgesPosts
+                  }
                 />
 
-                {pageInfo.totalCount > 20 && pageInfo.endCursor && (
-                  <Fragment key="test">
+                {pageInfo.totalCount > firstEdges * 2 && pageInfo.endCursor && (
+                  <>
                     <LoadMorePosts
                       totalCount={pageInfo.totalCount}
                       endCursor={pageInfo.endCursor}
                       initialCount={edgesPosts.length + lastEdges.length}
+                      firstEdges={firstEdges}
                     />
                     <ListPosts id="last" edges={lastEdges} />
-                  </Fragment>
+                  </>
                 )}
               </>
             )}

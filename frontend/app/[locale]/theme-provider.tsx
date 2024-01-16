@@ -14,7 +14,8 @@ export const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
       new QueryClient({
         defaultOptions: {
           queries: {
-            refetchOnWindowFocus: false
+            refetchOnWindowFocus: false,
+            refetchOnMount: false
           }
         }
       })

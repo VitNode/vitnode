@@ -1,7 +1,8 @@
 {
   "components": "Components",
-  "theme": "Theme Mode",
   "graphql": "GraphQL",
+  "fetch": "Fetch and Revalidate Data",
+  "theme": "Theme Mode",
   "forms": "Forms",
   "notifications": "Notifications",
   "users": "Users",

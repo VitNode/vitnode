@@ -1,0 +1,96 @@
+import { Steps } from 'nextra/components';
+import { FileTree } from 'nextra/components';
+
+# GraphGL
+
+Frontend communicates with the backend via GraphQL and use SSR to fetching data. The GraphQL queries are defined in the `graphql/queries` or `graphql/mutation` folder. The queries are then used in the frontend components.
+
+## Generate GraphQL Types
+
+VitNode use [GraphQL Codegen](https://the-guild.dev/graphql/codegen) to generate types for GraphQL queries. The types are generated in the `graphql/hooks.ts` file.
+
+<Steps>
+### Find Query or Mutation
+
+First we need to define the GraphQL query in the `graphql/queries/${module_name}` (if you want query) or `graphql/mutations/${module_name}` folder.  
+You can find list of available queries in your API.
+
+If you are running development server go to [http://localhost:8080/graphql](http://localhost:8080/graphql) to see the list of available queries.
+
+### Define Query
+
+When you find the query or mutation you want to use, copy the query/mutation and paste it in a new file with `.gql` extension. Remember to sort the query by module.
+
+For example file `graphql/queries/module_name/authorization.gql`:
+
+```graphql
+query Authorization_custom_app {
+  authorization_custom_app {
+    user {
+      email
+    }
+  }
+}
+```
+
+### Generate Types
+
+After defining the query, you can generate the types by running the following command:
+
+```bash
+npm run codegen
+```
+
+The command will overwrite the `graphql/hooks.ts` file.
+
+</Steps>
+
+## Use Query in Component
+
+After generating the types, you can use the query in the frontend component.
+
+<Steps>
+
+### Create Folder for Hook
+
+Create a new hook inside your folder component. Your schema should be similar like this:
+
+<FileTree>
+  <FileTree.Folder name="hooks" defaultOpen>
+    <FileTree.Folder name="module_name" defaultOpen>
+      <FileTree.Folder name="overview" defaultOpen>
+        <FileTree.File name="use-overview-view.ts" />
+      </FileTree.Folder>
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+### Create Hook
+
+Inside your hook (for example `use-overview-view.ts` file) import `useQuery` from `@tanstack/react-query`.
+
+```ts
+import { useQuery } from '@tanstack/react-query';
+
+import { fetcher } from '@/graphql/fetcher';
+import {
+  Authorization_Custom_App,
+  Authorization_Custom_AppQuery,
+  Authorization_Custom_AppQueryVariables
+} from '@/graphql/hooks';
+
+export const useOverviewView = () => {
+  return useQuery({
+    queryKey: ['Authorization_Custom_App'],
+    queryFn: async () =>
+      await fetcher<Authorization_Custom_AppQuery, Authorization_Custom_AppQueryVariables>({
+        query: Authorization_Custom_App
+      }),
+    placeholderData: previousData => previousData
+  });
+};
+```
+
+You can read more about `fetching data` in [Fetch and Revalidate Data](/frontend/fetch).
+
+</Steps>
