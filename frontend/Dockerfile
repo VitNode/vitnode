@@ -12,6 +12,7 @@ WORKDIR /app
 COPY package.json ./
 RUN pnpm i
 
+# Build the app
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
@@ -20,6 +21,7 @@ COPY . .
 RUN pnpm config:init
 RUN pnpm build
 
+# Run the app
 FROM base AS runner
 WORKDIR /app
 

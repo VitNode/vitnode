@@ -10,6 +10,15 @@ services:
     ports:
       - '3000:3000'
 
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    # tagert: development or backend
+    ports:
+      - '8080:8080'
+
   postgres:
     image: postgres:16.1-alpine
     restart: always
