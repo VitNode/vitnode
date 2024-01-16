@@ -1,5 +1,4 @@
 import * as fs from 'fs';
-import { join } from 'path';
 
 import { Injectable } from '@nestjs/common';
 import { count } from 'drizzle-orm';
@@ -13,13 +12,14 @@ import { DatabaseService } from '@/database/database.service';
 import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
 import { core_languages } from '@/src/admin/core/database/schema/languages';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+import { configPath } from '@/functions/generate-config-file';
 
 @Injectable()
 export class ShowCoreLanguageService {
   constructor(private databaseService: DatabaseService) {}
 
   async show({ cursor, first, last }: ShowCoreLanguagesArgs): Promise<ShowCoreLanguagesObj> {
-    const configFile = fs.readFileSync(join('..', 'config.json'), 'utf8');
+    const configFile = fs.readFileSync(configPath, 'utf8');
     const config: ConfigType = JSON.parse(configFile);
 
     const pagination = await inputPaginationCursor({

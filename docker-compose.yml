@@ -1,6 +1,14 @@
 version: '3.8'
 
 services:
+  # frontend:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   restart: always
+  #   ports:
+  #     - '3000:3000'
+
   postgres:
     image: postgres:16.1-alpine
     restart: always
@@ -26,7 +34,6 @@ services:
     restart: always
     ports:
       - '6379:6379'
-
-volumes:
-  db:
-    driver: local
+# volumes:
+#   db:
+#     driver: local

@@ -1,11 +1,10 @@
-import configs from '~/config.json';
-
 import type { ReactNode } from 'react';
 import { cookies, headers } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
 import { isRedirectError } from 'next/dist/client/components/redirect';
 
+import configs from '@/config.json';
 import { AdminLayout } from '@/admin/layout/admin-layout';
 import { SessionAdminProvider } from './session-admin-provider';
 import { redirect } from '@/i18n';

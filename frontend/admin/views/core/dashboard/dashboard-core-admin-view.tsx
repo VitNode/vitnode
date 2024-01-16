@@ -1,7 +1,6 @@
-import corePackages from '~/package.json';
-
 import { useTranslations } from 'next-intl';
 
+import corePackages from '@/package.json';
 import { HeaderContent } from '@/components/header-content/header-content';
 
 export const DashboardCoreAdminView = () => {
