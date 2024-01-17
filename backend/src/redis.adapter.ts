@@ -8,12 +8,13 @@ export class RedisIoAdapter extends IoAdapter {
 
   async connectToRedis(): Promise<void> {
     const envs = {
-      url: process.env.REDIS_URL,
+      host: process.env.REDIS_HOST,
+      port: process.env.REDIS_PORT,
       password: process.env.REDIS_PASSWORD
     };
 
     const config = {
-      url: envs.url ? envs.url : 'redis://localhost:6379',
+      url: envs.host && envs.port ? `redis://${envs.host}:${envs.port}` : 'redis://localhost:6379',
       password: envs.password ? envs.password : ''
     };
 

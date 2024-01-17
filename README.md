@@ -1,3 +1,5 @@
+[![Header VitNode GitHub](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/public/vitnode_cover_github.jpg 'Header VitNode GitHub')](https://vitnode.com/)
+
 # VitNode
 
 > [!WARNING]

@@ -1,10 +1,9 @@
-import configs from '~/config.json';
-
 import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider, type AbstractIntlMessages } from 'next-intl';
 import { Inter } from 'next/font/google';
 
+import configs from '@/config.json';
 import { ThemeProvider } from './theme-provider';
 
 const inter = Inter({

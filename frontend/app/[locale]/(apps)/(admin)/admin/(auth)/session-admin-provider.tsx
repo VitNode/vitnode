@@ -1,9 +1,8 @@
 'use client';
 
-import configs from '~/config.json';
-
 import type { ReactNode } from 'react';
 
+import configs from '@/config.json';
 import type { Admin_Sessions__AuthorizationQuery } from '@/graphql/hooks';
 import { SessionAdminContext } from '@/admin/hooks/use-session-admin';
 

@@ -1,8 +1,5 @@
-import { useRouter } from 'next/router';
-import { DocsThemeConfig } from 'nextra-theme-docs';
-
-const config: DocsThemeConfig = {
-  logo: (
+export const LogoVitNode = () => {
+  return (
     <svg
       width="162"
       height="40"
@@ -45,42 +42,5 @@ const config: DocsThemeConfig = {
         fill="#0162C3"
       />
     </svg>
-  ),
-  primaryHue: 210,
-  primarySaturation: 100,
-  footer: {
-    text: <span>VitNode © {new Date().getFullYear()}</span>
-  },
-  project: {
-    link: 'https://github.com/aXenDeveloper/vitnode/'
-  },
-  docsRepositoryBase: 'https://github.com/aXenDeveloper/vitnode/tree/canary/docs',
-  useNextSeoProps() {
-    const { asPath } = useRouter();
-    if (asPath !== '/') {
-      return {
-        titleTemplate: '%s – VitNode'
-      };
-    }
-
-    return {
-      titleTemplate: 'VitNode - Headless CMS in NodeJS and React'
-    };
-  },
-  sidebar: {
-    titleComponent({ title, type }) {
-      if (type === 'separator') {
-        return <span className="cursor-default">{title}</span>;
-      }
-      return <>{title}</>;
-    },
-    // defaultMenuCollapseLevel: 1,
-    toggleButton: true
-  },
-  banner: {
-    key: '0.0.0-alpha',
-    text: "🛠️ VitNode is still in development and hasn't any release yet! You can try it out, but it is not recommended to use it now."
-  }
+  );
 };
-
-export default config;

@@ -1,5 +1,4 @@
 import * as fs from 'fs';
-import { join } from 'path';
 
 import { Injectable } from '@nestjs/common';
 import { count } from 'drizzle-orm';
@@ -13,6 +12,7 @@ import { core_languages } from '@/src/admin/core/database/schema/languages';
 import { core_groups, core_groups_names } from '@/src/admin/core/database/schema/groups';
 import { core_admin_permissions } from '@/src/admin/core/database/schema/admins';
 import { core_moderators_permissions } from '../../database/schema/moderators';
+import { configPath } from '@/config';
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {
@@ -26,7 +26,7 @@ export class CreateDatabaseAdminInstallService {
   }
 
   async create(): Promise<string> {
-    const configFile = fs.readFileSync(join('..', 'config.json'), 'utf8');
+    const configFile = fs.readFileSync(configPath, 'utf8');
     const config: ConfigType = JSON.parse(configFile);
 
     if (config.finished_install) {
