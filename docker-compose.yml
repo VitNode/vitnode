@@ -1,49 +1,72 @@
 version: '3.8'
 
 services:
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    restart: always
-    # tagert: development or frontend
-    ports:
-      - '3000:3000'
-
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    restart: always
-    # tagert: development or backend
-    ports:
-      - '8080:8080'
-
   postgres:
     image: postgres:16.1-alpine
-    restart: always
+    restart: on-failure
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: vitnode
-    command: ['postgres', '-c', 'log_statement=all']
+    command: ['postgres', '-c', 'log_statement=all'] # log all sql queries
     ports:
       - '5432:5432'
+    networks:
+      - vitnode
 
   pgadmin:
     image: dpage/pgadmin4:latest
-    restart: always
+    restart: on-failure
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
       - '5050:80'
+    networks:
+      - vitnode
 
   redis:
     image: redis:7.2.3-alpine
-    restart: always
+    restart: on-failure
     ports:
       - '6379:6379'
-# volumes:
-#   db:
-#     driver: local
+    networks:
+      - vitnode
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: on-failure
+    # tagert: development or backend
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=vitnode
+    ports:
+      - '8080:8080'
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - vitnode
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: on-failure
+    environment:
+      - NEXT_PUBLIC_GRAPHQL_URL=http://backend:8080
+    # tagert: development or frontend
+    ports:
+      - '3000:3000'
+    networks:
+      - vitnode
+
+networks:
+  vitnode:
