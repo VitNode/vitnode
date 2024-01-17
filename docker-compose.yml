@@ -56,6 +56,7 @@ services:
       - vitnode
     volumes:
       - frontend_data:/frontend
+      - ./backend/public:/app/public # for serving static files
 
   frontend:
     build:
