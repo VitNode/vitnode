@@ -54,6 +54,8 @@ services:
       - redis
     networks:
       - vitnode
+    volumes:
+      - frontend_data:/frontend
 
   frontend:
     build:
@@ -67,6 +69,11 @@ services:
       - '3000:3000'
     networks:
       - vitnode
+    volumes:
+      - frontend_data:/app
 
 networks:
   vitnode:
+
+volumes:
+  frontend_data:

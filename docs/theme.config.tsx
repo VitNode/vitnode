@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { DocsThemeConfig } from 'nextra-theme-docs';
 
 const config: DocsThemeConfig = {
@@ -55,8 +56,15 @@ const config: DocsThemeConfig = {
   },
   docsRepositoryBase: 'https://github.com/aXenDeveloper/vitnode/tree/canary/docs',
   useNextSeoProps() {
+    const { asPath } = useRouter();
+    if (asPath !== '/') {
+      return {
+        titleTemplate: '%s – VitNode'
+      };
+    }
+
     return {
-      titleTemplate: '%s - VitNode'
+      titleTemplate: 'VitNode - Headless CMS in NodeJS and React'
     };
   },
   sidebar: {
