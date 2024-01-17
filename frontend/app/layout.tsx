@@ -10,6 +10,9 @@ export function generateMetadata(): Metadata {
     title: {
       default: defaultTitle,
       template: `%s - ${defaultTitle}`
+    },
+    icons: {
+      icon: '/icons/favicon.ico'
     }
   };
 }
