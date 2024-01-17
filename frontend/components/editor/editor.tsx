@@ -94,7 +94,10 @@ export const Editor = ({
           <RichTextPlugin
             contentEditable={
               <div className="relative" ref={floatingAnchorElem}>
-                <ContentEditable className="py-4 px-7 border-0 focus:border-0 focus:outline-none min-h-[10rem] resize-y overflow-auto" />
+                <ContentEditable
+                  ariaLabel={id}
+                  className="py-4 px-7 border-0 focus:border-0 focus:outline-none min-h-[10rem] resize-y overflow-auto"
+                />
               </div>
             }
             placeholder={null}
