@@ -46,6 +46,11 @@ const config: DocsThemeConfig = {
       />
     </svg>
   ),
+  head: (
+    <>
+      <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="48x48" />
+    </>
+  ),
   primaryHue: 210,
   primarySaturation: 100,
   footer: {
