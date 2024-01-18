@@ -11,7 +11,7 @@ export const SignInAdminView = () => {
   return (
     <div className="max-w-[32rem] mx-auto my-10 py-10 flex flex-col gap-5">
       <header className="flex justify-center">
-        <LogoVitNode />
+        <LogoVitNode className="h-16" />
       </header>
 
       <Card>

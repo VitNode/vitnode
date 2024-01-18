@@ -16,7 +16,7 @@ export const LayoutConfigs = ({ children }: Props) => {
   return (
     <div className="container my-10">
       <div className="flex items-center justify-center mb-5">
-        <LogoVitNode />
+        <LogoVitNode className="h-16" />
       </div>
 
       {children}

@@ -18,6 +18,12 @@
     }
   },
   "setup": "🛠️ Get Started",
+  "brands": {
+    "title": "🎨 Brands",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
   "-- For Developers": {
     "type": "separator",
     "title": "For Developers"
