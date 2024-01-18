@@ -47,6 +47,7 @@ services:
       - DB_USER=root
       - DB_PASSWORD=root
       - DB_NAME=vitnode
+      - LOGIN_TOKEN_SECRET=SECRET
     ports:
       - '8080:8080'
     depends_on:
