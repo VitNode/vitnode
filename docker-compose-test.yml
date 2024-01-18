@@ -38,7 +38,6 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     restart: on-failure
-    # tagert: development or backend
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
@@ -67,7 +66,6 @@ services:
         - NEXT_PUBLIC_GRAPHQL_URL=http://backend:8080
         - NEXT_PUBLIC_CLIENT_GRAPHQL_URL=http://localhost:8080
     restart: on-failure
-    # tagert: development or frontend
     ports:
       - '3000:3000'
     networks:
