@@ -89,23 +89,28 @@ export async function fetcher<TData, TVariables>({
     });
   }
 
-  const res = await fetch(`${CONFIG.graphql_url}/graphql`, {
-    method: 'POST',
-    credentials: 'include',
-    mode: 'cors',
-    signal,
-    headers: uploads
-      ? {
-          'x-apollo-operation-name': '*',
-          ...headers
-        }
-      : {
-          'Content-Type': 'application/json',
-          ...headers
-        },
-    body: uploads ? formData : JSON.stringify({ query: getGqlString(query), variables }),
-    next
-  });
+  const isClient = typeof window !== 'undefined' && CONFIG.client_graphql_url;
+
+  const res = await fetch(
+    isClient ? `${CONFIG.client_graphql_url}/graphql` : `${CONFIG.graphql_url}/graphql`,
+    {
+      method: 'POST',
+      credentials: 'include',
+      mode: 'cors',
+      signal,
+      headers: uploads
+        ? {
+            'x-apollo-operation-name': '*',
+            ...headers
+          }
+        : {
+            'Content-Type': 'application/json',
+            ...headers
+          },
+      body: uploads ? formData : JSON.stringify({ query: getGqlString(query), variables }),
+      next
+    }
+  );
 
   const json = await res.json();
 

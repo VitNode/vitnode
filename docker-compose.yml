@@ -62,9 +62,10 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_GRAPHQL_URL=http://backend:8080
+        - NEXT_PUBLIC_CLIENT_GRAPHQL_URL=http://localhost:8080
     restart: on-failure
-    environment:
-      - NEXT_PUBLIC_GRAPHQL_URL=http://backend:8080
     # tagert: development or frontend
     ports:
       - '3000:3000'
