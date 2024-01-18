@@ -77,7 +77,6 @@ const config: DocsThemeConfig = {
       }
       return <>{title}</>;
     },
-    defaultMenuCollapseLevel: 1,
     toggleButton: true
   },
   banner: {

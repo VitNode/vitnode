@@ -10,7 +10,7 @@ services:
     ports:
       - '${DB_PORT:-5432}:${DB_PORT:-5432}'
     volumes:
-      - ./docker/database:/var/lib/postgresql/data
+      - ./docker/prod/database:/var/lib/postgresql/data
     networks:
       - vitnode
 
