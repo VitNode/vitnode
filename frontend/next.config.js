@@ -8,8 +8,15 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true'
 });
 
-module.exports = withBundleAnalyzer(
-  withNextIntl({
+const config = () => {
+  const envBackend = process.env.NEXT_PUBLIC_GRAPHQL_URL ?? 'http://localhost:8080';
+  const backend = {
+    hostname: new URL(envBackend).hostname,
+    port: new URL(envBackend).port,
+    protocol: new URL(envBackend).protocol.replace(':', '')
+  };
+
+  return {
     output: 'standalone',
     transpilePackages: ['lucide-react'],
     images: {
@@ -20,8 +27,16 @@ module.exports = withBundleAnalyzer(
           port: '8080',
           protocol: 'http',
           pathname: '/public/**'
+        },
+        {
+          hostname: backend.hostname,
+          port: backend.port,
+          protocol: backend.protocol,
+          pathname: '/public/**'
         }
       ]
     }
-  })
-);
+  };
+};
+
+module.exports = withBundleAnalyzer(withNextIntl(config()));
