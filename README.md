@@ -1,4 +1,4 @@
-[![Header VitNode GitHub](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/public/vitnode_cover_github.jpg 'Header VitNode GitHub')](https://vitnode.com/)
+[![Header VitNode GitHub](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/public/header.jpg 'Header VitNode GitHub')](https://vitnode.com/)
 
 # VitNode
 

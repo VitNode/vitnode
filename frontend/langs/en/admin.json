@@ -8,6 +8,7 @@
         "title": "Core",
         "dashboard": "Dashboard",
         "general": "General",
+        "plugins": "Plugins",
         "langs": "Languages"
       },
       "members": {
@@ -33,6 +34,9 @@
             }
           }
         }
+      },
+      "plugins": {
+        "title": "Plugins"
       },
       "langs": {
         "title": "Languages",

@@ -13,6 +13,7 @@ import { core_groups, core_groups_names } from '@/src/admin/core/database/schema
 import { core_admin_permissions } from '@/src/admin/core/database/schema/admins';
 import { core_moderators_permissions } from '../../database/schema/moderators';
 import { configPath } from '@/config';
+import { core_plugins } from '../../database/schema/plugins';
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {
@@ -57,6 +58,30 @@ export class CreateDatabaseAdminInstallService {
         name: 'Polski (Polish)',
         timezone: 'Europe/Warsaw',
         created: currentDate()
+      }
+    ]);
+
+    // Create plugins
+    await this.databaseService.db.insert(core_plugins).values([
+      {
+        id: 'core',
+        name: 'Core',
+        version: '0.1.0 Alpha 1',
+        author: 'VitNode',
+        author_url: 'https://vitnode.com/',
+        uploaded: currentDate(),
+        updated: currentDate(),
+        protected: true
+      },
+      {
+        id: 'forum',
+        name: 'Forum',
+        version: '0.1.0 Alpha 1',
+        author: 'VitNode',
+        author_url: 'https://vitnode.com/',
+        uploaded: currentDate(),
+        updated: currentDate(),
+        protected: true
       }
     ]);
 

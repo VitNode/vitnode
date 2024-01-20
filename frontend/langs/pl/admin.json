@@ -8,6 +8,7 @@
         "title": "Rdzeń",
         "dashboard": "Pulpit",
         "general": "Ogólne",
+        "plugins": "Wtyczki",
         "langs": "Języki"
       },
       "members": {
@@ -33,6 +34,9 @@
             }
           }
         }
+      },
+      "plugins": {
+        "title": "Wtyczki"
       },
       "langs": {
         "title": "Języki",
