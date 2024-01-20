@@ -57,8 +57,9 @@ services:
     networks:
       - vitnode
     volumes:
-      - frontend_data:/frontend
-      - ./backend/public:/app/public # for serving static files
+      # - frontend_data:/frontend
+      - ./frontend/config:/frontend/config # config
+      - ./backend/public:/app/public # static files
 
   frontend:
     build:
@@ -73,10 +74,10 @@ services:
     networks:
       - vitnode
     volumes:
-      - frontend_data:/app
+      # - frontend_data:/app
+      - ./frontend/config:/app/config # config
 
 networks:
   vitnode:
-
-volumes:
-  frontend_data:
+# volumes:
+#   frontend_data:

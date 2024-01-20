@@ -1,7 +1,7 @@
 import { getRequestConfig } from 'next-intl/server';
 import { createSharedPathnamesNavigation } from 'next-intl/navigation';
 
-import configs from '@/config.json';
+import configs from '@/config/config.json';
 
 export default getRequestConfig(async ({ locale }) => {
   const messagesFormApps = await Promise.all(

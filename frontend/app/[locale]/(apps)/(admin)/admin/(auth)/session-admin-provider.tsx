@@ -2,7 +2,6 @@
 
 import type { ReactNode } from 'react';
 
-import configs from '@/config.json';
 import type { Admin_Sessions__AuthorizationQuery } from '@/graphql/hooks';
 import { SessionAdminContext } from '@/admin/hooks/use-session-admin';
 
@@ -15,8 +14,7 @@ export const SessionAdminProvider = ({ children, data }: Props) => {
   return (
     <SessionAdminContext.Provider
       value={{
-        session: data.admin_sessions__authorization.user,
-        side_name: configs.side_name
+        session: data.admin_sessions__authorization.user
       }}
     >
       {children}

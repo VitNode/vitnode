@@ -9,6 +9,8 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: vitnode
     command: ['postgres', '-c', 'log_statement=all'] # log all sql queries
+    volumes:
+      - ./docker/dev/database:/var/lib/postgresql/data
     ports:
       - '5432:5432'
     networks:

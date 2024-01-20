@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation';
 import { NextIntlClientProvider, type AbstractIntlMessages } from 'next-intl';
 import { Inter } from 'next/font/google';
 
-import configs from '@/config.json';
 import { ThemeProvider } from './theme-provider';
+import { getConfig } from '@/functions/get-config';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -18,10 +18,11 @@ interface Props {
 }
 
 export default async function LocaleLayout({ children, params: { locale } }: Props) {
+  const config = await getConfig();
   let messages: AbstractIntlMessages;
   try {
     const messagesFormApps = await Promise.all(
-      configs.applications.map(async app => {
+      config.applications.map(async app => {
         return {
           ...(await import(`@/langs/${locale}/${app}.json`)).default
         };
