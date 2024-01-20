@@ -1,7 +1,8 @@
-import { boolean, integer, pgTable, varchar } from 'drizzle-orm/pg-core';
+import { boolean, integer, pgTable, serial, varchar } from 'drizzle-orm/pg-core';
 
 export const core_plugins = pgTable('core_plugins', {
-  id: varchar('id').notNull().primaryKey(),
+  id: serial('id').primaryKey(),
+  code: varchar('code', { length: 255 }).notNull(),
   name: varchar('name', { length: 255 }).notNull(),
   description: varchar('description', { length: 255 }),
   version: varchar('version', { length: 255 }).notNull().default('1.0.0'),

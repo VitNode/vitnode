@@ -64,7 +64,7 @@ export class CreateDatabaseAdminInstallService {
     // Create plugins
     await this.databaseService.db.insert(core_plugins).values([
       {
-        id: 'core',
+        code: 'core',
         name: 'Core',
         version: '0.1.0 Alpha 1',
         author: 'VitNode',
@@ -74,7 +74,7 @@ export class CreateDatabaseAdminInstallService {
         protected: true
       },
       {
-        id: 'forum',
+        code: 'forum',
         name: 'Forum',
         version: '0.1.0 Alpha 1',
         author: 'VitNode',
