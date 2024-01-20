@@ -26,7 +26,7 @@ export default async function Page() {}
   Due to SSR, you need to pass cookies to `fetcher` using `headers` option.
 </Callout>
 
-```ts
+```tsx {1-8,10-20}
 import { cookies } from 'next/headers';
 
 import { fetcher } from '@/graphql/fetcher';
@@ -35,9 +35,7 @@ import {
   type Forum_Forums__ShowQuery,
   type Forum_Forums__ShowQueryVariables
 } from '@/graphql/hooks';
-```
 
-```tsx
 const getData = async (variables: Forum_Forums__ShowQueryVariables) => {
   const { data } = await fetcher<Forum_Forums__ShowQuery, Forum_Forums__ShowQueryVariables>({
     query: Forum_Forums__Show,
@@ -49,11 +47,13 @@ const getData = async (variables: Forum_Forums__ShowQueryVariables) => {
 
   return data;
 };
+
+export default async function Page() {}
 ```
 
 ### Run query
 
-```tsx
+```tsx {2-4}
 export default async function Page() {
   const data = await getData();
 
@@ -98,7 +98,7 @@ export const useShortShowGroupsAdmin = () => {};
 
 ### useQuery
 
-```ts
+```ts {1-9,12-31}
 import { useQuery } from '@tanstack/react-query';
 
 import { APIKeys } from '@/graphql/api-keys';
@@ -108,9 +108,7 @@ import {
   type Core_Groups__Admin__Show_ShortQuery,
   type Core_Groups__Admin__Show_ShortQueryVariables
 } from '@/graphql/hooks';
-```
 
-```ts
 export const useShortShowGroupsAdmin = () => {
   const api = useQuery({
     queryKey: [APIKeys.SHORT_GROUPS_MEMBERS],
@@ -145,7 +143,7 @@ export const useShortShowGroupsAdmin = () => {
 
 ### Example use
 
-```tsx
+```tsx {2}
 export const ContentGroupsFiltersUsersMembersAdmin = () => {
   const { data, isFetching } = useShortShowGroupsAdmin();
 
@@ -202,9 +200,7 @@ import {
   type Forum_Forums__Show_Item_MoreQueryVariables,
   type ShowTopicsForumsObj
 } from '@/graphql/hooks';
-```
 
-```ts
 export const useTopicsList = () => {
   const { id } = useParams();
 
@@ -251,7 +247,7 @@ export const useTopicsList = () => {
 
 ### Parse map data
 
-```ts
+```ts {4-7,11}
 export const useTopicsList = () => {
   ...
 
@@ -269,7 +265,7 @@ export const useTopicsList = () => {
 
 ### Example use
 
-```tsx
+```tsx {2}
 export const TopicsList = () => {
   const { data, isFetching, fetchNextPage, hasNextPage } = useTopicsList();
 
@@ -363,7 +359,7 @@ export default async function Page() {
 
 If you has already fetched data you can pass `initialData` to `useInfiniteQuery`.
 
-```tsx
+```tsx {3-6}
  const query = useInfiniteQuery({
     ...
     initialData: {
@@ -387,9 +383,7 @@ Mutations should be placed in `hooks` folder next to client hook with `onSubmit`
 
 ```ts
 'use server';
-```
 
-```ts
 export const mutationApi = async () => {};
 ```
 
@@ -397,7 +391,7 @@ export const mutationApi = async () => {};
 
 Our `fetcher` should be wrapper with `try/catch` block to handle errors using client side.
 
-```ts
+```ts {3-10,13,15-30}
 'use server';
 
 import { cookies } from 'next/headers';
@@ -408,9 +402,7 @@ import {
   type Forum_Topics__Actions__Lock_ToggleMutation,
   type Forum_Topics__Actions__Lock_ToggleMutationVariables
 } from '@/graphql/hooks';
-```
 
-```ts
 export const mutationApi = async (
   variables: Forum_Topics__Actions__Lock_ToggleMutationVariables
 ) => {
@@ -439,14 +431,12 @@ export const mutationApi = async (
 
 ### Example use
 
-```ts
+```tsx {4,9-17,19}
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
-```
 
-```tsx
 export const useLockToggleActionsTopic = ({ id }: { id: number }) => {
   const t = useTranslations('core');
 
@@ -472,13 +462,11 @@ NextJS allows you to use [Revalidating data](https://nextjs.org/docs/app/buildin
 
 This function only works when you're using Server Side Rendering (SSR) for fetching data.
 
-```ts
+```tsx {3,10}
 'use server';
 
 import { revalidatePath } from 'next/cache';
-```
 
-```tsx
 export const mutationApi = async (
 ) => {
   try {
@@ -502,9 +490,7 @@ Take a look at your mutation in Server Action. You have `data` variable from `fe
 import { useQuery, useQueryClient, type InfiniteData } from '@tanstack/react-query';
 import { APIKeys } from '@/graphql/api-keys';
 import { type Forum_Topics__ShowQuery } from '@/graphql/hooks';
-```
 
-```ts
 const queryClient = useQueryClient();
 
 const onClick = async () => {
