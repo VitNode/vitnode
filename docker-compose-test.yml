@@ -9,6 +9,8 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: vitnode
     command: ['postgres', '-c', 'log_statement=all'] # log all sql queries
+    volumes:
+      - ./docker/test/database:/var/lib/postgresql/data
     ports:
       - '5432:5432'
     networks:
@@ -38,7 +40,6 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     restart: on-failure
-    # tagert: development or backend
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
@@ -56,8 +57,9 @@ services:
     networks:
       - vitnode
     volumes:
-      - frontend_data:/frontend
-      - ./backend/public:/app/public # for serving static files
+      # - frontend_data:/frontend
+      - ./frontend/config:/frontend/config # config
+      - ./backend/public:/app/public # static files
 
   frontend:
     build:
@@ -67,16 +69,15 @@ services:
         - NEXT_PUBLIC_GRAPHQL_URL=http://backend:8080
         - NEXT_PUBLIC_CLIENT_GRAPHQL_URL=http://localhost:8080
     restart: on-failure
-    # tagert: development or frontend
     ports:
       - '3000:3000'
     networks:
       - vitnode
     volumes:
-      - frontend_data:/app
+      # - frontend_data:/app
+      - ./frontend/config:/app/config # config
 
 networks:
   vitnode:
-
-volumes:
-  frontend_data:
+# volumes:
+#   frontend_data:

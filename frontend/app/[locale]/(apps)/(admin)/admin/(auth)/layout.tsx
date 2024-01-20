@@ -4,7 +4,6 @@ import { getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
 import { isRedirectError } from 'next/dist/client/components/redirect';
 
-import configs from '@/config.json';
 import { AdminLayout } from '@/admin/layout/admin-layout';
 import { SessionAdminProvider } from './session-admin-provider';
 import { redirect } from '@/i18n';
@@ -14,6 +13,7 @@ import {
   type Admin_Sessions__AuthorizationQuery,
   type Admin_Sessions__AuthorizationQueryVariables
 } from '@/graphql/hooks';
+import { getConfig } from '@/functions/get-config';
 
 const getData = async () => {
   const cookieStore = cookies();
@@ -42,9 +42,10 @@ interface Props {
 }
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
+  const config = await getConfig();
   const t = await getTranslations({ locale, namespace: 'admin' });
 
-  const defaultTitle = `${t('title_short')} - ${configs.side_name}`;
+  const defaultTitle = `${t('title_short')} - ${config.side_name}`;
 
   return {
     title: {

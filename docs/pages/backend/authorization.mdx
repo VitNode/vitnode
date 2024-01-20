@@ -10,7 +10,7 @@ To protect a route, you need to add the `@UseGuards(AuthGuards)` decorator to th
 
 Here is an example for resolver:
 
-```typescript
+```ts {1, 4}
 import { AuthGuards } from '@/utils/guards/auth.guards';
 
 @Query(() => ShowCoreMembersObj)
@@ -29,7 +29,7 @@ async core_members__show(@Args() args: ShowCoreMembersArgs): Promise<ShowCoreMem
 
 Whan you are using `AuthGuards` you can access to the current user in the resolver by using the `@CurrentUser()` decorator as param route.
 
-```typescript
+```ts {1, 7}
 import { CurrentUser, User } from '@/utils/decorators/user.decorator';
 
 @Query(() => ShowCoreMembersObj)
@@ -46,7 +46,7 @@ async core_members__show(
 
 If you need to access to the current user in a route you need use the `@OptionalAuth()` decorator in route. You need change `@CurrentUser()` decorator to optional param route.
 
-```typescript
+```ts {1-2, 5-6, 9}
 import { AuthGuards, OptionalAuth } from '@/utils/guards/auth.guards';
 import { CurrentUser, User } from '@/utils/decorators/user.decorator';
 

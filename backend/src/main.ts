@@ -14,7 +14,11 @@ async function bootstrap() {
   app.use(graphqlUploadExpress({ maxFiles: 100 }));
   app.enableCors({
     credentials: true,
-    origin: ['http://localhost:3000', 'https://sandbox.embed.apollographql.com']
+    origin: [
+      process.env.FRONTEND_URL,
+      'http://localhost:3000',
+      'https://sandbox.embed.apollographql.com'
+    ]
   });
 
   // Redis

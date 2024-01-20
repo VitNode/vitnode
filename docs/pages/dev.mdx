@@ -10,11 +10,11 @@ This guide will help you to install the project on your local machine.
   This tutorial is for development purposes only. Do not use these credentials in production.
 </Callout>
 
-## Prerequisites
+## 📝 Prerequisites
 
-- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
+Before you begin, please read the [Contribution](/contribution) page and prepere your environment.
 
-## Main Steps
+## 🚀 Installation
 
 <Steps>
 ### Get files
@@ -40,51 +40,45 @@ cd vitnode
 ### Install dependencies
 
 ```bash
-pnpm install
+pnpm i
 ```
 
 ### Prepere docker containers
 
 ```bash
-pnpm docker
+pnpm docker:dev
 ```
 
 ### Environment variables for Backend
 
-Go to `backend` folder and create new `.env` file. Copy the contents from `.env.example` file.
-
-Then fill the values:
+Go to `backend` folder and create new `.env` file:
 
 ```bash
-# General
-# PORT=8080
-
-# Tokens
-LOGIN_TOKEN_SECRET=SECRET
-
-# Database
-DATABASE_URL=postgresql://root:root@localhost:5432/vitnode
-
-# Redis
-# REDIS_URL=redis://HOST:PORT
-# REDIS_PASSWORD=PASSWORD
-
-# Frontend
-# COOKIE_DOMAIN=localhost
+LOGIN_TOKEN_SECRET=secret
 ```
 
-<Callout type="info" emoji="ℹ️">
-  Commented out values are optional
-</Callout>
-
-`DATABASE_URL` has already been filled with correct values which sets in `/deployments/docker-compose.yml`, but you can change it if you want.
+Database and Redis variables are already set in `docker-compose-dev.yml` file and inside `backend` config as default values.
 
 ### Generate database schema
 
-Before you move on, make sure you have a database in Docker.
+Before you move on, make sure you have a database in Docker and you're in the `backend` folder.
 
 ```bash
-pnpm backend:init
+pnpm db
+```
+
+### Generate config
+
+Go to previus folder
+
+```bash
+cd ..
+```
+
+and generate config file
+
+```bash
+pnpm config:init
 ```
 
 ### Run backend
@@ -99,14 +93,14 @@ pnpm backend:dev
 pnpm frontend:dev
 ```
 
-<Callout type="error" emoji="❌">
-  Frontend should be running on port `3000`, because CORS is enabled only for this port on
-  `localhost`.
+<Callout type="info" emoji="ℹ️">
+  Frontend should be running on port `3000`. If you want to change it go to `.env` file and fill
+  `FRONTEND_URL` variable _(For example `FRONTEND_URL=FRONTEND_URL=http://localhost`)_.
 </Callout>
 
 </Steps>
 
-## PGAdmin
+## 🧑‍💻 PGAdmin
 
 You can use PGAdmin to manage your database. VitNode has this image in Docker Compose. To use it, you need to go to `http://localhost:5050` and login with credentials:
 

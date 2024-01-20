@@ -1,0 +1,68 @@
+import { Steps } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import dockerComposeTestImg from '@/assets/docker_compose_test.png';
+import Image from 'next/image';
+
+# Testing
+
+We're prepared for you docker compose file for testing VitNode. You don't need to install anything on your machine exept Docker.
+
+## Installation
+
+<Steps>
+
+### Get files
+
+<Tabs items={['git', 'zip']}>
+  <Tabs.Tab>
+
+```bash
+git clone https://github.com/aXenDeveloper/vitnode.git
+cd vitnode
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    1. Go to [GitHub VitNode](https://github.com/aXenDeveloper/vitnode),
+    2. Click on the green button `Code`,
+    3. Click on `Download ZIP`,
+    4. Unzip the file on your server,
+    5. Open the folder in the terminal.
+  </Tabs.Tab>
+</Tabs>
+
+### Run docker compose
+
+<Tabs items={['docker-compose', 'pnpm']}>
+  <Tabs.Tab>
+
+```bash
+docker-compose -f ./docker-compose-test.yml -p vitnode-test up -d
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+
+```bash
+pnpm docker:test
+```
+
+  </Tabs.Tab>
+
+### Generate tables in database
+
+Go to backend container and run:
+
+```bash
+pnpm db
+```
+
+<Image className="max-w-full" src={dockerComposeTestImg} alt="Docker Compose with command" />
+
+### Finish
+
+Now you can go to [http://localhost:3000](http://localhost:3000) and see VitNode and run setup wizard.
+
+</Tabs>
+
+</Steps>

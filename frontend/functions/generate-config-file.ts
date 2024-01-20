@@ -34,7 +34,7 @@ const DATA: ConfigType = {
   finished_install: false
 };
 
-const configPath = join('config.json');
+const configPath = join('config', 'config.json');
 if (!fs.existsSync(configPath)) {
   fs.writeFile(configPath, JSON.stringify(DATA, null, 2), 'utf8', err => {
     if (err) throw err;

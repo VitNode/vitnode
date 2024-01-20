@@ -16,11 +16,9 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
 import { mutationApi } from './mutation-api';
 
 export const FormGeneralCoreAdmin = () => {
-  const { side_name } = useSessionAdmin();
   const t = useTranslations('admin');
   const tCore = useTranslations('core');
 
@@ -37,7 +35,7 @@ export const FormGeneralCoreAdmin = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: side_name
+      name: ''
     }
   });
 
