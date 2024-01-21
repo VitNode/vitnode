@@ -162,6 +162,7 @@ type Query {
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_middleware: CoreMiddlewareObj!
   core_plugins__admin__show(cursor: Int, first: Int, last: Int): ShowAdminPluginsObj!
+  core_plugins__show(cursor: Int, first: Int, last: Int): ShowCorePluginsObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_staff_administrators__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
   core_staff_moderators__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
@@ -344,6 +345,17 @@ enum ShowCoreMembersSortingColumnEnum {
   name
   posts
   reactions
+}
+
+type ShowCorePlugins {
+  code: String!
+  default: Boolean!
+  id: Int!
+}
+
+type ShowCorePluginsObj {
+  edges: [ShowCorePlugins!]!
+  pageInfo: PageInfo!
 }
 
 type ShowForumForums {

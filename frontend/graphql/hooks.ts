@@ -309,6 +309,7 @@ export type Query = {
   core_members__show: ShowCoreMembersObj;
   core_middleware: CoreMiddlewareObj;
   core_plugins__admin__show: ShowAdminPluginsObj;
+  core_plugins__show: ShowCorePluginsObj;
   core_sessions__authorization: AuthorizationCoreSessionsObj;
   core_staff_administrators__admin__show: ShowAdminStaffAdministratorsObj;
   core_staff_moderators__admin__show: ShowAdminStaffModeratorsObj;
@@ -356,6 +357,13 @@ export type QueryCore_Members__ShowArgs = {
 
 
 export type QueryCore_Plugins__Admin__ShowArgs = {
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryCore_Plugins__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
@@ -608,6 +616,19 @@ export const ShowCoreMembersSortingColumnEnum = {
 } as const;
 
 export type ShowCoreMembersSortingColumnEnum = typeof ShowCoreMembersSortingColumnEnum[keyof typeof ShowCoreMembersSortingColumnEnum];
+export type ShowCorePlugins = {
+  __typename?: 'ShowCorePlugins';
+  code: Scalars['String']['output'];
+  default: Scalars['Boolean']['output'];
+  id: Scalars['Int']['output'];
+};
+
+export type ShowCorePluginsObj = {
+  __typename?: 'ShowCorePluginsObj';
+  edges: Array<ShowCorePlugins>;
+  pageInfo: PageInfo;
+};
+
 export type ShowForumForums = {
   __typename?: 'ShowForumForums';
   _count: ShowForumForumsCount;
@@ -1046,6 +1067,11 @@ export type Core_Members__Show__SearchQueryVariables = Exact<{
 
 
 export type Core_Members__Show__SearchQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, id: number, name: string, name_seo: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
+
+export type Core_Plugins__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Core_Plugins__ShowQuery = { __typename?: 'Query', core_plugins__show: { __typename?: 'ShowCorePluginsObj', edges: Array<{ __typename?: 'ShowCorePlugins', code: string, default: boolean, id: number }> } };
 
 export type Core_Members__ProfilesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -1733,6 +1759,17 @@ export const Core_Members__Show__Search = gql`
       id
       name
       name_seo
+    }
+  }
+}
+    `;
+export const Core_Plugins__Show = gql`
+    query Core_plugins__show {
+  core_plugins__show {
+    edges {
+      code
+      default
+      id
     }
   }
 }

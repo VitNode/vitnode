@@ -1,0 +1,9 @@
+query Core_plugins__show {
+  core_plugins__show {
+    edges {
+      code
+      default
+      id
+    }
+  }
+}
