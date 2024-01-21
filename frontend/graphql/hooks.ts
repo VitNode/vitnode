@@ -145,6 +145,7 @@ export type Mutation = {
   core_members__avatar__delete: Scalars['String']['output'];
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
   core_members__sign_up: SignUpCoreMembersObj;
+  core_plugins__admin__change_position: Scalars['String']['output'];
   core_sessions__sign_in: Scalars['String']['output'];
   core_sessions__sign_out: Scalars['String']['output'];
   core_staff_administrators__admin__create: ShowAdminStaffAdministrators;
@@ -200,6 +201,12 @@ export type MutationCore_Members__Sign_UpArgs = {
   name: Scalars['String']['input'];
   newsletter?: InputMaybe<Scalars['Boolean']['input']>;
   password: Scalars['String']['input'];
+};
+
+
+export type MutationCore_Plugins__Admin__Change_PositionArgs = {
+  id: Scalars['Int']['input'];
+  index_to_move: Scalars['Int']['input'];
 };
 
 
@@ -841,6 +848,14 @@ export type Core_Staff_Moderators__Admin__DeleteMutationVariables = Exact<{
 
 export type Core_Staff_Moderators__Admin__DeleteMutation = { __typename?: 'Mutation', core_staff_moderators__admin__delete: string };
 
+export type Core_Plugins__Admin__Change_PositionMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  indexToMove: Scalars['Int']['input'];
+}>;
+
+
+export type Core_Plugins__Admin__Change_PositionMutation = { __typename?: 'Mutation', core_plugins__admin__change_position: string };
+
 export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1205,6 +1220,11 @@ export const Core_Staff_Moderators__Admin__Create = gql`
 export const Core_Staff_Moderators__Admin__Delete = gql`
     mutation Core_staff_moderators__admin__delete($id: Int!) {
   core_staff_moderators__admin__delete(id: $id)
+}
+    `;
+export const Core_Plugins__Admin__Change_Position = gql`
+    mutation Core_plugins__admin__change_position($id: Int!, $indexToMove: Int!) {
+  core_plugins__admin__change_position(id: $id, index_to_move: $indexToMove)
 }
     `;
 export const Admin_Sessions__Sign_Out = gql`

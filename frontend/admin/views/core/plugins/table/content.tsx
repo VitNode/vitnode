@@ -6,11 +6,12 @@ import { useQueryClient, type InfiniteData } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 
 import { ItemContentTablePluginsAdmin } from './item';
-import { usePluginsAdminAPI } from './use-plugins-admin-api';
+import { usePluginsAdminAPI } from '../hooks/use-plugins-admin-api';
 import type { Core_Plugins__Admin__ShowQuery } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
 import { Loader } from '@/components/loader/loader';
 import { ErrorAdminView } from '@/admin/global/error-admin-view';
+import { mutationChangePositionApi } from '../hooks/mutation-change-position-api';
 
 export const ContentTablePluginsAdmin = () => {
   const t = useTranslations('core');
@@ -34,7 +35,7 @@ export const ContentTablePluginsAdmin = () => {
       onDragCancel={() => {
         setActive(null);
       }}
-      onDragEnd={({ active, over }) => {
+      onDragEnd={async ({ active, over }) => {
         const findOverIndex = data.findIndex(item => item.id === over?.id);
         const activeItemIndex = data.findIndex(item => item.id === active.id);
         if (activeItemIndex === findOverIndex) return;
@@ -64,6 +65,11 @@ export const ContentTablePluginsAdmin = () => {
         );
 
         setActive(null);
+
+        await mutationChangePositionApi({
+          id: Number(active.id),
+          indexToMove: findOverIndex
+        });
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
@@ -85,7 +91,9 @@ export const ContentTablePluginsAdmin = () => {
           })
         }}
       >
-        {active !== null && <ItemContentTablePluginsAdmin data={data[active]} />}
+        {active !== null && (
+          <ItemContentTablePluginsAdmin key={data[active].id} data={data[active]} />
+        )}
       </DragOverlay>
     </DndContext>
   );

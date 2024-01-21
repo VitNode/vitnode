@@ -71,7 +71,8 @@ export class CreateDatabaseAdminInstallService {
         author_url: 'https://vitnode.com/',
         uploaded: currentDate(),
         updated: currentDate(),
-        protected: true
+        protected: true,
+        position: 0
       },
       {
         code: 'forum',
@@ -82,7 +83,8 @@ export class CreateDatabaseAdminInstallService {
         uploaded: currentDate(),
         updated: currentDate(),
         protected: true,
-        default: true
+        default: true,
+        position: 1
       }
     ]);
 
