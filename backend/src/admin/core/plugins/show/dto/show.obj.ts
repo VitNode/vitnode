@@ -13,8 +13,8 @@ export class ShowAdminPlugins {
   @Field(() => String)
   name: string;
 
-  @Field(() => String)
-  description: string;
+  @Field(() => String, { nullable: true })
+  description: string | null;
 
   @Field(() => String)
   version: string;

@@ -301,6 +301,7 @@ export type Query = {
   core_members__admin__show: ShowAdminMembersObj;
   core_members__show: ShowCoreMembersObj;
   core_middleware: CoreMiddlewareObj;
+  core_plugins__admin__show: ShowAdminPluginsObj;
   core_sessions__authorization: AuthorizationCoreSessionsObj;
   core_staff_administrators__admin__show: ShowAdminStaffAdministratorsObj;
   core_staff_moderators__admin__show: ShowAdminStaffModeratorsObj;
@@ -344,6 +345,13 @@ export type QueryCore_Members__ShowArgs = {
   name_seo?: InputMaybe<Scalars['String']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<Array<ShowCoreMembersSortByArgs>>;
+};
+
+
+export type QueryCore_Plugins__Admin__ShowArgs = {
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -465,6 +473,31 @@ export const ShowAdminMembersSortingColumnEnum = {
 } as const;
 
 export type ShowAdminMembersSortingColumnEnum = typeof ShowAdminMembersSortingColumnEnum[keyof typeof ShowAdminMembersSortingColumnEnum];
+export type ShowAdminPlugins = {
+  __typename?: 'ShowAdminPlugins';
+  author: Scalars['String']['output'];
+  author_url: Scalars['String']['output'];
+  code: Scalars['String']['output'];
+  default: Scalars['Boolean']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  enabled: Scalars['Boolean']['output'];
+  id: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+  position: Scalars['Int']['output'];
+  protected: Scalars['Boolean']['output'];
+  support?: Maybe<Scalars['String']['output']>;
+  updated: Scalars['Int']['output'];
+  uploaded: Scalars['Int']['output'];
+  version: Scalars['String']['output'];
+  version_code: Scalars['Int']['output'];
+};
+
+export type ShowAdminPluginsObj = {
+  __typename?: 'ShowAdminPluginsObj';
+  edges: Array<ShowAdminPlugins>;
+  pageInfo: PageInfo;
+};
+
 export type ShowAdminStaffAdministrators = {
   __typename?: 'ShowAdminStaffAdministrators';
   created: Scalars['Int']['output'];
@@ -957,6 +990,15 @@ export type Core_Members__Admin__ShowQueryVariables = Exact<{
 
 
 export type Core_Members__Admin__ShowQuery = { __typename?: 'Query', core_members__admin__show: { __typename?: 'ShowAdminMembersObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminMembers', avatar_color: string, email: string, id: number, name_seo: string, joined: number, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
+
+export type Core_Plugins__Admin__ShowQueryVariables = Exact<{
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type Core_Plugins__Admin__ShowQuery = { __typename?: 'Query', core_plugins__admin__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url: string, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, position: number, protected: boolean, support?: string | null, updated: number, uploaded: number, version: string, version_code: number }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Admin_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1537,6 +1579,37 @@ export const Core_Members__Admin__Show = gql`
           value
         }
       }
+    }
+  }
+}
+    `;
+export const Core_Plugins__Admin__Show = gql`
+    query Core_plugins__admin__show($cursor: Int, $first: Int, $last: Int) {
+  core_plugins__admin__show(cursor: $cursor, first: $first, last: $last) {
+    edges {
+      author
+      author_url
+      code
+      default
+      description
+      enabled
+      id
+      name
+      position
+      protected
+      support
+      updated
+      uploaded
+      version
+      version_code
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
     }
   }
 }

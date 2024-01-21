@@ -235,7 +235,7 @@ type ShowAdminPlugins {
   author_url: String!
   code: String!
   default: Boolean!
-  description: String!
+  description: String
   enabled: Boolean!
   id: Int!
   name: String!

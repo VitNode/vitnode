@@ -1,0 +1,29 @@
+query Core_plugins__admin__show($cursor: Int, $first: Int, $last: Int) {
+  core_plugins__admin__show(cursor: $cursor, first: $first, last: $last) {
+    edges {
+      author
+      author_url
+      code
+      default
+      description
+      enabled
+      id
+      name
+      position
+      protected
+      support
+      updated
+      uploaded
+      version
+      version_code
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+  }
+}

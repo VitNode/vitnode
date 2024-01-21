@@ -81,7 +81,8 @@ export class CreateDatabaseAdminInstallService {
         author_url: 'https://vitnode.com/',
         uploaded: currentDate(),
         updated: currentDate(),
-        protected: true
+        protected: true,
+        default: true
       }
     ]);
 

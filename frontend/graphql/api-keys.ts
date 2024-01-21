@@ -4,5 +4,6 @@ export enum APIKeys {
   FORUMS_ADMIN = 'forums.admin',
   FORUMS_CHILDREN_ADMIN = 'forums.children.admin',
   POSTS_MORE = 'posts.more',
-  TOPICS_IN_FORUM = 'topics.in.forum'
+  TOPICS_IN_FORUM = 'topics.in.forum',
+  PLUGINS = 'plugins'
 }
