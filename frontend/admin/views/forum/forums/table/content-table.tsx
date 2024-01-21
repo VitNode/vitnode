@@ -145,7 +145,6 @@ export const ContentTableForumsForumAdmin = () => {
             if (!old || !lastPage) return old;
 
             return {
-              ...old,
               pages: [
                 {
                   ...lastPage,
@@ -154,7 +153,8 @@ export const ContentTableForumsForumAdmin = () => {
                     edges: buildTree(sortedItems)
                   }
                 }
-              ]
+              ],
+              pageParams: [old.pageParams.at(-1)]
             };
           }
         );

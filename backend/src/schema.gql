@@ -116,6 +116,7 @@ type Mutation {
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
   core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
+  core_plugins__admin__change_position(id: Int!, index_to_move: Int!): String!
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
   core_staff_administrators__admin__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffAdministrators!
@@ -160,6 +161,7 @@ type Query {
   core_members__admin__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_middleware: CoreMiddlewareObj!
+  core_plugins__admin__show(cursor: Int, first: Int, last: Int): ShowAdminPluginsObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_staff_administrators__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
   core_staff_moderators__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
@@ -227,6 +229,29 @@ enum ShowAdminMembersSortingColumnEnum {
   name
   posts
   reactions
+}
+
+type ShowAdminPlugins {
+  author: String!
+  author_url: String!
+  code: String!
+  default: Boolean!
+  description: String
+  enabled: Boolean!
+  id: Int!
+  name: String!
+  position: Int!
+  protected: Boolean!
+  support: String
+  updated: Int!
+  uploaded: Int!
+  version: String!
+  version_code: Int!
+}
+
+type ShowAdminPluginsObj {
+  edges: [ShowAdminPlugins!]!
+  pageInfo: PageInfo!
 }
 
 type ShowAdminStaffAdministrators {

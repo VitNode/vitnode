@@ -3,7 +3,6 @@ import type { CSSProperties } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import type { UniqueIdentifier } from '@dnd-kit/core';
-import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components/ui/button';
 import { useTextLang } from '@/hooks/core/use-text-lang';
@@ -28,7 +27,6 @@ export const ItemTableForumsForumAdmin = ({
   name,
   onCollapse
 }: Props) => {
-  const t = useTranslations('core');
   const { convertText } = useTextLang();
   const {
     attributes,
@@ -83,10 +81,10 @@ export const ItemTableForumsForumAdmin = ({
         ref={setDraggableNodeRef}
       >
         <Button
-          className="sm:flex hidden flex-shrink-0 focus:outline-none text-muted-foreground hover:text-foreground"
+          className="sm:flex hidden flex-shrink-0 focus:outline-none text-muted-foreground hover:text-foreground cursor-grab"
           variant="ghost"
           size="icon"
-          tooltip={t('open_menu')}
+          tooltip=""
           {...attributes}
           {...listeners}
         >
