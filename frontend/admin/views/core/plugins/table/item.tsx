@@ -1,18 +1,21 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Menu } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 import type { ShowAdminPlugins } from '@/graphql/hooks';
 import { cx } from '@/functions/classnames';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 
 interface Props {
   data: ShowAdminPlugins;
 }
 
-export const ItemContentTablePluginsAdmin = ({ data: { author, id, name, version } }: Props) => {
+export const ItemContentTablePluginsAdmin = ({ data }: Props) => {
+  const t = useTranslations('core');
   const { attributes, isDragging, listeners, setNodeRef, transform, transition } = useSortable({
-    id,
+    id: data.id,
     animateLayoutChanges: ({ isSorting, wasDragging }) => (isSorting || wasDragging ? false : true)
   });
 
@@ -43,11 +46,18 @@ export const ItemContentTablePluginsAdmin = ({ data: { author, id, name, version
 
       <div className="flex flex-col">
         <div className="flex gap-2 items-center">
-          <span className="font-semibold">{name}</span>
-          <span className="text-muted-foreground text-sm">{version}</span>
+          <span className="font-semibold">{data.name}</span>
+          <span className="text-muted-foreground text-sm">{data.version}</span>
+          {data.default && <Badge variant="outline">{t('default')}</Badge>}
         </div>
-        <span className="text-muted-foreground text-sm">Description</span>
-        <span className="text-muted-foreground text-sm">Author: {author}</span>
+        {data.description && (
+          <span className="text-muted-foreground text-sm line-clamp-2">{data.description}</span>
+        )}
+        <span className="text-muted-foreground text-sm">
+          <a href={data.author_url} rel="noopener noreferrer" target="_blank">
+            {data.author}
+          </a>
+        </span>
       </div>
     </div>
   );

@@ -77,6 +77,7 @@ export class CreateDatabaseAdminInstallService {
       {
         code: 'forum',
         name: 'Forum',
+        description: 'Community forum plugin.',
         version: '0.1.0 Alpha 1',
         author: 'VitNode',
         author_url: 'https://vitnode.com/',
