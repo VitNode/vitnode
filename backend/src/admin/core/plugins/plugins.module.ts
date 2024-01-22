@@ -6,6 +6,8 @@ import { ShowAdminPluginsService } from './show/show.service';
 import { ShowAdminPluginsResolver } from './show/show.resolver';
 import { ChangePositionAdminPluginsService } from './change_position/change_position.service';
 import { ChangePositionAdminPluginsResolver } from './change_position/change_position.resolver';
+import { CreateAdminPluginsResolver } from './create/create.resolver';
+import { CreateAdminPluginsService } from './create/create.service';
 
 @Module({
   providers: [
@@ -14,7 +16,9 @@ import { ChangePositionAdminPluginsResolver } from './change_position/change_pos
     ShowAdminPluginsService,
     ShowAdminPluginsResolver,
     ChangePositionAdminPluginsService,
-    ChangePositionAdminPluginsResolver
+    ChangePositionAdminPluginsResolver,
+    CreateAdminPluginsResolver,
+    CreateAdminPluginsService
   ]
 })
 export class AdminPluginsModule {}
