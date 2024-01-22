@@ -1,9 +1,9 @@
-import { mkdirSync } from 'fs';
+import { mkdirSync, readFileSync } from 'fs';
 import { writeFile } from 'fs/promises';
 
 import { Injectable } from '@nestjs/common';
 
-import { createModuleSchema } from './content-files';
+import { changeModuleSchema, createModuleSchema } from './content-files';
 
 // TODO: Remove this
 const code = 'commerce';
@@ -51,6 +51,34 @@ export class CreateAdminPluginsService {
         writeFile(`${folder.path}/${file.name}`, file.content);
       });
     });
+
+    // Import module
+    const pathModules = `src/modules.module.ts`;
+
+    const modules = readFileSync(pathModules, 'utf8');
+    if (!modules.includes(`./${code}/${code}.module`)) {
+      await writeFile(
+        pathModules,
+        changeModuleSchema({
+          content: modules,
+          code
+        })
+      );
+    }
+
+    // Import module in admin
+    const pathAdminModules = `src/admin/admin.module.ts`;
+    const adminModules = readFileSync(pathAdminModules, 'utf8');
+    if (!modules.includes(`./${code}/${code}.module`)) {
+      await writeFile(
+        pathAdminModules,
+        changeModuleSchema({
+          content: adminModules,
+          code,
+          admin: true
+        })
+      );
+    }
 
     return `${__dirname} - Hello World!`;
   }

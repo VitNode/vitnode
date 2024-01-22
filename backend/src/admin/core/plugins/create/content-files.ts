@@ -3,11 +3,30 @@ const firstLetterToUpperCase = (str: string) => {
 };
 
 export const createModuleSchema = ({ admin, code }: { code: string; admin?: boolean }) => {
-  const current = firstLetterToUpperCase(code);
+  const name = `${admin ? 'Admin' : ''}${firstLetterToUpperCase(code)}`;
 
   return `import { Module } from '@nestjs/common';
 
 @Module({})
-export class ${admin ? 'Admin' : ''}${current}Module {}
+export class ${name}Module {}
 `;
+};
+
+export const changeModuleSchema = ({
+  admin,
+  code,
+  content
+}: {
+  code: string;
+  content: string;
+  admin?: boolean;
+}) => {
+  const name = `${admin ? 'Admin' : ''}${firstLetterToUpperCase(code)}`;
+
+  return content
+    .replace(
+      '// ! === IMPORT ===',
+      `import { ${name}Module } from './${code}/${code}.module';\n// ! === IMPORT ===`
+    )
+    .replace(' // ! === MODULE ===', `,\n    ${name}Module // ! === MODULE ===`);
 };
