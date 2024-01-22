@@ -3,7 +3,7 @@ import { writeFile } from 'fs/promises';
 
 import { Injectable } from '@nestjs/common';
 
-import { changeModuleSchema, createModuleSchema } from './content-files';
+import { changeModuleRootSchema, createModuleSchema } from './contents';
 
 // TODO: Remove this
 const code = 'commerce';
@@ -54,13 +54,12 @@ export class CreateAdminPluginsService {
 
     // Import module
     const pathModules = `src/modules.module.ts`;
-
-    const modules = readFileSync(pathModules, 'utf8');
-    if (!modules.includes(`./${code}/${code}.module`)) {
+    const moduleContent = readFileSync(pathModules, 'utf8');
+    if (!moduleContent.includes(`./${code}/${code}.module`)) {
       await writeFile(
         pathModules,
-        changeModuleSchema({
-          content: modules,
+        changeModuleRootSchema({
+          content: moduleContent,
           code
         })
       );
@@ -68,12 +67,12 @@ export class CreateAdminPluginsService {
 
     // Import module in admin
     const pathAdminModules = `src/admin/admin.module.ts`;
-    const adminModules = readFileSync(pathAdminModules, 'utf8');
-    if (!modules.includes(`./${code}/${code}.module`)) {
+    const adminModuleContent = readFileSync(pathAdminModules, 'utf8');
+    if (!adminModuleContent.includes(`./${code}/${code}.module`)) {
       await writeFile(
         pathAdminModules,
-        changeModuleSchema({
-          content: adminModules,
+        changeModuleRootSchema({
+          content: adminModuleContent,
           code,
           admin: true
         })

@@ -7,7 +7,8 @@ import { CommerceModule } from './commerce/commerce.module';
 @Module({
   imports: [
     ForumModule,
-    CommerceModule // ! === MODULE ===
+    CommerceModule
+    // ! === MODULE ===
   ]
 })
 export class ModulesModule {}

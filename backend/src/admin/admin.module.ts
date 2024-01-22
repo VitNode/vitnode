@@ -9,7 +9,8 @@ import { AdminCommerceModule } from './commerce/commerce.module';
   imports: [
     AdminCoreModule,
     AdminForumModule,
-    AdminCommerceModule // ! === MODULE ===
+    AdminCommerceModule
+    // ! === MODULE ===
   ]
 })
 export class AdminModule {}

@@ -1,6 +1,4 @@
-const firstLetterToUpperCase = (str: string) => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-};
+import { firstLetterToUpperCase } from '@/functions/first-letter-to-upper-case';
 
 export const createModuleSchema = ({ admin, code }: { code: string; admin?: boolean }) => {
   const name = `${admin ? 'Admin' : ''}${firstLetterToUpperCase(code)}`;
@@ -12,7 +10,7 @@ export class ${name}Module {}
 `;
 };
 
-export const changeModuleSchema = ({
+export const changeModuleRootSchema = ({
   admin,
   code,
   content
@@ -28,5 +26,5 @@ export const changeModuleSchema = ({
       '// ! === IMPORT ===',
       `import { ${name}Module } from './${code}/${code}.module';\n// ! === IMPORT ===`
     )
-    .replace(' // ! === MODULE ===', `,\n    ${name}Module // ! === MODULE ===`);
+    .replace('\n    // ! === MODULE ===', `,\n    ${name}Module\n    // ! === MODULE ===`);
 };

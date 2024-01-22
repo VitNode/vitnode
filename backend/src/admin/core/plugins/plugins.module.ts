@@ -8,6 +8,8 @@ import { ChangePositionAdminPluginsService } from './change_position/change_posi
 import { ChangePositionAdminPluginsResolver } from './change_position/change_position.resolver';
 import { CreateAdminPluginsResolver } from './create/create.resolver';
 import { CreateAdminPluginsService } from './create/create.service';
+import { DeleteAdminPluginsResolver } from './delete/delete.resolver';
+import { DeleteAdminPluginsService } from './delete/delete.service';
 
 @Module({
   providers: [
@@ -18,7 +20,9 @@ import { CreateAdminPluginsService } from './create/create.service';
     ChangePositionAdminPluginsService,
     ChangePositionAdminPluginsResolver,
     CreateAdminPluginsResolver,
-    CreateAdminPluginsService
+    CreateAdminPluginsService,
+    DeleteAdminPluginsResolver,
+    DeleteAdminPluginsService
   ]
 })
 export class AdminPluginsModule {}
