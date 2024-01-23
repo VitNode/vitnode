@@ -146,6 +146,8 @@ export type Mutation = {
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
   core_members__sign_up: SignUpCoreMembersObj;
   core_plugins__admin__change_position: Scalars['String']['output'];
+  core_plugins__admin__create: Scalars['String']['output'];
+  core_plugins__admin__delete: Scalars['String']['output'];
   core_sessions__sign_in: Scalars['String']['output'];
   core_sessions__sign_out: Scalars['String']['output'];
   core_staff_administrators__admin__create: ShowAdminStaffAdministrators;
@@ -492,7 +494,7 @@ export type ShowAdminPlugins = {
   name: Scalars['String']['output'];
   position: Scalars['Int']['output'];
   protected: Scalars['Boolean']['output'];
-  support?: Maybe<Scalars['String']['output']>;
+  support_url?: Maybe<Scalars['String']['output']>;
   updated: Scalars['Int']['output'];
   uploaded: Scalars['Int']['output'];
   version: Scalars['String']['output'];
@@ -1013,7 +1015,7 @@ export type Core_Plugins__Admin__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Core_Plugins__Admin__ShowQuery = { __typename?: 'Query', core_plugins__admin__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url: string, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, position: number, protected: boolean, support?: string | null, updated: number, uploaded: number, version: string, version_code: number }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Core_Plugins__Admin__ShowQuery = { __typename?: 'Query', core_plugins__admin__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url: string, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, position: number, protected: boolean, support_url?: string | null, updated: number, uploaded: number, version: string, version_code: number }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Admin_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1617,7 +1619,7 @@ export const Core_Plugins__Admin__Show = gql`
       name
       position
       protected
-      support
+      support_url
       updated
       uploaded
       version

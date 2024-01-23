@@ -28,7 +28,7 @@ export const CreateActionsPluginsAdmin = () => {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-w-4xl">
+      <DialogContent className="max-w-md">
         <Suspense fallback={<Loader />}>
           <Content />
         </Suspense>

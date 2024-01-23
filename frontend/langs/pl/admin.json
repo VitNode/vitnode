@@ -38,7 +38,28 @@
       "plugins": {
         "title": "Wtyczki",
         "create": {
-          "title": "Stwórz wtyczkę"
+          "title": "Stwórz wtyczkę",
+          "name": {
+            "label": "Nazwa",
+            "desc": "Min 3 znaki, max 100 znaków."
+          },
+          "code": {
+            "label": "Kod",
+            "desc": "Musi być unikalny. Min 5 znaków, max 50 znaków."
+          },
+          "description": {
+            "label": "Opis"
+          },
+          "support_url": {
+            "label": "Link do wsparcia",
+            "desc": "Link do strony wsparcia wtyczki."
+          },
+          "author": {
+            "label": "Autor"
+          },
+          "author_url": {
+            "label": "Link do autora"
+          }
         },
         "upload": {
           "title": "Załaduj wtyczkę"

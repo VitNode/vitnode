@@ -38,7 +38,28 @@
       "plugins": {
         "title": "Plugins",
         "create": {
-          "title": "Create Plugin"
+          "title": "Create Plugin",
+          "name": {
+            "label": "Name",
+            "desc": "Min 3 characters, max 100 characters."
+          },
+          "code": {
+            "label": "Code",
+            "desc": "Must be unique. Min 5 characters, max 50 characters."
+          },
+          "description": {
+            "label": "Description"
+          },
+          "support_url": {
+            "label": "Support URL",
+            "desc": "URL to the support page for this plugin."
+          },
+          "author": {
+            "label": "Author"
+          },
+          "author_url": {
+            "label": "Author URL"
+          }
         },
         "upload": {
           "title": "Upload Plugin"
