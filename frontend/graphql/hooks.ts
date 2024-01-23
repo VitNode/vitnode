@@ -222,6 +222,11 @@ export type MutationCore_Plugins__Admin__CreateArgs = {
 };
 
 
+export type MutationCore_Plugins__Admin__DeleteArgs = {
+  code: Scalars['String']['input'];
+};
+
+
 export type MutationCore_Sessions__Sign_InArgs = {
   admin?: InputMaybe<Scalars['Boolean']['input']>;
   email: Scalars['String']['input'];
@@ -880,6 +885,13 @@ export type Core_Plugins__Admin__CreateMutationVariables = Exact<{
 
 export type Core_Plugins__Admin__CreateMutation = { __typename?: 'Mutation', core_plugins__admin__create: { __typename?: 'ShowAdminPlugins', code: string } };
 
+export type Core_Plugins__Admin__DeleteMutationVariables = Exact<{
+  code: Scalars['String']['input'];
+}>;
+
+
+export type Core_Plugins__Admin__DeleteMutation = { __typename?: 'Mutation', core_plugins__admin__delete: string };
+
 export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1263,6 +1275,11 @@ export const Core_Plugins__Admin__Create = gql`
   ) {
     code
   }
+}
+    `;
+export const Core_Plugins__Admin__Delete = gql`
+    mutation Core_plugins__admin__delete($code: String!) {
+  core_plugins__admin__delete(code: $code)
 }
     `;
 export const Admin_Sessions__Sign_Out = gql`

@@ -64,6 +64,11 @@
         },
         "upload": {
           "title": "Załaduj wtyczkę"
+        },
+        "delete": {
+          "submit": "Tak, usuń wtyczkę",
+          "desc": "Ta akcja usunie wtyczkę <name></name> stworzoną przez <author></author> i wszystkie dane z nią związane.",
+          "success": "Wtyczka została usunięta."
         }
       },
       "langs": {
