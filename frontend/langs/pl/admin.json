@@ -36,7 +36,13 @@
         }
       },
       "plugins": {
-        "title": "Wtyczki"
+        "title": "Wtyczki",
+        "create": {
+          "title": "Stwórz wtyczkę"
+        },
+        "upload": {
+          "title": "Załaduj wtyczkę"
+        }
       },
       "langs": {
         "title": "Języki",

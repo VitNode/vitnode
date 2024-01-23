@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs';
-import { writeFile } from 'fs/promises';
+import { rm, writeFile } from 'fs/promises';
 
 import { Injectable } from '@nestjs/common';
 
@@ -33,6 +33,9 @@ export class DeleteAdminPluginsService {
         admin: true
       })
     );
+
+    rm(`src/${code}`, { recursive: true });
+    rm(`src/admin/${code}`, { recursive: true });
 
     return 'DeleteAdminPluginsService';
   }

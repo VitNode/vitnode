@@ -36,7 +36,13 @@
         }
       },
       "plugins": {
-        "title": "Plugins"
+        "title": "Plugins",
+        "create": {
+          "title": "Create Plugin"
+        },
+        "upload": {
+          "title": "Upload Plugin"
+        }
       },
       "langs": {
         "title": "Languages",
