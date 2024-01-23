@@ -1,18 +1,16 @@
 import { useTranslations } from 'next-intl';
-import { toast } from 'sonner';
 
 import {
   AlertDialogCancel,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle,
-  useAlertDialog
+  AlertDialogTitle
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { SubmitContentDeletePluginActionsAdmin } from './submit';
-import { mutationApi } from './mutation-api';
 import type { ActionsItemPluginsAdminProps } from '../actions';
+import { useDeletePluginAdmin } from './hooks/use-delete-plugin-admin';
 
 export const ContentDeletePluginActionsAdmin = ({
   author,
@@ -21,24 +19,7 @@ export const ContentDeletePluginActionsAdmin = ({
 }: ActionsItemPluginsAdminProps) => {
   const t = useTranslations('admin.core.plugins.delete');
   const tCore = useTranslations('core');
-  const { setOpen } = useAlertDialog();
-
-  const onSubmit = async () => {
-    const mutation = await mutationApi({ code });
-    if (mutation.error) {
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error')
-      });
-
-      return;
-    }
-
-    toast.success(t('success'), {
-      description: name
-    });
-
-    setOpen(false);
-  };
+  const { onSubmit } = useDeletePluginAdmin({ code, name });
 
   return (
     <form action={onSubmit}>
