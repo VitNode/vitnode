@@ -36,7 +36,41 @@
         }
       },
       "plugins": {
-        "title": "Plugins"
+        "title": "Plugins",
+        "create": {
+          "title": "Create Plugin",
+          "success": "Plugin has been created.",
+          "name": {
+            "label": "Name",
+            "desc": "Min 3-100 characters."
+          },
+          "code": {
+            "label": "Code",
+            "desc": "Must be unique. Min 5-50 characters. Allowed characters: a-z, 0-9, -",
+            "invalid": "You can use only a-z, 0-9, -"
+          },
+          "description": {
+            "label": "Description"
+          },
+          "support_url": {
+            "label": "Support URL",
+            "desc": "URL to the support page for this plugin."
+          },
+          "author": {
+            "label": "Author"
+          },
+          "author_url": {
+            "label": "Author URL"
+          }
+        },
+        "upload": {
+          "title": "Upload Plugin"
+        },
+        "delete": {
+          "submit": "Yes, delete plugin",
+          "desc": "This action will delete <name></name> plugin created by <author></author> and all data associated with it.",
+          "success": "Plugin has been deleted."
+        }
       },
       "langs": {
         "title": "Languages",

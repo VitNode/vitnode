@@ -61,7 +61,7 @@ export const ContentTableLangsCoreAdmin = ({ data }: LangsCoreAdminViewProps) =>
       },
       {
         header: t('table.key'),
-        accessorKey: 'id'
+        accessorKey: 'code'
       },
       {
         header: '',

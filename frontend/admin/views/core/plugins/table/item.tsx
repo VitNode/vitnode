@@ -7,6 +7,7 @@ import type { ShowAdminPlugins } from '@/graphql/hooks';
 import { cx } from '@/functions/classnames';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { ActionsItemPluginsAdmin } from './actions/actions';
 
 interface Props {
   data: ShowAdminPlugins;
@@ -44,7 +45,7 @@ export const ItemContentTablePluginsAdmin = ({ data }: Props) => {
         <Menu />
       </Button>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col flex-1">
         <div className="flex gap-2 items-center">
           <span className="font-semibold">{data.name}</span>
           <span className="text-muted-foreground text-sm">{data.version}</span>
@@ -59,6 +60,8 @@ export const ItemContentTablePluginsAdmin = ({ data }: Props) => {
           </a>
         </span>
       </div>
+
+      <ActionsItemPluginsAdmin {...data} />
     </div>
   );
 };

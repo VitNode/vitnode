@@ -32,7 +32,7 @@ export class ShowAdminPlugins {
   updated: number;
 
   @Field(() => String, { nullable: true })
-  support: string | null;
+  support_url: string | null;
 
   @Field(() => Boolean)
   protected: boolean;

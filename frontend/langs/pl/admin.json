@@ -36,7 +36,41 @@
         }
       },
       "plugins": {
-        "title": "Wtyczki"
+        "title": "Wtyczki",
+        "success": "Wtyczka została utworzona.",
+        "create": {
+          "title": "Stwórz wtyczkę",
+          "name": {
+            "label": "Nazwa",
+            "desc": "Min 3-100 znaków."
+          },
+          "code": {
+            "label": "Kod",
+            "desc": "Musi być unikalny. Min 5-50 znaków. Dozwolone znaki: a-z, 0-9, -",
+            "invalid": "Możesz użyć tylko znaków a-z, 0-9, -"
+          },
+          "description": {
+            "label": "Opis"
+          },
+          "support_url": {
+            "label": "Link do wsparcia",
+            "desc": "Link do strony wsparcia wtyczki."
+          },
+          "author": {
+            "label": "Autor"
+          },
+          "author_url": {
+            "label": "Link do autora"
+          }
+        },
+        "upload": {
+          "title": "Załaduj wtyczkę"
+        },
+        "delete": {
+          "submit": "Tak, usuń wtyczkę",
+          "desc": "Ta akcja usunie wtyczkę <name></name> stworzoną przez <author></author> i wszystkie dane z nią związane.",
+          "success": "Wtyczka została usunięta."
+        }
       },
       "langs": {
         "title": "Języki",

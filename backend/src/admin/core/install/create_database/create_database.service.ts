@@ -64,17 +64,6 @@ export class CreateDatabaseAdminInstallService {
     // Create plugins
     await this.databaseService.db.insert(core_plugins).values([
       {
-        code: 'core',
-        name: 'Core',
-        version: '0.1.0 Alpha 1',
-        author: 'VitNode',
-        author_url: 'https://vitnode.com/',
-        uploaded: currentDate(),
-        updated: currentDate(),
-        protected: true,
-        position: 0
-      },
-      {
         code: 'forum',
         name: 'Forum',
         description: 'Community forum plugin.',
@@ -85,7 +74,7 @@ export class CreateDatabaseAdminInstallService {
         updated: currentDate(),
         protected: true,
         default: true,
-        position: 1
+        position: 0
       }
     ]);
 
