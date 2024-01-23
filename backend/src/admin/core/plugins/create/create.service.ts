@@ -101,6 +101,10 @@ export class CreateAdminPluginsService {
       );
     }
 
+    const findPluginWithLastPosition = await this.databaseService.db.query.core_plugins.findFirst({
+      orderBy: (table, { desc }) => desc(table.position)
+    });
+
     const data = await this.databaseService.db
       .insert(core_plugins)
       .values({
@@ -111,7 +115,8 @@ export class CreateAdminPluginsService {
         author,
         author_url,
         updated: currentDate(),
-        uploaded: currentDate()
+        uploaded: currentDate(),
+        position: findPluginWithLastPosition ? findPluginWithLastPosition.position + 1 : 0
       })
       .returning();
 
