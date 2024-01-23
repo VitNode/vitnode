@@ -1,7 +1,9 @@
-import { Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
 import { CreateAdminPluginsService } from './create.service';
+import { CreateAdminPluginsArgs } from './dto/create.args';
+import { ShowAdminPlugins } from '../show/dto/show.obj';
 
 import { AdminAuthGuards } from '@/utils/guards/admin-auth.guards';
 
@@ -9,9 +11,11 @@ import { AdminAuthGuards } from '@/utils/guards/admin-auth.guards';
 export class CreateAdminPluginsResolver {
   constructor(private readonly service: CreateAdminPluginsService) {}
 
-  @Mutation(() => String)
+  @Mutation(() => ShowAdminPlugins)
   @UseGuards(AdminAuthGuards)
-  async core_plugins__admin__create(): Promise<string> {
-    return await this.service.create();
+  async core_plugins__admin__create(
+    @Args() args: CreateAdminPluginsArgs
+  ): Promise<ShowAdminPlugins> {
+    return await this.service.create(args);
   }
 }

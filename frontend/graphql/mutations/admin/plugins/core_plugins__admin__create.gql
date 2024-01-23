@@ -1,0 +1,19 @@
+mutation Core_plugins__admin__create(
+  $author: String!
+  $authorUrl: String!
+  $code: String!
+  $name: String!
+  $supportUrl: String!
+  $description: String
+) {
+  core_plugins__admin__create(
+    author: $author
+    author_url: $authorUrl
+    code: $code
+    name: $name
+    support_url: $supportUrl
+    description: $description
+  ) {
+    code
+  }
+}

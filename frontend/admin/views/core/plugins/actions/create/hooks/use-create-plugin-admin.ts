@@ -1,8 +1,21 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
+import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
+
+import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
+import { mutationApi } from './mutation-api';
+import { useDialog } from '@/components/ui/dialog';
+import { usePathname, useRouter } from '@/i18n';
 
 export const useCreatePluginAdmin = () => {
+  const t = useTranslations('admin.core.plugins');
+  const tCore = useTranslations('core');
+  const { setOpen } = useDialog();
+  const pathname = usePathname();
+  const { push } = useRouter();
+  const { session } = useSessionAdmin();
   const formSchema = z.object({
     name: z.string().min(3).max(100),
     code: z.string().min(5).max(50),
@@ -19,14 +32,36 @@ export const useCreatePluginAdmin = () => {
       code: '',
       description: '',
       support_url: '',
-      author: '',
+      author: session?.name || '',
       author_url: ''
     }
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // eslint-disable-next-line no-console
-    console.log(values);
+    const mutation = await mutationApi({
+      name: values.name,
+      code: values.code,
+      description: values.description,
+      supportUrl: values.support_url,
+      author: values.author,
+      authorUrl: values.author_url
+    });
+
+    if (mutation.error) {
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error')
+      });
+
+      return;
+    }
+
+    push(pathname);
+
+    toast.success(t('create.success'), {
+      description: values.name
+    });
+
+    setOpen(false);
   };
 
   return {

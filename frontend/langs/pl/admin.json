@@ -37,15 +37,16 @@
       },
       "plugins": {
         "title": "Wtyczki",
+        "success": "Wtyczka została utworzona.",
         "create": {
           "title": "Stwórz wtyczkę",
           "name": {
             "label": "Nazwa",
-            "desc": "Min 3 znaki, max 100 znaków."
+            "desc": "Min 3-100 znaków."
           },
           "code": {
             "label": "Kod",
-            "desc": "Musi być unikalny. Min 5 znaków, max 50 znaków."
+            "desc": "Musi być unikalny. Min 5-50 znaków."
           },
           "description": {
             "label": "Opis"

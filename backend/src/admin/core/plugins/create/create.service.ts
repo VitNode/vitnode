@@ -4,15 +4,37 @@ import { writeFile } from 'fs/promises';
 import { Injectable } from '@nestjs/common';
 
 import { changeModuleRootSchema, createModuleSchema } from './contents';
+import { CreateAdminPluginsArgs } from './dto/create.args';
+import { ShowAdminPlugins } from '../show/dto/show.obj';
 
-// TODO: Remove this
-const code = 'commerce';
+import { DatabaseService } from '@/database/database.service';
+import { CustomError } from '@/utils/errors/CustomError';
+import { core_plugins } from '../../database/schema/plugins';
+import { currentDate } from '@/functions/date';
 
 @Injectable()
 export class CreateAdminPluginsService {
-  constructor() {}
+  constructor(private databaseService: DatabaseService) {}
 
-  async create(): Promise<string> {
+  async create({
+    author,
+    author_url,
+    code,
+    description,
+    name,
+    support_url
+  }: CreateAdminPluginsArgs): Promise<ShowAdminPlugins> {
+    const plugin = await this.databaseService.db.query.core_plugins.findFirst({
+      where: (table, { eq }) => eq(table.code, code)
+    });
+
+    if (plugin) {
+      throw new CustomError({
+        code: 'PLUGIN_ALREADY_EXISTS',
+        message: `Plugin already exists with "${code}" code!`
+      });
+    }
+
     const folders: { files: { content: string; name: string }[]; path: string }[] = [
       {
         path: `src/${code}`,
@@ -79,6 +101,20 @@ export class CreateAdminPluginsService {
       );
     }
 
-    return `${__dirname} - Hello World!`;
+    const data = await this.databaseService.db
+      .insert(core_plugins)
+      .values({
+        code,
+        description,
+        name,
+        support_url,
+        author,
+        author_url,
+        updated: currentDate(),
+        uploaded: currentDate()
+      })
+      .returning();
+
+    return data[0];
   }
 }

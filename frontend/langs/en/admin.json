@@ -39,13 +39,14 @@
         "title": "Plugins",
         "create": {
           "title": "Create Plugin",
+          "success": "Plugin has been created.",
           "name": {
             "label": "Name",
-            "desc": "Min 3 characters, max 100 characters."
+            "desc": "Min 3-100 characters."
           },
           "code": {
             "label": "Code",
-            "desc": "Must be unique. Min 5 characters, max 50 characters."
+            "desc": "Must be unique. Min 5-50 characters."
           },
           "description": {
             "label": "Description"

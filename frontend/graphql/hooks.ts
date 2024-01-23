@@ -146,7 +146,7 @@ export type Mutation = {
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
   core_members__sign_up: SignUpCoreMembersObj;
   core_plugins__admin__change_position: Scalars['String']['output'];
-  core_plugins__admin__create: Scalars['String']['output'];
+  core_plugins__admin__create: ShowAdminPlugins;
   core_plugins__admin__delete: Scalars['String']['output'];
   core_sessions__sign_in: Scalars['String']['output'];
   core_sessions__sign_out: Scalars['String']['output'];
@@ -209,6 +209,16 @@ export type MutationCore_Members__Sign_UpArgs = {
 export type MutationCore_Plugins__Admin__Change_PositionArgs = {
   id: Scalars['Int']['input'];
   index_to_move: Scalars['Int']['input'];
+};
+
+
+export type MutationCore_Plugins__Admin__CreateArgs = {
+  author: Scalars['String']['input'];
+  author_url: Scalars['String']['input'];
+  code: Scalars['String']['input'];
+  description?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  support_url: Scalars['String']['input'];
 };
 
 
@@ -858,6 +868,18 @@ export type Core_Plugins__Admin__Change_PositionMutationVariables = Exact<{
 
 export type Core_Plugins__Admin__Change_PositionMutation = { __typename?: 'Mutation', core_plugins__admin__change_position: string };
 
+export type Core_Plugins__Admin__CreateMutationVariables = Exact<{
+  author: Scalars['String']['input'];
+  authorUrl: Scalars['String']['input'];
+  code: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  supportUrl: Scalars['String']['input'];
+  description?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Core_Plugins__Admin__CreateMutation = { __typename?: 'Mutation', core_plugins__admin__create: { __typename?: 'ShowAdminPlugins', code: string } };
+
 export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1227,6 +1249,20 @@ export const Core_Staff_Moderators__Admin__Delete = gql`
 export const Core_Plugins__Admin__Change_Position = gql`
     mutation Core_plugins__admin__change_position($id: Int!, $indexToMove: Int!) {
   core_plugins__admin__change_position(id: $id, index_to_move: $indexToMove)
+}
+    `;
+export const Core_Plugins__Admin__Create = gql`
+    mutation Core_plugins__admin__create($author: String!, $authorUrl: String!, $code: String!, $name: String!, $supportUrl: String!, $description: String) {
+  core_plugins__admin__create(
+    author: $author
+    author_url: $authorUrl
+    code: $code
+    name: $name
+    support_url: $supportUrl
+    description: $description
+  ) {
+    code
+  }
 }
     `;
 export const Admin_Sessions__Sign_Out = gql`
