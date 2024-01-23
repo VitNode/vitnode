@@ -1,5 +1,5 @@
 import { ArgsType, Field } from '@nestjs/graphql';
-import { MaxLength, MinLength } from 'class-validator';
+import { Matches, MaxLength, MinLength } from 'class-validator';
 
 @ArgsType()
 export class CreateAdminPluginsArgs {
@@ -11,6 +11,7 @@ export class CreateAdminPluginsArgs {
   @Field(() => String)
   @MinLength(3)
   @MaxLength(50)
+  @Matches(/^[a-z0-9-]*$/)
   code: string;
 
   @Field(() => String, { nullable: true })

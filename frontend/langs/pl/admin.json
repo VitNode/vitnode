@@ -46,7 +46,8 @@
           },
           "code": {
             "label": "Kod",
-            "desc": "Musi być unikalny. Min 5-50 znaków."
+            "desc": "Musi być unikalny. Min 5-50 znaków. Dozwolone znaki: a-z, 0-9, -",
+            "invalid": "Możesz użyć tylko znaków a-z, 0-9, -"
           },
           "description": {
             "label": "Opis"

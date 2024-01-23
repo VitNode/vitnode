@@ -1,7 +1,7 @@
-import { firstLetterToUpperCase } from '@/functions/first-letter-to-upper-case';
+import { changeCodePluginToCapitalLetters } from '@/src/admin/core/plugins/functions/change-code-plugin-to-capital-letters';
 
 export const createModuleSchema = ({ admin, code }: { code: string; admin?: boolean }) => {
-  const name = `${admin ? 'Admin' : ''}${firstLetterToUpperCase(code)}`;
+  const name = `${admin ? 'Admin' : ''}${changeCodePluginToCapitalLetters(code)}`;
 
   return `import { Module } from '@nestjs/common';
 
@@ -19,7 +19,7 @@ export const changeModuleRootSchema = ({
   content: string;
   admin?: boolean;
 }) => {
-  const name = `${admin ? 'Admin' : ''}${firstLetterToUpperCase(code)}`;
+  const name = `${admin ? 'Admin' : ''}${changeCodePluginToCapitalLetters(code)}`;
 
   return content
     .replace(

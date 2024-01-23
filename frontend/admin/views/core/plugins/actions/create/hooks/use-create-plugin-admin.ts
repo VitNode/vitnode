@@ -9,8 +9,10 @@ import { mutationApi } from './mutation-api';
 import { useDialog } from '@/components/ui/dialog';
 import { usePathname, useRouter } from '@/i18n';
 
+export const codePluginRegex = /^[a-z0-9-]*$/;
+
 export const useCreatePluginAdmin = () => {
-  const t = useTranslations('admin.core.plugins');
+  const t = useTranslations('admin.core.plugins.create');
   const tCore = useTranslations('core');
   const { setOpen } = useDialog();
   const pathname = usePathname();
@@ -18,7 +20,13 @@ export const useCreatePluginAdmin = () => {
   const { session } = useSessionAdmin();
   const formSchema = z.object({
     name: z.string().min(3).max(100),
-    code: z.string().min(5).max(50),
+    code: z
+      .string()
+      .min(5)
+      .max(50)
+      .refine(value => codePluginRegex.test(value), {
+        message: t('code.invalid')
+      }),
     description: z.string(),
     support_url: z.string().url().or(z.literal('')),
     author: z.string().min(3).max(100),
@@ -57,7 +65,7 @@ export const useCreatePluginAdmin = () => {
 
     push(pathname);
 
-    toast.success(t('create.success'), {
+    toast.success(t('success'), {
       description: values.name
     });
 

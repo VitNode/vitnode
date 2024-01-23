@@ -46,8 +46,8 @@ export const ContentDeletePluginActionsAdmin = ({
         <AlertDialogTitle>{tCore('are_you_absolutely_sure')}</AlertDialogTitle>
         <AlertDialogDescription>
           {t.rich('desc', {
-            name: () => <span className="font-bold">{name}</span>,
-            author: () => <span className="font-bold">{author}</span>
+            name: () => <span className="font-bold text-foreground">{name}</span>,
+            author: () => <span className="font-bold text-foreground">{author}</span>
           })}
         </AlertDialogDescription>
       </AlertDialogHeader>
