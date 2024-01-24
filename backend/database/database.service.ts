@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { NodePgDatabase, drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 
-import tableCore from '../src/admin/core/database/schema/index';
-import tableForum from '../src/admin/forum/database/schema/index';
+import tableCore from '../src/admin/core/database/index';
+import tableForum from '../src/admin/forum/database/index';
+// ! === IMPORT ===
 
 const schema = {
   ...tableCore,
   ...tableForum
+  // ! === MODULE ===
 };
 
 @Injectable()

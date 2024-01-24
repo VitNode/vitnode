@@ -3,7 +3,7 @@ import { writeFile } from 'fs/promises';
 
 import { Injectable } from '@nestjs/common';
 
-import { changeModuleRootSchema, createModuleSchema } from './contents';
+import { changeDatabaseService, changeModuleRootSchema, createModuleSchema } from './contents';
 import { CreateAdminPluginsArgs } from './dto/create.args';
 import { ShowAdminPlugins } from '../show/dto/show.obj';
 
@@ -53,6 +53,15 @@ export class CreateAdminPluginsService {
             content: createModuleSchema({ code, admin: true })
           }
         ]
+      },
+      {
+        path: `src/admin/${code}/database`,
+        files: [
+          {
+            name: 'index.ts',
+            content: `export default {};\n`
+          }
+        ]
       }
     ];
 
@@ -88,7 +97,7 @@ export class CreateAdminPluginsService {
     }
 
     // Import module in admin
-    const pathAdminModules = `src/admin/admin.module.ts`;
+    const pathAdminModules = 'src/admin/admin.module.ts';
     const adminModuleContent = readFileSync(pathAdminModules, 'utf8');
     if (!adminModuleContent.includes(`./${code}/${code}.module`)) {
       await writeFile(
@@ -100,6 +109,18 @@ export class CreateAdminPluginsService {
         })
       );
     }
+
+    // Database
+    const pathDatabaseService = 'database/database.service.ts';
+    const databaseContentService = readFileSync(pathDatabaseService, 'utf8');
+    await writeFile(
+      pathDatabaseService,
+      changeDatabaseService({
+        content: databaseContentService,
+        code,
+        admin: true
+      })
+    );
 
     const findPluginWithLastPosition = await this.databaseService.db.query.core_plugins.findFirst({
       orderBy: (table, { desc }) => desc(table.position)

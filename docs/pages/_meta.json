@@ -40,6 +40,7 @@
       "breadcrumb": false
     }
   },
+  "plugins": "🔌 Plugins",
   "backend": "Backend",
   "frontend": "Frontend",
   "contact": {

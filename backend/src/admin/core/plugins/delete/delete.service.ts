@@ -4,7 +4,7 @@ import { rm, writeFile } from 'fs/promises';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { removeModuleFromRootSchema } from './contents';
+import { removeDatabaseFromService, removeModuleFromRootSchema } from './contents';
 import { DeleteAdminPluginsArgs } from './dto/delete.args';
 
 import { DatabaseService } from '@/database/database.service';
@@ -51,11 +51,21 @@ export class DeleteAdminPluginsService {
 
     const pathAdminModules = `src/admin/admin.module.ts`;
     const adminModuleContent = readFileSync(pathAdminModules, 'utf8');
-
     await writeFile(
       pathAdminModules,
       removeModuleFromRootSchema({
         content: adminModuleContent,
+        code,
+        admin: true
+      })
+    );
+
+    const pathDatabaseService = 'database/database.service.ts';
+    const databaseContentService = readFileSync(pathDatabaseService, 'utf8');
+    await writeFile(
+      pathDatabaseService,
+      removeDatabaseFromService({
+        content: databaseContentService,
         code,
         admin: true
       })

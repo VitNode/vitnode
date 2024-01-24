@@ -4,6 +4,8 @@ import * as path from 'path';
 import { Injectable } from '@nestjs/common';
 import * as archiver from 'archiver';
 
+// import * as files from '../../database/schema/files';
+
 @Injectable()
 export class TestPluginsService {
   constructor() {}
@@ -43,6 +45,8 @@ export class TestPluginsService {
   }
 
   async test2(): Promise<string> {
+    // console.log(files, Object.keys(files));
+
     return 'test';
   }
 }
