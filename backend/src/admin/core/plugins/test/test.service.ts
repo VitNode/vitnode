@@ -1,14 +1,15 @@
 import * as fs from 'fs';
 import * as path from 'path';
+// import { exec } from 'child_process';
 
 import { Injectable } from '@nestjs/common';
 import * as archiver from 'archiver';
 
-// import * as files from '../../database/schema/files';
+import { DatabaseService } from '@/database/database.service';
 
 @Injectable()
 export class TestPluginsService {
-  constructor() {}
+  constructor(private databaseService: DatabaseService) {}
 
   async test(): Promise<string> {
     const output = 'public/temp/output.zip';
@@ -45,7 +46,19 @@ export class TestPluginsService {
   }
 
   async test2(): Promise<string> {
-    // console.log(files, Object.keys(files));
+    // await this.testService.delete();
+
+    // exec('pnpm db', (error, stdout, stderr) => {
+    //   if (error) {
+    //     console.log(`error: ${error.message}`);
+    //     return;
+    //   }
+    //   if (stderr) {
+    //     console.log(`stderr: ${stderr}`);
+    //     return;
+    //   }
+    //   console.log(`stdout: ${stdout}`);
+    // });
 
     return 'test';
   }

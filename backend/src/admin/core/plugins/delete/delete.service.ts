@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 import { rm, writeFile } from 'fs/promises';
 
 import { Injectable } from '@nestjs/common';
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 
 import { removeDatabaseFromService, removeModuleFromRootSchema } from './contents';
 import { DeleteAdminPluginsArgs } from './dto/delete.args';
@@ -38,6 +38,16 @@ export class DeleteAdminPluginsService {
         message: 'This plugin is default and cannot be deleted'
       });
     }
+
+    // Drop tables
+    const tables: { getTables: () => string[] } = await import(
+      `../../../${code}/database/functions`
+    );
+    Promise.all(
+      tables.getTables().map(async table => {
+        await this.databaseService.db.execute(sql.raw(`DROP TABLE IF EXISTS ${table}`));
+      })
+    );
 
     const pathModules = `src/modules.module.ts`;
     const moduleContent = readFileSync(pathModules, 'utf8');
@@ -76,6 +86,6 @@ export class DeleteAdminPluginsService {
 
     await this.databaseService.db.delete(core_plugins).where(eq(core_plugins.code, code));
 
-    return 'DeleteAdminPluginsService';
+    return 'Success!';
   }
 }

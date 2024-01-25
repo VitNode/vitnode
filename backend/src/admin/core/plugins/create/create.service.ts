@@ -3,7 +3,12 @@ import { writeFile } from 'fs/promises';
 
 import { Injectable } from '@nestjs/common';
 
-import { changeDatabaseService, changeModuleRootSchema, createModuleSchema } from './contents';
+import {
+  changeDatabaseService,
+  changeModuleRootSchema,
+  createModuleSchema,
+  createFunctionsDatabase
+} from './contents';
 import { CreateAdminPluginsArgs } from './dto/create.args';
 import { ShowAdminPlugins } from '../show/dto/show.obj';
 
@@ -121,6 +126,9 @@ export class CreateAdminPluginsService {
         admin: true
       })
     );
+
+    const pathDeleteDatabaseService = `src/admin/${code}/database/functions.ts`;
+    await writeFile(pathDeleteDatabaseService, createFunctionsDatabase());
 
     const findPluginWithLastPosition = await this.databaseService.db.query.core_plugins.findFirst({
       orderBy: (table, { desc }) => desc(table.position)
