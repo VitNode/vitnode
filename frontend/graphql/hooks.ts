@@ -512,8 +512,8 @@ export type ShowAdminPlugins = {
   support_url?: Maybe<Scalars['String']['output']>;
   updated: Scalars['Int']['output'];
   uploaded: Scalars['Int']['output'];
-  version: Scalars['String']['output'];
-  version_code: Scalars['Int']['output'];
+  version?: Maybe<Scalars['String']['output']>;
+  version_code?: Maybe<Scalars['Int']['output']>;
 };
 
 export type ShowAdminPluginsObj = {
@@ -1049,7 +1049,7 @@ export type Core_Plugins__Admin__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Core_Plugins__Admin__ShowQuery = { __typename?: 'Query', core_plugins__admin__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url: string, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, position: number, protected: boolean, support_url?: string | null, updated: number, uploaded: number, version: string, version_code: number }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Core_Plugins__Admin__ShowQuery = { __typename?: 'Query', core_plugins__admin__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url: string, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, position: number, protected: boolean, support_url?: string | null, updated: number, uploaded: number, version?: string | null, version_code?: number | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Admin_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 

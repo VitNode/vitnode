@@ -23,10 +23,10 @@ import { CodeHighlightPluginEditor } from './plugins/code-highlight';
 import { CodeActionMenuPluginEditor } from './plugins/code/code-action-menu';
 import { useGlobals } from '@/hooks/core/use-globals';
 import type { TextLanguage } from '@/graphql/hooks';
-import './editor.scss';
 import { EmojiPluginEditor } from './plugins/emoji';
 import { initialConfigEditor } from './initial-config';
 import { BottomToolbarEditor } from './toolbar/bottom-toolbar-editor';
+import './editor.scss';
 
 interface Props {
   id: string;

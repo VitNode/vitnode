@@ -48,7 +48,7 @@ export const ItemContentTablePluginsAdmin = ({ data }: Props) => {
       <div className="flex flex-col flex-1">
         <div className="flex gap-2 items-center">
           <span className="font-semibold">{data.name}</span>
-          <span className="text-muted-foreground text-sm">{data.version}</span>
+          {data.version && <span className="text-muted-foreground text-sm">{data.version}</span>}
           {data.default && <Badge variant="outline">{t('default')}</Badge>}
         </div>
         {data.description && (

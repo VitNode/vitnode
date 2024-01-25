@@ -62,12 +62,13 @@ export class CreateDatabaseAdminInstallService {
     ]);
 
     // Create plugins
+    const packageJSON = JSON.parse(fs.readFileSync('package.json', 'utf8'));
     await this.databaseService.db.insert(core_plugins).values([
       {
         code: 'forum',
         name: 'Forum',
         description: 'Community forum plugin.',
-        version: '0.1.0 Alpha 1',
+        version: packageJSON.version,
         author: 'VitNode',
         author_url: 'https://vitnode.com/',
         uploaded: currentDate(),

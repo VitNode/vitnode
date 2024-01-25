@@ -247,8 +247,8 @@ type ShowAdminPlugins {
   support_url: String
   updated: Int!
   uploaded: Int!
-  version: String!
-  version_code: Int!
+  version: String
+  version_code: Int
 }
 
 type ShowAdminPluginsObj {
