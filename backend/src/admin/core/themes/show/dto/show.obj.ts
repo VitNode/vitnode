@@ -16,9 +16,6 @@ export class ShowAdminThemes {
   @Field(() => Int, { nullable: true })
   version_code: number | null;
 
-  @Field(() => Boolean)
-  enabled: boolean;
-
   @Field(() => Int)
   created: number;
 

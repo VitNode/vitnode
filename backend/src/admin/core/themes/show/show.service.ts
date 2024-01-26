@@ -22,7 +22,7 @@ export class ShowAdminThemesService {
       last,
       primaryCursor: { order: 'ASC', key: 'id', schema: core_themes.id },
       defaultSortBy: {
-        direction: SortDirectionEnum.asc,
+        direction: SortDirectionEnum.desc,
         column: 'created'
       },
       sortBy

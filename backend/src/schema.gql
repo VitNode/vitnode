@@ -116,7 +116,6 @@ type Mutation {
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
   core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
-  core_plugins__admin__change_position(id: Int!, index_to_move: Int!): String!
   core_plugins__admin__create(author: String!, author_url: String!, code: String!, description: String, name: String!, support_url: String!): ShowAdminPlugins!
   core_plugins__admin__delete(code: String!): String!
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
@@ -238,16 +237,14 @@ type ShowAdminPlugins {
   author: String!
   author_url: String!
   code: String!
+  created: Int!
   default: Boolean!
   description: String
   enabled: Boolean!
   id: Int!
   name: String!
-  position: Int!
   protected: Boolean!
   support_url: String
-  updated: Int!
-  uploaded: Int!
   version: String
   version_code: Int
 }
@@ -317,7 +314,6 @@ type ShowAdminThemes {
   author_url: String!
   created: Int!
   default: Boolean!
-  enabled: Boolean!
   id: Int!
   name: String!
   protected: Boolean!

@@ -5,7 +5,7 @@ export const OverviewSettingsView = () => {
   return (
     <Card>
       <HeaderOverviewSettings />
-      <CardContent>test</CardContent>
+      <CardContent>Not implemented!</CardContent>
     </Card>
   );
 };

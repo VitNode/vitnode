@@ -5,7 +5,7 @@ export const NotificationsSettingsView = () => {
   return (
     <Card>
       <HeaderNotificationsSettings />
-      <CardContent>Test</CardContent>
+      <CardContent>Not implemented!</CardContent>
     </Card>
   );
 };

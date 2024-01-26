@@ -12,8 +12,7 @@ import type { Core_Themes__Admin__ShowQuery, ShowAdminThemes } from '@/graphql/h
 export const ContentTableThemesAdmin = ({
   core_themes__admin__show: { edges, pageInfo }
 }: Core_Themes__Admin__ShowQuery) => {
-  const t = useTranslations('admin.core.styles.themes');
-  const tCore = useTranslations('core');
+  const t = useTranslations('core');
 
   const columns: ColumnDef<ShowAdminThemes>[] = useMemo(
     () => [
@@ -26,7 +25,7 @@ export const ContentTableThemesAdmin = ({
           return (
             <div className="flex gap-2 items-center">
               <span className="font-semibold">{data.name}</span>
-              {data.default && <Badge variant="outline">{tCore('default')}</Badge>}
+              {data.default && <Badge variant="outline">{t('default')}</Badge>}
             </div>
           );
         }

@@ -19,7 +19,7 @@ export const ContentTableLangsCoreAdmin = ({ data }: LangsCoreAdminViewProps) =>
   const columns: ColumnDef<ShowCoreLanguages>[] = useMemo(
     () => [
       {
-        header: t('table.name'),
+        header: tCore('table.name'),
         accessorKey: 'name',
         cell: ({ row }) => {
           const data = row.original;
@@ -33,7 +33,7 @@ export const ContentTableLangsCoreAdmin = ({ data }: LangsCoreAdminViewProps) =>
         }
       },
       {
-        header: t('table.enabled'),
+        header: tCore('table.enabled'),
         accessorKey: 'enabled',
         cell: ({ row }) => {
           const data = row.original;
@@ -75,13 +75,11 @@ export const ContentTableLangsCoreAdmin = ({ data }: LangsCoreAdminViewProps) =>
   );
 
   return (
-    <>
-      <DataTable
-        data={data?.core_languages__show.edges ?? []}
-        pageInfo={data?.core_languages__show.pageInfo}
-        defaultPageSize={10}
-        columns={columns}
-      />
-    </>
+    <DataTable
+      data={data?.core_languages__show.edges ?? []}
+      pageInfo={data?.core_languages__show.pageInfo}
+      defaultPageSize={10}
+      columns={columns}
+    />
   );
 };

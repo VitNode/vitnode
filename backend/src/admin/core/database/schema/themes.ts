@@ -5,7 +5,6 @@ export const core_themes = pgTable('core_themes', {
   name: varchar('name', { length: 100 }).notNull(),
   version: varchar('version', { length: 255 }),
   version_code: integer('version_code'),
-  enabled: boolean('enabled').notNull().default(true),
   created: integer('created').notNull(),
   support_url: varchar('support_url', { length: 255 }),
   protected: boolean('protected').notNull().default(false),

@@ -75,21 +75,13 @@
       },
       "styles": {
         "themes": {
-          "title": "Motywy",
-          "table": {
-            "name": "Nazwa",
-            "version": "Wersja",
-            "author": "Autor",
-            "created": "Stworzono"
-          }
+          "title": "Motywy"
         }
       },
       "langs": {
         "title": "Języki",
         "table": {
-          "name": "Nazwa",
-          "key": "Klucz",
-          "enabled": "Włączony"
+          "key": "Klucz"
         },
         "actions": {
           "edit": {
@@ -108,7 +100,6 @@
           "groups": "Grupy"
         },
         "table": {
-          "name": "Nazwa",
           "email": "Email",
           "group": "Grupa",
           "joined": "Dołączył"
@@ -120,9 +111,7 @@
         "default": "Domyślna",
         "root": "Admin Root",
         "table": {
-          "name": "Nazwa",
-          "users_count": "Użytkownicy",
-          "updated": "Zaktualizowano"
+          "users_count": "Użytkownicy"
         },
         "create_edit": {
           "form": {

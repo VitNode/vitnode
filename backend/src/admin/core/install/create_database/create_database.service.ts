@@ -72,11 +72,9 @@ export class CreateDatabaseAdminInstallService {
         version: packageJSON.version,
         author: 'VitNode',
         author_url: 'https://vitnode.com/',
-        uploaded: currentDate(),
-        updated: currentDate(),
+        created: currentDate(),
         protected: true,
-        default: true,
-        position: 0
+        default: true
       }
     ]);
 

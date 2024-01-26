@@ -30,7 +30,7 @@ export const ContentTableUsersMembersAdmin = ({ data }: UsersMembersAdminViewPro
   const columns: ColumnDef<UsersMembersAdminAPIDataType>[] = useMemo(
     () => [
       {
-        header: t('table.name'),
+        header: tCore('table.name'),
         accessorKey: 'name',
         cell: ({ row }) => {
           const data = row.original;

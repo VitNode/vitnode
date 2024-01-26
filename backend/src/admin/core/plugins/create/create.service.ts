@@ -130,10 +130,6 @@ export class CreateAdminPluginsService {
     const pathDeleteDatabaseService = `src/admin/${code}/database/functions.ts`;
     await writeFile(pathDeleteDatabaseService, createFunctionsDatabase());
 
-    const findPluginWithLastPosition = await this.databaseService.db.query.core_plugins.findFirst({
-      orderBy: (table, { desc }) => desc(table.position)
-    });
-
     const data = await this.databaseService.db
       .insert(core_plugins)
       .values({
@@ -143,9 +139,7 @@ export class CreateAdminPluginsService {
         support_url,
         author,
         author_url,
-        updated: currentDate(),
-        uploaded: currentDate(),
-        position: findPluginWithLastPosition ? findPluginWithLastPosition.position + 1 : 0
+        created: currentDate()
       })
       .returning();
 

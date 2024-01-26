@@ -75,21 +75,13 @@
       },
       "styles": {
         "themes": {
-          "title": "Themes",
-          "table": {
-            "name": "Name",
-            "version": "Version",
-            "author": "Author",
-            "created": "Created"
-          }
+          "title": "Themes"
         }
       },
       "langs": {
         "title": "Languages",
         "table": {
-          "name": "Name",
-          "key": "Key",
-          "enabled": "Enabled"
+          "key": "Key"
         },
         "actions": {
           "edit": {
@@ -108,7 +100,6 @@
           "groups": "Groups"
         },
         "table": {
-          "name": "Name",
           "email": "Email",
           "group": "Group",
           "joined": "Joined"
@@ -120,9 +111,7 @@
         "default": "Default",
         "root": "Admin Root",
         "table": {
-          "name": "Name",
-          "users_count": "Users",
-          "updated": "Updated"
+          "users_count": "Users"
         },
         "create_edit": {
           "form": {

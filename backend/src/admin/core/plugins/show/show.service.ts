@@ -22,8 +22,8 @@ export class ShowAdminPluginsService {
       last,
       primaryCursor: { order: 'ASC', key: 'id', schema: core_plugins.id },
       defaultSortBy: {
-        direction: SortDirectionEnum.asc,
-        column: 'position'
+        direction: SortDirectionEnum.desc,
+        column: 'created'
       },
       sortBy
     });

@@ -14,12 +14,13 @@ import { Badge } from '@/components/ui/badge';
 
 export const ContentTableGroupsMembersAdmin = ({ data }: GroupsMembersAdminViewProps) => {
   const t = useTranslations('admin.members.groups');
+  const tCore = useTranslations('core');
   const { convertText } = useTextLang();
 
   const columns: ColumnDef<ShowAdminGroups>[] = useMemo(
     () => [
       {
-        header: t('table.name'),
+        header: tCore('table.name'),
         accessorKey: 'name',
         cell: ({ row }) => {
           const data = row.original;
@@ -46,7 +47,7 @@ export const ContentTableGroupsMembersAdmin = ({ data }: GroupsMembersAdminViewP
       },
       {
         header: val => {
-          return <HeaderSortingDataTable {...val}>{t('table.updated')}</HeaderSortingDataTable>;
+          return <HeaderSortingDataTable {...val}>{tCore('table.updated')}</HeaderSortingDataTable>;
         },
         accessorKey: 'updated',
         cell: ({ row }) => {

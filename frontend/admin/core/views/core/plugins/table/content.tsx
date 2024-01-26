@@ -1,100 +1,119 @@
-import { useState, useMemo } from 'react';
-import { Virtuoso } from 'react-virtuoso';
-import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { DndContext, DragOverlay, defaultDropAnimationSideEffects } from '@dnd-kit/core';
-import { useQueryClient, type InfiniteData } from '@tanstack/react-query';
+import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
+import type { ColumnDef } from '@tanstack/react-table';
+import { ExternalLink } from 'lucide-react';
 
-import { ItemContentTablePluginsAdmin } from './item';
-import { usePluginsAdminAPI } from '../hooks/use-plugins-admin-api';
-import type { Core_Plugins__Admin__ShowQuery } from '@/graphql/hooks';
-import { APIKeys } from '@/graphql/api-keys';
-import { Loader } from '@/components/loader/loader';
-import { ErrorAdminView } from '@/admin/core/global/error-admin-view';
-import { mutationChangePositionApi } from '../hooks/mutation-change-position-api';
+import type { Core_Plugins__Admin__ShowQuery, ShowAdminPlugins } from '@/graphql/hooks';
+import { Badge } from '@/components/ui/badge';
+import { HeaderSortingDataTable } from '@/components/data-table/header';
+import { DateFormat } from '@/components/date-format/date-format';
+import { DataTable } from '@/components/data-table/data-table';
+import { Switch } from '@/components/ui/switch';
+import { ActionsItemPluginsAdmin } from './actions/actions';
 
-export const ContentTablePluginsAdmin = () => {
+export const ContentTablePluginsAdmin = ({
+  core_plugins__admin__show: { edges, pageInfo }
+}: Core_Plugins__Admin__ShowQuery) => {
   const t = useTranslations('core');
-  const { data, isError, isLoading } = usePluginsAdminAPI();
-  const queryClient = useQueryClient();
-  const [active, setActive] = useState<number | null>(null);
 
-  const sortedIds = useMemo(() => data.map(({ id }) => id), [data]);
+  const columns: ColumnDef<ShowAdminPlugins>[] = useMemo(
+    () => [
+      {
+        header: t('table.name'),
+        accessorKey: 'name',
+        cell: ({ row }) => {
+          const data = row.original;
 
-  if (isLoading) return <Loader />;
-  if (isError) return <ErrorAdminView />;
-  if (!data || data.length === 0) return <div className="text-center">{t('no_results')}</div>;
+          return (
+            <div className="flex gap-2 items-center">
+              <span className="font-semibold">{data.name}</span>
+              {data.default && <Badge variant="outline">{t('default')}</Badge>}
+            </div>
+          );
+        }
+      },
+      {
+        header: t('table.version'),
+        accessorKey: 'version'
+      },
+      {
+        header: t('table.author'),
+        accessorKey: 'author',
+        cell: ({ row }) => {
+          const data = row.original;
+
+          return (
+            <a
+              href={data.author_url}
+              className="flex gap-1"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {data.author} <ExternalLink className="size-4" />
+            </a>
+          );
+        }
+      },
+      {
+        header: val => {
+          return <HeaderSortingDataTable {...val}>{t('table.created')}</HeaderSortingDataTable>;
+        },
+        accessorKey: 'created',
+        cell: ({ row }) => {
+          const data = row.original;
+
+          return <DateFormat date={data.created} />;
+        }
+      },
+      {
+        header: t('table.enabled'),
+        accessorKey: 'enabled',
+        cell: ({ row }) => {
+          const data = row.original;
+
+          return (
+            <Switch
+              disabled={data.default || data.protected}
+              checked={data.enabled}
+              onClick={async () => {
+                // const mutation = await mutationApi({
+                //   ...data,
+                //   enabled: !data.enabled
+                // });
+                // if (mutation.error) {
+                //   toast.error(tCore('errors.title'), {
+                //     description: tCore('errors.internal_server_error')
+                //   });
+                //   return;
+                // }
+              }}
+            />
+          );
+        }
+      },
+      {
+        id: 'actions',
+        cell: ({ row }) => {
+          const data = row.original;
+
+          return <ActionsItemPluginsAdmin {...data} />;
+        }
+      }
+    ],
+    []
+  );
 
   return (
-    <DndContext
-      onDragStart={({ active }) => {
-        const findIndex = data.findIndex(item => item.id === active.id);
-
-        setActive(findIndex);
+    <DataTable
+      data={edges}
+      pageInfo={pageInfo}
+      defaultPageSize={10}
+      columns={columns}
+      // searchPlaceholder={t('search_placeholder')}
+      defaultSorting={{
+        sortBy: 'created',
+        sortDirection: 'desc'
       }}
-      onDragCancel={() => {
-        setActive(null);
-      }}
-      onDragEnd={async ({ active, over }) => {
-        const findOverIndex = data.findIndex(item => item.id === over?.id);
-        const activeItemIndex = data.findIndex(item => item.id === active.id);
-        if (activeItemIndex === findOverIndex) return;
-
-        queryClient.setQueryData<InfiniteData<Core_Plugins__Admin__ShowQuery>>(
-          [APIKeys.PLUGINS],
-          old => {
-            if (!old) return old;
-
-            const parsePages = old.pages.flatMap(page => page.core_plugins__admin__show);
-            const pageInfo = parsePages.at(-1)?.pageInfo;
-            if (!pageInfo) return old;
-            const newEdges = arrayMove(data, activeItemIndex, findOverIndex);
-
-            return {
-              pages: [
-                {
-                  core_plugins__admin__show: {
-                    edges: newEdges.map((item, index) => ({ ...item, position: index })),
-                    pageInfo
-                  }
-                }
-              ],
-              pageParams: [old.pageParams.at(-1)]
-            };
-          }
-        );
-
-        setActive(null);
-
-        await mutationChangePositionApi({
-          id: Number(active.id),
-          indexToMove: findOverIndex
-        });
-      }}
-    >
-      <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
-        <Virtuoso
-          useWindowScroll
-          overscan={200}
-          data={data}
-          itemContent={(_index, data) => <ItemContentTablePluginsAdmin key={data.id} data={data} />}
-        />
-      </SortableContext>
-      <DragOverlay
-        dropAnimation={{
-          sideEffects: defaultDropAnimationSideEffects({
-            styles: {
-              active: {
-                opacity: '0.5'
-              }
-            }
-          })
-        }}
-      >
-        {active !== null && (
-          <ItemContentTablePluginsAdmin key={data[active].id} data={data[active]} />
-        )}
-      </DragOverlay>
-    </DndContext>
+    />
   );
 };

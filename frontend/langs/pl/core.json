@@ -35,6 +35,14 @@
       "previous": "Poprzednia",
       "next": "Następna"
     },
+    "table": {
+      "name": "Nazwa",
+      "created": "Utworzono",
+      "updated": "Zaktualizowano",
+      "version": "Wersja",
+      "author": "Autor",
+      "enabled": "Włączony"
+    },
     "editor": {
       "remove_formatting": "Usuń formatowanie",
       "mixed": "Mieszane",

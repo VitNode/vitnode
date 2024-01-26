@@ -3,13 +3,11 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
-import { useQueryClient } from '@tanstack/react-query';
 
 import { useSessionAdmin } from '@/admin/core/hooks/use-session-admin';
 import { mutationApi } from './mutation-api';
 import { useDialog } from '@/components/ui/dialog';
 import { usePathname, useRouter } from '@/i18n';
-import { APIKeys } from '@/graphql/api-keys';
 
 export const codePluginRegex = /^[a-z0-9-]*$/;
 
@@ -20,7 +18,6 @@ export const useCreatePluginAdmin = () => {
   const pathname = usePathname();
   const { push } = useRouter();
   const { session } = useSessionAdmin();
-  const queryClient = useQueryClient();
   const formSchema = z.object({
     name: z.string().min(3).max(100),
     code: z
@@ -70,9 +67,6 @@ export const useCreatePluginAdmin = () => {
 
     toast.success(t('success'), {
       description: values.name
-    });
-    queryClient.refetchQueries({
-      queryKey: [APIKeys.PLUGINS]
     });
 
     setOpen(false);

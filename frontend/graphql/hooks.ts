@@ -145,7 +145,6 @@ export type Mutation = {
   core_members__avatar__delete: Scalars['String']['output'];
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
   core_members__sign_up: SignUpCoreMembersObj;
-  core_plugins__admin__change_position: Scalars['String']['output'];
   core_plugins__admin__create: ShowAdminPlugins;
   core_plugins__admin__delete: Scalars['String']['output'];
   core_sessions__sign_in: Scalars['String']['output'];
@@ -203,12 +202,6 @@ export type MutationCore_Members__Sign_UpArgs = {
   name: Scalars['String']['input'];
   newsletter?: InputMaybe<Scalars['Boolean']['input']>;
   password: Scalars['String']['input'];
-};
-
-
-export type MutationCore_Plugins__Admin__Change_PositionArgs = {
-  id: Scalars['Int']['input'];
-  index_to_move: Scalars['Int']['input'];
 };
 
 
@@ -512,16 +505,14 @@ export type ShowAdminPlugins = {
   author: Scalars['String']['output'];
   author_url: Scalars['String']['output'];
   code: Scalars['String']['output'];
+  created: Scalars['Int']['output'];
   default: Scalars['Boolean']['output'];
   description?: Maybe<Scalars['String']['output']>;
   enabled: Scalars['Boolean']['output'];
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
-  position: Scalars['Int']['output'];
   protected: Scalars['Boolean']['output'];
   support_url?: Maybe<Scalars['String']['output']>;
-  updated: Scalars['Int']['output'];
-  uploaded: Scalars['Int']['output'];
   version?: Maybe<Scalars['String']['output']>;
   version_code?: Maybe<Scalars['Int']['output']>;
 };
@@ -600,7 +591,6 @@ export type ShowAdminThemes = {
   author_url: Scalars['String']['output'];
   created: Scalars['Int']['output'];
   default: Scalars['Boolean']['output'];
-  enabled: Scalars['Boolean']['output'];
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   protected: Scalars['Boolean']['output'];
@@ -916,14 +906,6 @@ export type Core_Staff_Moderators__Admin__DeleteMutationVariables = Exact<{
 
 export type Core_Staff_Moderators__Admin__DeleteMutation = { __typename?: 'Mutation', core_staff_moderators__admin__delete: string };
 
-export type Core_Plugins__Admin__Change_PositionMutationVariables = Exact<{
-  id: Scalars['Int']['input'];
-  indexToMove: Scalars['Int']['input'];
-}>;
-
-
-export type Core_Plugins__Admin__Change_PositionMutation = { __typename?: 'Mutation', core_plugins__admin__change_position: string };
-
 export type Core_Plugins__Admin__CreateMutationVariables = Exact<{
   author: Scalars['String']['input'];
   authorUrl: Scalars['String']['input'];
@@ -1097,10 +1079,11 @@ export type Core_Plugins__Admin__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<Array<ShowAdminPluginsSortByArgs> | ShowAdminPluginsSortByArgs>;
 }>;
 
 
-export type Core_Plugins__Admin__ShowQuery = { __typename?: 'Query', core_plugins__admin__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url: string, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, position: number, protected: boolean, support_url?: string | null, updated: number, uploaded: number, version?: string | null, version_code?: number | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Core_Plugins__Admin__ShowQuery = { __typename?: 'Query', core_plugins__admin__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url: string, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, protected: boolean, support_url?: string | null, created: number, version?: string | null, version_code?: number | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Admin_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1115,7 +1098,7 @@ export type Core_Themes__Admin__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Core_Themes__Admin__ShowQuery = { __typename?: 'Query', core_themes__admin__show: { __typename?: 'ShowAdminThemesObj', edges: Array<{ __typename?: 'ShowAdminThemes', author: string, author_url: string, created: number, default: boolean, enabled: boolean, id: number, name: string, protected: boolean, support_url?: string | null, version?: string | null, version_code?: number | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Core_Themes__Admin__ShowQuery = { __typename?: 'Query', core_themes__admin__show: { __typename?: 'ShowAdminThemesObj', edges: Array<{ __typename?: 'ShowAdminThemes', author: string, author_url: string, created: number, default: boolean, id: number, name: string, protected: boolean, support_url?: string | null, version?: string | null, version_code?: number | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1317,11 +1300,6 @@ export const Core_Staff_Moderators__Admin__Create = gql`
 export const Core_Staff_Moderators__Admin__Delete = gql`
     mutation Core_staff_moderators__admin__delete($id: Int!) {
   core_staff_moderators__admin__delete(id: $id)
-}
-    `;
-export const Core_Plugins__Admin__Change_Position = gql`
-    mutation Core_plugins__admin__change_position($id: Int!, $indexToMove: Int!) {
-  core_plugins__admin__change_position(id: $id, index_to_move: $indexToMove)
 }
     `;
 export const Core_Plugins__Admin__Create = gql`
@@ -1720,8 +1698,13 @@ export const Core_Members__Admin__Show = gql`
 }
     `;
 export const Core_Plugins__Admin__Show = gql`
-    query Core_plugins__admin__show($cursor: Int, $first: Int, $last: Int) {
-  core_plugins__admin__show(cursor: $cursor, first: $first, last: $last) {
+    query Core_plugins__admin__show($cursor: Int, $first: Int, $last: Int, $sortBy: [ShowAdminPluginsSortByArgs!]) {
+  core_plugins__admin__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+    sortBy: $sortBy
+  ) {
     edges {
       author
       author_url
@@ -1731,11 +1714,9 @@ export const Core_Plugins__Admin__Show = gql`
       enabled
       id
       name
-      position
       protected
       support_url
-      updated
-      uploaded
+      created
       version
       version_code
     }
@@ -1791,7 +1772,6 @@ export const Core_Themes__Admin__Show = gql`
       author_url
       created
       default
-      enabled
       id
       name
       protected

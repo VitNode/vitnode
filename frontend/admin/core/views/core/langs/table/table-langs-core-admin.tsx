@@ -6,7 +6,7 @@ import { Loader } from '@/components/loader/loader';
 import type { LangsCoreAdminViewProps } from '../langs-core-admin-view';
 
 const ContentTableLangsCoreAdmin = lazy(() =>
-  import('./content-table-langs-core-admin').then(module => ({
+  import('./content').then(module => ({
     default: module.ContentTableLangsCoreAdmin
   }))
 );
