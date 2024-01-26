@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
-import { ForumForumView } from '@/themes/default/core/views/forum/forums/views/[id]/forum-forum-view';
+import { ForumForumView } from '@/themes/1/forum/views/forum/forums/views/[id]/forum-forum-view';
 import { fetcher, type ErrorType } from '@/graphql/fetcher';
 import { Forum_Forums__Show_Item } from '@/graphql/hooks';
 import type {
@@ -9,7 +9,7 @@ import type {
   Forum_Forums__Show_ItemQueryVariables
 } from '@/graphql/hooks';
 import { getIdFormString } from '@/functions/url';
-import { ErrorView } from '@/themes/default/core/views/global/error/error-view';
+import { ErrorView } from '@/themes/1/core/views/global/error/error-view';
 
 const getData = async ({ id }: { id: string }) => {
   const { data } = await fetcher<

@@ -4,7 +4,6 @@ const ENVS = {
 };
 
 export const CONFIG = {
-  default_theme: 'default',
   graphql_url: ENVS.graphql_url ?? 'http://localhost:8080',
   client_graphql_url: ENVS.client_graphql_url,
   editor: {

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { ContainerLayout } from '@/themes/default/core/layout/container-layout';
+import { ContainerLayout } from '@/themes/1/core/layout/container-layout';
 
 interface Props {
   children: ReactNode;

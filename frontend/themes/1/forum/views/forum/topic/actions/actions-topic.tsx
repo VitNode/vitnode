@@ -7,7 +7,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { LockToggleActionsTopic } from '@/themes/default/core/views/forum/topic/actions/lock-toggle/lock-toggle';
+import { LockToggleActionsTopic } from '@/themes/1/forum/views/forum/topic/actions/lock-toggle/lock-toggle';
 
 interface Props {
   id: number;

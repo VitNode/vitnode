@@ -43,7 +43,7 @@ export default async function Layout({ children }: Props) {
 
     const Layout: LazyExoticComponent<({ children }: { children: ReactNode }) => JSX.Element> =
       lazy(() =>
-        import(`@/themes/${CONFIG.default_theme}/core/layout/layout`).then(module => ({
+        import(`@/themes/1/core/layout/layout`).then(module => ({
           default: module.Layout
         }))
       );

@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { ProfileView } from '@/themes/default/core/views/profile/profile-view';
+import { ProfileView } from '@/themes/1/core/views/profile/profile-view';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Members__Profiles,
