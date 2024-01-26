@@ -1,6 +1,7 @@
 import type { ColumnDef } from '@tanstack/react-table';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
+import { ExternalLink } from 'lucide-react';
 
 import { DataTable } from '@/components/data-table/data-table';
 import { HeaderSortingDataTable } from '@/components/data-table/header';
@@ -33,6 +34,24 @@ export const ContentTableThemesAdmin = ({
       {
         header: t('table.version'),
         accessorKey: 'version'
+      },
+      {
+        header: t('table.author'),
+        accessorKey: 'author',
+        cell: ({ row }) => {
+          const data = row.original;
+
+          return (
+            <a
+              href={data.author_url}
+              className="flex gap-1"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {data.author} <ExternalLink className="size-4" />
+            </a>
+          );
+        }
       },
       {
         header: val => {

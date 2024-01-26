@@ -13,7 +13,7 @@ import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 export class ShowAdminThemesService {
   constructor(private databaseService: DatabaseService) {}
 
-  async show({ cursor, first, last }: ShowAdminThemesArgs): Promise<ShowAdminThemesObj> {
+  async show({ cursor, first, last, sortBy }: ShowAdminThemesArgs): Promise<ShowAdminThemesObj> {
     const pagination = await inputPaginationCursor({
       cursor,
       database: core_themes,
@@ -24,7 +24,8 @@ export class ShowAdminThemesService {
       defaultSortBy: {
         direction: SortDirectionEnum.asc,
         column: 'created'
-      }
+      },
+      sortBy
     });
 
     const edges = await this.databaseService.db.query.core_themes.findMany({

@@ -6,6 +6,7 @@ import { ThemesAdminView } from '@/admin/core/views/core/styles/themes/themes-ad
 import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Themes__Admin__Show,
+  ShowAdminThemesSortingColumnEnum,
   type Core_Themes__Admin__ShowQuery,
   type Core_Themes__Admin__ShowQueryVariables
 } from '@/graphql/hooks';
@@ -48,7 +49,7 @@ export default async function Page({ searchParams }: Props) {
   const variables = usePaginationAPISsr({
     searchParams,
     // search: true,
-    // sortByEnum: ShowAdminGroupsSortingColumnEnum,
+    sortByEnum: ShowAdminThemesSortingColumnEnum,
     defaultPageSize: 10
   });
   const data = await getData(variables);

@@ -82,7 +82,7 @@ export class CreateDatabaseAdminInstallService {
 
     // Create default theme
     await this.databaseService.db.insert(core_themes).values({
-      name: 'Default',
+      name: 'Default Theme',
       version: packageJSON.version,
       version_code: 1,
       author: 'VitNode',

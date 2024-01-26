@@ -377,6 +377,7 @@ export type QueryCore_Plugins__Admin__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<Array<ShowAdminPluginsSortByArgs>>;
 };
 
 
@@ -400,6 +401,7 @@ export type QueryCore_Themes__Admin__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<Array<ShowAdminThemesSortByArgs>>;
 };
 
 
@@ -530,6 +532,16 @@ export type ShowAdminPluginsObj = {
   pageInfo: PageInfo;
 };
 
+export type ShowAdminPluginsSortByArgs = {
+  column: ShowAdminPluginsSortingColumnEnum | `${ShowAdminPluginsSortingColumnEnum}`;
+  direction: SortDirectionEnum | `${SortDirectionEnum}`;
+};
+
+export const ShowAdminPluginsSortingColumnEnum = {
+  created: 'created'
+} as const;
+
+export type ShowAdminPluginsSortingColumnEnum = typeof ShowAdminPluginsSortingColumnEnum[keyof typeof ShowAdminPluginsSortingColumnEnum];
 export type ShowAdminStaffAdministrators = {
   __typename?: 'ShowAdminStaffAdministrators';
   created: Scalars['Int']['output'];
@@ -603,6 +615,16 @@ export type ShowAdminThemesObj = {
   pageInfo: PageInfo;
 };
 
+export type ShowAdminThemesSortByArgs = {
+  column: ShowAdminThemesSortingColumnEnum | `${ShowAdminThemesSortingColumnEnum}`;
+  direction: SortDirectionEnum | `${SortDirectionEnum}`;
+};
+
+export const ShowAdminThemesSortingColumnEnum = {
+  created: 'created'
+} as const;
+
+export type ShowAdminThemesSortingColumnEnum = typeof ShowAdminThemesSortingColumnEnum[keyof typeof ShowAdminThemesSortingColumnEnum];
 export type ShowCoreLanguages = {
   __typename?: 'ShowCoreLanguages';
   code: Scalars['String']['output'];
@@ -1089,6 +1111,7 @@ export type Core_Themes__Admin__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<Array<ShowAdminThemesSortByArgs> | ShowAdminThemesSortByArgs>;
 }>;
 
 
@@ -1756,8 +1779,13 @@ export const Admin_Sessions__Authorization = gql`
 }
     `;
 export const Core_Themes__Admin__Show = gql`
-    query Core_themes__admin__show($cursor: Int, $first: Int, $last: Int) {
-  core_themes__admin__show(cursor: $cursor, first: $first, last: $last) {
+    query Core_themes__admin__show($cursor: Int, $first: Int, $last: Int, $sortBy: [ShowAdminThemesSortByArgs!]) {
+  core_themes__admin__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+    sortBy: $sortBy
+  ) {
     edges {
       author
       author_url
