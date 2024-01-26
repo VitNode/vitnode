@@ -75,7 +75,13 @@
       },
       "styles": {
         "themes": {
-          "title": "Motywy"
+          "title": "Motywy",
+          "table": {
+            "name": "Nazwa",
+            "version": "Wersja",
+            "author": "Autor",
+            "created": "Stworzono"
+          }
         }
       },
       "langs": {

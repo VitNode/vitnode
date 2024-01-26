@@ -329,6 +329,7 @@ export type Query = {
   core_sessions__authorization: AuthorizationCoreSessionsObj;
   core_staff_administrators__admin__show: ShowAdminStaffAdministratorsObj;
   core_staff_moderators__admin__show: ShowAdminStaffModeratorsObj;
+  core_themes__admin__show: ShowAdminThemesObj;
   forum_forums__admin__show: ShowForumForumsAdminObj;
   forum_forums__show: ShowForumForumsObj;
   forum_posts__show: ShowPostsForumsObj;
@@ -392,6 +393,13 @@ export type QueryCore_Staff_Moderators__Admin__ShowArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   sortBy?: InputMaybe<Array<ShowAdminStaffModeratorsSortByArgs>>;
+};
+
+
+export type QueryCore_Themes__Admin__ShowArgs = {
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -574,6 +582,27 @@ export const ShowAdminStaffModeratorsSortingColumnEnum = {
 } as const;
 
 export type ShowAdminStaffModeratorsSortingColumnEnum = typeof ShowAdminStaffModeratorsSortingColumnEnum[keyof typeof ShowAdminStaffModeratorsSortingColumnEnum];
+export type ShowAdminThemes = {
+  __typename?: 'ShowAdminThemes';
+  author: Scalars['String']['output'];
+  author_url: Scalars['String']['output'];
+  created: Scalars['Int']['output'];
+  default: Scalars['Boolean']['output'];
+  enabled: Scalars['Boolean']['output'];
+  id: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+  protected: Scalars['Boolean']['output'];
+  support_url?: Maybe<Scalars['String']['output']>;
+  version?: Maybe<Scalars['String']['output']>;
+  version_code?: Maybe<Scalars['Int']['output']>;
+};
+
+export type ShowAdminThemesObj = {
+  __typename?: 'ShowAdminThemesObj';
+  edges: Array<ShowAdminThemes>;
+  pageInfo: PageInfo;
+};
+
 export type ShowCoreLanguages = {
   __typename?: 'ShowCoreLanguages';
   code: Scalars['String']['output'];
@@ -1055,6 +1084,15 @@ export type Admin_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]:
 
 
 export type Admin_Sessions__AuthorizationQuery = { __typename?: 'Query', admin_sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null } };
+
+export type Core_Themes__Admin__ShowQueryVariables = Exact<{
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type Core_Themes__Admin__ShowQuery = { __typename?: 'Query', core_themes__admin__show: { __typename?: 'ShowAdminThemesObj', edges: Array<{ __typename?: 'ShowAdminThemes', author: string, author_url: string, created: number, default: boolean, enabled: boolean, id: number, name: string, protected: boolean, support_url?: string | null, version?: string | null, version_code?: number | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1713,6 +1751,33 @@ export const Admin_Sessions__Authorization = gql`
         }
         id
       }
+    }
+  }
+}
+    `;
+export const Core_Themes__Admin__Show = gql`
+    query Core_themes__admin__show($cursor: Int, $first: Int, $last: Int) {
+  core_themes__admin__show(cursor: $cursor, first: $first, last: $last) {
+    edges {
+      author
+      author_url
+      created
+      default
+      enabled
+      id
+      name
+      protected
+      support_url
+      version
+      version_code
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
     }
   }
 }

@@ -1,0 +1,25 @@
+query Core_themes__admin__show($cursor: Int, $first: Int, $last: Int) {
+  core_themes__admin__show(cursor: $cursor, first: $first, last: $last) {
+    edges {
+      author
+      author_url
+      created
+      default
+      enabled
+      id
+      name
+      protected
+      support_url
+      version
+      version_code
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+  }
+}

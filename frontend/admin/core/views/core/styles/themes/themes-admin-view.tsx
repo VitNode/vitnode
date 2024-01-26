@@ -1,14 +1,17 @@
-import { HeaderContent } from '@/components/header-content/header-content';
 import { useTranslations } from 'next-intl';
 
-export const ThemesAdminView = () => {
+import { HeaderContent } from '@/components/header-content/header-content';
+import { TableThemesAdmin } from './table/table';
+import type { Core_Themes__Admin__ShowQuery } from '@/graphql/hooks';
+
+export const ThemesAdminView = (props: Core_Themes__Admin__ShowQuery) => {
   const t = useTranslations('admin.core.styles.themes');
 
   return (
     <>
       <HeaderContent h1={t('title')} />
 
-      <div>test</div>
+      <TableThemesAdmin {...props} />
     </>
   );
 };

@@ -75,7 +75,13 @@
       },
       "styles": {
         "themes": {
-          "title": "Themes"
+          "title": "Themes",
+          "table": {
+            "name": "Name",
+            "version": "Version",
+            "author": "Author",
+            "created": "Created"
+          }
         }
       },
       "langs": {
