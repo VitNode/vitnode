@@ -5,6 +5,7 @@ import {
   Languages,
   LayoutDashboard,
   MessagesSquare,
+  Paintbrush,
   PlugIcon,
   Settings,
   UserCog,
@@ -54,6 +55,11 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
             id: 'plugins',
             href: '/plugins',
             icon: PlugIcon
+          },
+          {
+            id: 'styles',
+            href: '/styles',
+            icon: Paintbrush
           },
           {
             id: 'langs',

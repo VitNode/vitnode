@@ -9,6 +9,7 @@
         "dashboard": "Dashboard",
         "general": "General",
         "plugins": "Plugins",
+        "styles": "Styles",
         "langs": "Languages"
       },
       "members": {
@@ -70,6 +71,11 @@
           "submit": "Yes, delete plugin",
           "desc": "This action will delete <name></name> plugin created by <author></author> and all data associated with it.",
           "success": "Plugin has been deleted."
+        }
+      },
+      "styles": {
+        "themes": {
+          "title": "Themes"
         }
       },
       "langs": {
