@@ -1,0 +1,18 @@
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
+
+import { DeleteAdminThemesService } from './delete.service';
+import { DeleteAdminThemesArgs } from './dto/create.args';
+
+import { AdminAuthGuards } from '@/utils/guards/admin-auth.guards';
+
+@Resolver()
+export class DeleteAdminThemesResolver {
+  constructor(private readonly service: DeleteAdminThemesService) {}
+
+  @Mutation(() => String)
+  @UseGuards(AdminAuthGuards)
+  async core_themes__admin__delete(@Args() args: DeleteAdminThemesArgs): Promise<string> {
+    return await this.service.delete(args);
+  }
+}

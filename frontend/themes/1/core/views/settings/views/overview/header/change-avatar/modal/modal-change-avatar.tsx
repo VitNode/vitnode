@@ -20,9 +20,7 @@ const CropperModalChangeAvatar = lazy(() =>
 export const ModalChangeAvatar = () => {
   const t = useTranslations('core');
   const { session } = useSession();
-
   const { form, onSubmit } = useModalChangeAvatar();
-
   if (!session) return null;
   const { avatar } = session;
 

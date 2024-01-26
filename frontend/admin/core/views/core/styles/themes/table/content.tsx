@@ -25,7 +25,7 @@ export const ContentTableThemesAdmin = ({
           return (
             <div className="flex gap-2 items-center">
               <span className="font-semibold">{data.name}</span>
-              {data.default && <Badge variant="outline">{t('default')}</Badge>}
+              {data.default && <Badge>{t('default')}</Badge>}
             </div>
           );
         }

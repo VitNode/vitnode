@@ -12,7 +12,6 @@ interface Props {
 
 export const CropperModalChangeAvatar = ({ file }: Props) => {
   const t = useTranslations('core');
-
   const { cropperRef, isPending, onSubmit } = useCopperModalChangeAvatar();
 
   return (
