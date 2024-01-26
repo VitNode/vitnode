@@ -167,7 +167,7 @@ type Query {
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_staff_administrators__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
   core_staff_moderators__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
-  core_themes__admin__show: String!
+  core_themes__admin__show(cursor: Int, first: Int, last: Int): ShowAdminThemesObj!
   forum_forums__admin__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsAdminObj!
   forum_forums__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsObj!
   forum_posts__show(cursor: Int, first: Int, firstEdges: Int, last: Int, sortBy: ShowPostsForumsSortingEnum, topic_id: Int!): ShowPostsForumsObj!
@@ -301,6 +301,25 @@ input ShowAdminStaffModeratorsSortByArgs {
 
 enum ShowAdminStaffModeratorsSortingColumnEnum {
   updated
+}
+
+type ShowAdminThemes {
+  author: String!
+  author_url: String!
+  created: Int!
+  default: Boolean!
+  enabled: Boolean!
+  id: Int!
+  name: String!
+  protected: Boolean!
+  support_url: String
+  version: String
+  version_code: Int
+}
+
+type ShowAdminThemesObj {
+  edges: [ShowAdminThemes!]!
+  pageInfo: PageInfo!
 }
 
 type ShowCoreLanguages {

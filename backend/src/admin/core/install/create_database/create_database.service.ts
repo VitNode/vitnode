@@ -14,6 +14,7 @@ import { core_admin_permissions } from '@/src/admin/core/database/schema/admins'
 import { core_moderators_permissions } from '../../database/schema/moderators';
 import { configPath } from '@/config';
 import { core_plugins } from '../../database/schema/plugins';
+import { core_themes } from '../../database/schema/themes';
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {
@@ -78,6 +79,18 @@ export class CreateDatabaseAdminInstallService {
         position: 0
       }
     ]);
+
+    // Create default theme
+    await this.databaseService.db.insert(core_themes).values({
+      name: 'Default',
+      version: packageJSON.version,
+      version_code: 1,
+      author: 'VitNode',
+      author_url: 'https://vitnode.com/',
+      created: currentDate(),
+      protected: true,
+      default: true
+    });
 
     // Create default groups
     const groupCount = await this.databaseService.db
