@@ -1,0 +1,13 @@
+mutation Core_themes__admin__create(
+  $author: String!
+  $authorUrl: String!
+  $name: String!
+  $supportUrl: String!
+) {
+  core_themes__admin__create(
+    author: $author
+    author_url: $authorUrl
+    name: $name
+    support_url: $supportUrl
+  )
+}

@@ -75,7 +75,24 @@
       },
       "styles": {
         "themes": {
-          "title": "Motywy"
+          "title": "Motywy",
+          "create": {
+            "title": "Stwórz motyw",
+            "success": "Motyw został utworzony.",
+            "name": {
+              "label": "Nazwa"
+            },
+            "support_url": {
+              "label": "Link do wsparcia",
+              "desc": "Link do strony wsparcia motywu."
+            },
+            "author": {
+              "label": "Autor"
+            },
+            "author_url": {
+              "label": "Link do autora"
+            }
+          }
         }
       },
       "langs": {

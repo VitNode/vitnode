@@ -75,7 +75,24 @@
       },
       "styles": {
         "themes": {
-          "title": "Themes"
+          "title": "Themes",
+          "create": {
+            "title": "Create Theme",
+            "success": "Theme has been created.",
+            "name": {
+              "label": "Name"
+            },
+            "support_url": {
+              "label": "Support URL",
+              "desc": "URL to the support page for this theme."
+            },
+            "author": {
+              "label": "Author"
+            },
+            "author_url": {
+              "label": "Author URL"
+            }
+          }
         }
       },
       "langs": {

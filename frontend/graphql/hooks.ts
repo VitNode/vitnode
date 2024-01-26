@@ -153,6 +153,8 @@ export type Mutation = {
   core_staff_administrators__admin__delete: Scalars['String']['output'];
   core_staff_moderators__admin__create: ShowAdminStaffModerators;
   core_staff_moderators__admin__delete: Scalars['String']['output'];
+  core_themes__admin__create: Scalars['String']['output'];
+  core_themes__admin__delete: Scalars['String']['output'];
   forum_forums__admin__change_position: Scalars['String']['output'];
   forum_forums__admin__create: CreateForumForumsObj;
   forum_posts__create: ShowPostsForums;
@@ -248,6 +250,19 @@ export type MutationCore_Staff_Moderators__Admin__CreateArgs = {
 
 
 export type MutationCore_Staff_Moderators__Admin__DeleteArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type MutationCore_Themes__Admin__CreateArgs = {
+  author: Scalars['String']['input'];
+  author_url: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  support_url: Scalars['String']['input'];
+};
+
+
+export type MutationCore_Themes__Admin__DeleteArgs = {
   id: Scalars['Int']['input'];
 };
 
@@ -937,6 +952,23 @@ export type Admin_Settings__General__EditMutationVariables = Exact<{
 
 export type Admin_Settings__General__EditMutation = { __typename?: 'Mutation', admin_settings__general__edit: { __typename?: 'GeneralAdminSettingsObj', side_name: string } };
 
+export type Core_Themes__Admin__CreateMutationVariables = Exact<{
+  author: Scalars['String']['input'];
+  authorUrl: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  supportUrl: Scalars['String']['input'];
+}>;
+
+
+export type Core_Themes__Admin__CreateMutation = { __typename?: 'Mutation', core_themes__admin__create: string };
+
+export type Core_Themes__Admin__DeleteMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type Core_Themes__Admin__DeleteMutation = { __typename?: 'Mutation', core_themes__admin__delete: string };
+
 export type Core_Languages__EditMutationVariables = Exact<{
   default: Scalars['Boolean']['input'];
   enabled: Scalars['Boolean']['input'];
@@ -1331,6 +1363,21 @@ export const Admin_Settings__General__Edit = gql`
   admin_settings__general__edit(side_name: $sideName) {
     side_name
   }
+}
+    `;
+export const Core_Themes__Admin__Create = gql`
+    mutation Core_themes__admin__create($author: String!, $authorUrl: String!, $name: String!, $supportUrl: String!) {
+  core_themes__admin__create(
+    author: $author
+    author_url: $authorUrl
+    name: $name
+    support_url: $supportUrl
+  )
+}
+    `;
+export const Core_Themes__Admin__Delete = gql`
+    mutation Core_themes__admin__delete($id: Int!) {
+  core_themes__admin__delete(id: $id)
 }
     `;
 export const Core_Languages__Edit = gql`
