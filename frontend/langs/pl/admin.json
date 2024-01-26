@@ -92,6 +92,11 @@
             "author_url": {
               "label": "Link do autora"
             }
+          },
+          "delete": {
+            "submit": "Tak, usuń motyw",
+            "desc": "Ta akcja usunie motyw <name></name> stworzony przez <author></author>.",
+            "success": "Motyw został usunięty."
           }
         }
       },

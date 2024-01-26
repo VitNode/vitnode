@@ -8,6 +8,7 @@ import { HeaderSortingDataTable } from '@/components/data-table/header';
 import { DateFormat } from '@/components/date-format/date-format';
 import { Badge } from '@/components/ui/badge';
 import type { Core_Themes__Admin__ShowQuery, ShowAdminThemes } from '@/graphql/hooks';
+import { ActionsItemThemesAdmin } from './actions/actions';
 
 export const ContentTableThemesAdmin = ({
   core_themes__admin__show: { edges, pageInfo }
@@ -65,8 +66,10 @@ export const ContentTableThemesAdmin = ({
       },
       {
         id: 'actions',
-        cell: () => {
-          return 'actions';
+        cell: ({ row }) => {
+          const data = row.original;
+
+          return <ActionsItemThemesAdmin {...data} />;
         }
       }
     ],
