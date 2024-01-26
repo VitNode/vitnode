@@ -4,7 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
 import { isRedirectError } from 'next/dist/client/components/redirect';
 
-import { AdminLayout } from '@/admin/layout/admin-layout';
+import { AdminLayout } from '@/admin/core/layout/admin-layout';
 import { SessionAdminProvider } from './session-admin-provider';
 import { redirect } from '@/i18n';
 import { fetcher } from '@/graphql/fetcher';

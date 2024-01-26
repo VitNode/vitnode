@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
-import { ForumsForumAdminView } from '@/admin/views/forum/forums/forums-forum-admin-view';
+import { ForumsForumAdminView } from '@/admin/forum/views/forums/forums-forum-admin-view';
 import getQueryClient from '@/functions/get-query-client';
 import { fetcher } from '@/graphql/fetcher';
 import { APIKeys } from '@/graphql/api-keys';

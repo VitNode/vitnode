@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { FormSignInAdmin } from './form/form-sign-in-admin';
 import { LogoVitNode } from '@/components/logo-vitnode';
-import { PoweredByVitNode } from '@/admin/global/powered-by';
+import { PoweredByVitNode } from '@/admin/core/global/powered-by';
 
 export const SignInAdminView = () => {
   const t = useTranslations('admin');

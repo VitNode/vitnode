@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { cookies } from 'next/headers';
 
-import { ModeratorsStaffAdminView } from '@/admin/views/members/staff/views/moderators/moderators-view';
+import { ModeratorsStaffAdminView } from '@/admin/core/views/members/staff/views/moderators/moderators-view';
 
 import { fetcher } from '../../../../../../../../../graphql/fetcher';
 import {

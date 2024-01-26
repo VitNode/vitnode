@@ -1,5 +1,5 @@
 import { ContentFilterToolbarDataTable } from '@/components/data-table/toolbar/filter/content/content';
-import { useShortShowGroupsAdminAPI } from '@/admin/hooks/api/use-short-show-groups-admin-api';
+import { useShortShowGroupsAdminAPI } from '@/admin/core/hooks/api/use-short-show-groups-admin-api';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 
 export const ContentGroupsFiltersUsersMembersAdmin = () => {

@@ -27,7 +27,7 @@ import type {
   Forum_Forums__Admin__ShowWithProjection
 } from './types';
 import { Loader } from '@/components/loader/loader';
-import { ErrorAdminView } from '@/admin/global/error-admin-view';
+import { ErrorAdminView } from '@/admin/core/global/error-admin-view';
 import { APIKeys } from '@/graphql/api-keys';
 import type { Forum_Forums__Admin__ShowQuery } from '@/graphql/hooks';
 import { mutationChangePositionApi } from '../hooks/mutation-change-position-api';
@@ -165,9 +165,8 @@ export const ContentTableForumsForumAdmin = () => {
 
         // If change item position on the same level at the end of the list
         if (active.id === over.id && depth < findActive.depth) {
-          const findParentPosition = flattenedItems.find(
-            i => i.id === findActive.parentId
-          )?.position;
+          const findParentPosition = flattenedItems.find(i => i.id === findActive.parentId)
+            ?.position;
 
           if (findParentPosition === undefined) return;
 

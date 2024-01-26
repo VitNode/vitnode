@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
+import { useSessionAdmin } from '@/admin/core/hooks/use-session-admin';
 import { mutationApi } from './mutation-api';
 import { useDialog } from '@/components/ui/dialog';
 import { usePathname, useRouter } from '@/i18n';

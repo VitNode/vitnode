@@ -10,7 +10,7 @@ import { usePluginsAdminAPI } from '../hooks/use-plugins-admin-api';
 import type { Core_Plugins__Admin__ShowQuery } from '@/graphql/hooks';
 import { APIKeys } from '@/graphql/api-keys';
 import { Loader } from '@/components/loader/loader';
-import { ErrorAdminView } from '@/admin/global/error-admin-view';
+import { ErrorAdminView } from '@/admin/core/global/error-admin-view';
 import { mutationChangePositionApi } from '../hooks/mutation-change-position-api';
 
 export const ContentTablePluginsAdmin = () => {

@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import { cookies } from 'next/headers';
 
-import { PluginsCoreAdminView } from '@/admin/views/core/plugins/plugins-admin-view';
+import { PluginsCoreAdminView } from '@/admin/core/views/core/plugins/plugins-admin-view';
 import {
   Core_Plugins__Admin__Show,
   type Core_Plugins__Admin__ShowQuery,

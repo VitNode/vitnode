@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { PoweredByVitNode } from './powered-by';
-import '@/admin/layout/global.scss';
+import '@/admin/core/layout/global.scss';
 
 interface Props {
   showPoweredBy?: boolean;

@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
-import { useSessionAdmin } from '@/admin/hooks/use-session-admin';
+import { useSessionAdmin } from '@/admin/core/hooks/use-session-admin';
 import { ItemUserBarAdmin } from './item-user-bar-admin';
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
 import { Separator } from '@/components/ui/separator';

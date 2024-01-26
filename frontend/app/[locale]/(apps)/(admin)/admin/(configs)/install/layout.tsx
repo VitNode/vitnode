@@ -1,16 +1,16 @@
 import type { ReactNode } from 'react';
 import { cookies } from 'next/headers';
 
-import { LayoutInstallConfigsView } from '@/admin/configs/views/install/layout-install-configs-view';
+import { LayoutInstallConfigsView } from '@/admin/core/configs/views/install/layout-install-configs-view';
 import { fetcher, type ErrorType } from '@/graphql/fetcher';
 import {
   Admin_Install__Layout,
   type Admin_Install__LayoutQuery,
   type Admin_Install__LayoutQueryVariables
 } from '@/graphql/hooks';
-import { InternalErrorView } from '@/admin/global/internal-error-view';
+import { InternalErrorView } from '@/admin/core/global/internal-error-view';
 import { redirect } from '@/i18n';
-import { RedirectsInstallConfigsLayout } from '@/admin/configs/views/install/redirects-install-configs-layout';
+import { RedirectsInstallConfigsLayout } from '@/admin/core/configs/views/install/redirects-install-configs-layout';
 
 interface Props {
   children: ReactNode;

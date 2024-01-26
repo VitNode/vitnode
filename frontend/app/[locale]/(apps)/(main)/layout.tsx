@@ -2,7 +2,6 @@ import { lazy, type LazyExoticComponent, type ReactNode } from 'react';
 import { cookies, headers } from 'next/headers';
 import { isRedirectError } from 'next/dist/client/components/redirect';
 
-import { CONFIG } from '@/config';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Sessions__Authorization,
@@ -10,7 +9,7 @@ import {
   type Core_Sessions__AuthorizationQueryVariables
 } from '@/graphql/hooks';
 import { SessionProvider } from './session-provider';
-import { InternalErrorView } from '@/admin/global/internal-error-view';
+import { InternalErrorView } from '@/admin/core/global/internal-error-view';
 import { redirect } from '@/i18n';
 
 interface Props {
