@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import type { ActionsItemThemesAdminProps } from '../actions';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
+import { cx } from '@/functions/classnames';
 
 export const ContentDownloadThemeActionsAdmin = ({
   id,
@@ -47,8 +48,15 @@ export const ContentDownloadThemeActionsAdmin = ({
                 </div>
 
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="new_version" id="new_version" />
-                  <Label htmlFor="new_version">{t('type.new_version')}</Label>
+                  <RadioGroupItem value="new_version" id="new_version" disabled={id === 1} />
+                  <Label
+                    htmlFor="new_version"
+                    className={cx({
+                      'opacity-50': id === 1
+                    })}
+                  >
+                    {t('type.new_version')}
+                  </Label>
                 </div>
               </RadioGroup>
             )}

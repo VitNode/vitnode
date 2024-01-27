@@ -40,7 +40,12 @@ export class DownloadAdminThemesService {
     );
 
     // Update version
-    if (version && version_code && version_code > theme.version_code) {
+    if (
+      version !== null &&
+      version_code !== null &&
+      version_code > theme.version_code &&
+      id !== 1
+    ) {
       const pathThemeConfig = `${path}/theme.json`;
       const getInfoJson = fs.readFileSync(pathThemeConfig, 'utf8');
       const infoJson: { name: string } = JSON.parse(getInfoJson);

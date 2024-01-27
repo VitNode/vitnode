@@ -8,14 +8,13 @@ import { mutationApi } from './mutation-api';
 import { increaseVersionString } from '@/functions/increase-version-string';
 import { useDialog } from '@/components/ui/dialog';
 import { CONFIG } from '@/config';
+import type { ShowAdminThemes } from '@/graphql/hooks';
 
-interface Args {
-  id: number;
-  version: string;
-  version_code: number;
-}
-
-export const useDownloadThemeAdmin = ({ id, version, version_code }: Args) => {
+export const useDownloadThemeAdmin = ({
+  id,
+  version,
+  version_code
+}: Pick<ShowAdminThemes, 'id' | 'version' | 'version_code'>) => {
   const t = useTranslations('core');
   const { setOpen } = useDialog();
   const formSchema = z.object({
@@ -36,8 +35,8 @@ export const useDownloadThemeAdmin = ({ id, version, version_code }: Args) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const mutation = await mutationApi({
       id,
-      version: values.version,
-      versionCode: values.version_code
+      version: values.type === 'new_version' ? values.version : null,
+      versionCode: values.type === 'new_version' ? values.version_code : null
     });
 
     if (mutation.error || !mutation.data) {

@@ -23,7 +23,9 @@ export const mutationApi = async (variables: Core_Themes__Admin__DownloadMutatio
       }
     });
 
-    revalidatePath('/admin/core/styles/themes', 'page');
+    if (variables.version && variables.versionCode) {
+      revalidatePath('/admin/core/styles/themes', 'page');
+    }
 
     return { data };
   } catch (error) {
