@@ -6,6 +6,8 @@ import { CreateAdminThemesService } from './create/create.service';
 import { CreateAdminThemesResolver } from './create/create.resolver';
 import { DeleteAdminThemesResolver } from './delete/delete.resolver';
 import { DeleteAdminThemesService } from './delete/delete.service';
+import { DownloadAdminThemesService } from './download/download.service';
+import { DownloadAdminThemesResolver } from './download/download.resolver';
 
 @Module({
   providers: [
@@ -14,7 +16,9 @@ import { DeleteAdminThemesService } from './delete/delete.service';
     CreateAdminThemesService,
     CreateAdminThemesResolver,
     DeleteAdminThemesResolver,
-    DeleteAdminThemesService
+    DeleteAdminThemesService,
+    DownloadAdminThemesService,
+    DownloadAdminThemesResolver
   ]
 })
 export class AdminThemesModule {}

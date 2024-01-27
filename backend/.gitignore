@@ -38,3 +38,5 @@ lerna-debug.log*
 # Static files
 public/*
 !public/index.html
+temp/*
+!temp/index.html

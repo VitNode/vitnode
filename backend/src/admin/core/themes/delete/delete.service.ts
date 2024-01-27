@@ -4,7 +4,7 @@ import { join } from 'path';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { DeleteAdminThemesArgs } from './dto/create.args';
+import { DeleteAdminThemesArgs } from './dto/delete.args';
 
 import { DatabaseService } from '@/database/database.service';
 import { NotFoundError } from '@/utils/errors/not-found-error';
