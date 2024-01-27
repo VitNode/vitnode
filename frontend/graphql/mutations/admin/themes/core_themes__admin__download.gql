@@ -1,0 +1,3 @@
+mutation Core_themes__admin__download($id: Int!) {
+  core_themes__admin__download(id: $id)
+}

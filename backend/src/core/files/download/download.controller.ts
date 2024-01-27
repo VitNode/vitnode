@@ -1,7 +1,7 @@
-import { createReadStream } from 'fs';
+import { createReadStream, existsSync, unlinkSync } from 'fs';
 import { join } from 'path';
 
-import { Controller, Get, Req, Res, StreamableFile } from '@nestjs/common';
+import { Controller, Get, Param, Req, Res, StreamableFile } from '@nestjs/common';
 import { Request, Response } from 'express';
 
 import { InternalAuthorizationCoreSessionsService } from '../../sessions/authorization/internal/internal_authorization.service';
@@ -10,24 +10,53 @@ import { InternalAuthorizationCoreSessionsService } from '../../sessions/authori
 export class DownloadFilesController {
   constructor(private service: InternalAuthorizationCoreSessionsService) {}
 
-  @Get(':id')
+  @Get(':file')
   async getFile(
     @Res({ passthrough: true }) res: Response,
-    @Req() req: Request
+    @Req() req: Request,
+    @Param() { file }: { file: string }
   ): Promise<StreamableFile> {
-    const data = await this.service.authorization({
-      req,
-      res
-    });
+    const path = join(process.cwd(), 'temp', file);
+    if (!existsSync(path)) {
+      res.status(404);
 
-    const file = createReadStream(
-      join(process.cwd(), 'temp', 'Default-Theme-0-1-0-Alpha-1--1-npKCW-1706356233.zip')
-    );
+      return;
+    }
+    const userId = file.split('.')[0].split('--')[1].split('-')[0];
+    const currentFile = {
+      name: file.split('--')[0],
+      type: file.split('.')[1]
+    };
+
+    if (userId) {
+      try {
+        const data = await this.service.authorization({
+          req,
+          res
+        });
+
+        if (+userId !== data.id) {
+          res.status(404);
+
+          return;
+        }
+      } catch (e) {
+        res.status(404);
+
+        return;
+      }
+    }
+
+    const streamFile = createReadStream(path);
     res.set({
       'Content-Type': 'application/json',
-      'Content-Disposition': 'attachment; filename="Default-Theme-0-1-0-Alpha-1.zip"'
+      'Content-Disposition': `attachment; filename="${currentFile.name}.${currentFile.type}"`
     });
 
-    return new StreamableFile(file);
+    streamFile.on('close', () => {
+      unlinkSync(path);
+    });
+
+    return new StreamableFile(streamFile);
   }
 }

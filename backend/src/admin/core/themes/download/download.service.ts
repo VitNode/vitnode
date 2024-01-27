@@ -61,6 +61,6 @@ export class DownloadAdminThemesService {
       archive.finalize();
     });
 
-    return `Success! - ${name}`;
+    return `${name}.zip`;
   }
 }

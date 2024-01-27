@@ -155,6 +155,7 @@ export type Mutation = {
   core_staff_moderators__admin__delete: Scalars['String']['output'];
   core_themes__admin__create: Scalars['String']['output'];
   core_themes__admin__delete: Scalars['String']['output'];
+  core_themes__admin__download: Scalars['String']['output'];
   forum_forums__admin__change_position: Scalars['String']['output'];
   forum_forums__admin__create: CreateForumForumsObj;
   forum_posts__create: ShowPostsForums;
@@ -263,6 +264,11 @@ export type MutationCore_Themes__Admin__CreateArgs = {
 
 
 export type MutationCore_Themes__Admin__DeleteArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type MutationCore_Themes__Admin__DownloadArgs = {
   id: Scalars['Int']['input'];
 };
 
@@ -969,6 +975,13 @@ export type Core_Themes__Admin__DeleteMutationVariables = Exact<{
 
 export type Core_Themes__Admin__DeleteMutation = { __typename?: 'Mutation', core_themes__admin__delete: string };
 
+export type Core_Themes__Admin__DownloadMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type Core_Themes__Admin__DownloadMutation = { __typename?: 'Mutation', core_themes__admin__download: string };
+
 export type Core_Languages__EditMutationVariables = Exact<{
   default: Scalars['Boolean']['input'];
   enabled: Scalars['Boolean']['input'];
@@ -1378,6 +1391,11 @@ export const Core_Themes__Admin__Create = gql`
 export const Core_Themes__Admin__Delete = gql`
     mutation Core_themes__admin__delete($id: Int!) {
   core_themes__admin__delete(id: $id)
+}
+    `;
+export const Core_Themes__Admin__Download = gql`
+    mutation Core_themes__admin__download($id: Int!) {
+  core_themes__admin__download(id: $id)
 }
     `;
 export const Core_Languages__Edit = gql`

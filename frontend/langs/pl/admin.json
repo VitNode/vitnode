@@ -97,6 +97,20 @@
             "submit": "Tak, usuń motyw",
             "desc": "Ta akcja usunie motyw <name></name> stworzony przez <author></author>.",
             "success": "Motyw został usunięty."
+          },
+          "download": {
+            "title": "Pobierz motyw",
+            "submit": "Pobierz",
+            "version": {
+              "label": "Wersja"
+            },
+            "version_code": {
+              "label": "Kod wersji"
+            },
+            "type": {
+              "rebuild": "Przebuduj obecną wersję - {version}",
+              "new_version": "Stwórz nową wersja"
+            }
           }
         }
       },

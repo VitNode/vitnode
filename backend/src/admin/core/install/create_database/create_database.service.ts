@@ -70,6 +70,7 @@ export class CreateDatabaseAdminInstallService {
         name: 'Forum',
         description: 'Community forum plugin.',
         version: packageJSON.version,
+        version_code: packageJSON.version_code,
         author: 'VitNode',
         author_url: 'https://vitnode.com/',
         created: currentDate(),
@@ -82,7 +83,7 @@ export class CreateDatabaseAdminInstallService {
     await this.databaseService.db.insert(core_themes).values({
       name: 'Default Theme',
       version: packageJSON.version,
-      version_code: 1,
+      version_code: packageJSON.version_code,
       author: 'VitNode',
       author_url: 'https://vitnode.com/',
       created: currentDate(),

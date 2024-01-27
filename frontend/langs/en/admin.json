@@ -97,6 +97,20 @@
             "submit": "Yes, delete theme",
             "desc": "This action will delete <name></name> theme created by <author></author>.",
             "success": "Theme has been deleted."
+          },
+          "download": {
+            "title": "Download Theme",
+            "submit": "Download",
+            "version": {
+              "label": "Version"
+            },
+            "version_code": {
+              "label": "Version Code"
+            },
+            "type": {
+              "rebuild": "Rebuild current version - {version}",
+              "new_version": "Create new version"
+            }
           }
         }
       },
