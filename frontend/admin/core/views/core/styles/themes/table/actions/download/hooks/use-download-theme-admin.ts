@@ -26,7 +26,7 @@ export const useDownloadThemeAdmin = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      type: 'rebuild',
+      type: version_code ? 'rebuild' : 'new_version',
       version: version ? increaseVersionString(version) : '1.0.0',
       version_code: version_code ? version_code + 1 : 10000
     }

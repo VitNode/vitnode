@@ -33,34 +33,36 @@ export const ContentDownloadThemeActionsAdmin = ({
 
       <Form {...form}>
         <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
-          <FormField
-            control={form.control}
-            name="type"
-            render={({ field }) => (
-              <RadioGroup onValueChange={field.onChange} defaultValue={field.value}>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="rebuild" id="rebuild" />
-                  <Label htmlFor="rebuild">
-                    {t('type.rebuild', {
-                      version: `${version} (${version_code})`
-                    })}
-                  </Label>
-                </div>
+          {version_code && (
+            <FormField
+              control={form.control}
+              name="type"
+              render={({ field }) => (
+                <RadioGroup onValueChange={field.onChange} defaultValue={field.value}>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="rebuild" id="rebuild" />
+                    <Label htmlFor="rebuild">
+                      {t('type.rebuild', {
+                        version: `${version} (${version_code})`
+                      })}
+                    </Label>
+                  </div>
 
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="new_version" id="new_version" disabled={id === 1} />
-                  <Label
-                    htmlFor="new_version"
-                    className={cx({
-                      'opacity-50': id === 1
-                    })}
-                  >
-                    {t('type.new_version')}
-                  </Label>
-                </div>
-              </RadioGroup>
-            )}
-          />
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="new_version" id="new_version" disabled={id === 1} />
+                    <Label
+                      htmlFor="new_version"
+                      className={cx({
+                        'opacity-50': id === 1
+                      })}
+                    >
+                      {t('type.new_version')}
+                    </Label>
+                  </div>
+                </RadioGroup>
+              )}
+            />
+          )}
 
           {form.watch('type') === 'new_version' && (
             <>

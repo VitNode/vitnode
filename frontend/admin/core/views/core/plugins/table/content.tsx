@@ -34,7 +34,19 @@ export const ContentTablePluginsAdmin = ({
       },
       {
         header: t('table.version'),
-        accessorKey: 'version'
+        accessorKey: 'version',
+        cell: ({ row }) => {
+          const data = row.original;
+
+          if (!data.version_code) return null;
+
+          return (
+            <span className="flex gap-1">
+              <span>{data.version}</span>
+              <span className="text-muted-foreground">({data.version_code})</span>
+            </span>
+          );
+        }
       },
       {
         header: t('table.author'),
