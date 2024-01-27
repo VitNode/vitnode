@@ -1,8 +1,10 @@
 import * as fs from 'fs';
 import { join } from 'path';
+import { writeFile } from 'fs/promises';
 
 import { Injectable } from '@nestjs/common';
 import * as archiver from 'archiver';
+import { eq } from 'drizzle-orm';
 
 import { DownloadAdminThemesArgs } from './dto/download.args';
 
@@ -12,12 +14,16 @@ import { removeSpecialCharacters } from '@/functions/remove-special-characters';
 import { User } from '@/utils/decorators/user.decorator';
 import { generateRandomString } from '@/functions/generate-random-string';
 import { currentDate } from '@/functions/date';
+import { core_themes } from '../../database/schema/themes';
 
 @Injectable()
 export class DownloadAdminThemesService {
   constructor(private databaseService: DatabaseService) {}
 
-  async download({ id: userId }: User, { id }: DownloadAdminThemesArgs): Promise<string> {
+  async download(
+    { id: userId }: User,
+    { id, version, version_code }: DownloadAdminThemesArgs
+  ): Promise<string> {
     const theme = await this.databaseService.db.query.core_themes.findFirst({
       where: (theme, { eq }) => eq(theme.id, id)
     });
@@ -26,9 +32,32 @@ export class DownloadAdminThemesService {
       throw new NotFoundError('Theme');
     }
 
+    const path = join('..', 'frontend', 'themes', theme.id.toString());
     const name = removeSpecialCharacters(
-      `${theme.name}-${theme.version}--${userId}-${generateRandomString(5)}-${currentDate()}`
+      `${theme.name}-${
+        version && version_code ? version : theme.version
+      }--${userId}-${generateRandomString(5)}-${currentDate()}`
     );
+
+    // Update version
+    if (version && version_code && version_code > theme.version_code) {
+      const pathThemeConfig = `${path}/theme.json`;
+      const getInfoJson = fs.readFileSync(pathThemeConfig, 'utf8');
+      const infoJson: { name: string } = JSON.parse(getInfoJson);
+
+      await writeFile(
+        pathThemeConfig,
+        JSON.stringify({ ...infoJson, version, version_code }, null, 2)
+      );
+
+      await this.databaseService.db
+        .update(core_themes)
+        .set({
+          version,
+          version_code
+        })
+        .where(eq(core_themes.id, id));
+    }
 
     // Prepare to zip
     const output = `temp/${name}.zip`;
@@ -57,7 +86,7 @@ export class DownloadAdminThemesService {
         });
       };
 
-      getFiles(join('..', 'frontend', 'themes', theme.id.toString()));
+      getFiles(path);
       archive.finalize();
     });
 

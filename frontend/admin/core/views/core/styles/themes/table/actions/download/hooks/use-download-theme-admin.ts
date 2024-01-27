@@ -35,7 +35,9 @@ export const useDownloadThemeAdmin = ({ id, version, version_code }: Args) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const mutation = await mutationApi({
-      id
+      id,
+      version: values.version,
+      versionCode: values.version_code
     });
 
     if (mutation.error || !mutation.data) {

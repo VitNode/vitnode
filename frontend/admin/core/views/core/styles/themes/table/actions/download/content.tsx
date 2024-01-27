@@ -23,7 +23,6 @@ export const ContentDownloadThemeActionsAdmin = ({
 }: ActionsItemThemesAdminProps) => {
   const { form, onSubmit } = useDownloadThemeAdmin({ id, version, version_code });
   const t = useTranslations('admin.core.styles.themes.download');
-  const tCore = useTranslations('core');
 
   return (
     <>

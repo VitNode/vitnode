@@ -270,6 +270,8 @@ export type MutationCore_Themes__Admin__DeleteArgs = {
 
 export type MutationCore_Themes__Admin__DownloadArgs = {
   id: Scalars['Int']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+  version_code?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -977,6 +979,8 @@ export type Core_Themes__Admin__DeleteMutation = { __typename?: 'Mutation', core
 
 export type Core_Themes__Admin__DownloadMutationVariables = Exact<{
   id: Scalars['Int']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+  versionCode?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
@@ -1394,8 +1398,12 @@ export const Core_Themes__Admin__Delete = gql`
 }
     `;
 export const Core_Themes__Admin__Download = gql`
-    mutation Core_themes__admin__download($id: Int!) {
-  core_themes__admin__download(id: $id)
+    mutation Core_themes__admin__download($id: Int!, $version: String, $versionCode: Int) {
+  core_themes__admin__download(
+    id: $id
+    version: $version
+    version_code: $versionCode
+  )
 }
     `;
 export const Core_Languages__Edit = gql`
