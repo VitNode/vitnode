@@ -5,6 +5,7 @@ import { CONFIG } from '@/config';
 
 interface Args<TVariables> {
   query: DocumentNode;
+  cache?: RequestCache;
   headers?: HeadersInit;
   next?: NextFetchRequestConfig;
   signal?: AbortSignal;
@@ -16,6 +17,7 @@ interface Args<TVariables> {
 }
 
 export async function fetcher<TData, TVariables>({
+  cache,
   headers,
   next,
   query,
@@ -97,6 +99,7 @@ export async function fetcher<TData, TVariables>({
       method: 'POST',
       credentials: 'include',
       mode: 'cors',
+      cache: cache ?? 'force-cache',
       signal,
       headers: uploads
         ? {

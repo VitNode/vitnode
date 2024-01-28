@@ -26,7 +26,8 @@ const getData = async () => {
     headers: {
       Cookie: cookies().toString(),
       ['user-agent']: headers().get('user-agent') ?? 'node'
-    }
+    },
+    cache: 'no-cache'
   });
 
   if (data.core_languages__show.edges.length === 0) {

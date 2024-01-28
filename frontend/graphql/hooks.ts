@@ -1152,12 +1152,7 @@ export type Core_Themes__Admin__ShowQuery = { __typename?: 'Query', core_themes_
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_MiddlewareQuery = { __typename?: 'Query', core_middleware: { __typename?: 'CoreMiddlewareObj', default_language: string, languages: Array<{ __typename?: 'LanguageCoreMiddlewareObj', default: boolean, code: string, id: number, name: string, timezone: string }> } };
-
-export type Core_Languages__MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Core_Languages__MiddlewareQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', id: number, code: string, name: string, enabled: boolean, timezone: string, default: boolean }> } };
+export type Core_MiddlewareQuery = { __typename?: 'Query', core_middleware: { __typename?: 'CoreMiddlewareObj', default_language: string, languages: Array<{ __typename?: 'LanguageCoreMiddlewareObj', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean }> } };
 
 export type Core_Languages__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -1873,20 +1868,7 @@ export const Core_Middleware = gql`
       id
       name
       timezone
-    }
-  }
-}
-    `;
-export const Core_Languages__Middleware = gql`
-    query Core_languages__middleware {
-  core_languages__show {
-    edges {
-      id
-      code
-      name
       enabled
-      timezone
-      default
     }
   }
 }

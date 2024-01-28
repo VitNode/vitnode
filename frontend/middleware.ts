@@ -16,10 +16,11 @@ export default async function middleware(request: NextRequest) {
       query: Core_Middleware,
       headers: {
         Cookie: request.cookies.toString()
-      }
+      },
+      cache: 'no-cache'
     });
 
-    const languages = data.core_middleware.languages;
+    const languages = data.core_middleware.languages.filter(lang => lang.enabled);
     const handleI18nRouting = createIntlMiddleware({
       locales: languages.length > 0 ? languages.map(edge => edge.code) : ['en'],
       defaultLocale: data.core_middleware.default_language
