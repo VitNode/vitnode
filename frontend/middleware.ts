@@ -1,5 +1,6 @@
 import createIntlMiddleware from 'next-intl/middleware';
 import { NextRequest } from 'next/server';
+import { headers } from 'next/headers';
 
 import { fetcher } from './graphql/fetcher';
 import {
@@ -15,9 +16,9 @@ export default async function middleware(request: NextRequest) {
     const { data, res } = await fetcher<Core_MiddlewareQuery, Core_MiddlewareQueryVariables>({
       query: Core_Middleware,
       headers: {
-        Cookie: request.cookies.toString()
-      },
-      cache: 'no-cache'
+        Cookie: request.cookies.toString(),
+        ['user-agent']: headers().get('user-agent') ?? 'node'
+      }
     });
 
     const languages = data.core_middleware.languages.filter(lang => lang.enabled);

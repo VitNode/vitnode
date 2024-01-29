@@ -99,7 +99,6 @@ export async function fetcher<TData, TVariables>({
       method: 'POST',
       credentials: 'include',
       mode: 'cors',
-      cache: cache ?? 'force-cache',
       signal,
       headers: uploads
         ? {

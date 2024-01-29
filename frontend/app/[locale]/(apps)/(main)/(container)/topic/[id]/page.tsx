@@ -31,7 +31,8 @@ const getData = async ({ id, sort }: { id: string; sort: string | undefined }) =
     },
     headers: {
       Cookie: cookies().toString()
-    }
+    },
+    cache: 'force-cache'
   });
 
   return data;

@@ -1,32 +1,26 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.theme_1 {
+  --background: 216deg 50% 96%;
+  --foreground: 0 0% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 3.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 217.2deg 86.43% 92.07%;
+  --secondary-foreground: 222.2 47.4% 11%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 213.85deg 16.19% 45.18%;
+  --accent: 210deg 22.22% 92.94%;
+  --accent-foreground: 216deg 13.89% 14.12%;
+  --destructive: 0 57.5% 43.47%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 215deg 17.67% 89.32%;
+  --input: var(--border);
+  --ring: 221.2 83.2% 53%;
+  --radius: 0.5rem;
 
-@layer base {
-  :root {
-    --background: 216deg 50% 96%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 217.2deg 86.43% 92.07%;
-    --secondary-foreground: 222.2 47.4% 11%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 213.85deg 16.19% 45.18%;
-    --accent: 210deg 22.22% 92.94%;
-    --accent-foreground: 216deg 13.89% 14.12%;
-    --destructive: 0 57.5% 43.47%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 215deg 17.67% 89.32%;
-    --input: var(--border);
-    --ring: 221.2 83.2% 53%;
-    --radius: 0.5rem;
-  }
-
-  .dark {
+  &.dark {
     --background: 225deg 66.67% 2.35%;
     --foreground: 0 0% 98%;
     --card: 213.33deg 25.71% 6.86%;
@@ -46,21 +40,4 @@
     --border: 220deg 13.27% 14.21%;
     --ring: 224.3 76.3% 48%;
   }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-a {
-  @apply text-primary;
-  @apply underline;
-  @apply hover:no-underline;
-  @apply cursor-pointer;
 }

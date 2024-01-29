@@ -22,6 +22,7 @@ query Core_sessions__authorization {
         id
       }
     }
+    theme_id
   }
   core_languages__show {
     edges {

@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 
-export const ThemeSwitcher = () => {
+export const DarkLightModeSwitcher = () => {
   const t = useTranslations('core');
   const { setTheme, theme } = useTheme();
 

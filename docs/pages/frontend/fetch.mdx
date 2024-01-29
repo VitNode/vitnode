@@ -42,7 +42,8 @@ const getData = async (variables: Forum_Forums__ShowQueryVariables) => {
     variables,
     headers: {
       Cookie: cookies().toString()
-    }
+    },
+    cache: 'force-cache' // this option is used for caching data for GraphQL
   });
 
   return data;
@@ -50,6 +51,8 @@ const getData = async (variables: Forum_Forums__ShowQueryVariables) => {
 
 export default async function Page() {}
 ```
+
+You can avoid using `cache` option if you don't want to cache data for GraphQL. The best practise is to avoid using `cache` option in AdminCP.
 
 ### Run query
 

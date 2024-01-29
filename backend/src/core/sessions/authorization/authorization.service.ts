@@ -59,11 +59,13 @@ export class AuthorizationCoreSessionsService {
           is_admin: await this.isAdmin({ group_id: user.group.id, user_id: user.id }),
           is_mod: await this.isMod({ group_id: user.group.id, user_id: user.id }),
           avatar_color: user.avatar_color
-        }
+        },
+        theme_id: user.theme_id
       };
     } catch (error) {
       return {
-        user: null
+        user: null,
+        theme_id: null
       };
     }
   }

@@ -3,6 +3,7 @@ import { boolean, integer, pgTable, serial, text, varchar } from 'drizzle-orm/pg
 
 import { core_groups } from './groups';
 import { core_files_avatars } from './files';
+import { core_themes } from './themes';
 
 export const core_users = pgTable('core_users', {
   id: serial('id').primaryKey(),
@@ -14,7 +15,10 @@ export const core_users = pgTable('core_users', {
   posts: integer('posts').notNull().default(0),
   newsletter: boolean('newsletter').notNull().default(false),
   avatar_color: varchar('avatar_color', { length: 6 }).notNull(),
-  group_id: integer('group_id').references(() => core_groups.id)
+  group_id: integer('group_id').references(() => core_groups.id),
+  theme_id: integer('theme_id').references(() => core_themes.id, {
+    onDelete: 'set null'
+  })
 });
 
 export const core_users_relations = relations(core_users, ({ one }) => ({

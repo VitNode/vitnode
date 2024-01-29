@@ -1,6 +1,6 @@
 import { Link } from '@/i18n';
 import { UserBar } from './user-bar/user-bar';
-import { ThemeSwitcher } from '@/components/switchers/theme-switcher';
+import { DarkLightModeSwitcher } from '@/components/switchers/dark-light-mode-switcher';
 import { LanguageSwitcher } from '@/components/switchers/language-switcher';
 import { LogoVitNode } from '@/components/logo-vitnode';
 
@@ -13,7 +13,7 @@ export const Header = () => {
         </Link>
 
         <div className="ml-auto flex gap-2">
-          <ThemeSwitcher />
+          <DarkLightModeSwitcher />
           <LanguageSwitcher />
         </div>
 

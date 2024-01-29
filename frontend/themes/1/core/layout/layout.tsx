@@ -9,7 +9,7 @@ interface Props {
   children: ReactNode;
 }
 
-export const Layout = ({ children }: Props) => {
+export default function Layout({ children }: Props) {
   /**
    * Thanks for using VitNode!
    *
@@ -32,4 +32,4 @@ export const Layout = ({ children }: Props) => {
       <QuickMenu />
     </>
   );
-};
+}

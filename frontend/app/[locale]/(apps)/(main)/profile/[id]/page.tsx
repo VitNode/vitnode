@@ -20,7 +20,8 @@ const getData = async ({ id }: { id: string }) => {
       },
       headers: {
         Cookie: cookies().toString()
-      }
+      },
+      cache: 'force-cache'
     }
   );
 

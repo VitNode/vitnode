@@ -13,7 +13,8 @@ const getData = async () => {
     query: Forum_Forums__Show,
     headers: {
       Cookie: cookies().toString()
-    }
+    },
+    cache: 'force-cache'
   });
 
   return data;

@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 
 import { Card } from '@/components/ui/card';
-import { ThemeSwitcher } from '@/components/switchers/theme-switcher';
+import { DarkLightModeSwitcher } from '@/components/switchers/dark-light-mode-switcher';
 import { LogoVitNode } from '@/components/logo-vitnode';
 import { PoweredByVitNode } from '../global/powered-by';
 
@@ -26,7 +26,7 @@ export const LayoutConfigs = ({ children }: Props) => {
         <PoweredByVitNode />
 
         <div>
-          <ThemeSwitcher />
+          <DarkLightModeSwitcher />
         </div>
       </div>
     </div>

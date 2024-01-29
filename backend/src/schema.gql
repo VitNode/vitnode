@@ -7,6 +7,7 @@ type AuthorizationAdminSessionsObj {
 }
 
 type AuthorizationCoreSessionsObj {
+  theme_id: Int
   user: AuthorizationCurrentUserObj
 }
 

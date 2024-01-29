@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { User } from '@/utils/decorators/user.decorator';
 
@@ -20,4 +20,7 @@ export class AuthorizationCurrentUserObj extends User {
 export class AuthorizationCoreSessionsObj {
   @Field(() => AuthorizationCurrentUserObj, { nullable: true })
   user: AuthorizationCurrentUserObj | null;
+
+  @Field(() => Int, { nullable: true })
+  theme_id: number | null;
 }
