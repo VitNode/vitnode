@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   postgres:
+    container_name: vitnode_postgres
     image: postgres:16.1-alpine
     restart: on-failure
     environment:
@@ -17,6 +18,7 @@ services:
       - vitnode
 
   pgadmin:
+    container_name: vitnode_pgadmin
     image: dpage/pgadmin4:latest
     restart: on-failure
     environment:
@@ -28,6 +30,7 @@ services:
       - vitnode
 
   redis:
+    container_name: vitnode_redis
     image: redis:7.2.3-alpine
     restart: on-failure
     ports:
@@ -36,6 +39,7 @@ services:
       - vitnode
 
   backend:
+    container_name: vitnode_backend
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -59,9 +63,11 @@ services:
     volumes:
       # - frontend_data:/frontend
       - ./frontend/config:/frontend/config # config
+      - ./frontend/themes:/frontend/themes # themes
       - ./backend/public:/app/public # static files
 
   frontend:
+    container_name: vitnode_frontend
     build:
       context: ./frontend
       dockerfile: Dockerfile
@@ -76,6 +82,7 @@ services:
     volumes:
       # - frontend_data:/app
       - ./frontend/config:/app/config # config
+      - ./frontend/themes:/app/themes # themes
 
 networks:
   vitnode:

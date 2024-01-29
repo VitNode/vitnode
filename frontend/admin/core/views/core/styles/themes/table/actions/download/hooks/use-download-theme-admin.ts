@@ -49,7 +49,10 @@ export const useDownloadThemeAdmin = ({
 
     setOpen(false);
 
-    window.location.href = `${CONFIG.client_graphql_url}/files/${mutation.data.core_themes__admin__download}`;
+    window.open(
+      `${CONFIG.client_graphql_url}/files/${mutation.data.core_themes__admin__download}`,
+      '_blank'
+    );
   };
 
   return { form, onSubmit };

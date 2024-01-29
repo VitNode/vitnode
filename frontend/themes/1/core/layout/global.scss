@@ -20,7 +20,7 @@
   --ring: 221.2 83.2% 53%;
   --radius: 0.5rem;
 
-  &.dark {
+  html.dark & {
     --background: 225deg 66.67% 2.35%;
     --foreground: 0 0% 98%;
     --card: 213.33deg 25.71% 6.86%;

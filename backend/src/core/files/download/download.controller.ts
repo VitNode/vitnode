@@ -49,7 +49,7 @@ export class DownloadFilesController {
 
     const streamFile = createReadStream(path);
     res.set({
-      'Content-Type': 'application/json',
+      'Content-Type': `application/${currentFile.type}`,
       'Content-Disposition': `attachment; filename="${currentFile.name}.${currentFile.type}"`
     });
 
