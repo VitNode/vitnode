@@ -17,6 +17,10 @@ export const configuration = () => {
       known_device: {
         name: 'vitnode-device',
         expiresIn: 60 * 60 * 24 * 365 // 1 year
+      },
+      theme_id: {
+        name: 'vitnode-theme-id',
+        expiresIn: 60 * 60 * 24 * 365 // 1 year
       }
     }
   };
