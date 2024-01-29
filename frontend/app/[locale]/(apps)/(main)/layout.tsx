@@ -21,9 +21,12 @@ export default async function Layout({ children }: Props) {
     }
 
     const theme_id = data.core_sessions__authorization.theme_id ?? 1;
-
     const Layout: LazyExoticComponent<({ children }: { children: ReactNode }) => JSX.Element> =
-      lazy(() => import(`@/themes/${theme_id}/core/layout/layout`));
+      lazy(() =>
+        import(`@/themes/${theme_id}/core/layout/layout`).catch(
+          () => import('@/themes/1/core/layout/layout')
+        )
+      );
 
     return (
       <SessionProvider data={data}>

@@ -111,6 +111,10 @@
               "rebuild": "Rebuild current version - {version}",
               "new_version": "Create new version"
             }
+          },
+          "upload": {
+            "title": "Upload Theme",
+            "submit": "Upload"
           }
         }
       },

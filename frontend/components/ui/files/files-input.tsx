@@ -121,7 +121,9 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
               </p>
               <p className="text-xs">
                 {acceptExtensions.join(', ').toUpperCase()}{' '}
-                {t('forms.files.allow_size_per_file', { size: maxFileSizeInMb })}
+                {maxFileSizeInMb
+                  ? t('forms.files.allow_size_per_file', { size: maxFileSizeInMb })
+                  : ''}
               </p>
             </div>
             <input

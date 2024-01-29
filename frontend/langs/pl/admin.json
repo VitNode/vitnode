@@ -111,6 +111,10 @@
               "rebuild": "Przebuduj obecną wersję - {version}",
               "new_version": "Stwórz nową wersja"
             }
+          },
+          "upload": {
+            "title": "Załaduj motyw",
+            "submit": "Załaduj"
           }
         }
       },
