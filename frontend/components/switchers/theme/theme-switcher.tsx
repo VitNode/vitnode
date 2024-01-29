@@ -13,6 +13,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useGlobals } from '@/hooks/core/use-globals';
 import { useSession } from '@/hooks/core/use-session';
+import { mutationApi } from './mutation-api';
 
 export const ThemeSwitcher = () => {
   const t = useTranslations('core');
@@ -31,9 +32,10 @@ export const ThemeSwitcher = () => {
       <DropdownMenuContent>
         <DropdownMenuRadioGroup
           value={theme_id?.toString() ?? '1'}
-          // onValueChange={id => {
-          //   replace(pathname, { locale: id });
-          // }}
+          onValueChange={async id => {
+            await mutationApi({ id: parseInt(id) });
+            // window.location.reload();
+          }}
         >
           {themes.map(theme => (
             <DropdownMenuRadioItem key={theme.id} value={theme.id.toString()}>

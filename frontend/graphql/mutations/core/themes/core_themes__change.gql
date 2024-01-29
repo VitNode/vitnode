@@ -1,0 +1,3 @@
+mutation Core_themes__change($id: Int!) {
+  core_themes__change(id: $id)
+}

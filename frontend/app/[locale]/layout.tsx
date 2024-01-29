@@ -64,11 +64,8 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
     const data = await getSessionData();
 
     return (
-      <html
-        lang={locale}
-        className={`${inter.variable} theme_${data.core_sessions__authorization.theme_id ?? 1}`}
-      >
-        <body>
+      <html lang={locale} className={inter.variable}>
+        <body className={`theme_${data.core_sessions__authorization.theme_id ?? 1}`}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
           </ThemeProvider>

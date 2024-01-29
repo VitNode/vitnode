@@ -3,7 +3,7 @@ import { UserBar } from './user-bar/user-bar';
 import { DarkLightModeSwitcher } from '@/components/switchers/dark-light-mode-switcher';
 import { LanguageSwitcher } from '@/components/switchers/language-switcher';
 import { LogoVitNode } from '@/components/logo-vitnode';
-import { ThemeSwitcher } from '@/components/switchers/theme-switcher';
+import { ThemeSwitcher } from '@/components/switchers/theme/theme-switcher';
 
 export const Header = () => {
   return (

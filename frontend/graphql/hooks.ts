@@ -157,6 +157,7 @@ export type Mutation = {
   core_themes__admin__create: Scalars['String']['output'];
   core_themes__admin__delete: Scalars['String']['output'];
   core_themes__admin__download: Scalars['String']['output'];
+  core_themes__change: Scalars['String']['output'];
   forum_forums__admin__change_position: Scalars['String']['output'];
   forum_forums__admin__create: CreateForumForumsObj;
   forum_posts__create: ShowPostsForums;
@@ -273,6 +274,11 @@ export type MutationCore_Themes__Admin__DownloadArgs = {
   id: Scalars['Int']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
   version_code?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type MutationCore_Themes__ChangeArgs = {
+  id: Scalars['Int']['input'];
 };
 
 
@@ -1057,6 +1063,13 @@ export type Core_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: ne
 
 export type Core_Sessions__Sign_OutMutation = { __typename?: 'Mutation', core_sessions__sign_out: string };
 
+export type Core_Themes__ChangeMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type Core_Themes__ChangeMutation = { __typename?: 'Mutation', core_themes__change: string };
+
 export type Forum_Posts__CreateMutationVariables = Exact<{
   content: Array<TextLanguageInput> | TextLanguageInput;
   topicId: Scalars['Int']['input'];
@@ -1488,6 +1501,11 @@ export const Core_Sessions__Sign_In = gql`
 export const Core_Sessions__Sign_Out = gql`
     mutation Core_sessions__sign_out {
   core_sessions__sign_out
+}
+    `;
+export const Core_Themes__Change = gql`
+    mutation Core_themes__change($id: Int!) {
+  core_themes__change(id: $id)
 }
     `;
 export const Forum_Posts__Create = gql`
