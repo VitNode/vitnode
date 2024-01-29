@@ -110,7 +110,8 @@ export async function fetcher<TData, TVariables>({
             ...headers
           },
       body: uploads ? formData : JSON.stringify({ query: getGqlString(query), variables }),
-      next
+      next,
+      cache
     }
   );
 

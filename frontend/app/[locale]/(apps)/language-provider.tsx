@@ -15,7 +15,8 @@ export const LanguageProvider = ({ children, data }: Props) => {
     <GlobalsContext.Provider
       value={{
         languages: data?.core_middleware.languages.filter(lang => lang.enabled) ?? [],
-        defaultLanguage: data?.core_middleware.default_language ?? 'en'
+        defaultLanguage: data?.core_middleware.default_language ?? 'en',
+        themes: data?.core_themes__show.edges ?? []
       }}
     >
       {children}

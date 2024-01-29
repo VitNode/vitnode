@@ -347,6 +347,7 @@ export type Query = {
   core_staff_administrators__admin__show: ShowAdminStaffAdministratorsObj;
   core_staff_moderators__admin__show: ShowAdminStaffModeratorsObj;
   core_themes__admin__show: ShowAdminThemesObj;
+  core_themes__show: ShowCoreThemesObj;
   forum_forums__admin__show: ShowForumForumsAdminObj;
   forum_forums__show: ShowForumForumsObj;
   forum_posts__show: ShowPostsForumsObj;
@@ -419,6 +420,13 @@ export type QueryCore_Themes__Admin__ShowArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   sortBy?: InputMaybe<Array<ShowAdminThemesSortByArgs>>;
+};
+
+
+export type QueryCore_Themes__ShowArgs = {
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -690,6 +698,19 @@ export const ShowCoreMembersSortingColumnEnum = {
 } as const;
 
 export type ShowCoreMembersSortingColumnEnum = typeof ShowCoreMembersSortingColumnEnum[keyof typeof ShowCoreMembersSortingColumnEnum];
+export type ShowCoreThemes = {
+  __typename?: 'ShowCoreThemes';
+  default: Scalars['Boolean']['output'];
+  id: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type ShowCoreThemesObj = {
+  __typename?: 'ShowCoreThemesObj';
+  edges: Array<ShowCoreThemes>;
+  pageInfo: PageInfo;
+};
+
 export type ShowForumForums = {
   __typename?: 'ShowForumForums';
   _count: ShowForumForumsCount;
@@ -1153,7 +1174,7 @@ export type Core_Themes__Admin__ShowQuery = { __typename?: 'Query', core_themes_
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_MiddlewareQuery = { __typename?: 'Query', core_middleware: { __typename?: 'CoreMiddlewareObj', default_language: string, languages: Array<{ __typename?: 'LanguageCoreMiddlewareObj', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean }> } };
+export type Core_MiddlewareQuery = { __typename?: 'Query', core_middleware: { __typename?: 'CoreMiddlewareObj', default_language: string, languages: Array<{ __typename?: 'LanguageCoreMiddlewareObj', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean }> }, core_themes__show: { __typename?: 'ShowCoreThemesObj', edges: Array<{ __typename?: 'ShowCoreThemes', id: number, name: string }> } };
 
 export type Core_Languages__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -1870,6 +1891,12 @@ export const Core_Middleware = gql`
       name
       timezone
       enabled
+    }
+  }
+  core_themes__show {
+    edges {
+      id
+      name
     }
   }
 }

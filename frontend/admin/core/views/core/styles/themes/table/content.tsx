@@ -26,6 +26,9 @@ export const ContentTableThemesAdmin = ({
           return (
             <div className="flex gap-2 items-center">
               <span className="font-semibold">{data.name}</span>
+              {process.env.NODE_ENV === 'development' && (
+                <Badge variant="outline">ID: {data.id}</Badge>
+              )}
               {data.default && <Badge>{t('default')}</Badge>}
             </div>
           );

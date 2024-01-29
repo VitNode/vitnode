@@ -171,6 +171,7 @@ type Query {
   core_staff_administrators__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
   core_staff_moderators__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
   core_themes__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminThemesSortByArgs!]): ShowAdminThemesObj!
+  core_themes__show(cursor: Int, first: Int, last: Int): ShowCoreThemesObj!
   forum_forums__admin__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsAdminObj!
   forum_forums__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsObj!
   forum_posts__show(cursor: Int, first: Int, firstEdges: Int, last: Int, sortBy: ShowPostsForumsSortingEnum, topic_id: Int!): ShowPostsForumsObj!
@@ -384,6 +385,17 @@ enum ShowCoreMembersSortingColumnEnum {
   name
   posts
   reactions
+}
+
+type ShowCoreThemes {
+  default: Boolean!
+  id: Int!
+  name: String!
+}
+
+type ShowCoreThemesObj {
+  edges: [ShowCoreThemes!]!
+  pageInfo: PageInfo!
 }
 
 type ShowForumForums {

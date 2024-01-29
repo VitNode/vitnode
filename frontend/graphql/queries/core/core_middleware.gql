@@ -10,4 +10,10 @@ query Core_middleware {
       enabled
     }
   }
+  core_themes__show {
+    edges {
+      id
+      name
+    }
+  }
 }

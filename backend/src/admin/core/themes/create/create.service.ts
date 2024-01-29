@@ -45,6 +45,11 @@ export class CreateAdminThemesService {
       )
     );
 
+    // Update the global.scss file
+    const pathSCSSFile = `${path}/core/layout/global.scss`;
+    const pathSCSSFileContent = fs.readFileSync(pathSCSSFile, 'utf8');
+    await writeFile(pathSCSSFile, pathSCSSFileContent.replace('.theme_1', `.theme_${id}`));
+
     return 'create';
   }
 }
