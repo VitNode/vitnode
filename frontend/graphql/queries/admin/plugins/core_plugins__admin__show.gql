@@ -1,5 +1,10 @@
-query Core_plugins__admin__show($cursor: Int, $first: Int, $last: Int) {
-  core_plugins__admin__show(cursor: $cursor, first: $first, last: $last) {
+query Core_plugins__admin__show(
+  $cursor: Int
+  $first: Int
+  $last: Int
+  $sortBy: [ShowAdminPluginsSortByArgs!]
+) {
+  core_plugins__admin__show(cursor: $cursor, first: $first, last: $last, sortBy: $sortBy) {
     edges {
       author
       author_url
@@ -9,11 +14,9 @@ query Core_plugins__admin__show($cursor: Int, $first: Int, $last: Int) {
       enabled
       id
       name
-      position
       protected
       support_url
-      updated
-      uploaded
+      created
       version
       version_code
     }

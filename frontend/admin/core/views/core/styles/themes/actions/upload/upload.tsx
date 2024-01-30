@@ -1,0 +1,36 @@
+'use client';
+
+import { Upload } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { Suspense, lazy } from 'react';
+
+import { Loader } from '@/components/loader/loader';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+
+const Content = lazy(() =>
+  import('./content').then(module => ({
+    default: module.ContentUploadActionsThemesAdmin
+  }))
+);
+
+export const UploadActionsThemesAdmin = () => {
+  const t = useTranslations('core');
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>
+          <Upload />
+          {t('upload')}
+        </Button>
+      </DialogTrigger>
+
+      <DialogContent className="max-w-xl">
+        <Suspense fallback={<Loader />}>
+          <Content />
+        </Suspense>
+      </DialogContent>
+    </Dialog>
+  );
+};

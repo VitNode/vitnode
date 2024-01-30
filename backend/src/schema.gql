@@ -7,6 +7,7 @@ type AuthorizationAdminSessionsObj {
 }
 
 type AuthorizationCoreSessionsObj {
+  theme_id: Int
   user: AuthorizationCurrentUserObj
 }
 
@@ -116,7 +117,6 @@ type Mutation {
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
   core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
-  core_plugins__admin__change_position(id: Int!, index_to_move: Int!): String!
   core_plugins__admin__create(author: String!, author_url: String!, code: String!, description: String, name: String!, support_url: String!): ShowAdminPlugins!
   core_plugins__admin__delete(code: String!): String!
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
@@ -125,6 +125,11 @@ type Mutation {
   core_staff_administrators__admin__delete(id: Int!): String!
   core_staff_moderators__admin__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffModerators!
   core_staff_moderators__admin__delete(id: Int!): String!
+  core_themes__admin__create(author: String!, author_url: String!, name: String!, support_url: String!): String!
+  core_themes__admin__delete(id: Int!): String!
+  core_themes__admin__download(id: Int!, version: String, version_code: Int): String!
+  core_themes__admin__upload(file: Upload!): String!
+  core_themes__change(id: Int!): String!
   forum_forums__admin__change_position(id: Int!, index_to_move: Int!, parent_id: Int): String!
   forum_forums__admin__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
   forum_posts__create(content: [TextLanguageInput!]!, topic_id: Int!): ShowPostsForums!
@@ -163,10 +168,12 @@ type Query {
   core_members__admin__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_middleware: CoreMiddlewareObj!
-  core_plugins__admin__show(cursor: Int, first: Int, last: Int): ShowAdminPluginsObj!
+  core_plugins__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminPluginsSortByArgs!]): ShowAdminPluginsObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_staff_administrators__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
   core_staff_moderators__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
+  core_themes__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminThemesSortByArgs!]): ShowAdminThemesObj!
+  core_themes__show(cursor: Int, first: Int, last: Int): ShowCoreThemesObj!
   forum_forums__admin__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsAdminObj!
   forum_forums__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsObj!
   forum_posts__show(cursor: Int, first: Int, firstEdges: Int, last: Int, sortBy: ShowPostsForumsSortingEnum, topic_id: Int!): ShowPostsForumsObj!
@@ -237,16 +244,14 @@ type ShowAdminPlugins {
   author: String!
   author_url: String!
   code: String!
+  created: Int!
   default: Boolean!
   description: String
   enabled: Boolean!
   id: Int!
   name: String!
-  position: Int!
   protected: Boolean!
   support_url: String
-  updated: Int!
-  uploaded: Int!
   version: String
   version_code: Int
 }
@@ -254,6 +259,15 @@ type ShowAdminPlugins {
 type ShowAdminPluginsObj {
   edges: [ShowAdminPlugins!]!
   pageInfo: PageInfo!
+}
+
+input ShowAdminPluginsSortByArgs {
+  column: ShowAdminPluginsSortingColumnEnum!
+  direction: SortDirectionEnum!
+}
+
+enum ShowAdminPluginsSortingColumnEnum {
+  created
 }
 
 type ShowAdminStaffAdministrators {
@@ -302,6 +316,33 @@ enum ShowAdminStaffModeratorsSortingColumnEnum {
   updated
 }
 
+type ShowAdminThemes {
+  author: String!
+  author_url: String!
+  created: Int!
+  default: Boolean!
+  id: Int!
+  name: String!
+  protected: Boolean!
+  support_url: String
+  version: String
+  version_code: Int
+}
+
+type ShowAdminThemesObj {
+  edges: [ShowAdminThemes!]!
+  pageInfo: PageInfo!
+}
+
+input ShowAdminThemesSortByArgs {
+  column: ShowAdminThemesSortingColumnEnum!
+  direction: SortDirectionEnum!
+}
+
+enum ShowAdminThemesSortingColumnEnum {
+  created
+}
+
 type ShowCoreLanguages {
   code: String!
   default: Boolean!
@@ -346,6 +387,17 @@ enum ShowCoreMembersSortingColumnEnum {
   name
   posts
   reactions
+}
+
+type ShowCoreThemes {
+  default: Boolean!
+  id: Int!
+  name: String!
+}
+
+type ShowCoreThemesObj {
+  edges: [ShowCoreThemes!]!
+  pageInfo: PageInfo!
 }
 
 type ShowForumForums {

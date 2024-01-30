@@ -1,0 +1,3 @@
+mutation Core_themes__admin__upload($file: Upload!) {
+  core_themes__admin__upload(file: $file)
+}

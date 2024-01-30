@@ -12,6 +12,7 @@ export interface ConfigType {
     }[];
   };
   side_name: string;
+  theme_id: number;
 }
 
 export const getConfig = async () => {

@@ -9,6 +9,7 @@
         "dashboard": "Dashboard",
         "general": "General",
         "plugins": "Plugins",
+        "styles": "Styles",
         "langs": "Languages"
       },
       "members": {
@@ -72,12 +73,56 @@
           "success": "Plugin has been deleted."
         }
       },
+      "styles": {
+        "themes": {
+          "title": "Themes",
+          "create": {
+            "title": "Create Theme",
+            "success": "Theme has been created.",
+            "name": {
+              "label": "Name"
+            },
+            "support_url": {
+              "label": "Support URL",
+              "desc": "URL to the support page for this theme."
+            },
+            "author": {
+              "label": "Author"
+            },
+            "author_url": {
+              "label": "Author URL"
+            }
+          },
+          "delete": {
+            "submit": "Yes, delete theme",
+            "desc": "This action will delete <name></name> theme created by <author></author>.",
+            "success": "Theme has been deleted."
+          },
+          "download": {
+            "title": "Download Theme",
+            "submit": "Download",
+            "version": {
+              "label": "Version"
+            },
+            "version_code": {
+              "label": "Version Code"
+            },
+            "type": {
+              "rebuild": "Rebuild current version - {version}",
+              "new_version": "Create new version"
+            }
+          },
+          "upload": {
+            "title": "Upload Theme",
+            "submit": "Upload",
+            "success": "Successfully uploaded theme."
+          }
+        }
+      },
       "langs": {
         "title": "Languages",
         "table": {
-          "name": "Name",
-          "key": "Key",
-          "enabled": "Enabled"
+          "key": "Key"
         },
         "actions": {
           "edit": {
@@ -96,7 +141,6 @@
           "groups": "Groups"
         },
         "table": {
-          "name": "Name",
           "email": "Email",
           "group": "Group",
           "joined": "Joined"
@@ -108,9 +152,7 @@
         "default": "Default",
         "root": "Admin Root",
         "table": {
-          "name": "Name",
-          "users_count": "Users",
-          "updated": "Updated"
+          "users_count": "Users"
         },
         "create_edit": {
           "form": {

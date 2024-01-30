@@ -1,51 +1,31 @@
 import { lazy, type LazyExoticComponent, type ReactNode } from 'react';
-import { cookies, headers } from 'next/headers';
 import { isRedirectError } from 'next/dist/client/components/redirect';
 
-import { CONFIG } from '@/config';
-import { fetcher } from '@/graphql/fetcher';
-import {
-  Core_Sessions__Authorization,
-  type Core_Sessions__AuthorizationQuery,
-  type Core_Sessions__AuthorizationQueryVariables
-} from '@/graphql/hooks';
 import { SessionProvider } from './session-provider';
-import { InternalErrorView } from '@/admin/global/internal-error-view';
+import { InternalErrorView } from '@/admin/core/global/internal-error-view';
 import { redirect } from '@/i18n';
+
+import { getSessionData } from '../../layout';
 
 interface Props {
   children: ReactNode;
   params: { locale: string };
 }
 
-const getData = async () => {
-  const { data } = await fetcher<
-    Core_Sessions__AuthorizationQuery,
-    Core_Sessions__AuthorizationQueryVariables
-  >({
-    query: Core_Sessions__Authorization,
-    headers: {
-      Cookie: cookies().toString(),
-      ['user-agent']: headers().get('user-agent') ?? 'node'
-    }
-  });
-
-  if (data.core_languages__show.edges.length === 0) {
-    redirect('/admin/install');
-  }
-
-  return data;
-};
-
 export default async function Layout({ children }: Props) {
   try {
-    const data = await getData();
+    const data = await getSessionData();
 
+    if (data.core_languages__show.edges.length === 0) {
+      redirect('/admin/install');
+    }
+
+    const theme_id = data.core_sessions__authorization.theme_id ?? 1;
     const Layout: LazyExoticComponent<({ children }: { children: ReactNode }) => JSX.Element> =
       lazy(() =>
-        import(`@/themes/${CONFIG.default_theme}/core/layout/layout`).then(module => ({
-          default: module.Layout
-        }))
+        import(`@/themes/${theme_id}/core/layout/layout`).catch(
+          () => import('@/themes/1/core/layout/layout')
+        )
       );
 
     return (

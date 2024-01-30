@@ -26,10 +26,7 @@ export class ShowAdminPlugins {
   enabled: boolean;
 
   @Field(() => Int)
-  uploaded: number;
-
-  @Field(() => Int)
-  updated: number;
+  created: number;
 
   @Field(() => String, { nullable: true })
   support_url: string | null;
@@ -42,9 +39,6 @@ export class ShowAdminPlugins {
 
   @Field(() => String)
   author_url: string;
-
-  @Field(() => Int)
-  position: number;
 
   @Field(() => Boolean)
   default: boolean;

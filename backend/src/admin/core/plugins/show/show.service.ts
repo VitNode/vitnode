@@ -13,7 +13,7 @@ import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 export class ShowAdminPluginsService {
   constructor(private databaseService: DatabaseService) {}
 
-  async show({ cursor, first, last }: ShowAdminPluginsArgs): Promise<ShowAdminPluginsObj> {
+  async show({ cursor, first, last, sortBy }: ShowAdminPluginsArgs): Promise<ShowAdminPluginsObj> {
     const pagination = await inputPaginationCursor({
       cursor,
       database: core_plugins,
@@ -22,9 +22,10 @@ export class ShowAdminPluginsService {
       last,
       primaryCursor: { order: 'ASC', key: 'id', schema: core_plugins.id },
       defaultSortBy: {
-        direction: SortDirectionEnum.asc,
-        column: 'position'
-      }
+        direction: SortDirectionEnum.desc,
+        column: 'created'
+      },
+      sortBy
     });
 
     const edges = await this.databaseService.db.query.core_plugins.findMany({

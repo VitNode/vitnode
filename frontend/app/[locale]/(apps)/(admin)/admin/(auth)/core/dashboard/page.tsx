@@ -1,4 +1,4 @@
-import { DashboardCoreAdminView } from '@/admin/views/core/dashboard/dashboard-core-admin-view';
+import { DashboardCoreAdminView } from '@/admin/core/views/core/dashboard/dashboard-core-admin-view';
 
 export default function Page() {
   return <DashboardCoreAdminView />;

@@ -8,12 +8,10 @@ export const core_plugins = pgTable('core_plugins', {
   version: varchar('version', { length: 255 }),
   version_code: integer('version_code'),
   enabled: boolean('enabled').notNull().default(true),
-  uploaded: integer('uploaded').notNull(),
-  updated: integer('updated').notNull(),
+  created: integer('created').notNull(),
   support_url: varchar('support_url', { length: 255 }),
   protected: boolean('protected').notNull().default(false),
   author: varchar('author', { length: 100 }).notNull(),
   author_url: varchar('author_url', { length: 255 }).notNull(),
-  position: integer('position').notNull().default(0),
   default: boolean('default').notNull().default(false)
 });

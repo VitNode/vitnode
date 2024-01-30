@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { cookies } from 'next/headers';
 
-import { LangsCoreAdminView } from '@/admin/views/core/langs/langs-core-admin-view';
+import { LangsCoreAdminView } from '@/admin/core/views/core/langs/langs-core-admin-view';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Languages__Show,

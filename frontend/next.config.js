@@ -17,6 +17,11 @@ const config = () => {
   };
 
   return {
+    logging: {
+      fetches: {
+        fullUrl: true
+      }
+    },
     output: 'standalone',
     transpilePackages: ['lucide-react'],
     images: {

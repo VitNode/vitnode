@@ -1,6 +1,7 @@
 {
   "name": "vitnode",
   "version": "0.1.0 Alpha 1",
+  "version_code": "10000",
   "description": "VitNode app",
   "author": "Maciej Piotr (aXenDev) Balcerzak",
   "license": "GPL-3.0 license",

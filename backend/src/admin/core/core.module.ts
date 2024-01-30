@@ -7,6 +7,7 @@ import { AdminGroupsModule } from './groups/groups.module';
 import { AdminMembersModule } from './members/members.module';
 import { AdminStaffModule } from './staff/staff.module';
 import { AdminPluginsModule } from './plugins/plugins.module';
+import { AdminThemesModule } from './themes/themes.module';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { AdminPluginsModule } from './plugins/plugins.module';
     AdminGroupsModule,
     AdminMembersModule,
     AdminStaffModule,
-    AdminPluginsModule
+    AdminPluginsModule,
+    AdminThemesModule
   ]
 })
 export class AdminCoreModule {}

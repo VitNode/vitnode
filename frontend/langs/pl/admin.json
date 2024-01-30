@@ -9,6 +9,7 @@
         "dashboard": "Pulpit",
         "general": "Ogólne",
         "plugins": "Wtyczki",
+        "styles": "Style",
         "langs": "Języki"
       },
       "members": {
@@ -72,12 +73,56 @@
           "success": "Wtyczka została usunięta."
         }
       },
+      "styles": {
+        "themes": {
+          "title": "Motywy",
+          "create": {
+            "title": "Stwórz motyw",
+            "success": "Motyw został utworzony.",
+            "name": {
+              "label": "Nazwa"
+            },
+            "support_url": {
+              "label": "Link do wsparcia",
+              "desc": "Link do strony wsparcia motywu."
+            },
+            "author": {
+              "label": "Autor"
+            },
+            "author_url": {
+              "label": "Link do autora"
+            }
+          },
+          "delete": {
+            "submit": "Tak, usuń motyw",
+            "desc": "Ta akcja usunie motyw <name></name> stworzony przez <author></author>.",
+            "success": "Motyw został usunięty."
+          },
+          "download": {
+            "title": "Pobierz motyw",
+            "submit": "Pobierz",
+            "version": {
+              "label": "Wersja"
+            },
+            "version_code": {
+              "label": "Kod wersji"
+            },
+            "type": {
+              "rebuild": "Przebuduj obecną wersję - {version}",
+              "new_version": "Stwórz nową wersja",
+              "success": "Pomyślnie przesłano motyw."
+            }
+          },
+          "upload": {
+            "title": "Załaduj motyw",
+            "submit": "Załaduj"
+          }
+        }
+      },
       "langs": {
         "title": "Języki",
         "table": {
-          "name": "Nazwa",
-          "key": "Klucz",
-          "enabled": "Włączony"
+          "key": "Klucz"
         },
         "actions": {
           "edit": {
@@ -96,7 +141,6 @@
           "groups": "Grupy"
         },
         "table": {
-          "name": "Nazwa",
           "email": "Email",
           "group": "Grupa",
           "joined": "Dołączył"
@@ -108,9 +152,7 @@
         "default": "Domyślna",
         "root": "Admin Root",
         "table": {
-          "name": "Nazwa",
-          "users_count": "Użytkownicy",
-          "updated": "Zaktualizowano"
+          "users_count": "Użytkownicy"
         },
         "create_edit": {
           "form": {

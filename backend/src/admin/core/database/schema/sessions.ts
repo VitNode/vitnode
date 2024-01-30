@@ -3,6 +3,7 @@ import { relations } from 'drizzle-orm';
 
 import { core_users } from './users';
 import { core_admin_sessions } from './admins';
+import { core_themes } from './themes';
 
 export const core_sessions = pgTable('core_sessions', {
   login_token: varchar('login_token', { length: 255 }).primaryKey(),
@@ -36,7 +37,10 @@ export const core_sessions_known_devices = pgTable('core_sessions_known_devices'
   uagent_device_vendor: varchar('uagent_device_vendor', { length: 200 }),
   uagent_device_type: varchar('uagent_device_type', { length: 200 }),
   uagent_device_model: varchar('uagent_device_model', { length: 200 }),
-  last_seen: integer('last_seen').notNull()
+  last_seen: integer('last_seen').notNull(),
+  theme_id: integer('theme_id').references(() => core_themes.id, {
+    onDelete: 'set null'
+  })
 });
 
 export const core_sessions_known_devices_relations = relations(

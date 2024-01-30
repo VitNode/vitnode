@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
-import { TopicView } from '@/themes/default/core/views/forum/topic/topic-view';
+import { TopicView } from '@/themes/1/forum/views/forum/topic/topic-view';
 import { fetcher, type ErrorType } from '@/graphql/fetcher';
 import {
   Forum_Topics__Show,
@@ -10,7 +10,7 @@ import {
   type Forum_Topics__ShowQueryVariables
 } from '@/graphql/hooks';
 import { getIdFormString } from '@/functions/url';
-import { ErrorView } from '@/themes/default/core/views/global/error/error-view';
+import { ErrorView } from '@/themes/1/core/views/global/error/error-view';
 
 const firstEdges = 25;
 
@@ -31,7 +31,8 @@ const getData = async ({ id, sort }: { id: string; sort: string | undefined }) =
     },
     headers: {
       Cookie: cookies().toString()
-    }
+    },
+    cache: 'force-cache'
   });
 
   return data;

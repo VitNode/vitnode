@@ -10,6 +10,8 @@ interface Props {
   value: File[] | undefined;
 }
 
+const IMAGE_FILE_TYPES = ['image/png', 'image/jpeg', 'image/gif'];
+
 export const ItemPreviewFilesInput = ({ file, index, onChange, value }: Props) => {
   const previewURL = useMemo(() => (file instanceof File ? URL.createObjectURL(file) : ``), [file]);
   const size = useMemo(() => {
@@ -36,14 +38,16 @@ export const ItemPreviewFilesInput = ({ file, index, onChange, value }: Props) =
 
   return (
     <li className="relative p-4 rounded-md bg-background border border-input flex gap-4 overflow-hidden">
-      <Img
-        className="rounded-sm flex-shrink-0"
-        imageClassName="object-cover"
-        src={previewURL}
-        alt={file instanceof File ? file.name : ''}
-        width={64}
-        height={64}
-      />
+      {IMAGE_FILE_TYPES.includes(file.type) && (
+        <Img
+          className="rounded-sm flex-shrink-0"
+          imageClassName="object-cover"
+          src={previewURL}
+          alt={file instanceof File ? file.name : ''}
+          width={64}
+          height={64}
+        />
+      )}
       <div className="mr-6 overflow-hidden">
         <p className="truncate">{file.name}</p>
         <p className="text-sm text-muted-foreground">{size}</p>

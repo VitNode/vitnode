@@ -1,0 +1,29 @@
+query Core_themes__admin__show(
+  $cursor: Int
+  $first: Int
+  $last: Int
+  $sortBy: [ShowAdminThemesSortByArgs!]
+) {
+  core_themes__admin__show(cursor: $cursor, first: $first, last: $last, sortBy: $sortBy) {
+    edges {
+      author
+      author_url
+      created
+      default
+      id
+      name
+      protected
+      support_url
+      version
+      version_code
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+  }
+}

@@ -112,7 +112,7 @@ export class CoreMiddlewareService {
     await this.checkDevice(context);
 
     const languages = await this.databaseService.db.query.core_languages.findMany({
-      where: (table, { eq }) => eq(table.enabled, true)
+      orderBy: (table, { asc }) => asc(table.id)
     });
 
     const default_language = languages.find(language => language.default)?.code ?? 'en';

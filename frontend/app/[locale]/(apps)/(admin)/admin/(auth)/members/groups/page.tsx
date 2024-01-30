@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { cookies } from 'next/headers';
 
-import { GroupsMembersAdminView } from '@/admin/views/members/groups/groups-members-admin-view';
+import { GroupsMembersAdminView } from '@/admin/core/views/members/groups/groups-members-admin-view';
 import { fetcher } from '@/graphql/fetcher';
 import { Core_Groups__Admin__Show, ShowAdminGroupsSortingColumnEnum } from '@/graphql/hooks';
 import type {

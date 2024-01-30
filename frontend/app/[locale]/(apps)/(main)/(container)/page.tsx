@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 
-import { ForumsForumView } from '@/themes/default/core/views/forum/forums/forums-forum-view';
+import { ForumsForumView } from '@/themes/1/forum/views/forum/forums/forums-forum-view';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Forum_Forums__Show,
@@ -13,7 +13,8 @@ const getData = async () => {
     query: Forum_Forums__Show,
     headers: {
       Cookie: cookies().toString()
-    }
+    },
+    cache: 'force-cache'
   });
 
   return data;

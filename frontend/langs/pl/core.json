@@ -35,6 +35,14 @@
       "previous": "Poprzednia",
       "next": "Następna"
     },
+    "table": {
+      "name": "Nazwa",
+      "created": "Utworzono",
+      "updated": "Zaktualizowano",
+      "version": "Wersja",
+      "author": "Autor",
+      "enabled": "Włączony"
+    },
     "editor": {
       "remove_formatting": "Usuń formatowanie",
       "mixed": "Mieszane",
@@ -110,11 +118,14 @@
       "settings": "Ustawienia",
       "mod_cp": "Moderator Panel",
       "admin_cp": "Admin Panel",
-      "theme": {
+      "dark_light_switcher": {
         "light": "Jasny",
         "dark": "Ciemny",
         "system": "System",
-        "toggle": "Przełącz motyw"
+        "toggle": "Przełącz tryb"
+      },
+      "theme": {
+        "change": "Zmień motyw"
       },
       "language": {
         "change": "Zmień język"
