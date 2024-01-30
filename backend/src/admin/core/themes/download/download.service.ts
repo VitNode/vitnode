@@ -34,6 +34,11 @@ export class DownloadAdminThemesService {
     }
 
     const path = join('..', 'frontend', 'themes', theme.id.toString());
+    // Check if theme exists
+    if (!fs.existsSync(path)) {
+      throw new NotFoundError('Theme directory');
+    }
+
     const name = removeSpecialCharacters(
       `${theme.name}-${
         version && version_code ? version : theme.version
@@ -66,16 +71,14 @@ export class DownloadAdminThemesService {
     }
 
     // Create tgz
-    tar
-      .c({ gzip: true, file: `temp/${name}.tgz`, cwd: join('..', 'frontend', 'themes') }, [
-        theme.id.toString()
-      ])
-      .catch(err => {
-        throw new CustomError({
-          code: 'DOWNLOAD_ADMIN_THEMES_SERVICE_ERROR',
-          message: err.message
-        });
+    try {
+      tar.c({ gzip: true, file: `temp/${name}.tgz`, cwd: path }, ['.']);
+    } catch (error) {
+      throw new CustomError({
+        code: 'DOWNLOAD_ADMIN_THEMES_SERVICE_ERROR',
+        message: 'Error creating tgz'
       });
+    }
 
     return `${name}.tgz`;
   }

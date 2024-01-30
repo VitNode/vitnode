@@ -114,7 +114,8 @@
           },
           "upload": {
             "title": "Upload Theme",
-            "submit": "Upload"
+            "submit": "Upload",
+            "success": "Successfully uploaded theme."
           }
         }
       },

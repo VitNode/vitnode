@@ -21,7 +21,7 @@ export const ContentUploadActionsThemesAdmin = () => {
             control={form.control}
             name="file"
             render={({ field }) => (
-              <FilesInput id="theme" {...field} acceptExtensions={['zip']} maxFileSizeInMb={0} />
+              <FilesInput id="theme" {...field} acceptExtensions={['tgz']} maxFileSizeInMb={0} />
             )}
           />
 

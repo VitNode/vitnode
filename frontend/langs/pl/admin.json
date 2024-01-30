@@ -109,7 +109,8 @@
             },
             "type": {
               "rebuild": "Przebuduj obecną wersję - {version}",
-              "new_version": "Stwórz nową wersja"
+              "new_version": "Stwórz nową wersja",
+              "success": "Pomyślnie przesłano motyw."
             }
           },
           "upload": {
