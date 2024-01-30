@@ -157,6 +157,7 @@ export type Mutation = {
   core_themes__admin__create: Scalars['String']['output'];
   core_themes__admin__delete: Scalars['String']['output'];
   core_themes__admin__download: Scalars['String']['output'];
+  core_themes__admin__upload: Scalars['String']['output'];
   core_themes__change: Scalars['String']['output'];
   forum_forums__admin__change_position: Scalars['String']['output'];
   forum_forums__admin__create: CreateForumForumsObj;
@@ -274,6 +275,11 @@ export type MutationCore_Themes__Admin__DownloadArgs = {
   id: Scalars['Int']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
   version_code?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type MutationCore_Themes__Admin__UploadArgs = {
+  file: Scalars['Upload']['input'];
 };
 
 
@@ -1014,6 +1020,13 @@ export type Core_Themes__Admin__DownloadMutationVariables = Exact<{
 
 export type Core_Themes__Admin__DownloadMutation = { __typename?: 'Mutation', core_themes__admin__download: string };
 
+export type Core_Themes__Admin__UploadMutationVariables = Exact<{
+  file: Scalars['Upload']['input'];
+}>;
+
+
+export type Core_Themes__Admin__UploadMutation = { __typename?: 'Mutation', core_themes__admin__upload: string };
+
 export type Core_Languages__EditMutationVariables = Exact<{
   default: Scalars['Boolean']['input'];
   enabled: Scalars['Boolean']['input'];
@@ -1434,6 +1447,11 @@ export const Core_Themes__Admin__Download = gql`
     version: $version
     version_code: $versionCode
   )
+}
+    `;
+export const Core_Themes__Admin__Upload = gql`
+    mutation Core_themes__admin__upload($file: Upload!) {
+  core_themes__admin__upload(file: $file)
 }
     `;
 export const Core_Languages__Edit = gql`

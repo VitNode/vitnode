@@ -8,6 +8,8 @@ import { DeleteAdminThemesResolver } from './delete/delete.resolver';
 import { DeleteAdminThemesService } from './delete/delete.service';
 import { DownloadAdminThemesService } from './download/download.service';
 import { DownloadAdminThemesResolver } from './download/download.resolver';
+import { UploadAdminThemesResolver } from './upload/upload.resolver';
+import { UploadAdminThemesService } from './upload/upload.service';
 
 @Module({
   providers: [
@@ -18,7 +20,9 @@ import { DownloadAdminThemesResolver } from './download/download.resolver';
     DeleteAdminThemesResolver,
     DeleteAdminThemesService,
     DownloadAdminThemesService,
-    DownloadAdminThemesResolver
+    DownloadAdminThemesResolver,
+    UploadAdminThemesResolver,
+    UploadAdminThemesService
   ]
 })
 export class AdminThemesModule {}

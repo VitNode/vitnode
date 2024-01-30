@@ -25,7 +25,6 @@
     "docker:run": "docker run -p 8080:8080 vitnode_backend"
   },
   "dependencies": {
-    "archiver": "^6.0.1",
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
@@ -39,6 +38,7 @@
     "reflect-metadata": "^0.2.1",
     "rxjs": "^7.8.1",
     "socket.io": "^4.7.4",
+    "tar": "^6.2.0",
     "ua-parser-js": "^1.0.37"
   },
   "devDependencies": {
@@ -67,6 +67,7 @@
     "@types/object-path": "^0.11.4",
     "@types/pg": "^8.11.0",
     "@types/supertest": "^6.0.2",
+    "@types/tar": "^6.1.11",
     "@types/ua-parser-js": "^0.7.39",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.19.1",

@@ -2,8 +2,8 @@ import * as fs from 'fs';
 import { join } from 'path';
 import { writeFile } from 'fs/promises';
 
+import * as tar from 'tar';
 import { Injectable } from '@nestjs/common';
-import * as archiver from 'archiver';
 import { eq } from 'drizzle-orm';
 
 import { DownloadAdminThemesArgs } from './dto/download.args';
@@ -15,6 +15,7 @@ import { User } from '@/utils/decorators/user.decorator';
 import { generateRandomString } from '@/functions/generate-random-string';
 import { currentDate } from '@/functions/date';
 import { core_themes } from '../../database/schema/themes';
+import { CustomError } from '@/utils/errors/CustomError';
 
 @Injectable()
 export class DownloadAdminThemesService {
@@ -64,37 +65,18 @@ export class DownloadAdminThemesService {
         .where(eq(core_themes.id, id));
     }
 
-    // Prepare to zip
-    const output = `temp/${name}.zip`;
-    const archive = archiver('zip', {
-      zlib: { level: 9 }
-    });
-    const stream = fs.createWriteStream(output);
-
-    // Create zip
-    new Promise<void>((resolve, reject) => {
-      archive.on('error', err => reject(err)).pipe(stream);
-      stream.on('close', () => resolve());
-      stream.on('end', () => resolve());
-      stream.on('error', err => reject(err));
-
-      // Recursive function to get all files in a directory
-      const getFiles = (dirPath: string) => {
-        fs.readdirSync(dirPath).forEach(file => {
-          const fullPath = join(dirPath, file);
-
-          if (fs.statSync(fullPath).isDirectory()) {
-            getFiles(fullPath);
-          } else {
-            archive.file(fullPath, { name: fullPath.replace('../frontend/themes/', '') });
-          }
+    // Create tgz
+    tar
+      .c({ gzip: true, file: `temp/${name}.tgz`, cwd: join('..', 'frontend', 'themes') }, [
+        theme.id.toString()
+      ])
+      .catch(err => {
+        throw new CustomError({
+          code: 'DOWNLOAD_ADMIN_THEMES_SERVICE_ERROR',
+          message: err.message
         });
-      };
+      });
 
-      getFiles(path);
-      archive.finalize();
-    });
-
-    return `${name}.zip`;
+    return `${name}.tgz`;
   }
 }

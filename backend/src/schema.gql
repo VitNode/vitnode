@@ -128,6 +128,7 @@ type Mutation {
   core_themes__admin__create(author: String!, author_url: String!, name: String!, support_url: String!): String!
   core_themes__admin__delete(id: Int!): String!
   core_themes__admin__download(id: Int!, version: String, version_code: Int): String!
+  core_themes__admin__upload(file: Upload!): String!
   core_themes__change(id: Int!): String!
   forum_forums__admin__change_position(id: Int!, index_to_move: Int!, parent_id: Int): String!
   forum_forums__admin__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
