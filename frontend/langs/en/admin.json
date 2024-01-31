@@ -117,6 +117,9 @@
             "submit": "Upload",
             "success": "Successfully uploaded theme."
           }
+        },
+        "nav": {
+          "title": "Navigation"
         }
       },
       "langs": {

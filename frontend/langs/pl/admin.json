@@ -117,6 +117,9 @@
             "title": "Załaduj motyw",
             "submit": "Załaduj"
           }
+        },
+        "nav": {
+          "title": "Nawigacja"
         }
       },
       "langs": {
