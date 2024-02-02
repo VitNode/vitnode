@@ -1,20 +1,27 @@
 import { relations } from 'drizzle-orm';
-import { boolean, pgTable, serial, varchar } from 'drizzle-orm/pg-core';
+import { boolean, integer, pgTable, serial, varchar } from 'drizzle-orm/pg-core';
 
 import { core_languages } from './languages';
 
 export const core_nav = pgTable('core_nav', {
   id: serial('id').primaryKey(),
   href: varchar('href', { length: 255 }).notNull(),
-  external: boolean('external').notNull().default(false)
+  external: boolean('external').notNull().default(false),
+  position: integer('position').notNull().default(0),
+  // ! Warning: this is a recursive relation. It's not supported by drizzle-orm yet.
+  parent_id: integer('parent_id')
 });
 
-export const core_nav_relations = relations(core_nav, ({ many }) => ({
-  names: many(core_nav_names),
-  description: many(core_nav_description)
+export const core_nav_relations = relations(core_nav, ({ many, one }) => ({
+  name: many(core_nav_name),
+  description: many(core_nav_description),
+  parent: one(core_nav, {
+    fields: [core_nav.parent_id],
+    references: [core_nav.id]
+  })
 }));
 
-export const core_nav_names = pgTable('core_nav_names', {
+export const core_nav_name = pgTable('core_nav_name', {
   id: serial('id').primaryKey(),
   nav_id: serial('nav_id')
     .notNull()
@@ -26,16 +33,16 @@ export const core_nav_names = pgTable('core_nav_names', {
     .references(() => core_languages.code, {
       onDelete: 'cascade'
     }),
-  value: varchar('value').notNull()
+  value: varchar('value', { length: 50 }).notNull()
 });
 
-export const core_nav_names_relations = relations(core_nav_names, ({ one }) => ({
+export const core_nav_name_relations = relations(core_nav_name, ({ one }) => ({
   nav: one(core_nav, {
-    fields: [core_nav_names.nav_id],
+    fields: [core_nav_name.nav_id],
     references: [core_nav.id]
   }),
   language: one(core_languages, {
-    fields: [core_nav_names.language_code],
+    fields: [core_nav_name.language_code],
     references: [core_languages.code]
   })
 }));
@@ -52,7 +59,7 @@ export const core_nav_description = pgTable('core_nav_description', {
     .references(() => core_languages.code, {
       onDelete: 'cascade'
     }),
-  value: varchar('value').notNull()
+  value: varchar('value', { length: 50 }).notNull()
 });
 
 export const core_nav_description_relations = relations(core_nav_description, ({ one }) => ({
