@@ -117,6 +117,7 @@ type Mutation {
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
   core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
+  core_nav__admin__change_position(id: Int!, index_to_move: Int!, parent_id: Int): String!
   core_nav__admin__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, name: [TextLanguageInput!]!): ShowCoreNav!
   core_nav__admin__delete(id: Int!): String!
   core_plugins__admin__create(author: String!, author_url: String!, code: String!, description: String, name: String!, support_url: String!): ShowAdminPlugins!

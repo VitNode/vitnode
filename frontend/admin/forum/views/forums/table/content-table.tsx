@@ -20,7 +20,7 @@ import { useQueryClient, type InfiniteData } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 
 import { ItemTableForumsForumAdmin } from './item/item';
-import { useForumForumsAdminAPI } from '../hooks/use-forum-forums-admin-api';
+import { useForumForumsAdminAPI } from './hooks/use-forum-forums-admin-api';
 import { buildTree, flattenTree, getForumProjection, removeChildrenOf } from './functions';
 import type {
   Forum_Forums__Admin__ShowFlattenedItem,
@@ -30,7 +30,7 @@ import { Loader } from '@/components/loader/loader';
 import { ErrorAdminView } from '@/admin/core/global/error-admin-view';
 import { APIKeys } from '@/graphql/api-keys';
 import type { Forum_Forums__Admin__ShowQuery } from '@/graphql/hooks';
-import { mutationChangePositionApi } from '../hooks/mutation-change-position-api';
+import { mutationChangePositionApi } from './hooks/mutation-change-position-api';
 
 const indentationWidth = 20;
 

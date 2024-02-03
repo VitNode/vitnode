@@ -5,7 +5,7 @@ import type {
   Forum_Forums__Admin__ShowFlattenedItem,
   Forum_Forums__Admin__ShowWithProjection
 } from './types';
-import type { Forum_Forums__Admin__ShowQueryItem } from '../hooks/use-forum-forums-admin-api';
+import type { Forum_Forums__Admin__ShowQueryItem } from './hooks/use-forum-forums-admin-api';
 import type { ChildrenShowForumForums, ShowForumForumsAdmin } from '@/graphql/hooks';
 
 const getDragDepth = ({

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { count } from 'drizzle-orm';
+import { and, count, isNull } from 'drizzle-orm';
 
 import { ShowCoreNavArgs } from './dto/show.args';
 import { ShowCoreNavObj } from './dto/show.obj';
@@ -27,8 +27,9 @@ export class ShowCoreNavService {
       }
     });
 
-    const edges = await this.databaseService.db.query.core_nav.findMany({
+    const itemsParent = await this.databaseService.db.query.core_nav.findMany({
       ...pagination,
+      where: and(pagination.where, isNull(core_nav.parent_id)),
       with: {
         name: true,
         description: true
@@ -37,10 +38,26 @@ export class ShowCoreNavService {
 
     const totalCount = await this.databaseService.db.select({ count: count() }).from(core_nav);
 
+    const edges = await Promise.all(
+      itemsParent.map(async item => {
+        const children = await this.databaseService.db.query.core_nav.findMany({
+          where: (table, { eq }) => eq(table.parent_id, item.id),
+          orderBy: (table, { asc }) => asc(table.position),
+          with: {
+            name: true,
+            description: true
+          }
+        });
+
+        return {
+          ...item,
+          children
+        };
+      })
+    );
+
     return outputPagination({
-      edges: edges.map(edge => {
-        return { ...edge, children: [] };
-      }),
+      edges,
       totalCount,
       first,
       cursor,

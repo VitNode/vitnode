@@ -135,7 +135,7 @@
             },
             "external": {
               "label": "External link?",
-              "desc": "If yes, the link will open in a new tab."
+              "desc": "The link will open in a new tab."
             }
           },
           "delete": {

@@ -146,6 +146,7 @@ export type Mutation = {
   core_members__avatar__delete: Scalars['String']['output'];
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
   core_members__sign_up: SignUpCoreMembersObj;
+  core_nav__admin__change_position: Scalars['String']['output'];
   core_nav__admin__create: ShowCoreNav;
   core_nav__admin__delete: Scalars['String']['output'];
   core_plugins__admin__create: ShowAdminPlugins;
@@ -210,6 +211,13 @@ export type MutationCore_Members__Sign_UpArgs = {
   name: Scalars['String']['input'];
   newsletter?: InputMaybe<Scalars['Boolean']['input']>;
   password: Scalars['String']['input'];
+};
+
+
+export type MutationCore_Nav__Admin__Change_PositionArgs = {
+  id: Scalars['Int']['input'];
+  index_to_move: Scalars['Int']['input'];
+  parent_id?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -1011,6 +1019,15 @@ export type Core_Staff_Moderators__Admin__DeleteMutationVariables = Exact<{
 
 export type Core_Staff_Moderators__Admin__DeleteMutation = { __typename?: 'Mutation', core_staff_moderators__admin__delete: string };
 
+export type Core_Nav__Admin__Change_PositionMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  indexToMove: Scalars['Int']['input'];
+  parentId?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type Core_Nav__Admin__Change_PositionMutation = { __typename?: 'Mutation', core_nav__admin__change_position: string };
+
 export type Core_Nav__Admin__CreateMutationVariables = Exact<{
   description: Array<TextLanguageInput> | TextLanguageInput;
   external: Scalars['Boolean']['input'];
@@ -1462,6 +1479,15 @@ export const Core_Staff_Moderators__Admin__Create = gql`
 export const Core_Staff_Moderators__Admin__Delete = gql`
     mutation Core_staff_moderators__admin__delete($id: Int!) {
   core_staff_moderators__admin__delete(id: $id)
+}
+    `;
+export const Core_Nav__Admin__Change_Position = gql`
+    mutation Core_nav__admin__change_position($id: Int!, $indexToMove: Int!, $parentId: Int) {
+  core_nav__admin__change_position(
+    id: $id
+    index_to_move: $indexToMove
+    parent_id: $parentId
+  )
 }
     `;
 export const Core_Nav__Admin__Create = gql`

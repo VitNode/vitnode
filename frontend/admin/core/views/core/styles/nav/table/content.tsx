@@ -19,6 +19,7 @@ import { useTranslations } from 'next-intl';
 
 import { ItemContentTableContentNavAdmin } from './item';
 import type { Core_Nav__Admin__ShowQuery, ShowCoreNav } from '@/graphql/hooks';
+import { mutationChangePositionApi } from './hooks/mutation-change-position-api';
 
 interface ProjectedType {
   activeId: UniqueIdentifier;
@@ -132,14 +133,14 @@ export const ContentTableContentNavAdmin = ({
           overId
         });
       }}
-      onDragEnd={() => {
+      onDragEnd={async () => {
         if (!projected) return;
 
         const tree = flattenedItems;
         const activeItemIndex = tree.findIndex(({ id }) => id === projected.activeId);
         const overItemIndex = tree.findIndex(({ id }) => id === projected.overId);
 
-        if (!activeItemIndex) return;
+        if (activeItemIndex === -1) return;
         const afterChangeTree = arrayMove(tree, activeItemIndex, overItemIndex);
         const afterChangeTreeActiveItemIndex = afterChangeTree.findIndex(
           ({ id }) => id === projected.activeId
@@ -179,6 +180,18 @@ export const ContentTableContentNavAdmin = ({
         });
 
         setItems(newTree);
+
+        const indexToMove =
+          projected.activeId === projected.overId
+            ? -1
+            : flattenedItems.find(i => i.id === projected.overId)?.position ?? -1;
+
+        await mutationChangePositionApi({
+          id: Number(projected.activeId),
+          parentId: projected.parentId,
+          indexToMove: indexToMove
+        });
+
         setProjected(null);
         setActiveId(null);
         setOverId(null);
