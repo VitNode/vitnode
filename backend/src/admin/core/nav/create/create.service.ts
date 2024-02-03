@@ -12,7 +12,7 @@ export class CreateAdminNavService {
 
   async create({ description, external, href, name }: CreateAdminNavArgs): Promise<ShowCoreNav> {
     const theMostHighestPosition = await this.databaseService.db.query.core_nav.findFirst({
-      where: (table, { eq }) => eq(table.parent_id, null),
+      where: (table, { isNull }) => isNull(table.parent_id),
       orderBy: (table, { asc }) => asc(table.position)
     });
 
@@ -38,16 +38,19 @@ export class CreateAdminNavService {
       )
       .returning();
 
-    const descriptionNav = await this.databaseService.db
-      .insert(core_nav_description)
-      .values(
-        description.map(n => ({
-          nav_id: id,
-          language_code: n.language_code,
-          value: n.value
-        }))
-      )
-      .returning();
+    const descriptionNav =
+      description.length > 0
+        ? await this.databaseService.db
+            .insert(core_nav_description)
+            .values(
+              description.map(n => ({
+                nav_id: id,
+                language_code: n.language_code,
+                value: n.value
+              }))
+            )
+            .returning()
+        : [];
 
     return {
       ...nav[0],

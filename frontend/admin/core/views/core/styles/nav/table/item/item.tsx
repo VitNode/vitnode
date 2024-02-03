@@ -19,7 +19,8 @@ export const ItemContentTableContentNavAdmin = ({
   href,
   id,
   isDropHere,
-  name
+  name,
+  position
 }: Props) => {
   const t = useTranslations('admin.core.styles.nav');
   const { attributes, isDragging, listeners, setNodeRef, transform, transition } = useSortable({
@@ -57,7 +58,9 @@ export const ItemContentTableContentNavAdmin = ({
 
       <div className="flex flex-col flex-1">
         <div className="flex gap-2 items-center">
-          <span className="font-semibold">{convertText(name)}</span>
+          <span className="font-semibold">
+            {convertText(name)} - {id} - position {position}
+          </span>
         </div>
 
         <span className="text-muted-foreground text-sm line-clamp-2">{t('href', { href })}</span>

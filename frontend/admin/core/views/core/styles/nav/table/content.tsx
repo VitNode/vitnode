@@ -114,10 +114,6 @@ export const ContentTableContentNavAdmin = ({
             return null;
           }
 
-          // if (depth === previousItem.depth) {
-          //   return previousItem.parentId;
-          // }
-
           if (depth > previousItem.depth) {
             return previousItem.id;
           }
