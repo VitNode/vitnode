@@ -17,7 +17,7 @@ import {
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
-import { ItemContentTableContentNavAdmin } from './item/item';
+import { ItemContentTableContentNavAdmin } from './item';
 import type { Core_Nav__Admin__ShowQuery, ShowCoreNav } from '@/graphql/hooks';
 
 interface ProjectedType {

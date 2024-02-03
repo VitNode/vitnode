@@ -11,7 +11,7 @@ const Content = lazy(() =>
   }))
 );
 
-export const TableContentNavAdmin = (props: Core_Nav__Admin__ShowQuery) => {
+export const TableNavAdmin = (props: Core_Nav__Admin__ShowQuery) => {
   return (
     <Suspense fallback={<Loader />}>
       <Content {...props} />

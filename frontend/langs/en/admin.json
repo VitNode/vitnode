@@ -137,6 +137,11 @@
               "label": "External link?",
               "desc": "If yes, the link will open in a new tab."
             }
+          },
+          "delete": {
+            "submit": "Yes, delete navigation",
+            "desc": "This action will delete <name></name> navigation.",
+            "success": "Navigation has been deleted."
           }
         }
       },

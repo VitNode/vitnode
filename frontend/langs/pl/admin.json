@@ -137,6 +137,11 @@
               "label": "Link zewnętrzny?",
               "desc": "Jeśli tak, link będzie otwierał się w nowym oknie."
             }
+          },
+          "delete": {
+            "submit": "Tak, usuń nawigację",
+            "desc": "Ta akcja usunie nawigację <name></name>.",
+            "success": "Nawigacja została usunięta."
           }
         }
       },

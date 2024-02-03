@@ -7,6 +7,7 @@ import { cx } from '@/functions/classnames';
 import { Button } from '@/components/ui/button';
 import type { ShowCoreNav } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
+import { ActionsTableNavAdmin } from './actions/actions';
 
 interface Props extends Omit<ShowCoreNav, '__typename'> {
   depth: boolean;
@@ -20,7 +21,8 @@ export const ItemContentTableContentNavAdmin = ({
   id,
   isDropHere,
   name,
-  position
+  position,
+  ...props
 }: Props) => {
   const t = useTranslations('admin.core.styles.nav');
   const { attributes, isDragging, listeners, setNodeRef, transform, transition } = useSortable({
@@ -72,7 +74,7 @@ export const ItemContentTableContentNavAdmin = ({
         )}
       </div>
 
-      <div>actions</div>
+      <ActionsTableNavAdmin id={id} name={name} {...props} />
     </div>
   );
 };

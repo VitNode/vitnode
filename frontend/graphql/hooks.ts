@@ -147,6 +147,7 @@ export type Mutation = {
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
   core_members__sign_up: SignUpCoreMembersObj;
   core_nav__admin__create: ShowCoreNav;
+  core_nav__admin__delete: Scalars['String']['output'];
   core_plugins__admin__create: ShowAdminPlugins;
   core_plugins__admin__delete: Scalars['String']['output'];
   core_sessions__sign_in: Scalars['String']['output'];
@@ -217,6 +218,11 @@ export type MutationCore_Nav__Admin__CreateArgs = {
   external: Scalars['Boolean']['input'];
   href: Scalars['String']['input'];
   name: Array<TextLanguageInput>;
+};
+
+
+export type MutationCore_Nav__Admin__DeleteArgs = {
+  id: Scalars['Int']['input'];
 };
 
 
@@ -1015,6 +1021,13 @@ export type Core_Nav__Admin__CreateMutationVariables = Exact<{
 
 export type Core_Nav__Admin__CreateMutation = { __typename?: 'Mutation', core_nav__admin__create: { __typename?: 'ShowCoreNav', id: number } };
 
+export type Core_Nav__Admin__DeleteMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type Core_Nav__Admin__DeleteMutation = { __typename?: 'Mutation', core_nav__admin__delete: string };
+
 export type Core_Plugins__Admin__CreateMutationVariables = Exact<{
   author: Scalars['String']['input'];
   authorUrl: Scalars['String']['input'];
@@ -1461,6 +1474,11 @@ export const Core_Nav__Admin__Create = gql`
   ) {
     id
   }
+}
+    `;
+export const Core_Nav__Admin__Delete = gql`
+    mutation Core_nav__admin__delete($id: Int!) {
+  core_nav__admin__delete(id: $id)
 }
     `;
 export const Core_Plugins__Admin__Create = gql`
