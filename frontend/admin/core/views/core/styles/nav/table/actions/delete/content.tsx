@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import { Trash } from 'lucide-react';
 
 import type { ShowCoreNav } from '@/graphql/hooks';
 import { useDeleteNavAdmin } from './hooks/use-delete-nav-admin';
@@ -12,6 +13,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { SubmitDeleteActionTableNavAdmin } from './submit';
 import { useTextLang } from '@/hooks/core/use-text-lang';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 export const ContentDeleteActionTableNavAdmin = ({
   children,
@@ -32,6 +34,14 @@ export const ContentDeleteActionTableNavAdmin = ({
             name: () => <span className="font-bold text-foreground">{convertText(name)}</span>
           })}
         </AlertDialogDescription>
+
+        {children.length > 0 && (
+          <Alert variant="destructive">
+            <Trash className="size-4" />
+            <AlertTitle>{tCore('hands_up')}</AlertTitle>
+            <AlertDescription>{t('desc_with_children')}</AlertDescription>
+          </Alert>
+        )}
       </AlertDialogHeader>
 
       <AlertDialogFooter className="mt-6">

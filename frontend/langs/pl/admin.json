@@ -141,6 +141,7 @@
           "delete": {
             "submit": "Tak, usuń nawigację",
             "desc": "Ta akcja usunie nawigację <name></name>.",
+            "desc_with_children": "Masz podnawigacje. Jeśli usuniesz tą nawigację, wszystkie podnawigacje zostaną przeniesione do nadrzędnej nawigacji.",
             "success": "Nawigacja została usunięta."
           }
         }
