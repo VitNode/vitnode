@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 
+import { useCreateNavAdmin } from './hooks/use-create-nav-admin';
 import { DialogTitle } from '@/components/ui/dialog';
 import {
   Form,
@@ -10,14 +11,15 @@ import {
   FormLabel,
   FormMessage
 } from '@/components/ui/form';
-import { useCreateThemeAdmin } from './hooks/use-create-plugin-admin';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { TextLanguageInput } from '@/components/text-language-input';
+import { Switch } from '@/components/ui/switch';
 
-export const ContentCreateActionThemeAdmin = () => {
-  const t = useTranslations('admin.core.styles.themes.create');
+export const ContentCreateNavAdmin = () => {
+  const t = useTranslations('admin.core.styles.nav.create');
   const tCore = useTranslations('core');
-  const { form, onSubmit } = useCreateThemeAdmin();
+  const { form, onSubmit } = useCreateNavAdmin();
 
   return (
     <>
@@ -32,6 +34,34 @@ export const ContentCreateActionThemeAdmin = () => {
               <FormItem>
                 <FormLabel>{t('name.label')}</FormLabel>
                 <FormControl>
+                  <TextLanguageInput {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t('description.label')}</FormLabel>
+                <FormControl>
+                  <TextLanguageInput {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="href"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t('href.label')}</FormLabel>
+                <FormControl>
                   <Input {...field} />
                 </FormControl>
                 <FormMessage />
@@ -41,43 +71,16 @@ export const ContentCreateActionThemeAdmin = () => {
 
           <FormField
             control={form.control}
-            name="support_url"
+            name="external"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('support_url.label')}</FormLabel>
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                <div className="space-y-0.5">
+                  <FormLabel className="text-base">{t('external.label')}</FormLabel>
+                  <FormDescription>{t('external.desc')}</FormDescription>
+                </div>
                 <FormControl>
-                  <Input type="url" {...field} />
+                  <Switch checked={field.value} onCheckedChange={field.onChange} />
                 </FormControl>
-                <FormDescription>{t('support_url.desc')}</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="author"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('author.label')}</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="author_url"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('author_url.label')}</FormLabel>
-                <FormControl>
-                  <Input type="url" {...field} />
-                </FormControl>
-                <FormMessage />
               </FormItem>
             )}
           />

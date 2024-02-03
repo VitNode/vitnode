@@ -119,7 +119,24 @@
           }
         },
         "nav": {
-          "title": "Navigation"
+          "title": "Navigation",
+          "create": {
+            "title": "Create Navigation",
+            "success": "Navigation has been created.",
+            "name": {
+              "label": "Name"
+            },
+            "description": {
+              "label": "Description"
+            },
+            "href": {
+              "label": "URL"
+            },
+            "external": {
+              "label": "External link?",
+              "desc": "If yes, the link will open in a new tab."
+            }
+          }
         }
       },
       "langs": {

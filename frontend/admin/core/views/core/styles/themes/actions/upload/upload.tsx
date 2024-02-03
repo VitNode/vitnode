@@ -10,11 +10,11 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
 const Content = lazy(() =>
   import('./content').then(module => ({
-    default: module.ContentUploadActionsThemesAdmin
+    default: module.ContentUploadActionThemeAdmin
   }))
 );
 
-export const UploadActionsThemesAdmin = () => {
+export const UploadActionThemeAdmin = () => {
   const t = useTranslations('core');
 
   return (

@@ -4,19 +4,26 @@ import { CSS } from '@dnd-kit/utilities';
 
 import { cx } from '@/functions/classnames';
 import { Button } from '@/components/ui/button';
+import type { ShowCoreNav } from '@/graphql/hooks';
+import { useTextLang } from '@/hooks/core/use-text-lang';
 
-interface Props {
+interface Props extends Omit<ShowCoreNav, '__typename'> {
   depth: boolean;
-  id: number;
   isDropHere: boolean;
-  name: string;
 }
 
-export const ItemContentTableContentNavAdmin = ({ depth, id, isDropHere, name }: Props) => {
+export const ItemContentTableContentNavAdmin = ({
+  depth,
+  description,
+  id,
+  isDropHere,
+  name
+}: Props) => {
   const { attributes, isDragging, listeners, setNodeRef, transform, transition } = useSortable({
     id,
     animateLayoutChanges: ({ isSorting, wasDragging }) => (isSorting || wasDragging ? false : true)
   });
+  const { convertText } = useTextLang();
 
   return (
     <div
@@ -47,12 +54,14 @@ export const ItemContentTableContentNavAdmin = ({ depth, id, isDropHere, name }:
 
       <div className="flex flex-col flex-1">
         <div className="flex gap-2 items-center">
-          <span className="font-semibold">
-            {name} - {depth && 'children'}
-          </span>
+          <span className="font-semibold">{convertText(name)}</span>
         </div>
 
-        <span className="text-muted-foreground text-sm line-clamp-2">desc</span>
+        {description.length > 0 && (
+          <span className="text-muted-foreground text-sm line-clamp-2">
+            {convertText(description)}
+          </span>
+        )}
       </div>
 
       <div>actions</div>

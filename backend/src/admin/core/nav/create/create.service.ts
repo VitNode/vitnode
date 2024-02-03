@@ -3,22 +3,16 @@ import { Injectable } from '@nestjs/common';
 import { CreateAdminNavArgs } from './dto/create.args';
 
 import { DatabaseService } from '@/database/database.service';
-import { core_nav, core_nav_name } from '../../database/schema/nav';
+import { core_nav, core_nav_description, core_nav_name } from '../../database/schema/nav';
 import { ShowCoreNav } from '@/src/core/nav/show/dto/show.obj';
 
 @Injectable()
 export class CreateAdminNavService {
   constructor(private databaseService: DatabaseService) {}
 
-  async create({
-    description,
-    external,
-    href,
-    name,
-    parent_id
-  }: CreateAdminNavArgs): Promise<ShowCoreNav> {
+  async create({ description, external, href, name }: CreateAdminNavArgs): Promise<ShowCoreNav> {
     const theMostHighestPosition = await this.databaseService.db.query.core_nav.findFirst({
-      where: (table, { eq }) => eq(table.parent_id, parent_id || null),
+      where: (table, { eq }) => eq(table.parent_id, null),
       orderBy: (table, { asc }) => asc(table.position)
     });
 
@@ -27,7 +21,6 @@ export class CreateAdminNavService {
       .values({
         href,
         external,
-        parent_id,
         position: theMostHighestPosition ? theMostHighestPosition.position + 1 : 0
       })
       .returning();
@@ -46,7 +39,7 @@ export class CreateAdminNavService {
       .returning();
 
     const descriptionNav = await this.databaseService.db
-      .insert(core_nav_name)
+      .insert(core_nav_description)
       .values(
         description.map(n => ({
           nav_id: id,

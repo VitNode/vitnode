@@ -10,11 +10,11 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
 const Content = lazy(() =>
   import('./content').then(module => ({
-    default: module.ContentCreateActionsPluginsAdmin
+    default: module.ContentCreateActionPluginAdmin
   }))
 );
 
-export const CreateActionsPluginsAdmin = () => {
+export const CreateActionPluginAdmin = () => {
   const t = useTranslations('core');
 
   if (process.env.NODE_ENV !== 'development') return null;

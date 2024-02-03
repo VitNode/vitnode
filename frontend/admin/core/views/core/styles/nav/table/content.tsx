@@ -14,19 +14,11 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy
 } from '@dnd-kit/sortable';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import { ItemContentTableContentNavAdmin } from './item/item';
-
-interface ItemNavType {
-  id: number;
-  name: string;
-}
-
-interface ItemsNavWithChildrenType extends ItemNavType {
-  children?: ItemNavType[];
-}
+import type { Core_Nav__Admin__ShowQuery, ShowCoreNav } from '@/graphql/hooks';
 
 interface ProjectedType {
   activeId: UniqueIdentifier;
@@ -34,41 +26,25 @@ interface ProjectedType {
   parentId: number | null;
 }
 
-interface FlattenedItemsType extends ItemsNavWithChildrenType {
+interface FlattenedItemsType extends Omit<ShowCoreNav, '__typename'> {
   depth: boolean;
 }
 
-export const ContentTableContentNavAdmin = () => {
+export const ContentTableContentNavAdmin = ({
+  core_nav__show: { edges }
+}: Core_Nav__Admin__ShowQuery) => {
   const t = useTranslations('core');
-  const [items, setItems] = useState<ItemsNavWithChildrenType[]>([
-    {
-      id: 1,
-      name: 'test1',
-      children: [
-        {
-          id: 4,
-          name: 'test4'
-        },
-        {
-          id: 5,
-          name: 'test5'
-        }
-      ]
-    },
-    {
-      id: 2,
-      name: 'test2',
-      children: []
-    },
-    {
-      id: 3,
-      name: 'test3',
-      children: []
-    }
-  ]);
+  const [items, setItems] = useState<Omit<ShowCoreNav, '__typename'>[]>(edges);
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
   const [projected, setProjected] = useState<ProjectedType | null>();
+
+  // Revalidate items when edges change
+  useEffect(() => {
+    if (!edges) return;
+
+    setItems(edges);
+  }, [edges]);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -79,9 +55,10 @@ export const ContentTableContentNavAdmin = () => {
 
   const flattenedItems: FlattenedItemsType[] = useMemo(() => {
     const tree = items.reduce<FlattenedItemsType[]>((acc, item) => {
-      const children = item.children?.map(child => ({
+      const children = item.children.map(child => ({
         ...child,
-        depth: true
+        depth: true,
+        children: []
       }));
 
       return [...acc, { ...item, depth: false }, ...(children ?? [])];
@@ -176,11 +153,11 @@ export const ContentTableContentNavAdmin = () => {
         afterChangeTree[afterChangeTreeActiveItemIndex] = {
           ...afterChangeTree[afterChangeTreeActiveItemIndex],
           depth: !!projected.parentId,
-          children: undefined
+          children: []
         };
 
         // Build new tree
-        const newTree: ItemsNavWithChildrenType[] = [];
+        const newTree: Omit<ShowCoreNav, '__typename'>[] = [];
 
         let rootItemId: number | null = null;
         afterChangeTree.forEach(item => {

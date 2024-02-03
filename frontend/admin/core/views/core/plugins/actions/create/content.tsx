@@ -14,7 +14,7 @@ import { useCreatePluginAdmin } from './hooks/use-create-plugin-admin';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-export const ContentCreateActionsPluginsAdmin = () => {
+export const ContentCreateActionPluginAdmin = () => {
   const t = useTranslations('admin.core.plugins.create');
   const tCore = useTranslations('core');
   const { form, onSubmit } = useCreatePluginAdmin();

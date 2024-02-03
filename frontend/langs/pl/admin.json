@@ -119,7 +119,24 @@
           }
         },
         "nav": {
-          "title": "Nawigacja"
+          "title": "Nawigacja",
+          "create": {
+            "title": "Stwórz nawigację",
+            "success": "Nawigacja została utworzona.",
+            "name": {
+              "label": "Nazwa"
+            },
+            "description": {
+              "label": "Opis"
+            },
+            "href": {
+              "label": "Link"
+            },
+            "external": {
+              "label": "Link zewnętrzny?",
+              "desc": "Jeśli tak, link będzie otwierał się w nowym oknie."
+            }
+          }
         }
       },
       "langs": {

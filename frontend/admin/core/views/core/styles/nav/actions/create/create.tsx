@@ -10,14 +10,12 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
 const Content = lazy(() =>
   import('./content').then(module => ({
-    default: module.ContentCreateActionThemeAdmin
+    default: module.ContentCreateNavAdmin
   }))
 );
 
-export const CreateActionThemeAdmin = () => {
+export const CreateActionNavAdmin = () => {
   const t = useTranslations('core');
-
-  if (process.env.NODE_ENV !== 'development') return null;
 
   return (
     <Dialog>
@@ -28,7 +26,7 @@ export const CreateActionThemeAdmin = () => {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-w-xl">
+      <DialogContent className="max-w-2xl">
         <Suspense fallback={<Loader />}>
           <Content />
         </Suspense>

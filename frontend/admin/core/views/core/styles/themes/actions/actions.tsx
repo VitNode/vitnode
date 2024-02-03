@@ -1,11 +1,11 @@
-import { CreateActionsThemesAdmin } from './create/create';
-import { UploadActionsThemesAdmin } from './upload/upload';
+import { CreateActionThemeAdmin } from './create/create';
+import { UploadActionThemeAdmin } from './upload/upload';
 
 export const ActionsThemesAdmin = () => {
   return (
     <>
-      <UploadActionsThemesAdmin />
-      {process.env.NODE_ENV === 'development' && <CreateActionsThemesAdmin />}
+      <UploadActionThemeAdmin />
+      {process.env.NODE_ENV === 'development' && <CreateActionThemeAdmin />}
     </>
   );
 };

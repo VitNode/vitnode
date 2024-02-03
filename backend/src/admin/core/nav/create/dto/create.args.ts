@@ -1,24 +1,23 @@
 import { ArgsType, Field } from '@nestjs/graphql';
-import { MaxLength, MinLength } from 'class-validator';
+import { ArrayMinSize, IsArray, MaxLength, ValidateNested } from 'class-validator';
 
 import { TextLanguageInput } from '@/types/database/text-language.type';
 
 @ArgsType()
 export class CreateAdminNavArgs {
+  @IsArray()
+  @ValidateNested({ each: true })
+  @ArrayMinSize(1)
   @Field(() => [TextLanguageInput])
-  @MinLength(3)
-  @MaxLength(50)
   name: TextLanguageInput[];
 
+  @IsArray()
+  @ValidateNested({ each: true })
   @Field(() => [TextLanguageInput])
-  @MaxLength(50)
   description: TextLanguageInput[];
 
   @Field(() => Boolean)
   external: boolean;
-
-  @Field(() => Number)
-  parent_id: number;
 
   @Field(() => String)
   @MaxLength(255)
