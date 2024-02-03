@@ -1,8 +1,10 @@
 'use client';
 
+import { useSession } from '@/hooks/core/use-session';
 import { ItemNav } from './item';
 
 export const Nav = () => {
+  const { nav } = useSession();
   // const [rootRef, { width: rootWidth }] = useMeasure<HTMLDivElement>();
   // const [ref, { width }] = useMeasure<HTMLDivElement>();
 
@@ -14,8 +16,8 @@ export const Nav = () => {
       style={{ scrollbarWidth: 'none' }}
     >
       <ul className="flex">
-        {[...Array(16)].map((_, i) => (
-          <ItemNav key={i} />
+        {nav.map((data, i) => (
+          <ItemNav key={i} {...data} />
         ))}
       </ul>
     </nav>

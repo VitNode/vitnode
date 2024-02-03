@@ -14,6 +14,9 @@ class ShowCoreNavItem {
   @Field(() => [TextLanguage])
   description: TextLanguage[];
 
+  @Field(() => String)
+  href: string;
+
   @Field(() => Int)
   position: number;
 }

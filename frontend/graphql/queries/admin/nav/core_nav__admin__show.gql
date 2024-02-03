@@ -11,6 +11,7 @@ query Core_nav__admin__show {
           language_code
           value
         }
+        href
         position
       }
       description {
@@ -22,6 +23,7 @@ query Core_nav__admin__show {
         language_code
         value
       }
+      href
       position
     }
   }

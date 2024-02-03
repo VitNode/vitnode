@@ -7,14 +7,18 @@ import {
   HoverCardContent,
   HoverCardTrigger
 } from '@/components/ui/hover-card';
+import type { ShowCoreNav } from '@/graphql/hooks';
+import { useTextLang } from '@/hooks/core/use-text-lang';
 
-export const ItemNav = () => {
+export const ItemNav = ({ name }: ShowCoreNav) => {
+  const { convertText } = useTextLang();
+
   return (
     <li className="flex-shrink-0">
       <HoverCard openDelay={0} closeDelay={0}>
         <HoverCardTrigger>
           <Button variant="ghost">
-            <Home /> Test nav item <ChevronDown />
+            <Home /> {convertText(name)} <ChevronDown />
           </Button>
         </HoverCardTrigger>
 

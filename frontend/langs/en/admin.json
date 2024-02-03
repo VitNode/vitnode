@@ -120,6 +120,7 @@
         },
         "nav": {
           "title": "Navigation",
+          "href": "URL: {href}",
           "create": {
             "title": "Create Navigation",
             "success": "Navigation has been created.",

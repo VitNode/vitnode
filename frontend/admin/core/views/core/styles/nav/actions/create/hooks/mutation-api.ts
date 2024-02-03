@@ -24,6 +24,7 @@ export const mutationApi = async (variables: Core_Nav__Admin__CreateMutationVari
     });
 
     revalidatePath('/admin/core/styles/nav', 'page');
+    revalidatePath('/', 'layout');
 
     return { data };
   } catch (error) {

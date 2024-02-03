@@ -1,6 +1,7 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { Menu } from 'lucide-react';
 import { CSS } from '@dnd-kit/utilities';
+import { useTranslations } from 'next-intl';
 
 import { cx } from '@/functions/classnames';
 import { Button } from '@/components/ui/button';
@@ -15,10 +16,12 @@ interface Props extends Omit<ShowCoreNav, '__typename'> {
 export const ItemContentTableContentNavAdmin = ({
   depth,
   description,
+  href,
   id,
   isDropHere,
   name
 }: Props) => {
+  const t = useTranslations('admin.core.styles.nav');
   const { attributes, isDragging, listeners, setNodeRef, transform, transition } = useSortable({
     id,
     animateLayoutChanges: ({ isSorting, wasDragging }) => (isSorting || wasDragging ? false : true)
@@ -56,6 +59,8 @@ export const ItemContentTableContentNavAdmin = ({
         <div className="flex gap-2 items-center">
           <span className="font-semibold">{convertText(name)}</span>
         </div>
+
+        <span className="text-muted-foreground text-sm line-clamp-2">{t('href', { href })}</span>
 
         {description.length > 0 && (
           <span className="text-muted-foreground text-sm line-clamp-2">

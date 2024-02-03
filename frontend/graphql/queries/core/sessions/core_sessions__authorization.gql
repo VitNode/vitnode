@@ -29,4 +29,32 @@ query Core_sessions__authorization {
       code
     }
   }
+  core_nav__show {
+    edges {
+      children {
+        description {
+          language_code
+          value
+        }
+        id
+        name {
+          language_code
+          value
+        }
+        position
+        href
+      }
+      description {
+        language_code
+        value
+      }
+      id
+      name {
+        language_code
+        value
+      }
+      href
+      position
+    }
+  }
 }
