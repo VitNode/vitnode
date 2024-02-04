@@ -14,7 +14,7 @@ const Content = lazy(() =>
   }))
 );
 
-export const UploadActionsPluginsAdmin = () => {
+export const UploadActionPluginAdmin = () => {
   const t = useTranslations('core');
 
   return (

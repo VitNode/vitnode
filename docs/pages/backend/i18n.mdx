@@ -7,86 +7,62 @@ Create a new multilanguage input in backend maight be a bit tricky, because VitN
 
 ## Database schema
 
-For exaple we use `core_groups` table.
+For exaple we use `core_nav` table.
 
 <Steps>
 
-### Main table
+### Create main table
 
-Create a schema `core_groups` in `schema.prisma` file, but without `name`. This is the only difference.
+Create a schema `core_nav` in `database` folder.
 
-```prisma
-model core_groups {
-  id        String                  @id @unique @default(uuid())
-  created   Int
-  updated   Int
-  protected Boolean                 @default(false)
-  default   Boolean                 @default(false)
-  root      Boolean                 @default(false)
-  guest     Boolean                 @default(false)
-}
+```ts
+export const core_nav = pgTable('core_nav', {
+  id: serial('id').primaryKey(),
+  href: varchar('href', { length: 255 }).notNull(),
+  external: boolean('external').notNull().default(false),
+  position: integer('position').notNull().default(0)
+});
 ```
 
 ### Translation table
 
-Create a schema `core_groups_names` in `schema.prisma` file for translation table.
+Create a schema `core_nav_name` in the same file for translation table.
 The translation table must have:
 
-- `language_id` with type `String` and `@db.VarChar(32)` value,
-- `value` with type `String` and any string value,
-- any fields for relation with main table (in our case `group_id`).
+- `language_code` with `varchar` type,
+- `value` with `varchar` type _(You can set `length` option)_,
+- any fields for relation with main table (in our case `nav_id`)
 
-```prisma
-model core_groups_names {
-  id          String @id @unique @default(uuid())
-  language_id String @db.VarChar(32)
-  group_id    String
-  value       String @db.VarChar(255)
-}
+```ts
+export const core_nav_name = pgTable('core_nav_name', {
+  id: serial('id').primaryKey(),
+  nav_id: serial('nav_id')
+    .notNull()
+    .references(() => core_nav.id, {
+      onDelete: 'cascade'
+    }),
+  language_code: varchar('language_code')
+    .notNull()
+    .references(() => core_languages.code, {
+      onDelete: 'cascade'
+    }),
+  value: varchar('value', { length: 50 }).notNull()
+});
 ```
+
+Remember to set `onDelete: 'cascade'` action into references. We want to delete translation when we delete main table.
 
 ### Relation
 
-Add relation to main table. Remember to add `@relation` and `@relation` name.
+Add relation to main table.
 
-```prisma
-model core_groups {
-  id        String                  @id @unique @default(uuid())
-  name      core_groups_names[] @relation("core_groups_names_group")
-  ...
-}
+```ts
+export const core_nav_relations = relations(core_nav, ({ many }) => ({
+  name: many(core_nav_name)
+}));
 ```
 
-Next step is to add relation to translation table.
-
-Remember to add relation for `core_languages` table:
-
-```prisma
-language core_languages @relation("core_groups_names_language", references: [id], fields: [language_id])
-```
-
-Here is the full code:
-
-```prisma
-model core_groups_names {
-  id          String @id @unique @default(uuid())
-  language_id String @db.VarChar(32)
-  group_id    String
-  value       String @db.VarChar(255)
-
-  group    core_groups    @relation("core_groups_names_group", references: [id], fields: [group_id], onDelete: Cascade)
-  language core_languages @relation("core_groups_names_language", references: [id], fields: [language_id])
-
-  @@index([language_id])
-}
-```
-
-Remember to add `onDelete: Cascade` actions into relation. We want to delete translation when we delete main table.
-
-<Callout type="info" emoji="ℹ️">
-  For better performance you can add index to `language_id` field by adding `@@index([language_id])`
-  to the end of the schema.
-</Callout>
+You can read more about [relations using Drizzle here](https://orm.drizzle.team/docs/rqb).
 
 </Steps>
 
@@ -102,28 +78,33 @@ import { ArgsType, Field } from '@nestjs/graphql';
 import { TextLanguageInput } from '@/types/database/text-language.type';
 
 @ArgsType()
-export class CreateAdminGroupsArgs {
+export class CreateAdminNavArgs {
   @Field(() => [TextLanguageInput])
   name: TextLanguageInput[];
+
+ ...
 }
 ```
 
 If you want to change this field to `required`, you have to add some decorators form `class-validator`.
 
-```ts
+```ts {2, 8-10}
 import { ArgsType, Field } from '@nestjs/graphql';
-import { ArrayMinSize, IsArray, ValidateNested } from 'class-validator';
+import { ArrayMinSize, IsArray, MaxLength, ValidateNested } from 'class-validator';
 
 import { TextLanguageInput } from '@/types/database/text-language.type';
 
 @ArgsType()
-export class CreateAdminGroupsArgs {
+export class CreateAdminNavArgs {
   @IsArray()
   @ValidateNested({ each: true })
   @ArrayMinSize(1)
   @Field(() => [TextLanguageInput])
   name: TextLanguageInput[];
+
+  ...
 }
+
 ```
 
 ## Object field mutation
@@ -138,67 +119,73 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { TextLanguage } from '@/types/database/text-language.type';
 
 @ObjectType()
-export class ShowAdminGroups {
+class ShowCoreNavItem {
   @Field(() => [TextLanguage])
   name: TextLanguage[];
+
+  ...
 }
 ```
 
 ## Create Mutation
 
-It's no difference between normal and multilanguage mutation for create data, but thanks to `prisma` you can create data in one request and it will be saved in two tables.
-
-For our example we use `mockValues` array with `TextLanguage` type.
-
-```ts
-const mockValues: TextLanguage[] = [
-  {
-    language_id: 'en',
-    value: 'English Group'
-  }
-];
-```
+Now let's create a mutation for adding new record to database with translations.
 
 <Steps>
 
-### Check if translation exists
+### Create record
 
-Trim and filter empty values.
+Create a record in main table and get the id.
 
 ```ts
-const transformText = mockValues.filter(item => item.value.trim().length > 0);
+const nav = await this.databaseService.db
+  .insert(core_nav)
+  .values({
+    href,
+    external
+  })
+  .returning();
+
+const id = nav[0].id;
 ```
 
-If there is no translation, throw an error.
+### Create translations
+
+Create translations for each language.
 
 ```ts
-import { CustomError } from '@/utils/errors/CustomError';
-
-if (!transformName.length) {
-  throw new CustomError({
-    code: 'BAD_REQUEST',
-    message: 'mockValues is required'
-  });
-}
+const namesNav = await this.databaseService.db
+  .insert(core_nav_name)
+  .values(
+    name.map(n => ({
+      nav_id: id,
+      language_code: n.language_code,
+      value: n.value
+    }))
+  )
+  .returning();
 ```
 
-### Create records in database
+But if you have empty array of translations, you have to handle it. You can't create empty translation.
+We want `description` to be optional, so we have create an empty array if it's not passed.
 
 ```ts
-await this.prisma.core_groups.create({
-  data: {
-    name: {
-      create: transformText
-    },
-    created: currentDate(),
-    updated: currentDate()
-  }
-});
+const descriptionNav =
+  description.length > 0
+    ? await this.databaseService.db
+        .insert(core_nav_description)
+        .values(
+          description.map(n => ({
+            nav_id: id,
+            language_code: n.language_code,
+            value: n.value
+          }))
+        )
+        .returning()
+    : [];
 ```
 
 </Steps>
-
-You can read more about [CRUD in Prisma here](https://www.prisma.io/docs/concepts/components/prisma-client/crud#create).
 
 ## Update Mutation
 
@@ -222,38 +209,37 @@ It may sound complicated, but it's not. We will show you how to do it.
 ### Get translation
 
 ```ts
-const groupNames = await this.prisma.core_groups_names.findMany({
-  where: {
-    group_id: id
-  }
+const names = await this.databaseService.db.query.core_nav_name.findMany({
+  where: (table, { eq }) => eq(table.nav_id, id)
 });
 ```
 
 ### Process data
 
 ```ts
-const updatedName = await Promise.all(
-  mockValues.map(async item => {
-    const nameExist = groupNames.find(name => name.language_id === item.language_id);
+const update = await Promise.all(
+  name.map(async item => {
+    const itemExist = names.find(el => el.language_code === item.language_code);
 
-    if (nameExist) {
+    if (itemExist) {
       // If value is empty, do nothing
-      if (!nameExist.value.trim()) return;
+      if (!itemExist.value.trim()) return;
 
-      return await this.prisma.core_groups_names.update({
-        where: {
-          id: nameExist.id
-        },
-        data: item
-      });
+      const update = await this.databaseService.db
+        .update(core_nav_name)
+        .set({ ...item, nav_id: id })
+        .where(eq(core_nav_name.id, itemExist.id))
+        .returning();
+
+      return update[0];
     }
 
-    return await this.prisma.core_groups_names.create({
-      data: {
-        ...item,
-        group_id: id
-      }
-    });
+    const insert = await this.databaseService.db
+      .insert(core_nav_name)
+      .values({ ...item, nav_id: id })
+      .returning();
+
+    return insert[0];
   })
 );
 ```
@@ -262,15 +248,11 @@ const updatedName = await Promise.all(
 
 ```ts
 Promise.all(
-  groupNames.map(async item => {
-    const nameExist = updatedName.find(name => name.id === item.id);
-    if (nameExist) return;
+  names.map(async item => {
+    const exist = update.find(name => name.id === item.id);
+    if (exist) return;
 
-    await this.prisma.core_groups_names.delete({
-      where: {
-        id: item.id
-      }
-    });
+    await this.databaseService.db.delete(core_nav_name).where(eq(core_nav_name.id, item.id));
   })
 );
 ```
@@ -279,4 +261,8 @@ Promise.all(
 
 ## Delete Mutation
 
-If you add `onDelete: Cascade` action to relation, you don't have to do anything. Prisma will delete translation for you.
+If you add `onDelete: Cascade` action to relation, you don't have to do anything. When you delete main record, all translations will be deleted.
+
+## Frontend
+
+Backend is ready? Great! Now let's move to [frontend](/frontend/i18n).

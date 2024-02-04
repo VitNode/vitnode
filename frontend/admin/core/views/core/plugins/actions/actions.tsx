@@ -1,11 +1,11 @@
-import { CreateActionsPluginsAdmin } from './create/create';
-import { UploadActionsPluginsAdmin } from './upload/upload';
+import { CreateActionPluginAdmin } from './create/create';
+import { UploadActionPluginAdmin } from './upload/upload';
 
 export const ActionsPluginsAdmin = () => {
   return (
     <>
-      <UploadActionsPluginsAdmin />
-      {process.env.NODE_ENV === 'development' && <CreateActionsPluginsAdmin />}
+      <UploadActionPluginAdmin />
+      {process.env.NODE_ENV === 'development' && <CreateActionPluginAdmin />}
     </>
   );
 };

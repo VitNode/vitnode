@@ -1,0 +1,32 @@
+query Core_nav__admin__show {
+  core_nav__show {
+    edges {
+      children {
+        description {
+          language_code
+          value
+        }
+        id
+        name {
+          language_code
+          value
+        }
+        href
+        external
+        position
+      }
+      description {
+        language_code
+        value
+      }
+      id
+      name {
+        language_code
+        value
+      }
+      href
+      external
+      position
+    }
+  }
+}

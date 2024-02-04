@@ -117,6 +117,10 @@ type Mutation {
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
   core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
+  core_nav__admin__change_position(id: Int!, index_to_move: Int!, parent_id: Int): String!
+  core_nav__admin__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, name: [TextLanguageInput!]!): ShowCoreNav!
+  core_nav__admin__delete(id: Int!): String!
+  core_nav__admin__edit(description: [TextLanguageInput!]!, external: Boolean!, href: String!, id: Int!, name: [TextLanguageInput!]!): ShowCoreNav!
   core_plugins__admin__create(author: String!, author_url: String!, code: String!, description: String, name: String!, support_url: String!): ShowAdminPlugins!
   core_plugins__admin__delete(code: String!): String!
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
@@ -168,6 +172,7 @@ type Query {
   core_members__admin__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_middleware: CoreMiddlewareObj!
+  core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
   core_plugins__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminPluginsSortByArgs!]): ShowAdminPluginsObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_staff_administrators__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
@@ -387,6 +392,30 @@ enum ShowCoreMembersSortingColumnEnum {
   name
   posts
   reactions
+}
+
+type ShowCoreNav {
+  children: [ShowCoreNavItem!]!
+  description: [TextLanguage!]!
+  external: Boolean!
+  href: String!
+  id: Int!
+  name: [TextLanguage!]!
+  position: Int!
+}
+
+type ShowCoreNavItem {
+  description: [TextLanguage!]!
+  external: Boolean!
+  href: String!
+  id: Int!
+  name: [TextLanguage!]!
+  position: Int!
+}
+
+type ShowCoreNavObj {
+  edges: [ShowCoreNav!]!
+  pageInfo: PageInfo!
 }
 
 type ShowCoreThemes {

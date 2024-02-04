@@ -4,6 +4,7 @@ import { DarkLightModeSwitcher } from '@/components/switchers/dark-light-mode-sw
 import { LanguageSwitcher } from '@/components/switchers/language-switcher';
 import { LogoVitNode } from '@/components/logo-vitnode';
 import { ThemeSwitcher } from '@/components/switchers/theme/theme-switcher';
+import { Nav } from '../nav/nav';
 
 export const Header = () => {
   return (
@@ -12,6 +13,8 @@ export const Header = () => {
         <Link href="/">
           <LogoVitNode className="h-10" />
         </Link>
+
+        <Nav />
 
         <div className="ml-auto flex gap-2">
           <ThemeSwitcher />

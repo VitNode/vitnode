@@ -1,5 +1,6 @@
 import { forwardRef, useState, type InputHTMLAttributes } from 'react';
 import * as z from 'zod';
+import { useLocale } from 'next-intl';
 
 import { useGlobals } from '@/hooks/core/use-globals';
 import { Input } from './ui/input';
@@ -21,8 +22,9 @@ interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' |
 
 const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
   ({ onChange, value, ...props }, ref) => {
+    const locale = useLocale();
     const { defaultLanguage, languages } = useGlobals();
-    const [selectedLanguage, setSelectedLanguage] = useState(defaultLanguage);
+    const [selectedLanguage, setSelectedLanguage] = useState(locale ?? defaultLanguage);
     const valueAsArray = Array.isArray(value) ? value : [];
     const currentValue =
       valueAsArray.find(item => item.language_code === selectedLanguage)?.value ?? '';

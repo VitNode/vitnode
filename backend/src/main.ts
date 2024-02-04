@@ -26,7 +26,7 @@ async function bootstrap() {
   await redisIoAdapter.connectToRedis();
   app.useWebSocketAdapter(redisIoAdapter);
 
-  await app.listen(process.env.PORT ?? '8080', null, async () => {
+  await app.listen(process.env.PORT ?? '8080', null, () => {
     // eslint-disable-next-line no-console
     console.log(`Application is running on: http://localhost:${process.env.PORT ?? 8080}/graphql`);
   });

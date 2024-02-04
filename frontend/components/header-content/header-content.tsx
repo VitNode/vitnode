@@ -26,8 +26,10 @@ export const HeaderContent = ({
   h2
 }: HeaderContentH1Props | HeaderContentH2Props) => {
   return (
-    <div className={cx('mb-5 flex gap-4 flex-col sm:flex-row items-center', className)}>
-      <div className="space-y-1 text-center sm:text-left">
+    <div
+      className={cx('mb-5 flex gap-4 flex-col sm:flex-row sm:items-center items-start', className)}
+    >
+      <div className="space-y-1 text-left">
         {h1 ? (
           <h1 className="font-semibold tracking-tight text-2xl">{h1}</h1>
         ) : (

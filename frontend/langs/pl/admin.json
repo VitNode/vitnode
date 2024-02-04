@@ -117,6 +117,38 @@
             "title": "Załaduj motyw",
             "submit": "Załaduj"
           }
+        },
+        "nav": {
+          "title": "Nawigacja",
+          "href": "Link: {href}",
+          "create": {
+            "title": "Stwórz nawigację",
+            "success": "Nawigacja została utworzona.",
+            "name": {
+              "label": "Nazwa"
+            },
+            "description": {
+              "label": "Opis"
+            },
+            "href": {
+              "label": "Link",
+              "desc": "Wewnętrzny link: /ścieżka/do/strony"
+            },
+            "external": {
+              "label": "Link zewnętrzny?",
+              "desc": "Lnk będzie otwierał się w nowym oknie."
+            }
+          },
+          "edit": {
+            "title": "Edytuj nawigację",
+            "success": "Nawigacja została zaktualizowana."
+          },
+          "delete": {
+            "submit": "Tak, usuń nawigację",
+            "desc": "Ta akcja usunie nawigację <name></name>.",
+            "desc_with_children": "Masz podnawigacje. Jeśli usuniesz tą nawigację, wszystkie podnawigacje zostaną przeniesione do nadrzędnej nawigacji.",
+            "success": "Nawigacja została usunięta."
+          }
         }
       },
       "langs": {

@@ -6,7 +6,7 @@ import { FilesInput } from '@/components/ui/files/files-input';
 import { DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 
-export const ContentUploadActionsThemesAdmin = () => {
+export const ContentUploadActionThemeAdmin = () => {
   const t = useTranslations('admin.core.styles.themes.upload');
   const { form, onSubmit } = useThemeUpload();
 

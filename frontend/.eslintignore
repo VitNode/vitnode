@@ -12,3 +12,7 @@ graphql/hooks.ts
 /public/worker-*.js.map
 /public/fallback-*.js
 /worker
+
+next.config.js
+tailwind.config.js
+postcss.config.js

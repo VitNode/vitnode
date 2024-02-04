@@ -4,7 +4,7 @@
   "authorization": "Authorization",
   "errors": "Errors",
   "files": "Files",
-  "i18n": "Internationalization",
+  "i18n": "Internationalization (i18n)",
   "practices": "Best Practices",
   "sessions": "Sessions",
   "cron": "Task Scheduling (CRON)",

@@ -14,7 +14,7 @@ import { useCreateThemeAdmin } from './hooks/use-create-plugin-admin';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-export const ContentCreateActionsThemesAdmin = () => {
+export const ContentCreateActionThemeAdmin = () => {
   const t = useTranslations('admin.core.styles.themes.create');
   const tCore = useTranslations('core');
   const { form, onSubmit } = useCreateThemeAdmin();

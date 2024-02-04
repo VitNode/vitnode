@@ -117,6 +117,38 @@
             "submit": "Upload",
             "success": "Successfully uploaded theme."
           }
+        },
+        "nav": {
+          "title": "Navigation",
+          "href": "URL: {href}",
+          "create": {
+            "title": "Create Navigation",
+            "success": "Navigation has been created.",
+            "name": {
+              "label": "Name"
+            },
+            "description": {
+              "label": "Description"
+            },
+            "href": {
+              "label": "URL",
+              "desc": "Internal link format: /path/to/page"
+            },
+            "external": {
+              "label": "External link?",
+              "desc": "The link will open in a new tab."
+            }
+          },
+          "edit": {
+            "title": "Edit Navigation",
+            "success": "Navigation has been updated."
+          },
+          "delete": {
+            "submit": "Yes, delete navigation",
+            "desc": "This action will delete <name></name> navigation.",
+            "desc_with_children": "You have sub-navigations. If you delete this navigation, all sub-navigations will be moved to the parent navigation.",
+            "success": "Navigation has been deleted."
+          }
         }
       },
       "langs": {

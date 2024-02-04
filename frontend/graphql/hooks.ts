@@ -146,6 +146,10 @@ export type Mutation = {
   core_members__avatar__delete: Scalars['String']['output'];
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
   core_members__sign_up: SignUpCoreMembersObj;
+  core_nav__admin__change_position: Scalars['String']['output'];
+  core_nav__admin__create: ShowCoreNav;
+  core_nav__admin__delete: Scalars['String']['output'];
+  core_nav__admin__edit: ShowCoreNav;
   core_plugins__admin__create: ShowAdminPlugins;
   core_plugins__admin__delete: Scalars['String']['output'];
   core_sessions__sign_in: Scalars['String']['output'];
@@ -208,6 +212,35 @@ export type MutationCore_Members__Sign_UpArgs = {
   name: Scalars['String']['input'];
   newsletter?: InputMaybe<Scalars['Boolean']['input']>;
   password: Scalars['String']['input'];
+};
+
+
+export type MutationCore_Nav__Admin__Change_PositionArgs = {
+  id: Scalars['Int']['input'];
+  index_to_move: Scalars['Int']['input'];
+  parent_id?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type MutationCore_Nav__Admin__CreateArgs = {
+  description: Array<TextLanguageInput>;
+  external: Scalars['Boolean']['input'];
+  href: Scalars['String']['input'];
+  name: Array<TextLanguageInput>;
+};
+
+
+export type MutationCore_Nav__Admin__DeleteArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type MutationCore_Nav__Admin__EditArgs = {
+  description: Array<TextLanguageInput>;
+  external: Scalars['Boolean']['input'];
+  href: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
+  name: Array<TextLanguageInput>;
 };
 
 
@@ -354,6 +387,7 @@ export type Query = {
   core_members__admin__show: ShowAdminMembersObj;
   core_members__show: ShowCoreMembersObj;
   core_middleware: CoreMiddlewareObj;
+  core_nav__show: ShowCoreNavObj;
   core_plugins__admin__show: ShowAdminPluginsObj;
   core_sessions__authorization: AuthorizationCoreSessionsObj;
   core_staff_administrators__admin__show: ShowAdminStaffAdministratorsObj;
@@ -400,6 +434,13 @@ export type QueryCore_Members__ShowArgs = {
   name_seo?: InputMaybe<Scalars['String']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<Array<ShowCoreMembersSortByArgs>>;
+};
+
+
+export type QueryCore_Nav__ShowArgs = {
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -710,6 +751,33 @@ export const ShowCoreMembersSortingColumnEnum = {
 } as const;
 
 export type ShowCoreMembersSortingColumnEnum = typeof ShowCoreMembersSortingColumnEnum[keyof typeof ShowCoreMembersSortingColumnEnum];
+export type ShowCoreNav = {
+  __typename?: 'ShowCoreNav';
+  children: Array<ShowCoreNavItem>;
+  description: Array<TextLanguage>;
+  external: Scalars['Boolean']['output'];
+  href: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  name: Array<TextLanguage>;
+  position: Scalars['Int']['output'];
+};
+
+export type ShowCoreNavItem = {
+  __typename?: 'ShowCoreNavItem';
+  description: Array<TextLanguage>;
+  external: Scalars['Boolean']['output'];
+  href: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  name: Array<TextLanguage>;
+  position: Scalars['Int']['output'];
+};
+
+export type ShowCoreNavObj = {
+  __typename?: 'ShowCoreNavObj';
+  edges: Array<ShowCoreNav>;
+  pageInfo: PageInfo;
+};
+
 export type ShowCoreThemes = {
   __typename?: 'ShowCoreThemes';
   default: Scalars['Boolean']['output'];
@@ -963,6 +1031,43 @@ export type Core_Staff_Moderators__Admin__DeleteMutationVariables = Exact<{
 
 export type Core_Staff_Moderators__Admin__DeleteMutation = { __typename?: 'Mutation', core_staff_moderators__admin__delete: string };
 
+export type Core_Nav__Admin__Change_PositionMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  indexToMove: Scalars['Int']['input'];
+  parentId?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type Core_Nav__Admin__Change_PositionMutation = { __typename?: 'Mutation', core_nav__admin__change_position: string };
+
+export type Core_Nav__Admin__CreateMutationVariables = Exact<{
+  description: Array<TextLanguageInput> | TextLanguageInput;
+  external: Scalars['Boolean']['input'];
+  href: Scalars['String']['input'];
+  name: Array<TextLanguageInput> | TextLanguageInput;
+}>;
+
+
+export type Core_Nav__Admin__CreateMutation = { __typename?: 'Mutation', core_nav__admin__create: { __typename?: 'ShowCoreNav', id: number } };
+
+export type Core_Nav__Admin__DeleteMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type Core_Nav__Admin__DeleteMutation = { __typename?: 'Mutation', core_nav__admin__delete: string };
+
+export type Core_Nav__Admin__EditMutationVariables = Exact<{
+  description: Array<TextLanguageInput> | TextLanguageInput;
+  external: Scalars['Boolean']['input'];
+  href: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
+  name: Array<TextLanguageInput> | TextLanguageInput;
+}>;
+
+
+export type Core_Nav__Admin__EditMutation = { __typename?: 'Mutation', core_nav__admin__edit: { __typename?: 'ShowCoreNav', id: number } };
+
 export type Core_Plugins__Admin__CreateMutationVariables = Exact<{
   author: Scalars['String']['input'];
   authorUrl: Scalars['String']['input'];
@@ -1172,6 +1277,11 @@ export type Core_Members__Admin__ShowQueryVariables = Exact<{
 
 export type Core_Members__Admin__ShowQuery = { __typename?: 'Query', core_members__admin__show: { __typename?: 'ShowAdminMembersObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminMembers', avatar_color: string, email: string, id: number, name_seo: string, joined: number, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
 
+export type Core_Nav__Admin__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Core_Nav__Admin__ShowQuery = { __typename?: 'Query', core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, href: string, external: boolean, position: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
+
 export type Core_Plugins__Admin__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -1230,7 +1340,7 @@ export type Core_Members__ProfilesQuery = { __typename?: 'Query', core_members__
 export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', theme_id?: number | null, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string }> } };
+export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', theme_id?: number | null, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string }> }, core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, position: number, external: boolean, href: string, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
 export type Forum_Forums__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1392,6 +1502,45 @@ export const Core_Staff_Moderators__Admin__Create = gql`
 export const Core_Staff_Moderators__Admin__Delete = gql`
     mutation Core_staff_moderators__admin__delete($id: Int!) {
   core_staff_moderators__admin__delete(id: $id)
+}
+    `;
+export const Core_Nav__Admin__Change_Position = gql`
+    mutation Core_nav__admin__change_position($id: Int!, $indexToMove: Int!, $parentId: Int) {
+  core_nav__admin__change_position(
+    id: $id
+    index_to_move: $indexToMove
+    parent_id: $parentId
+  )
+}
+    `;
+export const Core_Nav__Admin__Create = gql`
+    mutation Core_nav__admin__create($description: [TextLanguageInput!]!, $external: Boolean!, $href: String!, $name: [TextLanguageInput!]!) {
+  core_nav__admin__create(
+    description: $description
+    external: $external
+    href: $href
+    name: $name
+  ) {
+    id
+  }
+}
+    `;
+export const Core_Nav__Admin__Delete = gql`
+    mutation Core_nav__admin__delete($id: Int!) {
+  core_nav__admin__delete(id: $id)
+}
+    `;
+export const Core_Nav__Admin__Edit = gql`
+    mutation Core_nav__admin__edit($description: [TextLanguageInput!]!, $external: Boolean!, $href: String!, $id: Int!, $name: [TextLanguageInput!]!) {
+  core_nav__admin__edit(
+    description: $description
+    external: $external
+    href: $href
+    id: $id
+    name: $name
+  ) {
+    id
+  }
 }
     `;
 export const Core_Plugins__Admin__Create = gql`
@@ -1823,6 +1972,40 @@ export const Core_Members__Admin__Show = gql`
   }
 }
     `;
+export const Core_Nav__Admin__Show = gql`
+    query Core_nav__admin__show {
+  core_nav__show {
+    edges {
+      children {
+        description {
+          language_code
+          value
+        }
+        id
+        name {
+          language_code
+          value
+        }
+        href
+        external
+        position
+      }
+      description {
+        language_code
+        value
+      }
+      id
+      name {
+        language_code
+        value
+      }
+      href
+      external
+      position
+    }
+  }
+}
+    `;
 export const Core_Plugins__Admin__Show = gql`
     query Core_plugins__admin__show($cursor: Int, $first: Int, $last: Int, $sortBy: [ShowAdminPluginsSortByArgs!]) {
   core_plugins__admin__show(
@@ -2039,6 +2222,36 @@ export const Core_Sessions__Authorization = gql`
   core_languages__show {
     edges {
       code
+    }
+  }
+  core_nav__show {
+    edges {
+      children {
+        description {
+          language_code
+          value
+        }
+        id
+        name {
+          language_code
+          value
+        }
+        position
+        external
+        href
+      }
+      description {
+        language_code
+        value
+      }
+      id
+      name {
+        language_code
+        value
+      }
+      href
+      external
+      position
     }
   }
 }
