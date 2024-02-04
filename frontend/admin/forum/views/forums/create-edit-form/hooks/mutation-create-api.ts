@@ -1,6 +1,7 @@
 'use server';
 
 import { cookies } from 'next/headers';
+import { revalidateTag } from 'next/cache';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -23,6 +24,8 @@ export const mutationCreateApi = async (
         Cookie: cookies().toString()
       }
     });
+
+    revalidateTag('Forum_Forums__Show');
 
     return { data };
   } catch (error) {

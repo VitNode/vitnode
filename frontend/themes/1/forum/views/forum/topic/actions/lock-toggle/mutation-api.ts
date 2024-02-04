@@ -1,7 +1,7 @@
 'use server';
 
 import { cookies } from 'next/headers';
-import { revalidatePath } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -25,7 +25,7 @@ export const mutationApi = async (
       }
     });
 
-    revalidatePath('/topic/[id]', 'page');
+    revalidateTag('Forum_Topics__Show');
 
     return { data };
   } catch (error) {

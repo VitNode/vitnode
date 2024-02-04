@@ -5,6 +5,16 @@
       "breadcrumb": false
     }
   },
+  "support": {
+    "title": "🫶 Support this project",
+    "href": "https://github.com/sponsors/aXenDeveloper"
+  },
+  "screenshots": {
+    "title": "🖼️ Screenshots",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
   "features": {
     "title": "🎸 Features",
     "theme": {

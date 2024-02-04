@@ -113,8 +113,6 @@ export const TopicView = ({ data: dataApi, firstEdges }: Props) => {
           <CreatePost className="mt-5" />
         </WrapperPosts>
       </div>
-
-      <div className="w-1/4">Sidebar</div>
     </div>
   );
 };

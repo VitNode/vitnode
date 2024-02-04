@@ -32,7 +32,10 @@ const getData = async ({ id, sort }: { id: string; sort: string | undefined }) =
     headers: {
       Cookie: cookies().toString()
     },
-    cache: 'force-cache'
+    cache: 'force-cache',
+    next: {
+      tags: ['Forum_Topics__Show']
+    }
   });
 
   return data;

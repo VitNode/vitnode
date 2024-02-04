@@ -14,7 +14,10 @@ const getData = async () => {
     headers: {
       Cookie: cookies().toString()
     },
-    cache: 'force-cache'
+    cache: 'force-cache',
+    next: {
+      tags: ['Forum_Forums__Show']
+    }
   });
 
   return data;

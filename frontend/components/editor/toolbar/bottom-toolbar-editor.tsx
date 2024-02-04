@@ -19,8 +19,6 @@ export const BottomToolbarEditor = ({
           setSelectedLanguage={setSelectedLanguage}
         />
       )}
-
-      <div>Something here</div>
     </div>
   );
 };

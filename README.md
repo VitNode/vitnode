@@ -7,6 +7,14 @@
 
 VitNode is a headless CMS built with [NextJS](https://nextjs.org/) and [NestJS](https://nestjs.com/). It is designed to be a scalable and flexible platform for creating community-driven websites and applications. VitNode uses [Tailwind CSS](https://tailwindcss.com/) and [Shadcn UI](https://ui.shadcn.com/) for its frontend styling, which makes it easy to customize the look and feel of the website.
 
+## 🖼️ Screenshots
+
+![Topic in Forum Page (Dark Mode)](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/assets/screenshots/1.png 'Topic in Forum Page (Dark Mode)')
+
+![Topic in Forum Page (Light Mode)](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/assets/screenshots/1.png 'Topic in Forum Page (Light Mode)')
+
+More screenshots you can find in the [Screenshots Page](https://vitnode.com/screenshots).
+
 ## 🚀 Installation
 
 Click to see the [installation guide](https://vitnode.com/setup/installation).
