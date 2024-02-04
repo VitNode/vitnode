@@ -182,7 +182,7 @@ export const ContentTableContentNavAdmin = ({
         setItems(newTree);
 
         const indexToMove =
-          projected.activeId === projected.overId
+          projected.activeId === projected.overId && projected.parentId
             ? -1
             : flattenedItems.find(i => i.id === projected.overId)?.position ?? -1;
 

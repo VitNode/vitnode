@@ -19,6 +19,9 @@ class ShowCoreNavItem {
 
   @Field(() => Int)
   position: number;
+
+  @Field(() => Boolean)
+  external: boolean;
 }
 
 @ObjectType()

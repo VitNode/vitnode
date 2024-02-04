@@ -61,7 +61,7 @@ export const ItemContentTableContentNavAdmin = ({
       <div className="flex flex-col flex-1">
         <div className="flex gap-2 items-center">
           <span className="font-semibold">
-            {convertText(name)} - {id} - position {position}
+            {convertText(name)} - {position}
           </span>
         </div>
 

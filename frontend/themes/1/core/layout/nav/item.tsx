@@ -1,6 +1,7 @@
-import { ChevronDown, Home } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
+import { useState } from 'react';
 
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import {
   HoverCard,
   HoverCardArrow,
@@ -9,33 +10,54 @@ import {
 } from '@/components/ui/hover-card';
 import type { ShowCoreNav } from '@/graphql/hooks';
 import { useTextLang } from '@/hooks/core/use-text-lang';
+import { Link } from '@/i18n';
 
-export const ItemNav = ({ name }: ShowCoreNav) => {
+export const ItemNav = ({ children, external, href, name }: ShowCoreNav) => {
+  const [open, setOpen] = useState(false);
   const { convertText } = useTextLang();
 
   return (
     <li className="flex-shrink-0">
-      <HoverCard openDelay={0} closeDelay={0}>
-        <HoverCardTrigger>
-          <Button variant="ghost">
-            <Home /> {convertText(name)} <ChevronDown />
-          </Button>
+      <HoverCard open={open} onOpenChange={setOpen} openDelay={0} closeDelay={0}>
+        <HoverCardTrigger asChild>
+          <Link
+            href={href}
+            className={buttonVariants({
+              variant: 'ghost',
+              className: 'px-6'
+            })}
+            onClick={() => setOpen(false)}
+            target={external ? '_blank' : undefined}
+            rel={external ? 'noopener noreferrer' : undefined}
+          >
+            {convertText(name)} {children.length > 0 && <ChevronDown />}
+          </Link>
         </HoverCardTrigger>
 
-        <HoverCardContent>
-          <div className="flex flex-col max-w-80 p-1">
-            <Button variant="ghost" className="justify-start">
-              <Home /> Test nav item
-            </Button>
-            <Button variant="ghost" className="justify-start">
-              <Home /> Test nav item
-            </Button>
-            <Button variant="ghost" className="justify-start">
-              <Home /> Test nav item
-            </Button>
-          </div>
-          <HoverCardArrow />
-        </HoverCardContent>
+        {children.length > 0 && (
+          <HoverCardContent sideOffset={-5}>
+            <ul className="flex gap-2 p-2 w-[30rem] flex-wrap">
+              {children.map(item => (
+                <li key={item.id} className="flex-1 basis-[calc(50%-0.5rem)]">
+                  <Link
+                    href={item.href}
+                    className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground h-full text-accent-foreground"
+                    onClick={() => setOpen(false)}
+                    target={item.external ? '_blank' : undefined}
+                    rel={item.external ? 'noopener noreferrer' : undefined}
+                  >
+                    <div className="text-sm font-medium leading-none">{convertText(item.name)}</div>
+                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                      {convertText(item.description)}
+                    </p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <HoverCardArrow />
+          </HoverCardContent>
+        )}
       </HoverCard>
     </li>
   );

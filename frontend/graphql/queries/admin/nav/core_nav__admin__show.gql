@@ -12,6 +12,7 @@ query Core_nav__admin__show {
           value
         }
         href
+        external
         position
       }
       description {
@@ -24,6 +25,7 @@ query Core_nav__admin__show {
         value
       }
       href
+      external
       position
     }
   }

@@ -13,7 +13,7 @@ export class CreateAdminNavService {
   async create({ description, external, href, name }: CreateAdminNavArgs): Promise<ShowCoreNav> {
     const theMostHighestPosition = await this.databaseService.db.query.core_nav.findFirst({
       where: (table, { isNull }) => isNull(table.parent_id),
-      orderBy: (table, { asc }) => asc(table.position)
+      orderBy: (table, { desc }) => desc(table.position)
     });
 
     const nav = await this.databaseService.db

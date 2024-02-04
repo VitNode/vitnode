@@ -42,6 +42,7 @@ query Core_sessions__authorization {
           value
         }
         position
+        external
         href
       }
       description {
@@ -54,6 +55,7 @@ query Core_sessions__authorization {
         value
       }
       href
+      external
       position
     }
   }
