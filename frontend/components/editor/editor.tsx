@@ -11,6 +11,7 @@ import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
 import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { ClearEditorPlugin } from '@lexical/react/LexicalClearEditorPlugin';
+import { useLocale } from 'next-intl';
 
 import { OnChangePluginEditor } from './plugins/on-change';
 import { AutoLinkPluginEditor } from './plugins/auto-link';
@@ -26,6 +27,7 @@ import type { TextLanguage } from '@/graphql/hooks';
 import { EmojiPluginEditor } from './plugins/emoji';
 import { initialConfigEditor } from './initial-config';
 import { BottomToolbarEditor } from './toolbar/bottom-toolbar-editor';
+
 import './editor.scss';
 
 interface Props {
@@ -57,8 +59,9 @@ export const Editor = ({
 }: WithLanguage | WithoutLanguage) => {
   const [blockType, setBlockType] = useState<string>(BLOCK_NAMES.PARAGRAPH);
   const floatingAnchorElem = useRef<HTMLDivElement>(null);
+  const locale = useLocale();
   const { defaultLanguage } = useGlobals();
-  const [selectedLanguage, setSelectedLanguage] = useState(defaultLanguage);
+  const [selectedLanguage, setSelectedLanguage] = useState(locale ?? defaultLanguage);
 
   const initialConfig: InitialConfigType = {
     ...initialConfigEditor,

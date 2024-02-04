@@ -27,14 +27,17 @@ export class EditAdminNavService {
 
           const update = await this.databaseService.db
             .update(core_nav_name)
-            .set(item)
+            .set({ ...item, nav_id: id })
             .where(eq(core_nav_name.id, itemExist.id))
             .returning();
 
           return update[0];
         }
 
-        const insert = await this.databaseService.db.insert(core_nav_name).values(item).returning();
+        const insert = await this.databaseService.db
+          .insert(core_nav_name)
+          .values({ ...item, nav_id: id })
+          .returning();
 
         return insert[0];
       })
@@ -71,7 +74,7 @@ export class EditAdminNavService {
 
           const update = await this.databaseService.db
             .update(core_nav_description)
-            .set(item)
+            .set({ ...item, nav_id: id })
             .where(eq(core_nav_description.id, itemExist.id))
             .returning();
 
@@ -80,7 +83,7 @@ export class EditAdminNavService {
 
         const insert = await this.databaseService.db
           .insert(core_nav_description)
-          .values(item)
+          .values({ ...item, nav_id: id })
           .returning();
 
         return insert[0];

@@ -149,6 +149,7 @@ export type Mutation = {
   core_nav__admin__change_position: Scalars['String']['output'];
   core_nav__admin__create: ShowCoreNav;
   core_nav__admin__delete: Scalars['String']['output'];
+  core_nav__admin__edit: ShowCoreNav;
   core_plugins__admin__create: ShowAdminPlugins;
   core_plugins__admin__delete: Scalars['String']['output'];
   core_sessions__sign_in: Scalars['String']['output'];
@@ -231,6 +232,15 @@ export type MutationCore_Nav__Admin__CreateArgs = {
 
 export type MutationCore_Nav__Admin__DeleteArgs = {
   id: Scalars['Int']['input'];
+};
+
+
+export type MutationCore_Nav__Admin__EditArgs = {
+  description: Array<TextLanguageInput>;
+  external: Scalars['Boolean']['input'];
+  href: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
+  name: Array<TextLanguageInput>;
 };
 
 
@@ -1047,6 +1057,17 @@ export type Core_Nav__Admin__DeleteMutationVariables = Exact<{
 
 export type Core_Nav__Admin__DeleteMutation = { __typename?: 'Mutation', core_nav__admin__delete: string };
 
+export type Core_Nav__Admin__EditMutationVariables = Exact<{
+  description: Array<TextLanguageInput> | TextLanguageInput;
+  external: Scalars['Boolean']['input'];
+  href: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
+  name: Array<TextLanguageInput> | TextLanguageInput;
+}>;
+
+
+export type Core_Nav__Admin__EditMutation = { __typename?: 'Mutation', core_nav__admin__edit: { __typename?: 'ShowCoreNav', id: number } };
+
 export type Core_Plugins__Admin__CreateMutationVariables = Exact<{
   author: Scalars['String']['input'];
   authorUrl: Scalars['String']['input'];
@@ -1507,6 +1528,19 @@ export const Core_Nav__Admin__Create = gql`
 export const Core_Nav__Admin__Delete = gql`
     mutation Core_nav__admin__delete($id: Int!) {
   core_nav__admin__delete(id: $id)
+}
+    `;
+export const Core_Nav__Admin__Edit = gql`
+    mutation Core_nav__admin__edit($description: [TextLanguageInput!]!, $external: Boolean!, $href: String!, $id: Int!, $name: [TextLanguageInput!]!) {
+  core_nav__admin__edit(
+    description: $description
+    external: $external
+    href: $href
+    id: $id
+    name: $name
+  ) {
+    id
+  }
 }
     `;
 export const Core_Plugins__Admin__Create = gql`

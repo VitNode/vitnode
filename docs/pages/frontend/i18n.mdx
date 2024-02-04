@@ -43,6 +43,8 @@ Create form with translations is very similar to normal [form](/frontend/form).
 ### Define schema
 
 ```ts
+import * as z from 'zod';
+
 const formSchema = z.object({
   name: z.array(
     z.object({
@@ -55,20 +57,27 @@ const formSchema = z.object({
 
 You can add more functions to validate translations.
 
-```ts {5}
+```ts {8, 11}
+import * as z from 'zod';
+
 const formSchema = z.object({
-  name: z.array(
-    z.object({
-      language_code: z.string(),
-      value: z.string().min(3).max(50)
-    })
-  )
+  name: z
+    .array(
+      z.object({
+        language_code: z.string(),
+        value: z.string().min(3).max(50)
+      })
+    )
+    .min(1)
 });
 ```
 
 ### Set initial values
 
-```ts {4}
+```ts {7}
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
 const form = useForm<z.infer<typeof formSchema>>({
   resolver: zodResolver(formSchema),
   defaultValues: {
@@ -83,14 +92,18 @@ const form = useForm<z.infer<typeof formSchema>>({
   <Tabs.Tab>
 
 ```tsx
-<TextLanguageInput {...field} />
+import { TextLanguageInput } from '@/components/text-language-input';
+
+<TextLanguageInput {...field} />;
 ```
 
   </Tabs.Tab>
   <Tabs.Tab>
 
 ```tsx
-<Editor id="id" {...field} />
+import { Editor } from '@/components/editor/editor';
+
+<Editor id="id" {...field} />;
 ```
 
   </Tabs.Tab>

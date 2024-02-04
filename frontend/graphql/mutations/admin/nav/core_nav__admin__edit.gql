@@ -1,0 +1,17 @@
+mutation Core_nav__admin__edit(
+  $description: [TextLanguageInput!]!
+  $external: Boolean!
+  $href: String!
+  $id: Int!
+  $name: [TextLanguageInput!]!
+) {
+  core_nav__admin__edit(
+    description: $description
+    external: $external
+    href: $href
+    id: $id
+    name: $name
+  ) {
+    id
+  }
+}

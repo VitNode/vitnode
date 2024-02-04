@@ -131,12 +131,17 @@
               "label": "Description"
             },
             "href": {
-              "label": "URL"
+              "label": "URL",
+              "desc": "Internal link format: /path/to/page"
             },
             "external": {
               "label": "External link?",
               "desc": "The link will open in a new tab."
             }
+          },
+          "edit": {
+            "title": "Edit Navigation",
+            "success": "Navigation has been updated."
           },
           "delete": {
             "submit": "Yes, delete navigation",

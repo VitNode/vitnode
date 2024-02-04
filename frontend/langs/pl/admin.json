@@ -131,12 +131,17 @@
               "label": "Opis"
             },
             "href": {
-              "label": "Link"
+              "label": "Link",
+              "desc": "Wewnętrzny link: /ścieżka/do/strony"
             },
             "external": {
               "label": "Link zewnętrzny?",
               "desc": "Lnk będzie otwierał się w nowym oknie."
             }
+          },
+          "edit": {
+            "title": "Edytuj nawigację",
+            "success": "Nawigacja została zaktualizowana."
           },
           "delete": {
             "submit": "Tak, usuń nawigację",

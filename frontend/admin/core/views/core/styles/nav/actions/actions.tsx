@@ -1,4 +1,4 @@
-import { CreateActionNavAdmin } from './create/create';
+import { CreateActionNavAdmin } from './create';
 
 export const ActionsNavAdmin = () => {
   return <CreateActionNavAdmin />;

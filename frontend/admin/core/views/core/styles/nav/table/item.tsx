@@ -1,5 +1,5 @@
 import { useSortable } from '@dnd-kit/sortable';
-import { Menu } from 'lucide-react';
+import { ExternalLink, Menu } from 'lucide-react';
 import { CSS } from '@dnd-kit/utilities';
 import { useTranslations } from 'next-intl';
 
@@ -17,6 +17,7 @@ interface Props extends Omit<ShowCoreNav, '__typename'> {
 export const ItemContentTableContentNavAdmin = ({
   depth,
   description,
+  external,
   href,
   id,
   isDropHere,
@@ -62,7 +63,9 @@ export const ItemContentTableContentNavAdmin = ({
           <span className="font-semibold">{convertText(name)}</span>
         </div>
 
-        <span className="text-muted-foreground text-sm line-clamp-2">{t('href', { href })}</span>
+        <span className="text-muted-foreground text-sm line-clamp-2 flex gap-2 items-center">
+          {t('href', { href })} {external && <ExternalLink className="size-4" />}
+        </span>
 
         {description.length > 0 && (
           <span className="text-muted-foreground text-sm line-clamp-2">
@@ -71,7 +74,14 @@ export const ItemContentTableContentNavAdmin = ({
         )}
       </div>
 
-      <ActionsTableNavAdmin id={id} name={name} {...props} />
+      <ActionsTableNavAdmin
+        id={id}
+        name={name}
+        href={href}
+        description={description}
+        external={external}
+        {...props}
+      />
     </div>
   );
 };

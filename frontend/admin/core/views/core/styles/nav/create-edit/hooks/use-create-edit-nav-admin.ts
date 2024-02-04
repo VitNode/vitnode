@@ -4,22 +4,30 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { toast } from 'sonner';
 
-import { mutationApi } from './mutation-api';
+import { createMutationApi } from './create-mutation-api';
 import { useDialog } from '@/components/ui/dialog';
 import { useTextLang } from '@/hooks/core/use-text-lang';
+import type { ShowCoreNav } from '@/graphql/hooks';
+import { editMutationApi } from './edit-mutation-api';
 
-export const useCreateNavAdmin = () => {
-  const t = useTranslations('admin.core.styles.nav.create');
+export interface CreateEditNavAdminArgs {
+  data?: Omit<ShowCoreNav, 'children'>;
+}
+
+export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
+  const t = useTranslations('admin.core.styles.nav');
   const tCore = useTranslations('core');
   const { setOpen } = useDialog();
   const { convertText } = useTextLang();
   const formSchema = z.object({
-    name: z.array(
-      z.object({
-        language_code: z.string(),
-        value: z.string().min(3).max(50)
-      })
-    ),
+    name: z
+      .array(
+        z.object({
+          language_code: z.string(),
+          value: z.string().min(3).max(50)
+        })
+      )
+      .min(1),
     description: z.array(
       z.object({
         language_code: z.string(),
@@ -33,17 +41,24 @@ export const useCreateNavAdmin = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: [],
-      description: [],
-      href: '',
-      external: false
+      name: data?.name ?? [],
+      description: data?.description ?? [],
+      href: data?.href ?? '',
+      external: data?.external ?? false
     }
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const mutation = await mutationApi(values);
+    let isError = false;
+    if (data) {
+      const mutation = await editMutationApi({ ...values, id: data.id });
+      if (mutation.error) isError = true;
+    } else {
+      const mutation = await createMutationApi(values);
+      if (mutation.error) isError = true;
+    }
 
-    if (mutation.error) {
+    if (isError) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error')
       });
@@ -51,7 +66,7 @@ export const useCreateNavAdmin = () => {
       return;
     }
 
-    toast.success(t('success'), {
+    toast.success(t(data ? 'edit.success' : 'create.success'), {
       description: convertText(values.name)
     });
 
