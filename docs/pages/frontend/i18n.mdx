@@ -1,17 +1,20 @@
+import { Steps } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+
 # Internationalization (i18n)
 
-VitNode uses not only native i18n form [next-intl](https://github.com/amannn/next-intl), but also database which can store your translations. It gives your full control for your translations without restart your server.
+VitNode uses not only native i18n form [next-intl](https://github.com/amannn/next-intl), but also translations from database. It gives your full control for your translations without restart your server.
 
 Each translations are stored in database as `array`.
 
 ```ts
 [
   {
-    language_id: 'en',
+    language_code: 'en',
     value: 'Hello world'
   },
   {
-    language_id: 'pl',
+    language_code: 'pl',
     value: 'Witaj świecie'
   }
 ];
@@ -23,9 +26,7 @@ To display text you can use `useTextLang` hook.
 
 ```tsx
 import { useTextLang } from '@/hooks/core/use-text-lang';
-```
 
-```tsx
 const { convertText } = useTextLang();
 
 const text = convertText(value);
@@ -33,24 +34,73 @@ const text = convertText(value);
 
 `value` is `TextLanguage[]` interface form `GraphQL backend`.
 
-## TextInputLanguage
+## Form
 
-Example use in form field:
+Create form with translations is very similar to normal [form](/frontend/form).
 
-```tsx
-import { useFormContext } from 'react-hook-form';
-import { useTranslations } from 'next-intl';
+<Steps>
 
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { TextLanguageInput } from '@/components/text-language-input';
+### Define schema
+
+```ts
+const formSchema = z.object({
+  name: z.array(
+    z.object({
+      language_code: z.string(),
+      value: z.string()
+    })
+  )
+});
 ```
 
-```tsx
-export const MainCreateActionsGroupsMembersAdmin = () => {
-  const t = useTranslations('admin.members.groups.create.form');
-  const form = useFormContext();
+You can add more functions to validate translations.
 
-  return (
+```ts {5}
+const formSchema = z.object({
+  name: z.array(
+    z.object({
+      language_code: z.string(),
+      value: z.string().min(3).max(50)
+    })
+  )
+});
+```
+
+### Set initial values
+
+```ts {4}
+const form = useForm<z.infer<typeof formSchema>>({
+  resolver: zodResolver(formSchema),
+  defaultValues: {
+    name: []
+  }
+});
+```
+
+### Choose input
+
+<Tabs items={['Text Input', 'Editor']}>
+  <Tabs.Tab>
+
+```tsx
+<TextLanguageInput {...field} />
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+
+```tsx
+<Editor id="id" {...field} />
+```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Create form field
+
+```tsx {10}
+<Form {...form}>
+  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
     <FormField
       control={form.control}
       name="name"
@@ -64,36 +114,12 @@ export const MainCreateActionsGroupsMembersAdmin = () => {
         </FormItem>
       )}
     />
-  );
-};
+
+    <Button disabled={!form.formState.isValid} loading={form.formState.isSubmitting} type="submit">
+      {tCore('create')}
+    </Button>
+  </form>
+</Form>
 ```
 
-### Using with form in zod
-
-```tsx
-import * as z from 'zod';
-
-import { zodTextLanguageInputType } from '@/components/text-language-input';
-```
-
-```tsx
-const formSchema = z.object({
-  name: zodTextLanguageInputType
-});
-```
-
-If you want to make field required, you can use `.min(1, t('forms.empty'))` from `zod` library:
-
-```tsx
-import { useTranslations } from 'next-intl';
-import * as z from 'zod';
-
-import { zodTextLanguageInputType } from '@/components/text-language-input';
-```
-
-```tsx
-const t = useTranslations('core');
-const formSchema = z.object({
-  name: zodTextLanguageInputType.min(1, t('forms.empty'))
-});
-```
+</Steps>

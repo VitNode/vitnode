@@ -21,7 +21,6 @@ export const ItemContentTableContentNavAdmin = ({
   id,
   isDropHere,
   name,
-  position,
   ...props
 }: Props) => {
   const t = useTranslations('admin.core.styles.nav');
@@ -60,9 +59,7 @@ export const ItemContentTableContentNavAdmin = ({
 
       <div className="flex flex-col flex-1">
         <div className="flex gap-2 items-center">
-          <span className="font-semibold">
-            {convertText(name)} - {position}
-          </span>
+          <span className="font-semibold">{convertText(name)}</span>
         </div>
 
         <span className="text-muted-foreground text-sm line-clamp-2">{t('href', { href })}</span>
