@@ -30,8 +30,7 @@
       "notifications": "Notifications",
       "messages": "Messages",
       "search": "Search",
-      "menu": "Menu",
-      "login": "Login"
+      "menu": "Menu"
     },
     "user_input": {
       "placeholder": "Click to chose user...",

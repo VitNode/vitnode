@@ -30,8 +30,7 @@
       "notifications": "Powiadomienia",
       "messages": "Wiadomości",
       "search": "Szukaj",
-      "menu": "Menu",
-      "login": "Zaloguj się"
+      "menu": "Menu"
     },
     "user_input": {
       "placeholder": "Kliknij, aby wybrać użytkownika...",

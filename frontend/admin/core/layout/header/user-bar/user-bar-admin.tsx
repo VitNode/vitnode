@@ -33,9 +33,9 @@ export const UserBarAdmin = () => {
       <SheetContent className="p-0">
         <SheetHeader className="p-4 flex-row items-center space-y-0 gap-2 text-left">
           <AvatarUser user={{ name, ...rest }} sizeInRem={1.75} />
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-1">
             <p className="font-medium leading-none text-base">{name}</p>
-            <p className="text-xs leading-none text-muted-foreground">{email}</p>
+            <p className="text-sm leading-none text-muted-foreground">{email}</p>
           </div>
         </SheetHeader>
 
