@@ -25,6 +25,13 @@
     "confirm": "Zatwierdź",
     "close": "Zamknij",
     "default": "Domyślny",
+    "mobile_nav": {
+      "home": "Główna",
+      "notifications": "Powiadomienia",
+      "messages": "Wiadomości",
+      "search": "Szukaj",
+      "menu": "Menu"
+    },
     "user_input": {
       "placeholder": "Kliknij, aby wybrać użytkownika...",
       "search": "Search user..."

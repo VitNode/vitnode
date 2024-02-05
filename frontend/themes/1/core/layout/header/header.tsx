@@ -16,7 +16,7 @@ export const Header = () => {
 
         <Nav />
 
-        <div className="ml-auto flex gap-2">
+        <div className="ml-auto sm:flex gap-2 hidden">
           <ThemeSwitcher />
           <DarkLightModeSwitcher />
           <LanguageSwitcher />

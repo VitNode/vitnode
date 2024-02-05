@@ -36,40 +36,38 @@ export const TopicView = ({ data: dataApi, firstEdges }: Props) => {
   return (
     <div className="flex flex-col md:flex-row gap-5">
       <div className="flex-1">
-        <div className="flex flex-col gap-1 mb-5">
-          <div className="flex gap-4 items-center sm:flex-row flex-col">
-            <div className="order-1 sm:order-2">
-              <ActionsTopic id={id} state={{ locked }} />
-            </div>
-
-            <h1 className="text-2xl font-semibold tracking-tight leading-tight sm:order-1 order-2 flex-1">
+        <div className="flex flex-col sm:flex-row gap-4 mb-5 justify-between">
+          <div className="flex flex-col gap-2">
+            <h1 className="text-2xl font-semibold tracking-tight leading-tight flex-1">
               {convertText(title)}
             </h1>
+
+            <div className="flex items-center gap-2 flex-wrap">
+              {locked && (
+                <TitleIconTopic variant="destructive">
+                  <Lock /> {t('closed')}
+                </TitleIconTopic>
+              )}
+
+              <span>
+                {t.rich('user_wrote_in_forum', {
+                  user: () => <UserLink className="font-semibold" user={user} />,
+                  forum: () => (
+                    <Link
+                      href={`/forum/${convertNameToLink({ ...forum })}`}
+                      className={badgeVariants({
+                        className: '[&>svg]:size-3'
+                      })}
+                    >
+                      <MessagesSquare /> {convertText(forum.name)}
+                    </Link>
+                  )
+                })}
+              </span>
+            </div>
           </div>
 
-          <div className="flex items-center gap-2 flex-wrap">
-            {locked && (
-              <TitleIconTopic variant="destructive">
-                <Lock /> {t('closed')}
-              </TitleIconTopic>
-            )}
-
-            <span>
-              {t.rich('user_wrote_in_forum', {
-                user: () => <UserLink className="font-semibold" user={user} />,
-                forum: () => (
-                  <Link
-                    href={`/forum/${convertNameToLink({ ...forum })}`}
-                    className={badgeVariants({
-                      className: '[&>svg]:size-3'
-                    })}
-                  >
-                    <MessagesSquare /> {convertText(forum.name)}
-                  </Link>
-                )
-              })}
-            </span>
-          </div>
+          <ActionsTopic id={id} state={{ locked }} />
         </div>
 
         <WrapperPosts>
