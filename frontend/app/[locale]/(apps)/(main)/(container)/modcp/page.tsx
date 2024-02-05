@@ -1,3 +1,3 @@
-export default function TabsDemo() {
-  return <div>Mod CP</div>;
+export default function Page() {
+  return <div>Mod CP - Not implemented!</div>;
 }
