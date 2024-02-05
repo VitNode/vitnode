@@ -25,6 +25,14 @@
     "confirm": "Confirm",
     "close": "Close",
     "default": "Default",
+    "mobile_nav": {
+      "home": "Home",
+      "notifications": "Notifications",
+      "messages": "Messages",
+      "search": "Search",
+      "menu": "Menu",
+      "login": "Login"
+    },
     "user_input": {
       "placeholder": "Click to chose user...",
       "search": "Search users..."

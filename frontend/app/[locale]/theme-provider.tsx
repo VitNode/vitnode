@@ -27,7 +27,7 @@ export const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
         <>
           {children}
           <Toaster closeButton />
-          <ReactQueryDevtools initialIsOpen={false} />
+          {process.env.NEXT_PUBLIC_DEBUG && <ReactQueryDevtools initialIsOpen={false} />}
         </>
       </QueryClientProvider>
     </NextThemesProvider>
