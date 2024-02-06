@@ -16,12 +16,12 @@ import { WrapperPosts } from './posts/wrapper/wrapper';
 import { ListPosts } from './posts/list';
 import { AnimatePresenceClient } from '@/components/animations/animate-presence';
 
-interface Props {
+export interface TopicViewProps {
   data: Forum_Topics__ShowQuery;
   firstEdges: number;
 }
 
-export const TopicView = ({ data: dataApi, firstEdges }: Props) => {
+export default function TopicView({ data: dataApi, firstEdges }: TopicViewProps) {
   const t = useTranslations('forum.topics');
   const { convertNameToLink, convertText } = useTextLang();
 
@@ -113,4 +113,4 @@ export const TopicView = ({ data: dataApi, firstEdges }: Props) => {
       </div>
     </div>
   );
-};
+}

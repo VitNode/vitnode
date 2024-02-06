@@ -1,7 +1,8 @@
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
+import { lazy, type LazyExoticComponent } from 'react';
 
-import { TopicView } from '@/themes/1/forum/views/forum/topic/topic-view';
+import { type TopicViewProps } from '@/themes/1/forum/views/forum/topic/topic-view';
 import { fetcher, type ErrorType } from '@/graphql/fetcher';
 import {
   Forum_Topics__Show,
@@ -10,7 +11,8 @@ import {
   type Forum_Topics__ShowQueryVariables
 } from '@/graphql/hooks';
 import { getIdFormString } from '@/functions/url';
-import { ErrorView } from '@/themes/1/core/views/global/error/error-view';
+import { type ErrorViewProps } from '@/themes/1/core/views/global/error/error-view';
+import { getSessionData } from '@/functions/get-session-data';
 
 const firstEdges = 25;
 
@@ -51,6 +53,7 @@ interface Props {
 }
 
 export default async function Page({ params: { id }, searchParams: { sort } }: Props) {
+  const { theme_id } = await getSessionData();
   let data: Forum_Topics__ShowQuery | undefined;
   try {
     data = await getData({ id, sort });
@@ -58,6 +61,12 @@ export default async function Page({ params: { id }, searchParams: { sort } }: P
     const error = e as ErrorType;
 
     if (error.extensions?.code === 'ACCESS_DENIED') {
+      const ErrorView: LazyExoticComponent<(props: ErrorViewProps) => JSX.Element> = lazy(() =>
+        import(`@/themes/${theme_id}/core/views/global/error/error-view`).catch(
+          () => import('@/themes/1/core/views/global/error/error-view')
+        )
+      );
+
       return <ErrorView code="403" />;
     }
 
@@ -68,5 +77,11 @@ export default async function Page({ params: { id }, searchParams: { sort } }: P
     notFound();
   }
 
-  return <TopicView data={data} firstEdges={firstEdges} />;
+  const PageFromTheme: LazyExoticComponent<(props: TopicViewProps) => JSX.Element> = lazy(() =>
+    import(`@/themes/${theme_id}/forum/views/forum/topic/topic-view`).catch(
+      () => import('@/themes/1/forum/views/forum/topic/topic-view')
+    )
+  );
+
+  return <PageFromTheme data={data} firstEdges={firstEdges} />;
 }

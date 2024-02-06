@@ -8,12 +8,12 @@ import { Link } from '@/i18n';
 import { buttonVariants } from '@/components/ui/button';
 import { cx } from '@/functions/classnames';
 
-interface Props {
+export interface ErrorViewProps {
   code: '403' | '404' | '500' | string;
   className?: string;
 }
 
-export const ErrorView = ({ className, code }: Props) => {
+export default function ErrorView({ className, code }: ErrorViewProps) {
   const t = useTranslations('core');
 
   return (
@@ -42,4 +42,4 @@ export const ErrorView = ({ className, code }: Props) => {
       </div>
     </div>
   );
-};
+}

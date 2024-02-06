@@ -8,7 +8,7 @@ interface Props {
   children: ReactNode;
 }
 
-export const LayoutSettingsView = ({ children }: Props) => {
+export default function LayoutSettingsView({ children }: Props) {
   const t = useTranslations('core');
 
   return (
@@ -21,4 +21,4 @@ export const LayoutSettingsView = ({ children }: Props) => {
       </div>
     </>
   );
-};
+}

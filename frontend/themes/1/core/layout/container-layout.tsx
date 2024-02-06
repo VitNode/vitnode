@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react';
 
-interface Props {
+export interface ContainerLayoutProps {
   children: ReactNode;
 }
 
-export const ContainerLayout = ({ children }: Props) => {
+export default function ContainerLayout({ children }: ContainerLayoutProps) {
   return <div className="container py-5">{children}</div>;
-};
+}

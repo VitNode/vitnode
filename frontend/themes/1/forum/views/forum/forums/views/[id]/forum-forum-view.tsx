@@ -10,11 +10,13 @@ import { HeaderContent } from '@/components/header-content/header-content';
 
 import { ItemForum } from '../../item/item-forum';
 
-interface Props {
+export interface ForumForumViewProps {
   data: Forum_Forums__Show_ItemQuery;
 }
 
-export const ForumForumView = ({ data: { forum_forums__show, forum_topics__show } }: Props) => {
+export default function ForumForumView({
+  data: { forum_forums__show, forum_topics__show }
+}: ForumForumViewProps) {
   const { convertText } = useTextLang();
   const t = useTranslations('forum.topics');
 
@@ -66,4 +68,4 @@ export const ForumForumView = ({ data: { forum_forums__show, forum_topics__show 
       </Card>
     </>
   );
-};
+}

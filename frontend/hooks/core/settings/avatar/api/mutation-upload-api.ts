@@ -1,7 +1,7 @@
 'use server';
 
 import { cookies } from 'next/headers';
-import { revalidatePath } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -30,7 +30,7 @@ export const mutationUploadApi = async (formData: FormData) => {
       }
     });
 
-    revalidatePath('/', 'layout');
+    revalidateTag('Core_Sessions__Authorization');
 
     return { data };
   } catch (error) {

@@ -11,7 +11,7 @@ After created plugin using our [plugin system](/plugins/create) you can find `da
 
 <FileTree>
   <FileTree.Folder name="admin" defaultOpen>
-    <FileTree.Folder name="{your_app}" defaultOpen>
+    <FileTree.Folder name="{your_plugin}" defaultOpen>
       <FileTree.Folder name="database" defaultOpen>
         <FileTree.File name="functions.ts" />
         <FileTree.File name="index.ts" />
@@ -31,7 +31,7 @@ Here is example file tree after created `posts` file:
 
 <FileTree>
   <FileTree.Folder name="admin" defaultOpen>
-    <FileTree.Folder name="{your_app}" defaultOpen>
+    <FileTree.Folder name="{your_plugin}" defaultOpen>
       <FileTree.Folder name="database" defaultOpen>
         <FileTree.Folder name="schema" defaultOpen>
           <FileTree.File name="posts.ts" />
@@ -89,7 +89,7 @@ export const forum_posts_relations = relations(forum_posts, ({ many, one }) => (
 - Inside `schema` folder you can create as many files as you want _(folders not supported)_,
 - You can create as many schemas as you want inside one file _(including relations)_,
 - VitNode using PostgreSQL,
-- The best naming convention for tables is `snake_case` with `{your_app}_` prefix _(example: `forum_posts`)_,
+- The best naming convention for tables is `snake_case` with `{your_plugin}_` prefix _(example: `forum_posts`)_,
 
 #### Relations
 

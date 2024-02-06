@@ -13,20 +13,34 @@ Steps:
 
 ## Plugin schema
 
-When you're created a plugin VitNode will created few files for you. Below you can see the schema of the plugin.
+When you're created a plugin VitNode will created few files for you on `backend` side, but not in `frontend` side. Below you can see the schema of folders for your plugin files.
 
 <FileTree>
   <FileTree.Folder name="backend" defaultOpen>
     <FileTree.Folder name="admin" defaultOpen>
-      <FileTree.Folder name="{your_app}" defaultOpen>
+      <FileTree.Folder name="{your_plugin}" defaultOpen>
         <FileTree.Folder name="database" defaultOpen>
           <FileTree.File name="functions.ts" />
           <FileTree.File name="index.ts" />
         </FileTree.Folder>
+        <FileTree.File name="{your_plugin}.module.ts" />
       </FileTree.Folder>
     </FileTree.Folder>
-    <FileTree.Folder name="{your_app}" defaultOpen>
-      <FileTree.File name="{your_app}.module.ts" />
+    <FileTree.Folder name="{your_plugin}" defaultOpen>
+      <FileTree.File name="{your_plugin}.module.ts" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+
+  <FileTree.Folder name="frontend" defaultOpen>
+    <FileTree.Folder name="hooks" defaultOpen>
+      <FileTree.Folder name="{your_plugin}" />
+    </FileTree.Folder>
+    <FileTree.Folder name="themes" defaultOpen>
+      <FileTree.Folder name="1" defaultOpen>
+        <FileTree.Folder name="{your_plugin}" defaultOpen>
+          <FileTree.File name="home.ts" />
+        </FileTree.Folder>
+      </FileTree.Folder>
     </FileTree.Folder>
   </FileTree.Folder>
 </FileTree>

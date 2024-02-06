@@ -3,11 +3,11 @@ import type { Core_Members__ProfilesQuery } from '@/graphql/hooks';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
 import { useTextLang } from '@/hooks/core/use-text-lang';
 
-interface Props {
+export interface ProfileViewProps {
   data: Core_Members__ProfilesQuery;
 }
 
-export const ProfileView = ({ data: dataApi }: Props) => {
+export default function ProfileView({ data: dataApi }: ProfileViewProps) {
   const { convertText } = useTextLang();
 
   const { edges } = dataApi.core_members__show;
@@ -40,4 +40,4 @@ export const ProfileView = ({ data: dataApi }: Props) => {
       <div className="container py-6">test</div>
     </>
   );
-};
+}

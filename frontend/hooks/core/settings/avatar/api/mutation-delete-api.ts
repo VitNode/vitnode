@@ -1,6 +1,6 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 
 import { fetcher } from '@/graphql/fetcher';
@@ -22,7 +22,7 @@ export const mutationDeleteApi = async () => {
       }
     });
 
-    revalidatePath('/', 'layout');
+    revalidateTag('Core_Sessions__Authorization');
 
     return { data };
   } catch (error) {

@@ -1,6 +1,6 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { cookies, headers } from 'next/headers';
 
 import { fetcher } from '@/graphql/fetcher';
@@ -28,6 +28,7 @@ export const mutationApi = async (variables: Core_Sessions__Sign_InMutationVaria
 
     // Set cookie
     setCookieFromApi({ res });
+    revalidateTag('Core_Sessions__Authorization');
   } catch (error) {
     return { error };
   }
