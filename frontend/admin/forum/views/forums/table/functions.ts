@@ -1,12 +1,15 @@
-import type { UniqueIdentifier } from '@dnd-kit/core';
-import { arrayMove } from '@dnd-kit/sortable';
+import type { UniqueIdentifier } from "@dnd-kit/core";
+import { arrayMove } from "@dnd-kit/sortable";
 
 import type {
   Forum_Forums__Admin__ShowFlattenedItem,
   Forum_Forums__Admin__ShowWithProjection
-} from './types';
-import type { Forum_Forums__Admin__ShowQueryItem } from './hooks/use-forum-forums-admin-api';
-import type { ChildrenShowForumForums, ShowForumForumsAdmin } from '@/graphql/hooks';
+} from "./types";
+import type { Forum_Forums__Admin__ShowQueryItem } from "./hooks/use-forum-forums-admin-api";
+import type {
+  ChildrenShowForumForums,
+  ShowForumForumsAdmin
+} from "@/graphql/hooks";
 
 const getDragDepth = ({
   indentationWidth,
@@ -26,7 +29,11 @@ const getMaxDepth = ({
   return previousItem ? previousItem.depth + 1 : 0;
 };
 
-const getMinDepth = ({ nextItem }: { nextItem: Forum_Forums__Admin__ShowFlattenedItem }) => {
+const getMinDepth = ({
+  nextItem
+}: {
+  nextItem: Forum_Forums__Admin__ShowFlattenedItem;
+}) => {
   return nextItem ? nextItem.depth : 0;
 };
 
@@ -111,20 +118,27 @@ export const flattenTree = (
   parentId: number | null = null,
   depth = 0
 ): Forum_Forums__Admin__ShowFlattenedItem[] => {
-  return items.reduce<Forum_Forums__Admin__ShowFlattenedItem[]>((acc, item, index) => {
-    return [
-      ...acc,
-      { ...item, parentId, depth, index },
-      ...flattenTree((item.children ?? []) as ShowForumForumsAdmin[], item.id, depth + 1)
-    ];
-  }, []);
+  return items.reduce<Forum_Forums__Admin__ShowFlattenedItem[]>(
+    (acc, item, index) => {
+      return [
+        ...acc,
+        { ...item, parentId, depth, index },
+        ...flattenTree(
+          (item.children ?? []) as ShowForumForumsAdmin[],
+          item.id,
+          depth + 1
+        )
+      ];
+    },
+    []
+  );
 };
 
 export const buildTree = (
   flattenedItems: Forum_Forums__Admin__ShowFlattenedItem[]
 ): Forum_Forums__Admin__ShowQueryItem[] => {
   const root: { children: Forum_Forums__Admin__ShowQueryItem[]; id: string } = {
-    id: 'root',
+    id: "root",
     children: []
   };
   const nodes: Record<string, Forum_Forums__Admin__ShowQueryItem> = {

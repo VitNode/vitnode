@@ -1,13 +1,17 @@
-import { useTranslations } from 'next-intl';
-import { Redo } from 'lucide-react';
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { CAN_REDO_COMMAND, COMMAND_PRIORITY_CRITICAL, REDO_COMMAND } from 'lexical';
-import { useEffect, useState } from 'react';
+import { useTranslations } from "next-intl";
+import { Redo } from "lucide-react";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import {
+  CAN_REDO_COMMAND,
+  COMMAND_PRIORITY_CRITICAL,
+  REDO_COMMAND
+} from "lexical";
+import { useEffect, useState } from "react";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 
 export const RedoMoveButtonEditor = () => {
-  const t = useTranslations('core.editor.move');
+  const t = useTranslations("core.editor.move");
   const [editor] = useLexicalComposerContext();
   const [canRedo, setCanRedo] = useState(false);
 
@@ -29,7 +33,7 @@ export const RedoMoveButtonEditor = () => {
       size="icon"
       className="size-9"
       onClick={() => editor.dispatchCommand(REDO_COMMAND, undefined)}
-      tooltip={t('redo')}
+      tooltip={t("redo")}
       disabled={!canRedo}
     >
       <Redo />

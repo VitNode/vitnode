@@ -1,15 +1,18 @@
-import { Injectable } from '@nestjs/common';
-import { and, count, eq, inArray, isNull, or } from 'drizzle-orm';
+import { Injectable } from "@nestjs/common";
+import { and, count, eq, inArray, isNull, or } from "drizzle-orm";
 
-import { ShowForumForumsArgs } from './dto/show.args';
-import { ShowForumForumsObj } from './dto/show.obj';
+import { ShowForumForumsArgs } from "./dto/show.args";
+import { ShowForumForumsObj } from "./dto/show.obj";
 
-import { User } from '@/utils/decorators/user.decorator';
-import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
-import { DatabaseService } from '@/database/database.service';
-import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
-import { forum_forums } from '@/src/admin/forum/database/schema/forums';
-import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+import { User } from "@/utils/decorators/user.decorator";
+import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
+import { DatabaseService } from "@/database/database.service";
+import {
+  inputPaginationCursor,
+  outputPagination
+} from "@/functions/database/pagination";
+import { forum_forums } from "@/src/admin/forum/database/schema/forums";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 @Injectable()
 export class ShowForumForumsService {
@@ -25,10 +28,10 @@ export class ShowForumForumsService {
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: 'ASC', key: 'id', schema: forum_forums.id },
+      primaryCursor: { order: "ASC", key: "id", schema: forum_forums.id },
       defaultSortBy: {
         direction: SortDirectionEnum.asc,
-        column: 'position'
+        column: "position"
       }
     });
 
@@ -81,31 +84,38 @@ export class ShowForumForumsService {
 
     const edges = await Promise.all(
       forums.map(async forum => {
-        const children = await this.databaseService.db.query.forum_forums.findMany({
-          where: and(eq(forum_forums.parent_id, forum.id), wherePermissions),
-          orderBy: (table, { asc }) => [asc(table.position)],
-          with: {
-            name: true,
-            description: true,
-            permissions: true
-          }
-        });
+        const children =
+          await this.databaseService.db.query.forum_forums.findMany({
+            where: and(eq(forum_forums.parent_id, forum.id), wherePermissions),
+            orderBy: (table, { asc }) => [asc(table.position)],
+            with: {
+              name: true,
+              description: true,
+              permissions: true
+            }
+          });
 
         return {
           ...forum,
-          parent: forum.parent_id ? { ...forum.parent, _count: { children: 0 } } : null,
+          parent: forum.parent_id
+            ? { ...forum.parent, _count: { children: 0 } }
+            : null,
           _count: { children: children.length },
           children: await Promise.all(
             children.map(async child => {
-              const children = await this.databaseService.db.query.forum_forums.findMany({
-                where: and(eq(forum_forums.parent_id, child.id), wherePermissions),
-                orderBy: (table, { asc }) => [asc(table.position)],
-                with: {
-                  name: true,
-                  description: true,
-                  permissions: true
-                }
-              });
+              const children =
+                await this.databaseService.db.query.forum_forums.findMany({
+                  where: and(
+                    eq(forum_forums.parent_id, child.id),
+                    wherePermissions
+                  ),
+                  orderBy: (table, { asc }) => [asc(table.position)],
+                  with: {
+                    name: true,
+                    description: true,
+                    permissions: true
+                  }
+                });
 
               return {
                 ...child,
@@ -147,7 +157,8 @@ export class ShowForumForumsService {
         return {
           ...edge,
           permissions: {
-            can_create: edge.permissions.at(0)?.can_create || edge.can_all_create,
+            can_create:
+              edge.permissions.at(0)?.can_create || edge.can_all_create,
             can_read: edge.permissions.at(0)?.can_read || edge.can_all_read,
             can_reply: edge.permissions.at(0)?.can_reply || edge.can_all_reply
           }

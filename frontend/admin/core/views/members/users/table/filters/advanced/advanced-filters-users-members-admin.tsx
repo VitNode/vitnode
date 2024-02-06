@@ -1,19 +1,25 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-import { useTranslations } from 'next-intl';
-import { useSearchParams } from 'next/navigation';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 
-import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Button } from '@/components/ui/button';
-import { SheetClose, SheetFooter } from '@/components/ui/sheet';
-import { CalendarPicker } from '@/components/calendar-picker';
-import { usePathname, useRouter } from '@/i18n';
-import { convertDateToUnixTime } from '@/functions/date';
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { SheetClose, SheetFooter } from "@/components/ui/sheet";
+import { CalendarPicker } from "@/components/calendar-picker";
+import { usePathname, useRouter } from "@/i18n";
+import { convertDateToUnixTime } from "@/functions/date";
 
 export const AdvancedFiltersUsersMembersAdmin = () => {
-  const t = useTranslations('admin.members.users');
-  const tCore = useTranslations('core');
+  const t = useTranslations("admin.members.users");
+  const tCore = useTranslations("core");
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -36,11 +42,17 @@ export const AdvancedFiltersUsersMembersAdmin = () => {
     const params = new URLSearchParams(searchParams);
 
     if (data.date?.from) {
-      params.set('dateFrom', `${convertDateToUnixTime(data.date.from.toDateString())}`);
+      params.set(
+        "dateFrom",
+        `${convertDateToUnixTime(data.date.from.toDateString())}`
+      );
     }
 
     if (data.date?.to) {
-      params.set('dateTo', `${convertDateToUnixTime(data.date.to.toDateString())}`);
+      params.set(
+        "dateTo",
+        `${convertDateToUnixTime(data.date.to.toDateString())}`
+      );
     }
 
     router.push(`${pathname}?${params.toString()}`);
@@ -54,8 +66,11 @@ export const AdvancedFiltersUsersMembersAdmin = () => {
           name="date"
           render={({ field }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>{t('table.joined')}</FormLabel>
-              <CalendarPicker selected={field.value} onSelect={field.onChange} />
+              <FormLabel>{t("table.joined")}</FormLabel>
+              <CalendarPicker
+                selected={field.value}
+                onSelect={field.onChange}
+              />
               <FormMessage />
             </FormItem>
           )}
@@ -64,7 +79,7 @@ export const AdvancedFiltersUsersMembersAdmin = () => {
         <SheetFooter>
           <SheetClose asChild>
             <Button className="w-full" type="submit">
-              {tCore('search')}
+              {tCore("search")}
             </Button>
           </SheetClose>
         </SheetFooter>

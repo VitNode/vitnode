@@ -1,8 +1,8 @@
-import { ReadStream, ReadStreamOptions, WriteStream } from './fs-capacitor';
+import { ReadStream, ReadStreamOptions, WriteStream } from "./fs-capacitor";
 
 interface FileUploadCreateReadStreamOptions {
-  encoding: ReadStreamOptions['encoding'];
-  highWaterMark: ReadStreamOptions['highWaterMark'];
+  encoding: ReadStreamOptions["encoding"];
+  highWaterMark: ReadStreamOptions["highWaterMark"];
 }
 
 export type FileUploadCreateReadStream = (

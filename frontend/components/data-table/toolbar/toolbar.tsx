@@ -1,7 +1,7 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
-import { SearchToolbarDataTable } from './search';
-import { AdvancedFilterToolbarDataTable } from './advanced-filter/advanced-filter-toolbar-data-table';
+import { SearchToolbarDataTable } from "./search";
+import { AdvancedFilterToolbarDataTable } from "./advanced-filter/advanced-filter-toolbar-data-table";
 
 export interface ToolbarDataTableProps {
   advancedFilters?: ReactNode;
@@ -18,11 +18,15 @@ export const ToolbarDataTable = ({
 
   return (
     <div className="flex gap-2 items-center flex-wrap">
-      {searchPlaceholder && <SearchToolbarDataTable searchPlaceholder={searchPlaceholder} />}
+      {searchPlaceholder && (
+        <SearchToolbarDataTable searchPlaceholder={searchPlaceholder} />
+      )}
       {filters}
 
       {advancedFilters && (
-        <AdvancedFilterToolbarDataTable>{advancedFilters}</AdvancedFilterToolbarDataTable>
+        <AdvancedFilterToolbarDataTable>
+          {advancedFilters}
+        </AdvancedFilterToolbarDataTable>
       )}
     </div>
   );

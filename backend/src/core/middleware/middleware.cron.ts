@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { Cron, CronExpression } from '@nestjs/schedule';
-import { and, eq, lt, or } from 'drizzle-orm';
-import { ConfigService } from '@nestjs/config';
+import { Injectable } from "@nestjs/common";
+import { Cron, CronExpression } from "@nestjs/schedule";
+import { and, eq, lt, or } from "drizzle-orm";
+import { ConfigService } from "@nestjs/config";
 
-import { currentDate } from '@/functions/date';
-import { DatabaseService } from '@/database/database.service';
-import { core_sessions_known_devices } from '@/src/admin/core/database/schema/sessions';
+import { currentDate } from "@/functions/date";
+import { DatabaseService } from "@/database/database.service";
+import { core_sessions_known_devices } from "@/src/admin/core/database/schema/sessions";
 
 @Injectable()
 export class CoreMiddlewareCron {
@@ -25,7 +25,10 @@ export class CoreMiddlewareCron {
             eq(core_sessions_known_devices.session_id, null),
             lt(
               core_sessions_known_devices.last_seen,
-              currentDate() - this.configService.getOrThrow('cookies.login_token.expiresInRemember')
+              currentDate() -
+                this.configService.getOrThrow(
+                  "cookies.login_token.expiresInRemember"
+                )
             )
           )
         )

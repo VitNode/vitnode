@@ -1,13 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { count } from 'drizzle-orm';
+import { Injectable } from "@nestjs/common";
+import { count } from "drizzle-orm";
 
-import { ShowAdminStaffAdministratorsArgs } from './dto/show.args';
-import { ShowAdminStaffAdministratorsObj } from './dto/show.obj';
+import { ShowAdminStaffAdministratorsArgs } from "./dto/show.args";
+import { ShowAdminStaffAdministratorsObj } from "./dto/show.obj";
 
-import { DatabaseService } from '@/database/database.service';
-import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
-import { core_admin_permissions } from '@/src/admin/core/database/schema/admins';
-import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+import { DatabaseService } from "@/database/database.service";
+import {
+  inputPaginationCursor,
+  outputPagination
+} from "@/functions/database/pagination";
+import { core_admin_permissions } from "@/src/admin/core/database/schema/admins";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 @Injectable()
 export class ShowAdminStaffAdministratorsService {
@@ -25,34 +28,39 @@ export class ShowAdminStaffAdministratorsService {
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: 'ASC', key: 'id', schema: core_admin_permissions.id },
+      primaryCursor: {
+        order: "ASC",
+        key: "id",
+        schema: core_admin_permissions.id
+      },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: 'updated'
+        column: "updated"
       },
       sortBy
     });
 
-    const edges = await this.databaseService.db.query.core_admin_permissions.findMany({
-      ...pagination,
-      with: {
-        group: {
-          with: {
-            name: true
-          }
-        },
-        user: {
-          with: {
-            avatar: true,
-            group: {
-              with: {
-                name: true
+    const edges =
+      await this.databaseService.db.query.core_admin_permissions.findMany({
+        ...pagination,
+        with: {
+          group: {
+            with: {
+              name: true
+            }
+          },
+          user: {
+            with: {
+              avatar: true,
+              group: {
+                with: {
+                  name: true
+                }
               }
             }
           }
         }
-      }
-    });
+      });
 
     const totalCount = await this.databaseService.db
       .select({ count: count() })

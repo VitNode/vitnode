@@ -1,6 +1,6 @@
-import { Bell, Cog, type LucideIcon } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import type { ReactNode } from 'react';
+import { Bell, Cog, type LucideIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import type { ReactNode } from "react";
 
 export interface ItemNavSettingsProps {
   href: string;
@@ -9,7 +9,8 @@ export interface ItemNavSettingsProps {
   onClick?: () => void;
 }
 
-export interface LinkItemNavSettingsProps extends Omit<ItemNavSettingsProps, 'icon' | 'text'> {
+export interface LinkItemNavSettingsProps
+  extends Omit<ItemNavSettingsProps, "icon" | "text"> {
   children: ReactNode;
 }
 
@@ -18,19 +19,19 @@ interface ReturnValues {
 }
 
 export const useSettingsView = (): ReturnValues => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
 
   return {
     navItems: [
       {
-        href: '/settings',
+        href: "/settings",
         icon: Cog,
-        text: t('settings.overview.title')
+        text: t("settings.overview.title")
       },
       {
-        href: '/settings/notifications',
+        href: "/settings/notifications",
         icon: Bell,
-        text: t('settings.notifications.title')
+        text: t("settings.notifications.title")
       }
     ]
   };

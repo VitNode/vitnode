@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
+import { Module } from "@nestjs/common";
 
-import { ForumModule } from './forum/forum.module';
+import { ForumModule } from "./forum/forum.module";
 // ! === IMPORT ===
 
 @Module({

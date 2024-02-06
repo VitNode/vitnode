@@ -1,9 +1,9 @@
 import { Callout } from 'nextra/components';
 import { FileTree } from 'nextra/components';
 
-# Create Theme
+# Themes
 
-Test
+VitNode allows you to create your own theme which allows user to change the look of the page.
 
 <Callout type="warning" emoji="⚠️">
   Make sure you have [developer mode](/dev) enabled.
@@ -17,9 +17,9 @@ When you're created a theme VitNode will clone files form the default theme.
   <FileTree.Folder name="frontend" defaultOpen>
     <FileTree.Folder name="themes" defaultOpen>
       <FileTree.Folder name="{id_theme}" defaultOpen>
-        <FileTree.File name="core" />
-        <FileTree.File name="forums" />
-        <FileTree.File name="...other modules" />
+        <FileTree.Folder name="core" />
+        <FileTree.Folder name="forums" />
+        <FileTree.Folder name="...other plugins" />
         <FileTree.File name="theme.json" />
       </FileTree.Folder>
     </FileTree.Folder>

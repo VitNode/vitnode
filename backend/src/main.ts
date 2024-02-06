@@ -1,11 +1,11 @@
-import { NestFactory } from '@nestjs/core';
-import { ValidationPipe } from '@nestjs/common';
-import * as cookieParser from 'cookie-parser';
+import { NestFactory } from "@nestjs/core";
+import { ValidationPipe } from "@nestjs/common";
+import * as cookieParser from "cookie-parser";
 
-import { AppModule } from './app.module';
-import { RedisIoAdapter } from './redis.adapter';
+import { AppModule } from "./app.module";
+import { RedisIoAdapter } from "./redis.adapter";
 
-import { graphqlUploadExpress } from '@/utils/graphql-upload/graphqlUploadExpress';
+import { graphqlUploadExpress } from "@/utils/graphql-upload/graphqlUploadExpress";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,8 +16,8 @@ async function bootstrap() {
     credentials: true,
     origin: [
       process.env.FRONTEND_URL,
-      'http://localhost:3000',
-      'https://sandbox.embed.apollographql.com'
+      "http://localhost:3000",
+      "https://sandbox.embed.apollographql.com"
     ]
   });
 
@@ -26,9 +26,11 @@ async function bootstrap() {
   await redisIoAdapter.connectToRedis();
   app.useWebSocketAdapter(redisIoAdapter);
 
-  await app.listen(process.env.PORT ?? '8080', null, () => {
+  await app.listen(process.env.PORT ?? "8080", null, () => {
     // eslint-disable-next-line no-console
-    console.log(`Application is running on: http://localhost:${process.env.PORT ?? 8080}/graphql`);
+    console.log(
+      `Application is running on: http://localhost:${process.env.PORT ?? 8080}/graphql`
+    );
   });
 }
 bootstrap();

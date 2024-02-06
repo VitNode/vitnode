@@ -1,16 +1,18 @@
-'use server';
+"use server";
 
-import { cookies } from 'next/headers';
-import { revalidatePath } from 'next/cache';
+import { cookies } from "next/headers";
+import { revalidatePath, revalidateTag } from "next/cache";
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Languages__Edit,
   type Core_Languages__EditMutation,
   type Core_Languages__EditMutationVariables
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
-export const mutationApi = async (variables: Core_Languages__EditMutationVariables) => {
+export const mutationApi = async (
+  variables: Core_Languages__EditMutationVariables
+) => {
   try {
     const { data } = await fetcher<
       Core_Languages__EditMutation,
@@ -23,8 +25,9 @@ export const mutationApi = async (variables: Core_Languages__EditMutationVariabl
       }
     });
 
-    revalidatePath('/', 'layout');
-    revalidatePath('/admin/core/langs', 'page');
+    revalidatePath("/", "layout");
+    revalidateTag("Core_Sessions__Authorization");
+    revalidatePath("/admin/core/langs", "page");
 
     return { data };
   } catch (error) {

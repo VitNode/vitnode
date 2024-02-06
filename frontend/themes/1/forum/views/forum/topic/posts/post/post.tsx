@@ -1,14 +1,14 @@
-import { useTranslations } from 'next-intl';
-import { MoreHorizontal } from 'lucide-react';
+import { useTranslations } from "next-intl";
+import { MoreHorizontal } from "lucide-react";
 
-import { AvatarUser } from '@/components/user/avatar/avatar-user';
-import { UserLink } from '@/components/user/link/user-link';
-import { DateFormat } from '@/components/date-format/date-format';
-import { GroupFormat } from '@/components/groups/group-format';
-import { Button } from '@/components/ui/button';
-import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
-import type { TextLanguage, User } from '@/graphql/hooks';
-import { DivMotion } from '@/components/animations/div-motion';
+import { AvatarUser } from "@/components/user/avatar/avatar-user";
+import { UserLink } from "@/components/user/link/user-link";
+import { DateFormat } from "@/components/date-format/date-format";
+import { GroupFormat } from "@/components/groups/group-format";
+import { Button } from "@/components/ui/button";
+import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
+import type { TextLanguage, User } from "@/graphql/hooks";
+import { DivMotion } from "@/components/animations/div-motion";
 
 interface Props {
   content: TextLanguage[];
@@ -25,8 +25,8 @@ export const PostTopic = ({
   post_id: id,
   user
 }: Props) => {
-  const t = useTranslations('forum.topics');
-  const tCore = useTranslations('core');
+  const t = useTranslations("forum.topics");
+  const tCore = useTranslations("core");
 
   return (
     <DivMotion
@@ -41,16 +41,21 @@ export const PostTopic = ({
           <AvatarUser sizeInRem={2} user={user} />
           <div className="flex flex-col leading-none">
             <div>
-              {t.rich('username_format', {
+              {t.rich("username_format", {
                 user: () => <UserLink className="font-semibold" user={user} />,
-                group: () => <GroupFormat className="text-sm" group={user.group} />
+                group: () => (
+                  <GroupFormat className="text-sm" group={user.group} />
+                )
               })}
             </div>
-            <DateFormat className="text-muted-foreground text-sm" date={created} />
+            <DateFormat
+              className="text-muted-foreground text-sm"
+              date={created}
+            />
           </div>
         </div>
 
-        <Button variant="ghost" size="icon" tooltip={tCore('open_menu')}>
+        <Button variant="ghost" size="icon" tooltip={tCore("open_menu")}>
           <MoreHorizontal />
         </Button>
       </div>

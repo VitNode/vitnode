@@ -1,14 +1,14 @@
-'use server';
+"use server";
 
-import { cookies } from 'next/headers';
-import { revalidatePath } from 'next/cache';
+import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher } from "@/graphql/fetcher";
 import {
   Admin_Install__Create_Database,
   type Admin_Install__Create_DatabaseMutation,
   type Admin_Install__Create_DatabaseMutationVariables
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
 export const mutationApi = async () => {
   try {
@@ -22,7 +22,7 @@ export const mutationApi = async () => {
       }
     });
 
-    revalidatePath('/admin/(configs)/install/', 'layout');
+    revalidatePath("/admin/(configs)/install/", "layout");
 
     return { data };
   } catch (error) {

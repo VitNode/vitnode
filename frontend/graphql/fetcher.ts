@@ -1,7 +1,7 @@
-import type { DocumentNode } from 'graphql';
+import type { DocumentNode } from "graphql";
 
-import { getGqlString } from '@/functions/get-qql-string';
-import { CONFIG } from '@/config';
+import { getGqlString } from "@/functions/get-qql-string";
+import { CONFIG } from "@/config";
 
 interface Args<TVariables> {
   query: DocumentNode;
@@ -42,7 +42,7 @@ export async function fetcher<TData, TVariables>({
     });
 
     formData.append(
-      'operations',
+      "operations",
       JSON.stringify({
         query: getGqlString(query),
         variables: {
@@ -71,7 +71,7 @@ export async function fetcher<TData, TVariables>({
         }
       }
     });
-    formData.append('map', JSON.stringify(Object.fromEntries(preMap)));
+    formData.append("map", JSON.stringify(Object.fromEntries(preMap)));
 
     let currentIndex = 0;
     uploads.forEach(({ files }) => {
@@ -91,25 +91,29 @@ export async function fetcher<TData, TVariables>({
     });
   }
 
-  const isClient = typeof window !== 'undefined' && CONFIG.client_graphql_url;
+  const isClient = typeof window !== "undefined" && CONFIG.client_graphql_url;
 
   const res = await fetch(
-    isClient ? `${CONFIG.client_graphql_url}/graphql` : `${CONFIG.graphql_url}/graphql`,
+    isClient
+      ? `${CONFIG.client_graphql_url}/graphql`
+      : `${CONFIG.graphql_url}/graphql`,
     {
-      method: 'POST',
-      credentials: 'include',
-      mode: 'cors',
+      method: "POST",
+      credentials: "include",
+      mode: "cors",
       signal,
       headers: uploads
         ? {
-            'x-apollo-operation-name': '*',
+            "x-apollo-operation-name": "*",
             ...headers
           }
         : {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             ...headers
           },
-      body: uploads ? formData : JSON.stringify({ query: getGqlString(query), variables }),
+      body: uploads
+        ? formData
+        : JSON.stringify({ query: getGqlString(query), variables }),
       next,
       cache
     }

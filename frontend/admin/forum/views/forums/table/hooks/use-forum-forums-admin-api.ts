@@ -1,17 +1,17 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 
-import { APIKeys } from '@/graphql/api-keys';
-import { fetcher } from '@/graphql/fetcher';
+import { APIKeys } from "@/graphql/api-keys";
+import { fetcher } from "@/graphql/fetcher";
 import {
   Forum_Forums__Admin__Show,
   type Forum_Forums__Admin__ShowQuery,
   type Forum_Forums__Admin__ShowQueryVariables,
   type ShowForumForumsAdmin
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
 export interface Forum_Forums__Admin__ShowQueryItem
-  extends Omit<ShowForumForumsAdmin, 'parent' | 'permissions'> {}
+  extends Omit<ShowForumForumsAdmin, "parent" | "permissions"> {}
 
 export const useForumForumsAdminAPI = () => {
   const query = useInfiniteQuery({
@@ -42,7 +42,11 @@ export const useForumForumsAdminAPI = () => {
   });
 
   const data: ShowForumForumsAdmin[] = useMemo(() => {
-    return query.data?.pages.flatMap(({ forum_forums__admin__show: { edges } }) => edges) ?? [];
+    return (
+      query.data?.pages.flatMap(
+        ({ forum_forums__admin__show: { edges } }) => edges
+      ) ?? []
+    );
   }, [query.data]);
 
   return {

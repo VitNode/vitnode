@@ -155,7 +155,8 @@
     },
     "sign_in": {
       "title": "Zaloguj się",
-      "desc": "Zaloguj się do swojego konta.",
+      "desc": "Nie masz konta? <link></link>.",
+      "sign_up": "Zarejestruj się",
       "form": {
         "email": {
           "label": "Email"
@@ -176,7 +177,8 @@
     },
     "sign_up": {
       "title": "Zarejestruj się",
-      "desc": "Zarejestruj się do swojego konta.",
+      "desc": "Masz już konto? <link></link>.",
+      "sign_in": "Zaloguj się",
       "form": {
         "name": {
           "label": "Nick",
@@ -202,7 +204,12 @@
           "label": "Newsletter",
           "desc": "Otrzymuj informacje o nowych funkcjach, aktualizacjach i wydarzeniach związanych z aplikacją."
         },
-        "submit": "Zarejestruj się"
+        "submit": "Zarejestruj się",
+        "success": {
+          "title": "Hej <name></name>! 🎉",
+          "desc": "Twoje konto zostało utworzone. Możesz teraz zalogować się do swojego konta.",
+          "sign_in": "Zaloguj się"
+        }
       }
     },
     "settings": {

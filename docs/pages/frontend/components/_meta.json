@@ -1,8 +1,13 @@
 {
+  "shadcn": "Shadcn UI",
+  "avatar": "Avatar",
+  "data-table": "Data Table",
   "dialog": "Dialog",
   "tabs": "Tabs",
   "loaders": "Loaders",
   "date": "Date Format",
-  "table": "Table",
-  "editor": "Editor"
+  "editor": "Editor",
+  "user-link": "User Link",
+  "user-input": "User Input",
+  "user-group": "User Group"
 }

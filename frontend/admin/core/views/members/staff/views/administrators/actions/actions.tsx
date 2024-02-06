@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { CreateActionsAdministratorsStaffAdmin } from './create';
+import { CreateActionsAdministratorsStaffAdmin } from "./create";
 
 export const ActionsAdministratorsStaffAdmin = () => {
   return (

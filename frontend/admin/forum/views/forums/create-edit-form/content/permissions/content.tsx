@@ -1,17 +1,17 @@
-import { useCallback, useState } from 'react';
-import { TableVirtuoso } from 'react-virtuoso';
-import type { ControllerRenderProps, FieldValues } from 'react-hook-form';
-import { keyBy, mapValues } from 'lodash';
+import { useCallback, useState } from "react";
+import { TableVirtuoso } from "react-virtuoso";
+import type { ControllerRenderProps, FieldValues } from "react-hook-form";
+import { keyBy, mapValues } from "lodash";
 
-import { useTextLang } from '@/hooks/core/use-text-lang';
-import { usePermissionsGroupsAdminAPI } from '../hooks/use-permissions-groups-admin';
-import { Input } from '@/components/ui/input';
-import { Switch } from '@/components/ui/switch';
-import { Loader } from '@/components/loader/loader';
-import type { ShowAdminGroups } from '@/graphql/hooks';
+import { useTextLang } from "@/hooks/core/use-text-lang";
+import { usePermissionsGroupsAdminAPI } from "../hooks/use-permissions-groups-admin";
+import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
+import { Loader } from "@/components/loader/loader";
+import type { ShowAdminGroups } from "@/graphql/hooks";
 
 interface Props {
-  field: ControllerRenderProps<FieldValues, 'permissions'>;
+  field: ControllerRenderProps<FieldValues, "permissions">;
   permissions: { id: string; title: string; disableForGuest?: boolean }[];
 }
 
@@ -19,13 +19,16 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
   field,
   permissions
 }: Props) => {
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
   const { data, isError, isLoading } = usePermissionsGroupsAdminAPI({
     searchValue
   });
   const { convertText } = useTextLang();
 
-  const Table = useCallback(({ ...props }) => <table className="w-full" {...props} />, []);
+  const Table = useCallback(
+    ({ ...props }) => <table className="w-full" {...props} />,
+    []
+  );
   const TableRow = useCallback(
     ({ ...props }) => (
       <tr
@@ -56,7 +59,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
       />
 
       <TableVirtuoso
-        style={{ height: '50vh' }}
+        style={{ height: "50vh" }}
         data={data}
         overscan={200}
         className="border rounded-md"
@@ -84,14 +87,20 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
           </tr>
         )}
         itemContent={(index, item) => {
-          const findItem = field.value.groups.find((group: { id: number }) => group.id === item.id);
+          const findItem = field.value.groups.find(
+            (group: { id: number }) => group.id === item.id
+          );
           // Check if:
           // 1. The permission is enabled for all groups
           // 2. The all permissions is enabled for the current group
           const isAllPermissionsEnabled =
-            permissions.every(permission => field.value[`can_all_${permission.id}`]) ||
             permissions.every(
-              permission => findItem?.[permission.id] || field.value[`can_all_${permission.id}`]
+              permission => field.value[`can_all_${permission.id}`]
+            ) ||
+            permissions.every(
+              permission =>
+                findItem?.[permission.id] ||
+                field.value[`can_all_${permission.id}`]
             );
 
           return (
@@ -114,7 +123,10 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
                         return;
                       }
 
-                      const groupPermissions = mapValues(keyBy(permissions, 'id'), () => true);
+                      const groupPermissions = mapValues(
+                        keyBy(permissions, "id"),
+                        () => true
+                      );
 
                       field.onChange({
                         ...field.value,
@@ -149,35 +161,47 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
                     <Switch
                       onClick={() => {
                         if (field.value[`can_all_${permission.id}`]) {
-                          const groupPermissions = mapValues(keyBy(permissions, 'id'), () => false);
+                          const groupPermissions = mapValues(
+                            keyBy(permissions, "id"),
+                            () => false
+                          );
 
                           field.onChange({
                             ...field.value,
                             [`can_all_${permission.id}`]: false,
-                            groups: data.map((group: Pick<ShowAdminGroups, 'id'>) => {
-                              if (group.id === item.id) {
+                            groups: data.map(
+                              (group: Pick<ShowAdminGroups, "id">) => {
+                                if (group.id === item.id) {
+                                  return {
+                                    id: group.id,
+                                    ...groupPermissions,
+                                    [permission.id]: false
+                                  };
+                                }
+
                                 return {
                                   id: group.id,
                                   ...groupPermissions,
-                                  [permission.id]: false
+                                  [permission.id]: true
                                 };
                               }
-
-                              return { id: group.id, ...groupPermissions, [permission.id]: true };
-                            })
+                            )
                           });
 
                           return;
                         }
 
                         if (!findItem) {
-                          const groupPermissions = mapValues(keyBy(permissions, 'id'), item => {
-                            if (item.id === permission.id) {
-                              return true;
-                            }
+                          const groupPermissions = mapValues(
+                            keyBy(permissions, "id"),
+                            item => {
+                              if (item.id === permission.id) {
+                                return true;
+                              }
 
-                            return false;
-                          });
+                              return false;
+                            }
+                          );
 
                           field.onChange({
                             ...field.value,

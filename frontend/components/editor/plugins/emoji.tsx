@@ -1,15 +1,17 @@
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { useEffect } from 'react';
-import { TextNode } from 'lexical';
-import data, { type Emoji, type EmojiMartData } from '@emoji-mart/data';
-import { values } from 'lodash';
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { useEffect } from "react";
+import { TextNode } from "lexical";
+import data, { type Emoji, type EmojiMartData } from "@emoji-mart/data";
+import { values } from "lodash";
 
-import { $createEmojiNode, EmojiNode } from '../nodes/EmojiNode';
-import { CONFIG } from '@/config';
+import { $createEmojiNode, EmojiNode } from "../nodes/EmojiNode";
+import { CONFIG } from "@/config";
 
 const convertEmoji = (emoji: Emoji[]) => {
   const localStorageSkinToneIndex =
-    typeof window !== 'undefined' ? localStorage.getItem(CONFIG.editor.skin_tone) : null;
+    typeof window !== "undefined"
+      ? localStorage.getItem(CONFIG.editor.skin_tone)
+      : null;
   const result: Map<string, string> = new Map();
 
   emoji.forEach(item => {
@@ -17,7 +19,8 @@ const convertEmoji = (emoji: Emoji[]) => {
       item.emoticons.forEach(emoticon => {
         result.set(
           emoticon,
-          item.skins[localStorageSkinToneIndex ? +localStorageSkinToneIndex : 0].native
+          item.skins[localStorageSkinToneIndex ? +localStorageSkinToneIndex : 0]
+            .native
         );
       });
     }
@@ -27,7 +30,9 @@ const convertEmoji = (emoji: Emoji[]) => {
 };
 
 const emojiMart = data as EmojiMartData;
-const emojis = convertEmoji(values(emojiMart.emojis).filter(emoji => emoji.emoticons));
+const emojis = convertEmoji(
+  values(emojiMart.emojis).filter(emoji => emoji.emoticons)
+);
 
 const findAndTransformEmoji = (node: TextNode): null | TextNode => {
   const text = node.getTextContent();
@@ -72,7 +77,7 @@ export const EmojiPluginEditor = () => {
 
   useEffect(() => {
     if (!editor.hasNodes([EmojiNode])) {
-      throw new Error('EmojisPlugin: EmojiNode not registered on editor');
+      throw new Error("EmojisPlugin: EmojiNode not registered on editor");
     }
 
     return editor.registerNodeTransform(TextNode, textNodeTransform);

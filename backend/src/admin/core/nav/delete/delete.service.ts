@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { eq } from 'drizzle-orm';
+import { Injectable } from "@nestjs/common";
+import { eq } from "drizzle-orm";
 
-import { DeleteAdminNavArgs } from './dto/delete.args';
+import { DeleteAdminNavArgs } from "./dto/delete.args";
 
-import { DatabaseService } from '@/database/database.service';
-import { NotFoundError } from '@/utils/errors/not-found-error';
-import { core_nav } from '../../database/schema/nav';
+import { DatabaseService } from "@/database/database.service";
+import { NotFoundError } from "@/utils/errors/not-found-error";
+import { core_nav } from "../../database/schema/nav";
 
 @Injectable()
 export class DeleteAdminNavService {
@@ -17,7 +17,7 @@ export class DeleteAdminNavService {
     });
 
     if (!nav) {
-      throw new NotFoundError('Nav');
+      throw new NotFoundError("Nav");
     }
 
     // Update parent_id to null
@@ -29,6 +29,6 @@ export class DeleteAdminNavService {
     // Delete nav
     await this.databaseService.db.delete(core_nav).where(eq(core_nav.id, id));
 
-    return 'Success!';
+    return "Success!";
   }
 }

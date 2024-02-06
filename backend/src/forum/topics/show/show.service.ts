@@ -1,18 +1,21 @@
-import { Injectable } from '@nestjs/common';
-import { and, asc, count, eq, or } from 'drizzle-orm';
+import { Injectable } from "@nestjs/common";
+import { and, asc, count, eq, or } from "drizzle-orm";
 
-import { ShowTopicsForumsArgs } from './dto/show.args';
-import { ShowTopicsForumsObj } from './dto/show.obj';
+import { ShowTopicsForumsArgs } from "./dto/show.args";
+import { ShowTopicsForumsObj } from "./dto/show.obj";
 
-import { SortDirectionEnum } from '@/types/database/sortDirection.type';
-import { User } from '@/utils/decorators/user.decorator';
-import { DatabaseService } from '@/database/database.service';
-import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
-import { forum_topics } from '@/src/admin/forum/database/schema/topics';
-import { forum_posts } from '@/src/admin/forum/database/schema/posts';
-import { CustomError } from '@/utils/errors/CustomError';
-import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
-import { forum_forums_permissions } from '@/src/admin/forum/database/schema/forums';
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
+import { User } from "@/utils/decorators/user.decorator";
+import { DatabaseService } from "@/database/database.service";
+import {
+  inputPaginationCursor,
+  outputPagination
+} from "@/functions/database/pagination";
+import { forum_topics } from "@/src/admin/forum/database/schema/topics";
+import { forum_posts } from "@/src/admin/forum/database/schema/posts";
+import { CustomError } from "@/utils/errors/CustomError";
+import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
+import { forum_forums_permissions } from "@/src/admin/forum/database/schema/forums";
 
 @Injectable()
 export class ShowTopicsForumsService {
@@ -24,8 +27,8 @@ export class ShowTopicsForumsService {
   ): Promise<ShowTopicsForumsObj> {
     if (!forum_id && !id) {
       throw new CustomError({
-        code: 'FORUM_TOPIC_SHOW_NO_ID',
-        message: 'No forum_id or id provided'
+        code: "FORUM_TOPIC_SHOW_NO_ID",
+        message: "No forum_id or id provided"
       });
     }
 
@@ -35,10 +38,10 @@ export class ShowTopicsForumsService {
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: 'ASC', key: 'id', schema: forum_topics.id },
+      primaryCursor: { order: "ASC", key: "id", schema: forum_topics.id },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: 'created'
+        column: "created"
       }
     });
 

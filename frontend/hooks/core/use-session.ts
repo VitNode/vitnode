@@ -1,10 +1,10 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from "react";
 
-import type { AuthorizationCurrentUserObj, ShowCoreNav } from '@/graphql/hooks';
+import type { AuthorizationCurrentUserObj, ShowCoreNav } from "@/graphql/hooks";
 
 interface Args {
   nav: ShowCoreNav[];
-  session: Omit<AuthorizationCurrentUserObj, 'posts'> | undefined | null;
+  session: Omit<AuthorizationCurrentUserObj, "posts"> | undefined | null;
   theme_id: number | null;
 }
 

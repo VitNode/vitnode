@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 
-import { ChangeCoreThemesArgs } from './dto/change.args';
+import { ChangeCoreThemesArgs } from "./dto/change.args";
 
-import { DatabaseService } from '@/database/database.service';
-import { NotFoundError } from '@/utils/errors/not-found-error';
-import { Ctx } from '@/types/context.type';
-import { convertUnixTime, currentDate } from '@/functions/date';
+import { DatabaseService } from "@/database/database.service";
+import { NotFoundError } from "@/utils/errors/not-found-error";
+import { Ctx } from "@/types/context.type";
+import { convertUnixTime, currentDate } from "@/functions/date";
 
 @Injectable()
 export class ChangeCoreThemesService {
@@ -21,21 +21,24 @@ export class ChangeCoreThemesService {
     });
 
     if (!theme) {
-      throw new NotFoundError('Theme');
+      throw new NotFoundError("Theme");
     }
 
     // Set cookie for session
-    res.cookie(this.configService.getOrThrow('cookies.theme_id.name'), id, {
+    res.cookie(this.configService.getOrThrow("cookies.theme_id.name"), id, {
       httpOnly: true,
       secure: true,
-      domain: this.configService.getOrThrow('cookies.domain'),
-      path: '/',
+      domain: this.configService.getOrThrow("cookies.domain"),
+      path: "/",
       expires: new Date(
-        convertUnixTime(currentDate() + this.configService.getOrThrow('cookies.theme_id.expiresIn'))
+        convertUnixTime(
+          currentDate() +
+            this.configService.getOrThrow("cookies.theme_id.expiresIn")
+        )
       ),
-      sameSite: 'none'
+      sameSite: "none"
     });
 
-    return 'Success!';
+    return "Success!";
   }
 }

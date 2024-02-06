@@ -1,16 +1,16 @@
-'use server';
+"use server";
 
-import { cookies } from 'next/headers';
-import { revalidatePath } from 'next/cache';
+import { cookies } from "next/headers";
+import { revalidateTag } from "next/cache";
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Sessions__Sign_Out,
   type Core_Sessions__Sign_OutMutation,
   type Core_Sessions__Sign_OutMutationVariables
-} from '@/graphql/hooks';
-import { redirect } from '@/i18n';
-import { setCookieFromApi } from '@/functions/cookie-from-string-to-object';
+} from "@/graphql/hooks";
+import { redirect } from "@/i18n";
+import { setCookieFromApi } from "@/functions/cookie-from-string-to-object";
 
 export const mutationApi = async () => {
   try {
@@ -26,11 +26,10 @@ export const mutationApi = async () => {
 
     // Set cookie
     setCookieFromApi({ res });
-
-    revalidatePath('/', 'layout');
+    revalidateTag("Core_Sessions__Authorization");
   } catch (error) {
     return { error };
   }
 
-  redirect('/');
+  redirect("/");
 };

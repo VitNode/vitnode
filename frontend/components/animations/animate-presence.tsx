@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { AnimatePresence, type AnimatePresenceProps } from 'framer-motion';
-import type { ReactNode } from 'react';
+import { AnimatePresence, type AnimatePresenceProps } from "framer-motion";
+import type { ReactNode } from "react";
 
 interface Props extends AnimatePresenceProps {
   children: ReactNode;

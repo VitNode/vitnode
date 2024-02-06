@@ -1,22 +1,27 @@
-import { useTranslations } from 'next-intl';
-import { Suspense, lazy } from 'react';
-import { ImageIcon } from 'lucide-react';
+import { useTranslations } from "next-intl";
+import { Suspense, lazy } from "react";
+import { ImageIcon } from "lucide-react";
 
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { AvatarUser } from '@/components/user/avatar/avatar-user';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Button } from '@/components/ui/button';
-import { Loader } from '@/components/loader/loader';
-import { useSession } from '@/hooks/core/use-session';
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { AvatarUser } from "@/components/user/avatar/avatar-user";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
+import { Loader } from "@/components/loader/loader";
+import { useSession } from "@/hooks/core/use-session";
 
 const ModalChangeAvatar = lazy(() =>
-  import('./modal/modal-change-avatar').then(module => ({
+  import("./modal/modal-change-avatar").then(module => ({
     default: module.ModalChangeAvatar
   }))
 );
 
 export const ChangeAvatar = () => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
   const { session } = useSession();
   if (!session) return null;
 
@@ -46,7 +51,7 @@ export const ChangeAvatar = () => {
             </DialogContent>
 
             <TooltipContent>
-              <p>{t('settings.change_avatar.title')}</p>
+              <p>{t("settings.change_avatar.title")}</p>
             </TooltipContent>
           </Tooltip>
         </Dialog>

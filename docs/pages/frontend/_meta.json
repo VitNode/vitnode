@@ -2,10 +2,9 @@
   "components": "Components",
   "graphql": "GraphQL",
   "fetch": "Fetch and Revalidate Data",
-  "theme": "Theme Mode",
+  "dark-light-mode": "Dark and Light Mode",
   "forms": "Forms",
   "notifications": "Notifications",
-  "users": "Users",
   "i18n": "Internationalization (i18n)",
   "virtualization": "Virtualization",
   "practices": "Best Practices"

@@ -1,8 +1,8 @@
-import type { ReactNode } from 'react';
-import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import type { ReactNode } from "react";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-import './global.scss';
+import "./global.scss";
 
 interface Props {
   children: ReactNode;
@@ -11,12 +11,14 @@ interface Props {
   };
 }
 
-export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: 'admin' });
+export async function generateMetadata({
+  params: { locale }
+}: Props): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: "admin" });
 
   return {
-    title: t('title'),
-    robots: 'noindex, nofollow'
+    title: t("title"),
+    robots: "noindex, nofollow"
   };
 }
 

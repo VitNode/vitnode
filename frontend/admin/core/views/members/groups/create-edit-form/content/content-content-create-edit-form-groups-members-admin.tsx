@@ -1,11 +1,17 @@
-import { useFormContext } from 'react-hook-form';
-import { useTranslations } from 'next-intl';
+import { useFormContext } from "react-hook-form";
+import { useTranslations } from "next-intl";
 
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 export const ContentContentCreateEditFormGroupsMembersAdmin = () => {
-  const t = useTranslations('admin.members.groups.create_edit.form');
+  const t = useTranslations("admin.members.groups.create_edit.form");
   const form = useFormContext();
 
   return (
@@ -14,7 +20,7 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = () => {
       name="test"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>{t('name.label')} + test</FormLabel>
+          <FormLabel>{t("name.label")} + test</FormLabel>
           <FormControl>
             <Input {...field} />
           </FormControl>

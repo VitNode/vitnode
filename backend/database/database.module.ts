@@ -1,12 +1,12 @@
-import { Global, Module } from '@nestjs/common';
-import { registerEnumType } from '@nestjs/graphql';
+import { Global, Module } from "@nestjs/common";
+import { registerEnumType } from "@nestjs/graphql";
 
-import { DatabaseService } from './database.service';
+import { DatabaseService } from "./database.service";
 
-import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 registerEnumType(SortDirectionEnum, {
-  name: 'SortDirectionEnum'
+  name: "SortDirectionEnum"
 });
 
 @Global()

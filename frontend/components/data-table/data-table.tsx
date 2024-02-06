@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import {
   flexRender,
   getCoreRowModel,
   useReactTable,
   type ColumnDef,
   type SortingState
-} from '@tanstack/react-table';
-import { useTranslations } from 'next-intl';
-import { useSearchParams } from 'next/navigation';
-import { useMemo, type ReactNode } from 'react';
+} from "@tanstack/react-table";
+import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
+import { useMemo, type ReactNode } from "react";
 
 import {
   Table,
@@ -19,13 +19,19 @@ import {
   TableHead,
   TableHeader,
   TableRow
-} from '@/components/ui/table';
-import { Button } from '../ui/button';
-import type { PageInfo } from '@/graphql/hooks';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { usePathname, useRouter } from '@/i18n';
-import { ToolbarDataTable } from './toolbar/toolbar';
-import type { ToolbarDataTableProps } from './toolbar/toolbar';
+} from "@/components/ui/table";
+import { Button } from "../ui/button";
+import type { PageInfo } from "@/graphql/hooks";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "../ui/select";
+import { usePathname, useRouter } from "@/i18n";
+import { ToolbarDataTable } from "./toolbar/toolbar";
+import type { ToolbarDataTableProps } from "./toolbar/toolbar";
 
 interface TDataMin {
   id: number;
@@ -35,7 +41,7 @@ interface DataTableProps<TData extends TDataMin> extends ToolbarDataTableProps {
   columns: ColumnDef<TData>[];
   data: TData[];
   defaultPageSize: 10 | 20 | 30 | 40 | 50;
-  defaultSorting?: { sortBy: keyof TData; sortDirection: 'desc' | 'asc' };
+  defaultSorting?: { sortBy: keyof TData; sortDirection: "desc" | "asc" };
   filters?: ReactNode;
   pageInfo?: PageInfo;
   searchPlaceholder?: string;
@@ -52,11 +58,11 @@ export function DataTable<TData extends TDataMin>({
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { push } = useRouter();
-  const t = useTranslations('core');
+  const t = useTranslations("core");
   const pagination = {
-    first: searchParams.get('first'),
-    last: searchParams.get('last'),
-    cursor: searchParams.get('cursor')
+    first: searchParams.get("first"),
+    last: searchParams.get("last"),
+    cursor: searchParams.get("cursor")
   };
 
   const table = useReactTable({
@@ -70,8 +76,8 @@ export function DataTable<TData extends TDataMin>({
       const sorting = fnSorting();
 
       const params = new URLSearchParams(searchParams);
-      params.set('sortBy', sorting[0].id);
-      params.set('sortDirection', sorting[0].desc ? 'desc' : 'asc');
+      params.set("sortBy", sorting[0].id);
+      params.set("sortDirection", sorting[0].desc ? "desc" : "asc");
 
       push(`${pathname}?${params.toString()}`);
     },
@@ -80,7 +86,7 @@ export function DataTable<TData extends TDataMin>({
         ? [
             {
               id: defaultSorting.sortBy.toString(),
-              desc: defaultSorting.sortDirection === 'desc'
+              desc: defaultSorting.sortDirection === "desc"
             }
           ]
         : []
@@ -112,9 +118,9 @@ export function DataTable<TData extends TDataMin>({
     const params = new URLSearchParams(searchParams);
 
     if (cursor) {
-      params.set('cursor', `${cursor}`);
+      params.set("cursor", `${cursor}`);
     } else {
-      params.delete('cursor');
+      params.delete("cursor");
     }
 
     const currentDefaultPageSize = {
@@ -122,12 +128,16 @@ export function DataTable<TData extends TDataMin>({
       last: pagination.last ? pagination.last : `${defaultPageSize}`
     };
 
-    if (nextPage || (pageSize && !nextPage) || (!cursor && !nextPage && pageSize)) {
-      params.set('first', pageSize ? pageSize : currentDefaultPageSize.first);
-      params.delete('last');
+    if (
+      nextPage ||
+      (pageSize && !nextPage) ||
+      (!cursor && !nextPage && pageSize)
+    ) {
+      params.set("first", pageSize ? pageSize : currentDefaultPageSize.first);
+      params.delete("last");
     } else {
-      params.set('last', pageSize ? pageSize : currentDefaultPageSize.last);
-      params.delete('first');
+      params.set("last", pageSize ? pageSize : currentDefaultPageSize.last);
+      params.delete("first");
     }
 
     push(`${pathname}?${params.toString()}`);
@@ -147,7 +157,10 @@ export function DataTable<TData extends TDataMin>({
                     <TableHead key={header.id}>
                       {header.isPlaceholder
                         ? null
-                        : flexRender(header.column.columnDef.header, header.getContext())}
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   );
                 })}
@@ -157,18 +170,27 @@ export function DataTable<TData extends TDataMin>({
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map(row => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
                   {row.getVisibleCells().map(cell => (
                     <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
-                  {t('no_results')}
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  {t("no_results")}
                 </TableCell>
               </TableRow>
             )}
@@ -204,7 +226,7 @@ export function DataTable<TData extends TDataMin>({
               variant="outline"
               size="icon"
               disabled={!pageInfo.hasPreviousPage}
-              tooltip={t('pagination.previous')}
+              tooltip={t("pagination.previous")}
               onClick={() =>
                 changeState({
                   cursor: pageInfo.startCursor,
@@ -217,7 +239,7 @@ export function DataTable<TData extends TDataMin>({
             <Button
               variant="outline"
               size="icon"
-              tooltip={t('pagination.next')}
+              tooltip={t("pagination.next")}
               disabled={!pageInfo.hasNextPage}
               onClick={() =>
                 changeState({

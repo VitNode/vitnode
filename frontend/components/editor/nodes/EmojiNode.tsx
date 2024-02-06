@@ -12,13 +12,13 @@ import {
   type LexicalNode,
   type NodeKey,
   type SerializedTextNode
-} from 'lexical';
+} from "lexical";
 
 export type SerializedEmojiNode = SerializedTextNode;
 
 export class EmojiNode extends TextNode {
   static getType(): string {
-    return 'emoji';
+    return "emoji";
   }
 
   static clone(node: EmojiNode): EmojiNode {
@@ -33,7 +33,11 @@ export class EmojiNode extends TextNode {
     return super.createDOM(config);
   }
 
-  updateDOM(prevNode: TextNode, dom: HTMLElement, config: EditorConfig): boolean {
+  updateDOM(
+    prevNode: TextNode,
+    dom: HTMLElement,
+    config: EditorConfig
+  ): boolean {
     const inner = dom.firstChild;
     if (inner === null) {
       return true;
@@ -56,17 +60,19 @@ export class EmojiNode extends TextNode {
   exportJSON(): SerializedEmojiNode {
     return {
       ...super.exportJSON(),
-      type: 'emoji'
+      type: "emoji"
     };
   }
 }
 
-export function $isEmojiNode(node: LexicalNode | null | undefined): node is EmojiNode {
+export function $isEmojiNode(
+  node: LexicalNode | null | undefined
+): node is EmojiNode {
   return node instanceof EmojiNode;
 }
 
 export function $createEmojiNode(emojiText: string): EmojiNode {
-  const node = new EmojiNode(emojiText).setMode('token');
+  const node = new EmojiNode(emojiText).setMode("token");
 
   return $applyNodeReplacement(node);
 }

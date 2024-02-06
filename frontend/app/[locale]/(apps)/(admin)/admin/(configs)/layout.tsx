@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
-import { LayoutConfigs } from '@/admin/core/configs/layout-configs';
+import { LayoutConfigs } from "@/admin/core/configs/layout-configs";
 
 interface Props {
   children: ReactNode;

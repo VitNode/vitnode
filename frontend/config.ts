@@ -4,9 +4,9 @@ const ENVS = {
 };
 
 export const CONFIG = {
-  graphql_url: ENVS.graphql_url ?? 'http://localhost:8080',
-  client_graphql_url: ENVS.client_graphql_url ?? 'http://localhost:8080',
+  graphql_url: ENVS.graphql_url ?? "http://localhost:8080",
+  client_graphql_url: ENVS.client_graphql_url ?? "http://localhost:8080",
   editor: {
-    skin_tone: 'emoji:skin-tone'
+    skin_tone: "emoji:skin-tone"
   }
 };

@@ -1,7 +1,7 @@
-import { ArgsType, Field } from '@nestjs/graphql';
-import { ArrayMinSize, IsArray, ValidateNested } from 'class-validator';
+import { ArgsType, Field } from "@nestjs/graphql";
+import { ArrayMinSize, IsArray, ValidateNested } from "class-validator";
 
-import { TextLanguageInput } from '@/types/database/text-language.type';
+import { TextLanguageInput } from "@/types/database/text-language.type";
 
 @ArgsType()
 export class CreateAdminGroupsArgs {

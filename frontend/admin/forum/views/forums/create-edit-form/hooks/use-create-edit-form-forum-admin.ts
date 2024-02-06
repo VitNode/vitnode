@@ -1,22 +1,22 @@
-import { useTranslations } from 'next-intl';
-import * as z from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useQueryClient } from '@tanstack/react-query';
-import { toast } from 'sonner';
+import { useTranslations } from "next-intl";
+import * as z from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
-import { zodTextLanguageInputType } from '@/components/text-language-input';
-import { useDialog } from '@/components/ui/dialog';
-import { mutationCreateApi } from './mutation-create-api';
-import { APIKeys } from '@/graphql/api-keys';
+import { zodTextLanguageInputType } from "@/components/text-language-input";
+import { useDialog } from "@/components/ui/dialog";
+import { mutationCreateApi } from "./mutation-create-api";
+import { APIKeys } from "@/graphql/api-keys";
 
 export const useCreateEditFormForumAdmin = () => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
   const { setOpen } = useDialog();
   const queryClient = useQueryClient();
 
   const formSchema = z.object({
-    name: zodTextLanguageInputType.min(1, t('forms.empty')),
+    name: zodTextLanguageInputType.min(1, t("forms.empty")),
     description: zodTextLanguageInputType,
     permissions: z.object({
       can_all_view: z.boolean(),
@@ -58,8 +58,8 @@ export const useCreateEditFormForumAdmin = () => {
     });
 
     if (mutation.error) {
-      toast.error(t('errors.title'), {
-        description: t('errors.internal_server_error')
+      toast.error(t("errors.title"), {
+        description: t("errors.internal_server_error")
       });
 
       return;

@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import { NodePgDatabase, drizzle } from 'drizzle-orm/node-postgres';
-import { Pool } from 'pg';
+import { Injectable } from "@nestjs/common";
+import { NodePgDatabase, drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
 
-import tableCore from '../src/admin/core/database/index';
-import tableForum from '../src/admin/forum/database/index';
+import tableCore from "../src/admin/core/database/index";
+import tableForum from "../src/admin/forum/database/index";
 // ! === IMPORT ===
 
 const schema = {
@@ -26,11 +26,11 @@ export class DatabaseService {
     };
 
     const pool = new Pool({
-      host: envs.host ?? 'localhost',
+      host: envs.host ?? "localhost",
       port: envs.port ? +envs.port : 5432,
-      user: envs.user ?? 'root',
-      password: envs.password ?? 'root',
-      database: envs.name ?? 'vitnode'
+      user: envs.user ?? "root",
+      password: envs.password ?? "root",
+      database: envs.name ?? "vitnode"
     });
 
     this.db = drizzle(pool, { schema });

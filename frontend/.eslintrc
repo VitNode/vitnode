@@ -27,8 +27,7 @@
     "@typescript-eslint",
     "typescript-sort-keys",
     "sort-destructure-keys",
-    "@tanstack/query",
-    "jsx-a11y"
+    "@tanstack/query"
   ],
   "rules": {
     "react/react-in-jsx-scope": "off",

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Palette } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { Palette } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import {
   DropdownMenu,
@@ -9,14 +9,14 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
-import { useGlobals } from '@/hooks/core/use-globals';
-import { useSession } from '@/hooks/core/use-session';
-import { mutationApi } from './mutation-api';
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { useGlobals } from "@/hooks/core/use-globals";
+import { useSession } from "@/hooks/core/use-session";
+import { mutationApi } from "./mutation-api";
 
 export const ThemeSwitcher = () => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
   const { themes } = useGlobals();
   const { theme_id } = useSession();
 
@@ -25,13 +25,17 @@ export const ThemeSwitcher = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon" tooltip={t('user-bar.theme.change')}>
+        <Button
+          variant="outline"
+          size="icon"
+          tooltip={t("user-bar.theme.change")}
+        >
           <Palette />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuRadioGroup
-          value={theme_id?.toString() ?? '1'}
+          value={theme_id?.toString() ?? "1"}
           onValueChange={async id => {
             await mutationApi({ id: parseInt(id) });
             // window.location.reload();

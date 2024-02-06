@@ -1,14 +1,20 @@
+import { Steps } from 'nextra/components';
+import { Callout } from 'nextra/components';
+
 # Sorting
 
-VitNode provide a sorting system to order the query result. The sorting system is based on the [Prisma sorting system](https://www.prisma.io/docs/concepts/components/prisma-client/filtering-and-sorting#sorting).
+VitNode provide a sorting system to order the query result.
 
 Here is an example of how to use the sorting system. We will use the `core_members` table as an example.
+
+<Callout type="warning" emoji="⚠️">
+  Sorting system is based on [Pagination System](/backend/database/pagination). If you don't want to
+  use the pagination system you can use the `orderBy` argument directly in the `findMany()` method.
+</Callout>
 
 ## Data Transfer Object (DTO)
 
 We will create a `DTO` to create arguments values for the query.
-
-import { Steps } from 'nextra/components';
 
 <Steps>
 
@@ -40,8 +46,6 @@ enum ShowCoreMembersSortingColumnEnum {
   reactions = 'reactions'
 }
 ```
-
-import { Callout } from 'nextra/components';
 
 <Callout type="warning" emoji="⚠️">
   Remember to export the enum. It will be used in the next steps.
@@ -146,11 +150,11 @@ import { Injectable } from '@nestjs/common';
 import { ShowCoreMembersObj } from './dto/show-core_members.obj';
 import { ShowCoreMembersArgs } from './dto/show-core_members.args';
 
-import { PrismaService } from '@/src/prisma/prisma.service';
+import { DatabaseService } from '@/database/database.service';
 
 @Injectable()
 export class ShowCoreMembersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private databaseService: DatabaseService) {}
 
   async show({ sortBy }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {}
 }
@@ -158,32 +162,23 @@ export class ShowCoreMembersService {
 
 ### Query from database
 
-Now we can create query using `Prisma` and pass `inputSorting()` function to orderBy arguments in the `findMany()` method to create the query.
+To the `inputPaginationCursor()` function you have to pass the `sortBy` argument.
 
-```ts
-import { inputSorting } from '@/functions/database/inputSorting';
+```ts {10-14}
+import { inputPaginationCursor } from '@/functions/database/pagination';
 
-const edges = await this.prisma.core_members.findMany({
-  orderBy: inputSorting<ShowCoreMembersSortingColumnEnum>({ sortBy })
-});
-```
-
-<Callout type="info" emoji="ℹ️">
-  You can pass generic type to the `inputSorting()` function to get type checking. We're recommend
-  to use generic type.
-</Callout>
-
-### Default sorting (Optional)
-
-The `inputSorting()` function has `defaultSortBy` argument. You can pass default sorting to the function. If the `sortBy` argument is empty the function will use the `defaultSortBy` argument.
-
-```ts
-orderBy: inputSorting<ShowCoreMembersSortingColumnEnum>({
-  sortBy,
+const pagination = await inputPaginationCursor({
+  cursor,
+  database: core_users,
+  databaseService: this.databaseService,
+  first,
+  last,
+  primaryCursor: { order: 'ASC', key: 'id', schema: core_users.id },
   defaultSortBy: {
-    column: ShowCoreMembersSortingColumnEnum.joined,
-    direction: SortDirectionEnum.desc
-  }
+    direction: SortDirectionEnum.desc,
+    column: 'joined'
+  },
+  sortBy
 });
 ```
 
@@ -191,37 +186,70 @@ orderBy: inputSorting<ShowCoreMembersSortingColumnEnum>({
 
 ```ts
 import { Injectable } from '@nestjs/common';
+import { and, count, eq, ilike, or } from 'drizzle-orm';
 
-import { ShowCoreMembersObj } from './dto/show-core_members.obj';
-import {
-  ShowCoreMembersArgs,
-  ShowCoreMembersSortingColumnEnum
-} from './dto/show-core_members.args';
+import { ShowCoreMembersObj } from './dto/show.obj';
+import { ShowCoreMembersArgs } from './dto/show.args';
 
-import { PrismaService } from '@/src/prisma/prisma.service';
-import { inputSorting } from '@/functions/database/inputSorting';
+import { DatabaseService } from '@/database/database.service';
+import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
+import { core_users } from '@/src/admin/core/database/schema/users';
 import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
 export class ShowCoreMembersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private databaseService: DatabaseService) {}
 
-  async show({ sortBy }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
-    const edges = await this.prisma.core_members.findMany({
-      select: {
-        id: true,
-        name: true
+  async show({
+    cursor,
+    first,
+    last,
+    name_seo,
+    search,
+    sortBy
+  }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
+    const pagination = await inputPaginationCursor({
+      cursor,
+      database: core_users,
+      databaseService: this.databaseService,
+      first,
+      last,
+      primaryCursor: { order: 'ASC', key: 'id', schema: core_users.id },
+      defaultSortBy: {
+        direction: SortDirectionEnum.desc,
+        column: 'joined'
       },
-      orderBy: inputSorting<ShowCoreMembersSortingColumnEnum>({
-        sortBy,
-        defaultSortBy: {
-          column: ShowCoreMembersSortingColumnEnum.joined,
-          direction: SortDirectionEnum.desc
-        }
-      })
+      sortBy
     });
 
-    return edges;
+    const where = or(
+      eq(core_users.name_seo, name_seo),
+      or(
+        ilike(core_users.name, `%${search}%`),
+        ilike(core_users.email, `%${search}%`),
+        Number(search) ? eq(core_users.id, Number(search)) : undefined
+      )
+    );
+
+    const edges = await this.databaseService.db.query.core_users.findMany({
+      ...pagination,
+      where: and(pagination.where, where),
+      with: {
+        avatar: true,
+        group: {
+          with: {
+            name: true
+          }
+        }
+      }
+    });
+
+    const totalCount = await this.databaseService.db
+      .select({ count: count() })
+      .from(core_users)
+      .where(where);
+
+    return outputPagination({ edges, totalCount, first, cursor, last });
   }
 }
 ```

@@ -1,16 +1,22 @@
-import { Field, Int, ObjectType, createUnionType, registerEnumType } from '@nestjs/graphql';
+import {
+  Field,
+  Int,
+  ObjectType,
+  createUnionType,
+  registerEnumType
+} from "@nestjs/graphql";
 
-import { PageInfo } from '@/types/database/pagination.type';
-import { TextLanguage } from '@/types/database/text-language.type';
-import { User } from '@/utils/decorators/user.decorator';
+import { PageInfo } from "@/types/database/pagination.type";
+import { TextLanguage } from "@/types/database/text-language.type";
+import { User } from "@/utils/decorators/user.decorator";
 
 enum TopicActions {
-  lock = 'lock',
-  unlock = 'unlock'
+  lock = "lock",
+  unlock = "unlock"
 }
 
 registerEnumType(TopicActions, {
-  name: 'TopicActions'
+  name: "TopicActions"
 });
 
 @ObjectType()
@@ -47,7 +53,7 @@ export class ShowPostsForums extends ShowPostsForumsItemCommon {
 }
 
 const PostsWithMetaTagsUnion = createUnionType({
-  name: 'postsWithMetaTagsUnion',
+  name: "postsWithMetaTagsUnion",
   types: () => [ShowPostsForums, ShowPostsForumsMetaTags] as const,
   resolveType(value) {
     if (value.action) {

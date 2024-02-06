@@ -1,17 +1,21 @@
-import type { CodegenConfig } from '@graphql-codegen/cli';
+import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   overwrite: true,
-  schema: 'http://[::1]:8080/graphql',
-  documents: ['graphql/**/*.gql'],
+  schema: "http://[::1]:8080/graphql",
+  documents: ["graphql/**/*.gql"],
   generates: {
-    'graphql/hooks.ts': {
-      plugins: ['typescript', 'typescript-operations', 'typescript-document-nodes'],
+    "graphql/hooks.ts": {
+      plugins: [
+        "typescript",
+        "typescript-operations",
+        "typescript-document-nodes"
+      ],
       config: {
         enumsAsConst: true,
         allowEnumStringTypes: true,
         namingConvention: {
-          enumValues: 'change-case-all#lowerCase'
+          enumValues: "change-case-all#lowerCase"
         }
       }
     }

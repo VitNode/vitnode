@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { CardHeader } from '@/components/ui/card';
-import { useSession } from '@/hooks/core/use-session';
-import { ChangeAvatar } from './change-avatar/change-avatar';
+import { CardHeader } from "@/components/ui/card";
+import { useSession } from "@/hooks/core/use-session";
+import { ChangeAvatar } from "./change-avatar/change-avatar";
 
 export const HeaderOverviewSettings = () => {
   const { session } = useSession();

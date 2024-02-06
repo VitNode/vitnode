@@ -1,12 +1,12 @@
-import { ArgsType, Field, Int, registerEnumType } from '@nestjs/graphql';
+import { ArgsType, Field, Int, registerEnumType } from "@nestjs/graphql";
 
 export enum ShowPostsForumsSortingEnum {
-  oldest = 'oldest',
-  newest = 'newest'
+  oldest = "oldest",
+  newest = "newest"
 }
 
 registerEnumType(ShowPostsForumsSortingEnum, {
-  name: 'ShowPostsForumsSortingEnum'
+  name: "ShowPostsForumsSortingEnum"
 });
 
 @ArgsType()

@@ -1,4 +1,4 @@
-import { DeletePluginActionsAdmin } from './delete/delete';
+import { DeletePluginActionsAdmin } from "./delete/delete";
 
 export interface ActionsItemPluginsAdminProps {
   author: string;
@@ -8,6 +8,8 @@ export interface ActionsItemPluginsAdminProps {
   protected: boolean;
 }
 
-export const ActionsItemPluginsAdmin = (props: ActionsItemPluginsAdminProps) => {
+export const ActionsItemPluginsAdmin = (
+  props: ActionsItemPluginsAdminProps
+) => {
   return <DeletePluginActionsAdmin {...props} />;
 };

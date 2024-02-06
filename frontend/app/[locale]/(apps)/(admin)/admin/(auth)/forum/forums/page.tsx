@@ -1,15 +1,15 @@
-import { cookies } from 'next/headers';
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import { cookies } from "next/headers";
+import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
-import { ForumsForumAdminView } from '@/admin/forum/views/forums/forums-forum-admin-view';
-import getQueryClient from '@/functions/get-query-client';
-import { fetcher } from '@/graphql/fetcher';
-import { APIKeys } from '@/graphql/api-keys';
+import { ForumsForumAdminView } from "@/admin/forum/views/forums/forums-forum-admin-view";
+import getQueryClient from "@/functions/get-query-client";
+import { fetcher } from "@/graphql/fetcher";
+import { APIKeys } from "@/graphql/api-keys";
 import {
   Forum_Forums__Admin__Show,
   type Forum_Forums__Admin__ShowQuery,
   type Forum_Forums__Admin__ShowQueryVariables
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
 export default async function Page() {
   const queryClient = getQueryClient();

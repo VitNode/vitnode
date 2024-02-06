@@ -1,8 +1,8 @@
-import { Global, Module } from '@nestjs/common';
+import { Global, Module } from "@nestjs/common";
 
-import { UploadCoreFilesService } from './upload/upload.service';
-import { DeleteCoreFilesService } from './delete/delete.service';
-import { DownloadFilesController } from './download/download.controller';
+import { UploadCoreFilesService } from "./upload/upload.service";
+import { DeleteCoreFilesService } from "./delete/delete.service";
+import { DownloadFilesController } from "./download/download.controller";
 
 @Global()
 @Module({

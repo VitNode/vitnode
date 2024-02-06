@@ -1,38 +1,38 @@
-import { useTranslations } from 'next-intl';
-import type { Options } from 'prettier';
-import { format } from 'prettier/standalone';
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { $getNearestNodeFromDOMNode } from 'lexical';
-import { $isCodeNode } from '@lexical/code';
-import * as prettierPluginBabel from 'prettier/plugins/babel';
-import * as prettierPluginEstree from 'prettier/plugins/estree';
-import * as prettierPluginMarkdown from 'prettier/parser-markdown';
-import * as prettierPluginHtml from 'prettier/parser-html';
-import * as prettierPluginCss from 'prettier/parser-postcss';
+import { useTranslations } from "next-intl";
+import type { Options } from "prettier";
+import { format } from "prettier/standalone";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { $getNearestNodeFromDOMNode } from "lexical";
+import { $isCodeNode } from "@lexical/code";
+import * as prettierPluginBabel from "prettier/plugins/babel";
+import * as prettierPluginEstree from "prettier/plugins/estree";
+import * as prettierPluginMarkdown from "prettier/parser-markdown";
+import * as prettierPluginHtml from "prettier/parser-html";
+import * as prettierPluginCss from "prettier/parser-postcss";
 
-import { PrettierIcon } from './prettier-icon';
-import { Button } from '@/components/ui/button';
-import { useAlertDialog } from '@/components/ui/alert-dialog';
+import { PrettierIcon } from "./prettier-icon";
+import { Button } from "@/components/ui/button";
+import { useAlertDialog } from "@/components/ui/alert-dialog";
 
 const PRETTIER_OPTIONS_BY_LANG: Record<string, Options> = {
   css: {
-    parser: 'css',
+    parser: "css",
     plugins: [prettierPluginCss]
   },
   html: {
-    parser: 'html',
+    parser: "html",
     plugins: [prettierPluginHtml]
   },
   js: {
-    parser: 'babel',
+    parser: "babel",
     plugins: [prettierPluginBabel, prettierPluginEstree]
   },
   ts: {
-    parser: 'babel',
+    parser: "babel",
     plugins: [prettierPluginBabel, prettierPluginEstree]
   },
   markdown: {
-    parser: 'markdown',
+    parser: "markdown",
     plugins: [prettierPluginMarkdown]
   }
 };
@@ -48,7 +48,9 @@ export const getPrettierOptions = (lang: string): Options => {
 
   if (!options) {
     // eslint-disable-next-line no-console
-    console.error(`PrettierButtonCodeAction: Prettier does not support this language: ${lang}`);
+    console.error(
+      `PrettierButtonCodeAction: Prettier does not support this language: ${lang}`
+    );
   }
 
   return options;
@@ -69,8 +71,12 @@ interface Props {
   setPrettierError: (error: PrettierFormatError | null) => void;
 }
 
-export const PrettierButtonCodeAction = ({ codeDOMNode, lang, setPrettierError }: Props) => {
-  const t = useTranslations('core.editor.prettier');
+export const PrettierButtonCodeAction = ({
+  codeDOMNode,
+  lang,
+  setPrettierError
+}: Props) => {
+  const t = useTranslations("core.editor.prettier");
   const [editor] = useLexicalComposerContext();
   const { setOpen } = useAlertDialog();
 
@@ -79,10 +85,10 @@ export const PrettierButtonCodeAction = ({ codeDOMNode, lang, setPrettierError }
       className="w-8 h-8 [&>svg]:pointer-events-none [&>svg]:fill-foreground [&>svg]:w-4 [&>svg]:h-4"
       variant="outline"
       size="icon"
-      tooltip={t('format_code')}
+      tooltip={t("format_code")}
       onClick={async () => {
         try {
-          let content = '';
+          let content = "";
 
           editor.update(() => {
             const codeNode = $getNearestNodeFromDOMNode(codeDOMNode);
@@ -93,7 +99,7 @@ export const PrettierButtonCodeAction = ({ codeDOMNode, lang, setPrettierError }
 
           const parsed = await format(content, getPrettierOptions(lang));
 
-          if (parsed === '') return;
+          if (parsed === "") return;
 
           editor.update(async () => {
             const codeNode = $getNearestNodeFromDOMNode(codeDOMNode);

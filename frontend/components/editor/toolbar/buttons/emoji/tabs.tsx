@@ -9,52 +9,52 @@ import {
   Smile,
   Sparkles,
   Utensils
-} from 'lucide-react';
-import { motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
+} from "lucide-react";
+import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
-import { Button } from '@/components/ui/button';
-import { cx } from '@/functions/classnames';
+import { Button } from "@/components/ui/button";
+import { cn } from "@/functions/classnames";
 
 const categories = [
   {
-    id: 'all',
+    id: "all",
     icon: InfinityIcon
   },
   {
-    id: 'people',
+    id: "people",
     icon: Smile
   },
   {
-    id: 'nature',
+    id: "nature",
     icon: PawPrint
   },
   {
-    id: 'foods',
+    id: "foods",
     icon: Utensils
   },
   {
-    id: 'activity',
+    id: "activity",
     icon: Dumbbell
   },
   {
-    id: 'places',
+    id: "places",
     icon: Car
   },
   {
-    id: 'objects',
+    id: "objects",
     icon: Lightbulb
   },
   {
-    id: 'symbols',
+    id: "symbols",
     icon: Component
   },
   {
-    id: 'flags',
+    id: "flags",
     icon: Flag
   },
   {
-    id: 'customs',
+    id: "customs",
     icon: Sparkles
   }
 ];
@@ -67,12 +67,12 @@ interface Props {
 }
 
 export const TabsEmojiButtonEditor = ({
-  activeCategory = 'all',
+  activeCategory = "all",
   onResetSearch,
   searchValue,
   setActiveCategory
 }: Props) => {
-  const t = useTranslations('core.editor.emoji');
+  const t = useTranslations("core.editor.emoji");
 
   return (
     <div className="border-b-2 flex justify-between">
@@ -83,8 +83,8 @@ export const TabsEmojiButtonEditor = ({
         return (
           <Button
             key={category.id}
-            className={cx('w-9 h-9 rounded-b-none relative', {
-              'text-primary': active
+            className={cn("w-9 h-9 rounded-b-none relative", {
+              "text-primary": active
             })}
             size="icon"
             variant="ghost"

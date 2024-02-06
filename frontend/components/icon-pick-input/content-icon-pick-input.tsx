@@ -1,13 +1,18 @@
-import * as Lucide from 'lucide-react';
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { DialogClose } from '@radix-ui/react-dialog';
+import * as Lucide from "lucide-react";
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { DialogClose } from "@radix-ui/react-dialog";
 
-import { DialogHeader, DialogTitle } from '../ui/dialog';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { IconDynamic, type IconDynamicNames } from '../icon-dynamic';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
+import { DialogHeader, DialogTitle } from "../ui/dialog";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { IconDynamic, type IconDynamicNames } from "../icon-dynamic";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "../ui/tooltip";
 
 const IconNamesArray = Object.keys(Lucide.icons) as IconDynamicNames[];
 
@@ -16,8 +21,8 @@ interface Props {
 }
 
 export const ContentIconPickInput = ({ onChange }: Props) => {
-  const t = useTranslations('core');
-  const [search, setSearch] = useState('');
+  const t = useTranslations("core");
+  const [search, setSearch] = useState("");
   const iconsAfterSearch = IconNamesArray.filter(name =>
     name.toLowerCase().includes(search.toLowerCase())
   );
@@ -25,11 +30,11 @@ export const ContentIconPickInput = ({ onChange }: Props) => {
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{t('icon_picker.title')}</DialogTitle>
+        <DialogTitle>{t("icon_picker.title")}</DialogTitle>
       </DialogHeader>
 
       <Input
-        placeholder={t('icon_picker.placeholder')}
+        placeholder={t("icon_picker.placeholder")}
         onChange={e => setSearch(e.target.value)}
         value={search}
       />
@@ -59,7 +64,7 @@ export const ContentIconPickInput = ({ onChange }: Props) => {
             );
           })
         ) : (
-          <p>{t('no_results')}</p>
+          <p>{t("no_results")}</p>
         )}
       </div>
     </>

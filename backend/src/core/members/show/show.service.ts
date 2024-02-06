@@ -1,13 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { and, count, eq, ilike, or } from 'drizzle-orm';
+import { Injectable } from "@nestjs/common";
+import { and, count, eq, ilike, or } from "drizzle-orm";
 
-import { ShowCoreMembersObj } from './dto/show.obj';
-import { ShowCoreMembersArgs } from './dto/show.args';
+import { ShowCoreMembersObj } from "./dto/show.obj";
+import { ShowCoreMembersArgs } from "./dto/show.args";
 
-import { DatabaseService } from '@/database/database.service';
-import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
-import { core_users } from '@/src/admin/core/database/schema/users';
-import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+import { DatabaseService } from "@/database/database.service";
+import {
+  inputPaginationCursor,
+  outputPagination
+} from "@/functions/database/pagination";
+import { core_users } from "@/src/admin/core/database/schema/users";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 @Injectable()
 export class ShowCoreMembersService {
@@ -40,10 +43,10 @@ export class ShowCoreMembersService {
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: 'ASC', key: 'id', schema: core_users.id },
+      primaryCursor: { order: "ASC", key: "id", schema: core_users.id },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: 'joined'
+        column: "joined"
       },
       sortBy
     });

@@ -1,14 +1,14 @@
-import { ChevronRight, Menu } from 'lucide-react';
-import type { CSSProperties } from 'react';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import type { UniqueIdentifier } from '@dnd-kit/core';
+import { ChevronRight, Menu } from "lucide-react";
+import type { CSSProperties } from "react";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import type { UniqueIdentifier } from "@dnd-kit/core";
 
-import { Button } from '@/components/ui/button';
-import { useTextLang } from '@/hooks/core/use-text-lang';
-import { cx } from '@/functions/classnames';
-import { useChildrenForumForumsAdminAPI } from './hooks/use-children-forum-forums-admin-api';
-import type { Forum_Forums__Admin__ShowFlattenedItem } from '../types';
+import { Button } from "@/components/ui/button";
+import { useTextLang } from "@/hooks/core/use-text-lang";
+import { cn } from "@/functions/classnames";
+import { useChildrenForumForumsAdminAPI } from "./hooks/use-children-forum-forums-admin-api";
+import type { Forum_Forums__Admin__ShowFlattenedItem } from "../types";
 
 interface Props extends Forum_Forums__Admin__ShowFlattenedItem {
   indentationWidth: number;
@@ -38,7 +38,8 @@ export const ItemTableForumsForumAdmin = ({
     transition
   } = useSortable({
     id,
-    animateLayoutChanges: ({ isSorting, wasDragging }) => (isSorting || wasDragging ? false : true)
+    animateLayoutChanges: ({ isSorting, wasDragging }) =>
+      isSorting || wasDragging ? false : true
   });
   const childrenCount = children?.length ?? 0;
   const allowOpenChildren = childrenCount > 0;
@@ -54,24 +55,24 @@ export const ItemTableForumsForumAdmin = ({
       className="pl-[var(--spacing)]"
       style={
         {
-          '--spacing': `${indentationWidth * depth}px`
+          "--spacing": `${indentationWidth * depth}px`
         } as CSSProperties
       }
       onClick={() => {
         if (allowOpenChildren) onCollapse?.(id);
       }}
-      role={allowOpenChildren ? 'button' : undefined}
+      role={allowOpenChildren ? "button" : undefined}
       tabIndex={allowOpenChildren ? 0 : -1}
       onKeyDown={e => {
-        if (e.key === 'Enter' && allowOpenChildren) onCollapse?.(id);
+        if (e.key === "Enter" && allowOpenChildren) onCollapse?.(id);
       }}
     >
       <div
-        className={cx(
-          'p-4 flex gap-4 bg-card items-center transition-[background-color,opacity] relative border',
+        className={cn(
+          "p-4 flex gap-4 bg-card items-center transition-[background-color,opacity] relative border",
           {
-            'animate-pulse bg-primary/20': isDropHere,
-            'z-10': isDragging
+            "animate-pulse bg-primary/20": isDropHere,
+            "z-10": isDragging
           }
         )}
         style={{
@@ -93,8 +94,8 @@ export const ItemTableForumsForumAdmin = ({
 
         {childrenCount > 0 && (
           <ChevronRight
-            className={cx('transition-transform text-muted-foreground', {
-              'rotate-90': isOpenChildren
+            className={cn("transition-transform text-muted-foreground", {
+              "rotate-90": isOpenChildren
             })}
           />
         )}

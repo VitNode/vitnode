@@ -1,4 +1,4 @@
-import { cx } from '@/functions/classnames';
+import { cn } from "@/functions/classnames";
 
 interface Props {
   className?: string;
@@ -8,7 +8,7 @@ export const LogoVitNode = ({ className }: Props) => {
   return (
     <svg
       viewBox="0 0 546 129"
-      className={cx('text-foreground', className)}
+      className={cn("text-foreground", className)}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >

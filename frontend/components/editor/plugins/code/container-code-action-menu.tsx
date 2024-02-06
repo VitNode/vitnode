@@ -1,21 +1,26 @@
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { Suspense, lazy, useEffect, useRef, useState } from 'react';
-import { $isCodeNode, CodeNode, getLanguageFriendlyName, normalizeCodeLang } from '@lexical/code';
-import { $getNearestNodeFromDOMNode } from 'lexical';
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { Suspense, lazy, useEffect, useRef, useState } from "react";
+import {
+  $isCodeNode,
+  CodeNode,
+  getLanguageFriendlyName,
+  normalizeCodeLang
+} from "@lexical/code";
+import { $getNearestNodeFromDOMNode } from "lexical";
 
-import { useDebounce } from '@/hooks/core/use-debounce';
-import { getMouseInfo } from './utils-code-action-menu-plugin-editor';
+import { useDebounce } from "@/hooks/core/use-debounce";
+import { getMouseInfo } from "./utils-code-action-menu-plugin-editor";
 import {
   PrettierButtonCodeAction,
   canBePrettier,
   type PrettierFormatError
-} from './prettier/prettier-button-code-action';
-import { AlertDialog, AlertDialogContent } from '@/components/ui/alert-dialog';
-import { Loader } from '@/components/loader/loader';
-import { CopyButtonCodeAction } from './copy/copy-button-code-action';
+} from "./prettier/prettier-button-code-action";
+import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
+import { Loader } from "@/components/loader/loader";
+import { CopyButtonCodeAction } from "./copy/copy-button-code-action";
 
 const PrettierAlertDialog = lazy(() =>
-  import('./prettier/prettier-alert-dialog').then(module => ({
+  import("./prettier/prettier-alert-dialog").then(module => ({
     default: module.PrettierAlertDialog
   }))
 );
@@ -34,15 +39,16 @@ const CODE_PADDING = 8;
 export const ContainerCodeActionMenuPluginEditor = ({ anchorElem }: Props) => {
   const [editor] = useLexicalComposerContext();
   const [isShown, setShown] = useState(false);
-  const [lang, setLang] = useState('');
+  const [lang, setLang] = useState("");
   const [position, setPosition] = useState<Position>({
-    right: '0',
-    top: '0'
+    right: "0",
+    top: "0"
   });
   const codeSetRef = useRef<Set<string>>(new Set());
   const [shouldListenMouseMove, setShouldListenMouseMove] = useState(false);
   const codeDOMNodeRef = useRef<HTMLElement | null>(null);
-  const [prettierError, setPrettierError] = useState<PrettierFormatError | null>(null);
+  const [prettierError, setPrettierError] =
+    useState<PrettierFormatError | null>(null);
 
   const debouncedOnMouseMove = useDebounce(
     (event: MouseEvent) => {
@@ -60,18 +66,19 @@ export const ContainerCodeActionMenuPluginEditor = ({ anchorElem }: Props) => {
       codeDOMNodeRef.current = codeDOMNode;
 
       let codeNode: CodeNode | null = null;
-      let _lang = '';
+      let _lang = "";
 
       editor.update(() => {
         const maybeCodeNode = $getNearestNodeFromDOMNode(codeDOMNode);
         if ($isCodeNode(maybeCodeNode)) {
           codeNode = maybeCodeNode;
-          _lang = codeNode.getLanguage() || '';
+          _lang = codeNode.getLanguage() || "";
         }
       });
 
       if (codeNode) {
-        const { right: editorElemRight, y: editorElemY } = anchorElem.getBoundingClientRect();
+        const { right: editorElemRight, y: editorElemY } =
+          anchorElem.getBoundingClientRect();
         const { right, y } = codeDOMNode.getBoundingClientRect();
         setLang(_lang);
         setShown(true);
@@ -90,12 +97,12 @@ export const ContainerCodeActionMenuPluginEditor = ({ anchorElem }: Props) => {
       return;
     }
 
-    document.addEventListener('mousemove', debouncedOnMouseMove);
+    document.addEventListener("mousemove", debouncedOnMouseMove);
 
     return () => {
       setShown(false);
       debouncedOnMouseMove.cancel();
-      document.removeEventListener('mousemove', debouncedOnMouseMove);
+      document.removeEventListener("mousemove", debouncedOnMouseMove);
     };
   }, [shouldListenMouseMove, debouncedOnMouseMove]);
 
@@ -103,12 +110,12 @@ export const ContainerCodeActionMenuPluginEditor = ({ anchorElem }: Props) => {
     editor.getEditorState().read(() => {
       for (const [key, type] of mutations) {
         switch (type) {
-          case 'created':
+          case "created":
             codeSetRef.current.add(key);
             setShouldListenMouseMove(codeSetRef.current.size > 0);
             break;
 
-          case 'updated':
+          case "updated":
             if (codeSetRef.current.has(key)) {
               break;
             }
@@ -117,7 +124,7 @@ export const ContainerCodeActionMenuPluginEditor = ({ anchorElem }: Props) => {
             setShouldListenMouseMove(codeSetRef.current.size > 0);
             break;
 
-          case 'destroyed':
+          case "destroyed":
             codeSetRef.current.delete(key);
             setShouldListenMouseMove(codeSetRef.current.size > 0);
             break;

@@ -1,10 +1,10 @@
-import { Mutation, Resolver } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
+import { Mutation, Resolver } from "@nestjs/graphql";
+import { UseGuards } from "@nestjs/common";
 
-import { DeleteAvatarCoreMembersService } from './delete.service';
+import { DeleteAvatarCoreMembersService } from "./delete.service";
 
-import { User, CurrentUser } from '@/utils/decorators/user.decorator';
-import { AuthGuards } from '@/utils/guards/auth.guards';
+import { User, CurrentUser } from "@/utils/decorators/user.decorator";
+import { AuthGuards } from "@/utils/guards/auth.guards";
 
 @Resolver()
 export class DeleteAvatarCoreMembersResolver {
@@ -12,7 +12,9 @@ export class DeleteAvatarCoreMembersResolver {
 
   @Mutation(() => String)
   @UseGuards(AuthGuards)
-  async core_members__avatar__delete(@CurrentUser() currentUser: User): Promise<string> {
+  async core_members__avatar__delete(
+    @CurrentUser() currentUser: User
+  ): Promise<string> {
     return await this.service.deleteAvatar(currentUser);
   }
 }

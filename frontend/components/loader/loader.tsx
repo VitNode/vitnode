@@ -1,6 +1,6 @@
-import { Loader2 } from 'lucide-react';
+import { Loader2 } from "lucide-react";
 
-import { cx } from '@/functions/classnames';
+import { cn } from "@/functions/classnames";
 
 interface Props {
   className?: string;
@@ -9,10 +9,10 @@ interface Props {
 
 export const Loader = ({ className, small }: Props) => {
   return (
-    <div className={cx('flex justify-center items-center', className)}>
+    <div className={cn("flex justify-center items-center", className)}>
       <Loader2
-        className={cx('h-10 w-10 animate-spin', {
-          'h-4 w-4': small
+        className={cn("h-10 w-10 animate-spin", {
+          "h-4 w-4": small
         })}
       />
     </div>

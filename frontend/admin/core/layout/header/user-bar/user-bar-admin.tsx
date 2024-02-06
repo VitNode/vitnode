@@ -1,22 +1,27 @@
-'use client';
+"use client";
 
-import { Home, LogOut } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { toast } from 'sonner';
+import { Home, LogOut } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
-import { Button } from '@/components/ui/button';
-import { AvatarUser } from '@/components/user/avatar/avatar-user';
-import { useSessionAdmin } from '@/admin/core/hooks/use-session-admin';
-import { ItemUserBarAdmin } from './item-user-bar-admin';
-import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
-import { Separator } from '@/components/ui/separator';
-import { mutationApi } from './mutation-api';
+import { Button } from "@/components/ui/button";
+import { AvatarUser } from "@/components/user/avatar/avatar-user";
+import { useSessionAdmin } from "@/admin/core/hooks/use-session-admin";
+import { ItemUserBarAdmin } from "./item-user-bar-admin";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTrigger
+} from "@/components/ui/sheet";
+import { Separator } from "@/components/ui/separator";
+import { mutationApi } from "./mutation-api";
 
-import { ListNavAdmin } from '../../nav/list/list-nav-admin';
+import { ListNavAdmin } from "../../nav/list/list-nav-admin";
 
 export const UserBarAdmin = () => {
-  const t = useTranslations('admin');
-  const tCore = useTranslations('core');
+  const t = useTranslations("admin");
+  const tCore = useTranslations("core");
   const { session } = useSessionAdmin();
 
   if (!session) return null;
@@ -25,7 +30,12 @@ export const UserBarAdmin = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" className="rounded-full" size="icon" tooltip={tCore('open_menu')}>
+        <Button
+          variant="ghost"
+          className="rounded-full"
+          size="icon"
+          tooltip={tCore("open_menu")}
+        >
           <AvatarUser user={{ name, ...rest }} sizeInRem={2} />
         </Button>
       </SheetTrigger>
@@ -35,7 +45,9 @@ export const UserBarAdmin = () => {
           <AvatarUser user={{ name, ...rest }} sizeInRem={1.75} />
           <div className="flex flex-col gap-1">
             <p className="font-medium leading-none text-base">{name}</p>
-            <p className="text-sm leading-none text-muted-foreground">{email}</p>
+            <p className="text-sm leading-none text-muted-foreground">
+              {email}
+            </p>
           </div>
         </SheetHeader>
 
@@ -49,7 +61,7 @@ export const UserBarAdmin = () => {
 
         <div className="px-2">
           <ItemUserBarAdmin href="/" target="_blank">
-            <Home /> <span>{t('home_page')}</span>
+            <Home /> <span>{t("home_page")}</span>
           </ItemUserBarAdmin>
 
           <Separator className="my-2" />
@@ -58,13 +70,13 @@ export const UserBarAdmin = () => {
             onClick={async () => {
               const mutation = await mutationApi();
               if (mutation?.error) {
-                toast.error(tCore('errors.title'), {
-                  description: tCore('errors.internal_server_error')
+                toast.error(tCore("errors.title"), {
+                  description: tCore("errors.internal_server_error")
                 });
               }
             }}
           >
-            <LogOut /> <span>{tCore('user-bar.log_out')}</span>
+            <LogOut /> <span>{tCore("user-bar.log_out")}</span>
           </ItemUserBarAdmin>
         </div>
       </SheetContent>

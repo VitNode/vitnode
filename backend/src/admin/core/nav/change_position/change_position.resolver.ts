@@ -1,10 +1,10 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
+import { Args, Mutation, Resolver } from "@nestjs/graphql";
+import { UseGuards } from "@nestjs/common";
 
-import { ChangePositionAdminNavService } from './change_position.service';
-import { ChangePositionAdminNavArgs } from './dto/change_position.args';
+import { ChangePositionAdminNavService } from "./change_position.service";
+import { ChangePositionAdminNavArgs } from "./dto/change_position.args";
 
-import { AdminAuthGuards } from '@/utils/guards/admin-auth.guards';
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
 
 @Resolver()
 export class ChangePositionAdminNavResolver {

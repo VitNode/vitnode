@@ -1,15 +1,15 @@
-import { useTranslations } from 'next-intl';
-import { useFormStatus } from 'react-dom';
+import { useTranslations } from "next-intl";
+import { useFormStatus } from "react-dom";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 
 export const SubmitContentDeleteThemeActionsAdmin = () => {
-  const t = useTranslations('admin.core.styles.themes.delete');
+  const t = useTranslations("admin.core.styles.themes.delete");
   const { pending } = useFormStatus();
 
   return (
     <Button variant="destructive" type="submit" loading={pending}>
-      {t('submit')}
+      {t("submit")}
     </Button>
   );
 };

@@ -1,16 +1,18 @@
-'use server';
+"use server";
 
-import { cookies } from 'next/headers';
-import { revalidatePath } from 'next/cache';
+import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Groups__Admin__Delete,
   type Core_Groups__Admin__DeleteMutation,
   type Core_Groups__Admin__DeleteMutationVariables
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
-export const mutationApi = async (variables: Core_Groups__Admin__DeleteMutationVariables) => {
+export const mutationApi = async (
+  variables: Core_Groups__Admin__DeleteMutationVariables
+) => {
   try {
     const { data } = await fetcher<
       Core_Groups__Admin__DeleteMutation,
@@ -23,7 +25,7 @@ export const mutationApi = async (variables: Core_Groups__Admin__DeleteMutationV
       }
     });
 
-    revalidatePath('/admin/members/groups', 'page');
+    revalidatePath("/admin/members/groups", "page");
 
     return { data };
   } catch (error) {

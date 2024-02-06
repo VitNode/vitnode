@@ -1,22 +1,38 @@
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { Check, Link, X } from 'lucide-react';
-import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
-import { $getSelection, $isRangeSelection, ElementNode, TextNode } from 'lexical';
-import type { RangeSelection } from 'lexical';
-import { $isAtNodeEnd } from '@lexical/selection';
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { PopoverClose } from '@radix-ui/react-popover';
-import { $findMatchingParent } from '@lexical/utils';
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { Check, Link, X } from "lucide-react";
+import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
+import {
+  $getSelection,
+  $isRangeSelection,
+  ElementNode,
+  TextNode
+} from "lexical";
+import type { RangeSelection } from "lexical";
+import { $isAtNodeEnd } from "@lexical/selection";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { PopoverClose } from "@radix-ui/react-popover";
+import { $findMatchingParent } from "@lexical/utils";
 
-import { useUpdateStateEditor } from '../hooks/use-update-state-editor';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Toggle } from '@/components/ui/toggle';
+import { useUpdateStateEditor } from "../hooks/use-update-state-editor";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger
+} from "@/components/ui/popover";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
+import { Toggle } from "@/components/ui/toggle";
 
-export const getSelectedNode = (selection: RangeSelection): TextNode | ElementNode => {
+export const getSelectedNode = (
+  selection: RangeSelection
+): TextNode | ElementNode => {
   const anchor = selection.anchor;
   const focus = selection.focus;
   const anchorNode = selection.anchor.getNode();
@@ -32,14 +48,14 @@ export const getSelectedNode = (selection: RangeSelection): TextNode | ElementNo
   }
 };
 
-const SUPPORTED_URL_PROTOCOLS = new Set(['https:', 'mailto:', 'sms:', 'tel:']);
+const SUPPORTED_URL_PROTOCOLS = new Set(["https:", "mailto:", "sms:", "tel:"]);
 
 export const sanitizeUrl = (url: string) => {
   try {
     const parsedUrl = new URL(url);
     // eslint-disable-next-line no-script-url
     if (!SUPPORTED_URL_PROTOCOLS.has(parsedUrl.protocol)) {
-      return 'about:blank';
+      return "about:blank";
     }
   } catch {
     return url;
@@ -49,10 +65,10 @@ export const sanitizeUrl = (url: string) => {
 };
 
 export const LinkButtonEditor = () => {
-  const t = useTranslations('core.editor');
-  const tCore = useTranslations('core');
+  const t = useTranslations("core.editor");
+  const tCore = useTranslations("core");
   const [isLink, setIsLink] = useState(false);
-  const [linkUrl, setLinkUrl] = useState('https://');
+  const [linkUrl, setLinkUrl] = useState("https://");
   const [editor] = useLexicalComposerContext();
 
   useUpdateStateEditor({
@@ -69,7 +85,7 @@ export const LinkButtonEditor = () => {
       } else if ($isLinkNode(node)) {
         setLinkUrl(node.getURL());
       } else {
-        setLinkUrl('');
+        setLinkUrl("");
       }
 
       // Set the link state
@@ -92,11 +108,14 @@ export const LinkButtonEditor = () => {
             <PopoverTrigger asChild>
               <div>
                 <Toggle
-                  aria-label={t('link')}
+                  aria-label={t("link")}
                   pressed={isLink}
                   onClick={() => {
                     if (!isLink) {
-                      editor.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl('https://'));
+                      editor.dispatchCommand(
+                        TOGGLE_LINK_COMMAND,
+                        sanitizeUrl("https://")
+                      );
                     }
                   }}
                   className="size-9"
@@ -113,7 +132,7 @@ export const LinkButtonEditor = () => {
               variant="ghost"
               size="icon"
               onClick={() => editor.dispatchCommand(TOGGLE_LINK_COMMAND, null)}
-              tooltip={tCore('delete')}
+              tooltip={tCore("delete")}
             >
               <X />
             </Button>
@@ -123,16 +142,19 @@ export const LinkButtonEditor = () => {
                 size="icon"
                 disabled={!linkUrl}
                 onClick={() => {
-                  editor.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl(linkUrl));
+                  editor.dispatchCommand(
+                    TOGGLE_LINK_COMMAND,
+                    sanitizeUrl(linkUrl)
+                  );
                 }}
-                tooltip={tCore('confirm')}
+                tooltip={tCore("confirm")}
               >
                 <Check />
               </Button>
             </PopoverClose>
           </PopoverContent>
 
-          <TooltipContent>{t('link')}</TooltipContent>
+          <TooltipContent>{t("link")}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
     </Popover>

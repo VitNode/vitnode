@@ -1,84 +1,75 @@
-import type { EditorThemeClasses } from 'lexical';
+import type { EditorThemeClasses } from "lexical";
 
 /**
  * ! IMPORTANT
  * ! This file is used to generate the theme editor
  * ! Do not modify this file !!!
- *
- * ? If you want to modify the theme editor, please modify the file: editor.scss
  */
-
-const PREFIX = 'vitnode-editor';
 
 export const themeEditor: EditorThemeClasses = {
   heading: {
-    h1: `${PREFIX}_heading--1`,
-    h2: `${PREFIX}_heading--2`,
-    h3: `${PREFIX}_heading--3`
+    h1: "text-4xl",
+    h2: "text-3xl",
+    h3: "text-2xl",
+    h4: "text-xl"
   },
   text: {
-    bold: `${PREFIX}_text--bold`,
-    italic: `${PREFIX}_text--italic`,
-    underline: `${PREFIX}_text--underline`,
-    underlineStrikethrough: `${PREFIX}_text--underlineStrikethrough`,
-    strikethrough: `${PREFIX}_text--strikethrough`,
-    code: `${PREFIX}_text--code`
+    bold: "font-bold",
+    italic: "italic",
+    underline: "underline",
+    underlineStrikethrough: "underline-strike-through",
+    strikethrough: "line-through",
+    code: "font-mono bg-muted rounded-md p-1.5"
   },
   list: {
-    ul: `${PREFIX}_list--ul`,
-    ulDepth: [
-      `${PREFIX}_list--ulDepth`,
-      `${PREFIX}_list--ulDepth`,
-      `${PREFIX}_list--ulDepth`,
-      `${PREFIX}_list--ulDepth`,
-      `${PREFIX}_list--ulDepth`
-    ],
-    ol: `${PREFIX}_list--ol`,
+    ul: "list-disc ml-6",
+    ulDepth: ["list-disc", "list-disc", "list-disc", "list-disc", "list-disc"],
+    ol: "list-decimal ml-6",
     olDepth: [
-      `${PREFIX}_list--olDepth`,
-      `${PREFIX}_list--olDepth`,
-      `${PREFIX}_list--olDepth`,
-      `${PREFIX}_list--olDepth`,
-      `${PREFIX}_list--olDepth`
+      "list-decimal",
+      "list-decimal",
+      "list-decimal",
+      "list-decimal",
+      "list-decimal"
     ],
     nested: {
-      listitem: `${PREFIX}_list--nested-listitem`
+      listitem: "list-none"
     }
   },
-  paragraph: `${PREFIX}_paragraph`,
-  ltr: `${PREFIX}_ltr`,
-  rtl: `${PREFIX}_rtl`,
-  code: `${PREFIX}_code`,
+  paragraph: "my-2",
+  ltr: "text-left",
+  rtl: "text-right",
+  code: "font-mono bg-muted rounded-md px-2 py-3 pl-14 block relative before:content-[attr(data-gutter)] before:absolute before:top-0 before:left-0 before:min-w-[3rem] before:text-right before:whitespace-pre-wrap before:py-3 before:px-1 before:bg-background/40 before:border-r before:border-input before:text-muted-foreground",
   codeHighlight: {
-    atrule: `${PREFIX}_code--atrule`,
-    attr: `${PREFIX}_code--attr`,
-    boolean: `${PREFIX}_code--boolean`,
-    builtin: `${PREFIX}_code--builtin`,
-    cdata: `${PREFIX}_code--cdata`,
-    char: `${PREFIX}_code--char`,
-    class: `${PREFIX}_code--class`,
-    'class-name': `${PREFIX}_code--class-name`,
-    comment: `${PREFIX}_code--comment`,
-    constant: `${PREFIX}_code--constant`,
-    deleted: `${PREFIX}_code--deleted`,
-    doctype: `${PREFIX}_code--doctype`,
-    entity: `${PREFIX}_code--entity`,
-    function: `${PREFIX}_code--function`,
-    important: `${PREFIX}_code--important`,
-    inserted: `${PREFIX}_code--inserted`,
-    keyword: `${PREFIX}_code--keyword`,
-    namespace: `${PREFIX}_code--namespace`,
-    number: `${PREFIX}_code--number`,
-    operator: `${PREFIX}_code--operator`,
-    prolog: `${PREFIX}_code--prolog`,
-    property: `${PREFIX}_code--property`,
-    punctuation: `${PREFIX}_code--punctuation`,
-    regex: `${PREFIX}_code--regex`,
-    selector: `${PREFIX}_code--selector`,
-    string: `${PREFIX}_code--string`,
-    symbol: `${PREFIX}_code--symbol`,
-    tag: `${PREFIX}_code--tag`,
-    url: `${PREFIX}_code--url`,
-    variable: `${PREFIX}_code--variable`
+    atrule: "text-orange-700 dark:text-orange-500",
+    attr: "text-pink-700 dark:text-pink-400",
+    boolean: "text-pink-700 dark:text-pink-400",
+    builtin: "text-teal-700 dark:text-teal-500",
+    cdata: "text-green-700 dark:text-green-500",
+    char: "text-green-700 dark:text-green-500",
+    class: "text-orange-700 dark:text-orange-500",
+    "class-name": "text-orange-700 dark:text-orange-500",
+    comment: "text-gray-600 dark:text-gray-400",
+    constant: "text-red-700 dark:text-red-400",
+    deleted: "text-red-700 dark:text-red-400",
+    doctype: "text-blue-600 dark:text-blue-400",
+    entity: "text-blue-600 dark:text-blue-400",
+    function: "text-blue-600 dark:text-blue-400",
+    important: "text-red-700 dark:text-red-400",
+    inserted: "text-blue-600 dark:text-blue-400",
+    keyword: "text-purple-600 dark:text-purple-400",
+    namespace: "text-blue-600 dark:text-blue-400",
+    number: "text-orange-700 dark:text-orange-500",
+    operator: "text-purple-600 dark:text-purple-400",
+    prolog: "text-blue-600 dark:text-blue-400",
+    property: "text-orange-700 dark:text-orange-500",
+    punctuation: "text-gray-600 dark:text-gray-400",
+    regex: "text-red-700 dark:text-red-400",
+    selector: "text-red-700 dark:text-red-400",
+    string: "text-green-700 dark:text-green-500",
+    symbol: "text-red-700 dark:text-red-400",
+    tag: "text-sky-700 dark:text-sky-500",
+    url: "text-green-700 dark:text-green-500",
+    variable: "text-orange-700 dark:text-orange-500"
   }
 };

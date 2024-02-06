@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useTranslations } from 'next-intl';
+import { useTranslations } from "next-intl";
 
-import { CardContent, CardFooter } from '@/components/ui/card';
+import { CardContent, CardFooter } from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -11,16 +11,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage
-} from '@/components/ui/form';
-import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Progress } from '@/components/ui/progress';
-import { removeSpecialCharacters } from '@/functions/remove-special-characters';
+} from "@/components/ui/form";
+import { useSignUpView } from "@/hooks/core/sign/up/use-sign-up-view";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Progress } from "@/components/ui/progress";
+import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 
 export const AccountInstallConfigsView = () => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
   const { form, onSubmit } = useSignUpView({
     installPage: true
   });
@@ -34,16 +34,18 @@ export const AccountInstallConfigsView = () => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('sign_up.form.name.label')}</FormLabel>
+                <FormLabel>{t("sign_up.form.name.label")}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
-                <FormDescription>{t('sign_up.form.name.desc')}</FormDescription>
+                <FormDescription>{t("sign_up.form.name.desc")}</FormDescription>
                 {field.value.length > 0 && (
                   <FormDescription>
-                    {t.rich('sign_up.form.name.your_id', {
+                    {t.rich("sign_up.form.name.your_id", {
                       id: () => (
-                        <span className="font-medium">{removeSpecialCharacters(field.value)}</span>
+                        <span className="font-medium">
+                          {removeSpecialCharacters(field.value)}
+                        </span>
                       )
                     })}
                   </FormDescription>
@@ -58,7 +60,7 @@ export const AccountInstallConfigsView = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('sign_up.form.email.label')}</FormLabel>
+                <FormLabel>{t("sign_up.form.email.label")}</FormLabel>
                 <FormControl>
                   <Input {...field} type="email" />
                 </FormControl>
@@ -86,7 +88,7 @@ export const AccountInstallConfigsView = () => {
 
               return (
                 <FormItem>
-                  <FormLabel>{t('sign_up.form.password.label')}</FormLabel>
+                  <FormLabel>{t("sign_up.form.password.label")}</FormLabel>
                   <FormControl>
                     <Input {...field} type="password" />
                   </FormControl>
@@ -96,7 +98,9 @@ export const AccountInstallConfigsView = () => {
                         <span>Weak</span>
                         <span>Strong</span>
                       </div>
-                      <Progress value={(100 / regexArray.length) * passRegexPassword} />
+                      <Progress
+                        value={(100 / regexArray.length) * passRegexPassword}
+                      />
                     </div>
                   )}
                   <FormMessage />
@@ -111,11 +115,16 @@ export const AccountInstallConfigsView = () => {
             render={({ field }) => (
               <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
                 <FormControl>
-                  <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
                 </FormControl>
                 <div className="space-y-1 leading-none">
-                  <FormLabel>{t('sign_up.form.terms.label')}</FormLabel>
-                  <FormDescription>{t('sign_up.form.terms.desc')}</FormDescription>
+                  <FormLabel>{t("sign_up.form.terms.label")}</FormLabel>
+                  <FormDescription>
+                    {t("sign_up.form.terms.desc")}
+                  </FormDescription>
                 </div>
               </FormItem>
             )}
@@ -128,7 +137,7 @@ export const AccountInstallConfigsView = () => {
             disabled={!form.formState.isValid}
             loading={form.formState.isSubmitting}
           >
-            {t('sign_up.form.submit')}
+            {t("sign_up.form.submit")}
           </Button>
         </CardFooter>
       </form>

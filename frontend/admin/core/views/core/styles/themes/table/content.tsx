@@ -1,42 +1,45 @@
-import type { ColumnDef } from '@tanstack/react-table';
-import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
-import { ExternalLink } from 'lucide-react';
+import type { ColumnDef } from "@tanstack/react-table";
+import { useTranslations } from "next-intl";
+import { useMemo } from "react";
+import { ExternalLink } from "lucide-react";
 
-import { DataTable } from '@/components/data-table/data-table';
-import { HeaderSortingDataTable } from '@/components/data-table/header';
-import { DateFormat } from '@/components/date-format/date-format';
-import { Badge } from '@/components/ui/badge';
-import type { Core_Themes__Admin__ShowQuery, ShowAdminThemes } from '@/graphql/hooks';
-import { ActionsItemThemesAdmin } from './actions/actions';
+import { DataTable } from "@/components/data-table/data-table";
+import { HeaderSortingDataTable } from "@/components/data-table/header";
+import { DateFormat } from "@/components/date-format/date-format";
+import { Badge } from "@/components/ui/badge";
+import type {
+  Core_Themes__Admin__ShowQuery,
+  ShowAdminThemes
+} from "@/graphql/hooks";
+import { ActionsItemThemesAdmin } from "./actions/actions";
 
 export const ContentTableThemesAdmin = ({
   core_themes__admin__show: { edges, pageInfo }
 }: Core_Themes__Admin__ShowQuery) => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
 
   const columns: ColumnDef<ShowAdminThemes>[] = useMemo(
     () => [
       {
-        header: t('table.name'),
-        accessorKey: 'name',
+        header: t("table.name"),
+        accessorKey: "name",
         cell: ({ row }) => {
           const data = row.original;
 
           return (
             <div className="flex gap-2 items-center">
               <span className="font-semibold">{data.name}</span>
-              {process.env.NODE_ENV === 'development' && (
+              {process.env.NODE_ENV === "development" && (
                 <Badge variant="outline">ID: {data.id}</Badge>
               )}
-              {data.default && <Badge>{t('default')}</Badge>}
+              {data.default && <Badge>{t("default")}</Badge>}
             </div>
           );
         }
       },
       {
-        header: t('table.version'),
-        accessorKey: 'version',
+        header: t("table.version"),
+        accessorKey: "version",
         cell: ({ row }) => {
           const data = row.original;
 
@@ -45,14 +48,16 @@ export const ContentTableThemesAdmin = ({
           return (
             <span className="flex gap-1">
               <span>{data.version}</span>
-              <span className="text-muted-foreground">({data.version_code})</span>
+              <span className="text-muted-foreground">
+                ({data.version_code})
+              </span>
             </span>
           );
         }
       },
       {
-        header: t('table.author'),
-        accessorKey: 'author',
+        header: t("table.author"),
+        accessorKey: "author",
         cell: ({ row }) => {
           const data = row.original;
 
@@ -70,9 +75,13 @@ export const ContentTableThemesAdmin = ({
       },
       {
         header: val => {
-          return <HeaderSortingDataTable {...val}>{t('table.created')}</HeaderSortingDataTable>;
+          return (
+            <HeaderSortingDataTable {...val}>
+              {t("table.created")}
+            </HeaderSortingDataTable>
+          );
         },
-        accessorKey: 'created',
+        accessorKey: "created",
         cell: ({ row }) => {
           const data = row.original;
 
@@ -80,7 +89,7 @@ export const ContentTableThemesAdmin = ({
         }
       },
       {
-        id: 'actions',
+        id: "actions",
         cell: ({ row }) => {
           const data = row.original;
 
@@ -99,8 +108,8 @@ export const ContentTableThemesAdmin = ({
       columns={columns}
       // searchPlaceholder={t('search_placeholder')}
       defaultSorting={{
-        sortBy: 'created',
-        sortDirection: 'desc'
+        sortBy: "created",
+        sortDirection: "desc"
       }}
     />
   );

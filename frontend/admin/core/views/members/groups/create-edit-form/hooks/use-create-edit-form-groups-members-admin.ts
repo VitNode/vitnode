@@ -1,33 +1,33 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslations } from 'next-intl';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-import { toast } from 'sonner';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { toast } from "sonner";
 
-import { zodTextLanguageInputType } from '@/components/text-language-input';
-import type { ShowAdminGroups } from '@/graphql/hooks';
-import { mutationCreateApi } from './mutation-create-api';
-import { mutationEditApi } from './mutation-edit-api';
-import { useDialog } from '@/components/ui/dialog';
-import { useTextLang } from '@/hooks/core/use-text-lang';
-import { usePathname, useRouter } from '@/i18n';
+import { zodTextLanguageInputType } from "@/components/text-language-input";
+import type { ShowAdminGroups } from "@/graphql/hooks";
+import { mutationCreateApi } from "./mutation-create-api";
+import { mutationEditApi } from "./mutation-edit-api";
+import { useDialog } from "@/components/ui/dialog";
+import { useTextLang } from "@/hooks/core/use-text-lang";
+import { usePathname, useRouter } from "@/i18n";
 
 export interface CreateEditFormGroupsMembersAdminArgs {
-  data?: Pick<ShowAdminGroups, 'name' | 'id'>;
+  data?: Pick<ShowAdminGroups, "name" | "id">;
 }
 
 export const useCreateEditFormGroupsMembersAdmin = ({
   data
 }: CreateEditFormGroupsMembersAdminArgs) => {
-  const t = useTranslations('admin.members.groups');
-  const tCore = useTranslations('core');
+  const t = useTranslations("admin.members.groups");
+  const tCore = useTranslations("core");
   const { setOpen } = useDialog();
   const { convertText } = useTextLang();
   const pathname = usePathname();
   const { push } = useRouter();
 
   const formSchema = z.object({
-    name: zodTextLanguageInputType.min(1, tCore('forms.empty')),
+    name: zodTextLanguageInputType.min(1, tCore("forms.empty")),
     test: z.string()
   });
 
@@ -35,7 +35,7 @@ export const useCreateEditFormGroupsMembersAdmin = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: data?.name ?? [],
-      test: ''
+      test: ""
     }
   });
 
@@ -61,8 +61,8 @@ export const useCreateEditFormGroupsMembersAdmin = ({
     }
 
     if (isError) {
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error')
+      toast.error(tCore("errors.title"), {
+        description: tCore("errors.internal_server_error")
       });
 
       return;
@@ -70,7 +70,7 @@ export const useCreateEditFormGroupsMembersAdmin = ({
 
     push(pathname);
 
-    toast.success(data ? t('edit.success') : t('create.success'), {
+    toast.success(data ? t("edit.success") : t("create.success"), {
       description: convertText(values.name)
     });
 

@@ -1,13 +1,13 @@
-import { ChevronDown, Settings } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { ChevronDown, Settings } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu';
-import { LockToggleActionsTopic } from '@/themes/1/forum/views/forum/topic/actions/lock-toggle/lock-toggle';
+} from "@/components/ui/dropdown-menu";
+import { LockToggleActionsTopic } from "./lock-toggle/lock-toggle";
 
 interface Props {
   id: number;
@@ -17,13 +17,13 @@ interface Props {
 }
 
 export const ActionsTopic = ({ id, state }: Props) => {
-  const t = useTranslations('forum.topics.actions');
+  const t = useTranslations("forum.topics.actions");
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="sm">
-          <Settings /> {t('title')} <ChevronDown />
+          <Settings /> {t("title")} <ChevronDown />
         </Button>
       </DropdownMenuTrigger>
 

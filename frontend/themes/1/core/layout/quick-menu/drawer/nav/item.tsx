@@ -1,10 +1,10 @@
-import { buttonVariants } from '@/components/ui/button';
-import { DrawerClose } from '@/components/ui/drawer';
-import { cx } from '@/functions/classnames';
-import type { ShowCoreNav } from '@/graphql/hooks';
-import { useTextLang } from '@/hooks/core/use-text-lang';
-import { Link, usePathname } from '@/i18n';
-import { classNameDrawerQuickMenu } from '../drawer';
+import { buttonVariants } from "@/components/ui/button";
+import { DrawerClose } from "@/components/ui/drawer";
+import { cn } from "@/functions/classnames";
+import type { ShowCoreNav } from "@/graphql/hooks";
+import { useTextLang } from "@/hooks/core/use-text-lang";
+import { Link, usePathname } from "@/i18n";
+import { classNameDrawerQuickMenu } from "../drawer";
 
 export const ItemNavDrawerQuickMenu = ({
   description,
@@ -12,25 +12,30 @@ export const ItemNavDrawerQuickMenu = ({
   href,
   id,
   name
-}: Omit<ShowCoreNav, 'children' | '__typename'>) => {
+}: Omit<ShowCoreNav, "children" | "__typename">) => {
   const { convertText } = useTextLang();
   const pathname = usePathname();
-  const active = href === pathname || (pathname.startsWith(href) && href !== '/');
+  const active =
+    href === pathname || (pathname.startsWith(href) && href !== "/");
 
   return (
     <DrawerClose key={id} asChild>
       <Link
         href={href}
-        className={cx(
+        className={cn(
           buttonVariants({
-            variant: 'ghost',
-            className: cx(classNameDrawerQuickMenu, 'flex-col h-auto items-start gap-1', {
-              'bg-accent': active
-            })
+            variant: "ghost",
+            className: cn(
+              classNameDrawerQuickMenu,
+              "flex-col h-auto items-start gap-1",
+              {
+                "bg-accent": active
+              }
+            )
           })
         )}
-        target={external ? '_blank' : undefined}
-        rel={external ? 'noopener noreferrer' : undefined}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener noreferrer" : undefined}
       >
         <span>{convertText(name)}</span>
         {description.length > 0 && (

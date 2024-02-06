@@ -1,16 +1,18 @@
-'use server';
+"use server";
 
-import { cookies } from 'next/headers';
-import { revalidatePath } from 'next/cache';
+import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Themes__Admin__Download,
   type Core_Themes__Admin__DownloadMutation,
   type Core_Themes__Admin__DownloadMutationVariables
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
-export const mutationApi = async (variables: Core_Themes__Admin__DownloadMutationVariables) => {
+export const mutationApi = async (
+  variables: Core_Themes__Admin__DownloadMutationVariables
+) => {
   try {
     const { data } = await fetcher<
       Core_Themes__Admin__DownloadMutation,
@@ -24,7 +26,7 @@ export const mutationApi = async (variables: Core_Themes__Admin__DownloadMutatio
     });
 
     if (variables.version && variables.versionCode) {
-      revalidatePath('/admin/core/styles/themes', 'page');
+      revalidatePath("/admin/core/styles/themes", "page");
     }
 
     return { data };

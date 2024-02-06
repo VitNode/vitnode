@@ -1,8 +1,8 @@
 // import { exec } from 'child_process';
 
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 
-import { DatabaseService } from '@/database/database.service';
+import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class TestPluginsService {
@@ -27,6 +27,6 @@ export class TestPluginsService {
     //   console.log(`stdout: ${stdout}`);
     // });
 
-    return 'test';
+    return "test";
   }
 }

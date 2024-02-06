@@ -1,10 +1,10 @@
-import { existsSync, unlink } from 'fs';
+import { existsSync, unlink } from "fs";
 
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 
-import { DeleteCoreFilesArgs } from './dto/delete.args';
+import { DeleteCoreFilesArgs } from "./dto/delete.args";
 
-import { CustomError } from '@/utils/errors/CustomError';
+import { CustomError } from "@/utils/errors/CustomError";
 
 @Injectable()
 export class DeleteCoreFilesService {
@@ -12,7 +12,7 @@ export class DeleteCoreFilesService {
     // Check if folder exists
     if (!existsSync(dir_folder)) {
       throw new CustomError({
-        code: 'FOLDER_NOT_FOUND',
+        code: "FOLDER_NOT_FOUND",
         message: `Folder "${dir_folder}" not found`
       });
     }
@@ -20,7 +20,7 @@ export class DeleteCoreFilesService {
     // Check if file exists
     if (!existsSync(`${dir_folder}/${name}`)) {
       throw new CustomError({
-        code: 'FILE_NOT_FOUND',
+        code: "FILE_NOT_FOUND",
         message: `File "${name}" not found`
       });
     }
@@ -35,6 +35,6 @@ export class DeleteCoreFilesService {
       if (err) console.error(err);
     });
 
-    return 'Success!';
+    return "Success!";
   }
 }

@@ -1,19 +1,19 @@
-import { Injectable } from '@nestjs/common';
-import { count, eq } from 'drizzle-orm';
+import { Injectable } from "@nestjs/common";
+import { count, eq } from "drizzle-orm";
 
-import { CreateForumForumsArgs } from './dto/create.args';
-import { CreateForumForumsObj } from './dto/create.obj';
+import { CreateForumForumsArgs } from "./dto/create.args";
+import { CreateForumForumsObj } from "./dto/create.obj";
 
-import { CustomError } from '@/utils/errors/CustomError';
-import { currentDate } from '@/functions/date';
-import { DatabaseService } from '@/database/database.service';
+import { CustomError } from "@/utils/errors/CustomError";
+import { currentDate } from "@/functions/date";
+import { DatabaseService } from "@/database/database.service";
 import {
   forum_forums,
   forum_forums_description,
   forum_forums_name,
   forum_forums_permissions
-} from '@/src/admin/forum/database/schema/forums';
-import { NotFoundError } from '@/utils/errors/not-found-error';
+} from "@/src/admin/forum/database/schema/forums";
+import { NotFoundError } from "@/utils/errors/not-found-error";
 
 @Injectable()
 export class CreateForumForumsService {
@@ -26,27 +26,32 @@ export class CreateForumForumsService {
     permissions
   }: CreateForumForumsArgs): Promise<CreateForumForumsObj> {
     if (parent_id) {
-      const parent = await this.databaseService.db.query.forum_forums.findFirst({
-        where: (table, { eq }) => eq(table.id, parent_id)
-      });
+      const parent = await this.databaseService.db.query.forum_forums.findFirst(
+        {
+          where: (table, { eq }) => eq(table.id, parent_id)
+        }
+      );
 
       if (!parent) {
         throw new CustomError({
-          code: 'FORUMS_PARENT_NOT_FOUND',
-          message: 'Parent not found'
+          code: "FORUMS_PARENT_NOT_FOUND",
+          message: "Parent not found"
         });
       }
     }
 
-    const theMostHighestPosition = await this.databaseService.db.query.forum_forums.findFirst({
-      where: (table, { eq }) => eq(table.parent_id, parent_id || null),
-      orderBy: (table, { desc }) => desc(table.position)
-    });
+    const theMostHighestPosition =
+      await this.databaseService.db.query.forum_forums.findFirst({
+        where: (table, { eq }) => eq(table.parent_id, parent_id || null),
+        orderBy: (table, { desc }) => desc(table.position)
+      });
 
     const data = await this.databaseService.db
       .insert(forum_forums)
       .values({
-        position: theMostHighestPosition ? theMostHighestPosition.position + 1 : 0,
+        position: theMostHighestPosition
+          ? theMostHighestPosition.position + 1
+          : 0,
         created: currentDate(),
         parent_id,
         can_all_create: permissions.can_all_create,
@@ -98,7 +103,7 @@ export class CreateForumForumsService {
     });
 
     if (!forum) {
-      throw new NotFoundError('Forum');
+      throw new NotFoundError("Forum");
     }
 
     const parent = await this.databaseService.db.query.forum_forums.findFirst({

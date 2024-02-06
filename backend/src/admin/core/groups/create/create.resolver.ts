@@ -1,11 +1,11 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
+import { Args, Mutation, Resolver } from "@nestjs/graphql";
+import { UseGuards } from "@nestjs/common";
 
-import { CreateAdminGroupsService } from './create.service';
-import { CreateAdminGroupsArgs } from './dto/create.args';
-import { ShowAdminGroups } from '../show/dto/show.obj';
+import { CreateAdminGroupsService } from "./create.service";
+import { CreateAdminGroupsArgs } from "./dto/create.args";
+import { ShowAdminGroups } from "../show/dto/show.obj";
 
-import { AdminAuthGuards } from '@/utils/guards/admin-auth.guards';
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
 
 @Resolver()
 export class CreateAdminGroupsResolver {
@@ -13,7 +13,9 @@ export class CreateAdminGroupsResolver {
 
   @Mutation(() => ShowAdminGroups)
   @UseGuards(AdminAuthGuards)
-  async core_groups__admin_create(@Args() args: CreateAdminGroupsArgs): Promise<ShowAdminGroups> {
+  async core_groups__admin_create(
+    @Args() args: CreateAdminGroupsArgs
+  ): Promise<ShowAdminGroups> {
     return await this.service.create(args);
   }
 }

@@ -1,7 +1,7 @@
-import { KeyRound, LogOut, Settings, Shield, User } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { KeyRound, LogOut, Settings, Shield, User } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,14 +10,14 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
   DropdownMenuLabel
-} from '@/components/ui/dropdown-menu';
-import { useSession } from '@/hooks/core/use-session';
-import { useSignOutAPI } from '@/hooks/core/sign/out/use-sign-out-api';
-import { useRouter } from '@/i18n';
-import { AvatarUser } from '@/components/user/avatar/avatar-user';
+} from "@/components/ui/dropdown-menu";
+import { useSession } from "@/hooks/core/use-session";
+import { useSignOutAPI } from "@/hooks/core/sign/out/use-sign-out-api";
+import { useRouter } from "@/i18n";
+import { AvatarUser } from "@/components/user/avatar/avatar-user";
 
 export const AuthUserBar = () => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
   const { push } = useRouter();
   const { session } = useSession();
   const { onSubmit } = useSignOutAPI();
@@ -28,7 +28,12 @@ export const AuthUserBar = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="sm:flex hidden rounded-full" size="icon" tooltip="">
+        <Button
+          variant="ghost"
+          className="sm:flex hidden rounded-full"
+          size="icon"
+          tooltip=""
+        >
           <AvatarUser user={session} sizeInRem={1.75} />
         </Button>
       </DropdownMenuTrigger>
@@ -36,7 +41,9 @@ export const AuthUserBar = () => {
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="font-medium leading-none text-base">{name}</p>
-            <p className="text-xs leading-none text-muted-foreground">{email}</p>
+            <p className="text-xs leading-none text-muted-foreground">
+              {email}
+            </p>
           </div>
         </DropdownMenuLabel>
 
@@ -45,11 +52,11 @@ export const AuthUserBar = () => {
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={() => push(`/profile/${name_seo}`)}>
             <User />
-            <span>{t('user-bar.my_profile')}</span>
+            <span>{t("user-bar.my_profile")}</span>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => push('/settings')}>
+          <DropdownMenuItem onClick={() => push("/settings")}>
             <Settings />
-            <span>{t('user-bar.settings')}</span>
+            <span>{t("user-bar.settings")}</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
 
@@ -59,16 +66,18 @@ export const AuthUserBar = () => {
 
             <DropdownMenuGroup>
               {is_mod && (
-                <DropdownMenuItem onClick={() => push('/modcp')}>
+                <DropdownMenuItem onClick={() => push("/modcp")}>
                   <Shield />
-                  <span>{t('user-bar.mod_cp')}</span>
+                  <span>{t("user-bar.mod_cp")}</span>
                 </DropdownMenuItem>
               )}
 
               {is_admin && (
-                <DropdownMenuItem onClick={() => window.open('/admin', '_blank')}>
+                <DropdownMenuItem
+                  onClick={() => window.open("/admin", "_blank")}
+                >
                   <KeyRound />
-                  <span>{t('user-bar.admin_cp')}</span>
+                  <span>{t("user-bar.admin_cp")}</span>
                 </DropdownMenuItem>
               )}
             </DropdownMenuGroup>
@@ -80,7 +89,7 @@ export const AuthUserBar = () => {
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={async () => await onSubmit()}>
             <LogOut />
-            <span>{t('user-bar.log_out')}</span>
+            <span>{t("user-bar.log_out")}</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

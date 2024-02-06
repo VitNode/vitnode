@@ -1,25 +1,32 @@
-import * as fs from 'fs';
+import * as fs from "fs";
 
-import { Injectable } from '@nestjs/common';
-import { count } from 'drizzle-orm';
+import { Injectable } from "@nestjs/common";
+import { count } from "drizzle-orm";
 
-import { ShowCoreLanguagesArgs } from './dto/show.args';
-import { ShowCoreLanguagesObj } from './dto/show.obj';
+import { ShowCoreLanguagesArgs } from "./dto/show.args";
+import { ShowCoreLanguagesObj } from "./dto/show.obj";
 
-import { CustomError } from '@/utils/errors/CustomError';
-import { ConfigType } from '@/types/config.type';
-import { DatabaseService } from '@/database/database.service';
-import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
-import { core_languages } from '@/src/admin/core/database/schema/languages';
-import { SortDirectionEnum } from '@/types/database/sortDirection.type';
-import { configPath } from '@/config';
+import { CustomError } from "@/utils/errors/CustomError";
+import { ConfigType } from "@/types/config.type";
+import { DatabaseService } from "@/database/database.service";
+import {
+  inputPaginationCursor,
+  outputPagination
+} from "@/functions/database/pagination";
+import { core_languages } from "@/src/admin/core/database/schema/languages";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
+import { configPath } from "@/config";
 
 @Injectable()
 export class ShowCoreLanguageService {
   constructor(private databaseService: DatabaseService) {}
 
-  async show({ cursor, first, last }: ShowCoreLanguagesArgs): Promise<ShowCoreLanguagesObj> {
-    const configFile = fs.readFileSync(configPath, 'utf8');
+  async show({
+    cursor,
+    first,
+    last
+  }: ShowCoreLanguagesArgs): Promise<ShowCoreLanguagesObj> {
+    const configFile = fs.readFileSync(configPath, "utf8");
     const config: ConfigType = JSON.parse(configFile);
 
     const pagination = await inputPaginationCursor({
@@ -28,10 +35,10 @@ export class ShowCoreLanguageService {
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: 'ASC', key: 'id', schema: core_languages.id },
+      primaryCursor: { order: "ASC", key: "id", schema: core_languages.id },
       defaultSortBy: {
         direction: SortDirectionEnum.asc,
-        column: 'id'
+        column: "id"
       }
     });
 
@@ -54,12 +61,14 @@ export class ShowCoreLanguageService {
 
     // Check valid data with config
     edges.forEach(edge => {
-      const currentLanguage = config.languages.locales.find(locale => locale.key === edge.code);
+      const currentLanguage = config.languages.locales.find(
+        locale => locale.key === edge.code
+      );
 
       // Check key
       if (!currentLanguage) {
         throw new CustomError({
-          code: 'INVALID_CONFIG_WITH_DATABASE',
+          code: "INVALID_CONFIG_WITH_DATABASE",
           message: `Language "${edge.name}" is not found in config.json`
         });
       }
@@ -67,7 +76,7 @@ export class ShowCoreLanguageService {
       // Check enabled status
       if (currentLanguage.enabled !== edge.enabled) {
         throw new CustomError({
-          code: 'INVALID_CONFIG_WITH_DATABASE',
+          code: "INVALID_CONFIG_WITH_DATABASE",
           message: `Language "${edge.name}" enabled status is not match with config.json`
         });
       }
@@ -75,7 +84,7 @@ export class ShowCoreLanguageService {
       // Check valid default language
       if (edge.default && config.languages.default !== edge.code) {
         throw new CustomError({
-          code: 'INVALID_CONFIG_WITH_DATABASE',
+          code: "INVALID_CONFIG_WITH_DATABASE",
           message: `Language "${edge.name}" is default but not match with config.json`
         });
       }

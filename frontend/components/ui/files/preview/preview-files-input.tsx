@@ -1,4 +1,4 @@
-import { ItemPreviewFilesInput } from './item/item-preview-files-input';
+import { ItemPreviewFilesInput } from "./item/item-preview-files-input";
 
 interface Props {
   onChange: (e: File[]) => void;

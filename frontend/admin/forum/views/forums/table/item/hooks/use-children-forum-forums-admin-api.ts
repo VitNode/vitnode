@@ -1,7 +1,11 @@
-import { useQuery, useQueryClient, type InfiniteData } from '@tanstack/react-query';
+import {
+  useQuery,
+  useQueryClient,
+  type InfiniteData
+} from "@tanstack/react-query";
 
-import { APIKeys } from '@/graphql/api-keys';
-import { fetcher } from '@/graphql/fetcher';
+import { APIKeys } from "@/graphql/api-keys";
+import { fetcher } from "@/graphql/fetcher";
 import {
   Forum_Forums__Admin__Show,
   type Maybe,
@@ -9,7 +13,7 @@ import {
   type Forum_Forums__Admin__ShowQueryVariables,
   type ChildrenShowForumForums,
   type ShowForumForumsAdmin
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
 interface Args {
   parentId: number;
@@ -23,9 +27,9 @@ const updateState = ({
   parentId
 }: {
   data: Forum_Forums__Admin__ShowQuery;
-  edges: Omit<ShowForumForumsAdmin, 'permissions'>[];
+  edges: Omit<ShowForumForumsAdmin, "permissions">[];
   parentId: number;
-}): Omit<ShowForumForumsAdmin, 'permissions'>[] => {
+}): Omit<ShowForumForumsAdmin, "permissions">[] => {
   return edges.map(edge => {
     if (edge.id === parentId) {
       return {

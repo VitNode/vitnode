@@ -1,10 +1,10 @@
-import { AnyColumn, SQL, and, asc, desc, eq, gt, lt, or } from 'drizzle-orm';
-import { PgTableWithColumns, TableConfig } from 'drizzle-orm/pg-core';
+import { AnyColumn, SQL, and, asc, desc, eq, gt, lt, or } from "drizzle-orm";
+import { PgTableWithColumns, TableConfig } from "drizzle-orm/pg-core";
 
-import { PageInfo } from '@/types/database/pagination.type';
-import { CustomError } from '@/utils/errors/CustomError';
-import { DatabaseService } from '@/database/database.service';
-import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+import { PageInfo } from "@/types/database/pagination.type";
+import { CustomError } from "@/utils/errors/CustomError";
+import { DatabaseService } from "@/database/database.service";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 type DataInterface<T> = T & {
   id: number;
@@ -78,7 +78,7 @@ export function outputPagination<T>({
 }
 
 // Input Pagination Cursor
-export type Cursor = { key: string; schema: AnyColumn; order?: 'ASC' | 'DESC' };
+export type Cursor = { key: string; schema: AnyColumn; order?: "ASC" | "DESC" };
 
 interface InputPaginationCursorArgs<T extends TableConfig> {
   cursor: number | null;
@@ -124,13 +124,19 @@ export async function inputPaginationCursor<T extends TableConfig>({
 }: InputPaginationCursorArgs<T>): Promise<Return> {
   const cursors: Cursor[] = [...(sortBy ?? []), defaultSortBy].map(item => ({
     key: item.column,
-    order: item.direction === 'asc' ? 'ASC' : 'DESC',
+    order: item.direction === "asc" ? "ASC" : "DESC",
     schema: database[item.column]
   }));
 
   const orderBy: SQL[] = [];
-  for (const { order = 'ASC', schema } of [...cursors, primaryCursor]) {
-    const fn = last ? (order === 'ASC' ? desc : asc) : order === 'ASC' ? asc : desc;
+  for (const { order = "ASC", schema } of [...cursors, primaryCursor]) {
+    const fn = last
+      ? order === "ASC"
+        ? desc
+        : asc
+      : order === "ASC"
+        ? asc
+        : desc;
     const sql = fn(schema);
     orderBy.push(sql);
   }
@@ -145,7 +151,7 @@ export async function inputPaginationCursor<T extends TableConfig>({
 
   if (!database[primaryCursor.key]) {
     throw new CustomError({
-      code: 'PAGINATION_ERROR',
+      code: "PAGINATION_ERROR",
       message: `You must provide \`${primaryCursor.key}\` column in database`
     });
   }
@@ -160,7 +166,7 @@ export async function inputPaginationCursor<T extends TableConfig>({
 
   if (!cursorItem) {
     throw new CustomError({
-      code: 'PAGINATION_ERROR',
+      code: "PAGINATION_ERROR",
       message: `Cursor item not found`
     });
   }
@@ -176,9 +182,11 @@ export async function inputPaginationCursor<T extends TableConfig>({
     const ands: SQL[] = [];
     for (const cursor of posibilities) {
       const lastValue = cursor === posibilities?.at(-1);
-      const { key, order = 'ASC', schema } = cursor;
-      const fn = last ? (order === 'ASC' ? lt : gt) : order === 'ASC' ? gt : lt;
-      const sql = !lastValue ? eq(schema, cursorItem[key]) : fn(schema, cursorItem[key]);
+      const { key, order = "ASC", schema } = cursor;
+      const fn = last ? (order === "ASC" ? lt : gt) : order === "ASC" ? gt : lt;
+      const sql = !lastValue
+        ? eq(schema, cursorItem[key])
+        : fn(schema, cursorItem[key]);
       ands.push(sql);
     }
     const _and = and(...ands);

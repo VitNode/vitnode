@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useTranslations } from 'next-intl';
+import { useTranslations } from "next-intl";
 
-import { buttonVariants } from '@/components/ui/button';
-import { AuthUserBar } from './auth/auth-user-bar';
-import { useSession } from '@/hooks/core/use-session';
-import { Link } from '@/i18n';
+import { buttonVariants } from "@/components/ui/button";
+import { AuthUserBar } from "./auth/auth-user-bar";
+import { useSession } from "@/hooks/core/use-session";
+import { Link } from "@/i18n";
 
 export const UserBar = () => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
   const { session } = useSession();
 
   if (session) {
@@ -20,20 +20,20 @@ export const UserBar = () => {
       <Link
         href="/login"
         className={buttonVariants({
-          size: 'sm',
-          variant: 'outline'
+          size: "sm",
+          variant: "outline"
         })}
       >
-        {t('user-bar.sign_in')}
+        {t("user-bar.sign_in")}
       </Link>
 
       <Link
         href="/register"
         className={buttonVariants({
-          size: 'sm'
+          size: "sm"
         })}
       >
-        {t('user-bar.sign_up')}
+        {t("user-bar.sign_up")}
       </Link>
     </div>
   );

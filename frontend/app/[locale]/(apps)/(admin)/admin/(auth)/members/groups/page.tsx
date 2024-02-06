@@ -1,18 +1,21 @@
-import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
-import { cookies } from 'next/headers';
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { cookies } from "next/headers";
 
-import { GroupsMembersAdminView } from '@/admin/core/views/members/groups/groups-members-admin-view';
-import { fetcher } from '@/graphql/fetcher';
-import { Core_Groups__Admin__Show, ShowAdminGroupsSortingColumnEnum } from '@/graphql/hooks';
+import { GroupsMembersAdminView } from "@/admin/core/views/members/groups/groups-members-admin-view";
+import { fetcher } from "@/graphql/fetcher";
+import {
+  Core_Groups__Admin__Show,
+  ShowAdminGroupsSortingColumnEnum
+} from "@/graphql/hooks";
 import type {
   Core_Groups__Admin__ShowQuery,
   Core_Groups__Admin__ShowQueryVariables
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
   type SearchParamsPagination
-} from '@/hooks/core/utils/use-pagination-api-ssr';
+} from "@/hooks/core/utils/use-pagination-api-ssr";
 
 interface Props {
   params: {
@@ -36,11 +39,16 @@ const getData = async (variables: Core_Groups__Admin__ShowQueryVariables) => {
   return data;
 };
 
-export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: 'admin.members.groups' });
+export async function generateMetadata({
+  params: { locale }
+}: Props): Promise<Metadata> {
+  const t = await getTranslations({
+    locale,
+    namespace: "admin.members.groups"
+  });
 
   return {
-    title: t('title')
+    title: t("title")
   };
 }
 

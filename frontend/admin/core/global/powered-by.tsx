@@ -13,7 +13,12 @@ interface Props {
 
 export const PoweredByVitNode = ({ className }: Props) => {
   return (
-    <a className={className} href="https://vitnode.com/" rel="noopener noreferrer" target="_blank">
+    <a
+      className={className}
+      href="https://vitnode.com/"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
       Powered by VitNode
     </a>
   );

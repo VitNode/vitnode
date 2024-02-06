@@ -1,9 +1,9 @@
 const config = {
-  singleQuote: true,
+  singleQuote: false,
   arrowParens: "avoid",
   trailingComma: "none",
-  printWidth: 100,
-  plugins: ["prettier-plugin-tailwind"],
+  printWidth: 80,
+  plugins: ["prettier-plugin-tailwind"]
 };
 
 export default config;

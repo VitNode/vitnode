@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 
-import { ShowAdminStaffModerators } from '../show/dto/show.obj';
-import { CreateAdminStaffModeratorsArgs } from './dto/create.args';
+import { ShowAdminStaffModerators } from "../show/dto/show.obj";
+import { CreateAdminStaffModeratorsArgs } from "./dto/create.args";
 
-import { CustomError } from '@/utils/errors/CustomError';
-import { currentDate } from '@/functions/date';
-import { DatabaseService } from '@/database/database.service';
-import { core_moderators_permissions } from '@/src/admin/core/database/schema/moderators';
+import { CustomError } from "@/utils/errors/CustomError";
+import { currentDate } from "@/functions/date";
+import { DatabaseService } from "@/database/database.service";
+import { core_moderators_permissions } from "@/src/admin/core/database/schema/moderators";
 
 @Injectable()
 export class CreateAdminStaffModeratorsService {
@@ -19,20 +19,23 @@ export class CreateAdminStaffModeratorsService {
   }: CreateAdminStaffModeratorsArgs): Promise<ShowAdminStaffModerators> {
     if (!group_id && !user_id) {
       throw new CustomError({
-        code: 'BAD_REQUEST',
-        message: 'You must provide either a group_id or a user_id.'
+        code: "BAD_REQUEST",
+        message: "You must provide either a group_id or a user_id."
       });
     }
 
     const findPermission =
-      await this.databaseService.db.query.core_moderators_permissions.findFirst({
-        where: (table, { eq, or }) => or(eq(table.user_id, user_id), eq(table.group_id, group_id))
-      });
+      await this.databaseService.db.query.core_moderators_permissions.findFirst(
+        {
+          where: (table, { eq, or }) =>
+            or(eq(table.user_id, user_id), eq(table.group_id, group_id))
+        }
+      );
 
     if (findPermission) {
       throw new CustomError({
-        code: 'ALREADY_EXISTS',
-        message: 'This user or group already has moderator permissions.'
+        code: "ALREADY_EXISTS",
+        message: "This user or group already has moderator permissions."
       });
     }
 
@@ -47,26 +50,29 @@ export class CreateAdminStaffModeratorsService {
       })
       .returning();
 
-    const data = await this.databaseService.db.query.core_moderators_permissions.findFirst({
-      where: (table, { eq }) => eq(table.id, permission[0].id),
-      with: {
-        user: {
+    const data =
+      await this.databaseService.db.query.core_moderators_permissions.findFirst(
+        {
+          where: (table, { eq }) => eq(table.id, permission[0].id),
           with: {
-            avatar: true,
+            user: {
+              with: {
+                avatar: true,
+                group: {
+                  with: {
+                    name: true
+                  }
+                }
+              }
+            },
             group: {
               with: {
                 name: true
               }
             }
           }
-        },
-        group: {
-          with: {
-            name: true
-          }
         }
-      }
-    });
+      );
 
     if (data.user) {
       return {

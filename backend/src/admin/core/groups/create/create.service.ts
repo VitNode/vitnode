@@ -1,12 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 
-import { ShowAdminGroups } from '../show/dto/show.obj';
-import { CreateAdminGroupsArgs } from './dto/create.args';
+import { ShowAdminGroups } from "../show/dto/show.obj";
+import { CreateAdminGroupsArgs } from "./dto/create.args";
 
-import { currentDate } from '@/functions/date';
-import { CustomError } from '@/utils/errors/CustomError';
-import { DatabaseService } from '@/database/database.service';
-import { core_groups, core_groups_names } from '@/src/admin/core/database/schema/groups';
+import { currentDate } from "@/functions/date";
+import { CustomError } from "@/utils/errors/CustomError";
+import { DatabaseService } from "@/database/database.service";
+import {
+  core_groups,
+  core_groups_names
+} from "@/src/admin/core/database/schema/groups";
 
 @Injectable()
 export class CreateAdminGroupsService {
@@ -17,8 +20,8 @@ export class CreateAdminGroupsService {
 
     if (!transformName.length) {
       throw new CustomError({
-        code: 'BAD_REQUEST',
-        message: 'Name is required'
+        code: "BAD_REQUEST",
+        message: "Name is required"
       });
     }
 

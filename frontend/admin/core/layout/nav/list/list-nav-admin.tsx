@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Group,
@@ -10,14 +10,14 @@ import {
   Settings,
   UserCog,
   Users
-} from 'lucide-react';
-import type { ReactNode } from 'react';
-import { useState } from 'react';
-import * as Accordion from '@radix-ui/react-accordion';
-import { useSelectedLayoutSegments } from 'next/navigation';
+} from "lucide-react";
+import type { ReactNode } from "react";
+import { useState } from "react";
+import * as Accordion from "@radix-ui/react-accordion";
+import { useSelectedLayoutSegments } from "next/navigation";
 
-import { ItemListNavAdmin } from './item/item-list-nav-admin';
-import { cx } from '@/functions/classnames';
+import { ItemListNavAdmin } from "./item/item-list-nav-admin";
+import { cn } from "@/functions/classnames";
 
 interface Props {
   children?: ReactNode;
@@ -27,13 +27,13 @@ interface Props {
 
 export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
   const segments = useSelectedLayoutSegments();
-  const [activeItems, setActiveItems] = useState([segments.at(0) ?? 'core']);
+  const [activeItems, setActiveItems] = useState([segments.at(0) ?? "core"]);
 
   return (
     <Accordion.Root
       type="multiple"
       defaultValue={activeItems}
-      className={cx('flex flex-col', className)}
+      className={cn("flex flex-col", className)}
     >
       <ItemListNavAdmin
         id="core"
@@ -42,28 +42,28 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
         onClickItem={onClickItem}
         items={[
           {
-            id: 'dashboard',
-            href: '/dashboard',
+            id: "dashboard",
+            href: "/dashboard",
             icon: LayoutDashboard
           },
           {
-            id: 'general',
-            href: '/general',
+            id: "general",
+            href: "/general",
             icon: Settings
           },
           {
-            id: 'plugins',
-            href: '/plugins',
+            id: "plugins",
+            href: "/plugins",
             icon: PlugIcon
           },
           {
-            id: 'styles',
-            href: '/styles',
+            id: "styles",
+            href: "/styles",
             icon: Paintbrush
           },
           {
-            id: 'langs',
-            href: '/langs',
+            id: "langs",
+            href: "/langs",
             icon: Languages
           }
         ]}
@@ -75,18 +75,18 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
         onClickItem={onClickItem}
         items={[
           {
-            id: 'list',
-            href: '/users',
+            id: "list",
+            href: "/users",
             icon: Users
           },
           {
-            id: 'groups',
-            href: '/groups',
+            id: "groups",
+            href: "/groups",
             icon: Group
           },
           {
-            id: 'staff',
-            href: '/staff',
+            id: "staff",
+            href: "/staff",
             icon: UserCog
           }
         ]}
@@ -98,8 +98,8 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
         onClickItem={onClickItem}
         items={[
           {
-            id: 'forums',
-            href: '/forums',
+            id: "forums",
+            href: "/forums",
             icon: MessagesSquare
           }
         ]}

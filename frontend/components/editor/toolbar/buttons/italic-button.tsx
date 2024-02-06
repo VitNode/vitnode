@@ -1,15 +1,20 @@
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { Italic } from 'lucide-react';
-import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND } from 'lexical';
-import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { Italic } from "lucide-react";
+import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND } from "lexical";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
 
-import { Toggle } from '@/components/ui/toggle';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { useUpdateStateEditor } from '../hooks/use-update-state-editor';
+import { Toggle } from "@/components/ui/toggle";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
+import { useUpdateStateEditor } from "../hooks/use-update-state-editor";
 
 export const ItalicButtonEditor = () => {
-  const t = useTranslations('core.editor.text');
+  const t = useTranslations("core.editor.text");
   const [isItalic, setIsItalic] = useState(false);
   const [editor] = useLexicalComposerContext();
 
@@ -18,7 +23,7 @@ export const ItalicButtonEditor = () => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
-      setIsItalic(selection.hasFormat('italic'));
+      setIsItalic(selection.hasFormat("italic"));
     }
   });
 
@@ -28,8 +33,10 @@ export const ItalicButtonEditor = () => {
         <TooltipTrigger asChild>
           <div>
             <Toggle
-              aria-label={t('italic')}
-              onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic')}
+              aria-label={t("italic")}
+              onClick={() =>
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic")
+              }
               pressed={isItalic}
               className="size-9"
             >
@@ -38,7 +45,7 @@ export const ItalicButtonEditor = () => {
           </div>
         </TooltipTrigger>
 
-        <TooltipContent>{t('italic')}</TooltipContent>
+        <TooltipContent>{t("italic")}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

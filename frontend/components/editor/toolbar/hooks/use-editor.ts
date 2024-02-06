@@ -6,18 +6,18 @@ import {
   List,
   ListFilter,
   ListOrdered
-} from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
-import { createContext, useContext } from 'react';
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { createContext, useContext } from "react";
 
 export enum BLOCK_NAMES {
-  PARAGRAPH = 'paragraph',
-  H1 = 'h1',
-  H2 = 'h2',
-  H3 = 'h3',
-  BULLET = 'bullet',
-  NUMBER = 'number',
-  CODE = 'code'
+  PARAGRAPH = "paragraph",
+  H1 = "h1",
+  H2 = "h2",
+  H3 = "h3",
+  BULLET = "bullet",
+  NUMBER = "number",
+  CODE = "code"
 }
 
 export const AVAILABLE_BLOCKS: { icon: LucideIcon; value: BLOCK_NAMES }[] = [

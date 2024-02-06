@@ -1,9 +1,9 @@
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { useEffect } from 'react';
-import { useLocale } from 'next-intl';
-import { $createParagraphNode, $createTextNode, $getRoot } from 'lexical';
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { useEffect } from "react";
+import { useLocale } from "next-intl";
+import { $createParagraphNode, $createTextNode, $getRoot } from "lexical";
 
-import type { TextLanguage } from '@/graphql/hooks';
+import type { TextLanguage } from "@/graphql/hooks";
 
 interface Props {
   value: TextLanguage[];
@@ -33,7 +33,9 @@ export const LoadReadOnlyEditor = ({ value }: Props) => {
   useEffect(() => {
     if (value.length === 0) return;
 
-    const currentValue = value.find(item => item.language_code === locale)?.value;
+    const currentValue = value.find(
+      item => item.language_code === locale
+    )?.value;
     const lastValue = value.at(-1)?.value;
 
     if (!currentValue && lastValue) {

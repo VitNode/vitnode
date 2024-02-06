@@ -1,4 +1,4 @@
-import { Virtuoso } from 'react-virtuoso';
+import { Virtuoso } from "react-virtuoso";
 import {
   DndContext,
   closestCorners,
@@ -8,39 +8,46 @@ import {
   useSensors,
   MeasuringStrategy,
   type UniqueIdentifier
-} from '@dnd-kit/core';
+} from "@dnd-kit/core";
 import {
   SortableContext,
   arrayMove,
   sortableKeyboardCoordinates,
   verticalListSortingStrategy
-} from '@dnd-kit/sortable';
-import { useMemo, useState } from 'react';
-import { useQueryClient, type InfiniteData } from '@tanstack/react-query';
-import { useTranslations } from 'next-intl';
+} from "@dnd-kit/sortable";
+import { useMemo, useState } from "react";
+import { useQueryClient, type InfiniteData } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 
-import { ItemTableForumsForumAdmin } from './item/item';
-import { useForumForumsAdminAPI } from './hooks/use-forum-forums-admin-api';
-import { buildTree, flattenTree, getForumProjection, removeChildrenOf } from './functions';
+import { ItemTableForumsForumAdmin } from "./item/item";
+import { useForumForumsAdminAPI } from "./hooks/use-forum-forums-admin-api";
+import {
+  buildTree,
+  flattenTree,
+  getForumProjection,
+  removeChildrenOf
+} from "./functions";
 import type {
   Forum_Forums__Admin__ShowFlattenedItem,
   Forum_Forums__Admin__ShowWithProjection
-} from './types';
-import { Loader } from '@/components/loader/loader';
-import { ErrorAdminView } from '@/admin/core/global/error-admin-view';
-import { APIKeys } from '@/graphql/api-keys';
-import type { Forum_Forums__Admin__ShowQuery } from '@/graphql/hooks';
-import { mutationChangePositionApi } from './hooks/mutation-change-position-api';
+} from "./types";
+import { Loader } from "@/components/loader/loader";
+import { ErrorAdminView } from "@/admin/core/global/error-admin-view";
+import { APIKeys } from "@/graphql/api-keys";
+import type { Forum_Forums__Admin__ShowQuery } from "@/graphql/hooks";
+import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
 
 const indentationWidth = 20;
 
 export const ContentTableForumsForumAdmin = () => {
-  const t = useTranslations('core');
-  const { data, fetchNextPage, hasNextPage, isError, isLoading } = useForumForumsAdminAPI();
+  const t = useTranslations("core");
+  const { data, fetchNextPage, hasNextPage, isError, isLoading } =
+    useForumForumsAdminAPI();
   const queryClient = useQueryClient();
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
-  const [projected, setProjected] = useState<Forum_Forums__Admin__ShowWithProjection | null>();
+  const [projected, setProjected] =
+    useState<Forum_Forums__Admin__ShowWithProjection | null>();
   const [isOpenChildren, setIsOpenChildren] = useState<UniqueIdentifier[]>([]);
 
   const resetState = () => {
@@ -57,26 +64,31 @@ export const ContentTableForumsForumAdmin = () => {
   );
 
   // DndKit doesn't support nested sortable, so we need to flatten the data in one array
-  const flattenedItems: Forum_Forums__Admin__ShowFlattenedItem[] = useMemo(() => {
-    const tree = flattenTree(data);
+  const flattenedItems: Forum_Forums__Admin__ShowFlattenedItem[] =
+    useMemo(() => {
+      const tree = flattenTree(data);
 
-    const collapsedItems = tree.reduce<UniqueIdentifier[]>(
-      (acc, { children, id }) =>
-        !isOpenChildren.includes(id) && children?.length ? [...acc, id] : acc,
-      []
-    );
+      const collapsedItems = tree.reduce<UniqueIdentifier[]>(
+        (acc, { children, id }) =>
+          !isOpenChildren.includes(id) && children?.length ? [...acc, id] : acc,
+        []
+      );
 
-    return removeChildrenOf({
-      items: tree,
-      ids: activeId ? [activeId, ...collapsedItems] : collapsedItems
-    });
-  }, [data, activeId, isOpenChildren]);
+      return removeChildrenOf({
+        items: tree,
+        ids: activeId ? [activeId, ...collapsedItems] : collapsedItems
+      });
+    }, [data, activeId, isOpenChildren]);
 
-  const sortedIds = useMemo(() => flattenedItems.map(({ id }) => id), [flattenedItems]);
+  const sortedIds = useMemo(
+    () => flattenedItems.map(({ id }) => id),
+    [flattenedItems]
+  );
 
   if (isLoading) return <Loader />;
   if (isError) return <ErrorAdminView />;
-  if (!data || data.length === 0) return <div className="text-center">{t('no_results')}</div>;
+  if (!data || data.length === 0)
+    return <div className="text-center">{t("no_results")}</div>;
 
   return (
     <DndContext
@@ -115,16 +127,17 @@ export const ContentTableForumsForumAdmin = () => {
 
         if (!projected || !over) return;
         const { depth, parentId } = projected;
-        const clonedItems: Forum_Forums__Admin__ShowFlattenedItem[] = JSON.parse(
-          JSON.stringify(flattenTree(data))
-        );
+        const clonedItems: Forum_Forums__Admin__ShowFlattenedItem[] =
+          JSON.parse(JSON.stringify(flattenTree(data)));
 
         const overIndex = clonedItems.findIndex(({ id }) => id === over.id);
         const activeIndex = clonedItems.findIndex(({ id }) => id === active.id);
         const activeTreeItem = clonedItems[activeIndex];
         clonedItems[activeIndex] = { ...activeTreeItem, depth, parentId };
         const sortedItems = arrayMove(clonedItems, activeIndex, overIndex);
-        const findItemsParent = sortedItems.filter(i => i.parentId === parentId);
+        const findItemsParent = sortedItems.filter(
+          i => i.parentId === parentId
+        );
 
         // Update position of the item
         findItemsParent.forEach((item, index) => {
@@ -181,7 +194,9 @@ export const ContentTableForumsForumAdmin = () => {
         }
 
         const indexToMove =
-          active.id === over.id ? -1 : flattenedItems.find(i => i.id === over.id)?.position ?? -1;
+          active.id === over.id
+            ? -1
+            : flattenedItems.find(i => i.id === over.id)?.position ?? -1;
 
         // Do nothing if drag and drop on the same item on the same level
         if (findActive?.parentId === parentId && active.id === over.id) {

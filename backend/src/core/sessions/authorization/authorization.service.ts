@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 
-import { InternalAuthorizationCoreSessionsService } from './internal/internal_authorization.service';
-import { AuthorizationCoreSessionsObj } from './dto/authorization.obj';
+import { InternalAuthorizationCoreSessionsService } from "./internal/internal_authorization.service";
+import { AuthorizationCoreSessionsObj } from "./dto/authorization.obj";
 
-import { Ctx } from '@/types/context.type';
-import { DatabaseService } from '@/database/database.service';
+import { Ctx } from "@/types/context.type";
+import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class AuthorizationCoreSessionsService {
@@ -15,9 +15,11 @@ export class AuthorizationCoreSessionsService {
     private configService: ConfigService
   ) {}
 
-  protected async getThemeId({ req }: Pick<Ctx, 'req'>): Promise<number | null> {
+  protected async getThemeId({
+    req
+  }: Pick<Ctx, "req">): Promise<number | null> {
     const cookie_theme_id: string | null =
-      req.cookies[this.configService.getOrThrow('cookies.theme_id.name')];
+      req.cookies[this.configService.getOrThrow("cookies.theme_id.name")];
 
     if (cookie_theme_id) {
       const theme = await this.databaseService.db.query.core_themes.findFirst({
@@ -39,9 +41,12 @@ export class AuthorizationCoreSessionsService {
     group_id: number;
     user_id: number;
   }): Promise<boolean> {
-    return !!(await this.databaseService.db.query.core_admin_permissions.findFirst({
-      where: (table, { eq, or }) => or(eq(table.group_id, group_id), eq(table.user_id, user_id))
-    }));
+    return !!(await this.databaseService.db.query.core_admin_permissions.findFirst(
+      {
+        where: (table, { eq, or }) =>
+          or(eq(table.group_id, group_id), eq(table.user_id, user_id))
+      }
+    ));
   }
 
   protected async isMod({
@@ -51,12 +56,18 @@ export class AuthorizationCoreSessionsService {
     group_id: number;
     user_id: number;
   }): Promise<boolean> {
-    return !!(await this.databaseService.db.query.core_moderators_permissions.findFirst({
-      where: (table, { eq, or }) => or(eq(table.group_id, group_id), eq(table.user_id, user_id))
-    }));
+    return !!(await this.databaseService.db.query.core_moderators_permissions.findFirst(
+      {
+        where: (table, { eq, or }) =>
+          or(eq(table.group_id, group_id), eq(table.user_id, user_id))
+      }
+    ));
   }
 
-  async authorization({ req, res }: Ctx): Promise<AuthorizationCoreSessionsObj> {
+  async authorization({
+    req,
+    res
+  }: Ctx): Promise<AuthorizationCoreSessionsObj> {
     const theme_id = await this.getThemeId({ req });
 
     try {
@@ -77,8 +88,14 @@ export class AuthorizationCoreSessionsService {
       return {
         user: {
           ...user,
-          is_admin: await this.isAdmin({ group_id: user.group.id, user_id: user.id }),
-          is_mod: await this.isMod({ group_id: user.group.id, user_id: user.id }),
+          is_admin: await this.isAdmin({
+            group_id: user.group.id,
+            user_id: user.id
+          }),
+          is_mod: await this.isMod({
+            group_id: user.group.id,
+            user_id: user.id
+          }),
           avatar_color: user.avatar_color
         },
         theme_id

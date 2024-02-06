@@ -1,5 +1,5 @@
-import { ArgsType, Field } from '@nestjs/graphql';
-import { Matches, MaxLength, MinLength } from 'class-validator';
+import { ArgsType, Field } from "@nestjs/graphql";
+import { Matches, MaxLength, MinLength } from "class-validator";
 
 @ArgsType()
 export class CreateAdminPluginsArgs {

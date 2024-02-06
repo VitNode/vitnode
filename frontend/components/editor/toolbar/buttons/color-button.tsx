@@ -1,41 +1,53 @@
-import { useState } from 'react';
-import { Baseline, Check, Palette, X } from 'lucide-react';
-import { $getSelection, $isRangeSelection } from 'lexical';
-import { $getSelectionStyleValueForProperty, $patchStyleText } from '@lexical/selection';
-import { useTranslations } from 'next-intl';
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { useState } from "react";
+import { Baseline, Check, Palette, X } from "lucide-react";
+import { $getSelection, $isRangeSelection } from "lexical";
+import {
+  $getSelectionStyleValueForProperty,
+  $patchStyleText
+} from "@lexical/selection";
+import { useTranslations } from "next-intl";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
-import { useUpdateStateEditor } from '../hooks/use-update-state-editor';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { useUpdateStateEditor } from "../hooks/use-update-state-editor";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger
+} from "@/components/ui/popover";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const basicColors = [
-  '#d0021b',
-  '#f5a623',
-  '#f8e71c',
-  '#8b572a',
-  '#7ed321',
-  '#417505',
-  '#bd10e0',
-  '#9013fe',
-  '#4a90e2',
-  '#50e3c2',
-  '#b8e986',
-  '#4a4a4a',
-  '#9b9b9b'
+  "#d0021b",
+  "#f5a623",
+  "#f8e71c",
+  "#8b572a",
+  "#7ed321",
+  "#417505",
+  "#bd10e0",
+  "#9013fe",
+  "#4a90e2",
+  "#50e3c2",
+  "#b8e986",
+  "#4a4a4a",
+  "#9b9b9b"
 ];
 
 interface Props {
-  type: 'color' | 'background-color';
+  type: "color" | "background-color";
 }
 
 export const ColorButtonEditor = ({ type }: Props) => {
-  const t = useTranslations('core.editor');
-  const tCore = useTranslations('core');
-  const [fontColor, setFontColor] = useState('');
-  const [customColor, setCustomColor] = useState('');
+  const t = useTranslations("core.editor");
+  const tCore = useTranslations("core");
+  const [fontColor, setFontColor] = useState("");
+  const [customColor, setCustomColor] = useState("");
   const [editor] = useLexicalComposerContext();
 
   useUpdateStateEditor({
@@ -43,7 +55,7 @@ export const ColorButtonEditor = ({ type }: Props) => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
-      setFontColor($getSelectionStyleValueForProperty(selection, type, ''));
+      setFontColor($getSelectionStyleValueForProperty(selection, type, ""));
     }
   });
 
@@ -62,14 +74,18 @@ export const ColorButtonEditor = ({ type }: Props) => {
         <Tooltip>
           <TooltipTrigger asChild>
             <PopoverTrigger asChild>
-              <Button size="sm" variant="ghost" className="[&>svg]:w-5 [&>svg]:h-5">
-                {type === 'color' ? <Baseline /> : <Palette />}
+              <Button
+                size="sm"
+                variant="ghost"
+                className="[&>svg]:w-5 [&>svg]:h-5"
+              >
+                {type === "color" ? <Baseline /> : <Palette />}
                 <div
                   className="size-5 border rounded-md"
                   style={{
                     backgroundColor: fontColor
                       ? fontColor
-                      : `hsl(var(--${type === 'color' ? 'foreground' : 'card'}))`
+                      : `hsl(var(--${type === "color" ? "foreground" : "card"}))`
                   }}
                 />
               </Button>
@@ -95,7 +111,9 @@ export const ColorButtonEditor = ({ type }: Props) => {
                     variant="ghost"
                     className="w-7 h-7 border [&>svg]:w-4 [&>svg]:h-4"
                     size="icon"
-                    onClick={() => setCustomColor(fontColor ? fontColor : '#000000')}
+                    onClick={() =>
+                      setCustomColor(fontColor ? fontColor : "#000000")
+                    }
                     tooltip=""
                   >
                     <Palette />
@@ -107,9 +125,9 @@ export const ColorButtonEditor = ({ type }: Props) => {
                     className="w-full"
                     variant="secondary"
                     size="sm"
-                    onClick={() => updateColor('')}
+                    onClick={() => updateColor("")}
                   >
-                    {t('set_default_color')}
+                    {t("set_default_color")}
                   </Button>
                 )}
               </>
@@ -125,8 +143,8 @@ export const ColorButtonEditor = ({ type }: Props) => {
                   size="icon"
                   className="flex-shrink-0"
                   variant="ghost"
-                  onClick={() => setCustomColor('')}
-                  tooltip={tCore('cancel')}
+                  onClick={() => setCustomColor("")}
+                  tooltip={tCore("cancel")}
                 >
                   <X />
                 </Button>
@@ -135,7 +153,7 @@ export const ColorButtonEditor = ({ type }: Props) => {
                   size="icon"
                   className="flex-shrink-0"
                   onClick={() => updateColor(customColor)}
-                  tooltip={tCore('confirm')}
+                  tooltip={tCore("confirm")}
                 >
                   <Check />
                 </Button>
@@ -144,7 +162,7 @@ export const ColorButtonEditor = ({ type }: Props) => {
           </PopoverContent>
 
           <TooltipContent>
-            {t(type === 'color' ? 'font_color' : 'font_background_color')}
+            {t(type === "color" ? "font_color" : "font_background_color")}
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>

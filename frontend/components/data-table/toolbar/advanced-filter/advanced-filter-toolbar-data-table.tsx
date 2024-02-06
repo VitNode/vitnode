@@ -1,30 +1,41 @@
-import { Filter } from 'lucide-react';
-import type { ReactNode } from 'react';
-import { Suspense } from 'react';
-import { useTranslations } from 'next-intl';
+import { Filter } from "lucide-react";
+import type { ReactNode } from "react";
+import { Suspense } from "react";
+import { useTranslations } from "next-intl";
 
-import { Button } from '../../../ui/button';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '../../../ui/sheet';
-import { Loader } from '../../../loader/loader';
+import { Button } from "../../../ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger
+} from "../../../ui/sheet";
+import { Loader } from "../../../loader/loader";
 
 interface Props {
   children: ReactNode;
 }
 
 export const AdvancedFilterToolbarDataTable = ({ children }: Props) => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
 
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button className="ml-auto" variant="outline" size="icon" tooltip={t('filters')}>
+        <Button
+          className="ml-auto"
+          variant="outline"
+          size="icon"
+          tooltip={t("filters")}
+        >
           <Filter />
         </Button>
       </SheetTrigger>
 
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>{t('filters')}</SheetTitle>
+          <SheetTitle>{t("filters")}</SheetTitle>
         </SheetHeader>
 
         <Suspense fallback={<Loader />}>{children}</Suspense>

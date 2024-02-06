@@ -1,7 +1,11 @@
-import { LinkItemNavSettings } from './link/link-item-nav-settings';
-import { type ItemNavSettingsProps } from '@/hooks/core/settings/use-settings-view';
+import { LinkItemNavSettings } from "./link/link-item-nav-settings";
+import { type ItemNavSettingsProps } from "@/hooks/core/settings/use-settings-view";
 
-export const ItemNavSettings = ({ icon, text, ...props }: ItemNavSettingsProps) => {
+export const ItemNavSettings = ({
+  icon,
+  text,
+  ...props
+}: ItemNavSettingsProps) => {
   const Icon = icon;
 
   return (

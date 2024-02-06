@@ -1,8 +1,8 @@
+import { Callout } from 'nextra/components';
+
 # Pagination
 
-VitNode provide a pagination system using `cursor` pagination to help you retrieve data from the `database`. The pagination system is based on the [Prisma pagination system](https://www.prisma.io/docs/concepts/components/prisma-client/pagination).
-
-import { Callout } from 'nextra/components';
+VitNode provide a pagination system using `cursor` pagination to help you retrieve data from the `database`.
 
 <Callout type="warning" emoji="⚠️">
   VitNode doesn't support the `offset` pagination.
@@ -80,66 +80,167 @@ import { Injectable } from '@nestjs/common';
 import { ShowCoreMembersObj } from './dto/show-core_members.obj';
 import { ShowCoreMembersArgs } from './dto/show-core_members.args';
 
-import { PrismaService } from '@/src/prisma/prisma.service';
+import { DatabaseService } from '@/database/database.service';
 
 @Injectable()
 export class ShowCoreMembersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private databaseService: DatabaseService) {}
 
   async show({ cursor, first, last }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {}
 }
 ```
 
-### Query from database
+### Initial values for pagination
 
-Now we can create query using `Prisma` and pass `inputPagination()` to the `findMany()` method to create the query.
+We will use `inputPaginationCursor()` to create initial values for pagination.
 
 ```ts
-import { inputPagination } from '@/functions/database/pagination/inputPagination';
+import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
+import { core_users } from '@/src/admin/core/database/schema/users';
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
-const edges = await this.prisma.core_members.findMany({
-  ...inputPagination({ first, cursor, last })
+const pagination = await inputPaginationCursor({
+  cursor,
+  database: core_users,
+  databaseService: this.databaseService,
+  first,
+  last,
+  primaryCursor: { order: 'ASC', key: 'id', schema: core_users.id },
+  defaultSortBy: {
+    direction: SortDirectionEnum.desc,
+    column: 'joined'
+  },
+  sortBy
+});
+```
+
+### Query from database
+
+We will use `findMany()` method to get the data from the database. We will use `with` argument to get the `avatar` and `group` data from the `core_users` table.
+
+```ts
+const edges = await this.databaseService.db.query.core_users.findMany({
+  ...pagination,
+  with: {
+    avatar: true,
+    group: {
+      with: {
+        name: true
+      }
+    }
+  }
+});
+```
+
+#### Where argument
+
+If you want to use `where` argument you can pass it to the `findMany()` method like this:
+
+```ts {1-8, 12}
+const where = or(
+  eq(core_users.name_seo, name_seo),
+  or(
+    ilike(core_users.name, `%${search}%`),
+    ilike(core_users.email, `%${search}%`),
+    Number(search) ? eq(core_users.id, Number(search)) : undefined
+  )
+);
+
+const edges = await this.databaseService.db.query.core_users.findMany({
+  ...pagination,
+  where: and(pagination.where, where),
+  with: {
+    avatar: true,
+    group: {
+      with: {
+        name: true
+      }
+    }
+  }
 });
 ```
 
 ### Return values
 
-To complite the `show()` method we need to return a `ShowCoreMembersObj` object. VitNode provide a `outputPagination()` function to create the `pageInfo` object.
+We will use `outputPagination()` to create return values for the query. Remember to create a query `totalCount` to get the total count of the query.
 
 ```ts
-import { outputPagination } from '@/functions/database/pagination/outputPagination';
+import { outputPagination } from '@/functions/database/pagination';
 
-const totalCount = await this.prisma.core_members.count();
+const totalCount = await this.databaseService.db
+  .select({ count: count() })
+  .from(core_users)
+  .where(where);
 
-return outputPagination({ edges, totalCount, first, last });
+return outputPagination({ edges, totalCount, first, cursor, last });
 ```
-
-Please remember to create a query `totalCount` to get the total count of the query.
 
 ### Complite example
 
 ```ts
 import { Injectable } from '@nestjs/common';
+import { and, count, eq, ilike, or } from 'drizzle-orm';
 
-import { ShowCoreMembersObj } from './dto/show-core_members.obj';
-import { ShowCoreMembersArgs } from './dto/show-core_members.args';
+import { ShowCoreMembersObj } from './dto/show.obj';
+import { ShowCoreMembersArgs } from './dto/show.args';
 
-import { PrismaService } from '@/src/prisma/prisma.service';
-import { inputPagination } from '@/functions/database/pagination/inputPagination';
-import { outputPagination } from '@/functions/database/pagination/outputPagination';
+import { DatabaseService } from '@/database/database.service';
+import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
+import { core_users } from '@/src/admin/core/database/schema/users';
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
 export class ShowCoreMembersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private databaseService: DatabaseService) {}
 
-  async show({ cursor, first, last }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
-    const edges = await this.prisma.core_members.findMany({
-      ...inputPagination({ first, cursor, last })
+  async show({
+    cursor,
+    first,
+    last,
+    name_seo,
+    search
+  }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
+    const pagination = await inputPaginationCursor({
+      cursor,
+      database: core_users,
+      databaseService: this.databaseService,
+      first,
+      last,
+      primaryCursor: { order: 'ASC', key: 'id', schema: core_users.id },
+      defaultSortBy: {
+        direction: SortDirectionEnum.desc,
+        column: 'joined'
+      }
     });
 
-    const totalCount = await this.prisma.core_members.count();
+    const where = or(
+      eq(core_users.name_seo, name_seo),
+      or(
+        ilike(core_users.name, `%${search}%`),
+        ilike(core_users.email, `%${search}%`),
+        Number(search) ? eq(core_users.id, Number(search)) : undefined
+      )
+    );
 
-    return outputPagination({ edges, totalCount, first, last });
+    const edges = await this.databaseService.db.query.core_users.findMany({
+      ...pagination,
+      where: and(pagination.where, where),
+      with: {
+        avatar: true,
+        group: {
+          with: {
+            name: true
+          }
+        }
+      }
+    });
+
+    const totalCount = await this.databaseService.db
+      .select({ count: count() })
+      .from(core_users)
+      .where(where);
+
+    return outputPagination({ edges, totalCount, first, cursor, last });
   }
 }
 ```

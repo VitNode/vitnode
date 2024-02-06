@@ -1,19 +1,19 @@
-import { lazy } from 'react';
-import { useTranslations } from 'next-intl';
+import { lazy } from "react";
+import { useTranslations } from "next-intl";
 
-import { FilterToolbarDataTable } from '@/components/data-table/toolbar/filter/filter';
+import { FilterToolbarDataTable } from "@/components/data-table/toolbar/filter/filter";
 
 const ContentGroupsFiltersUsersMembersAdmin = lazy(() =>
-  import('./content-groups-filters-users-members-admin').then(module => ({
+  import("./content-groups-filters-users-members-admin").then(module => ({
     default: module.ContentGroupsFiltersUsersMembersAdmin
   }))
 );
 
 export const GroupsFiltersUsersMembersAdmin = () => {
-  const t = useTranslations('admin.members.users.filters');
+  const t = useTranslations("admin.members.users.filters");
 
   return (
-    <FilterToolbarDataTable title={t('groups')} id="groups">
+    <FilterToolbarDataTable title={t("groups")} id="groups">
       <ContentGroupsFiltersUsersMembersAdmin />
     </FilterToolbarDataTable>
   );

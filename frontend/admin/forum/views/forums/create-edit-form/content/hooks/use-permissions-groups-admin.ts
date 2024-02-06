@@ -1,12 +1,12 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Groups__Admin__Show_Short,
   type Core_Groups__Admin__Show_ShortQuery,
   type Core_Groups__Admin__Show_ShortQueryVariables
-} from '@/graphql/hooks';
-import { APIKeys } from '@/graphql/api-keys';
+} from "@/graphql/hooks";
+import { APIKeys } from "@/graphql/api-keys";
 
 interface Args {
   searchValue: string;

@@ -155,7 +155,8 @@
     },
     "sign_in": {
       "title": "Login",
-      "desc": "Sign in to your account.",
+      "desc": "You don't have an account? <link></link>.",
+      "sign_up": "Sign Up",
       "form": {
         "email": {
           "label": "Email"
@@ -176,7 +177,8 @@
     },
     "sign_up": {
       "title": "Register",
-      "desc": "Create a new account.",
+      "desc": "You already have an account? <link></link>.",
+      "sign_in": "Sign In",
       "form": {
         "name": {
           "label": "Nickname",
@@ -202,7 +204,12 @@
           "label": "Newsletter",
           "desc": "Receive information about new features, updates and events related to the application."
         },
-        "submit": "Sign Up"
+        "submit": "Sign Up",
+        "success": {
+          "title": "Hi <name></name>! 🎉",
+          "desc": "Your account has been created successfully. Now you can sign in.",
+          "sign_in": "Sign In"
+        }
       }
     },
     "settings": {

@@ -1,21 +1,21 @@
-import { mkdirSync, readFileSync } from 'fs';
-import { writeFile } from 'fs/promises';
+import { mkdirSync, readFileSync } from "fs";
+import { writeFile } from "fs/promises";
 
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 
 import {
   changeDatabaseService,
   changeModuleRootSchema,
   createModuleSchema,
   createFunctionsDatabase
-} from './contents';
-import { CreateAdminPluginsArgs } from './dto/create.args';
-import { ShowAdminPlugins } from '../show/dto/show.obj';
+} from "./contents";
+import { CreateAdminPluginsArgs } from "./dto/create.args";
+import { ShowAdminPlugins } from "../show/dto/show.obj";
 
-import { DatabaseService } from '@/database/database.service';
-import { CustomError } from '@/utils/errors/CustomError';
-import { core_plugins } from '../../database/schema/plugins';
-import { currentDate } from '@/functions/date';
+import { DatabaseService } from "@/database/database.service";
+import { CustomError } from "@/utils/errors/CustomError";
+import { core_plugins } from "../../database/schema/plugins";
+import { currentDate } from "@/functions/date";
 
 @Injectable()
 export class CreateAdminPluginsService {
@@ -35,12 +35,15 @@ export class CreateAdminPluginsService {
 
     if (plugin) {
       throw new CustomError({
-        code: 'PLUGIN_ALREADY_EXISTS',
+        code: "PLUGIN_ALREADY_EXISTS",
         message: `Plugin already exists with "${code}" code!`
       });
     }
 
-    const folders: { files: { content: string; name: string }[]; path: string }[] = [
+    const folders: {
+      files: { content: string; name: string }[];
+      path: string;
+    }[] = [
       {
         path: `src/${code}`,
         files: [
@@ -63,7 +66,7 @@ export class CreateAdminPluginsService {
         path: `src/admin/${code}/database`,
         files: [
           {
-            name: 'index.ts',
+            name: "index.ts",
             content: `export default {};\n`
           }
         ]
@@ -90,7 +93,7 @@ export class CreateAdminPluginsService {
 
     // Import module
     const pathModules = `src/modules.module.ts`;
-    const moduleContent = readFileSync(pathModules, 'utf8');
+    const moduleContent = readFileSync(pathModules, "utf8");
     if (!moduleContent.includes(`./${code}/${code}.module`)) {
       await writeFile(
         pathModules,
@@ -102,8 +105,8 @@ export class CreateAdminPluginsService {
     }
 
     // Import module in admin
-    const pathAdminModules = 'src/admin/admin.module.ts';
-    const adminModuleContent = readFileSync(pathAdminModules, 'utf8');
+    const pathAdminModules = "src/admin/admin.module.ts";
+    const adminModuleContent = readFileSync(pathAdminModules, "utf8");
     if (!adminModuleContent.includes(`./${code}/${code}.module`)) {
       await writeFile(
         pathAdminModules,
@@ -116,8 +119,8 @@ export class CreateAdminPluginsService {
     }
 
     // Database
-    const pathDatabaseService = 'database/database.service.ts';
-    const databaseContentService = readFileSync(pathDatabaseService, 'utf8');
+    const pathDatabaseService = "database/database.service.ts";
+    const databaseContentService = readFileSync(pathDatabaseService, "utf8");
     await writeFile(
       pathDatabaseService,
       changeDatabaseService({

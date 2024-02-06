@@ -1,12 +1,11 @@
 {
   "graphql": "GraphQL",
   "database": "Database",
+  "pages": "Pages",
   "authorization": "Authorization",
-  "errors": "Errors",
-  "files": "Files",
   "i18n": "Internationalization (i18n)",
-  "practices": "Best Practices",
+  "files": "Files",
   "sessions": "Sessions",
   "cron": "Task Scheduling (CRON)",
-  "applications": "Applications"
+  "practices": "Best Practices"
 }
