@@ -33,9 +33,7 @@ We're modifying few components to help you load data to the frontend. You can us
 
 ```tsx
 import { Button } from '@/components/ui/button';
-```
 
-```tsx
 export const TestComponent = () => {
   return (
     <Button type="submit" loading={isPending}>
@@ -49,9 +47,7 @@ export const TestComponent = () => {
 
 ```tsx
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
-```
 
-```tsx
 export const TestComponent = () => {
   return <DropdownMenuItem loading={isPending}>{t('testing')}</DropdownMenuItem>;
 };

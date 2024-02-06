@@ -23,9 +23,7 @@ import {
   FormMessage
 } from '@/components/ui/form';
 import { Editor } from '@/components/editor/editor';
-```
 
-```tsx
 <FormField
   control={form.control}
   name="content"
@@ -38,16 +36,14 @@ import { Editor } from '@/components/editor/editor';
       <FormMessage />
     </FormItem>
   )}
-/>
+/>;
 ```
 
 ### Form Schema
 
 ```ts
 import { zodTextLanguageInputType } from '@/components/text-language-input';
-```
 
-```ts
 const formSchema = z.object({
   content: zodTextLanguageInputType
 });
