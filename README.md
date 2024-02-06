@@ -15,6 +15,8 @@ VitNode is a headless CMS built with [NextJS](https://nextjs.org/) and [NestJS](
 
 ![Groups page in AdminCP](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/assets/screenshots/12.png 'Groups page in AdminCP')
 
+![Users page in AdminCP](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/assets/screenshots/10.png 'Users page in AdminCP')
+
 ![Create Topic](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/assets/screenshots/8.png 'Create Topic')
 
 ![Change Avatar](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/assets/screenshots/3.png 'Change Avatar')

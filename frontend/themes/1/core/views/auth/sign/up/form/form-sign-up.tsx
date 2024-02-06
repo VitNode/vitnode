@@ -18,10 +18,15 @@ import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { removeSpecialCharacters } from '@/functions/remove-special-characters';
+import { SuccessFormSignUp } from './success';
 
 export const FormSignUp = () => {
   const t = useTranslations('core');
   const { form, onSubmit } = useSignUpView({});
+
+  if (form.formState.isSubmitSuccessful) {
+    return <SuccessFormSignUp name={form.watch('name')} />;
+  }
 
   return (
     <Form {...form}>
