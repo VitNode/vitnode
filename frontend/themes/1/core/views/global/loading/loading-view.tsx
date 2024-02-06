@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 
 import { Card, CardHeader } from "@/components/ui/card";
 import { Loader } from "@/components/loader/loader";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 interface Props {
   className?: string;
@@ -21,7 +21,7 @@ export const LoadingView = ({ className, global }: Props) => {
   );
 
   if (global)
-    return <div className={cx("mx-auto max-w-sm", className)}>{content}</div>;
+    return <div className={cn("mx-auto max-w-sm", className)}>{content}</div>;
 
   return content;
 };

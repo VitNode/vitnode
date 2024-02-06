@@ -1,12 +1,12 @@
 import { forwardRef, type HTMLAttributes } from "react";
 
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cx(
+      className={cn(
         "rounded-lg border bg-card text-card-foreground shadow-sm",
         className
       )}
@@ -20,7 +20,7 @@ const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cx("flex flex-col space-y-1.5 p-5", className)}
+      className={cn("flex flex-col space-y-1.5 p-5", className)}
       {...props}
     />
   )
@@ -33,7 +33,7 @@ const CardTitle = forwardRef<
 >(({ children, className, ...props }, ref) => (
   <h1
     ref={ref}
-    className={cx(
+    className={cn(
       "text-2xl font-semibold leading-none tracking-tight",
       className
     )}
@@ -50,7 +50,7 @@ const CardDescription = forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cx("text-sm text-muted-foreground", className)}
+    className={cn("text-sm text-muted-foreground", className)}
     {...props}
   />
 ));
@@ -58,7 +58,7 @@ CardDescription.displayName = "CardDescription";
 
 const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cx("p-5 pt-0", className)} {...props} />
+    <div ref={ref} className={cn("p-5 pt-0", className)} {...props} />
   )
 );
 CardContent.displayName = "CardContent";
@@ -67,7 +67,7 @@ const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cx("flex items-center p-5 pt-0", className)}
+      className={cn("flex items-center p-5 pt-0", className)}
       {...props}
     />
   )

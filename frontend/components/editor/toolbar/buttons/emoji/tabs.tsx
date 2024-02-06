@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 const categories = [
   {
@@ -83,7 +83,7 @@ export const TabsEmojiButtonEditor = ({
         return (
           <Button
             key={category.id}
-            className={cx("w-9 h-9 rounded-b-none relative", {
+            className={cn("w-9 h-9 rounded-b-none relative", {
               "text-primary": active
             })}
             size="icon"

@@ -7,7 +7,7 @@ import {
   SheetTrigger
 } from "@/components/ui/sheet";
 import { buttonVariants } from "@/components/ui/button";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { ItemNavSettings } from "../item/item-nav-settings";
 import { useSettingsView } from "@/hooks/core/settings/use-settings-view";
 
@@ -19,7 +19,7 @@ export const SheetNavSettings = () => {
     <div className="lg:hidden block">
       <Sheet>
         <SheetTrigger
-          className={cx(buttonVariants({ variant: "ghost" }), "w-full")}
+          className={cn(buttonVariants({ variant: "ghost" }), "w-full")}
         >
           {t("settings.open_sheet")}
         </SheetTrigger>

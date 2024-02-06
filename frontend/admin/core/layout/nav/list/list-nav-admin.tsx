@@ -17,7 +17,7 @@ import * as Accordion from "@radix-ui/react-accordion";
 import { useSelectedLayoutSegments } from "next/navigation";
 
 import { ItemListNavAdmin } from "./item/item-list-nav-admin";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 interface Props {
   children?: ReactNode;
@@ -33,7 +33,7 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
     <Accordion.Root
       type="multiple"
       defaultValue={activeItems}
-      className={cx("flex flex-col", className)}
+      className={cn("flex flex-col", className)}
     >
       <ItemListNavAdmin
         id="core"

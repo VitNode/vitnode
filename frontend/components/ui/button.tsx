@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { forwardRef, type ButtonHTMLAttributes } from "react";
 import { useTranslations } from "next-intl";
 
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { Loader } from "../loader/loader";
 import {
   Tooltip,
@@ -77,7 +77,7 @@ const Button = forwardRef<HTMLButtonElement, IconButtonProps | ButtonProps>(
       if (loading) {
         return (
           <Comp
-            className={cx(buttonVariants({ variant, size, className }))}
+            className={cn(buttonVariants({ variant, size, className }))}
             ref={ref}
             {...props}
             disabled
@@ -90,7 +90,7 @@ const Button = forwardRef<HTMLButtonElement, IconButtonProps | ButtonProps>(
 
       return (
         <Comp
-          className={cx(buttonVariants({ variant, size, className }))}
+          className={cn(buttonVariants({ variant, size, className }))}
           type={type}
           ref={ref}
           aria-label={tooltip}

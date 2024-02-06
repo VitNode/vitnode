@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import type { LucideIcon } from "lucide-react";
 
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { buttonVariants } from "@/components/ui/button";
 import { Link, usePathname } from "@/i18n";
 
@@ -33,7 +33,7 @@ export const LinkItemListNavAdmin = ({
     <li>
       <Link
         href={href}
-        className={cx(
+        className={cn(
           buttonVariants({ variant: "ghost", size: "sm" }),
           "w-full justify-start relative pl-4 hover:bg-secondary font-normal text-foreground",
           {

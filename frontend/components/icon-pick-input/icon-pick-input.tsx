@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { Loader } from "../loader/loader";
 import { IconDynamic } from "../icon-dynamic";
 import type { IconDynamicNames } from "../icon-dynamic";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 const ContentIconPickInput = lazy(() =>
   import("./content-icon-pick-input").then(module => ({
@@ -29,7 +29,7 @@ const IconPickerInput = forwardRef<HTMLButtonElement, Props>(
         <DialogTrigger asChild>
           <Button
             variant="outline"
-            className={cx("w-full justify-start", {
+            className={cn("w-full justify-start", {
               ["text-muted-foreground"]: !value
             })}
             ref={ref}

@@ -64,9 +64,9 @@ export const LayoutInstallConfigsView = ({ children }: Props) => {
       <div className="flex-grow">
         <CardHeader>
           <CardDescription>{t("title", { name: "VitNode" })}</CardDescription>
-          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-          {/* @ts-expect-error */}
           <CardTitle>
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+            {/* @ts-expect-error */}
             {t(`steps.${items.at(activeStep - 1)?.id}.title`)}
           </CardTitle>
         </CardHeader>

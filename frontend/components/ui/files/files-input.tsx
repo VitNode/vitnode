@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import { useMergeRefs } from "@/hooks/core/utils/use-merge-refs";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { PreviewFilesInput } from "./preview/preview-files-input";
 
 export interface InputProps
@@ -78,7 +78,7 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
       <>
         {((stateValue && stateValue.length === 0 && !multiple) || multiple) && (
           <div
-            className={cx(
+            className={cn(
               "flex flex-col items-center justify-center w-full m-h-32 rounded-md bg-background border border-input px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 text-center",
               className,
               {

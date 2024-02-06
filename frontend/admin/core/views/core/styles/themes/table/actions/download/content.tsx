@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import type { ActionsItemThemesAdminProps } from "../actions";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 export const ContentDownloadThemeActionsAdmin = ({
   id,
@@ -63,7 +63,7 @@ export const ContentDownloadThemeActionsAdmin = ({
                     />
                     <Label
                       htmlFor="new_version"
-                      className={cx({
+                      className={cn({
                         "opacity-50": id === 1
                       })}
                     >

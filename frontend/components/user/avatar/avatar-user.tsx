@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 import { CONFIG } from "@/config";
 import { generateLetterPhoto } from "@/functions/generate-letter-photo";
 import type { Maybe, AvatarUser as AvatarUserType } from "@/graphql/hooks";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 import { Img } from "../../img";
 
@@ -22,7 +22,7 @@ const AvatarUser = forwardRef<HTMLImageElement, Props>(
   ({ className, sizeInRem, user: { avatar, avatar_color, name } }, ref) => {
     return (
       <Img
-        className={cx("rounded-full flex-shrink-0", className)}
+        className={cn("rounded-full flex-shrink-0", className)}
         imageClassName="object-cover"
         src={
           avatar

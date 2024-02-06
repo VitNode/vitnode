@@ -3,7 +3,7 @@ import { ExternalLink, Menu } from "lucide-react";
 import { CSS } from "@dnd-kit/utilities";
 import { useTranslations } from "next-intl";
 
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { Button } from "@/components/ui/button";
 import type { ShowCoreNav } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
@@ -46,7 +46,7 @@ export const ItemContentTableContentNavAdmin = ({
         transform: CSS.Translate.toString(transform),
         transition
       }}
-      className={cx(
+      className={cn(
         "p-4 flex gap-4 bg-card items-center transition-[background-color,opacity] relative border",
         {
           "opacity-50 z-10": isDragging,

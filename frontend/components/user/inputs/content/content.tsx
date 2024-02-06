@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Members__Show__Search,
@@ -52,7 +52,7 @@ export const UserInputContent = ({ onSelect, values }: Props) => {
       <div className="flex items-center border-b px-3">
         <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
         <Input
-          className={cx(
+          className={cn(
             "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0",
             commandInputClassName
           )}

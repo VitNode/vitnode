@@ -4,7 +4,7 @@ import { Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import type { ShowAdminPlugins } from "@/graphql/hooks";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ActionsItemPluginsAdmin } from "./actions/actions";
@@ -35,7 +35,7 @@ export const ItemContentTablePluginsAdmin = ({ data }: Props) => {
         transform: CSS.Translate.toString(transform),
         transition
       }}
-      className={cx(
+      className={cn(
         "p-4 flex gap-4 bg-card items-center transition-[background-color,opacity] relative border",
         {
           "opacity-50": isDragging

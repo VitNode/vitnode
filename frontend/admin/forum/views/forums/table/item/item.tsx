@@ -6,7 +6,7 @@ import type { UniqueIdentifier } from "@dnd-kit/core";
 
 import { Button } from "@/components/ui/button";
 import { useTextLang } from "@/hooks/core/use-text-lang";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { useChildrenForumForumsAdminAPI } from "./hooks/use-children-forum-forums-admin-api";
 import type { Forum_Forums__Admin__ShowFlattenedItem } from "../types";
 
@@ -68,7 +68,7 @@ export const ItemTableForumsForumAdmin = ({
       }}
     >
       <div
-        className={cx(
+        className={cn(
           "p-4 flex gap-4 bg-card items-center transition-[background-color,opacity] relative border",
           {
             "animate-pulse bg-primary/20": isDropHere,
@@ -94,7 +94,7 @@ export const ItemTableForumsForumAdmin = ({
 
         {childrenCount > 0 && (
           <ChevronRight
-            className={cx("transition-transform text-muted-foreground", {
+            className={cn("transition-transform text-muted-foreground", {
               "rotate-90": isOpenChildren
             })}
           />

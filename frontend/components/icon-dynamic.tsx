@@ -3,7 +3,7 @@ import * as Lucide from "lucide-react";
 import { memo } from "react";
 import { Loader2 } from "lucide-react";
 
-import { cx } from "../functions/classnames";
+import { cn } from "@/functions/classnames";
 
 export type IconDynamicNames = keyof typeof Lucide.icons;
 
@@ -16,7 +16,7 @@ const _IconDynamic = ({ className, name, ...props }: Props) => {
     () => import(`lucide-react`).then(mod => mod[name]),
     {
       loading: () => {
-        return <Loader2 className={cx("animate-spin", className)} />;
+        return <Loader2 className={cn("animate-spin", className)} />;
       }
     }
   );

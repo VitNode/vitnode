@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { CheckIcon } from "lucide-react";
 
 import type { ShowAdminGroups } from "@/graphql/hooks";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { CommandGroup, CommandItem } from "@/components/ui/command";
 import type { GroupInputItem } from "../group-input";
 
@@ -38,7 +38,7 @@ export const GroupInputContentList = ({ edges, onSelect, values }: Props) => {
             }
           >
             <div
-              className={cx(
+              className={cn(
                 "mr-2 flex size-4 items-center justify-center rounded-sm border border-primary",
                 values.find(value => item.id === value.id)
                   ? "bg-primary text-primary-foreground"

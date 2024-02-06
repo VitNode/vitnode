@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { forwardRef, type HTMLAttributes } from "react";
 
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 const alertVariants = cva(
   "relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
@@ -26,7 +26,7 @@ const Alert = forwardRef<
   <div
     ref={ref}
     role="alert"
-    className={cx(alertVariants({ variant }), className)}
+    className={cn(alertVariants({ variant }), className)}
     {...props}
   />
 ));
@@ -38,7 +38,7 @@ const AlertTitle = forwardRef<
 >(({ children, className, ...props }, ref) => (
   <h5
     ref={ref}
-    className={cx("mb-1 font-bold leading-none tracking-tight", className)}
+    className={cn("mb-1 font-bold leading-none tracking-tight", className)}
     {...props}
   >
     {children}
@@ -52,7 +52,7 @@ const AlertDescription = forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cx("text-sm [&_p]:leading-relaxed", className)}
+    className={cn("text-sm [&_p]:leading-relaxed", className)}
     {...props}
   />
 ));

@@ -19,7 +19,7 @@ import { useLocale } from "next-intl";
 import { OnChangePluginEditor } from "./plugins/on-change";
 import { AutoLinkPluginEditor } from "./plugins/auto-link";
 import { ToolbarEditor } from "./toolbar/toolbar-editor";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { DraggableBlockPluginEditor } from "./plugins/draggable-block";
 import { MARKDOWN_TRANSFORMERS_EDITOR } from "./markdown-transformers-editor";
 import { BLOCK_NAMES, EditorContext } from "./toolbar/hooks/use-editor";
@@ -75,7 +75,7 @@ export const Editor = ({
     <EditorContext.Provider value={{ blockType, setBlockType }}>
       <LexicalComposer key={id} initialConfig={initialConfig}>
         <div
-          className={cx(
+          className={cn(
             "relative border border-input rounded-md bg-card ring-offset-background",
             className
           )}

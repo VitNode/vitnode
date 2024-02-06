@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 
 import { DateFormat } from "@/components/date-format/date-format";
 import type { ShowPostsForumsMetaTags } from "@/graphql/hooks";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { UserLink } from "@/components/user/link/user-link";
 import { DivMotion } from "@/components/animations/div-motion";
 
@@ -35,7 +35,7 @@ export const MetaTagTopic = ({
       className="ml-2.5 flex gap-4 items-center"
     >
       <div
-        className={cx(
+        className={cn(
           "border size-8 bg-border [&>svg]:size-4 flex items-center justify-center rounded-full",
           {
             "bg-destructive border-destructive text-white": action === "lock"

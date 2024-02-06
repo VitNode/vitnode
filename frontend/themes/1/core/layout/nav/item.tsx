@@ -5,7 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import type { ShowCoreNav } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { Link, usePathname } from "@/i18n";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 export const ItemNav = ({ children, external, href, name }: ShowCoreNav) => {
   const { convertText } = useTextLang();
@@ -20,7 +20,7 @@ export const ItemNav = ({ children, external, href, name }: ShowCoreNav) => {
           href={href}
           className={buttonVariants({
             variant: "ghost",
-            className: cx("px-6", {
+            className: cn("px-6", {
               "bg-accent": active
             })
           })}
@@ -33,7 +33,7 @@ export const ItemNav = ({ children, external, href, name }: ShowCoreNav) => {
 
       {children.length > 0 && (
         <NavigationMenu.Content
-          className={cx(
+          className={cn(
             "absolute top-0 left-0 duration-200 ease-in-out data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 w-[20rem]",
             {
               "w-[40rem]": children.length > 3
@@ -49,14 +49,14 @@ export const ItemNav = ({ children, external, href, name }: ShowCoreNav) => {
               return (
                 <li
                   key={item.id}
-                  className={cx("flex-1 basis-full", {
+                  className={cn("flex-1 basis-full", {
                     "basis-[calc(50%-0.5rem)]": children.length > 3
                   })}
                 >
                   <NavigationMenu.Link asChild>
                     <Link
                       href={item.href}
-                      className={cx(
+                      className={cn(
                         "flex flex-col justify-center select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground h-full text-accent-foreground",
                         {
                           "bg-accent": activeItem

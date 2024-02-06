@@ -1,6 +1,6 @@
 import { ClearFormattingButtonEditor } from "./buttons/clear-formatting-button";
 import { SeparatorToolbarEditor } from "./separator-toolbar-editor";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { BLOCK_NAMES, useEditor } from "./hooks/use-editor";
 import { BoldButtonEditor } from "./buttons/bold-button";
 import { ItalicButtonEditor } from "./buttons/italic-button";
@@ -27,7 +27,7 @@ export const ToolbarEditor = ({ className }: Props) => {
 
   return (
     <div
-      className={cx(
+      className={cn(
         "border-b-2 rounded-t-md sticky top-0 bg-background z-10",
         className
       )}

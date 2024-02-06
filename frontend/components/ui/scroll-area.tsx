@@ -7,7 +7,7 @@ import {
   forwardRef
 } from "react";
 
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 const ScrollArea = forwardRef<
   ElementRef<typeof ScrollAreaPrimitive.Root>,
@@ -15,7 +15,7 @@ const ScrollArea = forwardRef<
 >(({ children, className, ...props }, ref) => (
   <ScrollAreaPrimitive.Root
     ref={ref}
-    className={cx("relative overflow-hidden", className)}
+    className={cn("relative overflow-hidden", className)}
     {...props}
   >
     <ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]">
@@ -34,7 +34,7 @@ const ScrollBar = forwardRef<
   <ScrollAreaPrimitive.ScrollAreaScrollbar
     ref={ref}
     orientation={orientation}
-    className={cx(
+    className={cn(
       "flex touch-none select-none transition-colors",
       orientation === "vertical" &&
         "h-full w-2.5 border-l border-l-transparent p-[1px]",

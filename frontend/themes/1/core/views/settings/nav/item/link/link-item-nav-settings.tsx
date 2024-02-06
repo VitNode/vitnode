@@ -1,7 +1,7 @@
 "use client";
 
 import { Link, usePathname } from "@/i18n";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { buttonVariants } from "@/components/ui/button";
 import { type LinkItemNavSettingsProps } from "@/hooks/core/settings/use-settings-view";
 
@@ -15,7 +15,7 @@ export const LinkItemNavSettings = ({
   return (
     <Link
       href={href}
-      className={cx(
+      className={cn(
         buttonVariants({ variant: href === pathname ? "default" : "ghost" }),
         "justify-start gap-2"
       )}

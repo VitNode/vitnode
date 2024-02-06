@@ -8,7 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { useSignOutAPI } from "@/hooks/core/sign/out/use-sign-out-api";
 import { useSession } from "@/hooks/core/use-session";
 import { Link } from "@/i18n";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { NavDrawerQuickMenu } from "./nav/nav";
 
 export const classNameDrawerQuickMenu =
@@ -28,7 +28,7 @@ export const DrawerQuickMenu = () => {
           <DrawerClose asChild>
             <Link
               href={`/profile/${session.name_seo}`}
-              className={cx(
+              className={cn(
                 buttonVariants({
                   variant: "ghost",
                   className: classNameDrawerQuickMenu
@@ -43,7 +43,7 @@ export const DrawerQuickMenu = () => {
           <DrawerClose asChild>
             <Link
               href="/settings"
-              className={cx(
+              className={cn(
                 buttonVariants({
                   variant: "ghost",
                   className: classNameDrawerQuickMenu
@@ -69,7 +69,7 @@ export const DrawerQuickMenu = () => {
             <DrawerClose asChild>
               <Link
                 href="/modcp"
-                className={cx(
+                className={cn(
                   buttonVariants({
                     variant: "ghost",
                     className: classNameDrawerQuickMenu

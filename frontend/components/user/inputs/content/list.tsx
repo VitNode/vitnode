@@ -3,7 +3,7 @@ import { CheckIcon } from "lucide-react";
 
 import type { ShowCoreMembers } from "@/graphql/hooks";
 import type { UserInputItem } from "../user-input";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { CommandGroup, CommandItem } from "@/components/ui/command";
 
 import { AvatarUser } from "../../avatar/avatar-user";
@@ -40,7 +40,7 @@ export const UserInputContentList = ({ edges, onSelect, values }: Props) => {
           }
         >
           <div
-            className={cx(
+            className={cn(
               "mr-2 flex size-4 items-center justify-center rounded-sm border border-primary",
               values.find(value => item.id === value.id)
                 ? "bg-primary text-primary-foreground"

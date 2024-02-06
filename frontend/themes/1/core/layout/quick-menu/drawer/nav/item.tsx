@@ -1,6 +1,6 @@
 import { buttonVariants } from "@/components/ui/button";
 import { DrawerClose } from "@/components/ui/drawer";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import type { ShowCoreNav } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { Link, usePathname } from "@/i18n";
@@ -22,10 +22,10 @@ export const ItemNavDrawerQuickMenu = ({
     <DrawerClose key={id} asChild>
       <Link
         href={href}
-        className={cx(
+        className={cn(
           buttonVariants({
             variant: "ghost",
-            className: cx(
+            className: cn(
               classNameDrawerQuickMenu,
               "flex-col h-auto items-start gap-1",
               {

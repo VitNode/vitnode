@@ -7,7 +7,7 @@ import {
   forwardRef
 } from "react";
 
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 const Progress = forwardRef<
   ElementRef<typeof ProgressPrimitive.Root>,
@@ -15,7 +15,7 @@ const Progress = forwardRef<
 >(({ className, value, ...props }, ref) => (
   <ProgressPrimitive.Root
     ref={ref}
-    className={cx(
+    className={cn(
       "relative h-4 w-full overflow-hidden rounded-full bg-secondary",
       className
     )}

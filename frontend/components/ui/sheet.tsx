@@ -10,7 +10,7 @@ import {
   type HTMLAttributes
 } from "react";
 
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 const Sheet = SheetPrimitive.Root;
 
@@ -28,7 +28,7 @@ const SheetOverlay = forwardRef<
   ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Overlay
-    className={cx(
+    className={cn(
       "fixed inset-0 z-50 bg-background/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
       className
     )}
@@ -69,7 +69,7 @@ const SheetContent = forwardRef<
     <SheetOverlay />
     <SheetPrimitive.Content
       ref={ref}
-      className={cx(sheetVariants({ side }), className)}
+      className={cn(sheetVariants({ side }), className)}
       {...props}
     >
       {children}
@@ -87,7 +87,7 @@ const SheetHeader = ({
   ...props
 }: HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cx(
+    className={cn(
       "flex flex-col space-y-2 text-center sm:text-left",
       className
     )}
@@ -101,7 +101,7 @@ const SheetFooter = ({
   ...props
 }: HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cx(
+    className={cn(
       "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
       className
     )}
@@ -116,7 +116,7 @@ const SheetTitle = forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Title
     ref={ref}
-    className={cx("text-lg font-semibold text-foreground", className)}
+    className={cn("text-lg font-semibold text-foreground", className)}
     {...props}
   />
 ));
@@ -128,7 +128,7 @@ const SheetDescription = forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Description
     ref={ref}
-    className={cx("text-sm text-muted-foreground", className)}
+    className={cn("text-sm text-muted-foreground", className)}
     {...props}
   />
 ));

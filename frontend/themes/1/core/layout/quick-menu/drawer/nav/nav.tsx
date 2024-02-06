@@ -3,7 +3,7 @@ import * as Accordion from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
 
 import { useSession } from "@/hooks/core/use-session";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { ItemNavDrawerQuickMenu } from "./item";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { buttonVariants } from "@/components/ui/button";
@@ -18,7 +18,7 @@ export const NavDrawerQuickMenu = () => {
     <Accordion.Root
       type="multiple"
       defaultValue={activeItems}
-      className={cx("px-2 flex flex-col", {
+      className={cn("px-2 flex flex-col", {
         "pb-5": !session
       })}
     >
@@ -28,10 +28,10 @@ export const NavDrawerQuickMenu = () => {
             <Accordion.Item key={item.id} value={item.id.toString()}>
               <Accordion.Header>
                 <Accordion.Trigger
-                  className={cx(
+                  className={cn(
                     buttonVariants({
                       variant: "ghost",
-                      className: cx(
+                      className: cn(
                         classNameDrawerQuickMenu,
                         "focus:bg-inherit"
                       )
@@ -47,7 +47,7 @@ export const NavDrawerQuickMenu = () => {
                 >
                   <span>{convertText(item.name)}</span>
                   <ChevronDown
-                    className={cx(
+                    className={cn(
                       "w-5 h-5 ml-auto transition-transform flex-shrink-0",
                       {
                         "transform rotate-180": activeItems.includes(

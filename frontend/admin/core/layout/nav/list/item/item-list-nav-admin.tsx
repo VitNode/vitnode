@@ -4,7 +4,7 @@ import * as Accordion from "@radix-ui/react-accordion";
 import { useTranslations } from "next-intl";
 
 import { buttonVariants } from "@/components/ui/button";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import {
   LinkItemListNavAdmin,
   type ItemListNavAdminProps
@@ -37,7 +37,7 @@ export const ItemListNavAdmin = ({
           className={buttonVariants({
             variant: id === pathnameId ? "default" : "ghost",
             size: "sm",
-            className: cx("w-full justify-start flex gap-2", {
+            className: cn("w-full justify-start flex gap-2", {
               ["hover:bg-secondary "]: id !== pathnameId
             })
           })}
@@ -53,7 +53,7 @@ export const ItemListNavAdmin = ({
           {/* @ts-expect-error */}
           <span>{t(`nav.${id}.title`)}</span>
           <ChevronDown
-            className={cx(
+            className={cn(
               "w-5 h-5 ml-auto transition-transform flex-shrink-0",
               {
                 "transform rotate-180": activeItems.includes(id)

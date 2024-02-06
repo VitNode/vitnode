@@ -8,7 +8,7 @@ import {
   forwardRef
 } from "react";
 
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 const labelVariants = cva(
   "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -21,7 +21,7 @@ const Label = forwardRef<
 >(({ className, ...props }, ref) => (
   <LabelPrimitive.Root
     ref={ref}
-    className={cx(labelVariants(), className)}
+    className={cn(labelVariants(), className)}
     {...props}
   />
 ));

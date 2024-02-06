@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import type { ComponentType } from "react";
 
 import { Input } from "@/components/ui/input";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import {
   Command,
   CommandEmpty,
@@ -51,7 +51,7 @@ export const ContentFilterToolbarDataTable = ({
           <Input
             onChange={e => searchState.onChange(e.target.value)}
             value={searchState.value}
-            className={cx(
+            className={cn(
               commandInputClassName,
               "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0"
             )}

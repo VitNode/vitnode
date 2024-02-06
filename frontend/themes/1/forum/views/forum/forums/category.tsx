@@ -3,7 +3,7 @@ import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "@/i18n";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { ItemForum, type ItemForumProps } from "./item/item-forum";
 import type { TextLanguage } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
@@ -23,7 +23,7 @@ export const CategoryForum = ({ children, description, id, name }: Props) => {
     <Card>
       <CardContent className="p-0">
         <div
-          className={cx("px-6 py-4 flex items-center gap-4 justify-between", {
+          className={cn("px-6 py-4 flex items-center gap-4 justify-between", {
             //  'border-b': children && children.length > 0
           })}
         >
@@ -53,7 +53,7 @@ export const CategoryForum = ({ children, description, id, name }: Props) => {
               // onClick={() => setClose(prev => !prev)}
             >
               <ChevronDown
-                className={cx("transition-transform", {
+                className={cn("transition-transform", {
                   //  'transform rotate-90': isClose
                 })}
               />

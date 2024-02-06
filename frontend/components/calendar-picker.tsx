@@ -2,7 +2,7 @@ import { CalendarIcon } from "lucide-react";
 import type { SelectRangeEventHandler } from "react-day-picker";
 import { format } from "date-fns";
 
-import { cx } from "../functions/classnames";
+import { cn } from "../functions/classnames";
 import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Calendar } from "./ui/calendar";
@@ -22,7 +22,7 @@ export const CalendarPicker = ({ onSelect, selected }: Props) => {
         <Button
           id="date"
           variant={"outline"}
-          className={cx(
+          className={cn(
             "w-full justify-start text-left font-normal",
             !selected && "text-muted-foreground"
           )}

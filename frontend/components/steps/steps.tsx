@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { Link } from "@/i18n";
 
 export interface ItemStepProps {
@@ -21,11 +21,11 @@ export const Steps = ({ className, items }: Props) => {
 
   return (
     <div className={className}>
-      <ol className={cx("relative flex flex-col gap-5 border-l-2 ml-4")}>
+      <ol className={cn("relative flex flex-col gap-5 border-l-2 ml-4")}>
         {items.map((item, index) => (
           <li key={item.id}>
             <span
-              className={cx(
+              className={cn(
                 "absolute flex items-center justify-center w-8 h-8 rounded-full -left-4 border-2 bg-background text-card-foreground font-bold",
                 {
                   ["bg-primary text-white border-primary"]: item.checked

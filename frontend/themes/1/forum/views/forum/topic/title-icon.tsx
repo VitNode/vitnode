@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { Badge, type BadgeProps } from "@/components/ui/badge";
 
 interface Props extends Pick<BadgeProps, "variant"> {
@@ -16,7 +16,7 @@ export const TitleIconTopic = ({
   return (
     <Badge
       variant={variant}
-      className={cx(
+      className={cn(
         "px-3 py-1 [&>svg]:size-4 flex-shrink-0 text-sm",
         className
       )}

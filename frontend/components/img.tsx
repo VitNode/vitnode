@@ -4,7 +4,7 @@ import { forwardRef, useEffect, useState } from "react";
 import Image, { type StaticImageData } from "next/image";
 
 import { Skeleton } from "./ui/skeleton";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 interface InitialProps {
   alt: string;
@@ -63,7 +63,7 @@ const Img = forwardRef<HTMLDivElement, ImgProps>(
 
     return (
       <div
-        className={cx("relative overflow-hidden leading-[0] w-fit", className)}
+        className={cn("relative overflow-hidden leading-[0] w-fit", className)}
         style={{
           height: !height
             ? heightLoading && isLoading

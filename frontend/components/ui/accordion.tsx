@@ -8,7 +8,7 @@ import {
   type ElementRef
 } from "react";
 
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 const Accordion = AccordionPrimitive.Root;
 
@@ -18,7 +18,7 @@ const AccordionItem = forwardRef<
 >(({ className, ...props }, ref) => (
   <AccordionPrimitive.Item
     ref={ref}
-    className={cx("border-b", className)}
+    className={cn("border-b", className)}
     {...props}
   />
 ));
@@ -31,7 +31,7 @@ const AccordionTrigger = forwardRef<
   <AccordionPrimitive.Header className="flex">
     <AccordionPrimitive.Trigger
       ref={ref}
-      className={cx(
+      className={cn(
         "flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
         className
       )}
@@ -50,7 +50,7 @@ const AccordionContent = forwardRef<
 >(({ children, className, ...props }, ref) => (
   <AccordionPrimitive.Content
     ref={ref}
-    className={cx(
+    className={cn(
       "overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
       className
     )}

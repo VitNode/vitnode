@@ -3,7 +3,7 @@
 import { useMorePosts } from "@/hooks/forums/forum/posts/use-more-posts";
 import { ButtonLoadMorePosts } from "./button";
 import { ListPosts } from "../list";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 interface Props {
   endCursor: number;
@@ -30,7 +30,7 @@ export const LoadMorePosts = ({
       {data.length > 0 && (
         <ListPosts
           id="load_more_posts"
-          className={cx("py-5", {
+          className={cn("py-5", {
             "pb-0": countToLoad > 0
           })}
           edges={data}

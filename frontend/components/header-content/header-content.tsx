@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 interface HeaderContentProps {
   children?: ReactNode;
@@ -27,7 +27,7 @@ export const HeaderContent = ({
 }: HeaderContentH1Props | HeaderContentH2Props) => {
   return (
     <div
-      className={cx(
+      className={cn(
         "mb-5 flex gap-4 flex-col sm:flex-row sm:items-center items-start",
         className
       )}

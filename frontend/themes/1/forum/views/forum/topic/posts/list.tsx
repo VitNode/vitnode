@@ -1,7 +1,7 @@
 import type { ShowPostsForums, ShowPostsForumsMetaTags } from "@/graphql/hooks";
 import { PostTopic } from "./post/post";
 import { MetaTagTopic } from "./meta-tags/meta-tag";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 interface Props {
   edges: (ShowPostsForums | ShowPostsForumsMetaTags)[];
@@ -13,7 +13,7 @@ export const ListPosts = ({ className, edges, id }: Props) => {
   return (
     <div
       key={`post_list_${id}`}
-      className={cx(
+      className={cn(
         "flex flex-col gap-5 relative after:absolute after:top-0 after:left-6 after:w-1 after:h-full after:block after:-z-10 after:bg-border",
         className
       )}

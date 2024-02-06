@@ -7,7 +7,7 @@ import {
   forwardRef
 } from "react";
 
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 const Separator = forwardRef<
   ElementRef<typeof SeparatorPrimitive.Root>,
@@ -21,7 +21,7 @@ const Separator = forwardRef<
       ref={ref}
       decorative={decorative}
       orientation={orientation}
-      className={cx(
+      className={cn(
         "shrink-0 bg-border",
         orientation === "horizontal" ? "h-[1px] w-full" : "h-full w-[1px]",
         className

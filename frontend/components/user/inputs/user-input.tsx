@@ -2,7 +2,7 @@ import { Suspense, forwardRef, lazy, useState } from "react";
 import { useTranslations } from "next-intl";
 import { X } from "lucide-react";
 
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -57,7 +57,7 @@ export const UserInput = forwardRef<
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className={cx("w-full justify-start", className, {
+          className={cn("w-full justify-start", className, {
             "text-muted-foreground": values.length === 0
           })}
           ref={ref}

@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { SheetClose } from "@/components/ui/sheet";
 import { Link } from "@/i18n";
-import { cx } from "@/functions/classnames";
+import { cn } from "@/functions/classnames";
 
 interface Props {
   children: ReactNode;
@@ -26,7 +26,7 @@ export const ItemUserBarAdmin = ({
       return (
         <Link
           href={href}
-          className={cx(
+          className={cn(
             buttonVariants({
               variant: "ghost",
               size: "sm",
