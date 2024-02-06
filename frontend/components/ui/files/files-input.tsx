@@ -1,14 +1,17 @@
-import { type InputHTMLAttributes, forwardRef, useRef, useState } from 'react';
-import { Upload } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { toast } from 'sonner';
+import { type InputHTMLAttributes, forwardRef, useRef, useState } from "react";
+import { Upload } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
-import { useMergeRefs } from '@/hooks/core/utils/use-merge-refs';
-import { cx } from '@/functions/classnames';
-import { PreviewFilesInput } from './preview/preview-files-input';
+import { useMergeRefs } from "@/hooks/core/utils/use-merge-refs";
+import { cx } from "@/functions/classnames";
+import { PreviewFilesInput } from "./preview/preview-files-input";
 
 export interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange' | 'value'> {
+  extends Omit<
+    InputHTMLAttributes<HTMLInputElement>,
+    "type" | "onChange" | "value"
+  > {
   acceptExtensions: string[];
   maxFileSizeInMb: number;
   onChange: (e: File[]) => void;
@@ -29,7 +32,7 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => {
-    const t = useTranslations('core');
+    const t = useTranslations("core");
     const [isDrag, setDrag] = useState(false);
     const currentRef = useRef<HTMLInputElement>(null);
     const inputRef = useMergeRefs([ref, currentRef]);
@@ -39,17 +42,17 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
 
       // Validate files
       const currentFiles = Array.from(files).filter(file => {
-        const splitFileName = file.name.split('.');
+        const splitFileName = file.name.split(".");
         const extensionType = splitFileName.at(-1);
 
         if (extensionType && !acceptExtensions.includes(extensionType)) {
-          toast.error(t('forms.files.errors.extension', { file: file.name }));
+          toast.error(t("forms.files.errors.extension", { file: file.name }));
 
           return;
         }
 
         if (maxFileSizeInMb && file.size > maxFileSizeInMb * 1024 * 1024) {
-          toast.error(t('forms.files.errors.max_size', { file: file.name }));
+          toast.error(t("forms.files.errors.max_size", { file: file.name }));
 
           return;
         }
@@ -76,30 +79,30 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
         {((stateValue && stateValue.length === 0 && !multiple) || multiple) && (
           <div
             className={cx(
-              'flex flex-col items-center justify-center w-full m-h-32 rounded-md bg-background border border-input px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 text-center',
+              "flex flex-col items-center justify-center w-full m-h-32 rounded-md bg-background border border-input px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 text-center",
               className,
               {
-                'opacity-50 cursor-not-allowed': disabled
+                "opacity-50 cursor-not-allowed": disabled
               }
             )}
             role="button"
             tabIndex={disabled ? -1 : 0}
             onClick={() => currentRef.current?.click()}
             onKeyDown={e => {
-              if (e.key === 'Enter' || e.key === ' ') {
+              if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
                 currentRef.current?.click();
               }
             }}
             onDragOver={e => {
-              if (!e.dataTransfer.types.includes('Files')) return;
+              if (!e.dataTransfer.types.includes("Files")) return;
               e.preventDefault();
               e.stopPropagation();
 
               setDrag(true);
             }}
             onDragLeave={e => {
-              if (!e.dataTransfer.types.includes('Files')) return;
+              if (!e.dataTransfer.types.includes("Files")) return;
               e.preventDefault();
               e.stopPropagation();
 
@@ -107,7 +110,7 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
               setDrag(false);
             }}
             onDrop={e => {
-              if (!e.dataTransfer.types.includes('Files')) return;
+              if (!e.dataTransfer.types.includes("Files")) return;
               e.preventDefault();
               e.stopPropagation();
               setDrag(false);
@@ -117,13 +120,15 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
             <div className="flex flex-col items-center justify-center pt-5 pb-6 text-muted-foreground">
               <Upload />
               <p className="mb-2 text-sm mt-2 font-semibold">
-                {t(isDrag ? 'forms.files.drop_here' : 'forms.files.title')}
+                {t(isDrag ? "forms.files.drop_here" : "forms.files.title")}
               </p>
               <p className="text-xs">
-                {acceptExtensions.join(', ').toUpperCase()}{' '}
+                {acceptExtensions.join(", ").toUpperCase()}{" "}
                 {maxFileSizeInMb
-                  ? t('forms.files.allow_size_per_file', { size: maxFileSizeInMb })
-                  : ''}
+                  ? t("forms.files.allow_size_per_file", {
+                      size: maxFileSizeInMb
+                    })
+                  : ""}
               </p>
             </div>
             <input
@@ -145,6 +150,6 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
     );
   }
 );
-FilesInput.displayName = 'Input';
+FilesInput.displayName = "Input";
 
 export { FilesInput };

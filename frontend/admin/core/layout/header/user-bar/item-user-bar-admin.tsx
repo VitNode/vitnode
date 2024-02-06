@@ -1,9 +1,9 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
-import { Button, buttonVariants } from '@/components/ui/button';
-import { SheetClose } from '@/components/ui/sheet';
-import { Link } from '@/i18n';
-import { cx } from '@/functions/classnames';
+import { Button, buttonVariants } from "@/components/ui/button";
+import { SheetClose } from "@/components/ui/sheet";
+import { Link } from "@/i18n";
+import { cx } from "@/functions/classnames";
 
 interface Props {
   children: ReactNode;
@@ -12,9 +12,15 @@ interface Props {
   target?: string;
 }
 
-export const ItemUserBarAdmin = ({ children, href, onClick, target }: Props) => {
+export const ItemUserBarAdmin = ({
+  children,
+  href,
+  onClick,
+  target
+}: Props) => {
   const content = () => {
-    const className = 'w-full justify-start [&>svg]:text-muted-foreground font-normal';
+    const className =
+      "w-full justify-start [&>svg]:text-muted-foreground font-normal";
 
     if (href) {
       return (
@@ -22,8 +28,8 @@ export const ItemUserBarAdmin = ({ children, href, onClick, target }: Props) => 
           href={href}
           className={cx(
             buttonVariants({
-              variant: 'ghost',
-              size: 'sm',
+              variant: "ghost",
+              size: "sm",
               className
             })
           )}

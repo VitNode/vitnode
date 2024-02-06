@@ -1,16 +1,16 @@
-import { IncomingMessage, ServerResponse } from 'http';
+import { IncomingMessage, ServerResponse } from "http";
 
-import * as busboy from 'busboy';
-import * as createError from 'http-errors';
-import * as objectPath from 'object-path';
+import * as busboy from "busboy";
+import * as createError from "http-errors";
+import * as objectPath from "object-path";
 
-import Upload, { FileUpload } from './Upload';
-import ignoreStream from './ignoreStream';
-import { ProcessRequestOptions } from './graphqlUploadExpress';
-import { WriteStream } from './fs-capacitor';
+import Upload, { FileUpload } from "./Upload";
+import ignoreStream from "./ignoreStream";
+import { ProcessRequestOptions } from "./graphqlUploadExpress";
+import { WriteStream } from "./fs-capacitor";
 
 const GRAPHQL_MULTIPART_REQUEST_SPEC_URL =
-  'https://github.com/jaydenseric/graphql-multipart-request-spec';
+  "https://github.com/jaydenseric/graphql-multipart-request-spec";
 
 export default function processRequest(
   request: IncomingMessage,
@@ -26,7 +26,9 @@ export default function processRequest(
 
     let exitError: Error;
 
-    let operations: { [key: string]: unknown } | Array<{ [key: string]: unknown }>;
+    let operations:
+      | { [key: string]: unknown }
+      | Array<{ [key: string]: unknown }>;
 
     let operationsPath: objectPath.ObjectPathBound<
       { [key: string]: unknown } | { [key: string]: unknown }[]
@@ -36,7 +38,7 @@ export default function processRequest(
 
     const parser = busboy({
       headers: request.headers,
-      defParamCharset: 'utf8',
+      defParamCharset: "utf8",
       limits: {
         fieldSize: maxFieldSize,
         fields: 2, // Only operations and map.
@@ -53,7 +55,9 @@ export default function processRequest(
 
       exitError = error;
 
-      if (map) for (const upload of map.values()) if (!upload.file) upload.reject(exitError);
+      if (map)
+        for (const upload of map.values())
+          if (!upload.file) upload.reject(exitError);
 
       // If the error came from the parser, don’t cause it to be emitted again.
       isParserError ? parser.destroy() : parser.destroy(exitError);
@@ -71,7 +75,7 @@ export default function processRequest(
       reject(exitError);
     }
 
-    parser.on('field', (fieldName, value, { valueTruncated }) => {
+    parser.on("field", (fieldName, value, { valueTruncated }) => {
       if (valueTruncated)
         return exit(
           createError(
@@ -81,7 +85,7 @@ export default function processRequest(
         );
 
       switch (fieldName) {
-        case 'operations':
+        case "operations":
           try {
             operations = JSON.parse(value);
           } catch (error) {
@@ -95,7 +99,7 @@ export default function processRequest(
 
           // `operations` should be an object or an array. Note that arrays
           // and `null` have an `object` type.
-          if (typeof operations !== 'object' || !operations)
+          if (typeof operations !== "object" || !operations)
             return exit(
               createError(
                 400,
@@ -106,7 +110,7 @@ export default function processRequest(
           operationsPath = objectPath(operations);
 
           break;
-        case 'map': {
+        case "map": {
           if (!operations)
             return exit(
               createError(
@@ -128,7 +132,11 @@ export default function processRequest(
           }
 
           // `map` should be an object.
-          if (typeof parsedMap !== 'object' || !parsedMap || Array.isArray(parsedMap))
+          if (
+            typeof parsedMap !== "object" ||
+            !parsedMap ||
+            Array.isArray(parsedMap)
+          )
             return exit(
               createError(
                 400,
@@ -141,7 +149,9 @@ export default function processRequest(
           // Check max files is not exceeded, even though the number of files
           // to parse might not match the map provided by the client.
           if (mapEntries.length > maxFiles)
-            return exit(createError(413, `${maxFiles} max file uploads exceeded.`));
+            return exit(
+              createError(413, `${maxFiles} max file uploads exceeded.`)
+            );
 
           map = new Map();
           for (const [fieldName, paths] of mapEntries) {
@@ -156,7 +166,7 @@ export default function processRequest(
             map.set(fieldName, new Upload());
 
             for (const [index, path] of paths.entries()) {
-              if (typeof path !== 'string')
+              if (typeof path !== "string")
                 return exit(
                   createError(
                     400,
@@ -182,80 +192,83 @@ export default function processRequest(
       }
     });
 
-    parser.on('file', (fieldName, stream, { encoding, filename, mimeType: mimetype }) => {
-      if (!map) {
-        ignoreStream(stream);
+    parser.on(
+      "file",
+      (fieldName, stream, { encoding, filename, mimeType: mimetype }) => {
+        if (!map) {
+          ignoreStream(stream);
 
-        return exit(
-          createError(
-            400,
-            `Misordered multipart fields; files should follow ‘map’ (${GRAPHQL_MULTIPART_REQUEST_SPEC_URL}).`
-          )
-        );
+          return exit(
+            createError(
+              400,
+              `Misordered multipart fields; files should follow ‘map’ (${GRAPHQL_MULTIPART_REQUEST_SPEC_URL}).`
+            )
+          );
+        }
+
+        const upload = map.get(fieldName);
+
+        if (!upload) {
+          // The file is extraneous. As the rest can still be processed, just
+          // ignore it and don’t exit with an error.
+          ignoreStream(stream);
+
+          return;
+        }
+
+        let fileError: Error;
+
+        const capacitor = new WriteStream();
+
+        capacitor.on("error", () => {
+          stream.unpipe();
+          stream.resume();
+        });
+
+        stream.on("limit", () => {
+          fileError = createError(
+            413,
+            `File truncated as it exceeds the ${maxFileSize} byte size limit.`
+          );
+          stream.unpipe();
+          capacitor.destroy(fileError);
+        });
+
+        stream.on("error", error => {
+          fileError = error;
+          stream.unpipe();
+          capacitor.destroy(fileError);
+        });
+
+        const file: FileUpload = {
+          filename,
+          mimetype,
+          encoding,
+          createReadStream(options) {
+            const error = fileError || (released ? exitError : null);
+            if (error) throw error;
+
+            return capacitor.createReadStream(options);
+          },
+          capacitor
+        };
+
+        Object.defineProperty(file, "capacitor", {
+          enumerable: false,
+          configurable: false,
+          writable: false
+        });
+
+        stream.pipe(capacitor);
+        upload.resolve(file);
       }
+    );
 
-      const upload = map.get(fieldName);
-
-      if (!upload) {
-        // The file is extraneous. As the rest can still be processed, just
-        // ignore it and don’t exit with an error.
-        ignoreStream(stream);
-
-        return;
-      }
-
-      let fileError: Error;
-
-      const capacitor = new WriteStream();
-
-      capacitor.on('error', () => {
-        stream.unpipe();
-        stream.resume();
-      });
-
-      stream.on('limit', () => {
-        fileError = createError(
-          413,
-          `File truncated as it exceeds the ${maxFileSize} byte size limit.`
-        );
-        stream.unpipe();
-        capacitor.destroy(fileError);
-      });
-
-      stream.on('error', error => {
-        fileError = error;
-        stream.unpipe();
-        capacitor.destroy(fileError);
-      });
-
-      const file: FileUpload = {
-        filename,
-        mimetype,
-        encoding,
-        createReadStream(options) {
-          const error = fileError || (released ? exitError : null);
-          if (error) throw error;
-
-          return capacitor.createReadStream(options);
-        },
-        capacitor
-      };
-
-      Object.defineProperty(file, 'capacitor', {
-        enumerable: false,
-        configurable: false,
-        writable: false
-      });
-
-      stream.pipe(capacitor);
-      upload.resolve(file);
-    });
-
-    parser.once('filesLimit', () =>
+    parser.once("filesLimit", () =>
       exit(createError(413, `${maxFiles} max file uploads exceeded.`))
     );
 
-    parser.once('finish', () => {
+    parser.once("finish", () => {
       request.unpipe(parser);
       request.resume();
 
@@ -269,22 +282,26 @@ export default function processRequest(
 
       if (!map)
         return exit(
-          createError(400, `Missing multipart field ‘map’ (${GRAPHQL_MULTIPART_REQUEST_SPEC_URL}).`)
+          createError(
+            400,
+            `Missing multipart field ‘map’ (${GRAPHQL_MULTIPART_REQUEST_SPEC_URL}).`
+          )
         );
 
       for (const upload of map.values())
-        if (!upload.file) upload.reject(createError(400, 'File missing in the request.'));
+        if (!upload.file)
+          upload.reject(createError(400, "File missing in the request."));
     });
 
     // Use the `on` method instead of `once` as in edge cases the same parser
     // could have multiple `error` events and all must be handled to prevent the
     // Node.js process exiting with an error. One edge case is if there is a
     // malformed part header as well as an unexpected end of the form.
-    parser.on('error', (error: Error) => {
+    parser.on("error", (error: Error) => {
       exit(error, true);
     });
 
-    response.once('close', () => {
+    response.once("close", () => {
       released = true;
 
       if (map)
@@ -294,9 +311,14 @@ export default function processRequest(
             upload.file.capacitor.release();
     });
 
-    request.once('close', () => {
+    request.once("close", () => {
       if (!request.readableEnded)
-        exit(createError(499, 'Request disconnected during file upload stream parsing.'));
+        exit(
+          createError(
+            499,
+            "Request disconnected during file upload stream parsing."
+          )
+        );
     });
 
     request.pipe(parser);

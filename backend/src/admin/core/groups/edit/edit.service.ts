@@ -1,14 +1,17 @@
-import { Injectable } from '@nestjs/common';
-import { count, eq } from 'drizzle-orm';
+import { Injectable } from "@nestjs/common";
+import { count, eq } from "drizzle-orm";
 
-import { EditAdminGroupsArgs } from './dto/edit.args';
-import { ShowAdminGroups } from '../show/dto/show.obj';
+import { EditAdminGroupsArgs } from "./dto/edit.args";
+import { ShowAdminGroups } from "../show/dto/show.obj";
 
-import { currentDate } from '@/functions/date';
-import { DatabaseService } from '@/database/database.service';
-import { NotFoundError } from '@/utils/errors/not-found-error';
-import { core_groups, core_groups_names } from '@/src/admin/core/database/schema/groups';
-import { core_users } from '@/src/admin/core/database/schema/users';
+import { currentDate } from "@/functions/date";
+import { DatabaseService } from "@/database/database.service";
+import { NotFoundError } from "@/utils/errors/not-found-error";
+import {
+  core_groups,
+  core_groups_names
+} from "@/src/admin/core/database/schema/groups";
+import { core_users } from "@/src/admin/core/database/schema/users";
 
 @Injectable()
 export class EditAdminGroupsService {
@@ -20,17 +23,20 @@ export class EditAdminGroupsService {
     });
 
     if (!group) {
-      throw new NotFoundError('Group');
+      throw new NotFoundError("Group");
     }
 
-    const groupNames = await this.databaseService.db.query.core_groups_names.findMany({
-      where: (table, { eq }) => eq(table.group_id, id)
-    });
+    const groupNames =
+      await this.databaseService.db.query.core_groups_names.findMany({
+        where: (table, { eq }) => eq(table.group_id, id)
+      });
 
     // Update name languages
     const updatedName = await Promise.all(
       name.map(async item => {
-        const nameExist = groupNames.find(name => name.language_code === item.language_code);
+        const nameExist = groupNames.find(
+          name => name.language_code === item.language_code
+        );
 
         if (nameExist) {
           // If value is empty, do nothing
@@ -85,12 +91,13 @@ export class EditAdminGroupsService {
       .where(eq(core_groups.id, id))
       .returning();
 
-    const updateGroup = await this.databaseService.db.query.core_groups.findFirst({
-      where: (table, { eq }) => eq(table.id, id),
-      with: {
-        name: true
-      }
-    });
+    const updateGroup =
+      await this.databaseService.db.query.core_groups.findFirst({
+        where: (table, { eq }) => eq(table.id, id),
+        with: {
+          name: true
+        }
+      });
 
     return {
       users_count: usersCount[0].count,

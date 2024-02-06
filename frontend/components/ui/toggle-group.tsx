@@ -1,33 +1,36 @@
-'use client';
+"use client";
 
-import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
-import { type VariantProps } from 'class-variance-authority';
+import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
+import { type VariantProps } from "class-variance-authority";
 import {
   type ComponentPropsWithoutRef,
   type ElementRef,
   createContext,
   forwardRef,
   useContext
-} from 'react';
+} from "react";
 
-import { toggleVariants } from '@/components/ui/toggle';
-import { cx } from '@/functions/classnames';
+import { toggleVariants } from "@/components/ui/toggle";
+import { cx } from "@/functions/classnames";
 
 const ToggleGroupContext = createContext<VariantProps<typeof toggleVariants>>({
-  size: 'default',
-  variant: 'default'
+  size: "default",
+  variant: "default"
 });
 
 const ToggleGroup = forwardRef<
   ElementRef<typeof ToggleGroupPrimitive.Root>,
-  ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> & VariantProps<typeof toggleVariants>
+  ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &
+    VariantProps<typeof toggleVariants>
 >(({ children, className, size, variant, ...props }, ref) => (
   <ToggleGroupPrimitive.Root
     ref={ref}
-    className={cx('flex items-center justify-center gap-1', className)}
+    className={cx("flex items-center justify-center gap-1", className)}
     {...props}
   >
-    <ToggleGroupContext.Provider value={{ variant, size }}>{children}</ToggleGroupContext.Provider>
+    <ToggleGroupContext.Provider value={{ variant, size }}>
+      {children}
+    </ToggleGroupContext.Provider>
   </ToggleGroupPrimitive.Root>
 ));
 
@@ -35,7 +38,8 @@ ToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName;
 
 const ToggleGroupItem = forwardRef<
   ElementRef<typeof ToggleGroupPrimitive.Item>,
-  ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> & VariantProps<typeof toggleVariants>
+  ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> &
+    VariantProps<typeof toggleVariants>
 >(({ children, className, size, variant, ...props }, ref) => {
   const context = useContext(ToggleGroupContext);
 

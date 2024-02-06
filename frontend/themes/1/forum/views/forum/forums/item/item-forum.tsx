@@ -1,19 +1,24 @@
-import { Folder, MessagesSquare } from 'lucide-react';
+import { Folder, MessagesSquare } from "lucide-react";
 
-import { Link } from '@/i18n';
-import { buttonVariants } from '@/components/ui/button';
-import type { TextLanguage } from '@/graphql/hooks';
-import { useTextLang } from '@/hooks/core/use-text-lang';
-import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
+import { Link } from "@/i18n";
+import { buttonVariants } from "@/components/ui/button";
+import type { TextLanguage } from "@/graphql/hooks";
+import { useTextLang } from "@/hooks/core/use-text-lang";
+import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
 
 export interface ItemForumProps {
   description: TextLanguage[];
   id: number;
   name: TextLanguage[];
-  children?: Omit<ItemForumProps, 'description'>[] | null;
+  children?: Omit<ItemForumProps, "description">[] | null;
 }
 
-export const ItemForum = ({ children, description, id, name }: ItemForumProps) => {
+export const ItemForum = ({
+  children,
+  description,
+  id,
+  name
+}: ItemForumProps) => {
   const { convertNameToLink, convertText } = useTextLang();
 
   return (
@@ -46,9 +51,9 @@ export const ItemForum = ({ children, description, id, name }: ItemForumProps) =
                   key={child.id}
                   href={`/forum/${convertNameToLink({ id: child.id, name: child.name })}`}
                   className={buttonVariants({
-                    variant: 'ghost',
-                    size: 'sm',
-                    className: 'h-auto min-h-[2.25rem] font-normal'
+                    variant: "ghost",
+                    size: "sm",
+                    className: "h-auto min-h-[2.25rem] font-normal"
                   })}
                 >
                   <Folder />

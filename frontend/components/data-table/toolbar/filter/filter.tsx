@@ -1,14 +1,18 @@
-import { PlusCircledIcon } from '@radix-ui/react-icons';
-import type { ReactNode } from 'react';
-import { Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { PlusCircledIcon } from "@radix-ui/react-icons";
+import type { ReactNode } from "react";
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { Badge } from '@/components/ui/badge';
-import { Loader } from '@/components/loader/loader';
-import { FilterToolbarDataTableContext } from './hooks/use-filter-toolbar-data-table';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
+import { Loader } from "@/components/loader/loader";
+import { FilterToolbarDataTableContext } from "./hooks/use-filter-toolbar-data-table";
 
 export interface FilterToolbarDataTableProps {
   children: ReactNode;
@@ -16,7 +20,11 @@ export interface FilterToolbarDataTableProps {
   title: string;
 }
 
-export function FilterToolbarDataTable({ children, id, title }: FilterToolbarDataTableProps) {
+export function FilterToolbarDataTable({
+  children,
+  id,
+  title
+}: FilterToolbarDataTableProps) {
   const searchParams = useSearchParams();
   const selectedValues = searchParams.getAll(id);
 
@@ -29,11 +37,17 @@ export function FilterToolbarDataTable({ children, id, title }: FilterToolbarDat
           {selectedValues.length > 0 && (
             <>
               <Separator orientation="vertical" className="mx-2 h-4" />
-              <Badge variant="secondary" className="rounded-sm px-1 font-normal lg:hidden">
+              <Badge
+                variant="secondary"
+                className="rounded-sm px-1 font-normal lg:hidden"
+              >
                 {selectedValues.length}
               </Badge>
               <div className="hidden space-x-1 lg:flex">
-                <Badge variant="secondary" className="rounded-sm px-1 font-normal">
+                <Badge
+                  variant="secondary"
+                  className="rounded-sm px-1 font-normal"
+                >
                   +{selectedValues.length}
                 </Badge>
               </div>

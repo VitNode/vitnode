@@ -1,12 +1,18 @@
-import { forwardRef, useState, type InputHTMLAttributes } from 'react';
-import * as z from 'zod';
-import { useLocale } from 'next-intl';
+import { forwardRef, useState, type InputHTMLAttributes } from "react";
+import * as z from "zod";
+import { useLocale } from "next-intl";
 
-import { useGlobals } from '@/hooks/core/use-globals';
-import { Input } from './ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { FormControl } from './ui/form';
-import type { TextLanguage } from '@/graphql/hooks';
+import { useGlobals } from "@/hooks/core/use-globals";
+import { Input } from "./ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "./ui/select";
+import { FormControl } from "./ui/form";
+import type { TextLanguage } from "@/graphql/hooks";
 
 export const zodTextLanguageInputType = z.array(
   z.object({
@@ -15,7 +21,8 @@ export const zodTextLanguageInputType = z.array(
   })
 );
 
-interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'> {
+interface Props
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "value"> {
   onChange: (value: TextLanguage[]) => void;
   value: TextLanguage[];
 }
@@ -24,10 +31,13 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
   ({ onChange, value, ...props }, ref) => {
     const locale = useLocale();
     const { defaultLanguage, languages } = useGlobals();
-    const [selectedLanguage, setSelectedLanguage] = useState(locale ?? defaultLanguage);
+    const [selectedLanguage, setSelectedLanguage] = useState(
+      locale ?? defaultLanguage
+    );
     const valueAsArray = Array.isArray(value) ? value : [];
     const currentValue =
-      valueAsArray.find(item => item.language_code === selectedLanguage)?.value ?? '';
+      valueAsArray.find(item => item.language_code === selectedLanguage)
+        ?.value ?? "";
 
     return (
       <div className="flex gap-2">
@@ -37,7 +47,9 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
           onChange={e => {
             if (e.target.value) {
               onChange([
-                ...valueAsArray.filter(item => item.language_code !== selectedLanguage),
+                ...valueAsArray.filter(
+                  item => item.language_code !== selectedLanguage
+                ),
                 {
                   language_code: selectedLanguage,
                   value: e.target.value
@@ -47,7 +59,11 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
               return;
             }
 
-            onChange(valueAsArray.filter(item => item.language_code !== selectedLanguage));
+            onChange(
+              valueAsArray.filter(
+                item => item.language_code !== selectedLanguage
+              )
+            );
           }}
           value={currentValue}
           ref={ref}
@@ -74,6 +90,6 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
     );
   }
 );
-TextLanguageInput.displayName = 'TextLanguageInput';
+TextLanguageInput.displayName = "TextLanguageInput";
 
 export { TextLanguageInput };

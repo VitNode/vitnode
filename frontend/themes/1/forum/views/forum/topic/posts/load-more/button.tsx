@@ -1,6 +1,6 @@
-import { useTranslations } from 'next-intl';
+import { useTranslations } from "next-intl";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 
 interface Props {
   count: number;
@@ -8,8 +8,12 @@ interface Props {
   isFetching: boolean;
 }
 
-export const ButtonLoadMorePosts = ({ count, fetchNextPage, isFetching }: Props) => {
-  const t = useTranslations('forum.topics');
+export const ButtonLoadMorePosts = ({
+  count,
+  fetchNextPage,
+  isFetching
+}: Props) => {
+  const t = useTranslations("forum.topics");
 
   return (
     <div className="relative py-5">
@@ -18,8 +22,13 @@ export const ButtonLoadMorePosts = ({ count, fetchNextPage, isFetching }: Props)
       </div>
 
       <div className="relative flex justify-center">
-        <Button variant="outline" size="sm" onClick={fetchNextPage} loading={isFetching}>
-          {t('load_more_comments', { count })}
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={fetchNextPage}
+          loading={isFetching}
+        >
+          {t("load_more_comments", { count })}
         </Button>
       </div>
     </div>

@@ -1,19 +1,19 @@
-import { useTranslations } from 'next-intl';
-import { Plus } from 'lucide-react';
-import { Suspense, lazy } from 'react';
+import { useTranslations } from "next-intl";
+import { Plus } from "lucide-react";
+import { Suspense, lazy } from "react";
 
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Loader } from '@/components/loader/loader';
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Loader } from "@/components/loader/loader";
 
 const CreateEditFormModeratorsStaffAdmin = lazy(() =>
-  import('../create-edit-form/create-edit-form').then(module => ({
+  import("../create-edit-form/create-edit-form").then(module => ({
     default: module.CreateEditFormModeratorsStaffAdmin
   }))
 );
 
 export const CreateActionsModeratorsStaffAdmin = () => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
 
   return (
     <>
@@ -21,7 +21,7 @@ export const CreateActionsModeratorsStaffAdmin = () => {
         <DialogTrigger asChild>
           <Button>
             <Plus />
-            {t('create')}
+            {t("create")}
           </Button>
         </DialogTrigger>
 

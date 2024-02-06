@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy } from "react";
 
-import { Loader } from '@/components/loader/loader';
-import type { Core_Nav__Admin__ShowQuery } from '@/graphql/hooks';
+import { Loader } from "@/components/loader/loader";
+import type { Core_Nav__Admin__ShowQuery } from "@/graphql/hooks";
 
 const Content = lazy(() =>
-  import('./content').then(module => ({
+  import("./content").then(module => ({
     default: module.ContentTableContentNavAdmin
   }))
 );

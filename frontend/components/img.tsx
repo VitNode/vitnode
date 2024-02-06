@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { forwardRef, useEffect, useState } from 'react';
-import Image, { type StaticImageData } from 'next/image';
+import { forwardRef, useEffect, useState } from "react";
+import Image, { type StaticImageData } from "next/image";
 
-import { Skeleton } from './ui/skeleton';
-import { cx } from '@/functions/classnames';
+import { Skeleton } from "./ui/skeleton";
+import { cx } from "@/functions/classnames";
 
 interface InitialProps {
   alt: string;
@@ -63,9 +63,13 @@ const Img = forwardRef<HTMLDivElement, ImgProps>(
 
     return (
       <div
-        className={cx('relative overflow-hidden leading-[0] w-fit', className)}
+        className={cx("relative overflow-hidden leading-[0] w-fit", className)}
         style={{
-          height: !height ? (heightLoading && isLoading ? `${heightLoading}px` : '100%') : undefined
+          height: !height
+            ? heightLoading && isLoading
+              ? `${heightLoading}px`
+              : "100%"
+            : undefined
         }}
         ref={ref}
       >
@@ -73,8 +77,11 @@ const Img = forwardRef<HTMLDivElement, ImgProps>(
           <Skeleton
             className="absolute"
             style={{
-              height: height !== undefined ? `${heightLoading ? heightLoading : height}px` : '100%',
-              width: width ? `${widthLoading ? widthLoading : width}px` : '100%'
+              height:
+                height !== undefined
+                  ? `${heightLoading ? heightLoading : height}px`
+                  : "100%",
+              width: width ? `${widthLoading ? widthLoading : width}px` : "100%"
             }}
           />
         )}
@@ -97,6 +104,6 @@ const Img = forwardRef<HTMLDivElement, ImgProps>(
     );
   }
 );
-Img.displayName = 'Img';
+Img.displayName = "Img";
 
 export { Img };

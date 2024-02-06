@@ -1,15 +1,19 @@
-import { Suspense, forwardRef, lazy, useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { X } from 'lucide-react';
+import { Suspense, forwardRef, lazy, useState } from "react";
+import { useTranslations } from "next-intl";
+import { X } from "lucide-react";
 
-import { cx } from '@/functions/classnames';
-import { Button } from '@/components/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Loader } from '@/components/loader/loader';
-import { Badge } from '@/components/ui/badge';
+import { cx } from "@/functions/classnames";
+import { Button } from "@/components/ui/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger
+} from "@/components/ui/popover";
+import { Loader } from "@/components/loader/loader";
+import { Badge } from "@/components/ui/badge";
 
 const UserInputContent = lazy(() =>
-  import('./content/content').then(module => ({
+  import("./content/content").then(module => ({
     default: module.UserInputContent
   }))
 );
@@ -36,86 +40,91 @@ interface SingleProps extends Props {
   value?: UserInputItem;
 }
 
-export const UserInput = forwardRef<HTMLButtonElement, SingleProps | MultiProps>(
-  ({ className, multiple, onChange, value: currentValue, ...rest }, ref) => {
-    const t = useTranslations('core.user_input');
-    const values = Array.isArray(currentValue) ? currentValue : currentValue ? [currentValue] : [];
-    const [open, setOpen] = useState(false);
+export const UserInput = forwardRef<
+  HTMLButtonElement,
+  SingleProps | MultiProps
+>(({ className, multiple, onChange, value: currentValue, ...rest }, ref) => {
+  const t = useTranslations("core.user_input");
+  const values = Array.isArray(currentValue)
+    ? currentValue
+    : currentValue
+      ? [currentValue]
+      : [];
+  const [open, setOpen] = useState(false);
 
-    return (
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            className={cx('w-full justify-start', className, {
-              'text-muted-foreground': values.length === 0
-            })}
-            ref={ref}
-            {...rest}
-          >
-            {values.length === 0
-              ? t('placeholder')
-              : values.map(item => {
-                  const onRemove = () => {
-                    if (multiple) {
-                      onChange(values.filter(value => value.id !== item.id));
-
-                      return;
-                    }
-
-                    onChange();
-                  };
-
-                  return (
-                    <Badge
-                      className="[&>svg]:size-4"
-                      key={item.id}
-                      tabIndex={0}
-                      onClick={e => {
-                        e.stopPropagation();
-                        e.preventDefault();
-                        onRemove();
-                      }}
-                      onKeyDown={e => {
-                        if (e.key === 'Enter') {
-                          e.stopPropagation();
-                          e.preventDefault();
-                          onRemove();
-                        }
-                      }}
-                    >
-                      {item.name} <X />
-                    </Badge>
-                  );
-                })}
-          </Button>
-        </PopoverTrigger>
-
-        <PopoverContent className="p-0 w-64" align="start">
-          <Suspense fallback={<Loader className="p-4" />}>
-            <UserInputContent
-              values={values}
-              onSelect={item => {
-                if (multiple) {
-                  if (values.find(value => value.id === item.id)) {
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          className={cx("w-full justify-start", className, {
+            "text-muted-foreground": values.length === 0
+          })}
+          ref={ref}
+          {...rest}
+        >
+          {values.length === 0
+            ? t("placeholder")
+            : values.map(item => {
+                const onRemove = () => {
+                  if (multiple) {
                     onChange(values.filter(value => value.id !== item.id));
 
                     return;
                   }
-                  onChange([...values, item]);
+
+                  onChange();
+                };
+
+                return (
+                  <Badge
+                    className="[&>svg]:size-4"
+                    key={item.id}
+                    tabIndex={0}
+                    onClick={e => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      onRemove();
+                    }}
+                    onKeyDown={e => {
+                      if (e.key === "Enter") {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        onRemove();
+                      }
+                    }}
+                  >
+                    {item.name} <X />
+                  </Badge>
+                );
+              })}
+        </Button>
+      </PopoverTrigger>
+
+      <PopoverContent className="p-0 w-64" align="start">
+        <Suspense fallback={<Loader className="p-4" />}>
+          <UserInputContent
+            values={values}
+            onSelect={item => {
+              if (multiple) {
+                if (values.find(value => value.id === item.id)) {
+                  onChange(values.filter(value => value.id !== item.id));
 
                   return;
                 }
+                onChange([...values, item]);
 
-                onChange(item.id !== values[0]?.id ? item : undefined);
-                setOpen(false);
-              }}
-            />
-          </Suspense>
-        </PopoverContent>
-      </Popover>
-    );
-  }
-);
+                return;
+              }
 
-UserInput.displayName = 'UserInput';
+              onChange(item.id !== values[0]?.id ? item : undefined);
+              setOpen(false);
+            }}
+          />
+        </Suspense>
+      </PopoverContent>
+    </Popover>
+  );
+});
+
+UserInput.displayName = "UserInput";

@@ -1,9 +1,9 @@
-import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-import { usePathname, useRouter } from '@/i18n';
+import { usePathname, useRouter } from "@/i18n";
 
-import { Input } from '../../ui/input';
+import { Input } from "../../ui/input";
 
 interface Props {
   searchPlaceholder?: string;
@@ -13,14 +13,14 @@ export const SearchToolbarDataTable = ({ searchPlaceholder }: Props) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { push } = useRouter();
-  const [value, setValue] = useState(searchParams.get('search') ?? '');
+  const [value, setValue] = useState(searchParams.get("search") ?? "");
 
   // Update the value if the search param changes
   useEffect(() => {
-    if (searchParams.get('search') === value) return;
+    if (searchParams.get("search") === value) return;
 
-    setValue(searchParams.get('search') ?? '');
-  }, [searchParams.get('search')]);
+    setValue(searchParams.get("search") ?? "");
+  }, [searchParams.get("search")]);
 
   return (
     <Input
@@ -30,9 +30,9 @@ export const SearchToolbarDataTable = ({ searchPlaceholder }: Props) => {
         setValue(e.target.value);
         const params = new URLSearchParams(searchParams);
         if (e.target.value) {
-          params.set('search', e.target.value);
+          params.set("search", e.target.value);
         } else {
-          params.delete('search');
+          params.delete("search");
         }
 
         push(params.toString() ? `${pathname}?${params.toString()}` : pathname);

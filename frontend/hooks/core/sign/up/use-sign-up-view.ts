@@ -1,11 +1,11 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslations } from 'next-intl';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-import { toast } from 'sonner';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { toast } from "sonner";
 
-import type { ErrorType } from '@/graphql/fetcher';
-import { mutationApi } from './mutation-api';
+import type { ErrorType } from "@/graphql/fetcher";
+import { mutationApi } from "./mutation-api";
 
 const nameRegex = /^[A-Za-z0-9._@ -]*$/;
 
@@ -14,54 +14,57 @@ interface Args {
 }
 
 export const useSignUpView = ({ installPage }: Args) => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
 
   const formSchema = z.object({
     name: z
       .string({
-        required_error: t('forms.empty')
+        required_error: t("forms.empty")
       })
       .min(1, {
-        message: t('forms.empty')
+        message: t("forms.empty")
       })
       .max(32, {
-        message: t('forms.max_length', { length: 32 })
+        message: t("forms.max_length", { length: 32 })
       })
       .refine(value => nameRegex.test(value), {
-        message: t('sign_up.form.name.invalid')
+        message: t("sign_up.form.name.invalid")
       }),
     email: z
       .string({
-        required_error: t('forms.empty')
+        required_error: t("forms.empty")
       })
       .min(1, {
-        message: t('forms.empty')
+        message: t("forms.empty")
       }),
     password: z
       .string({
-        required_error: t('forms.empty')
+        required_error: t("forms.empty")
       })
       .min(1, {
-        message: t('forms.empty')
+        message: t("forms.empty")
       })
-      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{8,}$/, {
-        message: t('sign_up.form.password.invalid')
-      }),
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{8,}$/,
+        {
+          message: t("sign_up.form.password.invalid")
+        }
+      ),
     terms: z.boolean().refine(value => value, {
-      message: t('sign_up.form.terms.empty')
+      message: t("sign_up.form.terms.empty")
     }),
     newsletter: z.boolean()
   });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
-      email: '',
-      password: '',
+      name: "",
+      email: "",
+      password: "",
       terms: false,
       newsletter: false
     },
-    mode: 'onChange'
+    mode: "onChange"
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -78,12 +81,12 @@ export const useSignUpView = ({ installPage }: Args) => {
 
       if (error?.extensions) {
         const { code } = error.extensions;
-        if (code === 'EMAIL_ALREADY_EXISTS') {
+        if (code === "EMAIL_ALREADY_EXISTS") {
           form.setError(
-            'email',
+            "email",
             {
-              type: 'manual',
-              message: t('sign_up.form.email.already_exists')
+              type: "manual",
+              message: t("sign_up.form.email.already_exists")
             },
             {
               shouldFocus: true
@@ -93,12 +96,12 @@ export const useSignUpView = ({ installPage }: Args) => {
           return;
         }
 
-        if (code === 'NAME_ALREADY_EXISTS') {
+        if (code === "NAME_ALREADY_EXISTS") {
           form.setError(
-            'name',
+            "name",
             {
-              type: 'manual',
-              message: t('sign_up.form.name.already_exists')
+              type: "manual",
+              message: t("sign_up.form.name.already_exists")
             },
             {
               shouldFocus: true
@@ -108,8 +111,8 @@ export const useSignUpView = ({ installPage }: Args) => {
           return;
         }
 
-        toast.error(t('errors.title'), {
-          description: t('errors.internal_server_error')
+        toast.error(t("errors.title"), {
+          description: t("errors.internal_server_error")
         });
       }
     }

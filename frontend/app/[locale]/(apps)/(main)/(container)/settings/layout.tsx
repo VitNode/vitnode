@@ -1,9 +1,9 @@
-import { lazy, type LazyExoticComponent, type ReactNode } from 'react';
-import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { lazy, type LazyExoticComponent, type ReactNode } from "react";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-import { getConfig } from '@/functions/get-config';
-import { getSessionData } from '@/functions/get-session-data';
+import { getConfig } from "@/functions/get-config";
+import { getSessionData } from "@/functions/get-session-data";
 
 interface Props {
   children: ReactNode;
@@ -12,16 +12,18 @@ interface Props {
   };
 }
 
-export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params: { locale }
+}: Props): Promise<Metadata> {
   const config = await getConfig();
-  const t = await getTranslations({ locale, namespace: 'core.settings' });
+  const t = await getTranslations({ locale, namespace: "core.settings" });
 
   return {
     title: {
-      default: t('title'),
-      template: `%s - ${t('title')} - ${config.side_name}`
+      default: t("title"),
+      template: `%s - ${t("title")} - ${config.side_name}`
     },
-    robots: 'noindex, nofollow'
+    robots: "noindex, nofollow"
   };
 }
 
@@ -30,9 +32,9 @@ export default async function Layout({ children }: Props) {
   const LayoutFromLazy: LazyExoticComponent<
     ({ children }: { children: ReactNode }) => JSX.Element
   > = lazy(() =>
-    import(`@/themes/${theme_id}/core/views/settings/layout-settings-view`).catch(
-      () => import('@/themes/1/core/views/settings/layout-settings-view')
-    )
+    import(
+      `@/themes/${theme_id}/core/views/settings/layout-settings-view`
+    ).catch(() => import("@/themes/1/core/views/settings/layout-settings-view"))
   );
 
   return <LayoutFromLazy>{children}</LayoutFromLazy>;

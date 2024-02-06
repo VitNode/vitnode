@@ -1,9 +1,9 @@
-import { useTranslations } from 'next-intl';
-import type { LucideIcon } from 'lucide-react';
+import { useTranslations } from "next-intl";
+import type { LucideIcon } from "lucide-react";
 
-import { cx } from '@/functions/classnames';
-import { buttonVariants } from '@/components/ui/button';
-import { Link, usePathname } from '@/i18n';
+import { cx } from "@/functions/classnames";
+import { buttonVariants } from "@/components/ui/button";
+import { Link, usePathname } from "@/i18n";
 
 export interface ItemListNavAdminProps {
   href: string;
@@ -16,8 +16,14 @@ interface Props extends ItemListNavAdminProps {
   onClick?: () => void;
 }
 
-export const LinkItemListNavAdmin = ({ href, icon, id, onClick, primaryId }: Props) => {
-  const t = useTranslations('admin');
+export const LinkItemListNavAdmin = ({
+  href,
+  icon,
+  id,
+  onClick,
+  primaryId
+}: Props) => {
+  const t = useTranslations("admin");
   const pathname = usePathname();
   const Icon = icon;
 
@@ -28,10 +34,10 @@ export const LinkItemListNavAdmin = ({ href, icon, id, onClick, primaryId }: Pro
       <Link
         href={href}
         className={cx(
-          buttonVariants({ variant: 'ghost', size: 'sm' }),
-          'w-full justify-start relative pl-4 hover:bg-secondary font-normal text-foreground',
+          buttonVariants({ variant: "ghost", size: "sm" }),
+          "w-full justify-start relative pl-4 hover:bg-secondary font-normal text-foreground",
           {
-            'font-semibold': active
+            "font-semibold": active
           }
         )}
         onClick={onClick}

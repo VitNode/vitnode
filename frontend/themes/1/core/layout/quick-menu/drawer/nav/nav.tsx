@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import * as Accordion from '@radix-ui/react-accordion';
-import { ChevronDown } from 'lucide-react';
+import { useState } from "react";
+import * as Accordion from "@radix-ui/react-accordion";
+import { ChevronDown } from "lucide-react";
 
-import { useSession } from '@/hooks/core/use-session';
-import { cx } from '@/functions/classnames';
-import { ItemNavDrawerQuickMenu } from './item';
-import { useTextLang } from '@/hooks/core/use-text-lang';
-import { buttonVariants } from '@/components/ui/button';
-import { classNameDrawerQuickMenu } from '../drawer';
+import { useSession } from "@/hooks/core/use-session";
+import { cx } from "@/functions/classnames";
+import { ItemNavDrawerQuickMenu } from "./item";
+import { useTextLang } from "@/hooks/core/use-text-lang";
+import { buttonVariants } from "@/components/ui/button";
+import { classNameDrawerQuickMenu } from "../drawer";
 
 export const NavDrawerQuickMenu = () => {
   const { nav, session } = useSession();
@@ -18,8 +18,8 @@ export const NavDrawerQuickMenu = () => {
     <Accordion.Root
       type="multiple"
       defaultValue={activeItems}
-      className={cx('px-2 flex flex-col', {
-        'pb-5': !session
+      className={cx("px-2 flex flex-col", {
+        "pb-5": !session
       })}
     >
       {nav.map(item => {
@@ -30,8 +30,11 @@ export const NavDrawerQuickMenu = () => {
                 <Accordion.Trigger
                   className={cx(
                     buttonVariants({
-                      variant: 'ghost',
-                      className: cx(classNameDrawerQuickMenu, 'focus:bg-inherit')
+                      variant: "ghost",
+                      className: cx(
+                        classNameDrawerQuickMenu,
+                        "focus:bg-inherit"
+                      )
                     })
                   )}
                   onClick={() =>
@@ -44,9 +47,14 @@ export const NavDrawerQuickMenu = () => {
                 >
                   <span>{convertText(item.name)}</span>
                   <ChevronDown
-                    className={cx('w-5 h-5 ml-auto transition-transform flex-shrink-0', {
-                      'transform rotate-180': activeItems.includes(item.id.toString())
-                    })}
+                    className={cx(
+                      "w-5 h-5 ml-auto transition-transform flex-shrink-0",
+                      {
+                        "transform rotate-180": activeItems.includes(
+                          item.id.toString()
+                        )
+                      }
+                    )}
                   />
                 </Accordion.Trigger>
               </Accordion.Header>

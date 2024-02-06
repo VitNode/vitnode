@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
-import { StylesAdminLayout } from '@/admin/core/views/core/styles/styles-admin-layout';
+import { StylesAdminLayout } from "@/admin/core/views/core/styles/styles-admin-layout";
 
 interface Props {
   children: ReactNode;

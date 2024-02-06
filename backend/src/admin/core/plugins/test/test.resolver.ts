@@ -1,9 +1,9 @@
-import { Mutation, Resolver } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
+import { Mutation, Resolver } from "@nestjs/graphql";
+import { UseGuards } from "@nestjs/common";
 
-import { TestPluginsService } from './test.service';
+import { TestPluginsService } from "./test.service";
 
-import { AdminAuthGuards } from '@/utils/guards/admin-auth.guards';
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
 
 @Resolver()
 export class TestPluginsResolver {

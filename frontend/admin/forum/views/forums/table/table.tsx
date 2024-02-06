@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy } from "react";
 
-import { Loader } from '@/components/loader/loader';
+import { Loader } from "@/components/loader/loader";
 
 const ContentTableForumsForumAdmin = lazy(() =>
-  import('./content-table').then(module => ({
+  import("./content-table").then(module => ({
     default: module.ContentTableForumsForumAdmin
   }))
 );

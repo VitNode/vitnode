@@ -1,11 +1,16 @@
-import { useTranslations } from 'next-intl';
-import * as z from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from 'sonner';
+import { useTranslations } from "next-intl";
+import * as z from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 
-import { DialogFooter, DialogHeader, DialogTitle, useDialog } from '@/components/ui/dialog';
-import type { ShowCoreLanguages } from '@/graphql/hooks';
+import {
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  useDialog
+} from "@/components/ui/dialog";
+import type { ShowCoreLanguages } from "@/graphql/hooks";
 import {
   Form,
   FormControl,
@@ -13,30 +18,32 @@ import {
   FormItem,
   FormLabel,
   FormMessage
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { mutationApi } from './mutation-api';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { mutationApi } from "./mutation-api";
 
-export const ModalEditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
-  const t = useTranslations('admin');
-  const tCore = useTranslations('core');
+export const ModalEditActionsTableLangsCoreAdmin = (
+  data: ShowCoreLanguages
+) => {
+  const t = useTranslations("admin");
+  const tCore = useTranslations("core");
   const { setOpen } = useDialog();
 
   const formSchema = z.object({
     name: z
       .string({
-        required_error: tCore('forms.empty')
+        required_error: tCore("forms.empty")
       })
       .min(1, {
-        message: tCore('forms.empty')
+        message: tCore("forms.empty")
       }),
     timezone: z
       .string({
-        required_error: tCore('forms.empty')
+        required_error: tCore("forms.empty")
       })
       .min(1, {
-        message: tCore('forms.empty')
+        message: tCore("forms.empty")
       })
   });
 
@@ -54,14 +61,14 @@ export const ModalEditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => 
       ...values
     });
     if (mutation.error) {
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error')
+      toast.error(tCore("errors.title"), {
+        description: tCore("errors.internal_server_error")
       });
 
       return;
     }
 
-    toast(tCore('saved_success'));
+    toast(tCore("saved_success"));
     setOpen(false);
   };
 
@@ -72,13 +79,16 @@ export const ModalEditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => 
       </DialogHeader>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col gap-4"
+        >
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('core.langs.actions.edit.name')}</FormLabel>
+                <FormLabel>{t("core.langs.actions.edit.name")}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -92,7 +102,7 @@ export const ModalEditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => 
             name="timezone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('core.langs.actions.edit.timezone')}</FormLabel>
+                <FormLabel>{t("core.langs.actions.edit.timezone")}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -108,7 +118,7 @@ export const ModalEditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => 
             onClick={form.handleSubmit(onSubmit)}
             loading={form.formState.isSubmitting}
           >
-            {t('core.langs.actions.edit.submit')}
+            {t("core.langs.actions.edit.submit")}
           </Button>
         </DialogFooter>
       </Form>

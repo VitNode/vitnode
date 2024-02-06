@@ -1,7 +1,13 @@
-import { changeCodePluginToCapitalLetters } from '@/src/admin/core/plugins/functions/change-code-plugin-to-capital-letters';
+import { changeCodePluginToCapitalLetters } from "@/src/admin/core/plugins/functions/change-code-plugin-to-capital-letters";
 
-export const createModuleSchema = ({ admin, code }: { code: string; admin?: boolean }) => {
-  const name = `${admin ? 'Admin' : ''}${changeCodePluginToCapitalLetters(code)}`;
+export const createModuleSchema = ({
+  admin,
+  code
+}: {
+  code: string;
+  admin?: boolean;
+}) => {
+  const name = `${admin ? "Admin" : ""}${changeCodePluginToCapitalLetters(code)}`;
 
   return `import { Module } from '@nestjs/common';
 
@@ -19,14 +25,17 @@ export const changeModuleRootSchema = ({
   content: string;
   admin?: boolean;
 }) => {
-  const name = `${admin ? 'Admin' : ''}${changeCodePluginToCapitalLetters(code)}`;
+  const name = `${admin ? "Admin" : ""}${changeCodePluginToCapitalLetters(code)}`;
 
   return content
     .replace(
-      '// ! === IMPORT ===',
+      "// ! === IMPORT ===",
       `import { ${name}Module } from './${code}/${code}.module';\n// ! === IMPORT ===`
     )
-    .replace('\n    // ! === MODULE ===', `,\n    ${name}Module\n    // ! === MODULE ===`);
+    .replace(
+      "\n    // ! === MODULE ===",
+      `,\n    ${name}Module\n    // ! === MODULE ===`
+    );
 };
 
 export const changeDatabaseService = ({
@@ -38,14 +47,17 @@ export const changeDatabaseService = ({
   content: string;
   admin?: boolean;
 }) => {
-  const name = `${admin ? 'Admin' : ''}${changeCodePluginToCapitalLetters(code)}`;
+  const name = `${admin ? "Admin" : ""}${changeCodePluginToCapitalLetters(code)}`;
 
   return content
     .replace(
-      '// ! === IMPORT ===',
+      "// ! === IMPORT ===",
       `import table${name} from '../src/admin/${code}/database/index';\n// ! === IMPORT ===`
     )
-    .replace('\n  // ! === MODULE ===', `,\n  ...table${name}\n  // ! === MODULE ===`);
+    .replace(
+      "\n  // ! === MODULE ===",
+      `,\n  ...table${name}\n  // ! === MODULE ===`
+    );
 };
 
 export const createFunctionsDatabase = () => {

@@ -1,16 +1,18 @@
-'use server';
+"use server";
 
-import { cookies } from 'next/headers';
-import { revalidateTag } from 'next/cache';
+import { cookies } from "next/headers";
+import { revalidateTag } from "next/cache";
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher } from "@/graphql/fetcher";
 import {
   Forum_Posts__Create,
   type Forum_Posts__CreateMutation,
   type Forum_Posts__CreateMutationVariables
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
-export const mutationApi = async (variables: Forum_Posts__CreateMutationVariables) => {
+export const mutationApi = async (
+  variables: Forum_Posts__CreateMutationVariables
+) => {
   try {
     const { data } = await fetcher<
       Forum_Posts__CreateMutation,
@@ -23,7 +25,7 @@ export const mutationApi = async (variables: Forum_Posts__CreateMutationVariable
       }
     });
 
-    revalidateTag('Forum_Topics__Show');
+    revalidateTag("Forum_Topics__Show");
 
     return { data };
   } catch (error) {

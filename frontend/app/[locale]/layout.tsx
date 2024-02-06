@@ -1,18 +1,18 @@
-import { type ReactNode } from 'react';
-import { notFound } from 'next/navigation';
-import { NextIntlClientProvider, type AbstractIntlMessages } from 'next-intl';
-import { Inter } from 'next/font/google';
+import { type ReactNode } from "react";
+import { notFound } from "next/navigation";
+import { NextIntlClientProvider, type AbstractIntlMessages } from "next-intl";
+import { Inter } from "next/font/google";
 
-import { ThemeProvider } from './theme-provider';
-import { getConfig } from '@/functions/get-config';
-import { InternalErrorView } from '@/admin/core/global/internal-error-view';
-import './global.scss';
-import { getSessionData } from '@/functions/get-session-data';
+import { ThemeProvider } from "./theme-provider";
+import { getConfig } from "@/functions/get-config";
+import { InternalErrorView } from "@/admin/core/global/internal-error-view";
+import "./global.scss";
+import { getSessionData } from "@/functions/get-session-data";
 
 const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter'
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter"
 });
 
 interface Props {
@@ -20,7 +20,10 @@ interface Props {
   params: { locale: string };
 }
 
-export default async function LocaleLayout({ children, params: { locale } }: Props) {
+export default async function LocaleLayout({
+  children,
+  params: { locale }
+}: Props) {
   const config = await getConfig();
   let messages: AbstractIntlMessages;
   try {
@@ -33,7 +36,10 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
     );
 
     messages = {
-      ...messagesFormApps.reduce((acc, messages) => ({ ...acc, ...messages }), {})
+      ...messagesFormApps.reduce(
+        (acc, messages) => ({ ...acc, ...messages }),
+        {}
+      )
     };
   } catch (error) {
     notFound();
@@ -44,9 +50,13 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
 
     return (
       <html lang={locale} className={inter.variable}>
-        <body className={`theme_${data.core_sessions__authorization.theme_id ?? 1}`}>
+        <body
+          className={`theme_${data.core_sessions__authorization.theme_id ?? 1}`}
+        >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+            <NextIntlClientProvider messages={messages}>
+              {children}
+            </NextIntlClientProvider>
           </ThemeProvider>
         </body>
       </html>

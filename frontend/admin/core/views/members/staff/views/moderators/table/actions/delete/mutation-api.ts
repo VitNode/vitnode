@@ -1,14 +1,14 @@
-'use server';
+"use server";
 
-import { cookies } from 'next/headers';
-import { revalidatePath } from 'next/cache';
+import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Staff_Moderators__Admin__Delete,
   type Core_Staff_Moderators__Admin__DeleteMutation,
   type Core_Staff_Moderators__Admin__DeleteMutationVariables
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
 export const mutationApi = async (
   variables: Core_Staff_Moderators__Admin__DeleteMutationVariables
@@ -25,7 +25,7 @@ export const mutationApi = async (
       }
     });
 
-    revalidatePath('/admin/members/staff/moderators', 'page');
+    revalidatePath("/admin/members/staff/moderators", "page");
 
     return { data };
   } catch (error) {

@@ -1,12 +1,12 @@
-import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
+import { Args, Context, Mutation, Resolver } from "@nestjs/graphql";
+import { UseGuards } from "@nestjs/common";
 
-import { AuthGuards } from '@/utils/guards/auth.guards';
-import { CurrentUser, User } from '@/utils/decorators/user.decorator';
-import { Ctx } from '@/types/context.type';
-import { CreatePostsForumsArgs } from '@/src/forum/posts/create/dto/create.args';
-import { ShowPostsForums } from '@/src/forum/posts/show/dto/show.obj';
-import { CreateForumsPostsService } from '@/src/forum/posts/create/create.service';
+import { AuthGuards } from "@/utils/guards/auth.guards";
+import { CurrentUser, User } from "@/utils/decorators/user.decorator";
+import { Ctx } from "@/types/context.type";
+import { CreatePostsForumsArgs } from "@/src/forum/posts/create/dto/create.args";
+import { ShowPostsForums } from "@/src/forum/posts/show/dto/show.obj";
+import { CreateForumsPostsService } from "@/src/forum/posts/create/create.service";
 
 @Resolver()
 export class CreateForumPostsResolver {

@@ -1,9 +1,9 @@
-import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Context, Mutation, Resolver } from "@nestjs/graphql";
 
-import { ChangeCoreThemesArgs } from './dto/change.args';
-import { ChangeCoreThemesService } from './change.service';
+import { ChangeCoreThemesArgs } from "./dto/change.args";
+import { ChangeCoreThemesService } from "./change.service";
 
-import { Ctx } from '@/types/context.type';
+import { Ctx } from "@/types/context.type";
 
 @Resolver()
 export class ChangeThemesResolver {

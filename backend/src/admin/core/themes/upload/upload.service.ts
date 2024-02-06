@@ -1,17 +1,17 @@
-import * as fs from 'fs';
-import { join } from 'path';
-import { writeFile } from 'fs/promises';
+import * as fs from "fs";
+import { join } from "path";
+import { writeFile } from "fs/promises";
 
-import { Injectable } from '@nestjs/common';
-import * as tar from 'tar';
+import { Injectable } from "@nestjs/common";
+import * as tar from "tar";
 
-import { UploadAdminThemesArgs } from './dto/delete.args';
+import { UploadAdminThemesArgs } from "./dto/delete.args";
 
-import { DatabaseService } from '@/database/database.service';
-import { generateRandomString } from '@/functions/generate-random-string';
-import { currentDate } from '@/functions/date';
-import { CustomError } from '@/utils/errors/CustomError';
-import { core_themes } from '../../database/schema/themes';
+import { DatabaseService } from "@/database/database.service";
+import { generateRandomString } from "@/functions/generate-random-string";
+import { currentDate } from "@/functions/date";
+import { CustomError } from "@/utils/errors/CustomError";
+import { core_themes } from "../../database/schema/themes";
 
 interface ConfigTheme {
   author: string;
@@ -26,27 +26,27 @@ interface ConfigTheme {
 export class UploadAdminThemesService {
   constructor(private databaseService: DatabaseService) {}
 
-  protected path: string = join('..', 'frontend', 'themes');
+  protected path: string = join("..", "frontend", "themes");
   protected tempFolder: string = `temp--${generateRandomString(5)}-${currentDate()}`;
   protected tempPath: string = `${this.path}/${this.tempFolder}`;
 
   protected getThemeConfig(): ConfigTheme {
-    const pathThemeJSON = join(this.tempPath, 'theme.json');
-    const themeFile = fs.readFileSync(pathThemeJSON, 'utf8');
+    const pathThemeJSON = join(this.tempPath, "theme.json");
+    const themeFile = fs.readFileSync(pathThemeJSON, "utf8");
     const config: ConfigTheme = JSON.parse(themeFile);
 
     // Check if variables exists
     if (!config.name || !config.author || !config.author_url) {
       throw new CustomError({
-        code: 'THEME_CONFIG_VARIABLES_NOT_FOUND',
-        message: 'Theme config variables not found'
+        code: "THEME_CONFIG_VARIABLES_NOT_FOUND",
+        message: "Theme config variables not found"
       });
     }
 
     if (!config.version || !config.version_code) {
       throw new CustomError({
-        code: 'THEME_CONFIG_VERSION_NOT_FOUND',
-        message: 'Theme config version not found'
+        code: "THEME_CONFIG_VERSION_NOT_FOUND",
+        message: "Theme config version not found"
       });
     }
 
@@ -65,7 +65,7 @@ export class UploadAdminThemesService {
           cwd: this.tempPath
         })
       )
-      .on('finish', async () => {
+      .on("finish", async () => {
         const config = this.getThemeConfig();
 
         // Create theme in database
@@ -87,13 +87,13 @@ export class UploadAdminThemesService {
 
         // Update the global.scss file
         const pathSCSSFile = `${newPath}/core/layout/global.scss`;
-        const pathSCSSFileContent = fs.readFileSync(pathSCSSFile, 'utf8');
+        const pathSCSSFileContent = fs.readFileSync(pathSCSSFile, "utf8");
         await writeFile(
           pathSCSSFile,
           pathSCSSFileContent.replace(/\.theme_\d+/g, `.theme_${theme[0].id}`)
         );
       });
 
-    return 'upload';
+    return "upload";
   }
 }

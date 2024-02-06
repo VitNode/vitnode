@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
-import type { ReactNode } from 'react';
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
 
-import { getConfig } from '@/functions/get-config';
+import { getConfig } from "@/functions/get-config";
 
 export async function generateMetadata(): Promise<Metadata> {
   const config = await getConfig();
@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s - ${defaultTitle}`
     },
     icons: {
-      icon: '/icons/favicon.ico'
+      icon: "/icons/favicon.ico"
     }
   };
 }

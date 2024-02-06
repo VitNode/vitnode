@@ -1,9 +1,9 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from "react";
 
-import type { AuthorizationCurrentUserObj } from '@/graphql/hooks';
+import type { AuthorizationCurrentUserObj } from "@/graphql/hooks";
 
 interface Args {
-  session: Omit<AuthorizationCurrentUserObj, 'posts'> | undefined | null;
+  session: Omit<AuthorizationCurrentUserObj, "posts"> | undefined | null;
 }
 
 export const SessionAdminContext = createContext<Args>({

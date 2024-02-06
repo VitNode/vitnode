@@ -1,8 +1,8 @@
-import { IncomingMessage, ServerResponse } from 'http';
+import { IncomingMessage, ServerResponse } from "http";
 
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, Response } from "express";
 
-import defaultProcessRequest from './processRequest';
+import defaultProcessRequest from "./processRequest";
 
 export interface ProcessRequestOptions {
   maxFieldSize?: number;
@@ -41,9 +41,9 @@ export function graphqlUploadExpress({
     response: Response,
     next: NextFunction
   ) {
-    if (!request.is('multipart/form-data')) return next();
+    if (!request.is("multipart/form-data")) return next();
 
-    const requestEnd = new Promise(resolve => request.on('end', resolve));
+    const requestEnd = new Promise(resolve => request.on("end", resolve));
     const { send } = response;
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import type { ReactNode } from 'react';
-import { useEffect } from 'react';
+import type { ReactNode } from "react";
+import { useEffect } from "react";
 
-import { LayoutAdminInstallEnum } from '@/graphql/hooks';
-import type { Admin_Install__LayoutQuery } from '@/graphql/hooks';
-import { usePathname, useRouter } from '@/i18n';
-import { FinishInstallConfigsView } from './finish/finish-install-config-view';
+import { LayoutAdminInstallEnum } from "@/graphql/hooks";
+import type { Admin_Install__LayoutQuery } from "@/graphql/hooks";
+import { usePathname, useRouter } from "@/i18n";
+import { FinishInstallConfigsView } from "./finish/finish-install-config-view";
 
 interface Props {
   children: ReactNode;
@@ -21,8 +21,8 @@ export const RedirectsInstallConfigsLayout = ({ children, data }: Props) => {
     const redirectItems: {
       [key: string]: string;
     } = {
-      [LayoutAdminInstallEnum.database]: '/admin/install',
-      [LayoutAdminInstallEnum.account]: '/admin/install/account'
+      [LayoutAdminInstallEnum.database]: "/admin/install",
+      [LayoutAdminInstallEnum.account]: "/admin/install/account"
     };
 
     const path = redirectItems[data.admin_install__layout.status];

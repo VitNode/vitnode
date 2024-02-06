@@ -1,6 +1,6 @@
-import { lazy, type LazyExoticComponent } from 'react';
+import { lazy, type LazyExoticComponent } from "react";
 
-import { getSessionData } from '@/functions/get-session-data';
+import { getSessionData } from "@/functions/get-session-data";
 
 export default async function Page() {
   const { theme_id } = await getSessionData();
@@ -8,7 +8,10 @@ export default async function Page() {
     import(
       `@/themes/${theme_id}/core/views/settings/views/notifications/notifications-settings-view`
     ).catch(
-      () => import('@/themes/1/core/views/settings/views/notifications/notifications-settings-view')
+      () =>
+        import(
+          "@/themes/1/core/views/settings/views/notifications/notifications-settings-view"
+        )
     )
   );
 

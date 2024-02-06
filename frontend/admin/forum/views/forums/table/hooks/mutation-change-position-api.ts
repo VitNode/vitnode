@@ -1,14 +1,14 @@
-'use server';
+"use server";
 
-import { cookies } from 'next/headers';
-import { revalidateTag } from 'next/cache';
+import { cookies } from "next/headers";
+import { revalidateTag } from "next/cache";
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher } from "@/graphql/fetcher";
 import {
   type Forum_Forums__Admin__Change_PositionMutation,
   type Forum_Forums__Admin__Change_PositionMutationVariables,
   Forum_Forums__Admin__Change_Position
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
 export const mutationChangePositionApi = async (
   variables: Forum_Forums__Admin__Change_PositionMutationVariables
@@ -25,7 +25,7 @@ export const mutationChangePositionApi = async (
       }
     });
 
-    revalidateTag('Forum_Forums__Show');
+    revalidateTag("Forum_Forums__Show");
 
     return { data };
   } catch (error) {

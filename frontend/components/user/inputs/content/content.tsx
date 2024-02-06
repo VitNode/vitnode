@@ -1,20 +1,24 @@
-import { Search } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { Search } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
-import { cx } from '@/functions/classnames';
-import { fetcher } from '@/graphql/fetcher';
+import { cx } from "@/functions/classnames";
+import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Members__Show__Search,
   type Core_Members__Show__SearchQuery,
   type Core_Members__Show__SearchQueryVariables
-} from '@/graphql/hooks';
-import { UserInputContentList } from './list';
-import type { UserInputItem } from '../user-input';
-import { Loader } from '@/components/loader/loader';
-import { Input } from '@/components/ui/input';
-import { Command, CommandList, commandInputClassName } from '@/components/ui/command';
+} from "@/graphql/hooks";
+import { UserInputContentList } from "./list";
+import type { UserInputItem } from "../user-input";
+import { Loader } from "@/components/loader/loader";
+import { Input } from "@/components/ui/input";
+import {
+  Command,
+  CommandList,
+  commandInputClassName
+} from "@/components/ui/command";
 
 interface Props {
   onSelect: (value: UserInputItem) => void;
@@ -22,11 +26,11 @@ interface Props {
 }
 
 export const UserInputContent = ({ onSelect, values }: Props) => {
-  const t = useTranslations('core');
-  const [search, setSearch] = useState('');
+  const t = useTranslations("core");
+  const [search, setSearch] = useState("");
 
   const { data, isLoading } = useQuery({
-    queryKey: ['Core_Members__Show__Search', { search }],
+    queryKey: ["Core_Members__Show__Search", { search }],
     queryFn: async () => {
       const { data } = await fetcher<
         Core_Members__Show__SearchQuery,
@@ -49,12 +53,12 @@ export const UserInputContent = ({ onSelect, values }: Props) => {
         <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
         <Input
           className={cx(
-            'border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0',
+            "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0",
             commandInputClassName
           )}
           value={search}
           onChange={e => setSearch(e.target.value)}
-          placeholder={t('user_input.search')}
+          placeholder={t("user_input.search")}
         />
       </div>
 

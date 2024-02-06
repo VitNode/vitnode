@@ -1,20 +1,23 @@
-import * as fs from 'fs';
+import * as fs from "fs";
 
-import { Injectable } from '@nestjs/common';
-import { count } from 'drizzle-orm';
+import { Injectable } from "@nestjs/common";
+import { count } from "drizzle-orm";
 
-import { CustomError } from '@/utils/errors/CustomError';
-import { ConfigType } from '@/types/config.type';
-import { AccessDeniedError } from '@/utils/errors/AccessDeniedError';
-import { currentDate } from '@/functions/date';
-import { DatabaseService } from '@/database/database.service';
-import { core_languages } from '@/src/admin/core/database/schema/languages';
-import { core_groups, core_groups_names } from '@/src/admin/core/database/schema/groups';
-import { core_admin_permissions } from '@/src/admin/core/database/schema/admins';
-import { core_moderators_permissions } from '../../database/schema/moderators';
-import { configPath } from '@/config';
-import { core_plugins } from '../../database/schema/plugins';
-import { core_themes } from '../../database/schema/themes';
+import { CustomError } from "@/utils/errors/CustomError";
+import { ConfigType } from "@/types/config.type";
+import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
+import { currentDate } from "@/functions/date";
+import { DatabaseService } from "@/database/database.service";
+import { core_languages } from "@/src/admin/core/database/schema/languages";
+import {
+  core_groups,
+  core_groups_names
+} from "@/src/admin/core/database/schema/groups";
+import { core_admin_permissions } from "@/src/admin/core/database/schema/admins";
+import { core_moderators_permissions } from "../../database/schema/moderators";
+import { configPath } from "@/config";
+import { core_plugins } from "../../database/schema/plugins";
+import { core_themes } from "../../database/schema/themes";
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {
@@ -22,13 +25,13 @@ export class CreateDatabaseAdminInstallService {
 
   protected throwError() {
     throw new CustomError({
-      code: 'DATABASE_ALREADY_EXISTS',
-      message: 'Database already exists.'
+      code: "DATABASE_ALREADY_EXISTS",
+      message: "Database already exists."
     });
   }
 
   async create(): Promise<string> {
-    const configFile = fs.readFileSync(configPath, 'utf8');
+    const configFile = fs.readFileSync(configPath, "utf8");
     const config: ConfigType = JSON.parse(configFile);
 
     if (config.finished_install) {
@@ -47,32 +50,32 @@ export class CreateDatabaseAdminInstallService {
 
     await this.databaseService.db.insert(core_languages).values([
       {
-        code: 'en',
-        name: 'English',
+        code: "en",
+        name: "English",
         default: true,
         protected: true,
-        timezone: 'America/New_York',
+        timezone: "America/New_York",
         created: currentDate()
       },
       {
-        code: 'pl',
-        name: 'Polski (Polish)',
-        timezone: 'Europe/Warsaw',
+        code: "pl",
+        name: "Polski (Polish)",
+        timezone: "Europe/Warsaw",
         created: currentDate()
       }
     ]);
 
     // Create plugins
-    const packageJSON = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+    const packageJSON = JSON.parse(fs.readFileSync("package.json", "utf8"));
     await this.databaseService.db.insert(core_plugins).values([
       {
-        code: 'forum',
-        name: 'Forum',
-        description: 'Community forum plugin.',
+        code: "forum",
+        name: "Forum",
+        description: "Community forum plugin.",
         version: packageJSON.version,
         version_code: packageJSON.version_code,
-        author: 'VitNode',
-        author_url: 'https://vitnode.com/',
+        author: "VitNode",
+        author_url: "https://vitnode.com/",
         created: currentDate(),
         protected: true,
         default: true
@@ -81,11 +84,11 @@ export class CreateDatabaseAdminInstallService {
 
     // Create default theme
     await this.databaseService.db.insert(core_themes).values({
-      name: 'Default Theme',
+      name: "Default Theme",
       version: packageJSON.version,
       version_code: packageJSON.version_code,
-      author: 'VitNode',
-      author_url: 'https://vitnode.com/',
+      author: "VitNode",
+      author_url: "https://vitnode.com/",
       created: currentDate(),
       protected: true,
       default: true
@@ -114,13 +117,13 @@ export class CreateDatabaseAdminInstallService {
     await this.databaseService.db.insert(core_groups_names).values([
       {
         group_id: guestGroup[0].id,
-        language_code: 'en',
-        value: 'Guest'
+        language_code: "en",
+        value: "Guest"
       },
       {
         group_id: guestGroup[0].id,
-        language_code: 'pl',
-        value: 'Gość'
+        language_code: "pl",
+        value: "Gość"
       }
     ]);
 
@@ -137,13 +140,13 @@ export class CreateDatabaseAdminInstallService {
     await this.databaseService.db.insert(core_groups_names).values([
       {
         group_id: memberGroup[0].id,
-        language_code: 'en',
-        value: 'Member'
+        language_code: "en",
+        value: "Member"
       },
       {
         group_id: memberGroup[0].id,
-        language_code: 'pl',
-        value: 'Użytkownik'
+        language_code: "pl",
+        value: "Użytkownik"
       }
     ]);
 
@@ -159,13 +162,13 @@ export class CreateDatabaseAdminInstallService {
     await this.databaseService.db.insert(core_groups_names).values([
       {
         group_id: moderatorGroup[0].id,
-        language_code: 'en',
-        value: 'Moderator'
+        language_code: "en",
+        value: "Moderator"
       },
       {
         group_id: moderatorGroup[0].id,
-        language_code: 'pl',
-        value: 'Moderator'
+        language_code: "pl",
+        value: "Moderator"
       }
     ]);
 
@@ -190,13 +193,13 @@ export class CreateDatabaseAdminInstallService {
     await this.databaseService.db.insert(core_groups_names).values([
       {
         group_id: adminGroup[0].id,
-        language_code: 'en',
-        value: 'Administrator'
+        language_code: "en",
+        value: "Administrator"
       },
       {
         group_id: adminGroup[0].id,
-        language_code: 'pl',
-        value: 'Administrator'
+        language_code: "pl",
+        value: "Administrator"
       }
     ]);
 
@@ -216,6 +219,6 @@ export class CreateDatabaseAdminInstallService {
       protected: true
     });
 
-    return 'Success!';
+    return "Success!";
   }
 }

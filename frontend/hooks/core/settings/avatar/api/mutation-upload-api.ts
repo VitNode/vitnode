@@ -1,18 +1,18 @@
-'use server';
+"use server";
 
-import { cookies } from 'next/headers';
-import { revalidateTag } from 'next/cache';
+import { cookies } from "next/headers";
+import { revalidateTag } from "next/cache";
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Members__Avatar__Upload,
   type Core_Members__Avatar__UploadMutation,
   type Core_Members__Avatar__UploadMutationVariables
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
 export const mutationUploadApi = async (formData: FormData) => {
   try {
-    const files = formData.get('file') as File;
+    const files = formData.get("file") as File;
 
     const { data } = await fetcher<
       Core_Members__Avatar__UploadMutation,
@@ -22,7 +22,7 @@ export const mutationUploadApi = async (formData: FormData) => {
       uploads: [
         {
           files,
-          variable: 'file'
+          variable: "file"
         }
       ],
       headers: {
@@ -30,7 +30,7 @@ export const mutationUploadApi = async (formData: FormData) => {
       }
     });
 
-    revalidateTag('Core_Sessions__Authorization');
+    revalidateTag("Core_Sessions__Authorization");
 
     return { data };
   } catch (error) {

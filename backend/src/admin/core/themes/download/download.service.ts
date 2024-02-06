@@ -1,21 +1,21 @@
-import * as fs from 'fs';
-import { join } from 'path';
-import { writeFile } from 'fs/promises';
+import * as fs from "fs";
+import { join } from "path";
+import { writeFile } from "fs/promises";
 
-import * as tar from 'tar';
-import { Injectable } from '@nestjs/common';
-import { eq } from 'drizzle-orm';
+import * as tar from "tar";
+import { Injectable } from "@nestjs/common";
+import { eq } from "drizzle-orm";
 
-import { DownloadAdminThemesArgs } from './dto/download.args';
+import { DownloadAdminThemesArgs } from "./dto/download.args";
 
-import { DatabaseService } from '@/database/database.service';
-import { NotFoundError } from '@/utils/errors/not-found-error';
-import { removeSpecialCharacters } from '@/functions/remove-special-characters';
-import { User } from '@/utils/decorators/user.decorator';
-import { generateRandomString } from '@/functions/generate-random-string';
-import { currentDate } from '@/functions/date';
-import { core_themes } from '../../database/schema/themes';
-import { CustomError } from '@/utils/errors/CustomError';
+import { DatabaseService } from "@/database/database.service";
+import { NotFoundError } from "@/utils/errors/not-found-error";
+import { removeSpecialCharacters } from "@/functions/remove-special-characters";
+import { User } from "@/utils/decorators/user.decorator";
+import { generateRandomString } from "@/functions/generate-random-string";
+import { currentDate } from "@/functions/date";
+import { core_themes } from "../../database/schema/themes";
+import { CustomError } from "@/utils/errors/CustomError";
 
 @Injectable()
 export class DownloadAdminThemesService {
@@ -30,13 +30,13 @@ export class DownloadAdminThemesService {
     });
 
     if (!theme) {
-      throw new NotFoundError('Theme');
+      throw new NotFoundError("Theme");
     }
 
-    const path = join('..', 'frontend', 'themes', theme.id.toString());
+    const path = join("..", "frontend", "themes", theme.id.toString());
     // Check if theme exists
     if (!fs.existsSync(path)) {
-      throw new NotFoundError('Theme directory');
+      throw new NotFoundError("Theme directory");
     }
 
     const name = removeSpecialCharacters(
@@ -53,7 +53,7 @@ export class DownloadAdminThemesService {
       id !== 1
     ) {
       const pathThemeConfig = `${path}/theme.json`;
-      const getInfoJson = fs.readFileSync(pathThemeConfig, 'utf8');
+      const getInfoJson = fs.readFileSync(pathThemeConfig, "utf8");
       const infoJson: { name: string } = JSON.parse(getInfoJson);
 
       await writeFile(
@@ -72,11 +72,11 @@ export class DownloadAdminThemesService {
 
     // Create tgz
     try {
-      tar.c({ gzip: true, file: `temp/${name}.tgz`, cwd: path }, ['.']);
+      tar.c({ gzip: true, file: `temp/${name}.tgz`, cwd: path }, ["."]);
     } catch (error) {
       throw new CustomError({
-        code: 'DOWNLOAD_ADMIN_THEMES_SERVICE_ERROR',
-        message: 'Error creating tgz'
+        code: "DOWNLOAD_ADMIN_THEMES_SERVICE_ERROR",
+        message: "Error creating tgz"
       });
     }
 

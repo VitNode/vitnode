@@ -1,14 +1,14 @@
-'use server';
+"use server";
 
-import { cookies } from 'next/headers';
-import { revalidateTag } from 'next/cache';
+import { cookies } from "next/headers";
+import { revalidateTag } from "next/cache";
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher } from "@/graphql/fetcher";
 import {
   Forum_Topics__Actions__Lock_Toggle,
   type Forum_Topics__Actions__Lock_ToggleMutation,
   type Forum_Topics__Actions__Lock_ToggleMutationVariables
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
 export const mutationApi = async (
   variables: Forum_Topics__Actions__Lock_ToggleMutationVariables
@@ -25,7 +25,7 @@ export const mutationApi = async (
       }
     });
 
-    revalidateTag('Forum_Topics__Show');
+    revalidateTag("Forum_Topics__Show");
 
     return { data };
   } catch (error) {

@@ -1,8 +1,14 @@
-import { Field, Int, ObjectType, OmitType, createUnionType } from '@nestjs/graphql';
+import {
+  Field,
+  Int,
+  ObjectType,
+  OmitType,
+  createUnionType
+} from "@nestjs/graphql";
 
-import { PageInfo } from '@/types/database/pagination.type';
-import { GroupUser, User } from '@/utils/decorators/user.decorator';
-import { TextLanguage } from '@/types/database/text-language.type';
+import { PageInfo } from "@/types/database/pagination.type";
+import { GroupUser, User } from "@/utils/decorators/user.decorator";
+import { TextLanguage } from "@/types/database/text-language.type";
 
 @ObjectType()
 export class ShowAdminStaffAdministratorsObj {
@@ -14,13 +20,13 @@ export class ShowAdminStaffAdministratorsObj {
 }
 
 @ObjectType()
-export class StaffGroupUser extends OmitType(GroupUser, ['name'] as const) {
+export class StaffGroupUser extends OmitType(GroupUser, ["name"] as const) {
   @Field(() => [TextLanguage])
   group_name: TextLanguage[];
 }
 
 export const UserOrGroupCoreStaffUnion = createUnionType({
-  name: 'UserOrGroupCoreStaffUnion',
+  name: "UserOrGroupCoreStaffUnion",
   types: () => [User, StaffGroupUser] as const,
   resolveType(value) {
     if (value.avatar_color) {

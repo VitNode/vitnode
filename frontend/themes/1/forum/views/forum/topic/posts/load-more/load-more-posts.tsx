@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useMorePosts } from '@/hooks/forums/forum/posts/use-more-posts';
-import { ButtonLoadMorePosts } from './button';
-import { ListPosts } from '../list';
-import { cx } from '@/functions/classnames';
+import { useMorePosts } from "@/hooks/forums/forum/posts/use-more-posts";
+import { ButtonLoadMorePosts } from "./button";
+import { ListPosts } from "../list";
+import { cx } from "@/functions/classnames";
 
 interface Props {
   endCursor: number;
@@ -12,7 +12,12 @@ interface Props {
   totalCount: number;
 }
 
-export const LoadMorePosts = ({ endCursor, firstEdges, initialCount, totalCount }: Props) => {
+export const LoadMorePosts = ({
+  endCursor,
+  firstEdges,
+  initialCount,
+  totalCount
+}: Props) => {
   const { data, fetchNextPage, isFetching } = useMorePosts({
     totalCount,
     initialCount,
@@ -25,8 +30,8 @@ export const LoadMorePosts = ({ endCursor, firstEdges, initialCount, totalCount 
       {data.length > 0 && (
         <ListPosts
           id="load_more_posts"
-          className={cx('py-5', {
-            'pb-0': countToLoad > 0
+          className={cx("py-5", {
+            "pb-0": countToLoad > 0
           })}
           edges={data}
         />

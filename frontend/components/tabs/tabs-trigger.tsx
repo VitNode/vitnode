@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
-import { Link, usePathname } from '@/i18n';
-import { buttonVariants } from '../ui/button';
+import { Link, usePathname } from "@/i18n";
+import { buttonVariants } from "../ui/button";
 
 export interface TabsTriggerProps {
   children: ReactNode;
@@ -23,7 +23,7 @@ export const TabsTrigger = ({
 }: TabsTriggerProps) => {
   const pathname = usePathname();
   const active = activeFromProps || (href && pathname.includes(href));
-  const dataState = active ? 'active' : 'inactive';
+  const dataState = active ? "active" : "inactive";
 
   if (href) {
     return (
@@ -31,9 +31,9 @@ export const TabsTrigger = ({
         href={href}
         data-state={dataState}
         className={buttonVariants({
-          variant: active ? 'default' : 'ghost',
+          variant: active ? "default" : "ghost",
           className,
-          size: 'sm'
+          size: "sm"
         })}
         onClick={onClick}
       >
@@ -47,9 +47,9 @@ export const TabsTrigger = ({
       type="button"
       data-state={dataState}
       className={buttonVariants({
-        variant: active ? 'default' : 'ghost',
+        variant: active ? "default" : "ghost",
         className,
-        size: 'sm'
+        size: "sm"
       })}
       onClick={onClick}
     >

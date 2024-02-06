@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import * as NavigationMenu from '@radix-ui/react-navigation-menu';
+import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 
-import { useSession } from '@/hooks/core/use-session';
-import { ItemNav } from './item';
+import { useSession } from "@/hooks/core/use-session";
+import { ItemNav } from "./item";
 
 export const Nav = () => {
   const { nav } = useSession();
@@ -20,7 +20,7 @@ export const Nav = () => {
 
       <div
         className="absolute flex justify-center w-full top-full left-0"
-        style={{ perspective: '2000px' }}
+        style={{ perspective: "2000px" }}
       >
         <NavigationMenu.Viewport className="origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-[var(--radix-navigation-menu-viewport-width)]" />
       </div>

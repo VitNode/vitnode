@@ -1,16 +1,16 @@
-import { useTranslations } from 'next-intl';
-import { toast } from 'sonner';
+import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
-import { mutationApi } from './mutation-api';
+import { mutationApi } from "./mutation-api";
 
 export const useSignOutAPI = () => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
 
   const onSubmit = async () => {
     const mutation = await mutationApi();
     if (mutation?.error) {
-      toast.error(t('errors.title'), {
-        description: t('errors.internal_server_error')
+      toast.error(t("errors.title"), {
+        description: t("errors.internal_server_error")
       });
     }
   };

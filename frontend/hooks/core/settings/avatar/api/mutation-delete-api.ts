@@ -1,14 +1,14 @@
-'use server';
+"use server";
 
-import { revalidateTag } from 'next/cache';
-import { cookies } from 'next/headers';
+import { revalidateTag } from "next/cache";
+import { cookies } from "next/headers";
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Members__Avatar__Delete,
   type Core_Members__Avatar__DeleteMutation,
   type Core_Members__Avatar__DeleteMutationVariables
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
 export const mutationDeleteApi = async () => {
   try {
@@ -22,7 +22,7 @@ export const mutationDeleteApi = async () => {
       }
     });
 
-    revalidateTag('Core_Sessions__Authorization');
+    revalidateTag("Core_Sessions__Authorization");
 
     return { data };
   } catch (error) {

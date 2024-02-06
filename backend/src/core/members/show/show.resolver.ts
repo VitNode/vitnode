@@ -1,11 +1,11 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
+import { Args, Query, Resolver } from "@nestjs/graphql";
+import { UseGuards } from "@nestjs/common";
 
-import { ShowCoreMembersService } from './show.service';
-import { ShowCoreMembersObj } from './dto/show.obj';
-import { ShowCoreMembersArgs } from './dto/show.args';
+import { ShowCoreMembersService } from "./show.service";
+import { ShowCoreMembersObj } from "./dto/show.obj";
+import { ShowCoreMembersArgs } from "./dto/show.args";
 
-import { AuthGuards, OptionalAuth } from '@/utils/guards/auth.guards';
+import { AuthGuards, OptionalAuth } from "@/utils/guards/auth.guards";
 
 @Resolver()
 export class ShowCoreMembersResolver {
@@ -14,7 +14,9 @@ export class ShowCoreMembersResolver {
   @Query(() => ShowCoreMembersObj)
   @OptionalAuth()
   @UseGuards(AuthGuards)
-  async core_members__show(@Args() args: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
+  async core_members__show(
+    @Args() args: ShowCoreMembersArgs
+  ): Promise<ShowCoreMembersObj> {
     return await this.service.show(args);
   }
 }

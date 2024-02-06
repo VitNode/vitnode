@@ -1,14 +1,16 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
+import { Args, Mutation, Resolver } from "@nestjs/graphql";
+import { UseGuards } from "@nestjs/common";
 
-import { DeleteAdminStaffAdministratorsService } from './delete.service';
-import { DeleteAdminStaffAdministratorsArgs } from './dto/delete.args';
+import { DeleteAdminStaffAdministratorsService } from "./delete.service";
+import { DeleteAdminStaffAdministratorsArgs } from "./dto/delete.args";
 
-import { AdminAuthGuards } from '@/utils/guards/admin-auth.guards';
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
 
 @Resolver()
 export class DeleteAdminStaffAdministratorsResolver {
-  constructor(private readonly service: DeleteAdminStaffAdministratorsService) {}
+  constructor(
+    private readonly service: DeleteAdminStaffAdministratorsService
+  ) {}
 
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)

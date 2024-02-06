@@ -1,5 +1,5 @@
-import { Card, CardContent } from '@/components/ui/card';
-import { HeaderOverviewSettings } from './header/header-overview-settings';
+import { Card, CardContent } from "@/components/ui/card";
+import { HeaderOverviewSettings } from "./header/header-overview-settings";
 
 export default function OverviewSettingsView() {
   return (

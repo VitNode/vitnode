@@ -1,7 +1,7 @@
-import { Module } from '@nestjs/common';
+import { Module } from "@nestjs/common";
 
-import { ShowAdminMembersResolver } from './show/show.resolver';
-import { ShowAdminMembersService } from './show/show.service';
+import { ShowAdminMembersResolver } from "./show/show.resolver";
+import { ShowAdminMembersService } from "./show/show.service";
 
 @Module({
   providers: [ShowAdminMembersResolver, ShowAdminMembersService]

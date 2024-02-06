@@ -7,19 +7,19 @@ import {
   useSensors,
   type UniqueIdentifier,
   MeasuringStrategy
-} from '@dnd-kit/core';
+} from "@dnd-kit/core";
 import {
   SortableContext,
   arrayMove,
   sortableKeyboardCoordinates,
   verticalListSortingStrategy
-} from '@dnd-kit/sortable';
-import { useEffect, useMemo, useState } from 'react';
-import { useTranslations } from 'next-intl';
+} from "@dnd-kit/sortable";
+import { useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 
-import { ItemContentTableContentNavAdmin } from './item';
-import type { Core_Nav__Admin__ShowQuery, ShowCoreNav } from '@/graphql/hooks';
-import { mutationChangePositionApi } from './hooks/mutation-change-position-api';
+import { ItemContentTableContentNavAdmin } from "./item";
+import type { Core_Nav__Admin__ShowQuery, ShowCoreNav } from "@/graphql/hooks";
+import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
 
 interface ProjectedType {
   activeId: UniqueIdentifier;
@@ -27,15 +27,15 @@ interface ProjectedType {
   parentId: number | null;
 }
 
-interface FlattenedItemsType extends Omit<ShowCoreNav, '__typename'> {
+interface FlattenedItemsType extends Omit<ShowCoreNav, "__typename"> {
   depth: boolean;
 }
 
 export const ContentTableContentNavAdmin = ({
   core_nav__show: { edges }
 }: Core_Nav__Admin__ShowQuery) => {
-  const t = useTranslations('core');
-  const [items, setItems] = useState<Omit<ShowCoreNav, '__typename'>[]>(edges);
+  const t = useTranslations("core");
+  const [items, setItems] = useState<Omit<ShowCoreNav, "__typename">[]>(edges);
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
   const [projected, setProjected] = useState<ProjectedType | null>();
@@ -68,9 +68,13 @@ export const ContentTableContentNavAdmin = ({
     return tree;
   }, [items]);
 
-  const sortedIds = useMemo(() => flattenedItems.map(({ id }) => id), [flattenedItems]);
+  const sortedIds = useMemo(
+    () => flattenedItems.map(({ id }) => id),
+    [flattenedItems]
+  );
 
-  if (items.length === 0) return <div className="text-center">{t('no_results')}</div>;
+  if (items.length === 0)
+    return <div className="text-center">{t("no_results")}</div>;
 
   return (
     <DndContext
@@ -137,8 +141,12 @@ export const ContentTableContentNavAdmin = ({
         if (!projected) return;
 
         const tree = flattenedItems;
-        const activeItemIndex = tree.findIndex(({ id }) => id === projected.activeId);
-        const overItemIndex = tree.findIndex(({ id }) => id === projected.overId);
+        const activeItemIndex = tree.findIndex(
+          ({ id }) => id === projected.activeId
+        );
+        const overItemIndex = tree.findIndex(
+          ({ id }) => id === projected.overId
+        );
 
         if (activeItemIndex === -1) return;
         const afterChangeTree = arrayMove(tree, activeItemIndex, overItemIndex);
@@ -154,7 +162,7 @@ export const ContentTableContentNavAdmin = ({
         };
 
         // Build new tree
-        const newTree: Omit<ShowCoreNav, '__typename'>[] = [];
+        const newTree: Omit<ShowCoreNav, "__typename">[] = [];
 
         let rootItemId: number | null = null;
         afterChangeTree.forEach(item => {
@@ -184,7 +192,8 @@ export const ContentTableContentNavAdmin = ({
         const indexToMove =
           projected.activeId === projected.overId && projected.parentId
             ? -1
-            : flattenedItems.find(i => i.id === projected.overId)?.position ?? -1;
+            : flattenedItems.find(i => i.id === projected.overId)?.position ??
+              -1;
 
         await mutationChangePositionApi({
           id: Number(projected.activeId),

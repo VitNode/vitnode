@@ -1,32 +1,35 @@
-import { useRef, useState } from 'react';
-import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
-import { LexicalComposer, type InitialConfigType } from '@lexical/react/LexicalComposer';
-import { ContentEditable } from '@lexical/react/LexicalContentEditable';
-import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
-import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
-import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
-import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
-import { ListPlugin } from '@lexical/react/LexicalListPlugin';
-import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
-import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
-import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
-import { ClearEditorPlugin } from '@lexical/react/LexicalClearEditorPlugin';
-import { useLocale } from 'next-intl';
+import { useRef, useState } from "react";
+import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
+import {
+  LexicalComposer,
+  type InitialConfigType
+} from "@lexical/react/LexicalComposer";
+import { ContentEditable } from "@lexical/react/LexicalContentEditable";
+import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
+import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
+import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
+import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
+import { ListPlugin } from "@lexical/react/LexicalListPlugin";
+import { CheckListPlugin } from "@lexical/react/LexicalCheckListPlugin";
+import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
+import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
+import { ClearEditorPlugin } from "@lexical/react/LexicalClearEditorPlugin";
+import { useLocale } from "next-intl";
 
-import { OnChangePluginEditor } from './plugins/on-change';
-import { AutoLinkPluginEditor } from './plugins/auto-link';
-import { ToolbarEditor } from './toolbar/toolbar-editor';
-import { cx } from '@/functions/classnames';
-import { DraggableBlockPluginEditor } from './plugins/draggable-block';
-import { MARKDOWN_TRANSFORMERS_EDITOR } from './markdown-transformers-editor';
-import { BLOCK_NAMES, EditorContext } from './toolbar/hooks/use-editor';
-import { CodeHighlightPluginEditor } from './plugins/code-highlight';
-import { CodeActionMenuPluginEditor } from './plugins/code/code-action-menu';
-import { useGlobals } from '@/hooks/core/use-globals';
-import type { TextLanguage } from '@/graphql/hooks';
-import { EmojiPluginEditor } from './plugins/emoji';
-import { initialConfigEditor } from './initial-config';
-import { BottomToolbarEditor } from './toolbar/bottom-toolbar-editor';
+import { OnChangePluginEditor } from "./plugins/on-change";
+import { AutoLinkPluginEditor } from "./plugins/auto-link";
+import { ToolbarEditor } from "./toolbar/toolbar-editor";
+import { cx } from "@/functions/classnames";
+import { DraggableBlockPluginEditor } from "./plugins/draggable-block";
+import { MARKDOWN_TRANSFORMERS_EDITOR } from "./markdown-transformers-editor";
+import { BLOCK_NAMES, EditorContext } from "./toolbar/hooks/use-editor";
+import { CodeHighlightPluginEditor } from "./plugins/code-highlight";
+import { CodeActionMenuPluginEditor } from "./plugins/code/code-action-menu";
+import { useGlobals } from "@/hooks/core/use-globals";
+import type { TextLanguage } from "@/graphql/hooks";
+import { EmojiPluginEditor } from "./plugins/emoji";
+import { initialConfigEditor } from "./initial-config";
+import { BottomToolbarEditor } from "./toolbar/bottom-toolbar-editor";
 
 interface Props {
   id: string;
@@ -59,7 +62,9 @@ export const Editor = ({
   const floatingAnchorElem = useRef<HTMLDivElement>(null);
   const locale = useLocale();
   const { defaultLanguage } = useGlobals();
-  const [selectedLanguage, setSelectedLanguage] = useState(locale ?? defaultLanguage);
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    locale ?? defaultLanguage
+  );
 
   const initialConfig: InitialConfigType = {
     ...initialConfigEditor,
@@ -71,7 +76,7 @@ export const Editor = ({
       <LexicalComposer key={id} initialConfig={initialConfig}>
         <div
           className={cx(
-            'relative border border-input rounded-md bg-card ring-offset-background',
+            "relative border border-input rounded-md bg-card ring-offset-background",
             className
           )}
         >
@@ -116,8 +121,12 @@ export const Editor = ({
 
           {floatingAnchorElem.current && (
             <>
-              <DraggableBlockPluginEditor anchorElem={floatingAnchorElem.current} />
-              <CodeActionMenuPluginEditor anchorElem={floatingAnchorElem.current} />
+              <DraggableBlockPluginEditor
+                anchorElem={floatingAnchorElem.current}
+              />
+              <CodeActionMenuPluginEditor
+                anchorElem={floatingAnchorElem.current}
+              />
             </>
           )}
           <BottomToolbarEditor

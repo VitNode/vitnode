@@ -1,4 +1,4 @@
-import type { Config } from 'drizzle-kit';
+import type { Config } from "drizzle-kit";
 
 const envs = {
   host: process.env.DB_HOST,
@@ -9,14 +9,14 @@ const envs = {
 };
 
 export default {
-  schema: './src/admin/**/database/schema/*.ts',
-  out: './drizzle',
-  driver: 'pg',
+  schema: "./src/admin/**/database/schema/*.ts",
+  out: "./drizzle",
+  driver: "pg",
   dbCredentials: {
-    host: envs.host ?? 'localhost',
+    host: envs.host ?? "localhost",
     port: envs.port ? +envs.port : 5432,
-    user: envs.user ?? 'root',
-    password: envs.password ?? 'root',
-    database: envs.NAME ?? 'vitnode'
+    user: envs.user ?? "root",
+    password: envs.password ?? "root",
+    database: envs.NAME ?? "vitnode"
   }
 } satisfies Config;

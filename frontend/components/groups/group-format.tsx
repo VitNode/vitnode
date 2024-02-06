@@ -1,5 +1,5 @@
-import type { TextLanguage } from '@/graphql/hooks';
-import { useTextLang } from '@/hooks/core/use-text-lang';
+import type { TextLanguage } from "@/graphql/hooks";
+import { useTextLang } from "@/hooks/core/use-text-lang";
 
 interface Props {
   group: {

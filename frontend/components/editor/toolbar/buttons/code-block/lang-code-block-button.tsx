@@ -3,19 +3,34 @@ import {
   CODE_LANGUAGE_FRIENDLY_NAME_MAP,
   CODE_LANGUAGE_MAP,
   getLanguageFriendlyName
-} from '@lexical/code';
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { $getNodeByKey, $getSelection, $isRangeSelection, $isRootOrShadowRoot } from 'lexical';
-import type { NodeKey } from 'lexical';
-import { $findMatchingParent } from '@lexical/utils';
+} from "@lexical/code";
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import {
+  $getNodeByKey,
+  $getSelection,
+  $isRangeSelection,
+  $isRootOrShadowRoot
+} from "lexical";
+import type { NodeKey } from "lexical";
+import { $findMatchingParent } from "@lexical/utils";
 
-import { buttonVariants } from '@/components/ui/button';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
+import { buttonVariants } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger
+} from "@/components/ui/select";
 
-import { useUpdateStateEditor } from '../../hooks/use-update-state-editor';
+import { useUpdateStateEditor } from "../../hooks/use-update-state-editor";
 
 interface CodeLanguageType {
   friendlyName: string;
@@ -25,7 +40,9 @@ interface CodeLanguageType {
 const getCodeLanguageOptions = (): CodeLanguageType[] => {
   const options: CodeLanguageType[] = [];
 
-  for (const [lang, friendlyName] of Object.entries(CODE_LANGUAGE_FRIENDLY_NAME_MAP)) {
+  for (const [lang, friendlyName] of Object.entries(
+    CODE_LANGUAGE_FRIENDLY_NAME_MAP
+  )) {
     options.push({ lang, friendlyName });
   }
 
@@ -35,10 +52,12 @@ const getCodeLanguageOptions = (): CodeLanguageType[] => {
 const CODE_LANGUAGE_OPTIONS = getCodeLanguageOptions();
 
 export const LangCodeBlockButtonEditor = () => {
-  const t = useTranslations('core.editor');
-  const [codeLanguage, setCodeLanguage] = useState('');
+  const t = useTranslations("core.editor");
+  const [codeLanguage, setCodeLanguage] = useState("");
   const [editor] = useLexicalComposerContext();
-  const [selectedElementKey, setSelectedElementKey] = useState<NodeKey | null>(null);
+  const [selectedElementKey, setSelectedElementKey] = useState<NodeKey | null>(
+    null
+  );
 
   useUpdateStateEditor({
     handleChange: () => {
@@ -46,7 +65,7 @@ export const LangCodeBlockButtonEditor = () => {
       if (!$isRangeSelection(selection)) return false;
       const anchorNode = selection.anchor.getNode();
       let element =
-        anchorNode.getKey() === 'root'
+        anchorNode.getKey() === "root"
           ? anchorNode
           : $findMatchingParent(anchorNode, e => {
               const parent = e.getParent();
@@ -64,7 +83,7 @@ export const LangCodeBlockButtonEditor = () => {
       if (elementDOM === null || !$isCodeNode(element)) return;
 
       const language = element.getLanguage();
-      setCodeLanguage(language ? CODE_LANGUAGE_MAP[language] || language : '');
+      setCodeLanguage(language ? CODE_LANGUAGE_MAP[language] || language : "");
     }
   });
 
@@ -86,16 +105,16 @@ export const LangCodeBlockButtonEditor = () => {
           <TooltipTrigger asChild>
             <SelectTrigger
               className={buttonVariants({
-                variant: 'ghost',
-                className: 'w-auto border-0',
-                size: 'sm'
+                variant: "ghost",
+                className: "w-auto border-0",
+                size: "sm"
               })}
             >
               {getLanguageFriendlyName(codeLanguage)}
             </SelectTrigger>
           </TooltipTrigger>
 
-          <TooltipContent>{t('code_language')}</TooltipContent>
+          <TooltipContent>{t("code_language")}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 

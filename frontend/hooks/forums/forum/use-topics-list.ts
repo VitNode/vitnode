@@ -1,16 +1,16 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
-import { useMemo } from 'react';
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
+import { useMemo } from "react";
 
-import { getIdFormString } from '@/functions/url';
-import { APIKeys } from '@/graphql/api-keys';
-import { fetcher } from '@/graphql/fetcher';
+import { getIdFormString } from "@/functions/url";
+import { APIKeys } from "@/graphql/api-keys";
+import { fetcher } from "@/graphql/fetcher";
 import {
   Forum_Forums__Show_Item_More,
   type Forum_Forums__Show_Item_MoreQuery,
   type Forum_Forums__Show_Item_MoreQueryVariables,
   type ShowTopicsForumsObj
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
 interface Args {
   initData: ShowTopicsForumsObj;

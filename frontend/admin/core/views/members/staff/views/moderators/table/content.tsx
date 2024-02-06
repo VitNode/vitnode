@@ -1,34 +1,36 @@
-import { useTranslations } from 'next-intl';
-import type { ColumnDef } from '@tanstack/react-table';
-import { useMemo } from 'react';
-import { InfinityIcon, ShieldAlert } from 'lucide-react';
+import { useTranslations } from "next-intl";
+import type { ColumnDef } from "@tanstack/react-table";
+import { useMemo } from "react";
+import { InfinityIcon, ShieldAlert } from "lucide-react";
 
-import { DataTable } from '@/components/data-table/data-table';
-import type { ShowAdminStaffModerators } from '@/graphql/hooks';
-import { DateFormat } from '@/components/date-format/date-format';
-import { HeaderSortingDataTable } from '@/components/data-table/header';
-import { Badge } from '@/components/ui/badge';
-import { UserLink } from '@/components/user/link/user-link';
-import { GroupFormat } from '@/components/groups/group-format';
-import type { ModeratorsStaffAdminViewProps } from '../moderators-view';
-import { ActionsTableModeratorsStaffAdmin } from './actions/actions';
+import { DataTable } from "@/components/data-table/data-table";
+import type { ShowAdminStaffModerators } from "@/graphql/hooks";
+import { DateFormat } from "@/components/date-format/date-format";
+import { HeaderSortingDataTable } from "@/components/data-table/header";
+import { Badge } from "@/components/ui/badge";
+import { UserLink } from "@/components/user/link/user-link";
+import { GroupFormat } from "@/components/groups/group-format";
+import type { ModeratorsStaffAdminViewProps } from "../moderators-view";
+import { ActionsTableModeratorsStaffAdmin } from "./actions/actions";
 
-export const ContentTableModeratorsStaffAdmin = ({ data }: ModeratorsStaffAdminViewProps) => {
-  const t = useTranslations('admin.members.staff');
+export const ContentTableModeratorsStaffAdmin = ({
+  data
+}: ModeratorsStaffAdminViewProps) => {
+  const t = useTranslations("admin.members.staff");
 
   const columns: ColumnDef<ShowAdminStaffModerators>[] = useMemo(
     () => [
       {
-        header: t('table.moderator'),
-        accessorKey: 'name',
+        header: t("table.moderator"),
+        accessorKey: "name",
         cell: ({ row }) => {
           const data = row.original;
 
-          if (data.user_or_group.__typename === 'User') {
+          if (data.user_or_group.__typename === "User") {
             return <UserLink user={data.user_or_group} />;
           }
 
-          if (data.user_or_group.__typename === 'StaffGroupUser') {
+          if (data.user_or_group.__typename === "StaffGroupUser") {
             return (
               <GroupFormat
                 group={{
@@ -43,23 +45,27 @@ export const ContentTableModeratorsStaffAdmin = ({ data }: ModeratorsStaffAdminV
         }
       },
       {
-        header: t('table.type'),
-        accessorKey: 'type',
+        header: t("table.type"),
+        accessorKey: "type",
         cell: ({ row }) => {
           const data = row.original;
 
           return (
             <Badge variant="outline">
-              {t(data.user_or_group.__typename === 'User' ? 'user' : 'group')}
+              {t(data.user_or_group.__typename === "User" ? "user" : "group")}
             </Badge>
           );
         }
       },
       {
         header: val => {
-          return <HeaderSortingDataTable {...val}>{t('table.updated')}</HeaderSortingDataTable>;
+          return (
+            <HeaderSortingDataTable {...val}>
+              {t("table.updated")}
+            </HeaderSortingDataTable>
+          );
         },
-        accessorKey: 'updated',
+        accessorKey: "updated",
         cell: ({ row }) => {
           const data = row.original;
 
@@ -67,22 +73,25 @@ export const ContentTableModeratorsStaffAdmin = ({ data }: ModeratorsStaffAdminV
         }
       },
       {
-        header: t('table.permissions'),
-        id: 'permissions',
+        header: t("table.permissions"),
+        id: "permissions",
         cell: ({ row }) => {
           const data = row.original;
           const unrestricted = data.unrestricted;
 
           return (
-            <Badge className="[&>svg]:size-4" variant={unrestricted ? 'default' : 'secondary'}>
+            <Badge
+              className="[&>svg]:size-4"
+              variant={unrestricted ? "default" : "secondary"}
+            >
               {unrestricted ? <InfinityIcon /> : <ShieldAlert />}
-              {t(unrestricted ? 'unrestricted' : 'restricted')}
+              {t(unrestricted ? "unrestricted" : "restricted")}
             </Badge>
           );
         }
       },
       {
-        id: 'actions',
+        id: "actions",
         cell: ({ row }) => {
           const data = row.original;
 
@@ -102,8 +111,8 @@ export const ContentTableModeratorsStaffAdmin = ({ data }: ModeratorsStaffAdminV
       defaultPageSize={10}
       columns={columns}
       defaultSorting={{
-        sortBy: 'updated',
-        sortDirection: 'desc'
+        sortBy: "updated",
+        sortDirection: "desc"
       }}
     />
   );

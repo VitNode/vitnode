@@ -1,10 +1,10 @@
-import { Search } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { useSearchParams } from 'next/navigation';
-import type { ComponentType } from 'react';
+import { Search } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
+import type { ComponentType } from "react";
 
-import { Input } from '@/components/ui/input';
-import { cx } from '@/functions/classnames';
+import { Input } from "@/components/ui/input";
+import { cx } from "@/functions/classnames";
 import {
   Command,
   CommandEmpty,
@@ -14,10 +14,10 @@ import {
   CommandList,
   CommandSeparator,
   commandInputClassName
-} from '@/components/ui/command';
-import { ListContentFilterToolbarDataTable } from './list';
-import { usePathname, useRouter } from '@/i18n';
-import { useFilterToolbarDataTable } from '../hooks/use-filter-toolbar-data-table';
+} from "@/components/ui/command";
+import { ListContentFilterToolbarDataTable } from "./list";
+import { usePathname, useRouter } from "@/i18n";
+import { useFilterToolbarDataTable } from "../hooks/use-filter-toolbar-data-table";
 
 export interface ContentFilterToolbarDataTableProps {
   options: {
@@ -36,7 +36,7 @@ export const ContentFilterToolbarDataTable = ({
   searchState,
   ...props
 }: ContentFilterToolbarDataTableProps) => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
   const { id, title } = useFilterToolbarDataTable();
   const searchParams = useSearchParams();
   const selectedValues = searchParams.getAll(id);
@@ -53,7 +53,7 @@ export const ContentFilterToolbarDataTable = ({
             value={searchState.value}
             className={cx(
               commandInputClassName,
-              'border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0'
+              "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0"
             )}
             placeholder={title}
           />
@@ -63,7 +63,7 @@ export const ContentFilterToolbarDataTable = ({
       )}
 
       <CommandList>
-        {!searchState && <CommandEmpty>{t('no_results')}</CommandEmpty>}
+        {!searchState && <CommandEmpty>{t("no_results")}</CommandEmpty>}
 
         <CommandGroup>
           <ListContentFilterToolbarDataTable {...props} />
@@ -73,8 +73,11 @@ export const ContentFilterToolbarDataTable = ({
           <>
             <CommandSeparator />
             <CommandGroup>
-              <CommandItem onSelect={() => push(pathname)} className="justify-center text-center">
-                {t('clear')}
+              <CommandItem
+                onSelect={() => push(pathname)}
+                className="justify-center text-center"
+              >
+                {t("clear")}
               </CommandItem>
             </CommandGroup>
           </>

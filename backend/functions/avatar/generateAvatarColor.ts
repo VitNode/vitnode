@@ -1,5 +1,5 @@
-import { generateHSLFromName } from './generateHSLFromName';
-import { hslToRgb } from './hslToRgb';
+import { generateHSLFromName } from "./generateHSLFromName";
+import { hslToRgb } from "./hslToRgb";
 
 export const generateAvatarColor = (name: string) => {
   const hslName = generateHSLFromName(name);

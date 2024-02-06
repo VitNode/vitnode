@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from "react";
 
 interface Args {
   id: string;
@@ -6,8 +6,9 @@ interface Args {
 }
 
 export const FilterToolbarDataTableContext = createContext<Args>({
-  id: '',
-  title: ''
+  id: "",
+  title: ""
 });
 
-export const useFilterToolbarDataTable = () => useContext(FilterToolbarDataTableContext);
+export const useFilterToolbarDataTable = () =>
+  useContext(FilterToolbarDataTableContext);

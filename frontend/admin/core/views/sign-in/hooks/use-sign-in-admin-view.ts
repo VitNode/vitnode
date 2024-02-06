@@ -1,38 +1,38 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslations } from 'next-intl';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-import { useState } from 'react';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { useState } from "react";
 
-import { mutationApi } from '@/hooks/core/sign/in/mutation-api';
-import type { ErrorType } from '@/graphql/fetcher';
+import { mutationApi } from "@/hooks/core/sign/in/mutation-api";
+import type { ErrorType } from "@/graphql/fetcher";
 
 export const useSignInAdminView = () => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
   const [error, setError] = useState<ErrorType | null>(null);
 
   const formSchema = z.object({
     email: z
       .string({
-        required_error: t('forms.empty')
+        required_error: t("forms.empty")
       })
       .min(1, {
-        message: t('forms.empty')
+        message: t("forms.empty")
       }),
     password: z
       .string({
-        required_error: t('forms.empty')
+        required_error: t("forms.empty")
       })
       .min(1, {
-        message: t('forms.empty')
+        message: t("forms.empty")
       })
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: '',
-      password: ''
+      email: "",
+      password: ""
     }
   });
 

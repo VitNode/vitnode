@@ -1,14 +1,14 @@
-import { createWriteStream, existsSync, mkdirSync, statSync } from 'fs';
+import { createWriteStream, existsSync, mkdirSync, statSync } from "fs";
 
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 
-import { UploadCoreFilesArgs } from './dto/upload.args';
-import { UploadCoreFilesObj } from './dto/upload.obj';
+import { UploadCoreFilesArgs } from "./dto/upload.args";
+import { UploadCoreFilesObj } from "./dto/upload.obj";
 
-import { CustomError } from '@/utils/errors/CustomError';
-import { FileUpload } from '@/utils/graphql-upload/Upload';
-import { generateRandomString } from '@/functions/generate-random-string';
-import { removeSpecialCharacters } from '@/functions/remove-special-characters';
+import { CustomError } from "@/utils/errors/CustomError";
+import { FileUpload } from "@/utils/graphql-upload/Upload";
+import { generateRandomString } from "@/functions/generate-random-string";
+import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 
 @Injectable()
 export class UploadCoreFilesService {
@@ -32,7 +32,7 @@ export class UploadCoreFilesService {
 
     if (fileSizeInBytes > maxUploadSizeBytes) {
       throw new CustomError({
-        code: 'FILE_TOO_LARGE',
+        code: "FILE_TOO_LARGE",
         message: `${filename} file is too large! We only accept files up to ${maxUploadSizeBytes} bytes.`
       });
     }
@@ -55,9 +55,9 @@ export class UploadCoreFilesService {
 
     if (!acceptMimeType.includes(mimetype)) {
       throw new CustomError({
-        code: 'INVALID_TYPE_FILE',
+        code: "INVALID_TYPE_FILE",
         message: `${filename} file has invalid type! We only accept the following types: ${acceptMimeType.join(
-          ', '
+          ", "
         )}.`
       });
     }
@@ -100,8 +100,8 @@ export class UploadCoreFilesService {
         await new Promise((resolve, reject) =>
           stream
             .pipe(createWriteStream(url))
-            .on('finish', () => resolve(url))
-            .on('error', reject)
+            .on("finish", () => resolve(url))
+            .on("error", reject)
         );
 
         // Get file stats
@@ -112,7 +112,7 @@ export class UploadCoreFilesService {
           mimetype,
           name: currentFileName,
           dir_folder: dirFolder,
-          extension: filename.split('.').pop(),
+          extension: filename.split(".").pop(),
           size: stat.size
         };
       })

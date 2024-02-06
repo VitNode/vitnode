@@ -1,8 +1,8 @@
-import { useTranslations } from 'next-intl';
-import * as z from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from 'sonner';
+import { useTranslations } from "next-intl";
+import * as z from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 
 import {
   AlertDialogCancel,
@@ -11,22 +11,28 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   useAlertDialog
-} from '@/components/ui/alert-dialog';
-import type { ShowAdminGroups } from '@/graphql/hooks';
-import { useTextLang } from '@/hooks/core/use-text-lang';
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { mutationApi } from './mutation-api';
-import { usePathname, useRouter } from '@/i18n';
+} from "@/components/ui/alert-dialog";
+import type { ShowAdminGroups } from "@/graphql/hooks";
+import { useTextLang } from "@/hooks/core/use-text-lang";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { mutationApi } from "./mutation-api";
+import { usePathname, useRouter } from "@/i18n";
 
 interface Props {
-  data: Pick<ShowAdminGroups, 'id' | 'name'>;
+  data: Pick<ShowAdminGroups, "id" | "name">;
 }
 
 export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
-  const t = useTranslations('admin.members.groups.delete');
-  const tCore = useTranslations('core');
+  const t = useTranslations("admin.members.groups.delete");
+  const tCore = useTranslations("core");
   const { convertText } = useTextLang();
   const name = convertText(data.name);
   const { setOpen } = useAlertDialog();
@@ -40,7 +46,7 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: ''
+      name: ""
     }
   });
 
@@ -49,8 +55,8 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
 
     const mutation = await mutationApi({ id: data.id });
     if (mutation.error) {
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error')
+      toast.error(tCore("errors.title"), {
+        description: tCore("errors.internal_server_error")
       });
 
       return;
@@ -58,7 +64,7 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
 
     push(pathname);
 
-    toast.success(t('success'));
+    toast.success(t("success"));
 
     setOpen(false);
   };
@@ -67,12 +73,16 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <AlertDialogHeader>
-          <AlertDialogTitle>{tCore('are_you_absolutely_sure')}</AlertDialogTitle>
+          <AlertDialogTitle>
+            {tCore("are_you_absolutely_sure")}
+          </AlertDialogTitle>
           <AlertDialogDescription className="flex flex-col gap-4">
-            <p>{t('text')}</p>
+            <p>{t("text")}</p>
             <p>
-              {t.rich('form_confirm_text', {
-                text: () => <span className="font-semibold text-foreground">{name}</span>
+              {t.rich("form_confirm_text", {
+                text: () => (
+                  <span className="font-semibold text-foreground">{name}</span>
+                )
               })}
             </p>
 
@@ -94,7 +104,7 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
         <AlertDialogFooter className="mt-6">
           <AlertDialogCancel asChild>
             <Button type="button" variant="outline">
-              {tCore('cancel')}
+              {tCore("cancel")}
             </Button>
           </AlertDialogCancel>
           <Button
@@ -103,7 +113,7 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
             disabled={!form.formState.isValid}
             loading={form.formState.isSubmitting}
           >
-            {t('submit')}
+            {t("submit")}
           </Button>
         </AlertDialogFooter>
       </form>

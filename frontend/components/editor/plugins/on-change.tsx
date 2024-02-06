@@ -1,9 +1,9 @@
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { useEffect } from 'react';
-import { $rootTextContent } from '@lexical/text';
-import { CLEAR_EDITOR_COMMAND } from 'lexical';
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { useEffect } from "react";
+import { $rootTextContent } from "@lexical/text";
+import { CLEAR_EDITOR_COMMAND } from "lexical";
 
-import type { TextLanguage } from '@/graphql/hooks';
+import type { TextLanguage } from "@/graphql/hooks";
 
 interface Props {
   selectedLanguage: string;
@@ -33,7 +33,7 @@ export const OnChangePluginEditor = ({
   useEffect(() => {
     if (!value || value.length === 0) return;
 
-    if (disableLanguage && typeof value === 'string') {
+    if (disableLanguage && typeof value === "string") {
       const initialEditorState = editor.parseEditorState(value);
       editor.setEditorState(initialEditorState);
 
@@ -43,7 +43,9 @@ export const OnChangePluginEditor = ({
     // If the value is not an array, we don't know what to do with it
     if (!Array.isArray(value)) return;
 
-    const currentValue = value.find(item => item.language_code === selectedLanguage)?.value;
+    const currentValue = value.find(
+      item => item.language_code === selectedLanguage
+    )?.value;
     if (!currentValue) {
       editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined);
 
@@ -60,14 +62,16 @@ export const OnChangePluginEditor = ({
       const text = editorState.read($rootTextContent);
       const valueAsArray = Array.isArray(value) ? value : [];
 
-      if (disableLanguage || typeof value === 'string') {
+      if (disableLanguage || typeof value === "string") {
         onChange(text as TextLanguage[] & string);
 
         return;
       }
 
       if (text.length === 0) {
-        onChange(valueAsArray.filter(item => item.language_code !== selectedLanguage));
+        onChange(
+          valueAsArray.filter(item => item.language_code !== selectedLanguage)
+        );
 
         return;
       }

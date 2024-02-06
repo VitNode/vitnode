@@ -1,7 +1,7 @@
-import { useFormContext } from 'react-hook-form';
+import { useFormContext } from "react-hook-form";
 
-import { FormField } from '@/components/ui/form';
-import { ContentPermissionsContentCreateEditFormForumAdmin } from './content';
+import { FormField } from "@/components/ui/form";
+import { ContentPermissionsContentCreateEditFormForumAdmin } from "./content";
 
 export const PermissionsContentCreateEditFormForumAdmin = () => {
   const form = useFormContext();
@@ -15,21 +15,21 @@ export const PermissionsContentCreateEditFormForumAdmin = () => {
           <ContentPermissionsContentCreateEditFormForumAdmin
             permissions={[
               {
-                id: 'view',
-                title: 'View'
+                id: "view",
+                title: "View"
               },
               {
-                id: 'read',
-                title: 'Read'
+                id: "read",
+                title: "Read"
               },
               {
-                id: 'create',
-                title: 'Create',
+                id: "create",
+                title: "Create",
                 disableForGuest: true
               },
               {
-                id: 'reply',
-                title: 'Reply',
+                id: "reply",
+                title: "Reply",
                 disableForGuest: true
               }
             ]}

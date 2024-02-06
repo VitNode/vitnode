@@ -1,4 +1,4 @@
-import { GraphQLError } from 'graphql';
+import { GraphQLError } from "graphql";
 
 export interface CustomErrorArgs {
   code: string;
@@ -11,6 +11,6 @@ export class CustomError extends GraphQLError {
       extensions: { code }
     });
 
-    Object.defineProperty(this, 'name', { value: 'CustomError' });
+    Object.defineProperty(this, "name", { value: "CustomError" });
   }
 }

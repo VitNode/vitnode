@@ -1,15 +1,15 @@
-import { useRef, useState } from 'react';
-import { type ReactCropperElement } from 'react-cropper';
-import { useTranslations } from 'next-intl';
-import { toast } from 'sonner';
+import { useRef, useState } from "react";
+import { type ReactCropperElement } from "react-cropper";
+import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
-import { mutationUploadApi } from './api/mutation-upload-api';
-import { useDialog } from '@/components/ui/dialog';
+import { mutationUploadApi } from "./api/mutation-upload-api";
+import { useDialog } from "@/components/ui/dialog";
 
-import { useSession } from '../../use-session';
+import { useSession } from "../../use-session";
 
 export const useCopperModalChangeAvatar = () => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
   const cropperRef = useRef<ReactCropperElement>(null);
   const [isPending, setPending] = useState(false);
   const { session } = useSession();
@@ -20,7 +20,9 @@ export const useCopperModalChangeAvatar = () => {
 
     const cropper = cropperRef.current?.cropper;
     if (!cropper) return;
-    const blob = await fetch(cropper.getCroppedCanvas().toDataURL()).then(res => res.blob());
+    const blob = await fetch(cropper.getCroppedCanvas().toDataURL()).then(res =>
+      res.blob()
+    );
     const file = new File([blob], `${session.id}.webp`, {
       type: blob.type
     });
@@ -28,17 +30,17 @@ export const useCopperModalChangeAvatar = () => {
     setPending(true);
 
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append("file", file);
     const mutation = await mutationUploadApi(formData);
     if (mutation.error) {
-      toast.error(t('errors.title'), {
-        description: t('settings.change_avatar.options.upload.error')
+      toast.error(t("errors.title"), {
+        description: t("settings.change_avatar.options.upload.error")
       });
 
       return;
     } else {
-      toast.success(t('settings.change_avatar.options.upload.title'), {
-        description: t('settings.change_avatar.options.upload.success')
+      toast.success(t("settings.change_avatar.options.upload.title"), {
+        description: t("settings.change_avatar.options.upload.success")
       });
       setOpen(false);
     }

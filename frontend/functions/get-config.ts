@@ -1,5 +1,5 @@
-import { promises } from 'fs';
-import { join } from 'path';
+import { promises } from "fs";
+import { join } from "path";
 
 export interface ConfigType {
   applications: string[];
@@ -16,8 +16,8 @@ export interface ConfigType {
 }
 
 export const getConfig = async () => {
-  const configPath = join('config', 'config.json');
-  const file = await promises.readFile(configPath, 'utf8');
+  const configPath = join("config", "config.json");
+  const file = await promises.readFile(configPath, "utf8");
 
   return JSON.parse(file) as ConfigType;
 };

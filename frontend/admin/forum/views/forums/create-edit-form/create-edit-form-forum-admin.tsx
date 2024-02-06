@@ -1,33 +1,33 @@
-import { useTranslations } from 'next-intl';
-import { Suspense, lazy, useState } from 'react';
+import { useTranslations } from "next-intl";
+import { Suspense, lazy, useState } from "react";
 
-import { DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useCreateEditFormForumAdmin } from './hooks/use-create-edit-form-forum-admin';
-import { Form } from '@/components/ui/form';
-import { Tabs } from '@/components/tabs/tabs';
-import { Loader } from '@/components/loader/loader';
-import { Button } from '@/components/ui/button';
-import { TabsTrigger } from '@/components/tabs/tabs-trigger';
+import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useCreateEditFormForumAdmin } from "./hooks/use-create-edit-form-forum-admin";
+import { Form } from "@/components/ui/form";
+import { Tabs } from "@/components/tabs/tabs";
+import { Loader } from "@/components/loader/loader";
+import { Button } from "@/components/ui/button";
+import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 
 const MainContentCreateEditFormForumAdmin = lazy(() =>
-  import('./content/main').then(module => ({
+  import("./content/main").then(module => ({
     default: module.MainContentCreateEditFormForumAdmin
   }))
 );
 const PermissionsContentCreateEditFormForumAdmin = lazy(() =>
-  import('./content/permissions/permissions').then(module => ({
+  import("./content/permissions/permissions").then(module => ({
     default: module.PermissionsContentCreateEditFormForumAdmin
   }))
 );
 
 enum TabsEnum {
-  MAIN = 'main',
-  PERMISSIONS = 'permissions'
+  MAIN = "main",
+  PERMISSIONS = "permissions"
 }
 
 export const CreateEditFormForumAdmin = () => {
-  const t = useTranslations('admin.forum.forums');
-  const tCore = useTranslations('core');
+  const t = useTranslations("admin.forum.forums");
+  const tCore = useTranslations("core");
   const { form, onSubmit } = useCreateEditFormForumAdmin();
   const [activeTab, setActiveTab] = useState<TabsEnum>(TabsEnum.MAIN);
 
@@ -39,7 +39,7 @@ export const CreateEditFormForumAdmin = () => {
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{t('create.title')}</DialogTitle>
+        <DialogTitle>{t("create.title")}</DialogTitle>
       </DialogHeader>
 
       <Tabs>
@@ -48,14 +48,14 @@ export const CreateEditFormForumAdmin = () => {
           active={activeTab === TabsEnum.MAIN}
           onClick={() => setActiveTab(TabsEnum.MAIN)}
         >
-          {t('create_edit.tabs.main')}
+          {t("create_edit.tabs.main")}
         </TabsTrigger>
         <TabsTrigger
           id="permissions"
           active={activeTab === TabsEnum.PERMISSIONS}
           onClick={() => setActiveTab(TabsEnum.PERMISSIONS)}
         >
-          {t('create_edit.tabs.permissions')}
+          {t("create_edit.tabs.permissions")}
         </TabsTrigger>
       </Tabs>
 
@@ -68,7 +68,7 @@ export const CreateEditFormForumAdmin = () => {
             loading={form.formState.isSubmitting}
             type="submit"
           >
-            {tCore('save')}
+            {tCore("save")}
           </Button>
         </form>
       </Form>

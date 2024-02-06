@@ -1,15 +1,15 @@
-import { useSortable } from '@dnd-kit/sortable';
-import { ExternalLink, Menu } from 'lucide-react';
-import { CSS } from '@dnd-kit/utilities';
-import { useTranslations } from 'next-intl';
+import { useSortable } from "@dnd-kit/sortable";
+import { ExternalLink, Menu } from "lucide-react";
+import { CSS } from "@dnd-kit/utilities";
+import { useTranslations } from "next-intl";
 
-import { cx } from '@/functions/classnames';
-import { Button } from '@/components/ui/button';
-import type { ShowCoreNav } from '@/graphql/hooks';
-import { useTextLang } from '@/hooks/core/use-text-lang';
-import { ActionsTableNavAdmin } from './actions/actions';
+import { cx } from "@/functions/classnames";
+import { Button } from "@/components/ui/button";
+import type { ShowCoreNav } from "@/graphql/hooks";
+import { useTextLang } from "@/hooks/core/use-text-lang";
+import { ActionsTableNavAdmin } from "./actions/actions";
 
-interface Props extends Omit<ShowCoreNav, '__typename'> {
+interface Props extends Omit<ShowCoreNav, "__typename"> {
   depth: boolean;
   isDropHere: boolean;
 }
@@ -24,10 +24,18 @@ export const ItemContentTableContentNavAdmin = ({
   name,
   ...props
 }: Props) => {
-  const t = useTranslations('admin.core.styles.nav');
-  const { attributes, isDragging, listeners, setNodeRef, transform, transition } = useSortable({
+  const t = useTranslations("admin.core.styles.nav");
+  const {
+    attributes,
+    isDragging,
+    listeners,
+    setNodeRef,
+    transform,
+    transition
+  } = useSortable({
     id,
-    animateLayoutChanges: ({ isSorting, wasDragging }) => (isSorting || wasDragging ? false : true)
+    animateLayoutChanges: ({ isSorting, wasDragging }) =>
+      isSorting || wasDragging ? false : true
   });
   const { convertText } = useTextLang();
 
@@ -39,11 +47,11 @@ export const ItemContentTableContentNavAdmin = ({
         transition
       }}
       className={cx(
-        'p-4 flex gap-4 bg-card items-center transition-[background-color,opacity] relative border',
+        "p-4 flex gap-4 bg-card items-center transition-[background-color,opacity] relative border",
         {
-          'opacity-50 z-10': isDragging,
+          "opacity-50 z-10": isDragging,
           [`ml-5`]: depth,
-          'animate-pulse bg-primary/20': isDropHere
+          "animate-pulse bg-primary/20": isDropHere
         }
       )}
     >
@@ -64,7 +72,8 @@ export const ItemContentTableContentNavAdmin = ({
         </div>
 
         <span className="text-muted-foreground text-sm line-clamp-2 flex gap-2 items-center">
-          {t('href', { href })} {external && <ExternalLink className="size-4" />}
+          {t("href", { href })}{" "}
+          {external && <ExternalLink className="size-4" />}
         </span>
 
         {description.length > 0 && (

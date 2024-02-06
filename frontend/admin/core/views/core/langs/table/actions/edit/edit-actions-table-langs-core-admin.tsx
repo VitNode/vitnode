@@ -1,21 +1,26 @@
-import { Pencil } from 'lucide-react';
-import { Suspense, lazy } from 'react';
-import { useTranslations } from 'next-intl';
+import { Pencil } from "lucide-react";
+import { Suspense, lazy } from "react";
+import { useTranslations } from "next-intl";
 
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Loader } from '@/components/loader/loader';
-import type { ShowCoreLanguages } from '@/graphql/hooks';
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
+import { Loader } from "@/components/loader/loader";
+import type { ShowCoreLanguages } from "@/graphql/hooks";
 
 const ModalEditActionsTableLangsCoreAdmin = lazy(() =>
-  import('./modal-edit-actions-table-langs-core-admin').then(module => ({
+  import("./modal-edit-actions-table-langs-core-admin").then(module => ({
     default: module.ModalEditActionsTableLangsCoreAdmin
   }))
 );
 
 export const EditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
 
   return (
     <TooltipProvider>
@@ -23,7 +28,7 @@ export const EditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
         <Tooltip>
           <TooltipTrigger asChild>
             <DialogTrigger asChild>
-              <Button variant="ghost" size="icon" tooltip={t('edit')}>
+              <Button variant="ghost" size="icon" tooltip={t("edit")}>
                 <Pencil />
               </Button>
             </DialogTrigger>
@@ -36,7 +41,7 @@ export const EditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
           </DialogContent>
 
           <TooltipContent>
-            <p>{t('edit')}</p>
+            <p>{t("edit")}</p>
           </TooltipContent>
         </Tooltip>
       </Dialog>

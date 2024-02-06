@@ -1,14 +1,20 @@
-import { ArgsType, Field, InputType, Int, registerEnumType } from '@nestjs/graphql';
+import {
+  ArgsType,
+  Field,
+  InputType,
+  Int,
+  registerEnumType
+} from "@nestjs/graphql";
 
-import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 enum ShowAdminGroupsSortingColumnEnum {
-  created = 'created',
-  updated = 'updated'
+  created = "created",
+  updated = "updated"
 }
 
 registerEnumType(ShowAdminGroupsSortingColumnEnum, {
-  name: 'ShowAdminGroupsSortingColumnEnum'
+  name: "ShowAdminGroupsSortingColumnEnum"
 });
 
 @InputType()

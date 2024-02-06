@@ -1,16 +1,16 @@
-import { useTranslations } from 'next-intl';
-import { Suspense, forwardRef, useState } from 'react';
-import { X } from 'lucide-react';
+import { useTranslations } from "next-intl";
+import { Suspense, forwardRef, useState } from "react";
+import { X } from "lucide-react";
 
-import { GroupInputContent } from './content/content';
+import { GroupInputContent } from "./content/content";
 
-import type { TextLanguage } from '../../../graphql/hooks';
-import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover';
-import { Button } from '../../ui/button';
-import { cx } from '../../../functions/classnames';
-import { Badge } from '../../ui/badge';
-import { Loader } from '../../loader/loader';
-import { useTextLang } from '../../../hooks/core/use-text-lang';
+import type { TextLanguage } from "../../../graphql/hooks";
+import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
+import { Button } from "../../ui/button";
+import { cx } from "../../../functions/classnames";
+import { Badge } from "../../ui/badge";
+import { Loader } from "../../loader/loader";
+import { useTextLang } from "../../../hooks/core/use-text-lang";
 
 export interface GroupInputItem {
   id: number;
@@ -36,87 +36,92 @@ interface SingleProps extends Props {
   value?: GroupInputItem;
 }
 
-export const GroupInput = forwardRef<HTMLButtonElement, SingleProps | MultiProps>(
-  ({ className, multiple, onChange, value: currentValue, ...rest }, ref) => {
-    const t = useTranslations('core.group_input');
-    const values = Array.isArray(currentValue) ? currentValue : currentValue ? [currentValue] : [];
-    const [open, setOpen] = useState(false);
-    const { convertText } = useTextLang();
+export const GroupInput = forwardRef<
+  HTMLButtonElement,
+  SingleProps | MultiProps
+>(({ className, multiple, onChange, value: currentValue, ...rest }, ref) => {
+  const t = useTranslations("core.group_input");
+  const values = Array.isArray(currentValue)
+    ? currentValue
+    : currentValue
+      ? [currentValue]
+      : [];
+  const [open, setOpen] = useState(false);
+  const { convertText } = useTextLang();
 
-    return (
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            className={cx('w-full justify-start', className, {
-              'text-muted-foreground': values.length === 0
-            })}
-            ref={ref}
-            {...rest}
-          >
-            {values.length === 0
-              ? t('placeholder')
-              : values.map(item => {
-                  const onRemove = () => {
-                    if (multiple) {
-                      onChange(values.filter(value => value.id !== item.id));
-
-                      return;
-                    }
-
-                    onChange();
-                  };
-
-                  return (
-                    <Badge
-                      className="[&>svg]:size-4"
-                      key={item.id}
-                      tabIndex={0}
-                      onClick={e => {
-                        e.stopPropagation();
-                        e.preventDefault();
-                        onRemove();
-                      }}
-                      onKeyDown={e => {
-                        if (e.key === 'Enter') {
-                          e.stopPropagation();
-                          e.preventDefault();
-                          onRemove();
-                        }
-                      }}
-                    >
-                      {convertText(item.name)} <X />
-                    </Badge>
-                  );
-                })}
-          </Button>
-        </PopoverTrigger>
-
-        <PopoverContent className="p-0 w-64" align="start">
-          <Suspense fallback={<Loader className="p-4" />}>
-            <GroupInputContent
-              values={values}
-              onSelect={item => {
-                if (multiple) {
-                  if (values.find(value => value.id === item.id)) {
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          className={cx("w-full justify-start", className, {
+            "text-muted-foreground": values.length === 0
+          })}
+          ref={ref}
+          {...rest}
+        >
+          {values.length === 0
+            ? t("placeholder")
+            : values.map(item => {
+                const onRemove = () => {
+                  if (multiple) {
                     onChange(values.filter(value => value.id !== item.id));
 
                     return;
                   }
-                  onChange([...values, item]);
+
+                  onChange();
+                };
+
+                return (
+                  <Badge
+                    className="[&>svg]:size-4"
+                    key={item.id}
+                    tabIndex={0}
+                    onClick={e => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      onRemove();
+                    }}
+                    onKeyDown={e => {
+                      if (e.key === "Enter") {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        onRemove();
+                      }
+                    }}
+                  >
+                    {convertText(item.name)} <X />
+                  </Badge>
+                );
+              })}
+        </Button>
+      </PopoverTrigger>
+
+      <PopoverContent className="p-0 w-64" align="start">
+        <Suspense fallback={<Loader className="p-4" />}>
+          <GroupInputContent
+            values={values}
+            onSelect={item => {
+              if (multiple) {
+                if (values.find(value => value.id === item.id)) {
+                  onChange(values.filter(value => value.id !== item.id));
 
                   return;
                 }
+                onChange([...values, item]);
 
-                onChange(item.id !== values[0]?.id ? item : undefined);
-                setOpen(false);
-              }}
-            />
-          </Suspense>
-        </PopoverContent>
-      </Popover>
-    );
-  }
-);
+                return;
+              }
 
-GroupInput.displayName = 'GroupInput';
+              onChange(item.id !== values[0]?.id ? item : undefined);
+              setOpen(false);
+            }}
+          />
+        </Suspense>
+      </PopoverContent>
+    </Popover>
+  );
+});
+
+GroupInput.displayName = "GroupInput";

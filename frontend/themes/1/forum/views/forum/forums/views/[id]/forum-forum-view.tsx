@@ -1,14 +1,14 @@
-import { useTranslations } from 'next-intl';
+import { useTranslations } from "next-intl";
 
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { useTextLang } from '@/hooks/core/use-text-lang';
-import { ActionsForumsForum } from './actions/actions';
-import type { Forum_Forums__Show_ItemQuery } from '@/graphql/hooks';
-import { TopicsListForum } from './topics-list/topics-list';
-import { ReadOnlyEditor } from '@/components/editor/read-only/read-only-editor';
-import { HeaderContent } from '@/components/header-content/header-content';
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { useTextLang } from "@/hooks/core/use-text-lang";
+import { ActionsForumsForum } from "./actions/actions";
+import type { Forum_Forums__Show_ItemQuery } from "@/graphql/hooks";
+import { TopicsListForum } from "./topics-list/topics-list";
+import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
+import { HeaderContent } from "@/components/header-content/header-content";
 
-import { ItemForum } from '../../item/item-forum';
+import { ItemForum } from "../../item/item-forum";
 
 export interface ForumForumViewProps {
   data: Forum_Forums__Show_ItemQuery;
@@ -18,7 +18,7 @@ export default function ForumForumView({
   data: { forum_forums__show, forum_topics__show }
 }: ForumForumViewProps) {
   const { convertText } = useTextLang();
-  const t = useTranslations('forum.topics');
+  const t = useTranslations("forum.topics");
 
   const { edges } = forum_forums__show;
   const forumData = edges.at(0);
@@ -60,7 +60,7 @@ export default function ForumForumView({
             <TopicsListForum initData={forum_topics__show} />
           ) : (
             <div className="p-5 flex flex-col items-center justify-center gap-4 text-center">
-              <span>{t('not_found')}</span>
+              <span>{t("not_found")}</span>
               <ActionsForumsForum permissions={forumData.permissions} />
             </div>
           )}

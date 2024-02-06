@@ -1,36 +1,49 @@
-import { useMemo } from 'react';
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { useTranslations } from 'next-intl';
+import { useMemo } from "react";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { useTranslations } from "next-intl";
 import {
   $createParagraphNode,
   $getSelection,
   $isRangeSelection,
   $isRootOrShadowRoot
-} from 'lexical';
-import { $createHeadingNode, $isHeadingNode } from '@lexical/rich-text';
-import { $setBlocksType } from '@lexical/selection';
-import { $findMatchingParent, $getNearestNodeOfType } from '@lexical/utils';
+} from "lexical";
+import { $createHeadingNode, $isHeadingNode } from "@lexical/rich-text";
+import { $setBlocksType } from "@lexical/selection";
+import { $findMatchingParent, $getNearestNodeOfType } from "@lexical/utils";
 import {
   $isListNode,
   INSERT_ORDERED_LIST_COMMAND,
   INSERT_UNORDERED_LIST_COMMAND,
   ListNode
-} from '@lexical/list';
-import type { ListType } from '@lexical/list';
-import { $createCodeNode } from '@lexical/code';
+} from "@lexical/list";
+import type { ListType } from "@lexical/list";
+import { $createCodeNode } from "@lexical/code";
 
-import { useUpdateStateEditor } from '../hooks/use-update-state-editor';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { buttonVariants } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
-import { AVAILABLE_BLOCKS, BLOCK_NAMES, useEditor } from '../hooks/use-editor';
+import { useUpdateStateEditor } from "../hooks/use-update-state-editor";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
+import { buttonVariants } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger
+} from "@/components/ui/select";
+import { AVAILABLE_BLOCKS, BLOCK_NAMES, useEditor } from "../hooks/use-editor";
 
 export const BlockTypeButtonEditor = () => {
-  const t = useTranslations('core.editor.roots');
+  const t = useTranslations("core.editor.roots");
   const { blockType, setBlockType } = useEditor();
   const [editor] = useLexicalComposerContext();
   const currentRoot = useMemo(() => {
-    return AVAILABLE_BLOCKS.find(item => item.value === blockType) ?? AVAILABLE_BLOCKS[0];
+    return (
+      AVAILABLE_BLOCKS.find(item => item.value === blockType) ??
+      AVAILABLE_BLOCKS[0]
+    );
   }, [blockType]);
 
   useUpdateStateEditor({
@@ -40,7 +53,7 @@ export const BlockTypeButtonEditor = () => {
 
       const anchorNode = selection.anchor.getNode();
       let element =
-        anchorNode.getKey() === 'root'
+        anchorNode.getKey() === "root"
           ? anchorNode
           : $findMatchingParent(anchorNode, e => {
               const parent = e.getParent();
@@ -58,15 +71,22 @@ export const BlockTypeButtonEditor = () => {
 
       // Lists
       if ($isListNode(element)) {
-        const parentList = $getNearestNodeOfType<ListNode>(anchorNode, ListNode);
-        const type: ListType = parentList ? parentList.getListType() : element.getListType();
+        const parentList = $getNearestNodeOfType<ListNode>(
+          anchorNode,
+          ListNode
+        );
+        const type: ListType = parentList
+          ? parentList.getListType()
+          : element.getListType();
         setBlockType(type);
 
         return true;
       }
 
       // Headings
-      const type = $isHeadingNode(element) ? element.getTag() : element.getType();
+      const type = $isHeadingNode(element)
+        ? element.getTag()
+        : element.getType();
       setBlockType(type);
 
       // Code
@@ -103,7 +123,8 @@ export const BlockTypeButtonEditor = () => {
           selection.insertNodes([codeNode]);
 
           selection = $getSelection();
-          if ($isRangeSelection(selection)) selection.insertRawText(textContent);
+          if ($isRangeSelection(selection))
+            selection.insertRawText(textContent);
         }
 
         return true;
@@ -118,7 +139,11 @@ export const BlockTypeButtonEditor = () => {
         return true;
       }
 
-      if (value === BLOCK_NAMES.H1 || value === BLOCK_NAMES.H2 || value === BLOCK_NAMES.H3) {
+      if (
+        value === BLOCK_NAMES.H1 ||
+        value === BLOCK_NAMES.H2 ||
+        value === BLOCK_NAMES.H3
+      ) {
         $setBlocksType(selection, () => $createHeadingNode(value));
 
         return true;
@@ -133,9 +158,9 @@ export const BlockTypeButtonEditor = () => {
           <TooltipTrigger asChild>
             <SelectTrigger
               className={buttonVariants({
-                variant: 'ghost',
-                size: 'sm',
-                className: 'w-auto border-0 [&>svg]:w-5 [&>svg]:h-5'
+                variant: "ghost",
+                size: "sm",
+                className: "w-auto border-0 [&>svg]:w-5 [&>svg]:h-5"
               })}
             >
               <currentRoot.icon />
@@ -144,7 +169,7 @@ export const BlockTypeButtonEditor = () => {
             </SelectTrigger>
           </TooltipTrigger>
 
-          <TooltipContent>{t('title')}</TooltipContent>
+          <TooltipContent>{t("title")}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 

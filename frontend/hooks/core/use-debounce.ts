@@ -3,8 +3,8 @@
  *
  * Source: https://github.com/facebook/lexical/blob/main/packages/lexical-playground/src/plugins/CodeActionMenuPlugin/utils.ts
  */
-import { debounce } from 'lodash';
-import { useMemo, useRef } from 'react';
+import { debounce } from "lodash";
+import { useMemo, useRef } from "react";
 
 export function useDebounce<T extends (...args: never[]) => void>(
   fn: T,

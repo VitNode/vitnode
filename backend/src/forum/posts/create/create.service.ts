@@ -1,17 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 
-import { currentDate } from '@/functions/date';
-import { CreatePostsForumsArgs } from '@/src/forum/posts/create/dto/create.args';
-import { ShowPostsForums } from '@/src/forum/posts/show/dto/show.obj';
-import { Ctx } from '@/types/context.type';
-import { User } from '@/utils/decorators/user.decorator';
-import { DatabaseService } from '@/database/database.service';
+import { currentDate } from "@/functions/date";
+import { CreatePostsForumsArgs } from "@/src/forum/posts/create/dto/create.args";
+import { ShowPostsForums } from "@/src/forum/posts/show/dto/show.obj";
+import { Ctx } from "@/types/context.type";
+import { User } from "@/utils/decorators/user.decorator";
+import { DatabaseService } from "@/database/database.service";
 import {
   forum_posts,
   forum_posts_content,
   forum_posts_timeline
-} from '@/src/admin/forum/database/schema/posts';
-import { NotFoundError } from '@/utils/errors/not-found-error';
+} from "@/src/admin/forum/database/schema/posts";
+import { NotFoundError } from "@/utils/errors/not-found-error";
 
 @Injectable()
 export class CreateForumsPostsService {
@@ -28,7 +28,7 @@ export class CreateForumsPostsService {
     });
 
     if (!topic) {
-      throw new NotFoundError('Topic');
+      throw new NotFoundError("Topic");
     }
 
     const createPost = await this.databaseService.db

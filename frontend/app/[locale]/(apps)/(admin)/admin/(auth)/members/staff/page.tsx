@@ -1,5 +1,5 @@
-import { redirect } from '@/i18n';
+import { redirect } from "@/i18n";
 
 export default function Page() {
-  redirect('/admin/members/staff/moderators');
+  redirect("/admin/members/staff/moderators");
 }

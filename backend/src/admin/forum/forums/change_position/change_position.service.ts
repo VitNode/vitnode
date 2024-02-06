@@ -1,30 +1,37 @@
-import { Injectable } from '@nestjs/common';
-import { eq, isNull } from 'drizzle-orm';
+import { Injectable } from "@nestjs/common";
+import { eq, isNull } from "drizzle-orm";
 
-import { ChangePositionForumForumsArgs } from './dto/change_position.args';
+import { ChangePositionForumForumsArgs } from "./dto/change_position.args";
 
-import { DatabaseService } from '@/database/database.service';
-import { NotFoundError } from '@/utils/errors/not-found-error';
-import { forum_forums } from '@/src/admin/forum/database/schema/forums';
+import { DatabaseService } from "@/database/database.service";
+import { NotFoundError } from "@/utils/errors/not-found-error";
+import { forum_forums } from "@/src/admin/forum/database/schema/forums";
 
 @Injectable()
 export class ChangePositionForumForumsService {
   constructor(private databaseService: DatabaseService) {}
 
-  async changeOrderingForumForums({ id, index_to_move, parent_id }: ChangePositionForumForumsArgs) {
+  async changeOrderingForumForums({
+    id,
+    index_to_move,
+    parent_id
+  }: ChangePositionForumForumsArgs) {
     const item = await this.databaseService.db.query.forum_forums.findFirst({
       where: (table, { eq }) => eq(table.id, id)
     });
 
     if (!item) {
-      throw new NotFoundError('Forum');
+      throw new NotFoundError("Forum");
     }
 
-    const allChildrenParent = await this.databaseService.db.query.forum_forums.findMany({
-      where: (table, { eq }) =>
-        parent_id === null ? isNull(table.parent_id) : eq(table.parent_id, parent_id),
-      orderBy: (table, { asc }) => asc(table.position)
-    });
+    const allChildrenParent =
+      await this.databaseService.db.query.forum_forums.findMany({
+        where: (table, { eq }) =>
+          parent_id === null
+            ? isNull(table.parent_id)
+            : eq(table.parent_id, parent_id),
+        orderBy: (table, { asc }) => asc(table.position)
+      });
 
     let index = 0;
     const newChildrenIndexes: { id: number; position: number }[] = [];
@@ -61,6 +68,6 @@ export class ChangePositionForumForumsService {
       })
     );
 
-    return 'Success!';
+    return "Success!";
   }
 }

@@ -1,6 +1,7 @@
-import type { Forum_Forums__Admin__ShowQueryItem } from './hooks/use-forum-forums-admin-api';
+import type { Forum_Forums__Admin__ShowQueryItem } from "./hooks/use-forum-forums-admin-api";
 
-export interface Forum_Forums__Admin__ShowFlattenedItem extends Forum_Forums__Admin__ShowQueryItem {
+export interface Forum_Forums__Admin__ShowFlattenedItem
+  extends Forum_Forums__Admin__ShowQueryItem {
   depth: number;
   index: number;
   parentId: number | null;

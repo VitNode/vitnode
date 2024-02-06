@@ -1,11 +1,11 @@
-import { cookies, headers } from 'next/headers';
+import { cookies, headers } from "next/headers";
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Sessions__Authorization,
   type Core_Sessions__AuthorizationQuery,
   type Core_Sessions__AuthorizationQueryVariables
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
 export const getSessionData = async () => {
   const { data } = await fetcher<
@@ -15,11 +15,11 @@ export const getSessionData = async () => {
     query: Core_Sessions__Authorization,
     headers: {
       Cookie: cookies().toString(),
-      ['user-agent']: headers().get('user-agent') ?? 'node'
+      ["user-agent"]: headers().get("user-agent") ?? "node"
     },
-    cache: 'force-cache',
+    cache: "force-cache",
     next: {
-      tags: ['Core_Sessions__Authorization']
+      tags: ["Core_Sessions__Authorization"]
     }
   });
 

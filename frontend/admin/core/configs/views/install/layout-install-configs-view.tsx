@@ -1,18 +1,23 @@
-'use client';
+"use client";
 
-import type { ReactNode } from 'react';
-import { useTranslations } from 'next-intl';
-import { useSelectedLayoutSegment } from 'next/navigation';
+import type { ReactNode } from "react";
+import { useTranslations } from "next-intl";
+import { useSelectedLayoutSegment } from "next/navigation";
 
-import { Steps, type ItemStepProps } from '@/components/steps/steps';
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Steps, type ItemStepProps } from "@/components/steps/steps";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from "@/components/ui/card";
 
 interface Props {
   children: ReactNode;
 }
 
 export const LayoutInstallConfigsView = ({ children }: Props) => {
-  const t = useTranslations('admin.configs.install');
+  const t = useTranslations("admin.configs.install");
   const segment = useSelectedLayoutSegment();
 
   const stepsNumber: {
@@ -27,27 +32,27 @@ export const LayoutInstallConfigsView = ({ children }: Props) => {
 
   const items: ItemStepProps[] = [
     {
-      id: 'welcome',
-      title: t('steps.welcome.title'),
-      description: t('steps.welcome.desc'),
+      id: "welcome",
+      title: t("steps.welcome.title"),
+      description: t("steps.welcome.desc"),
       checked: activeStep >= 2
     },
     {
-      id: 'license',
-      title: t('steps.license.title'),
-      description: t('steps.license.desc'),
+      id: "license",
+      title: t("steps.license.title"),
+      description: t("steps.license.desc"),
       checked: activeStep >= 3
     },
     {
-      id: 'database',
-      title: t('steps.database.title'),
-      description: t('steps.database.desc'),
+      id: "database",
+      title: t("steps.database.title"),
+      description: t("steps.database.desc"),
       checked: activeStep >= 4
     },
     {
-      id: 'account',
-      title: t('steps.account.title'),
-      description: t('steps.account.desc'),
+      id: "account",
+      title: t("steps.account.title"),
+      description: t("steps.account.desc"),
       checked: activeStep >= 5
     }
   ];
@@ -58,10 +63,12 @@ export const LayoutInstallConfigsView = ({ children }: Props) => {
 
       <div className="flex-grow">
         <CardHeader>
-          <CardDescription>{t('title', { name: 'VitNode' })}</CardDescription>
+          <CardDescription>{t("title", { name: "VitNode" })}</CardDescription>
           {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
           {/* @ts-expect-error */}
-          <CardTitle>{t(`steps.${items.at(activeStep - 1)?.id}.title`)}</CardTitle>
+          <CardTitle>
+            {t(`steps.${items.at(activeStep - 1)?.id}.title`)}
+          </CardTitle>
         </CardHeader>
         {children}
       </div>

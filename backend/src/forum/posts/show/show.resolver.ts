@@ -1,12 +1,12 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
+import { Args, Query, Resolver } from "@nestjs/graphql";
+import { UseGuards } from "@nestjs/common";
 
-import { ShowPostsForumsService } from './show.service';
-import { ShowPostsForumsObj } from './dto/show.obj';
-import { ShowPostsForumsArgs } from './dto/show.args';
+import { ShowPostsForumsService } from "./show.service";
+import { ShowPostsForumsObj } from "./dto/show.obj";
+import { ShowPostsForumsArgs } from "./dto/show.args";
 
-import { AuthGuards, OptionalAuth } from '@/utils/guards/auth.guards';
-import { CurrentUser, User } from '@/utils/decorators/user.decorator';
+import { AuthGuards, OptionalAuth } from "@/utils/guards/auth.guards";
+import { CurrentUser, User } from "@/utils/decorators/user.decorator";
 
 @Resolver()
 export class ShowPostsForumsResolver {

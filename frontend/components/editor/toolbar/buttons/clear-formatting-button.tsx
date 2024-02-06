@@ -1,16 +1,21 @@
-import { RemoveFormatting } from 'lucide-react';
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { $createParagraphNode, $getSelection, $isRangeSelection, $isTextNode } from 'lexical';
-import { $isDecoratorBlockNode } from '@lexical/react/LexicalDecoratorBlockNode';
-import { $isHeadingNode, $isQuoteNode } from '@lexical/rich-text';
-import { $getNearestBlockElementAncestorOrThrow } from '@lexical/utils';
-import { useTranslations } from 'next-intl';
-import { useCallback } from 'react';
+import { RemoveFormatting } from "lucide-react";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import {
+  $createParagraphNode,
+  $getSelection,
+  $isRangeSelection,
+  $isTextNode
+} from "lexical";
+import { $isDecoratorBlockNode } from "@lexical/react/LexicalDecoratorBlockNode";
+import { $isHeadingNode, $isQuoteNode } from "@lexical/rich-text";
+import { $getNearestBlockElementAncestorOrThrow } from "@lexical/utils";
+import { useTranslations } from "next-intl";
+import { useCallback } from "react";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 
 export const ClearFormattingButtonEditor = () => {
-  const t = useTranslations('core.editor');
+  const t = useTranslations("core.editor");
   const [editor] = useLexicalComposerContext();
 
   const clearFormatting = useCallback(() => {
@@ -38,18 +43,18 @@ export const ClearFormattingButtonEditor = () => {
               textNode = textNode.splitText(focus.offset)[0] || textNode;
             }
 
-            if (textNode.__style !== '') {
-              textNode.setStyle('');
+            if (textNode.__style !== "") {
+              textNode.setStyle("");
             }
             if (textNode.__format !== 0) {
               textNode.setFormat(0);
-              $getNearestBlockElementAncestorOrThrow(textNode).setFormat('');
+              $getNearestBlockElementAncestorOrThrow(textNode).setFormat("");
             }
             node = textNode;
           } else if ($isHeadingNode(node) || $isQuoteNode(node)) {
             node.replace($createParagraphNode(), true);
           } else if ($isDecoratorBlockNode(node)) {
-            node.setFormat('');
+            node.setFormat("");
           }
         });
       }
@@ -62,7 +67,7 @@ export const ClearFormattingButtonEditor = () => {
       className="size-9"
       size="icon"
       onClick={clearFormatting}
-      tooltip={t('remove_formatting')}
+      tooltip={t("remove_formatting")}
     >
       <RemoveFormatting />
     </Button>

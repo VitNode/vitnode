@@ -1,9 +1,9 @@
-import type { ShowAdminGroups } from '@/graphql/hooks';
-import { EditGroupsMembersDialogAdmin } from './edit-groups-members-dialog-admin';
-import { DeleteGroupsMembersDialogAdmin } from './delete/delete-groups-members-dialog-admin';
+import type { ShowAdminGroups } from "@/graphql/hooks";
+import { EditGroupsMembersDialogAdmin } from "./edit-groups-members-dialog-admin";
+import { DeleteGroupsMembersDialogAdmin } from "./delete/delete-groups-members-dialog-admin";
 
 interface Props {
-  data: Omit<ShowAdminGroups, 'default' | 'root'>;
+  data: Omit<ShowAdminGroups, "default" | "root">;
 }
 
 export const ActionsTableGroupsMembersAdmin = ({ data }: Props) => {

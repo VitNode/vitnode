@@ -1,15 +1,20 @@
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { Subscript } from 'lucide-react';
-import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND } from 'lexical';
-import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { Subscript } from "lucide-react";
+import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND } from "lexical";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
 
-import { Toggle } from '@/components/ui/toggle';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { useUpdateStateEditor } from '../hooks/use-update-state-editor';
+import { Toggle } from "@/components/ui/toggle";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
+import { useUpdateStateEditor } from "../hooks/use-update-state-editor";
 
 export const SubscriptButtonEditor = () => {
-  const t = useTranslations('core.editor.text');
+  const t = useTranslations("core.editor.text");
   const [isSubscript, setIsSubscript] = useState(false);
   const [editor] = useLexicalComposerContext();
 
@@ -18,7 +23,7 @@ export const SubscriptButtonEditor = () => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
-      setIsSubscript(selection.hasFormat('subscript'));
+      setIsSubscript(selection.hasFormat("subscript"));
     }
   });
 
@@ -28,8 +33,10 @@ export const SubscriptButtonEditor = () => {
         <TooltipTrigger asChild>
           <div>
             <Toggle
-              aria-label={t('subscript')}
-              onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'subscript')}
+              aria-label={t("subscript")}
+              onClick={() =>
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "subscript")
+              }
               pressed={isSubscript}
               className="size-9"
             >
@@ -38,7 +45,7 @@ export const SubscriptButtonEditor = () => {
           </div>
         </TooltipTrigger>
 
-        <TooltipContent>{t('subscript')}</TooltipContent>
+        <TooltipContent>{t("subscript")}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

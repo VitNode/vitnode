@@ -1,28 +1,31 @@
-import { useTranslations } from 'next-intl';
-import { Lock, MessagesSquare } from 'lucide-react';
+import { useTranslations } from "next-intl";
+import { Lock, MessagesSquare } from "lucide-react";
 
-import { badgeVariants } from '@/components/ui/badge';
-import { Link } from '@/i18n';
-import type { Forum_Topics__ShowQuery } from '@/graphql/hooks';
-import { useTextLang } from '@/hooks/core/use-text-lang';
-import { UserLink } from '@/components/user/link/user-link';
-import { ActionsTopic } from './actions/actions-topic';
-import { TitleIconTopic } from './title-icon';
-import { PostTopic } from './posts/post/post';
-import { CreatePost } from './posts/create/create-post';
-import { HeaderPosts } from './posts/header/header-posts';
-import { LoadMorePosts } from './posts/load-more/load-more-posts';
-import { WrapperPosts } from './posts/wrapper/wrapper';
-import { ListPosts } from './posts/list';
-import { AnimatePresenceClient } from '@/components/animations/animate-presence';
+import { badgeVariants } from "@/components/ui/badge";
+import { Link } from "@/i18n";
+import type { Forum_Topics__ShowQuery } from "@/graphql/hooks";
+import { useTextLang } from "@/hooks/core/use-text-lang";
+import { UserLink } from "@/components/user/link/user-link";
+import { ActionsTopic } from "./actions/actions-topic";
+import { TitleIconTopic } from "./title-icon";
+import { PostTopic } from "./posts/post/post";
+import { CreatePost } from "./posts/create/create-post";
+import { HeaderPosts } from "./posts/header/header-posts";
+import { LoadMorePosts } from "./posts/load-more/load-more-posts";
+import { WrapperPosts } from "./posts/wrapper/wrapper";
+import { ListPosts } from "./posts/list";
+import { AnimatePresenceClient } from "@/components/animations/animate-presence";
 
 export interface TopicViewProps {
   data: Forum_Topics__ShowQuery;
   firstEdges: number;
 }
 
-export default function TopicView({ data: dataApi, firstEdges }: TopicViewProps) {
-  const t = useTranslations('forum.topics');
+export default function TopicView({
+  data: dataApi,
+  firstEdges
+}: TopicViewProps) {
+  const t = useTranslations("forum.topics");
   const { convertNameToLink, convertText } = useTextLang();
 
   const {
@@ -45,18 +48,20 @@ export default function TopicView({ data: dataApi, firstEdges }: TopicViewProps)
             <div className="flex items-center gap-2 flex-wrap">
               {locked && (
                 <TitleIconTopic variant="destructive">
-                  <Lock /> {t('closed')}
+                  <Lock /> {t("closed")}
                 </TitleIconTopic>
               )}
 
               <span>
-                {t.rich('user_wrote_in_forum', {
-                  user: () => <UserLink className="font-semibold" user={user} />,
+                {t.rich("user_wrote_in_forum", {
+                  user: () => (
+                    <UserLink className="font-semibold" user={user} />
+                  ),
                   forum: () => (
                     <Link
                       href={`/forum/${convertNameToLink({ ...forum })}`}
                       className={badgeVariants({
-                        className: '[&>svg]:size-3'
+                        className: "[&>svg]:size-3"
                       })}
                     >
                       <MessagesSquare /> {convertText(forum.name)}

@@ -1,12 +1,12 @@
-import { useTranslations } from 'next-intl';
-import { AlertTriangle } from 'lucide-react';
+import { useTranslations } from "next-intl";
+import { AlertTriangle } from "lucide-react";
 
-import corePackages from '@/package.json';
-import { HeaderContent } from '@/components/header-content/header-content';
-import { Badge } from '@/components/ui/badge';
+import corePackages from "@/package.json";
+import { HeaderContent } from "@/components/header-content/header-content";
+import { Badge } from "@/components/ui/badge";
 
 export const DashboardCoreAdminView = () => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
 
   return (
     <>
@@ -14,7 +14,7 @@ export const DashboardCoreAdminView = () => {
         h1={
           <>
             <span>VitNode</span>
-            {process.env.NODE_ENV === 'development' && (
+            {process.env.NODE_ENV === "development" && (
               <Badge
                 variant="destructive"
                 className="ml-2 bg-yellow-500 text-black hover:bg-yellow-500"
@@ -24,7 +24,7 @@ export const DashboardCoreAdminView = () => {
             )}
           </>
         }
-        desc={t('version', { version: corePackages.version })}
+        desc={t("version", { version: corePackages.version })}
       />
     </>
   );

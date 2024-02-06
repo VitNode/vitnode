@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
-import { X } from 'lucide-react';
+import { useMemo } from "react";
+import { X } from "lucide-react";
 
-import { Img } from '@/components/img';
+import { Img } from "@/components/img";
 
 interface Props {
   file: File;
@@ -10,10 +10,18 @@ interface Props {
   value: File[] | undefined;
 }
 
-const IMAGE_FILE_TYPES = ['image/png', 'image/jpeg', 'image/gif'];
+const IMAGE_FILE_TYPES = ["image/png", "image/jpeg", "image/gif"];
 
-export const ItemPreviewFilesInput = ({ file, index, onChange, value }: Props) => {
-  const previewURL = useMemo(() => (file instanceof File ? URL.createObjectURL(file) : ``), [file]);
+export const ItemPreviewFilesInput = ({
+  file,
+  index,
+  onChange,
+  value
+}: Props) => {
+  const previewURL = useMemo(
+    () => (file instanceof File ? URL.createObjectURL(file) : ``),
+    [file]
+  );
   const size = useMemo(() => {
     if (file instanceof File) {
       const sizeInKb = file.size / 1024;
@@ -27,7 +35,7 @@ export const ItemPreviewFilesInput = ({ file, index, onChange, value }: Props) =
       return `${sizeInGb.toFixed(2)} GB`;
     }
 
-    return '';
+    return "";
   }, [file]);
 
   const handleRemoveFile = () => {
@@ -43,7 +51,7 @@ export const ItemPreviewFilesInput = ({ file, index, onChange, value }: Props) =
           className="rounded-sm flex-shrink-0"
           imageClassName="object-cover"
           src={previewURL}
-          alt={file instanceof File ? file.name : ''}
+          alt={file instanceof File ? file.name : ""}
           width={64}
           height={64}
         />

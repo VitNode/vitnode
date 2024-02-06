@@ -1,15 +1,20 @@
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { Code } from 'lucide-react';
-import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND } from 'lexical';
-import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { Code } from "lucide-react";
+import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND } from "lexical";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
 
-import { Toggle } from '@/components/ui/toggle';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { useUpdateStateEditor } from '../hooks/use-update-state-editor';
+import { Toggle } from "@/components/ui/toggle";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
+import { useUpdateStateEditor } from "../hooks/use-update-state-editor";
 
 export const CodeButtonEditor = () => {
-  const t = useTranslations('core.editor.text');
+  const t = useTranslations("core.editor.text");
   const [isCode, setIsCode] = useState(false);
   const [editor] = useLexicalComposerContext();
 
@@ -18,7 +23,7 @@ export const CodeButtonEditor = () => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
-      setIsCode(selection.hasFormat('code'));
+      setIsCode(selection.hasFormat("code"));
     }
   });
 
@@ -28,8 +33,10 @@ export const CodeButtonEditor = () => {
         <TooltipTrigger asChild>
           <div>
             <Toggle
-              aria-label={t('code')}
-              onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code')}
+              aria-label={t("code")}
+              onClick={() =>
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code")
+              }
               pressed={isCode}
               className="size-9"
             >
@@ -38,7 +45,7 @@ export const CodeButtonEditor = () => {
           </div>
         </TooltipTrigger>
 
-        <TooltipContent>{t('code')}</TooltipContent>
+        <TooltipContent>{t("code")}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

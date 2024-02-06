@@ -1,11 +1,11 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
+import { Args, Query, Resolver } from "@nestjs/graphql";
+import { UseGuards } from "@nestjs/common";
 
-import { ShowAdminStaffAdministratorsService } from './show.service';
-import { ShowAdminStaffAdministratorsObj } from './dto/show.obj';
-import { ShowAdminStaffAdministratorsArgs } from './dto/show.args';
+import { ShowAdminStaffAdministratorsService } from "./show.service";
+import { ShowAdminStaffAdministratorsObj } from "./dto/show.obj";
+import { ShowAdminStaffAdministratorsArgs } from "./dto/show.args";
 
-import { AdminAuthGuards } from '@/utils/guards/admin-auth.guards';
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
 
 @Resolver()
 export class ShowAdminStaffAdministratorResolver {

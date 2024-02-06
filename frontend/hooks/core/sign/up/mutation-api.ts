@@ -1,14 +1,14 @@
-'use server';
+"use server";
 
-import { cookies } from 'next/headers';
-import { revalidatePath } from 'next/cache';
+import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Members__Sign_Up,
   type Core_Members__Sign_UpMutation,
   type Core_Members__Sign_UpMutationVariables
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
 interface Args {
   variables: Core_Members__Sign_UpMutationVariables;
@@ -29,7 +29,7 @@ export const mutationApi = async ({ installPage, variables }: Args) => {
     });
 
     if (installPage) {
-      revalidatePath('/admin/(configs)/install/', 'layout');
+      revalidatePath("/admin/(configs)/install/", "layout");
     }
 
     return { data };

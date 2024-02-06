@@ -1,16 +1,26 @@
-'use client';
+"use client";
 
-import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-import { Circle } from 'lucide-react';
-import { type ComponentPropsWithoutRef, type ElementRef, forwardRef } from 'react';
+import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
+import { Circle } from "lucide-react";
+import {
+  type ComponentPropsWithoutRef,
+  type ElementRef,
+  forwardRef
+} from "react";
 
-import { cx } from '@/functions/classnames';
+import { cx } from "@/functions/classnames";
 
 const RadioGroup = forwardRef<
   ElementRef<typeof RadioGroupPrimitive.Root>,
   ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
 >(({ className, ...props }, ref) => {
-  return <RadioGroupPrimitive.Root className={cx('grid gap-2', className)} {...props} ref={ref} />;
+  return (
+    <RadioGroupPrimitive.Root
+      className={cx("grid gap-2", className)}
+      {...props}
+      ref={ref}
+    />
+  );
 });
 RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
 
@@ -22,7 +32,7 @@ const RadioGroupItem = forwardRef<
     <RadioGroupPrimitive.Item
       ref={ref}
       className={cx(
-        'aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+        "aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
       {...props}

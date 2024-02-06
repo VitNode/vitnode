@@ -1,9 +1,9 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
-import { Header } from './header/header';
-import { QuickMenu } from './quick-menu/quick-menu';
-import { PoweredByVitNode } from '@/admin/core/global/powered-by';
-import './global.scss';
+import { Header } from "./header/header";
+import { QuickMenu } from "./quick-menu/quick-menu";
+import { PoweredByVitNode } from "@/admin/core/global/powered-by";
+import "./global.scss";
 
 interface Props {
   children: ReactNode;

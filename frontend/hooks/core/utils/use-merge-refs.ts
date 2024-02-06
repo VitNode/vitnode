@@ -1,4 +1,9 @@
-import { type Ref, type RefCallback, useMemo, type MutableRefObject } from 'react';
+import {
+  type Ref,
+  type RefCallback,
+  useMemo,
+  type MutableRefObject
+} from "react";
 
 /**
  * Merges an array of refs into a single memoized callback ref or `null`.
@@ -14,7 +19,7 @@ export function useMergeRefs<Instance>(
 
     return value => {
       refs.forEach(ref => {
-        if (typeof ref === 'function') {
+        if (typeof ref === "function") {
           ref(value);
         } else if (ref != null) {
           (ref as MutableRefObject<Instance | null>).current = value;

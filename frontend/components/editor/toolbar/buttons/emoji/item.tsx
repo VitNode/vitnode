@@ -1,8 +1,8 @@
-import type { Emoji } from '@emoji-mart/data';
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { $createTextNode, $getSelection, $isRangeSelection } from 'lexical';
+import type { Emoji } from "@emoji-mart/data";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { $createTextNode, $getSelection, $isRangeSelection } from "lexical";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 
 interface Props {
   emoji: Emoji;
@@ -12,7 +12,9 @@ interface Props {
 export const ItemEmojiButtonEditor = ({ emoji, skinToneIndex }: Props) => {
   const [editor] = useLexicalComposerContext();
   const icon =
-    emoji.skins.length > skinToneIndex ? emoji.skins[skinToneIndex].native : emoji.skins[0].native;
+    emoji.skins.length > skinToneIndex
+      ? emoji.skins[skinToneIndex].native
+      : emoji.skins[0].native;
 
   return (
     <Button

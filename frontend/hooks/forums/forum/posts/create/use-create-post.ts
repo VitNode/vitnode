@@ -1,24 +1,24 @@
-import { useTranslations } from 'next-intl';
-import { useParams } from 'next/navigation';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { toast } from 'sonner';
+import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { toast } from "sonner";
 
-import { zodTextLanguageInputType } from '@/components/text-language-input';
-import { mutationApi } from './mutation-api';
-import { getIdFormString } from '@/functions/url';
+import { zodTextLanguageInputType } from "@/components/text-language-input";
+import { mutationApi } from "./mutation-api";
+import { getIdFormString } from "@/functions/url";
 
 interface Args {
   setOpen: (value: boolean) => void;
 }
 
 export const useCreatePost = ({ setOpen }: Args) => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
   const { id } = useParams();
 
   const formSchema = z.object({
-    content: zodTextLanguageInputType.min(1, t('forms.empty'))
+    content: zodTextLanguageInputType.min(1, t("forms.empty"))
   });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -34,8 +34,8 @@ export const useCreatePost = ({ setOpen }: Args) => {
     });
 
     if (mutation.error) {
-      toast.error(t('errors.title'), {
-        description: t('errors.internal_server_error')
+      toast.error(t("errors.title"), {
+        description: t("errors.internal_server_error")
       });
 
       return;

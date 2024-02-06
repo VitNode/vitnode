@@ -1,5 +1,5 @@
-import type { ShowAdminStaffAdministrators } from '@/graphql/hooks';
-import { DeleteActionsTableAdministratorsStaffAdmin } from './delete/delete';
+import type { ShowAdminStaffAdministrators } from "@/graphql/hooks";
+import { DeleteActionsTableAdministratorsStaffAdmin } from "./delete/delete";
 
 interface Props {
   data: ShowAdminStaffAdministrators;

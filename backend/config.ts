@@ -1,3 +1,3 @@
-import { join } from 'path';
+import { join } from "path";
 
-export const configPath = join('..', 'frontend', 'config', 'config.json');
+export const configPath = join("..", "frontend", "config", "config.json");

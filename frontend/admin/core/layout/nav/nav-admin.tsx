@@ -1,6 +1,6 @@
-import { Link } from '@/i18n';
-import { ListNavAdmin } from './list/list-nav-admin';
-import { LogoVitNode } from '@/components/logo-vitnode';
+import { Link } from "@/i18n";
+import { ListNavAdmin } from "./list/list-nav-admin";
+import { LogoVitNode } from "@/components/logo-vitnode";
 
 export const NavAdmin = () => {
   return (

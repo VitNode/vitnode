@@ -1,19 +1,23 @@
-import { CheckCircle, Copy } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { useState } from 'react';
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { $getNearestNodeFromDOMNode, $getSelection, $setSelection } from 'lexical';
-import { $isCodeNode } from '@lexical/code';
+import { CheckCircle, Copy } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import {
+  $getNearestNodeFromDOMNode,
+  $getSelection,
+  $setSelection
+} from "lexical";
+import { $isCodeNode } from "@lexical/code";
 
-import { useDebounce } from '@/hooks/core/use-debounce';
-import { Button } from '@/components/ui/button';
+import { useDebounce } from "@/hooks/core/use-debounce";
+import { Button } from "@/components/ui/button";
 
 interface Props {
   codeDOMNode: HTMLElement;
 }
 
 export const CopyButtonCodeAction = ({ codeDOMNode }: Props) => {
-  const t = useTranslations('core.editor');
+  const t = useTranslations("core.editor");
   const [isCopyCompleted, setCopyCompleted] = useState(false);
   const [editor] = useLexicalComposerContext();
 
@@ -26,9 +30,9 @@ export const CopyButtonCodeAction = ({ codeDOMNode }: Props) => {
       className="w-8 h-8 [&>svg]:pointer-events-none [&>svg]:w-4 [&>svg]:h-4"
       variant="outline"
       size="icon"
-      tooltip={t('copy_code')}
+      tooltip={t("copy_code")}
       onClick={async () => {
-        let content = '';
+        let content = "";
 
         editor.update(() => {
           const codeNode = $getNearestNodeFromDOMNode(codeDOMNode);

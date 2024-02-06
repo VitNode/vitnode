@@ -1,4 +1,4 @@
-import { LanguageButtonEditor } from './buttons/language-button';
+import { LanguageButtonEditor } from "./buttons/language-button";
 
 interface Props {
   selectedLanguage: string;

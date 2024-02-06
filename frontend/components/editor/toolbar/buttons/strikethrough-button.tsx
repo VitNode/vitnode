@@ -1,15 +1,20 @@
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { Strikethrough } from 'lucide-react';
-import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND } from 'lexical';
-import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { Strikethrough } from "lucide-react";
+import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND } from "lexical";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
 
-import { Toggle } from '@/components/ui/toggle';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { useUpdateStateEditor } from '../hooks/use-update-state-editor';
+import { Toggle } from "@/components/ui/toggle";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
+import { useUpdateStateEditor } from "../hooks/use-update-state-editor";
 
 export const StrikethroughButtonEditor = () => {
-  const t = useTranslations('core.editor.text');
+  const t = useTranslations("core.editor.text");
   const [isStrikethrough, setIsStrikethrough] = useState(false);
   const [editor] = useLexicalComposerContext();
 
@@ -18,7 +23,7 @@ export const StrikethroughButtonEditor = () => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
-      setIsStrikethrough(selection.hasFormat('strikethrough'));
+      setIsStrikethrough(selection.hasFormat("strikethrough"));
     }
   });
 
@@ -28,8 +33,10 @@ export const StrikethroughButtonEditor = () => {
         <TooltipTrigger asChild>
           <div>
             <Toggle
-              aria-label={t('strikethrough')}
-              onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough')}
+              aria-label={t("strikethrough")}
+              onClick={() =>
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough")
+              }
               pressed={isStrikethrough}
               className="size-9"
             >
@@ -38,7 +45,7 @@ export const StrikethroughButtonEditor = () => {
           </div>
         </TooltipTrigger>
 
-        <TooltipContent>{t('strikethrough')}</TooltipContent>
+        <TooltipContent>{t("strikethrough")}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );
