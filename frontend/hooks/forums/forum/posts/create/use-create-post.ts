@@ -9,7 +9,11 @@ import { zodTextLanguageInputType } from '@/components/text-language-input';
 import { mutationApi } from './mutation-api';
 import { getIdFormString } from '@/functions/url';
 
-export const useCreatePost = () => {
+interface Args {
+  setOpen: (value: boolean) => void;
+}
+
+export const useCreatePost = ({ setOpen }: Args) => {
   const t = useTranslations('core');
   const { id } = useParams();
 
@@ -36,6 +40,8 @@ export const useCreatePost = () => {
 
       return;
     }
+
+    setOpen(false);
   };
 
   return {

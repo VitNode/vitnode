@@ -5,9 +5,13 @@ import { Editor } from '@/components/editor/editor';
 import { Button } from '@/components/ui/button';
 import { useCreatePost } from '@/hooks/forums/forum/posts/create/use-create-post';
 
-export const ContentCreatePost = () => {
+interface Props {
+  setOpen: (open: boolean) => void;
+}
+
+export const ContentCreatePost = ({ setOpen }: Props) => {
   const t = useTranslations('forum.topics.post');
-  const { form, onSubmit } = useCreatePost();
+  const { form, onSubmit } = useCreatePost({ setOpen });
 
   return (
     <Form {...form}>

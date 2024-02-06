@@ -26,7 +26,10 @@ const getData = async ({ id }: { id: string }) => {
     headers: {
       Cookie: cookies().toString()
     },
-    cache: 'force-cache'
+    cache: 'force-cache',
+    next: {
+      tags: ['Forum_Forums__Show_Item']
+    }
   });
 
   return data;

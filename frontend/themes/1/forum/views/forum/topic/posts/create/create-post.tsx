@@ -40,7 +40,7 @@ export const CreatePost = ({ className }: Props) => {
           </Button>
         ) : (
           <Suspense fallback={<Skeleton className="w-full h-[54px]" />}>
-            <ContentCreatePost />
+            <ContentCreatePost setOpen={setOpen} />
           </Suspense>
         )}
       </CardContent>

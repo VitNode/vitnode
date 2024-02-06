@@ -1,7 +1,7 @@
 'use server';
 
 import { cookies } from 'next/headers';
-import { revalidatePath } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 
 import {
   Forum_Topics__Create,
@@ -23,7 +23,8 @@ export const mutationApi = async (variables: Forum_Topics__CreateMutationVariabl
       }
     });
 
-    revalidatePath('/forum/[id]', 'page');
+    revalidateTag('Forum_Topics__Show');
+    revalidateTag('Forum_Forums__Show_Item');
 
     return { data };
   } catch (error) {
