@@ -8,7 +8,6 @@ import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { initialConfigEditor } from '../initial-config';
 import type { TextLanguage } from '@/graphql/hooks';
 import { LoadReadOnlyEditor } from './load';
-import '../editor.scss';
 
 interface Props {
   id: string;

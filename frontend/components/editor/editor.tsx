@@ -28,8 +28,6 @@ import { EmojiPluginEditor } from './plugins/emoji';
 import { initialConfigEditor } from './initial-config';
 import { BottomToolbarEditor } from './toolbar/bottom-toolbar-editor';
 
-import './editor.scss';
-
 interface Props {
   id: string;
   className?: string;
