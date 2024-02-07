@@ -10,6 +10,17 @@ import { DownloadAdminThemesService } from "./download/download.service";
 import { DownloadAdminThemesResolver } from "./download/download.resolver";
 import { UploadAdminThemesResolver } from "./upload/upload.resolver";
 import { UploadAdminThemesService } from "./upload/upload.service";
+import { EditAdminThemesResolver } from "./edit/edit.resolver";
+import { EditAdminThemesService } from "./edit/edit.service";
+
+export interface ConfigTheme {
+  author: string;
+  author_url: string;
+  name: string;
+  version: string;
+  version_code: number;
+  support_url?: string;
+}
 
 @Module({
   providers: [
@@ -22,7 +33,9 @@ import { UploadAdminThemesService } from "./upload/upload.service";
     DownloadAdminThemesService,
     DownloadAdminThemesResolver,
     UploadAdminThemesResolver,
-    UploadAdminThemesService
+    UploadAdminThemesService,
+    EditAdminThemesResolver,
+    EditAdminThemesService
   ]
 })
 export class AdminThemesModule {}
