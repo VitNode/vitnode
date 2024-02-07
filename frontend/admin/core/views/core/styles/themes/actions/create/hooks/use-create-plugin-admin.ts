@@ -19,9 +19,9 @@ export const useCreateThemeAdmin = () => {
   const { push } = useRouter();
   const { session } = useSessionAdmin();
   const formSchema = z.object({
-    name: z.string().min(3).max(100),
+    name: z.string().min(3).max(50),
     support_url: z.string().url().or(z.literal("")),
-    author: z.string().min(3).max(100),
+    author: z.string().min(3).max(50),
     author_url: z.string().url()
   });
 

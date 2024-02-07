@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { Form, FormField } from "@/components/ui/form";
 import { useThemeUpload } from "./hooks/use-upload-theme";
 import { FilesInput } from "@/components/ui/files/files-input";
-import { DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 export const ContentUploadActionThemeAdmin = () => {
@@ -13,7 +13,6 @@ export const ContentUploadActionThemeAdmin = () => {
   return (
     <>
       <DialogTitle>{t("title")}</DialogTitle>
-      <DialogDescription>{t("title")}</DialogDescription>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -22,6 +21,7 @@ export const ContentUploadActionThemeAdmin = () => {
             name="file"
             render={({ field }) => (
               <FilesInput
+                className="mt-5"
                 id="theme"
                 {...field}
                 acceptExtensions={["tgz"]}

@@ -80,7 +80,8 @@
             "title": "Stwórz motyw",
             "success": "Motyw został utworzony.",
             "name": {
-              "label": "Nazwa"
+              "label": "Nazwa",
+              "desc": "Min 3-50 znaków."
             },
             "support_url": {
               "label": "Link do wsparcia",
@@ -92,6 +93,10 @@
             "author_url": {
               "label": "Link do autora"
             }
+          },
+          "edit": {
+            "title": "Edytuj motyw",
+            "success": "Motyw został zaktualizowany."
           },
           "delete": {
             "submit": "Tak, usuń motyw",

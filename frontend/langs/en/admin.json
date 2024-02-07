@@ -80,7 +80,8 @@
             "title": "Create Theme",
             "success": "Theme has been created.",
             "name": {
-              "label": "Name"
+              "label": "Name",
+              "desc": "Min 3-50 characters."
             },
             "support_url": {
               "label": "Support URL",
@@ -92,6 +93,10 @@
             "author_url": {
               "label": "Author URL"
             }
+          },
+          "edit": {
+            "title": "Edit Theme",
+            "success": "Theme has been updated."
           },
           "delete": {
             "submit": "Yes, delete theme",
