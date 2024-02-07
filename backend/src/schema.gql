@@ -129,9 +129,10 @@ type Mutation {
   core_staff_administrators__admin__delete(id: Int!): String!
   core_staff_moderators__admin__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffModerators!
   core_staff_moderators__admin__delete(id: Int!): String!
-  core_themes__admin__create(author: String!, author_url: String!, id: Int!, name: String!, support_url: String!): ShowAdminThemes!
+  core_themes__admin__create(author: String!, author_url: String!, name: String!, support_url: String!): ShowAdminThemes!
   core_themes__admin__delete(id: Int!): String!
   core_themes__admin__download(id: Int!, version: String, version_code: Int): String!
+  core_themes__admin__edit(author: String!, author_url: String!, id: Int!, name: String!, support_url: String!): ShowAdminThemes!
   core_themes__admin__upload(file: Upload!): String!
   core_themes__change(id: Int!): String!
   forum_forums__admin__change_position(id: Int!, index_to_move: Int!, parent_id: Int): String!

@@ -90,6 +90,7 @@ export class CreateDatabaseAdminInstallService {
       version_code: packageJSON.version_code,
       author: "VitNode",
       author_url: "https://vitnode.com/",
+      support_url: "https://github.com/aXenDeveloper/vitnode/issues",
       created: currentDate(),
       protected: true,
       default: true

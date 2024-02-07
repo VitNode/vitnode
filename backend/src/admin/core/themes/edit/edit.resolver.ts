@@ -13,7 +13,7 @@ export class EditAdminThemesResolver {
 
   @Mutation(() => ShowAdminThemes)
   @UseGuards(AdminAuthGuards)
-  async core_themes__admin__create(
+  async core_themes__admin__edit(
     @Args() args: EditAdminThemesArgs
   ): Promise<ShowAdminThemes> {
     return await this.service.edit(args);

@@ -158,9 +158,10 @@ export type Mutation = {
   core_staff_administrators__admin__delete: Scalars['String']['output'];
   core_staff_moderators__admin__create: ShowAdminStaffModerators;
   core_staff_moderators__admin__delete: Scalars['String']['output'];
-  core_themes__admin__create: Scalars['String']['output'];
+  core_themes__admin__create: ShowAdminThemes;
   core_themes__admin__delete: Scalars['String']['output'];
   core_themes__admin__download: Scalars['String']['output'];
+  core_themes__admin__edit: ShowAdminThemes;
   core_themes__admin__upload: Scalars['String']['output'];
   core_themes__change: Scalars['String']['output'];
   forum_forums__admin__change_position: Scalars['String']['output'];
@@ -308,6 +309,15 @@ export type MutationCore_Themes__Admin__DownloadArgs = {
   id: Scalars['Int']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
   version_code?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type MutationCore_Themes__Admin__EditArgs = {
+  author: Scalars['String']['input'];
+  author_url: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
+  name: Scalars['String']['input'];
+  support_url: Scalars['String']['input'];
 };
 
 
@@ -1107,7 +1117,7 @@ export type Core_Themes__Admin__CreateMutationVariables = Exact<{
 }>;
 
 
-export type Core_Themes__Admin__CreateMutation = { __typename?: 'Mutation', core_themes__admin__create: string };
+export type Core_Themes__Admin__CreateMutation = { __typename?: 'Mutation', core_themes__admin__create: { __typename?: 'ShowAdminThemes', id: number } };
 
 export type Core_Themes__Admin__DeleteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -1124,6 +1134,17 @@ export type Core_Themes__Admin__DownloadMutationVariables = Exact<{
 
 
 export type Core_Themes__Admin__DownloadMutation = { __typename?: 'Mutation', core_themes__admin__download: string };
+
+export type Core_Themes__Admin__EditMutationVariables = Exact<{
+  author: Scalars['String']['input'];
+  authorUrl: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
+  name: Scalars['String']['input'];
+  supportUrl: Scalars['String']['input'];
+}>;
+
+
+export type Core_Themes__Admin__EditMutation = { __typename?: 'Mutation', core_themes__admin__edit: { __typename?: 'ShowAdminThemes', id: number } };
 
 export type Core_Themes__Admin__UploadMutationVariables = Exact<{
   file: Scalars['Upload']['input'];
@@ -1581,7 +1602,9 @@ export const Core_Themes__Admin__Create = gql`
     author_url: $authorUrl
     name: $name
     support_url: $supportUrl
-  )
+  ) {
+    id
+  }
 }
     `;
 export const Core_Themes__Admin__Delete = gql`
@@ -1596,6 +1619,19 @@ export const Core_Themes__Admin__Download = gql`
     version: $version
     version_code: $versionCode
   )
+}
+    `;
+export const Core_Themes__Admin__Edit = gql`
+    mutation Core_themes__admin__edit($author: String!, $authorUrl: String!, $id: Int!, $name: String!, $supportUrl: String!) {
+  core_themes__admin__edit(
+    author: $author
+    author_url: $authorUrl
+    id: $id
+    name: $name
+    support_url: $supportUrl
+  ) {
+    id
+  }
 }
     `;
 export const Core_Themes__Admin__Upload = gql`
