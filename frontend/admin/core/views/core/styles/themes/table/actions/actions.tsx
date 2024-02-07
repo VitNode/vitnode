@@ -1,6 +1,7 @@
 import type { ShowAdminThemes } from "@/graphql/hooks";
 import { DeleteThemeActionsAdmin } from "./delete/delete";
 import { DownloadThemeActionsAdmin } from "./download/download";
+import { EditThemeActionsAdmin } from "./edit/edit";
 
 export interface ActionsItemThemesAdminProps
   extends Pick<
@@ -12,14 +13,15 @@ export interface ActionsItemThemesAdminProps
     | "protected"
     | "version"
     | "version_code"
+    | "support_url"
+    | "author_url"
   > {}
 
 export const ActionsItemThemesAdmin = (props: ActionsItemThemesAdminProps) => {
   return (
     <>
-      {process.env.NODE_ENV === "development" && (
-        <DownloadThemeActionsAdmin {...props} />
-      )}
+      <EditThemeActionsAdmin {...props} />
+      <DownloadThemeActionsAdmin {...props} />
       <DeleteThemeActionsAdmin {...props} />
     </>
   );

@@ -5,6 +5,7 @@ import { writeFile } from "fs/promises";
 import { Injectable } from "@nestjs/common";
 
 import { CreateAdminThemesArgs } from "./dto/create.args";
+import { ShowAdminThemes } from "../show/dto/show.obj";
 
 import { DatabaseService } from "@/database/database.service";
 import { core_themes } from "../../database/schema/themes";
@@ -19,7 +20,7 @@ export class CreateAdminThemesService {
     author_url,
     name,
     support_url
-  }: CreateAdminThemesArgs): Promise<string> {
+  }: CreateAdminThemesArgs): Promise<ShowAdminThemes> {
     const theme = await this.databaseService.db
       .insert(core_themes)
       .values({
@@ -58,6 +59,6 @@ export class CreateAdminThemesService {
       pathSCSSFileContent.replace(".theme_1", `.theme_${id}`)
     );
 
-    return "create";
+    return theme[0];
   }
 }

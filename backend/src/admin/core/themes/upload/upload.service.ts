@@ -6,21 +6,13 @@ import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 
 import { UploadAdminThemesArgs } from "./dto/delete.args";
+import { ConfigTheme } from "../themes.module";
 
 import { DatabaseService } from "@/database/database.service";
 import { generateRandomString } from "@/functions/generate-random-string";
 import { currentDate } from "@/functions/date";
 import { CustomError } from "@/utils/errors/CustomError";
 import { core_themes } from "../../database/schema/themes";
-
-interface ConfigTheme {
-  author: string;
-  author_url: string;
-  name: string;
-  version: string;
-  version_code: number;
-  support_url?: string;
-}
 
 @Injectable()
 export class UploadAdminThemesService {

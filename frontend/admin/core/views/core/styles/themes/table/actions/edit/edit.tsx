@@ -1,4 +1,6 @@
-import { Download } from "lucide-react";
+"use client";
+
+import { Pencil } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Suspense, lazy } from "react";
 
@@ -9,24 +11,22 @@ import type { ActionsItemThemesAdminProps } from "../actions";
 
 const Content = lazy(() =>
   import("./content").then(module => ({
-    default: module.ContentDownloadThemeActionsAdmin
+    default: module.ContentEditThemeActionsAdmin
   }))
 );
 
-export const DownloadThemeActionsAdmin = (
-  props: ActionsItemThemesAdminProps
-) => {
+export const EditThemeActionsAdmin = (props: ActionsItemThemesAdminProps) => {
   const t = useTranslations("core");
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" tooltip={t("download")}>
-          <Download />
+        <Button variant="ghost" size="icon" tooltip={t("edit")}>
+          <Pencil />
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-w-xl">
+      <DialogContent className="max-w-2xl">
         <Suspense fallback={<Loader />}>
           <Content {...props} />
         </Suspense>

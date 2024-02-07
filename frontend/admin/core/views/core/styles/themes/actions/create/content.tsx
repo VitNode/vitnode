@@ -34,6 +34,7 @@ export const ContentCreateActionThemeAdmin = () => {
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
+                <FormDescription>{t("name.desc")}</FormDescription>
                 <FormMessage />
               </FormItem>
             )}

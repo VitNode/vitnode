@@ -4,34 +4,47 @@ import * as z from "zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
-import { useSessionAdmin } from "@/admin/core/hooks/use-session-admin";
 import { mutationApi } from "./mutation-api";
-import { useDialog } from "@/components/ui/dialog";
 import { usePathname, useRouter } from "@/i18n";
+import { useDialog } from "@/components/ui/dialog";
 
-export const codeThemeRegex = /^[a-z0-9-]*$/;
+// {
+//   "name": "Default",
+//   "version": "0.1.0 Alpha 1",
+//   "version_code": 10000,
+//   "author": "VitNode",
+//   "author_url": "https://vitnode.com/",
+//   "support_url": "https://github.com/aXenDeveloper/vitnode/issues"
+// }
 
-export const useCreateThemeAdmin = () => {
-  const t = useTranslations("admin.core.styles.themes.create");
+import type { ActionsItemThemesAdminProps } from "../../actions";
+
+export const useEditThemeAdmin = ({
+  author,
+  author_url,
+  id,
+  name,
+  support_url
+}: ActionsItemThemesAdminProps) => {
+  const t = useTranslations("admin.core.styles.themes.edit");
   const tCore = useTranslations("core");
-  const { setOpen } = useDialog();
-  const pathname = usePathname();
-  const { push } = useRouter();
-  const { session } = useSessionAdmin();
   const formSchema = z.object({
     name: z.string().min(3).max(50),
     support_url: z.string().url().or(z.literal("")),
     author: z.string().min(3).max(50),
     author_url: z.string().url()
   });
+  const { push } = useRouter();
+  const pathname = usePathname();
+  const { setOpen } = useDialog();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      support_url: "",
-      author: session?.name || "",
-      author_url: ""
+      name,
+      support_url: support_url ?? "",
+      author,
+      author_url
     }
   });
 
@@ -40,7 +53,8 @@ export const useCreateThemeAdmin = () => {
       name: values.name,
       supportUrl: values.support_url,
       author: values.author,
-      authorUrl: values.author_url
+      authorUrl: values.author_url,
+      id
     });
 
     if (mutation.error) {
@@ -56,7 +70,6 @@ export const useCreateThemeAdmin = () => {
     toast.success(t("success"), {
       description: values.name
     });
-
     setOpen(false);
   };
 

@@ -21,6 +21,12 @@
       "breadcrumb": false
     }
   },
+  "faq": {
+    "title": "❓ FAQ",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
   "requirements": {
     "title": "🛂 Requirements",
     "theme": {

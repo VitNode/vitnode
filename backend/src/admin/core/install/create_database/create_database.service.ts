@@ -18,6 +18,7 @@ import { core_moderators_permissions } from "../../database/schema/moderators";
 import { configPath } from "@/config";
 import { core_plugins } from "../../database/schema/plugins";
 import { core_themes } from "../../database/schema/themes";
+import { core_nav, core_nav_name } from "../../database/schema/nav";
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {
@@ -89,6 +90,7 @@ export class CreateDatabaseAdminInstallService {
       version_code: packageJSON.version_code,
       author: "VitNode",
       author_url: "https://vitnode.com/",
+      support_url: "https://github.com/aXenDeveloper/vitnode/issues",
       created: currentDate(),
       protected: true,
       default: true
@@ -218,6 +220,35 @@ export class CreateDatabaseAdminInstallService {
       updated: currentDate(),
       protected: true
     });
+
+    // Create navigation
+    const nav = await this.databaseService.db.insert(core_nav).values([
+      {
+        href: "/"
+      },
+      {
+        href: "https://vitnode.com/",
+        external: true
+      }
+    ]);
+
+    await this.databaseService.db.insert(core_nav_name).values([
+      {
+        nav_id: nav[0].id,
+        language_code: "en",
+        value: "Home"
+      },
+      {
+        nav_id: nav[0].id,
+        language_code: "pl",
+        value: "Strona główna"
+      },
+      {
+        nav_id: nav[1].id,
+        language_code: "en",
+        value: "VitNode"
+      }
+    ]);
 
     return "Success!";
   }

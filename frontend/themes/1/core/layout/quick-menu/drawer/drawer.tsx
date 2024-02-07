@@ -63,8 +63,6 @@ export const DrawerQuickMenu = () => {
 
       {session && (
         <div className="px-2 pb-5 flex flex-col">
-          <Separator className="my-2" />
-
           {session.is_mod && (
             <DrawerClose asChild>
               <Link
