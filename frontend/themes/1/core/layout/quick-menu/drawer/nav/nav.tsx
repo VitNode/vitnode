@@ -8,11 +8,14 @@ import { ItemNavDrawerQuickMenu } from "./item";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { buttonVariants } from "@/components/ui/button";
 import { classNameDrawerQuickMenu } from "../drawer";
+import { Separator } from "@/components/ui/separator";
 
 export const NavDrawerQuickMenu = () => {
   const { nav, session } = useSession();
   const [activeItems, setActiveItems] = useState<string[]>([]);
   const { convertText } = useTextLang();
+
+  if (nav.length === 0) return null;
 
   return (
     <Accordion.Root
@@ -72,6 +75,8 @@ export const NavDrawerQuickMenu = () => {
 
         return <ItemNavDrawerQuickMenu key={item.id} {...item} />;
       })}
+
+      <Separator className="my-2" />
     </Accordion.Root>
   );
 };
