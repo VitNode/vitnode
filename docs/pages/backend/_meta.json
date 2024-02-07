@@ -1,7 +1,6 @@
 {
   "graphql": "GraphQL",
   "database": "Database",
-  "pages": "Pages",
   "authorization": "Authorization",
   "i18n": "Internationalization (i18n)",
   "files": "Files",

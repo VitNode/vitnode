@@ -17,9 +17,7 @@ export interface ActionsItemThemesAdminProps
 export const ActionsItemThemesAdmin = (props: ActionsItemThemesAdminProps) => {
   return (
     <>
-      {process.env.NODE_ENV === "development" && (
-        <DownloadThemeActionsAdmin {...props} />
-      )}
+      <DownloadThemeActionsAdmin {...props} />
       <DeleteThemeActionsAdmin {...props} />
     </>
   );

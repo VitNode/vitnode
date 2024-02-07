@@ -1,7 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
 import {
@@ -29,7 +29,7 @@ export const mutationApi = async ({ installPage, variables }: Args) => {
     });
 
     if (installPage) {
-      revalidatePath("/admin/(configs)/install/", "layout");
+      revalidateTag("Core_Sessions__Authorization");
     }
 
     return { data };
