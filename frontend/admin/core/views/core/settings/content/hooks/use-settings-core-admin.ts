@@ -5,8 +5,11 @@ import * as z from "zod";
 import { toast } from "sonner";
 
 import { mutationApi } from "./mutation-api";
+import type { Admin__Settings__General__ShowQuery } from "@/graphql/hooks";
 
-export const useSettingsCoreAdmin = () => {
+export const useSettingsCoreAdmin = ({
+  admin__settings__general__show: { side_name }
+}: Admin__Settings__General__ShowQuery) => {
   const t = useTranslations("core");
 
   const formSchema = z.object({
@@ -22,7 +25,7 @@ export const useSettingsCoreAdmin = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: ""
+      name: side_name
     }
   });
 

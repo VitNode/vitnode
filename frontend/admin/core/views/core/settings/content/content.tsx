@@ -13,11 +13,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useSettingsCoreAdmin } from "./hooks/use-settings-core-admin";
+import type { Admin__Settings__General__ShowQuery } from "@/graphql/hooks";
 
-export const ContentSettingsCoreAdmin = () => {
+export const ContentSettingsCoreAdmin = (
+  props: Admin__Settings__General__ShowQuery
+) => {
   const t = useTranslations("admin");
   const tCore = useTranslations("core");
-  const { form, onSubmit } = useSettingsCoreAdmin();
+  const { form, onSubmit } = useSettingsCoreAdmin(props);
 
   return (
     <Form {...form}>

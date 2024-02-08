@@ -1323,6 +1323,11 @@ export type Admin__Sessions__AuthorizationQueryVariables = Exact<{ [key: string]
 
 export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null } };
 
+export type Admin__Settings__General__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Admin__Settings__General__ShowQuery = { __typename?: 'Query', admin__settings__general__show: { __typename?: 'ShowGeneralAdminSettingsObj', side_name: string } };
+
 export type Admin_Core_Themes__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2106,6 +2111,13 @@ export const Admin__Sessions__Authorization = gql`
         id
       }
     }
+  }
+}
+    `;
+export const Admin__Settings__General__Show = gql`
+    query Admin__settings__general__show {
+  admin__settings__general__show {
+    side_name
   }
 }
     `;
