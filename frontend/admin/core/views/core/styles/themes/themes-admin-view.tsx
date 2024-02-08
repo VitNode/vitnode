@@ -2,10 +2,10 @@ import { useTranslations } from "next-intl";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { TableThemesAdmin } from "./table/table";
-import type { Core_Themes__Admin__ShowQuery } from "@/graphql/hooks";
+import type { Admin_Core_Themes__ShowQuery } from "@/graphql/hooks";
 import { ActionsThemesAdmin } from "./actions/actions";
 
-export const ThemesAdminView = (props: Core_Themes__Admin__ShowQuery) => {
+export const ThemesAdminView = (props: Admin_Core_Themes__ShowQuery) => {
   const t = useTranslations("admin.core.styles.themes");
 
   return (

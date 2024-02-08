@@ -5,20 +5,20 @@ import { revalidatePath } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
 import {
-  Core_Themes__Admin__Delete,
-  type Core_Themes__Admin__DeleteMutation,
-  type Core_Themes__Admin__DeleteMutationVariables
+  Admin__Core_Themes__Delete,
+  type Admin__Core_Themes__DeleteMutation,
+  type Admin__Core_Themes__DeleteMutationVariables
 } from "@/graphql/hooks";
 
 export const mutationApi = async (
-  variables: Core_Themes__Admin__DeleteMutationVariables
+  variables: Admin__Core_Themes__DeleteMutationVariables
 ) => {
   try {
     const { data } = await fetcher<
-      Core_Themes__Admin__DeleteMutation,
-      Core_Themes__Admin__DeleteMutationVariables
+      Admin__Core_Themes__DeleteMutation,
+      Admin__Core_Themes__DeleteMutationVariables
     >({
-      query: Core_Themes__Admin__Delete,
+      query: Admin__Core_Themes__Delete,
       variables,
       headers: {
         Cookie: cookies().toString()

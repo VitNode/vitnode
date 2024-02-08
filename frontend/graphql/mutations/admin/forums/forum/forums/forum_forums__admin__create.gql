@@ -1,10 +1,10 @@
-mutation Forum_forums__admin__create(
+mutation Admin__forum_forums__create(
   $name: [TextLanguageInput!]!
   $description: [TextLanguageInput!]!
   $parentId: Int
   $permissions: PermissionsCreateForumForums!
 ) {
-  forum_forums__admin__create(
+  admin__forum_forums__create(
     name: $name
     description: $description
     parent_id: $parentId

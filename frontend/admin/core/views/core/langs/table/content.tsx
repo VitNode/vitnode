@@ -6,9 +6,9 @@ import { toast } from "sonner";
 import { DataTable } from "@/components/data-table/data-table";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
-import { ActionsTableLangsCoreAdmin } from "./actions/actions-table-langs-core-admin";
+import { ActionsTableLangsCoreAdmin } from "./actions/actions";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
-import { mutationApi } from "./actions/edit/mutation-api";
+import { mutationApi } from "./actions/edit/hooks/mutation-api";
 import type { LangsCoreAdminViewProps } from "../langs-core-admin-view";
 
 export const ContentTableLangsCoreAdmin = ({

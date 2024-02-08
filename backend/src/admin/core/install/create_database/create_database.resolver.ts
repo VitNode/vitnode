@@ -7,7 +7,7 @@ export class CreateDatabaseAdminInstallResolver {
   constructor(private readonly service: CreateDatabaseAdminInstallService) {}
 
   @Mutation(() => String)
-  async admin_install__create_database(): Promise<string> {
+  async admin__install__create_database(): Promise<string> {
     return await this.service.create();
   }
 }

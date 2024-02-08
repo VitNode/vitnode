@@ -13,9 +13,9 @@ import {
 import { Loader } from "@/components/loader/loader";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 
-const ModalEditActionsTableLangsCoreAdmin = lazy(() =>
-  import("./modal-edit-actions-table-langs-core-admin").then(module => ({
-    default: module.ModalEditActionsTableLangsCoreAdmin
+const Content = lazy(() =>
+  import("./content").then(module => ({
+    default: module.ContentEditActionsTableLangsCoreAdmin
   }))
 );
 
@@ -36,7 +36,7 @@ export const EditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
 
           <DialogContent>
             <Suspense fallback={<Loader />}>
-              <ModalEditActionsTableLangsCoreAdmin {...data} />
+              <Content {...data} />
             </Suspense>
           </DialogContent>
 

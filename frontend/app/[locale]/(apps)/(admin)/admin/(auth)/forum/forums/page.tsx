@@ -6,9 +6,9 @@ import getQueryClient from "@/functions/get-query-client";
 import { fetcher } from "@/graphql/fetcher";
 import { APIKeys } from "@/graphql/api-keys";
 import {
-  Forum_Forums__Admin__Show,
-  type Forum_Forums__Admin__ShowQuery,
-  type Forum_Forums__Admin__ShowQueryVariables
+  Admin__Forum_Forums__Show,
+  type Admin__Forum_Forums__ShowQuery,
+  type Admin__Forum_Forums__ShowQueryVariables
 } from "@/graphql/hooks";
 
 export default async function Page() {
@@ -17,10 +17,10 @@ export default async function Page() {
     queryKey: [APIKeys.FORUMS_ADMIN],
     queryFn: async ({ pageParam }) => {
       const { data } = await fetcher<
-        Forum_Forums__Admin__ShowQuery,
-        Forum_Forums__Admin__ShowQueryVariables
+        Admin__Forum_Forums__ShowQuery,
+        Admin__Forum_Forums__ShowQueryVariables
       >({
-        query: Forum_Forums__Admin__Show,
+        query: Admin__Forum_Forums__Show,
         variables: pageParam,
         headers: {
           Cookie: cookies().toString()
@@ -32,7 +32,7 @@ export default async function Page() {
     initialPageParam: {
       first: 10
     },
-    getNextPageParam: ({ forum_forums__admin__show: { pageInfo } }) => {
+    getNextPageParam: ({ admin__forum_forums__show: { pageInfo } }) => {
       if (pageInfo.hasNextPage) {
         return {
           first: 10,

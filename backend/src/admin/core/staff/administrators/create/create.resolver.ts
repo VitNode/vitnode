@@ -15,7 +15,7 @@ export class CreateAdminStaffAdministratorResolver {
 
   @Mutation(() => ShowAdminStaffAdministrators)
   @UseGuards(AdminAuthGuards)
-  async core_staff_administrators__admin__create(
+  async admin__core_staff_administrators__create(
     @Args() args: CreateAdminStaffAdministratorsArgs
   ): Promise<ShowAdminStaffAdministrators> {
     return await this.service.create(args);

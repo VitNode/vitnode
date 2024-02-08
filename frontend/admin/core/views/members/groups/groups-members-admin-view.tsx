@@ -2,11 +2,11 @@ import { useTranslations } from "next-intl";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { ActionsGroupsMembersAdmin } from "./actions/actions-groups-members-admin";
-import type { Core_Groups__Admin__ShowQuery } from "@/graphql/hooks";
+import type { Admin__Core_Groups__ShowQuery } from "@/graphql/hooks";
 import { TableGroupsMembersAdmin } from "./table/table";
 
 export interface GroupsMembersAdminViewProps {
-  data: Core_Groups__Admin__ShowQuery;
+  data: Admin__Core_Groups__ShowQuery;
 }
 
 export const GroupsMembersAdminView = (props: GroupsMembersAdminViewProps) => {

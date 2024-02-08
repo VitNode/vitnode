@@ -1,4 +1,4 @@
-query Core_nav__admin__show {
+query Admin__Core_nav__show {
   core_nav__show {
     edges {
       children {

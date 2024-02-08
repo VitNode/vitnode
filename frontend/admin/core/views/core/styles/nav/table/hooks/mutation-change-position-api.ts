@@ -4,20 +4,20 @@ import { cookies } from "next/headers";
 
 import { fetcher } from "@/graphql/fetcher";
 import {
-  type Core_Nav__Admin__Change_PositionMutation,
-  type Core_Nav__Admin__Change_PositionMutationVariables,
-  Core_Nav__Admin__Change_Position
+  type Admin__Core_Nav__Change_PositionMutation,
+  type Admin__Core_Nav__Change_PositionMutationVariables,
+  Admin__Core_Nav__Change_Position
 } from "@/graphql/hooks";
 
 export const mutationChangePositionApi = async (
-  variables: Core_Nav__Admin__Change_PositionMutationVariables
+  variables: Admin__Core_Nav__Change_PositionMutationVariables
 ) => {
   try {
     const { data } = await fetcher<
-      Core_Nav__Admin__Change_PositionMutation,
-      Core_Nav__Admin__Change_PositionMutationVariables
+      Admin__Core_Nav__Change_PositionMutation,
+      Admin__Core_Nav__Change_PositionMutationVariables
     >({
-      query: Core_Nav__Admin__Change_Position,
+      query: Admin__Core_Nav__Change_Position,
       variables,
       headers: {
         Cookie: cookies().toString()

@@ -12,7 +12,7 @@ export class DeleteAdminThemesResolver {
 
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
-  async core_themes__admin__delete(
+  async admin__core_themes__delete(
     @Args() args: DeleteAdminThemesArgs
   ): Promise<string> {
     return await this.service.delete(args);

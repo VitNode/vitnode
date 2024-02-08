@@ -10,7 +10,7 @@ export class AuthorizationAdminSessionsResolver {
   constructor(private readonly service: AuthorizationAdminSessionsService) {}
 
   @Query(() => AuthorizationAdminSessionsObj)
-  async admin_sessions__authorization(
+  async admin__sessions__authorization(
     @Context() context: Ctx
   ): Promise<AuthorizationAdminSessionsObj> {
     return await this.service.authorization(context);

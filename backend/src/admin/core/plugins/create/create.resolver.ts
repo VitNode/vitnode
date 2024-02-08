@@ -13,7 +13,7 @@ export class CreateAdminPluginsResolver {
 
   @Mutation(() => ShowAdminPlugins)
   @UseGuards(AdminAuthGuards)
-  async core_plugins__admin__create(
+  async admin__core_plugins__create(
     @Args() args: CreateAdminPluginsArgs
   ): Promise<ShowAdminPlugins> {
     return await this.service.create(args);

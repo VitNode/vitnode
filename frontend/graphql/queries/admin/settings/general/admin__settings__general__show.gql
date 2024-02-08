@@ -1,0 +1,5 @@
+query Admin__settings__general__show {
+  admin__settings__general__show {
+    side_name
+  }
+}

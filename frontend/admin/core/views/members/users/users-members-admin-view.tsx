@@ -2,10 +2,10 @@ import { useTranslations } from "next-intl";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { TableUsersMembersAdmin } from "./table/table";
-import type { Core_Members__Admin__ShowQuery } from "@/graphql/hooks";
+import type { Admin__Core_Members__ShowQuery } from "@/graphql/hooks";
 
 export interface UsersMembersAdminViewProps {
-  data: Core_Members__Admin__ShowQuery;
+  data: Admin__Core_Members__ShowQuery;
 }
 
 export const UsersMembersAdminView = (props: UsersMembersAdminViewProps) => {

@@ -8,9 +8,9 @@ import { Button } from "@/components/ui/button";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { cn } from "@/functions/classnames";
 import { useChildrenForumForumsAdminAPI } from "./hooks/use-children-forum-forums-admin-api";
-import type { Forum_Forums__Admin__ShowFlattenedItem } from "../types";
+import type { Admin__Forum_Forums__ShowFlattenedItem } from "../types";
 
-interface Props extends Forum_Forums__Admin__ShowFlattenedItem {
+interface Props extends Admin__Forum_Forums__ShowFlattenedItem {
   indentationWidth: number;
   isOpenChildren: boolean;
   isDropHere?: boolean;

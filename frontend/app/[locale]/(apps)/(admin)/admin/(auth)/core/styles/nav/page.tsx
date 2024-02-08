@@ -5,9 +5,9 @@ import { cookies } from "next/headers";
 import { NavAdminView } from "@/admin/core/views/core/styles/nav/nav-admin-view";
 import { fetcher } from "@/graphql/fetcher";
 import {
-  Core_Nav__Admin__Show,
-  type Core_Nav__Admin__ShowQuery,
-  type Core_Nav__Admin__ShowQueryVariables
+  Admin__Core_Nav__Show,
+  type Admin__Core_Nav__ShowQuery,
+  type Admin__Core_Nav__ShowQueryVariables
 } from "@/graphql/hooks";
 
 interface Props {
@@ -18,10 +18,10 @@ interface Props {
 
 const getData = async () => {
   const { data } = await fetcher<
-    Core_Nav__Admin__ShowQuery,
-    Core_Nav__Admin__ShowQueryVariables
+    Admin__Core_Nav__ShowQuery,
+    Admin__Core_Nav__ShowQueryVariables
   >({
-    query: Core_Nav__Admin__Show,
+    query: Admin__Core_Nav__Show,
     headers: {
       Cookie: cookies().toString()
     }

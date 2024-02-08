@@ -5,7 +5,7 @@ import { Suspense, lazy } from "react";
 import { Loader } from "@/components/loader/loader";
 import type { LangsCoreAdminViewProps } from "../langs-core-admin-view";
 
-const ContentTableLangsCoreAdmin = lazy(() =>
+const Content = lazy(() =>
   import("./content").then(module => ({
     default: module.ContentTableLangsCoreAdmin
   }))
@@ -14,7 +14,7 @@ const ContentTableLangsCoreAdmin = lazy(() =>
 export const TableLangsCoreAdmin = (props: LangsCoreAdminViewProps) => {
   return (
     <Suspense fallback={<Loader />}>
-      <ContentTableLangsCoreAdmin {...props} />
+      <Content {...props} />
     </Suspense>
   );
 };

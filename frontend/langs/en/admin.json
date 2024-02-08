@@ -7,7 +7,7 @@
       "core": {
         "title": "Core",
         "dashboard": "Dashboard",
-        "general": "General",
+        "settings": "Settings",
         "plugins": "Plugins",
         "styles": "Styles",
         "langs": "Languages"

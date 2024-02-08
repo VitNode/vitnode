@@ -1,4 +1,4 @@
-query Core_members__admin__show(
+query Admin__core_members__show(
   $cursor: Int
   $first: Int
   $last: Int
@@ -6,7 +6,7 @@ query Core_members__admin__show(
   $sortBy: [ShowAdminMembersSortByArgs!]
   $groups: [Int!]
 ) {
-  core_members__admin__show(
+  admin__core_members__show(
     cursor: $cursor
     first: $first
     last: $last

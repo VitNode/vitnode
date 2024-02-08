@@ -4,13 +4,13 @@ import type { ReactNode } from "react";
 import { useEffect } from "react";
 
 import { LayoutAdminInstallEnum } from "@/graphql/hooks";
-import type { Admin_Install__LayoutQuery } from "@/graphql/hooks";
+import type { Admin__Install__LayoutQuery } from "@/graphql/hooks";
 import { usePathname, useRouter } from "@/i18n";
 import { FinishInstallConfigsView } from "./finish/finish-install-config-view";
 
 interface Props {
   children: ReactNode;
-  data: Admin_Install__LayoutQuery;
+  data: Admin__Install__LayoutQuery;
 }
 
 export const RedirectsInstallConfigsLayout = ({ children, data }: Props) => {
@@ -25,14 +25,14 @@ export const RedirectsInstallConfigsLayout = ({ children, data }: Props) => {
       [LayoutAdminInstallEnum.account]: "/admin/install/account"
     };
 
-    const path = redirectItems[data.admin_install__layout.status];
+    const path = redirectItems[data.admin__install__layout.status];
 
     if (path && path !== pathname) {
       replace(path);
     }
   }, [data]);
 
-  if (data.admin_install__layout.status === LayoutAdminInstallEnum.finish) {
+  if (data.admin__install__layout.status === LayoutAdminInstallEnum.finish) {
     return <FinishInstallConfigsView />;
   }
 

@@ -26,6 +26,8 @@ export const DashboardCoreAdminView = () => {
         }
         desc={t("version", { version: corePackages.version })}
       />
+
+      <div>Not implemented!</div>
     </>
   );
 };

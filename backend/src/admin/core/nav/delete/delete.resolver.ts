@@ -12,7 +12,7 @@ export class DeleteAdminNavResolver {
 
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
-  async core_nav__admin__delete(
+  async admin__core_nav__delete(
     @Args() args: DeleteAdminNavArgs
   ): Promise<string> {
     return await this.service.delete(args);

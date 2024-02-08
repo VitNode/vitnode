@@ -13,7 +13,7 @@ export class ShowAdminThemesResolver {
 
   @Query(() => ShowAdminThemesObj)
   @UseGuards(AdminAuthGuards)
-  async core_themes__admin__show(
+  async admin__core_themes__show(
     @Args() args: ShowAdminThemesArgs
   ): Promise<ShowAdminThemesObj> {
     return await this.service.show(args);

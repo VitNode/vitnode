@@ -13,7 +13,7 @@ export class EditAdminGroupsResolver {
 
   @Mutation(() => ShowAdminGroups)
   @UseGuards(AdminAuthGuards)
-  async core_groups__admin__edit(
+  async admin__core_groups__edit(
     @Args() args: EditAdminGroupsArgs
   ): Promise<ShowAdminGroups> {
     return await this.service.edit(args);

@@ -13,7 +13,7 @@ export class DownloadAdminThemesResolver {
 
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
-  async core_themes__admin__download(
+  async admin__core_themes__download(
     @CurrentUser() user: User,
     @Args() args: DownloadAdminThemesArgs
   ): Promise<string> {

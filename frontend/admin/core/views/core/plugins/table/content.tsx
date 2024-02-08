@@ -4,7 +4,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { ExternalLink } from "lucide-react";
 
 import type {
-  Core_Plugins__Admin__ShowQuery,
+  Admin__Core_Plugins__ShowQuery,
   ShowAdminPlugins
 } from "@/graphql/hooks";
 import { Badge } from "@/components/ui/badge";
@@ -15,8 +15,8 @@ import { Switch } from "@/components/ui/switch";
 import { ActionsItemPluginsAdmin } from "./actions/actions";
 
 export const ContentTablePluginsAdmin = ({
-  core_plugins__admin__show: { edges, pageInfo }
-}: Core_Plugins__Admin__ShowQuery) => {
+  admin__core_plugins__show: { edges, pageInfo }
+}: Admin__Core_Plugins__ShowQuery) => {
   const t = useTranslations("core");
 
   const columns: ColumnDef<ShowAdminPlugins>[] = useMemo(

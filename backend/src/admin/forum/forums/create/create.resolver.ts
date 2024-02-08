@@ -13,7 +13,7 @@ export class CreateForumForumsResolver {
 
   @Mutation(() => CreateForumForumsObj)
   @UseGuards(AdminAuthGuards)
-  async forum_forums__admin__create(
+  async admin__forum_forums__create(
     @Args() args: CreateForumForumsArgs
   ): Promise<CreateForumForumsObj> {
     return await this.service.create(args);

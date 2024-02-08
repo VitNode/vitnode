@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import { HeaderContent } from "@/components/header-content/header-content";
-import { ActionsForumsForumAdmin } from "./actions/actions-forums-forum-admin";
+import { ActionsForumsForumAdmin } from "./actions/actions";
 import { TableForumsForumAdmin } from "./table/table";
 
 export const ForumsForumAdminView = () => {

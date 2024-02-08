@@ -9,9 +9,9 @@ import { SessionAdminProvider } from "./session-admin-provider";
 import { redirect } from "@/i18n";
 import { fetcher } from "@/graphql/fetcher";
 import {
-  Admin_Sessions__Authorization,
-  type Admin_Sessions__AuthorizationQuery,
-  type Admin_Sessions__AuthorizationQueryVariables
+  Admin__Sessions__Authorization,
+  type Admin__Sessions__AuthorizationQuery,
+  type Admin__Sessions__AuthorizationQueryVariables
 } from "@/graphql/hooks";
 import { getConfig } from "@/functions/get-config";
 
@@ -23,10 +23,10 @@ const getData = async () => {
   }
 
   const { data } = await fetcher<
-    Admin_Sessions__AuthorizationQuery,
-    Admin_Sessions__AuthorizationQueryVariables
+    Admin__Sessions__AuthorizationQuery,
+    Admin__Sessions__AuthorizationQueryVariables
   >({
-    query: Admin_Sessions__Authorization,
+    query: Admin__Sessions__Authorization,
     headers: {
       Cookie: cookies().toString(),
       ["user-agent"]: headers().get("user-agent") ?? "node"

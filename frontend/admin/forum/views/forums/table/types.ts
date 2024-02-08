@@ -1,13 +1,13 @@
-import type { Forum_Forums__Admin__ShowQueryItem } from "./hooks/use-forum-forums-admin-api";
+import type { Admin__Forum_Forums__ShowQueryItem } from "./hooks/use-forum-forums-admin-api";
 
-export interface Forum_Forums__Admin__ShowFlattenedItem
-  extends Forum_Forums__Admin__ShowQueryItem {
+export interface Admin__Forum_Forums__ShowFlattenedItem
+  extends Admin__Forum_Forums__ShowQueryItem {
   depth: number;
   index: number;
   parentId: number | null;
 }
 
-export interface Forum_Forums__Admin__ShowWithProjection {
+export interface Admin__Forum_Forums__ShowWithProjection {
   depth: number;
   maxDepth: number;
   minDepth: number;

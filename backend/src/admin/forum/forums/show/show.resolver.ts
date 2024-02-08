@@ -13,7 +13,7 @@ export class ShowForumForumsAdminResolver {
 
   @Query(() => ShowForumForumsAdminObj)
   @UseGuards(AdminAuthGuards)
-  async forum_forums__admin__show(
+  async admin__forum_forums__show(
     @Args() args: ShowForumForumsArgs
   ): Promise<ShowForumForumsAdminObj> {
     return await this.service.show(args);

@@ -13,7 +13,7 @@ export class CreateAdminStaffModeratorsResolver {
 
   @Mutation(() => ShowAdminStaffModerators)
   @UseGuards(AdminAuthGuards)
-  async core_staff_moderators__admin__create(
+  async admin__core_staff_moderators__create(
     @Args() args: CreateAdminStaffModeratorsArgs
   ): Promise<ShowAdminStaffModerators> {
     return await this.service.create(args);

@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 
 import { fetcher } from "@/graphql/fetcher";
 import {
-  Core_Groups__Admin__Show_Short,
-  type Core_Groups__Admin__Show_ShortQuery,
-  type Core_Groups__Admin__Show_ShortQueryVariables
+  Admin__Core_Groups__Show_Short,
+  type Admin__Core_Groups__Show_ShortQuery,
+  type Admin__Core_Groups__Show_ShortQueryVariables
 } from "@/graphql/hooks";
 import { APIKeys } from "@/graphql/api-keys";
 
@@ -17,10 +17,10 @@ export const usePermissionsGroupsAdminAPI = ({ searchValue }: Args) => {
     queryKey: [APIKeys.GROUPS_MEMBERS_FORUMS_ADMIN, { search: searchValue }],
     queryFn: async () => {
       const { data } = await fetcher<
-        Core_Groups__Admin__Show_ShortQuery,
-        Core_Groups__Admin__Show_ShortQueryVariables
+        Admin__Core_Groups__Show_ShortQuery,
+        Admin__Core_Groups__Show_ShortQueryVariables
       >({
-        query: Core_Groups__Admin__Show_Short,
+        query: Admin__Core_Groups__Show_Short,
         variables: {
           search: searchValue
         }
@@ -32,5 +32,5 @@ export const usePermissionsGroupsAdminAPI = ({ searchValue }: Args) => {
     refetchOnMount: true
   });
 
-  return { ...query, data: query.data?.core_groups__admin__show.edges ?? [] };
+  return { ...query, data: query.data?.admin__core_groups__show.edges ?? [] };
 };

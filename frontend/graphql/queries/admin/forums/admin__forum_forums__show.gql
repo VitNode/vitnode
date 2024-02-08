@@ -1,5 +1,9 @@
-query Forum_forums__admin__show($first: Int, $cursor: Int, $parentId: Int) {
-  forum_forums__admin__show(first: $first, cursor: $cursor, parent_id: $parentId) {
+query Admin__forum_forums__show($first: Int, $cursor: Int, $parentId: Int) {
+  admin__forum_forums__show(
+    first: $first
+    cursor: $cursor
+    parent_id: $parentId
+  ) {
     edges {
       id
       description {

@@ -18,7 +18,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { ItemContentTableContentNavAdmin } from "./item";
-import type { Core_Nav__Admin__ShowQuery, ShowCoreNav } from "@/graphql/hooks";
+import type { Admin__Core_Nav__ShowQuery, ShowCoreNav } from "@/graphql/hooks";
 import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
 
 interface ProjectedType {
@@ -33,7 +33,7 @@ interface FlattenedItemsType extends Omit<ShowCoreNav, "__typename"> {
 
 export const ContentTableContentNavAdmin = ({
   core_nav__show: { edges }
-}: Core_Nav__Admin__ShowQuery) => {
+}: Admin__Core_Nav__ShowQuery) => {
   const t = useTranslations("core");
   const [items, setItems] = useState<Omit<ShowCoreNav, "__typename">[]>(edges);
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);

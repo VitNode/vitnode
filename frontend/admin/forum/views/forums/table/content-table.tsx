@@ -28,13 +28,13 @@ import {
   removeChildrenOf
 } from "./functions";
 import type {
-  Forum_Forums__Admin__ShowFlattenedItem,
-  Forum_Forums__Admin__ShowWithProjection
+  Admin__Forum_Forums__ShowFlattenedItem,
+  Admin__Forum_Forums__ShowWithProjection
 } from "./types";
 import { Loader } from "@/components/loader/loader";
 import { ErrorAdminView } from "@/admin/core/global/error-admin-view";
 import { APIKeys } from "@/graphql/api-keys";
-import type { Forum_Forums__Admin__ShowQuery } from "@/graphql/hooks";
+import type { Admin__Forum_Forums__ShowQuery } from "@/graphql/hooks";
 import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
 
 const indentationWidth = 20;
@@ -47,7 +47,7 @@ export const ContentTableForumsForumAdmin = () => {
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
   const [projected, setProjected] =
-    useState<Forum_Forums__Admin__ShowWithProjection | null>();
+    useState<Admin__Forum_Forums__ShowWithProjection | null>();
   const [isOpenChildren, setIsOpenChildren] = useState<UniqueIdentifier[]>([]);
 
   const resetState = () => {
@@ -64,7 +64,7 @@ export const ContentTableForumsForumAdmin = () => {
   );
 
   // DndKit doesn't support nested sortable, so we need to flatten the data in one array
-  const flattenedItems: Forum_Forums__Admin__ShowFlattenedItem[] =
+  const flattenedItems: Admin__Forum_Forums__ShowFlattenedItem[] =
     useMemo(() => {
       const tree = flattenTree(data);
 
@@ -127,7 +127,7 @@ export const ContentTableForumsForumAdmin = () => {
 
         if (!projected || !over) return;
         const { depth, parentId } = projected;
-        const clonedItems: Forum_Forums__Admin__ShowFlattenedItem[] =
+        const clonedItems: Admin__Forum_Forums__ShowFlattenedItem[] =
           JSON.parse(JSON.stringify(flattenTree(data)));
 
         const overIndex = clonedItems.findIndex(({ id }) => id === over.id);
@@ -151,7 +151,7 @@ export const ContentTableForumsForumAdmin = () => {
           };
         });
 
-        queryClient.setQueryData<InfiniteData<Forum_Forums__Admin__ShowQuery>>(
+        queryClient.setQueryData<InfiniteData<Admin__Forum_Forums__ShowQuery>>(
           [APIKeys.FORUMS_ADMIN],
           old => {
             const lastPage = old?.pages.at(-1);
@@ -161,8 +161,8 @@ export const ContentTableForumsForumAdmin = () => {
               pages: [
                 {
                   ...lastPage,
-                  forum_forums__admin__show: {
-                    ...lastPage.forum_forums__admin__show,
+                  admin__forum_forums__show: {
+                    ...lastPage.admin__forum_forums__show,
                     edges: buildTree(sortedItems)
                   }
                 }

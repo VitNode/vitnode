@@ -4,9 +4,9 @@ import { cookies } from "next/headers";
 import { LayoutInstallConfigsView } from "@/admin/core/configs/views/install/layout-install-configs-view";
 import { fetcher, type ErrorType } from "@/graphql/fetcher";
 import {
-  Admin_Install__Layout,
-  type Admin_Install__LayoutQuery,
-  type Admin_Install__LayoutQueryVariables
+  Admin__Install__Layout,
+  type Admin__Install__LayoutQuery,
+  type Admin__Install__LayoutQueryVariables
 } from "@/graphql/hooks";
 import { InternalErrorView } from "@/admin/core/global/internal-error-view";
 import { redirect } from "@/i18n";
@@ -18,10 +18,10 @@ interface Props {
 
 const getData = async () => {
   const { data } = await fetcher<
-    Admin_Install__LayoutQuery,
-    Admin_Install__LayoutQueryVariables
+    Admin__Install__LayoutQuery,
+    Admin__Install__LayoutQueryVariables
   >({
-    query: Admin_Install__Layout,
+    query: Admin__Install__Layout,
     headers: {
       Cookie: cookies().toString()
     }

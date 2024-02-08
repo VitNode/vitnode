@@ -5,9 +5,9 @@ import { revalidatePath } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
 import {
-  Core_Themes__Admin__Upload,
-  type Core_Themes__Admin__UploadMutation,
-  type Core_Themes__Admin__UploadMutationVariables
+  Admin__Core_Themes__Upload,
+  type Admin__Core_Themes__UploadMutation,
+  type Admin__Core_Themes__UploadMutationVariables
 } from "@/graphql/hooks";
 
 export const mutationApi = async (formData: FormData) => {
@@ -15,10 +15,10 @@ export const mutationApi = async (formData: FormData) => {
     const files = formData.get("file") as File;
 
     const { data } = await fetcher<
-      Core_Themes__Admin__UploadMutation,
-      Core_Themes__Admin__UploadMutationVariables
+      Admin__Core_Themes__UploadMutation,
+      Admin__Core_Themes__UploadMutationVariables
     >({
-      query: Core_Themes__Admin__Upload,
+      query: Admin__Core_Themes__Upload,
       uploads: [
         {
           files,

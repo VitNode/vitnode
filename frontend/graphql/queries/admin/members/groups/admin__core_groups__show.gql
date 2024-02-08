@@ -1,11 +1,11 @@
-query Core_groups__admin__show(
+query Admin__Core_groups__show(
   $first: Int
   $cursor: Int
   $search: String
   $sortBy: [ShowAdminGroupsSortByArgs!]
   $last: Int
 ) {
-  core_groups__admin__show(
+  admin__core_groups__show(
     first: $first
     cursor: $cursor
     search: $search

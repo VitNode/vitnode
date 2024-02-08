@@ -1,11 +1,11 @@
-mutation Core_themes__admin__edit(
+mutation Admin__core_themes__edit(
   $author: String!
   $authorUrl: String!
   $id: Int!
   $name: String!
   $supportUrl: String!
 ) {
-  core_themes__admin__edit(
+  admin__core_themes__edit(
     author: $author
     author_url: $authorUrl
     id: $id

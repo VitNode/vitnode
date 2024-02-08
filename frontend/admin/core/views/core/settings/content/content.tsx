@@ -1,10 +1,6 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { toast } from "sonner";
 
 import {
   Form,
@@ -16,43 +12,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { mutationApi } from "./mutation-api";
+import { useSettingsCoreAdmin } from "./hooks/use-settings-core-admin";
+import type { Admin__Settings__General__ShowQuery } from "@/graphql/hooks";
 
-export const FormGeneralCoreAdmin = () => {
+export const ContentSettingsCoreAdmin = (
+  props: Admin__Settings__General__ShowQuery
+) => {
   const t = useTranslations("admin");
   const tCore = useTranslations("core");
-
-  const formSchema = z.object({
-    name: z
-      .string({
-        required_error: tCore("forms.empty")
-      })
-      .min(1, {
-        message: tCore("forms.empty")
-      })
-  });
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: ""
-    }
-  });
-
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const mutation = await mutationApi({
-      sideName: values.name
-    });
-    if (mutation.error) {
-      toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
-      });
-
-      return;
-    }
-
-    toast.success(tCore("saved_success"));
-  };
+  const { form, onSubmit } = useSettingsCoreAdmin(props);
 
   return (
     <Form {...form}>

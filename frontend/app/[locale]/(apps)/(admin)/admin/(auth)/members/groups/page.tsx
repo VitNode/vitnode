@@ -5,12 +5,12 @@ import { cookies } from "next/headers";
 import { GroupsMembersAdminView } from "@/admin/core/views/members/groups/groups-members-admin-view";
 import { fetcher } from "@/graphql/fetcher";
 import {
-  Core_Groups__Admin__Show,
+  Admin__Core_Groups__Show,
   ShowAdminGroupsSortingColumnEnum
 } from "@/graphql/hooks";
 import type {
-  Core_Groups__Admin__ShowQuery,
-  Core_Groups__Admin__ShowQueryVariables
+  Admin__Core_Groups__ShowQuery,
+  Admin__Core_Groups__ShowQueryVariables
 } from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
@@ -24,12 +24,12 @@ interface Props {
   searchParams: SearchParamsPagination;
 }
 
-const getData = async (variables: Core_Groups__Admin__ShowQueryVariables) => {
+const getData = async (variables: Admin__Core_Groups__ShowQueryVariables) => {
   const { data } = await fetcher<
-    Core_Groups__Admin__ShowQuery,
-    Core_Groups__Admin__ShowQueryVariables
+    Admin__Core_Groups__ShowQuery,
+    Admin__Core_Groups__ShowQueryVariables
   >({
-    query: Core_Groups__Admin__Show,
+    query: Admin__Core_Groups__Show,
     variables,
     headers: {
       Cookie: cookies().toString()

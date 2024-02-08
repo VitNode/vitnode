@@ -12,7 +12,7 @@ export class UploadAdminThemesResolver {
 
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
-  async core_themes__admin__upload(
+  async admin__core_themes__upload(
     @Args() args: UploadAdminThemesArgs
   ): Promise<string> {
     return await this.service.upload(args);
