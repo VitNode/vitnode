@@ -397,7 +397,7 @@ export type Query = {
   admin__core_staff_moderators__show: ShowAdminStaffModeratorsObj;
   admin__core_themes__show: ShowAdminThemesObj;
   admin__forum_forums__show: ShowForumForumsAdminObj;
-  admin_install__layout: LayoutAdminInstallObj;
+  admin__install__layout: LayoutAdminInstallObj;
   admin_sessions__authorization: AuthorizationAdminSessionsObj;
   admin_settings__general__show: ShowGeneralAdminSettingsObj;
   core_languages__show: ShowCoreLanguagesObj;
@@ -1239,10 +1239,10 @@ export type Forum_Topics__CreateMutationVariables = Exact<{
 
 export type Forum_Topics__CreateMutation = { __typename?: 'Mutation', forum_topics__create: { __typename?: 'ShowTopicsForums', created: number, id: number, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
-export type Admin_Install__LayoutQueryVariables = Exact<{ [key: string]: never; }>;
+export type Admin__Install__LayoutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Admin_Install__LayoutQuery = { __typename?: 'Query', admin_install__layout: { __typename?: 'LayoutAdminInstallObj', status: LayoutAdminInstallEnum } };
+export type Admin__Install__LayoutQuery = { __typename?: 'Query', admin__install__layout: { __typename?: 'LayoutAdminInstallObj', status: LayoutAdminInstallEnum } };
 
 export type Admin__Forum_Forums__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -1764,9 +1764,9 @@ export const Forum_Topics__Create = gql`
   }
 }
     `;
-export const Admin_Install__Layout = gql`
-    query Admin_install__layout {
-  admin_install__layout {
+export const Admin__Install__Layout = gql`
+    query Admin__install__layout {
+  admin__install__layout {
     status
   }
 }

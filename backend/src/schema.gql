@@ -173,7 +173,7 @@ type Query {
   admin__core_staff_moderators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
   admin__core_themes__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminThemesSortByArgs!]): ShowAdminThemesObj!
   admin__forum_forums__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsAdminObj!
-  admin_install__layout: LayoutAdminInstallObj!
+  admin__install__layout: LayoutAdminInstallObj!
   admin_sessions__authorization: AuthorizationAdminSessionsObj!
   admin_settings__general__show: ShowGeneralAdminSettingsObj!
   core_languages__show(cursor: Int, first: Int, last: Int): ShowCoreLanguagesObj!
