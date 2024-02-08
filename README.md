@@ -1,25 +1,25 @@
-[![Header VitNode GitHub](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/public/header.jpg 'Header VitNode GitHub')](https://vitnode.com/)
+[![Header VitNode GitHub](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/public/header.jpg "Header VitNode GitHub")](https://vitnode.com/)
 
 # VitNode
 
 > [!WARNING]
 > VitNode is still in development and hasn't any release yet! You can try it out, but it is not recommended to use it now.
 
-VitNode is a headless CMS built with [NextJS](https://nextjs.org/) and [NestJS](https://nestjs.com/). It is designed to be a scalable and flexible platform for creating community-driven websites and applications. VitNode uses [Tailwind CSS](https://tailwindcss.com/) and [Shadcn UI](https://ui.shadcn.com/) for its frontend styling, which makes it easy to customize the look and feel of the website.
+VitNode is a CMS _(Content Management System)_ built with [NextJS](https://nextjs.org/) and [NestJS](https://nestjs.com/). It is designed to be a scalable and flexible platform for creating community-driven websites and applications. VitNode uses [Tailwind CSS](https://tailwindcss.com/) and [Shadcn UI](https://ui.shadcn.com/) for its frontend styling, which makes it easy to customize the look and feel of the website.
 
 ## 🖼️ Screenshots
 
-![Topic in Forum Page (Dark Mode)](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/assets/screenshots/1.png 'Topic in Forum Page (Dark Mode)')
+![Topic in Forum Page (Dark Mode)](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/assets/screenshots/1.png "Topic in Forum Page (Dark Mode)")
 
-![Topic in Forum Page (Light Mode)](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/assets/screenshots/2.png 'Topic in Forum Page (Light Mode)')
+![Topic in Forum Page (Light Mode)](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/assets/screenshots/2.png "Topic in Forum Page (Light Mode)")
 
-![Groups page in AdminCP](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/assets/screenshots/12.png 'Groups page in AdminCP')
+![Groups page in AdminCP](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/assets/screenshots/12.png "Groups page in AdminCP")
 
-![Users page in AdminCP](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/assets/screenshots/10.png 'Users page in AdminCP')
+![Users page in AdminCP](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/assets/screenshots/10.png "Users page in AdminCP")
 
-![Create Topic](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/assets/screenshots/8.png 'Create Topic')
+![Create Topic](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/assets/screenshots/8.png "Create Topic")
 
-![Change Avatar](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/assets/screenshots/3.png 'Change Avatar')
+![Change Avatar](https://raw.githubusercontent.com/aXenDeveloper/vitnode/canary/docs/assets/screenshots/3.png "Change Avatar")
 
 More screenshots you can find in the [Screenshots Page](https://vitnode.com/screenshots).
 

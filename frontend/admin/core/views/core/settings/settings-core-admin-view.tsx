@@ -1,16 +1,16 @@
 import { useTranslations } from "next-intl";
 
 import { HeaderContent } from "@/components/header-content/header-content";
-import { FormGeneralCoreAdmin } from "./form/form-general-core-admin";
+import { ContentSettingsCoreAdmin } from "./content/content";
 
-export const GeneralCoreAdminView = () => {
+export const SettingsCoreAdminView = () => {
   const t = useTranslations("admin");
 
   return (
     <>
       <HeaderContent h1={t("core.general.title")} />
 
-      <FormGeneralCoreAdmin />
+      <ContentSettingsCoreAdmin />
     </>
   );
 };

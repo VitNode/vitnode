@@ -1,14 +1,9 @@
 import { useTranslations } from "next-intl";
-import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
 
 import {
   DialogFooter,
   DialogHeader,
-  DialogTitle,
-  useDialog
+  DialogTitle
 } from "@/components/ui/dialog";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 import {
@@ -21,56 +16,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { mutationApi } from "./mutation-api";
+import { useEditLangAdmin } from "./hooks/use-edit-lang-admin";
 
-export const ModalEditActionsTableLangsCoreAdmin = (
+export const ContentEditActionsTableLangsCoreAdmin = (
   data: ShowCoreLanguages
 ) => {
-  const t = useTranslations("admin");
-  const tCore = useTranslations("core");
-  const { setOpen } = useDialog();
-
-  const formSchema = z.object({
-    name: z
-      .string({
-        required_error: tCore("forms.empty")
-      })
-      .min(1, {
-        message: tCore("forms.empty")
-      }),
-    timezone: z
-      .string({
-        required_error: tCore("forms.empty")
-      })
-      .min(1, {
-        message: tCore("forms.empty")
-      })
-  });
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: data.name,
-      timezone: data.timezone
-    }
-  });
-
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const mutation = await mutationApi({
-      ...data,
-      ...values
-    });
-    if (mutation.error) {
-      toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
-      });
-
-      return;
-    }
-
-    toast(tCore("saved_success"));
-    setOpen(false);
-  };
+  const t = useTranslations("admin.core.langs.actions.edit");
+  const { form, onSubmit } = useEditLangAdmin({ data });
 
   return (
     <>
@@ -88,7 +40,7 @@ export const ModalEditActionsTableLangsCoreAdmin = (
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("core.langs.actions.edit.name")}</FormLabel>
+                <FormLabel>{t("name")}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -102,7 +54,7 @@ export const ModalEditActionsTableLangsCoreAdmin = (
             name="timezone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("core.langs.actions.edit.timezone")}</FormLabel>
+                <FormLabel>{t("timezone")}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -118,7 +70,7 @@ export const ModalEditActionsTableLangsCoreAdmin = (
             onClick={form.handleSubmit(onSubmit)}
             loading={form.formState.isSubmitting}
           >
-            {t("core.langs.actions.edit.submit")}
+            {t("submit")}
           </Button>
         </DialogFooter>
       </Form>

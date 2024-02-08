@@ -1,5 +1,5 @@
 import type { ShowCoreLanguages } from "@/graphql/hooks";
-import { EditActionsTableLangsCoreAdmin } from "./edit/edit-actions-table-langs-core-admin";
+import { EditActionsTableLangsCoreAdmin } from "./edit/edit";
 
 export const ActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
   return (

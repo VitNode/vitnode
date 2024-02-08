@@ -47,8 +47,8 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
             icon: LayoutDashboard
           },
           {
-            id: "general",
-            href: "/general",
+            id: "settings",
+            href: "/settings",
             icon: Settings
           },
           {
