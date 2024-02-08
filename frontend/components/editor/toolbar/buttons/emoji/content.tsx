@@ -81,7 +81,7 @@ export const ContentEmojiButtonEditor = ({ setOpen }: Props) => {
             </div>
             <div className="px-5 pb-3 pt-1">
               {searchResults?.length === 0 ? (
-                <div className="p-2 text-muted-foreground italic">
+                <div className="p-2 text-muted-foreground">
                   {t("no_results")}
                 </div>
               ) : (

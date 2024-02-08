@@ -119,7 +119,19 @@
     },
     "icon_picker": {
       "title": "Wybierz ikonę",
-      "placeholder": "Wyszukaj ikonę..."
+      "remove": "Usuń ikonę",
+      "tabs": {
+        "icons": "Ikony",
+        "emojis": "Emotki"
+      },
+      "icons": {
+        "placeholder": "Wyszukaj ikonę...",
+        "not_found": "Nie znaleziono ikony."
+      },
+      "emojis": {
+        "search": "Wyszukaj emoji...",
+        "not_found": "Nie znaleziono emoji."
+      }
     },
     "user-bar": {
       "sign_in": "Zaloguj się",
