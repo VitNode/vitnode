@@ -1,6 +1,6 @@
 import { Smile } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useState } from "react";
 
 import {
   Popover,
@@ -18,9 +18,10 @@ const ContentEmojiButtonEditor = lazy(() =>
 
 export const EmojiButtonEditor = () => {
   const t = useTranslations("core.editor.emoji");
+  const [open, setOpen] = useState(false);
 
   return (
-    <Popover modal>
+    <Popover open={open} onOpenChange={setOpen} modal>
       <PopoverTrigger asChild>
         <Button
           variant="ghost"
@@ -34,7 +35,7 @@ export const EmojiButtonEditor = () => {
 
       <PopoverContent className="p-0 w-[23rem] overflow-y-auto">
         <Suspense fallback={<Loader className="p-4" />}>
-          <ContentEmojiButtonEditor />
+          <ContentEmojiButtonEditor setOpen={setOpen} />
         </Suspense>
       </PopoverContent>
     </Popover>

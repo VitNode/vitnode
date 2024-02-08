@@ -69,8 +69,10 @@
       },
       "emoji": {
         "title": "Emoji",
+        "search_results": "Wyniki wyszukiwania",
         "categories": {
           "all": "Wszystkie",
+          "frequent": "Ostatnio używane",
           "people": "Emotki i ludzie",
           "nature": "Zwierzęta i natura",
           "foods": "Jedzenie i napoje",
