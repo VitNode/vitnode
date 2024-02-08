@@ -4,10 +4,10 @@ import { cookies } from "next/headers";
 
 import { AdministratorsStaffAdminView } from "@/admin/core/views/members/staff/views/administrators/administrators-view";
 import {
-  Core_Staff_Administrators__Admin__Show,
+  Admin__Core_Staff_Administrators__Show,
   ShowAdminStaffAdministratorsSortingColumnEnum,
-  type Core_Staff_Administrators__Admin__ShowQuery,
-  type Core_Staff_Administrators__Admin__ShowQueryVariables
+  type Admin__Core_Staff_Administrators__ShowQuery,
+  type Admin__Core_Staff_Administrators__ShowQueryVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 import {
@@ -16,13 +16,13 @@ import {
 } from "@/hooks/core/utils/use-pagination-api-ssr";
 
 const getData = async (
-  variables: Core_Staff_Administrators__Admin__ShowQueryVariables
+  variables: Admin__Core_Staff_Administrators__ShowQueryVariables
 ) => {
   const { data } = await fetcher<
-    Core_Staff_Administrators__Admin__ShowQuery,
-    Core_Staff_Administrators__Admin__ShowQueryVariables
+    Admin__Core_Staff_Administrators__ShowQuery,
+    Admin__Core_Staff_Administrators__ShowQueryVariables
   >({
-    query: Core_Staff_Administrators__Admin__Show,
+    query: Admin__Core_Staff_Administrators__Show,
     variables,
     headers: {
       Cookie: cookies().toString()

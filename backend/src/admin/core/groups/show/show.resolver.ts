@@ -13,7 +13,7 @@ export class ShowAdminGroupsResolver {
 
   @Query(() => ShowAdminGroupsObj)
   @UseGuards(AdminAuthGuards)
-  async core_groups__admin__show(
+  async admin__core_groups__show(
     @Args() args: ShowAdminGroupsArgs
   ): Promise<ShowAdminGroupsObj> {
     return await this.service.show(args);

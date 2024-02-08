@@ -1,10 +1,15 @@
-query Core_plugins__admin__show(
+query Admin__core_plugins__show(
   $cursor: Int
   $first: Int
   $last: Int
   $sortBy: [ShowAdminPluginsSortByArgs!]
 ) {
-  core_plugins__admin__show(cursor: $cursor, first: $first, last: $last, sortBy: $sortBy) {
+  admin__core_plugins__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+    sortBy: $sortBy
+  ) {
     edges {
       author
       author_url

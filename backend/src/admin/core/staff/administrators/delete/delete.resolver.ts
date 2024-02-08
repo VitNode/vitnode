@@ -14,7 +14,7 @@ export class DeleteAdminStaffAdministratorsResolver {
 
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
-  async core_staff_administrators__admin__delete(
+  async admin__core_staff_administrators__delete(
     @Args() args: DeleteAdminStaffAdministratorsArgs
   ): Promise<string> {
     return await this.service.delete(args);

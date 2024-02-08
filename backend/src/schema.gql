@@ -106,37 +106,37 @@ type LayoutAdminInstallObj {
 }
 
 type Mutation {
+  admin__core_groups__delete(id: Int!): String!
+  admin__core_groups__edit(id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
+  admin__core_nav__change_position(id: Int!, index_to_move: Int!, parent_id: Int): String!
+  admin__core_nav__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, name: [TextLanguageInput!]!): ShowCoreNav!
+  admin__core_nav__delete(id: Int!): String!
+  admin__core_nav__edit(description: [TextLanguageInput!]!, external: Boolean!, href: String!, id: Int!, name: [TextLanguageInput!]!): ShowCoreNav!
+  admin__core_plugins__create(author: String!, author_url: String!, code: String!, description: String, name: String!, support_url: String!): ShowAdminPlugins!
+  admin__core_plugins__delete(code: String!): String!
+  admin__core_staff_administrators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffAdministrators!
+  admin__core_staff_administrators__delete(id: Int!): String!
+  admin__core_staff_moderators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffModerators!
+  admin__core_staff_moderators__delete(id: Int!): String!
+  admin__core_themes__create(author: String!, author_url: String!, name: String!, support_url: String!): ShowAdminThemes!
+  admin__core_themes__delete(id: Int!): String!
+  admin__core_themes__download(id: Int!, version: String, version_code: Int): String!
+  admin__core_themes__edit(author: String!, author_url: String!, id: Int!, name: String!, support_url: String!): ShowAdminThemes!
+  admin__core_themes__upload(file: Upload!): String!
+  admin__forum_forums__change_position(id: Int!, index_to_move: Int!, parent_id: Int): String!
+  admin__forum_forums__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
   admin_core_plugins__test: String!
   admin_install__create_database: String!
   admin_sessions__sign_out: String!
   admin_settings__general__edit(side_name: String!): GeneralAdminSettingsObj!
-  core_groups__admin__delete(id: Int!): String!
-  core_groups__admin__edit(id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
   core_groups__admin_create(name: [TextLanguageInput!]!): ShowAdminGroups!
   core_languages__edit(code: String!, default: Boolean!, enabled: Boolean!, id: Int!, name: String!, timezone: String!): ShowCoreLanguages!
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
   core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
-  core_nav__admin__change_position(id: Int!, index_to_move: Int!, parent_id: Int): String!
-  core_nav__admin__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, name: [TextLanguageInput!]!): ShowCoreNav!
-  core_nav__admin__delete(id: Int!): String!
-  core_nav__admin__edit(description: [TextLanguageInput!]!, external: Boolean!, href: String!, id: Int!, name: [TextLanguageInput!]!): ShowCoreNav!
-  core_plugins__admin__create(author: String!, author_url: String!, code: String!, description: String, name: String!, support_url: String!): ShowAdminPlugins!
-  core_plugins__admin__delete(code: String!): String!
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
-  core_staff_administrators__admin__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffAdministrators!
-  core_staff_administrators__admin__delete(id: Int!): String!
-  core_staff_moderators__admin__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffModerators!
-  core_staff_moderators__admin__delete(id: Int!): String!
-  core_themes__admin__create(author: String!, author_url: String!, name: String!, support_url: String!): ShowAdminThemes!
-  core_themes__admin__delete(id: Int!): String!
-  core_themes__admin__download(id: Int!, version: String, version_code: Int): String!
-  core_themes__admin__edit(author: String!, author_url: String!, id: Int!, name: String!, support_url: String!): ShowAdminThemes!
-  core_themes__admin__upload(file: Upload!): String!
   core_themes__change(id: Int!): String!
-  forum_forums__admin__change_position(id: Int!, index_to_move: Int!, parent_id: Int): String!
-  forum_forums__admin__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
   forum_posts__create(content: [TextLanguageInput!]!, topic_id: Int!): ShowPostsForums!
   forum_topics__actions__lock_toggle(id: Int!): Boolean!
   forum_topics__create(content: [TextLanguageInput!]!, forum_id: Int!, title: [TextLanguageInput!]!): ShowTopicsForums!
@@ -166,21 +166,22 @@ type PermissionsForumForumsCount {
 }
 
 type Query {
+  admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
+  admin__core_members__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
+  admin__core_plugins__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminPluginsSortByArgs!]): ShowAdminPluginsObj!
+  admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
+  admin__core_staff_moderators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
+  admin__core_themes__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminThemesSortByArgs!]): ShowAdminThemesObj!
+  admin__forum_forums__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsAdminObj!
   admin_install__layout: LayoutAdminInstallObj!
   admin_sessions__authorization: AuthorizationAdminSessionsObj!
-  core_groups__admin__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
+  admin_settings__general__show: ShowGeneralAdminSettingsObj!
   core_languages__show(cursor: Int, first: Int, last: Int): ShowCoreLanguagesObj!
-  core_members__admin__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_middleware: CoreMiddlewareObj!
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
-  core_plugins__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminPluginsSortByArgs!]): ShowAdminPluginsObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
-  core_staff_administrators__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
-  core_staff_moderators__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
-  core_themes__admin__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminThemesSortByArgs!]): ShowAdminThemesObj!
   core_themes__show(cursor: Int, first: Int, last: Int): ShowCoreThemesObj!
-  forum_forums__admin__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsAdminObj!
   forum_forums__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsObj!
   forum_posts__show(cursor: Int, first: Int, firstEdges: Int, last: Int, sortBy: ShowPostsForumsSortingEnum, topic_id: Int!): ShowPostsForumsObj!
   forum_topics__show(cursor: Int, first: Int, forum_id: Int, id: Int, last: Int): ShowTopicsForumsObj!
@@ -474,6 +475,10 @@ type ShowForumForumsWithParent {
   parent: ShowForumForums
   permissions: PermissionsForumForumsCount!
   position: Int!
+}
+
+type ShowGeneralAdminSettingsObj {
+  side_name: String!
 }
 
 type ShowPostsForums {

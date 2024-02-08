@@ -1,10 +1,10 @@
-mutation Core_nav__admin__create(
+mutation Admin__core_nav__create(
   $description: [TextLanguageInput!]!
   $external: Boolean!
   $href: String!
   $name: [TextLanguageInput!]!
 ) {
-  core_nav__admin__create(
+  admin__core_nav__create(
     description: $description
     external: $external
     href: $href

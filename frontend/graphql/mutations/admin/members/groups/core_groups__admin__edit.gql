@@ -1,5 +1,5 @@
-mutation Core_groups__admin__edit($id: Int!, $name: [TextLanguageInput!]!) {
-  core_groups__admin__edit(id: $id, name: $name) {
+mutation Admin__core_groups__edit($id: Int!, $name: [TextLanguageInput!]!) {
+  admin__core_groups__edit(id: $id, name: $name) {
     created
     id
     name {

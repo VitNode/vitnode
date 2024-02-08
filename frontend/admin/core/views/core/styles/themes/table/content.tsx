@@ -8,14 +8,14 @@ import { HeaderSortingDataTable } from "@/components/data-table/header";
 import { DateFormat } from "@/components/date-format/date-format";
 import { Badge } from "@/components/ui/badge";
 import type {
-  Core_Themes__Admin__ShowQuery,
+  Admin_Core_Themes__ShowQuery,
   ShowAdminThemes
 } from "@/graphql/hooks";
 import { ActionsItemThemesAdmin } from "./actions/actions";
 
 export const ContentTableThemesAdmin = ({
-  core_themes__admin__show: { edges, pageInfo }
-}: Core_Themes__Admin__ShowQuery) => {
+  admin__core_themes__show: { edges, pageInfo }
+}: Admin_Core_Themes__ShowQuery) => {
   const t = useTranslations("core");
 
   const columns: ColumnDef<ShowAdminThemes>[] = useMemo(

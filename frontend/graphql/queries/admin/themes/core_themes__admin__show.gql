@@ -1,10 +1,15 @@
-query Core_themes__admin__show(
+query Admin_core_themes__show(
   $cursor: Int
   $first: Int
   $last: Int
   $sortBy: [ShowAdminThemesSortByArgs!]
 ) {
-  core_themes__admin__show(cursor: $cursor, first: $first, last: $last, sortBy: $sortBy) {
+  admin__core_themes__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+    sortBy: $sortBy
+  ) {
     edges {
       author
       author_url

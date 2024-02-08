@@ -2,10 +2,10 @@ import type { UniqueIdentifier } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 
 import type {
-  Forum_Forums__Admin__ShowFlattenedItem,
-  Forum_Forums__Admin__ShowWithProjection
+  Admin__Forum_Forums__ShowFlattenedItem,
+  Admin__Forum_Forums__ShowWithProjection
 } from "./types";
-import type { Forum_Forums__Admin__ShowQueryItem } from "./hooks/use-forum-forums-admin-api";
+import type { Admin__Forum_Forums__ShowQueryItem } from "./hooks/use-forum-forums-admin-api";
 import type {
   ChildrenShowForumForums,
   ShowForumForumsAdmin
@@ -24,7 +24,7 @@ const getDragDepth = ({
 const getMaxDepth = ({
   previousItem
 }: {
-  previousItem: Forum_Forums__Admin__ShowFlattenedItem;
+  previousItem: Admin__Forum_Forums__ShowFlattenedItem;
 }) => {
   return previousItem ? previousItem.depth + 1 : 0;
 };
@@ -32,7 +32,7 @@ const getMaxDepth = ({
 const getMinDepth = ({
   nextItem
 }: {
-  nextItem: Forum_Forums__Admin__ShowFlattenedItem;
+  nextItem: Admin__Forum_Forums__ShowFlattenedItem;
 }) => {
   return nextItem ? nextItem.depth : 0;
 };
@@ -42,7 +42,7 @@ export const removeChildrenOf = ({
   items
 }: {
   ids: UniqueIdentifier[];
-  items: Forum_Forums__Admin__ShowFlattenedItem[];
+  items: Admin__Forum_Forums__ShowFlattenedItem[];
 }) => {
   const excludeParentIds = [...ids];
 
@@ -60,12 +60,12 @@ export const removeChildrenOf = ({
 };
 
 export const getForumProjection = (
-  items: Forum_Forums__Admin__ShowFlattenedItem[],
+  items: Admin__Forum_Forums__ShowFlattenedItem[],
   activeId: UniqueIdentifier,
   overId: UniqueIdentifier,
   dragOffset: number,
   indentationWidth: number
-): Forum_Forums__Admin__ShowWithProjection => {
+): Admin__Forum_Forums__ShowWithProjection => {
   const overItemIndex = items.findIndex(({ id }) => id === overId);
   const activeItemIndex = items.findIndex(({ id }) => id === activeId);
   const activeItem = items[activeItemIndex];
@@ -114,11 +114,11 @@ export const getForumProjection = (
 };
 
 export const flattenTree = (
-  items: Forum_Forums__Admin__ShowQueryItem[],
+  items: Admin__Forum_Forums__ShowQueryItem[],
   parentId: number | null = null,
   depth = 0
-): Forum_Forums__Admin__ShowFlattenedItem[] => {
-  return items.reduce<Forum_Forums__Admin__ShowFlattenedItem[]>(
+): Admin__Forum_Forums__ShowFlattenedItem[] => {
+  return items.reduce<Admin__Forum_Forums__ShowFlattenedItem[]>(
     (acc, item, index) => {
       return [
         ...acc,
@@ -135,15 +135,15 @@ export const flattenTree = (
 };
 
 export const buildTree = (
-  flattenedItems: Forum_Forums__Admin__ShowFlattenedItem[]
-): Forum_Forums__Admin__ShowQueryItem[] => {
-  const root: { children: Forum_Forums__Admin__ShowQueryItem[]; id: string } = {
+  flattenedItems: Admin__Forum_Forums__ShowFlattenedItem[]
+): Admin__Forum_Forums__ShowQueryItem[] => {
+  const root: { children: Admin__Forum_Forums__ShowQueryItem[]; id: string } = {
     id: "root",
     children: []
   };
-  const nodes: Record<string, Forum_Forums__Admin__ShowQueryItem> = {
+  const nodes: Record<string, Admin__Forum_Forums__ShowQueryItem> = {
     [root.id]: root
-  } as unknown as Record<string, Forum_Forums__Admin__ShowQueryItem>;
+  } as unknown as Record<string, Admin__Forum_Forums__ShowQueryItem>;
   const items = flattenedItems.map(item => ({ ...item, children: [] }));
 
   for (const item of items) {
@@ -157,5 +157,5 @@ export const buildTree = (
     parent.children.push(item as ChildrenShowForumForums);
   }
 
-  return root.children as Forum_Forums__Admin__ShowQueryItem[];
+  return root.children as Admin__Forum_Forums__ShowQueryItem[];
 };

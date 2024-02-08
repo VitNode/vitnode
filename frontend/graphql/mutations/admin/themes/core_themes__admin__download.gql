@@ -1,3 +1,11 @@
-mutation Core_themes__admin__download($id: Int!, $version: String, $versionCode: Int) {
-  core_themes__admin__download(id: $id, version: $version, version_code: $versionCode)
+mutation Admin__core_themes__download(
+  $id: Int!
+  $version: String
+  $versionCode: Int
+) {
+  admin__core_themes__download(
+    id: $id
+    version: $version
+    version_code: $versionCode
+  )
 }

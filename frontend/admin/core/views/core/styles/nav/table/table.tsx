@@ -3,7 +3,7 @@
 import { Suspense, lazy } from "react";
 
 import { Loader } from "@/components/loader/loader";
-import type { Core_Nav__Admin__ShowQuery } from "@/graphql/hooks";
+import type { Admin__Core_Nav__ShowQuery } from "@/graphql/hooks";
 
 const Content = lazy(() =>
   import("./content").then(module => ({
@@ -11,7 +11,7 @@ const Content = lazy(() =>
   }))
 );
 
-export const TableNavAdmin = (props: Core_Nav__Admin__ShowQuery) => {
+export const TableNavAdmin = (props: Admin__Core_Nav__ShowQuery) => {
   return (
     <Suspense fallback={<Loader />}>
       <Content {...props} />

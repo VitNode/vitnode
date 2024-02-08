@@ -5,10 +5,10 @@ import type { Metadata } from "next";
 import { UsersMembersAdminView } from "@/admin/core/views/members/users/users-members-admin-view";
 import { fetcher } from "@/graphql/fetcher";
 import {
-  Core_Members__Admin__Show,
+  Admin__Core_Members__Show,
   ShowAdminMembersSortingColumnEnum,
-  type Core_Members__Admin__ShowQuery,
-  type Core_Members__Admin__ShowQueryVariables
+  type Admin__Core_Members__ShowQuery,
+  type Admin__Core_Members__ShowQueryVariables
 } from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
@@ -26,12 +26,12 @@ interface Props {
   searchParams: SearchParams;
 }
 
-const getData = async (variables: Core_Members__Admin__ShowQueryVariables) => {
+const getData = async (variables: Admin__Core_Members__ShowQueryVariables) => {
   const { data } = await fetcher<
-    Core_Members__Admin__ShowQuery,
-    Core_Members__Admin__ShowQueryVariables
+    Admin__Core_Members__ShowQuery,
+    Admin__Core_Members__ShowQueryVariables
   >({
-    query: Core_Members__Admin__Show,
+    query: Admin__Core_Members__Show,
     variables,
     headers: {
       Cookie: cookies().toString()
@@ -52,7 +52,7 @@ export async function generateMetadata({
 }
 
 export default async function Page({ searchParams }: Props) {
-  const variables: Core_Members__Admin__ShowQueryVariables = {
+  const variables: Admin__Core_Members__ShowQueryVariables = {
     ...usePaginationAPISsr({
       searchParams,
       sortByEnum: ShowAdminMembersSortingColumnEnum,

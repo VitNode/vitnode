@@ -1,4 +1,4 @@
-mutation Core_plugins__admin__create(
+mutation Admin__core_plugins__create(
   $author: String!
   $authorUrl: String!
   $code: String!
@@ -6,7 +6,7 @@ mutation Core_plugins__admin__create(
   $supportUrl: String!
   $description: String
 ) {
-  core_plugins__admin__create(
+  admin__core_plugins__create(
     author: $author
     author_url: $authorUrl
     code: $code

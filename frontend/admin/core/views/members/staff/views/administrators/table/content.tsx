@@ -106,8 +106,8 @@ export const ContentTableAdministratorsStaffAdmin = ({
 
   return (
     <DataTable
-      data={data?.core_staff_administrators__admin__show.edges ?? []}
-      pageInfo={data?.core_staff_administrators__admin__show.pageInfo}
+      data={data?.admin__core_staff_administrators__show.edges ?? []}
+      pageInfo={data?.admin__core_staff_administrators__show.pageInfo}
       defaultPageSize={10}
       columns={columns}
       defaultSorting={{

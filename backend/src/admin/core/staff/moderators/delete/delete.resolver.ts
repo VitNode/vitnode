@@ -12,7 +12,7 @@ export class DeleteAdminStaffModeratorsResolver {
 
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
-  async core_staff_moderators__admin__delete(
+  async admin__core_staff_moderators__delete(
     @Args() args: DeleteAdminStaffModeratorsArgs
   ): Promise<string> {
     return await this.service.delete(args);

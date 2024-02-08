@@ -15,7 +15,7 @@ export const ContentGroupsFiltersUsersMembersAdmin = () => {
         onChange: setTextSearch
       }}
       options={
-        data?.core_groups__admin__show.edges
+        data?.admin__core_groups__show.edges
           .filter(item => !item.guest)
           .map(group => ({
             label: convertText(group.name),

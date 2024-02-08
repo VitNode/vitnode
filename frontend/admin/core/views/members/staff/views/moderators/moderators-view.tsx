@@ -1,12 +1,12 @@
 import { useTranslations } from "next-intl";
 
 import { HeaderContent } from "@/components/header-content/header-content";
-import type { Core_Staff_Moderators__Admin__ShowQuery } from "@/graphql/hooks";
+import type { Admin__Core_Staff_Moderators__ShowQuery } from "@/graphql/hooks";
 import { TableModeratorsStaffAdmin } from "./table/table";
 import { ActionsModeratorsStaffAdmin } from "./actions/actions";
 
 export interface ModeratorsStaffAdminViewProps {
-  data: Core_Staff_Moderators__Admin__ShowQuery;
+  data: Admin__Core_Staff_Moderators__ShowQuery;
 }
 
 export const ModeratorsStaffAdminView = (

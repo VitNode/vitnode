@@ -1,6 +1,6 @@
-import { Steps } from 'nextra/components';
-import { Callout } from 'nextra/components';
-import { FileTree } from 'nextra/components';
+import { Steps } from "nextra/components";
+import { Callout } from "nextra/components";
+import { FileTree } from "nextra/components";
 
 # Fetch and Revalidate Data
 
@@ -27,23 +27,26 @@ export default async function Page() {}
 </Callout>
 
 ```tsx {1-8,10-20}
-import { cookies } from 'next/headers';
+import { cookies } from "next/headers";
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher } from "@/graphql/fetcher";
 import {
   Forum_Forums__Show,
   type Forum_Forums__ShowQuery,
   type Forum_Forums__ShowQueryVariables
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
 const getData = async (variables: Forum_Forums__ShowQueryVariables) => {
-  const { data } = await fetcher<Forum_Forums__ShowQuery, Forum_Forums__ShowQueryVariables>({
+  const { data } = await fetcher<
+    Forum_Forums__ShowQuery,
+    Forum_Forums__ShowQueryVariables
+  >({
     query: Forum_Forums__Show,
     variables,
     headers: {
       Cookie: cookies().toString()
     },
-    cache: 'force-cache' // this option is used for caching data for GraphQL
+    cache: "force-cache" // this option is used for caching data for GraphQL
   });
 
   return data;
@@ -102,25 +105,25 @@ export const useShortShowGroupsAdmin = () => {};
 ### useQuery
 
 ```ts {1-9,12-31}
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
-import { APIKeys } from '@/graphql/api-keys';
-import { fetcher } from '@/graphql/fetcher';
+import { APIKeys } from "@/graphql/api-keys";
+import { fetcher } from "@/graphql/fetcher";
 import {
-  Core_Groups__Admin__Show_Short,
-  type Core_Groups__Admin__Show_ShortQuery,
-  type Core_Groups__Admin__Show_ShortQueryVariables
-} from '@/graphql/hooks';
+  Admin__Core_Groups__Show_Short,
+  type Admin__Core_Groups__Show_ShortQuery,
+  type Admin__Core_Groups__Show_ShortQueryVariables
+} from "@/graphql/hooks";
 
 export const useShortShowGroupsAdmin = () => {
   const api = useQuery({
     queryKey: [APIKeys.SHORT_GROUPS_MEMBERS],
     queryFn: async ({ signal }) => {
       const { data } = await fetcher<
-        Core_Groups__Admin__Show_ShortQuery,
-        Core_Groups__Admin__Show_ShortQueryVariables
+        Admin__Core_Groups__Show_ShortQuery,
+        Admin__Core_Groups__Show_ShortQueryVariables
       >({
-        query: Core_Groups__Admin__Show_Short,
+        query: Admin__Core_Groups__Show_Short,
         variables: {
           first: 25
         },
@@ -165,8 +168,8 @@ export const ContentGroupsFiltersUsersMembersAdmin = () => {
 </Steps>
 
 <Callout type="error" emoji="❌">
-  Don't use prefetch for useQuery. If you need to use prefeth for useQuery that means you should use
-  Server Side Rendering (SSR) fetching.
+  Don't use prefetch for useQuery. If you need to use prefeth for useQuery that
+  means you should use Server Side Rendering (SSR) fetching.
 </Callout>
 
 ## Infinite Query
@@ -192,17 +195,17 @@ Inside `hooks/{module_name}` create new file with prefix `use`, for example `use
 ### useInfiniteQuery
 
 ```ts
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 
-import { APIKeys } from '@/graphql/api-keys';
-import { fetcher } from '@/graphql/fetcher';
+import { APIKeys } from "@/graphql/api-keys";
+import { fetcher } from "@/graphql/fetcher";
 import {
   Forum_Forums__Show_Item_More,
   type Forum_Forums__Show_Item_MoreQuery,
   type Forum_Forums__Show_Item_MoreQueryVariables,
   type ShowTopicsForumsObj
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
 export const useTopicsList = () => {
   const { id } = useParams();
@@ -297,18 +300,18 @@ Compared to `useQuery` in `useInfiniteQuery` you can use prefetch.
 Inside async component you can use [prefetchInfiniteQuery](https://tanstack.com/query/latest/docs/react/reference/QueryClient#queryclientfetchinfinitequery) function.
 
 ```tsx
-import { cookies } from 'next/headers';
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import { cookies } from "next/headers";
+import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
-import { ForumsForumAdminView } from '@/admin/views/forum/forums/forums-forum-admin-view';
-import getQueryClient from '@/functions/get-query-client';
-import { fetcher } from '@/graphql/fetcher';
-import { APIKeys } from '@/graphql/api-keys';
+import { ForumsForumAdminView } from "@/admin/views/forum/forums/forums-forum-admin-view";
+import getQueryClient from "@/functions/get-query-client";
+import { fetcher } from "@/graphql/fetcher";
+import { APIKeys } from "@/graphql/api-keys";
 import {
-  Forum_Forums__Admin__Show,
-  type Forum_Forums__Admin__ShowQuery,
-  type Forum_Forums__Admin__ShowQueryVariables
-} from '@/graphql/hooks';
+  Admin__Forum_Forums__Show,
+  type Admin__Forum_Forums__ShowQuery,
+  type Admin__Forum_Forums__ShowQueryVariables
+} from "@/graphql/hooks";
 ```
 
 ```tsx
@@ -318,10 +321,10 @@ export default async function Page() {
     queryKey: [APIKeys.FORUMS_ADMIN],
     queryFn: async ({ pageParam }) => {
       const { data } = await fetcher<
-        Forum_Forums__Admin__ShowQuery,
-        Forum_Forums__Admin__ShowQueryVariables
+        Admin__Forum_Forums__ShowQuery,
+        Admin__Forum_Forums__ShowQueryVariables
       >({
-        query: Forum_Forums__Admin__Show,
+        query: Admin__Forum_Forums__Show,
         variables: pageParam,
         headers: {
           Cookie: cookies().toString()
@@ -333,7 +336,7 @@ export default async function Page() {
     initialPageParam: {
       first: 10
     },
-    getNextPageParam: ({ forum_forums__admin__show: { pageInfo } }) => {
+    getNextPageParam: ({ Admin__Forum_Forums__Show: { pageInfo } }) => {
       if (pageInfo.hasNextPage) {
         return {
           first: 10,
@@ -354,8 +357,8 @@ export default async function Page() {
 ```
 
 <Callout type="warning" emoji="⚠️">
-  Remember to use the same `queryKey` as in `useInfiniteQuery`. Otherwise, the data will be fetched
-  two times and SSR make no sense.
+  Remember to use the same `queryKey` as in `useInfiniteQuery`. Otherwise, the
+  data will be fetched two times and SSR make no sense.
 </Callout>
 
 ### Prefetch data (Client)
@@ -385,7 +388,7 @@ NextJS allows you to use [Server Actions](https://nextjs.org/docs/app/building-y
 Mutations should be placed in `hooks` folder next to client hook with `onSubmit`.
 
 ```ts
-'use server';
+"use server";
 
 export const mutationApi = async () => {};
 ```
@@ -395,16 +398,16 @@ export const mutationApi = async () => {};
 Our `fetcher` should be wrapper with `try/catch` block to handle errors using client side.
 
 ```ts {3-10,13,15-30}
-'use server';
+"use server";
 
-import { cookies } from 'next/headers';
+import { cookies } from "next/headers";
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher } from "@/graphql/fetcher";
 import {
   Forum_Topics__Actions__Lock_Toggle,
   type Forum_Topics__Actions__Lock_ToggleMutation,
   type Forum_Topics__Actions__Lock_ToggleMutationVariables
-} from '@/graphql/hooks';
+} from "@/graphql/hooks";
 
 export const mutationApi = async (
   variables: Forum_Topics__Actions__Lock_ToggleMutationVariables
@@ -435,20 +438,20 @@ export const mutationApi = async (
 ### Example use
 
 ```tsx {4,9-17,19}
-import { useTranslations } from 'next-intl';
-import { toast } from 'sonner';
+import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
-import { mutationApi } from './mutation-api';
+import { mutationApi } from "./mutation-api";
 
 export const useLockToggleActionsTopic = ({ id }: { id: number }) => {
-  const t = useTranslations('core');
+  const t = useTranslations("core");
 
   const onClick = async () => {
     const mutation = await mutationApi({ id });
 
     if (mutation.error) {
-      toast.error(t('errors.title'), {
-        description: t('errors.internal_server_error')
+      toast.error(t("errors.title"), {
+        description: t("errors.internal_server_error")
       });
     }
   };
@@ -490,35 +493,42 @@ export const mutationApi = async (
 Take a look at your mutation in Server Action. You have `data` variable from `fetcher` function and you return it. You can using this data to change data in cache using [queryClient.setQueryData](https://tanstack.com/query/latest/docs/react/reference/QueryClient#queryclientsetquerydata).
 
 ```ts
-import { useQuery, useQueryClient, type InfiniteData } from '@tanstack/react-query';
-import { APIKeys } from '@/graphql/api-keys';
-import { type Forum_Topics__ShowQuery } from '@/graphql/hooks';
+import {
+  useQuery,
+  useQueryClient,
+  type InfiniteData
+} from "@tanstack/react-query";
+import { APIKeys } from "@/graphql/api-keys";
+import { type Forum_Topics__ShowQuery } from "@/graphql/hooks";
 
 const queryClient = useQueryClient();
 
 const onClick = async () => {
   const mutation = await mutationApi({ id });
   if (mutation.data) {
-    queryClient.setQueryData<InfiniteData<Forum_Topics__ShowQuery>>([APIKeys.TOPICS], old => {
-      if (!old) return old;
+    queryClient.setQueryData<InfiniteData<Forum_Topics__ShowQuery>>(
+      [APIKeys.TOPICS],
+      old => {
+        if (!old) return old;
 
-      return {
-        ...old,
-        pages: old.pages.map(page => ({
-          ...page,
-          forum_topics__show: {
-            ...page.forum_topics__show,
-            edges: mutation.data
-          }
-        }))
-      };
-    });
+        return {
+          ...old,
+          pages: old.pages.map(page => ({
+            ...page,
+            forum_topics__show: {
+              ...page.forum_topics__show,
+              edges: mutation.data
+            }
+          }))
+        };
+      }
+    );
 
     return;
   }
 
-  toast.error(t('errors.title'), {
-    description: t('errors.internal_server_error')
+  toast.error(t("errors.title"), {
+    description: t("errors.internal_server_error")
   });
 };
 ```

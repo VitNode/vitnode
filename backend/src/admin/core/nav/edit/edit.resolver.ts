@@ -13,7 +13,7 @@ export class EditAdminNavResolver {
 
   @Mutation(() => ShowCoreNav)
   @UseGuards(AdminAuthGuards)
-  async core_nav__admin__edit(
+  async admin__core_nav__edit(
     @Args() args: EditAdminNavArgs
   ): Promise<ShowCoreNav> {
     return await this.service.edit(args);

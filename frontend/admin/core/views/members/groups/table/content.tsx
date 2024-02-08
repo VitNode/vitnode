@@ -78,8 +78,8 @@ export const ContentTableGroupsMembersAdmin = ({
 
   return (
     <DataTable
-      data={data?.core_groups__admin__show.edges ?? []}
-      pageInfo={data?.core_groups__admin__show.pageInfo}
+      data={data?.admin__core_groups__show.edges ?? []}
+      pageInfo={data?.admin__core_groups__show.pageInfo}
       defaultPageSize={10}
       columns={columns}
       searchPlaceholder={t("search_placeholder")}

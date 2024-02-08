@@ -5,10 +5,10 @@ import { cookies } from "next/headers";
 import { ThemesAdminView } from "@/admin/core/views/core/styles/themes/themes-admin-view";
 import { fetcher } from "@/graphql/fetcher";
 import {
-  Core_Themes__Admin__Show,
+  Admin_Core_Themes__Show,
   ShowAdminThemesSortingColumnEnum,
-  type Core_Themes__Admin__ShowQuery,
-  type Core_Themes__Admin__ShowQueryVariables
+  type Admin_Core_Themes__ShowQuery,
+  type Admin_Core_Themes__ShowQueryVariables
 } from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
@@ -22,12 +22,12 @@ interface Props {
   searchParams: SearchParamsPagination;
 }
 
-const getData = async (variables: Core_Themes__Admin__ShowQueryVariables) => {
+const getData = async (variables: Admin_Core_Themes__ShowQueryVariables) => {
   const { data } = await fetcher<
-    Core_Themes__Admin__ShowQuery,
-    Core_Themes__Admin__ShowQueryVariables
+    Admin_Core_Themes__ShowQuery,
+    Admin_Core_Themes__ShowQueryVariables
   >({
-    query: Core_Themes__Admin__Show,
+    query: Admin_Core_Themes__Show,
     variables,
     headers: {
       Cookie: cookies().toString()

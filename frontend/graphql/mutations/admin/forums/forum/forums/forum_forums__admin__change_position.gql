@@ -1,3 +1,11 @@
-mutation Forum_forums__admin__change_position($id: Int!, $indexToMove: Int!, $parentId: Int) {
-  forum_forums__admin__change_position(id: $id, index_to_move: $indexToMove, parent_id: $parentId)
+mutation Admin__forum_forums__change_position(
+  $id: Int!
+  $indexToMove: Int!
+  $parentId: Int
+) {
+  admin__forum_forums__change_position(
+    id: $id
+    index_to_move: $indexToMove
+    parent_id: $parentId
+  )
 }

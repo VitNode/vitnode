@@ -4,21 +4,21 @@ import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
-import { Core_Groups__Admin__Edit } from "@/graphql/hooks";
+import { Admin__Core_Groups__Edit } from "@/graphql/hooks";
 import type {
-  Core_Groups__Admin__EditMutation,
-  Core_Groups__Admin__EditMutationVariables
+  Admin__Core_Groups__EditMutation,
+  Admin__Core_Groups__EditMutationVariables
 } from "@/graphql/hooks";
 
 export const mutationEditApi = async (
-  variables: Core_Groups__Admin__EditMutationVariables
+  variables: Admin__Core_Groups__EditMutationVariables
 ) => {
   try {
     const { data } = await fetcher<
-      Core_Groups__Admin__EditMutation,
-      Core_Groups__Admin__EditMutationVariables
+      Admin__Core_Groups__EditMutation,
+      Admin__Core_Groups__EditMutationVariables
     >({
-      query: Core_Groups__Admin__Edit,
+      query: Admin__Core_Groups__Edit,
       variables,
       headers: {
         Cookie: cookies().toString()

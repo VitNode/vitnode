@@ -1,10 +1,10 @@
-query Core_staff_administrators__admin__show(
+query Admin__core_staff_administrators__show(
   $cursor: Int
   $first: Int
   $last: Int
   $sortBy: [ShowAdminStaffAdministratorsSortByArgs!]
 ) {
-  core_staff_administrators__admin__show(
+  admin__core_staff_administrators__show(
     cursor: $cursor
     first: $first
     last: $last

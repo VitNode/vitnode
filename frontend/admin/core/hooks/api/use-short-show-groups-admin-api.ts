@@ -4,9 +4,9 @@ import { useState } from "react";
 import { APIKeys } from "@/graphql/api-keys";
 import { fetcher } from "@/graphql/fetcher";
 import {
-  Core_Groups__Admin__Show_Short,
-  type Core_Groups__Admin__Show_ShortQuery,
-  type Core_Groups__Admin__Show_ShortQueryVariables
+  Admin__Core_Groups__Show_Short,
+  type Admin__Core_Groups__Show_ShortQuery,
+  type Admin__Core_Groups__Show_ShortQueryVariables
 } from "@/graphql/hooks";
 
 export const useShortShowGroupsAdminAPI = () => {
@@ -16,10 +16,10 @@ export const useShortShowGroupsAdminAPI = () => {
     queryKey: [APIKeys.SHORT_GROUPS_MEMBERS, { textSearch }],
     queryFn: async ({ signal }) => {
       const { data } = await fetcher<
-        Core_Groups__Admin__Show_ShortQuery,
-        Core_Groups__Admin__Show_ShortQueryVariables
+        Admin__Core_Groups__Show_ShortQuery,
+        Admin__Core_Groups__Show_ShortQueryVariables
       >({
-        query: Core_Groups__Admin__Show_Short,
+        query: Admin__Core_Groups__Show_Short,
         variables: {
           first: 25,
           search: textSearch

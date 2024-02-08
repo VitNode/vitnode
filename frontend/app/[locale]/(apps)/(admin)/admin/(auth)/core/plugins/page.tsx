@@ -4,10 +4,10 @@ import { cookies } from "next/headers";
 
 import { PluginsCoreAdminView } from "@/admin/core/views/core/plugins/plugins-admin-view";
 import {
-  Core_Plugins__Admin__Show,
+  Admin__Core_Plugins__Show,
   ShowAdminPluginsSortingColumnEnum,
-  type Core_Plugins__Admin__ShowQuery,
-  type Core_Plugins__Admin__ShowQueryVariables
+  type Admin__Core_Plugins__ShowQuery,
+  type Admin__Core_Plugins__ShowQueryVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 import {
@@ -22,12 +22,12 @@ interface Props {
   searchParams: SearchParamsPagination;
 }
 
-const getData = async (variables: Core_Plugins__Admin__ShowQueryVariables) => {
+const getData = async (variables: Admin__Core_Plugins__ShowQueryVariables) => {
   const { data } = await fetcher<
-    Core_Plugins__Admin__ShowQuery,
-    Core_Plugins__Admin__ShowQueryVariables
+    Admin__Core_Plugins__ShowQuery,
+    Admin__Core_Plugins__ShowQueryVariables
   >({
-    query: Core_Plugins__Admin__Show,
+    query: Admin__Core_Plugins__Show,
     variables,
     headers: {
       Cookie: cookies().toString()

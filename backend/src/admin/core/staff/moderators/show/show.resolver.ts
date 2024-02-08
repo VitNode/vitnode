@@ -13,7 +13,7 @@ export class ShowAdminStaffModeratorsResolver {
 
   @Query(() => ShowAdminStaffModeratorsObj)
   @UseGuards(AdminAuthGuards)
-  async core_staff_moderators__admin__show(
+  async admin__core_staff_moderators__show(
     @Args() args: ShowAdminStaffModeratorsArgs
   ): Promise<ShowAdminStaffModeratorsObj> {
     return await this.service.show(args);

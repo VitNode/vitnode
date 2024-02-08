@@ -120,8 +120,8 @@ export const ContentTableUsersMembersAdmin = ({
 
   return (
     <DataTable
-      data={data?.core_members__admin__show.edges ?? []}
-      pageInfo={data?.core_members__admin__show.pageInfo}
+      data={data?.admin__core_members__show.edges ?? []}
+      pageInfo={data?.admin__core_members__show.pageInfo}
       defaultPageSize={10}
       columns={columns}
       searchPlaceholder={t("search_placeholder")}

@@ -12,7 +12,7 @@ export class ChangePositionForumForumsResolver {
 
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
-  async forum_forums__admin__change_position(
+  async admin__forum_forums__change_position(
     @Args() args: ChangePositionForumForumsArgs
   ): Promise<string> {
     return await this.service.changeOrderingForumForums(args);

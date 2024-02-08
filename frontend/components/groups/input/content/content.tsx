@@ -6,9 +6,9 @@ import { useQuery } from "@tanstack/react-query";
 import { cn } from "@/functions/classnames";
 import { fetcher } from "@/graphql/fetcher";
 import {
-  Core_Groups__Admin__Show_Short,
-  type Core_Groups__Admin__Show_ShortQuery,
-  type Core_Groups__Admin__Show_ShortQueryVariables
+  Admin__Core_Groups__Show_Short,
+  type Admin__Core_Groups__Show_ShortQuery,
+  type Admin__Core_Groups__Show_ShortQueryVariables
 } from "@/graphql/hooks";
 import { Loader } from "@/components/loader/loader";
 import { Input } from "@/components/ui/input";
@@ -30,13 +30,13 @@ export const GroupInputContent = ({ onSelect, values }: Props) => {
   const [search, setSearch] = useState("");
 
   const { data, isLoading } = useQuery({
-    queryKey: ["Core_Groups__Admin__Show_Short", { search }],
+    queryKey: ["Admin__Core_Groups__Show_Short", { search }],
     queryFn: async () => {
       const { data } = await fetcher<
-        Core_Groups__Admin__Show_ShortQuery,
-        Core_Groups__Admin__Show_ShortQueryVariables
+        Admin__Core_Groups__Show_ShortQuery,
+        Admin__Core_Groups__Show_ShortQueryVariables
       >({
-        query: Core_Groups__Admin__Show_Short,
+        query: Admin__Core_Groups__Show_Short,
         variables: {
           first: 10,
           search
@@ -67,7 +67,7 @@ export const GroupInputContent = ({ onSelect, values }: Props) => {
           <Loader className="p-2" />
         ) : (
           <GroupInputContentList
-            edges={data?.core_groups__admin__show.edges ?? []}
+            edges={data?.admin__core_groups__show.edges ?? []}
             onSelect={onSelect}
             values={values}
           />

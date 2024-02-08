@@ -8,7 +8,7 @@ import { EditGeneralAdminSettingsArgs } from "./dto/edit.args";
 import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
 
 @Resolver()
-export class GeneralAdminSettingsResolver {
+export class EditGeneralAdminSettingsResolver {
   constructor(private readonly service: EditGeneralAdminSettingsService) {}
 
   @Mutation(() => GeneralAdminSettingsObj)
