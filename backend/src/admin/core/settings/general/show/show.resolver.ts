@@ -13,7 +13,7 @@ export class ShowGeneralAdminSettingsResolver {
 
   @Query(() => ShowGeneralAdminSettingsObj)
   @UseGuards(AdminAuthGuards)
-  async admin_settings__general__show(): Promise<GeneralAdminSettingsObj> {
+  async admin__settings__general__show(): Promise<GeneralAdminSettingsObj> {
     return await this.service.show();
   }
 }

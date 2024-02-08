@@ -125,8 +125,7 @@ type Mutation {
   admin__core_themes__upload(file: Upload!): String!
   admin__forum_forums__change_position(id: Int!, index_to_move: Int!, parent_id: Int): String!
   admin__forum_forums__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
-  admin_core_plugins__test: String!
-  admin_install__create_database: String!
+  admin__install__create_database: String!
   admin_sessions__sign_out: String!
   admin_settings__general__edit(side_name: String!): GeneralAdminSettingsObj!
   core_groups__admin_create(name: [TextLanguageInput!]!): ShowAdminGroups!
@@ -174,8 +173,8 @@ type Query {
   admin__core_themes__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminThemesSortByArgs!]): ShowAdminThemesObj!
   admin__forum_forums__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsAdminObj!
   admin__install__layout: LayoutAdminInstallObj!
-  admin_sessions__authorization: AuthorizationAdminSessionsObj!
-  admin_settings__general__show: ShowGeneralAdminSettingsObj!
+  admin__sessions__authorization: AuthorizationAdminSessionsObj!
+  admin__settings__general__show: ShowGeneralAdminSettingsObj!
   core_languages__show(cursor: Int, first: Int, last: Int): ShowCoreLanguagesObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_middleware: CoreMiddlewareObj!
