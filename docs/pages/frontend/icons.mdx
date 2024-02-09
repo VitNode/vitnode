@@ -1,0 +1,61 @@
+# Icons
+
+VitNode uses [Lucide Icons](https://lucide.dev/icons/) and Emoji as icons. We're created a few components to help you use them.
+
+But, before we start...
+
+## Use JSX
+
+To use Lucide Icons, we're really recommend you to use JSX _(Insted of using `Dynamic Icon`)_. It's the best way to use them.
+
+```tsx
+import { Home, KeyRound } from "lucide-react";
+
+return (
+  <div>
+    <Home />
+    <KeyRound />
+  </div>
+);
+```
+
+### Dynamic Icon
+
+You can use dynamic icons with JSX too. Use this component if you want to download the icons as "text" from database or something like that.
+
+```tsx
+import { Icon, type IconLucideNames } from "@/components/icon/icon";
+
+return <Icon name="Home" />;
+```
+
+## Icon Input
+
+This component is a simple icon picker. You can use it to select a icon from Lucide Icons and Emoji.
+
+```tsx {8, 18}
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from "@/components/ui/form";
+import { IconInput } from "@/components/icon/input/icon-input";
+
+return (
+  <FormField
+    control={form.control}
+    name="icon"
+    render={({ field }) => (
+      <FormItem>
+        <FormLabel>Icon</FormLabel>
+        <FormControl>
+          <IconInput {...field} />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    )}
+  />
+);
+```

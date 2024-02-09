@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/form";
 import { TextLanguageInput } from "@/components/text-language-input";
 import { Separator } from "@/components/ui/separator";
-import { IconPickerInput } from "@/components/icon-pick-input/icon-pick-input";
+import { IconInput } from "@/components/icon/input/icon-input";
 
 export const MainContentCreateEditFormGroupsMembersAdmin = () => {
   const t = useTranslations("admin.members.groups.create_edit.form");
@@ -40,7 +40,7 @@ export const MainContentCreateEditFormGroupsMembersAdmin = () => {
           <FormItem>
             <FormLabel>Icon</FormLabel>
             <FormControl>
-              <IconPickerInput {...field} />
+              <IconInput {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>

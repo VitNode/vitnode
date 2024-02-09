@@ -14,13 +14,18 @@ const convertEmoji = (emoji: Emoji[]) => {
       : null;
   const result: Map<string, string> = new Map();
 
+  const skinToneIndex = localStorageSkinToneIndex
+    ? +localStorageSkinToneIndex
+    : 0;
+
   emoji.forEach(item => {
     if (item.emoticons) {
       item.emoticons.forEach(emoticon => {
         result.set(
           emoticon,
-          item.skins[localStorageSkinToneIndex ? +localStorageSkinToneIndex : 0]
-            .native
+          item.skins.length > skinToneIndex
+            ? item.skins[skinToneIndex].native
+            : item.skins[0].native
         );
       });
     }

@@ -1,5 +1,6 @@
 {
   "components": "Components",
+  "icons": "Icons",
   "pages": "Pages",
   "graphql": "GraphQL",
   "fetch": "Fetch and Revalidate Data",

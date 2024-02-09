@@ -69,8 +69,10 @@
       },
       "emoji": {
         "title": "Emoji",
+        "search_results": "Search Results",
         "categories": {
           "all": "All",
+          "frequent": "Frequently Used",
           "people": "Smileys & People",
           "nature": "Animals & Nature",
           "foods": "Food & Drink",
@@ -117,7 +119,19 @@
     },
     "icon_picker": {
       "title": "Choose an icon",
-      "placeholder": "Search icon..."
+      "remove": "Remove Icon",
+      "tabs": {
+        "icons": "Icons",
+        "emojis": "Emojis"
+      },
+      "icons": {
+        "placeholder": "Search icon...",
+        "not_found": "No icons found."
+      },
+      "emojis": {
+        "placeholder": "Search emoji...",
+        "not_found": "No emojis found."
+      }
     },
     "user-bar": {
       "sign_in": "Login",

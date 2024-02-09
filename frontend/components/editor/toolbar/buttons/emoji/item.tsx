@@ -6,10 +6,15 @@ import { Button } from "@/components/ui/button";
 
 interface Props {
   emoji: Emoji;
+  onClick: () => void;
   skinToneIndex: number;
 }
 
-export const ItemEmojiButtonEditor = ({ emoji, skinToneIndex }: Props) => {
+export const ItemEmojiButtonEditor = ({
+  emoji,
+  onClick,
+  skinToneIndex
+}: Props) => {
   const [editor] = useLexicalComposerContext();
   const icon =
     emoji.skins.length > skinToneIndex
@@ -18,7 +23,7 @@ export const ItemEmojiButtonEditor = ({ emoji, skinToneIndex }: Props) => {
 
   return (
     <Button
-      className="text-3xl"
+      className="text-3xl size-9"
       variant="ghost"
       size="icon"
       style={{
@@ -34,6 +39,7 @@ export const ItemEmojiButtonEditor = ({ emoji, skinToneIndex }: Props) => {
           }
 
           selection.insertNodes([$createTextNode(icon)]);
+          onClick();
         });
       }}
     >

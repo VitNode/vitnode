@@ -1,13 +1,7 @@
-import {
-  forwardRef,
-  useState,
-  type CSSProperties,
-  type ReactNode
-} from "react";
+import { useState } from "react";
 import data from "@emoji-mart/data";
 import type { Emoji, EmojiMartData } from "@emoji-mart/data";
 import { init, SearchIndex } from "emoji-mart";
-import { VirtuosoGrid, type Components } from "react-virtuoso";
 import { useTranslations } from "next-intl";
 
 import { ItemEmojiButtonEditor } from "./item";
@@ -19,9 +13,12 @@ import { CONFIG } from "@/config";
 init({ data });
 
 const emojiMart = data as EmojiMartData;
-const emojis = emojiMart.categories.flatMap(item => item.emojis);
 
-export const ContentEmojiButtonEditor = () => {
+interface Props {
+  setOpen: (open: boolean) => void;
+}
+
+export const ContentEmojiButtonEditor = ({ setOpen }: Props) => {
   const localStorageSkinToneIndex = localStorage.getItem(
     CONFIG.editor.skin_tone
   );
@@ -33,92 +30,102 @@ export const ContentEmojiButtonEditor = () => {
   );
   const t = useTranslations("core");
 
-  async function search(value: string) {
+  const search = async (value: string) => {
     setSearchValue(value);
     if (value === "") return setSearchResults(null);
 
     const emojis: Emoji[] = await SearchIndex.search(value);
     setSearchResults(emojis.map(emoji => emoji.id));
-  }
+  };
 
-  const List: Components["List"] = forwardRef(
-    (
-      { children, style }: { children?: ReactNode; style?: CSSProperties },
-      ref
-    ) => {
-      return (
-        <div
-          className="flex flex-wrap items-center relative"
-          style={style}
-          ref={ref}
-        >
-          {children}
-        </div>
-      );
-    }
-  );
-
-  List.displayName = "List";
+  const categories =
+    activeCategory === "all"
+      ? emojiMart.categories
+      : emojiMart.categories.filter(category => category.id === activeCategory);
 
   return (
     <>
-      <TabsEmojiButtonEditor
-        activeCategory={activeCategory}
-        setActiveCategory={setActiveCategory}
-        searchValue={searchValue}
-        onResetSearch={async () => {
-          if (searchValue.length === 0) return;
+      <div className="sticky top-0 z-10 bg-popover">
+        <TabsEmojiButtonEditor
+          activeCategory={activeCategory}
+          setActiveCategory={setActiveCategory}
+          searchValue={searchValue}
+          onResetSearch={async () => {
+            if (searchValue.length === 0) return;
 
-          await search("");
-        }}
-      />
-
-      <div className="px-2 py-3.5 flex gap-2">
-        <Input
-          className="h-9"
-          onChange={async e => {
-            await search(e.target.value);
+            await search("");
           }}
-          value={searchValue}
-          placeholder={t("search_placeholder")}
         />
-        <SkinSelectEmojiButtonEditor
-          skinToneIndex={skinToneIndex}
-          setSkinToneIndex={setSkinToneIndex}
-        />
+
+        <div className="px-5 py-3 flex gap-2">
+          <Input
+            className="h-9"
+            onChange={async e => {
+              await search(e.target.value);
+            }}
+            value={searchValue}
+            placeholder={t("search_placeholder")}
+          />
+          <SkinSelectEmojiButtonEditor
+            skinToneIndex={skinToneIndex}
+            setSkinToneIndex={setSkinToneIndex}
+          />
+        </div>
       </div>
 
       <div className="h-48">
-        {searchResults && searchResults.length === 0 ? (
-          <div className="px-2 pb-2 text-muted-foreground italic">
-            {t("no_results")}
+        {searchValue ? (
+          <div>
+            <div className="px-5 pb-2 text-sm sticky top-[6rem] bg-popover/80 backdrop-blur">
+              {t("editor.emoji.search_results")}
+            </div>
+            <div className="px-5 pb-3 pt-1">
+              {searchResults?.length === 0 ? (
+                <div className="p-2 text-muted-foreground">
+                  {t("no_results")}
+                </div>
+              ) : (
+                searchResults?.map(id => {
+                  const emoji = emojiMart.emojis[id];
+
+                  return (
+                    <ItemEmojiButtonEditor
+                      key={`search_${id}`}
+                      emoji={emoji}
+                      skinToneIndex={skinToneIndex}
+                      onClick={() => setOpen(false)}
+                    />
+                  );
+                })
+              )}
+            </div>
           </div>
         ) : (
-          <VirtuosoGrid
-            style={{ height: "100%" }}
-            data={
-              searchResults
-                ? searchResults
-                : emojiMart.categories.find(
-                    category => category.id === activeCategory
-                  )?.emojis ?? emojis
-            }
-            components={{
-              List
-            }}
-            overscan={200}
-            itemContent={(_index, id) => {
-              const emoji = emojiMart.emojis[id];
+          categories.map(category => {
+            return (
+              <div key={category.id}>
+                <div className="px-5 pb-2 text-sm sticky top-[6rem] bg-popover/80 backdrop-blur">
+                  {/*  eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                  {/*  @ts-expect-error */}
+                  {t(`editor.emoji.categories.${category.id}`)}
+                </div>
+                <div className="px-5 pb-3 pt-1">
+                  {category.emojis.map(id => {
+                    const emoji = emojiMart.emojis[id];
 
-              return (
-                <ItemEmojiButtonEditor
-                  key={id}
-                  emoji={emoji}
-                  skinToneIndex={skinToneIndex}
-                />
-              );
-            }}
-          />
+                    return (
+                      <ItemEmojiButtonEditor
+                        key={`${id}_${category.id}`}
+                        emoji={emoji}
+                        skinToneIndex={skinToneIndex}
+                        onClick={() => setOpen(false)}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })
         )}
       </div>
     </>
