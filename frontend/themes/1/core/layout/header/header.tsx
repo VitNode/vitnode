@@ -19,7 +19,7 @@ export const Header = () => {
         <div className="ml-auto sm:flex gap-2 hidden">
           <ThemeSwitcher />
           <DarkLightModeSwitcher />
-          <LanguageSwitcher />I
+          <LanguageSwitcher />
         </div>
 
         <UserBar />

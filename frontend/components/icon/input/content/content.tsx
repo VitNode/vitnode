@@ -84,7 +84,7 @@ export const ContentIconInput = (props: IconInputProps) => {
         </div>
       </div>
 
-      <div className="p-4 pt-0">
+      <div className="p-4 pt-0 max-h-64">
         <Suspense fallback={<Loader />}>
           {activeTab === Tab.Icon ? (
             <IconsContentIconInput search={search} {...props} />

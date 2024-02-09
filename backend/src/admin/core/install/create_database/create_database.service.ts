@@ -222,15 +222,18 @@ export class CreateDatabaseAdminInstallService {
     });
 
     // Create navigation
-    const nav = await this.databaseService.db.insert(core_nav).values([
-      {
-        href: "/"
-      },
-      {
-        href: "https://vitnode.com/",
-        external: true
-      }
-    ]);
+    const nav = await this.databaseService.db
+      .insert(core_nav)
+      .values([
+        {
+          href: "/"
+        },
+        {
+          href: "https://vitnode.com/",
+          external: true
+        }
+      ])
+      .returning();
 
     await this.databaseService.db.insert(core_nav_name).values([
       {
