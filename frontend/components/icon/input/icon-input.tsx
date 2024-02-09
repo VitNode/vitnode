@@ -2,7 +2,7 @@ import { Plus, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Suspense, forwardRef, lazy, useState } from "react";
 
-import { IconDynamic, type IconDynamicNames } from "@/components/icon-dynamic";
+import { Icon, type IconLucideNames } from "@/components/icon/icon";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -51,11 +51,14 @@ export const IconInput = forwardRef<HTMLButtonElement, Props>(
           </div>
 
           {value && (
-            <IconDynamic className="size-10" name={value as IconDynamicNames} />
+            <Icon
+              className="size-10 text-4xl"
+              name={value as IconLucideNames}
+            />
           )}
         </div>
 
-        <PopoverContent align="start" className="w-80">
+        <PopoverContent align="start" className="w-80 p-0">
           <Suspense fallback={<Loader />}>
             <Content onChange={onChange} value={value} setOpen={setOpen} />
           </Suspense>

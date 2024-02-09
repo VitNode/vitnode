@@ -1,7 +1,7 @@
 import * as Lucide from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { IconDynamic, type IconDynamicNames } from "@/components/icon-dynamic";
+import { Icon, type IconLucideNames } from "@/components/icon/icon";
 import type { IconInputProps } from "../content";
 import { Button } from "@/components/ui/button";
 
@@ -9,7 +9,7 @@ interface Props extends IconInputProps {
   search: string;
 }
 
-const iconNamesArray = Object.keys(Lucide.icons) as IconDynamicNames[];
+const iconNamesArray = Object.keys(Lucide.icons) as IconLucideNames[];
 
 export const IconsContentIconInput = ({
   onChange,
@@ -46,7 +46,7 @@ export const IconsContentIconInput = ({
             setOpen(false);
           }}
         >
-          <IconDynamic name={name} />
+          <Icon name={name} />
         </Button>
       ))}
     </>

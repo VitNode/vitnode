@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
-import type { IconDynamicNames } from "@/components/icon-dynamic";
+import type { IconLucideNames } from "@/components/icon/icon";
 import { Tabs } from "@/components/tabs/tabs";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 import { Input } from "@/components/ui/input";
@@ -9,7 +9,7 @@ import { IconsContentIconInput } from "./icons/icons";
 import { EmojisContentIconInput } from "./emojis/emojis";
 
 export interface IconInputProps {
-  onChange: (icon: IconDynamicNames | string) => void;
+  onChange: (icon: IconLucideNames | string) => void;
   setOpen: (open: boolean) => void;
   value: string;
 }
@@ -26,7 +26,7 @@ export const ContentIconInput = (props: IconInputProps) => {
 
   return (
     <>
-      <div className="flex flex-col gap-3 sticky top-0 bg-popover pb-3 z-10">
+      <div className="flex flex-col gap-3 sticky top-0 bg-popover z-10 p-4">
         <Tabs>
           <TabsTrigger
             id={Tab.Icon}
@@ -54,11 +54,13 @@ export const ContentIconInput = (props: IconInputProps) => {
         />
       </div>
 
-      {activeTab === Tab.Icon ? (
-        <IconsContentIconInput search={search} {...props} />
-      ) : (
-        <EmojisContentIconInput search={search} {...props} />
-      )}
+      <div className="p-4 pt-0">
+        {activeTab === Tab.Icon ? (
+          <IconsContentIconInput search={search} {...props} />
+        ) : (
+          <EmojisContentIconInput search={search} {...props} />
+        )}
+      </div>
     </>
   );
 };
