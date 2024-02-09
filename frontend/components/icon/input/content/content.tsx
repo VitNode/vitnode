@@ -1,12 +1,25 @@
-import { useState } from "react";
+import { Suspense, lazy, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import type { IconLucideNames } from "@/components/icon/icon";
 import { Tabs } from "@/components/tabs/tabs";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 import { Input } from "@/components/ui/input";
-import { IconsContentIconInput } from "./icons/icons";
-import { EmojisContentIconInput } from "./emojis/emojis";
+import { SkinSelectEmojiButtonEditor } from "@/components/editor/toolbar/buttons/emoji/skin-select";
+import { CONFIG } from "@/config";
+import { Loader } from "@/components/loader/loader";
+
+const EmojisContentIconInput = lazy(() =>
+  import("./emojis/emojis").then(module => ({
+    default: module.EmojisContentIconInput
+  }))
+);
+
+const IconsContentIconInput = lazy(() =>
+  import("./icons/icons").then(module => ({
+    default: module.IconsContentIconInput
+  }))
+);
 
 export interface IconInputProps {
   onChange: (icon: IconLucideNames | string) => void;
@@ -23,6 +36,12 @@ export const ContentIconInput = (props: IconInputProps) => {
   const t = useTranslations("core.icon_picker");
   const [search, setSearch] = useState("");
   const [activeTab, setActiveTab] = useState<Tab>(Tab.Icon);
+  const localStorageSkinToneIndex = localStorage.getItem(
+    CONFIG.editor.skin_tone
+  );
+  const [skinToneIndex, setSkinToneIndex] = useState(
+    localStorageSkinToneIndex ? +localStorageSkinToneIndex : 0
+  );
 
   return (
     <>
@@ -44,22 +63,39 @@ export const ContentIconInput = (props: IconInputProps) => {
           </TabsTrigger>
         </Tabs>
 
-        <Input
-          placeholder={t(
-            activeTab === Tab.Icon ? "icons.placeholder" : "emojis.placeholder"
+        <div className="flex gap-2">
+          <Input
+            placeholder={t(
+              activeTab === Tab.Icon
+                ? "icons.placeholder"
+                : "emojis.placeholder"
+            )}
+            onChange={e => setSearch(e.target.value)}
+            value={search}
+            className="h-9"
+          />
+
+          {activeTab === Tab.Emoji && (
+            <SkinSelectEmojiButtonEditor
+              skinToneIndex={skinToneIndex}
+              setSkinToneIndex={setSkinToneIndex}
+            />
           )}
-          onChange={e => setSearch(e.target.value)}
-          value={search}
-          className="h-9"
-        />
+        </div>
       </div>
 
       <div className="p-4 pt-0">
-        {activeTab === Tab.Icon ? (
-          <IconsContentIconInput search={search} {...props} />
-        ) : (
-          <EmojisContentIconInput search={search} {...props} />
-        )}
+        <Suspense fallback={<Loader />}>
+          {activeTab === Tab.Icon ? (
+            <IconsContentIconInput search={search} {...props} />
+          ) : (
+            <EmojisContentIconInput
+              search={search}
+              skinToneIndex={skinToneIndex}
+              {...props}
+            />
+          )}
+        </Suspense>
       </div>
     </>
   );
