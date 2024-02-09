@@ -59,7 +59,7 @@ export const IconInput = forwardRef<HTMLButtonElement, Props>(
         </div>
 
         <PopoverContent align="start" className="w-80 p-0">
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={<Loader className="p-4" />}>
             <Content onChange={onChange} value={value} setOpen={setOpen} />
           </Suspense>
         </PopoverContent>
