@@ -90,5 +90,73 @@ export const colorConverter = {
       s: v && (c / v) * 100,
       v: (v / 255) * 100
     };
+  },
+
+  RGBToHSL(r: number, g: number, b: number) {
+    // Make r, g, and b fractions of 1
+    r /= 255;
+    g /= 255;
+    b /= 255;
+
+    // Find greatest and smallest channel values
+    const cmin = Math.min(r, g, b),
+      cmax = Math.max(r, g, b),
+      delta = cmax - cmin;
+
+    let h = 0,
+      s = 0,
+      l = 0;
+
+    // Calculate hue
+    if (delta == 0) h = 0;
+    else if (cmax == r) h = ((g - b) / delta) % 6;
+    else if (cmax == g) h = (b - r) / delta + 2;
+    else h = (r - g) / delta + 4;
+
+    h = Math.round(h * 60);
+
+    // Make negative hues positive behind 360°
+    if (h < 0) h += 360;
+
+    // Calculate lightness
+    l = (cmax + cmin) / 2;
+
+    // Calculate saturation
+    s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+
+    // Multiply l and s by 100
+    s = +(s * 100).toFixed(1);
+    l = +(l * 100).toFixed(1);
+
+    return {
+      h,
+      s,
+      l
+    };
   }
+};
+
+type CheckColorReturn = "hex" | "hsl" | "rgb";
+
+export const checkColorType = (strColor: string): CheckColorReturn | null => {
+  const hexRegex = /^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+  if (hexRegex.test(strColor)) {
+    return "hex";
+  }
+
+  const hslRegex = /^hsl\(\s*\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%\s*\)$/;
+
+  if (hslRegex.test(strColor)) {
+    return "hsl";
+  }
+
+  const rgbWithCommaRegex =
+    /^rgb\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\)$/;
+  const rgbWithoutCommaRegex = /^rgb\(\s*\d{1,3}\s+\d{1,3}\s+\d{1,3}\s*\)$/;
+
+  if (rgbWithoutCommaRegex.test(strColor) || rgbWithCommaRegex.test(strColor)) {
+    return "rgb";
+  }
+
+  return null;
 };

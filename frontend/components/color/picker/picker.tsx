@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { useRef, type MouseEvent, useEffect } from "react";
+import { useRef, type MouseEvent, useEffect, type ChangeEvent } from "react";
 
-import { colorConverter } from "@/functions/colors";
+import { checkColorType, colorConverter } from "@/functions/colors";
 import type { ColorInputProps } from "../color-input";
 import { Input } from "@/components/ui/input";
 
@@ -35,15 +35,7 @@ export const ColorPicker = ({ onChange }: ColorInputProps) => {
     hslColor.current.lightness = (50 * (1 - x / 100) + 50) * (1 - y / 100);
   };
 
-  // Set the initial position of the selectors
-  useEffect(() => {
-    const [h, s, l] = defaultHSL
-      .replaceAll("%", "")
-      .trim()
-      .slice(4, -1)
-      .split(",")
-      .map(Number);
-
+  const setSelectorsFromHSL = (h: number, s: number, l: number) => {
     if (saturationSelectorRef.current && saturationRef.current) {
       const x = (s * 100) / 100;
       const y = 100 - (l * 100) / 50;
@@ -63,7 +55,54 @@ export const ColorPicker = ({ onChange }: ColorInputProps) => {
     }
 
     hslColor.current = { hue: h, saturation: s, lightness: l };
+  };
+
+  // Set the initial position of the selectors
+  useEffect(() => {
+    const [h, s, l] = defaultHSL
+      .replaceAll("hsl(", "")
+      .replaceAll(")", "")
+      .replaceAll("%", "")
+      .split(",")
+      .map(Number);
+
+    setSelectorsFromHSL(h, s, l);
   }, []);
+
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value.trim();
+    const type = checkColorType(input);
+
+    if (type === "hex") {
+      const hsl = colorConverter.hexToHSL(input);
+      if (!hsl) return;
+      setSelectorsFromHSL(hsl.h, hsl.s, hsl.l);
+    } else if (type === "rgb") {
+      const [r, g, b] = input.includes(",")
+        ? input
+            .replaceAll("rgb(", "")
+            .replaceAll(")", "")
+            .split(",")
+            .map(Number)
+        : input
+            .replaceAll("rgb(", "")
+            .replaceAll(")", "")
+            .split(" ")
+            .map(Number);
+
+      const hsl = colorConverter.RGBToHSL(r, g, b);
+      setSelectorsFromHSL(hsl.h, hsl.s, hsl.l);
+    } else if (type === "hsl") {
+      const [h, s, l] = input
+        .replaceAll("hsl(", "")
+        .replaceAll(")", "")
+        .replaceAll("%", "")
+        .split(",")
+        .map(Number);
+
+      setSelectorsFromHSL(h, s, l);
+    }
+  };
 
   const handleHueCursorPosition = (
     e: MouseEvent<HTMLDivElement> | MouseEvent
@@ -252,6 +291,7 @@ export const ColorPicker = ({ onChange }: ColorInputProps) => {
           // value={value}
           ref={inputRef}
           defaultValue={defaultHSL}
+          onChange={handleInput}
         />
 
         <div
