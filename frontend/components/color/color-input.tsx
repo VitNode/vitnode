@@ -1,9 +1,8 @@
-import { forwardRef, type ChangeEvent, useRef } from "react";
+import { forwardRef } from "react";
 
 import { Input } from "../ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { ColorPicker } from "./picker/picker";
-import { useMergeRefs } from "@/hooks/core/utils/use-merge-refs";
 
 export interface ColorInputProps {
   onChange: (value: string) => void;

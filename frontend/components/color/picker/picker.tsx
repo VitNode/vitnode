@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { useRef, type MouseEvent } from "react";
+import { useRef, type MouseEvent, useEffect } from "react";
 
 import { colorConverter } from "@/functions/colors";
 import type { ColorInputProps } from "../color-input";
@@ -12,6 +12,8 @@ interface HSL {
 }
 
 const MAX_HUE = 360;
+
+const defaultHSL = `hsl(189, 100%, 50%)`;
 
 export const ColorPicker = ({ onChange }: ColorInputProps) => {
   const hueRef = useRef<HTMLDivElement>(null);
@@ -32,6 +34,36 @@ export const ColorPicker = ({ onChange }: ColorInputProps) => {
     hslColor.current.saturation = x;
     hslColor.current.lightness = (50 * (1 - x / 100) + 50) * (1 - y / 100);
   };
+
+  // Set the initial position of the selectors
+  useEffect(() => {
+    const [h, s, l] = defaultHSL
+      .replaceAll("%", "")
+      .trim()
+      .slice(4, -1)
+      .split(",")
+      .map(Number);
+
+    if (saturationSelectorRef.current && saturationRef.current) {
+      const x = (s * 100) / 100;
+      const y = 100 - (l * 100) / 50;
+
+      const [saturationWidth, saturationHeight] = [
+        saturationRef.current.offsetWidth,
+        saturationRef.current.offsetHeight
+      ];
+
+      saturationSelectorRef.current.style.left = `${(x / 100) * saturationWidth}px`;
+      saturationSelectorRef.current.style.top = `${(y / 100) * saturationHeight}px`;
+    }
+
+    if (hueSelectorRef.current && hueRef.current) {
+      const hueWidth = hueRef.current.offsetWidth;
+      hueSelectorRef.current.style.left = `${(h / MAX_HUE) * hueWidth}px`;
+    }
+
+    hslColor.current = { hue: h, saturation: s, lightness: l };
+  }, []);
 
   const handleHueCursorPosition = (
     e: MouseEvent<HTMLDivElement> | MouseEvent
@@ -62,7 +94,7 @@ export const ColorPicker = ({ onChange }: ColorInputProps) => {
     hueSelectorRef.current.style.left = mousePosition.current.x + "px";
     const hue = (mousePosition.current.x / hueWidth) * MAX_HUE;
     hslColor.current.hue = hue;
-    saturationRef.current.style.background = `hsl(${hue},${100}%,${50}%)`;
+    saturationRef.current.style.background = `hsl(${hue}, ${100}%, ${50}%)`;
 
     const hex = colorConverter.hslToHex(
       hslColor.current.hue,
@@ -192,7 +224,7 @@ export const ColorPicker = ({ onChange }: ColorInputProps) => {
         className="size-52 relative border rounded-md overflow-hidden"
         ref={saturationRef}
         onMouseDown={event => handleMouseDown({ event, option: "saturation" })}
-        style={{ backgroundColor: "hsl(0, 100%, 50%)" }}
+        style={{ backgroundColor: defaultHSL }}
       >
         <div
           className="absolute top-0 left-0 w-full h-full"
@@ -219,13 +251,13 @@ export const ColorPicker = ({ onChange }: ColorInputProps) => {
           // onChange={handleTextInput}
           // value={value}
           ref={inputRef}
-          defaultValue={"#000000"}
+          defaultValue={defaultHSL}
         />
 
         <div
           className="size-9 bg-black shrink-0 rounded-md border"
           style={{
-            backgroundColor: inputRef.current?.value
+            backgroundColor: inputRef.current?.value || defaultHSL
           }}
         />
       </div>
