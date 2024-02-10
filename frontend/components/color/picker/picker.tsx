@@ -2,6 +2,8 @@
 import { useRef, type MouseEvent } from "react";
 
 import { colorConverter } from "@/functions/colors";
+import type { ColorInputProps } from "../color-input";
+import { Input } from "@/components/ui/input";
 
 interface HSL {
   hue: number;
@@ -11,29 +13,35 @@ interface HSL {
 
 const MAX_HUE = 360;
 
-export const ColorPicker = () => {
+export const ColorPicker = ({ onChange }: ColorInputProps) => {
   const hueRef = useRef<HTMLDivElement>(null);
   const hueSelectorRef = useRef<HTMLDivElement>(null);
   const saturationRef = useRef<HTMLDivElement>(null);
   const saturationSelectorRef = useRef<HTMLDivElement>(null);
   const isDown = useRef<boolean>(false);
   const optionActive = useRef<"saturation" | "hue" | undefined>(undefined);
-  const mousePosition = useRef<{ x: number; y?: number }>({ x: 0, y: 0 });
+  const mousePosition = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const inputRef = useRef<HTMLInputElement>(null);
   const hslColor = useRef<HSL>({
     hue: 0,
     saturation: 0,
     lightness: 0
   });
 
-  const calculateHslFromCoordinates = (x: number, y: number): void => {
+  const calculateHslFromCoordinates = (x: number, y: number) => {
     hslColor.current.saturation = x;
     hslColor.current.lightness = (50 * (1 - x / 100) + 50) * (1 - y / 100);
   };
 
   const handleHueCursorPosition = (
-    e: React.MouseEvent<HTMLDivElement> | MouseEvent
+    e: MouseEvent<HTMLDivElement> | MouseEvent
   ): void => {
-    if (!hueRef.current || !hueSelectorRef.current || !saturationRef.current)
+    if (
+      !hueRef.current ||
+      !hueSelectorRef.current ||
+      !saturationRef.current ||
+      !inputRef.current
+    )
       return;
 
     const hueRect = hueRef.current.getBoundingClientRect();
@@ -47,7 +55,8 @@ export const ColorPicker = () => {
           ? mousePositionX
           : mousePositionX > hueWidth
             ? hueWidth
-            : 0
+            : 0,
+      y: 0
     };
 
     hueSelectorRef.current.style.left = mousePosition.current.x + "px";
@@ -61,13 +70,20 @@ export const ColorPicker = () => {
       hslColor.current.lightness
     );
 
-    //  inputRef.current.value = hex;
+    const hsl = colorConverter.hexToHSL(hex);
+    if (!hsl) return;
+    inputRef.current.value = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
   };
 
   const handleSaturationCursorPosition = (
     e: MouseEvent<HTMLDivElement> | MouseEvent
   ): void => {
-    if (!saturationRef.current || !saturationSelectorRef.current) return;
+    if (
+      !saturationRef.current ||
+      !saturationSelectorRef.current ||
+      !inputRef.current
+    )
+      return;
 
     const saturationRect = saturationRef.current.getBoundingClientRect();
     const [saturationWidth, saturationHeight] = [
@@ -99,7 +115,7 @@ export const ColorPicker = () => {
 
     calculateHslFromCoordinates(
       (mousePosition.current.x * 100) / saturationWidth,
-      (mousePosition.current.y ?? 0 * 100) / saturationHeight
+      (mousePosition.current.y * 100) / saturationHeight
     );
 
     const hex = colorConverter.hslToHex(
@@ -108,7 +124,9 @@ export const ColorPicker = () => {
       hslColor.current.lightness
     );
 
-    // inputRef.current.value = hex;
+    const hsl = colorConverter.hexToHSL(hex);
+    if (!hsl) return;
+    inputRef.current.value = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
   };
 
   const handleMouseMove = (e: MouseEvent): void => {
@@ -139,7 +157,9 @@ export const ColorPicker = () => {
       hslColor.current.lightness
     );
 
-    //  props.handleColorSelected(hex);
+    const hsl = colorConverter.hexToHSL(hex);
+    if (!hsl) return;
+    onChange(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`);
   };
 
   const handleMouseDown = ({
@@ -172,6 +192,7 @@ export const ColorPicker = () => {
         className="size-52 relative border rounded-md overflow-hidden"
         ref={saturationRef}
         onMouseDown={event => handleMouseDown({ event, option: "saturation" })}
+        style={{ backgroundColor: "hsl(0, 100%, 50%)" }}
       >
         <div
           className="absolute top-0 left-0 w-full h-full"
@@ -191,8 +212,26 @@ export const ColorPicker = () => {
         />
       </div>
 
+      <div className="w-52 flex gap-2">
+        <Input
+          type="text"
+          className="h-9"
+          // onChange={handleTextInput}
+          // value={value}
+          ref={inputRef}
+          defaultValue={"#000000"}
+        />
+
+        <div
+          className="size-9 bg-black shrink-0 rounded-md border"
+          style={{
+            backgroundColor: inputRef.current?.value
+          }}
+        />
+      </div>
+
       {/* Hue */}
-      <div className="h-4">
+      <div className="h-4 w-52">
         <div
           ref={hueRef}
           className="h-full rounded-md relative flex items-center"
