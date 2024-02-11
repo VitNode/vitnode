@@ -2,16 +2,10 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { forwardRef, type ButtonHTMLAttributes } from "react";
 import { useTranslations } from "next-intl";
-import { TooltipPortal } from "@radix-ui/react-tooltip";
 
 import { cn } from "@/functions/classnames";
 import { Loader } from "../loader/loader";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger
-} from "./tooltip";
+import { TooltipButton } from "./button-tooltip";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 text-center rounded-md text-sm font-medium ring-offset-background transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&>svg]:size-4 [&>svg]:flex-shrink-0 no-underline",
@@ -101,17 +95,7 @@ const Button = forwardRef<HTMLButtonElement, IconButtonProps | ButtonProps>(
     };
 
     if (tooltip) {
-      return (
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>{content()}</TooltipTrigger>
-
-            <TooltipPortal>
-              <TooltipContent>{tooltip}</TooltipContent>
-            </TooltipPortal>
-          </Tooltip>
-        </TooltipProvider>
-      );
+      return <TooltipButton tooltip={tooltip} content={content} />;
     }
 
     return content();
