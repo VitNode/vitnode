@@ -1,3 +1,5 @@
+"use client";
+
 import { Plus, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Suspense, forwardRef, lazy, useState } from "react";

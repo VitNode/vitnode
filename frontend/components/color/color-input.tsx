@@ -1,3 +1,5 @@
+"use client";
+
 import { forwardRef, useEffect, useState } from "react";
 import type { HslColor } from "react-colorful";
 import { useTranslations } from "next-intl";
@@ -12,12 +14,12 @@ import { getHSLFromString } from "@/functions/colors";
 interface Props {
   onChange: (value: string) => void;
   value: string;
-  disabled?: boolean;
   disableRemoveColor?: boolean;
+  disabled?: boolean;
 }
 
 export const ColorInput = forwardRef<HTMLButtonElement, Props>(
-  ({ onChange, value, disabled, disableRemoveColor }, ref) => {
+  ({ disableRemoveColor, disabled, onChange, value }, ref) => {
     const t = useTranslations("core.colors");
     const [color, setColor] = useState<HslColor | null>(
       getHSLFromString(value)
