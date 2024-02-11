@@ -28,14 +28,16 @@ export const useCreateEditFormGroupsMembersAdmin = ({
 
   const formSchema = z.object({
     name: zodTextLanguageInputType.min(1, tCore("forms.empty")),
-    test: z.string()
+    test: z.string(),
+    color: z.string()
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: data?.name ?? [],
-      test: ""
+      test: "",
+      color: ""
     }
   });
 

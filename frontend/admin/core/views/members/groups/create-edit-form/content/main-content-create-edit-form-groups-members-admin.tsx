@@ -11,6 +11,7 @@ import {
 import { TextLanguageInput } from "@/components/text-language-input";
 import { Separator } from "@/components/ui/separator";
 import { IconInput } from "@/components/icon/input/icon-input";
+import { ColorInput } from "@/components/color/color-input";
 
 export const MainContentCreateEditFormGroupsMembersAdmin = () => {
   const t = useTranslations("admin.members.groups.create_edit.form");
@@ -41,6 +42,20 @@ export const MainContentCreateEditFormGroupsMembersAdmin = () => {
             <FormLabel>Icon</FormLabel>
             <FormControl>
               <IconInput {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={form.control}
+        name="color"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Color</FormLabel>
+            <FormControl>
+              <ColorInput {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>

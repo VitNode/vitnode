@@ -1,0 +1,37 @@
+# Colors
+
+Colors is the most important part of the design system. It is used to create a visual hierarchy and to communicate meaning. We're creating a set of components to help you manage colors in your application.
+
+## Color Input
+
+```tsx {8, 18}
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from "@/components/ui/form";
+import { ColorInput } from "@/components/color/color-input";
+
+return (
+  <FormField
+    control={form.control}
+    name="color"
+    render={({ field }) => (
+      <FormItem>
+        <FormLabel>Color</FormLabel>
+        <FormControl>
+          <ColorInput {...field} />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    )}
+  />
+);
+```
+
+### Props
+
+- `disabled` - _(Boolen)_ - If `true`, the input will be disabled,
+- `disableRemoveColor` - _(Boolen)_ - If `true`, the remove color button will be disabled

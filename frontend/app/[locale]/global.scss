@@ -2,21 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  @apply border-border;
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  a {
+    @apply text-primary;
+    @apply underline;
+    @apply hover:no-underline;
+    @apply cursor-pointer;
+  }
 }
 
-body {
-  @apply bg-background text-foreground;
-}
+@layer utilities {
+  .underline-strike-through {
+    text-decoration: underline line-through;
+  }
 
-a {
-  @apply text-primary;
-  @apply underline;
-  @apply hover:no-underline;
-  @apply cursor-pointer;
-}
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 
-.underline-strike-through {
-  text-decoration: underline line-through;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
