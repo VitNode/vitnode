@@ -2,6 +2,7 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { forwardRef, type ButtonHTMLAttributes } from "react";
 import { useTranslations } from "next-intl";
+import { TooltipPortal } from "@radix-ui/react-tooltip";
 
 import { cn } from "@/functions/classnames";
 import { Loader } from "../loader/loader";
@@ -105,7 +106,9 @@ const Button = forwardRef<HTMLButtonElement, IconButtonProps | ButtonProps>(
           <Tooltip>
             <TooltipTrigger asChild>{content()}</TooltipTrigger>
 
-            <TooltipContent>{tooltip}</TooltipContent>
+            <TooltipPortal>
+              <TooltipContent>{tooltip}</TooltipContent>
+            </TooltipPortal>
           </Tooltip>
         </TooltipProvider>
       );

@@ -25,6 +25,10 @@
     "confirm": "Confirm",
     "close": "Close",
     "default": "Default",
+    "colors": {
+      "none": "No Color",
+      "remove": "Remove color"
+    },
     "mobile_nav": {
       "home": "Home",
       "notifications": "Notifications",

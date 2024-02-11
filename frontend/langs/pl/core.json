@@ -25,6 +25,10 @@
     "confirm": "Zatwierdź",
     "close": "Zamknij",
     "default": "Domyślny",
+    "colors": {
+      "none": "Brak koloru",
+      "remove": "Usuń kolor"
+    },
     "mobile_nav": {
       "home": "Główna",
       "notifications": "Powiadomienia",

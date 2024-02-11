@@ -1,36 +1,82 @@
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useState } from "react";
+import type { HslColor } from "react-colorful";
+import { useTranslations } from "next-intl";
+import { X } from "lucide-react";
 
-import { Input } from "../ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { ColorPicker } from "./picker/picker";
+import { PickerColor } from "./picker/picker";
+import { Button } from "../ui/button";
+import { cn } from "@/functions/classnames";
+import { getHSLFromString } from "@/functions/colors";
 
-export interface ColorInputProps {
+interface Props {
   onChange: (value: string) => void;
   value: string;
+  disabled?: boolean;
+  disableRemoveColor?: boolean;
 }
 
-export const ColorInput = forwardRef<HTMLInputElement, ColorInputProps>(
-  ({ onChange, value }, ref) => {
-    // const handleTextInput = (e: ChangeEvent<HTMLInputElement>) => {
-    //   const input = e.target.value;
+export const ColorInput = forwardRef<HTMLButtonElement, Props>(
+  ({ onChange, value, disabled, disableRemoveColor }, ref) => {
+    const t = useTranslations("core.colors");
+    const [color, setColor] = useState<HslColor | null>(
+      getHSLFromString(value)
+    );
 
-    //   onChange(input);
-    // };
+    // Set color from value
+    useEffect(() => {
+      onChange(color ? `hsl(${color.h}, ${color.s}%, ${color.l}%)` : "");
+    }, [color]);
+
+    const isColorBrightness = color && color.l > 55;
 
     return (
       <Popover>
-        <PopoverTrigger asChild>
-          <Input
-            type="text"
-            // onChange={handleTextInput}
-            // value={value}
-            ref={ref}
-          />
-        </PopoverTrigger>
+        <div className="flex gap-2">
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              className={cn("justify-start flex-1", {
+                "text-black": color && isColorBrightness,
+                "text-white": color && !isColorBrightness
+              })}
+              style={{
+                backgroundColor: color
+                  ? `hsl(${color.h}, ${color.s}%, ${color.l}%)`
+                  : ""
+              }}
+              disabled={disabled}
+              ref={ref}
+            >
+              <span
+                className={cn({
+                  "text-muted-foreground": !color
+                })}
+              >
+                {color
+                  ? `hsl(${color.h}, ${color.s}%, ${color.l}%)`
+                  : t("none")}
+              </span>
+            </Button>
+          </PopoverTrigger>
+          {color !== null && !disableRemoveColor && (
+            <Button
+              className="shrink-0"
+              size="icon"
+              tooltip={t("remove")}
+              variant="destructiveGhost"
+              onClick={() => setColor(null)}
+            >
+              <X />
+            </Button>
+          )}
+        </div>
 
-        <PopoverContent align="start" className="w-auto">
-          <ColorPicker onChange={onChange} value={value} />
-        </PopoverContent>
+        {!disabled && (
+          <PopoverContent align="start" className="w-auto">
+            <PickerColor color={color} setColor={setColor} />
+          </PopoverContent>
+        )}
       </Popover>
     );
   }

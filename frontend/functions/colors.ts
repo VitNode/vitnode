@@ -1,3 +1,5 @@
+import type { HslColor } from "react-colorful";
+
 export const colorConverter = {
   hslToHex: (h: number, s: number, l: number): string => {
     l /= 100;
@@ -138,25 +140,38 @@ export const colorConverter = {
 
 type CheckColorReturn = "hex" | "hsl" | "rgb";
 
+export const hexRegex = /^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+export const hslRegex = /^hsl\(\s*\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%\s*\)$/;
+export const rgbWithCommaRegex =
+  /^rgb\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\)$/;
+export const rgbWithoutCommaRegex =
+  /^rgb\(\s*\d{1,3}\s+\d{1,3}\s+\d{1,3}\s*\)$/;
+
 export const checkColorType = (strColor: string): CheckColorReturn | null => {
-  const hexRegex = /^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
   if (hexRegex.test(strColor)) {
     return "hex";
   }
 
-  const hslRegex = /^hsl\(\s*\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%\s*\)$/;
-
   if (hslRegex.test(strColor)) {
     return "hsl";
   }
-
-  const rgbWithCommaRegex =
-    /^rgb\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\)$/;
-  const rgbWithoutCommaRegex = /^rgb\(\s*\d{1,3}\s+\d{1,3}\s+\d{1,3}\s*\)$/;
 
   if (rgbWithoutCommaRegex.test(strColor) || rgbWithCommaRegex.test(strColor)) {
     return "rgb";
   }
 
   return null;
+};
+
+export const getHSLFromString = (string: string): HslColor | null => {
+  if (!hslRegex.test(string)) return null;
+
+  const [h, s, l] = string
+    .replaceAll("hsl(", "")
+    .replaceAll(")", "")
+    .replaceAll("%", "")
+    .split(",")
+    .map(Number);
+
+  return { h, s, l };
 };
