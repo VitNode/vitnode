@@ -88,3 +88,22 @@ docker compose -f ./docker-compose-prod.yml -p vitnode-prod up -d
 ```
 
 </Steps>
+
+Test:
+
+```bash
+docker exec -it a2c2a4a0a774 /bin/sh
+```
+
+Install nodejs:
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
+apt-get install -y nodejs
+```
+
+pnpm
+
+```bash
+npm i pnpm -g
+```

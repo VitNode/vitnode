@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   postgres:
@@ -9,7 +9,8 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME:-vitnode}
     ports:
-      - '${DB_PORT:-5432}:${DB_PORT:-5432}'
+      - "${DB_PORT:-5432}:${DB_PORT:-5432}"
+    restart: on-failure
     volumes:
       - ./docker/prod/database:/var/lib/postgresql/data
     networks:
@@ -23,8 +24,9 @@ services:
     environment:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
       - REDIS_PORT=${REDIS_PORT:-6379}
+    restart: on-failure
     ports:
-      - '${REDIS_PORT:-6379}:${REDIS_PORT:-6379}'
+      - "${REDIS_PORT:-6379}:${REDIS_PORT:-6379}"
     networks:
       - vitnode
 
@@ -44,8 +46,9 @@ services:
       - DB_NAME=${DB_NAME:-vitnode}
       - LOGIN_TOKEN_SECRET=${LOGIN_TOKEN_SECRET}
       - FRONTEND_URL=${FRONTEND_URL}
+    restart: on-failure
     ports:
-      - '8080:8080'
+      - "8080:8080"
     depends_on:
       - postgres
       - redis
@@ -62,10 +65,11 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - NEXT_PUBLIC_GRAPHQL_URL=${NEXT_PUBLIC_GRAPHQL_URL}
+        - NEXT_PUBLIC_GRAPHQL_URL=http://backend:8080
         - NEXT_PUBLIC_CLIENT_GRAPHQL_URL=${NEXT_PUBLIC_CLIENT_GRAPHQL_URL:-}
+    restart: on-failure
     ports:
-      - '80:3000'
+      - "3000:3000"
     networks:
       - vitnode
     volumes:
