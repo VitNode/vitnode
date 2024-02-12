@@ -44,7 +44,7 @@ Click to see the [installation guide](https://vitnode.com/setup/installation).
 
 |         | Minimum        | Recommended    |
 | :------ | :------------- | :------------- |
-| CPU     | 1GHz (2+ core) | 1GHz (4+ core) |
+| CPU     | 1GHz (1+ core) | 2GHz (2+ core) |
 | RAM     | 2GB            | 4GB            |
 | Storage | 10GB           | 20GB           |
 | Network | 100Mbps        | 1Gbps          |
