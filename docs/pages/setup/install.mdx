@@ -1,0 +1,165 @@
+import { Steps } from "nextra/components";
+import { Callout } from "nextra/components";
+
+# Installation
+
+In this tutorial, we will use a server with `Debian` OS. Before you start, make sure you have everything from the [Requirements](/requirements) page.
+
+<Callout type="info" emoji="ℹ️">
+  You don't need install VitNode on your server now. You can test in before you
+  choose to install it. More info on the [Testing](/setup/testing) page.
+</Callout>
+
+<Callout type="error" emoji="❌">
+  You cannot use hosting for deploying VitNode. You need a server with root
+  access.
+</Callout>
+
+## Prepare your server
+
+<Steps>
+### Install Docker
+
+https://docs.docker.com/engine/install/debian/
+
+### Install NodeJS 20
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs
+```
+
+#### Install pnpm
+
+```bash
+npm i pnpm -g
+```
+
+</Steps>
+
+## Swap Memory (Optional)
+
+If you have a server with less than 2GB of RAM, you need to create a swap
+memory. Otherwise, the server will crash when building the project.
+
+If you have more than 2GB of RAM, you can skip this step.
+
+<Steps>
+
+### Check your current RAM and Swap Memory
+
+```bash
+free -h
+```
+
+### Create swap file
+
+```bash
+fallocate -l 2G /swapfile
+```
+
+### Secure swap file
+
+```bash
+chmod 600 /swapfile
+```
+
+### Create swap area
+
+```bash
+mkswap /swapfile
+```
+
+### Active swap
+
+```bash
+sudo swapon /swapfile
+```
+
+</Steps>
+
+## Connect your domain
+
+<Steps>
+### Create a new A record
+
+You need to point your domain to the server's IP address. You can do this by
+changing the DNS settings of your domain.
+
+### ???
+
+???
+
+</Steps>
+
+## SSL Certificate
+
+You need to install an SSL certificate to enable HTTPS on your domain.
+
+<Steps>
+### ???
+
+???
+
+</Steps>
+
+## Install VitNode
+
+<Steps>
+### Go to home directory
+
+```bash
+cd /home
+```
+
+### Clone VitNode
+
+```bash
+git clone https://github.com/aXenDeveloper/vitnode.git
+cd vitnode
+```
+
+### Install dependencies
+
+```bash
+pnpm i
+```
+
+### Generate config file
+
+```bash
+pnpm config:init
+```
+
+### Set env File
+
+Copy content from `.env.eample` file to `.env`.
+
+After copy content from example file **you need to** change:
+
+- `LOGIN_TOKEN_SECRET` - Login token must be `unique`,
+- `FRONTEND_URL` - Your frontend url, for example `https://frontend.vitnode.com`,
+- `DB_USER` - Database user,
+- `DB_PASSWORD` - Database password,
+- `REDIS_PASSWORD` - Redis password,
+- `NEXT_PUBLIC_CLIENT_GRAPHQL_URL` - Your backend url, for example `https://backend.vitnode.com`
+
+### Build the project
+
+```bash
+pnpm docker:prod
+```
+
+### Generate schema database
+
+```bash
+docker exec -it vitnode_backend /bin/sh
+pnpm db
+```
+
+</Steps>
+
+## Start VitNode
+
+Now when you open your website in the browser, you should see the wizard install page. Follow the instructions on the screen.
+
+Now, let's move to the [security server](setup/secure) part.

@@ -1,6 +1,5 @@
 {
-  "installation": "Installation",
+  "install": "Installation",
   "secure": "Secure Server",
-  "testing": "Testing",
-  "deployment": "Deployment"
+  "testing": "Testing"
 }
