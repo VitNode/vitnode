@@ -14,16 +14,40 @@ https://docs.docker.com/engine/install/debian/
 
 ### Swap Memory
 
-Check your current RAM and Swap Memory:
+#### Check your current RAM and Swap Memory
 
 ```bash
-free
+free -h
 ```
 
-Your Swap Memory should be:
+#### Create swap File
 
-- If you have `<= 2GB RAM`, your Swap Memory should be the same: 2GB,
-- If your have more then `> 2GB RAM`, your Swap Memory should be 25% of your RAM
+```bash
+fallocate -l 2G /swapfile
+```
+
+Change `2G` to:
+
+- If you have `<= 2GB RAM`, your Swap Memory should be the same: `2G`,
+- If your have more then `> 2GB RAM`, your Swap Memory should be 50% of your RAM. Example your have `8GB RAM` then your Swap Memory should be `4G`.
+
+#### Secure swap File
+
+```bash
+chmod 600 /swapfile
+```
+
+#### Create swap area
+
+```bash
+mkswap /swapfile
+```
+
+#### Active swap
+
+```bash
+sudo swapon /swapfile
+```
 
 </Steps>
 
