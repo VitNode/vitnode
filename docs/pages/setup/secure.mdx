@@ -1,3 +1,199 @@
+import { Steps } from "nextra/components";
+
 # Secure Server
 
-???
+## Disabling Root Login and Creating a Sudo User
+
+<Steps>
+
+### Create a New User
+
+```bash
+adduser {username}
+```
+
+Remember to replace `{username}` with the name of the user you want to create and `password` with the password you want to use.
+
+### Add the User to the Sudo Group
+
+```bash
+usermod -aG sudo {username}
+```
+
+Replace `{username}` with the name of the user you created in the previous step.
+
+### Generate an SSH Key Pair
+
+```bash
+sudo -u {username} ssh-keygen -t rsa
+```
+
+RSA key pair saves it in the user’s home directory, typically at `/home/{username}/.ssh/`.
+Change `{username}` to the name of the user you created in the previous step.
+
+### Add the Public Key to Authorized Keys
+
+```bash
+sudo -u {username} mkdir -p /home/{username}/.ssh
+sudo -u {username} chmod 700 /home/{username}/.ssh
+sudo -u {username} touch /home/user1/.ssh/authorized_keys
+sudo -u {username} chmod 600 /home/{username}/.ssh/authorized_keys
+cat /home/{username}/.ssh/id_rsa.pub >> /home/{username}/.ssh/authorized_keys
+```
+
+Change `{username}` to the name of the user you created in the first step.
+
+</Steps>
+
+## Update the System
+
+<Steps>
+
+### Update the Package List
+
+```bash
+
+sudo apt-get update
+```
+
+### Upgrade the Packages
+
+```bash
+
+sudo apt-get upgrade
+```
+
+</Steps>
+
+## Edit Configuration File
+
+<Steps>
+### Open the Configuration File
+
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+
+### Change the Default SSH Port
+
+Locate the line that reads `Port 22` and change it to a different port number.
+
+### Disable Root Login
+
+Locate the line that reads `PermitRootLogin yes` and change it to `PermitRootLogin no`.
+
+### Save and Exit
+
+Press `Ctrl + X`, then `Y`, then `Enter` to save and exit the file.
+
+### Restart SSH Service
+
+```bash
+service ssh restart
+```
+
+</Steps>
+
+## Firewall Configuration (iptables)
+
+<Steps>
+
+### Install iptables
+
+```bash
+sudo apt-get install iptables
+```
+
+### Configure iptables
+
+```bash
+sudo iptables -L -v
+```
+
+</Steps>
+
+## Firewall Configuration (UFW)
+
+<Steps>
+
+### Install UFW
+
+```bash
+sudo apt-get install ufw
+```
+
+If the reply states that the command was not found, install the firewall using this command:
+
+```bash
+sudo apt-get install ufw
+```
+
+### Configure UFW
+
+```bash
+sudo apt-get install ufw
+```
+
+### Verify status
+
+```bash
+sudo ufw status
+```
+
+</Steps>
+
+## Set Up Fail2Ban
+
+<Steps>
+
+### Install Fail2Ban
+
+```bash
+sudo apt-get install fail2ban
+```
+
+### Verify status
+
+```bash
+sudo systemctl status fail2ban
+```
+
+</Steps>
+
+## Disable IPv6
+
+<Steps>
+
+### Open the Configuration File
+
+```bash
+sudo nano /etc/sysctl.d/99-sysctl.conf
+```
+
+### Add the following lines to the file
+
+```bash
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+```
+
+### Save and Exit
+
+Press `Ctrl + X`, then `Y`, then `Enter` to save and exit the file.
+
+### Apply the changes
+
+```bash
+sudo sysctl -p
+```
+
+### Verify the changes
+
+```bash
+cat /proc/sys/net/ipv6/conf/all/disable_ipv6
+```
+
+If you see `1`, then IPv6 has been disabled.
+
+</Steps>

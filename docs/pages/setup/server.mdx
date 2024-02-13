@@ -91,7 +91,6 @@ Go to the `/etc/nginx/sites-available` directory and create a new file `frontend
 ```nginx {8}
 server {
   listen 443 ssl http2;
-  listen [::]:443 ssl http2;
 
   ssl_certificate         /etc/ssl/cert-vitnode.pem;
   ssl_certificate_key     /etc/ssl/key-vitnode.pem;
@@ -112,7 +111,6 @@ and create a new file `backend-vitnode.conf` with the following content:
 ```nginx {8}
 server {
   listen 443 ssl http2;
-  listen [::]:443 ssl http2;
 
   ssl_certificate         /etc/ssl/cert-vitnode.pem;
   ssl_certificate_key     /etc/ssl/key-vitnode.pem;
