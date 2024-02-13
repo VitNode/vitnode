@@ -63,6 +63,7 @@ server {
 
   location / {
     proxy_pass http://localhost:3000;
+    proxy_set_header X-Forwarded-Host $host;
   }
 }
 ```
@@ -81,6 +82,7 @@ server {
 
   location / {
     proxy_pass http://localhost:8080;
+    proxy_set_header X-Forwarded-Host $host;
   }
 }
 ```

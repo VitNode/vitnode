@@ -17,23 +17,12 @@ const config = () => {
     protocol: new URL(envBackend).protocol.replace(":", "")
   };
 
-  const allowedOrigins = ["localhost:3000"];
-
-  if (process.env.NEXT_PUBLIC_FRONTEND_URL) {
-    allowedOrigins.push(process.env.NEXT_PUBLIC_FRONTEND_URL);
-  }
-
   return {
     // logging: {
     //   fetches: {
     //     fullUrl: true
     //   }
     // },
-    experimental: {
-      serverActions: {
-        allowedOrigins
-      }
-    },
     output: "standalone",
     transpilePackages: ["lucide-react"],
     images: {
