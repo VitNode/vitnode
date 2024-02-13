@@ -19,8 +19,8 @@ const config = () => {
 
   const allowedOrigins = ["localhost:3000"];
 
-  if (process.env.FRONTEND_URL) {
-    allowedOrigins.push(process.env.FRONTEND_URL);
+  if (process.env.NEXT_PUBLIC_FRONTEND_URL) {
+    allowedOrigins.push(process.env.NEXT_PUBLIC_FRONTEND_URL);
   }
 
   return {
