@@ -48,6 +48,7 @@ Click to see the [installation guide](https://vitnode.com/setup/installation).
 | RAM     | 2GB            | 8GB            |
 | Storage | 10GB           | 20GB           |
 | Network | 100Mbps        | 300Mbps        |
+| Https   | Yes            | Yes            |
 
 ## 🧑‍💻 Browser
 

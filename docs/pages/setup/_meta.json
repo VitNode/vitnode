@@ -1,4 +1,6 @@
 {
+  "domain": "Domain",
+  "server": "Server",
   "install": "Installation",
   "secure": "Secure Server",
   "testing": "Testing"

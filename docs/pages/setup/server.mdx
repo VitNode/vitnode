@@ -1,0 +1,150 @@
+import { Steps } from "nextra/components";
+import { Callout } from "nextra/components";
+
+# Server
+
+In this tutorial, we will use a server with `Debian` OS. Before you start, make sure you have everything from the [Requirements](/requirements) page.
+
+<Callout type="info" emoji="ℹ️">
+  You don't need install VitNode on your server now. You can test in before you
+  choose to install it. More info on the [Testing](/setup/testing) page.
+</Callout>
+
+<Callout type="error" emoji="❌">
+  You cannot use hosting for deploying VitNode. You need a server with root
+  access.
+</Callout>
+
+## Prepare your server
+
+<Steps>
+### Install Docker
+
+https://docs.docker.com/engine/install/debian/
+
+### Install NodeJS 20 with pnpm
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs && npm i pnpm -g
+```
+
+### Install Ngnix
+
+```bash
+sudo apt update && sudo apt install nginx
+```
+
+</Steps>
+
+## Swap Memory
+
+Swap memory is a space on a disk that is used when the amount of physical RAM memory is full. When a Linux system runs out of RAM, inactive pages are moved from the RAM to the swap space.
+
+<Steps>
+
+### Quick ???
+
+```bash
+sudo fallocate -l 2G /swapfile && sudo chmod 600 /swapfile && sudo mkswap /swapfile && sudo swapon /swapfile
+```
+
+### Create swap file
+
+```bash
+fallocate -l 2G /swapfile
+```
+
+### Secure swap file
+
+```bash
+chmod 600 /swapfile
+```
+
+### Create swap area
+
+```bash
+mkswap /swapfile
+```
+
+### Active swap
+
+```bash
+sudo swapon /swapfile
+```
+
+</Steps>
+
+## Configuration Nginx
+
+<Steps>
+
+### Delete default configuration
+
+```bash
+rm /etc/nginx/sites-enabled/default && rm /etc/nginx/sites-available/default
+```
+
+### Create config file
+
+Go to the `/etc/nginx/sites-available` directory and create a new file `frontend-vitnode.conf` with the following content:
+
+```nginx {8}
+server {
+  listen 443 ssl http2;
+  listen [::]:443 ssl http2;
+
+  ssl_certificate         /etc/ssl/cert-vitnode.pem;
+  ssl_certificate_key     /etc/ssl/key-vitnode.pem;
+
+  server_name frontend.vitnode.com;
+
+  location / {
+    proxy_pass http://localhost:3000;
+    proxy_set_header X-Forwarded-Host $host;
+  }
+}
+```
+
+Change `server_name` to your domain.
+
+and create a new file `backend-vitnode.conf` with the following content:
+
+```nginx {8}
+server {
+  listen 443 ssl http2;
+  listen [::]:443 ssl http2;
+
+  ssl_certificate         /etc/ssl/cert-vitnode.pem;
+  ssl_certificate_key     /etc/ssl/key-vitnode.pem;
+
+  server_name backend.vitnode.com;
+
+  location / {
+    proxy_pass http://localhost:8080;
+    proxy_set_header X-Forwarded-Host $host;
+  }
+}
+```
+
+Change `server_name` to your domain.
+
+### Create a symbolic link
+
+```bash
+ln -s /etc/nginx/sites-available/frontend-vitnode.conf /etc/nginx/sites-enabled/ && ln -s /etc/nginx/sites-available/backend-vitnode.conf /etc/nginx/sites-enabled/
+```
+
+### Upload SSL certificate
+
+Open the `/etc/ssl` directory and upload:
+
+- SSL certificate - `cert-vitnode.pem`,
+- Key - `key-vitnode.pem`
+
+### Restart Nginx
+
+```bash
+systemctl restart nginx
+```
+
+</Steps>
