@@ -34,6 +34,69 @@ curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y 
 npm i pnpm -g
 ```
 
+## Install Ngnix
+
+```bash
+sudo apt update
+sudo apt install nginx
+```
+
+</Steps>
+
+## Configure Nginx
+
+<Steps>
+
+### Configuration file
+
+frontend-vitnode.conf:
+
+```nginx
+server {
+  listen 443 ssl http2;
+  listen [::]:443 ssl http2;
+
+  ssl_certificate         /etc/ssl/cert.pem;
+  ssl_certificate_key     /etc/ssl/key.pem;
+
+  server_name frontend.vitnode.com;
+
+  location / {
+    proxy_pass http://localhost:3000;
+  }
+}
+```
+
+backend-vitnode.conf:
+
+```nginx
+server {
+  listen 443 ssl http2;
+  listen [::]:443 ssl http2;
+
+  ssl_certificate         /etc/ssl/cert.pem;
+  ssl_certificate_key     /etc/ssl/key.pem;
+
+  server_name backend.vitnode.com;
+
+  location / {
+    proxy_pass http://localhost:8080;
+  }
+}
+```
+
+```bash
+ln -s /etc/nginx/sites-available/frontend-vitnode.conf /etc/nginx/sites-enabled/ && ln -s /etc/nginx/sites-available/backend-vitnode.conf /etc/nginx/sites-enabled/
+```
+
+### Restart Nginx
+
+```bash
+# apt install ufw
+# sudo ufw allow 'Nginx Full'
+systemctl restart nginx
+```
+
 </Steps>
 
 ## Swap Memory (Optional)

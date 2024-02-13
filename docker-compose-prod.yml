@@ -65,6 +65,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
+        - FRONTEND_URL=${FRONTEND_URL}
         - NEXT_PUBLIC_GRAPHQL_URL=http://backend:8080
         - NEXT_PUBLIC_CLIENT_GRAPHQL_URL=${NEXT_PUBLIC_CLIENT_GRAPHQL_URL:-}
     restart: on-failure
