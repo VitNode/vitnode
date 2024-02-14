@@ -44,6 +44,8 @@ That created:
 
 If you don't want to use subdomains, you can add `@` for the name of the record and point it to your server's IP address.
 
+Make sure that the proxy status is set to `Proxied` for your domain.
+
 </Steps>
 
 ## SSL Certificate
@@ -58,13 +60,9 @@ If you are using [Cloudflare](https://www.cloudflare.com/), you can use Cloudfla
 
 Open the panel for your domain on [Cloudflare](https://www.cloudflare.com/).
 
-### Proxy status
-
-Make sure that the proxy status is set to "Proxied" for your domain.
-
 ### SSL/TLS
 
-Go to the "SSL/TLS => `Overview`" tab and make sure that the SSL certificate is set to `Full (strict)` _(Recommended)_ or `Full`.
+Go to the "SSL/TLS => `Overview`" tab and make sure that the SSL certificate is set to `Full (strict)`, `Full` or `Flexible`.
 
 <Image src={sslCf} alt="SSL Overview in CloudFlare" />
 

@@ -11,7 +11,13 @@ Secure in the most important part of the server. In this guide, we will cover th
 ## Update the System & Packages
 
 ```bash
-apt-get update && apt-get upgrade -d
+apt-get update && apt-get upgrade -d -y
+```
+
+## Install Nginx
+
+```bash
+apt update && apt install nginx -y
 ```
 
 ## Fail2Ban
@@ -21,7 +27,7 @@ apt-get update && apt-get upgrade -d
 ### Install
 
 ```bash
-apt-get install fail2ban && systemctl enable fail2ban && systemctl start fail2ban
+apt-get install fail2ban -y && echo -e "[sshd]\nbackend=systemd\nenabled=true" | tee /etc/fail2ban/jail.local && systemctl enable fail2ban && systemctl start fail2ban
 ```
 
 ### Verify status
@@ -33,35 +39,6 @@ systemctl status fail2ban
 Status should be `Active: active (running)`.
 
 <Image src={fail2banStatus} alt="fail2ban status" />
-
-</Steps>
-
-## Firewall (UFW)
-
-<Steps>
-
-### Install UFW
-
-```bash
-apt-get install ufw
-```
-
-### Configure
-
-```bash
-ufw default deny incoming
-ufw default allow outgoing
-ufw allow 'Nginx Full'
-ufw allow ssh
-```
-
-next ??
-
-### Enable
-
-```bash
-ufw enable
-```
 
 </Steps>
 
@@ -90,7 +67,7 @@ Press `Ctrl + X`, then `Y`, then `Enter` to save and exit the file.
 ### Apply the changes
 
 ```bash
-sudo sysctl -p
+sysctl -p
 ```
 
 ### Verify the changes
@@ -115,15 +92,25 @@ In this part of the guide, we will create a new user and give them sudo privileg
 adduser {username}
 ```
 
+### Install Sudo
+
+```bash
+apt-get install sudo -y
+```
+
 ### Add user to Sudo Group
 
 ```bash
 usermod -aG sudo {username}
 ```
 
-</Steps>
+### Restart SSH Service
 
-????
+```bash
+systemctl restart sshd
+```
+
+</Steps>
 
 ## Generate SSL
 
@@ -182,7 +169,7 @@ Now try to connect to your server using the private key and the username you cre
 ### Disable Password Authentication
 
 ```bash
-nano /etc/ssh/sshd_config
+sudo nano /etc/ssh/sshd_config
 ```
 
 Locate the line that reads `#PasswordAuthentication yes` and change it to `PasswordAuthentication no`.
@@ -194,7 +181,7 @@ Press `Ctrl + X`, then `Y`, then `Enter` to save and exit the file.
 ### Restart SSH Service
 
 ```bash
-systemctl restart sshd
+sudo systemctl restart sshd
 ```
 
 </Steps>
@@ -212,7 +199,7 @@ sudo nano /etc/ssh/sshd_config
 
 ### Change the Default SSH Port
 
-Locate the line that reads `Port 22` and change it to a different port number.
+Locate the line that reads `#Port 22` and change it to `Port X` where is is a different port number.
 
 ### Disable Root Login
 
@@ -222,10 +209,40 @@ Locate the line that reads `PermitRootLogin yes` and change it to `PermitRootLog
 
 Press `Ctrl + X`, then `Y`, then `Enter` to save and exit the file.
 
-### Restart SSH Service
+</Steps>
+
+## Firewall (UFW)
+
+<Steps>
+
+### Install UFW
 
 ```bash
-systemctl restart sshd
+sudo apt-get install ufw -y
+```
+
+### Configure
+
+```bash
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 'Nginx Full'
+sudo ufw allow ssh
+sudo ufw allow {port}
+```
+
+Replace `{port}` with the port number you set in the SSH configuration file.
+
+### Enable
+
+```bash
+sudo ufw enable
 ```
 
 </Steps>
+
+## Restart SSH Service
+
+```bash
+sudo systemctl restart sshd
+```
