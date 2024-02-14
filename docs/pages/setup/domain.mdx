@@ -1,4 +1,9 @@
 import { Steps } from "nextra/components";
+import Image from "next/image";
+import dnsCf from "@/assets/setup/domain/dns-cf.png";
+import sslCf from "@/assets/setup/domain/ssl-cf.png";
+import createOriginSsfCf from "@/assets/setup/domain/create-origin-ssl-cf.png";
+import saveOriginSsfCf from "@/assets/setup/domain/save-origin-ssl-cf.png";
 
 # Domain
 
@@ -26,9 +31,18 @@ Add your domain to [Cloudflare](https://www.cloudflare.com/). You can do this by
 
 ### Add records
 
-Add `A` record for your domain and point it to your server's IP address.
+You need to add `A` records and point it to your server's IP address for `frontend` and `backend` domains.
 
-Frontend and Backend ???
+For example, if your domain is `vitnode.com`, you can add the following records:
+
+<Image src={dnsCf} alt="DNS Records in CloudFlare" />
+
+That created:
+
+- frontend.vitnode.com
+- backend.vitnode.com
+
+If you don't want to use subdomains, you can add `@` for the name of the record and point it to your server's IP address.
 
 </Steps>
 
@@ -52,6 +66,8 @@ Make sure that the proxy status is set to "Proxied" for your domain.
 
 Go to the "SSL/TLS => `Overview`" tab and make sure that the SSL certificate is set to `Full (strict)` _(Recommended)_ or `Full`.
 
+<Image src={sslCf} alt="SSL Overview in CloudFlare" />
+
 ### Always use HTTPS
 
 Go to the "SSL/TLS => `Edge Certificates`" tab and make sure that the "Always use HTTPS" option is enabled.
@@ -60,11 +76,18 @@ Go to the "SSL/TLS => `Edge Certificates`" tab and make sure that the "Always us
 
 Go to the "SSL/TLS => `Origin Certificates`" tab and click on the `Create Certificate` button. Fill in the form with `RSA (2048)` private key type and click on the `Next` button.
 
+<Image src={createOriginSsfCf} alt="Create Origin Server SSL in CloudFlare" />
+
 ### Save the certificate
 
-Save the certificate.
+After you click on the `Next` button, you will see the certificate and private key.
 
-??
+<Image src={saveOriginSsfCf} alt="Save Origin Server SSL in CloudFlare" />
+
+Create a new files where:
+
+- `Origin Certificate` - Save the certificate to a file with the `cert-vitnode.pem` filename,
+- `Private Key` - Save the private key to a file with the `key-vitnode.pem` filename.
 
 Save these certificates, you will need to use the certificate and private key when you configure your server.
 
@@ -80,4 +103,4 @@ Go to the "Rules => `Configuration Rules`" tab and add click on the `Add a rule`
 
 ## Server
 
-Now let's configure the server. Go to the [next step](/setup/server) to continue.
+Now let's configure the server. Go to the [next step](/setup/secure) to continue.

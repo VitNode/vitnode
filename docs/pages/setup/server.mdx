@@ -1,19 +1,8 @@
 import { Steps } from "nextra/components";
-import { Callout } from "nextra/components";
 
-# Server
+# Configuration Server
 
-In this tutorial, we will use a server with `Debian` OS. Before you start, make sure you have everything from the [Requirements](/requirements) page.
-
-<Callout type="info" emoji="ℹ️">
-  You don't need install VitNode on your server now. You can test in before you
-  choose to install it. More info on the [Testing](/setup/testing) page.
-</Callout>
-
-<Callout type="error" emoji="❌">
-  You cannot use hosting for deploying VitNode. You need a server with root
-  access.
-</Callout>
+Now let's configure the server to run the application. We will install Docker, NodeJS, Nginx, and configure the swap memory.
 
 ## Prepare your server
 
@@ -22,7 +11,7 @@ In this tutorial, we will use a server with `Debian` OS. Before you start, make 
 
 https://docs.docker.com/engine/install/debian/
 
-### Install NodeJS 20 with pnpm
+### Install NodeJS 20 & pnpm
 
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs && npm i pnpm -g

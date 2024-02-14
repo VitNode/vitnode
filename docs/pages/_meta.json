@@ -40,6 +40,12 @@
       "breadcrumb": false
     }
   },
+  "testing": {
+    "title": "🧪 Testing Locally",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
   "-- For Developers": {
     "type": "separator",
     "title": "For Developers"

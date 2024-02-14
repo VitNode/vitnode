@@ -1,11 +1,11 @@
-import { useRouter } from 'next/router';
-import { DocsThemeConfig } from 'nextra-theme-docs';
+import { useRouter } from "next/router";
+import { DocsThemeConfig } from "nextra-theme-docs";
 
 const config: DocsThemeConfig = {
   logo: (
     <svg
       viewBox="0 0 546 129"
-      style={{ height: '2.5rem' }}
+      style={{ height: "2.5rem" }}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -44,24 +44,25 @@ const config: DocsThemeConfig = {
     text: <span>VitNode © {new Date().getFullYear()}</span>
   },
   project: {
-    link: 'https://github.com/aXenDeveloper/vitnode/'
+    link: "https://github.com/aXenDeveloper/vitnode/"
   },
-  docsRepositoryBase: 'https://github.com/aXenDeveloper/vitnode/tree/canary/docs',
+  docsRepositoryBase:
+    "https://github.com/aXenDeveloper/vitnode/tree/canary/docs",
   useNextSeoProps() {
     const { asPath } = useRouter();
-    if (asPath !== '/') {
+    if (asPath !== "/") {
       return {
-        titleTemplate: '%s – VitNode'
+        titleTemplate: "%s – VitNode"
       };
     }
 
     return {
-      titleTemplate: 'VitNode - Headless CMS in NodeJS and React'
+      titleTemplate: "VitNode - CMS built with NodeJS and React"
     };
   },
   sidebar: {
     titleComponent({ title, type }) {
-      if (type === 'separator') {
+      if (type === "separator") {
         return <span className="cursor-default">{title}</span>;
       }
       return <>{title}</>;
@@ -69,7 +70,7 @@ const config: DocsThemeConfig = {
     toggleButton: true
   },
   banner: {
-    key: '0.0.0-alpha',
+    key: "0.0.0-alpha",
     text: "🛠️ VitNode is still in development and hasn't any release yet! You can try it out, but it is not recommended to use it now."
   }
 };
