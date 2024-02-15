@@ -5,7 +5,8 @@ import { useTranslations } from "next-intl";
 
 import { cn } from "@/functions/classnames";
 import { Loader } from "../loader/loader";
-import { TooltipButton } from "./button-tooltip";
+import { TooltipPortalButton } from "./button-tooltip-portal";
+import { Tooltip, TooltipProvider, TooltipTrigger } from "./tooltip";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 text-center rounded-md text-sm font-medium ring-offset-background transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&>svg]:size-4 [&>svg]:flex-shrink-0 no-underline",
@@ -75,10 +76,12 @@ const Button = forwardRef<HTMLButtonElement, IconButtonProps | ButtonProps>(
             className={cn(buttonVariants({ variant, size, className }))}
             ref={ref}
             {...props}
+            type="button"
+            aria-label={t("loading")}
             disabled
           >
             <Loader small />
-            {t("loading")}
+            {size !== "icon" && t("loading")}
           </Comp>
         );
       }
@@ -95,7 +98,15 @@ const Button = forwardRef<HTMLButtonElement, IconButtonProps | ButtonProps>(
     };
 
     if (tooltip) {
-      return <TooltipButton tooltip={tooltip} content={content} />;
+      return (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>{content()}</TooltipTrigger>
+
+            <TooltipPortalButton tooltip={tooltip} />
+          </Tooltip>
+        </TooltipProvider>
+      );
     }
 
     return content();

@@ -1,5 +1,7 @@
 {
-  "installation": "Installation",
-  "secure": "Secure Server",
-  "testing": "Testing"
+  "overview": "Overview",
+  "domain": "Domain",
+  "server": "Configuration Server",
+  "install": "Installation",
+  "secure": "Secure Server"
 }

@@ -11,6 +11,7 @@ import { convertUnixTime, currentDate } from "@/functions/date";
 import { DatabaseService } from "@/database/database.service";
 import { core_admin_sessions } from "@/src/admin/core/database/schema/admins";
 import { core_sessions } from "@/src/admin/core/database/schema/sessions";
+import { CustomError } from "@/utils/errors/CustomError";
 
 interface CreateSessionArgs extends Ctx {
   email: string;
@@ -55,6 +56,14 @@ export class SignInCoreSessionsService {
 
     if (!device) {
       throw new AccessDeniedError();
+    }
+
+    if (device.uagent_os === "Uagent from tests") {
+      throw new CustomError({
+        code: "INVALID_DEVICE",
+        message:
+          "We have detected that you are using an invalid device. Please try again."
+      });
     }
 
     const login_token = this.jwtService.sign(

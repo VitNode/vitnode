@@ -16,7 +16,8 @@
     "frontend:dev": "cd frontend && pnpm dev",
     "docker:test": "docker-compose -f ./docker-compose-test.yml -p vitnode-test up -d",
     "docker:dev": "docker-compose -f ./docker-compose-dev.yml -p vitnode-dev up -d",
-    "docker:prod": "docker-compose -f ./docker-compose-prod.yml -p vitnode-prod up -d",
+    "docker:prod": "pnpm config:init && sudo docker compose -f ./docker-compose-prod.yml -p vitnode-prod up -d && sudo docker exec -d vitnode_backend /bin/sh -c \"pnpm db\"",
+    "docker:prod:rebuild": "pnpm config:init && sudo docker compose -f ./docker-compose-prod.yml -p vitnode-prod up -d --build && sudo docker exec -d vitnode_backend /bin/sh -c \"pnpm db\"",
     "lint": "cd backend && pnpm lint && cd .. && cd frontend && pnpm lint && cd ..",
     "lint:fix": "cd backend && pnpm lint:fix && cd .. && cd frontend && pnpm lint:fix && cd .."
   },
