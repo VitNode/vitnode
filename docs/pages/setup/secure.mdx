@@ -291,7 +291,9 @@ sudo systemctl restart sshd
 ## Set permissions
 
 ```bash
-sudo chmod 775 /home/vitnode && sudo chown -R {username}:{username} /home/vitnode
+git config --global --add safe.directory /home/vitnode &&\
+ sudo chmod 775 /home/vitnode &&\
+ sudo chown -R {username}:{username} /home/vitnode
 ```
 
 Replace `{username}` with your username.

@@ -77,8 +77,8 @@ Now, let's move to the [security server](setup/secure) part.
 ## Reinstall VitNode (Experimental)
 
 ```bash
-docker rm -v -f $(docker ps -qa)
-docker rmi $(docker images -a -q)
-docker system prune -a
-rm -r /home/vitnode/docker && rm /home/vitnode/frontend/config/config.json
+sudo docker rm -v -f $(docker ps -qa)
+sudo docker rmi $(docker images -a -q)
+sudo docker system prune -a
+sudo rm -r /home/vitnode/docker && sudo rm /home/vitnode/frontend/config/config.json
 ```
