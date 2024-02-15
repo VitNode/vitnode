@@ -70,8 +70,8 @@ const config: DocsThemeConfig = {
     toggleButton: true
   },
   banner: {
-    key: "0.0.0-alpha",
-    text: "🛠️ VitNode is still in development and hasn't any release yet! You can try it out, but it is not recommended to use it now."
+    key: "0.0.1-alpha",
+    text: "🛠️ VitNode is still in development! You can try it out, but it is not recommended to use it now in production."
   }
 };
 

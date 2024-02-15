@@ -4,6 +4,7 @@ import dnsCf from "@/assets/setup/domain/dns-cf.png";
 import sslCf from "@/assets/setup/domain/ssl-cf.png";
 import createOriginSsfCf from "@/assets/setup/domain/create-origin-ssl-cf.png";
 import saveOriginSsfCf from "@/assets/setup/domain/save-origin-ssl-cf.png";
+import defaultDnsCf from "@/assets/setup/domain/default-dns-cf.png";
 
 # Domain
 
@@ -42,7 +43,12 @@ That created:
 - frontend.vitnode.com
 - backend.vitnode.com
 
-If you don't want to use subdomains, you can add `@` for the name of the record and point it to your server's IP address.
+If you don't want to use subdomains, you can add `@` for the name of the record and point it to your server's IP address for frontend. If you want to redirect from `www` to `non-www` add `www` for the name of the record and point it to your server's IP address for frontend.
+
+<Image
+  src={defaultDnsCf}
+  alt="DNS Records without subdomain for frontend in CloudFlare"
+/>
 
 Make sure that the proxy status is set to `Proxied` for your domain.
 
@@ -101,4 +107,4 @@ Go to the "Rules => `Configuration Rules`" tab and add click on the `Add a rule`
 
 ## Server
 
-Now let's configure the server. Go to the [next step](/setup/secure) to continue.
+Now let's configure the server. Go to the [next step](/setup/server) to continue.

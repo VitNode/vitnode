@@ -1,9 +1,12 @@
 import { Steps } from "nextra/components";
+import { Tabs } from "nextra/components";
 
 # Installation
 
 ## Install VitNode
 
+<Tabs items={['Manual', 'Fast']}>
+  <Tabs.Tab>
 <Steps>
 ### Go to home directory
 
@@ -29,9 +32,26 @@ pnpm i
 pnpm config:init
 ```
 
-### Set env File
+</Steps>
 
-Copy content from `.env.eample` file to `.env`.
+  </Tabs.Tab>
+  <Tabs.Tab>
+
+```bash
+cd /home &&\
+ sudo git clone https://github.com/aXenDeveloper/vitnode.git &&\
+ cd vitnode &&\
+ pnpm i &&\
+ pnpm config:init
+```
+
+  </Tabs.Tab>
+
+</Tabs>
+
+## Set env File
+
+Go to `/home/vitnode` and opy content from `.env.eample` file to `.env`.
 
 After copy content from example file **you need to** change:
 
@@ -42,19 +62,17 @@ After copy content from example file **you need to** change:
 - `REDIS_PASSWORD` - Redis password,
 - `NEXT_PUBLIC_CLIENT_GRAPHQL_URL` - Your backend url, for example `https://backend.vitnode.com`
 
-### Build the project
+## Build the project
 
 ```bash
 pnpm docker:prod
 ```
 
-### Generate schema database
+## Generate schema database
 
 ```bash
 docker exec -d vitnode_backend /bin/sh -c "pnpm db"
 ```
-
-</Steps>
 
 ## Start VitNode
 
@@ -62,7 +80,7 @@ Now when you open your website in the browser, you should see the wizard install
 
 Now, let's move to the [security server](setup/secure) part.
 
-## Reinstall VitNode
+## Reinstall VitNode (Experimental)
 
 ```bash
 docker rm -v -f $(docker ps -qa)

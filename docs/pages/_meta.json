@@ -66,6 +66,12 @@
   "themes": "🖌️ Themes",
   "backend": "Backend",
   "frontend": "Frontend",
+  "demo": {
+    "title": "🚀 Demo",
+    "type": "page",
+    "href": "https://frontend.vitnode.com/",
+    "newWindow": true
+  },
   "contact": {
     "title": "Contact ↗",
     "type": "page",

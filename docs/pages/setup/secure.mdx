@@ -9,34 +9,16 @@ import formGenerateSshTermius from "@/assets/setup/secure/form-generate-ssh-term
 
 Secure in the most important part of the server. In this guide, we will cover the basic steps to secure your server.
 
-## Update the System & Install Packages
+## Fail2Ban
 
 <Tabs items={['Manual', 'Fast']}>
   <Tabs.Tab>
    <Steps>
 
-### Update the system
-
-```bash
-apt update
-```
-
-### Upgrade the system
-
-```bash
-apt upgrade -d -y
-```
-
-### Install Nginx
-
-```bash
-apt install nginx -y
-```
-
 ### Install Fail2Ban
 
 ```bash
-apt-get install fail2ban -y
+apt install fail2ban -y
 ```
 
 ### Config Fail2Ban
@@ -57,34 +39,22 @@ systemctl enable fail2ban
 systemctl start fail2ban
 ```
 
-### Install Sudo
-
-```bash
-apt install sudo -y
-```
-
    </Steps>
   </Tabs.Tab>
 
     <Tabs.Tab>
 
 ```bash
-apt update &&
-apt upgrade -d -y &&
-apt install nginx -y &&
-apt install fail2ban -y &&
-echo -e "[sshd]\nbackend=systemd\nenabled=true" | tee /etc/fail2ban/jail.local &&
-systemctl enable fail2ban &&
-systemctl start fail2ban &&
-apt install sudo -y
+apt install fail2ban -y &&\
+ echo -e "[sshd]\nbackend=systemd\nenabled=true" | tee /etc/fail2ban/jail.local &&\
+ systemctl enable fail2ban &&\
+ systemctl start fail2ban
 ```
 
   </Tabs.Tab>
 </Tabs>
 
-## Fail2Ban
-
-Verify status of Fail2Ban.
+### Verify status of Fail2Ban
 
 ```bash
 systemctl status fail2ban
@@ -249,7 +219,7 @@ Press `Ctrl + X`, then `Y`, then `Enter` to save and exit the file.
 ### Install
 
 ```bash
-sudo apt-get install ufw -y
+sudo apt install ufw -y
 ```
 
 ### Deny all incoming connections
@@ -264,16 +234,16 @@ sudo ufw default deny incoming
 sudo ufw default allow outgoing
 ```
 
-### Allow Nginx
-
-```bash
-sudo ufw allow 'Nginx Full'
-```
-
 ### Allow SSH
 
 ```bash
 sudo ufw allow ssh
+```
+
+### Allow Nginx
+
+```bash
+sudo ufw allow 'Nginx Full'
 ```
 
 ### Allow the new SSH port
@@ -297,13 +267,13 @@ sudo ufw enable
 <Tabs.Tab>
 
 ```bash
-sudo apt-get install ufw -y &&
-sudo ufw default deny incoming &&
-sudo ufw default allow outgoing &&
-sudo ufw allow 'Nginx Full' &&
-sudo ufw allow ssh &&
-sudo ufw allow {port} &&
-sudo ufw enable
+sudo apt install ufw -y &&\
+ sudo ufw default deny incoming &&\
+ sudo ufw default allow outgoing &&\
+ sudo ufw allow ssh &&\
+ sudo ufw allow 'Nginx Full' &&\
+ sudo ufw allow {port} &&\
+ sudo ufw enable
 ```
 
 Replace `{port}` with the port number you set in the SSH configuration file.
@@ -317,3 +287,11 @@ Replace `{port}` with the port number you set in the SSH configuration file.
 ```bash
 sudo systemctl restart sshd
 ```
+
+## Set permissions
+
+```bash
+sudo chmod 775 /home/vitnode && sudo chown -R {username}:{username} /home/vitnode
+```
+
+Replace `{username}` with your username.
