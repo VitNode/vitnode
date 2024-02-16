@@ -137,6 +137,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   admin__core_groups__delete: Scalars['String']['output'];
   admin__core_groups__edit: ShowAdminGroups;
+  admin__core_languages__create: ShowCoreLanguages;
   admin__core_nav__change_position: Scalars['String']['output'];
   admin__core_nav__create: ShowCoreNav;
   admin__core_nav__delete: Scalars['String']['output'];
@@ -155,10 +156,10 @@ export type Mutation = {
   admin__forum_forums__change_position: Scalars['String']['output'];
   admin__forum_forums__create: CreateForumForumsObj;
   admin__install__create_database: Scalars['String']['output'];
+  admin_core_languages__edit: ShowCoreLanguages;
   admin_sessions__sign_out: Scalars['String']['output'];
   admin_settings__general__edit: GeneralAdminSettingsObj;
   core_groups__admin_create: ShowAdminGroups;
-  core_languages__edit: ShowCoreLanguages;
   core_members__avatar__delete: Scalars['String']['output'];
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
   core_members__sign_up: SignUpCoreMembersObj;
@@ -179,6 +180,13 @@ export type MutationAdmin__Core_Groups__DeleteArgs = {
 export type MutationAdmin__Core_Groups__EditArgs = {
   id: Scalars['Int']['input'];
   name: Array<TextLanguageInput>;
+};
+
+
+export type MutationAdmin__Core_Languages__CreateArgs = {
+  code: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  timezone: Scalars['String']['input'];
 };
 
 
@@ -299,6 +307,16 @@ export type MutationAdmin__Forum_Forums__CreateArgs = {
 };
 
 
+export type MutationAdmin_Core_Languages__EditArgs = {
+  code: Scalars['String']['input'];
+  default: Scalars['Boolean']['input'];
+  enabled: Scalars['Boolean']['input'];
+  id: Scalars['Int']['input'];
+  name: Scalars['String']['input'];
+  timezone: Scalars['String']['input'];
+};
+
+
 export type MutationAdmin_Settings__General__EditArgs = {
   side_name: Scalars['String']['input'];
 };
@@ -306,16 +324,6 @@ export type MutationAdmin_Settings__General__EditArgs = {
 
 export type MutationCore_Groups__Admin_CreateArgs = {
   name: Array<TextLanguageInput>;
-};
-
-
-export type MutationCore_Languages__EditArgs = {
-  code: Scalars['String']['input'];
-  default: Scalars['Boolean']['input'];
-  enabled: Scalars['Boolean']['input'];
-  id: Scalars['Int']['input'];
-  name: Scalars['String']['input'];
-  timezone: Scalars['String']['input'];
 };
 
 
@@ -1158,7 +1166,7 @@ export type Admin__Core_Themes__UploadMutationVariables = Exact<{
 
 export type Admin__Core_Themes__UploadMutation = { __typename?: 'Mutation', admin__core_themes__upload: string };
 
-export type Core_Languages__EditMutationVariables = Exact<{
+export type Admin_Core_Languages__EditMutationVariables = Exact<{
   default: Scalars['Boolean']['input'];
   enabled: Scalars['Boolean']['input'];
   id: Scalars['Int']['input'];
@@ -1168,7 +1176,7 @@ export type Core_Languages__EditMutationVariables = Exact<{
 }>;
 
 
-export type Core_Languages__EditMutation = { __typename?: 'Mutation', core_languages__edit: { __typename?: 'ShowCoreLanguages', code: string, default: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string } };
+export type Admin_Core_Languages__EditMutation = { __typename?: 'Mutation', admin_core_languages__edit: { __typename?: 'ShowCoreLanguages', code: string, default: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string } };
 
 export type Core_Members__Sign_UpMutationVariables = Exact<{
   email: Scalars['String']['input'];
@@ -1649,9 +1657,9 @@ export const Admin__Core_Themes__Upload = gql`
   admin__core_themes__upload(file: $file)
 }
     `;
-export const Core_Languages__Edit = gql`
-    mutation Core_languages__edit($default: Boolean!, $enabled: Boolean!, $id: Int!, $name: String!, $timezone: String!, $code: String!) {
-  core_languages__edit(
+export const Admin_Core_Languages__Edit = gql`
+    mutation Admin_core_languages__edit($default: Boolean!, $enabled: Boolean!, $id: Int!, $name: String!, $timezone: String!, $code: String!) {
+  admin_core_languages__edit(
     default: $default
     enabled: $enabled
     id: $id

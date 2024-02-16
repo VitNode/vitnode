@@ -5,20 +5,20 @@ import { revalidatePath, revalidateTag } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
 import {
-  Core_Languages__Edit,
-  type Core_Languages__EditMutation,
-  type Core_Languages__EditMutationVariables
+  Admin_Core_Languages__Edit,
+  type Admin_Core_Languages__EditMutation,
+  type Admin_Core_Languages__EditMutationVariables
 } from "@/graphql/hooks";
 
 export const editMutationApi = async (
-  variables: Core_Languages__EditMutationVariables
+  variables: Admin_Core_Languages__EditMutationVariables
 ) => {
   try {
     const { data } = await fetcher<
-      Core_Languages__EditMutation,
-      Core_Languages__EditMutationVariables
+      Admin_Core_Languages__EditMutation,
+      Admin_Core_Languages__EditMutationVariables
     >({
-      query: Core_Languages__Edit,
+      query: Admin_Core_Languages__Edit,
       variables,
       headers: {
         Cookie: cookies().toString()

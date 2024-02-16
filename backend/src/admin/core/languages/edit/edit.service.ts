@@ -3,24 +3,24 @@ import * as fs from "fs";
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
 
-import { ShowCoreLanguages } from "../show/dto/show.obj";
-import { EditCoreLanguagesArgs } from "./dto/edit.args";
+import { EditCoreAdminLanguagesArgs } from "./dto/edit.args";
 
 import { ConfigType } from "@/types/config.type";
 import { DatabaseService } from "@/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_languages } from "@/src/admin/core/database/schema/languages";
 import { configPath } from "@/config";
+import { ShowCoreLanguages } from "@/src/core/languages/show/dto/show.obj";
 
 @Injectable()
-export class EditCoreLanguageService {
+export class EditAdminCoreLanguagesService {
   constructor(private databaseService: DatabaseService) {}
 
   async edit({
     code,
     id,
     ...rest
-  }: EditCoreLanguagesArgs): Promise<ShowCoreLanguages> {
+  }: EditCoreAdminLanguagesArgs): Promise<ShowCoreLanguages> {
     const configFile = fs.readFileSync(configPath, "utf8");
     const config: ConfigType = JSON.parse(configFile);
 
