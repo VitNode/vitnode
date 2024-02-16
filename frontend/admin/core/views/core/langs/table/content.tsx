@@ -8,8 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { ActionsTableLangsCoreAdmin } from "./actions/actions";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
-import { mutationApi } from "./actions/edit/hooks/mutation-api";
 import type { LangsCoreAdminViewProps } from "../langs-core-admin-view";
+import { editMutationApi } from "../create-edit/hooks/edit-mutation-api";
 
 export const ContentTableLangsCoreAdmin = ({
   data
@@ -45,7 +45,7 @@ export const ContentTableLangsCoreAdmin = ({
               disabled={data.default || data.protected}
               checked={data.enabled}
               onClick={async () => {
-                const mutation = await mutationApi({
+                const mutation = await editMutationApi({
                   ...data,
                   enabled: !data.enabled
                 });

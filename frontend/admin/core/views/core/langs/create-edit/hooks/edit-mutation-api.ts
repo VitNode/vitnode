@@ -10,7 +10,7 @@ import {
   type Core_Languages__EditMutationVariables
 } from "@/graphql/hooks";
 
-export const mutationApi = async (
+export const editMutationApi = async (
   variables: Core_Languages__EditMutationVariables
 ) => {
   try {

@@ -1,11 +1,12 @@
 import { useTranslations } from "next-intl";
 
+import { useCreateEditLangAdmin } from "./hooks/use-create-edit-lang-admin";
+import type { ShowCoreLanguages } from "@/graphql/hooks";
 import {
   DialogFooter,
   DialogHeader,
   DialogTitle
 } from "@/components/ui/dialog";
-import type { ShowCoreLanguages } from "@/graphql/hooks";
 import {
   Form,
   FormControl,
@@ -16,18 +17,19 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useEditLangAdmin } from "./hooks/use-edit-lang-admin";
 
-export const ContentEditActionsTableLangsCoreAdmin = (
-  data: ShowCoreLanguages
-) => {
-  const t = useTranslations("admin.core.langs.actions.edit");
-  const { form, onSubmit } = useEditLangAdmin({ data });
+interface Props {
+  data?: ShowCoreLanguages;
+}
+
+export const CreateEditLangAdmin = ({ data }: Props) => {
+  const t = useTranslations("admin.core.langs.actions");
+  const { form, onSubmit } = useCreateEditLangAdmin({ data });
 
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{data.name}</DialogTitle>
+        <DialogTitle>{data ? data.name : "test"}</DialogTitle>
       </DialogHeader>
 
       <Form {...form}>
@@ -40,7 +42,7 @@ export const ContentEditActionsTableLangsCoreAdmin = (
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("name")}</FormLabel>
+                <FormLabel>{t("create.name")}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -54,7 +56,7 @@ export const ContentEditActionsTableLangsCoreAdmin = (
             name="timezone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("timezone")}</FormLabel>
+                <FormLabel>{t("create.timezone")}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -70,7 +72,7 @@ export const ContentEditActionsTableLangsCoreAdmin = (
             onClick={form.handleSubmit(onSubmit)}
             loading={form.formState.isSubmitting}
           >
-            {t("submit")}
+            {t(data ? "edit.submit" : "create.submit")}
           </Button>
         </DialogFooter>
       </Form>
