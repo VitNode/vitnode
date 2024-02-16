@@ -59,12 +59,6 @@ export type ChildrenShowForumForums = {
   position: Scalars['Int']['output'];
 };
 
-export type CoreMiddlewareObj = {
-  __typename?: 'CoreMiddlewareObj';
-  default_language: Scalars['String']['output'];
-  languages: Array<LanguageCoreMiddlewareObj>;
-};
-
 export type CreateForumForumsObj = {
   __typename?: 'CreateForumForumsObj';
   _count: ShowForumForumsCount;
@@ -100,16 +94,6 @@ export type GroupsPermissionsCreateForumForums = {
   read: Scalars['Boolean']['input'];
   reply: Scalars['Boolean']['input'];
   view: Scalars['Boolean']['input'];
-};
-
-export type LanguageCoreMiddlewareObj = {
-  __typename?: 'LanguageCoreMiddlewareObj';
-  code: Scalars['String']['output'];
-  default: Scalars['Boolean']['output'];
-  enabled: Scalars['Boolean']['output'];
-  id: Scalars['Int']['output'];
-  name: Scalars['String']['output'];
-  timezone: Scalars['String']['output'];
 };
 
 export type LastChildShowForumForums = {
@@ -409,7 +393,6 @@ export type Query = {
   admin__settings__general__show: ShowGeneralAdminSettingsObj;
   core_languages__show: ShowCoreLanguagesObj;
   core_members__show: ShowCoreMembersObj;
-  core_middleware: CoreMiddlewareObj;
   core_nav__show: ShowCoreNavObj;
   core_sessions__authorization: AuthorizationCoreSessionsObj;
   core_themes__show: ShowCoreThemesObj;
@@ -1349,7 +1332,7 @@ export type Admin_Core_Themes__ShowQuery = { __typename?: 'Query', admin__core_t
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_MiddlewareQuery = { __typename?: 'Query', core_middleware: { __typename?: 'CoreMiddlewareObj', default_language: string, languages: Array<{ __typename?: 'LanguageCoreMiddlewareObj', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean }> }, core_themes__show: { __typename?: 'ShowCoreThemesObj', edges: Array<{ __typename?: 'ShowCoreThemes', id: number, name: string }> } };
+export type Core_MiddlewareQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean }> }, core_themes__show: { __typename?: 'ShowCoreThemesObj', edges: Array<{ __typename?: 'ShowCoreThemes', id: number, name: string }> } };
 
 export type Core_Languages__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2162,9 +2145,8 @@ export const Admin_Core_Themes__Show = gql`
     `;
 export const Core_Middleware = gql`
     query Core_middleware {
-  core_middleware {
-    default_language
-    languages {
+  core_languages__show {
+    edges {
       default
       code
       id

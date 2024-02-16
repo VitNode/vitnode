@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 import { LanguageProvider } from "./language-provider";
 import { fetcher } from "@/graphql/fetcher";
@@ -17,7 +17,8 @@ const getData = async () => {
   >({
     query: Core_Middleware,
     headers: {
-      Cookie: cookies().toString()
+      Cookie: cookies().toString(),
+      ["user-agent"]: headers().get("user-agent") ?? "node"
     }
   });
 

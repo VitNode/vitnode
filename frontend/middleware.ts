@@ -1,12 +1,11 @@
 import createIntlMiddleware from "next-intl/middleware";
 import { NextRequest } from "next/server";
-import { headers } from "next/headers";
 
 import { fetcher } from "./graphql/fetcher";
 import {
-  Core_Middleware,
-  type Core_MiddlewareQuery,
-  type Core_MiddlewareQueryVariables
+  Core_Languages__Show,
+  type Core_Languages__ShowQuery,
+  type Core_Languages__ShowQueryVariables
 } from "./graphql/hooks";
 
 export default async function middleware(request: NextRequest) {
@@ -14,22 +13,24 @@ export default async function middleware(request: NextRequest) {
 
   try {
     const { data, res } = await fetcher<
-      Core_MiddlewareQuery,
-      Core_MiddlewareQueryVariables
+      Core_Languages__ShowQuery,
+      Core_Languages__ShowQueryVariables
     >({
-      query: Core_Middleware,
+      query: Core_Languages__Show,
       headers: {
-        Cookie: request.cookies.toString(),
-        ["user-agent"]: headers().get("user-agent") ?? "node"
+        Cookie: request.cookies.toString()
+        // ["user-agent"]: headers().get("user-agent") ?? "node"
       }
     });
 
-    const languages = data.core_middleware.languages.filter(
+    const languages = data.core_languages__show.edges.filter(
       lang => lang.enabled
     );
+    const defaultLanguage =
+      data.core_languages__show.edges.find(lang => lang.default)?.code ?? "en";
     const handleI18nRouting = createIntlMiddleware({
       locales: languages.length > 0 ? languages.map(edge => edge.code) : ["en"],
-      defaultLocale: data.core_middleware.default_language
+      defaultLocale: defaultLanguage
     });
 
     const response = handleI18nRouting(request);

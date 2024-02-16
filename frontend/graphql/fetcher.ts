@@ -1,7 +1,9 @@
 import type { DocumentNode } from "graphql";
+import { cookies, headers as nextHeaders } from "next/headers";
 
 import { getGqlString } from "@/functions/get-qql-string";
 import { CONFIG } from "@/config";
+import { setCookieFromApi } from "@/functions/cookie-from-string-to-object";
 
 interface Args<TVariables> {
   query: DocumentNode;
@@ -91,33 +93,38 @@ export async function fetcher<TData, TVariables>({
     });
   }
 
-  const isClient = typeof window !== "undefined" && CONFIG.client_graphql_url;
+  const internalHeaders = {
+    Cookie: cookies().toString(),
+    ["user-agent"]: nextHeaders().get("user-agent") ?? "node",
+    ...headers
+  };
 
-  const res = await fetch(
-    isClient
-      ? `${CONFIG.client_graphql_url}/graphql`
-      : `${CONFIG.graphql_url}/graphql`,
-    {
-      method: "POST",
-      credentials: "include",
-      mode: "cors",
-      signal,
-      headers: uploads
-        ? {
-            "x-apollo-operation-name": "*",
-            ...headers
-          }
-        : {
-            "Content-Type": "application/json",
-            ...headers
-          },
-      body: uploads
-        ? formData
-        : JSON.stringify({ query: getGqlString(query), variables }),
-      next,
-      cache
-    }
-  );
+  const internalQuery = getGqlString(query);
+
+  const res = await fetch(`${CONFIG.graphql_url}/graphql`, {
+    method: "POST",
+    credentials: "include",
+    mode: "cors",
+    signal,
+    headers: uploads
+      ? {
+          "x-apollo-operation-name": "*",
+          ...internalHeaders
+        }
+      : {
+          "Content-Type": "application/json",
+          ...internalHeaders
+        },
+    body: uploads
+      ? formData
+      : JSON.stringify({ query: internalQuery, variables }),
+    next,
+    cache
+  });
+
+  if (internalQuery.trim().startsWith("mutation")) {
+    setCookieFromApi({ res });
+  }
 
   const json = await res.json();
 

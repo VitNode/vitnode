@@ -1,7 +1,6 @@
 query Core_middleware {
-  core_middleware {
-    default_language
-    languages {
+  core_languages__show {
+    edges {
       default
       code
       id
