@@ -4,13 +4,8 @@ import { useMemo, useState } from "react";
 
 import { getIdFormString } from "@/functions/url";
 import { APIKeys } from "@/graphql/api-keys";
-import { fetcher } from "@/graphql/fetcher";
-import {
-  Forum_Posts__Show_More,
-  ShowPostsForumsSortingEnum,
-  type Forum_Posts__Show_MoreQuery,
-  type Forum_Posts__Show_MoreQueryVariables
-} from "@/graphql/hooks";
+import { ShowPostsForumsSortingEnum } from "@/graphql/hooks";
+import { queryApi } from "./query-api";
 
 interface Props {
   endCursor: number | null | undefined;
@@ -31,7 +26,7 @@ export const useMorePosts = ({
 
   const query = useInfiniteQuery({
     queryKey: [APIKeys.POSTS_MORE, { id, sort }],
-    queryFn: async ({ pageParam, signal }) => {
+    queryFn: async ({ pageParam }) => {
       let sortBy: ShowPostsForumsSortingEnum | undefined;
       if (sort === ShowPostsForumsSortingEnum.newest) {
         sortBy = ShowPostsForumsSortingEnum.newest;
@@ -39,20 +34,11 @@ export const useMorePosts = ({
         sortBy = ShowPostsForumsSortingEnum.oldest;
       }
 
-      const { data } = await fetcher<
-        Forum_Posts__Show_MoreQuery,
-        Forum_Posts__Show_MoreQueryVariables
-      >({
-        query: Forum_Posts__Show_More,
-        variables: {
-          ...pageParam,
-          id: getIdFormString(id),
-          sortBy
-        },
-        signal
+      return await queryApi({
+        ...pageParam,
+        id: getIdFormString(id),
+        sortBy
       });
-
-      return data;
     },
     initialPageParam: {
       first: postsToLoad > 10 ? 10 : postsToLoad,

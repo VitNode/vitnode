@@ -12,15 +12,11 @@ export default async function middleware(request: NextRequest) {
   const defaultLocale = request.headers.get("x-default-locale") || "en";
 
   try {
-    const { data, res } = await fetcher<
+    const { data } = await fetcher<
       Core_Languages__ShowQuery,
       Core_Languages__ShowQueryVariables
     >({
-      query: Core_Languages__Show,
-      headers: {
-        Cookie: request.cookies.toString()
-        // ["user-agent"]: headers().get("user-agent") ?? "node"
-      }
+      query: Core_Languages__Show
     });
 
     const languages = data.core_languages__show.edges.filter(
@@ -36,8 +32,6 @@ export default async function middleware(request: NextRequest) {
     const response = handleI18nRouting(request);
 
     response.headers.set("x-default-locale", defaultLocale);
-    const setCookie = res.headers.get("set-cookie");
-    if (setCookie) response.headers.set("set-cookie", setCookie);
 
     return response;
   } catch (error) {

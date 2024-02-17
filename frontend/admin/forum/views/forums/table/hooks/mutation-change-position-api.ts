@@ -1,6 +1,5 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
@@ -19,10 +18,7 @@ export const mutationChangePositionApi = async (
       Admin__Forum_Forums__Change_PositionMutationVariables
     >({
       query: Admin__Forum_Forums__Change_Position,
-      variables,
-      headers: {
-        Cookie: cookies().toString()
-      }
+      variables
     });
 
     revalidateTag("Forum_Forums__Show");

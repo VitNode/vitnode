@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { cookies } from "next/headers";
 
 import { ThemesAdminView } from "@/admin/core/views/core/styles/themes/themes-admin-view";
 import { fetcher } from "@/graphql/fetcher";
@@ -28,10 +27,7 @@ const getData = async (variables: Admin_Core_Themes__ShowQueryVariables) => {
     Admin_Core_Themes__ShowQueryVariables
   >({
     query: Admin_Core_Themes__Show,
-    variables,
-    headers: {
-      Cookie: cookies().toString()
-    }
+    variables
   });
 
   return data;

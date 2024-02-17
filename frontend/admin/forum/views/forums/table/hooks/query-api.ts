@@ -16,7 +16,6 @@ export const queryApi = async (
   >({
     query: Admin__Forum_Forums__Show,
     variables
-    // signal
   });
 
   return data;

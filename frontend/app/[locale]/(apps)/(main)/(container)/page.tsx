@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { lazy, type LazyExoticComponent } from "react";
 
 import { fetcher } from "@/graphql/fetcher";
@@ -16,9 +15,6 @@ const getData = async () => {
     Forum_Forums__ShowQueryVariables
   >({
     query: Forum_Forums__Show,
-    headers: {
-      Cookie: cookies().toString()
-    },
     cache: "force-cache",
     next: {
       tags: ["Forum_Forums__Show"]

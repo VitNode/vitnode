@@ -1,6 +1,5 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { revalidatePath, revalidateTag } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
@@ -19,10 +18,7 @@ export const mutationApi = async (
       Admin__Core_Nav__DeleteMutationVariables
     >({
       query: Admin__Core_Nav__Delete,
-      variables,
-      headers: {
-        Cookie: cookies().toString()
-      }
+      variables
     });
 
     revalidateTag("Core_Sessions__Authorization");

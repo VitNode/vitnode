@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { isRedirectError } from "next/dist/client/components/redirect";
@@ -26,11 +26,7 @@ const getData = async () => {
     Admin__Sessions__AuthorizationQuery,
     Admin__Sessions__AuthorizationQueryVariables
   >({
-    query: Admin__Sessions__Authorization,
-    headers: {
-      Cookie: cookies().toString(),
-      ["user-agent"]: headers().get("user-agent") ?? "node"
-    }
+    query: Admin__Sessions__Authorization
   });
 
   return data;

@@ -1,7 +1,5 @@
 "use server";
 
-import { cookies } from "next/headers";
-
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Themes__Change,
@@ -19,10 +17,7 @@ export const mutationApi = async (
       Core_Themes__ChangeMutationVariables
     >({
       query: Core_Themes__Change,
-      variables,
-      headers: {
-        Cookie: cookies().toString()
-      }
+      variables
     });
 
     // Set cookie
