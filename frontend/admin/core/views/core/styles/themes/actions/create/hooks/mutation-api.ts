@@ -1,6 +1,5 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
@@ -19,10 +18,7 @@ export const mutationApi = async (
       Admin__Core_Themes__CreateMutationVariables
     >({
       query: Admin__Core_Themes__Create,
-      variables,
-      headers: {
-        Cookie: cookies().toString()
-      }
+      variables
     });
 
     revalidatePath("/admin/core/styles/themes", "page");

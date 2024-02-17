@@ -1,6 +1,5 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
@@ -19,10 +18,7 @@ export const mutationCreateApi = async (
       Core_Groups__Admin_CreateMutationVariables
     >({
       query: Core_Groups__Admin_Create,
-      variables,
-      headers: {
-        Cookie: cookies().toString()
-      }
+      variables
     });
 
     revalidatePath("/admin/members/groups", "page");

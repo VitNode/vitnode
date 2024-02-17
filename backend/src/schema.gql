@@ -40,11 +40,6 @@ type ChildrenShowForumForums {
   position: Int!
 }
 
-type CoreMiddlewareObj {
-  default_language: String!
-  languages: [LanguageCoreMiddlewareObj!]!
-}
-
 type CreateForumForumsObj {
   _count: ShowForumForumsCount!
   children: [ChildrenShowForumForums!]
@@ -76,15 +71,6 @@ input GroupsPermissionsCreateForumForums {
   read: Boolean!
   reply: Boolean!
   view: Boolean!
-}
-
-type LanguageCoreMiddlewareObj {
-  code: String!
-  default: Boolean!
-  enabled: Boolean!
-  id: Int!
-  name: String!
-  timezone: String!
 }
 
 type LastChildShowForumForums {
@@ -178,7 +164,6 @@ type Query {
   admin__settings__general__show: ShowGeneralAdminSettingsObj!
   core_languages__show(cursor: Int, first: Int, last: Int): ShowCoreLanguagesObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
-  core_middleware: CoreMiddlewareObj!
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_themes__show(cursor: Int, first: Int, last: Int): ShowCoreThemesObj!

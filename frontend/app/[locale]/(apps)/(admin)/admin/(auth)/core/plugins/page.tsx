@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { cookies } from "next/headers";
 
 import { PluginsCoreAdminView } from "@/admin/core/views/core/plugins/plugins-admin-view";
 import {
@@ -28,10 +27,7 @@ const getData = async (variables: Admin__Core_Plugins__ShowQueryVariables) => {
     Admin__Core_Plugins__ShowQueryVariables
   >({
     query: Admin__Core_Plugins__Show,
-    variables,
-    headers: {
-      Cookie: cookies().toString()
-    }
+    variables
   });
 
   return data;

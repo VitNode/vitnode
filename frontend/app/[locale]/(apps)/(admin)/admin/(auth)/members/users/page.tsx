@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 
@@ -32,10 +31,7 @@ const getData = async (variables: Admin__Core_Members__ShowQueryVariables) => {
     Admin__Core_Members__ShowQueryVariables
   >({
     query: Admin__Core_Members__Show,
-    variables,
-    headers: {
-      Cookie: cookies().toString()
-    }
+    variables
   });
 
   return data;

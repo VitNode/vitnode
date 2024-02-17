@@ -4,13 +4,8 @@ import { useMemo } from "react";
 
 import { getIdFormString } from "@/functions/url";
 import { APIKeys } from "@/graphql/api-keys";
-import { fetcher } from "@/graphql/fetcher";
-import {
-  Forum_Forums__Show_Item_More,
-  type Forum_Forums__Show_Item_MoreQuery,
-  type Forum_Forums__Show_Item_MoreQueryVariables,
-  type ShowTopicsForumsObj
-} from "@/graphql/hooks";
+import { type ShowTopicsForumsObj } from "@/graphql/hooks";
+import { queryApi } from "./query-api";
 
 interface Args {
   initData: ShowTopicsForumsObj;
@@ -23,21 +18,11 @@ export const useTopicsList = ({ initData }: Args) => {
 
   const query = useInfiniteQuery({
     queryKey: [APIKeys.TOPICS_IN_FORUM, { id }],
-    queryFn: async ({ pageParam, signal }) => {
-      const { data } = await fetcher<
-        Forum_Forums__Show_Item_MoreQuery,
-        Forum_Forums__Show_Item_MoreQueryVariables
-      >({
-        query: Forum_Forums__Show_Item_More,
-        variables: {
-          ...pageParam,
-          forumId: getIdFormString(id)
-        },
-        signal
-      });
-
-      return data;
-    },
+    queryFn: async ({ pageParam }) =>
+      await queryApi({
+        ...pageParam,
+        forumId: getIdFormString(id)
+      }),
     initialPageParam: {
       first: FIRST
     },

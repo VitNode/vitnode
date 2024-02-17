@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
 import { ForumsForumAdminView } from "@/admin/forum/views/forums/forums-forum-admin-view";
@@ -21,10 +20,7 @@ export default async function Page() {
         Admin__Forum_Forums__ShowQueryVariables
       >({
         query: Admin__Forum_Forums__Show,
-        variables: pageParam,
-        headers: {
-          Cookie: cookies().toString()
-        }
+        variables: pageParam
       });
 
       return data;

@@ -50,7 +50,7 @@ export const useDownloadThemeAdmin = ({
     setOpen(false);
 
     window.open(
-      `${CONFIG.client_graphql_url}/files/${mutation.data.admin__core_themes__download}`,
+      `${CONFIG.backend_url}/files/${mutation.data.admin__core_themes__download}`,
       "_blank"
     );
   };

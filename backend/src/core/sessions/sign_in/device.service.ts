@@ -1,17 +1,31 @@
-import { Injectable } from "@nestjs/common";
 import { UAParser } from "ua-parser-js";
-import { eq } from "drizzle-orm";
+import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 
-import { CoreMiddlewareObj } from "./dto/middleware.obj";
-
-import { Ctx } from "@/types/context.type";
-import { convertUnixTime, currentDate } from "@/functions/date";
 import { DatabaseService } from "@/database/database.service";
+import { convertUnixTime, currentDate } from "@/functions/date";
 import { core_sessions_known_devices } from "@/src/admin/core/database/schema/sessions";
+import { Ctx } from "@/types/context.type";
+
+interface DeviceType {
+  id: number;
+  ip_address: string;
+  last_seen: number;
+  uagent_browser: string;
+  uagent_device_model: string;
+  uagent_device_type: string;
+  uagent_device_vendor: string;
+  uagent_os: string;
+  uagent_version: string;
+  user_agent: string;
+}
+
+interface GetDeviceType extends Ctx {
+  sessionId?: string;
+}
 
 @Injectable()
-export class CoreMiddlewareService {
+export class DeviceSignInCoreSessionsService {
   constructor(
     private databaseService: DatabaseService,
     private configService: ConfigService
@@ -33,13 +47,18 @@ export class CoreMiddlewareService {
     };
   }
 
-  protected async createKnowDevice({ req, res }: Ctx): Promise<number> {
+  protected async createDevice({
+    req,
+    res,
+    sessionId
+  }: GetDeviceType): Promise<DeviceType> {
     const dataDevice = await this.databaseService.db
       .insert(core_sessions_known_devices)
       .values({
         ...this.getUserAgentData(req.headers["user-agent"]),
         last_seen: currentDate(),
-        ip_address: req.ip
+        ip_address: req.ip,
+        session_id: sessionId
       })
       .returning();
 
@@ -64,14 +83,15 @@ export class CoreMiddlewareService {
       }
     );
 
-    return device.id;
+    return device;
   }
 
-  protected async checkDevice({ req, res }: Ctx): Promise<number> {
+  async getDevice({ req, res, sessionId }: GetDeviceType): Promise<DeviceType> {
     const know_device_id: number | undefined =
       +req.cookies[this.configService.getOrThrow("cookies.known_device.name")];
+
     if (!know_device_id) {
-      return await this.createKnowDevice({ req, res });
+      return await this.createDevice({ req, res, sessionId });
     }
 
     const device =
@@ -82,59 +102,9 @@ export class CoreMiddlewareService {
       );
 
     if (!device) {
-      return await this.createKnowDevice({ req, res });
+      return await this.createDevice({ req, res, sessionId });
     }
 
-    // Not update when last seen is less than 15 minutes
-    if (device.last_seen > currentDate() - 60 * 15) {
-      return know_device_id;
-    }
-
-    await this.databaseService.db
-      .update(core_sessions_known_devices)
-      .set({
-        ...this.getUserAgentData(req.headers["user-agent"]),
-        last_seen: currentDate(),
-        ip_address: req.ip
-      })
-      .where(eq(core_sessions_known_devices.id, device.id));
-
-    // Update sign in date
-    res.cookie(
-      this.configService.getOrThrow("cookies.known_device.name"),
-      know_device_id,
-      {
-        httpOnly: true,
-        secure: true,
-        domain: this.configService.getOrThrow("cookies.domain"),
-        path: "/",
-        expires: new Date(
-          convertUnixTime(
-            currentDate() +
-              this.configService.getOrThrow("cookies.known_device.expiresIn")
-          )
-        ),
-        sameSite: "none"
-      }
-    );
-
-    return know_device_id;
-  }
-
-  async middleware(context: Ctx): Promise<CoreMiddlewareObj> {
-    await this.checkDevice(context);
-
-    const languages =
-      await this.databaseService.db.query.core_languages.findMany({
-        orderBy: (table, { asc }) => asc(table.id)
-      });
-
-    const default_language =
-      languages.find(language => language.default)?.code ?? "en";
-
-    return {
-      languages,
-      default_language
-    };
+    return device;
   }
 }

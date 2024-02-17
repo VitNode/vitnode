@@ -1,7 +1,5 @@
 "use server";
 
-import { cookies } from "next/headers";
-
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin_Settings__General__Edit,
@@ -18,10 +16,7 @@ export const mutationApi = async (
       Admin_Settings__General__EditMutationVariables
     >({
       query: Admin_Settings__General__Edit,
-      variables,
-      headers: {
-        Cookie: cookies().toString()
-      }
+      variables
     });
 
     return { data };

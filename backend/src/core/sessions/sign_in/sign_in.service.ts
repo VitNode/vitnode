@@ -4,6 +4,7 @@ import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
 
 import { SignInCoreSessionsArgs } from "./dto/sign_in.args";
+import { DeviceSignInCoreSessionsService } from "./device.service";
 
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { Ctx } from "@/types/context.type";
@@ -26,7 +27,8 @@ export class SignInCoreSessionsService {
   constructor(
     private databaseService: DatabaseService,
     private jwtService: JwtService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private deviceService: DeviceSignInCoreSessionsService
   ) {}
 
   protected async createSession({
@@ -41,19 +43,7 @@ export class SignInCoreSessionsService {
     const loginTokenSecret =
       this.configService.getOrThrow("login_token_secret");
 
-    const know_device_id: number | undefined =
-      +req.cookies[this.configService.getOrThrow("cookies.known_device.name")];
-    if (!know_device_id) {
-      throw new AccessDeniedError();
-    }
-
-    const device =
-      await this.databaseService.db.query.core_sessions_known_devices.findFirst(
-        {
-          where: (table, { eq }) => eq(table.id, know_device_id)
-        }
-      );
-
+    const device = await this.deviceService.getDevice({ req, res });
     if (!device) {
       throw new AccessDeniedError();
     }

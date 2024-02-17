@@ -1,6 +1,5 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
@@ -16,10 +15,7 @@ export const mutationApi = async () => {
       Admin__Install__Create_DatabaseMutation,
       Admin__Install__Create_DatabaseMutationVariables
     >({
-      query: Admin__Install__Create_Database,
-      headers: {
-        Cookie: cookies().toString()
-      }
+      query: Admin__Install__Create_Database
     });
 
     revalidatePath("/admin/(configs)/install/", "layout");

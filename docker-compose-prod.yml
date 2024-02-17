@@ -66,7 +66,7 @@ services:
       dockerfile: Dockerfile
       args:
         - NEXT_PUBLIC_GRAPHQL_URL=http://backend:8080
-        - NEXT_PUBLIC_CLIENT_GRAPHQL_URL=${NEXT_PUBLIC_CLIENT_GRAPHQL_URL:-}
+        - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL:-}
     restart: on-failure
     ports:
       - "3000:3000"

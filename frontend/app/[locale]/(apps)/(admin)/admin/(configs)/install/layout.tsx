@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { cookies } from "next/headers";
 
 import { LayoutInstallConfigsView } from "@/admin/core/configs/views/install/layout-install-configs-view";
 import { fetcher, type ErrorType } from "@/graphql/fetcher";
@@ -21,10 +20,7 @@ const getData = async () => {
     Admin__Install__LayoutQuery,
     Admin__Install__LayoutQueryVariables
   >({
-    query: Admin__Install__Layout,
-    headers: {
-      Cookie: cookies().toString()
-    }
+    query: Admin__Install__Layout
   });
 
   return data;

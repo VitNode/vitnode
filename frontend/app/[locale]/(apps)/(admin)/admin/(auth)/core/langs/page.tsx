@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { cookies } from "next/headers";
 
 import { LangsCoreAdminView } from "@/admin/core/views/core/langs/langs-core-admin-view";
 import { fetcher } from "@/graphql/fetcher";
@@ -20,10 +19,7 @@ const getData = async (variables: Core_Languages__ShowQueryVariables) => {
     Core_Languages__ShowQueryVariables
   >({
     query: Core_Languages__Show,
-    variables,
-    headers: {
-      Cookie: cookies().toString()
-    }
+    variables
   });
 
   return data;
