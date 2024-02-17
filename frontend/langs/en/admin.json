@@ -172,6 +172,12 @@
           "edit": {
             "submit": "Edit Language",
             "success": "Language has been updated."
+          },
+          "delete": {
+            "text": "This action cannot be undone. This will permanently delete this language and all user content associated with it. This may impact your app's SEO.",
+            "form_confirm_text": "Type the name of the language <text></text> to confirm.",
+            "success": "Language has been deleted.",
+            "submit": "Yes, delete language"
           }
         }
       }

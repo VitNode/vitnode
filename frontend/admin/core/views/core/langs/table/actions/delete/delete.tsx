@@ -1,34 +1,33 @@
-import { useTranslations } from "next-intl";
 import { Trash2 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { Suspense, lazy } from "react";
 
+import { Loader } from "@/components/loader/loader";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTrigger
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import { Button } from "@/components/ui/button";
-import type { ShowAdminGroups } from "@/graphql/hooks";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogTrigger
-} from "@/components/ui/alert-dialog";
-import { Loader } from "@/components/loader/loader";
+import type { ShowCoreLanguages } from "@/graphql/hooks";
 
-const ContentDeleteGroupsMembersDialogAdmin = lazy(() =>
-  import("./content-delete-groups-members-dialog-admin").then(module => ({
-    default: module.ContentDeleteGroupsMembersDialogAdmin
+const Content = lazy(() =>
+  import("./content").then(module => ({
+    default: module.ContentDeleteActionsTableLangsCoreAdmin
   }))
 );
 
-interface Props {
-  data: Pick<ShowAdminGroups, "id" | "name" | "protected">;
-}
-
-export const DeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
+export const DeleteActionsTableLangsCoreAdmin = (
+  props: Pick<ShowCoreLanguages, "code" | "name">
+) => {
   const t = useTranslations("core");
+  const locale = useLocale();
 
   return (
     <AlertDialog>
@@ -40,6 +39,7 @@ export const DeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
                 variant="destructiveGhost"
                 size="icon"
                 tooltip={t("delete")}
+                disabled={locale === props.code}
               >
                 <Trash2 />
               </Button>
@@ -52,7 +52,7 @@ export const DeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
 
       <AlertDialogContent>
         <Suspense fallback={<Loader />}>
-          <ContentDeleteGroupsMembersDialogAdmin data={data} />
+          <Content {...props} />
         </Suspense>
       </AlertDialogContent>
     </AlertDialog>
