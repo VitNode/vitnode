@@ -13,7 +13,7 @@ export class EditAdminCoreLanguagesResolver {
 
   @Mutation(() => ShowCoreLanguages)
   @UseGuards(AdminAuthGuards)
-  async admin_core_languages__edit(
+  async admin__core_languages__edit(
     @Args() args: EditCoreAdminLanguagesArgs
   ): Promise<ShowCoreLanguages> {
     return await this.service.edit(args);

@@ -1,3 +1,6 @@
+import * as fs from "fs";
+import { join } from "path";
+
 import { Injectable } from "@nestjs/common";
 
 import { CreateCoreAdminLanguagesArgs } from "./dto/edit.args";
@@ -5,6 +8,8 @@ import { CreateCoreAdminLanguagesArgs } from "./dto/edit.args";
 import { DatabaseService } from "@/database/database.service";
 import { ShowCoreLanguages } from "@/src/core/languages/show/dto/show.obj";
 import { CustomError } from "@/utils/errors/CustomError";
+import { core_languages } from "../../database/schema/languages";
+import { currentDate } from "@/functions/date";
 
 @Injectable()
 export class CreateAdminCoreLanguageService {
@@ -27,14 +32,26 @@ export class CreateAdminCoreLanguageService {
       });
     }
 
-    return {
-      id: 1,
-      name: "test",
-      code: "test",
-      timezone: "test",
-      default: true,
-      protected: true,
-      enabled: true
-    };
+    const newLanguage = await this.databaseService.db
+      .insert(core_languages)
+      .values({
+        code,
+        name,
+        timezone,
+        default: false,
+        protected: false,
+        enabled: true,
+        created: currentDate()
+      })
+      .returning();
+
+    // Clone JSONs from lang folder in frontend
+    fs.cpSync(
+      join("..", "frontend", "langs", "en"),
+      join("..", "frontend", "langs", code),
+      { recursive: true }
+    );
+
+    return newLanguage[0];
   }
 }

@@ -122,6 +122,7 @@ export type Mutation = {
   admin__core_groups__delete: Scalars['String']['output'];
   admin__core_groups__edit: ShowAdminGroups;
   admin__core_languages__create: ShowCoreLanguages;
+  admin__core_languages__edit: ShowCoreLanguages;
   admin__core_nav__change_position: Scalars['String']['output'];
   admin__core_nav__create: ShowCoreNav;
   admin__core_nav__delete: Scalars['String']['output'];
@@ -140,7 +141,6 @@ export type Mutation = {
   admin__forum_forums__change_position: Scalars['String']['output'];
   admin__forum_forums__create: CreateForumForumsObj;
   admin__install__create_database: Scalars['String']['output'];
-  admin_core_languages__edit: ShowCoreLanguages;
   admin_sessions__sign_out: Scalars['String']['output'];
   admin_settings__general__edit: GeneralAdminSettingsObj;
   core_groups__admin_create: ShowAdminGroups;
@@ -169,6 +169,15 @@ export type MutationAdmin__Core_Groups__EditArgs = {
 
 export type MutationAdmin__Core_Languages__CreateArgs = {
   code: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  timezone: Scalars['String']['input'];
+};
+
+
+export type MutationAdmin__Core_Languages__EditArgs = {
+  default: Scalars['Boolean']['input'];
+  enabled: Scalars['Boolean']['input'];
+  id: Scalars['Int']['input'];
   name: Scalars['String']['input'];
   timezone: Scalars['String']['input'];
 };
@@ -288,15 +297,6 @@ export type MutationAdmin__Forum_Forums__CreateArgs = {
   name: Array<TextLanguageInput>;
   parent_id?: InputMaybe<Scalars['Int']['input']>;
   permissions: PermissionsCreateForumForums;
-};
-
-
-export type MutationAdmin_Core_Languages__EditArgs = {
-  default: Scalars['Boolean']['input'];
-  enabled: Scalars['Boolean']['input'];
-  id: Scalars['Int']['input'];
-  name: Scalars['String']['input'];
-  timezone: Scalars['String']['input'];
 };
 
 
@@ -982,6 +982,26 @@ export type Admin__Forum_Forums__CreateMutationVariables = Exact<{
 
 export type Admin__Forum_Forums__CreateMutation = { __typename?: 'Mutation', admin__forum_forums__create: { __typename?: 'CreateForumForumsObj', created: number, id: number, position: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
+export type Admin__Core_Languages__CreateMutationVariables = Exact<{
+  code: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  timezone: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Languages__CreateMutation = { __typename?: 'Mutation', admin__core_languages__create: { __typename?: 'ShowCoreLanguages', code: string, id: number, name: string } };
+
+export type Admin__Core_Languages__EditMutationVariables = Exact<{
+  default: Scalars['Boolean']['input'];
+  enabled: Scalars['Boolean']['input'];
+  id: Scalars['Int']['input'];
+  name: Scalars['String']['input'];
+  timezone: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Languages__EditMutation = { __typename?: 'Mutation', admin__core_languages__edit: { __typename?: 'ShowCoreLanguages', code: string, default: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string } };
+
 export type Admin__Core_Groups__DeleteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
 }>;
@@ -1147,17 +1167,6 @@ export type Admin__Core_Themes__UploadMutationVariables = Exact<{
 
 
 export type Admin__Core_Themes__UploadMutation = { __typename?: 'Mutation', admin__core_themes__upload: string };
-
-export type Admin_Core_Languages__EditMutationVariables = Exact<{
-  default: Scalars['Boolean']['input'];
-  enabled: Scalars['Boolean']['input'];
-  id: Scalars['Int']['input'];
-  name: Scalars['String']['input'];
-  timezone: Scalars['String']['input'];
-}>;
-
-
-export type Admin_Core_Languages__EditMutation = { __typename?: 'Mutation', admin_core_languages__edit: { __typename?: 'ShowCoreLanguages', code: string, default: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string } };
 
 export type Core_Members__Sign_UpMutationVariables = Exact<{
   email: Scalars['String']['input'];
@@ -1447,6 +1456,34 @@ export const Admin__Forum_Forums__Create = gql`
   }
 }
     `;
+export const Admin__Core_Languages__Create = gql`
+    mutation Admin__core_languages__create($code: String!, $name: String!, $timezone: String!) {
+  admin__core_languages__create(code: $code, name: $name, timezone: $timezone) {
+    code
+    id
+    name
+  }
+}
+    `;
+export const Admin__Core_Languages__Edit = gql`
+    mutation Admin__core_languages__edit($default: Boolean!, $enabled: Boolean!, $id: Int!, $name: String!, $timezone: String!) {
+  admin__core_languages__edit(
+    default: $default
+    enabled: $enabled
+    id: $id
+    name: $name
+    timezone: $timezone
+  ) {
+    code
+    default
+    enabled
+    id
+    name
+    protected
+    timezone
+  }
+}
+    `;
 export const Admin__Core_Groups__Delete = gql`
     mutation Admin__core_groups__delete($id: Int!) {
   admin__core_groups__delete(id: $id)
@@ -1636,25 +1673,6 @@ export const Admin__Core_Themes__Edit = gql`
 export const Admin__Core_Themes__Upload = gql`
     mutation Admin__core_themes__upload($file: Upload!) {
   admin__core_themes__upload(file: $file)
-}
-    `;
-export const Admin_Core_Languages__Edit = gql`
-    mutation Admin_core_languages__edit($default: Boolean!, $enabled: Boolean!, $id: Int!, $name: String!, $timezone: String!) {
-  admin_core_languages__edit(
-    default: $default
-    enabled: $enabled
-    id: $id
-    name: $name
-    timezone: $timezone
-  ) {
-    code
-    default
-    enabled
-    id
-    name
-    protected
-    timezone
-  }
 }
     `;
 export const Core_Members__Sign_Up = gql`

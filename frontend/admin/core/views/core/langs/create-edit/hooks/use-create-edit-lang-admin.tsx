@@ -8,6 +8,8 @@ import type { ShowCoreLanguages } from "@/graphql/hooks";
 import { useDialog } from "@/components/ui/dialog";
 import { editMutationApi } from "./edit-mutation-api";
 
+import { createMutationApi } from "../../../styles/nav/create-edit/hooks/create-mutation-api";
+
 interface Args {
   data?: ShowCoreLanguages;
 }
@@ -18,6 +20,13 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
   const { setOpen } = useDialog();
 
   const formSchema = z.object({
+    code: z
+      .string({
+        required_error: tCore("forms.empty")
+      })
+      .min(1, {
+        message: tCore("forms.empty")
+      }),
     name: z
       .string({
         required_error: tCore("forms.empty")
@@ -37,6 +46,7 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      code: data?.code ?? "",
       name: data?.name ?? "",
       timezone: data?.timezone ?? ""
     }
@@ -49,6 +59,12 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
         ...data,
         ...values
       });
+
+      if (mutation.error) {
+        error = true;
+      }
+    } else {
+      const mutation = await createMutationApi(values);
 
       if (mutation.error) {
         error = true;

@@ -164,6 +164,7 @@
         "actions": {
           "create": {
             "name": "Nazwa",
+            "code": "Kod",
             "timezone": "Strefa czasowa",
             "submit": "Stwórz język",
             "success": "Język został stworzony."

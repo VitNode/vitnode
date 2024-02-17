@@ -4,9 +4,8 @@ import { revalidatePath, revalidateTag } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
 import {
-  Admin__Core_Languages__Create,
-  type Admin__Core_Languages__CreateMutation,
-  type Admin__Core_Languages__CreateMutationVariables
+  type Admin__Core_Languages__CreateMutationVariables,
+  Admin__Core_Languages__Create
 } from "@/graphql/hooks";
 
 export const createMutationApi = async (
@@ -14,16 +13,16 @@ export const createMutationApi = async (
 ) => {
   try {
     const { data } = await fetcher<
-      Admin__Core_Languages__CreateMutation,
+      Admin__Core_Languages__CreateMutationVariables,
       Admin__Core_Languages__CreateMutationVariables
     >({
       query: Admin__Core_Languages__Create,
       variables
     });
 
-    revalidateTag("Core_Sessions__Authorization");
-    revalidatePath("/admin/core/styles/nav", "page");
     revalidatePath("/", "layout");
+    revalidateTag("Core_Sessions__Authorization");
+    revalidatePath("/admin/core/langs", "page");
 
     return { data };
   } catch (error) {

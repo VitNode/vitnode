@@ -51,6 +51,22 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
             )}
           />
 
+          {!data && (
+            <FormField
+              control={form.control}
+              name="code"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("create.code")}</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
+
           <FormField
             control={form.control}
             name="timezone"

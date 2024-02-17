@@ -4,20 +4,20 @@ import { revalidatePath, revalidateTag } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
 import {
-  Admin_Core_Languages__Edit,
-  type Admin_Core_Languages__EditMutation,
-  type Admin_Core_Languages__EditMutationVariables
+  Admin__Core_Languages__Edit,
+  type Admin__Core_Languages__EditMutation,
+  type Admin__Core_Languages__EditMutationVariables
 } from "@/graphql/hooks";
 
 export const editMutationApi = async (
-  variables: Admin_Core_Languages__EditMutationVariables
+  variables: Admin__Core_Languages__EditMutationVariables
 ) => {
   try {
     const { data } = await fetcher<
-      Admin_Core_Languages__EditMutation,
-      Admin_Core_Languages__EditMutationVariables
+      Admin__Core_Languages__EditMutation,
+      Admin__Core_Languages__EditMutationVariables
     >({
-      query: Admin_Core_Languages__Edit,
+      query: Admin__Core_Languages__Edit,
       variables
     });
 
