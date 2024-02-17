@@ -172,6 +172,12 @@
           "edit": {
             "submit": "Edytuj język",
             "success": "Język został zaktualizowany."
+          },
+          "delete": {
+            "test": "Ta akcja nie może być cofnięta. Usunięcie języka spowoduje usunięcie wszystkich treści użytkowników z nim związanych. Może to wpłynąć na SEO Twojej aplikacji.",
+            "form_confirm_text": "Wpisz nazwę języka <text></text>, aby potwierdzić.",
+            "submit": "Tak, usuń język",
+            "success": "Język został usunięty."
           }
         }
       }

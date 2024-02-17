@@ -1,16 +1,11 @@
 import { useTranslations } from "next-intl";
-import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
 
 import {
   AlertDialogCancel,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle,
-  useAlertDialog
+  AlertDialogTitle
 } from "@/components/ui/alert-dialog";
 import type { ShowAdminGroups } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
@@ -23,51 +18,17 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { mutationApi } from "./mutation-api";
-import { usePathname, useRouter } from "@/i18n";
+import { useDeleteGroupAdmin } from "./hooks/use-delete-group-admin";
 
-interface Props {
-  data: Pick<ShowAdminGroups, "id" | "name">;
-}
-
-export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
+export const ContentDeleteGroupsMembersDialogAdmin = ({
+  id,
+  name
+}: Pick<ShowAdminGroups, "id" | "name">) => {
   const t = useTranslations("admin.members.groups.delete");
   const tCore = useTranslations("core");
   const { convertText } = useTextLang();
-  const name = convertText(data.name);
-  const { setOpen } = useAlertDialog();
-  const pathname = usePathname();
-  const { push } = useRouter();
-
-  const formSchema = z.object({
-    name: z.string().refine(value => value === name)
-  });
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: ""
-    }
-  });
-
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    if (values.name !== name) return;
-
-    const mutation = await mutationApi({ id: data.id });
-    if (mutation.error) {
-      toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
-      });
-
-      return;
-    }
-
-    push(pathname);
-
-    toast.success(t("success"));
-
-    setOpen(false);
-  };
+  const formatName = convertText(name);
+  const { form, onSubmit } = useDeleteGroupAdmin({ name, id });
 
   return (
     <Form {...form}>
@@ -81,7 +42,9 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({ data }: Props) => {
             <p>
               {t.rich("form_confirm_text", {
                 text: () => (
-                  <span className="font-semibold text-foreground">{name}</span>
+                  <span className="font-semibold text-foreground">
+                    {formatName}
+                  </span>
                 )
               })}
             </p>

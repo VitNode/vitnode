@@ -122,6 +122,7 @@ export type Mutation = {
   admin__core_groups__delete: Scalars['String']['output'];
   admin__core_groups__edit: ShowAdminGroups;
   admin__core_languages__create: ShowCoreLanguages;
+  admin__core_languages__delete: Scalars['String']['output'];
   admin__core_languages__edit: ShowCoreLanguages;
   admin__core_nav__change_position: Scalars['String']['output'];
   admin__core_nav__create: ShowCoreNav;
@@ -171,6 +172,11 @@ export type MutationAdmin__Core_Languages__CreateArgs = {
   code: Scalars['String']['input'];
   name: Scalars['String']['input'];
   timezone: Scalars['String']['input'];
+};
+
+
+export type MutationAdmin__Core_Languages__DeleteArgs = {
+  code: Scalars['String']['input'];
 };
 
 
@@ -991,6 +997,13 @@ export type Admin__Core_Languages__CreateMutationVariables = Exact<{
 
 export type Admin__Core_Languages__CreateMutation = { __typename?: 'Mutation', admin__core_languages__create: { __typename?: 'ShowCoreLanguages', code: string, id: number, name: string } };
 
+export type Admin__Core_Languages__DeleteMutationVariables = Exact<{
+  code: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Languages__DeleteMutation = { __typename?: 'Mutation', admin__core_languages__delete: string };
+
 export type Admin__Core_Languages__EditMutationVariables = Exact<{
   default: Scalars['Boolean']['input'];
   enabled: Scalars['Boolean']['input'];
@@ -1463,6 +1476,11 @@ export const Admin__Core_Languages__Create = gql`
     id
     name
   }
+}
+    `;
+export const Admin__Core_Languages__Delete = gql`
+    mutation Admin__core_languages__delete($code: String!) {
+  admin__core_languages__delete(code: $code)
 }
     `;
 export const Admin__Core_Languages__Edit = gql`
