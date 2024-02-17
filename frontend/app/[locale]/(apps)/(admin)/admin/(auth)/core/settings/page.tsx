@@ -1,5 +1,3 @@
-import { cookies } from "next/headers";
-
 import { SettingsCoreAdminView } from "@/admin/core/views/core/settings/settings-core-admin-view";
 import { fetcher } from "@/graphql/fetcher";
 import {
@@ -13,10 +11,7 @@ const getData = async () => {
     Admin__Settings__General__ShowQuery,
     Admin__Settings__General__ShowQueryVariables
   >({
-    query: Admin__Settings__General__Show,
-    headers: {
-      Cookie: cookies().toString()
-    }
+    query: Admin__Settings__General__Show
   });
 
   return data;

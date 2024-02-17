@@ -1,7 +1,5 @@
 "use server";
 
-import { cookies } from "next/headers";
-
 import { fetcher } from "@/graphql/fetcher";
 import {
   type Admin__Core_Nav__Change_PositionMutation,
@@ -18,10 +16,7 @@ export const mutationChangePositionApi = async (
       Admin__Core_Nav__Change_PositionMutationVariables
     >({
       query: Admin__Core_Nav__Change_Position,
-      variables,
-      headers: {
-        Cookie: cookies().toString()
-      }
+      variables
     });
 
     return { data };

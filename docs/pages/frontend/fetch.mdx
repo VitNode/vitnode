@@ -22,13 +22,7 @@ export default async function Page() {}
 
 ### Function with fetcher
 
-<Callout type="warning" emoji="⚠️">
-  Due to SSR, you need to pass cookies to `fetcher` using `headers` option.
-</Callout>
-
-```tsx {1-8,10-20}
-import { cookies } from "next/headers";
-
+```tsx {1-6, 9-16}
 import { fetcher } from "@/graphql/fetcher";
 import {
   Forum_Forums__Show,
@@ -43,9 +37,6 @@ const getData = async (variables: Forum_Forums__ShowQueryVariables) => {
   >({
     query: Forum_Forums__Show,
     variables,
-    headers: {
-      Cookie: cookies().toString()
-    },
     cache: "force-cache" // this option is used for caching data for GraphQL
   });
 
@@ -55,7 +46,7 @@ const getData = async (variables: Forum_Forums__ShowQueryVariables) => {
 export default async function Page() {}
 ```
 
-You can avoid using `cache` option if you don't want to cache data for GraphQL. The best practise is to avoid using `cache` option in AdminCP.
+You can avoid using `cache` option if you don't want to cache data for GraphQL. We don't recommend to use it in AdminCP.
 
 ### Run query
 
@@ -84,7 +75,10 @@ Using [TanStack Query (React Query)](https://tanstack.com/query/latest/docs/reac
 
 ### Create hook
 
-Inside `hooks/{module_name}` create new file with prefix `use`, for example `use-use-short-show-groups.ts`.
+Inside `hooks/{module_name}` create new files with:
+
+- suffix `api`, for example `query-api.ts` _(For Server Action)_,
+- prefix `use`, for example `use-use-short-show-groups.ts`
 
 Your schema should be similar like this:
 
@@ -92,22 +86,20 @@ Your schema should be similar like this:
   <FileTree.Folder name="hooks" defaultOpen>
     <FileTree.Folder name="module_name" defaultOpen>
       <FileTree.Folder name="groups" defaultOpen>
+        <FileTree.File name="query-api.ts" />
         <FileTree.File name="use-use-short-show-groups.ts" />
       </FileTree.Folder>
     </FileTree.Folder>
   </FileTree.Folder>
 </FileTree>
 
+### Server Action
+
+Inside `query-api.ts` you should create function for fetching data from server using `fetcher` function.
+
 ```ts
-export const useShortShowGroupsAdmin = () => {};
-```
+"use server";
 
-### useQuery
-
-```ts {1-9,12-31}
-import { useQuery } from "@tanstack/react-query";
-
-import { APIKeys } from "@/graphql/api-keys";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Groups__Show_Short,
@@ -115,32 +107,48 @@ import {
   type Admin__Core_Groups__Show_ShortQueryVariables
 } from "@/graphql/hooks";
 
-export const useShortShowGroupsAdmin = () => {
-  const api = useQuery({
-    queryKey: [APIKeys.SHORT_GROUPS_MEMBERS],
-    queryFn: async ({ signal }) => {
-      const { data } = await fetcher<
-        Admin__Core_Groups__Show_ShortQuery,
-        Admin__Core_Groups__Show_ShortQueryVariables
-      >({
-        query: Admin__Core_Groups__Show_Short,
-        variables: {
-          first: 25
-        },
-        signal
-      });
-
-      return data;
-    },
-    refetchOnMount: true
+export const queryApi = async (
+  variables: Admin__Core_Groups__Show_ShortQueryVariables
+) => {
+  const { data } = await fetcher<
+    Admin__Core_Groups__Show_ShortQuery,
+    Admin__Core_Groups__Show_ShortQueryVariables
+  >({
+    query: Admin__Core_Groups__Show_Short,
+    variables
   });
 
-  return api;
+  return data;
 };
 ```
 
-- `signal` - is used for canceling request when component is unmounted
-- `refetchOnMount` - is used for refetching data when component is mounted
+### useQuery
+
+```ts
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+
+import { APIKeys } from "@/graphql/api-keys";
+import { queryApi } from "./query-api";
+
+export const useShortShowGroupsAdminAPI = () => {
+  const [textSearch, setTextSearch] = useState("");
+
+  const api = useQuery({
+    queryKey: [APIKeys.SHORT_GROUPS_MEMBERS, { textSearch }],
+    queryFn: async () =>
+      await queryApi({
+        first: 25,
+        search: textSearch
+      }),
+    refetchOnMount: true
+  });
+
+  return { ...api, setTextSearch };
+};
+```
+
+`refetchOnMount` - is used for refetching data when component is mounted
 
 <Callout type="info" emoji="ℹ️">
   `queryKey` have to be unique in your app. The best practise to name it is
@@ -165,6 +173,22 @@ export const ContentGroupsFiltersUsersMembersAdmin = () => {
 };
 ```
 
+### Deley fetching (Signal)
+
+In [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) doesn't exist `signal` option. Insted of this you can use `useDebouncedCallback` in client side.
+
+Here is an example how to use it for `search` input.
+
+```tsx
+import { useDebouncedCallback } from "use-debounce";
+
+const handleSearchInput = useDebouncedCallback((value: string) => {
+  setSearch(value);
+}, 500);
+
+return <Input onChange={e => handleSearchInput(e.target.value)} />;
+```
+
 </Steps>
 
 <Callout type="error" emoji="❌">
@@ -186,11 +210,41 @@ Inside `hooks/{module_name}` create new file with prefix `use`, for example `use
   <FileTree.Folder name="hooks" defaultOpen>
     <FileTree.Folder name="module_name" defaultOpen>
       <FileTree.Folder name="topics" defaultOpen>
+        <FileTree.File name="query-api.ts" />
         <FileTree.File name="use-use-topics-list.ts" />
       </FileTree.Folder>
     </FileTree.Folder>
   </FileTree.Folder>
 </FileTree>
+
+### Server Action
+
+Inside `query-api.ts` you should create function for fetching data from server using `fetcher` function.
+
+```ts
+"use server";
+
+import { fetcher } from "@/graphql/fetcher";
+import {
+  Forum_Forums__Show_Item_More,
+  type Forum_Forums__Show_Item_MoreQuery,
+  type Forum_Forums__Show_Item_MoreQueryVariables
+} from "@/graphql/hooks";
+
+export const queryApi = async (
+  variables: Forum_Forums__Show_Item_MoreQueryVariables
+) => {
+  const { data } = await fetcher<
+    Forum_Forums__Show_Item_MoreQuery,
+    Forum_Forums__Show_Item_MoreQueryVariables
+  >({
+    query: Forum_Forums__Show_Item_More,
+    variables
+  });
+
+  return data;
+};
+```
 
 ### useInfiniteQuery
 
@@ -212,21 +266,11 @@ export const useTopicsList = () => {
 
   const query = useInfiniteQuery({
     queryKey: [APIKeys.TOPICS_IN_FORUM, { id }],
-    queryFn: async ({ pageParam, signal }) => {
-      const { data } = await fetcher<
-        Forum_Forums__Show_Item_MoreQuery,
-        Forum_Forums__Show_Item_MoreQueryVariables
-      >({
-        query: Forum_Forums__Show_Item_More,
-        variables: {
-          ...pageParam,
-          forumId: id
-        },
-        signal
-      });
-
-      return data;
-    },
+    queryFn: async ({ pageParam }) =>
+      await queryApi({
+        ...pageParam,
+        forumId: getIdFormString(id)
+      }),
     initialPageParam: {
       first: 10
     },
@@ -246,7 +290,6 @@ export const useTopicsList = () => {
 };
 ```
 
-- `signal` - is used for canceling request when component is unmounted
 - `pageParam` - is used for passing variables to query
 - `initialPageParam` - is used for passing initial variables to query
 - `getNextPageParam` - is used for passing variables to query when infinite scroll is triggered
@@ -300,7 +343,6 @@ Compared to `useQuery` in `useInfiniteQuery` you can use prefetch.
 Inside async component you can use [prefetchInfiniteQuery](https://tanstack.com/query/latest/docs/react/reference/QueryClient#queryclientfetchinfinitequery) function.
 
 ```tsx
-import { cookies } from "next/headers";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
 import { ForumsForumAdminView } from "@/admin/views/forum/forums/forums-forum-admin-view";
@@ -325,10 +367,7 @@ export default async function Page() {
         Admin__Forum_Forums__ShowQueryVariables
       >({
         query: Admin__Forum_Forums__Show,
-        variables: pageParam,
-        headers: {
-          Cookie: cookies().toString()
-        }
+        variables: pageParam
       });
 
       return data;
@@ -397,10 +436,8 @@ export const mutationApi = async () => {};
 
 Our `fetcher` should be wrapper with `try/catch` block to handle errors using client side.
 
-```ts {3-10,13,15-30}
+```ts
 "use server";
-
-import { cookies } from "next/headers";
 
 import { fetcher } from "@/graphql/fetcher";
 import {
@@ -418,10 +455,7 @@ export const mutationApi = async (
       Forum_Topics__Actions__Lock_ToggleMutationVariables
     >({
       query: Forum_Topics__Actions__Lock_Toggle,
-      variables,
-      headers: {
-        Cookie: cookies().toString()
-      }
+      variables
     });
 
     return { data };
@@ -430,10 +464,6 @@ export const mutationApi = async (
   }
 };
 ```
-
-<Callout type="warning" emoji="⚠️">
-  Due to SSR, you need to pass cookies to `fetcher` using `headers` option.
-</Callout>
 
 ### Example use
 
@@ -542,3 +572,7 @@ You don't need to use only one method. You can combine them.
 For example:
 
 - Fetching first page for infinite query using Server Side Rendering (SSR)
+
+## Debugging for React Query
+
+To enable debugging for React Query add `NEXT_PUBLIC_DEBUG=true` to `.env` in frontend folder.

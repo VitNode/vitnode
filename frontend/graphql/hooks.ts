@@ -59,12 +59,6 @@ export type ChildrenShowForumForums = {
   position: Scalars['Int']['output'];
 };
 
-export type CoreMiddlewareObj = {
-  __typename?: 'CoreMiddlewareObj';
-  default_language: Scalars['String']['output'];
-  languages: Array<LanguageCoreMiddlewareObj>;
-};
-
 export type CreateForumForumsObj = {
   __typename?: 'CreateForumForumsObj';
   _count: ShowForumForumsCount;
@@ -102,16 +96,6 @@ export type GroupsPermissionsCreateForumForums = {
   view: Scalars['Boolean']['input'];
 };
 
-export type LanguageCoreMiddlewareObj = {
-  __typename?: 'LanguageCoreMiddlewareObj';
-  code: Scalars['String']['output'];
-  default: Scalars['Boolean']['output'];
-  enabled: Scalars['Boolean']['output'];
-  id: Scalars['Int']['output'];
-  name: Scalars['String']['output'];
-  timezone: Scalars['String']['output'];
-};
-
 export type LastChildShowForumForums = {
   __typename?: 'LastChildShowForumForums';
   created: Scalars['Int']['output'];
@@ -137,6 +121,8 @@ export type Mutation = {
   __typename?: 'Mutation';
   admin__core_groups__delete: Scalars['String']['output'];
   admin__core_groups__edit: ShowAdminGroups;
+  admin__core_languages__create: ShowCoreLanguages;
+  admin__core_languages__edit: ShowCoreLanguages;
   admin__core_nav__change_position: Scalars['String']['output'];
   admin__core_nav__create: ShowCoreNav;
   admin__core_nav__delete: Scalars['String']['output'];
@@ -158,7 +144,6 @@ export type Mutation = {
   admin_sessions__sign_out: Scalars['String']['output'];
   admin_settings__general__edit: GeneralAdminSettingsObj;
   core_groups__admin_create: ShowAdminGroups;
-  core_languages__edit: ShowCoreLanguages;
   core_members__avatar__delete: Scalars['String']['output'];
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
   core_members__sign_up: SignUpCoreMembersObj;
@@ -179,6 +164,22 @@ export type MutationAdmin__Core_Groups__DeleteArgs = {
 export type MutationAdmin__Core_Groups__EditArgs = {
   id: Scalars['Int']['input'];
   name: Array<TextLanguageInput>;
+};
+
+
+export type MutationAdmin__Core_Languages__CreateArgs = {
+  code: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  timezone: Scalars['String']['input'];
+};
+
+
+export type MutationAdmin__Core_Languages__EditArgs = {
+  default: Scalars['Boolean']['input'];
+  enabled: Scalars['Boolean']['input'];
+  id: Scalars['Int']['input'];
+  name: Scalars['String']['input'];
+  timezone: Scalars['String']['input'];
 };
 
 
@@ -309,16 +310,6 @@ export type MutationCore_Groups__Admin_CreateArgs = {
 };
 
 
-export type MutationCore_Languages__EditArgs = {
-  code: Scalars['String']['input'];
-  default: Scalars['Boolean']['input'];
-  enabled: Scalars['Boolean']['input'];
-  id: Scalars['Int']['input'];
-  name: Scalars['String']['input'];
-  timezone: Scalars['String']['input'];
-};
-
-
 export type MutationCore_Members__Avatar__UploadArgs = {
   file: Scalars['Upload']['input'];
 };
@@ -401,7 +392,6 @@ export type Query = {
   admin__settings__general__show: ShowGeneralAdminSettingsObj;
   core_languages__show: ShowCoreLanguagesObj;
   core_members__show: ShowCoreMembersObj;
-  core_middleware: CoreMiddlewareObj;
   core_nav__show: ShowCoreNavObj;
   core_sessions__authorization: AuthorizationCoreSessionsObj;
   core_themes__show: ShowCoreThemesObj;
@@ -992,6 +982,26 @@ export type Admin__Forum_Forums__CreateMutationVariables = Exact<{
 
 export type Admin__Forum_Forums__CreateMutation = { __typename?: 'Mutation', admin__forum_forums__create: { __typename?: 'CreateForumForumsObj', created: number, id: number, position: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
+export type Admin__Core_Languages__CreateMutationVariables = Exact<{
+  code: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  timezone: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Languages__CreateMutation = { __typename?: 'Mutation', admin__core_languages__create: { __typename?: 'ShowCoreLanguages', code: string, id: number, name: string } };
+
+export type Admin__Core_Languages__EditMutationVariables = Exact<{
+  default: Scalars['Boolean']['input'];
+  enabled: Scalars['Boolean']['input'];
+  id: Scalars['Int']['input'];
+  name: Scalars['String']['input'];
+  timezone: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Languages__EditMutation = { __typename?: 'Mutation', admin__core_languages__edit: { __typename?: 'ShowCoreLanguages', code: string, default: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string } };
+
 export type Admin__Core_Groups__DeleteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
 }>;
@@ -1157,18 +1167,6 @@ export type Admin__Core_Themes__UploadMutationVariables = Exact<{
 
 
 export type Admin__Core_Themes__UploadMutation = { __typename?: 'Mutation', admin__core_themes__upload: string };
-
-export type Core_Languages__EditMutationVariables = Exact<{
-  default: Scalars['Boolean']['input'];
-  enabled: Scalars['Boolean']['input'];
-  id: Scalars['Int']['input'];
-  name: Scalars['String']['input'];
-  timezone: Scalars['String']['input'];
-  code: Scalars['String']['input'];
-}>;
-
-
-export type Core_Languages__EditMutation = { __typename?: 'Mutation', core_languages__edit: { __typename?: 'ShowCoreLanguages', code: string, default: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string } };
 
 export type Core_Members__Sign_UpMutationVariables = Exact<{
   email: Scalars['String']['input'];
@@ -1341,7 +1339,7 @@ export type Admin_Core_Themes__ShowQuery = { __typename?: 'Query', admin__core_t
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_MiddlewareQuery = { __typename?: 'Query', core_middleware: { __typename?: 'CoreMiddlewareObj', default_language: string, languages: Array<{ __typename?: 'LanguageCoreMiddlewareObj', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean }> }, core_themes__show: { __typename?: 'ShowCoreThemesObj', edges: Array<{ __typename?: 'ShowCoreThemes', id: number, name: string }> } };
+export type Core_MiddlewareQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean }> }, core_themes__show: { __typename?: 'ShowCoreThemesObj', edges: Array<{ __typename?: 'ShowCoreThemes', id: number, name: string }> } };
 
 export type Core_Languages__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -1455,6 +1453,34 @@ export const Admin__Forum_Forums__Create = gql`
       value
     }
     position
+  }
+}
+    `;
+export const Admin__Core_Languages__Create = gql`
+    mutation Admin__core_languages__create($code: String!, $name: String!, $timezone: String!) {
+  admin__core_languages__create(code: $code, name: $name, timezone: $timezone) {
+    code
+    id
+    name
+  }
+}
+    `;
+export const Admin__Core_Languages__Edit = gql`
+    mutation Admin__core_languages__edit($default: Boolean!, $enabled: Boolean!, $id: Int!, $name: String!, $timezone: String!) {
+  admin__core_languages__edit(
+    default: $default
+    enabled: $enabled
+    id: $id
+    name: $name
+    timezone: $timezone
+  ) {
+    code
+    default
+    enabled
+    id
+    name
+    protected
+    timezone
   }
 }
     `;
@@ -1647,26 +1673,6 @@ export const Admin__Core_Themes__Edit = gql`
 export const Admin__Core_Themes__Upload = gql`
     mutation Admin__core_themes__upload($file: Upload!) {
   admin__core_themes__upload(file: $file)
-}
-    `;
-export const Core_Languages__Edit = gql`
-    mutation Core_languages__edit($default: Boolean!, $enabled: Boolean!, $id: Int!, $name: String!, $timezone: String!, $code: String!) {
-  core_languages__edit(
-    default: $default
-    enabled: $enabled
-    id: $id
-    name: $name
-    timezone: $timezone
-    code: $code
-  ) {
-    code
-    default
-    enabled
-    id
-    name
-    protected
-    timezone
-  }
 }
     `;
 export const Core_Members__Sign_Up = gql`
@@ -2154,9 +2160,8 @@ export const Admin_Core_Themes__Show = gql`
     `;
 export const Core_Middleware = gql`
     query Core_middleware {
-  core_middleware {
-    default_language
-    languages {
+  core_languages__show {
+    edges {
       default
       code
       id

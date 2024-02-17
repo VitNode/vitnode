@@ -1,6 +1,5 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
@@ -19,10 +18,7 @@ export const mutationEditApi = async (
       Admin__Core_Groups__EditMutationVariables
     >({
       query: Admin__Core_Groups__Edit,
-      variables,
-      headers: {
-        Cookie: cookies().toString()
-      }
+      variables
     });
 
     revalidatePath("/admin/members/groups", "page");

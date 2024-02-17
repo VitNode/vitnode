@@ -1,6 +1,5 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
@@ -24,10 +23,7 @@ export const mutationUploadApi = async (formData: FormData) => {
           files,
           variable: "file"
         }
-      ],
-      headers: {
-        Cookie: cookies().toString()
-      }
+      ]
     });
 
     revalidateTag("Core_Sessions__Authorization");

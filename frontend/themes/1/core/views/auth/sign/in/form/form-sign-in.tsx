@@ -36,6 +36,16 @@ export const FormSignIn = () => {
               </Alert>
             )}
 
+            {error && error.extensions?.code !== "ACCESS_DENIED" && (
+              <Alert variant="destructive">
+                <AlertCircle className="h-4 w-4" />
+                <AlertTitle>{t("errors.title")}</AlertTitle>
+                <AlertDescription>
+                  {t("errors.internal_server_error")}
+                </AlertDescription>
+              </Alert>
+            )}
+
             <FormField
               control={form.control}
               name="email"

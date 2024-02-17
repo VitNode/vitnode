@@ -40,11 +40,6 @@ type ChildrenShowForumForums {
   position: Int!
 }
 
-type CoreMiddlewareObj {
-  default_language: String!
-  languages: [LanguageCoreMiddlewareObj!]!
-}
-
 type CreateForumForumsObj {
   _count: ShowForumForumsCount!
   children: [ChildrenShowForumForums!]
@@ -78,15 +73,6 @@ input GroupsPermissionsCreateForumForums {
   view: Boolean!
 }
 
-type LanguageCoreMiddlewareObj {
-  code: String!
-  default: Boolean!
-  enabled: Boolean!
-  id: Int!
-  name: String!
-  timezone: String!
-}
-
 type LastChildShowForumForums {
   created: Int!
   description: [TextLanguage!]!
@@ -108,6 +94,8 @@ type LayoutAdminInstallObj {
 type Mutation {
   admin__core_groups__delete(id: Int!): String!
   admin__core_groups__edit(id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
+  admin__core_languages__create(code: String!, name: String!, timezone: String!): ShowCoreLanguages!
+  admin__core_languages__edit(default: Boolean!, enabled: Boolean!, id: Int!, name: String!, timezone: String!): ShowCoreLanguages!
   admin__core_nav__change_position(id: Int!, index_to_move: Int!, parent_id: Int): String!
   admin__core_nav__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, name: [TextLanguageInput!]!): ShowCoreNav!
   admin__core_nav__delete(id: Int!): String!
@@ -129,7 +117,6 @@ type Mutation {
   admin_sessions__sign_out: String!
   admin_settings__general__edit(side_name: String!): GeneralAdminSettingsObj!
   core_groups__admin_create(name: [TextLanguageInput!]!): ShowAdminGroups!
-  core_languages__edit(code: String!, default: Boolean!, enabled: Boolean!, id: Int!, name: String!, timezone: String!): ShowCoreLanguages!
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
   core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
@@ -177,7 +164,6 @@ type Query {
   admin__settings__general__show: ShowGeneralAdminSettingsObj!
   core_languages__show(cursor: Int, first: Int, last: Int): ShowCoreLanguagesObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
-  core_middleware: CoreMiddlewareObj!
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_themes__show(cursor: Int, first: Int, last: Int): ShowCoreThemesObj!

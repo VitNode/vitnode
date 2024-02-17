@@ -2,14 +2,9 @@ import { Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useDebouncedCallback } from "use-debounce";
 
 import { cn } from "@/functions/classnames";
-import { fetcher } from "@/graphql/fetcher";
-import {
-  Admin__Core_Groups__Show_Short,
-  type Admin__Core_Groups__Show_ShortQuery,
-  type Admin__Core_Groups__Show_ShortQueryVariables
-} from "@/graphql/hooks";
 import { Loader } from "@/components/loader/loader";
 import { Input } from "@/components/ui/input";
 import {
@@ -19,6 +14,7 @@ import {
 } from "@/components/ui/command";
 import type { GroupInputItem } from "../group-input";
 import { GroupInputContentList } from "./list";
+import { queryApi } from "./query-api";
 
 interface Props {
   onSelect: (value: GroupInputItem) => void;
@@ -31,21 +27,12 @@ export const GroupInputContent = ({ onSelect, values }: Props) => {
 
   const { data, isLoading } = useQuery({
     queryKey: ["Admin__Core_Groups__Show_Short", { search }],
-    queryFn: async () => {
-      const { data } = await fetcher<
-        Admin__Core_Groups__Show_ShortQuery,
-        Admin__Core_Groups__Show_ShortQueryVariables
-      >({
-        query: Admin__Core_Groups__Show_Short,
-        variables: {
-          first: 10,
-          search
-        }
-      });
-
-      return data;
-    }
+    queryFn: async () => await queryApi({ first: 10, search })
   });
+
+  const handleSearchInput = useDebouncedCallback((value: string) => {
+    setSearch(value);
+  }, 500);
 
   return (
     <Command>
@@ -56,8 +43,7 @@ export const GroupInputContent = ({ onSelect, values }: Props) => {
             "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0",
             commandInputClassName
           )}
-          value={search}
-          onChange={e => setSearch(e.target.value)}
+          onChange={e => handleSearchInput(e.target.value)}
           placeholder={t("group_input.search")}
         />
       </div>

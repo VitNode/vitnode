@@ -1,18 +1,16 @@
-mutation Core_languages__edit(
+mutation Admin__core_languages__edit(
   $default: Boolean!
   $enabled: Boolean!
   $id: Int!
   $name: String!
   $timezone: String!
-  $code: String!
 ) {
-  core_languages__edit(
+  admin__core_languages__edit(
     default: $default
     enabled: $enabled
     id: $id
     name: $name
     timezone: $timezone
-    code: $code
   ) {
     code
     default

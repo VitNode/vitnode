@@ -1,13 +1,10 @@
 import { createContext, useContext } from "react";
 
-import type {
-  LanguageCoreMiddlewareObj,
-  ShowCoreThemes
-} from "@/graphql/hooks";
+import type { ShowCoreLanguages, ShowCoreThemes } from "@/graphql/hooks";
 
 interface Args {
   defaultLanguage: string;
-  languages: Omit<LanguageCoreMiddlewareObj, "protected">[];
+  languages: Omit<ShowCoreLanguages, "protected">[];
   themes: Pick<ShowCoreThemes, "id" | "name">[];
 }
 

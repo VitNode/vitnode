@@ -1,0 +1,11 @@
+mutation Admin__core_languages__create(
+  $code: String!
+  $name: String!
+  $timezone: String!
+) {
+  admin__core_languages__create(code: $code, name: $name, timezone: $timezone) {
+    code
+    id
+    name
+  }
+}

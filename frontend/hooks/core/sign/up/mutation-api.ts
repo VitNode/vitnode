@@ -1,6 +1,5 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
@@ -22,10 +21,7 @@ export const mutationApi = async ({ installPage, variables }: Args) => {
       Core_Members__Sign_UpMutationVariables
     >({
       query: Core_Members__Sign_Up,
-      variables,
-      headers: {
-        Cookie: cookies().toString()
-      }
+      variables
     });
 
     if (installPage) {

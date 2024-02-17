@@ -14,8 +14,8 @@ import { Loader } from "@/components/loader/loader";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 
 const Content = lazy(() =>
-  import("./content").then(module => ({
-    default: module.ContentEditActionsTableLangsCoreAdmin
+  import("../../create-edit/create-edit").then(module => ({
+    default: module.CreateEditLangAdmin
   }))
 );
 
@@ -36,7 +36,7 @@ export const EditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
 
           <DialogContent>
             <Suspense fallback={<Loader />}>
-              <Content {...data} />
+              <Content data={data} />
             </Suspense>
           </DialogContent>
 

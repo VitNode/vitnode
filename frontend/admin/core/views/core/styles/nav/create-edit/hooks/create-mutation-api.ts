@@ -1,6 +1,5 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { revalidatePath, revalidateTag } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
@@ -19,10 +18,7 @@ export const createMutationApi = async (
       Admin__Core_Nav__CreateMutationVariables
     >({
       query: Admin__Core_Nav__Create,
-      variables,
-      headers: {
-        Cookie: cookies().toString()
-      }
+      variables
     });
 
     revalidateTag("Core_Sessions__Authorization");

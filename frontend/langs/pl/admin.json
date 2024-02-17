@@ -162,10 +162,16 @@
           "key": "Klucz"
         },
         "actions": {
+          "create": {
+            "name": "Nazwa",
+            "code": "Kod",
+            "timezone": "Strefa czasowa",
+            "submit": "Stwórz język",
+            "success": "Język został stworzony."
+          },
           "edit": {
-            "name": "Name",
-            "timezone": "Timezone",
-            "submit": "Zapisz zmiany"
+            "submit": "Edytuj język",
+            "success": "Język został zaktualizowany."
           }
         }
       }

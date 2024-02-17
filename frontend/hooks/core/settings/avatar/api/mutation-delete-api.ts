@@ -1,7 +1,6 @@
 "use server";
 
 import { revalidateTag } from "next/cache";
-import { cookies } from "next/headers";
 
 import { fetcher } from "@/graphql/fetcher";
 import {
@@ -16,10 +15,7 @@ export const mutationDeleteApi = async () => {
       Core_Members__Avatar__DeleteMutation,
       Core_Members__Avatar__DeleteMutationVariables
     >({
-      query: Core_Members__Avatar__Delete,
-      headers: {
-        Cookie: cookies().toString()
-      }
+      query: Core_Members__Avatar__Delete
     });
 
     revalidateTag("Core_Sessions__Authorization");

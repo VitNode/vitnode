@@ -1,7 +1,8 @@
 import { Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import type { ComponentType } from "react";
+import { type ComponentType } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 import { Input } from "@/components/ui/input";
 import { cn } from "@/functions/classnames";
@@ -26,14 +27,11 @@ export interface ContentFilterToolbarDataTableProps {
     icon?: ComponentType<{ className?: string }>;
   }[];
   isFetching?: boolean;
-  searchState?: {
-    onChange: (value: string) => void;
-    value: string;
-  };
+  searchOnChange?: (value: string) => void;
 }
 
 export const ContentFilterToolbarDataTable = ({
-  searchState,
+  searchOnChange,
   ...props
 }: ContentFilterToolbarDataTableProps) => {
   const t = useTranslations("core");
@@ -43,14 +41,19 @@ export const ContentFilterToolbarDataTable = ({
   const { push } = useRouter();
   const pathname = usePathname();
 
+  const handleSearchInput = useDebouncedCallback((value: string) => {
+    if (!searchOnChange) return;
+
+    searchOnChange(value);
+  }, 500);
+
   return (
     <Command>
-      {searchState ? (
+      {searchOnChange ? (
         <div className="flex items-center border-b px-3">
           <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
           <Input
-            onChange={e => searchState.onChange(e.target.value)}
-            value={searchState.value}
+            onChange={e => handleSearchInput(e.target.value)}
             className={cn(
               commandInputClassName,
               "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0"
@@ -63,7 +66,7 @@ export const ContentFilterToolbarDataTable = ({
       )}
 
       <CommandList>
-        {!searchState && <CommandEmpty>{t("no_results")}</CommandEmpty>}
+        {!searchOnChange && <CommandEmpty>{t("no_results")}</CommandEmpty>}
 
         <CommandGroup>
           <ListContentFilterToolbarDataTable {...props} />

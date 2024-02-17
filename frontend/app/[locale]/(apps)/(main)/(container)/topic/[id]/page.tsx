@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { lazy, type LazyExoticComponent } from "react";
 
@@ -39,9 +38,6 @@ const getData = async ({
       id: getIdFormString(id),
       sortBy,
       firstEdges
-    },
-    headers: {
-      Cookie: cookies().toString()
     },
     cache: "force-cache",
     next: {

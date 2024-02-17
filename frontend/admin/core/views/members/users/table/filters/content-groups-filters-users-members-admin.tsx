@@ -3,17 +3,13 @@ import { useShortShowGroupsAdminAPI } from "@/admin/core/hooks/api/use-short-sho
 import { useTextLang } from "@/hooks/core/use-text-lang";
 
 export const ContentGroupsFiltersUsersMembersAdmin = () => {
-  const { data, isFetching, setTextSearch, textSearch } =
-    useShortShowGroupsAdminAPI();
+  const { data, isFetching, setTextSearch } = useShortShowGroupsAdminAPI();
   const { convertText } = useTextLang();
 
   return (
     <ContentFilterToolbarDataTable
       isFetching={isFetching}
-      searchState={{
-        value: textSearch,
-        onChange: setTextSearch
-      }}
+      searchOnChange={setTextSearch}
       options={
         data?.admin__core_groups__show.edges
           .filter(item => !item.guest)

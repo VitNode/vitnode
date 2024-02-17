@@ -162,10 +162,16 @@
           "key": "Key"
         },
         "actions": {
-          "edit": {
+          "create": {
             "name": "Name",
+            "code": "Code",
             "timezone": "Timezone",
-            "submit": "Save changes"
+            "submit": "Create Language",
+            "success": "Language has been created."
+          },
+          "edit": {
+            "submit": "Edit Language",
+            "success": "Language has been updated."
           }
         }
       }

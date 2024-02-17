@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { cookies } from "next/headers";
 
 import { AdministratorsStaffAdminView } from "@/admin/core/views/members/staff/views/administrators/administrators-view";
 import {
@@ -23,10 +22,7 @@ const getData = async (
     Admin__Core_Staff_Administrators__ShowQueryVariables
   >({
     query: Admin__Core_Staff_Administrators__Show,
-    variables,
-    headers: {
-      Cookie: cookies().toString()
-    }
+    variables
   });
 
   return data;

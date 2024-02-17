@@ -1,28 +1,23 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { revalidatePath, revalidateTag } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
 import {
-  Core_Languages__Edit,
-  type Core_Languages__EditMutation,
-  type Core_Languages__EditMutationVariables
+  type Admin__Core_Languages__CreateMutationVariables,
+  Admin__Core_Languages__Create
 } from "@/graphql/hooks";
 
-export const mutationApi = async (
-  variables: Core_Languages__EditMutationVariables
+export const createMutationApi = async (
+  variables: Admin__Core_Languages__CreateMutationVariables
 ) => {
   try {
     const { data } = await fetcher<
-      Core_Languages__EditMutation,
-      Core_Languages__EditMutationVariables
+      Admin__Core_Languages__CreateMutationVariables,
+      Admin__Core_Languages__CreateMutationVariables
     >({
-      query: Core_Languages__Edit,
-      variables,
-      headers: {
-        Cookie: cookies().toString()
-      }
+      query: Admin__Core_Languages__Create,
+      variables
     });
 
     revalidatePath("/", "layout");

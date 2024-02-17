@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { lazy, type LazyExoticComponent } from "react";
 
@@ -22,9 +21,6 @@ const getData = async ({ id }: { id: string }) => {
     variables: {
       forumId: getIdFormString(id),
       first: 25
-    },
-    headers: {
-      Cookie: cookies().toString()
     },
     cache: "force-cache",
     next: {
