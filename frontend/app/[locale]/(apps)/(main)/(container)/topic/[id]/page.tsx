@@ -62,9 +62,19 @@ export default async function Page({
   searchParams: { sort }
 }: Props) {
   const { theme_id } = await getSessionData();
-  let data: Forum_Topics__ShowQuery | undefined;
+
   try {
-    data = await getData({ id, sort });
+    const data = await getData({ id, sort });
+
+    const PageFromTheme: LazyExoticComponent<
+      (props: TopicViewProps) => JSX.Element
+    > = lazy(() =>
+      import(`@/themes/${theme_id}/forum/views/forum/topic/topic-view`).catch(
+        () => import("@/themes/1/forum/views/forum/topic/topic-view")
+      )
+    );
+
+    return <PageFromTheme data={data} firstEdges={firstEdges} />;
   } catch (e) {
     const error = e as ErrorType;
 
@@ -80,20 +90,6 @@ export default async function Page({
       return <ErrorView code="403" />;
     }
 
-    throw e;
-  }
-
-  if (!data || data.forum_topics__show.edges.length === 0) {
     notFound();
   }
-
-  const PageFromTheme: LazyExoticComponent<
-    (props: TopicViewProps) => JSX.Element
-  > = lazy(() =>
-    import(`@/themes/${theme_id}/forum/views/forum/topic/topic-view`).catch(
-      () => import("@/themes/1/forum/views/forum/topic/topic-view")
-    )
-  );
-
-  return <PageFromTheme data={data} firstEdges={firstEdges} />;
 }

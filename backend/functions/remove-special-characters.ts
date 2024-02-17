@@ -1,8 +1,9 @@
 export const removeSpecialCharacters = (text: string) =>
   text
+    .replace(/\s/g, "-")
     .normalize("NFD")
     .replace(/\p{Diacritic}/gu, "")
-    .replace(/\s/g, "-")
+    .replace(/[#%&?^|'{}\\/]/g, "")
     .replace(/ł/g, "l")
     .replace(/@/g, "-at-")
     .replace(/\./g, "-");
