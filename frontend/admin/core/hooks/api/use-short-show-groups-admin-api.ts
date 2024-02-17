@@ -9,12 +9,11 @@ export const useShortShowGroupsAdminAPI = () => {
 
   const api = useQuery({
     queryKey: [APIKeys.SHORT_GROUPS_MEMBERS, { textSearch }],
-    queryFn: async () => {
-      return await queryApi({
+    queryFn: async () =>
+      await queryApi({
         first: 25,
         search: textSearch
-      });
-    },
+      }),
     refetchOnMount: true
   });
 

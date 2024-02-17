@@ -5,15 +5,13 @@ import {
 } from "@tanstack/react-query";
 
 import { APIKeys } from "@/graphql/api-keys";
-import { fetcher } from "@/graphql/fetcher";
 import {
-  Admin__Forum_Forums__Show,
   type Maybe,
   type Admin__Forum_Forums__ShowQuery,
-  type Admin__Forum_Forums__ShowQueryVariables,
   type ChildrenShowForumForums,
   type ShowForumForumsAdmin
 } from "@/graphql/hooks";
+import { queryApi } from "./query-api";
 
 interface Args {
   parentId: number;
@@ -60,15 +58,7 @@ export const useChildrenForumForumsAdminAPI = ({ enabled, parentId }: Args) => {
   const { isFetching, isLoading } = useQuery({
     queryKey: [APIKeys.FORUMS_CHILDREN_ADMIN, { parentId }],
     queryFn: async () => {
-      const { data } = await fetcher<
-        Admin__Forum_Forums__ShowQuery,
-        Admin__Forum_Forums__ShowQueryVariables
-      >({
-        query: Admin__Forum_Forums__Show,
-        variables: {
-          parentId
-        }
-      });
+      const data = await queryApi({ parentId });
 
       queryClient.setQueryData<InfiniteData<Admin__Forum_Forums__ShowQuery>>(
         [APIKeys.FORUMS_ADMIN],

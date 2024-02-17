@@ -2,14 +2,9 @@ import { Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useDebouncedCallback } from "use-debounce";
 
 import { cn } from "@/functions/classnames";
-import { fetcher } from "@/graphql/fetcher";
-import {
-  Core_Members__Show__Search,
-  type Core_Members__Show__SearchQuery,
-  type Core_Members__Show__SearchQueryVariables
-} from "@/graphql/hooks";
 import { UserInputContentList } from "./list";
 import type { UserInputItem } from "../user-input";
 import { Loader } from "@/components/loader/loader";
@@ -19,6 +14,7 @@ import {
   CommandList,
   commandInputClassName
 } from "@/components/ui/command";
+import { queryApi } from "./query-api";
 
 interface Props {
   onSelect: (value: UserInputItem) => void;
@@ -31,21 +27,16 @@ export const UserInputContent = ({ onSelect, values }: Props) => {
 
   const { data, isLoading } = useQuery({
     queryKey: ["Core_Members__Show__Search", { search }],
-    queryFn: async () => {
-      const { data } = await fetcher<
-        Core_Members__Show__SearchQuery,
-        Core_Members__Show__SearchQueryVariables
-      >({
-        query: Core_Members__Show__Search,
-        variables: {
-          first: 10,
-          search
-        }
-      });
-
-      return data;
-    }
+    queryFn: async () =>
+      await queryApi({
+        first: 10,
+        search
+      })
   });
+
+  const handleSearchInput = useDebouncedCallback((value: string) => {
+    setSearch(value);
+  }, 500);
 
   return (
     <Command>
@@ -56,8 +47,7 @@ export const UserInputContent = ({ onSelect, values }: Props) => {
             "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0",
             commandInputClassName
           )}
-          value={search}
-          onChange={e => setSearch(e.target.value)}
+          onChange={e => handleSearchInput(e.target.value)}
           placeholder={t("user_input.search")}
         />
       </div>
