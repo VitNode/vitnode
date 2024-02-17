@@ -292,7 +292,6 @@ export type MutationAdmin__Forum_Forums__CreateArgs = {
 
 
 export type MutationAdmin_Core_Languages__EditArgs = {
-  code: Scalars['String']['input'];
   default: Scalars['Boolean']['input'];
   enabled: Scalars['Boolean']['input'];
   id: Scalars['Int']['input'];
@@ -1155,7 +1154,6 @@ export type Admin_Core_Languages__EditMutationVariables = Exact<{
   id: Scalars['Int']['input'];
   name: Scalars['String']['input'];
   timezone: Scalars['String']['input'];
-  code: Scalars['String']['input'];
 }>;
 
 
@@ -1641,14 +1639,13 @@ export const Admin__Core_Themes__Upload = gql`
 }
     `;
 export const Admin_Core_Languages__Edit = gql`
-    mutation Admin_core_languages__edit($default: Boolean!, $enabled: Boolean!, $id: Int!, $name: String!, $timezone: String!, $code: String!) {
+    mutation Admin_core_languages__edit($default: Boolean!, $enabled: Boolean!, $id: Int!, $name: String!, $timezone: String!) {
   admin_core_languages__edit(
     default: $default
     enabled: $enabled
     id: $id
     name: $name
     timezone: $timezone
-    code: $code
   ) {
     code
     default

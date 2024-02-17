@@ -5,31 +5,11 @@ import { join } from "path";
 interface ConfigType {
   applications: string[];
   finished_install: boolean;
-  languages: {
-    default: string;
-    locales: {
-      enabled: boolean;
-      key: string;
-    }[];
-  };
   side_name: string;
 }
 
 const DATA: ConfigType = {
   side_name: "VitNode Community",
-  languages: {
-    locales: [
-      {
-        key: "en",
-        enabled: true
-      },
-      {
-        key: "pl",
-        enabled: true
-      }
-    ],
-    default: "en"
-  },
   applications: ["core", "admin", "forum"],
   finished_install: false
 };

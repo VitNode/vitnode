@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useMemo } from "react";
 import { toast } from "sonner";
@@ -17,6 +17,7 @@ export const ContentTableLangsCoreAdmin = ({
   const t = useTranslations("admin.core.langs");
   const tAdmin = useTranslations("admin");
   const tCore = useTranslations("core");
+  const locale = useLocale();
 
   const columns: ColumnDef<ShowCoreLanguages>[] = useMemo(
     () => [
@@ -42,7 +43,7 @@ export const ContentTableLangsCoreAdmin = ({
 
           return (
             <Switch
-              disabled={data.default || data.protected}
+              disabled={data.default || data.protected || data.code === locale}
               checked={data.enabled}
               onClick={async () => {
                 const mutation = await editMutationApi({

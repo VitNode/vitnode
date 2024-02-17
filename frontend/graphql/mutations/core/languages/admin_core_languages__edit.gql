@@ -4,7 +4,6 @@ mutation Admin_core_languages__edit(
   $id: Int!
   $name: String!
   $timezone: String!
-  $code: String!
 ) {
   admin_core_languages__edit(
     default: $default
@@ -12,7 +11,6 @@ mutation Admin_core_languages__edit(
     id: $id
     name: $name
     timezone: $timezone
-    code: $code
   ) {
     code
     default

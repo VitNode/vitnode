@@ -1,9 +1,12 @@
-import { ArgsType, Field, Int } from "@nestjs/graphql";
+import { ArgsType, Field, Int, OmitType } from "@nestjs/graphql";
 
 import { CreateCoreAdminLanguagesArgs } from "../../create/dto/edit.args";
 
 @ArgsType()
-export class EditCoreAdminLanguagesArgs extends CreateCoreAdminLanguagesArgs {
+export class EditCoreAdminLanguagesArgs extends OmitType(
+  CreateCoreAdminLanguagesArgs,
+  ["code"] as const
+) {
   @Field(() => Int)
   id: number;
 
