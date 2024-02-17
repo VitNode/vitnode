@@ -7,8 +7,7 @@ import * as z from "zod";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 import { useDialog } from "@/components/ui/dialog";
 import { editMutationApi } from "./edit-mutation-api";
-
-import { createMutationApi } from "../../../styles/nav/create-edit/hooks/create-mutation-api";
+import { createMutationApi } from "./create-mutation-api";
 
 interface Args {
   data?: ShowCoreLanguages;
