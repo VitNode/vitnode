@@ -31,9 +31,7 @@ export const useTextLang = () => {
     id: number;
     name: TextLanguage[];
   }) => {
-    const text = removeSpecialCharacters(convertText(name))
-      .replace(/\//g, "-")
-      .toLowerCase();
+    const text = removeSpecialCharacters(convertText(name)).toLowerCase();
 
     return `${text}-${id}`;
   };
