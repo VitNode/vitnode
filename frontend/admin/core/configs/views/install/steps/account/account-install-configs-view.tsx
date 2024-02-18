@@ -44,7 +44,9 @@ export const AccountInstallConfigsView = () => {
                     {t.rich("sign_up.form.name.your_id", {
                       id: () => (
                         <span className="font-medium">
-                          {removeSpecialCharacters(field.value)}
+                          {removeSpecialCharacters(
+                            field.value.trimStart().trimEnd()
+                          )}
                         </span>
                       )
                     })}

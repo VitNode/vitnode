@@ -1,5 +1,7 @@
 export const removeSpecialCharacters = (text: string) =>
   text
+    .trimStart()
+    .trimEnd()
     .replace(/\s/g, "-")
     .normalize("NFD")
     .replace(/\p{Diacritic}/gu, "")

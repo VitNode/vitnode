@@ -4,13 +4,13 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
 
-import { zodTextLanguageInputType } from "@/components/text-language-input";
 import type { ShowAdminGroups } from "@/graphql/hooks";
 import { mutationCreateApi } from "./mutation-create-api";
 import { mutationEditApi } from "./mutation-edit-api";
 import { useDialog } from "@/components/ui/dialog";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { usePathname, useRouter } from "@/i18n";
+import { zodInput } from "@/functions/zod";
 
 export interface CreateEditFormGroupsMembersAdminArgs {
   data?: Pick<ShowAdminGroups, "name" | "id">;
@@ -27,9 +27,9 @@ export const useCreateEditFormGroupsMembersAdmin = ({
   const { push } = useRouter();
 
   const formSchema = z.object({
-    name: zodTextLanguageInputType.min(1, tCore("forms.empty")),
-    test: z.string(),
-    color: z.string()
+    name: zodInput.languageInputRequired,
+    test: zodInput.string,
+    color: zodInput.string
   });
 
   const form = useForm<z.infer<typeof formSchema>>({

@@ -59,7 +59,7 @@ export const OnChangePluginEditor = ({
   // Update the editor value when the editor value changes
   useEffect(() => {
     return editor.registerUpdateListener(({ editorState }) => {
-      const text = editorState.read($rootTextContent);
+      const text = editorState.read($rootTextContent).trimStart();
       const valueAsArray = Array.isArray(value) ? value : [];
 
       if (disableLanguage || typeof value === "string") {

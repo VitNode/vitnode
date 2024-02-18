@@ -4,10 +4,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
 
-import { zodTextLanguageInputType } from "@/components/text-language-input";
 import { mutationApi } from "./mutation-api";
 import { useDialog } from "@/components/ui/dialog";
 import { useRouter } from "@/i18n";
+import { zodInput } from "@/functions/zod";
 
 import { useTextLang } from "../../../../core/use-text-lang";
 
@@ -22,8 +22,8 @@ export const useCreateTopic = ({ forumId }: Props) => {
   const { convertNameToLink } = useTextLang();
 
   const formSchema = z.object({
-    title: zodTextLanguageInputType.min(1, t("forms.empty")),
-    content: zodTextLanguageInputType.min(1, t("forms.empty"))
+    title: zodInput.languageInputRequired,
+    content: zodInput.languageInputRequired
   });
 
   const form = useForm<z.infer<typeof formSchema>>({

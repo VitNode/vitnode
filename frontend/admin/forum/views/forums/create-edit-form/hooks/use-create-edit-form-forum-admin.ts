@@ -5,10 +5,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-import { zodTextLanguageInputType } from "@/components/text-language-input";
 import { useDialog } from "@/components/ui/dialog";
 import { mutationCreateApi } from "./mutation-create-api";
 import { APIKeys } from "@/graphql/api-keys";
+import { zodInput } from "@/functions/zod";
 
 export const useCreateEditFormForumAdmin = () => {
   const t = useTranslations("core");
@@ -16,8 +16,8 @@ export const useCreateEditFormForumAdmin = () => {
   const queryClient = useQueryClient();
 
   const formSchema = z.object({
-    name: zodTextLanguageInputType.min(1, t("forms.empty")),
-    description: zodTextLanguageInputType,
+    name: zodInput.languageInputRequired,
+    description: zodInput.languageInput,
     permissions: z.object({
       can_all_view: z.boolean(),
       can_all_read: z.boolean(),

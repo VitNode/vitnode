@@ -9,6 +9,7 @@ import { useDialog } from "@/components/ui/dialog";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import type { ShowCoreNav } from "@/graphql/hooks";
 import { editMutationApi } from "./edit-mutation-api";
+import { zodInput } from "@/functions/zod";
 
 export interface CreateEditNavAdminArgs {
   data?: Omit<ShowCoreNav, "children">;
@@ -23,18 +24,18 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
     name: z
       .array(
         z.object({
-          language_code: z.string(),
-          value: z.string().min(3).max(50)
+          language_code: zodInput.string,
+          value: zodInput.string.min(3).max(50)
         })
       )
       .min(1),
     description: z.array(
       z.object({
-        language_code: z.string(),
-        value: z.string().max(50)
+        language_code: zodInput.string,
+        value: zodInput.string.max(50)
       })
     ),
-    href: z.string().min(1).max(255),
+    href: zodInput.string.min(1).max(255),
     external: z.boolean()
   });
 

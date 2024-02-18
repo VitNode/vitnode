@@ -4,11 +4,11 @@ import * as z from "zod";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
-import { zodTextLanguageInputType } from "@/components/text-language-input";
 import { mutationApi } from "./mutation-api";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { useDialog } from "@/components/ui/dialog";
 import type { ErrorType } from "@/graphql/fetcher";
+import { zodInput } from "@/functions/zod";
 
 export const useFormCreateEditFormGroupsMembersAdmin = () => {
   const t = useTranslations("admin.members.staff");
@@ -21,13 +21,13 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
     user: z
       .object({
         id: z.number(),
-        name: z.string()
+        name: zodInput.string
       })
       .optional(),
     group: z
       .object({
         id: z.number(),
-        name: zodTextLanguageInputType
+        name: zodInput.languageInput
       })
       .optional(),
     unrestricted: z.boolean()

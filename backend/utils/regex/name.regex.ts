@@ -1,1 +1,1 @@
-export const nameRegex = /^[A-Za-z0-9._@ -]*$/;
+export const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;

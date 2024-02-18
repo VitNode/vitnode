@@ -9,6 +9,7 @@ import { increaseVersionString } from "@/functions/increase-version-string";
 import { useDialog } from "@/components/ui/dialog";
 import { CONFIG } from "@/config";
 import type { ShowAdminThemes } from "@/graphql/hooks";
+import { zodInput } from "@/functions/zod";
 
 export const useDownloadThemeAdmin = ({
   id,
@@ -19,7 +20,7 @@ export const useDownloadThemeAdmin = ({
   const { setOpen } = useDialog();
   const formSchema = z.object({
     type: z.enum(["rebuild", "new_version"]),
-    version: z.string(),
+    version: zodInput.string,
     version_code: z.coerce.number().min(version_code ? version_code + 1 : 10000)
   });
 

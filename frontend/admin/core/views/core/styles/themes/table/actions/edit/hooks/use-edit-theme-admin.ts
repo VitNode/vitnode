@@ -17,6 +17,8 @@ import { useDialog } from "@/components/ui/dialog";
 //   "support_url": "https://github.com/aXenDeveloper/vitnode/issues"
 // }
 
+import { zodInput } from "@/functions/zod";
+
 import type { ActionsItemThemesAdminProps } from "../../actions";
 
 export const useEditThemeAdmin = ({
@@ -29,10 +31,10 @@ export const useEditThemeAdmin = ({
   const t = useTranslations("admin.core.styles.themes.edit");
   const tCore = useTranslations("core");
   const formSchema = z.object({
-    name: z.string().min(3).max(50),
-    support_url: z.string().url().or(z.literal("")),
-    author: z.string().min(3).max(50),
-    author_url: z.string().url()
+    name: zodInput.string.min(3).max(50),
+    support_url: zodInput.string.url().or(z.literal("")),
+    author: zodInput.string.min(3).max(50),
+    author_url: zodInput.string.url()
   });
   const { push } = useRouter();
   const pathname = usePathname();

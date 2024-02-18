@@ -6,6 +6,7 @@ import { toast } from "sonner";
 
 import { mutationApi } from "./mutation-api";
 import type { Admin__Settings__General__ShowQuery } from "@/graphql/hooks";
+import { zodInput } from "@/functions/zod";
 
 export const useSettingsCoreAdmin = ({
   admin__settings__general__show: { side_name }
@@ -13,13 +14,7 @@ export const useSettingsCoreAdmin = ({
   const t = useTranslations("core");
 
   const formSchema = z.object({
-    name: z
-      .string({
-        required_error: t("forms.empty")
-      })
-      .min(1, {
-        message: t("forms.empty")
-      })
+    name: zodInput.string.min(1)
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
