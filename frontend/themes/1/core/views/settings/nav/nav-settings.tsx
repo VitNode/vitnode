@@ -1,5 +1,5 @@
+import { DrawerNavSettings } from "./drawer";
 import { ItemNavSettings } from "./item/item-nav-settings";
-import { SheetNavSettings } from "./sheet/sheet-nav-settings";
 import { useSettingsView } from "@/hooks/core/settings/use-settings-view";
 
 export const NavSettings = () => {
@@ -13,7 +13,7 @@ export const NavSettings = () => {
         ))}
       </div>
 
-      <SheetNavSettings />
+      <DrawerNavSettings />
     </aside>
   );
 };

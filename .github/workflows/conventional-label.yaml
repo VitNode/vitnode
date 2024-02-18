@@ -1,7 +1,13 @@
+name: Conventional Release Labels
+
 on:
   pull_request_target:
     types: [opened, edited]
-name: conventional-release-labels
+
+permissions:
+  pull-requests: write
+  contents: read
+
 jobs:
   label:
     runs-on: ubuntu-latest
