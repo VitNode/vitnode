@@ -1,0 +1,32 @@
+name: 💡 Feature request
+description: Suggest an idea for this project
+labels: ["Feature request"]
+body:
+  - type: checkboxes
+    attributes:
+      label: Is there an existing feature request for this?
+      description: Please search to see if an feature request already exists.
+      options:
+        - label: I have searched the existing feature request
+          required: true
+  - type: textarea
+    attributes:
+      label: What?
+      description: Describe what do you want to see in VitNode.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Possible Solution
+      description: A concise description of what you expected to happen.
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Anything else?
+      description: |
+        Links? References? Anything that will give us more context about the feature!
+
+        Tip: You can attach images by clicking this area to highlight it and then dragging files in.
+    validations:
+      required: false
