@@ -1,6 +1,6 @@
 name: 💡 Feature request
 description: Suggest an idea for this project
-labels: ["Feature request"]
+labels: ["💡 Feature"]
 body:
   - type: checkboxes
     attributes:

@@ -3,9 +3,14 @@ name: "Lint PR title"
 on:
   pull_request:
     branches: "*"
+    types:
+      - opened
+      - edited
+      - synchronize
 
 permissions:
   pull-requests: write
+  contents: read
 
 jobs:
   main:

@@ -1,0 +1,20 @@
+changelog:
+  categories:
+    - title: 🔒 Secure Changes
+      labels:
+        - 🔒 Secure Changes
+    - title: 🚨 Breaking Changes
+      labels:
+        - 🚨 Breaking Changes
+    - title: 🚨 Breaking Changes
+      labels:
+        - 🚨 Breaking Changes
+    - title: 🎉 Features
+      labels:
+        - 💡 Feature
+    - title: 🔧 Fixes
+      labels:
+        - 🐞 Bug
+    - title: Other Changes
+      labels:
+        - "*"
