@@ -1,4 +1,4 @@
-import { Callout } from 'nextra/components';
+import { Callout } from "nextra/components";
 
 # Pagination
 
@@ -14,7 +14,7 @@ Here is an example of how to use the pagination system. We will use the `core_me
 
 We will create a `DTO` to create arguments and return values for the query.
 
-import { Steps } from 'nextra/components';
+import { Steps } from "nextra/components";
 
 <Steps>
 
@@ -25,12 +25,12 @@ File: `show/dto/show-core_members.args.ts`
 Arguments used as container for fields to create query in GraphQL schema.
 
 ```ts
-import { ArgsType, Field, Int } from '@nestjs/graphql';
+import { ArgsType, Field, Int } from "@nestjs/graphql";
 
 @ArgsType()
 export class ShowCoreMembersArgs {
-  @Field(() => String, { nullable: true })
-  cursor: string | null;
+  @Field(() => Int, { nullable: true })
+  cursor: number | null;
 
   @Field(() => Int, { nullable: true })
   first: number | null;
@@ -47,9 +47,9 @@ File: `show/dto/show-core_members.obj.ts`
 Object used as container for fields to create return values query in GraphQL schema.
 
 ```ts
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from "@nestjs/graphql";
 
-import { PageInfo } from '@/types/database/pagination.type';
+import { PageInfo } from "@/types/database/pagination.type";
 
 @ObjectType()
 export class ShowCoreMembersObj {
@@ -75,18 +75,22 @@ File: `show/show-core_members.service.ts`
 Inside service file we will create a `show` method that will return a `ShowCoreMembersObj` object.
 
 ```ts
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 
-import { ShowCoreMembersObj } from './dto/show-core_members.obj';
-import { ShowCoreMembersArgs } from './dto/show-core_members.args';
+import { ShowCoreMembersObj } from "./dto/show-core_members.obj";
+import { ShowCoreMembersArgs } from "./dto/show-core_members.args";
 
-import { DatabaseService } from '@/database/database.service';
+import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class ShowCoreMembersService {
   constructor(private databaseService: DatabaseService) {}
 
-  async show({ cursor, first, last }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {}
+  async show({
+    cursor,
+    first,
+    last
+  }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {}
 }
 ```
 
@@ -95,9 +99,12 @@ export class ShowCoreMembersService {
 We will use `inputPaginationCursor()` to create initial values for pagination.
 
 ```ts
-import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
-import { core_users } from '@/src/admin/core/database/schema/users';
-import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+import {
+  inputPaginationCursor,
+  outputPagination
+} from "@/functions/database/pagination";
+import { core_users } from "@/src/admin/core/database/schema/users";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 const pagination = await inputPaginationCursor({
   cursor,
@@ -105,10 +112,10 @@ const pagination = await inputPaginationCursor({
   databaseService: this.databaseService,
   first,
   last,
-  primaryCursor: { order: 'ASC', key: 'id', schema: core_users.id },
+  primaryCursor: { order: "ASC", key: "id", schema: core_users.id },
   defaultSortBy: {
     direction: SortDirectionEnum.desc,
-    column: 'joined'
+    column: "joined"
   },
   sortBy
 });
@@ -165,7 +172,7 @@ const edges = await this.databaseService.db.query.core_users.findMany({
 We will use `outputPagination()` to create return values for the query. Remember to create a query `totalCount` to get the total count of the query.
 
 ```ts
-import { outputPagination } from '@/functions/database/pagination';
+import { outputPagination } from "@/functions/database/pagination";
 
 const totalCount = await this.databaseService.db
   .select({ count: count() })
@@ -178,16 +185,19 @@ return outputPagination({ edges, totalCount, first, cursor, last });
 ### Complite example
 
 ```ts
-import { Injectable } from '@nestjs/common';
-import { and, count, eq, ilike, or } from 'drizzle-orm';
+import { Injectable } from "@nestjs/common";
+import { and, count, eq, ilike, or } from "drizzle-orm";
 
-import { ShowCoreMembersObj } from './dto/show.obj';
-import { ShowCoreMembersArgs } from './dto/show.args';
+import { ShowCoreMembersObj } from "./dto/show.obj";
+import { ShowCoreMembersArgs } from "./dto/show.args";
 
-import { DatabaseService } from '@/database/database.service';
-import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
-import { core_users } from '@/src/admin/core/database/schema/users';
-import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+import { DatabaseService } from "@/database/database.service";
+import {
+  inputPaginationCursor,
+  outputPagination
+} from "@/functions/database/pagination";
+import { core_users } from "@/src/admin/core/database/schema/users";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 @Injectable()
 export class ShowCoreMembersService {
@@ -206,10 +216,10 @@ export class ShowCoreMembersService {
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: 'ASC', key: 'id', schema: core_users.id },
+      primaryCursor: { order: "ASC", key: "id", schema: core_users.id },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: 'joined'
+        column: "joined"
       }
     });
 
@@ -248,8 +258,8 @@ export class ShowCoreMembersService {
 </Steps>
 
 <Callout type="info" emoji="ℹ️">
-  Remember if you want use `findMany()` query with `where` argument you need to pass `where`
-  argument to the `findMany()` and `count()` method.
+  Remember if you want use `findMany()` query with `where` argument you need to
+  pass `where` argument to the `findMany()` and `count()` method.
 </Callout>
 
 ## Output

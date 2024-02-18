@@ -4,19 +4,9 @@ import * as z from "zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
+import { useDialog } from "@/components/ui/dialog";
 import { mutationApi } from "./mutation-api";
 import { usePathname, useRouter } from "@/i18n";
-import { useDialog } from "@/components/ui/dialog";
-
-// {
-//   "name": "Default",
-//   "version": "0.1.0 Alpha 1",
-//   "version_code": 10000,
-//   "author": "VitNode",
-//   "author_url": "https://vitnode.com/",
-//   "support_url": "https://github.com/aXenDeveloper/vitnode/issues"
-// }
-
 import { zodInput } from "@/functions/zod";
 
 import type { ActionsItemThemesAdminProps } from "../../actions";

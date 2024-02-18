@@ -1,5 +1,5 @@
-import { Steps } from 'nextra/components';
-import { Callout } from 'nextra/components';
+import { Steps } from "nextra/components";
+import { Callout } from "nextra/components";
 
 # Internationalization (i18n)
 
@@ -16,11 +16,11 @@ For exaple we use `core_nav` table.
 Create a schema `core_nav` in `database` folder.
 
 ```ts
-export const core_nav = pgTable('core_nav', {
-  id: serial('id').primaryKey(),
-  href: varchar('href', { length: 255 }).notNull(),
-  external: boolean('external').notNull().default(false),
-  position: integer('position').notNull().default(0)
+export const core_nav = pgTable("core_nav", {
+  id: serial("id").primaryKey(),
+  href: varchar("href", { length: 255 }).notNull(),
+  external: boolean("external").notNull().default(false),
+  position: integer("position").notNull().default(0)
 });
 ```
 
@@ -34,19 +34,19 @@ The translation table must have:
 - any fields for relation with main table (in our case `nav_id`)
 
 ```ts
-export const core_nav_name = pgTable('core_nav_name', {
-  id: serial('id').primaryKey(),
-  nav_id: serial('nav_id')
+export const core_nav_name = pgTable("core_nav_name", {
+  id: serial("id").primaryKey(),
+  nav_id: serial("nav_id")
     .notNull()
     .references(() => core_nav.id, {
-      onDelete: 'cascade'
+      onDelete: "cascade"
     }),
-  language_code: varchar('language_code')
+  language_code: varchar("language_code")
     .notNull()
     .references(() => core_languages.code, {
-      onDelete: 'cascade'
+      onDelete: "cascade"
     }),
-  value: varchar('value', { length: 50 }).notNull()
+  value: varchar("value", { length: 50 }).notNull()
 });
 ```
 
@@ -73,38 +73,49 @@ For your mutation we're created for you a new type `TextLanguageInput`.
 Here is a code for example:
 
 ```ts
-import { ArgsType, Field } from '@nestjs/graphql';
+import { ArgsType, Field } from "@nestjs/graphql";
+import { IsArray } from "class-validator";
+import { Transform } from "class-transformer";
 
-import { TextLanguageInput } from '@/types/database/text-language.type';
+import {
+  IsTextLanguageInput,
+  TextLanguageInput,
+  TransformTextLanguageInput
+} from "@/types/database/text-language.type";
 
 @ArgsType()
 export class CreateAdminNavArgs {
+  @IsArray()
+  @IsTextLanguageInput()
+  @Transform(TransformTextLanguageInput)
   @Field(() => [TextLanguageInput])
   name: TextLanguageInput[];
-
- ...
 }
 ```
 
 If you want to change this field to `required`, you have to add some decorators form `class-validator`.
 
-```ts {2, 8-10}
-import { ArgsType, Field } from '@nestjs/graphql';
-import { ArrayMinSize, IsArray, MaxLength, ValidateNested } from 'class-validator';
+```ts {2, 13-15}
+import { ArgsType, Field } from "@nestjs/graphql";
+import { ArrayMinSize, IsArray, ValidateNested } from "class-validator";
+import { Transform } from "class-transformer";
 
-import { TextLanguageInput } from '@/types/database/text-language.type';
+import {
+  IsTextLanguageInput,
+  TextLanguageInput,
+  TransformTextLanguageInput
+} from "@/types/database/text-language.type";
 
 @ArgsType()
 export class CreateAdminNavArgs {
   @IsArray()
   @ValidateNested({ each: true })
   @ArrayMinSize(1)
+  @IsTextLanguageInput()
+  @Transform(TransformTextLanguageInput)
   @Field(() => [TextLanguageInput])
   name: TextLanguageInput[];
-
-  ...
 }
-
 ```
 
 ## Object field mutation
@@ -200,8 +211,8 @@ You have to check if the translation:
 It may sound complicated, but it's not. We will show you how to do it.
 
 <Callout type="warning" emoji="⚠️">
-  Remember to always check if redord exists before you update it. If it doesn't exist, you have to
-  throw an error.
+  Remember to always check if redord exists before you update it. If it doesn't
+  exist, you have to throw an error.
 </Callout>
 
 <Steps>
@@ -252,7 +263,9 @@ Promise.all(
     const exist = update.find(name => name.id === item.id);
     if (exist) return;
 
-    await this.databaseService.db.delete(core_nav_name).where(eq(core_nav_name.id, item.id));
+    await this.databaseService.db
+      .delete(core_nav_name)
+      .where(eq(core_nav_name.id, item.id));
   })
 );
 ```

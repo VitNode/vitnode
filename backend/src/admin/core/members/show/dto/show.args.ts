@@ -5,8 +5,10 @@ import {
   Int,
   registerEnumType
 } from "@nestjs/graphql";
+import { Transform } from "class-transformer";
 
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
+import { TransformString } from "@/types/database/text-language.type";
 
 export enum ShowAdminMembersSortingColumnEnum {
   name = "name",
@@ -45,6 +47,7 @@ export class ShowAdminMembersArgs {
   @Field(() => [ShowAdminMembersSortByArgs], { nullable: true })
   sortBy: ShowAdminMembersSortByArgs[] | null;
 
+  @Transform(TransformString)
   @Field(() => String, { nullable: true })
   search: string | null;
 
