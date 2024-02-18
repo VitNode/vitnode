@@ -1,13 +1,11 @@
 name: "Lint PR title"
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: "*"
 
 permissions:
-  pull-requests: read
+  pull-requests: write
 
 jobs:
   main:
