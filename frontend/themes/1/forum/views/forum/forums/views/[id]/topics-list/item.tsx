@@ -4,6 +4,7 @@ import { DateFormat } from "@/components/date-format/date-format";
 import type { ShowTopicsForums } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { Link } from "@/i18n";
+import { WrapperItemTopicListForum } from "./wrapper-item";
 
 export interface ItemTopicListForumProps
   extends Pick<ShowTopicsForums, "title" | "user" | "id" | "created"> {}
@@ -16,15 +17,13 @@ export const ItemTopicListForum = ({
 }: ItemTopicListForumProps) => {
   const t = useTranslations("forum");
   const { convertNameToLink, convertText } = useTextLang();
+  const href = `/topic/${convertNameToLink({ id, name: title })}`;
 
   return (
-    <div className="px-6 py-4 hover:bg-muted/50 cursor-pointer">
+    <WrapperItemTopicListForum href={href}>
       <div className="flex flex-col">
         <h3 className="font-semibold text-base">
-          <Link
-            href={`/topic/${convertNameToLink({ id, name: title })}`}
-            className="text-foreground no-underline"
-          >
+          <Link href={href} className="text-foreground no-underline">
             {convertText(title)}
           </Link>
         </h3>
@@ -37,6 +36,6 @@ export const ItemTopicListForum = ({
           })}
         </span>
       </div>
-    </div>
+    </WrapperItemTopicListForum>
   );
 };

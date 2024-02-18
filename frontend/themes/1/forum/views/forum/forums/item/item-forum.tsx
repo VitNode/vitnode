@@ -5,6 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import type { TextLanguage } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
+import { WrapperItemForum } from "./wrapper-item-forum";
 
 export interface ItemForumProps {
   description: TextLanguage[];
@@ -20,9 +21,10 @@ export const ItemForum = ({
   name
 }: ItemForumProps) => {
   const { convertNameToLink, convertText } = useTextLang();
+  const href = `/forum/${convertNameToLink({ id, name })}`;
 
   return (
-    <div className="px-6 py-4 border-t hover:bg-muted/50 flex gap-4 cursor-pointer flex-col md:flex-row">
+    <WrapperItemForum href={href}>
       <div className="flex gap-4 flex-1">
         <div className="bg-primary/20 w-10 h-10 rounded-md flex items-center justify-center [&>svg]:w-5 [&>svg]:h-5 text-primary flex-shrink-0">
           <MessagesSquare />
@@ -30,7 +32,7 @@ export const ItemForum = ({
 
         <div className="flex flex-col justify-center">
           <Link
-            href={`/forum/${convertNameToLink({ id, name })}`}
+            href={href}
             className="text-lg font-medium text-foreground no-underline"
           >
             {convertText(name)}
@@ -64,6 +66,6 @@ export const ItemForum = ({
           )}
         </div>
       </div>
-    </div>
+    </WrapperItemForum>
   );
 };
