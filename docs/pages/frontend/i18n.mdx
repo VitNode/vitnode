@@ -1,5 +1,5 @@
-import { Steps } from 'nextra/components';
-import { Tabs } from 'nextra/components';
+import { Steps } from "nextra/components";
+import { Tabs } from "nextra/components";
 
 # Internationalization (i18n)
 
@@ -10,12 +10,12 @@ Each translations are stored in database as `array`.
 ```ts
 [
   {
-    language_code: 'en',
-    value: 'Hello world'
+    language_code: "en",
+    value: "Hello world"
   },
   {
-    language_code: 'pl',
-    value: 'Witaj świecie'
+    language_code: "pl",
+    value: "Witaj świecie"
   }
 ];
 ```
@@ -25,7 +25,7 @@ Each translations are stored in database as `array`.
 To display text you can use `useTextLang` hook.
 
 ```tsx
-import { useTextLang } from '@/hooks/core/use-text-lang';
+import { useTextLang } from "@/hooks/core/use-text-lang";
 
 const { convertText } = useTextLang();
 
@@ -43,40 +43,41 @@ Create form with translations is very similar to normal [Forms](/frontend/forms)
 ### Define schema
 
 ```ts
-import * as z from 'zod';
+import * as z from "zod";
+
+import { zodInput } from "@/functions/zod";
 
 const formSchema = z.object({
-  name: z.array(
-    z.object({
-      language_code: z.string(),
-      value: z.string()
-    })
-  )
+  name: zodInput.languageInput
 });
 ```
 
 You can add more functions to validate translations.
 
 ```ts {8, 11}
-import * as z from 'zod';
+import * as z from "zod";
+
+import { zodInput } from "@/functions/zod";
 
 const formSchema = z.object({
   name: z
     .array(
       z.object({
-        language_code: z.string(),
-        value: z.string().min(3).max(50)
+        language_code: zodInput.string,
+        value: zodInput.string.min(3).max(50)
       })
     )
     .min(1)
 });
 ```
 
+We're using `zodInput.string` instead of `z.string` to add more functions to validate translations.
+
 ### Set initial values
 
 ```ts {7}
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const form = useForm<z.infer<typeof formSchema>>({
   resolver: zodResolver(formSchema),
@@ -92,7 +93,7 @@ const form = useForm<z.infer<typeof formSchema>>({
   <Tabs.Tab>
 
 ```tsx
-import { TextLanguageInput } from '@/components/text-language-input';
+import { TextLanguageInput } from "@/components/text-language-input";
 
 <TextLanguageInput {...field} />;
 ```
@@ -101,7 +102,7 @@ import { TextLanguageInput } from '@/components/text-language-input';
   <Tabs.Tab>
 
 ```tsx
-import { Editor } from '@/components/editor/editor';
+import { Editor } from "@/components/editor/editor";
 
 <Editor id="id" {...field} />;
 ```
@@ -119,7 +120,7 @@ import { Editor } from '@/components/editor/editor';
       name="name"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>{t('name.label')}</FormLabel>
+          <FormLabel>{t("name.label")}</FormLabel>
           <FormControl>
             <TextLanguageInput {...field} />
           </FormControl>
@@ -128,8 +129,12 @@ import { Editor } from '@/components/editor/editor';
       )}
     />
 
-    <Button disabled={!form.formState.isValid} loading={form.formState.isSubmitting} type="submit">
-      {tCore('create')}
+    <Button
+      disabled={!form.formState.isValid}
+      loading={form.formState.isSubmitting}
+      type="submit"
+    >
+      {tCore("create")}
     </Button>
   </form>
 </Form>

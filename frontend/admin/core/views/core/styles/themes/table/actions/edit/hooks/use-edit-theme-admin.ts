@@ -4,18 +4,10 @@ import * as z from "zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
+import { useDialog } from "@/components/ui/dialog";
 import { mutationApi } from "./mutation-api";
 import { usePathname, useRouter } from "@/i18n";
-import { useDialog } from "@/components/ui/dialog";
-
-// {
-//   "name": "Default",
-//   "version": "0.1.0 Alpha 1",
-//   "version_code": 10000,
-//   "author": "VitNode",
-//   "author_url": "https://vitnode.com/",
-//   "support_url": "https://github.com/aXenDeveloper/vitnode/issues"
-// }
+import { zodInput } from "@/functions/zod";
 
 import type { ActionsItemThemesAdminProps } from "../../actions";
 
@@ -29,10 +21,10 @@ export const useEditThemeAdmin = ({
   const t = useTranslations("admin.core.styles.themes.edit");
   const tCore = useTranslations("core");
   const formSchema = z.object({
-    name: z.string().min(3).max(50),
-    support_url: z.string().url().or(z.literal("")),
-    author: z.string().min(3).max(50),
-    author_url: z.string().url()
+    name: zodInput.string.min(3).max(50),
+    support_url: zodInput.string.url().or(z.literal("")),
+    author: zodInput.string.min(3).max(50),
+    author_url: zodInput.string.url()
   });
   const { push } = useRouter();
   const pathname = usePathname();

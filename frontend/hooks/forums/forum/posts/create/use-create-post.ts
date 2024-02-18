@@ -5,9 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
 
-import { zodTextLanguageInputType } from "@/components/text-language-input";
 import { mutationApi } from "./mutation-api";
 import { getIdFormString } from "@/functions/url";
+import { zodInput } from "@/functions/zod";
 
 interface Args {
   setOpen: (value: boolean) => void;
@@ -18,7 +18,7 @@ export const useCreatePost = ({ setOpen }: Args) => {
   const { id } = useParams();
 
   const formSchema = z.object({
-    content: zodTextLanguageInputType.min(1, t("forms.empty"))
+    content: zodInput.languageInputRequired
   });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

@@ -8,6 +8,7 @@ import { useSessionAdmin } from "@/admin/core/hooks/use-session-admin";
 import { mutationApi } from "./mutation-api";
 import { useDialog } from "@/components/ui/dialog";
 import { usePathname, useRouter } from "@/i18n";
+import { zodInput } from "@/functions/zod";
 
 export const codeThemeRegex = /^[a-z0-9-]*$/;
 
@@ -19,10 +20,10 @@ export const useCreateThemeAdmin = () => {
   const { push } = useRouter();
   const { session } = useSessionAdmin();
   const formSchema = z.object({
-    name: z.string().min(3).max(50),
-    support_url: z.string().url().or(z.literal("")),
-    author: z.string().min(3).max(50),
-    author_url: z.string().url()
+    name: zodInput.string.min(3).max(50),
+    support_url: zodInput.string.url().or(z.literal("")),
+    author: zodInput.string.min(3).max(50),
+    author_url: zodInput.string.url()
   });
 
   const form = useForm<z.infer<typeof formSchema>>({

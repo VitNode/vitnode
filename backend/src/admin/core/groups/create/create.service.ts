@@ -4,7 +4,6 @@ import { ShowAdminGroups } from "../show/dto/show.obj";
 import { CreateAdminGroupsArgs } from "./dto/create.args";
 
 import { currentDate } from "@/functions/date";
-import { CustomError } from "@/utils/errors/CustomError";
 import { DatabaseService } from "@/database/database.service";
 import {
   core_groups,
@@ -16,15 +15,6 @@ export class CreateAdminGroupsService {
   constructor(private databaseService: DatabaseService) {}
 
   async create({ name }: CreateAdminGroupsArgs): Promise<ShowAdminGroups> {
-    const transformName = name.filter(item => item.value.trim().length > 0);
-
-    if (!transformName.length) {
-      throw new CustomError({
-        code: "BAD_REQUEST",
-        message: "Name is required"
-      });
-    }
-
     const group = await this.databaseService.db
       .insert(core_groups)
       .values({
@@ -36,7 +26,7 @@ export class CreateAdminGroupsService {
     const groupNames = await this.databaseService.db
       .insert(core_groups_names)
       .values(
-        transformName.map(item => ({
+        name.map(item => ({
           group_id: group[0].id,
           language_code: item.language_code,
           value: item.value

@@ -1,31 +1,18 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useState } from "react";
 
 import { mutationApi } from "./mutation-api";
 import type { ErrorType } from "@/graphql/fetcher";
+import { zodInput } from "@/functions/zod";
 
 export const useSignInView = () => {
   const [error, setError] = useState<ErrorType | null>(null);
-  const t = useTranslations("core");
 
   const formSchema = z.object({
-    email: z
-      .string({
-        required_error: t("forms.empty")
-      })
-      .min(1, {
-        message: t("forms.empty")
-      }),
-    password: z
-      .string({
-        required_error: t("forms.empty")
-      })
-      .min(1, {
-        message: t("forms.empty")
-      }),
+    email: zodInput.string.min(1),
+    password: z.string().min(1),
     remember: z.boolean()
   });
 

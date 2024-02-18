@@ -1,5 +1,4 @@
 import { forwardRef, useState, type InputHTMLAttributes } from "react";
-import * as z from "zod";
 import { useLocale } from "next-intl";
 
 import { useGlobals } from "@/hooks/core/use-globals";
@@ -13,13 +12,6 @@ import {
 } from "./ui/select";
 import { FormControl } from "./ui/form";
 import type { TextLanguage } from "@/graphql/hooks";
-
-export const zodTextLanguageInputType = z.array(
-  z.object({
-    language_code: z.string(),
-    value: z.string()
-  })
-);
 
 interface Props
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "value"> {
@@ -45,14 +37,16 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
           className="flex-grow"
           type="text"
           onChange={e => {
-            if (e.target.value) {
+            const value = e.target.value;
+
+            if (value) {
               onChange([
                 ...valueAsArray.filter(
                   item => item.language_code !== selectedLanguage
                 ),
                 {
                   language_code: selectedLanguage,
-                  value: e.target.value
+                  value: value
                 }
               ]);
 

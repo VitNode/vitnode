@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import type { ErrorType } from "@/graphql/fetcher";
 import { mutationApi } from "./mutation-api";
 
-const nameRegex = /^[A-Za-z0-9._@ -]*$/;
+const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 
 interface Args {
   installPage?: boolean;
@@ -18,9 +18,8 @@ export const useSignUpView = ({ installPage }: Args) => {
 
   const formSchema = z.object({
     name: z
-      .string({
-        required_error: t("forms.empty")
-      })
+      .string()
+      .trim()
       .min(1, {
         message: t("forms.empty")
       })
@@ -31,16 +30,13 @@ export const useSignUpView = ({ installPage }: Args) => {
         message: t("sign_up.form.name.invalid")
       }),
     email: z
-      .string({
-        required_error: t("forms.empty")
-      })
+      .string()
+      .trim()
       .min(1, {
         message: t("forms.empty")
       }),
     password: z
-      .string({
-        required_error: t("forms.empty")
-      })
+      .string()
       .min(1, {
         message: t("forms.empty")
       })

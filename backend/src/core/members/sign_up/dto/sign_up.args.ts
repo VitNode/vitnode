@@ -6,22 +6,25 @@ import {
   MaxLength,
   MinLength
 } from "class-validator";
+import { Transform } from "class-transformer";
 
 import { nameRegex } from "@/utils/regex/name.regex";
+import { TransformString } from "@/types/database/text-language.type";
 
 @ArgsType()
 export class SignUpCoreMembersArgs {
+  @Transform(TransformString)
   @Field(() => String)
   @IsEmail()
   email: string;
 
+  @Transform(TransformString)
   @Field(() => String)
   @MinLength(3)
   @MaxLength(32)
   @Matches(nameRegex)
   name: string;
 
-  @Field(() => String)
   @IsStrongPassword({
     minLength: 8,
     minLowercase: 1,
@@ -29,6 +32,7 @@ export class SignUpCoreMembersArgs {
     minNumbers: 1,
     minSymbols: 1
   })
+  @Field(() => String)
   password: string;
 
   @Field(() => Boolean, { nullable: true })
