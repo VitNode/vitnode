@@ -33,6 +33,7 @@ import {
   CommandItem
 } from "@/components/ui/command";
 import { Loader } from "@/components/loader/loader";
+import corePackages from "@/package.json";
 
 export const ContentDownloadActionsTableLangsCoreAdmin = () => {
   const t = useTranslations("admin.core.langs.actions.download");
@@ -46,6 +47,17 @@ export const ContentDownloadActionsTableLangsCoreAdmin = () => {
   const {
     admin__core_plugins__show: { edges }
   } = data;
+
+  const plugins = [
+    { id: "core", name: "Core", version: corePackages.version, code: "core" },
+    {
+      id: "admin",
+      name: "Admin",
+      version: corePackages.version,
+      code: "admin"
+    },
+    ...edges
+  ];
 
   return (
     <>
@@ -106,10 +118,11 @@ export const ContentDownloadActionsTableLangsCoreAdmin = () => {
                         <CommandInput placeholder={t("search")} />
                         <CommandEmpty>{t("empty")}</CommandEmpty>
                         <CommandGroup>
-                          {edges.map(item => (
+                          {plugins.map(item => (
                             <CommandItem
                               value={item.code}
                               key={item.id}
+                              className="flex gap-2"
                               onSelect={value => {
                                 const values = field.value;
 
@@ -122,13 +135,14 @@ export const ContentDownloadActionsTableLangsCoreAdmin = () => {
                             >
                               <Check
                                 className={cn(
-                                  "mr-2 size-4",
+                                  "size-4",
                                   field.value.includes(item.code)
                                     ? "opacity-100"
                                     : "opacity-0"
                                 )}
                               />
-                              {item.name} - {item.version}
+                              <span className="font-semibold">{item.name}</span>
+                              <span>{item.version}</span>
                             </CommandItem>
                           ))}
                         </CommandGroup>
