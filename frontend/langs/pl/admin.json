@@ -180,7 +180,7 @@
             "success": "Język został usunięty."
           },
           "download": {
-            "title": "Pobierz język",
+            "title": "Pobierz język - {code}",
             "desc": "Wybierz pluginy dla których chcesz pobrać język.",
             "all": {
               "label": "Wszystkie",

@@ -6,7 +6,7 @@ import { DownloadActionsTableLangsCoreAdmin } from "./download/download";
 export const ActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
   return (
     <div className="flex items-center justify-end">
-      <DownloadActionsTableLangsCoreAdmin />
+      <DownloadActionsTableLangsCoreAdmin {...data} />
       <EditActionsTableLangsCoreAdmin {...data} />
       {!data.default && !data.protected && (
         <DeleteActionsTableLangsCoreAdmin {...data} />

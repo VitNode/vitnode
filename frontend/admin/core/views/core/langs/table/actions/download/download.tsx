@@ -5,6 +5,7 @@ import { Suspense, lazy } from "react";
 import { Loader } from "@/components/loader/loader";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import type { ShowCoreLanguages } from "@/graphql/hooks";
 
 const Content = lazy(() =>
   import("./content").then(module => ({
@@ -12,7 +13,9 @@ const Content = lazy(() =>
   }))
 );
 
-export const DownloadActionsTableLangsCoreAdmin = () => {
+export const DownloadActionsTableLangsCoreAdmin = (
+  props: Pick<ShowCoreLanguages, "code">
+) => {
   const t = useTranslations("core");
 
   return (
@@ -25,7 +28,7 @@ export const DownloadActionsTableLangsCoreAdmin = () => {
 
       <DialogContent>
         <Suspense fallback={<Loader />}>
-          <Content />
+          <Content {...props} />
         </Suspense>
       </DialogContent>
     </Dialog>

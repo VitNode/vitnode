@@ -180,7 +180,7 @@
             "submit": "Yes, delete language"
           },
           "download": {
-            "title": "Download Language",
+            "title": "Download Language - {code}",
             "desc": "Choose which plugins language you want to download.",
             "all": {
               "label": "All",

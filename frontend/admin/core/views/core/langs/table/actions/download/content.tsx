@@ -34,10 +34,13 @@ import {
 } from "@/components/ui/command";
 import { Loader } from "@/components/loader/loader";
 import corePackages from "@/package.json";
+import type { ShowCoreLanguages } from "@/graphql/hooks";
 
-export const ContentDownloadActionsTableLangsCoreAdmin = () => {
+export const ContentDownloadActionsTableLangsCoreAdmin = ({
+  code
+}: Pick<ShowCoreLanguages, "code">) => {
   const t = useTranslations("admin.core.langs.actions.download");
-  const { form, onSubmit, query } = useDownloadLangAdmin();
+  const { form, onSubmit, query } = useDownloadLangAdmin({ code });
   const { data } = query;
 
   if (query.isLoading || !data) {
@@ -62,7 +65,7 @@ export const ContentDownloadActionsTableLangsCoreAdmin = () => {
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{t("title")}</DialogTitle>
+        <DialogTitle>{t("title", { code })}</DialogTitle>
         <DialogDescription>{t("desc")}</DialogDescription>
       </DialogHeader>
 
