@@ -187,6 +187,9 @@
               "desc": "Download language for all plugins."
             },
             "plugins": "Plugins",
+            "search": "Search by name...",
+            "empty": "No plugins found.",
+            "selected": "{count, plural, =0 {No plugins} =1 {1 plugin} other {# plugins}} selected",
             "submit": "Download"
           }
         }

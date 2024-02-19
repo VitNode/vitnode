@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { Check } from "lucide-react";
 
 import {
   DialogDescription,
@@ -28,12 +29,23 @@ import {
   Command,
   CommandEmpty,
   CommandGroup,
-  CommandInput
+  CommandInput,
+  CommandItem
 } from "@/components/ui/command";
+import { Loader } from "@/components/loader/loader";
 
 export const ContentDownloadActionsTableLangsCoreAdmin = () => {
   const t = useTranslations("admin.core.langs.actions.download");
-  const { form, onSubmit } = useDownloadLangAdmin();
+  const { form, onSubmit, query } = useDownloadLangAdmin();
+  const { data } = query;
+
+  if (query.isLoading || !data) {
+    return <Loader />;
+  }
+
+  const {
+    admin__core_plugins__show: { edges }
+  } = data;
 
   return (
     <>
@@ -85,34 +97,40 @@ export const ContentDownloadActionsTableLangsCoreAdmin = () => {
                             !field.value && "text-muted-foreground"
                           )}
                         >
-                          Test
+                          {t("selected", { count: field.value.length })}
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
-                    <PopoverContent className="w-full p-0">
+                    <PopoverContent className="p-0 w-80">
                       <Command>
-                        <CommandInput placeholder="Search language..." />
-                        <CommandEmpty>No language found.</CommandEmpty>
+                        <CommandInput placeholder={t("search")} />
+                        <CommandEmpty>{t("empty")}</CommandEmpty>
                         <CommandGroup>
-                          {/* {languages.map(language => (
-                          <CommandItem
-                            value={language.label}
-                            key={language.value}
-                            onSelect={() => {
-                              form.setValue("language", language.value);
-                            }}
-                          >
-                            <Check
-                              className={cn(
-                                "mr-2 h-4 w-4",
-                                language.value === field.value
-                                  ? "opacity-100"
-                                  : "opacity-0"
-                              )}
-                            />
-                            {language.label}
-                          </CommandItem>
-                        ))} */}
+                          {edges.map(item => (
+                            <CommandItem
+                              value={item.code}
+                              key={item.id}
+                              onSelect={value => {
+                                const values = field.value;
+
+                                field.onChange(
+                                  values.includes(value)
+                                    ? values.filter(el => el !== value)
+                                    : [...values, item.code]
+                                );
+                              }}
+                            >
+                              <Check
+                                className={cn(
+                                  "mr-2 size-4",
+                                  field.value.includes(item.code)
+                                    ? "opacity-100"
+                                    : "opacity-0"
+                                )}
+                              />
+                              {item.name} - {item.version}
+                            </CommandItem>
+                          ))}
                         </CommandGroup>
                       </Command>
                     </PopoverContent>
@@ -128,6 +146,9 @@ export const ContentDownloadActionsTableLangsCoreAdmin = () => {
               type="submit"
               onClick={form.handleSubmit(onSubmit)}
               loading={form.formState.isSubmitting}
+              disabled={
+                !form.watch("all") && form.watch("plugins").length === 0
+              }
             >
               {t("submit")}
             </Button>

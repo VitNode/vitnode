@@ -1,8 +1,16 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
+import { queryApi } from "./query-api";
+
 export const useDownloadLangAdmin = () => {
+  const query = useQuery({
+    queryKey: ["Admin__Core_Plugins__Show"],
+    queryFn: async () => await queryApi({})
+  });
+
   const formSchema = z.object({
     all: z.boolean(),
     plugins: z.array(z.string())
@@ -21,5 +29,5 @@ export const useDownloadLangAdmin = () => {
     console.log(values);
   };
 
-  return { form, onSubmit };
+  return { form, onSubmit, query };
 };

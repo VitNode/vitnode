@@ -187,6 +187,9 @@
               "desc": "Pobierz językl dla wszystkich pluginów."
             },
             "plugins": "Plugins",
+            "search": "Szukaj po nazwie...",
+            "empty": "Nie znaleziono pliginów.",
+            "selected": "{count, plural, =0 {Nie wybrano pluginów} =1 {1 plugin wybrany} few {# pluginy wybrane} other {# pluginów wybrano}}",
             "submit": "Pobierz"
           }
         }
