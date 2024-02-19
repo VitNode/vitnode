@@ -6,16 +6,16 @@ import type { ShowCoreLanguages } from "@/graphql/hooks";
 
 const Content = lazy(() =>
   import("./content").then(module => ({
-    default: module.ContentUploadActionsTableLangsCoreAdmin
+    default: module.ContentUpdateActionsTableLangsCoreAdmin
   }))
 );
 
-interface Props extends Pick<ShowCoreLanguages, "code"> {
+interface Props extends Pick<ShowCoreLanguages, "code" | "name"> {
   open: boolean;
   setOpen: (value: boolean) => void;
 }
 
-export const UploadActionsTableLangsCoreAdmin = ({
+export const UpdateActionsTableLangsCoreAdmin = ({
   open,
   setOpen,
   ...props

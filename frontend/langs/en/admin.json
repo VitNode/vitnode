@@ -204,6 +204,11 @@
             "empty": "No plugins found.",
             "selected": "{count, plural, =0 {No plugins} =1 {1 plugin} other {# plugins}} selected",
             "submit": "Download"
+          },
+          "update": {
+            "title": "Update Language - {code}",
+            "submit": "Update Language",
+            "success": "Language has been updated."
           }
         }
       }

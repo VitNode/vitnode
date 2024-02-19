@@ -1,18 +1,22 @@
 import { useTranslations } from "next-intl";
 
-import { Form, FormField } from "@/components/ui/form";
-import { useThemeUpload } from "./hooks/use-upload-theme";
-import { FilesInput } from "@/components/ui/files/files-input";
 import { DialogFooter, DialogTitle } from "@/components/ui/dialog";
+import type { ShowCoreLanguages } from "@/graphql/hooks";
+import { Form, FormField } from "@/components/ui/form";
+import { useUpdateLangAdmin } from "./hooks/use-update-lang-admin";
+import { FilesInput } from "@/components/ui/files/files-input";
 import { Button } from "@/components/ui/button";
 
-export const ContentUploadActionThemeAdmin = () => {
-  const t = useTranslations("admin.core.styles.themes.upload");
-  const { form, onSubmit } = useThemeUpload();
+export const ContentUpdateActionsTableLangsCoreAdmin = ({
+  code,
+  name
+}: Pick<ShowCoreLanguages, "code" | "name">) => {
+  const t = useTranslations("admin.core.langs.actions.update");
+  const { form, onSubmit } = useUpdateLangAdmin({ code, name });
 
   return (
     <>
-      <DialogTitle>{t("title")}</DialogTitle>
+      <DialogTitle>{t("title", { code })}</DialogTitle>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

@@ -6,7 +6,7 @@ import type { ShowCoreLanguages } from "@/graphql/hooks";
 import { EditActionsTableLangsCoreAdmin } from "./edit";
 import { DeleteActionsTableLangsCoreAdmin } from "./delete/delete";
 import { DownloadActionsTableLangsCoreAdmin } from "./download/download";
-import { UploadActionsTableLangsCoreAdmin } from "./upload/upload";
+import { UpdateActionsTableLangsCoreAdmin } from "./update/update";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -55,7 +55,7 @@ export const ActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
         {...data}
       />
       {!data.protected && (
-        <UploadActionsTableLangsCoreAdmin
+        <UpdateActionsTableLangsCoreAdmin
           open={isOpenUploadDialog}
           setOpen={setIsOpenUploadDialog}
           {...data}
