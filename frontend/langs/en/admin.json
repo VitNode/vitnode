@@ -178,6 +178,16 @@
             "form_confirm_text": "Type the name of the language <text></text> to confirm.",
             "success": "Language has been deleted.",
             "submit": "Yes, delete language"
+          },
+          "download": {
+            "title": "Download Language",
+            "desc": "Choose which plugins language you want to download.",
+            "all": {
+              "label": "All",
+              "desc": "Download language for all plugins."
+            },
+            "plugins": "Plugins",
+            "submit": "Download"
           }
         }
       }

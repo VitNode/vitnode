@@ -178,6 +178,16 @@
             "form_confirm_text": "Wpisz nazwę języka <text></text>, aby potwierdzić.",
             "submit": "Tak, usuń język",
             "success": "Język został usunięty."
+          },
+          "download": {
+            "title": "Pobierz język",
+            "desc": "Wybierz pluginy dla których chcesz pobrać język.",
+            "all": {
+              "label": "Wszystkie",
+              "desc": "Pobierz językl dla wszystkich pluginów."
+            },
+            "plugins": "Plugins",
+            "submit": "Pobierz"
           }
         }
       }
