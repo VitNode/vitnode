@@ -52,7 +52,7 @@ export class CreateDatabaseAdminInstallService {
     await this.databaseService.db.insert(core_languages).values([
       {
         code: "en",
-        name: "English",
+        name: "English (USA)",
         default: true,
         protected: true,
         timezone: "America/New_York",

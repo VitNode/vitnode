@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { Virtuoso } from "react-virtuoso";
 
 import { useCreateEditLangAdmin } from "./hooks/use-create-edit-lang-admin";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
@@ -17,6 +18,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger
+} from "@/components/ui/select";
+import { timeZones } from "./timezones";
+import { cn } from "@/functions/classnames";
 
 interface Props {
   data?: ShowCoreLanguages;
@@ -42,9 +51,12 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("create.name")}</FormLabel>
+                <FormLabel>{t("create.name.label")}</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input
+                    placeholder={t("create.name.placeholder")}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -57,9 +69,12 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
               name="code"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t("create.code")}</FormLabel>
+                  <FormLabel>{t("create.code.label")}</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input
+                      placeholder={t("create.code.placeholder")}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -72,10 +87,31 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
             name="timezone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("create.timezone")}</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
+                <FormLabel>{t("create.timezone.label")}</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger
+                      className={cn({
+                        "text-muted-foreground": !field.value
+                      })}
+                    >
+                      {field.value || t("create.timezone.placeholder")}
+                    </SelectTrigger>
+                  </FormControl>
+
+                  <SelectContent>
+                    <Virtuoso
+                      style={{ height: "200px" }}
+                      data={timeZones}
+                      itemContent={(index, zone) => (
+                        <SelectItem value={zone}>{zone}</SelectItem>
+                      )}
+                    />
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}

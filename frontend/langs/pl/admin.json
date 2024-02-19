@@ -163,9 +163,18 @@
         },
         "actions": {
           "create": {
-            "name": "Nazwa",
-            "code": "Kod",
-            "timezone": "Strefa czasowa",
+            "name": {
+              "label": "Nazwa",
+              "placeholder": "Polski (Polish)"
+            },
+            "code": {
+              "label": "Kod",
+              "placeholder": "pl"
+            },
+            "timezone": {
+              "label": "Strefa czasowa",
+              "placeholder": "Wybierz strefę czasową..."
+            },
             "submit": "Stwórz język",
             "success": "Język został stworzony."
           },
