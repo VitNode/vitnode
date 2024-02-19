@@ -6,10 +6,9 @@ export const ActionsTableGroupsMembersAdmin = (
   props: Omit<ShowAdminGroups, "default" | "root">
 ) => {
   return (
-    <div className="flex items-center justify-end">
+    <>
       <EditGroupsMembersDialogAdmin data={props} />
-
       {!props.protected && <DeleteGroupsMembersDialogAdmin {...props} />}
-    </div>
+    </>
   );
 };

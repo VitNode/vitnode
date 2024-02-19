@@ -92,7 +92,7 @@ export const ContentTableUsersMembersAdmin = ({
           const data = row.original;
 
           return (
-            <div className="flex items-center justify-end">
+            <>
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -110,7 +110,7 @@ export const ContentTableUsersMembersAdmin = ({
                   <TooltipContent>{tCore("edit")}</TooltipContent>
                 </Tooltip>
               </TooltipProvider>
-            </div>
+            </>
           );
         }
       }
