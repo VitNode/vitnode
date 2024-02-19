@@ -1,15 +1,65 @@
+import { ChevronDown, Trash2, Upload } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { useState } from "react";
+
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 import { EditActionsTableLangsCoreAdmin } from "./edit";
 import { DeleteActionsTableLangsCoreAdmin } from "./delete/delete";
 import { DownloadActionsTableLangsCoreAdmin } from "./download/download";
+import { UploadActionsTableLangsCoreAdmin } from "./upload/upload";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 
 export const ActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
+  const t = useTranslations("core");
+  const locale = useLocale();
+  const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
+  const [isOpenUploadDialog, setIsOpenUploadDialog] = useState(false);
+
   return (
     <>
       <DownloadActionsTableLangsCoreAdmin {...data} />
       <EditActionsTableLangsCoreAdmin {...data} />
-      {!data.default && !data.protected && (
-        <DeleteActionsTableLangsCoreAdmin {...data} />
+
+      {!data.protected && (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon" tooltip={t("more_actions")}>
+              <ChevronDown />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem onClick={() => setIsOpenUploadDialog(true)}>
+              <Upload /> {t("upload_new_version")}
+            </DropdownMenuItem>
+            {!data.default && (
+              <DropdownMenuItem
+                onClick={() => setIsOpenDeleteDialog(true)}
+                disabled={locale === data.code}
+              >
+                <Trash2 className="text-destructive" /> {t("delete")}
+              </DropdownMenuItem>
+            )}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )}
+
+      <DeleteActionsTableLangsCoreAdmin
+        open={isOpenDeleteDialog}
+        setOpen={setIsOpenDeleteDialog}
+        {...data}
+      />
+      {!data.protected && (
+        <UploadActionsTableLangsCoreAdmin
+          open={isOpenUploadDialog}
+          setOpen={setIsOpenUploadDialog}
+          {...data}
+        />
       )}
     </>
   );
