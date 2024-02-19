@@ -180,6 +180,10 @@
           },
           "edit": {
             "submit": "Edytuj język",
+            "default": {
+              "label": "Domyślny język",
+              "desc": "Ustaw jako domyślny język dla twojej aplikacji."
+            },
             "success": "Język został zaktualizowany."
           },
           "delete": {

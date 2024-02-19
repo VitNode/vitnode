@@ -11,6 +11,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -26,6 +27,7 @@ import {
 } from "@/components/ui/select";
 import { timeZones } from "./timezones";
 import { cn } from "@/functions/classnames";
+import { Switch } from "@/components/ui/switch";
 
 interface Props {
   data?: ShowCoreLanguages;
@@ -63,25 +65,6 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
             )}
           />
 
-          {!data && (
-            <FormField
-              control={form.control}
-              name="code"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("create.code.label")}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder={t("create.code.placeholder")}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          )}
-
           <FormField
             control={form.control}
             name="timezone"
@@ -116,17 +99,57 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
               </FormItem>
             )}
           />
-        </form>
 
-        <DialogFooter>
-          <Button
-            type="submit"
-            onClick={form.handleSubmit(onSubmit)}
-            loading={form.formState.isSubmitting}
-          >
-            {t(data ? "edit.submit" : "create.submit")}
-          </Button>
-        </DialogFooter>
+          {!data ? (
+            <FormField
+              control={form.control}
+              name="code"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("create.code.label")}</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder={t("create.code.placeholder")}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          ) : (
+            <FormField
+              control={form.control}
+              name="default"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                  <div className="space-y-0.5">
+                    <FormLabel className="text-base">
+                      {t("edit.default.label")}
+                    </FormLabel>
+                    <FormDescription>{t("edit.default.desc")}</FormDescription>
+                  </div>
+                  <FormControl>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          )}
+
+          <DialogFooter>
+            <Button
+              type="submit"
+              onClick={form.handleSubmit(onSubmit)}
+              loading={form.formState.isSubmitting}
+            >
+              {t(data ? "edit.submit" : "create.submit")}
+            </Button>
+          </DialogFooter>
+        </form>
       </Form>
     </>
   );

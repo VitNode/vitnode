@@ -180,6 +180,10 @@
           },
           "edit": {
             "submit": "Edit Language",
+            "default": {
+              "label": "Default",
+              "desc": "Set this language as the default language for your applications."
+            },
             "success": "Language has been updated."
           },
           "delete": {

@@ -22,7 +22,8 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
   const formSchema = z.object({
     code: zodInput.string.min(1),
     name: zodInput.string.min(1),
-    timezone: zodInput.string.min(1)
+    timezone: zodInput.string.min(1),
+    default: z.boolean()
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -30,7 +31,8 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
     defaultValues: {
       code: data?.code ?? "",
       name: data?.name ?? "",
-      timezone: data?.timezone ?? ""
+      timezone: data?.timezone ?? "",
+      default: data?.default ?? false
     }
   });
 
