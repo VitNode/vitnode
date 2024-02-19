@@ -123,6 +123,7 @@ export type Mutation = {
   admin__core_groups__edit: ShowAdminGroups;
   admin__core_languages__create: ShowCoreLanguages;
   admin__core_languages__delete: Scalars['String']['output'];
+  admin__core_languages__download: Scalars['String']['output'];
   admin__core_languages__edit: ShowCoreLanguages;
   admin__core_nav__change_position: Scalars['String']['output'];
   admin__core_nav__create: ShowCoreNav;
@@ -177,6 +178,13 @@ export type MutationAdmin__Core_Languages__CreateArgs = {
 
 export type MutationAdmin__Core_Languages__DeleteArgs = {
   code: Scalars['String']['input'];
+};
+
+
+export type MutationAdmin__Core_Languages__DownloadArgs = {
+  all: Scalars['Boolean']['input'];
+  code: Scalars['String']['input'];
+  plugins: Array<Scalars['String']['input']>;
 };
 
 
@@ -1004,6 +1012,15 @@ export type Admin__Core_Languages__DeleteMutationVariables = Exact<{
 
 export type Admin__Core_Languages__DeleteMutation = { __typename?: 'Mutation', admin__core_languages__delete: string };
 
+export type Admin__Core_Languages__DownloadMutationVariables = Exact<{
+  all: Scalars['Boolean']['input'];
+  code: Scalars['String']['input'];
+  plugins: Array<Scalars['String']['input']> | Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Languages__DownloadMutation = { __typename?: 'Mutation', admin__core_languages__download: string };
+
 export type Admin__Core_Languages__EditMutationVariables = Exact<{
   default: Scalars['Boolean']['input'];
   enabled: Scalars['Boolean']['input'];
@@ -1481,6 +1498,11 @@ export const Admin__Core_Languages__Create = gql`
 export const Admin__Core_Languages__Delete = gql`
     mutation Admin__core_languages__delete($code: String!) {
   admin__core_languages__delete(code: $code)
+}
+    `;
+export const Admin__Core_Languages__Download = gql`
+    mutation Admin__core_languages__download($all: Boolean!, $code: String!, $plugins: [String!]!) {
+  admin__core_languages__download(all: $all, code: $code, plugins: $plugins)
 }
     `;
 export const Admin__Core_Languages__Edit = gql`

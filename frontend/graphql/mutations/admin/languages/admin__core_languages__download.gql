@@ -1,0 +1,7 @@
+mutation Admin__core_languages__download(
+  $all: Boolean!
+  $code: String!
+  $plugins: [String!]!
+) {
+  admin__core_languages__download(all: $all, code: $code, plugins: $plugins)
+}

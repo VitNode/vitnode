@@ -1,32 +1,34 @@
-import { Pencil } from "lucide-react";
-import { Suspense, lazy } from "react";
+import { Download } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Suspense, lazy } from "react";
 
+import { Loader } from "@/components/loader/loader";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Loader } from "@/components/loader/loader";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 
 const Content = lazy(() =>
-  import("../../create-edit/create-edit").then(module => ({
-    default: module.CreateEditLangAdmin
+  import("./content").then(module => ({
+    default: module.ContentDownloadActionsTableLangsCoreAdmin
   }))
 );
 
-export const EditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
+export const DownloadActionsTableLangsCoreAdmin = (
+  props: Pick<ShowCoreLanguages, "code">
+) => {
   const t = useTranslations("core");
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" tooltip={t("edit")}>
-          <Pencil />
+        <Button variant="ghost" size="icon" tooltip={t("download")}>
+          <Download />
         </Button>
       </DialogTrigger>
 
       <DialogContent>
         <Suspense fallback={<Loader />}>
-          <Content data={data} />
+          <Content {...props} />
         </Suspense>
       </DialogContent>
     </Dialog>
