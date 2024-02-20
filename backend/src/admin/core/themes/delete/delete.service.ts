@@ -1,5 +1,6 @@
 import { rm } from "fs/promises";
 import { join } from "path";
+import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
@@ -35,7 +36,11 @@ export class DeleteAdminThemesService {
       .delete(core_themes)
       .where(eq(core_themes.id, id));
 
-    rm(join("..", "frontend", "themes", id.toString()), { recursive: true });
+    const path = join("..", "frontend", "themes", id.toString());
+    // Check if folder exists
+    if (fs.existsSync(path)) {
+      rm(join("..", "frontend", "themes", id.toString()), { recursive: true });
+    }
 
     return "Success!";
   }

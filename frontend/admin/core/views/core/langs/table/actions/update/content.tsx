@@ -28,7 +28,7 @@ export const ContentUpdateActionsTableLangsCoreAdmin = ({
                 className="mt-5"
                 id="theme"
                 {...field}
-                acceptExtensions={["tgz"]}
+                acceptExtensions={["tgz", "png"]}
                 maxFileSizeInMb={0}
               />
             )}

@@ -145,6 +145,7 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
               type="submit"
               onClick={form.handleSubmit(onSubmit)}
               loading={form.formState.isSubmitting}
+              disabled={!form.formState.isValid}
             >
               {t(data ? "edit.submit" : "create.submit")}
             </Button>

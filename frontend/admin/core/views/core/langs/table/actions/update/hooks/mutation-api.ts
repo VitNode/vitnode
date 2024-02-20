@@ -4,9 +4,9 @@ import { revalidatePath } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
 import {
-  Admin__Core_Themes__Upload,
-  type Admin__Core_Themes__UploadMutation,
-  type Admin__Core_Themes__UploadMutationVariables
+  type Admin__Core_Languages__UpdateMutation,
+  Admin__Core_Languages__Update,
+  type Admin__Core_Languages__UpdateMutationVariables
 } from "@/graphql/hooks";
 
 export const mutationApi = async (formData: FormData) => {
@@ -15,16 +15,19 @@ export const mutationApi = async (formData: FormData) => {
     const code = formData.get("code") as string;
 
     const { data } = await fetcher<
-      Admin__Core_Themes__UploadMutation,
-      Admin__Core_Themes__UploadMutationVariables
+      Admin__Core_Languages__UpdateMutation,
+      Omit<Admin__Core_Languages__UpdateMutationVariables, "file">
     >({
-      query: Admin__Core_Themes__Upload,
+      query: Admin__Core_Languages__Update,
       uploads: [
         {
           files,
           variable: "file"
         }
-      ]
+      ],
+      variables: {
+        code
+      }
     });
 
     revalidatePath("/admin/core/langs", "page");

@@ -20,7 +20,7 @@ export class UploadAdminThemesService {
 
   protected path: string = join("..", "frontend", "themes");
   protected tempFolder: string = `temp--${generateRandomString(5)}-${currentDate()}`;
-  protected tempPath: string = `${this.path}/${this.tempFolder}`;
+  protected tempPath: string = join(this.path, this.tempFolder);
 
   protected getThemeConfig(): ConfigTheme {
     const pathThemeJSON = join(this.tempPath, "theme.json");
@@ -50,42 +50,57 @@ export class UploadAdminThemesService {
 
     // Unpack theme to temp folder
     fs.mkdirSync(this.tempPath);
-    tgz
-      .createReadStream()
-      .pipe(
-        tar.x({
-          cwd: this.tempPath
-        })
-      )
-      .on("finish", async () => {
-        const config = this.getThemeConfig();
 
-        // Create theme in database
-        const theme = await this.databaseService.db
-          .insert(core_themes)
-          .values({
-            name: config.name,
-            version: config.version,
-            version_code: config.version_code,
-            created: currentDate(),
-            author: config.author,
-            author_url: config.author_url
+    await new Promise((resolve, reject) => {
+      tgz
+        .createReadStream()
+        .pipe(
+          tar.x({
+            cwd: this.tempPath
           })
-          .returning();
+        )
+        .on("error", function (err) {
+          reject(err.message);
+        })
+        .on("finish", async () => {
+          const config = this.getThemeConfig();
 
-        // Update theme folder name
-        const newPath = `${this.path}/${theme[0].id}`;
-        fs.renameSync(this.tempPath, newPath);
+          // Create theme in database
+          const theme = await this.databaseService.db
+            .insert(core_themes)
+            .values({
+              name: config.name,
+              version: config.version,
+              version_code: config.version_code,
+              created: currentDate(),
+              author: config.author,
+              author_url: config.author_url
+            })
+            .returning();
 
-        // Update the global.scss file
-        const pathSCSSFile = `${newPath}/core/layout/global.scss`;
-        const pathSCSSFileContent = fs.readFileSync(pathSCSSFile, "utf8");
-        await writeFile(
-          pathSCSSFile,
-          pathSCSSFileContent.replace(/\.theme_\d+/g, `.theme_${theme[0].id}`)
-        );
-      });
+          // Update theme folder name
+          try {
+            const newPath = join(this.path, theme[0].id.toString());
+            fs.renameSync(this.tempPath, newPath);
 
-    return "upload";
+            // Update the global.scss file
+            const pathSCSSFile = `${newPath}/core/layout/global.scss`;
+            const pathSCSSFileContent = fs.readFileSync(pathSCSSFile, "utf8");
+            await writeFile(
+              pathSCSSFile,
+              pathSCSSFileContent.replace(
+                /\.theme_\d+/g,
+                `.theme_${theme[0].id}`
+              )
+            );
+          } catch (error) {
+            reject(error);
+          }
+
+          resolve("success");
+        });
+    });
+
+    return "Success!";
   }
 }
