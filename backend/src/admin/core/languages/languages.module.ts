@@ -8,6 +8,8 @@ import { DeleteAdminCoreLanguagesResolver } from "./delete/delete.resolver";
 import { DeleteAdminCoreLanguageService } from "./delete/delete.service";
 import { DownloadAdminCoreLanguageService } from "./download/download.service";
 import { DownloadAdminCoreLanguagesResolver } from "./download/download.resolver";
+import { UpdateAdminCoreLanguageService } from "./update/update.service";
+import { UpdateAdminCoreLanguagesResolver } from "./update/update.resolver";
 
 @Module({
   providers: [
@@ -18,7 +20,9 @@ import { DownloadAdminCoreLanguagesResolver } from "./download/download.resolver
     DeleteAdminCoreLanguagesResolver,
     DeleteAdminCoreLanguageService,
     DownloadAdminCoreLanguageService,
-    DownloadAdminCoreLanguagesResolver
+    DownloadAdminCoreLanguagesResolver,
+    UpdateAdminCoreLanguageService,
+    UpdateAdminCoreLanguagesResolver
   ]
 })
 export class AdminLanguagesModule {}

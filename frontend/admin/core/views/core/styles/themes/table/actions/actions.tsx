@@ -20,8 +20,8 @@ export interface ActionsItemThemesAdminProps
 export const ActionsItemThemesAdmin = (props: ActionsItemThemesAdminProps) => {
   return (
     <>
-      <EditThemeActionsAdmin {...props} />
       <DownloadThemeActionsAdmin {...props} />
+      <EditThemeActionsAdmin {...props} />
       <DeleteThemeActionsAdmin {...props} />
     </>
   );

@@ -32,6 +32,7 @@ import {
 import { usePathname, useRouter } from "@/i18n";
 import { ToolbarDataTable } from "./toolbar/toolbar";
 import type { ToolbarDataTableProps } from "./toolbar/toolbar";
+import { cn } from "@/functions/classnames";
 
 interface TDataMin {
   id: number;
@@ -175,7 +176,13 @@ export function DataTable<TData extends TDataMin>({
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map(cell => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      className={cn({
+                        "flex items-center justify-end":
+                          cell.column.id === "actions"
+                      })}
+                      key={cell.id}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

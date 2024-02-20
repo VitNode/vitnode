@@ -4,10 +4,8 @@ import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import { createContext, forwardRef, useContext, useState } from "react";
 import type {
   ComponentPropsWithoutRef,
-  Dispatch,
   ElementRef,
-  HTMLAttributes,
-  SetStateAction
+  HTMLAttributes
 } from "react";
 
 import { buttonVariants } from "@/components/ui/button";
@@ -15,7 +13,7 @@ import { cn } from "@/functions/classnames";
 
 interface AlertDialogContextArgs {
   open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen: (value: boolean) => void;
 }
 
 export const AlertDialogContext = createContext<AlertDialogContextArgs>({
@@ -27,13 +25,21 @@ export const useAlertDialog = () => useContext(AlertDialogContext);
 
 const AlertDialog = ({
   children,
+  onOpenChange,
+  open: openProp,
   ...props
-}: Omit<AlertDialogPrimitive.DialogProps, "open" | "onOpenChange">) => {
+}: AlertDialogPrimitive.DialogProps) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <AlertDialogContext.Provider value={{ open, setOpen }}>
-      <AlertDialogPrimitive.Root open={open} onOpenChange={setOpen} {...props}>
+    <AlertDialogContext.Provider
+      value={{ open: openProp ?? open, setOpen: onOpenChange ?? setOpen }}
+    >
+      <AlertDialogPrimitive.Root
+        open={openProp ?? open}
+        onOpenChange={onOpenChange ?? setOpen}
+        {...props}
+      >
         {children}
       </AlertDialogPrimitive.Root>
     </AlertDialogContext.Provider>

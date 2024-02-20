@@ -8,17 +8,15 @@ import {
   useContext,
   useState,
   type ComponentPropsWithoutRef,
-  type Dispatch,
   type ElementRef,
-  type HTMLAttributes,
-  type SetStateAction
+  type HTMLAttributes
 } from "react";
 
 import { cn } from "@/functions/classnames";
 
 interface DialogContextArgs {
   open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen: (value: boolean) => void;
 }
 
 export const DialogContext = createContext<DialogContextArgs>({
@@ -30,13 +28,21 @@ export const useDialog = () => useContext(DialogContext);
 
 const Dialog = ({
   children,
+  onOpenChange,
+  open: openProp,
   ...props
-}: Omit<DialogPrimitive.DialogProps, "open" | "onOpenChange">) => {
+}: DialogPrimitive.DialogProps) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <DialogContext.Provider value={{ open, setOpen }}>
-      <DialogPrimitive.Root open={open} onOpenChange={setOpen} {...props}>
+    <DialogContext.Provider
+      value={{ open: openProp ?? open, setOpen: onOpenChange ?? setOpen }}
+    >
+      <DialogPrimitive.Root
+        open={openProp ?? open}
+        onOpenChange={onOpenChange ?? setOpen}
+        {...props}
+      >
         {children}
       </DialogPrimitive.Root>
     </DialogContext.Provider>

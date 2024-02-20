@@ -6,9 +6,5 @@ interface Props {
 }
 
 export const ActionsTableAdministratorsStaffAdmin = ({ data }: Props) => {
-  return (
-    <div className="flex items-center justify-end">
-      <DeleteActionsTableAdministratorsStaffAdmin data={data} />
-    </div>
-  );
+  return <DeleteActionsTableAdministratorsStaffAdmin data={data} />;
 };

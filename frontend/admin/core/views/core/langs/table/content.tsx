@@ -67,8 +67,7 @@ export const ContentTableLangsCoreAdmin = ({
         accessorKey: "code"
       },
       {
-        header: "",
-        accessorKey: "actions",
+        id: "actions",
         cell: ({ row }) => {
           return <ActionsTableLangsCoreAdmin {...row.original} />;
         }

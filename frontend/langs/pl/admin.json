@@ -163,14 +163,27 @@
         },
         "actions": {
           "create": {
-            "name": "Nazwa",
-            "code": "Kod",
-            "timezone": "Strefa czasowa",
+            "name": {
+              "label": "Nazwa",
+              "placeholder": "Polski (Polish)"
+            },
+            "code": {
+              "label": "Kod",
+              "placeholder": "pl"
+            },
+            "timezone": {
+              "label": "Strefa czasowa",
+              "placeholder": "Wybierz strefę czasową..."
+            },
             "submit": "Stwórz język",
             "success": "Język został stworzony."
           },
           "edit": {
             "submit": "Edytuj język",
+            "default": {
+              "label": "Domyślny język",
+              "desc": "Ustaw jako domyślny język dla twojej aplikacji."
+            },
             "success": "Język został zaktualizowany."
           },
           "delete": {
@@ -191,6 +204,11 @@
             "empty": "Nie znaleziono pliginów.",
             "selected": "{count, plural, =0 {Nie wybrano pluginów} =1 {1 plugin wybrany} few {# pluginy wybrane} other {# pluginów wybrano}}",
             "submit": "Pobierz"
+          },
+          "update": {
+            "title": "Aktualizuj język - {code}",
+            "submit": "Aktualizuj język",
+            "success": "Język został zaktualizowany."
           }
         }
       }

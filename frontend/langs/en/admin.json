@@ -163,14 +163,27 @@
         },
         "actions": {
           "create": {
-            "name": "Name",
-            "code": "Code",
-            "timezone": "Timezone",
+            "name": {
+              "label": "Name",
+              "placeholder": "English (USA)"
+            },
+            "code": {
+              "label": "Code",
+              "placeholder": "en"
+            },
+            "timezone": {
+              "label": "Timezone",
+              "placeholder": "Choose timezone..."
+            },
             "submit": "Create Language",
             "success": "Language has been created."
           },
           "edit": {
             "submit": "Edit Language",
+            "default": {
+              "label": "Default",
+              "desc": "Set this language as the default language for your applications."
+            },
             "success": "Language has been updated."
           },
           "delete": {
@@ -191,6 +204,11 @@
             "empty": "No plugins found.",
             "selected": "{count, plural, =0 {No plugins} =1 {1 plugin} other {# plugins}} selected",
             "submit": "Download"
+          },
+          "update": {
+            "title": "Update Language - {code}",
+            "submit": "Update Language",
+            "success": "Language has been updated."
           }
         }
       }
