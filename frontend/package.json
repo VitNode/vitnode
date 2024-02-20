@@ -1,7 +1,7 @@
 {
   "name": "vitnode_frontend",
-  "version": "0.1.0 Alpha 1",
-  "version_code": "10000",
+  "version": "0.0.2",
+  "version_code": "10001",
   "description": "",
   "author": "Maciej Piotr (aXenDev) Balcerzak",
   "license": "GPL-3.0 license",
