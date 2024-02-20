@@ -23,6 +23,11 @@
         "forums": "Fora"
       }
     },
+    "rebuild_required": {
+      "title": "Wymaga przebudowania",
+      "desc": "Aby zastosować zmiany, musisz przebudować aplikację.",
+      "submit": "Przebuduj teraz"
+    },
     "home_page": "Strona główna",
     "core": {
       "general": {

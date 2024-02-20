@@ -3,7 +3,7 @@ version: "3.8"
 services:
   postgres:
     container_name: vitnode_postgres
-    image: postgres:16.1-alpine
+    image: postgres:16.2-alpine
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -57,7 +57,7 @@ services:
     volumes:
       - ./frontend/config:/frontend/config # config
       - ./frontend/themes:/frontend/themes # themes
-      - ./frontend/langs:/app/langs # langs
+      - ./frontend/langs:/frontend/langs # langs
       - ./backend/public:/app/public # static files
 
   frontend:

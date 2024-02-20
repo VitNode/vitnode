@@ -24,6 +24,12 @@
       }
     },
     "home_page": "Home Page",
+    "rebuild_required": {
+      "title": "Themes, Languages and Plugins disabled",
+      "desc": "We're detecting that you need to rebuild your website. This is required after you have made changes in themes, languages or plugins like adding, updating or deleting.",
+      "this_process": "This process will take a few minutes to complete.",
+      "submit": "Rebuild Now"
+    },
     "core": {
       "general": {
         "title": "General Settings",

@@ -3,7 +3,7 @@ version: "3.8"
 services:
   postgres:
     container_name: vitnode_postgres
-    image: postgres:16.1-alpine
+    image: postgres:16.2-alpine
     restart: on-failure
     environment:
       POSTGRES_USER: root
@@ -31,7 +31,7 @@ services:
 
   redis:
     container_name: vitnode_redis
-    image: redis:7.2.3-alpine
+    image: redis:7.2.4-alpine
     restart: on-failure
     ports:
       - "6379:6379"
