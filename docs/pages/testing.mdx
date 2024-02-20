@@ -1,7 +1,5 @@
 import { Steps } from "nextra/components";
 import { Tabs } from "nextra/components";
-import dockerComposeTestImg from "@/assets/docker_compose_test.png";
-import Image from "next/image";
 
 # 🧪 Testing Locally
 
@@ -17,8 +15,7 @@ We're prepared for you docker compose file for testing VitNode. You don't need t
   <Tabs.Tab>
 
 ```bash
-git clone https://github.com/aXenDeveloper/vitnode.git
-cd vitnode
+git clone https://github.com/aXenDeveloper/vitnode.git && cd vitnode
 ```
 
   </Tabs.Tab>
@@ -31,16 +28,15 @@ cd vitnode
   </Tabs.Tab>
 </Tabs>
 
-### Run docker compose
-
-<Tabs items={['docker-compose', 'pnpm']}>
-  <Tabs.Tab>
+### Install dependencies
 
 ```bash
-docker-compose -f ./docker-compose-test.yml -p vitnode-test up -d
+pnpm i
 ```
 
-  </Tabs.Tab>
+### Run docker compose
+
+<Tabs items={['pnpm', 'docker-compose']}>
   <Tabs.Tab>
 
 ```bash
@@ -48,20 +44,13 @@ pnpm docker:test
 ```
 
   </Tabs.Tab>
-
-### Generate tables in database
-
-Go to backend container and run:
+    <Tabs.Tab>
 
 ```bash
-pnpm db
+pnpm config:init && docker-compose -f ./docker-compose-prod.yml -p vitnode-test up -d --build && sudo docker exec -d vitnode_backend /bin/sh -c \"pnpm db\"
 ```
 
-<Image
-  className="max-w-full"
-  src={dockerComposeTestImg}
-  alt="Docker Compose with command"
-/>
+  </Tabs.Tab>
 
 ### Finish
 
