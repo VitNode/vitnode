@@ -23,6 +23,11 @@ query Core_sessions__authorization {
       }
     }
     theme_id
+    rebuild_required {
+      themes
+      langs
+      plugins
+    }
   }
   core_languages__show {
     edges {

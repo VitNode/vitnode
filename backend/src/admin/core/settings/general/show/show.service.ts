@@ -1,19 +1,16 @@
-import * as fs from "fs";
-
 import { Injectable } from "@nestjs/common";
 
 import { ShowGeneralAdminSettingsObj } from "./dto/show.obj";
 
-import { ConfigType, configPath } from "@/config";
+import { getConfigFile } from "@/functions/config/get-config-file";
 
 @Injectable()
 export class ShowGeneralAdminSettingsService {
   async show(): Promise<ShowGeneralAdminSettingsObj> {
-    const config = fs.readFileSync(configPath, "utf8");
-    const data: ConfigType = JSON.parse(config);
+    const config = await getConfigFile();
 
     return {
-      side_name: data.side_name
+      side_name: config.side_name
     };
   }
 }

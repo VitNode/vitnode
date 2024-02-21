@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 "use client";
 
 import { Languages } from "lucide-react";
@@ -13,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "@/i18n";
 import { useGlobals } from "@/hooks/core/use-globals";
+import { useSession } from "@/hooks/core/use-session";
 
 export const LanguageSwitcher = () => {
   const t = useTranslations("core");
@@ -21,8 +23,14 @@ export const LanguageSwitcher = () => {
   const { replace } = useRouter();
   const pathname = usePathname();
   const enableLocales = languages.filter(lang => lang.enabled);
+  const { rebuild_required } = useSession();
 
-  if (enableLocales.length <= 1) return null;
+  if (
+    enableLocales.length <= 1 ||
+    (rebuild_required.langs && process.env.NODE_ENV !== "development")
+  ) {
+    return null;
+  }
 
   return (
     <DropdownMenu>

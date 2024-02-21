@@ -11,6 +11,7 @@ import { DatabaseService } from "@/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_languages } from "../../database/schema/languages";
 import { CustomError } from "@/utils/errors/CustomError";
+import { setRebuildRequired } from "@/functions/config/rebuild-required";
 
 @Injectable()
 export class DeleteAdminCoreLanguageService {
@@ -48,6 +49,8 @@ export class DeleteAdminCoreLanguageService {
     if (existsSync(path)) {
       rm(path, { recursive: true });
     }
+
+    await setRebuildRequired({ set: "langs" });
 
     return "Success!";
   }

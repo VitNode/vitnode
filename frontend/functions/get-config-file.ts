@@ -4,18 +4,15 @@ import { join } from "path";
 export interface ConfigType {
   applications: string[];
   finished_install: boolean;
-  languages: {
-    default: string;
-    locales: {
-      enabled: boolean;
-      key: string;
-    }[];
+  rebuild_required: {
+    langs: boolean;
+    plugins: boolean;
+    themes: boolean;
   };
   side_name: string;
-  theme_id: number;
 }
 
-export const getConfig = async () => {
+export const getConfigFile = async () => {
   const configPath = join("config", "config.json");
   const file = await promises.readFile(configPath, "utf8");
 

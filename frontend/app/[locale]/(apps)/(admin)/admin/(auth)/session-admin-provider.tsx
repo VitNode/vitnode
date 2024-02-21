@@ -10,11 +10,17 @@ interface Props {
   data: Admin__Sessions__AuthorizationQuery;
 }
 
-export const SessionAdminProvider = ({ children, data }: Props) => {
+export const SessionAdminProvider = ({
+  children,
+  data: {
+    admin__sessions__authorization: { rebuild_required, user: session }
+  }
+}: Props) => {
   return (
     <SessionAdminContext.Provider
       value={{
-        session: data.admin__sessions__authorization.user
+        session,
+        rebuild_required
       }}
     >
       {children}

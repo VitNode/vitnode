@@ -46,6 +46,7 @@
       "breadcrumb": false
     }
   },
+  "help": "🙋‍♂️ Help",
   "-- For Developers": {
     "type": "separator",
     "title": "For Developers"

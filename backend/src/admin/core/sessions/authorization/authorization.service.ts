@@ -8,6 +8,7 @@ import { Ctx } from "@/types/context.type";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { currentDate } from "@/functions/date";
 import { DatabaseService } from "@/database/database.service";
+import { getConfigFile } from "@/functions/config/get-config-file";
 
 @Injectable()
 export class AuthorizationAdminSessionsService {
@@ -54,6 +55,7 @@ export class AuthorizationAdminSessionsService {
       throw new AccessDeniedError();
     }
 
+    const config = await getConfigFile();
     const { user } = session;
 
     return {
@@ -61,7 +63,8 @@ export class AuthorizationAdminSessionsService {
         ...user,
         is_admin: true,
         is_mod: true
-      }
+      },
+      rebuild_required: config.rebuild_required
     };
   }
 }

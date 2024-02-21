@@ -10,6 +10,7 @@ RUN apk add --no-cache libc6-compat
 FROM base AS deps
 WORKDIR /app
 COPY package.json ./
+COPY config ./config
 RUN pnpm i
 
 # Build the app
@@ -24,7 +25,6 @@ ENV NEXT_PUBLIC_GRAPHQL_URL=${NEXT_PUBLIC_GRAPHQL_URL}
 ARG NEXT_PUBLIC_BACKEND_URL
 ENV NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
 
-RUN pnpm config:init
 RUN pnpm build
 
 # Run the app

@@ -24,6 +24,14 @@
       }
     },
     "home_page": "Home Page",
+    "rebuild_required": {
+      "title": "Rebuild Required",
+      "desc": "We're detecting that you need to rebuild your website, because you have made changes in:",
+      "plugins": "<bold>Plugins</bold> - Temporary disabled",
+      "themes": "<bold>Themes</bold> - Changing theme disabled",
+      "langs": "<bold>Languages</bold> - Changing language disabled",
+      "submit": "Read How To Rebuild"
+    },
     "core": {
       "general": {
         "title": "General Settings",

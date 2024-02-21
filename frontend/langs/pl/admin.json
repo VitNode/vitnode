@@ -23,6 +23,14 @@
         "forums": "Fora"
       }
     },
+    "rebuild_required": {
+      "title": "Wymaga przebudowania",
+      "desc": "Wykryliśmy, że musisz przebudować swoją stronę, ponieważ wprowadziłeś zmiany w:",
+      "plugins": "<bold>Pluginach</bold> - Wyłączone",
+      "themes": "<bold>Motywach</bold> - Zmiana motywu wyłączona",
+      "langs": "<bold>Językach</bold> - Zmiana języka wyłączona",
+      "submit": "Przeczytaj jak przebudować"
+    },
     "home_page": "Strona główna",
     "core": {
       "general": {
