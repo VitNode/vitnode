@@ -12,9 +12,10 @@ export const RebuildRequiredAdmin = () => {
   const { rebuild_required } = useSessionAdmin();
 
   if (
-    !rebuild_required.langs &&
-    !rebuild_required.plugins &&
-    !rebuild_required.themes
+    (!rebuild_required.langs &&
+      !rebuild_required.plugins &&
+      !rebuild_required.themes) ||
+    process.env.NODE_ENV === "development"
   ) {
     return null;
   }
