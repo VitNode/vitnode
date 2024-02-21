@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
-import { getConfig } from "@/functions/get-config";
+import { getConfigFile } from "@/functions/get-config-file";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const config = await getConfig();
+  const config = await getConfigFile();
   const defaultTitle = config.side_name;
 
   return {

@@ -22,5 +22,10 @@ query Admin__sessions__authorization {
         id
       }
     }
+    rebuild_required {
+      themes
+      langs
+      plugins
+    }
   }
 }

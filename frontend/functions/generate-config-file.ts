@@ -2,16 +2,17 @@
 import * as fs from "fs";
 import { join } from "path";
 
-interface ConfigType {
-  applications: string[];
-  finished_install: boolean;
-  side_name: string;
-}
+import type { ConfigType } from "./get-config-file";
 
 const DATA: ConfigType = {
   side_name: "VitNode Community",
   applications: ["core", "admin", "forum"],
-  finished_install: false
+  finished_install: false,
+  rebuild_required: {
+    themes: false,
+    langs: false,
+    plugins: false
+  }
 };
 
 const configPath = join("config", "config.json");

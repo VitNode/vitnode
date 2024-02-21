@@ -5,9 +5,19 @@ import { useTranslations } from "next-intl";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { buttonVariants } from "@/components/ui/button";
+import { useSessionAdmin } from "../hooks/use-session-admin";
 
 export const RebuildRequiredAdmin = () => {
   const t = useTranslations("admin.rebuild_required");
+  const { rebuild_required } = useSessionAdmin();
+
+  if (
+    !rebuild_required.langs &&
+    !rebuild_required.plugins &&
+    !rebuild_required.themes
+  ) {
+    return null;
+  }
 
   return (
     <Alert className="mb-2" variant="destructive">
@@ -15,7 +25,33 @@ export const RebuildRequiredAdmin = () => {
 
       <AlertTitle>{t("title")}</AlertTitle>
       <AlertDescription>{t("desc")}</AlertDescription>
-      <AlertDescription>{t("why")}</AlertDescription>
+      <AlertDescription className="my-4">
+        <ul>
+          {rebuild_required.langs && (
+            <li>
+              {t.rich("langs", {
+                bold: text => <span className="font-bold">{text}</span>
+              })}
+            </li>
+          )}
+
+          {rebuild_required.plugins && (
+            <li>
+              {t.rich("plugins", {
+                bold: text => <span className="font-bold">{text}</span>
+              })}
+            </li>
+          )}
+
+          {rebuild_required.themes && (
+            <li>
+              {t.rich("themes", {
+                bold: text => <span className="font-bold">{text}</span>
+              })}
+            </li>
+          )}
+        </ul>
+      </AlertDescription>
 
       <div className="mt-2">
         <a

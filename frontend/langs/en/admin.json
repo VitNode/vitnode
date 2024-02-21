@@ -26,8 +26,10 @@
     "home_page": "Home Page",
     "rebuild_required": {
       "title": "Rebuild Required",
-      "desc": "We're detecting that you need to rebuild your website.",
-      "why": "This is required after you have made changes in themes, languages or plugins like adding, updating or deleting.",
+      "desc": "We're detecting that you need to rebuild your website, because you have made changes in:",
+      "plugins": "<bold>Plugins</bold> - Temporary disabled",
+      "themes": "<bold>Themes</bold> - Changing theme disabled",
+      "langs": "<bold>Languages</bold> - Changing language disabled",
       "submit": "Read How To Rebuild"
     },
     "core": {

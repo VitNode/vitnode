@@ -5,17 +5,17 @@ import { Injectable } from "@nestjs/common";
 import { GeneralAdminSettingsObj } from "../dto/general.obj";
 import { EditGeneralAdminSettingsArgs } from "./dto/edit.args";
 
-import { configPath } from "@/config";
+import { configPath, getConfigFile } from "@/functions/get-config-file";
 
 @Injectable()
 export class EditGeneralAdminSettingsService {
   async edit(
     data: EditGeneralAdminSettingsArgs
   ): Promise<GeneralAdminSettingsObj> {
-    const config = fs.readFileSync(configPath, "utf8");
+    const config = await getConfigFile();
 
     const newData = {
-      ...JSON.parse(config),
+      ...config,
       ...data
     };
 

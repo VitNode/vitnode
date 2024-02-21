@@ -3,6 +3,7 @@
 # ------------------------------------------------------
 
 type AuthorizationAdminSessionsObj {
+  rebuild_required: RebuildRequiredObj!
   user: AuthorizationCurrentUserObj
 }
 
@@ -173,6 +174,12 @@ type Query {
   forum_forums__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsObj!
   forum_posts__show(cursor: Int, first: Int, firstEdges: Int, last: Int, sortBy: ShowPostsForumsSortingEnum, topic_id: Int!): ShowPostsForumsObj!
   forum_topics__show(cursor: Int, first: Int, forum_id: Int, id: Int, last: Int): ShowTopicsForumsObj!
+}
+
+type RebuildRequiredObj {
+  langs: Boolean!
+  plugins: Boolean!
+  themes: Boolean!
 }
 
 type ShowAdminGroups {

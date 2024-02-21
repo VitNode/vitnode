@@ -2,7 +2,7 @@ import { lazy, type LazyExoticComponent, type ReactNode } from "react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-import { getConfig } from "@/functions/get-config";
+import { getConfigFile } from "@/functions/get-config-file";
 import { getSessionData } from "@/functions/get-session-data";
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 export async function generateMetadata({
   params: { locale }
 }: Props): Promise<Metadata> {
-  const config = await getConfig();
+  const config = await getConfigFile();
   const t = await getTranslations({ locale, namespace: "core.settings" });
 
   return {

@@ -18,6 +18,7 @@ export type Scalars = {
 
 export type AuthorizationAdminSessionsObj = {
   __typename?: 'AuthorizationAdminSessionsObj';
+  rebuild_required: RebuildRequiredObj;
   user?: Maybe<AuthorizationCurrentUserObj>;
 };
 
@@ -538,6 +539,13 @@ export type QueryForum_Topics__ShowArgs = {
   forum_id?: InputMaybe<Scalars['Int']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type RebuildRequiredObj = {
+  __typename?: 'RebuildRequiredObj';
+  langs: Scalars['Boolean']['output'];
+  plugins: Scalars['Boolean']['output'];
+  themes: Scalars['Boolean']['output'];
 };
 
 export type ShowAdminGroups = {
@@ -1364,7 +1372,7 @@ export type Admin__Core_Plugins__ShowQuery = { __typename?: 'Query', admin__core
 export type Admin__Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null } };
+export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, rebuild_required: { __typename?: 'RebuildRequiredObj', themes: boolean, langs: boolean, plugins: boolean } } };
 
 export type Admin__Settings__General__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2176,6 +2184,11 @@ export const Admin__Sessions__Authorization = gql`
         }
         id
       }
+    }
+    rebuild_required {
+      themes
+      langs
+      plugins
     }
   }
 }

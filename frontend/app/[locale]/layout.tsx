@@ -4,7 +4,7 @@ import { NextIntlClientProvider, type AbstractIntlMessages } from "next-intl";
 import { Inter } from "next/font/google";
 
 import { ThemeProvider } from "./theme-provider";
-import { getConfig } from "@/functions/get-config";
+import { getConfigFile } from "@/functions/get-config-file";
 import { InternalErrorView } from "@/admin/core/global/internal-error-view";
 import "./global.scss";
 import { getSessionData } from "@/functions/get-session-data";
@@ -24,7 +24,7 @@ export default async function LocaleLayout({
   children,
   params: { locale }
 }: Props) {
-  const config = await getConfig();
+  const config = await getConfigFile();
   let messages: AbstractIntlMessages;
   try {
     const messagesFormApps = await Promise.all(
