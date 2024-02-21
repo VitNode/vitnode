@@ -5,7 +5,7 @@ import { Injectable } from "@nestjs/common";
 import { GeneralAdminSettingsObj } from "../dto/general.obj";
 import { EditGeneralAdminSettingsArgs } from "./dto/edit.args";
 
-import { configPath, getConfigFile } from "@/functions/get-config-file";
+import { configPath, getConfigFile } from "@/functions/config/get-config-file";
 
 @Injectable()
 export class EditGeneralAdminSettingsService {

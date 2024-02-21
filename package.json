@@ -7,23 +7,24 @@
   "license": "GPL-3.0 license",
   "scripts": {
     "prepare": "npx husky install",
-    "config:init": "cd frontend && pnpm config:init && cd ..",
+    "config:init": "cd backend && pnpm config:init && cd ..",
+    "config:finish": "cd backend && pnpm config:finish && cd ..",
     "backend:build": "cd backend && pnpm build && cd ..",
     "backend:start": "cd backend && pnpm start",
     "backend:dev": "cd backend && pnpm dev",
     "frontend:build": "cd frontend && pnpm build && cd ..",
     "frontend:start": "cd frontend && pnpm start",
     "frontend:dev": "cd frontend && pnpm dev",
-    "docker:test": "pnpm config:init && docker-compose -f ./docker-compose-prod.yml -p vitnode-test up -d --build && sudo docker exec -d vitnode_backend /bin/sh -c \"pnpm db\"",
+    "docker:test": "pnpm config:init && docker-compose -f ./docker-compose-prod.yml -p vitnode-test up -d --build && sudo docker exec -d vitnode_backend /bin/sh -c \"pnpm db\" && pnpm config:finish",
     "docker:dev": "docker-compose -f ./docker-compose-dev.yml -p vitnode-dev up -d",
-    "docker:prod": "pnpm config:init && sudo docker compose -f ./docker-compose-prod.yml -p vitnode-prod up -d --build && sudo docker exec -d vitnode_backend /bin/sh -c \"pnpm db\"",
+    "docker:prod": "pnpm config:init && sudo docker compose -f ./docker-compose-prod.yml -p vitnode-prod up -d --build && sudo docker exec -d vitnode_backend /bin/sh -c \"pnpm db\" && pnpm config:finish",
     "lint": "cd backend && pnpm lint && cd .. && cd frontend && pnpm lint && cd ..",
     "lint:fix": "cd backend && pnpm lint:fix && cd .. && cd frontend && pnpm lint:fix && cd .."
   },
   "devDependencies": {
-    "@commitlint/cli": "^18.6.0",
-    "@commitlint/config-conventional": "^18.6.0",
-    "husky": "^9.0.10",
+    "@commitlint/cli": "^18.6.1",
+    "@commitlint/config-conventional": "^18.6.2",
+    "husky": "^9.0.11",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11"
   }

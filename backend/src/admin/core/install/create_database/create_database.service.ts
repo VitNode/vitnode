@@ -17,7 +17,7 @@ import { core_moderators_permissions } from "../../database/schema/moderators";
 import { core_plugins } from "../../database/schema/plugins";
 import { core_themes } from "../../database/schema/themes";
 import { core_nav, core_nav_name } from "../../database/schema/nav";
-import { getConfigFile } from "@/functions/get-config-file";
+import { getConfigFile } from "@/functions/config/get-config-file";
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {
