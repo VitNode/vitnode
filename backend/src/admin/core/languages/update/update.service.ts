@@ -8,6 +8,7 @@ import { UpdateCoreAdminLanguagesArgs } from "./dto/update.args";
 
 import { DatabaseService } from "@/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
+import { setRebuildRequired } from "@/functions/config/rebuild-required";
 
 @Injectable()
 export class UpdateAdminCoreLanguageService {
@@ -43,6 +44,8 @@ export class UpdateAdminCoreLanguageService {
           resolve("success");
         });
     });
+
+    await setRebuildRequired({ set: "langs" });
 
     return "Success!";
   }

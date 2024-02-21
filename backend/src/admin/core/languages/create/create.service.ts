@@ -10,6 +10,7 @@ import { ShowCoreLanguages } from "@/src/core/languages/show/dto/show.obj";
 import { CustomError } from "@/utils/errors/CustomError";
 import { core_languages } from "../../database/schema/languages";
 import { currentDate } from "@/functions/date";
+import { setRebuildRequired } from "@/functions/config/rebuild-required";
 
 @Injectable()
 export class CreateAdminCoreLanguageService {
@@ -51,6 +52,8 @@ export class CreateAdminCoreLanguageService {
       join("..", "frontend", "langs", code),
       { recursive: true }
     );
+
+    await setRebuildRequired({ set: "langs" });
 
     return newLanguage[0];
   }
