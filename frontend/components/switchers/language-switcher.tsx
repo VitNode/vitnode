@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 "use client";
 
 import { Languages } from "lucide-react";
@@ -26,7 +27,7 @@ export const LanguageSwitcher = () => {
 
   if (
     enableLocales.length <= 1 ||
-    (rebuild_required && process.env.NODE_ENV !== "development")
+    (rebuild_required.langs && process.env.NODE_ENV !== "development")
   ) {
     return null;
   }
