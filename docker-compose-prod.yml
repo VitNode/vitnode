@@ -74,7 +74,6 @@ services:
     networks:
       - vitnode
     volumes:
-      # - frontend_data:/app
       - ./frontend/config:/app/config # config
       - ./frontend/themes:/app/themes # themes
       - ./frontend/langs:/app/langs # langs

@@ -25,8 +25,9 @@
     },
     "rebuild_required": {
       "title": "Wymaga przebudowania",
-      "desc": "Aby zastosować zmiany, musisz przebudować aplikację.",
-      "submit": "Przebuduj teraz"
+      "desc": "Wykryliśmy, że musisz przebudować swoją stronę.",
+      "why": "Jest to wymagane po wprowadzeniu zmian w motywach, językach lub wtyczkach, takich jak dodawanie, aktualizowanie lub usuwanie.",
+      "submit": "Przeczytaj jak przebudować"
     },
     "home_page": "Strona główna",
     "core": {
