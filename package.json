@@ -9,7 +9,7 @@
     "prepare": "npx husky install",
     "config:init": "cd backend && pnpm config:init && cd ..",
     "config:finish": "cd backend && pnpm config:finish && cd ..",
-    "backend:build": "cd backend && pnpm build && cd ..",
+    "backend:build": "cd backend && pnpm build && cd .. pnpm config:finish",
     "backend:start": "cd backend && pnpm start",
     "backend:dev": "cd backend && pnpm dev",
     "frontend:build": "cd frontend && pnpm build && cd ..",

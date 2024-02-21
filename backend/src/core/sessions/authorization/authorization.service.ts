@@ -6,6 +6,7 @@ import { AuthorizationCoreSessionsObj } from "./dto/authorization.obj";
 
 import { Ctx } from "@/types/context.type";
 import { DatabaseService } from "@/database/database.service";
+import { getConfigFile } from "@/functions/config/get-config-file";
 
 @Injectable()
 export class AuthorizationCoreSessionsService {
@@ -69,6 +70,7 @@ export class AuthorizationCoreSessionsService {
     res
   }: Ctx): Promise<AuthorizationCoreSessionsObj> {
     const theme_id = await this.getThemeId({ req });
+    const config = await getConfigFile();
 
     try {
       const currentUser = await this.service.authorization({ req, res });
@@ -98,12 +100,14 @@ export class AuthorizationCoreSessionsService {
           }),
           avatar_color: user.avatar_color
         },
-        theme_id
+        theme_id,
+        rebuild_required: config.rebuild_required
       };
     } catch (error) {
       return {
         user: null,
-        theme_id
+        theme_id,
+        rebuild_required: config.rebuild_required
       };
     }
   }

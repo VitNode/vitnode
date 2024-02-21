@@ -1,6 +1,6 @@
-import { LanguageSwitcher } from "@/components/switchers/language-switcher";
 import { UserBarAdmin } from "./user-bar/user-bar-admin";
 import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";
+import { LangSwitcherHeaderAdmin } from "./lang-switcher";
 
 export const HeaderAdmin = () => {
   return (
@@ -16,7 +16,7 @@ export const HeaderAdmin = () => {
       )}
 
       <div className="ml-auto flex items-center justify-center gap-2">
-        <LanguageSwitcher />
+        <LangSwitcherHeaderAdmin />
         <DarkLightModeSwitcher />
         <UserBarAdmin />
       </div>

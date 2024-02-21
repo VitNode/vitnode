@@ -18,9 +18,9 @@ import { mutationApi } from "./mutation-api";
 export const ThemeSwitcher = () => {
   const t = useTranslations("core");
   const { themes } = useGlobals();
-  const { theme_id } = useSession();
+  const { rebuild_required, theme_id } = useSession();
 
-  if (themes.length <= 1) return null;
+  if (themes.length <= 1 || rebuild_required.themes) return null;
 
   return (
     <DropdownMenu>
