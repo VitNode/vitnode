@@ -1,6 +1,10 @@
 import { useTranslations } from "next-intl";
 
-import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -109,16 +113,18 @@ export const CreateEditFormModeratorsStaffAdmin = () => {
           )}
         />
 
-        <Button
-          disabled={
-            !form.formState.isValid ||
-            (!form.watch("user") && !form.watch("group"))
-          }
-          loading={form.formState.isSubmitting}
-          type="submit"
-        >
-          {tCore("save")}
-        </Button>
+        <DialogFooter>
+          <Button
+            disabled={
+              !form.formState.isValid ||
+              (!form.watch("user") && !form.watch("group"))
+            }
+            loading={form.formState.isSubmitting}
+            type="submit"
+          >
+            {tCore("save")}
+          </Button>
+        </DialogFooter>
       </form>
     </Form>
   );

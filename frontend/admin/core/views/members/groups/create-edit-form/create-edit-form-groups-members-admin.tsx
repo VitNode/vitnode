@@ -2,7 +2,11 @@ import { Suspense, lazy, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { Tabs } from "@/components/tabs/tabs";
-import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import { Loader } from "@/components/loader/loader";
 import { Button } from "@/components/ui/button";
@@ -78,13 +82,15 @@ export const CreateEditFormGroupsMembersAdmin = ({
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <Suspense fallback={<Loader />}>{tabsContent[activeTab]}</Suspense>
 
-          <Button
-            disabled={!form.formState.isValid}
-            loading={form.formState.isSubmitting}
-            type="submit"
-          >
-            {tCore("save")}
-          </Button>
+          <DialogFooter>
+            <Button
+              disabled={!form.formState.isValid}
+              loading={form.formState.isSubmitting}
+              type="submit"
+            >
+              {tCore("save")}
+            </Button>
+          </DialogFooter>
         </form>
       </Form>
     </>

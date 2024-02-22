@@ -10,7 +10,11 @@ import {
 } from "@/components/ui/form";
 import { useDownloadThemeAdmin } from "./hooks/use-download-theme-admin";
 import { Input } from "@/components/ui/input";
-import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import type { ActionsItemThemesAdminProps } from "../actions";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -111,13 +115,15 @@ export const ContentDownloadThemeActionsAdmin = ({
             </>
           )}
 
-          <Button
-            disabled={!form.formState.isValid}
-            loading={form.formState.isSubmitting}
-            type="submit"
-          >
-            {t("submit")}
-          </Button>
+          <DialogFooter>
+            <Button
+              disabled={!form.formState.isValid}
+              loading={form.formState.isSubmitting}
+              type="submit"
+            >
+              {t("submit")}
+            </Button>
+          </DialogFooter>
         </form>
       </Form>
     </>

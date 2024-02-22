@@ -4,7 +4,11 @@ import {
   useCreateEditNavAdmin,
   type CreateEditNavAdminArgs
 } from "./hooks/use-create-edit-nav-admin";
-import { DialogTitle } from "@/components/ui/dialog";
+import {
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -26,7 +30,9 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
 
   return (
     <>
-      <DialogTitle>{data ? t("edit.title") : t("create.title")}</DialogTitle>
+      <DialogHeader>
+        <DialogTitle>{data ? t("edit.title") : t("create.title")}</DialogTitle>
+      </DialogHeader>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -94,13 +100,15 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
             )}
           />
 
-          <Button
-            disabled={!form.formState.isValid}
-            loading={form.formState.isSubmitting}
-            type="submit"
-          >
-            {tCore(data ? "edit" : "create")}
-          </Button>
+          <DialogFooter>
+            <Button
+              disabled={!form.formState.isValid}
+              loading={form.formState.isSubmitting}
+              type="submit"
+            >
+              {tCore(data ? "edit" : "create")}
+            </Button>
+          </DialogFooter>
         </form>
       </Form>
     </>
