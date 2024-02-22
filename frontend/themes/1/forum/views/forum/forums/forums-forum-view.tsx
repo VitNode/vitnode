@@ -1,8 +1,9 @@
 import { useTranslations } from "next-intl";
 
 import type { Forum_Forums__ShowQuery } from "@/graphql/hooks";
-import { CategoryForum } from "./category";
+import { CategoryForum } from "./category/category";
 import { HeaderContent } from "@/components/header-content/header-content";
+import { WrapperForumsForum } from "./wrapper";
 
 export interface ForumsForumViewProps {
   data: Forum_Forums__ShowQuery;
@@ -21,11 +22,13 @@ export default function ForumsForumView({
       <HeaderContent h1={t("forum")} />
 
       {edges.length ? (
-        <div className="flex flex-col gap-4">
-          {edges.map(edge => (
-            <CategoryForum key={edge.id} {...edge} />
-          ))}
-        </div>
+        <WrapperForumsForum forums={edges}>
+          <div className="flex flex-col gap-4">
+            {edges.map(edge => (
+              <CategoryForum key={edge.id} {...edge} />
+            ))}
+          </div>
+        </WrapperForumsForum>
       ) : (
         <div className="text-center">{tCore("no_results")}</div>
       )}
