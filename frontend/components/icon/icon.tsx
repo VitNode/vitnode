@@ -21,15 +21,6 @@ export const Icon = memo(({ className, name, ...props }: Props) => {
       .then(mod => ({ default: mod }))
   );
 
-  // const LucideIcon = dynamic(
-  //   () => import(`lucide-react`).then(mod => mod[name]),
-  //   {
-  //     loading: () => {
-  //       return <Loader2 className={cn("animate-spin", className)} />;
-  //     }
-  //   }
-  // );
-
   return (
     <Suspense fallback={<Loader2 className={cn("animate-spin", className)} />}>
       <LucideIcon className={className} {...props} />

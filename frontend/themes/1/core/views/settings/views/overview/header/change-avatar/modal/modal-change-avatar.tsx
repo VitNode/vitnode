@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import { FilesInput } from "@/components/ui/files/files-input";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import { useModalChangeAvatar } from "@/hooks/core/settings/avatar/use-modal-change-avatar";
 import { useSession } from "@/hooks/core/use-session";
 

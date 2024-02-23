@@ -2,7 +2,7 @@
 
 import { Suspense, lazy } from "react";
 
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 
 const ContentTableForumsForumAdmin = lazy(() =>
   import("./content-table").then(module => ({

@@ -5,7 +5,7 @@ import { Virtuoso } from "react-virtuoso";
 import { type ShowTopicsForumsObj } from "@/graphql/hooks";
 import { ItemTopicListForum } from "./item";
 import { useTopicsList } from "@/hooks/forums/forum/use-topics-list";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 
 interface Props {
   initData: ShowTopicsForumsObj;

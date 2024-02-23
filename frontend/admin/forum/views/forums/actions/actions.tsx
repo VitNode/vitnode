@@ -6,7 +6,7 @@ import { Suspense, lazy } from "react";
 
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 
 const CreateEditFormForumAdmin = lazy(() =>
   import("../create-edit-form/create-edit-form-forum-admin").then(module => ({

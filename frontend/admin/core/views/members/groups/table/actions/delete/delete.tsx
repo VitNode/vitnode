@@ -15,7 +15,7 @@ import {
   AlertDialogContent,
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 
 const Content = lazy(() =>
   import("./content").then(module => ({

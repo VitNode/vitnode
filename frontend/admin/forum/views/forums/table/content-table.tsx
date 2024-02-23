@@ -31,7 +31,7 @@ import type {
   Admin__Forum_Forums__ShowFlattenedItem,
   Admin__Forum_Forums__ShowWithProjection
 } from "./types";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import { ErrorAdminView } from "@/admin/core/global/error-admin-view";
 import { APIKeys } from "@/graphql/api-keys";
 import type { Admin__Forum_Forums__ShowQuery } from "@/graphql/hooks";

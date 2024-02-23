@@ -7,7 +7,7 @@ import { useParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import { getIdFormString } from "@/functions/url";
 import type { PermissionsForumForumsCount } from "@/graphql/hooks";
 

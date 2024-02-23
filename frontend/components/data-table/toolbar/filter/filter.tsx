@@ -11,7 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import { FilterToolbarDataTableContext } from "./hooks/use-filter-toolbar-data-table";
 
 export interface FilterToolbarDataTableProps {

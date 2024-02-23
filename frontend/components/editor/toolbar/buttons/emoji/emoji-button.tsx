@@ -8,7 +8,7 @@ import {
   PopoverTrigger
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 
 const ContentEmojiButtonEditor = lazy(() =>
   import("./content").then(module => ({

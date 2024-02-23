@@ -12,7 +12,7 @@ import {
   PopoverTrigger
 } from "@/components/ui/popover";
 import { cn } from "@/functions/classnames";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import type { IconInputProps } from "./content/content";
 
 const Content = lazy(() =>

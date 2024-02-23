@@ -8,7 +8,7 @@ import {
   DialogTitle
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import {
   useCreateEditFormGroupsMembersAdmin,

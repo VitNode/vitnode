@@ -3,7 +3,7 @@ import { useSearchParams } from "next/navigation";
 import { CheckIcon } from "@radix-ui/react-icons";
 
 import { CommandGroup, CommandItem } from "@/components/ui/command";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import { usePathname, useRouter } from "@/i18n";
 import { cn } from "@/functions/classnames";
 import type { ContentFilterToolbarDataTableProps } from "./content";

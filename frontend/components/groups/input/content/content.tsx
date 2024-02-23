@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useDebouncedCallback } from "use-debounce";
 
 import { cn } from "@/functions/classnames";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import { Input } from "@/components/ui/input";
 import {
   Command,

@@ -1,0 +1,19 @@
+import { Callout } from "nextra/components";
+
+# Group Format
+
+Allows you to display single name group with formatted text.
+
+## Example
+
+```tsx
+import { GroupFormat } from "@/components/groups/group-format";
+
+return <GroupFormat group={user.group} />;
+```
+
+## Props
+
+| Name                 | Type                      | Default | Description                  |
+| -------------------- | ------------------------- | ------- | ---------------------------- |
+| `group` _(Required)_ | `{name: TextLanguage[];}` |         | The group object to display. |

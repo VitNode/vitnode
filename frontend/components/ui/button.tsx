@@ -4,7 +4,7 @@ import { forwardRef, type ButtonHTMLAttributes } from "react";
 import { useTranslations } from "next-intl";
 
 import { cn } from "@/functions/classnames";
-import { Loader } from "../loader/loader";
+import { Loader } from "../loader";
 import { TooltipPortalButton } from "./button-tooltip-portal";
 import { Tooltip, TooltipProvider, TooltipTrigger } from "./tooltip";
 
