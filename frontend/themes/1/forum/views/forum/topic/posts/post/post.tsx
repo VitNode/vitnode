@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import { UserLink } from "@/components/user/link/user-link";
-import { DateFormat } from "@/components/date-format/date-format";
+import { DateFormat } from "@/components/date-format";
 import { GroupFormat } from "@/components/groups/group-format";
 import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
 import type { TextLanguage, User } from "@/graphql/hooks";

@@ -6,7 +6,7 @@ import { Suspense, lazy } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 
 const CreateEditFormGroupsMembersAdmin = lazy(() =>
   import("../create-edit-form/create-edit-form-groups-members-admin").then(

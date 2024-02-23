@@ -7,7 +7,7 @@ import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 import { Input } from "@/components/ui/input";
 import { SkinSelectEmojiButtonEditor } from "@/components/editor/toolbar/buttons/emoji/skin-select";
 import { CONFIG } from "@/config";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 
 const EmojisContentIconInput = lazy(() =>
   import("./emojis/emojis").then(module => ({

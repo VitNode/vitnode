@@ -7,7 +7,7 @@ import { useTextLang } from "@/hooks/core/use-text-lang";
 import { usePermissionsGroupsAdminAPI } from "../hooks/use-permissions-groups-admin";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import type { ShowAdminGroups } from "@/graphql/hooks";
 
 interface Props {

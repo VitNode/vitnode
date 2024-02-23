@@ -2,7 +2,7 @@ import { Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Suspense, lazy } from "react";
 
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import {
   AlertDialog,
   AlertDialogContent,

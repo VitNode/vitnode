@@ -2,7 +2,7 @@
 
 import { Suspense, lazy } from "react";
 
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import type { GroupsMembersAdminViewProps } from "../groups-members-admin-view";
 
 const ContentTableGroupsMembersAdmin = lazy(() =>

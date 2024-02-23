@@ -8,7 +8,7 @@ import {
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import type { ShowAdminStaffModerators } from "@/graphql/hooks";
 
 const ContentDeleteActionsTableModeratorsStaffAdmin = lazy(() =>

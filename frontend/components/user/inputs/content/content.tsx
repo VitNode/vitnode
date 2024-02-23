@@ -7,7 +7,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { cn } from "@/functions/classnames";
 import { UserInputContentList } from "./list";
 import type { UserInputItem } from "../user-input";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import { Input } from "@/components/ui/input";
 import {
   Command,

@@ -2,7 +2,7 @@
 
 import { Suspense, lazy } from "react";
 
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import type { LangsCoreAdminViewProps } from "../langs-core-admin-view";
 
 const Content = lazy(() =>

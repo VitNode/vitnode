@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import { Card, CardHeader } from "@/components/ui/card";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import { cn } from "@/functions/classnames";
 
 interface Props {

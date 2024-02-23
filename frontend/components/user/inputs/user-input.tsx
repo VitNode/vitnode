@@ -9,7 +9,7 @@ import {
   PopoverContent,
   PopoverTrigger
 } from "@/components/ui/popover";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import { Badge } from "@/components/ui/badge";
 
 const UserInputContent = lazy(() =>

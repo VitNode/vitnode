@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { forwardRef } from "react";
 
 import { cn } from "@/functions/classnames";
 
@@ -18,15 +19,13 @@ interface HeaderContentH2Props extends HeaderContentProps {
   h1?: never;
 }
 
-export const HeaderContent = ({
-  children,
-  className,
-  desc,
-  h1,
-  h2
-}: HeaderContentH1Props | HeaderContentH2Props) => {
+export const HeaderContent = forwardRef<
+  HTMLDivElement,
+  HeaderContentH1Props | HeaderContentH2Props
+>(({ children, className, desc, h1, h2 }, ref) => {
   return (
     <div
+      ref={ref}
       className={cn(
         "mb-5 flex gap-4 flex-col sm:flex-row sm:items-center items-start",
         className
@@ -52,4 +51,6 @@ export const HeaderContent = ({
       )}
     </div>
   );
-};
+});
+
+HeaderContent.displayName = "HeaderContent";

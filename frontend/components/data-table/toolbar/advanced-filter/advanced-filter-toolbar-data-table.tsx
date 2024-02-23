@@ -11,7 +11,7 @@ import {
   SheetTitle,
   SheetTrigger
 } from "../../../ui/sheet";
-import { Loader } from "../../../loader/loader";
+import { Loader } from "../../../loader";
 
 interface Props {
   children: ReactNode;

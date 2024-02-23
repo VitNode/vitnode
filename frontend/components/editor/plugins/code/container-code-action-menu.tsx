@@ -16,7 +16,7 @@ import {
   type PrettierFormatError
 } from "./prettier/prettier-button-code-action";
 import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import { CopyButtonCodeAction } from "./copy/copy-button-code-action";
 
 const PrettierAlertDialog = lazy(() =>

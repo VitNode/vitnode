@@ -1,6 +1,6 @@
 import { Suspense, lazy } from "react";
 
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 

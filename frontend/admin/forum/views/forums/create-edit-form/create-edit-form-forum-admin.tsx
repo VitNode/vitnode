@@ -9,7 +9,7 @@ import {
 import { useCreateEditFormForumAdmin } from "./hooks/use-create-edit-form-forum-admin";
 import { Form } from "@/components/ui/form";
 import { Tabs } from "@/components/tabs/tabs";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 

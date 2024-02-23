@@ -32,7 +32,7 @@ import {
   CommandInput,
   CommandItem
 } from "@/components/ui/command";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import corePackages from "@/package.json";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 

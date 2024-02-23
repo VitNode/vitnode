@@ -11,7 +11,7 @@ import {
   TooltipTrigger
 } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 import { useSession } from "@/hooks/core/use-session";
 
 const ModalChangeAvatar = lazy(() =>

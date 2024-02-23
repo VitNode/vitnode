@@ -9,7 +9,7 @@ import type { TextLanguage } from "../../../graphql/hooks";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { Button } from "../../ui/button";
 import { Badge } from "../../ui/badge";
-import { Loader } from "../../loader/loader";
+import { Loader } from "../../loader";
 import { useTextLang } from "../../../hooks/core/use-text-lang";
 
 export interface GroupInputItem {

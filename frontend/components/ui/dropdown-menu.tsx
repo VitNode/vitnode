@@ -11,7 +11,7 @@ import {
 import { useTranslations } from "next-intl";
 
 import { cn } from "@/functions/classnames";
-import { Loader } from "@/components/loader/loader";
+import { Loader } from "@/components/loader";
 
 const DropdownMenu = DropdownMenuPrimitive.Root;
 
