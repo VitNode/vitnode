@@ -37,7 +37,7 @@ export const ContentIconInput = (props: IconInputProps) => {
   const [search, setSearch] = useState("");
   const [activeTab, setActiveTab] = useState<Tab>(Tab.Icon);
   const localStorageSkinToneIndex = localStorage.getItem(
-    CONFIG.editor.skin_tone
+    CONFIG.local_storage.editor_skin_tone
   );
   const [skinToneIndex, setSkinToneIndex] = useState(
     localStorageSkinToneIndex ? +localStorageSkinToneIndex : 0

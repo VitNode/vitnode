@@ -1,6 +1,10 @@
 import { useTranslations } from "next-intl";
 
-import { DialogFooter, DialogTitle } from "@/components/ui/dialog";
+import {
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from "@/components/ui/dialog";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 import { Form, FormField } from "@/components/ui/form";
 import { useUpdateLangAdmin } from "./hooks/use-update-lang-admin";
@@ -16,7 +20,9 @@ export const ContentUpdateActionsTableLangsCoreAdmin = ({
 
   return (
     <>
-      <DialogTitle>{t("title", { code })}</DialogTitle>
+      <DialogHeader>
+        <DialogTitle>{t("title", { code })}</DialogTitle>
+      </DialogHeader>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

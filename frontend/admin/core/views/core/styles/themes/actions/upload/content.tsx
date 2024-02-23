@@ -3,7 +3,11 @@ import { useTranslations } from "next-intl";
 import { Form, FormField } from "@/components/ui/form";
 import { useThemeUpload } from "./hooks/use-upload-theme";
 import { FilesInput } from "@/components/ui/files/files-input";
-import { DialogFooter, DialogTitle } from "@/components/ui/dialog";
+import {
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 export const ContentUploadActionThemeAdmin = () => {
@@ -12,7 +16,9 @@ export const ContentUploadActionThemeAdmin = () => {
 
   return (
     <>
-      <DialogTitle>{t("title")}</DialogTitle>
+      <DialogHeader>
+        <DialogTitle>{t("title")}</DialogTitle>
+      </DialogHeader>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

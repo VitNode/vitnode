@@ -5,8 +5,8 @@ const ENVS = {
 
 export const CONFIG = {
   graphql_url: ENVS.graphql_url ?? "http://localhost:8080",
-  editor: {
-    skin_tone: "emoji:skin-tone"
-  },
-  backend_url: ENVS.backend_url ?? "http://localhost:8080"
+  backend_url: ENVS.backend_url ?? "http://localhost:8080",
+  local_storage: {
+    editor_skin_tone: "emoji:skin-tone"
+  }
 };

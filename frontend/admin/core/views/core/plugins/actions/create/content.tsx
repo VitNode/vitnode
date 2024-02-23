@@ -1,6 +1,10 @@
 import { useTranslations } from "next-intl";
 
-import { DialogTitle } from "@/components/ui/dialog";
+import {
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -21,7 +25,9 @@ export const ContentCreateActionPluginAdmin = () => {
 
   return (
     <>
-      <DialogTitle>{t("title")}</DialogTitle>
+      <DialogHeader>
+        <DialogTitle>{t("title")}</DialogTitle>
+      </DialogHeader>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -112,13 +118,15 @@ export const ContentCreateActionPluginAdmin = () => {
             )}
           />
 
-          <Button
-            disabled={!form.formState.isValid}
-            loading={form.formState.isSubmitting}
-            type="submit"
-          >
-            {tCore("create")}
-          </Button>
+          <DialogFooter>
+            <Button
+              disabled={!form.formState.isValid}
+              loading={form.formState.isSubmitting}
+              type="submit"
+            >
+              {tCore("create")}
+            </Button>
+          </DialogFooter>
         </form>
       </Form>
     </>

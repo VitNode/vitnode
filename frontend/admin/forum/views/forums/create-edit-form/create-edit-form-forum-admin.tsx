@@ -1,7 +1,11 @@
 import { useTranslations } from "next-intl";
 import { Suspense, lazy, useState } from "react";
 
-import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from "@/components/ui/dialog";
 import { useCreateEditFormForumAdmin } from "./hooks/use-create-edit-form-forum-admin";
 import { Form } from "@/components/ui/form";
 import { Tabs } from "@/components/tabs/tabs";
@@ -63,13 +67,15 @@ export const CreateEditFormForumAdmin = () => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <Suspense fallback={<Loader />}>{tabsContent[activeTab]}</Suspense>
 
-          <Button
-            disabled={!form.formState.isValid}
-            loading={form.formState.isSubmitting}
-            type="submit"
-          >
-            {tCore("save")}
-          </Button>
+          <DialogFooter>
+            <Button
+              disabled={!form.formState.isValid}
+              loading={form.formState.isSubmitting}
+              type="submit"
+            >
+              {tCore("save")}
+            </Button>
+          </DialogFooter>
         </form>
       </Form>
     </>

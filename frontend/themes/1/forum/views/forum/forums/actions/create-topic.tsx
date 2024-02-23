@@ -1,6 +1,10 @@
 import { useTranslations } from "next-intl";
 
-import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from "@/components/ui/dialog";
 import { TextLanguageInput } from "@/components/text-language-input";
 import {
   Form,
@@ -64,13 +68,15 @@ export const CreateTopic = ({ defaultForumId }: Props) => {
             )}
           />
 
-          <Button
-            disabled={!form.formState.isValid}
-            loading={form.formState.isSubmitting}
-            type="submit"
-          >
-            {tCore("save")}
-          </Button>
+          <DialogFooter>
+            <Button
+              disabled={!form.formState.isValid}
+              loading={form.formState.isSubmitting}
+              type="submit"
+            >
+              {tCore("save")}
+            </Button>
+          </DialogFooter>
         </form>
       </Form>
     </>

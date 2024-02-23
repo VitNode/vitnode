@@ -20,7 +20,7 @@ interface Props {
 
 export const ContentEmojiButtonEditor = ({ setOpen }: Props) => {
   const localStorageSkinToneIndex = localStorage.getItem(
-    CONFIG.editor.skin_tone
+    CONFIG.local_storage.editor_skin_tone
   );
   const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState<string[] | null>(null);

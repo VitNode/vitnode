@@ -2,7 +2,11 @@ import { useTranslations } from "next-intl";
 
 import type { ActionsItemThemesAdminProps } from "../actions";
 import { useEditThemeAdmin } from "./hooks/use-edit-theme-admin";
-import { DialogTitle } from "@/components/ui/dialog";
+import {
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -24,7 +28,9 @@ export const ContentEditThemeActionsAdmin = (
 
   return (
     <>
-      <DialogTitle>{t("edit.title")}</DialogTitle>
+      <DialogHeader>
+        <DialogTitle>{t("edit.title")}</DialogTitle>
+      </DialogHeader>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -92,13 +98,15 @@ export const ContentEditThemeActionsAdmin = (
             </>
           )}
 
-          <Button
-            disabled={!form.formState.isValid}
-            loading={form.formState.isSubmitting}
-            type="submit"
-          >
-            {tCore("edit")}
-          </Button>
+          <DialogFooter>
+            <Button
+              disabled={!form.formState.isValid}
+              loading={form.formState.isSubmitting}
+              type="submit"
+            >
+              {tCore("edit")}
+            </Button>
+          </DialogFooter>
         </form>
       </Form>
     </>
