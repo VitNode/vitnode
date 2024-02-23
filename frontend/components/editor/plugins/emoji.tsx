@@ -10,7 +10,7 @@ import { CONFIG } from "@/config";
 const convertEmoji = (emoji: Emoji[]) => {
   const localStorageSkinToneIndex =
     typeof window !== "undefined"
-      ? localStorage.getItem(CONFIG.editor.skin_tone)
+      ? localStorage.getItem(CONFIG.local_storage.editor_skin_tone)
       : null;
   const result: Map<string, string> = new Map();
 

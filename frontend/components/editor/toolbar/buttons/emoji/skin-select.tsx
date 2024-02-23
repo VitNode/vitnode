@@ -52,7 +52,10 @@ export const SkinSelectEmojiButtonEditor = ({
             key={item}
             className="flex gap-2"
             onClick={() => {
-              localStorage.setItem(CONFIG.editor.skin_tone, index.toString());
+              localStorage.setItem(
+                CONFIG.local_storage.editor_skin_tone,
+                index.toString()
+              );
               setSkinToneIndex(index);
             }}
           >

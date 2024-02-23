@@ -5,9 +5,9 @@ import { ItemForum, type ItemForumProps } from "../item/item-forum";
 import type { TextLanguage } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
-import { AccordionContent } from "@/components/ui/accordion";
 import { WrapperCategoryForum } from "./wrapper";
 import { ChevronCategoryForumButton } from "./chevron-button";
+import { ChildrenWrapperCategoryForum } from "./children-wrapper";
 
 interface Props {
   description: TextLanguage[];
@@ -45,15 +45,17 @@ export const CategoryForum = ({ children, description, id, name }: Props) => {
               )}
             </div>
 
-            {children && children.length > 0 && <ChevronCategoryForumButton />}
+            {children && children.length > 0 && (
+              <ChevronCategoryForumButton id={id} />
+            )}
           </div>
 
           {children && children.length > 0 && (
-            <AccordionContent className="[&>div]:p-0">
+            <ChildrenWrapperCategoryForum>
               {children.map(child => (
                 <ItemForum key={child.id} {...child} />
               ))}
-            </AccordionContent>
+            </ChildrenWrapperCategoryForum>
           )}
         </CardContent>
       </Card>

@@ -1,23 +1,39 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
-import * as Accordion from "@radix-ui/react-accordion";
 
 import { Button } from "@/components/ui/button";
+import { useWrapperCategoryForum } from "@/hooks/forums/forum/use-wrapper-category-forum";
+import { LOCAL_STORAGE_KEY } from "./wrapper";
 
-export const ChevronCategoryForumButton = () => {
+interface Props {
+  id: number;
+}
+
+export const ChevronCategoryForumButton = ({ id }: Props) => {
+  const { open, setOpen } = useWrapperCategoryForum();
+
   return (
-    <Accordion.Header>
-      <Accordion.Trigger asChild>
-        <Button
-          className="text-muted-foreground hover:text-foreground flex-shrink-0 [&[data-state=open]>svg]:rotate-180 [&>svg]:transition-transform"
-          variant="ghost"
-          size="icon"
-          tooltip=""
-        >
-          <ChevronDown />
-        </Button>
-      </Accordion.Trigger>
-    </Accordion.Header>
+    <Button
+      className="text-muted-foreground hover:text-foreground flex-shrink-0 [&[data-state=open]>svg]:rotate-180 [&>svg]:transition-transform"
+      variant="ghost"
+      size="icon"
+      data-state={open ? "open" : "closed"}
+      tooltip=""
+      onClick={() => {
+        setOpen(prev => !prev);
+        const currentId = id.toString();
+
+        const prevIds =
+          localStorage.getItem(LOCAL_STORAGE_KEY)?.split(",") || [];
+        const valueToSet = prevIds.includes(currentId)
+          ? prevIds.filter(i => i !== currentId)
+          : [...prevIds, currentId];
+
+        localStorage.setItem(LOCAL_STORAGE_KEY, valueToSet.join(","));
+      }}
+    >
+      <ChevronDown />
+    </Button>
   );
 };
