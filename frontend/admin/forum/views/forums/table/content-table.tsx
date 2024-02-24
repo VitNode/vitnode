@@ -150,7 +150,7 @@ export const ContentTableForumsForumAdmin = () => {
         const indexToMove =
           active.id === over.id
             ? -1
-            : flattenedItems.find(i => i.id === over.id)?.position ?? -1;
+            : flattenedItems.find(i => i.id === over.id)?.index ?? -1;
 
         // Do nothing if drag and drop on the same item on the same level
         if (findActive?.parentId === parentId && active.id === over.id) {
