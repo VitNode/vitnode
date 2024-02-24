@@ -113,6 +113,13 @@ export const ContentTableForumsForumAdmin = () => {
         const toIndex = clonedItems.findIndex(({ id }) => id === over.id);
         const fromIndex = clonedItems.findIndex(({ id }) => id === active.id);
         const sortedItems = arrayMove(clonedItems, fromIndex, toIndex);
+        const activeIndex = sortedItems.findIndex(i => i.id === active.id);
+        sortedItems[activeIndex] = {
+          ...sortedItems[activeIndex],
+          depth,
+          parentId
+        };
+
         const build = testDragAndDrop.buildTree({
           flattenedTree: sortedItems
         });
