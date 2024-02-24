@@ -34,7 +34,7 @@ export interface ProjectionReturnType {
   depth: number;
   maxDepth: number;
   minDepth: number;
-  parentId: number;
+  parentId: number | null;
 }
 
 export const useProjection = () => {
@@ -73,9 +73,9 @@ export const useProjection = () => {
       depth = minDepth;
     }
 
-    const getParentId = (): number => {
+    const getParentId = (): number | null => {
       if (depth === 0 || !previousItem) {
-        return 0;
+        return null;
       }
 
       if (depth === previousItem.depth) {
@@ -91,7 +91,7 @@ export const useProjection = () => {
         .reverse()
         .find(item => item.depth === depth)?.parentId;
 
-      return newParent ?? 0;
+      return newParent ?? null;
     };
 
     return { depth, maxDepth, minDepth, parentId: getParentId() };

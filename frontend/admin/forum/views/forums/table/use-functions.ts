@@ -9,17 +9,17 @@ type WithChildren<T extends object> = Omit<T, "children"> & {
 export type FlatTree<T extends object> = {
   depth: number;
   index: number;
-  parentId: number;
+  parentId: number | null;
 } & WithChildren<T>;
 
 function flattenTree<T extends WithChildren<T>>({
   depth = 0,
-  parentId = 0,
+  parentId = null,
   tree
 }: {
   tree: T[];
   depth?: number;
-  parentId?: number;
+  parentId?: number | null;
 }): FlatTree<T>[] {
   return tree.reduce<FlatTree<T>[]>((acc, item, index) => {
     const children = item.children
@@ -105,16 +105,14 @@ export const useDragAndDrop = ({ activeId }: Args) => {
 
     for (const item of flattenedTree) {
       const { id } = item;
-      const parentId = item.parentId ?? root.id;
+      const parentId = item.parentId || root.id;
       const parent =
         nodes[parentId] ?? flattenedTree.find(({ id }) => id === parentId);
 
       nodes[id] = item;
 
-      if (parent) {
-        parent.children = parent.children ?? [];
-        parent.children.push(item as T);
-      }
+      parent.children = parent.children ?? [];
+      parent.children.push(item as T);
     }
 
     return root.children;

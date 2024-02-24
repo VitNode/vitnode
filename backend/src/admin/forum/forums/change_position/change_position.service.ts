@@ -27,8 +27,8 @@ export class ChangePositionForumForumsService {
     const allChildrenParent =
       await this.databaseService.db.query.forum_forums.findMany({
         where: (table, { eq }) =>
-          parent_id === null
-            ? isNull(table.parent_id)
+          !parent_id
+            ? isNull(table.parent_id ?? null)
             : eq(table.parent_id, parent_id),
         orderBy: (table, { asc }) => asc(table.position)
       });
