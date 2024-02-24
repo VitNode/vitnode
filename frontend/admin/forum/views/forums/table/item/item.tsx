@@ -9,6 +9,7 @@ import { useTextLang } from "@/hooks/core/use-text-lang";
 import { cn } from "@/functions/classnames";
 import { useChildrenForumForumsAdminAPI } from "./hooks/use-children-forum-forums-admin-api";
 import type { Admin__Forum_Forums__ShowFlattenedItem } from "../types";
+import { ActionsForumAdmin } from "./actions/actions";
 
 interface Props extends Admin__Forum_Forums__ShowFlattenedItem {
   indentationWidth: number;
@@ -58,18 +59,10 @@ export const ItemTableForumsForumAdmin = ({
           "--spacing": `${indentationWidth * depth}px`
         } as CSSProperties
       }
-      onClick={() => {
-        if (allowOpenChildren) onCollapse?.(id);
-      }}
-      role={allowOpenChildren ? "button" : undefined}
-      tabIndex={allowOpenChildren ? 0 : -1}
-      onKeyDown={e => {
-        if (e.key === "Enter" && allowOpenChildren) onCollapse?.(id);
-      }}
     >
       <div
         className={cn(
-          "p-4 flex gap-4 bg-card items-center transition-[background-color,opacity] relative border",
+          "p-4 flex gap-2 bg-card items-center transition-[background-color,opacity] relative border",
           {
             "animate-pulse bg-primary/20": isDropHere,
             "z-10": isDragging
@@ -93,16 +86,27 @@ export const ItemTableForumsForumAdmin = ({
         </Button>
 
         {childrenCount > 0 && (
-          <ChevronRight
-            className={cn("transition-transform text-muted-foreground", {
-              "rotate-90": isOpenChildren
-            })}
-          />
+          <Button
+            onClick={() => {
+              if (allowOpenChildren) onCollapse?.(id);
+            }}
+            variant="ghost"
+            size="icon"
+            tooltip=""
+          >
+            <ChevronRight
+              className={cn("transition-transform text-muted-foreground", {
+                "rotate-90": isOpenChildren
+              })}
+            />
+          </Button>
         )}
 
         <div className="flex-grow flex flex-col">
           <span>{convertText(name)}</span>
         </div>
+
+        <ActionsForumAdmin />
       </div>
     </div>
   );

@@ -1,28 +1,25 @@
-"use client";
-
+import { Pencil } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Plus } from "lucide-react";
 import { Suspense, lazy } from "react";
 
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const Content = lazy(() =>
-  import("../create-edit/create-edit").then(module => ({
+  import("../../../create-edit/create-edit").then(module => ({
     default: module.CreateEditForumAdmin
   }))
 );
 
-export const ActionsForumsForumAdmin = () => {
+export const EditActionForumAdmin = () => {
   const t = useTranslations("core");
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>
-          <Plus />
-          {t("create")}
+        <Button variant="ghost" size="icon" tooltip={t("edit")}>
+          <Pencil />
         </Button>
       </DialogTrigger>
 

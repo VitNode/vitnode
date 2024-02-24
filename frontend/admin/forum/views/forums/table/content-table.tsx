@@ -87,8 +87,9 @@ export const ContentTableForumsForumAdmin = () => {
 
   if (isLoading) return <Loader />;
   if (isError) return <ErrorAdminView />;
-  if (!data || data.length === 0)
+  if (!data || data.length === 0) {
     return <div className="text-center">{t("no_results")}</div>;
+  }
 
   return (
     <DndContext

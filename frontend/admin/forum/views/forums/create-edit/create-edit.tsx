@@ -29,7 +29,7 @@ enum TabsEnum {
   PERMISSIONS = "permissions"
 }
 
-export const CreateEditFormForumAdmin = () => {
+export const CreateEditForumAdmin = () => {
   const t = useTranslations("admin.forum.forums");
   const tCore = useTranslations("core");
   const { form, onSubmit } = useCreateEditFormForumAdmin();
