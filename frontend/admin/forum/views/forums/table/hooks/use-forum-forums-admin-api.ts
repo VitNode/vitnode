@@ -8,6 +8,11 @@ import { queryApi } from "./query-api";
 export interface Admin__Forum_Forums__ShowQueryItem
   extends Omit<ShowForumForumsAdmin, "parent" | "permissions"> {}
 
+export interface ShowForumForumsAdminWithChildren
+  extends Omit<ShowForumForumsAdmin, "children"> {
+  children: ShowForumForumsAdminWithChildren[];
+}
+
 export const useForumForumsAdminAPI = () => {
   const query = useInfiniteQuery({
     queryKey: [APIKeys.FORUMS_ADMIN],
@@ -27,10 +32,16 @@ export const useForumForumsAdminAPI = () => {
     }
   });
 
-  const data: ShowForumForumsAdmin[] = useMemo(() => {
+  const data: ShowForumForumsAdminWithChildren[] = useMemo(() => {
     return (
-      query.data?.pages.flatMap(
-        ({ admin__forum_forums__show: { edges } }) => edges
+      query.data?.pages.flatMap(({ admin__forum_forums__show: { edges } }) =>
+        edges.map(item => ({
+          ...item,
+          children:
+            item.children.length > 0
+              ? (item.children as unknown as ShowForumForumsAdminWithChildren[]) // Convert to the correct type, drizzle don't support recursive types
+              : []
+        }))
       ) ?? []
     );
   }, [query.data]);

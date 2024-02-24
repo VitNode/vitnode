@@ -8,10 +8,11 @@ import { Button } from "@/components/ui/button";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { cn } from "@/functions/classnames";
 import { useChildrenForumForumsAdminAPI } from "./hooks/use-children-forum-forums-admin-api";
-import type { Admin__Forum_Forums__ShowFlattenedItem } from "../types";
 import { ActionsForumAdmin } from "./actions/actions";
+import type { ShowForumForumsAdminWithChildren } from "../hooks/use-forum-forums-admin-api";
+import type { FlatTree } from "../use-functions";
 
-interface Props extends Admin__Forum_Forums__ShowFlattenedItem {
+interface Props extends FlatTree<ShowForumForumsAdminWithChildren> {
   indentationWidth: number;
   isOpenChildren: boolean;
   isDropHere?: boolean;
