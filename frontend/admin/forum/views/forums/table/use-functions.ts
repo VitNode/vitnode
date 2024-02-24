@@ -2,7 +2,7 @@ import type { UniqueIdentifier } from "@dnd-kit/core";
 import { useState } from "react";
 
 type WithChildren<T extends object> = Omit<T, "children"> & {
-  children: T[];
+  children: WithChildren<T>[];
   id: number;
 };
 
@@ -12,28 +12,28 @@ export type FlatTree<T extends object> = {
   parentId: number | null;
 } & WithChildren<T>;
 
-function flattenTree<T extends WithChildren<T>>({
+function flattenTree<T extends object>({
   depth = 0,
   parentId = null,
   tree
 }: {
-  tree: T[];
+  tree: WithChildren<T>[];
   depth?: number;
   parentId?: number | null;
 }): FlatTree<T>[] {
-  return tree.reduce<FlatTree<T>[]>((acc, item, index) => {
-    const children = item.children
+  return tree.reduce<FlatTree<T>[]>((previousValue, currentValue, index) => {
+    const children = currentValue.children
       ? flattenTree({
-          tree: item.children,
-          parentId: item.id,
+          tree: currentValue.children,
+          parentId: currentValue.id,
           depth: depth + 1
         })
       : [];
 
     return [
-      ...acc,
+      ...previousValue,
       {
-        ...item,
+        ...currentValue,
         parentId: parentId,
         depth: depth,
         index,
@@ -94,28 +94,33 @@ export const useDragAndDrop = ({ activeId }: Args) => {
   }: {
     flattenedTree: FlatTree<T>[];
   }): WithChildren<T>[] {
-    const root: { children: WithChildren<T>[]; id: string } = {
-      id: "root",
-      children: []
-    };
+    const tree: WithChildren<T>[] = [];
 
-    const nodes: Record<string, WithChildren<T>> = {
-      [root.id]: root
-    } as unknown as Record<string, WithChildren<T>>;
+    // Prepare the tree with the root elements
+    flattenedTree
+      .filter(item => !item.parentId)
+      .forEach(item => {
+        tree.push({ ...item, children: [] });
+      });
 
-    for (const item of flattenedTree) {
-      const { id } = item;
-      const parentId = item.parentId || root.id;
-      const parent =
-        nodes[parentId] ?? flattenedTree.find(({ id }) => id === parentId);
+    flattenedTree
+      .filter(item => item.parentId)
+      .forEach(item => {
+        const parentIndex = tree.findIndex(({ id }) => id === item.parentId);
 
-      nodes[id] = item;
+        if (parentIndex === -1) {
+          throw new Error("Parent not found");
+        }
 
-      parent.children = parent.children ?? [];
-      parent.children.push(item as T);
-    }
+        const parent = tree[parentIndex];
 
-    return root.children;
+        tree[parentIndex] = {
+          ...parent,
+          children: [...parent.children, item]
+        };
+      });
+
+    return tree;
   }
 
   return {

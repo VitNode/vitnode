@@ -15,29 +15,32 @@ import {
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { useMemo, useState } from "react";
-import { useQueryClient, type InfiniteData } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 
 import { ItemTableForumsForumAdmin } from "./item/item";
 import {
   useForumForumsAdminAPI,
-  type Admin__Forum_Forums__ShowQueryItem
+  type ShowForumForumsAdminWithChildren
 } from "./hooks/use-forum-forums-admin-api";
 import { Loader } from "@/components/loader";
 import { ErrorAdminView } from "@/admin/core/global/error-admin-view";
-import { APIKeys } from "@/graphql/api-keys";
-import type { Admin__Forum_Forums__ShowQuery } from "@/graphql/hooks";
 import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
-import { useDragAndDrop } from "./use-functions";
+import { useDragAndDrop, type FlatTree } from "./use-functions";
 import { useProjection, type ProjectionReturnType } from "./use-projection";
 
 const indentationWidth = 20;
 
 export const ContentTableForumsForumAdmin = () => {
   const t = useTranslations("core");
-  const { data, fetchNextPage, hasNextPage, isError, isLoading } =
-    useForumForumsAdminAPI();
-  const queryClient = useQueryClient();
+  const {
+    data: initData,
+    fetchNextPage,
+    hasNextPage,
+    isError,
+    isLoading
+  } = useForumForumsAdminAPI();
+  const [data, setData] =
+    useState<ShowForumForumsAdminWithChildren[]>(initData);
   const [projected, setProjected] = useState<ProjectionReturnType | null>();
 
   const { activeId, getProjection, overId, setActiveId, setOverId } =
@@ -104,51 +107,17 @@ export const ContentTableForumsForumAdmin = () => {
 
         if (!projected || !over) return;
         const { depth, parentId } = projected;
-        const clonedItems = testDragAndDrop.flattenTree({ tree: data });
 
-        const overIndex = clonedItems.findIndex(({ id }) => id === over.id);
-        const activeIndex = clonedItems.findIndex(({ id }) => id === active.id);
-        const activeTreeItem = clonedItems[activeIndex];
-        clonedItems[activeIndex] = { ...activeTreeItem, depth, parentId };
-        const sortedItems = arrayMove(clonedItems, activeIndex, overIndex);
-        const findItemsParent = sortedItems.filter(
-          i => i.parentId === parentId
-        );
-
-        // Update position of the item
-        findItemsParent.forEach((item, index) => {
-          const findIndex = sortedItems.findIndex(i => i.id === item.id);
-
-          if (!findIndex) return;
-
-          sortedItems[findIndex] = {
-            ...item,
-            position: index
-          };
+        const clonedItems: FlatTree<ShowForumForumsAdminWithChildren>[] =
+          testDragAndDrop.flattenTree({ tree: data });
+        const toIndex = clonedItems.findIndex(({ id }) => id === over.id);
+        const fromIndex = clonedItems.findIndex(({ id }) => id === active.id);
+        const sortedItems = arrayMove(clonedItems, fromIndex, toIndex);
+        const build = testDragAndDrop.buildTree({
+          flattenedTree: sortedItems
         });
 
-        queryClient.setQueryData<InfiniteData<Admin__Forum_Forums__ShowQuery>>(
-          [APIKeys.FORUMS_ADMIN],
-          old => {
-            const lastPage = old?.pages.at(-1);
-            if (!old || !lastPage) return old;
-
-            return {
-              pages: [
-                {
-                  ...lastPage,
-                  admin__forum_forums__show: {
-                    ...lastPage.admin__forum_forums__show,
-                    edges: testDragAndDrop.buildTree({
-                      flattenedTree: sortedItems
-                    }) as Admin__Forum_Forums__ShowQueryItem[]
-                  }
-                }
-              ],
-              pageParams: [old.pageParams.at(-1)]
-            };
-          }
-        );
+        setData(build);
 
         // -1 means that the item is the last one
         const findActive = flattenedItems.find(i => i.id === active.id);

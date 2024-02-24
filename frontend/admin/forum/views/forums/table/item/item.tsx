@@ -104,7 +104,9 @@ export const ItemTableForumsForumAdmin = ({
         )}
 
         <div className="flex-grow flex flex-col">
-          <span>{convertText(name)}</span>
+          <span>
+            {convertText(name)} - {id}
+          </span>
         </div>
 
         <ActionsForumAdmin />
