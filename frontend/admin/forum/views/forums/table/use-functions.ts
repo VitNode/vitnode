@@ -107,11 +107,7 @@ export const useDragAndDrop = ({ activeId }: Args) => {
       .filter(item => item.parentId)
       .forEach(item => {
         const parentIndex = tree.findIndex(({ id }) => id === item.parentId);
-
-        if (parentIndex === -1) {
-          throw new Error("Parent not found");
-        }
-
+        if (parentIndex === -1) return;
         const parent = tree[parentIndex];
 
         tree[parentIndex] = {

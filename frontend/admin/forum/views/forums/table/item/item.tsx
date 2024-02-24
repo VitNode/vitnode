@@ -15,11 +15,13 @@ import type { FlatTree } from "../use-functions";
 interface Props extends FlatTree<ShowForumForumsAdminWithChildren> {
   indentationWidth: number;
   isOpenChildren: boolean;
+  active?: boolean;
   isDropHere?: boolean;
   onCollapse?: (id: UniqueIdentifier) => void;
 }
 
 export const ItemTableForumsForumAdmin = ({
+  active,
   children,
   depth,
   id,
@@ -66,7 +68,8 @@ export const ItemTableForumsForumAdmin = ({
           "p-4 flex gap-2 bg-card items-center transition-[background-color,opacity] relative border",
           {
             "animate-pulse bg-primary/20": isDropHere,
-            "z-10": isDragging
+            "z-10": isDragging,
+            "opacity-50": active
           }
         )}
         style={{
@@ -104,9 +107,7 @@ export const ItemTableForumsForumAdmin = ({
         )}
 
         <div className="flex-grow flex flex-col">
-          <span>
-            {convertText(name)} - {id}
-          </span>
+          <span>{convertText(name)}</span>
         </div>
 
         <ActionsForumAdmin />

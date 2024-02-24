@@ -1,4 +1,3 @@
-import { Virtuoso } from "react-virtuoso";
 import {
   DndContext,
   closestCorners,
@@ -6,7 +5,8 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
-  MeasuringStrategy
+  MeasuringStrategy,
+  DragOverlay
 } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -22,8 +22,6 @@ import {
   useForumForumsAdminAPI,
   type ShowForumForumsAdminWithChildren
 } from "./hooks/use-forum-forums-admin-api";
-import { Loader } from "@/components/loader";
-import { ErrorAdminView } from "@/admin/core/global/error-admin-view";
 import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
 import { useDragAndDrop, type FlatTree } from "./use-functions";
 import { useProjection, type ProjectionReturnType } from "./use-projection";
@@ -32,13 +30,7 @@ const indentationWidth = 20;
 
 export const ContentTableForumsForumAdmin = () => {
   const t = useTranslations("core");
-  const {
-    data: initData,
-    fetchNextPage,
-    hasNextPage,
-    isError,
-    isLoading
-  } = useForumForumsAdminAPI();
+  const { data: initData } = useForumForumsAdminAPI();
   const [data, setData] =
     useState<ShowForumForumsAdminWithChildren[]>(initData);
   const [projected, setProjected] = useState<ProjectionReturnType | null>();
@@ -61,13 +53,12 @@ export const ContentTableForumsForumAdmin = () => {
   );
 
   const flattenedItems = testDragAndDrop.flattenedItems({ data });
+  const activeItem = flattenedItems.find(i => i.id === activeId);
   const sortedIds = useMemo(
     () => flattenedItems.map(({ id }) => id),
     [flattenedItems]
   );
 
-  if (isLoading) return <Loader />;
-  if (isError) return <ErrorAdminView />;
   if (!data || data.length === 0) {
     return <div className="text-center">{t("no_results")}</div>;
   }
@@ -165,39 +156,41 @@ export const ContentTableForumsForumAdmin = () => {
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
-        <Virtuoso
-          useWindowScroll
-          data={flattenedItems}
-          overscan={200}
-          className="rounded-md"
-          endReached={() => {
-            if (hasNextPage) {
-              fetchNextPage();
-            }
-          }}
-          itemContent={(_index, item) => {
-            return (
-              <ItemTableForumsForumAdmin
-                key={item.id}
-                indentationWidth={indentationWidth}
-                onCollapse={id => {
-                  testDragAndDrop.setIsOpenChildren(prev => {
-                    if (prev.includes(id)) {
-                      return prev.filter(i => i !== id);
-                    }
+        {flattenedItems.map(item => (
+          <ItemTableForumsForumAdmin
+            key={item.id}
+            indentationWidth={indentationWidth}
+            onCollapse={id => {
+              testDragAndDrop.setIsOpenChildren(prev => {
+                if (prev.includes(id)) {
+                  return prev.filter(i => i !== id);
+                }
 
-                    return [...prev, id];
-                  });
-                }}
-                isOpenChildren={testDragAndDrop.isOpenChildren.includes(
-                  item.id
-                )}
-                isDropHere={projected?.parentId === item.id}
-                {...item}
-              />
-            );
-          }}
-        />
+                return [...prev, id];
+              });
+            }}
+            isOpenChildren={testDragAndDrop.isOpenChildren.includes(item.id)}
+            isDropHere={projected?.parentId === item.id}
+            active={activeId === item.id}
+            {...item}
+            depth={
+              activeId === item.id && projected?.depth
+                ? projected?.depth
+                : item.depth
+            }
+          />
+        ))}
+
+        <DragOverlay>
+          {activeId !== null && activeItem && (
+            <ItemTableForumsForumAdmin
+              indentationWidth={indentationWidth}
+              isOpenChildren={false}
+              isDropHere={false}
+              {...activeItem}
+            />
+          )}
+        </DragOverlay>
       </SortableContext>
     </DndContext>
   );
