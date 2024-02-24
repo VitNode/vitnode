@@ -28,13 +28,16 @@ import { useProjection, type ProjectionReturnType } from "./use-projection";
 
 const indentationWidth = 20;
 
-export const ContentTableForumsForumAdmin = () => {
-  const t = useTranslations("core");
-  const { data: initData } = useForumForumsAdminAPI();
-  const [data, setData] =
-    useState<ShowForumForumsAdminWithChildren[]>(initData);
-  const [projected, setProjected] = useState<ProjectionReturnType | null>();
+export interface TableForumsForumAdminProps {
+  initData: ShowForumForumsAdminWithChildren[];
+}
 
+export const ContentTableForumsForumAdmin = ({
+  initData
+}: TableForumsForumAdminProps) => {
+  const t = useTranslations("core");
+  const { data, setData } = useForumForumsAdminAPI({ initData });
+  const [projected, setProjected] = useState<ProjectionReturnType | null>();
   const { activeId, getProjection, overId, setActiveId, setOverId } =
     useProjection();
   const testDragAndDrop = useDragAndDrop({ activeId });
