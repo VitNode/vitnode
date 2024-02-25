@@ -12,7 +12,7 @@ export type FlatTree<T extends object> = {
   parentId: number | null;
 } & WithChildren<T>;
 
-function flattenTree<T extends object>({
+export function flattenTree<T extends object>({
   depth = 0,
   parentId = null,
   tree
@@ -66,6 +66,36 @@ function removeChildrenOf<T extends object>({
   });
 }
 
+export function buildTree<T extends object>({
+  flattenedTree
+}: {
+  flattenedTree: FlatTree<T>[];
+}): WithChildren<T>[] {
+  const tree: WithChildren<T>[] = [];
+
+  // Prepare the tree with the root elements
+  flattenedTree
+    .filter(item => !item.parentId)
+    .forEach(item => {
+      tree.push({ ...item, children: [] });
+    });
+
+  flattenedTree
+    .filter(item => item.parentId)
+    .forEach(item => {
+      const parentIndex = tree.findIndex(({ id }) => id === item.parentId);
+      if (parentIndex === -1) return;
+      const parent = tree[parentIndex];
+
+      tree[parentIndex] = {
+        ...parent,
+        children: [...parent.children, item]
+      };
+    });
+
+  return tree;
+}
+
 interface Args {
   activeId: UniqueIdentifier | null;
 }
@@ -89,41 +119,9 @@ export const useDragAndDrop = ({ activeId }: Args) => {
     });
   }
 
-  function buildTree<T extends object>({
-    flattenedTree
-  }: {
-    flattenedTree: FlatTree<T>[];
-  }): WithChildren<T>[] {
-    const tree: WithChildren<T>[] = [];
-
-    // Prepare the tree with the root elements
-    flattenedTree
-      .filter(item => !item.parentId)
-      .forEach(item => {
-        tree.push({ ...item, children: [] });
-      });
-
-    flattenedTree
-      .filter(item => item.parentId)
-      .forEach(item => {
-        const parentIndex = tree.findIndex(({ id }) => id === item.parentId);
-        if (parentIndex === -1) return;
-        const parent = tree[parentIndex];
-
-        tree[parentIndex] = {
-          ...parent,
-          children: [...parent.children, item]
-        };
-      });
-
-    return tree;
-  }
-
   return {
-    flattenTree,
     flattenedItems,
     isOpenChildren,
-    setIsOpenChildren,
-    buildTree
+    setIsOpenChildren
   };
 };

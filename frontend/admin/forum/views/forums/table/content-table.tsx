@@ -23,7 +23,12 @@ import {
   type ShowForumForumsAdminWithChildren
 } from "./hooks/use-forum-forums-admin-api";
 import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
-import { useDragAndDrop, type FlatTree } from "./use-functions";
+import {
+  useDragAndDrop,
+  type FlatTree,
+  buildTree,
+  flattenTree
+} from "./use-functions";
 import { useProjection, type ProjectionReturnType } from "./use-projection";
 
 const indentationWidth = 20;
@@ -36,7 +41,7 @@ export const ContentTableForumsForumAdmin = ({
   initData
 }: TableForumsForumAdminProps) => {
   const t = useTranslations("core");
-  const { data, setData } = useForumForumsAdminAPI({ initData });
+  const { data, setData, updateData } = useForumForumsAdminAPI({ initData });
   const [projected, setProjected] = useState<ProjectionReturnType | null>();
   const { activeId, getProjection, overId, setActiveId, setOverId } =
     useProjection();
@@ -103,7 +108,7 @@ export const ContentTableForumsForumAdmin = ({
         const { depth, parentId } = projected;
 
         const clonedItems: FlatTree<ShowForumForumsAdminWithChildren>[] =
-          testDragAndDrop.flattenTree({ tree: data });
+          flattenTree({ tree: data });
         const toIndex = clonedItems.findIndex(({ id }) => id === over.id);
         const fromIndex = clonedItems.findIndex(({ id }) => id === active.id);
         const sortedItems = arrayMove(clonedItems, fromIndex, toIndex);
@@ -114,11 +119,11 @@ export const ContentTableForumsForumAdmin = ({
           parentId
         };
 
-        const build = testDragAndDrop.buildTree({
-          flattenedTree: sortedItems
-        });
-
-        setData(build);
+        setData(
+          buildTree({
+            flattenedTree: sortedItems
+          })
+        );
 
         const parents = sortedItems.filter(i => i.parentId === parentId);
         const indexToMove = parents.findIndex(i => i.id === active.id);
@@ -167,8 +172,14 @@ export const ContentTableForumsForumAdmin = ({
             key={item.id}
             indentationWidth={indentationWidth}
             onCollapse={id => {
+              const isOpen = testDragAndDrop.isOpenChildren.includes(id);
+
+              if (!isOpen) {
+                updateData({ parentId: Number(id) });
+              }
+
               testDragAndDrop.setIsOpenChildren(prev => {
-                if (prev.includes(id)) {
+                if (isOpen) {
                   return prev.filter(i => i !== id);
                 }
 

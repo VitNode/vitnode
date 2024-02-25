@@ -45,8 +45,8 @@ export const ItemTableForumsForumAdmin = ({
     animateLayoutChanges: ({ isSorting, wasDragging }) =>
       isSorting || wasDragging ? false : true
   });
-  const childrenCount = children?.length ?? 0;
-  const allowOpenChildren = childrenCount > 0;
+
+  const allowOpenChildren = children.length > 0 && onCollapse;
 
   useChildrenForumForumsAdminAPI({
     parentId: id,
@@ -89,11 +89,9 @@ export const ItemTableForumsForumAdmin = ({
           <Menu />
         </Button>
 
-        {childrenCount > 0 && (
+        {allowOpenChildren && (
           <Button
-            onClick={() => {
-              if (allowOpenChildren) onCollapse?.(id);
-            }}
+            onClick={() => onCollapse(id)}
             variant="ghost"
             size="icon"
             tooltip=""
