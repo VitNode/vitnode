@@ -120,31 +120,34 @@ export const ContentTableForumsForumAdmin = ({
 
         setData(build);
 
+        const parents = sortedItems.filter(i => i.parentId === parentId);
+        const indexToMove = parents.findIndex(i => i.id === active.id);
+
         // -1 means that the item is the last one
         const findActive = flattenedItems.find(i => i.id === active.id);
         if (!findActive) return;
 
-        // If change item position on the same level at the end of the list
-        if (active.id === over.id && depth < findActive.depth) {
-          const findParentPosition = flattenedItems.find(
-            i => i.id === findActive.parentId
-          )?.position;
+        // // If change item position on the same level at the end of the list
+        // if (active.id === over.id && depth < findActive.depth) {
+        //   const findParentPosition = flattenedItems.find(
+        //     i => i.id === findActive.parentId
+        //   )?.position;
 
-          if (findParentPosition === undefined) return;
+        //   if (findParentPosition === undefined) return;
 
-          await mutationChangePositionApi({
-            id: Number(active.id),
-            parentId,
-            indexToMove: findParentPosition + 1
-          });
+        //   await mutationChangePositionApi({
+        //     id: Number(active.id),
+        //     parentId,
+        //     indexToMove: findParentPosition + 1
+        //   });
 
-          return;
-        }
+        //   return;
+        // }
 
-        const indexToMove =
-          active.id === over.id
-            ? -1
-            : flattenedItems.find(i => i.id === over.id)?.index ?? -1;
+        // const indexToMove =
+        //   active.id === over.id
+        //     ? -1
+        //     : flattenedItems.find(i => i.id === over.id)?.index ?? -1;
 
         // Do nothing if drag and drop on the same item on the same level
         if (findActive?.parentId === parentId && active.id === over.id) {
@@ -177,7 +180,7 @@ export const ContentTableForumsForumAdmin = ({
             active={activeId === item.id}
             {...item}
             depth={
-              activeId === item.id && projected?.depth
+              activeId === item.id && projected?.parentId
                 ? projected?.depth
                 : item.depth
             }
