@@ -8,17 +8,20 @@ import { Button } from "@/components/ui/button";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { cn } from "@/functions/classnames";
 import { useChildrenForumForumsAdminAPI } from "./hooks/use-children-forum-forums-admin-api";
-import type { Admin__Forum_Forums__ShowFlattenedItem } from "../types";
 import { ActionsForumAdmin } from "./actions/actions";
+import type { ShowForumForumsAdminWithChildren } from "../hooks/use-forum-forums-admin-api";
+import type { FlatTree } from "../use-functions";
 
-interface Props extends Admin__Forum_Forums__ShowFlattenedItem {
+interface Props extends FlatTree<ShowForumForumsAdminWithChildren> {
   indentationWidth: number;
   isOpenChildren: boolean;
+  active?: boolean;
   isDropHere?: boolean;
   onCollapse?: (id: UniqueIdentifier) => void;
 }
 
 export const ItemTableForumsForumAdmin = ({
+  active,
   children,
   depth,
   id,
@@ -42,8 +45,8 @@ export const ItemTableForumsForumAdmin = ({
     animateLayoutChanges: ({ isSorting, wasDragging }) =>
       isSorting || wasDragging ? false : true
   });
-  const childrenCount = children?.length ?? 0;
-  const allowOpenChildren = childrenCount > 0;
+
+  const allowOpenChildren = children.length > 0 && onCollapse;
 
   useChildrenForumForumsAdminAPI({
     parentId: id,
@@ -65,7 +68,8 @@ export const ItemTableForumsForumAdmin = ({
           "p-4 flex gap-2 bg-card items-center transition-[background-color,opacity] relative border",
           {
             "animate-pulse bg-primary/20": isDropHere,
-            "z-10": isDragging
+            "z-10": isDragging,
+            "opacity-50": active
           }
         )}
         style={{
@@ -85,11 +89,9 @@ export const ItemTableForumsForumAdmin = ({
           <Menu />
         </Button>
 
-        {childrenCount > 0 && (
+        {allowOpenChildren && (
           <Button
-            onClick={() => {
-              if (allowOpenChildren) onCollapse?.(id);
-            }}
+            onClick={() => onCollapse(id)}
             variant="ghost"
             size="icon"
             tooltip=""
@@ -103,7 +105,9 @@ export const ItemTableForumsForumAdmin = ({
         )}
 
         <div className="flex-grow flex flex-col">
-          <span>{convertText(name)}</span>
+          <span>
+            {convertText(name)} - {id}
+          </span>
         </div>
 
         <ActionsForumAdmin />

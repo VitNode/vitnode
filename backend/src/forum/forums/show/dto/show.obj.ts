@@ -54,8 +54,8 @@ export class FirstShowForumForums extends ShowForumForums {
 
 @ObjectType()
 export class ChildrenShowForumForums extends ShowForumForums {
-  @Field(() => [LastChildShowForumForums], { nullable: true })
-  children: LastChildShowForumForums[] | null;
+  @Field(() => [LastChildShowForumForums])
+  children: LastChildShowForumForums[];
 }
 
 @ObjectType()
@@ -63,8 +63,8 @@ export class ShowForumForumsWithParent extends FirstShowForumForums {
   @Field(() => ShowForumForums, { nullable: true })
   parent: ShowForumForums | null;
 
-  @Field(() => [ChildrenShowForumForums], { nullable: true })
-  children: ChildrenShowForumForums[] | null;
+  @Field(() => [ChildrenShowForumForums])
+  children: ChildrenShowForumForums[];
 }
 
 @ObjectType()
