@@ -33,36 +33,27 @@ export const useForumForumsAdminAPI = ({ initData }: Args) => {
 
     const data = mutation.data.admin__forum_forums__show.edges;
 
-    // setData(prev => {
-    //   const clonedItems: FlatTree<ShowForumForumsAdminWithChildren>[] =
-    //     flattenTree({ tree: prev });
+    setData(prev => {
+      const clonedItems: FlatTree<ShowForumForumsAdminWithChildren>[] =
+        flattenTree({ tree: prev });
+      const items: FlatTree<ShowForumForumsAdminWithChildren>[] = clonedItems
+        .map(item => ({ ...item, children: [] }))
+        .filter(item => item.parentId !== parentId);
+      const parent = items.find(item => item.id === parentId);
+      if (!parent) return prev;
 
-    //   const parentIndex1 = clonedItems.findIndex(i => i.id === parentId);
-    //   const parent1 = clonedItems[parentIndex1];
+      data.forEach(item => {
+        items.push({
+          ...item,
+          parentId,
+          depth: parent.depth + 1,
+          index: parent.children.length,
+          children: (item.children ?? []) as ShowForumForumsAdminWithChildren[]
+        });
+      });
 
-    //   clonedItems[parentIndex1] = {
-    //     ...parent1,
-    //     children: data
-    //   };
-
-    //   const build1 = buildTree({ flattenedTree: clonedItems });
-
-    //   const test = clonedItems.filter(item => !item.parentId);
-
-    //   const items = clonedItems.filter(item => item.parentId !== parentId);
-
-    //   const parentIndex = items.findIndex(i => i.id === parentId);
-    //   const parent = items[parentIndex];
-
-    //   items[parentIndex] = {
-    //     ...parent,
-    //     children: mutation.data.admin__forum_forums__show.edges
-    //   };
-
-    //   const build = buildTree({ flattenedTree: items });
-
-    //   return build;
-    // });
+      return buildTree({ flattenedTree: items });
+    });
   };
 
   return {

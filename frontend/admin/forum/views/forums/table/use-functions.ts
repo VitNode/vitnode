@@ -71,29 +71,33 @@ export function buildTree<T extends object>({
 }: {
   flattenedTree: FlatTree<T>[];
 }): WithChildren<T>[] {
-  const tree: WithChildren<T>[] = [];
+  const sorted = flattenedTree.sort((a, b) => b.depth - a.depth);
+  const maxDepth = sorted[0].depth;
+  let tree: FlatTree<T>[] = [];
 
-  // Prepare the tree with the root elements
-  flattenedTree
-    .filter(item => !item.parentId)
-    .forEach(item => {
-      tree.push({ ...item, children: [] });
-    });
+  tree = sorted.map(item => {
+    if (item.depth === maxDepth) {
+      return item;
+    }
 
-  flattenedTree
-    .filter(item => item.parentId)
-    .forEach(item => {
-      const parentIndex = tree.findIndex(({ id }) => id === item.parentId);
-      if (parentIndex === -1) return;
-      const parent = tree[parentIndex];
+    return {
+      ...item,
+      children: []
+    };
+  });
 
-      tree[parentIndex] = {
-        ...parent,
-        children: [...parent.children, item]
-      };
-    });
+  tree.forEach(item => {
+    const parentIndex = tree.findIndex(({ id }) => id === item.parentId);
+    if (parentIndex === -1) return;
+    const parent = tree[parentIndex];
 
-  return tree;
+    tree[parentIndex] = {
+      ...parent,
+      children: [...parent.children, item]
+    };
+  });
+
+  return tree.filter(item => !item.parentId);
 }
 
 interface Args {
