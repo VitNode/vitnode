@@ -1,42 +1,64 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { useMemo } from "react";
+import { useState } from "react";
+import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
-import { APIKeys } from "@/graphql/api-keys";
-import { type ShowForumForumsAdmin } from "@/graphql/hooks";
-import { queryApi } from "./query-api";
+import { mutationUpdateDataApi } from "./mutation-update-data-api";
+import { buildTree, flattenTree, type FlatTree } from "../use-functions";
+import type { ShowForumForumsAdmin } from "@/graphql/hooks";
 
-export interface Admin__Forum_Forums__ShowQueryItem
-  extends Omit<ShowForumForumsAdmin, "parent" | "permissions"> {}
+export interface ShowForumForumsAdminWithChildren
+  extends Omit<ShowForumForumsAdmin, "children" | "__typename"> {
+  children: ShowForumForumsAdminWithChildren[];
+}
 
-export const useForumForumsAdminAPI = () => {
-  const query = useInfiniteQuery({
-    queryKey: [APIKeys.FORUMS_ADMIN],
-    queryFn: async ({ pageParam }) => {
-      return await queryApi(pageParam);
-    },
-    initialPageParam: {
-      first: 10
-    },
-    getNextPageParam: ({ admin__forum_forums__show: { pageInfo } }) => {
-      if (pageInfo.hasNextPage) {
-        return {
-          first: 10,
-          cursor: pageInfo.endCursor
-        };
-      }
+interface Args {
+  initData: ShowForumForumsAdminWithChildren[];
+}
+
+export const useForumForumsAdminAPI = ({ initData }: Args) => {
+  const t = useTranslations("core");
+  const [data, setData] =
+    useState<ShowForumForumsAdminWithChildren[]>(initData);
+
+  const updateData = async ({ parentId }: { parentId: number }) => {
+    const mutation = await mutationUpdateDataApi({ parentId });
+
+    if (mutation.error || !mutation.data) {
+      toast.error(t("errors.title"), {
+        description: t("errors.internal_server_error")
+      });
+
+      return;
     }
-  });
 
-  const data: ShowForumForumsAdmin[] = useMemo(() => {
-    return (
-      query.data?.pages.flatMap(
-        ({ admin__forum_forums__show: { edges } }) => edges
-      ) ?? []
-    );
-  }, [query.data]);
+    const data = mutation.data.admin__forum_forums__show.edges;
+
+    setData(prev => {
+      const clonedItems: FlatTree<ShowForumForumsAdminWithChildren>[] =
+        flattenTree({ tree: prev });
+      const items: FlatTree<ShowForumForumsAdminWithChildren>[] = clonedItems
+        .map(item => ({ ...item, children: [] }))
+        .filter(item => item.parentId !== parentId);
+      const parent = items.find(item => item.id === parentId);
+      if (!parent) return prev;
+
+      data.forEach(item => {
+        items.push({
+          ...item,
+          parentId,
+          depth: parent.depth + 1,
+          index: parent.children.length,
+          children: (item.children ?? []) as ShowForumForumsAdminWithChildren[]
+        });
+      });
+
+      return buildTree({ flattenedTree: items });
+    });
+  };
 
   return {
-    ...query,
-    data
+    data,
+    setData,
+    updateData
   };
 };

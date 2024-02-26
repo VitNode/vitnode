@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType, OmitType } from "@nestjs/graphql";
+import { Field, Int, ObjectType } from "@nestjs/graphql";
 
 import { PageInfo } from "@/types/database/pagination.type";
 import { TextLanguage } from "@/types/database/text-language.type";
@@ -16,12 +16,7 @@ class PermissionsForumForumsCount {
 }
 
 @ObjectType()
-class ShowForumForumsCount {
-  @Field(() => Int)
-  children: number;
-}
-@ObjectType()
-class ShowForumForums {
+export class ShowForumForums {
   @Field(() => Int)
   id: number;
 
@@ -36,15 +31,7 @@ class ShowForumForums {
 
   @Field(() => Int)
   created: number;
-
-  @Field(() => ShowForumForumsCount)
-  _count: ShowForumForumsCount;
 }
-
-@ObjectType()
-class LastChildShowForumForums extends OmitType(ShowForumForums, [
-  "_count"
-] as const) {}
 
 @ObjectType()
 export class FirstShowForumForums extends ShowForumForums {
@@ -54,8 +41,8 @@ export class FirstShowForumForums extends ShowForumForums {
 
 @ObjectType()
 export class ChildrenShowForumForums extends ShowForumForums {
-  @Field(() => [LastChildShowForumForums], { nullable: true })
-  children: LastChildShowForumForums[] | null;
+  @Field(() => [ShowForumForums])
+  children: ShowForumForums[];
 }
 
 @ObjectType()
@@ -63,8 +50,8 @@ export class ShowForumForumsWithParent extends FirstShowForumForums {
   @Field(() => ShowForumForums, { nullable: true })
   parent: ShowForumForums | null;
 
-  @Field(() => [ChildrenShowForumForums], { nullable: true })
-  children: ChildrenShowForumForums[] | null;
+  @Field(() => [ChildrenShowForumForums])
+  children: ChildrenShowForumForums[];
 }
 
 @ObjectType()

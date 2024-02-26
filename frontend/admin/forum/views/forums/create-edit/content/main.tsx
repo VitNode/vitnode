@@ -12,7 +12,7 @@ import { TextLanguageInput } from "@/components/text-language-input";
 import { Editor } from "@/components/editor/editor";
 
 export const MainContentCreateEditFormForumAdmin = () => {
-  const t = useTranslations("admin.forum.forums.create_edit");
+  const t = useTranslations("admin_forum.forums.create_edit");
   const form = useFormContext();
 
   return (

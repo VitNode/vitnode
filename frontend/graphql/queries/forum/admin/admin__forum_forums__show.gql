@@ -28,12 +28,19 @@ query Admin__forum_forums__show($first: Int, $cursor: Int, $parentId: Int) {
           value
         }
         position
-        _count {
-          children
-        }
       }
-      _count {
-        children
+      permissions {
+        can_all_create
+        can_all_read
+        can_all_reply
+        can_all_view
+        groups {
+          can_create
+          can_read
+          can_reply
+          can_view
+          id
+        }
       }
     }
     pageInfo {

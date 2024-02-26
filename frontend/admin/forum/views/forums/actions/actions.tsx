@@ -8,9 +8,9 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
 
-const CreateEditFormForumAdmin = lazy(() =>
-  import("../create-edit-form/create-edit-form-forum-admin").then(module => ({
-    default: module.CreateEditFormForumAdmin
+const Content = lazy(() =>
+  import("../create-edit/create-edit").then(module => ({
+    default: module.CreateEditForumAdmin
   }))
 );
 
@@ -28,7 +28,7 @@ export const ActionsForumsForumAdmin = () => {
 
       <DialogContent className="max-w-6xl">
         <Suspense fallback={<Loader />}>
-          <CreateEditFormForumAdmin />
+          <Content />
         </Suspense>
       </DialogContent>
     </Dialog>

@@ -7,17 +7,20 @@ import type { UniqueIdentifier } from "@dnd-kit/core";
 import { Button } from "@/components/ui/button";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { cn } from "@/functions/classnames";
-import { useChildrenForumForumsAdminAPI } from "./hooks/use-children-forum-forums-admin-api";
-import type { Admin__Forum_Forums__ShowFlattenedItem } from "../types";
+import { ActionsForumAdmin } from "./actions/actions";
+import type { ShowForumForumsAdminWithChildren } from "../hooks/use-forum-forums-admin-api";
+import type { FlatTree } from "../use-functions";
 
-interface Props extends Admin__Forum_Forums__ShowFlattenedItem {
+interface Props extends FlatTree<ShowForumForumsAdminWithChildren> {
   indentationWidth: number;
   isOpenChildren: boolean;
+  active?: boolean;
   isDropHere?: boolean;
   onCollapse?: (id: UniqueIdentifier) => void;
 }
 
 export const ItemTableForumsForumAdmin = ({
+  active,
   children,
   depth,
   id,
@@ -25,7 +28,8 @@ export const ItemTableForumsForumAdmin = ({
   isDropHere = false,
   isOpenChildren,
   name,
-  onCollapse
+  onCollapse,
+  ...props
 }: Props) => {
   const { convertText } = useTextLang();
   const {
@@ -41,13 +45,8 @@ export const ItemTableForumsForumAdmin = ({
     animateLayoutChanges: ({ isSorting, wasDragging }) =>
       isSorting || wasDragging ? false : true
   });
-  const childrenCount = children?.length ?? 0;
-  const allowOpenChildren = childrenCount > 0;
 
-  useChildrenForumForumsAdminAPI({
-    parentId: id,
-    enabled: allowOpenChildren && isOpenChildren
-  });
+  const allowOpenChildren = children.length > 0 && onCollapse;
 
   return (
     <div
@@ -58,21 +57,14 @@ export const ItemTableForumsForumAdmin = ({
           "--spacing": `${indentationWidth * depth}px`
         } as CSSProperties
       }
-      onClick={() => {
-        if (allowOpenChildren) onCollapse?.(id);
-      }}
-      role={allowOpenChildren ? "button" : undefined}
-      tabIndex={allowOpenChildren ? 0 : -1}
-      onKeyDown={e => {
-        if (e.key === "Enter" && allowOpenChildren) onCollapse?.(id);
-      }}
     >
       <div
         className={cn(
-          "p-4 flex gap-4 bg-card items-center transition-[background-color,opacity] relative border",
+          "p-4 flex gap-2 bg-card items-center transition-[background-color,opacity] relative border",
           {
             "animate-pulse bg-primary/20": isDropHere,
-            "z-10": isDragging
+            "z-10": isDragging,
+            "opacity-50": active
           }
         )}
         style={{
@@ -92,17 +84,28 @@ export const ItemTableForumsForumAdmin = ({
           <Menu />
         </Button>
 
-        {childrenCount > 0 && (
-          <ChevronRight
-            className={cn("transition-transform text-muted-foreground", {
-              "rotate-90": isOpenChildren
-            })}
-          />
+        {allowOpenChildren && (
+          <Button
+            onClick={() => onCollapse(id)}
+            variant="ghost"
+            size="icon"
+            tooltip=""
+          >
+            <ChevronRight
+              className={cn("transition-transform text-muted-foreground", {
+                "rotate-90": isOpenChildren
+              })}
+            />
+          </Button>
         )}
 
         <div className="flex-grow flex flex-col">
-          <span>{convertText(name)}</span>
+          <span>
+            {convertText(name)} - {id}
+          </span>
         </div>
+
+        <ActionsForumAdmin id={id} name={name} {...props} />
       </div>
     </div>
   );

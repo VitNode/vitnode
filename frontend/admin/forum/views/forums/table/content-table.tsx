@@ -1,4 +1,3 @@
-import { Virtuoso } from "react-virtuoso";
 import {
   DndContext,
   closestCorners,
@@ -7,7 +6,7 @@ import {
   useSensor,
   useSensors,
   MeasuringStrategy,
-  type UniqueIdentifier
+  DragOverlay
 } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -16,39 +15,37 @@ import {
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { useMemo, useState } from "react";
-import { useQueryClient, type InfiniteData } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 
 import { ItemTableForumsForumAdmin } from "./item/item";
-import { useForumForumsAdminAPI } from "./hooks/use-forum-forums-admin-api";
 import {
-  buildTree,
-  flattenTree,
-  getForumProjection,
-  removeChildrenOf
-} from "./functions";
-import type {
-  Admin__Forum_Forums__ShowFlattenedItem,
-  Admin__Forum_Forums__ShowWithProjection
-} from "./types";
-import { Loader } from "@/components/loader";
-import { ErrorAdminView } from "@/admin/core/global/error-admin-view";
-import { APIKeys } from "@/graphql/api-keys";
-import type { Admin__Forum_Forums__ShowQuery } from "@/graphql/hooks";
+  useForumForumsAdminAPI,
+  type ShowForumForumsAdminWithChildren
+} from "./hooks/use-forum-forums-admin-api";
 import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
+import {
+  useDragAndDrop,
+  type FlatTree,
+  buildTree,
+  flattenTree
+} from "./use-functions";
+import { useProjection, type ProjectionReturnType } from "./use-projection";
 
 const indentationWidth = 20;
 
-export const ContentTableForumsForumAdmin = () => {
+export interface TableForumsForumAdminProps {
+  initData: ShowForumForumsAdminWithChildren[];
+}
+
+export const ContentTableForumsForumAdmin = ({
+  initData
+}: TableForumsForumAdminProps) => {
   const t = useTranslations("core");
-  const { data, fetchNextPage, hasNextPage, isError, isLoading } =
-    useForumForumsAdminAPI();
-  const queryClient = useQueryClient();
-  const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
-  const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
-  const [projected, setProjected] =
-    useState<Admin__Forum_Forums__ShowWithProjection | null>();
-  const [isOpenChildren, setIsOpenChildren] = useState<UniqueIdentifier[]>([]);
+  const { data, setData, updateData } = useForumForumsAdminAPI({ initData });
+  const [projected, setProjected] = useState<ProjectionReturnType | null>();
+  const { activeId, getProjection, overId, setActiveId, setOverId } =
+    useProjection();
+  const testDragAndDrop = useDragAndDrop({ activeId });
 
   const resetState = () => {
     setOverId(null);
@@ -63,32 +60,16 @@ export const ContentTableForumsForumAdmin = () => {
     })
   );
 
-  // DndKit doesn't support nested sortable, so we need to flatten the data in one array
-  const flattenedItems: Admin__Forum_Forums__ShowFlattenedItem[] =
-    useMemo(() => {
-      const tree = flattenTree(data);
-
-      const collapsedItems = tree.reduce<UniqueIdentifier[]>(
-        (acc, { children, id }) =>
-          !isOpenChildren.includes(id) && children?.length ? [...acc, id] : acc,
-        []
-      );
-
-      return removeChildrenOf({
-        items: tree,
-        ids: activeId ? [activeId, ...collapsedItems] : collapsedItems
-      });
-    }, [data, activeId, isOpenChildren]);
-
+  const flattenedItems = testDragAndDrop.flattenedItems({ data });
+  const activeItem = flattenedItems.find(i => i.id === activeId);
   const sortedIds = useMemo(
     () => flattenedItems.map(({ id }) => id),
     [flattenedItems]
   );
 
-  if (isLoading) return <Loader />;
-  if (isError) return <ErrorAdminView />;
-  if (!data || data.length === 0)
+  if (!data || data.length === 0) {
     return <div className="text-center">{t("no_results")}</div>;
+  }
 
   return (
     <DndContext
@@ -104,13 +85,11 @@ export const ContentTableForumsForumAdmin = () => {
       onDragMove={({ delta }) => {
         if (!activeId || !overId) return;
 
-        const currentProjection = getForumProjection(
-          flattenedItems,
-          activeId,
-          overId,
-          delta.x,
+        const currentProjection = getProjection({
+          tree: flattenedItems,
+          dragOffset: delta.x,
           indentationWidth
-        );
+        });
 
         if (projected?.parentId === currentProjection.parentId) {
           return;
@@ -127,76 +106,53 @@ export const ContentTableForumsForumAdmin = () => {
 
         if (!projected || !over) return;
         const { depth, parentId } = projected;
-        const clonedItems: Admin__Forum_Forums__ShowFlattenedItem[] =
-          JSON.parse(JSON.stringify(flattenTree(data)));
 
-        const overIndex = clonedItems.findIndex(({ id }) => id === over.id);
-        const activeIndex = clonedItems.findIndex(({ id }) => id === active.id);
-        const activeTreeItem = clonedItems[activeIndex];
-        clonedItems[activeIndex] = { ...activeTreeItem, depth, parentId };
-        const sortedItems = arrayMove(clonedItems, activeIndex, overIndex);
-        const findItemsParent = sortedItems.filter(
-          i => i.parentId === parentId
+        const clonedItems: FlatTree<ShowForumForumsAdminWithChildren>[] =
+          flattenTree({ tree: data });
+        const toIndex = clonedItems.findIndex(({ id }) => id === over.id);
+        const fromIndex = clonedItems.findIndex(({ id }) => id === active.id);
+        const sortedItems = arrayMove(clonedItems, fromIndex, toIndex);
+        const activeIndex = sortedItems.findIndex(i => i.id === active.id);
+        sortedItems[activeIndex] = {
+          ...sortedItems[activeIndex],
+          depth,
+          parentId
+        };
+
+        setData(
+          buildTree({
+            flattenedTree: sortedItems
+          })
         );
 
-        // Update position of the item
-        findItemsParent.forEach((item, index) => {
-          const findIndex = sortedItems.findIndex(i => i.id === item.id);
-
-          if (!findIndex) return;
-
-          sortedItems[findIndex] = {
-            ...item,
-            position: index
-          };
-        });
-
-        queryClient.setQueryData<InfiniteData<Admin__Forum_Forums__ShowQuery>>(
-          [APIKeys.FORUMS_ADMIN],
-          old => {
-            const lastPage = old?.pages.at(-1);
-            if (!old || !lastPage) return old;
-
-            return {
-              pages: [
-                {
-                  ...lastPage,
-                  admin__forum_forums__show: {
-                    ...lastPage.admin__forum_forums__show,
-                    edges: buildTree(sortedItems)
-                  }
-                }
-              ],
-              pageParams: [old.pageParams.at(-1)]
-            };
-          }
-        );
+        const parents = sortedItems.filter(i => i.parentId === parentId);
+        const indexToMove = parents.findIndex(i => i.id === active.id);
 
         // -1 means that the item is the last one
         const findActive = flattenedItems.find(i => i.id === active.id);
         if (!findActive) return;
 
-        // If change item position on the same level at the end of the list
-        if (active.id === over.id && depth < findActive.depth) {
-          const findParentPosition = flattenedItems.find(
-            i => i.id === findActive.parentId
-          )?.position;
+        // // If change item position on the same level at the end of the list
+        // if (active.id === over.id && depth < findActive.depth) {
+        //   const findParentPosition = flattenedItems.find(
+        //     i => i.id === findActive.parentId
+        //   )?.position;
 
-          if (findParentPosition === undefined) return;
+        //   if (findParentPosition === undefined) return;
 
-          await mutationChangePositionApi({
-            id: Number(active.id),
-            parentId,
-            indexToMove: findParentPosition + 1
-          });
+        //   await mutationChangePositionApi({
+        //     id: Number(active.id),
+        //     parentId,
+        //     indexToMove: findParentPosition + 1
+        //   });
 
-          return;
-        }
+        //   return;
+        // }
 
-        const indexToMove =
-          active.id === over.id
-            ? -1
-            : flattenedItems.find(i => i.id === over.id)?.position ?? -1;
+        // const indexToMove =
+        //   active.id === over.id
+        //     ? -1
+        //     : flattenedItems.find(i => i.id === over.id)?.index ?? -1;
 
         // Do nothing if drag and drop on the same item on the same level
         if (findActive?.parentId === parentId && active.id === over.id) {
@@ -211,37 +167,47 @@ export const ContentTableForumsForumAdmin = () => {
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
-        <Virtuoso
-          useWindowScroll
-          data={flattenedItems}
-          overscan={200}
-          className="rounded-md"
-          endReached={() => {
-            if (hasNextPage) {
-              fetchNextPage();
-            }
-          }}
-          itemContent={(_index, item) => {
-            return (
-              <ItemTableForumsForumAdmin
-                key={item.id}
-                indentationWidth={indentationWidth}
-                onCollapse={id => {
-                  setIsOpenChildren(prev => {
-                    if (prev.includes(id)) {
-                      return prev.filter(i => i !== id);
-                    }
+        {flattenedItems.map(item => (
+          <ItemTableForumsForumAdmin
+            key={item.id}
+            indentationWidth={indentationWidth}
+            onCollapse={id => {
+              const isOpen = testDragAndDrop.isOpenChildren.includes(id);
 
-                    return [...prev, id];
-                  });
-                }}
-                isOpenChildren={isOpenChildren.includes(item.id)}
-                isDropHere={projected?.parentId === item.id}
-                {...item}
-              />
-            );
-          }}
-        />
+              if (!isOpen) {
+                updateData({ parentId: Number(id) });
+              }
+
+              testDragAndDrop.setIsOpenChildren(prev => {
+                if (isOpen) {
+                  return prev.filter(i => i !== id);
+                }
+
+                return [...prev, id];
+              });
+            }}
+            isOpenChildren={testDragAndDrop.isOpenChildren.includes(item.id)}
+            isDropHere={projected?.parentId === item.id}
+            active={activeId === item.id}
+            {...item}
+            depth={
+              activeId === item.id && projected?.parentId
+                ? projected?.depth
+                : item.depth
+            }
+          />
+        ))}
+
+        <DragOverlay>
+          {activeId !== null && activeItem && (
+            <ItemTableForumsForumAdmin
+              indentationWidth={indentationWidth}
+              isOpenChildren={false}
+              isDropHere={false}
+              {...activeItem}
+            />
+          )}
+        </DragOverlay>
       </SortableContext>
     </DndContext>
   );

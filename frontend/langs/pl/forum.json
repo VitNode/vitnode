@@ -36,5 +36,20 @@
         "submit": "Dodaj post"
       }
     }
+  },
+  "admin_forum": {
+    "forums": {
+      "title": "Fora",
+      "create_edit": {
+        "tabs": {
+          "main": "Główne",
+          "permissions": "Uprawnienia"
+        },
+        "create_title": "Stwórz forum",
+        "edit_title": "Edytuj forum - {name}",
+        "name": "Nazwa",
+        "desc": "Opis"
+      }
+    }
   }
 }
