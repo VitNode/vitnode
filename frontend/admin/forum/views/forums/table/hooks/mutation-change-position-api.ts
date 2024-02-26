@@ -22,6 +22,7 @@ export const mutationChangePositionApi = async (
     });
 
     revalidateTag("Forum_Forums__Show");
+    revalidateTag("Forum_Forums__Show_Item");
 
     return { data };
   } catch (error) {

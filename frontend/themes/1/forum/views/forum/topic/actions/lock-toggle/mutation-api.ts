@@ -21,6 +21,7 @@ export const mutationApi = async (
       variables
     });
 
+    revalidateTag("Forum_Forums__Show_Item");
     revalidateTag("Forum_Topics__Show");
 
     return { data };
