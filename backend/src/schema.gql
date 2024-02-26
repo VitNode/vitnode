@@ -66,11 +66,19 @@ type GroupUser {
 }
 
 input GroupsPermissionsCreateForumForums {
-  create: Boolean!
+  can_create: Boolean!
+  can_read: Boolean!
+  can_reply: Boolean!
+  can_view: Boolean!
   id: Int!
-  read: Boolean!
-  reply: Boolean!
-  view: Boolean!
+}
+
+type GroupsPermissionsForumForums {
+  can_create: Boolean!
+  can_read: Boolean!
+  can_reply: Boolean!
+  can_view: Boolean!
+  id: Int!
 }
 
 enum LayoutAdminInstallEnum {
@@ -138,6 +146,14 @@ input PermissionsCreateForumForums {
   can_all_reply: Boolean!
   can_all_view: Boolean!
   groups: [GroupsPermissionsCreateForumForums!]!
+}
+
+type PermissionsForumForums {
+  can_all_create: Boolean!
+  can_all_read: Boolean!
+  can_all_reply: Boolean!
+  can_all_view: Boolean!
+  groups: [GroupsPermissionsForumForums!]!
 }
 
 type PermissionsForumForumsCount {
@@ -425,18 +441,8 @@ type ShowForumForums {
   position: Int!
 }
 
-type ShowForumForumsAdmin {
-  children: [ChildrenShowForumForums!]!
-  created: Int!
-  description: [TextLanguage!]!
-  id: Int!
-  name: [TextLanguage!]!
-  parent: ShowForumForums
-  position: Int!
-}
-
 type ShowForumForumsAdminObj {
-  edges: [ShowForumForumsAdmin!]!
+  edges: [ShowForumForumsWithParent!]!
   pageInfo: PageInfo!
 }
 

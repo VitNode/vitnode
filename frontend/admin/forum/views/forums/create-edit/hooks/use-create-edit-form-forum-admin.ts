@@ -26,10 +26,10 @@ export const useCreateEditFormForumAdmin = () => {
       groups: z.array(
         z.object({
           id: z.number(),
-          view: z.boolean(),
-          read: z.boolean(),
-          create: z.boolean(),
-          reply: z.boolean()
+          can_view: z.boolean(),
+          can_read: z.boolean(),
+          can_create: z.boolean(),
+          can_reply: z.boolean()
         })
       )
     })

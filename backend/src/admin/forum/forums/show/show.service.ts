@@ -50,7 +50,8 @@ export class ShowForumForumsAdminService {
             name: true,
             description: true
           }
-        }
+        },
+        permissions: true
       }
     });
 
@@ -77,6 +78,13 @@ export class ShowForumForumsAdminService {
           parent: forum.parent_id
             ? { ...forum.parent, _count: { children: 0 } }
             : null,
+          permissions: {
+            can_all_view: forum.can_all_view,
+            can_all_read: forum.can_all_read,
+            can_all_create: forum.can_all_create,
+            can_all_reply: forum.can_all_reply,
+            groups: forum.permissions
+          },
           _count: { children: children.length },
           children: await Promise.all(
             children.map(async child => {
@@ -93,7 +101,16 @@ export class ShowForumForumsAdminService {
 
               return {
                 ...child,
-                children,
+                children: children.map(child => ({
+                  ...child,
+                  permissions: {
+                    can_all_view: child.can_all_view,
+                    can_all_read: child.can_all_read,
+                    can_all_create: child.can_all_create,
+                    can_all_reply: child.can_all_reply,
+                    groups: child.permissions
+                  }
+                })),
                 _count: { children: children.length }
               };
             })

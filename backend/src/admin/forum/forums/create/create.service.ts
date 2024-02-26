@@ -84,10 +84,7 @@ export class CreateForumForumsService {
         permissions.groups.map(item => ({
           forum_id: data[0].id,
           group_id: item.id,
-          can_create: item.create,
-          can_read: item.read,
-          can_reply: item.reply,
-          can_view: item.view
+          ...item
         }))
       );
     }

@@ -14,16 +14,16 @@ class GroupsPermissionsCreateForumForums {
   id: number;
 
   @Field(() => Boolean)
-  view: boolean;
+  can_view: boolean;
 
   @Field(() => Boolean)
-  read: boolean;
+  can_read: boolean;
 
   @Field(() => Boolean)
-  create: boolean;
+  can_create: boolean;
 
   @Field(() => Boolean)
-  reply: boolean;
+  can_reply: boolean;
 }
 
 @InputType()

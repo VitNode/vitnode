@@ -15,20 +15,20 @@ export const PermissionsContentCreateEditFormForumAdmin = () => {
           <ContentPermissionsContentCreateEditFormForumAdmin
             permissions={[
               {
-                id: "view",
+                id: "can_view",
                 title: "View"
               },
               {
-                id: "read",
+                id: "can_read",
                 title: "Read"
               },
               {
-                id: "create",
+                id: "can_create",
                 title: "Create",
                 disableForGuest: true
               },
               {
-                id: "reply",
+                id: "can_reply",
                 title: "Reply",
                 disableForGuest: true
               }
