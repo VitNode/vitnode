@@ -2,21 +2,19 @@ import { useTranslations } from "next-intl";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 import { useDialog } from "@/components/ui/dialog";
 import { mutationCreateApi } from "./mutation-create-api";
-import { APIKeys } from "@/graphql/api-keys";
 import { zodInput } from "@/functions/zod";
 import type { CreateEditForumAdminProps } from "../create-edit";
+import { mutationEditApi } from "./mutation-edit-api";
 
 export const useCreateEditFormForumAdmin = ({
   data
 }: CreateEditForumAdminProps) => {
   const t = useTranslations("core");
   const { setOpen } = useDialog();
-  const queryClient = useQueryClient();
 
   const formSchema = z.object({
     name: zodInput.languageInputRequired,
@@ -54,23 +52,37 @@ export const useCreateEditFormForumAdmin = ({
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const mutation = await mutationCreateApi({
-      name: values.name,
-      description: values.description,
-      permissions: values.permissions
-    });
+    let error = false;
+    if (data) {
+      const mutation = await mutationEditApi({
+        id: data.id,
+        name: values.name,
+        description: values.description,
+        permissions: values.permissions
+      });
 
-    if (mutation.error) {
+      if (mutation.error) {
+        error = true;
+      }
+    } else {
+      const mutation = await mutationCreateApi({
+        name: values.name,
+        description: values.description,
+        permissions: values.permissions
+      });
+
+      if (mutation.error) {
+        error = true;
+      }
+    }
+
+    if (error) {
       toast.error(t("errors.title"), {
         description: t("errors.internal_server_error")
       });
 
       return;
     }
-
-    queryClient.refetchQueries({
-      queryKey: [APIKeys.FORUMS_ADMIN]
-    });
 
     setOpen(false);
   };

@@ -4,20 +4,20 @@ import { revalidateTag } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
 import {
-  Admin__Forum_Forums__Create,
-  type Admin__Forum_Forums__CreateMutation,
-  type Admin__Forum_Forums__CreateMutationVariables
+  Admin__Forum_Forums__Edit,
+  type Admin__Forum_Forums__EditMutation,
+  type Admin__Forum_Forums__EditMutationVariables
 } from "@/graphql/hooks";
 
-export const mutationCreateApi = async (
-  variables: Admin__Forum_Forums__CreateMutationVariables
+export const mutationEditApi = async (
+  variables: Admin__Forum_Forums__EditMutationVariables
 ) => {
   try {
     const { data } = await fetcher<
-      Admin__Forum_Forums__CreateMutation,
-      Admin__Forum_Forums__CreateMutationVariables
+      Admin__Forum_Forums__EditMutation,
+      Admin__Forum_Forums__EditMutationVariables
     >({
-      query: Admin__Forum_Forums__Create,
+      query: Admin__Forum_Forums__Edit,
       variables
     });
 

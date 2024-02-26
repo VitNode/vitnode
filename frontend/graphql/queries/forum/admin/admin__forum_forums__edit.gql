@@ -1,0 +1,27 @@
+mutation Admin__forum_forums__edit(
+  $description: [TextLanguageInput!]!
+  $id: Int!
+  $name: [TextLanguageInput!]!
+  $permissions: PermissionsCreateForumForums!
+  $parentId: Int
+) {
+  admin__forum_forums__edit(
+    description: $description
+    id: $id
+    name: $name
+    permissions: $permissions
+    parent_id: $parentId
+  ) {
+    id
+    name {
+      language_code
+      value
+    }
+    description {
+      language_code
+      value
+    }
+    position
+    created
+  }
+}

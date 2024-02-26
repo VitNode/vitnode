@@ -198,6 +198,14 @@ export class EditForumForumsService {
       throw new NotFoundError("Forum");
     }
 
+    const parent = await this.databaseService.db.query.forum_forums.findFirst({
+      where: (table, { eq }) => eq(table.id, parent_id)
+    });
+
+    if (!parent && parent_id) {
+      throw new NotFoundError("Parent");
+    }
+
     await this.databaseService.db
       .update(forum_forums)
       .set({
