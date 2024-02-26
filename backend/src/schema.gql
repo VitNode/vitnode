@@ -33,8 +33,7 @@ type AvatarUser {
 }
 
 type ChildrenShowForumForums {
-  _count: ShowForumForumsCount!
-  children: [LastChildShowForumForums!]!
+  children: [ShowForumForums!]!
   created: Int!
   description: [TextLanguage!]!
   id: Int!
@@ -43,7 +42,6 @@ type ChildrenShowForumForums {
 }
 
 type CreateForumForumsObj {
-  _count: ShowForumForumsCount!
   children: [ChildrenShowForumForums!]!
   created: Int!
   description: [TextLanguage!]!
@@ -73,14 +71,6 @@ input GroupsPermissionsCreateForumForums {
   read: Boolean!
   reply: Boolean!
   view: Boolean!
-}
-
-type LastChildShowForumForums {
-  created: Int!
-  description: [TextLanguage!]!
-  id: Int!
-  name: [TextLanguage!]!
-  position: Int!
 }
 
 enum LayoutAdminInstallEnum {
@@ -428,7 +418,6 @@ type ShowCoreThemesObj {
 }
 
 type ShowForumForums {
-  _count: ShowForumForumsCount!
   created: Int!
   description: [TextLanguage!]!
   id: Int!
@@ -437,7 +426,6 @@ type ShowForumForums {
 }
 
 type ShowForumForumsAdmin {
-  _count: ShowForumForumsCount!
   children: [ChildrenShowForumForums!]!
   created: Int!
   description: [TextLanguage!]!
@@ -452,17 +440,12 @@ type ShowForumForumsAdminObj {
   pageInfo: PageInfo!
 }
 
-type ShowForumForumsCount {
-  children: Int!
-}
-
 type ShowForumForumsObj {
   edges: [ShowForumForumsWithParent!]!
   pageInfo: PageInfo!
 }
 
 type ShowForumForumsWithParent {
-  _count: ShowForumForumsCount!
   children: [ChildrenShowForumForums!]!
   created: Int!
   description: [TextLanguage!]!

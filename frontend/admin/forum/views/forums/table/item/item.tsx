@@ -7,7 +7,6 @@ import type { UniqueIdentifier } from "@dnd-kit/core";
 import { Button } from "@/components/ui/button";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { cn } from "@/functions/classnames";
-import { useChildrenForumForumsAdminAPI } from "./hooks/use-children-forum-forums-admin-api";
 import { ActionsForumAdmin } from "./actions/actions";
 import type { ShowForumForumsAdminWithChildren } from "../hooks/use-forum-forums-admin-api";
 import type { FlatTree } from "../use-functions";
@@ -47,11 +46,6 @@ export const ItemTableForumsForumAdmin = ({
   });
 
   const allowOpenChildren = children.length > 0 && onCollapse;
-
-  useChildrenForumForumsAdminAPI({
-    parentId: id,
-    enabled: allowOpenChildren && isOpenChildren
-  });
 
   return (
     <div

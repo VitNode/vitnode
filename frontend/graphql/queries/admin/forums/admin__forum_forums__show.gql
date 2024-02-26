@@ -28,12 +28,6 @@ query Admin__forum_forums__show($first: Int, $cursor: Int, $parentId: Int) {
           value
         }
         position
-        _count {
-          children
-        }
-      }
-      _count {
-        children
       }
     }
     pageInfo {

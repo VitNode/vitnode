@@ -1,5 +1,4 @@
 import { Injectable } from "@nestjs/common";
-import { count, eq } from "drizzle-orm";
 
 import { CreateForumForumsArgs } from "./dto/create.args";
 import { CreateForumForumsObj } from "./dto/create.obj";
@@ -115,16 +114,10 @@ export class CreateForumForumsService {
       }
     });
 
-    const countParentChildren = await this.databaseService.db
-      .select({ count: count() })
-      .from(forum_forums)
-      .where(eq(forum_forums.parent_id, parent_id || null));
-
     return {
       ...forum,
       children: [],
-      _count: { children: 0 },
-      parent: { ...parent, _count: { children: countParentChildren[0].count } }
+      parent
     };
   }
 }
