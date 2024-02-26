@@ -1,0 +1,32 @@
+"use client";
+
+import { Folder } from "lucide-react";
+
+import { Link } from "@/i18n";
+import type { ItemForumProps } from "./item-forum";
+import { buttonVariants } from "@/components/ui/button";
+import { useTextLang } from "@/hooks/core/use-text-lang";
+
+export const ChildButtonItemForum = ({
+  id,
+  name
+}: Omit<ItemForumProps, "description">) => {
+  const { convertNameToLink, convertText } = useTextLang();
+
+  return (
+    <Link
+      href={`/forum/${convertNameToLink({ id, name })}`}
+      className={buttonVariants({
+        variant: "ghost",
+        size: "sm",
+        className: "h-auto min-h-[2.25rem] font-normal"
+      })}
+      onClick={e => {
+        e.stopPropagation();
+      }}
+    >
+      <Folder />
+      <span>{convertText(name)}</span>
+    </Link>
+  );
+};
