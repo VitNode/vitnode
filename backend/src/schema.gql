@@ -116,6 +116,7 @@ type Mutation {
   admin__core_themes__upload(file: Upload!): String!
   admin__forum_forums__change_position(id: Int!, index_to_move: Int!, parent_id: Int): String!
   admin__forum_forums__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
+  admin__forum_forums__edit(description: [TextLanguageInput!]!, id: Int!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
   admin__install__create_database: String!
   admin_sessions__sign_out: String!
   admin_settings__general__edit(side_name: String!): GeneralAdminSettingsObj!

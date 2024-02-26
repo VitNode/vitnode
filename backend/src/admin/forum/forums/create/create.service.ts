@@ -94,7 +94,13 @@ export class CreateForumForumsService {
       with: {
         name: true,
         description: true,
-        permissions: true
+        permissions: true,
+        parent: {
+          with: {
+            name: true,
+            description: true
+          }
+        }
       }
     });
 
@@ -102,19 +108,9 @@ export class CreateForumForumsService {
       throw new NotFoundError("Forum");
     }
 
-    const parent = await this.databaseService.db.query.forum_forums.findFirst({
-      where: (table, { eq }) => eq(table.id, parent_id || null),
-      with: {
-        name: true,
-        description: true,
-        permissions: true
-      }
-    });
-
     return {
       ...forum,
-      children: [],
-      parent
+      children: []
     };
   }
 }

@@ -6,6 +6,8 @@ import { ChangePositionForumForumsResolver } from "./forums/change_position/chan
 import { ChangePositionForumForumsService } from "./forums/change_position/change_position.service";
 import { ShowForumForumsAdminResolver } from "./forums/show/show.resolver";
 import { ShowForumForumsAdminService } from "./forums/show/show.service";
+import { EditForumForumsResolver } from "./forums/edit/edit.resolver";
+import { EditForumForumsService } from "./forums/edit/edit.service";
 
 @Module({
   providers: [
@@ -14,7 +16,9 @@ import { ShowForumForumsAdminService } from "./forums/show/show.service";
     ChangePositionForumForumsResolver,
     ChangePositionForumForumsService,
     ShowForumForumsAdminResolver,
-    ShowForumForumsAdminService
+    ShowForumForumsAdminService,
+    EditForumForumsResolver,
+    EditForumForumsService
   ]
 })
 export class AdminForumModule {}

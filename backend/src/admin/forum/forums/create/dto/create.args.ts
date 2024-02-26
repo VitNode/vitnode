@@ -27,7 +27,7 @@ class GroupsPermissionsCreateForumForums {
 }
 
 @InputType()
-class PermissionsCreateForumForums {
+export class PermissionsCreateForumForums {
   @Field(() => Boolean)
   can_all_view: boolean;
 
