@@ -6,7 +6,7 @@ import { TableForumsForumAdmin } from "./table/table";
 import type { Admin__Forum_Forums__ShowQuery } from "@/graphql/hooks";
 
 export const ForumsForumAdminView = (props: Admin__Forum_Forums__ShowQuery) => {
-  const t = useTranslations("admin.forum.forums");
+  const t = useTranslations("admin_forum.forums");
 
   return (
     <>

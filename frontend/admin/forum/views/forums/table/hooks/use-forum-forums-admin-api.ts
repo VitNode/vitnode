@@ -4,10 +4,10 @@ import { useTranslations } from "next-intl";
 
 import { mutationUpdateDataApi } from "./mutation-update-data-api";
 import { buildTree, flattenTree, type FlatTree } from "../use-functions";
-import type { ChildrenShowForumForums } from "@/graphql/hooks";
+import type { ShowForumForumsAdmin } from "@/graphql/hooks";
 
 export interface ShowForumForumsAdminWithChildren
-  extends Omit<ChildrenShowForumForums, "children" | "__typename"> {
+  extends Omit<ShowForumForumsAdmin, "children" | "__typename"> {
   children: ShowForumForumsAdminWithChildren[];
 }
 

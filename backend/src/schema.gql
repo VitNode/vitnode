@@ -441,8 +441,19 @@ type ShowForumForums {
   position: Int!
 }
 
+type ShowForumForumsAdmin {
+  children: [ChildrenShowForumForums!]!
+  created: Int!
+  description: [TextLanguage!]!
+  id: Int!
+  name: [TextLanguage!]!
+  parent: ShowForumForums
+  permissions: PermissionsForumForums!
+  position: Int!
+}
+
 type ShowForumForumsAdminObj {
-  edges: [ShowForumForumsWithParent!]!
+  edges: [ShowForumForumsAdmin!]!
   pageInfo: PageInfo!
 }
 

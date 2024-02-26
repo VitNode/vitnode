@@ -49,7 +49,7 @@ export class ShowForumForumsAdmin extends OmitType(ShowForumForumsWithParent, [
 
 @ObjectType()
 export class ShowForumForumsAdminObj {
-  @Field(() => [ShowForumForumsWithParent])
+  @Field(() => [ShowForumForumsAdmin])
   edges: ShowForumForumsAdmin[];
 
   @Field(() => PageInfo)

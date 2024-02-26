@@ -36,5 +36,20 @@
         "submit": "Submit Post"
       }
     }
+  },
+  "admin_forum": {
+    "forums": {
+      "title": "Forums",
+      "create_edit": {
+        "tabs": {
+          "main": "Main",
+          "permissions": "Permissions"
+        },
+        "create_title": "Create Forum",
+        "edit_title": "Edit Forum - {name}",
+        "name": "Name",
+        "desc": "Description"
+      }
+    }
   }
 }

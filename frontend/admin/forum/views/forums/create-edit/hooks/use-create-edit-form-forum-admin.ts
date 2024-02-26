@@ -9,8 +9,11 @@ import { useDialog } from "@/components/ui/dialog";
 import { mutationCreateApi } from "./mutation-create-api";
 import { APIKeys } from "@/graphql/api-keys";
 import { zodInput } from "@/functions/zod";
+import type { CreateEditForumAdminProps } from "../create-edit";
 
-export const useCreateEditFormForumAdmin = () => {
+export const useCreateEditFormForumAdmin = ({
+  data
+}: CreateEditForumAdminProps) => {
   const t = useTranslations("core");
   const { setOpen } = useDialog();
   const queryClient = useQueryClient();
@@ -38,14 +41,14 @@ export const useCreateEditFormForumAdmin = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: [],
-      description: [],
+      name: data?.name || [],
+      description: data?.description || [],
       permissions: {
-        can_all_view: false,
-        can_all_read: false,
-        can_all_create: false,
-        can_all_reply: false,
-        groups: []
+        can_all_view: data?.permissions.can_all_view || false,
+        can_all_read: data?.permissions.can_all_read || false,
+        can_all_create: data?.permissions.can_all_create || false,
+        can_all_reply: data?.permissions.can_all_reply || false,
+        groups: data?.permissions.groups || []
       }
     }
   });

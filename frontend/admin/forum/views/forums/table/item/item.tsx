@@ -28,7 +28,8 @@ export const ItemTableForumsForumAdmin = ({
   isDropHere = false,
   isOpenChildren,
   name,
-  onCollapse
+  onCollapse,
+  ...props
 }: Props) => {
   const { convertText } = useTextLang();
   const {
@@ -104,7 +105,7 @@ export const ItemTableForumsForumAdmin = ({
           </span>
         </div>
 
-        <ActionsForumAdmin />
+        <ActionsForumAdmin id={id} name={name} {...props} />
       </div>
     </div>
   );

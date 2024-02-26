@@ -351,22 +351,6 @@
           }
         }
       }
-    },
-    "forum": {
-      "forums": {
-        "title": "Fora",
-        "create": {
-          "title": "Stwórz forum"
-        },
-        "create_edit": {
-          "tabs": {
-            "main": "Główne",
-            "permissions": "Uprawnienia"
-          },
-          "name": "Nazwa",
-          "desc": "Opis"
-        }
-      }
     }
   }
 }

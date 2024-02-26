@@ -12,6 +12,8 @@ import { Tabs } from "@/components/tabs/tabs";
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
+import type { ShowForumForumsAdminWithChildren } from "../table/hooks/use-forum-forums-admin-api";
+import { useTextLang } from "@/hooks/core/use-text-lang";
 
 const MainContentCreateEditFormForumAdmin = lazy(() =>
   import("./content/main").then(module => ({
@@ -29,11 +31,16 @@ enum TabsEnum {
   PERMISSIONS = "permissions"
 }
 
-export const CreateEditForumAdmin = () => {
-  const t = useTranslations("admin.forum.forums");
+export interface CreateEditForumAdminProps {
+  data?: Omit<ShowForumForumsAdminWithChildren, "children">;
+}
+
+export const CreateEditForumAdmin = ({ data }: CreateEditForumAdminProps) => {
+  const t = useTranslations("admin_forum.forums.create_edit");
   const tCore = useTranslations("core");
-  const { form, onSubmit } = useCreateEditFormForumAdmin();
+  const { form, onSubmit } = useCreateEditFormForumAdmin({ data });
   const [activeTab, setActiveTab] = useState<TabsEnum>(TabsEnum.MAIN);
+  const { convertText } = useTextLang();
 
   const tabsContent = {
     [TabsEnum.MAIN]: <MainContentCreateEditFormForumAdmin />,
@@ -43,7 +50,11 @@ export const CreateEditForumAdmin = () => {
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{t("create.title")}</DialogTitle>
+        <DialogTitle>
+          {data
+            ? t("edit_title", { name: convertText(data.name) })
+            : t("create_title")}
+        </DialogTitle>
       </DialogHeader>
 
       <Tabs>
@@ -52,14 +63,14 @@ export const CreateEditForumAdmin = () => {
           active={activeTab === TabsEnum.MAIN}
           onClick={() => setActiveTab(TabsEnum.MAIN)}
         >
-          {t("create_edit.tabs.main")}
+          {t("tabs.main")}
         </TabsTrigger>
         <TabsTrigger
           id="permissions"
           active={activeTab === TabsEnum.PERMISSIONS}
           onClick={() => setActiveTab(TabsEnum.PERMISSIONS)}
         >
-          {t("create_edit.tabs.permissions")}
+          {t("tabs.permissions")}
         </TabsTrigger>
       </Tabs>
 

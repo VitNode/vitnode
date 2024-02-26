@@ -16,7 +16,7 @@ class PermissionsForumForumsCount {
 }
 
 @ObjectType()
-class ShowForumForums {
+export class ShowForumForums {
   @Field(() => Int)
   id: number;
 
