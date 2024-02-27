@@ -19,7 +19,14 @@ export class ShowForumForumsService {
   constructor(private databaseService: DatabaseService) {}
 
   async show(
-    { cursor, first, ids, last, parent_id }: ShowForumForumsArgs,
+    {
+      cursor,
+      first,
+      ids,
+      last,
+      parent_id,
+      show_all_forums
+    }: ShowForumForumsArgs,
     user: User | null
   ): Promise<ShowForumForumsObj> {
     const pagination = await inputPaginationCursor({
@@ -55,14 +62,17 @@ export class ShowForumForumsService {
       )
     );
 
-    const whereParent = !parent_id
-      ? isNull(forum_forums.parent_id)
-      : eq(forum_forums.parent_id, parent_id);
+    const whereParent = parent_id
+      ? eq(forum_forums.parent_id, parent_id)
+      : isNull(forum_forums.parent_id);
+
+    const idsCondition =
+      ids?.length > 0 ? inArray(forum_forums.id, ids) : undefined;
 
     const where = and(
       pagination.where,
       wherePermissions,
-      ids?.length > 0 ? inArray(forum_forums.id, ids) : whereParent
+      show_all_forums ? idsCondition : idsCondition || whereParent
     );
 
     const forums = await this.databaseService.db.query.forum_forums.findMany({
@@ -84,16 +94,20 @@ export class ShowForumForumsService {
 
     const edges = await Promise.all(
       forums.map(async forum => {
-        const children =
-          await this.databaseService.db.query.forum_forums.findMany({
-            where: and(eq(forum_forums.parent_id, forum.id), wherePermissions),
-            orderBy: (table, { asc }) => [asc(table.position)],
-            with: {
-              name: true,
-              description: true,
-              permissions: true
-            }
-          });
+        const children = show_all_forums
+          ? []
+          : await this.databaseService.db.query.forum_forums.findMany({
+              where: and(
+                eq(forum_forums.parent_id, forum.id),
+                wherePermissions
+              ),
+              orderBy: (table, { asc }) => [asc(table.position)],
+              with: {
+                name: true,
+                description: true,
+                permissions: true
+              }
+            });
 
         return {
           ...forum,

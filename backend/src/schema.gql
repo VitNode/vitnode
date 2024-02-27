@@ -170,7 +170,15 @@ type Query {
   admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
   admin__core_staff_moderators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
   admin__core_themes__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminThemesSortByArgs!]): ShowAdminThemesObj!
-  admin__forum_forums__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsAdminObj!
+  admin__forum_forums__show(
+    cursor: Int
+    first: Int
+    last: Int
+    parent_id: Int
+
+    """Show all forums without children"""
+    show_all_forums: Boolean
+  ): ShowForumForumsAdminObj!
   admin__install__layout: LayoutAdminInstallObj!
   admin__sessions__authorization: AuthorizationAdminSessionsObj!
   admin__settings__general__show: ShowGeneralAdminSettingsObj!
@@ -179,7 +187,16 @@ type Query {
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_themes__show(cursor: Int, first: Int, last: Int): ShowCoreThemesObj!
-  forum_forums__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsObj!
+  forum_forums__show(
+    cursor: Int
+    first: Int
+    ids: [Int!]
+    last: Int
+    parent_id: Int
+
+    """Show all forums without children"""
+    show_all_forums: Boolean
+  ): ShowForumForumsObj!
   forum_posts__show(cursor: Int, first: Int, firstEdges: Int, last: Int, sortBy: ShowPostsForumsSortingEnum, topic_id: Int!): ShowPostsForumsObj!
   forum_topics__show(cursor: Int, first: Int, forum_id: Int, id: Int, last: Int): ShowTopicsForumsObj!
 }

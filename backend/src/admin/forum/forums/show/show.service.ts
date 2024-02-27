@@ -2,8 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { and, count, eq, isNull } from "drizzle-orm";
 
 import { ShowForumForumsAdminObj } from "./dto/show.obj";
+import { ShowForumForumsAdminArgs } from "./dto/show.args";
 
-import { ShowForumForumsArgs } from "../../../../forum/forums/show/dto/show.args";
 import { DatabaseService } from "@/database/database.service";
 import {
   inputPaginationCursor,
@@ -20,8 +20,9 @@ export class ShowForumForumsAdminService {
     cursor,
     first,
     last,
-    parent_id
-  }: ShowForumForumsArgs): Promise<ShowForumForumsAdminObj> {
+    parent_id,
+    show_all_forums
+  }: ShowForumForumsAdminArgs): Promise<ShowForumForumsAdminObj> {
     const pagination = await inputPaginationCursor({
       cursor,
       database: forum_forums,
@@ -41,7 +42,7 @@ export class ShowForumForumsAdminService {
 
     const forums = await this.databaseService.db.query.forum_forums.findMany({
       ...pagination,
-      where: and(pagination.where, where),
+      where: show_all_forums ? pagination.where : and(pagination.where, where),
       with: {
         name: true,
         description: true,
@@ -62,16 +63,17 @@ export class ShowForumForumsAdminService {
 
     const edges = await Promise.all(
       forums.map(async forum => {
-        const children =
-          await this.databaseService.db.query.forum_forums.findMany({
-            where: eq(forum_forums.parent_id, forum.id),
-            orderBy: (table, { asc }) => [asc(table.position)],
-            with: {
-              name: true,
-              description: true,
-              permissions: true
-            }
-          });
+        const children = show_all_forums
+          ? []
+          : await this.databaseService.db.query.forum_forums.findMany({
+              where: eq(forum_forums.parent_id, forum.id),
+              orderBy: (table, { asc }) => [asc(table.position)],
+              with: {
+                name: true,
+                description: true,
+                permissions: true
+              }
+            });
 
         return {
           ...forum,
