@@ -175,6 +175,7 @@ type Query {
     first: Int
     last: Int
     parent_id: Int
+    search: String
 
     """Show all forums without children"""
     show_all_forums: Boolean
@@ -193,6 +194,7 @@ type Query {
     ids: [Int!]
     last: Int
     parent_id: Int
+    search: String
 
     """Show all forums without children"""
     show_all_forums: Boolean
