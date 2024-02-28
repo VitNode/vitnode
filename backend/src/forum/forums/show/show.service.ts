@@ -103,6 +103,11 @@ export class ShowForumForumsService {
             description: true,
             permissions: true
           }
+        },
+        topics: {
+          with: {
+            posts: true
+          }
         }
       }
     });
@@ -120,16 +125,28 @@ export class ShowForumForumsService {
               with: {
                 name: true,
                 description: true,
-                permissions: true
+                permissions: true,
+                topics: {
+                  with: {
+                    posts: true
+                  }
+                }
               }
             });
 
         return {
           ...forum,
           parent: forum.parent_id
-            ? { ...forum.parent, _count: { children: 0 } }
+            ? { ...forum.parent, _count: { children: 0, topics: 0, posts: 0 } }
             : null,
-          _count: { children: children.length },
+          _count: {
+            children: children.length,
+            topics: forum.topics.length,
+            posts: forum.topics.reduce(
+              (acc, item) => acc + item.posts.length,
+              0
+            )
+          },
           children: await Promise.all(
             children.map(async child => {
               const children =
@@ -142,14 +159,26 @@ export class ShowForumForumsService {
                   with: {
                     name: true,
                     description: true,
-                    permissions: true
+                    permissions: true,
+                    topics: {
+                      with: {
+                        posts: true
+                      }
+                    }
                   }
                 });
 
               return {
                 ...child,
                 children,
-                _count: { children: children.length }
+                _count: {
+                  children: children.length,
+                  topics: child.topics.length,
+                  posts: child.topics.reduce(
+                    (acc, item) => acc + item.posts.length,
+                    0
+                  )
+                }
               };
             })
           )

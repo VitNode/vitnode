@@ -65,13 +65,23 @@ export class ShowForumForumsAdminService {
       with: {
         name: true,
         description: true,
+        permissions: true,
         parent: {
           with: {
             name: true,
-            description: true
+            description: true,
+            topics: {
+              with: {
+                posts: true
+              }
+            }
           }
         },
-        permissions: true
+        topics: {
+          with: {
+            posts: true
+          }
+        }
       }
     });
 
@@ -91,14 +101,29 @@ export class ShowForumForumsAdminService {
                 with: {
                   name: true,
                   description: true,
-                  permissions: true
+                  permissions: true,
+                  topics: {
+                    with: {
+                      posts: true
+                    }
+                  }
                 }
               });
 
         return {
           ...forum,
           parent: forum.parent_id
-            ? { ...forum.parent, _count: { children: 0 } }
+            ? {
+                ...forum.parent,
+                _count: {
+                  children: 0,
+                  topics: forum.parent.topics.length,
+                  posts: forum.parent.topics.reduce(
+                    (acc, item) => acc + item.posts.length,
+                    0
+                  )
+                }
+              }
             : null,
           permissions: {
             can_all_view: forum.can_all_view,
@@ -107,7 +132,14 @@ export class ShowForumForumsAdminService {
             can_all_reply: forum.can_all_reply,
             groups: forum.permissions
           },
-          _count: { children: children.length },
+          _count: {
+            children: children.length,
+            topics: forum.topics.length,
+            posts: forum.topics.reduce(
+              (acc, item) => acc + item.posts.length,
+              0
+            )
+          },
           children: await Promise.all(
             children.map(async child => {
               const children =
@@ -133,7 +165,14 @@ export class ShowForumForumsAdminService {
                     groups: child.permissions
                   }
                 })),
-                _count: { children: children.length }
+                _count: {
+                  children: children.length,
+                  topics: child.topics.length,
+                  posts: child.topics.reduce(
+                    (acc, item) => acc + item.posts.length,
+                    0
+                  )
+                }
               };
             })
           )

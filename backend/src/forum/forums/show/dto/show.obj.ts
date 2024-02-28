@@ -1,10 +1,22 @@
-import { Field, Int, ObjectType } from "@nestjs/graphql";
+import { Field, Int, ObjectType, OmitType } from "@nestjs/graphql";
 
 import { PageInfo } from "@/types/database/pagination.type";
 import { TextLanguage } from "@/types/database/text-language.type";
 
 @ObjectType()
-class PermissionsForumForumsCount {
+class ShowForumForumsCounts {
+  @Field(() => Int)
+  children: number;
+
+  @Field(() => Int)
+  topics: number;
+
+  @Field(() => Int)
+  posts: number;
+}
+
+@ObjectType()
+class PermissionsForumForums {
   @Field(() => Boolean)
   can_read: boolean;
 
@@ -31,18 +43,26 @@ export class ShowForumForums {
 
   @Field(() => Int)
   created: number;
+
+  @Field(() => ShowForumForumsCounts)
+  _count: ShowForumForumsCounts;
 }
 
 @ObjectType()
 export class FirstShowForumForums extends ShowForumForums {
-  @Field(() => PermissionsForumForumsCount)
-  permissions: PermissionsForumForumsCount;
+  @Field(() => PermissionsForumForums)
+  permissions: PermissionsForumForums;
 }
 
 @ObjectType()
+class LastChildShowForumForums extends OmitType(ShowForumForums, [
+  "_count"
+] as const) {}
+
+@ObjectType()
 export class ChildrenShowForumForums extends ShowForumForums {
-  @Field(() => [ShowForumForums])
-  children: ShowForumForums[];
+  @Field(() => [LastChildShowForumForums])
+  children: LastChildShowForumForums[];
 }
 
 @ObjectType()
