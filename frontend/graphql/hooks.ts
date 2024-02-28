@@ -336,7 +336,6 @@ export type MutationAdmin__Forum_Forums__CreateArgs = {
 
 export type MutationAdmin__Forum_Forums__DeleteArgs = {
   id: Scalars['Int']['input'];
-  move_forums_to?: InputMaybe<Scalars['Int']['input']>;
   move_topics_to?: InputMaybe<Scalars['Int']['input']>;
 };
 
@@ -1310,7 +1309,6 @@ export type Admin__Forum_Forums__CreateMutation = { __typename?: 'Mutation', adm
 
 export type Admin__Forum_Forums__DeleteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
-  moveForumsTo?: InputMaybe<Scalars['Int']['input']>;
   moveTopicsTo?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
@@ -1868,12 +1866,8 @@ export const Admin__Forum_Forums__Create = gql`
 }
     `;
 export const Admin__Forum_Forums__Delete = gql`
-    mutation Admin__forum_forums__delete($id: Int!, $moveForumsTo: Int, $moveTopicsTo: Int) {
-  admin__forum_forums__delete(
-    id: $id
-    move_forums_to: $moveForumsTo
-    move_topics_to: $moveTopicsTo
-  )
+    mutation Admin__forum_forums__delete($id: Int!, $moveTopicsTo: Int) {
+  admin__forum_forums__delete(id: $id, move_topics_to: $moveTopicsTo)
 }
     `;
 export const Admin__Forum_Forums__Edit = gql`

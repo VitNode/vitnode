@@ -25,7 +25,12 @@ export const DeleteActionForumAdmin = (
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructiveGhost" size="icon" tooltip={t("delete")}>
+        <Button
+          variant="destructiveGhost"
+          size="icon"
+          tooltip={t("delete")}
+          disabled={props._count.children > 0}
+        >
           <Trash2 />
         </Button>
       </AlertDialogTrigger>

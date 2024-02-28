@@ -13,11 +13,7 @@ import { forum_topics } from "../../database/schema/topics";
 export class DeleteForumForumsService {
   constructor(private databaseService: DatabaseService) {}
 
-  async delete({
-    id,
-    move_forums_to,
-    move_topics_to
-  }: DeleteForumForumsArgs): Promise<string> {
+  async delete({ id, move_topics_to }: DeleteForumForumsArgs): Promise<string> {
     const forum = await this.databaseService.db.query.forum_forums.findFirst({
       where: (table, { eq }) => eq(table.id, id)
     });
@@ -31,28 +27,11 @@ export class DeleteForumForumsService {
     });
 
     if (children.length > 0) {
-      if (!move_forums_to) {
-        throw new CustomError({
-          code: "FORUM_HAS_CHILDREN",
-          message: "Forum has children and no move_forums_to provided"
-        });
-      }
-
-      const moveForumsToForum =
-        await this.databaseService.db.query.forum_forums.findFirst({
-          where: (table, { eq }) => eq(table.id, move_forums_to)
-        });
-
-      if (!moveForumsToForum) {
-        throw new NotFoundError("Forum");
-      }
-
-      await this.databaseService.db
-        .update(forum_forums)
-        .set({
-          parent_id: move_forums_to
-        })
-        .where(eq(forum_forums.parent_id, id));
+      throw new CustomError({
+        code: "FORUM_HAS_CHILDREN",
+        message:
+          "Forum has children and cannot be deleted. Please delete children first."
+      });
     }
 
     const topics = await this.databaseService.db.query.forum_topics.findMany({

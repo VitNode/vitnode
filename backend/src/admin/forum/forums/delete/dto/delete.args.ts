@@ -6,8 +6,5 @@ export class DeleteForumForumsArgs {
   id: number;
 
   @Field(() => Int, { nullable: true })
-  move_forums_to: number | null;
-
-  @Field(() => Int, { nullable: true })
   move_topics_to: number | null;
 }

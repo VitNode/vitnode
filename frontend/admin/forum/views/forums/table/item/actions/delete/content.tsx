@@ -47,22 +47,6 @@ export const ContentDeleteActionForumAdmin = ({
           </AlertDialogDescription>
         </AlertDialogHeader>
 
-        {_count.children > 0 && (
-          <FormField
-            control={form.control}
-            name="move_forums_to"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("move_forums_to")}</FormLabel>
-                <FormControl>
-                  <ForumsSelect {...field} exclude={[id]} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        )}
-
         {_count.topics > 0 && (
           <FormField
             control={form.control}
@@ -90,7 +74,6 @@ export const ContentDeleteActionForumAdmin = ({
             type="submit"
             disabled={
               !form.formState.isValid ||
-              (_count.children > 0 && !form.watch("move_forums_to")) ||
               (_count.topics > 0 && !form.watch("move_topics_to"))
             }
             loading={form.formState.isSubmitting}

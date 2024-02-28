@@ -19,12 +19,6 @@ export const useDeleteForumAdmin = ({
   const { convertText } = useTextLang();
   const { setOpen } = useAlertDialog();
   const formSchema = z.object({
-    move_forums_to: z
-      .object({
-        id: z.number().min(1),
-        name: zodInput.languageInput
-      })
-      .optional(),
     move_topics_to: z
       .object({
         id: z.number().min(1),
@@ -40,7 +34,6 @@ export const useDeleteForumAdmin = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const mutation = await mutationApi({
       id,
-      moveForumsTo: values.move_forums_to?.id,
       moveTopicsTo: values.move_topics_to?.id
     });
     if (mutation.error) {
