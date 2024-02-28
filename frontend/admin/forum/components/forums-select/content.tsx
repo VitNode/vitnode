@@ -17,11 +17,15 @@ import type { ForumSelectItem } from "./forums-select";
 export interface ContentForumsSelectProps {
   onSelect: (value: ForumSelectItem) => void;
   values: ForumSelectItem[];
+  exclude?: number[];
 }
 
-export const ContentForumsSelect = (props: ContentForumsSelectProps) => {
+export const ContentForumsSelect = ({
+  exclude,
+  ...props
+}: ContentForumsSelectProps) => {
   const t = useTranslations("forum.select");
-  const { data, isLoading, setSearch } = useSearchForums();
+  const { data, isLoading, setSearch } = useSearchForums({ exclude });
 
   const handleSearchInput = useDebouncedCallback((value: string) => {
     setSearch(value);

@@ -28,6 +28,7 @@ export interface ForumSelectItem {
 interface Props {
   onChange: (value?: ForumSelectItem | ForumSelectItem[]) => void;
   className?: string;
+  exclude?: number[];
 }
 
 interface MultiProps extends Props {
@@ -47,7 +48,14 @@ export const ForumsSelect = forwardRef<
   SingleProps | MultiProps
 >(
   (
-    { className, multiple, onChange, value: currentValue = [], ...rest },
+    {
+      className,
+      exclude,
+      multiple,
+      onChange,
+      value: currentValue = [],
+      ...rest
+    },
     ref
   ) => {
     const t = useTranslations("forum.select");
@@ -125,6 +133,7 @@ export const ForumsSelect = forwardRef<
           <Suspense fallback={<Loader className="p-2" />}>
             <Content
               values={values}
+              exclude={exclude}
               onSelect={item => {
                 if (multiple) {
                   if (values.find(value => value.id === item.id)) {

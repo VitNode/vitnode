@@ -9,7 +9,7 @@ export const ActionsForumAdmin = (
   return (
     <div className="flex gap-2 flex-shrink-0">
       <EditActionForumAdmin {...props} />
-      <DeleteActionForumAdmin />
+      <DeleteActionForumAdmin {...props} />
     </div>
   );
 };

@@ -53,6 +53,12 @@
         "edit_title": "Edit Forum - {name}",
         "name": "Name",
         "desc": "Description"
+      },
+      "delete": {
+        "desc": "Are you sure you want to delete <name></name> forum? This action cannot be undone.",
+        "move_forums_to": "Move forums to",
+        "move_topics_to": "Move topics to",
+        "submit": "Delete Forum"
       }
     }
   }

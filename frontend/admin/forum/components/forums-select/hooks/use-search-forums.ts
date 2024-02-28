@@ -3,7 +3,11 @@ import { useState } from "react";
 
 import { queryApi } from "./admin-query-api";
 
-export const useSearchForums = () => {
+interface Args {
+  exclude?: number[];
+}
+
+export const useSearchForums = ({ exclude }: Args) => {
   const [search, setSearch] = useState("");
 
   const query = useQuery({
@@ -16,7 +20,10 @@ export const useSearchForums = () => {
       })
   });
 
-  const data = query.data?.admin__forum_forums__show.edges ?? [];
+  const data =
+    query.data?.admin__forum_forums__show.edges.filter(
+      item => !exclude?.includes(item.id)
+    ) ?? [];
 
   return { ...query, setSearch, data };
 };

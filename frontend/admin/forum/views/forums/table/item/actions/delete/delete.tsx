@@ -9,6 +9,7 @@ import {
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import type { ShowForumForumsAdmin } from "@/graphql/hooks";
 
 const Content = lazy(() =>
   import("./content").then(module => ({
@@ -16,7 +17,9 @@ const Content = lazy(() =>
   }))
 );
 
-export const DeleteActionForumAdmin = () => {
+export const DeleteActionForumAdmin = (
+  props: Pick<ShowForumForumsAdmin, "id" | "name">
+) => {
   const t = useTranslations("core");
 
   return (
@@ -29,7 +32,7 @@ export const DeleteActionForumAdmin = () => {
 
       <AlertDialogContent>
         <Suspense fallback={<Loader />}>
-          <Content />
+          <Content {...props} />
         </Suspense>
       </AlertDialogContent>
     </AlertDialog>
