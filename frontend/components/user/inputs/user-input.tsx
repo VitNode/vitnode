@@ -53,7 +53,7 @@ export const UserInput = forwardRef<
   const [open, setOpen] = useState(false);
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={open} onOpenChange={setOpen} modal>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
@@ -78,7 +78,7 @@ export const UserInput = forwardRef<
 
                 return (
                   <Badge
-                    className="[&>svg]:size-4"
+                    className="[&>svg]:size-4 flex-shrink-0"
                     key={item.id}
                     tabIndex={0}
                     onClick={e => {

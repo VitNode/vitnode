@@ -55,13 +55,13 @@ export class ShowForumForumsAdminService {
       : eq(forum_forums.parent_id, parent_id);
 
     const where = and(
-      whereParent,
+      !show_all_forums ? whereParent : undefined,
       searchIds.length > 0 ? inArray(forum_forums.id, searchIds) : undefined
     );
 
     const forums = await this.databaseService.db.query.forum_forums.findMany({
       ...pagination,
-      where: show_all_forums ? pagination.where : and(pagination.where, where),
+      where: and(pagination.where, where),
       with: {
         name: true,
         description: true,

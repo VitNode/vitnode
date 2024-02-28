@@ -20,117 +20,132 @@ const Content = lazy(() =>
   }))
 );
 
-export interface UserInputItem {
+export interface ForumSelectItem {
   id: number;
   name: TextLanguage[];
 }
 
 interface Props {
-  onChange: (value?: UserInputItem | UserInputItem[]) => void;
+  onChange: (value?: ForumSelectItem | ForumSelectItem[]) => void;
   className?: string;
 }
 
 interface MultiProps extends Props {
   className?: string;
   multiple?: true;
-  value?: UserInputItem[];
+  value?: ForumSelectItem[];
 }
 
 interface SingleProps extends Props {
   className?: string;
   multiple?: never;
-  value?: UserInputItem;
+  value?: ForumSelectItem;
 }
 
 export const ForumsSelect = forwardRef<
   HTMLButtonElement,
   SingleProps | MultiProps
->(({ className, multiple, onChange, value: currentValue, ...rest }, ref) => {
-  const t = useTranslations("core.user_input");
-  const values = Array.isArray(currentValue)
-    ? currentValue
-    : currentValue
-      ? [currentValue]
-      : [];
-  const [open, setOpen] = useState(false);
-  const { convertText } = useTextLang();
+>(
+  (
+    { className, multiple, onChange, value: currentValue = [], ...rest },
+    ref
+  ) => {
+    const t = useTranslations("forum.select");
+    const tCore = useTranslations("core");
+    const values = Array.isArray(currentValue) ? currentValue : [currentValue];
 
-  return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          className={cn("w-full justify-start", className, {
-            "text-muted-foreground": values.length === 0
-          })}
-          ref={ref}
-          {...rest}
-        >
-          {values.length === 0
-            ? t("placeholder")
-            : values.map(item => {
-                const onRemove = () => {
-                  if (multiple) {
+    const [open, setOpen] = useState(false);
+    const { convertText } = useTextLang();
+
+    const placeholder = () => {
+      if (values.length > 1) {
+        return (
+          <Badge
+            className="[&>svg]:size-4 flex-shrink-0"
+            tabIndex={0}
+            onClick={e => {
+              e.stopPropagation();
+              e.preventDefault();
+              onChange([]);
+            }}
+            onKeyDown={e => {
+              if (e.key === "Enter") {
+                e.stopPropagation();
+                e.preventDefault();
+                onChange([]);
+              }
+            }}
+          >
+            {tCore("checked_number", { count: values.length })} <X />
+          </Badge>
+        );
+      }
+
+      return values.map(item => {
+        return (
+          <Badge
+            className="[&>svg]:size-4 flex-shrink-0"
+            key={item.id}
+            tabIndex={0}
+            onClick={e => {
+              e.stopPropagation();
+              e.preventDefault();
+              onChange();
+            }}
+            onKeyDown={e => {
+              if (e.key === "Enter") {
+                e.stopPropagation();
+                e.preventDefault();
+                onChange();
+              }
+            }}
+          >
+            {convertText(item.name)} <X />
+          </Badge>
+        );
+      });
+    };
+
+    return (
+      <Popover open={open} onOpenChange={setOpen} modal>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            className={cn("w-full justify-start", className, {
+              "text-muted-foreground": values.length === 0
+            })}
+            ref={ref}
+            {...rest}
+          >
+            {values.length === 0 ? t("placeholder") : placeholder()}
+          </Button>
+        </PopoverTrigger>
+
+        <PopoverContent className="p-0 w-64" align="start">
+          <Suspense fallback={<Loader className="p-2" />}>
+            <Content
+              values={values}
+              onSelect={item => {
+                if (multiple) {
+                  if (values.find(value => value.id === item.id)) {
                     onChange(values.filter(value => value.id !== item.id));
 
                     return;
                   }
-
-                  onChange();
-                };
-
-                return (
-                  <Badge
-                    className="[&>svg]:size-4"
-                    key={item.id}
-                    tabIndex={0}
-                    onClick={e => {
-                      e.stopPropagation();
-                      e.preventDefault();
-                      onRemove();
-                    }}
-                    onKeyDown={e => {
-                      if (e.key === "Enter") {
-                        e.stopPropagation();
-                        e.preventDefault();
-                        onRemove();
-                      }
-                    }}
-                  >
-                    {convertText(item.name)} <X />
-                  </Badge>
-                );
-              })}
-        </Button>
-      </PopoverTrigger>
-
-      <PopoverContent className="p-0 w-64" align="start">
-        <div className="p-4">
-          <Suspense fallback={<Loader />}>
-            {/* <UserInputContent
-            values={values}
-            onSelect={item => {
-              if (multiple) {
-                if (values.find(value => value.id === item.id)) {
-                  onChange(values.filter(value => value.id !== item.id));
+                  onChange([...values, item]);
 
                   return;
                 }
-                onChange([...values, item]);
 
-                return;
-              }
-
-              onChange(item.id !== values[0]?.id ? item : undefined);
-              setOpen(false);
-            }}
-          /> */}
-            <Content />
+                onChange(item.id !== values[0]?.id ? item : undefined);
+                setOpen(false);
+              }}
+            />
           </Suspense>
-        </div>
-      </PopoverContent>
-    </Popover>
-  );
-});
+        </PopoverContent>
+      </Popover>
+    );
+  }
+);
 
 ForumsSelect.displayName = "ForumsSelect";

@@ -27,6 +27,7 @@
     "confirm": "Confirm",
     "close": "Close",
     "default": "Default",
+    "checked_number": "Checked: {count}",
     "colors": {
       "none": "No Color",
       "remove": "Remove color"

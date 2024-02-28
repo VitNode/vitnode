@@ -27,6 +27,7 @@
     "confirm": "Zatwierdź",
     "close": "Zamknij",
     "default": "Domyślny",
+    "checked_number": "Zaznaczono: {count}",
     "colors": {
       "none": "Brak koloru",
       "remove": "Usuń kolor"

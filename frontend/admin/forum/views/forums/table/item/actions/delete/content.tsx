@@ -32,7 +32,7 @@ export const ContentDeleteActionForumAdmin = () => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <ForumsSelect {...field} />
+                <ForumsSelect {...field} multiple />
               </FormControl>
               <FormMessage />
             </FormItem>

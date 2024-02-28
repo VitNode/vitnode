@@ -1,0 +1,26 @@
+query Admin__forum_forums__show_short(
+  $search: String
+  $showAllForums: Boolean
+  $first: Int
+) {
+  admin__forum_forums__show(
+    search: $search
+    show_all_forums: $showAllForums
+    first: $first
+  ) {
+    edges {
+      name {
+        language_code
+        value
+      }
+      parent {
+        id
+        name {
+          language_code
+          value
+        }
+      }
+      id
+    }
+  }
+}

@@ -35,6 +35,10 @@
         "placeholder": "Napisz odpowiedź tutaj...",
         "submit": "Dodaj post"
       }
+    },
+    "select": {
+      "placeholder": "Wybierz forum...",
+      "search": "Szukaj..."
     }
   },
   "admin_forum": {

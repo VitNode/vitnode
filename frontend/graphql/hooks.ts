@@ -495,9 +495,10 @@ export type QueryAdmin__Core_Themes__ShowArgs = {
 export type QueryAdmin__Forum_Forums__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
-  ids?: InputMaybe<Array<Scalars['Int']['input']>>;
   last?: InputMaybe<Scalars['Int']['input']>;
   parent_id?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  show_all_forums?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
@@ -538,6 +539,8 @@ export type QueryForum_Forums__ShowArgs = {
   ids?: InputMaybe<Array<Scalars['Int']['input']>>;
   last?: InputMaybe<Scalars['Int']['input']>;
   parent_id?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  show_all_forums?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
@@ -1003,25 +1006,6 @@ export type Admin__Install__Create_DatabaseMutationVariables = Exact<{ [key: str
 
 export type Admin__Install__Create_DatabaseMutation = { __typename?: 'Mutation', admin__install__create_database: string };
 
-export type Admin__Forum_Forums__Change_PositionMutationVariables = Exact<{
-  id: Scalars['Int']['input'];
-  indexToMove: Scalars['Int']['input'];
-  parentId?: InputMaybe<Scalars['Int']['input']>;
-}>;
-
-
-export type Admin__Forum_Forums__Change_PositionMutation = { __typename?: 'Mutation', admin__forum_forums__change_position: string };
-
-export type Admin__Forum_Forums__CreateMutationVariables = Exact<{
-  name: Array<TextLanguageInput> | TextLanguageInput;
-  description: Array<TextLanguageInput> | TextLanguageInput;
-  parentId?: InputMaybe<Scalars['Int']['input']>;
-  permissions: PermissionsCreateForumForums;
-}>;
-
-
-export type Admin__Forum_Forums__CreateMutation = { __typename?: 'Mutation', admin__forum_forums__create: { __typename?: 'CreateForumForumsObj', created: number, id: number, position: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
-
 export type Admin__Core_Languages__CreateMutationVariables = Exact<{
   code: Scalars['String']['input'];
   name: Scalars['String']['input'];
@@ -1276,6 +1260,45 @@ export type Core_Themes__ChangeMutationVariables = Exact<{
 
 export type Core_Themes__ChangeMutation = { __typename?: 'Mutation', core_themes__change: string };
 
+export type Admin__Forum_Forums__Change_PositionMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  indexToMove: Scalars['Int']['input'];
+  parentId?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type Admin__Forum_Forums__Change_PositionMutation = { __typename?: 'Mutation', admin__forum_forums__change_position: string };
+
+export type Admin__Forum_Forums__CreateMutationVariables = Exact<{
+  name: Array<TextLanguageInput> | TextLanguageInput;
+  description: Array<TextLanguageInput> | TextLanguageInput;
+  parentId?: InputMaybe<Scalars['Int']['input']>;
+  permissions: PermissionsCreateForumForums;
+}>;
+
+
+export type Admin__Forum_Forums__CreateMutation = { __typename?: 'Mutation', admin__forum_forums__create: { __typename?: 'CreateForumForumsObj', created: number, id: number, position: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+
+export type Admin__Forum_Forums__EditMutationVariables = Exact<{
+  description: Array<TextLanguageInput> | TextLanguageInput;
+  id: Scalars['Int']['input'];
+  name: Array<TextLanguageInput> | TextLanguageInput;
+  permissions: PermissionsCreateForumForums;
+  parentId?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type Admin__Forum_Forums__EditMutation = { __typename?: 'Mutation', admin__forum_forums__edit: { __typename?: 'CreateForumForumsObj', id: number, position: number, created: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+
+export type Admin__Forum_Forums__Show_ShortQueryVariables = Exact<{
+  search?: InputMaybe<Scalars['String']['input']>;
+  showAllForums?: InputMaybe<Scalars['Boolean']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type Admin__Forum_Forums__Show_ShortQuery = { __typename?: 'Query', admin__forum_forums__show: { __typename?: 'ShowForumForumsAdminObj', edges: Array<{ __typename?: 'ShowForumForumsAdmin', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, parent?: { __typename?: 'ShowForumForums', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } | null }> } };
+
 export type Forum_Posts__CreateMutationVariables = Exact<{
   content: Array<TextLanguageInput> | TextLanguageInput;
   topicId: Scalars['Int']['input'];
@@ -1426,17 +1449,6 @@ export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: 
 
 export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', theme_id?: number | null, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, rebuild_required: { __typename?: 'RebuildRequiredObj', themes: boolean, langs: boolean, plugins: boolean } }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string }> }, core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, position: number, external: boolean, href: string, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
-export type Admin__Forum_Forums__EditMutationVariables = Exact<{
-  description: Array<TextLanguageInput> | TextLanguageInput;
-  id: Scalars['Int']['input'];
-  name: Array<TextLanguageInput> | TextLanguageInput;
-  permissions: PermissionsCreateForumForums;
-  parentId?: InputMaybe<Scalars['Int']['input']>;
-}>;
-
-
-export type Admin__Forum_Forums__EditMutation = { __typename?: 'Mutation', admin__forum_forums__edit: { __typename?: 'CreateForumForumsObj', id: number, position: number, created: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
-
 export type Admin__Forum_Forums__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -1498,37 +1510,6 @@ export type Forum_Topics__ShowQuery = { __typename?: 'Query', forum_topics__show
 export const Admin__Install__Create_Database = gql`
     mutation Admin__install__create_database {
   admin__install__create_database
-}
-    `;
-export const Admin__Forum_Forums__Change_Position = gql`
-    mutation Admin__forum_forums__change_position($id: Int!, $indexToMove: Int!, $parentId: Int) {
-  admin__forum_forums__change_position(
-    id: $id
-    index_to_move: $indexToMove
-    parent_id: $parentId
-  )
-}
-    `;
-export const Admin__Forum_Forums__Create = gql`
-    mutation Admin__forum_forums__create($name: [TextLanguageInput!]!, $description: [TextLanguageInput!]!, $parentId: Int, $permissions: PermissionsCreateForumForums!) {
-  admin__forum_forums__create(
-    name: $name
-    description: $description
-    parent_id: $parentId
-    permissions: $permissions
-  ) {
-    created
-    description {
-      language_code
-      value
-    }
-    id
-    name {
-      language_code
-      value
-    }
-    position
-  }
 }
     `;
 export const Admin__Core_Languages__Create = gql`
@@ -1815,6 +1796,84 @@ export const Core_Sessions__Sign_Out = gql`
 export const Core_Themes__Change = gql`
     mutation Core_themes__change($id: Int!) {
   core_themes__change(id: $id)
+}
+    `;
+export const Admin__Forum_Forums__Change_Position = gql`
+    mutation Admin__forum_forums__change_position($id: Int!, $indexToMove: Int!, $parentId: Int) {
+  admin__forum_forums__change_position(
+    id: $id
+    index_to_move: $indexToMove
+    parent_id: $parentId
+  )
+}
+    `;
+export const Admin__Forum_Forums__Create = gql`
+    mutation Admin__forum_forums__create($name: [TextLanguageInput!]!, $description: [TextLanguageInput!]!, $parentId: Int, $permissions: PermissionsCreateForumForums!) {
+  admin__forum_forums__create(
+    name: $name
+    description: $description
+    parent_id: $parentId
+    permissions: $permissions
+  ) {
+    created
+    description {
+      language_code
+      value
+    }
+    id
+    name {
+      language_code
+      value
+    }
+    position
+  }
+}
+    `;
+export const Admin__Forum_Forums__Edit = gql`
+    mutation Admin__forum_forums__edit($description: [TextLanguageInput!]!, $id: Int!, $name: [TextLanguageInput!]!, $permissions: PermissionsCreateForumForums!, $parentId: Int) {
+  admin__forum_forums__edit(
+    description: $description
+    id: $id
+    name: $name
+    permissions: $permissions
+    parent_id: $parentId
+  ) {
+    id
+    name {
+      language_code
+      value
+    }
+    description {
+      language_code
+      value
+    }
+    position
+    created
+  }
+}
+    `;
+export const Admin__Forum_Forums__Show_Short = gql`
+    query Admin__forum_forums__show_short($search: String, $showAllForums: Boolean, $first: Int) {
+  admin__forum_forums__show(
+    search: $search
+    show_all_forums: $showAllForums
+    first: $first
+  ) {
+    edges {
+      name {
+        language_code
+        value
+      }
+      parent {
+        id
+        name {
+          language_code
+          value
+        }
+      }
+      id
+    }
+  }
 }
     `;
 export const Forum_Posts__Create = gql`
@@ -2365,29 +2424,6 @@ export const Core_Sessions__Authorization = gql`
       external
       position
     }
-  }
-}
-    `;
-export const Admin__Forum_Forums__Edit = gql`
-    mutation Admin__forum_forums__edit($description: [TextLanguageInput!]!, $id: Int!, $name: [TextLanguageInput!]!, $permissions: PermissionsCreateForumForums!, $parentId: Int) {
-  admin__forum_forums__edit(
-    description: $description
-    id: $id
-    name: $name
-    permissions: $permissions
-    parent_id: $parentId
-  ) {
-    id
-    name {
-      language_code
-      value
-    }
-    description {
-      language_code
-      value
-    }
-    position
-    created
   }
 }
     `;

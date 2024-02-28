@@ -6,10 +6,12 @@ import { zodInput } from "@/functions/zod";
 
 export const useDeleteForumAdmin = () => {
   const formSchema = z.object({
-    move_forums_to: z.object({
-      id: z.number().min(1),
-      name: zodInput.languageInput
-    }),
+    move_forums_to: z.array(
+      z.object({
+        id: z.number().min(1),
+        name: zodInput.languageInput
+      })
+    ),
     move_topics_to: z.object({
       id: z.number().min(1),
       name: zodInput.languageInput
