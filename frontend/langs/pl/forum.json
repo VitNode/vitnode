@@ -35,6 +35,10 @@
         "placeholder": "Napisz odpowiedź tutaj...",
         "submit": "Dodaj post"
       }
+    },
+    "select": {
+      "placeholder": "Wybierz forum...",
+      "search": "Szukaj..."
     }
   },
   "admin_forum": {
@@ -49,6 +53,12 @@
         "edit_title": "Edytuj forum - {name}",
         "name": "Nazwa",
         "desc": "Opis"
+      },
+      "delete": {
+        "desc": "Czy na pewno chcesz usunąć forum <name></name>? Ta akcja nie może być cofnięta.",
+        "move_topics_to": "Przenieś posty do",
+        "success": "Forum zostało usunięte.",
+        "submit": "Usuń forum"
       }
     }
   }

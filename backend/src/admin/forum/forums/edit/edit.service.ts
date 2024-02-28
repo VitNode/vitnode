@@ -231,7 +231,17 @@ export class EditForumForumsService {
           parent: {
             with: {
               name: true,
-              description: true
+              description: true,
+              topics: {
+                with: {
+                  posts: true
+                }
+              }
+            }
+          },
+          topics: {
+            with: {
+              posts: true
             }
           }
         }
@@ -243,10 +253,9 @@ export class EditForumForumsService {
         name: true,
         description: true,
         permissions: true,
-        parent: {
+        topics: {
           with: {
-            name: true,
-            description: true
+            posts: true
           }
         }
       }
@@ -254,10 +263,36 @@ export class EditForumForumsService {
 
     return {
       ...dataUpdate,
+      _count: {
+        children: children.length,
+        topics: dataUpdate.topics.length,
+        posts: dataUpdate.topics.reduce(
+          (acc, item) => acc + item.posts.length,
+          0
+        )
+      },
       children: children.map(item => ({
         ...item,
-        children: []
-      }))
+        children: [],
+        _count: {
+          children: 0,
+          posts: item.topics.reduce((acc, item) => acc + item.posts.length, 0),
+          topics: item.topics.length
+        }
+      })),
+      parent: dataUpdate.parent
+        ? {
+            ...dataUpdate.parent,
+            _count: {
+              children: 0,
+              posts: dataUpdate.parent.topics.reduce(
+                (acc, item) => acc + item.posts.length,
+                0
+              ),
+              topics: dataUpdate.parent.topics.length
+            }
+          }
+        : null
     };
   }
 }

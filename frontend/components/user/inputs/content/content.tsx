@@ -21,7 +21,7 @@ interface Props {
   values: UserInputItem[];
 }
 
-export const UserInputContent = ({ onSelect, values }: Props) => {
+export const UserInputContent = (props: Props) => {
   const t = useTranslations("core");
   const [search, setSearch] = useState("");
 
@@ -58,8 +58,7 @@ export const UserInputContent = ({ onSelect, values }: Props) => {
         ) : (
           <UserInputContentList
             edges={data?.core_members__show.edges ?? []}
-            onSelect={onSelect}
-            values={values}
+            {...props}
           />
         )}
       </CommandList>

@@ -22,7 +22,7 @@ class GroupsPermissionsForumForums {
 }
 
 @ObjectType()
-export class PermissionsForumForums {
+export class PermissionsForumForumsAdmin {
   @Field(() => Boolean)
   can_all_view: boolean;
 
@@ -43,8 +43,8 @@ export class PermissionsForumForums {
 export class ShowForumForumsAdmin extends OmitType(ShowForumForumsWithParent, [
   "permissions"
 ] as const) {
-  @Field(() => PermissionsForumForums)
-  permissions: PermissionsForumForums;
+  @Field(() => PermissionsForumForumsAdmin)
+  permissions: PermissionsForumForumsAdmin;
 }
 
 @ObjectType()

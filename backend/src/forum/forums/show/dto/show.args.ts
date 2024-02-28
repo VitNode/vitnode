@@ -16,4 +16,13 @@ export class ShowForumForumsArgs {
 
   @Field(() => [Int], { nullable: true })
   ids: number[] | null;
+
+  @Field(() => Boolean, {
+    nullable: true,
+    description: "Show all forums without children"
+  })
+  show_all_forums: boolean;
+
+  @Field(() => String, { nullable: true })
+  search: string | null;
 }

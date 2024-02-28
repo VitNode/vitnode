@@ -7,6 +7,8 @@ import {
   varchar
 } from "drizzle-orm/pg-core";
 
+import { forum_topics } from "./topics";
+
 import { core_groups } from "@/src/admin/core/database/schema/groups";
 import { core_languages } from "@/src/admin/core/database/schema/languages";
 
@@ -31,7 +33,8 @@ export const forum_forums_relations = relations(
     }),
     name: many(forum_forums_name),
     description: many(forum_forums_description),
-    permissions: many(forum_forums_permissions)
+    permissions: many(forum_forums_permissions),
+    topics: many(forum_topics)
   })
 );
 

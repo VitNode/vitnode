@@ -1,15 +1,18 @@
 import { Injectable } from "@nestjs/common";
-import { and, count, eq, isNull } from "drizzle-orm";
+import { and, count, eq, ilike, inArray, isNull } from "drizzle-orm";
 
 import { ShowForumForumsAdminObj } from "./dto/show.obj";
+import { ShowForumForumsAdminArgs } from "./dto/show.args";
 
-import { ShowForumForumsArgs } from "../../../../forum/forums/show/dto/show.args";
 import { DatabaseService } from "@/database/database.service";
 import {
   inputPaginationCursor,
   outputPagination
 } from "@/functions/database/pagination";
-import { forum_forums } from "@/src/admin/forum/database/schema/forums";
+import {
+  forum_forums,
+  forum_forums_name
+} from "@/src/admin/forum/database/schema/forums";
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 @Injectable()
@@ -20,8 +23,20 @@ export class ShowForumForumsAdminService {
     cursor,
     first,
     last,
-    parent_id
-  }: ShowForumForumsArgs): Promise<ShowForumForumsAdminObj> {
+    parent_id,
+    search,
+    show_all_forums
+  }: ShowForumForumsAdminArgs): Promise<ShowForumForumsAdminObj> {
+    let searchIds: number[] = [];
+
+    if (search) {
+      searchIds = await this.databaseService.db
+        .select({ forum_id: forum_forums_name.id })
+        .from(forum_forums_name)
+        .where(ilike(forum_forums_name.value, `%${search}%`))
+        .then(res => res.map(({ forum_id }) => forum_id));
+    }
+
     const pagination = await inputPaginationCursor({
       cursor,
       database: forum_forums,
@@ -35,9 +50,14 @@ export class ShowForumForumsAdminService {
       }
     });
 
-    const where = !parent_id
+    const whereParent = !parent_id
       ? isNull(forum_forums.parent_id)
       : eq(forum_forums.parent_id, parent_id);
+
+    const where = and(
+      !show_all_forums ? whereParent : undefined,
+      searchIds.length > 0 ? inArray(forum_forums.id, searchIds) : undefined
+    );
 
     const forums = await this.databaseService.db.query.forum_forums.findMany({
       ...pagination,
@@ -45,13 +65,23 @@ export class ShowForumForumsAdminService {
       with: {
         name: true,
         description: true,
+        permissions: true,
         parent: {
           with: {
             name: true,
-            description: true
+            description: true,
+            topics: {
+              with: {
+                posts: true
+              }
+            }
           }
         },
-        permissions: true
+        topics: {
+          with: {
+            posts: true
+          }
+        }
       }
     });
 
@@ -63,20 +93,37 @@ export class ShowForumForumsAdminService {
     const edges = await Promise.all(
       forums.map(async forum => {
         const children =
-          await this.databaseService.db.query.forum_forums.findMany({
-            where: eq(forum_forums.parent_id, forum.id),
-            orderBy: (table, { asc }) => [asc(table.position)],
-            with: {
-              name: true,
-              description: true,
-              permissions: true
-            }
-          });
+          show_all_forums || search
+            ? []
+            : await this.databaseService.db.query.forum_forums.findMany({
+                where: eq(forum_forums.parent_id, forum.id),
+                orderBy: (table, { asc }) => [asc(table.position)],
+                with: {
+                  name: true,
+                  description: true,
+                  permissions: true,
+                  topics: {
+                    with: {
+                      posts: true
+                    }
+                  }
+                }
+              });
 
         return {
           ...forum,
           parent: forum.parent_id
-            ? { ...forum.parent, _count: { children: 0 } }
+            ? {
+                ...forum.parent,
+                _count: {
+                  children: 0,
+                  topics: forum.parent.topics.length,
+                  posts: forum.parent.topics.reduce(
+                    (acc, item) => acc + item.posts.length,
+                    0
+                  )
+                }
+              }
             : null,
           permissions: {
             can_all_view: forum.can_all_view,
@@ -85,7 +132,14 @@ export class ShowForumForumsAdminService {
             can_all_reply: forum.can_all_reply,
             groups: forum.permissions
           },
-          _count: { children: children.length },
+          _count: {
+            children: children.length,
+            topics: forum.topics.length,
+            posts: forum.topics.reduce(
+              (acc, item) => acc + item.posts.length,
+              0
+            )
+          },
           children: await Promise.all(
             children.map(async child => {
               const children =
@@ -111,7 +165,14 @@ export class ShowForumForumsAdminService {
                     groups: child.permissions
                   }
                 })),
-                _count: { children: children.length }
+                _count: {
+                  children: children.length,
+                  topics: child.topics.length,
+                  posts: child.topics.reduce(
+                    (acc, item) => acc + item.posts.length,
+                    0
+                  )
+                }
               };
             })
           )
@@ -120,7 +181,7 @@ export class ShowForumForumsAdminService {
     );
 
     return outputPagination({
-      edges,
+      edges: search && searchIds.length === 0 ? [] : edges,
       totalCount,
       first,
       cursor,

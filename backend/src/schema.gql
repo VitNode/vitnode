@@ -33,7 +33,8 @@ type AvatarUser {
 }
 
 type ChildrenShowForumForums {
-  children: [ShowForumForums!]!
+  _count: ShowForumForumsCounts!
+  children: [LastChildShowForumForums!]!
   created: Int!
   description: [TextLanguage!]!
   id: Int!
@@ -42,6 +43,7 @@ type ChildrenShowForumForums {
 }
 
 type CreateForumForumsObj {
+  _count: ShowForumForumsCounts!
   children: [ChildrenShowForumForums!]!
   created: Int!
   description: [TextLanguage!]!
@@ -81,6 +83,14 @@ type GroupsPermissionsForumForums {
   id: Int!
 }
 
+type LastChildShowForumForums {
+  created: Int!
+  description: [TextLanguage!]!
+  id: Int!
+  name: [TextLanguage!]!
+  position: Int!
+}
+
 enum LayoutAdminInstallEnum {
   ACCOUNT
   DATABASE
@@ -116,6 +126,7 @@ type Mutation {
   admin__core_themes__upload(file: Upload!): String!
   admin__forum_forums__change_position(id: Int!, index_to_move: Int!, parent_id: Int): String!
   admin__forum_forums__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
+  admin__forum_forums__delete(id: Int!, move_topics_to: Int): String!
   admin__forum_forums__edit(description: [TextLanguageInput!]!, id: Int!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
   admin__install__create_database: String!
   admin_sessions__sign_out: String!
@@ -150,17 +161,17 @@ input PermissionsCreateForumForums {
 }
 
 type PermissionsForumForums {
+  can_create: Boolean!
+  can_read: Boolean!
+  can_reply: Boolean!
+}
+
+type PermissionsForumForumsAdmin {
   can_all_create: Boolean!
   can_all_read: Boolean!
   can_all_reply: Boolean!
   can_all_view: Boolean!
   groups: [GroupsPermissionsForumForums!]!
-}
-
-type PermissionsForumForumsCount {
-  can_create: Boolean!
-  can_read: Boolean!
-  can_reply: Boolean!
 }
 
 type Query {
@@ -170,7 +181,16 @@ type Query {
   admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
   admin__core_staff_moderators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
   admin__core_themes__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminThemesSortByArgs!]): ShowAdminThemesObj!
-  admin__forum_forums__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsAdminObj!
+  admin__forum_forums__show(
+    cursor: Int
+    first: Int
+    last: Int
+    parent_id: Int
+    search: String
+
+    """Show all forums without children"""
+    show_all_forums: Boolean
+  ): ShowForumForumsAdminObj!
   admin__install__layout: LayoutAdminInstallObj!
   admin__sessions__authorization: AuthorizationAdminSessionsObj!
   admin__settings__general__show: ShowGeneralAdminSettingsObj!
@@ -179,7 +199,17 @@ type Query {
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_themes__show(cursor: Int, first: Int, last: Int): ShowCoreThemesObj!
-  forum_forums__show(cursor: Int, first: Int, ids: [Int!], last: Int, parent_id: Int): ShowForumForumsObj!
+  forum_forums__show(
+    cursor: Int
+    first: Int
+    ids: [Int!]
+    last: Int
+    parent_id: Int
+    search: String
+
+    """Show all forums without children"""
+    show_all_forums: Boolean
+  ): ShowForumForumsObj!
   forum_posts__show(cursor: Int, first: Int, firstEdges: Int, last: Int, sortBy: ShowPostsForumsSortingEnum, topic_id: Int!): ShowPostsForumsObj!
   forum_topics__show(cursor: Int, first: Int, forum_id: Int, id: Int, last: Int): ShowTopicsForumsObj!
 }
@@ -435,6 +465,7 @@ type ShowCoreThemesObj {
 }
 
 type ShowForumForums {
+  _count: ShowForumForumsCounts!
   created: Int!
   description: [TextLanguage!]!
   id: Int!
@@ -443,13 +474,14 @@ type ShowForumForums {
 }
 
 type ShowForumForumsAdmin {
+  _count: ShowForumForumsCounts!
   children: [ChildrenShowForumForums!]!
   created: Int!
   description: [TextLanguage!]!
   id: Int!
   name: [TextLanguage!]!
   parent: ShowForumForums
-  permissions: PermissionsForumForums!
+  permissions: PermissionsForumForumsAdmin!
   position: Int!
 }
 
@@ -458,19 +490,26 @@ type ShowForumForumsAdminObj {
   pageInfo: PageInfo!
 }
 
+type ShowForumForumsCounts {
+  children: Int!
+  posts: Int!
+  topics: Int!
+}
+
 type ShowForumForumsObj {
   edges: [ShowForumForumsWithParent!]!
   pageInfo: PageInfo!
 }
 
 type ShowForumForumsWithParent {
+  _count: ShowForumForumsCounts!
   children: [ChildrenShowForumForums!]!
   created: Int!
   description: [TextLanguage!]!
   id: Int!
   name: [TextLanguage!]!
   parent: ShowForumForums
-  permissions: PermissionsForumForumsCount!
+  permissions: PermissionsForumForums!
   position: Int!
 }
 

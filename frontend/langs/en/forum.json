@@ -35,6 +35,10 @@
         "placeholder": "Write your reply here...",
         "submit": "Submit Post"
       }
+    },
+    "select": {
+      "placeholder": "Select a forum...",
+      "search": "Search forums..."
     }
   },
   "admin_forum": {
@@ -49,6 +53,12 @@
         "edit_title": "Edit Forum - {name}",
         "name": "Name",
         "desc": "Description"
+      },
+      "delete": {
+        "desc": "Are you sure you want to delete <name></name> forum? This action cannot be undone.",
+        "move_topics_to": "Move topics to",
+        "success": "Forum has been deleted.",
+        "submit": "Delete Forum"
       }
     }
   }

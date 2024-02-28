@@ -1,24 +1,18 @@
-import { useTranslations } from "next-intl";
 import { CheckIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-import type { ShowCoreMembers } from "@/graphql/hooks";
-import type { UserInputItem } from "../user-input";
-import { cn } from "@/functions/classnames";
+import type { ShowForumForums } from "@/graphql/hooks";
+import type { ContentForumsSelectProps } from "./content";
 import { CommandGroup, CommandItem } from "@/components/ui/command";
+import { cn } from "@/functions/classnames";
+import { useTextLang } from "@/hooks/core/use-text-lang";
 
-import { AvatarUser } from "../../avatar/avatar-user";
-import { GroupFormat } from "../../../groups/group-format";
-
-interface Props {
-  edges: Pick<
-    ShowCoreMembers,
-    "id" | "name" | "avatar_color" | "avatar" | "group" | "name_seo"
-  >[];
-  onSelect: (value: UserInputItem) => void;
-  values: UserInputItem[];
+interface Props extends ContentForumsSelectProps {
+  edges: Pick<ShowForumForums, "id" | "name">[];
 }
 
-export const UserInputContentList = ({ edges, onSelect, values }: Props) => {
+export const ListContentForumsSelect = ({ edges, onSelect, values }: Props) => {
+  const { convertText } = useTextLang();
   const t = useTranslations("core");
 
   if (edges.length === 0) {
@@ -48,11 +42,9 @@ export const UserInputContentList = ({ edges, onSelect, values }: Props) => {
           >
             <CheckIcon />
           </div>
-          <AvatarUser sizeInRem={1.75} user={item} />
-          <div className="flex flex-col">
-            <span>{item.name}</span>
-            <GroupFormat className="text-xs" group={item.group} />
-          </div>
+          <span>
+            {convertText(item.name)} - {item.id}
+          </span>
         </CommandItem>
       ))}
     </CommandGroup>
