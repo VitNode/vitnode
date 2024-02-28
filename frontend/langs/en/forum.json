@@ -56,7 +56,7 @@
       },
       "delete": {
         "desc": "Are you sure you want to delete <name></name> forum? This action cannot be undone.",
-        "move_forums_to": "Move forums to",
+        "move_forums_to": "Move children forums to",
         "move_topics_to": "Move topics to",
         "success": "Forum has been deleted.",
         "submit": "Delete Forum"

@@ -121,17 +121,19 @@ export class CreateForumForumsService {
         posts: 0
       },
       children: [],
-      parent: {
-        ...forum.parent,
-        _count: {
-          children: 0,
-          topics: forum.parent.topics.length,
-          posts: forum.parent.topics.reduce(
-            (acc, item) => acc + item.posts.length,
-            0
-          )
-        }
-      }
+      parent: forum.parent
+        ? {
+            ...forum.parent,
+            _count: {
+              children: 0,
+              topics: forum.parent.topics.length,
+              posts: forum.parent.topics.reduce(
+                (acc, item) => acc + item.posts.length,
+                0
+              )
+            }
+          }
+        : null
     };
   }
 }

@@ -28,6 +28,11 @@ query Admin__forum_forums__show($first: Int, $cursor: Int, $parentId: Int) {
           value
         }
         position
+        _count {
+          children
+          posts
+          topics
+        }
       }
       permissions {
         can_all_create
@@ -41,6 +46,11 @@ query Admin__forum_forums__show($first: Int, $cursor: Int, $parentId: Int) {
           can_view
           id
         }
+      }
+      _count {
+        children
+        posts
+        topics
       }
     }
     pageInfo {

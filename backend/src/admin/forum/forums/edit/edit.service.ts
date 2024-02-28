@@ -280,17 +280,19 @@ export class EditForumForumsService {
           topics: item.topics.length
         }
       })),
-      parent: {
-        ...dataUpdate.parent,
-        _count: {
-          children: 0,
-          posts: dataUpdate.parent.topics.reduce(
-            (acc, item) => acc + item.posts.length,
-            0
-          ),
-          topics: dataUpdate.parent.topics.length
-        }
-      }
+      parent: dataUpdate.parent
+        ? {
+            ...dataUpdate.parent,
+            _count: {
+              children: 0,
+              posts: dataUpdate.parent.topics.reduce(
+                (acc, item) => acc + item.posts.length,
+                0
+              ),
+              topics: dataUpdate.parent.topics.length
+            }
+          }
+        : null
     };
   }
 }

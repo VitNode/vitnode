@@ -18,7 +18,7 @@ const Content = lazy(() =>
 );
 
 export const DeleteActionForumAdmin = (
-  props: Pick<ShowForumForumsAdmin, "id" | "name">
+  props: Pick<ShowForumForumsAdmin, "id" | "name" | "_count">
 ) => {
   const t = useTranslations("core");
 

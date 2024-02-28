@@ -22,9 +22,10 @@ import type { ShowForumForumsAdmin } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 
 export const ContentDeleteActionForumAdmin = ({
+  _count,
   id,
   name
-}: Pick<ShowForumForumsAdmin, "id" | "name">) => {
+}: Pick<ShowForumForumsAdmin, "id" | "name" | "_count">) => {
   const t = useTranslations("admin_forum.forums.delete");
   const tCore = useTranslations("core");
   const { form, onSubmit } = useDeleteForumAdmin({ id, name });
@@ -46,33 +47,37 @@ export const ContentDeleteActionForumAdmin = ({
           </AlertDialogDescription>
         </AlertDialogHeader>
 
-        <FormField
-          control={form.control}
-          name="move_forums_to"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("move_forums_to")}</FormLabel>
-              <FormControl>
-                <ForumsSelect {...field} exclude={[id]} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {_count.children > 0 && (
+          <FormField
+            control={form.control}
+            name="move_forums_to"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("move_forums_to")}</FormLabel>
+                <FormControl>
+                  <ForumsSelect {...field} exclude={[id]} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
 
-        <FormField
-          control={form.control}
-          name="move_topics_to"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("move_topics_to")}</FormLabel>
-              <FormControl>
-                <ForumsSelect {...field} exclude={[id]} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {_count.topics > 0 && (
+          <FormField
+            control={form.control}
+            name="move_topics_to"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("move_topics_to")}</FormLabel>
+                <FormControl>
+                  <ForumsSelect {...field} exclude={[id]} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
 
         <AlertDialogFooter>
           <AlertDialogCancel asChild>
@@ -83,7 +88,11 @@ export const ContentDeleteActionForumAdmin = ({
           <Button
             variant="destructive"
             type="submit"
-            disabled={!form.formState.isValid}
+            disabled={
+              !form.formState.isValid ||
+              (_count.children > 0 && !form.watch("move_forums_to")) ||
+              (_count.topics > 0 && !form.watch("move_topics_to"))
+            }
             loading={form.formState.isSubmitting}
           >
             {t("submit")}
