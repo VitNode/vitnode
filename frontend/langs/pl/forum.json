@@ -58,6 +58,7 @@
         "desc": "Czy na pewno chcesz usunąć forum <name></name>? Ta akcja nie może być cofnięta.",
         "move_forums_to": "Przenieś tematy do",
         "move_topics_to": "Przenieś posty do",
+        "success": "Forum zostało usunięte.",
         "submit": "Usuń forum"
       }
     }

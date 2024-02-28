@@ -8,6 +8,8 @@ import { ShowForumForumsAdminResolver } from "./forums/show/show.resolver";
 import { ShowForumForumsAdminService } from "./forums/show/show.service";
 import { EditForumForumsResolver } from "./forums/edit/edit.resolver";
 import { EditForumForumsService } from "./forums/edit/edit.service";
+import { DeleteForumForumsResolver } from "./forums/delete/delete.resolver";
+import { DeleteForumForumsService } from "./forums/delete/delete.service";
 
 @Module({
   providers: [
@@ -18,7 +20,9 @@ import { EditForumForumsService } from "./forums/edit/edit.service";
     ShowForumForumsAdminResolver,
     ShowForumForumsAdminService,
     EditForumForumsResolver,
-    EditForumForumsService
+    EditForumForumsService,
+    DeleteForumForumsResolver,
+    DeleteForumForumsService
   ]
 })
 export class AdminForumModule {}

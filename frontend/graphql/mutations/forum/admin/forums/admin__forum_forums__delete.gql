@@ -1,0 +1,11 @@
+mutation Admin__forum_forums__delete(
+  $id: Int!
+  $moveForumsTo: Int
+  $moveTopicsTo: Int
+) {
+  admin__forum_forums__delete(
+    id: $id
+    move_forums_to: $moveForumsTo
+    move_topics_to: $moveTopicsTo
+  )
+}

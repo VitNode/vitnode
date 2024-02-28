@@ -143,6 +143,7 @@ export type Mutation = {
   admin__core_themes__upload: Scalars['String']['output'];
   admin__forum_forums__change_position: Scalars['String']['output'];
   admin__forum_forums__create: CreateForumForumsObj;
+  admin__forum_forums__delete: Scalars['String']['output'];
   admin__forum_forums__edit: CreateForumForumsObj;
   admin__install__create_database: Scalars['String']['output'];
   admin_sessions__sign_out: Scalars['String']['output'];
@@ -319,6 +320,13 @@ export type MutationAdmin__Forum_Forums__CreateArgs = {
   name: Array<TextLanguageInput>;
   parent_id?: InputMaybe<Scalars['Int']['input']>;
   permissions: PermissionsCreateForumForums;
+};
+
+
+export type MutationAdmin__Forum_Forums__DeleteArgs = {
+  id: Scalars['Int']['input'];
+  move_forums_to?: InputMaybe<Scalars['Int']['input']>;
+  move_topics_to?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -1279,6 +1287,15 @@ export type Admin__Forum_Forums__CreateMutationVariables = Exact<{
 
 export type Admin__Forum_Forums__CreateMutation = { __typename?: 'Mutation', admin__forum_forums__create: { __typename?: 'CreateForumForumsObj', created: number, id: number, position: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
+export type Admin__Forum_Forums__DeleteMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  moveForumsTo?: InputMaybe<Scalars['Int']['input']>;
+  moveTopicsTo?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type Admin__Forum_Forums__DeleteMutation = { __typename?: 'Mutation', admin__forum_forums__delete: string };
+
 export type Admin__Forum_Forums__EditMutationVariables = Exact<{
   description: Array<TextLanguageInput> | TextLanguageInput;
   id: Scalars['Int']['input'];
@@ -1827,6 +1844,15 @@ export const Admin__Forum_Forums__Create = gql`
     }
     position
   }
+}
+    `;
+export const Admin__Forum_Forums__Delete = gql`
+    mutation Admin__forum_forums__delete($id: Int!, $moveForumsTo: Int, $moveTopicsTo: Int) {
+  admin__forum_forums__delete(
+    id: $id
+    move_forums_to: $moveForumsTo
+    move_topics_to: $moveTopicsTo
+  )
 }
     `;
 export const Admin__Forum_Forums__Edit = gql`
