@@ -5,7 +5,7 @@ import { ShowForumForumsAdminService } from "./show.service";
 import { ShowForumForumsAdminObj } from "./dto/show.obj";
 import { ShowForumForumsAdminArgs } from "./dto/show.args";
 
-import { AdminAuthGuards } from "@/src/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
 
 @Resolver()
 export class ShowForumForumsAdminResolver {

@@ -16,8 +16,8 @@ import { GlobalAdminSessionsModule } from "./admin/core/sessions/sessions.module
 import { ModulesModule } from "../modules.module";
 import { configuration } from "../configuration";
 
-import { Ctx } from "@/src/types/context.type";
-import { DatabaseModule } from "@/src/database/database.module";
+import { Ctx } from "@/types/context.type";
+import { DatabaseModule } from "@/database/database.module";
 
 @Module({
   imports: [

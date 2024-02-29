@@ -5,7 +5,7 @@ import { EditForumForumsService } from "./edit.service";
 import { CreateForumForumsObj } from "../create/dto/create.obj";
 import { EditForumForumsArgs } from "./dto/edit.args";
 
-import { AdminAuthGuards } from "@/src/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
 
 @Resolver()
 export class EditForumForumsResolver {

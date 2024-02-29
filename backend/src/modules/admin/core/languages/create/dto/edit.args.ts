@@ -1,7 +1,7 @@
 import { ArgsType, Field } from "@nestjs/graphql";
 import { Transform } from "class-transformer";
 
-import { TransformString } from "@/src/types/database/text-language.type";
+import { TransformString } from "@/types/database/text-language.type";
 
 @ArgsType()
 export class CreateCoreAdminLanguagesArgs {

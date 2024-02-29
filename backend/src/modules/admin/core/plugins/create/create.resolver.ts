@@ -5,7 +5,7 @@ import { CreateAdminPluginsService } from "./create.service";
 import { CreateAdminPluginsArgs } from "./dto/create.args";
 import { ShowAdminPlugins } from "../show/dto/show.obj";
 
-import { AdminAuthGuards } from "@/src/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
 
 @Resolver()
 export class CreateAdminPluginsResolver {

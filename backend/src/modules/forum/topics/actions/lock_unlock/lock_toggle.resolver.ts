@@ -1,11 +1,11 @@
 import { UseGuards } from "@nestjs/common";
 import { Args, Context, Mutation, Resolver } from "@nestjs/graphql";
 
-import { Ctx } from "@/src/types/context.type";
-import { CurrentUser, User } from "@/src/utils/decorators/user.decorator";
-import { AuthGuards } from "@/src/utils/guards/auth.guards";
-import { LockToggleForumTopicsService } from "@/src/modules/forum/topics/actions/lock_unlock/lock_toggle.service";
-import { LockToggleForumTopicsArgs } from "@/src/modules/forum/topics/actions/lock_unlock/dto/lock_toggle.args";
+import { Ctx } from "@/types/context.type";
+import { CurrentUser, User } from "@/utils/decorators/user.decorator";
+import { AuthGuards } from "@/utils/guards/auth.guards";
+import { LockToggleForumTopicsService } from "@/modules/forum/topics/actions/lock_unlock/lock_toggle.service";
+import { LockToggleForumTopicsArgs } from "@/modules/forum/topics/actions/lock_unlock/dto/lock_toggle.args";
 
 @Resolver()
 export class LockToggleForumTopicsResolver {

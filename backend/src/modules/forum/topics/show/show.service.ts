@@ -4,18 +4,18 @@ import { and, asc, count, eq, or } from "drizzle-orm";
 import { ShowTopicsForumsArgs } from "./dto/show.args";
 import { ShowTopicsForumsObj } from "./dto/show.obj";
 
-import { SortDirectionEnum } from "@/src/types/database/sortDirection.type";
-import { User } from "@/src/utils/decorators/user.decorator";
-import { DatabaseService } from "@/src/database/database.service";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
+import { User } from "@/utils/decorators/user.decorator";
+import { DatabaseService } from "@/database/database.service";
 import {
   inputPaginationCursor,
   outputPagination
-} from "@/src/functions/database/pagination";
-import { forum_topics } from "@/src/modules/admin/forum/database/schema/topics";
-import { forum_posts } from "@/src/modules/admin/forum/database/schema/posts";
-import { CustomError } from "@/src/utils/errors/CustomError";
-import { AccessDeniedError } from "@/src/utils/errors/AccessDeniedError";
-import { forum_forums_permissions } from "@/src/modules/admin/forum/database/schema/forums";
+} from "@/functions/database/pagination";
+import { forum_topics } from "@/modules/admin/forum/database/schema/topics";
+import { forum_posts } from "@/modules/admin/forum/database/schema/posts";
+import { CustomError } from "@/utils/errors/CustomError";
+import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
+import { forum_forums_permissions } from "@/modules/admin/forum/database/schema/forums";
 
 @Injectable()
 export class ShowTopicsForumsService {

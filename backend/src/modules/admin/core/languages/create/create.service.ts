@@ -5,12 +5,12 @@ import { Injectable } from "@nestjs/common";
 
 import { CreateCoreAdminLanguagesArgs } from "./dto/edit.args";
 
-import { DatabaseService } from "@/src/database/database.service";
-import { ShowCoreLanguages } from "@/src/modules/core/languages/show/dto/show.obj";
-import { CustomError } from "@/src/utils/errors/CustomError";
+import { DatabaseService } from "@/database/database.service";
+import { ShowCoreLanguages } from "@/modules/core/languages/show/dto/show.obj";
+import { CustomError } from "@/utils/errors/CustomError";
 import { core_languages } from "../../database/schema/languages";
-import { currentDate } from "@/src/functions/date";
-import { setRebuildRequired } from "@/src/functions/config/rebuild-required";
+import { currentDate } from "@/functions/date";
+import { setRebuildRequired } from "@/functions/config/rebuild-required";
 
 @Injectable()
 export class CreateAdminCoreLanguageService {

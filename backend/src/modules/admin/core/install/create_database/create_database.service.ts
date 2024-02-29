@@ -3,21 +3,21 @@ import * as fs from "fs";
 import { Injectable } from "@nestjs/common";
 import { count } from "drizzle-orm";
 
-import { CustomError } from "@/src/utils/errors/CustomError";
-import { AccessDeniedError } from "@/src/utils/errors/AccessDeniedError";
-import { currentDate } from "@/src/functions/date";
-import { DatabaseService } from "@/src/database/database.service";
-import { core_languages } from "@/src/modules/admin/core/database/schema/languages";
+import { CustomError } from "@/utils/errors/CustomError";
+import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
+import { currentDate } from "@/functions/date";
+import { DatabaseService } from "@/database/database.service";
+import { core_languages } from "@/modules/admin/core/database/schema/languages";
 import {
   core_groups,
   core_groups_names
-} from "@/src/modules/admin/core/database/schema/groups";
-import { core_admin_permissions } from "@/src/modules/admin/core/database/schema/admins";
+} from "@/modules/admin/core/database/schema/groups";
+import { core_admin_permissions } from "@/modules/admin/core/database/schema/admins";
 import { core_moderators_permissions } from "../../database/schema/moderators";
 import { core_plugins } from "../../database/schema/plugins";
 import { core_themes } from "../../database/schema/themes";
 import { core_nav, core_nav_name } from "../../database/schema/nav";
-import { getConfigFile } from "@/src/functions/config/get-config-file";
+import { getConfigFile } from "@/functions/config/get-config-file";
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {

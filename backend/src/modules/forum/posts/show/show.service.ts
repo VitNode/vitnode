@@ -10,13 +10,13 @@ import { ShowPostsForumsObj } from "./dto/show.obj";
 import {
   inputPaginationCursor,
   outputPagination
-} from "@/src/functions/database/pagination";
-import { DatabaseService } from "@/src/database/database.service";
-import { forum_posts_timeline } from "@/src/modules/admin/forum/database/schema/posts";
-import { SortDirectionEnum } from "@/src/types/database/sortDirection.type";
-import { NotFoundError } from "@/src/utils/errors/not-found-error";
-import { User } from "@/src/utils/decorators/user.decorator";
-import { AccessDeniedError } from "@/src/utils/errors/AccessDeniedError";
+} from "@/functions/database/pagination";
+import { DatabaseService } from "@/database/database.service";
+import { forum_posts_timeline } from "@/modules/admin/forum/database/schema/posts";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
+import { NotFoundError } from "@/utils/errors/not-found-error";
+import { User } from "@/utils/decorators/user.decorator";
+import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 
 @Injectable()
 export class ShowPostsForumsService {

@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType, OmitType } from "@nestjs/graphql";
 
 import { ShowForumForumsWithParent } from "../../../../../forum/forums/show/dto/show.obj";
-import { PageInfo } from "@/src/types/database/pagination.type";
+import { PageInfo } from "@/types/database/pagination.type";
 
 @ObjectType()
 class GroupsPermissionsForumForums {

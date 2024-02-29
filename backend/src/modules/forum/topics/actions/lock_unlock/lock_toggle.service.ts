@@ -1,18 +1,18 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
 
-import { currentDate } from "@/src/functions/date";
-import { Ctx } from "@/src/types/context.type";
-import { User } from "@/src/utils/decorators/user.decorator";
-import { LockToggleForumTopicsArgs } from "@/src/modules/forum/topics/actions/lock_unlock/dto/lock_toggle.args";
-import { DatabaseService } from "@/src/database/database.service";
-import { NotFoundError } from "@/src/utils/errors/not-found-error";
+import { currentDate } from "@/functions/date";
+import { Ctx } from "@/types/context.type";
+import { User } from "@/utils/decorators/user.decorator";
+import { LockToggleForumTopicsArgs } from "@/modules/forum/topics/actions/lock_unlock/dto/lock_toggle.args";
+import { DatabaseService } from "@/database/database.service";
+import { NotFoundError } from "@/utils/errors/not-found-error";
 import {
   forum_topics,
   forum_topics_logs
-} from "@/src/modules/admin/forum/database/schema/topics";
-import { forum_posts_timeline } from "@/src/modules/admin/forum/database/schema/posts";
-import { AccessDeniedError } from "@/src/utils/errors/AccessDeniedError";
+} from "@/modules/admin/forum/database/schema/topics";
+import { forum_posts_timeline } from "@/modules/admin/forum/database/schema/posts";
+import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 
 @Injectable()
 export class LockToggleForumTopicsService {

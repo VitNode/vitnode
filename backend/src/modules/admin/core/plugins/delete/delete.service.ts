@@ -10,10 +10,10 @@ import {
 } from "./contents";
 import { DeleteAdminPluginsArgs } from "./dto/delete.args";
 
-import { DatabaseService } from "@/src/database/database.service";
-import { NotFoundError } from "@/src/utils/errors/not-found-error";
+import { DatabaseService } from "@/database/database.service";
+import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_plugins } from "../../database/schema/plugins";
-import { CustomError } from "@/src/utils/errors/CustomError";
+import { CustomError } from "@/utils/errors/CustomError";
 
 @Injectable()
 export class DeleteAdminPluginsService {

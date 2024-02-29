@@ -6,13 +6,13 @@ import { ConfigService } from "@nestjs/config";
 import { SignInCoreSessionsArgs } from "./dto/sign_in.args";
 import { DeviceSignInCoreSessionsService } from "./device.service";
 
-import { AccessDeniedError } from "@/src/utils/errors/AccessDeniedError";
-import { Ctx } from "@/src/types/context.type";
-import { convertUnixTime, currentDate } from "@/src/functions/date";
-import { DatabaseService } from "@/src/database/database.service";
-import { core_admin_sessions } from "@/src/modules/admin/core/database/schema/admins";
-import { core_sessions } from "@/src/modules/admin/core/database/schema/sessions";
-import { CustomError } from "@/src/utils/errors/CustomError";
+import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
+import { Ctx } from "@/types/context.type";
+import { convertUnixTime, currentDate } from "@/functions/date";
+import { DatabaseService } from "@/database/database.service";
+import { core_admin_sessions } from "@/modules/admin/core/database/schema/admins";
+import { core_sessions } from "@/modules/admin/core/database/schema/sessions";
+import { CustomError } from "@/utils/errors/CustomError";
 
 interface CreateSessionArgs extends Ctx {
   email: string;

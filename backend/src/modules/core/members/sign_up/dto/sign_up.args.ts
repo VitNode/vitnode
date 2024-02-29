@@ -8,8 +8,8 @@ import {
 } from "class-validator";
 import { Transform } from "class-transformer";
 
-import { nameRegex } from "@/src/utils/regex/name.regex";
-import { TransformString } from "@/src/types/database/text-language.type";
+import { nameRegex } from "@/utils/regex/name.regex";
+import { TransformString } from "@/types/database/text-language.type";
 
 @ArgsType()
 export class SignUpCoreMembersArgs {

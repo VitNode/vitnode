@@ -2,7 +2,7 @@ import { ArgsType, Field } from "@nestjs/graphql";
 import { Transform } from "class-transformer";
 import { MaxLength, MinLength } from "class-validator";
 
-import { TransformString } from "@/src/types/database/text-language.type";
+import { TransformString } from "@/types/database/text-language.type";
 
 @ArgsType()
 export class CreateAdminThemesArgs {

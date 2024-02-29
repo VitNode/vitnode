@@ -3,10 +3,10 @@ import { ConfigService } from "@nestjs/config";
 
 import { ChangeCoreThemesArgs } from "./dto/change.args";
 
-import { DatabaseService } from "@/src/database/database.service";
-import { NotFoundError } from "@/src/utils/errors/not-found-error";
-import { Ctx } from "@/src/types/context.type";
-import { convertUnixTime, currentDate } from "@/src/functions/date";
+import { DatabaseService } from "@/database/database.service";
+import { NotFoundError } from "@/utils/errors/not-found-error";
+import { Ctx } from "@/types/context.type";
+import { convertUnixTime, currentDate } from "@/functions/date";
 
 @Injectable()
 export class ChangeCoreThemesService {

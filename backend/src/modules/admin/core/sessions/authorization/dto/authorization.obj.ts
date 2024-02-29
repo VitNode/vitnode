@@ -1,6 +1,6 @@
 import { Field, ObjectType } from "@nestjs/graphql";
 
-import { AuthorizationCurrentUserObj } from "@/src/modules/core/sessions/authorization/dto/authorization.obj";
+import { AuthorizationCurrentUserObj } from "@/modules/core/sessions/authorization/dto/authorization.obj";
 @ObjectType()
 export class RebuildRequiredObj {
   @Field(() => Boolean)

@@ -3,9 +3,9 @@ import { eq } from "drizzle-orm";
 
 import { DeleteForumForumsArgs } from "./dto/delete.args";
 
-import { DatabaseService } from "@/src/database/database.service";
-import { NotFoundError } from "@/src/utils/errors/not-found-error";
-import { CustomError } from "@/src/utils/errors/CustomError";
+import { DatabaseService } from "@/database/database.service";
+import { NotFoundError } from "@/utils/errors/not-found-error";
+import { CustomError } from "@/utils/errors/CustomError";
 import { forum_forums } from "../../database/schema/forums";
 import { forum_topics } from "../../database/schema/topics";
 

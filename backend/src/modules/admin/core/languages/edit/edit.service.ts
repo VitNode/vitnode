@@ -3,10 +3,10 @@ import { eq } from "drizzle-orm";
 
 import { EditCoreAdminLanguagesArgs } from "./dto/edit.args";
 
-import { DatabaseService } from "@/src/database/database.service";
-import { NotFoundError } from "@/src/utils/errors/not-found-error";
-import { core_languages } from "@/src/modules/admin/core/database/schema/languages";
-import { ShowCoreLanguages } from "@/src/modules/core/languages/show/dto/show.obj";
+import { DatabaseService } from "@/database/database.service";
+import { NotFoundError } from "@/utils/errors/not-found-error";
+import { core_languages } from "@/modules/admin/core/database/schema/languages";
+import { ShowCoreLanguages } from "@/modules/core/languages/show/dto/show.obj";
 
 @Injectable()
 export class EditAdminCoreLanguagesService {

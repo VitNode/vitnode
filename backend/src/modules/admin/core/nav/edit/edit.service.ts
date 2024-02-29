@@ -3,9 +3,9 @@ import { eq } from "drizzle-orm";
 
 import { EditAdminNavArgs } from "./dto/edit.args";
 
-import { DatabaseService } from "@/src/database/database.service";
-import { ShowCoreNav } from "@/src/modules/core/nav/show/dto/show.obj";
-import { NotFoundError } from "@/src/utils/errors/not-found-error";
+import { DatabaseService } from "@/database/database.service";
+import { ShowCoreNav } from "@/modules/core/nav/show/dto/show.obj";
+import { NotFoundError } from "@/utils/errors/not-found-error";
 import {
   core_nav,
   core_nav_description,

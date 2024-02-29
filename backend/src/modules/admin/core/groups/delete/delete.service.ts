@@ -3,10 +3,10 @@ import { eq } from "drizzle-orm";
 
 import { DeleteAdminGroupsArgs } from "./dto/delete.args";
 
-import { DatabaseService } from "@/src/database/database.service";
-import { NotFoundError } from "@/src/utils/errors/not-found-error";
-import { core_users } from "@/src/modules/admin/core/database/schema/users";
-import { core_groups } from "@/src/modules/admin/core/database/schema/groups";
+import { DatabaseService } from "@/database/database.service";
+import { NotFoundError } from "@/utils/errors/not-found-error";
+import { core_users } from "@/modules/admin/core/database/schema/users";
+import { core_groups } from "@/modules/admin/core/database/schema/groups";
 
 @Injectable()
 export class DeleteAdminGroupsService {

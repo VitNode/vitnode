@@ -6,7 +6,7 @@ import {
   registerEnumType
 } from "@nestjs/graphql";
 
-import { SortDirectionEnum } from "@/src/types/database/sortDirection.type";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 enum ShowAdminThemesSortingColumnEnum {
   created = "created"

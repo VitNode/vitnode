@@ -5,10 +5,10 @@ import { Injectable } from "@nestjs/common";
 import { UploadCoreFilesArgs } from "./dto/upload.args";
 import { UploadCoreFilesObj } from "./dto/upload.obj";
 
-import { CustomError } from "@/src/utils/errors/CustomError";
-import { FileUpload } from "@/src/utils/graphql-upload/Upload";
-import { generateRandomString } from "@/src/functions/generate-random-string";
-import { removeSpecialCharacters } from "@/src/functions/remove-special-characters";
+import { CustomError } from "@/utils/errors/CustomError";
+import { FileUpload } from "@/utils/graphql-upload/Upload";
+import { generateRandomString } from "@/functions/generate-random-string";
+import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 
 @Injectable()
 export class UploadCoreFilesService {

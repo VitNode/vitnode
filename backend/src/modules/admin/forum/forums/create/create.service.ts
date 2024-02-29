@@ -3,16 +3,16 @@ import { Injectable } from "@nestjs/common";
 import { CreateForumForumsArgs } from "./dto/create.args";
 import { CreateForumForumsObj } from "./dto/create.obj";
 
-import { CustomError } from "@/src/utils/errors/CustomError";
-import { currentDate } from "@/src/functions/date";
-import { DatabaseService } from "@/src/database/database.service";
+import { CustomError } from "@/utils/errors/CustomError";
+import { currentDate } from "@/functions/date";
+import { DatabaseService } from "@/database/database.service";
 import {
   forum_forums,
   forum_forums_description,
   forum_forums_name,
   forum_forums_permissions
-} from "@/src/modules/admin/forum/database/schema/forums";
-import { NotFoundError } from "@/src/utils/errors/not-found-error";
+} from "@/modules/admin/forum/database/schema/forums";
+import { NotFoundError } from "@/utils/errors/not-found-error";
 
 @Injectable()
 export class CreateForumForumsService {

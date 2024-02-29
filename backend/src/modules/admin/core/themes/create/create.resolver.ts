@@ -5,7 +5,7 @@ import { CreateAdminThemesService } from "./create.service";
 import { CreateAdminThemesArgs } from "./dto/create.args";
 import { ShowAdminThemes } from "../show/dto/show.obj";
 
-import { AdminAuthGuards } from "@/src/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
 
 @Resolver()
 export class CreateAdminThemesResolver {

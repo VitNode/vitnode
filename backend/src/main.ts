@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import { AppModule } from "./modules/app.module";
 import { RedisIoAdapter } from "./redis.adapter";
 
-import { graphqlUploadExpress } from "@/src/utils/graphql-upload/graphqlUploadExpress";
+import { graphqlUploadExpress } from "@/utils/graphql-upload/graphqlUploadExpress";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

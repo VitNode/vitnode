@@ -9,9 +9,9 @@ import { ShowAdminThemes } from "../show/dto/show.obj";
 import { EditAdminThemesArgs } from "./dto/edit.args";
 import { ConfigTheme } from "../themes.module";
 
-import { NotFoundError } from "@/src/utils/errors/not-found-error";
+import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_themes } from "../../database/schema/themes";
-import { DatabaseService } from "@/src/database/database.service";
+import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class EditAdminThemesService {

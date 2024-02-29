@@ -12,10 +12,10 @@ import {
 import { CreateAdminPluginsArgs } from "./dto/create.args";
 import { ShowAdminPlugins } from "../show/dto/show.obj";
 
-import { DatabaseService } from "@/src/database/database.service";
-import { CustomError } from "@/src/utils/errors/CustomError";
+import { DatabaseService } from "@/database/database.service";
+import { CustomError } from "@/utils/errors/CustomError";
 import { core_plugins } from "../../database/schema/plugins";
-import { currentDate } from "@/src/functions/date";
+import { currentDate } from "@/functions/date";
 
 @Injectable()
 export class CreateAdminPluginsService {

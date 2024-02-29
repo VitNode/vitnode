@@ -1,17 +1,17 @@
 import { Injectable } from "@nestjs/common";
 
-import { currentDate } from "@/src/functions/date";
-import { CreatePostsForumsArgs } from "@/src/modules/forum/posts/create/dto/create.args";
-import { ShowPostsForums } from "@/src/modules/forum/posts/show/dto/show.obj";
-import { Ctx } from "@/src/types/context.type";
-import { User } from "@/src/utils/decorators/user.decorator";
-import { DatabaseService } from "@/src/database/database.service";
+import { currentDate } from "@/functions/date";
+import { CreatePostsForumsArgs } from "@/modules/forum/posts/create/dto/create.args";
+import { ShowPostsForums } from "@/modules/forum/posts/show/dto/show.obj";
+import { Ctx } from "@/types/context.type";
+import { User } from "@/utils/decorators/user.decorator";
+import { DatabaseService } from "@/database/database.service";
 import {
   forum_posts,
   forum_posts_content,
   forum_posts_timeline
-} from "@/src/modules/admin/forum/database/schema/posts";
-import { NotFoundError } from "@/src/utils/errors/not-found-error";
+} from "@/modules/admin/forum/database/schema/posts";
+import { NotFoundError } from "@/utils/errors/not-found-error";
 
 @Injectable()
 export class CreateForumsPostsService {

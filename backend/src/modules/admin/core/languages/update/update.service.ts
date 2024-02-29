@@ -6,9 +6,9 @@ import * as tar from "tar";
 
 import { UpdateCoreAdminLanguagesArgs } from "./dto/update.args";
 
-import { DatabaseService } from "@/src/database/database.service";
-import { NotFoundError } from "@/src/utils/errors/not-found-error";
-import { setRebuildRequired } from "@/src/functions/config/rebuild-required";
+import { DatabaseService } from "@/database/database.service";
+import { NotFoundError } from "@/utils/errors/not-found-error";
+import { setRebuildRequired } from "@/functions/config/rebuild-required";
 
 @Injectable()
 export class UpdateAdminCoreLanguageService {

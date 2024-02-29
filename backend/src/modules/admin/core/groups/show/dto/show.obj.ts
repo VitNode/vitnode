@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
 
-import { PageInfo } from "@/src/types/database/pagination.type";
-import { TextLanguage } from "@/src/types/database/text-language.type";
+import { PageInfo } from "@/types/database/pagination.type";
+import { TextLanguage } from "@/types/database/text-language.type";
 
 @ObjectType()
 export class ShowAdminGroupsObj {

@@ -4,8 +4,8 @@ import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { CreateAdminCoreLanguageService } from "./create.service";
 import { CreateCoreAdminLanguagesArgs } from "./dto/edit.args";
 
-import { AdminAuthGuards } from "@/src/utils/guards/admin-auth.guards";
-import { ShowCoreLanguages } from "@/src/modules/core/languages/show/dto/show.obj";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
+import { ShowCoreLanguages } from "@/modules/core/languages/show/dto/show.obj";
 
 @Resolver()
 export class CreateAdminCoreLanguagesResolver {

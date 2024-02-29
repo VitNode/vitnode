@@ -8,12 +8,12 @@ import * as tar from "tar";
 import { UploadAdminThemesArgs } from "./dto/delete.args";
 import { ConfigTheme } from "../themes.module";
 
-import { DatabaseService } from "@/src/database/database.service";
-import { generateRandomString } from "@/src/functions/generate-random-string";
-import { currentDate } from "@/src/functions/date";
-import { CustomError } from "@/src/utils/errors/CustomError";
+import { DatabaseService } from "@/database/database.service";
+import { generateRandomString } from "@/functions/generate-random-string";
+import { currentDate } from "@/functions/date";
+import { CustomError } from "@/utils/errors/CustomError";
 import { core_themes } from "../../database/schema/themes";
-import { FileUpload } from "@/src/utils/graphql-upload/Upload";
+import { FileUpload } from "@/utils/graphql-upload/Upload";
 
 @Injectable()
 export class UploadAdminThemesService {

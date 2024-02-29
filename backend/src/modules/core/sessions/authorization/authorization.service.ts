@@ -4,9 +4,9 @@ import { ConfigService } from "@nestjs/config";
 import { InternalAuthorizationCoreSessionsService } from "./internal/internal_authorization.service";
 import { AuthorizationCoreSessionsObj } from "./dto/authorization.obj";
 
-import { Ctx } from "@/src/types/context.type";
-import { DatabaseService } from "@/src/database/database.service";
-import { getConfigFile } from "@/src/functions/config/get-config-file";
+import { Ctx } from "@/types/context.type";
+import { DatabaseService } from "@/database/database.service";
+import { getConfigFile } from "@/functions/config/get-config-file";
 
 @Injectable()
 export class AuthorizationCoreSessionsService {

@@ -4,13 +4,13 @@ import { and, count, eq, ilike, or } from "drizzle-orm";
 import { ShowCoreMembersObj } from "./dto/show.obj";
 import { ShowCoreMembersArgs } from "./dto/show.args";
 
-import { DatabaseService } from "@/src/database/database.service";
+import { DatabaseService } from "@/database/database.service";
 import {
   inputPaginationCursor,
   outputPagination
-} from "@/src/functions/database/pagination";
-import { core_users } from "@/src/modules/admin/core/database/schema/users";
-import { SortDirectionEnum } from "@/src/types/database/sortDirection.type";
+} from "@/functions/database/pagination";
+import { core_users } from "@/modules/admin/core/database/schema/users";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 @Injectable()
 export class ShowCoreMembersService {

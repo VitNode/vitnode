@@ -3,8 +3,8 @@ import { UseGuards } from "@nestjs/common";
 
 import { DeleteAvatarCoreMembersService } from "./delete.service";
 
-import { User, CurrentUser } from "@/src/utils/decorators/user.decorator";
-import { AuthGuards } from "@/src/utils/guards/auth.guards";
+import { User, CurrentUser } from "@/utils/decorators/user.decorator";
+import { AuthGuards } from "@/utils/guards/auth.guards";
 
 @Resolver()
 export class DeleteAvatarCoreMembersResolver {

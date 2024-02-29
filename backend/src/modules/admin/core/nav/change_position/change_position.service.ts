@@ -3,8 +3,8 @@ import { eq, isNull } from "drizzle-orm";
 
 import { ChangePositionAdminNavArgs } from "./dto/change_position.args";
 
-import { DatabaseService } from "@/src/database/database.service";
-import { NotFoundError } from "@/src/utils/errors/not-found-error";
+import { DatabaseService } from "@/database/database.service";
+import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_nav } from "../../database/schema/nav";
 
 @Injectable()

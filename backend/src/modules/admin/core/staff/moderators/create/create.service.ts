@@ -3,10 +3,10 @@ import { Injectable } from "@nestjs/common";
 import { ShowAdminStaffModerators } from "../show/dto/show.obj";
 import { CreateAdminStaffModeratorsArgs } from "./dto/create.args";
 
-import { CustomError } from "@/src/utils/errors/CustomError";
-import { currentDate } from "@/src/functions/date";
-import { DatabaseService } from "@/src/database/database.service";
-import { core_moderators_permissions } from "@/src/modules/admin/core/database/schema/moderators";
+import { CustomError } from "@/utils/errors/CustomError";
+import { currentDate } from "@/functions/date";
+import { DatabaseService } from "@/database/database.service";
+import { core_moderators_permissions } from "@/modules/admin/core/database/schema/moderators";
 
 @Injectable()
 export class CreateAdminStaffModeratorsService {

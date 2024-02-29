@@ -4,13 +4,13 @@ import { and, count, isNull } from "drizzle-orm";
 import { ShowCoreNavArgs } from "./dto/show.args";
 import { ShowCoreNavObj } from "./dto/show.obj";
 
-import { DatabaseService } from "@/src/database/database.service";
+import { DatabaseService } from "@/database/database.service";
 import {
   inputPaginationCursor,
   outputPagination
-} from "@/src/functions/database/pagination";
-import { core_nav } from "@/src/modules/admin/core/database/schema/nav";
-import { SortDirectionEnum } from "@/src/types/database/sortDirection.type";
+} from "@/functions/database/pagination";
+import { core_nav } from "@/modules/admin/core/database/schema/nav";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 @Injectable()
 export class ShowCoreNavService {

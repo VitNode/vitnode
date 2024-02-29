@@ -6,12 +6,12 @@ import {
   LayoutAdminInstallObj
 } from "./dto/layout.obj";
 
-import { AccessDeniedError } from "@/src/utils/errors/AccessDeniedError";
-import { DatabaseService } from "@/src/database/database.service";
-import { core_users } from "@/src/modules/admin/core/database/schema/users";
-import { core_sessions } from "@/src/modules/admin/core/database/schema/sessions";
-import { core_admin_sessions } from "@/src/modules/admin/core/database/schema/admins";
-import { core_languages } from "@/src/modules/admin/core/database/schema/languages";
+import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
+import { DatabaseService } from "@/database/database.service";
+import { core_users } from "@/modules/admin/core/database/schema/users";
+import { core_sessions } from "@/modules/admin/core/database/schema/sessions";
+import { core_admin_sessions } from "@/modules/admin/core/database/schema/admins";
+import { core_languages } from "@/modules/admin/core/database/schema/languages";
 
 @Injectable()
 export class LayoutAdminInstallService {

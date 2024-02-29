@@ -5,7 +5,7 @@ import { ShowCoreMembersService } from "./show.service";
 import { ShowCoreMembersObj } from "./dto/show.obj";
 import { ShowCoreMembersArgs } from "./dto/show.args";
 
-import { AuthGuards, OptionalAuth } from "@/src/utils/guards/auth.guards";
+import { AuthGuards, OptionalAuth } from "@/utils/guards/auth.guards";
 
 @Resolver()
 export class ShowCoreMembersResolver {

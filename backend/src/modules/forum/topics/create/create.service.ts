@@ -3,15 +3,15 @@ import { Injectable } from "@nestjs/common";
 import { CreateForumTopicsArgs } from "./dto/create.args";
 import { ShowTopicsForums } from "../show/dto/show.obj";
 
-import { currentDate } from "@/src/functions/date";
-import { User } from "@/src/utils/decorators/user.decorator";
-import { Ctx } from "@/src/types/context.type";
-import { AccessDeniedError } from "@/src/utils/errors/AccessDeniedError";
-import { DatabaseService } from "@/src/database/database.service";
+import { currentDate } from "@/functions/date";
+import { User } from "@/utils/decorators/user.decorator";
+import { Ctx } from "@/types/context.type";
+import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
+import { DatabaseService } from "@/database/database.service";
 import {
   forum_topics,
   forum_topics_titles
-} from "@/src/modules/admin/forum/database/schema/topics";
+} from "@/modules/admin/forum/database/schema/topics";
 import { CreateForumsPostsService } from "../../posts/create/create.service";
 
 @Injectable()

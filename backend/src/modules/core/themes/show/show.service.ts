@@ -4,13 +4,13 @@ import { count } from "drizzle-orm";
 import { ShowCoreThemesObj } from "./dto/show.obj";
 import { ShowCoreThemesArgs } from "./dto/show.args";
 
-import { DatabaseService } from "@/src/database/database.service";
+import { DatabaseService } from "@/database/database.service";
 import {
   inputPaginationCursor,
   outputPagination
-} from "@/src/functions/database/pagination";
-import { SortDirectionEnum } from "@/src/types/database/sortDirection.type";
-import { core_themes } from "@/src/modules/admin/core/database/schema/themes";
+} from "@/functions/database/pagination";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
+import { core_themes } from "@/modules/admin/core/database/schema/themes";
 
 @Injectable()
 export class ShowCoreThemesService {

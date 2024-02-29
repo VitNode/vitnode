@@ -6,12 +6,12 @@ import { ConfigService } from "@nestjs/config";
 import { SignUpCoreMembersArgs } from "./dto/sign_up.args";
 import { SignUpCoreMembersObj } from "./dto/sign_up.obj";
 
-import { CustomError } from "@/src/utils/errors/CustomError";
-import { removeSpecialCharacters } from "@/src/functions/remove-special-characters";
-import { currentDate } from "@/src/functions/date";
-import { generateAvatarColor } from "@/src/functions/avatar/generateAvatarColor";
-import { DatabaseService } from "@/src/database/database.service";
-import { core_users } from "@/src/modules/admin/core/database/schema/users";
+import { CustomError } from "@/utils/errors/CustomError";
+import { removeSpecialCharacters } from "@/functions/remove-special-characters";
+import { currentDate } from "@/functions/date";
+import { generateAvatarColor } from "@/functions/avatar/generateAvatarColor";
+import { DatabaseService } from "@/database/database.service";
+import { core_users } from "@/modules/admin/core/database/schema/users";
 
 @Injectable()
 export class SignUpCoreMembersService {

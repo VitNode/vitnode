@@ -1,10 +1,10 @@
 import { AnyColumn, SQL, and, asc, desc, eq, gt, lt, or } from "drizzle-orm";
 import { PgTableWithColumns, TableConfig } from "drizzle-orm/pg-core";
 
-import { PageInfo } from "@/src/types/database/pagination.type";
-import { CustomError } from "@/src/utils/errors/CustomError";
-import { DatabaseService } from "@/src/database/database.service";
-import { SortDirectionEnum } from "@/src/types/database/sortDirection.type";
+import { PageInfo } from "@/types/database/pagination.type";
+import { CustomError } from "@/utils/errors/CustomError";
+import { DatabaseService } from "@/database/database.service";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 type DataInterface<T> = T & {
   id: number;

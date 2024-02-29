@@ -4,7 +4,7 @@ import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { DeleteAdminStaffModeratorsArgs } from "./dto/delete.args";
 import { DeleteAdminStaffModeratorsService } from "./delete.service";
 
-import { AdminAuthGuards } from "@/src/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
 
 @Resolver()
 export class DeleteAdminStaffModeratorsResolver {

@@ -3,9 +3,9 @@ import { eq, isNull } from "drizzle-orm";
 
 import { ChangePositionForumForumsArgs } from "./dto/change_position.args";
 
-import { DatabaseService } from "@/src/database/database.service";
-import { NotFoundError } from "@/src/utils/errors/not-found-error";
-import { forum_forums } from "@/src/modules/admin/forum/database/schema/forums";
+import { DatabaseService } from "@/database/database.service";
+import { NotFoundError } from "@/utils/errors/not-found-error";
+import { forum_forums } from "@/modules/admin/forum/database/schema/forums";
 
 @Injectable()
 export class ChangePositionForumForumsService {

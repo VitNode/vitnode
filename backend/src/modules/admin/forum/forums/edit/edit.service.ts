@@ -5,15 +5,15 @@ import { CreateForumForumsObj } from "../create/dto/create.obj";
 import { EditForumForumsArgs } from "./dto/edit.args";
 import { PermissionsCreateForumForums } from "../create/dto/create.args";
 
-import { DatabaseService } from "@/src/database/database.service";
-import { NotFoundError } from "@/src/utils/errors/not-found-error";
+import { DatabaseService } from "@/database/database.service";
+import { NotFoundError } from "@/utils/errors/not-found-error";
 import {
   forum_forums,
   forum_forums_description,
   forum_forums_name,
   forum_forums_permissions
 } from "../../database/schema/forums";
-import { TextLanguageInput } from "@/src/types/database/text-language.type";
+import { TextLanguageInput } from "@/types/database/text-language.type";
 
 @Injectable()
 export class EditForumForumsService {

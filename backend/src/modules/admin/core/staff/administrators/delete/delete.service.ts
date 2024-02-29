@@ -3,10 +3,10 @@ import { eq } from "drizzle-orm";
 
 import { DeleteAdminStaffAdministratorsArgs } from "./dto/delete.args";
 
-import { CustomError } from "@/src/utils/errors/CustomError";
-import { DatabaseService } from "@/src/database/database.service";
-import { NotFoundError } from "@/src/utils/errors/not-found-error";
-import { core_admin_permissions } from "@/src/modules/admin/core/database/schema/admins";
+import { CustomError } from "@/utils/errors/CustomError";
+import { DatabaseService } from "@/database/database.service";
+import { NotFoundError } from "@/utils/errors/not-found-error";
+import { core_admin_permissions } from "@/modules/admin/core/database/schema/admins";
 
 @Injectable()
 export class DeleteAdminStaffAdministratorsService {

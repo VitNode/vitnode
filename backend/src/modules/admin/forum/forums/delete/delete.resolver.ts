@@ -4,7 +4,7 @@ import { UseGuards } from "@nestjs/common";
 import { DeleteForumForumsService } from "./delete.service";
 import { DeleteForumForumsArgs } from "./dto/delete.args";
 
-import { AdminAuthGuards } from "@/src/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
 
 @Resolver()
 export class DeleteForumForumsResolver {

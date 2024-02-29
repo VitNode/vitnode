@@ -2,8 +2,8 @@ import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { GqlExecutionContext } from "@nestjs/graphql";
 import { Reflector } from "@nestjs/core";
 
-import { InternalAuthorizationCoreSessionsService } from "@/src/modules/core/sessions/authorization/internal/internal_authorization.service";
-import { Ctx } from "@/src/types/context.type";
+import { InternalAuthorizationCoreSessionsService } from "@/modules/core/sessions/authorization/internal/internal_authorization.service";
+import { Ctx } from "@/types/context.type";
 
 @Injectable()
 export class AuthGuards implements CanActivate {

@@ -4,16 +4,16 @@ import { and, count, eq, ilike, inArray } from "drizzle-orm";
 import { ShowAdminGroupsArgs } from "./dto/show.args";
 import { ShowAdminGroupsObj } from "./dto/show.obj";
 
-import { DatabaseService } from "@/src/database/database.service";
+import { DatabaseService } from "@/database/database.service";
 import {
   core_groups,
   core_groups_names
-} from "@/src/modules/admin/core/database/schema/groups";
+} from "@/modules/admin/core/database/schema/groups";
 import {
   inputPaginationCursor,
   outputPagination
-} from "@/src/functions/database/pagination";
-import { SortDirectionEnum } from "@/src/types/database/sortDirection.type";
+} from "@/functions/database/pagination";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 import { core_users } from "../../database/schema/users";
 
 @Injectable()

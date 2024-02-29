@@ -1,6 +1,6 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
 
-import { UploadCoreFilesObj } from "@/src/modules/core/files/upload/dto/upload.obj";
+import { UploadCoreFilesObj } from "@/modules/core/files/upload/dto/upload.obj";
 
 @ObjectType()
 export class UploadAvatarCoreMembersObj extends UploadCoreFilesObj {

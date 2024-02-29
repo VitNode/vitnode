@@ -4,18 +4,18 @@ import { and, count, eq, ilike, inArray, isNull, or } from "drizzle-orm";
 import { ShowForumForumsArgs } from "./dto/show.args";
 import { ShowForumForumsObj } from "./dto/show.obj";
 
-import { User } from "@/src/utils/decorators/user.decorator";
-import { AccessDeniedError } from "@/src/utils/errors/AccessDeniedError";
-import { DatabaseService } from "@/src/database/database.service";
+import { User } from "@/utils/decorators/user.decorator";
+import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
+import { DatabaseService } from "@/database/database.service";
 import {
   inputPaginationCursor,
   outputPagination
-} from "@/src/functions/database/pagination";
+} from "@/functions/database/pagination";
 import {
   forum_forums,
   forum_forums_name
-} from "@/src/modules/admin/forum/database/schema/forums";
-import { SortDirectionEnum } from "@/src/types/database/sortDirection.type";
+} from "@/modules/admin/forum/database/schema/forums";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 @Injectable()
 export class ShowForumForumsService {

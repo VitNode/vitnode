@@ -3,7 +3,7 @@ import { registerEnumType } from "@nestjs/graphql";
 
 import { DatabaseService } from "./database.service";
 
-import { SortDirectionEnum } from "@/src/types/database/sortDirection.type";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 registerEnumType(SortDirectionEnum, {
   name: "SortDirectionEnum"

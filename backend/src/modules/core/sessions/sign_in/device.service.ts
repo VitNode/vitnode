@@ -2,10 +2,10 @@ import { UAParser } from "ua-parser-js";
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 
-import { DatabaseService } from "@/src/database/database.service";
-import { convertUnixTime, currentDate } from "@/src/functions/date";
-import { core_sessions_known_devices } from "@/src/modules/admin/core/database/schema/sessions";
-import { Ctx } from "@/src/types/context.type";
+import { DatabaseService } from "@/database/database.service";
+import { convertUnixTime, currentDate } from "@/functions/date";
+import { core_sessions_known_devices } from "@/modules/admin/core/database/schema/sessions";
+import { Ctx } from "@/types/context.type";
 
 interface DeviceType {
   id: number;

@@ -2,7 +2,7 @@ import * as fs from "fs";
 
 import { ConfigType, configPath, getConfigFile } from "./get-config-file";
 
-import { CustomError } from "@/src/utils/errors/CustomError";
+import { CustomError } from "@/utils/errors/CustomError";
 
 export const setRebuildRequired = async ({
   set

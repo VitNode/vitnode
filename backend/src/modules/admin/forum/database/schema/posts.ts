@@ -3,8 +3,8 @@ import { relations } from "drizzle-orm";
 
 import { forum_topics, forum_topics_logs } from "./topics";
 
-import { core_users } from "@/src/modules/admin/core/database/schema/users";
-import { core_languages } from "@/src/modules/admin/core/database/schema/languages";
+import { core_users } from "@/modules/admin/core/database/schema/users";
+import { core_languages } from "@/modules/admin/core/database/schema/languages";
 
 export const forum_posts = pgTable("forum_posts", {
   id: serial("id").primaryKey(),

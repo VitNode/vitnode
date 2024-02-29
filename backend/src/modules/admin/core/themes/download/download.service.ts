@@ -8,14 +8,14 @@ import { eq } from "drizzle-orm";
 
 import { DownloadAdminThemesArgs } from "./dto/download.args";
 
-import { DatabaseService } from "@/src/database/database.service";
-import { NotFoundError } from "@/src/utils/errors/not-found-error";
-import { removeSpecialCharacters } from "@/src/functions/remove-special-characters";
-import { User } from "@/src/utils/decorators/user.decorator";
-import { generateRandomString } from "@/src/functions/generate-random-string";
-import { currentDate } from "@/src/functions/date";
+import { DatabaseService } from "@/database/database.service";
+import { NotFoundError } from "@/utils/errors/not-found-error";
+import { removeSpecialCharacters } from "@/functions/remove-special-characters";
+import { User } from "@/utils/decorators/user.decorator";
+import { generateRandomString } from "@/functions/generate-random-string";
+import { currentDate } from "@/functions/date";
 import { core_themes } from "../../database/schema/themes";
-import { CustomError } from "@/src/utils/errors/CustomError";
+import { CustomError } from "@/utils/errors/CustomError";
 
 @Injectable()
 export class DownloadAdminThemesService {

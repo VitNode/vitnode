@@ -4,11 +4,11 @@ import { ConfigService } from "@nestjs/config";
 
 import { AuthorizationAdminSessionsObj } from "./dto/authorization.obj";
 
-import { Ctx } from "@/src/types/context.type";
-import { AccessDeniedError } from "@/src/utils/errors/AccessDeniedError";
-import { currentDate } from "@/src/functions/date";
-import { DatabaseService } from "@/src/database/database.service";
-import { getConfigFile } from "@/src/functions/config/get-config-file";
+import { Ctx } from "@/types/context.type";
+import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
+import { currentDate } from "@/functions/date";
+import { DatabaseService } from "@/database/database.service";
+import { getConfigFile } from "@/functions/config/get-config-file";
 
 @Injectable()
 export class AuthorizationAdminSessionsService {

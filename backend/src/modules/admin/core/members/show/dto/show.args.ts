@@ -7,8 +7,8 @@ import {
 } from "@nestjs/graphql";
 import { Transform } from "class-transformer";
 
-import { SortDirectionEnum } from "@/src/types/database/sortDirection.type";
-import { TransformString } from "@/src/types/database/text-language.type";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
+import { TransformString } from "@/types/database/text-language.type";
 
 export enum ShowAdminMembersSortingColumnEnum {
   name = "name",

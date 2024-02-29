@@ -1,8 +1,8 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
 
-import { PageInfo } from "@/src/types/database/pagination.type";
-import { TextLanguage } from "@/src/types/database/text-language.type";
-import { User } from "@/src/utils/decorators/user.decorator";
+import { PageInfo } from "@/types/database/pagination.type";
+import { TextLanguage } from "@/types/database/text-language.type";
+import { User } from "@/utils/decorators/user.decorator";
 
 @ObjectType()
 export class ForumTopicsForums {

@@ -12,7 +12,7 @@ import {
   TextLanguageInput,
   TransformString,
   TransformTextLanguageInput
-} from "@/src/types/database/text-language.type";
+} from "@/types/database/text-language.type";
 
 @ArgsType()
 export class CreateAdminNavArgs {

@@ -4,14 +4,14 @@ import { count, eq } from "drizzle-orm";
 import { EditAdminGroupsArgs } from "./dto/edit.args";
 import { ShowAdminGroups } from "../show/dto/show.obj";
 
-import { currentDate } from "@/src/functions/date";
-import { DatabaseService } from "@/src/database/database.service";
-import { NotFoundError } from "@/src/utils/errors/not-found-error";
+import { currentDate } from "@/functions/date";
+import { DatabaseService } from "@/database/database.service";
+import { NotFoundError } from "@/utils/errors/not-found-error";
 import {
   core_groups,
   core_groups_names
-} from "@/src/modules/admin/core/database/schema/groups";
-import { core_users } from "@/src/modules/admin/core/database/schema/users";
+} from "@/modules/admin/core/database/schema/groups";
+import { core_users } from "@/modules/admin/core/database/schema/users";
 
 @Injectable()
 export class EditAdminGroupsService {

@@ -4,13 +4,13 @@ import { eq } from "drizzle-orm";
 import { UploadAvatarCoreMembersArgs } from "./dto/upload.args";
 import { UploadAvatarCoreMembersObj } from "./dto/upload.obj";
 
-import { User } from "@/src/utils/decorators/user.decorator";
-import { CustomError } from "@/src/utils/errors/CustomError";
-import { UploadCoreFilesService } from "@/src/modules/core/files/upload/upload.service";
-import { DatabaseService } from "@/src/database/database.service";
-import { core_files_avatars } from "@/src/modules/admin/core/database/schema/files";
-import { currentDate } from "@/src/functions/date";
-import { DeleteCoreFilesService } from "@/src/modules/core/files/delete/delete.service";
+import { User } from "@/utils/decorators/user.decorator";
+import { CustomError } from "@/utils/errors/CustomError";
+import { UploadCoreFilesService } from "@/modules/core/files/upload/upload.service";
+import { DatabaseService } from "@/database/database.service";
+import { core_files_avatars } from "@/modules/admin/core/database/schema/files";
+import { currentDate } from "@/functions/date";
+import { DeleteCoreFilesService } from "@/modules/core/files/delete/delete.service";
 
 @Injectable()
 export class UploadAvatarCoreMembersService {

@@ -4,13 +4,13 @@ import { count } from "drizzle-orm";
 import { ShowAdminStaffModeratorsArgs } from "./dto/show.args";
 import { ShowAdminStaffModeratorsObj } from "./dto/show.obj";
 
-import { DatabaseService } from "@/src/database/database.service";
+import { DatabaseService } from "@/database/database.service";
 import {
   inputPaginationCursor,
   outputPagination
-} from "@/src/functions/database/pagination";
-import { core_moderators_permissions } from "@/src/modules/admin/core/database/schema/moderators";
-import { SortDirectionEnum } from "@/src/types/database/sortDirection.type";
+} from "@/functions/database/pagination";
+import { core_moderators_permissions } from "@/modules/admin/core/database/schema/moderators";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 @Injectable()
 export class ShowAdminStaffModeratorsService {

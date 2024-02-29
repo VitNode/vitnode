@@ -1,7 +1,7 @@
 import { createParamDecorator, ExecutionContext } from "@nestjs/common";
 import { Field, GqlExecutionContext, Int, ObjectType } from "@nestjs/graphql";
 
-import { TextLanguage } from "@/src/types/database/text-language.type";
+import { TextLanguage } from "@/types/database/text-language.type";
 
 export const CurrentUser = createParamDecorator(
   (_data: unknown, context: ExecutionContext) => {

@@ -3,9 +3,9 @@ import { Cron, CronExpression } from "@nestjs/schedule";
 import { and, eq, lt, or } from "drizzle-orm";
 import { ConfigService } from "@nestjs/config";
 
-import { currentDate } from "@/src/functions/date";
-import { DatabaseService } from "@/src/database/database.service";
-import { core_sessions_known_devices } from "@/src/modules/admin/core/database/schema/sessions";
+import { currentDate } from "@/functions/date";
+import { DatabaseService } from "@/database/database.service";
+import { core_sessions_known_devices } from "@/modules/admin/core/database/schema/sessions";
 
 @Injectable()
 export class CoreMiddlewareCron {

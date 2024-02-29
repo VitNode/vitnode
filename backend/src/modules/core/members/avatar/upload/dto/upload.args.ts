@@ -1,7 +1,7 @@
 import { ArgsType, Field } from "@nestjs/graphql";
 
-import { FileUpload } from "@/src/utils/graphql-upload/Upload";
-import { GraphQLUpload } from "@/src/utils/graphql-upload/GraphQLUpload";
+import { FileUpload } from "@/utils/graphql-upload/Upload";
+import { GraphQLUpload } from "@/utils/graphql-upload/GraphQLUpload";
 
 @ArgsType()
 export class UploadAvatarCoreMembersArgs {

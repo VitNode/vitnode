@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
 
-import { User } from "@/src/utils/decorators/user.decorator";
-import { DeleteCoreFilesService } from "@/src/modules/core/files/delete/delete.service";
-import { DatabaseService } from "@/src/database/database.service";
-import { core_files_avatars } from "@/src/modules/admin/core/database/schema/files";
+import { User } from "@/utils/decorators/user.decorator";
+import { DeleteCoreFilesService } from "@/modules/core/files/delete/delete.service";
+import { DatabaseService } from "@/database/database.service";
+import { core_files_avatars } from "@/modules/admin/core/database/schema/files";
 @Injectable()
 export class DeleteAvatarCoreMembersService {
   constructor(
