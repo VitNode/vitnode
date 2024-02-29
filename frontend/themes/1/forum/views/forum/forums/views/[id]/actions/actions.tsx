@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Loader } from "@/components/loader";
 import { getIdFormString } from "@/functions/url";
-import type { PermissionsForumForumsCount } from "@/graphql/hooks";
+import type { PermissionsForumForums } from "@/graphql/hooks";
 
 const CreateTopic = lazy(() =>
   import("../../../actions/create-topic").then(module => ({
@@ -18,7 +18,7 @@ const CreateTopic = lazy(() =>
 );
 
 interface Props {
-  permissions: Pick<PermissionsForumForumsCount, "can_create">;
+  permissions: Pick<PermissionsForumForums, "can_create">;
 }
 
 export const ActionsForumsForum = ({ permissions }: Props) => {

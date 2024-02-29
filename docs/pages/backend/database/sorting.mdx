@@ -1,5 +1,5 @@
-import { Steps } from 'nextra/components';
-import { Callout } from 'nextra/components';
+import { Steps } from "nextra/components";
+import { Callout } from "nextra/components";
 
 # Sorting
 
@@ -8,8 +8,9 @@ VitNode provide a sorting system to order the query result.
 Here is an example of how to use the sorting system. We will use the `core_members` table as an example.
 
 <Callout type="warning" emoji="⚠️">
-  Sorting system is based on [Pagination System](/backend/database/pagination). If you don't want to
-  use the pagination system you can use the `orderBy` argument directly in the `findMany()` method.
+  Sorting system is based on [Pagination System](/backend/database/pagination).
+  If you don't want to use the pagination system you can use the `orderBy`
+  argument directly in the `findMany()` method.
 </Callout>
 
 ## Data Transfer Object (DTO)
@@ -25,7 +26,7 @@ File: `show/dto/show-core_members.args.ts`
 Arguments used as container for fields to create query in GraphQL schema.
 
 ```ts
-import { ArgsType, Field, Int } from '@nestjs/graphql';
+import { ArgsType, Field, Int } from "@nestjs/graphql";
 
 @ArgsType()
 export class ShowCoreMembersArgs {}
@@ -37,13 +38,13 @@ To restrict sorting by selected columns you have to create a enum.
 
 ```ts
 enum ShowCoreMembersSortingColumnEnum {
-  name = 'name',
-  joined = 'joined',
-  first_name = 'first_name',
-  last_name = 'last_name',
-  posts = 'posts',
-  followers = 'followers',
-  reactions = 'reactions'
+  name = "name",
+  joined = "joined",
+  first_name = "first_name",
+  last_name = "last_name",
+  posts = "posts",
+  followers = "followers",
+  reactions = "reactions"
 }
 ```
 
@@ -56,10 +57,10 @@ enum ShowCoreMembersSortingColumnEnum {
 NestJS require to register the enum in the GraphQL schema. You can read more in [NestJS documentation](https://docs.nestjs.com/graphql/unions-and-enums).
 
 ```ts
-import { registerEnumType } from '@nestjs/graphql';
+import { registerEnumType } from "@nestjs/graphql";
 
 registerEnumType(ShowCoreMembersSortingColumnEnum, {
-  name: 'ShowCoreMembersSortingColumnEnum'
+  name: "ShowCoreMembersSortingColumnEnum"
 });
 ```
 
@@ -68,9 +69,9 @@ registerEnumType(ShowCoreMembersSortingColumnEnum, {
 Now you have to create a input type to use the enum in the args type.
 
 ```ts
-import { InputType } from '@nestjs/graphql';
+import { InputType } from "@nestjs/graphql";
 
-import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 @InputType()
 class SortByArgs {
@@ -87,7 +88,7 @@ class SortByArgs {
 Now you have to add the input type to the args type as arry and make it optional _(If you want)_.
 
 ```ts
-import { ArgsType, Field } from '@nestjs/graphql';
+import { ArgsType, Field } from "@nestjs/graphql";
 
 @ArgsType()
 export class ShowCoreMembersArgs {
@@ -99,22 +100,22 @@ export class ShowCoreMembersArgs {
 ### Complite example
 
 ```ts
-import { ArgsType, Field, InputType, registerEnumType } from '@nestjs/graphql';
+import { ArgsType, Field, InputType, registerEnumType } from "@nestjs/graphql";
 
-import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 enum ShowCoreMembersSortingColumnEnum {
-  name = 'name',
-  joined = 'joined',
-  first_name = 'first_name',
-  last_name = 'last_name',
-  posts = 'posts',
-  followers = 'followers',
-  reactions = 'reactions'
+  name = "name",
+  joined = "joined",
+  first_name = "first_name",
+  last_name = "last_name",
+  posts = "posts",
+  followers = "followers",
+  reactions = "reactions"
 }
 
 registerEnumType(ShowCoreMembersSortingColumnEnum, {
-  name: 'ShowCoreMembersSortingColumnEnum'
+  name: "ShowCoreMembersSortingColumnEnum"
 });
 
 @InputType()
@@ -145,12 +146,12 @@ File: `show/show-core_members.service.ts`
 Inside service file we will create a `show` method that will return a `ShowCoreMembersObj` object.
 
 ```ts
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 
-import { ShowCoreMembersObj } from './dto/show-core_members.obj';
-import { ShowCoreMembersArgs } from './dto/show-core_members.args';
+import { ShowCoreMembersObj } from "./dto/show-core_members.obj";
+import { ShowCoreMembersArgs } from "./dto/show-core_members.args";
 
-import { DatabaseService } from '@/database/database.service';
+import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class ShowCoreMembersService {
@@ -165,7 +166,7 @@ export class ShowCoreMembersService {
 To the `inputPaginationCursor()` function you have to pass the `sortBy` argument.
 
 ```ts {10-14}
-import { inputPaginationCursor } from '@/functions/database/pagination';
+import { inputPaginationCursor } from "@/functions/database/pagination";
 
 const pagination = await inputPaginationCursor({
   cursor,
@@ -173,10 +174,10 @@ const pagination = await inputPaginationCursor({
   databaseService: this.databaseService,
   first,
   last,
-  primaryCursor: { order: 'ASC', key: 'id', schema: core_users.id },
+  primaryCursor: { order: "ASC", key: "id", schema: core_users.id },
   defaultSortBy: {
     direction: SortDirectionEnum.desc,
-    column: 'joined'
+    column: "joined"
   },
   sortBy
 });
@@ -185,16 +186,19 @@ const pagination = await inputPaginationCursor({
 ### Complite example
 
 ```ts
-import { Injectable } from '@nestjs/common';
-import { and, count, eq, ilike, or } from 'drizzle-orm';
+import { Injectable } from "@nestjs/common";
+import { and, count, eq, ilike, or } from "drizzle-orm";
 
-import { ShowCoreMembersObj } from './dto/show.obj';
-import { ShowCoreMembersArgs } from './dto/show.args';
+import { ShowCoreMembersObj } from "./dto/show.obj";
+import { ShowCoreMembersArgs } from "./dto/show.args";
 
-import { DatabaseService } from '@/database/database.service';
-import { inputPaginationCursor, outputPagination } from '@/functions/database/pagination';
-import { core_users } from '@/src/admin/core/database/schema/users';
-import { SortDirectionEnum } from '@/types/database/sortDirection.type';
+import { DatabaseService } from "@/database/database.service";
+import {
+  inputPaginationCursor,
+  outputPagination
+} from "@/functions/database/pagination";
+import { core_users } from "@/src/apps/admin/core/database/schema/users";
+import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 @Injectable()
 export class ShowCoreMembersService {
@@ -214,10 +218,10 @@ export class ShowCoreMembersService {
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: 'ASC', key: 'id', schema: core_users.id },
+      primaryCursor: { order: "ASC", key: "id", schema: core_users.id },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: 'joined'
+        column: "joined"
       },
       sortBy
     });

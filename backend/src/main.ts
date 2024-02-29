@@ -2,7 +2,7 @@ import { NestFactory } from "@nestjs/core";
 import { ValidationPipe } from "@nestjs/common";
 import cookieParser from "cookie-parser";
 
-import { AppModule } from "./modules/app.module";
+import { AppModule } from "./app.module";
 import { RedisIoAdapter } from "./redis.adapter";
 
 import { graphqlUploadExpress } from "@/utils/graphql-upload/graphqlUploadExpress";
