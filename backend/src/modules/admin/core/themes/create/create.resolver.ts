@@ -1,0 +1,21 @@
+import { Args, Mutation, Resolver } from "@nestjs/graphql";
+import { UseGuards } from "@nestjs/common";
+
+import { CreateAdminThemesService } from "./create.service";
+import { CreateAdminThemesArgs } from "./dto/create.args";
+import { ShowAdminThemes } from "../show/dto/show.obj";
+
+import { AdminAuthGuards } from "@/src/utils/guards/admin-auth.guards";
+
+@Resolver()
+export class CreateAdminThemesResolver {
+  constructor(private readonly service: CreateAdminThemesService) {}
+
+  @Mutation(() => ShowAdminThemes)
+  @UseGuards(AdminAuthGuards)
+  async admin__core_themes__create(
+    @Args() args: CreateAdminThemesArgs
+  ): Promise<ShowAdminThemes> {
+    return await this.service.create(args);
+  }
+}

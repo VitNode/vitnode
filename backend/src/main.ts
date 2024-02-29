@@ -1,11 +1,11 @@
 import { NestFactory } from "@nestjs/core";
 import { ValidationPipe } from "@nestjs/common";
-import * as cookieParser from "cookie-parser";
+import cookieParser from "cookie-parser";
 
-import { AppModule } from "./app.module";
+import { AppModule } from "./modules/app.module";
 import { RedisIoAdapter } from "./redis.adapter";
 
-import { graphqlUploadExpress } from "@/utils/graphql-upload/graphqlUploadExpress";
+import { graphqlUploadExpress } from "@/src/utils/graphql-upload/graphqlUploadExpress";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

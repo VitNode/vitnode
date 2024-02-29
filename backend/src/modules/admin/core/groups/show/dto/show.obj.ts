@@ -1,0 +1,43 @@
+import { Field, Int, ObjectType } from "@nestjs/graphql";
+
+import { PageInfo } from "@/src/types/database/pagination.type";
+import { TextLanguage } from "@/src/types/database/text-language.type";
+
+@ObjectType()
+export class ShowAdminGroupsObj {
+  @Field(() => [ShowAdminGroups])
+  edges: ShowAdminGroups[];
+
+  @Field(() => PageInfo)
+  pageInfo: PageInfo;
+}
+
+@ObjectType()
+export class ShowAdminGroups {
+  @Field(() => Int)
+  id: number;
+
+  @Field(() => [TextLanguage])
+  name: TextLanguage[];
+
+  @Field(() => Int)
+  users_count: number;
+
+  @Field(() => Int)
+  created: number;
+
+  @Field(() => Int)
+  updated: number;
+
+  @Field(() => Boolean)
+  protected: boolean;
+
+  @Field(() => Boolean)
+  root: boolean;
+
+  @Field(() => Boolean)
+  default: boolean;
+
+  @Field(() => Boolean)
+  guest: boolean;
+}
