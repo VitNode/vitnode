@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useTextLang } from "@/hooks/core/use-text-lang";
-import { ActionsForumsForum } from "./actions/actions";
+import { ActionsForumsForum } from "./actions/action";
 import type { Forum_Forums__Show_ItemQuery } from "@/graphql/hooks";
 import { TopicsListForum } from "./topics-list/topics-list";
 import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
