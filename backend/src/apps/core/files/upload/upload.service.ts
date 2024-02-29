@@ -1,4 +1,5 @@
 import { createWriteStream, existsSync, mkdirSync, statSync } from "fs";
+import { join } from "path";
 
 import { Injectable } from "@nestjs/common";
 
@@ -79,7 +80,12 @@ export class UploadCoreFilesService {
 
     // Create folders
     const date = new Date();
-    const dirFolder = `public/monthly_${date.getMonth() + 1}_${date.getFullYear()}/${module_name}`;
+    const dir = join(
+      "public",
+      `monthly_${date.getMonth() + 1}_${date.getFullYear()}`,
+      module_name
+    );
+    const dirFolder = join(process.cwd(), dir);
     if (!existsSync(dirFolder)) {
       mkdirSync(dirFolder, { recursive: true });
     }
@@ -87,14 +93,16 @@ export class UploadCoreFilesService {
     const saveFiles = await Promise.all(
       files.map(async file => {
         const { createReadStream, filename, mimetype } = await file;
+        const extension = filename.split(".").pop();
+        const name = filename.split(".").shift();
 
         const stream = createReadStream();
 
         // Generate file name
         const currentFileName = `${date.getTime()}_${generateRandomString(
           10
-        )}_${removeSpecialCharacters(filename)}`;
-        const url = `${dirFolder}/${currentFileName}`;
+        )}_${removeSpecialCharacters(name)}.${extension}`;
+        const url = join(dirFolder, currentFileName);
 
         // Save file to file system
         await new Promise((resolve, reject) =>
@@ -111,8 +119,8 @@ export class UploadCoreFilesService {
           module_name,
           mimetype,
           name: currentFileName,
-          dir_folder: dirFolder,
-          extension: filename.split(".").pop(),
+          dir_folder: dir,
+          extension,
           size: stat.size
         };
       })
