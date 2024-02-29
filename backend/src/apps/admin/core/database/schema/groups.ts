@@ -1,6 +1,7 @@
 import { relations } from "drizzle-orm";
 import {
   boolean,
+  index,
   integer,
   pgTable,
   serial,
@@ -29,20 +30,29 @@ export const core_members = pgTable("core_members", {
   posts: integer("posts").notNull().default(0)
 });
 
-export const core_groups_names = pgTable("core_groups_names", {
-  id: serial("id").primaryKey(),
-  group_id: integer("group_id")
-    .notNull()
-    .references(() => core_groups.id, {
-      onDelete: "cascade"
-    }),
-  language_code: varchar("language_code")
-    .notNull()
-    .references(() => core_languages.code, {
-      onDelete: "cascade"
-    }),
-  value: varchar("value", { length: 255 }).notNull()
-});
+export const core_groups_names = pgTable(
+  "core_groups_names",
+  {
+    id: serial("id").primaryKey(),
+    group_id: integer("group_id")
+      .notNull()
+      .references(() => core_groups.id, {
+        onDelete: "cascade"
+      }),
+    language_code: varchar("language_code")
+      .notNull()
+      .references(() => core_languages.code, {
+        onDelete: "cascade"
+      }),
+    value: varchar("value", { length: 255 }).notNull()
+  },
+  table => ({
+    group_id_idx: index("core_groups_names_group_id_idx").on(table.group_id),
+    language_code_idx: index("core_groups_names_language_code_idx").on(
+      table.language_code
+    )
+  })
+);
 
 export const core_groups_names_relations = relations(
   core_groups_names,

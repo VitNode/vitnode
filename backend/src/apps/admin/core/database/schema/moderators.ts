@@ -1,4 +1,4 @@
-import { boolean, integer, pgTable, serial } from "drizzle-orm/pg-core";
+import { boolean, index, integer, pgTable, serial } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
 import { core_groups } from "./groups";
@@ -18,7 +18,15 @@ export const core_moderators_permissions = pgTable(
     created: integer("created").notNull(),
     updated: integer("updated").notNull(),
     protected: boolean("protected").notNull().default(false)
-  }
+  },
+  table => ({
+    group_id_idx: index("core_moderators_permissions_group_id_idx").on(
+      table.group_id
+    ),
+    user_id_idx: index("core_moderators_permissions_user_id_idx").on(
+      table.user_id
+    )
+  })
 );
 
 export const core_moderators_permissions_relations = relations(

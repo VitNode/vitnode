@@ -1,18 +1,31 @@
-import { integer, pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
+import {
+  index,
+  integer,
+  pgTable,
+  serial,
+  text,
+  varchar
+} from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
 import { core_users } from "./users";
 import { core_admin_sessions } from "./admins";
-export const core_sessions = pgTable("core_sessions", {
-  login_token: varchar("login_token", { length: 255 }).primaryKey(),
-  user_id: integer("user_id")
-    .notNull()
-    .references(() => core_users.id, {
-      onDelete: "cascade"
-    }),
-  last_seen: integer("last_seen").notNull(),
-  expires: integer("expires").notNull()
-});
+export const core_sessions = pgTable(
+  "core_sessions",
+  {
+    login_token: varchar("login_token", { length: 255 }).primaryKey(),
+    user_id: integer("user_id")
+      .notNull()
+      .references(() => core_users.id, {
+        onDelete: "cascade"
+      }),
+    last_seen: integer("last_seen").notNull(),
+    expires: integer("expires").notNull()
+  },
+  table => ({
+    user_id_idx: index("core_sessions_user_id_idx").on(table.user_id)
+  })
+);
 
 export const core_sessions_relations = relations(
   core_sessions,
@@ -44,7 +57,12 @@ export const core_sessions_known_devices = pgTable(
     uagent_device_type: varchar("uagent_device_type", { length: 200 }),
     uagent_device_model: varchar("uagent_device_model", { length: 200 }),
     last_seen: integer("last_seen").notNull()
-  }
+  },
+  table => ({
+    session_id_idx: index("core_sessions_known_devices_session_id_idx").on(
+      table.session_id
+    )
+  })
 );
 
 export const core_sessions_known_devices_relations = relations(
