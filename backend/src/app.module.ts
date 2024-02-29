@@ -32,7 +32,7 @@ import { DatabaseModule } from "@/database/database.module";
     JwtModule.register({ global: true }),
     ModulesModule,
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, "..", "../public"),
+      rootPath: join(process.cwd(), "public"),
       serveRoot: "/public"
     }),
     ScheduleModule.forRoot(),

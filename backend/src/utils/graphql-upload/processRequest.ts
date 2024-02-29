@@ -1,8 +1,8 @@
 import { IncomingMessage, ServerResponse } from "http";
 
-import * as busboy from "busboy";
+import busboy from "busboy";
 import * as createError from "http-errors";
-import * as objectPath from "object-path";
+import objectPath from "object-path";
 
 import Upload, { FileUpload } from "./Upload";
 import ignoreStream from "./ignoreStream";
