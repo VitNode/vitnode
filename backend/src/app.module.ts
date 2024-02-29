@@ -9,11 +9,7 @@ import { ServeStaticModule } from "@nestjs/serve-static";
 import { ScheduleModule } from "@nestjs/schedule";
 import { ConfigModule } from "@nestjs/config";
 
-import { GlobalCoreSessionsModule } from "./core/sessions/sessions.module";
-import { CoreModule } from "./core/core.module";
-import { AdminModule } from "./admin/admin.module";
-import { GlobalAdminSessionsModule } from "./admin/core/sessions/sessions.module";
-import { ModulesModule } from "./modules.module";
+import { ModulesModule } from "./apps/modules.module";
 import { configuration } from "./configuration";
 
 import { Ctx } from "@/types/context.type";
@@ -29,15 +25,11 @@ import { DatabaseModule } from "@/database/database.module";
       driver: ApolloDriver,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      autoSchemaFile: join(process.cwd(), "src/schema.gql"),
+      autoSchemaFile: join(process.cwd(), "schema.gql"),
       sortSchema: true,
       context: ({ req, res }): Ctx => ({ req, res })
     }),
     JwtModule.register({ global: true }),
-    GlobalCoreSessionsModule,
-    GlobalAdminSessionsModule,
-    CoreModule,
-    AdminModule,
     ModulesModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, "..", "../public"),

@@ -1,5 +1,5 @@
-import { FileTree } from 'nextra/components';
-import { Callout } from 'nextra/components';
+import { FileTree } from "nextra/components";
+import { Callout } from "nextra/components";
 
 # Plugins
 
@@ -15,17 +15,19 @@ When you're created a plugin VitNode will created few files for you on `backend`
 
 <FileTree>
   <FileTree.Folder name="backend" defaultOpen>
-    <FileTree.Folder name="admin" defaultOpen>
-      <FileTree.Folder name="{your_plugin}" defaultOpen>
-        <FileTree.Folder name="database" defaultOpen>
-          <FileTree.File name="functions.ts" />
-          <FileTree.File name="index.ts" />
+    <FileTree.Folder name="src" defaultOpen>
+      <FileTree.Folder name="admin" defaultOpen>
+        <FileTree.Folder name="{your_plugin}" defaultOpen>
+          <FileTree.Folder name="database" defaultOpen>
+            <FileTree.File name="functions.ts" />
+            <FileTree.File name="index.ts" />
+          </FileTree.Folder>
+          <FileTree.File name="{your_plugin}.module.ts" />
         </FileTree.Folder>
+      </FileTree.Folder>
+      <FileTree.Folder name="{your_plugin}" defaultOpen>
         <FileTree.File name="{your_plugin}.module.ts" />
       </FileTree.Folder>
-    </FileTree.Folder>
-    <FileTree.Folder name="{your_plugin}" defaultOpen>
-      <FileTree.File name="{your_plugin}.module.ts" />
     </FileTree.Folder>
   </FileTree.Folder>
 

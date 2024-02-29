@@ -1,4 +1,4 @@
-import { Callout } from 'nextra/components';
+import { Callout } from "nextra/components";
 
 # Files
 
@@ -19,10 +19,10 @@ As an example, we will upload a file for a avatar user.
 File: `upload/dto/upload-avatar-core_members.args.ts`
 
 ```ts
-import { ArgsType, Field } from '@nestjs/graphql';
+import { ArgsType, Field } from "@nestjs/graphql";
 
-import { FileUpload } from '@/utils/graphql-upload/Upload';
-import { GraphQLUpload } from '@/utils/graphql-upload/GraphQLUpload';
+import { FileUpload } from "@/utils/graphql-upload/Upload";
+import { GraphQLUpload } from "@/utils/graphql-upload/GraphQLUpload";
 
 @ArgsType()
 export class UploadAvatarCoreMembersArgs {
@@ -31,7 +31,7 @@ export class UploadAvatarCoreMembersArgs {
 }
 ```
 
-import { Steps } from 'nextra/components';
+import { Steps } from "nextra/components";
 
 <Steps>
 
@@ -42,14 +42,14 @@ File: `upload/upload-avatar-core_members.resolver.ts`
 In this example, we will use the `@CurrentUser()` decorator to get the user data.
 
 ```ts
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
+import { Args, Mutation, Resolver } from "@nestjs/graphql";
+import { UseGuards } from "@nestjs/common";
 
-import { UploadAvatarCoreMembersService } from './upload-avatar-core_members.service';
-import { UploadAvatarCoreMembersArgs } from './dto/upload-avatar-core_members.args';
+import { UploadAvatarCoreMembersService } from "./upload-avatar-core_members.service";
+import { UploadAvatarCoreMembersArgs } from "./dto/upload-avatar-core_members.args";
 
-import { User, CurrentUser } from '@/utils/decorators/user.decorator';
-import { AuthGuards } from '@/utils/guards/auth.guards';
+import { User, CurrentUser } from "@/utils/decorators/user.decorator";
+import { AuthGuards } from "@/utils/guards/auth.guards";
 
 @Resolver()
 export class UploadAvatarCoreMembersResolver {
@@ -75,13 +75,13 @@ await this.attachments.upload({
   files: [
     {
       file,
-      description: 'Avatar',
+      description: "Avatar",
       position: 0
     }
   ],
   maxUploadSizeBytes: 1e6, // 1MB
-  acceptMimeType: ['image/png', 'image/jpeg'],
-  module: 'core_members',
+  acceptMimeType: ["image/png", "image/jpeg"],
+  module: "core_members",
   module_id: id
 });
 ```
@@ -147,33 +147,36 @@ export class UploadCoreAttachmentsObj {
 File: `upload/upload-avatar-core_members.service.ts`
 
 ```ts
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 
-import { UploadAvatarCoreMembersArgs } from './dto/upload-avatar-core_members.args';
+import { UploadAvatarCoreMembersArgs } from "./dto/upload-avatar-core_members.args";
 
-import { UploadCoreAttachmentsService } from '@/src/core/attachments/upload/upload-core_attachments.service';
-import { User } from '@/utils/decorators/user.decorator';
+import { UploadCoreAttachmentsService } from "@/src/apps/core/attachments/upload/upload-core_attachments.service";
+import { User } from "@/utils/decorators/user.decorator";
 
 @Injectable()
 export class UploadAvatarCoreMembersService {
   constructor(private readonly attachments: UploadCoreAttachmentsService) {}
 
-  async uploadAvatar({ id }: User, { file }: UploadAvatarCoreMembersArgs): Promise<string> {
+  async uploadAvatar(
+    { id }: User,
+    { file }: UploadAvatarCoreMembersArgs
+  ): Promise<string> {
     await this.attachments.upload({
       files: [
         {
           file,
-          description: 'Avatar',
+          description: "Avatar",
           position: 0
         }
       ],
       maxUploadSizeBytes: 1e6, // 1MB
-      acceptMimeType: ['image/png', 'image/jpeg'],
-      module: 'core_members',
+      acceptMimeType: ["image/png", "image/jpeg"],
+      module: "core_members",
       module_id: id
     });
 
-    return 'Success!';
+    return "Success!";
   }
 }
 ```

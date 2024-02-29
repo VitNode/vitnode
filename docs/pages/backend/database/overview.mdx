@@ -1,6 +1,6 @@
-import { FileTree } from 'nextra/components';
-import { Steps } from 'nextra/components';
-import { Cards, Card } from 'nextra/components';
+import { FileTree } from "nextra/components";
+import { Steps } from "nextra/components";
+import { Cards, Card } from "nextra/components";
 
 # Database
 
@@ -51,38 +51,41 @@ Inside `posts.ts` file create schema for your tables. Follow [Drizzle ORM](https
 Here is example schema for `posts` table:
 
 ```ts
-import { integer, pgTable, serial, text, varchar } from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
+import { integer, pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 
-import { forum_topics } from './topics';
+import { forum_topics } from "./topics";
 
-import { core_users } from '@/src/admin/core/database/schema/users';
+import { core_users } from "@/src/apps/admin/core/database/schema/users";
 
-export const forum_posts = pgTable('forum_posts', {
-  id: serial('id').primaryKey(),
-  topic_id: integer('topic_id').references(() => forum_topics.id, {
-    onDelete: 'cascade'
+export const forum_posts = pgTable("forum_posts", {
+  id: serial("id").primaryKey(),
+  topic_id: integer("topic_id").references(() => forum_topics.id, {
+    onDelete: "cascade"
   }),
-  user_id: integer('user_id').references(() => core_users.id, {
-    onDelete: 'cascade'
+  user_id: integer("user_id").references(() => core_users.id, {
+    onDelete: "cascade"
   }),
-  ip_address: varchar('ip_address', { length: 45 }),
-  created: integer('created').notNull(),
-  updated: integer('updated').notNull()
+  ip_address: varchar("ip_address", { length: 45 }),
+  created: integer("created").notNull(),
+  updated: integer("updated").notNull()
 });
 
-export const forum_posts_relations = relations(forum_posts, ({ many, one }) => ({
-  topic: one(forum_topics, {
-    fields: [forum_posts.topic_id],
-    references: [forum_topics.id]
-  }),
-  user: one(core_users, {
-    fields: [forum_posts.user_id],
-    references: [core_users.id]
-  }),
-  content: many(forum_posts_content),
-  timeline: many(forum_posts_timeline)
-}));
+export const forum_posts_relations = relations(
+  forum_posts,
+  ({ many, one }) => ({
+    topic: one(forum_topics, {
+      fields: [forum_posts.topic_id],
+      references: [forum_topics.id]
+    }),
+    user: one(core_users, {
+      fields: [forum_posts.user_id],
+      references: [core_users.id]
+    }),
+    content: many(forum_posts_content),
+    timeline: many(forum_posts_timeline)
+  })
+);
 ```
 
 #### Good to know
@@ -107,9 +110,9 @@ After created schema, you need to import it to `index.ts` file. Inside `index.ts
 Here is example `index.ts` file:
 
 ```ts
-import * as forums from './schema/forums';
-import * as topics from './schema/topics';
-import * as posts from './schema/posts';
+import * as forums from "./schema/forums";
+import * as topics from "./schema/topics";
+import * as posts from "./schema/posts";
 
 export default {
   ...forums,
