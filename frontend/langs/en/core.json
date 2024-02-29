@@ -33,7 +33,7 @@
       "remove": "Remove color"
     },
     "mobile_nav": {
-      "home": "Home",
+      "back": "Back",
       "notifications": "Notifications",
       "messages": "Messages",
       "search": "Search",
