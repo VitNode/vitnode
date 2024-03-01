@@ -10,6 +10,12 @@ class ShowForumForumsCounts {
 
   @Field(() => Int)
   posts: number;
+
+  @Field(() => Int)
+  total_topics: number;
+
+  @Field(() => Int)
+  total_posts: number;
 }
 
 @ObjectType()
@@ -63,18 +69,15 @@ export class ChildrenShowForumForums extends ShowForumForums {
 }
 
 @ObjectType()
-export class ShowForumForumsWithParent extends FirstShowForumForums {
-  // @Field(() => ShowForumForums, { nullable: true })
-  // parent: ShowForumForums | null;
-
+export class ShowForumForumsWithChildren extends FirstShowForumForums {
   @Field(() => [ChildrenShowForumForums])
   children: ChildrenShowForumForums[];
 }
 
 @ObjectType()
 export class ShowForumForumsObj {
-  @Field(() => [ShowForumForumsWithParent])
-  edges: ShowForumForumsWithParent[];
+  @Field(() => [ShowForumForumsWithChildren])
+  edges: ShowForumForumsWithChildren[];
 
   @Field(() => PageInfo)
   pageInfo: PageInfo;

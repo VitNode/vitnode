@@ -106,12 +106,7 @@ export class ShowForumForumsService {
       with: {
         name: true,
         description: true,
-        permissions: true,
-        topics: {
-          with: {
-            posts: true
-          }
-        }
+        permissions: true
       }
     });
 
@@ -126,25 +121,16 @@ export class ShowForumForumsService {
               with: {
                 name: true,
                 description: true,
-                permissions: true,
-                topics: {
-                  with: {
-                    posts: true
-                  }
-                }
+                permissions: true
               }
             });
 
-        // console.log(await this.statsService.stats({ id: forum.id }));
+        const stats = await this.statsService.stats({ forumId: forum.id });
 
         return {
           ...forum,
           _count: {
-            topics: forum.topics.length,
-            posts: forum.topics.reduce(
-              (acc, item) => acc + item.posts.length,
-              0
-            )
+            ...stats
           },
           children: await Promise.all(
             children.map(async child => {
@@ -155,24 +141,19 @@ export class ShowForumForumsService {
                   with: {
                     name: true,
                     description: true,
-                    permissions: true,
-                    topics: {
-                      with: {
-                        posts: true
-                      }
-                    }
+                    permissions: true
                   }
                 });
+
+              const stats = await this.statsService.stats({
+                forumId: child.id
+              });
 
               return {
                 ...child,
                 children,
                 _count: {
-                  topics: child.topics.length,
-                  posts: child.topics.reduce(
-                    (acc, item) => acc + item.posts.length,
-                    0
-                  )
+                  ...stats
                 }
               };
             })
@@ -199,13 +180,14 @@ export class ShowForumForumsService {
         search && searchIds.length === 0
           ? []
           : edges.map(edge => {
+              const permissions = edge.permissions.at(0);
+
               if (!user) {
                 return {
                   ...edge,
                   permissions: {
                     can_create: false,
-                    can_read:
-                      edge.permissions.at(0)?.can_read || edge.can_all_read,
+                    can_read: permissions?.can_read || edge.can_all_read,
                     can_reply: false
                   }
                 };
@@ -214,12 +196,9 @@ export class ShowForumForumsService {
               return {
                 ...edge,
                 permissions: {
-                  can_create:
-                    edge.permissions.at(0)?.can_create || edge.can_all_create,
-                  can_read:
-                    edge.permissions.at(0)?.can_read || edge.can_all_read,
-                  can_reply:
-                    edge.permissions.at(0)?.can_reply || edge.can_all_reply
+                  can_create: permissions?.can_create || edge.can_all_create,
+                  can_read: permissions?.can_read || edge.can_all_read,
+                  can_reply: permissions?.can_reply || edge.can_all_reply
                 }
               };
             }),

@@ -9,7 +9,7 @@ import { TextLanguage } from "@/types/database/text-language.type";
 export class StatsShowForumForumsService {
   constructor(private databaseService: DatabaseService) {}
 
-  protected async getAllChildren({ id }: { id: number }): Promise<
+  protected async getAllChildren({ forumId }: { forumId: number }): Promise<
     {
       id: number;
       name: TextLanguage[];
@@ -19,7 +19,7 @@ export class StatsShowForumForumsService {
 
     const directChildren =
       await this.databaseService.db.query.forum_forums.findMany({
-        where: (table, { eq }) => eq(table.parent_id, id),
+        where: (table, { eq }) => eq(table.parent_id, forumId),
         columns: {
           id: true
         },
@@ -34,7 +34,7 @@ export class StatsShowForumForumsService {
         name: child.name
       });
 
-      const grandChildren = await this.getAllChildren({ id: child.id });
+      const grandChildren = await this.getAllChildren({ forumId: child.id });
       children = children.concat(grandChildren);
     }
 
@@ -81,28 +81,65 @@ export class StatsShowForumForumsService {
     return posts[0].count;
   }
 
-  async stats({ id }: { id: number }): Promise<{
+  protected async getCountTopics({ forumId }: { forumId: number }): Promise<{
+    count: number;
+    ids: number[];
+  }> {
+    const topics = await this.databaseService.db.query.forum_topics.findMany({
+      where: (table, { eq }) => eq(table.forum_id, forumId),
+      columns: {
+        id: true
+      }
+    });
+
+    return {
+      count: topics.length,
+      ids: topics.map(topic => topic.id)
+    };
+  }
+
+  protected async getCountPosts({
+    topicIds
+  }: {
+    topicIds: number[];
+  }): Promise<number> {
+    const posts = await this.databaseService.db
+      .select({
+        count: count()
+      })
+      .from(forum_posts)
+      .where(inArray(forum_posts.topic_id, topicIds));
+
+    return posts[0].count;
+  }
+
+  async stats({ forumId }: { forumId: number }): Promise<{
     children: {
       id: number;
       name: TextLanguage[];
     }[];
-    topicsIds: number[];
-    totalPosts: number;
-    totalTopics: number;
+    posts: number;
+    topics: number;
+    total_posts: number;
+    total_topics: number;
   }> {
-    const children = await this.getAllChildren({ id });
-    const topics = await this.getTotalTopics({
-      forumIds: [id, ...children.map(child => child.id)]
+    const children = await this.getAllChildren({ forumId });
+    const totalTopics = await this.getTotalTopics({
+      forumIds: [forumId, ...children.map(child => child.id)]
     });
     const totalPosts = await this.getTotalCountPosts({
-      topicIds: topics.ids
+      topicIds: totalTopics.ids
     });
 
+    const topics = await this.getCountTopics({ forumId });
+    const posts = await this.getCountPosts({ topicIds: topics.ids });
+
     return {
-      totalPosts: totalPosts - topics.totalCount,
-      totalTopics: topics.totalCount,
-      topicsIds: topics.ids,
-      children
+      total_posts: totalPosts - totalTopics.totalCount,
+      total_topics: totalTopics.totalCount,
+      children,
+      topics: topics.count,
+      posts: posts - topics.count
     };
   }
 }

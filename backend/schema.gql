@@ -482,14 +482,16 @@ type ShowForumForumsAdminObj {
 type ShowForumForumsCounts {
   posts: Int!
   topics: Int!
+  total_posts: Int!
+  total_topics: Int!
 }
 
 type ShowForumForumsObj {
-  edges: [ShowForumForumsWithParent!]!
+  edges: [ShowForumForumsWithChildren!]!
   pageInfo: PageInfo!
 }
 
-type ShowForumForumsWithParent {
+type ShowForumForumsWithChildren {
   _count: ShowForumForumsCounts!
   children: [ChildrenShowForumForums!]!
   created: Int!
