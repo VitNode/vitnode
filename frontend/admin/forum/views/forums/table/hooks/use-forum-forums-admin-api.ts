@@ -48,7 +48,19 @@ export const useForumForumsAdminAPI = ({ initData }: Args) => {
           parentId,
           depth: parent.depth + 1,
           index: parent.children.length,
-          children: (item.children ?? []) as ShowForumForumsAdminWithChildren[]
+          // Map children to add permissions / Disable all permissions, by default
+          children:
+            item.children.map(child => ({
+              ...child,
+              children: [],
+              permissions: {
+                can_all_read: false,
+                can_all_create: false,
+                can_all_reply: false,
+                can_all_view: false,
+                groups: []
+              }
+            })) ?? []
         });
       });
 

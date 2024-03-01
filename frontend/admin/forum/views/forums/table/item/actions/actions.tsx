@@ -12,7 +12,7 @@ export const ActionsForumAdmin = (props: ActionsForumAdminProps) => {
   return (
     <div className="flex gap-2 flex-shrink-0">
       <EditActionForumAdmin {...props} />
-      {props.childrenCount > 0 && <DeleteActionForumAdmin {...props} />}
+      {props.childrenCount === 0 && <DeleteActionForumAdmin {...props} />}
     </div>
   );
 };

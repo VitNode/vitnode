@@ -27,6 +27,18 @@ query Forum_forums__show {
           language_code
           value
         }
+        _count {
+          total_posts
+          total_topics
+          topics
+          posts
+        }
+      }
+      _count {
+        total_posts
+        total_topics
+        topics
+        posts
       }
     }
   }

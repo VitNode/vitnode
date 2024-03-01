@@ -9,16 +9,14 @@ import { useRouter } from "@/i18n";
 interface Props {
   children: ReactNode;
   href: string;
+  className?: string;
 }
 
-export const WrapperItemForum = ({ children, href }: Props) => {
+export const WrapperItemForum = ({ children, className, href }: Props) => {
   const { push } = useRouter();
 
   return (
-    <div
-      onClick={() => push(href)}
-      className="px-6 py-4 border-t hover:bg-muted/50 flex gap-4 cursor-pointer flex-col md:flex-row"
-    >
+    <div onClick={() => push(href)} className={className}>
       {children}
     </div>
   );

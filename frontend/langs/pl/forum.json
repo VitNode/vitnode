@@ -2,6 +2,8 @@
   "forum": {
     "forum": "Forum",
     "by": "Przez <user></user>, <date></date>",
+    "topics_title_count": "{count, plural, =1 {Temat} few {Tematy} many {Tematów} other {Tematów}}",
+    "posts_title_count": "{count, plural, =1 {Post} few {Posty} many {Postów} other {Postów}}",
     "topics": {
       "not_found": "Nie znaleziono tematów w tym forum.",
       "username_format": "<user></user>, <group></group>",

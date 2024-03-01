@@ -3,14 +3,14 @@
 import { Folder } from "lucide-react";
 
 import { Link } from "@/i18n";
-import type { ItemForumProps } from "./item-forum";
+import type { ItemForumProps } from "./item";
 import { buttonVariants } from "@/components/ui/button";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 
 export const ChildButtonItemForum = ({
   id,
   name
-}: Omit<ItemForumProps, "description">) => {
+}: Pick<ItemForumProps, "id" | "name">) => {
   const { convertNameToLink, convertText } = useTextLang();
 
   return (
