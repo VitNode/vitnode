@@ -14,10 +14,14 @@ import {
   forum_forums_permissions
 } from "../../database/schema/forums";
 import { TextLanguageInput } from "@/types/database/text-language.type";
+import { StatsShowForumForumsService } from "@/apps/forum/forums/show/stats.service";
 
 @Injectable()
 export class EditForumForumsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private statsService: StatsShowForumForumsService
+  ) {}
 
   protected updateName = async ({
     id,
@@ -227,23 +231,7 @@ export class EditForumForumsService {
         with: {
           name: true,
           description: true,
-          permissions: true,
-          parent: {
-            with: {
-              name: true,
-              description: true,
-              topics: {
-                with: {
-                  posts: true
-                }
-              }
-            }
-          },
-          topics: {
-            with: {
-              posts: true
-            }
-          }
+          permissions: true
         }
       });
 
@@ -252,47 +240,30 @@ export class EditForumForumsService {
       with: {
         name: true,
         description: true,
-        permissions: true,
-        topics: {
-          with: {
-            posts: true
-          }
-        }
+        permissions: true
       }
     });
+
+    const stats = await this.statsService.stats({ forumId: id });
 
     return {
       ...dataUpdate,
       _count: {
-        children: children.length,
-        topics: dataUpdate.topics.length,
-        posts: dataUpdate.topics.reduce(
-          (acc, item) => acc + item.posts.length,
-          0
-        )
+        ...stats
       },
-      children: children.map(item => ({
-        ...item,
-        children: [],
-        _count: {
-          children: 0,
-          posts: item.topics.reduce((acc, item) => acc + item.posts.length, 0),
-          topics: item.topics.length
-        }
-      })),
-      parent: dataUpdate.parent
-        ? {
-            ...dataUpdate.parent,
+      children: await Promise.all(
+        children.map(async item => {
+          const stats = await this.statsService.stats({ forumId: item.id });
+
+          return {
+            ...item,
+            children: [],
             _count: {
-              children: 0,
-              posts: dataUpdate.parent.topics.reduce(
-                (acc, item) => acc + item.posts.length,
-                0
-              ),
-              topics: dataUpdate.parent.topics.length
+              ...stats
             }
-          }
-        : null
+          };
+        })
+      )
     };
   }
 }

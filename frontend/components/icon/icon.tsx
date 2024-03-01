@@ -6,8 +6,9 @@ import { cn } from "@/functions/classnames";
 
 export type IconLucideNames = keyof typeof Lucide.icons;
 
-interface Props extends Lucide.LucideProps {
+interface Props extends Omit<Lucide.LucideIcon, "$$typeof"> {
   name: IconLucideNames | string;
+  className?: string;
 }
 
 export const Icon = memo(({ className, name, ...props }: Props) => {

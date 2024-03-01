@@ -3,9 +3,9 @@ import { UseGuards } from "@nestjs/common";
 
 import { ShowForumForumsAdminService } from "./show.service";
 import { ShowForumForumsAdminObj } from "./dto/show.obj";
-import { ShowForumForumsAdminArgs } from "./dto/show.args";
 
 import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
+import { ShowForumForumsArgs } from "@/apps/forum/forums/show/dto/show.args";
 
 @Resolver()
 export class ShowForumForumsAdminResolver {
@@ -14,7 +14,7 @@ export class ShowForumForumsAdminResolver {
   @Query(() => ShowForumForumsAdminObj)
   @UseGuards(AdminAuthGuards)
   async admin__forum_forums__show(
-    @Args() args: ShowForumForumsAdminArgs
+    @Args() args: ShowForumForumsArgs
   ): Promise<ShowForumForumsAdminObj> {
     return await this.service.show(args);
   }

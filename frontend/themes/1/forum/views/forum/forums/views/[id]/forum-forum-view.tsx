@@ -8,7 +8,7 @@ import { TopicsListForum } from "./topics-list/topics-list";
 import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
 import { HeaderContent } from "@/components/header-content/header-content";
 
-import { ItemForum } from "../../item/item-forum";
+import { ItemForum } from "../../item/item";
 
 export interface ForumForumViewProps {
   data: Forum_Forums__Show_ItemQuery;

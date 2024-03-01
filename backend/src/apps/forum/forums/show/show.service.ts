@@ -1,8 +1,12 @@
 import { Injectable } from "@nestjs/common";
-import { and, count, eq, ilike, inArray, isNull, or } from "drizzle-orm";
+import { SQL, and, count, eq, ilike, inArray, isNull, or } from "drizzle-orm";
 
 import { ShowForumForumsArgs } from "./dto/show.args";
-import { ShowForumForumsObj } from "./dto/show.obj";
+import {
+  ShowForumForumsObj,
+  ShowForumForumsWithChildren
+} from "./dto/show.obj";
+import { StatsShowForumForumsService } from "./stats.service";
 
 import { User } from "@/utils/decorators/user.decorator";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
@@ -17,24 +21,82 @@ import {
 } from "@/apps/admin/forum/database/schema/forums";
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
+interface ShowArgs extends ShowForumForumsArgs {
+  isAdmin?: boolean;
+}
+
+interface ShowForumForumsWithPermissions
+  extends Omit<ShowForumForumsWithChildren, "permissions"> {
+  can_all_create: boolean;
+  can_all_read: boolean;
+  can_all_reply: boolean;
+  can_all_view: boolean;
+  permissions: {
+    can_create: boolean;
+    can_read: boolean;
+    can_reply: boolean;
+    can_view: boolean;
+    forum_id: number;
+    group_id: number;
+    id: number;
+  }[];
+}
+
 @Injectable()
 export class ShowForumForumsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private statsService: StatsShowForumForumsService
+  ) {}
 
-  async show(
+  protected async whereAccessToView({
+    isAdmin,
+    user
+  }: {
+    user: User | null;
+    isAdmin?: boolean;
+  }): Promise<SQL<unknown>> {
+    if (isAdmin) return undefined;
+
+    const forumIds =
+      await this.databaseService.db.query.forum_forums_permissions.findMany({
+        columns: {
+          forum_id: true
+        },
+        where: (table, { eq }) => eq(table.group_id, user?.group.id ?? 1) // 1 - guest group id
+      });
+
+    const forumIdsSQL =
+      forumIds.length > 0
+        ? inArray(
+            forum_forums.id,
+            forumIds.map(({ forum_id }) => forum_id)
+          )
+        : undefined;
+
+    return or(eq(forum_forums.can_all_view, true), forumIdsSQL);
+  }
+
+  async getData(
     {
       cursor,
       first,
       ids,
+      isAdmin,
       last,
       parent_id,
       search,
       show_all_forums
-    }: ShowForumForumsArgs,
+    }: ShowArgs,
     user: User | null
-  ): Promise<ShowForumForumsObj> {
+  ): Promise<{
+    edges: ShowForumForumsWithPermissions[];
+    searchIds: number[];
+    where: SQL<unknown>;
+  }> {
     let searchIds: number[] = [];
 
+    // Get forum ids by search
     if (search) {
       searchIds = await this.databaseService.db
         .select({ forum_id: forum_forums_name.id })
@@ -56,26 +118,6 @@ export class ShowForumForumsService {
       }
     });
 
-    const forumIdsWithAccess =
-      await this.databaseService.db.query.forum_forums_permissions.findMany({
-        columns: {
-          forum_id: true
-        },
-        where: (table, { eq }) => eq(table.group_id, user?.group.id ?? 1) // 1 - guest group id
-      });
-
-    const wherePermissions = and(
-      or(
-        eq(forum_forums.can_all_view, true),
-        forumIdsWithAccess.length > 0
-          ? inArray(
-              forum_forums.id,
-              forumIdsWithAccess.map(({ forum_id }) => forum_id)
-            )
-          : undefined
-      )
-    );
-
     const whereParent = parent_id
       ? eq(forum_forums.parent_id, parent_id)
       : isNull(forum_forums.parent_id);
@@ -83,9 +125,10 @@ export class ShowForumForumsService {
     const idsCondition =
       ids?.length > 0 ? inArray(forum_forums.id, ids) : undefined;
 
+    const whereAccess = await this.whereAccessToView({ user, isAdmin });
     const where = and(
       pagination.where,
-      wherePermissions,
+      whereAccess,
       show_all_forums ? idsCondition : idsCondition || whereParent,
       searchIds.length > 0 ? inArray(forum_forums.id, searchIds) : undefined
     );
@@ -96,94 +139,79 @@ export class ShowForumForumsService {
       with: {
         name: true,
         description: true,
-        permissions: true,
-        parent: {
-          with: {
-            name: true,
-            description: true,
-            permissions: true
-          }
-        },
-        topics: {
-          with: {
-            posts: true
-          }
-        }
+        permissions: true
       }
     });
 
-    const edges = await Promise.all(
+    const edges: ShowForumForumsWithPermissions[] = await Promise.all(
       forums.map(async forum => {
+        // If show_all_forums is true, we don't need to fetch children
         const children = show_all_forums
           ? []
           : await this.databaseService.db.query.forum_forums.findMany({
-              where: and(
-                eq(forum_forums.parent_id, forum.id),
-                wherePermissions
-              ),
+              where: and(eq(forum_forums.parent_id, forum.id), whereAccess),
               orderBy: (table, { asc }) => [asc(table.position)],
               with: {
                 name: true,
                 description: true,
-                permissions: true,
-                topics: {
-                  with: {
-                    posts: true
-                  }
-                }
+                permissions: true
               }
             });
 
+        const stats = await this.statsService.stats({ forumId: forum.id });
+
         return {
           ...forum,
-          parent: forum.parent_id
-            ? { ...forum.parent, _count: { children: 0, topics: 0, posts: 0 } }
-            : null,
           _count: {
-            children: children.length,
-            topics: forum.topics.length,
-            posts: forum.topics.reduce(
-              (acc, item) => acc + item.posts.length,
-              0
-            )
+            ...stats
           },
           children: await Promise.all(
             children.map(async child => {
               const children =
                 await this.databaseService.db.query.forum_forums.findMany({
-                  where: and(
-                    eq(forum_forums.parent_id, child.id),
-                    wherePermissions
-                  ),
+                  where: and(eq(forum_forums.parent_id, child.id), whereAccess),
                   orderBy: (table, { asc }) => [asc(table.position)],
                   with: {
                     name: true,
                     description: true,
-                    permissions: true,
-                    topics: {
-                      with: {
-                        posts: true
-                      }
-                    }
+                    permissions: true
                   }
                 });
+
+              const stats = await this.statsService.stats({
+                forumId: child.id
+              });
 
               return {
                 ...child,
                 children,
                 _count: {
-                  children: children.length,
-                  topics: child.topics.length,
-                  posts: child.topics.reduce(
-                    (acc, item) => acc + item.posts.length,
-                    0
-                  )
+                  ...stats
                 }
               };
             })
           )
         };
       })
+    );
+
+    return { edges, where, searchIds };
+  }
+
+  async show(
+    { cursor, first, ids, last, search, ...rest }: ShowArgs,
+    user: User | null
+  ): Promise<ShowForumForumsObj> {
+    const { edges, searchIds, where } = await this.getData(
+      {
+        cursor,
+        first,
+        ids,
+        last,
+        search,
+        ...rest
+      },
+      user
     );
 
     const totalCount = await this.databaseService.db
@@ -204,13 +232,14 @@ export class ShowForumForumsService {
         search && searchIds.length === 0
           ? []
           : edges.map(edge => {
+              const permissions = edge.permissions.at(0);
+
               if (!user) {
                 return {
                   ...edge,
                   permissions: {
                     can_create: false,
-                    can_read:
-                      edge.permissions.at(0)?.can_read || edge.can_all_read,
+                    can_read: permissions?.can_read || edge.can_all_read,
                     can_reply: false
                   }
                 };
@@ -219,12 +248,9 @@ export class ShowForumForumsService {
               return {
                 ...edge,
                 permissions: {
-                  can_create:
-                    edge.permissions.at(0)?.can_create || edge.can_all_create,
-                  can_read:
-                    edge.permissions.at(0)?.can_read || edge.can_all_read,
-                  can_reply:
-                    edge.permissions.at(0)?.can_reply || edge.can_all_reply
+                  can_create: permissions?.can_create || edge.can_all_create,
+                  can_read: permissions?.can_read || edge.can_all_read,
+                  can_reply: permissions?.can_reply || edge.can_all_reply
                 }
               };
             }),

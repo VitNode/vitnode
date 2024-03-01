@@ -1,4 +1,9 @@
-query Forum_forums__show_item($cursor: Int, $first: Int, $last: Int, $forumId: Int!) {
+query Forum_forums__show_item(
+  $cursor: Int
+  $first: Int
+  $last: Int
+  $forumId: Int!
+) {
   forum_forums__show(ids: [$forumId]) {
     edges {
       id
@@ -27,13 +32,30 @@ query Forum_forums__show_item($cursor: Int, $first: Int, $last: Int, $forumId: I
           language_code
           value
         }
+        _count {
+          total_posts
+          total_topics
+          topics
+          posts
+        }
       }
       permissions {
         can_create
       }
+      _count {
+        total_posts
+        total_topics
+        topics
+        posts
+      }
     }
   }
-  forum_topics__show(cursor: $cursor, first: $first, last: $last, forum_id: $forumId) {
+  forum_topics__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+    forum_id: $forumId
+  ) {
     edges {
       created
       id

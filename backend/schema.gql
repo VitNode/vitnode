@@ -49,7 +49,6 @@ type CreateForumForumsObj {
   description: [TextLanguage!]!
   id: Int!
   name: [TextLanguage!]!
-  parent: ShowForumForums
   position: Int!
 }
 
@@ -184,6 +183,7 @@ type Query {
   admin__forum_forums__show(
     cursor: Int
     first: Int
+    ids: [Int!]
     last: Int
     parent_id: Int
     search: String
@@ -464,15 +464,6 @@ type ShowCoreThemesObj {
   pageInfo: PageInfo!
 }
 
-type ShowForumForums {
-  _count: ShowForumForumsCounts!
-  created: Int!
-  description: [TextLanguage!]!
-  id: Int!
-  name: [TextLanguage!]!
-  position: Int!
-}
-
 type ShowForumForumsAdmin {
   _count: ShowForumForumsCounts!
   children: [ChildrenShowForumForums!]!
@@ -480,7 +471,6 @@ type ShowForumForumsAdmin {
   description: [TextLanguage!]!
   id: Int!
   name: [TextLanguage!]!
-  parent: ShowForumForums
   permissions: PermissionsForumForumsAdmin!
   position: Int!
 }
@@ -491,24 +481,24 @@ type ShowForumForumsAdminObj {
 }
 
 type ShowForumForumsCounts {
-  children: Int!
   posts: Int!
   topics: Int!
+  total_posts: Int!
+  total_topics: Int!
 }
 
 type ShowForumForumsObj {
-  edges: [ShowForumForumsWithParent!]!
+  edges: [ShowForumForumsWithChildren!]!
   pageInfo: PageInfo!
 }
 
-type ShowForumForumsWithParent {
+type ShowForumForumsWithChildren {
   _count: ShowForumForumsCounts!
   children: [ChildrenShowForumForums!]!
   created: Int!
   description: [TextLanguage!]!
   id: Int!
   name: [TextLanguage!]!
-  parent: ShowForumForums
   permissions: PermissionsForumForums!
   position: Int!
 }

@@ -1,18 +1,16 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "@/i18n";
 import { cn } from "@/functions/classnames";
-import { ItemForum, type ItemForumProps } from "../item/item-forum";
-import type { TextLanguage } from "@/graphql/hooks";
+import { ItemForum, type ItemForumProps } from "../item/item";
+import type { ShowForumForumsWithChildren } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
 import { WrapperCategoryForum } from "./wrapper";
 import { ChevronCategoryForumButton } from "./chevron-button";
 import { ChildrenWrapperCategoryForum } from "./children-wrapper";
 
-interface Props {
-  description: TextLanguage[];
-  id: number;
-  name: TextLanguage[];
+interface Props
+  extends Pick<ShowForumForumsWithChildren, "description" | "id" | "name"> {
   children?: ItemForumProps[] | null;
 }
 

@@ -31,8 +31,8 @@ const config = () => {
         {
           hostname: "localhost",
           port: "8080",
-          protocol: "http"
-          // pathname: "/public/**"
+          protocol: "http",
+          pathname: "/public/**"
         },
         {
           hostname: backend.hostname,

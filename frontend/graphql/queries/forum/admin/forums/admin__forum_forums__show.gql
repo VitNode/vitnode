@@ -29,9 +29,10 @@ query Admin__forum_forums__show($first: Int, $cursor: Int, $parentId: Int) {
         }
         position
         _count {
-          children
           posts
           topics
+          total_posts
+          total_topics
         }
       }
       permissions {
@@ -48,9 +49,10 @@ query Admin__forum_forums__show($first: Int, $cursor: Int, $parentId: Int) {
         }
       }
       _count {
-        children
         posts
         topics
+        total_posts
+        total_topics
       }
     }
     pageInfo {

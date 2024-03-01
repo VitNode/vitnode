@@ -103,7 +103,12 @@ export const ItemTableForumsForumAdmin = ({
           <span>{convertText(name)}</span>
         </div>
 
-        <ActionsForumAdmin id={id} name={name} {...props} />
+        <ActionsForumAdmin
+          id={id}
+          name={name}
+          childrenCount={children.length}
+          {...props}
+        />
       </div>
     </div>
   );
