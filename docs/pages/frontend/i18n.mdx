@@ -52,22 +52,17 @@ const formSchema = z.object({
 });
 ```
 
-You can add more functions to validate translations.
+Or you can set **maxLength **:
 
-```ts {8, 11}
-import * as z from "zod";
-
-import { zodInput } from "@/functions/zod";
-
+```ts
 const formSchema = z.object({
-  name: z
-    .array(
-      z.object({
-        language_code: zodInput.string,
-        value: zodInput.string.min(3).max(50)
-      })
-    )
-    .min(1)
+  content: zodInput.languageInput
+    .min(1, {
+      message: t("errors.required")
+    })
+    .refine(value => value.every(item => item.value.length <= 100), {
+      message: t("errors.max_length", { length: 100 })
+    })
 });
 ```
 

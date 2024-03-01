@@ -59,7 +59,7 @@ export const forum_forums_name = pgTable(
       .references(() => core_languages.code, {
         onDelete: "cascade"
       }),
-    value: varchar("value").notNull()
+    value: varchar("value", { length: 50 }).notNull()
   },
   table => ({
     forum_id_idx: index("forum_forums_name_forum_id_idx").on(table.forum_id),

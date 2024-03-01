@@ -18,7 +18,7 @@ export const useCreatePost = ({ setOpen }: Args) => {
   const { id } = useParams();
 
   const formSchema = z.object({
-    content: zodInput.languageInputRequired
+    content: zodInput.languageInput.min(1)
   });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

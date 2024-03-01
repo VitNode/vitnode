@@ -57,7 +57,7 @@ You can set this field as **required**:
 
 ```ts
 const formSchema = z.object({
-  content: zodInput.languageInputRequired
+  content: zodInput.languageInput.min(1)
 });
 ```
 

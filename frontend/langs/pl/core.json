@@ -268,6 +268,7 @@
       "no_connection_api": "Brak połączenia z API",
       "access_denied": "Brak dostępu",
       "internal_server_error": "Wewnętrzny błąd serwera",
+      "required": "To pole jest wymagane.",
       "min_length": "Minimalna długość to {length} znaków.",
       "max_length": "Maksymalna długość to {length} znaków.",
       "403": "Brak dostępu",

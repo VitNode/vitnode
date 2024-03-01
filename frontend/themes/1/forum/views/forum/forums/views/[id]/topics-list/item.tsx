@@ -20,7 +20,10 @@ export const ItemTopicListForum = ({
   const href = `/topic/${convertNameToLink({ id, name: title })}`;
 
   return (
-    <WrapperItemTopicListForum href={href}>
+    <WrapperItemTopicListForum
+      href={href}
+      className="px-6 py-4 hover:bg-muted/50 cursor-pointer select-none md:select-auto"
+    >
       <div className="flex flex-col">
         <h3 className="font-semibold text-base">
           <Link href={href} className="text-foreground no-underline">

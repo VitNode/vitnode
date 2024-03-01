@@ -22,13 +22,16 @@ export const useCreateTopic = ({ forumId }: Props) => {
   const { convertNameToLink } = useTextLang();
 
   const formSchema = z.object({
-    title: zodInput.languageInputRequired.refine(
-      value => value.every(item => item.value.length <= 100),
-      {
+    title: zodInput.languageInput
+      .min(1, {
+        message: t("errors.required")
+      })
+      .refine(value => value.every(item => item.value.length <= 100), {
         message: t("errors.max_length", { length: 100 })
-      }
-    ),
-    content: zodInput.languageInputRequired
+      }),
+    content: zodInput.languageInput.min(1, {
+      message: t("errors.required")
+    })
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
