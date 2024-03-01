@@ -1,14 +1,14 @@
 import { CheckIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import type { ShowForumForums } from "@/graphql/hooks";
+import type { ShowForumForumsAdmin } from "@/graphql/hooks";
 import type { ContentForumsSelectProps } from "./content";
 import { CommandGroup, CommandItem } from "@/components/ui/command";
 import { cn } from "@/functions/classnames";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 
 interface Props extends ContentForumsSelectProps {
-  edges: Pick<ShowForumForums, "id" | "name">[];
+  edges: Pick<ShowForumForumsAdmin, "id" | "name">[];
 }
 
 export const ListContentForumsSelect = ({ edges, onSelect, values }: Props) => {
@@ -42,9 +42,7 @@ export const ListContentForumsSelect = ({ edges, onSelect, values }: Props) => {
           >
             <CheckIcon />
           </div>
-          <span>
-            {convertText(item.name)} - {item.id}
-          </span>
+          <span>{convertText(item.name)}</span>
         </CommandItem>
       ))}
     </CommandGroup>
