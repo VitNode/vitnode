@@ -29,7 +29,7 @@ export const ItemForum = ({
 
   return (
     <WrapperItemForum
-      className="px-6 py-4 border-t hover:bg-muted/50 flex gap-4 cursor-pointer flex-col md:flex-row pointer-events-none md:pointer-events-auto"
+      className="px-6 py-4 border-t hover:bg-muted/50 flex gap-4 cursor-pointer flex-col md:flex-row select-none md:select-auto"
       href={href}
     >
       <div className="flex gap-4 flex-1">
@@ -48,7 +48,7 @@ export const ItemForum = ({
           {description.length > 0 && (
             <ReadOnlyEditor
               id={`${id}_description`}
-              className="text-muted-foreground text-sm [&_p]:m-0"
+              className="text-muted-foreground text-sm [&_p]:m-0 pointer-events-none md:pointer-events-auto"
               value={description}
             />
           )}

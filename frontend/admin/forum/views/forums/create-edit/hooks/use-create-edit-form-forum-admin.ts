@@ -17,7 +17,7 @@ export const useCreateEditFormForumAdmin = ({
   const { setOpen } = useDialog();
 
   const formSchema = z.object({
-    name: zodInput.languageInputRequired,
+    name: zodInput.languageInput.min(1),
     description: zodInput.languageInput,
     permissions: z.object({
       can_all_view: z.boolean(),

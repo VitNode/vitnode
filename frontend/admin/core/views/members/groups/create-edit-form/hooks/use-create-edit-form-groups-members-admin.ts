@@ -27,7 +27,7 @@ export const useCreateEditFormGroupsMembersAdmin = ({
   const { push } = useRouter();
 
   const formSchema = z.object({
-    name: zodInput.languageInputRequired,
+    name: zodInput.languageInput.min(1),
     test: zodInput.string,
     color: zodInput.string
   });
