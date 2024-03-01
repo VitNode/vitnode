@@ -183,6 +183,7 @@ type Query {
   admin__forum_forums__show(
     cursor: Int
     first: Int
+    ids: [Int!]
     last: Int
     parent_id: Int
     search: String

@@ -2,7 +2,10 @@ import { Injectable } from "@nestjs/common";
 import { SQL, and, count, eq, ilike, inArray, isNull, or } from "drizzle-orm";
 
 import { ShowForumForumsArgs } from "./dto/show.args";
-import { ShowForumForumsObj } from "./dto/show.obj";
+import {
+  ShowForumForumsObj,
+  ShowForumForumsWithChildren
+} from "./dto/show.obj";
 import { StatsShowForumForumsService } from "./stats.service";
 
 import { User } from "@/utils/decorators/user.decorator";
@@ -18,6 +21,27 @@ import {
 } from "@/apps/admin/forum/database/schema/forums";
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
+interface ShowArgs extends ShowForumForumsArgs {
+  isAdmin?: boolean;
+}
+
+interface ShowForumForumsWithPermissions
+  extends Omit<ShowForumForumsWithChildren, "permissions"> {
+  can_all_create: boolean;
+  can_all_read: boolean;
+  can_all_reply: boolean;
+  can_all_view: boolean;
+  permissions: {
+    can_create: boolean;
+    can_read: boolean;
+    can_reply: boolean;
+    can_view: boolean;
+    forum_id: number;
+    group_id: number;
+    id: number;
+  }[];
+}
+
 @Injectable()
 export class ShowForumForumsService {
   constructor(
@@ -26,10 +50,14 @@ export class ShowForumForumsService {
   ) {}
 
   protected async whereAccessToView({
+    isAdmin,
     user
   }: {
     user: User | null;
+    isAdmin?: boolean;
   }): Promise<SQL<unknown>> {
+    if (isAdmin) return undefined;
+
     const forumIds =
       await this.databaseService.db.query.forum_forums_permissions.findMany({
         columns: {
@@ -49,18 +77,23 @@ export class ShowForumForumsService {
     return or(eq(forum_forums.can_all_view, true), forumIdsSQL);
   }
 
-  async show(
+  async getData(
     {
       cursor,
       first,
       ids,
+      isAdmin,
       last,
       parent_id,
       search,
       show_all_forums
-    }: ShowForumForumsArgs,
+    }: ShowArgs,
     user: User | null
-  ): Promise<ShowForumForumsObj> {
+  ): Promise<{
+    edges: ShowForumForumsWithPermissions[];
+    searchIds: number[];
+    where: SQL<unknown>;
+  }> {
     let searchIds: number[] = [];
 
     // Get forum ids by search
@@ -92,7 +125,7 @@ export class ShowForumForumsService {
     const idsCondition =
       ids?.length > 0 ? inArray(forum_forums.id, ids) : undefined;
 
-    const whereAccess = await this.whereAccessToView({ user });
+    const whereAccess = await this.whereAccessToView({ user, isAdmin });
     const where = and(
       pagination.where,
       whereAccess,
@@ -110,7 +143,7 @@ export class ShowForumForumsService {
       }
     });
 
-    const edges = await Promise.all(
+    const edges: ShowForumForumsWithPermissions[] = await Promise.all(
       forums.map(async forum => {
         // If show_all_forums is true, we don't need to fetch children
         const children = show_all_forums
@@ -160,6 +193,25 @@ export class ShowForumForumsService {
           )
         };
       })
+    );
+
+    return { edges, where, searchIds };
+  }
+
+  async show(
+    { cursor, first, ids, last, search, ...rest }: ShowArgs,
+    user: User | null
+  ): Promise<ShowForumForumsObj> {
+    const { edges, searchIds, where } = await this.getData(
+      {
+        cursor,
+        first,
+        ids,
+        last,
+        search,
+        ...rest
+      },
+      user
     );
 
     const totalCount = await this.databaseService.db

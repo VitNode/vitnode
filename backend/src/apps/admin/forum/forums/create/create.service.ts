@@ -94,18 +94,7 @@ export class CreateForumForumsService {
       with: {
         name: true,
         description: true,
-        permissions: true,
-        parent: {
-          with: {
-            name: true,
-            description: true,
-            topics: {
-              with: {
-                posts: true
-              }
-            }
-          }
-        }
+        permissions: true
       }
     });
 
@@ -116,24 +105,12 @@ export class CreateForumForumsService {
     return {
       ...forum,
       _count: {
-        children: 0,
         topics: 0,
-        posts: 0
+        posts: 0,
+        total_posts: 0,
+        total_topics: 0
       },
-      children: [],
-      parent: forum.parent
-        ? {
-            ...forum.parent,
-            _count: {
-              children: 0,
-              topics: forum.parent.topics.length,
-              posts: forum.parent.topics.reduce(
-                (acc, item) => acc + item.posts.length,
-                0
-              )
-            }
-          }
-        : null
+      children: []
     };
   }
 }

@@ -9,6 +9,7 @@ import { StatsShowForumForumsService } from "./show/stats.service";
     ShowForumForumsResolver,
     ShowForumForumsService,
     StatsShowForumForumsService
-  ]
+  ],
+  exports: [ShowForumForumsService, StatsShowForumForumsService]
 })
 export class ForumsForumModule {}

@@ -76,7 +76,11 @@ export class StatsShowForumForumsService {
             .select({ count: count() })
             .from(forum_posts)
             .where(inArray(forum_posts.topic_id, topicIds))
-        : [];
+        : [
+            {
+              count: 0
+            }
+          ];
 
     return posts[0].count;
   }
@@ -103,12 +107,19 @@ export class StatsShowForumForumsService {
   }: {
     topicIds: number[];
   }): Promise<number> {
-    const posts = await this.databaseService.db
-      .select({
-        count: count()
-      })
-      .from(forum_posts)
-      .where(inArray(forum_posts.topic_id, topicIds));
+    const posts =
+      topicIds.length > 0
+        ? await this.databaseService.db
+            .select({
+              count: count()
+            })
+            .from(forum_posts)
+            .where(inArray(forum_posts.topic_id, topicIds))
+        : [
+            {
+              count: 0
+            }
+          ];
 
     return posts[0].count;
   }
