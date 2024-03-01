@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { and, count, eq, ilike, inArray, isNull, or } from "drizzle-orm";
+import { SQL, and, count, eq, ilike, inArray, isNull, or } from "drizzle-orm";
 
 import { ShowForumForumsArgs } from "./dto/show.args";
 import { ShowForumForumsObj } from "./dto/show.obj";
@@ -25,6 +25,30 @@ export class ShowForumForumsService {
     private statsService: StatsShowForumForumsService
   ) {}
 
+  protected async whereAccessToView({
+    user
+  }: {
+    user: User | null;
+  }): Promise<SQL<unknown>> {
+    const forumIds =
+      await this.databaseService.db.query.forum_forums_permissions.findMany({
+        columns: {
+          forum_id: true
+        },
+        where: (table, { eq }) => eq(table.group_id, user?.group.id ?? 1) // 1 - guest group id
+      });
+
+    const forumIdsSQL =
+      forumIds.length > 0
+        ? inArray(
+            forum_forums.id,
+            forumIds.map(({ forum_id }) => forum_id)
+          )
+        : undefined;
+
+    return or(eq(forum_forums.can_all_view, true), forumIdsSQL);
+  }
+
   async show(
     {
       cursor,
@@ -39,6 +63,7 @@ export class ShowForumForumsService {
   ): Promise<ShowForumForumsObj> {
     let searchIds: number[] = [];
 
+    // Get forum ids by search
     if (search) {
       searchIds = await this.databaseService.db
         .select({ forum_id: forum_forums_name.id })
@@ -60,26 +85,6 @@ export class ShowForumForumsService {
       }
     });
 
-    const forumIdsWithAccess =
-      await this.databaseService.db.query.forum_forums_permissions.findMany({
-        columns: {
-          forum_id: true
-        },
-        where: (table, { eq }) => eq(table.group_id, user?.group.id ?? 1) // 1 - guest group id
-      });
-
-    const wherePermissions = and(
-      or(
-        eq(forum_forums.can_all_view, true),
-        forumIdsWithAccess.length > 0
-          ? inArray(
-              forum_forums.id,
-              forumIdsWithAccess.map(({ forum_id }) => forum_id)
-            )
-          : undefined
-      )
-    );
-
     const whereParent = parent_id
       ? eq(forum_forums.parent_id, parent_id)
       : isNull(forum_forums.parent_id);
@@ -87,9 +92,10 @@ export class ShowForumForumsService {
     const idsCondition =
       ids?.length > 0 ? inArray(forum_forums.id, ids) : undefined;
 
+    const whereAccess = await this.whereAccessToView({ user });
     const where = and(
       pagination.where,
-      wherePermissions,
+      whereAccess,
       show_all_forums ? idsCondition : idsCondition || whereParent,
       searchIds.length > 0 ? inArray(forum_forums.id, searchIds) : undefined
     );
@@ -101,13 +107,6 @@ export class ShowForumForumsService {
         name: true,
         description: true,
         permissions: true,
-        parent: {
-          with: {
-            name: true,
-            description: true,
-            permissions: true
-          }
-        },
         topics: {
           with: {
             posts: true
@@ -118,13 +117,11 @@ export class ShowForumForumsService {
 
     const edges = await Promise.all(
       forums.map(async forum => {
+        // If show_all_forums is true, we don't need to fetch children
         const children = show_all_forums
           ? []
           : await this.databaseService.db.query.forum_forums.findMany({
-              where: and(
-                eq(forum_forums.parent_id, forum.id),
-                wherePermissions
-              ),
+              where: and(eq(forum_forums.parent_id, forum.id), whereAccess),
               orderBy: (table, { asc }) => [asc(table.position)],
               with: {
                 name: true,
@@ -142,11 +139,7 @@ export class ShowForumForumsService {
 
         return {
           ...forum,
-          parent: forum.parent_id
-            ? { ...forum.parent, _count: { children: 0, topics: 0, posts: 0 } }
-            : null,
           _count: {
-            children: children.length,
             topics: forum.topics.length,
             posts: forum.topics.reduce(
               (acc, item) => acc + item.posts.length,
@@ -157,10 +150,7 @@ export class ShowForumForumsService {
             children.map(async child => {
               const children =
                 await this.databaseService.db.query.forum_forums.findMany({
-                  where: and(
-                    eq(forum_forums.parent_id, child.id),
-                    wherePermissions
-                  ),
+                  where: and(eq(forum_forums.parent_id, child.id), whereAccess),
                   orderBy: (table, { asc }) => [asc(table.position)],
                   with: {
                     name: true,
@@ -178,7 +168,6 @@ export class ShowForumForumsService {
                 ...child,
                 children,
                 _count: {
-                  children: children.length,
                   topics: child.topics.length,
                   posts: child.topics.reduce(
                     (acc, item) => acc + item.posts.length,

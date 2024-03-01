@@ -6,9 +6,6 @@ import { TextLanguage } from "@/types/database/text-language.type";
 @ObjectType()
 class ShowForumForumsCounts {
   @Field(() => Int)
-  children: number;
-
-  @Field(() => Int)
   topics: number;
 
   @Field(() => Int)
@@ -67,8 +64,8 @@ export class ChildrenShowForumForums extends ShowForumForums {
 
 @ObjectType()
 export class ShowForumForumsWithParent extends FirstShowForumForums {
-  @Field(() => ShowForumForums, { nullable: true })
-  parent: ShowForumForums | null;
+  // @Field(() => ShowForumForums, { nullable: true })
+  // parent: ShowForumForums | null;
 
   @Field(() => [ChildrenShowForumForums])
   children: ChildrenShowForumForums[];

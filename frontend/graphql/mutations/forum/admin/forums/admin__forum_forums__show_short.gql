@@ -13,13 +13,6 @@ query Admin__forum_forums__show_short(
         language_code
         value
       }
-      parent {
-        id
-        name {
-          language_code
-          value
-        }
-      }
       id
     }
   }

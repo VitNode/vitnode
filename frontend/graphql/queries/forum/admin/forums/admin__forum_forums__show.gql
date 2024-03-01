@@ -29,7 +29,6 @@ query Admin__forum_forums__show($first: Int, $cursor: Int, $parentId: Int) {
         }
         position
         _count {
-          children
           posts
           topics
         }
@@ -48,7 +47,6 @@ query Admin__forum_forums__show($first: Int, $cursor: Int, $parentId: Int) {
         }
       }
       _count {
-        children
         posts
         topics
       }

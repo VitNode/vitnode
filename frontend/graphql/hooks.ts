@@ -69,7 +69,6 @@ export type CreateForumForumsObj = {
   description: Array<TextLanguage>;
   id: Scalars['Int']['output'];
   name: Array<TextLanguage>;
-  parent?: Maybe<ShowForumForums>;
   position: Scalars['Int']['output'];
 };
 
@@ -859,16 +858,6 @@ export type ShowCoreThemesObj = {
   pageInfo: PageInfo;
 };
 
-export type ShowForumForums = {
-  __typename?: 'ShowForumForums';
-  _count: ShowForumForumsCounts;
-  created: Scalars['Int']['output'];
-  description: Array<TextLanguage>;
-  id: Scalars['Int']['output'];
-  name: Array<TextLanguage>;
-  position: Scalars['Int']['output'];
-};
-
 export type ShowForumForumsAdmin = {
   __typename?: 'ShowForumForumsAdmin';
   _count: ShowForumForumsCounts;
@@ -877,7 +866,6 @@ export type ShowForumForumsAdmin = {
   description: Array<TextLanguage>;
   id: Scalars['Int']['output'];
   name: Array<TextLanguage>;
-  parent?: Maybe<ShowForumForums>;
   permissions: PermissionsForumForumsAdmin;
   position: Scalars['Int']['output'];
 };
@@ -890,7 +878,6 @@ export type ShowForumForumsAdminObj = {
 
 export type ShowForumForumsCounts = {
   __typename?: 'ShowForumForumsCounts';
-  children: Scalars['Int']['output'];
   posts: Scalars['Int']['output'];
   topics: Scalars['Int']['output'];
 };
@@ -909,7 +896,6 @@ export type ShowForumForumsWithParent = {
   description: Array<TextLanguage>;
   id: Scalars['Int']['output'];
   name: Array<TextLanguage>;
-  parent?: Maybe<ShowForumForums>;
   permissions: PermissionsForumForums;
   position: Scalars['Int']['output'];
 };
@@ -1333,7 +1319,7 @@ export type Admin__Forum_Forums__Show_ShortQueryVariables = Exact<{
 }>;
 
 
-export type Admin__Forum_Forums__Show_ShortQuery = { __typename?: 'Query', admin__forum_forums__show: { __typename?: 'ShowForumForumsAdminObj', edges: Array<{ __typename?: 'ShowForumForumsAdmin', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, parent?: { __typename?: 'ShowForumForums', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } | null }> } };
+export type Admin__Forum_Forums__Show_ShortQuery = { __typename?: 'Query', admin__forum_forums__show: { __typename?: 'ShowForumForumsAdminObj', edges: Array<{ __typename?: 'ShowForumForumsAdmin', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
 export type Forum_Posts__CreateMutationVariables = Exact<{
   content: Array<TextLanguageInput> | TextLanguageInput;
@@ -1492,7 +1478,7 @@ export type Admin__Forum_Forums__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Admin__Forum_Forums__ShowQuery = { __typename?: 'Query', admin__forum_forums__show: { __typename?: 'ShowForumForumsAdminObj', edges: Array<{ __typename?: 'ShowForumForumsAdmin', id: number, position: number, created: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, children: Array<{ __typename?: 'ChildrenShowForumForums', created: number, id: number, position: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, _count: { __typename?: 'ShowForumForumsCounts', children: number, posts: number, topics: number } }>, permissions: { __typename?: 'PermissionsForumForumsAdmin', can_all_create: boolean, can_all_read: boolean, can_all_reply: boolean, can_all_view: boolean, groups: Array<{ __typename?: 'GroupsPermissionsForumForums', can_create: boolean, can_read: boolean, can_reply: boolean, can_view: boolean, id: number }> }, _count: { __typename?: 'ShowForumForumsCounts', children: number, posts: number, topics: number } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Admin__Forum_Forums__ShowQuery = { __typename?: 'Query', admin__forum_forums__show: { __typename?: 'ShowForumForumsAdminObj', edges: Array<{ __typename?: 'ShowForumForumsAdmin', id: number, position: number, created: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, children: Array<{ __typename?: 'ChildrenShowForumForums', created: number, id: number, position: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, _count: { __typename?: 'ShowForumForumsCounts', posts: number, topics: number } }>, permissions: { __typename?: 'PermissionsForumForumsAdmin', can_all_create: boolean, can_all_read: boolean, can_all_reply: boolean, can_all_view: boolean, groups: Array<{ __typename?: 'GroupsPermissionsForumForums', can_create: boolean, can_read: boolean, can_reply: boolean, can_view: boolean, id: number }> }, _count: { __typename?: 'ShowForumForumsCounts', posts: number, topics: number } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Forum_Forums__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1904,13 +1890,6 @@ export const Admin__Forum_Forums__Show_Short = gql`
       name {
         language_code
         value
-      }
-      parent {
-        id
-        name {
-          language_code
-          value
-        }
       }
       id
     }
@@ -2496,7 +2475,6 @@ export const Admin__Forum_Forums__Show = gql`
         }
         position
         _count {
-          children
           posts
           topics
         }
@@ -2515,7 +2493,6 @@ export const Admin__Forum_Forums__Show = gql`
         }
       }
       _count {
-        children
         posts
         topics
       }
