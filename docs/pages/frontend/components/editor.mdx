@@ -61,18 +61,6 @@ const formSchema = z.object({
 });
 ```
 
-Or you can set **maxLength **:
-
-```ts
-const formSchema = z.object({
-  content: zodInput.languageInput
-    .min(1)
-    .refine(value => value.every(item => item.value.length <= 100), {
-      message: t("errors.max_length", { length: 100 })
-    })
-});
-```
-
 ### Editor without i18n
 
 If you don't want to use i18n in Editor you need to pass `disableLanguage` props.

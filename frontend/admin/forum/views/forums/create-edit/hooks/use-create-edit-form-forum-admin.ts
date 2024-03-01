@@ -17,7 +17,13 @@ export const useCreateEditFormForumAdmin = ({
   const { setOpen } = useDialog();
 
   const formSchema = z.object({
-    name: zodInput.languageInput.min(1),
+    name: zodInput.languageInput
+      .min(1, {
+        message: t("errors.required")
+      })
+      .refine(value => value.every(item => item.value.length <= 50), {
+        message: t("errors.max_length", { length: 50 })
+      }),
     description: zodInput.languageInput,
     permissions: z.object({
       can_all_view: z.boolean(),
@@ -42,13 +48,14 @@ export const useCreateEditFormForumAdmin = ({
       name: data?.name || [],
       description: data?.description || [],
       permissions: {
-        can_all_view: data?.permissions.can_all_view || false,
-        can_all_read: data?.permissions.can_all_read || false,
-        can_all_create: data?.permissions.can_all_create || false,
-        can_all_reply: data?.permissions.can_all_reply || false,
+        can_all_view: data?.permissions.can_all_view || true,
+        can_all_read: data?.permissions.can_all_read || true,
+        can_all_create: data?.permissions.can_all_create || true,
+        can_all_reply: data?.permissions.can_all_reply || true,
         groups: data?.permissions.groups || []
       }
-    }
+    },
+    mode: "onTouched"
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
