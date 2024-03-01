@@ -38,6 +38,44 @@ export const IsTextLanguageInput = () => {
   };
 };
 
+export const MaxLengthLanguageInput = ({ length }: { length: number }) => {
+  return (object: Record<string, any>, propertyName: string) => {
+    registerDecorator({
+      target: object.constructor,
+      propertyName,
+      options: {
+        message: `Each language must have a value with a maximum length of ${length}`
+      },
+      validator: {
+        validate(item?: TextLanguageInput | TextLanguageInput[]) {
+          return (Array.isArray(item) ? item : [item]).every(
+            item => item.value?.trim().length <= length
+          );
+        }
+      }
+    });
+  };
+};
+
+export const MinLengthLanguageInput = ({ length }: { length: number }) => {
+  return (object: Record<string, any>, propertyName: string) => {
+    registerDecorator({
+      target: object.constructor,
+      propertyName,
+      options: {
+        message: `Each language must have a value with a minimum length of ${length}`
+      },
+      validator: {
+        validate(item?: TextLanguageInput | TextLanguageInput[]) {
+          return (Array.isArray(item) ? item : [item]).every(
+            item => item.value?.trim().length >= length
+          );
+        }
+      }
+    });
+  };
+};
+
 export const TransformTextLanguageInput = ({
   value
 }: {

@@ -22,7 +22,12 @@ export const useCreateTopic = ({ forumId }: Props) => {
   const { convertNameToLink } = useTextLang();
 
   const formSchema = z.object({
-    title: zodInput.languageInputRequired,
+    title: zodInput.languageInputRequired.refine(
+      value => value.every(item => item.value.length <= 100),
+      {
+        message: t("errors.max_length", { length: 100 })
+      }
+    ),
     content: zodInput.languageInputRequired
   });
 
@@ -31,7 +36,8 @@ export const useCreateTopic = ({ forumId }: Props) => {
     defaultValues: {
       title: [],
       content: []
-    }
+    },
+    mode: "onTouched"
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {

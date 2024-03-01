@@ -4,6 +4,7 @@ import { Transform } from "class-transformer";
 
 import {
   IsTextLanguageInput,
+  MaxLengthLanguageInput,
   TextLanguageInput,
   TransformTextLanguageInput
 } from "@/types/database/text-language.type";
@@ -15,6 +16,7 @@ export class CreateForumTopicsArgs {
   @ArrayMinSize(1)
   @IsTextLanguageInput()
   @Transform(TransformTextLanguageInput)
+  @MaxLengthLanguageInput({ length: 100 })
   @Field(() => [TextLanguageInput])
   title: TextLanguageInput[];
 
