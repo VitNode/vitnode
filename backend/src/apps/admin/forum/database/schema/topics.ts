@@ -61,7 +61,7 @@ export const forum_topics_titles = pgTable(
       .references(() => core_languages.code, {
         onDelete: "cascade"
       }),
-    value: varchar("value").notNull()
+    value: varchar("value", { length: 100 }).notNull()
   },
   table => ({
     topic_id_idx: index("forum_topics_titles_topic_id_idx").on(table.topic_id),
