@@ -3,6 +3,7 @@ import { and, count, eq, ilike, inArray, isNull, or } from "drizzle-orm";
 
 import { ShowForumForumsArgs } from "./dto/show.args";
 import { ShowForumForumsObj } from "./dto/show.obj";
+import { StatsShowForumForumsService } from "./stats.service";
 
 import { User } from "@/utils/decorators/user.decorator";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
@@ -19,7 +20,10 @@ import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 @Injectable()
 export class ShowForumForumsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private statsService: StatsShowForumForumsService
+  ) {}
 
   async show(
     {
@@ -133,6 +137,8 @@ export class ShowForumForumsService {
                 }
               }
             });
+
+        // console.log(await this.statsService.stats({ id: forum.id }));
 
         return {
           ...forum,
