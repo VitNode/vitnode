@@ -17,7 +17,7 @@ export const WrapperItemTopicListForum = ({ children, href }: Props) => {
   return (
     <div
       onClick={() => push(href)}
-      className="px-6 py-4 hover:bg-muted/50 cursor-pointer"
+      className="px-6 py-4 hover:bg-muted/50 cursor-pointer pointer-events-none md:pointer-events-auto"
     >
       {children}
     </div>

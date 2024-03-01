@@ -29,7 +29,7 @@ export const ItemForum = ({
 
   return (
     <WrapperItemForum
-      className="px-6 py-4 border-t hover:bg-muted/50 flex gap-4 cursor-pointer flex-col md:flex-row"
+      className="px-6 py-4 border-t hover:bg-muted/50 flex gap-4 cursor-pointer flex-col md:flex-row pointer-events-none md:pointer-events-auto"
       href={href}
     >
       <div className="flex gap-4 flex-1">
@@ -63,7 +63,7 @@ export const ItemForum = ({
         </div>
       </div>
 
-      {_count.total_topics > 0 && _count.total_posts > 0 && (
+      {_count.total_topics > 0 && (
         <div className="flex-shrink-0 flex md:gap-4 gap-2 md:flex-row flex-col md:items-center">
           <StatsItemForum {..._count} />
           <LastPostItemForum />
