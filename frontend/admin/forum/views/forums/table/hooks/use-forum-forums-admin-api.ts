@@ -7,7 +7,7 @@ import { buildTree, flattenTree, type FlatTree } from "../use-functions";
 import type { ShowForumForumsAdmin } from "@/graphql/hooks";
 
 export interface ShowForumForumsAdminWithChildren
-  extends Omit<ShowForumForumsAdmin, "children" | "__typename"> {
+  extends Omit<ShowForumForumsAdmin, "children" | "__typename" | "last_posts"> {
   children: ShowForumForumsAdminWithChildren[];
 }
 

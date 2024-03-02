@@ -1,5 +1,7 @@
 import { Field, Int, ObjectType, OmitType } from "@nestjs/graphql";
 
+import { LastPostsShowForumForumsObj } from "../last_posts/dto/last_posts.obj";
+
 import { PageInfo } from "@/types/database/pagination.type";
 import { TextLanguage } from "@/types/database/text-language.type";
 
@@ -49,6 +51,9 @@ export class ShowForumForums {
 
   @Field(() => ShowForumForumsCounts)
   _count: ShowForumForumsCounts;
+
+  @Field(() => LastPostsShowForumForumsObj)
+  last_posts: LastPostsShowForumForumsObj;
 }
 
 @ObjectType()
@@ -59,7 +64,8 @@ export class FirstShowForumForums extends ShowForumForums {
 
 @ObjectType()
 class LastChildShowForumForums extends OmitType(ShowForumForums, [
-  "_count"
+  "_count",
+  "last_posts"
 ] as const) {}
 
 @ObjectType()

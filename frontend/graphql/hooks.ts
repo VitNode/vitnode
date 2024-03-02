@@ -57,6 +57,7 @@ export type ChildrenShowForumForums = {
   created: Scalars['Int']['output'];
   description: Array<TextLanguage>;
   id: Scalars['Int']['output'];
+  last_posts: LastPostsShowForumForumsObj;
   name: Array<TextLanguage>;
   position: Scalars['Int']['output'];
 };
@@ -68,6 +69,7 @@ export type CreateForumForumsObj = {
   created: Scalars['Int']['output'];
   description: Array<TextLanguage>;
   id: Scalars['Int']['output'];
+  last_posts: LastPostsShowForumForumsObj;
   name: Array<TextLanguage>;
   position: Scalars['Int']['output'];
 };
@@ -115,6 +117,39 @@ export type LastChildShowForumForums = {
   position: Scalars['Int']['output'];
 };
 
+export type LastPostsShowForumForums = {
+  __typename?: 'LastPostsShowForumForums';
+  content: Array<TextLanguage>;
+  created: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  topic: TopicLastPostsShowForumForums;
+  user: User;
+};
+
+export type LastPostsShowForumForumsArgs = {
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<Array<LastPostsShowForumForumsSortByArgs>>;
+};
+
+export type LastPostsShowForumForumsObj = {
+  __typename?: 'LastPostsShowForumForumsObj';
+  edges: Array<LastPostsShowForumForums>;
+  pageInfo: PageInfo;
+};
+
+export type LastPostsShowForumForumsSortByArgs = {
+  column: LastPostsShowForumForumsSortingColumnEnum | `${LastPostsShowForumForumsSortingColumnEnum}`;
+  direction: SortDirectionEnum | `${SortDirectionEnum}`;
+};
+
+export const LastPostsShowForumForumsSortingColumnEnum = {
+  created: 'created',
+  updated: 'updated'
+} as const;
+
+export type LastPostsShowForumForumsSortingColumnEnum = typeof LastPostsShowForumForumsSortingColumnEnum[keyof typeof LastPostsShowForumForumsSortingColumnEnum];
 export const LayoutAdminInstallEnum = {
   account: 'ACCOUNT',
   database: 'DATABASE',
@@ -514,6 +549,7 @@ export type QueryAdmin__Forum_Forums__ShowArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   ids?: InputMaybe<Array<Scalars['Int']['input']>>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  last_posts_args?: InputMaybe<LastPostsShowForumForumsArgs>;
   parent_id?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   show_all_forums?: InputMaybe<Scalars['Boolean']['input']>;
@@ -556,6 +592,7 @@ export type QueryForum_Forums__ShowArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   ids?: InputMaybe<Array<Scalars['Int']['input']>>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  last_posts_args?: InputMaybe<LastPostsShowForumForumsArgs>;
   parent_id?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   show_all_forums?: InputMaybe<Scalars['Boolean']['input']>;
@@ -866,6 +903,7 @@ export type ShowForumForumsAdmin = {
   created: Scalars['Int']['output'];
   description: Array<TextLanguage>;
   id: Scalars['Int']['output'];
+  last_posts: LastPostsShowForumForumsObj;
   name: Array<TextLanguage>;
   permissions: PermissionsForumForumsAdmin;
   position: Scalars['Int']['output'];
@@ -898,6 +936,7 @@ export type ShowForumForumsWithChildren = {
   created: Scalars['Int']['output'];
   description: Array<TextLanguage>;
   id: Scalars['Int']['output'];
+  last_posts: LastPostsShowForumForumsObj;
   name: Array<TextLanguage>;
   permissions: PermissionsForumForums;
   position: Scalars['Int']['output'];
@@ -993,6 +1032,12 @@ export const TopicActions = {
 } as const;
 
 export type TopicActions = typeof TopicActions[keyof typeof TopicActions];
+export type TopicLastPostsShowForumForums = {
+  __typename?: 'TopicLastPostsShowForumForums';
+  id: Scalars['Int']['output'];
+  title: Array<TextLanguage>;
+};
+
 export type UploadAvatarCoreMembersObj = {
   __typename?: 'UploadAvatarCoreMembersObj';
   dir_folder: Scalars['String']['output'];
