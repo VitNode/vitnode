@@ -26,7 +26,10 @@ export const ItemTopicListForum = ({
     >
       <div className="flex flex-col">
         <h3 className="font-semibold text-base">
-          <Link href={href} className="text-foreground no-underline">
+          <Link
+            href={href}
+            className="text-foreground no-underline break-words"
+          >
             {convertText(title)}
           </Link>
         </h3>

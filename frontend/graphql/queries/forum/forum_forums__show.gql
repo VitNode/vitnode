@@ -1,5 +1,5 @@
-query Forum_forums__show {
-  forum_forums__show {
+query Forum_forums__show($lastPostsArgs: LastPostsShowForumForumsArgs) {
+  forum_forums__show(last_posts_args: $lastPostsArgs) {
     edges {
       id
       description {
@@ -33,12 +33,37 @@ query Forum_forums__show {
           topics
           posts
         }
-      }
-      _count {
-        total_posts
-        total_topics
-        topics
-        posts
+        last_posts {
+          edges {
+            id
+            user {
+              avatar {
+                dir_folder
+                id
+                name
+              }
+              avatar_color
+              group {
+                id
+                name {
+                  language_code
+                  value
+                }
+              }
+              id
+              name
+              name_seo
+            }
+            topic {
+              id
+              title {
+                language_code
+                value
+              }
+            }
+            created
+          }
+        }
       }
     }
   }

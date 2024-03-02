@@ -124,15 +124,18 @@ export class StatsShowForumForumsService {
     return posts[0].count;
   }
 
-  async stats({ forumId }: { forumId: number }): Promise<{
+  async topicsPosts({ forumId }: { forumId: number }): Promise<{
     children: {
       id: number;
       name: TextLanguage[];
     }[];
-    posts: number;
-    topics: number;
-    total_posts: number;
-    total_topics: number;
+    stats: {
+      posts: number;
+      topics: number;
+      total_posts: number;
+      total_topics: number;
+    };
+    topic_ids: number[];
   }> {
     const children = await this.getAllChildren({ forumId });
     const totalTopics = await this.getTotalTopics({
@@ -146,11 +149,14 @@ export class StatsShowForumForumsService {
     const posts = await this.getCountPosts({ topicIds: topics.ids });
 
     return {
-      total_posts: totalPosts - totalTopics.totalCount,
-      total_topics: totalTopics.totalCount,
       children,
-      topics: topics.count,
-      posts: posts - topics.count
+      stats: {
+        total_posts: totalPosts - totalTopics.totalCount,
+        total_topics: totalTopics.totalCount,
+        topics: topics.count,
+        posts: posts - topics.count
+      },
+      topic_ids: totalTopics.ids
     };
   }
 }

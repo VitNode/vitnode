@@ -3,8 +3,9 @@ query Forum_forums__show_item(
   $first: Int
   $last: Int
   $forumId: Int!
+  $lastPostsArgs: LastPostsShowForumForumsArgs
 ) {
-  forum_forums__show(ids: [$forumId]) {
+  forum_forums__show(ids: [$forumId], last_posts_args: $lastPostsArgs) {
     edges {
       id
       description {
@@ -38,15 +39,40 @@ query Forum_forums__show_item(
           topics
           posts
         }
+        last_posts {
+          edges {
+            created
+            id
+            user {
+              avatar {
+                dir_folder
+                id
+                name
+              }
+              avatar_color
+              group {
+                id
+                name {
+                  language_code
+                  value
+                }
+              }
+              id
+              name
+              name_seo
+            }
+            topic {
+              id
+              title {
+                language_code
+                value
+              }
+            }
+          }
+        }
       }
       permissions {
         can_create
-      }
-      _count {
-        total_posts
-        total_topics
-        topics
-        posts
       }
     }
   }

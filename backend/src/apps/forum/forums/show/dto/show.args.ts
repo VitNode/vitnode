@@ -1,5 +1,7 @@
 import { ArgsType, Field, Int } from "@nestjs/graphql";
 
+import { LastPostsShowForumForumsArgs } from "../last_posts/dto/last_posts.args";
+
 @ArgsType()
 export class ShowForumForumsArgs {
   @Field(() => Int, { nullable: true })
@@ -25,4 +27,7 @@ export class ShowForumForumsArgs {
 
   @Field(() => String, { nullable: true })
   search: string | null;
+
+  @Field(() => LastPostsShowForumForumsArgs, { nullable: true })
+  last_posts_args: LastPostsShowForumForumsArgs | null;
 }

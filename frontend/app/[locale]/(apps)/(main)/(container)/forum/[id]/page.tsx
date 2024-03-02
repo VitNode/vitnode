@@ -20,7 +20,10 @@ const getData = async ({ id }: { id: string }) => {
     query: Forum_Forums__Show_Item,
     variables: {
       forumId: getIdFormString(id),
-      first: 25
+      first: 25,
+      lastPostsArgs: {
+        first: 1
+      }
     },
     cache: "force-cache",
     next: {

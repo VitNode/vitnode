@@ -38,6 +38,7 @@ type ChildrenShowForumForums {
   created: Int!
   description: [TextLanguage!]!
   id: Int!
+  last_posts: LastPostsShowForumForumsObj!
   name: [TextLanguage!]!
   position: Int!
 }
@@ -48,6 +49,7 @@ type CreateForumForumsObj {
   created: Int!
   description: [TextLanguage!]!
   id: Int!
+  last_posts: LastPostsShowForumForumsObj!
   name: [TextLanguage!]!
   position: Int!
 }
@@ -88,6 +90,35 @@ type LastChildShowForumForums {
   id: Int!
   name: [TextLanguage!]!
   position: Int!
+}
+
+type LastPostsShowForumForums {
+  created: Int!
+  id: Int!
+  topic: TopicLastPostsShowForumForums!
+  user: User!
+}
+
+input LastPostsShowForumForumsArgs {
+  cursor: Int
+  first: Int
+  last: Int
+  sortBy: [LastPostsShowForumForumsSortByArgs!]
+}
+
+type LastPostsShowForumForumsObj {
+  edges: [LastPostsShowForumForums!]!
+  pageInfo: PageInfo!
+}
+
+input LastPostsShowForumForumsSortByArgs {
+  column: LastPostsShowForumForumsSortingColumnEnum!
+  direction: SortDirectionEnum!
+}
+
+enum LastPostsShowForumForumsSortingColumnEnum {
+  created
+  updated
 }
 
 enum LayoutAdminInstallEnum {
@@ -185,6 +216,7 @@ type Query {
     first: Int
     ids: [Int!]
     last: Int
+    last_posts_args: LastPostsShowForumForumsArgs
     parent_id: Int
     search: String
 
@@ -204,6 +236,7 @@ type Query {
     first: Int
     ids: [Int!]
     last: Int
+    last_posts_args: LastPostsShowForumForumsArgs
     parent_id: Int
     search: String
 
@@ -470,6 +503,7 @@ type ShowForumForumsAdmin {
   created: Int!
   description: [TextLanguage!]!
   id: Int!
+  last_posts: LastPostsShowForumForumsObj!
   name: [TextLanguage!]!
   permissions: PermissionsForumForumsAdmin!
   position: Int!
@@ -498,6 +532,7 @@ type ShowForumForumsWithChildren {
   created: Int!
   description: [TextLanguage!]!
   id: Int!
+  last_posts: LastPostsShowForumForumsObj!
   name: [TextLanguage!]!
   permissions: PermissionsForumForums!
   position: Int!
@@ -579,6 +614,11 @@ input TextLanguageInput {
 enum TopicActions {
   lock
   unlock
+}
+
+type TopicLastPostsShowForumForums {
+  id: Int!
+  title: [TextLanguage!]!
 }
 
 """The `Upload` scalar type represents a file upload."""

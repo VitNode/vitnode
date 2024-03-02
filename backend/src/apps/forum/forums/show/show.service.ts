@@ -7,6 +7,7 @@ import {
   ShowForumForumsWithChildren
 } from "./dto/show.obj";
 import { StatsShowForumForumsService } from "./stats.service";
+import { LastPostsForumForumsService } from "./last_posts/last_posts.service";
 
 import { User } from "@/utils/decorators/user.decorator";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
@@ -46,7 +47,8 @@ interface ShowForumForumsWithPermissions
 export class ShowForumForumsService {
   constructor(
     private databaseService: DatabaseService,
-    private statsService: StatsShowForumForumsService
+    private statsService: StatsShowForumForumsService,
+    private lastPostsService: LastPostsForumForumsService
   ) {}
 
   protected async whereAccessToView({
@@ -84,6 +86,7 @@ export class ShowForumForumsService {
       ids,
       isAdmin,
       last,
+      last_posts_args,
       parent_id,
       search,
       show_all_forums
@@ -158,10 +161,17 @@ export class ShowForumForumsService {
               }
             });
 
-        const stats = await this.statsService.stats({ forumId: forum.id });
+        const { stats, topic_ids } = await this.statsService.topicsPosts({
+          forumId: forum.id
+        });
+        const last_posts = await this.lastPostsService.lastPosts({
+          topicIds: topic_ids,
+          ...last_posts_args
+        });
 
         return {
           ...forum,
+          last_posts,
           _count: {
             ...stats
           },
@@ -178,13 +188,18 @@ export class ShowForumForumsService {
                   }
                 });
 
-              const stats = await this.statsService.stats({
+              const { stats, topic_ids } = await this.statsService.topicsPosts({
                 forumId: child.id
+              });
+              const last_posts = await this.lastPostsService.lastPosts({
+                topicIds: topic_ids,
+                ...last_posts_args
               });
 
               return {
                 ...child,
                 children,
+                last_posts,
                 _count: {
                   ...stats
                 }
