@@ -110,6 +110,17 @@ export class CreateForumForumsService {
         total_posts: 0,
         total_topics: 0
       },
+      last_posts: {
+        edges: [],
+        pageInfo: {
+          count: 0,
+          totalCount: 0,
+          hasNextPage: false,
+          hasPreviousPage: false,
+          startCursor: null,
+          endCursor: null
+        }
+      },
       children: []
     };
   }

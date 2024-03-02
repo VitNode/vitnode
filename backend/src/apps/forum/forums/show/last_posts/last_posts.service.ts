@@ -53,7 +53,6 @@ export class LastPostsForumForumsService {
             title: true
           }
         },
-        content: true,
         user: {
           with: {
             group: {

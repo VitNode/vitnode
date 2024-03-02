@@ -15,12 +15,14 @@ import {
 } from "../../database/schema/forums";
 import { TextLanguageInput } from "@/types/database/text-language.type";
 import { StatsShowForumForumsService } from "@/apps/forum/forums/show/stats.service";
+import { LastPostsForumForumsService } from "@/apps/forum/forums/show/last_posts/last_posts.service";
 
 @Injectable()
 export class EditForumForumsService {
   constructor(
     private databaseService: DatabaseService,
-    private statsService: StatsShowForumForumsService
+    private statsService: StatsShowForumForumsService,
+    private lastPostsService: LastPostsForumForumsService
   ) {}
 
   protected updateName = async ({
@@ -244,19 +246,40 @@ export class EditForumForumsService {
       }
     });
 
-    const stats = await this.statsService.stats({ forumId: id });
+    const { stats, topic_ids } = await this.statsService.topicsPosts({
+      forumId: id
+    });
+    const last_posts = await this.lastPostsService.lastPosts({
+      topicIds: topic_ids,
+      first: null,
+      cursor: null,
+      last: null,
+      sortBy: null
+    });
 
     return {
       ...dataUpdate,
+      last_posts,
       _count: {
         ...stats
       },
       children: await Promise.all(
         children.map(async item => {
-          const stats = await this.statsService.stats({ forumId: item.id });
+          const { stats, topic_ids } = await this.statsService.topicsPosts({
+            forumId: item.id
+          });
+
+          const last_posts = await this.lastPostsService.lastPosts({
+            topicIds: topic_ids,
+            first: null,
+            cursor: null,
+            last: null,
+            sortBy: null
+          });
 
           return {
             ...item,
+            last_posts,
             children: [],
             _count: {
               ...stats

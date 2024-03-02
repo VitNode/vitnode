@@ -15,6 +15,11 @@ const getData = async () => {
     Forum_Forums__ShowQueryVariables
   >({
     query: Forum_Forums__Show,
+    variables: {
+      lastPostsArgs: {
+        first: 1
+      }
+    },
     cache: "force-cache",
     next: {
       tags: ["Forum_Forums__Show"]

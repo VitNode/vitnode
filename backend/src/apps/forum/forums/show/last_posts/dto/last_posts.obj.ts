@@ -24,9 +24,6 @@ export class LastPostsShowForumForums {
   @Field(() => User)
   user: User;
 
-  @Field(() => [TextLanguage])
-  content: TextLanguage[];
-
   @Field(() => TopicLastPostsShowForumForums)
   topic: TopicLastPostsShowForumForums;
 }

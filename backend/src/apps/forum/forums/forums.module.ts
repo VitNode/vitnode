@@ -12,6 +12,10 @@ import { LastPostsForumForumsService } from "./show/last_posts/last_posts.servic
     StatsShowForumForumsService,
     LastPostsForumForumsService
   ],
-  exports: [ShowForumForumsService, StatsShowForumForumsService]
+  exports: [
+    ShowForumForumsService,
+    StatsShowForumForumsService,
+    LastPostsForumForumsService
+  ]
 })
 export class ForumsForumModule {}

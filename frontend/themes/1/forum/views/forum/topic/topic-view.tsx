@@ -41,7 +41,7 @@ export default function TopicView({
       <div className="flex-1">
         <div className="flex flex-col sm:flex-row gap-4 mb-5 justify-between">
           <div className="flex flex-col gap-2">
-            <h1 className="text-2xl font-semibold tracking-tight leading-tight flex-1">
+            <h1 className="text-2xl font-semibold tracking-tight leading-tight flex-1 break-words">
               {convertText(title)}
             </h1>
 

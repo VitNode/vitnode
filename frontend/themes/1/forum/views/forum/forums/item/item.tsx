@@ -1,20 +1,27 @@
 import { MessagesSquare } from "lucide-react";
 
 import { Link } from "@/i18n";
-import type { ShowForumForumsCounts, TextLanguage } from "@/graphql/hooks";
+import type {
+  LastPostsShowForumForumsObj,
+  ShowForumForumsCounts,
+  TextLanguage
+} from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
 import { WrapperItemForum } from "./wrapper-item-forum";
 import { ChildButtonItemForum } from "./child";
 import { StatsItemForum } from "./stats";
-import { LastPostItemForum } from "./last-post";
+import { LastPostItemForum } from "./last-post/last-post";
 
 export interface ItemForumProps {
   _count: Pick<ShowForumForumsCounts, "total_posts" | "total_topics">;
   description: TextLanguage[];
   id: number;
+  last_posts: Pick<LastPostsShowForumForumsObj, "edges">;
   name: TextLanguage[];
-  children?: Omit<ItemForumProps, "description" | "_count">[] | null;
+  children?:
+    | Omit<ItemForumProps, "description" | "_count" | "last_posts">[]
+    | null;
 }
 
 export const ItemForum = ({
@@ -22,6 +29,7 @@ export const ItemForum = ({
   children,
   description,
   id,
+  last_posts: { edges: lastPosts },
   name
 }: ItemForumProps) => {
   const { convertNameToLink, convertText } = useTextLang();
@@ -66,7 +74,7 @@ export const ItemForum = ({
       {_count.total_topics > 0 && (
         <div className="flex-shrink-0 flex md:gap-4 gap-2 md:flex-row flex-col md:items-center">
           <StatsItemForum {..._count} />
-          <LastPostItemForum />
+          <LastPostItemForum lastPosts={lastPosts} />
         </div>
       )}
     </WrapperItemForum>

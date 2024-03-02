@@ -93,7 +93,6 @@ type LastChildShowForumForums {
 }
 
 type LastPostsShowForumForums {
-  content: [TextLanguage!]!
   created: Int!
   id: Int!
   topic: TopicLastPostsShowForumForums!
