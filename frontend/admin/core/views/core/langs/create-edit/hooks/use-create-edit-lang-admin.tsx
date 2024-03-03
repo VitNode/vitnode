@@ -66,7 +66,7 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
     toast(t(data ? "edit.success" : "create.success"), {
       description: values.name
     });
-    setOpen(false);
+    setOpen?.(false);
   };
 
   return {

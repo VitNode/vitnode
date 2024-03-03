@@ -58,7 +58,7 @@ export const useCreateThemeAdmin = () => {
       description: values.name
     });
 
-    setOpen(false);
+    setOpen?.(false);
   };
 
   return {

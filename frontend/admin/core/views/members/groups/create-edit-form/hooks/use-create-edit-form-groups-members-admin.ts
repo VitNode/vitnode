@@ -76,7 +76,7 @@ export const useCreateEditFormGroupsMembersAdmin = ({
       description: convertText(values.name)
     });
 
-    setOpen(false);
+    setOpen?.(false);
   };
 
   return { form, formSchema, onSubmit };

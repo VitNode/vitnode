@@ -91,7 +91,7 @@ export const useCreateEditFormForumAdmin = ({
       return;
     }
 
-    setOpen(false);
+    setOpen?.(false);
   };
 
   return { form, onSubmit };

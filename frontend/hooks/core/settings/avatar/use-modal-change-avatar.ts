@@ -37,7 +37,7 @@ export const useModalChangeAvatar = () => {
         toast.success(t("settings.change_avatar.options.delete.title"), {
           description: t("settings.change_avatar.options.delete.success")
         });
-        setOpen(false);
+        setOpen?.(false);
       }
 
       setPending(false);

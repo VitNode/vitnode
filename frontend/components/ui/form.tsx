@@ -17,18 +17,28 @@ import {
   useId,
   type ComponentPropsWithoutRef,
   type ElementRef,
-  type HTMLAttributes
+  type HTMLAttributes,
+  useEffect
 } from "react";
+import { useTranslations } from "next-intl";
 
 import { Label } from "@/components/ui/label";
 import { cn } from "@/functions/classnames";
+import { useDialog } from "./dialog";
 
 function Form<
   TFieldValues extends FieldValues,
   TContext = unknown,
   TTransformedValues extends FieldValues = TFieldValues
 >(props: FormProviderProps<TFieldValues, TContext, TTransformedValues>) {
-  useBeforeUnload(props.formState.isDirty);
+  const t = useTranslations("core");
+  const formIsDirty = props.formState.isDirty;
+  useBeforeUnload(formIsDirty, t("are_you_sure_want_to_leave_form"));
+  const { setIsDirty } = useDialog();
+
+  useEffect(() => {
+    setIsDirty?.(formIsDirty);
+  }, [formIsDirty]);
 
   return <FormProvider {...props} />;
 }

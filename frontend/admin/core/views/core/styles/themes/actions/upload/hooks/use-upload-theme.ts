@@ -35,7 +35,7 @@ export const useThemeUpload = () => {
       return;
     }
 
-    setOpen(false);
+    setOpen?.(false);
     toast.success(t("success"));
   };
 
