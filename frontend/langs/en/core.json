@@ -29,6 +29,7 @@
     "close": "Close",
     "default": "Default",
     "checked_number": "Checked: {count}",
+    "prev_page": "Previous Page",
     "colors": {
       "none": "No Color",
       "remove": "Remove color"

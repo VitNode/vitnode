@@ -2,20 +2,10 @@
 
 import { useTranslations } from "next-intl";
 import { Plus } from "lucide-react";
-import { Suspense, lazy } from "react";
-import { useParams } from "next/navigation";
 
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Loader } from "@/components/loader";
-import { getIdFormString } from "@/functions/url";
 import type { PermissionsForumForums } from "@/graphql/hooks";
-
-const CreateTopic = lazy(() =>
-  import("../../../actions/create-topic").then(module => ({
-    default: module.CreateTopic
-  }))
-);
+import { Link, usePathname } from "@/i18n";
+import { buttonVariants } from "@/components/ui/button";
 
 interface Props {
   permissions: Pick<PermissionsForumForums, "can_create">;
@@ -23,24 +13,14 @@ interface Props {
 
 export const ActionsForumsForum = ({ permissions }: Props) => {
   const t = useTranslations("forum.topics.create");
-  const { id } = useParams();
+  const pathname = usePathname();
 
   if (!permissions.can_create) return null;
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button>
-          <Plus />
-          {t("title")}
-        </Button>
-      </DialogTrigger>
-
-      <DialogContent className="max-w-6xl">
-        <Suspense fallback={<Loader />}>
-          <CreateTopic defaultForumId={getIdFormString(id)} />
-        </Suspense>
-      </DialogContent>
-    </Dialog>
+    <Link className={buttonVariants()} href={`${pathname}/create`}>
+      <Plus />
+      {t("title")}
+    </Link>
   );
 };

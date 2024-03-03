@@ -29,6 +29,7 @@
     "close": "Zamknij",
     "default": "Domyślny",
     "checked_number": "Zaznaczono: {count}",
+    "prev_page": "Poprzednia strona",
     "colors": {
       "none": "Brak koloru",
       "remove": "Usuń kolor"
