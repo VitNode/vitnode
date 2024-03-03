@@ -30,6 +30,7 @@
     "default": "Default",
     "checked_number": "Checked: {count}",
     "prev_page": "Previous Page",
+    "home": "Home",
     "colors": {
       "none": "No Color",
       "remove": "Remove color"

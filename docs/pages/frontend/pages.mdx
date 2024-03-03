@@ -18,48 +18,6 @@ We're created a `layout` for you with margines and paddings. You can use it for 
       <FileTree.Folder name="[locale]" defaultOpen>
         <FileTree.Folder name="(apps)" defaultOpen>
           <FileTree.Folder name="(main)" defaultOpen>
-            <FileTree.Folder name="(container)" defaultOpen>
-              <FileTree.Folder name="{your_plugin}" defaultOpen>
-                <FileTree.File name="..." />
-              </FileTree.Folder>
-            </FileTree.Folder>
-          </FileTree.Folder>
-        </FileTree.Folder>
-      </FileTree.Folder>
-    </FileTree.Folder>
-  </FileTree.Folder>
-</FileTree>
-
-Example based on forum plugin:
-
-<FileTree>
-  <FileTree.Folder name="frontend" defaultOpen>
-    <FileTree.Folder name="app" defaultOpen>
-      <FileTree.Folder name="[locale]" defaultOpen>
-        <FileTree.Folder name="(apps)" defaultOpen>
-          <FileTree.Folder name="(main)" defaultOpen>
-            <FileTree.Folder name="(container)" defaultOpen>
-              <FileTree.Folder name="forum" defaultOpen>
-                <FileTree.Folder name="forums" defaultOpen>
-                  <FileTree.File name="page.tsx" />
-                </FileTree.Folder>
-              </FileTree.Folder>
-            </FileTree.Folder>
-          </FileTree.Folder>
-        </FileTree.Folder>
-      </FileTree.Folder>
-    </FileTree.Folder>
-  </FileTree.Folder>
-</FileTree>
-
-But if you don't want to have paddings and margins you can create a file `page.tsx` outside of `(container)` folder:
-
-<FileTree>
-  <FileTree.Folder name="frontend" defaultOpen>
-    <FileTree.Folder name="app" defaultOpen>
-      <FileTree.Folder name="[locale]" defaultOpen>
-        <FileTree.Folder name="(apps)" defaultOpen>
-          <FileTree.Folder name="(main)" defaultOpen>
             <FileTree.Folder name="{your_plugin}" defaultOpen>
               <FileTree.File name="..." />
             </FileTree.Folder>
@@ -78,18 +36,15 @@ Example based on forum plugin:
       <FileTree.Folder name="[locale]" defaultOpen>
         <FileTree.Folder name="(apps)" defaultOpen>
           <FileTree.Folder name="(main)" defaultOpen>
-
-              <FileTree.Folder name="forum" defaultOpen>
-                <FileTree.Folder name="forums" defaultOpen>
-                  <FileTree.File name="page.tsx" />
-                </FileTree.Folder>
+            <FileTree.Folder name="forum" defaultOpen>
+              <FileTree.Folder name="forums" defaultOpen>
+                <FileTree.File name="page.tsx" />
               </FileTree.Folder>
-
+            </FileTree.Folder>
           </FileTree.Folder>
         </FileTree.Folder>
       </FileTree.Folder>
     </FileTree.Folder>
-
   </FileTree.Folder>
 </FileTree>
 
