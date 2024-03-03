@@ -1,12 +1,14 @@
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
+import { useBeforeUnload } from "react-use";
 import {
   Controller,
   FormProvider,
   useFormContext,
   type ControllerProps,
   type FieldPath,
-  type FieldValues
+  type FieldValues,
+  type FormProviderProps
 } from "react-hook-form";
 import {
   createContext,
@@ -21,7 +23,15 @@ import {
 import { Label } from "@/components/ui/label";
 import { cn } from "@/functions/classnames";
 
-const Form = FormProvider;
+function Form<
+  TFieldValues extends FieldValues,
+  TContext = unknown,
+  TTransformedValues extends FieldValues = TFieldValues
+>(props: FormProviderProps<TFieldValues, TContext, TTransformedValues>) {
+  useBeforeUnload(props.formState.isDirty);
+
+  return <FormProvider {...props} />;
+}
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
