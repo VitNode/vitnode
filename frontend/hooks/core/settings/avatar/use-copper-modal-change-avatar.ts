@@ -42,7 +42,7 @@ export const useCopperModalChangeAvatar = () => {
       toast.success(t("settings.change_avatar.options.upload.title"), {
         description: t("settings.change_avatar.options.upload.success")
       });
-      setOpen(false);
+      setOpen?.(false);
     }
 
     setPending(false);

@@ -61,7 +61,7 @@ export const useCreateTopic = ({ forumId }: Props) => {
       push(`/topic/${convertNameToLink({ id, name: title })}`);
     }
 
-    setOpen(false);
+    setOpen?.(false);
   };
 
   return { form, onSubmit };

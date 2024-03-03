@@ -28,7 +28,7 @@ export const ContentDeleteActionTableNavAdmin = ({
   return (
     <form action={onSubmit}>
       <AlertDialogHeader>
-        <AlertDialogTitle>{tCore("are_your_sure")}</AlertDialogTitle>
+        <AlertDialogTitle>{tCore("are_you_sure")}</AlertDialogTitle>
         <AlertDialogDescription>
           {t.rich("desc", {
             name: () => (

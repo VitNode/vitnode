@@ -35,7 +35,7 @@ export const ContentDeleteActionForumAdmin = ({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <AlertDialogHeader>
-          <AlertDialogTitle>{tCore("are_your_sure")}</AlertDialogTitle>
+          <AlertDialogTitle>{tCore("are_you_sure")}</AlertDialogTitle>
           <AlertDialogDescription>
             {t.rich("desc", {
               name: () => (

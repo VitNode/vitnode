@@ -69,7 +69,7 @@ export const useCreatePluginAdmin = () => {
       description: values.name
     });
 
-    setOpen(false);
+    setOpen?.(false);
   };
 
   return {

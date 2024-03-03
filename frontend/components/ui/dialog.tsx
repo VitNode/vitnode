@@ -2,6 +2,7 @@
 
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import {
   createContext,
   forwardRef,
@@ -9,19 +10,24 @@ import {
   useState,
   type ComponentPropsWithoutRef,
   type ElementRef,
-  type HTMLAttributes
+  type HTMLAttributes,
+  type MouseEvent
 } from "react";
 
 import { cn } from "@/functions/classnames";
 
 interface DialogContextArgs {
-  open: boolean;
-  setOpen: (value: boolean) => void;
+  isDirty?: boolean;
+  open?: boolean;
+  setIsDirty?: (value: boolean) => void;
+  setOpen?: (value: boolean) => void;
 }
 
 export const DialogContext = createContext<DialogContextArgs>({
   open: false,
-  setOpen: () => {}
+  setOpen: () => {},
+  isDirty: false,
+  setIsDirty: () => {}
 });
 
 export const useDialog = () => useContext(DialogContext);
@@ -33,10 +39,16 @@ const Dialog = ({
   ...props
 }: DialogPrimitive.DialogProps) => {
   const [open, setOpen] = useState(false);
+  const [isDirty, setIsDirty] = useState(false);
 
   return (
     <DialogContext.Provider
-      value={{ open: openProp ?? open, setOpen: onOpenChange ?? setOpen }}
+      value={{
+        open: openProp ?? open,
+        setOpen: onOpenChange ?? setOpen,
+        isDirty,
+        setIsDirty
+      }}
     >
       <DialogPrimitive.Root
         open={openProp ?? open}
@@ -71,25 +83,49 @@ DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 const DialogContent = forwardRef<
   ElementRef<typeof DialogPrimitive.Content>,
   ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ children, className, ...props }, ref) => (
-  <DialogPortal>
-    <DialogOverlay />
-    <DialogPrimitive.Content
-      ref={ref}
-      className={cn(
-        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-card p-5 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg md:w-full overflow-y-auto max-h-[calc(100vh_-_2rem)]",
-        className
-      )}
-      {...props}
-    >
-      {children}
-      <DialogPrimitive.Close className="absolute w-9 h-9 flex items-center justify-center right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-        <X className="h-6 w-6" />
-        <span className="sr-only">Close</span>
-      </DialogPrimitive.Close>
-    </DialogPrimitive.Content>
-  </DialogPortal>
-));
+>(({ children, className, ...props }, ref) => {
+  const t = useTranslations("core");
+  const { isDirty, setOpen } = useDialog();
+
+  const handleBeforeUnload = (
+    e:
+      | CustomEvent<{
+          originalEvent: PointerEvent;
+        }>
+      | MouseEvent<HTMLButtonElement>
+  ) => {
+    if (!isDirty) return;
+    e.preventDefault();
+
+    if (confirm(t("are_you_sure_want_to_leave_form"))) {
+      setOpen?.(false);
+    }
+  };
+
+  return (
+    <DialogPortal>
+      <DialogOverlay />
+      <DialogPrimitive.Content
+        ref={ref}
+        onPointerDownOutside={handleBeforeUnload}
+        className={cn(
+          "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-card p-5 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg md:w-full overflow-y-auto max-h-screen",
+          className
+        )}
+        {...props}
+      >
+        {children}
+        <DialogPrimitive.Close
+          onClick={handleBeforeUnload}
+          className="absolute w-9 h-9 flex items-center justify-center right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+        >
+          <X className="h-6 w-6" />
+          <span className="sr-only">Close</span>
+        </DialogPrimitive.Close>
+      </DialogPrimitive.Content>
+    </DialogPortal>
+  );
+});
 DialogContent.displayName = DialogPrimitive.Content.displayName;
 
 const DialogHeader = ({

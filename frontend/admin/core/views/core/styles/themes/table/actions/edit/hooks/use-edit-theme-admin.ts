@@ -62,7 +62,7 @@ export const useEditThemeAdmin = ({
     toast.success(t("success"), {
       description: values.name
     });
-    setOpen(false);
+    setOpen?.(false);
   };
 
   return {

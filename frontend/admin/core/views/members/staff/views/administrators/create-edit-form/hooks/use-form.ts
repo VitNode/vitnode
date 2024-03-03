@@ -69,7 +69,7 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
       return;
     }
 
-    setOpen(false);
+    setOpen?.(false);
     toast.success(t("administrators.add.success"), {
       description:
         values.type === "group"

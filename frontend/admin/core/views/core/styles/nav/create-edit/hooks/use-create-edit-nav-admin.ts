@@ -71,7 +71,7 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
       description: convertText(values.name)
     });
 
-    setOpen(false);
+    setOpen?.(false);
   };
 
   return {

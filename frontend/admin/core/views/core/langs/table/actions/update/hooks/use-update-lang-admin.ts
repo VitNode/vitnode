@@ -40,7 +40,7 @@ export const useUpdateLangAdmin = ({
       return;
     }
 
-    setOpen(false);
+    setOpen?.(false);
     toast.success(t("success"), {
       description: name
     });

@@ -48,7 +48,7 @@ export const useDownloadThemeAdmin = ({
       return;
     }
 
-    setOpen(false);
+    setOpen?.(false);
 
     window.open(
       `${CONFIG.backend_url}/files/${mutation.data.admin__core_themes__download}`,

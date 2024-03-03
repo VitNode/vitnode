@@ -49,7 +49,7 @@ export const useDownloadLangAdmin = ({
       return;
     }
 
-    setOpen(false);
+    setOpen?.(false);
 
     window.open(
       `${CONFIG.backend_url}/files/${mutation.data.admin__core_languages__download}`,

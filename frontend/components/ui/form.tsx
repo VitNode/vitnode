@@ -1,12 +1,14 @@
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
+import { useBeforeUnload } from "react-use";
 import {
   Controller,
   FormProvider,
   useFormContext,
   type ControllerProps,
   type FieldPath,
-  type FieldValues
+  type FieldValues,
+  type FormProviderProps
 } from "react-hook-form";
 import {
   createContext,
@@ -15,13 +17,31 @@ import {
   useId,
   type ComponentPropsWithoutRef,
   type ElementRef,
-  type HTMLAttributes
+  type HTMLAttributes,
+  useEffect
 } from "react";
+import { useTranslations } from "next-intl";
 
 import { Label } from "@/components/ui/label";
 import { cn } from "@/functions/classnames";
+import { useDialog } from "./dialog";
 
-const Form = FormProvider;
+function Form<
+  TFieldValues extends FieldValues,
+  TContext = unknown,
+  TTransformedValues extends FieldValues = TFieldValues
+>(props: FormProviderProps<TFieldValues, TContext, TTransformedValues>) {
+  const t = useTranslations("core");
+  const formIsDirty = props.formState.isDirty;
+  useBeforeUnload(formIsDirty, t("are_you_sure_want_to_leave_form"));
+  const { setIsDirty } = useDialog();
+
+  useEffect(() => {
+    setIsDirty?.(formIsDirty);
+  }, [formIsDirty]);
+
+  return <FormProvider {...props} />;
+}
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
