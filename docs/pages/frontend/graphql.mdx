@@ -1,5 +1,5 @@
-import { Steps } from 'nextra/components';
-import { FileTree } from 'nextra/components';
+import { Steps } from "nextra/components";
+import { FileTree } from "nextra/components";
 
 # GraphGL
 
@@ -42,55 +42,5 @@ npm run codegen
 ```
 
 The command will overwrite the `graphql/hooks.ts` file.
-
-</Steps>
-
-## Use Query in Component
-
-After generating the types, you can use the query in the frontend component.
-
-<Steps>
-
-### Create Folder for Hook
-
-Create a new hook inside your folder component. Your schema should be similar like this:
-
-<FileTree>
-  <FileTree.Folder name="hooks" defaultOpen>
-    <FileTree.Folder name="module_name" defaultOpen>
-      <FileTree.Folder name="overview" defaultOpen>
-        <FileTree.File name="use-overview-view.ts" />
-      </FileTree.Folder>
-    </FileTree.Folder>
-  </FileTree.Folder>
-</FileTree>
-
-### Create Hook
-
-Inside your hook (for example `use-overview-view.ts` file) import `useQuery` from `@tanstack/react-query`.
-
-```ts
-import { useQuery } from '@tanstack/react-query';
-
-import { fetcher } from '@/graphql/fetcher';
-import {
-  Authorization_Custom_App,
-  Authorization_Custom_AppQuery,
-  Authorization_Custom_AppQueryVariables
-} from '@/graphql/hooks';
-
-export const useOverviewView = () => {
-  return useQuery({
-    queryKey: ['Authorization_Custom_App'],
-    queryFn: async () =>
-      await fetcher<Authorization_Custom_AppQuery, Authorization_Custom_AppQueryVariables>({
-        query: Authorization_Custom_App
-      }),
-    placeholderData: previousData => previousData
-  });
-};
-```
-
-You can read more about `fetching data` in [Fetch and Revalidate Data](/frontend/fetch).
 
 </Steps>

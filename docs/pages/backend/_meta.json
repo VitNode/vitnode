@@ -4,6 +4,5 @@
   "i18n": "Internationalization (i18n)",
   "files": "Files",
   "sessions": "Sessions",
-  "cron": "Task Scheduling (CRON)",
-  "practices": "Best Practices"
+  "cron": "Task Scheduling (CRON)"
 }

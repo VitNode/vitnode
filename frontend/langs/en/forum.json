@@ -31,7 +31,8 @@
         "form": {
           "title": "Title",
           "content": "Content"
-        }
+        },
+        "submit": "Create Topic"
       },
       "post": {
         "placeholder": "Write your reply here...",

@@ -31,7 +31,8 @@
         "form": {
           "title": "Tytuł",
           "content": "Treść"
-        }
+        },
+        "submit": "Stwórz temat"
       },
       "post": {
         "placeholder": "Napisz odpowiedź tutaj...",
