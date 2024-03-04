@@ -65,7 +65,11 @@ export class ShowForumForumsService {
         columns: {
           forum_id: true
         },
-        where: (table, { eq }) => eq(table.group_id, user?.group.id ?? 1) // 1 - guest group id
+        where: (table, { and, eq }) =>
+          and(
+            eq(table.group_id, user?.group.id ?? 1), // 1 - guest group id
+            eq(table.can_view, true)
+          )
       });
 
     const forumIdsSQL =
@@ -162,11 +166,12 @@ export class ShowForumForumsService {
             });
 
         const { stats, topic_ids } = await this.statsService.topicsPosts({
-          forumId: forum.id
+          forumId: forum.id,
+          user
         });
 
         const breadcrumbs = await this.statsService.breadcrumbs({
-          forumParentId: forum.id
+          forumId: forum.id
         });
 
         const last_posts = await this.lastPostsService.lastPosts({
@@ -195,10 +200,11 @@ export class ShowForumForumsService {
                 });
 
               const { stats, topic_ids } = await this.statsService.topicsPosts({
-                forumId: child.id
+                forumId: child.id,
+                user
               });
               const breadcrumbs = await this.statsService.breadcrumbs({
-                forumParentId: child.id
+                forumId: child.id
               });
               const last_posts = await this.lastPostsService.lastPosts({
                 topicIds: topic_ids,

@@ -23,7 +23,7 @@ const Breadcrumbs = forwardRef<HTMLDivElement, Props>(
     );
 
     return (
-      <div className="my-2 flex justify-between gap-5 items-center" ref={ref}>
+      <div className="mb-2 flex justify-between gap-5 items-center" ref={ref}>
         <ul className="flex gap-2 text-muted-foreground py-3 overflow-auto">
           <li className="leading-none">
             <Link className={classNameItem} aria-label={t("home")} href="/">

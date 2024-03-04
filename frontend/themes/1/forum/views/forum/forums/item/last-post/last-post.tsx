@@ -24,7 +24,7 @@ export const LastPostItemForum = ({ lastPosts }: Props) => {
   return (
     <WrapperLastPostItemForum
       href={href}
-      className="md:w-60 flex gap-2 items-center"
+      className="md:w-64 flex gap-2 items-center"
     >
       <AvatarUser user={user} sizeInRem={2.25} />
       <div className="flex flex-col overflow-hidden justify-center flex-1">

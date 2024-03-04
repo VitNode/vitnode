@@ -22,7 +22,7 @@ export default function ErrorView({ className, code }: ErrorViewProps) {
   const t = useTranslations("core");
 
   return (
-    <div className={cn("mx-auto max-w-2xl px-4", className)}>
+    <div className={cn("mx-auto max-w-2xl px-4 my-10", className)}>
       <Card>
         <CardHeader className="items-center pb-2">
           <AlertTriangle className="w-16 h-16" />
