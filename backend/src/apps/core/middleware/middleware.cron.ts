@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { Cron, CronExpression } from "@nestjs/schedule";
-import { and, eq, lt, or } from "drizzle-orm";
+import { eq, lt, or } from "drizzle-orm";
 import { ConfigService } from "@nestjs/config";
 
 import { currentDate } from "@/functions/date";
@@ -16,22 +16,19 @@ export class CoreMiddlewareCron {
 
   @Cron(CronExpression.EVERY_HOUR)
   async clearKnowDevices() {
-    // await this.databaseService.db
-    //   .delete(core_sessions_known_devices)
-    //   .where(
-    //     or(
-    //       eq(core_sessions_known_devices.ip_address, null),
-    //       and(
-    //         eq(core_sessions_known_devices.session_id, null),
-    //         lt(
-    //           core_sessions_known_devices.last_seen,
-    //           currentDate() -
-    //             this.configService.getOrThrow(
-    //               "cookies.login_token.expiresInRemember"
-    //             )
-    //         )
-    //       )
-    //     )
-    //   );
+    await this.databaseService.db
+      .delete(core_sessions_known_devices)
+      .where(
+        or(
+          eq(core_sessions_known_devices.ip_address, null),
+          lt(
+            core_sessions_known_devices.last_seen,
+            currentDate() -
+              this.configService.getOrThrow(
+                "cookies.login_token.expiresInRemember"
+              )
+          )
+        )
+      );
   }
 }
