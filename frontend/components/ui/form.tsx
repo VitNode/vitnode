@@ -26,17 +26,30 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/functions/classnames";
 import { useDialog } from "./dialog";
 
+interface FormProps<
+  TFieldValues extends FieldValues,
+  TContext = unknown,
+  TTransformedValues extends FieldValues = TFieldValues
+> extends FormProviderProps<TFieldValues, TContext, TTransformedValues> {
+  disableBeforeUnload?: boolean;
+}
+
 function Form<
   TFieldValues extends FieldValues,
   TContext = unknown,
   TTransformedValues extends FieldValues = TFieldValues
->(props: FormProviderProps<TFieldValues, TContext, TTransformedValues>) {
+>(props: FormProps<TFieldValues, TContext, TTransformedValues>) {
   const t = useTranslations("core");
   const formIsDirty = props.formState.isDirty;
-  useBeforeUnload(formIsDirty, t("are_you_sure_want_to_leave_form"));
+  useBeforeUnload(
+    formIsDirty && !props.disableBeforeUnload,
+    t("are_you_sure_want_to_leave_form")
+  );
   const { setIsDirty } = useDialog();
 
   useEffect(() => {
+    if (props.disableBeforeUnload) return;
+
     setIsDirty?.(formIsDirty);
   }, [formIsDirty]);
 
