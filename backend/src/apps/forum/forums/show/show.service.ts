@@ -161,9 +161,14 @@ export class ShowForumForumsService {
               }
             });
 
-        const { stats, topic_ids } = await this.statsService.topicsPosts({
+        const {
+          children: breadcrumbs,
+          stats,
+          topic_ids
+        } = await this.statsService.topicsPosts({
           forumId: forum.id
         });
+
         const last_posts = await this.lastPostsService.lastPosts({
           topicIds: topic_ids,
           ...last_posts_args

@@ -80,7 +80,8 @@ export class SignInCoreSessionsService {
         last_seen: currentDate(),
         expires:
           currentDate() +
-          this.configService.getOrThrow("cookies.login_token.admin.expiresIn")
+          this.configService.getOrThrow("cookies.login_token.admin.expiresIn"),
+        device_id: device.id
       });
 
       // Set cookie for session
@@ -111,7 +112,8 @@ export class SignInCoreSessionsService {
       login_token,
       user_id: userId,
       last_seen: currentDate(),
-      expires: currentDate() + expires
+      expires: currentDate() + expires,
+      device_id: device.id
     });
 
     // Set cookie for session
