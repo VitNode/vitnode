@@ -20,34 +20,33 @@ export const core_sessions = pgTable(
         onDelete: "cascade"
       }),
     last_seen: integer("last_seen").notNull(),
-    expires: integer("expires").notNull()
+    expires: integer("expires").notNull(),
+    device_id: integer("device_id")
+      .references(() => core_sessions_known_devices.id, {
+        onDelete: "cascade"
+      })
+      .notNull()
   },
   table => ({
     user_id_idx: index("core_sessions_user_id_idx").on(table.user_id)
   })
 );
 
-export const core_sessions_relations = relations(
-  core_sessions,
-  ({ many, one }) => ({
-    user: one(core_users, {
-      fields: [core_sessions.user_id],
-      references: [core_users.id]
-    }),
-    known_devices: many(core_sessions_known_devices)
+export const core_sessions_relations = relations(core_sessions, ({ one }) => ({
+  user: one(core_users, {
+    fields: [core_sessions.user_id],
+    references: [core_users.id]
+  }),
+  device: one(core_sessions_known_devices, {
+    fields: [core_sessions.device_id],
+    references: [core_sessions_known_devices.id]
   })
-);
+}));
 
 export const core_sessions_known_devices = pgTable(
   "core_sessions_known_devices",
   {
     id: serial("id").primaryKey(),
-    session_id: varchar("session_id").references(
-      () => core_sessions.login_token,
-      {
-        onDelete: "cascade"
-      }
-    ),
     ip_address: varchar("ip_address", { length: 255 }),
     user_agent: text("user_agent").notNull(),
     uagent_browser: varchar("uagent_browser", { length: 200 }).notNull(),
@@ -57,24 +56,19 @@ export const core_sessions_known_devices = pgTable(
     uagent_device_type: varchar("uagent_device_type", { length: 200 }),
     uagent_device_model: varchar("uagent_device_model", { length: 200 }),
     last_seen: integer("last_seen").notNull()
-  },
-  table => ({
-    session_id_idx: index("core_sessions_known_devices_session_id_idx").on(
-      table.session_id
-    )
-  })
+  }
 );
 
 export const core_sessions_known_devices_relations = relations(
   core_sessions_known_devices,
   ({ one }) => ({
     session: one(core_sessions, {
-      fields: [core_sessions_known_devices.session_id],
-      references: [core_sessions.login_token]
+      fields: [core_sessions_known_devices.id],
+      references: [core_sessions.device_id]
     }),
     admin_session: one(core_admin_sessions, {
-      fields: [core_sessions_known_devices.session_id],
-      references: [core_admin_sessions.login_token]
+      fields: [core_sessions_known_devices.id],
+      references: [core_admin_sessions.device_id]
     })
   })
 );

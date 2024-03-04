@@ -10,6 +10,7 @@ import { relations } from "drizzle-orm";
 
 import { core_groups } from "./groups";
 import { core_users } from "./users";
+import { core_sessions_known_devices } from "./sessions";
 
 export const core_admin_permissions = pgTable(
   "core_admin_permissions",
@@ -58,7 +59,12 @@ export const core_admin_sessions = pgTable(
         onDelete: "cascade"
       }),
     last_seen: integer("last_seen").notNull(),
-    expires: integer("expires").notNull()
+    expires: integer("expires").notNull(),
+    device_id: integer("device_id")
+      .references(() => core_sessions_known_devices.id, {
+        onDelete: "cascade"
+      })
+      .notNull()
   },
   table => ({
     login_token_idx: index("core_admin_sessions_login_token_idx").on(
@@ -74,6 +80,10 @@ export const core_admin_sessions_relations = relations(
     user: one(core_users, {
       fields: [core_admin_sessions.user_id],
       references: [core_users.id]
+    }),
+    device: one(core_sessions_known_devices, {
+      fields: [core_admin_sessions.device_id],
+      references: [core_sessions_known_devices.id]
     })
   })
 );

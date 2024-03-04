@@ -20,9 +20,7 @@ interface DeviceType {
   user_agent: string;
 }
 
-interface GetDeviceType extends Ctx {
-  sessionId?: string;
-}
+interface GetDeviceType extends Ctx {}
 
 @Injectable()
 export class DeviceSignInCoreSessionsService {
@@ -49,16 +47,14 @@ export class DeviceSignInCoreSessionsService {
 
   protected async createDevice({
     req,
-    res,
-    sessionId
+    res
   }: GetDeviceType): Promise<DeviceType> {
     const dataDevice = await this.databaseService.db
       .insert(core_sessions_known_devices)
       .values({
         ...this.getUserAgentData(req.headers["user-agent"]),
         last_seen: currentDate(),
-        ip_address: req.ip,
-        session_id: sessionId
+        ip_address: req.ip
       })
       .returning();
 
@@ -86,12 +82,12 @@ export class DeviceSignInCoreSessionsService {
     return device;
   }
 
-  async getDevice({ req, res, sessionId }: GetDeviceType): Promise<DeviceType> {
+  async getDevice({ req, res }: GetDeviceType): Promise<DeviceType> {
     const know_device_id: number | undefined =
       +req.cookies[this.configService.getOrThrow("cookies.known_device.name")];
 
     if (!know_device_id) {
-      return await this.createDevice({ req, res, sessionId });
+      return await this.createDevice({ req, res });
     }
 
     const device =
@@ -102,7 +98,7 @@ export class DeviceSignInCoreSessionsService {
       );
 
     if (!device) {
-      return await this.createDevice({ req, res, sessionId });
+      return await this.createDevice({ req, res });
     }
 
     return device;
