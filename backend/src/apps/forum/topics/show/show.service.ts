@@ -112,7 +112,7 @@ export class ShowTopicsForumsService {
             if (!post) return null;
 
             const breadcrumbs = await this.statsForumService.breadcrumbs({
-              forumParentId: edge.forum.id
+              forumId: edge.forum.id
             });
 
             return {

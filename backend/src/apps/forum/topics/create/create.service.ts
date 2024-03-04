@@ -74,7 +74,7 @@ export class CreateForumTopicsService {
     });
 
     const breadcrumbs = await this.statsForumService.breadcrumbs({
-      forumParentId: topic.forum_id
+      forumId: topic.forum_id
     });
 
     return { ...topic, user: post.user, content: post.content, breadcrumbs };

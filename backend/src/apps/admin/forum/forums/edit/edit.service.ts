@@ -16,6 +16,7 @@ import {
 import { TextLanguageInput } from "@/types/database/text-language.type";
 import { StatsShowForumForumsService } from "@/apps/forum/forums/show/stats.service";
 import { LastPostsForumForumsService } from "@/apps/forum/forums/show/last_posts/last_posts.service";
+import { User } from "@/utils/decorators/user.decorator";
 
 @Injectable()
 export class EditForumForumsService {
@@ -189,13 +190,10 @@ export class EditForumForumsService {
     );
   };
 
-  async edit({
-    description,
-    id,
-    name,
-    parent_id,
-    permissions
-  }: EditForumForumsArgs): Promise<CreateForumForumsObj> {
+  async edit(
+    { description, id, name, parent_id, permissions }: EditForumForumsArgs,
+    user: User | null
+  ): Promise<CreateForumForumsObj> {
     const forum = await this.databaseService.db.query.forum_forums.findFirst({
       where: (table, { eq }) => eq(table.id, id)
     });
@@ -251,7 +249,8 @@ export class EditForumForumsService {
       stats,
       topic_ids
     } = await this.statsService.topicsPosts({
-      forumId: id
+      forumId: id,
+      user
     });
     const last_posts = await this.lastPostsService.lastPosts({
       topicIds: topic_ids,
@@ -275,7 +274,8 @@ export class EditForumForumsService {
             stats,
             topic_ids
           } = await this.statsService.topicsPosts({
-            forumId: item.id
+            forumId: item.id,
+            user
           });
 
           const last_posts = await this.lastPostsService.lastPosts({

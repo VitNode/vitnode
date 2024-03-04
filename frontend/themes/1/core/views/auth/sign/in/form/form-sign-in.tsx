@@ -24,7 +24,7 @@ export const FormSignIn = () => {
   const { error, form, onSubmit } = useSignInView();
 
   return (
-    <Form {...form}>
+    <Form {...form} disableBeforeUnload>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <CardContent>
           <div className="space-y-4">

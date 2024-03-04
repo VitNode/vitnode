@@ -6,6 +6,7 @@ import { CreateForumForumsObj } from "../create/dto/create.obj";
 import { EditForumForumsArgs } from "./dto/edit.args";
 
 import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
+import { CurrentUser, User } from "@/utils/decorators/user.decorator";
 
 @Resolver()
 export class EditForumForumsResolver {
@@ -14,8 +15,9 @@ export class EditForumForumsResolver {
   @Mutation(() => CreateForumForumsObj)
   @UseGuards(AdminAuthGuards)
   async admin__forum_forums__edit(
-    @Args() args: EditForumForumsArgs
+    @Args() args: EditForumForumsArgs,
+    @CurrentUser() user: User | null
   ): Promise<CreateForumForumsObj> {
-    return await this.service.edit(args);
+    return await this.service.edit(args, user);
   }
 }

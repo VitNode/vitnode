@@ -1,28 +1,67 @@
 import { Injectable } from "@nestjs/common";
-import { count, inArray } from "drizzle-orm";
+import { SQL, count, eq, inArray, or } from "drizzle-orm";
 
 import { forum_posts } from "@/apps/admin/forum/database/schema/posts";
 import { DatabaseService } from "@/database/database.service";
 import { TextLanguage } from "@/types/database/text-language.type";
+import { User } from "@/utils/decorators/user.decorator";
+import { forum_forums } from "@/apps/admin/forum/database/schema/forums";
 
 @Injectable()
 export class StatsShowForumForumsService {
   constructor(private databaseService: DatabaseService) {}
 
-  protected async getAllChildren({ forumId }: { forumId: number }): Promise<
+  async whereAccessToRead({
+    isAdmin,
+    user
+  }: {
+    user: User | null;
+    isAdmin?: boolean;
+  }): Promise<SQL<unknown>> {
+    if (isAdmin) return undefined;
+
+    const forumIds =
+      await this.databaseService.db.query.forum_forums_permissions.findMany({
+        columns: {
+          forum_id: true
+        },
+        where: (table, { and, eq }) =>
+          and(
+            eq(table.group_id, user?.group.id ?? 1), // 1 - guest group id
+            eq(table.can_read, true)
+          )
+      });
+
+    const forumIdsSQL =
+      forumIds.length > 0
+        ? inArray(
+            forum_forums.id,
+            forumIds.map(({ forum_id }) => forum_id)
+          )
+        : undefined;
+
+    return or(eq(forum_forums.can_all_read, true), forumIdsSQL);
+  }
+
+  protected async getAllChildren({
+    forumId,
+    user
+  }: {
+    forumId: number;
+    user: User | null;
+  }): Promise<
     {
       id: number;
       name: TextLanguage[];
     }[]
   > {
     let children: { id: number; name: TextLanguage[] }[] = [];
+    const whereAccess = await this.whereAccessToRead({ user });
 
     const directChildren =
       await this.databaseService.db.query.forum_forums.findMany({
-        where: (table, { eq }) => eq(table.parent_id, forumId),
-        columns: {
-          id: true
-        },
+        where: (table, { and, eq }) =>
+          and(eq(table.parent_id, forumId), whereAccess),
         with: {
           name: true
         }
@@ -34,7 +73,10 @@ export class StatsShowForumForumsService {
         name: child.name
       });
 
-      const grandChildren = await this.getAllChildren({ forumId: child.id });
+      const grandChildren = await this.getAllChildren({
+        forumId: child.id,
+        user
+      });
       children = children.concat(grandChildren);
     }
 
@@ -124,7 +166,13 @@ export class StatsShowForumForumsService {
     return posts[0].count;
   }
 
-  async topicsPosts({ forumId }: { forumId: number }): Promise<{
+  async topicsPosts({
+    forumId,
+    user
+  }: {
+    forumId: number;
+    user: User | null;
+  }): Promise<{
     children: {
       id: number;
       name: TextLanguage[];
@@ -137,9 +185,15 @@ export class StatsShowForumForumsService {
     };
     topic_ids: number[];
   }> {
-    const children = await this.getAllChildren({ forumId });
+    const whereAccess = await this.whereAccessToRead({ user });
+    const forum = await this.databaseService.db.query.forum_forums.findFirst({
+      where: (table, { and, eq }) => and(eq(table.id, forumId), whereAccess)
+    });
+
+    const children = await this.getAllChildren({ forumId, user });
+    const childrenIds = children.map(child => child.id);
     const totalTopics = await this.getTotalTopics({
-      forumIds: [forumId, ...children.map(child => child.id)]
+      forumIds: forum ? [forum.id, ...childrenIds] : childrenIds
     });
     const totalPosts = await this.getTotalCountPosts({
       topicIds: totalTopics.ids
@@ -160,7 +214,7 @@ export class StatsShowForumForumsService {
     };
   }
 
-  async breadcrumbs({ forumParentId }: { forumParentId: number }): Promise<
+  async breadcrumbs({ forumId }: { forumId: number }): Promise<
     {
       id: number;
       name: TextLanguage[];
@@ -172,7 +226,7 @@ export class StatsShowForumForumsService {
     }[] = [];
 
     const forum = await this.databaseService.db.query.forum_forums.findFirst({
-      where: (table, { eq }) => eq(table.id, forumParentId),
+      where: (table, { eq }) => eq(table.id, forumId),
       columns: {
         id: true,
         parent_id: true
@@ -188,7 +242,7 @@ export class StatsShowForumForumsService {
         name: forum.name
       });
 
-      const parent = await this.breadcrumbs({ forumParentId: forum.parent_id });
+      const parent = await this.breadcrumbs({ forumId: forum.parent_id });
       breadcrumbs = [...parent, ...breadcrumbs];
     }
 

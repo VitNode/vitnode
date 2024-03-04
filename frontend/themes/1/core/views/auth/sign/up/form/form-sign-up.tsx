@@ -29,7 +29,7 @@ export const FormSignUp = () => {
   }
 
   return (
-    <Form {...form}>
+    <Form {...form} disableBeforeUnload>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <CardContent className="space-y-4">
           <FormField

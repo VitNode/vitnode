@@ -22,7 +22,7 @@ export const FormSignInAdmin = () => {
   const { error, form, onSubmit } = useSignInAdminView();
 
   return (
-    <Form {...form}>
+    <Form {...form} disableBeforeUnload>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <CardContent>
           <div className="space-y-4">
