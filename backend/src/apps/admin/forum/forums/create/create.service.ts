@@ -121,7 +121,8 @@ export class CreateForumForumsService {
           endCursor: null
         }
       },
-      children: []
+      children: [],
+      breadcrumbs: []
     };
   }
 }

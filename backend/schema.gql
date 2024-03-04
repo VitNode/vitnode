@@ -32,8 +32,14 @@ type AvatarUser {
   name: String!
 }
 
+type BreadcrumbsForumForums {
+  id: Int!
+  name: [TextLanguage!]!
+}
+
 type ChildrenShowForumForums {
   _count: ShowForumForumsCounts!
+  breadcrumbs: [BreadcrumbsForumForums!]!
   children: [LastChildShowForumForums!]!
   created: Int!
   description: [TextLanguage!]!
@@ -45,6 +51,7 @@ type ChildrenShowForumForums {
 
 type CreateForumForumsObj {
   _count: ShowForumForumsCounts!
+  breadcrumbs: [BreadcrumbsForumForums!]!
   children: [ChildrenShowForumForums!]!
   created: Int!
   description: [TextLanguage!]!
@@ -499,6 +506,7 @@ type ShowCoreThemesObj {
 
 type ShowForumForumsAdmin {
   _count: ShowForumForumsCounts!
+  breadcrumbs: [BreadcrumbsForumForums!]!
   children: [ChildrenShowForumForums!]!
   created: Int!
   description: [TextLanguage!]!
@@ -528,6 +536,7 @@ type ShowForumForumsObj {
 
 type ShowForumForumsWithChildren {
   _count: ShowForumForumsCounts!
+  breadcrumbs: [BreadcrumbsForumForums!]!
   children: [ChildrenShowForumForums!]!
   created: Int!
   description: [TextLanguage!]!

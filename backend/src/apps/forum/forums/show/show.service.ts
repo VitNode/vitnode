@@ -161,12 +161,12 @@ export class ShowForumForumsService {
               }
             });
 
-        const {
-          children: breadcrumbs,
-          stats,
-          topic_ids
-        } = await this.statsService.topicsPosts({
+        const { stats, topic_ids } = await this.statsService.topicsPosts({
           forumId: forum.id
+        });
+
+        const breadcrumbs = await this.statsService.breadcrumbs({
+          forumParentId: forum.parent_id
         });
 
         const last_posts = await this.lastPostsService.lastPosts({
@@ -180,6 +180,7 @@ export class ShowForumForumsService {
           _count: {
             ...stats
           },
+          breadcrumbs,
           children: await Promise.all(
             children.map(async child => {
               const children =
@@ -196,6 +197,9 @@ export class ShowForumForumsService {
               const { stats, topic_ids } = await this.statsService.topicsPosts({
                 forumId: child.id
               });
+              // const breadcrumbs = await this.statsService.breadcrumbs({
+              //   forumParentId: child.parent_id
+              // });
               const last_posts = await this.lastPostsService.lastPosts({
                 topicIds: topic_ids,
                 ...last_posts_args
@@ -205,6 +209,7 @@ export class ShowForumForumsService {
                 ...child,
                 children,
                 last_posts,
+                breadcrumbs: [],
                 _count: {
                   ...stats
                 }

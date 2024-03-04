@@ -7,7 +7,7 @@ import { buttonVariants } from "./button";
 import { cn } from "@/functions/classnames";
 
 interface Props {
-  items: { href: string; id: string; text: string }[];
+  items: { href: string; id: string | number; text: string }[];
   children?: ReactNode;
 }
 

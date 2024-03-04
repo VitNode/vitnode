@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { getSessionData } from "@/functions/get-session-data";
-import { getForumItemData } from "../layout";
 import type { ErrorViewProps } from "@/themes/1/core/views/global/error/error-view";
+import { getForumItemData } from "../query";
 
 interface Props {
   params: {

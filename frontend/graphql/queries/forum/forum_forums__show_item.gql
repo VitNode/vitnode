@@ -74,6 +74,13 @@ query Forum_forums__show_item(
       permissions {
         can_create
       }
+      breadcrumbs {
+        id
+        name {
+          language_code
+          value
+        }
+      }
     }
   }
   forum_topics__show(
