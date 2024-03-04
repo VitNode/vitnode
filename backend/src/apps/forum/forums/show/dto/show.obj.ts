@@ -6,6 +6,15 @@ import { PageInfo } from "@/types/database/pagination.type";
 import { TextLanguage } from "@/types/database/text-language.type";
 
 @ObjectType()
+export class BreadcrumbsForumForums {
+  @Field(() => Int)
+  id: number;
+
+  @Field(() => [TextLanguage])
+  name: TextLanguage[];
+}
+
+@ObjectType()
 class ShowForumForumsCounts {
   @Field(() => Int)
   topics: number;
@@ -54,6 +63,9 @@ export class ShowForumForums {
 
   @Field(() => LastPostsShowForumForumsObj)
   last_posts: LastPostsShowForumForumsObj;
+
+  @Field(() => [BreadcrumbsForumForums])
+  breadcrumbs: BreadcrumbsForumForums[];
 }
 
 @ObjectType()
@@ -65,7 +77,8 @@ export class FirstShowForumForums extends ShowForumForums {
 @ObjectType()
 class LastChildShowForumForums extends OmitType(ShowForumForums, [
   "_count",
-  "last_posts"
+  "last_posts",
+  "breadcrumbs"
 ] as const) {}
 
 @ObjectType()

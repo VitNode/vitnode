@@ -32,8 +32,14 @@ type AvatarUser {
   name: String!
 }
 
+type BreadcrumbsForumForums {
+  id: Int!
+  name: [TextLanguage!]!
+}
+
 type ChildrenShowForumForums {
   _count: ShowForumForumsCounts!
+  breadcrumbs: [BreadcrumbsForumForums!]!
   children: [LastChildShowForumForums!]!
   created: Int!
   description: [TextLanguage!]!
@@ -45,6 +51,7 @@ type ChildrenShowForumForums {
 
 type CreateForumForumsObj {
   _count: ShowForumForumsCounts!
+  breadcrumbs: [BreadcrumbsForumForums!]!
   children: [ChildrenShowForumForums!]!
   created: Int!
   description: [TextLanguage!]!
@@ -52,11 +59,6 @@ type CreateForumForumsObj {
   last_posts: LastPostsShowForumForumsObj!
   name: [TextLanguage!]!
   position: Int!
-}
-
-type ForumTopicsForums {
-  id: Int!
-  name: [TextLanguage!]!
 }
 
 type GeneralAdminSettingsObj {
@@ -499,6 +501,7 @@ type ShowCoreThemesObj {
 
 type ShowForumForumsAdmin {
   _count: ShowForumForumsCounts!
+  breadcrumbs: [BreadcrumbsForumForums!]!
   children: [ChildrenShowForumForums!]!
   created: Int!
   description: [TextLanguage!]!
@@ -528,6 +531,7 @@ type ShowForumForumsObj {
 
 type ShowForumForumsWithChildren {
   _count: ShowForumForumsCounts!
+  breadcrumbs: [BreadcrumbsForumForums!]!
   children: [ChildrenShowForumForums!]!
   created: Int!
   description: [TextLanguage!]!
@@ -570,9 +574,9 @@ enum ShowPostsForumsSortingEnum {
 }
 
 type ShowTopicsForums {
+  breadcrumbs: [BreadcrumbsForumForums!]!
   content: [TextLanguage!]!
   created: Int!
-  forum: ForumTopicsForums!
   id: Int!
   locked: Boolean!
   title: [TextLanguage!]!

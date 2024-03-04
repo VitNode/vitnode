@@ -19,7 +19,7 @@ export default function Layout({ children }: Props) {
    * ! Thank you for your support!
    */
   const poweredBy = (
-    <footer className="text-center p-5 text-sm">
+    <footer className="text-center p-5 text-sm md:mb-0 mb-16">
       <PoweredByVitNode className="text-muted-foreground no-underline" />
     </footer>
   );

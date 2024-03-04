@@ -10,6 +10,7 @@ import { DatabaseService } from "@/database/database.service";
 import { User } from "@/utils/decorators/user.decorator";
 import { core_sessions_known_devices } from "@/apps/admin/core/database/schema/sessions";
 import { DeviceSignInCoreSessionsService } from "../../sign_in/device.service";
+import { CustomError } from "@/utils/errors/CustomError";
 
 @Injectable()
 export class InternalAuthorizationCoreSessionsService {
@@ -30,6 +31,11 @@ export class InternalAuthorizationCoreSessionsService {
       throw new AccessDeniedError();
     }
 
+    const device = await this.deviceService.getDevice({
+      req,
+      res
+    });
+
     const session = await this.databaseService.db.query.core_sessions.findFirst(
       {
         where: (table, { eq }) => eq(table.login_token, login_token),
@@ -44,9 +50,7 @@ export class InternalAuthorizationCoreSessionsService {
               }
             }
           },
-          known_devices: {
-            where: (table, { eq }) => eq(table.id, know_device_id)
-          }
+          device: true
         }
       }
     );
@@ -55,11 +59,10 @@ export class InternalAuthorizationCoreSessionsService {
       throw new AccessDeniedError();
     }
 
-    if (!session.known_devices.length) {
-      await this.deviceService.getDevice({
-        req,
-        res,
-        sessionId: session.login_token
+    if (session.device.id !== device.id) {
+      throw new CustomError({
+        code: "DEVICE_CHANGED",
+        message: "Device has been changed"
       });
     }
 

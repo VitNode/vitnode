@@ -159,4 +159,39 @@ export class StatsShowForumForumsService {
       topic_ids: totalTopics.ids
     };
   }
+
+  async breadcrumbs({ forumParentId }: { forumParentId: number }): Promise<
+    {
+      id: number;
+      name: TextLanguage[];
+    }[]
+  > {
+    let breadcrumbs: {
+      id: number;
+      name: TextLanguage[];
+    }[] = [];
+
+    const forum = await this.databaseService.db.query.forum_forums.findFirst({
+      where: (table, { eq }) => eq(table.id, forumParentId),
+      columns: {
+        id: true,
+        parent_id: true
+      },
+      with: {
+        name: true
+      }
+    });
+
+    if (forum) {
+      breadcrumbs.push({
+        id: forum.id,
+        name: forum.name
+      });
+
+      const parent = await this.breadcrumbs({ forumParentId: forum.parent_id });
+      breadcrumbs = [...parent, ...breadcrumbs];
+    }
+
+    return breadcrumbs;
+  }
 }

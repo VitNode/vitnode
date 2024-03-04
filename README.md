@@ -25,7 +25,7 @@ More screenshots you can find in the [Screenshots Page](https://vitnode.com/scre
 
 ## 🚀 Installation
 
-Click to see the [installation guide](https://vitnode.com/setup/installation).
+Click to see the [installation guide](https://vitnode.com/setup/overview).
 
 ## 📦 Software
 

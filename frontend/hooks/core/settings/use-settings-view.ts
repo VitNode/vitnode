@@ -19,19 +19,19 @@ interface ReturnValues {
 }
 
 export const useSettingsView = (): ReturnValues => {
-  const t = useTranslations("core");
+  const t = useTranslations("core.settings");
 
   return {
     navItems: [
       {
         href: "/settings",
         icon: Cog,
-        text: t("settings.overview.title")
+        text: t("overview.title")
       },
       {
         href: "/settings/notifications",
         icon: Bell,
-        text: t("settings.notifications.title")
+        text: t("notifications.title")
       }
     ]
   };

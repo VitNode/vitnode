@@ -30,6 +30,7 @@
     "default": "Domyślny",
     "checked_number": "Zaznaczono: {count}",
     "prev_page": "Poprzednia strona",
+    "home": "Strona główna",
     "colors": {
       "none": "Brak koloru",
       "remove": "Usuń kolor"

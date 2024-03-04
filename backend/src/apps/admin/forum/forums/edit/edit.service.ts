@@ -246,7 +246,11 @@ export class EditForumForumsService {
       }
     });
 
-    const { stats, topic_ids } = await this.statsService.topicsPosts({
+    const {
+      children: breadcrumbs,
+      stats,
+      topic_ids
+    } = await this.statsService.topicsPosts({
       forumId: id
     });
     const last_posts = await this.lastPostsService.lastPosts({
@@ -263,9 +267,14 @@ export class EditForumForumsService {
       _count: {
         ...stats
       },
+      breadcrumbs,
       children: await Promise.all(
         children.map(async item => {
-          const { stats, topic_ids } = await this.statsService.topicsPosts({
+          const {
+            children: breadcrumbs,
+            stats,
+            topic_ids
+          } = await this.statsService.topicsPosts({
             forumId: item.id
           });
 
@@ -280,6 +289,7 @@ export class EditForumForumsService {
           return {
             ...item,
             last_posts,
+            breadcrumbs,
             children: [],
             _count: {
               ...stats
