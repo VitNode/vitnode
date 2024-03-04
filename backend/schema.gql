@@ -61,11 +61,6 @@ type CreateForumForumsObj {
   position: Int!
 }
 
-type ForumTopicsForums {
-  id: Int!
-  name: [TextLanguage!]!
-}
-
 type GeneralAdminSettingsObj {
   side_name: String!
 }
@@ -579,9 +574,9 @@ enum ShowPostsForumsSortingEnum {
 }
 
 type ShowTopicsForums {
+  breadcrumbs: [BreadcrumbsForumForums!]!
   content: [TextLanguage!]!
   created: Int!
-  forum: ForumTopicsForums!
   id: Int!
   locked: Boolean!
   title: [TextLanguage!]!

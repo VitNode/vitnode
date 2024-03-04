@@ -6,7 +6,7 @@ import { PageInfo } from "@/types/database/pagination.type";
 import { TextLanguage } from "@/types/database/text-language.type";
 
 @ObjectType()
-class BreadcrumbsForumForums {
+export class BreadcrumbsForumForums {
   @Field(() => Int)
   id: number;
 

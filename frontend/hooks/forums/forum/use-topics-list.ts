@@ -4,11 +4,11 @@ import { useMemo } from "react";
 
 import { getIdFormString } from "@/functions/url";
 import { APIKeys } from "@/graphql/api-keys";
-import { type ShowTopicsForumsObj } from "@/graphql/hooks";
+import { type Forum_Forums__Show_ItemQuery } from "@/graphql/hooks";
 import { queryApi } from "./query-api";
 
 interface Args {
-  initData: ShowTopicsForumsObj;
+  initData: Forum_Forums__Show_ItemQuery["forum_topics__show"];
 }
 
 const FIRST = 25;

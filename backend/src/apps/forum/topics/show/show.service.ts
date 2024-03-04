@@ -16,10 +16,14 @@ import { forum_posts } from "@/apps/admin/forum/database/schema/posts";
 import { CustomError } from "@/utils/errors/CustomError";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { forum_forums_permissions } from "@/apps/admin/forum/database/schema/forums";
+import { StatsShowForumForumsService } from "../../forums/show/stats.service";
 
 @Injectable()
 export class ShowTopicsForumsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private statsForumService: StatsShowForumForumsService
+  ) {}
 
   async show(
     { cursor, first, forum_id, id, last }: ShowTopicsForumsArgs,
@@ -92,23 +96,34 @@ export class ShowTopicsForumsService {
       .where(where);
 
     return outputPagination({
-      edges: edges
-        .map(edge => {
-          // Check permissions
-          if (!edge.forum.can_all_view && !edge.forum.permissions.length) {
-            if (id && edges.length === 1) {
-              throw new AccessDeniedError();
+      edges: await Promise.all(
+        edges
+          .map(async edge => {
+            // Check permissions
+            if (!edge.forum.can_all_view && !edge.forum.permissions.length) {
+              if (id && edges.length === 1) {
+                throw new AccessDeniedError();
+              }
+
+              return null;
             }
 
-            return null;
-          }
+            const post = edge.posts.at(0);
+            if (!post) return null;
 
-          const post = edge.posts.at(0);
-          if (!post) return null;
+            const breadcrumbs = await this.statsForumService.breadcrumbs({
+              forumParentId: edge.forum.id
+            });
 
-          return { ...edge, user: post.user, content: post.content };
-        })
-        .filter(edge => edge !== null),
+            return {
+              ...edge,
+              user: post.user,
+              content: post.content,
+              breadcrumbs
+            };
+          })
+          .filter(edge => edge !== null)
+      ),
       totalCount,
       first,
       cursor,

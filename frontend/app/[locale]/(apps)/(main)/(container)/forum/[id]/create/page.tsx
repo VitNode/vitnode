@@ -5,6 +5,7 @@ import { getTranslations } from "next-intl/server";
 import { getSessionData } from "@/functions/get-session-data";
 import type { ErrorViewProps } from "@/themes/1/core/views/global/error/error-view";
 import { getForumItemData } from "../query";
+import type { CreateTopicViewProps } from "@/themes/1/forum/views/forum/forums/views/create-topic/create-topic-view";
 
 interface Props {
   params: {
@@ -41,7 +42,9 @@ export default async function Page({ params: { id } }: Props) {
     return <ErrorView code="403" />;
   }
 
-  const PageFromTheme: LazyExoticComponent<() => JSX.Element> = lazy(() =>
+  const PageFromTheme: LazyExoticComponent<
+    (props: CreateTopicViewProps) => JSX.Element
+  > = lazy(() =>
     import(
       `@/themes/${theme_id}/forum/views/forum/forums/views/create-topic/create-topic-view`
     ).catch(
@@ -52,5 +55,5 @@ export default async function Page({ params: { id } }: Props) {
     )
   );
 
-  return <PageFromTheme />;
+  return <PageFromTheme data={data} />;
 }

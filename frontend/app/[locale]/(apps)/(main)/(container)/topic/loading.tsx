@@ -1,5 +1,5 @@
 import { Loader } from "@/components/loader";
 
 export default function Loading() {
-  return <Loader />;
+  return <Loader className="m-5" />;
 }

@@ -166,7 +166,7 @@ export class ShowForumForumsService {
         });
 
         const breadcrumbs = await this.statsService.breadcrumbs({
-          forumParentId: forum.parent_id
+          forumParentId: forum.id
         });
 
         const last_posts = await this.lastPostsService.lastPosts({
@@ -197,9 +197,9 @@ export class ShowForumForumsService {
               const { stats, topic_ids } = await this.statsService.topicsPosts({
                 forumId: child.id
               });
-              // const breadcrumbs = await this.statsService.breadcrumbs({
-              //   forumParentId: child.parent_id
-              // });
+              const breadcrumbs = await this.statsService.breadcrumbs({
+                forumParentId: child.id
+              });
               const last_posts = await this.lastPostsService.lastPosts({
                 topicIds: topic_ids,
                 ...last_posts_args
@@ -209,7 +209,7 @@ export class ShowForumForumsService {
                 ...child,
                 children,
                 last_posts,
-                breadcrumbs: [],
+                breadcrumbs,
                 _count: {
                   ...stats
                 }

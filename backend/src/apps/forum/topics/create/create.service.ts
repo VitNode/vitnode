@@ -13,12 +13,14 @@ import {
   forum_topics_titles
 } from "@/apps/admin/forum/database/schema/topics";
 import { CreateForumsPostsService } from "../../posts/create/create.service";
+import { StatsShowForumForumsService } from "../../forums/show/stats.service";
 
 @Injectable()
 export class CreateForumTopicsService {
   constructor(
     private databaseService: DatabaseService,
-    private createPostService: CreateForumsPostsService
+    private createPostService: CreateForumsPostsService,
+    private statsForumService: StatsShowForumForumsService
   ) {}
 
   async create(
@@ -67,15 +69,14 @@ export class CreateForumTopicsService {
     const topic = await this.databaseService.db.query.forum_topics.findFirst({
       where: (table, { eq }) => eq(table.id, data[0].id),
       with: {
-        title: true,
-        forum: {
-          with: {
-            name: true
-          }
-        }
+        title: true
       }
     });
 
-    return { ...topic, user: post.user, content: post.content };
+    const breadcrumbs = await this.statsForumService.breadcrumbs({
+      forumParentId: topic.forum_id
+    });
+
+    return { ...topic, user: post.user, content: post.content, breadcrumbs };
   }
 }

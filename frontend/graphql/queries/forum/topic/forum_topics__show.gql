@@ -37,11 +37,11 @@ query Forum_topics__show(
         name_seo
         name
       }
-      forum {
+      breadcrumbs {
         id
         name {
-          language_code
           value
+          language_code
         }
       }
     }

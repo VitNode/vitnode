@@ -2,13 +2,13 @@
 
 import { Virtuoso } from "react-virtuoso";
 
-import { type ShowTopicsForumsObj } from "@/graphql/hooks";
+import { type Forum_Forums__Show_ItemQuery } from "@/graphql/hooks";
 import { ItemTopicListForum } from "./item";
 import { useTopicsList } from "@/hooks/forums/forum/use-topics-list";
 import { Loader } from "@/components/loader";
 
 interface Props {
-  initData: ShowTopicsForumsObj;
+  initData: Forum_Forums__Show_ItemQuery["forum_topics__show"];
 }
 
 export const TopicsListForum = ({ initData }: Props) => {

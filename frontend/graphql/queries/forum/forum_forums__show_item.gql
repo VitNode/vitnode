@@ -118,13 +118,6 @@ query Forum_forums__show_item(
         language_code
         value
       }
-      forum {
-        id
-        name {
-          language_code
-          value
-        }
-      }
       locked
     }
     pageInfo {

@@ -15,6 +15,7 @@ import { LoadMorePosts } from "./posts/load-more/load-more-posts";
 import { WrapperPosts } from "./posts/wrapper/wrapper";
 import { ListPosts } from "./posts/list";
 import { AnimatePresenceClient } from "@/components/animations/animate-presence";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 
 export interface TopicViewProps {
   data: Forum_Topics__ShowQuery;
@@ -34,88 +35,105 @@ export default function TopicView({
   } = dataApi;
   const data = edges.at(0);
   if (!data) return null;
-  const { content, created, forum, id, locked, title, user } = data;
+  const { breadcrumbs, content, created, id, locked, title, user } = data;
+  const forum = breadcrumbs.at(-1);
+  if (!forum) return null;
+  const breadcrumbItems = breadcrumbs.map(item => ({
+    id: item.id,
+    text: convertText(item.name),
+    href: `/forum/${item.id}`
+  }));
 
   return (
-    <div className="flex flex-col md:flex-row gap-5">
-      <div className="flex-1">
-        <div className="flex flex-col sm:flex-row gap-4 mb-5 justify-between">
-          <div className="flex flex-col gap-2">
-            <h1 className="text-2xl font-semibold tracking-tight leading-tight flex-1 break-words">
-              {convertText(title)}
-            </h1>
+    <>
+      <Breadcrumbs
+        items={[
+          ...breadcrumbItems,
+          { id, text: convertText(title), href: `/topic/${id}` }
+        ]}
+      />
 
-            <div className="flex items-center gap-2 flex-wrap">
-              {locked && (
-                <TitleIconTopic variant="destructive">
-                  <Lock /> {t("closed")}
-                </TitleIconTopic>
-              )}
+      <div className="flex flex-col md:flex-row gap-5">
+        <div className="flex-1">
+          <div className="flex flex-col sm:flex-row gap-4 mb-5 justify-between">
+            <div className="flex flex-col gap-2">
+              <h1 className="text-2xl font-semibold tracking-tight leading-tight flex-1 break-words">
+                {convertText(title)}
+              </h1>
 
-              <span>
-                {t.rich("user_wrote_in_forum", {
-                  user: () => (
-                    <UserLink className="font-semibold" user={user} />
-                  ),
-                  forum: () => (
-                    <Link
-                      href={`/forum/${convertNameToLink({ ...forum })}`}
-                      className={badgeVariants({
-                        className: "[&>svg]:size-3"
-                      })}
-                    >
-                      <MessagesSquare /> {convertText(forum.name)}
-                    </Link>
-                  )
-                })}
-              </span>
+              <div className="flex items-center gap-2 flex-wrap">
+                {locked && (
+                  <TitleIconTopic variant="destructive">
+                    <Lock /> {t("closed")}
+                  </TitleIconTopic>
+                )}
+
+                <span>
+                  {t.rich("user_wrote_in_forum", {
+                    user: () => (
+                      <UserLink className="font-semibold" user={user} />
+                    ),
+                    forum: () => (
+                      <Link
+                        href={`/forum/${convertNameToLink({ ...forum })}`}
+                        className={badgeVariants({
+                          className: "[&>svg]:size-3"
+                        })}
+                      >
+                        <MessagesSquare /> {convertText(forum.name)}
+                      </Link>
+                    )
+                  })}
+                </span>
+              </div>
             </div>
+
+            <ActionsTopic id={id} state={{ locked }} />
           </div>
 
-          <ActionsTopic id={id} state={{ locked }} />
+          <WrapperPosts>
+            <PostTopic
+              post_id={id}
+              content={content}
+              user={user}
+              created={created}
+              disableInitialAnimation
+            />
+
+            <HeaderPosts totalComments={pageInfo.totalCount} />
+
+            <AnimatePresenceClient key={`topic_posts_${id}`} initial={false}>
+              {edgesPosts.length > 0 && (
+                <>
+                  <ListPosts
+                    id="first"
+                    edges={
+                      pageInfo.totalCount <= firstEdges * 2
+                        ? [...edgesPosts, ...lastEdges]
+                        : edgesPosts
+                    }
+                  />
+
+                  {pageInfo.totalCount > firstEdges * 2 &&
+                    pageInfo.endCursor && (
+                      <>
+                        <LoadMorePosts
+                          totalCount={pageInfo.totalCount}
+                          endCursor={pageInfo.endCursor}
+                          initialCount={edgesPosts.length + lastEdges.length}
+                          firstEdges={firstEdges}
+                        />
+                        <ListPosts id="last" edges={lastEdges} />
+                      </>
+                    )}
+                </>
+              )}
+            </AnimatePresenceClient>
+
+            <CreatePost className="mt-5" />
+          </WrapperPosts>
         </div>
-
-        <WrapperPosts>
-          <PostTopic
-            post_id={id}
-            content={content}
-            user={user}
-            created={created}
-            disableInitialAnimation
-          />
-
-          <HeaderPosts totalComments={pageInfo.totalCount} />
-
-          <AnimatePresenceClient key={`topic_posts_${id}`} initial={false}>
-            {edgesPosts.length > 0 && (
-              <>
-                <ListPosts
-                  id="first"
-                  edges={
-                    pageInfo.totalCount <= firstEdges * 2
-                      ? [...edgesPosts, ...lastEdges]
-                      : edgesPosts
-                  }
-                />
-
-                {pageInfo.totalCount > firstEdges * 2 && pageInfo.endCursor && (
-                  <>
-                    <LoadMorePosts
-                      totalCount={pageInfo.totalCount}
-                      endCursor={pageInfo.endCursor}
-                      initialCount={edgesPosts.length + lastEdges.length}
-                      firstEdges={firstEdges}
-                    />
-                    <ListPosts id="last" edges={lastEdges} />
-                  </>
-                )}
-              </>
-            )}
-          </AnimatePresenceClient>
-
-          <CreatePost className="mt-5" />
-        </WrapperPosts>
       </div>
-    </div>
+    </>
   );
 }
