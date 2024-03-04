@@ -13,5 +13,9 @@ export default async function NotFoundPage() {
     )
   );
 
-  return <PageFromTheme code="404" />;
+  return (
+    <div className="container">
+      <PageFromTheme code="404" />
+    </div>
+  );
 }

@@ -18,7 +18,7 @@ export default function ForumsForumView({
 
   return (
     <>
-      <HeaderContent h1={t("forum")} />
+      <HeaderContent className="mt-5" h1={t("forum")} />
 
       {edges.length ? (
         <div className="flex flex-col gap-4">

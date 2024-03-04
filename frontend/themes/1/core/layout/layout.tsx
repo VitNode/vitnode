@@ -27,7 +27,7 @@ export default function Layout({ children }: Props) {
   return (
     <>
       <Header />
-      <div className="container">{children}</div>
+      {children}
       {poweredBy}
       <QuickMenu />
     </>

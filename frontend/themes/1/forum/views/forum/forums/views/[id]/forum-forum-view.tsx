@@ -7,6 +7,7 @@ import type { Forum_Forums__Show_ItemQuery } from "@/graphql/hooks";
 import { TopicsListForum } from "./topics-list/topics-list";
 import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
 import { HeaderContent } from "@/components/header-content/header-content";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 
 import { ItemForum } from "../../item/item";
 
@@ -26,6 +27,8 @@ export default function ForumForumView({
 
   return (
     <>
+      <Breadcrumbs items={[]} />
+
       <Card className="mb-8">
         <CardHeader className="py-4">
           <HeaderContent
