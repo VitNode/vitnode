@@ -12,3 +12,6 @@ services:
       - "5050:80"
     networks:
       - vitnode
+
+networks:
+  vitnode:
