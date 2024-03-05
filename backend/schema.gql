@@ -206,6 +206,11 @@ type PermissionsForumForumsAdmin {
   groups: [GroupsPermissionsForumForums!]!
 }
 
+type PermissionsTopicForums {
+  can_edit: Boolean!
+  can_reply: Boolean!
+}
+
 type Query {
   admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
   admin__core_members__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
@@ -579,6 +584,7 @@ type ShowTopicsForums {
   created: Int!
   id: Int!
   locked: Boolean!
+  permissions: PermissionsTopicForums!
   title: [TextLanguage!]!
   user: User!
 }

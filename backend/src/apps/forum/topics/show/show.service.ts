@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { and, asc, count, eq, or } from "drizzle-orm";
 
 import { ShowTopicsForumsArgs } from "./dto/show.args";
-import { ShowTopicsForumsObj } from "./dto/show.obj";
+import { PermissionsTopicForums, ShowTopicsForumsObj } from "./dto/show.obj";
 
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 import { User } from "@/utils/decorators/user.decorator";
@@ -115,11 +115,24 @@ export class ShowTopicsForumsService {
               forumId: edge.forum.id
             });
 
+            const permissionsData = edge.forum.permissions.at(0);
+            const permissions: PermissionsTopicForums = user
+              ? {
+                  can_reply:
+                    permissionsData?.can_reply || edge.forum.can_all_reply,
+                  can_edit: user.id === post.user.id
+                }
+              : {
+                  can_reply: false,
+                  can_edit: false
+                };
+
             return {
               ...edge,
               user: post.user,
               content: post.content,
-              breadcrumbs
+              breadcrumbs,
+              permissions
             };
           })
           .filter(edge => edge !== null)

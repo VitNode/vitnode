@@ -34,7 +34,16 @@ export default function TopicView({
   } = dataApi;
   const data = edges.at(0);
   if (!data) return null;
-  const { breadcrumbs, content, created, id, locked, title, user } = data;
+  const {
+    breadcrumbs,
+    content,
+    created,
+    id,
+    locked,
+    permissions,
+    title,
+    user
+  } = data;
   const forum = breadcrumbs.at(-1);
   if (!forum) return null;
 
@@ -78,7 +87,13 @@ export default function TopicView({
             user={user}
             created={created}
             disableInitialAnimation
-            customMoreMenu={<ActionsTopic id={id} state={{ locked }} />}
+            customMoreMenu={
+              <ActionsTopic
+                id={id}
+                state={{ locked }}
+                permissions={permissions}
+              />
+            }
           />
 
           <HeaderPosts totalComments={pageInfo.totalCount} />
@@ -110,7 +125,7 @@ export default function TopicView({
             )}
           </AnimatePresenceClient>
 
-          <CreatePost className="mt-5" />
+          {permissions.can_reply && <CreatePost className="mt-5" />}
         </WrapperPosts>
       </div>
     </div>

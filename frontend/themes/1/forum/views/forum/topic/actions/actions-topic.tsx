@@ -14,19 +14,27 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LockToggleActionsTopic } from "./lock-toggle/lock-toggle";
 import { usePathname, useRouter } from "@/i18n";
+import type { PermissionsTopicForums } from "@/graphql/hooks";
 
 interface Props {
   id: number;
+  permissions: PermissionsTopicForums;
   state: {
     locked: boolean;
   };
 }
 
-export const ActionsTopic = ({ id, state }: Props) => {
+export const ActionsTopic = ({
+  id,
+  permissions: { can_edit },
+  state
+}: Props) => {
   const t = useTranslations("forum.topics.actions");
   const tCore = useTranslations("core");
   const pathname = usePathname();
   const { push } = useRouter();
+
+  if (!can_edit) return null;
 
   return (
     <DropdownMenu>

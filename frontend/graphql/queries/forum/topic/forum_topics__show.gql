@@ -44,6 +44,10 @@ query Forum_topics__show(
           language_code
         }
       }
+      permissions {
+        can_reply
+        can_edit
+      }
     }
   }
   forum_posts__show(

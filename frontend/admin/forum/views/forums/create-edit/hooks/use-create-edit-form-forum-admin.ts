@@ -45,14 +45,14 @@ export const useCreateEditFormForumAdmin = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: data?.name || [],
-      description: data?.description || [],
+      name: data?.name ?? [],
+      description: data?.description ?? [],
       permissions: {
-        can_all_view: data?.permissions.can_all_view || true,
-        can_all_read: data?.permissions.can_all_read || true,
-        can_all_create: data?.permissions.can_all_create || true,
-        can_all_reply: data?.permissions.can_all_reply || true,
-        groups: data?.permissions.groups || []
+        can_all_view: data?.permissions.can_all_view ?? true,
+        can_all_read: data?.permissions.can_all_read ?? true,
+        can_all_create: data?.permissions.can_all_create ?? true,
+        can_all_reply: data?.permissions.can_all_reply ?? true,
+        groups: data?.permissions.groups ?? []
       }
     },
     mode: "onTouched"
