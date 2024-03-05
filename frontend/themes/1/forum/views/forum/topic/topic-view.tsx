@@ -46,12 +46,7 @@ export default function TopicView({
 
   return (
     <>
-      <Breadcrumbs
-        items={[
-          ...breadcrumbItems,
-          { id, text: convertText(title), href: `/topic/${id}` }
-        ]}
-      />
+      <Breadcrumbs items={breadcrumbItems} />
 
       <div className="flex flex-col md:flex-row gap-5">
         <div className="flex-1">

@@ -51,16 +51,7 @@ export default function CreateTopicView({ data }: CreateTopicViewProps) {
 
   return (
     <>
-      <Breadcrumbs
-        items={[
-          ...breadcrumbsItems,
-          {
-            id: `create_${id}`,
-            text: t("title"),
-            href: `/forum/${id}/create`
-          }
-        ]}
-      />
+      <Breadcrumbs items={breadcrumbsItems} />
 
       <Card>
         <CardHeader>
