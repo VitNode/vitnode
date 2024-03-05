@@ -1,6 +1,6 @@
 import { NestFactory } from "@nestjs/core";
 import { ValidationPipe } from "@nestjs/common";
-import cookieParser from "cookie-parser";
+import * as cookieParser from "cookie-parser";
 
 import { AppModule } from "./app.module";
 import { RedisIoAdapter } from "./redis.adapter";
