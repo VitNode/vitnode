@@ -8,10 +8,9 @@
       "dynamicImport": true
     },
     "paths": {
-      "@/*": ["./src/*"],
-      "~/*": ["../*"]
+      "@/*": ["./src/*"]
     },
     "baseUrl": "./"
   },
-  "minify": true
+  "minify": false
 }
