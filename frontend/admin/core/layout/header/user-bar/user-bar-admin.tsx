@@ -34,7 +34,7 @@ export const UserBarAdmin = () => {
           variant="ghost"
           className="rounded-full"
           size="icon"
-          tooltip={tCore("open_menu")}
+          ariaLabel={tCore("open_menu")}
         >
           <AvatarUser user={{ name, ...rest }} sizeInRem={2} />
         </Button>

@@ -1,4 +1,4 @@
-import { ChevronDown, Settings } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
@@ -22,8 +22,8 @@ export const ActionsTopic = ({ id, state }: Props) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm">
-          <Settings /> {t("title")} <ChevronDown />
+        <Button variant="ghost" size="icon" ariaLabel={t("title")}>
+          <MoreHorizontal />
         </Button>
       </DropdownMenuTrigger>
 

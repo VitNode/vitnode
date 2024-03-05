@@ -28,7 +28,7 @@ export const ThemeSwitcher = () => {
         <Button
           variant="outline"
           size="icon"
-          tooltip={t("user-bar.theme.change")}
+          ariaLabel={t("user-bar.theme.change")}
         >
           <Palette />
         </Button>

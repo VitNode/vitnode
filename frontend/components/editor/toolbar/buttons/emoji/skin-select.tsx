@@ -37,7 +37,7 @@ export const SkinSelectEmojiButtonEditor = ({
           className="flex-shrink-0 w-9 h-9"
           size="icon"
           variant="ghost"
-          tooltip={t("skin.title")}
+          ariaLabel={t("skin.title")}
         >
           <div
             className="w-5 h-5 rounded-md"

@@ -1,5 +1,5 @@
-import { Steps } from 'nextra/components';
-import { Callout } from 'nextra/components';
+import { Steps } from "nextra/components";
+import { Callout } from "nextra/components";
 
 # Dialog
 
@@ -14,14 +14,14 @@ Dialog component is from [Shadcn UI](https://ui.shadcn.com/docs/components/dialo
 We're create `test.tsx` file as example.
 
 ```tsx
-import { Dialog, DialogTrigger } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 export const Test = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" tooltip="Edit">
+        <Button variant="ghost" size="icon" ariaLabel="Edit">
           <Pencil />
         </Button>
       </DialogTrigger>
@@ -33,7 +33,7 @@ export const Test = () => {
 ### Define content
 
 ```tsx
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 export const Test = () => {
   return (
@@ -83,13 +83,13 @@ export const ModalTest = () => {
 And then, import it in `test.tsx` file with `Suspance` and `Loader` component.
 
 ```tsx
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy } from "react";
 
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { Loader } from '@/components/loader/loader';
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Loader } from "@/components/loader/loader";
 
 const ModalTest = lazy(() =>
-  import('./modal-test').then(module => ({
+  import("./modal-test").then(module => ({
     default: module.ModalTest
   }))
 );
@@ -112,8 +112,8 @@ export const Test = () => {
 </Steps>
 
 <Callout type="info" emoji="ℹ️">
-  We're recomended to create each dialog in separate file. It's will help you to manage your code.
-  One for trigger dialog and one for content dialog.
+  We're recomended to create each dialog in separate file. It's will help you to
+  manage your code. One for trigger dialog and one for content dialog.
 </Callout>
 
 ## Tooltip with Dialog Trigger
@@ -121,14 +121,19 @@ export const Test = () => {
 You can use `Tooltip` component to create tooltip with dialog trigger. Here is the example:
 
 ```tsx
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy } from "react";
 
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { Loader } from '@/components/loader/loader';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Loader } from "@/components/loader/loader";
 
 const ModalTest = lazy(() =>
-  import('./modal-test').then(module => ({
+  import("./modal-test").then(module => ({
     default: module.ModalTest
   }))
 );

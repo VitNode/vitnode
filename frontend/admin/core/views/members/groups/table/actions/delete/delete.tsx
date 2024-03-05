@@ -39,7 +39,7 @@ export const DeleteGroupsMembersDialogAdmin = (
               <Button
                 variant="destructiveGhost"
                 size="icon"
-                tooltip={t("delete")}
+                ariaLabel={t("delete")}
               >
                 <Trash2 />
               </Button>

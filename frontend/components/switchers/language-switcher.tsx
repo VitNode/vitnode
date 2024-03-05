@@ -38,7 +38,7 @@ export const LanguageSwitcher = () => {
         <Button
           variant="outline"
           size="icon"
-          tooltip={t("user-bar.language.change")}
+          ariaLabel={t("user-bar.language.change")}
         >
           <Languages className="size-[1.2rem]" />
         </Button>

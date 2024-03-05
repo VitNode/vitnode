@@ -66,7 +66,7 @@ export const EmojisContentIconInput = ({
                   key={`search_${id}`}
                   size="icon"
                   className="text-2xl"
-                  tooltip={emoji.name}
+                  ariaLabel={emoji.name}
                   variant={value === icon ? "default" : "ghost"}
                   onClick={() => {
                     if (value === icon) {
@@ -113,7 +113,7 @@ export const EmojisContentIconInput = ({
                   key={`${id}_${category.id}`}
                   size="icon"
                   className="text-2xl"
-                  tooltip={emoji.name}
+                  ariaLabel={emoji.name}
                   variant={value === icon ? "default" : "ghost"}
                   onClick={() => {
                     if (value === icon) {

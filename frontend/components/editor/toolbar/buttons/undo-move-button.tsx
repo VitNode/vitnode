@@ -33,7 +33,7 @@ export const UndoMoveButtonEditor = () => {
       size="icon"
       className="size-9"
       onClick={() => editor.dispatchCommand(UNDO_COMMAND, undefined)}
-      tooltip={t("undo")}
+      ariaLabel={t("undo")}
       disabled={!canUndo}
     >
       <Undo />

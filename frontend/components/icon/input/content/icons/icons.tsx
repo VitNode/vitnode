@@ -32,7 +32,7 @@ export const IconsContentIconInput = ({
         <Button
           key={name}
           size="icon"
-          tooltip={name}
+          ariaLabel={name}
           variant={value === name ? "default" : "ghost"}
           onClick={() => {
             if (value === name) {

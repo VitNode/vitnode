@@ -11,7 +11,7 @@
       "open": "Open",
       "closed": "Closed",
       "actions": {
-        "title": "Actions",
+        "title": "More Actions",
         "lock": "Lock",
         "unlock": "Unlock",
         "meta": {

@@ -103,7 +103,7 @@ export const ColorButtonEditor = ({ type }: Props) => {
                       key={color}
                       style={{ backgroundColor: color }}
                       onClick={() => updateColor(color)}
-                      tooltip=""
+                      ariaLabel=""
                     />
                   ))}
 
@@ -114,7 +114,7 @@ export const ColorButtonEditor = ({ type }: Props) => {
                     onClick={() =>
                       setCustomColor(fontColor ? fontColor : "#000000")
                     }
-                    tooltip=""
+                    ariaLabel=""
                   >
                     <Palette />
                   </Button>
@@ -144,7 +144,7 @@ export const ColorButtonEditor = ({ type }: Props) => {
                   className="flex-shrink-0"
                   variant="ghost"
                   onClick={() => setCustomColor("")}
-                  tooltip={tCore("cancel")}
+                  ariaLabel={tCore("cancel")}
                 >
                   <X />
                 </Button>
@@ -153,7 +153,7 @@ export const ColorButtonEditor = ({ type }: Props) => {
                   size="icon"
                   className="flex-shrink-0"
                   onClick={() => updateColor(customColor)}
-                  tooltip={tCore("confirm")}
+                  ariaLabel={tCore("confirm")}
                 >
                   <Check />
                 </Button>

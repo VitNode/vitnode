@@ -77,7 +77,7 @@ export const ItemTableForumsForumAdmin = ({
           className="sm:flex hidden flex-shrink-0 focus:outline-none text-muted-foreground hover:text-foreground cursor-grab"
           variant="ghost"
           size="icon"
-          tooltip=""
+          ariaLabel=""
           {...attributes}
           {...listeners}
         >
@@ -89,7 +89,7 @@ export const ItemTableForumsForumAdmin = ({
             onClick={() => onCollapse(id)}
             variant="ghost"
             size="icon"
-            tooltip=""
+            ariaLabel=""
           >
             <ChevronRight
               className={cn("transition-transform text-muted-foreground", {

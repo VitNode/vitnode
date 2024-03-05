@@ -33,7 +33,7 @@ export const RedoMoveButtonEditor = () => {
       size="icon"
       className="size-9"
       onClick={() => editor.dispatchCommand(REDO_COMMAND, undefined)}
-      tooltip={t("redo")}
+      ariaLabel={t("redo")}
       disabled={!canRedo}
     >
       <Redo />

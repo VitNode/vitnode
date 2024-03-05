@@ -21,7 +21,7 @@ export const DownloadThemeActionsAdmin = (
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" tooltip={t("download")}>
+        <Button variant="ghost" size="icon" ariaLabel={t("download")}>
           <Download />
         </Button>
       </DialogTrigger>

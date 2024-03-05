@@ -32,7 +32,7 @@ const Breadcrumbs = forwardRef<HTMLDivElement, Props>(
           </li>
 
           {items.map((item, index) => (
-            <li key={item.id} className="flex gap-2 items-center">
+            <li key={item.id} className="flex gap-2 items-center flex-shrink-0">
               <ChevronRight className="size-4" />
               {index === items.length - 1 ? (
                 <span

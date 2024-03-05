@@ -19,7 +19,7 @@ export const ChevronCategoryForumButton = ({ id }: Props) => {
       variant="ghost"
       size="icon"
       data-state={open ? "open" : "closed"}
-      tooltip=""
+      ariaLabel=""
       onClick={() => {
         setOpen(prev => !prev);
         const currentId = id.toString();

@@ -30,7 +30,7 @@ export const DeletePluginActionsAdmin = ({
         <Button
           variant="destructiveGhost"
           size="icon"
-          tooltip={t("delete")}
+          ariaLabel={t("delete")}
           disabled={isDefault || isProtected}
         >
           <Trash2 />
