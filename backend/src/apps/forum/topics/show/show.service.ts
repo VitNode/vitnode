@@ -15,7 +15,6 @@ import { forum_topics } from "@/apps/admin/forum/database/schema/topics";
 import { forum_posts } from "@/apps/admin/forum/database/schema/posts";
 import { CustomError } from "@/utils/errors/CustomError";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
-import { forum_forums_permissions } from "@/apps/admin/forum/database/schema/forums";
 import { StatsShowForumForumsService } from "../../forums/show/stats.service";
 
 @Injectable()
@@ -65,7 +64,7 @@ export class ShowTopicsForumsService {
           with: {
             name: true,
             permissions: {
-              where: eq(forum_forums_permissions.group_id, user?.group.id ?? 1) // 1 = guest
+              where: (table, { eq }) => eq(table.group_id, user?.group.id ?? 1) // 1 = guest
             }
           }
         },

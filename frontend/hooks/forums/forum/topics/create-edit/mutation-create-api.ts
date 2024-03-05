@@ -9,7 +9,7 @@ import {
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 
-export const mutationApi = async (
+export const mutationCreateApi = async (
   variables: Forum_Topics__CreateMutationVariables
 ) => {
   try {

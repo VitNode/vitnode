@@ -25,7 +25,7 @@ import { getIdFormString } from "@/functions/url";
 import { useRouter } from "@/i18n";
 import type { ShowTopicsForums } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
-import { useCreateEditTopic } from "@/hooks/forums/forum/topics/create/use-create-edit-topic";
+import { useCreateEditTopic } from "@/hooks/forums/forum/topics/create-edit/use-create-edit-topic";
 
 export interface EditTopicData
   extends Pick<ShowTopicsForums, "title" | "content" | "id"> {}

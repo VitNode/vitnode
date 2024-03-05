@@ -204,6 +204,7 @@ export type Mutation = {
   forum_posts__create: ShowPostsForums;
   forum_topics__actions__lock_toggle: Scalars['Boolean']['output'];
   forum_topics__create: ShowTopicsForums;
+  forum_topics__edit: ShowTopicsForums;
 };
 
 
@@ -434,6 +435,13 @@ export type MutationForum_Topics__Actions__Lock_ToggleArgs = {
 export type MutationForum_Topics__CreateArgs = {
   content: Array<TextLanguageInput>;
   forum_id: Scalars['Int']['input'];
+  title: Array<TextLanguageInput>;
+};
+
+
+export type MutationForum_Topics__EditArgs = {
+  content: Array<TextLanguageInput>;
+  id: Scalars['Int']['input'];
   title: Array<TextLanguageInput>;
 };
 
@@ -1403,6 +1411,15 @@ export type Forum_Topics__CreateMutationVariables = Exact<{
 
 export type Forum_Topics__CreateMutation = { __typename?: 'Mutation', forum_topics__create: { __typename?: 'ShowTopicsForums', created: number, id: number, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
+export type Forum_Topics__EditMutationVariables = Exact<{
+  content: Array<TextLanguageInput> | TextLanguageInput;
+  id: Scalars['Int']['input'];
+  title: Array<TextLanguageInput> | TextLanguageInput;
+}>;
+
+
+export type Forum_Topics__EditMutation = { __typename?: 'Mutation', forum_topics__edit: { __typename?: 'ShowTopicsForums', id: number, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, content: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+
 export type Admin__Install__LayoutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1998,6 +2015,21 @@ export const Forum_Topics__Create = gql`
     created
     id
     title {
+      language_code
+      value
+    }
+  }
+}
+    `;
+export const Forum_Topics__Edit = gql`
+    mutation Forum_topics__edit($content: [TextLanguageInput!]!, $id: Int!, $title: [TextLanguageInput!]!) {
+  forum_topics__edit(content: $content, id: $id, title: $title) {
+    id
+    title {
+      language_code
+      value
+    }
+    content {
       language_code
       value
     }

@@ -6,6 +6,8 @@ import { CreateForumTopicsResolver } from "./create/create.resolver";
 import { CreateForumTopicsService } from "./create/create.service";
 import { PostsForumModule } from "../posts/topics.module";
 import { ForumsForumModule } from "../forums/forums.module";
+import { EditForumTopicsResolver } from "./edit/edit.resolver";
+import { EditForumTopicsService } from "./edit/edit.service";
 
 import { LockToggleForumTopicsResolver } from "@/apps/forum/topics/actions/lock_unlock/lock_toggle.resolver";
 import { LockToggleForumTopicsService } from "@/apps/forum/topics/actions/lock_unlock/lock_toggle.service";
@@ -17,7 +19,9 @@ import { LockToggleForumTopicsService } from "@/apps/forum/topics/actions/lock_u
     CreateForumTopicsResolver,
     CreateForumTopicsService,
     LockToggleForumTopicsResolver,
-    LockToggleForumTopicsService
+    LockToggleForumTopicsService,
+    EditForumTopicsResolver,
+    EditForumTopicsService
   ],
   imports: [PostsForumModule, ForumsForumModule]
 })
