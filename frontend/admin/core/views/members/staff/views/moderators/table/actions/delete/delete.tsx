@@ -27,7 +27,7 @@ export const DeleteActionsTableModeratorsStaffAdmin = (props: Props) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructiveGhost" size="icon" tooltip={t("delete")}>
+        <Button variant="destructiveGhost" size="icon" ariaLabel={t("delete")}>
           <Trash2 />
         </Button>
       </AlertDialogTrigger>

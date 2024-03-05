@@ -30,7 +30,7 @@ export const CopyButtonCodeAction = ({ codeDOMNode }: Props) => {
       className="w-8 h-8 [&>svg]:pointer-events-none [&>svg]:w-4 [&>svg]:h-4"
       variant="outline"
       size="icon"
-      tooltip={t("copy_code")}
+      ariaLabel={t("copy_code")}
       onClick={async () => {
         let content = "";
 

@@ -12,15 +12,17 @@ import {
 } from "./ui/select";
 import { FormControl } from "./ui/form";
 import type { TextLanguage } from "@/graphql/hooks";
+import { cn } from "@/functions/classnames";
 
 interface Props
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "value"> {
   onChange: (value: TextLanguage[]) => void;
   value: TextLanguage[];
+  className?: string;
 }
 
 const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
-  ({ onChange, value, ...props }, ref) => {
+  ({ className, onChange, value, ...props }, ref) => {
     const locale = useLocale();
     const { defaultLanguage, languages } = useGlobals();
     const [selectedLanguage, setSelectedLanguage] = useState(
@@ -32,9 +34,9 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
         ?.value ?? "";
 
     return (
-      <div className="flex gap-2">
+      <div className={cn("flex gap-2", className)}>
         <Input
-          className="flex-grow"
+          className="flex-grow max-h-full"
           type="text"
           onChange={e => {
             const value = e.target.value;
@@ -67,7 +69,7 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
         {languages.length > 1 && (
           <Select onValueChange={setSelectedLanguage} value={selectedLanguage}>
             <FormControl>
-              <SelectTrigger className="basis-64">
+              <SelectTrigger className="basis-64 max-h-full">
                 <SelectValue />
               </SelectTrigger>
             </FormControl>

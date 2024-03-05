@@ -27,7 +27,7 @@ export const EmojiButtonEditor = () => {
           variant="ghost"
           size="icon"
           className="size-9"
-          tooltip={t("title")}
+          ariaLabel={t("title")}
         >
           <Smile />
         </Button>

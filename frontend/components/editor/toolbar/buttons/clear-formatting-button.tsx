@@ -67,7 +67,7 @@ export const ClearFormattingButtonEditor = () => {
       className="size-9"
       size="icon"
       onClick={clearFormatting}
-      tooltip={t("remove_formatting")}
+      ariaLabel={t("remove_formatting")}
     >
       <RemoveFormatting />
     </Button>

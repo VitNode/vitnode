@@ -15,6 +15,15 @@ export class ForumTopicsForums {
 }
 
 @ObjectType()
+export class PermissionsTopicForums {
+  @Field(() => Boolean)
+  can_reply: boolean;
+
+  @Field(() => Boolean)
+  can_edit: boolean;
+}
+
+@ObjectType()
 export class ShowTopicsForums {
   @Field(() => Int)
   id: number;
@@ -36,6 +45,9 @@ export class ShowTopicsForums {
 
   @Field(() => [BreadcrumbsForumForums])
   breadcrumbs: BreadcrumbsForumForums[];
+
+  @Field(() => PermissionsTopicForums)
+  permissions: PermissionsTopicForums;
 }
 
 @ObjectType()

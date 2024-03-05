@@ -1,5 +1,3 @@
-"use client";
-
 import { Lock, Unlock } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";

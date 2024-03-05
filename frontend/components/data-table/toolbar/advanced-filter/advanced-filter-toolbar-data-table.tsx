@@ -27,7 +27,7 @@ export const AdvancedFilterToolbarDataTable = ({ children }: Props) => {
           className="ml-auto"
           variant="outline"
           size="icon"
-          tooltip={t("filters")}
+          ariaLabel={t("filters")}
         >
           <Filter />
         </Button>

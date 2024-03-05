@@ -1,0 +1,17 @@
+mutation Forum_topics__edit(
+  $content: [TextLanguageInput!]!
+  $id: Int!
+  $title: [TextLanguageInput!]!
+) {
+  forum_topics__edit(content: $content, id: $id, title: $title) {
+    id
+    title {
+      language_code
+      value
+    }
+    content {
+      language_code
+      value
+    }
+  }
+}

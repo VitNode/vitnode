@@ -65,7 +65,7 @@ export const ColorInput = forwardRef<HTMLButtonElement, Props>(
             <Button
               className="shrink-0"
               size="icon"
-              tooltip={t("remove")}
+              ariaLabel={t("remove")}
               variant="destructiveGhost"
               onClick={() => setColor(null)}
             >

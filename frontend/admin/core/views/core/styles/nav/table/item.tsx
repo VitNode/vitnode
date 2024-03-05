@@ -59,7 +59,7 @@ export const ItemContentTableContentNavAdmin = ({
         className="sm:flex hidden flex-shrink-0 focus:outline-none text-muted-foreground hover:text-foreground cursor-grab"
         variant="ghost"
         size="icon"
-        tooltip=""
+        ariaLabel=""
         {...attributes}
         {...listeners}
       >

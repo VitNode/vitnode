@@ -173,6 +173,7 @@ type Mutation {
   forum_posts__create(content: [TextLanguageInput!]!, topic_id: Int!): ShowPostsForums!
   forum_topics__actions__lock_toggle(id: Int!): Boolean!
   forum_topics__create(content: [TextLanguageInput!]!, forum_id: Int!, title: [TextLanguageInput!]!): ShowTopicsForums!
+  forum_topics__edit(content: [TextLanguageInput!]!, id: Int!, title: [TextLanguageInput!]!): ShowTopicsForums!
 }
 
 type PageInfo {
@@ -204,6 +205,11 @@ type PermissionsForumForumsAdmin {
   can_all_reply: Boolean!
   can_all_view: Boolean!
   groups: [GroupsPermissionsForumForums!]!
+}
+
+type PermissionsTopicForums {
+  can_edit: Boolean!
+  can_reply: Boolean!
 }
 
 type Query {
@@ -579,6 +585,7 @@ type ShowTopicsForums {
   created: Int!
   id: Int!
   locked: Boolean!
+  permissions: PermissionsTopicForums!
   title: [TextLanguage!]!
   user: User!
 }

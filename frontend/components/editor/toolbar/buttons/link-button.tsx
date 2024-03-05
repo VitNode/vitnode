@@ -132,7 +132,7 @@ export const LinkButtonEditor = () => {
               variant="ghost"
               size="icon"
               onClick={() => editor.dispatchCommand(TOGGLE_LINK_COMMAND, null)}
-              tooltip={tCore("delete")}
+              ariaLabel={tCore("delete")}
             >
               <X />
             </Button>
@@ -147,7 +147,7 @@ export const LinkButtonEditor = () => {
                     sanitizeUrl(linkUrl)
                   );
                 }}
-                tooltip={tCore("confirm")}
+                ariaLabel={tCore("confirm")}
               >
                 <Check />
               </Button>

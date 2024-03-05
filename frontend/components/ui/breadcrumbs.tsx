@@ -31,28 +31,12 @@ const Breadcrumbs = forwardRef<HTMLDivElement, Props>(
             </Link>
           </li>
 
-          {items.map((item, index) => (
-            <li key={item.id} className="flex gap-2 items-center">
+          {items.map(item => (
+            <li key={item.id} className="flex gap-2 items-center flex-shrink-0">
               <ChevronRight className="size-4" />
-              {index === items.length - 1 ? (
-                <span
-                  className={cn(
-                    classNameItem,
-                    "text-foreground hover:no-underline"
-                  )}
-                >
-                  {item.text}
-                </span>
-              ) : (
-                <Link
-                  className={cn(classNameItem, {
-                    "text-foreground": index === items.length - 1
-                  })}
-                  href={item.href}
-                >
-                  {item.text}
-                </Link>
-              )}
+              <Link className={classNameItem} href={item.href}>
+                {item.text}
+              </Link>
             </li>
           ))}
         </ul>

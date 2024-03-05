@@ -233,7 +233,7 @@ export function DataTable<TData extends TDataMin>({
               variant="outline"
               size="icon"
               disabled={!pageInfo.hasPreviousPage}
-              tooltip={t("pagination.previous")}
+              ariaLabel={t("pagination.previous")}
               onClick={() =>
                 changeState({
                   cursor: pageInfo.startCursor,
@@ -246,7 +246,7 @@ export function DataTable<TData extends TDataMin>({
             <Button
               variant="outline"
               size="icon"
-              tooltip={t("pagination.next")}
+              ariaLabel={t("pagination.next")}
               disabled={!pageInfo.hasNextPage}
               onClick={() =>
                 changeState({

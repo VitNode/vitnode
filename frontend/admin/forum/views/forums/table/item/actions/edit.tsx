@@ -22,7 +22,7 @@ export const EditActionForumAdmin = (
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" tooltip={t("edit")}>
+        <Button variant="ghost" size="icon" ariaLabel={t("edit")}>
           <Pencil />
         </Button>
       </DialogTrigger>

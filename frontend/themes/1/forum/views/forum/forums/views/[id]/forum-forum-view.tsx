@@ -27,13 +27,15 @@ export default function ForumForumView({
 
   return (
     <>
-      <Breadcrumbs
-        items={forumData.breadcrumbs.map(item => ({
-          id: item.id,
-          text: convertText(item.name),
-          href: `/forum/${item.id}`
-        }))}
-      />
+      {forumData.breadcrumbs.length > 1 && (
+        <Breadcrumbs
+          items={forumData.breadcrumbs.slice(0, -1).map(item => ({
+            id: item.id,
+            text: convertText(item.name),
+            href: `/forum/${item.id}`
+          }))}
+        />
+      )}
 
       <Card className="mb-8">
         <CardHeader className="py-4">

@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import type { ReactNode } from "react";
 
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import { UserLink } from "@/components/user/link/user-link";
@@ -13,12 +14,14 @@ interface Props {
   created: number;
   post_id: number;
   user: User;
+  customMoreMenu?: ReactNode;
   disableInitialAnimation?: boolean;
 }
 
 export const PostTopic = ({
   content,
   created,
+  customMoreMenu,
   disableInitialAnimation,
   post_id: id,
   user
@@ -51,6 +54,8 @@ export const PostTopic = ({
             />
           </div>
         </div>
+
+        {customMoreMenu}
 
         {/* <Button variant="ghost" size="icon" tooltip={tCore("open_menu")}>
           <MoreHorizontal />

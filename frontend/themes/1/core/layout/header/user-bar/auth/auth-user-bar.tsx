@@ -32,7 +32,7 @@ export const AuthUserBar = () => {
           variant="ghost"
           className="sm:flex hidden rounded-full"
           size="icon"
-          tooltip=""
+          ariaLabel=""
         >
           <AvatarUser user={session} sizeInRem={1.75} />
         </Button>

@@ -69,7 +69,14 @@ export class CreateForumTopicsService {
     const topic = await this.databaseService.db.query.forum_topics.findFirst({
       where: (table, { eq }) => eq(table.id, data[0].id),
       with: {
-        title: true
+        title: true,
+        forum: {
+          with: {
+            permissions: {
+              where: (table, { eq }) => eq(table.group_id, user?.group.id ?? 1) // 1 = guest
+            }
+          }
+        }
       }
     });
 
@@ -77,6 +84,16 @@ export class CreateForumTopicsService {
       forumId: topic.forum_id
     });
 
-    return { ...topic, user: post.user, content: post.content, breadcrumbs };
+    return {
+      ...topic,
+      user: post.user,
+      content: post.content,
+      breadcrumbs,
+      permissions: {
+        can_reply:
+          topic.forum.permissions.at(0)?.can_reply || topic.forum.can_all_reply,
+        can_edit: user.id === post.user.id
+      }
+    };
   }
 }

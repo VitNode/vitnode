@@ -11,7 +11,7 @@
       "open": "Otwarty",
       "closed": "Zamknięty",
       "actions": {
-        "title": "Akcje",
+        "title": "Więcej akcji",
         "lock": "Zablokuj",
         "unlock": "Odblokuj",
         "meta": {
@@ -33,6 +33,10 @@
           "content": "Treść"
         },
         "submit": "Stwórz temat"
+      },
+      "edit": {
+        "title": "Edytuj temat - {title}",
+        "submit": "Zapisz zmiany"
       },
       "post": {
         "placeholder": "Napisz odpowiedź tutaj...",

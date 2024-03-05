@@ -85,7 +85,7 @@ export const PrettierButtonCodeAction = ({
       className="w-8 h-8 [&>svg]:pointer-events-none [&>svg]:fill-foreground [&>svg]:w-4 [&>svg]:h-4"
       variant="outline"
       size="icon"
-      tooltip={t("format_code")}
+      ariaLabel={t("format_code")}
       onClick={async () => {
         try {
           let content = "";

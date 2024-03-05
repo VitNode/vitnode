@@ -29,7 +29,7 @@ export const ActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
       {!data.protected && (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" tooltip={t("more_actions")}>
+            <Button variant="ghost" size="icon" ariaLabel={t("more_actions")}>
               <ChevronDown />
             </Button>
           </DropdownMenuTrigger>

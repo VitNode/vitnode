@@ -37,7 +37,7 @@ export const ChangeAvatar = () => {
                   variant="outline"
                   size="icon"
                   className="absolute bottom-[-0.5rem] left-[-0.5rem]"
-                  tooltip=""
+                  ariaLabel=""
                 >
                   <ImageIcon size={20} />
                 </Button>
