@@ -34,6 +34,10 @@
         },
         "submit": "Stwórz temat"
       },
+      "edit": {
+        "title": "Edytuj temat - {title}",
+        "submit": "Zapisz zmiany"
+      },
       "post": {
         "placeholder": "Napisz odpowiedź tutaj...",
         "submit": "Dodaj post"

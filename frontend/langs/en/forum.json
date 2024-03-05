@@ -34,6 +34,10 @@
         },
         "submit": "Create Topic"
       },
+      "edit": {
+        "title": "Edit Topic - {title}",
+        "submit": "Edit Topic"
+      },
       "post": {
         "placeholder": "Write your reply here...",
         "submit": "Submit Post"

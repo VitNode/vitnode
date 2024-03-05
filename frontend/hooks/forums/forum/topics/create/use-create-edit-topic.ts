@@ -8,14 +8,16 @@ import { mutationApi } from "./mutation-api";
 import { useDialog } from "@/components/ui/dialog";
 import { useRouter } from "@/i18n";
 import { zodInput } from "@/functions/zod";
+import type { EditTopicData } from "@/themes/1/forum/views/forum/topic/create-edit/create-edit";
 
 import { useTextLang } from "../../../../core/use-text-lang";
 
 interface Props {
   forumId: number;
+  data?: EditTopicData;
 }
 
-export const useCreateTopic = ({ forumId }: Props) => {
+export const useCreateEditTopic = ({ data, forumId }: Props) => {
   const t = useTranslations("core");
   const { setOpen } = useDialog();
   const { push } = useRouter();
@@ -37,8 +39,8 @@ export const useCreateTopic = ({ forumId }: Props) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: [],
-      content: []
+      title: data?.title || [],
+      content: data?.content || []
     },
     mode: "onTouched"
   });
