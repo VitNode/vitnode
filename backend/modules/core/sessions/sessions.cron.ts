@@ -3,7 +3,7 @@ import { Cron, CronExpression } from "@nestjs/schedule";
 import { lte } from "drizzle-orm";
 
 import { currentDate } from "@/functions/date";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { core_sessions } from "@/modules/admin/core/database/schema/sessions";
 
 @Injectable()

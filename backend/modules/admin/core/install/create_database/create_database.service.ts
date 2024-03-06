@@ -6,7 +6,7 @@ import { count } from "drizzle-orm";
 import { CustomError } from "@/utils/errors/CustomError";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { currentDate } from "@/functions/date";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { core_languages } from "@/modules/admin/core/database/schema/languages";
 import {
   core_groups,

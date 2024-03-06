@@ -7,7 +7,7 @@ import { Injectable } from "@nestjs/common";
 import { CreateAdminThemesArgs } from "./dto/create.args";
 import { ShowAdminThemes } from "../show/dto/show.obj";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { core_themes } from "../../database/schema/themes";
 import { currentDate } from "@/functions/date";
 

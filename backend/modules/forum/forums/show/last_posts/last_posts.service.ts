@@ -4,7 +4,7 @@ import { and, count, inArray } from "drizzle-orm";
 import { LastPostsShowForumForumsArgs } from "./dto/last_posts.args";
 import { LastPostsShowForumForumsObj } from "./dto/last_posts.obj";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import {
   inputPaginationCursor,
   outputPagination

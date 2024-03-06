@@ -3,7 +3,7 @@ import { count } from "drizzle-orm";
 
 import { ShowForumForumsAdminObj } from "./dto/show.obj";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { outputPagination } from "@/functions/database/pagination";
 import { forum_forums } from "@/modules/admin/forum/database/schema/forums";
 import { ShowForumForumsService } from "@/modules/forum/forums/show/show.service";

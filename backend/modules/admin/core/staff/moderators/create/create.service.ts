@@ -5,7 +5,7 @@ import { CreateAdminStaffModeratorsArgs } from "./dto/create.args";
 
 import { CustomError } from "@/utils/errors/CustomError";
 import { currentDate } from "@/functions/date";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { core_moderators_permissions } from "@/modules/admin/core/database/schema/moderators";
 
 @Injectable()

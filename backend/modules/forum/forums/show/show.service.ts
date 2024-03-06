@@ -11,7 +11,7 @@ import { LastPostsForumForumsService } from "./last_posts/last_posts.service";
 
 import { User } from "@/utils/decorators/user.decorator";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import {
   inputPaginationCursor,
   outputPagination

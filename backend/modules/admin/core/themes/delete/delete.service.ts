@@ -7,7 +7,7 @@ import { eq } from "drizzle-orm";
 
 import { DeleteAdminThemesArgs } from "./dto/delete.args";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_themes } from "../../database/schema/themes";
 import { CustomError } from "@/utils/errors/CustomError";

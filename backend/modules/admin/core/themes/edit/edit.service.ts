@@ -11,7 +11,7 @@ import { ConfigTheme } from "../themes.module";
 
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_themes } from "../../database/schema/themes";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 
 @Injectable()
 export class EditAdminThemesService {

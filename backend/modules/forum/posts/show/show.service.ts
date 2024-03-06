@@ -11,7 +11,7 @@ import {
   inputPaginationCursor,
   outputPagination
 } from "@/functions/database/pagination";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { forum_posts_timeline } from "@/modules/admin/forum/database/schema/posts";
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 import { NotFoundError } from "@/utils/errors/not-found-error";

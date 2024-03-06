@@ -4,7 +4,7 @@ import { and, count, isNull } from "drizzle-orm";
 import { ShowCoreNavArgs } from "./dto/show.args";
 import { ShowCoreNavObj } from "./dto/show.obj";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import {
   inputPaginationCursor,
   outputPagination

@@ -7,7 +7,7 @@ import { currentDate } from "@/functions/date";
 import { User } from "@/utils/decorators/user.decorator";
 import { Ctx } from "@/types/context.type";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import {
   forum_topics,
   forum_topics_titles

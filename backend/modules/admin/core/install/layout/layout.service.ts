@@ -7,7 +7,7 @@ import {
 } from "./dto/layout.obj";
 
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { core_users } from "@/modules/admin/core/database/schema/users";
 import { core_sessions } from "@/modules/admin/core/database/schema/sessions";
 import { core_admin_sessions } from "@/modules/admin/core/database/schema/admins";

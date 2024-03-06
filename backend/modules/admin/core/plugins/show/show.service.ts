@@ -4,7 +4,7 @@ import { count } from "drizzle-orm";
 import { ShowAdminPluginsArgs } from "./dto/show.args";
 import { ShowAdminPluginsObj } from "./dto/show.obj";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import {
   inputPaginationCursor,
   outputPagination

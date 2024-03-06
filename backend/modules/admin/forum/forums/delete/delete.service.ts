@@ -3,7 +3,7 @@ import { eq } from "drizzle-orm";
 
 import { DeleteForumForumsArgs } from "./dto/delete.args";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { CustomError } from "@/utils/errors/CustomError";
 import { forum_forums } from "../../database/schema/forums";

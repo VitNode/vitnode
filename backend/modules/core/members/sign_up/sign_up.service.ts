@@ -9,8 +9,8 @@ import { SignUpCoreMembersObj } from "./dto/sign_up.obj";
 import { CustomError } from "@/utils/errors/CustomError";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 import { currentDate } from "@/functions/date";
-import { generateAvatarColor } from "@/functions/avatar/generateAvatarColor";
-import { DatabaseService } from "@/database/database.service";
+import { generateAvatarColor } from "@/modules/core/members/sign_up/functions/generate-avatar-color";
+import { DatabaseService } from "@/modules/database/database.service";
 import { core_users } from "@/modules/admin/core/database/schema/users";
 
 @Injectable()

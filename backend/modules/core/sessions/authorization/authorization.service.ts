@@ -5,7 +5,7 @@ import { InternalAuthorizationCoreSessionsService } from "./internal/internal_au
 import { AuthorizationCoreSessionsObj } from "./dto/authorization.obj";
 
 import { Ctx } from "@/types/context.type";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { getConfigFile } from "@/functions/config/get-config-file";
 
 @Injectable()

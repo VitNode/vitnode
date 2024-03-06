@@ -7,7 +7,7 @@ import * as tar from "tar";
 import { DownloadCoreAdminLanguagesArgs } from "./dto/download.args";
 
 import { NotFoundError } from "@/utils/errors/not-found-error";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 import { User } from "@/utils/decorators/user.decorator";
 import { generateRandomString } from "@/functions/generate-random-string";

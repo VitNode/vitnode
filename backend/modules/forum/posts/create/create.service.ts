@@ -5,7 +5,7 @@ import { CreatePostsForumsArgs } from "@/modules/forum/posts/create/dto/create.a
 import { ShowPostsForums } from "@/modules/forum/posts/show/dto/show.obj";
 import { Ctx } from "@/types/context.type";
 import { User } from "@/utils/decorators/user.decorator";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import {
   forum_posts,
   forum_posts_content,

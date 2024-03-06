@@ -8,7 +8,7 @@ import * as tar from "tar";
 import { UploadAdminThemesArgs } from "./dto/delete.args";
 import { ConfigTheme } from "../themes.module";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { generateRandomString } from "@/functions/generate-random-string";
 import { currentDate } from "@/functions/date";
 import { CustomError } from "@/utils/errors/CustomError";

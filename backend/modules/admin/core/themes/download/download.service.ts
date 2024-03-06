@@ -8,7 +8,7 @@ import { eq } from "drizzle-orm";
 
 import { DownloadAdminThemesArgs } from "./dto/download.args";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 import { User } from "@/utils/decorators/user.decorator";

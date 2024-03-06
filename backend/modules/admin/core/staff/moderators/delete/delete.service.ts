@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 import { DeleteAdminStaffModeratorsArgs } from "./dto/delete.args";
 
 import { CustomError } from "@/utils/errors/CustomError";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { core_moderators_permissions } from "@/modules/admin/core/database/schema/moderators";
 
 @Injectable()

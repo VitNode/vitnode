@@ -5,7 +5,7 @@ import { EditAdminGroupsArgs } from "./dto/edit.args";
 import { ShowAdminGroups } from "../show/dto/show.obj";
 
 import { currentDate } from "@/functions/date";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import {
   core_groups,

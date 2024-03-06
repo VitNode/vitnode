@@ -7,7 +7,7 @@ import { eq } from "drizzle-orm";
 
 import { DeleteCoreAdminLanguagesArgs } from "./dto/delete.args";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_languages } from "../../database/schema/languages";
 import { CustomError } from "@/utils/errors/CustomError";

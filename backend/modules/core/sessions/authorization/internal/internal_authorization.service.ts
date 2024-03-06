@@ -6,7 +6,7 @@ import { eq } from "drizzle-orm";
 import { Ctx } from "@/types/context.type";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { convertUnixTime, currentDate } from "@/functions/date";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { User } from "@/utils/decorators/user.decorator";
 import { core_sessions_known_devices } from "@/modules/admin/core/database/schema/sessions";
 import { DeviceSignInCoreSessionsService } from "../../sign_in/device.service";

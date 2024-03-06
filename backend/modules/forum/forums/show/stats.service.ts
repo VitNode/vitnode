@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { SQL, count, eq, inArray, or } from "drizzle-orm";
 
 import { forum_posts } from "@/modules/admin/forum/database/schema/posts";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { TextLanguage } from "@/types/database/text-language.type";
 import { User } from "@/utils/decorators/user.decorator";
 import { forum_forums } from "@/modules/admin/forum/database/schema/forums";

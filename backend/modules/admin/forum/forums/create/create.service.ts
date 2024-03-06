@@ -5,7 +5,7 @@ import { CreateForumForumsObj } from "./dto/create.obj";
 
 import { CustomError } from "@/utils/errors/CustomError";
 import { currentDate } from "@/functions/date";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import {
   forum_forums,
   forum_forums_description,

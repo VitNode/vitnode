@@ -3,7 +3,7 @@ import { eq } from "drizzle-orm";
 import { ConfigService } from "@nestjs/config";
 
 import { Ctx } from "@/types/context.type";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { core_sessions } from "@/modules/admin/core/database/schema/sessions";
 
 @Injectable()

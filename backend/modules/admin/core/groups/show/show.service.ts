@@ -4,7 +4,7 @@ import { and, count, eq, ilike, inArray } from "drizzle-orm";
 import { ShowAdminGroupsArgs } from "./dto/show.args";
 import { ShowAdminGroupsObj } from "./dto/show.obj";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import {
   core_groups,
   core_groups_names

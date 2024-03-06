@@ -13,7 +13,7 @@ import { ModulesModule } from "./modules/modules.module";
 import { configuration } from "./configuration";
 
 import { Ctx } from "@/types/context.type";
-import { DatabaseModule } from "@/database/database.module";
+import { DatabaseModule } from "@/modules/database/database.module";
 
 @Module({
   imports: [

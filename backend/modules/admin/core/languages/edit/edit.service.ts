@@ -3,7 +3,7 @@ import { eq } from "drizzle-orm";
 
 import { EditCoreAdminLanguagesArgs } from "./dto/edit.args";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_languages } from "@/modules/admin/core/database/schema/languages";
 import { ShowCoreLanguages } from "@/modules/core/languages/show/dto/show.obj";

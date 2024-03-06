@@ -3,7 +3,7 @@ import { eq } from "drizzle-orm";
 
 import { EditAdminNavArgs } from "./dto/edit.args";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { ShowCoreNav } from "@/modules/core/nav/show/dto/show.obj";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import {

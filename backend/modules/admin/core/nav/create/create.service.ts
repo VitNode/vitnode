@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 
 import { CreateAdminNavArgs } from "./dto/create.args";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import {
   core_nav,
   core_nav_description,

@@ -7,7 +7,7 @@ import { AuthorizationAdminSessionsObj } from "./dto/authorization.obj";
 import { Ctx } from "@/types/context.type";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { currentDate } from "@/functions/date";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { getConfigFile } from "@/functions/config/get-config-file";
 
 @Injectable()

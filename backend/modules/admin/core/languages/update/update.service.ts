@@ -6,7 +6,7 @@ import * as tar from "tar";
 
 import { UpdateCoreAdminLanguagesArgs } from "./dto/update.args";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { setRebuildRequired } from "@/functions/config/rebuild-required";
 

@@ -4,7 +4,7 @@ import { and, count, eq, ilike, or } from "drizzle-orm";
 import { ShowCoreMembersObj } from "./dto/show.obj";
 import { ShowCoreMembersArgs } from "./dto/show.args";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import {
   inputPaginationCursor,
   outputPagination

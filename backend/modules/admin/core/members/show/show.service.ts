@@ -4,7 +4,7 @@ import { and, count, eq, ilike, inArray, or } from "drizzle-orm";
 import { ShowAdminMembersObj } from "./dto/show.obj";
 import { ShowAdminMembersArgs } from "./dto/show.args";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import {
   inputPaginationCursor,
   outputPagination

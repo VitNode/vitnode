@@ -12,7 +12,7 @@ import {
 import { CreateAdminPluginsArgs } from "./dto/create.args";
 import { ShowAdminPlugins } from "../show/dto/show.obj";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { CustomError } from "@/utils/errors/CustomError";
 import { core_plugins } from "../../database/schema/plugins";
 import { currentDate } from "@/functions/date";

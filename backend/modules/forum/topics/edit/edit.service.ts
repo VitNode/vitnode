@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 import { EditForumTopicsArgs } from "./dto/edit.args";
 import { ShowTopicsForums } from "../show/dto/show.obj";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { User } from "@/utils/decorators/user.decorator";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";

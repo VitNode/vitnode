@@ -5,7 +5,7 @@ import { currentDate } from "@/functions/date";
 import { Ctx } from "@/types/context.type";
 import { User } from "@/utils/decorators/user.decorator";
 import { LockToggleForumTopicsArgs } from "@/modules/forum/topics/actions/lock_unlock/dto/lock_toggle.args";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import {
   forum_topics,

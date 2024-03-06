@@ -4,7 +4,7 @@ import { ShowAdminGroups } from "../show/dto/show.obj";
 import { CreateAdminGroupsArgs } from "./dto/create.args";
 
 import { currentDate } from "@/functions/date";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import {
   core_groups,
   core_groups_names

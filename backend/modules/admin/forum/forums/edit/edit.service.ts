@@ -5,7 +5,7 @@ import { CreateForumForumsObj } from "../create/dto/create.obj";
 import { EditForumForumsArgs } from "./dto/edit.args";
 import { PermissionsCreateForumForums } from "../create/dto/create.args";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import {
   forum_forums,

@@ -3,7 +3,7 @@ import { eq, isNull } from "drizzle-orm";
 
 import { ChangePositionForumForumsArgs } from "./dto/change_position.args";
 
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { forum_forums } from "@/modules/admin/forum/database/schema/forums";
 

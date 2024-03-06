@@ -6,7 +6,7 @@ import { PermissionsTopicForums, ShowTopicsForumsObj } from "./dto/show.obj";
 
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 import { User } from "@/utils/decorators/user.decorator";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import {
   inputPaginationCursor,
   outputPagination

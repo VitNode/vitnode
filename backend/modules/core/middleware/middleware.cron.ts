@@ -4,7 +4,7 @@ import { eq, lt, or } from "drizzle-orm";
 import { ConfigService } from "@nestjs/config";
 
 import { currentDate } from "@/functions/date";
-import { DatabaseService } from "@/database/database.service";
+import { DatabaseService } from "@/modules/database/database.service";
 import { core_sessions_known_devices } from "@/modules/admin/core/database/schema/sessions";
 
 @Injectable()
