@@ -2,7 +2,7 @@ import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { GqlExecutionContext } from "@nestjs/graphql";
 
 import { Ctx } from "@/types/context.type";
-import { AuthorizationAdminSessionsService } from "@/src/apps/admin/core/sessions/authorization/authorization.service";
+import { AuthorizationAdminSessionsService } from "@/modules/admin/core/sessions/authorization/authorization.service";
 
 @Injectable()
 export class AdminAuthGuards implements CanActivate {

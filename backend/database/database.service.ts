@@ -2,8 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { NodePgDatabase, drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 
-import tableCore from "../src/apps/admin/core/database/index";
-import tableForum from "../src/apps/admin/forum/database/index";
+import tableCore from "../modules/admin/core/database/index";
+import tableForum from "../modules/admin/forum/database/index";
 // ! === IMPORT ===
 
 const schema = {
