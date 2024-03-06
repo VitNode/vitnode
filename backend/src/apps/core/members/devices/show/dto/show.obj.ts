@@ -2,16 +2,16 @@ import { Field, ObjectType } from "@nestjs/graphql";
 import { PageInfo } from "@/types/database/pagination.type";
 
 @ObjectType()
-export class ShowCoreSessionObj {
-  @Field(() => [ShowCoreSession])
-  edges: ShowCoreSession[];
+export class ShowCoreSessionDevicesObj {
+  @Field(() => [ShowCoreSessionDevices])
+  edges: ShowCoreSessionDevices[];
 
   @Field(() => PageInfo)
   pageInfo: PageInfo;
 }
 
 @ObjectType()
-export class ShowCoreSession {
+export class ShowCoreSessionDevices {
   @Field(() => String)
   login_token: string;
 

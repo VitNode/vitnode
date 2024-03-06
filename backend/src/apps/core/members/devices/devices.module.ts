@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { ShowCoreSessionResolver } from './show/show.resolver';
-import { ShowCoreSessionService } from './show/show.service';
+import { ShowCoreSessionDevicesResolver } from './show/show.resolver';
+import { ShowCoreSessionDevicesService } from './show/show.service';
 
 @Module({
-  providers: [ShowCoreSessionResolver, ShowCoreSessionService]
+  providers: [ShowCoreSessionDevicesResolver, ShowCoreSessionDevicesService]
 })
 export class DevicesModule {}

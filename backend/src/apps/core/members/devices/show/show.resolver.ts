@@ -1,16 +1,16 @@
 import { Args, Query, Resolver } from "@nestjs/graphql";
 
-import { ShowCoreSessionService } from "./show.service";
-import { ShowCoreSessionArgs } from "./dto/show.args";
-import { ShowCoreSessionObj } from "./dto/show.obj";
+import { ShowCoreSessionDevicesService } from "./show.service";
+import { ShowCoreSessionDevicesArgs } from "./dto/show.args";
+import { ShowCoreSessionDevicesObj } from "./dto/show.obj";
 
 @Resolver()
-export class ShowCoreSessionResolver {
-  constructor(private readonly service: ShowCoreSessionService) {}
+export class ShowCoreSessionDevicesResolver {
+  constructor(private readonly service: ShowCoreSessionDevicesService) {}
 
-  @Query(() => ShowCoreSessionObj)
+  @Query(() => ShowCoreSessionDevicesObj)
   async core_nav__show(
-    @Args() args: ShowCoreSessionArgs): Promise<ShowCoreSessionObj> {
+    @Args() args: ShowCoreSessionDevicesArgs): Promise<ShowCoreSessionDevicesObj> {
         return await this.service.show(args);
   }
 }

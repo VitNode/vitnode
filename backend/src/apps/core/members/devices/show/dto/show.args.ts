@@ -1,7 +1,7 @@
 import { ArgsType, Field, Int } from "@nestjs/graphql";
 
 @ArgsType()
-export class ShowCoreSessionArgs {
+export class ShowCoreSessionDevicesArgs {
   @Field(() => Int, { nullable: true })
   cursor: number | null;
 
