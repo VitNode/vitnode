@@ -8,10 +8,10 @@ import {
 
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { DatabaseService } from "@/database/database.service";
-import { core_users } from "@/apps/admin/core/database/schema/users";
-import { core_sessions } from "@/apps/admin/core/database/schema/sessions";
-import { core_admin_sessions } from "@/apps/admin/core/database/schema/admins";
-import { core_languages } from "@/apps/admin/core/database/schema/languages";
+import { core_users } from "@/src/apps/admin/core/database/schema/users";
+import { core_sessions } from "@/src/apps/admin/core/database/schema/sessions";
+import { core_admin_sessions } from "@/src/apps/admin/core/database/schema/admins";
+import { core_languages } from "@/src/apps/admin/core/database/schema/languages";
 
 @Injectable()
 export class LayoutAdminInstallService {

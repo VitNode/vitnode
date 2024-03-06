@@ -8,7 +8,7 @@ import { DatabaseService } from "@/database/database.service";
 import {
   core_groups,
   core_groups_names
-} from "@/apps/admin/core/database/schema/groups";
+} from "@/src/apps/admin/core/database/schema/groups";
 
 @Injectable()
 export class CreateAdminGroupsService {

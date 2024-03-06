@@ -5,7 +5,7 @@ import { ConfigService } from "@nestjs/config";
 
 import { currentDate } from "@/functions/date";
 import { DatabaseService } from "@/database/database.service";
-import { core_sessions_known_devices } from "@/apps/admin/core/database/schema/sessions";
+import { core_sessions_known_devices } from "@/src/apps/admin/core/database/schema/sessions";
 
 @Injectable()
 export class CoreMiddlewareCron {

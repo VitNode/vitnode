@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
 
 import { User } from "@/utils/decorators/user.decorator";
-import { RebuildRequiredObj } from "@/apps/admin/core/sessions/authorization/dto/authorization.obj";
+import { RebuildRequiredObj } from "@/src/apps/admin/core/sessions/authorization/dto/authorization.obj";
 
 @ObjectType()
 export class AuthorizationCurrentUserObj extends User {

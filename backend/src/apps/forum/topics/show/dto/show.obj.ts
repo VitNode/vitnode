@@ -3,7 +3,7 @@ import { Field, Int, ObjectType } from "@nestjs/graphql";
 import { PageInfo } from "@/types/database/pagination.type";
 import { TextLanguage } from "@/types/database/text-language.type";
 import { User } from "@/utils/decorators/user.decorator";
-import { BreadcrumbsForumForums } from "@/apps/forum/forums/show/dto/show.obj";
+import { BreadcrumbsForumForums } from "@/src/apps/forum/forums/show/dto/show.obj";
 
 @ObjectType()
 export class ForumTopicsForums {

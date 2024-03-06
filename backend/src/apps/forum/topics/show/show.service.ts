@@ -11,8 +11,8 @@ import {
   inputPaginationCursor,
   outputPagination
 } from "@/functions/database/pagination";
-import { forum_topics } from "@/apps/admin/forum/database/schema/topics";
-import { forum_posts } from "@/apps/admin/forum/database/schema/posts";
+import { forum_topics } from "@/src/apps/admin/forum/database/schema/topics";
+import { forum_posts } from "@/src/apps/admin/forum/database/schema/posts";
 import { CustomError } from "@/utils/errors/CustomError";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { StatsShowForumForumsService } from "../../forums/show/stats.service";

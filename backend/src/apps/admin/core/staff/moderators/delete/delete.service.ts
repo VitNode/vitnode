@@ -5,7 +5,7 @@ import { DeleteAdminStaffModeratorsArgs } from "./dto/delete.args";
 
 import { CustomError } from "@/utils/errors/CustomError";
 import { DatabaseService } from "@/database/database.service";
-import { core_moderators_permissions } from "@/apps/admin/core/database/schema/moderators";
+import { core_moderators_permissions } from "@/src/apps/admin/core/database/schema/moderators";
 
 @Injectable()
 export class DeleteAdminStaffModeratorsService {

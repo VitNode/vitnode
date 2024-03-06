@@ -9,7 +9,7 @@ import {
   inputPaginationCursor,
   outputPagination
 } from "@/functions/database/pagination";
-import { forum_posts } from "@/apps/admin/forum/database/schema/posts";
+import { forum_posts } from "@/src/apps/admin/forum/database/schema/posts";
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 interface Args extends LastPostsShowForumForumsArgs {

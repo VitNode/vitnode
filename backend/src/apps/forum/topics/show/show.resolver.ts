@@ -6,7 +6,10 @@ import { ShowTopicsForumsArgs } from "./dto/show.args";
 import { ShowTopicsForumsObj } from "./dto/show.obj";
 
 import { AuthGuards, OptionalAuth } from "@/utils/guards/auth.guards";
-import { CurrentUser, User } from "../../../../utils/decorators/user.decorator";
+import {
+  CurrentUser,
+  User
+} from "../../../../../utils/decorators/user.decorator";
 
 @Resolver()
 export class ShowTopicsForumsResolver {

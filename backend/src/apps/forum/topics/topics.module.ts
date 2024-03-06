@@ -9,8 +9,8 @@ import { ForumsForumModule } from "../forums/forums.module";
 import { EditForumTopicsResolver } from "./edit/edit.resolver";
 import { EditForumTopicsService } from "./edit/edit.service";
 
-import { LockToggleForumTopicsResolver } from "@/apps/forum/topics/actions/lock_unlock/lock_toggle.resolver";
-import { LockToggleForumTopicsService } from "@/apps/forum/topics/actions/lock_unlock/lock_toggle.service";
+import { LockToggleForumTopicsResolver } from "@/src/apps/forum/topics/actions/lock_unlock/lock_toggle.resolver";
+import { LockToggleForumTopicsService } from "@/src/apps/forum/topics/actions/lock_unlock/lock_toggle.service";
 
 @Module({
   providers: [

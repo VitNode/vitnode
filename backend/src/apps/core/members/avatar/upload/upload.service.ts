@@ -6,11 +6,11 @@ import { UploadAvatarCoreMembersObj } from "./dto/upload.obj";
 
 import { User } from "@/utils/decorators/user.decorator";
 import { CustomError } from "@/utils/errors/CustomError";
-import { UploadCoreFilesService } from "@/apps/core/files/upload/upload.service";
+import { UploadCoreFilesService } from "@/src/apps/core/files/upload/upload.service";
 import { DatabaseService } from "@/database/database.service";
-import { core_files_avatars } from "@/apps/admin/core/database/schema/files";
+import { core_files_avatars } from "@/src/apps/admin/core/database/schema/files";
 import { currentDate } from "@/functions/date";
-import { DeleteCoreFilesService } from "@/apps/core/files/delete/delete.service";
+import { DeleteCoreFilesService } from "@/src/apps/core/files/delete/delete.service";
 
 @Injectable()
 export class UploadAvatarCoreMembersService {

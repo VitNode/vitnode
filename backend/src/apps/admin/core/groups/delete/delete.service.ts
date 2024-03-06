@@ -5,8 +5,8 @@ import { DeleteAdminGroupsArgs } from "./dto/delete.args";
 
 import { DatabaseService } from "@/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
-import { core_users } from "@/apps/admin/core/database/schema/users";
-import { core_groups } from "@/apps/admin/core/database/schema/groups";
+import { core_users } from "@/src/apps/admin/core/database/schema/users";
+import { core_groups } from "@/src/apps/admin/core/database/schema/groups";
 
 @Injectable()
 export class DeleteAdminGroupsService {

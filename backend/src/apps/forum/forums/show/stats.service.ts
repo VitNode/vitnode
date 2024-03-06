@@ -1,11 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { SQL, count, eq, inArray, or } from "drizzle-orm";
 
-import { forum_posts } from "@/apps/admin/forum/database/schema/posts";
+import { forum_posts } from "@/src/apps/admin/forum/database/schema/posts";
 import { DatabaseService } from "@/database/database.service";
 import { TextLanguage } from "@/types/database/text-language.type";
 import { User } from "@/utils/decorators/user.decorator";
-import { forum_forums } from "@/apps/admin/forum/database/schema/forums";
+import { forum_forums } from "@/src/apps/admin/forum/database/schema/forums";
 
 @Injectable()
 export class StatsShowForumForumsService {

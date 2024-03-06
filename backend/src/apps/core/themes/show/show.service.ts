@@ -10,7 +10,7 @@ import {
   outputPagination
 } from "@/functions/database/pagination";
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
-import { core_themes } from "@/apps/admin/core/database/schema/themes";
+import { core_themes } from "@/src/apps/admin/core/database/schema/themes";
 
 @Injectable()
 export class ShowCoreThemesService {

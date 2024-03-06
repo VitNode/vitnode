@@ -4,7 +4,7 @@ import { ConfigService } from "@nestjs/config";
 
 import { DatabaseService } from "@/database/database.service";
 import { convertUnixTime, currentDate } from "@/functions/date";
-import { core_sessions_known_devices } from "@/apps/admin/core/database/schema/sessions";
+import { core_sessions_known_devices } from "@/src/apps/admin/core/database/schema/sessions";
 import { Ctx } from "@/types/context.type";
 
 interface DeviceType {

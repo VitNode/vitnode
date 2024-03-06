@@ -11,7 +11,7 @@ import { DatabaseService } from "@/database/database.service";
 import {
   forum_topics,
   forum_topics_titles
-} from "@/apps/admin/forum/database/schema/topics";
+} from "@/src/apps/admin/forum/database/schema/topics";
 import { CreateForumsPostsService } from "../../posts/create/create.service";
 import { StatsShowForumForumsService } from "../../forums/show/stats.service";
 

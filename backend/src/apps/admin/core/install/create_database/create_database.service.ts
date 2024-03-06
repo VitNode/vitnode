@@ -7,12 +7,12 @@ import { CustomError } from "@/utils/errors/CustomError";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { currentDate } from "@/functions/date";
 import { DatabaseService } from "@/database/database.service";
-import { core_languages } from "@/apps/admin/core/database/schema/languages";
+import { core_languages } from "@/src/apps/admin/core/database/schema/languages";
 import {
   core_groups,
   core_groups_names
-} from "@/apps/admin/core/database/schema/groups";
-import { core_admin_permissions } from "@/apps/admin/core/database/schema/admins";
+} from "@/src/apps/admin/core/database/schema/groups";
+import { core_admin_permissions } from "@/src/apps/admin/core/database/schema/admins";
 import { core_moderators_permissions } from "../../database/schema/moderators";
 import { core_plugins } from "../../database/schema/plugins";
 import { core_themes } from "../../database/schema/themes";

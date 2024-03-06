@@ -4,8 +4,8 @@ import { Args, Context, Mutation, Resolver } from "@nestjs/graphql";
 import { Ctx } from "@/types/context.type";
 import { CurrentUser, User } from "@/utils/decorators/user.decorator";
 import { AuthGuards } from "@/utils/guards/auth.guards";
-import { LockToggleForumTopicsService } from "@/apps/forum/topics/actions/lock_unlock/lock_toggle.service";
-import { LockToggleForumTopicsArgs } from "@/apps/forum/topics/actions/lock_unlock/dto/lock_toggle.args";
+import { LockToggleForumTopicsService } from "@/src/apps/forum/topics/actions/lock_unlock/lock_toggle.service";
+import { LockToggleForumTopicsArgs } from "@/src/apps/forum/topics/actions/lock_unlock/dto/lock_toggle.args";
 
 @Resolver()
 export class LockToggleForumTopicsResolver {

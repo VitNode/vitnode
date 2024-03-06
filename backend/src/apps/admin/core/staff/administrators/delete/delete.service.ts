@@ -6,7 +6,7 @@ import { DeleteAdminStaffAdministratorsArgs } from "./dto/delete.args";
 import { CustomError } from "@/utils/errors/CustomError";
 import { DatabaseService } from "@/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
-import { core_admin_permissions } from "@/apps/admin/core/database/schema/admins";
+import { core_admin_permissions } from "@/src/apps/admin/core/database/schema/admins";
 
 @Injectable()
 export class DeleteAdminStaffAdministratorsService {

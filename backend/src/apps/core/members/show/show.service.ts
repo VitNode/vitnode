@@ -9,7 +9,7 @@ import {
   inputPaginationCursor,
   outputPagination
 } from "@/functions/database/pagination";
-import { core_users } from "@/apps/admin/core/database/schema/users";
+import { core_users } from "@/src/apps/admin/core/database/schema/users";
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 @Injectable()

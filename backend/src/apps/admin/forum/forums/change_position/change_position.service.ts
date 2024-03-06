@@ -5,7 +5,7 @@ import { ChangePositionForumForumsArgs } from "./dto/change_position.args";
 
 import { DatabaseService } from "@/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
-import { forum_forums } from "@/apps/admin/forum/database/schema/forums";
+import { forum_forums } from "@/src/apps/admin/forum/database/schema/forums";
 
 @Injectable()
 export class ChangePositionForumForumsService {

@@ -5,9 +5,9 @@ import { ShowForumForumsAdminObj } from "./dto/show.obj";
 
 import { DatabaseService } from "@/database/database.service";
 import { outputPagination } from "@/functions/database/pagination";
-import { forum_forums } from "@/apps/admin/forum/database/schema/forums";
-import { ShowForumForumsService } from "@/apps/forum/forums/show/show.service";
-import { ShowForumForumsArgs } from "@/apps/forum/forums/show/dto/show.args";
+import { forum_forums } from "@/src/apps/admin/forum/database/schema/forums";
+import { ShowForumForumsService } from "@/src/apps/forum/forums/show/show.service";
+import { ShowForumForumsArgs } from "@/src/apps/forum/forums/show/dto/show.args";
 
 @Injectable()
 export class ShowForumForumsAdminService {

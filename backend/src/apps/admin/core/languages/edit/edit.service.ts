@@ -5,8 +5,8 @@ import { EditCoreAdminLanguagesArgs } from "./dto/edit.args";
 
 import { DatabaseService } from "@/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
-import { core_languages } from "@/apps/admin/core/database/schema/languages";
-import { ShowCoreLanguages } from "@/apps/core/languages/show/dto/show.obj";
+import { core_languages } from "@/src/apps/admin/core/database/schema/languages";
+import { ShowCoreLanguages } from "@/src/apps/core/languages/show/dto/show.obj";
 
 @Injectable()
 export class EditAdminCoreLanguagesService {

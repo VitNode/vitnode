@@ -6,7 +6,7 @@ import { Injectable } from "@nestjs/common";
 import { CreateCoreAdminLanguagesArgs } from "./dto/edit.args";
 
 import { DatabaseService } from "@/database/database.service";
-import { ShowCoreLanguages } from "@/apps/core/languages/show/dto/show.obj";
+import { ShowCoreLanguages } from "@/src/apps/core/languages/show/dto/show.obj";
 import { CustomError } from "@/utils/errors/CustomError";
 import { core_languages } from "../../database/schema/languages";
 import { currentDate } from "@/functions/date";

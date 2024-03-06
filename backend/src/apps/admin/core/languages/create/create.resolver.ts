@@ -5,7 +5,7 @@ import { CreateAdminCoreLanguageService } from "./create.service";
 import { CreateCoreAdminLanguagesArgs } from "./dto/edit.args";
 
 import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
-import { ShowCoreLanguages } from "@/apps/core/languages/show/dto/show.obj";
+import { ShowCoreLanguages } from "@/src/apps/core/languages/show/dto/show.obj";
 
 @Resolver()
 export class CreateAdminCoreLanguagesResolver {

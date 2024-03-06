@@ -1,4 +1,4 @@
-import { changeCodePluginToCapitalLetters } from "@/apps/admin/core/plugins/functions/change-code-plugin-to-capital-letters";
+import { changeCodePluginToCapitalLetters } from "@/src/apps/admin/core/plugins/functions/change-code-plugin-to-capital-letters";
 
 export const createModuleSchema = ({
   admin,

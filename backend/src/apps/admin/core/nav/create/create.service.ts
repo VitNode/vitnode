@@ -8,7 +8,7 @@ import {
   core_nav_description,
   core_nav_name
 } from "../../database/schema/nav";
-import { ShowCoreNav } from "@/apps/core/nav/show/dto/show.obj";
+import { ShowCoreNav } from "@/src/apps/core/nav/show/dto/show.obj";
 
 @Injectable()
 export class CreateAdminNavService {

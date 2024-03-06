@@ -10,8 +10,8 @@ import { relations } from "drizzle-orm";
 
 import { forum_topics, forum_topics_logs } from "./topics";
 
-import { core_users } from "@/apps/admin/core/database/schema/users";
-import { core_languages } from "@/apps/admin/core/database/schema/languages";
+import { core_users } from "@/src/apps/admin/core/database/schema/users";
+import { core_languages } from "@/src/apps/admin/core/database/schema/languages";
 
 export const forum_posts = pgTable(
   "forum_posts",

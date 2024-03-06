@@ -11,7 +11,7 @@ import {
   forum_forums_description,
   forum_forums_name,
   forum_forums_permissions
-} from "@/apps/admin/forum/database/schema/forums";
+} from "@/src/apps/admin/forum/database/schema/forums";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 
 @Injectable()

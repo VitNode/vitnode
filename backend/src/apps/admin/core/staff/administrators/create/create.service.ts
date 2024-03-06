@@ -6,7 +6,7 @@ import { CreateAdminStaffAdministratorsArgs } from "./dto/create.args";
 import { CustomError } from "@/utils/errors/CustomError";
 import { currentDate } from "@/functions/date";
 import { DatabaseService } from "@/database/database.service";
-import { core_admin_permissions } from "@/apps/admin/core/database/schema/admins";
+import { core_admin_permissions } from "@/src/apps/admin/core/database/schema/admins";
 
 @Injectable()
 export class CreateAdminStaffAdministratorsService {

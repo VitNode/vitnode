@@ -5,8 +5,14 @@ import { ShowForumForumsService } from "./show.service";
 import { ShowForumForumsObj } from "./dto/show.obj";
 import { ShowForumForumsArgs } from "./dto/show.args";
 
-import { AuthGuards, OptionalAuth } from "../../../../utils/guards/auth.guards";
-import { CurrentUser, User } from "../../../../utils/decorators/user.decorator";
+import {
+  AuthGuards,
+  OptionalAuth
+} from "../../../../../utils/guards/auth.guards";
+import {
+  CurrentUser,
+  User
+} from "../../../../../utils/decorators/user.decorator";
 
 @Resolver()
 export class ShowForumForumsResolver {

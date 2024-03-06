@@ -14,8 +14,8 @@ import {
   forum_forums_permissions
 } from "../../database/schema/forums";
 import { TextLanguageInput } from "@/types/database/text-language.type";
-import { StatsShowForumForumsService } from "@/apps/forum/forums/show/stats.service";
-import { LastPostsForumForumsService } from "@/apps/forum/forums/show/last_posts/last_posts.service";
+import { StatsShowForumForumsService } from "@/src/apps/forum/forums/show/stats.service";
+import { LastPostsForumForumsService } from "@/src/apps/forum/forums/show/last_posts/last_posts.service";
 import { User } from "@/utils/decorators/user.decorator";
 
 @Injectable()

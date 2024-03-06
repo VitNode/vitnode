@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
 
 import { currentDate } from "@/functions/date";
-import { CreatePostsForumsArgs } from "@/apps/forum/posts/create/dto/create.args";
-import { ShowPostsForums } from "@/apps/forum/posts/show/dto/show.obj";
+import { CreatePostsForumsArgs } from "@/src/apps/forum/posts/create/dto/create.args";
+import { ShowPostsForums } from "@/src/apps/forum/posts/show/dto/show.obj";
 import { Ctx } from "@/types/context.type";
 import { User } from "@/utils/decorators/user.decorator";
 import { DatabaseService } from "@/database/database.service";
@@ -10,7 +10,7 @@ import {
   forum_posts,
   forum_posts_content,
   forum_posts_timeline
-} from "@/apps/admin/forum/database/schema/posts";
+} from "@/src/apps/admin/forum/database/schema/posts";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 
 @Injectable()

@@ -11,7 +11,7 @@ import { EditForumForumsService } from "./forums/edit/edit.service";
 import { DeleteForumForumsResolver } from "./forums/delete/delete.resolver";
 import { DeleteForumForumsService } from "./forums/delete/delete.service";
 
-import { ForumsForumModule } from "@/apps/forum/forums/forums.module";
+import { ForumsForumModule } from "@/src/apps/forum/forums/forums.module";
 
 @Module({
   providers: [

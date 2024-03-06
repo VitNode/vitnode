@@ -9,7 +9,7 @@ import { ServeStaticModule } from "@nestjs/serve-static";
 import { ScheduleModule } from "@nestjs/schedule";
 import { ConfigModule } from "@nestjs/config";
 
-import { ModulesModule } from "./apps/modules.module";
+import { ModulesModule } from "./src/apps/modules.module";
 import { configuration } from "./configuration";
 
 import { Ctx } from "@/types/context.type";
