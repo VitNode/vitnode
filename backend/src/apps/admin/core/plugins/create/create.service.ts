@@ -119,7 +119,7 @@ export class CreateAdminPluginsService {
     }
 
     // Database
-    const pathDatabaseService = "database/database.service.ts";
+    const pathDatabaseService = "src/database/database.service.ts";
     const databaseContentService = readFileSync(pathDatabaseService, "utf8");
     await writeFile(
       pathDatabaseService,
