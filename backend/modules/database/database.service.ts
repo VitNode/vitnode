@@ -3,7 +3,7 @@ import { NodePgDatabase, drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 
 import tableCore from "../admin/core/database/index";
-import tableForum from "../admin/forum/database/index";
+import tableForum from "../forum/admin/database/index";
 // ! === IMPORT ===
 
 const schema = {

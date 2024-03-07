@@ -10,7 +10,7 @@ import {
   forum_posts,
   forum_posts_content,
   forum_posts_timeline
-} from "@/modules/admin/forum/database/schema/posts";
+} from "@/modules/forum/admin/database/schema/posts";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 
 @Injectable()

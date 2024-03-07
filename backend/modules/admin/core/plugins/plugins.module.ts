@@ -6,6 +6,8 @@ import { CreateAdminPluginsResolver } from "./create/create.resolver";
 import { CreateAdminPluginsService } from "./create/create.service";
 import { DeleteAdminPluginsResolver } from "./delete/delete.resolver";
 import { DeleteAdminPluginsService } from "./delete/delete.service";
+import { CreateFilesCreateAdminPluginsService } from "./create/files/create/create-files.service";
+import { ChangeFilesCreateAdminPluginsService } from "./create/files/change/change.service";
 
 @Module({
   providers: [
@@ -14,7 +16,9 @@ import { DeleteAdminPluginsService } from "./delete/delete.service";
     CreateAdminPluginsResolver,
     CreateAdminPluginsService,
     DeleteAdminPluginsResolver,
-    DeleteAdminPluginsService
+    DeleteAdminPluginsService,
+    CreateFilesCreateAdminPluginsService,
+    ChangeFilesCreateAdminPluginsService
   ]
 })
 export class AdminPluginsModule {}

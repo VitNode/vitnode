@@ -5,7 +5,7 @@ import { ShowForumForumsAdminObj } from "./dto/show.obj";
 
 import { DatabaseService } from "@/modules/database/database.service";
 import { outputPagination } from "@/functions/database/pagination";
-import { forum_forums } from "@/modules/admin/forum/database/schema/forums";
+import { forum_forums } from "@/modules/forum/admin/database/schema/forums";
 import { ShowForumForumsService } from "@/modules/forum/forums/show/show.service";
 import { ShowForumForumsArgs } from "@/modules/forum/forums/show/dto/show.args";
 

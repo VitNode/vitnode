@@ -10,8 +10,8 @@ import { NotFoundError } from "@/utils/errors/not-found-error";
 import {
   forum_topics,
   forum_topics_logs
-} from "@/modules/admin/forum/database/schema/topics";
-import { forum_posts_timeline } from "@/modules/admin/forum/database/schema/posts";
+} from "@/modules/forum/admin/database/schema/topics";
+import { forum_posts_timeline } from "@/modules/forum/admin/database/schema/posts";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 
 @Injectable()

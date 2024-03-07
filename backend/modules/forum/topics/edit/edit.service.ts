@@ -9,8 +9,8 @@ import { NotFoundError } from "@/utils/errors/not-found-error";
 import { User } from "@/utils/decorators/user.decorator";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { TextLanguageInput } from "@/types/database/text-language.type";
-import { forum_topics_titles } from "@/modules/admin/forum/database/schema/topics";
-import { forum_posts_content } from "@/modules/admin/forum/database/schema/posts";
+import { forum_topics_titles } from "@/modules/forum/admin/database/schema/topics";
+import { forum_posts_content } from "@/modules/forum/admin/database/schema/posts";
 import { StatsShowForumForumsService } from "../../forums/show/stats.service";
 
 @Injectable()

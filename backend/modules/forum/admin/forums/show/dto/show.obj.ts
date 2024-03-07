@@ -1,6 +1,6 @@
 import { Field, Int, ObjectType, OmitType } from "@nestjs/graphql";
 
-import { ShowForumForumsWithChildren } from "../../../../../forum/forums/show/dto/show.obj";
+import { ShowForumForumsWithChildren } from "../../../../forums/show/dto/show.obj";
 import { PageInfo } from "@/types/database/pagination.type";
 
 @ObjectType()

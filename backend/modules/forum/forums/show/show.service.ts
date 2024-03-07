@@ -19,7 +19,7 @@ import {
 import {
   forum_forums,
   forum_forums_name
-} from "@/modules/admin/forum/database/schema/forums";
+} from "@/modules/forum/admin/database/schema/forums";
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 interface ShowArgs extends ShowForumForumsArgs {
