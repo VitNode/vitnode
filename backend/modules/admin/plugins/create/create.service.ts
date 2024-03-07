@@ -38,8 +38,15 @@ export class CreateAdminPluginsService {
       });
     }
 
-    // Modifying files
-    this.createFilesService.createFiles({ code });
+    // Modifying / Create files
+    this.createFilesService.createFiles({
+      author,
+      author_url,
+      code,
+      description,
+      name,
+      support_url
+    });
     this.changeFilesService.changeFilesWhenCreate({ code });
 
     const data = await this.databaseService.db
