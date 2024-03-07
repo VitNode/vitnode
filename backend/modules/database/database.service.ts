@@ -2,19 +2,11 @@ import { Injectable } from "@nestjs/common";
 import { NodePgDatabase, drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 
-import tableCore from "../admin/database/index";
-import tableForum from "../forum/admin/database/index";
-// ! === IMPORT ===
-
-const schema = {
-  ...tableCore,
-  ...tableForum
-  // ! === MODULE ===
-};
+import { schemaDatabase } from "./schema";
 
 @Injectable()
 export class DatabaseService {
-  public db: NodePgDatabase<typeof schema>;
+  public db: NodePgDatabase<typeof schemaDatabase>;
 
   constructor() {
     const envs = {
@@ -33,6 +25,6 @@ export class DatabaseService {
       database: envs.name ?? "vitnode"
     });
 
-    this.db = drizzle(pool, { schema });
+    this.db = drizzle(pool, { schema: schemaDatabase });
   }
 }

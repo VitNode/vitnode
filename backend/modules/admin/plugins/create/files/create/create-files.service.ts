@@ -13,7 +13,7 @@ import { CustomError } from "@/utils/errors/CustomError";
 
 @Injectable()
 export class CreateFilesCreateAdminPluginsService {
-  protected path = "modules";
+  protected path = join(process.cwd(), "modules");
 
   createFiles({ code }: { code: string }): void {
     const folders: {
