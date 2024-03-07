@@ -38,7 +38,7 @@ export class CreateAdminPluginsService {
 
     // Modifying files
     this.createFilesService.createFiles({ code });
-    this.changeFilesService.changeFiles({ code });
+    this.changeFilesService.changeFilesWhenCreate({ code });
 
     // const data = await this.databaseService.db
     //   .insert(core_plugins)

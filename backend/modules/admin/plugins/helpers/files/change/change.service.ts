@@ -6,6 +6,10 @@ import { Injectable } from "@nestjs/common";
 import { changeDatabaseService, changeModuleRootSchema } from "./contents";
 
 import { CustomError } from "@/utils/errors/CustomError";
+import {
+  removeDatabaseFromService,
+  removeModuleFromRootSchema
+} from "../../../delete/contents";
 
 interface ChangeFilesContentType {
   condition: (content: string) => boolean;
@@ -48,7 +52,7 @@ export class ChangeFilesAdminPluginsService {
     });
   }
 
-  changeFiles({ code }: { code: string }): void {
+  changeFilesWhenCreate({ code }: { code: string }): void {
     const files: ChangeFilesContentType[] = [
       {
         path: "modules.module.ts",
@@ -64,8 +68,32 @@ export class ChangeFilesAdminPluginsService {
         content: content =>
           changeDatabaseService({
             content,
-            code,
-            admin: true
+            code
+          }),
+        condition: () => true
+      }
+    ];
+
+    this.changeContent({ files });
+  }
+
+  changeFilesWhenDelete({ code }: { code: string }): void {
+    const files: ChangeFilesContentType[] = [
+      {
+        path: "modules.module.ts",
+        content: content =>
+          removeModuleFromRootSchema({
+            content,
+            code
+          }),
+        condition: () => true
+      },
+      {
+        path: join("database", "schema.ts"),
+        content: content =>
+          removeDatabaseFromService({
+            content,
+            code
           }),
         condition: () => true
       }

@@ -1,14 +1,11 @@
-import { readFileSync } from "fs";
-import { rm, writeFile } from "fs/promises";
+import * as fs from "fs";
+import { join } from "path";
 
 import { Injectable } from "@nestjs/common";
 import { eq, sql } from "drizzle-orm";
 
-import {
-  removeDatabaseFromService,
-  removeModuleFromRootSchema
-} from "./contents";
 import { DeleteAdminPluginsArgs } from "./dto/delete.args";
+import { ChangeFilesAdminPluginsService } from "../helpers/files/change/change.service";
 
 import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
@@ -17,34 +14,37 @@ import { CustomError } from "@/utils/errors/CustomError";
 
 @Injectable()
 export class DeleteAdminPluginsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private changeFilesService: ChangeFilesAdminPluginsService
+  ) {}
 
   async delete({ code }: DeleteAdminPluginsArgs): Promise<string> {
-    const plugin = await this.databaseService.db.query.core_plugins.findFirst({
-      where: (table, { eq }) => eq(table.code, code)
-    });
+    // const plugin = await this.databaseService.db.query.core_plugins.findFirst({
+    //   where: (table, { eq }) => eq(table.code, code)
+    // });
 
-    if (!plugin) {
-      throw new NotFoundError("Plugin");
-    }
+    // if (!plugin) {
+    //   throw new NotFoundError("Plugin");
+    // }
 
-    if (plugin.protected) {
-      throw new CustomError({
-        code: "PROTECTED_PLUGIN",
-        message: "This plugin is protected and cannot be deleted"
-      });
-    }
+    // if (plugin.protected) {
+    //   throw new CustomError({
+    //     code: "PROTECTED_PLUGIN",
+    //     message: "This plugin is protected and cannot be deleted"
+    //   });
+    // }
 
-    if (plugin.default) {
-      throw new CustomError({
-        code: "DEFAULT_PLUGIN",
-        message: "This plugin is default and cannot be deleted"
-      });
-    }
+    // if (plugin.default) {
+    //   throw new CustomError({
+    //     code: "DEFAULT_PLUGIN",
+    //     message: "This plugin is default and cannot be deleted"
+    //   });
+    // }
 
     // Drop tables
     const tables: { getTables: () => string[] } = await import(
-      `@/modules/${code}/admin/database/functions`
+      `../../../../modules/${code}/admin/database/functions`
     );
     Promise.all(
       tables.getTables().map(async table => {
@@ -61,40 +61,12 @@ export class DeleteAdminPluginsService {
       })
     );
 
-    const pathModules = `src/apps/modules.module.ts`;
-    const moduleContent = readFileSync(pathModules, "utf8");
-    await writeFile(
-      pathModules,
-      removeModuleFromRootSchema({
-        content: moduleContent,
-        code
-      })
-    );
+    this.changeFilesService.changeFilesWhenDelete({ code });
 
-    const pathAdminModules = `src/apps/admin/admin.module.ts`;
-    const adminModuleContent = readFileSync(pathAdminModules, "utf8");
-    await writeFile(
-      pathAdminModules,
-      removeModuleFromRootSchema({
-        content: adminModuleContent,
-        code,
-        admin: true
-      })
-    );
-
-    const pathDatabaseService = "src/database/database.service.ts";
-    const databaseContentService = readFileSync(pathDatabaseService, "utf8");
-    await writeFile(
-      pathDatabaseService,
-      removeDatabaseFromService({
-        content: databaseContentService,
-        code,
-        admin: true
-      })
-    );
-
-    rm(`src/apps/${code}`, { recursive: true });
-    rm(`src/apps/admin/${code}`, { recursive: true });
+    const modulePath = join(process.cwd(), "modules", code);
+    if (fs.existsSync(modulePath)) {
+      fs.rmSync(modulePath, { recursive: true });
+    }
 
     await this.databaseService.db
       .delete(core_plugins)

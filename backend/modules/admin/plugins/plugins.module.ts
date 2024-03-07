@@ -8,7 +8,6 @@ import { DeleteAdminPluginsResolver } from "./delete/delete.resolver";
 import { DeleteAdminPluginsService } from "./delete/delete.service";
 import { CreateFilesAdminPluginsService } from "./helpers/files/create/create-files.service";
 import { ChangeFilesAdminPluginsService } from "./helpers/files/change/change.service";
-import { DeleteFilesAdminPluginsService } from "./helpers/files/delete/delete.service";
 
 @Module({
   providers: [
@@ -19,8 +18,7 @@ import { DeleteFilesAdminPluginsService } from "./helpers/files/delete/delete.se
     DeleteAdminPluginsResolver,
     DeleteAdminPluginsService,
     CreateFilesAdminPluginsService,
-    ChangeFilesAdminPluginsService,
-    DeleteFilesAdminPluginsService
+    ChangeFilesAdminPluginsService
   ]
 })
 export class AdminPluginsModule {}
