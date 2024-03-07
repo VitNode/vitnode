@@ -3,7 +3,11 @@ import { join } from "path";
 
 import { Injectable } from "@nestjs/common";
 
-import { createFunctionsDatabase, createModuleSchema } from "./contents";
+import {
+  createFunctionsDatabase,
+  createModuleAdminSchema,
+  createModuleSchema
+} from "./contents";
 
 import { CustomError } from "@/utils/errors/CustomError";
 
@@ -29,8 +33,8 @@ export class CreateFilesCreateAdminPluginsService {
         path: join(code, "admin"),
         files: [
           {
-            name: `${code}.module.ts`,
-            content: createModuleSchema({ code, admin: true })
+            name: "admin.module.ts",
+            content: createModuleAdminSchema({ code })
           }
         ]
       },
