@@ -41,7 +41,7 @@ export class DownloadAdminThemesService {
 
     const name = removeSpecialCharacters(
       `${theme.name}-${
-        version && version_code ? version_code : theme.version
+        version && version_code ? version_code : theme.version_code
       }--${userId}-${generateRandomString(5)}-${currentDate()}`
     );
 

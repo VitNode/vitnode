@@ -2,13 +2,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { toast } from "sonner";
 
 import { useDialog } from "@/components/ui/dialog";
 import { increaseVersionString } from "@/functions/increase-version-string";
 import { zodInput } from "@/functions/zod";
 import type { ShowAdminPlugins } from "@/graphql/hooks";
+import { CONFIG } from "@/config";
+import { mutationApi } from "./mutation-api";
 
 export const useDownloadPluginAdmin = ({
+  code,
   version,
   version_code
 }: Pick<ShowAdminPlugins, "version_code" | "version" | "code">) => {
@@ -30,22 +34,24 @@ export const useDownloadPluginAdmin = ({
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // const mutation = await mutationApi({
-    //   id,
-    //   version: values.type === "new_version" ? values.version : null,
-    //   versionCode: values.type === "new_version" ? values.version_code : null
-    // });
-    // if (mutation.error || !mutation.data) {
-    //   toast.error(t("errors.title"), {
-    //     description: t("errors.internal_server_error")
-    //   });
-    //   return;
-    // }
+    const mutation = await mutationApi({
+      code,
+      version: values.type === "new_version" ? values.version : null,
+      versionCode: values.type === "new_version" ? values.version_code : null
+    });
+    if (mutation.error || !mutation.data) {
+      toast.error(t("errors.title"), {
+        description: t("errors.internal_server_error")
+      });
+
+      return;
+    }
     setOpen?.(false);
-    // window.open(
-    //   `${CONFIG.backend_url}/files/${mutation.data.admin__core_themes__download}`,
-    //   "_blank"
-    // );
+
+    window.open(
+      `${CONFIG.backend_url}/files/${mutation.data.admin__core_plugins__download}`,
+      "_blank"
+    );
   };
 
   return { form, onSubmit };

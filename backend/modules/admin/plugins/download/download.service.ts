@@ -12,6 +12,7 @@ import { User } from "@/utils/decorators/user.decorator";
 import { generateRandomString } from "@/functions/generate-random-string";
 import { currentDate } from "@/functions/date";
 import { CustomError } from "@/utils/errors/CustomError";
+import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 
 @Injectable()
 export class DownloadAdminPluginsService {
@@ -80,9 +81,11 @@ export class DownloadAdminPluginsService {
     }
 
     // Tgs
-    const name = `${code}${
-      version && version_code ? version_code : plugin.version
-    }--${userId}-${generateRandomString(5)}-${currentDate()}`;
+    const name = removeSpecialCharacters(
+      `${code}${
+        version && version_code ? version_code : plugin.version_code
+      }--${userId}-${generateRandomString(5)}-${currentDate()}`
+    );
     await this.createTgz({ code, name });
 
     return `${name}.tgz`;
