@@ -1,6 +1,12 @@
 import { useTranslations } from "next-intl";
-import { DialogDescription } from "@radix-ui/react-dialog";
 
+import type { DownloadPluginActionsAdminProps } from "./download";
+import {
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -9,31 +15,24 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { useDownloadThemeAdmin } from "./hooks/use-download-theme-admin";
-import { Input } from "@/components/ui/input";
-import {
-  DialogFooter,
-  DialogHeader,
-  DialogTitle
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import type { ActionsItemThemesAdminProps } from "../actions";
+import { useDownloadPluginAdmin } from "./hooks/use-download-plugin-admin";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { cn } from "@/functions/classnames";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
-export const ContentDownloadThemeActionsAdmin = ({
-  id,
+export const ContentDownloadPluginActionsAdmin = ({
+  code,
   name,
   version,
   version_code
-}: ActionsItemThemesAdminProps) => {
-  const { form, onSubmit } = useDownloadThemeAdmin({
-    id,
+}: DownloadPluginActionsAdminProps) => {
+  const t = useTranslations("admin.core.plugins.download");
+  const { form, onSubmit } = useDownloadPluginAdmin({
+    version_code,
     version,
-    version_code
+    code
   });
-  const t = useTranslations("admin.core.styles.themes.download");
 
   return (
     <>
@@ -65,19 +64,8 @@ export const ContentDownloadThemeActionsAdmin = ({
                   </div>
 
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem
-                      value="new_version"
-                      id="new_version"
-                      disabled={id === 1}
-                    />
-                    <Label
-                      htmlFor="new_version"
-                      className={cn({
-                        "opacity-50": id === 1
-                      })}
-                    >
-                      {t("type.new_version")}
-                    </Label>
+                    <RadioGroupItem value="new_version" id="new_version" />
+                    <Label htmlFor="new_version">{t("type.new_version")}</Label>
                   </div>
                 </RadioGroup>
               )}

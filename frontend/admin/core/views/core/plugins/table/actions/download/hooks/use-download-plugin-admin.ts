@@ -1,0 +1,52 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+
+import { useDialog } from "@/components/ui/dialog";
+import { increaseVersionString } from "@/functions/increase-version-string";
+import { zodInput } from "@/functions/zod";
+import type { ShowAdminPlugins } from "@/graphql/hooks";
+
+export const useDownloadPluginAdmin = ({
+  version,
+  version_code
+}: Pick<ShowAdminPlugins, "version_code" | "version" | "code">) => {
+  const t = useTranslations("core");
+  const { setOpen } = useDialog();
+  const formSchema = z.object({
+    type: z.enum(["rebuild", "new_version"]),
+    version: zodInput.string,
+    version_code: z.coerce.number().min(version_code ? version_code + 1 : 10000)
+  });
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      type: version_code ? "rebuild" : "new_version",
+      version: version ? increaseVersionString(version) : "1.0.0",
+      version_code: version_code ? version_code + 1 : 10000
+    }
+  });
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    // const mutation = await mutationApi({
+    //   id,
+    //   version: values.type === "new_version" ? values.version : null,
+    //   versionCode: values.type === "new_version" ? values.version_code : null
+    // });
+    // if (mutation.error || !mutation.data) {
+    //   toast.error(t("errors.title"), {
+    //     description: t("errors.internal_server_error")
+    //   });
+    //   return;
+    // }
+    setOpen?.(false);
+    // window.open(
+    //   `${CONFIG.backend_url}/files/${mutation.data.admin__core_themes__download}`,
+    //   "_blank"
+    // );
+  };
+
+  return { form, onSubmit };
+};

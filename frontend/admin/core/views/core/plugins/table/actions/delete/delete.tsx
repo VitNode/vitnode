@@ -9,7 +9,7 @@ import {
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import type { ActionsItemPluginsAdminProps } from "../actions";
+import type { ShowAdminPlugins } from "@/graphql/hooks";
 
 const ContentDeletePluginActionsAdmin = lazy(() =>
   import("./content").then(module => ({
@@ -21,7 +21,7 @@ export const DeletePluginActionsAdmin = ({
   default: isDefault,
   protected: isProtected,
   ...props
-}: ActionsItemPluginsAdminProps) => {
+}: ShowAdminPlugins) => {
   const t = useTranslations("core");
 
   return (

@@ -9,14 +9,14 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { SubmitContentDeletePluginActionsAdmin } from "./submit";
-import type { ActionsItemPluginsAdminProps } from "../actions";
 import { useDeletePluginAdmin } from "./hooks/use-delete-plugin-admin";
+import type { ShowAdminPlugins } from "@/graphql/hooks";
 
 export const ContentDeletePluginActionsAdmin = ({
   author,
   code,
   name
-}: ActionsItemPluginsAdminProps) => {
+}: ShowAdminPlugins) => {
   const t = useTranslations("admin.core.plugins.delete");
   const tCore = useTranslations("core");
   const { onSubmit } = useDeletePluginAdmin({ code, name });

@@ -38,7 +38,7 @@ export async function generateMetadata({
 }: Props): Promise<Metadata> {
   const t = await getTranslations({
     locale,
-    namespace: "admin.core.styles.themes"
+    namespace: "admin.core.plugins"
   });
 
   return {
