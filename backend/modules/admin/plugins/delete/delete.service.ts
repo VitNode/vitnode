@@ -44,13 +44,20 @@ export class DeleteAdminPluginsService {
 
     // Drop tables
     const tables: { getTables: () => string[] } = await import(
-      `../../../${code}/database/functions`
+      `@/modules/${code}/admin/database/functions`
     );
     Promise.all(
       tables.getTables().map(async table => {
-        await this.databaseService.db.execute(
-          sql.raw(`DROP TABLE IF EXISTS ${table}`)
-        );
+        try {
+          await this.databaseService.db.execute(
+            sql.raw(`DROP TABLE IF EXISTS ${table}`)
+          );
+        } catch (error) {
+          throw new CustomError({
+            code: "DELETE_TABLE_ERROR",
+            message: `Error deleting table ${table}`
+          });
+        }
       })
     );
 

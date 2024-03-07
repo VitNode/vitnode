@@ -2,8 +2,8 @@ import { Injectable } from "@nestjs/common";
 
 import { CreateAdminPluginsArgs } from "./dto/create.args";
 import { ShowAdminPlugins } from "../show/dto/show.obj";
-import { CreateFilesCreateAdminPluginsService } from "./files/create/create-files.service";
-import { ChangeFilesCreateAdminPluginsService } from "./files/change/change.service";
+import { CreateFilesAdminPluginsService } from "../helpers/files/create/create-files.service";
+import { ChangeFilesAdminPluginsService } from "../helpers/files/change/change.service";
 
 import { DatabaseService } from "@/modules/database/database.service";
 import { CustomError } from "@/utils/errors/CustomError";
@@ -13,8 +13,8 @@ import { currentDate } from "@/functions/date";
 export class CreateAdminPluginsService {
   constructor(
     private databaseService: DatabaseService,
-    private createFilesService: CreateFilesCreateAdminPluginsService,
-    private changeFilesService: ChangeFilesCreateAdminPluginsService
+    private createFilesService: CreateFilesAdminPluginsService,
+    private changeFilesService: ChangeFilesAdminPluginsService
   ) {}
 
   async create({
