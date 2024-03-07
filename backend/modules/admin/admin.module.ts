@@ -1,9 +1,32 @@
 import { Module } from "@nestjs/common";
 
-import { AdminCoreModule } from "./core/core.module";
-import { GlobalAdminSessionsModule } from "./core/sessions/sessions.module";
+import { AdminSettingsModule } from "./settings/settings.module";
+import {
+  AdminSessionsModule,
+  GlobalAdminSessionsModule
+} from "./sessions/sessions.module";
+import { AdminInstallModule } from "./install/install.module";
+import { AdminGroupsModule } from "./groups/groups.module";
+import { AdminMembersModule } from "./members/members.module";
+import { AdminStaffModule } from "./staff/staff.module";
+import { AdminPluginsModule } from "./plugins/plugins.module";
+import { AdminThemesModule } from "./themes/themes.module";
+import { AdminNavModule } from "./nav/nav.module";
+import { AdminLanguagesModule } from "./languages/languages.module";
 
 @Module({
-  imports: [GlobalAdminSessionsModule, AdminCoreModule]
+  imports: [
+    GlobalAdminSessionsModule,
+    AdminSettingsModule,
+    AdminSessionsModule,
+    AdminInstallModule,
+    AdminGroupsModule,
+    AdminMembersModule,
+    AdminStaffModule,
+    AdminPluginsModule,
+    AdminThemesModule,
+    AdminNavModule,
+    AdminLanguagesModule
+  ]
 })
 export class AdminModule {}

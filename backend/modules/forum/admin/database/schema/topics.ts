@@ -12,8 +12,8 @@ import { relations } from "drizzle-orm";
 import { forum_forums } from "./forums";
 import { forum_posts, forum_posts_timeline } from "./posts";
 
-import { core_languages } from "@/modules/admin/core/database/schema/languages";
-import { core_users } from "@/modules/admin/core/database/schema/users";
+import { core_languages } from "@/modules/admin/database/schema/languages";
+import { core_users } from "@/modules/admin/database/schema/users";
 
 export const forum_topics = pgTable(
   "forum_topics",

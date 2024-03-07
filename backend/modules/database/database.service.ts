@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { NodePgDatabase, drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 
-import tableCore from "../admin/core/database/index";
+import tableCore from "../admin/database/index";
 import tableForum from "../forum/admin/database/index";
 // ! === IMPORT ===
 
