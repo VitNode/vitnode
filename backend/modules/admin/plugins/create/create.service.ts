@@ -8,6 +8,8 @@ import { ChangeFilesAdminPluginsService } from "../helpers/files/change/change.s
 import { DatabaseService } from "@/modules/database/database.service";
 import { CustomError } from "@/utils/errors/CustomError";
 import { currentDate } from "@/functions/date";
+import { core_plugins } from "../../database/schema/plugins";
+import { setRebuildRequired } from "@/functions/config/rebuild-required";
 
 @Injectable()
 export class CreateAdminPluginsService {
@@ -40,33 +42,21 @@ export class CreateAdminPluginsService {
     this.createFilesService.createFiles({ code });
     this.changeFilesService.changeFilesWhenCreate({ code });
 
-    // const data = await this.databaseService.db
-    //   .insert(core_plugins)
-    //   .values({
-    //     code,
-    //     description,
-    //     name,
-    //     support_url,
-    //     author,
-    //     author_url,
-    //     created: currentDate()
-    //   })
-    //   .returning();
+    const data = await this.databaseService.db
+      .insert(core_plugins)
+      .values({
+        code,
+        description,
+        name,
+        support_url,
+        author,
+        author_url,
+        created: currentDate()
+      })
+      .returning();
 
-    return {
-      code,
-      description,
-      name,
-      support_url,
-      author,
-      author_url,
-      created: currentDate(),
-      protected: false,
-      default: false,
-      version: "1.0.0",
-      version_code: 1,
-      enabled: true,
-      id: 1
-    };
+    await setRebuildRequired({ set: "plugins" });
+
+    return data[0];
   }
 }

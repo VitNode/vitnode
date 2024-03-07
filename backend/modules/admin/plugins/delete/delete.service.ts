@@ -11,6 +11,7 @@ import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_plugins } from "../../database/schema/plugins";
 import { CustomError } from "@/utils/errors/CustomError";
+import { setRebuildRequired } from "@/functions/config/rebuild-required";
 
 @Injectable()
 export class DeleteAdminPluginsService {
@@ -20,27 +21,27 @@ export class DeleteAdminPluginsService {
   ) {}
 
   async delete({ code }: DeleteAdminPluginsArgs): Promise<string> {
-    // const plugin = await this.databaseService.db.query.core_plugins.findFirst({
-    //   where: (table, { eq }) => eq(table.code, code)
-    // });
+    const plugin = await this.databaseService.db.query.core_plugins.findFirst({
+      where: (table, { eq }) => eq(table.code, code)
+    });
 
-    // if (!plugin) {
-    //   throw new NotFoundError("Plugin");
-    // }
+    if (!plugin) {
+      throw new NotFoundError("Plugin");
+    }
 
-    // if (plugin.protected) {
-    //   throw new CustomError({
-    //     code: "PROTECTED_PLUGIN",
-    //     message: "This plugin is protected and cannot be deleted"
-    //   });
-    // }
+    if (plugin.protected) {
+      throw new CustomError({
+        code: "PROTECTED_PLUGIN",
+        message: "This plugin is protected and cannot be deleted"
+      });
+    }
 
-    // if (plugin.default) {
-    //   throw new CustomError({
-    //     code: "DEFAULT_PLUGIN",
-    //     message: "This plugin is default and cannot be deleted"
-    //   });
-    // }
+    if (plugin.default) {
+      throw new CustomError({
+        code: "DEFAULT_PLUGIN",
+        message: "This plugin is default and cannot be deleted"
+      });
+    }
 
     // Drop tables
     const tables: { getTables: () => string[] } = await import(
@@ -71,6 +72,8 @@ export class DeleteAdminPluginsService {
     await this.databaseService.db
       .delete(core_plugins)
       .where(eq(core_plugins.code, code));
+
+    await setRebuildRequired({ set: "plugins" });
 
     return "Success!";
   }
