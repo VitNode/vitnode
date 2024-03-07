@@ -5,4 +5,4 @@ import { ShowCoreSessionDevicesService } from './show/show.service';
 @Module({
   providers: [ShowCoreSessionDevicesResolver, ShowCoreSessionDevicesService]
 })
-export class DevicesModule {}
+export class DevicesCoreSession {}

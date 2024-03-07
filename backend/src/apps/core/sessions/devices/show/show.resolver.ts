@@ -1,4 +1,5 @@
 import { Args, Query, Resolver } from "@nestjs/graphql";
+import { UseGuards } from "@nestjs/common";
 import { AuthGuards } from "@/utils/guards/auth.guards";
 import { CurrentUser, User } from "@/utils/decorators/user.decorator";
 
@@ -11,11 +12,11 @@ export class ShowCoreSessionDevicesResolver {
   constructor(private readonly service: ShowCoreSessionDevicesService) {}
 
   @Query(() => ShowCoreSessionDevicesObj)
-  @UseGuards(AuthGuards) 
+  @UseGuards(AuthGuards)
   async core_sessions_devices__show(
     @Args() args: ShowCoreSessionDevicesArgs,
-    @CurrentUser() user: User | null):
-      Promise<ShowCoreSessionDevicesObj> {
-        return await this.service.show(args, user);
+    @CurrentUser() user: User | null
+  ): Promise<ShowCoreSessionDevicesObj> {
+    return await this.service.show(args, user);
   }
 }

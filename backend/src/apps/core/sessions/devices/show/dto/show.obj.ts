@@ -1,4 +1,4 @@
-import { Field, ObjectType } from "@nestjs/graphql";
+import { Field, Int, ObjectType } from "@nestjs/graphql";
 import { PageInfo } from "@/types/database/pagination.type";
 
 @ObjectType()
@@ -12,18 +12,18 @@ export class ShowCoreSessionDevicesObj {
 
 @ObjectType()
 export class ShowCoreSessionDevices {
+  @Field(() => Int)
+  user_id: number;
+
   @Field(() => String)
   login_token: string;
 
-  @Field(() => Number)
-  user_id: number;
-
-  @Field(() => Number)
+  @Field(() => Int)
   last_seen: number;
 
-  @Field(() => Number)
+  @Field(() => Int)
   expires: number;
 
-  @Field(() => Number)
+  @Field(() => Int)
   device_id: number;
 }

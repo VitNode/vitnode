@@ -9,6 +9,7 @@ import { SignOutCoreSessionsResolver } from "./sign_out/sign_out.resolver";
 import { InternalAuthorizationCoreSessionsService } from "./authorization/internal/internal_authorization.service";
 import { CoreSessionsCron } from "./sessions.cron";
 import { DeviceSignInCoreSessionsService } from "./sign_in/device.service";
+import { DevicesCoreSession } from "./devices/devices-core_session.module";
 
 @Module({
   providers: [
@@ -30,6 +31,9 @@ export class CoreSessionsModule {}
     AuthorizationCoreSessionsResolver,
     InternalAuthorizationCoreSessionsService,
     DeviceSignInCoreSessionsService
+  ],
+  imports: [
+    DevicesCoreSession
   ],
   exports: [
     AuthorizationCoreSessionsService,
