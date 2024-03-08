@@ -10,7 +10,8 @@
     "config:init": "ts-node ./functions/config/generate-config-file.ts",
     "config:finish": "ts-node ./functions/config/finish-build-config-file.ts",
     "migrate": "drizzle-kit generate:pg",
-    "migrate:forum": "drizzle-kit generate:pg --out src/apps/forum/database/migrations --schema src/apps/forum/database/schema.ts",
+    "migrate:forum": "drizzle-kit generate:pg --out modules/forum/admin/database/migrations --schema modules/forum/admin/database/schema/*.ts",
+    "migrate:admin": "drizzle-kit generate:pg --out modules/admin/database/migrations --schema modules/admin/database/schema/*.ts",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -20,7 +21,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "docker:build": "docker build -t vitnode_backend .",
-    "docker:run": "docker run -p 8080:8080 vitnode_backend"
+    "docker:run": "docker run -p 8080:8080 vitnode_backend",
+    "db:test": "ts-node ./modules/forum/admin/database/migration.ts"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
