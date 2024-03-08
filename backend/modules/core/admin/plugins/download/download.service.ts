@@ -3,6 +3,7 @@ import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
+import { eq } from "drizzle-orm";
 
 import { DownloadAdminPluginsArgs } from "./dto/download.args";
 
@@ -13,6 +14,10 @@ import { generateRandomString } from "@/functions/generate-random-string";
 import { currentDate } from "@/functions/date";
 import { CustomError } from "@/utils/errors/CustomError";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
+import {
+  core_plugins,
+  core_plugins_versions
+} from "../../database/schema/plugins";
 
 @Injectable()
 export class DownloadAdminPluginsService {
@@ -68,6 +73,49 @@ export class DownloadAdminPluginsService {
     }
   }
 
+  async updateVersion({
+    code,
+    version,
+    version_code
+  }: DownloadAdminPluginsArgs): Promise<void> {
+    if (!version || !version_code) return;
+
+    const update = await this.databaseService.db
+      .update(core_plugins)
+      .set({
+        version,
+        version_code
+      })
+      .where(eq(core_plugins.code, code))
+      .returning();
+
+    const pathToVersions = join(
+      process.cwd(),
+      "modules",
+      code,
+      "versions.json"
+    );
+    if (!fs.existsSync(pathToVersions)) {
+      throw new CustomError({
+        code: "VERSIONS_FILE_NOT_FOUND",
+        message: "Versions file not found"
+      });
+    }
+
+    const versions = JSON.parse(fs.readFileSync(pathToVersions, "utf-8"));
+    versions[version_code] = version;
+    fs.writeFileSync(pathToVersions, JSON.stringify(versions, null, 2));
+
+    const updateData = update[0];
+
+    await this.databaseService.db.insert(core_plugins_versions).values({
+      plugin_id: updateData.id,
+      version,
+      version_code,
+      updated: currentDate()
+    });
+  }
+
   async download(
     { code, version, version_code }: DownloadAdminPluginsArgs,
     { id: userId }: User
@@ -79,6 +127,8 @@ export class DownloadAdminPluginsService {
     if (!plugin) {
       throw new NotFoundError("Plugin");
     }
+
+    await this.updateVersion({ code, version, version_code });
 
     // Tgs
     const name = removeSpecialCharacters(

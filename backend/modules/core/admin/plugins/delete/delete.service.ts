@@ -45,7 +45,7 @@ export class DeleteAdminPluginsService {
 
     // Drop tables
     const tables: { getTables: () => string[] } = await import(
-      `../../../../modules/${code}/admin/database/functions`
+      `../../../../${code}/admin/database/functions`
     );
     Promise.all(
       tables.getTables().map(async table => {

@@ -32,6 +32,10 @@ export class CreateFilesAdminPluginsService {
           {
             name: "info.json",
             content: createInfoJSON({ code, ...rest })
+          },
+          {
+            name: "versions.json",
+            content: "{}\n"
           }
         ]
       },
