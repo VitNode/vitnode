@@ -10,8 +10,8 @@ import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { Ctx } from "@/types/context.type";
 import { convertUnixTime, currentDate } from "@/functions/date";
 import { DatabaseService } from "@/modules/database/database.service";
-import { core_admin_sessions } from "@/modules/admin/database/schema/admins";
-import { core_sessions } from "@/modules/admin/database/schema/sessions";
+import { core_admin_sessions } from "@/modules/core/admin/database/schema/admins";
+import { core_sessions } from "@/modules/core/admin/database/schema/sessions";
 import { CustomError } from "@/utils/errors/CustomError";
 
 interface CreateSessionArgs extends Ctx {

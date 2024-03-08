@@ -11,7 +11,6 @@ import { ConfigModule } from "@nestjs/config";
 
 import { ModulesModule } from "./modules/modules.module";
 import { configuration } from "./configuration";
-import { AdminModule } from "./modules/admin/admin.module";
 
 import { Ctx } from "@/types/context.type";
 import { DatabaseModule } from "@/modules/database/database.module";
@@ -31,7 +30,6 @@ import { DatabaseModule } from "@/modules/database/database.module";
       context: ({ req, res }): Ctx => ({ req, res })
     }),
     JwtModule.register({ global: true }),
-    AdminModule,
     ModulesModule,
     ServeStaticModule.forRoot({
       rootPath: join(process.cwd(), "public"),

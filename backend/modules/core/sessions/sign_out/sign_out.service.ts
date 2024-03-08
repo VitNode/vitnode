@@ -4,7 +4,7 @@ import { ConfigService } from "@nestjs/config";
 
 import { Ctx } from "@/types/context.type";
 import { DatabaseService } from "@/modules/database/database.service";
-import { core_sessions } from "@/modules/admin/database/schema/sessions";
+import { core_sessions } from "@/modules/core/admin/database/schema/sessions";
 
 @Injectable()
 export class SignOutCoreSessionsService {

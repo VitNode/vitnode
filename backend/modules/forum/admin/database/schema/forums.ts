@@ -10,8 +10,8 @@ import {
 
 import { forum_topics } from "./topics";
 
-import { core_groups } from "@/modules/admin/database/schema/groups";
-import { core_languages } from "@/modules/admin/database/schema/languages";
+import { core_groups } from "@/modules/core/admin/database/schema/groups";
+import { core_languages } from "@/modules/core/admin/database/schema/languages";
 
 export const forum_forums = pgTable(
   "forum_forums",

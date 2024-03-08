@@ -4,7 +4,7 @@ import { lte } from "drizzle-orm";
 
 import { currentDate } from "@/functions/date";
 import { DatabaseService } from "@/modules/database/database.service";
-import { core_sessions } from "@/modules/admin/database/schema/sessions";
+import { core_sessions } from "@/modules/core/admin/database/schema/sessions";
 
 @Injectable()
 export class CoreSessionsCron {

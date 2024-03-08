@@ -1,10 +1,12 @@
 /* eslint-disable no-console */
 import * as fs from "fs";
+import { join } from "path";
+
+import { migrate } from "drizzle-orm/node-postgres/migrator";
 
 import { ConfigType, configPath, getConfigFile } from "./get-config-file";
-import { migrate } from "drizzle-orm/node-postgres/migrator";
+
 import { db, poolDB } from "@/modules/database/client";
-import { join } from "path";
 
 (async () => {
   const config = await getConfigFile();

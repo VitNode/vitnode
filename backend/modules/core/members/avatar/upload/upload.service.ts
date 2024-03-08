@@ -8,7 +8,7 @@ import { User } from "@/utils/decorators/user.decorator";
 import { CustomError } from "@/utils/errors/CustomError";
 import { UploadCoreFilesService } from "@/modules/core/files/upload/upload.service";
 import { DatabaseService } from "@/modules/database/database.service";
-import { core_files_avatars } from "@/modules/admin/database/schema/files";
+import { core_files_avatars } from "@/modules/core/admin/database/schema/files";
 import { currentDate } from "@/functions/date";
 import { DeleteCoreFilesService } from "@/modules/core/files/delete/delete.service";
 

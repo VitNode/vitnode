@@ -10,9 +10,11 @@ import { CoreMiddlewareModule } from "./middleware/middleware.module";
 import { CoreFilesModule } from "./files/files.module";
 import { CoreThemesModule } from "./themes/themes.module";
 import { CoreNavModule } from "./nav/nav.module";
+import { AdminModule } from "./admin/admin.module";
 
 @Module({
   imports: [
+    AdminModule,
     GlobalCoreSessionsModule,
     CoreMembersModule,
     CoreSessionsModule,

@@ -11,7 +11,7 @@ import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 import { currentDate } from "@/functions/date";
 import { generateAvatarColor } from "@/modules/core/members/sign_up/functions/generate-avatar-color";
 import { DatabaseService } from "@/modules/database/database.service";
-import { core_users } from "@/modules/admin/database/schema/users";
+import { core_users } from "@/modules/core/admin/database/schema/users";
 
 @Injectable()
 export class SignUpCoreMembersService {
