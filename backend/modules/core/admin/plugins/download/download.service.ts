@@ -18,6 +18,7 @@ import {
   core_plugins,
   core_plugins_versions
 } from "../../database/schema/plugins";
+import { execShellCommand } from "@/functions/exec-shell-command";
 
 @Injectable()
 export class DownloadAdminPluginsService {
@@ -126,6 +127,18 @@ export class DownloadAdminPluginsService {
 
     if (!plugin) {
       throw new NotFoundError("Plugin");
+    }
+
+    // Generate migration
+    try {
+      await execShellCommand(
+        `npx drizzle-kit generate:pg --out modules/${code}/admin/database/migrations --schema modules/${code}/admin/database/schema/*.ts`
+      );
+    } catch (err) {
+      throw new CustomError({
+        code: "GENERATE_MIGRATION_ERROR",
+        message: "Error generating migration"
+      });
     }
 
     await this.updateVersion({ code, version, version_code });

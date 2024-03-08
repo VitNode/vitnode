@@ -122,7 +122,16 @@ CREATE TABLE IF NOT EXISTS "core_plugins" (
 	"protected" boolean DEFAULT false NOT NULL,
 	"author" varchar(100) NOT NULL,
 	"author_url" varchar(255) NOT NULL,
-	"default" boolean DEFAULT false NOT NULL
+	"default" boolean DEFAULT false NOT NULL,
+	"position" integer DEFAULT 0 NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "core_plugins_versions" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"plugin_id" integer NOT NULL,
+	"version" varchar(255) NOT NULL,
+	"version_code" integer,
+	"updated" integer NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "core_sessions" (
@@ -193,6 +202,7 @@ CREATE INDEX IF NOT EXISTS "core_nav_name_nav_id_idx" ON "core_nav_name" ("nav_i
 CREATE INDEX IF NOT EXISTS "core_nav_name_language_code_idx" ON "core_nav_name" ("language_code");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_plugins_code_idx" ON "core_plugins" ("code");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_plugins_name_idx" ON "core_plugins" ("name");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_plugins_versions_plugin_id_idx" ON "core_plugins_versions" ("plugin_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_sessions_user_id_idx" ON "core_sessions" ("user_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_users_name_seo_idx" ON "core_users" ("name_seo");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_users_name_idx" ON "core_users" ("name");--> statement-breakpoint

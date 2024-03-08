@@ -1,5 +1,5 @@
 {
-  "id": "d31dfbfb-40cb-4df3-b7d4-4174558db0a6",
+  "id": "6ca1aab3-cba0-48df-a4be-9bb2b868821c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -987,6 +987,13 @@
           "primaryKey": false,
           "notNull": true,
           "default": false
+        },
+        "position": {
+          "name": "position",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
         }
       },
       "indexes": {
@@ -1001,6 +1008,54 @@
           "name": "core_plugins_name_idx",
           "columns": [
             "name"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "core_plugins_versions": {
+      "name": "core_plugins_versions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "plugin_id": {
+          "name": "plugin_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "version": {
+          "name": "version",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "version_code": {
+          "name": "version_code",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated": {
+          "name": "updated",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "core_plugins_versions_plugin_id_idx": {
+          "name": "core_plugins_versions_plugin_id_idx",
+          "columns": [
+            "plugin_id"
           ],
           "isUnique": false
         }
