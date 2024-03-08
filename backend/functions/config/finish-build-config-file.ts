@@ -2,6 +2,9 @@
 import * as fs from "fs";
 
 import { ConfigType, configPath, getConfigFile } from "./get-config-file";
+import { migrate } from "drizzle-orm/node-postgres/migrator";
+import { db, poolDB } from "@/modules/database/client";
+import { join } from "path";
 
 (async () => {
   const config = await getConfigFile();
@@ -9,15 +12,25 @@ import { ConfigType, configPath, getConfigFile } from "./get-config-file";
   const newData: ConfigType = {
     ...config,
     rebuild_required: {
-      langs: false,
-      plugins: false,
-      themes: false
+      langs: true,
+      plugins: true,
+      themes: true
     }
   };
 
-  fs.writeFile(configPath, JSON.stringify(newData, null, 2), "utf8", err => {
-    if (err) throw err;
+  fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), "utf8");
+
+  // Migration for database
+  await migrate(db, {
+    migrationsFolder: join(
+      process.cwd(),
+      "modules",
+      "admin",
+      "database",
+      "migrations"
+    )
   });
+  await poolDB.end();
 
   console.log("[VitNode] - Successfully finished build");
 })();
