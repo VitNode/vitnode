@@ -10,6 +10,8 @@ import { CreateFilesAdminPluginsService } from "./helpers/files/create/create-fi
 import { ChangeFilesAdminPluginsService } from "./helpers/files/change/change.service";
 import { DownloadAdminPluginsResolver } from "./download/download.resolver";
 import { DownloadAdminPluginsService } from "./download/download.service";
+import { UploadAdminPluginsResolver } from "./upload/upload.resolver";
+import { UploadAdminPluginsService } from "./upload/upload.service";
 
 @Module({
   providers: [
@@ -22,7 +24,9 @@ import { DownloadAdminPluginsService } from "./download/download.service";
     CreateFilesAdminPluginsService,
     ChangeFilesAdminPluginsService,
     DownloadAdminPluginsResolver,
-    DownloadAdminPluginsService
+    DownloadAdminPluginsService,
+    UploadAdminPluginsResolver,
+    UploadAdminPluginsService
   ]
 })
 export class AdminPluginsModule {}

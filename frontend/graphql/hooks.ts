@@ -179,6 +179,7 @@ export type Mutation = {
   admin__core_plugins__create: ShowAdminPlugins;
   admin__core_plugins__delete: Scalars['String']['output'];
   admin__core_plugins__download: Scalars['String']['output'];
+  admin__core_plugins__upload: ShowAdminPlugins;
   admin__core_staff_administrators__create: ShowAdminStaffAdministrators;
   admin__core_staff_administrators__delete: Scalars['String']['output'];
   admin__core_staff_moderators__create: ShowAdminStaffModerators;
@@ -302,6 +303,11 @@ export type MutationAdmin__Core_Plugins__DownloadArgs = {
   code: Scalars['String']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
   version_code?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type MutationAdmin__Core_Plugins__UploadArgs = {
+  file: Scalars['Upload']['input'];
 };
 
 
@@ -1257,6 +1263,13 @@ export type Admin__Core_Plugins__DownloadMutationVariables = Exact<{
 
 export type Admin__Core_Plugins__DownloadMutation = { __typename?: 'Mutation', admin__core_plugins__download: string };
 
+export type Admin__Core_Plugins__UploadMutationVariables = Exact<{
+  file: Scalars['Upload']['input'];
+}>;
+
+
+export type Admin__Core_Plugins__UploadMutation = { __typename?: 'Mutation', admin__core_plugins__upload: { __typename?: 'ShowAdminPlugins', id: number } };
+
 export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1814,6 +1827,13 @@ export const Admin__Core_Plugins__Download = gql`
     version: $version
     version_code: $versionCode
   )
+}
+    `;
+export const Admin__Core_Plugins__Upload = gql`
+    mutation Admin__core_plugins__upload($file: Upload!) {
+  admin__core_plugins__upload(file: $file) {
+    id
+  }
 }
     `;
 export const Admin_Sessions__Sign_Out = gql`

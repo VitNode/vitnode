@@ -148,6 +148,7 @@ type Mutation {
   admin__core_plugins__create(author: String!, author_url: String!, code: String!, description: String, name: String!, support_url: String!): ShowAdminPlugins!
   admin__core_plugins__delete(code: String!): String!
   admin__core_plugins__download(code: String!, version: String, version_code: Int): String!
+  admin__core_plugins__upload(file: Upload!): ShowAdminPlugins!
   admin__core_staff_administrators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffAdministrators!
   admin__core_staff_administrators__delete(id: Int!): String!
   admin__core_staff_moderators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffModerators!

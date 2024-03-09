@@ -74,7 +74,7 @@ export class DownloadAdminPluginsService {
     }
   }
 
-  async updateVersion({
+  protected async updateVersion({
     code,
     version,
     version_code
@@ -117,6 +117,29 @@ export class DownloadAdminPluginsService {
     });
   }
 
+  protected async generateMigration({ code }: { code: string }): Promise<void> {
+    const path = join(
+      process.cwd(),
+      "modules",
+      code,
+      "admin",
+      "database",
+      "migrations"
+    );
+    if (!fs.existsSync(path)) return;
+
+    try {
+      await execShellCommand(
+        `npx drizzle-kit generate:pg --out modules/${code}/admin/database/migrations --schema modules/${code}/admin/database/schema/*.ts`
+      );
+    } catch (err) {
+      throw new CustomError({
+        code: "GENERATE_MIGRATION_ERROR",
+        message: "Error generating migration"
+      });
+    }
+  }
+
   async download(
     { code, version, version_code }: DownloadAdminPluginsArgs,
     { id: userId }: User
@@ -129,18 +152,7 @@ export class DownloadAdminPluginsService {
       throw new NotFoundError("Plugin");
     }
 
-    // Generate migration
-    try {
-      await execShellCommand(
-        `npx drizzle-kit generate:pg --out modules/${code}/admin/database/migrations --schema modules/${code}/admin/database/schema/*.ts`
-      );
-    } catch (err) {
-      throw new CustomError({
-        code: "GENERATE_MIGRATION_ERROR",
-        message: "Error generating migration"
-      });
-    }
-
+    await this.generateMigration({ code });
     await this.updateVersion({ code, version, version_code });
 
     // Tgs
