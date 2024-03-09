@@ -496,6 +496,14 @@ type ShowCoreNavObj {
   pageInfo: PageInfo!
 }
 
+type ShowCoreSessionDevices {
+  device_id: Int!
+  expires: Int!
+  last_seen: Int!
+  login_token: String!
+  user_id: Int!
+}
+
 type ShowCoreThemes {
   default: Boolean!
   id: Int!
