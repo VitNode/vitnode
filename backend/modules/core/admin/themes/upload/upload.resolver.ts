@@ -3,6 +3,7 @@ import { UseGuards } from "@nestjs/common";
 
 import { UploadAdminThemesService } from "./upload.service";
 import { UploadAdminThemesArgs } from "./dto/upload.args";
+import { ShowAdminThemes } from "../show/dto/show.obj";
 
 import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
 
@@ -10,11 +11,11 @@ import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
 export class UploadAdminThemesResolver {
   constructor(private readonly service: UploadAdminThemesService) {}
 
-  @Mutation(() => String)
+  @Mutation(() => ShowAdminThemes)
   @UseGuards(AdminAuthGuards)
   async admin__core_themes__upload(
     @Args() args: UploadAdminThemesArgs
-  ): Promise<string> {
+  ): Promise<ShowAdminThemes> {
     return await this.service.upload(args);
   }
 }

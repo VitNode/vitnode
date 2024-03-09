@@ -1,5 +1,6 @@
 mutation Admin__core_plugins__upload($file: Upload!) {
   admin__core_plugins__upload(file: $file) {
     id
+    name
   }
 }

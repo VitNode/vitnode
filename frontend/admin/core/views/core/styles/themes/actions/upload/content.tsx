@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import { Form, FormField } from "@/components/ui/form";
-import { useThemeUpload } from "./hooks/use-upload-theme";
+import { useUploadThemeAdmin } from "./hooks/use-upload-theme-admin";
 import { FilesInput } from "@/components/ui/files/files-input";
 import {
   DialogFooter,
@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 
 export const ContentUploadActionThemeAdmin = () => {
   const t = useTranslations("admin.core.styles.themes.upload");
-  const { form, onSubmit } = useThemeUpload();
+  const { form, onSubmit } = useUploadThemeAdmin();
 
   return (
     <>

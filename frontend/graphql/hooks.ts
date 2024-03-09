@@ -188,7 +188,7 @@ export type Mutation = {
   admin__core_themes__delete: Scalars['String']['output'];
   admin__core_themes__download: Scalars['String']['output'];
   admin__core_themes__edit: ShowAdminThemes;
-  admin__core_themes__upload: Scalars['String']['output'];
+  admin__core_themes__upload: ShowAdminThemes;
   admin__forum_forums__change_position: Scalars['String']['output'];
   admin__forum_forums__create: CreateForumForumsObj;
   admin__forum_forums__delete: Scalars['String']['output'];
@@ -1268,7 +1268,7 @@ export type Admin__Core_Plugins__UploadMutationVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Plugins__UploadMutation = { __typename?: 'Mutation', admin__core_plugins__upload: { __typename?: 'ShowAdminPlugins', id: number } };
+export type Admin__Core_Plugins__UploadMutation = { __typename?: 'Mutation', admin__core_plugins__upload: { __typename?: 'ShowAdminPlugins', id: number, name: string } };
 
 export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -1324,7 +1324,7 @@ export type Admin__Core_Themes__UploadMutationVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Themes__UploadMutation = { __typename?: 'Mutation', admin__core_themes__upload: string };
+export type Admin__Core_Themes__UploadMutation = { __typename?: 'Mutation', admin__core_themes__upload: { __typename?: 'ShowAdminThemes', id: number, name: string } };
 
 export type Core_Members__Sign_UpMutationVariables = Exact<{
   email: Scalars['String']['input'];
@@ -1833,6 +1833,7 @@ export const Admin__Core_Plugins__Upload = gql`
     mutation Admin__core_plugins__upload($file: Upload!) {
   admin__core_plugins__upload(file: $file) {
     id
+    name
   }
 }
     `;
@@ -1889,7 +1890,10 @@ export const Admin__Core_Themes__Edit = gql`
     `;
 export const Admin__Core_Themes__Upload = gql`
     mutation Admin__core_themes__upload($file: Upload!) {
-  admin__core_themes__upload(file: $file)
+  admin__core_themes__upload(file: $file) {
+    id
+    name
+  }
 }
     `;
 export const Core_Members__Sign_Up = gql`

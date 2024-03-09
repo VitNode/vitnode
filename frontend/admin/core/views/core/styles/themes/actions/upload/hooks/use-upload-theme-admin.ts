@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { mutationApi } from "./mutation-api";
 import { useDialog } from "@/components/ui/dialog";
 
-export const useThemeUpload = () => {
+export const useUploadThemeAdmin = () => {
   const t = useTranslations("admin.core.styles.themes.upload");
   const tCore = useTranslations("core");
   const { setOpen } = useDialog();
@@ -36,7 +36,9 @@ export const useThemeUpload = () => {
     }
 
     setOpen?.(false);
-    toast.success(t("success"));
+    toast.success(t("success"), {
+      description: mutation.data.admin__core_themes__upload.name
+    });
   };
 
   return { form, onSubmit };

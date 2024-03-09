@@ -36,7 +36,9 @@ export const useUploadPluginAdmin = () => {
     }
 
     setOpen?.(false);
-    toast.success(t("success"));
+    toast.success(t("success"), {
+      description: mutation.data.admin__core_plugins__upload.name
+    });
   };
 
   return { form, onSubmit };
