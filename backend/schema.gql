@@ -148,6 +148,7 @@ type Mutation {
   admin__core_plugins__create(author: String!, author_url: String!, code: String!, description: String, name: String!, support_url: String!): ShowAdminPlugins!
   admin__core_plugins__delete(code: String!): String!
   admin__core_plugins__download(code: String!, version: String, version_code: Int): String!
+  admin__core_plugins__upload(file: Upload!): ShowAdminPlugins!
   admin__core_staff_administrators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffAdministrators!
   admin__core_staff_administrators__delete(id: Int!): String!
   admin__core_staff_moderators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffModerators!
@@ -156,7 +157,7 @@ type Mutation {
   admin__core_themes__delete(id: Int!): String!
   admin__core_themes__download(id: Int!, version: String, version_code: Int): String!
   admin__core_themes__edit(author: String!, author_url: String!, id: Int!, name: String!, support_url: String!): ShowAdminThemes!
-  admin__core_themes__upload(file: Upload!): String!
+  admin__core_themes__upload(file: Upload!): ShowAdminThemes!
   admin__forum_forums__change_position(id: Int!, index_to_move: Int!, parent_id: Int): String!
   admin__forum_forums__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
   admin__forum_forums__delete(id: Int!, move_topics_to: Int): String!

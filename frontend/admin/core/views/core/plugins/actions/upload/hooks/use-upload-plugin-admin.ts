@@ -1,13 +1,13 @@
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { toast } from "sonner";
 
-import { mutationApi } from "./mutation-api";
 import { useDialog } from "@/components/ui/dialog";
+import { mutationApi } from "./mutation-api";
 
-export const useThemeUpload = () => {
-  const t = useTranslations("admin.core.styles.themes.upload");
+export const useUploadPluginAdmin = () => {
+  const t = useTranslations("admin.core.plugins.upload");
   const tCore = useTranslations("core");
   const { setOpen } = useDialog();
   const formSchema = z.object({
@@ -36,7 +36,9 @@ export const useThemeUpload = () => {
     }
 
     setOpen?.(false);
-    toast.success(t("success"));
+    toast.success(t("success"), {
+      description: mutation.data.admin__core_plugins__upload.name
+    });
   };
 
   return { form, onSubmit };

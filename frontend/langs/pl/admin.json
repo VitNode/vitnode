@@ -73,7 +73,9 @@
           }
         },
         "upload": {
-          "title": "Załaduj wtyczkę"
+          "title": "Prześlij wtyczkę",
+          "success": "Wtyczka została przesłana.",
+          "submit": "Prześlij"
         },
         "delete": {
           "submit": "Tak, usuń wtyczkę",
@@ -141,8 +143,8 @@
             }
           },
           "upload": {
-            "title": "Załaduj motyw",
-            "submit": "Załaduj"
+            "title": "Prześlij motyw",
+            "submit": "Prześlij"
           }
         },
         "nav": {

@@ -14,10 +14,7 @@ import { generateRandomString } from "@/functions/generate-random-string";
 import { currentDate } from "@/functions/date";
 import { CustomError } from "@/utils/errors/CustomError";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
-import {
-  core_plugins,
-  core_plugins_versions
-} from "../../database/schema/plugins";
+import { core_plugins } from "../../database/schema/plugins";
 import { execShellCommand } from "@/functions/exec-shell-command";
 
 @Injectable()
@@ -74,14 +71,14 @@ export class DownloadAdminPluginsService {
     }
   }
 
-  async updateVersion({
+  protected async updateVersion({
     code,
     version,
     version_code
   }: DownloadAdminPluginsArgs): Promise<void> {
     if (!version || !version_code) return;
 
-    const update = await this.databaseService.db
+    await this.databaseService.db
       .update(core_plugins)
       .set({
         version,
@@ -106,15 +103,29 @@ export class DownloadAdminPluginsService {
     const versions = JSON.parse(fs.readFileSync(pathToVersions, "utf-8"));
     versions[version_code] = version;
     fs.writeFileSync(pathToVersions, JSON.stringify(versions, null, 2));
+  }
 
-    const updateData = update[0];
+  protected async generateMigration({ code }: { code: string }): Promise<void> {
+    const path = join(
+      process.cwd(),
+      "modules",
+      code,
+      "admin",
+      "database",
+      "migrations"
+    );
+    if (!fs.existsSync(path)) return;
 
-    await this.databaseService.db.insert(core_plugins_versions).values({
-      plugin_id: updateData.id,
-      version,
-      version_code,
-      updated: currentDate()
-    });
+    try {
+      await execShellCommand(
+        `npx drizzle-kit generate:pg --out modules/${code}/admin/database/migrations --schema modules/${code}/admin/database/schema/*.ts`
+      );
+    } catch (err) {
+      throw new CustomError({
+        code: "GENERATE_MIGRATION_ERROR",
+        message: "Error generating migration"
+      });
+    }
   }
 
   async download(
@@ -129,18 +140,7 @@ export class DownloadAdminPluginsService {
       throw new NotFoundError("Plugin");
     }
 
-    // Generate migration
-    try {
-      await execShellCommand(
-        `npx drizzle-kit generate:pg --out modules/${code}/admin/database/migrations --schema modules/${code}/admin/database/schema/*.ts`
-      );
-    } catch (err) {
-      throw new CustomError({
-        code: "GENERATE_MIGRATION_ERROR",
-        message: "Error generating migration"
-      });
-    }
-
+    await this.generateMigration({ code });
     await this.updateVersion({ code, version, version_code });
 
     // Tgs

@@ -5,8 +5,9 @@ import { writeFile } from "fs/promises";
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 
-import { UploadAdminThemesArgs } from "./dto/delete.args";
+import { UploadAdminThemesArgs } from "./dto/upload.args";
 import { ConfigTheme } from "../themes.module";
+import { ShowAdminThemes } from "../show/dto/show.obj";
 
 import { DatabaseService } from "@/modules/database/database.service";
 import { generateRandomString } from "@/functions/generate-random-string";
@@ -19,7 +20,7 @@ import { FileUpload } from "@/utils/graphql-upload/Upload";
 export class UploadAdminThemesService {
   constructor(private databaseService: DatabaseService) {}
 
-  protected path: string = join("..", "frontend", "themes");
+  protected path: string = join(process.cwd(), "..", "frontend", "themes");
   protected tempFolderName: string = `${generateRandomString(5)}${currentDate()}`;
   protected tempPath: string = join(process.cwd(), "temp", "themes");
 
@@ -74,12 +75,12 @@ export class UploadAdminThemesService {
     return config;
   }
 
-  async upload({ file }: UploadAdminThemesArgs): Promise<string> {
+  async upload({ file }: UploadAdminThemesArgs): Promise<ShowAdminThemes> {
     const tgz = await file;
     const config = await this.getThemeConfig({ tgz });
 
-    // Create theme in database
-    const theme = await this.databaseService.db
+    // Save theme to database
+    const themes = await this.databaseService.db
       .insert(core_themes)
       .values({
         name: config.name,
@@ -91,8 +92,10 @@ export class UploadAdminThemesService {
       })
       .returning();
 
+    const theme = themes[0];
+
     // Create theme folder in frontend
-    const newPath = join(this.path, `${theme[0].id}`);
+    const newPath = join(this.path, `${theme.id}`);
     await fsPromises.mkdir(newPath);
 
     // Unpack theme to temp folder
@@ -117,10 +120,7 @@ export class UploadAdminThemesService {
             );
             await writeFile(
               pathSCSSFile,
-              pathSCSSFileContent.replace(
-                /\.theme_\d+/g,
-                `.theme_${theme[0].id}`
-              )
+              pathSCSSFileContent.replace(/\.theme_\d+/g, `.theme_${theme.id}`)
             );
           } catch (error) {
             reject(error);
@@ -130,6 +130,6 @@ export class UploadAdminThemesService {
         });
     });
 
-    return "Success!";
+    return theme;
   }
 }

@@ -73,7 +73,9 @@
           }
         },
         "upload": {
-          "title": "Upload Plugin"
+          "title": "Upload Plugin",
+          "success": "Successfully uploaded plugin.",
+          "submit": "Upload"
         },
         "delete": {
           "submit": "Yes, delete plugin",
