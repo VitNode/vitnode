@@ -30,7 +30,7 @@ export class CreateFilesAdminPluginsService {
             content: createModuleSchema({ code })
           },
           {
-            name: "info.json",
+            name: "plugin.json",
             content: createInfoJSON({ code, ...rest })
           },
           {

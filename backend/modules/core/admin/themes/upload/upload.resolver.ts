@@ -2,7 +2,7 @@ import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
 
 import { UploadAdminThemesService } from "./upload.service";
-import { UploadAdminThemesArgs } from "./dto/delete.args";
+import { UploadAdminThemesArgs } from "./dto/upload.args";
 
 import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
 

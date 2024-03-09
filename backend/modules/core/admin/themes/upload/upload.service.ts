@@ -5,7 +5,7 @@ import { writeFile } from "fs/promises";
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 
-import { UploadAdminThemesArgs } from "./dto/delete.args";
+import { UploadAdminThemesArgs } from "./dto/upload.args";
 import { ConfigTheme } from "../themes.module";
 
 import { DatabaseService } from "@/modules/database/database.service";
@@ -19,7 +19,7 @@ import { FileUpload } from "@/utils/graphql-upload/Upload";
 export class UploadAdminThemesService {
   constructor(private databaseService: DatabaseService) {}
 
-  protected path: string = join("..", "frontend", "themes");
+  protected path: string = join(process.cwd(), "..", "frontend", "themes");
   protected tempFolderName: string = `${generateRandomString(5)}${currentDate()}`;
   protected tempPath: string = join(process.cwd(), "temp", "themes");
 
