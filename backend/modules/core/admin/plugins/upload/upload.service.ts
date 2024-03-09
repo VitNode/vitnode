@@ -1,11 +1,13 @@
 import { join } from "path";
 import * as fsPromises from "fs/promises";
+import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 
 import { ShowAdminPlugins } from "../show/dto/show.obj";
 import { UploadAdminPluginsArgs } from "./dto/upload.args";
+import { ChangeFilesAdminPluginsService } from "../helpers/files/change/change.service";
 
 import { FileUpload } from "@/utils/graphql-upload/Upload";
 import { DatabaseService } from "@/modules/database/database.service";
@@ -20,16 +22,26 @@ interface ConfigPlugin {
   code: string;
   name: string;
   support_url: string;
+  version: string;
+  version_code: number;
   description?: string;
 }
 
 @Injectable()
 export class UploadAdminPluginsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private changeFilesService: ChangeFilesAdminPluginsService
+  ) {}
 
   protected path: string = join(process.cwd());
   protected tempFolderName: string = `${generateRandomString(5)}${currentDate()}`;
-  protected tempPath: string = join(process.cwd(), "temp", "plugins");
+  protected tempPath: string = join(
+    process.cwd(),
+    "temp",
+    "plugins",
+    this.tempFolderName
+  );
 
   protected async getPluginConfig({
     tgz
@@ -37,8 +49,7 @@ export class UploadAdminPluginsService {
     tgz: FileUpload;
   }): Promise<ConfigPlugin> {
     // Create folders
-    const path = join(this.tempPath, this.tempFolderName);
-    await fsPromises.mkdir(path, { recursive: true });
+    await fsPromises.mkdir(this.tempPath, { recursive: true });
 
     // Upload to temp folder
     await new Promise((resolve, reject) => {
@@ -46,7 +57,7 @@ export class UploadAdminPluginsService {
         .createReadStream()
         .pipe(
           tar.x({
-            cwd: path
+            cwd: this.tempPath
           })
         )
         .on("error", err => {
@@ -57,9 +68,10 @@ export class UploadAdminPluginsService {
         });
     });
 
-    const pathJSON = join(path, "backend", "plugin.json");
-    const pluginFile = await fsPromises.readFile(pathJSON, "utf8");
-    const config: ConfigPlugin = JSON.parse(pluginFile);
+    const pathInfoJSON = join(this.tempPath, "backend", "plugin.json");
+    const pluginFile = await fsPromises.readFile(pathInfoJSON, "utf8");
+    const config: Omit<ConfigPlugin, "versions" | "version_code"> =
+      JSON.parse(pluginFile);
 
     // Check if variables exists
     if (
@@ -75,7 +87,39 @@ export class UploadAdminPluginsService {
       });
     }
 
-    return config;
+    const pathVersionsJSON = join(this.tempPath, "backend", "versions.json");
+    const versionsFile = await fsPromises.readFile(pathVersionsJSON, "utf8");
+    const versions: { [key: string]: string } = JSON.parse(versionsFile);
+
+    // Find the latest version
+    const latestVersion = Object.keys(versions).sort().reverse()[0];
+    const version = versions[latestVersion];
+
+    return {
+      ...config,
+      version,
+      version_code: +latestVersion
+    };
+  }
+
+  protected async createPluginBackend({
+    config
+  }: {
+    config: ConfigPlugin;
+  }): Promise<void> {
+    const newPathBackend = join(process.cwd(), "modules", config.code);
+    if (fs.existsSync(newPathBackend)) {
+      throw new CustomError({
+        code: "PLUGIN_FOLDER_ALREADY_EXISTS",
+        message: "Plugin folder already exists in backend"
+      });
+    }
+    await fsPromises.mkdir(newPathBackend);
+
+    // Copy temp folder to plugin folder
+    const backendSource = join(this.tempPath, "backend");
+    await fsPromises.cp(backendSource, newPathBackend, { recursive: true });
+    this.changeFilesService.changeFilesWhenCreate({ code: config.code });
   }
 
   async upload({ file }: UploadAdminPluginsArgs): Promise<ShowAdminPlugins> {
@@ -94,7 +138,13 @@ export class UploadAdminPluginsService {
       });
     }
 
-    // Save to database
+    // Create plugin folder
+    await this.createPluginBackend({ config });
+
+    // Delete temp folder
+    await fsPromises.rm(this.tempPath, { recursive: true });
+
+    // Save plugin to database
     const plugins = await this.databaseService.db
       .insert(core_plugins)
       .values({

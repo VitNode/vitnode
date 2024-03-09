@@ -14,10 +14,7 @@ import { generateRandomString } from "@/functions/generate-random-string";
 import { currentDate } from "@/functions/date";
 import { CustomError } from "@/utils/errors/CustomError";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
-import {
-  core_plugins,
-  core_plugins_versions
-} from "../../database/schema/plugins";
+import { core_plugins } from "../../database/schema/plugins";
 import { execShellCommand } from "@/functions/exec-shell-command";
 
 @Injectable()
@@ -81,7 +78,7 @@ export class DownloadAdminPluginsService {
   }: DownloadAdminPluginsArgs): Promise<void> {
     if (!version || !version_code) return;
 
-    const update = await this.databaseService.db
+    await this.databaseService.db
       .update(core_plugins)
       .set({
         version,
@@ -106,15 +103,6 @@ export class DownloadAdminPluginsService {
     const versions = JSON.parse(fs.readFileSync(pathToVersions, "utf-8"));
     versions[version_code] = version;
     fs.writeFileSync(pathToVersions, JSON.stringify(versions, null, 2));
-
-    const updateData = update[0];
-
-    await this.databaseService.db.insert(core_plugins_versions).values({
-      plugin_id: updateData.id,
-      version,
-      version_code,
-      updated: currentDate()
-    });
   }
 
   protected async generateMigration({ code }: { code: string }): Promise<void> {

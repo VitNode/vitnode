@@ -78,7 +78,7 @@ export class UploadAdminThemesService {
     const tgz = await file;
     const config = await this.getThemeConfig({ tgz });
 
-    // Create theme in database
+    // Save theme to database
     const theme = await this.databaseService.db
       .insert(core_themes)
       .values({
