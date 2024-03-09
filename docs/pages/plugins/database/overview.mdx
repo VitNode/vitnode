@@ -8,15 +8,12 @@ Our plugin system allows you to create own tables in the database. VitNode using
 
 ## Initial setup
 
-After created plugin using our [plugin system](/plugins/create) you can find `database` folder in your plugin in `admin` folder.
+After created plugin using our [plugin system](/plugins/create) you can find `modules/{your_plugin}/admin/database` folder.
 
 <FileTree>
-  <FileTree.Folder name="admin" defaultOpen>
-    <FileTree.Folder name="{your_plugin}" defaultOpen>
-      <FileTree.Folder name="database" defaultOpen>
-        <FileTree.File name="functions.ts" />
-        <FileTree.File name="index.ts" />
-      </FileTree.Folder>
+  <FileTree.Folder name="{your_plugin}" defaultOpen>
+    <FileTree.Folder name="admin" defaultOpen>
+      <FileTree.Folder name="database" defaultOpen />
     </FileTree.Folder>
   </FileTree.Folder>
 </FileTree>
@@ -31,14 +28,12 @@ Inside `database` folder go to `schema` folder _(If is your first schema, create
 Here is example file tree after created `posts` file:
 
 <FileTree>
-  <FileTree.Folder name="admin" defaultOpen>
-    <FileTree.Folder name="{your_plugin}" defaultOpen>
+  <FileTree.Folder name="{your_plugin}" defaultOpen>
+    <FileTree.Folder name="admin" defaultOpen>
       <FileTree.Folder name="database" defaultOpen>
         <FileTree.Folder name="schema" defaultOpen>
           <FileTree.File name="posts.ts" />
         </FileTree.Folder>
-        <FileTree.File name="functions.ts" />
-        <FileTree.File name="index.ts" />
       </FileTree.Folder>
     </FileTree.Folder>
   </FileTree.Folder>
@@ -133,11 +128,15 @@ pnpm db
 
 </Steps>
 
+## Migration
+
+You don't need to worry about migration. VitNode will handle it for you. When you change your schema, VitNode will automatically create schema for migration when create new version or rebuild existing version of your plugin.
+
 ## Helpers
 
 VitNode provide a few helpers functions to help you build your query. We recommend using this helpers functions to build your query.
 
 <Cards>
-  <Card title="Pagination" href="/backend/database/pagination" />
-  <Card title="Ordering" href="/backend/database/ordering" />
+  <Card title="Pagination" href="/plugins/database/pagination" />
+  <Card title="Ordering" href="/plugins/database/ordering" />
 </Cards>
