@@ -73,12 +73,28 @@
           }
         },
         "upload": {
-          "title": "Załaduj wtyczkę"
+          "title": "Prześlij wtyczkę",
+          "success": "Wtyczka została przesłana.",
+          "submit": "Prześlij"
         },
         "delete": {
           "submit": "Tak, usuń wtyczkę",
           "desc": "Ta akcja usunie wtyczkę <name></name> stworzoną przez <author></author> i wszystkie dane z nią związane.",
           "success": "Wtyczka została usunięta."
+        },
+        "download": {
+          "title": "Pobierz wtyczkę",
+          "type": {
+            "rebuild": "Przebuduj obecną wersję - {version}",
+            "new_version": "Stwórz nową wersja"
+          },
+          "version": {
+            "label": "Wersja"
+          },
+          "version_code": {
+            "label": "Kod wersji"
+          },
+          "submit": "Pobierz"
         }
       },
       "styles": {
@@ -127,8 +143,8 @@
             }
           },
           "upload": {
-            "title": "Załaduj motyw",
-            "submit": "Załaduj"
+            "title": "Prześlij motyw",
+            "submit": "Prześlij"
           }
         },
         "nav": {

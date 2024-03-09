@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { DialogDescription } from "@radix-ui/react-dialog";
 
 import {
   Form,
@@ -23,6 +24,7 @@ import { cn } from "@/functions/classnames";
 
 export const ContentDownloadThemeActionsAdmin = ({
   id,
+  name,
   version,
   version_code
 }: ActionsItemThemesAdminProps) => {
@@ -37,6 +39,9 @@ export const ContentDownloadThemeActionsAdmin = ({
     <>
       <DialogHeader>
         <DialogTitle>{t("title")}</DialogTitle>
+        <DialogDescription className="text-muted-foreground text-sm">
+          {name}
+        </DialogDescription>
       </DialogHeader>
 
       <Form {...form}>

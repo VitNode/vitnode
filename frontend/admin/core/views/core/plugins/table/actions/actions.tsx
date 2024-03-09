@@ -1,15 +1,14 @@
+import type { ShowAdminPlugins } from "@/graphql/hooks";
 import { DeletePluginActionsAdmin } from "./delete/delete";
+import { DownloadPluginActionsAdmin } from "./download/download";
 
-export interface ActionsItemPluginsAdminProps {
-  author: string;
-  code: string;
-  default: boolean;
-  name: string;
-  protected: boolean;
-}
-
-export const ActionsItemPluginsAdmin = (
-  props: ActionsItemPluginsAdminProps
-) => {
-  return <DeletePluginActionsAdmin {...props} />;
+export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
+  return (
+    <>
+      {process.env.NODE_ENV === "development" && (
+        <DownloadPluginActionsAdmin {...props} />
+      )}
+      <DeletePluginActionsAdmin {...props} />
+    </>
+  );
 };

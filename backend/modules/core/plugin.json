@@ -1,0 +1,8 @@
+{
+  "name": "Core",
+  "description": "Core module for VitNode",
+  "code": "core",
+  "author": "VitNode",
+  "author_url": "https://vitnode.com/",
+  "support_url": "https://vitnode.com/"
+}

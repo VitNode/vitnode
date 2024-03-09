@@ -1,12 +1,12 @@
 "use client";
 
-import { ArrowLeft, Bell, Mail, Menu, Search } from "lucide-react";
+import { ArrowLeft, Menu, Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { ItemQuickMenu } from "./item";
 import { usePathname, useRouter } from "@/i18n";
 import { useSession } from "@/hooks/core/use-session";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
 import { DrawerQuickMenu } from "./drawer/drawer";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 
@@ -30,7 +30,7 @@ export const QuickMenu = () => {
         <span>{t("search")}</span>
       </ItemQuickMenu>
 
-      {session && (
+      {/* {session && (
         <>
           <Drawer>
             <DrawerTrigger asChild>
@@ -58,7 +58,7 @@ export const QuickMenu = () => {
             </DrawerContent>
           </Drawer>
         </>
-      )}
+      )} */}
 
       <Drawer>
         <DrawerTrigger asChild>

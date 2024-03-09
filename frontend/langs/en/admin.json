@@ -73,12 +73,28 @@
           }
         },
         "upload": {
-          "title": "Upload Plugin"
+          "title": "Upload Plugin",
+          "success": "Successfully uploaded plugin.",
+          "submit": "Upload"
         },
         "delete": {
           "submit": "Yes, delete plugin",
           "desc": "This action will delete <name></name> plugin created by <author></author> and all data associated with it.",
           "success": "Plugin has been deleted."
+        },
+        "download": {
+          "title": "Download Plugin",
+          "type": {
+            "rebuild": "Rebuild current version - {version}",
+            "new_version": "Create new version"
+          },
+          "version": {
+            "label": "Version"
+          },
+          "version_code": {
+            "label": "Version Code"
+          },
+          "submit": "Download"
         }
       },
       "styles": {

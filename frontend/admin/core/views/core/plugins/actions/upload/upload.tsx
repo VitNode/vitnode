@@ -26,7 +26,7 @@ export const UploadActionPluginAdmin = () => {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-w-4xl">
+      <DialogContent className="max-w-xl">
         <Suspense fallback={<Loader />}>
           <Content />
         </Suspense>
