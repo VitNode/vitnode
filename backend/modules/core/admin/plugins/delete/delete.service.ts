@@ -1,11 +1,11 @@
 import * as fs from "fs";
-import { join } from "path";
 
 import { Injectable } from "@nestjs/common";
 import { eq, sql } from "drizzle-orm";
 
 import { DeleteAdminPluginsArgs } from "./dto/delete.args";
 import { ChangeFilesAdminPluginsService } from "../helpers/files/change/change.service";
+import { pluginPaths } from "../paths";
 
 import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
@@ -19,6 +19,12 @@ export class DeleteAdminPluginsService {
     private databaseService: DatabaseService,
     private changeFilesService: ChangeFilesAdminPluginsService
   ) {}
+
+  protected deleteFolderWhenExists(path: string) {
+    if (fs.existsSync(path)) {
+      fs.rmSync(path, { recursive: true });
+    }
+  }
 
   async delete({ code }: DeleteAdminPluginsArgs): Promise<string> {
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
@@ -64,10 +70,10 @@ export class DeleteAdminPluginsService {
 
     this.changeFilesService.changeFilesWhenDelete({ code });
 
-    const modulePath = join(process.cwd(), "modules", code);
-    if (fs.existsSync(modulePath)) {
-      fs.rmSync(modulePath, { recursive: true });
-    }
+    const modulePath = pluginPaths({ code }).backend.root;
+    this.deleteFolderWhenExists(modulePath);
+    // Frontend - Delete admin pages
+    this.deleteFolderWhenExists(pluginPaths({ code }).frontend.admin_pages);
 
     await this.databaseService.db
       .delete(core_plugins)

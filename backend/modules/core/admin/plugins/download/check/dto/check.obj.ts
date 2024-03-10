@@ -1,33 +1,33 @@
-import { Field, ObjectType } from "@nestjs/graphql";
+import { Field, Int, ObjectType } from "@nestjs/graphql";
 
 @ObjectType()
 export class CheckDownloadAdminPluginsObj {
-  @Field(() => [String])
-  databases: string[];
+  @Field(() => Int)
+  databases: number;
 
-  @Field(() => [String])
-  admin_pages: string[];
+  @Field(() => Int)
+  admin_pages: number;
 
-  @Field(() => [String])
-  admin_templates: string[];
+  @Field(() => Int)
+  admin_templates: number;
 
-  @Field(() => [String])
-  pages_container: string[];
+  @Field(() => Int)
+  pages_container: number;
 
-  @Field(() => [String])
-  pages: string[];
+  @Field(() => Int)
+  pages: number;
 
-  @Field(() => [String])
-  hooks: string[];
+  @Field(() => Int)
+  hooks: number;
 
-  @Field(() => [String])
-  templates: string[];
+  @Field(() => Int)
+  templates: number;
 
-  @Field(() => [String])
-  graphql_queries: string[];
+  @Field(() => Int)
+  graphql_queries: number;
 
-  @Field(() => [String])
-  graphql_mutations: string[];
+  @Field(() => Int)
+  graphql_mutations: number;
 
   @Field(() => Boolean)
   language: boolean;

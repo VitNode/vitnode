@@ -38,16 +38,16 @@ type BreadcrumbsForumForums {
 }
 
 type CheckDownloadAdminPluginsObj {
-  admin_pages: [String!]!
-  admin_templates: [String!]!
-  databases: [String!]!
-  graphql_mutations: [String!]!
-  graphql_queries: [String!]!
-  hooks: [String!]!
+  admin_pages: Int!
+  admin_templates: Int!
+  databases: Int!
+  graphql_mutations: Int!
+  graphql_queries: Int!
+  hooks: Int!
   language: Boolean!
-  pages: [String!]!
-  pages_container: [String!]!
-  templates: [String!]!
+  pages: Int!
+  pages_container: Int!
+  templates: Int!
 }
 
 type ChildrenShowForumForums {

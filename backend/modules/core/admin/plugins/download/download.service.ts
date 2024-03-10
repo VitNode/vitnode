@@ -6,6 +6,7 @@ import * as tar from "tar";
 import { eq } from "drizzle-orm";
 
 import { DownloadAdminPluginsArgs } from "./dto/download.args";
+import { pluginPaths } from "../paths";
 
 import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
@@ -30,6 +31,19 @@ export class DownloadAdminPluginsService {
     }
   }
 
+  protected copyFiles({
+    destination,
+    source
+  }: {
+    destination: string;
+    source: string;
+  }): void {
+    if (fs.existsSync(source)) {
+      fs.cpSync(source, destination, {
+        recursive: true
+      });
+    }
+  }
   protected async prepareTgz({ code }: { code: string }): Promise<void> {
     // Create temp folder
     const tempPath = join(this.tempPath, code);
@@ -45,158 +59,25 @@ export class DownloadAdminPluginsService {
     const backendSource = join(process.cwd(), "modules", code);
     fs.cpSync(backendSource, backendPath, { recursive: true });
 
-    // Copy frontend files - admin pages
-    const frontendAdminPagesSource = join(
-      process.cwd(),
-      "..",
-      "frontend",
-      "app",
-      "[locale]",
-      "(apps)",
-      "(admin)",
-      "admin",
-      "(auth)",
-      code
-    );
-    if (fs.existsSync(frontendAdminPagesSource)) {
-      fs.cpSync(frontendAdminPagesSource, join(frontendPath, "admin_pages"), {
-        recursive: true
-      });
-    }
-
-    // Copy frontend files - admin templates
-    const frontendAdminTemplatesSource = join(
-      process.cwd(),
-      "..",
-      "frontend",
-      "admin",
-      code
-    );
-    if (fs.existsSync(frontendAdminTemplatesSource)) {
-      fs.cpSync(
-        frontendAdminTemplatesSource,
-        join(frontendPath, "admin_templates"),
-        {
-          recursive: true
-        }
-      );
-    }
-
-    // Copy frontend files - pages container
-    const frontendPagesContainerSource = join(
-      process.cwd(),
-      "..",
-      "frontend",
-      "app",
-      "[locale]",
-      "(apps)",
-      "(main)",
-      "(container)",
-      code
-    );
-    if (fs.existsSync(frontendPagesContainerSource)) {
-      fs.cpSync(
-        frontendPagesContainerSource,
-        join(frontendPath, "pages_container"),
-        {
-          recursive: true
-        }
-      );
-    }
-
-    // Copy frontend files - pages
-    const frontendPagesSource = join(
-      process.cwd(),
-      "..",
-      "frontend",
-      "app",
-      "[locale]",
-      "(apps)",
-      "(main)",
-      code
-    );
-    if (fs.existsSync(frontendPagesSource)) {
-      fs.cpSync(frontendPagesSource, join(frontendPath, "pages"), {
-        recursive: true
-      });
-    }
-
-    // Copy frontend files - hooks
-    const frontendHooksSource = join(
-      process.cwd(),
-      "..",
-      "frontend",
+    // Copy frontend files
+    const frontendPaths = [
+      "admin_pages",
+      "admin_templates",
+      "pages",
       "hooks",
-      code
-    );
-    if (fs.existsSync(frontendHooksSource)) {
-      fs.cpSync(frontendHooksSource, join(frontendPath, "hooks"), {
-        recursive: true
+      "templates",
+      "graphql_queries",
+      "graphql_mutations"
+    ];
+    frontendPaths.forEach(path => {
+      this.copyFiles({
+        destination: join(frontendPath, path),
+        source: pluginPaths({ code }).frontend[path]
       });
-    }
-
-    // Copy frontend files - templates
-    const frontendComponentsSource = join(
-      process.cwd(),
-      "..",
-      "frontend",
-      "themes",
-      "1",
-      code
-    );
-    if (fs.existsSync(frontendComponentsSource)) {
-      fs.cpSync(frontendComponentsSource, join(frontendPath, "templates"), {
-        recursive: true
-      });
-    }
-
-    // Copy frontend files - graphql queries
-    const frontendGraphQLQueriesSource = join(
-      process.cwd(),
-      "..",
-      "frontend",
-      "graphql",
-      "queries",
-      code
-    );
-    if (fs.existsSync(frontendGraphQLQueriesSource)) {
-      fs.cpSync(
-        frontendGraphQLQueriesSource,
-        join(frontendPath, "graphql_queries"),
-        {
-          recursive: true
-        }
-      );
-    }
-
-    // Copy frontend files - graphql mutations
-    const frontendGraphQLMutationsSource = join(
-      process.cwd(),
-      "..",
-      "frontend",
-      "graphql",
-      "mutations",
-      code
-    );
-    if (fs.existsSync(frontendGraphQLMutationsSource)) {
-      fs.cpSync(
-        frontendGraphQLMutationsSource,
-        join(frontendPath, "graphql_mutations"),
-        {
-          recursive: true
-        }
-      );
-    }
+    });
 
     // Copy frontend files - language
-    const frontendLanguageSource = join(
-      process.cwd(),
-      "..",
-      "frontend",
-      "langs",
-      "en",
-      `${code}.json`
-    );
+    const frontendLanguageSource = pluginPaths({ code }).frontend.language;
     if (fs.existsSync(frontendLanguageSource)) {
       fs.cpSync(
         frontendLanguageSource,

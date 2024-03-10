@@ -1,6 +1,5 @@
-import * as fsPromises from "fs/promises";
 import { join } from "path";
-import { writeFile } from "fs/promises";
+import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
@@ -31,7 +30,7 @@ export class UploadAdminThemesService {
   }): Promise<ConfigTheme> {
     // Create folders
     const path = join(this.tempPath, this.tempFolderName);
-    await fsPromises.mkdir(path, { recursive: true });
+    await fs.promises.mkdir(path, { recursive: true });
 
     // Upload to temp folder
     await new Promise((resolve, reject) => {
@@ -51,7 +50,7 @@ export class UploadAdminThemesService {
     });
 
     const pathThemeJSON = join(path, "theme.json");
-    const themeFile = await fsPromises.readFile(pathThemeJSON, "utf8");
+    const themeFile = await fs.promises.readFile(pathThemeJSON, "utf8");
     const config: ConfigTheme = JSON.parse(themeFile);
 
     // Check if variables exists
@@ -70,7 +69,7 @@ export class UploadAdminThemesService {
     }
 
     // Delete temp folder
-    await fsPromises.rm(path, { recursive: true });
+    await fs.promises.rm(path, { recursive: true });
 
     return config;
   }
@@ -96,7 +95,7 @@ export class UploadAdminThemesService {
 
     // Create theme folder in frontend
     const newPath = join(this.path, `${theme.id}`);
-    await fsPromises.mkdir(newPath);
+    await fs.promises.mkdir(newPath);
 
     // Unpack theme to temp folder
     await new Promise((resolve, reject) => {
@@ -114,11 +113,11 @@ export class UploadAdminThemesService {
           // Update the global.scss file
           try {
             const pathSCSSFile = join(newPath, "core", "layout", "global.scss");
-            const pathSCSSFileContent = await fsPromises.readFile(
+            const pathSCSSFileContent = await fs.promises.readFile(
               pathSCSSFile,
               "utf8"
             );
-            await writeFile(
+            await fs.promises.writeFile(
               pathSCSSFile,
               pathSCSSFileContent.replace(/\.theme_\d+/g, `.theme_${theme.id}`)
             );
