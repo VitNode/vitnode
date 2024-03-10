@@ -1,7 +1,6 @@
 import { useTranslations } from "next-intl";
 import { AlertTriangle } from "lucide-react";
 
-import corePackages from "@/package.json";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Badge } from "@/components/ui/badge";
 import { RebuildRequiredAdmin } from "@/admin/core/global/rebuild-required";
@@ -25,7 +24,7 @@ export const DashboardCoreAdminView = () => {
             )}
           </>
         }
-        desc={t("version", { version: corePackages.version })}
+        desc={t("version", { version: "TODO" })}
       />
 
       <RebuildRequiredAdmin />

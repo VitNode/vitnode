@@ -1,8 +1,9 @@
 {
+  "overview": "Overview",
   "database": "Database",
   "authorization": "Authorization",
+  "cron": "Task Scheduling (CRON)",
   "i18n": "Internationalization (i18n)",
-  "files": "Files",
-  "sessions": "Sessions",
-  "cron": "Task Scheduling (CRON)"
+  "pages": "Pages",
+  "files": "Files"
 }

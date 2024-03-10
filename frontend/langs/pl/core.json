@@ -1,6 +1,7 @@
 {
   "core": {
-    "test": "Test PL",
+    "reload_page": "Przeładuj stronę",
+    "go_back": "Wróć",
     "open_menu": "Otwórz menu",
     "loading": "Czekaj, ładowanie...",
     "save": "Zapisz",
@@ -269,6 +270,7 @@
       "title": "Ups! Coś poszło nie tak",
       "code": "Kod błędu: <code></code>",
       "no_connection_api": "Brak połączenia z API",
+      "no_connection_api_dev": "To się zdarza, gdy API wprowadza zmiany w kodzie lub gdy API jest wyłączone.",
       "access_denied": "Brak dostępu",
       "internal_server_error": "Wewnętrzny błąd serwera",
       "required": "To pole jest wymagane.",

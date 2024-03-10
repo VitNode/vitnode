@@ -6,6 +6,7 @@ import * as tar from "tar";
 import { eq } from "drizzle-orm";
 
 import { DownloadAdminPluginsArgs } from "./dto/download.args";
+import { pluginPaths } from "../paths";
 
 import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
@@ -30,6 +31,19 @@ export class DownloadAdminPluginsService {
     }
   }
 
+  protected copyFiles({
+    destination,
+    source
+  }: {
+    destination: string;
+    source: string;
+  }): void {
+    if (fs.existsSync(source)) {
+      fs.cpSync(source, destination, {
+        recursive: true
+      });
+    }
+  }
   protected async prepareTgz({ code }: { code: string }): Promise<void> {
     // Create temp folder
     const tempPath = join(this.tempPath, code);
@@ -44,6 +58,35 @@ export class DownloadAdminPluginsService {
     // Copy backend files
     const backendSource = join(process.cwd(), "modules", code);
     fs.cpSync(backendSource, backendPath, { recursive: true });
+
+    // Copy frontend files
+    const frontendPaths = [
+      "admin_pages",
+      "admin_templates",
+      "pages",
+      "hooks",
+      "templates",
+      "graphql_queries",
+      "graphql_mutations"
+    ];
+    frontendPaths.forEach(path => {
+      this.copyFiles({
+        destination: join(frontendPath, path),
+        source: pluginPaths({ code }).frontend[path]
+      });
+    });
+
+    // Copy frontend files - language
+    const frontendLanguageSource = pluginPaths({ code }).frontend.language;
+    if (fs.existsSync(frontendLanguageSource)) {
+      fs.cpSync(
+        frontendLanguageSource,
+        join(frontendPath, "langs", `${code}.json`),
+        {
+          recursive: true
+        }
+      );
+    }
   }
 
   protected async createTgz({

@@ -6,6 +6,7 @@ import { eq, sql } from "drizzle-orm";
 
 import { DeleteAdminPluginsArgs } from "./dto/delete.args";
 import { ChangeFilesAdminPluginsService } from "../helpers/files/change/change.service";
+import { pluginPaths } from "../paths";
 
 import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
@@ -19,6 +20,12 @@ export class DeleteAdminPluginsService {
     private databaseService: DatabaseService,
     private changeFilesService: ChangeFilesAdminPluginsService
   ) {}
+
+  protected deleteFolderWhenExists(path: string) {
+    if (fs.existsSync(path)) {
+      fs.rmSync(path, { recursive: true });
+    }
+  }
 
   async delete({ code }: DeleteAdminPluginsArgs): Promise<string> {
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
@@ -64,10 +71,52 @@ export class DeleteAdminPluginsService {
 
     this.changeFilesService.changeFilesWhenDelete({ code });
 
-    const modulePath = join(process.cwd(), "modules", code);
-    if (fs.existsSync(modulePath)) {
-      fs.rmSync(modulePath, { recursive: true });
-    }
+    const modulePath = pluginPaths({ code }).backend.root;
+    this.deleteFolderWhenExists(modulePath);
+    // Frontend
+    const frontendPaths = [
+      "admin_pages",
+      "admin_templates",
+      "pages",
+      "hooks",
+      "graphql_queries",
+      "graphql_mutations"
+    ];
+    frontendPaths.forEach(path => {
+      this.deleteFolderWhenExists(pluginPaths({ code }).frontend[path]);
+    });
+
+    // Frontend - Delete Templates
+    const themes = await this.databaseService.db.query.core_themes.findMany({
+      columns: {
+        id: true
+      }
+    });
+    themes.forEach(({ id }) => {
+      this.deleteFolderWhenExists(
+        join(process.cwd(), "..", "frontend", "themes", id.toString(), code)
+      );
+    });
+
+    // Frontend - Delete Language
+    const languages =
+      await this.databaseService.db.query.core_languages.findMany({
+        columns: {
+          code: true
+        }
+      });
+    languages.forEach(lang => {
+      this.deleteFolderWhenExists(
+        join(
+          process.cwd(),
+          "..",
+          "frontend",
+          "langs",
+          lang.code,
+          `${code}.json`
+        )
+      );
+    });
 
     await this.databaseService.db
       .delete(core_plugins)

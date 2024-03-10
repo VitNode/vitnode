@@ -19,7 +19,7 @@ export const LastPostItemForum = ({ lastPosts }: Props) => {
   if (lastPosts.length === 0) return null;
   const { created, topic, user } = lastPosts[0];
 
-  const href = `/topic/${convertNameToLink({ id: topic.id, name: topic.title })}`;
+  const href = `/forum/topic/${convertNameToLink({ id: topic.id, name: topic.title })}`;
 
   return (
     <WrapperLastPostItemForum

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMorePosts } from "@/hooks/forums/forum/posts/use-more-posts";
+import { useMorePosts } from "@/hooks/forum/posts/use-more-posts";
 import { ButtonLoadMorePosts } from "./button";
 import { ListPosts } from "../list";
 import { cn } from "@/functions/classnames";

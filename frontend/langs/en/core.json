@@ -1,6 +1,7 @@
 {
   "core": {
-    "test": "Test EN",
+    "reload_page": "Reload Page",
+    "go_back": "Go Back",
     "open_menu": "Open Menu",
     "loading": "Please wait, loading...",
     "save": "Save",
@@ -269,6 +270,7 @@
       "title": "Oops! Something went wrong",
       "code": "Error code: <code></code>",
       "no_connection_api": "No connection to the API",
+      "no_connection_api_dev": "This happens when the API makes some changes in your code or when the API is down.",
       "access_denied": "Access denied",
       "internal_server_error": "Internal server error",
       "required": "This field is required.",

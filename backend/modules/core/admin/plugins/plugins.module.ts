@@ -12,6 +12,8 @@ import { DownloadAdminPluginsResolver } from "./download/download.resolver";
 import { DownloadAdminPluginsService } from "./download/download.service";
 import { UploadAdminPluginsResolver } from "./upload/upload.resolver";
 import { UploadAdminPluginsService } from "./upload/upload.service";
+import { CheckDownloadAdminPluginsService } from "./download/check/check.service";
+import { CheckDownloadAdminPluginsResolver } from "./download/check/check.resolver";
 
 @Module({
   providers: [
@@ -26,7 +28,9 @@ import { UploadAdminPluginsService } from "./upload/upload.service";
     DownloadAdminPluginsResolver,
     DownloadAdminPluginsService,
     UploadAdminPluginsResolver,
-    UploadAdminPluginsService
+    UploadAdminPluginsService,
+    CheckDownloadAdminPluginsService,
+    CheckDownloadAdminPluginsResolver
   ]
 })
 export class AdminPluginsModule {}

@@ -2,7 +2,7 @@
 
 import { useState, type ReactNode, useEffect } from "react";
 
-import { WrapperCategoryForumContext } from "@/hooks/forums/forum/use-wrapper-category-forum";
+import { WrapperCategoryForumContext } from "@/hooks/forum/forum/use-wrapper-category-forum";
 
 interface Props {
   children: ReactNode;

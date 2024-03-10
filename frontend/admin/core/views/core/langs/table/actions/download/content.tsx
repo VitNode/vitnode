@@ -33,7 +33,6 @@ import {
   CommandItem
 } from "@/components/ui/command";
 import { Loader } from "@/components/loader";
-import corePackages from "@/package.json";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 
 export const ContentDownloadActionsTableLangsCoreAdmin = ({
@@ -52,11 +51,11 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
   } = data;
 
   const plugins = [
-    { id: "core", name: "Core", version: corePackages.version, code: "core" },
+    { id: "core", name: "Core", version: "TODO", code: "core" },
     {
       id: "admin",
       name: "Admin",
-      version: corePackages.version,
+      version: "TODO",
       code: "admin"
     },
     ...edges

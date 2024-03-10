@@ -3,7 +3,7 @@
 import { ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { useWrapperCategoryForum } from "@/hooks/forums/forum/use-wrapper-category-forum";
+import { useWrapperCategoryForum } from "@/hooks/forum/forum/use-wrapper-category-forum";
 import { LOCAL_STORAGE_KEY } from "./wrapper";
 
 interface Props {

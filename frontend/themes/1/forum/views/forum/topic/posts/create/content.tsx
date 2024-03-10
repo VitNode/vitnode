@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/form";
 import { Editor } from "@/components/editor/editor";
 import { Button } from "@/components/ui/button";
-import { useCreatePost } from "@/hooks/forums/forum/posts/create/use-create-post";
+import { useCreatePost } from "@/hooks/forum/posts/create/use-create-post";
 
 interface Props {
   setOpen: (open: boolean) => void;
