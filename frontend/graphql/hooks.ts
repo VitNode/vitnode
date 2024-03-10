@@ -56,6 +56,20 @@ export type BreadcrumbsForumForums = {
   name: Array<TextLanguage>;
 };
 
+export type CheckDownloadAdminPluginsObj = {
+  __typename?: 'CheckDownloadAdminPluginsObj';
+  admin_pages: Scalars['Int']['output'];
+  admin_templates: Scalars['Int']['output'];
+  databases: Scalars['Int']['output'];
+  graphql_mutations: Scalars['Int']['output'];
+  graphql_queries: Scalars['Int']['output'];
+  hooks: Scalars['Int']['output'];
+  language: Scalars['Boolean']['output'];
+  pages: Scalars['Int']['output'];
+  pages_container: Scalars['Int']['output'];
+  templates: Scalars['Int']['output'];
+};
+
 export type ChildrenShowForumForums = {
   __typename?: 'ChildrenShowForumForums';
   _count: ShowForumForumsCounts;
@@ -503,6 +517,7 @@ export type Query = {
   __typename?: 'Query';
   admin__core_groups__show: ShowAdminGroupsObj;
   admin__core_members__show: ShowAdminMembersObj;
+  admin__core_plugins__download_check: CheckDownloadAdminPluginsObj;
   admin__core_plugins__show: ShowAdminPluginsObj;
   admin__core_staff_administrators__show: ShowAdminStaffAdministratorsObj;
   admin__core_staff_moderators__show: ShowAdminStaffModeratorsObj;
@@ -538,6 +553,11 @@ export type QueryAdmin__Core_Members__ShowArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<Array<ShowAdminMembersSortByArgs>>;
+};
+
+
+export type QueryAdmin__Core_Plugins__Download_CheckArgs = {
+  code: Scalars['String']['input'];
 };
 
 
@@ -910,6 +930,15 @@ export type ShowCoreNavObj = {
   __typename?: 'ShowCoreNavObj';
   edges: Array<ShowCoreNav>;
   pageInfo: PageInfo;
+};
+
+export type ShowCoreSessionDevices = {
+  __typename?: 'ShowCoreSessionDevices';
+  device_id: Scalars['Int']['output'];
+  expires: Scalars['Int']['output'];
+  last_seen: Scalars['Int']['output'];
+  login_token: Scalars['String']['output'];
+  user_id: Scalars['Int']['output'];
 };
 
 export type ShowCoreThemes = {
@@ -1510,6 +1539,13 @@ export type Admin__Core_Nav__ShowQueryVariables = Exact<{ [key: string]: never; 
 
 
 export type Admin__Core_Nav__ShowQuery = { __typename?: 'Query', core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, href: string, external: boolean, position: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
+
+export type Admin__Core_Plugins__Download_CheckQueryVariables = Exact<{
+  code: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Plugins__Download_CheckQuery = { __typename?: 'Query', admin__core_plugins__download_check: { __typename?: 'CheckDownloadAdminPluginsObj', admin_pages: number, admin_templates: number, databases: number, graphql_mutations: number, graphql_queries: number, hooks: number, language: boolean, pages: number, pages_container: number, templates: number } };
 
 export type Admin__Core_Plugins__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -2321,6 +2357,22 @@ export const Admin__Core_Nav__Show = gql`
       external
       position
     }
+  }
+}
+    `;
+export const Admin__Core_Plugins__Download_Check = gql`
+    query Admin__core_plugins__download_check($code: String!) {
+  admin__core_plugins__download_check(code: $code) {
+    admin_pages
+    admin_templates
+    databases
+    graphql_mutations
+    graphql_queries
+    hooks
+    language
+    pages
+    pages_container
+    templates
   }
 }
     `;

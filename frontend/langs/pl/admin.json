@@ -94,6 +94,19 @@
           "version_code": {
             "label": "Kod wersji"
           },
+          "check": {
+            "databases": "Bazy danych: <status></status>",
+            "admin_pages": "Strony administratora: <status></status>",
+            "admin_templates": "Szablony administratora: <status></status>",
+            "graphql_mutations": "Mutacje GraphQL: <status></status>",
+            "graphql_queries": "Zapytania GraphQL: <status></status>",
+            "hooks": "Hooki: <status></status>",
+            "language": "Język: <status></status>",
+            "pages": "Strony: <status></status>",
+            "pages_container": "Strony (kontener): <status></status>",
+            "templates": "Szablony: <status></status>",
+            "file_detected": "{count, plural, =0 {Brak plików} =1 {1 plik} few {# pliki} other {# plików}} wykryto"
+          },
           "submit": "Pobierz"
         }
       },
