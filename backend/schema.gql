@@ -37,6 +37,15 @@ type BreadcrumbsForumForums {
   name: [TextLanguage!]!
 }
 
+type CheckDownloadAdminPluginsObj {
+  admin_pages: [String!]!
+  databases: [String!]!
+  hooks: [String!]!
+  pages: [String!]!
+  pages_container: [String!]!
+  templates: [String!]!
+}
+
 type ChildrenShowForumForums {
   _count: ShowForumForumsCounts!
   breadcrumbs: [BreadcrumbsForumForums!]!
@@ -217,6 +226,7 @@ type PermissionsTopicForums {
 type Query {
   admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
   admin__core_members__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
+  admin__core_plugins__download_check(code: String!): CheckDownloadAdminPluginsObj!
   admin__core_plugins__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminPluginsSortByArgs!]): ShowAdminPluginsObj!
   admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
   admin__core_staff_moderators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
