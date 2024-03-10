@@ -12,7 +12,7 @@ import type { EditTopicData } from "@/themes/1/forum/views/forum/topic/create-ed
 import { mutationEditApi } from "./mutation-edit-api";
 import type { TextLanguage } from "@/graphql/hooks";
 
-import { useTextLang } from "../../../../core/use-text-lang";
+import { useTextLang } from "../../../core/use-text-lang";
 
 interface Props {
   forumId: number;
@@ -85,7 +85,9 @@ export const useCreateEditTopic = ({ data, forumId }: Props) => {
     }
 
     if (!topic) return;
-    push(`/topic/${convertNameToLink({ id: topic.id, name: topic.title })}`);
+    push(
+      `/forum/topic/${convertNameToLink({ id: topic.id, name: topic.title })}`
+    );
     setOpen?.(false);
   };
 

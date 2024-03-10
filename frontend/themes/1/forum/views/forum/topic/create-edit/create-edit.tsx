@@ -25,7 +25,7 @@ import { getIdFormString } from "@/functions/url";
 import { useRouter } from "@/i18n";
 import type { ShowTopicsForums } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
-import { useCreateEditTopic } from "@/hooks/forums/forum/topics/create-edit/use-create-edit-topic";
+import { useCreateEditTopic } from "@/hooks/forum/topics/create-edit/use-create-edit-topic";
 
 export interface EditTopicData
   extends Pick<ShowTopicsForums, "title" | "content" | "id"> {}
@@ -38,10 +38,10 @@ export const CreateEditTopic = ({ data }: Props) => {
   const t = useTranslations("forum.topics");
   const tCore = useTranslations("core");
   const { id } = useParams();
-  const { back } = useRouter();
+  const { back, push } = useRouter();
   const forumId = getIdFormString(id);
   const { form, onSubmit } = useCreateEditTopic({ forumId, data });
-  const { convertText } = useTextLang();
+  const { convertNameToLink, convertText } = useTextLang();
 
   return (
     <Card>
@@ -92,7 +92,20 @@ export const CreateEditTopic = ({ data }: Props) => {
           </CardContent>
 
           <CardFooter className="justify-center">
-            <Button onClick={back} variant="ghost">
+            <Button
+              onClick={() => {
+                if (data) {
+                  push(
+                    `/forum/topic/${convertNameToLink({ id: data.id, name: data.title })}`
+                  );
+
+                  return;
+                }
+
+                back();
+              }}
+              variant="ghost"
+            >
               {tCore("prev_page")}
             </Button>
 

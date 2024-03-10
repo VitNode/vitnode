@@ -17,7 +17,7 @@ export const ItemTopicListForum = ({
 }: ItemTopicListForumProps) => {
   const t = useTranslations("forum");
   const { convertNameToLink, convertText } = useTextLang();
-  const href = `/topic/${convertNameToLink({ id, name: title })}`;
+  const href = `/forum/topic/${convertNameToLink({ id, name: title })}`;
 
   return (
     <WrapperItemTopicListForum
