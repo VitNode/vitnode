@@ -28,4 +28,7 @@ export class CheckDownloadAdminPluginsObj {
 
   @Field(() => [String])
   graphql_mutations: string[];
+
+  @Field(() => Boolean)
+  language: boolean;
 }

@@ -175,6 +175,17 @@ export class CheckDownloadAdminPluginsService {
         ).filter(file => file.includes(".gql"))
       : [];
 
+    // Check if language file exists
+    const pathLanguage = join(
+      process.cwd(),
+      "..",
+      "frontend",
+      "langs",
+      "en",
+      `${code}.json`
+    );
+    const language = fs.existsSync(pathLanguage);
+
     return {
       databases: databaseSchemaFiles,
       admin_pages: frontendAdminPages,
@@ -184,7 +195,8 @@ export class CheckDownloadAdminPluginsService {
       hooks: frontendHooks,
       templates: frontendTemplates,
       graphql_queries: frontendGraphQLQueries,
-      graphql_mutations: frontendGraphQLMutations
+      graphql_mutations: frontendGraphQLMutations,
+      language
     };
   }
 }

@@ -187,6 +187,25 @@ export class DownloadAdminPluginsService {
         }
       );
     }
+
+    // Copy frontend files - language
+    const frontendLanguageSource = join(
+      process.cwd(),
+      "..",
+      "frontend",
+      "langs",
+      "en",
+      `${code}.json`
+    );
+    if (fs.existsSync(frontendLanguageSource)) {
+      fs.cpSync(
+        frontendLanguageSource,
+        join(frontendPath, "language", `${code}.json`),
+        {
+          recursive: true
+        }
+      );
+    }
   }
 
   protected async createTgz({

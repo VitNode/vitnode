@@ -44,6 +44,7 @@ type CheckDownloadAdminPluginsObj {
   graphql_mutations: [String!]!
   graphql_queries: [String!]!
   hooks: [String!]!
+  language: Boolean!
   pages: [String!]!
   pages_container: [String!]!
   templates: [String!]!
