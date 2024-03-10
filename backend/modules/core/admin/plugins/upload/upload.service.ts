@@ -122,29 +122,89 @@ export class UploadAdminPluginsService {
     this.changeFilesService.changeFilesWhenCreate({ code: config.code });
   }
 
+  protected async copyFilesToPluginFolder({
+    destination,
+    source
+  }: {
+    destination: string;
+    source: string;
+  }): Promise<void> {
+    if (!fs.existsSync(source)) return;
+
+    try {
+      await fs.promises.cp(source, destination, {
+        recursive: true
+      });
+    } catch (error) {
+      throw new CustomError({
+        code: "COPY_FILES_TO_PLUGIN_FOLDER_ERROR",
+        message: `Source: ${source}, Destination: ${destination}`
+      });
+    }
+  }
+
   protected async createPluginFrontend({
     config
   }: {
     config: ConfigPlugin;
   }): Promise<void> {
-    // Admin pages
-    const newPathAdminPages = join(
-      process.cwd(),
-      "..",
-      "frontend",
-      "app",
-      "[locale]",
-      "(apps)",
-      "(admin)",
-      "admin",
-      "(auth)",
-      config.code
+    const frontendPaths = [
+      "admin_pages",
+      "admin_templates",
+      "pages",
+      "hooks",
+      "graphql_queries",
+      "graphql_mutations"
+    ];
+    await Promise.all(
+      frontendPaths.map(async path => {
+        const source = join(this.tempPath, "frontend", path);
+        const destination = pluginPaths({ code: config.code }).frontend[path];
+
+        return this.copyFilesToPluginFolder({ source, destination });
+      })
     );
 
-    // Copy temp folder to plugin folder
-    const adminPagesSource = join(this.tempPath, "frontend", "admin_pages");
-    await fs.promises.cp(adminPagesSource, newPathAdminPages, {
-      recursive: true
+    // Copy templates
+    const themes = await this.databaseService.db.query.core_themes.findMany({
+      columns: {
+        id: true
+      }
+    });
+    await Promise.all(
+      themes.map(async ({ id }) => {
+        const source = join(this.tempPath, "frontend", "templates");
+        const destination = join(
+          process.cwd(),
+          "..",
+          "frontend",
+          "themes",
+          id.toString(),
+          config.code
+        );
+
+        return this.copyFilesToPluginFolder({ source, destination });
+      })
+    );
+
+    // Copy language
+    const languages =
+      await this.databaseService.db.query.core_languages.findMany({
+        columns: {
+          code: true
+        }
+      });
+    languages.forEach(lang => {
+      const source = join(this.tempPath, "frontend", "langs");
+      const destination = join(
+        process.cwd(),
+        "..",
+        "frontend",
+        "langs",
+        lang.code
+      );
+
+      return this.copyFilesToPluginFolder({ source, destination });
     });
   }
 

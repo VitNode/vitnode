@@ -81,7 +81,7 @@ export class DownloadAdminPluginsService {
     if (fs.existsSync(frontendLanguageSource)) {
       fs.cpSync(
         frontendLanguageSource,
-        join(frontendPath, "language", `${code}.json`),
+        join(frontendPath, "langs", `${code}.json`),
         {
           recursive: true
         }
