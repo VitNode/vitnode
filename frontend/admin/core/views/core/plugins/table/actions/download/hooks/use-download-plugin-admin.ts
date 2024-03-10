@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
+import { useQuery } from "@tanstack/react-query";
 
 import { useDialog } from "@/components/ui/dialog";
 import { increaseVersionString } from "@/functions/increase-version-string";
@@ -10,6 +11,7 @@ import { zodInput } from "@/functions/zod";
 import type { ShowAdminPlugins } from "@/graphql/hooks";
 import { CONFIG } from "@/config";
 import { mutationApi } from "./mutation-api";
+import { queryApi } from "./query-api";
 
 export const useDownloadPluginAdmin = ({
   code,
@@ -54,5 +56,10 @@ export const useDownloadPluginAdmin = ({
     );
   };
 
-  return { form, onSubmit };
+  const query = useQuery({
+    queryKey: ["admin__core_plugins__download_check", code],
+    queryFn: async () => await queryApi({ code })
+  });
+
+  return { form, onSubmit, ...query };
 };

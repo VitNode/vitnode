@@ -20,6 +20,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { CheckListDownloadPluginActionsAdmin } from "./check-list";
 
 export const ContentDownloadPluginActionsAdmin = ({
   code,
@@ -28,7 +29,7 @@ export const ContentDownloadPluginActionsAdmin = ({
   version_code
 }: DownloadPluginActionsAdminProps) => {
   const t = useTranslations("admin.core.plugins.download");
-  const { form, onSubmit } = useDownloadPluginAdmin({
+  const { data, form, isError, isLoading, onSubmit } = useDownloadPluginAdmin({
     version_code,
     version,
     code
@@ -42,6 +43,12 @@ export const ContentDownloadPluginActionsAdmin = ({
           {name}
         </DialogDescription>
       </DialogHeader>
+
+      <CheckListDownloadPluginActionsAdmin
+        isLoading={isLoading}
+        isError={isError}
+        data={data}
+      />
 
       <Form {...form}>
         <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
