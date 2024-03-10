@@ -9,6 +9,9 @@ export class CheckDownloadAdminPluginsObj {
   admin_pages: string[];
 
   @Field(() => [String])
+  admin_templates: string[];
+
+  @Field(() => [String])
   pages_container: string[];
 
   @Field(() => [String])
@@ -19,4 +22,10 @@ export class CheckDownloadAdminPluginsObj {
 
   @Field(() => [String])
   templates: string[];
+
+  @Field(() => [String])
+  graphql_queries: string[];
+
+  @Field(() => [String])
+  graphql_mutations: string[];
 }

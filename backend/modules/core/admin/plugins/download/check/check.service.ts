@@ -59,6 +59,22 @@ export class CheckDownloadAdminPluginsService {
         ).filter(file => file.includes(".tsx") || file.includes(".ts"))
       : [];
 
+    // Frontend - Admin templates
+    const pathFrontendAdminTemplates = join(
+      process.cwd(),
+      "..",
+      "frontend",
+      "admin",
+      code
+    );
+    const frontendAdminTemplates = fs.existsSync(pathFrontendAdminTemplates)
+      ? (
+          await fsPromises.readdir(pathFrontendAdminTemplates, {
+            recursive: true
+          })
+        ).filter(file => file.includes(".tsx") || file.includes(".ts"))
+      : [];
+
     // Frontend - Pages Container
     const pathFrontendPagesContainer = join(
       process.cwd(),
@@ -125,13 +141,50 @@ export class CheckDownloadAdminPluginsService {
         ).filter(file => file.includes(".tsx") || file.includes(".ts"))
       : [];
 
+    // Frontend - GraphQL queries
+    const pathFrontendGraphQLQueries = join(
+      process.cwd(),
+      "..",
+      "frontend",
+      "graphql",
+      "queries",
+      code
+    );
+    const frontendGraphQLQueries = fs.existsSync(pathFrontendGraphQLQueries)
+      ? (
+          await fs.promises.readdir(pathFrontendGraphQLQueries, {
+            recursive: true
+          })
+        ).filter(file => file.includes(".gql"))
+      : [];
+
+    // Frontend - GraphQL mutations
+    const pathFrontendGraphQLMutations = join(
+      process.cwd(),
+      "..",
+      "frontend",
+      "graphql",
+      "mutations",
+      code
+    );
+    const frontendGraphQLMutations = fs.existsSync(pathFrontendGraphQLMutations)
+      ? (
+          await fs.promises.readdir(pathFrontendGraphQLMutations, {
+            recursive: true
+          })
+        ).filter(file => file.includes(".gql"))
+      : [];
+
     return {
       databases: databaseSchemaFiles,
       admin_pages: frontendAdminPages,
+      admin_templates: frontendAdminTemplates,
       pages_container: frontendPagesContainer,
       pages: frontendPages,
       hooks: frontendHooks,
-      templates: frontendTemplates
+      templates: frontendTemplates,
+      graphql_queries: frontendGraphQLQueries,
+      graphql_mutations: frontendGraphQLMutations
     };
   }
 }

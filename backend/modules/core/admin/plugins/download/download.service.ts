@@ -44,6 +44,149 @@ export class DownloadAdminPluginsService {
     // Copy backend files
     const backendSource = join(process.cwd(), "modules", code);
     fs.cpSync(backendSource, backendPath, { recursive: true });
+
+    // Copy frontend files - admin pages
+    const frontendAdminPagesSource = join(
+      process.cwd(),
+      "..",
+      "frontend",
+      "app",
+      "[locale]",
+      "(apps)",
+      "(admin)",
+      "admin",
+      "(auth)",
+      code
+    );
+    if (fs.existsSync(frontendAdminPagesSource)) {
+      fs.cpSync(frontendAdminPagesSource, join(frontendPath, "admin_pages"), {
+        recursive: true
+      });
+    }
+
+    // Copy frontend files - admin templates
+    const frontendAdminTemplatesSource = join(
+      process.cwd(),
+      "..",
+      "frontend",
+      "admin",
+      code
+    );
+    if (fs.existsSync(frontendAdminTemplatesSource)) {
+      fs.cpSync(
+        frontendAdminTemplatesSource,
+        join(frontendPath, "admin_templates"),
+        {
+          recursive: true
+        }
+      );
+    }
+
+    // Copy frontend files - pages container
+    const frontendPagesContainerSource = join(
+      process.cwd(),
+      "..",
+      "frontend",
+      "app",
+      "[locale]",
+      "(apps)",
+      "(main)",
+      "(container)",
+      code
+    );
+    if (fs.existsSync(frontendPagesContainerSource)) {
+      fs.cpSync(
+        frontendPagesContainerSource,
+        join(frontendPath, "pages_container"),
+        {
+          recursive: true
+        }
+      );
+    }
+
+    // Copy frontend files - pages
+    const frontendPagesSource = join(
+      process.cwd(),
+      "..",
+      "frontend",
+      "app",
+      "[locale]",
+      "(apps)",
+      "(main)",
+      code
+    );
+    if (fs.existsSync(frontendPagesSource)) {
+      fs.cpSync(frontendPagesSource, join(frontendPath, "pages"), {
+        recursive: true
+      });
+    }
+
+    // Copy frontend files - hooks
+    const frontendHooksSource = join(
+      process.cwd(),
+      "..",
+      "frontend",
+      "hooks",
+      code
+    );
+    if (fs.existsSync(frontendHooksSource)) {
+      fs.cpSync(frontendHooksSource, join(frontendPath, "hooks"), {
+        recursive: true
+      });
+    }
+
+    // Copy frontend files - templates
+    const frontendComponentsSource = join(
+      process.cwd(),
+      "..",
+      "frontend",
+      "themes",
+      "1",
+      code
+    );
+    if (fs.existsSync(frontendComponentsSource)) {
+      fs.cpSync(frontendComponentsSource, join(frontendPath, "templates"), {
+        recursive: true
+      });
+    }
+
+    // Copy frontend files - graphql queries
+    const frontendGraphQLQueriesSource = join(
+      process.cwd(),
+      "..",
+      "frontend",
+      "graphql",
+      "queries",
+      code
+    );
+    if (fs.existsSync(frontendGraphQLQueriesSource)) {
+      fs.cpSync(
+        frontendGraphQLQueriesSource,
+        join(frontendPath, "graphql_queries"),
+        {
+          recursive: true
+        }
+      );
+    }
+
+    // Copy frontend files - graphql mutations
+    const frontendGraphQLMutationsSource = join(
+      process.cwd(),
+      "..",
+      "frontend",
+      "graphql",
+      "mutations",
+      code
+    );
+    if (fs.existsSync(frontendGraphQLMutationsSource)) {
+      fs.cpSync(
+        frontendGraphQLMutationsSource,
+        join(frontendPath, "graphql_mutations"),
+        {
+          recursive: true
+        }
+      );
+    }
   }
 
   protected async createTgz({
