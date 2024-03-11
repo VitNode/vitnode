@@ -1,0 +1,20 @@
+mutation Admin__core_plugins__edit(
+  $author: String!
+  $authorUrl: String!
+  $code: String!
+  $name: String!
+  $supportUrl: String!
+  $description: String
+) {
+  admin__core_plugins__edit(
+    author: $author
+    author_url: $authorUrl
+    code: $code
+    name: $name
+    support_url: $supportUrl
+    description: $description
+  ) {
+    id
+    name
+  }
+}

@@ -193,6 +193,7 @@ export type Mutation = {
   admin__core_plugins__create: ShowAdminPlugins;
   admin__core_plugins__delete: Scalars['String']['output'];
   admin__core_plugins__download: Scalars['String']['output'];
+  admin__core_plugins__edit: ShowAdminPlugins;
   admin__core_plugins__upload: ShowAdminPlugins;
   admin__core_staff_administrators__create: ShowAdminStaffAdministrators;
   admin__core_staff_administrators__delete: Scalars['String']['output'];
@@ -317,6 +318,16 @@ export type MutationAdmin__Core_Plugins__DownloadArgs = {
   code: Scalars['String']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
   version_code?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type MutationAdmin__Core_Plugins__EditArgs = {
+  author: Scalars['String']['input'];
+  author_url: Scalars['String']['input'];
+  code: Scalars['String']['input'];
+  description?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  support_url: Scalars['String']['input'];
 };
 
 
@@ -1292,6 +1303,18 @@ export type Admin__Core_Plugins__DownloadMutationVariables = Exact<{
 
 export type Admin__Core_Plugins__DownloadMutation = { __typename?: 'Mutation', admin__core_plugins__download: string };
 
+export type Admin__Core_Plugins__EditMutationVariables = Exact<{
+  author: Scalars['String']['input'];
+  authorUrl: Scalars['String']['input'];
+  code: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  supportUrl: Scalars['String']['input'];
+  description?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Admin__Core_Plugins__EditMutation = { __typename?: 'Mutation', admin__core_plugins__edit: { __typename?: 'ShowAdminPlugins', id: number, name: string } };
+
 export type Admin__Core_Plugins__UploadMutationVariables = Exact<{
   file: Scalars['Upload']['input'];
 }>;
@@ -1863,6 +1886,21 @@ export const Admin__Core_Plugins__Download = gql`
     version: $version
     version_code: $versionCode
   )
+}
+    `;
+export const Admin__Core_Plugins__Edit = gql`
+    mutation Admin__core_plugins__edit($author: String!, $authorUrl: String!, $code: String!, $name: String!, $supportUrl: String!, $description: String) {
+  admin__core_plugins__edit(
+    author: $author
+    author_url: $authorUrl
+    code: $code
+    name: $name
+    support_url: $supportUrl
+    description: $description
+  ) {
+    id
+    name
+  }
 }
     `;
 export const Admin__Core_Plugins__Upload = gql`

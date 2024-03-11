@@ -14,6 +14,19 @@ import { UploadAdminPluginsResolver } from "./upload/upload.resolver";
 import { UploadAdminPluginsService } from "./upload/upload.service";
 import { CheckDownloadAdminPluginsService } from "./download/check/check.service";
 import { CheckDownloadAdminPluginsResolver } from "./download/check/check.resolver";
+import { EditAdminPluginsResolver } from "./edit/edit.resolver";
+import { EditAdminPluginsService } from "./edit/edit.service";
+
+export interface ConfigPlugin {
+  author: string;
+  author_url: string;
+  code: string;
+  name: string;
+  support_url: string;
+  version: string;
+  version_code: number;
+  description?: string;
+}
 
 @Module({
   providers: [
@@ -30,7 +43,9 @@ import { CheckDownloadAdminPluginsResolver } from "./download/check/check.resolv
     UploadAdminPluginsResolver,
     UploadAdminPluginsService,
     CheckDownloadAdminPluginsService,
-    CheckDownloadAdminPluginsResolver
+    CheckDownloadAdminPluginsResolver,
+    EditAdminPluginsResolver,
+    EditAdminPluginsService
   ]
 })
 export class AdminPluginsModule {}

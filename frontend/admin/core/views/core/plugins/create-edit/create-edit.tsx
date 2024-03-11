@@ -14,19 +14,24 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { useCreatePluginAdmin } from "./hooks/use-create-plugin-admin";
+import { useCreateEditPluginAdmin } from "./hooks/use-create-edit-plugin-admin";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import type { ShowAdminPlugins } from "@/graphql/hooks";
 
-export const ContentCreateActionPluginAdmin = () => {
-  const t = useTranslations("admin.core.plugins.create");
+interface Props {
+  data?: ShowAdminPlugins;
+}
+
+export const CreateEditPluginAdmin = ({ data }: Props) => {
+  const t = useTranslations("admin.core.plugins");
   const tCore = useTranslations("core");
-  const { form, onSubmit } = useCreatePluginAdmin();
+  const { form, onSubmit } = useCreateEditPluginAdmin({ data });
 
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{t("title")}</DialogTitle>
+        <DialogTitle>{t(data ? "edit.title" : "create.title")}</DialogTitle>
       </DialogHeader>
 
       <Form {...form}>
@@ -36,11 +41,11 @@ export const ContentCreateActionPluginAdmin = () => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("name.label")}</FormLabel>
+                <FormLabel>{t("create.name.label")}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
-                <FormDescription>{t("name.desc")}</FormDescription>
+                <FormDescription>{t("create.name.desc")}</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -51,7 +56,7 @@ export const ContentCreateActionPluginAdmin = () => {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("description.label")}</FormLabel>
+                <FormLabel>{t("create.description.label")}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -65,11 +70,15 @@ export const ContentCreateActionPluginAdmin = () => {
             name="code"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("code.label")}</FormLabel>
+                <FormLabel>{t("create.code.label")}</FormLabel>
                 <FormControl>
-                  <Input placeholder="vitnode-plugin-example" {...field} />
+                  <Input
+                    placeholder="vitnode-plugin-example"
+                    disabled={!!data}
+                    {...field}
+                  />
                 </FormControl>
-                <FormDescription>{t("code.desc")}</FormDescription>
+                <FormDescription>{t("create.code.desc")}</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -80,11 +89,13 @@ export const ContentCreateActionPluginAdmin = () => {
             name="support_url"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("support_url.label")}</FormLabel>
+                <FormLabel>{t("create.support_url.label")}</FormLabel>
                 <FormControl>
                   <Input type="url" {...field} />
                 </FormControl>
-                <FormDescription>{t("support_url.desc")}</FormDescription>
+                <FormDescription>
+                  {t("create.support_url.desc")}
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -95,7 +106,7 @@ export const ContentCreateActionPluginAdmin = () => {
             name="author"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("author.label")}</FormLabel>
+                <FormLabel>{t("create.author.label")}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -109,7 +120,7 @@ export const ContentCreateActionPluginAdmin = () => {
             name="author_url"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("author_url.label")}</FormLabel>
+                <FormLabel>{t("create.author_url.label")}</FormLabel>
                 <FormControl>
                   <Input type="url" {...field} />
                 </FormControl>
@@ -124,7 +135,7 @@ export const ContentCreateActionPluginAdmin = () => {
               loading={form.formState.isSubmitting}
               type="submit"
             >
-              {tCore("create")}
+              {tCore(data ? "edit" : "create")}
             </Button>
           </DialogFooter>
         </form>

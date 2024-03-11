@@ -51,11 +51,11 @@
           "success": "Plugin has been created.",
           "name": {
             "label": "Name",
-            "desc": "Min 3-100 characters."
+            "desc": "Min 3-50 characters."
           },
           "code": {
             "label": "Code",
-            "desc": "Must be unique. Min 5-50 characters. Allowed characters: a-z, 0-9, -",
+            "desc": "Must be unique. Min 3-50 characters. Allowed characters: a-z, 0-9, -",
             "invalid": "You can use only a-z, 0-9, -"
           },
           "description": {
@@ -71,6 +71,10 @@
           "author_url": {
             "label": "Author URL"
           }
+        },
+        "edit": {
+          "title": "Edit Plugin",
+          "success": "Plugin has been updated."
         },
         "upload": {
           "title": "Upload Plugin",

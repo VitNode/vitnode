@@ -8,6 +8,7 @@ import { ShowAdminPlugins } from "../show/dto/show.obj";
 import { UploadAdminPluginsArgs } from "./dto/upload.args";
 import { ChangeFilesAdminPluginsService } from "../helpers/files/change/change.service";
 import { pluginPaths } from "../paths";
+import { ConfigPlugin } from "../plugins.module";
 
 import { FileUpload } from "@/utils/graphql-upload/Upload";
 import { DatabaseService } from "@/modules/database/database.service";
@@ -15,17 +16,6 @@ import { generateRandomString } from "@/functions/generate-random-string";
 import { currentDate } from "@/functions/date";
 import { CustomError } from "@/utils/errors/CustomError";
 import { core_plugins } from "../../database/schema/plugins";
-
-interface ConfigPlugin {
-  author: string;
-  author_url: string;
-  code: string;
-  name: string;
-  support_url: string;
-  version: string;
-  version_code: number;
-  description?: string;
-}
 
 @Injectable()
 export class UploadAdminPluginsService {
