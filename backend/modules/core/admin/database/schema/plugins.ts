@@ -12,7 +12,7 @@ export const core_plugins = pgTable(
   {
     id: serial("id").primaryKey(),
     code: varchar("code", { length: 50 }).notNull(),
-    name: varchar("name", { length: 100 }).notNull(),
+    name: varchar("name", { length: 50 }).notNull(),
     description: varchar("description", { length: 255 }),
     version: varchar("version", { length: 255 }),
     version_code: integer("version_code"),

@@ -51,11 +51,11 @@
           "title": "Stwórz wtyczkę",
           "name": {
             "label": "Nazwa",
-            "desc": "Min 3-100 znaków."
+            "desc": "Min 3-50 znaków."
           },
           "code": {
             "label": "Kod",
-            "desc": "Musi być unikalny. Min 5-50 znaków. Dozwolone znaki: a-z, 0-9, -",
+            "desc": "Musi być unikalny. Min 3-50 znaków. Dozwolone znaki: a-z, 0-9, -",
             "invalid": "Możesz użyć tylko znaków a-z, 0-9, -"
           },
           "description": {
@@ -71,6 +71,10 @@
           "author_url": {
             "label": "Link do autora"
           }
+        },
+        "edit": {
+          "title": "Edytuj wtyczkę",
+          "success": "Wtyczka została zaktualizowana."
         },
         "upload": {
           "title": "Prześlij wtyczkę",

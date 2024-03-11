@@ -9,10 +9,15 @@ import { mutationApi } from "./mutation-api";
 import { useDialog } from "@/components/ui/dialog";
 import { usePathname, useRouter } from "@/i18n";
 import { zodInput } from "@/functions/zod";
+import type { ShowAdminPlugins } from "@/graphql/hooks";
 
 export const codePluginRegex = /^[a-z0-9-]*$/;
 
-export const useCreatePluginAdmin = () => {
+interface Args {
+  data?: ShowAdminPlugins;
+}
+
+export const useCreateEditPluginAdmin = ({ data }: Args) => {
   const t = useTranslations("admin.core.plugins.create");
   const tCore = useTranslations("core");
   const { setOpen } = useDialog();
@@ -20,9 +25,9 @@ export const useCreatePluginAdmin = () => {
   const { push } = useRouter();
   const { session } = useSessionAdmin();
   const formSchema = z.object({
-    name: zodInput.string.min(3).max(100),
+    name: zodInput.string.min(3).max(50),
     code: zodInput.string
-      .min(5)
+      .min(3)
       .max(50)
       .refine(value => codePluginRegex.test(value), {
         message: t("code.invalid")
@@ -36,12 +41,12 @@ export const useCreatePluginAdmin = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      code: "",
-      description: "",
-      support_url: "",
-      author: session?.name || "",
-      author_url: ""
+      name: data?.name ?? "",
+      code: data?.code ?? "",
+      description: data?.description ?? "",
+      support_url: data?.support_url ?? "",
+      author: data ? data.author : session?.name ?? "",
+      author_url: data?.author_url ?? ""
     }
   });
 
