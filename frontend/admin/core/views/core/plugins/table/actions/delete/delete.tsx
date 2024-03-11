@@ -1,14 +1,7 @@
-import { Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { Suspense, lazy } from "react";
 
 import { Loader } from "@/components/loader";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogTrigger
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
+import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
 import type { ShowAdminPlugins } from "@/graphql/hooks";
 
 const ContentDeletePluginActionsAdmin = lazy(() =>
@@ -17,33 +10,21 @@ const ContentDeletePluginActionsAdmin = lazy(() =>
   }))
 );
 
+interface Props extends ShowAdminPlugins {
+  open: boolean;
+  setOpen: (value: boolean) => void;
+}
+
 export const DeletePluginActionsAdmin = ({
-  default: isDefault,
-  protected: isProtected,
+  open,
+  setOpen,
   ...props
-}: ShowAdminPlugins) => {
-  const t = useTranslations("core");
-
+}: Props) => {
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button
-          variant="destructiveGhost"
-          size="icon"
-          ariaLabel={t("delete")}
-          disabled={isDefault || isProtected}
-        >
-          <Trash2 />
-        </Button>
-      </AlertDialogTrigger>
-
+    <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
         <Suspense fallback={<Loader />}>
-          <ContentDeletePluginActionsAdmin
-            default={isDefault}
-            protected={isProtected}
-            {...props}
-          />
+          <ContentDeletePluginActionsAdmin {...props} />
         </Suspense>
       </AlertDialogContent>
     </AlertDialog>

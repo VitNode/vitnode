@@ -95,7 +95,7 @@ const DropdownMenuItem = forwardRef<
   const t = useTranslations("core");
 
   const currentClassName = cn(
-    "relative flex select-none items-center gap-2 rounded-sm px-3 py-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 cursor-pointer [&>svg]:size-4 [&>svg]:flex-shrink-0",
+    "relative flex select-none items-center gap-2 rounded-sm px-3 py-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 cursor-pointer [&>svg]:size-4 [&>svg]:flex-shrink-0 text-current",
     inset && "pl-8",
     className
   );

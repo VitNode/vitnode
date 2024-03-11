@@ -1,10 +1,7 @@
-import { Download } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { Suspense, lazy } from "react";
 
 import { Loader } from "@/components/loader";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import type { ShowAdminPlugins } from "@/graphql/hooks";
 
 const Content = lazy(() =>
@@ -19,19 +16,18 @@ export interface DownloadPluginActionsAdminProps
     "code" | "name" | "version_code" | "version"
   > {}
 
-export const DownloadPluginActionsAdmin = (
-  props: DownloadPluginActionsAdminProps
-) => {
-  const t = useTranslations("core");
+interface Props extends DownloadPluginActionsAdminProps {
+  open: boolean;
+  setOpen: (value: boolean) => void;
+}
 
+export const DownloadPluginActionsAdmin = ({
+  open,
+  setOpen,
+  ...props
+}: Props) => {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" ariaLabel={t("download")}>
-          <Download />
-        </Button>
-      </DialogTrigger>
-
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="max-w-xl">
         <Suspense fallback={<Loader />}>
           <Content {...props} />

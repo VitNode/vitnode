@@ -46,9 +46,11 @@
       },
       "plugins": {
         "title": "Wtyczki",
-        "success": "Wtyczka została utworzona.",
+        "set_default": "Ustaw jako domyślną",
+        "get_help": "Get help",
         "create": {
           "title": "Stwórz wtyczkę",
+          "success": "Wtyczka została utworzona.",
           "name": {
             "label": "Nazwa",
             "desc": "Min 3-50 znaków."
