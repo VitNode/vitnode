@@ -31,9 +31,6 @@ export class ShowAdminPlugins {
   @Field(() => String, { nullable: true })
   support_url: string | null;
 
-  @Field(() => Boolean)
-  protected: boolean;
-
   @Field(() => String)
   author: string;
 

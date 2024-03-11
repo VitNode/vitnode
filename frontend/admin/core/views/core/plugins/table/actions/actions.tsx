@@ -27,7 +27,9 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
 
   return (
     <>
-      {!props.default && props.enabled && <SetDefaultPluginActionsAdmin />}
+      {!props.default && props.enabled && (
+        <SetDefaultPluginActionsAdmin {...props} />
+      )}
       <UploadPluginActionsAdmin />
 
       <DropdownMenu>
@@ -58,7 +60,7 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
             </DropdownMenuItem>
           )}
 
-          {(!props.default || !props.protected) && (
+          {!props.default && (
             <DropdownMenuItem onClick={() => setIsOpenDeleteDialog(true)}>
               <Trash2 className="text-destructive" /> {tCore("delete")}
             </DropdownMenuItem>

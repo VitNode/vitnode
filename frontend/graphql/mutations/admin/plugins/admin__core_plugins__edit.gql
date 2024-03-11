@@ -3,10 +3,10 @@ mutation Admin__core_plugins__edit(
   $authorUrl: String!
   $code: String!
   $name: String!
-  $supportUrl: String!
+  $supportUrl: String
   $description: String
   $default: Boolean
-  $active: Boolean
+  $enabled: Boolean
 ) {
   admin__core_plugins__edit(
     author: $author
@@ -16,7 +16,7 @@ mutation Admin__core_plugins__edit(
     support_url: $supportUrl
     description: $description
     default: $default
-    active: $active
+    enabled: $enabled
   ) {
     id
     name

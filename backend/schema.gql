@@ -158,10 +158,10 @@ type Mutation {
   admin__core_nav__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, name: [TextLanguageInput!]!): ShowCoreNav!
   admin__core_nav__delete(id: Int!): String!
   admin__core_nav__edit(description: [TextLanguageInput!]!, external: Boolean!, href: String!, id: Int!, name: [TextLanguageInput!]!): ShowCoreNav!
-  admin__core_plugins__create(author: String!, author_url: String!, code: String!, description: String, name: String!, support_url: String!): ShowAdminPlugins!
+  admin__core_plugins__create(author: String!, author_url: String!, code: String!, description: String, name: String!, support_url: String): ShowAdminPlugins!
   admin__core_plugins__delete(code: String!): String!
   admin__core_plugins__download(code: String!, version: String, version_code: Int): String!
-  admin__core_plugins__edit(active: Boolean, author: String!, author_url: String!, code: String!, default: Boolean, description: String, name: String!, support_url: String!): ShowAdminPlugins!
+  admin__core_plugins__edit(author: String!, author_url: String!, code: String!, default: Boolean, description: String, enabled: Boolean, name: String!, support_url: String): ShowAdminPlugins!
   admin__core_plugins__upload(file: Upload!): ShowAdminPlugins!
   admin__core_staff_administrators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffAdministrators!
   admin__core_staff_administrators__delete(id: Int!): String!
@@ -348,7 +348,6 @@ type ShowAdminPlugins {
   enabled: Boolean!
   id: Int!
   name: String!
-  protected: Boolean!
   support_url: String
   version: String
   version_code: Int

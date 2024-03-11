@@ -19,7 +19,6 @@ query Admin__core_plugins__show(
       enabled
       id
       name
-      protected
       support_url
       created
       version

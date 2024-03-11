@@ -1,27 +1,26 @@
-import { Star } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
-  TooltipTrigger
+  TooltipProvider
 } from "@/components/ui/tooltip";
+import { ButtonSetDefaultPluginActionsAdmin } from "./button";
+import { useSetDefaultPluginAdmin } from "./hooks/use-set-default-admin";
+import type { ShowAdminPlugins } from "@/graphql/hooks";
 
-export const SetDefaultPluginActionsAdmin = () => {
+export const SetDefaultPluginActionsAdmin = (props: ShowAdminPlugins) => {
   const t = useTranslations("admin.core.plugins");
+  const { onSubmit } = useSetDefaultPluginAdmin(props);
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon" ariaLabel={t("set_default")}>
-            <Star />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>{t("set_default")}</TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <form action={onSubmit}>
+      <TooltipProvider>
+        <Tooltip>
+          <ButtonSetDefaultPluginActionsAdmin />
+          <TooltipContent>{t("set_default")}</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    </form>
   );
 };

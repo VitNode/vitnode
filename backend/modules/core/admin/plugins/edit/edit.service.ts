@@ -31,16 +31,14 @@ export class EditAdminPluginsService {
       throw new NotFoundError("Plugin");
     }
 
-    const updatePlugin = await this.databaseService.db
-      .update(core_plugins)
-      .set({
-        ...rest,
-        default: isDefault
-      })
-      .where(eq(core_plugins.code, code))
-      .returning();
-
     if (isDefault) {
+      if (!plugin.enabled) {
+        throw new CustomError({
+          code: "PLUGIN_NOT_ENABLED",
+          message: "Plugin is not enabled!"
+        });
+      }
+
       // Set all other plugins to default: false
       await this.databaseService.db
         .update(core_plugins)
@@ -49,6 +47,15 @@ export class EditAdminPluginsService {
         })
         .where(ne(core_plugins.code, code));
     }
+
+    const updatePlugin = await this.databaseService.db
+      .update(core_plugins)
+      .set({
+        ...rest,
+        default: isDefault
+      })
+      .where(eq(core_plugins.code, code))
+      .returning();
 
     // Update plugin.json
     const path = join(pluginPaths({ code }).backend.root, "plugin.json");

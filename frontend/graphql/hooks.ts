@@ -305,7 +305,7 @@ export type MutationAdmin__Core_Plugins__CreateArgs = {
   code: Scalars['String']['input'];
   description?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
-  support_url: Scalars['String']['input'];
+  support_url?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -322,14 +322,14 @@ export type MutationAdmin__Core_Plugins__DownloadArgs = {
 
 
 export type MutationAdmin__Core_Plugins__EditArgs = {
-  active?: InputMaybe<Scalars['Boolean']['input']>;
   author: Scalars['String']['input'];
   author_url: Scalars['String']['input'];
   code: Scalars['String']['input'];
   default?: InputMaybe<Scalars['Boolean']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
+  enabled?: InputMaybe<Scalars['Boolean']['input']>;
   name: Scalars['String']['input'];
-  support_url: Scalars['String']['input'];
+  support_url?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -763,7 +763,6 @@ export type ShowAdminPlugins = {
   enabled: Scalars['Boolean']['output'];
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
-  protected: Scalars['Boolean']['output'];
   support_url?: Maybe<Scalars['String']['output']>;
   version?: Maybe<Scalars['String']['output']>;
   version_code?: Maybe<Scalars['Int']['output']>;
@@ -1310,10 +1309,10 @@ export type Admin__Core_Plugins__EditMutationVariables = Exact<{
   authorUrl: Scalars['String']['input'];
   code: Scalars['String']['input'];
   name: Scalars['String']['input'];
-  supportUrl: Scalars['String']['input'];
+  supportUrl?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   default?: InputMaybe<Scalars['Boolean']['input']>;
-  active?: InputMaybe<Scalars['Boolean']['input']>;
+  enabled?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 
@@ -1582,7 +1581,7 @@ export type Admin__Core_Plugins__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Plugins__ShowQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url: string, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, protected: boolean, support_url?: string | null, created: number, version?: string | null, version_code?: number | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Admin__Core_Plugins__ShowQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url: string, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, support_url?: string | null, created: number, version?: string | null, version_code?: number | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Admin__Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1893,7 +1892,7 @@ export const Admin__Core_Plugins__Download = gql`
 }
     `;
 export const Admin__Core_Plugins__Edit = gql`
-    mutation Admin__core_plugins__edit($author: String!, $authorUrl: String!, $code: String!, $name: String!, $supportUrl: String!, $description: String, $default: Boolean, $active: Boolean) {
+    mutation Admin__core_plugins__edit($author: String!, $authorUrl: String!, $code: String!, $name: String!, $supportUrl: String, $description: String, $default: Boolean, $enabled: Boolean) {
   admin__core_plugins__edit(
     author: $author
     author_url: $authorUrl
@@ -1902,7 +1901,7 @@ export const Admin__Core_Plugins__Edit = gql`
     support_url: $supportUrl
     description: $description
     default: $default
-    active: $active
+    enabled: $enabled
   ) {
     id
     name
@@ -2437,7 +2436,6 @@ export const Admin__Core_Plugins__Show = gql`
       enabled
       id
       name
-      protected
       support_url
       created
       version
