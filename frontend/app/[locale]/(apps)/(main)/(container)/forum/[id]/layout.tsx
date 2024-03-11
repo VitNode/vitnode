@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { lazy, type LazyExoticComponent, type ReactNode } from "react";
+import { type ReactNode } from "react";
 
 import { getConfigFile } from "@/functions/get-config-file";
 import { getSessionData } from "@/functions/get-session-data";
 import { getConvertTextLang } from "@/hooks/core/use-text-lang";
-import type { ErrorViewProps } from "@/themes/1/core/views/global/error/error-view";
 import { getForumItemData } from "./query";
+import { ErrorViewSSR } from "@/components/views/error-view-ssr";
 
 interface Props {
   children: ReactNode;
@@ -42,15 +42,7 @@ export default async function Layout({ children, params: { id } }: Props) {
   const { data, error } = await getForumItemData({ id });
 
   if (error?.extensions?.code === "ACCESS_DENIED") {
-    const ErrorView: LazyExoticComponent<
-      (props: ErrorViewProps) => JSX.Element
-    > = lazy(() =>
-      import(`@/themes/${theme_id}/core/views/global/error/error-view`).catch(
-        () => import("@/themes/1/core/views/global/error/error-view")
-      )
-    );
-
-    return <ErrorView code="403" />;
+    return <ErrorViewSSR theme_id={theme_id} code="403" />;
   }
 
   if (!data || data.forum_forums__show.edges.length === 0) {

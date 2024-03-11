@@ -94,7 +94,7 @@ export const ContentTablePluginsAdmin = ({
 
           return (
             <Switch
-              disabled={data.default || data.protected}
+              disabled={data.default}
               checked={data.enabled}
               onClick={async () => {
                 // const mutation = await mutationApi({

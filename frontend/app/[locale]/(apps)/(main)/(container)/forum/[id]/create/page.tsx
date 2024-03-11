@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { getSessionData } from "@/functions/get-session-data";
-import type { ErrorViewProps } from "@/themes/1/core/views/global/error/error-view";
 import { getForumItemData } from "../query";
 import type { CreateTopicViewProps } from "@/themes/1/forum/views/forum/forums/views/create-topic/create-topic-view";
+import { ErrorViewSSR } from "@/components/views/error-view-ssr";
 
 interface Props {
   params: {
@@ -28,18 +28,10 @@ export async function generateMetadata({
 export default async function Page({ params: { id } }: Props) {
   const { theme_id } = await getSessionData();
   const { data } = await getForumItemData({ id });
-  if (!data) throw new Error("No data");
+  if (!data) return null;
 
   if (!data.forum_forums__show.edges[0].permissions.can_create) {
-    const ErrorView: LazyExoticComponent<
-      (props: ErrorViewProps) => JSX.Element
-    > = lazy(() =>
-      import(`@/themes/${theme_id}/core/views/global/error/error-view`).catch(
-        () => import("@/themes/1/core/views/global/error/error-view")
-      )
-    );
-
-    return <ErrorView code="403" />;
+    return <ErrorViewSSR theme_id={theme_id} code="403" />;
   }
 
   const PageFromTheme: LazyExoticComponent<
