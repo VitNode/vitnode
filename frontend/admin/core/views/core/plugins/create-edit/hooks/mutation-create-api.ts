@@ -9,7 +9,7 @@ import {
   type Admin__Core_Plugins__CreateMutationVariables
 } from "@/graphql/hooks";
 
-export const mutationApi = async (
+export const mutationCreateApi = async (
   variables: Admin__Core_Plugins__CreateMutationVariables
 ) => {
   try {

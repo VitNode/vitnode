@@ -5,11 +5,12 @@ import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
 import { useSessionAdmin } from "@/admin/core/hooks/use-session-admin";
-import { mutationApi } from "./mutation-api";
+import { mutationCreateApi } from "./mutation-create-api";
 import { useDialog } from "@/components/ui/dialog";
 import { usePathname, useRouter } from "@/i18n";
 import { zodInput } from "@/functions/zod";
 import type { ShowAdminPlugins } from "@/graphql/hooks";
+import { mutationEditApi } from "./mutation-edit-api";
 
 export const codePluginRegex = /^[a-z0-9-]*$/;
 
@@ -18,7 +19,7 @@ interface Args {
 }
 
 export const useCreateEditPluginAdmin = ({ data }: Args) => {
-  const t = useTranslations("admin.core.plugins.create");
+  const t = useTranslations("admin.core.plugins");
   const tCore = useTranslations("core");
   const { setOpen } = useDialog();
   const pathname = usePathname();
@@ -30,7 +31,7 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
       .min(3)
       .max(50)
       .refine(value => codePluginRegex.test(value), {
-        message: t("code.invalid")
+        message: t("create.code.invalid")
       }),
     description: zodInput.string,
     support_url: zodInput.string.url().or(z.literal("")),
@@ -51,16 +52,37 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const mutation = await mutationApi({
-      name: values.name,
-      code: values.code,
-      description: values.description,
-      supportUrl: values.support_url,
-      author: values.author,
-      authorUrl: values.author_url
-    });
+    let error = false;
 
-    if (mutation.error) {
+    if (data) {
+      const mutation = await mutationEditApi({
+        name: values.name,
+        code: values.code,
+        description: values.description,
+        supportUrl: values.support_url,
+        author: values.author,
+        authorUrl: values.author_url
+      });
+
+      if (mutation.error) {
+        error = true;
+      }
+    } else {
+      const mutation = await mutationCreateApi({
+        name: values.name,
+        code: values.code,
+        description: values.description,
+        supportUrl: values.support_url,
+        author: values.author,
+        authorUrl: values.author_url
+      });
+
+      if (mutation.error) {
+        error = true;
+      }
+    }
+
+    if (error) {
       toast.error(tCore("errors.title"), {
         description: tCore("errors.internal_server_error")
       });
@@ -70,7 +92,7 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
 
     push(pathname);
 
-    toast.success(t("success"), {
+    toast.success(t(data ? "edit.success" : "create.success"), {
       description: values.name
     });
 
