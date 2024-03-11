@@ -322,9 +322,11 @@ export type MutationAdmin__Core_Plugins__DownloadArgs = {
 
 
 export type MutationAdmin__Core_Plugins__EditArgs = {
+  active?: InputMaybe<Scalars['Boolean']['input']>;
   author: Scalars['String']['input'];
   author_url: Scalars['String']['input'];
   code: Scalars['String']['input'];
+  default?: InputMaybe<Scalars['Boolean']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
   support_url: Scalars['String']['input'];
@@ -1310,6 +1312,8 @@ export type Admin__Core_Plugins__EditMutationVariables = Exact<{
   name: Scalars['String']['input'];
   supportUrl: Scalars['String']['input'];
   description?: InputMaybe<Scalars['String']['input']>;
+  default?: InputMaybe<Scalars['Boolean']['input']>;
+  active?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 
@@ -1889,7 +1893,7 @@ export const Admin__Core_Plugins__Download = gql`
 }
     `;
 export const Admin__Core_Plugins__Edit = gql`
-    mutation Admin__core_plugins__edit($author: String!, $authorUrl: String!, $code: String!, $name: String!, $supportUrl: String!, $description: String) {
+    mutation Admin__core_plugins__edit($author: String!, $authorUrl: String!, $code: String!, $name: String!, $supportUrl: String!, $description: String, $default: Boolean, $active: Boolean) {
   admin__core_plugins__edit(
     author: $author
     author_url: $authorUrl
@@ -1897,6 +1901,8 @@ export const Admin__Core_Plugins__Edit = gql`
     name: $name
     support_url: $supportUrl
     description: $description
+    default: $default
+    active: $active
   ) {
     id
     name

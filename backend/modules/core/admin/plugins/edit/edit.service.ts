@@ -2,7 +2,7 @@ import * as fs from "fs";
 import { join } from "path";
 
 import { Injectable } from "@nestjs/common";
-import { eq } from "drizzle-orm";
+import { eq, ne } from "drizzle-orm";
 
 import { ShowAdminPlugins } from "../show/dto/show.obj";
 import { EditAdminPluginsArgs } from "./dto/edit.args";
@@ -20,6 +20,7 @@ export class EditAdminPluginsService {
 
   async edit({
     code,
+    default: isDefault = false,
     ...rest
   }: EditAdminPluginsArgs): Promise<ShowAdminPlugins> {
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
@@ -33,10 +34,21 @@ export class EditAdminPluginsService {
     const updatePlugin = await this.databaseService.db
       .update(core_plugins)
       .set({
-        ...rest
+        ...rest,
+        default: isDefault
       })
       .where(eq(core_plugins.code, code))
       .returning();
+
+    if (isDefault) {
+      // Set all other plugins to default: false
+      await this.databaseService.db
+        .update(core_plugins)
+        .set({
+          default: false
+        })
+        .where(ne(core_plugins.code, code));
+    }
 
     // Update plugin.json
     const path = join(pluginPaths({ code }).backend.root, "plugin.json");

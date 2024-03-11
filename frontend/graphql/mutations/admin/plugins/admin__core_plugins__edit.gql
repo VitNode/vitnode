@@ -5,6 +5,8 @@ mutation Admin__core_plugins__edit(
   $name: String!
   $supportUrl: String!
   $description: String
+  $default: Boolean
+  $active: Boolean
 ) {
   admin__core_plugins__edit(
     author: $author
@@ -13,6 +15,8 @@ mutation Admin__core_plugins__edit(
     name: $name
     support_url: $supportUrl
     description: $description
+    default: $default
+    active: $active
   ) {
     id
     name
