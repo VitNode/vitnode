@@ -8,6 +8,7 @@ type AuthorizationAdminSessionsObj {
 }
 
 type AuthorizationCoreSessionsObj {
+  plugin_default: String!
   rebuild_required: RebuildRequiredObj!
   theme_id: Int
   user: AuthorizationCurrentUserObj

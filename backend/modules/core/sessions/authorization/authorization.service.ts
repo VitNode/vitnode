@@ -71,6 +71,9 @@ export class AuthorizationCoreSessionsService {
   }: Ctx): Promise<AuthorizationCoreSessionsObj> {
     const theme_id = await this.getThemeId({ req });
     const config = await getConfigFile();
+    const plugin = await this.databaseService.db.query.core_plugins.findFirst({
+      where: (table, { eq }) => eq(table.default, true)
+    });
 
     try {
       const currentUser = await this.service.authorization({ req, res });
@@ -101,13 +104,15 @@ export class AuthorizationCoreSessionsService {
           avatar_color: user.avatar_color
         },
         theme_id,
-        rebuild_required: config.rebuild_required
+        rebuild_required: config.rebuild_required,
+        plugin_default: plugin.code
       };
     } catch (error) {
       return {
         user: null,
         theme_id,
-        rebuild_required: config.rebuild_required
+        rebuild_required: config.rebuild_required,
+        plugin_default: plugin.code
       };
     }
   }

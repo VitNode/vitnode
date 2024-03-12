@@ -14,14 +14,5 @@
     "uagent",
     "vitnode"
   ],
-  "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[scss]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "css.validate": false,
-  "less.validate": false,
-  "scss.validate": false,
   "eslint.workingDirectories": ["frontend", "backend"]
 }
