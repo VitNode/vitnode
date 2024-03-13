@@ -2,6 +2,7 @@
   "core": {
     "reload_page": "Przeładuj stronę",
     "clear_cache_and_reload": "Wyczyść pamięć podręczną i przeładuj",
+    "optional": "Opcjonalne",
     "go_back": "Wróć",
     "open_menu": "Otwórz menu",
     "loading": "Czekaj, ładowanie...",

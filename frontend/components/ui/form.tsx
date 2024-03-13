@@ -124,19 +124,30 @@ const FormItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 );
 FormItem.displayName = "FormItem";
 
+interface FormLabelProps
+  extends ComponentPropsWithoutRef<typeof LabelPrimitive.Root> {
+  optional?: boolean;
+}
+
 const FormLabel = forwardRef<
   ElementRef<typeof LabelPrimitive.Root>,
-  ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
->(({ className, ...props }, ref) => {
+  FormLabelProps
+>(({ children, className, optional, ...props }, ref) => {
   const { error, formItemId } = useFormField();
+  const t = useTranslations("core");
 
   return (
     <Label
       ref={ref}
-      className={cn(error && "text-destructive", className)}
+      className={cn(error && "text-destructive", "space-x-2", className)}
       htmlFor={formItemId}
       {...props}
-    />
+    >
+      <span>{children}</span>
+      {optional && (
+        <span className="text-muted-foreground text-xs">{t("optional")}</span>
+      )}
+    </Label>
   );
 });
 FormLabel.displayName = "FormLabel";
