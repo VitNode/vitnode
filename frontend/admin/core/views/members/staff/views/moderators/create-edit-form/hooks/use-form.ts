@@ -52,7 +52,7 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
     });
 
     if (mutation.error) {
-      const error = mutation.error as ErrorType;
+      const error = mutation.error as ErrorType | undefined;
       if (error?.extensions && error.extensions?.code === "ALREADY_EXISTS") {
         form.setError(values.type === "user" ? "user" : "group", {
           type: "manual",

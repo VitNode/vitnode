@@ -336,6 +336,7 @@ export type MutationAdmin__Core_Plugins__EditArgs = {
 
 
 export type MutationAdmin__Core_Plugins__UploadArgs = {
+  code?: InputMaybe<Scalars['String']['input']>;
   file: Scalars['Upload']['input'];
 };
 
@@ -1323,6 +1324,7 @@ export type Admin__Core_Plugins__EditMutation = { __typename?: 'Mutation', admin
 
 export type Admin__Core_Plugins__UploadMutationVariables = Exact<{
   file: Scalars['Upload']['input'];
+  code?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -1912,8 +1914,8 @@ export const Admin__Core_Plugins__Edit = gql`
 }
     `;
 export const Admin__Core_Plugins__Upload = gql`
-    mutation Admin__core_plugins__upload($file: Upload!) {
-  admin__core_plugins__upload(file: $file) {
+    mutation Admin__core_plugins__upload($file: Upload!, $code: String) {
+  admin__core_plugins__upload(file: $file, code: $code) {
     id
     name
   }

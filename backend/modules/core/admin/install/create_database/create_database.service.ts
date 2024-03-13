@@ -69,10 +69,9 @@ export class CreateDatabaseAdminInstallService {
     const coreVersions: { [version_code: number]: string } = JSON.parse(
       fs.readFileSync(pluginPaths({ code: "core" }).backend.versions, "utf8")
     );
-    const coreVersionCode = Object.keys(coreVersions)
-      .map(Number)
-      .sort((a, b) => b - a)[0];
-    const coreVersion = coreVersions[coreVersionCode];
+
+    const coreVersionCode = +Object.keys(coreVersions).sort().reverse()[0];
+    const coreVersion: string = coreVersions[coreVersionCode];
 
     await this.databaseService.db.insert(core_plugins).values([
       {

@@ -82,6 +82,11 @@
           "title": "Prześlij wtyczkę",
           "title_new_version": "Prześlij nową wersję wtyczki",
           "success": "Wtyczka została przesłana.",
+          "success_update": "Nowa wersja wtyczki została przesłana.",
+          "errors": {
+            "PLUGIN_ALREADY_EXISTS": "Wtyczka o takim kodzie już istnieje.",
+            "PLUGIN_VERSION_IS_LOWER": "Wersja przesłanej wtyczki jest niższa niż obecna wersja."
+          },
           "submit": "Prześlij"
         },
         "delete": {

@@ -3,6 +3,7 @@ import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
+import { eq } from "drizzle-orm";
 
 import { ShowAdminPlugins } from "../show/dto/show.obj";
 import { UploadAdminPluginsArgs } from "./dto/upload.args";
@@ -16,7 +17,6 @@ import { generateRandomString } from "@/functions/generate-random-string";
 import { currentDate } from "@/functions/date";
 import { CustomError } from "@/utils/errors/CustomError";
 import { core_plugins } from "../../database/schema/plugins";
-import { NotFoundError } from "@/utils/errors/not-found-error";
 
 @Injectable()
 export class UploadAdminPluginsService {
@@ -100,10 +100,7 @@ export class UploadAdminPluginsService {
   }): Promise<void> {
     const newPathBackend = pluginPaths({ code: config.code }).backend.root;
     if (fs.existsSync(newPathBackend)) {
-      throw new CustomError({
-        code: "PLUGIN_FOLDER_ALREADY_EXISTS",
-        message: "Plugin folder already exists in backend"
-      });
+      await fs.promises.rmdir(newPathBackend, { recursive: true });
     }
     await fs.promises.mkdir(newPathBackend);
 
@@ -199,6 +196,11 @@ export class UploadAdminPluginsService {
     });
   }
 
+  protected async removeTempFolder(): Promise<void> {
+    // Delete temp folder
+    await fs.promises.rm(this.tempPath, { recursive: true });
+  }
+
   async upload({
     code,
     file
@@ -212,27 +214,49 @@ export class UploadAdminPluginsService {
       });
 
     if (checkPlugin && !code) {
+      await this.removeTempFolder();
       throw new CustomError({
         code: "PLUGIN_ALREADY_EXISTS",
         message: "Plugin already exists"
       });
     }
 
-    if (code !== config.code) {
+    if (code && code !== config.code) {
+      await this.removeTempFolder();
       throw new CustomError({
         code: "PLUGIN_CODE_NOT_MATCH",
         message: "Plugin code not match"
       });
     }
 
+    if (checkPlugin && code && config.version_code < checkPlugin.version_code) {
+      await this.removeTempFolder();
+      throw new CustomError({
+        code: "PLUGIN_VERSION_IS_LOWER",
+        message: "Plugin version is lower than the current version"
+      });
+    }
+
     // Create plugin folder
     await this.createPluginBackend({ config });
     await this.createPluginFrontend({ config });
+    await this.removeTempFolder();
 
-    // Delete temp folder
-    await fs.promises.rm(this.tempPath, { recursive: true });
+    if (code) {
+      const plugins = await this.databaseService.db
+        .update(core_plugins)
+        .set({
+          ...config,
+          created: currentDate()
+        })
+        .where(eq(core_plugins.code, code))
+        .returning();
 
-    // Save plugin to database
+      const plugin = plugins[0];
+
+      return plugin;
+    }
+
     const plugins = await this.databaseService.db
       .insert(core_plugins)
       .values({
