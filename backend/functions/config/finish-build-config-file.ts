@@ -14,9 +14,9 @@ import { db, poolDB } from "@/modules/database/client";
   const newData: ConfigType = {
     ...config,
     rebuild_required: {
-      langs: true,
-      plugins: true,
-      themes: true
+      langs: false,
+      plugins: false,
+      themes: false
     }
   };
   fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), "utf8");

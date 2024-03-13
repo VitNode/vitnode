@@ -16,7 +16,8 @@ export const useSetDefaultPluginAdmin = (data: ShowAdminPlugins) => {
       authorUrl: data.author_url,
       description: data.description,
       enabled: data.enabled,
-      default: true
+      default: true,
+      supportUrl: data.support_url
     });
 
     if (mutation.error) {

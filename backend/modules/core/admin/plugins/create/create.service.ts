@@ -45,7 +45,8 @@ export class CreateAdminPluginsService {
       code,
       description,
       name,
-      support_url
+      support_url,
+      allow_default: true
     });
     this.changeFilesService.changeFilesWhenCreate({ code });
 

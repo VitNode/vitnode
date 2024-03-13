@@ -14,6 +14,7 @@ import "@/app/[locale]/(apps)/(admin)/admin/global.scss";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "@/i18n";
 import { mutationClearCache } from "./mutation-clear-cache";
+import { CONFIG } from "@/config";
 
 interface Props {
   showPoweredBy?: boolean;
@@ -36,7 +37,7 @@ export const InternalErrorView = ({ showPoweredBy }: Props) => {
             {t("errors.no_connection_api")}
           </p>
 
-          {process.env.NODE_ENV === "development" && (
+          {CONFIG.node_development && (
             <p className="text-muted-foreground mt-10 text-sm max-w-96">
               {t("errors.no_connection_api_dev")}
             </p>
@@ -49,7 +50,7 @@ export const InternalErrorView = ({ showPoweredBy }: Props) => {
 
           <Button
             onClick={() => {
-              if (process.env.NODE_ENV === "development") {
+              if (CONFIG.node_development) {
                 mutationClearCache();
               }
 
@@ -58,9 +59,7 @@ export const InternalErrorView = ({ showPoweredBy }: Props) => {
           >
             <RefreshCcw />
             {t(
-              process.env.NODE_ENV === "development"
-                ? "clear_cache_and_reload"
-                : "reload_page"
+              CONFIG.node_development ? "clear_cache_and_reload" : "reload_page"
             )}
           </Button>
         </CardFooter>

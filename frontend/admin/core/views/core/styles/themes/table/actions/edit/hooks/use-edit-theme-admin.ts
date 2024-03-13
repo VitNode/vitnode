@@ -22,9 +22,9 @@ export const useEditThemeAdmin = ({
   const tCore = useTranslations("core");
   const formSchema = z.object({
     name: zodInput.string.min(3).max(50),
-    support_url: zodInput.string.url().or(z.literal("")),
+    support_url: zodInput.string.url(),
     author: zodInput.string.min(3).max(50),
-    author_url: zodInput.string.url()
+    author_url: zodInput.string.url().or(z.literal(""))
   });
   const { push } = useRouter();
   const pathname = usePathname();
@@ -34,9 +34,9 @@ export const useEditThemeAdmin = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name,
-      support_url: support_url ?? "",
+      support_url,
       author,
-      author_url
+      author_url: author_url ?? ""
     }
   });
 

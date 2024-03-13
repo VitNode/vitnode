@@ -23,6 +23,7 @@ query Admin__core_plugins__show(
       created
       version
       version_code
+      allow_default
     }
     pageInfo {
       count

@@ -16,6 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n";
 import { UploadPluginActionsAdmin } from "./upload/upload";
+import { CONFIG } from "@/config";
 
 export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
   const t = useTranslations("admin.core.plugins");
@@ -27,9 +28,11 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
 
   return (
     <>
-      {!props.default && props.enabled && (
-        <SetDefaultPluginActionsAdmin {...props} />
-      )}
+      {!props.default &&
+        props.enabled &&
+        (props.allow_default || CONFIG.node_development) && (
+          <SetDefaultPluginActionsAdmin {...props} />
+        )}
       <UploadPluginActionsAdmin />
 
       <DropdownMenu>
@@ -40,13 +43,17 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
         </DropdownMenuTrigger>
 
         <DropdownMenuContent className="w-40">
-          <DropdownMenuItem onClick={() => setIsOpenEditDialog(true)}>
-            <Pencil /> {tCore("edit")}
-          </DropdownMenuItem>
+          {CONFIG.node_development && (
+            <>
+              <DropdownMenuItem onClick={() => setIsOpenEditDialog(true)}>
+                <Pencil /> {tCore("edit")}
+              </DropdownMenuItem>
 
-          <DropdownMenuItem onClick={() => setIsOpenDownloadDialog(true)}>
-            <Download /> {tCore("download")}
-          </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setIsOpenDownloadDialog(true)}>
+                <Download /> {tCore("download")}
+              </DropdownMenuItem>
+            </>
+          )}
 
           {props.support_url && (
             <DropdownMenuItem asChild>
@@ -68,7 +75,7 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {process.env.NODE_ENV === "development" && (
+      {CONFIG.node_development && (
         <>
           <DownloadPluginActionsAdmin
             open={isOpenDownloadDialog}

@@ -82,6 +82,7 @@ export class CreateDatabaseAdminInstallService {
         version: coreVersion,
         version_code: coreVersionCode,
         author: "VitNode",
+        support_url: "https://vitnode.com/",
         author_url: "https://vitnode.com/",
         created: currentDate(),
         default: true

@@ -1,9 +1,9 @@
 mutation Admin__core_plugins__edit(
   $author: String!
-  $authorUrl: String!
+  $authorUrl: String
   $code: String!
   $name: String!
-  $supportUrl: String
+  $supportUrl: String!
   $description: String
   $default: Boolean
   $enabled: Boolean

@@ -4,6 +4,7 @@ import { AlertTriangle } from "lucide-react";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Badge } from "@/components/ui/badge";
 import { RebuildRequiredAdmin } from "@/admin/core/global/rebuild-required";
+import { CONFIG } from "@/config";
 
 export const DashboardCoreAdminView = () => {
   const t = useTranslations("core");
@@ -14,7 +15,7 @@ export const DashboardCoreAdminView = () => {
         h1={
           <>
             <span>VitNode</span>
-            {process.env.NODE_ENV === "development" && (
+            {CONFIG.node_development && (
               <Badge
                 variant="destructive"
                 className="ml-2 bg-yellow-500 text-black hover:bg-yellow-500"

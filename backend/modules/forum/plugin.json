@@ -4,5 +4,5 @@
   "author": "VitNode",
   "author_url": "https://vitnode.com/",
   "description": "Community forum plugin.",
-  "allow_default": true
+  "allow_default": false
 }

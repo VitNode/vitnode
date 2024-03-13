@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { CONFIG } from "@/config";
 
 export const ContentEditThemeActionsAdmin = (
   props: ActionsItemThemesAdminProps
@@ -49,7 +50,7 @@ export const ContentEditThemeActionsAdmin = (
             )}
           />
 
-          {process.env.NODE_ENV === "development" && (
+          {CONFIG.node_development && (
             <>
               <FormField
                 control={form.control}

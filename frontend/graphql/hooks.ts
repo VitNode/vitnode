@@ -303,11 +303,11 @@ export type MutationAdmin__Core_Nav__EditArgs = {
 
 export type MutationAdmin__Core_Plugins__CreateArgs = {
   author: Scalars['String']['input'];
-  author_url: Scalars['String']['input'];
+  author_url?: InputMaybe<Scalars['String']['input']>;
   code: Scalars['String']['input'];
   description?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
-  support_url?: InputMaybe<Scalars['String']['input']>;
+  support_url: Scalars['String']['input'];
 };
 
 
@@ -325,13 +325,13 @@ export type MutationAdmin__Core_Plugins__DownloadArgs = {
 
 export type MutationAdmin__Core_Plugins__EditArgs = {
   author: Scalars['String']['input'];
-  author_url: Scalars['String']['input'];
+  author_url?: InputMaybe<Scalars['String']['input']>;
   code: Scalars['String']['input'];
   default?: InputMaybe<Scalars['Boolean']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   enabled?: InputMaybe<Scalars['Boolean']['input']>;
   name: Scalars['String']['input'];
-  support_url?: InputMaybe<Scalars['String']['input']>;
+  support_url: Scalars['String']['input'];
 };
 
 
@@ -366,7 +366,7 @@ export type MutationAdmin__Core_Staff_Moderators__DeleteArgs = {
 
 export type MutationAdmin__Core_Themes__CreateArgs = {
   author: Scalars['String']['input'];
-  author_url: Scalars['String']['input'];
+  author_url?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
   support_url: Scalars['String']['input'];
 };
@@ -386,7 +386,7 @@ export type MutationAdmin__Core_Themes__DownloadArgs = {
 
 export type MutationAdmin__Core_Themes__EditArgs = {
   author: Scalars['String']['input'];
-  author_url: Scalars['String']['input'];
+  author_url?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Int']['input'];
   name: Scalars['String']['input'];
   support_url: Scalars['String']['input'];
@@ -756,8 +756,9 @@ export const ShowAdminMembersSortingColumnEnum = {
 export type ShowAdminMembersSortingColumnEnum = typeof ShowAdminMembersSortingColumnEnum[keyof typeof ShowAdminMembersSortingColumnEnum];
 export type ShowAdminPlugins = {
   __typename?: 'ShowAdminPlugins';
+  allow_default: Scalars['Boolean']['output'];
   author: Scalars['String']['output'];
-  author_url: Scalars['String']['output'];
+  author_url?: Maybe<Scalars['String']['output']>;
   code: Scalars['String']['output'];
   created: Scalars['Int']['output'];
   default: Scalars['Boolean']['output'];
@@ -765,7 +766,7 @@ export type ShowAdminPlugins = {
   enabled: Scalars['Boolean']['output'];
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
-  support_url?: Maybe<Scalars['String']['output']>;
+  support_url: Scalars['String']['output'];
   version?: Maybe<Scalars['String']['output']>;
   version_code?: Maybe<Scalars['Int']['output']>;
 };
@@ -841,13 +842,13 @@ export type ShowAdminStaffModeratorsSortingColumnEnum = typeof ShowAdminStaffMod
 export type ShowAdminThemes = {
   __typename?: 'ShowAdminThemes';
   author: Scalars['String']['output'];
-  author_url: Scalars['String']['output'];
+  author_url?: Maybe<Scalars['String']['output']>;
   created: Scalars['Int']['output'];
   default: Scalars['Boolean']['output'];
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   protected: Scalars['Boolean']['output'];
-  support_url?: Maybe<Scalars['String']['output']>;
+  support_url: Scalars['String']['output'];
   version?: Maybe<Scalars['String']['output']>;
   version_code?: Maybe<Scalars['Int']['output']>;
 };
@@ -1280,7 +1281,7 @@ export type Admin__Core_Nav__EditMutation = { __typename?: 'Mutation', admin__co
 
 export type Admin__Core_Plugins__CreateMutationVariables = Exact<{
   author: Scalars['String']['input'];
-  authorUrl: Scalars['String']['input'];
+  authorUrl?: InputMaybe<Scalars['String']['input']>;
   code: Scalars['String']['input'];
   name: Scalars['String']['input'];
   supportUrl: Scalars['String']['input'];
@@ -1308,10 +1309,10 @@ export type Admin__Core_Plugins__DownloadMutation = { __typename?: 'Mutation', a
 
 export type Admin__Core_Plugins__EditMutationVariables = Exact<{
   author: Scalars['String']['input'];
-  authorUrl: Scalars['String']['input'];
+  authorUrl?: InputMaybe<Scalars['String']['input']>;
   code: Scalars['String']['input'];
   name: Scalars['String']['input'];
-  supportUrl?: InputMaybe<Scalars['String']['input']>;
+  supportUrl: Scalars['String']['input'];
   description?: InputMaybe<Scalars['String']['input']>;
   default?: InputMaybe<Scalars['Boolean']['input']>;
   enabled?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1341,7 +1342,7 @@ export type Admin_Settings__General__EditMutation = { __typename?: 'Mutation', a
 
 export type Admin__Core_Themes__CreateMutationVariables = Exact<{
   author: Scalars['String']['input'];
-  authorUrl: Scalars['String']['input'];
+  authorUrl?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
   supportUrl: Scalars['String']['input'];
 }>;
@@ -1367,7 +1368,7 @@ export type Admin__Core_Themes__DownloadMutation = { __typename?: 'Mutation', ad
 
 export type Admin__Core_Themes__EditMutationVariables = Exact<{
   author: Scalars['String']['input'];
-  authorUrl: Scalars['String']['input'];
+  authorUrl?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Int']['input'];
   name: Scalars['String']['input'];
   supportUrl: Scalars['String']['input'];
@@ -1583,7 +1584,7 @@ export type Admin__Core_Plugins__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Plugins__ShowQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url: string, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, support_url?: string | null, created: number, version?: string | null, version_code?: number | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Admin__Core_Plugins__ShowQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url?: string | null, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, support_url: string, created: number, version?: string | null, version_code?: number | null, allow_default: boolean }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Admin__Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1603,7 +1604,7 @@ export type Admin_Core_Themes__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Admin_Core_Themes__ShowQuery = { __typename?: 'Query', admin__core_themes__show: { __typename?: 'ShowAdminThemesObj', edges: Array<{ __typename?: 'ShowAdminThemes', author: string, author_url: string, created: number, default: boolean, id: number, name: string, protected: boolean, support_url?: string | null, version?: string | null, version_code?: number | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Admin_Core_Themes__ShowQuery = { __typename?: 'Query', admin__core_themes__show: { __typename?: 'ShowAdminThemesObj', edges: Array<{ __typename?: 'ShowAdminThemes', author: string, author_url?: string | null, created: number, default: boolean, id: number, name: string, protected: boolean, support_url: string, version?: string | null, version_code?: number | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1866,7 +1867,7 @@ export const Admin__Core_Nav__Edit = gql`
 }
     `;
 export const Admin__Core_Plugins__Create = gql`
-    mutation Admin__core_plugins__create($author: String!, $authorUrl: String!, $code: String!, $name: String!, $supportUrl: String!, $description: String) {
+    mutation Admin__core_plugins__create($author: String!, $authorUrl: String, $code: String!, $name: String!, $supportUrl: String!, $description: String) {
   admin__core_plugins__create(
     author: $author
     author_url: $authorUrl
@@ -1894,7 +1895,7 @@ export const Admin__Core_Plugins__Download = gql`
 }
     `;
 export const Admin__Core_Plugins__Edit = gql`
-    mutation Admin__core_plugins__edit($author: String!, $authorUrl: String!, $code: String!, $name: String!, $supportUrl: String, $description: String, $default: Boolean, $enabled: Boolean) {
+    mutation Admin__core_plugins__edit($author: String!, $authorUrl: String, $code: String!, $name: String!, $supportUrl: String!, $description: String, $default: Boolean, $enabled: Boolean) {
   admin__core_plugins__edit(
     author: $author
     author_url: $authorUrl
@@ -1931,7 +1932,7 @@ export const Admin_Settings__General__Edit = gql`
 }
     `;
 export const Admin__Core_Themes__Create = gql`
-    mutation Admin__core_themes__create($author: String!, $authorUrl: String!, $name: String!, $supportUrl: String!) {
+    mutation Admin__core_themes__create($author: String!, $authorUrl: String, $name: String!, $supportUrl: String!) {
   admin__core_themes__create(
     author: $author
     author_url: $authorUrl
@@ -1957,7 +1958,7 @@ export const Admin__Core_Themes__Download = gql`
 }
     `;
 export const Admin__Core_Themes__Edit = gql`
-    mutation Admin__core_themes__edit($author: String!, $authorUrl: String!, $id: Int!, $name: String!, $supportUrl: String!) {
+    mutation Admin__core_themes__edit($author: String!, $authorUrl: String, $id: Int!, $name: String!, $supportUrl: String!) {
   admin__core_themes__edit(
     author: $author
     author_url: $authorUrl
@@ -2443,6 +2444,7 @@ export const Admin__Core_Plugins__Show = gql`
       created
       version
       version_code
+      allow_default
     }
     pageInfo {
       count

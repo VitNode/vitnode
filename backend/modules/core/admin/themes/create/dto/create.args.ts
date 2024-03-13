@@ -23,6 +23,6 @@ export class CreateAdminThemesArgs {
   author: string;
 
   @Transform(TransformString)
-  @Field(() => String)
-  author_url: string;
+  @Field(() => String, { nullable: true })
+  author_url: string | null;
 }

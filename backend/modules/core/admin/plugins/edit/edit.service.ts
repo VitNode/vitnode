@@ -39,6 +39,13 @@ export class EditAdminPluginsService {
         });
       }
 
+      if (!plugin.allow_default) {
+        throw new CustomError({
+          code: "PLUGIN_NOT_ALLOW_DEFAULT",
+          message: "Plugin does not allow default!"
+        });
+      }
+
       // Set all other plugins to default: false
       await this.databaseService.db
         .update(core_plugins)

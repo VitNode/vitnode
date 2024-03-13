@@ -26,9 +26,8 @@ export class CreateAdminPluginsArgs {
   description: string | null;
 
   @Transform(TransformString)
-  @IsOptional()
-  @Field(() => String, { nullable: true })
-  support_url: string | null;
+  @Field(() => String)
+  support_url: string;
 
   @Transform(TransformString)
   @MinLength(3)
@@ -37,6 +36,7 @@ export class CreateAdminPluginsArgs {
   author: string;
 
   @Transform(TransformString)
-  @Field(() => String)
-  author_url: string;
+  @IsOptional()
+  @Field(() => String, { nullable: true })
+  author_url: string | null;
 }

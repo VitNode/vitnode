@@ -1,7 +1,7 @@
 import { changeCodePluginToCapitalLetters } from "@/modules/core/admin/plugins/functions/change-code-plugin-to-capital-letters";
 import { CreateAdminPluginsArgs } from "../../../create/dto/create.args";
 
-interface CreateInfoJSONType extends CreateAdminPluginsArgs {
+export interface PluginInfoJSONType extends CreateAdminPluginsArgs {
   allow_default: boolean;
 }
 
@@ -47,7 +47,7 @@ export const createInfoJSON = ({
   description,
   name,
   support_url
-}: CreateInfoJSONType): string => {
+}: PluginInfoJSONType): string => {
   const json = {
     name,
     description,
