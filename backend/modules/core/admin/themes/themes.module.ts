@@ -15,11 +15,11 @@ import { EditAdminThemesService } from "./edit/edit.service";
 
 export interface ConfigTheme {
   author: string;
-  author_url?: string;
   name: string;
+  support_url: string;
   version: string;
   version_code: number;
-  support_url: string;
+  author_url?: string;
 }
 
 @Module({

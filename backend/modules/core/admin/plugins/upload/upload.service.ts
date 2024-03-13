@@ -3,6 +3,7 @@ import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
+import { eq } from "drizzle-orm";
 
 import { ShowAdminPlugins } from "../show/dto/show.obj";
 import { UploadAdminPluginsArgs } from "./dto/upload.args";
@@ -93,23 +94,24 @@ export class UploadAdminPluginsService {
   }
 
   protected async createPluginBackend({
-    config
+    config,
+    upload_new_version
   }: {
     config: ConfigPlugin;
+    upload_new_version?: boolean;
   }): Promise<void> {
     const newPathBackend = pluginPaths({ code: config.code }).backend.root;
     if (fs.existsSync(newPathBackend)) {
-      throw new CustomError({
-        code: "PLUGIN_FOLDER_ALREADY_EXISTS",
-        message: "Plugin folder already exists in backend"
-      });
+      await fs.promises.rmdir(newPathBackend, { recursive: true });
     }
     await fs.promises.mkdir(newPathBackend);
 
     // Copy temp folder to plugin folder
     const backendSource = join(this.tempPath, "backend");
     await fs.promises.cp(backendSource, newPathBackend, { recursive: true });
-    this.changeFilesService.changeFilesWhenCreate({ code: config.code });
+    if (!upload_new_version) {
+      this.changeFilesService.changeFilesWhenCreate({ code: config.code });
+    }
   }
 
   protected async copyFilesToPluginFolder({
@@ -198,7 +200,15 @@ export class UploadAdminPluginsService {
     });
   }
 
-  async upload({ file }: UploadAdminPluginsArgs): Promise<ShowAdminPlugins> {
+  protected async removeTempFolder(): Promise<void> {
+    // Delete temp folder
+    await fs.promises.rm(this.tempPath, { recursive: true });
+  }
+
+  async upload({
+    code,
+    file
+  }: UploadAdminPluginsArgs): Promise<ShowAdminPlugins> {
     const tgz = await file;
     const config = await this.getPluginConfig({ tgz });
 
@@ -207,21 +217,50 @@ export class UploadAdminPluginsService {
         where: (table, { eq }) => eq(table.code, config.code)
       });
 
-    if (checkPlugin) {
+    if (checkPlugin && !code) {
+      await this.removeTempFolder();
       throw new CustomError({
         code: "PLUGIN_ALREADY_EXISTS",
         message: "Plugin already exists"
       });
     }
 
+    if (code && code !== config.code) {
+      await this.removeTempFolder();
+      throw new CustomError({
+        code: "PLUGIN_CODE_NOT_MATCH",
+        message: "Plugin code not match"
+      });
+    }
+
+    if (checkPlugin && code && config.version_code < checkPlugin.version_code) {
+      await this.removeTempFolder();
+      throw new CustomError({
+        code: "PLUGIN_VERSION_IS_LOWER",
+        message: "Plugin version is lower than the current version"
+      });
+    }
+
     // Create plugin folder
-    await this.createPluginBackend({ config });
+    await this.createPluginBackend({ config, upload_new_version: !!code });
     await this.createPluginFrontend({ config });
+    await this.removeTempFolder();
 
-    // Delete temp folder
-    await fs.promises.rm(this.tempPath, { recursive: true });
+    if (code) {
+      const plugins = await this.databaseService.db
+        .update(core_plugins)
+        .set({
+          ...config,
+          created: currentDate()
+        })
+        .where(eq(core_plugins.code, code))
+        .returning();
 
-    // Save plugin to database
+      const plugin = plugins[0];
+
+      return plugin;
+    }
+
     const plugins = await this.databaseService.db
       .insert(core_plugins)
       .values({

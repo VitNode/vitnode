@@ -7,4 +7,7 @@ import { FileUpload } from "@/utils/graphql-upload/Upload";
 export class UploadAdminPluginsArgs {
   @Field(() => GraphQLUpload)
   file: Promise<FileUpload>;
+
+  @Field(() => String, { nullable: true })
+  code: string | null;
 }

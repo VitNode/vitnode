@@ -147,7 +147,9 @@ export const FormSignUp = () => {
                   />
                 </FormControl>
                 <div className="space-y-1 leading-none">
-                  <FormLabel>{t("sign_up.form.newsletter.label")}</FormLabel>
+                  <FormLabel optional>
+                    {t("sign_up.form.newsletter.label")}
+                  </FormLabel>
                   <FormDescription>
                     {t("sign_up.form.newsletter.desc")}
                   </FormDescription>

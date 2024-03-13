@@ -39,9 +39,9 @@ export default async function Layout({
       </>
     );
   } catch (e) {
-    const error = e as ErrorType;
+    const error = e as ErrorType | undefined;
 
-    if (error.extensions?.code === "ACCESS_DENIED") {
+    if (error?.extensions?.code === "ACCESS_DENIED") {
       return <ErrorViewSSR theme_id={theme_id} code="403" />;
     }
 

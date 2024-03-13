@@ -15,9 +15,12 @@ export const mutationApi = async (formData: FormData) => {
 
     const { data } = await fetcher<
       Admin__Core_Plugins__UploadMutation,
-      Admin__Core_Plugins__UploadMutationVariables
+      Omit<Admin__Core_Plugins__UploadMutationVariables, "file">
     >({
       query: Admin__Core_Plugins__Upload,
+      variables: {
+        code: formData.get("code") as string
+      },
       uploads: [
         {
           files,

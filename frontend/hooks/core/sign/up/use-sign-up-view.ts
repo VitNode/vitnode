@@ -73,7 +73,7 @@ export const useSignUpView = ({ installPage }: Args) => {
     });
 
     if (mutation.error) {
-      const error = mutation.error as ErrorType;
+      const error = mutation.error as ErrorType | undefined;
 
       if (error?.extensions) {
         const { code } = error.extensions;
