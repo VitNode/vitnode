@@ -9,10 +9,11 @@ import {
   CardFooter,
   CardHeader
 } from "@/components/ui/card";
-import { PoweredByVitNode } from "./powered-by";
+import { PoweredByVitNode } from "../powered-by";
 import "@/app/[locale]/(apps)/(admin)/admin/global.scss";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "@/i18n";
+import { mutationClearCache } from "./mutation-clear-cache";
 
 interface Props {
   showPoweredBy?: boolean;
@@ -41,13 +42,21 @@ export const InternalErrorView = ({ showPoweredBy }: Props) => {
             </p>
           )}
         </CardContent>
-        <CardFooter className="flex items-center justify-center flex-wrap gap-5">
+        <CardFooter className="flex gap-2 justify-center flex-col flex-wrap items-stretch sm:flex-row">
           <Button onClick={back} variant="ghost">
             <RotateCcw /> {t("go_back")}
           </Button>
 
-          <Button onClick={() => window.location.reload()}>
-            <RefreshCcw /> {t("reload_page")}
+          <Button
+            onClick={() => {
+              if (process.env.NODE_ENV === "development") {
+                mutationClearCache();
+              }
+
+              window.location.reload();
+            }}
+          >
+            <RefreshCcw /> {t("clear_cache_and_reload")}
           </Button>
         </CardFooter>
       </Card>

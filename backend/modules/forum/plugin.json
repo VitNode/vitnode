@@ -3,5 +3,6 @@
   "code": "forum",
   "author": "VitNode",
   "author_url": "https://vitnode.com/",
-  "description": "Community forum plugin."
+  "description": "Community forum plugin.",
+  "allow_default": true
 }

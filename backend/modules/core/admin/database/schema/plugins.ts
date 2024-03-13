@@ -22,7 +22,7 @@ export const core_plugins = pgTable(
     author: varchar("author", { length: 100 }).notNull(),
     author_url: varchar("author_url", { length: 255 }).notNull(),
     default: boolean("default").notNull().default(false),
-    position: integer("position").notNull().default(0)
+    allow_default: boolean("allow_default").notNull().default(true)
   },
   table => ({
     code_idx: index("core_plugins_code_idx").on(table.code),

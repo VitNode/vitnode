@@ -52,6 +52,7 @@ export class CheckDownloadAdminPluginsService {
       pages_container: await this.checkNumberOfFiles({
         paths: pluginPaths({ code }).frontend.pages_container
       }),
+      default_page: fs.existsSync(pluginPaths({ code }).frontend.default_page),
       language: fs.existsSync(pluginPaths({ code }).frontend.language),
       hooks: await this.checkNumberOfFiles({
         paths: pluginPaths({ code }).frontend.hooks

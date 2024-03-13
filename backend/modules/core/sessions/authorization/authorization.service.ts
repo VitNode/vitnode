@@ -105,14 +105,14 @@ export class AuthorizationCoreSessionsService {
         },
         theme_id,
         rebuild_required: config.rebuild_required,
-        plugin_default: plugin.code
+        plugin_default: plugin?.code ?? ""
       };
     } catch (error) {
       return {
         user: null,
         theme_id,
         rebuild_required: config.rebuild_required,
-        plugin_default: plugin.code
+        plugin_default: plugin?.code ?? ""
       };
     }
   }

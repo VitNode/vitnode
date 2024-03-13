@@ -17,6 +17,9 @@ export class CheckDownloadAdminPluginsObj {
   @Field(() => Int)
   pages: number;
 
+  @Field(() => Boolean)
+  default_page: boolean;
+
   @Field(() => Int)
   hooks: number;
 

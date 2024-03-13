@@ -42,6 +42,7 @@ type CheckDownloadAdminPluginsObj {
   admin_pages: Int!
   admin_templates: Int!
   databases: Int!
+  default_page: Boolean!
   graphql_mutations: Int!
   graphql_queries: Int!
   hooks: Int!

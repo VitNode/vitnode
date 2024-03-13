@@ -7,7 +7,10 @@ export const pluginPaths = ({ code }: { code: string }) => {
   return {
     backend: {
       root: backend_root,
-      database_schema: join(backend_root, "admin", "database", "schema")
+      database_schema: join(backend_root, "admin", "database", "schema"),
+      database_migration: join(backend_root, "admin", "database", "migration"),
+      versions: join(backend_root, "versions.json"),
+      info: join(backend_root, "plugin.json")
     },
     frontend: {
       admin_pages: join(
@@ -29,6 +32,13 @@ export const pluginPaths = ({ code }: { code: string }) => {
         "(main)",
         "(container)",
         code
+      ),
+      default_page: join(
+        frontend_root,
+        "themes",
+        "1",
+        code,
+        "default-page.tsx"
       ),
       pages: join(frontend_root, "app", "[locale]", "(apps)", "(main)", code),
       hooks: join(frontend_root, "hooks", code),

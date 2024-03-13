@@ -5,7 +5,7 @@ import { Inter } from "next/font/google";
 
 import { ThemeProvider } from "./theme-provider";
 import { getConfigFile } from "@/functions/get-config-file";
-import { InternalErrorView } from "@/admin/core/global/internal-error-view";
+import { InternalErrorView } from "@/admin/core/global/internal-error/internal-error-view";
 import "./global.scss";
 import { getSessionData } from "@/functions/get-session-data";
 

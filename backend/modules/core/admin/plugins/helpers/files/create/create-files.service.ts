@@ -31,7 +31,7 @@ export class CreateFilesAdminPluginsService {
           },
           {
             name: "plugin.json",
-            content: createInfoJSON({ code, ...rest })
+            content: createInfoJSON({ code, allow_default: true, ...rest })
           },
           {
             name: "versions.json",
