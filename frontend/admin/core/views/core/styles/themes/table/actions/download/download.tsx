@@ -5,7 +5,7 @@ import { Suspense, lazy } from "react";
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import type { ActionsItemThemesAdminProps } from "../actions";
+import type { DownloadThemeActionsAdminProps } from "./content";
 
 const Content = lazy(() =>
   import("./content").then(module => ({
@@ -14,7 +14,7 @@ const Content = lazy(() =>
 );
 
 export const DownloadThemeActionsAdmin = (
-  props: ActionsItemThemesAdminProps
+  props: DownloadThemeActionsAdminProps
 ) => {
   const t = useTranslations("core");
 

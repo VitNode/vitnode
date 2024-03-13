@@ -170,6 +170,8 @@
           },
           "upload": {
             "title": "Prześlij motyw",
+            "title_new_version": "Prześlij nową wersję motywu",
+            "success": "Motyw został przesłany.",
             "submit": "Prześlij"
           }
         },

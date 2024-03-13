@@ -14,6 +14,7 @@ import { currentDate } from "@/functions/date";
 import { CustomError } from "@/utils/errors/CustomError";
 import { core_themes } from "../../database/schema/themes";
 import { FileUpload } from "@/utils/graphql-upload/Upload";
+import { NotFoundError } from "@/utils/errors/not-found-error";
 
 @Injectable()
 export class UploadAdminThemesService {
@@ -75,6 +76,23 @@ export class UploadAdminThemesService {
   }
 
   async upload({ file, id }: UploadAdminThemesArgs): Promise<ShowAdminThemes> {
+    if (id) {
+      const theme = await this.databaseService.db.query.core_themes.findFirst({
+        where: (table, { eq }) => eq(table.id, id)
+      });
+
+      if (!theme) {
+        throw new NotFoundError("Theme");
+      }
+
+      if (theme.protected) {
+        throw new CustomError({
+          code: "THEME_PROTECTED",
+          message: "Theme is protected and cannot be updated"
+        });
+      }
+    }
+
     const tgz = await file;
     const config = await this.getThemeConfig({ tgz });
 

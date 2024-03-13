@@ -26,6 +26,9 @@ export const useUploadThemeAdmin = ({ data }: UploadThemeAdminProps) => {
 
     const formData = new FormData();
     formData.append("file", values.file[0]);
+    if (data?.id) {
+      formData.append("id", `${data.id}`);
+    }
     const mutation = await mutationApi(formData);
 
     if (mutation.error || !mutation.data) {

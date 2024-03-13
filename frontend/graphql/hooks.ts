@@ -396,6 +396,7 @@ export type MutationAdmin__Core_Themes__EditArgs = {
 
 export type MutationAdmin__Core_Themes__UploadArgs = {
   file: Scalars['Upload']['input'];
+  id?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -1381,6 +1382,7 @@ export type Admin__Core_Themes__EditMutation = { __typename?: 'Mutation', admin_
 
 export type Admin__Core_Themes__UploadMutationVariables = Exact<{
   file: Scalars['Upload']['input'];
+  id?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
@@ -1973,8 +1975,8 @@ export const Admin__Core_Themes__Edit = gql`
 }
     `;
 export const Admin__Core_Themes__Upload = gql`
-    mutation Admin__core_themes__upload($file: Upload!) {
-  admin__core_themes__upload(file: $file) {
+    mutation Admin__core_themes__upload($file: Upload!, $id: Int) {
+  admin__core_themes__upload(file: $file, id: $id) {
     id
     name
   }

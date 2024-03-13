@@ -80,7 +80,7 @@
         },
         "upload": {
           "title": "Upload Plugin",
-          "title_new_version": "Upload New Version",
+          "title_new_version": "Upload New Version Plugin",
           "success": "Successfully uploaded plugin.",
           "success_update": "Successfully updated plugin.",
           "errors": {
@@ -170,8 +170,9 @@
           },
           "upload": {
             "title": "Upload Theme",
-            "submit": "Upload",
-            "success": "Successfully uploaded theme."
+            "title_new_version": "Upload New Version Theme",
+            "success": "Successfully uploaded theme.",
+            "submit": "Upload"
           }
         },
         "nav": {

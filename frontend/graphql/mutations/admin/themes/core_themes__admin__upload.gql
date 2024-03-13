@@ -1,5 +1,5 @@
-mutation Admin__core_themes__upload($file: Upload!) {
-  admin__core_themes__upload(file: $file) {
+mutation Admin__core_themes__upload($file: Upload!, $id: Int) {
+  admin__core_themes__upload(file: $file, id: $id) {
     id
     name
   }
