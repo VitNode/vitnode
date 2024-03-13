@@ -74,7 +74,7 @@ export class UploadAdminThemesService {
     return config;
   }
 
-  async upload({ file }: UploadAdminThemesArgs): Promise<ShowAdminThemes> {
+  async upload({ file, id }: UploadAdminThemesArgs): Promise<ShowAdminThemes> {
     const tgz = await file;
     const config = await this.getThemeConfig({ tgz });
 
