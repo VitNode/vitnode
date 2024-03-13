@@ -1,6 +1,6 @@
 import { CONFIG } from "@/config";
 import { CreateActionPluginAdmin } from "./create/create";
-import { UploadActionPluginAdmin } from "./upload/upload";
+import { UploadActionPluginAdmin } from "./upload";
 
 export const ActionsPluginsAdmin = () => {
   return (

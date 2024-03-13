@@ -16,6 +16,7 @@ import { generateRandomString } from "@/functions/generate-random-string";
 import { currentDate } from "@/functions/date";
 import { CustomError } from "@/utils/errors/CustomError";
 import { core_plugins } from "../../database/schema/plugins";
+import { NotFoundError } from "@/utils/errors/not-found-error";
 
 @Injectable()
 export class UploadAdminPluginsService {
@@ -198,7 +199,10 @@ export class UploadAdminPluginsService {
     });
   }
 
-  async upload({ file }: UploadAdminPluginsArgs): Promise<ShowAdminPlugins> {
+  async upload({
+    code,
+    file
+  }: UploadAdminPluginsArgs): Promise<ShowAdminPlugins> {
     const tgz = await file;
     const config = await this.getPluginConfig({ tgz });
 
@@ -207,10 +211,17 @@ export class UploadAdminPluginsService {
         where: (table, { eq }) => eq(table.code, config.code)
       });
 
-    if (checkPlugin) {
+    if (checkPlugin && !code) {
       throw new CustomError({
         code: "PLUGIN_ALREADY_EXISTS",
         message: "Plugin already exists"
+      });
+    }
+
+    if (code !== config.code) {
+      throw new CustomError({
+        code: "PLUGIN_CODE_NOT_MATCH",
+        message: "Plugin code not match"
       });
     }
 

@@ -80,6 +80,7 @@
         },
         "upload": {
           "title": "Upload Plugin",
+          "title_new_version": "Upload New Version",
           "success": "Successfully uploaded plugin.",
           "submit": "Upload"
         },

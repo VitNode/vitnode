@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n";
-import { UploadPluginActionsAdmin } from "./upload/upload";
+import { UploadPluginActionsAdmin } from "./upload";
 import { CONFIG } from "@/config";
 
 export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
@@ -33,7 +33,7 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
         (props.allow_default || CONFIG.node_development) && (
           <SetDefaultPluginActionsAdmin {...props} />
         )}
-      <UploadPluginActionsAdmin />
+      <UploadPluginActionsAdmin {...props} />
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

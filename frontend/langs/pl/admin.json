@@ -80,6 +80,7 @@
         },
         "upload": {
           "title": "Prześlij wtyczkę",
+          "title_new_version": "Prześlij nową wersję wtyczki",
           "success": "Wtyczka została przesłana.",
           "submit": "Prześlij"
         },
