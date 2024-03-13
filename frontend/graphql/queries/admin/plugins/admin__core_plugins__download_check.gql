@@ -10,5 +10,6 @@ query Admin__core_plugins__download_check($code: String!) {
     pages
     pages_container
     templates
+    default_page
   }
 }

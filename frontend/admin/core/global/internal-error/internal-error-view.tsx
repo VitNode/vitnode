@@ -56,7 +56,12 @@ export const InternalErrorView = ({ showPoweredBy }: Props) => {
               window.location.reload();
             }}
           >
-            <RefreshCcw /> {t("clear_cache_and_reload")}
+            <RefreshCcw />
+            {t(
+              process.env.NODE_ENV === "development"
+                ? "clear_cache_and_reload"
+                : "reload_page"
+            )}
           </Button>
         </CardFooter>
       </Card>

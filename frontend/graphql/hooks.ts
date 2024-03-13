@@ -62,6 +62,7 @@ export type CheckDownloadAdminPluginsObj = {
   admin_pages: Scalars['Int']['output'];
   admin_templates: Scalars['Int']['output'];
   databases: Scalars['Int']['output'];
+  default_page: Scalars['Boolean']['output'];
   graphql_mutations: Scalars['Int']['output'];
   graphql_queries: Scalars['Int']['output'];
   hooks: Scalars['Int']['output'];
@@ -1572,7 +1573,7 @@ export type Admin__Core_Plugins__Download_CheckQueryVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Plugins__Download_CheckQuery = { __typename?: 'Query', admin__core_plugins__download_check: { __typename?: 'CheckDownloadAdminPluginsObj', admin_pages: number, admin_templates: number, databases: number, graphql_mutations: number, graphql_queries: number, hooks: number, language: boolean, pages: number, pages_container: number, templates: number } };
+export type Admin__Core_Plugins__Download_CheckQuery = { __typename?: 'Query', admin__core_plugins__download_check: { __typename?: 'CheckDownloadAdminPluginsObj', admin_pages: number, admin_templates: number, databases: number, graphql_mutations: number, graphql_queries: number, hooks: number, language: boolean, pages: number, pages_container: number, templates: number, default_page: boolean } };
 
 export type Admin__Core_Plugins__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -2417,6 +2418,7 @@ export const Admin__Core_Plugins__Download_Check = gql`
     pages
     pages_container
     templates
+    default_page
   }
 }
     `;

@@ -111,6 +111,7 @@
             "pages": "Pages: <status></status>",
             "pages_container": "Pages (container): <status></status>",
             "templates": "Templates: <status></status>",
+            "default_page": "Default Page: <status></status>",
             "file_detected": "{count, plural, =0 {No files} =1 {1 file} other {# files}} detected"
           },
           "submit": "Download"

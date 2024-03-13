@@ -49,7 +49,9 @@ export const CheckListDownloadPluginActionsAdmin = ({
               <span
                 className={cn("text-sm", {
                   "text-muted-foreground italic": !item[1],
-                  "text-primary font-semibold": item[1]
+                  "text-primary font-semibold": item[1],
+                  "text-destructive font-semibold":
+                    !item[1] && item[0] === "default_page"
                 })}
               >
                 {t("file_detected", { count: +item[1] })}
