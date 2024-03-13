@@ -17,8 +17,6 @@ const Content = lazy(() =>
 export const CreateActionThemeAdmin = () => {
   const t = useTranslations("core");
 
-  if (process.env.NODE_ENV !== "development") return null;
-
   return (
     <Dialog>
       <DialogTrigger asChild>

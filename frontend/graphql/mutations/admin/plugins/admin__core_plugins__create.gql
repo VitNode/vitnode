@@ -1,6 +1,6 @@
 mutation Admin__core_plugins__create(
   $author: String!
-  $authorUrl: String!
+  $authorUrl: String
   $code: String!
   $name: String!
   $supportUrl: String!

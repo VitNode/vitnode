@@ -59,16 +59,20 @@ export const ContentTablePluginsAdmin = ({
         cell: ({ row }) => {
           const data = row.original;
 
-          return (
-            <a
-              href={data.author_url}
-              className="flex gap-1"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              {data.author} <ExternalLink className="size-4" />
-            </a>
-          );
+          if (data.author_url) {
+            return (
+              <a
+                href={data.author_url}
+                className="flex gap-1"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {data.author} <ExternalLink className="size-4" />
+              </a>
+            );
+          }
+
+          return <span className="flex gap-1">{data.author}</span>;
         }
       },
       {
@@ -94,7 +98,7 @@ export const ContentTablePluginsAdmin = ({
 
           return (
             <Switch
-              disabled={data.default || data.protected}
+              disabled={data.default}
               checked={data.enabled}
               onClick={async () => {
                 // const mutation = await mutationApi({

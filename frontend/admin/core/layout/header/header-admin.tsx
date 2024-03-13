@@ -1,11 +1,12 @@
 import { UserBarAdmin } from "./user-bar/user-bar-admin";
 import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";
 import { LangSwitcherHeaderAdmin } from "./lang-switcher";
+import { CONFIG } from "@/config";
 
 export const HeaderAdmin = () => {
   return (
     <header className="h-16 fixed top-0 left-0 right-0 sm:ml-60 z-20 bg-background/75 backdrop-blur flex items-center gap-4 justify-between px-5">
-      {process.env.NODE_ENV === "development" && (
+      {CONFIG.node_development && (
         <div
           className="absolute top-0 left-0 w-full h-1 z-50"
           style={{

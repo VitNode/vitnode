@@ -7,7 +7,7 @@ import {
   type Admin__Install__LayoutQuery,
   type Admin__Install__LayoutQueryVariables
 } from "@/graphql/hooks";
-import { InternalErrorView } from "@/admin/core/global/internal-error-view";
+import { InternalErrorView } from "@/admin/core/global/internal-error/internal-error-view";
 import { redirect } from "@/i18n";
 import { RedirectsInstallConfigsLayout } from "@/admin/core/configs/views/install/redirects-install-configs-layout";
 

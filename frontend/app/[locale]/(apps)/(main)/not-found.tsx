@@ -1,21 +1,12 @@
-import { lazy, type LazyExoticComponent } from "react";
-
 import { getSessionData } from "@/functions/get-session-data";
-import type { ErrorViewProps } from "@/themes/1/core/views/global/error/error-view";
+import { ErrorViewSSR } from "@/components/views/error-view-ssr";
 
 export default async function NotFoundPage() {
   const { theme_id } = await getSessionData();
-  const PageFromTheme: LazyExoticComponent<
-    (props: ErrorViewProps) => JSX.Element
-  > = lazy(() =>
-    import(`@/themes/${theme_id}/core/views/global/error/error-view`).catch(
-      () => import("@/themes/1/core/views/global/error/error-view")
-    )
-  );
 
   return (
     <div className="container">
-      <PageFromTheme code="404" />
+      <ErrorViewSSR theme_id={theme_id} code="404" />
     </div>
   );
 }

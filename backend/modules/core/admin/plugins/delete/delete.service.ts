@@ -36,13 +36,6 @@ export class DeleteAdminPluginsService {
       throw new NotFoundError("Plugin");
     }
 
-    if (plugin.protected) {
-      throw new CustomError({
-        code: "PROTECTED_PLUGIN",
-        message: "This plugin is protected and cannot be deleted"
-      });
-    }
-
     if (plugin.default) {
       throw new CustomError({
         code: "DEFAULT_PLUGIN",

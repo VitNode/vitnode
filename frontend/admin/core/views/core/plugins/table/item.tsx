@@ -69,9 +69,13 @@ export const ItemContentTablePluginsAdmin = ({ data }: Props) => {
           </span>
         )}
         <span className="text-muted-foreground text-sm">
-          <a href={data.author_url} rel="noopener noreferrer" target="_blank">
-            {data.author}
-          </a>
+          {data.author_url ? (
+            <a href={data.author_url} rel="noopener noreferrer" target="_blank">
+              {data.author}
+            </a>
+          ) : (
+            data.author
+          )}
         </span>
       </div>
 

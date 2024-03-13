@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { buttonVariants } from "@/components/ui/button";
 import { useSessionAdmin } from "../hooks/use-session-admin";
+import { CONFIG } from "@/config";
 
 export const RebuildRequiredAdmin = () => {
   const t = useTranslations("admin.rebuild_required");
@@ -15,7 +16,7 @@ export const RebuildRequiredAdmin = () => {
     (!rebuild_required.langs &&
       !rebuild_required.plugins &&
       !rebuild_required.themes) ||
-    process.env.NODE_ENV === "development"
+    CONFIG.node_development
   ) {
     return null;
   }

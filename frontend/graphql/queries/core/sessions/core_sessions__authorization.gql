@@ -28,6 +28,7 @@ query Core_sessions__authorization {
       langs
       plugins
     }
+    plugin_default
   }
   core_languages__show {
     edges {

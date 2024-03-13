@@ -4,6 +4,7 @@ import { join } from "path";
 import { Injectable } from "@nestjs/common";
 
 import {
+  PluginInfoJSONType,
   createFunctionsDatabase,
   createInfoJSON,
   createModuleAdminSchema,
@@ -11,13 +12,12 @@ import {
 } from "./contents";
 
 import { CustomError } from "@/utils/errors/CustomError";
-import { CreateAdminPluginsArgs } from "../../../create/dto/create.args";
 
 @Injectable()
 export class CreateFilesAdminPluginsService {
   protected path = join(process.cwd(), "modules");
 
-  createFiles({ code, ...rest }: CreateAdminPluginsArgs): void {
+  createFiles({ code, ...rest }: PluginInfoJSONType): void {
     const folders: {
       files: { content: string; name: string }[];
       path: string;
@@ -31,7 +31,7 @@ export class CreateFilesAdminPluginsService {
           },
           {
             name: "plugin.json",
-            content: createInfoJSON({ code, ...rest })
+            content: createInfoJSON({ code, allow_default: true, ...rest })
           },
           {
             name: "versions.json",

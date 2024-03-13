@@ -1,6 +1,6 @@
 mutation Admin__core_themes__edit(
   $author: String!
-  $authorUrl: String!
+  $authorUrl: String
   $id: Int!
   $name: String!
   $supportUrl: String!

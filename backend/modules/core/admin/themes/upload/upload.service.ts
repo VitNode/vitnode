@@ -87,7 +87,8 @@ export class UploadAdminThemesService {
         version_code: config.version_code,
         created: currentDate(),
         author: config.author,
-        author_url: config.author_url
+        author_url: config.author_url,
+        support_url: config.support_url
       })
       .returning();
 

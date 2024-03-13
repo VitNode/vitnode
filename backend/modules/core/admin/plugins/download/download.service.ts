@@ -7,6 +7,7 @@ import { eq } from "drizzle-orm";
 
 import { DownloadAdminPluginsArgs } from "./dto/download.args";
 import { pluginPaths } from "../paths";
+import { PluginInfoJSONType } from "../helpers/files/create/contents";
 
 import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
@@ -119,23 +120,53 @@ export class DownloadAdminPluginsService {
     version,
     version_code
   }: DownloadAdminPluginsArgs): Promise<void> {
-    if (!version || !version_code) return;
+    // Update allow_default in plugin.json
+    const pathInfoJSON = pluginPaths({ code }).backend.info;
+    const infoJSON: PluginInfoJSONType = JSON.parse(
+      fs.readFileSync(pathInfoJSON, "utf-8")
+    );
+    const allow_default = fs.existsSync(
+      pluginPaths({ code }).frontend.default_page
+    );
+    infoJSON.allow_default = allow_default;
+
+    fs.writeFile(
+      pathInfoJSON,
+      JSON.stringify(infoJSON, null, 2),
+      "utf8",
+      err => {
+        if (err) {
+          throw new CustomError({
+            code: "ERROR_UPDATING_INFO_JSON",
+            message: err.message
+          });
+        }
+      }
+    );
+
+    if (!version || !version_code) {
+      // Update only allow_default
+      await this.databaseService.db
+        .update(core_plugins)
+        .set({
+          allow_default
+        })
+        .where(eq(core_plugins.code, code));
+
+      return;
+    }
 
     await this.databaseService.db
       .update(core_plugins)
       .set({
         version,
-        version_code
+        version_code,
+        allow_default
       })
       .where(eq(core_plugins.code, code))
       .returning();
 
-    const pathToVersions = join(
-      process.cwd(),
-      "modules",
-      code,
-      "versions.json"
-    );
+    const pathToVersions = pluginPaths({ code }).backend.versions;
     if (!fs.existsSync(pathToVersions)) {
       throw new CustomError({
         code: "VERSIONS_FILE_NOT_FOUND",
@@ -143,20 +174,15 @@ export class DownloadAdminPluginsService {
       });
     }
 
-    const versions = JSON.parse(fs.readFileSync(pathToVersions, "utf-8"));
+    const versions: { [version_code: number]: string } = JSON.parse(
+      fs.readFileSync(pathToVersions, "utf-8")
+    );
     versions[version_code] = version;
     fs.writeFileSync(pathToVersions, JSON.stringify(versions, null, 2));
   }
 
   protected async generateMigration({ code }: { code: string }): Promise<void> {
-    const path = join(
-      process.cwd(),
-      "modules",
-      code,
-      "admin",
-      "database",
-      "migrations"
-    );
+    const path = pluginPaths({ code }).backend.database_migration;
     if (!fs.existsSync(path)) return;
 
     try {

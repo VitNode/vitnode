@@ -18,12 +18,11 @@ export const core_plugins = pgTable(
     version_code: integer("version_code"),
     enabled: boolean("enabled").notNull().default(true),
     created: integer("created").notNull(),
-    support_url: varchar("support_url", { length: 255 }),
-    protected: boolean("protected").notNull().default(false),
+    support_url: varchar("support_url", { length: 255 }).notNull(),
     author: varchar("author", { length: 100 }).notNull(),
-    author_url: varchar("author_url", { length: 255 }).notNull(),
+    author_url: varchar("author_url", { length: 255 }),
     default: boolean("default").notNull().default(false),
-    position: integer("position").notNull().default(0)
+    allow_default: boolean("allow_default").notNull().default(true)
   },
   table => ({
     code_idx: index("core_plugins_code_idx").on(table.code),

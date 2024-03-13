@@ -6,7 +6,7 @@ import { getSessionData } from "@/functions/get-session-data";
 import { getTopicData } from "../query";
 import type { EditTopicViewProps } from "@/themes/1/forum/views/forum/topic/views/edit/edit-topic-view";
 import { getConvertTextLang } from "@/hooks/core/use-text-lang";
-import type { ErrorViewProps } from "@/themes/1/core/views/global/error/error-view";
+import { ErrorViewSSR } from "@/components/views/error-view-ssr";
 
 interface Props {
   params: {
@@ -41,15 +41,7 @@ export default async function Page({ params: { id } }: Props) {
   const data = await getTopicData({ id });
 
   if (!data.forum_topics__show.edges[0].permissions.can_edit) {
-    const ErrorView: LazyExoticComponent<
-      (props: ErrorViewProps) => JSX.Element
-    > = lazy(() =>
-      import(`@/themes/${theme_id}/core/views/global/error/error-view`).catch(
-        () => import("@/themes/1/core/views/global/error/error-view")
-      )
-    );
-
-    return <ErrorView code="403" />;
+    return <ErrorViewSSR theme_id={theme_id} code="403" />;
   }
 
   const PageFromTheme: LazyExoticComponent<

@@ -12,6 +12,7 @@ import type {
   ShowAdminThemes
 } from "@/graphql/hooks";
 import { ActionsItemThemesAdmin } from "./actions/actions";
+import { CONFIG } from "@/config";
 
 export const ContentTableThemesAdmin = ({
   admin__core_themes__show: { edges, pageInfo }
@@ -29,7 +30,7 @@ export const ContentTableThemesAdmin = ({
           return (
             <div className="flex gap-2 items-center">
               <span className="font-semibold">{data.name}</span>
-              {process.env.NODE_ENV === "development" && (
+              {CONFIG.node_development && (
                 <Badge variant="outline">ID: {data.id}</Badge>
               )}
               {data.default && <Badge>{t("default")}</Badge>}
@@ -61,16 +62,20 @@ export const ContentTableThemesAdmin = ({
         cell: ({ row }) => {
           const data = row.original;
 
-          return (
-            <a
-              href={data.author_url}
-              className="flex gap-1"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              {data.author} <ExternalLink className="size-4" />
-            </a>
-          );
+          if (data.author_url) {
+            return (
+              <a
+                href={data.author_url}
+                className="flex gap-1"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {data.author} <ExternalLink className="size-4" />
+              </a>
+            );
+          }
+
+          return <span className="flex gap-1">{data.author}</span>;
         }
       },
       {

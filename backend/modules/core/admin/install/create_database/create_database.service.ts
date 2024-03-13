@@ -18,6 +18,7 @@ import { core_plugins } from "../../database/schema/plugins";
 import { core_themes } from "../../database/schema/themes";
 import { core_nav, core_nav_name } from "../../database/schema/nav";
 import { getConfigFile } from "@/functions/config/get-config-file";
+import { pluginPaths } from "../../plugins/paths";
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {
@@ -65,18 +66,25 @@ export class CreateDatabaseAdminInstallService {
     ]);
 
     // Create plugins
-    const packageJSON = JSON.parse(fs.readFileSync("package.json", "utf8"));
+    const coreVersions: { [version_code: number]: string } = JSON.parse(
+      fs.readFileSync(pluginPaths({ code: "core" }).backend.versions, "utf8")
+    );
+    const coreVersionCode = Object.keys(coreVersions)
+      .map(Number)
+      .sort((a, b) => b - a)[0];
+    const coreVersion = coreVersions[coreVersionCode];
+
     await this.databaseService.db.insert(core_plugins).values([
       {
         code: "forum",
         name: "Forum",
         description: "Community forum plugin.",
-        version: packageJSON.version,
-        version_code: packageJSON.version_code,
+        version: coreVersion,
+        version_code: coreVersionCode,
         author: "VitNode",
+        support_url: "https://vitnode.com/",
         author_url: "https://vitnode.com/",
         created: currentDate(),
-        protected: true,
         default: true
       }
     ]);
@@ -84,8 +92,8 @@ export class CreateDatabaseAdminInstallService {
     // Create default theme
     await this.databaseService.db.insert(core_themes).values({
       name: "Default Theme",
-      version: packageJSON.version,
-      version_code: packageJSON.version_code,
+      version: coreVersion,
+      version_code: coreVersionCode,
       author: "VitNode",
       author_url: "https://vitnode.com/",
       support_url: "https://github.com/aXenDeveloper/vitnode/issues",

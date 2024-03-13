@@ -2,7 +2,7 @@ import { lazy, type LazyExoticComponent, type ReactNode } from "react";
 import { isRedirectError } from "next/dist/client/components/redirect";
 
 import { SessionProvider } from "./session-provider";
-import { InternalErrorView } from "@/admin/core/global/internal-error-view";
+import { InternalErrorView } from "@/admin/core/global/internal-error/internal-error-view";
 import { redirect } from "@/i18n";
 import { getSessionData } from "@/functions/get-session-data";
 

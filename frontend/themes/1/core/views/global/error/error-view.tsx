@@ -12,11 +12,7 @@ import {
 import { Link } from "@/i18n";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/functions/classnames";
-
-export interface ErrorViewProps {
-  code: "403" | "404" | "500" | string;
-  className?: string;
-}
+import type { ErrorViewProps } from "@/components/views/error-view-ssr";
 
 export default function ErrorView({ className, code }: ErrorViewProps) {
   const t = useTranslations("core");

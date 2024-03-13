@@ -9,10 +9,12 @@ import {
   CardFooter,
   CardHeader
 } from "@/components/ui/card";
-import { PoweredByVitNode } from "./powered-by";
+import { PoweredByVitNode } from "../powered-by";
 import "@/app/[locale]/(apps)/(admin)/admin/global.scss";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "@/i18n";
+import { mutationClearCache } from "./mutation-clear-cache";
+import { CONFIG } from "@/config";
 
 interface Props {
   showPoweredBy?: boolean;
@@ -35,19 +37,30 @@ export const InternalErrorView = ({ showPoweredBy }: Props) => {
             {t("errors.no_connection_api")}
           </p>
 
-          {process.env.NODE_ENV === "development" && (
+          {CONFIG.node_development && (
             <p className="text-muted-foreground mt-10 text-sm max-w-96">
               {t("errors.no_connection_api_dev")}
             </p>
           )}
         </CardContent>
-        <CardFooter className="flex items-center justify-center flex-wrap gap-5">
+        <CardFooter className="flex gap-2 justify-center flex-col flex-wrap items-stretch sm:flex-row">
           <Button onClick={back} variant="ghost">
             <RotateCcw /> {t("go_back")}
           </Button>
 
-          <Button onClick={() => window.location.reload()}>
-            <RefreshCcw /> {t("reload_page")}
+          <Button
+            onClick={() => {
+              if (CONFIG.node_development) {
+                mutationClearCache();
+              }
+
+              window.location.reload();
+            }}
+          >
+            <RefreshCcw />
+            {t(
+              CONFIG.node_development ? "clear_cache_and_reload" : "reload_page"
+            )}
           </Button>
         </CardFooter>
       </Card>

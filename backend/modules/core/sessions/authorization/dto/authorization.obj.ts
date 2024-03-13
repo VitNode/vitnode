@@ -27,4 +27,7 @@ export class AuthorizationCoreSessionsObj {
 
   @Field(() => RebuildRequiredObj)
   rebuild_required: RebuildRequiredObj;
+
+  @Field(() => String)
+  plugin_default: string;
 }

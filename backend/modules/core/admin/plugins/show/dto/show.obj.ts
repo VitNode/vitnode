@@ -28,20 +28,20 @@ export class ShowAdminPlugins {
   @Field(() => Int)
   created: number;
 
-  @Field(() => String, { nullable: true })
-  support_url: string | null;
-
-  @Field(() => Boolean)
-  protected: boolean;
+  @Field(() => String)
+  support_url: string;
 
   @Field(() => String)
   author: string;
 
-  @Field(() => String)
-  author_url: string;
+  @Field(() => String, { nullable: true })
+  author_url: string | null;
 
   @Field(() => Boolean)
   default: boolean;
+
+  @Field(() => Boolean)
+  allow_default: boolean;
 }
 
 @ObjectType()

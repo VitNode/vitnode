@@ -13,7 +13,7 @@ interface Props {
 export default async function Page({ params: { id } }: Props) {
   const { theme_id } = await getSessionData();
   const { data } = await getForumItemData({ id });
-  if (!data) throw new Error("No data");
+  if (!data) return null;
 
   const PageFromTheme: LazyExoticComponent<
     (props: ForumForumViewProps) => JSX.Element

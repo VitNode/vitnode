@@ -24,6 +24,7 @@ export type AuthorizationAdminSessionsObj = {
 
 export type AuthorizationCoreSessionsObj = {
   __typename?: 'AuthorizationCoreSessionsObj';
+  plugin_default: Scalars['String']['output'];
   rebuild_required: RebuildRequiredObj;
   theme_id?: Maybe<Scalars['Int']['output']>;
   user?: Maybe<AuthorizationCurrentUserObj>;
@@ -61,6 +62,7 @@ export type CheckDownloadAdminPluginsObj = {
   admin_pages: Scalars['Int']['output'];
   admin_templates: Scalars['Int']['output'];
   databases: Scalars['Int']['output'];
+  default_page: Scalars['Boolean']['output'];
   graphql_mutations: Scalars['Int']['output'];
   graphql_queries: Scalars['Int']['output'];
   hooks: Scalars['Int']['output'];
@@ -301,7 +303,7 @@ export type MutationAdmin__Core_Nav__EditArgs = {
 
 export type MutationAdmin__Core_Plugins__CreateArgs = {
   author: Scalars['String']['input'];
-  author_url: Scalars['String']['input'];
+  author_url?: InputMaybe<Scalars['String']['input']>;
   code: Scalars['String']['input'];
   description?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
@@ -323,9 +325,11 @@ export type MutationAdmin__Core_Plugins__DownloadArgs = {
 
 export type MutationAdmin__Core_Plugins__EditArgs = {
   author: Scalars['String']['input'];
-  author_url: Scalars['String']['input'];
+  author_url?: InputMaybe<Scalars['String']['input']>;
   code: Scalars['String']['input'];
+  default?: InputMaybe<Scalars['Boolean']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
+  enabled?: InputMaybe<Scalars['Boolean']['input']>;
   name: Scalars['String']['input'];
   support_url: Scalars['String']['input'];
 };
@@ -362,7 +366,7 @@ export type MutationAdmin__Core_Staff_Moderators__DeleteArgs = {
 
 export type MutationAdmin__Core_Themes__CreateArgs = {
   author: Scalars['String']['input'];
-  author_url: Scalars['String']['input'];
+  author_url?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
   support_url: Scalars['String']['input'];
 };
@@ -382,7 +386,7 @@ export type MutationAdmin__Core_Themes__DownloadArgs = {
 
 export type MutationAdmin__Core_Themes__EditArgs = {
   author: Scalars['String']['input'];
-  author_url: Scalars['String']['input'];
+  author_url?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Int']['input'];
   name: Scalars['String']['input'];
   support_url: Scalars['String']['input'];
@@ -752,8 +756,9 @@ export const ShowAdminMembersSortingColumnEnum = {
 export type ShowAdminMembersSortingColumnEnum = typeof ShowAdminMembersSortingColumnEnum[keyof typeof ShowAdminMembersSortingColumnEnum];
 export type ShowAdminPlugins = {
   __typename?: 'ShowAdminPlugins';
+  allow_default: Scalars['Boolean']['output'];
   author: Scalars['String']['output'];
-  author_url: Scalars['String']['output'];
+  author_url?: Maybe<Scalars['String']['output']>;
   code: Scalars['String']['output'];
   created: Scalars['Int']['output'];
   default: Scalars['Boolean']['output'];
@@ -761,8 +766,7 @@ export type ShowAdminPlugins = {
   enabled: Scalars['Boolean']['output'];
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
-  protected: Scalars['Boolean']['output'];
-  support_url?: Maybe<Scalars['String']['output']>;
+  support_url: Scalars['String']['output'];
   version?: Maybe<Scalars['String']['output']>;
   version_code?: Maybe<Scalars['Int']['output']>;
 };
@@ -838,13 +842,13 @@ export type ShowAdminStaffModeratorsSortingColumnEnum = typeof ShowAdminStaffMod
 export type ShowAdminThemes = {
   __typename?: 'ShowAdminThemes';
   author: Scalars['String']['output'];
-  author_url: Scalars['String']['output'];
+  author_url?: Maybe<Scalars['String']['output']>;
   created: Scalars['Int']['output'];
   default: Scalars['Boolean']['output'];
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   protected: Scalars['Boolean']['output'];
-  support_url?: Maybe<Scalars['String']['output']>;
+  support_url: Scalars['String']['output'];
   version?: Maybe<Scalars['String']['output']>;
   version_code?: Maybe<Scalars['Int']['output']>;
 };
@@ -1277,7 +1281,7 @@ export type Admin__Core_Nav__EditMutation = { __typename?: 'Mutation', admin__co
 
 export type Admin__Core_Plugins__CreateMutationVariables = Exact<{
   author: Scalars['String']['input'];
-  authorUrl: Scalars['String']['input'];
+  authorUrl?: InputMaybe<Scalars['String']['input']>;
   code: Scalars['String']['input'];
   name: Scalars['String']['input'];
   supportUrl: Scalars['String']['input'];
@@ -1305,11 +1309,13 @@ export type Admin__Core_Plugins__DownloadMutation = { __typename?: 'Mutation', a
 
 export type Admin__Core_Plugins__EditMutationVariables = Exact<{
   author: Scalars['String']['input'];
-  authorUrl: Scalars['String']['input'];
+  authorUrl?: InputMaybe<Scalars['String']['input']>;
   code: Scalars['String']['input'];
   name: Scalars['String']['input'];
   supportUrl: Scalars['String']['input'];
   description?: InputMaybe<Scalars['String']['input']>;
+  default?: InputMaybe<Scalars['Boolean']['input']>;
+  enabled?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 
@@ -1336,7 +1342,7 @@ export type Admin_Settings__General__EditMutation = { __typename?: 'Mutation', a
 
 export type Admin__Core_Themes__CreateMutationVariables = Exact<{
   author: Scalars['String']['input'];
-  authorUrl: Scalars['String']['input'];
+  authorUrl?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
   supportUrl: Scalars['String']['input'];
 }>;
@@ -1362,7 +1368,7 @@ export type Admin__Core_Themes__DownloadMutation = { __typename?: 'Mutation', ad
 
 export type Admin__Core_Themes__EditMutationVariables = Exact<{
   author: Scalars['String']['input'];
-  authorUrl: Scalars['String']['input'];
+  authorUrl?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Int']['input'];
   name: Scalars['String']['input'];
   supportUrl: Scalars['String']['input'];
@@ -1568,7 +1574,7 @@ export type Admin__Core_Plugins__Download_CheckQueryVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Plugins__Download_CheckQuery = { __typename?: 'Query', admin__core_plugins__download_check: { __typename?: 'CheckDownloadAdminPluginsObj', admin_pages: number, admin_templates: number, databases: number, graphql_mutations: number, graphql_queries: number, hooks: number, language: boolean, pages: number, pages_container: number, templates: number } };
+export type Admin__Core_Plugins__Download_CheckQuery = { __typename?: 'Query', admin__core_plugins__download_check: { __typename?: 'CheckDownloadAdminPluginsObj', admin_pages: number, admin_templates: number, databases: number, graphql_mutations: number, graphql_queries: number, hooks: number, language: boolean, pages: number, pages_container: number, templates: number, default_page: boolean } };
 
 export type Admin__Core_Plugins__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -1578,7 +1584,7 @@ export type Admin__Core_Plugins__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Plugins__ShowQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url: string, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, protected: boolean, support_url?: string | null, created: number, version?: string | null, version_code?: number | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Admin__Core_Plugins__ShowQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url?: string | null, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, support_url: string, created: number, version?: string | null, version_code?: number | null, allow_default: boolean }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Admin__Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1598,7 +1604,7 @@ export type Admin_Core_Themes__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Admin_Core_Themes__ShowQuery = { __typename?: 'Query', admin__core_themes__show: { __typename?: 'ShowAdminThemesObj', edges: Array<{ __typename?: 'ShowAdminThemes', author: string, author_url: string, created: number, default: boolean, id: number, name: string, protected: boolean, support_url?: string | null, version?: string | null, version_code?: number | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Admin_Core_Themes__ShowQuery = { __typename?: 'Query', admin__core_themes__show: { __typename?: 'ShowAdminThemesObj', edges: Array<{ __typename?: 'ShowAdminThemes', author: string, author_url?: string | null, created: number, default: boolean, id: number, name: string, protected: boolean, support_url: string, version?: string | null, version_code?: number | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1633,7 +1639,7 @@ export type Core_Members__ProfilesQuery = { __typename?: 'Query', core_members__
 export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', theme_id?: number | null, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, rebuild_required: { __typename?: 'RebuildRequiredObj', themes: boolean, langs: boolean, plugins: boolean } }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string }> }, core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, position: number, external: boolean, href: string, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
+export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', theme_id?: number | null, plugin_default: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, rebuild_required: { __typename?: 'RebuildRequiredObj', themes: boolean, langs: boolean, plugins: boolean } }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string }> }, core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, position: number, external: boolean, href: string, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
 export type Admin__Forum_Forums__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -1861,7 +1867,7 @@ export const Admin__Core_Nav__Edit = gql`
 }
     `;
 export const Admin__Core_Plugins__Create = gql`
-    mutation Admin__core_plugins__create($author: String!, $authorUrl: String!, $code: String!, $name: String!, $supportUrl: String!, $description: String) {
+    mutation Admin__core_plugins__create($author: String!, $authorUrl: String, $code: String!, $name: String!, $supportUrl: String!, $description: String) {
   admin__core_plugins__create(
     author: $author
     author_url: $authorUrl
@@ -1889,7 +1895,7 @@ export const Admin__Core_Plugins__Download = gql`
 }
     `;
 export const Admin__Core_Plugins__Edit = gql`
-    mutation Admin__core_plugins__edit($author: String!, $authorUrl: String!, $code: String!, $name: String!, $supportUrl: String!, $description: String) {
+    mutation Admin__core_plugins__edit($author: String!, $authorUrl: String, $code: String!, $name: String!, $supportUrl: String!, $description: String, $default: Boolean, $enabled: Boolean) {
   admin__core_plugins__edit(
     author: $author
     author_url: $authorUrl
@@ -1897,6 +1903,8 @@ export const Admin__Core_Plugins__Edit = gql`
     name: $name
     support_url: $supportUrl
     description: $description
+    default: $default
+    enabled: $enabled
   ) {
     id
     name
@@ -1924,7 +1932,7 @@ export const Admin_Settings__General__Edit = gql`
 }
     `;
 export const Admin__Core_Themes__Create = gql`
-    mutation Admin__core_themes__create($author: String!, $authorUrl: String!, $name: String!, $supportUrl: String!) {
+    mutation Admin__core_themes__create($author: String!, $authorUrl: String, $name: String!, $supportUrl: String!) {
   admin__core_themes__create(
     author: $author
     author_url: $authorUrl
@@ -1950,7 +1958,7 @@ export const Admin__Core_Themes__Download = gql`
 }
     `;
 export const Admin__Core_Themes__Edit = gql`
-    mutation Admin__core_themes__edit($author: String!, $authorUrl: String!, $id: Int!, $name: String!, $supportUrl: String!) {
+    mutation Admin__core_themes__edit($author: String!, $authorUrl: String, $id: Int!, $name: String!, $supportUrl: String!) {
   admin__core_themes__edit(
     author: $author
     author_url: $authorUrl
@@ -2411,6 +2419,7 @@ export const Admin__Core_Plugins__Download_Check = gql`
     pages
     pages_container
     templates
+    default_page
   }
 }
     `;
@@ -2431,11 +2440,11 @@ export const Admin__Core_Plugins__Show = gql`
       enabled
       id
       name
-      protected
       support_url
       created
       version
       version_code
+      allow_default
     }
     pageInfo {
       count
@@ -2642,6 +2651,7 @@ export const Core_Sessions__Authorization = gql`
       langs
       plugins
     }
+    plugin_default
   }
   core_languages__show {
     edges {

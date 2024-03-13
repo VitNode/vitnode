@@ -1,8 +1,8 @@
 {
   "name": "Forum",
-  "description": "Community forum plugin.",
   "code": "forum",
   "author": "VitNode",
   "author_url": "https://vitnode.com/",
-  "support_url": "https://vitnode.com/"
+  "description": "Community forum plugin.",
+  "allow_default": false
 }

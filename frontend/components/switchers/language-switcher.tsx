@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "@/i18n";
 import { useGlobals } from "@/hooks/core/use-globals";
 import { useSession } from "@/hooks/core/use-session";
+import { CONFIG } from "@/config";
 
 export const LanguageSwitcher = () => {
   const t = useTranslations("core");
@@ -27,7 +28,7 @@ export const LanguageSwitcher = () => {
 
   if (
     enableLocales.length <= 1 ||
-    (rebuild_required.langs && process.env.NODE_ENV !== "development")
+    (rebuild_required.langs && !CONFIG.node_development)
   ) {
     return null;
   }

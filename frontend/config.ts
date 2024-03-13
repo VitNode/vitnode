@@ -8,5 +8,6 @@ export const CONFIG = {
   backend_url: ENVS.backend_url ?? "http://localhost:8080",
   local_storage: {
     editor_skin_tone: "emoji:skin-tone"
-  }
+  },
+  node_development: process.env.NODE_ENV === "development"
 };

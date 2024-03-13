@@ -36,6 +36,7 @@ export class CreateAdminPluginsArgs {
   author: string;
 
   @Transform(TransformString)
-  @Field(() => String)
-  author_url: string;
+  @IsOptional()
+  @Field(() => String, { nullable: true })
+  author_url: string | null;
 }

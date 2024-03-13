@@ -34,9 +34,9 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
         message: t("create.code.invalid")
       }),
     description: zodInput.string,
-    support_url: zodInput.string.url().or(z.literal("")),
+    support_url: zodInput.string.url(),
     author: zodInput.string.min(3).max(100),
-    author_url: zodInput.string.url()
+    author_url: zodInput.string.url().or(z.literal(""))
   });
 
   const form = useForm<z.infer<typeof formSchema>>({

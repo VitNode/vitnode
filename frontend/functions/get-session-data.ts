@@ -17,7 +17,9 @@ export const getSessionData = async () => {
     }
   });
 
-  const theme_id = data.core_sessions__authorization.theme_id ?? 1;
-
-  return { data, theme_id };
+  return {
+    data,
+    theme_id: data.core_sessions__authorization.theme_id ?? 1,
+    default_plugin: data.core_sessions__authorization.plugin_default
+  };
 };

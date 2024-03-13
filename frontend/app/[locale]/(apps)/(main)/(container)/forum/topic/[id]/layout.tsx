@@ -1,12 +1,12 @@
-import { lazy, type LazyExoticComponent, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { notFound } from "next/navigation";
 
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { getTopicData } from "./query";
 import { getConvertTextLang } from "@/hooks/core/use-text-lang";
 import type { ErrorType } from "@/graphql/fetcher";
-import type { ErrorViewProps } from "@/themes/1/core/views/global/error/error-view";
 import { getSessionData } from "@/functions/get-session-data";
+import { ErrorViewSSR } from "@/components/views/error-view-ssr";
 
 interface Props {
   children: ReactNode;
@@ -42,15 +42,7 @@ export default async function Layout({
     const error = e as ErrorType;
 
     if (error.extensions?.code === "ACCESS_DENIED") {
-      const ErrorView: LazyExoticComponent<
-        (props: ErrorViewProps) => JSX.Element
-      > = lazy(() =>
-        import(`@/themes/${theme_id}/core/views/global/error/error-view`).catch(
-          () => import("@/themes/1/core/views/global/error/error-view")
-        )
-      );
-
-      return <ErrorView code="403" />;
+      return <ErrorViewSSR theme_id={theme_id} code="403" />;
     }
 
     notFound();
