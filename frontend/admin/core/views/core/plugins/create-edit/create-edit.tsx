@@ -56,7 +56,7 @@ export const CreateEditPluginAdmin = ({ data }: Props) => {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("create.description.label")}</FormLabel>
+                <FormLabel optional>{t("create.description.label")}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -120,7 +120,7 @@ export const CreateEditPluginAdmin = ({ data }: Props) => {
             name="author_url"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("create.author_url.label")}</FormLabel>
+                <FormLabel optional>{t("create.author_url.label")}</FormLabel>
                 <FormControl>
                   <Input type="url" {...field} />
                 </FormControl>

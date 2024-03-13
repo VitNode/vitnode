@@ -94,9 +94,11 @@ export class UploadAdminPluginsService {
   }
 
   protected async createPluginBackend({
-    config
+    config,
+    upload_new_version
   }: {
     config: ConfigPlugin;
+    upload_new_version?: boolean;
   }): Promise<void> {
     const newPathBackend = pluginPaths({ code: config.code }).backend.root;
     if (fs.existsSync(newPathBackend)) {
@@ -107,7 +109,9 @@ export class UploadAdminPluginsService {
     // Copy temp folder to plugin folder
     const backendSource = join(this.tempPath, "backend");
     await fs.promises.cp(backendSource, newPathBackend, { recursive: true });
-    this.changeFilesService.changeFilesWhenCreate({ code: config.code });
+    if (!upload_new_version) {
+      this.changeFilesService.changeFilesWhenCreate({ code: config.code });
+    }
   }
 
   protected async copyFilesToPluginFolder({
@@ -238,7 +242,7 @@ export class UploadAdminPluginsService {
     }
 
     // Create plugin folder
-    await this.createPluginBackend({ config });
+    await this.createPluginBackend({ config, upload_new_version: !!code });
     await this.createPluginFrontend({ config });
     await this.removeTempFolder();
 

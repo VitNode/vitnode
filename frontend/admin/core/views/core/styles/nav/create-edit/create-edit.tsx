@@ -55,7 +55,7 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("create.description.label")}</FormLabel>
+                <FormLabel optional>{t("create.description.label")}</FormLabel>
                 <FormControl>
                   <TextLanguageInput {...field} />
                 </FormControl>

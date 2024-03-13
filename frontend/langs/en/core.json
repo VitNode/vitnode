@@ -2,6 +2,7 @@
   "core": {
     "reload_page": "Reload Page",
     "clear_cache_and_reload": "Clear Cache and Reload",
+    "optional": "Optional",
     "go_back": "Go Back",
     "open_menu": "Open Menu",
     "loading": "Please wait, loading...",

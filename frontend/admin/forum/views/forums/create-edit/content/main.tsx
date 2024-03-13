@@ -36,7 +36,7 @@ export const MainContentCreateEditFormForumAdmin = () => {
         name="description"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t("desc")}</FormLabel>
+            <FormLabel optional>{t("desc")}</FormLabel>
             <Editor
               id="forum_create"
               onChange={field.onChange}

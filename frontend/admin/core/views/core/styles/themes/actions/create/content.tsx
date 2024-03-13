@@ -80,7 +80,7 @@ export const ContentCreateActionThemeAdmin = () => {
             name="author_url"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("author_url.label")}</FormLabel>
+                <FormLabel optional>{t("author_url.label")}</FormLabel>
                 <FormControl>
                   <Input type="url" {...field} />
                 </FormControl>
