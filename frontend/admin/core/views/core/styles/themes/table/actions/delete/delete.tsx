@@ -1,15 +1,8 @@
-import { Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { Suspense, lazy } from "react";
 
 import { Loader } from "@/components/loader";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogTrigger
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import type { ActionsItemThemesAdminProps } from "../actions";
+import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
+import type { ShowAdminThemes } from "@/graphql/hooks";
 
 const ContentDeleteThemeActionsAdmin = lazy(() =>
   import("./content").then(module => ({
@@ -17,33 +10,17 @@ const ContentDeleteThemeActionsAdmin = lazy(() =>
   }))
 );
 
-export const DeleteThemeActionsAdmin = ({
-  default: isDefault,
-  protected: isProtected,
-  ...props
-}: ActionsItemThemesAdminProps) => {
-  const t = useTranslations("core");
+interface Props extends Pick<ShowAdminThemes, "author" | "id" | "name"> {
+  open: boolean;
+  setOpen: (value: boolean) => void;
+}
 
+export const DeleteThemeActionsAdmin = ({ open, setOpen, ...props }: Props) => {
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button
-          variant="destructiveGhost"
-          size="icon"
-          ariaLabel={t("delete")}
-          disabled={isDefault || isProtected}
-        >
-          <Trash2 />
-        </Button>
-      </AlertDialogTrigger>
-
+    <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
         <Suspense fallback={<Loader />}>
-          <ContentDeleteThemeActionsAdmin
-            default={isDefault}
-            protected={isProtected}
-            {...props}
-          />
+          <ContentDeleteThemeActionsAdmin {...props} />
         </Suspense>
       </AlertDialogContent>
     </AlertDialog>

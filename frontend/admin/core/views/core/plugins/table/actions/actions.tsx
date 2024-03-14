@@ -42,7 +42,7 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
           </Button>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent className="w-40">
+        <DropdownMenuContent className="w-52">
           {CONFIG.node_development && (
             <>
               <DropdownMenuItem onClick={() => setIsOpenEditDialog(true)}>
@@ -90,11 +90,13 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
         </>
       )}
 
-      <DeletePluginActionsAdmin
-        open={isOpenDeleteDialog}
-        setOpen={setIsOpenDeleteDialog}
-        {...props}
-      />
+      {!props.default && (
+        <DeletePluginActionsAdmin
+          open={isOpenDeleteDialog}
+          setOpen={setIsOpenDeleteDialog}
+          {...props}
+        />
+      )}
     </>
   );
 };

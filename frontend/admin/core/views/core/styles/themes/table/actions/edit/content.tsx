@@ -1,6 +1,5 @@
 import { useTranslations } from "next-intl";
 
-import type { ActionsItemThemesAdminProps } from "../actions";
 import { useEditThemeAdmin } from "./hooks/use-edit-theme-admin";
 import {
   DialogFooter,
@@ -19,10 +18,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { CONFIG } from "@/config";
+import type { ShowAdminThemes } from "@/graphql/hooks";
 
-export const ContentEditThemeActionsAdmin = (
-  props: ActionsItemThemesAdminProps
-) => {
+export const ContentEditThemeActionsAdmin = (props: ShowAdminThemes) => {
   const t = useTranslations("admin.core.styles.themes");
   const tCore = useTranslations("core");
   const { form, onSubmit } = useEditThemeAdmin(props);

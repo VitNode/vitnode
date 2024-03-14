@@ -170,6 +170,11 @@
           },
           "upload": {
             "title": "Prześlij motyw",
+            "title_new_version": "Prześlij nową wersję motywu",
+            "success": "Motyw został przesłany.",
+            "errors": {
+              "THEME_VERSION_CODE_LOWER": "Wersja przesłanego motywu jest niższa niż obecna wersja."
+            },
             "submit": "Prześlij"
           }
         },

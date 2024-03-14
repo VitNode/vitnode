@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
 import {
@@ -15,9 +15,12 @@ export const mutationApi = async (formData: FormData) => {
 
     const { data } = await fetcher<
       Admin__Core_Themes__UploadMutation,
-      Admin__Core_Themes__UploadMutationVariables
+      Omit<Admin__Core_Themes__UploadMutationVariables, "file">
     >({
       query: Admin__Core_Themes__Upload,
+      variables: {
+        id: +(formData.get("id") as string)
+      },
       uploads: [
         {
           files,
@@ -26,6 +29,7 @@ export const mutationApi = async (formData: FormData) => {
       ]
     });
 
+    revalidateTag("Core_Sessions__Authorization");
     revalidatePath("/admin/core/styles/themes", "page");
 
     return { data };

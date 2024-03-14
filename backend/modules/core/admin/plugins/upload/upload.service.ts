@@ -34,6 +34,11 @@ export class UploadAdminPluginsService {
     this.tempFolderName
   );
 
+  protected async removeTempFolder(): Promise<void> {
+    // Delete temp folder
+    await fs.promises.rm(this.tempPath, { recursive: true });
+  }
+
   protected async getPluginConfig({
     tgz
   }: {
@@ -72,6 +77,7 @@ export class UploadAdminPluginsService {
       !config.code ||
       !config.support_url
     ) {
+      await this.removeTempFolder();
       throw new CustomError({
         code: "PLUGIN_CONFIG_VARIABLES_NOT_FOUND",
         message: "Plugin config variables not found"
@@ -198,11 +204,6 @@ export class UploadAdminPluginsService {
 
       return this.copyFilesToPluginFolder({ source, destination });
     });
-  }
-
-  protected async removeTempFolder(): Promise<void> {
-    // Delete temp folder
-    await fs.promises.rm(this.tempPath, { recursive: true });
   }
 
   async upload({

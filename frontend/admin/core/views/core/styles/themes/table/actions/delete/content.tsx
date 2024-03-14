@@ -9,14 +9,14 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { SubmitContentDeleteThemeActionsAdmin } from "./submit";
-import type { ActionsItemThemesAdminProps } from "../actions";
 import { useDeleteThemeAdmin } from "./hooks/use-delete-theme-admin";
+import type { ShowAdminThemes } from "@/graphql/hooks";
 
 export const ContentDeleteThemeActionsAdmin = ({
   author,
   id,
   name
-}: ActionsItemThemesAdminProps) => {
+}: Pick<ShowAdminThemes, "author" | "id" | "name">) => {
   const t = useTranslations("admin.core.styles.themes.delete");
   const tCore = useTranslations("core");
   const { onSubmit } = useDeleteThemeAdmin({ name, id });

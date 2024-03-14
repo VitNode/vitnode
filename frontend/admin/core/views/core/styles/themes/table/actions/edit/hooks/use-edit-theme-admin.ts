@@ -8,8 +8,7 @@ import { useDialog } from "@/components/ui/dialog";
 import { mutationApi } from "./mutation-api";
 import { usePathname, useRouter } from "@/i18n";
 import { zodInput } from "@/functions/zod";
-
-import type { ActionsItemThemesAdminProps } from "../../actions";
+import type { ShowAdminThemes } from "@/graphql/hooks";
 
 export const useEditThemeAdmin = ({
   author,
@@ -17,7 +16,7 @@ export const useEditThemeAdmin = ({
   id,
   name,
   support_url
-}: ActionsItemThemesAdminProps) => {
+}: ShowAdminThemes) => {
   const t = useTranslations("admin.core.styles.themes.edit");
   const tCore = useTranslations("core");
   const formSchema = z.object({
