@@ -1,5 +1,5 @@
-import { Callout } from 'nextra/components';
-import { FileTree } from 'nextra/components';
+import { Callout } from "nextra/components";
+import { FileTree } from "nextra/components";
 
 # Themes
 
@@ -25,3 +25,21 @@ When you're created a theme VitNode will clone files form the default theme.
     </FileTree.Folder>
   </FileTree.Folder>
 </FileTree>
+
+## Exclude from update
+
+VitNode has own update system for templates in themes. If you want to exclude from update just add to the top of the file `// ! no-replace`.
+
+```tsx
+// ! no-replace
+
+import type { ReactNode } from "react";
+
+interface Props {
+  children: ReactNode;
+}
+
+export default function Layout({ children }: Props) {
+  return <main className="flex-grow">{children}</main>;
+}
+```

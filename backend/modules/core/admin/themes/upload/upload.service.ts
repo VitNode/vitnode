@@ -3,10 +3,12 @@ import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
+import { eq } from "drizzle-orm";
 
 import { UploadAdminThemesArgs } from "./dto/upload.args";
 import { ConfigTheme } from "../themes.module";
 import { ShowAdminThemes } from "../show/dto/show.obj";
+import { ChangeTemplatesAdminThemesService } from "../change_templates.service";
 
 import { DatabaseService } from "@/modules/database/database.service";
 import { generateRandomString } from "@/functions/generate-random-string";
@@ -17,8 +19,10 @@ import { FileUpload } from "@/utils/graphql-upload/Upload";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 
 @Injectable()
-export class UploadAdminThemesService {
-  constructor(private databaseService: DatabaseService) {}
+export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService {
+  constructor(private databaseService: DatabaseService) {
+    super();
+  }
 
   protected path: string = join(process.cwd(), "..", "frontend", "themes");
   protected tempPath: string = join(
@@ -80,6 +84,10 @@ export class UploadAdminThemesService {
   }
 
   async upload({ file, id }: UploadAdminThemesArgs): Promise<ShowAdminThemes> {
+    const tgz = await file;
+    const config = await this.getThemeConfig({ tgz });
+
+    // Update existing theme
     if (id) {
       const theme = await this.databaseService.db.query.core_themes.findFirst({
         where: (table, { eq }) => eq(table.id, id)
@@ -97,10 +105,38 @@ export class UploadAdminThemesService {
           message: "Theme is protected and cannot be updated"
         });
       }
-    }
 
-    const tgz = await file;
-    const config = await this.getThemeConfig({ tgz });
+      if (config.version_code < theme.version_code) {
+        await this.deleteTempFolder();
+        throw new CustomError({
+          code: "THEME_VERSION_CODE_LOWER",
+          message: "Version code is lower than the current version"
+        });
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { name, ...rest } = config;
+
+      const themesUpdate = await this.databaseService.db
+        .update(core_themes)
+        .set({
+          ...rest
+        })
+        .where(eq(core_themes.id, id))
+        .returning();
+
+      // Copy from temp to frontend
+      await this.changeTemplates({
+        tempPath: this.tempPath,
+        destinationPath: this.path,
+        theme_id: theme.id
+      });
+
+      await this.deleteTempFolder();
+      const themeUpdate = themesUpdate[0];
+
+      return themeUpdate;
+    }
 
     // Save theme to database
     const themes = await this.databaseService.db
@@ -134,6 +170,7 @@ export class UploadAdminThemesService {
     if (!fs.existsSync(destination)) {
       await fs.promises.mkdir(destination);
     } else {
+      await this.deleteTempFolder();
       throw new CustomError({
         code: "THEME_FOLDER_EXISTS",
         message: `Theme folder already exists: ${destination}`
@@ -151,7 +188,6 @@ export class UploadAdminThemesService {
       });
     }
 
-    // Delete temp folder
     await this.deleteTempFolder();
 
     return theme;

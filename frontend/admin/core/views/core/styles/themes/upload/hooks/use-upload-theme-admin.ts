@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { mutationApi } from "./mutation-api";
 import { useDialog } from "@/components/ui/dialog";
 import type { UploadThemeAdminProps } from "../upload";
+import type { ErrorType } from "@/graphql/fetcher";
 
 export const useUploadThemeAdmin = ({ data }: UploadThemeAdminProps) => {
   const t = useTranslations("admin.core.styles.themes.upload");
@@ -31,7 +32,17 @@ export const useUploadThemeAdmin = ({ data }: UploadThemeAdminProps) => {
     }
     const mutation = await mutationApi(formData);
 
-    if (mutation.error || !mutation.data) {
+    const error = mutation.error as ErrorType | undefined;
+
+    if (error?.extensions?.code === "THEME_VERSION_CODE_LOWER") {
+      form.setError("file", {
+        message: t(`errors.${error?.extensions?.code}`)
+      });
+
+      return;
+    }
+
+    if (error || !mutation.data) {
       toast.error(tCore("errors.title"), {
         description: tCore("errors.internal_server_error")
       });
