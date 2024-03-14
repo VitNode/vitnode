@@ -58,7 +58,8 @@
           "code": {
             "label": "Kod",
             "desc": "Musi być unikalny. Min 3-50 znaków. Dozwolone znaki: a-z, 0-9, -",
-            "invalid": "Możesz użyć tylko znaków a-z, 0-9, -"
+            "invalid": "Możesz użyć tylko znaków a-z, 0-9, -",
+            "exists": "Wtyczka o takim kodzie już istnieje."
           },
           "description": {
             "label": "Opis"

@@ -128,8 +128,7 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
       // Copy from temp to frontend
       await this.changeTemplates({
         tempPath: this.tempPath,
-        destinationPath: this.path,
-        theme_id: theme.id
+        destinationPath: join(this.path, `${theme.id}`)
       });
 
       await this.deleteTempFolder();
