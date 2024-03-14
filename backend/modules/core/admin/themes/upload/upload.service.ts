@@ -21,8 +21,12 @@ export class UploadAdminThemesService {
   constructor(private databaseService: DatabaseService) {}
 
   protected path: string = join(process.cwd(), "..", "frontend", "themes");
-  protected tempFolderName: string = `${generateRandomString(5)}${currentDate()}`;
-  protected tempPath: string = join(process.cwd(), "temp", "themes");
+  protected tempPath: string = join(
+    process.cwd(),
+    "temp",
+    "themes",
+    `${generateRandomString(5)}${currentDate()}`
+  );
 
   protected async getThemeConfig({
     tgz
@@ -30,8 +34,7 @@ export class UploadAdminThemesService {
     tgz: FileUpload;
   }): Promise<ConfigTheme> {
     // Create folders
-    const path = join(this.tempPath, this.tempFolderName);
-    await fs.promises.mkdir(path, { recursive: true });
+    await fs.promises.mkdir(this.tempPath, { recursive: true });
 
     // Upload to temp folder
     await new Promise((resolve, reject) => {
@@ -39,7 +42,7 @@ export class UploadAdminThemesService {
         .createReadStream()
         .pipe(
           tar.x({
-            cwd: path
+            cwd: this.tempPath
           })
         )
         .on("error", err => {
@@ -50,7 +53,7 @@ export class UploadAdminThemesService {
         });
     });
 
-    const pathThemeJSON = join(path, "theme.json");
+    const pathThemeJSON = join(this.tempPath, "theme.json");
     const themeFile = await fs.promises.readFile(pathThemeJSON, "utf8");
     const config: ConfigTheme = JSON.parse(themeFile);
 
@@ -69,10 +72,11 @@ export class UploadAdminThemesService {
       });
     }
 
-    // Delete temp folder
-    await fs.promises.rm(path, { recursive: true });
-
     return config;
+  }
+
+  protected async deleteTempFolder(): Promise<void> {
+    await fs.promises.rm(this.tempPath, { recursive: true });
   }
 
   async upload({ file, id }: UploadAdminThemesArgs): Promise<ShowAdminThemes> {
@@ -82,10 +86,12 @@ export class UploadAdminThemesService {
       });
 
       if (!theme) {
+        await this.deleteTempFolder();
         throw new NotFoundError("Theme");
       }
 
       if (theme.protected) {
+        await this.deleteTempFolder();
         throw new CustomError({
           code: "THEME_PROTECTED",
           message: "Theme is protected and cannot be updated"
@@ -112,41 +118,41 @@ export class UploadAdminThemesService {
 
     const theme = themes[0];
 
-    // Create theme folder in frontend
-    const newPath = join(this.path, `${theme.id}`);
-    await fs.promises.mkdir(newPath);
+    // Update CSS
+    const pathSCSSFile = join(this.tempPath, "core", "layout", "global.scss");
+    const pathSCSSFileContent = await fs.promises.readFile(
+      pathSCSSFile,
+      "utf8"
+    );
+    await fs.promises.writeFile(
+      pathSCSSFile,
+      pathSCSSFileContent.replace(/\.theme_\d+/g, `.theme_${theme.id}`)
+    );
 
-    // Unpack theme to temp folder
-    await new Promise((resolve, reject) => {
-      tgz
-        .createReadStream()
-        .pipe(
-          tar.x({
-            cwd: newPath
-          })
-        )
-        .on("error", err => {
-          reject(err.message);
-        })
-        .on("finish", async () => {
-          // Update the global.scss file
-          try {
-            const pathSCSSFile = join(newPath, "core", "layout", "global.scss");
-            const pathSCSSFileContent = await fs.promises.readFile(
-              pathSCSSFile,
-              "utf8"
-            );
-            await fs.promises.writeFile(
-              pathSCSSFile,
-              pathSCSSFileContent.replace(/\.theme_\d+/g, `.theme_${theme.id}`)
-            );
-          } catch (error) {
-            reject(error);
-          }
+    // Copy from temp to frontend
+    const destination = join(this.path, `${theme.id}`);
+    if (!fs.existsSync(destination)) {
+      await fs.promises.mkdir(destination);
+    } else {
+      throw new CustomError({
+        code: "THEME_FOLDER_EXISTS",
+        message: `Theme folder already exists: ${destination}`
+      });
+    }
 
-          resolve("success");
-        });
-    });
+    try {
+      await fs.promises.cp(this.tempPath, destination, {
+        recursive: true
+      });
+    } catch (error) {
+      throw new CustomError({
+        code: "COPY_FILES_TO_THEME_FOLDER_ERROR",
+        message: `Source: ${this.tempPath}, Destination: ${destination}`
+      });
+    }
+
+    // Delete temp folder
+    await this.deleteTempFolder();
 
     return theme;
   }
