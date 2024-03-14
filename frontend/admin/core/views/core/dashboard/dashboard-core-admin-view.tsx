@@ -5,6 +5,7 @@ import { HeaderContent } from "@/components/header-content/header-content";
 import { Badge } from "@/components/ui/badge";
 import { RebuildRequiredAdmin } from "@/admin/core/global/rebuild-required";
 import { CONFIG } from "@/config";
+import { SignUpStatsDashboardCoreAdmin } from "./sign-up-stats";
 
 export const DashboardCoreAdminView = () => {
   const t = useTranslations("core");
@@ -30,7 +31,9 @@ export const DashboardCoreAdminView = () => {
 
       <RebuildRequiredAdmin />
 
-      <div>Not implemented!</div>
+      <div className="relative h-[20rem] max-w-full">
+        <SignUpStatsDashboardCoreAdmin />
+      </div>
     </>
   );
 };

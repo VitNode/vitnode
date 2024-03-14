@@ -34,6 +34,15 @@
     "checked_number": "Checked: {count}",
     "prev_page": "Previous Page",
     "home": "Home",
+    "weeks": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    },
     "colors": {
       "none": "No Color",
       "remove": "Remove color"
