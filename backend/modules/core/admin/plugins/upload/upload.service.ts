@@ -17,13 +17,16 @@ import { generateRandomString } from "@/functions/generate-random-string";
 import { currentDate } from "@/functions/date";
 import { CustomError } from "@/utils/errors/CustomError";
 import { core_plugins } from "../../database/schema/plugins";
+import { ChangeTemplatesAdminThemesService } from "../../themes/change_templates.service";
 
 @Injectable()
-export class UploadAdminPluginsService {
+export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService {
   constructor(
     private databaseService: DatabaseService,
     private changeFilesService: ChangeFilesAdminPluginsService
-  ) {}
+  ) {
+    super();
+  }
 
   protected path: string = join(process.cwd());
   protected tempFolderName: string = `${generateRandomString(5)}${currentDate()}`;
@@ -70,13 +73,7 @@ export class UploadAdminPluginsService {
       JSON.parse(pluginFile);
 
     // Check if variables exists
-    if (
-      !config.name ||
-      !config.author ||
-      !config.author_url ||
-      !config.code ||
-      !config.support_url
-    ) {
+    if (!config.name || !config.author || !config.code || !config.support_url) {
       await this.removeTempFolder();
       throw new CustomError({
         code: "PLUGIN_CONFIG_VARIABLES_NOT_FOUND",
@@ -108,7 +105,7 @@ export class UploadAdminPluginsService {
   }): Promise<void> {
     const newPathBackend = pluginPaths({ code: config.code }).backend.root;
     if (fs.existsSync(newPathBackend)) {
-      await fs.promises.rmdir(newPathBackend, { recursive: true });
+      await fs.promises.rm(newPathBackend, { recursive: true });
     }
     await fs.promises.mkdir(newPathBackend);
 
@@ -171,17 +168,17 @@ export class UploadAdminPluginsService {
     });
     await Promise.all(
       themes.map(async ({ id }) => {
-        const source = join(this.tempPath, "frontend", "templates");
-        const destination = join(
-          process.cwd(),
-          "..",
-          "frontend",
-          "themes",
-          id.toString(),
-          config.code
-        );
-
-        return this.copyFilesToPluginFolder({ source, destination });
+        await this.changeTemplates({
+          tempPath: join(this.tempPath, "frontend", "templates"),
+          destinationPath: join(
+            process.cwd(),
+            "..",
+            "frontend",
+            "themes",
+            id.toString(),
+            config.code
+          )
+        });
       })
     );
 

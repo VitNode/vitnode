@@ -58,7 +58,8 @@
           "code": {
             "label": "Code",
             "desc": "Must be unique. Min 3-50 characters. Allowed characters: a-z, 0-9, -",
-            "invalid": "You can use only a-z, 0-9, -"
+            "invalid": "You can use only a-z, 0-9, -",
+            "exists": "Plugin with this code already exists."
           },
           "description": {
             "label": "Description"

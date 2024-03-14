@@ -11,6 +11,7 @@ import { usePathname, useRouter } from "@/i18n";
 import { zodInput } from "@/functions/zod";
 import type { ShowAdminPlugins } from "@/graphql/hooks";
 import { mutationEditApi } from "./mutation-edit-api";
+import type { ErrorType } from "@/graphql/fetcher";
 
 export const codePluginRegex = /^[a-z0-9-]*$/;
 
@@ -52,7 +53,7 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    let error = false;
+    let error: ErrorType | undefined;
 
     if (data) {
       const mutation = await mutationEditApi({
@@ -65,7 +66,7 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
       });
 
       if (mutation.error) {
-        error = true;
+        error = mutation.error as ErrorType | undefined;
       }
     } else {
       const mutation = await mutationCreateApi({
@@ -78,8 +79,16 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
       });
 
       if (mutation.error) {
-        error = true;
+        error = mutation.error as ErrorType | undefined;
       }
+    }
+
+    if (error?.extensions?.code === "PLUGIN_ALREADY_EXISTS") {
+      form.setError("code", {
+        message: t("create.code.exists")
+      });
+
+      return;
     }
 
     if (error) {

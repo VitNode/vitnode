@@ -6,12 +6,10 @@ import { CustomError } from "@/utils/errors/CustomError";
 interface Args {
   destinationPath: string;
   tempPath: string;
-  theme_id: number;
 }
 
 export class ChangeTemplatesAdminThemesService {
-  async changeTemplates({ destinationPath, tempPath, theme_id }: Args) {
-    const destination = join(destinationPath, `${theme_id}`);
+  async changeTemplates({ destinationPath, tempPath }: Args) {
     try {
       const files = (
         await fs.promises.readdir(tempPath, {
@@ -22,10 +20,10 @@ export class ChangeTemplatesAdminThemesService {
       await Promise.all(
         files.map(async file => {
           // If file does not exist, copy
-          if (!fs.existsSync(join(destination, file))) {
+          if (!fs.existsSync(join(destinationPath, file))) {
             await fs.promises.cp(
               join(tempPath, file),
-              join(destination, file),
+              join(destinationPath, file),
               {
                 recursive: true
               }
@@ -34,15 +32,22 @@ export class ChangeTemplatesAdminThemesService {
             return;
           }
 
-          const fileContent = fs.readFileSync(join(destination, file), "utf8");
+          const fileContent = fs.readFileSync(
+            join(destinationPath, file),
+            "utf8"
+          );
 
           if (fileContent.includes("// ! no-replace")) {
             return;
           }
 
-          await fs.promises.cp(join(tempPath, file), join(destination, file), {
-            recursive: true
-          });
+          await fs.promises.cp(
+            join(tempPath, file),
+            join(destinationPath, file),
+            {
+              recursive: true
+            }
+          );
         })
       );
     } catch (error) {
