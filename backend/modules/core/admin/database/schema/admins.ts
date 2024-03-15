@@ -59,8 +59,8 @@ export const core_admin_sessions = pgTable(
       .references(() => core_users.id, {
         onDelete: "cascade"
       }),
-    last_seen: integer("last_seen").notNull(),
-    expires: integer("expires").notNull(),
+    last_seen: timestamp("last_seen").notNull().defaultNow(),
+    expires: timestamp("expires").notNull(),
     device_id: integer("device_id")
       .references(() => core_sessions_known_devices.id, {
         onDelete: "cascade"

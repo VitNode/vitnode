@@ -19,11 +19,11 @@ export class ShowCoreSessionDevices {
   @Field(() => String)
   login_token: string;
 
-  @Field(() => Int)
-  last_seen: number;
+  @Field(() => Date)
+  last_seen: Date;
 
-  @Field(() => Int)
-  expires: number;
+  @Field(() => Date)
+  expires: Date;
 
   @Field(() => Int)
   device_id: number;

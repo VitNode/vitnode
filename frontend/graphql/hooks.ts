@@ -954,8 +954,8 @@ export type ShowCoreNavObj = {
 export type ShowCoreSessionDevices = {
   __typename?: 'ShowCoreSessionDevices';
   device_id: Scalars['Int']['output'];
-  expires: Scalars['Int']['output'];
-  last_seen: Scalars['Int']['output'];
+  expires: Scalars['DateTime']['output'];
+  last_seen: Scalars['DateTime']['output'];
   login_token: Scalars['String']['output'];
   user_id: Scalars['Int']['output'];
 };

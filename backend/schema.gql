@@ -521,8 +521,8 @@ type ShowCoreNavObj {
 
 type ShowCoreSessionDevices {
   device_id: Int!
-  expires: Int!
-  last_seen: Int!
+  expires: DateTime!
+  last_seen: DateTime!
   login_token: String!
   user_id: Int!
 }

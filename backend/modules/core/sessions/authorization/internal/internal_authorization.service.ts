@@ -5,7 +5,7 @@ import { eq } from "drizzle-orm";
 
 import { Ctx } from "@/types/context.type";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
-import { convertUnixTime, currentDate } from "@/functions/date";
+import { currentDate } from "@/functions/date";
 import { DatabaseService } from "@/modules/database/database.service";
 import { User } from "@/utils/decorators/user.decorator";
 import { core_sessions_known_devices } from "@/modules/core/admin/database/schema/sessions";
@@ -70,11 +70,16 @@ export class InternalAuthorizationCoreSessionsService {
     await this.databaseService.db
       .update(core_sessions_known_devices)
       .set({
-        last_seen: currentDate()
+        last_seen: new Date()
       })
       .where(eq(core_sessions_known_devices.id, know_device_id));
 
     // Update sign in date
+    const expires = new Date();
+    const expiresIn: number = this.configService.getOrThrow(
+      "cookies.known_device.expiresIn"
+    );
+    expires.setDate(expires.getDate() + expiresIn);
     res.cookie(
       this.configService.getOrThrow("cookies.known_device.name"),
       know_device_id,
@@ -83,12 +88,7 @@ export class InternalAuthorizationCoreSessionsService {
         secure: true,
         domain: this.configService.getOrThrow("cookies.domain"),
         path: "/",
-        expires: new Date(
-          convertUnixTime(
-            currentDate() +
-              this.configService.getOrThrow("cookies.known_device.expiresIn")
-          )
-        ),
+        expires,
         sameSite: "none"
       }
     );

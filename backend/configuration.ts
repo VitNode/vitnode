@@ -6,21 +6,21 @@ export const configuration = () => {
     cookies: {
       domain: process.env.FRONTEND_URL ? process.env.FRONTEND_URL : "localhost",
       login_token: {
-        expiresIn: 60 * 60 * 24 * 7, // 7 days
-        expiresInRemember: 60 * 60 * 24 * 90, // 90 days
+        expiresIn: 7, // 7 days
+        expiresInRemember: 90, // 90 days
         name: "vitnode-login-token",
         admin: {
           name: "vitnode-login-token-admin",
-          expiresIn: 60 * 60 * 24 // 1 day
+          expiresIn: 1 // 1 day
         }
       },
       known_device: {
         name: "vitnode-device",
-        expiresIn: 60 * 60 * 24 * 365 // 1 year
+        expiresIn: 365 // 1 year
       },
       theme_id: {
         name: "vitnode-theme-id",
-        expiresIn: 60 * 60 * 24 * 365 // 1 year
+        expiresIn: 365 // 1 year
       }
     }
   };
