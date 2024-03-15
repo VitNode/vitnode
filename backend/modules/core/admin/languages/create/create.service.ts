@@ -9,7 +9,6 @@ import { DatabaseService } from "@/modules/database/database.service";
 import { ShowCoreLanguages } from "@/modules/core/languages/show/dto/show.obj";
 import { CustomError } from "@/utils/errors/CustomError";
 import { core_languages } from "../../database/schema/languages";
-import { currentDate } from "@/functions/date";
 import { setRebuildRequired } from "@/functions/config/rebuild-required";
 
 @Injectable()
@@ -41,8 +40,7 @@ export class CreateAdminCoreLanguageService {
         timezone,
         default: false,
         protected: false,
-        enabled: true,
-        created: currentDate()
+        enabled: true
       })
       .returning();
 

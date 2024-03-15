@@ -4,7 +4,6 @@ import { CreateForumForumsArgs } from "./dto/create.args";
 import { CreateForumForumsObj } from "./dto/create.obj";
 
 import { CustomError } from "@/utils/errors/CustomError";
-import { currentDate } from "@/functions/date";
 import { DatabaseService } from "@/modules/database/database.service";
 import {
   forum_forums,
@@ -51,7 +50,6 @@ export class CreateForumForumsService {
         position: theMostHighestPosition
           ? theMostHighestPosition.position + 1
           : 0,
-        created: currentDate(),
         parent_id,
         can_all_create: permissions.can_all_create,
         can_all_read: permissions.can_all_read,

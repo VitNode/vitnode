@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
 
-import { currentDate } from "@/functions/date";
 import { Ctx } from "@/types/context.type";
 import { User } from "@/utils/decorators/user.decorator";
 import { LockToggleForumTopicsArgs } from "@/modules/forum/topics/actions/lock_unlock/dto/lock_toggle.args";
@@ -59,7 +58,6 @@ export class LockToggleForumTopicsService {
     const log = await this.databaseService.db
       .insert(forum_topics_logs)
       .values({
-        created: currentDate(),
         topic_id: topic.id,
         user_id,
         action: topic.locked ? "unlock" : "lock",
@@ -69,7 +67,6 @@ export class LockToggleForumTopicsService {
 
     // Add log to timeline
     await this.databaseService.db.insert(forum_posts_timeline).values({
-      created: currentDate(),
       topic_log_id: log[0].id,
       topic_id: id
     });

@@ -7,7 +7,6 @@ import { ChangeFilesAdminPluginsService } from "../helpers/files/change/change.s
 
 import { DatabaseService } from "@/modules/database/database.service";
 import { CustomError } from "@/utils/errors/CustomError";
-import { currentDate } from "@/functions/date";
 import { core_plugins } from "../../database/schema/plugins";
 import { setRebuildRequired } from "@/functions/config/rebuild-required";
 
@@ -58,8 +57,7 @@ export class CreateAdminPluginsService {
         name,
         support_url,
         author,
-        author_url,
-        created: currentDate()
+        author_url
       })
       .returning();
 

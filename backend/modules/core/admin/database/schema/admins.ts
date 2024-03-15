@@ -4,6 +4,7 @@ import {
   integer,
   pgTable,
   serial,
+  timestamp,
   varchar
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
@@ -23,8 +24,8 @@ export const core_admin_permissions = pgTable(
       onDelete: "cascade"
     }),
     unrestricted: boolean("unrestricted").notNull().default(false),
-    created: integer("created").notNull(),
-    updated: integer("updated").notNull(),
+    created: timestamp("created").notNull().defaultNow(),
+    updated: timestamp("updated").notNull().defaultNow(),
     protected: boolean("protected").notNull().default(false)
   },
   table => ({

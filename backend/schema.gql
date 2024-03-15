@@ -56,7 +56,7 @@ type ChildrenShowForumForums {
   _count: ShowForumForumsCounts!
   breadcrumbs: [BreadcrumbsForumForums!]!
   children: [LastChildShowForumForums!]!
-  created: Int!
+  created: DateTime!
   description: [TextLanguage!]!
   id: Int!
   last_posts: LastPostsShowForumForumsObj!
@@ -68,7 +68,7 @@ type CreateForumForumsObj {
   _count: ShowForumForumsCounts!
   breadcrumbs: [BreadcrumbsForumForums!]!
   children: [ChildrenShowForumForums!]!
-  created: Int!
+  created: DateTime!
   description: [TextLanguage!]!
   id: Int!
   last_posts: LastPostsShowForumForumsObj!
@@ -107,7 +107,7 @@ type GroupsPermissionsForumForums {
 }
 
 type LastChildShowForumForums {
-  created: Int!
+  created: DateTime!
   description: [TextLanguage!]!
   id: Int!
   name: [TextLanguage!]!
@@ -115,7 +115,7 @@ type LastChildShowForumForums {
 }
 
 type LastPostsShowForumForums {
-  created: Int!
+  created: DateTime!
   id: Int!
   topic: TopicLastPostsShowForumForums!
   user: User!
@@ -351,7 +351,7 @@ type ShowAdminPlugins {
   author: String!
   author_url: String
   code: String!
-  created: Int!
+  created: DateTime!
   default: Boolean!
   description: String
   enabled: Boolean!
@@ -377,11 +377,11 @@ enum ShowAdminPluginsSortingColumnEnum {
 }
 
 type ShowAdminStaffAdministrators {
-  created: Int!
+  created: DateTime!
   id: Int!
   protected: Boolean!
   unrestricted: Boolean!
-  updated: Int!
+  updated: DateTime!
   user_or_group: UserOrGroupCoreStaffUnion!
 }
 
@@ -400,11 +400,11 @@ enum ShowAdminStaffAdministratorsSortingColumnEnum {
 }
 
 type ShowAdminStaffModerators {
-  created: Int!
+  created: DateTime!
   id: Int!
   protected: Boolean!
   unrestricted: Boolean!
-  updated: Int!
+  updated: DateTime!
   user_or_group: UserOrGroupCoreStaffUnion!
 }
 
@@ -425,7 +425,7 @@ enum ShowAdminStaffModeratorsSortingColumnEnum {
 type ShowAdminThemes {
   author: String!
   author_url: String
-  created: Int!
+  created: DateTime!
   default: Boolean!
   id: Int!
   name: String!
@@ -542,7 +542,7 @@ type ShowForumForumsAdmin {
   _count: ShowForumForumsCounts!
   breadcrumbs: [BreadcrumbsForumForums!]!
   children: [ChildrenShowForumForums!]!
-  created: Int!
+  created: DateTime!
   description: [TextLanguage!]!
   id: Int!
   last_posts: LastPostsShowForumForumsObj!
@@ -572,7 +572,7 @@ type ShowForumForumsWithChildren {
   _count: ShowForumForumsCounts!
   breadcrumbs: [BreadcrumbsForumForums!]!
   children: [ChildrenShowForumForums!]!
-  created: Int!
+  created: DateTime!
   description: [TextLanguage!]!
   id: Int!
   last_posts: LastPostsShowForumForumsObj!
@@ -587,7 +587,7 @@ type ShowGeneralAdminSettingsObj {
 
 type ShowPostsForums {
   content: [TextLanguage!]!
-  created: Int!
+  created: DateTime!
   id: Int!
   post_id: Int!
   user: User!
@@ -596,7 +596,7 @@ type ShowPostsForums {
 type ShowPostsForumsMetaTags {
   action: TopicActions!
   action_id: Int!
-  created: Int!
+  created: DateTime!
   id: Int!
   user: User!
 }
@@ -615,7 +615,7 @@ enum ShowPostsForumsSortingEnum {
 type ShowTopicsForums {
   breadcrumbs: [BreadcrumbsForumForums!]!
   content: [TextLanguage!]!
-  created: Int!
+  created: DateTime!
   id: Int!
   locked: Boolean!
   permissions: PermissionsTopicForums!

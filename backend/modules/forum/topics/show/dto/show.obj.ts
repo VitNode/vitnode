@@ -34,8 +34,8 @@ export class ShowTopicsForums {
   @Field(() => [TextLanguage])
   content: TextLanguage[];
 
-  @Field(() => Int)
-  created: number;
+  @Field(() => Date)
+  created: Date;
 
   @Field(() => Boolean)
   locked: boolean;
