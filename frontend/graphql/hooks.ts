@@ -879,8 +879,10 @@ export type ShowCoreLanguages = {
   default: Scalars['Boolean']['output'];
   enabled: Scalars['Boolean']['output'];
   id: Scalars['Int']['output'];
+  locale: Scalars['String']['output'];
   name: Scalars['String']['output'];
   protected: Scalars['Boolean']['output'];
+  time_24: Scalars['Boolean']['output'];
   timezone: Scalars['String']['output'];
 };
 
@@ -1626,7 +1628,7 @@ export type Admin_Core_Themes__ShowQuery = { __typename?: 'Query', admin__core_t
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_MiddlewareQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean }> }, core_themes__show: { __typename?: 'ShowCoreThemesObj', edges: Array<{ __typename?: 'ShowCoreThemes', id: number, name: string }> } };
+export type Core_MiddlewareQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean, locale: string, time_24: boolean }> }, core_themes__show: { __typename?: 'ShowCoreThemesObj', edges: Array<{ __typename?: 'ShowCoreThemes', id: number, name: string }> } };
 
 export type Core_Languages__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2563,6 +2565,8 @@ export const Core_Middleware = gql`
       name
       timezone
       enabled
+      locale
+      time_24
     }
   }
   core_themes__show {

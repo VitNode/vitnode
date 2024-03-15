@@ -53,12 +53,15 @@ export class CreateDatabaseAdminInstallService {
         name: "English (USA)",
         default: true,
         protected: true,
-        timezone: "America/New_York"
+        timezone: "America/New_York",
+        locale: "enUS"
       },
       {
         code: "pl",
         name: "Polski (Polish)",
-        timezone: "Europe/Warsaw"
+        timezone: "Europe/Warsaw",
+        time_24: true,
+        locale: "pl"
       }
     ]);
 

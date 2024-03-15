@@ -59,6 +59,22 @@ export const SignUpStatsDashboardCoreAdmin = ({ data }: Props) => {
           legend: {
             display: false
           }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 1
+            },
+            grid: {
+              display: false
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
         }
       }}
       data={{
@@ -66,10 +82,10 @@ export const SignUpStatsDashboardCoreAdmin = ({ data }: Props) => {
         datasets: [
           {
             fill: true,
-            label: "Dataset 2",
             data: labels.map(item => item.value),
             borderColor: `hsl(${primaryColor} )`,
-            backgroundColor: `hsl(${primaryColor} / 20% )`
+            backgroundColor: `hsl(${primaryColor} / 20% )`,
+            borderWidth: 4
           }
         ]
       }}
