@@ -535,7 +535,7 @@ export type Query = {
   __typename?: 'Query';
   admin__core_groups__show: ShowAdminGroupsObj;
   admin__core_members__show: ShowAdminMembersObj;
-  admin__core_members__stats_sign_up: Scalars['String']['output'];
+  admin__core_members__stats_sign_up: Array<SignUpStatsAdminMembers>;
   admin__core_plugins__download_check: CheckDownloadAdminPluginsObj;
   admin__core_plugins__show: ShowAdminPluginsObj;
   admin__core_staff_administrators__show: ShowAdminStaffAdministratorsObj;
@@ -1083,6 +1083,12 @@ export type SignUpCoreMembersObj = {
   newsletter?: Maybe<Scalars['Boolean']['output']>;
 };
 
+export type SignUpStatsAdminMembers = {
+  __typename?: 'SignUpStatsAdminMembers';
+  joined_date: Scalars['String']['output'];
+  users_joined: Scalars['Int']['output'];
+};
+
 export const SortDirectionEnum = {
   asc: 'asc',
   desc: 'desc'
@@ -1518,6 +1524,11 @@ export type Admin__Install__LayoutQueryVariables = Exact<{ [key: string]: never;
 
 
 export type Admin__Install__LayoutQuery = { __typename?: 'Query', admin__install__layout: { __typename?: 'LayoutAdminInstallObj', status: LayoutAdminInstallEnum } };
+
+export type Admin__Core__DashboardQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Admin__Core__DashboardQuery = { __typename?: 'Query', admin__core_members__stats_sign_up: Array<{ __typename?: 'SignUpStatsAdminMembers', joined_date: string, users_joined: number }> };
 
 export type Admin__Core_Groups__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2178,6 +2189,14 @@ export const Admin__Install__Layout = gql`
     query Admin__install__layout {
   admin__install__layout {
     status
+  }
+}
+    `;
+export const Admin__Core__Dashboard = gql`
+    query Admin__core__dashboard {
+  admin__core_members__stats_sign_up {
+    joined_date
+    users_joined
   }
 }
     `;

@@ -13,7 +13,13 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
-export const SignUpStatsDashboardCoreAdmin = () => {
+import type { SignUpStatsAdminMembers } from "@/graphql/hooks";
+
+interface Props {
+  data: SignUpStatsAdminMembers[];
+}
+
+export const SignUpStatsDashboardCoreAdmin = ({ data }: Props) => {
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -29,8 +35,13 @@ export const SignUpStatsDashboardCoreAdmin = () => {
     .map(i => {
       const date = new Date();
       date.setDate(date.getDate() - i);
+      const returnDate = date.toISOString().split("T")[0];
 
-      return date.toISOString().split("T")[0];
+      return {
+        label: returnDate,
+        value:
+          data.find(item => item.joined_date === returnDate)?.users_joined || 0
+      };
     })
     .reverse();
 
@@ -51,12 +62,12 @@ export const SignUpStatsDashboardCoreAdmin = () => {
         }
       }}
       data={{
-        labels,
+        labels: labels.map(item => item.label),
         datasets: [
           {
             fill: true,
             label: "Dataset 2",
-            data: labels.map(() => Math.random() * 100),
+            data: labels.map(item => item.value),
             borderColor: `hsl(${primaryColor} )`,
             backgroundColor: `hsl(${primaryColor} / 20% )`
           }
