@@ -238,7 +238,7 @@ type PermissionsTopicForums {
 type Query {
   admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
   admin__core_members__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
-  admin__core_members__stats_sign_up: String!
+  admin__core_members__stats_sign_up: [SignUpStatsAdminMembers!]!
   admin__core_plugins__download_check(code: String!): CheckDownloadAdminPluginsObj!
   admin__core_plugins__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminPluginsSortByArgs!]): ShowAdminPluginsObj!
   admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
@@ -633,6 +633,11 @@ type SignUpCoreMembersObj {
   group_id: Int!
   name: String!
   newsletter: Boolean
+}
+
+type SignUpStatsAdminMembers {
+  joined_date: String!
+  users_joined: Int!
 }
 
 enum SortDirectionEnum {

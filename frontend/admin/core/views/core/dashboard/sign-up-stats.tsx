@@ -11,12 +11,9 @@ import {
   Filler,
   Legend
 } from "chart.js";
-import { useTranslations } from "next-intl";
 import { Line } from "react-chartjs-2";
 
 export const SignUpStatsDashboardCoreAdmin = () => {
-  const t = useTranslations("core");
-
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -28,15 +25,14 @@ export const SignUpStatsDashboardCoreAdmin = () => {
     Legend
   );
 
-  const labels = [
-    t("weeks.monday"),
-    t("weeks.tuesday"),
-    t("weeks.wednesday"),
-    t("weeks.thursday"),
-    t("weeks.friday"),
-    t("weeks.saturday"),
-    t("weeks.sunday")
-  ];
+  const labels = [...Array(7).keys()]
+    .map(i => {
+      const date = new Date();
+      date.setDate(date.getDate() - i);
+
+      return date.toISOString().split("T")[0];
+    })
+    .reverse();
 
   const primaryColor =
     typeof window !== "undefined"

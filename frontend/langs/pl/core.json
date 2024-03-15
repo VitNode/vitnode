@@ -34,15 +34,6 @@
     "checked_number": "Zaznaczono: {count}",
     "prev_page": "Poprzednia strona",
     "home": "Strona główna",
-    "weeks": {
-      "monday": "Poniedziałek",
-      "tuesday": "Wtorek",
-      "wednesday": "Środa",
-      "thursday": "Czwartek",
-      "friday": "Piątek",
-      "saturday": "Sobota",
-      "sunday": "Niedziela"
-    },
     "colors": {
       "none": "Brak koloru",
       "remove": "Usuń kolor"
