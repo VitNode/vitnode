@@ -2,7 +2,7 @@ import { UseGuards } from "@nestjs/common";
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
 
 import { CreateAdminCoreLanguageService } from "./create.service";
-import { CreateCoreAdminLanguagesArgs } from "./dto/edit.args";
+import { CreateCoreAdminLanguagesArgs } from "./dto/create.args";
 
 import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
 import { ShowCoreLanguages } from "@/modules/core/languages/show/dto/show.obj";

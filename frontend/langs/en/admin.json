@@ -218,22 +218,31 @@
         },
         "actions": {
           "create": {
+            "title": "Create Language",
             "name": {
               "label": "Name",
               "placeholder": "English (USA)"
             },
             "code": {
               "label": "Code",
-              "placeholder": "en"
+              "placeholder": "en",
+              "desc": "This code uses as a language identifier in your URL, like: /en/page"
             },
             "timezone": {
-              "label": "Timezone",
-              "placeholder": "Choose timezone..."
+              "label": "Timezone"
+            },
+            "time_24": {
+              "label": "24h Time Format",
+              "desc": "Shows 24h time format instead of 12h."
+            },
+            "locale": {
+              "label": "Locale"
             },
             "submit": "Create Language",
             "success": "Language has been created."
           },
           "edit": {
+            "title": "Edit Language",
             "submit": "Edit Language",
             "default": {
               "label": "Default",

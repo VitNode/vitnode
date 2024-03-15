@@ -16,4 +16,10 @@ export class CreateCoreAdminLanguagesArgs {
   @Transform(TransformString)
   @Field(() => String)
   timezone: string;
+
+  @Field(() => Boolean)
+  time_24: boolean;
+
+  @Field(() => String)
+  locale: string;
 }

@@ -33,4 +33,10 @@ export class ShowCoreLanguages {
 
   @Field(() => Boolean)
   enabled: boolean;
+
+  @Field(() => Boolean)
+  time_24: boolean;
+
+  @Field(() => String)
+  locale: string;
 }

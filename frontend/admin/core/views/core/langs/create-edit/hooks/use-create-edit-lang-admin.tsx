@@ -23,7 +23,9 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
     code: zodInput.string.min(1),
     name: zodInput.string.min(1),
     timezone: zodInput.string.min(1),
-    default: z.boolean()
+    default: z.boolean(),
+    time_24: z.boolean(),
+    locale: z.string()
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -31,8 +33,10 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
     defaultValues: {
       code: data?.code ?? "",
       name: data?.name ?? "",
-      timezone: data?.timezone ?? "",
-      default: data?.default ?? false
+      timezone: data?.timezone ?? "America/New_York",
+      default: data?.default ?? false,
+      time_24: data?.time_24 ?? false,
+      locale: data?.locale ?? "enUS"
     }
   });
 
@@ -41,14 +45,18 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
     if (data) {
       const mutation = await editMutationApi({
         ...data,
-        ...values
+        ...values,
+        time24: values.time_24
       });
 
       if (mutation.error) {
         error = true;
       }
     } else {
-      const mutation = await createMutationApi(values);
+      const mutation = await createMutationApi({
+        ...values,
+        time24: values.time_24
+      });
 
       if (mutation.error) {
         error = true;
