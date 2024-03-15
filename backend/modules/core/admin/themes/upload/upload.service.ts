@@ -144,7 +144,6 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
         name: config.name,
         version: config.version,
         version_code: config.version_code,
-        created: currentDate(),
         author: config.author,
         author_url: config.author_url,
         support_url: config.support_url

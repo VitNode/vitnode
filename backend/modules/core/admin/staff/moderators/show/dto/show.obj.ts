@@ -24,11 +24,11 @@ export class ShowAdminStaffModerators {
   @Field(() => Boolean)
   unrestricted: boolean;
 
-  @Field(() => Int)
-  created: number;
+  @Field(() => Date)
+  created: Date;
 
-  @Field(() => Int)
-  updated: number;
+  @Field(() => Date)
+  updated: Date;
 
   @Field(() => Boolean)
   protected: boolean;

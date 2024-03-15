@@ -18,8 +18,8 @@ export class LastPostsShowForumForums {
   @Field(() => Int)
   id: number;
 
-  @Field(() => Int)
-  created: number;
+  @Field(() => Date)
+  created: Date;
 
   @Field(() => User)
   user: User;

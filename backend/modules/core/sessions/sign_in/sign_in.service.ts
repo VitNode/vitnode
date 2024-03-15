@@ -8,7 +8,6 @@ import { DeviceSignInCoreSessionsService } from "./device.service";
 
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { Ctx } from "@/types/context.type";
-import { convertUnixTime, currentDate } from "@/functions/date";
 import { DatabaseService } from "@/modules/database/database.service";
 import { core_admin_sessions } from "@/modules/core/admin/database/schema/admins";
 import { core_sessions } from "@/modules/core/admin/database/schema/sessions";
@@ -63,24 +62,25 @@ export class SignInCoreSessionsService {
       },
       {
         secret: loginTokenSecret,
-        expiresIn: this.configService.getOrThrow(
-          "cookies.login_token.expiresIn"
-        )
+        expiresIn:
+          60 *
+          60 *
+          24 *
+          this.configService.getOrThrow("cookies.login_token.expiresIn")
       }
     );
 
-    const expires = this.configService.getOrThrow(
+    const expiresValue: number = this.configService.getOrThrow(
       `cookies.login_token.${remember ? "expiresInRemember" : "expiresIn"}`
     );
 
     if (admin) {
+      const expires = new Date();
+      expires.setDate(expires.getDate() + 1);
       await this.databaseService.db.insert(core_admin_sessions).values({
         login_token,
         user_id: userId,
-        last_seen: currentDate(),
-        expires:
-          currentDate() +
-          this.configService.getOrThrow("cookies.login_token.admin.expiresIn"),
+        expires,
         device_id: device.id
       });
 
@@ -93,14 +93,7 @@ export class SignInCoreSessionsService {
           secure: true,
           domain: this.configService.getOrThrow("cookies.domain"),
           path: "/",
-          expires: new Date(
-            convertUnixTime(
-              currentDate() +
-                this.configService.getOrThrow(
-                  "cookies.login_token.admin.expiresIn"
-                )
-            )
-          ),
+          expires,
           sameSite: "none"
         }
       );
@@ -108,11 +101,13 @@ export class SignInCoreSessionsService {
       return login_token;
     }
 
+    const expires = new Date();
+    expires.setDate(expires.getDate() + expiresValue);
+
     await this.databaseService.db.insert(core_sessions).values({
       login_token,
       user_id: userId,
-      last_seen: currentDate(),
-      expires: currentDate() + expires,
+      expires,
       device_id: device.id
     });
 
@@ -125,16 +120,7 @@ export class SignInCoreSessionsService {
         secure: true,
         domain: this.configService.getOrThrow("cookies.domain"),
         path: "/",
-        expires: remember
-          ? new Date(
-              convertUnixTime(
-                currentDate() +
-                  this.configService.getOrThrow(
-                    "cookies.login_token.expiresInRemember"
-                  )
-              )
-            )
-          : null,
+        expires: remember ? expires : null,
         sameSite: "none"
       }
     );

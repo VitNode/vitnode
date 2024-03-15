@@ -4,6 +4,7 @@ import {
   integer,
   pgTable,
   serial,
+  timestamp,
   varchar
 } from "drizzle-orm/pg-core";
 
@@ -17,7 +18,8 @@ export const core_plugins = pgTable(
     version: varchar("version", { length: 255 }),
     version_code: integer("version_code"),
     enabled: boolean("enabled").notNull().default(true),
-    created: integer("created").notNull(),
+    created: timestamp("created").notNull().defaultNow(),
+    updated: timestamp("updated").notNull().defaultNow(),
     support_url: varchar("support_url", { length: 255 }).notNull(),
     author: varchar("author", { length: 100 }).notNull(),
     author_url: varchar("author_url", { length: 255 }),

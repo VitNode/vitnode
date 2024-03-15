@@ -4,7 +4,6 @@ import { ShowAdminStaffModerators } from "../show/dto/show.obj";
 import { CreateAdminStaffModeratorsArgs } from "./dto/create.args";
 
 import { CustomError } from "@/utils/errors/CustomError";
-import { currentDate } from "@/functions/date";
 import { DatabaseService } from "@/modules/database/database.service";
 import { core_moderators_permissions } from "@/modules/core/admin/database/schema/moderators";
 
@@ -42,8 +41,6 @@ export class CreateAdminStaffModeratorsService {
     const permission = await this.databaseService.db
       .insert(core_moderators_permissions)
       .values({
-        created: currentDate(),
-        updated: currentDate(),
         user_id,
         group_id,
         unrestricted

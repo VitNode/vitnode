@@ -16,8 +16,8 @@ export class ShowAdminThemes {
   @Field(() => Int, { nullable: true })
   version_code: number | null;
 
-  @Field(() => Int)
-  created: number;
+  @Field(() => Date)
+  created: Date;
 
   @Field(() => String)
   support_url: string;

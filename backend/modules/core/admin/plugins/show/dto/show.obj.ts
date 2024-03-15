@@ -25,8 +25,8 @@ export class ShowAdminPlugins {
   @Field(() => Boolean)
   enabled: boolean;
 
-  @Field(() => Int)
-  created: number;
+  @Field(() => Date)
+  created: Date;
 
   @Field(() => String)
   support_url: string;

@@ -4,6 +4,7 @@ import {
   pgTable,
   serial,
   text,
+  timestamp,
   varchar
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
@@ -19,8 +20,8 @@ export const core_sessions = pgTable(
       .references(() => core_users.id, {
         onDelete: "cascade"
       }),
-    last_seen: integer("last_seen").notNull(),
-    expires: integer("expires").notNull(),
+    last_seen: timestamp("last_seen").notNull().defaultNow(),
+    expires: timestamp("expires").notNull(),
     device_id: integer("device_id")
       .references(() => core_sessions_known_devices.id, {
         onDelete: "cascade"
@@ -53,9 +54,8 @@ export const core_sessions_known_devices = pgTable(
     uagent_version: varchar("uagent_version", { length: 100 }).notNull(),
     uagent_os: varchar("uagent_os", { length: 100 }).notNull(),
     uagent_device_vendor: varchar("uagent_device_vendor", { length: 200 }),
-    uagent_device_type: varchar("uagent_device_type", { length: 200 }),
     uagent_device_model: varchar("uagent_device_model", { length: 200 }),
-    last_seen: integer("last_seen").notNull()
+    last_seen: timestamp("last_seen").notNull().defaultNow()
   }
 );
 
