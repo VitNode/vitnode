@@ -114,8 +114,6 @@ export class CreateDatabaseAdminInstallService {
     const guestGroup = await this.databaseService.db
       .insert(core_groups)
       .values({
-        created: currentDate(),
-        updated: currentDate(),
         protected: true,
         guest: true
       })
@@ -137,8 +135,6 @@ export class CreateDatabaseAdminInstallService {
     const memberGroup = await this.databaseService.db
       .insert(core_groups)
       .values({
-        created: currentDate(),
-        updated: currentDate(),
         protected: true,
         default: true
       })
@@ -160,8 +156,6 @@ export class CreateDatabaseAdminInstallService {
     const moderatorGroup = await this.databaseService.db
       .insert(core_groups)
       .values({
-        created: currentDate(),
-        updated: currentDate(),
         protected: true
       })
       .returning();
@@ -190,8 +184,6 @@ export class CreateDatabaseAdminInstallService {
     const adminGroup = await this.databaseService.db
       .insert(core_groups)
       .values({
-        created: currentDate(),
-        updated: currentDate(),
         protected: true,
         root: true
       })

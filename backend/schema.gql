@@ -76,6 +76,11 @@ type CreateForumForumsObj {
   position: Int!
 }
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type GeneralAdminSettingsObj {
   side_name: String!
 }
@@ -233,6 +238,7 @@ type PermissionsTopicForums {
 type Query {
   admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
   admin__core_members__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
+  admin__core_members__stats_sign_up: String!
   admin__core_plugins__download_check(code: String!): CheckDownloadAdminPluginsObj!
   admin__core_plugins__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminPluginsSortByArgs!]): ShowAdminPluginsObj!
   admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
@@ -281,14 +287,14 @@ type RebuildRequiredObj {
 }
 
 type ShowAdminGroups {
-  created: Int!
+  created: DateTime!
   default: Boolean!
   guest: Boolean!
   id: Int!
   name: [TextLanguage!]!
   protected: Boolean!
   root: Boolean!
-  updated: Int!
+  updated: DateTime!
   users_count: Int!
 }
 
@@ -313,7 +319,7 @@ type ShowAdminMembers {
   email: String!
   group: GroupUser!
   id: Int!
-  joined: Int!
+  joined: DateTime!
   name: String!
   name_seo: String!
   newsletter: Boolean!
@@ -463,7 +469,7 @@ type ShowCoreMembers {
   avatar_color: String!
   group: GroupUser!
   id: Int!
-  joined: Int!
+  joined: DateTime!
   name: String!
   name_seo: String!
   posts: Int!

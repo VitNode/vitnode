@@ -4,7 +4,6 @@ import { count, eq } from "drizzle-orm";
 import { EditAdminGroupsArgs } from "./dto/edit.args";
 import { ShowAdminGroups } from "../show/dto/show.obj";
 
-import { currentDate } from "@/functions/date";
 import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import {
@@ -86,7 +85,7 @@ export class EditAdminGroupsService {
     await this.databaseService.db
       .update(core_groups)
       .set({
-        updated: currentDate()
+        updated: new Date()
       })
       .where(eq(core_groups.id, id))
       .returning();

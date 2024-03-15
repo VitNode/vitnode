@@ -8,7 +8,6 @@ import { SignUpCoreMembersObj } from "./dto/sign_up.obj";
 
 import { CustomError } from "@/utils/errors/CustomError";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
-import { currentDate } from "@/functions/date";
 import { generateAvatarColor } from "@/modules/core/members/sign_up/functions/generate-avatar-color";
 import { DatabaseService } from "@/modules/database/database.service";
 import { core_users } from "@/modules/core/admin/database/schema/users";
@@ -79,8 +78,6 @@ export class SignUpCoreMembersService {
       });
     }
 
-    const dateNow = currentDate();
-
     const passwordSalt = await genSalt(
       this.configService.getOrThrow("password_salt")
     );
@@ -94,7 +91,6 @@ export class SignUpCoreMembersService {
         name_seo: convertToNameSEO,
         newsletter,
         password: hashPassword,
-        joined: dateNow,
         avatar_color: generateAvatarColor(name),
         group_id: await this.getGroupId()
       })

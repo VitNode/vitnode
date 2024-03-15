@@ -12,14 +12,15 @@ import {
 } from "./ui/tooltip";
 
 interface Props {
-  date: number;
+  date: number | Date;
   className?: string;
 }
 
 export const DateFormat = forwardRef<HTMLSpanElement, Props>(
   ({ className, date }, ref) => {
     const locale = useLocale();
-    const currentTime = convertUnixTime(date);
+    const currentTime =
+      typeof date === "number" ? convertUnixTime(date) : new Date(date);
 
     const relative = Math.floor(
       (new Date().getTime() - currentTime.getTime()) / 1000
