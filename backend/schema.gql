@@ -5,6 +5,7 @@
 type AuthorizationAdminSessionsObj {
   rebuild_required: RebuildRequiredObj!
   user: AuthorizationCurrentUserObj
+  version: String!
 }
 
 type AuthorizationCoreSessionsObj {

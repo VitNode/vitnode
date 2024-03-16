@@ -1,18 +1,16 @@
-import { useTranslations } from "next-intl";
 import { AlertTriangle } from "lucide-react";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Badge } from "@/components/ui/badge";
 import { RebuildRequiredAdmin } from "@/admin/core/global/rebuild-required";
 import { CONFIG } from "@/config";
+import { VersionDashboardCoreAdmin } from "./version";
 
 // interface Props {
 //   data: Admin__Core__DashboardQuery;
 // }
 
 export const DashboardCoreAdminView = () => {
-  const t = useTranslations("core");
-
   return (
     <>
       <HeaderContent
@@ -29,7 +27,7 @@ export const DashboardCoreAdminView = () => {
             )}
           </>
         }
-        desc={t("version", { version: "TODO" })}
+        desc={<VersionDashboardCoreAdmin />}
       />
 
       <RebuildRequiredAdmin />
