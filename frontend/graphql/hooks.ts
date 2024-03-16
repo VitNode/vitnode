@@ -769,13 +769,13 @@ export type ShowAdminPlugins = {
   author: Scalars['String']['output'];
   author_url?: Maybe<Scalars['String']['output']>;
   code: Scalars['String']['output'];
-  created: Scalars['DateTime']['output'];
   default: Scalars['Boolean']['output'];
   description?: Maybe<Scalars['String']['output']>;
   enabled: Scalars['Boolean']['output'];
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   support_url: Scalars['String']['output'];
+  updated: Scalars['DateTime']['output'];
   version?: Maybe<Scalars['String']['output']>;
   version_code?: Maybe<Scalars['Int']['output']>;
 };
@@ -1617,7 +1617,7 @@ export type Admin__Core_Plugins__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Plugins__ShowQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url?: string | null, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, support_url: string, created: Date, version?: string | null, version_code?: number | null, allow_default: boolean }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Admin__Core_Plugins__ShowQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url?: string | null, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, support_url: string, updated: Date, version?: string | null, version_code?: number | null, allow_default: boolean }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Admin__Settings__General__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2519,7 +2519,7 @@ export const Admin__Core_Plugins__Show = gql`
       id
       name
       support_url
-      created
+      updated
       version
       version_code
       allow_default

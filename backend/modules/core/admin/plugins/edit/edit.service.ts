@@ -43,7 +43,8 @@ export class EditAdminPluginsService {
       await this.databaseService.db
         .update(core_plugins)
         .set({
-          default: false
+          default: false,
+          updated: new Date()
         })
         .where(ne(core_plugins.code, code));
     }
@@ -52,7 +53,8 @@ export class EditAdminPluginsService {
       .update(core_plugins)
       .set({
         ...rest,
-        default: isDefault
+        default: isDefault,
+        updated: new Date()
       })
       .where(eq(core_plugins.code, code))
       .returning();

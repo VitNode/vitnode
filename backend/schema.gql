@@ -359,6 +359,7 @@ type ShowAdminPlugins {
   id: Int!
   name: String!
   support_url: String!
+  updated: DateTime!
   version: String
   version_code: Int
 }
