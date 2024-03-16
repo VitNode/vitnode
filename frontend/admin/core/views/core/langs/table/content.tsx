@@ -10,6 +10,8 @@ import { ActionsTableLangsCoreAdmin } from "./actions/actions";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 import type { LangsCoreAdminViewProps } from "../langs-core-admin-view";
 import { editMutationApi } from "../create-edit/hooks/edit-mutation-api";
+import { HeaderSortingDataTable } from "@/components/data-table/header";
+import { DateFormat } from "@/components/date-format/date-format";
 
 export const ContentTableLangsCoreAdmin = ({
   data
@@ -33,6 +35,38 @@ export const ContentTableLangsCoreAdmin = ({
               {data.default && <Badge>{tAdmin("default")}</Badge>}
             </div>
           );
+        }
+      },
+      {
+        header: t("table.key"),
+        accessorKey: "code"
+      },
+      {
+        header: t("table.locale"),
+        accessorKey: "locale"
+      },
+      {
+        header: t("table.time_24"),
+        accessorKey: "time_24",
+        cell: ({ row }) => {
+          const data = row.original;
+
+          return data.time_24 ? tCore("yes") : tCore("no");
+        }
+      },
+      {
+        header: val => {
+          return (
+            <HeaderSortingDataTable {...val}>
+              {tCore("table.updated")}
+            </HeaderSortingDataTable>
+          );
+        },
+        accessorKey: "updated",
+        cell: ({ row }) => {
+          const data = row.original;
+
+          return <DateFormat date={data.updated} />;
         }
       },
       {
@@ -64,23 +98,6 @@ export const ContentTableLangsCoreAdmin = ({
         }
       },
       {
-        header: t("table.key"),
-        accessorKey: "code"
-      },
-      {
-        header: t("table.locale"),
-        accessorKey: "locale"
-      },
-      {
-        header: t("table.time_24"),
-        accessorKey: "time_24",
-        cell: ({ row }) => {
-          const data = row.original;
-
-          return data.time_24 ? tCore("yes") : tCore("no");
-        }
-      },
-      {
         id: "actions",
         cell: ({ row }) => {
           return <ActionsTableLangsCoreAdmin {...row.original} />;
@@ -96,6 +113,10 @@ export const ContentTableLangsCoreAdmin = ({
       pageInfo={data?.core_languages__show.pageInfo}
       searchPlaceholder={t("search_placeholder")}
       defaultPageSize={10}
+      defaultSorting={{
+        sortBy: "updated",
+        sortDirection: "desc"
+      }}
       columns={columns}
     />
   );

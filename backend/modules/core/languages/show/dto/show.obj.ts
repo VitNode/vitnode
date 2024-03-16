@@ -39,4 +39,10 @@ export class ShowCoreLanguages {
 
   @Field(() => String)
   locale: string;
+
+  @Field(() => Date)
+  created: Date;
+
+  @Field(() => Date)
+  updated: Date;
 }

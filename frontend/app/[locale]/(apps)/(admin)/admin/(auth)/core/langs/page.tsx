@@ -5,6 +5,7 @@ import { LangsCoreAdminView } from "@/admin/core/views/core/langs/langs-core-adm
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Languages__Show,
+  ShowCoreLanguagesSortingColumnEnum,
   type Core_Languages__ShowQuery,
   type Core_Languages__ShowQueryVariables
 } from "@/graphql/hooks";
@@ -45,7 +46,8 @@ export default async function Page({ searchParams }: Props) {
   const variables = usePaginationAPISsr({
     searchParams,
     defaultPageSize: 10,
-    search: true
+    search: true,
+    sortByEnum: ShowCoreLanguagesSortingColumnEnum
   });
 
   const data = await getData(variables);

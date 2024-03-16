@@ -9,7 +9,8 @@ import {
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 enum ShowAdminPluginsSortingColumnEnum {
-  created = "created"
+  created = "created",
+  updated = "updated"
 }
 
 registerEnumType(ShowAdminPluginsSortingColumnEnum, {

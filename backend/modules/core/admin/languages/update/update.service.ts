@@ -3,12 +3,14 @@ import { join } from "path";
 
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
+import { eq } from "drizzle-orm";
 
 import { UpdateCoreAdminLanguagesArgs } from "./dto/update.args";
 
 import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { setRebuildRequired } from "@/functions/config/rebuild-required";
+import { core_languages } from "../../database/schema/languages";
 
 @Injectable()
 export class UpdateAdminCoreLanguageService {
@@ -44,6 +46,11 @@ export class UpdateAdminCoreLanguageService {
           resolve("success");
         });
     });
+
+    await this.databaseService.db
+      .update(core_languages)
+      .set({ updated: new Date() })
+      .where(eq(core_languages.code, code));
 
     await setRebuildRequired({ set: "langs" });
 

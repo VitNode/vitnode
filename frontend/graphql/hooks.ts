@@ -635,6 +635,7 @@ export type QueryCore_Languages__ShowArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
+  sortBy?: InputMaybe<Array<ShowCoreLanguagesSortByArgs>>;
 };
 
 
@@ -795,7 +796,8 @@ export type ShowAdminPluginsSortByArgs = {
 };
 
 export const ShowAdminPluginsSortingColumnEnum = {
-  created: 'created'
+  created: 'created',
+  updated: 'updated'
 } as const;
 
 export type ShowAdminPluginsSortingColumnEnum = typeof ShowAdminPluginsSortingColumnEnum[keyof typeof ShowAdminPluginsSortingColumnEnum];
@@ -884,6 +886,7 @@ export type ShowAdminThemesSortingColumnEnum = typeof ShowAdminThemesSortingColu
 export type ShowCoreLanguages = {
   __typename?: 'ShowCoreLanguages';
   code: Scalars['String']['output'];
+  created: Scalars['DateTime']['output'];
   default: Scalars['Boolean']['output'];
   enabled: Scalars['Boolean']['output'];
   id: Scalars['Int']['output'];
@@ -892,6 +895,7 @@ export type ShowCoreLanguages = {
   protected: Scalars['Boolean']['output'];
   time_24: Scalars['Boolean']['output'];
   timezone: Scalars['String']['output'];
+  updated: Scalars['DateTime']['output'];
 };
 
 export type ShowCoreLanguagesObj = {
@@ -900,6 +904,17 @@ export type ShowCoreLanguagesObj = {
   pageInfo: PageInfo;
 };
 
+export type ShowCoreLanguagesSortByArgs = {
+  column: ShowCoreLanguagesSortingColumnEnum | `${ShowCoreLanguagesSortingColumnEnum}`;
+  direction: SortDirectionEnum | `${SortDirectionEnum}`;
+};
+
+export const ShowCoreLanguagesSortingColumnEnum = {
+  created: 'created',
+  updated: 'updated'
+} as const;
+
+export type ShowCoreLanguagesSortingColumnEnum = typeof ShowCoreLanguagesSortingColumnEnum[keyof typeof ShowCoreLanguagesSortingColumnEnum];
 export type ShowCoreMembers = {
   __typename?: 'ShowCoreMembers';
   avatar?: Maybe<AvatarUser>;
@@ -1653,10 +1668,11 @@ export type Core_Languages__ShowQueryVariables = Exact<{
   last?: InputMaybe<Scalars['Int']['input']>;
   cursor?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
+  sortBy?: InputMaybe<Array<ShowCoreLanguagesSortByArgs> | ShowCoreLanguagesSortByArgs>;
 }>;
 
 
-export type Core_Languages__ShowQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string, default: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string, locale: string, time_24: boolean }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Core_Languages__ShowQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string, default: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string, locale: string, time_24: boolean, updated: Date, created: Date }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Core_Members__Show__SearchQueryVariables = Exact<{
   search?: InputMaybe<Scalars['String']['input']>;
@@ -2673,12 +2689,13 @@ export const Core_Sessions__Authorization = gql`
 }
     `;
 export const Core_Languages__Show = gql`
-    query Core_languages__show($first: Int, $last: Int, $cursor: Int, $search: String) {
+    query Core_languages__show($first: Int, $last: Int, $cursor: Int, $search: String, $sortBy: [ShowCoreLanguagesSortByArgs!]) {
   core_languages__show(
     first: $first
     last: $last
     cursor: $cursor
     search: $search
+    sortBy: $sortBy
   ) {
     edges {
       code
@@ -2690,6 +2707,8 @@ export const Core_Languages__Show = gql`
       timezone
       locale
       time_24
+      updated
+      created
     }
     pageInfo {
       count
