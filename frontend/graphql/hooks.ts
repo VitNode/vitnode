@@ -634,6 +634,7 @@ export type QueryCore_Languages__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -1651,6 +1652,7 @@ export type Core_Languages__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   cursor?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -2671,8 +2673,13 @@ export const Core_Sessions__Authorization = gql`
 }
     `;
 export const Core_Languages__Show = gql`
-    query Core_languages__show($first: Int, $last: Int, $cursor: Int) {
-  core_languages__show(first: $first, last: $last, cursor: $cursor) {
+    query Core_languages__show($first: Int, $last: Int, $cursor: Int, $search: String) {
+  core_languages__show(
+    first: $first
+    last: $last
+    cursor: $cursor
+    search: $search
+  ) {
     edges {
       code
       default

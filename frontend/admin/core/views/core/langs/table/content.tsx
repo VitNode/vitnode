@@ -68,6 +68,19 @@ export const ContentTableLangsCoreAdmin = ({
         accessorKey: "code"
       },
       {
+        header: t("table.locale"),
+        accessorKey: "locale"
+      },
+      {
+        header: t("table.time_24"),
+        accessorKey: "time_24",
+        cell: ({ row }) => {
+          const data = row.original;
+
+          return data.time_24 ? tCore("yes") : tCore("no");
+        }
+      },
+      {
         id: "actions",
         cell: ({ row }) => {
           return <ActionsTableLangsCoreAdmin {...row.original} />;
@@ -81,6 +94,7 @@ export const ContentTableLangsCoreAdmin = ({
     <DataTable
       data={data?.core_languages__show.edges ?? []}
       pageInfo={data?.core_languages__show.pageInfo}
+      searchPlaceholder={t("search_placeholder")}
       defaultPageSize={10}
       columns={columns}
     />

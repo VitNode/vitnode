@@ -215,8 +215,11 @@
       },
       "langs": {
         "title": "Języki",
+        "search_placeholder": "Szukaj po kodzie...",
         "table": {
-          "key": "Klucz"
+          "key": "Klucz",
+          "time_24": "Format 24h",
+          "locale": "Lokalizacja"
         },
         "actions": {
           "create": {

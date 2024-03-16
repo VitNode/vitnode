@@ -214,8 +214,11 @@
       },
       "langs": {
         "title": "Languages",
+        "search_placeholder": "Search by name...",
         "table": {
-          "key": "Key"
+          "key": "Key",
+          "time_24": "24h Format",
+          "locale": "Locale"
         },
         "actions": {
           "create": {
