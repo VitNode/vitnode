@@ -33,7 +33,7 @@ import { usePathname, useRouter } from "@/i18n";
 import { ToolbarDataTable } from "./toolbar/toolbar";
 import type { ToolbarDataTableProps } from "./toolbar/toolbar";
 import { cn } from "@/functions/classnames";
-import { Loader } from "../loader";
+import { SkeletonDataTable } from "./skeleton";
 
 interface TDataMin {
   id: number;
@@ -152,7 +152,7 @@ export function DataTable<TData extends TDataMin>({
       <ToolbarDataTable startTransition={startTransition} {...props} />
 
       {isPending ? (
-        <Loader />
+        <SkeletonDataTable />
       ) : (
         <>
           <div className="rounded-md border">
