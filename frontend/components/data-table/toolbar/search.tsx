@@ -1,5 +1,5 @@
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState, type TransitionStartFunction } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
 import { usePathname, useRouter } from "@/i18n";
@@ -7,14 +7,25 @@ import { usePathname, useRouter } from "@/i18n";
 import { Input } from "../../ui/input";
 
 interface Props {
+  startTransition: TransitionStartFunction;
   searchPlaceholder?: string;
 }
 
-export const SearchToolbarDataTable = ({ searchPlaceholder }: Props) => {
+export const SearchToolbarDataTable = ({
+  searchPlaceholder,
+  startTransition
+}: Props) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { push } = useRouter();
   const [value, setValue] = useState(searchParams.get("search") ?? "");
+
+  // Clear search input when search param is removed
+  useEffect(() => {
+    if (searchParams.get("search")) return;
+
+    setValue("");
+  }, [searchParams.get("search")]);
 
   const handleSearch = useDebouncedCallback((value: string) => {
     const params = new URLSearchParams(searchParams);
@@ -24,7 +35,9 @@ export const SearchToolbarDataTable = ({ searchPlaceholder }: Props) => {
       params.delete("search");
     }
 
-    push(params.toString() ? `${pathname}?${params.toString()}` : pathname);
+    startTransition(() => {
+      push(params.toString() ? `${pathname}?${params.toString()}` : pathname);
+    });
   }, 500);
 
   return (
