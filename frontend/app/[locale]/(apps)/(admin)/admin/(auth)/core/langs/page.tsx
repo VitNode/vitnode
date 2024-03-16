@@ -44,7 +44,8 @@ export async function generateMetadata({
 export default async function Page({ searchParams }: Props) {
   const variables = usePaginationAPISsr({
     searchParams,
-    defaultPageSize: 10
+    defaultPageSize: 10,
+    search: true
   });
 
   const data = await getData(variables);

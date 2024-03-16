@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { count } from "drizzle-orm";
+import { and, count, ilike } from "drizzle-orm";
 
 import { ShowCoreLanguagesArgs } from "./dto/show.args";
 import { ShowCoreLanguagesObj } from "./dto/show.obj";
@@ -19,7 +19,8 @@ export class ShowCoreLanguageService {
   async show({
     cursor,
     first,
-    last
+    last,
+    search = ""
   }: ShowCoreLanguagesArgs): Promise<ShowCoreLanguagesObj> {
     const pagination = await inputPaginationCursor({
       cursor,
@@ -35,7 +36,8 @@ export class ShowCoreLanguageService {
     });
 
     const edges = await this.databaseService.db.query.core_languages.findMany({
-      ...pagination
+      ...pagination,
+      where: and(pagination.where, ilike(core_languages.name, `%${search}%`))
     });
 
     const totalCount = await this.databaseService.db

@@ -1,5 +1,15 @@
-query Core_languages__show($first: Int, $last: Int, $cursor: Int) {
-  core_languages__show(first: $first, last: $last, cursor: $cursor) {
+query Core_languages__show(
+  $first: Int
+  $last: Int
+  $cursor: Int
+  $search: String
+) {
+  core_languages__show(
+    first: $first
+    last: $last
+    cursor: $cursor
+    search: $search
+  ) {
     edges {
       code
       default

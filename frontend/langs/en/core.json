@@ -1,6 +1,8 @@
 {
   "core": {
     "reload_page": "Reload Page",
+    "yes": "Yes",
+    "no": "No",
     "clear_cache_and_reload": "Clear Cache and Reload",
     "optional": "Optional",
     "go_back": "Go Back",

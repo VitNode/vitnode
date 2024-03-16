@@ -1,6 +1,8 @@
 {
   "core": {
     "reload_page": "Przeładuj stronę",
+    "yes": "Tak",
+    "no": "Nie",
     "clear_cache_and_reload": "Wyczyść pamięć podręczną i przeładuj",
     "optional": "Opcjonalne",
     "go_back": "Wróć",

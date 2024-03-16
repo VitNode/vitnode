@@ -10,4 +10,7 @@ export class ShowCoreLanguagesArgs {
 
   @Field(() => Int, { nullable: true })
   last: number | null;
+
+  @Field(() => String, { nullable: true })
+  search: string | null;
 }
