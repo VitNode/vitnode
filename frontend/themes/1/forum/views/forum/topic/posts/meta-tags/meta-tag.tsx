@@ -1,7 +1,7 @@
 import { Lock, Tag, Unlock, type LucideIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { DateFormat } from "@/components/date-format";
+import { DateFormat } from "@/components/date-format/date-format";
 import type { ShowPostsForumsMetaTags } from "@/graphql/hooks";
 import { cn } from "@/functions/classnames";
 import { UserLink } from "@/components/user/link/user-link";

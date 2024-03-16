@@ -48,7 +48,8 @@ export const ContentTableLangsCoreAdmin = ({
               onClick={async () => {
                 const mutation = await editMutationApi({
                   ...data,
-                  enabled: !data.enabled
+                  enabled: !data.enabled,
+                  time24: data.time_24
                 });
                 if (mutation.error) {
                   toast.error(tCore("errors.title"), {

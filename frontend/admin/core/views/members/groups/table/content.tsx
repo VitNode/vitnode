@@ -7,7 +7,7 @@ import { Link } from "@/i18n";
 import type { ShowAdminGroups } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { ActionsTableGroupsMembersAdmin } from "./actions/actions";
-import { DateFormat } from "@/components/date-format";
+import { DateFormat } from "@/components/date-format/date-format";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
 import type { GroupsMembersAdminViewProps } from "../groups-members-admin-view";
 import { Badge } from "@/components/ui/badge";

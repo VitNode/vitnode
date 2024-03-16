@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import { UserLink } from "@/components/user/link/user-link";
-import { DateFormat } from "@/components/date-format";
+import { DateFormat } from "@/components/date-format/date-format";
 import { GroupFormat } from "@/components/groups/group-format";
 import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
 import type { ShowPostsForums } from "@/graphql/hooks";

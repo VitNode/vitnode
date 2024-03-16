@@ -5,7 +5,7 @@ import { InfinityIcon, ShieldAlert } from "lucide-react";
 
 import { DataTable } from "@/components/data-table/data-table";
 import type { ShowAdminStaffModerators } from "@/graphql/hooks";
-import { DateFormat } from "@/components/date-format";
+import { DateFormat } from "@/components/date-format/date-format";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
 import { Badge } from "@/components/ui/badge";
 import { UserLink } from "@/components/user/link/user-link";

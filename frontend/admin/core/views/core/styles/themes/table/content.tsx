@@ -5,7 +5,7 @@ import { ExternalLink } from "lucide-react";
 
 import { DataTable } from "@/components/data-table/data-table";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
-import { DateFormat } from "@/components/date-format";
+import { DateFormat } from "@/components/date-format/date-format";
 import { Badge } from "@/components/ui/badge";
 import type {
   Admin_Core_Themes__ShowQuery,
