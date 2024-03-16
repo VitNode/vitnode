@@ -28,6 +28,9 @@ export class ShowAdminPlugins {
   @Field(() => Date)
   created: Date;
 
+  @Field(() => Date)
+  updated: Date;
+
   @Field(() => String)
   support_url: string;
 

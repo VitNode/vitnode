@@ -48,6 +48,7 @@
         "title": "Wtyczki",
         "set_default": "Ustaw jako domyślną",
         "get_help": "Get help",
+        "search_placeholder": "Szukaj po nazwie...",
         "create": {
           "title": "Stwórz wtyczkę",
           "success": "Wtyczka została utworzona.",

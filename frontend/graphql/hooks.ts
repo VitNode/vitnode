@@ -589,6 +589,7 @@ export type QueryAdmin__Core_Plugins__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<Array<ShowAdminPluginsSortByArgs>>;
 };
 
@@ -776,6 +777,7 @@ export type ShowAdminPlugins = {
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   support_url: Scalars['String']['output'];
+  updated: Scalars['DateTime']['output'];
   version?: Maybe<Scalars['String']['output']>;
   version_code?: Maybe<Scalars['Int']['output']>;
 };
@@ -1614,10 +1616,11 @@ export type Admin__Core_Plugins__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   sortBy?: InputMaybe<Array<ShowAdminPluginsSortByArgs> | ShowAdminPluginsSortByArgs>;
+  search?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type Admin__Core_Plugins__ShowQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url?: string | null, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, support_url: string, created: Date, version?: string | null, version_code?: number | null, allow_default: boolean }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Admin__Core_Plugins__ShowQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url?: string | null, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, support_url: string, updated: Date, version?: string | null, created: Date, version_code?: number | null, allow_default: boolean }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Admin__Settings__General__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2502,12 +2505,13 @@ export const Admin__Core_Plugins__Download_Check = gql`
 }
     `;
 export const Admin__Core_Plugins__Show = gql`
-    query Admin__core_plugins__show($cursor: Int, $first: Int, $last: Int, $sortBy: [ShowAdminPluginsSortByArgs!]) {
+    query Admin__core_plugins__show($cursor: Int, $first: Int, $last: Int, $sortBy: [ShowAdminPluginsSortByArgs!], $search: String) {
   admin__core_plugins__show(
     cursor: $cursor
     first: $first
     last: $last
     sortBy: $sortBy
+    search: $search
   ) {
     edges {
       author
@@ -2519,8 +2523,9 @@ export const Admin__Core_Plugins__Show = gql`
       id
       name
       support_url
-      created
+      updated
       version
+      created
       version_code
       allow_default
     }

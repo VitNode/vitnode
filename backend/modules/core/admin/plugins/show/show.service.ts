@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { count } from "drizzle-orm";
+import { and, count, ilike } from "drizzle-orm";
 
 import { ShowAdminPluginsArgs } from "./dto/show.args";
 import { ShowAdminPluginsObj } from "./dto/show.obj";
@@ -20,6 +20,7 @@ export class ShowAdminPluginsService {
     cursor,
     first,
     last,
+    search = "",
     sortBy
   }: ShowAdminPluginsArgs): Promise<ShowAdminPluginsObj> {
     const pagination = await inputPaginationCursor({
@@ -31,13 +32,14 @@ export class ShowAdminPluginsService {
       primaryCursor: { order: "ASC", key: "id", schema: core_plugins.id },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: "created"
+        column: "updated"
       },
       sortBy
     });
 
     const edges = await this.databaseService.db.query.core_plugins.findMany({
-      ...pagination
+      ...pagination,
+      where: and(pagination.where, ilike(core_plugins.name, `%${search}%`))
     });
 
     const totalCount = await this.databaseService.db

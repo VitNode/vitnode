@@ -3,12 +3,14 @@ query Admin__core_plugins__show(
   $first: Int
   $last: Int
   $sortBy: [ShowAdminPluginsSortByArgs!]
+  $search: String
 ) {
   admin__core_plugins__show(
     cursor: $cursor
     first: $first
     last: $last
     sortBy: $sortBy
+    search: $search
   ) {
     edges {
       author
@@ -20,8 +22,9 @@ query Admin__core_plugins__show(
       id
       name
       support_url
-      created
+      updated
       version
+      created
       version_code
       allow_default
     }

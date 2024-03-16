@@ -17,12 +17,13 @@ import { ActionsItemPluginsAdmin } from "./actions/actions";
 export const ContentTablePluginsAdmin = ({
   admin__core_plugins__show: { edges, pageInfo }
 }: Admin__Core_Plugins__ShowQuery) => {
-  const t = useTranslations("core");
+  const t = useTranslations("admin.core.plugins");
+  const tCore = useTranslations("core");
 
   const columns: ColumnDef<ShowAdminPlugins>[] = useMemo(
     () => [
       {
-        header: t("table.name"),
+        header: tCore("table.name"),
         accessorKey: "name",
         cell: ({ row }) => {
           const data = row.original;
@@ -30,13 +31,13 @@ export const ContentTablePluginsAdmin = ({
           return (
             <div className="flex gap-2 items-center">
               <span className="font-semibold">{data.name}</span>
-              {data.default && <Badge>{t("default")}</Badge>}
+              {data.default && <Badge>{tCore("default")}</Badge>}
             </div>
           );
         }
       },
       {
-        header: t("table.version"),
+        header: tCore("table.version"),
         accessorKey: "version",
         cell: ({ row }) => {
           const data = row.original;
@@ -54,7 +55,7 @@ export const ContentTablePluginsAdmin = ({
         }
       },
       {
-        header: t("table.author"),
+        header: tCore("table.author"),
         accessorKey: "author",
         cell: ({ row }) => {
           const data = row.original;
@@ -79,19 +80,19 @@ export const ContentTablePluginsAdmin = ({
         header: val => {
           return (
             <HeaderSortingDataTable {...val}>
-              {t("table.created")}
+              {tCore("table.updated")}
             </HeaderSortingDataTable>
           );
         },
-        accessorKey: "created",
+        accessorKey: "updated",
         cell: ({ row }) => {
           const data = row.original;
 
-          return <DateFormat date={data.created} />;
+          return <DateFormat date={data.updated} />;
         }
       },
       {
-        header: t("table.enabled"),
+        header: tCore("table.enabled"),
         accessorKey: "enabled",
         cell: ({ row }) => {
           const data = row.original;
@@ -134,9 +135,9 @@ export const ContentTablePluginsAdmin = ({
       pageInfo={pageInfo}
       defaultPageSize={10}
       columns={columns}
-      // searchPlaceholder={t('search_placeholder')}
+      searchPlaceholder={t("search_placeholder")}
       defaultSorting={{
-        sortBy: "created",
+        sortBy: "updated",
         sortDirection: "desc"
       }}
     />

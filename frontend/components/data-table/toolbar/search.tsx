@@ -1,41 +1,53 @@
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type TransitionStartFunction } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 import { usePathname, useRouter } from "@/i18n";
 
 import { Input } from "../../ui/input";
 
 interface Props {
+  startTransition: TransitionStartFunction;
   searchPlaceholder?: string;
 }
 
-export const SearchToolbarDataTable = ({ searchPlaceholder }: Props) => {
+export const SearchToolbarDataTable = ({
+  searchPlaceholder,
+  startTransition
+}: Props) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { push } = useRouter();
   const [value, setValue] = useState(searchParams.get("search") ?? "");
 
-  // Update the value if the search param changes
+  // Clear search input when search param is removed
   useEffect(() => {
-    if (searchParams.get("search") === value) return;
+    if (searchParams.get("search")) return;
 
-    setValue(searchParams.get("search") ?? "");
+    setValue("");
   }, [searchParams.get("search")]);
+
+  const handleSearch = useDebouncedCallback((value: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (value) {
+      params.set("search", value);
+    } else {
+      params.delete("search");
+    }
+
+    startTransition(() => {
+      push(params.toString() ? `${pathname}?${params.toString()}` : pathname);
+    });
+  }, 500);
 
   return (
     <Input
       placeholder={searchPlaceholder}
       value={value}
       onChange={e => {
-        setValue(e.target.value);
-        const params = new URLSearchParams(searchParams);
-        if (e.target.value) {
-          params.set("search", e.target.value);
-        } else {
-          params.delete("search");
-        }
-
-        push(params.toString() ? `${pathname}?${params.toString()}` : pathname);
+        const value = e.target.value;
+        setValue(value);
+        handleSearch(value);
       }}
       className="w-[150px] lg:w-[250px] flex-grow"
     />

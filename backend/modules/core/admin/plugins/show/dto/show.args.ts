@@ -38,4 +38,7 @@ export class ShowAdminPluginsArgs {
 
   @Field(() => [ShowAdminPluginsSortByArgs], { nullable: true })
   sortBy: ShowAdminPluginsSortByArgs[] | null;
+
+  @Field(() => String, { nullable: true })
+  search: string | null;
 }
