@@ -219,22 +219,31 @@
         },
         "actions": {
           "create": {
+            "title": "Stwórz język",
             "name": {
               "label": "Nazwa",
               "placeholder": "Polski (Polish)"
             },
             "code": {
               "label": "Kod",
-              "placeholder": "pl"
+              "placeholder": "pl",
+              "desc": "Ten kod jest używany jako identyfikator języka w adresie URL, np. /pl/strona"
             },
             "timezone": {
-              "label": "Strefa czasowa",
-              "placeholder": "Wybierz strefę czasową..."
+              "label": "Strefa czasowa"
+            },
+            "time_24": {
+              "label": "24h format",
+              "desc": "Pokazuje format 24h zamiast 12h."
+            },
+            "locale": {
+              "label": "Lokalizacja"
             },
             "submit": "Stwórz język",
             "success": "Język został stworzony."
           },
           "edit": {
+            "title": "Edytuj język",
             "submit": "Edytuj język",
             "default": {
               "label": "Domyślny język",

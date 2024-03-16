@@ -23,11 +23,11 @@ export class ShowAdminGroups {
   @Field(() => Int)
   users_count: number;
 
-  @Field(() => Int)
-  created: number;
+  @Field(() => Date)
+  created: Date;
 
-  @Field(() => Int)
-  updated: number;
+  @Field(() => Date)
+  updated: Date;
 
   @Field(() => Boolean)
   protected: boolean;

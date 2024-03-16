@@ -2,8 +2,16 @@ mutation Admin__core_languages__create(
   $code: String!
   $name: String!
   $timezone: String!
+  $locale: String!
+  $time24: Boolean!
 ) {
-  admin__core_languages__create(code: $code, name: $name, timezone: $timezone) {
+  admin__core_languages__create(
+    code: $code
+    name: $name
+    timezone: $timezone
+    locale: $locale
+    time_24: $time24
+  ) {
     code
     id
     name

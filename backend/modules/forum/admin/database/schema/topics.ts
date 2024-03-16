@@ -5,6 +5,7 @@ import {
   pgEnum,
   pgTable,
   serial,
+  timestamp,
   varchar
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
@@ -24,7 +25,7 @@ export const forum_topics = pgTable(
       .references(() => forum_forums.id, {
         onDelete: "cascade"
       }),
-    created: integer("created").notNull(),
+    created: timestamp("created").notNull().defaultNow(),
     ip_address: varchar("ip_address", { length: 45 }),
     locked: boolean("locked").notNull().default(false)
   },
@@ -98,7 +99,7 @@ export const forum_topics_logs = pgTable(
       onDelete: "cascade"
     }),
     ip_address: varchar("ip_address", { length: 45 }).notNull(),
-    created: integer("created").notNull(),
+    created: timestamp("created").notNull().defaultNow(),
     action: forum_topics_logs_actions_enum("action").notNull(),
     topic_id: integer("topic_id").references(() => forum_topics.id, {
       onDelete: "cascade"

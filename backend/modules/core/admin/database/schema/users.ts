@@ -6,6 +6,7 @@ import {
   pgTable,
   serial,
   text,
+  timestamp,
   varchar
 } from "drizzle-orm/pg-core";
 
@@ -20,7 +21,7 @@ export const core_users = pgTable(
     name: varchar("name", { length: 255 }).notNull().unique(),
     email: varchar("email", { length: 255 }).notNull().unique(),
     password: text("password").notNull(),
-    joined: integer("joined").notNull(),
+    joined: timestamp("joined").notNull().defaultNow(),
     posts: integer("posts").notNull().default(0),
     newsletter: boolean("newsletter").notNull().default(false),
     avatar_color: varchar("avatar_color", { length: 6 }).notNull(),

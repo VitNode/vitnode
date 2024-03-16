@@ -1,6 +1,5 @@
 import { Injectable } from "@nestjs/common";
 
-import { currentDate } from "@/functions/date";
 import { CreatePostsForumsArgs } from "@/modules/forum/posts/create/dto/create.args";
 import { ShowPostsForums } from "@/modules/forum/posts/show/dto/show.obj";
 import { Ctx } from "@/types/context.type";
@@ -35,8 +34,6 @@ export class CreateForumsPostsService {
       .insert(forum_posts)
       .values({
         ip_address: req.ip,
-        created: currentDate(),
-        updated: currentDate(),
         topic_id,
         user_id: id
       })
@@ -74,7 +71,6 @@ export class CreateForumsPostsService {
       const timelineItem = await this.databaseService.db
         .insert(forum_posts_timeline)
         .values({
-          created: currentDate(),
           post_id: post.id,
           topic_id
         })

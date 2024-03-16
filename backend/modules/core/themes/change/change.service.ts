@@ -6,7 +6,6 @@ import { ChangeCoreThemesArgs } from "./dto/change.args";
 import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { Ctx } from "@/types/context.type";
-import { convertUnixTime, currentDate } from "@/functions/date";
 
 @Injectable()
 export class ChangeCoreThemesService {
@@ -25,17 +24,18 @@ export class ChangeCoreThemesService {
     }
 
     // Set cookie for session
+    const expires = new Date();
+    const expiresIn: number = this.configService.getOrThrow(
+      "cookies.theme_id.expiresIn"
+    );
+    expires.setDate(expires.getDate() + expiresIn);
+
     res.cookie(this.configService.getOrThrow("cookies.theme_id.name"), id, {
       httpOnly: true,
       secure: true,
       domain: this.configService.getOrThrow("cookies.domain"),
       path: "/",
-      expires: new Date(
-        convertUnixTime(
-          currentDate() +
-            this.configService.getOrThrow("cookies.theme_id.expiresIn")
-        )
-      ),
+      expires,
       sameSite: "none"
     });
 

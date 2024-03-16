@@ -9,7 +9,6 @@ import { ShowAdminThemes } from "../show/dto/show.obj";
 
 import { DatabaseService } from "@/modules/database/database.service";
 import { core_themes } from "../../database/schema/themes";
-import { currentDate } from "@/functions/date";
 
 @Injectable()
 export class CreateAdminThemesService {
@@ -27,8 +26,7 @@ export class CreateAdminThemesService {
         name,
         support_url,
         author,
-        author_url,
-        created: currentDate()
+        author_url
       })
       .returning();
 

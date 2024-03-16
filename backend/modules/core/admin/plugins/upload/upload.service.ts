@@ -248,8 +248,7 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
       const plugins = await this.databaseService.db
         .update(core_plugins)
         .set({
-          ...config,
-          created: currentDate()
+          ...config
         })
         .where(eq(core_plugins.code, code))
         .returning();
@@ -262,8 +261,7 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
     const plugins = await this.databaseService.db
       .insert(core_plugins)
       .values({
-        ...config,
-        created: currentDate()
+        ...config
       })
       .returning();
 

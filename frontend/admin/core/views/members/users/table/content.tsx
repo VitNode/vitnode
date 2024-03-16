@@ -13,7 +13,7 @@ import { Link } from "@/i18n";
 import { buttonVariants } from "@/components/ui/button";
 import { DataTable } from "@/components/data-table/data-table";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
-import { DateFormat } from "@/components/date-format";
+import { DateFormat } from "@/components/date-format/date-format";
 import { GroupsFiltersUsersMembersAdmin } from "./filters/groups-filters-users-members-admin";
 import { AdvancedFiltersUsersMembersAdmin } from "./filters/advanced/advanced-filters-users-members-admin";
 import { useTextLang } from "@/hooks/core/use-text-lang";

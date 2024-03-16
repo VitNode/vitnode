@@ -8,6 +8,8 @@ query Core_languages__show($first: Int, $last: Int, $cursor: Int) {
       name
       protected
       timezone
+      locale
+      time_24
     }
     pageInfo {
       count

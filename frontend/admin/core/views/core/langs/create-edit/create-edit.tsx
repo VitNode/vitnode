@@ -1,9 +1,11 @@
 import { useTranslations } from "next-intl";
 import { Virtuoso } from "react-virtuoso";
+import * as localeDate from "date-fns/locale";
 
 import { useCreateEditLangAdmin } from "./hooks/use-create-edit-lang-admin";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 import {
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle
@@ -40,7 +42,8 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{data ? data.name : "test"}</DialogTitle>
+        <DialogTitle>{t(data ? "edit.title" : "create.title")}</DialogTitle>
+        {data?.name && <DialogDescription>{data.name}</DialogDescription>}
       </DialogHeader>
 
       <Form {...form}>
@@ -64,7 +67,6 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
               </FormItem>
             )}
           />
-
           <FormField
             control={form.control}
             name="timezone"
@@ -81,7 +83,7 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
                         "text-muted-foreground": !field.value
                       })}
                     >
-                      {field.value || t("create.timezone.placeholder")}
+                      {field.value}
                     </SelectTrigger>
                   </FormControl>
 
@@ -89,6 +91,41 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
                     <Virtuoso
                       style={{ height: "200px" }}
                       data={timeZones}
+                      itemContent={(index, zone) => (
+                        <SelectItem value={zone}>{zone}</SelectItem>
+                      )}
+                    />
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="locale"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("create.locale.label")}</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger
+                      className={cn({
+                        "text-muted-foreground": !field.value
+                      })}
+                    >
+                      {field.value}
+                    </SelectTrigger>
+                  </FormControl>
+
+                  <SelectContent>
+                    <Virtuoso
+                      style={{ height: "200px" }}
+                      data={Object.keys(localeDate)}
                       itemContent={(index, zone) => (
                         <SelectItem value={zone}>{zone}</SelectItem>
                       )}
@@ -113,6 +150,7 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
                       {...field}
                     />
                   </FormControl>
+                  <FormDescription>{t("create.code.desc")}</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -133,12 +171,34 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
                     <Switch
                       checked={field.value}
                       onCheckedChange={field.onChange}
+                      disabled={data.default}
                     />
                   </FormControl>
                 </FormItem>
               )}
             />
           )}
+
+          <FormField
+            control={form.control}
+            name="time_24"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                <div className="space-y-0.5">
+                  <FormLabel className="text-base">
+                    {t("create.time_24.label")}
+                  </FormLabel>
+                  <FormDescription>{t("create.time_24.desc")}</FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
 
           <DialogFooter>
             <Button

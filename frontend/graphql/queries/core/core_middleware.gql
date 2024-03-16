@@ -7,6 +7,8 @@ query Core_middleware {
       name
       timezone
       enabled
+      locale
+      time_24
     }
   }
   core_themes__show {

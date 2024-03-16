@@ -5,6 +5,7 @@ import {
   integer,
   pgTable,
   serial,
+  timestamp,
   varchar
 } from "drizzle-orm/pg-core";
 
@@ -17,7 +18,7 @@ export const forum_forums = pgTable(
   "forum_forums",
   {
     id: serial("id").primaryKey(),
-    created: integer("created").notNull(),
+    created: timestamp("created").notNull().defaultNow(),
     // ! Warning: this is a recursive relation. It's not supported by drizzle-orm yet.
     parent_id: integer("parent_id"),
     position: integer("position").notNull().default(0),

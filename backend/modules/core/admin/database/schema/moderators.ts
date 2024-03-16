@@ -1,4 +1,11 @@
-import { boolean, index, integer, pgTable, serial } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  index,
+  integer,
+  pgTable,
+  serial,
+  timestamp
+} from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
 import { core_groups } from "./groups";
@@ -15,8 +22,8 @@ export const core_moderators_permissions = pgTable(
       onDelete: "cascade"
     }),
     unrestricted: boolean("unrestricted").notNull().default(false),
-    created: integer("created").notNull(),
-    updated: integer("updated").notNull(),
+    created: timestamp("created").notNull().defaultNow(),
+    updated: timestamp("updated").notNull().defaultNow(),
     protected: boolean("protected").notNull().default(false)
   },
   table => ({

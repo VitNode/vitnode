@@ -3,7 +3,6 @@ import { Injectable } from "@nestjs/common";
 import { CreateForumTopicsArgs } from "./dto/create.args";
 import { ShowTopicsForums } from "../show/dto/show.obj";
 
-import { currentDate } from "@/functions/date";
 import { User } from "@/utils/decorators/user.decorator";
 import { Ctx } from "@/types/context.type";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
@@ -45,7 +44,6 @@ export class CreateForumTopicsService {
       .insert(forum_topics)
       .values({
         ip_address: req.ip,
-        created: currentDate(),
         forum_id
       })
       .returning();

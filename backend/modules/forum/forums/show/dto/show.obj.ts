@@ -55,8 +55,8 @@ export class ShowForumForums {
   @Field(() => Int)
   position: number;
 
-  @Field(() => Int)
-  created: number;
+  @Field(() => Date)
+  created: Date;
 
   @Field(() => ShowForumForumsCounts)
   _count: ShowForumForumsCounts;

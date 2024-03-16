@@ -5,7 +5,6 @@ import { count } from "drizzle-orm";
 
 import { CustomError } from "@/utils/errors/CustomError";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
-import { currentDate } from "@/functions/date";
 import { DatabaseService } from "@/modules/database/database.service";
 import { core_languages } from "@/modules/core/admin/database/schema/languages";
 import {
@@ -55,13 +54,14 @@ export class CreateDatabaseAdminInstallService {
         default: true,
         protected: true,
         timezone: "America/New_York",
-        created: currentDate()
+        locale: "enUS"
       },
       {
         code: "pl",
         name: "Polski (Polish)",
         timezone: "Europe/Warsaw",
-        created: currentDate()
+        time_24: true,
+        locale: "pl"
       }
     ]);
 
@@ -83,7 +83,6 @@ export class CreateDatabaseAdminInstallService {
         author: "VitNode",
         support_url: "https://vitnode.com/",
         author_url: "https://vitnode.com/",
-        created: currentDate(),
         default: true
       }
     ]);
@@ -96,7 +95,6 @@ export class CreateDatabaseAdminInstallService {
       author: "VitNode",
       author_url: "https://vitnode.com/",
       support_url: "https://github.com/aXenDeveloper/vitnode/issues",
-      created: currentDate(),
       protected: true,
       default: true
     });
@@ -114,8 +112,6 @@ export class CreateDatabaseAdminInstallService {
     const guestGroup = await this.databaseService.db
       .insert(core_groups)
       .values({
-        created: currentDate(),
-        updated: currentDate(),
         protected: true,
         guest: true
       })
@@ -137,8 +133,6 @@ export class CreateDatabaseAdminInstallService {
     const memberGroup = await this.databaseService.db
       .insert(core_groups)
       .values({
-        created: currentDate(),
-        updated: currentDate(),
         protected: true,
         default: true
       })
@@ -160,8 +154,6 @@ export class CreateDatabaseAdminInstallService {
     const moderatorGroup = await this.databaseService.db
       .insert(core_groups)
       .values({
-        created: currentDate(),
-        updated: currentDate(),
         protected: true
       })
       .returning();
@@ -182,16 +174,12 @@ export class CreateDatabaseAdminInstallService {
     await this.databaseService.db.insert(core_moderators_permissions).values({
       group_id: moderatorGroup[0].id,
       unrestricted: true,
-      created: currentDate(),
-      updated: currentDate(),
       protected: true
     });
 
     const adminGroup = await this.databaseService.db
       .insert(core_groups)
       .values({
-        created: currentDate(),
-        updated: currentDate(),
         protected: true,
         root: true
       })
@@ -213,16 +201,12 @@ export class CreateDatabaseAdminInstallService {
     await this.databaseService.db.insert(core_admin_permissions).values({
       group_id: adminGroup[0].id,
       unrestricted: true,
-      created: currentDate(),
-      updated: currentDate(),
       protected: true
     });
 
     await this.databaseService.db.insert(core_moderators_permissions).values({
       group_id: adminGroup[0].id,
       unrestricted: true,
-      created: currentDate(),
-      updated: currentDate(),
       protected: true
     });
 

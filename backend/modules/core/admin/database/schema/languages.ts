@@ -1,9 +1,9 @@
 import {
   boolean,
   index,
-  integer,
   pgTable,
   serial,
+  timestamp,
   varchar
 } from "drizzle-orm/pg-core";
 
@@ -17,7 +17,10 @@ export const core_languages = pgTable(
     protected: boolean("protected").notNull().default(false),
     default: boolean("default").notNull().default(false),
     enabled: boolean("enabled").notNull().default(true),
-    created: integer("created").notNull()
+    created: timestamp("created").notNull().defaultNow(),
+    updated: timestamp("updated").notNull().defaultNow(),
+    time_24: boolean("time_24").notNull().default(false),
+    locale: varchar("locale", { length: 50 }).notNull().default("enUS")
   },
   table => ({
     code_idx: index("core_languages_code_idx").on(table.code),

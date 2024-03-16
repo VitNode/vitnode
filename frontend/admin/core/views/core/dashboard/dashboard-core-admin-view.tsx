@@ -6,6 +6,10 @@ import { Badge } from "@/components/ui/badge";
 import { RebuildRequiredAdmin } from "@/admin/core/global/rebuild-required";
 import { CONFIG } from "@/config";
 
+// interface Props {
+//   data: Admin__Core__DashboardQuery;
+// }
+
 export const DashboardCoreAdminView = () => {
   const t = useTranslations("core");
 
@@ -29,8 +33,6 @@ export const DashboardCoreAdminView = () => {
       />
 
       <RebuildRequiredAdmin />
-
-      <div>Not implemented!</div>
     </>
   );
 };

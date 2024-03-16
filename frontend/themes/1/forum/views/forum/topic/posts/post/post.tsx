@@ -3,17 +3,14 @@ import type { ReactNode } from "react";
 
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import { UserLink } from "@/components/user/link/user-link";
-import { DateFormat } from "@/components/date-format";
+import { DateFormat } from "@/components/date-format/date-format";
 import { GroupFormat } from "@/components/groups/group-format";
 import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
-import type { TextLanguage, User } from "@/graphql/hooks";
+import type { ShowPostsForums } from "@/graphql/hooks";
 import { DivMotion } from "@/components/animations/div-motion";
 
-interface Props {
-  content: TextLanguage[];
-  created: number;
-  post_id: number;
-  user: User;
+interface Props
+  extends Pick<ShowPostsForums, "content" | "created" | "post_id" | "user"> {
   customMoreMenu?: ReactNode;
   disableInitialAnimation?: boolean;
 }

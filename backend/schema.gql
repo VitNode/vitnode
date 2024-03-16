@@ -56,7 +56,7 @@ type ChildrenShowForumForums {
   _count: ShowForumForumsCounts!
   breadcrumbs: [BreadcrumbsForumForums!]!
   children: [LastChildShowForumForums!]!
-  created: Int!
+  created: DateTime!
   description: [TextLanguage!]!
   id: Int!
   last_posts: LastPostsShowForumForumsObj!
@@ -68,13 +68,18 @@ type CreateForumForumsObj {
   _count: ShowForumForumsCounts!
   breadcrumbs: [BreadcrumbsForumForums!]!
   children: [ChildrenShowForumForums!]!
-  created: Int!
+  created: DateTime!
   description: [TextLanguage!]!
   id: Int!
   last_posts: LastPostsShowForumForumsObj!
   name: [TextLanguage!]!
   position: Int!
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type GeneralAdminSettingsObj {
   side_name: String!
@@ -102,7 +107,7 @@ type GroupsPermissionsForumForums {
 }
 
 type LastChildShowForumForums {
-  created: Int!
+  created: DateTime!
   description: [TextLanguage!]!
   id: Int!
   name: [TextLanguage!]!
@@ -110,7 +115,7 @@ type LastChildShowForumForums {
 }
 
 type LastPostsShowForumForums {
-  created: Int!
+  created: DateTime!
   id: Int!
   topic: TopicLastPostsShowForumForums!
   user: User!
@@ -151,10 +156,10 @@ type LayoutAdminInstallObj {
 type Mutation {
   admin__core_groups__delete(id: Int!): String!
   admin__core_groups__edit(id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
-  admin__core_languages__create(code: String!, name: String!, timezone: String!): ShowCoreLanguages!
+  admin__core_languages__create(code: String!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_languages__delete(code: String!): String!
   admin__core_languages__download(all: Boolean!, code: String!, plugins: [String!]!): String!
-  admin__core_languages__edit(default: Boolean!, enabled: Boolean!, id: Int!, name: String!, timezone: String!): ShowCoreLanguages!
+  admin__core_languages__edit(default: Boolean!, enabled: Boolean!, id: Int!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_languages__update(code: String!, file: Upload!): String!
   admin__core_nav__change_position(id: Int!, index_to_move: Int!, parent_id: Int): String!
   admin__core_nav__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, name: [TextLanguageInput!]!): ShowCoreNav!
@@ -233,6 +238,7 @@ type PermissionsTopicForums {
 type Query {
   admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
   admin__core_members__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
+  admin__core_members__stats_sign_up: [SignUpStatsAdminMembers!]!
   admin__core_plugins__download_check(code: String!): CheckDownloadAdminPluginsObj!
   admin__core_plugins__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminPluginsSortByArgs!]): ShowAdminPluginsObj!
   admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
@@ -281,14 +287,14 @@ type RebuildRequiredObj {
 }
 
 type ShowAdminGroups {
-  created: Int!
+  created: DateTime!
   default: Boolean!
   guest: Boolean!
   id: Int!
   name: [TextLanguage!]!
   protected: Boolean!
   root: Boolean!
-  updated: Int!
+  updated: DateTime!
   users_count: Int!
 }
 
@@ -313,7 +319,7 @@ type ShowAdminMembers {
   email: String!
   group: GroupUser!
   id: Int!
-  joined: Int!
+  joined: DateTime!
   name: String!
   name_seo: String!
   newsletter: Boolean!
@@ -345,7 +351,7 @@ type ShowAdminPlugins {
   author: String!
   author_url: String
   code: String!
-  created: Int!
+  created: DateTime!
   default: Boolean!
   description: String
   enabled: Boolean!
@@ -371,11 +377,11 @@ enum ShowAdminPluginsSortingColumnEnum {
 }
 
 type ShowAdminStaffAdministrators {
-  created: Int!
+  created: DateTime!
   id: Int!
   protected: Boolean!
   unrestricted: Boolean!
-  updated: Int!
+  updated: DateTime!
   user_or_group: UserOrGroupCoreStaffUnion!
 }
 
@@ -394,11 +400,11 @@ enum ShowAdminStaffAdministratorsSortingColumnEnum {
 }
 
 type ShowAdminStaffModerators {
-  created: Int!
+  created: DateTime!
   id: Int!
   protected: Boolean!
   unrestricted: Boolean!
-  updated: Int!
+  updated: DateTime!
   user_or_group: UserOrGroupCoreStaffUnion!
 }
 
@@ -419,7 +425,7 @@ enum ShowAdminStaffModeratorsSortingColumnEnum {
 type ShowAdminThemes {
   author: String!
   author_url: String
-  created: Int!
+  created: DateTime!
   default: Boolean!
   id: Int!
   name: String!
@@ -448,8 +454,10 @@ type ShowCoreLanguages {
   default: Boolean!
   enabled: Boolean!
   id: Int!
+  locale: String!
   name: String!
   protected: Boolean!
+  time_24: Boolean!
   timezone: String!
 }
 
@@ -463,7 +471,7 @@ type ShowCoreMembers {
   avatar_color: String!
   group: GroupUser!
   id: Int!
-  joined: Int!
+  joined: DateTime!
   name: String!
   name_seo: String!
   posts: Int!
@@ -515,8 +523,8 @@ type ShowCoreNavObj {
 
 type ShowCoreSessionDevices {
   device_id: Int!
-  expires: Int!
-  last_seen: Int!
+  expires: DateTime!
+  last_seen: DateTime!
   login_token: String!
   user_id: Int!
 }
@@ -536,7 +544,7 @@ type ShowForumForumsAdmin {
   _count: ShowForumForumsCounts!
   breadcrumbs: [BreadcrumbsForumForums!]!
   children: [ChildrenShowForumForums!]!
-  created: Int!
+  created: DateTime!
   description: [TextLanguage!]!
   id: Int!
   last_posts: LastPostsShowForumForumsObj!
@@ -566,7 +574,7 @@ type ShowForumForumsWithChildren {
   _count: ShowForumForumsCounts!
   breadcrumbs: [BreadcrumbsForumForums!]!
   children: [ChildrenShowForumForums!]!
-  created: Int!
+  created: DateTime!
   description: [TextLanguage!]!
   id: Int!
   last_posts: LastPostsShowForumForumsObj!
@@ -581,7 +589,7 @@ type ShowGeneralAdminSettingsObj {
 
 type ShowPostsForums {
   content: [TextLanguage!]!
-  created: Int!
+  created: DateTime!
   id: Int!
   post_id: Int!
   user: User!
@@ -590,7 +598,7 @@ type ShowPostsForums {
 type ShowPostsForumsMetaTags {
   action: TopicActions!
   action_id: Int!
-  created: Int!
+  created: DateTime!
   id: Int!
   user: User!
 }
@@ -609,7 +617,7 @@ enum ShowPostsForumsSortingEnum {
 type ShowTopicsForums {
   breadcrumbs: [BreadcrumbsForumForums!]!
   content: [TextLanguage!]!
-  created: Int!
+  created: DateTime!
   id: Int!
   locked: Boolean!
   permissions: PermissionsTopicForums!
@@ -627,6 +635,11 @@ type SignUpCoreMembersObj {
   group_id: Int!
   name: String!
   newsletter: Boolean
+}
+
+type SignUpStatsAdminMembers {
+  joined_date: String!
+  users_joined: Int!
 }
 
 enum SortDirectionEnum {

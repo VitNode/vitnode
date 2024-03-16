@@ -3,7 +3,6 @@ import { Injectable } from "@nestjs/common";
 import { ShowAdminGroups } from "../show/dto/show.obj";
 import { CreateAdminGroupsArgs } from "./dto/create.args";
 
-import { currentDate } from "@/functions/date";
 import { DatabaseService } from "@/modules/database/database.service";
 import {
   core_groups,
@@ -17,10 +16,7 @@ export class CreateAdminGroupsService {
   async create({ name }: CreateAdminGroupsArgs): Promise<ShowAdminGroups> {
     const group = await this.databaseService.db
       .insert(core_groups)
-      .values({
-        created: currentDate(),
-        updated: currentDate()
-      })
+      .values({})
       .returning();
 
     const groupNames = await this.databaseService.db

@@ -4,6 +4,7 @@ import {
   pgTable,
   serial,
   text,
+  timestamp,
   varchar
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
@@ -24,8 +25,8 @@ export const forum_posts = pgTable(
       onDelete: "cascade"
     }),
     ip_address: varchar("ip_address", { length: 45 }),
-    created: integer("created").notNull(),
-    updated: integer("updated").notNull()
+    created: timestamp("created").notNull().defaultNow(),
+    update: timestamp("update").notNull().defaultNow()
   },
   table => ({
     topic_id_idx: index("forum_posts_topic_id_idx").on(table.topic_id),
@@ -99,7 +100,7 @@ export const forum_posts_timeline = pgTable(
         onDelete: "cascade"
       }
     ),
-    created: integer("created").notNull(),
+    created: timestamp("created").notNull().defaultNow(),
     topic_id: integer("topic_id")
       .notNull()
       .references(() => forum_topics.id, {

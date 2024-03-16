@@ -12,6 +12,9 @@ const config: CodegenConfig = {
         "typescript-document-nodes"
       ],
       config: {
+        scalars: {
+          DateTime: "Date"
+        },
         enumsAsConst: true,
         allowEnumStringTypes: true,
         namingConvention: {

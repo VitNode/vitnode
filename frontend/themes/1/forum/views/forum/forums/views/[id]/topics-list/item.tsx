@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 
-import { DateFormat } from "@/components/date-format";
+import { DateFormat } from "@/components/date-format/date-format";
 import type { ShowTopicsForums } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { Link } from "@/i18n";

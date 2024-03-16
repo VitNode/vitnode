@@ -24,8 +24,8 @@ class ShowPostsForumsItemCommon {
   @Field(() => Int)
   id: number;
 
-  @Field(() => Int)
-  created: number;
+  @Field(() => Date)
+  created: Date;
 }
 
 @ObjectType()

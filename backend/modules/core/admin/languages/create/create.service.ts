@@ -3,13 +3,12 @@ import { join } from "path";
 
 import { Injectable } from "@nestjs/common";
 
-import { CreateCoreAdminLanguagesArgs } from "./dto/edit.args";
+import { CreateCoreAdminLanguagesArgs } from "./dto/create.args";
 
 import { DatabaseService } from "@/modules/database/database.service";
 import { ShowCoreLanguages } from "@/modules/core/languages/show/dto/show.obj";
 import { CustomError } from "@/utils/errors/CustomError";
 import { core_languages } from "../../database/schema/languages";
-import { currentDate } from "@/functions/date";
 import { setRebuildRequired } from "@/functions/config/rebuild-required";
 
 @Injectable()
@@ -18,7 +17,9 @@ export class CreateAdminCoreLanguageService {
 
   async create({
     code,
+    locale,
     name,
+    time_24,
     timezone
   }: CreateCoreAdminLanguagesArgs): Promise<ShowCoreLanguages> {
     const language =
@@ -42,7 +43,8 @@ export class CreateAdminCoreLanguageService {
         default: false,
         protected: false,
         enabled: true,
-        created: currentDate()
+        time_24,
+        locale
       })
       .returning();
 

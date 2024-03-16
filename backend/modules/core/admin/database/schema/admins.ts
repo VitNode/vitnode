@@ -4,6 +4,7 @@ import {
   integer,
   pgTable,
   serial,
+  timestamp,
   varchar
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
@@ -23,8 +24,8 @@ export const core_admin_permissions = pgTable(
       onDelete: "cascade"
     }),
     unrestricted: boolean("unrestricted").notNull().default(false),
-    created: integer("created").notNull(),
-    updated: integer("updated").notNull(),
+    created: timestamp("created").notNull().defaultNow(),
+    updated: timestamp("updated").notNull().defaultNow(),
     protected: boolean("protected").notNull().default(false)
   },
   table => ({
@@ -58,8 +59,8 @@ export const core_admin_sessions = pgTable(
       .references(() => core_users.id, {
         onDelete: "cascade"
       }),
-    last_seen: integer("last_seen").notNull(),
-    expires: integer("expires").notNull(),
+    last_seen: timestamp("last_seen").notNull().defaultNow(),
+    expires: timestamp("expires").notNull(),
     device_id: integer("device_id")
       .references(() => core_sessions_known_devices.id, {
         onDelete: "cascade"

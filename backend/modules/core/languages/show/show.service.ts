@@ -35,16 +35,7 @@ export class ShowCoreLanguageService {
     });
 
     const edges = await this.databaseService.db.query.core_languages.findMany({
-      ...pagination,
-      columns: {
-        id: true,
-        code: true,
-        name: true,
-        default: true,
-        enabled: true,
-        timezone: true,
-        protected: true
-      }
+      ...pagination
     });
 
     const totalCount = await this.databaseService.db

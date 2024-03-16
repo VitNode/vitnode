@@ -21,8 +21,8 @@ export class GroupShowCoreMembers {
 
 @ObjectType()
 export class ShowCoreMembers extends User {
-  @Field(() => Int)
-  joined: number;
+  @Field(() => Date)
+  joined: Date;
 
   @Field(() => Int)
   posts: number;
