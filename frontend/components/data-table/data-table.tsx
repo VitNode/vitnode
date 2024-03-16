@@ -10,7 +10,7 @@ import {
 } from "@tanstack/react-table";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { useMemo, type ReactNode } from "react";
+import { useMemo, type ReactNode, Suspense } from "react";
 
 import {
   Table,
@@ -33,6 +33,7 @@ import { usePathname, useRouter } from "@/i18n";
 import { ToolbarDataTable } from "./toolbar/toolbar";
 import type { ToolbarDataTableProps } from "./toolbar/toolbar";
 import { cn } from "@/functions/classnames";
+import { Loader } from "../loader";
 
 interface TDataMin {
   id: number;
@@ -148,119 +149,124 @@ export function DataTable<TData extends TDataMin>({
     <div className="flex flex-col gap-4">
       <ToolbarDataTable {...props} />
 
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map(headerGroup => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map(header => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map(row => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map(cell => (
-                    <TableCell
-                      className={cn({
-                        "flex items-center justify-end":
-                          cell.column.id === "actions"
-                      })}
-                      key={cell.id}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
+      <Suspense
+        key={`${pagination.cursor}_${pagination.first}_${pagination.last}`}
+        fallback={<Loader />}
+      >
+        <div className="rounded-md border">
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map(headerGroup => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map(header => {
+                    return (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </TableHead>
+                    );
+                  })}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  {t("no_results")}
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
-
-      {pageInfo && (
-        <div className="flex items-center justify-end px-2 pt-4 gap-4 lg:gap-8">
-          <div className="flex items-center space-x-2">
-            <p className="text-sm font-medium">Rows per page</p>
-            <Select
-              value={`${pageSizeValue}`}
-              onValueChange={value => {
-                changeState({ pageSize: value });
-              }}
-            >
-              <SelectTrigger className="h-8 w-[70px]">
-                <SelectValue placeholder={pageSizeValue} />
-              </SelectTrigger>
-              <SelectContent side="top">
-                {enablePageSize.map(pageSize => (
-                  <SelectItem key={pageSize} value={`${pageSize}`}>
-                    {pageSize}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <Button
-              variant="outline"
-              size="icon"
-              disabled={!pageInfo.hasPreviousPage}
-              ariaLabel={t("pagination.previous")}
-              onClick={() =>
-                changeState({
-                  cursor: pageInfo.startCursor,
-                  pageSize: pagination.last
-                })
-              }
-            >
-              <ChevronLeftIcon className="size-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              ariaLabel={t("pagination.next")}
-              disabled={!pageInfo.hasNextPage}
-              onClick={() =>
-                changeState({
-                  cursor: pageInfo.endCursor,
-                  pageSize: pagination.first,
-                  nextPage: true
-                })
-              }
-            >
-              <ChevronRightIcon className="size-4" />
-            </Button>
-          </div>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map(row => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map(cell => (
+                      <TableCell
+                        className={cn({
+                          "flex items-center justify-end":
+                            cell.column.id === "actions"
+                        })}
+                        key={cell.id}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
+                    {t("no_results")}
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
         </div>
-      )}
+
+        {pageInfo && (
+          <div className="flex items-center justify-end px-2 pt-4 gap-4 lg:gap-8">
+            <div className="flex items-center space-x-2">
+              <p className="text-sm font-medium">Rows per page</p>
+              <Select
+                value={`${pageSizeValue}`}
+                onValueChange={value => {
+                  changeState({ pageSize: value });
+                }}
+              >
+                <SelectTrigger className="h-8 w-[70px]">
+                  <SelectValue placeholder={pageSizeValue} />
+                </SelectTrigger>
+                <SelectContent side="top">
+                  {enablePageSize.map(pageSize => (
+                    <SelectItem key={pageSize} value={`${pageSize}`}>
+                      {pageSize}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <Button
+                variant="outline"
+                size="icon"
+                disabled={!pageInfo.hasPreviousPage}
+                ariaLabel={t("pagination.previous")}
+                onClick={() =>
+                  changeState({
+                    cursor: pageInfo.startCursor,
+                    pageSize: pagination.last
+                  })
+                }
+              >
+                <ChevronLeftIcon className="size-4" />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                ariaLabel={t("pagination.next")}
+                disabled={!pageInfo.hasNextPage}
+                onClick={() =>
+                  changeState({
+                    cursor: pageInfo.endCursor,
+                    pageSize: pagination.first,
+                    nextPage: true
+                  })
+                }
+              >
+                <ChevronRightIcon className="size-4" />
+              </Button>
+            </div>
+          </div>
+        )}
+      </Suspense>
     </div>
   );
 }

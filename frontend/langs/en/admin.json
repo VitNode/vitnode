@@ -48,6 +48,7 @@
         "title": "Plugins",
         "set_default": "Set as default",
         "get_help": "Get help",
+        "search_placeholder": "Search by name...",
         "create": {
           "title": "Create Plugin",
           "success": "Plugin has been created.",

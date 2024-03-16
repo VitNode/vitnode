@@ -49,7 +49,7 @@ export async function generateMetadata({
 export default async function Page({ searchParams }: Props) {
   const variables = usePaginationAPISsr({
     searchParams,
-    // search: true,
+    search: true,
     sortByEnum: ShowAdminPluginsSortingColumnEnum,
     defaultPageSize: 10
   });
