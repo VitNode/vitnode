@@ -30,16 +30,19 @@ import {
   CommandEmpty,
   CommandGroup,
   CommandInput,
-  CommandItem
+  CommandItem,
+  CommandList
 } from "@/components/ui/command";
 import { Loader } from "@/components/loader";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
+import { useSessionAdmin } from "@/admin/core/hooks/use-session-admin";
 
 export const ContentDownloadActionsTableLangsCoreAdmin = ({
   code
 }: Pick<ShowCoreLanguages, "code">) => {
   const t = useTranslations("admin.core.langs.actions.download");
   const { form, onSubmit, query } = useDownloadLangAdmin({ code });
+  const { version } = useSessionAdmin();
   const { data } = query;
 
   if (query.isLoading || !data) {
@@ -51,11 +54,11 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
   } = data;
 
   const plugins = [
-    { id: "core", name: "Core", version: "TODO", code: "core" },
+    { id: "core", name: "Core", version, code: "core" },
     {
       id: "admin",
       name: "Admin",
-      version: "TODO",
+      version,
       code: "admin"
     },
     ...edges
@@ -118,36 +121,41 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
                     <PopoverContent className="p-0 w-80">
                       <Command>
                         <CommandInput placeholder={t("search")} />
-                        <CommandEmpty>{t("empty")}</CommandEmpty>
-                        <CommandGroup>
-                          {plugins.map(item => (
-                            <CommandItem
-                              value={item.code}
-                              key={item.id}
-                              className="flex gap-2"
-                              onSelect={value => {
-                                const values = field.value;
 
-                                field.onChange(
-                                  values.includes(value)
-                                    ? values.filter(el => el !== value)
-                                    : [...values, item.code]
-                                );
-                              }}
-                            >
-                              <Check
-                                className={cn(
-                                  "size-4",
-                                  field.value.includes(item.code)
-                                    ? "opacity-100"
-                                    : "opacity-0"
-                                )}
-                              />
-                              <span className="font-semibold">{item.name}</span>
-                              <span>{item.version}</span>
-                            </CommandItem>
-                          ))}
-                        </CommandGroup>
+                        <CommandList>
+                          <CommandEmpty>{t("empty")}</CommandEmpty>
+                          <CommandGroup>
+                            {plugins.map(item => (
+                              <CommandItem
+                                value={item.code}
+                                key={item.id}
+                                className="flex gap-2"
+                                onSelect={value => {
+                                  const values = field.value;
+
+                                  field.onChange(
+                                    values.includes(value)
+                                      ? values.filter(el => el !== value)
+                                      : [...values, item.code]
+                                  );
+                                }}
+                              >
+                                <Check
+                                  className={cn(
+                                    "size-4",
+                                    field.value.includes(item.code)
+                                      ? "opacity-100"
+                                      : "opacity-0"
+                                  )}
+                                />
+                                <span className="font-semibold">
+                                  {item.name}
+                                </span>
+                                <span>{item.version}</span>
+                              </CommandItem>
+                            ))}
+                          </CommandGroup>
+                        </CommandList>
                       </Command>
                     </PopoverContent>
                   </Popover>

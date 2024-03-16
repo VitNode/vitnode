@@ -1,6 +1,8 @@
 import { join } from "path";
 import * as fs from "fs";
 
+import { PluginInfoJSONType } from "@/modules/core/admin/plugins/helpers/files/create/contents";
+
 export interface ConfigType {
   applications: string[];
   finished_install: boolean;
@@ -25,4 +27,23 @@ export const getConfigFile = async () => {
   const data: ConfigType = JSON.parse(config);
 
   return data;
+};
+
+export const getCoreInfo = async () => {
+  const path = join(process.cwd(), "modules", "core");
+  const config = fs.readFileSync(join(path, "plugin.json"), "utf8");
+  const data: PluginInfoJSONType = JSON.parse(config);
+
+  const pathVersionsJSON = join(path, "versions.json");
+  const versionsFile = await fs.promises.readFile(pathVersionsJSON, "utf8");
+  const versions: { [key: string]: string } = JSON.parse(versionsFile);
+
+  // Find the latest version
+  const latestVersion = Object.keys(versions).sort().reverse()[0];
+  const version = versions[latestVersion];
+
+  return {
+    ...data,
+    version
+  };
 };

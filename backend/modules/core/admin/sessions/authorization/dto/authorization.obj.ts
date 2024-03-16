@@ -20,4 +20,7 @@ export class AuthorizationAdminSessionsObj {
 
   @Field(() => RebuildRequiredObj)
   rebuild_required: RebuildRequiredObj;
+
+  @Field(() => String)
+  version: string;
 }

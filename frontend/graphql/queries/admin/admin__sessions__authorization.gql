@@ -27,5 +27,6 @@ query Admin__sessions__authorization {
       langs
       plugins
     }
+    version
   }
 }

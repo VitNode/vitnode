@@ -8,6 +8,7 @@ import type {
 interface Args {
   rebuild_required: RebuildRequiredObj;
   session: Omit<AuthorizationCurrentUserObj, "posts"> | undefined | null;
+  version: string;
 }
 
 export const SessionAdminContext = createContext<Args>({
@@ -16,7 +17,8 @@ export const SessionAdminContext = createContext<Args>({
     themes: false,
     langs: false,
     plugins: false
-  }
+  },
+  version: ""
 });
 
 export const useSessionAdmin = () => useContext(SessionAdminContext);

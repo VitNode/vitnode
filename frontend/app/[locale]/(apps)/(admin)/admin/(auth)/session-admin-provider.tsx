@@ -13,14 +13,15 @@ interface Props {
 export const SessionAdminProvider = ({
   children,
   data: {
-    admin__sessions__authorization: { rebuild_required, user: session }
+    admin__sessions__authorization: { rebuild_required, user: session, version }
   }
 }: Props) => {
   return (
     <SessionAdminContext.Provider
       value={{
         session,
-        rebuild_required
+        rebuild_required,
+        version
       }}
     >
       {children}

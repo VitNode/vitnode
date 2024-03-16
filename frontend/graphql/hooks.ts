@@ -21,6 +21,7 @@ export type AuthorizationAdminSessionsObj = {
   __typename?: 'AuthorizationAdminSessionsObj';
   rebuild_required: RebuildRequiredObj;
   user?: Maybe<AuthorizationCurrentUserObj>;
+  version: Scalars['String']['output'];
 };
 
 export type AuthorizationCoreSessionsObj = {
@@ -1530,6 +1531,11 @@ export type Forum_Topics__EditMutationVariables = Exact<{
 
 export type Forum_Topics__EditMutation = { __typename?: 'Mutation', forum_topics__edit: { __typename?: 'ShowTopicsForums', id: number, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, content: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
+export type Admin__Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', version: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, rebuild_required: { __typename?: 'RebuildRequiredObj', themes: boolean, langs: boolean, plugins: boolean } } };
+
 export type Admin__Install__LayoutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1613,11 +1619,6 @@ export type Admin__Core_Plugins__ShowQueryVariables = Exact<{
 
 export type Admin__Core_Plugins__ShowQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url?: string | null, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, support_url: string, created: Date, version?: string | null, version_code?: number | null, allow_default: boolean }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
-export type Admin__Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, rebuild_required: { __typename?: 'RebuildRequiredObj', themes: boolean, langs: boolean, plugins: boolean } } };
-
 export type Admin__Settings__General__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1637,6 +1638,11 @@ export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type Core_MiddlewareQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean, locale: string, time_24: boolean }> }, core_themes__show: { __typename?: 'ShowCoreThemesObj', edges: Array<{ __typename?: 'ShowCoreThemes', id: number, name: string }> } };
+
+export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', theme_id?: number | null, plugin_default: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, rebuild_required: { __typename?: 'RebuildRequiredObj', themes: boolean, langs: boolean, plugins: boolean } }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string }> }, core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, position: number, external: boolean, href: string, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
 export type Core_Languages__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -1662,11 +1668,6 @@ export type Core_Members__ProfilesQueryVariables = Exact<{
 
 
 export type Core_Members__ProfilesQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, id: number, joined: Date, name: string, name_seo: string, posts: number, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
-
-export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', theme_id?: number | null, plugin_default: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, rebuild_required: { __typename?: 'RebuildRequiredObj', themes: boolean, langs: boolean, plugins: boolean } }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string }> }, core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, position: number, external: boolean, href: string, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
 export type Admin__Forum_Forums__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2203,6 +2204,40 @@ export const Forum_Topics__Edit = gql`
   }
 }
     `;
+export const Admin__Sessions__Authorization = gql`
+    query Admin__sessions__authorization {
+  admin__sessions__authorization {
+    user {
+      email
+      id
+      name_seo
+      is_admin
+      is_mod
+      name
+      newsletter
+      avatar_color
+      avatar {
+        id
+        dir_folder
+        name
+      }
+      group {
+        name {
+          language_code
+          value
+        }
+        id
+      }
+    }
+    rebuild_required {
+      themes
+      langs
+      plugins
+    }
+    version
+  }
+}
+    `;
 export const Admin__Install__Layout = gql`
     query Admin__install__layout {
   admin__install__layout {
@@ -2500,39 +2535,6 @@ export const Admin__Core_Plugins__Show = gql`
   }
 }
     `;
-export const Admin__Sessions__Authorization = gql`
-    query Admin__sessions__authorization {
-  admin__sessions__authorization {
-    user {
-      email
-      id
-      name_seo
-      is_admin
-      is_mod
-      name
-      newsletter
-      avatar_color
-      avatar {
-        id
-        dir_folder
-        name
-      }
-      group {
-        name {
-          language_code
-          value
-        }
-        id
-      }
-    }
-    rebuild_required {
-      themes
-      langs
-      plugins
-    }
-  }
-}
-    `;
 export const Admin__Settings__General__Show = gql`
     query Admin__settings__general__show {
   admin__settings__general__show {
@@ -2589,6 +2591,76 @@ export const Core_Middleware = gql`
     edges {
       id
       name
+    }
+  }
+}
+    `;
+export const Core_Sessions__Authorization = gql`
+    query Core_sessions__authorization {
+  core_sessions__authorization {
+    user {
+      email
+      id
+      name_seo
+      is_admin
+      is_mod
+      name
+      newsletter
+      avatar_color
+      avatar {
+        id
+        dir_folder
+        name
+      }
+      group {
+        name {
+          language_code
+          value
+        }
+        id
+      }
+    }
+    theme_id
+    rebuild_required {
+      themes
+      langs
+      plugins
+    }
+    plugin_default
+  }
+  core_languages__show {
+    edges {
+      code
+    }
+  }
+  core_nav__show {
+    edges {
+      children {
+        description {
+          language_code
+          value
+        }
+        id
+        name {
+          language_code
+          value
+        }
+        position
+        external
+        href
+      }
+      description {
+        language_code
+        value
+      }
+      id
+      name {
+        language_code
+        value
+      }
+      href
+      external
+      position
     }
   }
 }
@@ -2663,76 +2735,6 @@ export const Core_Members__Profiles = gql`
       name
       name_seo
       posts
-    }
-  }
-}
-    `;
-export const Core_Sessions__Authorization = gql`
-    query Core_sessions__authorization {
-  core_sessions__authorization {
-    user {
-      email
-      id
-      name_seo
-      is_admin
-      is_mod
-      name
-      newsletter
-      avatar_color
-      avatar {
-        id
-        dir_folder
-        name
-      }
-      group {
-        name {
-          language_code
-          value
-        }
-        id
-      }
-    }
-    theme_id
-    rebuild_required {
-      themes
-      langs
-      plugins
-    }
-    plugin_default
-  }
-  core_languages__show {
-    edges {
-      code
-    }
-  }
-  core_nav__show {
-    edges {
-      children {
-        description {
-          language_code
-          value
-        }
-        id
-        name {
-          language_code
-          value
-        }
-        position
-        external
-        href
-      }
-      description {
-        language_code
-        value
-      }
-      id
-      name {
-        language_code
-        value
-      }
-      href
-      external
-      position
     }
   }
 }
