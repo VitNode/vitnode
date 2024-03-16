@@ -3,12 +3,14 @@ query Core_languages__show(
   $last: Int
   $cursor: Int
   $search: String
+  $sortBy: [ShowCoreLanguagesSortByArgs!]
 ) {
   core_languages__show(
     first: $first
     last: $last
     cursor: $cursor
     search: $search
+    sortBy: $sortBy
   ) {
     edges {
       code
@@ -20,6 +22,8 @@ query Core_languages__show(
       timezone
       locale
       time_24
+      updated
+      created
     }
     pageInfo {
       count

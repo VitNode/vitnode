@@ -75,7 +75,7 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
             </FormControl>
             <SelectContent>
               {languages.map(language => (
-                <SelectItem key={language.id} value={language.code}>
+                <SelectItem key={language.code} value={language.code}>
                   {language.name}
                 </SelectItem>
               ))}

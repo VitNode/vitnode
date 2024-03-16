@@ -20,7 +20,8 @@ export class ShowCoreLanguageService {
     cursor,
     first,
     last,
-    search = ""
+    search = "",
+    sortBy
   }: ShowCoreLanguagesArgs): Promise<ShowCoreLanguagesObj> {
     const pagination = await inputPaginationCursor({
       cursor,
@@ -30,9 +31,10 @@ export class ShowCoreLanguageService {
       last,
       primaryCursor: { order: "ASC", key: "id", schema: core_languages.id },
       defaultSortBy: {
-        direction: SortDirectionEnum.asc,
-        column: "id"
-      }
+        direction: SortDirectionEnum.desc,
+        column: "updated"
+      },
+      sortBy
     });
 
     const edges = await this.databaseService.db.query.core_languages.findMany({

@@ -11,7 +11,6 @@ import { Badge } from "@/components/ui/badge";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
 import { DateFormat } from "@/components/date-format/date-format";
 import { DataTable } from "@/components/data-table/data-table";
-import { Switch } from "@/components/ui/switch";
 import { ActionsItemPluginsAdmin } from "./actions/actions";
 
 export const ContentTablePluginsAdmin = ({
@@ -91,32 +90,32 @@ export const ContentTablePluginsAdmin = ({
           return <DateFormat date={data.updated} />;
         }
       },
-      {
-        header: tCore("table.enabled"),
-        accessorKey: "enabled",
-        cell: ({ row }) => {
-          const data = row.original;
+      // {
+      //   header: tCore("table.enabled"),
+      //   accessorKey: "enabled",
+      //   cell: ({ row }) => {
+      //     const data = row.original;
 
-          return (
-            <Switch
-              disabled={data.default}
-              checked={data.enabled}
-              onClick={async () => {
-                // const mutation = await mutationApi({
-                //   ...data,
-                //   enabled: !data.enabled
-                // });
-                // if (mutation.error) {
-                //   toast.error(tCore('errors.title'), {
-                //     description: tCore('errors.internal_server_error')
-                //   });
-                //   return;
-                // }
-              }}
-            />
-          );
-        }
-      },
+      //     return (
+      //       <Switch
+      //         disabled={data.default}
+      //         checked={data.enabled}
+      //         onClick={async () => {
+      //           // const mutation = await mutationApi({
+      //           //   ...data,
+      //           //   enabled: !data.enabled
+      //           // });
+      //           // if (mutation.error) {
+      //           //   toast.error(tCore('errors.title'), {
+      //           //     description: tCore('errors.internal_server_error')
+      //           //   });
+      //           //   return;
+      //           // }
+      //         }}
+      //       />
+      //     );
+      //   }
+      // },
       {
         id: "actions",
         cell: ({ row }) => {

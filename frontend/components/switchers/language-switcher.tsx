@@ -52,7 +52,7 @@ export const LanguageSwitcher = () => {
           }}
         >
           {enableLocales.map(language => (
-            <DropdownMenuRadioItem key={language.id} value={language.code}>
+            <DropdownMenuRadioItem key={language.code} value={language.code}>
               {language.name}
             </DropdownMenuRadioItem>
           ))}

@@ -4,7 +4,10 @@ import type { ShowCoreLanguages, ShowCoreThemes } from "@/graphql/hooks";
 
 interface Args {
   defaultLanguage: string;
-  languages: Omit<ShowCoreLanguages, "protected">[];
+  languages: Pick<
+    ShowCoreLanguages,
+    "code" | "default" | "enabled" | "locale" | "time_24" | "name" | "timezone"
+  >[];
   themes: Pick<ShowCoreThemes, "id" | "name">[];
 }
 

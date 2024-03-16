@@ -260,7 +260,7 @@ type Query {
   admin__install__layout: LayoutAdminInstallObj!
   admin__sessions__authorization: AuthorizationAdminSessionsObj!
   admin__settings__general__show: ShowGeneralAdminSettingsObj!
-  core_languages__show(cursor: Int, first: Int, last: Int, search: String): ShowCoreLanguagesObj!
+  core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowCoreLanguagesSortByArgs!]): ShowCoreLanguagesObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
@@ -376,6 +376,7 @@ input ShowAdminPluginsSortByArgs {
 
 enum ShowAdminPluginsSortingColumnEnum {
   created
+  updated
 }
 
 type ShowAdminStaffAdministrators {
@@ -453,6 +454,7 @@ enum ShowAdminThemesSortingColumnEnum {
 
 type ShowCoreLanguages {
   code: String!
+  created: DateTime!
   default: Boolean!
   enabled: Boolean!
   id: Int!
@@ -461,11 +463,22 @@ type ShowCoreLanguages {
   protected: Boolean!
   time_24: Boolean!
   timezone: String!
+  updated: DateTime!
 }
 
 type ShowCoreLanguagesObj {
   edges: [ShowCoreLanguages!]!
   pageInfo: PageInfo!
+}
+
+input ShowCoreLanguagesSortByArgs {
+  column: ShowCoreLanguagesSortingColumnEnum!
+  direction: SortDirectionEnum!
+}
+
+enum ShowCoreLanguagesSortingColumnEnum {
+  created
+  updated
 }
 
 type ShowCoreMembers {
