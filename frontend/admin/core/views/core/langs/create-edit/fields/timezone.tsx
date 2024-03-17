@@ -89,30 +89,6 @@ export function TimezoneFieldCreateEditLangAdmin<
         </PopoverContent>
       </Popover>
 
-      {/* <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger
-                      className={cn({
-                        "text-muted-foreground": !field.value
-                      })}
-                    >
-                      {field.value}
-                    </SelectTrigger>
-                  </FormControl>
-
-                  <SelectContent>
-                    <Virtuoso
-                      style={{ height: "200px" }}
-                      data={Object.keys(localeDate)}
-                      itemContent={(index, zone) => (
-                        <SelectItem value={zone}>{zone}</SelectItem>
-                      )}
-                    />
-                  </SelectContent>
-                </Select> */}
       <FormMessage />
     </FormItem>
   );
