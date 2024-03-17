@@ -30,7 +30,7 @@ export class EditAdminCoreLanguagesService {
       // Disable previous default language
       await this.databaseService.db
         .update(core_languages)
-        .set({ default: false, updated: new Date() })
+        .set({ default: false })
         .where(eq(core_languages.default, true));
     }
 
