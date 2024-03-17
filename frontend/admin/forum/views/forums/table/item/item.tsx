@@ -9,14 +9,15 @@ import { useTextLang } from "@/hooks/core/use-text-lang";
 import { cn } from "@/functions/classnames";
 import { ActionsForumAdmin } from "./actions/actions";
 import type { ShowForumForumsAdminWithChildren } from "../hooks/use-forum-forums-admin-api";
-import type { FlatTree } from "../use-functions";
+import type { FlatTree } from "@/hooks/core/drag&drop/use-functions";
 
 interface Props extends FlatTree<ShowForumForumsAdminWithChildren> {
   indentationWidth: number;
-  isOpenChildren: boolean;
   active?: boolean;
   isDropHere?: boolean;
+  isOpenChildren?: boolean;
   onCollapse?: (id: UniqueIdentifier) => void;
+  overlay?: boolean;
 }
 
 export const ItemTableForumsForumAdmin = ({
@@ -29,6 +30,7 @@ export const ItemTableForumsForumAdmin = ({
   isOpenChildren,
   name,
   onCollapse,
+  overlay,
   ...props
 }: Props) => {
   const { convertText } = useTextLang();
@@ -51,7 +53,9 @@ export const ItemTableForumsForumAdmin = ({
   return (
     <div
       ref={setDroppableNodeRef}
-      className="pl-[var(--spacing)]"
+      className={cn({
+        "pl-[var(--spacing)]": !overlay
+      })}
       style={
         {
           "--spacing": `${indentationWidth * depth}px`
@@ -100,7 +104,9 @@ export const ItemTableForumsForumAdmin = ({
         )}
 
         <div className="flex-grow flex flex-col">
-          <span>{convertText(name)}</span>
+          <span>
+            {convertText(name)} - {id}
+          </span>
         </div>
 
         <ActionsForumAdmin
