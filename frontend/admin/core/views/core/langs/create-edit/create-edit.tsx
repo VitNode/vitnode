@@ -1,6 +1,4 @@
 import { useTranslations } from "next-intl";
-import { Virtuoso } from "react-virtuoso";
-import * as localeDate from "date-fns/locale";
 
 import { useCreateEditLangAdmin } from "./hooks/use-create-edit-lang-admin";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
@@ -21,15 +19,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger
-} from "@/components/ui/select";
-import { timeZones } from "./timezones";
-import { cn } from "@/functions/classnames";
 import { Switch } from "@/components/ui/switch";
+import { LocaleFieldCreateEditLangAdmin } from "./fields/locale";
+import { TimezoneFieldCreateEditLangAdmin } from "./fields/timezone";
 
 interface Props {
   data?: ShowCoreLanguages;
@@ -71,34 +63,7 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
             control={form.control}
             name="timezone"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("create.timezone.label")}</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger
-                      className={cn({
-                        "text-muted-foreground": !field.value
-                      })}
-                    >
-                      {field.value}
-                    </SelectTrigger>
-                  </FormControl>
-
-                  <SelectContent>
-                    <Virtuoso
-                      style={{ height: "200px" }}
-                      data={timeZones}
-                      itemContent={(index, zone) => (
-                        <SelectItem value={zone}>{zone}</SelectItem>
-                      )}
-                    />
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
+              <TimezoneFieldCreateEditLangAdmin field={field} />
             )}
           />
 
@@ -106,34 +71,7 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
             control={form.control}
             name="locale"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("create.locale.label")}</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger
-                      className={cn({
-                        "text-muted-foreground": !field.value
-                      })}
-                    >
-                      {field.value}
-                    </SelectTrigger>
-                  </FormControl>
-
-                  <SelectContent>
-                    <Virtuoso
-                      style={{ height: "200px" }}
-                      data={Object.keys(localeDate)}
-                      itemContent={(index, zone) => (
-                        <SelectItem value={zone}>{zone}</SelectItem>
-                      )}
-                    />
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
+              <LocaleFieldCreateEditLangAdmin field={field} />
             )}
           />
 

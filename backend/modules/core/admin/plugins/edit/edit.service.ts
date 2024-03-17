@@ -43,8 +43,7 @@ export class EditAdminPluginsService {
       await this.databaseService.db
         .update(core_plugins)
         .set({
-          default: false,
-          updated: new Date()
+          default: false
         })
         .where(ne(core_plugins.code, code));
     }

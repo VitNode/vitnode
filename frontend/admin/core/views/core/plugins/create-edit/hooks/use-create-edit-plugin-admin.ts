@@ -62,7 +62,8 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
         description: values.description,
         supportUrl: values.support_url,
         author: values.author,
-        authorUrl: values.author_url
+        authorUrl: values.author_url,
+        default: data.default
       });
 
       if (mutation.error) {
