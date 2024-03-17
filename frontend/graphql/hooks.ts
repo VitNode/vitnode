@@ -586,6 +586,7 @@ export type QueryAdmin__Core_Plugins__Download_CheckArgs = {
 
 
 export type QueryAdmin__Core_Plugins__ShowArgs = {
+  code?: InputMaybe<Scalars['String']['input']>;
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
@@ -1638,6 +1639,14 @@ export type Admin__Core_Plugins__ShowQueryVariables = Exact<{
 
 export type Admin__Core_Plugins__ShowQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url?: string | null, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, support_url: string, updated: Date, version?: string | null, created: Date, version_code?: number | null, allow_default: boolean }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
+export type Admin__Core_Plugins__Show__ItemQueryVariables = Exact<{
+  code?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type Admin__Core_Plugins__Show__ItemQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', allow_default: boolean, author: string, author_url?: string | null, code: string, created: Date, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, support_url: string, updated: Date, version?: string | null, version_code?: number | null }> } };
+
 export type Admin__Settings__General__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2554,6 +2563,28 @@ export const Admin__Core_Plugins__Show = gql`
       hasPreviousPage
       startCursor
       totalCount
+    }
+  }
+}
+    `;
+export const Admin__Core_Plugins__Show__Item = gql`
+    query Admin__core_plugins__show__item($code: String, $first: Int) {
+  admin__core_plugins__show(code: $code, first: $first) {
+    edges {
+      allow_default
+      author
+      author_url
+      code
+      created
+      default
+      description
+      enabled
+      id
+      name
+      support_url
+      updated
+      version
+      version_code
     }
   }
 }

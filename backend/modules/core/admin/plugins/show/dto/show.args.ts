@@ -42,4 +42,7 @@ export class ShowAdminPluginsArgs {
 
   @Field(() => String, { nullable: true })
   search: string | null;
+
+  @Field(() => String, { nullable: true })
+  code: string | null;
 }

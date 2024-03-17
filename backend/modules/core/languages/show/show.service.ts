@@ -37,14 +37,17 @@ export class ShowCoreLanguageService {
       sortBy
     });
 
+    const where = ilike(core_languages.name, `%${search}%`);
+
     const edges = await this.databaseService.db.query.core_languages.findMany({
       ...pagination,
-      where: and(pagination.where, ilike(core_languages.name, `%${search}%`))
+      where: and(pagination.where, where)
     });
 
     const totalCount = await this.databaseService.db
       .select({ count: count() })
-      .from(core_languages);
+      .from(core_languages)
+      .where(where);
 
     return outputPagination({
       edges,
