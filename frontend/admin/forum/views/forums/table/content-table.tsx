@@ -45,7 +45,7 @@ export const ContentTableForumsForumAdmin = ({
   const [projected, setProjected] = useState<ProjectionReturnType | null>();
   const { activeId, getProjection, overId, setActiveId, setOverId } =
     useProjection();
-  const testDragAndDrop = useDragAndDrop({ activeId });
+  const dragAndDrop = useDragAndDrop({ activeId });
 
   const resetState = () => {
     setOverId(null);
@@ -60,7 +60,7 @@ export const ContentTableForumsForumAdmin = ({
     })
   );
 
-  const flattenedItems = testDragAndDrop.flattenedItems({ data });
+  const flattenedItems = dragAndDrop.flattenedItems({ data });
   const activeItem = flattenedItems.find(i => i.id === activeId);
   const sortedIds = useMemo(
     () => flattenedItems.map(({ id }) => id),
@@ -109,6 +109,7 @@ export const ContentTableForumsForumAdmin = ({
 
         const clonedItems: FlatTree<ShowForumForumsAdminWithChildren>[] =
           flattenTree({ tree: data });
+
         const toIndex = clonedItems.findIndex(({ id }) => id === over.id);
         const fromIndex = clonedItems.findIndex(({ id }) => id === active.id);
         const sortedItems = arrayMove(clonedItems, fromIndex, toIndex);
@@ -119,9 +120,16 @@ export const ContentTableForumsForumAdmin = ({
           parentId
         };
 
+        const dataAfterUpdate: FlatTree<
+          FlatTree<ShowForumForumsAdminWithChildren>
+        >[] = sortedItems.map(item => ({
+          ...item,
+          children: []
+        }));
+
         setData(
           buildTree({
-            flattenedTree: sortedItems
+            flattenedTree: dataAfterUpdate
           })
         );
 
@@ -131,28 +139,6 @@ export const ContentTableForumsForumAdmin = ({
         // -1 means that the item is the last one
         const findActive = flattenedItems.find(i => i.id === active.id);
         if (!findActive) return;
-
-        // // If change item position on the same level at the end of the list
-        // if (active.id === over.id && depth < findActive.depth) {
-        //   const findParentPosition = flattenedItems.find(
-        //     i => i.id === findActive.parentId
-        //   )?.position;
-
-        //   if (findParentPosition === undefined) return;
-
-        //   await mutationChangePositionApi({
-        //     id: Number(active.id),
-        //     parentId,
-        //     indexToMove: findParentPosition + 1
-        //   });
-
-        //   return;
-        // }
-
-        // const indexToMove =
-        //   active.id === over.id
-        //     ? -1
-        //     : flattenedItems.find(i => i.id === over.id)?.index ?? -1;
 
         // Do nothing if drag and drop on the same item on the same level
         if (findActive?.parentId === parentId && active.id === over.id) {
@@ -172,13 +158,13 @@ export const ContentTableForumsForumAdmin = ({
             key={item.id}
             indentationWidth={indentationWidth}
             onCollapse={id => {
-              const isOpen = testDragAndDrop.isOpenChildren.includes(id);
+              const isOpen = dragAndDrop.isOpenChildren.includes(id);
 
               if (!isOpen) {
                 updateData({ parentId: Number(id) });
               }
 
-              testDragAndDrop.setIsOpenChildren(prev => {
+              dragAndDrop.setIsOpenChildren(prev => {
                 if (isOpen) {
                   return prev.filter(i => i !== id);
                 }
@@ -186,7 +172,7 @@ export const ContentTableForumsForumAdmin = ({
                 return [...prev, id];
               });
             }}
-            isOpenChildren={testDragAndDrop.isOpenChildren.includes(item.id)}
+            isOpenChildren={dragAndDrop.isOpenChildren.includes(item.id)}
             isDropHere={projected?.parentId === item.id}
             active={activeId === item.id}
             {...item}

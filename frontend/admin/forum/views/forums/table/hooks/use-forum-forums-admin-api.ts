@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
@@ -22,6 +22,12 @@ export const useForumForumsAdminAPI = ({ initData }: Args) => {
   const t = useTranslations("core");
   const [data, setData] =
     useState<ShowForumForumsAdminWithChildren[]>(initData);
+
+  useEffect(() => {
+    if (!initData || !data || data.length === initData.length) return;
+
+    setData(initData);
+  }, [initData]);
 
   const updateData = async ({ parentId }: { parentId: number }) => {
     const mutation = await mutationUpdateDataApi({ parentId });
