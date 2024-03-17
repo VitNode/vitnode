@@ -5,8 +5,8 @@ import {
   closestCorners,
   useSensor,
   useSensors,
-  type UniqueIdentifier,
-  MeasuringStrategy
+  MeasuringStrategy,
+  DragOverlay
 } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -20,32 +20,41 @@ import { useTranslations } from "next-intl";
 import { ItemContentTableContentNavAdmin } from "./item";
 import type { Admin__Core_Nav__ShowQuery, ShowCoreNav } from "@/graphql/hooks";
 import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
+import {
+  useProjection,
+  type ProjectionReturnType
+} from "@/hooks/core/drag&drop/use-projection";
+import {
+  useDragAndDrop,
+  type FlatTree,
+  flattenTree,
+  buildTree
+} from "@/hooks/core/drag&drop/use-functions";
 
-interface ProjectedType {
-  activeId: UniqueIdentifier;
-  overId: UniqueIdentifier;
-  parentId: number | null;
-}
-
-interface FlattenedItemsType extends Omit<ShowCoreNav, "__typename"> {
-  depth: boolean;
-}
+const indentationWidth = 20;
 
 export const ContentTableContentNavAdmin = ({
   core_nav__show: { edges }
 }: Admin__Core_Nav__ShowQuery) => {
   const t = useTranslations("core");
-  const [items, setItems] = useState<Omit<ShowCoreNav, "__typename">[]>(edges);
-  const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
-  const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
-  const [projected, setProjected] = useState<ProjectedType | null>();
+  const [data, setData] = useState<Omit<ShowCoreNav, "__typename">[]>(edges);
+  const [projected, setProjected] = useState<ProjectionReturnType | null>();
+  const { activeId, getProjection, overId, setActiveId, setOverId } =
+    useProjection();
+  const dragAndDrop = useDragAndDrop({ activeId });
 
   // Revalidate items when edges change
   useEffect(() => {
-    if (!edges) return;
+    if (!edges || !data || data.length === edges.length) return;
 
-    setItems(edges);
+    setData(edges);
   }, [edges]);
+
+  const resetState = () => {
+    setOverId(null);
+    setActiveId(null);
+    setProjected(null);
+  };
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -54,27 +63,21 @@ export const ContentTableContentNavAdmin = ({
     })
   );
 
-  const flattenedItems: FlattenedItemsType[] = useMemo(() => {
-    const tree = items.reduce<FlattenedItemsType[]>((acc, item) => {
-      const children = item.children.map(child => ({
-        ...child,
-        depth: true,
-        children: []
-      }));
-
-      return [...acc, { ...item, depth: false }, ...(children ?? [])];
-    }, []);
-
-    return tree;
-  }, [items]);
-
+  const flattenedItems = dragAndDrop.flattenedItems({
+    data: data.map(item => ({
+      ...item,
+      children: item.children.map(child => ({ ...child, children: [] }))
+    }))
+  });
+  const activeItem = flattenedItems.find(i => i.id === activeId);
   const sortedIds = useMemo(
     () => flattenedItems.map(({ id }) => id),
     [flattenedItems]
   );
 
-  if (items.length === 0)
+  if (!data || data.length === 0) {
     return <div className="text-center">{t("no_results")}</div>;
+  }
 
   return (
     <DndContext
@@ -85,135 +88,119 @@ export const ContentTableContentNavAdmin = ({
           strategy: MeasuringStrategy.Always
         }
       }}
-      onDragCancel={() => {
-        setActiveId(null);
-        setOverId(null);
-        setProjected(null);
+      onDragCancel={resetState}
+      onDragOver={({ over }) => setOverId(over?.id ?? null)}
+      onDragMove={({ delta }) => {
+        if (!activeId || !overId) return;
+
+        const currentProjection = getProjection({
+          tree: flattenedItems,
+          dragOffset: delta.x,
+          indentationWidth,
+          maxDepth: 1
+        });
+
+        if (projected?.parentId === currentProjection.parentId) {
+          return;
+        }
+
+        setProjected(currentProjection);
       }}
       onDragStart={({ active: { id: activeId } }) => {
         setActiveId(activeId);
         setOverId(activeId);
       }}
-      onDragOver={({ over }) => setOverId(over?.id ?? null)}
-      onDragMove={({ delta }) => {
-        if (!activeId || !overId) return;
+      onDragEnd={async ({ active, over }) => {
+        resetState();
 
-        const items = flattenedItems;
+        if (!projected || !over) return;
+        const { depth, parentId } = projected;
 
-        const overItemIndex = items.findIndex(({ id }) => id === overId);
-        const activeItemIndex = items.findIndex(({ id }) => id === activeId);
-        const newItems = arrayMove(items, activeItemIndex, overItemIndex);
-        const previousItem = newItems[overItemIndex - 1];
-        const nextItem = newItems[overItemIndex + 1];
-        const dragDepth = Math.round(delta.x / 20);
-        const projectedDepth = dragDepth > 0;
-        const minDepth = nextItem?.depth ?? false;
-        let depth = projectedDepth;
+        const clonedItems: FlatTree<ShowCoreNav>[] = flattenTree({
+          tree: data.map(item => ({
+            ...item,
+            children: item.children.map(child => ({ ...child, children: [] }))
+          }))
+        });
 
-        if (projectedDepth < minDepth) {
-          depth = minDepth;
+        const toIndex = clonedItems.findIndex(({ id }) => id === over.id);
+        const fromIndex = clonedItems.findIndex(({ id }) => id === active.id);
+        const sortedItems = arrayMove(clonedItems, fromIndex, toIndex);
+        const activeIndex = sortedItems.findIndex(i => i.id === active.id);
+        sortedItems[activeIndex] = {
+          ...sortedItems[activeIndex],
+          depth,
+          parentId
+        };
+
+        const dataAfterUpdate: FlatTree<FlatTree<ShowCoreNav>>[] =
+          sortedItems.map(item => ({
+            ...item,
+            children: []
+          }));
+
+        setData(
+          buildTree({
+            flattenedTree: dataAfterUpdate
+          })
+        );
+
+        const parents = sortedItems.filter(i => i.parentId === parentId);
+        const indexToMove = parents.findIndex(i => i.id === active.id);
+
+        // -1 means that the item is the last one
+        const findActive = flattenedItems.find(i => i.id === active.id);
+        if (!findActive) return;
+
+        // Do nothing if drag and drop on the same item on the same level
+        if (findActive?.parentId === parentId && active.id === over.id) {
+          return;
         }
 
-        const getParentId = () => {
-          if (!depth || !previousItem) {
-            return null;
-          }
-
-          if (depth > previousItem.depth) {
-            return previousItem.id;
-          }
-
-          const newParentId = newItems
-            .slice(0, overItemIndex)
-            .reverse()
-            .find(item => !item.depth)?.id;
-
-          return newParentId ?? null;
-        };
-
-        setProjected({
-          parentId: getParentId(),
-          activeId,
-          overId
-        });
-      }}
-      onDragEnd={async () => {
-        if (!projected) return;
-
-        const tree = flattenedItems;
-        const activeItemIndex = tree.findIndex(
-          ({ id }) => id === projected.activeId
-        );
-        const overItemIndex = tree.findIndex(
-          ({ id }) => id === projected.overId
-        );
-
-        if (activeItemIndex === -1) return;
-        const afterChangeTree = arrayMove(tree, activeItemIndex, overItemIndex);
-        const afterChangeTreeActiveItemIndex = afterChangeTree.findIndex(
-          ({ id }) => id === projected.activeId
-        );
-
-        // If active item moved to the children
-        afterChangeTree[afterChangeTreeActiveItemIndex] = {
-          ...afterChangeTree[afterChangeTreeActiveItemIndex],
-          depth: !!projected.parentId,
-          children: []
-        };
-
-        // Build new tree
-        const newTree: Omit<ShowCoreNav, "__typename">[] = [];
-
-        let rootItemId: number | null = null;
-        afterChangeTree.forEach(item => {
-          if (!item.depth) {
-            rootItemId = item.id;
-          }
-
-          if (item.depth) {
-            const parent = newTree.findLast(item => item.id === rootItemId);
-
-            if (!parent) return;
-
-            if (!parent.children) {
-              parent.children = [];
-            }
-
-            parent.children.push(item);
-
-            return;
-          }
-
-          newTree.push({ ...item, children: [] });
-        });
-
-        setItems(newTree);
-
-        const indexToMove =
-          projected.activeId === projected.overId && projected.parentId
-            ? -1
-            : flattenedItems.find(i => i.id === projected.overId)?.position ??
-              -1;
-
         await mutationChangePositionApi({
-          id: Number(projected.activeId),
-          parentId: projected.parentId,
-          indexToMove: indexToMove
+          id: Number(active.id),
+          parentId,
+          indexToMove
         });
-
-        setProjected(null);
-        setActiveId(null);
-        setOverId(null);
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
         {flattenedItems.map(item => (
           <ItemContentTableContentNavAdmin
-            isDropHere={projected?.parentId === item.id}
             key={item.id}
+            indentationWidth={indentationWidth}
+            onCollapse={id => {
+              const isOpen = dragAndDrop.isOpenChildren.includes(id);
+
+              dragAndDrop.setIsOpenChildren(prev => {
+                if (isOpen) {
+                  return prev.filter(i => i !== id);
+                }
+
+                return [...prev, id];
+              });
+            }}
+            isOpenChildren={dragAndDrop.isOpenChildren.includes(item.id)}
+            isDropHere={projected?.parentId === item.id}
+            active={activeId === item.id}
             {...item}
+            depth={
+              activeId === item.id && projected?.parentId
+                ? projected?.depth
+                : item.depth
+            }
           />
         ))}
+
+        <DragOverlay>
+          {activeId !== null && activeItem && (
+            <ItemContentTableContentNavAdmin
+              indentationWidth={indentationWidth}
+              overlay
+              {...activeItem}
+            />
+          )}
+        </DragOverlay>
       </SortableContext>
     </DndContext>
   );

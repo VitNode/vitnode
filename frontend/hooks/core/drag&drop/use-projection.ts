@@ -44,8 +44,8 @@ export const useProjection = () => {
   function getProjection<T extends object>({
     dragOffset,
     indentationWidth,
-    tree,
-    maxDepth: maxDepthProp
+    maxDepth: maxDepthProp,
+    tree
   }: {
     dragOffset: number;
     indentationWidth: number;

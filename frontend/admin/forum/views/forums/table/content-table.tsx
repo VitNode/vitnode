@@ -28,8 +28,11 @@ import {
   type FlatTree,
   buildTree,
   flattenTree
-} from "./use-functions";
-import { useProjection, type ProjectionReturnType } from "./use-projection";
+} from "@/hooks/core/drag&drop/use-functions";
+import {
+  useProjection,
+  type ProjectionReturnType
+} from "@/hooks/core/drag&drop/use-projection";
 
 const indentationWidth = 20;
 
@@ -188,8 +191,7 @@ export const ContentTableForumsForumAdmin = ({
           {activeId !== null && activeItem && (
             <ItemTableForumsForumAdmin
               indentationWidth={indentationWidth}
-              isOpenChildren={false}
-              isDropHere={false}
+              overlay
               {...activeItem}
             />
           )}

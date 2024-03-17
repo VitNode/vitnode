@@ -1,7 +1,7 @@
 import type { UniqueIdentifier } from "@dnd-kit/core";
 import { useState } from "react";
 
-type WithChildren<T extends object> = Omit<T, "children"> & {
+type WithChildren<T extends object> = Omit<T, "children" | "__typename"> & {
   children: WithChildren<T>[];
   id: number;
 };
