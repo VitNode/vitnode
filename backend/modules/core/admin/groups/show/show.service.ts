@@ -86,12 +86,14 @@ export class ShowAdminGroupsService {
       })
     );
 
-    return outputPagination({
+    const test = outputPagination({
       edges: search && filtersName.length === 0 ? [] : currentEdges,
       totalCount,
       first,
       cursor,
       last
     });
+
+    return test;
   }
 }
