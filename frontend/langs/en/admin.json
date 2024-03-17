@@ -49,6 +49,7 @@
         "set_default": "Set as default",
         "get_help": "Get help",
         "search_placeholder": "Search by name...",
+        "dev_tool": "Developer Tool",
         "create": {
           "title": "Create Plugin",
           "success": "Plugin has been created.",

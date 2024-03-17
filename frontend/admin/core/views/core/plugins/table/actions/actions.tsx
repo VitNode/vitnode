@@ -1,4 +1,11 @@
-import { BadgeHelp, ChevronDown, Download, Pencil, Trash2 } from "lucide-react";
+import {
+  BadgeHelp,
+  ChevronDown,
+  CodeXml,
+  Download,
+  Pencil,
+  Trash2
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
@@ -14,13 +21,15 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Link } from "@/i18n";
+import { Link, usePathname, useRouter } from "@/i18n";
 import { UploadPluginActionsAdmin } from "./upload";
 import { CONFIG } from "@/config";
 
 export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
   const t = useTranslations("admin.core.plugins");
   const tCore = useTranslations("core");
+  const pathname = usePathname();
+  const { push } = useRouter();
 
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
   const [isOpenEditDialog, setIsOpenEditDialog] = useState(false);
@@ -47,6 +56,12 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
             <>
               <DropdownMenuItem onClick={() => setIsOpenEditDialog(true)}>
                 <Pencil /> {tCore("edit")}
+              </DropdownMenuItem>
+
+              <DropdownMenuItem
+                onClick={() => push(`${pathname}/${props.code}/dev`)}
+              >
+                <CodeXml /> {t("dev_tool")}
               </DropdownMenuItem>
 
               <DropdownMenuItem onClick={() => setIsOpenDownloadDialog(true)}>
