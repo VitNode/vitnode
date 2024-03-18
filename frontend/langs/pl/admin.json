@@ -49,6 +49,18 @@
         "set_default": "Ustaw jako domyślną",
         "get_help": "Get help",
         "search_placeholder": "Szukaj po nazwie...",
+        "dev_tool": "Narzędzia deweloperskie",
+        "dev": {
+          "overview": {
+            "title": "Przegląd"
+          },
+          "files": {
+            "title": "Pliki"
+          },
+          "nav": {
+            "title": "Nawigacja w AdminCP"
+          }
+        },
         "create": {
           "title": "Stwórz wtyczkę",
           "success": "Wtyczka została utworzona.",
@@ -109,17 +121,17 @@
             "label": "Kod wersji"
           },
           "check": {
-            "databases": "Bazy danych: <status></status>",
-            "admin_pages": "Strony administratora: <status></status>",
-            "admin_templates": "Szablony administratora: <status></status>",
-            "graphql_mutations": "Mutacje GraphQL: <status></status>",
-            "graphql_queries": "Zapytania GraphQL: <status></status>",
-            "hooks": "Hooki: <status></status>",
-            "language": "Język: <status></status>",
-            "pages": "Strony: <status></status>",
-            "pages_container": "Strony (kontener): <status></status>",
-            "templates": "Szablony: <status></status>",
-            "default_page": "Strona domyślna: <status></status>",
+            "databases": "Bazy danych",
+            "admin_pages": "Strony administratora",
+            "admin_templates": "Szablony administratora",
+            "graphql_mutations": "Mutacje GraphQL",
+            "graphql_queries": "Zapytania GraphQL",
+            "hooks": "Hooki",
+            "language": "Język",
+            "pages": "Strony",
+            "pages_container": "Strony (kontener)",
+            "templates": "Szablony",
+            "default_page": "Strona domyślna",
             "file_detected": "{count, plural, =0 {Brak plików} =1 {1 plik} few {# pliki} other {# plików}} wykryto"
           },
           "submit": "Pobierz"

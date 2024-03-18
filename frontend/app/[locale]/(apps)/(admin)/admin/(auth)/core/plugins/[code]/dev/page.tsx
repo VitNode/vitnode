@@ -1,9 +1,11 @@
-import { notFound } from "next/navigation";
+import { redirect } from "@/i18n";
 
-import { CONFIG } from "@/config";
+interface Props {
+  params: {
+    code: string;
+  };
+}
 
-export default async function Page() {
-  if (!CONFIG.node_development) notFound();
-
-  return <div>Plugin</div>;
+export default function Page({ params: { code } }: Props) {
+  redirect(`/admin/core/plugins/${code}/dev/overview`);
 }

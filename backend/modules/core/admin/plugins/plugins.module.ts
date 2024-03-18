@@ -12,8 +12,8 @@ import { DownloadAdminPluginsResolver } from "./download/download.resolver";
 import { DownloadAdminPluginsService } from "./download/download.service";
 import { UploadAdminPluginsResolver } from "./upload/upload.resolver";
 import { UploadAdminPluginsService } from "./upload/upload.service";
-import { CheckDownloadAdminPluginsService } from "./download/check/check.service";
-import { CheckDownloadAdminPluginsResolver } from "./download/check/check.resolver";
+import { FilesAdminPluginsService } from "./files/files.service";
+import { FilesAdminPluginsResolver } from "./files/files.resolver";
 import { EditAdminPluginsResolver } from "./edit/edit.resolver";
 import { EditAdminPluginsService } from "./edit/edit.service";
 
@@ -42,8 +42,8 @@ export interface ConfigPlugin {
     DownloadAdminPluginsService,
     UploadAdminPluginsResolver,
     UploadAdminPluginsService,
-    CheckDownloadAdminPluginsService,
-    CheckDownloadAdminPluginsResolver,
+    FilesAdminPluginsService,
+    FilesAdminPluginsResolver,
     EditAdminPluginsResolver,
     EditAdminPluginsService
   ]

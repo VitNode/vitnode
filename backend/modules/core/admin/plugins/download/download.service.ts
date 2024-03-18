@@ -149,7 +149,8 @@ export class DownloadAdminPluginsService {
       await this.databaseService.db
         .update(core_plugins)
         .set({
-          allow_default
+          allow_default,
+          updated: new Date()
         })
         .where(eq(core_plugins.code, code));
 
@@ -161,7 +162,8 @@ export class DownloadAdminPluginsService {
       .set({
         version,
         version_code,
-        allow_default
+        allow_default,
+        updated: new Date()
       })
       .where(eq(core_plugins.code, code))
       .returning();

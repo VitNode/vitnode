@@ -7,6 +7,7 @@ import { Suspense, lazy } from "react";
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { CONFIG } from "@/config";
 
 const Content = lazy(() =>
   import("../upload/upload").then(module => ({
@@ -20,7 +21,7 @@ export const UploadActionPluginAdmin = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>
+        <Button variant={CONFIG.node_development ? "ghost" : "default"}>
           <Upload />
           {t("upload")}
         </Button>

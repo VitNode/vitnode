@@ -1,11 +1,9 @@
-import { BadgeHelp, ChevronDown, Download, Pencil, Trash2 } from "lucide-react";
+import { BadgeHelp, ChevronDown, CodeXml, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import type { ShowAdminPlugins } from "@/graphql/hooks";
 import { DeletePluginActionsAdmin } from "./delete/delete";
-import { DownloadPluginActionsAdmin } from "./download/download";
-import { EditPluginActionsAdmin } from "./edit";
 import { SetDefaultPluginActionsAdmin } from "./set-default/set-default";
 import {
   DropdownMenu,
@@ -14,17 +12,17 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Link } from "@/i18n";
+import { Link, usePathname, useRouter } from "@/i18n";
 import { UploadPluginActionsAdmin } from "./upload";
 import { CONFIG } from "@/config";
 
 export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
   const t = useTranslations("admin.core.plugins");
   const tCore = useTranslations("core");
+  const pathname = usePathname();
+  const { push } = useRouter();
 
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
-  const [isOpenEditDialog, setIsOpenEditDialog] = useState(false);
-  const [isOpenDownloadDialog, setIsOpenDownloadDialog] = useState(false);
 
   return (
     <>
@@ -45,17 +43,15 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
         <DropdownMenuContent className="w-52">
           {CONFIG.node_development && (
             <>
-              <DropdownMenuItem onClick={() => setIsOpenEditDialog(true)}>
-                <Pencil /> {tCore("edit")}
-              </DropdownMenuItem>
-
-              <DropdownMenuItem onClick={() => setIsOpenDownloadDialog(true)}>
-                <Download /> {tCore("download")}
+              <DropdownMenuItem
+                onClick={() => push(`${pathname}/${props.code}/dev`)}
+              >
+                <CodeXml /> {t("dev_tool")}
               </DropdownMenuItem>
             </>
           )}
 
-          {props.support_url && (
+          {CONFIG.node_development && (
             <DropdownMenuItem asChild>
               <Link
                 href={props.support_url}
@@ -74,21 +70,6 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
           )}
         </DropdownMenuContent>
       </DropdownMenu>
-
-      {CONFIG.node_development && (
-        <>
-          <DownloadPluginActionsAdmin
-            open={isOpenDownloadDialog}
-            setOpen={setIsOpenDownloadDialog}
-            {...props}
-          />
-          <EditPluginActionsAdmin
-            open={isOpenEditDialog}
-            setOpen={setIsOpenEditDialog}
-            {...props}
-          />
-        </>
-      )}
 
       {!props.default && (
         <DeletePluginActionsAdmin

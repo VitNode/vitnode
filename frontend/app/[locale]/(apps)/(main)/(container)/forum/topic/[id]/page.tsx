@@ -2,7 +2,7 @@ import { lazy, type LazyExoticComponent } from "react";
 
 import { type TopicViewProps } from "@/themes/1/forum/views/forum/topic/topic-view";
 import { getSessionData } from "@/functions/get-session-data";
-import { firstEdgesTopiData, getTopicData } from "./query";
+import { firstEdgesTopiData, getTopicData } from "./query-api";
 
 interface Props {
   params: {
