@@ -121,17 +121,17 @@
             "label": "Version Code"
           },
           "check": {
-            "databases": "Databases: <status></status>",
-            "admin_pages": "Admin Pages: <status></status>",
-            "admin_templates": "Admin Templates: <status></status>",
-            "graphql_mutations": "GraphQL Mutations: <status></status>",
-            "graphql_queries": "GraphQL Queries: <status></status>",
-            "hooks": "Hooks: <status></status>",
-            "language": "Language: <status></status>",
-            "pages": "Pages: <status></status>",
-            "pages_container": "Pages (container): <status></status>",
-            "templates": "Templates: <status></status>",
-            "default_page": "Default Page: <status></status>",
+            "databases": "Databases",
+            "admin_pages": "Admin Pages",
+            "admin_templates": "Admin Templates",
+            "graphql_mutations": "GraphQL Mutations",
+            "graphql_queries": "GraphQL Queries",
+            "hooks": "Hooks",
+            "language": "Language",
+            "pages": "Pages",
+            "pages_container": "Pages (container)",
+            "templates": "Templates",
+            "default_page": "Default Page",
             "file_detected": "{count, plural, =0 {No files} =1 {1 file} other {# files}} detected"
           },
           "submit": "Download"
