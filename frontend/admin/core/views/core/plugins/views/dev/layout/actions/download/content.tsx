@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 
-import type { DownloadPluginActionsAdminProps } from "./download";
+import { useDownloadPluginAdmin } from "./hooks/use-download-plugin-admin";
 import {
   DialogDescription,
   DialogFooter,
@@ -15,18 +15,18 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { useDownloadPluginAdmin } from "./hooks/use-download-plugin-admin";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import type { ShowAdminPlugins } from "@/graphql/hooks";
 
-export const ContentDownloadPluginActionsAdmin = ({
+export const ContentDownloadActionDevPluginAdmin = ({
   code,
   name,
   version,
   version_code
-}: DownloadPluginActionsAdminProps) => {
+}: ShowAdminPlugins) => {
   const t = useTranslations("admin.core.plugins.download");
   const { form, onSubmit } = useDownloadPluginAdmin({
     version_code,

@@ -1,16 +1,9 @@
-import {
-  BadgeHelp,
-  ChevronDown,
-  CodeXml,
-  Download,
-  Trash2
-} from "lucide-react";
+import { BadgeHelp, ChevronDown, CodeXml, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import type { ShowAdminPlugins } from "@/graphql/hooks";
 import { DeletePluginActionsAdmin } from "./delete/delete";
-import { DownloadPluginActionsAdmin } from "./download/download";
 import { SetDefaultPluginActionsAdmin } from "./set-default/set-default";
 import {
   DropdownMenu,
@@ -30,7 +23,6 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
   const { push } = useRouter();
 
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
-  const [isOpenDownloadDialog, setIsOpenDownloadDialog] = useState(false);
 
   return (
     <>
@@ -56,14 +48,10 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
               >
                 <CodeXml /> {t("dev_tool")}
               </DropdownMenuItem>
-
-              <DropdownMenuItem onClick={() => setIsOpenDownloadDialog(true)}>
-                <Download /> {tCore("download")}
-              </DropdownMenuItem>
             </>
           )}
 
-          {props.support_url && (
+          {CONFIG.node_development && (
             <DropdownMenuItem asChild>
               <Link
                 href={props.support_url}
@@ -82,14 +70,6 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
           )}
         </DropdownMenuContent>
       </DropdownMenu>
-
-      {CONFIG.node_development && (
-        <DownloadPluginActionsAdmin
-          open={isOpenDownloadDialog}
-          setOpen={setIsOpenDownloadDialog}
-          {...props}
-        />
-      )}
 
       {!props.default && (
         <DeletePluginActionsAdmin

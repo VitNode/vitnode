@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { Download, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 import type { Admin__Core_Plugins__Show__ItemQuery } from "@/graphql/hooks";
 import { HeaderContent } from "@/components/header-content/header-content";
@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs } from "@/components/tabs/tabs";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 import { DateFormat } from "@/components/date-format/date-format";
-import { Button } from "@/components/ui/button";
+import { ActionsDevPluginAdmin } from "./actions/actions";
 
 interface Props extends Admin__Core_Plugins__Show__ItemQuery {
   children: ReactNode;
@@ -70,9 +70,7 @@ export const DevPluginAdminLayout = ({
           </div>
         }
       >
-        <Button>
-          <Download /> {tCore("download")}
-        </Button>
+        <ActionsDevPluginAdmin {...plugin} />
       </HeaderContent>
 
       <Tabs className="mb-5">
