@@ -50,6 +50,17 @@
         "get_help": "Get help",
         "search_placeholder": "Szukaj po nazwie...",
         "dev_tool": "Narzędzia deweloperskie",
+        "dev": {
+          "overview": {
+            "title": "Przegląd"
+          },
+          "files": {
+            "title": "Pliki"
+          },
+          "nav": {
+            "title": "Nawigacja w AdminCP"
+          }
+        },
         "create": {
           "title": "Stwórz wtyczkę",
           "success": "Wtyczka została utworzona.",

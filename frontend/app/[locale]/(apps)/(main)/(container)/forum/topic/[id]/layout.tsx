@@ -2,7 +2,7 @@ import { type ReactNode } from "react";
 import { notFound } from "next/navigation";
 
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { getTopicData } from "./query";
+import { getTopicData } from "./query-api";
 import { getConvertTextLang } from "@/hooks/core/use-text-lang";
 import type { ErrorType } from "@/graphql/fetcher";
 import { getSessionData } from "@/functions/get-session-data";

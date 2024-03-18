@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { lazy, type LazyExoticComponent } from "react";
 
 import { getSessionData } from "@/functions/get-session-data";
-import { getTopicData } from "../query";
+import { getTopicData } from "../query-api";
 import type { EditTopicViewProps } from "@/themes/1/forum/views/forum/topic/views/edit/edit-topic-view";
 import { getConvertTextLang } from "@/hooks/core/use-text-lang";
 import { ErrorViewSSR } from "@/components/views/error-view-ssr";

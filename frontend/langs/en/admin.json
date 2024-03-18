@@ -50,6 +50,17 @@
         "get_help": "Get help",
         "search_placeholder": "Search by name...",
         "dev_tool": "Developer Tool",
+        "dev": {
+          "overview": {
+            "title": "Overview"
+          },
+          "files": {
+            "title": "Files"
+          },
+          "nav": {
+            "title": "Navigation in AdminCP"
+          }
+        },
         "create": {
           "title": "Create Plugin",
           "success": "Plugin has been created.",

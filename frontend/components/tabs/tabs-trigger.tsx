@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 
 import { Link, usePathname } from "@/i18n";
 import { buttonVariants } from "../ui/button";
+import { cn } from "@/functions/classnames";
 
 export interface TabsTriggerProps {
   children: ReactNode;
@@ -32,7 +33,7 @@ export const TabsTrigger = ({
         data-state={dataState}
         className={buttonVariants({
           variant: active ? "default" : "ghost",
-          className,
+          className: cn(className, "flex-shrink-0"),
           size: "sm"
         })}
         onClick={onClick}
@@ -48,7 +49,7 @@ export const TabsTrigger = ({
       data-state={dataState}
       className={buttonVariants({
         variant: active ? "default" : "ghost",
-        className,
+        className: cn(className, "flex-shrink-0"),
         size: "sm"
       })}
       onClick={onClick}
