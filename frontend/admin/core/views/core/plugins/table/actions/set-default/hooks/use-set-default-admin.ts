@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 
 import type { ShowAdminPlugins } from "@/graphql/hooks";
 
-import { mutationEditApi } from "../../../../create-edit/hooks/mutation-edit-api";
+import { mutationEditApi } from "../../../../actions/create/hooks/mutation-edit-api";
 
 export const useSetDefaultPluginAdmin = (data: ShowAdminPlugins) => {
   const tCore = useTranslations("core");

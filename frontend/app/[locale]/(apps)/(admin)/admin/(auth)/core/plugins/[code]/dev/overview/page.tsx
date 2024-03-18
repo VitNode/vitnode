@@ -16,5 +16,9 @@ export default async function Page({ params: { code } }: Props) {
   const { data } = await getPluginDataAdmin({ code });
   if (!data || data.admin__core_plugins__show.edges.length === 0) notFound();
 
-  return <OverviewDevPluginAdminView />;
+  return (
+    <OverviewDevPluginAdminView
+      data={data.admin__core_plugins__show.edges[0]}
+    />
+  );
 }

@@ -100,13 +100,14 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
       return;
     }
 
-    push(pathname);
-
     toast.success(t(data ? "edit.success" : "create.success"), {
       description: values.name
     });
 
-    setOpen?.(false);
+    if (!data) {
+      push(pathname);
+      setOpen?.(false);
+    }
   };
 
   return {

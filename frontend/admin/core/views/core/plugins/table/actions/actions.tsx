@@ -3,7 +3,6 @@ import {
   ChevronDown,
   CodeXml,
   Download,
-  Pencil,
   Trash2
 } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -12,7 +11,6 @@ import { useState } from "react";
 import type { ShowAdminPlugins } from "@/graphql/hooks";
 import { DeletePluginActionsAdmin } from "./delete/delete";
 import { DownloadPluginActionsAdmin } from "./download/download";
-import { EditPluginActionsAdmin } from "./edit";
 import { SetDefaultPluginActionsAdmin } from "./set-default/set-default";
 import {
   DropdownMenu,
@@ -32,7 +30,6 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
   const { push } = useRouter();
 
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
-  const [isOpenEditDialog, setIsOpenEditDialog] = useState(false);
   const [isOpenDownloadDialog, setIsOpenDownloadDialog] = useState(false);
 
   return (
@@ -54,10 +51,6 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
         <DropdownMenuContent className="w-52">
           {CONFIG.node_development && (
             <>
-              <DropdownMenuItem onClick={() => setIsOpenEditDialog(true)}>
-                <Pencil /> {tCore("edit")}
-              </DropdownMenuItem>
-
               <DropdownMenuItem
                 onClick={() => push(`${pathname}/${props.code}/dev`)}
               >
@@ -91,18 +84,11 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
       </DropdownMenu>
 
       {CONFIG.node_development && (
-        <>
-          <DownloadPluginActionsAdmin
-            open={isOpenDownloadDialog}
-            setOpen={setIsOpenDownloadDialog}
-            {...props}
-          />
-          <EditPluginActionsAdmin
-            open={isOpenEditDialog}
-            setOpen={setIsOpenEditDialog}
-            {...props}
-          />
-        </>
+        <DownloadPluginActionsAdmin
+          open={isOpenDownloadDialog}
+          setOpen={setIsOpenDownloadDialog}
+          {...props}
+        />
       )}
 
       {!props.default && (

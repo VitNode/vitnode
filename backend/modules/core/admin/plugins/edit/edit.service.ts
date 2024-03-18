@@ -31,6 +31,13 @@ export class EditAdminPluginsService {
       throw new NotFoundError("Plugin");
     }
 
+    if (code !== plugin.code) {
+      throw new CustomError({
+        code: "PLUGIN_CODE_MISMATCH",
+        message: "Plugin code mismatch!"
+      });
+    }
+
     if (isDefault) {
       if (!plugin.enabled) {
         throw new CustomError({
@@ -52,8 +59,7 @@ export class EditAdminPluginsService {
       .update(core_plugins)
       .set({
         ...rest,
-        default: isDefault,
-        updated: new Date()
+        default: isDefault
       })
       .where(eq(core_plugins.code, code))
       .returning();

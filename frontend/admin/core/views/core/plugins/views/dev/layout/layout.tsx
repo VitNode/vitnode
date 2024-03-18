@@ -7,6 +7,7 @@ import { HeaderContent } from "@/components/header-content/header-content";
 import { Badge } from "@/components/ui/badge";
 import { Tabs } from "@/components/tabs/tabs";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
+import { DateFormat } from "@/components/date-format/date-format";
 
 interface Props extends Admin__Core_Plugins__Show__ItemQuery {
   children: ReactNode;
@@ -28,6 +29,7 @@ export const DevPluginAdminLayout = ({
     default: isDefault,
     description,
     name,
+    updated,
     version,
     version_code
   } = plugin;
@@ -39,17 +41,19 @@ export const DevPluginAdminLayout = ({
           <div className="flex gap-2 items-center flex-wrap">
             <span>{name}</span>
             {isDefault && <Badge>{tCore("default")}</Badge>}
-            {version && version_code && (
-              <span className="flex gap-1 text-sm font-normal">
-                <span>{version}</span>
-                <span className="text-muted-foreground">({version_code})</span>
-              </span>
-            )}
           </div>
         }
         desc={
           <div>
             {description && <p>{description}</p>}
+            {version && version_code && (
+              <span className="flex gap-1 flex-wrap">
+                <span>{version}</span>
+                <span className="text-muted-foreground">
+                  ({version_code} - <DateFormat date={updated} />)
+                </span>
+              </span>
+            )}
             {author_url ? (
               <a
                 href={author_url}

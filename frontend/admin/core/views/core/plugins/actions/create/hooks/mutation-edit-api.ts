@@ -1,13 +1,12 @@
 "use server";
 
-import { revalidatePath, revalidateTag } from "next/cache";
-
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Plugins__Edit,
   type Admin__Core_Plugins__EditMutation,
   type Admin__Core_Plugins__EditMutationVariables
 } from "@/graphql/hooks";
+import { cleanAdminCorePluginsCache } from "@/admin/core/api-tags";
 
 export const mutationEditApi = async (
   variables: Admin__Core_Plugins__EditMutationVariables
@@ -21,8 +20,7 @@ export const mutationEditApi = async (
       variables
     });
 
-    revalidatePath("/admin/core/plugins", "page");
-    revalidateTag("Core_Sessions__Authorization");
+    cleanAdminCorePluginsCache();
 
     return { data };
   } catch (error) {

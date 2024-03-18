@@ -79,15 +79,15 @@ export const ContentTablePluginsAdmin = ({
         header: val => {
           return (
             <HeaderSortingDataTable {...val}>
-              {tCore("table.updated")}
+              {tCore("table.created")}
             </HeaderSortingDataTable>
           );
         },
-        accessorKey: "updated",
+        accessorKey: "created",
         cell: ({ row }) => {
           const data = row.original;
 
-          return <DateFormat date={data.updated} />;
+          return <DateFormat date={data.created} />;
         }
       },
       // {
@@ -136,7 +136,7 @@ export const ContentTablePluginsAdmin = ({
       columns={columns}
       searchPlaceholder={t("search_placeholder")}
       defaultSorting={{
-        sortBy: "updated",
+        sortBy: "created",
         sortDirection: "desc"
       }}
     />

@@ -161,7 +161,8 @@ export class DownloadAdminPluginsService {
       .set({
         version,
         version_code,
-        allow_default
+        allow_default,
+        updated: new Date()
       })
       .where(eq(core_plugins.code, code))
       .returning();
