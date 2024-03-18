@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
 
 @ObjectType()
-export class CheckDownloadAdminPluginsObj {
+export class FilesAdminPluginsObj {
   @Field(() => Int)
   databases: number;
 

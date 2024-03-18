@@ -27,11 +27,11 @@ export const HeaderContent = forwardRef<
     <div
       ref={ref}
       className={cn(
-        "mb-5 flex gap-4 flex-col sm:flex-row sm:items-center items-start",
+        "mb-5 flex gap-4 flex-col sm:flex-row items-start",
         className
       )}
     >
-      <div className="space-y-1 text-left">
+      <div className="space-y-1 text-left flex-1 sm:self-center h-full">
         {h1 ? (
           <h1 className="font-semibold tracking-tight text-2xl">{h1}</h1>
         ) : (
@@ -45,7 +45,7 @@ export const HeaderContent = forwardRef<
       </div>
 
       {children && (
-        <div className="ml-auto flex flex-col sm:flex-row gap-2 items-center justify-center flex-wrap w-full sm:w-auto [&>*]:w-full [&>*]:sm:w-auto">
+        <div className="flex flex-col sm:flex-row gap-2 items-center justify-center flex-wrap w-full sm:w-auto [&>*]:w-full [&>*]:sm:w-auto">
           {children}
         </div>
       )}

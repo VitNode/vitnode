@@ -59,21 +59,6 @@ export type BreadcrumbsForumForums = {
   name: Array<TextLanguage>;
 };
 
-export type CheckDownloadAdminPluginsObj = {
-  __typename?: 'CheckDownloadAdminPluginsObj';
-  admin_pages: Scalars['Int']['output'];
-  admin_templates: Scalars['Int']['output'];
-  databases: Scalars['Int']['output'];
-  default_page: Scalars['Boolean']['output'];
-  graphql_mutations: Scalars['Int']['output'];
-  graphql_queries: Scalars['Int']['output'];
-  hooks: Scalars['Int']['output'];
-  language: Scalars['Boolean']['output'];
-  pages: Scalars['Int']['output'];
-  pages_container: Scalars['Int']['output'];
-  templates: Scalars['Int']['output'];
-};
-
 export type ChildrenShowForumForums = {
   __typename?: 'ChildrenShowForumForums';
   _count: ShowForumForumsCounts;
@@ -98,6 +83,21 @@ export type CreateForumForumsObj = {
   last_posts: LastPostsShowForumForumsObj;
   name: Array<TextLanguage>;
   position: Scalars['Int']['output'];
+};
+
+export type FilesAdminPluginsObj = {
+  __typename?: 'FilesAdminPluginsObj';
+  admin_pages: Scalars['Int']['output'];
+  admin_templates: Scalars['Int']['output'];
+  databases: Scalars['Int']['output'];
+  default_page: Scalars['Boolean']['output'];
+  graphql_mutations: Scalars['Int']['output'];
+  graphql_queries: Scalars['Int']['output'];
+  hooks: Scalars['Int']['output'];
+  language: Scalars['Boolean']['output'];
+  pages: Scalars['Int']['output'];
+  pages_container: Scalars['Int']['output'];
+  templates: Scalars['Int']['output'];
 };
 
 export type GeneralAdminSettingsObj = {
@@ -541,7 +541,7 @@ export type Query = {
   admin__core_groups__show: ShowAdminGroupsObj;
   admin__core_members__show: ShowAdminMembersObj;
   admin__core_members__stats_sign_up: Array<SignUpStatsAdminMembers>;
-  admin__core_plugins__download_check: CheckDownloadAdminPluginsObj;
+  admin__core_plugins__files: FilesAdminPluginsObj;
   admin__core_plugins__show: ShowAdminPluginsObj;
   admin__core_staff_administrators__show: ShowAdminStaffAdministratorsObj;
   admin__core_staff_moderators__show: ShowAdminStaffModeratorsObj;
@@ -580,7 +580,7 @@ export type QueryAdmin__Core_Members__ShowArgs = {
 };
 
 
-export type QueryAdmin__Core_Plugins__Download_CheckArgs = {
+export type QueryAdmin__Core_Plugins__FilesArgs = {
   code: Scalars['String']['input'];
 };
 
@@ -1621,12 +1621,12 @@ export type Admin__Core_Nav__ShowQueryVariables = Exact<{ [key: string]: never; 
 
 export type Admin__Core_Nav__ShowQuery = { __typename?: 'Query', core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, href: string, external: boolean, position: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
-export type Admin__Core_Plugins__Download_CheckQueryVariables = Exact<{
+export type Admin__Core_Plugins__FilesQueryVariables = Exact<{
   code: Scalars['String']['input'];
 }>;
 
 
-export type Admin__Core_Plugins__Download_CheckQuery = { __typename?: 'Query', admin__core_plugins__download_check: { __typename?: 'CheckDownloadAdminPluginsObj', admin_pages: number, admin_templates: number, databases: number, graphql_mutations: number, graphql_queries: number, hooks: number, language: boolean, pages: number, pages_container: number, templates: number, default_page: boolean } };
+export type Admin__Core_Plugins__FilesQuery = { __typename?: 'Query', admin__core_plugins__files: { __typename?: 'FilesAdminPluginsObj', admin_pages: number, admin_templates: number, databases: number, graphql_mutations: number, graphql_queries: number, hooks: number, language: boolean, pages: number, pages_container: number, templates: number, default_page: boolean } };
 
 export type Admin__Core_Plugins__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -1637,7 +1637,7 @@ export type Admin__Core_Plugins__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Plugins__ShowQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url?: string | null, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, support_url: string, version?: string | null, created: Date, version_code?: number | null, allow_default: boolean }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Admin__Core_Plugins__ShowQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url?: string | null, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, support_url: string, updated: Date, version?: string | null, created: Date, version_code?: number | null, allow_default: boolean }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Admin__Core_Plugins__Show__ItemQueryVariables = Exact<{
   code?: InputMaybe<Scalars['String']['input']>;
@@ -2514,9 +2514,9 @@ export const Admin__Core_Nav__Show = gql`
   }
 }
     `;
-export const Admin__Core_Plugins__Download_Check = gql`
-    query Admin__core_plugins__download_check($code: String!) {
-  admin__core_plugins__download_check(code: $code) {
+export const Admin__Core_Plugins__Files = gql`
+    query Admin__core_plugins__files($code: String!) {
+  admin__core_plugins__files(code: $code) {
     admin_pages
     admin_templates
     databases
@@ -2550,6 +2550,7 @@ export const Admin__Core_Plugins__Show = gql`
       id
       name
       support_url
+      updated
       version
       created
       version_code

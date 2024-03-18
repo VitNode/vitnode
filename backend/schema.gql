@@ -39,20 +39,6 @@ type BreadcrumbsForumForums {
   name: [TextLanguage!]!
 }
 
-type CheckDownloadAdminPluginsObj {
-  admin_pages: Int!
-  admin_templates: Int!
-  databases: Int!
-  default_page: Boolean!
-  graphql_mutations: Int!
-  graphql_queries: Int!
-  hooks: Int!
-  language: Boolean!
-  pages: Int!
-  pages_container: Int!
-  templates: Int!
-}
-
 type ChildrenShowForumForums {
   _count: ShowForumForumsCounts!
   breadcrumbs: [BreadcrumbsForumForums!]!
@@ -81,6 +67,20 @@ type CreateForumForumsObj {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+type FilesAdminPluginsObj {
+  admin_pages: Int!
+  admin_templates: Int!
+  databases: Int!
+  default_page: Boolean!
+  graphql_mutations: Int!
+  graphql_queries: Int!
+  hooks: Int!
+  language: Boolean!
+  pages: Int!
+  pages_container: Int!
+  templates: Int!
+}
 
 type GeneralAdminSettingsObj {
   side_name: String!
@@ -240,7 +240,7 @@ type Query {
   admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
   admin__core_members__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   admin__core_members__stats_sign_up: [SignUpStatsAdminMembers!]!
-  admin__core_plugins__download_check(code: String!): CheckDownloadAdminPluginsObj!
+  admin__core_plugins__files(code: String!): FilesAdminPluginsObj!
   admin__core_plugins__show(code: String, cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminPluginsSortByArgs!]): ShowAdminPluginsObj!
   admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
   admin__core_staff_moderators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!

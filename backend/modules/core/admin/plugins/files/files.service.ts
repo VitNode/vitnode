@@ -2,15 +2,15 @@ import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
 
-import { CheckDownloadAdminPluginsArgs } from "./dto/check.args";
-import { CheckDownloadAdminPluginsObj } from "./dto/check.obj";
+import { FilesAdminPluginsArgs } from "./dto/files.args";
+import { FilesAdminPluginsObj } from "./dto/files.obj";
+import { pluginPaths } from "../paths";
 
 import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
-import { pluginPaths } from "../../paths";
 
 @Injectable()
-export class CheckDownloadAdminPluginsService {
+export class FilesAdminPluginsService {
   constructor(private databaseService: DatabaseService) {}
 
   protected async checkNumberOfFiles({
@@ -25,9 +25,7 @@ export class CheckDownloadAdminPluginsService {
       : 0;
   }
 
-  async check({
-    code
-  }: CheckDownloadAdminPluginsArgs): Promise<CheckDownloadAdminPluginsObj> {
+  async check({ code }: FilesAdminPluginsArgs): Promise<FilesAdminPluginsObj> {
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
       where: (table, { eq }) => eq(table.code, code)
     });

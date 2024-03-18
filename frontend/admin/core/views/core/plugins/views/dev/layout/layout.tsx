@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { ExternalLink } from "lucide-react";
+import { Download, ExternalLink } from "lucide-react";
 
 import type { Admin__Core_Plugins__Show__ItemQuery } from "@/graphql/hooks";
 import { HeaderContent } from "@/components/header-content/header-content";
@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs } from "@/components/tabs/tabs";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 import { DateFormat } from "@/components/date-format/date-format";
+import { Button } from "@/components/ui/button";
 
 interface Props extends Admin__Core_Plugins__Show__ItemQuery {
   children: ReactNode;
@@ -50,7 +51,7 @@ export const DevPluginAdminLayout = ({
               <span className="flex gap-1 flex-wrap">
                 <span>{version}</span>
                 <span className="text-muted-foreground">
-                  ({version_code} - <DateFormat date={updated} />)
+                  ({version_code}), <DateFormat date={updated} />
                 </span>
               </span>
             )}
@@ -69,7 +70,9 @@ export const DevPluginAdminLayout = ({
           </div>
         }
       >
-        Test
+        <Button>
+          <Download /> {tCore("download")}
+        </Button>
       </HeaderContent>
 
       <Tabs className="mb-5">

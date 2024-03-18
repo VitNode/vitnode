@@ -1,7 +1,7 @@
 import { ArgsType, Field } from "@nestjs/graphql";
 
 @ArgsType()
-export class CheckDownloadAdminPluginsArgs {
+export class FilesAdminPluginsArgs {
   @Field(() => String)
   code: string;
 }
