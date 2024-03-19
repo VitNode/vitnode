@@ -45,7 +45,7 @@ export const ContentTableContentNavAdmin = ({
 
   // Revalidate items when edges change
   useEffect(() => {
-    if (!edges || !data || data.length === edges.length) return;
+    if (!edges || !data) return;
 
     setData(edges);
   }, [edges]);

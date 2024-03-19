@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
 import {
@@ -22,7 +22,6 @@ export const mutationChangePositionApi = async (
     });
 
     revalidateTag("Core_Sessions__Authorization");
-    revalidatePath("/admin/core/styles/nav", "page");
 
     return { data };
   } catch (error) {

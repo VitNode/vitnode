@@ -85,7 +85,7 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
             name="icon"
             render={({ field }) => (
               <FormItem>
-                <FormLabel optional>Icon</FormLabel>
+                <FormLabel optional>{t("create.icon.label")}</FormLabel>
                 <FormControl>
                   <IconInput {...field} />
                 </FormControl>

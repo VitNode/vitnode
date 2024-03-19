@@ -208,6 +208,9 @@
               "label": "Link",
               "desc": "Wewnętrzny link: /ścieżka/do/strony"
             },
+            "icon": {
+              "label": "Ikona"
+            },
             "external": {
               "label": "Link zewnętrzny?",
               "desc": "Lnk będzie otwierał się w nowym oknie."

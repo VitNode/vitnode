@@ -132,6 +132,7 @@ export const ItemContentTableContentNavAdmin = ({
           href={href}
           description={description}
           external={external}
+          icon={icon}
           {...props}
         />
       </div>
