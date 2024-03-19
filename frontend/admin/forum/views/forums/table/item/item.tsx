@@ -64,7 +64,7 @@ export const ItemTableForumsForumAdmin = ({
     >
       <div
         className={cn(
-          "p-4 flex gap-2 bg-card items-center transition-[background-color,opacity] relative border",
+          "p-4 flex gap-2 bg-card items-center transition-[background-color,opacity] relative border flex-wrap",
           {
             "animate-pulse bg-primary/20": isDropHere,
             "z-10": isDragging,

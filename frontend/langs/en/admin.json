@@ -207,6 +207,9 @@
               "label": "URL",
               "desc": "Internal link format: /path/to/page"
             },
+            "icon": {
+              "label": "Icon"
+            },
             "external": {
               "label": "External link?",
               "desc": "The link will open in a new tab."

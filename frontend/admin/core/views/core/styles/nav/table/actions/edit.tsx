@@ -8,6 +8,12 @@ import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import type { ShowCoreNav } from "@/graphql/hooks";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
 
 const Content = lazy(() =>
   import("../../create-edit/create-edit").then(module => ({
@@ -22,11 +28,19 @@ export const EditActionTableNavAdmin = (
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" ariaLabel={t("edit")}>
-          <Pencil />
-        </Button>
-      </DialogTrigger>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <DialogTrigger asChild>
+              <Button variant="ghost" size="icon" ariaLabel={t("edit")}>
+                <Pencil />
+              </Button>
+            </DialogTrigger>
+          </TooltipTrigger>
+
+          <TooltipContent>{t("edit")}</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
 
       <DialogContent className="max-w-2xl">
         <Suspense fallback={<Loader />}>

@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { TextLanguageInput } from "@/components/text-language-input";
 import { Switch } from "@/components/ui/switch";
+import { IconInput } from "@/components/icon/input/icon-input";
 
 export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
   const t = useTranslations("admin.core.styles.nav");
@@ -74,6 +75,20 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
                   <Input {...field} />
                 </FormControl>
                 <FormDescription>{t("create.href.desc")}</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="icon"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel optional>{t("create.icon.label")}</FormLabel>
+                <FormControl>
+                  <IconInput {...field} />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}

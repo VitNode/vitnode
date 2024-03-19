@@ -38,4 +38,7 @@ export class CreateAdminNavArgs {
   @Field(() => String)
   @MaxLength(255)
   href: string;
+
+  @Field(() => String, { nullable: true })
+  icon: string | null;
 }
