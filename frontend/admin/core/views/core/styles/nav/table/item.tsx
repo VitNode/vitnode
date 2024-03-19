@@ -12,6 +12,12 @@ import { useTextLang } from "@/hooks/core/use-text-lang";
 import { ActionsTableNavAdmin } from "./actions/actions";
 import type { FlatTree } from "@/hooks/core/drag&drop/use-functions";
 import { Icon } from "@/components/icon/icon";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
 
 interface Props extends FlatTree<Omit<ShowCoreNav, "__typename">> {
   indentationWidth: number;
@@ -39,6 +45,7 @@ export const ItemContentTableContentNavAdmin = ({
   ...props
 }: Props) => {
   const t = useTranslations("admin.core.styles.nav");
+  const tCore = useTranslations("core");
   const {
     attributes,
     isDragging,
@@ -70,7 +77,7 @@ export const ItemContentTableContentNavAdmin = ({
     >
       <div
         className={cn(
-          "p-4 flex gap-2 bg-card items-center transition-[background-color,opacity] relative border",
+          "p-4 flex gap-2 bg-card items-center transition-[background-color,opacity] relative border flex-wrap",
           {
             "animate-pulse bg-primary/20": isDropHere,
             "z-10": isDragging,
@@ -83,16 +90,23 @@ export const ItemContentTableContentNavAdmin = ({
         }}
         ref={setDraggableNodeRef}
       >
-        <Button
-          className="sm:flex hidden flex-shrink-0 focus:outline-none text-muted-foreground hover:text-foreground cursor-grab"
-          variant="ghost"
-          size="icon"
-          ariaLabel=""
-          {...attributes}
-          {...listeners}
-        >
-          {icon ? <Icon className="text-2xl" name={icon} /> : <Menu />}
-        </Button>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                className="sm:flex hidden flex-shrink-0 focus:outline-none text-muted-foreground hover:text-foreground cursor-grab"
+                variant="ghost"
+                size="icon"
+                ariaLabel=""
+                {...attributes}
+                {...listeners}
+              >
+                {icon ? <Icon className="text-2xl" name={icon} /> : <Menu />}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>{tCore("drag_to_change_position")}</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
 
         {allowOpenChildren && (
           <Button

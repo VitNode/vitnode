@@ -10,6 +10,12 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import type { ShowCoreNav } from "@/graphql/hooks";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
 
 const Content = lazy(() =>
   import("./content").then(module => ({
@@ -24,11 +30,23 @@ export const DeleteActionTableNavAdmin = (
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="destructiveGhost" size="icon" ariaLabel={t("delete")}>
-          <Trash2 />
-        </Button>
-      </AlertDialogTrigger>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <AlertDialogTrigger asChild>
+              <Button
+                variant="destructiveGhost"
+                size="icon"
+                ariaLabel={t("delete")}
+              >
+                <Trash2 />
+              </Button>
+            </AlertDialogTrigger>
+          </TooltipTrigger>
+
+          <TooltipContent>{t("delete")}</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
 
       <AlertDialogContent>
         <Suspense fallback={<Loader />}>
