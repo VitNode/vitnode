@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath, revalidateTag } from "next/cache";
+
 import { fetcher } from "@/graphql/fetcher";
 import {
   type Admin__Core_Nav__Change_PositionMutation,
@@ -18,6 +20,9 @@ export const mutationChangePositionApi = async (
       query: Admin__Core_Nav__Change_Position,
       variables
     });
+
+    revalidateTag("Core_Sessions__Authorization");
+    revalidatePath("/admin/core/styles/nav", "page");
 
     return { data };
   } catch (error) {

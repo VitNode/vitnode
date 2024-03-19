@@ -3,13 +3,19 @@ mutation Admin__core_nav__create(
   $external: Boolean!
   $href: String!
   $name: [TextLanguageInput!]!
+  $icon: String
 ) {
   admin__core_nav__create(
     description: $description
     external: $external
     href: $href
     name: $name
+    icon: $icon
   ) {
     id
+    name {
+      language_code
+      value
+    }
   }
 }

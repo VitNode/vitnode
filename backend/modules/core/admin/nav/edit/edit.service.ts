@@ -123,6 +123,7 @@ export class EditAdminNavService {
     description,
     external,
     href,
+    icon,
     id,
     name
   }: EditAdminNavArgs): Promise<ShowCoreNav> {
@@ -138,7 +139,8 @@ export class EditAdminNavService {
       .update(core_nav)
       .set({
         href,
-        external
+        external,
+        icon
       })
       .where(eq(core_nav.id, id))
       .returning();

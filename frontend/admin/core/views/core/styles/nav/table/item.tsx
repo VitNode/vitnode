@@ -11,6 +11,7 @@ import type { ShowCoreNav } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { ActionsTableNavAdmin } from "./actions/actions";
 import type { FlatTree } from "@/hooks/core/drag&drop/use-functions";
+import { Icon } from "@/components/icon/icon";
 
 interface Props extends FlatTree<Omit<ShowCoreNav, "__typename">> {
   indentationWidth: number;
@@ -27,6 +28,7 @@ export const ItemContentTableContentNavAdmin = ({
   description,
   external,
   href,
+  icon,
   id,
   indentationWidth,
   isDropHere = false,
@@ -89,7 +91,7 @@ export const ItemContentTableContentNavAdmin = ({
           {...attributes}
           {...listeners}
         >
-          <Menu />
+          {icon ? <Icon className="text-2xl" name={icon} /> : <Menu />}
         </Button>
 
         {allowOpenChildren && (

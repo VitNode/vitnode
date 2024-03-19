@@ -50,6 +50,7 @@ query Core_sessions__authorization {
         position
         external
         href
+        icon
       }
       description {
         language_code
@@ -63,6 +64,7 @@ query Core_sessions__authorization {
       href
       external
       position
+      icon
     }
   }
 }

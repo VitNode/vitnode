@@ -18,6 +18,7 @@ export class CreateAdminNavService {
     description,
     external,
     href,
+    icon,
     name
   }: CreateAdminNavArgs): Promise<ShowCoreNav> {
     const theMostHighestPosition =
@@ -31,6 +32,7 @@ export class CreateAdminNavService {
       .values({
         href,
         external,
+        icon,
         position: theMostHighestPosition
           ? theMostHighestPosition.position + 1
           : 0

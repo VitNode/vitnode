@@ -289,6 +289,7 @@ export type MutationAdmin__Core_Nav__CreateArgs = {
   description: Array<TextLanguageInput>;
   external: Scalars['Boolean']['input'];
   href: Scalars['String']['input'];
+  icon?: InputMaybe<Scalars['String']['input']>;
   name: Array<TextLanguageInput>;
 };
 
@@ -302,6 +303,7 @@ export type MutationAdmin__Core_Nav__EditArgs = {
   description: Array<TextLanguageInput>;
   external: Scalars['Boolean']['input'];
   href: Scalars['String']['input'];
+  icon?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Int']['input'];
   name: Array<TextLanguageInput>;
 };
@@ -956,6 +958,7 @@ export type ShowCoreNav = {
   description: Array<TextLanguage>;
   external: Scalars['Boolean']['output'];
   href: Scalars['String']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
   name: Array<TextLanguage>;
   position: Scalars['Int']['output'];
@@ -966,6 +969,7 @@ export type ShowCoreNavItem = {
   description: Array<TextLanguage>;
   external: Scalars['Boolean']['output'];
   href: Scalars['String']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
   name: Array<TextLanguage>;
   position: Scalars['Int']['output'];
@@ -1296,10 +1300,11 @@ export type Admin__Core_Nav__CreateMutationVariables = Exact<{
   external: Scalars['Boolean']['input'];
   href: Scalars['String']['input'];
   name: Array<TextLanguageInput> | TextLanguageInput;
+  icon?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type Admin__Core_Nav__CreateMutation = { __typename?: 'Mutation', admin__core_nav__create: { __typename?: 'ShowCoreNav', id: number } };
+export type Admin__Core_Nav__CreateMutation = { __typename?: 'Mutation', admin__core_nav__create: { __typename?: 'ShowCoreNav', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
 export type Admin__Core_Nav__DeleteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -1314,10 +1319,11 @@ export type Admin__Core_Nav__EditMutationVariables = Exact<{
   href: Scalars['String']['input'];
   id: Scalars['Int']['input'];
   name: Array<TextLanguageInput> | TextLanguageInput;
+  icon?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type Admin__Core_Nav__EditMutation = { __typename?: 'Mutation', admin__core_nav__edit: { __typename?: 'ShowCoreNav', id: number } };
+export type Admin__Core_Nav__EditMutation = { __typename?: 'Mutation', admin__core_nav__edit: { __typename?: 'ShowCoreNav', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
 export type Admin__Core_Plugins__CreateMutationVariables = Exact<{
   author: Scalars['String']['input'];
@@ -1619,7 +1625,7 @@ export type Admin__Core_Members__ShowQuery = { __typename?: 'Query', admin__core
 export type Admin__Core_Nav__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Admin__Core_Nav__ShowQuery = { __typename?: 'Query', core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, href: string, external: boolean, position: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
+export type Admin__Core_Nav__ShowQuery = { __typename?: 'Query', core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, icon?: string | null, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, href: string, external: boolean, position: number, icon?: string | null, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
 export type Admin__Core_Plugins__FilesQueryVariables = Exact<{
   code: Scalars['String']['input'];
@@ -1670,7 +1676,7 @@ export type Core_MiddlewareQuery = { __typename?: 'Query', core_languages__show:
 export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', theme_id?: number | null, plugin_default: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, rebuild_required: { __typename?: 'RebuildRequiredObj', themes: boolean, langs: boolean, plugins: boolean } }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string }> }, core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, position: number, external: boolean, href: string, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
+export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', theme_id?: number | null, plugin_default: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, rebuild_required: { __typename?: 'RebuildRequiredObj', themes: boolean, langs: boolean, plugins: boolean } }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string }> }, core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, icon?: string | null, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, position: number, external: boolean, href: string, icon?: string | null, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
 export type Core_Languages__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -1903,14 +1909,19 @@ export const Admin__Core_Nav__Change_Position = gql`
 }
     `;
 export const Admin__Core_Nav__Create = gql`
-    mutation Admin__core_nav__create($description: [TextLanguageInput!]!, $external: Boolean!, $href: String!, $name: [TextLanguageInput!]!) {
+    mutation Admin__core_nav__create($description: [TextLanguageInput!]!, $external: Boolean!, $href: String!, $name: [TextLanguageInput!]!, $icon: String) {
   admin__core_nav__create(
     description: $description
     external: $external
     href: $href
     name: $name
+    icon: $icon
   ) {
     id
+    name {
+      language_code
+      value
+    }
   }
 }
     `;
@@ -1920,15 +1931,20 @@ export const Admin__Core_Nav__Delete = gql`
 }
     `;
 export const Admin__Core_Nav__Edit = gql`
-    mutation Admin__core_nav__edit($description: [TextLanguageInput!]!, $external: Boolean!, $href: String!, $id: Int!, $name: [TextLanguageInput!]!) {
+    mutation Admin__core_nav__edit($description: [TextLanguageInput!]!, $external: Boolean!, $href: String!, $id: Int!, $name: [TextLanguageInput!]!, $icon: String) {
   admin__core_nav__edit(
     description: $description
     external: $external
     href: $href
     id: $id
     name: $name
+    icon: $icon
   ) {
     id
+    name {
+      language_code
+      value
+    }
   }
 }
     `;
@@ -2497,6 +2513,7 @@ export const Admin__Core_Nav__Show = gql`
         href
         external
         position
+        icon
       }
       description {
         language_code
@@ -2510,6 +2527,7 @@ export const Admin__Core_Nav__Show = gql`
       href
       external
       position
+      icon
     }
   }
 }
@@ -2702,6 +2720,7 @@ export const Core_Sessions__Authorization = gql`
         position
         external
         href
+        icon
       }
       description {
         language_code
@@ -2715,6 +2734,7 @@ export const Core_Sessions__Authorization = gql`
       href
       external
       position
+      icon
     }
   }
 }

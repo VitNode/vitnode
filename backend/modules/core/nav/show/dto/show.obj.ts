@@ -22,6 +22,9 @@ class ShowCoreNavItem {
 
   @Field(() => Boolean)
   external: boolean;
+
+  @Field(() => String, { nullable: true })
+  icon: string | null;
 }
 
 @ObjectType()
