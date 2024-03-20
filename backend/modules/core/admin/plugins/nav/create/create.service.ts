@@ -15,6 +15,7 @@ export class CreateAdminNavPluginsService {
 
   async create({
     code,
+    href,
     icon,
     plugin_code
   }: CreateAdminNavPluginsArgs): Promise<ShowAdminNavPluginsObj> {
@@ -40,12 +41,19 @@ export class CreateAdminNavPluginsService {
       });
     }
 
+    const getLastPosition =
+      await this.databaseService.db.query.core_plugins_nav.findFirst({
+        orderBy: (table, { desc }) => desc(table.position)
+      });
+
     const nav = await this.databaseService.db
       .insert(core_plugins_nav)
       .values({
         plugin_id: plugin.id,
         code: currentCode,
-        icon
+        icon,
+        position: getLastPosition ? getLastPosition.position + 1 : 0,
+        href: removeSpecialCharacters(href)
       })
       .returning();
 

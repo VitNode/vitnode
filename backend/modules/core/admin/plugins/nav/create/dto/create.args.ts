@@ -1,6 +1,6 @@
 import { ArgsType, Field } from "@nestjs/graphql";
 import { Transform } from "class-transformer";
-import { MaxLength, MinLength } from "class-validator";
+import { IsNotEmpty, MaxLength, MinLength } from "class-validator";
 
 import { TransformString } from "@/types/database/text-language.type";
 
@@ -14,6 +14,12 @@ export class CreateAdminNavPluginsArgs {
   @MaxLength(100)
   @Transform(TransformString)
   code: string;
+
+  // @MaxLength(100)
+  // @Transform(TransformString)
+  @IsNotEmpty()
+  @Field(() => String)
+  href: string;
 
   @Field(() => String, { nullable: true })
   icon: string | null;

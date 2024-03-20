@@ -353,6 +353,7 @@ export type MutationAdmin__Core_Plugins__Nav__Change_PositionArgs = {
 
 export type MutationAdmin__Core_Plugins__Nav__CreateArgs = {
   code: Scalars['String']['input'];
+  href: Scalars['String']['input'];
   icon?: InputMaybe<Scalars['String']['input']>;
   plugin_code: Scalars['String']['input'];
 };
@@ -793,6 +794,7 @@ export type ShowAdminMembersSortingColumnEnum = typeof ShowAdminMembersSortingCo
 export type ShowAdminNavPluginsObj = {
   __typename?: 'ShowAdminNavPluginsObj';
   code: Scalars['String']['output'];
+  href: Scalars['String']['output'];
   icon?: Maybe<Scalars['String']['output']>;
   position: Scalars['Int']['output'];
 };
@@ -1415,10 +1417,11 @@ export type Admin__Core_Plugins__Nav__CreateMutationVariables = Exact<{
   code: Scalars['String']['input'];
   pluginCode: Scalars['String']['input'];
   icon?: InputMaybe<Scalars['String']['input']>;
+  href: Scalars['String']['input'];
 }>;
 
 
-export type Admin__Core_Plugins__Nav__CreateMutation = { __typename?: 'Mutation', admin__core_plugins__nav__create: { __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null } };
+export type Admin__Core_Plugins__Nav__CreateMutation = { __typename?: 'Mutation', admin__core_plugins__nav__create: { __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null, href: string } };
 
 export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -1703,7 +1706,7 @@ export type Admin__Core_Plugins__Nav__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null, position: number }> };
+export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null, position: number, href: string }> };
 
 export type Admin__Settings__General__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2062,14 +2065,16 @@ export const Admin__Core_Plugins__Nav__Change_Position = gql`
 }
     `;
 export const Admin__Core_Plugins__Nav__Create = gql`
-    mutation Admin__core_plugins__nav__create($code: String!, $pluginCode: String!, $icon: String) {
+    mutation Admin__core_plugins__nav__create($code: String!, $pluginCode: String!, $icon: String, $href: String!) {
   admin__core_plugins__nav__create(
     code: $code
     plugin_code: $pluginCode
     icon: $icon
+    href: $href
   ) {
     code
     icon
+    href
   }
 }
     `;
@@ -2685,6 +2690,7 @@ export const Admin__Core_Plugins__Nav__Show = gql`
     code
     icon
     position
+    href
   }
 }
     `;

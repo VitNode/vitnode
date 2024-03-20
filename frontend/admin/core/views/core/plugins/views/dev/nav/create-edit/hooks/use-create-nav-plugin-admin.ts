@@ -22,14 +22,16 @@ export const useCreateNavPluginAdmin = ({ data }: Props) => {
   const { code } = useParams();
   const formSchema = z.object({
     code: zodInput.string.min(3).max(50),
-    icon: z.string()
+    icon: z.string(),
+    href: zodInput.string.min(1).max(100)
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       code: data?.code ?? "",
-      icon: data?.icon ?? ""
+      icon: data?.icon ?? "",
+      href: data?.href ?? ""
     }
   });
 

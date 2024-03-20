@@ -32,6 +32,7 @@ import type {
   ShowAdminNavPluginsObj
 } from "@/graphql/hooks";
 import { ItemContentTableNavDevPluginAdmin } from "./item";
+import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
 
 export const ContentTableNavDevPluginAdmin = ({
   admin__core_plugins__nav__show: initData
@@ -147,11 +148,10 @@ export const ContentTableNavDevPluginAdmin = ({
           return;
         }
 
-        // await mutationChangePositionApi({
-        //   id: Number(active.id),
-        //   parentId: Number(parentId),
-        //   indexToMove
-        // });
+        await mutationChangePositionApi({
+          code: active.id.toString(),
+          indexToMove
+        });
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>

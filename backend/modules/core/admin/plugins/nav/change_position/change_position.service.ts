@@ -25,6 +25,7 @@ export class ChangePositionAdminNavPluginsService {
 
     const getAllNav =
       await this.databaseService.db.query.core_plugins_nav.findMany({
+        where: (table, { eq }) => eq(table.plugin_id, nav.plugin_id),
         orderBy: (table, { asc }) => asc(table.position)
       });
 
@@ -44,6 +45,11 @@ export class ChangePositionAdminNavPluginsService {
         });
         index++;
       });
+
+    newIndexes.push({
+      code,
+      position: index_to_move < 0 ? index : index_to_move
+    });
 
     await Promise.all(
       newIndexes.map(async item => {

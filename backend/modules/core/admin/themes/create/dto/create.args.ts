@@ -1,6 +1,6 @@
 import { ArgsType, Field } from "@nestjs/graphql";
 import { Transform } from "class-transformer";
-import { MaxLength, MinLength } from "class-validator";
+import { IsNotEmpty, MaxLength, MinLength } from "class-validator";
 
 import { TransformString } from "@/types/database/text-language.type";
 
@@ -13,6 +13,7 @@ export class CreateAdminThemesArgs {
   name: string;
 
   @Transform(TransformString)
+  @IsNotEmpty()
   @Field(() => String)
   support_url: string;
 

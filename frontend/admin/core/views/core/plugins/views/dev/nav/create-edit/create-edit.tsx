@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 
 import {
   DialogFooter,
@@ -19,6 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { IconInput } from "@/components/icon/input/icon-input";
 import type { ShowAdminNavPluginsObj } from "@/graphql/hooks";
+import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 
 interface Props {
   data?: ShowAdminNavPluginsObj;
@@ -28,6 +30,7 @@ export const CreateEditNavDevPluginAdmin = ({ data }: Props) => {
   const t = useTranslations("admin.core.plugins.dev.nav");
   const tCore = useTranslations("core");
   const { form, onSubmit } = useCreateNavPluginAdmin({ data });
+  const { code } = useParams();
 
   return (
     <>
@@ -47,6 +50,27 @@ export const CreateEditNavDevPluginAdmin = ({ data }: Props) => {
                   <Input {...field} />
                 </FormControl>
                 <FormDescription>{t("create.code.desc")}</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="href"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("create.href.label")}</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormDescription>
+                  {t.rich("create.href.desc", {
+                    link: () => (
+                      <span className="font-bold text-foreground">{`${code}/${removeSpecialCharacters(form.watch("href"))}`}</span>
+                    )
+                  })}
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}

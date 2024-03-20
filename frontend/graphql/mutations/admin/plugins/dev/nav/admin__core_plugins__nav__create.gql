@@ -2,13 +2,16 @@ mutation Admin__core_plugins__nav__create(
   $code: String!
   $pluginCode: String!
   $icon: String
+  $href: String!
 ) {
   admin__core_plugins__nav__create(
     code: $code
     plugin_code: $pluginCode
     icon: $icon
+    href: $href
   ) {
     code
     icon
+    href
   }
 }

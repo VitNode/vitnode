@@ -10,4 +10,7 @@ export class ShowAdminNavPluginsObj {
 
   @Field(() => Int)
   position: number;
+
+  @Field(() => String)
+  href: string;
 }
