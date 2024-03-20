@@ -32,8 +32,8 @@ export const core_plugins = pgTable(
   })
 );
 
-export const core_plugins__nav = pgTable(
-  "core_plugins__nav",
+export const core_plugins_nav = pgTable(
+  "core_plugins_nav",
   {
     code: varchar("code", { length: 50 }).notNull().unique(),
     plugin_id: integer("plugin_id").notNull(),

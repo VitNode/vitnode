@@ -21,7 +21,7 @@ export class ShowAdminNavPluginsService {
       throw new NotFoundError("Plugin");
     }
 
-    const nav = await this.databaseService.db.query.core_plugins__nav.findMany({
+    const nav = await this.databaseService.db.query.core_plugins_nav.findMany({
       where: (table, { eq }) => eq(table.plugin_id, plugin.id)
     });
 
