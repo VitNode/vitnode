@@ -35,6 +35,7 @@ export const core_plugins = pgTable(
 export const core_plugins_nav = pgTable(
   "core_plugins_nav",
   {
+    id: serial("id").primaryKey(),
     code: varchar("code", { length: 50 }).notNull().unique(),
     plugin_id: integer("plugin_id")
       .notNull()

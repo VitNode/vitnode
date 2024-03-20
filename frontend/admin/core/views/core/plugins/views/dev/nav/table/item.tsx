@@ -14,6 +14,7 @@ import {
 import { cn } from "@/functions/classnames";
 import type { ShowAdminNavPluginsObj } from "@/graphql/hooks";
 import type { FlatTree } from "@/hooks/core/drag&drop/use-functions";
+import { ActionsTableNavDevPluginAdmin } from "./actions/actions";
 
 interface Props extends FlatTree<ShowAdminNavPluginsObj> {
   active?: boolean;
@@ -25,7 +26,8 @@ export const ItemContentTableNavDevPluginAdmin = ({
   code,
   icon,
   id,
-  isDropHere
+  isDropHere,
+  ...props
 }: Props) => {
   const tCore = useTranslations("core");
   const {
@@ -80,6 +82,13 @@ export const ItemContentTableNavDevPluginAdmin = ({
         <div className="flex flex-col flex-1">
           <span className="font-semibold">{code}</span>
         </div>
+
+        <ActionsTableNavDevPluginAdmin
+          id={id}
+          code={code}
+          icon={icon}
+          {...props}
+        />
       </div>
     </div>
   );

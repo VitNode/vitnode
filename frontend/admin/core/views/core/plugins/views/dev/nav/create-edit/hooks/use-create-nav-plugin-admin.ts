@@ -10,6 +10,7 @@ import { useDialog } from "@/components/ui/dialog";
 import { createMutationApi } from "./create-mutation-api";
 import type { ErrorType } from "@/graphql/fetcher";
 import type { ShowAdminNavPluginsObj } from "@/graphql/hooks";
+import { editMutationApi } from "./edit-mutation-api";
 
 interface Props {
   data?: ShowAdminNavPluginsObj;
@@ -38,8 +39,9 @@ export const useCreateNavPluginAdmin = ({ data }: Props) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     let error: ErrorType | undefined;
     if (data) {
-      const mutation = await createMutationApi({
+      const mutation = await editMutationApi({
         ...values,
+        id: data.id,
         pluginCode: Array.isArray(code) ? code[0] : code
       });
       if (mutation.error) {

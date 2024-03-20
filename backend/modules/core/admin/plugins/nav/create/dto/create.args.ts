@@ -15,8 +15,8 @@ export class CreateAdminNavPluginsArgs {
   @Transform(TransformString)
   code: string;
 
-  // @MaxLength(100)
-  // @Transform(TransformString)
+  @MaxLength(100)
+  @Transform(TransformString)
   @IsNotEmpty()
   @Field(() => String)
   href: string;

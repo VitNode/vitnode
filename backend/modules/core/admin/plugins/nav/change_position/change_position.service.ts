@@ -12,11 +12,11 @@ export class ChangePositionAdminNavPluginsService {
   constructor(private databaseService: DatabaseService) {}
 
   async changePosition({
-    code,
+    id,
     index_to_move
   }: ChangePositionAdminNavPluginsArgs): Promise<string> {
     const nav = await this.databaseService.db.query.core_plugins_nav.findFirst({
-      where: (table, { eq }) => eq(table.code, code)
+      where: (table, { eq }) => eq(table.id, id)
     });
 
     if (!nav) {
@@ -30,9 +30,9 @@ export class ChangePositionAdminNavPluginsService {
       });
 
     let index = 0;
-    const newIndexes: { code: string; position: number }[] = [];
+    const newIndexes: { id: number; position: number }[] = [];
     getAllNav
-      .filter(item => item.code !== code)
+      .filter(item => item.id !== id)
       .forEach(item => {
         // Skip the item that we want to move
         if (index_to_move === index) {
@@ -40,14 +40,14 @@ export class ChangePositionAdminNavPluginsService {
         }
 
         newIndexes.push({
-          code: item.code,
+          id: item.id,
           position: index
         });
         index++;
       });
 
     newIndexes.push({
-      code,
+      id,
       position: index_to_move < 0 ? index : index_to_move
     });
 
@@ -58,7 +58,7 @@ export class ChangePositionAdminNavPluginsService {
           .set({
             position: item.position
           })
-          .where(eq(core_plugins_nav.code, item.code));
+          .where(eq(core_plugins_nav.id, item.id));
       })
     );
 

@@ -15,7 +15,7 @@ import {
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { useTranslations } from "next-intl";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import {
   useProjection,
@@ -35,14 +35,21 @@ import { ItemContentTableNavDevPluginAdmin } from "./item";
 import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
 
 export const ContentTableNavDevPluginAdmin = ({
-  admin__core_plugins__nav__show: initData
+  admin__core_plugins__nav__show: edges
 }: Admin__Core_Plugins__Nav__ShowQuery) => {
   const t = useTranslations("core");
-  const [data, setData] = useState<ShowAdminNavPluginsObj[]>(initData);
+  const [data, setData] = useState<ShowAdminNavPluginsObj[]>(edges);
   const [projected, setProjected] = useState<ProjectionReturnType | null>();
   const { activeId, getProjection, overId, setActiveId, setOverId } =
     useProjection();
   const dragAndDrop = useDragAndDrop({ activeId });
+
+  // Revalidate items when edges change
+  useEffect(() => {
+    if (!edges || !data) return;
+
+    setData(edges);
+  }, [edges]);
 
   const resetState = () => {
     setOverId(null);
@@ -58,7 +65,7 @@ export const ContentTableNavDevPluginAdmin = ({
   );
 
   const flattenedItems = dragAndDrop.flattenedItems({
-    data: data.map(item => ({ ...item, id: item.code, children: [] }))
+    data: data.map(item => ({ ...item, children: [] }))
   });
   const activeItem = flattenedItems.find(i => i.id === activeId);
   const sortedIds = useMemo(
@@ -109,7 +116,6 @@ export const ContentTableNavDevPluginAdmin = ({
         const clonedItems: FlatTree<ShowAdminNavPluginsObj>[] = flattenTree({
           tree: data.map(item => ({
             ...item,
-            id: item.code,
             children: []
           }))
         });
@@ -149,7 +155,7 @@ export const ContentTableNavDevPluginAdmin = ({
         }
 
         await mutationChangePositionApi({
-          code: active.id.toString(),
+          id: Number(active.id),
           indexToMove
         });
       }}
