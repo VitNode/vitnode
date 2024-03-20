@@ -14,21 +14,21 @@ export class DeleteForumsPostsService {
     { id }: User,
     { post_id }: DeletePostsForumsArgs
   ): Promise<string> {
+    const user_id = await this.databaseService.db
+      .select({
+        user_id: forum_posts.user_id
+      })
+      .from(forum_posts)
+      .where(eq(forum_posts.id, post_id))[0]?.user_id;
 
-    const post = await this.databaseService.db
-      .query(forum_posts)
-      .where(eq(forum_posts.id, post_id))
-      .select(forum_posts.user_id)
-      .findOne();
-
-    if (post.user_id === id) {
+    if (user_id === id) {
       await this.databaseService.db
-      .delete(forum_posts)
-      .where(eq(forum_posts.id, post_id))
-      .execute();
+        .delete(forum_posts)
+        .where(eq(forum_posts.id, post_id))
+        .execute();
 
       return "Success!";
     }
-    throw new AccessDeniedError();    
+    throw new AccessDeniedError();
   }
 }
