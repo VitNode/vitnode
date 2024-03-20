@@ -16,6 +16,7 @@ import { FilesAdminPluginsService } from "./files/files.service";
 import { FilesAdminPluginsResolver } from "./files/files.resolver";
 import { EditAdminPluginsResolver } from "./edit/edit.resolver";
 import { EditAdminPluginsService } from "./edit/edit.service";
+import { AdminNavPluginsModule } from "./nav/nav-plugins.module";
 
 export interface ConfigPlugin {
   author: string;
@@ -46,6 +47,7 @@ export interface ConfigPlugin {
     FilesAdminPluginsResolver,
     EditAdminPluginsResolver,
     EditAdminPluginsService
-  ]
+  ],
+  imports: [AdminNavPluginsModule]
 })
 export class AdminPluginsModule {}

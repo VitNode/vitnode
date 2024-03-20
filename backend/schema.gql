@@ -241,6 +241,7 @@ type Query {
   admin__core_members__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   admin__core_members__stats_sign_up: [SignUpStatsAdminMembers!]!
   admin__core_plugins__files(code: String!): FilesAdminPluginsObj!
+  admin__core_plugins__nav__show(plugin_code: String!): [ShowAdminNavPluginsObj!]!
   admin__core_plugins__show(code: String, cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminPluginsSortByArgs!]): ShowAdminPluginsObj!
   admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
   admin__core_staff_moderators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
@@ -345,6 +346,12 @@ enum ShowAdminMembersSortingColumnEnum {
   name
   posts
   reactions
+}
+
+type ShowAdminNavPluginsObj {
+  code: String!
+  icon: String
+  position: Int!
 }
 
 type ShowAdminPlugins {
