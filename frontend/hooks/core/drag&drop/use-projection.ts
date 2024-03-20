@@ -34,7 +34,7 @@ export interface ProjectionReturnType {
   depth: number;
   maxDepth: number;
   minDepth: number;
-  parentId: number | null;
+  parentId: number | string | null;
 }
 
 export const useProjection = () => {
@@ -43,13 +43,13 @@ export const useProjection = () => {
 
   function getProjection<T extends object>({
     dragOffset,
-    indentationWidth,
+    indentationWidth = 0,
     maxDepth: maxDepthProp,
     tree
   }: {
     dragOffset: number;
-    indentationWidth: number;
     tree: FlatTree<T>[];
+    indentationWidth?: number;
     maxDepth?: number;
   }): ProjectionReturnType {
     const overItemIndex = tree.findIndex(({ id }) => id === overId);
@@ -63,11 +63,12 @@ export const useProjection = () => {
       indentationWidth
     });
     const projectedDepth = activeItem.depth + dragDepth;
-    const maxDepth = maxDepthProp
-      ? maxDepthProp
-      : getMaxDepth({
-          previousItem
-        });
+    const maxDepth =
+      maxDepthProp !== undefined
+        ? maxDepthProp
+        : getMaxDepth({
+            previousItem
+          });
     const minDepth = getMinDepth({ nextItem });
     let depth = projectedDepth;
 
@@ -77,7 +78,7 @@ export const useProjection = () => {
       depth = minDepth;
     }
 
-    const getParentId = (): number | null => {
+    const getParentId = (): number | string | null => {
       if (depth === 0 || !previousItem) {
         return null;
       }

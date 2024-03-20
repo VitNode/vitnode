@@ -1,12 +1,12 @@
 import {
   DndContext,
+  DragOverlay,
   KeyboardSensor,
+  MeasuringStrategy,
   PointerSensor,
   closestCorners,
   useSensor,
-  useSensors,
-  MeasuringStrategy,
-  DragOverlay
+  useSensors
 } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -14,12 +14,9 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
-import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
+import { useMemo, useState } from "react";
 
-import { ItemContentTableContentNavAdmin } from "./item";
-import type { Admin__Core_Nav__ShowQuery, ShowCoreNav } from "@/graphql/hooks";
-import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
 import {
   useProjection,
   type ProjectionReturnType
@@ -30,25 +27,21 @@ import {
   flattenTree,
   buildTree
 } from "@/hooks/core/drag&drop/use-functions";
+import type {
+  Admin__Core_Plugins__Nav__ShowQuery,
+  ShowAdminNavPluginsObj
+} from "@/graphql/hooks";
+import { ItemContentTableNavDevPluginAdmin } from "./item";
 
-const indentationWidth = 20;
-
-export const ContentTableContentNavAdmin = ({
-  core_nav__show: { edges }
-}: Admin__Core_Nav__ShowQuery) => {
+export const ContentTableNavDevPluginAdmin = ({
+  admin__core_plugins__nav__show: initData
+}: Admin__Core_Plugins__Nav__ShowQuery) => {
   const t = useTranslations("core");
-  const [data, setData] = useState<Omit<ShowCoreNav, "__typename">[]>(edges);
+  const [data, setData] = useState<ShowAdminNavPluginsObj[]>(initData);
   const [projected, setProjected] = useState<ProjectionReturnType | null>();
   const { activeId, getProjection, overId, setActiveId, setOverId } =
     useProjection();
   const dragAndDrop = useDragAndDrop({ activeId });
-
-  // Revalidate items when edges change
-  useEffect(() => {
-    if (!edges || !data) return;
-
-    setData(edges);
-  }, [edges]);
 
   const resetState = () => {
     setOverId(null);
@@ -64,10 +57,7 @@ export const ContentTableContentNavAdmin = ({
   );
 
   const flattenedItems = dragAndDrop.flattenedItems({
-    data: data.map(item => ({
-      ...item,
-      children: item.children.map(child => ({ ...child, children: [] }))
-    }))
+    data: data.map(item => ({ ...item, id: item.code, children: [] }))
   });
   const activeItem = flattenedItems.find(i => i.id === activeId);
   const sortedIds = useMemo(
@@ -96,8 +86,7 @@ export const ContentTableContentNavAdmin = ({
         const currentProjection = getProjection({
           tree: flattenedItems,
           dragOffset: delta.x,
-          indentationWidth,
-          maxDepth: 1
+          maxDepth: 0
         });
 
         if (projected?.parentId === currentProjection.parentId) {
@@ -116,10 +105,11 @@ export const ContentTableContentNavAdmin = ({
         if (!projected || !over) return;
         const { depth, parentId } = projected;
 
-        const clonedItems: FlatTree<ShowCoreNav>[] = flattenTree({
+        const clonedItems: FlatTree<ShowAdminNavPluginsObj>[] = flattenTree({
           tree: data.map(item => ({
             ...item,
-            children: item.children.map(child => ({ ...child, children: [] }))
+            id: item.code,
+            children: []
           }))
         });
 
@@ -133,12 +123,11 @@ export const ContentTableContentNavAdmin = ({
           parentId
         };
 
-        const dataAfterUpdate: FlatTree<ShowCoreNav>[] = sortedItems.map(
-          item => ({
+        const dataAfterUpdate: FlatTree<ShowAdminNavPluginsObj>[] =
+          sortedItems.map(item => ({
             ...item,
             children: []
-          })
-        );
+          }));
 
         setData(
           buildTree({
@@ -158,48 +147,26 @@ export const ContentTableContentNavAdmin = ({
           return;
         }
 
-        await mutationChangePositionApi({
-          id: Number(active.id),
-          parentId: Number(parentId),
-          indexToMove
-        });
+        // await mutationChangePositionApi({
+        //   id: Number(active.id),
+        //   parentId: Number(parentId),
+        //   indexToMove
+        // });
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
         {flattenedItems.map(item => (
-          <ItemContentTableContentNavAdmin
+          <ItemContentTableNavDevPluginAdmin
             key={item.id}
-            indentationWidth={indentationWidth}
-            onCollapse={id => {
-              const isOpen = dragAndDrop.isOpenChildren.includes(id);
-
-              dragAndDrop.setIsOpenChildren(prev => {
-                if (isOpen) {
-                  return prev.filter(i => i !== id);
-                }
-
-                return [...prev, id];
-              });
-            }}
-            isOpenChildren={dragAndDrop.isOpenChildren.includes(item.id)}
             isDropHere={projected?.parentId === item.id}
             active={activeId === item.id}
             {...item}
-            depth={
-              activeId === item.id && projected?.parentId
-                ? projected?.depth
-                : item.depth
-            }
           />
         ))}
 
         <DragOverlay>
           {activeId !== null && activeItem && (
-            <ItemContentTableContentNavAdmin
-              indentationWidth={indentationWidth}
-              overlay
-              {...activeItem}
-            />
+            <ItemContentTableNavDevPluginAdmin {...activeItem} />
           )}
         </DragOverlay>
       </SortableContext>
