@@ -8,6 +8,8 @@ import { ChangePositionAdminNavPluginsResolver } from "./change_position/change_
 import { ChangePositionAdminNavPluginsService } from "./change_position/change_position.service";
 import { EditAdminNavPluginsResolver } from "./edit/edit.resolver";
 import { EditAdminNavPluginsService } from "./edit/edit.service";
+import { DeleteAdminNavPluginsResolver } from "./delete/delete.resolver";
+import { DeleteAdminNavPluginsService } from "./delete/delete.service";
 
 @Module({
   providers: [
@@ -18,7 +20,9 @@ import { EditAdminNavPluginsService } from "./edit/edit.service";
     ChangePositionAdminNavPluginsResolver,
     ChangePositionAdminNavPluginsService,
     EditAdminNavPluginsResolver,
-    EditAdminNavPluginsService
+    EditAdminNavPluginsService,
+    DeleteAdminNavPluginsResolver,
+    DeleteAdminNavPluginsService
   ]
 })
 export class AdminNavPluginsModule {}
