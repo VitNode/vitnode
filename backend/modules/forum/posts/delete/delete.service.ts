@@ -3,32 +3,27 @@ import { eq } from "drizzle-orm";
 import { User } from "@/utils/decorators/user.decorator";
 import { DatabaseService } from "@/modules/database/database.service";
 import { forum_posts } from "@/modules/forum/admin/database/schema/posts";
-import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { DeletePostsForumsArgs } from "@/modules/forum/posts/delete/dto/delete.args";
+import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
+import { NotFoundError } from "@/utils/errors/not-found-error";
 
 @Injectable()
 export class DeleteForumsPostsService {
   constructor(private databaseService: DatabaseService) {}
 
-  async delete(
-    { id }: User,
-    { post_id }: DeletePostsForumsArgs
-  ): Promise<string> {
-    const user_id = await this.databaseService.db
-      .select({
-        user_id: forum_posts.user_id
-      })
-      .from(forum_posts)
-      .where(eq(forum_posts.id, post_id))[0]?.user_id;
+  async delete(user: User, { id }: DeletePostsForumsArgs): Promise<string> {
+    const post = await this.databaseService.db.query.forum_posts.findFirst({
+      where: (table, { eq }) => eq(table.id, id)
+    });
 
-    if (user_id === id) {
-      await this.databaseService.db
-        .delete(forum_posts)
-        .where(eq(forum_posts.id, post_id))
-        .execute();
+    if (!post) throw new NotFoundError("Post");
+    if (user.id !== post.user_id) throw new AccessDeniedError();
 
-      return "Success!";
-    }
-    throw new AccessDeniedError();
+    await this.databaseService.db
+      .delete(forum_posts)
+      .where(eq(forum_posts.id, id))
+      .execute();
+
+    return "Success!";
   }
 }
