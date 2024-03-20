@@ -58,7 +58,23 @@
             "title": "Files"
           },
           "nav": {
-            "title": "Navigation in AdminCP"
+            "title": "Navigation in AdminCP",
+            "create": {
+              "title": "Create Navigation",
+              "code": {
+                "label": "Code",
+                "desc": "Should be unique. Min 3-50 characters.",
+                "exists": "Navigation with this code already exists."
+              },
+              "icon": {
+                "label": "Icon"
+              },
+              "success": "Navigation has been created."
+            },
+            "edit": {
+              "title": "Edit Navigation",
+              "success": "Navigation has been updated."
+            }
           }
         },
         "create": {

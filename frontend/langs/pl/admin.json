@@ -58,7 +58,23 @@
             "title": "Pliki"
           },
           "nav": {
-            "title": "Nawigacja w AdminCP"
+            "title": "Nawigacja w AdminCP",
+            "create": {
+              "title": "Stwórz nawigację",
+              "code": {
+                "label": "Kod",
+                "desc": "Powinno być unikalne. Min 3-50 znakó.",
+                "exists": "Nawigacja o takim kodzie już istnieje."
+              },
+              "icon": {
+                "label": "Ikona"
+              },
+              "success": "Nawigacja została stworzona."
+            },
+            "edit": {
+              "title": "Edytuj nawigację",
+              "success": "Nawigacja została zaktualizowana."
+            }
           }
         },
         "create": {
