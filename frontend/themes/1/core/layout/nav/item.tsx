@@ -73,8 +73,10 @@ export const ItemNav = ({
                       target={item.external ? "_blank" : undefined}
                       rel={item.external ? "noopener noreferrer" : undefined}
                     >
-                      <div className="text font-medium">
-                        {item.icon && <Icon name={item.icon} />}{" "}
+                      <div className="font-medium flex gap-1">
+                        {item.icon && (
+                          <Icon className="size-4" name={item.icon} />
+                        )}
                         {convertText(item.name)}
                       </div>
                       {item.description && (

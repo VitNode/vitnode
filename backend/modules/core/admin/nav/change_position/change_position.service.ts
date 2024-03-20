@@ -15,7 +15,7 @@ export class ChangePositionAdminNavService {
     id,
     index_to_move,
     parent_id
-  }: ChangePositionAdminNavArgs) {
+  }: ChangePositionAdminNavArgs): Promise<string> {
     const nav = await this.databaseService.db.query.core_nav.findFirst({
       where: (table, { eq }) => eq(table.id, id)
     });

@@ -133,11 +133,12 @@ export const ContentTableContentNavAdmin = ({
           parentId
         };
 
-        const dataAfterUpdate: FlatTree<FlatTree<ShowCoreNav>>[] =
-          sortedItems.map(item => ({
+        const dataAfterUpdate: FlatTree<ShowCoreNav>[] = sortedItems.map(
+          item => ({
             ...item,
             children: []
-          }));
+          })
+        );
 
         setData(
           buildTree({
@@ -159,7 +160,7 @@ export const ContentTableContentNavAdmin = ({
 
         await mutationChangePositionApi({
           id: Number(active.id),
-          parentId,
+          parentId: Number(parentId),
           indexToMove
         });
       }}

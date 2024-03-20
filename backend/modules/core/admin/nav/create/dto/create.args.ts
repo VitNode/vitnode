@@ -2,6 +2,7 @@ import { ArgsType, Field } from "@nestjs/graphql";
 import {
   ArrayMinSize,
   IsArray,
+  IsNotEmpty,
   MaxLength,
   ValidateNested
 } from "class-validator";
@@ -35,6 +36,7 @@ export class CreateAdminNavArgs {
   external: boolean;
 
   @Transform(TransformString)
+  @IsNotEmpty()
   @Field(() => String)
   @MaxLength(255)
   href: string;

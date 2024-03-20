@@ -1,0 +1,15 @@
+mutation Admin__core_plugins__nav__edit(
+  $code: String!
+  $href: String!
+  $id: Int!
+  $icon: String
+) {
+  admin__core_plugins__nav__edit(
+    code: $code
+    href: $href
+    id: $id
+    icon: $icon
+  ) {
+    id
+  }
+}

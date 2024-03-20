@@ -198,6 +198,10 @@ export type Mutation = {
   admin__core_plugins__delete: Scalars['String']['output'];
   admin__core_plugins__download: Scalars['String']['output'];
   admin__core_plugins__edit: ShowAdminPlugins;
+  admin__core_plugins__nav__change_position: Scalars['String']['output'];
+  admin__core_plugins__nav__create: ShowAdminNavPluginsObj;
+  admin__core_plugins__nav__delete: Scalars['String']['output'];
+  admin__core_plugins__nav__edit: ShowAdminNavPluginsObj;
   admin__core_plugins__upload: ShowAdminPlugins;
   admin__core_staff_administrators__create: ShowAdminStaffAdministrators;
   admin__core_staff_administrators__delete: Scalars['String']['output'];
@@ -340,6 +344,33 @@ export type MutationAdmin__Core_Plugins__EditArgs = {
   enabled?: InputMaybe<Scalars['Boolean']['input']>;
   name: Scalars['String']['input'];
   support_url: Scalars['String']['input'];
+};
+
+
+export type MutationAdmin__Core_Plugins__Nav__Change_PositionArgs = {
+  id: Scalars['Int']['input'];
+  index_to_move: Scalars['Int']['input'];
+};
+
+
+export type MutationAdmin__Core_Plugins__Nav__CreateArgs = {
+  code: Scalars['String']['input'];
+  href: Scalars['String']['input'];
+  icon?: InputMaybe<Scalars['String']['input']>;
+  plugin_code: Scalars['String']['input'];
+};
+
+
+export type MutationAdmin__Core_Plugins__Nav__DeleteArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type MutationAdmin__Core_Plugins__Nav__EditArgs = {
+  code: Scalars['String']['input'];
+  href: Scalars['String']['input'];
+  icon?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['Int']['input'];
 };
 
 
@@ -544,6 +575,7 @@ export type Query = {
   admin__core_members__show: ShowAdminMembersObj;
   admin__core_members__stats_sign_up: Array<SignUpStatsAdminMembers>;
   admin__core_plugins__files: FilesAdminPluginsObj;
+  admin__core_plugins__nav__show: Array<ShowAdminNavPluginsObj>;
   admin__core_plugins__show: ShowAdminPluginsObj;
   admin__core_staff_administrators__show: ShowAdminStaffAdministratorsObj;
   admin__core_staff_moderators__show: ShowAdminStaffModeratorsObj;
@@ -584,6 +616,11 @@ export type QueryAdmin__Core_Members__ShowArgs = {
 
 export type QueryAdmin__Core_Plugins__FilesArgs = {
   code: Scalars['String']['input'];
+};
+
+
+export type QueryAdmin__Core_Plugins__Nav__ShowArgs = {
+  plugin_code: Scalars['String']['input'];
 };
 
 
@@ -769,6 +806,15 @@ export const ShowAdminMembersSortingColumnEnum = {
 } as const;
 
 export type ShowAdminMembersSortingColumnEnum = typeof ShowAdminMembersSortingColumnEnum[keyof typeof ShowAdminMembersSortingColumnEnum];
+export type ShowAdminNavPluginsObj = {
+  __typename?: 'ShowAdminNavPluginsObj';
+  code: Scalars['String']['output'];
+  href: Scalars['String']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
+  id: Scalars['Int']['output'];
+  position: Scalars['Int']['output'];
+};
+
 export type ShowAdminPlugins = {
   __typename?: 'ShowAdminPlugins';
   allow_default: Scalars['Boolean']['output'];
@@ -1344,6 +1390,14 @@ export type Admin__Core_Plugins__DeleteMutationVariables = Exact<{
 
 export type Admin__Core_Plugins__DeleteMutation = { __typename?: 'Mutation', admin__core_plugins__delete: string };
 
+export type Admin__Core_Plugins__UploadMutationVariables = Exact<{
+  file: Scalars['Upload']['input'];
+  code?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Admin__Core_Plugins__UploadMutation = { __typename?: 'Mutation', admin__core_plugins__upload: { __typename?: 'ShowAdminPlugins', id: number, name: string } };
+
 export type Admin__Core_Plugins__DownloadMutationVariables = Exact<{
   code: Scalars['String']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
@@ -1367,13 +1421,40 @@ export type Admin__Core_Plugins__EditMutationVariables = Exact<{
 
 export type Admin__Core_Plugins__EditMutation = { __typename?: 'Mutation', admin__core_plugins__edit: { __typename?: 'ShowAdminPlugins', id: number, name: string } };
 
-export type Admin__Core_Plugins__UploadMutationVariables = Exact<{
-  file: Scalars['Upload']['input'];
-  code?: InputMaybe<Scalars['String']['input']>;
+export type Admin__Core_Plugins__Nav__Change_PositionMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  indexToMove: Scalars['Int']['input'];
 }>;
 
 
-export type Admin__Core_Plugins__UploadMutation = { __typename?: 'Mutation', admin__core_plugins__upload: { __typename?: 'ShowAdminPlugins', id: number, name: string } };
+export type Admin__Core_Plugins__Nav__Change_PositionMutation = { __typename?: 'Mutation', admin__core_plugins__nav__change_position: string };
+
+export type Admin__Core_Plugins__Nav__CreateMutationVariables = Exact<{
+  code: Scalars['String']['input'];
+  pluginCode: Scalars['String']['input'];
+  icon?: InputMaybe<Scalars['String']['input']>;
+  href: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Plugins__Nav__CreateMutation = { __typename?: 'Mutation', admin__core_plugins__nav__create: { __typename?: 'ShowAdminNavPluginsObj', id: number, code: string, icon?: string | null, href: string } };
+
+export type Admin__Core_Plugins__Nav__DeleteMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type Admin__Core_Plugins__Nav__DeleteMutation = { __typename?: 'Mutation', admin__core_plugins__nav__delete: string };
+
+export type Admin__Core_Plugins__Nav__EditMutationVariables = Exact<{
+  code: Scalars['String']['input'];
+  href: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
+  icon?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Admin__Core_Plugins__Nav__EditMutation = { __typename?: 'Mutation', admin__core_plugins__nav__edit: { __typename?: 'ShowAdminNavPluginsObj', id: number } };
 
 export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -1627,13 +1708,6 @@ export type Admin__Core_Nav__ShowQueryVariables = Exact<{ [key: string]: never; 
 
 export type Admin__Core_Nav__ShowQuery = { __typename?: 'Query', core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, icon?: string | null, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, href: string, external: boolean, position: number, icon?: string | null, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
-export type Admin__Core_Plugins__FilesQueryVariables = Exact<{
-  code: Scalars['String']['input'];
-}>;
-
-
-export type Admin__Core_Plugins__FilesQuery = { __typename?: 'Query', admin__core_plugins__files: { __typename?: 'FilesAdminPluginsObj', admin_pages: number, admin_templates: number, databases: number, graphql_mutations: number, graphql_queries: number, hooks: number, language: boolean, pages: number, pages_container: number, templates: number, default_page: boolean } };
-
 export type Admin__Core_Plugins__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -1645,6 +1719,13 @@ export type Admin__Core_Plugins__ShowQueryVariables = Exact<{
 
 export type Admin__Core_Plugins__ShowQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url?: string | null, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, support_url: string, updated: Date, version?: string | null, created: Date, version_code?: number | null, allow_default: boolean }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
+export type Admin__Core_Plugins__FilesQueryVariables = Exact<{
+  code: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Plugins__FilesQuery = { __typename?: 'Query', admin__core_plugins__files: { __typename?: 'FilesAdminPluginsObj', admin_pages: number, admin_templates: number, databases: number, graphql_mutations: number, graphql_queries: number, hooks: number, language: boolean, pages: number, pages_container: number, templates: number, default_page: boolean } };
+
 export type Admin__Core_Plugins__Show__ItemQueryVariables = Exact<{
   code?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -1652,6 +1733,13 @@ export type Admin__Core_Plugins__Show__ItemQueryVariables = Exact<{
 
 
 export type Admin__Core_Plugins__Show__ItemQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', allow_default: boolean, author: string, author_url?: string | null, code: string, created: Date, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, support_url: string, updated: Date, version?: string | null, version_code?: number | null }> } };
+
+export type Admin__Core_Plugins__Nav__ShowQueryVariables = Exact<{
+  pluginCode: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, id: number, icon?: string | null, position: number, href: string }> };
 
 export type Admin__Settings__General__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1967,6 +2055,14 @@ export const Admin__Core_Plugins__Delete = gql`
   admin__core_plugins__delete(code: $code)
 }
     `;
+export const Admin__Core_Plugins__Upload = gql`
+    mutation Admin__core_plugins__upload($file: Upload!, $code: String) {
+  admin__core_plugins__upload(file: $file, code: $code) {
+    id
+    name
+  }
+}
+    `;
 export const Admin__Core_Plugins__Download = gql`
     mutation Admin__core_plugins__download($code: String!, $version: String, $versionCode: Int) {
   admin__core_plugins__download(
@@ -1993,11 +2089,35 @@ export const Admin__Core_Plugins__Edit = gql`
   }
 }
     `;
-export const Admin__Core_Plugins__Upload = gql`
-    mutation Admin__core_plugins__upload($file: Upload!, $code: String) {
-  admin__core_plugins__upload(file: $file, code: $code) {
+export const Admin__Core_Plugins__Nav__Change_Position = gql`
+    mutation Admin__core_plugins__nav__change_position($id: Int!, $indexToMove: Int!) {
+  admin__core_plugins__nav__change_position(id: $id, index_to_move: $indexToMove)
+}
+    `;
+export const Admin__Core_Plugins__Nav__Create = gql`
+    mutation Admin__core_plugins__nav__create($code: String!, $pluginCode: String!, $icon: String, $href: String!) {
+  admin__core_plugins__nav__create(
+    code: $code
+    plugin_code: $pluginCode
+    icon: $icon
+    href: $href
+  ) {
     id
-    name
+    code
+    icon
+    href
+  }
+}
+    `;
+export const Admin__Core_Plugins__Nav__Delete = gql`
+    mutation Admin__core_plugins__nav__delete($id: Int!) {
+  admin__core_plugins__nav__delete(id: $id)
+}
+    `;
+export const Admin__Core_Plugins__Nav__Edit = gql`
+    mutation Admin__core_plugins__nav__edit($code: String!, $href: String!, $id: Int!, $icon: String) {
+  admin__core_plugins__nav__edit(code: $code, href: $href, id: $id, icon: $icon) {
+    id
   }
 }
     `;
@@ -2532,23 +2652,6 @@ export const Admin__Core_Nav__Show = gql`
   }
 }
     `;
-export const Admin__Core_Plugins__Files = gql`
-    query Admin__core_plugins__files($code: String!) {
-  admin__core_plugins__files(code: $code) {
-    admin_pages
-    admin_templates
-    databases
-    graphql_mutations
-    graphql_queries
-    hooks
-    language
-    pages
-    pages_container
-    templates
-    default_page
-  }
-}
-    `;
 export const Admin__Core_Plugins__Show = gql`
     query Admin__core_plugins__show($cursor: Int, $first: Int, $last: Int, $sortBy: [ShowAdminPluginsSortByArgs!], $search: String) {
   admin__core_plugins__show(
@@ -2585,6 +2688,23 @@ export const Admin__Core_Plugins__Show = gql`
   }
 }
     `;
+export const Admin__Core_Plugins__Files = gql`
+    query Admin__core_plugins__files($code: String!) {
+  admin__core_plugins__files(code: $code) {
+    admin_pages
+    admin_templates
+    databases
+    graphql_mutations
+    graphql_queries
+    hooks
+    language
+    pages
+    pages_container
+    templates
+    default_page
+  }
+}
+    `;
 export const Admin__Core_Plugins__Show__Item = gql`
     query Admin__core_plugins__show__item($code: String, $first: Int) {
   admin__core_plugins__show(code: $code, first: $first) {
@@ -2604,6 +2724,17 @@ export const Admin__Core_Plugins__Show__Item = gql`
       version
       version_code
     }
+  }
+}
+    `;
+export const Admin__Core_Plugins__Nav__Show = gql`
+    query Admin__core_plugins__nav__show($pluginCode: String!) {
+  admin__core_plugins__nav__show(plugin_code: $pluginCode) {
+    code
+    id
+    icon
+    position
+    href
   }
 }
     `;
