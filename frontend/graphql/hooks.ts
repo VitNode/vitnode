@@ -198,6 +198,7 @@ export type Mutation = {
   admin__core_plugins__delete: Scalars['String']['output'];
   admin__core_plugins__download: Scalars['String']['output'];
   admin__core_plugins__edit: ShowAdminPlugins;
+  admin__core_plugins__nav__change_position: Scalars['String']['output'];
   admin__core_plugins__nav__create: ShowAdminNavPluginsObj;
   admin__core_plugins__upload: ShowAdminPlugins;
   admin__core_staff_administrators__create: ShowAdminStaffAdministrators;
@@ -341,6 +342,12 @@ export type MutationAdmin__Core_Plugins__EditArgs = {
   enabled?: InputMaybe<Scalars['Boolean']['input']>;
   name: Scalars['String']['input'];
   support_url: Scalars['String']['input'];
+};
+
+
+export type MutationAdmin__Core_Plugins__Nav__Change_PositionArgs = {
+  code: Scalars['String']['input'];
+  index_to_move: Scalars['Int']['input'];
 };
 
 
@@ -1396,6 +1403,14 @@ export type Admin__Core_Plugins__EditMutationVariables = Exact<{
 
 export type Admin__Core_Plugins__EditMutation = { __typename?: 'Mutation', admin__core_plugins__edit: { __typename?: 'ShowAdminPlugins', id: number, name: string } };
 
+export type Admin__Core_Plugins__Nav__Change_PositionMutationVariables = Exact<{
+  code: Scalars['String']['input'];
+  indexToMove: Scalars['Int']['input'];
+}>;
+
+
+export type Admin__Core_Plugins__Nav__Change_PositionMutation = { __typename?: 'Mutation', admin__core_plugins__nav__change_position: string };
+
 export type Admin__Core_Plugins__Nav__CreateMutationVariables = Exact<{
   code: Scalars['String']['input'];
   pluginCode: Scalars['String']['input'];
@@ -2036,6 +2051,14 @@ export const Admin__Core_Plugins__Edit = gql`
     id
     name
   }
+}
+    `;
+export const Admin__Core_Plugins__Nav__Change_Position = gql`
+    mutation Admin__core_plugins__nav__change_position($code: String!, $indexToMove: Int!) {
+  admin__core_plugins__nav__change_position(
+    code: $code
+    index_to_move: $indexToMove
+  )
 }
     `;
 export const Admin__Core_Plugins__Nav__Create = gql`

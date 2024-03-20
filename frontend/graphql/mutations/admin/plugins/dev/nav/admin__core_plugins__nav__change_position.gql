@@ -1,0 +1,9 @@
+mutation Admin__core_plugins__nav__change_position(
+  $code: String!
+  $indexToMove: Int!
+) {
+  admin__core_plugins__nav__change_position(
+    code: $code
+    index_to_move: $indexToMove
+  )
+}

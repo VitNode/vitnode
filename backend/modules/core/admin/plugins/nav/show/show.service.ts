@@ -22,7 +22,8 @@ export class ShowAdminNavPluginsService {
     }
 
     const nav = await this.databaseService.db.query.core_plugins_nav.findMany({
-      where: (table, { eq }) => eq(table.plugin_id, plugin.id)
+      where: (table, { eq }) => eq(table.plugin_id, plugin.id),
+      orderBy: (table, { asc }) => asc(table.position)
     });
 
     return nav;
