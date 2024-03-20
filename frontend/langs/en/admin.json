@@ -78,6 +78,11 @@
             "edit": {
               "title": "Edit Navigation",
               "success": "Navigation has been updated."
+            },
+            "delete": {
+              "submit": "Yes, delete navigation",
+              "desc": "This action will delete <code></code> navigation.",
+              "success": "Navigation has been deleted."
             }
           }
         },

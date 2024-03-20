@@ -78,6 +78,11 @@
             "edit": {
               "title": "Edytuj nawigację",
               "success": "Nawigacja została zaktualizowana."
+            },
+            "delete": {
+              "submit": "Tak, usuń nawigację",
+              "desc": "Ta akcja usunie nawigację <code></code>.",
+              "success": "Nawigacja została usunięta."
             }
           }
         },

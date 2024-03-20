@@ -200,6 +200,7 @@ export type Mutation = {
   admin__core_plugins__edit: ShowAdminPlugins;
   admin__core_plugins__nav__change_position: Scalars['String']['output'];
   admin__core_plugins__nav__create: ShowAdminNavPluginsObj;
+  admin__core_plugins__nav__delete: Scalars['String']['output'];
   admin__core_plugins__nav__edit: ShowAdminNavPluginsObj;
   admin__core_plugins__upload: ShowAdminPlugins;
   admin__core_staff_administrators__create: ShowAdminStaffAdministrators;
@@ -357,6 +358,11 @@ export type MutationAdmin__Core_Plugins__Nav__CreateArgs = {
   href: Scalars['String']['input'];
   icon?: InputMaybe<Scalars['String']['input']>;
   plugin_code: Scalars['String']['input'];
+};
+
+
+export type MutationAdmin__Core_Plugins__Nav__DeleteArgs = {
+  id: Scalars['Int']['input'];
 };
 
 
@@ -1433,6 +1439,13 @@ export type Admin__Core_Plugins__Nav__CreateMutationVariables = Exact<{
 
 export type Admin__Core_Plugins__Nav__CreateMutation = { __typename?: 'Mutation', admin__core_plugins__nav__create: { __typename?: 'ShowAdminNavPluginsObj', id: number, code: string, icon?: string | null, href: string } };
 
+export type Admin__Core_Plugins__Nav__DeleteMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type Admin__Core_Plugins__Nav__DeleteMutation = { __typename?: 'Mutation', admin__core_plugins__nav__delete: string };
+
 export type Admin__Core_Plugins__Nav__EditMutationVariables = Exact<{
   code: Scalars['String']['input'];
   href: Scalars['String']['input'];
@@ -2094,6 +2107,11 @@ export const Admin__Core_Plugins__Nav__Create = gql`
     icon
     href
   }
+}
+    `;
+export const Admin__Core_Plugins__Nav__Delete = gql`
+    mutation Admin__core_plugins__nav__delete($id: Int!) {
+  admin__core_plugins__nav__delete(id: $id)
 }
     `;
 export const Admin__Core_Plugins__Nav__Edit = gql`

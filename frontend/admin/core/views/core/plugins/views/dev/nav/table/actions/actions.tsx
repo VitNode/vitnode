@@ -1,5 +1,6 @@
 import type { ShowAdminNavPluginsObj } from "@/graphql/hooks";
 import { EditActionTableNavDevPluginAdmin } from "./edit";
+import { DeleteActionTableNavDevPluginAdmin } from "./delete/delete";
 
 export const ActionsTableNavDevPluginAdmin = (
   props: ShowAdminNavPluginsObj
@@ -7,7 +8,7 @@ export const ActionsTableNavDevPluginAdmin = (
   return (
     <div className="flex gap-1">
       <EditActionTableNavDevPluginAdmin {...props} />
-      {/* <DeleteActionTableNavAdmin {...props} /> */}
+      <DeleteActionTableNavDevPluginAdmin {...props} />
     </div>
   );
 };

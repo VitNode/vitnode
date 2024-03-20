@@ -27,7 +27,7 @@
     "more_actions": "More Actions",
     "download": "Download",
     "are_you_sure": "Are you sure?",
-    "are_you_absolutely_sure": "Are you absolutely sure?",
+    "are_you_sure_desc": "This action cannot be undone.",
     "are_you_sure_want_to_leave_form": "Are you sure you want to leave the form? Your changes may not be saved.",
     "hands_up": "Hands up!",
     "cancel": "Cancel",
