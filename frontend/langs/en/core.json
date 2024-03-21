@@ -288,6 +288,26 @@
         "back_home": "Home Page",
         "contact": "Contact with Us"
       }
+    },
+    "admin": {
+      "nav": {
+        "title": "Core",
+        "dashboard": "Dashboard",
+        "settings": "Settings",
+        "plugins": "Plugins",
+        "styles": "Styles",
+        "langs": "Languages"
+      }
+    }
+  },
+  "members": {
+    "admin": {
+      "nav": {
+        "title": "Members",
+        "list": "Users",
+        "groups": "Groups",
+        "staff": "Staff"
+      }
     }
   }
 }

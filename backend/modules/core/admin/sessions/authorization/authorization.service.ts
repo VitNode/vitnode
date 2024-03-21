@@ -2,7 +2,10 @@ import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
 
-import { AuthorizationAdminSessionsObj } from "./dto/authorization.obj";
+import {
+  AuthorizationAdminSessionsObj,
+  NavAdminPluginsAuthorization
+} from "./dto/authorization.obj";
 
 import { Ctx } from "@/types/context.type";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
@@ -17,6 +20,22 @@ export class AuthorizationAdminSessionsService {
     private jwtService: JwtService,
     private configService: ConfigService
   ) {}
+
+  async getAdminNav(): Promise<NavAdminPluginsAuthorization[]> {
+    const adminNav = await this.databaseService.db.query.core_plugins.findMany({
+      orderBy: (table, { asc }) => asc(table.created),
+      columns: {
+        code: true
+      },
+      with: {
+        nav: {
+          orderBy: (table, { asc }) => asc(table.position)
+        }
+      }
+    });
+
+    return adminNav.filter(plugin => plugin.nav.length > 0);
+  }
 
   async authorization({ req }: Ctx): Promise<AuthorizationAdminSessionsObj> {
     const login_token =
@@ -66,7 +85,8 @@ export class AuthorizationAdminSessionsService {
         is_mod: true
       },
       rebuild_required: config.rebuild_required,
-      version: coreInfo.version
+      version: coreInfo.version,
+      nav: await this.getAdminNav()
     };
   }
 }

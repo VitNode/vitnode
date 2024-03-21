@@ -2,27 +2,6 @@
   "admin": {
     "title": "Panel kontrolny administratora",
     "title_short": "Admin",
-    "default": "Domyślny",
-    "nav": {
-      "core": {
-        "title": "Rdzeń",
-        "dashboard": "Pulpit",
-        "settings": "Ustawienia",
-        "plugins": "Wtyczki",
-        "styles": "Style",
-        "langs": "Języki"
-      },
-      "members": {
-        "title": "Użytkownicy",
-        "list": "Użytkownicy",
-        "groups": "Grupy",
-        "staff": "Personel"
-      },
-      "forum": {
-        "title": "Forum",
-        "forums": "Fora"
-      }
-    },
     "rebuild_required": {
       "title": "Wymaga przebudowania",
       "desc": "Wykryliśmy, że musisz przebudować swoją stronę, ponieważ wprowadziłeś zmiany w:",

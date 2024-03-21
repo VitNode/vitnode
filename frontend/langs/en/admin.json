@@ -2,27 +2,6 @@
   "admin": {
     "title": "Admin Control Panel",
     "title_short": "Admin",
-    "default": "Default",
-    "nav": {
-      "core": {
-        "title": "Core",
-        "dashboard": "Dashboard",
-        "settings": "Settings",
-        "plugins": "Plugins",
-        "styles": "Styles",
-        "langs": "Languages"
-      },
-      "members": {
-        "title": "Members",
-        "list": "Users",
-        "groups": "Groups",
-        "staff": "Staff"
-      },
-      "forum": {
-        "title": "Forum",
-        "forums": "Forums"
-      }
-    },
     "home_page": "Home Page",
     "rebuild_required": {
       "title": "Rebuild Required",

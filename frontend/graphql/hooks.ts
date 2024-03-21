@@ -19,6 +19,7 @@ export type Scalars = {
 
 export type AuthorizationAdminSessionsObj = {
   __typename?: 'AuthorizationAdminSessionsObj';
+  nav: Array<NavAdminPluginsAuthorization>;
   rebuild_required: RebuildRequiredObj;
   user?: Maybe<AuthorizationCurrentUserObj>;
   version: Scalars['String']['output'];
@@ -126,6 +127,13 @@ export type GroupsPermissionsForumForums = {
   can_reply: Scalars['Boolean']['output'];
   can_view: Scalars['Boolean']['output'];
   id: Scalars['Int']['output'];
+};
+
+export type ItemNavAdminPluginsAuthorization = {
+  __typename?: 'ItemNavAdminPluginsAuthorization';
+  code: Scalars['String']['output'];
+  href: Scalars['String']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
 };
 
 export type LastChildShowForumForums = {
@@ -527,6 +535,12 @@ export type MutationForum_Topics__EditArgs = {
   content: Array<TextLanguageInput>;
   id: Scalars['Int']['input'];
   title: Array<TextLanguageInput>;
+};
+
+export type NavAdminPluginsAuthorization = {
+  __typename?: 'NavAdminPluginsAuthorization';
+  code: Scalars['String']['output'];
+  nav: Array<ItemNavAdminPluginsAuthorization>;
 };
 
 export type PageInfo = {
@@ -1640,7 +1654,7 @@ export type Forum_Topics__EditMutation = { __typename?: 'Mutation', forum_topics
 export type Admin__Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', version: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, rebuild_required: { __typename?: 'RebuildRequiredObj', themes: boolean, langs: boolean, plugins: boolean } } };
+export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', version: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, rebuild_required: { __typename?: 'RebuildRequiredObj', themes: boolean, langs: boolean, plugins: boolean }, nav: Array<{ __typename?: 'NavAdminPluginsAuthorization', code: string, nav: Array<{ __typename?: 'ItemNavAdminPluginsAuthorization', code: string, href: string, icon?: string | null }> }> } };
 
 export type Admin__Install__LayoutQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2401,6 +2415,14 @@ export const Admin__Sessions__Authorization = gql`
       plugins
     }
     version
+    nav {
+      code
+      nav {
+        code
+        href
+        icon
+      }
+    }
   }
 }
     `;

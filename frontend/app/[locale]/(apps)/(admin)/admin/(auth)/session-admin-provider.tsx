@@ -13,7 +13,12 @@ interface Props {
 export const SessionAdminProvider = ({
   children,
   data: {
-    admin__sessions__authorization: { rebuild_required, user: session, version }
+    admin__sessions__authorization: {
+      nav,
+      rebuild_required,
+      user: session,
+      version
+    }
   }
 }: Props) => {
   return (
@@ -21,7 +26,8 @@ export const SessionAdminProvider = ({
       value={{
         session,
         rebuild_required,
-        version
+        version,
+        nav
       }}
     >
       {children}

@@ -1,14 +1,15 @@
 import { useTranslations } from "next-intl";
-import type { LucideIcon } from "lucide-react";
+import { Menu } from "lucide-react";
 
 import { cn } from "@/functions/classnames";
 import { buttonVariants } from "@/components/ui/button";
 import { Link, usePathname } from "@/i18n";
+import { Icon } from "@/components/icon/icon";
 
 export interface ItemListNavAdminProps {
   href: string;
-  icon: LucideIcon;
   id: string;
+  icon?: string;
 }
 
 interface Props extends ItemListNavAdminProps {
@@ -23,10 +24,10 @@ export const LinkItemListNavAdmin = ({
   onClick,
   primaryId
 }: Props) => {
-  const t = useTranslations("admin");
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  const t = useTranslations(`${primaryId}.admin.nav`);
   const pathname = usePathname();
-  const Icon = icon;
-
   const active = pathname.startsWith(href);
 
   return (
@@ -35,17 +36,17 @@ export const LinkItemListNavAdmin = ({
         href={href}
         className={cn(
           buttonVariants({ variant: "ghost", size: "sm" }),
-          "w-full justify-start relative pl-4 hover:bg-secondary font-normal text-foreground",
+          "w-full justify-start relative pl-4 hover:bg-secondary font-normal text-foreground [&>svg]:size-4 [&>svg]:flex-shrink-0 [&>svg]:flex [&>svg]:items-center [&>svg]:justify-center [&>svg]:text-muted-foreground",
           {
             "font-semibold": active
           }
         )}
         onClick={onClick}
       >
-        <Icon className="w-5 h-5 flex-shrink-0 text-muted-foreground" />
+        {icon ? <Icon name={icon} /> : <Menu />}
         {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
         {/* @ts-expect-error */}
-        <span>{t(`nav.${primaryId}.${id}`)}</span>
+        <span>{t(id)}</span>
         {active && (
           <div className="absolute top-1/2 left-1 w-1 h-[calc(100%_-_0.5rem)] bg-primary rounded-md -translate-y-1/2" />
         )}

@@ -288,6 +288,26 @@
         "back_home": "Strona główna",
         "contact": "Skontaktuj się z nami"
       }
+    },
+    "admin": {
+      "nav": {
+        "title": "Rdzeń",
+        "dashboard": "Pulpit",
+        "settings": "Ustawienia",
+        "plugins": "Wtyczki",
+        "styles": "Style",
+        "langs": "Języki"
+      }
+    }
+  },
+  "members": {
+    "admin": {
+      "nav": {
+        "title": "Użytkownicy",
+        "list": "Użytkownicy",
+        "groups": "Grupy",
+        "staff": "Personel"
+      }
     }
   }
 }

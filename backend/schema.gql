@@ -3,6 +3,7 @@
 # ------------------------------------------------------
 
 type AuthorizationAdminSessionsObj {
+  nav: [NavAdminPluginsAuthorization!]!
   rebuild_required: RebuildRequiredObj!
   user: AuthorizationCurrentUserObj
   version: String!
@@ -107,6 +108,12 @@ type GroupsPermissionsForumForums {
   id: Int!
 }
 
+type ItemNavAdminPluginsAuthorization {
+  code: String!
+  href: String!
+  icon: String
+}
+
 type LastChildShowForumForums {
   created: DateTime!
   description: [TextLanguage!]!
@@ -202,6 +209,11 @@ type Mutation {
   forum_topics__actions__lock_toggle(id: Int!): Boolean!
   forum_topics__create(content: [TextLanguageInput!]!, forum_id: Int!, title: [TextLanguageInput!]!): ShowTopicsForums!
   forum_topics__edit(content: [TextLanguageInput!]!, id: Int!, title: [TextLanguageInput!]!): ShowTopicsForums!
+}
+
+type NavAdminPluginsAuthorization {
+  code: String!
+  nav: [ItemNavAdminPluginsAuthorization!]!
 }
 
 type PageInfo {
