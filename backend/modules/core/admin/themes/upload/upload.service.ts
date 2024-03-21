@@ -182,7 +182,7 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
     } catch (error) {
       throw new CustomError({
         code: "COPY_FILES_TO_THEME_FOLDER_ERROR",
-        message: `Source: ${this.tempPath}, Destination: ${destination}`
+        message: `Source: ${this.tempPath}, Destination: ${destination}, Error: ${error}`
       });
     }
 

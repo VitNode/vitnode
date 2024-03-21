@@ -16,7 +16,7 @@ import { DatabaseService } from "@/modules/database/database.service";
 import { generateRandomString } from "@/functions/generate-random-string";
 import { currentDate } from "@/functions/date";
 import { CustomError } from "@/utils/errors/CustomError";
-import { core_plugins } from "../../database/schema/plugins";
+import { core_plugins, core_plugins_nav } from "../../database/schema/plugins";
 import { ChangeTemplatesAdminThemesService } from "../../themes/change_templates.service";
 
 @Injectable()
@@ -166,21 +166,23 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
         id: true
       }
     });
-    await Promise.all(
-      themes.map(async ({ id }) => {
-        await this.changeTemplates({
-          tempPath: join(this.tempPath, "frontend", "templates"),
-          destinationPath: join(
-            process.cwd(),
-            "..",
-            "frontend",
-            "themes",
-            id.toString(),
-            config.code
-          )
-        });
-      })
-    );
+    if (fs.existsSync(join(this.tempPath, "frontend", "templates"))) {
+      await Promise.all(
+        themes.map(async ({ id }) => {
+          await this.changeTemplates({
+            tempPath: join(this.tempPath, "frontend", "templates"),
+            destinationPath: join(
+              process.cwd(),
+              "..",
+              "frontend",
+              "themes",
+              id.toString(),
+              config.code
+            )
+          });
+        })
+      );
+    }
 
     // Copy language
     const languages =
@@ -201,6 +203,62 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
 
       return this.copyFilesToPluginFolder({ source, destination });
     });
+  }
+
+  async updateNavAdmin({
+    config,
+    id
+  }: {
+    config: Pick<ConfigPlugin, "nav">;
+    id: number;
+  }): Promise<void> {
+    const navFromDatabase =
+      await this.databaseService.db.query.core_plugins_nav.findMany({
+        where: (table, { eq }) => eq(table.plugin_id, id)
+      });
+
+    const update = await Promise.all(
+      config.nav.map(async item => {
+        const itemExist = navFromDatabase.find(el => el.code === item.code);
+
+        if (itemExist) {
+          const update = await this.databaseService.db
+            .update(core_plugins_nav)
+            .set({ ...item, plugin_id: id })
+            .where(eq(core_plugins_nav.id, itemExist.id))
+            .returning();
+
+          return update[0];
+        }
+
+        const lastPosition =
+          await this.databaseService.db.query.core_plugins_nav.findFirst({
+            orderBy: (table, { desc }) => desc(table.position)
+          });
+
+        const insert = await this.databaseService.db
+          .insert(core_plugins_nav)
+          .values({
+            ...item,
+            plugin_id: id,
+            position: lastPosition.position ? lastPosition.position + 1 : 0
+          })
+          .returning();
+
+        return insert[0];
+      })
+    );
+
+    Promise.all(
+      navFromDatabase.map(async item => {
+        const exist = update.find(el => el.id === item.id);
+        if (exist) return;
+
+        await this.databaseService.db
+          .delete(core_plugins_nav)
+          .where(eq(core_plugins_nav.id, item.id));
+      })
+    );
   }
 
   async upload({
@@ -248,13 +306,22 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
       const plugins = await this.databaseService.db
         .update(core_plugins)
         .set({
-          ...config,
-          updated: new Date()
+          updated: new Date(),
+          name: config.name,
+          description: config.description,
+          support_url: config.support_url,
+          author: config.author,
+          author_url: config.author_url,
+          version: config.version,
+          version_code: config.version_code,
+          allow_default: config.allow_default
         })
         .where(eq(core_plugins.code, code))
         .returning();
 
       const plugin = plugins[0];
+
+      await this.updateNavAdmin({ id: plugin.id, config });
 
       return plugin;
     }
@@ -267,6 +334,8 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
       .returning();
 
     const plugin = plugins[0];
+
+    await this.updateNavAdmin({ id: plugin.id, config });
 
     return plugin;
   }

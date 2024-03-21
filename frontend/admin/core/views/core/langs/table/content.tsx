@@ -17,7 +17,6 @@ export const ContentTableLangsCoreAdmin = ({
   data
 }: LangsCoreAdminViewProps) => {
   const t = useTranslations("admin.core.langs");
-  const tAdmin = useTranslations("admin");
   const tCore = useTranslations("core");
   const locale = useLocale();
 
@@ -32,7 +31,7 @@ export const ContentTableLangsCoreAdmin = ({
           return (
             <div className="flex items-center gap-4">
               <span>{data.name}</span>
-              {data.default && <Badge>{tAdmin("default")}</Badge>}
+              {data.default && <Badge>{tCore("default")}</Badge>}
             </div>
           );
         }

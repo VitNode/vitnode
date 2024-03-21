@@ -53,7 +53,7 @@ export class ChangeTemplatesAdminThemesService {
     } catch (error) {
       throw new CustomError({
         code: "COPY_FILES_TO_THEME_FOLDER_ERROR",
-        message: `Source: ${tempPath}, Destination: ${destinationPath}`
+        message: `Source: ${tempPath}, Destination: ${destinationPath}, Error: ${error}`
       });
     }
   }

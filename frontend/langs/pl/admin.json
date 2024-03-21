@@ -38,6 +38,7 @@
           },
           "nav": {
             "title": "Nawigacja w AdminCP",
+            "key": "Klucz: <key></key>",
             "create": {
               "title": "Stwórz nawigację",
               "code": {

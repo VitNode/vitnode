@@ -2,6 +2,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 
 import { Icon } from "@/components/icon/icon";
 import { Button } from "@/components/ui/button";
@@ -29,6 +30,11 @@ export const ItemContentTableNavDevPluginAdmin = ({
   isDropHere,
   ...props
 }: Props) => {
+  const { code: pluginCode } = useParams();
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  const t = useTranslations(`${pluginCode}.admin.nav`);
+  const tAdmin = useTranslations("admin.core.plugins.dev.nav");
   const tCore = useTranslations("core");
   const {
     attributes,
@@ -80,7 +86,23 @@ export const ItemContentTableNavDevPluginAdmin = ({
         </TooltipProvider>
 
         <div className="flex flex-col flex-1">
-          <span className="font-semibold">{code}</span>
+          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+          {/* @ts-expect-error */}
+          <span className="font-semibold">{t(code)}</span>
+          <p className="text-muted-foreground text-sm">
+            {tAdmin.rich("key", {
+              key: () => (
+                <span className="text-foreground">{`${pluginCode}.admin.nav.${code}`}</span>
+              )
+            })}
+          </p>
+          <p className="text-muted-foreground text-sm">
+            {tCore.rich("link_url_with_link", {
+              link: () => (
+                <span className="text-foreground">{`/admin/${pluginCode}/${code}`}</span>
+              )
+            })}
+          </p>
         </div>
 
         <ActionsTableNavDevPluginAdmin

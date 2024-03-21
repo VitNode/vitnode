@@ -38,6 +38,7 @@
           },
           "nav": {
             "title": "Navigation in AdminCP",
+            "key": "Key: <key></key>",
             "create": {
               "title": "Create Navigation",
               "code": {

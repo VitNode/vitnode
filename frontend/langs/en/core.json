@@ -1,6 +1,7 @@
 {
   "core": {
     "reload_page": "Reload Page",
+    "link_url_with_link": "Link URL: <link></link>",
     "yes": "Yes",
     "no": "No",
     "clear_cache_and_reload": "Clear Cache and Reload",

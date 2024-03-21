@@ -17,16 +17,11 @@ import { FilesAdminPluginsResolver } from "./files/files.resolver";
 import { EditAdminPluginsResolver } from "./edit/edit.resolver";
 import { EditAdminPluginsService } from "./edit/edit.service";
 import { AdminNavPluginsModule } from "./nav/nav-plugins.module";
+import { PluginInfoJSONType } from "./helpers/files/create/contents";
 
-export interface ConfigPlugin {
-  author: string;
-  author_url: string;
-  code: string;
-  name: string;
-  support_url: string;
+export interface ConfigPlugin extends PluginInfoJSONType {
   version: string;
   version_code: number;
-  description?: string;
 }
 
 @Module({
