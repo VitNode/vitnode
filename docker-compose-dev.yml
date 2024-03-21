@@ -15,7 +15,7 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - vitnode
+      - vitnode_dev
 
   pgadmin:
     container_name: vitnode_pgadmin_dev
@@ -27,7 +27,7 @@ services:
     ports:
       - "5050:80"
     networks:
-      - vitnode
+      - vitnode_dev
 
   redis:
     container_name: vitnode_redis_dev
@@ -36,7 +36,7 @@ services:
     ports:
       - "6379:6379"
     networks:
-      - vitnode
+      - vitnode_dev
 
 networks:
-  vitnode:
+  vitnode_dev:

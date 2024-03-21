@@ -1,5 +1,5 @@
 {
-  "id": "6ca1aab3-cba0-48df-a4be-9bb2b868821c",
+  "id": "c191eda1-c7a1-47eb-83fb-98f766ea6be7",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -35,15 +35,17 @@
         },
         "created": {
           "name": "created",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "updated": {
           "name": "updated",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "protected": {
           "name": "protected",
@@ -118,13 +120,14 @@
         },
         "last_seen": {
           "name": "last_seen",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "expires": {
           "name": "expires",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true
         },
@@ -371,15 +374,17 @@
         },
         "created": {
           "name": "created",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "updated": {
           "name": "updated",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "protected": {
           "name": "protected",
@@ -491,35 +496,6 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "core_members": {
-      "name": "core_members",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "joined": {
-          "name": "joined",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "posts": {
-          "name": "posts",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
     "core_languages": {
       "name": "core_languages",
       "schema": "",
@@ -572,9 +548,31 @@
         },
         "created": {
           "name": "created",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated": {
+          "name": "updated",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "time_24": {
+          "name": "time_24",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "locale": {
+          "name": "locale",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'enUS'"
         }
       },
       "indexes": {
@@ -636,15 +634,17 @@
         },
         "created": {
           "name": "created",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "updated": {
           "name": "updated",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "protected": {
           "name": "protected",
@@ -734,6 +734,12 @@
         "parent_id": {
           "name": "parent_id",
           "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "icon": {
+          "name": "icon",
+          "type": "varchar(50)",
           "primaryKey": false,
           "notNull": false
         }
@@ -921,7 +927,7 @@
         },
         "name": {
           "name": "name",
-          "type": "varchar(100)",
+          "type": "varchar(50)",
           "primaryKey": false,
           "notNull": true
         },
@@ -952,22 +958,23 @@
         },
         "created": {
           "name": "created",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated": {
+          "name": "updated",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         },
         "support_url": {
           "name": "support_url",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": false
-        },
-        "protected": {
-          "name": "protected",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": false
+          "notNull": true
         },
         "author": {
           "name": "author",
@@ -979,7 +986,7 @@
           "name": "author_url",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "default": {
           "name": "default",
@@ -988,12 +995,12 @@
           "notNull": true,
           "default": false
         },
-        "position": {
-          "name": "position",
-          "type": "integer",
+        "allow_default": {
+          "name": "allow_default",
+          "type": "boolean",
           "primaryKey": false,
           "notNull": true,
-          "default": 0
+          "default": true
         }
       },
       "indexes": {
@@ -1016,8 +1023,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "core_plugins_versions": {
-      "name": "core_plugins_versions",
+    "core_plugins_nav": {
+      "name": "core_plugins_nav",
       "schema": "",
       "columns": {
         "id": {
@@ -1026,43 +1033,72 @@
           "primaryKey": true,
           "notNull": true
         },
+        "code": {
+          "name": "code",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
         "plugin_id": {
           "name": "plugin_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
-        "version": {
-          "name": "version",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "version_code": {
-          "name": "version_code",
+        "position": {
+          "name": "position",
           "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "icon": {
+          "name": "icon",
+          "type": "varchar(50)",
           "primaryKey": false,
           "notNull": false
         },
-        "updated": {
-          "name": "updated",
-          "type": "integer",
+        "href": {
+          "name": "href",
+          "type": "varchar(100)",
           "primaryKey": false,
           "notNull": true
         }
       },
       "indexes": {
-        "core_plugins_versions_plugin_id_idx": {
-          "name": "core_plugins_versions_plugin_id_idx",
+        "core_plugins__nav_plugin_id_idx": {
+          "name": "core_plugins__nav_plugin_id_idx",
           "columns": [
             "plugin_id"
           ],
           "isUnique": false
         }
       },
-      "foreignKeys": {},
+      "foreignKeys": {
+        "core_plugins_nav_plugin_id_core_plugins_id_fk": {
+          "name": "core_plugins_nav_plugin_id_core_plugins_id_fk",
+          "tableFrom": "core_plugins_nav",
+          "tableTo": "core_plugins",
+          "columnsFrom": [
+            "plugin_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {
+        "core_plugins_nav_code_unique": {
+          "name": "core_plugins_nav_code_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "code"
+          ]
+        }
+      }
     },
     "core_sessions": {
       "name": "core_sessions",
@@ -1082,13 +1118,14 @@
         },
         "last_seen": {
           "name": "last_seen",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "expires": {
           "name": "expires",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true
         },
@@ -1185,12 +1222,6 @@
           "primaryKey": false,
           "notNull": false
         },
-        "uagent_device_type": {
-          "name": "uagent_device_type",
-          "type": "varchar(200)",
-          "primaryKey": false,
-          "notNull": false
-        },
         "uagent_device_model": {
           "name": "uagent_device_model",
           "type": "varchar(200)",
@@ -1199,9 +1230,10 @@
         },
         "last_seen": {
           "name": "last_seen",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {},
@@ -1239,15 +1271,23 @@
         },
         "created": {
           "name": "created",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated": {
+          "name": "updated",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         },
         "support_url": {
           "name": "support_url",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "protected": {
           "name": "protected",
@@ -1266,7 +1306,7 @@
           "name": "author_url",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "default": {
           "name": "default",
@@ -1317,9 +1357,10 @@
         },
         "joined": {
           "name": "joined",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "posts": {
           "name": "posts",

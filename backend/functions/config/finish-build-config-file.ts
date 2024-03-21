@@ -58,9 +58,9 @@ import { db, poolDB } from "@/modules/database/client";
           await migrate(db, {
             migrationsFolder: migrationPath
           });
-          await poolDB.end();
         })
     );
+    await poolDB.end();
   });
 
   console.log("[VitNode] - Successfully finished build");

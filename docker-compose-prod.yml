@@ -58,7 +58,12 @@ services:
       - ./frontend/config:/frontend/config # config
       - ./frontend/themes:/frontend/themes # themes
       - ./frontend/langs:/frontend/langs # langs
+      - ./frontend/app:/frontend/app # app
+      - ./frontend/admin:/frontend/admin # admin
+      - ./frontend/graphql:/frontend/graphql # graphql
+      - ./frontend/hooks:/frontend/hooks # hooks
       - ./backend/public:/app/public # static files
+      - ./backend/modules:/app/modules # modules
 
   frontend:
     container_name: vitnode_frontend
@@ -77,8 +82,10 @@ services:
       - ./frontend/config:/app/config # config
       - ./frontend/themes:/app/themes # themes
       - ./frontend/langs:/app/langs # langs
+      - ./frontend/app:/app/app # app
+      - ./frontend/admin:/app/admin # admin
+      - ./frontend/graphql:/app/graphql # graphql
+      - ./frontend/hooks:/app/hooks # hooks
 
 networks:
   vitnode:
-# volumes:
-#   frontend_data:
