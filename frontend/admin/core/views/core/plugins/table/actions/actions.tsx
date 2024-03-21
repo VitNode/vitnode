@@ -51,17 +51,15 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
             </>
           )}
 
-          {CONFIG.node_development && (
-            <DropdownMenuItem asChild>
-              <Link
-                href={props.support_url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <BadgeHelp /> {t("get_help")}
-              </Link>
-            </DropdownMenuItem>
-          )}
+          <DropdownMenuItem asChild>
+            <Link
+              href={props.support_url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <BadgeHelp /> {t("get_help")}
+            </Link>
+          </DropdownMenuItem>
 
           {!props.default && (
             <DropdownMenuItem onClick={() => setIsOpenDeleteDialog(true)}>
