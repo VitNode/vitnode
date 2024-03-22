@@ -16,30 +16,13 @@ services:
     networks:
       - vitnode
 
-  redis:
-    container_name: vitnode_redis
-    image: redis:7.2.4-alpine
-    command: >
-      --requirepass ${REDIS_PASSWORD}
-    environment:
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
-      - REDIS_PORT=${REDIS_PORT:-6379}
-    restart: on-failure
-    ports:
-      - "${REDIS_PORT:-6379}:${REDIS_PORT:-6379}"
-    networks:
-      - vitnode
-
   backend:
     container_name: vitnode_backend
     build:
       context: ./backend
       dockerfile: Dockerfile
     environment:
-      - REDIS_HOST=${REDIS_HOST:-redis}
-      - REDIS_PORT=${REDIS_PORT:-6379}
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
-      - DB_HOST=${REDIS_PORT:-postgres}
+      - DB_HOST=${DB_HOST:-postgres}
       - DB_PORT=${DB_PORT:-5432}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
@@ -51,7 +34,6 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
-      - redis
     networks:
       - vitnode
     volumes:

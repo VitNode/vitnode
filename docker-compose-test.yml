@@ -29,15 +29,6 @@ services:
     networks:
       - vitnode
 
-  redis:
-    container_name: vitnode_redis
-    image: redis:7.2.4-alpine
-    restart: on-failure
-    ports:
-      - "6379:6379"
-    networks:
-      - vitnode
-
   backend:
     container_name: vitnode_backend
     build:
@@ -45,8 +36,6 @@ services:
       dockerfile: Dockerfile
     restart: on-failure
     environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
       - DB_HOST=postgres
       - DB_PORT=5432
       - DB_USER=root
@@ -57,7 +46,6 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
-      - redis
     networks:
       - vitnode
     volumes:
@@ -86,5 +74,3 @@ services:
 
 networks:
   vitnode:
-# volumes:
-#   frontend_data:
