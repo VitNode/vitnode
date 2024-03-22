@@ -14,6 +14,27 @@ export class RebuildRequiredObj {
 }
 
 @ObjectType()
+class ItemNavAdminPluginsAuthorization {
+  @Field(() => String)
+  code: string;
+
+  @Field(() => String)
+  href: string;
+
+  @Field(() => String, { nullable: true })
+  icon: string | null;
+}
+
+@ObjectType()
+export class NavAdminPluginsAuthorization {
+  @Field(() => String)
+  code: string;
+
+  @Field(() => [ItemNavAdminPluginsAuthorization])
+  nav: ItemNavAdminPluginsAuthorization[];
+}
+
+@ObjectType()
 export class AuthorizationAdminSessionsObj {
   @Field(() => AuthorizationCurrentUserObj, { nullable: true })
   user: AuthorizationCurrentUserObj | null;
@@ -23,4 +44,7 @@ export class AuthorizationAdminSessionsObj {
 
   @Field(() => String)
   version: string;
+
+  @Field(() => [NavAdminPluginsAuthorization])
+  nav: NavAdminPluginsAuthorization[];
 }

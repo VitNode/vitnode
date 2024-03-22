@@ -3,6 +3,11 @@ import { CreateAdminPluginsArgs } from "../../../create/dto/create.args";
 
 export interface PluginInfoJSONType extends CreateAdminPluginsArgs {
   allow_default: boolean;
+  nav: {
+    code: string;
+    href: string;
+    icon?: string;
+  }[];
 }
 
 export const createModuleSchema = ({ code }: { code: string }) => {
@@ -46,6 +51,7 @@ export const createInfoJSON = ({
   code,
   description,
   name,
+  nav,
   support_url
 }: PluginInfoJSONType): string => {
   const json = {
@@ -55,7 +61,8 @@ export const createInfoJSON = ({
     author,
     author_url,
     support_url,
-    allow_default
+    allow_default,
+    nav
   };
 
   return JSON.stringify(json, null, 2);

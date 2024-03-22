@@ -1,6 +1,7 @@
 {
   "core": {
     "reload_page": "Reload Page",
+    "link_url_with_link": "Link URL: <link></link>",
     "yes": "Yes",
     "no": "No",
     "clear_cache_and_reload": "Clear Cache and Reload",
@@ -287,6 +288,26 @@
       "actions": {
         "back_home": "Home Page",
         "contact": "Contact with Us"
+      }
+    },
+    "admin": {
+      "nav": {
+        "title": "Core",
+        "dashboard": "Dashboard",
+        "settings": "Settings",
+        "plugins": "Plugins",
+        "styles": "Styles",
+        "langs": "Languages"
+      }
+    }
+  },
+  "members": {
+    "admin": {
+      "nav": {
+        "title": "Members",
+        "list": "Users",
+        "groups": "Groups",
+        "staff": "Staff"
       }
     }
   }

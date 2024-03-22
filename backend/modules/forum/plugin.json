@@ -5,5 +5,12 @@
   "author_url": "https://vitnode.com/",
   "description": "Community forum plugin.",
   "allow_default": true,
-  "support_url": "https://vitnode.com/"
+  "support_url": "https://vitnode.com/",
+  "nav": [
+    {
+      "code": "forums",
+      "href": "forums",
+      "icon": "MessagesSquare"
+    }
+  ]
 }

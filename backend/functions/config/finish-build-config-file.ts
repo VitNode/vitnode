@@ -1,14 +1,22 @@
 /* eslint-disable no-console */
+
 import * as fs from "fs";
 import { join } from "path";
 
+import * as dotenv from "dotenv";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 
 import { ConfigType, configPath, getConfigFile } from "./get-config-file";
+import { updatePlugins } from "./update-plugins";
 
-import { db, poolDB } from "@/modules/database/client";
+import { db } from "@/modules/database/client";
+
+dotenv.config({
+  path: join(process.cwd(), "..", ".env")
+});
 
 (async () => {
+  console.log(`[VitNode] - Starting finish build, ${process.env.DB_USER}`);
   // Update config file
   const config = await getConfigFile();
   const newData: ConfigType = {
@@ -33,18 +41,18 @@ import { db, poolDB } from "@/modules/database/client";
     )
   });
 
-  fs.readdir(join(process.cwd(), "modules"), async (err, files) => {
+  fs.readdir(join(process.cwd(), "modules"), async (err, plugins) => {
     await Promise.all(
-      files
+      plugins
         .filter(
-          file => !["database", "modules.module.ts", "core"].includes(file)
+          plugin => !["database", "modules.module.ts", "core"].includes(plugin)
         )
-        .map(async file => {
+        .map(async plugin => {
           // Check if migration folder exists
           const migrationPath = join(
             process.cwd(),
             "modules",
-            file,
+            plugin,
             "admin",
             "database",
             "migrations"
@@ -58,10 +66,14 @@ import { db, poolDB } from "@/modules/database/client";
           await migrate(db, {
             migrationsFolder: migrationPath
           });
-          await poolDB.end();
+
+          console.log(`[VitNode] - Running migration for ${plugin}`);
         })
     );
   });
+
+  // Update plugins
+  await updatePlugins({ db });
 
   console.log("[VitNode] - Successfully finished build");
 })();

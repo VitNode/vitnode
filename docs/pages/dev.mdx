@@ -1,13 +1,16 @@
-import { Callout } from 'nextra/components';
-import { Steps } from 'nextra/components';
-import { Tabs } from 'nextra/components';
+import { Callout } from "nextra/components";
+import { Steps } from "nextra/components";
+import { Tabs } from "nextra/components";
+import { Img } from "@/components/img";
+import registerPostgres from "@/assets/dev/register_postgres.png";
 
 # Developer Mode
 
 This guide will help you to install the project on your local machine.
 
 <Callout type="error" emoji="❌">
-  This tutorial is for development purposes only. Do not use these credentials in production.
+  This tutorial is for development purposes only. Do not use these credentials
+  in production.
 </Callout>
 
 ## 📝 Prerequisites
@@ -19,23 +22,9 @@ Before you begin, please read the [Contribution](/contribution) page and prepere
 <Steps>
 ### Get files
 
-<Tabs items={['git', 'zip']}>
-  <Tabs.Tab>
-
 ```bash
-git clone https://github.com/aXenDeveloper/vitnode.git
-cd vitnode
+git clone https://github.com/aXenDeveloper/vitnode.git && cd vitnode
 ```
-
-  </Tabs.Tab>
-  <Tabs.Tab>
-    1. Go to [GitHub VitNode](https://github.com/aXenDeveloper/vitnode),
-    2. Click on the green button `Code`,
-    3. Click on `Download ZIP`,
-    4. Unzip the file on your server,
-    5. Open the folder in the terminal.
-  </Tabs.Tab>
-</Tabs>
 
 ### Install dependencies
 
@@ -57,25 +46,11 @@ Go to `backend` folder and create new `.env` file:
 LOGIN_TOKEN_SECRET=secret
 ```
 
-Database and Redis variables are already set in `docker-compose-dev.yml` file and inside `backend` config as default values.
-
-### Generate database schema
-
-Before you move on, make sure you have a database in Docker and you're in the `backend` folder.
-
-```bash
-pnpm db
-```
+Variables for `Database` are already set in `docker-compose-dev.yml` file with inside `backend` config as default values.
 
 ### Generate config
 
-Go to previus folder
-
-```bash
-cd ..
-```
-
-and generate config file
+Go to root folder and run:
 
 ```bash
 pnpm config:init
@@ -94,42 +69,29 @@ pnpm frontend:dev
 ```
 
 <Callout type="info" emoji="ℹ️">
-  Frontend should be running on port `3000`. If you want to change it go to `.env` file and fill
-  `FRONTEND_URL` variable _(For example `FRONTEND_URL=FRONTEND_URL=http://localhost`)_.
+  Frontend should be running on port `3000`. If you want to change it go to
+  `.env` file and fill `FRONTEND_URL` variable _(For example
+  `FRONTEND_URL=http://localhost`)_.
 </Callout>
 
 </Steps>
 
 ## 🧑‍💻 PGAdmin
 
-You can use PGAdmin to manage your database. VitNode has this image in Docker Compose. To use it, you need to go to `http://localhost:5050` and login with credentials:
+You can use PGAdmin to manage your database. VitNode has this image in Docker Compose. To use it, you need to go to http://localhost:5050 and login with credentials:
 
 - Email: `admin@admin.com`
 - Password: `admin`
-
-<Steps>
-
-### Check database IP
-
-```bash
-docker ps
-docker inspect <container_id_with_postgres>
-```
-
-Now you need to find `IPAddress` in `Networks` section. It should be something like this:
-
-```bash
-"IPAddress": "172.18.0.2",
-```
 
 ### Add server
 
 Click on `Add New Server` button and fill the values:
 
-- Name: `VitNode`
-- Host name/address: `172.18.0.2` **(your IP to database from previous step)**
+- Name: `vitnode`
+- Host name/address: `postgres`
+- Database: `vitnode`
 - Port: `5432`
 - Username: `root`
 - Password: `root`
 
-</Steps>
+<Img src={registerPostgres} alt="Register Postgres in PGAdmin" />

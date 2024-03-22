@@ -28,5 +28,13 @@ query Admin__sessions__authorization {
       plugins
     }
     version
+    nav {
+      code
+      nav {
+        code
+        href
+        icon
+      }
+    }
   }
 }

@@ -8,6 +8,7 @@ import { eq } from "drizzle-orm";
 import { DownloadAdminPluginsArgs } from "./dto/download.args";
 import { pluginPaths } from "../paths";
 import { PluginInfoJSONType } from "../helpers/files/create/contents";
+import { ShowAdminNavPluginsObj } from "../nav/show/dto/show.obj";
 
 import { DatabaseService } from "@/modules/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
@@ -199,12 +200,38 @@ export class DownloadAdminPluginsService {
     }
   }
 
+  async updateNavInConfig({
+    code,
+    nav
+  }: {
+    code: string;
+    nav: ShowAdminNavPluginsObj[];
+  }): Promise<void> {
+    const path = pluginPaths({ code }).backend.info;
+    const readFile = fs.readFileSync(path, "utf-8");
+    const infoJSON: PluginInfoJSONType = JSON.parse(readFile);
+
+    const updateObj = {
+      ...infoJSON,
+      nav: nav.map(item => ({
+        code: item.code,
+        href: item.href,
+        icon: item.icon
+      }))
+    };
+
+    fs.writeFileSync(path, JSON.stringify(updateObj, null, 2));
+  }
+
   async download(
     { code, version, version_code }: DownloadAdminPluginsArgs,
     { id: userId }: User
   ): Promise<string> {
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
-      where: (table, { eq }) => eq(table.code, code)
+      where: (table, { eq }) => eq(table.code, code),
+      with: {
+        nav: true
+      }
     });
 
     if (!plugin) {
@@ -213,6 +240,7 @@ export class DownloadAdminPluginsService {
 
     await this.generateMigration({ code });
     await this.updateVersion({ code, version, version_code });
+    await this.updateNavInConfig({ code, nav: plugin.nav });
 
     // Tgs
     const name = removeSpecialCharacters(

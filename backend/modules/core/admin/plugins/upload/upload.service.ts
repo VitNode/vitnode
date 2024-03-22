@@ -18,6 +18,7 @@ import { currentDate } from "@/functions/date";
 import { CustomError } from "@/utils/errors/CustomError";
 import { core_plugins } from "../../database/schema/plugins";
 import { ChangeTemplatesAdminThemesService } from "../../themes/change_templates.service";
+import { updateNavAdminPlugin } from "@/functions/config/update-plugins";
 
 @Injectable()
 export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService {
@@ -166,21 +167,23 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
         id: true
       }
     });
-    await Promise.all(
-      themes.map(async ({ id }) => {
-        await this.changeTemplates({
-          tempPath: join(this.tempPath, "frontend", "templates"),
-          destinationPath: join(
-            process.cwd(),
-            "..",
-            "frontend",
-            "themes",
-            id.toString(),
-            config.code
-          )
-        });
-      })
-    );
+    if (fs.existsSync(join(this.tempPath, "frontend", "templates"))) {
+      await Promise.all(
+        themes.map(async ({ id }) => {
+          await this.changeTemplates({
+            tempPath: join(this.tempPath, "frontend", "templates"),
+            destinationPath: join(
+              process.cwd(),
+              "..",
+              "frontend",
+              "themes",
+              id.toString(),
+              config.code
+            )
+          });
+        })
+      );
+    }
 
     // Copy language
     const languages =
@@ -248,13 +251,26 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
       const plugins = await this.databaseService.db
         .update(core_plugins)
         .set({
-          ...config,
-          updated: new Date()
+          updated: new Date(),
+          name: config.name,
+          description: config.description,
+          support_url: config.support_url,
+          author: config.author,
+          author_url: config.author_url,
+          version: config.version,
+          version_code: config.version_code,
+          allow_default: config.allow_default
         })
         .where(eq(core_plugins.code, code))
         .returning();
 
       const plugin = plugins[0];
+
+      await updateNavAdminPlugin({
+        db: this.databaseService.db,
+        id: plugin.id,
+        config
+      });
 
       return plugin;
     }
@@ -267,6 +283,12 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
       .returning();
 
     const plugin = plugins[0];
+
+    await updateNavAdminPlugin({
+      db: this.databaseService.db,
+      id: plugin.id,
+      config
+    });
 
     return plugin;
   }

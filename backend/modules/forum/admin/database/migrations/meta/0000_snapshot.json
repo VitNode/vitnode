@@ -1,5 +1,5 @@
 {
-  "id": "545f3c94-9173-46bb-bcb0-a52c02f93485",
+  "id": "08712ff4-1f61-4a7e-b069-3cd033bfeaca",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -16,9 +16,10 @@
         },
         "created": {
           "name": "created",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "parent_id": {
           "name": "parent_id",
@@ -355,15 +356,17 @@
         },
         "created": {
           "name": "created",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
-        "updated": {
-          "name": "updated",
-          "type": "integer",
+        "update": {
+          "name": "update",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {
@@ -519,9 +522,10 @@
         },
         "created": {
           "name": "created",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "topic_id": {
           "name": "topic_id",
@@ -615,9 +619,10 @@
         },
         "created": {
           "name": "created",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "ip_address": {
           "name": "ip_address",
@@ -684,9 +689,10 @@
         },
         "created": {
           "name": "created",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "action": {
           "name": "action",

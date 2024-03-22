@@ -13,7 +13,6 @@ import {
 } from "@/modules/core/admin/database/schema/groups";
 import { core_admin_permissions } from "@/modules/core/admin/database/schema/admins";
 import { core_moderators_permissions } from "../../database/schema/moderators";
-import { core_plugins } from "../../database/schema/plugins";
 import { core_themes } from "../../database/schema/themes";
 import { core_nav, core_nav_name } from "../../database/schema/nav";
 import { getConfigFile } from "@/functions/config/get-config-file";
@@ -72,20 +71,6 @@ export class CreateDatabaseAdminInstallService {
 
     const coreVersionCode = +Object.keys(coreVersions).sort().reverse()[0];
     const coreVersion: string = coreVersions[coreVersionCode];
-
-    await this.databaseService.db.insert(core_plugins).values([
-      {
-        code: "forum",
-        name: "Forum",
-        description: "Community forum plugin.",
-        version: coreVersion,
-        version_code: coreVersionCode,
-        author: "VitNode",
-        support_url: "https://vitnode.com/",
-        author_url: "https://vitnode.com/",
-        default: true
-      }
-    ]);
 
     // Create default theme
     await this.databaseService.db.insert(core_themes).values({

@@ -1,6 +1,7 @@
 {
   "core": {
     "reload_page": "Przeładuj stronę",
+    "link_url_with_link": "Link URL: <link></link>",
     "yes": "Tak",
     "no": "Nie",
     "clear_cache_and_reload": "Wyczyść pamięć podręczną i przeładuj",
@@ -287,6 +288,26 @@
       "actions": {
         "back_home": "Strona główna",
         "contact": "Skontaktuj się z nami"
+      }
+    },
+    "admin": {
+      "nav": {
+        "title": "Rdzeń",
+        "dashboard": "Pulpit",
+        "settings": "Ustawienia",
+        "plugins": "Wtyczki",
+        "styles": "Style",
+        "langs": "Języki"
+      }
+    }
+  },
+  "members": {
+    "admin": {
+      "nav": {
+        "title": "Użytkownicy",
+        "list": "Użytkownicy",
+        "groups": "Grupy",
+        "staff": "Personel"
       }
     }
   }

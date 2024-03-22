@@ -1,5 +1,11 @@
 {
   "forum": {
+    "admin": {
+      "nav": {
+        "title": "Forum",
+        "forums": "Fora"
+      }
+    },
     "forum": "Forum",
     "by": "Przez <user></user>, <date></date>",
     "topics_title_count": "{count, plural, =1 {Temat} few {Tematy} many {Tematów} other {Tematów}}",

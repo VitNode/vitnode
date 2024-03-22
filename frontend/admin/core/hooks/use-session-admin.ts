@@ -2,10 +2,12 @@ import { createContext, useContext } from "react";
 
 import type {
   AuthorizationCurrentUserObj,
+  NavAdminPluginsAuthorization,
   RebuildRequiredObj
 } from "@/graphql/hooks";
 
 interface Args {
+  nav: NavAdminPluginsAuthorization[];
   rebuild_required: RebuildRequiredObj;
   session: Omit<AuthorizationCurrentUserObj, "posts"> | undefined | null;
   version: string;
@@ -18,7 +20,8 @@ export const SessionAdminContext = createContext<Args>({
     langs: false,
     plugins: false
   },
-  version: ""
+  version: "",
+  nav: []
 });
 
 export const useSessionAdmin = () => useContext(SessionAdminContext);

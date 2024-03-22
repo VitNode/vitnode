@@ -6,7 +6,7 @@ END $$;
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "forum_forums" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"created" integer NOT NULL,
+	"created" timestamp DEFAULT now() NOT NULL,
 	"parent_id" integer,
 	"position" integer DEFAULT 0 NOT NULL,
 	"can_all_view" boolean DEFAULT false NOT NULL,
@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS "forum_posts" (
 	"topic_id" integer,
 	"user_id" integer,
 	"ip_address" varchar(45),
-	"created" integer NOT NULL,
-	"updated" integer NOT NULL
+	"created" timestamp DEFAULT now() NOT NULL,
+	"update" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "forum_posts_content" (
@@ -60,14 +60,14 @@ CREATE TABLE IF NOT EXISTS "forum_posts_timeline" (
 	"post_id" integer,
 	"log" text,
 	"topic_log_id" integer,
-	"created" integer NOT NULL,
+	"created" timestamp DEFAULT now() NOT NULL,
 	"topic_id" integer NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "forum_topics" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"forum_id" integer NOT NULL,
-	"created" integer NOT NULL,
+	"created" timestamp DEFAULT now() NOT NULL,
 	"ip_address" varchar(45),
 	"locked" boolean DEFAULT false NOT NULL
 );
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS "forum_topics_logs" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"user_id" integer,
 	"ip_address" varchar(45) NOT NULL,
-	"created" integer NOT NULL,
+	"created" timestamp DEFAULT now() NOT NULL,
 	"action" "actions" NOT NULL,
 	"topic_id" integer
 );

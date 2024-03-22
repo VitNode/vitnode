@@ -5,10 +5,7 @@ import { useTranslations } from "next-intl";
 
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/functions/classnames";
-import {
-  LinkItemListNavAdmin,
-  type ItemListNavAdminProps
-} from "./link/link-item-list-nav-admin";
+import { LinkItemListNavAdmin, type ItemListNavAdminProps } from "./link";
 import { usePathname } from "@/i18n";
 
 interface Props {
@@ -28,7 +25,9 @@ export const ItemListNavAdmin = ({
 }: Props) => {
   const pathname = usePathname();
   const pathnameId = pathname.split("/").at(2);
-  const t = useTranslations("admin");
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  const t = useTranslations(`${id}.admin`);
 
   return (
     <Accordion.Item value={id}>
@@ -49,9 +48,7 @@ export const ItemListNavAdmin = ({
             )
           }
         >
-          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-          {/* @ts-expect-error */}
-          <span>{t(`nav.${id}.title`)}</span>
+          <span>{t("nav.title")}</span>
           <ChevronDown
             className={cn(
               "w-5 h-5 ml-auto transition-transform flex-shrink-0",
@@ -68,7 +65,7 @@ export const ItemListNavAdmin = ({
           {items.map(el => (
             <LinkItemListNavAdmin
               key={el.id}
-              href={`/admin/${id}${el.href}`}
+              href={`/admin/${id}/${el.href}`}
               id={el.id}
               primaryId={id}
               onClick={onClickItem}
