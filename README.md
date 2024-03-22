@@ -38,7 +38,6 @@ Click to see the [installation guide](https://vitnode.com/setup/overview).
 ### Without Docker
 
 - [PostgreSQL 16+](https://www.postgresql.org/),
-- [Redis 7+](https://redis.io/),
 
 ## 🖥️ Hardware
 
