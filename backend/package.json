@@ -5,7 +5,7 @@
   "scripts": {
     "db": "drizzle-kit push:pg",
     "config:init": "ts-node ./functions/config/generate-config-file.ts",
-    "config:finish": "ts-node ./functions/config/finish-build-config-file.ts",
+    "config:finish": "ts-node ./functions/config/finish-build-config-file.ts --env-file=../.env",
     "migrate:forum": "drizzle-kit generate:pg --out modules/forum/admin/database/migrations --schema modules/forum/admin/database/schema/*.ts",
     "migrate:admin": "drizzle-kit generate:pg --out modules/core/admin/database/migrations --schema modules/core/admin/database/schema/*.ts",
     "build": "nest build",
@@ -64,6 +64,7 @@
     "@typescript-eslint/eslint-plugin": "^7.3.1",
     "@typescript-eslint/parser": "^7.3.1",
     "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
     "drizzle-kit": "^0.20.14",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",

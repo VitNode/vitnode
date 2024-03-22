@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   postgres:
-    container_name: vitnode_postgres
+    container_name: vitnode_postgres_production
     image: postgres:16.2-alpine
     environment:
       POSTGRES_USER: ${DB_USER}
@@ -14,10 +14,10 @@ services:
     volumes:
       - ./docker/prod/database:/var/lib/postgresql/data
     networks:
-      - vitnode
+      - vitnode_production
 
   backend:
-    container_name: vitnode_backend
+    container_name: vitnode_backend_production
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -35,7 +35,7 @@ services:
     depends_on:
       - postgres
     networks:
-      - vitnode
+      - vitnode_production
     volumes:
       - ./frontend/config:/frontend/config # config
       - ./frontend/themes:/frontend/themes # themes
@@ -48,7 +48,7 @@ services:
       - ./backend/modules:/app/modules # modules
 
   frontend:
-    container_name: vitnode_frontend
+    container_name: vitnode_frontend_production
     build:
       context: ./frontend
       dockerfile: Dockerfile
@@ -59,7 +59,7 @@ services:
     ports:
       - "3000:3000"
     networks:
-      - vitnode
+      - vitnode_production
     volumes:
       - ./frontend/config:/app/config # config
       - ./frontend/themes:/app/themes # themes
@@ -70,4 +70,4 @@ services:
       - ./frontend/hooks:/app/hooks # hooks
 
 networks:
-  vitnode:
+  vitnode_production:
