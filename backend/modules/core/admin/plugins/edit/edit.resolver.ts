@@ -5,7 +5,8 @@ import { EditAdminPluginsService } from "./edit.service";
 import { ShowAdminPlugins } from "../show/dto/show.obj";
 import { EditAdminPluginsArgs } from "./dto/edit.args";
 
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
+import { OnlyForDevelopment } from "@/utils/guards/dev.guard";
 
 @Resolver()
 export class EditAdminPluginsResolver {
@@ -13,6 +14,7 @@ export class EditAdminPluginsResolver {
 
   @Mutation(() => ShowAdminPlugins)
   @UseGuards(AdminAuthGuards)
+  @UseGuards(OnlyForDevelopment)
   async admin__core_plugins__edit(
     @Args() args: EditAdminPluginsArgs
   ): Promise<ShowAdminPlugins> {

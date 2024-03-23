@@ -3,7 +3,7 @@ import { Args, Context, Mutation, Resolver } from "@nestjs/graphql";
 
 import { Ctx } from "@/types/context.type";
 import { CurrentUser, User } from "@/utils/decorators/user.decorator";
-import { AuthGuards } from "@/utils/guards/auth.guards";
+import { AuthGuards } from "@/utils/guards/auth.guard";
 import { LockToggleForumTopicsService } from "@/modules/forum/topics/actions/lock_unlock/lock_toggle.service";
 import { LockToggleForumTopicsArgs } from "@/modules/forum/topics/actions/lock_unlock/dto/lock_toggle.args";
 

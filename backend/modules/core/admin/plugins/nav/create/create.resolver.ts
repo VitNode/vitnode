@@ -5,7 +5,8 @@ import { CreateAdminNavPluginsService } from "./create.service";
 import { ShowAdminNavPluginsObj } from "../show/dto/show.obj";
 import { CreateAdminNavPluginsArgs } from "./dto/create.args";
 
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
+import { OnlyForDevelopment } from "@/utils/guards/dev.guard";
 
 @Resolver()
 export class CreateAdminNavPluginsResolver {
@@ -13,6 +14,7 @@ export class CreateAdminNavPluginsResolver {
 
   @Mutation(() => ShowAdminNavPluginsObj)
   @UseGuards(AdminAuthGuards)
+  @UseGuards(OnlyForDevelopment)
   async admin__core_plugins__nav__create(
     @Args() args: CreateAdminNavPluginsArgs
   ): Promise<ShowAdminNavPluginsObj> {

@@ -5,7 +5,7 @@ import { UploadAdminThemesService } from "./upload.service";
 import { UploadAdminThemesArgs } from "./dto/upload.args";
 import { ShowAdminThemes } from "../show/dto/show.obj";
 
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
 
 @Resolver()
 export class UploadAdminThemesResolver {

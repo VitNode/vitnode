@@ -5,7 +5,7 @@ import { EditForumTopicsService } from "./edit.service";
 import { ShowTopicsForums } from "../show/dto/show.obj";
 import { EditForumTopicsArgs } from "./dto/edit.args";
 
-import { AuthGuards } from "@/utils/guards/auth.guards";
+import { AuthGuards } from "@/utils/guards/auth.guard";
 import { CurrentUser, User } from "@/utils/decorators/user.decorator";
 
 @Resolver()

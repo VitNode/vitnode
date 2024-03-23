@@ -5,7 +5,8 @@ import { CreateAdminThemesService } from "./create.service";
 import { CreateAdminThemesArgs } from "./dto/create.args";
 import { ShowAdminThemes } from "../show/dto/show.obj";
 
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
+import { OnlyForDevelopment } from "@/utils/guards/dev.guard";
 
 @Resolver()
 export class CreateAdminThemesResolver {
@@ -13,6 +14,7 @@ export class CreateAdminThemesResolver {
 
   @Mutation(() => ShowAdminThemes)
   @UseGuards(AdminAuthGuards)
+  @UseGuards(OnlyForDevelopment)
   async admin__core_themes__create(
     @Args() args: CreateAdminThemesArgs
   ): Promise<ShowAdminThemes> {

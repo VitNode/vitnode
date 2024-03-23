@@ -5,7 +5,7 @@ import { ShowAdminThemes } from "../show/dto/show.obj";
 import { EditAdminThemesService } from "./edit.service";
 import { EditAdminThemesArgs } from "./dto/edit.args";
 
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
 
 @Resolver()
 export class EditAdminThemesResolver {

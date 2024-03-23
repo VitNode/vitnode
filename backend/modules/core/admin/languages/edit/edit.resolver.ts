@@ -4,7 +4,7 @@ import { UseGuards } from "@nestjs/common";
 import { EditAdminCoreLanguagesService } from "./edit.service";
 import { EditCoreAdminLanguagesArgs } from "./dto/edit.args";
 
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
 import { ShowCoreLanguages } from "@/modules/core/languages/show/dto/show.obj";
 
 @Resolver()
