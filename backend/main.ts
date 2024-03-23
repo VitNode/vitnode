@@ -3,6 +3,7 @@ import { ValidationPipe } from "@nestjs/common";
 import * as cookieParser from "cookie-parser";
 
 import { AppModule } from "./app.module";
+import { execShellCommand } from "./functions/exec-shell-command";
 
 import { graphqlUploadExpress } from "@/utils/graphql-upload/graphqlUploadExpress";
 
@@ -26,6 +27,10 @@ async function bootstrap() {
   });
 
   await app.listen(process.env.PORT ?? "8080", null, () => {
+    if (process.env.NODE_ENV !== "development") {
+      execShellCommand("pnpm codegen");
+    }
+
     // eslint-disable-next-line no-console
     console.log(
       `Application is running on: http://localhost:${process.env.PORT ?? 8080}/graphql`

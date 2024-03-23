@@ -14,9 +14,10 @@
     "frontend:build": "cd frontend && pnpm build && cd ..",
     "frontend:start": "cd frontend && pnpm start",
     "frontend:dev": "cd frontend && pnpm dev",
-    "docker:test": "pnpm config:init && docker-compose -f ./docker-compose-prod.yml -p vitnode-test up -d --build && docker exec -d vitnode_backend /bin/sh -c \"pnpm db\" && pnpm config:finish",
+    "codegen": "cd backend && pnpm codegen && cd ..",
+    "docker:test": "pnpm config:init && docker-compose -f ./docker-compose-prod-backend.yml -p vitnode-test up -d --build && docker-compose -f ./docker-compose-prod-frontend.yml -p vitnode-test up -d --build && pnpm config:finish",
+    "docker:prod": "sudo pnpm config:init && sudo docker compose -f ./docker-compose-prod-backend.yml -p vitnode-prod up -d --build && sudo docker compose -f ./docker-compose-prod-frontend.yml -p vitnode-prod up -d --build && sudo pnpm config:finish",
     "docker:dev": "docker-compose -f ./docker-compose-dev.yml -p vitnode-dev up -d",
-    "docker:prod": "sudo pnpm config:init && sudo docker compose -f ./docker-compose-prod.yml -p vitnode-prod up -d --build && sudo pnpm config:finish",
     "docker:clean": "sudo docker system prune -a",
     "lint": "cd backend && pnpm lint && cd .. && cd frontend && pnpm lint && cd ..",
     "lint:fix": "cd backend && pnpm lint:fix && cd .. && cd frontend && pnpm lint:fix && cd .."

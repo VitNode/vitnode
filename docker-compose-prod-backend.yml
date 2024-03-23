@@ -47,27 +47,5 @@ services:
       - ./backend/public:/app/public # static files
       - ./backend/modules:/app/modules # modules
 
-  frontend:
-    container_name: vitnode_frontend_production
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-      args:
-        - NEXT_PUBLIC_GRAPHQL_URL=http://backend:8080
-        - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL:-}
-    restart: on-failure
-    ports:
-      - "3000:3000"
-    networks:
-      - vitnode_production
-    volumes:
-      - ./frontend/config:/app/config # config
-      - ./frontend/themes:/app/themes # themes
-      - ./frontend/langs:/app/langs # langs
-      - ./frontend/app:/app/app # app
-      - ./frontend/admin:/app/admin # admin
-      - ./frontend/graphql:/app/graphql # graphql
-      - ./frontend/hooks:/app/hooks # hooks
-
 networks:
   vitnode_production:
