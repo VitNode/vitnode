@@ -1,44 +1,22 @@
 import { FileTree } from "nextra/components";
 import { Callout } from "nextra/components";
+import { Steps } from "nextra/components";
+import { Img } from "@/components/img";
+import createPluginImg from "@/assets/plugins/create_plugin.png";
 
 # Plugins
 
-In VitNode we're implementing a plugin system. This means that you can create your own plugins and use them in your VitNode instance.
+Plugins are a way to extend the functionality of your community like adding new features, integrations, or customizing the existing ones.
 
 <Callout type="warning" emoji="⚠️">
-  Make sure you have [developer mode](/dev) enabled.
+  Before move on, make sure you have [developer mode](/dev) enabled.
 </Callout>
-
-## Plugin schema
-
-When you're created a plugin VitNode will created few files for you on `backend` side, but not in `frontend` side. Below you can see the schema of folders for your plugin files.
-
-<FileTree>
-  <FileTree.Folder name="backend" defaultOpen>
-    <FileTree.Folder name="modules" defaultOpen>
-      <FileTree.Folder name="{your_plugin}" defaultOpen>
-        <FileTree.File name="{your_plugin}.module.ts" />
-      </FileTree.Folder>
-    </FileTree.Folder>
-  </FileTree.Folder>
-
-  <FileTree.Folder name="frontend" defaultOpen>
-    <FileTree.Folder name="hooks" defaultOpen>
-      <FileTree.Folder name="{your_plugin}" />
-    </FileTree.Folder>
-    <FileTree.Folder name="themes" defaultOpen>
-      <FileTree.Folder name="1" defaultOpen>
-        <FileTree.Folder name="{your_plugin}" defaultOpen>
-          <FileTree.File name="home.ts" />
-        </FileTree.Folder>
-      </FileTree.Folder>
-    </FileTree.Folder>
-  </FileTree.Folder>
-</FileTree>
 
 ## Create a plugin
 
 Go to AdminCP and go to `Plugins` section. Click on `Create` button and fill the form.
+
+<Img src={createPluginImg} alt="Create a plugin" />
 
 ## Build new version
 
