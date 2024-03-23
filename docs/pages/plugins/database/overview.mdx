@@ -54,12 +54,17 @@ import {
   varchar
 } from "drizzle-orm/pg-core";
 
+import { blog_categories } from "./categories";
+
 import { core_languages } from "@/plugins/core/admin/database/schema/languages";
 import { core_users } from "@/plugins/core/admin/database/schema/users";
 
 export const blog_articles = pgTable("blog_articles", {
   id: serial("id").primaryKey(),
   author_id: integer("author_id").references(() => core_users.id, {
+    onDelete: "cascade"
+  }),
+  category_id: integer("category_id").references(() => blog_categories.id, {
     onDelete: "cascade"
   }),
   created: timestamp("created").notNull().defaultNow(),
@@ -94,7 +99,7 @@ Indexes are important part of schema. Thanks to indexes your database will be fa
 
 For example, if you have `blog_articles` table and you want to search by `author_id`, you can create index for this column.
 
-```ts {2, 24-26, 43-50}
+```ts {2, 29-34, 51-58}
 import {
   index,
   integer,
@@ -103,6 +108,8 @@ import {
   timestamp,
   varchar
 } from "drizzle-orm/pg-core";
+
+import { blog_categories } from "./categories";
 
 import { core_languages } from "@/plugins/core/admin/database/schema/languages";
 import { core_users } from "@/plugins/core/admin/database/schema/users";
@@ -114,12 +121,18 @@ export const blog_articles = pgTable(
     author_id: integer("author_id").references(() => core_users.id, {
       onDelete: "cascade"
     }),
+    category_id: integer("category_id").references(() => blog_categories.id, {
+      onDelete: "cascade"
+    }),
     created: timestamp("created").notNull().defaultNow(),
     update: timestamp("update").notNull().defaultNow(),
     ip_address: varchar("ip_address", { length: 45 })
   },
   table => ({
-    author_id_idx: index("blog_articles_author_id_idx").on(table.author_id)
+    author_id_idx: index("blog_articles_author_id_idx").on(table.author_id),
+    category_id_idx: index("blog_articles_category_id_idx").on(
+      table.category_id
+    )
   })
 );
 
@@ -154,7 +167,7 @@ Relations is importatnt part of schema. Thanks to relations your database will b
 
 For example, if you have `blog_articles` table and `blog_articles_content` table, you can create relation between them. If some `blog_articles` will be removed, all `blog_articles_content` related to this `blog_articles` will be removed too.
 
-```ts {1, 30-39, 65-73}
+```ts {1, 38-51, 77-86}
 import { relations } from "drizzle-orm";
 import {
   index,
@@ -164,6 +177,8 @@ import {
   timestamp,
   varchar
 } from "drizzle-orm/pg-core";
+
+import { blog_categories } from "./categories";
 
 import { core_languages } from "@/plugins/core/admin/database/schema/languages";
 import { core_users } from "@/plugins/core/admin/database/schema/users";
@@ -175,12 +190,18 @@ export const blog_articles = pgTable(
     author_id: integer("author_id").references(() => core_users.id, {
       onDelete: "cascade"
     }),
+    category_id: integer("category_id").references(() => blog_categories.id, {
+      onDelete: "cascade"
+    }),
     created: timestamp("created").notNull().defaultNow(),
     update: timestamp("update").notNull().defaultNow(),
     ip_address: varchar("ip_address", { length: 45 })
   },
   table => ({
-    author_id_idx: index("blog_articles_author_id_idx").on(table.author_id)
+    author_id_idx: index("blog_articles_author_id_idx").on(table.author_id),
+    category_id_idx: index("blog_articles_category_id_idx").on(
+      table.category_id
+    )
   })
 );
 
@@ -191,7 +212,11 @@ export const blog_articles_relations = relations(
       fields: [blog_articles.author_id],
       references: [core_users.id]
     }),
-    content: many(blog_articles_content)
+    content: many(blog_articles_content),
+    category: one(blog_categories, {
+      fields: [blog_articles.category_id],
+      references: [blog_categories.id]
+    })
   })
 );
 
@@ -238,15 +263,13 @@ After created schema, you need to import it to `index.ts` file. Inside `index.ts
 
 Here is example `index.ts` file:
 
-```ts
-import * as forums from "./schema/forums";
-import * as topics from "./schema/topics";
-import * as posts from "./schema/posts";
+```ts {1-2, 5-6}
+import * as articles from "./schema/articles";
+import * as categories from "./schema/categories";
 
 export default {
-  ...forums,
-  ...topics,
-  ...posts
+  ...articles,
+  ...categories
 };
 ```
 

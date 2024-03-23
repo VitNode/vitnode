@@ -8,6 +8,8 @@ import {
   varchar
 } from "drizzle-orm/pg-core";
 
+import { blog_categories } from "./categories";
+
 import { core_languages } from "@/plugins/core/admin/database/schema/languages";
 import { core_users } from "@/plugins/core/admin/database/schema/users";
 
@@ -18,12 +20,18 @@ export const blog_articles = pgTable(
     author_id: integer("author_id").references(() => core_users.id, {
       onDelete: "cascade"
     }),
+    category_id: integer("category_id").references(() => blog_categories.id, {
+      onDelete: "cascade"
+    }),
     created: timestamp("created").notNull().defaultNow(),
     update: timestamp("update").notNull().defaultNow(),
     ip_address: varchar("ip_address", { length: 45 })
   },
   table => ({
-    author_id_idx: index("blog_articles_author_id_idx").on(table.author_id)
+    author_id_idx: index("blog_articles_author_id_idx").on(table.author_id),
+    category_id_idx: index("blog_articles_category_id_idx").on(
+      table.category_id
+    )
   })
 );
 
@@ -35,7 +43,11 @@ export const blog_articles_relations = relations(
       references: [core_users.id]
     }),
     content: many(blog_articles_content),
-    title: many(blog_articles_title)
+    title: many(blog_articles_title),
+    category: one(blog_categories, {
+      fields: [blog_articles.category_id],
+      references: [blog_categories.id]
+    })
   })
 );
 
