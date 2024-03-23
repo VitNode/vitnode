@@ -4,7 +4,7 @@ import { UseGuards } from "@nestjs/common";
 import { CreateAdminNavService } from "./create.service";
 import { CreateAdminNavArgs } from "./dto/create.args";
 
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
 import { ShowCoreNav } from "@/modules/core/nav/show/dto/show.obj";
 
 @Resolver()

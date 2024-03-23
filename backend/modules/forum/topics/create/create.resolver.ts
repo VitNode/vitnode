@@ -5,7 +5,7 @@ import { CreateForumTopicsService } from "./create.service";
 import { CreateForumTopicsArgs } from "./dto/create.args";
 import { ShowTopicsForums } from "../show/dto/show.obj";
 
-import { AuthGuards } from "@/utils/guards/auth.guards";
+import { AuthGuards } from "@/utils/guards/auth.guard";
 import { CurrentUser, User } from "@/utils/decorators/user.decorator";
 import { Ctx } from "@/types/context.type";
 

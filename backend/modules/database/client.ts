@@ -1,7 +1,16 @@
+import { join } from "path";
+
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
+import * as dotenv from "dotenv";
 
 import { schemaDatabase } from "./schema";
+
+if (process.env.NODE_ENV !== "development") {
+  dotenv.config({
+    path: join(process.cwd(), "..", ".env")
+  });
+}
 
 const envs = {
   host: process.env.DB_HOST,

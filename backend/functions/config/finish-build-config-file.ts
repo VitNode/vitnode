@@ -3,7 +3,6 @@
 import * as fs from "fs";
 import { join } from "path";
 
-import * as dotenv from "dotenv";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 
 import { ConfigType, configPath, getConfigFile } from "./get-config-file";
@@ -11,12 +10,7 @@ import { updatePlugins } from "./update-plugins";
 
 import { db } from "@/modules/database/client";
 
-dotenv.config({
-  path: join(process.cwd(), "..", ".env")
-});
-
 (async () => {
-  console.log(`[VitNode] - Starting finish build, ${process.env.DB_USER}`);
   // Update config file
   const config = await getConfigFile();
   const newData: ConfigType = {

@@ -5,7 +5,7 @@ import { ShowAdminThemesService } from "./show.service";
 import { ShowAdminThemesObj } from "./dto/show.obj";
 import { ShowAdminThemesArgs } from "./dto/show.args";
 
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
 
 @Resolver()
 export class ShowAdminThemesResolver {

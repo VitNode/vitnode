@@ -5,7 +5,7 @@ import { GeneralAdminSettingsObj } from "../dto/general.obj";
 import { EditGeneralAdminSettingsService } from "./edit.service";
 import { EditGeneralAdminSettingsArgs } from "./dto/edit.args";
 
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
 
 @Resolver()
 export class EditGeneralAdminSettingsResolver {

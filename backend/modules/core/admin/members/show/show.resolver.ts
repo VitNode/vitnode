@@ -5,7 +5,7 @@ import { ShowAdminMembersService } from "./show.service";
 import { ShowAdminMembersObj } from "./dto/show.obj";
 import { ShowAdminMembersArgs } from "./dto/show.args";
 
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
 
 @Resolver()
 export class ShowAdminMembersResolver {

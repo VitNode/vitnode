@@ -5,7 +5,7 @@ import { ShowPostsForumsService } from "./show.service";
 import { ShowPostsForumsObj } from "./dto/show.obj";
 import { ShowPostsForumsArgs } from "./dto/show.args";
 
-import { AuthGuards, OptionalAuth } from "@/utils/guards/auth.guards";
+import { AuthGuards, OptionalAuth } from "@/utils/guards/auth.guard";
 import { CurrentUser, User } from "@/utils/decorators/user.decorator";
 
 @Resolver()

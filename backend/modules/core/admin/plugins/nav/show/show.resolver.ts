@@ -5,7 +5,8 @@ import { ShowAdminNavPluginsArgs } from "./dto/show.args";
 import { ShowAdminNavPluginsService } from "./show.service";
 import { ShowAdminNavPluginsObj } from "./dto/show.obj";
 
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
+import { OnlyForDevelopment } from "@/utils/guards/dev.guard";
 
 @Resolver()
 export class ShowAdminNavPluginsResolver {
@@ -13,6 +14,7 @@ export class ShowAdminNavPluginsResolver {
 
   @Query(() => [ShowAdminNavPluginsObj])
   @UseGuards(AdminAuthGuards)
+  @UseGuards(OnlyForDevelopment)
   async admin__core_plugins__nav__show(
     @Args() args: ShowAdminNavPluginsArgs
   ): Promise<ShowAdminNavPluginsObj[]> {

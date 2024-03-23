@@ -5,7 +5,7 @@ import { CreateForumForumsService } from "./create.service";
 import { CreateForumForumsArgs } from "./dto/create.args";
 import { CreateForumForumsObj } from "./dto/create.obj";
 
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
 
 @Resolver()
 export class CreateForumForumsResolver {

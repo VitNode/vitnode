@@ -6,7 +6,7 @@ import { UploadAvatarCoreMembersArgs } from "./dto/upload.args";
 import { UploadAvatarCoreMembersObj } from "./dto/upload.obj";
 
 import { User, CurrentUser } from "@/utils/decorators/user.decorator";
-import { AuthGuards } from "@/utils/guards/auth.guards";
+import { AuthGuards } from "@/utils/guards/auth.guard";
 
 @Resolver()
 export class UploadAvatarCoreMembersResolver {

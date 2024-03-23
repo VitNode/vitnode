@@ -6,7 +6,7 @@ import { ShowCoreSessionDevicesArgs } from "./dto/show.args";
 import { ShowCoreSessionDevicesObj } from "./dto/show.obj";
 
 import { CurrentUser, User } from "@/utils/decorators/user.decorator";
-import { AuthGuards } from "@/utils/guards/auth.guards";
+import { AuthGuards } from "@/utils/guards/auth.guard";
 
 @Resolver()
 export class ShowCoreSessionDevicesResolver {

@@ -4,7 +4,8 @@ import { UseGuards } from "@nestjs/common";
 import { ChangePositionAdminNavPluginsService } from "./change_position.service";
 import { ChangePositionAdminNavPluginsArgs } from "./dto/change_position.args";
 
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
+import { OnlyForDevelopment } from "@/utils/guards/dev.guard";
 
 @Resolver()
 export class ChangePositionAdminNavPluginsResolver {
@@ -12,6 +13,7 @@ export class ChangePositionAdminNavPluginsResolver {
 
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
+  @UseGuards(OnlyForDevelopment)
   async admin__core_plugins__nav__change_position(
     @Args() args: ChangePositionAdminNavPluginsArgs
   ): Promise<string> {

@@ -4,8 +4,9 @@ import { UseGuards } from "@nestjs/common";
 import { DownloadAdminPluginsService } from "./download.service";
 import { DownloadAdminPluginsArgs } from "./dto/download.args";
 
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
 import { CurrentUser, User } from "@/utils/decorators/user.decorator";
+import { OnlyForDevelopment } from "@/utils/guards/dev.guard";
 
 @Resolver()
 export class DownloadAdminPluginsResolver {
@@ -13,6 +14,7 @@ export class DownloadAdminPluginsResolver {
 
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
+  @UseGuards(OnlyForDevelopment)
   async admin__core_plugins__download(
     @Args() args: DownloadAdminPluginsArgs,
     @CurrentUser() user: User

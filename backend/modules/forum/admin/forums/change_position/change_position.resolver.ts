@@ -4,7 +4,7 @@ import { UseGuards } from "@nestjs/common";
 import { ChangePositionForumForumsService } from "./change_position.service";
 import { ChangePositionForumForumsArgs } from "./dto/change_position.args";
 
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guards";
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
 
 @Resolver()
 export class ChangePositionForumForumsResolver {

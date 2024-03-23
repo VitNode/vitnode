@@ -1,7 +1,7 @@
 import { Args, Context, Mutation, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
 
-import { AuthGuards } from "@/utils/guards/auth.guards";
+import { AuthGuards } from "@/utils/guards/auth.guard";
 import { CurrentUser, User } from "@/utils/decorators/user.decorator";
 import { Ctx } from "@/types/context.type";
 import { CreatePostsForumsArgs } from "@/modules/forum/posts/create/dto/create.args";
