@@ -8,7 +8,7 @@ export const pluginPaths = ({ code }: { code: string }) => {
     backend: {
       root: backend_root,
       database_schema: join(backend_root, "admin", "database", "schema"),
-      database_migration: join(backend_root, "admin", "database", "migration"),
+      database_migration: join(backend_root, "admin", "database", "migrations"),
       versions: join(backend_root, "versions.json"),
       info: join(backend_root, "plugin.json")
     },
