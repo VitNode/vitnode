@@ -213,9 +213,11 @@ export function DataTable<TData extends TDataMin>({
           </div>
 
           {pageInfo && (
-            <div className="flex items-center justify-end px-2 pt-4 gap-4 lg:gap-8">
+            <div className="flex items-center sm:justify-end justify-center px-2 pt-4 gap-4 lg:gap-8 flex-wrap">
               <div className="flex items-center space-x-2">
-                <p className="text-sm font-medium">Rows per page</p>
+                <p className="text-sm font-medium">
+                  {t("table.rows_per_page")}
+                </p>
                 <Select
                   value={`${pageSizeValue}`}
                   onValueChange={value => {

@@ -9,11 +9,11 @@ import { ServeStaticModule } from "@nestjs/serve-static";
 import { ScheduleModule } from "@nestjs/schedule";
 import { ConfigModule } from "@nestjs/config";
 
-import { ModulesModule } from "./modules/modules.module";
+import { PluginsModule } from "./plugins/plugins.module";
 import { configuration } from "./configuration";
 
 import { Ctx } from "@/types/context.type";
-import { DatabaseModule } from "@/modules/database/database.module";
+import { DatabaseModule } from "@/plugins/database/database.module";
 
 @Module({
   imports: [
@@ -30,7 +30,7 @@ import { DatabaseModule } from "@/modules/database/database.module";
       context: ({ req, res }): Ctx => ({ req, res })
     }),
     JwtModule.register({ global: true }),
-    ModulesModule,
+    PluginsModule,
     ServeStaticModule.forRoot({
       rootPath: join(process.cwd(), "public"),
       serveRoot: "/public"

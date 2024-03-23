@@ -46,11 +46,13 @@ export const DevPluginAdminLayout = ({
         }
         desc={
           <div>
-            {description && <p>{description}</p>}
+            {description && (
+              <p className="text-sm max-w-80 truncate">{description}</p>
+            )}
             {version && version_code && (
               <span className="flex gap-1 flex-wrap">
                 <span>{version}</span>
-                <span className="text-muted-foreground">
+                <span>
                   ({version_code}), <DateFormat date={updated} />
                 </span>
               </span>

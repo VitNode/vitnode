@@ -67,7 +67,8 @@
       "updated": "Zaktualizowano",
       "version": "Wersja",
       "author": "Autor",
-      "enabled": "Włączony"
+      "enabled": "Włączony",
+      "rows_per_page": "Wierszy na stronę"
     },
     "editor": {
       "remove_formatting": "Usuń formatowanie",

@@ -67,7 +67,8 @@
       "updated": "Updated",
       "version": "Version",
       "author": "Author",
-      "enabled": "Enabled"
+      "enabled": "Enabled",
+      "rows_per_page": "Rows per page"
     },
     "editor": {
       "remove_formatting": "Remove Formatting",
