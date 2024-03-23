@@ -5,6 +5,6 @@
   "author": "VitNode",
   "author_url": "https://vitnode.com/",
   "support_url": "https://github.com/aXenDeveloper/vitnode/issues",
-  "allow_default": true,
+  "allow_default": false,
   "nav": []
 }

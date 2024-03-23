@@ -1,4 +1,5 @@
 import { CanActivate, Injectable } from "@nestjs/common";
+
 import { AccessDeniedError } from "../errors/AccessDeniedError";
 
 @Injectable()

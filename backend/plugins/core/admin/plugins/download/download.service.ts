@@ -186,7 +186,11 @@ export class DownloadAdminPluginsService {
 
   protected async generateMigration({ code }: { code: string }): Promise<void> {
     const path = pluginPaths({ code }).backend.database_migration;
-    if (!fs.existsSync(path)) return;
+    if (!fs.existsSync(path)) {
+      fs.mkdirSync(path, {
+        recursive: true
+      });
+    }
 
     try {
       await execShellCommand(
