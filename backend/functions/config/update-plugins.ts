@@ -4,13 +4,13 @@ import * as fs from "fs";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { eq } from "drizzle-orm";
 
-import { ConfigPlugin } from "@/modules/core/admin/plugins/plugins.module";
-import { schemaDatabase } from "@/modules/database/schema";
+import { ConfigPlugin } from "@/plugins/core/admin/plugins/plugins.module";
+import { schemaDatabase } from "@/plugins/database/schema";
 import {
   core_plugins,
   core_plugins_nav
-} from "@/modules/core/admin/database/schema/plugins";
-import { poolDB } from "@/modules/database/client";
+} from "@/plugins/core/admin/database/schema/plugins";
+import { poolDB } from "@/plugins/database/client";
 
 export const updateNavAdminPlugin = async ({
   config,
@@ -71,16 +71,16 @@ export const updatePlugins = async ({
 }: {
   db: NodePgDatabase<typeof schemaDatabase>;
 }) => {
-  fs.readdir(join(process.cwd(), "modules"), async (err, plugins) => {
+  fs.readdir(join(process.cwd(), "plugins"), async (err, plugins) => {
     await Promise.all(
       plugins
         .filter(
-          plugin => !["database", "modules.module.ts", "core"].includes(plugin)
+          plugin => !["database", "plugins.module.ts", "core"].includes(plugin)
         )
         .map(async (pluginName, index) => {
           const configPath = join(
             process.cwd(),
-            "modules",
+            "plugins",
             pluginName,
             "plugin.json"
           );
@@ -89,7 +89,7 @@ export const updatePlugins = async ({
           );
           const versionsPath = join(
             process.cwd(),
-            "modules",
+            "plugins",
             pluginName,
             "versions.json"
           );

@@ -45,7 +45,7 @@ services:
       - ./frontend/graphql:/frontend/graphql # graphql
       - ./frontend/hooks:/frontend/hooks # hooks
       - ./backend/public:/app/public # static files
-      - ./backend/modules:/app/modules # modules
+      - ./backend/plugins:/app/plugins # plugins
 
 networks:
   vitnode_production:

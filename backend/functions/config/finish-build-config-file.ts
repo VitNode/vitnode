@@ -8,7 +8,7 @@ import { migrate } from "drizzle-orm/node-postgres/migrator";
 import { ConfigType, configPath, getConfigFile } from "./get-config-file";
 import { updatePlugins } from "./update-plugins";
 
-import { db } from "@/modules/database/client";
+import { db } from "@/plugins/database/client";
 
 (async () => {
   // Update config file
@@ -27,7 +27,7 @@ import { db } from "@/modules/database/client";
   await migrate(db, {
     migrationsFolder: join(
       process.cwd(),
-      "modules",
+      "plugins",
       "core",
       "admin",
       "database",
@@ -35,17 +35,17 @@ import { db } from "@/modules/database/client";
     )
   });
 
-  fs.readdir(join(process.cwd(), "modules"), async (err, plugins) => {
+  fs.readdir(join(process.cwd(), "plugins"), async (err, plugins) => {
     await Promise.all(
       plugins
         .filter(
-          plugin => !["database", "modules.module.ts", "core"].includes(plugin)
+          plugin => !["database", "plugins.module.ts", "core"].includes(plugin)
         )
         .map(async plugin => {
           // Check if migration folder exists
           const migrationPath = join(
             process.cwd(),
-            "modules",
+            "plugins",
             plugin,
             "admin",
             "database",
