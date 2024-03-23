@@ -28,9 +28,16 @@ export const ContentTablePluginsAdmin = ({
           const data = row.original;
 
           return (
-            <div className="flex gap-2 items-center">
-              <span className="font-semibold">{data.name}</span>
-              {data.default && <Badge>{tCore("default")}</Badge>}
+            <div>
+              <div className="flex gap-2 items-center">
+                <span className="font-semibold">{data.name}</span>
+                {data.default && <Badge>{tCore("default")}</Badge>}
+              </div>
+              {data.description && (
+                <p className="text-sm text-muted-foreground max-w-80 truncate">
+                  {data.description}
+                </p>
+              )}
             </div>
           );
         }
