@@ -72,6 +72,7 @@ export const updatePlugins = async ({
   db: NodePgDatabase<typeof schemaDatabase>;
 }) => {
   fs.readdir(join(process.cwd(), "plugins"), async (err, plugins) => {
+    let isDefaultIndex: number | null = null;
     await Promise.all(
       plugins
         .filter(
@@ -87,6 +88,10 @@ export const updatePlugins = async ({
           const config: ConfigPlugin = JSON.parse(
             fs.readFileSync(configPath, "utf8")
           );
+
+          if (config.allow_default) {
+            isDefaultIndex = index;
+          }
           const versionsPath = join(
             process.cwd(),
             "plugins",
@@ -126,10 +131,16 @@ export const updatePlugins = async ({
               .insert(core_plugins)
               .values([
                 {
-                  ...config,
-                  version,
-                  version_code: +latestVersion,
-                  default: index === 0
+                  name: config.name,
+                  description: config.description,
+                  code: config.code,
+                  support_url: config.support_url,
+                  author: config.author,
+                  author_url: config.author_url,
+                  allow_default: config.allow_default,
+                  version: version ?? null,
+                  version_code: latestVersion ? +latestVersion : null,
+                  default: isDefaultIndex === index
                 }
               ])
               .returning();
@@ -142,9 +153,9 @@ export const updatePlugins = async ({
             config,
             id: pluginId
           });
-
-          await poolDB.end();
         })
     );
+
+    await poolDB.end();
   });
 };
