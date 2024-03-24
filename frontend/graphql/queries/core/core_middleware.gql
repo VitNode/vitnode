@@ -17,4 +17,7 @@ query Core_middleware {
       name
     }
   }
+  core_plugins__show {
+    code
+  }
 }

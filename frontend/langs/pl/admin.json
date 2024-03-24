@@ -28,7 +28,7 @@
         "set_default": "Ustaw jako domyślną",
         "get_help": "Get help",
         "search_placeholder": "Szukaj po nazwie...",
-        "dev_tool": "Narzędzia deweloperskie",
+        "dev_tools": "Narzędzia deweloperskie",
         "dev": {
           "overview": {
             "title": "Przegląd"

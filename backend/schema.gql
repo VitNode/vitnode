@@ -280,6 +280,7 @@ type Query {
   core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowCoreLanguagesSortByArgs!]): ShowCoreLanguagesObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
+  core_plugins__show: [ShowCorePluginsObj!]!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_themes__show(cursor: Int, first: Int, last: Int): ShowCoreThemesObj!
   forum_forums__show(
@@ -561,6 +562,10 @@ type ShowCoreNavItem {
 type ShowCoreNavObj {
   edges: [ShowCoreNav!]!
   pageInfo: PageInfo!
+}
+
+type ShowCorePluginsObj {
+  code: String!
 }
 
 type ShowCoreSessionDevices {

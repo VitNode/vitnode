@@ -28,7 +28,7 @@
         "set_default": "Set as default",
         "get_help": "Get help",
         "search_placeholder": "Search by name...",
-        "dev_tool": "Developer Tool",
+        "dev_tools": "Developer Tools",
         "dev": {
           "overview": {
             "title": "Overview"

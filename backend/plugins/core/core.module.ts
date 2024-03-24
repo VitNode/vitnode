@@ -11,6 +11,7 @@ import { CoreFilesModule } from "./files/files.module";
 import { CoreThemesModule } from "./themes/themes.module";
 import { CoreNavModule } from "./nav/nav.module";
 import { AdminModule } from "./admin/admin.module";
+import { CorePluginsModule } from "./plugins/plugins.module";
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { AdminModule } from "./admin/admin.module";
     CoreMiddlewareModule,
     CoreFilesModule,
     CoreThemesModule,
-    CoreNavModule
+    CoreNavModule,
+    CorePluginsModule
   ]
 })
 export class CoreModule {}

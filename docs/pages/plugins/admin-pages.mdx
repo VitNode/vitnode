@@ -1,0 +1,181 @@
+import { Steps } from "nextra/components";
+import { Img } from "@/components/img";
+import { FileTree } from "nextra/components";
+import { Callout } from "nextra/components";
+import openDevtoolsImg from "@/assets/plugins/open_devtools.png";
+import createNavAdminImg from "@/assets/plugins/create_nav_admin.png";
+import createNavAdminFormImg from "@/assets/plugins/create_nav_admin_form.png";
+import finishNavAdminImg from "@/assets/plugins/finish_create_nav_admin.png";
+import resultPageAdminImg from "@/assets/plugins/result_page_admin.png";
+import resultTemplatePageAdminImg from "@/assets/plugins/result_template_page_admin.png";
+
+# Admin Pages
+
+Admin pages are the pages that are shown in the AdminCP. You can create a new page and add it to the AdminCP navigation.
+
+## Navigation
+
+<Steps>
+
+### Open Developer Tools
+
+Open `AdminCP` and go to `Plugins` page. Choose the plugin you want and click on `Developer Tools` tab.
+
+<Img src={openDevtoolsImg} alt="Open Developer Tool for Plugin" />
+
+### Create Navigation
+
+Inside the `Developer Tools` tab, you will see the `Navigation in AdminCP` tab. Click on it to see the navigation of the plugin and click on `Create` button to create a new navigation.
+
+<Img
+  src={createNavAdminImg}
+  alt="Create button for navigation in Developer Tools Plugin"
+/>
+
+### Fill the form
+
+Fill the form with the required information and click on `Create` button to create the navigation.
+
+<Img
+  src={createNavAdminFormImg}
+  alt="Form for navigation in Developer Tools Plugin"
+/>
+
+### Translation (i18n)
+
+As you can see, the title of plugin and navigation item is a language key. You can add the language key inside the `langs` folder in `{your_plugin_code}.json` file in the frontend.
+
+<FileTree>
+  <FileTree.Folder name="frontend" defaultOpen>
+    <FileTree.Folder name="langs" defaultOpen>
+      <FileTree.Folder name="en" defaultOpen>
+        <FileTree.File name="{your_plugin_code}.json" />
+      </FileTree.Folder>
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+<Callout type="info" emoji="ℹ️">
+  If you have more than one language, you have to create a new file for each
+  language. For example, if you have `en` and `pl` languages, you have to create
+  `en/{your_plugin_code}.json` and `pl/{your_plugin_code}.json` files.
+</Callout>
+
+#### Language Keys
+
+- Title - key is always `{your_plugin_code}.admin.nav.title`. For example: `blog.admin.nav.title`,
+- Navigation item - key is always `{your_plugin_code}.admin.nav.{navigation_item_name}`. For example: `blog.admin.nav.categories`.
+
+Here is an example of the language keys:
+
+```json
+{
+  "blog": {
+    "admin": {
+      "nav": {
+        "title": "Blog",
+        "categories": "Categories"
+      }
+    }
+  }
+}
+```
+
+Now you can see your navigation item in the AdminCP.
+
+<Img
+  src={finishNavAdminImg}
+  alt="Finish creating navigation in Developer Tools Plugin"
+/>
+
+</Steps>
+
+## Page for AdminCP
+
+<Steps>
+
+### Create New File
+
+Thanks to [NextJS App dir routing](https://nextjs.org/docs/app/building-your-application/routing) structure you can create `pages.tsx`, `layouts.tsx`, `loading.tsx` states and `error.tsx` states for your plugin. All features are available in VitNode.
+
+Based on previus tutorial about create new navigation tab in AdminCP, you have to create a new file `page.tsx`. If you don't have a folder for your plugin, you have to create it.
+
+<FileTree>
+  <FileTree.Folder name="frontend" defaultOpen>
+    <FileTree.Folder name="app" defaultOpen>
+      <FileTree.Folder name="[locale]" defaultOpen>
+        <FileTree.Folder name="(apps)" defaultOpen>
+          <FileTree.Folder name="(admin)" defaultOpen>
+            <FileTree.Folder name="admin" defaultOpen>
+              <FileTree.Folder name="(auth)" defaultOpen>
+                <FileTree.Folder name="{your_plugin_code}" defaultOpen>
+                  <FileTree.Folder name="{path}" defaultOpen>
+                    <FileTree.File name="page.tsx" />
+                  </FileTree.Folder>
+                </FileTree.Folder>
+              </FileTree.Folder>
+            </FileTree.Folder>
+          </FileTree.Folder>
+        </FileTree.Folder>
+      </FileTree.Folder>
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+For example: `frontend/app/[locale]/(apps)/(admin)/admin/(auth)/blogs/categoires/page.tsx`
+
+### Write something
+
+Now you can write your page. Remember to export the component as default.
+
+```tsx
+export default function Page() {
+  return <div>Hi from blog page for categories!</div>;
+}
+```
+
+<Img src={resultPageAdminImg} alt="Result page for AdminCP" />
+
+### Template
+
+To save consistency in the AdminCP, we created `admin` folder in the `frontend` part. Inside the `admin` folder, you can create a new folder for your plugin and create a new page for the AdminCP.
+
+<FileTree>
+  <FileTree.Folder name="frontend" defaultOpen>
+    <FileTree.Folder name="admin" defaultOpen>
+      <FileTree.Folder name="{your_plugin_code}" defaultOpen>
+        <FileTree.Folder name="views" defaultOpen>
+          <FileTree.Folder name="categories" defaultOpen>
+            <FileTree.File name="categories-view.tsx" />
+          </FileTree.Folder>
+        </FileTree.Folder>
+        <FileTree.File name="...other files and folders" />
+      </FileTree.Folder>
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+Example: Inside `categories-view.tsx`
+
+```tsx
+export const CategoriesBlogAdminView = () => {
+  return <div>Hi from blog page for categories, but from template!</div>;
+};
+```
+
+and import it in `page.tsx`
+
+```tsx {1, 4}
+import { CategoriesBlogAdminView } from "@/admin/blog/views/categories/categories-view";
+
+export default function Page() {
+  return <CategoriesBlogAdminView />;
+}
+```
+
+<Img
+  src={resultTemplatePageAdminImg}
+  alt="Result page for AdminCP with template"
+/>
+
+</Steps>
