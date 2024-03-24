@@ -12,6 +12,7 @@ import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { currentDate } from "@/functions/date";
 import { DatabaseService } from "@/plugins/database/database.service";
 import { getConfigFile, getCoreInfo } from "@/functions/config/get-config-file";
+import { AuthorizationCurrentUserObj } from "@/plugins/core/sessions/authorization/dto/authorization.obj";
 
 @Injectable()
 export class AuthorizationAdminSessionsService {
@@ -21,7 +22,7 @@ export class AuthorizationAdminSessionsService {
     private configService: ConfigService
   ) {}
 
-  async getAdminNav(): Promise<NavAdminPluginsAuthorization[]> {
+  protected async getAdminNav(): Promise<NavAdminPluginsAuthorization[]> {
     const adminNav = await this.databaseService.db.query.core_plugins.findMany({
       orderBy: (table, { asc }) => asc(table.created),
       columns: {
@@ -37,7 +38,9 @@ export class AuthorizationAdminSessionsService {
     return adminNav.filter(plugin => plugin.nav.length > 0);
   }
 
-  async authorization({ req }: Ctx): Promise<AuthorizationAdminSessionsObj> {
+  async initialAuthorization({
+    req
+  }: Ctx): Promise<AuthorizationCurrentUserObj> {
     const login_token =
       req.cookies[
         this.configService.getOrThrow("cookies.login_token.admin.name")
@@ -74,16 +77,21 @@ export class AuthorizationAdminSessionsService {
       throw new AccessDeniedError();
     }
 
+    return {
+      ...session.user,
+      is_admin: true,
+      is_mod: true
+    };
+  }
+
+  async authorization(ctx: Ctx): Promise<AuthorizationAdminSessionsObj> {
+    const user = await this.initialAuthorization(ctx);
+
     const config = await getConfigFile();
-    const { user } = session;
     const coreInfo = await getCoreInfo();
 
     return {
-      user: {
-        ...user,
-        is_admin: true,
-        is_mod: true
-      },
+      user,
       rebuild_required: config.rebuild_required,
       version: coreInfo.version,
       nav: await this.getAdminNav()

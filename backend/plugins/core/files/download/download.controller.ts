@@ -12,10 +12,16 @@ import {
 import { Request, Response } from "express";
 
 import { InternalAuthorizationCoreSessionsService } from "../../sessions/authorization/internal/internal_authorization.service";
+import { DatabaseService } from "@/plugins/database/database.service";
+import { AuthorizationAdminSessionsService } from "../../admin/sessions/authorization/authorization.service";
 
 @Controller("files")
 export class DownloadFilesController {
-  constructor(private service: InternalAuthorizationCoreSessionsService) {}
+  constructor(
+    private service: InternalAuthorizationCoreSessionsService,
+    private readonly serviceAdmin: AuthorizationAdminSessionsService,
+    private databaseService: DatabaseService
+  ) {}
 
   @Get(":file")
   async getFile(
@@ -35,7 +41,40 @@ export class DownloadFilesController {
       type: file.split(".")[1]
     };
 
-    if (userId) {
+    const user = await this.databaseService.db.query.core_users.findFirst({
+      where: (table, { eq }) => eq(table.id, +userId)
+    });
+
+    if (!user) {
+      res.status(404);
+
+      return;
+    }
+
+    const isAdmin =
+      await this.databaseService.db.query.core_admin_permissions.findFirst({
+        where: (table, { eq, or }) =>
+          or(eq(table.user_id, +userId), eq(table.group_id, user.group_id))
+      });
+
+    if (isAdmin) {
+      try {
+        const data = await this.serviceAdmin.initialAuthorization({
+          req,
+          res
+        });
+
+        if (+userId !== data.id) {
+          res.status(404);
+
+          return;
+        }
+      } catch (e) {
+        res.status(404);
+
+        return;
+      }
+    } else {
       try {
         const data = await this.service.authorization({
           req,
