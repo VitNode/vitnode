@@ -1,0 +1,10 @@
+{
+  "blog": {
+    "admin": {
+      "nav": {
+        "title": "Blog",
+        "categories": "Kategorie"
+      }
+    }
+  }
+}

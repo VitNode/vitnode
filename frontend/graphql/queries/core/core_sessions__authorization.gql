@@ -67,4 +67,7 @@ query Core_sessions__authorization {
       icon
     }
   }
+  core_plugins__show {
+    code
+  }
 }
