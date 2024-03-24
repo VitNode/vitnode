@@ -10,7 +10,7 @@
     "migrate:admin": "drizzle-kit generate:pg --out plugins/core/admin/database/migrations --schema plugins/core/admin/database/schema/*.ts",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
+    "start": "cross-env NODE_ENV=test pnpm config:finish && nest start",
     "dev": "cross-env NODE_ENV=development pnpm config:finish && cross-env NODE_ENV=development nest start --watch",
     "start:debug": "nest start --debug --w",
     "start:prod": "node dist/main",

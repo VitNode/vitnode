@@ -23,48 +23,51 @@ import { db } from "@/plugins/database/client";
   };
   fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), "utf8");
 
-  // Migration for database
-  await migrate(db, {
-    migrationsFolder: join(
-      process.cwd(),
-      "plugins",
-      "core",
-      "admin",
-      "database",
-      "migrations"
-    )
-  });
+  if (process.env.NODE_ENV !== "development") {
+    // Migration for database
+    await migrate(db, {
+      migrationsFolder: join(
+        process.cwd(),
+        "plugins",
+        "core",
+        "admin",
+        "database",
+        "migrations"
+      )
+    });
 
-  fs.readdir(join(process.cwd(), "plugins"), async (err, plugins) => {
-    await Promise.all(
-      plugins
-        .filter(
-          plugin => !["database", "plugins.module.ts", "core"].includes(plugin)
-        )
-        .map(async plugin => {
-          // Check if migration folder exists
-          const migrationPath = join(
-            process.cwd(),
-            "plugins",
-            plugin,
-            "admin",
-            "database",
-            "migrations"
-          );
+    fs.readdir(join(process.cwd(), "plugins"), async (err, plugins) => {
+      await Promise.all(
+        plugins
+          .filter(
+            plugin =>
+              !["database", "plugins.module.ts", "core"].includes(plugin)
+          )
+          .map(async plugin => {
+            // Check if migration folder exists
+            const migrationPath = join(
+              process.cwd(),
+              "plugins",
+              plugin,
+              "admin",
+              "database",
+              "migrations"
+            );
 
-          if (!fs.existsSync(migrationPath)) {
-            return;
-          }
+            if (!fs.existsSync(migrationPath)) {
+              return;
+            }
 
-          // Run migration
-          await migrate(db, {
-            migrationsFolder: migrationPath
-          });
+            // Run migration
+            await migrate(db, {
+              migrationsFolder: migrationPath
+            });
 
-          console.log(`[VitNode] - Running migration for ${plugin}`);
-        })
-    );
-  });
+            console.log(`[VitNode] - Running migration for ${plugin}`);
+          })
+      );
+    });
+  }
 
   // Update plugins
   await updatePlugins({ db });
