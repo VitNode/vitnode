@@ -47,20 +47,21 @@ export class DeleteAdminPluginsService {
     const tables: { getTables: () => string[] } = await import(
       `../../../../${code}/admin/database/functions`
     );
-    Promise.all(
-      tables.getTables().map(async table => {
-        try {
-          await this.databaseService.db.execute(
-            sql.raw(`DROP TABLE IF EXISTS ${table}`)
-          );
-        } catch (error) {
-          throw new CustomError({
-            code: "DELETE_TABLE_ERROR",
-            message: `Error deleting table ${table}`
-          });
-        }
-      })
-    );
+    const deleteQueries = tables
+      .getTables()
+      .filter(el => !el.endsWith("_relations"))
+      .map(table => {
+        return `DROP TABLE IF EXISTS ${table} CASCADE;`;
+      });
+
+    try {
+      await this.databaseService.db.execute(sql.raw(deleteQueries.join(" ")));
+    } catch (error) {
+      throw new CustomError({
+        code: "DELETE_TABLE_ERROR",
+        message: `Error deleting tables for plugin ${code}`
+      });
+    }
 
     this.changeFilesService.changeFilesWhenDelete({ code });
 
