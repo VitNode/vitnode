@@ -1,0 +1,99 @@
+import { Steps } from "nextra/components";
+import { Img } from "@/components/img";
+import { FileTree } from "nextra/components";
+import { Callout } from "nextra/components";
+import openDevtoolsImg from "@/assets/plugins/open_devtools.png";
+import createNavAdminImg from "@/assets/plugins/create_nav_admin.png";
+import createNavAdminFormImg from "@/assets/plugins/create_nav_admin_form.png";
+import finishNavAdminImg from "@/assets/plugins/finish_create_nav_admin.png";
+
+# Admin Pages
+
+Admin pages are the pages that are shown in the AdminCP. You can create a new page and add it to the AdminCP navigation.
+
+## Navigation
+
+<Steps>
+
+### Open Developer Tools
+
+Open `AdminCP` and go to `Plugins` page. Choose the plugin you want and click on `Developer Tools` tab.
+
+<Img src={openDevtoolsImg} alt="Open Developer Tool for Plugin" />
+
+### Create Navigation
+
+Inside the `Developer Tools` tab, you will see the `Navigation in AdminCP` tab. Click on it to see the navigation of the plugin and click on `Create` button to create a new navigation.
+
+<Img
+  src={createNavAdminImg}
+  alt="Create button for navigation in Developer Tools Plugin"
+/>
+
+### Fill the form
+
+Fill the form with the required information and click on `Create` button to create the navigation.
+
+<Img
+  src={createNavAdminFormImg}
+  alt="Form for navigation in Developer Tools Plugin"
+/>
+
+### Translation (i18n)
+
+As you can see, the title of plugin and navigation item is a language key. You can add the language key inside the `langs` folder in `{your_plugin_code}.json` file in the frontend.
+
+<FileTree>
+  <FileTree.Folder name="frontend" defaultOpen>
+    <FileTree.Folder name="langs" defaultOpen>
+      <FileTree.Folder name="en" defaultOpen>
+        <FileTree.File name="{your_plugin_code}.json" />
+      </FileTree.Folder>
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+<Callout type="info" emoji="ℹ️">
+  If you have more than one language, you have to create a new file for each
+  language. For example, if you have `en` and `pl` languages, you have to create
+  `en/{your_plugin_code}.json` and `pl/{your_plugin_code}.json` files.
+</Callout>
+
+#### Language Keys
+
+- Title - key is always `{your_plugin_code}.admin.nav.title`. For example: `blog.admin.nav.title`,
+- Navigation item - key is always `{your_plugin_code}.admin.nav.{navigation_item_name}`. For example: `blog.admin.nav.categories`.
+
+Here is an example of the language keys:
+
+```json
+{
+  "blog": {
+    "admin": {
+      "nav": {
+        "title": "Blog",
+        "categories": "Categories"
+      }
+    }
+  }
+}
+```
+
+Now you can see your navigation item in the AdminCP.
+
+<Img
+  src={finishNavAdminImg}
+  alt="Finish creating navigation in Developer Tools Plugin"
+/>
+
+</Steps>
+
+## Page
+
+<Steps>
+
+### Test
+
+test
+
+</Steps>
