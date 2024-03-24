@@ -1,4 +1,4 @@
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export enum AdminCoreApiTags {
   Admin__Core_Plugins__Show__Item = "Admin__Core_Plugins__Show__Item",
@@ -13,4 +13,5 @@ export const cleanAdminCorePluginsCache = () => {
   revalidateTag(AdminCoreApiTags.Admin__Core_Plugins__Show__Item);
   revalidateTag(AdminCoreApiTags.Admin__Core_Plugins__Show);
   revalidateTag(CoreApiTags.Core_Sessions__Authorization);
+  revalidatePath("/", "layout");
 };
