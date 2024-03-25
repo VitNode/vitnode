@@ -1,0 +1,67 @@
+import { Steps } from "nextra/components";
+import { Callout } from "nextra/components";
+
+# GraphQL
+
+VitNode use [GraphQL](https://graphql.org/) to query and mutate data and [Codegen](https://the-guild.dev/graphql/codegen) to generate typescript types. It's a powerful tool that allows you to query only the data you need and get the data in the shape you want.
+
+Before we start, we're recomending you to read the [GraphQL documentation](https://graphql.org/learn/) to understand the basics of the language and [NestJS GraphQL documentation](https://docs.nestjs.com/graphql/quick-start) to understand how we're using it in VitNode.
+
+In this tutorial we're create a simple query and mutation with the categories data and [Internationalization (i18n)](/plugins/i18n) from the blog plugin.
+
+## Module
+
+<Steps>
+
+### Create
+
+To save consistency and make it easier to maintain, we're going to create a module to store all the queries and mutations involvin the categories of the blog. Each feature should have its own module.
+
+For example if you have `blogs_categories` and `blogs_articles` in the database, you should have two modules, one for each feature.
+
+Let's create a new file in the `backend/plugins/blog/categories/categories.module.ts` file and add the following code:
+
+```ts
+import { Module } from "@nestjs/common";
+
+@Module({
+  providers: []
+})
+export class BlogCategoriesModule {}
+```
+
+Name class whatever you want, but it's a good practice to name it after the feature you're working on.
+
+### Import to the main module
+
+Now we need to import the module we just created to the main module of the blog plugin. Open the `backend/plugins/blog/blog.module.ts` file and add the following code:
+
+```ts {4, 7}
+import { Module } from "@nestjs/common";
+
+import { AdminBlogModule } from "./admin/admin.module";
+import { BlogCategoriesModule } from "./categories/categories.module";
+
+@Module({
+  imports: [AdminBlogModule, BlogCategoriesModule]
+})
+export class BlogModule {}
+```
+
+</Steps>
+
+## Query
+
+As an example, we're going to create a query to get all the categories from the blog plugin.
+
+<Steps>
+
+### Create a folder
+
+test
+
+</Steps>
+
+## Mutation
+
+test
