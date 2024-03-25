@@ -1,4 +1,10 @@
-import { pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core";
+import {
+  integer,
+  pgTable,
+  serial,
+  timestamp,
+  varchar
+} from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
 import { blog_articles } from "./articles";
@@ -7,7 +13,8 @@ import { core_languages } from "@/plugins/core/admin/database/schema/languages";
 
 export const blog_categories = pgTable("blog_categories", {
   id: serial("id").primaryKey(),
-  created: timestamp("created").notNull().defaultNow()
+  created: timestamp("created").notNull().defaultNow(),
+  position: integer("position").notNull().default(0)
 });
 
 export const blog_categories_relations = relations(

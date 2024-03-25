@@ -27,6 +27,25 @@ export class DeleteAdminPluginsService {
     }
   }
 
+  protected async deleteMigration({ code }: { code: string }) {
+    const migrationPath = pluginPaths({ code }).backend.database_migration_info;
+    const migrationData: { entries: { when: number }[] } = JSON.parse(
+      fs.readFileSync(migrationPath, "utf-8")
+    );
+    const deleteQueries = migrationData.entries.map(entry => {
+      return `DELETE FROM drizzle.__drizzle_migrations WHERE created_at = ${entry.when};`;
+    });
+
+    try {
+      await this.databaseService.db.execute(sql.raw(deleteQueries.join(" ")));
+    } catch (error) {
+      throw new CustomError({
+        code: "DELETE_TABLE_ERROR",
+        message: `Error deleting migration for plugin ${code}`
+      });
+    }
+  }
+
   async delete({ code }: DeleteAdminPluginsArgs): Promise<string> {
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
       where: (table, { eq }) => eq(table.code, code)
@@ -115,6 +134,7 @@ export class DeleteAdminPluginsService {
     await this.databaseService.db
       .delete(core_plugins)
       .where(eq(core_plugins.code, code));
+    await this.deleteMigration({ code });
 
     await setRebuildRequired({ set: "plugins" });
 
