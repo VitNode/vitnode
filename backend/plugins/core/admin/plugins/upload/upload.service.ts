@@ -4,6 +4,7 @@ import * as fs from "fs";
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 import { eq } from "drizzle-orm";
+import { migrate } from "drizzle-orm/node-postgres/migrator";
 
 import { ShowAdminPlugins } from "../show/dto/show.obj";
 import { UploadAdminPluginsArgs } from "./dto/upload.args";
@@ -270,7 +271,7 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
     // Create plugin folder
     await this.createPluginBackend({ config, upload_new_version: !!code });
     await this.createPluginFrontend({ config });
-    // await this.removeTempFolder();
+    await this.removeTempFolder();
 
     if (code) {
       const plugins = await this.databaseService.db
@@ -313,6 +314,13 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
       db: this.databaseService.db,
       id: plugin.id,
       config
+    });
+
+    // Run migration
+    const migrationPath = pluginPaths({ code: config.code }).backend
+      .database_migration;
+    await migrate(this.databaseService.db, {
+      migrationsFolder: migrationPath
     });
 
     return plugin;

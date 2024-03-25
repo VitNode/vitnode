@@ -63,6 +63,7 @@ export class DeleteAdminPluginsService {
     }
 
     // Drop tables
+    await this.deleteMigration({ code });
     const tables: { getTables: () => string[] } = await import(
       `../../../../${code}/admin/database/functions`
     );
@@ -134,7 +135,6 @@ export class DeleteAdminPluginsService {
     await this.databaseService.db
       .delete(core_plugins)
       .where(eq(core_plugins.code, code));
-    await this.deleteMigration({ code });
 
     await setRebuildRequired({ set: "plugins" });
 
