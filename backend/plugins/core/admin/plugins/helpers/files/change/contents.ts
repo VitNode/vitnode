@@ -18,7 +18,7 @@ export const changeModuleRootSchema = ({
     )
     .replace(
       "\n    // ! === MODULE ===",
-      `,\n    ${name}Module\n    // ! === MODULE ===`
+      `\n    ${name}Module,\n    // ! === MODULE ===`
     );
 };
 
@@ -40,6 +40,6 @@ export const changeDatabaseService = ({
     )
     .replace(
       "\n  // ! === MODULE ===",
-      `,\n  ...table${name}\n  // ! === MODULE ===`
+      `\n  ...table${name},\n  // ! === MODULE ===`
     );
 };
