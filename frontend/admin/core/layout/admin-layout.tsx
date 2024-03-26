@@ -12,7 +12,7 @@ export const AdminLayout = ({ children }: Props) => {
     <>
       <NavAdmin />
       <HeaderAdmin />
-      <main className="sm:ml-60 mt-16 p-5 rounded-l-lg border bg-card text-card-foreground shadow-sm">
+      <main className="sm:ml-64 mt-16 p-5 text-card-foreground">
         {children}
       </main>
     </>

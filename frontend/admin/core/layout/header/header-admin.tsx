@@ -5,7 +5,7 @@ import { CONFIG } from "@/config";
 
 export const HeaderAdmin = () => {
   return (
-    <header className="h-16 fixed top-0 left-0 right-0 sm:ml-60 z-20 bg-background/75 backdrop-blur flex items-center gap-4 justify-between px-5">
+    <header className="h-16 fixed top-0 left-0 right-0 sm:ml-64 z-20 bg-card/75 border-b backdrop-blur flex items-center gap-4 justify-between px-5">
       {CONFIG.node_development && (
         <div
           className="absolute top-0 left-0 w-full h-1 z-50"

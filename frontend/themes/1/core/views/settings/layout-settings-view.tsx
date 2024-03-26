@@ -13,7 +13,11 @@ export default function LayoutSettingsView({ children }: Props) {
 
   return (
     <>
-      <HeaderContent h2={t("settings.title")} desc={t("settings.desc")} />
+      <HeaderContent
+        className="mb-5"
+        h2={t("settings.title")}
+        desc={t("settings.desc")}
+      />
 
       <div className="lg:gap-8 flex flex-col lg:flex-row gap-4">
         <NavSettings />
