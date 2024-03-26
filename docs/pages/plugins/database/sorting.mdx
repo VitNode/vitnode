@@ -19,37 +19,22 @@ We will create a `DTO` to create arguments values for the query.
 
 <Steps>
 
-### Initialize
-
-File: `show/dto/show-core_members.args.ts`
-
-Arguments used as container for fields to create query in GraphQL schema.
-
-```ts
-import { ArgsType, Field, Int } from "@nestjs/graphql";
-
-@ArgsType()
-export class ShowCoreMembersArgs {}
-```
-
 ### Create a enum
 
-To restrict sorting by selected columns you have to create a enum.
+Inside `show/dto/show.args.ts` file create a enum to restrict the sorting columns.
 
 ```ts
-enum ShowCoreMembersSortingColumnEnum {
-  name = "name",
-  joined = "joined",
-  first_name = "first_name",
-  last_name = "last_name",
-  posts = "posts",
-  followers = "followers",
-  reactions = "reactions"
+enum ShowBlogCategoriesSortingColumnEnum {
+  created = "created",
+  updated = "updated"
 }
 ```
 
 <Callout type="warning" emoji="⚠️">
-  Remember to export the enum. It will be used in the next steps.
+  Enum name should be unique. If you have multiple enums in the same file, make sure to give them unique names.
+
+Remember to export the enum. It will be used in the next steps.
+
 </Callout>
 
 ### Register the enum
@@ -59,8 +44,8 @@ NestJS require to register the enum in the GraphQL schema. You can read more in 
 ```ts
 import { registerEnumType } from "@nestjs/graphql";
 
-registerEnumType(ShowCoreMembersSortingColumnEnum, {
-  name: "ShowCoreMembersSortingColumnEnum"
+registerEnumType(ShowBlogCategoriesSortingColumnEnum, {
+  name: "ShowBlogCategoriesSortingColumnEnum"
 });
 ```
 
@@ -75,8 +60,8 @@ import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 @InputType()
 class SortByArgs {
-  @Field(() => ShowCoreMembersSortingColumnEnum)
-  column: ShowCoreMembersSortingColumnEnum;
+  @Field(() => ShowBlogCategoriesSortingColumnEnum)
+  column: ShowBlogCategoriesSortingColumnEnum;
 
   @Field(() => SortDirectionEnum)
   direction: SortDirectionEnum;
@@ -97,165 +82,37 @@ export class ShowCoreMembersArgs {
 }
 ```
 
-### Complite example
-
-```ts
-import { ArgsType, Field, InputType, registerEnumType } from "@nestjs/graphql";
-
-import { SortDirectionEnum } from "@/types/database/sortDirection.type";
-
-enum ShowCoreMembersSortingColumnEnum {
-  name = "name",
-  joined = "joined",
-  first_name = "first_name",
-  last_name = "last_name",
-  posts = "posts",
-  followers = "followers",
-  reactions = "reactions"
-}
-
-registerEnumType(ShowCoreMembersSortingColumnEnum, {
-  name: "ShowCoreMembersSortingColumnEnum"
-});
-
-@InputType()
-class SortByArgs {
-  @Field(() => ShowCoreMembersSortingColumnEnum)
-  column: ShowCoreMembersSortingColumnEnum;
-
-  @Field(() => SortDirectionEnum)
-  direction: SortDirectionEnum;
-}
-
-@ArgsType()
-export class ShowCoreMembersArgs {
-  @Field(() => [SortByArgs], { nullable: true })
-  sortBy: SortByArgs[] | null;
-}
-```
-
 </Steps>
 
-## Query GraphQL
+## Service
 
-<Steps>
-### Service
+Inside service in `show/show.service.ts` file you have to add the `sortBy` argument to the `show` method.
 
-File: `show/show-core_members.service.ts`
-
-Inside service file we will create a `show` method that will return a `ShowCoreMembersObj` object.
-
-```ts
-import { Injectable } from "@nestjs/common";
-
-import { ShowCoreMembersObj } from "./dto/show-core_members.obj";
-import { ShowCoreMembersArgs } from "./dto/show-core_members.args";
-
-import { DatabaseService } from "@/database/database.service";
-
+```ts {9, 22}
 @Injectable()
-export class ShowCoreMembersService {
-  constructor(private databaseService: DatabaseService) {}
-
-  async show({ sortBy }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {}
-}
-```
-
-### Query from database
-
-To the `inputPaginationCursor()` function you have to pass the `sortBy` argument.
-
-```ts {10-14}
-import { inputPaginationCursor } from "@/functions/database/pagination";
-
-const pagination = await inputPaginationCursor({
-  cursor,
-  database: core_users,
-  databaseService: this.databaseService,
-  first,
-  last,
-  primaryCursor: { order: "ASC", key: "id", schema: core_users.id },
-  defaultSortBy: {
-    direction: SortDirectionEnum.desc,
-    column: "joined"
-  },
-  sortBy
-});
-```
-
-### Complite example
-
-```ts
-import { Injectable } from "@nestjs/common";
-import { and, count, eq, ilike, or } from "drizzle-orm";
-
-import { ShowCoreMembersObj } from "./dto/show.obj";
-import { ShowCoreMembersArgs } from "./dto/show.args";
-
-import { DatabaseService } from "@/database/database.service";
-import {
-  inputPaginationCursor,
-  outputPagination
-} from "@/functions/database/pagination";
-import { core_users } from "@/src/apps/admin/core/database/schema/users";
-import { SortDirectionEnum } from "@/types/database/sortDirection.type";
-
-@Injectable()
-export class ShowCoreMembersService {
+export class ShowBlogCategoriesService {
   constructor(private databaseService: DatabaseService) {}
 
   async show({
     cursor,
     first,
     last,
-    name_seo,
-    search,
     sortBy
-  }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
+  }: ShowBlogCategoriesArgs): Promise<ShowBlogCategoriesObj> {
     const pagination = await inputPaginationCursor({
       cursor,
-      database: core_users,
+      database: blog_categories,
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: "ASC", key: "id", schema: core_users.id },
+      primaryCursor: { order: "ASC", key: "id", schema: blog_categories.id },
       defaultSortBy: {
-        direction: SortDirectionEnum.desc,
-        column: "joined"
+        direction: SortDirectionEnum.asc,
+        column: "position"
       },
       sortBy
     });
 
-    const where = or(
-      eq(core_users.name_seo, name_seo),
-      or(
-        ilike(core_users.name, `%${search}%`),
-        ilike(core_users.email, `%${search}%`),
-        Number(search) ? eq(core_users.id, Number(search)) : undefined
-      )
-    );
-
-    const edges = await this.databaseService.db.query.core_users.findMany({
-      ...pagination,
-      where: and(pagination.where, where),
-      with: {
-        avatar: true,
-        group: {
-          with: {
-            name: true
-          }
-        }
-      }
-    });
-
-    const totalCount = await this.databaseService.db
-      .select({ count: count() })
-      .from(core_users)
-      .where(where);
-
-    return outputPagination({ edges, totalCount, first, cursor, last });
+    ...
   }
-}
 ```
-
-</Steps>
