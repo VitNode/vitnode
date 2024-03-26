@@ -8,11 +8,11 @@ export class ShowBlogCategories {
   @Field(() => Int)
   id: number;
 
-  @Field(() => TextLanguage)
-  name: TextLanguage;
+  @Field(() => [TextLanguage])
+  title: TextLanguage[];
 
-  @Field(() => TextLanguage, { nullable: true })
-  description: TextLanguage | null;
+  @Field(() => [TextLanguage], { nullable: true })
+  description: TextLanguage[] | null;
 }
 
 @ObjectType()

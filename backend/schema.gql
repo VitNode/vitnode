@@ -277,6 +277,7 @@ type Query {
   admin__install__layout: LayoutAdminInstallObj!
   admin__sessions__authorization: AuthorizationAdminSessionsObj!
   admin__settings__general__show: ShowGeneralAdminSettingsObj!
+  blog_categories__show(cursor: Int, first: Int, last: Int): ShowBlogCategoriesObj!
   core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowCoreLanguagesSortByArgs!]): ShowCoreLanguagesObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
@@ -476,6 +477,17 @@ input ShowAdminThemesSortByArgs {
 
 enum ShowAdminThemesSortingColumnEnum {
   created
+}
+
+type ShowBlogCategories {
+  description: [TextLanguage!]
+  id: Int!
+  title: [TextLanguage!]!
+}
+
+type ShowBlogCategoriesObj {
+  edges: [ShowBlogCategories!]!
+  pageInfo: PageInfo!
 }
 
 type ShowCoreLanguages {
