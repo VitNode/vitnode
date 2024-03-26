@@ -11,9 +11,13 @@ VitNode use [Drizzle ORM](https://orm.drizzle.team/) to manage database. Drizzle
 After [created plugin](/plugins/overview#create-a-plugin) you can find `plugins/{your_plugin}/admin/database` folder.
 
 <FileTree>
-  <FileTree.Folder name="{your_plugin}" defaultOpen>
-    <FileTree.Folder name="admin" defaultOpen>
-      <FileTree.Folder name="database" defaultOpen />
+  <FileTree.Folder name="backend" defaultOpen>
+    <FileTree.Folder name="plugins" defaultOpen>
+      <FileTree.Folder name="{your_plugin}" defaultOpen>
+        <FileTree.Folder name="admin" defaultOpen>
+          <FileTree.Folder name="database" defaultOpen />
+        </FileTree.Folder>
+      </FileTree.Folder>
     </FileTree.Folder>
   </FileTree.Folder>
 </FileTree>
@@ -28,11 +32,15 @@ Inside `database` folder go to `schema` folder _(If is your first schema, create
 Here is example file tree after created `posts` file:
 
 <FileTree>
-  <FileTree.Folder name="{your_plugin}" defaultOpen>
-    <FileTree.Folder name="admin" defaultOpen>
-      <FileTree.Folder name="database" defaultOpen>
-        <FileTree.Folder name="schema" defaultOpen>
-          <FileTree.File name="posts.ts" />
+  <FileTree.Folder name="backend" defaultOpen>
+    <FileTree.Folder name="plugins" defaultOpen>
+      <FileTree.Folder name="{your_plugin}" defaultOpen>
+        <FileTree.Folder name="admin" defaultOpen>
+          <FileTree.Folder name="database" defaultOpen>
+            <FileTree.Folder name="schema" defaultOpen>
+              <FileTree.File name="posts.ts" />
+            </FileTree.Folder>
+          </FileTree.Folder>
         </FileTree.Folder>
       </FileTree.Folder>
     </FileTree.Folder>

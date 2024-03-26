@@ -15,7 +15,7 @@ In this tutorial we're create a simple query and mutation with the categories da
 
 ### Create
 
-To save consistency and make it easier to maintain, we're going to create a module to store all the queries and mutations involvin the categories of the blog. Each feature should have its own module.
+To save consistency and make it easier to maintain, we're going to create a module to store all the queries and mutations involvin the categories of the blog. Each sub-module should have its own module.
 
 For example if you have `blogs_categories` and `blogs_articles` in the database, you should have two modules, one for each feature.
 
@@ -24,9 +24,7 @@ Let's create a new file in the `backend/plugins/blog/categories/categories.modul
 ```ts
 import { Module } from "@nestjs/common";
 
-@Module({
-  providers: []
-})
+@Module({})
 export class BlogCategoriesModule {}
 ```
 
@@ -57,6 +55,157 @@ As an example, we're going to create a query to get all the categories from the 
 <Steps>
 
 ### Create a folder
+
+Each action should have its own folder. For example if you have a query to get all the categories, you should create a folder called `show` or if you have a mutation to create a category, you should create a folder called `create` inside the `backend/plugins/blog/categories` folder.
+
+Now, create a folder called `show` inside the `backend/plugins/blog/categories` folder.
+
+### Service
+
+Create a file called `show.service.ts` inside the `backend/plugins/blog/categories/show` folder and add the following code:
+
+```ts
+import { Injectable } from "@nestjs/common";
+
+@Injectable()
+export class ShowBlogCategoriesService {}
+```
+
+Class name should be whatever you want, but it's a good practice to name `{Action}{Plugin}{Module}Service`.
+
+#### Inject the database
+
+If you want to get access to database, you should inject the `DatabaseService` in the constructor of the service.
+
+```ts {3, 7}
+import { Injectable } from "@nestjs/common";
+
+import { DatabaseService } from "@/plugins/database/database.service";
+
+@Injectable()
+export class ShowBlogCategoriesService {
+  constructor(private databaseService: DatabaseService) {}
+}
+```
+
+<Callout type="error" emoji="❌">
+  You can still get data from `core` tables, but __avoid modyfing__ other tables
+  from outside the plugin.
+</Callout>
+
+#### Import service to the module
+
+Now we need to inject the service to the module. Open the `backend/plugins/blog/categories/categories.module.ts` file and add the following code:
+
+```ts {3, 6}
+import { Module } from "@nestjs/common";
+
+import { ShowBlogCategoriesService } from "./show/show.service";
+
+@Module({
+  providers: [ShowBlogCategoriesService]
+})
+export class BlogCategoriesModule {}
+```
+
+### Mapped Types (DTO)
+
+DTO (Data Transfer Object) is a class that defines how the data will be sent over the network. See [NestJS Mapped Types](https://docs.nestjs.com/graphql/mapped-types) for more information.
+
+Create the `backend/plugins/blog/categories/show/dto` folder.
+
+<Callout type="warning" emoji="⚠️">
+  NestJS GraphQL automaticly generates schema from the DTO classes. Make sure to
+  each class has a unique name.
+</Callout>
+
+#### Arguments DTO (Input)
+
+Create a file called `show.args.ts` inside the `backend/plugins/blog/categories/show/dto` folder and add the following code:
+
+```ts
+import { ArgsType, Field, Int } from "@nestjs/graphql";
+
+@ArgsType()
+export class ShowBlogCategoriesArgs {
+  @Field(() => Int, { nullable: true })
+  cursor: number | null;
+
+  @Field(() => Int, { nullable: true })
+  first: number | null;
+
+  @Field(() => Int, { nullable: true })
+  last: number | null;
+}
+```
+
+Class name should be unique. For example `{Action}{Plugin}{Module}Args`.
+
+#### Objects DTO (Output)
+
+Create a file called `show.obj.ts` inside the `backend/plugins/blog/categories/show/dto` folder and add the following code:
+
+```ts
+import { Field, Int, ObjectType } from "@nestjs/graphql";
+
+import { PageInfo } from "@/types/database/pagination.type";
+import { TextLanguage } from "@/types/database/text-language.type";
+
+@ObjectType()
+export class ShowBlogCategories {
+  @Field(() => Int)
+  id: number;
+
+  @Field(() => TextLanguage)
+  name: TextLanguage;
+
+  @Field(() => TextLanguage, { nullable: true })
+  description: TextLanguage | null;
+}
+
+@ObjectType()
+export class ShowBlogCategoriesObj {
+  @Field(() => [ShowBlogCategories])
+  edges: ShowBlogCategories[];
+
+  @Field(() => PageInfo)
+  pageInfo: PageInfo;
+}
+```
+
+Class name should be unique. For example `{Action}{Plugin}{Module}Obj`.
+
+In this example we use [Pagination with Database](/plugins/database/pagination).
+
+#### Import DTO to the Service
+
+Now import the `ShowBlogCategoriesArgs` and `ShowBlogCategoriesObj` to the `ShowBlogCategoriesService`.
+
+```ts {3-4, 12-16}
+import { Injectable } from "@nestjs/common";
+
+import { ShowBlogCategoriesArgs } from "./dto/show.args";
+import { ShowBlogCategoriesObj } from "./dto/show.obj";
+
+import { DatabaseService } from "@/plugins/database/database.service";
+
+@Injectable()
+export class ShowBlogCategoriesService {
+  constructor(private databaseService: DatabaseService) {}
+
+  async show({
+    cursor,
+    first,
+    last
+  }: ShowBlogCategoriesArgs): Promise<ShowBlogCategoriesObj> {
+    ...
+  }
+}
+```
+
+If you want to know how to implement `show` method, see [Pagination with Database](/plugins/database/pagination).
+
+### Resolver
 
 test
 
