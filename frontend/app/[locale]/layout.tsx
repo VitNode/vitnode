@@ -22,20 +22,23 @@ export default async function LocaleLayout({
   children,
   params: { locale }
 }: Props) {
-  let messages: AbstractIntlMessages = {};
+  const defaultPlugins = [{ code: "core", name: "admin" }];
 
   try {
-    const { data, plugins } = await getSessionData();
+    const { data } = await getSessionData();
 
     const messagesFormApps = await Promise.all(
-      plugins.map(async plugin => {
+      (data
+        ? [...data.core_plugins__show, ...defaultPlugins]
+        : defaultPlugins
+      ).map(async plugin => {
         return {
           ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
         };
       })
     );
 
-    messages = {
+    const messages: AbstractIntlMessages = {
       ...messagesFormApps.reduce(
         (acc, messages) => ({ ...acc, ...messages }),
         {}
@@ -56,6 +59,21 @@ export default async function LocaleLayout({
       </html>
     );
   } catch (error) {
+    const messagesFormApps = await Promise.all(
+      defaultPlugins.map(async plugin => {
+        return {
+          ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
+        };
+      })
+    );
+
+    const messages: AbstractIntlMessages = {
+      ...messagesFormApps.reduce(
+        (acc, messages) => ({ ...acc, ...messages }),
+        {}
+      )
+    };
+
     return (
       <html lang={locale} className={inter.variable}>
         <body>

@@ -4,8 +4,8 @@ import tableBlog from "../blog/admin/database/index";
 // ! === IMPORT ===
 
 export const schemaDatabase = {
-  ...tableCore,
   ...tableForum,
-  ...tableBlog
+  ...tableBlog,
   // ! === MODULE ===
+  ...tableCore
 };

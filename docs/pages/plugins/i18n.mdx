@@ -107,7 +107,7 @@ export class CreateAdminNavArgs {
 
 If you want to change this field to `required`, you have to add some decorators form `class-validator`.
 
-```ts {2, 13-15}
+```ts {2, 13-19}
 import { ArgsType, Field } from "@nestjs/graphql";
 import { ArrayMinSize, IsArray, ValidateNested } from "class-validator";
 import { Transform } from "class-transformer";

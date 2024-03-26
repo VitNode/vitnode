@@ -4,6 +4,7 @@ import * as fs from "fs";
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 import { eq } from "drizzle-orm";
+import { migrate } from "drizzle-orm/node-postgres/migrator";
 
 import { ShowAdminPlugins } from "../show/dto/show.obj";
 import { UploadAdminPluginsArgs } from "./dto/upload.args";
@@ -139,6 +140,25 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
     }
   }
 
+  protected async copyFileToPluginFolder({
+    destination,
+    source
+  }: {
+    destination: string;
+    source: string;
+  }): Promise<void> {
+    if (!fs.existsSync(source)) return;
+
+    try {
+      await fs.promises.copyFile(source, destination);
+    } catch (error) {
+      throw new CustomError({
+        code: "COPY_FILE_TO_PLUGIN_FOLDER_ERROR",
+        message: `Source: ${source}, Destination: ${destination}`
+      });
+    }
+  }
+
   protected async createPluginFrontend({
     config
   }: {
@@ -193,16 +213,22 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
         }
       });
     languages.forEach(lang => {
-      const source = join(this.tempPath, "frontend", "langs");
+      const source = join(
+        this.tempPath,
+        "frontend",
+        "langs",
+        `${config.code}.json`
+      );
       const destination = join(
         process.cwd(),
         "..",
         "frontend",
         "langs",
-        lang.code
+        lang.code,
+        `${config.code}.json`
       );
 
-      return this.copyFilesToPluginFolder({ source, destination });
+      this.copyFileToPluginFolder({ source, destination });
     });
   }
 
@@ -288,6 +314,13 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
       db: this.databaseService.db,
       id: plugin.id,
       config
+    });
+
+    // Run migration
+    const migrationPath = pluginPaths({ code: config.code }).backend
+      .database_migration;
+    await migrate(this.databaseService.db, {
+      migrationsFolder: migrationPath
     });
 
     return plugin;

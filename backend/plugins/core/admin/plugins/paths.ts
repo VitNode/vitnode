@@ -9,6 +9,14 @@ export const pluginPaths = ({ code }: { code: string }) => {
       root: backend_root,
       database_schema: join(backend_root, "admin", "database", "schema"),
       database_migration: join(backend_root, "admin", "database", "migrations"),
+      database_migration_info: join(
+        backend_root,
+        "admin",
+        "database",
+        "migrations",
+        "meta",
+        "_journal.json"
+      ),
       versions: join(backend_root, "versions.json"),
       info: join(backend_root, "plugin.json")
     },

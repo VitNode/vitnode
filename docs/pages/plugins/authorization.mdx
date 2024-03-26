@@ -1,5 +1,3 @@
-import { Callout } from 'nextra/components';
-
 # Authorization
 
 In VitNode we're implementing a custom authorization system, which gives us more flexibility and control over the authorization process. Our system use [Guards](https://docs.nestjs.com/guards) from NestJS to protect routes.
@@ -11,7 +9,7 @@ To protect a route, you need to add the `@UseGuards(AuthGuards)` decorator to th
 Here is an example for resolver:
 
 ```ts {1, 4}
-import { AuthGuards } from '@/utils/guards/auth.guards';
+import { AuthGuards } from "@/utils/guards/auth.guard";
 
 @Query(() => ShowCoreMembersObj)
 @UseGuards(AuthGuards)
@@ -20,10 +18,19 @@ async core_members__show(@Args() args: ShowCoreMembersArgs): Promise<ShowCoreMem
 }
 ```
 
-<Callout type="info" emoji="ℹ️">
-  If you need to protected a route with admin permissions you need to use the
-  `@UseGuards(AdminAuthGuards)` decorator.
-</Callout>
+### Admin protected route
+
+If you need to protect a route with `admin` permissions you need to use the `@UseGuards(AdminAuthGuards)` decorator.
+
+```ts {1, 4}
+import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
+
+@Query(() => ShowCoreMembersObj)
+@UseGuards(AdminAuthGuards)
+async core_members__show(@Args() args: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
+  return await this.service.show(args);
+}
+```
 
 ## Current user data
 
@@ -42,12 +49,12 @@ async core_members__show(
 }
 ```
 
-## Current user data withouth protected route
+## Current user data without protected route
 
 If you need to access to the current user in a route you need use the `@OptionalAuth()` decorator in route. You need change `@CurrentUser()` decorator to optional param route.
 
 ```ts {1-2, 5-6, 9}
-import { AuthGuards, OptionalAuth } from '@/utils/guards/auth.guards';
+import { AuthGuards, OptionalAuth } from "@/utils/guards/auth.guard";
 import { CurrentUser, User } from '@/utils/decorators/user.decorator';
 
 @Query(() => ShowCoreMembersObj)

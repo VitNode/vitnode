@@ -10,9 +10,9 @@ export const removeModuleFromRootSchema = ({
   const name = changeCodePluginToCapitalLetters(code);
 
   return content
-    .replace(`\n    ${name}Module`, "")
-    .replace(`\nimport { ${name}Module } from "./${code}/${code}.module";`, "")
-    .replace(`,\n    // ! === MODULE ===`, "\n    // ! === MODULE ===");
+    .replace(`\n    ${name}Module,`, "")
+    .replace(`\nimport { ${name}Module } from "./${code}/${code}.module";`, "");
+  // .replace(`,\n    // ! === MODULE ===`, "\n    // ! === MODULE ===");
 };
 
 export const removeDatabaseFromService = ({
@@ -25,10 +25,10 @@ export const removeDatabaseFromService = ({
   const name = changeCodePluginToCapitalLetters(code);
 
   return content
-    .replace(`\n  ...table${name}`, "")
+    .replace(`\n  ...table${name},`, "")
     .replace(
       `\nimport table${name} from "../${code}/admin/database/index";`,
       ""
-    )
-    .replace(`,\n  // ! === MODULE ===`, "\n  // ! === MODULE ===");
+    );
+  // .replace(`,\n  // ! === MODULE ===`, "\n  // ! === MODULE ===");
 };

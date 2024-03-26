@@ -7,10 +7,10 @@ import { BlogModule } from "./blog/blog.module";
 
 @Module({
   imports: [
-    CoreModule,
     ForumModule,
-    BlogModule
+    BlogModule,
     // ! === MODULE ===
+    CoreModule
   ]
 })
 export class PluginsModule {}

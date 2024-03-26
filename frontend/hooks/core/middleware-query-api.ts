@@ -8,12 +8,16 @@ import {
 } from "@/graphql/hooks";
 
 export const middlewareQueryApi = async () => {
-  const { data } = await fetcher<
-    Core_MiddlewareQuery,
-    Core_MiddlewareQueryVariables
-  >({
-    query: Core_Middleware
-  });
+  try {
+    const { data } = await fetcher<
+      Core_MiddlewareQuery,
+      Core_MiddlewareQueryVariables
+    >({
+      query: Core_Middleware
+    });
 
-  return data;
+    return data;
+  } catch (e) {
+    return null;
+  }
 };
