@@ -2,9 +2,9 @@
 
 import * as SeparatorPrimitive from "@radix-ui/react-separator";
 import {
-  type ComponentPropsWithoutRef,
+  forwardRef,
   type ElementRef,
-  forwardRef
+  type ComponentPropsWithoutRef
 } from "react";
 
 import { cn } from "@/functions/classnames";

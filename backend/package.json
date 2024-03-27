@@ -26,7 +26,7 @@
     "class-validator": "^0.14.1",
     "cookie-parser": "^1.4.6",
     "date-fns": "^3.6.0",
-    "drizzle-orm": "^0.30.4",
+    "drizzle-orm": "^0.30.5",
     "graphql": "^16.8.1",
     "object-path": "^0.11.8",
     "pg": "^8.11.3",

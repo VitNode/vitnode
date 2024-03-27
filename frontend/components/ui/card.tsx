@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/heading-has-content */
 import { forwardRef, type HTMLAttributes } from "react";
 
 import { cn } from "@/functions/classnames";
@@ -7,7 +8,7 @@ const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     <div
       ref={ref}
       className={cn(
-        "rounded-lg border bg-card text-card-foreground shadow-sm",
+        "rounded-xl border bg-card text-card-foreground shadow",
         className
       )}
       {...props}
@@ -20,7 +21,7 @@ const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn("flex flex-col space-y-1.5 p-5", className)}
+      className={cn("flex flex-col space-y-1.5 p-6", className)}
       {...props}
     />
   )
@@ -30,7 +31,7 @@ CardHeader.displayName = "CardHeader";
 const CardTitle = forwardRef<
   HTMLParagraphElement,
   HTMLAttributes<HTMLHeadingElement>
->(({ children, className, ...props }, ref) => (
+>(({ className, ...props }, ref) => (
   <h1
     ref={ref}
     className={cn(
@@ -38,9 +39,7 @@ const CardTitle = forwardRef<
       className
     )}
     {...props}
-  >
-    {children}
-  </h1>
+  />
 ));
 CardTitle.displayName = "CardTitle";
 
@@ -58,7 +57,7 @@ CardDescription.displayName = "CardDescription";
 
 const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn("p-5 pt-0", className)} {...props} />
+    <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
   )
 );
 CardContent.displayName = "CardContent";
@@ -67,10 +66,7 @@ const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn(
-        "flex items-center p-5 pt-0 gap-2 flex-wrap [&>button]:flex-shrink-0",
-        className
-      )}
+      className={cn("flex items-center p-6 pt-0", className)}
       {...props}
     />
   )
