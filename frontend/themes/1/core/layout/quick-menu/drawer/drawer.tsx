@@ -66,7 +66,7 @@ export const DrawerQuickMenu = () => {
           {session.is_mod && (
             <DrawerClose asChild>
               <Link
-                href="/modcp"
+                href="/mod"
                 className={cn(
                   buttonVariants({
                     variant: "ghost",
