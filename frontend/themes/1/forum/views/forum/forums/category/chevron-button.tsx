@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { useWrapperCategoryForum } from "@/hooks/forum/forum/use-wrapper-category-forum";
@@ -12,6 +13,7 @@ interface Props {
 
 export const ChevronCategoryForumButton = ({ id }: Props) => {
   const { open, setOpen } = useWrapperCategoryForum();
+  const t = useTranslations("forum");
 
   return (
     <Button
@@ -19,7 +21,7 @@ export const ChevronCategoryForumButton = ({ id }: Props) => {
       variant="ghost"
       size="icon"
       data-state={open ? "open" : "closed"}
-      ariaLabel=""
+      ariaLabel={t("toggle_category")}
       onClick={() => {
         setOpen(prev => !prev);
         const currentId = id.toString();

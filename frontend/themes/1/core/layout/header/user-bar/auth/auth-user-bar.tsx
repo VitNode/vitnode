@@ -66,7 +66,7 @@ export const AuthUserBar = () => {
 
             <DropdownMenuGroup>
               {is_mod && (
-                <DropdownMenuItem onClick={() => push("/modcp")}>
+                <DropdownMenuItem onClick={() => push("/mod")}>
                   <Shield />
                   <span>{t("user-bar.mod_cp")}</span>
                 </DropdownMenuItem>

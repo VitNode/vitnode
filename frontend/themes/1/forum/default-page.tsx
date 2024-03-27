@@ -38,7 +38,7 @@ export default async function DefaultPage() {
 
   return (
     <div className="container my-4">
-      <HeaderContent className="mt-5" h1={t("forum")} />
+      <HeaderContent className="my-5" h1={t("forum")} />
 
       {edges.length ? (
         <div className="flex flex-col gap-4">
