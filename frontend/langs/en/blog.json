@@ -4,6 +4,9 @@
       "nav": {
         "title": "Blog",
         "categories": "Categories"
+      },
+      "categories": {
+        "title": "Categories"
       }
     }
   }

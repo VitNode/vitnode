@@ -1,10 +1,15 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useTranslations } from "next-intl";
+
+import { HeaderContent } from "@/components/header-content/header-content";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 export const CategoriesBlogAdminView = () => {
+  const t = useTranslations("blog.admin.categories");
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Categories</CardTitle>
+        <HeaderContent h1={t("title")}>test</HeaderContent>
       </CardHeader>
 
       <CardContent>

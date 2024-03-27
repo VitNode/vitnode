@@ -1,13 +1,13 @@
 "use client";
 
+import { Drawer as DrawerPrimitive } from "vaul";
 import {
   forwardRef,
   type ComponentProps,
-  type ComponentPropsWithoutRef,
   type ElementRef,
+  type ComponentPropsWithoutRef,
   type HTMLAttributes
 } from "react";
-import { Drawer as DrawerPrimitive } from "vaul";
 
 import { cn } from "@/functions/classnames";
 

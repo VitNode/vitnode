@@ -15,7 +15,7 @@ interface Props {
   className?: string;
 }
 
-export const DateFormat = forwardRef<HTMLSpanElement, Props>(
+export const DateFormat = forwardRef<HTMLTimeElement, Props>(
   ({ className, date }, ref) => {
     const { currentTime, fullDate, getDateWithFormatDistance } = useDateFormat({
       date
@@ -26,9 +26,13 @@ export const DateFormat = forwardRef<HTMLSpanElement, Props>(
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <span ref={ref} className={className}>
+              <time
+                ref={ref}
+                dateTime={currentTime.toString()}
+                className={className}
+              >
                 {getDateWithFormatDistance()}
-              </span>
+              </time>
             </TooltipTrigger>
             <TooltipContent>
               <span>{fullDate}</span>
@@ -39,9 +43,9 @@ export const DateFormat = forwardRef<HTMLSpanElement, Props>(
     }
 
     return (
-      <span ref={ref} className={className}>
+      <time ref={ref} dateTime={currentTime.toString()} className={className}>
         {fullDate}
-      </span>
+      </time>
     );
   }
 );

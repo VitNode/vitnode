@@ -57,15 +57,15 @@ export const ContentTableLangsCoreAdmin = ({
         header: val => {
           return (
             <HeaderSortingDataTable {...val}>
-              {tCore("table.updated")}
+              {tCore("table.created")}
             </HeaderSortingDataTable>
           );
         },
-        accessorKey: "updated",
+        accessorKey: "created",
         cell: ({ row }) => {
           const data = row.original;
 
-          return <DateFormat date={data.updated} />;
+          return <DateFormat date={data.created} />;
         }
       },
       {
@@ -113,7 +113,7 @@ export const ContentTableLangsCoreAdmin = ({
       searchPlaceholder={t("search_placeholder")}
       defaultPageSize={10}
       defaultSorting={{
-        sortBy: "updated",
+        sortBy: "created",
         sortDirection: "desc"
       }}
       columns={columns}
