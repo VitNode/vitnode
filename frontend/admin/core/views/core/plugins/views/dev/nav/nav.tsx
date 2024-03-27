@@ -11,12 +11,12 @@ export const NavDevPluginAdminView = (
   const t = useTranslations("admin.core.plugins.dev.nav");
 
   return (
-    <div>
-      <HeaderContent h1={t("title")}>
+    <>
+      <HeaderContent className="mb-5" h1={t("title")}>
         <CreateNavDevPluginAdmin />
       </HeaderContent>
 
       <TableNavDevPluginAdmin {...props} />
-    </div>
+    </>
   );
 };

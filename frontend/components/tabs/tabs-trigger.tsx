@@ -33,7 +33,8 @@ export const TabsTrigger = ({
         data-state={dataState}
         className={buttonVariants({
           variant: active ? "default" : "ghost",
-          className: cn(className, "flex-shrink-0")
+          className: cn(className, "flex-shrink-0"),
+          size: "sm"
         })}
         onClick={onClick}
       >
@@ -48,7 +49,8 @@ export const TabsTrigger = ({
       data-state={dataState}
       className={buttonVariants({
         variant: active ? "default" : "ghost",
-        className: cn(className, "flex-shrink-0")
+        className: cn(className, "flex-shrink-0"),
+        size: "sm"
       })}
       onClick={onClick}
     >
