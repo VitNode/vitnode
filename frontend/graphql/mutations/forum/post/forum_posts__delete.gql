@@ -1,0 +1,3 @@
+mutation Forum_posts__delete($id: Int!) {
+  forum_posts__delete(id: $id)
+}
