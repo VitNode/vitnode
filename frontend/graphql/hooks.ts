@@ -191,6 +191,7 @@ export type LayoutAdminInstallObj = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  admin__blog_categories__create: ShowBlogCategories;
   admin__core_groups__delete: Scalars['String']['output'];
   admin__core_groups__edit: ShowAdminGroups;
   admin__core_languages__create: ShowCoreLanguages;
@@ -238,6 +239,12 @@ export type Mutation = {
   forum_topics__actions__lock_toggle: Scalars['Boolean']['output'];
   forum_topics__create: ShowTopicsForums;
   forum_topics__edit: ShowTopicsForums;
+};
+
+
+export type MutationAdmin__Blog_Categories__CreateArgs = {
+  description: Array<TextLanguageInput>;
+  name: Array<TextLanguageInput>;
 };
 
 
@@ -598,6 +605,7 @@ export type Query = {
   admin__install__layout: LayoutAdminInstallObj;
   admin__sessions__authorization: AuthorizationAdminSessionsObj;
   admin__settings__general__show: ShowGeneralAdminSettingsObj;
+  blog_categories__show: ShowBlogCategoriesObj;
   core_languages__show: ShowCoreLanguagesObj;
   core_members__show: ShowCoreMembersObj;
   core_nav__show: ShowCoreNavObj;
@@ -682,6 +690,13 @@ export type QueryAdmin__Forum_Forums__ShowArgs = {
   parent_id?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   show_all_forums?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type QueryBlog_Categories__ShowArgs = {
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -947,6 +962,20 @@ export const ShowAdminThemesSortingColumnEnum = {
 } as const;
 
 export type ShowAdminThemesSortingColumnEnum = typeof ShowAdminThemesSortingColumnEnum[keyof typeof ShowAdminThemesSortingColumnEnum];
+export type ShowBlogCategories = {
+  __typename?: 'ShowBlogCategories';
+  description?: Maybe<Array<TextLanguage>>;
+  id: Scalars['Int']['output'];
+  name: Array<TextLanguage>;
+  position: Scalars['Int']['output'];
+};
+
+export type ShowBlogCategoriesObj = {
+  __typename?: 'ShowBlogCategoriesObj';
+  edges: Array<ShowBlogCategories>;
+  pageInfo: PageInfo;
+};
+
 export type ShowCoreLanguages = {
   __typename?: 'ShowCoreLanguages';
   code: Scalars['String']['output'];
@@ -1532,6 +1561,14 @@ export type Admin__Core_Themes__UploadMutationVariables = Exact<{
 
 
 export type Admin__Core_Themes__UploadMutation = { __typename?: 'Mutation', admin__core_themes__upload: { __typename?: 'ShowAdminThemes', id: number, name: string } };
+
+export type Admin__Blog_Categories__CreateMutationVariables = Exact<{
+  description: Array<TextLanguageInput> | TextLanguageInput;
+  name: Array<TextLanguageInput> | TextLanguageInput;
+}>;
+
+
+export type Admin__Blog_Categories__CreateMutation = { __typename?: 'Mutation', admin__blog_categories__create: { __typename?: 'ShowBlogCategories', id: number } };
 
 export type Core_Members__Sign_UpMutationVariables = Exact<{
   email: Scalars['String']['input'];
@@ -2197,6 +2234,13 @@ export const Admin__Core_Themes__Upload = gql`
   admin__core_themes__upload(file: $file, id: $id) {
     id
     name
+  }
+}
+    `;
+export const Admin__Blog_Categories__Create = gql`
+    mutation Admin__blog_categories__create($description: [TextLanguageInput!]!, $name: [TextLanguageInput!]!) {
+  admin__blog_categories__create(description: $description, name: $name) {
+    id
   }
 }
     `;

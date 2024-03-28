@@ -14,14 +14,15 @@ import { TextLanguageInput } from "@/components/text-language-input";
 import { DialogFooter, DialogHeader } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Editor } from "@/components/editor/editor";
+import type { ShowBlogCategories } from "@/graphql/hooks";
 
 interface Props {
-  data?: unknown;
+  data?: ShowBlogCategories;
 }
 
 export const CreateEditCategoryBlogAdmin = ({ data }: Props) => {
   const t = useTranslations("blog.admin.categories");
-  const { form, onSubmit } = useCreateEditCategoryBlogAdmin();
+  const { form, onSubmit } = useCreateEditCategoryBlogAdmin({ data });
 
   return (
     <>

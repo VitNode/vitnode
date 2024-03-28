@@ -9,10 +9,13 @@ export class ShowBlogCategories {
   id: number;
 
   @Field(() => [TextLanguage])
-  title: TextLanguage[];
+  name: TextLanguage[];
 
   @Field(() => [TextLanguage], { nullable: true })
   description: TextLanguage[] | null;
+
+  @Field(() => Int)
+  position: number;
 }
 
 @ObjectType()

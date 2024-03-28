@@ -15,10 +15,12 @@
           "description": {
             "label": "Description"
           },
+          "success": "Category created successfully",
           "submit": "Create Category"
         },
         "edit": {
           "title": "Edit Category",
+          "success": "Category updated successfully",
           "submit": "Update Category"
         }
       }

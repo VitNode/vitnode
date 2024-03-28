@@ -21,14 +21,14 @@ export const blog_categories_relations = relations(
   blog_categories,
   ({ many }) => ({
     articles: many(blog_articles),
-    title: many(blog_categories_title),
+    name: many(blog_categories_name),
     description: many(blog_categories_description)
   })
 );
 
-export const blog_categories_title = pgTable("blog_categories_title", {
+export const blog_categories_name = pgTable("blog_categories_name", {
   id: serial("id").primaryKey(),
-  category_id: serial("category_id").references(() => blog_categories.id, {
+  category_id: integer("category_id").references(() => blog_categories.id, {
     onDelete: "cascade"
   }),
   language_code: varchar("language_code")
@@ -36,14 +36,14 @@ export const blog_categories_title = pgTable("blog_categories_title", {
     .references(() => core_languages.code, {
       onDelete: "cascade"
     }),
-  value: varchar("value", { length: 50 }).notNull()
+  value: varchar("value", { length: 100 }).notNull()
 });
 
-export const blog_categories_title_relations = relations(
-  blog_categories_title,
+export const blog_categories_name_relations = relations(
+  blog_categories_name,
   ({ one }) => ({
     category: one(blog_categories, {
-      fields: [blog_categories_title.category_id],
+      fields: [blog_categories_name.category_id],
       references: [blog_categories.id]
     })
   })
@@ -53,7 +53,7 @@ export const blog_categories_description = pgTable(
   "blog_categories_description",
   {
     id: serial("id").primaryKey(),
-    category_id: serial("category_id").references(() => blog_categories.id, {
+    category_id: integer("category_id").references(() => blog_categories.id, {
       onDelete: "cascade"
     }),
     language_code: varchar("language_code")
@@ -61,7 +61,7 @@ export const blog_categories_description = pgTable(
       .references(() => core_languages.code, {
         onDelete: "cascade"
       }),
-    value: varchar("value", { length: 150 }).notNull()
+    value: varchar("value").notNull()
   }
 );
 

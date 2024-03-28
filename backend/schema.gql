@@ -162,6 +162,7 @@ type LayoutAdminInstallObj {
 }
 
 type Mutation {
+  admin__blog_categories__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!): ShowBlogCategories!
   admin__core_groups__delete(id: Int!): String!
   admin__core_groups__edit(id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
   admin__core_languages__create(code: String!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
@@ -482,7 +483,8 @@ enum ShowAdminThemesSortingColumnEnum {
 type ShowBlogCategories {
   description: [TextLanguage!]
   id: Int!
-  title: [TextLanguage!]!
+  name: [TextLanguage!]!
+  position: Int!
 }
 
 type ShowBlogCategoriesObj {

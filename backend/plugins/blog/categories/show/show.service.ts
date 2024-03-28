@@ -37,7 +37,7 @@ export class ShowBlogCategoriesService {
     const edges = await this.databaseService.db.query.blog_categories.findMany({
       ...pagination,
       with: {
-        title: true,
+        name: true,
         description: true
       }
     });
