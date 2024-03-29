@@ -24,10 +24,6 @@ export const PostTopic = ({
   user
 }: Props) => {
   const t = useTranslations("forum.topics");
-  const permissions: PermissionsTopicForums = {
-    can_edit: true,
-    can_reply: true
-  };
   return (
     <DivMotion
       key={`post_${id}`}
