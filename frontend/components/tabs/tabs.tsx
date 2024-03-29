@@ -10,7 +10,7 @@ interface Props {
 export const Tabs = ({ children, className }: Props) => {
   return (
     <div className={cn("flex", className)}>
-      <div className="flex items-center justify-center rounded-lg bg-background p-1 text-muted-foreground overflow-x-auto">
+      <div className="flex items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground overflow-x-auto">
         {children}
       </div>
     </div>
