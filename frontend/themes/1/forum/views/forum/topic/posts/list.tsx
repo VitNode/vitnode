@@ -45,7 +45,6 @@ export const ListPosts = ({ className, edges, id, customMoreMenu }: Props) => {
                         state={{ locked: false }}
                         permissions={permissions}
                       />
-                      <h1>{edge.id}</h1>
                     </>
                   }
                 />
