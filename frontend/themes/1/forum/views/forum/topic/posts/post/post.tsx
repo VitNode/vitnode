@@ -6,7 +6,7 @@ import { UserLink } from "@/components/user/link/user-link";
 import { DateFormat } from "@/components/date-format/date-format";
 import { GroupFormat } from "@/components/groups/group-format";
 import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
-import type { PermissionsTopicForums, ShowPostsForums } from "@/graphql/hooks";
+import type { ShowPostsForums } from "@/graphql/hooks";
 import { DivMotion } from "@/components/animations/div-motion";
 
 interface Props
@@ -24,10 +24,6 @@ export const PostTopic = ({
   user
 }: Props) => {
   const t = useTranslations("forum.topics");
-  const permissions: PermissionsTopicForums = {
-    can_edit: true,
-    can_reply: true
-  };
   return (
     <DivMotion
       key={`post_${id}`}

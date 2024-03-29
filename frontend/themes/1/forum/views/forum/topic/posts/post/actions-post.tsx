@@ -11,12 +11,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import type { PermissionsTopicForums } from "@/graphql/hooks";
+import type { PermissionsPostForums } from "@/graphql/hooks";
 import { useDeletePost } from "@/hooks/forum/posts/delete/use-delete-post";
 
 interface Props {
   id: number;
-  permissions: PermissionsTopicForums;
+  permissions: PermissionsPostForums;
   state: {
     locked: boolean;
   };
@@ -24,17 +24,17 @@ interface Props {
 
 export const ActionsPost = ({
   id,
-  permissions: { can_edit },
-  state
+  permissions: { can_edit, can_delete }
 }: Props) => {
   const t = useTranslations("forum.topics.actions");
   const tCore = useTranslations("core");
   const { deletePost } = useDeletePost({ id: id });
   const editPost = async () => {
-    throw new Error("Not implemented yet");
+    console.log("Not implemented yet"); //TODO: implementation
   };
 
   if (!can_edit) return null;
+  if (!can_delete) return null;
 
   return (
     <DropdownMenu>

@@ -14,9 +14,8 @@ export const useDeletePost = ({ id }: Props) => {
     const mutation = await mutationApi({ id });
 
     if (mutation.error) {
-      let error: Error = mutation.error as Error;
       toast.error(tCore("errors.title"), {
-        description: error.message
+        description: tCore("errors.internal_server_error")
       });
     }
   };
