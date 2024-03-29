@@ -4,7 +4,6 @@ import * as fs from "fs";
 import { PluginInfoJSONType } from "@/plugins/core/admin/plugins/helpers/files/create/contents";
 
 export interface ConfigType {
-  finished_install: boolean;
   rebuild_required: {
     langs: boolean;
     plugins: boolean;

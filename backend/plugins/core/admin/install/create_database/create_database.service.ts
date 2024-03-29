@@ -4,7 +4,6 @@ import { Injectable } from "@nestjs/common";
 import { count } from "drizzle-orm";
 
 import { CustomError } from "@/utils/errors/CustomError";
-import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { DatabaseService } from "@/plugins/database/database.service";
 import { core_languages } from "@/plugins/core/admin/database/schema/languages";
 import {
@@ -15,7 +14,6 @@ import { core_admin_permissions } from "@/plugins/core/admin/database/schema/adm
 import { core_moderators_permissions } from "../../database/schema/moderators";
 import { core_themes } from "../../database/schema/themes";
 import { core_nav, core_nav_name } from "../../database/schema/nav";
-import { getConfigFile } from "@/functions/config/get-config-file";
 import { pluginPaths } from "../../plugins/paths";
 
 @Injectable()
@@ -30,12 +28,6 @@ export class CreateDatabaseAdminInstallService {
   }
 
   async create(): Promise<string> {
-    const config = await getConfigFile();
-
-    if (config.finished_install) {
-      throw new AccessDeniedError();
-    }
-
     // Create default language
     const languageCount = await this.databaseService.db
       .select({
