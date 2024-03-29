@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  postgres:
+    container_name: vitnode_postgres_production
+    image: postgres:16.2-alpine
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME:-vitnode}
+    ports:
+      - "${DB_PORT:-5432}:${DB_PORT:-5432}"
+    restart: on-failure
+    volumes:
+      - ./docker/prod/database:/var/lib/postgresql/data
+    networks:
+      - vitnode_production
+
+  backend:
+    container_name: vitnode_backend_production
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - DB_HOST=${DB_HOST:-postgres}
+      - DB_PORT=${DB_PORT:-5432}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME:-vitnode}
+      - LOGIN_TOKEN_SECRET=${LOGIN_TOKEN_SECRET}
+      - FRONTEND_URL=${FRONTEND_URL}
+    restart: on-failure
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - vitnode_production
+    volumes:
+      - ./frontend/config:/frontend/config # config
+      - ./frontend/themes:/frontend/themes # themes
+      - ./frontend/langs:/frontend/langs # langs
+      - ./frontend/app:/frontend/app # app
+      - ./frontend/admin:/frontend/admin # admin
+      - ./frontend/graphql:/frontend/graphql # graphql
+      - ./frontend/hooks:/frontend/hooks # hooks
+      - ./backend/public:/app/public # static files
+      - ./backend/plugins:/app/plugins # plugins
+
+networks:
+  vitnode_production:

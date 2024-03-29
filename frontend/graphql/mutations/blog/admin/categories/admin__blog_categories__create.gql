@@ -1,0 +1,8 @@
+mutation Admin__blog_categories__create(
+  $description: [TextLanguageInput!]!
+  $name: [TextLanguageInput!]!
+) {
+  admin__blog_categories__create(description: $description, name: $name) {
+    id
+  }
+}

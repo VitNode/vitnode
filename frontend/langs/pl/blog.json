@@ -1,0 +1,27 @@
+{
+  "blog": {
+    "admin": {
+      "nav": {
+        "title": "Blog",
+        "categories": "Kategorie"
+      },
+      "categories": {
+        "title": "Kategorie",
+        "create": {
+          "title": "Dodaj Kategorie",
+          "name": {
+            "label": "Tytuł"
+          },
+          "description": {
+            "label": "Opis"
+          },
+          "submit": "Dodaj Kategorie"
+        },
+        "edit": {
+          "title": "Edytuj Kategorie",
+          "submit": "Edytuj Kategorie"
+        }
+      }
+    }
+  }
+}
