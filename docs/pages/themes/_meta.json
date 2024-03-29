@@ -3,5 +3,7 @@
   "components": "Components",
   "graphql": "GraphQL",
   "fetch": "Fetch and Revalidate Data",
-  "forms": "Forms"
+  "forms": "Forms",
+  "i18n": "Internationalization (i18n)",
+  "virtualization": "Virtualization"
 }

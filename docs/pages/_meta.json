@@ -65,7 +65,6 @@
   },
   "plugins": "🔌 Plugins",
   "themes": "🖌️ Themes",
-  "frontend": "Frontend",
   "demo": {
     "title": "🚀 Demo",
     "type": "page",
