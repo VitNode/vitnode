@@ -31,7 +31,7 @@
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 57.5% 43.47%;
     --destructive-foreground: 210 40% 98%;
-    --border: 240 5.9% 90%;
+    --border: 204deg 23.97% 88.97%;
     --input: var(--border);
     --ring: var(--primary);
     --radius: 0.5rem;
@@ -54,7 +54,7 @@
       --destructive: 359.67deg 80.36% 43.92%;
       --destructive-foreground: 210 40% 98%;
       --border: 240deg 15.61% 13.28%;
-      --input: var(--border);
+      // --input: var(--border);
       /* --ring: var(--primary); */
     }
   }
