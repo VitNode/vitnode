@@ -28,7 +28,7 @@ export const core_admin_permissions = pgTable(
     updated: timestamp("updated").notNull().defaultNow(),
     protected: boolean("protected").notNull().default(false)
   },
-  table => ({
+  (table) => ({
     group_id_idx: index("core_admin_permissions_group_id_idx").on(
       table.group_id
     ),
@@ -67,7 +67,7 @@ export const core_admin_sessions = pgTable(
       })
       .notNull()
   },
-  table => ({
+  (table) => ({
     login_token_idx: index("core_admin_sessions_login_token_idx").on(
       table.login_token
     ),

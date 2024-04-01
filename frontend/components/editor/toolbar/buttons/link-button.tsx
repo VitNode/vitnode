@@ -50,7 +50,7 @@ export const getSelectedNode = (
 
 const SUPPORTED_URL_PROTOCOLS = new Set(["https:", "mailto:", "sms:", "tel:"]);
 
-export const sanitizeUrl = (url: string) => {
+export const sanitizeUrl = (url: string): string => {
   try {
     const parsedUrl = new URL(url);
     // eslint-disable-next-line no-script-url
@@ -64,7 +64,7 @@ export const sanitizeUrl = (url: string) => {
   return url;
 };
 
-export const LinkButtonEditor = () => {
+export const LinkButtonEditor = (): JSX.Element => {
   const t = useTranslations("core.editor");
   const tCore = useTranslations("core");
   const [isLink, setIsLink] = useState(false);
@@ -72,7 +72,7 @@ export const LinkButtonEditor = () => {
   const [editor] = useLexicalComposerContext();
 
   useUpdateStateEditor({
-    handleChange: () => {
+    handleChange: (): boolean => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
@@ -93,10 +93,12 @@ export const LinkButtonEditor = () => {
       if ($isLinkNode(parent) || $isLinkNode(node)) {
         setIsLink(true);
 
-        return;
+        return false;
       }
 
       setIsLink(false);
+
+      return true;
     }
   });
 
@@ -110,7 +112,7 @@ export const LinkButtonEditor = () => {
                 <Toggle
                   aria-label={t("link")}
                   pressed={isLink}
-                  onClick={() => {
+                  onClick={(): void => {
                     if (!isLink) {
                       editor.dispatchCommand(
                         TOGGLE_LINK_COMMAND,
@@ -127,11 +129,16 @@ export const LinkButtonEditor = () => {
           </TooltipTrigger>
 
           <PopoverContent className="flex gap-1 [&>button]:flex-shrink-0 p-2 w-80">
-            <Input onChange={e => setLinkUrl(e.target.value)} value={linkUrl} />
+            <Input
+              onChange={(e): void => setLinkUrl(e.target.value)}
+              value={linkUrl}
+            />
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => editor.dispatchCommand(TOGGLE_LINK_COMMAND, null)}
+              onClick={(): boolean =>
+                editor.dispatchCommand(TOGGLE_LINK_COMMAND, null)
+              }
               ariaLabel={tCore("delete")}
             >
               <X />
@@ -141,7 +148,7 @@ export const LinkButtonEditor = () => {
               <Button
                 size="icon"
                 disabled={!linkUrl}
-                onClick={() => {
+                onClick={(): void => {
                   editor.dispatchCommand(
                     TOGGLE_LINK_COMMAND,
                     sanitizeUrl(linkUrl)

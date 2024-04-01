@@ -11,11 +11,13 @@ import { Editor } from "@/components/editor/editor";
 import { Button } from "@/components/ui/button";
 import { useCreatePost } from "@/hooks/forum/posts/create/use-create-post";
 
-interface Props {
+export interface ContentCreatePostProps {
   setOpen: (open: boolean) => void;
 }
 
-export const ContentCreatePost = ({ setOpen }: Props) => {
+export const ContentCreatePost = ({
+  setOpen
+}: ContentCreatePostProps): JSX.Element => {
   const t = useTranslations("forum.topics.post");
   const { form, onSubmit } = useCreatePost({ setOpen });
 
@@ -25,7 +27,7 @@ export const ContentCreatePost = ({ setOpen }: Props) => {
         <FormField
           control={form.control}
           name="content"
-          render={({ field }) => (
+          render={({ field }): JSX.Element => (
             <FormItem>
               <FormControl>
                 <Editor

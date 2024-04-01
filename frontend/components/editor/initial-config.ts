@@ -10,7 +10,7 @@ import { EmojiNode } from "./nodes/EmojiNode";
 
 export const initialConfigEditor: Omit<InitialConfigType, "namespace"> = {
   theme: themeEditor,
-  onError: error => {
+  onError: (error): void => {
     // eslint-disable-next-line no-console
     console.error(error);
   },

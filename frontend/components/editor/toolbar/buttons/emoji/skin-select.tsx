@@ -27,7 +27,7 @@ interface Props {
 export const SkinSelectEmojiButtonEditor = ({
   setSkinToneIndex,
   skinToneIndex
-}: Props) => {
+}: Props): JSX.Element => {
   const t = useTranslations("core.editor.emoji");
 
   return (
@@ -47,28 +47,30 @@ export const SkinSelectEmojiButtonEditor = ({
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
-        {skinToneEmoji.map((item, index) => (
-          <DropdownMenuItem
-            key={item}
-            className="flex gap-2"
-            onClick={() => {
-              localStorage.setItem(
-                CONFIG.local_storage.editor_skin_tone,
-                index.toString()
-              );
-              setSkinToneIndex(index);
-            }}
-          >
-            {skinToneIndex === index && <Check className="h-4 w-4" />}
-            <div
-              className="w-5 h-5 rounded-md"
-              style={{ backgroundColor: `hsl(${skinToneEmoji[index]})` }}
-            />
-            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-            {/* @ts-expect-error */}
-            <span>{t(`skin.skin_${index}`)}</span>
-          </DropdownMenuItem>
-        ))}
+        {skinToneEmoji.map(
+          (item, index): JSX.Element => (
+            <DropdownMenuItem
+              key={item}
+              className="flex gap-2"
+              onClick={(): void => {
+                localStorage.setItem(
+                  CONFIG.local_storage.editor_skin_tone,
+                  index.toString()
+                );
+                setSkinToneIndex(index);
+              }}
+            >
+              {skinToneIndex === index && <Check className="h-4 w-4" />}
+              <div
+                className="w-5 h-5 rounded-md"
+                style={{ backgroundColor: `hsl(${skinToneEmoji[index]})` }}
+              />
+              {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+              {/* @ts-expect-error */}
+              <span>{t(`skin.skin_${index}`)}</span>
+            </DropdownMenuItem>
+          )
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

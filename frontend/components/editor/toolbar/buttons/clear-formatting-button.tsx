@@ -14,12 +14,12 @@ import { useCallback } from "react";
 
 import { Button } from "@/components/ui/button";
 
-export const ClearFormattingButtonEditor = () => {
+export const ClearFormattingButtonEditor = (): JSX.Element => {
   const t = useTranslations("core.editor");
   const [editor] = useLexicalComposerContext();
 
-  const clearFormatting = useCallback(() => {
-    editor.update(() => {
+  const clearFormatting = useCallback((): void => {
+    editor.update((): void => {
       const selection = $getSelection();
       if ($isRangeSelection(selection)) {
         const anchor = selection.anchor;
@@ -30,7 +30,7 @@ export const ClearFormattingButtonEditor = () => {
           return;
         }
 
-        nodes.forEach((node, idx) => {
+        nodes.forEach((node, idx): void => {
           // We split the first and last node by the selection
           // So that we don't format unselected text inside those nodes
           if ($isTextNode(node)) {

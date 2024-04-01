@@ -6,11 +6,13 @@ import { Button } from "@/components/ui/button";
 import { useCopperModalChangeAvatar } from "@/hooks/core/settings/avatar/use-copper-modal-change-avatar";
 import "cropperjs/dist/cropper.css";
 
-interface Props {
+export interface CropperModalChangeAvatarProps {
   file: File;
 }
 
-export const CropperModalChangeAvatar = ({ file }: Props) => {
+export const CropperModalChangeAvatar = ({
+  file
+}: CropperModalChangeAvatarProps): JSX.Element => {
   const t = useTranslations("core");
   const { cropperRef, isPending, onSubmit } = useCopperModalChangeAvatar();
 

@@ -30,7 +30,7 @@ export const core_files = pgTable(
     module_id: varchar("module_id", { length: 255 }),
     mimetype: varchar("mimetype", { length: 255 })
   },
-  table => ({
+  (table) => ({
     user_id_idx: index("core_files_user_id_idx").on(table.user_id)
   })
 );

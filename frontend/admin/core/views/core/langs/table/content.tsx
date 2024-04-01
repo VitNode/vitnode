@@ -54,7 +54,7 @@ export const ContentTableLangsCoreAdmin = ({
         }
       },
       {
-        header: val => {
+        header: (val) => {
           return (
             <HeaderSortingDataTable {...val}>
               {tCore("table.created")}

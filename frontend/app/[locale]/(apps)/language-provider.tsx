@@ -10,15 +10,17 @@ interface Props {
   data: Core_MiddlewareQuery | undefined;
 }
 
-export const LanguageProvider = ({ children, data }: Props) => {
+export const LanguageProvider = ({ children, data }: Props): JSX.Element => {
   return (
     <GlobalsContext.Provider
       value={{
         languages:
-          data?.core_languages__show.edges.filter(lang => lang.enabled) ?? [],
+          data?.core_languages__show.edges.filter(
+            (lang): boolean => lang.enabled
+          ) ?? [],
         defaultLanguage:
-          data?.core_languages__show.edges.find(lang => lang.default)?.code ??
-          "en",
+          data?.core_languages__show.edges.find((lang): boolean => lang.default)
+            ?.code ?? "en",
         themes: data?.core_themes__show.edges ?? []
       }}
     >

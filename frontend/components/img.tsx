@@ -51,11 +51,11 @@ const Img = forwardRef<HTMLDivElement, ImgProps>(
       widthLoading
     },
     ref
-  ) => {
+  ): JSX.Element => {
     const [isLoading, setIsLoading] = useState(!priority);
 
     // Refresh loading state when changing src
-    useEffect(() => {
+    useEffect((): void => {
       if (!priority) {
         setIsLoading(true);
       }
@@ -98,7 +98,7 @@ const Img = forwardRef<HTMLDivElement, ImgProps>(
           style={{
             height: height !== undefined ? `${height}px` : undefined
           }}
-          /* istanbul ignore next */ onLoad={() => setIsLoading(false)}
+          /* istanbul ignore next */ onLoad={(): void => setIsLoading(false)}
         />
       </div>
     );

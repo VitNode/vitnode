@@ -38,12 +38,12 @@ const AVAILABLE_FONT_SIZE = [
 
 const DEFAULT_FONT_SIZE = "16px";
 
-export const FontSizeButtonEditor = () => {
+export const FontSizeButtonEditor = (): JSX.Element => {
   const t = useTranslations("core.editor");
   const [fontSize, setFontSize] = useState(DEFAULT_FONT_SIZE);
   const [editor] = useLexicalComposerContext();
   useUpdateStateEditor({
-    handleChange: () => {
+    handleChange: (): boolean => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
@@ -54,14 +54,16 @@ export const FontSizeButtonEditor = () => {
           DEFAULT_FONT_SIZE
         )
       );
+
+      return true;
     }
   });
 
   return (
     <Select
       value={fontSize}
-      onValueChange={val => {
-        editor.update(() => {
+      onValueChange={(val): void => {
+        editor.update((): boolean => {
           const selection = $getSelection();
 
           if (!$isRangeSelection(selection)) return false;
@@ -69,6 +71,8 @@ export const FontSizeButtonEditor = () => {
           $patchStyleText(selection, {
             ["font-size"]: val
           });
+
+          return true;
         });
       }}
     >
@@ -91,12 +95,14 @@ export const FontSizeButtonEditor = () => {
         </Tooltip>
       </TooltipProvider>
 
-      <SelectContent onCloseAutoFocus={() => editor.focus()}>
-        {AVAILABLE_FONT_SIZE.map(size => (
-          <SelectItem key={size} value={size}>
-            {size}
-          </SelectItem>
-        ))}
+      <SelectContent onCloseAutoFocus={(): void => editor.focus()}>
+        {AVAILABLE_FONT_SIZE.map(
+          (size): JSX.Element => (
+            <SelectItem key={size} value={size}>
+              {size}
+            </SelectItem>
+          )
+        )}
       </SelectContent>
     </Select>
   );

@@ -42,7 +42,7 @@
       "warn",
       {
         "endOfLine": "auto",
-        "arrowParens": "avoid",
+        "arrowParens": "always",
         "trailingComma": "none"
       }
     ],

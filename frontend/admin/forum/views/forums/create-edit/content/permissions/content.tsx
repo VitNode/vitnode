@@ -54,7 +54,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
     <>
       <Input
         value={searchValue}
-        onChange={e => setSearchValue(e.target.value)}
+        onChange={(e) => setSearchValue(e.target.value)}
         placeholder="Search group..."
       />
 
@@ -70,7 +70,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
         fixedHeaderContent={() => (
           <tr className="bg-card border-b">
             <th />
-            {permissions.map(permission => (
+            {permissions.map((permission) => (
               <th
                 key={permission.id}
                 className="px-4 py-3 align-middle font-medium text-muted-foreground"
@@ -95,10 +95,10 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
           // 2. The all permissions is enabled for the current group
           const isAllPermissionsEnabled =
             permissions.every(
-              permission => field.value[`can_all_${permission.id}`]
+              (permission) => field.value[`can_all_${permission.id}`]
             ) ||
             permissions.every(
-              permission =>
+              (permission) =>
                 findItem?.[permission.id] ||
                 field.value[`can_all_${permission.id}`]
             );
@@ -146,7 +146,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
                 </div>
               </td>
 
-              {permissions.map(permission => {
+              {permissions.map((permission) => {
                 // Check if:
                 // 1. The permission is enabled for all groups
                 // 2. The permission is enabled for the current group
@@ -194,7 +194,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
                         if (!findItem) {
                           const groupPermissions = mapValues(
                             keyBy(permissions, "id"),
-                            item => {
+                            (item) => {
                               if (item.id === permission.id) {
                                 return true;
                               }

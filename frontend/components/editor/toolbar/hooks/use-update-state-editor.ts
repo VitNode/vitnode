@@ -7,24 +7,24 @@ interface Args {
   handleChange: () => void;
 }
 
-export const useUpdateStateEditor = ({ handleChange }: Args) => {
+export const useUpdateStateEditor = ({ handleChange }: Args): void => {
   const [editor] = useLexicalComposerContext();
 
-  useEffect(() => {
+  useEffect((): (() => void) => {
     editor.update(handleChange);
 
     return mergeRegister(
       editor.registerCommand(
         SELECTION_CHANGE_COMMAND,
-        () => {
+        (): boolean => {
           handleChange();
 
           return false;
         },
         COMMAND_PRIORITY_CRITICAL
       ),
-      editor.registerUpdateListener(({ editorState }) => {
-        editorState.read(() => {
+      editor.registerUpdateListener(({ editorState }): void => {
+        editorState.read((): void => {
           handleChange();
         });
       })

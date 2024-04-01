@@ -43,7 +43,7 @@ export class CreateForumsPostsService {
 
     // Post content
     await this.databaseService.db.insert(forum_posts_content).values(
-      content.map(item => ({
+      content.map((item) => ({
         ...item,
         post_id: post.id
       }))

@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const Content = lazy(() =>
-  import("./content").then(module => ({
+  import("./content").then((module) => ({
     default: module.ContentCreateActionThemeAdmin
   }))
 );

@@ -6,7 +6,7 @@ interface Props {
   totalComments: number;
 }
 
-export const HeaderPosts = ({ totalComments }: Props) => {
+export const HeaderPosts = ({ totalComments }: Props): JSX.Element => {
   const t = useTranslations("forum.topics");
 
   return (

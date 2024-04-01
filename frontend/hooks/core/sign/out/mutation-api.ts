@@ -10,7 +10,12 @@ import {
 } from "@/graphql/hooks";
 import { redirect } from "@/i18n";
 
-export const mutationApi = async () => {
+export const mutationApi = async (): Promise<
+  | {
+      error: unknown;
+    }
+  | undefined
+> => {
   try {
     await fetcher<
       Core_Sessions__Sign_OutMutation,

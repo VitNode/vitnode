@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import type { ShowForumForumsAdmin } from "@/graphql/hooks";
 
 const Content = lazy(() =>
-  import("./content").then(module => ({
+  import("./content").then((module) => ({
     default: module.ContentDeleteActionForumAdmin
   }))
 );

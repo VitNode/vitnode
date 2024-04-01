@@ -18,7 +18,7 @@ export class StatsAdminMembersService {
     ORDER BY joined_date ASC;
     `);
 
-    return data.rows.map(row => ({
+    return data.rows.map((row) => ({
       joined_date: row.joined_date as string,
       users_joined: row.users_joined as number
     }));

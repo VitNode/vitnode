@@ -41,9 +41,9 @@ export const ItemListNavAdmin = ({
             })
           })}
           onClick={() =>
-            setActiveItems(prev =>
+            setActiveItems((prev) =>
               prev.includes(id)
-                ? prev.filter(item => item !== id)
+                ? prev.filter((item) => item !== id)
                 : [...prev, id]
             )
           }
@@ -62,7 +62,7 @@ export const ItemListNavAdmin = ({
 
       <Accordion.Content className="transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden">
         <ul className="py-2">
-          {items.map(el => (
+          {items.map((el) => (
             <LinkItemListNavAdmin
               key={el.id}
               href={`/admin/${id}/${el.href}`}

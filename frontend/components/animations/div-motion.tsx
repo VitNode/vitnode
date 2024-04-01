@@ -8,9 +8,11 @@ interface Props extends AnimationProps, LayoutProps {
   className?: string;
 }
 
-const DivMotion = forwardRef<HTMLDivElement, Props>((props, ref) => {
-  return <motion.div ref={ref} {...props} />;
-});
+const DivMotion = forwardRef<HTMLDivElement, Props>(
+  (props, ref): JSX.Element => {
+    return <motion.div ref={ref} {...props} />;
+  }
+);
 
 DivMotion.displayName = "DivMotion";
 

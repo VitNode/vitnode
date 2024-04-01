@@ -15,10 +15,10 @@ export class ChangeTemplatesAdminThemesService {
         await fs.promises.readdir(tempPath, {
           recursive: true
         })
-      ).filter(file => file.includes("."));
+      ).filter((file) => file.includes("."));
 
       await Promise.all(
-        files.map(async file => {
+        files.map(async (file) => {
           // If file does not exist, copy
           if (!fs.existsSync(join(destinationPath, file))) {
             await fs.promises.cp(

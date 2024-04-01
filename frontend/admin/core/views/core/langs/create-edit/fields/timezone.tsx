@@ -64,12 +64,12 @@ export function TimezoneFieldCreateEditLangAdmin<
             <CommandList>
               <CommandEmpty>{tCore("no_results")}</CommandEmpty>
               <CommandGroup>
-                {timeZones.map(item => (
+                {timeZones.map((item) => (
                   <CommandItem
                     value={item}
                     key={item}
                     className="flex gap-2"
-                    onSelect={value => {
+                    onSelect={(value) => {
                       field.onChange(value);
                       setOpen(false);
                     }}

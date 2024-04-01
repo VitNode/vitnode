@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
+import { useForm, type UseFormReturn } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
 
@@ -13,7 +13,12 @@ interface Args {
   installPage?: boolean;
 }
 
-export const useSignUpView = ({ installPage }: Args) => {
+export const useSignUpView = ({
+  installPage
+}: Args): {
+  form: UseFormReturn<z.infer<typeof formSchema>>;
+  onSubmit: (values: z.infer<typeof formSchema>) => Promise<void>;
+} => {
   const t = useTranslations("core");
 
   const formSchema = z.object({
@@ -26,7 +31,7 @@ export const useSignUpView = ({ installPage }: Args) => {
       .max(32, {
         message: t("forms.max_length", { length: 32 })
       })
-      .refine(value => nameRegex.test(value), {
+      .refine((value): boolean => nameRegex.test(value), {
         message: t("sign_up.form.name.invalid")
       }),
     email: z
@@ -46,12 +51,14 @@ export const useSignUpView = ({ installPage }: Args) => {
           message: t("sign_up.form.password.invalid")
         }
       ),
-    terms: z.boolean().refine(value => value, {
+    terms: z.boolean().refine((value): boolean => value, {
       message: t("sign_up.form.terms.empty")
     }),
     newsletter: z.boolean()
   });
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form: UseFormReturn<z.infer<typeof formSchema>> = useForm<
+    z.infer<typeof formSchema>
+  >({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
@@ -63,7 +70,9 @@ export const useSignUpView = ({ installPage }: Args) => {
     mode: "onChange"
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (
+    values: z.infer<typeof formSchema>
+  ): Promise<void> => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { terms, ...rest } = values;
 

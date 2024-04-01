@@ -11,7 +11,10 @@ import {
 
 export const mutationApi = async (
   variables: Forum_Posts__CreateMutationVariables
-) => {
+): Promise<{
+  data?: Forum_Posts__CreateMutation;
+  error?: unknown;
+}> => {
   try {
     const { data } = await fetcher<
       Forum_Posts__CreateMutation,

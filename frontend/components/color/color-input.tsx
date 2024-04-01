@@ -19,14 +19,14 @@ interface Props {
 }
 
 export const ColorInput = forwardRef<HTMLButtonElement, Props>(
-  ({ disableRemoveColor, disabled, onChange, value }, ref) => {
+  ({ disableRemoveColor, disabled, onChange, value }, ref): JSX.Element => {
     const t = useTranslations("core.colors");
     const [color, setColor] = useState<HslColor | null>(
       getHSLFromString(value)
     );
 
     // Set color from value
-    useEffect(() => {
+    useEffect((): void => {
       onChange(color ? `hsl(${color.h}, ${color.s}%, ${color.l}%)` : "");
     }, [color]);
 
@@ -67,7 +67,7 @@ export const ColorInput = forwardRef<HTMLButtonElement, Props>(
               size="icon"
               ariaLabel={t("remove")}
               variant="destructiveGhost"
-              onClick={() => setColor(null)}
+              onClick={(): void => setColor(null)}
             >
               <X />
             </Button>

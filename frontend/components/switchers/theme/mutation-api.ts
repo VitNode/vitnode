@@ -10,7 +10,10 @@ import { setCookieFromApi } from "@/functions/cookie-from-string-to-object";
 
 export const mutationApi = async (
   variables: Core_Themes__ChangeMutationVariables
-) => {
+): Promise<{
+  data?: Core_Themes__ChangeMutation;
+  error?: unknown;
+}> => {
   try {
     const { data, res } = await fetcher<
       Core_Themes__ChangeMutation,

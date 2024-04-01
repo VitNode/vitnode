@@ -10,7 +10,7 @@ import { Loader } from "@/components/loader";
 
 const CreateEditFormGroupsMembersAdmin = lazy(() =>
   import("../create-edit-form/create-edit-form-groups-members-admin").then(
-    module => ({
+    (module) => ({
       default: module.CreateEditFormGroupsMembersAdmin
     })
   )

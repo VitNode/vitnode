@@ -9,7 +9,7 @@ interface Props {
   className?: string;
 }
 
-export const ListPosts = ({ className, edges, id }: Props) => {
+export const ListPosts = ({ className, edges, id }: Props): JSX.Element => {
   return (
     <div
       key={`post_list_${id}`}
@@ -18,7 +18,7 @@ export const ListPosts = ({ className, edges, id }: Props) => {
         className
       )}
     >
-      {edges.map(edge => {
+      {edges.map((edge): JSX.Element | null => {
         if (edge.__typename === "ShowPostsForums") {
           return <PostTopic key={`post_list_${edge.id}`} {...edge} />;
         }

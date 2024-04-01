@@ -7,7 +7,7 @@ import { values } from "lodash";
 import { $createEmojiNode, EmojiNode } from "../nodes/EmojiNode";
 import { CONFIG } from "@/config";
 
-const convertEmoji = (emoji: Emoji[]) => {
+const convertEmoji = (emoji: Emoji[]): Map<string, string> => {
   const localStorageSkinToneIndex =
     typeof window !== "undefined"
       ? localStorage.getItem(CONFIG.local_storage.editor_skin_tone)
@@ -18,9 +18,9 @@ const convertEmoji = (emoji: Emoji[]) => {
     ? +localStorageSkinToneIndex
     : 0;
 
-  emoji.forEach(item => {
+  emoji.forEach((item): void => {
     if (item.emoticons) {
-      item.emoticons.forEach(emoticon => {
+      item.emoticons.forEach((emoticon): void => {
         result.set(
           emoticon,
           item.skins.length > skinToneIndex
@@ -36,7 +36,9 @@ const convertEmoji = (emoji: Emoji[]) => {
 
 const emojiMart = data as EmojiMartData;
 const emojis = convertEmoji(
-  values(emojiMart.emojis).filter(emoji => emoji.emoticons)
+  values(emojiMart.emojis).filter(
+    (emoji): string[] | undefined => emoji.emoticons
+  )
 );
 
 const findAndTransformEmoji = (node: TextNode): null | TextNode => {
@@ -65,7 +67,7 @@ const findAndTransformEmoji = (node: TextNode): null | TextNode => {
   return null;
 };
 
-const textNodeTransform = (node: TextNode) => {
+const textNodeTransform = (node: TextNode): void => {
   let targetNode: TextNode | null = node;
 
   while (targetNode !== null) {
@@ -77,10 +79,10 @@ const textNodeTransform = (node: TextNode) => {
   }
 };
 
-export const EmojiPluginEditor = () => {
+export const EmojiPluginEditor = (): null => {
   const [editor] = useLexicalComposerContext();
 
-  useEffect(() => {
+  useEffect((): (() => void) => {
     if (!editor.hasNodes([EmojiNode])) {
       throw new Error("EmojisPlugin: EmojiNode not registered on editor");
     }

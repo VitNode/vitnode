@@ -125,17 +125,17 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
                         <CommandList>
                           <CommandEmpty>{t("empty")}</CommandEmpty>
                           <CommandGroup>
-                            {plugins.map(item => (
+                            {plugins.map((item) => (
                               <CommandItem
                                 value={item.code}
                                 key={item.id}
                                 className="flex gap-2"
-                                onSelect={value => {
+                                onSelect={(value) => {
                                   const values = field.value;
 
                                   field.onChange(
                                     values.includes(value)
-                                      ? values.filter(el => el !== value)
+                                      ? values.filter((el) => el !== value)
                                       : [...values, item.code]
                                   );
                                 }}

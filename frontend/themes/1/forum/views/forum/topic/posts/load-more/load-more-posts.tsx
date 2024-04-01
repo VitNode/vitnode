@@ -17,7 +17,7 @@ export const LoadMorePosts = ({
   firstEdges,
   initialCount,
   totalCount
-}: Props) => {
+}: Props): JSX.Element => {
   const { data, fetchNextPage, isFetching } = useMorePosts({
     totalCount,
     initialCount,

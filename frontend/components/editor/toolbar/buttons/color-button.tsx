@@ -43,7 +43,7 @@ interface Props {
   type: "color" | "background-color";
 }
 
-export const ColorButtonEditor = ({ type }: Props) => {
+export const ColorButtonEditor = ({ type }: Props): JSX.Element => {
   const t = useTranslations("core.editor");
   const tCore = useTranslations("core");
   const [fontColor, setFontColor] = useState("");
@@ -51,20 +51,24 @@ export const ColorButtonEditor = ({ type }: Props) => {
   const [editor] = useLexicalComposerContext();
 
   useUpdateStateEditor({
-    handleChange: () => {
+    handleChange: (): boolean => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
       setFontColor($getSelectionStyleValueForProperty(selection, type, ""));
+
+      return true;
     }
   });
 
-  const updateColor = (color: string) => {
-    editor.update(() => {
+  const updateColor = (color: string): void => {
+    editor.update((): boolean => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
       $patchStyleText(selection, { [type]: color });
+
+      return true;
     });
   };
 
@@ -96,22 +100,24 @@ export const ColorButtonEditor = ({ type }: Props) => {
             {!customColor ? (
               <>
                 <div className="flex flex-wrap justify-center items-center gap-1.5">
-                  {basicColors.map(color => (
-                    <Button
-                      className="w-7 h-7 border"
-                      size="icon"
-                      key={color}
-                      style={{ backgroundColor: color }}
-                      onClick={() => updateColor(color)}
-                      ariaLabel=""
-                    />
-                  ))}
+                  {basicColors.map(
+                    (color): JSX.Element => (
+                      <Button
+                        className="w-7 h-7 border"
+                        size="icon"
+                        key={color}
+                        style={{ backgroundColor: color }}
+                        onClick={(): void => updateColor(color)}
+                        ariaLabel=""
+                      />
+                    )
+                  )}
 
                   <Button
                     variant="ghost"
                     className="w-7 h-7 border [&>svg]:w-4 [&>svg]:h-4"
                     size="icon"
-                    onClick={() =>
+                    onClick={(): void =>
                       setCustomColor(fontColor ? fontColor : "#000000")
                     }
                     ariaLabel=""
@@ -125,7 +131,7 @@ export const ColorButtonEditor = ({ type }: Props) => {
                     className="w-full"
                     variant="secondary"
                     size="sm"
-                    onClick={() => updateColor("")}
+                    onClick={(): void => updateColor("")}
                   >
                     {t("set_default_color")}
                   </Button>
@@ -135,7 +141,7 @@ export const ColorButtonEditor = ({ type }: Props) => {
               <div className="flex gap-1">
                 <Input
                   type="color"
-                  onChange={e => setCustomColor(e.target.value)}
+                  onChange={(e): void => setCustomColor(e.target.value)}
                   value={customColor}
                 />
 
@@ -143,7 +149,7 @@ export const ColorButtonEditor = ({ type }: Props) => {
                   size="icon"
                   className="flex-shrink-0"
                   variant="ghost"
-                  onClick={() => setCustomColor("")}
+                  onClick={(): void => setCustomColor("")}
                   ariaLabel={tCore("cancel")}
                 >
                   <X />
@@ -152,7 +158,7 @@ export const ColorButtonEditor = ({ type }: Props) => {
                 <Button
                   size="icon"
                   className="flex-shrink-0"
-                  onClick={() => updateColor(customColor)}
+                  onClick={(): void => updateColor(customColor)}
                   ariaLabel={tCore("confirm")}
                 >
                   <Check />

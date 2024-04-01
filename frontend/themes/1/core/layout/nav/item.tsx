@@ -14,7 +14,7 @@ export const ItemNav = ({
   href,
   icon,
   name
-}: ShowCoreNav) => {
+}: ShowCoreNav): JSX.Element => {
   const { convertText } = useTextLang();
   const pathname = usePathname();
   const active =
@@ -49,7 +49,7 @@ export const ItemNav = ({
           )}
         >
           <ul className="flex gap-2 flex-wrap p-2">
-            {children.map(item => {
+            {children.map((item): JSX.Element => {
               const activeItem =
                 item.href === pathname ||
                 (pathname.startsWith(item.href) && item.href !== "/");

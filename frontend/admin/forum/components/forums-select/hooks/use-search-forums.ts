@@ -22,7 +22,7 @@ export const useSearchForums = ({ exclude }: Args) => {
 
   const data =
     query.data?.admin__forum_forums__show.edges.filter(
-      item => !exclude?.includes(item.id)
+      (item) => !exclude?.includes(item.id)
     ) ?? [];
 
   return { ...query, setSearch, data };

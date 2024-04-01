@@ -9,7 +9,7 @@ interface Props {
   children: ReactNode;
 }
 
-export default function Layout({ children }: Props) {
+export default function Layout({ children }: Props): JSX.Element {
   /**
    * Thanks for using VitNode!
    *

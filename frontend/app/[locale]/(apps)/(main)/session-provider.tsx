@@ -10,7 +10,7 @@ interface Props {
   data: Core_Sessions__AuthorizationQuery;
 }
 
-export const SessionProvider = ({ children, data }: Props) => {
+export const SessionProvider = ({ children, data }: Props): JSX.Element => {
   return (
     <SessionContext.Provider
       value={{

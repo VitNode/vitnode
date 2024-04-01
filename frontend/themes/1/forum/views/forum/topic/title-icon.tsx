@@ -12,7 +12,7 @@ export const TitleIconTopic = ({
   children,
   className,
   variant = "default"
-}: Props) => {
+}: Props): JSX.Element => {
   return (
     <Badge
       variant={variant}

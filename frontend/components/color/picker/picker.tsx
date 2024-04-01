@@ -10,10 +10,10 @@ interface Props {
   setColor: (color: HslColor | null) => void;
 }
 
-export const PickerColor = ({ color, setColor }: Props) => {
+export const PickerColor = ({ color, setColor }: Props): JSX.Element => {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e: ChangeEvent<HTMLInputElement>): void => {
     const input = e.target.value.trim();
     const type = checkColorType(input);
 
@@ -58,7 +58,7 @@ export const PickerColor = ({ color, setColor }: Props) => {
             l: 0
           }
         }
-        onChange={color => {
+        onChange={(color): void => {
           setColor(color);
 
           if (!inputRef.current) return;

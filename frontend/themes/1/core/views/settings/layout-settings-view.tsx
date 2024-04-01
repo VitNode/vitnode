@@ -8,7 +8,7 @@ interface Props {
   children: ReactNode;
 }
 
-export default function LayoutSettingsView({ children }: Props) {
+export default function LayoutSettingsView({ children }: Props): JSX.Element {
   const t = useTranslations("core");
 
   return (

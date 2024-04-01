@@ -32,7 +32,7 @@ export function inputSorting<T>({
   }
 
   return [
-    ...sortBy.map(item => ({
+    ...sortBy.map((item) => ({
       [`${item.column}`]: item.direction
     })),
     sortById

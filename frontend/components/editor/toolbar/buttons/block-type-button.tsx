@@ -5,9 +5,14 @@ import {
   $createParagraphNode,
   $getSelection,
   $isRangeSelection,
-  $isRootOrShadowRoot
+  $isRootOrShadowRoot,
+  ParagraphNode
 } from "lexical";
-import { $createHeadingNode, $isHeadingNode } from "@lexical/rich-text";
+import {
+  $createHeadingNode,
+  $isHeadingNode,
+  HeadingNode
+} from "@lexical/rich-text";
 import { $setBlocksType } from "@lexical/selection";
 import { $findMatchingParent, $getNearestNodeOfType } from "@lexical/utils";
 import {
@@ -17,7 +22,8 @@ import {
   ListNode
 } from "@lexical/list";
 import type { ListType } from "@lexical/list";
-import { $createCodeNode } from "@lexical/code";
+import { $createCodeNode, CodeNode } from "@lexical/code";
+import type { LucideIcon } from "lucide-react";
 
 import { useUpdateStateEditor } from "../hooks/use-update-state-editor";
 import {
@@ -35,19 +41,22 @@ import {
 } from "@/components/ui/select";
 import { AVAILABLE_BLOCKS, BLOCK_NAMES, useEditor } from "../hooks/use-editor";
 
-export const BlockTypeButtonEditor = () => {
+export const BlockTypeButtonEditor = (): JSX.Element => {
   const t = useTranslations("core.editor.roots");
   const { blockType, setBlockType } = useEditor();
   const [editor] = useLexicalComposerContext();
-  const currentRoot = useMemo(() => {
+  const currentRoot = useMemo((): {
+    icon: LucideIcon;
+    value: BLOCK_NAMES;
+  } => {
     return (
-      AVAILABLE_BLOCKS.find(item => item.value === blockType) ??
+      AVAILABLE_BLOCKS.find((item): boolean => item.value === blockType) ??
       AVAILABLE_BLOCKS[0]
     );
   }, [blockType]);
 
   useUpdateStateEditor({
-    handleChange: () => {
+    handleChange: (): boolean => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
@@ -55,7 +64,7 @@ export const BlockTypeButtonEditor = () => {
       let element =
         anchorNode.getKey() === "root"
           ? anchorNode
-          : $findMatchingParent(anchorNode, e => {
+          : $findMatchingParent(anchorNode, (e): boolean => {
               const parent = e.getParent();
 
               return parent !== null && $isRootOrShadowRoot(parent);
@@ -94,10 +103,12 @@ export const BlockTypeButtonEditor = () => {
       //   const language = element.getLanguage();
       //   setCodeLanguage(language ? CODE_LANGUAGE_MAP[language] || language : '');
       // }
+
+      return true;
     }
   });
 
-  const onValueChange = (value: BLOCK_NAMES) => {
+  const onValueChange = (value: BLOCK_NAMES): boolean => {
     if (value === BLOCK_NAMES.BULLET) {
       editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined);
 
@@ -110,13 +121,13 @@ export const BlockTypeButtonEditor = () => {
       return true;
     }
 
-    editor.update(() => {
+    editor.update((): boolean => {
       if (value === BLOCK_NAMES.CODE) {
         let selection = $getSelection();
         if (!$isRangeSelection(selection)) return false;
 
         if (selection.isCollapsed()) {
-          $setBlocksType(selection, () => $createCodeNode());
+          $setBlocksType(selection, (): CodeNode => $createCodeNode());
         } else {
           const textContent = selection.getTextContent();
           const codeNode = $createCodeNode();
@@ -134,7 +145,7 @@ export const BlockTypeButtonEditor = () => {
       if (!$isRangeSelection(selection)) return false;
 
       if (value === BLOCK_NAMES.PARAGRAPH) {
-        $setBlocksType(selection, () => $createParagraphNode());
+        $setBlocksType(selection, (): ParagraphNode => $createParagraphNode());
 
         return true;
       }
@@ -144,11 +155,15 @@ export const BlockTypeButtonEditor = () => {
         value === BLOCK_NAMES.H2 ||
         value === BLOCK_NAMES.H3
       ) {
-        $setBlocksType(selection, () => $createHeadingNode(value));
+        $setBlocksType(selection, (): HeadingNode => $createHeadingNode(value));
 
         return true;
       }
+
+      return false;
     });
+
+    return true;
   };
 
   return (
@@ -173,16 +188,18 @@ export const BlockTypeButtonEditor = () => {
         </Tooltip>
       </TooltipProvider>
 
-      <SelectContent onCloseAutoFocus={() => editor.focus()}>
-        {AVAILABLE_BLOCKS.map(item => (
-          <SelectItem key={item.value} value={item.value}>
-            <div className="flex items-center gap-2">
-              <item.icon />
+      <SelectContent onCloseAutoFocus={(): void => editor.focus()}>
+        {AVAILABLE_BLOCKS.map(
+          (item): JSX.Element => (
+            <SelectItem key={item.value} value={item.value}>
+              <div className="flex items-center gap-2">
+                <item.icon />
 
-              {t(item.value)}
-            </div>
-          </SelectItem>
-        ))}
+                {t(item.value)}
+              </div>
+            </SelectItem>
+          )
+        )}
       </SelectContent>
     </Select>
   );

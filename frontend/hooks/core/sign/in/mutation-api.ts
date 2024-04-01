@@ -12,7 +12,12 @@ import { redirect } from "@/i18n";
 
 export const mutationApi = async (
   variables: Core_Sessions__Sign_InMutationVariables
-) => {
+): Promise<
+  | {
+      error: unknown;
+    }
+  | undefined
+> => {
   try {
     await fetcher<
       Core_Sessions__Sign_InMutation,

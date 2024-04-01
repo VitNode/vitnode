@@ -21,7 +21,16 @@ export function usePaginationAPISsr<T extends { [key: string]: unknown }>({
   search,
   searchParams,
   sortByEnum
-}: Args<T>) {
+}: Args<T>): {
+  cursor: number;
+  first: number | null;
+  last: number;
+  search: string;
+  sortBy: {
+    column: keyof T;
+    direction: SortDirectionEnum;
+  } | null;
+} {
   const pagination = {
     first: Number(searchParams.first ?? 0),
     last: Number(searchParams.last ?? 0),
@@ -73,7 +82,13 @@ export const emptyPagination = ({
   first
 }: {
   first: 10 | 20 | 30 | 40 | 50;
-}) => {
+}): {
+  cursor: null;
+  first: 10 | 20 | 30 | 40 | 50;
+  last: number;
+  search: string;
+  sortBy: null;
+} => {
   return {
     first,
     last: 0,

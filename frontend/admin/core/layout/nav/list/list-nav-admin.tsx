@@ -95,14 +95,14 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
           }
         ]}
       /> */}
-      {nav.map(item => (
+      {nav.map((item) => (
         <ItemListNavAdmin
           key={item.code}
           id={item.code}
           activeItems={activeItems}
           setActiveItems={setActiveItems}
           onClickItem={onClickItem}
-          items={item.nav.map(navItem => ({
+          items={item.nav.map((navItem) => ({
             id: navItem.code,
             href: navItem.href,
             icon: navItem.icon ?? undefined

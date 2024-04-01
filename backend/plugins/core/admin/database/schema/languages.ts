@@ -22,7 +22,7 @@ export const core_languages = pgTable(
     time_24: boolean("time_24").notNull().default(false),
     locale: varchar("locale", { length: 50 }).notNull().default("enUS")
   },
-  table => ({
+  (table) => ({
     code_idx: index("core_languages_code_idx").on(table.code),
     name_idx: index("core_languages_name_idx").on(table.name)
   })

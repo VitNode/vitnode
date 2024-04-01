@@ -30,7 +30,7 @@ export const GroupInputContent = ({ onSelect, values }: Props) => {
     queryFn: async () => await queryApi({ first: 10, search })
   });
 
-  const handleSearchInput = useDebouncedCallback((value: string) => {
+  const handleSearchInput = useDebouncedCallback((value: string): void => {
     setSearch(value);
   }, 500);
 
@@ -43,7 +43,7 @@ export const GroupInputContent = ({ onSelect, values }: Props) => {
             "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0",
             commandInputClassName
           )}
-          onChange={e => handleSearchInput(e.target.value)}
+          onChange={(e) => handleSearchInput(e.target.value)}
           placeholder={t("group_input.search")}
         />
       </div>

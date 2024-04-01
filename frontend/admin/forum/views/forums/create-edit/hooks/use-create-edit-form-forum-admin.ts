@@ -21,7 +21,7 @@ export const useCreateEditFormForumAdmin = ({
       .min(1, {
         message: t("errors.required")
       })
-      .refine(value => value.every(item => item.value.length <= 50), {
+      .refine((value) => value.every((item) => item.value.length <= 50), {
         message: t("errors.max_length", { length: 50 })
       }),
     description: zodInput.languageInput,

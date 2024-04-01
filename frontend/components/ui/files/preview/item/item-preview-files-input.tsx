@@ -17,12 +17,12 @@ export const ItemPreviewFilesInput = ({
   index,
   onChange,
   value
-}: Props) => {
+}: Props): JSX.Element => {
   const previewURL = useMemo(
-    () => (file instanceof File ? URL.createObjectURL(file) : ``),
+    (): string => (file instanceof File ? URL.createObjectURL(file) : ``),
     [file]
   );
-  const size = useMemo(() => {
+  const size = useMemo((): string => {
     if (file instanceof File) {
       const sizeInKb = file.size / 1024;
       if (sizeInKb < 1024) return `${sizeInKb.toFixed(2)} KB`;
@@ -38,10 +38,10 @@ export const ItemPreviewFilesInput = ({
     return "";
   }, [file]);
 
-  const handleRemoveFile = () => {
+  const handleRemoveFile = (): void => {
     if (!value) return;
 
-    onChange(value.filter((_, i) => i !== index));
+    onChange(value.filter((_, i): boolean => i !== index));
   };
 
   return (

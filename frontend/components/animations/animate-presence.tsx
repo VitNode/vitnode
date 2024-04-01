@@ -7,6 +7,9 @@ interface Props extends AnimatePresenceProps {
   children: ReactNode;
 }
 
-export const AnimatePresenceClient = ({ children, ...props }: Props) => {
+export const AnimatePresenceClient = ({
+  children,
+  ...props
+}: Props): JSX.Element => {
   return <AnimatePresence {...props}>{children}</AnimatePresence>;
 };

@@ -71,12 +71,12 @@ export const TabsEmojiButtonEditor = ({
   onResetSearch,
   searchValue,
   setActiveCategory
-}: Props) => {
+}: Props): JSX.Element => {
   const t = useTranslations("core.editor.emoji");
 
   return (
     <div className="border-b-2 flex justify-between">
-      {categories.map(category => {
+      {categories.map((category): JSX.Element => {
         const active = activeCategory === category.id && !searchValue;
         const Icon = category.icon;
 
@@ -91,7 +91,7 @@ export const TabsEmojiButtonEditor = ({
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-expect-error
             tooltip={t(`categories.${category.id}`)}
-            onClick={() => {
+            onClick={(): void => {
               setActiveCategory(category.id);
               onResetSearch();
             }}

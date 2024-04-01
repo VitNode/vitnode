@@ -43,7 +43,7 @@ export class DownloadAdminCoreLanguageService {
 
     const pluginsPath: string[] = [];
     if (plugins.length > 0 && !all) {
-      plugins.forEach(plugin => {
+      plugins.forEach((plugin) => {
         const name = `${plugin}.json`;
         const pluginPath = join(path, name);
         if (!fs.existsSync(pluginPath)) {

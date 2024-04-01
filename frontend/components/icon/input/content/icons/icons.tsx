@@ -5,7 +5,7 @@ import { Icon, type IconLucideNames } from "@/components/icon/icon";
 import type { IconInputProps } from "../content";
 import { Button } from "@/components/ui/button";
 
-interface Props extends IconInputProps {
+export interface IconsContentIconInputProps extends IconInputProps {
   search: string;
 }
 
@@ -16,9 +16,9 @@ export const IconsContentIconInput = ({
   search,
   setOpen,
   value
-}: Props) => {
+}: IconsContentIconInputProps): JSX.Element => {
   const t = useTranslations("core.icon_picker.icons");
-  const data = iconNamesArray.filter(name =>
+  const data = iconNamesArray.filter((name): boolean =>
     name.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -28,27 +28,29 @@ export const IconsContentIconInput = ({
 
   return (
     <>
-      {data.slice(0, 42).map(name => (
-        <Button
-          key={name}
-          size="icon"
-          ariaLabel={name}
-          variant={value === name ? "default" : "ghost"}
-          onClick={() => {
-            if (value === name) {
-              onChange("");
+      {data.slice(0, 42).map(
+        (name): JSX.Element => (
+          <Button
+            key={name}
+            size="icon"
+            ariaLabel={name}
+            variant={value === name ? "default" : "ghost"}
+            onClick={(): void => {
+              if (value === name) {
+                onChange("");
+                setOpen(false);
+
+                return;
+              }
+
+              onChange(name);
               setOpen(false);
-
-              return;
-            }
-
-            onChange(name);
-            setOpen(false);
-          }}
-        >
-          <Icon name={name} />
-        </Button>
-      ))}
+            }}
+          >
+            <Icon name={name} />
+          </Button>
+        )
+      )}
     </>
   );
 };

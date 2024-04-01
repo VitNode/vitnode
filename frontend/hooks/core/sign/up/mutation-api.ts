@@ -14,7 +14,13 @@ interface Args {
   installPage?: boolean;
 }
 
-export const mutationApi = async ({ installPage, variables }: Args) => {
+export const mutationApi = async ({
+  installPage,
+  variables
+}: Args): Promise<{
+  data?: Core_Members__Sign_UpMutation;
+  error?: unknown;
+}> => {
   try {
     const { data } = await fetcher<
       Core_Members__Sign_UpMutation,

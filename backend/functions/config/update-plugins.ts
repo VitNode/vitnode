@@ -26,8 +26,8 @@ export const updateNavAdminPlugin = async ({
   });
 
   const update = await Promise.all(
-    config.nav.map(async item => {
-      const itemExist = navFromDatabase.find(el => el.code === item.code);
+    config.nav.map(async (item) => {
+      const itemExist = navFromDatabase.find((el) => el.code === item.code);
 
       if (itemExist) {
         const update = await db
@@ -57,8 +57,8 @@ export const updateNavAdminPlugin = async ({
   );
 
   Promise.all(
-    navFromDatabase.map(async item => {
-      const exist = update.find(el => el.id === item.id);
+    navFromDatabase.map(async (item) => {
+      const exist = update.find((el) => el.id === item.id);
       if (exist) return;
 
       await db.delete(core_plugins_nav).where(eq(core_plugins_nav.id, item.id));
@@ -76,7 +76,8 @@ export const updatePlugins = async ({
     await Promise.all(
       plugins
         .filter(
-          plugin => !["database", "plugins.module.ts", "core"].includes(plugin)
+          (plugin) =>
+            !["database", "plugins.module.ts", "core"].includes(plugin)
         )
         .map(async (pluginName, index) => {
           const configPath = join(

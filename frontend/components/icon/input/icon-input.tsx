@@ -2,7 +2,13 @@
 
 import { Plus, X } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Suspense, forwardRef, lazy, useState } from "react";
+import {
+  Suspense,
+  forwardRef,
+  lazy,
+  useState,
+  type ComponentType
+} from "react";
 
 import { Icon, type IconLucideNames } from "@/components/icon/icon";
 import { Button } from "@/components/ui/button";
@@ -15,10 +21,19 @@ import { cn } from "@/functions/classnames";
 import { Loader } from "@/components/loader";
 import type { IconInputProps } from "./content/content";
 
-const Content = lazy(() =>
-  import("./content/content").then(module => ({
-    default: module.ContentIconInput
-  }))
+const Content = lazy(
+  (): Promise<{
+    default: ComponentType<IconInputProps>;
+  }> =>
+    import("./content/content").then(
+      (
+        module
+      ): {
+        default: ComponentType<IconInputProps>;
+      } => ({
+        default: module.ContentIconInput
+      })
+    )
 );
 
 interface Props extends Omit<IconInputProps, "setOpen"> {
@@ -26,7 +41,7 @@ interface Props extends Omit<IconInputProps, "setOpen"> {
 }
 
 export const IconInput = forwardRef<HTMLButtonElement, Props>(
-  ({ className, onChange, value }, ref) => {
+  ({ className, onChange, value }, ref): JSX.Element => {
     const t = useTranslations("core");
     const [open, setOpen] = useState(false);
 
@@ -43,9 +58,7 @@ export const IconInput = forwardRef<HTMLButtonElement, Props>(
             {value && (
               <Button
                 variant="destructiveGhost"
-                onClick={() => {
-                  onChange("");
-                }}
+                onClick={(): void => onChange("")}
               >
                 <X /> {t("icon_picker.remove")}
               </Button>

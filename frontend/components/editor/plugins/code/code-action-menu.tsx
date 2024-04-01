@@ -8,7 +8,7 @@ interface Props {
 
 export const CodeActionMenuPluginEditor = ({
   anchorElem = document.body
-}: Props) => {
+}: Props): JSX.Element => {
   return createPortal(
     <ContainerCodeActionMenuPluginEditor anchorElem={anchorElem} />,
     anchorElem

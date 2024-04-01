@@ -15,7 +15,7 @@ export const ToolbarDataTable = ({
   filters,
   searchPlaceholder,
   startTransition
-}: ToolbarDataTableProps) => {
+}: ToolbarDataTableProps): JSX.Element | null => {
   if (!searchPlaceholder && filters && filters && advancedFilters) return null;
 
   return (

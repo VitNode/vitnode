@@ -10,11 +10,19 @@ export interface CreateTopicViewProps {
   data: Forum_Forums__Show_ItemQuery;
 }
 
-export default function CreateTopicView({ data }: CreateTopicViewProps) {
+export default function CreateTopicView({
+  data
+}: CreateTopicViewProps): JSX.Element {
   const { convertText } = useTextLang();
 
   const breadcrumbsItems = data.forum_forums__show.edges[0].breadcrumbs.map(
-    item => ({
+    (
+      item
+    ): {
+      href: string;
+      id: number;
+      text: string;
+    } => ({
       id: item.id,
       text: convertText(item.name),
       href: `/forum/${item.id}`

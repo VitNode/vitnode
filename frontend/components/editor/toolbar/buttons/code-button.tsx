@@ -13,17 +13,19 @@ import {
 } from "@/components/ui/tooltip";
 import { useUpdateStateEditor } from "../hooks/use-update-state-editor";
 
-export const CodeButtonEditor = () => {
+export const CodeButtonEditor = (): JSX.Element => {
   const t = useTranslations("core.editor.text");
   const [isCode, setIsCode] = useState(false);
   const [editor] = useLexicalComposerContext();
 
   useUpdateStateEditor({
-    handleChange: () => {
+    handleChange: (): boolean => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
       setIsCode(selection.hasFormat("code"));
+
+      return true;
     }
   });
 
@@ -34,7 +36,7 @@ export const CodeButtonEditor = () => {
           <div>
             <Toggle
               aria-label={t("code")}
-              onClick={() =>
+              onClick={(): boolean =>
                 editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code")
               }
               pressed={isCode}

@@ -10,5 +10,5 @@ export const FilterToolbarDataTableContext = createContext<Args>({
   title: ""
 });
 
-export const useFilterToolbarDataTable = () =>
+export const useFilterToolbarDataTable = (): Args =>
   useContext(FilterToolbarDataTableContext);

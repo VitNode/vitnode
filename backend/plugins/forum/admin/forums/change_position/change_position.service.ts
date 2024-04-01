@@ -36,8 +36,8 @@ export class ChangePositionForumForumsService {
     let index = 0;
     const newChildrenIndexes: { id: number; position: number }[] = [];
     allChildrenParent
-      .filter(item => item.id !== id)
-      .forEach(item => {
+      .filter((item) => item.id !== id)
+      .forEach((item) => {
         // Skip the item that we want to move
         if (index_to_move === index) {
           index++;
@@ -57,7 +57,7 @@ export class ChangePositionForumForumsService {
     });
 
     await Promise.all(
-      newChildrenIndexes.map(async item => {
+      newChildrenIndexes.map(async (item) => {
         await this.databaseService.db
           .update(forum_forums)
           .set({

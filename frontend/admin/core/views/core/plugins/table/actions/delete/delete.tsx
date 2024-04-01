@@ -5,7 +5,7 @@ import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
 import type { ShowAdminPlugins } from "@/graphql/hooks";
 
 const ContentDeletePluginActionsAdmin = lazy(() =>
-  import("./content").then(module => ({
+  import("./content").then((module) => ({
     default: module.ContentDeletePluginActionsAdmin
   }))
 );

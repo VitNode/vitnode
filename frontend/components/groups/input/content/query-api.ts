@@ -9,7 +9,7 @@ import {
 
 export const queryApi = async (
   variables: Admin__Core_Groups__Show_ShortQueryVariables
-) => {
+): Promise<Admin__Core_Groups__Show_ShortQuery> => {
   const { data } = await fetcher<
     Admin__Core_Groups__Show_ShortQuery,
     Admin__Core_Groups__Show_ShortQueryVariables

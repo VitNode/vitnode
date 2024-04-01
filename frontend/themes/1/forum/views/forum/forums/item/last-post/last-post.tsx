@@ -12,7 +12,7 @@ interface Props {
   lastPosts: LastPostsShowForumForums[];
 }
 
-export const LastPostItemForum = ({ lastPosts }: Props) => {
+export const LastPostItemForum = ({ lastPosts }: Props): JSX.Element | null => {
   const t = useTranslations("forum");
   const { convertNameToLink, convertText } = useTextLang();
 
@@ -36,8 +36,8 @@ export const LastPostItemForum = ({ lastPosts }: Props) => {
         </Link>
         <div className="text-muted-foreground text-sm">
           {t.rich("by", {
-            user: () => <UserLastPostItemForum {...user} />,
-            date: () => <DateFormat date={created} />
+            user: (): JSX.Element => <UserLastPostItemForum {...user} />,
+            date: (): JSX.Element => <DateFormat date={created} />
           })}
         </div>
       </div>

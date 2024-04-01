@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/tooltip";
 
 const Content = lazy(() =>
-  import("../../create-edit/create-edit").then(module => ({
+  import("../../create-edit/create-edit").then((module) => ({
     default: module.ContentCreateEditNavAdmin
   }))
 );

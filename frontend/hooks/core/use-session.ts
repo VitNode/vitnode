@@ -24,4 +24,4 @@ export const SessionContext = createContext<Args>({
   }
 });
 
-export const useSession = () => useContext(SessionContext);
+export const useSession = (): Args => useContext(SessionContext);

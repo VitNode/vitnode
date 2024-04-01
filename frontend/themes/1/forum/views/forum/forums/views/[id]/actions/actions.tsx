@@ -11,7 +11,9 @@ interface Props {
   permissions: Pick<PermissionsForumForums, "can_create">;
 }
 
-export const ActionsForumsForum = ({ permissions }: Props) => {
+export const ActionsForumsForum = ({
+  permissions
+}: Props): JSX.Element | null => {
   const t = useTranslations("forum.topics.create");
   const pathname = usePathname();
 

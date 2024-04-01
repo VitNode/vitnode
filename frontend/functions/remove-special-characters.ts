@@ -1,4 +1,4 @@
-export const removeSpecialCharacters = (text: string) =>
+export const removeSpecialCharacters = (text: string): string =>
   text
     .trimStart()
     .trimEnd()
@@ -9,6 +9,6 @@ export const removeSpecialCharacters = (text: string) =>
     .replace(/ł/g, "l")
     .trim();
 
-export const checkSpecialCharacters = (text: string) => {
+export const checkSpecialCharacters = (text: string): boolean => {
   return /^[a-z0-9-]+$/i.test(text);
 };

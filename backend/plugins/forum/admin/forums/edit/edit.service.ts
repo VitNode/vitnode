@@ -39,9 +39,9 @@ export class EditForumForumsService {
       });
 
     const update = await Promise.all(
-      name.map(async item => {
+      name.map(async (item) => {
         const itemExist = names.find(
-          el => el.language_code === item.language_code
+          (el) => el.language_code === item.language_code
         );
 
         if (itemExist) {
@@ -68,8 +68,8 @@ export class EditForumForumsService {
 
     // Delete remaining translations
     Promise.all(
-      names.map(async item => {
-        const exist = update.find(name => name.id === item.id);
+      names.map(async (item) => {
+        const exist = update.find((name) => name.id === item.id);
         if (exist) return;
 
         await this.databaseService.db
@@ -92,9 +92,9 @@ export class EditForumForumsService {
       });
 
     const update = await Promise.all(
-      description.map(async item => {
+      description.map(async (item) => {
         const itemExist = descriptions.find(
-          el => el.language_code === item.language_code
+          (el) => el.language_code === item.language_code
         );
 
         if (itemExist) {
@@ -119,8 +119,8 @@ export class EditForumForumsService {
 
     // Delete remaining translations
     Promise.all(
-      descriptions.map(async item => {
-        const exist = update.find(name => name.id === item.id);
+      descriptions.map(async (item) => {
+        const exist = update.find((name) => name.id === item.id);
         if (exist) return;
 
         await this.databaseService.db
@@ -155,8 +155,10 @@ export class EditForumForumsService {
       });
 
     const update = await Promise.all(
-      permissions.groups.map(async item => {
-        const itemExist = getAllPermissions.find(el => el.group_id === item.id);
+      permissions.groups.map(async (item) => {
+        const itemExist = getAllPermissions.find(
+          (el) => el.group_id === item.id
+        );
 
         if (itemExist) {
           const update = await this.databaseService.db
@@ -179,8 +181,8 @@ export class EditForumForumsService {
 
     // Delete remaining groups
     Promise.all(
-      getAllPermissions.map(async item => {
-        const exist = update.find(name => name.id === item.id);
+      getAllPermissions.map(async (item) => {
+        const exist = update.find((name) => name.id === item.id);
         if (exist) return;
 
         await this.databaseService.db
@@ -268,7 +270,7 @@ export class EditForumForumsService {
       },
       breadcrumbs,
       children: await Promise.all(
-        children.map(async item => {
+        children.map(async (item) => {
           const {
             children: breadcrumbs,
             stats,

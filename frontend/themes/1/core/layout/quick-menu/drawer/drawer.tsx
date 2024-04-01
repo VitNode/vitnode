@@ -14,7 +14,7 @@ import { NavDrawerQuickMenu } from "./nav/nav";
 export const classNameDrawerQuickMenu =
   "w-full justify-start [&>svg]:text-muted-foreground font-normal";
 
-export const DrawerQuickMenu = () => {
+export const DrawerQuickMenu = (): JSX.Element => {
   const t = useTranslations("core");
   const { onSubmit } = useSignOutAPI();
   const { session } = useSession();
@@ -84,7 +84,9 @@ export const DrawerQuickMenu = () => {
             <DrawerClose asChild>
               <Button
                 variant="ghost"
-                onClick={() => window.open("/admin", "_blank")}
+                onClick={(): void => {
+                  window.open("/admin", "_blank");
+                }}
                 className={classNameDrawerQuickMenu}
               >
                 <KeyRound />

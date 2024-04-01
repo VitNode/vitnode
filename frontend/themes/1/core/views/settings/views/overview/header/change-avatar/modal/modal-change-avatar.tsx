@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, type ComponentType } from "react";
 
 import {
   DialogDescription,
@@ -15,14 +15,24 @@ import { FilesInput } from "@/components/ui/files/files-input";
 import { Loader } from "@/components/loader";
 import { useModalChangeAvatar } from "@/hooks/core/settings/avatar/use-modal-change-avatar";
 import { useSession } from "@/hooks/core/use-session";
+import type { CropperModalChangeAvatarProps } from "./cropper/cropper-modal-change-avatar";
 
-const CropperModalChangeAvatar = lazy(() =>
-  import("./cropper/cropper-modal-change-avatar").then(module => ({
-    default: module.CropperModalChangeAvatar
-  }))
+const CropperModalChangeAvatar = lazy(
+  (): Promise<{
+    default: ComponentType<CropperModalChangeAvatarProps>;
+  }> =>
+    import("./cropper/cropper-modal-change-avatar").then(
+      (
+        module
+      ): {
+        default: ComponentType<CropperModalChangeAvatarProps>;
+      } => ({
+        default: module.CropperModalChangeAvatar
+      })
+    )
 );
 
-export const ModalChangeAvatar = () => {
+export const ModalChangeAvatar = (): JSX.Element | null => {
   const t = useTranslations("core");
   const { session } = useSession();
   const { form, onSubmit } = useModalChangeAvatar();
@@ -53,7 +63,7 @@ export const ModalChangeAvatar = () => {
                 <FormField
                   control={form.control}
                   name="type"
-                  render={({ field }) => (
+                  render={({ field }): JSX.Element => (
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
@@ -80,7 +90,7 @@ export const ModalChangeAvatar = () => {
                 <FormField
                   control={form.control}
                   name="file"
-                  render={({ field }) => (
+                  render={({ field }): JSX.Element => (
                     <FilesInput
                       id="picture"
                       {...field}

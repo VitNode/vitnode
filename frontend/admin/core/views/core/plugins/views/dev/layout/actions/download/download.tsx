@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import type { ShowAdminPlugins } from "@/graphql/hooks";
 
 const Content = lazy(() =>
-  import("./content").then(module => ({
+  import("./content").then((module) => ({
     default: module.ContentDownloadActionDevPluginAdmin
   }))
 );

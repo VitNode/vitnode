@@ -12,11 +12,15 @@ interface Props {
   className?: string;
 }
 
-export const WrapperItemForum = ({ children, className, href }: Props) => {
+export const WrapperItemForum = ({
+  children,
+  className,
+  href
+}: Props): JSX.Element => {
   const { push } = useRouter();
 
   return (
-    <div onClick={() => push(href)} className={className}>
+    <div onClick={(): void => push(href)} className={className}>
       {children}
     </div>
   );

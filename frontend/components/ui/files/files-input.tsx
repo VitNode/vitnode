@@ -31,30 +31,30 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
       ...props
     },
     ref
-  ) => {
+  ): JSX.Element => {
     const t = useTranslations("core");
     const [isDrag, setDrag] = useState(false);
     const currentRef = useRef<HTMLInputElement>(null);
     const inputRef = useMergeRefs([ref, currentRef]);
 
-    const handleUploadFile = (files: FileList | null) => {
+    const handleUploadFile = (files: FileList | null): void => {
       if (!files || files.length === 0) return;
 
       // Validate files
-      const currentFiles = Array.from(files).filter(file => {
+      const currentFiles = Array.from(files).filter((file): File | null => {
         const splitFileName = file.name.split(".");
         const extensionType = splitFileName.at(-1);
 
         if (extensionType && !acceptExtensions.includes(extensionType)) {
           toast.error(t("forms.files.errors.extension", { file: file.name }));
 
-          return;
+          return null;
         }
 
         if (maxFileSizeInMb && file.size > maxFileSizeInMb * 1024 * 1024) {
           toast.error(t("forms.files.errors.max_size", { file: file.name }));
 
-          return;
+          return null;
         }
 
         return file;
@@ -87,21 +87,21 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
             )}
             role="button"
             tabIndex={disabled ? -1 : 0}
-            onClick={() => currentRef.current?.click()}
-            onKeyDown={e => {
+            onClick={(): void => currentRef.current?.click()}
+            onKeyDown={(e): void => {
               if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
                 currentRef.current?.click();
               }
             }}
-            onDragOver={e => {
+            onDragOver={(e): void => {
               if (!e.dataTransfer.types.includes("Files")) return;
               e.preventDefault();
               e.stopPropagation();
 
               setDrag(true);
             }}
-            onDragLeave={e => {
+            onDragLeave={(e): void => {
               if (!e.dataTransfer.types.includes("Files")) return;
               e.preventDefault();
               e.stopPropagation();
@@ -109,7 +109,7 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
               if (e.currentTarget.contains(e.relatedTarget as Node)) return;
               setDrag(false);
             }}
-            onDrop={e => {
+            onDrop={(e): void => {
               if (!e.dataTransfer.types.includes("Files")) return;
               e.preventDefault();
               e.stopPropagation();
@@ -137,7 +137,7 @@ const FilesInput = forwardRef<HTMLInputElement, InputProps>(
               className="hidden"
               disabled={disabled}
               ref={inputRef}
-              onChange={e => handleUploadFile(e.target.files)}
+              onChange={(e): void => handleUploadFile(e.target.files)}
               multiple={multiple}
               value=""
               {...props}

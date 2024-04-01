@@ -18,7 +18,7 @@ export const getConvertTextLang = ({
     return text[0].value;
   }
 
-  const textFromLang = text.find(t => t.language_code === locale);
+  const textFromLang = text.find((t): boolean => t.language_code === locale);
 
   if (textFromLang) {
     return textFromLang.value;
@@ -27,7 +27,10 @@ export const getConvertTextLang = ({
   return text[0].value;
 };
 
-export const useTextLang = () => {
+export const useTextLang = (): {
+  convertNameToLink: (props: { id: number; name: TextLanguage[] }) => string;
+  convertText: (text?: TextLanguage[]) => string;
+} => {
   const locale = useLocale();
 
   const convertNameToLink = ({
@@ -36,7 +39,7 @@ export const useTextLang = () => {
   }: {
     id: number;
     name: TextLanguage[];
-  }) => {
+  }): string => {
     const text = removeSpecialCharacters(
       getConvertTextLang({ locale, text: name })
     ).toLowerCase();
@@ -45,7 +48,7 @@ export const useTextLang = () => {
   };
 
   return {
-    convertText: (text?: TextLanguage[]) =>
+    convertText: (text?: TextLanguage[]): string =>
       getConvertTextLang({ locale, text }),
     convertNameToLink
   };

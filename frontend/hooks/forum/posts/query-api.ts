@@ -9,7 +9,7 @@ import {
 
 export const queryApi = async (
   variables: Forum_Posts__Show_MoreQueryVariables
-) => {
+): Promise<Forum_Posts__Show_MoreQuery> => {
   const { data } = await fetcher<
     Forum_Posts__Show_MoreQuery,
     Forum_Posts__Show_MoreQueryVariables

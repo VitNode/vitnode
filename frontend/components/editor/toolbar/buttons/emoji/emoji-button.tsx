@@ -1,6 +1,6 @@
 import { Smile } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Suspense, lazy, useState } from "react";
+import { Suspense, lazy, useState, type ComponentType } from "react";
 
 import {
   Popover,
@@ -9,14 +9,24 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
+import type { ContentEmojiButtonEditorProps } from "./content";
 
-const ContentEmojiButtonEditor = lazy(() =>
-  import("./content").then(module => ({
-    default: module.ContentEmojiButtonEditor
-  }))
+const ContentEmojiButtonEditor = lazy(
+  (): Promise<{
+    default: ComponentType<ContentEmojiButtonEditorProps>;
+  }> =>
+    import("./content").then(
+      (
+        module
+      ): {
+        default: ComponentType<ContentEmojiButtonEditorProps>;
+      } => ({
+        default: module.ContentEmojiButtonEditor
+      })
+    )
 );
 
-export const EmojiButtonEditor = () => {
+export const EmojiButtonEditor = (): JSX.Element => {
   const t = useTranslations("core.editor.emoji");
   const [open, setOpen] = useState(false);
 

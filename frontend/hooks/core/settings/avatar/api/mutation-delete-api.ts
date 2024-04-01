@@ -9,7 +9,10 @@ import {
   type Core_Members__Avatar__DeleteMutationVariables
 } from "@/graphql/hooks";
 
-export const mutationDeleteApi = async () => {
+export const mutationDeleteApi = async (): Promise<{
+  data?: Core_Members__Avatar__DeleteMutation;
+  error?: unknown;
+}> => {
   try {
     const { data } = await fetcher<
       Core_Members__Avatar__DeleteMutation,

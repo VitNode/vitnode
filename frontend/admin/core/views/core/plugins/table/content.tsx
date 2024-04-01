@@ -83,7 +83,7 @@ export const ContentTablePluginsAdmin = ({
         }
       },
       {
-        header: val => {
+        header: (val) => {
           return (
             <HeaderSortingDataTable {...val}>
               {tCore("table.updated")}

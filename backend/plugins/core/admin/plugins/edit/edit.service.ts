@@ -76,7 +76,7 @@ export class EditAdminPluginsService {
     config.author_url = rest.author_url;
     config.support_url = rest.support_url;
 
-    fs.writeFile(path, JSON.stringify(config, null, 2), err => {
+    fs.writeFile(path, JSON.stringify(config, null, 2), (err) => {
       if (err) {
         throw new CustomError({
           code: "CANNOT_WRITE_FILE",

@@ -25,7 +25,7 @@ export default async function Layout({
   try {
     const data = await getTopicData({ id });
     const breadcrumbItems = data.forum_topics__show.edges[0].breadcrumbs.map(
-      item => ({
+      (item) => ({
         id: item.id,
         text: getConvertTextLang({ locale, text: item.name }),
         href: `/forum/${item.id}`

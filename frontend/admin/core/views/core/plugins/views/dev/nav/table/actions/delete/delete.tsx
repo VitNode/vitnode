@@ -18,7 +18,7 @@ import {
 import type { ContentDeleteActionTableNavDevPluginAdminProps } from "./content";
 
 const Content = lazy(() =>
-  import("./content").then(module => ({
+  import("./content").then((module) => ({
     default: module.ContentDeleteActionTableNavDevPluginAdmin
   }))
 );

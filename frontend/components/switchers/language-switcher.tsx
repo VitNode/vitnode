@@ -17,13 +17,13 @@ import { useGlobals } from "@/hooks/core/use-globals";
 import { useSession } from "@/hooks/core/use-session";
 import { CONFIG } from "@/config";
 
-export const LanguageSwitcher = () => {
+export const LanguageSwitcher = (): JSX.Element | null => {
   const t = useTranslations("core");
   const { languages } = useGlobals();
   const locale = useLocale();
   const { replace } = useRouter();
   const pathname = usePathname();
-  const enableLocales = languages.filter(lang => lang.enabled);
+  const enableLocales = languages.filter((lang): boolean => lang.enabled);
   const { rebuild_required } = useSession();
 
   if (
@@ -47,15 +47,17 @@ export const LanguageSwitcher = () => {
       <DropdownMenuContent>
         <DropdownMenuRadioGroup
           value={locale}
-          onValueChange={id => {
+          onValueChange={(id): void => {
             replace(pathname, { locale: id });
           }}
         >
-          {enableLocales.map(language => (
-            <DropdownMenuRadioItem key={language.code} value={language.code}>
-              {language.name}
-            </DropdownMenuRadioItem>
-          ))}
+          {enableLocales.map(
+            (language): JSX.Element => (
+              <DropdownMenuRadioItem key={language.code} value={language.code}>
+                {language.name}
+              </DropdownMenuRadioItem>
+            )
+          )}
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

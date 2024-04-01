@@ -9,11 +9,19 @@ interface Args {
   date: number | Date;
 }
 
-export const useDateFormat = ({ date }: Args) => {
+export const useDateFormat = ({
+  date
+}: Args): {
+  currentLanguage: { code: string; locale: string } | undefined;
+  currentTime: Date;
+  fullDate: string;
+  getDateFormat: (dateFormat: string) => string;
+  getDateWithFormatDistance: () => string;
+} => {
   const currentLocale = useLocale();
   const { languages } = useGlobals();
   const currentLanguage = languages.find(
-    language => language.code === currentLocale
+    (language): boolean => language.code === currentLocale
   );
 
   const currentTime =
@@ -23,7 +31,7 @@ export const useDateFormat = ({ date }: Args) => {
     (new Date().getTime() - currentTime.getTime()) / 1000
   );
 
-  const getDateFormat = (dateFormat: string) => {
+  const getDateFormat = (dateFormat: string): string => {
     const locale = currentLanguage?.locale || "enUS";
 
     return format(currentTime, dateFormat, {
@@ -33,7 +41,7 @@ export const useDateFormat = ({ date }: Args) => {
 
   const fullDate = getDateFormat("P p");
 
-  const getDateWithFormatDistance = () => {
+  const getDateWithFormatDistance = (): string => {
     // When date is < 1 day
     if (relative < 86400) {
       const locale = currentLanguage?.locale || "enUS";

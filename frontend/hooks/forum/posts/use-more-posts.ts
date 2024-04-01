@@ -46,7 +46,7 @@ export const useMorePosts = ({
     },
     getNextPageParam: ({ forum_posts__show: { pageInfo } }, allPages) => {
       const totalCount = allPages.flatMap(
-        item => item.forum_posts__show.edges
+        (item) => item.forum_posts__show.edges
       ).length;
       const first = postsToLoad - totalCount;
 
@@ -61,7 +61,8 @@ export const useMorePosts = ({
   });
 
   const data = useMemo(
-    () => query.data?.pages.flatMap(item => item.forum_posts__show.edges) ?? [],
+    () =>
+      query.data?.pages.flatMap((item) => item.forum_posts__show.edges) ?? [],
     [query.data]
   );
 

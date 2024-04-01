@@ -9,7 +9,9 @@ interface Props {
   children: ReactNode;
 }
 
-export const ChildrenWrapperCategoryForum = ({ children }: Props) => {
+export const ChildrenWrapperCategoryForum = ({
+  children
+}: Props): JSX.Element => {
   const { open } = useWrapperCategoryForum();
 
   return (

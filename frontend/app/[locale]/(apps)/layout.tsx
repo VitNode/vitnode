@@ -9,7 +9,7 @@ import {
 } from "@/graphql/hooks";
 import { InternalErrorView } from "@/admin/core/global/internal-error/internal-error-view";
 
-const getData = async () => {
+const getData = async (): Promise<Core_MiddlewareQuery> => {
   const { data } = await fetcher<
     Core_MiddlewareQuery,
     Core_MiddlewareQueryVariables
@@ -24,7 +24,9 @@ interface Props {
   children: ReactNode;
 }
 
-export default async function LocaleLayout({ children }: Props) {
+export default async function LocaleLayout({
+  children
+}: Props): Promise<JSX.Element> {
   try {
     const data = await getData();
 

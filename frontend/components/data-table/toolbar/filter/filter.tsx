@@ -24,7 +24,7 @@ export function FilterToolbarDataTable({
   children,
   id,
   title
-}: FilterToolbarDataTableProps) {
+}: FilterToolbarDataTableProps): JSX.Element {
   const searchParams = useSearchParams();
   const selectedValues = searchParams.getAll(id);
 

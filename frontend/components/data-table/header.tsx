@@ -14,14 +14,14 @@ export function HeaderSortingDataTable<T>({
   children,
   column,
   table
-}: Props<T>) {
+}: Props<T>): JSX.Element {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { push } = useRouter();
   const defaultSortingState = table.getState().sorting;
 
-  const icon = () => {
-    const getSortDirectionIcon = (direction: string) => {
+  const icon = (): JSX.Element => {
+    const getSortDirectionIcon = (direction: string): JSX.Element => {
       return direction === "asc" ? <ArrowUp /> : <ArrowDown />;
     };
 
@@ -44,11 +44,11 @@ export function HeaderSortingDataTable<T>({
       variant="ghost"
       className="-ml-3"
       size="sm"
-      onClick={() => {
+      onClick={(): void => {
         const params = new URLSearchParams(searchParams);
         params.set("sortBy", column.id);
 
-        const sortDirection = () => {
+        const sortDirection = (): string => {
           if (
             column.id === searchParams.get("sortBy") &&
             searchParams.get("sortDirection")

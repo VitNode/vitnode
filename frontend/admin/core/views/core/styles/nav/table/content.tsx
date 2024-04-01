@@ -64,12 +64,12 @@ export const ContentTableContentNavAdmin = ({
   );
 
   const flattenedItems = dragAndDrop.flattenedItems({
-    data: data.map(item => ({
+    data: data.map((item) => ({
       ...item,
-      children: item.children.map(child => ({ ...child, children: [] }))
+      children: item.children.map((child) => ({ ...child, children: [] }))
     }))
   });
-  const activeItem = flattenedItems.find(i => i.id === activeId);
+  const activeItem = flattenedItems.find((i) => i.id === activeId);
   const sortedIds = useMemo(
     () => flattenedItems.map(({ id }) => id),
     [flattenedItems]
@@ -117,16 +117,16 @@ export const ContentTableContentNavAdmin = ({
         const { depth, parentId } = projected;
 
         const clonedItems: FlatTree<ShowCoreNav>[] = flattenTree({
-          tree: data.map(item => ({
+          tree: data.map((item) => ({
             ...item,
-            children: item.children.map(child => ({ ...child, children: [] }))
+            children: item.children.map((child) => ({ ...child, children: [] }))
           }))
         });
 
         const toIndex = clonedItems.findIndex(({ id }) => id === over.id);
         const fromIndex = clonedItems.findIndex(({ id }) => id === active.id);
         const sortedItems = arrayMove(clonedItems, fromIndex, toIndex);
-        const activeIndex = sortedItems.findIndex(i => i.id === active.id);
+        const activeIndex = sortedItems.findIndex((i) => i.id === active.id);
         sortedItems[activeIndex] = {
           ...sortedItems[activeIndex],
           depth,
@@ -134,7 +134,7 @@ export const ContentTableContentNavAdmin = ({
         };
 
         const dataAfterUpdate: FlatTree<ShowCoreNav>[] = sortedItems.map(
-          item => ({
+          (item) => ({
             ...item,
             children: []
           })
@@ -146,11 +146,11 @@ export const ContentTableContentNavAdmin = ({
           })
         );
 
-        const parents = sortedItems.filter(i => i.parentId === parentId);
-        const indexToMove = parents.findIndex(i => i.id === active.id);
+        const parents = sortedItems.filter((i) => i.parentId === parentId);
+        const indexToMove = parents.findIndex((i) => i.id === active.id);
 
         // -1 means that the item is the last one
-        const findActive = flattenedItems.find(i => i.id === active.id);
+        const findActive = flattenedItems.find((i) => i.id === active.id);
         if (!findActive) return;
 
         // Do nothing if drag and drop on the same item on the same level
@@ -166,16 +166,16 @@ export const ContentTableContentNavAdmin = ({
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
-        {flattenedItems.map(item => (
+        {flattenedItems.map((item) => (
           <ItemContentTableContentNavAdmin
             key={item.id}
             indentationWidth={indentationWidth}
-            onCollapse={id => {
+            onCollapse={(id) => {
               const isOpen = dragAndDrop.isOpenChildren.includes(id);
 
-              dragAndDrop.setIsOpenChildren(prev => {
+              dragAndDrop.setIsOpenChildren((prev) => {
                 if (isOpen) {
-                  return prev.filter(i => i !== id);
+                  return prev.filter((i) => i !== id);
                 }
 
                 return [...prev, id];

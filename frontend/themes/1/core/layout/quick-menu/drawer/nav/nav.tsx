@@ -10,7 +10,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { classNameDrawerQuickMenu } from "../drawer";
 import { Separator } from "@/components/ui/separator";
 
-export const NavDrawerQuickMenu = () => {
+export const NavDrawerQuickMenu = (): JSX.Element | null => {
   const { nav, session } = useSession();
   const [activeItems, setActiveItems] = useState<string[]>([]);
   const { convertText } = useTextLang();
@@ -25,7 +25,7 @@ export const NavDrawerQuickMenu = () => {
         "pb-5": !session
       })}
     >
-      {nav.map(item => {
+      {nav.map((item): JSX.Element => {
         if (item.children.length > 0) {
           return (
             <Accordion.Item key={item.id} value={item.id.toString()}>
@@ -40,10 +40,12 @@ export const NavDrawerQuickMenu = () => {
                       )
                     })
                   )}
-                  onClick={() =>
-                    setActiveItems(prev =>
+                  onClick={(): void =>
+                    setActiveItems((prev): string[] =>
                       prev.includes(item.id.toString())
-                        ? prev.filter(el => el !== item.id.toString())
+                        ? prev.filter(
+                            (el): boolean => el !== item.id.toString()
+                          )
                         : [...prev, item.id.toString()]
                     )
                   }
@@ -64,9 +66,11 @@ export const NavDrawerQuickMenu = () => {
 
               <Accordion.Content className="transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden">
                 <div className="pl-5">
-                  {item.children.map(child => (
-                    <ItemNavDrawerQuickMenu key={child.id} {...child} />
-                  ))}
+                  {item.children.map(
+                    (child): JSX.Element => (
+                      <ItemNavDrawerQuickMenu key={child.id} {...child} />
+                    )
+                  )}
                 </div>
               </Accordion.Content>
             </Accordion.Item>

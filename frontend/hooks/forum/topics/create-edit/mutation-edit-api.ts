@@ -11,7 +11,10 @@ import { fetcher } from "@/graphql/fetcher";
 
 export const mutationEditApi = async (
   variables: Forum_Topics__EditMutationVariables
-) => {
+): Promise<{
+  data?: Forum_Topics__EditMutation;
+  error?: unknown;
+}> => {
   try {
     const { data } = await fetcher<
       Forum_Topics__EditMutation,

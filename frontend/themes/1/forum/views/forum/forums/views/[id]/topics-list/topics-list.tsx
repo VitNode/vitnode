@@ -11,7 +11,7 @@ interface Props {
   initData: Forum_Forums__Show_ItemQuery["forum_topics__show"];
 }
 
-export const TopicsListForum = ({ initData }: Props) => {
+export const TopicsListForum = ({ initData }: Props): JSX.Element => {
   const { data, fetchNextPage, hasNextPage, isFetching } = useTopicsList({
     initData
   });
@@ -20,19 +20,21 @@ export const TopicsListForum = ({ initData }: Props) => {
     <Virtuoso
       data={data}
       useWindowScroll
-      endReached={() => {
+      endReached={(): void => {
         if (hasNextPage) {
           fetchNextPage();
         }
       }}
       components={{
-        Footer: () => {
+        Footer: (): JSX.Element | null => {
           if (!isFetching) return null;
 
           return <Loader className="mt-4" />;
         }
       }}
-      itemContent={(index, data) => <ItemTopicListForum {...data} />}
+      itemContent={(index, data): JSX.Element => (
+        <ItemTopicListForum {...data} />
+      )}
     />
   );
 };

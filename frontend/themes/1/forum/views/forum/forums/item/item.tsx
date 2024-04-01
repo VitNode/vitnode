@@ -31,7 +31,7 @@ export const ItemForum = ({
   id,
   last_posts: { edges: lastPosts },
   name
-}: ItemForumProps) => {
+}: ItemForumProps): JSX.Element => {
   const { convertNameToLink, convertText } = useTextLang();
   const href = `/forum/${convertNameToLink({ id, name })}`;
 
@@ -63,9 +63,11 @@ export const ItemForum = ({
 
           {children && children.length > 0 && (
             <div className="flex mt-2 flex-wrap">
-              {children.map(child => (
-                <ChildButtonItemForum key={child.id} {...child} />
-              ))}
+              {children.map(
+                (child): JSX.Element => (
+                  <ChildButtonItemForum key={child.id} {...child} />
+                )
+              )}
             </div>
           )}
         </div>

@@ -5,16 +5,18 @@ import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { useSession } from "@/hooks/core/use-session";
 import { ItemNav } from "./item";
 
-export const Nav = () => {
+export const Nav = (): JSX.Element => {
   const { nav } = useSession();
 
   return (
     <NavigationMenu.Root className="relative sm:block hidden z-10 flex-1">
       <div className="flex-1 overflow-x-auto h-full p-1 flex">
         <NavigationMenu.List className="flex-1 flex list-none gap-2">
-          {nav.map((data, i) => (
-            <ItemNav key={i} {...data} />
-          ))}
+          {nav.map(
+            (data, i): JSX.Element => (
+              <ItemNav key={i} {...data} />
+            )
+          )}
         </NavigationMenu.List>
       </div>
 

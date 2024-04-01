@@ -6,7 +6,7 @@ import { Loader } from "@/components/loader";
 import type { Admin__Core_Plugins__Nav__ShowQuery } from "@/graphql/hooks";
 
 const Content = lazy(() =>
-  import("./content").then(module => ({
+  import("./content").then((module) => ({
     default: module.ContentTableNavDevPluginAdmin
   }))
 );

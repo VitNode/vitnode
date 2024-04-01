@@ -11,9 +11,9 @@ const cookieFromStringToObject = (
   SameSite: boolean | "lax" | "strict" | "none" | undefined;
   Secure: boolean;
 }[] => {
-  return str.map(item =>
+  return str.map((item) =>
     Object.fromEntries(
-      item.split("; ").map(v => {
+      item.split("; ").map((v): string[] | [string, true] => {
         const current = v.split(/=(.*)/s).map(decodeURIComponent);
 
         if (current.length === 1) {
@@ -28,7 +28,7 @@ const cookieFromStringToObject = (
 
 export const setCookieFromApi = ({ res }: { res: Response }) => {
   return cookieFromStringToObject(res.headers.getSetCookie()).forEach(
-    cookie => {
+    (cookie): void => {
       const key = Object.keys(cookie)[0];
       const value = Object.values(cookie)[0];
 

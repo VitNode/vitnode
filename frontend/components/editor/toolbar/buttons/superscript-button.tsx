@@ -13,17 +13,19 @@ import {
 } from "@/components/ui/tooltip";
 import { useUpdateStateEditor } from "../hooks/use-update-state-editor";
 
-export const SuperscriptButtonEditor = () => {
+export const SuperscriptButtonEditor = (): JSX.Element => {
   const t = useTranslations("core.editor.text");
   const [isSuperscript, setIsSuperscript] = useState(false);
   const [editor] = useLexicalComposerContext();
 
   useUpdateStateEditor({
-    handleChange: () => {
+    handleChange: (): boolean => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
       setIsSuperscript(selection.hasFormat("superscript"));
+
+      return true;
     }
   });
 
@@ -34,7 +36,7 @@ export const SuperscriptButtonEditor = () => {
           <div>
             <Toggle
               aria-label={t("superscript")}
-              onClick={() =>
+              onClick={(): boolean =>
                 editor.dispatchCommand(FORMAT_TEXT_COMMAND, "superscript")
               }
               pressed={isSuperscript}

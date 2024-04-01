@@ -51,7 +51,7 @@ const getCodeLanguageOptions = (): CodeLanguageType[] => {
 
 const CODE_LANGUAGE_OPTIONS = getCodeLanguageOptions();
 
-export const LangCodeBlockButtonEditor = () => {
+export const LangCodeBlockButtonEditor = (): JSX.Element => {
   const t = useTranslations("core.editor");
   const [codeLanguage, setCodeLanguage] = useState("");
   const [editor] = useLexicalComposerContext();
@@ -60,14 +60,14 @@ export const LangCodeBlockButtonEditor = () => {
   );
 
   useUpdateStateEditor({
-    handleChange: () => {
+    handleChange: (): boolean => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
       const anchorNode = selection.anchor.getNode();
       let element =
         anchorNode.getKey() === "root"
           ? anchorNode
-          : $findMatchingParent(anchorNode, e => {
+          : $findMatchingParent(anchorNode, (e): boolean => {
               const parent = e.getParent();
 
               return parent !== null && $isRootOrShadowRoot(parent);
@@ -80,18 +80,20 @@ export const LangCodeBlockButtonEditor = () => {
       const elementKey = element.getKey();
       const elementDOM = editor.getElementByKey(elementKey);
       setSelectedElementKey(elementKey);
-      if (elementDOM === null || !$isCodeNode(element)) return;
+      if (elementDOM === null || !$isCodeNode(element)) return false;
 
       const language = element.getLanguage();
       setCodeLanguage(language ? CODE_LANGUAGE_MAP[language] || language : "");
+
+      return true;
     }
   });
 
   return (
     <Select
       value={codeLanguage}
-      onValueChange={val => {
-        editor.update(() => {
+      onValueChange={(val): void => {
+        editor.update((): void => {
           if (selectedElementKey === null) return;
 
           const node = $getNodeByKey(selectedElementKey);
@@ -118,12 +120,14 @@ export const LangCodeBlockButtonEditor = () => {
         </Tooltip>
       </TooltipProvider>
 
-      <SelectContent onCloseAutoFocus={() => editor.focus()}>
-        {CODE_LANGUAGE_OPTIONS.map(item => (
-          <SelectItem key={item.lang} value={item.lang}>
-            {item.friendlyName}
-          </SelectItem>
-        ))}
+      <SelectContent onCloseAutoFocus={(): void => editor.focus()}>
+        {CODE_LANGUAGE_OPTIONS.map(
+          (item): JSX.Element => (
+            <SelectItem key={item.lang} value={item.lang}>
+              {item.friendlyName}
+            </SelectItem>
+          )
+        )}
       </SelectContent>
     </Select>
   );

@@ -13,17 +13,19 @@ import {
 } from "@/components/ui/tooltip";
 import { useUpdateStateEditor } from "../hooks/use-update-state-editor";
 
-export const UnderlineButtonEditor = () => {
+export const UnderlineButtonEditor = (): JSX.Element => {
   const t = useTranslations("core.editor.text");
   const [isUnderline, setIsUnderline] = useState(false);
   const [editor] = useLexicalComposerContext();
 
   useUpdateStateEditor({
-    handleChange: () => {
+    handleChange: (): boolean => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
       setIsUnderline(selection.hasFormat("underline"));
+
+      return true;
     }
   });
 
@@ -34,7 +36,7 @@ export const UnderlineButtonEditor = () => {
           <div>
             <Toggle
               aria-label={t("underline")}
-              onClick={() =>
+              onClick={(): boolean =>
                 editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline")
               }
               pressed={isUnderline}

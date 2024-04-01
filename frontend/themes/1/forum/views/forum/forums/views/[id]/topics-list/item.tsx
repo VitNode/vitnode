@@ -14,7 +14,7 @@ export const ItemTopicListForum = ({
   id,
   title,
   user
-}: ItemTopicListForumProps) => {
+}: ItemTopicListForumProps): JSX.Element => {
   const t = useTranslations("forum");
   const { convertNameToLink, convertText } = useTextLang();
   const href = `/forum/topic/${convertNameToLink({ id, name: title })}`;
@@ -35,10 +35,10 @@ export const ItemTopicListForum = ({
         </h3>
         <span className="text-sm text-muted-foreground">
           {t.rich("by", {
-            user: () => (
+            user: (): JSX.Element => (
               <Link href={`/profile/${user.name_seo}`}>{user.name}</Link>
             ),
-            date: () => <DateFormat date={created} />
+            date: (): JSX.Element => <DateFormat date={created} />
           })}
         </span>
       </div>

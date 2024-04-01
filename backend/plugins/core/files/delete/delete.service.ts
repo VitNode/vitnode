@@ -30,7 +30,7 @@ export class DeleteCoreFilesService {
     this.checkIfFileExists({ dir_folder, name });
 
     // Remove file from server
-    unlink(`${dir_folder}/${name}`, err => {
+    unlink(`${dir_folder}/${name}`, (err) => {
       // eslint-disable-next-line no-console
       if (err) console.error(err);
     });

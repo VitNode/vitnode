@@ -14,7 +14,7 @@ const DATA: ConfigType = {
 };
 
 if (!fs.existsSync(configPath)) {
-  fs.writeFile(configPath, JSON.stringify(DATA, null, 2), "utf8", err => {
+  fs.writeFile(configPath, JSON.stringify(DATA, null, 2), "utf8", (err) => {
     if (err) throw err;
   });
 

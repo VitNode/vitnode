@@ -10,15 +10,15 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 
-export const UndoMoveButtonEditor = () => {
+export const UndoMoveButtonEditor = (): JSX.Element => {
   const t = useTranslations("core.editor.move");
   const [editor] = useLexicalComposerContext();
   const [canUndo, setCanUndo] = useState(false);
 
-  useEffect(() => {
+  useEffect((): (() => void) => {
     return editor.registerCommand<boolean>(
       CAN_UNDO_COMMAND,
-      payload => {
+      (payload): boolean => {
         setCanUndo(payload);
 
         return false;
@@ -32,7 +32,7 @@ export const UndoMoveButtonEditor = () => {
       variant="ghost"
       size="icon"
       className="size-9"
-      onClick={() => editor.dispatchCommand(UNDO_COMMAND, undefined)}
+      onClick={(): boolean => editor.dispatchCommand(UNDO_COMMAND, undefined)}
       ariaLabel={t("undo")}
       disabled={!canUndo}
     >

@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, type ComponentType } from "react";
 import { ImageIcon } from "lucide-react";
 
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
@@ -14,13 +14,22 @@ import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
 import { useSession } from "@/hooks/core/use-session";
 
-const ModalChangeAvatar = lazy(() =>
-  import("./modal/modal-change-avatar").then(module => ({
-    default: module.ModalChangeAvatar
-  }))
+const ModalChangeAvatar = lazy(
+  (): Promise<{
+    default: ComponentType<object>;
+  }> =>
+    import("./modal/modal-change-avatar").then(
+      (
+        module
+      ): {
+        default: ComponentType<object>;
+      } => ({
+        default: module.ModalChangeAvatar
+      })
+    )
 );
 
-export const ChangeAvatar = () => {
+export const ChangeAvatar = (): JSX.Element | null => {
   const t = useTranslations("core");
   const { session } = useSession();
   if (!session) return null;

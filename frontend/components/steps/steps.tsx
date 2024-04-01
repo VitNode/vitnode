@@ -16,40 +16,42 @@ interface Props {
   className?: string;
 }
 
-export const Steps = ({ className, items }: Props) => {
+export const Steps = ({ className, items }: Props): JSX.Element | null => {
   if (items.length === 0) return null;
 
   return (
     <div className={className}>
       <ol className={cn("relative flex flex-col gap-5 border-l-2 ml-4")}>
-        {items.map((item, index) => (
-          <li key={item.id}>
-            <span
-              className={cn(
-                "absolute flex items-center justify-center w-8 h-8 rounded-full -left-4 border-2 bg-background text-card-foreground font-bold",
-                {
-                  ["bg-primary text-white border-primary"]: item.checked
-                }
-              )}
-            >
-              {item.checked ? <Check className="w-5 h-5" /> : index + 1}
-            </span>
-            <div className="ml-6">
-              {item.href ? (
-                <Link href={item.href} className="text-lg font-semibold">
-                  {item.title}
-                </Link>
-              ) : (
-                <span className="text-lg font-semibold">{item.title}</span>
-              )}
-              {item.description && (
-                <p className="text-sm text-muted-foreground">
-                  {item.description}
-                </p>
-              )}
-            </div>
-          </li>
-        ))}
+        {items.map(
+          (item, index): JSX.Element => (
+            <li key={item.id}>
+              <span
+                className={cn(
+                  "absolute flex items-center justify-center w-8 h-8 rounded-full -left-4 border-2 bg-background text-card-foreground font-bold",
+                  {
+                    ["bg-primary text-white border-primary"]: item.checked
+                  }
+                )}
+              >
+                {item.checked ? <Check className="w-5 h-5" /> : index + 1}
+              </span>
+              <div className="ml-6">
+                {item.href ? (
+                  <Link href={item.href} className="text-lg font-semibold">
+                    {item.title}
+                  </Link>
+                ) : (
+                  <span className="text-lg font-semibold">{item.title}</span>
+                )}
+                {item.description && (
+                  <p className="text-sm text-muted-foreground">
+                    {item.description}
+                  </p>
+                )}
+              </div>
+            </li>
+          )
+        )}
       </ol>
     </div>
   );

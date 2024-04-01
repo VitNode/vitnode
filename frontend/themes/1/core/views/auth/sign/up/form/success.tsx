@@ -8,7 +8,7 @@ interface Props {
   name: string;
 }
 
-export const SuccessFormSignUp = ({ name }: Props) => {
+export const SuccessFormSignUp = ({ name }: Props): JSX.Element => {
   const t = useTranslations("core.sign_up.form.success");
 
   return (
@@ -16,7 +16,7 @@ export const SuccessFormSignUp = ({ name }: Props) => {
       <Mailbox className="size-20" />
       <span className="text-xl font-semibold">
         {t.rich("title", {
-          name: () => <span className="text-primary">{name}</span>
+          name: (): JSX.Element => <span className="text-primary">{name}</span>
         })}
       </span>
       <p className="mt-2 mb-4 text-muted-foreground">{t("desc")}</p>

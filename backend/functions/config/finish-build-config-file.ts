@@ -39,9 +39,10 @@ import { db } from "@/plugins/database/client";
     await Promise.all(
       plugins
         .filter(
-          plugin => !["database", "plugins.module.ts", "core"].includes(plugin)
+          (plugin) =>
+            !["database", "plugins.module.ts", "core"].includes(plugin)
         )
-        .map(async plugin => {
+        .map(async (plugin) => {
           // Check if migration folder exists
           const migrationPath = join(
             process.cwd(),

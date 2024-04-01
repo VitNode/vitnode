@@ -10,7 +10,7 @@ export const FilesDevPluginAdminView = ({
 
   return (
     <ul className="rounded-md border [&>li:not(:last-child)]:border-b max-w-[40rem]">
-      {Object.entries(admin__core_plugins__files).map(item => (
+      {Object.entries(admin__core_plugins__files).map((item) => (
         <li
           className="p-4 flex gap-2 items-center justify-between"
           key={item[0]}

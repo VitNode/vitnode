@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const DateFormat = forwardRef<HTMLTimeElement, Props>(
-  ({ className, date }, ref) => {
+  ({ className, date }, ref): JSX.Element => {
     const { currentTime, fullDate, getDateWithFormatDistance } = useDateFormat({
       date
     });

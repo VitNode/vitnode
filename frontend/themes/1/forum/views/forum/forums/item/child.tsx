@@ -10,7 +10,7 @@ import { useTextLang } from "@/hooks/core/use-text-lang";
 export const ChildButtonItemForum = ({
   id,
   name
-}: Pick<ItemForumProps, "id" | "name">) => {
+}: Pick<ItemForumProps, "id" | "name">): JSX.Element => {
   const { convertNameToLink, convertText } = useTextLang();
 
   return (
@@ -21,9 +21,7 @@ export const ChildButtonItemForum = ({
         size: "sm",
         className: "h-auto min-h-[2.25rem] font-normal"
       })}
-      onClick={e => {
-        e.stopPropagation();
-      }}
+      onClick={(e): void => e.stopPropagation()}
     >
       <Folder />
       <span>{convertText(name)}</span>

@@ -122,7 +122,7 @@ export async function inputPaginationCursor<T extends TableConfig>({
   primaryCursor,
   sortBy
 }: InputPaginationCursorArgs<T>): Promise<Return> {
-  const cursors: Cursor[] = [...(sortBy ?? []), defaultSortBy].map(item => ({
+  const cursors: Cursor[] = [...(sortBy ?? []), defaultSortBy].map((item) => ({
     key: item.column,
     order: item.direction === "asc" ? "ASC" : "DESC",
     schema: database[item.column]

@@ -14,7 +14,7 @@ export const ItemEmojiButtonEditor = ({
   emoji,
   onClick,
   skinToneIndex
-}: Props) => {
+}: Props): JSX.Element => {
   const [editor] = useLexicalComposerContext();
   const icon =
     emoji.skins.length > skinToneIndex
@@ -31,8 +31,8 @@ export const ItemEmojiButtonEditor = ({
           '"EmojiMart", "Segoe UI Emoji", "Segoe UI Symbol", "Segoe UI", "Apple Color Emoji", "Twemoji Mozilla", "Noto Color Emoji", "Android Emoji"'
       }}
       ariaLabel=""
-      onClick={() => {
-        editor.update(() => {
+      onClick={(): void => {
+        editor.update((): void => {
           const selection = $getSelection();
           if (!$isRangeSelection(selection)) {
             return;

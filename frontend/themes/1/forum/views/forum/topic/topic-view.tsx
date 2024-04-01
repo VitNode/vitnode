@@ -24,7 +24,7 @@ export interface TopicViewProps {
 export default function TopicView({
   data: dataApi,
   firstEdges
-}: TopicViewProps) {
+}: TopicViewProps): JSX.Element | null {
   const t = useTranslations("forum.topics");
   const { convertNameToLink, convertText } = useTextLang();
 
@@ -64,8 +64,10 @@ export default function TopicView({
 
             <span>
               {t.rich("user_wrote_in_forum", {
-                user: () => <UserLink className="font-semibold" user={user} />,
-                forum: () => (
+                user: (): JSX.Element => (
+                  <UserLink className="font-semibold" user={user} />
+                ),
+                forum: (): JSX.Element => (
                   <Link
                     href={`/forum/${convertNameToLink({ ...forum })}`}
                     className={badgeVariants({

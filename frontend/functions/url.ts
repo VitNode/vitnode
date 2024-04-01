@@ -1,6 +1,6 @@
 import { removeSpecialCharacters } from "./remove-special-characters";
 
-export const getIdFormString = (str: string | string[]) => {
+export const getIdFormString = (str: string | string[]): number => {
   const value = Array.isArray(str) ? str[0] : str;
   const formatValue = removeSpecialCharacters(
     decodeURIComponent(value)

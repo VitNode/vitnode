@@ -11,7 +11,7 @@ export interface ConfigType {
   side_name: string;
 }
 
-export const getConfigFile = async () => {
+export const getConfigFile = async (): Promise<ConfigType> => {
   const configPath = join("config", "config.json");
   const file = await promises.readFile(configPath, "utf8");
 

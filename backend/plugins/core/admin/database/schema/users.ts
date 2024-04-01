@@ -27,7 +27,7 @@ export const core_users = pgTable(
     avatar_color: varchar("avatar_color", { length: 6 }).notNull(),
     group_id: integer("group_id").references(() => core_groups.id)
   },
-  table => ({
+  (table) => ({
     name_seo_idx: index("core_users_name_seo_idx").on(table.name_seo),
     name_idx: index("core_users_name_idx").on(table.name),
     email_idx: index("core_users_email_idx").on(table.email)

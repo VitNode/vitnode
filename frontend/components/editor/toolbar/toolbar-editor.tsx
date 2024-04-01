@@ -22,7 +22,7 @@ interface Props {
   className?: string;
 }
 
-export const ToolbarEditor = ({ className }: Props) => {
+export const ToolbarEditor = ({ className }: Props): JSX.Element => {
   const { blockType } = useEditor();
 
   return (

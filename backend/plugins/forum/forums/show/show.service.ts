@@ -109,7 +109,7 @@ export class ShowForumForumsService {
         .select({ forum_id: forum_forums_name.id })
         .from(forum_forums_name)
         .where(ilike(forum_forums_name.value, `%${search}%`))
-        .then(res => res.map(({ forum_id }) => forum_id));
+        .then((res) => res.map(({ forum_id }) => forum_id));
     }
 
     const pagination = await inputPaginationCursor({
@@ -151,7 +151,7 @@ export class ShowForumForumsService {
     });
 
     const edges: ShowForumForumsWithPermissions[] = await Promise.all(
-      forums.map(async forum => {
+      forums.map(async (forum) => {
         // If show_all_forums is true, we don't need to fetch children
         const children = show_all_forums
           ? []
@@ -187,7 +187,7 @@ export class ShowForumForumsService {
           },
           breadcrumbs,
           children: await Promise.all(
-            children.map(async child => {
+            children.map(async (child) => {
               const children =
                 await this.databaseService.db.query.forum_forums.findMany({
                   where: and(eq(forum_forums.parent_id, child.id), whereAccess),
@@ -262,7 +262,7 @@ export class ShowForumForumsService {
       edges:
         search && searchIds.length === 0
           ? []
-          : edges.map(edge => {
+          : edges.map((edge) => {
               const permissions = edge.permissions.at(0);
 
               if (!user) {

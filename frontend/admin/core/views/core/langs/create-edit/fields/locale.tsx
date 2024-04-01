@@ -64,12 +64,12 @@ export function LocaleFieldCreateEditLangAdmin<
             <CommandList>
               <CommandEmpty>{tCore("no_results")}</CommandEmpty>
               <CommandGroup>
-                {Object.keys(localeDate).map(item => (
+                {Object.keys(localeDate).map((item) => (
                   <CommandItem
                     value={item}
                     key={item}
                     className="flex gap-2"
-                    onSelect={value => {
+                    onSelect={(value) => {
                       field.onChange(value);
                       setOpen(false);
                     }}

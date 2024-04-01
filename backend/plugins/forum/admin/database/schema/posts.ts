@@ -28,7 +28,7 @@ export const forum_posts = pgTable(
     created: timestamp("created").notNull().defaultNow(),
     update: timestamp("update").notNull().defaultNow()
   },
-  table => ({
+  (table) => ({
     topic_id_idx: index("forum_posts_topic_id_idx").on(table.topic_id),
     user_id_idx: index("forum_posts_user_id_idx").on(table.user_id)
   })
@@ -64,7 +64,7 @@ export const forum_posts_content = pgTable(
       }),
     value: varchar("value").notNull()
   },
-  table => ({
+  (table) => ({
     post_id_idx: index("forum_posts_content_post_id_idx").on(table.post_id),
     language_code_idx: index("forum_posts_content_language_code_idx").on(
       table.language_code
@@ -107,7 +107,7 @@ export const forum_posts_timeline = pgTable(
         onDelete: "cascade"
       })
   },
-  table => ({
+  (table) => ({
     post_id_idx: index("forum_posts_timeline_post_id_idx").on(table.post_id),
     topic_log_id_idx: index("forum_posts_timeline_topic_log_id_idx").on(
       table.topic_log_id

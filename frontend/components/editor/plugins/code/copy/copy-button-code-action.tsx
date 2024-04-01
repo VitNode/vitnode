@@ -16,12 +16,12 @@ interface Props {
   codeDOMNode: HTMLElement;
 }
 
-export const CopyButtonCodeAction = ({ codeDOMNode }: Props) => {
+export const CopyButtonCodeAction = ({ codeDOMNode }: Props): JSX.Element => {
   const t = useTranslations("core.editor");
   const [isCopyCompleted, setCopyCompleted] = useState(false);
   const [editor] = useLexicalComposerContext();
 
-  const removeSuccessIcon = useDebounce(() => {
+  const removeSuccessIcon = useDebounce((): void => {
     setCopyCompleted(false);
   }, 1000);
 
@@ -31,10 +31,10 @@ export const CopyButtonCodeAction = ({ codeDOMNode }: Props) => {
       variant="outline"
       size="icon"
       ariaLabel={t("copy_code")}
-      onClick={async () => {
+      onClick={async (): Promise<void> => {
         let content = "";
 
-        editor.update(() => {
+        editor.update((): void => {
           const codeNode = $getNearestNodeFromDOMNode(codeDOMNode);
 
           if ($isCodeNode(codeNode)) {

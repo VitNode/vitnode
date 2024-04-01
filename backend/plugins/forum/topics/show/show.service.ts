@@ -97,7 +97,7 @@ export class ShowTopicsForumsService {
     return outputPagination({
       edges: await Promise.all(
         edges
-          .map(async edge => {
+          .map(async (edge) => {
             // Check permissions
             if (!edge.forum.can_all_view && !edge.forum.permissions.length) {
               if (id && edges.length === 1) {
@@ -134,7 +134,7 @@ export class ShowTopicsForumsService {
               permissions
             };
           })
-          .filter(edge => edge !== null)
+          .filter((edge) => edge !== null)
       ),
       totalCount,
       first,

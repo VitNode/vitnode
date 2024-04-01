@@ -26,7 +26,7 @@ export class ChangeFilesAdminPluginsService {
   }: {
     files: ChangeFilesContentType[];
   }): void {
-    files.forEach(file => {
+    files.forEach((file) => {
       const path = join(this.path, file.path);
 
       if (!fs.existsSync(path)) {
@@ -40,7 +40,7 @@ export class ChangeFilesAdminPluginsService {
 
       // Write files
       if (file.condition(content)) {
-        fs.writeFile(path, file.content(content), err => {
+        fs.writeFile(path, file.content(content), (err) => {
           if (err) {
             throw new CustomError({
               code: "CANNOT_WRITE_FILE",
@@ -56,16 +56,16 @@ export class ChangeFilesAdminPluginsService {
     const files: ChangeFilesContentType[] = [
       {
         path: "plugins.module.ts",
-        content: content =>
+        content: (content) =>
           changeModuleRootSchema({
             content,
             code
           }),
-        condition: content => !content.includes(`./${code}/${code}.module`)
+        condition: (content) => !content.includes(`./${code}/${code}.module`)
       },
       {
         path: join("database", "schema.ts"),
-        content: content =>
+        content: (content) =>
           changeDatabaseService({
             content,
             code
@@ -81,7 +81,7 @@ export class ChangeFilesAdminPluginsService {
     const files: ChangeFilesContentType[] = [
       {
         path: "plugins.module.ts",
-        content: content =>
+        content: (content) =>
           removeModuleFromRootSchema({
             content,
             code
@@ -90,7 +90,7 @@ export class ChangeFilesAdminPluginsService {
       },
       {
         path: join("database", "schema.ts"),
-        content: content =>
+        content: (content) =>
           removeDatabaseFromService({
             content,
             code

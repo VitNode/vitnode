@@ -58,7 +58,7 @@ export const ContentTableModeratorsStaffAdmin = ({
         }
       },
       {
-        header: val => {
+        header: (val) => {
           return (
             <HeaderSortingDataTable {...val}>
               {t("table.updated")}

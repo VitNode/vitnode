@@ -10,7 +10,7 @@ export const BottomToolbarEditor = ({
   disableLanguage,
   selectedLanguage,
   setSelectedLanguage
-}: Props) => {
+}: Props): JSX.Element => {
   return (
     <div className="border-t border-input p-2 bg-background rounded-b-sm flex gap-2 items-center flex-wrap justify-between">
       {!disableLanguage && (

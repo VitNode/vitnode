@@ -9,7 +9,7 @@ import {
   type Forum_Forums__ShowQueryVariables
 } from "@/graphql/hooks";
 
-const getData = async () => {
+const getData = async (): Promise<Forum_Forums__ShowQuery> => {
   const { data } = await fetcher<
     Forum_Forums__ShowQuery,
     Forum_Forums__ShowQueryVariables
@@ -29,7 +29,7 @@ const getData = async () => {
   return data;
 };
 
-export default async function DefaultPage() {
+export default async function DefaultPage(): Promise<JSX.Element> {
   const {
     forum_forums__show: { edges }
   } = await getData();
@@ -42,9 +42,11 @@ export default async function DefaultPage() {
 
       {edges.length ? (
         <div className="flex flex-col gap-4">
-          {edges.map(edge => (
-            <CategoryForum key={edge.id} {...edge} />
-          ))}
+          {edges.map(
+            (edge): JSX.Element => (
+              <CategoryForum key={edge.id} {...edge} />
+            )
+          )}
         </div>
       ) : (
         <div className="text-center">{tCore("no_results")}</div>

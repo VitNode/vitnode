@@ -26,7 +26,7 @@ export const core_moderators_permissions = pgTable(
     updated: timestamp("updated").notNull().defaultNow(),
     protected: boolean("protected").notNull().default(false)
   },
-  table => ({
+  (table) => ({
     group_id_idx: index("core_moderators_permissions_group_id_idx").on(
       table.group_id
     ),

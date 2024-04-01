@@ -75,7 +75,7 @@ export const PrettierButtonCodeAction = ({
   codeDOMNode,
   lang,
   setPrettierError
-}: Props) => {
+}: Props): JSX.Element => {
   const t = useTranslations("core.editor.prettier");
   const [editor] = useLexicalComposerContext();
   const { setOpen } = useAlertDialog();
@@ -86,11 +86,11 @@ export const PrettierButtonCodeAction = ({
       variant="outline"
       size="icon"
       ariaLabel={t("format_code")}
-      onClick={async () => {
+      onClick={async (): Promise<void> => {
         try {
           let content = "";
 
-          editor.update(() => {
+          editor.update((): void => {
             const codeNode = $getNearestNodeFromDOMNode(codeDOMNode);
             if (!$isCodeNode(codeNode)) return;
 
@@ -101,7 +101,7 @@ export const PrettierButtonCodeAction = ({
 
           if (parsed === "") return;
 
-          editor.update(async () => {
+          editor.update(async (): Promise<void> => {
             const codeNode = $getNearestNodeFromDOMNode(codeDOMNode);
             if (!$isCodeNode(codeNode)) return;
 

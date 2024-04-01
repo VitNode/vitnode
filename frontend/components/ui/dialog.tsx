@@ -25,19 +25,19 @@ interface DialogContextArgs {
 
 export const DialogContext = createContext<DialogContextArgs>({
   open: false,
-  setOpen: () => {},
+  setOpen: (): void => {},
   isDirty: false,
-  setIsDirty: () => {}
+  setIsDirty: (): void => {}
 });
 
-export const useDialog = () => useContext(DialogContext);
+export const useDialog = (): DialogContextArgs => useContext(DialogContext);
 
 const Dialog = ({
   children,
   onOpenChange,
   open: openProp,
   ...props
-}: DialogPrimitive.DialogProps) => {
+}: DialogPrimitive.DialogProps): JSX.Element => {
   const [open, setOpen] = useState(false);
   const [isDirty, setIsDirty] = useState(false);
 
@@ -70,22 +70,24 @@ const DialogClose = DialogPrimitive.Close;
 const DialogOverlay = forwardRef<
   ElementRef<typeof DialogPrimitive.Overlay>,
   ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Overlay
-    ref={ref}
-    className={cn(
-      "fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-      className
-    )}
-    {...props}
-  />
-));
+>(
+  ({ className, ...props }, ref): JSX.Element => (
+    <DialogPrimitive.Overlay
+      ref={ref}
+      className={cn(
+        "fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+        className
+      )}
+      {...props}
+    />
+  )
+);
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
 const DialogContent = forwardRef<
   ElementRef<typeof DialogPrimitive.Content>,
   ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ children, className, ...props }, ref) => {
+>(({ children, className, ...props }, ref): JSX.Element => {
   const t = useTranslations("core");
   const { isDirty, setOpen } = useDialog();
 
@@ -95,7 +97,7 @@ const DialogContent = forwardRef<
           originalEvent: PointerEvent;
         }>
       | MouseEvent<HTMLButtonElement>
-  ) => {
+  ): void => {
     if (!isDirty) return;
     e.preventDefault();
 
@@ -133,7 +135,7 @@ DialogContent.displayName = DialogPrimitive.Content.displayName;
 const DialogHeader = ({
   className,
   ...props
-}: HTMLAttributes<HTMLDivElement>) => (
+}: HTMLAttributes<HTMLDivElement>): JSX.Element => (
   <div
     className={cn(
       "flex flex-col space-y-1.5 text-center sm:text-left",
@@ -147,7 +149,7 @@ DialogHeader.displayName = "DialogHeader";
 const DialogFooter = ({
   className,
   ...props
-}: HTMLAttributes<HTMLDivElement>) => (
+}: HTMLAttributes<HTMLDivElement>): JSX.Element => (
   <div
     className={cn(
       "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
@@ -161,28 +163,32 @@ DialogFooter.displayName = "DialogFooter";
 const DialogTitle = forwardRef<
   ElementRef<typeof DialogPrimitive.Title>,
   ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Title
-    ref={ref}
-    className={cn(
-      "text-lg font-semibold leading-none tracking-tight",
-      className
-    )}
-    {...props}
-  />
-));
+>(
+  ({ className, ...props }, ref): JSX.Element => (
+    <DialogPrimitive.Title
+      ref={ref}
+      className={cn(
+        "text-lg font-semibold leading-none tracking-tight",
+        className
+      )}
+      {...props}
+    />
+  )
+);
 DialogTitle.displayName = DialogPrimitive.Title.displayName;
 
 const DialogDescription = forwardRef<
   ElementRef<typeof DialogPrimitive.Description>,
   ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Description
-    ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
-    {...props}
-  />
-));
+>(
+  ({ className, ...props }, ref): JSX.Element => (
+    <DialogPrimitive.Description
+      ref={ref}
+      className={cn("text-sm text-muted-foreground", className)}
+      {...props}
+    />
+  )
+);
 DialogDescription.displayName = DialogPrimitive.Description.displayName;
 
 export {

@@ -27,7 +27,7 @@ export const core_plugins = pgTable(
     default: boolean("default").notNull().default(false),
     allow_default: boolean("allow_default").notNull().default(true)
   },
-  table => ({
+  (table) => ({
     code_idx: index("core_plugins_code_idx").on(table.code),
     name_idx: index("core_plugins_name_idx").on(table.name)
   })
@@ -51,7 +51,7 @@ export const core_plugins_nav = pgTable(
     icon: varchar("icon", { length: 50 }),
     href: varchar("href", { length: 100 }).notNull()
   },
-  table => ({
+  (table) => ({
     plugin_id_idx: index("core_plugins__nav_plugin_id_idx").on(table.plugin_id)
   })
 );

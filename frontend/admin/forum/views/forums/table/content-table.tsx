@@ -64,7 +64,7 @@ export const ContentTableForumsForumAdmin = ({
   );
 
   const flattenedItems = dragAndDrop.flattenedItems({ data });
-  const activeItem = flattenedItems.find(i => i.id === activeId);
+  const activeItem = flattenedItems.find((i) => i.id === activeId);
   const sortedIds = useMemo(
     () => flattenedItems.map(({ id }) => id),
     [flattenedItems]
@@ -116,7 +116,7 @@ export const ContentTableForumsForumAdmin = ({
         const toIndex = clonedItems.findIndex(({ id }) => id === over.id);
         const fromIndex = clonedItems.findIndex(({ id }) => id === active.id);
         const sortedItems = arrayMove(clonedItems, fromIndex, toIndex);
-        const activeIndex = sortedItems.findIndex(i => i.id === active.id);
+        const activeIndex = sortedItems.findIndex((i) => i.id === active.id);
         sortedItems[activeIndex] = {
           ...sortedItems[activeIndex],
           depth,
@@ -125,7 +125,7 @@ export const ContentTableForumsForumAdmin = ({
 
         const dataAfterUpdate: FlatTree<
           FlatTree<ShowForumForumsAdminWithChildren>
-        >[] = sortedItems.map(item => ({
+        >[] = sortedItems.map((item) => ({
           ...item,
           children: []
         }));
@@ -136,11 +136,11 @@ export const ContentTableForumsForumAdmin = ({
           })
         );
 
-        const parents = sortedItems.filter(i => i.parentId === parentId);
-        const indexToMove = parents.findIndex(i => i.id === active.id);
+        const parents = sortedItems.filter((i) => i.parentId === parentId);
+        const indexToMove = parents.findIndex((i) => i.id === active.id);
 
         // -1 means that the item is the last one
-        const findActive = flattenedItems.find(i => i.id === active.id);
+        const findActive = flattenedItems.find((i) => i.id === active.id);
         if (!findActive) return;
 
         // Do nothing if drag and drop on the same item on the same level
@@ -156,20 +156,20 @@ export const ContentTableForumsForumAdmin = ({
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
-        {flattenedItems.map(item => (
+        {flattenedItems.map((item) => (
           <ItemTableForumsForumAdmin
             key={item.id}
             indentationWidth={indentationWidth}
-            onCollapse={id => {
+            onCollapse={(id) => {
               const isOpen = dragAndDrop.isOpenChildren.includes(id);
 
               if (!isOpen) {
                 updateData({ parentId: Number(id) });
               }
 
-              dragAndDrop.setIsOpenChildren(prev => {
+              dragAndDrop.setIsOpenChildren((prev) => {
                 if (isOpen) {
-                  return prev.filter(i => i !== id);
+                  return prev.filter((i) => i !== id);
                 }
 
                 return [...prev, id];

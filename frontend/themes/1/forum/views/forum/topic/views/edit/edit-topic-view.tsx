@@ -7,6 +7,8 @@ export interface EditTopicViewProps {
   data: EditTopicData;
 }
 
-export default function EditTopicView({ data }: EditTopicViewProps) {
+export default function EditTopicView({
+  data
+}: EditTopicViewProps): JSX.Element {
   return <CreateEditTopic data={data} />;
 }

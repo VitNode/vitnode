@@ -17,7 +17,7 @@ export interface ForumForumViewProps {
 
 export default function ForumForumView({
   data: { forum_forums__show, forum_topics__show }
-}: ForumForumViewProps) {
+}: ForumForumViewProps): JSX.Element | null {
   const { convertText } = useTextLang();
   const t = useTranslations("forum.topics");
 
@@ -29,11 +29,13 @@ export default function ForumForumView({
     <>
       {forumData.breadcrumbs.length > 1 && (
         <Breadcrumbs
-          items={forumData.breadcrumbs.slice(0, -1).map(item => ({
-            id: item.id,
-            text: convertText(item.name),
-            href: `/forum/${item.id}`
-          }))}
+          items={forumData.breadcrumbs.slice(0, -1).map(
+            (item): JSX.Element => ({
+              id: item.id,
+              text: convertText(item.name),
+              href: `/forum/${item.id}`
+            })
+          )}
         />
       )}
 
@@ -58,9 +60,11 @@ export default function ForumForumView({
 
         {forumData.children && forumData.children.length > 0 && (
           <CardContent className="p-0">
-            {forumData.children.map(child => (
-              <ItemForum key={child.id} {...child} />
-            ))}
+            {forumData.children.map(
+              (child): JSX.Element => (
+                <ItemForum key={child.id} {...child} />
+              )
+            )}
           </CardContent>
         )}
       </Card>

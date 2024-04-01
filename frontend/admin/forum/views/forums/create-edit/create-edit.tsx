@@ -16,12 +16,12 @@ import type { ShowForumForumsAdminWithChildren } from "../table/hooks/use-forum-
 import { useTextLang } from "@/hooks/core/use-text-lang";
 
 const MainContentCreateEditFormForumAdmin = lazy(() =>
-  import("./content/main").then(module => ({
+  import("./content/main").then((module) => ({
     default: module.MainContentCreateEditFormForumAdmin
   }))
 );
 const PermissionsContentCreateEditFormForumAdmin = lazy(() =>
-  import("./content/permissions/permissions").then(module => ({
+  import("./content/permissions/permissions").then((module) => ({
     default: module.PermissionsContentCreateEditFormForumAdmin
   }))
 );

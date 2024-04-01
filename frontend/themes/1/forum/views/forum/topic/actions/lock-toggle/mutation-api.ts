@@ -11,7 +11,10 @@ import {
 
 export const mutationApi = async (
   variables: Forum_Topics__Actions__Lock_ToggleMutationVariables
-) => {
+): Promise<{
+  data?: Forum_Topics__Actions__Lock_ToggleMutation;
+  error?: unknown;
+}> => {
   try {
     const { data } = await fetcher<
       Forum_Topics__Actions__Lock_ToggleMutation,

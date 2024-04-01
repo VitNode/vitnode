@@ -13,17 +13,19 @@ import {
 } from "@/components/ui/tooltip";
 import { useUpdateStateEditor } from "../hooks/use-update-state-editor";
 
-export const StrikethroughButtonEditor = () => {
+export const StrikethroughButtonEditor = (): JSX.Element => {
   const t = useTranslations("core.editor.text");
   const [isStrikethrough, setIsStrikethrough] = useState(false);
   const [editor] = useLexicalComposerContext();
 
   useUpdateStateEditor({
-    handleChange: () => {
+    handleChange: (): boolean => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
       setIsStrikethrough(selection.hasFormat("strikethrough"));
+
+      return true;
     }
   });
 
@@ -34,7 +36,7 @@ export const StrikethroughButtonEditor = () => {
           <div>
             <Toggle
               aria-label={t("strikethrough")}
-              onClick={() =>
+              onClick={(): boolean =>
                 editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough")
               }
               pressed={isStrikethrough}

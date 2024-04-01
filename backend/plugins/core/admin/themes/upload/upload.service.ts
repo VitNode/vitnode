@@ -49,7 +49,7 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
             cwd: this.tempPath
           })
         )
-        .on("error", err => {
+        .on("error", (err) => {
           reject(err.message);
         })
         .on("finish", () => {

@@ -19,7 +19,7 @@ export const setRebuildRequired = async ({
     }
   };
 
-  fs.writeFile(configPath, JSON.stringify(newData, null, 2), "utf8", err => {
+  fs.writeFile(configPath, JSON.stringify(newData, null, 2), "utf8", (err) => {
     if (err)
       throw new CustomError({
         code: "ERR_CONFIG_WRITE",

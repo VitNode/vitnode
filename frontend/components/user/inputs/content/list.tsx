@@ -18,7 +18,11 @@ interface Props {
   values: UserInputItem[];
 }
 
-export const UserInputContentList = ({ edges, onSelect, values }: Props) => {
+export const UserInputContentList = ({
+  edges,
+  onSelect,
+  values
+}: Props): JSX.Element => {
   const t = useTranslations("core");
 
   if (edges.length === 0) {
@@ -27,34 +31,36 @@ export const UserInputContentList = ({ edges, onSelect, values }: Props) => {
 
   return (
     <CommandGroup>
-      {edges.map(item => (
-        <CommandItem
-          className="gap-2"
-          key={item.id}
-          onSelect={() =>
-            onSelect({
-              id: item.id,
-              name: item.name
-            })
-          }
-        >
-          <div
-            className={cn(
-              "mr-2 flex size-4 items-center justify-center rounded-sm border border-primary",
-              values.find(value => item.id === value.id)
-                ? "bg-primary text-primary-foreground"
-                : "opacity-50 [&_svg]:invisible"
-            )}
+      {edges.map(
+        (item): JSX.Element => (
+          <CommandItem
+            className="gap-2"
+            key={item.id}
+            onSelect={(): void =>
+              onSelect({
+                id: item.id,
+                name: item.name
+              })
+            }
           >
-            <CheckIcon />
-          </div>
-          <AvatarUser sizeInRem={1.75} user={item} />
-          <div className="flex flex-col">
-            <span>{item.name}</span>
-            <GroupFormat className="text-xs" group={item.group} />
-          </div>
-        </CommandItem>
-      ))}
+            <div
+              className={cn(
+                "mr-2 flex size-4 items-center justify-center rounded-sm border border-primary",
+                values.find((value): boolean => item.id === value.id)
+                  ? "bg-primary text-primary-foreground"
+                  : "opacity-50 [&_svg]:invisible"
+              )}
+            >
+              <CheckIcon />
+            </div>
+            <AvatarUser sizeInRem={1.75} user={item} />
+            <div className="flex flex-col">
+              <span>{item.name}</span>
+              <GroupFormat className="text-xs" group={item.group} />
+            </div>
+          </CommandItem>
+        )
+      )}
     </CommandGroup>
   );
 };

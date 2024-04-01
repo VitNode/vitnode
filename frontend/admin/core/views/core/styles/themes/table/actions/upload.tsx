@@ -5,7 +5,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import type { ShowAdminThemes } from "@/graphql/hooks";
 
 const Content = lazy(() =>
-  import("../../upload/upload").then(module => ({
+  import("../../upload/upload").then((module) => ({
     default: module.UploadThemeAdmin
   }))
 );

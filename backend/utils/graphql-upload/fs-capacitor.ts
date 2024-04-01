@@ -150,10 +150,10 @@ export class WriteStream extends Writable {
     }
 
     // Close the file descriptor.
-    close(fd, closeError => {
+    close(fd, (closeError) => {
       // An error here probably means the fd was already closed, but we can
       // still try to unlink the file.
-      unlink(path, unlinkError => {
+      unlink(path, (unlinkError) => {
         // If we are unable to unlink the file, the operating system will
         // clean up on next restart, since we use store thes in `os.tmpdir()`
         this._fd = null;
@@ -207,7 +207,7 @@ export class WriteStream extends Writable {
       return;
     }
 
-    write(this._fd, chunk, 0, chunk.length, this._pos, error => {
+    write(this._fd, chunk, 0, chunk.length, this._pos, (error) => {
       if (error) {
         callback(error);
 
@@ -243,7 +243,7 @@ export class WriteStream extends Writable {
 
     // This capacitor is fully initialized.
     if (typeof this._fd === "number" && typeof this._path === "string") {
-      this._cleanup(cleanupError => callback(cleanupError ?? error));
+      this._cleanup((cleanupError) => callback(cleanupError ?? error));
 
       return;
     }
@@ -251,7 +251,7 @@ export class WriteStream extends Writable {
     // This capacitor has not yet finished initialization; if initialization
     // does complete, immediately clean up after.
     this.once("ready", () => {
-      this._cleanup(cleanupError => {
+      this._cleanup((cleanupError) => {
         if (cleanupError) {
           this.emit("error", cleanupError);
         }

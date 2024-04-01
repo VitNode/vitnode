@@ -31,7 +31,7 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
     code: zodInput.string
       .min(3)
       .max(50)
-      .refine(value => codePluginRegex.test(value), {
+      .refine((value) => codePluginRegex.test(value), {
         message: t("create.code.invalid")
       }),
     description: zodInput.string,

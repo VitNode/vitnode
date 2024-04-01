@@ -41,7 +41,7 @@ export const CreateEditFormModeratorsStaffAdmin = () => {
             <FormItem>
               <FormLabel>{t("create_edit.type.title")}</FormLabel>
               <RadioGroup
-                onValueChange={el => {
+                onValueChange={(el) => {
                   form.resetField("user");
                   form.resetField("group");
                   field.onChange(el);

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
 
 const CreateEditFormModeratorsStaffAdmin = lazy(() =>
-  import("../create-edit-form/create-edit-form").then(module => ({
+  import("../create-edit-form/create-edit-form").then((module) => ({
     default: module.CreateEditFormModeratorsStaffAdmin
   }))
 );

@@ -10,7 +10,7 @@ import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
 import { DrawerQuickMenu } from "./drawer/drawer";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 
-export const QuickMenu = () => {
+export const QuickMenu = (): JSX.Element => {
   const t = useTranslations("core.mobile_nav");
   const pathname = usePathname();
   const { back } = useRouter();

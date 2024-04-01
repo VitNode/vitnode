@@ -14,11 +14,13 @@ init({ data });
 
 const emojiMart = data as EmojiMartData;
 
-interface Props {
+export interface ContentEmojiButtonEditorProps {
   setOpen: (open: boolean) => void;
 }
 
-export const ContentEmojiButtonEditor = ({ setOpen }: Props) => {
+export const ContentEmojiButtonEditor = ({
+  setOpen
+}: ContentEmojiButtonEditorProps): JSX.Element => {
   const localStorageSkinToneIndex = localStorage.getItem(
     CONFIG.local_storage.editor_skin_tone
   );
@@ -30,18 +32,20 @@ export const ContentEmojiButtonEditor = ({ setOpen }: Props) => {
   );
   const t = useTranslations("core");
 
-  const search = async (value: string) => {
+  const search = async (value: string): Promise<void> => {
     setSearchValue(value);
     if (value === "") return setSearchResults(null);
 
     const emojis: Emoji[] = await SearchIndex.search(value);
-    setSearchResults(emojis.map(emoji => emoji.id));
+    setSearchResults(emojis.map((emoji): string => emoji.id));
   };
 
   const categories =
     activeCategory === "all"
       ? emojiMart.categories
-      : emojiMart.categories.filter(category => category.id === activeCategory);
+      : emojiMart.categories.filter(
+          (category): boolean => category.id === activeCategory
+        );
 
   return (
     <>
@@ -50,7 +54,7 @@ export const ContentEmojiButtonEditor = ({ setOpen }: Props) => {
           activeCategory={activeCategory}
           setActiveCategory={setActiveCategory}
           searchValue={searchValue}
-          onResetSearch={async () => {
+          onResetSearch={async (): Promise<void> => {
             if (searchValue.length === 0) return;
 
             await search("");
@@ -60,9 +64,7 @@ export const ContentEmojiButtonEditor = ({ setOpen }: Props) => {
         <div className="px-5 py-3 flex gap-2">
           <Input
             className="h-9"
-            onChange={async e => {
-              await search(e.target.value);
-            }}
+            onChange={async (e): Promise<void> => await search(e.target.value)}
             value={searchValue}
             placeholder={t("search_placeholder")}
           />
@@ -85,7 +87,7 @@ export const ContentEmojiButtonEditor = ({ setOpen }: Props) => {
                   {t("no_results")}
                 </div>
               ) : (
-                searchResults?.map(id => {
+                searchResults?.map((id): JSX.Element => {
                   const emoji = emojiMart.emojis[id];
 
                   return (
@@ -93,7 +95,7 @@ export const ContentEmojiButtonEditor = ({ setOpen }: Props) => {
                       key={`search_${id}`}
                       emoji={emoji}
                       skinToneIndex={skinToneIndex}
-                      onClick={() => setOpen(false)}
+                      onClick={(): void => setOpen(false)}
                     />
                   );
                 })
@@ -101,7 +103,7 @@ export const ContentEmojiButtonEditor = ({ setOpen }: Props) => {
             </div>
           </div>
         ) : (
-          categories.map(category => {
+          categories.map((category): JSX.Element => {
             return (
               <div key={category.id}>
                 <div className="px-5 pb-2 text-sm sticky top-[6rem] bg-popover/80 backdrop-blur">
@@ -110,7 +112,7 @@ export const ContentEmojiButtonEditor = ({ setOpen }: Props) => {
                   {t(`editor.emoji.categories.${category.id}`)}
                 </div>
                 <div className="px-5 pb-3 pt-1">
-                  {category.emojis.map(id => {
+                  {category.emojis.map((id): JSX.Element => {
                     const emoji = emojiMart.emojis[id];
 
                     return (
@@ -118,7 +120,7 @@ export const ContentEmojiButtonEditor = ({ setOpen }: Props) => {
                         key={`${id}_${category.id}`}
                         emoji={emoji}
                         skinToneIndex={skinToneIndex}
-                        onClick={() => setOpen(false)}
+                        onClick={(): void => setOpen(false)}
                       />
                     );
                   })}

@@ -34,7 +34,7 @@ export class ShowAdminGroupsService {
         .select({ group_id: core_groups_names.group_id })
         .from(core_groups_names)
         .where(ilike(core_groups_names.value, `%${search}%`))
-        .then(res => res.map(({ group_id }) => group_id));
+        .then((res) => res.map(({ group_id }) => group_id));
     }
 
     const pagination = await inputPaginationCursor({
@@ -73,7 +73,7 @@ export class ShowAdminGroupsService {
       .where(where);
 
     const currentEdges = await Promise.all(
-      edges.map(async edge => {
+      edges.map(async (edge) => {
         const usersCount = await this.databaseService.db
           .select({ count: count() })
           .from(core_users)

@@ -9,7 +9,7 @@ import {
 
 export const queryApi = async (
   variables: Core_Members__Show__SearchQueryVariables
-) => {
+): Promise<Core_Members__Show__SearchQuery> => {
   const { data } = await fetcher<
     Core_Members__Show__SearchQuery,
     Core_Members__Show__SearchQueryVariables

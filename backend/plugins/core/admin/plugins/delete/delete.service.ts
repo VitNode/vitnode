@@ -32,7 +32,7 @@ export class DeleteAdminPluginsService {
     const migrationData: { entries: { when: number }[] } = JSON.parse(
       fs.readFileSync(migrationPath, "utf-8")
     );
-    const deleteQueries = migrationData.entries.map(entry => {
+    const deleteQueries = migrationData.entries.map((entry) => {
       return `DELETE FROM drizzle.__drizzle_migrations WHERE created_at = ${entry.when};`;
     });
 
@@ -69,8 +69,8 @@ export class DeleteAdminPluginsService {
     );
     const deleteQueries = tables
       .getTables()
-      .filter(el => !el.endsWith("_relations"))
-      .map(table => {
+      .filter((el) => !el.endsWith("_relations"))
+      .map((table) => {
         return `DROP TABLE IF EXISTS ${table} CASCADE;`;
       });
 
@@ -96,7 +96,7 @@ export class DeleteAdminPluginsService {
       "graphql_queries",
       "graphql_mutations"
     ];
-    frontendPaths.forEach(path => {
+    frontendPaths.forEach((path) => {
       this.deleteFolderWhenExists(pluginPaths({ code }).frontend[path]);
     });
 
@@ -119,7 +119,7 @@ export class DeleteAdminPluginsService {
           code: true
         }
       });
-    languages.forEach(lang => {
+    languages.forEach((lang) => {
       this.deleteFolderWhenExists(
         join(
           process.cwd(),

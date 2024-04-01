@@ -1,5 +1,5 @@
 import type { UniqueIdentifier } from "@dnd-kit/core";
-import { useState } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 
 type WithChildren<T extends object> = Omit<T, "children" | "__typename"> & {
   children: WithChildren<T>[];
@@ -21,27 +21,30 @@ export function flattenTree<T extends object>({
   depth?: number;
   parentId?: number | string | null;
 }): FlatTree<T>[] {
-  return tree.reduce<FlatTree<T>[]>((previousValue, currentValue, index) => {
-    const children = currentValue.children
-      ? flattenTree({
-          tree: currentValue.children,
-          parentId: currentValue.id,
-          depth: depth + 1
-        })
-      : [];
+  return tree.reduce<FlatTree<T>[]>(
+    (previousValue, currentValue, index): FlatTree<T>[] => {
+      const children = currentValue.children
+        ? flattenTree({
+            tree: currentValue.children,
+            parentId: currentValue.id,
+            depth: depth + 1
+          })
+        : [];
 
-    return [
-      ...previousValue,
-      {
-        ...currentValue,
-        parentId: parentId,
-        depth: depth,
-        index,
-        children
-      },
-      ...children
-    ];
-  }, []);
+      return [
+        ...previousValue,
+        {
+          ...currentValue,
+          parentId: parentId,
+          depth: depth,
+          index,
+          children
+        },
+        ...children
+      ];
+    },
+    []
+  );
 }
 
 function removeChildrenOf<T extends object>({
@@ -50,10 +53,10 @@ function removeChildrenOf<T extends object>({
 }: {
   ids: UniqueIdentifier[];
   tree: FlatTree<T>[];
-}) {
+}): FlatTree<T>[] {
   const excludeParentIds = [...ids];
 
-  return tree.filter(item => {
+  return tree.filter((item): boolean => {
     if (item.parentId && excludeParentIds.includes(item.parentId)) {
       if ((item.children?.length ?? 0) > 0) {
         excludeParentIds.push(item.id);
@@ -71,11 +74,11 @@ export function buildTree<T extends object>({
 }: {
   flattenedTree: FlatTree<T>[];
 }): WithChildren<T>[] {
-  const sorted = flattenedTree.sort((a, b) => b.depth - a.depth);
+  const sorted = flattenedTree.sort((a, b): number => b.depth - a.depth);
   const maxDepth = sorted[0].depth;
   let tree: FlatTree<T>[] = [];
 
-  tree = sorted.map(item => {
+  tree = sorted.map((item): FlatTree<T> => {
     if (item.depth === maxDepth) {
       return item;
     }
@@ -86,8 +89,10 @@ export function buildTree<T extends object>({
     };
   });
 
-  tree.forEach(item => {
-    const parentIndex = tree.findIndex(({ id }) => id === item.parentId);
+  tree.forEach((item): void => {
+    const parentIndex = tree.findIndex(
+      ({ id }): boolean => id === item.parentId
+    );
     if (parentIndex === -1) return;
     const parent = tree[parentIndex];
 
@@ -97,22 +102,36 @@ export function buildTree<T extends object>({
     };
   });
 
-  return tree.filter(item => !item.parentId);
+  return tree.filter((item): boolean => !item.parentId);
 }
 
 interface Args {
   activeId: UniqueIdentifier | null;
 }
 
-export const useDragAndDrop = ({ activeId }: Args) => {
+export const useDragAndDrop = ({
+  activeId
+}: Args): {
+  flattenedItems: <T extends WithChildren<T>>({
+    data
+  }: {
+    data: T[];
+  }) => FlatTree<T>[];
+  isOpenChildren: UniqueIdentifier[];
+  setIsOpenChildren: Dispatch<SetStateAction<UniqueIdentifier[]>>;
+} => {
   const [isOpenChildren, setIsOpenChildren] = useState<UniqueIdentifier[]>([]);
 
   // DndKit doesn't support nested sortable, so we need to flatten the data in one array
-  function flattenedItems<T extends WithChildren<T>>({ data }: { data: T[] }) {
+  function flattenedItems<T extends WithChildren<T>>({
+    data
+  }: {
+    data: T[];
+  }): FlatTree<T>[] {
     const tree = flattenTree({ tree: data });
 
     const collapsedItems = tree.reduce<UniqueIdentifier[]>(
-      (acc, { children, id }) =>
+      (acc, { children, id }): UniqueIdentifier[] =>
         !isOpenChildren.includes(id) && children.length ? [...acc, id] : acc,
       []
     );

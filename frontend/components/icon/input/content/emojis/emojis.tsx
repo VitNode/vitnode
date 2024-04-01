@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import type { IconInputProps } from "../content";
 
-interface Props extends IconInputProps {
+export interface EmojisContentIconInputProps extends IconInputProps {
   search: string;
   skinToneIndex: number;
 }
@@ -24,11 +24,11 @@ export const EmojisContentIconInput = ({
   setOpen,
   skinToneIndex,
   value
-}: Props) => {
+}: EmojisContentIconInputProps): JSX.Element => {
   const t = useTranslations("core");
   const [searchResults, setSearchResults] = useState<string[] | null>(null);
 
-  const setResults = async (value: string) => {
+  const setResults = async (value: string): Promise<void> => {
     if (!value) {
       setSearchResults(null);
 
@@ -36,10 +36,10 @@ export const EmojisContentIconInput = ({
     }
 
     const emojis: Emoji[] = await SearchIndex.search(value);
-    setSearchResults(emojis.map(emoji => emoji.id));
+    setSearchResults(emojis.map((emoji): string => emoji.id));
   };
 
-  useEffect(() => {
+  useEffect((): void => {
     setResults(search);
   }, [search]);
 
@@ -53,7 +53,7 @@ export const EmojisContentIconInput = ({
           {searchResults?.length === 0 ? (
             <div className="p-2 text-muted-foreground">{t("no_results")}</div>
           ) : (
-            searchResults?.map(id => {
+            searchResults?.map((id): JSX.Element => {
               const emoji = emojiMart.emojis[id];
 
               const icon =
@@ -68,7 +68,7 @@ export const EmojisContentIconInput = ({
                   className="text-2xl"
                   ariaLabel={emoji.name}
                   variant={value === icon ? "default" : "ghost"}
-                  onClick={() => {
+                  onClick={(): void => {
                     if (value === icon) {
                       onChange("");
                       setOpen(false);
@@ -92,48 +92,50 @@ export const EmojisContentIconInput = ({
 
   return (
     <div>
-      {emojiMart.categories.map(category => (
-        <div key={category.id}>
-          <div className="pb-2 text-sm sticky top-[7.75rem] bg-popover/80 backdrop-blur">
-            {/*  eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-            {/*  @ts-expect-error */}
-            {t(`editor.emoji.categories.${category.id}`)}
-          </div>
-          <div className="pb-3 pt-1">
-            {category.emojis.map(id => {
-              const emoji = emojiMart.emojis[id];
+      {emojiMart.categories.map(
+        (category): JSX.Element => (
+          <div key={category.id}>
+            <div className="pb-2 text-sm sticky top-[7.75rem] bg-popover/80 backdrop-blur">
+              {/*  eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+              {/*  @ts-expect-error */}
+              {t(`editor.emoji.categories.${category.id}`)}
+            </div>
+            <div className="pb-3 pt-1">
+              {category.emojis.map((id): JSX.Element => {
+                const emoji = emojiMart.emojis[id];
 
-              const icon =
-                emoji.skins.length > skinToneIndex
-                  ? emoji.skins[skinToneIndex].native
-                  : emoji.skins[0].native;
+                const icon =
+                  emoji.skins.length > skinToneIndex
+                    ? emoji.skins[skinToneIndex].native
+                    : emoji.skins[0].native;
 
-              return (
-                <Button
-                  key={`${id}_${category.id}`}
-                  size="icon"
-                  className="text-2xl"
-                  ariaLabel={emoji.name}
-                  variant={value === icon ? "default" : "ghost"}
-                  onClick={() => {
-                    if (value === icon) {
-                      onChange("");
+                return (
+                  <Button
+                    key={`${id}_${category.id}`}
+                    size="icon"
+                    className="text-2xl"
+                    ariaLabel={emoji.name}
+                    variant={value === icon ? "default" : "ghost"}
+                    onClick={(): void => {
+                      if (value === icon) {
+                        onChange("");
+                        setOpen(false);
+
+                        return;
+                      }
+
+                      onChange(icon);
                       setOpen(false);
-
-                      return;
-                    }
-
-                    onChange(icon);
-                    setOpen(false);
-                  }}
-                >
-                  {icon}
-                </Button>
-              );
-            })}
+                    }}
+                  >
+                    {icon}
+                  </Button>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      ))}
+        )
+      )}
     </div>
   );
 };

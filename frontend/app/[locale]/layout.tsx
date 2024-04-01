@@ -21,7 +21,7 @@ interface Props {
 export default async function LocaleLayout({
   children,
   params: { locale }
-}: Props) {
+}: Props): Promise<JSX.Element> {
   const defaultPlugins = [{ code: "core", name: "admin" }];
 
   try {
@@ -31,7 +31,7 @@ export default async function LocaleLayout({
       (data
         ? [...data.core_plugins__show, ...defaultPlugins]
         : defaultPlugins
-      ).map(async plugin => {
+      ).map(async (plugin) => {
         return {
           ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
         };
@@ -60,7 +60,7 @@ export default async function LocaleLayout({
     );
   } catch (error) {
     const messagesFormApps = await Promise.all(
-      defaultPlugins.map(async plugin => {
+      defaultPlugins.map(async (plugin) => {
         return {
           ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
         };

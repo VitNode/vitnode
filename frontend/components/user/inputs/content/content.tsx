@@ -16,12 +16,12 @@ import {
 } from "@/components/ui/command";
 import { queryApi } from "./query-api";
 
-interface Props {
+export interface UserInputContentProps {
   onSelect: (value: UserInputItem) => void;
   values: UserInputItem[];
 }
 
-export const UserInputContent = (props: Props) => {
+export const UserInputContent = (props: UserInputContentProps) => {
   const t = useTranslations("core");
   const [search, setSearch] = useState("");
 
@@ -34,7 +34,7 @@ export const UserInputContent = (props: Props) => {
       })
   });
 
-  const handleSearchInput = useDebouncedCallback((value: string) => {
+  const handleSearchInput = useDebouncedCallback((value: string): void => {
     setSearch(value);
   }, 500);
 
@@ -47,7 +47,7 @@ export const UserInputContent = (props: Props) => {
             "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0",
             commandInputClassName
           )}
-          onChange={e => handleSearchInput(e.target.value)}
+          onChange={(e) => handleSearchInput(e.target.value)}
           placeholder={t("user_input.search")}
         />
       </div>

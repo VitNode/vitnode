@@ -11,7 +11,7 @@ export default getRequestConfig(async ({ locale }) => {
     (data
       ? [...data.core_plugins__show, ...defaultPlugins]
       : defaultPlugins
-    ).map(async plugin => {
+    ).map(async (plugin) => {
       return {
         ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
       };

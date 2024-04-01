@@ -17,7 +17,9 @@ interface Props {
   children: ReactNode;
 }
 
-export const AdvancedFilterToolbarDataTable = ({ children }: Props) => {
+export const AdvancedFilterToolbarDataTable = ({
+  children
+}: Props): JSX.Element => {
   const t = useTranslations("core");
 
   return (

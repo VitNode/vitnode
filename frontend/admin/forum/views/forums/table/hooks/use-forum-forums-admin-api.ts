@@ -47,16 +47,16 @@ export const useForumForumsAdminAPI = ({ initData }: Args) => {
 
     const data = mutation.data.admin__forum_forums__show.edges;
 
-    setData(prev => {
+    setData((prev) => {
       const clonedItems: FlatTree<ShowForumForumsAdminWithChildren>[] =
         flattenTree({ tree: prev });
       const items: FlatTree<ShowForumForumsAdminWithChildren>[] = clonedItems
-        .map(item => ({ ...item, children: [] }))
-        .filter(item => item.parentId !== parentId);
-      const parent = items.find(item => item.id === parentId);
+        .map((item) => ({ ...item, children: [] }))
+        .filter((item) => item.parentId !== parentId);
+      const parent = items.find((item) => item.id === parentId);
       if (!parent) return prev;
 
-      data.forEach(item => {
+      data.forEach((item) => {
         items.push({
           ...item,
           parentId,
@@ -64,7 +64,7 @@ export const useForumForumsAdminAPI = ({ initData }: Args) => {
           index: parent.children.length,
           // Map children to add permissions / Disable all permissions, by default
           children:
-            item.children.map(child => ({
+            item.children.map((child) => ({
               ...child,
               children: [],
               permissions: {

@@ -9,12 +9,17 @@ interface Props extends ErrorViewProps {
   theme_id: number;
 }
 
-export const ErrorViewSSR = ({ theme_id, ...props }: Props) => {
+interface DynamicImport
+  extends Promise<{ default: (props: ErrorViewProps) => JSX.Element }> {}
+
+export const ErrorViewSSR = ({ theme_id, ...props }: Props): JSX.Element => {
   const ErrorView: LazyExoticComponent<(props: ErrorViewProps) => JSX.Element> =
-    lazy(() =>
-      import(`@/themes/${theme_id}/core/views/global/error/error-view`).catch(
-        () => import("@/themes/1/core/views/global/error/error-view")
-      )
+    lazy(
+      (): DynamicImport =>
+        import(`@/themes/${theme_id}/core/views/global/error/error-view`).catch(
+          (): DynamicImport =>
+            import("@/themes/1/core/views/global/error/error-view")
+        )
     );
 
   return <ErrorView {...props} />;

@@ -27,7 +27,7 @@ export const forum_forums = pgTable(
     can_all_create: boolean("can_all_create").notNull().default(false),
     can_all_reply: boolean("can_all_reply").notNull().default(false)
   },
-  table => ({
+  (table) => ({
     parent_id_idx: index("forum_forums_parent_id_idx").on(table.parent_id)
   })
 );
@@ -62,7 +62,7 @@ export const forum_forums_name = pgTable(
       }),
     value: varchar("value", { length: 50 }).notNull()
   },
-  table => ({
+  (table) => ({
     forum_id_idx: index("forum_forums_name_forum_id_idx").on(table.forum_id),
     language_code_idx: index("forum_forums_name_language_code_idx").on(
       table.language_code
@@ -100,7 +100,7 @@ export const forum_forums_description = pgTable(
       }),
     value: varchar("value").notNull()
   },
-  table => ({
+  (table) => ({
     forum_id_idx: index("forum_forums_description_forum_id_idx").on(
       table.forum_id
     ),
@@ -139,7 +139,7 @@ export const forum_forums_permissions = pgTable(
     can_create: boolean("can_create").notNull().default(false),
     can_reply: boolean("can_reply").notNull().default(false)
   },
-  table => ({
+  (table) => ({
     forum_id_idx: index("forum_forums_permissions_forum_id_idx").on(
       table.forum_id
     ),

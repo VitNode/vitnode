@@ -7,7 +7,7 @@ interface Props {
   small?: boolean;
 }
 
-export const Loader = ({ className, small }: Props) => {
+export const Loader = ({ className, small }: Props): JSX.Element => {
   return (
     <div className={cn("flex justify-center items-center", className)}>
       <Loader2

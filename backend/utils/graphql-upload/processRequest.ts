@@ -234,7 +234,7 @@ export default function processRequest(
           capacitor.destroy(fileError);
         });
 
-        stream.on("error", error => {
+        stream.on("error", (error) => {
           fileError = error;
           stream.unpipe();
           capacitor.destroy(fileError);

@@ -28,7 +28,7 @@ export const ActionsTopic = ({
   id,
   permissions: { can_edit },
   state
-}: Props) => {
+}: Props): JSX.Element | null => {
   const t = useTranslations("forum.topics.actions");
   const tCore = useTranslations("core");
   const pathname = usePathname();
@@ -52,7 +52,7 @@ export const ActionsTopic = ({
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => push(`${pathname}/edit`)}>
+          <DropdownMenuItem onClick={(): void => push(`${pathname}/edit`)}>
             <Pencil />
             {tCore("edit")}
           </DropdownMenuItem>

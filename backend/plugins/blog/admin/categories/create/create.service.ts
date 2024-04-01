@@ -27,13 +27,13 @@ export class CreateBlogCategoriesService {
 
     await this.databaseService.db
       .insert(blog_categories_name)
-      .values(name.map(item => ({ ...item, category_id: categoryId })));
+      .values(name.map((item) => ({ ...item, category_id: categoryId })));
 
     if (description.length) {
       await this.databaseService.db
         .insert(blog_categories_description)
         .values(
-          description.map(item => ({ ...item, category_id: categoryId }))
+          description.map((item) => ({ ...item, category_id: categoryId }))
         );
     }
 

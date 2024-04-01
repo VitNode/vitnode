@@ -8,9 +8,12 @@ import { useState } from "react";
 
 import { Toaster } from "@/components/ui/sonner";
 
-export const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
+export const ThemeProvider = ({
+  children,
+  ...props
+}: ThemeProviderProps): JSX.Element => {
   const [queryClient] = useState(
-    () =>
+    (): QueryClient =>
       new QueryClient({
         defaultOptions: {
           queries: {

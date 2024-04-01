@@ -41,7 +41,8 @@ export const useTopicsList = ({ initData }: Args) => {
   });
 
   const data = useMemo(
-    () => query.data.pages.flatMap(page => page.forum_topics__show.edges) ?? [],
+    () =>
+      query.data.pages.flatMap((page) => page.forum_topics__show.edges) ?? [],
     [query.data.pages]
   );
 

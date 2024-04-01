@@ -1,6 +1,6 @@
 import { Skeleton } from "../ui/skeleton";
 
-export const SkeletonDataTable = () => {
+export const SkeletonDataTable = (): JSX.Element => {
   return (
     <div className="rounded-md border">
       <div className="border-b h-12 p-4 flex gap-5">

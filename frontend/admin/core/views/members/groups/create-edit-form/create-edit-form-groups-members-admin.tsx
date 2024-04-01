@@ -19,7 +19,7 @@ import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 
 const MainContentCreateEditFormGroupsMembersAdmin = lazy(() =>
   import("./content/main-content-create-edit-form-groups-members-admin").then(
-    module => ({
+    (module) => ({
       default: module.MainContentCreateEditFormGroupsMembersAdmin
     })
   )
@@ -27,7 +27,7 @@ const MainContentCreateEditFormGroupsMembersAdmin = lazy(() =>
 const ContentContentCreateEditFormGroupsMembersAdmin = lazy(() =>
   import(
     "./content/content-content-create-edit-form-groups-members-admin"
-  ).then(module => ({
+  ).then((module) => ({
     default: module.ContentContentCreateEditFormGroupsMembersAdmin
   }))
 );

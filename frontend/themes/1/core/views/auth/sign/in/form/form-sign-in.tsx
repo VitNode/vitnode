@@ -19,7 +19,7 @@ import { useSignInView } from "@/hooks/core/sign/in/use-sign-in-view";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-export const FormSignIn = () => {
+export const FormSignIn = (): JSX.Element => {
   const t = useTranslations("core");
   const { error, form, onSubmit } = useSignInView();
 
@@ -49,7 +49,7 @@ export const FormSignIn = () => {
             <FormField
               control={form.control}
               name="email"
-              render={({ field }) => (
+              render={({ field }): JSX.Element => (
                 <FormItem>
                   <FormLabel>{t("sign_in.form.email.label")}</FormLabel>
                   <FormControl>
@@ -62,7 +62,7 @@ export const FormSignIn = () => {
             <FormField
               control={form.control}
               name="password"
-              render={({ field }) => (
+              render={({ field }): JSX.Element => (
                 <FormItem>
                   <FormLabel>{t("sign_in.form.password.label")}</FormLabel>
                   <FormControl>
@@ -75,7 +75,7 @@ export const FormSignIn = () => {
             <FormField
               control={form.control}
               name="remember"
-              render={({ field }) => (
+              render={({ field }): JSX.Element => (
                 <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
                   <FormControl>
                     <Checkbox

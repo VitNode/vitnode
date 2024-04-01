@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 
-export const DarkLightModeSwitcher = () => {
+export const DarkLightModeSwitcher = (): JSX.Element => {
   const t = useTranslations("core");
   const { setTheme, theme } = useTheme();
 
@@ -33,22 +33,23 @@ export const DarkLightModeSwitcher = () => {
       <DropdownMenuContent>
         <DropdownMenuRadioGroup
           value={theme}
-          onValueChange={id => {
-            setTheme(id);
-          }}
+          onValueChange={(id): void => setTheme(id)}
         >
           <DropdownMenuRadioItem
             value="light"
-            onClick={() => setTheme("light")}
+            onClick={(): void => setTheme("light")}
           >
             <span>{t("user-bar.dark_light_switcher.light")}</span>
           </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="dark" onClick={() => setTheme("dark")}>
+          <DropdownMenuRadioItem
+            value="dark"
+            onClick={(): void => setTheme("dark")}
+          >
             <span>{t("user-bar.dark_light_switcher.dark")}</span>
           </DropdownMenuRadioItem>
           <DropdownMenuRadioItem
             value="system"
-            onClick={() => setTheme("system")}
+            onClick={(): void => setTheme("system")}
           >
             <span>{t("user-bar.dark_light_switcher.system")}</span>
           </DropdownMenuRadioItem>

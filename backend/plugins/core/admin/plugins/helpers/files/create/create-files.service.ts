@@ -64,7 +64,7 @@ export class CreateFilesAdminPluginsService {
     ];
 
     // Check if folder exists
-    folders.forEach(folder => {
+    folders.forEach((folder) => {
       if (fs.existsSync(join(this.path, folder.path))) {
         throw new CustomError({
           code: "PLUGIN_ALREADY_EXISTS",
@@ -73,14 +73,14 @@ export class CreateFilesAdminPluginsService {
       }
     });
 
-    folders.forEach(folder => {
+    folders.forEach((folder) => {
       const path = join(this.path, folder.path);
       // Create folders
       fs.mkdirSync(path, { recursive: true });
 
       // Create files
-      folder.files.forEach(file => {
-        fs.writeFile(join(path, file.name), file.content, err => {
+      folder.files.forEach((file) => {
+        fs.writeFile(join(path, file.name), file.content, (err) => {
           if (err) {
             throw new CustomError({
               code: "ERROR_CREATING_FILE",

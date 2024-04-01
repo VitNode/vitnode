@@ -26,11 +26,11 @@ export const OnChangePluginEditor = ({
   onChange,
   selectedLanguage,
   value
-}: WithLanguage | WithoutLanguage) => {
+}: WithLanguage | WithoutLanguage): null => {
   const [editor] = useLexicalComposerContext();
 
   // Set the initial editor value
-  useEffect(() => {
+  useEffect((): void => {
     if (!value || value.length === 0) return;
 
     if (disableLanguage && typeof value === "string") {
@@ -44,7 +44,7 @@ export const OnChangePluginEditor = ({
     if (!Array.isArray(value)) return;
 
     const currentValue = value.find(
-      item => item.language_code === selectedLanguage
+      (item): boolean => item.language_code === selectedLanguage
     )?.value;
     if (!currentValue) {
       editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined);
@@ -57,8 +57,8 @@ export const OnChangePluginEditor = ({
   }, [selectedLanguage]);
 
   // Update the editor value when the editor value changes
-  useEffect(() => {
-    return editor.registerUpdateListener(({ editorState }) => {
+  useEffect((): (() => void) => {
+    return editor.registerUpdateListener(({ editorState }): void => {
       const text = editorState.read($rootTextContent).trimStart();
       const valueAsArray = Array.isArray(value) ? value : [];
 
@@ -70,14 +70,18 @@ export const OnChangePluginEditor = ({
 
       if (text.length === 0) {
         onChange(
-          valueAsArray.filter(item => item.language_code !== selectedLanguage)
+          valueAsArray.filter(
+            (item): boolean => item.language_code !== selectedLanguage
+          )
         );
 
         return;
       }
 
       onChange([
-        ...valueAsArray.filter(item => item.language_code !== selectedLanguage),
+        ...valueAsArray.filter(
+          (item): boolean => item.language_code !== selectedLanguage
+        ),
         {
           language_code: selectedLanguage,
           value: JSON.stringify(editorState.toJSON())

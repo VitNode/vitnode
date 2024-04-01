@@ -18,7 +18,11 @@ interface Props {
   className?: string;
 }
 
-export const ReadOnlyEditor = ({ className, id, value }: Props) => {
+export const ReadOnlyEditor = ({
+  className,
+  id,
+  value
+}: Props): JSX.Element => {
   const initialConfig: InitialConfigType = {
     ...initialConfigEditor,
     namespace: id,

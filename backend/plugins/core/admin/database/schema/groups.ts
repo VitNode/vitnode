@@ -41,7 +41,7 @@ export const core_groups_names = pgTable(
       }),
     value: varchar("value", { length: 255 }).notNull()
   },
-  table => ({
+  (table) => ({
     group_id_idx: index("core_groups_names_group_id_idx").on(table.group_id),
     language_code_idx: index("core_groups_names_language_code_idx").on(
       table.language_code

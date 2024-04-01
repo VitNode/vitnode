@@ -10,11 +10,13 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Textarea } from "@/components/ui/textarea";
 
-interface Props {
+export interface PrettierAlertDialogProps {
   prettierError: PrettierFormatError | null;
 }
 
-export const PrettierAlertDialog = ({ prettierError }: Props) => {
+export const PrettierAlertDialog = ({
+  prettierError
+}: PrettierAlertDialogProps): JSX.Element | null => {
   const t = useTranslations("core.editor.prettier");
   const tCore = useTranslations("core");
   const [value, setValue] = useState(prettierError?.codeFrame ?? "");
@@ -32,7 +34,10 @@ export const PrettierAlertDialog = ({ prettierError }: Props) => {
         {prettierError.cause.reasonCode ?? prettierError.cause.reason}
       </p>
 
-      <Textarea onChange={e => setValue(e.target.value)} value={value} />
+      <Textarea
+        onChange={(e): void => setValue(e.target.value)}
+        value={value}
+      />
 
       <AlertDialogFooter>
         <AlertDialogCancel>{tCore("close")}</AlertDialogCancel>

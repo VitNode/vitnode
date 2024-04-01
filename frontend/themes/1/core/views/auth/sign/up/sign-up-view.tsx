@@ -9,7 +9,7 @@ import {
 import { FormSignUp } from "./form/form-sign-up";
 import { Link } from "@/i18n";
 
-export default function SignUpView() {
+export default function SignUpView(): JSX.Element {
   const t = useTranslations("core.sign_up");
 
   return (
@@ -19,7 +19,7 @@ export default function SignUpView() {
           <CardTitle className="text-2xl">{t("title")}</CardTitle>
           <CardDescription>
             {t.rich("desc", {
-              link: () => <Link href="/login">{t("sign_in")}</Link>
+              link: (): JSX.Element => <Link href="/login">{t("sign_in")}</Link>
             })}
           </CardDescription>
         </CardHeader>

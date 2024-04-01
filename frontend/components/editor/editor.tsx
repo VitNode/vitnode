@@ -57,7 +57,7 @@ export const Editor = ({
   onChange,
   toolbarClassName,
   value
-}: WithLanguage | WithoutLanguage) => {
+}: WithLanguage | WithoutLanguage): JSX.Element => {
   const [blockType, setBlockType] = useState<string>(BLOCK_NAMES.PARAGRAPH);
   const floatingAnchorElem = useRef<HTMLDivElement>(null);
   const locale = useLocale();

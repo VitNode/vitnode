@@ -4,4 +4,4 @@ interface Args {}
 
 export const WrapperPostsContext = createContext<Args>({});
 
-export const useWrapperPosts = () => useContext(WrapperPostsContext);
+export const useWrapperPosts = (): Args => useContext(WrapperPostsContext);

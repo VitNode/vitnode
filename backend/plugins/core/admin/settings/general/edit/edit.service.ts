@@ -19,9 +19,14 @@ export class EditGeneralAdminSettingsService {
       ...data
     };
 
-    fs.writeFile(configPath, JSON.stringify(newData, null, 2), "utf8", err => {
-      if (err) throw err;
-    });
+    fs.writeFile(
+      configPath,
+      JSON.stringify(newData, null, 2),
+      "utf8",
+      (err) => {
+        if (err) throw err;
+      }
+    );
 
     return data;
   }

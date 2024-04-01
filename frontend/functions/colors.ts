@@ -4,7 +4,7 @@ export const colorConverter = {
   hslToHex: (h: number, s: number, l: number): string => {
     l /= 100;
     const a = (s * Math.min(l, 1 - l)) / 100;
-    const f = (n: number) => {
+    const f = (n: number): string => {
       const k = (n + h / 30) % 12;
       const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
 
@@ -72,7 +72,11 @@ export const colorConverter = {
     };
   },
 
-  hexToRGB(hex: string) {
+  hexToRGB(hex: string): {
+    b: number;
+    g: number;
+    r: number;
+  } {
     const r = parseInt(hex.slice(1, 3), 16),
       g = parseInt(hex.slice(3, 5), 16),
       b = parseInt(hex.slice(5, 7), 16);
@@ -80,7 +84,15 @@ export const colorConverter = {
     return { r, g, b };
   },
 
-  RGBToHSV(r: number, g: number, b: number) {
+  RGBToHSV(
+    r: number,
+    g: number,
+    b: number
+  ): {
+    h: number;
+    s: number;
+    v: number;
+  } {
     const v = Math.max(r, g, b),
       c = v - Math.min(r, g, b);
     const h =
@@ -94,7 +106,15 @@ export const colorConverter = {
     };
   },
 
-  RGBToHSL(r: number, g: number, b: number) {
+  RGBToHSL(
+    r: number,
+    g: number,
+    b: number
+  ): {
+    h: number;
+    l: number;
+    s: number;
+  } {
     // Make r, g, and b fractions of 1
     r /= 255;
     g /= 255;

@@ -21,7 +21,7 @@ export const TabsTrigger = ({
   className,
   href,
   onClick
-}: TabsTriggerProps) => {
+}: TabsTriggerProps): JSX.Element => {
   const pathname = usePathname();
   const active = activeFromProps || (href && pathname.includes(href));
   const dataState = active ? "active" : "inactive";

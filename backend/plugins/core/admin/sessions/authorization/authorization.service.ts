@@ -35,7 +35,7 @@ export class AuthorizationAdminSessionsService {
       }
     });
 
-    return adminNav.filter(plugin => plugin.nav.length > 0);
+    return adminNav.filter((plugin) => plugin.nav.length > 0);
   }
 
   async initialAuthorization({

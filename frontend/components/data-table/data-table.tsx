@@ -6,7 +6,8 @@ import {
   getCoreRowModel,
   useReactTable,
   type ColumnDef,
-  type SortingState
+  type SortingState,
+  type OnChangeFn
 } from "@tanstack/react-table";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
@@ -57,7 +58,7 @@ export function DataTable<TData extends TDataMin>({
   defaultSorting,
   pageInfo,
   ...props
-}: DataTableProps<TData>) {
+}: DataTableProps<TData>): JSX.Element {
   const [isPending, startTransition] = useTransition();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -70,12 +71,12 @@ export function DataTable<TData extends TDataMin>({
   };
 
   const table = useReactTable({
-    data: useMemo(() => data, [data]),
-    columns: useMemo(() => columns, [columns]),
+    data: useMemo((): TData[] => data, [data]),
+    columns: useMemo((): ColumnDef<TData>[] => columns, [columns]),
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
-    getRowId: row => row.id.toString(),
-    onSortingChange: data => {
+    getRowId: (row): string => row.id.toString(),
+    onSortingChange: (data): void => {
       const fnSorting = data as () => SortingState;
       const sorting = fnSorting();
 
@@ -98,7 +99,7 @@ export function DataTable<TData extends TDataMin>({
   });
 
   const enablePageSize = [10, 20, 30, 40, 50];
-  const pageSizeValue = useMemo(() => {
+  const pageSizeValue = useMemo((): number => {
     if (enablePageSize.includes(Number(pagination.first))) {
       return Number(pagination.first);
     }
@@ -118,7 +119,7 @@ export function DataTable<TData extends TDataMin>({
     cursor?: number | null;
     nextPage?: boolean;
     pageSize?: string | null;
-  }) => {
+  }): void => {
     const params = new URLSearchParams(searchParams);
 
     if (cursor) {
@@ -158,46 +159,52 @@ export function DataTable<TData extends TDataMin>({
           <div className="rounded-md border">
             <Table>
               <TableHeader>
-                {table.getHeaderGroups().map(headerGroup => (
-                  <TableRow key={headerGroup.id}>
-                    {headerGroup.headers.map(header => {
-                      return (
-                        <TableHead key={header.id}>
-                          {header.isPlaceholder
-                            ? null
-                            : flexRender(
-                                header.column.columnDef.header,
-                                header.getContext()
-                              )}
-                        </TableHead>
-                      );
-                    })}
-                  </TableRow>
-                ))}
+                {table.getHeaderGroups().map(
+                  (headerGroup): JSX.Element => (
+                    <TableRow key={headerGroup.id}>
+                      {headerGroup.headers.map((header): JSX.Element => {
+                        return (
+                          <TableHead key={header.id}>
+                            {header.isPlaceholder
+                              ? null
+                              : flexRender(
+                                  header.column.columnDef.header,
+                                  header.getContext()
+                                )}
+                          </TableHead>
+                        );
+                      })}
+                    </TableRow>
+                  )
+                )}
               </TableHeader>
               <TableBody>
                 {table.getRowModel().rows?.length ? (
-                  table.getRowModel().rows.map(row => (
-                    <TableRow
-                      key={row.id}
-                      data-state={row.getIsSelected() && "selected"}
-                    >
-                      {row.getVisibleCells().map(cell => (
-                        <TableCell
-                          className={cn({
-                            "flex items-center justify-end":
-                              cell.column.id === "actions"
-                          })}
-                          key={cell.id}
-                        >
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  ))
+                  table.getRowModel().rows.map(
+                    (row): JSX.Element => (
+                      <TableRow
+                        key={row.id}
+                        data-state={row.getIsSelected() && "selected"}
+                      >
+                        {row.getVisibleCells().map(
+                          (cell): JSX.Element => (
+                            <TableCell
+                              className={cn({
+                                "flex items-center justify-end":
+                                  cell.column.id === "actions"
+                              })}
+                              key={cell.id}
+                            >
+                              {flexRender(
+                                cell.column.columnDef.cell,
+                                cell.getContext()
+                              )}
+                            </TableCell>
+                          )
+                        )}
+                      </TableRow>
+                    )
+                  )
                 ) : (
                   <TableRow>
                     <TableCell
@@ -220,19 +227,21 @@ export function DataTable<TData extends TDataMin>({
                 </p>
                 <Select
                   value={`${pageSizeValue}`}
-                  onValueChange={value => {
-                    changeState({ pageSize: value });
-                  }}
+                  onValueChange={(value): void =>
+                    changeState({ pageSize: value })
+                  }
                 >
                   <SelectTrigger className="h-8 w-[70px]">
                     <SelectValue placeholder={pageSizeValue} />
                   </SelectTrigger>
                   <SelectContent side="top">
-                    {enablePageSize.map(pageSize => (
-                      <SelectItem key={pageSize} value={`${pageSize}`}>
-                        {pageSize}
-                      </SelectItem>
-                    ))}
+                    {enablePageSize.map(
+                      (pageSize): JSX.Element => (
+                        <SelectItem key={pageSize} value={`${pageSize}`}>
+                          {pageSize}
+                        </SelectItem>
+                      )
+                    )}
                   </SelectContent>
                 </Select>
               </div>
@@ -243,7 +252,7 @@ export function DataTable<TData extends TDataMin>({
                   size="icon"
                   disabled={!pageInfo.hasPreviousPage}
                   ariaLabel={t("pagination.previous")}
-                  onClick={() =>
+                  onClick={(): void =>
                     changeState({
                       cursor: pageInfo.startCursor,
                       pageSize: pagination.last
@@ -257,7 +266,7 @@ export function DataTable<TData extends TDataMin>({
                   size="icon"
                   ariaLabel={t("pagination.next")}
                   disabled={!pageInfo.hasNextPage}
-                  onClick={() =>
+                  onClick={(): void =>
                     changeState({
                       cursor: pageInfo.endCursor,
                       pageSize: pagination.first,

@@ -103,7 +103,7 @@ export class StatsShowForumForumsService {
 
     return {
       totalCount: topics.length,
-      ids: topics.map(topic => topic.id)
+      ids: topics.map((topic) => topic.id)
     };
   }
 
@@ -140,7 +140,7 @@ export class StatsShowForumForumsService {
 
     return {
       count: topics.length,
-      ids: topics.map(topic => topic.id)
+      ids: topics.map((topic) => topic.id)
     };
   }
 
@@ -191,7 +191,7 @@ export class StatsShowForumForumsService {
     });
 
     const children = await this.getAllChildren({ forumId, user });
-    const childrenIds = children.map(child => child.id);
+    const childrenIds = children.map((child) => child.id);
     const totalTopics = await this.getTotalTopics({
       forumIds: forum ? [forum.id, ...childrenIds] : childrenIds
     });

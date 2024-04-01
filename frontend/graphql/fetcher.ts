@@ -35,9 +35,9 @@ export async function fetcher<TData, TVariables>({
   if (uploads) {
     const preVariables = {} as Record<string, unknown>;
 
-    uploads.forEach(({ files, variable }) => {
+    uploads.forEach(({ files, variable }): void => {
       if (Array.isArray(files)) {
-        preVariables[variable] = files.map(() => null);
+        preVariables[variable] = files.map((): null => null);
       } else {
         preVariables[variable] = null;
       }
@@ -58,9 +58,9 @@ export async function fetcher<TData, TVariables>({
 
     // Map
     let mapIndex = 0;
-    uploads.forEach(({ files, variable }) => {
+    uploads.forEach(({ files, variable }): void => {
       if (Array.isArray(files)) {
-        files.forEach((_file, index) => {
+        files.forEach((_file, index): void => {
           preMap.set(`${mapIndex}`, [`variables.${variable}.${index}`]);
 
           mapIndex += 1;
@@ -76,9 +76,9 @@ export async function fetcher<TData, TVariables>({
     formData.append("map", JSON.stringify(Object.fromEntries(preMap)));
 
     let currentIndex = 0;
-    uploads.forEach(({ files }) => {
+    uploads.forEach(({ files }): void => {
       if (Array.isArray(files)) {
-        files.forEach(file => {
+        files.forEach((file): void => {
           formData.append(`${currentIndex}`, file);
 
           currentIndex += 1;

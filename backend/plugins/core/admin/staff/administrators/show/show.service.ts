@@ -67,7 +67,7 @@ export class ShowAdminStaffAdministratorsService {
       .from(core_admin_permissions);
 
     return outputPagination({
-      edges: edges.map(edge => {
+      edges: edges.map((edge) => {
         if (edge.user) {
           return {
             ...edge,

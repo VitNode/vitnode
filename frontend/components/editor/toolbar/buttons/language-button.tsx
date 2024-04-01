@@ -25,7 +25,7 @@ interface Props {
 export const LanguageButtonEditor = ({
   selectedLanguage,
   setSelectedLanguage
-}: Props) => {
+}: Props): JSX.Element | null => {
   const t = useTranslations("core.editor");
   const { languages } = useGlobals();
   const [editor] = useLexicalComposerContext();
@@ -52,12 +52,14 @@ export const LanguageButtonEditor = ({
         </Tooltip>
       </TooltipProvider>
 
-      <SelectContent onCloseAutoFocus={() => editor.focus()}>
-        {languages.map(language => (
-          <SelectItem key={language.code} value={`${language.code}`}>
-            {language.name}
-          </SelectItem>
-        ))}
+      <SelectContent onCloseAutoFocus={(): void => editor.focus()}>
+        {languages.map(
+          (language): JSX.Element => (
+            <SelectItem key={language.code} value={`${language.code}`}>
+              {language.name}
+            </SelectItem>
+          )
+        )}
       </SelectContent>
     </Select>
   );

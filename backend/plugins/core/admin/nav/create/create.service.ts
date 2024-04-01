@@ -44,7 +44,7 @@ export class CreateAdminNavService {
     const namesNav = await this.databaseService.db
       .insert(core_nav_name)
       .values(
-        name.map(n => ({
+        name.map((n) => ({
           nav_id: id,
           language_code: n.language_code,
           value: n.value
@@ -57,7 +57,7 @@ export class CreateAdminNavService {
         ? await this.databaseService.db
             .insert(core_nav_description)
             .values(
-              description.map(n => ({
+              description.map((n) => ({
                 nav_id: id,
                 language_code: n.language_code,
                 value: n.value

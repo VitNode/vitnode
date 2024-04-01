@@ -9,16 +9,16 @@ interface Props {
   value: TextLanguage[];
 }
 
-export const LoadReadOnlyEditor = ({ value }: Props) => {
+export const LoadReadOnlyEditor = ({ value }: Props): null => {
   const [editor] = useLexicalComposerContext();
   const locale = useLocale();
 
-  const updateEditorState = (value: string) => {
+  const updateEditorState = (value: string): void => {
     try {
       const initialEditorState = editor.parseEditorState(value);
       editor.setEditorState(initialEditorState);
     } catch (e) {
-      editor.update(() => {
+      editor.update((): void => {
         const root = $getRoot();
         root.clear();
 
@@ -30,11 +30,11 @@ export const LoadReadOnlyEditor = ({ value }: Props) => {
   };
 
   // Set the initial editor value
-  useEffect(() => {
+  useEffect((): void => {
     if (value.length === 0) return;
 
     const currentValue = value.find(
-      item => item.language_code === locale
+      (item): boolean => item.language_code === locale
     )?.value;
     const lastValue = value.at(-1)?.value;
 

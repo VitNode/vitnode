@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 
 import { CardDescription, CardHeader } from "@/components/ui/card";
 
-export const HeaderNotificationsSettings = () => {
+export const HeaderNotificationsSettings = (): JSX.Element => {
   const t = useTranslations("core");
 
   return (

@@ -28,7 +28,7 @@ export const core_sessions = pgTable(
       })
       .notNull()
   },
-  table => ({
+  (table) => ({
     user_id_idx: index("core_sessions_user_id_idx").on(table.user_id)
   })
 );

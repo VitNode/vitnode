@@ -11,10 +11,10 @@ interface Props {
 
 export const LOCAL_STORAGE_KEY = "forum:category-accordion";
 
-export const WrapperCategoryForum = ({ children, id }: Props) => {
+export const WrapperCategoryForum = ({ children, id }: Props): JSX.Element => {
   const [open, setOpen] = useState(true);
 
-  useEffect(() => {
+  useEffect((): void => {
     const ids = localStorage.getItem(LOCAL_STORAGE_KEY)?.split(",");
 
     if (ids?.includes(id.toString())) {

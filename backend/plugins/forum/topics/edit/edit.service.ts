@@ -33,9 +33,9 @@ export class EditForumTopicsService {
       });
 
     const update = await Promise.all(
-      title.map(async item => {
+      title.map(async (item) => {
         const itemExist = names.find(
-          el => el.language_code === item.language_code
+          (el) => el.language_code === item.language_code
         );
 
         if (itemExist) {
@@ -62,8 +62,8 @@ export class EditForumTopicsService {
 
     // Delete remaining translations
     Promise.all(
-      names.map(async item => {
-        const exist = update.find(name => name.id === item.id);
+      names.map(async (item) => {
+        const exist = update.find((name) => name.id === item.id);
         if (exist) return;
 
         await this.databaseService.db
@@ -86,9 +86,9 @@ export class EditForumTopicsService {
       });
 
     const update = await Promise.all(
-      content.map(async item => {
+      content.map(async (item) => {
         const itemExist = names.find(
-          el => el.language_code === item.language_code
+          (el) => el.language_code === item.language_code
         );
 
         if (itemExist) {
@@ -115,8 +115,8 @@ export class EditForumTopicsService {
 
     // Delete remaining translations
     Promise.all(
-      names.map(async item => {
-        const exist = update.find(name => name.id === item.id);
+      names.map(async (item) => {
+        const exist = update.find((name) => name.id === item.id);
         if (exist) return;
 
         await this.databaseService.db

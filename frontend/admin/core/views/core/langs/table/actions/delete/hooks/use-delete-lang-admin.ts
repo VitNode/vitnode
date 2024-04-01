@@ -19,7 +19,7 @@ export const useDeleteLangAdmin = ({
   const pathname = usePathname();
   const { push } = useRouter();
   const formSchema = z.object({
-    name: z.string().refine(value => value === name)
+    name: z.string().refine((value) => value === name)
   });
 
   const form = useForm<z.infer<typeof formSchema>>({

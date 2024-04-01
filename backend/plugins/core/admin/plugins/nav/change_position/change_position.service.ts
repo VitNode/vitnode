@@ -32,8 +32,8 @@ export class ChangePositionAdminNavPluginsService {
     let index = 0;
     const newIndexes: { id: number; position: number }[] = [];
     getAllNav
-      .filter(item => item.id !== id)
-      .forEach(item => {
+      .filter((item) => item.id !== id)
+      .forEach((item) => {
         // Skip the item that we want to move
         if (index_to_move === index) {
           index++;
@@ -52,7 +52,7 @@ export class ChangePositionAdminNavPluginsService {
     });
 
     await Promise.all(
-      newIndexes.map(async item => {
+      newIndexes.map(async (item) => {
         await this.databaseService.db
           .update(core_plugins_nav)
           .set({

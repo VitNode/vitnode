@@ -50,7 +50,7 @@ export const ContentTableGroupsMembersAdmin = ({
         }
       },
       {
-        header: val => {
+        header: (val) => {
           return (
             <HeaderSortingDataTable {...val}>
               {tCore("table.updated")}

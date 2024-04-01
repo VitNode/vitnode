@@ -13,17 +13,19 @@ import {
 } from "@/components/ui/tooltip";
 import { useUpdateStateEditor } from "../hooks/use-update-state-editor";
 
-export const BoldButtonEditor = () => {
+export const BoldButtonEditor = (): JSX.Element => {
   const t = useTranslations("core.editor.text");
   const [isBold, setIsBold] = useState(false);
   const [editor] = useLexicalComposerContext();
 
   useUpdateStateEditor({
-    handleChange: () => {
+    handleChange: (): boolean => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
       setIsBold(selection.hasFormat("bold"));
+
+      return true;
     }
   });
 
@@ -34,7 +36,7 @@ export const BoldButtonEditor = () => {
           <div>
             <Toggle
               aria-label={t("bold")}
-              onClick={() =>
+              onClick={(): boolean =>
                 editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold")
               }
               pressed={isBold}

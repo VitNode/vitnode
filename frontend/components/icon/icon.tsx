@@ -11,22 +11,40 @@ interface Props extends Omit<Lucide.LucideIcon, "$$typeof"> {
   className?: string;
 }
 
-export const Icon = memo(({ className, name, ...props }: Props) => {
-  if (/\p{Extended_Pictographic}/gu.test(name)) {
-    return <span className={className}>{name}</span>;
+export const Icon = memo(
+  ({ className, name, ...props }: Props): JSX.Element => {
+    if (/\p{Extended_Pictographic}/gu.test(name)) {
+      return <span className={className}>{name}</span>;
+    }
+
+    const LucideIcon = lazy<ComponentType<Lucide.LucideProps>>(
+      (): Promise<
+        | {
+            default: ComponentType<Lucide.LucideProps>;
+          }
+        | {
+            default: Lucide.LucideIcon;
+          }
+      > =>
+        import("lucide-react")
+          .then((mod): Lucide.LucideIcon => mod[name as IconLucideNames])
+          .then(
+            (
+              mod
+            ): {
+              default: Lucide.LucideIcon;
+            } => ({ default: mod })
+          )
+    );
+
+    return (
+      <Suspense
+        fallback={<Loader2 className={cn("animate-spin", className)} />}
+      >
+        <LucideIcon className={className} {...props} />
+      </Suspense>
+    );
   }
-
-  const LucideIcon = lazy<ComponentType<Lucide.LucideProps>>(() =>
-    import("lucide-react")
-      .then(mod => mod[name as IconLucideNames])
-      .then(mod => ({ default: mod }))
-  );
-
-  return (
-    <Suspense fallback={<Loader2 className={cn("animate-spin", className)} />}>
-      <LucideIcon className={className} {...props} />
-    </Suspense>
-  );
-});
+);
 
 Icon.displayName = "Icon";

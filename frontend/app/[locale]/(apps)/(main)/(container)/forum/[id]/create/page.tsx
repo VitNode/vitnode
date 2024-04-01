@@ -25,7 +25,9 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params: { id } }: Props) {
+export default async function Page({
+  params: { id }
+}: Props): Promise<JSX.Element | null> {
   const { theme_id } = await getSessionData();
   const { data } = await getForumItemData({ id });
   if (!data) return null;
@@ -36,15 +38,18 @@ export default async function Page({ params: { id } }: Props) {
 
   const PageFromTheme: LazyExoticComponent<
     (props: CreateTopicViewProps) => JSX.Element
-  > = lazy(() =>
-    import(
-      `@/themes/${theme_id}/forum/views/forum/forums/views/create-topic/create-topic-view`
-    ).catch(
-      () =>
-        import(
-          "@/themes/1/forum/views/forum/forums/views/create-topic/create-topic-view"
-        )
-    )
+  > = lazy(
+    (): Promise<{ default: (props: CreateTopicViewProps) => JSX.Element }> =>
+      import(
+        `@/themes/${theme_id}/forum/views/forum/forums/views/create-topic/create-topic-view`
+      ).catch(
+        (): Promise<{
+          default: (props: CreateTopicViewProps) => JSX.Element | null;
+        }> =>
+          import(
+            "@/themes/1/forum/views/forum/forums/views/create-topic/create-topic-view"
+          )
+      )
   );
 
   return <PageFromTheme data={data} />;

@@ -10,15 +10,15 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 
-export const RedoMoveButtonEditor = () => {
+export const RedoMoveButtonEditor = (): JSX.Element => {
   const t = useTranslations("core.editor.move");
   const [editor] = useLexicalComposerContext();
   const [canRedo, setCanRedo] = useState(false);
 
-  useEffect(() => {
+  useEffect((): (() => void) => {
     return editor.registerCommand<boolean>(
       CAN_REDO_COMMAND,
-      payload => {
+      (payload): boolean => {
         setCanRedo(payload);
 
         return false;
@@ -32,7 +32,7 @@ export const RedoMoveButtonEditor = () => {
       variant="ghost"
       size="icon"
       className="size-9"
-      onClick={() => editor.dispatchCommand(REDO_COMMAND, undefined)}
+      onClick={(): boolean => editor.dispatchCommand(REDO_COMMAND, undefined)}
       ariaLabel={t("redo")}
       disabled={!canRedo}
     >

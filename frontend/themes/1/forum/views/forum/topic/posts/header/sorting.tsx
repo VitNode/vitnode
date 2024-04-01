@@ -9,7 +9,7 @@ import { usePathname, useRouter } from "@/i18n";
 
 const allowedSorting = ["oldest", "newest"];
 
-export const SortingHeaderPosts = () => {
+export const SortingHeaderPosts = (): JSX.Element => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -18,7 +18,7 @@ export const SortingHeaderPosts = () => {
     ? searchParams.get("sort") ?? "oldest"
     : "oldest";
 
-  const handleSort = (value: string) => {
+  const handleSort = (value: string): void => {
     if (sortValue === value) return;
 
     const newSearchParams = new URLSearchParams(searchParams);
@@ -39,7 +39,7 @@ export const SortingHeaderPosts = () => {
       <TabsTrigger
         id="oldest"
         active={sortValue === "oldest"}
-        onClick={() => handleSort("oldest")}
+        onClick={(): void => handleSort("oldest")}
       >
         {t("oldest")}
       </TabsTrigger>
@@ -47,7 +47,7 @@ export const SortingHeaderPosts = () => {
       <TabsTrigger
         id="newest"
         active={sortValue === "newest"}
-        onClick={() => handleSort("newest")}
+        onClick={(): void => handleSort("newest")}
       >
         {t("newest")}
       </TabsTrigger>

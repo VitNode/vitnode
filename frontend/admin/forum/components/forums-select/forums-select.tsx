@@ -15,7 +15,7 @@ import type { TextLanguage } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 
 const Content = lazy(() =>
-  import("./content").then(module => ({
+  import("./content").then((module) => ({
     default: module.ContentForumsSelect
   }))
 );
@@ -71,12 +71,12 @@ export const ForumsSelect = forwardRef<
           <Badge
             className="[&>svg]:size-4 flex-shrink-0"
             tabIndex={0}
-            onClick={e => {
+            onClick={(e) => {
               e.stopPropagation();
               e.preventDefault();
               onChange([]);
             }}
-            onKeyDown={e => {
+            onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.stopPropagation();
                 e.preventDefault();
@@ -89,18 +89,18 @@ export const ForumsSelect = forwardRef<
         );
       }
 
-      return values.map(item => {
+      return values.map((item) => {
         return (
           <Badge
             className="[&>svg]:size-4 flex-shrink-0"
             key={item.id}
             tabIndex={0}
-            onClick={e => {
+            onClick={(e) => {
               e.stopPropagation();
               e.preventDefault();
               onChange();
             }}
-            onKeyDown={e => {
+            onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.stopPropagation();
                 e.preventDefault();
@@ -134,10 +134,10 @@ export const ForumsSelect = forwardRef<
             <Content
               values={values}
               exclude={exclude}
-              onSelect={item => {
+              onSelect={(item) => {
                 if (multiple) {
-                  if (values.find(value => value.id === item.id)) {
-                    onChange(values.filter(value => value.id !== item.id));
+                  if (values.find((value) => value.id === item.id)) {
+                    onChange(values.filter((value) => value.id !== item.id));
 
                     return;
                   }

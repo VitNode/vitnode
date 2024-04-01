@@ -50,7 +50,9 @@ function getCurrentIndex(keysLength: number): number {
 }
 
 function getTopLevelNodeKeys(editor: LexicalEditor): string[] {
-  return editor.getEditorState().read(() => $getRoot().getChildrenKeys());
+  return editor
+    .getEditorState()
+    .read((): string[] => $getRoot().getChildrenKeys());
 }
 
 function getCollapsedMargins(elem: HTMLElement): {
@@ -95,7 +97,7 @@ function getBlockElement(
 
   let blockElem: HTMLElement | null = null;
 
-  editor.getEditorState().read(() => {
+  editor.getEditorState().read((): void => {
     if (useEdgeAsDefault) {
       const [firstNode, lastNode] = [
         editor.getElementByKey(topLevelNodeKeys[0]),
@@ -177,7 +179,7 @@ function setMenuPosition(
   targetElem: HTMLElement | null,
   floatingElem: HTMLElement,
   anchorElem: HTMLElement
-) {
+): void {
   if (!targetElem) {
     floatingElem.style.opacity = "0";
     floatingElem.style.transform = "translate(-10000px, -10000px)";
@@ -204,14 +206,14 @@ function setMenuPosition(
 function setDragImage(
   dataTransfer: DataTransfer,
   draggableBlockElem: HTMLElement
-) {
+): void {
   const { transform } = draggableBlockElem.style;
 
   // Remove dragImage borders
   draggableBlockElem.style.transform = "translateZ(0)";
   dataTransfer.setDragImage(draggableBlockElem, 0, 0);
 
-  setTimeout(() => {
+  setTimeout((): void => {
     draggableBlockElem.style.transform = transform;
   });
 }
@@ -221,7 +223,7 @@ function setTargetLine(
   targetBlockElem: HTMLElement,
   mouseY: number,
   anchorElem: HTMLElement
-) {
+): void {
   const { height: targetBlockElemHeight, top: targetBlockElemTop } =
     targetBlockElem.getBoundingClientRect();
   const { top: anchorTop, width: anchorWidth } =
@@ -243,7 +245,7 @@ function setTargetLine(
   targetLineElem.style.opacity = ".4";
 }
 
-function hideTargetLine(targetLineElem: HTMLElement | null) {
+function hideTargetLine(targetLineElem: HTMLElement | null): void {
   if (targetLineElem) {
     targetLineElem.style.opacity = "0";
     targetLineElem.style.transform = "translate(-10000px, -10000px)";
@@ -263,7 +265,7 @@ function useDraggableBlockMenu(
     useState<HTMLElement | null>(null);
 
   useEffect(() => {
-    function onMouseMove(event: MouseEvent) {
+    function onMouseMove(event: MouseEvent): void {
       const target = event.target;
       if (!isHTMLElement(target)) {
         setDraggableBlockElem(null);
@@ -280,26 +282,26 @@ function useDraggableBlockMenu(
       setDraggableBlockElem(_draggableBlockElem);
     }
 
-    function onMouseLeave() {
+    function onMouseLeave(): void {
       setDraggableBlockElem(null);
     }
 
     scrollerElem?.addEventListener("mousemove", onMouseMove);
     scrollerElem?.addEventListener("mouseleave", onMouseLeave);
 
-    return () => {
+    return (): void => {
       scrollerElem?.removeEventListener("mousemove", onMouseMove);
       scrollerElem?.removeEventListener("mouseleave", onMouseLeave);
     };
   }, [scrollerElem, anchorElem, editor]);
 
-  useEffect(() => {
+  useEffect((): void => {
     if (menuRef.current) {
       setMenuPosition(draggableBlockElem, menuRef.current, anchorElem);
     }
   }, [anchorElem, draggableBlockElem]);
 
-  useEffect(() => {
+  useEffect((): (() => void) => {
     function onDragover(event: DragEvent): boolean {
       if (!isDraggingBlockRef.current) {
         return false;
@@ -366,16 +368,12 @@ function useDraggableBlockMenu(
     return mergeRegister(
       editor.registerCommand(
         DRAGOVER_COMMAND,
-        event => {
-          return onDragover(event);
-        },
+        (event): boolean => onDragover(event),
         COMMAND_PRIORITY_LOW
       ),
       editor.registerCommand(
         DROP_COMMAND,
-        event => {
-          return onDrop(event);
-        },
+        (event): boolean => onDrop(event),
         COMMAND_PRIORITY_HIGH
       )
     );
@@ -388,7 +386,7 @@ function useDraggableBlockMenu(
     }
     setDragImage(dataTransfer, draggableBlockElem);
     let nodeKey = "";
-    editor.update(() => {
+    editor.update((): void => {
       const node = $getNearestNodeFromDOMNode(draggableBlockElem);
       if (node) {
         nodeKey = node.getKey();
@@ -432,7 +430,7 @@ interface Props {
 
 export const DraggableBlockPluginEditor = ({
   anchorElem = document.body
-}: Props) => {
+}: Props): JSX.Element => {
   const [editor] = useLexicalComposerContext();
 
   return useDraggableBlockMenu(editor, anchorElem);

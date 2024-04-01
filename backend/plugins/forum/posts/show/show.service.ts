@@ -117,7 +117,7 @@ export class ShowPostsForumsService {
       .where(where);
 
     const output = outputPagination({
-      edges: edges.map(edge => {
+      edges: edges.map((edge) => {
         if (edge.topic_log) {
           const { id, ...actions } = edge.topic_log;
 
@@ -215,7 +215,7 @@ export class ShowPostsForumsService {
 
       return {
         ...output,
-        lastEdges: lastEdges.reverse().map(edge => {
+        lastEdges: lastEdges.reverse().map((edge) => {
           if (edge.topic_log) {
             const { id, ...actions } = edge.topic_log;
 

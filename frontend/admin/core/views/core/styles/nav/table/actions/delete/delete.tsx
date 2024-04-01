@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/tooltip";
 
 const Content = lazy(() =>
-  import("./content").then(module => ({
+  import("./content").then((module) => ({
     default: module.ContentDeleteActionTableNavAdmin
   }))
 );

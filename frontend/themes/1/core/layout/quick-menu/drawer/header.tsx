@@ -9,7 +9,7 @@ import { ThemeSwitcher } from "@/components/switchers/theme/theme-switcher";
 import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";
 import { LanguageSwitcher } from "@/components/switchers/language-switcher";
 
-export const HeaderDrawerQuickMenu = () => {
+export const HeaderDrawerQuickMenu = (): JSX.Element => {
   const t = useTranslations("core");
   const { session } = useSession();
 

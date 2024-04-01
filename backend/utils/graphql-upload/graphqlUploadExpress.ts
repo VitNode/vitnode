@@ -43,7 +43,7 @@ export function graphqlUploadExpress({
   ) {
     if (!request.is("multipart/form-data")) return next();
 
-    const requestEnd = new Promise(resolve => request.on("end", resolve));
+    const requestEnd = new Promise((resolve) => request.on("end", resolve));
     const { send } = response;
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -59,11 +59,11 @@ export function graphqlUploadExpress({
       };
 
     processRequest(request, response, processRequestOptions)
-      .then(body => {
+      .then((body) => {
         request.body = body;
         next();
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.status && error.expose) response.status(error.status);
         next(error);
       });

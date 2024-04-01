@@ -16,7 +16,7 @@ const Separator = forwardRef<
   (
     { className, decorative = true, orientation = "horizontal", ...props },
     ref
-  ) => (
+  ): JSX.Element => (
     <SeparatorPrimitive.Root
       ref={ref}
       decorative={decorative}

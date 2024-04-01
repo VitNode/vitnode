@@ -13,17 +13,19 @@ import {
 } from "@/components/ui/tooltip";
 import { useUpdateStateEditor } from "../hooks/use-update-state-editor";
 
-export const SubscriptButtonEditor = () => {
+export const SubscriptButtonEditor = (): JSX.Element => {
   const t = useTranslations("core.editor.text");
   const [isSubscript, setIsSubscript] = useState(false);
   const [editor] = useLexicalComposerContext();
 
   useUpdateStateEditor({
-    handleChange: () => {
+    handleChange: (): boolean => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return false;
 
       setIsSubscript(selection.hasFormat("subscript"));
+
+      return true;
     }
   });
 
@@ -34,7 +36,7 @@ export const SubscriptButtonEditor = () => {
           <div>
             <Toggle
               aria-label={t("subscript")}
-              onClick={() =>
+              onClick={(): boolean =>
                 editor.dispatchCommand(FORMAT_TEXT_COMMAND, "subscript")
               }
               pressed={isSubscript}

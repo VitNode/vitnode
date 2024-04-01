@@ -12,7 +12,7 @@ import { Loader } from "@/components/loader";
 import type { ShowAdminStaffModerators } from "@/graphql/hooks";
 
 const ContentDeleteActionsTableModeratorsStaffAdmin = lazy(() =>
-  import("./content").then(module => ({
+  import("./content").then((module) => ({
     default: module.ContentDeleteActionsTableModeratorsStaffAdmin
   }))
 );

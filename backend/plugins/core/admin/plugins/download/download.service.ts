@@ -71,7 +71,7 @@ export class DownloadAdminPluginsService {
       "graphql_queries",
       "graphql_mutations"
     ];
-    frontendPaths.forEach(path => {
+    frontendPaths.forEach((path) => {
       this.copyFiles({
         destination: join(frontendPath, path),
         source: pluginPaths({ code }).frontend[path]
@@ -135,7 +135,7 @@ export class DownloadAdminPluginsService {
       pathInfoJSON,
       JSON.stringify(infoJSON, null, 2),
       "utf8",
-      err => {
+      (err) => {
         if (err) {
           throw new CustomError({
             code: "ERROR_UPDATING_INFO_JSON",
@@ -217,7 +217,7 @@ export class DownloadAdminPluginsService {
 
     const updateObj = {
       ...infoJSON,
-      nav: nav.map(item => ({
+      nav: nav.map((item) => ({
         code: item.code,
         href: item.href,
         icon: item.icon

@@ -16,12 +16,12 @@ export const WrapperLastPostItemForum = ({
   children,
   className,
   href
-}: Props) => {
+}: Props): JSX.Element => {
   const { push } = useRouter();
 
   return (
     <div
-      onClick={e => {
+      onClick={(e): void => {
         e.stopPropagation();
         push(href);
       }}

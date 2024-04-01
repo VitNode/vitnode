@@ -5,7 +5,7 @@ interface Props {
   shrink?: boolean;
 }
 
-export const LogoVitNode = ({ className, shrink }: Props) => {
+export const LogoVitNode = ({ className, shrink }: Props): JSX.Element => {
   if (shrink)
     return (
       <svg

@@ -6,7 +6,7 @@ import { Loader } from "@/components/loader";
 import type { AdministratorsStaffAdminViewProps } from "../administrators-view";
 
 const ContentTableAdministratorsStaffAdmin = lazy(() =>
-  import("./content").then(module => ({
+  import("./content").then((module) => ({
     default: module.ContentTableAdministratorsStaffAdmin
   }))
 );

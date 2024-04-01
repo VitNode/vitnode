@@ -15,7 +15,7 @@ import { useGlobals } from "@/hooks/core/use-globals";
 import { useSession } from "@/hooks/core/use-session";
 import { mutationApi } from "./mutation-api";
 
-export const ThemeSwitcher = () => {
+export const ThemeSwitcher = (): JSX.Element | null => {
   const t = useTranslations("core");
   const { themes } = useGlobals();
   const { rebuild_required, theme_id } = useSession();
@@ -36,16 +36,18 @@ export const ThemeSwitcher = () => {
       <DropdownMenuContent>
         <DropdownMenuRadioGroup
           value={theme_id?.toString() ?? "1"}
-          onValueChange={async id => {
+          onValueChange={async (id): Promise<void> => {
             await mutationApi({ id: parseInt(id) });
             // window.location.reload();
           }}
         >
-          {themes.map(theme => (
-            <DropdownMenuRadioItem key={theme.id} value={theme.id.toString()}>
-              {theme.name}
-            </DropdownMenuRadioItem>
-          ))}
+          {themes.map(
+            (theme): JSX.Element => (
+              <DropdownMenuRadioItem key={theme.id} value={theme.id.toString()}>
+                {theme.name}
+              </DropdownMenuRadioItem>
+            )
+          )}
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

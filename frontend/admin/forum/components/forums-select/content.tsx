@@ -40,7 +40,7 @@ export const ContentForumsSelect = ({
             "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0",
             commandInputClassName
           )}
-          onChange={e => handleSearchInput(e.target.value)}
+          onChange={(e) => handleSearchInput(e.target.value)}
           placeholder={t("search")}
         />
       </div>

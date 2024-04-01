@@ -12,13 +12,13 @@ import {
 export function useMergeRefs<Instance>(
   refs: Array<Ref<Instance> | undefined>
 ): RefCallback<Instance> | null {
-  return useMemo(() => {
-    if (refs.every(ref => ref == null)) {
+  return useMemo((): RefCallback<Instance> | null => {
+    if (refs.every((ref): boolean => ref == null)) {
       return null;
     }
 
-    return value => {
-      refs.forEach(ref => {
+    return (value): void => {
+      refs.forEach((ref): void => {
         if (typeof ref === "function") {
           ref(value);
         } else if (ref != null) {

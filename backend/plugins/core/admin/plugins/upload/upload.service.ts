@@ -61,7 +61,7 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
             cwd: this.tempPath
           })
         )
-        .on("error", err => {
+        .on("error", (err) => {
           reject(err.message);
         })
         .on("finish", () => {
@@ -173,7 +173,7 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
       "graphql_mutations"
     ];
     await Promise.all(
-      frontendPaths.map(async path => {
+      frontendPaths.map(async (path) => {
         const source = join(this.tempPath, "frontend", path);
         const destination = pluginPaths({ code: config.code }).frontend[path];
 
@@ -212,7 +212,7 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
           code: true
         }
       });
-    languages.forEach(lang => {
+    languages.forEach((lang) => {
       const source = join(
         this.tempPath,
         "frontend",

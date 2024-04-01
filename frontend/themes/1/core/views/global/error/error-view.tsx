@@ -14,7 +14,10 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/functions/classnames";
 import type { ErrorViewProps } from "@/components/views/error-view-ssr";
 
-export default function ErrorView({ className, code }: ErrorViewProps) {
+export default function ErrorView({
+  className,
+  code
+}: ErrorViewProps): JSX.Element {
   const t = useTranslations("core");
 
   return (
@@ -40,7 +43,7 @@ export default function ErrorView({ className, code }: ErrorViewProps) {
       </Card>
       <div className="text-right pt-2 text-muted-foreground italic">
         {t.rich("errors.code", {
-          code: () => (
+          code: (): JSX.Element => (
             <span className="font-semibold">{code.toLocaleLowerCase()}</span>
           )
         })}

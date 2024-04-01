@@ -7,7 +7,7 @@ import { AuthUserBar } from "./auth/auth-user-bar";
 import { useSession } from "@/hooks/core/use-session";
 import { Link } from "@/i18n";
 
-export const UserBar = () => {
+export const UserBar = (): JSX.Element => {
   const t = useTranslations("core");
   const { session } = useSession();
 

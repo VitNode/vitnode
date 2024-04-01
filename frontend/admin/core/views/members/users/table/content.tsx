@@ -72,7 +72,7 @@ export const ContentTableUsersMembersAdmin = ({
         }
       },
       {
-        header: val => {
+        header: (val) => {
           return (
             <HeaderSortingDataTable {...val}>
               {t("table.joined")}

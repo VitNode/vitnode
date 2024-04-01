@@ -8,7 +8,7 @@ interface Props {
   children: ReactNode;
 }
 
-export const WrapperPosts = ({ children }: Props) => {
+export const WrapperPosts = ({ children }: Props): JSX.Element => {
   return (
     <WrapperPostsContext.Provider value={{}}>
       {children}

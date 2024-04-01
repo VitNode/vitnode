@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { useForm, type UseFormReturn } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -11,12 +11,16 @@ interface FormType {
   type: "upload" | "delete";
 }
 
-export const useModalChangeAvatar = () => {
+export const useModalChangeAvatar = (): {
+  form: UseFormReturn<FormType>;
+  isPending: boolean;
+  onSubmit: ({ type }: FormType) => Promise<void>;
+} => {
   const [isPending, setPending] = useState(false);
   const t = useTranslations("core");
   const { setOpen } = useDialog();
 
-  const form = useForm<FormType>({
+  const form: UseFormReturn<FormType> = useForm<FormType>({
     defaultValues: {
       type: "upload",
       file: []
@@ -24,7 +28,7 @@ export const useModalChangeAvatar = () => {
     mode: "onChange"
   });
 
-  const onSubmit = async ({ type }: FormType) => {
+  const onSubmit = async ({ type }: FormType): Promise<void> => {
     if (type === "delete") {
       setPending(true);
 

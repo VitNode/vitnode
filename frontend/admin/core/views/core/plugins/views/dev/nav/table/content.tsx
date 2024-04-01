@@ -65,9 +65,9 @@ export const ContentTableNavDevPluginAdmin = ({
   );
 
   const flattenedItems = dragAndDrop.flattenedItems({
-    data: data.map(item => ({ ...item, children: [] }))
+    data: data.map((item) => ({ ...item, children: [] }))
   });
-  const activeItem = flattenedItems.find(i => i.id === activeId);
+  const activeItem = flattenedItems.find((i) => i.id === activeId);
   const sortedIds = useMemo(
     () => flattenedItems.map(({ id }) => id),
     [flattenedItems]
@@ -114,7 +114,7 @@ export const ContentTableNavDevPluginAdmin = ({
         const { depth, parentId } = projected;
 
         const clonedItems: FlatTree<ShowAdminNavPluginsObj>[] = flattenTree({
-          tree: data.map(item => ({
+          tree: data.map((item) => ({
             ...item,
             children: []
           }))
@@ -123,7 +123,7 @@ export const ContentTableNavDevPluginAdmin = ({
         const toIndex = clonedItems.findIndex(({ id }) => id === over.id);
         const fromIndex = clonedItems.findIndex(({ id }) => id === active.id);
         const sortedItems = arrayMove(clonedItems, fromIndex, toIndex);
-        const activeIndex = sortedItems.findIndex(i => i.id === active.id);
+        const activeIndex = sortedItems.findIndex((i) => i.id === active.id);
         sortedItems[activeIndex] = {
           ...sortedItems[activeIndex],
           depth,
@@ -131,7 +131,7 @@ export const ContentTableNavDevPluginAdmin = ({
         };
 
         const dataAfterUpdate: FlatTree<ShowAdminNavPluginsObj>[] =
-          sortedItems.map(item => ({
+          sortedItems.map((item) => ({
             ...item,
             children: []
           }));
@@ -142,11 +142,11 @@ export const ContentTableNavDevPluginAdmin = ({
           })
         );
 
-        const parents = sortedItems.filter(i => i.parentId === parentId);
-        const indexToMove = parents.findIndex(i => i.id === active.id);
+        const parents = sortedItems.filter((i) => i.parentId === parentId);
+        const indexToMove = parents.findIndex((i) => i.id === active.id);
 
         // -1 means that the item is the last one
-        const findActive = flattenedItems.find(i => i.id === active.id);
+        const findActive = flattenedItems.find((i) => i.id === active.id);
         if (!findActive) return;
 
         // Do nothing if drag and drop on the same item on the same level
@@ -161,7 +161,7 @@ export const ContentTableNavDevPluginAdmin = ({
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
-        {flattenedItems.map(item => (
+        {flattenedItems.map((item) => (
           <ItemContentTableNavDevPluginAdmin
             key={item.id}
             isDropHere={projected?.parentId === item.id}

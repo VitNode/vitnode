@@ -15,7 +15,7 @@ interface Props {
   };
 }
 
-export const CalendarPicker = ({ onSelect, selected }: Props) => {
+export const CalendarPicker = ({ onSelect, selected }: Props): JSX.Element => {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -46,7 +46,9 @@ export const CalendarPicker = ({ onSelect, selected }: Props) => {
         <Calendar
           selected={selected}
           onSelect={onSelect}
-          disabled={date => date > new Date() || date < new Date("1900-01-01")}
+          disabled={(date): boolean =>
+            date > new Date() || date < new Date("1900-01-01")
+          }
           initialFocus
           captionLayout="dropdown-buttons"
           mode="range"

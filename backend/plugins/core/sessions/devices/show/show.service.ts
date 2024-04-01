@@ -45,8 +45,8 @@ export class ShowCoreSessionDevicesService {
           device: true
         }
       })
-      .then(userDevices =>
-        userDevices.map(item => ({
+      .then((userDevices) =>
+        userDevices.map((item) => ({
           id: item.device.id,
           ...item
         }))

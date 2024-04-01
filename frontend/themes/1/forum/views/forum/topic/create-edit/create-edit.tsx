@@ -34,7 +34,7 @@ interface Props {
   data?: EditTopicData;
 }
 
-export const CreateEditTopic = ({ data }: Props) => {
+export const CreateEditTopic = ({ data }: Props): JSX.Element => {
   const t = useTranslations("forum.topics");
   const tCore = useTranslations("core");
   const { id } = useParams();
@@ -61,7 +61,7 @@ export const CreateEditTopic = ({ data }: Props) => {
             <FormField
               control={form.control}
               name="title"
-              render={({ field }) => (
+              render={({ field }): JSX.Element => (
                 <FormItem>
                   <FormLabel>{t("create.form.title")}</FormLabel>
                   <FormControl>
@@ -75,7 +75,7 @@ export const CreateEditTopic = ({ data }: Props) => {
             <FormField
               control={form.control}
               name="content"
-              render={({ field }) => (
+              render={({ field }): JSX.Element => (
                 <FormItem>
                   <FormLabel>{t("create.form.content")}</FormLabel>
                   <FormControl>
@@ -93,7 +93,7 @@ export const CreateEditTopic = ({ data }: Props) => {
 
           <CardFooter className="justify-center">
             <Button
-              onClick={() => {
+              onClick={(): void => {
                 if (data) {
                   push(
                     `/forum/topic/${convertNameToLink({ id: data.id, name: data.title })}`

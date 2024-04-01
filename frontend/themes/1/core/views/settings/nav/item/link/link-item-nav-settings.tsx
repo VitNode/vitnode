@@ -9,7 +9,7 @@ export const LinkItemNavSettings = ({
   children,
   href,
   onClick
-}: LinkItemNavSettingsProps) => {
+}: LinkItemNavSettingsProps): JSX.Element => {
   const pathname = usePathname();
 
   return (

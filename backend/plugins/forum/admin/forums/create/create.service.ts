@@ -60,7 +60,7 @@ export class CreateForumForumsService {
 
     // Set name
     await this.databaseService.db.insert(forum_forums_name).values(
-      name.map(item => ({
+      name.map((item) => ({
         forum_id: data[0].id,
         ...item
       }))
@@ -69,7 +69,7 @@ export class CreateForumForumsService {
     // Set description
     if (description.length > 0) {
       await this.databaseService.db.insert(forum_forums_description).values(
-        description.map(item => ({
+        description.map((item) => ({
           forum_id: data[0].id,
           ...item
         }))
@@ -79,7 +79,7 @@ export class CreateForumForumsService {
     // Set permissions
     if (permissions.groups.length > 0) {
       await this.databaseService.db.insert(forum_forums_permissions).values(
-        permissions.groups.map(item => ({
+        permissions.groups.map((item) => ({
           forum_id: data[0].id,
           group_id: item.id,
           ...item

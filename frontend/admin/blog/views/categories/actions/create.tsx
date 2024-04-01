@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const Content = lazy(() =>
-  import("../create-edit/create-edit").then(module => ({
+  import("../create-edit/create-edit").then((module) => ({
     default: module.CreateEditCategoryBlogAdmin
   }))
 );

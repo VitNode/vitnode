@@ -72,7 +72,7 @@ export class UploadCoreFilesService {
   }: UploadCoreFilesArgs): Promise<UploadCoreFilesObj[]> {
     // Validate files
     await Promise.all(
-      files.map(async file => {
+      files.map(async (file) => {
         await this.checkAcceptMimeType({ file, acceptMimeType });
         await this.checkSizeFile({ file, maxUploadSizeBytes });
       })
@@ -91,7 +91,7 @@ export class UploadCoreFilesService {
     }
 
     const saveFiles = await Promise.all(
-      files.map(async file => {
+      files.map(async (file) => {
         const { createReadStream, filename, mimetype } = await file;
         const extension = filename.split(".").pop();
         const name = filename.split(".").shift();

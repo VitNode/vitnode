@@ -11,7 +11,14 @@ interface Props {
   params: { locale: string };
 }
 
-export default async function Layout({ children }: Props) {
+interface DynamicImport
+  extends Promise<{
+    default: ({ children }: { children: ReactNode }) => JSX.Element;
+  }> {}
+
+export default async function Layout({
+  children
+}: Props): Promise<JSX.Element> {
   try {
     const { data, theme_id } = await getSessionData();
     if (data.core_languages__show.edges.length === 0) {
@@ -20,10 +27,11 @@ export default async function Layout({ children }: Props) {
 
     const Layout: LazyExoticComponent<
       ({ children }: { children: ReactNode }) => JSX.Element
-    > = lazy(() =>
-      import(`@/themes/${theme_id}/core/layout/layout`).catch(
-        () => import("@/themes/1/core/layout/layout")
-      )
+    > = lazy(
+      (): DynamicImport =>
+        import(`@/themes/${theme_id}/core/layout/layout`).catch(
+          (): DynamicImport => import("@/themes/1/core/layout/layout")
+        )
     );
 
     return (

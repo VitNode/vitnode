@@ -12,8 +12,8 @@ interface Args {
 
 export const WrapperCategoryForumContext = createContext<Args>({
   open: true,
-  setOpen: () => {}
+  setOpen: (): void => {}
 });
 
-export const useWrapperCategoryForum = () =>
+export const useWrapperCategoryForum = (): Args =>
   useContext(WrapperCategoryForumContext);

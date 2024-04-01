@@ -14,20 +14,20 @@ interface Props {
 export const SearchToolbarDataTable = ({
   searchPlaceholder,
   startTransition
-}: Props) => {
+}: Props): JSX.Element => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { push } = useRouter();
   const [value, setValue] = useState(searchParams.get("search") ?? "");
 
   // Clear search input when search param is removed
-  useEffect(() => {
+  useEffect((): void => {
     if (searchParams.get("search")) return;
 
     setValue("");
   }, [searchParams.get("search")]);
 
-  const handleSearch = useDebouncedCallback((value: string) => {
+  const handleSearch = useDebouncedCallback((value: string): void => {
     const params = new URLSearchParams(searchParams);
     if (value) {
       params.set("search", value);
@@ -35,7 +35,7 @@ export const SearchToolbarDataTable = ({
       params.delete("search");
     }
 
-    startTransition(() => {
+    startTransition((): void => {
       push(params.toString() ? `${pathname}?${params.toString()}` : pathname);
     });
   }, 500);
@@ -44,7 +44,7 @@ export const SearchToolbarDataTable = ({
     <Input
       placeholder={searchPlaceholder}
       value={value}
-      onChange={e => {
+      onChange={(e): void => {
         const value = e.target.value;
         setValue(value);
         handleSearch(value);

@@ -21,7 +21,7 @@ export const core_nav = pgTable(
     parent_id: integer("parent_id"),
     icon: varchar("icon", { length: 50 })
   },
-  table => ({
+  (table) => ({
     parent_id_idx: index("core_nav_parent_id_idx").on(table.parent_id)
   })
 );
@@ -51,7 +51,7 @@ export const core_nav_name = pgTable(
       }),
     value: varchar("value", { length: 50 }).notNull()
   },
-  table => ({
+  (table) => ({
     nav_id_idx: index("core_nav_name_nav_id_idx").on(table.nav_id),
     language_code_idx: index("core_nav_name_language_code_idx").on(
       table.language_code
@@ -86,7 +86,7 @@ export const core_nav_description = pgTable(
       }),
     value: varchar("value", { length: 50 }).notNull()
   },
-  table => ({
+  (table) => ({
     nav_id_idx: index("core_nav_description_nav_id_idx").on(table.nav_id),
     language_code_idx: index("core_nav_description_language_code_idx").on(
       table.language_code

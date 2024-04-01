@@ -11,7 +11,7 @@ import { cn } from "@/functions/classnames";
 import { useSettingsView } from "@/hooks/core/settings/use-settings-view";
 import { ItemNavSettings } from "./item/item-nav-settings";
 
-export const DrawerNavSettings = () => {
+export const DrawerNavSettings = (): JSX.Element => {
   const t = useTranslations("core");
   const { navItems } = useSettingsView();
 
@@ -26,11 +26,13 @@ export const DrawerNavSettings = () => {
 
         <DrawerContent>
           <div className="flex flex-col p-5">
-            {navItems.map(item => (
-              <DrawerClose asChild key={item.href}>
-                <ItemNavSettings {...item} />
-              </DrawerClose>
-            ))}
+            {navItems.map(
+              (item): JSX.Element => (
+                <DrawerClose asChild key={item.href}>
+                  <ItemNavSettings {...item} />
+                </DrawerClose>
+              )
+            )}
           </div>
         </DrawerContent>
       </Drawer>

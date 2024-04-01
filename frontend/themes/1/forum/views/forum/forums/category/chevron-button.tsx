@@ -11,7 +11,7 @@ interface Props {
   id: number;
 }
 
-export const ChevronCategoryForumButton = ({ id }: Props) => {
+export const ChevronCategoryForumButton = ({ id }: Props): JSX.Element => {
   const { open, setOpen } = useWrapperCategoryForum();
   const t = useTranslations("forum");
 
@@ -22,14 +22,14 @@ export const ChevronCategoryForumButton = ({ id }: Props) => {
       size="icon"
       data-state={open ? "open" : "closed"}
       ariaLabel={t("toggle_category")}
-      onClick={() => {
-        setOpen(prev => !prev);
+      onClick={(): void => {
+        setOpen((prev): boolean => !prev);
         const currentId = id.toString();
 
         const prevIds =
           localStorage.getItem(LOCAL_STORAGE_KEY)?.split(",") || [];
         const valueToSet = prevIds.includes(currentId)
-          ? prevIds.filter(i => i !== currentId)
+          ? prevIds.filter((i): boolean => i !== currentId)
           : [...prevIds, currentId];
 
         localStorage.setItem(LOCAL_STORAGE_KEY, valueToSet.join(","));

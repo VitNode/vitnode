@@ -44,7 +44,7 @@ export class ShowForumForumsAdminService {
       edges:
         search && searchIds.length === 0
           ? []
-          : edges.map(edge => ({
+          : edges.map((edge) => ({
               ...edge,
               permissions: {
                 can_all_create: edge.can_all_create,

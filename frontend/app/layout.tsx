@@ -22,6 +22,6 @@ interface Props {
   children: ReactNode;
 }
 
-export default function RootLayout({ children }: Props) {
+export default function RootLayout({ children }: Props): ReactNode {
   return children;
 }

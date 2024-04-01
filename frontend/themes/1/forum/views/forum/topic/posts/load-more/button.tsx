@@ -12,7 +12,7 @@ export const ButtonLoadMorePosts = ({
   count,
   fetchNextPage,
   isFetching
-}: Props) => {
+}: Props): JSX.Element => {
   const t = useTranslations("forum.topics");
 
   return (

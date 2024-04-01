@@ -4,7 +4,7 @@ import { CardHeader } from "@/components/ui/card";
 import { useSession } from "@/hooks/core/use-session";
 import { ChangeAvatar } from "./change-avatar/change-avatar";
 
-export const HeaderOverviewSettings = () => {
+export const HeaderOverviewSettings = (): JSX.Element | null => {
   const { session } = useSession();
   if (!session) return null;
   const { email, name } = session;

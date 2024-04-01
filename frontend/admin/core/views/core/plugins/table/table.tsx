@@ -6,7 +6,7 @@ import { Loader } from "@/components/loader";
 import type { Admin__Core_Plugins__ShowQuery } from "@/graphql/hooks";
 
 const ContentTablePluginsAdmin = lazy(() =>
-  import("./content").then(module => ({
+  import("./content").then((module) => ({
     default: module.ContentTablePluginsAdmin
   }))
 );

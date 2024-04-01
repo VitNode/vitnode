@@ -14,7 +14,12 @@ interface Props
   children?: ItemForumProps[] | null;
 }
 
-export const CategoryForum = ({ children, description, id, name }: Props) => {
+export const CategoryForum = ({
+  children,
+  description,
+  id,
+  name
+}: Props): JSX.Element => {
   const { convertNameToLink, convertText } = useTextLang();
 
   return (
@@ -50,9 +55,11 @@ export const CategoryForum = ({ children, description, id, name }: Props) => {
 
           {children && children.length > 0 && (
             <ChildrenWrapperCategoryForum>
-              {children.map(child => (
-                <ItemForum key={child.id} {...child} />
-              ))}
+              {children.map(
+                (child): JSX.Element => (
+                  <ItemForum key={child.id} {...child} />
+                )
+              )}
             </ChildrenWrapperCategoryForum>
           )}
         </CardContent>

@@ -7,7 +7,9 @@ export interface ProfileViewProps {
   data: Core_Members__ProfilesQuery;
 }
 
-export default function ProfileView({ data: dataApi }: ProfileViewProps) {
+export default function ProfileView({
+  data: dataApi
+}: ProfileViewProps): JSX.Element | null {
   const { convertText } = useTextLang();
 
   const { edges } = dataApi.core_members__show;

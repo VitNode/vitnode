@@ -33,7 +33,7 @@ export interface ContentFilterToolbarDataTableProps {
 export const ContentFilterToolbarDataTable = ({
   searchOnChange,
   ...props
-}: ContentFilterToolbarDataTableProps) => {
+}: ContentFilterToolbarDataTableProps): JSX.Element => {
   const t = useTranslations("core");
   const { id, title } = useFilterToolbarDataTable();
   const searchParams = useSearchParams();
@@ -41,7 +41,7 @@ export const ContentFilterToolbarDataTable = ({
   const { push } = useRouter();
   const pathname = usePathname();
 
-  const handleSearchInput = useDebouncedCallback((value: string) => {
+  const handleSearchInput = useDebouncedCallback((value: string): void => {
     if (!searchOnChange) return;
 
     searchOnChange(value);
@@ -53,7 +53,7 @@ export const ContentFilterToolbarDataTable = ({
         <div className="flex items-center border-b px-3">
           <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
           <Input
-            onChange={e => handleSearchInput(e.target.value)}
+            onChange={(e): void => handleSearchInput(e.target.value)}
             className={cn(
               commandInputClassName,
               "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0"
@@ -77,7 +77,7 @@ export const ContentFilterToolbarDataTable = ({
             <CommandSeparator />
             <CommandGroup>
               <CommandItem
-                onSelect={() => push(pathname)}
+                onSelect={(): void => push(pathname)}
                 className="justify-center text-center"
               >
                 {t("clear")}

@@ -22,7 +22,7 @@ interface Props
 }
 
 const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
-  ({ className, onChange, value, ...props }, ref) => {
+  ({ className, onChange, value, ...props }, ref): JSX.Element => {
     const locale = useLocale();
     const { defaultLanguage, languages } = useGlobals();
     const [selectedLanguage, setSelectedLanguage] = useState(
@@ -30,21 +30,22 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
     );
     const valueAsArray = Array.isArray(value) ? value : [];
     const currentValue =
-      valueAsArray.find(item => item.language_code === selectedLanguage)
-        ?.value ?? "";
+      valueAsArray.find(
+        (item): boolean => item.language_code === selectedLanguage
+      )?.value ?? "";
 
     return (
       <div className={cn("flex gap-2", className)}>
         <Input
           className="flex-grow max-h-full"
           type="text"
-          onChange={e => {
+          onChange={(e): void => {
             const value = e.target.value;
 
             if (value) {
               onChange([
                 ...valueAsArray.filter(
-                  item => item.language_code !== selectedLanguage
+                  (item): boolean => item.language_code !== selectedLanguage
                 ),
                 {
                   language_code: selectedLanguage,
@@ -57,7 +58,7 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
 
             onChange(
               valueAsArray.filter(
-                item => item.language_code !== selectedLanguage
+                (item): boolean => item.language_code !== selectedLanguage
               )
             );
           }}
@@ -74,11 +75,13 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
               </SelectTrigger>
             </FormControl>
             <SelectContent>
-              {languages.map(language => (
-                <SelectItem key={language.code} value={language.code}>
-                  {language.name}
-                </SelectItem>
-              ))}
+              {languages.map(
+                (language): JSX.Element => (
+                  <SelectItem key={language.code} value={language.code}>
+                    {language.name}
+                  </SelectItem>
+                )
+              )}
             </SelectContent>
           </Select>
         )}

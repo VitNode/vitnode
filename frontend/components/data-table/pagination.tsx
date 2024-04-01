@@ -8,7 +8,7 @@ interface Props {
   className?: string;
 }
 
-export const Pagination = ({ className }: Props) => {
+export const Pagination = ({ className }: Props): JSX.Element => {
   const t = useTranslations("core");
 
   return (

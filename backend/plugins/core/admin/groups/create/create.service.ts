@@ -22,7 +22,7 @@ export class CreateAdminGroupsService {
     const groupNames = await this.databaseService.db
       .insert(core_groups_names)
       .values(
-        name.map(item => ({
+        name.map((item) => ({
           group_id: group[0].id,
           language_code: item.language_code,
           value: item.value

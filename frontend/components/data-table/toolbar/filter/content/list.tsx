@@ -12,7 +12,10 @@ import { useFilterToolbarDataTable } from "../hooks/use-filter-toolbar-data-tabl
 export const ListContentFilterToolbarDataTable = ({
   isFetching,
   options
-}: Pick<ContentFilterToolbarDataTableProps, "isFetching" | "options">) => {
+}: Pick<
+  ContentFilterToolbarDataTableProps,
+  "isFetching" | "options"
+>): JSX.Element => {
   const t = useTranslations("core");
   const { id } = useFilterToolbarDataTable();
   const { push } = useRouter();
@@ -26,14 +29,14 @@ export const ListContentFilterToolbarDataTable = ({
 
   return (
     <CommandGroup>
-      {options.map(option => {
+      {options.map((option): JSX.Element => {
         const isSelected =
-          selectedValues.findIndex(v => v === option.value) !== -1;
+          selectedValues.findIndex((v): boolean => v === option.value) !== -1;
 
         return (
           <CommandItem
             key={option.value}
-            onSelect={() => {
+            onSelect={(): void => {
               const params = new URLSearchParams(searchParams);
               if (isSelected) {
                 params.delete(id, option.value);

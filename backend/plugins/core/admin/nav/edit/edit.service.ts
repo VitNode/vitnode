@@ -25,9 +25,9 @@ export class EditAdminNavService {
     });
 
     const update = await Promise.all(
-      name.map(async item => {
+      name.map(async (item) => {
         const itemExist = names.find(
-          el => el.language_code === item.language_code
+          (el) => el.language_code === item.language_code
         );
 
         if (itemExist) {
@@ -54,8 +54,8 @@ export class EditAdminNavService {
 
     // Delete
     Promise.all(
-      names.map(async item => {
-        const exist = update.find(name => name.id === item.id);
+      names.map(async (item) => {
+        const exist = update.find((name) => name.id === item.id);
         if (exist) return;
 
         await this.databaseService.db
@@ -77,9 +77,9 @@ export class EditAdminNavService {
       });
 
     const update = await Promise.all(
-      description.map(async item => {
+      description.map(async (item) => {
         const itemExist = descriptions.find(
-          el => el.language_code === item.language_code
+          (el) => el.language_code === item.language_code
         );
 
         if (itemExist) {
@@ -106,8 +106,8 @@ export class EditAdminNavService {
 
     // Delete
     Promise.all(
-      descriptions.map(async item => {
-        const exist = update.find(name => name.id === item.id);
+      descriptions.map(async (item) => {
+        const exist = update.find((name) => name.id === item.id);
         if (exist) return;
 
         await this.databaseService.db

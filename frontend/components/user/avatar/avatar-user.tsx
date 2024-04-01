@@ -19,7 +19,10 @@ interface Props {
 }
 
 const AvatarUser = forwardRef<HTMLImageElement, Props>(
-  ({ className, sizeInRem, user: { avatar, avatar_color, name } }, ref) => {
+  (
+    { className, sizeInRem, user: { avatar, avatar_color, name } },
+    ref
+  ): JSX.Element => {
     return (
       <Img
         className={cn("rounded-full flex-shrink-0", className)}

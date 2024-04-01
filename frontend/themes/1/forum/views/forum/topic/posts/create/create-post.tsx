@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, lazy, useState } from "react";
+import { Suspense, lazy, useState, type ComponentType } from "react";
 import { useTranslations } from "next-intl";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,18 +8,28 @@ import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import { useSession } from "@/hooks/core/use-session";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import type { ContentCreatePostProps } from "./content";
 
-const ContentCreatePost = lazy(() =>
-  import("./content").then(module => ({
-    default: module.ContentCreatePost
-  }))
+const Content = lazy(
+  (): Promise<{
+    default: ComponentType<ContentCreatePostProps>;
+  }> =>
+    import("./content").then(
+      (
+        module
+      ): {
+        default: ComponentType<ContentCreatePostProps>;
+      } => ({
+        default: module.ContentCreatePost
+      })
+    )
 );
 
 interface Props {
   className?: string;
 }
 
-export const CreatePost = ({ className }: Props) => {
+export const CreatePost = ({ className }: Props): JSX.Element | null => {
   const t = useTranslations("forum.topics.post");
   const [open, setOpen] = useState(false);
   const { session } = useSession();
@@ -38,13 +48,13 @@ export const CreatePost = ({ className }: Props) => {
           <Button
             variant="outline"
             className="w-full h-full p-4 justify-start text-muted-foreground"
-            onClick={() => setOpen(true)}
+            onClick={(): void => setOpen(true)}
           >
             {t("placeholder")}
           </Button>
         ) : (
           <Suspense fallback={<Skeleton className="w-full h-[54px]" />}>
-            <ContentCreatePost setOpen={setOpen} />
+            <Content setOpen={setOpen} />
           </Suspense>
         )}
       </CardContent>

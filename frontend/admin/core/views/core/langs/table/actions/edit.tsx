@@ -8,7 +8,7 @@ import { Loader } from "@/components/loader";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 
 const Content = lazy(() =>
-  import("../../create-edit/create-edit").then(module => ({
+  import("../../create-edit/create-edit").then((module) => ({
     default: module.CreateEditLangAdmin
   }))
 );

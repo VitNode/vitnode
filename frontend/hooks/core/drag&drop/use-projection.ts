@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import type { UniqueIdentifier } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 
@@ -10,7 +10,7 @@ const getDragDepth = ({
 }: {
   indentationWidth: number;
   offset: number;
-}) => {
+}): number => {
   return Math.round(offset / indentationWidth);
 };
 
@@ -18,7 +18,7 @@ function getMaxDepth<T extends object>({
   previousItem
 }: {
   previousItem: FlatTree<T>;
-}) {
+}): number {
   return previousItem ? previousItem.depth + 1 : 0;
 }
 
@@ -26,7 +26,7 @@ function getMinDepth<T extends object>({
   nextItem
 }: {
   nextItem: FlatTree<T>;
-}) {
+}): number {
   return nextItem ? nextItem.depth : 0;
 }
 
@@ -37,7 +37,23 @@ export interface ProjectionReturnType {
   parentId: number | string | null;
 }
 
-export const useProjection = () => {
+export const useProjection = (): {
+  activeId: UniqueIdentifier | null;
+  getProjection: <T extends object>({
+    dragOffset,
+    indentationWidth,
+    maxDepth,
+    tree
+  }: {
+    dragOffset: number;
+    tree: FlatTree<T>[];
+    indentationWidth?: number | undefined;
+    maxDepth?: number | undefined;
+  }) => ProjectionReturnType;
+  overId: UniqueIdentifier | null;
+  setActiveId: Dispatch<SetStateAction<UniqueIdentifier | null>>;
+  setOverId: Dispatch<SetStateAction<UniqueIdentifier | null>>;
+} => {
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
 
@@ -52,8 +68,10 @@ export const useProjection = () => {
     indentationWidth?: number;
     maxDepth?: number;
   }): ProjectionReturnType {
-    const overItemIndex = tree.findIndex(({ id }) => id === overId);
-    const activeItemIndex = tree.findIndex(({ id }) => id === activeId);
+    const overItemIndex = tree.findIndex(({ id }): boolean => id === overId);
+    const activeItemIndex = tree.findIndex(
+      ({ id }): boolean => id === activeId
+    );
     const activeItem = tree[activeItemIndex];
     const newItems = arrayMove(tree, activeItemIndex, overItemIndex);
     const previousItem = newItems[overItemIndex - 1];
@@ -94,7 +112,7 @@ export const useProjection = () => {
       const newParent = newItems
         .slice(0, overItemIndex)
         .reverse()
-        .find(item => item.depth === depth)?.parentId;
+        .find((item): boolean => item.depth === depth)?.parentId;
 
       return newParent ?? null;
     };

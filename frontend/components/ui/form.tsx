@@ -8,7 +8,9 @@ import {
   type FieldValues,
   FormProvider,
   useFormContext,
-  type FormProviderProps
+  type FormProviderProps,
+  type FormState,
+  type FieldError
 } from "react-hook-form";
 import {
   createContext,
@@ -38,7 +40,7 @@ function Form<
   TFieldValues extends FieldValues,
   TContext = unknown,
   TTransformedValues extends FieldValues = TFieldValues
->(props: FormProps<TFieldValues, TContext, TTransformedValues>) {
+>(props: FormProps<TFieldValues, TContext, TTransformedValues>): JSX.Element {
   const t = useTranslations("core");
   const formIsDirty = props.formState.isDirty;
   useBeforeUnload(
@@ -47,7 +49,7 @@ function Form<
   );
   const { setIsDirty } = useDialog();
 
-  useEffect(() => {
+  useEffect((): void => {
     if (props.disableBeforeUnload) return;
 
     setIsDirty?.(formIsDirty);
@@ -72,7 +74,7 @@ const FormField = <
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >({
   ...props
-}: ControllerProps<TFieldValues, TName>) => {
+}: ControllerProps<TFieldValues, TName>): JSX.Element => {
   return (
     <FormFieldContext.Provider value={{ name: props.name }}>
       <Controller {...props} />
@@ -80,7 +82,18 @@ const FormField = <
   );
 };
 
-const useFormField = () => {
+const useFormField = (): {
+  formDescriptionId: string;
+  formItemId: string;
+  formMessageId: string;
+  id: string;
+  invalid: boolean;
+  isDirty: boolean;
+  isTouched: boolean;
+  isValidating: boolean;
+  name: string;
+  error?: FieldError | undefined;
+} => {
   const fieldContext = useContext(FormFieldContext);
   const itemContext = useContext(FormItemContext);
   const { formState, getFieldState } = useFormContext();
@@ -112,7 +125,7 @@ const FormItemContext = createContext<FormItemContextValue>(
 );
 
 const FormItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => {
+  ({ className, ...props }, ref): JSX.Element => {
     const id = useId();
 
     return (
@@ -132,7 +145,7 @@ interface FormLabelProps
 const FormLabel = forwardRef<
   ElementRef<typeof LabelPrimitive.Root>,
   FormLabelProps
->(({ children, className, optional, ...props }, ref) => {
+>(({ children, className, optional, ...props }, ref): JSX.Element => {
   const { error, formItemId } = useFormField();
   const t = useTranslations("core");
 
@@ -155,7 +168,7 @@ FormLabel.displayName = "FormLabel";
 const FormControl = forwardRef<
   ElementRef<typeof Slot>,
   ComponentPropsWithoutRef<typeof Slot>
->(({ ...props }, ref) => {
+>(({ ...props }, ref): JSX.Element => {
   const { error, formDescriptionId, formItemId, formMessageId } =
     useFormField();
 
@@ -178,7 +191,7 @@ FormControl.displayName = "FormControl";
 const FormDescription = forwardRef<
   HTMLParagraphElement,
   HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => {
+>(({ className, ...props }, ref): JSX.Element => {
   const { formDescriptionId } = useFormField();
 
   return (
@@ -195,7 +208,7 @@ FormDescription.displayName = "FormDescription";
 const FormMessage = forwardRef<
   HTMLParagraphElement,
   HTMLAttributes<HTMLParagraphElement>
->(({ children, className, ...props }, ref) => {
+>(({ children, className, ...props }, ref): JSX.Element | null => {
   const { error, formMessageId } = useFormField();
   const body = error ? String(error?.message) : children;
 

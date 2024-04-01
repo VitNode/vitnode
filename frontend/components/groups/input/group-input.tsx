@@ -39,89 +39,98 @@ interface SingleProps extends Props {
 export const GroupInput = forwardRef<
   HTMLButtonElement,
   SingleProps | MultiProps
->(({ className, multiple, onChange, value: currentValue, ...rest }, ref) => {
-  const t = useTranslations("core.group_input");
-  const values = Array.isArray(currentValue)
-    ? currentValue
-    : currentValue
-      ? [currentValue]
-      : [];
-  const [open, setOpen] = useState(false);
-  const { convertText } = useTextLang();
+>(
+  (
+    { className, multiple, onChange, value: currentValue, ...rest },
+    ref
+  ): JSX.Element => {
+    const t = useTranslations("core.group_input");
+    const values = Array.isArray(currentValue)
+      ? currentValue
+      : currentValue
+        ? [currentValue]
+        : [];
+    const [open, setOpen] = useState(false);
+    const { convertText } = useTextLang();
 
-  return (
-    <Popover open={open} onOpenChange={setOpen} modal>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          className={cn("w-full justify-start", className, {
-            "text-muted-foreground": values.length === 0
-          })}
-          ref={ref}
-          {...rest}
-        >
-          {values.length === 0
-            ? t("placeholder")
-            : values.map(item => {
-                const onRemove = () => {
-                  if (multiple) {
-                    onChange(values.filter(value => value.id !== item.id));
+    return (
+      <Popover open={open} onOpenChange={setOpen} modal>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            className={cn("w-full justify-start", className, {
+              "text-muted-foreground": values.length === 0
+            })}
+            ref={ref}
+            {...rest}
+          >
+            {values.length === 0
+              ? t("placeholder")
+              : values.map((item): JSX.Element => {
+                  const onRemove = (): void => {
+                    if (multiple) {
+                      onChange(
+                        values.filter((value): boolean => value.id !== item.id)
+                      );
 
-                    return;
-                  }
+                      return;
+                    }
 
-                  onChange();
-                };
+                    onChange();
+                  };
 
-                return (
-                  <Badge
-                    className="[&>svg]:size-4 flex-shrink-0"
-                    key={item.id}
-                    tabIndex={0}
-                    onClick={e => {
-                      e.stopPropagation();
-                      e.preventDefault();
-                      onRemove();
-                    }}
-                    onKeyDown={e => {
-                      if (e.key === "Enter") {
+                  return (
+                    <Badge
+                      className="[&>svg]:size-4 flex-shrink-0"
+                      key={item.id}
+                      tabIndex={0}
+                      onClick={(e): void => {
                         e.stopPropagation();
                         e.preventDefault();
                         onRemove();
-                      }
-                    }}
-                  >
-                    {convertText(item.name)} <X />
-                  </Badge>
-                );
-              })}
-        </Button>
-      </PopoverTrigger>
+                      }}
+                      onKeyDown={(e): void => {
+                        if (e.key === "Enter") {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          onRemove();
+                        }
+                      }}
+                    >
+                      {convertText(item.name)} <X />
+                    </Badge>
+                  );
+                })}
+          </Button>
+        </PopoverTrigger>
 
-      <PopoverContent className="p-0 w-64" align="start">
-        <Suspense fallback={<Loader className="p-4" />}>
-          <GroupInputContent
-            values={values}
-            onSelect={item => {
-              if (multiple) {
-                if (values.find(value => value.id === item.id)) {
-                  onChange(values.filter(value => value.id !== item.id));
+        <PopoverContent className="p-0 w-64" align="start">
+          <Suspense fallback={<Loader className="p-4" />}>
+            <GroupInputContent
+              values={values}
+              onSelect={(item): void => {
+                if (multiple) {
+                  if (values.find((value): boolean => value.id === item.id)) {
+                    onChange(
+                      values.filter((value): boolean => value.id !== item.id)
+                    );
+
+                    return;
+                  }
+                  onChange([...values, item]);
 
                   return;
                 }
-                onChange([...values, item]);
 
-                return;
-              }
-
-              onChange(item.id !== values[0]?.id ? item : undefined);
-              setOpen(false);
-            }}
-          />
-        </Suspense>
-      </PopoverContent>
-    </Popover>
-  );
-});
+                onChange(item.id !== values[0]?.id ? item : undefined);
+                setOpen(false);
+              }}
+            />
+          </Suspense>
+        </PopoverContent>
+      </Popover>
+    );
+  }
+);
 
 GroupInput.displayName = "GroupInput";

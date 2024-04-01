@@ -8,20 +8,24 @@ import { useDialog } from "@/components/ui/dialog";
 
 import { useSession } from "../../use-session";
 
-export const useCopperModalChangeAvatar = () => {
+export const useCopperModalChangeAvatar = (): {
+  cropperRef: React.RefObject<ReactCropperElement>;
+  isPending: boolean;
+  onSubmit: () => Promise<void>;
+} => {
   const t = useTranslations("core");
   const cropperRef = useRef<ReactCropperElement>(null);
   const [isPending, setPending] = useState(false);
   const { session } = useSession();
   const { setOpen } = useDialog();
 
-  const onSubmit = async () => {
+  const onSubmit = async (): Promise<void> => {
     if (!session) return;
 
     const cropper = cropperRef.current?.cropper;
     if (!cropper) return;
-    const blob = await fetch(cropper.getCroppedCanvas().toDataURL()).then(res =>
-      res.blob()
+    const blob = await fetch(cropper.getCroppedCanvas().toDataURL()).then(
+      (res): Promise<Blob> => res.blob()
     );
     const file = new File([blob], `${session.id}.webp`, {
       type: blob.type

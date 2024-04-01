@@ -58,7 +58,7 @@ interface Args {
 
 export const EditorContext = createContext<Args>({
   blockType: BLOCK_NAMES.PARAGRAPH,
-  setBlockType: () => {}
+  setBlockType: (): void => {}
 });
 
-export const useEditor = () => useContext(EditorContext);
+export const useEditor = (): Args => useContext(EditorContext);

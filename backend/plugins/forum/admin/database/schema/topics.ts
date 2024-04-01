@@ -29,7 +29,7 @@ export const forum_topics = pgTable(
     ip_address: varchar("ip_address", { length: 45 }),
     locked: boolean("locked").notNull().default(false)
   },
-  table => ({
+  (table) => ({
     forum_id_idx: index("forum_topics_forum_id_idx").on(table.forum_id)
   })
 );
@@ -64,7 +64,7 @@ export const forum_topics_titles = pgTable(
       }),
     value: varchar("value", { length: 100 }).notNull()
   },
-  table => ({
+  (table) => ({
     topic_id_idx: index("forum_topics_titles_topic_id_idx").on(table.topic_id),
     language_code_idx: index("forum_topics_titles_language_code_idx").on(
       table.language_code
@@ -105,7 +105,7 @@ export const forum_topics_logs = pgTable(
       onDelete: "cascade"
     })
   },
-  table => ({
+  (table) => ({
     user_id_idx: index("forum_topics_logs_user_id_idx").on(table.user_id),
     topic_id_idx: index("forum_topics_logs_topic_id_idx").on(table.topic_id)
   })

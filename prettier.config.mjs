@@ -1,6 +1,6 @@
 const config = {
   singleQuote: false,
-  arrowParens: "avoid",
+  arrowParens: "always",
   trailingComma: "none",
   printWidth: 80,
   plugins: ["prettier-plugin-tailwind"]

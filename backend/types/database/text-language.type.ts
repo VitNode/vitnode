@@ -30,7 +30,7 @@ export const IsTextLanguageInput = () => {
       validator: {
         validate(item?: TextLanguageInput | TextLanguageInput[]) {
           return (Array.isArray(item) ? item : [item]).every(
-            item => item.value?.trim().length > 0
+            (item) => item.value?.trim().length > 0
           );
         }
       }
@@ -49,7 +49,7 @@ export const MaxLengthLanguageInput = ({ length }: { length: number }) => {
       validator: {
         validate(item?: TextLanguageInput | TextLanguageInput[]) {
           return (Array.isArray(item) ? item : [item]).every(
-            item => item.value?.trim().length <= length
+            (item) => item.value?.trim().length <= length
           );
         }
       }
@@ -68,7 +68,7 @@ export const MinLengthLanguageInput = ({ length }: { length: number }) => {
       validator: {
         validate(item?: TextLanguageInput | TextLanguageInput[]) {
           return (Array.isArray(item) ? item : [item]).every(
-            item => item.value?.trim().length >= length
+            (item) => item.value?.trim().length >= length
           );
         }
       }
@@ -82,7 +82,7 @@ export const TransformTextLanguageInput = ({
   value: TextLanguageInput | TextLanguageInput[];
 }) => {
   if (Array.isArray(value)) {
-    return value.map(item => ({
+    return value.map((item) => ({
       ...item,
       value: item.value.trimStart().trimEnd()
     }));
@@ -96,7 +96,7 @@ export const TransformTextLanguageInput = ({
 
 export const TransformString = ({ value }: { value: string | string[] }) => {
   if (Array.isArray(value)) {
-    return value.map(item => item.trimStart().trimEnd());
+    return value.map((item) => item.trimStart().trimEnd());
   }
 
   return value.trimStart().trimEnd();

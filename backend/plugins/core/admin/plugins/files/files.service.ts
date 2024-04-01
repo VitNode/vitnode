@@ -20,7 +20,7 @@ export class FilesAdminPluginsService {
   }): Promise<number> {
     return fs.existsSync(paths)
       ? (await fs.promises.readdir(paths, { recursive: true })).filter(
-          fileName => fileName.includes(".")
+          (fileName) => fileName.includes(".")
         ).length
       : 0;
   }

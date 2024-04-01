@@ -16,7 +16,7 @@ import { useSignOutAPI } from "@/hooks/core/sign/out/use-sign-out-api";
 import { useRouter } from "@/i18n";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 
-export const AuthUserBar = () => {
+export const AuthUserBar = (): JSX.Element => {
   const t = useTranslations("core");
   const { push } = useRouter();
   const { session } = useSession();
@@ -50,11 +50,11 @@ export const AuthUserBar = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => push(`/profile/${name_seo}`)}>
+          <DropdownMenuItem onClick={(): void => push(`/profile/${name_seo}`)}>
             <User />
             <span>{t("user-bar.my_profile")}</span>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => push("/settings")}>
+          <DropdownMenuItem onClick={(): void => push("/settings")}>
             <Settings />
             <span>{t("user-bar.settings")}</span>
           </DropdownMenuItem>
@@ -66,7 +66,7 @@ export const AuthUserBar = () => {
 
             <DropdownMenuGroup>
               {is_mod && (
-                <DropdownMenuItem onClick={() => push("/mod")}>
+                <DropdownMenuItem onClick={(): void => push("/mod")}>
                   <Shield />
                   <span>{t("user-bar.mod_cp")}</span>
                 </DropdownMenuItem>
@@ -74,7 +74,9 @@ export const AuthUserBar = () => {
 
               {is_admin && (
                 <DropdownMenuItem
-                  onClick={() => window.open("/admin", "_blank")}
+                  onClick={(): void => {
+                    window.open("/admin", "_blank");
+                  }}
                 >
                   <KeyRound />
                   <span>{t("user-bar.admin_cp")}</span>
@@ -87,7 +89,9 @@ export const AuthUserBar = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={async () => await onSubmit()}>
+          <DropdownMenuItem
+            onClick={async (): Promise<void> => await onSubmit()}
+          >
             <LogOut />
             <span>{t("user-bar.log_out")}</span>
           </DropdownMenuItem>

@@ -7,17 +7,18 @@ import {
   type Core_MiddlewareQueryVariables
 } from "@/graphql/hooks";
 
-export const middlewareQueryApi = async () => {
-  try {
-    const { data } = await fetcher<
-      Core_MiddlewareQuery,
-      Core_MiddlewareQueryVariables
-    >({
-      query: Core_Middleware
-    });
+export const middlewareQueryApi =
+  async (): Promise<Core_MiddlewareQuery | null> => {
+    try {
+      const { data } = await fetcher<
+        Core_MiddlewareQuery,
+        Core_MiddlewareQueryVariables
+      >({
+        query: Core_Middleware
+      });
 
-    return data;
-  } catch (e) {
-    return null;
-  }
-};
+      return data;
+    } catch (e) {
+      return null;
+    }
+  };

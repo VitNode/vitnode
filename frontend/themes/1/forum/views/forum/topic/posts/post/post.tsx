@@ -22,7 +22,7 @@ export const PostTopic = ({
   disableInitialAnimation,
   post_id: id,
   user
-}: Props) => {
+}: Props): JSX.Element => {
   const t = useTranslations("forum.topics");
 
   return (
@@ -39,8 +39,10 @@ export const PostTopic = ({
           <div className="flex flex-col leading-none">
             <div>
               {t.rich("username_format", {
-                user: () => <UserLink className="font-semibold" user={user} />,
-                group: () => (
+                user: (): JSX.Element => (
+                  <UserLink className="font-semibold" user={user} />
+                ),
+                group: (): JSX.Element => (
                   <GroupFormat className="text-sm" group={user.group} />
                 )
               })}

@@ -18,7 +18,7 @@ import {
 import { Loader } from "@/components/loader";
 
 const Content = lazy(() =>
-  import("./content").then(module => ({
+  import("./content").then((module) => ({
     default: module.ContentDeleteGroupsMembersDialogAdmin
   }))
 );

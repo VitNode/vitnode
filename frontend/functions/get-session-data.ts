@@ -5,7 +5,11 @@ import {
   type Core_Sessions__AuthorizationQueryVariables
 } from "@/graphql/hooks";
 
-export const getSessionData = async () => {
+export const getSessionData = async (): Promise<{
+  data: Core_Sessions__AuthorizationQuery;
+  default_plugin: string;
+  theme_id: number;
+}> => {
   const { data } = await fetcher<
     Core_Sessions__AuthorizationQuery,
     Core_Sessions__AuthorizationQueryVariables

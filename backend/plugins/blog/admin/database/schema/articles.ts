@@ -27,7 +27,7 @@ export const blog_articles = pgTable(
     update: timestamp("update").notNull().defaultNow(),
     ip_address: varchar("ip_address", { length: 45 })
   },
-  table => ({
+  (table) => ({
     author_id_idx: index("blog_articles_author_id_idx").on(table.author_id),
     category_id_idx: index("blog_articles_category_id_idx").on(
       table.category_id
@@ -65,7 +65,7 @@ export const blog_articles_content = pgTable(
       }),
     value: varchar("value").notNull()
   },
-  table => ({
+  (table) => ({
     article_id_idx: index("blog_articles_content_article_id_idx").on(
       table.article_id
     ),
@@ -99,7 +99,7 @@ export const blog_articles_title = pgTable(
       }),
     value: varchar("value", { length: 100 }).notNull()
   },
-  table => ({
+  (table) => ({
     article_id_idx: index("blog_articles_title_article_id_idx").on(
       table.article_id
     ),

@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Loader } from "@/components/loader";
 
 const Content = lazy(() =>
-  import("../create-edit/create-edit").then(module => ({
+  import("../create-edit/create-edit").then((module) => ({
     default: module.CreateEditNavDevPluginAdmin
   }))
 );

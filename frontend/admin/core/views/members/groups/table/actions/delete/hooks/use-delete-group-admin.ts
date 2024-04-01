@@ -23,7 +23,7 @@ export const useDeleteGroupAdmin = ({
   const { push } = useRouter();
 
   const formSchema = z.object({
-    name: z.string().refine(value => value === formatName)
+    name: z.string().refine((value) => value === formatName)
   });
 
   const form = useForm<z.infer<typeof formSchema>>({

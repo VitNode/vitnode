@@ -9,7 +9,7 @@ interface Props {
   global?: boolean;
 }
 
-export const LoadingView = ({ className, global }: Props) => {
+export const LoadingView = ({ className, global }: Props): JSX.Element => {
   const t = useTranslations("core");
 
   const content = (

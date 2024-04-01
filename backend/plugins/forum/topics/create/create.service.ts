@@ -50,7 +50,7 @@ export class CreateForumTopicsService {
 
     // Create title
     await this.databaseService.db.insert(forum_topics_titles).values(
-      title.map(item => ({
+      title.map((item) => ({
         ...item,
         topic_id: data[0].id
       }))

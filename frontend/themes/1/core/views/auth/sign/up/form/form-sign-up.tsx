@@ -20,7 +20,7 @@ import { Progress } from "@/components/ui/progress";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 import { SuccessFormSignUp } from "./success";
 
-export const FormSignUp = () => {
+export const FormSignUp = (): JSX.Element => {
   const t = useTranslations("core");
   const { form, onSubmit } = useSignUpView({});
 
@@ -35,7 +35,7 @@ export const FormSignUp = () => {
           <FormField
             control={form.control}
             name="name"
-            render={({ field }) => (
+            render={({ field }): JSX.Element => (
               <FormItem>
                 <FormLabel>{t("sign_up.form.name.label")}</FormLabel>
                 <FormControl>
@@ -45,7 +45,7 @@ export const FormSignUp = () => {
                 {field.value.length > 0 && (
                   <FormDescription>
                     {t.rich("sign_up.form.name.your_id", {
-                      id: () => (
+                      id: (): JSX.Element => (
                         <span className="font-medium">
                           {removeSpecialCharacters(
                             field.value.trimStart().trimEnd()
@@ -63,7 +63,7 @@ export const FormSignUp = () => {
           <FormField
             control={form.control}
             name="email"
-            render={({ field }) => (
+            render={({ field }): JSX.Element => (
               <FormItem>
                 <FormLabel>{t("sign_up.form.email.label")}</FormLabel>
                 <FormControl>
@@ -77,7 +77,7 @@ export const FormSignUp = () => {
           <FormField
             control={form.control}
             name="password"
-            render={({ field, fieldState }) => {
+            render={({ field, fieldState }): JSX.Element => {
               const value = field.value;
               const regexArray = [
                 /^.{8,}$/, // Min 8 characters
@@ -87,9 +87,12 @@ export const FormSignUp = () => {
                 /\W|_/ // Min 1 special character
               ];
 
-              const passRegexPassword = regexArray.reduce((acc, regex) => {
-                return acc + Number(regex.test(value));
-              }, 0);
+              const passRegexPassword = regexArray.reduce(
+                (acc, regex): number => {
+                  return acc + Number(regex.test(value));
+                },
+                0
+              );
 
               return (
                 <FormItem>
@@ -117,7 +120,7 @@ export const FormSignUp = () => {
           <FormField
             control={form.control}
             name="terms"
-            render={({ field }) => (
+            render={({ field }): JSX.Element => (
               <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
                 <FormControl>
                   <Checkbox
@@ -138,7 +141,7 @@ export const FormSignUp = () => {
           <FormField
             control={form.control}
             name="newsletter"
-            render={({ field }) => (
+            render={({ field }): JSX.Element => (
               <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
                 <FormControl>
                   <Checkbox

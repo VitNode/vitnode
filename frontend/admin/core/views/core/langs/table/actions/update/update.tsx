@@ -5,7 +5,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 
 const Content = lazy(() =>
-  import("./content").then(module => ({
+  import("./content").then((module) => ({
     default: module.ContentUpdateActionsTableLangsCoreAdmin
   }))
 );

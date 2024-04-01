@@ -30,6 +30,10 @@
     "@tanstack/query"
   ],
   "rules": {
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      { "allowTypedFunctionExpressions": false }
+    ],
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
@@ -49,7 +53,7 @@
       "warn",
       {
         "endOfLine": "auto",
-        "arrowParens": "avoid",
+        "arrowParens": "always",
         "trailingComma": "none"
       }
     ],

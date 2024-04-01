@@ -5,7 +5,10 @@ import type { ShowForumForumsCounts } from "@/graphql/hooks";
 export const StatsItemForum = ({
   total_posts,
   total_topics
-}: Pick<ShowForumForumsCounts, "total_posts" | "total_topics">) => {
+}: Pick<
+  ShowForumForumsCounts,
+  "total_posts" | "total_topics"
+>): JSX.Element => {
   const t = useTranslations("forum");
 
   return (

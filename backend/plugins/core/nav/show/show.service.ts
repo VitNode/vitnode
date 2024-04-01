@@ -48,7 +48,7 @@ export class ShowCoreNavService {
       .from(core_nav);
 
     const edges = await Promise.all(
-      itemsParent.map(async item => {
+      itemsParent.map(async (item) => {
         const children = await this.databaseService.db.query.core_nav.findMany({
           where: (table, { eq }) => eq(table.parent_id, item.id),
           orderBy: (table, { asc }) => asc(table.position),

@@ -32,7 +32,7 @@ export const RebuildRequiredAdmin = () => {
           {rebuild_required.langs && (
             <li>
               {t.rich("langs", {
-                bold: text => <span className="font-bold">{text}</span>
+                bold: (text) => <span className="font-bold">{text}</span>
               })}
             </li>
           )}
@@ -40,7 +40,7 @@ export const RebuildRequiredAdmin = () => {
           {rebuild_required.plugins && (
             <li>
               {t.rich("plugins", {
-                bold: text => <span className="font-bold">{text}</span>
+                bold: (text) => <span className="font-bold">{text}</span>
               })}
             </li>
           )}
@@ -48,7 +48,7 @@ export const RebuildRequiredAdmin = () => {
           {rebuild_required.themes && (
             <li>
               {t.rich("themes", {
-                bold: text => <span className="font-bold">{text}</span>
+                bold: (text) => <span className="font-bold">{text}</span>
               })}
             </li>
           )}

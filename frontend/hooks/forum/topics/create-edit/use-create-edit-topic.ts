@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
+import { useForm, type UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
@@ -19,7 +19,13 @@ interface Props {
   data?: EditTopicData;
 }
 
-export const useCreateEditTopic = ({ data, forumId }: Props) => {
+export const useCreateEditTopic = ({
+  data,
+  forumId
+}: Props): {
+  form: UseFormReturn<z.infer<typeof formSchema>>;
+  onSubmit: (values: z.infer<typeof formSchema>) => Promise<void>;
+} => {
   const t = useTranslations("core");
   const { setOpen } = useDialog();
   const { push } = useRouter();
@@ -30,15 +36,21 @@ export const useCreateEditTopic = ({ data, forumId }: Props) => {
       .min(1, {
         message: t("errors.required")
       })
-      .refine(value => value.every(item => item.value.length <= 100), {
-        message: t("errors.max_length", { length: 100 })
-      }),
+      .refine(
+        (value): boolean =>
+          value.every((item): boolean => item.value.length <= 100),
+        {
+          message: t("errors.max_length", { length: 100 })
+        }
+      ),
     content: zodInput.languageInput.min(1, {
       message: t("errors.required")
     })
   });
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form: UseFormReturn<z.infer<typeof formSchema>> = useForm<
+    z.infer<typeof formSchema>
+  >({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: data?.title || [],
@@ -47,7 +59,9 @@ export const useCreateEditTopic = ({ data, forumId }: Props) => {
     mode: "onTouched"
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (
+    values: z.infer<typeof formSchema>
+  ): Promise<void> => {
     let error = false;
     let topic: {
       id: number;

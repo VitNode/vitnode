@@ -5,7 +5,7 @@ export const ItemNavSettings = ({
   icon,
   text,
   ...props
-}: ItemNavSettingsProps) => {
+}: ItemNavSettingsProps): JSX.Element => {
   const Icon = icon;
 
   return (

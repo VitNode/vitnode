@@ -64,7 +64,7 @@ const Button = forwardRef<HTMLButtonElement, IconButtonProps | ButtonProps>(
       ...props
     },
     ref
-  ) => {
+  ): JSX.Element => {
     const t = useTranslations("core");
     const Comp = asChild ? Slot : "button";
 

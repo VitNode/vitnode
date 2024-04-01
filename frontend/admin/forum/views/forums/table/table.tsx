@@ -7,7 +7,7 @@ import type { Admin__Forum_Forums__ShowQuery } from "@/graphql/hooks";
 import type { ShowForumForumsAdminWithChildren } from "./hooks/use-forum-forums-admin-api";
 
 const ContentTableForumsForumAdmin = lazy(() =>
-  import("./content-table").then(module => ({
+  import("./content-table").then((module) => ({
     default: module.ContentTableForumsForumAdmin
   }))
 );
@@ -15,7 +15,7 @@ const ContentTableForumsForumAdmin = lazy(() =>
 export const TableForumsForumAdmin = ({
   admin__forum_forums__show: { edges }
 }: Admin__Forum_Forums__ShowQuery) => {
-  const initData: ShowForumForumsAdminWithChildren[] = edges.map(item => ({
+  const initData: ShowForumForumsAdminWithChildren[] = edges.map((item) => ({
     ...item,
     children:
       item.children.length > 0

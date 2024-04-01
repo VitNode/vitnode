@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const Content = lazy(() =>
-  import("../upload/upload").then(module => ({
+  import("../upload/upload").then((module) => ({
     default: module.UploadThemeAdmin
   }))
 );

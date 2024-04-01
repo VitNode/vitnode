@@ -9,7 +9,12 @@ import {
   type Core_Members__Avatar__UploadMutationVariables
 } from "@/graphql/hooks";
 
-export const mutationUploadApi = async (formData: FormData) => {
+export const mutationUploadApi = async (
+  formData: FormData
+): Promise<{
+  data?: Core_Members__Avatar__UploadMutation;
+  error?: unknown;
+}> => {
   try {
     const files = formData.get("file") as File;
 

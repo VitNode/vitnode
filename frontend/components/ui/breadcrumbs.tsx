@@ -12,7 +12,7 @@ interface Props {
 }
 
 const Breadcrumbs = forwardRef<HTMLDivElement, Props>(
-  ({ children, items }, ref) => {
+  ({ children, items }, ref): JSX.Element => {
     const t = useTranslations("core");
     const classNameItem = cn(
       buttonVariants({
@@ -31,14 +31,19 @@ const Breadcrumbs = forwardRef<HTMLDivElement, Props>(
             </Link>
           </li>
 
-          {items.map(item => (
-            <li key={item.id} className="flex gap-2 items-center flex-shrink-0">
-              <ChevronRight className="size-4" />
-              <Link className={classNameItem} href={item.href}>
-                {item.text}
-              </Link>
-            </li>
-          ))}
+          {items.map(
+            (item): JSX.Element => (
+              <li
+                key={item.id}
+                className="flex gap-2 items-center flex-shrink-0"
+              >
+                <ChevronRight className="size-4" />
+                <Link className={classNameItem} href={item.href}>
+                  {item.text}
+                </Link>
+              </li>
+            )
+          )}
         </ul>
 
         {children}

@@ -10,11 +10,11 @@ interface Props {
   locked: boolean;
 }
 
-export const LockToggleActionsTopic = ({ id, locked }: Props) => {
+export const LockToggleActionsTopic = ({ id, locked }: Props): JSX.Element => {
   const t = useTranslations("forum.topics.actions");
   const tCore = useTranslations("core");
 
-  const onClick = async () => {
+  const onClick = async (): Promise<void> => {
     const mutation = await mutationApi({ id });
 
     if (mutation.error) {

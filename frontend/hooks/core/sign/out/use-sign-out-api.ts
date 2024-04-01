@@ -3,10 +3,12 @@ import { toast } from "sonner";
 
 import { mutationApi } from "./mutation-api";
 
-export const useSignOutAPI = () => {
+export const useSignOutAPI = (): {
+  onSubmit: () => void;
+} => {
   const t = useTranslations("core");
 
-  const onSubmit = async () => {
+  const onSubmit = async (): Promise<void> => {
     const mutation = await mutationApi();
     if (mutation?.error) {
       toast.error(t("errors.title"), {

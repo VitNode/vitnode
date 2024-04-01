@@ -1,5 +1,12 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { Suspense, lazy, useEffect, useRef, useState } from "react";
+import {
+  Suspense,
+  lazy,
+  useEffect,
+  useRef,
+  useState,
+  type ComponentType
+} from "react";
 import {
   $isCodeNode,
   CodeNode,
@@ -18,11 +25,21 @@ import {
 import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
 import { Loader } from "@/components/loader";
 import { CopyButtonCodeAction } from "./copy/copy-button-code-action";
+import type { PrettierAlertDialogProps } from "./prettier/prettier-alert-dialog";
 
-const PrettierAlertDialog = lazy(() =>
-  import("./prettier/prettier-alert-dialog").then(module => ({
-    default: module.PrettierAlertDialog
-  }))
+const PrettierAlertDialog = lazy(
+  (): Promise<{
+    default: ComponentType<PrettierAlertDialogProps>;
+  }> =>
+    import("./prettier/prettier-alert-dialog").then(
+      (
+        module
+      ): {
+        default: ComponentType<PrettierAlertDialogProps>;
+      } => ({
+        default: module.PrettierAlertDialog
+      })
+    )
 );
 
 interface Position {
@@ -36,7 +53,9 @@ interface Props {
 
 const CODE_PADDING = 8;
 
-export const ContainerCodeActionMenuPluginEditor = ({ anchorElem }: Props) => {
+export const ContainerCodeActionMenuPluginEditor = ({
+  anchorElem
+}: Props): JSX.Element => {
   const [editor] = useLexicalComposerContext();
   const [isShown, setShown] = useState(false);
   const [lang, setLang] = useState("");
@@ -51,7 +70,7 @@ export const ContainerCodeActionMenuPluginEditor = ({ anchorElem }: Props) => {
     useState<PrettierFormatError | null>(null);
 
   const debouncedOnMouseMove = useDebounce(
-    (event: MouseEvent) => {
+    (event: MouseEvent): void => {
       const { codeDOMNode, isOutside } = getMouseInfo(event);
       if (isOutside) {
         setShown(false);
@@ -68,7 +87,7 @@ export const ContainerCodeActionMenuPluginEditor = ({ anchorElem }: Props) => {
       let codeNode: CodeNode | null = null;
       let _lang = "";
 
-      editor.update(() => {
+      editor.update((): void => {
         const maybeCodeNode = $getNearestNodeFromDOMNode(codeDOMNode);
         if ($isCodeNode(maybeCodeNode)) {
           codeNode = maybeCodeNode;
@@ -92,22 +111,22 @@ export const ContainerCodeActionMenuPluginEditor = ({ anchorElem }: Props) => {
     1000
   );
 
-  useEffect(() => {
+  useEffect((): (() => void) | void => {
     if (!shouldListenMouseMove) {
       return;
     }
 
     document.addEventListener("mousemove", debouncedOnMouseMove);
 
-    return () => {
+    return (): void => {
       setShown(false);
       debouncedOnMouseMove.cancel();
       document.removeEventListener("mousemove", debouncedOnMouseMove);
     };
   }, [shouldListenMouseMove, debouncedOnMouseMove]);
 
-  editor.registerMutationListener(CodeNode, mutations => {
-    editor.getEditorState().read(() => {
+  editor.registerMutationListener(CodeNode, (mutations): void => {
+    editor.getEditorState().read((): void => {
       for (const [key, type] of mutations) {
         switch (type) {
           case "created":

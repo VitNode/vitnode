@@ -15,7 +15,11 @@ interface Props {
   multiple?: boolean;
 }
 
-export const GroupInputContentList = ({ edges, onSelect, values }: Props) => {
+export const GroupInputContentList = ({
+  edges,
+  onSelect,
+  values
+}: Props): JSX.Element => {
   const t = useTranslations("core");
 
   if (edges.length === 0) {
@@ -25,31 +29,33 @@ export const GroupInputContentList = ({ edges, onSelect, values }: Props) => {
   return (
     <CommandGroup>
       {edges
-        .filter(item => !item.guest)
-        .map(item => (
-          <CommandItem
-            className="gap-2"
-            key={item.id}
-            onSelect={() =>
-              onSelect({
-                id: item.id,
-                name: item.name
-              })
-            }
-          >
-            <div
-              className={cn(
-                "mr-2 flex size-4 items-center justify-center rounded-sm border border-primary",
-                values.find(value => item.id === value.id)
-                  ? "bg-primary text-primary-foreground"
-                  : "opacity-50 [&_svg]:invisible"
-              )}
+        .filter((item): boolean => !item.guest)
+        .map(
+          (item): JSX.Element => (
+            <CommandItem
+              className="gap-2"
+              key={item.id}
+              onSelect={(): void =>
+                onSelect({
+                  id: item.id,
+                  name: item.name
+                })
+              }
             >
-              <CheckIcon />
-            </div>
-            <GroupFormat group={item} />
-          </CommandItem>
-        ))}
+              <div
+                className={cn(
+                  "mr-2 flex size-4 items-center justify-center rounded-sm border border-primary",
+                  values.find((value): boolean => item.id === value.id)
+                    ? "bg-primary text-primary-foreground"
+                    : "opacity-50 [&_svg]:invisible"
+                )}
+              >
+                <CheckIcon />
+              </div>
+              <GroupFormat group={item} />
+            </CommandItem>
+          )
+        )}
     </CommandGroup>
   );
 };

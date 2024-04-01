@@ -17,4 +17,4 @@ export const GlobalsContext = createContext<Args>({
   themes: []
 });
 
-export const useGlobals = () => useContext(GlobalsContext);
+export const useGlobals = (): Args => useContext(GlobalsContext);

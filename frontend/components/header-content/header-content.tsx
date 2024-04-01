@@ -22,7 +22,7 @@ interface HeaderContentH2Props extends HeaderContentProps {
 export const HeaderContent = forwardRef<
   HTMLDivElement,
   HeaderContentH1Props | HeaderContentH2Props
->(({ children, className, desc, h1, h2 }, ref) => {
+>(({ children, className, desc, h1, h2 }, ref): JSX.Element => {
   return (
     <div
       ref={ref}

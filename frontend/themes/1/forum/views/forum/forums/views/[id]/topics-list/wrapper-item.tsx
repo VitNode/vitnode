@@ -16,11 +16,11 @@ export const WrapperItemTopicListForum = ({
   children,
   className,
   href
-}: Props) => {
+}: Props): JSX.Element => {
   const { push } = useRouter();
 
   return (
-    <div onClick={() => push(href)} className={className}>
+    <div onClick={(): void => push(href)} className={className}>
       {children}
     </div>
   );

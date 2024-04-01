@@ -79,7 +79,7 @@ export const ContentTableThemesAdmin = ({
         }
       },
       {
-        header: val => {
+        header: (val) => {
           return (
             <HeaderSortingDataTable {...val}>
               {t("table.created")}
