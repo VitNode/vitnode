@@ -4,6 +4,7 @@ mutation Admin__core_nav__edit(
   $href: String!
   $id: Int!
   $name: [TextLanguageInput!]!
+  $icon: String
 ) {
   admin__core_nav__edit(
     description: $description
@@ -11,7 +12,12 @@ mutation Admin__core_nav__edit(
     href: $href
     id: $id
     name: $name
+    icon: $icon
   ) {
     id
+    name {
+      language_code
+      value
+    }
   }
 }

@@ -5,7 +5,6 @@ import { ConfigType, configPath } from "./get-config-file";
 
 const DATA: ConfigType = {
   side_name: "VitNode Community",
-  applications: ["core", "admin", "forum"],
   finished_install: false,
   rebuild_required: {
     themes: false,

@@ -2,27 +2,6 @@
   "admin": {
     "title": "Admin Control Panel",
     "title_short": "Admin",
-    "default": "Default",
-    "nav": {
-      "core": {
-        "title": "Core",
-        "dashboard": "Dashboard",
-        "settings": "Settings",
-        "plugins": "Plugins",
-        "styles": "Styles",
-        "langs": "Languages"
-      },
-      "members": {
-        "title": "Members",
-        "list": "Users",
-        "groups": "Groups",
-        "staff": "Staff"
-      },
-      "forum": {
-        "title": "Forum",
-        "forums": "Forums"
-      }
-    },
     "home_page": "Home Page",
     "rebuild_required": {
       "title": "Rebuild Required",
@@ -49,7 +28,7 @@
         "set_default": "Set as default",
         "get_help": "Get help",
         "search_placeholder": "Search by name...",
-        "dev_tool": "Developer Tool",
+        "dev_tools": "Developer Tools",
         "dev": {
           "overview": {
             "title": "Overview"
@@ -58,7 +37,33 @@
             "title": "Files"
           },
           "nav": {
-            "title": "Navigation in AdminCP"
+            "title": "Navigation in AdminCP",
+            "key": "Key: <key></key>",
+            "create": {
+              "title": "Create Navigation",
+              "code": {
+                "label": "Code",
+                "desc": "Should be unique. Min 3-50 characters.",
+                "exists": "Navigation with this code already exists."
+              },
+              "href": {
+                "label": "URL",
+                "desc": "Your link will be: /admin/<link></link>"
+              },
+              "icon": {
+                "label": "Icon"
+              },
+              "success": "Navigation has been created."
+            },
+            "edit": {
+              "title": "Edit Navigation",
+              "success": "Navigation has been updated."
+            },
+            "delete": {
+              "submit": "Yes, delete navigation",
+              "desc": "This action will delete <code></code> navigation.",
+              "success": "Navigation has been deleted."
+            }
           }
         },
         "create": {
@@ -206,6 +211,9 @@
             "href": {
               "label": "URL",
               "desc": "Internal link format: /path/to/page"
+            },
+            "icon": {
+              "label": "Icon"
             },
             "external": {
               "label": "External link?",

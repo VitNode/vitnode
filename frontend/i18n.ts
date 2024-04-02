@@ -1,13 +1,19 @@
 import { getRequestConfig } from "next-intl/server";
 import { createSharedPathnamesNavigation } from "next-intl/navigation";
 
-import configs from "@/config/config.json";
+import { middlewareQueryApi } from "./hooks/core/middleware-query-api";
 
 export default getRequestConfig(async ({ locale }) => {
+  const data = await middlewareQueryApi();
+  const defaultPlugins = [{ code: "core", name: "admin" }];
+
   const messagesFormApps = await Promise.all(
-    configs.applications.map(async app => {
+    (data
+      ? [...data.core_plugins__show, ...defaultPlugins]
+      : defaultPlugins
+    ).map(async plugin => {
       return {
-        ...(await import(`@/langs/${locale}/${app}.json`)).default
+        ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
       };
     })
   );

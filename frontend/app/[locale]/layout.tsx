@@ -1,10 +1,8 @@
 import { type ReactNode } from "react";
-import { notFound } from "next/navigation";
 import { NextIntlClientProvider, type AbstractIntlMessages } from "next-intl";
 import { Inter } from "next/font/google";
 
 import { ThemeProvider } from "./theme-provider";
-import { getConfigFile } from "@/functions/get-config-file";
 import { InternalErrorView } from "@/admin/core/global/internal-error/internal-error-view";
 import "./global.scss";
 import { getSessionData } from "@/functions/get-session-data";
@@ -24,29 +22,28 @@ export default async function LocaleLayout({
   children,
   params: { locale }
 }: Props) {
-  const config = await getConfigFile();
-  let messages: AbstractIntlMessages;
+  const defaultPlugins = [{ code: "core", name: "admin" }];
+
   try {
+    const { data } = await getSessionData();
+
     const messagesFormApps = await Promise.all(
-      config.applications.map(async app => {
+      (data
+        ? [...data.core_plugins__show, ...defaultPlugins]
+        : defaultPlugins
+      ).map(async plugin => {
         return {
-          ...(await import(`@/langs/${locale}/${app}.json`)).default
+          ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
         };
       })
     );
 
-    messages = {
+    const messages: AbstractIntlMessages = {
       ...messagesFormApps.reduce(
         (acc, messages) => ({ ...acc, ...messages }),
         {}
       )
     };
-  } catch (error) {
-    notFound();
-  }
-
-  try {
-    const { data } = await getSessionData();
 
     return (
       <html lang={locale} className={inter.variable}>
@@ -62,6 +59,21 @@ export default async function LocaleLayout({
       </html>
     );
   } catch (error) {
+    const messagesFormApps = await Promise.all(
+      defaultPlugins.map(async plugin => {
+        return {
+          ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
+        };
+      })
+    );
+
+    const messages: AbstractIntlMessages = {
+      ...messagesFormApps.reduce(
+        (acc, messages) => ({ ...acc, ...messages }),
+        {}
+      )
+    };
+
     return (
       <html lang={locale} className={inter.variable}>
         <body>

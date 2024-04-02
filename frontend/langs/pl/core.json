@@ -1,9 +1,11 @@
 {
   "core": {
     "reload_page": "Przeładuj stronę",
+    "link_url_with_link": "Link URL: <link></link>",
     "yes": "Tak",
     "no": "Nie",
     "clear_cache_and_reload": "Wyczyść pamięć podręczną i przeładuj",
+    "drag_to_change_position": "Przeciągnij, aby zmienić pozycję",
     "optional": "Opcjonalne",
     "go_back": "Wróć",
     "open_menu": "Otwórz menu",
@@ -65,7 +67,8 @@
       "updated": "Zaktualizowano",
       "version": "Wersja",
       "author": "Autor",
-      "enabled": "Włączony"
+      "enabled": "Włączony",
+      "rows_per_page": "Wierszy na stronę"
     },
     "editor": {
       "remove_formatting": "Usuń formatowanie",
@@ -286,6 +289,26 @@
       "actions": {
         "back_home": "Strona główna",
         "contact": "Skontaktuj się z nami"
+      }
+    },
+    "admin": {
+      "nav": {
+        "title": "Rdzeń",
+        "dashboard": "Pulpit",
+        "settings": "Ustawienia",
+        "plugins": "Wtyczki",
+        "styles": "Style",
+        "langs": "Języki"
+      }
+    }
+  },
+  "members": {
+    "admin": {
+      "nav": {
+        "title": "Użytkownicy",
+        "list": "Użytkownicy",
+        "groups": "Grupy",
+        "staff": "Personel"
       }
     }
   }

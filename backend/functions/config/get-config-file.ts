@@ -1,10 +1,9 @@
 import { join } from "path";
 import * as fs from "fs";
 
-import { PluginInfoJSONType } from "@/modules/core/admin/plugins/helpers/files/create/contents";
+import { PluginInfoJSONType } from "@/plugins/core/admin/plugins/helpers/files/create/contents";
 
 export interface ConfigType {
-  applications: string[];
   finished_install: boolean;
   rebuild_required: {
     langs: boolean;
@@ -30,7 +29,7 @@ export const getConfigFile = async () => {
 };
 
 export const getCoreInfo = async () => {
-  const path = join(process.cwd(), "modules", "core");
+  const path = join(process.cwd(), "plugins", "core");
   const config = fs.readFileSync(join(path, "plugin.json"), "utf8");
   const data: PluginInfoJSONType = JSON.parse(config);
 

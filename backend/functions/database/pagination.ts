@@ -3,7 +3,7 @@ import { PgTableWithColumns, TableConfig } from "drizzle-orm/pg-core";
 
 import { PageInfo } from "@/types/database/pagination.type";
 import { CustomError } from "@/utils/errors/CustomError";
-import { DatabaseService } from "@/modules/database/database.service";
+import { DatabaseService } from "@/plugins/database/database.service";
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 type DataInterface<T> = T & {

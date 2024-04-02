@@ -17,7 +17,6 @@ export const ContentTableLangsCoreAdmin = ({
   data
 }: LangsCoreAdminViewProps) => {
   const t = useTranslations("admin.core.langs");
-  const tAdmin = useTranslations("admin");
   const tCore = useTranslations("core");
   const locale = useLocale();
 
@@ -32,7 +31,7 @@ export const ContentTableLangsCoreAdmin = ({
           return (
             <div className="flex items-center gap-4">
               <span>{data.name}</span>
-              {data.default && <Badge>{tAdmin("default")}</Badge>}
+              {data.default && <Badge>{tCore("default")}</Badge>}
             </div>
           );
         }
@@ -58,15 +57,15 @@ export const ContentTableLangsCoreAdmin = ({
         header: val => {
           return (
             <HeaderSortingDataTable {...val}>
-              {tCore("table.updated")}
+              {tCore("table.created")}
             </HeaderSortingDataTable>
           );
         },
-        accessorKey: "updated",
+        accessorKey: "created",
         cell: ({ row }) => {
           const data = row.original;
 
-          return <DateFormat date={data.updated} />;
+          return <DateFormat date={data.created} />;
         }
       },
       {
@@ -114,7 +113,7 @@ export const ContentTableLangsCoreAdmin = ({
       searchPlaceholder={t("search_placeholder")}
       defaultPageSize={10}
       defaultSorting={{
-        sortBy: "updated",
+        sortBy: "created",
         sortDirection: "desc"
       }}
       columns={columns}

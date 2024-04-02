@@ -2,9 +2,9 @@
 
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import {
-  type ComponentPropsWithoutRef,
+  forwardRef,
   type ElementRef,
-  forwardRef
+  type ComponentPropsWithoutRef
 } from "react";
 
 import { cn } from "@/functions/classnames";
@@ -12,6 +12,8 @@ import { cn } from "@/functions/classnames";
 const Popover = PopoverPrimitive.Root;
 
 const PopoverTrigger = PopoverPrimitive.Trigger;
+
+const PopoverAnchor = PopoverPrimitive.Anchor;
 
 const PopoverContent = forwardRef<
   ElementRef<typeof PopoverPrimitive.Content>,
@@ -32,4 +34,4 @@ const PopoverContent = forwardRef<
 ));
 PopoverContent.displayName = PopoverPrimitive.Content.displayName;
 
-export { Popover, PopoverTrigger, PopoverContent };
+export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor };

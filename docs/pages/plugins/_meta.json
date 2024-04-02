@@ -1,9 +1,11 @@
 {
   "overview": "Overview",
   "database": "Database",
+  "graphql": "GraphQL",
   "authorization": "Authorization",
-  "cron": "Task Scheduling (CRON)",
   "i18n": "Internationalization (i18n)",
+  "admin-pages": "Admin Pages",
+  "cron": "Task Scheduling (CRON)",
   "pages": "Pages",
   "files": "Files"
 }

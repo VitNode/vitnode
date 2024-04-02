@@ -6,8 +6,15 @@ import type { ShowCoreNav } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { Link, usePathname } from "@/i18n";
 import { cn } from "@/functions/classnames";
+import { Icon } from "@/components/icon/icon";
 
-export const ItemNav = ({ children, external, href, name }: ShowCoreNav) => {
+export const ItemNav = ({
+  children,
+  external,
+  href,
+  icon,
+  name
+}: ShowCoreNav) => {
   const { convertText } = useTextLang();
   const pathname = usePathname();
   const active =
@@ -27,7 +34,8 @@ export const ItemNav = ({ children, external, href, name }: ShowCoreNav) => {
           target={external ? "_blank" : undefined}
           rel={external ? "noopener noreferrer" : undefined}
         >
-          {convertText(name)} {children.length > 0 && <ChevronDown />}
+          {icon && <Icon className="text-lg" name={icon} />} {convertText(name)}{" "}
+          {children.length > 0 && <ChevronDown />}
         </Link>
       </NavigationMenu.Trigger>
 
@@ -57,7 +65,7 @@ export const ItemNav = ({ children, external, href, name }: ShowCoreNav) => {
                     <Link
                       href={item.href}
                       className={cn(
-                        "flex flex-col justify-center select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground h-full text-accent-foreground",
+                        "flex flex-col justify-center select-none gap-1 rounded-md px-3 py-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground h-full text-accent-foreground",
                         {
                           "bg-accent": activeItem
                         }
@@ -65,12 +73,17 @@ export const ItemNav = ({ children, external, href, name }: ShowCoreNav) => {
                       target={item.external ? "_blank" : undefined}
                       rel={item.external ? "noopener noreferrer" : undefined}
                     >
-                      <div className="text-sm font-medium leading-none">
+                      <div className="font-medium flex gap-1">
+                        {item.icon && (
+                          <Icon className="size-4" name={item.icon} />
+                        )}
                         {convertText(item.name)}
                       </div>
-                      <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                        {convertText(item.description)}
-                      </p>
+                      {item.description && (
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                          {convertText(item.description)}
+                        </p>
+                      )}
                     </Link>
                   </NavigationMenu.Link>
                 </li>

@@ -150,7 +150,7 @@ export const ContentTableForumsForumAdmin = ({
 
         await mutationChangePositionApi({
           id: Number(active.id),
-          parentId,
+          parentId: Number(parentId),
           indexToMove
         });
       }}

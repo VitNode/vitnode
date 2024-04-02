@@ -10,9 +10,9 @@ interface Props {
 export const AdminLayout = ({ children }: Props) => {
   return (
     <>
-      <NavAdmin />
       <HeaderAdmin />
-      <main className="sm:ml-60 mt-16 p-5 rounded-l-lg border bg-card text-card-foreground shadow-sm">
+      <NavAdmin />
+      <main className="sm:ml-64 mt-16 p-5 sm:pl-2 text-card-foreground">
         {children}
       </main>
     </>

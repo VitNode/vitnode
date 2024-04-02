@@ -30,6 +30,7 @@ export const mutationApi = async (formData: FormData) => {
     });
 
     revalidatePath("/admin/core/plugins", "page");
+    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {

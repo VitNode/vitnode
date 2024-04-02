@@ -36,7 +36,8 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
       })
     ),
     href: zodInput.string.min(1).max(255),
-    external: z.boolean()
+    external: z.boolean(),
+    icon: z.string()
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -45,7 +46,8 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
       name: data?.name ?? [],
       description: data?.description ?? [],
       href: data?.href ?? "",
-      external: data?.external ?? false
+      external: data?.external ?? false,
+      icon: data?.icon ?? ""
     }
   });
 

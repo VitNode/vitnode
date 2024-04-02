@@ -46,22 +46,20 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
               <DropdownMenuItem
                 onClick={() => push(`${pathname}/${props.code}/dev`)}
               >
-                <CodeXml /> {t("dev_tool")}
+                <CodeXml /> {t("dev_tools")}
               </DropdownMenuItem>
             </>
           )}
 
-          {CONFIG.node_development && (
-            <DropdownMenuItem asChild>
-              <Link
-                href={props.support_url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <BadgeHelp /> {t("get_help")}
-              </Link>
-            </DropdownMenuItem>
-          )}
+          <DropdownMenuItem asChild>
+            <Link
+              href={props.support_url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <BadgeHelp /> {t("get_help")}
+            </Link>
+          </DropdownMenuItem>
 
           {!props.default && (
             <DropdownMenuItem onClick={() => setIsOpenDeleteDialog(true)}>

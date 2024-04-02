@@ -20,7 +20,7 @@ export const UploadActionThemeAdmin = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>
+        <Button variant="ghost">
           <Upload />
           {t("upload")}
         </Button>

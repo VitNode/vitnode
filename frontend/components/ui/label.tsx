@@ -3,9 +3,9 @@
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { cva, type VariantProps } from "class-variance-authority";
 import {
-  type ComponentPropsWithoutRef,
+  forwardRef,
   type ElementRef,
-  forwardRef
+  type ComponentPropsWithoutRef
 } from "react";
 
 import { cn } from "@/functions/classnames";

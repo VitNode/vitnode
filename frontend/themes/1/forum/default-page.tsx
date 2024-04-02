@@ -37,8 +37,8 @@ export default async function DefaultPage() {
   const tCore = await getTranslations("core");
 
   return (
-    <>
-      <HeaderContent className="mt-5" h1={t("forum")} />
+    <div className="container my-4">
+      <HeaderContent className="my-5" h1={t("forum")} />
 
       {edges.length ? (
         <div className="flex flex-col gap-4">
@@ -49,6 +49,6 @@ export default async function DefaultPage() {
       ) : (
         <div className="text-center">{tCore("no_results")}</div>
       )}
-    </>
+    </div>
   );
 }

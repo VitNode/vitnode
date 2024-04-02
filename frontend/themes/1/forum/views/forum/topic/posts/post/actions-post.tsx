@@ -24,14 +24,12 @@ interface Props {
 
 export const ActionsPost = ({
   id,
-  permissions: { can_edit, can_delete }
+  permissions: { can_delete, can_edit }
 }: Props) => {
   const t = useTranslations("forum.topics.actions");
   const tCore = useTranslations("core");
   const { deletePost } = useDeletePost({ id: id });
-  const editPost = async () => {
-    console.log("Not implemented yet"); //TODO: implementation
-  };
+  const editPost = async () => {}; //TODO: implementation
 
   if (!can_edit) return null;
   if (!can_delete) return null;

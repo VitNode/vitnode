@@ -23,7 +23,6 @@ export const editMutationApi = async (
 
     revalidateTag("Core_Sessions__Authorization");
     revalidatePath("/admin/core/styles/nav", "page");
-    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {

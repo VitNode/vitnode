@@ -2,27 +2,6 @@
   "admin": {
     "title": "Panel kontrolny administratora",
     "title_short": "Admin",
-    "default": "Domyślny",
-    "nav": {
-      "core": {
-        "title": "Rdzeń",
-        "dashboard": "Pulpit",
-        "settings": "Ustawienia",
-        "plugins": "Wtyczki",
-        "styles": "Style",
-        "langs": "Języki"
-      },
-      "members": {
-        "title": "Użytkownicy",
-        "list": "Użytkownicy",
-        "groups": "Grupy",
-        "staff": "Personel"
-      },
-      "forum": {
-        "title": "Forum",
-        "forums": "Fora"
-      }
-    },
     "rebuild_required": {
       "title": "Wymaga przebudowania",
       "desc": "Wykryliśmy, że musisz przebudować swoją stronę, ponieważ wprowadziłeś zmiany w:",
@@ -49,7 +28,7 @@
         "set_default": "Ustaw jako domyślną",
         "get_help": "Get help",
         "search_placeholder": "Szukaj po nazwie...",
-        "dev_tool": "Narzędzia deweloperskie",
+        "dev_tools": "Narzędzia deweloperskie",
         "dev": {
           "overview": {
             "title": "Przegląd"
@@ -58,7 +37,33 @@
             "title": "Pliki"
           },
           "nav": {
-            "title": "Nawigacja w AdminCP"
+            "title": "Nawigacja w AdminCP",
+            "key": "Klucz: <key></key>",
+            "create": {
+              "title": "Stwórz nawigację",
+              "code": {
+                "label": "Kod",
+                "desc": "Powinno być unikalne. Min 3-50 znakó.",
+                "exists": "Nawigacja o takim kodzie już istnieje."
+              },
+              "href": {
+                "label": "Link",
+                "desc": "Twój link to: /admin/<link></link>"
+              },
+              "icon": {
+                "label": "Ikona"
+              },
+              "success": "Nawigacja została stworzona."
+            },
+            "edit": {
+              "title": "Edytuj nawigację",
+              "success": "Nawigacja została zaktualizowana."
+            },
+            "delete": {
+              "submit": "Tak, usuń nawigację",
+              "desc": "Ta akcja usunie nawigację <code></code>.",
+              "success": "Nawigacja została usunięta."
+            }
           }
         },
         "create": {
@@ -207,6 +212,9 @@
             "href": {
               "label": "Link",
               "desc": "Wewnętrzny link: /ścieżka/do/strony"
+            },
+            "icon": {
+              "label": "Ikona"
             },
             "external": {
               "label": "Link zewnętrzny?",

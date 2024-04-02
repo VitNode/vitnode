@@ -1,9 +1,11 @@
 {
   "core": {
     "reload_page": "Reload Page",
+    "link_url_with_link": "Link URL: <link></link>",
     "yes": "Yes",
     "no": "No",
     "clear_cache_and_reload": "Clear Cache and Reload",
+    "drag_to_change_position": "Drag to change position",
     "optional": "Optional",
     "go_back": "Go Back",
     "open_menu": "Open Menu",
@@ -65,7 +67,8 @@
       "updated": "Updated",
       "version": "Version",
       "author": "Author",
-      "enabled": "Enabled"
+      "enabled": "Enabled",
+      "rows_per_page": "Rows per page"
     },
     "editor": {
       "remove_formatting": "Remove Formatting",
@@ -286,6 +289,26 @@
       "actions": {
         "back_home": "Home Page",
         "contact": "Contact with Us"
+      }
+    },
+    "admin": {
+      "nav": {
+        "title": "Core",
+        "dashboard": "Dashboard",
+        "settings": "Settings",
+        "plugins": "Plugins",
+        "styles": "Styles",
+        "langs": "Languages"
+      }
+    }
+  },
+  "members": {
+    "admin": {
+      "nav": {
+        "title": "Members",
+        "list": "Users",
+        "groups": "Groups",
+        "staff": "Staff"
       }
     }
   }

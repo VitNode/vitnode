@@ -57,7 +57,7 @@ export default function ForumForumView({
         </CardHeader>
 
         {forumData.children && forumData.children.length > 0 && (
-          <CardContent className="p-0 border-t">
+          <CardContent className="p-0">
             {forumData.children.map(child => (
               <ItemForum key={child.id} {...child} />
             ))}

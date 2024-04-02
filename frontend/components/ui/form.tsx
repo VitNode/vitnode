@@ -3,27 +3,27 @@ import { Slot } from "@radix-ui/react-slot";
 import { useBeforeUnload } from "react-use";
 import {
   Controller,
-  FormProvider,
-  useFormContext,
   type ControllerProps,
   type FieldPath,
   type FieldValues,
+  FormProvider,
+  useFormContext,
   type FormProviderProps
 } from "react-hook-form";
 import {
   createContext,
   forwardRef,
   useContext,
-  useId,
-  type ComponentPropsWithoutRef,
   type ElementRef,
+  type ComponentPropsWithoutRef,
   type HTMLAttributes,
+  useId,
   useEffect
 } from "react";
 import { useTranslations } from "next-intl";
 
-import { Label } from "@/components/ui/label";
 import { cn } from "@/functions/classnames";
+import { Label } from "@/components/ui/label";
 import { useDialog } from "./dialog";
 
 interface FormProps<
@@ -185,7 +185,7 @@ const FormDescription = forwardRef<
     <p
       ref={ref}
       id={formDescriptionId}
-      className={cn("text-sm text-muted-foreground", className)}
+      className={cn("text-[0.8rem] text-muted-foreground", className)}
       {...props}
     />
   );
@@ -207,7 +207,7 @@ const FormMessage = forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("text-sm font-medium text-destructive", className)}
+      className={cn("text-[0.8rem] font-medium text-destructive", className)}
       {...props}
     >
       {body}

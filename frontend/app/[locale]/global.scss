@@ -1,21 +1,5 @@
-@tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
-
-  a {
-    @apply text-primary;
-    @apply cursor-pointer;
-  }
-}
 
 @layer utilities {
   .underline-strike-through {

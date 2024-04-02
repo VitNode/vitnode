@@ -1,10 +1,10 @@
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
 
-import { AuthGuards } from "@/utils/guards/auth.guard";
 import { CurrentUser, User } from "@/utils/decorators/user.decorator";
-import { DeleteForumsPostsService } from "./delete.service";
-import { DeletePostsForumsArgs } from "./dto/delete.args";
+import { DeletePostsForumsArgs } from "@/plugins/forum/posts/delete/dto/delete.args";
+import { DeleteForumsPostsService } from "@/plugins/forum/posts/delete/delete.service";
+import { AuthGuards } from "@/utils/guards/auth.guard";
 
 @Resolver()
 export class DeleteForumPostsResolver {

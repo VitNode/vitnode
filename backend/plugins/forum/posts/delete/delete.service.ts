@@ -2,11 +2,11 @@ import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
 
 import { User } from "@/utils/decorators/user.decorator";
+import { forum_posts } from "@/plugins/forum/admin/database/schema/posts";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
-import { NotFoundError } from "@/utils/errors/not-found-error";
+import { DeletePostsForumsArgs } from "@/plugins/forum/posts/delete/dto/delete.args";
 import { DatabaseService } from "@/plugins/database/database.service";
-import { DeletePostsForumsArgs } from "./dto/delete.args";
-import { forum_posts } from "../../admin/database/schema/posts";
+import { NotFoundError } from "@/utils/errors/not-found-error";
 
 @Injectable()
 export class DeleteForumsPostsService {

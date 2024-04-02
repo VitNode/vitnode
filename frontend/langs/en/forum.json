@@ -1,9 +1,16 @@
 {
   "forum": {
+    "admin": {
+      "nav": {
+        "title": "Forum",
+        "forums": "Forums"
+      }
+    },
     "forum": "Forum",
     "by": "By <user></user>, <date></date>",
     "topics_title_count": "{count, plural, =1 {Topic} other {Topics}}",
     "posts_title_count": "{count, plural, =1 {Post} other {Posts}}",
+    "toggle_category": "Toggle category",
     "topics": {
       "not_found": "No topics found in this forum.",
       "username_format": "<user></user>, <group></group>",

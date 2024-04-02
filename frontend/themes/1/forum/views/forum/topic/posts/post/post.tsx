@@ -24,6 +24,7 @@ export const PostTopic = ({
   user
 }: Props) => {
   const t = useTranslations("forum.topics");
+
   return (
     <DivMotion
       key={`post_${id}`}

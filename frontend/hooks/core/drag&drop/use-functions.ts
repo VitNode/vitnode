@@ -3,13 +3,13 @@ import { useState } from "react";
 
 type WithChildren<T extends object> = Omit<T, "children" | "__typename"> & {
   children: WithChildren<T>[];
-  id: number;
+  id: number | string;
 };
 
 export type FlatTree<T extends object> = {
   depth: number;
   index: number;
-  parentId: number | null;
+  parentId: number | string | null;
 } & WithChildren<T>;
 
 export function flattenTree<T extends object>({
@@ -19,7 +19,7 @@ export function flattenTree<T extends object>({
 }: {
   tree: WithChildren<T>[];
   depth?: number;
-  parentId?: number | null;
+  parentId?: number | string | null;
 }): FlatTree<T>[] {
   return tree.reduce<FlatTree<T>[]>((previousValue, currentValue, index) => {
     const children = currentValue.children

@@ -1,4 +1,7 @@
 {
   "overview": "Overview",
-  "components": "Components"
+  "components": "Components",
+  "graphql": "GraphQL",
+  "fetch": "Fetch and Revalidate Data",
+  "forms": "Forms"
 }

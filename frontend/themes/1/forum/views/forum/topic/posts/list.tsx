@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 import type {
   PermissionsPostForums,
   ShowPostsForums,
@@ -13,6 +15,7 @@ interface Props {
   edges: (ShowPostsForums | ShowPostsForumsMetaTags)[];
   id: string;
   className?: string;
+  customMoreMenu?: ReactNode;
 }
 
 export const ListPosts = ({ className, edges, id }: Props) => {
@@ -21,6 +24,7 @@ export const ListPosts = ({ className, edges, id }: Props) => {
     can_edit: true,
     can_delete: true
   };
+
   return (
     <div
       key={`post_list_${id}`}
