@@ -13,6 +13,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import type { PermissionsPostForums } from "@/graphql/hooks";
 import { useDeletePost } from "@/hooks/forum/posts/delete/use-delete-post";
+import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
+import { Suspense, useState } from "react";
+import { Loader } from "@/components/loader";
+import { DialogFooter } from "@/components/ui/dialog";
 
 interface Props {
   id: number;
@@ -30,6 +34,7 @@ export const ActionsPost = ({
   const tCore = useTranslations("core");
   const { deletePost } = useDeletePost({ id: id });
   const editPost = async () => {}; //TODO: implementation
+  const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
 
   if (!can_edit) return null;
   if (!can_delete) return null;
@@ -41,7 +46,6 @@ export const ActionsPost = ({
           <MoreHorizontal />
         </Button>
       </DropdownMenuTrigger>
-
       <DropdownMenuContent className="w-40">
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={editPost}>
@@ -49,12 +53,41 @@ export const ActionsPost = ({
             {tCore("edit")}
           </DropdownMenuItem>
 
-          <DropdownMenuItem onClick={deletePost} className="text-destructive">
+          <DropdownMenuItem
+            onClick={() => setIsOpenDeleteDialog(true)}
+            className="text-destructive"
+          >
             <Trash2 />
             {tCore("delete")}
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
+      <AlertDialog
+        open={isOpenDeleteDialog}
+        onOpenChange={isOpen => setIsOpenDeleteDialog(isOpen)}
+      >
+        <AlertDialogContent>
+          <Suspense fallback={<Loader />}>
+            Are you sure you want to delete the comment?
+            <DialogFooter>
+              <Button
+                onClick={() => setIsOpenDeleteDialog(false)}
+                variant="outline"
+                ariaLabel={tCore("cancel")}
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={deletePost}
+                variant="destructive"
+                ariaLabel={tCore("delete")}
+              >
+                Delete Comment
+              </Button>
+            </DialogFooter>
+          </Suspense>
+        </AlertDialogContent>
+      </AlertDialog>{" "}
     </DropdownMenu>
   );
 };
