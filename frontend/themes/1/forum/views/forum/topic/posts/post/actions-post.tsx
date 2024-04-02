@@ -32,6 +32,7 @@ export const ActionsPost = ({
 }: Props) => {
   const t = useTranslations("forum.topics.actions");
   const tCore = useTranslations("core");
+  const tComment = useTranslations("comment");
   const { deletePost } = useDeletePost({ id: id });
   const editPost = async () => {}; //TODO: implementation
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
@@ -68,26 +69,26 @@ export const ActionsPost = ({
       >
         <AlertDialogContent>
           <Suspense fallback={<Loader />}>
-            Are you sure you want to delete the comment?
+            {tComment("desc")}
             <DialogFooter>
               <Button
                 onClick={() => setIsOpenDeleteDialog(false)}
                 variant="outline"
                 ariaLabel={tCore("cancel")}
               >
-                Cancel
+                {tComment("cancel")}
               </Button>
               <Button
                 onClick={deletePost}
                 variant="destructive"
                 ariaLabel={tCore("delete")}
               >
-                Delete Comment
+                {tComment("delete")}
               </Button>
             </DialogFooter>
           </Suspense>
         </AlertDialogContent>
-      </AlertDialog>{" "}
+      </AlertDialog>
     </DropdownMenu>
   );
 };

@@ -75,5 +75,10 @@
         "submit": "Usuń forum"
       }
     }
+  },
+  "comment": {
+    "cancel": "Anuluj",
+    "delete": "Usuń komentarz",
+    "desc": "Czy jesteś pewien, że chcesz usunąć komentarz?"
   }
 }
