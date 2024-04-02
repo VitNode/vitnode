@@ -24,7 +24,7 @@ export const useCreateNavPluginAdmin = ({ data }: Props) => {
   const formSchema = z.object({
     code: zodInput.string.min(3).max(50),
     icon: z.string(),
-    href: zodInput.string.min(1).max(100)
+    href: zodInput.string.min(1).max(200)
   });
 
   const form = useForm<z.infer<typeof formSchema>>({

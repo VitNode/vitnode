@@ -7,6 +7,11 @@ import { useTextLang } from "@/hooks/core/use-text-lang";
 import { Link, usePathname } from "@/i18n";
 import { cn } from "@/functions/classnames";
 import { Icon } from "@/components/icon/icon";
+import {
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink
+} from "@/components/ui/navigation-menu";
 
 export const ItemNav = ({
   children,
@@ -21,7 +26,7 @@ export const ItemNav = ({
     href === pathname || (pathname.startsWith(href) && href !== "/");
 
   return (
-    <NavigationMenu.Item className="flex-shrink-0">
+    <NavigationMenuItem className="flex-shrink-0">
       <NavigationMenu.Trigger asChild>
         <Link
           href={href}
@@ -40,28 +45,16 @@ export const ItemNav = ({
       </NavigationMenu.Trigger>
 
       {children.length > 0 && (
-        <NavigationMenu.Content
-          className={cn(
-            "absolute top-0 left-0 duration-200 ease-in-out data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 w-[20rem]",
-            {
-              "w-[40rem]": children.length > 3
-            }
-          )}
-        >
-          <ul className="flex gap-2 flex-wrap p-2">
+        <NavigationMenuContent>
+          <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
             {children.map(item => {
               const activeItem =
                 item.href === pathname ||
                 (pathname.startsWith(item.href) && item.href !== "/");
 
               return (
-                <li
-                  key={item.id}
-                  className={cn("flex-1 basis-full", {
-                    "basis-[calc(50%-0.5rem)]": children.length > 3
-                  })}
-                >
-                  <NavigationMenu.Link asChild>
+                <li key={item.id}>
+                  <NavigationMenuLink asChild>
                     <Link
                       href={item.href}
                       className={cn(
@@ -85,13 +78,13 @@ export const ItemNav = ({
                         </p>
                       )}
                     </Link>
-                  </NavigationMenu.Link>
+                  </NavigationMenuLink>
                 </li>
               );
             })}
           </ul>
-        </NavigationMenu.Content>
+        </NavigationMenuContent>
       )}
-    </NavigationMenu.Item>
+    </NavigationMenuItem>
   );
 };

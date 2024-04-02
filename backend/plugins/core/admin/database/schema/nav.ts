@@ -84,7 +84,7 @@ export const core_nav_description = pgTable(
       .references(() => core_languages.code, {
         onDelete: "cascade"
       }),
-    value: varchar("value", { length: 50 }).notNull()
+    value: varchar("value", { length: 200 }).notNull()
   },
   table => ({
     nav_id_idx: index("core_nav_description_nav_id_idx").on(table.nav_id),
