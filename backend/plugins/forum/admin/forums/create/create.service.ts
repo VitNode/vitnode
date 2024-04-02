@@ -40,7 +40,7 @@ export class CreateForumForumsService {
 
     const theMostHighestPosition =
       await this.databaseService.db.query.forum_forums.findFirst({
-        where: (table, { eq }) => eq(table.parent_id, parent_id || null),
+        where: (table, { eq }) => eq(table.parent_id, parent_id),
         orderBy: (table, { desc }) => desc(table.position)
       });
 

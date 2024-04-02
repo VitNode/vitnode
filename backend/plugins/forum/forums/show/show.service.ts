@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { SQL, and, count, eq, ilike, inArray, isNull, or } from "drizzle-orm";
+import { SQL, and, count, eq, ilike, inArray, or } from "drizzle-orm";
 
 import { ShowForumForumsArgs } from "./dto/show.args";
 import {
@@ -125,10 +125,6 @@ export class ShowForumForumsService {
       }
     });
 
-    const whereParent = parent_id
-      ? eq(forum_forums.parent_id, parent_id)
-      : isNull(forum_forums.parent_id);
-
     const idsCondition =
       ids?.length > 0 ? inArray(forum_forums.id, ids) : undefined;
 
@@ -136,7 +132,9 @@ export class ShowForumForumsService {
     const where = and(
       pagination.where,
       whereAccess,
-      show_all_forums ? idsCondition : idsCondition || whereParent,
+      show_all_forums
+        ? idsCondition
+        : idsCondition || eq(forum_forums.parent_id, parent_id ?? 0),
       searchIds.length > 0 ? inArray(forum_forums.id, searchIds) : undefined
     );
 

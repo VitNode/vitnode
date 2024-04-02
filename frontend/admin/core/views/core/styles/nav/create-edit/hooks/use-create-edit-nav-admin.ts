@@ -25,14 +25,14 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
       .array(
         z.object({
           language_code: zodInput.string,
-          value: zodInput.string.min(3).max(50)
+          value: zodInput.string.min(3).max(100)
         })
       )
       .min(1),
     description: z.array(
       z.object({
         language_code: zodInput.string,
-        value: zodInput.string.max(50)
+        value: zodInput.string.max(200)
       })
     ),
     href: zodInput.string.min(1).max(255),

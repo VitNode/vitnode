@@ -300,7 +300,7 @@ export type MutationAdmin__Core_Languages__UpdateArgs = {
 export type MutationAdmin__Core_Nav__Change_PositionArgs = {
   id: Scalars['Int']['input'];
   index_to_move: Scalars['Int']['input'];
-  parent_id?: InputMaybe<Scalars['Int']['input']>;
+  parent_id: Scalars['Int']['input'];
 };
 
 
@@ -457,7 +457,7 @@ export type MutationAdmin__Core_Themes__UploadArgs = {
 export type MutationAdmin__Forum_Forums__Change_PositionArgs = {
   id: Scalars['Int']['input'];
   index_to_move: Scalars['Int']['input'];
-  parent_id?: InputMaybe<Scalars['Int']['input']>;
+  parent_id: Scalars['Int']['input'];
 };
 
 
@@ -1384,7 +1384,7 @@ export type Admin__Core_Staff_Moderators__DeleteMutation = { __typename?: 'Mutat
 export type Admin__Core_Nav__Change_PositionMutationVariables = Exact<{
   id: Scalars['Int']['input'];
   indexToMove: Scalars['Int']['input'];
-  parentId?: InputMaybe<Scalars['Int']['input']>;
+  parentId: Scalars['Int']['input'];
 }>;
 
 
@@ -1617,7 +1617,7 @@ export type Core_Themes__ChangeMutation = { __typename?: 'Mutation', core_themes
 export type Admin__Forum_Forums__Change_PositionMutationVariables = Exact<{
   id: Scalars['Int']['input'];
   indexToMove: Scalars['Int']['input'];
-  parentId?: InputMaybe<Scalars['Int']['input']>;
+  parentId: Scalars['Int']['input'];
 }>;
 
 
@@ -2045,7 +2045,7 @@ export const Admin__Core_Staff_Moderators__Delete = gql`
 }
     `;
 export const Admin__Core_Nav__Change_Position = gql`
-    mutation Admin__core_nav__change_position($id: Int!, $indexToMove: Int!, $parentId: Int) {
+    mutation Admin__core_nav__change_position($id: Int!, $indexToMove: Int!, $parentId: Int!) {
   admin__core_nav__change_position(
     id: $id
     index_to_move: $indexToMove
@@ -2297,7 +2297,7 @@ export const Core_Themes__Change = gql`
 }
     `;
 export const Admin__Forum_Forums__Change_Position = gql`
-    mutation Admin__forum_forums__change_position($id: Int!, $indexToMove: Int!, $parentId: Int) {
+    mutation Admin__forum_forums__change_position($id: Int!, $indexToMove: Int!, $parentId: Int!) {
   admin__forum_forums__change_position(
     id: $id
     index_to_move: $indexToMove
