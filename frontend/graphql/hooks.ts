@@ -243,6 +243,7 @@ export type Mutation = {
 
 
 export type MutationAdmin__Blog_Categories__CreateArgs = {
+  color: Scalars['String']['input'];
   description: Array<TextLanguageInput>;
   name: Array<TextLanguageInput>;
 };
@@ -1565,6 +1566,7 @@ export type Admin__Core_Themes__UploadMutation = { __typename?: 'Mutation', admi
 export type Admin__Blog_Categories__CreateMutationVariables = Exact<{
   description: Array<TextLanguageInput> | TextLanguageInput;
   name: Array<TextLanguageInput> | TextLanguageInput;
+  color: Scalars['String']['input'];
 }>;
 
 
@@ -2238,8 +2240,12 @@ export const Admin__Core_Themes__Upload = gql`
 }
     `;
 export const Admin__Blog_Categories__Create = gql`
-    mutation Admin__blog_categories__create($description: [TextLanguageInput!]!, $name: [TextLanguageInput!]!) {
-  admin__blog_categories__create(description: $description, name: $name) {
+    mutation Admin__blog_categories__create($description: [TextLanguageInput!]!, $name: [TextLanguageInput!]!, $color: String!) {
+  admin__blog_categories__create(
+    description: $description
+    name: $name
+    color: $color
+  ) {
     id
   }
 }

@@ -15,12 +15,13 @@ export class CreateBlogCategoriesService {
   constructor(private databaseService: DatabaseService) {}
 
   async create({
+    color,
     description,
     name
   }: CreatePluginCategoriesArgs): Promise<ShowBlogCategories> {
     const categories = await this.databaseService.db
       .insert(blog_categories)
-      .values({})
+      .values({ color })
       .returning();
 
     const categoryId = categories[0].id;

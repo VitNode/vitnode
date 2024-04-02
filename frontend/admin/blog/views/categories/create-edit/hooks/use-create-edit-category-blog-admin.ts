@@ -22,14 +22,16 @@ export const useCreateEditCategoryBlogAdmin = ({ data }: Args) => {
 
   const formSchema = z.object({
     name: zodInput.languageInput.min(1),
-    description: zodInput.languageInput
+    description: zodInput.languageInput,
+    color: zodInput.string
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: data?.name ?? [],
-      description: data?.description ?? []
+      description: data?.description ?? [],
+      color: ""
     }
   });
 

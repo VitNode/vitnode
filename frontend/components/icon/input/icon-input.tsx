@@ -35,7 +35,7 @@ export const IconInput = forwardRef<HTMLButtonElement, Props>(
         <div className={cn("flex flex-col gap-2", className)}>
           <div className="flex gap-2">
             <PopoverTrigger asChild>
-              <Button variant="outline" ref={ref}>
+              <Button variant="outline" className="w-full max-w-52" ref={ref}>
                 <Plus /> {t("icon_picker.title")}
               </Button>
             </PopoverTrigger>

@@ -15,6 +15,9 @@
           "description": {
             "label": "Description"
           },
+          "color": {
+            "label": "Color"
+          },
           "success": "Category created successfully",
           "submit": "Create Category"
         },

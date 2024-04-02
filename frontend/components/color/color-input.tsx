@@ -38,7 +38,7 @@ export const ColorInput = forwardRef<HTMLButtonElement, Props>(
           <PopoverTrigger asChild>
             <Button
               variant="outline"
-              className={cn("justify-start flex-1", {
+              className={cn("justify-start flex-1 max-w-52", {
                 "text-black": color && isColorBrightness,
                 "text-white": color && !isColorBrightness
               })}
@@ -64,12 +64,11 @@ export const ColorInput = forwardRef<HTMLButtonElement, Props>(
           {color !== null && !disableRemoveColor && (
             <Button
               className="shrink-0"
-              size="icon"
               ariaLabel={t("remove")}
               variant="destructiveGhost"
               onClick={() => setColor(null)}
             >
-              <X />
+              <X /> {t("remove")}
             </Button>
           )}
         </div>

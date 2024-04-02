@@ -11,10 +11,16 @@ import {
 } from "@/components/ui/form";
 import { useCreateEditCategoryBlogAdmin } from "./hooks/use-create-edit-category-blog-admin";
 import { TextLanguageInput } from "@/components/text-language-input";
-import { DialogFooter, DialogHeader } from "@/components/ui/dialog";
+import {
+  DialogDescription,
+  DialogFooter,
+  DialogHeader
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Editor } from "@/components/editor/editor";
 import type { ShowBlogCategories } from "@/graphql/hooks";
+import { useTextLang } from "@/hooks/core/use-text-lang";
+import { ColorInput } from "@/components/color/color-input";
 
 interface Props {
   data?: ShowBlogCategories;
@@ -22,13 +28,16 @@ interface Props {
 
 export const CreateEditCategoryBlogAdmin = ({ data }: Props) => {
   const t = useTranslations("blog.admin.categories");
+  const { convertText } = useTextLang();
   const { form, onSubmit } = useCreateEditCategoryBlogAdmin({ data });
 
   return (
     <>
       <DialogHeader>
         <DialogTitle>{t(data ? "edit.title" : "create.title")}</DialogTitle>
-        {/* {data?.name && <DialogDescription>{data.name}</DialogDescription>} */}
+        {data?.name && (
+          <DialogDescription>{convertText(data.name)}</DialogDescription>
+        )}
       </DialogHeader>
 
       <Form {...form}>
@@ -55,9 +64,23 @@ export const CreateEditCategoryBlogAdmin = ({ data }: Props) => {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("create.description.label")}</FormLabel>
+                <FormLabel optional>{t("create.description.label")}</FormLabel>
                 <FormControl>
                   <Editor id="create_categories_blog" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="color"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel optional>{t("create.color.label")}</FormLabel>
+                <FormControl>
+                  <ColorInput {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
