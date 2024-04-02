@@ -47,7 +47,14 @@
       },
       "post": {
         "placeholder": "Write your reply here...",
-        "submit": "Submit Post"
+        "submit": "Submit Post",
+        "actions": {
+          "delete": {
+            "cancel": "Cancel",
+            "delete": "Delete Comment",
+            "desc": "Are you sure you want to delete the comment?"
+          }
+        }
       }
     },
     "select": {
@@ -75,10 +82,5 @@
         "submit": "Delete Forum"
       }
     }
-  },
-  "comment": {
-    "cancel": "Cancel",
-    "delete": "Delete Comment",
-    "desc": "Are you sure you want to delete the comment?"
   }
 }

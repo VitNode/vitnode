@@ -24,6 +24,11 @@
         "meta": {
           "meta_lock": "<user></user> zablokował ten temat - <date></date>.",
           "meta_unlock": "<user></user> odblokował ten temat - <date></date>."
+        },
+        "delete": {
+          "cancel": "Cancel",
+          "delete": "Delete Comment",
+          "desc": "Are you sure you want to delete the comment?"
         }
       },
       "sorting": {
@@ -47,7 +52,14 @@
       },
       "post": {
         "placeholder": "Napisz odpowiedź tutaj...",
-        "submit": "Dodaj post"
+        "submit": "Dodaj post",
+        "actions": {
+          "delete": {
+            "cancel": "Cancel",
+            "delete": "Delete Comment",
+            "desc": "Are you sure you want to delete the comment?"
+          }
+        }
       }
     },
     "select": {
@@ -75,10 +87,5 @@
         "submit": "Usuń forum"
       }
     }
-  },
-  "comment": {
-    "cancel": "Anuluj",
-    "delete": "Usuń komentarz",
-    "desc": "Czy jesteś pewien, że chcesz usunąć komentarz?"
   }
 }

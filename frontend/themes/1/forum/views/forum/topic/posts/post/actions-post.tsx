@@ -1,7 +1,8 @@
 "use client";
 
-import { MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -12,11 +13,7 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import type { PermissionsPostForums } from "@/graphql/hooks";
-import { useDeletePost } from "@/hooks/forum/posts/delete/use-delete-post";
-import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
-import { Suspense, useState } from "react";
-import { Loader } from "@/components/loader";
-import { DialogFooter } from "@/components/ui/dialog";
+import { DeleteCommentModal } from "./delete-comment-modal";
 
 interface Props {
   id: number;
@@ -32,10 +29,8 @@ export const ActionsPost = ({
 }: Props) => {
   const t = useTranslations("forum.topics.actions");
   const tCore = useTranslations("core");
-  const tComment = useTranslations("comment");
-  const { deletePost } = useDeletePost({ id: id });
   const editPost = async () => {}; //TODO: implementation
-  const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
+  const [isPending, setPending] = useState(false);
 
   if (!can_edit) return null;
   if (!can_delete) return null;
@@ -55,7 +50,7 @@ export const ActionsPost = ({
           </DropdownMenuItem>
 
           <DropdownMenuItem
-            onClick={() => setIsOpenDeleteDialog(true)}
+            onClick={() => setPending(true)}
             className="text-destructive"
           >
             <Trash2 />
@@ -63,32 +58,7 @@ export const ActionsPost = ({
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
-      <AlertDialog
-        open={isOpenDeleteDialog}
-        onOpenChange={isOpen => setIsOpenDeleteDialog(isOpen)}
-      >
-        <AlertDialogContent>
-          <Suspense fallback={<Loader />}>
-            {tComment("desc")}
-            <DialogFooter>
-              <Button
-                onClick={() => setIsOpenDeleteDialog(false)}
-                variant="outline"
-                ariaLabel={tCore("cancel")}
-              >
-                {tComment("cancel")}
-              </Button>
-              <Button
-                onClick={deletePost}
-                variant="destructive"
-                ariaLabel={tCore("delete")}
-              >
-                {tComment("delete")}
-              </Button>
-            </DialogFooter>
-          </Suspense>
-        </AlertDialogContent>
-      </AlertDialog>
+      <DeleteCommentModal open={isPending} setOpen={setPending} id={id} />
     </DropdownMenu>
   );
 };
