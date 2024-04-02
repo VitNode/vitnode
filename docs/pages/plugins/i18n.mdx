@@ -1,17 +1,123 @@
 import { Steps } from "nextra/components";
 import { Callout } from "nextra/components";
+import { Tabs } from "nextra/components";
 
 # Internationalization (i18n)
 
-Create a new multilanguage input in backend maight be a bit tricky, because VitNode dosn't provide any functions for that. But don't worry, it's not that hard. You have to follow few rules and you will be fine.
+VitNode uses not only native i18n from [next-intl](https://next-intl-docs.vercel.app/), but also dynamic translations from database. It gives your full control for your translations without restart your server.
 
-## Database schema
+## Static Translations
 
-For exaple we use `core_nav` table.
+Static translations are translations that are stored in the code. It's useful when you want to have translations that are always the same.
 
 <Steps>
 
-### Create main table
+### Create JSON file
+
+**Only first time!**
+
+Create a `JSON` file for your plugin _(if you don't have)_ in `frontend/locale/en/{plugin_code}.json`. For example `frontend/locale/en/blog.json`.
+
+### Define translations
+
+Define translations inside `{plugin_key}` object. For example in `blog` plugin:
+
+✅ Correct:
+
+```json
+{
+  "blog": {
+    "title": "Blog",
+    "actions": {
+      "create": "Create post"
+    }
+  }
+}
+```
+
+❌ Incorrect:
+
+```json
+{
+  "title": "Blog",
+  "actions": {
+    "create": "Create post"
+  }
+}
+```
+
+❌ Incorrect:
+
+```json
+{
+  "blog.title": "Blog",
+  "blog.actions.create": "Create post"
+}
+```
+
+❌ Incorrect:
+
+```json
+{
+  "blog": {
+    "title": "Blog"
+  },
+  "actions": {
+    "create": "Create post"
+  }
+}
+```
+
+<Callout type="warning" emoji="⚠️">
+  All your translations should be from your plugin key. You can use translations
+  only from `core.sjon` and `admin.json` plugin.
+</Callout>
+
+### Use translations
+
+<Tabs items={['Function Component', 'Async Function Component']}>
+  <Tabs.Tab>
+
+```tsx {1, 4, 6}
+import { useTranslations } from "next-intl";
+
+export const CategoriesBlogAdminView = () => {
+  const t = useTranslations("blog.admin.categories");
+
+  return <div>{t("title")}</div>;
+};
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+
+```tsx {1, 3, 6}
+import { getTranslations } from "next-intl/server";
+
+export default async function Page() {
+  const t = await getTranslations("blog");
+
+  return <div>{t("title")}</div>;
+}
+```
+
+  </Tabs.Tab>
+
+</Tabs>
+
+You can find more about [Rendering i18n messages from next-intl](https://next-intl-docs.vercel.app/docs/usage/messages) in their documentation.
+
+</Steps>
+
+## Dynamic Translations (Backend)
+
+Dynamic translations are translations that are stored in the database. It's useful when you want to change translations without restarting the server.
+
+As an example we will create a simple `core_nav` with translations.
+
+<Steps>
+
+### Create database schema
 
 Create a schema `core_nav` in `database` folder.
 
@@ -64,7 +170,7 @@ export const core_nav_name = pgTable(
 
 Remember to set `onDelete: 'cascade'` action into references and set `indexes` for best performerce. We want to delete translation when we delete main table.
 
-### Relation
+## Relation
 
 Add relation to main table.
 
@@ -76,15 +182,11 @@ export const core_nav_relations = relations(core_nav, ({ many }) => ({
 
 You can read more about [relations using Drizzle here](https://orm.drizzle.team/docs/rqb).
 
-</Steps>
-
-## Input field mutation
+### Input field mutation (Args)
 
 For your mutation we're created for you a new type `TextLanguageInput`.
 
-Here is a code for example:
-
-```ts
+```ts {5-9, 13-17}
 import { ArgsType, Field } from "@nestjs/graphql";
 import { IsArray } from "class-validator";
 import { Transform } from "class-transformer";
@@ -105,9 +207,9 @@ export class CreateAdminNavArgs {
 }
 ```
 
-If you want to change this field to `required`, you have to add some decorators form `class-validator`.
+If you want to change this field to `required`, you have to add some decorators form `class-validator` like `ArrayMinSize` and `ValidateNested`.
 
-```ts {2, 13-19}
+```ts {2, 14-15}
 import { ArgsType, Field } from "@nestjs/graphql";
 import { ArrayMinSize, IsArray, ValidateNested } from "class-validator";
 import { Transform } from "class-transformer";
@@ -130,31 +232,25 @@ export class CreateAdminNavArgs {
 }
 ```
 
-## Object field mutation
+### Object field mutation (Obj)
 
 For your mutation we're created for you a new type `TextLanguage`.
 
-Here is a code for example:
+```ts {3, 7-8}
+import { Field, ObjectType } from "@nestjs/graphql";
 
-```ts
-import { Field, ObjectType } from '@nestjs/graphql';
-
-import { TextLanguage } from '@/types/database/text-language.type';
+import { TextLanguage } from "@/types/database/text-language.type";
 
 @ObjectType()
 class ShowCoreNavItem {
   @Field(() => [TextLanguage])
   name: TextLanguage[];
-
-  ...
 }
 ```
 
 ## Create Mutation
 
 Now let's create a mutation for adding new record to database with translations.
-
-<Steps>
 
 ### Create record
 
@@ -208,8 +304,6 @@ const descriptionNav =
     : [];
 ```
 
-</Steps>
-
 ## Update Mutation
 
 In this case update data is a bit different.
@@ -227,22 +321,20 @@ It may sound complicated, but it's not. We will show you how to do it.
   exist, you have to throw an error.
 </Callout>
 
-<Steps>
-
-### Get translation
+### Get all translations
 
 ```ts
-const names = await this.databaseService.db.query.core_nav_name.findMany({
+const items = await this.databaseService.db.query.core_nav_name.findMany({
   where: (table, { eq }) => eq(table.nav_id, id)
 });
 ```
 
-### Process data
+### Update data
 
 ```ts
 const update = await Promise.all(
-  name.map(async item => {
-    const itemExist = names.find(el => el.language_code === item.language_code);
+  languageItemsArrayFromArgs.map(async item => {
+    const itemExist = items.find(el => el.language_code === item.language_code);
 
     if (itemExist) {
       // If value is empty, do nothing
@@ -271,7 +363,7 @@ const update = await Promise.all(
 
 ```ts
 Promise.all(
-  names.map(async item => {
+  items.map(async item => {
     const exist = update.find(name => name.id === item.id);
     if (exist) return;
 
@@ -282,12 +374,158 @@ Promise.all(
 );
 ```
 
-</Steps>
-
 ## Delete Mutation
 
 If you add `onDelete: Cascade` action to relation, you don't have to do anything. When you delete main record, all translations will be deleted.
 
-## Frontend
+</Steps>
 
-Backend is ready? Great! Now let's move to [frontend](/frontend/i18n).
+## Dynamic Translations (Frontend)
+
+Each dynamic translations are stored in database like this:
+
+```ts
+[
+  {
+    language_code: "en",
+    value: "Hello world"
+  },
+  {
+    language_code: "pl",
+    value: "Witaj świecie"
+  }
+];
+```
+
+### Display text
+
+To display text you can use `useTextLang` hook.
+
+```tsx
+import { useTextLang } from "@/hooks/core/use-text-lang";
+
+const TestComponent = () => {
+  const { convertText } = useTextLang();
+
+  return <div>{convertText(value)}</div>;
+};
+```
+
+`value` is `TextLanguage[]` interface form `GraphQL backend`.
+
+### Form
+
+Create form with translations is very similar to normal [Forms](/themes/forms).
+
+<Steps>
+
+### Define schema
+
+```ts
+import * as z from "zod";
+
+import { zodInput } from "@/functions/zod";
+
+const formSchema = z.object({
+  name: zodInput.languageInput
+});
+```
+
+Or you can set `maxLength` for each translation:
+
+```ts
+const formSchema = z.object({
+  content: zodInput.languageInput
+    .min(1, {
+      message: t("errors.required")
+    })
+    .refine(value => value.every(item => item.value.length <= 100), {
+      message: t("errors.max_length", { length: 100 })
+    })
+});
+```
+
+We're using `zodInput.languageInput` instead of `z.string` to add more functions to validate translations.
+
+### Set initial values
+
+```ts {7}
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const form = useForm<z.infer<typeof formSchema>>({
+  resolver: zodResolver(formSchema),
+  defaultValues: {
+    name: []
+  }
+});
+```
+
+### Choose input
+
+<Tabs items={['Text Input', 'Editor']}>
+  <Tabs.Tab>
+
+```tsx {1, 14}
+import { TextLanguageInput } from "@/components/text-language-input";
+
+const SimpleForm = () => {
+  return (
+    <>
+      ...
+      <FormField
+        control={form.control}
+        name="name"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>{t("name.label")}</FormLabel>
+            <FormControl>
+              <TextLanguageInput {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      ...
+    </>
+  );
+};
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+
+```tsx {1, 14}
+import { Editor } from "@/components/editor/editor";
+
+const SimpleForm = () => {
+  return (
+    <>
+      ...
+      <FormField
+        control={form.control}
+        name="name"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>{t("name.label")}</FormLabel>
+            <FormControl>
+              <Editor id="create_name" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      ...
+    </>
+  );
+};
+```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Submit form
+
+Now submit form like normal form.
+
+</Steps>
