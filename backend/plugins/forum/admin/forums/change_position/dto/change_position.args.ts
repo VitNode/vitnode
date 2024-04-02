@@ -8,6 +8,6 @@ export class ChangePositionForumForumsArgs {
   @Field(() => Int)
   index_to_move: number;
 
-  @Field(() => Int, { nullable: true })
-  parent_id: number | null;
+  @Field(() => Int)
+  parent_id: number;
 }

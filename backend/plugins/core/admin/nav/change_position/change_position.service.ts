@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { eq, isNull } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 import { ChangePositionAdminNavArgs } from "./dto/change_position.args";
 
@@ -26,10 +26,7 @@ export class ChangePositionAdminNavService {
 
     const allChildrenParent =
       await this.databaseService.db.query.core_nav.findMany({
-        where: (table, { eq }) =>
-          parent_id === null
-            ? isNull(table.parent_id)
-            : eq(table.parent_id, parent_id),
+        where: (table, { eq }) => eq(table.parent_id, parent_id),
         orderBy: (table, { asc }) => asc(table.position)
       });
 

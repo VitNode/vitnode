@@ -34,5 +34,5 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "tailwind.config.js", "postcss.config.js", "next.config.js"]
+  "exclude": ["node_modules", "postcss.config.js", "next.config.js"]
 }

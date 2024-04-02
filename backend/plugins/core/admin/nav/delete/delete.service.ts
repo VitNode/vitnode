@@ -20,10 +20,10 @@ export class DeleteAdminNavService {
       throw new NotFoundError("Nav");
     }
 
-    // Update parent_id to null
+    // Update parent_id to 0
     await this.databaseService.db
       .update(core_nav)
-      .set({ parent_id: null })
+      .set({ parent_id: 0 })
       .where(eq(core_nav.parent_id, id));
 
     // Delete nav

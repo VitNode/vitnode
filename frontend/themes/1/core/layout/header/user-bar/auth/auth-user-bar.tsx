@@ -30,7 +30,7 @@ export const AuthUserBar = () => {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="sm:flex hidden rounded-full"
+          className="sm:flex hidden rounded-full flex-shrink-0"
           size="icon"
           ariaLabel=""
         >

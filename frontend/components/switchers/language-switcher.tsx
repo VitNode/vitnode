@@ -37,7 +37,7 @@ export const LanguageSwitcher = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="outline"
+          variant="ghost"
           size="icon"
           ariaLabel={t("user-bar.language.change")}
         >

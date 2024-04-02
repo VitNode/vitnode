@@ -21,7 +21,7 @@ export const DarkLightModeSwitcher = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="outline"
+          variant="ghost"
           size="icon"
           className="relative"
           ariaLabel={t("user-bar.dark_light_switcher.toggle")}
