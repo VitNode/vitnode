@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { eq, isNull } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 import { ChangePositionAdminNavArgs } from "./dto/change_position.args";
 

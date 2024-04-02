@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { and, count, eq, isNull } from "drizzle-orm";
+import { and, count, eq } from "drizzle-orm";
 
 import { ShowCoreNavArgs } from "./dto/show.args";
 import { ShowCoreNavObj } from "./dto/show.obj";
