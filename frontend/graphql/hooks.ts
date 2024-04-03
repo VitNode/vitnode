@@ -236,6 +236,7 @@ export type Mutation = {
   core_sessions__sign_out: Scalars['String']['output'];
   core_themes__change: Scalars['String']['output'];
   forum_posts__create: ShowPostsForums;
+  forum_posts__delete: Scalars['String']['output'];
   forum_topics__actions__lock_toggle: Scalars['Boolean']['output'];
   forum_topics__create: ShowTopicsForums;
   forum_topics__edit: ShowTopicsForums;
@@ -524,6 +525,11 @@ export type MutationCore_Themes__ChangeArgs = {
 export type MutationForum_Posts__CreateArgs = {
   content: Array<TextLanguageInput>;
   topic_id: Scalars['Int']['input'];
+};
+
+
+export type MutationForum_Posts__DeleteArgs = {
+  id: Scalars['Int']['input'];
 };
 
 
@@ -1672,6 +1678,13 @@ export type Forum_Posts__CreateMutationVariables = Exact<{
 
 export type Forum_Posts__CreateMutation = { __typename?: 'Mutation', forum_posts__create: { __typename?: 'ShowPostsForums', created: Date, id: number, content: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, user: { __typename?: 'User', avatar_color: string, id: number, name: string, name_seo: string, avatar?: { __typename?: 'AvatarUser', dir_folder: string, id: number, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } } };
 
+export type Forum_Posts__DeleteMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type Forum_Posts__DeleteMutation = { __typename?: 'Mutation', forum_posts__delete: string };
+
 export type Forum_Topics__Actions__Lock_ToggleMutationVariables = Exact<{
   id: Scalars['Int']['input'];
 }>;
@@ -2412,6 +2425,11 @@ export const Forum_Posts__Create = gql`
       name_seo
     }
   }
+}
+    `;
+export const Forum_Posts__Delete = gql`
+    mutation Forum_posts__delete($id: Int!) {
+  forum_posts__delete(id: $id)
 }
     `;
 export const Forum_Topics__Actions__Lock_Toggle = gql`
