@@ -481,6 +481,7 @@ enum ShowAdminThemesSortingColumnEnum {
 }
 
 type ShowBlogCategories {
+  color: String!
   description: [TextLanguage!]
   id: Int!
   name: [TextLanguage!]!

@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { Suspense, lazy, useState } from "react";
 
 import {
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle
@@ -50,11 +51,10 @@ export const CreateEditForumAdmin = ({ data }: CreateEditForumAdminProps) => {
   return (
     <>
       <DialogHeader>
-        <DialogTitle>
-          {data
-            ? t("edit_title", { name: convertText(data.name) })
-            : t("create_title")}
-        </DialogTitle>
+        <DialogTitle>{data ? t("edit_title") : t("create_title")}</DialogTitle>
+        {data && (
+          <DialogDescription>{convertText(data.name)}</DialogDescription>
+        )}
       </DialogHeader>
 
       <Tabs>

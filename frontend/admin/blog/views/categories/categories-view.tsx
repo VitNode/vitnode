@@ -1,11 +1,30 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { CreateCategoryBlogAdmin } from "./actions/create";
+import { TableCategoriesCategoryAdmin } from "./table/table";
+import { fetcher } from "@/graphql/fetcher";
+import {
+  Admin_Blog_Categories__Show,
+  type Admin_Blog_Categories__ShowQuery,
+  type Admin_Blog_Categories__ShowQueryVariables
+} from "@/graphql/hooks";
 
-export const CategoriesBlogAdminView = () => {
-  const t = useTranslations("blog.admin.categories");
+const getData = async () => {
+  const { data } = await fetcher<
+    Admin_Blog_Categories__ShowQuery,
+    Admin_Blog_Categories__ShowQueryVariables
+  >({
+    query: Admin_Blog_Categories__Show
+  });
+
+  return data;
+};
+
+export const CategoriesBlogAdminView = async () => {
+  const t = await getTranslations("blog.admin.categories");
+  const data = await getData();
 
   return (
     <Card>
@@ -16,7 +35,7 @@ export const CategoriesBlogAdminView = () => {
       </CardHeader>
 
       <CardContent>
-        Hi from blog page for categories, but from template!
+        <TableCategoriesCategoryAdmin {...data} />
       </CardContent>
     </Card>
   );

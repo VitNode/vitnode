@@ -6,7 +6,7 @@ import { Loader } from "@/components/loader";
 import type { Admin__Forum_Forums__ShowQuery } from "@/graphql/hooks";
 import type { ShowForumForumsAdminWithChildren } from "./hooks/use-forum-forums-admin-api";
 
-const ContentTableForumsForumAdmin = lazy(() =>
+const Content = lazy(() =>
   import("./content-table").then(module => ({
     default: module.ContentTableForumsForumAdmin
   }))
@@ -25,7 +25,7 @@ export const TableForumsForumAdmin = ({
 
   return (
     <Suspense fallback={<Loader />}>
-      <ContentTableForumsForumAdmin initData={initData} />
+      <Content initData={initData} />
     </Suspense>
   );
 };

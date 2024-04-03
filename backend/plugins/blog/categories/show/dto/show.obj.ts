@@ -16,6 +16,9 @@ export class ShowBlogCategories {
 
   @Field(() => Int)
   position: number;
+
+  @Field(() => String)
+  color: string;
 }
 
 @ObjectType()
