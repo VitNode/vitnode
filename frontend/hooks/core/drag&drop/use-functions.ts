@@ -5,7 +5,7 @@ import type {
   DragStartEvent,
   UniqueIdentifier
 } from "@dnd-kit/core";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { arrayMove } from "@dnd-kit/sortable";
 
 import { useProjection } from "./use-projection";
@@ -109,7 +109,11 @@ export function buildTree<T extends object>({
   return tree.filter(item => !item.parentId);
 }
 
-export const useDragAndDrop = () => {
+interface Args<T extends object> {
+  data: WithChildren<T>[];
+}
+
+export function useDragAndDrop<T extends object>({ data }: Args<T>) {
   const [isOpenChildren, setIsOpenChildren] = useState<UniqueIdentifier[]>([]);
   const {
     activeId,
@@ -121,6 +125,12 @@ export const useDragAndDrop = () => {
     setProjected,
     ...rest
   } = useProjection();
+  const flattenedItems = flattItems({ data });
+  const activeItem = flattenedItems.find(i => i.id === activeId);
+  const sortedIds = useMemo(
+    () => flattenedItems.map(({ id }) => id),
+    [flattenedItems]
+  );
 
   // DndKit doesn't support nested sortable, so we need to flatten the data in one array
   function flattItems<T extends WithChildren<T>>({ data }: { data: T[] }) {
@@ -273,26 +283,23 @@ export const useDragAndDrop = () => {
       isDropHere: projected?.parentId === data.id,
       active: activeId === data.id,
       depth:
-        activeId === data.id && projected?.parentId
-          ? projected?.depth
-          : data.depth ?? 0,
+        (activeId === data.id && projected ? projected?.depth : data.depth) ??
+        0,
       indentationWidth,
       id: data.id
     };
   };
 
   return {
-    flattItems,
-    isOpenChildren,
-    setIsOpenChildren,
-    activeId,
     resetState,
     onDragOver,
     onDragStart,
-    projected,
     onDragMove,
     onDragEnd,
     actionsItemDragAndDrop,
+    flattenedItems,
+    activeItemOverlay: activeId !== null && activeItem,
+    sortedIds,
     ...rest
   };
-};
+}

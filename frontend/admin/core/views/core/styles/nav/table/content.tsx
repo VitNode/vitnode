@@ -3,7 +3,7 @@ import {
   SortableContext,
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { ItemContentTableContentNavAdmin } from "./item";
@@ -22,17 +22,20 @@ export const ContentTableContentNavAdmin = ({
 
   const {
     actionsItemDragAndDrop,
-    activeId,
-    flattItems,
-    isOpenChildren,
+    activeItemOverlay,
+    flattenedItems,
     onDragEnd,
     onDragMove,
     onDragOver,
     onDragStart,
-    projected,
     resetState,
-    setIsOpenChildren
-  } = useDragAndDrop();
+    sortedIds
+  } = useDragAndDrop<Omit<ShowCoreNav, "__typename">>({
+    data: data.map(item => ({
+      ...item,
+      children: item.children.map(child => ({ ...child, children: [] }))
+    }))
+  });
 
   // Revalidate items when edges change
   useEffect(() => {
@@ -40,18 +43,6 @@ export const ContentTableContentNavAdmin = ({
 
     setData(edges);
   }, [edges]);
-
-  const flattenedItems = flattItems({
-    data: data.map(item => ({
-      ...item,
-      children: item.children.map(child => ({ ...child, children: [] }))
-    }))
-  });
-  const activeItem = flattenedItems.find(i => i.id === activeId);
-  const sortedIds = useMemo(
-    () => flattenedItems.map(({ id }) => id),
-    [flattenedItems]
-  );
 
   if (!data || data.length === 0) {
     return <div className="text-center">{t("no_results")}</div>;
@@ -95,15 +86,17 @@ export const ContentTableContentNavAdmin = ({
           </ItemDragAndDrop>
         ))}
 
-        {/* <DragOverlay>
-          {activeId !== null && activeItem && (
-            <ItemContentTableContentNavAdmin
-              indentationWidth={indentationWidth}
-              overlay
-              {...activeItem}
-            />
+        <DragOverlay>
+          {activeItemOverlay && (
+            <ItemDragAndDrop
+              {...actionsItemDragAndDrop({
+                data: activeItemOverlay
+              })}
+            >
+              <ItemContentTableContentNavAdmin data={activeItemOverlay} />
+            </ItemDragAndDrop>
           )}
-        </DragOverlay> */}
+        </DragOverlay>
       </SortableContext>
     </DndContext>
   );

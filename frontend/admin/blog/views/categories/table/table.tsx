@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { DndContext, closestCorners } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -23,22 +23,16 @@ export const TableCategoriesCategoryAdmin = ({
   const [data, setData] = useState<ShowBlogCategories[]>(edges);
   const {
     actionsItemDragAndDrop,
-    activeId,
-    flattItems,
+    flattenedItems,
     onDragEnd,
     onDragMove,
     onDragOver,
     onDragStart,
-    projected,
-    resetState
-  } = useDragAndDrop();
-  const flattenedItems = flattItems({
+    resetState,
+    sortedIds
+  } = useDragAndDrop<ShowBlogCategories>({
     data: data.map(item => ({ ...item, children: [] }))
   });
-  const sortedIds = useMemo(
-    () => flattenedItems.map(({ id }) => id),
-    [flattenedItems]
-  );
 
   if (!data || data.length === 0) {
     return <div className="text-center">{t("no_results")}</div>;

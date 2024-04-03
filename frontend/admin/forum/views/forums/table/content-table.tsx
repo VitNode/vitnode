@@ -1,9 +1,18 @@
-import { DndContext, closestCorners, DragOverlay } from "@dnd-kit/core";
+import {
+  DndContext,
+  closestCorners,
+  DragOverlay,
+  MeasuringStrategy,
+  useSensors,
+  useSensor,
+  PointerSensor,
+  KeyboardSensor
+} from "@dnd-kit/core";
 import {
   SortableContext,
+  sortableKeyboardCoordinates,
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
-import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 
 import { ItemTableForumsForumAdmin } from "./item/item";
@@ -28,23 +37,20 @@ export const ContentTableForumsForumAdmin = ({
   const { data, setData, updateData } = useForumForumsAdminAPI({ initData });
   const {
     actionsItemDragAndDrop,
-    activeId,
-    flattItems,
-    isOpenChildren,
+    activeItemOverlay,
+    flattenedItems,
     onDragEnd,
     onDragMove,
     onDragOver,
     onDragStart,
-    projected,
     resetState,
-    setIsOpenChildren
-  } = useDragAndDrop();
-
-  const flattenedItems = flattItems({ data });
-  const activeItem = flattenedItems.find(i => i.id === activeId);
-  const sortedIds = useMemo(
-    () => flattenedItems.map(({ id }) => id),
-    [flattenedItems]
+    sortedIds
+  } = useDragAndDrop<ShowForumForumsAdminWithChildren>({ data });
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates
+    })
   );
 
   if (!data || data.length === 0) {
@@ -54,6 +60,12 @@ export const ContentTableForumsForumAdmin = ({
   return (
     <DndContext
       collisionDetection={closestCorners}
+      sensors={sensors}
+      measuring={{
+        droppable: {
+          strategy: MeasuringStrategy.Always
+        }
+      }}
       onDragCancel={resetState}
       onDragOver={onDragOver}
       onDragMove={e => onDragMove({ ...e, flattenedItems, indentationWidth })}
@@ -91,15 +103,17 @@ export const ContentTableForumsForumAdmin = ({
           </ItemDragAndDrop>
         ))}
 
-        {/* <DragOverlay>
-          {activeId !== null && activeItem && (
-            <ItemTableForumsForumAdmin
-              indentationWidth={indentationWidth}
-              overlay
-              {...activeItem}
-            />
+        <DragOverlay>
+          {activeItemOverlay && (
+            <ItemDragAndDrop
+              {...actionsItemDragAndDrop({
+                data: activeItemOverlay
+              })}
+            >
+              <ItemTableForumsForumAdmin data={activeItemOverlay} />
+            </ItemDragAndDrop>
           )}
-        </DragOverlay> */}
+        </DragOverlay>
       </SortableContext>
     </DndContext>
   );

@@ -4,7 +4,7 @@ import {
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { useTranslations } from "next-intl";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
 import type {
@@ -22,15 +22,17 @@ export const ContentTableNavDevPluginAdmin = ({
   const [data, setData] = useState<ShowAdminNavPluginsObj[]>(edges);
   const {
     actionsItemDragAndDrop,
-    activeId,
-    flattItems,
+    activeItemOverlay,
+    flattenedItems,
     onDragEnd,
     onDragMove,
     onDragOver,
     onDragStart,
-    projected,
-    resetState
-  } = useDragAndDrop();
+    resetState,
+    sortedIds
+  } = useDragAndDrop<ShowAdminNavPluginsObj>({
+    data: data.map(item => ({ ...item, children: [] }))
+  });
 
   // Revalidate items when edges change
   useEffect(() => {
@@ -38,15 +40,6 @@ export const ContentTableNavDevPluginAdmin = ({
 
     setData(edges);
   }, [edges]);
-
-  const flattenedItems = flattItems({
-    data: data.map(item => ({ ...item, children: [] }))
-  });
-  const activeItem = flattenedItems.find(i => i.id === activeId);
-  const sortedIds = useMemo(
-    () => flattenedItems.map(({ id }) => id),
-    [flattenedItems]
-  );
 
   if (!data || data.length === 0) {
     return <div className="text-center">{t("no_results")}</div>;
@@ -83,11 +76,17 @@ export const ContentTableNavDevPluginAdmin = ({
           </ItemDragAndDrop>
         ))}
 
-        {/* <DragOverlay>
-          {activeId !== null && activeItem && (
-            <ItemContentTableNavDevPluginAdmin {...activeItem} />
+        <DragOverlay>
+          {activeItemOverlay && (
+            <ItemDragAndDrop
+              {...actionsItemDragAndDrop({
+                data: activeItemOverlay
+              })}
+            >
+              <ItemContentTableNavDevPluginAdmin data={activeItemOverlay} />
+            </ItemDragAndDrop>
           )}
-        </DragOverlay> */}
+        </DragOverlay>
       </SortableContext>
     </DndContext>
   );

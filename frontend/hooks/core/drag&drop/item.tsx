@@ -16,7 +16,6 @@ interface Props {
   depth?: number;
   indentationWidth?: number;
   isOpenChildren?: boolean;
-  overlay?: boolean;
 }
 
 export const ItemDragAndDrop = ({
@@ -28,8 +27,7 @@ export const ItemDragAndDrop = ({
   indentationWidth = 0,
   isDropHere,
   isOpenChildren,
-  onCollapse,
-  overlay
+  onCollapse
 }: Props) => {
   const {
     attributes,
@@ -50,9 +48,7 @@ export const ItemDragAndDrop = ({
   return (
     <div
       ref={setDroppableNodeRef}
-      className={cn({
-        "pl-[var(--spacing)]": !overlay
-      })}
+      className={"pl-[var(--spacing)]"}
       style={
         {
           "--spacing": `${indentationWidth * depth}px`
