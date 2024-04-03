@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import type { PermissionsPostForums } from "@/graphql/hooks";
-import { DeleteCommentModal } from "./delete-comment-modal";
+import { Delete } from "./delete";
 
 interface Props {
   id: number;
@@ -58,7 +58,7 @@ export const ActionsPost = ({
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
-      <DeleteCommentModal open={isPending} setOpen={setPending} id={id} />
+      <Delete open={isPending} setOpen={setPending} id={id} />
     </DropdownMenu>
   );
 };
