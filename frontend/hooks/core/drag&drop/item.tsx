@@ -1,6 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Menu } from "lucide-react";
+import { ChevronRight, Menu } from "lucide-react";
 import type { CSSProperties, ReactNode } from "react";
 
 import { cn } from "@/functions/classnames";
@@ -11,18 +11,24 @@ interface Props {
   children: ReactNode;
   id: number;
   isDropHere: boolean;
+  onCollapse: () => void;
+  childrenLength?: number;
   depth?: number;
   indentationWidth?: number;
+  isOpenChildren?: boolean;
   overlay?: boolean;
 }
 
 export const ItemDragAndDrop = ({
   active,
   children,
+  childrenLength,
   depth = 0,
   id,
   indentationWidth = 0,
   isDropHere,
+  isOpenChildren,
+  onCollapse,
   overlay
 }: Props) => {
   const {
@@ -38,6 +44,8 @@ export const ItemDragAndDrop = ({
     animateLayoutChanges: ({ isSorting, wasDragging }) =>
       !(isSorting || wasDragging)
   });
+
+  const allowOpenChildren = !!(childrenLength && onCollapse);
 
   return (
     <div
@@ -76,6 +84,16 @@ export const ItemDragAndDrop = ({
         >
           <Menu />
         </Button>
+
+        {allowOpenChildren && (
+          <Button onClick={onCollapse} variant="ghost" size="icon" ariaLabel="">
+            <ChevronRight
+              className={cn("transition-transform text-muted-foreground", {
+                "rotate-90": isOpenChildren
+              })}
+            />
+          </Button>
+        )}
 
         {children}
       </div>

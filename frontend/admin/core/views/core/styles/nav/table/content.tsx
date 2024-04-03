@@ -1,16 +1,6 @@
-import {
-  DndContext,
-  KeyboardSensor,
-  PointerSensor,
-  closestCorners,
-  useSensor,
-  useSensors,
-  MeasuringStrategy,
-  DragOverlay
-} from "@dnd-kit/core";
+import { DndContext, closestCorners, DragOverlay } from "@dnd-kit/core";
 import {
   SortableContext,
-  sortableKeyboardCoordinates,
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { useEffect, useMemo, useState } from "react";
@@ -20,6 +10,7 @@ import { ItemContentTableContentNavAdmin } from "./item";
 import type { Admin__Core_Nav__ShowQuery, ShowCoreNav } from "@/graphql/hooks";
 import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
 import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
+import { ItemDragAndDrop } from "@/hooks/core/drag&drop/item";
 
 const indentationWidth = 20;
 
@@ -30,6 +21,7 @@ export const ContentTableContentNavAdmin = ({
   const [data, setData] = useState<Omit<ShowCoreNav, "__typename">[]>(edges);
 
   const {
+    actionsItemDragAndDrop,
     activeId,
     flattItems,
     isOpenChildren,
@@ -49,13 +41,6 @@ export const ContentTableContentNavAdmin = ({
     setData(edges);
   }, [edges]);
 
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates
-    })
-  );
-
   const flattenedItems = flattItems({
     data: data.map(item => ({
       ...item,
@@ -74,13 +59,7 @@ export const ContentTableContentNavAdmin = ({
 
   return (
     <DndContext
-      sensors={sensors}
       collisionDetection={closestCorners}
-      measuring={{
-        droppable: {
-          strategy: MeasuringStrategy.Always
-        }
-      }}
       onDragCancel={resetState}
       onDragOver={onDragOver}
       onDragMove={e =>
@@ -104,33 +83,19 @@ export const ContentTableContentNavAdmin = ({
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
         {flattenedItems.map(item => (
-          <ItemContentTableContentNavAdmin
+          <ItemDragAndDrop
             key={item.id}
-            indentationWidth={indentationWidth}
-            onCollapse={id => {
-              const isOpen = isOpenChildren.includes(id);
-
-              setIsOpenChildren(prev => {
-                if (isOpen) {
-                  return prev.filter(i => i !== id);
-                }
-
-                return [...prev, id];
-              });
-            }}
-            isOpenChildren={isOpenChildren.includes(item.id)}
-            isDropHere={projected?.parentId === item.id}
-            active={activeId === item.id}
-            {...item}
-            depth={
-              activeId === item.id && projected?.parentId
-                ? projected?.depth
-                : item.depth
-            }
-          />
+            childrenLength={item.children.length}
+            {...actionsItemDragAndDrop({
+              data: item,
+              indentationWidth
+            })}
+          >
+            <ItemContentTableContentNavAdmin data={item} />
+          </ItemDragAndDrop>
         ))}
 
-        <DragOverlay>
+        {/* <DragOverlay>
           {activeId !== null && activeItem && (
             <ItemContentTableContentNavAdmin
               indentationWidth={indentationWidth}
@@ -138,7 +103,7 @@ export const ContentTableContentNavAdmin = ({
               {...activeItem}
             />
           )}
-        </DragOverlay>
+        </DragOverlay> */}
       </SortableContext>
     </DndContext>
   );

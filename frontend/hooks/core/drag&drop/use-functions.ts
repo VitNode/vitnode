@@ -241,6 +241,46 @@ export const useDragAndDrop = () => {
     };
   }
 
+  const actionsItemDragAndDrop = ({
+    data,
+    indentationWidth,
+    onCollapse
+  }: {
+    data: {
+      id: number;
+      depth?: number;
+    };
+    indentationWidth?: number;
+    onCollapse?: ({ isOpen }: { isOpen: boolean }) => void;
+  }) => {
+    const onCollapseInternal = () => {
+      const isOpen = isOpenChildren.includes(data.id);
+
+      onCollapse?.({ isOpen });
+
+      setIsOpenChildren(prev => {
+        if (isOpen) {
+          return prev.filter(i => i !== data.id);
+        }
+
+        return [...prev, data.id];
+      });
+    };
+
+    return {
+      onCollapse: onCollapseInternal,
+      isOpenChildren: isOpenChildren.includes(data.id),
+      isDropHere: projected?.parentId === data.id,
+      active: activeId === data.id,
+      depth:
+        activeId === data.id && projected?.parentId
+          ? projected?.depth
+          : data.depth ?? 0,
+      indentationWidth,
+      id: data.id
+    };
+  };
+
   return {
     flattItems,
     isOpenChildren,
@@ -252,6 +292,7 @@ export const useDragAndDrop = () => {
     projected,
     onDragMove,
     onDragEnd,
+    actionsItemDragAndDrop,
     ...rest
   };
 };

@@ -1,16 +1,6 @@
-import {
-  DndContext,
-  closestCorners,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-  MeasuringStrategy,
-  DragOverlay
-} from "@dnd-kit/core";
+import { DndContext, closestCorners, DragOverlay } from "@dnd-kit/core";
 import {
   SortableContext,
-  sortableKeyboardCoordinates,
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { useMemo } from "react";
@@ -23,6 +13,7 @@ import {
 } from "./hooks/use-forum-forums-admin-api";
 import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
 import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
+import { ItemDragAndDrop } from "@/hooks/core/drag&drop/item";
 
 const indentationWidth = 20;
 
@@ -36,6 +27,7 @@ export const ContentTableForumsForumAdmin = ({
   const t = useTranslations("core");
   const { data, setData, updateData } = useForumForumsAdminAPI({ initData });
   const {
+    actionsItemDragAndDrop,
     activeId,
     flattItems,
     isOpenChildren,
@@ -47,13 +39,6 @@ export const ContentTableForumsForumAdmin = ({
     resetState,
     setIsOpenChildren
   } = useDragAndDrop();
-
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates
-    })
-  );
 
   const flattenedItems = flattItems({ data });
   const activeItem = flattenedItems.find(i => i.id === activeId);
@@ -68,13 +53,7 @@ export const ContentTableForumsForumAdmin = ({
 
   return (
     <DndContext
-      sensors={sensors}
       collisionDetection={closestCorners}
-      measuring={{
-        droppable: {
-          strategy: MeasuringStrategy.Always
-        }
-      }}
       onDragCancel={resetState}
       onDragOver={onDragOver}
       onDragMove={e => onDragMove({ ...e, flattenedItems, indentationWidth })}
@@ -95,37 +74,24 @@ export const ContentTableForumsForumAdmin = ({
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
         {flattenedItems.map(item => (
-          <ItemTableForumsForumAdmin
+          <ItemDragAndDrop
             key={item.id}
-            indentationWidth={indentationWidth}
-            onCollapse={id => {
-              const isOpen = isOpenChildren.includes(id);
-
-              if (!isOpen) {
-                updateData({ parentId: Number(id) });
-              }
-
-              setIsOpenChildren(prev => {
-                if (isOpen) {
-                  return prev.filter(i => i !== id);
+            childrenLength={item.children.length}
+            {...actionsItemDragAndDrop({
+              data: item,
+              onCollapse: ({ isOpen }) => {
+                if (!isOpen) {
+                  updateData({ parentId: item.id });
                 }
-
-                return [...prev, id];
-              });
-            }}
-            isOpenChildren={isOpenChildren.includes(item.id)}
-            isDropHere={projected?.parentId === item.id}
-            active={activeId === item.id}
-            {...item}
-            depth={
-              activeId === item.id && projected?.parentId
-                ? projected?.depth
-                : item.depth
-            }
-          />
+              },
+              indentationWidth
+            })}
+          >
+            <ItemTableForumsForumAdmin data={item} />
+          </ItemDragAndDrop>
         ))}
 
-        <DragOverlay>
+        {/* <DragOverlay>
           {activeId !== null && activeItem && (
             <ItemTableForumsForumAdmin
               indentationWidth={indentationWidth}
@@ -133,7 +99,7 @@ export const ContentTableForumsForumAdmin = ({
               {...activeItem}
             />
           )}
-        </DragOverlay>
+        </DragOverlay> */}
       </SortableContext>
     </DndContext>
   );

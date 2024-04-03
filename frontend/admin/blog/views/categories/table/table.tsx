@@ -22,6 +22,7 @@ export const TableCategoriesCategoryAdmin = ({
   const t = useTranslations("core");
   const [data, setData] = useState<ShowBlogCategories[]>(edges);
   const {
+    actionsItemDragAndDrop,
     activeId,
     flattItems,
     onDragEnd,
@@ -68,9 +69,7 @@ export const TableCategoriesCategoryAdmin = ({
         {flattenedItems.map(item => (
           <ItemDragAndDrop
             key={item.id}
-            isDropHere={projected?.parentId === item.id}
-            active={activeId === item.id}
-            id={item.id}
+            {...actionsItemDragAndDrop({ data: item })}
           >
             <ItemTableCategoriesCategoryAdmin data={item} />
           </ItemDragAndDrop>

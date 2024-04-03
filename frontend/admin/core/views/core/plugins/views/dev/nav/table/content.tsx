@@ -1,16 +1,6 @@
-import {
-  DndContext,
-  DragOverlay,
-  KeyboardSensor,
-  MeasuringStrategy,
-  PointerSensor,
-  closestCorners,
-  useSensor,
-  useSensors
-} from "@dnd-kit/core";
+import { DndContext, DragOverlay, closestCorners } from "@dnd-kit/core";
 import {
   SortableContext,
-  sortableKeyboardCoordinates,
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { useTranslations } from "next-intl";
@@ -23,6 +13,7 @@ import type {
 } from "@/graphql/hooks";
 import { ItemContentTableNavDevPluginAdmin } from "./item";
 import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
+import { ItemDragAndDrop } from "@/hooks/core/drag&drop/item";
 
 export const ContentTableNavDevPluginAdmin = ({
   admin__core_plugins__nav__show: edges
@@ -30,6 +21,7 @@ export const ContentTableNavDevPluginAdmin = ({
   const t = useTranslations("core");
   const [data, setData] = useState<ShowAdminNavPluginsObj[]>(edges);
   const {
+    actionsItemDragAndDrop,
     activeId,
     flattItems,
     onDragEnd,
@@ -47,13 +39,6 @@ export const ContentTableNavDevPluginAdmin = ({
     setData(edges);
   }, [edges]);
 
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates
-    })
-  );
-
   const flattenedItems = flattItems({
     data: data.map(item => ({ ...item, children: [] }))
   });
@@ -69,13 +54,7 @@ export const ContentTableNavDevPluginAdmin = ({
 
   return (
     <DndContext
-      sensors={sensors}
       collisionDetection={closestCorners}
-      measuring={{
-        droppable: {
-          strategy: MeasuringStrategy.Always
-        }
-      }}
       onDragCancel={resetState}
       onDragOver={onDragOver}
       onDragMove={e => onDragMove({ ...e, flattenedItems, maxDepth: 0 })}
@@ -94,19 +73,21 @@ export const ContentTableNavDevPluginAdmin = ({
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
         {flattenedItems.map(item => (
-          <ItemContentTableNavDevPluginAdmin
+          <ItemDragAndDrop
             key={item.id}
-            isDropHere={projected?.parentId === item.id}
-            active={activeId === item.id}
-            {...item}
-          />
+            {...actionsItemDragAndDrop({
+              data: item
+            })}
+          >
+            <ItemContentTableNavDevPluginAdmin data={item} />
+          </ItemDragAndDrop>
         ))}
 
-        <DragOverlay>
+        {/* <DragOverlay>
           {activeId !== null && activeItem && (
             <ItemContentTableNavDevPluginAdmin {...activeItem} />
           )}
-        </DragOverlay>
+        </DragOverlay> */}
       </SortableContext>
     </DndContext>
   );
