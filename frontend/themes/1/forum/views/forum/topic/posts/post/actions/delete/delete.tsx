@@ -5,7 +5,7 @@ import { Loader } from "@/components/loader";
 
 const Content = lazy(() =>
   import("./content").then(module => ({
-    default: module.Content
+    default: module.ContentDeleteActionPost
   }))
 );
 
@@ -15,12 +15,12 @@ interface Props {
   setOpen: (value: boolean) => void;
 }
 
-export const Delete = ({ id, open, setOpen }: Props) => {
+export const DeleteActionPost = ({ id, open, setOpen }: Props) => {
   return (
-    <AlertDialog open={open} onOpenChange={isOpen => setOpen(isOpen)}>
+    <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
         <Suspense fallback={<Loader />}>
-          <Content id={id} setOpen={setOpen}></Content>
+          <Content id={id} />
         </Suspense>
       </AlertDialogContent>
     </AlertDialog>

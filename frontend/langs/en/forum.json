@@ -52,6 +52,7 @@
           "delete": {
             "cancel": "Cancel",
             "delete": "Delete Comment",
+            "success": "Comment has been deleted.",
             "desc": "Are you sure you want to delete the comment?"
           }
         }

@@ -55,9 +55,10 @@
         "submit": "Dodaj post",
         "actions": {
           "delete": {
-            "cancel": "Cancel",
-            "delete": "Delete Comment",
-            "desc": "Are you sure you want to delete the comment?"
+            "cancel": "Anuluj",
+            "delete": "Usuń komentarz",
+            "success": "Komentarz został usunięty.",
+            "desc": "Czy na pewno chcesz usunąć ten komentarz?"
           }
         }
       }
