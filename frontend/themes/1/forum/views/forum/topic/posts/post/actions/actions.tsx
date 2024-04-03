@@ -12,12 +12,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import type { PermissionsPostForums } from "@/graphql/hooks";
 import { DeleteActionPost } from "./delete/delete";
 
 interface Props {
   id: number;
-  permissions: PermissionsPostForums;
+  permissions: {
+    can_delete: boolean;
+    can_edit: boolean;
+  };
   state: {
     locked: boolean;
   };
