@@ -170,7 +170,7 @@ type Mutation {
   admin__core_languages__download(all: Boolean!, code: String!, plugins: [String!]!): String!
   admin__core_languages__edit(default: Boolean!, enabled: Boolean!, id: Int!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_languages__update(code: String!, file: Upload!): String!
-  admin__core_nav__change_position(id: Int!, index_to_move: Int!, parent_id: Int): String!
+  admin__core_nav__change_position(id: Int!, index_to_move: Int!, parent_id: Int!): String!
   admin__core_nav__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, name: [TextLanguageInput!]!): ShowCoreNav!
   admin__core_nav__delete(id: Int!): String!
   admin__core_nav__edit(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, id: Int!, name: [TextLanguageInput!]!): ShowCoreNav!
@@ -192,7 +192,7 @@ type Mutation {
   admin__core_themes__download(id: Int!, version: String, version_code: Int): String!
   admin__core_themes__edit(author: String!, author_url: String, id: Int!, name: String!, support_url: String!): ShowAdminThemes!
   admin__core_themes__upload(file: Upload!, id: Int): ShowAdminThemes!
-  admin__forum_forums__change_position(id: Int!, index_to_move: Int!, parent_id: Int): String!
+  admin__forum_forums__change_position(id: Int!, index_to_move: Int!, parent_id: Int!): String!
   admin__forum_forums__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
   admin__forum_forums__delete(id: Int!, move_topics_to: Int): String!
   admin__forum_forums__edit(description: [TextLanguageInput!]!, id: Int!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!

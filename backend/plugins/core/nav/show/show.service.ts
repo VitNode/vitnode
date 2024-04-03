@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { and, count, isNull } from "drizzle-orm";
+import { and, count, eq } from "drizzle-orm";
 
 import { ShowCoreNavArgs } from "./dto/show.args";
 import { ShowCoreNavObj } from "./dto/show.obj";
@@ -36,7 +36,7 @@ export class ShowCoreNavService {
 
     const itemsParent = await this.databaseService.db.query.core_nav.findMany({
       ...pagination,
-      where: and(pagination.where, isNull(core_nav.parent_id)),
+      where: and(pagination.where, eq(core_nav.parent_id, 0)),
       with: {
         name: true,
         description: true

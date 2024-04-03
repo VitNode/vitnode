@@ -18,7 +18,7 @@ export const core_nav = pgTable(
     external: boolean("external").notNull().default(false),
     position: integer("position").notNull().default(0),
     // ! Warning: this is a recursive relation. It's not supported by drizzle-orm yet.
-    parent_id: integer("parent_id"),
+    parent_id: integer("parent_id").notNull().default(0),
     icon: varchar("icon", { length: 50 })
   },
   table => ({
@@ -49,7 +49,7 @@ export const core_nav_name = pgTable(
       .references(() => core_languages.code, {
         onDelete: "cascade"
       }),
-    value: varchar("value", { length: 50 }).notNull()
+    value: varchar("value", { length: 100 }).notNull()
   },
   table => ({
     nav_id_idx: index("core_nav_name_nav_id_idx").on(table.nav_id),
@@ -84,7 +84,7 @@ export const core_nav_description = pgTable(
       .references(() => core_languages.code, {
         onDelete: "cascade"
       }),
-    value: varchar("value", { length: 50 }).notNull()
+    value: varchar("value", { length: 200 }).notNull()
   },
   table => ({
     nav_id_idx: index("core_nav_description_nav_id_idx").on(table.nav_id),

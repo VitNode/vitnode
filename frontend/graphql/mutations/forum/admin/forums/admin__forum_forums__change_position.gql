@@ -1,7 +1,7 @@
 mutation Admin__forum_forums__change_position(
   $id: Int!
   $indexToMove: Int!
-  $parentId: Int
+  $parentId: Int!
 ) {
   admin__forum_forums__change_position(
     id: $id

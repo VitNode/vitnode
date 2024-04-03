@@ -20,7 +20,7 @@ export const forum_forums = pgTable(
     id: serial("id").primaryKey(),
     created: timestamp("created").notNull().defaultNow(),
     // ! Warning: this is a recursive relation. It's not supported by drizzle-orm yet.
-    parent_id: integer("parent_id"),
+    parent_id: integer("parent_id").notNull().default(0),
     position: integer("position").notNull().default(0),
     can_all_view: boolean("can_all_view").notNull().default(false),
     can_all_read: boolean("can_all_read").notNull().default(false),

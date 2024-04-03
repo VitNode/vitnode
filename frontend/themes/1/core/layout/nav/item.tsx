@@ -25,12 +25,14 @@ export const ItemNav = ({
       <NavigationMenu.Trigger asChild>
         <Link
           href={href}
-          className={buttonVariants({
-            variant: "ghost",
-            className: cn("px-6", {
-              "bg-accent": active
+          className={cn(
+            buttonVariants({
+              variant: active ? "outline" : "ghost",
+              className: cn("px-6", {
+                "bg-card dark:bg-accent": active
+              })
             })
-          })}
+          )}
           target={external ? "_blank" : undefined}
           rel={external ? "noopener noreferrer" : undefined}
         >
@@ -42,13 +44,14 @@ export const ItemNav = ({
       {children.length > 0 && (
         <NavigationMenu.Content
           className={cn(
-            "absolute top-0 left-0 duration-200 ease-in-out data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 w-[20rem]",
+            "top-0 left-0 duration-200 ease-in-out data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 w-56",
             {
-              "w-[40rem]": children.length > 3
+              "w-[30rem]": children.length >= 3,
+              "lg:w-[50rem]": children.length >= 5
             }
           )}
         >
-          <ul className="flex gap-2 flex-wrap p-2">
+          <ul className="flex gap-1 flex-wrap p-2">
             {children.map(item => {
               const activeItem =
                 item.href === pathname ||
@@ -58,7 +61,8 @@ export const ItemNav = ({
                 <li
                   key={item.id}
                   className={cn("flex-1 basis-full", {
-                    "basis-[calc(50%-0.5rem)]": children.length > 3
+                    "basis-[calc(50%-0.5rem)]": children.length >= 3,
+                    "lg:basis-[calc(33%-0.5rem)]": children.length >= 5
                   })}
                 >
                   <NavigationMenu.Link asChild>

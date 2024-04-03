@@ -26,7 +26,7 @@ export const ThemeSwitcher = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="outline"
+          variant="ghost"
           size="icon"
           ariaLabel={t("user-bar.theme.change")}
         >
