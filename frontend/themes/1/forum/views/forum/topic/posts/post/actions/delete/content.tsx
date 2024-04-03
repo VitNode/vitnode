@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { useDeletePost } from "@/hooks/forum/posts/delete/use-delete-post";
 import {
   AlertDialogCancel,
-  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle
@@ -24,7 +23,6 @@ export const ContentDeleteActionPost = ({ id }: Props) => {
     <form action={onSubmit}>
       <AlertDialogHeader>
         <AlertDialogTitle>{t("desc")}</AlertDialogTitle>
-        <AlertDialogDescription>dupa</AlertDialogDescription>
       </AlertDialogHeader>
 
       <AlertDialogFooter>
