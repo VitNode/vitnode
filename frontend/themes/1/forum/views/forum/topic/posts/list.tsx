@@ -1,10 +1,6 @@
 import type { ReactNode } from "react";
 
-import type {
-  PermissionsPostForums,
-  ShowPostsForums,
-  ShowPostsForumsMetaTags
-} from "@/graphql/hooks";
+import type { ShowPostsForums, ShowPostsForumsMetaTags } from "@/graphql/hooks";
 import { PostTopic } from "./post/post";
 import { MetaTagTopic } from "./meta-tags/meta-tag";
 import { cn } from "@/functions/classnames";
@@ -19,7 +15,7 @@ interface Props {
 }
 
 export const ListPosts = ({ className, edges, id }: Props) => {
-  const permissions: PermissionsPostForums = {
+  const permissions = {
     //TODO: retrieving permissions from backend, more elastic approach
     can_edit: true,
     can_delete: true
