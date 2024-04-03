@@ -13,13 +13,24 @@ import type {
   ShowBlogCategories
 } from "@/graphql/hooks";
 import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
+import { ItemTableCategoriesCategoryAdmin } from "./item";
+import { ItemDragAndDrop } from "@/hooks/core/drag&drop/item";
 
 export const TableCategoriesCategoryAdmin = ({
   blog_categories__show: { edges }
 }: Admin_Blog_Categories__ShowQuery) => {
   const t = useTranslations("core");
-  const [data] = useState<ShowBlogCategories[]>(edges);
-  const { flattItems, onDragOver, resetState } = useDragAndDrop();
+  const [data, setData] = useState<ShowBlogCategories[]>(edges);
+  const {
+    activeId,
+    flattItems,
+    onDragEnd,
+    onDragMove,
+    onDragOver,
+    onDragStart,
+    projected,
+    resetState
+  } = useDragAndDrop();
   const flattenedItems = flattItems({
     data: data.map(item => ({ ...item, children: [] }))
   });
@@ -37,10 +48,32 @@ export const TableCategoriesCategoryAdmin = ({
       collisionDetection={closestCorners}
       onDragCancel={resetState}
       onDragOver={onDragOver}
+      onDragMove={e => onDragMove({ ...e, flattenedItems, maxDepth: 0 })}
+      onDragStart={onDragStart}
+      onDragEnd={async ({ active, over, ...rest }) => {
+        const moveTo = onDragEnd<ShowBlogCategories>({
+          active,
+          over,
+          data: data.map(item => ({ ...item, children: [] })),
+          setData,
+          ...rest
+        });
+
+        if (!moveTo) return;
+
+        // await mutationChangePositionApi(moveTo);
+      }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
         {flattenedItems.map(item => (
-          <div key={item.id}>{item.id}</div>
+          <ItemDragAndDrop
+            key={item.id}
+            isDropHere={projected?.parentId === item.id}
+            active={activeId === item.id}
+            id={item.id}
+          >
+            <ItemTableCategoriesCategoryAdmin data={item} />
+          </ItemDragAndDrop>
         ))}
       </SortableContext>
     </DndContext>

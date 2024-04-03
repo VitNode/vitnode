@@ -163,6 +163,10 @@ export const useDragAndDrop = () => {
     indentationWidth,
     maxDepth
   }: OnDragMoveArgs) => {
+    if (maxDepth === undefined && !indentationWidth) {
+      throw new Error("You must provide either maxDepth abd indentationWidth");
+    }
+
     if (!activeId || !overId) return;
 
     const currentProjection = getProjection({

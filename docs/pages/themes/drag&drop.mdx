@@ -174,4 +174,111 @@ export const TableCategoriesCategoryAdmin = ({
 };
 ```
 
+### onDrag Actions
+
+```tsx {15, 21-29, 45-61}
+"use client";
+
+import { useMemo, useState } from "react";
+import { DndContext, closestCorners } from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy
+} from "@dnd-kit/sortable";
+import { useTranslations } from "next-intl";
+
+import type {
+  Admin_Blog_Categories__ShowQuery,
+  ShowBlogCategories
+} from "@/graphql/hooks";
+import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
+
+export const TableCategoriesCategoryAdmin = ({
+  blog_categories__show: { edges }
+}: Admin_Blog_Categories__ShowQuery) => {
+  const t = useTranslations("core");
+  const [data, setData] = useState<ShowBlogCategories[]>(edges);
+  const {
+    flattItems,
+    onDragEnd,
+    onDragMove,
+    onDragOver,
+    onDragStart,
+    resetState
+  } = useDragAndDrop();
+  const flattenedItems = flattItems({
+    data: data.map(item => ({ ...item, children: [] }))
+  });
+  const sortedIds = useMemo(
+    () => flattenedItems.map(({ id }) => id),
+    [flattenedItems]
+  );
+
+  if (!data || data.length === 0) {
+    return <div className="text-center">{t("no_results")}</div>;
+  }
+
+  return (
+    <DndContext
+      collisionDetection={closestCorners}
+      onDragCancel={resetState}
+      onDragOver={onDragOver}
+      onDragMove={e => onDragMove({ ...e, flattenedItems, maxDepth: 0 })}
+      onDragStart={onDragStart}
+      onDragEnd={async ({ active, over, ...rest }) => {
+        const moveTo = onDragEnd<ShowBlogCategories>({
+          active,
+          over,
+          data: data.map(item => ({ ...item, children: [] })),
+          setData,
+          ...rest
+        });
+
+        if (!moveTo) return;
+
+        await mutationChangePositionApi(moveTo);
+      }}
+    >
+      <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
+        {flattenedItems.map(item => (
+          <div key={item.id}>{item.id}</div>
+        ))}
+      </SortableContext>
+    </DndContext>
+  );
+};
+```
+
+#### With Depth
+
+If you want to add depth to the items, you can use the `maxDepth` and `indentationWidth` parameter in the `onDragMove` function.
+
+```tsx {1, 9}
+const indentationWidth = 16;
+
+export const TableCategoriesCategoryAdmin = ({
+  blog_categories__show: { edges }
+}: Admin_Blog_Categories__ShowQuery) => {
+  return (
+    <DndContext
+      onDragMove={e =>
+        onDragMove({ ...e, flattenedItems, maxDepth: 1, indentationWidth })
+      }
+    >
+      ...
+    </DndContext>
+  );
+};
+```
+
+- maxDepth - The maximum depth of the item.
+
+  - 0 - No depth
+  - 1 - One depth
+  - 2 - Two depth
+  - ...
+  - undefined - Infinite depth
+
+- indentationWidth - The width _(in px)_ of the indentation.
+
 </Steps>
