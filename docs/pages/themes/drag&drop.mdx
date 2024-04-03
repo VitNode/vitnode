@@ -1,0 +1,177 @@
+import { Steps } from "nextra/components";
+
+# Drag & Drop
+
+Thanks to [dnd-kit](https://dndkit.com/) library, you can drag and drop anything. You can drag and drop the cards in the list, the lists in the board, and the boards in the dashboard.
+
+## Sortable List
+
+<Steps>
+
+### Create state for data
+
+```tsx {3, 13}
+"use client";
+
+import { useState } from "react";
+
+import type {
+  Admin_Blog_Categories__ShowQuery,
+  ShowBlogCategories
+} from "@/graphql/hooks";
+
+export const TableCategoriesCategoryAdmin = ({
+  blog_categories__show: { edges }
+}: Admin_Blog_Categories__ShowQuery) => {
+  const [data] = useState<ShowBlogCategories[]>(edges);
+
+  return <div>test</div>;
+};
+```
+
+### DndContext
+
+```tsx {4, 16}
+"use client";
+
+import { useState } from "react";
+import { DndContext, closestCorners } from "@dnd-kit/core";
+
+import type {
+  Admin_Blog_Categories__ShowQuery,
+  ShowBlogCategories
+} from "@/graphql/hooks";
+
+export const TableCategoriesCategoryAdmin = ({
+  blog_categories__show: { edges }
+}: Admin_Blog_Categories__ShowQuery) => {
+  const [data] = useState<ShowBlogCategories[]>(edges);
+
+  return <DndContext collisionDetection={closestCorners}>test</DndContext>;
+};
+```
+
+### Flatt Items
+
+```tsx {3, 10, 16-23}
+"use client";
+
+import { useMemo, useState } from "react";
+import { DndContext, closestCorners } from "@dnd-kit/core";
+
+import type {
+  Admin_Blog_Categories__ShowQuery,
+  ShowBlogCategories
+} from "@/graphql/hooks";
+import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
+
+export const TableCategoriesCategoryAdmin = ({
+  blog_categories__show: { edges }
+}: Admin_Blog_Categories__ShowQuery) => {
+  const [data] = useState<ShowBlogCategories[]>(edges);
+  const { flattItems } = useDragAndDrop();
+  const flattenedItems = flattItems({
+    data: data.map(item => ({ ...item, children: [] }))
+  });
+  const sortedIds = useMemo(
+    () => flattenedItems.map(({ id }) => id),
+    [flattenedItems]
+  );
+
+  return <DndContext collisionDetection={closestCorners}>test</DndContext>;
+};
+```
+
+### Sortable Context
+
+```tsx {5-8, 31-35}
+"use client";
+
+import { useMemo, useState } from "react";
+import { DndContext, closestCorners } from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy
+} from "@dnd-kit/sortable";
+
+import type {
+  Admin_Blog_Categories__ShowQuery,
+  ShowBlogCategories
+} from "@/graphql/hooks";
+import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
+
+export const TableCategoriesCategoryAdmin = ({
+  blog_categories__show: { edges }
+}: Admin_Blog_Categories__ShowQuery) => {
+  const [data, setData] = useState<ShowBlogCategories[]>(edges);
+  const { flattItems } = useDragAndDrop();
+  const flattenedItems = flattItems({
+    data: data.map(item => ({ ...item, children: [] }))
+  });
+  const sortedIds = useMemo(
+    () => flattenedItems.map(({ id }) => id),
+    [flattenedItems]
+  );
+
+  return (
+    <DndContext collisionDetection={closestCorners}>
+      <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
+        {flattenedItems.map(item => (
+          <div key={item.id}>{item.id}</div>
+        ))}
+      </SortableContext>
+    </DndContext>
+  );
+};
+```
+
+### Empty View
+
+```tsx {9, 20, 31-33}
+"use client";
+
+import { useMemo, useState } from "react";
+import { DndContext, closestCorners } from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy
+} from "@dnd-kit/sortable";
+import { useTranslations } from "next-intl";
+
+import type {
+  Admin_Blog_Categories__ShowQuery,
+  ShowBlogCategories
+} from "@/graphql/hooks";
+import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
+
+export const TableCategoriesCategoryAdmin = ({
+  blog_categories__show: { edges }
+}: Admin_Blog_Categories__ShowQuery) => {
+  const t = useTranslations("core");
+  const [data] = useState<ShowBlogCategories[]>(edges);
+  const { flattItems } = useDragAndDrop();
+  const flattenedItems = flattItems({
+    data: data.map(item => ({ ...item, children: [] }))
+  });
+  const sortedIds = useMemo(
+    () => flattenedItems.map(({ id }) => id),
+    [flattenedItems]
+  );
+
+  if (!data || data.length === 0) {
+    return <div className="text-center">{t("no_results")}</div>;
+  }
+
+  return (
+    <DndContext collisionDetection={closestCorners}>
+      <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
+        {flattenedItems.map(item => (
+          <div key={item.id}>{item.id}</div>
+        ))}
+      </SortableContext>
+    </DndContext>
+  );
+};
+```
+
+</Steps>

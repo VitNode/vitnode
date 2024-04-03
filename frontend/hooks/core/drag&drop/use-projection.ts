@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { UniqueIdentifier } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
+import type { Coordinates } from "@dnd-kit/utilities";
 
 import type { FlatTree } from "./use-functions";
 
@@ -40,22 +41,26 @@ export interface ProjectionReturnType {
 export const useProjection = () => {
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
+  const [projected, setProjected] = useState<ProjectionReturnType | null>();
 
   function getProjection<T extends object>({
-    dragOffset,
+    delta,
+    flattenedItems,
     indentationWidth = 0,
-    maxDepth: maxDepthProp,
-    tree
+    maxDepth: maxDepthProp
   }: {
-    dragOffset: number;
-    tree: FlatTree<T>[];
+    delta: Coordinates;
+    flattenedItems: FlatTree<T>[];
     indentationWidth?: number;
     maxDepth?: number;
   }): ProjectionReturnType {
-    const overItemIndex = tree.findIndex(({ id }) => id === overId);
-    const activeItemIndex = tree.findIndex(({ id }) => id === activeId);
-    const activeItem = tree[activeItemIndex];
-    const newItems = arrayMove(tree, activeItemIndex, overItemIndex);
+    const dragOffset = delta.x;
+    const overItemIndex = flattenedItems.findIndex(({ id }) => id === overId);
+    const activeItemIndex = flattenedItems.findIndex(
+      ({ id }) => id === activeId
+    );
+    const activeItem = flattenedItems[activeItemIndex];
+    const newItems = arrayMove(flattenedItems, activeItemIndex, overItemIndex);
     const previousItem = newItems[overItemIndex - 1];
     const nextItem = newItems[overItemIndex + 1];
     const dragDepth = getDragDepth({
@@ -107,6 +112,8 @@ export const useProjection = () => {
     activeId,
     overId,
     setOverId,
-    setActiveId
+    setActiveId,
+    projected,
+    setProjected
   };
 };

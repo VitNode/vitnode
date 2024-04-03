@@ -1,5 +1,14 @@
-import type { UniqueIdentifier } from "@dnd-kit/core";
+import type {
+  DragEndEvent,
+  DragMoveEvent,
+  DragOverEvent,
+  DragStartEvent,
+  UniqueIdentifier
+} from "@dnd-kit/core";
 import { useState } from "react";
+import { arrayMove } from "@dnd-kit/sortable";
+
+import { useProjection } from "./use-projection";
 
 type WithChildren<T extends object> = Omit<T, "children" | "__typename"> & {
   children: WithChildren<T>[];
@@ -100,15 +109,21 @@ export function buildTree<T extends object>({
   return tree.filter(item => !item.parentId);
 }
 
-interface Args {
-  activeId: UniqueIdentifier | null;
-}
-
-export const useDragAndDrop = ({ activeId }: Args) => {
+export const useDragAndDrop = () => {
   const [isOpenChildren, setIsOpenChildren] = useState<UniqueIdentifier[]>([]);
+  const {
+    activeId,
+    getProjection,
+    overId,
+    projected,
+    setActiveId,
+    setOverId,
+    setProjected,
+    ...rest
+  } = useProjection();
 
   // DndKit doesn't support nested sortable, so we need to flatten the data in one array
-  function flattenedItems<T extends WithChildren<T>>({ data }: { data: T[] }) {
+  function flattItems<T extends WithChildren<T>>({ data }: { data: T[] }) {
     const tree = flattenTree({ tree: data });
 
     const collapsedItems = tree.reduce<UniqueIdentifier[]>(
@@ -123,9 +138,116 @@ export const useDragAndDrop = ({ activeId }: Args) => {
     });
   }
 
-  return {
+  const resetState = () => {
+    setOverId(null);
+    setActiveId(null);
+    setProjected(null);
+  };
+
+  const onDragOver = ({ over }: DragOverEvent) => setOverId(over?.id ?? null);
+
+  const onDragStart = ({ active }: DragStartEvent) => {
+    setActiveId(active.id);
+    setOverId(active.id);
+  };
+
+  interface OnDragMoveArgs extends DragMoveEvent {
+    flattenedItems: FlatTree<object>[];
+    indentationWidth?: number;
+    maxDepth?: number;
+  }
+
+  const onDragMove = ({
+    delta,
     flattenedItems,
+    indentationWidth,
+    maxDepth
+  }: OnDragMoveArgs) => {
+    if (!activeId || !overId) return;
+
+    const currentProjection = getProjection({
+      flattenedItems,
+      delta,
+      indentationWidth,
+      maxDepth
+    });
+
+    if (projected?.parentId === currentProjection.parentId) {
+      return;
+    }
+
+    setProjected(currentProjection);
+  };
+
+  interface DragEndArgs<T extends object> extends DragEndEvent {
+    data: WithChildren<T>[];
+    setData: (data: WithChildren<FlatTree<T>>[]) => void;
+  }
+
+  function onDragEnd<T extends object>({
+    active,
+    data,
+    over,
+    setData
+  }: DragEndArgs<T>) {
+    resetState();
+
+    if (!projected || !over) return;
+    const { depth, parentId } = projected;
+
+    const clonedItems: FlatTree<T>[] = flattenTree({ tree: data });
+    const toIndex = clonedItems.findIndex(({ id }) => id === over.id);
+    const fromIndex = clonedItems.findIndex(({ id }) => id === active.id);
+    const sortedItems = arrayMove(clonedItems, fromIndex, toIndex);
+    const activeIndex = sortedItems.findIndex(i => i.id === active.id);
+    sortedItems[activeIndex] = {
+      ...sortedItems[activeIndex],
+      depth,
+      parentId
+    };
+
+    const dataAfterUpdate: FlatTree<FlatTree<T>>[] = sortedItems.map(item => ({
+      ...item,
+      children: []
+    }));
+
+    setData(
+      buildTree({
+        flattenedTree: dataAfterUpdate
+      })
+    );
+
+    const parents = sortedItems.filter(i => i.parentId === parentId);
+    const indexToMove = parents.findIndex(i => i.id === active.id);
+    const flattenedItems = flattenTree({ tree: data });
+
+    // -1 means that the item is the last one
+    const findActive = flattenedItems.find(i => i.id === active.id);
+    if (!findActive) return;
+
+    // Do nothing if drag and drop on the same item on the same level
+    if (findActive?.parentId === parentId && active.id === over.id) {
+      return;
+    }
+
+    return {
+      id: Number(active.id),
+      parentId: Number(parentId),
+      indexToMove
+    };
+  }
+
+  return {
+    flattItems,
     isOpenChildren,
-    setIsOpenChildren
+    setIsOpenChildren,
+    activeId,
+    resetState,
+    onDragOver,
+    onDragStart,
+    projected,
+    onDragMove,
+    onDragEnd,
+    ...rest
   };
 };
