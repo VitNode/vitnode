@@ -51,12 +51,7 @@ export const PostTopic = ({
             />
           </div>
         </div>
-
         {customMoreMenu}
-
-        {/* <Button variant="ghost" size="icon" tooltip={tCore("open_menu")}>
-          <MoreHorizontal />
-        </Button> */}
       </div>
 
       <div className="p-4">
