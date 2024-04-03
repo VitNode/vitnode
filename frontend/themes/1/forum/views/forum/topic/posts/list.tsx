@@ -9,7 +9,7 @@ import { PostTopic } from "./post/post";
 import { MetaTagTopic } from "./meta-tags/meta-tag";
 import { cn } from "@/functions/classnames";
 import { WrapperPosts } from "./wrapper/wrapper";
-import { ActionsPost } from "./post/actions-post";
+import { ActionsPost } from "./post/actions/actions";
 
 interface Props {
   edges: (ShowPostsForums | ShowPostsForumsMetaTags)[];

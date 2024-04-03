@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import type { PermissionsPostForums } from "@/graphql/hooks";
-import { Delete } from "./delete";
+import { DeleteActionPost } from "./delete/delete";
 
 interface Props {
   id: number;
@@ -58,7 +58,8 @@ export const ActionsPost = ({
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
-      <Delete open={isPending} setOpen={setPending} id={id} />
+
+      <DeleteActionPost open={isPending} setOpen={setPending} id={id} />
     </DropdownMenu>
   );
 };
