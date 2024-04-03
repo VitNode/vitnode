@@ -1,8 +1,13 @@
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 
 import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
 import { Loader } from "@/components/loader";
-import { Content } from "./content";
+
+const Content = lazy(() =>
+  import("./content").then(module => ({
+    default: module.Content
+  }))
+);
 
 interface Props {
   id: number;
