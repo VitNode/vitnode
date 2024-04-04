@@ -16,9 +16,9 @@ interface Props {
   depth?: number;
   draggableButtonClassName?: string;
   draggableChildren?: ReactNode;
+  draggableStyle?: CSSProperties;
   indentationWidth?: number;
   isOpenChildren?: boolean;
-  draggableStyle?: CSSProperties;
 }
 
 export const ItemDragAndDrop = ({
@@ -28,12 +28,12 @@ export const ItemDragAndDrop = ({
   depth = 0,
   draggableButtonClassName,
   draggableChildren,
+  draggableStyle,
   id,
   indentationWidth = 0,
   isDropHere,
   isOpenChildren,
-  onCollapse,
-  draggableStyle
+  onCollapse
 }: Props) => {
   const {
     attributes,
@@ -54,7 +54,7 @@ export const ItemDragAndDrop = ({
   return (
     <div
       ref={setDroppableNodeRef}
-      className="pl-[var(--spacing)]"
+      className="pl-[var(--spacing)] [&:not(:first-child)>div]:border-t-0"
       style={
         {
           "--spacing": `${indentationWidth * depth}px`
@@ -63,7 +63,7 @@ export const ItemDragAndDrop = ({
     >
       <div
         className={cn(
-          "p-4 flex sm:gap-4 gap-2 bg-card items-center transition-[background-color,opacity] relative border flex-wrap",
+          "p-4 flex sm:gap-4 gap-2 bg-card items-center transition-[background-color,opacity] relative flex-wrap border",
           {
             "animate-pulse bg-primary/20": isDropHere,
             "z-10": isDragging,

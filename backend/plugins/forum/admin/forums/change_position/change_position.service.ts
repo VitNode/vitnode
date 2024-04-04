@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { eq, isNull } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 import { ChangePositionForumForumsArgs } from "./dto/change_position.args";
 
@@ -26,10 +26,7 @@ export class ChangePositionForumForumsService {
 
     const allChildrenParent =
       await this.databaseService.db.query.forum_forums.findMany({
-        where: (table, { eq }) =>
-          !parent_id
-            ? isNull(table.parent_id ?? null)
-            : eq(table.parent_id, parent_id),
+        where: (table, { eq }) => eq(table.parent_id, parent_id),
         orderBy: (table, { asc }) => asc(table.position)
       });
 
