@@ -13,6 +13,7 @@ import type { Admin__Core_Nav__ShowQuery, ShowCoreNav } from "@/graphql/hooks";
 import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
 import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
 import { ItemDragAndDrop } from "@/hooks/core/drag&drop/item";
+import { Icon } from "@/components/icon/icon";
 
 const indentationWidth = 20;
 
@@ -81,6 +82,7 @@ export const TableNavAdmin = ({
               data: item,
               indentationWidth
             })}
+            draggableChildren={item.icon ? <Icon name={item.icon} /> : null}
           >
             <ItemContentTableContentNavAdmin data={item} />
           </ItemDragAndDrop>
@@ -92,6 +94,11 @@ export const TableNavAdmin = ({
               {...actionsItem({
                 data: activeItemOverlay
               })}
+              draggableChildren={
+                activeItemOverlay.icon ? (
+                  <Icon name={activeItemOverlay.icon} />
+                ) : null
+              }
             >
               <ItemContentTableContentNavAdmin data={activeItemOverlay} />
             </ItemDragAndDrop>

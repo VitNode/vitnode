@@ -1,6 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { ChevronRight, Menu } from "lucide-react";
+import { ChevronRight, Grip } from "lucide-react";
 import type { CSSProperties, ReactNode } from "react";
 
 import { cn } from "@/functions/classnames";
@@ -14,8 +14,11 @@ interface Props {
   onCollapse: () => void;
   childrenLength?: number;
   depth?: number;
+  draggableButtonClassName?: string;
+  draggableChildren?: ReactNode;
   indentationWidth?: number;
   isOpenChildren?: boolean;
+  draggableStyle?: CSSProperties;
 }
 
 export const ItemDragAndDrop = ({
@@ -23,11 +26,14 @@ export const ItemDragAndDrop = ({
   children,
   childrenLength,
   depth = 0,
+  draggableButtonClassName,
+  draggableChildren,
   id,
   indentationWidth = 0,
   isDropHere,
   isOpenChildren,
-  onCollapse
+  onCollapse,
+  draggableStyle
 }: Props) => {
   const {
     attributes,
@@ -48,7 +54,7 @@ export const ItemDragAndDrop = ({
   return (
     <div
       ref={setDroppableNodeRef}
-      className={"pl-[var(--spacing)]"}
+      className="pl-[var(--spacing)]"
       style={
         {
           "--spacing": `${indentationWidth * depth}px`
@@ -57,7 +63,7 @@ export const ItemDragAndDrop = ({
     >
       <div
         className={cn(
-          "p-4 flex gap-2 bg-card items-center transition-[background-color,opacity] relative border flex-wrap",
+          "p-4 flex sm:gap-4 gap-2 bg-card items-center transition-[background-color,opacity] relative border flex-wrap",
           {
             "animate-pulse bg-primary/20": isDropHere,
             "z-10": isDragging,
@@ -70,26 +76,37 @@ export const ItemDragAndDrop = ({
         }}
         ref={setDraggableNodeRef}
       >
-        <Button
-          className="sm:flex hidden flex-shrink-0 focus:outline-none text-muted-foreground hover:text-foreground cursor-grab"
-          variant="ghost"
-          size="icon"
-          ariaLabel=""
-          {...attributes}
-          {...listeners}
-        >
-          <Menu />
-        </Button>
-
-        {allowOpenChildren && (
-          <Button onClick={onCollapse} variant="ghost" size="icon" ariaLabel="">
-            <ChevronRight
-              className={cn("transition-transform text-muted-foreground", {
-                "rotate-90": isOpenChildren
-              })}
-            />
+        <div className="flex flex-shrink-0 gap-2">
+          <Button
+            className={cn(
+              "sm:flex hidden flex-shrink-0 focus:outline-none hover:text-foreground cursor-grab bg-primary/20 text-primary",
+              draggableButtonClassName
+            )}
+            style={draggableStyle}
+            variant="ghost"
+            size="icon"
+            ariaLabel=""
+            {...attributes}
+            {...listeners}
+          >
+            {draggableChildren ? draggableChildren : <Grip />}
           </Button>
-        )}
+
+          {allowOpenChildren && (
+            <Button
+              onClick={onCollapse}
+              variant="ghost"
+              size="icon"
+              ariaLabel=""
+            >
+              <ChevronRight
+                className={cn("transition-transform text-muted-foreground", {
+                  "rotate-90": isOpenChildren
+                })}
+              />
+            </Button>
+          )}
+        </div>
 
         {children}
       </div>

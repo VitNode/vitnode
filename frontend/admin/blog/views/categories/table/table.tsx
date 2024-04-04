@@ -58,7 +58,14 @@ export const TableCategoriesCategoryAdmin = ({
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
         {flattenedItems.map(item => (
-          <ItemDragAndDrop key={item.id} {...actionsItem({ data: item })}>
+          <ItemDragAndDrop
+            key={item.id}
+            {...actionsItem({ data: item })}
+            draggableStyle={{
+              background: item.color.replace(")", ", 0.2 )"),
+              color: item.color
+            }}
+          >
             <ItemTableCategoriesCategoryAdmin data={item} />
           </ItemDragAndDrop>
         ))}
@@ -69,6 +76,10 @@ export const TableCategoriesCategoryAdmin = ({
               {...actionsItem({
                 data: activeItemOverlay
               })}
+              draggableStyle={{
+                background: activeItemOverlay.color.replace(")", ", 0.2 )"),
+                color: activeItemOverlay.color
+              }}
             >
               <ItemTableCategoriesCategoryAdmin data={activeItemOverlay} />
             </ItemDragAndDrop>

@@ -8,5 +8,9 @@ interface Props {
 export const ItemTableCategoriesCategoryAdmin = ({ data }: Props) => {
   const { convertText } = useTextLang();
 
-  return <>{convertText(data.name)}</>;
+  return (
+    <>
+      {convertText(data.name)} - {data.color}
+    </>
+  );
 };
