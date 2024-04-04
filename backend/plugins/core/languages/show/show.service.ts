@@ -32,7 +32,7 @@ export class ShowCoreLanguageService {
       primaryCursor: { order: "ASC", key: "id", schema: core_languages.id },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: "updated"
+        column: "created"
       },
       sortBy
     });
