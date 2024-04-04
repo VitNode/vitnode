@@ -251,13 +251,14 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
     };
   }
 
-  const actionsItemDragAndDrop = ({
+  const actionsItem = ({
     data,
     indentationWidth,
     onCollapse
   }: {
     data: {
       id: number;
+      children?: unknown[];
       depth?: number;
     };
     indentationWidth?: number;
@@ -286,7 +287,8 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
         (activeId === data.id && projected ? projected?.depth : data.depth) ??
         0,
       indentationWidth,
-      id: data.id
+      id: data.id,
+      childrenLength: data.children ? data.children.length : 0
     };
   };
 
@@ -296,7 +298,7 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
     onDragStart,
     onDragMove,
     onDragEnd,
-    actionsItemDragAndDrop,
+    actionsItem,
     flattenedItems,
     activeItemOverlay: activeId !== null && activeItem,
     sortedIds,

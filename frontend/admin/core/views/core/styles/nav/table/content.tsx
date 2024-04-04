@@ -18,10 +18,15 @@ export const ContentTableContentNavAdmin = ({
   core_nav__show: { edges }
 }: Admin__Core_Nav__ShowQuery) => {
   const t = useTranslations("core");
-  const [data, setData] = useState<Omit<ShowCoreNav, "__typename">[]>(edges);
+  const [initData, setData] =
+    useState<Omit<ShowCoreNav, "__typename">[]>(edges);
+  const data = initData.map(item => ({
+    ...item,
+    children: item.children.map(child => ({ ...child, children: [] }))
+  }));
 
   const {
-    actionsItemDragAndDrop,
+    actionsItem,
     activeItemOverlay,
     flattenedItems,
     onDragEnd,
@@ -31,10 +36,7 @@ export const ContentTableContentNavAdmin = ({
     resetState,
     sortedIds
   } = useDragAndDrop<Omit<ShowCoreNav, "__typename">>({
-    data: data.map(item => ({
-      ...item,
-      children: item.children.map(child => ({ ...child, children: [] }))
-    }))
+    data
   });
 
   // Revalidate items when edges change
@@ -59,10 +61,7 @@ export const ContentTableContentNavAdmin = ({
       onDragStart={onDragStart}
       onDragEnd={async event => {
         const moveTo = onDragEnd<ShowCoreNav>({
-          data: data.map(item => ({
-            ...item,
-            children: item.children.map(child => ({ ...child, children: [] }))
-          })),
+          data,
           setData,
           ...event
         });
@@ -76,8 +75,7 @@ export const ContentTableContentNavAdmin = ({
         {flattenedItems.map(item => (
           <ItemDragAndDrop
             key={item.id}
-            childrenLength={item.children.length}
-            {...actionsItemDragAndDrop({
+            {...actionsItem({
               data: item,
               indentationWidth
             })}
@@ -89,7 +87,7 @@ export const ContentTableContentNavAdmin = ({
         <DragOverlay>
           {activeItemOverlay && (
             <ItemDragAndDrop
-              {...actionsItemDragAndDrop({
+              {...actionsItem({
                 data: activeItemOverlay
               })}
             >

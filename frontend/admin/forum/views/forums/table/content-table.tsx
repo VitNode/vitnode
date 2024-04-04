@@ -36,7 +36,7 @@ export const ContentTableForumsForumAdmin = ({
   const t = useTranslations("core");
   const { data, setData, updateData } = useForumForumsAdminAPI({ initData });
   const {
-    actionsItemDragAndDrop,
+    actionsItem,
     activeItemOverlay,
     flattenedItems,
     onDragEnd,
@@ -88,8 +88,7 @@ export const ContentTableForumsForumAdmin = ({
         {flattenedItems.map(item => (
           <ItemDragAndDrop
             key={item.id}
-            childrenLength={item.children.length}
-            {...actionsItemDragAndDrop({
+            {...actionsItem({
               data: item,
               onCollapse: ({ isOpen }) => {
                 if (!isOpen) {
@@ -106,7 +105,7 @@ export const ContentTableForumsForumAdmin = ({
         <DragOverlay>
           {activeItemOverlay && (
             <ItemDragAndDrop
-              {...actionsItemDragAndDrop({
+              {...actionsItem({
                 data: activeItemOverlay
               })}
             >

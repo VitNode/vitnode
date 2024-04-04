@@ -1,10 +1,13 @@
 import { Steps } from "nextra/components";
+import { Tabs } from "nextra/components";
 
 # Drag & Drop
 
 Thanks to [dnd-kit](https://dndkit.com/) library, you can drag and drop anything. You can drag and drop the cards in the list, the lists in the board, and the boards in the dashboard.
 
 ## Sortable List
+
+You can sort the list by dragging and dropping the items. This tutorial will show you how to implement a sortable list with `children` and without `children`.
 
 <Steps>
 
@@ -31,7 +34,10 @@ export const TableCategoriesCategoryAdmin = ({
 
 ### DndContext
 
-```tsx {4, 16}
+<Tabs items={['Without children', 'With children']}>
+  <Tabs.Tab>
+
+```tsx {4, 10, 15-29, 32-49, 51}
 "use client";
 
 import { useState } from "react";
@@ -41,182 +47,26 @@ import type {
   Admin_Blog_Categories__ShowQuery,
   ShowBlogCategories
 } from "@/graphql/hooks";
-
-export const TableCategoriesCategoryAdmin = ({
-  blog_categories__show: { edges }
-}: Admin_Blog_Categories__ShowQuery) => {
-  const [data] = useState<ShowBlogCategories[]>(edges);
-
-  return <DndContext collisionDetection={closestCorners}>test</DndContext>;
-};
-```
-
-### Flatt Items
-
-```tsx {3, 10, 16-23}
-"use client";
-
-import { useMemo, useState } from "react";
-import { DndContext, closestCorners } from "@dnd-kit/core";
-
-import type {
-  Admin_Blog_Categories__ShowQuery,
-  ShowBlogCategories
-} from "@/graphql/hooks";
 import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
 
 export const TableCategoriesCategoryAdmin = ({
   blog_categories__show: { edges }
 }: Admin_Blog_Categories__ShowQuery) => {
-  const [data] = useState<ShowBlogCategories[]>(edges);
-  const { flattItems } = useDragAndDrop();
-  const flattenedItems = flattItems({
-    data: data.map(item => ({ ...item, children: [] }))
-  });
-  const sortedIds = useMemo(
-    () => flattenedItems.map(({ id }) => id),
-    [flattenedItems]
-  );
-
-  return <DndContext collisionDetection={closestCorners}>test</DndContext>;
-};
-```
-
-### Sortable Context
-
-```tsx {5-8, 31-35}
-"use client";
-
-import { useMemo, useState } from "react";
-import { DndContext, closestCorners } from "@dnd-kit/core";
-import {
-  SortableContext,
-  verticalListSortingStrategy
-} from "@dnd-kit/sortable";
-
-import type {
-  Admin_Blog_Categories__ShowQuery,
-  ShowBlogCategories
-} from "@/graphql/hooks";
-import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
-
-export const TableCategoriesCategoryAdmin = ({
-  blog_categories__show: { edges }
-}: Admin_Blog_Categories__ShowQuery) => {
-  const [data, setData] = useState<ShowBlogCategories[]>(edges);
-  const { flattItems } = useDragAndDrop();
-  const flattenedItems = flattItems({
-    data: data.map(item => ({ ...item, children: [] }))
-  });
-  const sortedIds = useMemo(
-    () => flattenedItems.map(({ id }) => id),
-    [flattenedItems]
-  );
-
-  return (
-    <DndContext collisionDetection={closestCorners}>
-      <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
-        {flattenedItems.map(item => (
-          <div key={item.id}>{item.id}</div>
-        ))}
-      </SortableContext>
-    </DndContext>
-  );
-};
-```
-
-### Empty View
-
-```tsx {9, 20, 31-33}
-"use client";
-
-import { useMemo, useState } from "react";
-import { DndContext, closestCorners } from "@dnd-kit/core";
-import {
-  SortableContext,
-  verticalListSortingStrategy
-} from "@dnd-kit/sortable";
-import { useTranslations } from "next-intl";
-
-import type {
-  Admin_Blog_Categories__ShowQuery,
-  ShowBlogCategories
-} from "@/graphql/hooks";
-import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
-
-export const TableCategoriesCategoryAdmin = ({
-  blog_categories__show: { edges }
-}: Admin_Blog_Categories__ShowQuery) => {
-  const t = useTranslations("core");
-  const [data] = useState<ShowBlogCategories[]>(edges);
-  const { flattItems } = useDragAndDrop();
-  const flattenedItems = flattItems({
-    data: data.map(item => ({ ...item, children: [] }))
-  });
-  const sortedIds = useMemo(
-    () => flattenedItems.map(({ id }) => id),
-    [flattenedItems]
-  );
-
-  if (!data || data.length === 0) {
-    return <div className="text-center">{t("no_results")}</div>;
-  }
-
-  return (
-    <DndContext collisionDetection={closestCorners}>
-      <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
-        {flattenedItems.map(item => (
-          <div key={item.id}>{item.id}</div>
-        ))}
-      </SortableContext>
-    </DndContext>
-  );
-};
-```
-
-### onDrag Actions
-
-```tsx {15, 21-29, 45-61}
-"use client";
-
-import { useMemo, useState } from "react";
-import { DndContext, closestCorners } from "@dnd-kit/core";
-import {
-  SortableContext,
-  verticalListSortingStrategy
-} from "@dnd-kit/sortable";
-import { useTranslations } from "next-intl";
-
-import type {
-  Admin_Blog_Categories__ShowQuery,
-  ShowBlogCategories
-} from "@/graphql/hooks";
-import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
-
-export const TableCategoriesCategoryAdmin = ({
-  blog_categories__show: { edges }
-}: Admin_Blog_Categories__ShowQuery) => {
-  const t = useTranslations("core");
-  const [data, setData] = useState<ShowBlogCategories[]>(edges);
+  const [initData, setData] = useState<ShowBlogCategories[]>(edges);
+  const data = initData.map(item => ({
+    ...item,
+    children: []
+  }));
   const {
-    flattItems,
+    flattenedItems,
     onDragEnd,
     onDragMove,
     onDragOver,
     onDragStart,
     resetState
-  } = useDragAndDrop();
-  const flattenedItems = flattItems({
-    data: data.map(item => ({ ...item, children: [] }))
+  } = useDragAndDrop<ShowBlogCategories>({
+    data
   });
-  const sortedIds = useMemo(
-    () => flattenedItems.map(({ id }) => id),
-    [flattenedItems]
-  );
-
-  if (!data || data.length === 0) {
-    return <div className="text-center">{t("no_results")}</div>;
-  }
 
   return (
     <DndContext
@@ -225,13 +75,11 @@ export const TableCategoriesCategoryAdmin = ({
       onDragOver={onDragOver}
       onDragMove={e => onDragMove({ ...e, flattenedItems, maxDepth: 0 })}
       onDragStart={onDragStart}
-      onDragEnd={async ({ active, over, ...rest }) => {
+      onDragEnd={async event => {
         const moveTo = onDragEnd<ShowBlogCategories>({
-          active,
-          over,
-          data: data.map(item => ({ ...item, children: [] })),
+          data,
           setData,
-          ...rest
+          ...event
         });
 
         if (!moveTo) return;
@@ -239,37 +87,93 @@ export const TableCategoriesCategoryAdmin = ({
         await mutationChangePositionApi(moveTo);
       }}
     >
-      <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
-        {flattenedItems.map(item => (
-          <div key={item.id}>{item.id}</div>
-        ))}
-      </SortableContext>
+      test
     </DndContext>
   );
 };
 ```
 
-#### With Depth
+  </Tabs.Tab>
+  <Tabs.Tab>
 
-If you want to add depth to the items, you can use the `maxDepth` and `indentationWidth` parameter in the `onDragMove` function.
+```tsx {18, 26, 47}
+"use client";
 
-```tsx {1, 9}
-const indentationWidth = 16;
+import { useState } from "react";
+import { DndContext, closestCorners } from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy
+} from "@dnd-kit/sortable";
+
+import type {
+  Admin_Blog_Categories__ShowQuery,
+  ShowBlogCategories
+} from "@/graphql/hooks";
+import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
+import { ItemDragAndDrop } from "@/hooks/core/drag&drop/item";
+import { ItemTableCategoriesCategoryAdmin } from "./item";
+
+const indentationWidth = 20;
 
 export const TableCategoriesCategoryAdmin = ({
   blog_categories__show: { edges }
 }: Admin_Blog_Categories__ShowQuery) => {
+  const [initData, setData] = useState<ShowBlogCategories[]>(edges);
+  const data = initData.map(item => ({
+    ...item,
+    children: item.children.map(child => ({ ...child, children: [] }))
+  }));
+  const {
+    actionsItem,
+    flattenedItems,
+    onDragEnd,
+    onDragMove,
+    onDragOver,
+    onDragStart,
+    resetState,
+    sortedIds
+  } = useDragAndDrop<ShowBlogCategories>({
+    data
+  });
+
   return (
     <DndContext
+      collisionDetection={closestCorners}
+      onDragCancel={resetState}
+      onDragOver={onDragOver}
       onDragMove={e =>
-        onDragMove({ ...e, flattenedItems, maxDepth: 1, indentationWidth })
+        onDragMove({ ...e, flattenedItems, maxDepth: 2, indentationWidth })
       }
+      onDragStart={onDragStart}
+      onDragEnd={async event => {
+        const moveTo = onDragEnd<ShowBlogCategories>({
+          data,
+          setData,
+          ...event
+        });
+
+        if (!moveTo) return;
+
+        await mutationChangePositionApi(moveTo);
+      }}
     >
-      ...
+      test
     </DndContext>
   );
 };
 ```
+
+  </Tabs.Tab>
+</Tabs>
+
+`data` in `useDragAndDrop` and `onDragEnd` requires children in the items. If you don't have children in the items, you can add an empty array to the children.
+
+#### onDragMove
+
+The `onDragMove` function is used to move the item while dragging. You can use this function to move the item to the desired location.
+
+Here are the parameters of the `onDragMove` function:
 
 - maxDepth - The maximum depth of the item.
 
@@ -280,5 +184,194 @@ export const TableCategoriesCategoryAdmin = ({
   - undefined - Infinite depth
 
 - indentationWidth - The width _(in px)_ of the indentation.
+
+#### onDragEnd
+
+The `onDragEnd` function is used to move the item to the desired location when the drag is finished. You can use this function to move the item to the desired location.
+
+Return values:
+
+- `id` - number
+- `parentId` - number
+- `indexToMove` - number
+
+### SortableContext
+
+<Tabs items={['Without children', 'With children']}>
+  <Tabs.Tab>
+
+```tsx {5-8, 15-16, 23-24, 30, 39-45 }
+"use client";
+
+import { useState } from "react";
+import { DndContext, closestCorners } from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy
+} from "@dnd-kit/sortable";
+
+import type {
+  Admin_Blog_Categories__ShowQuery,
+  ShowBlogCategories
+} from "@/graphql/hooks";
+import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
+import { ItemDragAndDrop } from "@/hooks/core/drag&drop/item";
+import { ItemTableCategoriesCategoryAdmin } from "./item";
+
+export const TableCategoriesCategoryAdmin = ({
+  blog_categories__show: { edges }
+}: Admin_Blog_Categories__ShowQuery) => {
+  ...
+  const {
+    actionsItem,
+    flattenedItems,
+    onDragEnd,
+    onDragMove,
+    onDragOver,
+    onDragStart,
+    resetState,
+    sortedIds
+  } = useDragAndDrop<ShowBlogCategories>({
+    data
+  });
+
+  return (
+    <DndContext
+      ...
+    >
+      <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
+        {flattenedItems.map(item => (
+          <ItemDragAndDrop key={item.id} {...actionsItem({ data: item })}>
+            <ItemTableCategoriesCategoryAdmin data={item} />
+          </ItemDragAndDrop>
+        ))}
+      </SortableContext>
+    </DndContext>
+  );
+};
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+
+```tsx {43}
+"use client";
+
+import { useState } from "react";
+import { DndContext, closestCorners } from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy
+} from "@dnd-kit/sortable";
+
+import type {
+  Admin_Blog_Categories__ShowQuery,
+  ShowBlogCategories
+} from "@/graphql/hooks";
+import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
+import { ItemDragAndDrop } from "@/hooks/core/drag&drop/item";
+import { ItemTableCategoriesCategoryAdmin } from "./item";
+
+export const TableCategoriesCategoryAdmin = ({
+  blog_categories__show: { edges }
+}: Admin_Blog_Categories__ShowQuery) => {
+  ...
+  const {
+    actionsItem,
+    flattenedItems,
+    onDragEnd,
+    onDragMove,
+    onDragOver,
+    onDragStart,
+    resetState,
+    sortedIds
+  } = useDragAndDrop<ShowBlogCategories>({
+    data
+  });
+
+  return (
+    <DndContext
+      ...
+    >
+      <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
+        {flattenedItems.map(item => (
+          <ItemDragAndDrop
+            key={item.id}
+            {...actionsItem({ data: item, indentationWidth })}
+          >
+            <ItemTableCategoriesCategoryAdmin data={item} />
+          </ItemDragAndDrop>
+        ))}
+      </SortableContext>
+    </DndContext>
+  );
+};
+```
+
+  </Tabs.Tab>
+
+</Tabs>
+
+`ItemTableCategoriesCategoryAdmin` is a component that displays the item. You can create a component that displays the item.
+
+### DragOverlay
+
+The `DragOverlay` component is used to display the item while dragging. You can use this component to display the item while dragging.
+
+```tsx {4, 24, 39-49}
+"use client";
+
+import { useState } from "react";
+import { DndContext, DragOverlay, closestCorners } from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy
+} from "@dnd-kit/sortable";
+
+import type {
+  Admin_Blog_Categories__ShowQuery,
+  ShowBlogCategories
+} from "@/graphql/hooks";
+import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
+import { ItemDragAndDrop } from "@/hooks/core/drag&drop/item";
+import { ItemTableCategoriesCategoryAdmin } from "./item";
+
+export const TableCategoriesCategoryAdmin = ({
+  blog_categories__show: { edges }
+}: Admin_Blog_Categories__ShowQuery) => {
+  ...
+  const {
+    actionsItem,
+    activeItemOverlay,
+    ...
+  } = useDragAndDrop<ShowBlogCategories>({
+    data
+  });
+
+  return (
+    <DndContext
+      ...
+    >
+      <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
+        {flattenedItems.map(item => (
+          ...
+        ))}
+
+        <DragOverlay>
+          {activeItemOverlay && (
+            <ItemDragAndDrop
+              {...actionsItem({
+                data: activeItemOverlay
+              })}
+            >
+              <ItemTableCategoriesCategoryAdmin data={activeItemOverlay} />
+            </ItemDragAndDrop>
+          )}
+        </DragOverlay>
+      </SortableContext>
+    </DndContext>
+  );
+};
+```
 
 </Steps>

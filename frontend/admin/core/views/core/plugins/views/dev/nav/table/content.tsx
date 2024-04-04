@@ -19,9 +19,10 @@ export const ContentTableNavDevPluginAdmin = ({
   admin__core_plugins__nav__show: edges
 }: Admin__Core_Plugins__Nav__ShowQuery) => {
   const t = useTranslations("core");
-  const [data, setData] = useState<ShowAdminNavPluginsObj[]>(edges);
+  const [initData, setData] = useState<ShowAdminNavPluginsObj[]>(edges);
+  const data = initData.map(item => ({ ...item, children: [] }));
   const {
-    actionsItemDragAndDrop,
+    actionsItem,
     activeItemOverlay,
     flattenedItems,
     onDragEnd,
@@ -31,7 +32,7 @@ export const ContentTableNavDevPluginAdmin = ({
     resetState,
     sortedIds
   } = useDragAndDrop<ShowAdminNavPluginsObj>({
-    data: data.map(item => ({ ...item, children: [] }))
+    data
   });
 
   // Revalidate items when edges change
@@ -54,7 +55,7 @@ export const ContentTableNavDevPluginAdmin = ({
       onDragStart={onDragStart}
       onDragEnd={async event => {
         const moveTo = onDragEnd<ShowAdminNavPluginsObj>({
-          data: data.map(item => ({ ...item, children: [] })),
+          data,
           setData,
           ...event
         });
@@ -68,7 +69,7 @@ export const ContentTableNavDevPluginAdmin = ({
         {flattenedItems.map(item => (
           <ItemDragAndDrop
             key={item.id}
-            {...actionsItemDragAndDrop({
+            {...actionsItem({
               data: item
             })}
           >
@@ -79,7 +80,7 @@ export const ContentTableNavDevPluginAdmin = ({
         <DragOverlay>
           {activeItemOverlay && (
             <ItemDragAndDrop
-              {...actionsItemDragAndDrop({
+              {...actionsItem({
                 data: activeItemOverlay
               })}
             >
