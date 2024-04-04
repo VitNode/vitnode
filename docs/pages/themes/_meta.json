@@ -2,8 +2,9 @@
   "overview": "Overview",
   "components": "Components",
   "graphql": "GraphQL",
-  "fetch": "Fetch and Revalidate Data",
+  "fetch": "Fetch & Revalidate Data",
   "forms": "Forms",
   "i18n": "Internationalization (i18n)",
-  "virtualization": "Virtualization"
+  "virtualization": "Virtualization",
+  "drag&drop": "Drag & Drop"
 }

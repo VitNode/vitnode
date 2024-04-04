@@ -23,4 +23,7 @@ export class CreatePluginCategoriesArgs {
   @Transform(TransformTextLanguageInput)
   @Field(() => [TextLanguageInput])
   description: TextLanguageInput[];
+
+  @Field(() => String)
+  color: string;
 }

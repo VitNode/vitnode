@@ -1,8 +1,13 @@
 mutation Admin__blog_categories__create(
   $description: [TextLanguageInput!]!
   $name: [TextLanguageInput!]!
+  $color: String!
 ) {
-  admin__blog_categories__create(description: $description, name: $name) {
+  admin__blog_categories__create(
+    description: $description
+    name: $name
+    color: $color
+  ) {
     id
   }
 }

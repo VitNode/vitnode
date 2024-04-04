@@ -1,28 +1,28 @@
 "use client";
 
+import { useState } from "react";
 import { DndContext, DragOverlay, closestCorners } from "@dnd-kit/core";
 import {
   SortableContext,
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
-import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
 
-import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
 import type {
-  Admin__Core_Plugins__Nav__ShowQuery,
-  ShowAdminNavPluginsObj
+  Admin_Blog_Categories__ShowQuery,
+  ShowBlogCategories
 } from "@/graphql/hooks";
-import { ItemContentTableNavDevPluginAdmin } from "./item";
-import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
+import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
 import { ItemDragAndDrop } from "@/hooks/core/drag&drop/item";
+import { ItemTableCategoriesCategoryAdmin } from "./item";
 
-export const TableNavDevPluginAdmin = ({
-  admin__core_plugins__nav__show: edges
-}: Admin__Core_Plugins__Nav__ShowQuery) => {
-  const t = useTranslations("core");
-  const [initData, setData] = useState<ShowAdminNavPluginsObj[]>(edges);
-  const data = initData.map(item => ({ ...item, children: [] }));
+export const TableCategoriesCategoryAdmin = ({
+  blog_categories__show: { edges }
+}: Admin_Blog_Categories__ShowQuery) => {
+  const [initData, setData] = useState<ShowBlogCategories[]>(edges);
+  const data = initData.map(item => ({
+    ...item,
+    children: []
+  }));
   const {
     actionsItem,
     activeItemOverlay,
@@ -33,20 +33,9 @@ export const TableNavDevPluginAdmin = ({
     onDragStart,
     resetState,
     sortedIds
-  } = useDragAndDrop<ShowAdminNavPluginsObj>({
+  } = useDragAndDrop<ShowBlogCategories>({
     data
   });
-
-  // Revalidate items when edges change
-  useEffect(() => {
-    if (!edges || !data) return;
-
-    setData(edges);
-  }, [edges]);
-
-  if (!data || data.length === 0) {
-    return <div className="text-center">{t("no_results")}</div>;
-  }
 
   return (
     <DndContext
@@ -56,7 +45,7 @@ export const TableNavDevPluginAdmin = ({
       onDragMove={e => onDragMove({ ...e, flattenedItems, maxDepth: 0 })}
       onDragStart={onDragStart}
       onDragEnd={async event => {
-        const moveTo = onDragEnd<ShowAdminNavPluginsObj>({
+        const moveTo = onDragEnd<ShowBlogCategories>({
           data,
           setData,
           ...event
@@ -64,18 +53,20 @@ export const TableNavDevPluginAdmin = ({
 
         if (!moveTo) return;
 
-        await mutationChangePositionApi(moveTo);
+        // await mutationChangePositionApi(moveTo);
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
         {flattenedItems.map(item => (
           <ItemDragAndDrop
             key={item.id}
-            {...actionsItem({
-              data: item
-            })}
+            {...actionsItem({ data: item })}
+            draggableStyle={{
+              background: item.color.replace(")", ", 0.2 )"),
+              color: item.color
+            }}
           >
-            <ItemContentTableNavDevPluginAdmin data={item} />
+            <ItemTableCategoriesCategoryAdmin data={item} />
           </ItemDragAndDrop>
         ))}
 
@@ -85,8 +76,12 @@ export const TableNavDevPluginAdmin = ({
               {...actionsItem({
                 data: activeItemOverlay
               })}
+              draggableStyle={{
+                background: activeItemOverlay.color.replace(")", ", 0.2 )"),
+                color: activeItemOverlay.color
+              }}
             >
-              <ItemContentTableNavDevPluginAdmin data={activeItemOverlay} />
+              <ItemTableCategoriesCategoryAdmin data={activeItemOverlay} />
             </ItemDragAndDrop>
           )}
         </DragOverlay>

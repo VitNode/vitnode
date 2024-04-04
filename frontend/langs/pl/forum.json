@@ -77,7 +77,7 @@
           "permissions": "Uprawnienia"
         },
         "create_title": "Stwórz forum",
-        "edit_title": "Edytuj forum - {name}",
+        "edit_title": "Edytuj forum",
         "name": "Nazwa",
         "desc": "Opis"
       },

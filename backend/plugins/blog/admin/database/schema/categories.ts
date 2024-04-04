@@ -14,7 +14,8 @@ import { core_languages } from "@/plugins/core/admin/database/schema/languages";
 export const blog_categories = pgTable("blog_categories", {
   id: serial("id").primaryKey(),
   created: timestamp("created").notNull().defaultNow(),
-  position: integer("position").notNull().default(0)
+  position: integer("position").notNull().default(0),
+  color: varchar("color", { length: 30 }).notNull().default("")
 });
 
 export const blog_categories_relations = relations(

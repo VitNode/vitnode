@@ -15,6 +15,9 @@
           "description": {
             "label": "Opis"
           },
+          "color": {
+            "label": "Kolor"
+          },
           "submit": "Dodaj Kategorie"
         },
         "edit": {

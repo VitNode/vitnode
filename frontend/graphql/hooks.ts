@@ -244,6 +244,7 @@ export type Mutation = {
 
 
 export type MutationAdmin__Blog_Categories__CreateArgs = {
+  color: Scalars['String']['input'];
   description: Array<TextLanguageInput>;
   name: Array<TextLanguageInput>;
 };
@@ -970,6 +971,7 @@ export const ShowAdminThemesSortingColumnEnum = {
 export type ShowAdminThemesSortingColumnEnum = typeof ShowAdminThemesSortingColumnEnum[keyof typeof ShowAdminThemesSortingColumnEnum];
 export type ShowBlogCategories = {
   __typename?: 'ShowBlogCategories';
+  color: Scalars['String']['output'];
   description?: Maybe<Array<TextLanguage>>;
   id: Scalars['Int']['output'];
   name: Array<TextLanguage>;
@@ -1571,6 +1573,7 @@ export type Admin__Core_Themes__UploadMutation = { __typename?: 'Mutation', admi
 export type Admin__Blog_Categories__CreateMutationVariables = Exact<{
   description: Array<TextLanguageInput> | TextLanguageInput;
   name: Array<TextLanguageInput> | TextLanguageInput;
+  color: Scalars['String']['input'];
 }>;
 
 
@@ -1825,6 +1828,11 @@ export type Admin_Core_Themes__ShowQueryVariables = Exact<{
 
 
 export type Admin_Core_Themes__ShowQuery = { __typename?: 'Query', admin__core_themes__show: { __typename?: 'ShowAdminThemesObj', edges: Array<{ __typename?: 'ShowAdminThemes', author: string, author_url?: string | null, created: Date, default: boolean, id: number, name: string, protected: boolean, support_url: string, version?: string | null, version_code?: number | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+
+export type Admin_Blog_Categories__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Admin_Blog_Categories__ShowQuery = { __typename?: 'Query', blog_categories__show: { __typename?: 'ShowBlogCategoriesObj', edges: Array<{ __typename?: 'ShowBlogCategories', color: string, id: number, position: number, description?: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> | null, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2251,8 +2259,12 @@ export const Admin__Core_Themes__Upload = gql`
 }
     `;
 export const Admin__Blog_Categories__Create = gql`
-    mutation Admin__blog_categories__create($description: [TextLanguageInput!]!, $name: [TextLanguageInput!]!) {
-  admin__blog_categories__create(description: $description, name: $name) {
+    mutation Admin__blog_categories__create($description: [TextLanguageInput!]!, $name: [TextLanguageInput!]!, $color: String!) {
+  admin__blog_categories__create(
+    description: $description
+    name: $name
+    color: $color
+  ) {
     id
   }
 }
@@ -2862,6 +2874,25 @@ export const Admin_Core_Themes__Show = gql`
       hasPreviousPage
       startCursor
       totalCount
+    }
+  }
+}
+    `;
+export const Admin_Blog_Categories__Show = gql`
+    query Admin_blog_categories__show {
+  blog_categories__show {
+    edges {
+      color
+      description {
+        language_code
+        value
+      }
+      id
+      name {
+        language_code
+        value
+      }
+      position
     }
   }
 }

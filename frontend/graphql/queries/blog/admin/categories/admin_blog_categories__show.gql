@@ -1,0 +1,17 @@
+query Admin_blog_categories__show {
+  blog_categories__show {
+    edges {
+      color
+      description {
+        language_code
+        value
+      }
+      id
+      name {
+        language_code
+        value
+      }
+      position
+    }
+  }
+}

@@ -72,7 +72,7 @@
           "permissions": "Permissions"
         },
         "create_title": "Create Forum",
-        "edit_title": "Edit Forum - {name}",
+        "edit_title": "Edit Forum",
         "name": "Name",
         "desc": "Description"
       },
