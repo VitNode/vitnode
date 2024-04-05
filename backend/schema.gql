@@ -255,6 +255,7 @@ type PermissionsTopicForums {
 }
 
 type Query {
+  aaaaa_forum_posts__test: ShowPostsForumsTestObj!
   admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
   admin__core_members__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   admin__core_members__stats_sign_up: [SignUpStatsAdminMembers!]!
@@ -666,6 +667,12 @@ type ShowPostsForumsMetaTags {
   user: User!
 }
 
+type ShowPostsForumsMetaTagsTest {
+  action: TopicActions!
+  action_id: Int!
+  user: User!
+}
+
 type ShowPostsForumsObj {
   edges: [postsWithMetaTagsUnion!]!
   lastEdges: [postsWithMetaTagsUnion!]!
@@ -675,6 +682,16 @@ type ShowPostsForumsObj {
 enum ShowPostsForumsSortingEnum {
   newest
   oldest
+}
+
+type ShowPostsForumsTest {
+  content: [TextLanguage!]!
+  post_id: Int!
+  user: User!
+}
+
+type ShowPostsForumsTestObj {
+  edges: [postsWithMetaTagsUniontest!]!
 }
 
 type ShowTopicsForums {
@@ -760,3 +777,5 @@ type User {
 union UserOrGroupCoreStaffUnion = StaffGroupUser | User
 
 union postsWithMetaTagsUnion = ShowPostsForums | ShowPostsForumsMetaTags
+
+union postsWithMetaTagsUniontest = ShowPostsForumsMetaTagsTest | ShowPostsForumsTest

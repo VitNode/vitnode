@@ -10,7 +10,7 @@ import { PageInfo } from "@/types/database/pagination.type";
 import { TextLanguage } from "@/types/database/text-language.type";
 import { User } from "@/utils/decorators/user.decorator";
 
-enum TopicActions {
+export enum TopicActions {
   lock = "lock",
   unlock = "unlock"
 }
@@ -52,7 +52,7 @@ export class ShowPostsForums extends ShowPostsForumsItemCommon {
   user: User;
 }
 
-const PostsWithMetaTagsUnion = createUnionType({
+export const PostsWithMetaTagsUnion = createUnionType({
   name: "postsWithMetaTagsUnion",
   types: () => [ShowPostsForums, ShowPostsForumsMetaTags] as const,
   resolveType(value) {
