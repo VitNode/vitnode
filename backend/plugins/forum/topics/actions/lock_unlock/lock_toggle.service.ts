@@ -10,7 +10,6 @@ import {
   forum_topics,
   forum_topics_logs
 } from "@/plugins/forum/admin/database/schema/topics";
-import { forum_posts_timeline } from "@/plugins/forum/admin/database/schema/posts";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 
 @Injectable()
@@ -55,7 +54,7 @@ export class LockToggleForumTopicsService {
       .where(eq(forum_topics.id, id));
 
     // Create log
-    const log = await this.databaseService.db
+    await this.databaseService.db
       .insert(forum_topics_logs)
       .values({
         topic_id: topic.id,
@@ -64,12 +63,6 @@ export class LockToggleForumTopicsService {
         ip_address: req.ip
       })
       .returning();
-
-    // Add log to timeline
-    await this.databaseService.db.insert(forum_posts_timeline).values({
-      topic_log_id: log[0].id,
-      topic_id: id
-    });
 
     return !topic.locked;
   }

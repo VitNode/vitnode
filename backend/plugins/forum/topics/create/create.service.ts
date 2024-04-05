@@ -60,8 +60,7 @@ export class CreateForumTopicsService {
     const post = await this.createPostService.create(
       user,
       { content, topic_id: data[0].id },
-      { req, res },
-      true // Skip timeline
+      { req, res }
     );
 
     const topic = await this.databaseService.db.query.forum_topics.findFirst({

@@ -25,7 +25,10 @@ export const core_users = pgTable(
     posts: integer("posts").notNull().default(0),
     newsletter: boolean("newsletter").notNull().default(false),
     avatar_color: varchar("avatar_color", { length: 6 }).notNull(),
-    group_id: integer("group_id").references(() => core_groups.id)
+    group_id: integer("group_id").references(() => core_groups.id),
+    first_name: varchar("first_name", { length: 255 }),
+    last_name: varchar("last_name", { length: 255 }),
+    birthday: timestamp("birthday")
   },
   table => ({
     name_seo_idx: index("core_users_name_seo_idx").on(table.name_seo),

@@ -7,30 +7,38 @@ import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { DeletePostsForumsArgs } from "@/plugins/forum/posts/delete/dto/delete.args";
 import { DatabaseService } from "@/plugins/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
+import { CustomError } from "@/utils/errors/CustomError";
 
 @Injectable()
 export class DeleteForumsPostsService {
   constructor(private databaseService: DatabaseService) {}
 
   async delete(user: User, { id }: DeletePostsForumsArgs): Promise<string> {
-    const { post_id } =
-      await this.databaseService.db.query.forum_posts_timeline.findFirst({
-        where: (table, { eq }) => eq(table.id, id),
-        columns: {
-          post_id: true
-        }
-      });
-
     const post = await this.databaseService.db.query.forum_posts.findFirst({
-      where: (table, { eq }) => eq(table.id, post_id)
+      where: (table, { eq }) => eq(table.id, id)
     });
 
     if (!post) throw new NotFoundError("Post");
     if (user.id !== post.user_id) throw new AccessDeniedError();
 
+    // Check if it's the first post
+    const firstPost = await this.databaseService.db.query.forum_posts.findFirst(
+      {
+        where: (table, { eq }) => eq(table.topic_id, post.topic_id),
+        orderBy: (table, { asc }) => asc(table.created)
+      }
+    );
+
+    if (firstPost.id === post.id) {
+      throw new CustomError({
+        code: "FORUM_POSTS_DELETE_FIRST_POST",
+        message: "You can't delete the first post of a topic"
+      });
+    }
+
     await this.databaseService.db
       .delete(forum_posts)
-      .where(eq(forum_posts.id, post_id))
+      .where(eq(forum_posts.id, id))
       .execute();
 
     return "Success!";

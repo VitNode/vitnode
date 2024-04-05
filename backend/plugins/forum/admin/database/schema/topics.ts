@@ -11,7 +11,7 @@ import {
 import { relations } from "drizzle-orm";
 
 import { forum_forums } from "./forums";
-import { forum_posts, forum_posts_timeline } from "./posts";
+import { forum_posts } from "./posts";
 
 import { core_languages } from "@/plugins/core/admin/database/schema/languages";
 import { core_users } from "@/plugins/core/admin/database/schema/users";
@@ -43,8 +43,7 @@ export const forum_topics_relations = relations(
     }),
     title: many(forum_topics_titles),
     logs: many(forum_topics_logs),
-    posts: many(forum_posts),
-    timeline: many(forum_posts_timeline)
+    posts: many(forum_posts)
   })
 );
 

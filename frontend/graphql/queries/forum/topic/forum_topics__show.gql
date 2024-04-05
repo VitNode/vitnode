@@ -1,10 +1,7 @@
 query Forum_topics__show(
   $id: Int!
-  $first: Int
-  $cursor: Int
-  $last: Int
   $sortBy: ShowPostsForumsSortingEnum
-  $firstEdges: Int
+  $limit: Int!
 ) {
   forum_topics__show(id: $id) {
     edges {
@@ -50,14 +47,7 @@ query Forum_topics__show(
       }
     }
   }
-  forum_posts__show(
-    topic_id: $id
-    cursor: $cursor
-    first: $first
-    last: $last
-    sortBy: $sortBy
-    firstEdges: $firstEdges
-  ) {
+  forum_posts__show(topic_id: $id, sortBy: $sortBy, limit: $limit) {
     edges {
       __typename
       ... on ShowPostsForums {
@@ -65,7 +55,6 @@ query Forum_topics__show(
           value
           language_code
         }
-        id
         user {
           avatar_color
           avatar {
@@ -89,7 +78,58 @@ query Forum_topics__show(
       }
       ... on ShowPostsForumsMetaTags {
         action
-        id
+        user {
+          avatar_color
+          avatar {
+            id
+            dir_folder
+            name
+          }
+          group {
+            id
+            name {
+              language_code
+              value
+            }
+          }
+          id
+          name_seo
+          name
+        }
+        created
+        action_id
+      }
+    }
+    lastEdges {
+      __typename
+      ... on ShowPostsForums {
+        content {
+          value
+          language_code
+        }
+        user {
+          avatar_color
+          avatar {
+            id
+            dir_folder
+            name
+          }
+          group {
+            id
+            name {
+              language_code
+              value
+            }
+          }
+          id
+          name_seo
+          name
+        }
+        created
+        post_id
+      }
+      ... on ShowPostsForumsMetaTags {
+        action
         user {
           avatar_color
           avatar {
@@ -113,66 +153,10 @@ query Forum_topics__show(
       }
     }
     pageInfo {
-      count
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
+      totalPostsCount
       totalCount
-    }
-    lastEdges {
-      __typename
-      ... on ShowPostsForums {
-        content {
-          value
-          language_code
-        }
-        id
-        user {
-          avatar_color
-          avatar {
-            id
-            dir_folder
-            name
-          }
-          group {
-            id
-            name {
-              language_code
-              value
-            }
-          }
-          id
-          name_seo
-          name
-        }
-        created
-        post_id
-      }
-      ... on ShowPostsForumsMetaTags {
-        action
-        id
-        user {
-          avatar_color
-          avatar {
-            id
-            dir_folder
-            name
-          }
-          group {
-            id
-            name {
-              language_code
-              value
-            }
-          }
-          id
-          name_seo
-          name
-        }
-        created
-        action_id
-      }
+      limit
+      hasNextPage
     }
   }
 }

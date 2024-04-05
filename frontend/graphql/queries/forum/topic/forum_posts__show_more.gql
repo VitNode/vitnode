@@ -1,11 +1,15 @@
 query Forum_posts__show_more(
   $id: Int!
-  $first: Int
-  $cursor: Int
-  $last: Int
+  $limit: Int!
   $sortBy: ShowPostsForumsSortingEnum
+  $page: Int
 ) {
-  forum_posts__show(topic_id: $id, cursor: $cursor, first: $first, last: $last, sortBy: $sortBy) {
+  forum_posts__show(
+    topic_id: $id
+    limit: $limit
+    sortBy: $sortBy
+    page: $page
+  ) {
     edges {
       __typename
       ... on ShowPostsForums {
@@ -13,7 +17,6 @@ query Forum_posts__show_more(
           value
           language_code
         }
-        id
         user {
           avatar_color
           avatar {
@@ -37,7 +40,6 @@ query Forum_posts__show_more(
       }
       ... on ShowPostsForumsMetaTags {
         action
-        id
         user {
           avatar_color
           avatar {
@@ -61,12 +63,8 @@ query Forum_posts__show_more(
       }
     }
     pageInfo {
-      count
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
       totalCount
+      hasNextPage
     }
   }
 }

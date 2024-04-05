@@ -6,11 +6,10 @@ import {
   registerEnumType
 } from "@nestjs/graphql";
 
-import { PageInfo } from "@/types/database/pagination.type";
 import { TextLanguage } from "@/types/database/text-language.type";
 import { User } from "@/utils/decorators/user.decorator";
 
-enum TopicActions {
+export enum TopicActions {
   lock = "lock",
   unlock = "unlock"
 }
@@ -20,16 +19,7 @@ registerEnumType(TopicActions, {
 });
 
 @ObjectType()
-class ShowPostsForumsItemCommon {
-  @Field(() => Int)
-  id: number;
-
-  @Field(() => Date)
-  created: Date;
-}
-
-@ObjectType()
-export class ShowPostsForumsMetaTags extends ShowPostsForumsItemCommon {
+export class ShowPostsForumsMetaTags {
   @Field(() => Int)
   action_id: number;
 
@@ -38,10 +28,13 @@ export class ShowPostsForumsMetaTags extends ShowPostsForumsItemCommon {
 
   @Field(() => User)
   user: User;
+
+  @Field(() => Date)
+  created: Date;
 }
 
 @ObjectType()
-export class ShowPostsForums extends ShowPostsForumsItemCommon {
+export class ShowPostsForums {
   @Field(() => Int)
   post_id: number;
 
@@ -50,6 +43,9 @@ export class ShowPostsForums extends ShowPostsForumsItemCommon {
 
   @Field(() => User)
   user: User;
+
+  @Field(() => Date)
+  created: Date;
 }
 
 const PostsWithMetaTagsUnion = createUnionType({
@@ -69,6 +65,21 @@ const PostsWithMetaTagsUnion = createUnionType({
 });
 
 @ObjectType()
+class PageInfoShowPostsForums {
+  @Field(() => Int)
+  totalCount: number;
+
+  @Field(() => Int)
+  totalPostsCount: number;
+
+  @Field(() => Int)
+  limit: number;
+
+  @Field(() => Boolean)
+  hasNextPage: boolean;
+}
+
+@ObjectType()
 export class ShowPostsForumsObj {
   @Field(() => [PostsWithMetaTagsUnion])
   edges: (ShowPostsForums | ShowPostsForumsMetaTags)[];
@@ -76,6 +87,6 @@ export class ShowPostsForumsObj {
   @Field(() => [PostsWithMetaTagsUnion])
   lastEdges: (ShowPostsForums | ShowPostsForumsMetaTags)[];
 
-  @Field(() => PageInfo)
-  pageInfo: PageInfo;
+  @Field(() => PageInfoShowPostsForums)
+  pageInfo: PageInfoShowPostsForums;
 }

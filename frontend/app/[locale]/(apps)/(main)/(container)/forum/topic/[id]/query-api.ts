@@ -7,7 +7,7 @@ import {
 } from "@/graphql/hooks";
 import { getIdFormString } from "@/functions/url";
 
-export const firstEdgesTopiData = 25;
+export const limit = 25;
 
 export const getTopicData = async ({
   id,
@@ -31,7 +31,7 @@ export const getTopicData = async ({
     variables: {
       id: getIdFormString(id),
       sortBy,
-      firstEdges: firstEdgesTopiData
+      limit
     },
     cache: "force-cache",
     next: {
