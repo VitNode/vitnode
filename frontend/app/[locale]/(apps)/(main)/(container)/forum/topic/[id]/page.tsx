@@ -2,7 +2,7 @@ import { lazy, type LazyExoticComponent } from "react";
 
 import { type TopicViewProps } from "@/themes/1/forum/views/forum/topic/topic-view";
 import { getSessionData } from "@/functions/get-session-data";
-import { firstEdgesTopiData, getTopicData } from "./query-api";
+import { getTopicData } from "./query-api";
 
 interface Props {
   params: {
@@ -28,5 +28,5 @@ export default async function Page({
     )
   );
 
-  return <PageFromTheme data={data} firstEdges={firstEdgesTopiData} />;
+  return <PageFromTheme data={data} />;
 }

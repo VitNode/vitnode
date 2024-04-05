@@ -6,24 +6,18 @@ import { ListPosts } from "../list";
 import { cn } from "@/functions/classnames";
 
 interface Props {
-  endCursor: number;
-  firstEdges: number;
   initialCount: number;
+  limit: number;
   totalCount: number;
 }
 
-export const LoadMorePosts = ({
-  endCursor,
-  firstEdges,
-  initialCount,
-  totalCount
-}: Props) => {
+export const LoadMorePosts = ({ initialCount, limit, totalCount }: Props) => {
   const { data, fetchNextPage, isFetching } = useMorePosts({
     totalCount,
     initialCount,
-    endCursor
+    limit
   });
-  const countToLoad = totalCount - data.length - firstEdges * 2;
+  const countToLoad = totalCount - data.length - limit * 2;
 
   return (
     <>

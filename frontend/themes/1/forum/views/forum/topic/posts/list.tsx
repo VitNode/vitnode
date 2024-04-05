@@ -4,7 +4,6 @@ import type { ShowPostsForums, ShowPostsForumsMetaTags } from "@/graphql/hooks";
 import { PostTopic } from "./post/post";
 import { MetaTagTopic } from "./meta-tags/meta-tag";
 import { cn } from "@/functions/classnames";
-import { WrapperPosts } from "./wrapper/wrapper";
 import { ActionsPost } from "./post/actions/actions";
 
 interface Props {
@@ -32,29 +31,28 @@ export const ListPosts = ({ className, edges, id }: Props) => {
       {edges.map(edge => {
         if (edge.__typename === "ShowPostsForums") {
           return (
-            <>
-              <WrapperPosts>
-                <PostTopic
-                  key={`post_list_${edge.id}`}
-                  {...edge}
-                  customMoreMenu={
-                    <>
-                      <ActionsPost
-                        id={edge.id}
-                        state={{ locked: false }}
-                        permissions={permissions}
-                      />
-                    </>
-                  }
-                />
-              </WrapperPosts>
-            </>
+            <PostTopic
+              key={`post_list_${edge.post_id}`}
+              {...edge}
+              customMoreMenu={
+                <>
+                  <ActionsPost
+                    id={edge.post_id}
+                    state={{ locked: false }}
+                    permissions={permissions}
+                  />
+                </>
+              }
+            />
           );
         }
 
         if (edge.__typename === "ShowPostsForumsMetaTags") {
           return (
-            <MetaTagTopic key={`post_meta_tag_list_${edge.id}`} {...edge} />
+            <MetaTagTopic
+              key={`post_meta_tag_list_${edge.action_id}`}
+              {...edge}
+            />
           );
         }
 

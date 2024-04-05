@@ -1,71 +1,36 @@
 import { Injectable } from "@nestjs/common";
-import { and, asc, count, eq, sql } from "drizzle-orm";
+import { and, asc, count, desc, eq, sql, ne } from "drizzle-orm";
+import { unionAll } from "drizzle-orm/pg-core";
 
-import {
-  ShowPostsForumsArgs,
-  ShowPostsForumsSortingEnum
-} from "./dto/show.args";
+import { ShowPostsForumsArgs } from "./dto/show.args";
 import { ShowPostsForumsObj } from "./dto/show.obj";
 
-import {
-  inputPaginationCursor,
-  outputPagination
-} from "@/functions/database/pagination";
 import { DatabaseService } from "@/plugins/database/database.service";
 import { forum_posts } from "@/plugins/forum/admin/database/schema/posts";
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { User } from "@/utils/decorators/user.decorator";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
-import { unionAll } from "drizzle-orm/pg-core";
 import { forum_topics_logs } from "../../admin/database/schema/topics";
 
 @Injectable()
 export class ShowPostsForumsService {
   constructor(private databaseService: DatabaseService) {}
 
-  async show(
-    { cursor, first, firstEdges, last, sortBy, topic_id }: ShowPostsForumsArgs,
-    user: User | null
-  ): Promise<ShowPostsForumsObj> {
-    const topic = await this.databaseService.db.query.forum_topics.findFirst({
-      where: (table, { eq }) => eq(table.id, topic_id),
-      with: {
-        forum: {
-          with: {
-            permissions: {
-              where: (table, { eq }) => eq(table.group_id, user?.group.id ?? 1) // 1 = guest
-            }
-          }
-        }
-      }
-    });
-
-    if (!topic) {
-      throw new NotFoundError("Topic");
-    }
-
-    if (!topic.forum.can_all_read && !topic.forum.permissions.length) {
-      throw new AccessDeniedError();
-    }
-
-    const getCount = await unionAll(
-      this.databaseService.db
-        .select({ count: count() })
-        .from(forum_posts)
-        .where(eq(forum_posts.topic_id, topic_id)),
-      this.databaseService.db
-        .select({ count: count() })
-        .from(forum_topics_logs)
-        .where(eq(forum_topics_logs.topic_id, topic_id))
-    );
-
-    const totalCount = getCount.reduce((acc, item) => acc + item.count, 0);
-
-    console.log(totalCount);
-
-    // ref: https://github.com/drizzle-team/drizzle-orm/issues/2050
-    const edges = await unionAll(
+  protected async getData({
+    first_post_id,
+    limit,
+    offset,
+    orderBy = SortDirectionEnum.asc,
+    topic_id
+  }: {
+    first_post_id: number;
+    limit: number;
+    topic_id: number;
+    offset?: number;
+    orderBy?: SortDirectionEnum;
+  }) {
+    const data = await unionAll(
       this.databaseService.db
         .select({
           topic_id: forum_posts.topic_id,
@@ -76,7 +41,12 @@ export class ShowPostsForumsService {
           created: forum_posts.created
         })
         .from(forum_posts)
-        .where(eq(forum_posts.topic_id, topic_id)),
+        .where(
+          and(
+            eq(forum_posts.topic_id, topic_id),
+            ne(forum_posts.id, first_post_id)
+          )
+        ),
       this.databaseService.db
         .select({
           topic_id: forum_topics_logs.topic_id,
@@ -88,10 +58,17 @@ export class ShowPostsForumsService {
         })
         .from(forum_topics_logs)
         .where(eq(forum_topics_logs.topic_id, topic_id))
-    ).orderBy(asc(forum_posts.created), asc(forum_topics_logs.created));
+    )
+      .orderBy(
+        orderBy === SortDirectionEnum.asc
+          ? (asc(forum_posts.created), asc(forum_topics_logs.created))
+          : (desc(forum_posts.created), desc(forum_topics_logs.created))
+      )
+      .limit(limit)
+      .offset(offset);
 
-    const test1 = await Promise.all(
-      edges.map(async edge => {
+    return await Promise.all(
+      data.map(async edge => {
         const user = await this.databaseService.db.query.core_users.findFirst({
           where: (table, { eq }) => eq(table.id, edge.user_id),
           with: {
@@ -128,210 +105,84 @@ export class ShowPostsForumsService {
         };
       })
     );
+  }
+
+  async show(
+    { limit, page = 1, sortBy, topic_id }: ShowPostsForumsArgs,
+    user: User | null
+  ): Promise<ShowPostsForumsObj> {
+    const topic = await this.databaseService.db.query.forum_topics.findFirst({
+      where: (table, { eq }) => eq(table.id, topic_id),
+      with: {
+        forum: {
+          with: {
+            permissions: {
+              where: (table, { eq }) => eq(table.group_id, user?.group.id ?? 1) // 1 = guest
+            }
+          }
+        },
+        posts: {
+          orderBy: (table, { asc }) => asc(table.created),
+          limit: 1
+        }
+      }
+    });
+
+    if (!topic) {
+      throw new NotFoundError("Topic");
+    }
+
+    if (!topic.forum.can_all_read && !topic.forum.permissions.length) {
+      throw new AccessDeniedError();
+    }
+
+    const getCount = await unionAll(
+      this.databaseService.db
+        .select({ count: count() })
+        .from(forum_posts)
+        .where(
+          and(
+            eq(forum_posts.topic_id, topic_id),
+            ne(forum_posts.id, topic.posts[0].id)
+          )
+        ),
+      this.databaseService.db
+        .select({ count: count() })
+        .from(forum_topics_logs)
+        .where(eq(forum_topics_logs.topic_id, topic_id))
+    );
+
+    const totalCount = getCount.reduce((acc, item) => acc + item.count, 0);
+
+    const edges = await this.getData({
+      topic_id,
+      limit,
+      first_post_id: topic.posts[0].id,
+      offset: (page - 1) * limit
+    });
+    const lastEdges =
+      totalCount > limit && page === 1
+        ? (
+            await this.getData({
+              topic_id,
+              limit,
+              orderBy: SortDirectionEnum.desc,
+              first_post_id: topic.posts[0].id
+            })
+          )
+            .reverse()
+            .splice(-(totalCount - limit))
+        : [];
 
     return {
-      edges: test1,
-      lastEdges: [],
+      edges,
+      lastEdges,
       pageInfo: {
         totalCount,
-        totalPostsCount: getCount[0].count
+        totalPostsCount: getCount[0].count,
+        limit,
+        hasNextPage: limit === 0 ? false : totalCount > limit * page
       }
     };
-
-    // const pagination = await inputPaginationCursor({
-    //   database: forum_posts_timeline,
-    //   databaseService: this.databaseService,
-    //   cursor,
-    //   first: first ?? firstEdges,
-    //   last,
-    //   primaryCursor: {
-    //     order: "ASC",
-    //     key: "id",
-    //     schema: forum_posts_timeline.id
-    //   },
-    //   defaultSortBy: {
-    //     direction:
-    //       sortBy === ShowPostsForumsSortingEnum.newest
-    //         ? SortDirectionEnum.desc
-    //         : SortDirectionEnum.asc,
-    //     column: "created"
-    //   }
-    // });
-
-    // const where = eq(forum_posts_timeline.topic_id, topic_id);
-
-    // const edges =
-    //   await this.databaseService.db.query.forum_posts_timeline.findMany({
-    //     ...pagination,
-    //     where: and(pagination.where, where),
-    //     with: {
-    //       post: {
-    //         with: {
-    //           content: true,
-    //           user: {
-    //             with: {
-    //               avatar: true,
-    //               group: {
-    //                 with: {
-    //                   name: true
-    //                 }
-    //               }
-    //             }
-    //           }
-    //         }
-    //       },
-    //       topic_log: {
-    //         with: {
-    //           topic: {
-    //             with: {
-    //               title: true
-    //             }
-    //           },
-    //           user: {
-    //             with: {
-    //               avatar: true,
-    //               group: {
-    //                 with: {
-    //                   name: true
-    //                 }
-    //               }
-    //             }
-    //           }
-    //         }
-    //       }
-    //     }
-    //   });
-
-    // const totalCount = await this.databaseService.db
-    //   .select({ count: count() })
-    //   .from(forum_posts_timeline)
-    //   .where(where);
-
-    // const output = outputPagination({
-    //   edges: edges.map(edge => {
-    //     if (edge.topic_log) {
-    //       const { id, ...actions } = edge.topic_log;
-
-    //       return {
-    //         ...edge,
-    //         action_id: id,
-    //         ...actions
-    //       };
-    //     }
-
-    //     const { id, ...post } = edge.post;
-
-    //     return {
-    //       ...edge,
-    //       post_id: id,
-    //       ...post
-    //     };
-    //   }),
-    //   totalCount,
-    //   first,
-    //   cursor,
-    //   last
-    // });
-
-    // // Get first edges
-    // const currentTotalCount = totalCount[0].count;
-    // const currentFirst = currentTotalCount - firstEdges;
-    // if (
-    //   output.edges.length &&
-    //   firstEdges &&
-    //   currentTotalCount > firstEdges &&
-    //   currentFirst > 0
-    // ) {
-    //   const lastEdgesPagination = await inputPaginationCursor({
-    //     database: forum_posts_timeline,
-    //     databaseService: this.databaseService,
-    //     cursor,
-    //     first: currentFirst >= firstEdges ? firstEdges : currentFirst,
-    //     last: null,
-    //     primaryCursor: {
-    //       order: "ASC",
-    //       key: "id",
-    //       schema: forum_posts_timeline.id
-    //     },
-    //     defaultSortBy: {
-    //       direction:
-    //         sortBy === ShowPostsForumsSortingEnum.newest
-    //           ? SortDirectionEnum.asc
-    //           : SortDirectionEnum.desc,
-    //       column: "created"
-    //     }
-    //   });
-
-    //   const lastEdges =
-    //     await this.databaseService.db.query.forum_posts_timeline.findMany({
-    //       ...lastEdgesPagination,
-    //       where: and(lastEdgesPagination.where, where),
-    //       with: {
-    //         post: {
-    //           with: {
-    //             content: true,
-    //             user: {
-    //               with: {
-    //                 avatar: true,
-    //                 group: {
-    //                   with: {
-    //                     name: true
-    //                   }
-    //                 }
-    //               }
-    //             }
-    //           }
-    //         },
-    //         topic_log: {
-    //           with: {
-    //             topic: {
-    //               with: {
-    //                 title: true
-    //               }
-    //             },
-    //             user: {
-    //               with: {
-    //                 avatar: true,
-    //                 group: {
-    //                   with: {
-    //                     name: true
-    //                   }
-    //                 }
-    //               }
-    //             }
-    //           }
-    //         }
-    //       }
-    //     });
-
-    //   return {
-    //     ...output,
-    //     lastEdges: lastEdges.reverse().map(edge => {
-    //       if (edge.topic_log) {
-    //         const { id, ...actions } = edge.topic_log;
-
-    //         return {
-    //           ...edge,
-    //           action_id: id,
-    //           ...actions
-    //         };
-    //       }
-
-    //       const { id, ...post } = edge.post;
-
-    //       return {
-    //         ...edge,
-    //         post_id: id,
-    //         ...post
-    //       };
-    //     })
-    //   };
-    // }
-
-    // // Get next edges
-    // return {
-    //   ...output,
-    //   lastEdges: []
-    // };
   }
 }

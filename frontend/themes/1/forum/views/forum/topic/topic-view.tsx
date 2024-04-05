@@ -12,19 +12,14 @@ import { PostTopic } from "./posts/post/post";
 import { CreatePost } from "./posts/create/create-post";
 import { HeaderPosts } from "./posts/header/header-posts";
 import { LoadMorePosts } from "./posts/load-more/load-more-posts";
-import { WrapperPosts } from "./posts/wrapper/wrapper";
 import { ListPosts } from "./posts/list";
 import { AnimatePresenceClient } from "@/components/animations/animate-presence";
 
 export interface TopicViewProps {
   data: Forum_Topics__ShowQuery;
-  firstEdges: number;
 }
 
-export default function TopicView({
-  data: dataApi,
-  firstEdges
-}: TopicViewProps) {
+export default function TopicView({ data: dataApi }: TopicViewProps) {
   const t = useTranslations("forum.topics");
   const { convertNameToLink, convertText } = useTextLang();
 
@@ -80,53 +75,49 @@ export default function TopicView({
           </div>
         </div>
 
-        <WrapperPosts>
-          <PostTopic
-            post_id={id}
-            content={content}
-            user={user}
-            created={created}
-            disableInitialAnimation
-            customMoreMenu={
-              <ActionsTopic
-                id={id}
-                state={{ locked }}
-                permissions={permissions}
+        <PostTopic
+          post_id={id}
+          content={content}
+          user={user}
+          created={created}
+          disableInitialAnimation
+          customMoreMenu={
+            <ActionsTopic
+              id={id}
+              state={{ locked }}
+              permissions={permissions}
+            />
+          }
+        />
+
+        <HeaderPosts totalComments={pageInfo.totalPostsCount} />
+
+        <AnimatePresenceClient key={`topic_posts_${id}`} initial={false}>
+          {edgesPosts.length > 0 && (
+            <>
+              <ListPosts
+                id="first"
+                edges={
+                  pageInfo.totalCount <= pageInfo.limit * 2
+                    ? [...edgesPosts, ...lastEdges]
+                    : edgesPosts
+                }
               />
-            }
-          />
 
-          <HeaderPosts totalComments={pageInfo.totalPostsCount - 1} />
-
-          <AnimatePresenceClient key={`topic_posts_${id}`} initial={false}>
-            {edgesPosts.length > 0 && (
-              <>
-                <ListPosts
-                  id="first"
-                  edges={
-                    pageInfo.totalCount <= firstEdges * 2
-                      ? [...edgesPosts, ...lastEdges]
-                      : edgesPosts
-                  }
-                />
-
-                {pageInfo.totalCount > firstEdges * 2 && pageInfo.endCursor && (
-                  <>
-                    <LoadMorePosts
-                      totalCount={pageInfo.totalCount}
-                      endCursor={pageInfo.endCursor}
-                      initialCount={edgesPosts.length + lastEdges.length}
-                      firstEdges={firstEdges}
-                    />
-                    <ListPosts id="last" edges={lastEdges} />
-                  </>
-                )}
-              </>
-            )}
-          </AnimatePresenceClient>
-
-          {permissions.can_reply && <CreatePost className="mt-5" />}
-        </WrapperPosts>
+              {pageInfo.totalCount > pageInfo.limit * 2 && (
+                <>
+                  <LoadMorePosts
+                    totalCount={pageInfo.totalCount}
+                    initialCount={edgesPosts.length + lastEdges.length}
+                    limit={pageInfo.limit}
+                  />
+                  <ListPosts id="last" edges={lastEdges} />
+                </>
+              )}
+            </>
+          )}
+        </AnimatePresenceClient>
+        {permissions.can_reply && <CreatePost className="mt-5" />}
       </div>
     </div>
   );

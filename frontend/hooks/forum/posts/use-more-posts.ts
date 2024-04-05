@@ -8,16 +8,12 @@ import { ShowPostsForumsSortingEnum } from "@/graphql/hooks";
 import { queryApi } from "./query-api";
 
 interface Props {
-  endCursor: number | null | undefined;
   initialCount: number;
+  limit: number;
   totalCount: number;
 }
 
-export const useMorePosts = ({
-  endCursor,
-  initialCount,
-  totalCount
-}: Props) => {
+export const useMorePosts = ({ initialCount, limit, totalCount }: Props) => {
   const [enabled, setEnabled] = useState(false);
   const { id } = useParams();
   const postsToLoad = totalCount - initialCount;
@@ -25,7 +21,7 @@ export const useMorePosts = ({
   const sort = searchParams.get("sort");
 
   const query = useInfiniteQuery({
-    queryKey: [APIKeys.POSTS_MORE, { id, sort }],
+    queryKey: [APIKeys.POSTS_MORE, { id, sort, limit, postsToLoad }],
     queryFn: async ({ pageParam }) => {
       let sortBy: ShowPostsForumsSortingEnum | undefined;
       if (sort === ShowPostsForumsSortingEnum.newest) {
@@ -34,26 +30,34 @@ export const useMorePosts = ({
         sortBy = ShowPostsForumsSortingEnum.oldest;
       }
 
-      return await queryApi({
-        ...pageParam,
+      const data = await queryApi({
         id: getIdFormString(id),
-        sortBy
+        sortBy,
+        limit: limit,
+        page: pageParam.page + 1
       });
+
+      return {
+        forum_posts__show: {
+          edges: data.forum_posts__show.edges.splice(0, pageParam.splice),
+          pageInfo: data.forum_posts__show.pageInfo
+        }
+      };
     },
     initialPageParam: {
-      first: postsToLoad > 10 ? 10 : postsToLoad,
-      cursor: endCursor
+      page: 1,
+      splice: postsToLoad > limit ? limit : postsToLoad
     },
     getNextPageParam: ({ forum_posts__show: { pageInfo } }, allPages) => {
       const totalCount = allPages.flatMap(
         item => item.forum_posts__show.edges
       ).length;
-      const first = postsToLoad - totalCount;
+      const splice = postsToLoad - totalCount;
 
-      if (pageInfo.hasNextPage && first > 0) {
+      if (pageInfo.hasNextPage && splice > 0) {
         return {
-          first: first > 10 ? 10 : first,
-          cursor: pageInfo.endCursor
+          page: allPages.length + 1,
+          splice
         };
       }
     },

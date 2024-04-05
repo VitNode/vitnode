@@ -1,10 +1,7 @@
 query Forum_topics__show(
   $id: Int!
-  $first: Int
-  $cursor: Int
-  $last: Int
   $sortBy: ShowPostsForumsSortingEnum
-  $firstEdges: Int
+  $limit: Int!
 ) {
   forum_topics__show(id: $id) {
     edges {
@@ -50,14 +47,7 @@ query Forum_topics__show(
       }
     }
   }
-  forum_posts__show(
-    topic_id: $id
-    cursor: $cursor
-    first: $first
-    last: $last
-    sortBy: $sortBy
-    firstEdges: $firstEdges
-  ) {
+  forum_posts__show(topic_id: $id, sortBy: $sortBy, limit: $limit) {
     edges {
       __typename
       ... on ShowPostsForums {
@@ -165,6 +155,8 @@ query Forum_topics__show(
     pageInfo {
       totalPostsCount
       totalCount
+      limit
+      hasNextPage
     }
   }
 }

@@ -33,8 +33,6 @@ export const useCreatePost = ({ setOpen }: Args) => {
       topicId: getIdFormString(id)
     });
 
-    console.log(mutation.error);
-
     if (mutation.error) {
       toast.error(t("errors.title"), {
         description: t("errors.internal_server_error")

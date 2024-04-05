@@ -72,6 +72,12 @@ class PageInfoShowPostsForums {
 
   @Field(() => Int)
   totalPostsCount: number;
+
+  @Field(() => Int)
+  limit: number;
+
+  @Field(() => Boolean)
+  hasNextPage: boolean;
 }
 
 @ObjectType()

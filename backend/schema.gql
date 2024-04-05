@@ -228,6 +228,8 @@ type PageInfo {
 }
 
 type PageInfoShowPostsForums {
+  hasNextPage: Boolean!
+  limit: Int!
   totalCount: Int!
   totalPostsCount: Int!
 }
@@ -303,7 +305,7 @@ type Query {
     """Show all forums without children"""
     show_all_forums: Boolean
   ): ShowForumForumsObj!
-  forum_posts__show(cursor: Int, first: Int, firstEdges: Int, last: Int, sortBy: ShowPostsForumsSortingEnum, topic_id: Int!): ShowPostsForumsObj!
+  forum_posts__show(limit: Int!, page: Int, sortBy: ShowPostsForumsSortingEnum, topic_id: Int!): ShowPostsForumsObj!
   forum_topics__show(cursor: Int, first: Int, forum_id: Int, id: Int, last: Int): ShowTopicsForumsObj!
 }
 

@@ -1,16 +1,14 @@
 query Forum_posts__show_more(
   $id: Int!
-  $first: Int
-  $cursor: Int
-  $last: Int
+  $limit: Int!
   $sortBy: ShowPostsForumsSortingEnum
+  $page: Int
 ) {
   forum_posts__show(
     topic_id: $id
-    cursor: $cursor
-    first: $first
-    last: $last
+    limit: $limit
     sortBy: $sortBy
+    page: $page
   ) {
     edges {
       __typename
@@ -66,6 +64,7 @@ query Forum_posts__show_more(
     }
     pageInfo {
       totalCount
+      hasNextPage
     }
   }
 }
