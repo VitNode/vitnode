@@ -65,7 +65,6 @@ query Forum_topics__show(
           value
           language_code
         }
-        id
         user {
           avatar_color
           avatar {
@@ -89,7 +88,58 @@ query Forum_topics__show(
       }
       ... on ShowPostsForumsMetaTags {
         action
-        id
+        user {
+          avatar_color
+          avatar {
+            id
+            dir_folder
+            name
+          }
+          group {
+            id
+            name {
+              language_code
+              value
+            }
+          }
+          id
+          name_seo
+          name
+        }
+        created
+        action_id
+      }
+    }
+    lastEdges {
+      __typename
+      ... on ShowPostsForums {
+        content {
+          value
+          language_code
+        }
+        user {
+          avatar_color
+          avatar {
+            id
+            dir_folder
+            name
+          }
+          group {
+            id
+            name {
+              language_code
+              value
+            }
+          }
+          id
+          name_seo
+          name
+        }
+        created
+        post_id
+      }
+      ... on ShowPostsForumsMetaTags {
+        action
         user {
           avatar_color
           avatar {
@@ -113,66 +163,8 @@ query Forum_topics__show(
       }
     }
     pageInfo {
-      count
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
+      totalPostsCount
       totalCount
-    }
-    lastEdges {
-      __typename
-      ... on ShowPostsForums {
-        content {
-          value
-          language_code
-        }
-        id
-        user {
-          avatar_color
-          avatar {
-            id
-            dir_folder
-            name
-          }
-          group {
-            id
-            name {
-              language_code
-              value
-            }
-          }
-          id
-          name_seo
-          name
-        }
-        created
-        post_id
-      }
-      ... on ShowPostsForumsMetaTags {
-        action
-        id
-        user {
-          avatar_color
-          avatar {
-            id
-            dir_folder
-            name
-          }
-          group {
-            id
-            name {
-              language_code
-              value
-            }
-          }
-          id
-          name_seo
-          name
-        }
-        created
-        action_id
-      }
     }
   }
 }

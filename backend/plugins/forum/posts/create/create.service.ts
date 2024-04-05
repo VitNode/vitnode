@@ -7,8 +7,7 @@ import { User } from "@/utils/decorators/user.decorator";
 import { DatabaseService } from "@/plugins/database/database.service";
 import {
   forum_posts,
-  forum_posts_content,
-  forum_posts_timeline
+  forum_posts_content
 } from "@/plugins/forum/admin/database/schema/posts";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 
@@ -19,8 +18,7 @@ export class CreateForumsPostsService {
   async create(
     { id }: User,
     { content, topic_id }: CreatePostsForumsArgs,
-    { req }: Ctx,
-    skipTimeLine = false
+    { req }: Ctx
   ): Promise<ShowPostsForums> {
     const topic = await this.databaseService.db.query.forum_topics.findFirst({
       where: (table, { eq }) => eq(table.id, topic_id)
@@ -65,25 +63,6 @@ export class CreateForumsPostsService {
         }
       }
     });
-
-    // Add post to timeline
-    if (!skipTimeLine) {
-      const timelineItem = await this.databaseService.db
-        .insert(forum_posts_timeline)
-        .values({
-          post_id: post.id,
-          topic_id
-        })
-        .returning();
-
-      const { id } = timelineItem[0];
-
-      return {
-        post_id: data.id,
-        ...data,
-        id
-      };
-    }
 
     return {
       post_id: post.id,

@@ -96,7 +96,7 @@ export default function TopicView({
             }
           />
 
-          <HeaderPosts totalComments={pageInfo.totalCount} />
+          <HeaderPosts totalComments={pageInfo.totalPostsCount - 1} />
 
           <AnimatePresenceClient key={`topic_posts_${id}`} initial={false}>
             {edgesPosts.length > 0 && (

@@ -5,7 +5,6 @@ mutation Forum_posts__create($content: [TextLanguageInput!]!, $topicId: Int!) {
       value
     }
     created
-    id
     user {
       avatar {
         dir_folder

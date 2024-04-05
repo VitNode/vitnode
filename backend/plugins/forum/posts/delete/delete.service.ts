@@ -13,16 +13,8 @@ export class DeleteForumsPostsService {
   constructor(private databaseService: DatabaseService) {}
 
   async delete(user: User, { id }: DeletePostsForumsArgs): Promise<string> {
-    const { post_id } =
-      await this.databaseService.db.query.forum_posts_timeline.findFirst({
-        where: (table, { eq }) => eq(table.id, id),
-        columns: {
-          post_id: true
-        }
-      });
-
     const post = await this.databaseService.db.query.forum_posts.findFirst({
-      where: (table, { eq }) => eq(table.id, post_id)
+      where: (table, { eq }) => eq(table.id, id)
     });
 
     if (!post) throw new NotFoundError("Post");
@@ -30,7 +22,7 @@ export class DeleteForumsPostsService {
 
     await this.databaseService.db
       .delete(forum_posts)
-      .where(eq(forum_posts.id, post_id))
+      .where(eq(forum_posts.id, id))
       .execute();
 
     return "Success!";
