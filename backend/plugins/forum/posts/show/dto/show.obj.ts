@@ -6,7 +6,6 @@ import {
   registerEnumType
 } from "@nestjs/graphql";
 
-import { PageInfo } from "@/types/database/pagination.type";
 import { TextLanguage } from "@/types/database/text-language.type";
 import { User } from "@/utils/decorators/user.decorator";
 
@@ -49,7 +48,7 @@ export class ShowPostsForums {
   created: Date;
 }
 
-export const PostsWithMetaTagsUnion = createUnionType({
+const PostsWithMetaTagsUnion = createUnionType({
   name: "postsWithMetaTagsUnion",
   types: () => [ShowPostsForums, ShowPostsForumsMetaTags] as const,
   resolveType(value) {

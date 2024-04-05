@@ -2,7 +2,10 @@ import { Injectable } from "@nestjs/common";
 import { and, asc, count, desc, eq, sql, ne } from "drizzle-orm";
 import { unionAll } from "drizzle-orm/pg-core";
 
-import { ShowPostsForumsArgs } from "./dto/show.args";
+import {
+  ShowPostsForumsArgs,
+  ShowPostsForumsSortingEnum
+} from "./dto/show.args";
 import { ShowPostsForumsObj } from "./dto/show.obj";
 
 import { DatabaseService } from "@/plugins/database/database.service";
@@ -158,7 +161,11 @@ export class ShowPostsForumsService {
       topic_id,
       limit,
       first_post_id: topic.posts[0].id,
-      offset: (page - 1) * limit
+      offset: (page - 1) * limit,
+      orderBy:
+        sortBy === ShowPostsForumsSortingEnum.oldest
+          ? SortDirectionEnum.asc
+          : SortDirectionEnum.desc
     });
     const lastEdges =
       totalCount > limit && page === 1
@@ -166,7 +173,10 @@ export class ShowPostsForumsService {
             await this.getData({
               topic_id,
               limit,
-              orderBy: SortDirectionEnum.desc,
+              orderBy:
+                sortBy === ShowPostsForumsSortingEnum.oldest
+                  ? SortDirectionEnum.desc
+                  : SortDirectionEnum.asc,
               first_post_id: topic.posts[0].id
             })
           )

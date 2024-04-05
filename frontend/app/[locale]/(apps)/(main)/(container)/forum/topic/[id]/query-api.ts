@@ -7,7 +7,7 @@ import {
 } from "@/graphql/hooks";
 import { getIdFormString } from "@/functions/url";
 
-export const limit = 5;
+export const limit = 25;
 
 export const getTopicData = async ({
   id,
@@ -33,8 +33,7 @@ export const getTopicData = async ({
       sortBy,
       limit
     },
-    // TODO: DELETE
-    // cache: "force-cache",
+    cache: "force-cache",
     next: {
       tags: ["Forum_Topics__Show"]
     }
