@@ -7,7 +7,8 @@ import { DateFormat } from "@/components/date-format/date-format";
 import { GroupFormat } from "@/components/groups/group-format";
 import type { ShowPostsForums } from "@/graphql/hooks";
 import { DivMotion } from "@/components/animations/div-motion";
-import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
+import { ReadOnlyEditor } from "@/components/editor/test/read-only";
+// import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
 
 interface Props
   extends Pick<ShowPostsForums, "content" | "created" | "post_id" | "user"> {
@@ -55,7 +56,8 @@ export const PostTopic = ({
       </div>
 
       <div className="p-4">
-        <ReadOnlyEditor id={`post_${id}`} value={content} />
+        <ReadOnlyEditor value={content} />
+        {/* <ReadOnlyEditor id={`post_${id}`} value={content} /> */}
       </div>
     </DivMotion>
   );

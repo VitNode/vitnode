@@ -75,6 +75,13 @@
       "italic": "Italic",
       "underline": "Underline",
       "strike": "Strike",
+      "text_align_left": "Text Align Left",
+      "text_align_center": "Text Align Center",
+      "text_align_right": "Text Align Right",
+      "text_align_justify": "Text Align Justify",
+      "block_quote": "Block Quote",
+      "bullet_list": "Bullet List",
+      "change_language": "Change Language",
 
       "remove_formatting": "Remove Formatting",
       "mixed": "Mixed",
@@ -85,7 +92,6 @@
       "link": "Link",
       "copy_code": "Copy Code",
       "code_language": "Code Language",
-      "change_language": "Change Language",
       "prettier": {
         "format_code": "Format Code",
         "error_title": "Prettier Error"

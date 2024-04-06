@@ -1,4 +1,3 @@
-import type { Editor } from "@tiptap/react";
 import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
@@ -12,16 +11,18 @@ import { Toggle } from "@/components/ui/toggle";
 
 interface Props {
   children: ReactNode;
-  editor: Editor;
   name: string;
   onPressedChange: () => void;
+  pressed: boolean;
+  disabled?: boolean;
 }
 
 export const ToggleToolbarEditor = ({
   children,
-  editor,
+  disabled,
   name,
-  onPressedChange
+  onPressedChange,
+  pressed
 }: Props) => {
   const t = useTranslations("core.editor");
 
@@ -31,8 +32,9 @@ export const ToggleToolbarEditor = ({
         <TooltipTrigger asChild>
           <div>
             <Toggle
-              pressed={editor.isActive(name)}
+              pressed={pressed}
               onPressedChange={onPressedChange}
+              disabled={disabled}
             >
               {children}
             </Toggle>

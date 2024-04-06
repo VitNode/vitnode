@@ -75,6 +75,13 @@
       "italic": "Kursywa",
       "underline": "Podkreślenie",
       "strike": "Przekreślenie",
+      "text_align_left": "Wyrównaj do lewej",
+      "text_align_center": "Wyrównaj do środka",
+      "text_align_right": "Wyrównaj do prawej",
+      "text_align_justify": "Wyjustuj",
+      "block_quote": "Cytat",
+      "bullet_list": "Lista punktowana",
+      "change_language": "Zmień język",
 
       "remove_formatting": "Usuń formatowanie",
       "mixed": "Mieszane",
@@ -85,7 +92,6 @@
       "link": "Link",
       "copy_code": "Kopiuj kod",
       "code_language": "Język kodu",
-      "change_language": "Zmień język",
       "prettier": {
         "format_code": "Formatuj kod",
         "error_title": "Błąd Prettier"

@@ -258,18 +258,15 @@ importers:
       '@radix-ui/react-tooltip':
         specifier: ^1.0.7
         version: 1.0.7(@types/react-dom@18.2.23)(@types/react@18.2.74)(react-dom@18.2.0)(react@18.2.0)
-      '@tiptap/extension-bold':
-        specifier: ^2.2.5
-        version: 2.2.5(@tiptap/core@2.2.5)
-      '@tiptap/extension-italic':
-        specifier: ^2.2.5
-        version: 2.2.5(@tiptap/core@2.2.5)
-      '@tiptap/extension-strike':
-        specifier: ^2.2.5
-        version: 2.2.5(@tiptap/core@2.2.5)
+      '@tiptap/extension-text-align':
+        specifier: ^2.2.6
+        version: 2.2.6(@tiptap/core@2.2.5)
       '@tiptap/extension-underline':
         specifier: ^2.2.5
         version: 2.2.5(@tiptap/core@2.2.5)
+      '@tiptap/html':
+        specifier: ^2.2.6
+        version: 2.2.6(@tiptap/core@2.2.5)(@tiptap/pm@2.2.5)
       '@tiptap/pm':
         specifier: ^2.2.5
         version: 2.2.5
@@ -5108,6 +5105,14 @@ packages:
       '@tiptap/core': 2.2.5(@tiptap/pm@2.2.5)
     dev: false
 
+  /@tiptap/extension-text-align@2.2.6(@tiptap/core@2.2.5):
+    resolution: {integrity: sha512-6vVK46e2NsVE4mz9dAmgYbsnJM93ukcbcQ0huCiPryM6uAg2OIfJw6X7Ha4Rdo6ee0xpNENmP8hG1wd+9b4Pyg==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.2.5(@tiptap/pm@2.2.5)
+    dev: false
+
   /@tiptap/extension-text@2.2.5(@tiptap/core@2.2.5):
     resolution: {integrity: sha512-Sn6Wqa52PVtJQW0W5zE8Tzf+61wH7s1kh0yN9Q05IeSoslK38R8mBdezp0bHnbqFrlqXDxtPrTRgipaWCSV6Lw==}
     peerDependencies:
@@ -5122,6 +5127,17 @@ packages:
       '@tiptap/core': ^2.0.0
     dependencies:
       '@tiptap/core': 2.2.5(@tiptap/pm@2.2.5)
+    dev: false
+
+  /@tiptap/html@2.2.6(@tiptap/core@2.2.5)(@tiptap/pm@2.2.5):
+    resolution: {integrity: sha512-RdZ5Zr2b+LShyKaQKlWB3eLSzznH54Er8/78wKLuudE2xiUS1t25O1YgIrGUA1AFC1woSPJsS1uEvxwvKqE6eg==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.2.5(@tiptap/pm@2.2.5)
+      '@tiptap/pm': 2.2.5
+      zeed-dom: 0.10.11
     dev: false
 
   /@tiptap/pm@2.2.5:
@@ -6968,6 +6984,11 @@ packages:
     dependencies:
       mdn-data: 2.0.14
       source-map: 0.6.1
+    dev: false
+
+  /css-what@6.1.0:
+    resolution: {integrity: sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw==}
+    engines: {node: '>= 6'}
     dev: false
 
   /cssesc@3.0.0:
@@ -13003,6 +13024,13 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  /zeed-dom@0.10.11:
+    resolution: {integrity: sha512-7ukbu6aQKx34OQ7PfUIxOuAhk2MvyZY/t4/IJsVzy76zuMzfhE74+Dbyp8SHiUJPTPkF0FflP1KVrGJ7gk9IHw==}
+    engines: {node: '>=14.13.1'}
+    dependencies:
+      css-what: 6.1.0
+    dev: false
 
   /zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
