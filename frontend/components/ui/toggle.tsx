@@ -20,9 +20,9 @@ const toggleVariants = cva(
           "border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground"
       },
       size: {
-        default: "h-9 px-3",
-        sm: "h-8 px-2",
-        lg: "h-10 px-3"
+        default: "size-9",
+        sm: "size-8",
+        lg: "size-10"
       }
     },
     defaultVariants: {
@@ -39,7 +39,13 @@ const Toggle = forwardRef<
 >(({ className, size, variant, ...props }, ref) => (
   <TogglePrimitive.Root
     ref={ref}
-    className={cn(toggleVariants({ variant, size, className }))}
+    className={cn(
+      toggleVariants({
+        variant,
+        size,
+        className: cn("[&>svg]:size-5", className)
+      })
+    )}
     {...props}
   />
 ));

@@ -11,8 +11,10 @@
     "tailwindcss",
     "tanstack",
     "testid",
+    "tiptap",
     "uagent",
     "vitnode"
   ],
-  "eslint.workingDirectories": ["frontend", "backend"]
+  "eslint.workingDirectories": ["frontend", "backend"],
+  "tailwindCSS.experimental.classRegex": ["class:\\s*?[\"'`]([^\"'`]*).*?,"]
 }

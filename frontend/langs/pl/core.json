@@ -71,6 +71,11 @@
       "rows_per_page": "Wierszy na stronę"
     },
     "editor": {
+      "bold": "Pogrubienie",
+      "italic": "Kursywa",
+      "underline": "Podkreślenie",
+      "strike": "Przekreślenie",
+
       "remove_formatting": "Usuń formatowanie",
       "mixed": "Mieszane",
       "font_size": "Rozmiar czcionki",

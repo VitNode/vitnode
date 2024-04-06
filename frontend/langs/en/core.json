@@ -71,6 +71,11 @@
       "rows_per_page": "Rows per page"
     },
     "editor": {
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline",
+      "strike": "Strike",
+
       "remove_formatting": "Remove Formatting",
       "mixed": "Mixed",
       "font_size": "Font Size",
