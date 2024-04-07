@@ -81,6 +81,9 @@
       "text_align_justify": "Wyjustuj",
       "block_quote": "Cytat",
       "bullet_list": "Lista punktowana",
+      "ordered_list": "Lista numerowana",
+      "undo": "Cofnij",
+      "redo": "Ponów",
       "change_language": "Zmień język",
 
       "remove_formatting": "Usuń formatowanie",

@@ -1,19 +1,23 @@
-import {
-  FontBoldIcon,
-  FontItalicIcon,
-  StrikethroughIcon,
-  UnderlineIcon,
-  TextAlignLeftIcon,
-  TextAlignCenterIcon,
-  TextAlignRightIcon,
-  TextAlignJustifyIcon,
-  QuoteIcon,
-  ListBulletIcon
-} from "@radix-ui/react-icons";
 import type { Editor } from "@tiptap/react";
+import {
+  AlignCenter,
+  AlignJustify,
+  AlignLeft,
+  AlignRight,
+  Bold,
+  Italic,
+  List,
+  ListOrdered,
+  Quote,
+  Redo,
+  Strikethrough,
+  Underline,
+  Undo
+} from "lucide-react";
 
 import { ToggleToolbarEditor } from "./toggle";
 import { SeparatorToolbarEditor } from "./separator";
+import { ButtonToolbarEditor } from "./button";
 
 interface Props {
   editor: Editor;
@@ -22,12 +26,30 @@ interface Props {
 export const ToolBarEditor = ({ editor }: Props) => {
   return (
     <div className="bg-background p-1 rounded-t-md flex gap-1 items-center">
+      <ButtonToolbarEditor
+        name="undo"
+        disabled={!editor.can().undo()}
+        onClick={() => editor.chain().focus().undo().run()}
+      >
+        <Undo />
+      </ButtonToolbarEditor>
+
+      <ButtonToolbarEditor
+        name="redo"
+        disabled={!editor.can().redo()}
+        onClick={() => editor.chain().focus().redo().run()}
+      >
+        <Redo />
+      </ButtonToolbarEditor>
+
+      <SeparatorToolbarEditor />
+
       <ToggleToolbarEditor
         pressed={editor.isActive("bold")}
         name="bold"
         onPressedChange={() => editor.chain().focus().toggleBold().run()}
       >
-        <FontBoldIcon />
+        <Bold />
       </ToggleToolbarEditor>
 
       <ToggleToolbarEditor
@@ -35,7 +57,7 @@ export const ToolBarEditor = ({ editor }: Props) => {
         name="italic"
         onPressedChange={() => editor.chain().focus().toggleItalic().run()}
       >
-        <FontItalicIcon />
+        <Italic />
       </ToggleToolbarEditor>
 
       <ToggleToolbarEditor
@@ -43,7 +65,7 @@ export const ToolBarEditor = ({ editor }: Props) => {
         name="underline"
         onPressedChange={() => editor.chain().focus().toggleUnderline().run()}
       >
-        <UnderlineIcon />
+        <Underline />
       </ToggleToolbarEditor>
 
       <ToggleToolbarEditor
@@ -51,7 +73,7 @@ export const ToolBarEditor = ({ editor }: Props) => {
         name="strike"
         onPressedChange={() => editor.chain().focus().toggleStrike().run()}
       >
-        <StrikethroughIcon />
+        <Strikethrough />
       </ToggleToolbarEditor>
 
       <SeparatorToolbarEditor />
@@ -64,7 +86,7 @@ export const ToolBarEditor = ({ editor }: Props) => {
           editor.commands.focus();
         }}
       >
-        <TextAlignLeftIcon />
+        <AlignLeft />
       </ToggleToolbarEditor>
 
       <ToggleToolbarEditor
@@ -75,7 +97,7 @@ export const ToolBarEditor = ({ editor }: Props) => {
           editor.commands.focus();
         }}
       >
-        <TextAlignCenterIcon />
+        <AlignCenter />
       </ToggleToolbarEditor>
 
       <ToggleToolbarEditor
@@ -86,7 +108,7 @@ export const ToolBarEditor = ({ editor }: Props) => {
           editor.commands.focus();
         }}
       >
-        <TextAlignRightIcon />
+        <AlignRight />
       </ToggleToolbarEditor>
 
       <ToggleToolbarEditor
@@ -97,7 +119,25 @@ export const ToolBarEditor = ({ editor }: Props) => {
           editor.commands.focus();
         }}
       >
-        <TextAlignJustifyIcon />
+        <AlignJustify />
+      </ToggleToolbarEditor>
+
+      <SeparatorToolbarEditor />
+
+      <ToggleToolbarEditor
+        pressed={editor.isActive("bulletList")}
+        name="bullet_list"
+        onPressedChange={() => editor.chain().focus().toggleBulletList().run()}
+      >
+        <List />
+      </ToggleToolbarEditor>
+
+      <ToggleToolbarEditor
+        pressed={editor.isActive("orderedList")}
+        name="ordered_list"
+        onPressedChange={() => editor.chain().focus().toggleOrderedList().run()}
+      >
+        <ListOrdered />
       </ToggleToolbarEditor>
 
       <SeparatorToolbarEditor />
@@ -107,15 +147,7 @@ export const ToolBarEditor = ({ editor }: Props) => {
         name="block_quote"
         onPressedChange={() => editor.chain().focus().toggleBlockquote().run()}
       >
-        <QuoteIcon />
-      </ToggleToolbarEditor>
-
-      <ToggleToolbarEditor
-        pressed={editor.isActive("bulletList")}
-        name="bullet_list"
-        onPressedChange={() => editor.chain().focus().toggleBulletList().run()}
-      >
-        <ListBulletIcon />
+        <Quote />
       </ToggleToolbarEditor>
     </div>
   );

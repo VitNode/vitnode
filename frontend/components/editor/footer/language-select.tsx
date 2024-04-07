@@ -42,7 +42,7 @@ export const LanguageSelectFooterEditor = ({
               className={buttonVariants({
                 variant: "ghost",
                 size: "sm",
-                className: "w-auto border-0 [&>svg]:w-5 [&>svg]:h-5"
+                className: "w-auto border-0 [&>svg]:w-5 [&>svg]:h-5 shadow-none"
               })}
             >
               <SelectValue />

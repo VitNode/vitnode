@@ -81,6 +81,9 @@
       "text_align_justify": "Text Align Justify",
       "block_quote": "Block Quote",
       "bullet_list": "Bullet List",
+      "ordered_list": "Ordered List",
+      "undo": "Undo",
+      "redo": "Redo",
       "change_language": "Change Language",
 
       "remove_formatting": "Remove Formatting",
