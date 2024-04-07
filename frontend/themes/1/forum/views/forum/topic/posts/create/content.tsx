@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { useCreatePost } from "@/hooks/forum/posts/create/use-create-post";
-import { EditorTest } from "@/components/editor/test/editor";
+import { Editor } from "@/components/editor/editor";
 
 interface Props {
   setOpen: (open: boolean) => void;
@@ -28,7 +28,7 @@ export const ContentCreatePost = ({ setOpen }: Props) => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <EditorTest onChange={field.onChange} value={field.value} />
+                <Editor onChange={field.onChange} value={field.value} />
               </FormControl>
               <FormMessage />
             </FormItem>

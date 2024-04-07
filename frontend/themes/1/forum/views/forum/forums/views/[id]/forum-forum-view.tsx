@@ -5,9 +5,9 @@ import { useTextLang } from "@/hooks/core/use-text-lang";
 import { ActionsForumsForum } from "./actions/actions";
 import type { Forum_Forums__Show_ItemQuery } from "@/graphql/hooks";
 import { TopicsListForum } from "./topics-list/topics-list";
-import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { ReadOnlyEditor } from "@/components/editor/read-only";
 
 import { ItemForum } from "../../item/item";
 
@@ -44,7 +44,6 @@ export default function ForumForumView({
             desc={
               forumData.description.length > 0 && (
                 <ReadOnlyEditor
-                  id={`${forumData.id}_description`}
                   className="[&_p]:m-0"
                   value={forumData.description}
                 />

@@ -66,7 +66,7 @@ export const CreateEditCategoryBlogAdmin = ({ data }: Props) => {
               <FormItem>
                 <FormLabel optional>{t("create.description.label")}</FormLabel>
                 <FormControl>
-                  <Editor id="create_categories_blog" {...field} />
+                  <Editor {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

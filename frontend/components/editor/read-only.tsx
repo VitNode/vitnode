@@ -3,14 +3,17 @@ import { generateHTML } from "@tiptap/html";
 
 import type { TextLanguage } from "@/graphql/hooks";
 import { extensionsEditor } from "./extensions";
+import { cn } from "@/functions/classnames";
 
 interface Props {
   value: TextLanguage[];
+  className?: string;
 }
 
-export const ReadOnlyEditor = ({ value }: Props) => {
+export const ReadOnlyEditor = ({ className, value }: Props) => {
   const locale = useLocale();
-  const currentValue = () => {
+
+  const currentValue = (): string => {
     const current =
       value.find(item => item.language_code === locale)?.value ?? "";
 
@@ -33,10 +36,19 @@ export const ReadOnlyEditor = ({ value }: Props) => {
     return "";
   };
 
+  const getText = (): string => {
+    try {
+      return generateHTML(JSON.parse(currentValue()), extensionsEditor);
+    } catch (e) {
+      return currentValue();
+    }
+  };
+
   return (
     <div
+      className={cn("break-all", className)}
       dangerouslySetInnerHTML={{
-        __html: generateHTML(JSON.parse(currentValue()), extensionsEditor)
+        __html: getText()
       }}
     />
   );

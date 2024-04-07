@@ -11,7 +11,12 @@ interface Props
 export const UserLink = forwardRef<HTMLAnchorElement, Props>(
   ({ user: { name, name_seo }, ...props }, ref) => {
     return (
-      <Link href={`/profile/${name_seo}`} ref={ref} {...props}>
+      <Link
+        href={`/profile/${name_seo}`}
+        className="font-medium"
+        ref={ref}
+        {...props}
+      >
         {name}
       </Link>
     );

@@ -7,11 +7,11 @@ import type {
   TextLanguage
 } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
-import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
 import { WrapperItemForum } from "./wrapper-item-forum";
 import { ChildButtonItemForum } from "./child";
 import { StatsItemForum } from "./stats";
 import { LastPostItemForum } from "./last-post/last-post";
+import { ReadOnlyEditor } from "@/components/editor/read-only";
 
 export interface ItemForumProps {
   _count: Pick<ShowForumForumsCounts, "total_posts" | "total_topics">;
@@ -55,7 +55,6 @@ export const ItemForum = ({
 
           {description.length > 0 && (
             <ReadOnlyEditor
-              id={`${id}_description`}
               className="text-muted-foreground text-sm [&_p]:m-0 pointer-events-none md:pointer-events-auto"
               value={description}
             />

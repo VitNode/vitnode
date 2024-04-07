@@ -4,10 +4,10 @@ import { cn } from "@/functions/classnames";
 import { ItemForum, type ItemForumProps } from "../item/item";
 import type { ShowForumForumsWithChildren } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
-import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
 import { WrapperCategoryForum } from "./wrapper";
 import { ChevronCategoryForumButton } from "./chevron-button";
 import { ChildrenWrapperCategoryForum } from "./children-wrapper";
+import { ReadOnlyEditor } from "@/components/editor/read-only";
 
 interface Props
   extends Pick<ShowForumForumsWithChildren, "description" | "id" | "name"> {
@@ -36,7 +36,6 @@ export const CategoryForum = ({ children, description, id, name }: Props) => {
 
               {description.length > 0 && (
                 <ReadOnlyEditor
-                  id={`${id}_description`}
                   className="text-muted-foreground text-sm [&_p]:m-0"
                   value={description}
                 />
