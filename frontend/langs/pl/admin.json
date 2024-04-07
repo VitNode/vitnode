@@ -231,6 +231,9 @@
             "desc_with_children": "Masz podnawigacje. Jeśli usuniesz tą nawigację, wszystkie podnawigacje zostaną przeniesione do nadrzędnej nawigacji.",
             "success": "Nawigacja została usunięta."
           }
+        },
+        "editor": {
+          "title": "Editor"
         }
       },
       "langs": {

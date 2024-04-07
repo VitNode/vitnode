@@ -9,7 +9,7 @@ import { Tabs } from "@/components/tabs/tabs";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 import { DateFormat } from "@/components/date-format/date-format";
 import { ActionsDevPluginAdmin } from "./actions/actions";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 
 interface Props extends Admin__Core_Plugins__Show__ItemQuery {
   children: ReactNode;
@@ -37,68 +37,61 @@ export const DevPluginAdminLayout = ({
   } = plugin;
 
   return (
-    <Card>
-      <CardHeader>
-        <HeaderContent
-          h1={
-            <div className="flex gap-2 items-center flex-wrap">
-              <span>{name}</span>
-              {isDefault && <Badge>{tCore("default")}</Badge>}
-            </div>
-          }
-          desc={
-            <div>
-              {description && (
-                <p className="text-sm max-w-80 truncate">{description}</p>
-              )}
-              {version && version_code && (
-                <span className="flex gap-1 flex-wrap">
-                  <span>{version}</span>
-                  <span>
-                    ({version_code}), <DateFormat date={updated} />
-                  </span>
+    <>
+      <HeaderContent
+        h1={
+          <div className="flex gap-2 items-center flex-wrap">
+            <span>{name}</span>
+            {isDefault && <Badge>{tCore("default")}</Badge>}
+          </div>
+        }
+        desc={
+          <div>
+            {description && (
+              <p className="text-sm max-w-80 truncate">{description}</p>
+            )}
+            {version && version_code && (
+              <span className="flex gap-1 flex-wrap">
+                <span>{version}</span>
+                <span>
+                  ({version_code}), <DateFormat date={updated} />
                 </span>
-              )}
-              {author_url ? (
-                <a
-                  href={author_url}
-                  className="inline-flex gap-1"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  {author} <ExternalLink className="size-4" />
-                </a>
-              ) : (
-                <span className="flex gap-1">{author}</span>
-              )}
-            </div>
-          }
+              </span>
+            )}
+            {author_url ? (
+              <a
+                href={author_url}
+                className="inline-flex gap-1"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {author} <ExternalLink className="size-4" />
+              </a>
+            ) : (
+              <span className="flex gap-1">{author}</span>
+            )}
+          </div>
+        }
+      >
+        <ActionsDevPluginAdmin {...plugin} />
+      </HeaderContent>
+
+      <Tabs className="mb-5">
+        <TabsTrigger
+          id="overview"
+          href={`/admin/core/plugins/${code}/dev/overview`}
         >
-          <ActionsDevPluginAdmin {...plugin} />
-        </HeaderContent>
-      </CardHeader>
+          {t("overview.title")}
+        </TabsTrigger>
+        <TabsTrigger id="files" href={`/admin/core/plugins/${code}/dev/files`}>
+          {t("files.title")}
+        </TabsTrigger>
+        <TabsTrigger id="nav" href={`/admin/core/plugins/${code}/dev/nav`}>
+          {t("nav.title")}
+        </TabsTrigger>
+      </Tabs>
 
-      <CardContent>
-        <Tabs className="mb-5">
-          <TabsTrigger
-            id="overview"
-            href={`/admin/core/plugins/${code}/dev/overview`}
-          >
-            {t("overview.title")}
-          </TabsTrigger>
-          <TabsTrigger
-            id="files"
-            href={`/admin/core/plugins/${code}/dev/files`}
-          >
-            {t("files.title")}
-          </TabsTrigger>
-          <TabsTrigger id="nav" href={`/admin/core/plugins/${code}/dev/nav`}>
-            {t("nav.title")}
-          </TabsTrigger>
-        </Tabs>
-
-        {children}
-      </CardContent>
-    </Card>
+      <Card className="p-6">{children}</Card>
+    </>
   );
 };

@@ -7,11 +7,9 @@ import {
   FormItem,
   FormMessage
 } from "@/components/ui/form";
-import { Editor } from "@/components/editor/editor";
 import { Button } from "@/components/ui/button";
 import { useCreatePost } from "@/hooks/forum/posts/create/use-create-post";
 import { EditorTest } from "@/components/editor/test/editor";
-import { Input } from "@/components/ui/input";
 
 interface Props {
   setOpen: (open: boolean) => void;
@@ -30,20 +28,7 @@ export const ContentCreatePost = ({ setOpen }: Props) => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <>
-                  <Editor
-                    id="post_create"
-                    onChange={field.onChange}
-                    value={field.value}
-                    enableAutoFocus
-                  />
-
-                  <br />
-                  <Input />
-
-                  <br />
-                  <EditorTest onChange={field.onChange} value={field.value} />
-                </>
+                <EditorTest onChange={field.onChange} value={field.value} />
               </FormControl>
               <FormMessage />
             </FormItem>

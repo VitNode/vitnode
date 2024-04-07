@@ -230,6 +230,9 @@
             "desc_with_children": "You have sub-navigations. If you delete this navigation, all sub-navigations will be moved to the parent navigation.",
             "success": "Navigation has been deleted."
           }
+        },
+        "editor": {
+          "title": "Editor"
         }
       },
       "langs": {

@@ -20,6 +20,9 @@ export const StylesAdminLayout = ({ children }: Props) => {
         <TabsTrigger id="nav" href="/admin/core/styles/nav">
           {t("nav.title")}
         </TabsTrigger>
+        <TabsTrigger id="editor" href="/admin/core/styles/editor">
+          {t("editor.title")}
+        </TabsTrigger>
       </Tabs>
 
       {children}

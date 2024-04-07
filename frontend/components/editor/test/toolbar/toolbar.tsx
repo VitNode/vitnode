@@ -59,7 +59,10 @@ export const ToolBarEditor = ({ editor }: Props) => {
       <ToggleToolbarEditor
         pressed={editor.isActive({ textAlign: "left" })}
         name="text_align_left"
-        onPressedChange={() => editor.commands.setTextAlign("left")}
+        onPressedChange={() => {
+          editor.commands.setTextAlign("left");
+          editor.commands.focus();
+        }}
       >
         <TextAlignLeftIcon />
       </ToggleToolbarEditor>
@@ -67,7 +70,10 @@ export const ToolBarEditor = ({ editor }: Props) => {
       <ToggleToolbarEditor
         pressed={editor.isActive({ textAlign: "center" })}
         name="text_align_center"
-        onPressedChange={() => editor.commands.setTextAlign("center")}
+        onPressedChange={() => {
+          editor.commands.setTextAlign("center");
+          editor.commands.focus();
+        }}
       >
         <TextAlignCenterIcon />
       </ToggleToolbarEditor>
@@ -75,7 +81,10 @@ export const ToolBarEditor = ({ editor }: Props) => {
       <ToggleToolbarEditor
         pressed={editor.isActive({ textAlign: "right" })}
         name="text_align_right"
-        onPressedChange={() => editor.commands.setTextAlign("right")}
+        onPressedChange={() => {
+          editor.commands.setTextAlign("right");
+          editor.commands.focus();
+        }}
       >
         <TextAlignRightIcon />
       </ToggleToolbarEditor>
@@ -83,7 +92,10 @@ export const ToolBarEditor = ({ editor }: Props) => {
       <ToggleToolbarEditor
         pressed={editor.isActive({ textAlign: "justify" })}
         name="text_align_justify"
-        onPressedChange={() => editor.commands.setTextAlign("justify")}
+        onPressedChange={() => {
+          editor.commands.setTextAlign("justify");
+          editor.commands.focus();
+        }}
       >
         <TextAlignJustifyIcon />
       </ToggleToolbarEditor>
