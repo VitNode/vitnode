@@ -36,7 +36,10 @@ export const LinkToolbarEditor = ({ editor }: Props) => {
         </ButtonToolbarEditor>
       </PopoverTrigger>
 
-      <PopoverContent className="w-80">
+      <PopoverContent
+        className="w-80"
+        onCloseAutoFocus={() => editor.commands.focus()}
+      >
         <Suspense fallback={<Loader />}>
           <Content editor={editor} setOpen={setOpen} />
         </Suspense>

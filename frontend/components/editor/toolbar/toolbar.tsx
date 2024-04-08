@@ -21,6 +21,7 @@ import { ToggleToolbarEditor } from "./toggle";
 import { SeparatorToolbarEditor } from "./separator";
 import { ButtonToolbarEditor } from "./button";
 import { LinkToolbarEditor } from "./custom/link/link";
+import { HeadingToolbarEditor } from "./custom/heading";
 
 interface Props {
   editor: Editor;
@@ -46,6 +47,8 @@ export const ToolBarEditor = ({ editor }: Props) => {
       </ButtonToolbarEditor>
 
       <SeparatorToolbarEditor />
+
+      <HeadingToolbarEditor editor={editor} />
 
       <ToggleToolbarEditor
         pressed={editor.isActive("bold")}

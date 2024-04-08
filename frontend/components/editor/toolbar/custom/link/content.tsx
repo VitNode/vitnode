@@ -43,7 +43,7 @@ export const ContentLinkToolbarEditor = ({ editor, setOpen }: Props) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     editor
       .chain()
-      .focus()
+
       .extendMarkRange("link")
       .command(({ dispatch, tr }) => {
         if (!dispatch) return true;
@@ -62,7 +62,6 @@ export const ContentLinkToolbarEditor = ({ editor, setOpen }: Props) => {
       })
       .run();
 
-    editor.commands.focus();
     setOpen(false);
   };
 
@@ -101,11 +100,8 @@ export const ContentLinkToolbarEditor = ({ editor, setOpen }: Props) => {
         <div className="flex gap-2 items-center [&>button]:flex-1 [&>button]:flex-shrink-0">
           <Button
             onClick={() => {
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-expect-error
-              editor.chain().focus().unsetLink().run();
+              editor.chain().unsetLink().run();
               setOpen(false);
-              form.reset();
             }}
             variant="destructiveGhost"
             size="sm"

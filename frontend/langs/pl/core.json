@@ -93,6 +93,15 @@
         "delete": "Usuń link",
         "insert": "Wstaw link"
       },
+      "heading": {
+        "h1": "Nagłówek H1",
+        "h2": "Nagłówek H2",
+        "h3": "Nagłówek H3",
+        "h4": "Nagłówek H4",
+        "h5": "Nagłówek H5",
+        "h6": "Nagłówek H6",
+        "paragraph": "Paragraf"
+      },
       "change_language": "Zmień język",
 
       "remove_formatting": "Usuń formatowanie",

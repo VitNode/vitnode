@@ -1,21 +1,20 @@
 import { TextAlign } from "@tiptap/extension-text-align";
 import { Underline } from "@tiptap/extension-underline";
-import { type Extensions } from "@tiptap/react";
+import { mergeAttributes, type Extensions } from "@tiptap/react";
 import { StarterKit } from "@tiptap/starter-kit";
 import { CodeBlockLowlight } from "@tiptap/extension-code-block-lowlight";
 import { all, createLowlight } from "lowlight";
 import { Link } from "@tiptap/extension-link";
+import { Heading } from "@tiptap/extension-heading";
 
 const lowlight = createLowlight(all);
 
 export const extensionsEditor: Extensions = [
   StarterKit.configure({
-    heading: {
-      levels: [1, 2, 3, 4, 5, 6]
-    },
+    heading: false,
     paragraph: {
       HTMLAttributes: {
-        class: "[&:not(:last-child)]:mb-[1em]"
+        class: "[&:not(:last-child)]:mb-[0.5rem]"
       }
     },
     bulletList: {
@@ -62,7 +61,29 @@ export const extensionsEditor: Extensions = [
       class: "bg-muted p-5 rounded-md overflow-auto"
     }
   }),
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  Link.extend({ inclusive: false })
+  Link.extend({ inclusive: false }),
+  Heading.extend({
+    levels: [1, 2],
+    renderHTML({ HTMLAttributes, node }) {
+      const level = this.options.levels.includes(node.attrs.level)
+        ? node.attrs.level
+        : this.options.levels[0];
+      const classes: { [index: number]: string } = {
+        1: "text-4xl font-extrabold",
+        2: "text-3xl font-bold",
+        3: "text-2xl font-bold",
+        4: "text-xl font-bold",
+        5: "text-lg font-bold",
+        6: "text-base font-bold"
+      };
+
+      return [
+        `h${level}`,
+        mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+          class: `${classes[level]} [&:not(:last-child)]:mb-[0.5rem]`
+        }),
+        0
+      ];
+    }
+  }).configure({ levels: [1, 2, 3, 4, 5, 6] })
 ];

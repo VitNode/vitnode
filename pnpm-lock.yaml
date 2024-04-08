@@ -261,6 +261,9 @@ importers:
       '@tiptap/extension-code-block-lowlight':
         specifier: ^2.2.6
         version: 2.2.6(@tiptap/core@2.2.6)(@tiptap/extension-code-block@2.2.6)(@tiptap/pm@2.2.6)
+      '@tiptap/extension-heading':
+        specifier: ^2.2.6
+        version: 2.2.6(@tiptap/core@2.2.6)
       '@tiptap/extension-link':
         specifier: ^2.2.6
         version: 2.2.6(@tiptap/core@2.2.6)(@tiptap/pm@2.2.6)

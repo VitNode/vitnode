@@ -33,6 +33,7 @@
     "@radix-ui/react-toggle-group": "^1.0.4",
     "@radix-ui/react-tooltip": "^1.0.7",
     "@tiptap/extension-code-block-lowlight": "^2.2.6",
+    "@tiptap/extension-heading": "^2.2.6",
     "@tiptap/extension-link": "^2.2.6",
     "@tiptap/extension-text-align": "^2.2.6",
     "@tiptap/extension-underline": "^2.2.6",
