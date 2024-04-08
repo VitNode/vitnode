@@ -43,7 +43,7 @@ export async function generateMetadata({
   const config = await getConfigFile();
   const t = await getTranslations({ locale, namespace: "admin" });
 
-  const defaultTitle = `${t("title_short")} - ${config.side_name}`;
+  const defaultTitle = `${t("title_short")} - ${config.settings.general.side_name}`;
 
   return {
     title: {

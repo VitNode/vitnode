@@ -4,7 +4,6 @@ import * as fs from "fs";
 import { ConfigType, configPath } from "./get-config-file";
 
 const DATA: ConfigType = {
-  side_name: "VitNode Community",
   rebuild_required: {
     themes: false,
     langs: false,
@@ -12,6 +11,11 @@ const DATA: ConfigType = {
   },
   editor: {
     sticky: false
+  },
+  settings: {
+    general: {
+      side_name: "VitNode Community"
+    }
   }
 };
 

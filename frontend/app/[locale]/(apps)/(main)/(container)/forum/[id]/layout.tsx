@@ -32,7 +32,7 @@ export async function generateMetadata({
   return {
     title: {
       default: title,
-      template: `%s - ${title} - ${config.side_name}`
+      template: `%s - ${title} - ${config.settings.general.side_name}`
     }
   };
 }

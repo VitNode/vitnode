@@ -6,8 +6,11 @@ import { toast } from "sonner";
 
 import { mutationApi } from "./mutation-api";
 import { zodInput } from "@/functions/zod";
+import type { ConfigType } from "@/functions/get-config-file";
 
-export const useSettingsCoreAdmin = () => {
+export const useSettingsCoreAdmin = (
+  data: ConfigType["settings"]["general"]
+) => {
   const t = useTranslations("core");
 
   const formSchema = z.object({
@@ -17,24 +20,23 @@ export const useSettingsCoreAdmin = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: ""
+      name: data.side_name
     }
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const mutation = await mutationApi({
-      sideName: values.name
-    });
+    try {
+      await mutationApi({
+        side_name: values.name
+      });
 
-    if (mutation.error) {
+      toast.success(t("saved_success"));
+      form.reset(values);
+    } catch (err) {
       toast.error(t("errors.title"), {
         description: t("errors.internal_server_error")
       });
-
-      return;
     }
-
-    toast.success(t("saved_success"));
   };
 
   return {

@@ -23,9 +23,13 @@ export const GlobalsContext = createContext<Args>({
       plugins: false,
       themes: false
     },
-    side_name: "",
     editor: {
       sticky: false
+    },
+    settings: {
+      general: {
+        side_name: ""
+      }
     }
   }
 });

@@ -1,26 +1,24 @@
 "use server";
 
-import { fetcher } from "@/graphql/fetcher";
+import * as fs from "fs";
+
 import {
-  Admin_Settings__General__Edit,
-  type Admin_Settings__General__EditMutation,
-  type Admin_Settings__General__EditMutationVariables
-} from "@/graphql/hooks";
+  configPath,
+  getConfigFile,
+  type ConfigType
+} from "@/functions/get-config-file";
 
 export const mutationApi = async (
-  variables: Admin_Settings__General__EditMutationVariables
+  variables: ConfigType["settings"]["general"]
 ) => {
-  try {
-    const { data } = await fetcher<
-      Admin_Settings__General__EditMutation,
-      Admin_Settings__General__EditMutationVariables
-    >({
-      query: Admin_Settings__General__Edit,
-      variables
-    });
+  const config = await getConfigFile();
+  const newData: ConfigType = {
+    ...config,
+    settings: {
+      ...config.settings,
+      general: variables
+    }
+  };
 
-    return { data };
-  } catch (error) {
-    return { error };
-  }
+  fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), "utf8");
 };

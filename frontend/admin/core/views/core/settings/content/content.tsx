@@ -13,11 +13,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useSettingsCoreAdmin } from "./hooks/use-settings-core-admin";
+import type { ConfigType } from "@/functions/get-config-file";
 
-export const ContentSettingsCoreAdmin = () => {
+export const ContentSettingsCoreAdmin = (
+  props: ConfigType["settings"]["general"]
+) => {
   const t = useTranslations("admin");
   const tCore = useTranslations("core");
-  const { form, onSubmit } = useSettingsCoreAdmin();
+  const { form, onSubmit } = useSettingsCoreAdmin(props);
 
   return (
     <Form {...form}>

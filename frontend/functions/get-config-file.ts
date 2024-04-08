@@ -10,7 +10,11 @@ export interface ConfigType {
     plugins: boolean;
     themes: boolean;
   };
-  side_name: string;
+  settings: {
+    general: {
+      side_name: string;
+    };
+  };
 }
 
 export const configPath = join("config", "config.json");
