@@ -5,9 +5,11 @@ import {
   AlignLeft,
   AlignRight,
   Bold,
+  Code,
   Italic,
   List,
   ListOrdered,
+  Minus,
   Quote,
   Redo,
   Strikethrough,
@@ -18,6 +20,7 @@ import {
 import { ToggleToolbarEditor } from "./toggle";
 import { SeparatorToolbarEditor } from "./separator";
 import { ButtonToolbarEditor } from "./button";
+import { LinkToolbarEditor } from "./custom/link/link";
 
 interface Props {
   editor: Editor;
@@ -142,12 +145,29 @@ export const ToolBarEditor = ({ editor }: Props) => {
 
       <SeparatorToolbarEditor />
 
+      <LinkToolbarEditor editor={editor} />
+
       <ToggleToolbarEditor
         pressed={editor.isActive("blockquote")}
         name="block_quote"
         onPressedChange={() => editor.chain().focus().toggleBlockquote().run()}
       >
         <Quote />
+      </ToggleToolbarEditor>
+
+      <ButtonToolbarEditor
+        name="horizontal_rule"
+        onClick={() => editor.chain().focus().setHorizontalRule().run()}
+      >
+        <Minus />
+      </ButtonToolbarEditor>
+
+      <ToggleToolbarEditor
+        pressed={editor.isActive("codeBlock")}
+        name="code_block"
+        onPressedChange={() => editor.chain().focus().toggleCodeBlock().run()}
+      >
+        <Code />
       </ToggleToolbarEditor>
     </div>
   );

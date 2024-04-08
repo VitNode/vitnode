@@ -84,6 +84,15 @@
       "ordered_list": "Lista numerowana",
       "undo": "Cofnij",
       "redo": "Ponów",
+      "horizontal_rule": "Linia pozioma",
+      "code_block": "Blok kodu",
+      "link": {
+        "title": "Link",
+        "text": "Tekst",
+        "href": "Adres URL",
+        "delete": "Usuń link",
+        "insert": "Wstaw link"
+      },
       "change_language": "Zmień język",
 
       "remove_formatting": "Usuń formatowanie",
@@ -92,7 +101,6 @@
       "font_color": "Kolor czcionki",
       "font_background_color": "Kolor tła czcionki",
       "set_default_color": "Ustaw domyślny kolor",
-      "link": "Link",
       "copy_code": "Kopiuj kod",
       "code_language": "Język kodu",
       "prettier": {

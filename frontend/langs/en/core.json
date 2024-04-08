@@ -84,6 +84,15 @@
       "ordered_list": "Ordered List",
       "undo": "Undo",
       "redo": "Redo",
+      "horizontal_rule": "Horizontal Rule",
+      "code_block": "Code Block",
+      "link": {
+        "title": "Link",
+        "text": "Text",
+        "href": "URL",
+        "delete": "Delete Link",
+        "insert": "Insert Link"
+      },
       "change_language": "Change Language",
 
       "remove_formatting": "Remove Formatting",
@@ -92,7 +101,6 @@
       "font_color": "Font Color",
       "font_background_color": "Font Background Color",
       "set_default_color": "Set Default Color",
-      "link": "Link",
       "copy_code": "Copy Code",
       "code_language": "Code Language",
       "prettier": {

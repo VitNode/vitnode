@@ -12,6 +12,7 @@ import { useGlobals } from "@/hooks/core/use-globals";
 import { extensionsEditor } from "./extensions";
 
 interface Props {
+  autoFocus?: boolean;
   className?: string;
 }
 
@@ -28,6 +29,7 @@ interface WithoutLanguage extends Props {
 }
 
 export const Editor = ({
+  autoFocus,
   className,
   disableLanguage,
   onChange,
@@ -39,6 +41,7 @@ export const Editor = ({
     locale ?? defaultLanguage
   );
   const editor = useEditor({
+    autofocus: autoFocus,
     extensions: extensionsEditor,
     editorProps: {
       attributes: {
