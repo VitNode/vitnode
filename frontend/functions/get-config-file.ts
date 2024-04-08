@@ -2,7 +2,6 @@ import { promises } from "fs";
 import { join } from "path";
 
 export interface ConfigType {
-  finished_install: boolean;
   rebuild_required: {
     langs: boolean;
     plugins: boolean;

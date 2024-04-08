@@ -1,5 +1,5 @@
 {
-  "id": "4d2e3de7-575e-464a-ab0b-3f825f2e2afe",
+  "id": "fe7a13df-c696-46d2-ae1a-5dd6aac27072",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -50,12 +50,16 @@
       "indexes": {
         "blog_articles_author_id_idx": {
           "name": "blog_articles_author_id_idx",
-          "columns": ["author_id"],
+          "columns": [
+            "author_id"
+          ],
           "isUnique": false
         },
         "blog_articles_category_id_idx": {
           "name": "blog_articles_category_id_idx",
-          "columns": ["category_id"],
+          "columns": [
+            "category_id"
+          ],
           "isUnique": false
         }
       },
@@ -64,8 +68,12 @@
           "name": "blog_articles_author_id_core_users_id_fk",
           "tableFrom": "blog_articles",
           "tableTo": "core_users",
-          "columnsFrom": ["author_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "author_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -73,8 +81,12 @@
           "name": "blog_articles_category_id_blog_categories_id_fk",
           "tableFrom": "blog_articles",
           "tableTo": "blog_categories",
-          "columnsFrom": ["category_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -114,12 +126,16 @@
       "indexes": {
         "blog_articles_content_article_id_idx": {
           "name": "blog_articles_content_article_id_idx",
-          "columns": ["article_id"],
+          "columns": [
+            "article_id"
+          ],
           "isUnique": false
         },
         "blog_articles_content_language_code_idx": {
           "name": "blog_articles_content_language_code_idx",
-          "columns": ["language_code"],
+          "columns": [
+            "language_code"
+          ],
           "isUnique": false
         }
       },
@@ -128,8 +144,12 @@
           "name": "blog_articles_content_article_id_blog_articles_id_fk",
           "tableFrom": "blog_articles_content",
           "tableTo": "blog_articles",
-          "columnsFrom": ["article_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "article_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -137,8 +157,12 @@
           "name": "blog_articles_content_language_code_core_languages_code_fk",
           "tableFrom": "blog_articles_content",
           "tableTo": "core_languages",
-          "columnsFrom": ["language_code"],
-          "columnsTo": ["code"],
+          "columnsFrom": [
+            "language_code"
+          ],
+          "columnsTo": [
+            "code"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -178,12 +202,16 @@
       "indexes": {
         "blog_articles_title_article_id_idx": {
           "name": "blog_articles_title_article_id_idx",
-          "columns": ["article_id"],
+          "columns": [
+            "article_id"
+          ],
           "isUnique": false
         },
         "blog_articles_title_language_code_idx": {
           "name": "blog_articles_title_language_code_idx",
-          "columns": ["language_code"],
+          "columns": [
+            "language_code"
+          ],
           "isUnique": false
         }
       },
@@ -192,8 +220,12 @@
           "name": "blog_articles_title_article_id_blog_articles_id_fk",
           "tableFrom": "blog_articles_title",
           "tableTo": "blog_articles",
-          "columnsFrom": ["article_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "article_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -201,8 +233,12 @@
           "name": "blog_articles_title_language_code_core_languages_code_fk",
           "tableFrom": "blog_articles_title",
           "tableTo": "core_languages",
-          "columnsFrom": ["language_code"],
-          "columnsTo": ["code"],
+          "columnsFrom": [
+            "language_code"
+          ],
+          "columnsTo": [
+            "code"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -226,6 +262,13 @@
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
+        },
+        "position": {
+          "name": "position",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
         }
       },
       "indexes": {},
@@ -245,9 +288,9 @@
         },
         "category_id": {
           "name": "category_id",
-          "type": "serial",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "language_code": {
           "name": "language_code",
@@ -257,7 +300,7 @@
         },
         "value": {
           "name": "value",
-          "type": "varchar(150)",
+          "type": "varchar",
           "primaryKey": false,
           "notNull": true
         }
@@ -268,8 +311,12 @@
           "name": "blog_categories_description_category_id_blog_categories_id_fk",
           "tableFrom": "blog_categories_description",
           "tableTo": "blog_categories",
-          "columnsFrom": ["category_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -277,8 +324,12 @@
           "name": "blog_categories_description_language_code_core_languages_code_fk",
           "tableFrom": "blog_categories_description",
           "tableTo": "core_languages",
-          "columnsFrom": ["language_code"],
-          "columnsTo": ["code"],
+          "columnsFrom": [
+            "language_code"
+          ],
+          "columnsTo": [
+            "code"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -298,9 +349,9 @@
         },
         "category_id": {
           "name": "category_id",
-          "type": "serial",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "language_code": {
           "name": "language_code",
@@ -310,7 +361,7 @@
         },
         "value": {
           "name": "value",
-          "type": "varchar(50)",
+          "type": "varchar(100)",
           "primaryKey": false,
           "notNull": true
         }
@@ -321,8 +372,12 @@
           "name": "blog_categories_name_category_id_blog_categories_id_fk",
           "tableFrom": "blog_categories_name",
           "tableTo": "blog_categories",
-          "columnsFrom": ["category_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -330,8 +385,12 @@
           "name": "blog_categories_name_language_code_core_languages_code_fk",
           "tableFrom": "blog_categories_name",
           "tableTo": "core_languages",
-          "columnsFrom": ["language_code"],
-          "columnsTo": ["code"],
+          "columnsFrom": [
+            "language_code"
+          ],
+          "columnsTo": [
+            "code"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }

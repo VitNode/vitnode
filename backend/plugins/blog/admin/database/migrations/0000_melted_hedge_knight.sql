@@ -23,21 +23,22 @@ CREATE TABLE IF NOT EXISTS "blog_articles_title" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "blog_categories" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"created" timestamp DEFAULT now() NOT NULL
+	"created" timestamp DEFAULT now() NOT NULL,
+	"position" integer DEFAULT 0 NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "blog_categories_description" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"category_id" serial NOT NULL,
+	"category_id" integer,
 	"language_code" varchar NOT NULL,
-	"value" varchar(150) NOT NULL
+	"value" varchar NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "blog_categories_name" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"category_id" serial NOT NULL,
+	"category_id" integer,
 	"language_code" varchar NOT NULL,
-	"value" varchar(50) NOT NULL
+	"value" varchar(100) NOT NULL
 );
 --> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "blog_articles_author_id_idx" ON "blog_articles" ("author_id");--> statement-breakpoint

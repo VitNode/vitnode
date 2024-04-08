@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1711277276835,
-      "tag": "0000_odd_zarek",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1711385041396,
-      "tag": "0001_naive_black_queen",
+      "when": 1711706513106,
+      "tag": "0000_melted_hedge_knight",
       "breakpoints": true
     }
   ]

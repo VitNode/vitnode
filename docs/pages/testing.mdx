@@ -47,7 +47,7 @@ pnpm docker:test
     <Tabs.Tab>
 
 ```bash
-pnpm config:init && docker-compose -f ./docker-compose-prod.yml -p vitnode-test up -d --build && sudo docker exec -d vitnode_backend /bin/sh -c \"pnpm db\"
+pnpm config:init && docker-compose -f ./docker-compose-prod-backend.yml -p vitnode-test up -d --build && docker-compose -f ./docker-compose-prod-frontend.yml -p vitnode-test up -d --build && pnpm config:finish
 ```
 
   </Tabs.Tab>
