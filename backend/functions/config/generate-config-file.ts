@@ -9,6 +9,9 @@ const DATA: ConfigType = {
     themes: false,
     langs: false,
     plugins: false
+  },
+  editor: {
+    sticky: false
   }
 };
 
@@ -19,5 +22,6 @@ if (!fs.existsSync(configPath)) {
 
   console.log("[VitNode] - Config file has been generated");
 } else {
+  // TODO: Update config
   console.log("[VitNode] - Config file already exists. Skipping...");
 }

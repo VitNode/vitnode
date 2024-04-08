@@ -10,6 +10,9 @@ export interface ConfigType {
     themes: boolean;
   };
   side_name: string;
+  editor: {
+    sticky: boolean;
+  };
 }
 
 export const configPath = join(

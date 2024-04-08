@@ -232,7 +232,11 @@
           }
         },
         "editor": {
-          "title": "Editor"
+          "title": "Editor",
+          "sticky": {
+            "label": "Sticky Toolbar",
+            "desc": "The toolbar will be fixed at the top of the screen."
+          }
         }
       },
       "langs": {

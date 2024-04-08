@@ -233,7 +233,11 @@
           }
         },
         "editor": {
-          "title": "Editor"
+          "title": "Editor",
+          "sticky": {
+            "label": "Lepki pasek narzędzi",
+            "desc": "Pasek narzędzi będzie przypięty na górze ekranu."
+          }
         }
       },
       "langs": {

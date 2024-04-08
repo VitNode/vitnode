@@ -19,6 +19,9 @@ import { db } from "@/plugins/database/client";
       langs: false,
       plugins: false,
       themes: false
+    },
+    editor: {
+      sticky: true
     }
   };
   fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), "utf8");

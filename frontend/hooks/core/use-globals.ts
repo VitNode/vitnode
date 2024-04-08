@@ -1,8 +1,10 @@
 import { createContext, useContext } from "react";
 
 import type { ShowCoreLanguages, ShowCoreThemes } from "@/graphql/hooks";
+import type { ConfigType } from "@/functions/get-config-file";
 
 interface Args {
+  config: ConfigType;
   defaultLanguage: string;
   languages: Pick<
     ShowCoreLanguages,
@@ -14,7 +16,18 @@ interface Args {
 export const GlobalsContext = createContext<Args>({
   languages: [],
   defaultLanguage: "",
-  themes: []
+  themes: [],
+  config: {
+    rebuild_required: {
+      langs: false,
+      plugins: false,
+      themes: false
+    },
+    side_name: "",
+    editor: {
+      sticky: false
+    }
+  }
 });
 
 export const useGlobals = () => useContext(GlobalsContext);

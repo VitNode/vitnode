@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { EditorAdminView } from "@/admin/core/views/core/styles/editor/editor-admin-view";
+import { getConfigFile } from "@/functions/get-config-file";
 
 interface Props {
   params: {
@@ -23,5 +24,7 @@ export async function generateMetadata({
 }
 
 export default async function Page() {
-  return <EditorAdminView />;
+  const data = await getConfigFile();
+
+  return <EditorAdminView data={data} />;
 }

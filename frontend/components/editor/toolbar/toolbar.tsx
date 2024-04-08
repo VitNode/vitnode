@@ -22,14 +22,26 @@ import { SeparatorToolbarEditor } from "./separator";
 import { ButtonToolbarEditor } from "./button";
 import { LinkToolbarEditor } from "./custom/link/link";
 import { HeadingToolbarEditor } from "./custom/heading";
+import { useGlobals } from "@/hooks/core/use-globals";
+import { cn } from "@/functions/classnames";
 
 interface Props {
   editor: Editor;
 }
 
 export const ToolBarEditor = ({ editor }: Props) => {
+  const { config } = useGlobals();
+
   return (
-    <div className="bg-background p-1 rounded-t-md flex gap-1 items-center">
+    <div
+      className={cn(
+        "bg-background p-1 rounded-md flex gap-1 items-center flex-wrap m-1 border",
+        {
+          "sticky top-[4.5rem] z-10 overflow-auto max-h-[32vh] shadow-sm":
+            config.editor.sticky
+        }
+      )}
+    >
       <ButtonToolbarEditor
         name="undo"
         disabled={!editor.can().undo()}
