@@ -83,10 +83,6 @@ type FilesAdminPluginsObj {
   templates: Int!
 }
 
-type GeneralAdminSettingsObj {
-  side_name: String!
-}
-
 type GroupUser {
   id: Int!
   name: [TextLanguage!]!
@@ -198,7 +194,6 @@ type Mutation {
   admin__forum_forums__edit(description: [TextLanguageInput!]!, id: Int!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
   admin__install__create_database: String!
   admin_sessions__sign_out: String!
-  admin_settings__general__edit(side_name: String!): GeneralAdminSettingsObj!
   core_groups__admin_create(name: [TextLanguageInput!]!): ShowAdminGroups!
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
@@ -285,7 +280,6 @@ type Query {
   ): ShowForumForumsAdminObj!
   admin__install__layout: LayoutAdminInstallObj!
   admin__sessions__authorization: AuthorizationAdminSessionsObj!
-  admin__settings__general__show: ShowGeneralAdminSettingsObj!
   blog_categories__show(cursor: Int, first: Int, last: Int): ShowBlogCategoriesObj!
   core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowCoreLanguagesSortByArgs!]): ShowCoreLanguagesObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
@@ -651,10 +645,6 @@ type ShowForumForumsWithChildren {
   name: [TextLanguage!]!
   permissions: PermissionsForumForums!
   position: Int!
-}
-
-type ShowGeneralAdminSettingsObj {
-  side_name: String!
 }
 
 type ShowPostsForums {

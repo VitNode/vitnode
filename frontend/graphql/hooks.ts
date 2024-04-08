@@ -101,11 +101,6 @@ export type FilesAdminPluginsObj = {
   templates: Scalars['Int']['output'];
 };
 
-export type GeneralAdminSettingsObj = {
-  __typename?: 'GeneralAdminSettingsObj';
-  side_name: Scalars['String']['output'];
-};
-
 export type GroupUser = {
   __typename?: 'GroupUser';
   id: Scalars['Int']['output'];
@@ -227,7 +222,6 @@ export type Mutation = {
   admin__forum_forums__edit: CreateForumForumsObj;
   admin__install__create_database: Scalars['String']['output'];
   admin_sessions__sign_out: Scalars['String']['output'];
-  admin_settings__general__edit: GeneralAdminSettingsObj;
   core_groups__admin_create: ShowAdminGroups;
   core_members__avatar__delete: Scalars['String']['output'];
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
@@ -486,11 +480,6 @@ export type MutationAdmin__Forum_Forums__EditArgs = {
 };
 
 
-export type MutationAdmin_Settings__General__EditArgs = {
-  side_name: Scalars['String']['input'];
-};
-
-
 export type MutationCore_Groups__Admin_CreateArgs = {
   name: Array<TextLanguageInput>;
 };
@@ -619,7 +608,6 @@ export type Query = {
   admin__forum_forums__show: ShowForumForumsAdminObj;
   admin__install__layout: LayoutAdminInstallObj;
   admin__sessions__authorization: AuthorizationAdminSessionsObj;
-  admin__settings__general__show: ShowGeneralAdminSettingsObj;
   blog_categories__show: ShowBlogCategoriesObj;
   core_languages__show: ShowCoreLanguagesObj;
   core_members__show: ShowCoreMembersObj;
@@ -1160,11 +1148,6 @@ export type ShowForumForumsWithChildren = {
   position: Scalars['Int']['output'];
 };
 
-export type ShowGeneralAdminSettingsObj = {
-  __typename?: 'ShowGeneralAdminSettingsObj';
-  side_name: Scalars['String']['output'];
-};
-
 export type ShowPostsForums = {
   __typename?: 'ShowPostsForums';
   content: Array<TextLanguage>;
@@ -1522,13 +1505,6 @@ export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: n
 
 export type Admin_Sessions__Sign_OutMutation = { __typename?: 'Mutation', admin_sessions__sign_out: string };
 
-export type Admin_Settings__General__EditMutationVariables = Exact<{
-  sideName: Scalars['String']['input'];
-}>;
-
-
-export type Admin_Settings__General__EditMutation = { __typename?: 'Mutation', admin_settings__general__edit: { __typename?: 'GeneralAdminSettingsObj', side_name: string } };
-
 export type Admin__Core_Themes__CreateMutationVariables = Exact<{
   author: Scalars['String']['input'];
   authorUrl?: InputMaybe<Scalars['String']['input']>;
@@ -1817,11 +1793,6 @@ export type Admin__Core_Plugins__Nav__ShowQueryVariables = Exact<{
 
 
 export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, id: number, icon?: string | null, position: number, href: string }> };
-
-export type Admin__Settings__General__ShowQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Admin__Settings__General__ShowQuery = { __typename?: 'Query', admin__settings__general__show: { __typename?: 'ShowGeneralAdminSettingsObj', side_name: string } };
 
 export type Admin_Core_Themes__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -2202,13 +2173,6 @@ export const Admin__Core_Plugins__Nav__Edit = gql`
 export const Admin_Sessions__Sign_Out = gql`
     mutation Admin_sessions__sign_out {
   admin_sessions__sign_out
-}
-    `;
-export const Admin_Settings__General__Edit = gql`
-    mutation Admin_settings__general__edit($sideName: String!) {
-  admin_settings__general__edit(side_name: $sideName) {
-    side_name
-  }
 }
     `;
 export const Admin__Core_Themes__Create = gql`
@@ -2836,13 +2800,6 @@ export const Admin__Core_Plugins__Nav__Show = gql`
     icon
     position
     href
-  }
-}
-    `;
-export const Admin__Settings__General__Show = gql`
-    query Admin__settings__general__show {
-  admin__settings__general__show {
-    side_name
   }
 }
     `;

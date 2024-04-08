@@ -1,6 +1,5 @@
 import { Module } from "@nestjs/common";
 
-import { AdminSettingsModule } from "./settings/settings.module";
 import {
   AdminSessionsModule,
   GlobalAdminSessionsModule
@@ -17,7 +16,6 @@ import { AdminLanguagesModule } from "./languages/languages.module";
 @Module({
   imports: [
     GlobalAdminSessionsModule,
-    AdminSettingsModule,
     AdminSessionsModule,
     AdminInstallModule,
     AdminGroupsModule,
