@@ -6,7 +6,7 @@ import { AuthorizationCoreSessionsObj } from "./dto/authorization.obj";
 
 import { Ctx } from "@/types/context.type";
 import { DatabaseService } from "@/plugins/database/database.service";
-import { getConfigFile } from "@/functions/config/get-config-file";
+import { getConfigFile } from "@/config/get-config-file";
 
 @Injectable()
 export class AuthorizationCoreSessionsService {

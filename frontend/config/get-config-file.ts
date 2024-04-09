@@ -3,6 +3,7 @@ import { join } from "path";
 
 export interface ConfigType {
   editor: {
+    allow_head_h1: boolean;
     sticky: boolean;
   };
   rebuild_required: {

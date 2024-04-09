@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 import { mutationApi } from "./mutation-api";
 import { zodInput } from "@/functions/zod";
-import type { ConfigType } from "@/functions/get-config-file";
+import type { ConfigType } from "@/config/get-config-file";
 
 export const useSettingsCoreAdmin = (
   data: ConfigType["settings"]["general"]

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { type ReactNode } from "react";
 
-import { getConfigFile } from "@/functions/get-config-file";
+import { getConfigFile } from "@/config/get-config-file";
 import { getSessionData } from "@/functions/get-session-data";
 import { getConvertTextLang } from "@/hooks/core/use-text-lang";
 import { getForumItemData } from "./query-api";

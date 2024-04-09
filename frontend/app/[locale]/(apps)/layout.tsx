@@ -8,7 +8,7 @@ import {
   type Core_MiddlewareQueryVariables
 } from "@/graphql/hooks";
 import { InternalErrorView } from "@/admin/core/global/internal-error/internal-error-view";
-import { getConfigFile } from "@/functions/get-config-file";
+import { getConfigFile } from "@/config/get-config-file";
 
 const getData = async () => {
   const { data } = await fetcher<

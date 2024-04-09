@@ -4,7 +4,7 @@ import * as z from "zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
-import type { ConfigType } from "@/functions/get-config-file";
+import type { ConfigType } from "@/config/get-config-file";
 import { mutationApi } from "./mutation-api";
 
 export interface EditorAdminArgs {

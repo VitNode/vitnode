@@ -11,7 +11,7 @@ import { Ctx } from "@/types/context.type";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { currentDate } from "@/functions/date";
 import { DatabaseService } from "@/plugins/database/database.service";
-import { getConfigFile, getCoreInfo } from "@/functions/config/get-config-file";
+import { getConfigFile, getCoreInfo } from "@/config/get-config-file";
 import { AuthorizationCurrentUserObj } from "@/plugins/core/sessions/authorization/dto/authorization.obj";
 
 @Injectable()

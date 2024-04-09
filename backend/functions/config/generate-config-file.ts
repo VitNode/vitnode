@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import * as fs from "fs";
 
-import { ConfigType, configPath } from "./get-config-file";
+import { ConfigType, configPath } from "../../config/get-config-file";
 
 const DATA: ConfigType = {
   rebuild_required: {
@@ -10,7 +10,8 @@ const DATA: ConfigType = {
     plugins: false
   },
   editor: {
-    sticky: false
+    sticky: true,
+    allow_head_h1: false
   },
   settings: {
     general: {

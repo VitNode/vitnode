@@ -5,6 +5,7 @@ import { PluginInfoJSONType } from "@/plugins/core/admin/plugins/helpers/files/c
 
 export interface ConfigType {
   editor: {
+    allow_head_h1: boolean;
     sticky: boolean;
   };
   rebuild_required: {

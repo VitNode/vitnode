@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useSettingsCoreAdmin } from "./hooks/use-settings-core-admin";
-import type { ConfigType } from "@/functions/get-config-file";
+import type { ConfigType } from "@/config/get-config-file";
 
 export const MainSettingsCoreAdmin = (
   props: ConfigType["settings"]["general"]

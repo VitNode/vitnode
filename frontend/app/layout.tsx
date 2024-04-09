@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
-import { getConfigFile } from "@/functions/get-config-file";
+import { getConfigFile } from "@/config/get-config-file";
 
 export async function generateMetadata(): Promise<Metadata> {
   const config = await getConfigFile();

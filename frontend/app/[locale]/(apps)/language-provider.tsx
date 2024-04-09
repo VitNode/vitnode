@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 
 import type { Core_MiddlewareQuery } from "@/graphql/hooks";
 import { GlobalsContext } from "@/hooks/core/use-globals";
-import type { ConfigType } from "@/functions/get-config-file";
+import type { ConfigType } from "@/config/get-config-file";
 
 interface Props {
   children: ReactNode;

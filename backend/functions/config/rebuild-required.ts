@@ -1,7 +1,10 @@
 import * as fs from "fs";
 
-import { ConfigType, configPath, getConfigFile } from "./get-config-file";
-
+import {
+  ConfigType,
+  configPath,
+  getConfigFile
+} from "../../config/get-config-file";
 import { CustomError } from "@/utils/errors/CustomError";
 
 export const setRebuildRequired = async ({

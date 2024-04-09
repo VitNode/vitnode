@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 
-import { getConfigFile } from "@/functions/get-config-file";
+import { getConfigFile } from "@/config/get-config-file";
 import { ContentEditorAdmin } from "./content";
 import { HeaderContent } from "@/components/header-content/header-content";
 

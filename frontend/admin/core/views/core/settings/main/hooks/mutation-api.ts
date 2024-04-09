@@ -6,7 +6,7 @@ import {
   configPath,
   getConfigFile,
   type ConfigType
-} from "@/functions/get-config-file";
+} from "@/config/get-config-file";
 
 export const mutationApi = async (
   variables: ConfigType["settings"]["general"]

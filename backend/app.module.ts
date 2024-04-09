@@ -10,7 +10,7 @@ import { ScheduleModule } from "@nestjs/schedule";
 import { ConfigModule } from "@nestjs/config";
 
 import { PluginsModule } from "./plugins/plugins.module";
-import { configuration } from "./configuration";
+import { configuration } from "./config/configuration";
 
 import { Ctx } from "@/types/context.type";
 import { DatabaseModule } from "@/plugins/database/database.module";
