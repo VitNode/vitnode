@@ -2,7 +2,7 @@ import { useLocale } from "next-intl";
 import { generateHTML } from "@tiptap/html";
 
 import type { TextLanguage } from "@/graphql/hooks";
-import { extensionsEditor } from "./extensions";
+import { extensionsEditor, headingExtensionEditor } from "./extensions";
 import { cn } from "@/functions/classnames";
 
 interface Props {
@@ -38,7 +38,10 @@ export const ReadOnlyEditor = ({ className, value }: Props) => {
 
   const getText = (): string => {
     try {
-      return generateHTML(JSON.parse(currentValue()), extensionsEditor);
+      return generateHTML(JSON.parse(currentValue()), [
+        ...extensionsEditor,
+        headingExtensionEditor({ allowH1: true })
+      ]);
     } catch (e) {
       return currentValue();
     }

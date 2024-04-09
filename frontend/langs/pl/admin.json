@@ -237,6 +237,10 @@
           "sticky": {
             "label": "Lepki pasek narzędzi",
             "desc": "Pasek narzędzi będzie przypięty na górze ekranu."
+          },
+          "allow_head_h1": {
+            "label": "Zezwól na H1 w nagłówku",
+            "desc": "Nie jest to zalecane dla SEO. Gdy zmienisz tę opcję, tylko nowe treści będą na nią wpływać."
           }
         }
       },

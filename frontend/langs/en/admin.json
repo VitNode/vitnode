@@ -236,6 +236,10 @@
           "sticky": {
             "label": "Sticky Toolbar",
             "desc": "The toolbar will be fixed at the top of the screen."
+          },
+          "allow_head_h1": {
+            "label": "Allow H1 in Headings",
+            "desc": "This is not recommended for SEO. When you change this setting, only new content will be affected."
           }
         }
       },

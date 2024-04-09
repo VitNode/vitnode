@@ -18,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
+import { useGlobals } from "@/hooks/core/use-globals";
 
 interface Props {
   editor: Editor;
@@ -42,6 +43,8 @@ const getHeadingIcon = (level: number) => {
 
 export const HeadingToolbarEditor = ({ editor }: Props) => {
   const t = useTranslations("core.editor.heading");
+  const { config } = useGlobals();
+  const allowH1 = config.editor.allow_head_h1;
 
   const value = useMemo(() => {
     const findActiveHeading = [...Array(6).keys()].find(i =>
@@ -86,13 +89,13 @@ export const HeadingToolbarEditor = ({ editor }: Props) => {
             <Pilcrow /> {t("paragraph")}
           </span>
         </SelectItem>
-        {[...Array(6).keys()].map(i => (
-          <SelectItem key={i} value={`h${i + 1}`}>
+        {[...Array(allowH1 ? 6 : 5).keys()].map(i => (
+          <SelectItem key={i} value={`h${i + (allowH1 ? 1 : 2)}`}>
             <span className="flex gap-1 [&>svg]:size-5 flex-wrap">
               {getHeadingIcon(i + 1)}
               {/* eslint-disable-next-line react/jsx-no-comment-textnodes, @typescript-eslint/ban-ts-comment */}
               {/* @ts-expect-error */}
-              {t(`h${i + 1}`)}
+              {t(`h${i + (allowH1 ? 1 : 2)}`)}
             </span>
           </SelectItem>
         ))}

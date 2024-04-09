@@ -14,13 +14,15 @@ export interface EditorAdminArgs {
 export const useEditorAdmin = ({ data }: EditorAdminArgs) => {
   const t = useTranslations("core");
   const formSchema = z.object({
-    sticky: z.boolean()
+    sticky: z.boolean(),
+    allow_head_h1: z.boolean()
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      sticky: data.editor.sticky
+      sticky: data.editor.sticky,
+      allow_head_h1: data.editor.allow_head_h1
     }
   });
 

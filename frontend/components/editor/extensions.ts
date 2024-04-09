@@ -7,6 +7,8 @@ import { all, createLowlight } from "lowlight";
 import { Link } from "@tiptap/extension-link";
 import { Heading } from "@tiptap/extension-heading";
 
+import type { ConfigType } from "@/config/get-config-file";
+
 const lowlight = createLowlight(all);
 
 export const extensionsEditor: Extensions = [
@@ -61,7 +63,14 @@ export const extensionsEditor: Extensions = [
       class: "bg-muted p-5 rounded-md overflow-auto"
     }
   }),
-  Link.extend({ inclusive: false }),
+  Link.extend({ inclusive: false })
+];
+
+export const headingExtensionEditor = ({
+  allowH1
+}: {
+  allowH1: ConfigType["editor"]["allow_head_h1"];
+}) =>
   Heading.extend({
     levels: [1, 2],
     renderHTML({ HTMLAttributes, node }) {
@@ -85,5 +94,6 @@ export const extensionsEditor: Extensions = [
         0
       ];
     }
-  }).configure({ levels: [1, 2, 3, 4, 5, 6] })
-];
+  }).configure({
+    levels: allowH1 ? [1, 2, 3, 4, 5, 6] : [2, 3, 4, 5, 6]
+  });

@@ -9,7 +9,7 @@ import type { TextLanguage } from "@/graphql/hooks";
 import { ToolBarEditor } from "./toolbar/toolbar";
 import { FooterEditor } from "./footer/footer";
 import { useGlobals } from "@/hooks/core/use-globals";
-import { extensionsEditor } from "./extensions";
+import { extensionsEditor, headingExtensionEditor } from "./extensions";
 
 interface Props {
   autoFocus?: boolean;
@@ -36,13 +36,16 @@ export const Editor = ({
   value
 }: WithLanguage | WithoutLanguage) => {
   const locale = useLocale();
-  const { defaultLanguage } = useGlobals();
+  const { config, defaultLanguage } = useGlobals();
   const [selectedLanguage, setSelectedLanguage] = useState(
     locale ?? defaultLanguage
   );
   const editor = useEditor({
     autofocus: autoFocus,
-    extensions: extensionsEditor,
+    extensions: [
+      ...extensionsEditor,
+      headingExtensionEditor({ allowH1: config.editor.allow_head_h1 })
+    ],
     editorProps: {
       attributes: {
         class: cn(
