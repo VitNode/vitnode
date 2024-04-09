@@ -15,10 +15,10 @@ import { Button } from "@/components/ui/button";
 import { useSettingsCoreAdmin } from "./hooks/use-settings-core-admin";
 import type { ConfigType } from "@/functions/get-config-file";
 
-export const ContentSettingsCoreAdmin = (
+export const MainSettingsCoreAdmin = (
   props: ConfigType["settings"]["general"]
 ) => {
-  const t = useTranslations("admin");
+  const t = useTranslations("admin.core.settings.main");
   const tCore = useTranslations("core");
   const { form, onSubmit } = useSettingsCoreAdmin(props);
 
@@ -33,7 +33,7 @@ export const ContentSettingsCoreAdmin = (
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("core.general.main.form.name.label")}</FormLabel>
+              <FormLabel>{t("name.label")}</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>

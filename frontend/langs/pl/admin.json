@@ -12,15 +12,15 @@
     },
     "home_page": "Strona główna",
     "core": {
-      "general": {
-        "title": "Ogólne ustawienia",
+      "settings": {
         "main": {
           "title": "Ustawienia główne",
-          "form": {
-            "name": {
-              "label": "Nazwa strony"
-            }
+          "name": {
+            "label": "Nazwa strony"
           }
+        },
+        "security": {
+          "title": "Bezpieczeństwo"
         }
       },
       "plugins": {

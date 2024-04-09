@@ -12,15 +12,15 @@
       "submit": "Read How To Rebuild"
     },
     "core": {
-      "general": {
-        "title": "General Settings",
+      "settings": {
         "main": {
           "title": "Main Settings",
-          "form": {
-            "name": {
-              "label": "Name Site"
-            }
+          "name": {
+            "label": "Name Site"
           }
+        },
+        "security": {
+          "title": "Security"
         }
       },
       "plugins": {
