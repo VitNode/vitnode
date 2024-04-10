@@ -5,9 +5,9 @@ import { useTextLang } from "@/hooks/core/use-text-lang";
 import { ActionsForumsForum } from "./actions/actions";
 import type { Forum_Forums__Show_ItemQuery } from "@/graphql/hooks";
 import { TopicsListForum } from "./topics-list/topics-list";
-import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { ReadOnlyEditor } from "@/components/editor/read-only";
 
 import { ItemForum } from "../../item/item";
 
@@ -18,7 +18,7 @@ export interface ForumForumViewProps {
 export default function ForumForumView({
   data: { forum_forums__show, forum_topics__show }
 }: ForumForumViewProps) {
-  const { convertText } = useTextLang();
+  const { convertNameToLink, convertText } = useTextLang();
   const t = useTranslations("forum.topics");
 
   const { edges } = forum_forums__show;
@@ -32,7 +32,7 @@ export default function ForumForumView({
           items={forumData.breadcrumbs.slice(0, -1).map(item => ({
             id: item.id,
             text: convertText(item.name),
-            href: `/forum/${item.id}`
+            href: `/forum/${convertNameToLink({ ...item })}`
           }))}
         />
       )}
@@ -44,7 +44,6 @@ export default function ForumForumView({
             desc={
               forumData.description.length > 0 && (
                 <ReadOnlyEditor
-                  id={`${forumData.id}_description`}
                   className="[&_p]:m-0"
                   value={forumData.description}
                 />

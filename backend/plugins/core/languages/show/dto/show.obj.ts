@@ -40,6 +40,9 @@ export class ShowCoreLanguages {
   @Field(() => String)
   locale: string;
 
+  @Field(() => Boolean)
+  allow_in_input: boolean;
+
   @Field(() => Date)
   created: Date;
 

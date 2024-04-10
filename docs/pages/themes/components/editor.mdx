@@ -2,7 +2,7 @@ import { Callout } from "nextra/components";
 
 # Editor
 
-WYSIWYG Editor is a rich text editor that uses [Lexical](https://lexical.dev/) library.
+WYSIWYG Editor is a rich text editor that uses [TipTap](https://tiptap.dev/) library.
 
 <Callout type="info" emoji="ℹ️">
   Editor has uncontroller state. All source-code for Editor is based on change
@@ -31,11 +31,7 @@ import { Editor } from "@/components/editor/editor";
     <FormItem>
       <FormLabel>{t("form.content")}</FormLabel>
       <FormControl>
-        <Editor
-          id="topic_create"
-          onChange={field.onChange}
-          value={field.value}
-        />
+        <Editor onChange={field.onChange} value={field.value} />
       </FormControl>
       <FormMessage />
     </FormItem>
@@ -66,12 +62,7 @@ const formSchema = z.object({
 If you don't want to use i18n in Editor you need to pass `disableLanguage` props.
 
 ```tsx
-<Editor
-  id="topic_create"
-  onChange={field.onChange}
-  value={field.value}
-  disableLanguage
-/>
+<Editor onChange={field.onChange} value={field.value} disableLanguage />
 ```
 
 #### Form Schema
@@ -82,12 +73,30 @@ const formSchema = z.object({
 });
 ```
 
-## Plugins
+## Extensions
 
-- **History** - Undo/redo changes _(For example go back by pressing `Ctrl+Z` or `Cmd+Z` on Mac)_
-- **RichText** - Entering text, deleting characters, copy + paste etc.
-- **Markdown** - Write markdown
-- **AutoLinkPluginEditor** - Automatically convert URLs to links
+- [Blockquote](https://tiptap.dev/docs/editor/api/nodes/blockquote),
+- [BulletList](https://tiptap.dev/docs/editor/api/nodes/bullet-list),
+- [CodeBlock](https://tiptap.dev/docs/editor/api/nodes/code-block),
+- [HardBreak](https://tiptap.dev/docs/editor/api/nodes/hard-break),
+- [Heading](https://tiptap.dev/docs/editor/api/nodes/heading),
+- [HorizontalRule](https://tiptap.dev/docs/editor/api/nodes/horizontal-rule),
+- [ListItem](https://tiptap.dev/docs/editor/api/nodes/list-item),
+- [OrderedList](https://tiptap.dev/docs/editor/api/nodes/ordered-list),
+- [Paragraph](https://tiptap.dev/docs/editor/api/nodes/paragraph),
+- [Bold](https://tiptap.dev/docs/editor/api/marks/bold),
+- [Code](https://tiptap.dev/docs/editor/api/marks/code),
+- [Italic](https://tiptap.dev/docs/editor/api/marks/italic),
+- [Strike](https://tiptap.dev/docs/editor/api/marks/strike),
+- [Dropcursor](https://tiptap.dev/docs/editor/api/extensions/dropcursor),
+- [Gapcursor](https://tiptap.dev/docs/editor/api/extensions/gapcursor),
+- [History](https://tiptap.dev/docs/editor/api/extensions/history),
+- [Underline](https://tiptap.dev/docs/editor/api/marks/underline),
+- [TextAlign](https://tiptap.dev/docs/editor/api/extensions/text-align),
+- [CodeBlockLowlight](https://tiptap.dev/docs/editor/api/nodes/code-block-lowlight),
+- [Link](https://tiptap.dev/docs/editor/api/marks/link),
+- [TextStyle](https://tiptap.dev/docs/editor/api/marks/text-style),
+- [Color](https://tiptap.dev/docs/editor/api/extensions/color)
 
 ## Good to know
 
@@ -101,7 +110,7 @@ const formSchema = z.object({
 To display content form editor you have to use `ReadOnlyEditor` component with unique `id: string` and `value: TextLanguage[]` props.
 
 ```tsx
-import { ReadOnlyEditor } from "@/components/editor/read-only/read-only-editor";
+import { ReadOnlyEditor } from "@/components/editor/read-only";
 
-<ReadOnlyEditor id={`${id}_value`} value={value} />;
+<ReadOnlyEditor value={value} />;
 ```

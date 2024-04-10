@@ -8,6 +8,7 @@ import {
   type Core_MiddlewareQueryVariables
 } from "@/graphql/hooks";
 import { InternalErrorView } from "@/admin/core/global/internal-error/internal-error-view";
+import { getConfigFile } from "@/config/get-config-file";
 
 const getData = async () => {
   const { data } = await fetcher<
@@ -26,9 +27,13 @@ interface Props {
 
 export default async function LocaleLayout({ children }: Props) {
   try {
-    const data = await getData();
+    const [data, config] = await Promise.all([getData(), getConfigFile()]);
 
-    return <LanguageProvider data={data}>{children}</LanguageProvider>;
+    return (
+      <LanguageProvider data={data} config={config}>
+        {children}
+      </LanguageProvider>
+    );
   } catch (e) {
     return <InternalErrorView showPoweredBy />;
   }

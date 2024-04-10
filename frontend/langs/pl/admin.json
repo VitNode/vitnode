@@ -12,15 +12,15 @@
     },
     "home_page": "Strona główna",
     "core": {
-      "general": {
-        "title": "Ogólne ustawienia",
+      "settings": {
         "main": {
           "title": "Ustawienia główne",
-          "form": {
-            "name": {
-              "label": "Nazwa strony"
-            }
+          "name": {
+            "label": "Nazwa strony"
           }
+        },
+        "security": {
+          "title": "Bezpieczeństwo"
         }
       },
       "plugins": {
@@ -231,6 +231,17 @@
             "desc_with_children": "Masz podnawigacje. Jeśli usuniesz tą nawigację, wszystkie podnawigacje zostaną przeniesione do nadrzędnej nawigacji.",
             "success": "Nawigacja została usunięta."
           }
+        },
+        "editor": {
+          "title": "Editor",
+          "sticky": {
+            "label": "Lepki pasek narzędzi",
+            "desc": "Pasek narzędzi będzie przypięty na górze ekranu."
+          },
+          "allow_head_h1": {
+            "label": "Zezwól na H1 w nagłówku",
+            "desc": "Nie jest to zalecane dla SEO. Gdy zmienisz tę opcję, tylko nowe treści będą na nią wpływać."
+          }
         }
       },
       "langs": {
@@ -262,6 +273,10 @@
             },
             "locale": {
               "label": "Lokalizacja"
+            },
+            "allow_in_input": {
+              "label": "Zezwól w inpucie",
+              "desc": "Zezwól użytkownikom na wybór tego języka w polu input."
             },
             "submit": "Stwórz język",
             "success": "Język został stworzony."
@@ -335,6 +350,7 @@
           "success": "Grupa została stworzona"
         },
         "edit": {
+          "title": "Edytuj grupę",
           "success": "Grupa została zaktualizowana"
         },
         "delete": {

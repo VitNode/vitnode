@@ -3,7 +3,6 @@
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 
-import { Editor } from "@/components/editor/editor";
 import { TextLanguageInput } from "@/components/text-language-input";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,6 +25,7 @@ import { useRouter } from "@/i18n";
 import type { ShowTopicsForums } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { useCreateEditTopic } from "@/hooks/forum/topics/create-edit/use-create-edit-topic";
+import { Editor } from "@/components/editor/editor";
 
 export interface EditTopicData
   extends Pick<ShowTopicsForums, "title" | "content" | "id"> {}
@@ -79,11 +79,7 @@ export const CreateEditTopic = ({ data }: Props) => {
                 <FormItem>
                   <FormLabel>{t("create.form.content")}</FormLabel>
                   <FormControl>
-                    <Editor
-                      id="topic_create"
-                      onChange={field.onChange}
-                      value={field.value}
-                    />
+                    <Editor onChange={field.onChange} value={field.value} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

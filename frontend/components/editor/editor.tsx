@@ -1,42 +1,21 @@
-import { useRef, useState } from "react";
-import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
-import {
-  LexicalComposer,
-  type InitialConfigType
-} from "@lexical/react/LexicalComposer";
-import { ContentEditable } from "@lexical/react/LexicalContentEditable";
-import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
-import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
-import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
-import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
-import { ListPlugin } from "@lexical/react/LexicalListPlugin";
-import { CheckListPlugin } from "@lexical/react/LexicalCheckListPlugin";
-import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
-import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
-import { ClearEditorPlugin } from "@lexical/react/LexicalClearEditorPlugin";
+"use client";
+
+import { useEditor, EditorContent } from "@tiptap/react";
+import { useEffect, useState } from "react";
 import { useLocale } from "next-intl";
 
-import { OnChangePluginEditor } from "./plugins/on-change";
-import { AutoLinkPluginEditor } from "./plugins/auto-link";
-import { ToolbarEditor } from "./toolbar/toolbar-editor";
 import { cn } from "@/functions/classnames";
-import { DraggableBlockPluginEditor } from "./plugins/draggable-block";
-import { MARKDOWN_TRANSFORMERS_EDITOR } from "./markdown-transformers-editor";
-import { BLOCK_NAMES, EditorContext } from "./toolbar/hooks/use-editor";
-import { CodeHighlightPluginEditor } from "./plugins/code-highlight";
-import { CodeActionMenuPluginEditor } from "./plugins/code/code-action-menu";
-import { useGlobals } from "@/hooks/core/use-globals";
 import type { TextLanguage } from "@/graphql/hooks";
-import { EmojiPluginEditor } from "./plugins/emoji";
-import { initialConfigEditor } from "./initial-config";
-import { BottomToolbarEditor } from "./toolbar/bottom-toolbar-editor";
+import { ToolBarEditor } from "./toolbar/toolbar";
+import { FooterEditor } from "./footer/footer";
+import { useGlobals } from "@/hooks/core/use-globals";
+import { extensionsEditor, headingExtensionEditor } from "./extensions";
 
 interface Props {
-  id: string;
+  autoFocus?: boolean;
   className?: string;
-  enableAutoFocus?: boolean;
-  toolbarClassName?: string;
 }
+
 interface WithLanguage extends Props {
   onChange: (value: TextLanguage[]) => void;
   value: TextLanguage[];
@@ -50,92 +29,95 @@ interface WithoutLanguage extends Props {
 }
 
 export const Editor = ({
+  autoFocus,
   className,
   disableLanguage,
-  enableAutoFocus,
-  id,
   onChange,
-  toolbarClassName,
   value
 }: WithLanguage | WithoutLanguage) => {
-  const [blockType, setBlockType] = useState<string>(BLOCK_NAMES.PARAGRAPH);
-  const floatingAnchorElem = useRef<HTMLDivElement>(null);
   const locale = useLocale();
-  const { defaultLanguage } = useGlobals();
+  const { config, defaultLanguage } = useGlobals();
   const [selectedLanguage, setSelectedLanguage] = useState(
     locale ?? defaultLanguage
   );
+  const editor = useEditor({
+    autofocus: autoFocus,
+    extensions: [
+      ...extensionsEditor,
+      headingExtensionEditor({ allowH1: config.editor.allow_head_h1 })
+    ],
+    editorProps: {
+      attributes: {
+        class: cn(
+          "min-h-32 p-4 focus:outline-none bg-card resize-y overflow-auto"
+        )
+      }
+    },
+    content: (() => {
+      const current = Array.isArray(value)
+        ? value.filter(v => v.language_code === selectedLanguage)[0]?.value ??
+          ""
+        : value;
 
-  const initialConfig: InitialConfigType = {
-    ...initialConfigEditor,
-    namespace: id
-  };
+      try {
+        return JSON.parse(current);
+      } catch (e) {
+        return current;
+      }
+    })(),
+    onUpdate({ editor }) {
+      const content = JSON.stringify(editor.getJSON());
+      const currentValue = Array.isArray(value) ? value : [];
+
+      if (disableLanguage) {
+        onChange(content);
+
+        return;
+      }
+
+      // Remove form the array if content is empty
+      if (editor.isEmpty) {
+        onChange(
+          currentValue.filter(v => v.language_code !== selectedLanguage)
+        );
+
+        return;
+      }
+
+      onChange([
+        ...currentValue.filter(v => v.language_code !== selectedLanguage),
+        { language_code: selectedLanguage, value: content }
+      ]);
+    }
+  });
+
+  // Toggle the editor content when the selected language changes
+  useEffect(() => {
+    if (!editor || disableLanguage || !Array.isArray(value)) return;
+
+    const findValue =
+      value.find(v => v.language_code === selectedLanguage)?.value ?? "";
+    if (!findValue) {
+      editor.commands.clearContent();
+
+      return;
+    }
+
+    editor.commands.setContent(JSON.parse(findValue));
+  }, [selectedLanguage]);
+
+  if (!editor) return null;
 
   return (
-    <EditorContext.Provider value={{ blockType, setBlockType }}>
-      <LexicalComposer key={id} initialConfig={initialConfig}>
-        <div
-          className={cn(
-            "relative border border-input rounded-md bg-card ring-offset-background",
-            className
-          )}
-        >
-          <ToolbarEditor className={toolbarClassName} />
-          {disableLanguage ? (
-            <OnChangePluginEditor
-              value={value}
-              onChange={onChange}
-              selectedLanguage={selectedLanguage}
-              disableLanguage
-            />
-          ) : (
-            <OnChangePluginEditor
-              value={value}
-              onChange={onChange}
-              selectedLanguage={selectedLanguage}
-            />
-          )}
-          <AutoLinkPluginEditor />
-          <CodeHighlightPluginEditor />
-          <RichTextPlugin
-            contentEditable={
-              <div className="relative" ref={floatingAnchorElem}>
-                <ContentEditable
-                  ariaLabel={id}
-                  className="py-4 px-7 border-0 focus:border-0 focus:outline-none min-h-[10rem] resize-y overflow-auto"
-                />
-              </div>
-            }
-            placeholder={null}
-            ErrorBoundary={LexicalErrorBoundary}
-          />
-          <MarkdownShortcutPlugin transformers={MARKDOWN_TRANSFORMERS_EDITOR} />
-          {enableAutoFocus && <AutoFocusPlugin />}
-          <HistoryPlugin />
-          <ListPlugin />
-          <CheckListPlugin />
-          <TabIndentationPlugin />
-          <LinkPlugin />
-          <ClearEditorPlugin />
-          <EmojiPluginEditor />
-
-          {floatingAnchorElem.current && (
-            <>
-              <DraggableBlockPluginEditor
-                anchorElem={floatingAnchorElem.current}
-              />
-              <CodeActionMenuPluginEditor
-                anchorElem={floatingAnchorElem.current}
-              />
-            </>
-          )}
-          <BottomToolbarEditor
-            selectedLanguage={selectedLanguage}
-            setSelectedLanguage={setSelectedLanguage}
-            disableLanguage={disableLanguage}
-          />
-        </div>
-      </LexicalComposer>
-    </EditorContext.Provider>
+    <div className={cn("border border-input rounded-md shadow-sm", className)}>
+      <ToolBarEditor editor={editor} />
+      <EditorContent className="break-all" editor={editor} />
+      <FooterEditor
+        editor={editor}
+        disableLanguage={disableLanguage}
+        selectedLanguage={selectedLanguage}
+        setSelectedLanguage={setSelectedLanguage}
+      />
+    </div>
   );
 };

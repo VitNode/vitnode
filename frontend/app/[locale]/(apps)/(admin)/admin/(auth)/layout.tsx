@@ -13,7 +13,7 @@ import {
   type Admin__Sessions__AuthorizationQuery,
   type Admin__Sessions__AuthorizationQueryVariables
 } from "@/graphql/hooks";
-import { getConfigFile } from "@/functions/get-config-file";
+import { getConfigFile } from "@/config/get-config-file";
 
 const getData = async () => {
   const cookieStore = cookies();
@@ -43,7 +43,7 @@ export async function generateMetadata({
   const config = await getConfigFile();
   const t = await getTranslations({ locale, namespace: "admin" });
 
-  const defaultTitle = `${t("title_short")} - ${config.side_name}`;
+  const defaultTitle = `${t("title_short")} - ${config.settings.general.side_name}`;
 
   return {
     title: {

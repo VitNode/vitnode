@@ -21,7 +21,6 @@
     "version": "Wersja: {version}",
     "delete": "Usuń",
     "edit": "Edytuj",
-    "edit_with_value": "Edytuj - {value}",
     "create": "Utwórz",
     "upload": "Prześlij",
     "upload_new_version": "Prześlij nową wersję",
@@ -71,16 +70,48 @@
       "rows_per_page": "Wierszy na stronę"
     },
     "editor": {
+      "bold": "Pogrubienie",
+      "italic": "Kursywa",
+      "underline": "Podkreślenie",
+      "strike": "Przekreślenie",
+      "text_align_left": "Wyrównaj do lewej",
+      "text_align_center": "Wyrównaj do środka",
+      "text_align_right": "Wyrównaj do prawej",
+      "text_align_justify": "Wyjustuj",
+      "block_quote": "Cytat",
+      "bullet_list": "Lista punktowana",
+      "ordered_list": "Lista numerowana",
+      "undo": "Cofnij",
+      "redo": "Ponów",
+      "horizontal_rule": "Linia pozioma",
+      "code_block": "Blok kodu",
+      "link": {
+        "title": "Link",
+        "text": "Tekst",
+        "href": "Adres URL",
+        "delete": "Usuń link",
+        "insert": "Wstaw link"
+      },
+      "heading": {
+        "h1": "Nagłówek H1",
+        "h2": "Nagłówek H2",
+        "h3": "Nagłówek H3",
+        "h4": "Nagłówek H4",
+        "h5": "Nagłówek H5",
+        "h6": "Nagłówek H6",
+        "paragraph": "Paragraf"
+      },
+      "color_text": "Kolor tekstu",
+      "change_language": "Zmień język",
+
       "remove_formatting": "Usuń formatowanie",
       "mixed": "Mieszane",
       "font_size": "Rozmiar czcionki",
       "font_color": "Kolor czcionki",
       "font_background_color": "Kolor tła czcionki",
       "set_default_color": "Ustaw domyślny kolor",
-      "link": "Link",
       "copy_code": "Kopiuj kod",
       "code_language": "Język kodu",
-      "change_language": "Zmień język",
       "prettier": {
         "format_code": "Formatuj kod",
         "error_title": "Błąd Prettier"

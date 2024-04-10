@@ -98,7 +98,7 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
               control={form.control}
               name="default"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 gap-2">
                   <div className="space-y-0.5">
                     <FormLabel className="text-base">
                       {t("edit.default.label")}
@@ -121,12 +121,35 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
             control={form.control}
             name="time_24"
             render={({ field }) => (
-              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 gap-2">
                 <div className="space-y-0.5">
                   <FormLabel className="text-base">
                     {t("create.time_24.label")}
                   </FormLabel>
                   <FormDescription>{t("create.time_24.desc")}</FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="allow_in_input"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 gap-2">
+                <div className="space-y-0.5">
+                  <FormLabel className="text-base">
+                    {t("create.allow_in_input.label")}
+                  </FormLabel>
+                  <FormDescription>
+                    {t("create.allow_in_input.desc")}
+                  </FormDescription>
                 </div>
                 <FormControl>
                   <Switch

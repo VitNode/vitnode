@@ -21,7 +21,6 @@
     "version": "Version: {version}",
     "delete": "Delete",
     "edit": "Edit",
-    "edit_with_value": "Edit - {value}",
     "create": "Create",
     "upload": "Upload",
     "upload_new_version": "Upload New Version",
@@ -71,16 +70,48 @@
       "rows_per_page": "Rows per page"
     },
     "editor": {
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline",
+      "strike": "Strike",
+      "text_align_left": "Text Align Left",
+      "text_align_center": "Text Align Center",
+      "text_align_right": "Text Align Right",
+      "text_align_justify": "Text Align Justify",
+      "block_quote": "Block Quote",
+      "bullet_list": "Bullet List",
+      "ordered_list": "Ordered List",
+      "undo": "Undo",
+      "redo": "Redo",
+      "horizontal_rule": "Horizontal Rule",
+      "code_block": "Code Block",
+      "link": {
+        "title": "Link",
+        "text": "Text",
+        "href": "URL",
+        "delete": "Delete Link",
+        "insert": "Insert Link"
+      },
+      "heading": {
+        "h1": "Heading H1",
+        "h2": "Heading H2",
+        "h3": "Heading H3",
+        "h4": "Heading H4",
+        "h5": "Heading H5",
+        "h6": "Heading H6",
+        "paragraph": "Paragraph"
+      },
+      "color_text": "Text Color",
+      "change_language": "Change Language",
+
       "remove_formatting": "Remove Formatting",
       "mixed": "Mixed",
       "font_size": "Font Size",
       "font_color": "Font Color",
       "font_background_color": "Font Background Color",
       "set_default_color": "Set Default Color",
-      "link": "Link",
       "copy_code": "Copy Code",
       "code_language": "Code Language",
-      "change_language": "Change Language",
       "prettier": {
         "format_code": "Format Code",
         "error_title": "Prettier Error"

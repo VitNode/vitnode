@@ -5,9 +5,13 @@ import { join } from "path";
 
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 
-import { ConfigType, configPath, getConfigFile } from "./get-config-file";
 import { updatePlugins } from "./update-plugins";
 
+import {
+  ConfigType,
+  configPath,
+  getConfigFile
+} from "../../config/get-config-file";
 import { db } from "@/plugins/database/client";
 
 (async () => {
@@ -19,6 +23,10 @@ import { db } from "@/plugins/database/client";
       langs: false,
       plugins: false,
       themes: false
+    },
+    editor: {
+      sticky: true,
+      allow_head_h1: false
     }
   };
   fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), "utf8");

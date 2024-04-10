@@ -26,7 +26,10 @@ export const HeaderContent = forwardRef<
   return (
     <div
       ref={ref}
-      className={cn("flex gap-4 flex-col sm:flex-row items-start", className)}
+      className={cn(
+        "flex sm:gap-4 gap-2 flex-col sm:flex-row items-start mb-4 min-h-9",
+        className
+      )}
     >
       <div className="space-y-1 text-left flex-1 sm:self-center h-full">
         {h1 ? (

@@ -15,6 +15,7 @@ query Core_languages__show(
     edges {
       code
       default
+      allow_in_input
       enabled
       id
       name

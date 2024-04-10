@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { getTopicData } from "./query-api";
-import { getConvertTextLang } from "@/hooks/core/use-text-lang";
+import { useTextLang } from "@/hooks/core/use-text-lang";
 import type { ErrorType } from "@/graphql/fetcher";
 import { getSessionData } from "@/functions/get-session-data";
 import { ErrorViewSSR } from "@/components/views/error-view-ssr";
@@ -16,19 +16,17 @@ interface Props {
   };
 }
 
-export default async function Layout({
-  children,
-  params: { id, locale }
-}: Props) {
+export default async function Layout({ children, params: { id } }: Props) {
   const { theme_id } = await getSessionData();
+  const { convertNameToLink, convertText } = useTextLang();
 
   try {
     const data = await getTopicData({ id });
     const breadcrumbItems = data.forum_topics__show.edges[0].breadcrumbs.map(
       item => ({
         id: item.id,
-        text: getConvertTextLang({ locale, text: item.name }),
-        href: `/forum/${item.id}`
+        text: convertText(item.name),
+        href: `/forum/${convertNameToLink({ ...item })}`
       })
     );
 

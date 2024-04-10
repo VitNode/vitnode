@@ -82,10 +82,22 @@ export const TransformTextLanguageInput = ({
   value: TextLanguageInput | TextLanguageInput[];
 }) => {
   if (Array.isArray(value)) {
-    return value.map(item => ({
+    let current = value.map(item => ({
       ...item,
       value: item.value.trimStart().trimEnd()
     }));
+
+    // If is only one item and isn't english then change to english
+    if (current.find(el => el.language_code !== "en" && current.length === 1)) {
+      current = [
+        {
+          language_code: "en",
+          value: current[0].value
+        }
+      ];
+    }
+
+    return current;
   }
 
   return {

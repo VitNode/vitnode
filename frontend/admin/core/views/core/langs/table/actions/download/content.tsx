@@ -80,7 +80,7 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
             control={form.control}
             name="all"
             render={({ field }) => (
-              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 gap-2">
                 <div className="space-y-0.5">
                   <FormLabel className="text-base">{t("all.label")}</FormLabel>
                   <FormDescription>{t("all.desc")}</FormDescription>

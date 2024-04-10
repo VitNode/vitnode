@@ -4,13 +4,15 @@ import type { ReactNode } from "react";
 
 import type { Core_MiddlewareQuery } from "@/graphql/hooks";
 import { GlobalsContext } from "@/hooks/core/use-globals";
+import type { ConfigType } from "@/config/get-config-file";
 
 interface Props {
   children: ReactNode;
+  config: ConfigType;
   data: Core_MiddlewareQuery | undefined;
 }
 
-export const LanguageProvider = ({ children, data }: Props) => {
+export const LanguageProvider = ({ children, config, data }: Props) => {
   return (
     <GlobalsContext.Provider
       value={{
@@ -19,7 +21,8 @@ export const LanguageProvider = ({ children, data }: Props) => {
         defaultLanguage:
           data?.core_languages__show.edges.find(lang => lang.default)?.code ??
           "en",
-        themes: data?.core_themes__show.edges ?? []
+        themes: data?.core_themes__show.edges ?? [],
+        config
       }}
     >
       {children}

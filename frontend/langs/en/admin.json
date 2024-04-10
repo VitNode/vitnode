@@ -12,15 +12,15 @@
       "submit": "Read How To Rebuild"
     },
     "core": {
-      "general": {
-        "title": "General Settings",
+      "settings": {
         "main": {
           "title": "Main Settings",
-          "form": {
-            "name": {
-              "label": "Name Site"
-            }
+          "name": {
+            "label": "Name Site"
           }
+        },
+        "security": {
+          "title": "Security"
         }
       },
       "plugins": {
@@ -230,6 +230,17 @@
             "desc_with_children": "You have sub-navigations. If you delete this navigation, all sub-navigations will be moved to the parent navigation.",
             "success": "Navigation has been deleted."
           }
+        },
+        "editor": {
+          "title": "Editor",
+          "sticky": {
+            "label": "Sticky Toolbar",
+            "desc": "The toolbar will be fixed at the top of the screen."
+          },
+          "allow_head_h1": {
+            "label": "Allow H1 in Headings",
+            "desc": "This is not recommended for SEO. When you change this setting, only new content will be affected."
+          }
         }
       },
       "langs": {
@@ -261,6 +272,10 @@
             },
             "locale": {
               "label": "Locale"
+            },
+            "allow_in_input": {
+              "label": "Allow in Input",
+              "desc": "Allow users to select this language in the input field."
             },
             "submit": "Create Language",
             "success": "Language has been created."
@@ -334,6 +349,7 @@
           "success": "Group has been created"
         },
         "edit": {
+          "title": "Edit Group",
           "success": "Group has been updated"
         },
         "delete": {

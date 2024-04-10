@@ -3,6 +3,8 @@ import { Steps } from "nextra/components";
 
 # Forms
 
+Forms are a common part of web applications. They allow users to input data and submit it to the server. In VitNode, we use the [react-hook-form](https://react-hook-form.com/) library to handle forms. This library is lightweight and easy to use. It also integrates well with the `zod` library for form validation.
+
 ## Usage
 
 <Steps>
@@ -155,7 +157,7 @@ export const CreateEditCategoryBlogAdmin = ({ data }: Props) => {
             <FormItem>
               <FormLabel>{t("create.description.label")}</FormLabel>
               <FormControl>
-                <Editor id="create_categories_blog" {...field} />
+                <Editor {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

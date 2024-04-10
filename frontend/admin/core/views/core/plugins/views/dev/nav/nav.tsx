@@ -12,7 +12,7 @@ export const NavDevPluginAdminView = (
 
   return (
     <>
-      <HeaderContent className="mb-5" h1={t("title")}>
+      <HeaderContent h1={t("title")}>
         <CreateNavDevPluginAdmin />
       </HeaderContent>
 

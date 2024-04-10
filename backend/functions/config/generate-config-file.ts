@@ -1,15 +1,22 @@
 /* eslint-disable no-console */
 import * as fs from "fs";
 
-import { ConfigType, configPath } from "./get-config-file";
+import { ConfigType, configPath } from "../../config/get-config-file";
 
 const DATA: ConfigType = {
-  side_name: "VitNode Community",
-  finished_install: false,
   rebuild_required: {
     themes: false,
     langs: false,
     plugins: false
+  },
+  editor: {
+    sticky: true,
+    allow_head_h1: false
+  },
+  settings: {
+    general: {
+      side_name: "VitNode Community"
+    }
   }
 };
 
@@ -20,5 +27,6 @@ if (!fs.existsSync(configPath)) {
 
   console.log("[VitNode] - Config file has been generated");
 } else {
+  // TODO: Update config
   console.log("[VitNode] - Config file already exists. Skipping...");
 }
