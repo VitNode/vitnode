@@ -53,9 +53,18 @@ export const Editor = ({
         )
       }
     },
-    content: Array.isArray(value)
-      ? value.filter(v => v.language_code === selectedLanguage)[0]?.value ?? ""
-      : value,
+    content: (() => {
+      const current = Array.isArray(value)
+        ? value.filter(v => v.language_code === selectedLanguage)[0]?.value ??
+          ""
+        : value;
+
+      try {
+        return JSON.parse(current);
+      } catch (e) {
+        return current;
+      }
+    })(),
     onUpdate({ editor }) {
       const content = JSON.stringify(editor.getJSON());
       const currentValue = Array.isArray(value) ? value : [];
@@ -102,7 +111,7 @@ export const Editor = ({
   return (
     <div className={cn("border border-input rounded-md shadow-sm", className)}>
       <ToolBarEditor editor={editor} />
-      <EditorContent editor={editor} />
+      <EditorContent className="break-all" editor={editor} />
       <FooterEditor
         editor={editor}
         disableLanguage={disableLanguage}

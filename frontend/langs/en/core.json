@@ -21,7 +21,6 @@
     "version": "Version: {version}",
     "delete": "Delete",
     "edit": "Edit",
-    "edit_with_value": "Edit - {value}",
     "create": "Create",
     "upload": "Upload",
     "upload_new_version": "Upload New Version",
@@ -102,6 +101,7 @@
         "h6": "Heading H6",
         "paragraph": "Paragraph"
       },
+      "color_text": "Text Color",
       "change_language": "Change Language",
 
       "remove_formatting": "Remove Formatting",

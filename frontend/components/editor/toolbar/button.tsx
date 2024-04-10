@@ -13,9 +13,9 @@ import { cn } from "@/functions/classnames";
 interface Props {
   children: ReactNode;
   name: string;
-  onClick: () => void;
   active?: boolean;
   disabled?: boolean;
+  onClick?: () => void;
 }
 
 export const ButtonToolbarEditor = forwardRef(

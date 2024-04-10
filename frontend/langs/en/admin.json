@@ -345,6 +345,7 @@
           "success": "Group has been created"
         },
         "edit": {
+          "title": "Edit Group",
           "success": "Group has been updated"
         },
         "delete": {

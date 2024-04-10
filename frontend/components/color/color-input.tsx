@@ -3,7 +3,6 @@
 import { forwardRef, useEffect, useState } from "react";
 import type { HslColor } from "react-colorful";
 import { useTranslations } from "next-intl";
-import { X } from "lucide-react";
 
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { PickerColor } from "./picker/picker";
@@ -21,6 +20,7 @@ interface Props {
 export const ColorInput = forwardRef<HTMLButtonElement, Props>(
   ({ disableRemoveColor, disabled, onChange, value }, ref) => {
     const t = useTranslations("core.colors");
+    const [open, setOpen] = useState(false);
     const [color, setColor] = useState<HslColor | null>(
       getHSLFromString(value)
     );
@@ -33,7 +33,7 @@ export const ColorInput = forwardRef<HTMLButtonElement, Props>(
     const isColorBrightness = color && color.l > 55;
 
     return (
-      <Popover>
+      <Popover open={open} onOpenChange={setOpen}>
         <div className="flex gap-2">
           <PopoverTrigger asChild>
             <Button
@@ -61,21 +61,16 @@ export const ColorInput = forwardRef<HTMLButtonElement, Props>(
               </span>
             </Button>
           </PopoverTrigger>
-          {color !== null && !disableRemoveColor && (
-            <Button
-              className="shrink-0"
-              ariaLabel={t("remove")}
-              variant="destructiveGhost"
-              onClick={() => setColor(null)}
-            >
-              <X /> {t("remove")}
-            </Button>
-          )}
         </div>
 
         {!disabled && (
           <PopoverContent align="start" className="w-auto">
-            <PickerColor color={color} setColor={setColor} />
+            <PickerColor
+              color={color}
+              setColor={setColor}
+              onClose={() => setOpen(false)}
+              disableRemoveColor={disableRemoveColor}
+            />
           </PopoverContent>
         )}
       </Popover>

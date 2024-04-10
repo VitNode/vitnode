@@ -6,6 +6,8 @@ import { CodeBlockLowlight } from "@tiptap/extension-code-block-lowlight";
 import { all, createLowlight } from "lowlight";
 import { Link } from "@tiptap/extension-link";
 import { Heading } from "@tiptap/extension-heading";
+import { Color } from "@tiptap/extension-color";
+import { TextStyle } from "@tiptap/extension-text-style";
 
 import type { ConfigType } from "@/config/get-config-file";
 
@@ -63,7 +65,9 @@ export const extensionsEditor: Extensions = [
       class: "bg-muted p-5 rounded-md overflow-auto"
     }
   }),
-  Link.extend({ inclusive: false })
+  Link.extend({ inclusive: false }),
+  Color,
+  TextStyle
 ];
 
 export const headingExtensionEditor = ({

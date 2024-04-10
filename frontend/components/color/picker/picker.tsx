@@ -1,17 +1,136 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { useRef, type ChangeEvent } from "react";
+import { useRef, useState, type ChangeEvent } from "react";
 import { HslColorPicker, type HslColor } from "react-colorful";
+import { RemoveFormatting } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { checkColorType, colorConverter } from "@/functions/colors";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/functions/classnames";
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
+
+const presetColors: { color: HslColor; name: string }[] = [
+  {
+    name: "Red",
+    color: {
+      h: 0,
+      s: 80,
+      l: 45
+    }
+  },
+  {
+    name: "Orange",
+    color: {
+      h: 30,
+      s: 80,
+      l: 45
+    }
+  },
+  {
+    name: "Yellow",
+    color: {
+      h: 60,
+      s: 80,
+      l: 45
+    }
+  },
+  {
+    name: "Lime",
+    color: {
+      h: 150,
+      s: 80,
+      l: 45
+    }
+  },
+  {
+    name: "Green",
+    color: {
+      h: 150,
+      s: 80,
+      l: 45
+    }
+  },
+  {
+    name: "Teal",
+    color: {
+      h: 180,
+      s: 80,
+      l: 45
+    }
+  },
+  {
+    name: "Cyan",
+    color: {
+      h: 210,
+      s: 80,
+      l: 45
+    }
+  },
+  {
+    name: "Blue",
+    color: {
+      h: 240,
+      s: 80,
+      l: 45
+    }
+  },
+  {
+    name: "Indigo",
+    color: {
+      h: 270,
+      s: 80,
+      l: 45
+    }
+  },
+  {
+    name: "Purple",
+    color: {
+      h: 300,
+      s: 80,
+      l: 45
+    }
+  },
+  {
+    name: "Magenta",
+    color: {
+      h: 330,
+      s: 80,
+      l: 45
+    }
+  },
+  {
+    name: "Primary",
+    color: {
+      h: 221.2,
+      s: 83.2,
+      l: 53.3
+    }
+  }
+];
 
 interface Props {
   color: HslColor | null;
   setColor: (color: HslColor | null) => void;
+  disableRemoveColor?: boolean;
+  onClose?: () => void;
 }
 
-export const PickerColor = ({ color, setColor }: Props) => {
+export const PickerColor = ({
+  color,
+  disableRemoveColor,
+  onClose,
+  setColor
+}: Props) => {
+  const t = useTranslations("core.colors");
+  const [internalColor, setInternalColor] = useState<HslColor | null>(color);
   const inputRef = useRef<HTMLInputElement>(null);
+  const isColorBrightness = internalColor && internalColor.l > 55;
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value.trim();
@@ -21,6 +140,7 @@ export const PickerColor = ({ color, setColor }: Props) => {
       const hsl = colorConverter.hexToHSL(input);
       if (!hsl) return;
       setColor(hsl);
+      setInternalColor(hsl);
     } else if (type === "rgb") {
       const [r, g, b] = input.includes(",")
         ? input
@@ -36,6 +156,7 @@ export const PickerColor = ({ color, setColor }: Props) => {
 
       const { h, l, s } = colorConverter.RGBToHSL(r, g, b);
       setColor({ h, s, l });
+      setInternalColor({ h, s, l });
     } else if (type === "hsl") {
       const [h, s, l] = input
         .replaceAll("hsl(", "")
@@ -45,48 +166,94 @@ export const PickerColor = ({ color, setColor }: Props) => {
         .map(Number);
 
       setColor({ h, s, l });
+      setInternalColor({ h, s, l });
     }
   };
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-2 items-center">
       <HslColorPicker
         color={
-          color ?? {
+          internalColor ?? {
             h: 0,
             s: 0,
             l: 0
           }
         }
         onChange={color => {
-          setColor(color);
+          setInternalColor(color);
 
           if (!inputRef.current) return;
           inputRef.current.value = `hsl(${color.h}, ${color.s}%, ${color.l}%)`;
         }}
+        onClick={() => {
+          setColor(internalColor);
+        }}
       />
 
-      <div className="w-52 flex gap-2">
-        <Input
-          type="text"
-          className="h-9"
-          ref={inputRef}
-          defaultValue={
-            color
-              ? `hsl(${color.h}, ${color.s}%, ${color.l}%)`
-              : "hs(0, 0%, 0%)"
-          }
-          onChange={handleInput}
-        />
+      <div className="space-y-2">
+        <div className="w-[200px] flex gap-2">
+          <Input
+            type="text"
+            className={cn("h-9", {
+              "text-black": internalColor && isColorBrightness,
+              "text-white": internalColor && !isColorBrightness
+            })}
+            ref={inputRef}
+            defaultValue={
+              internalColor
+                ? `hsl(${internalColor.h}, ${internalColor.s}%, ${internalColor.l}%)`
+                : "hs(0, 0%, 0%)"
+            }
+            style={{
+              backgroundColor: internalColor
+                ? `hsl(${internalColor.h}, ${internalColor.s}%, ${internalColor.l}%)`
+                : ""
+            }}
+            onChange={handleInput}
+          />
 
-        <div
-          className="size-9 bg-black shrink-0 rounded-md border"
-          style={{
-            backgroundColor: color
-              ? `hsl(${color.h}, ${color.s}%, ${color.l}%)`
-              : ""
-          }}
-        />
+          {!disableRemoveColor && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    size="icon"
+                    className="flex-shrink-0"
+                    ariaLabel={t("remove")}
+                    variant="ghost"
+                    onClick={() => {
+                      setColor(null);
+                      setInternalColor(null);
+                      onClose?.();
+                    }}
+                  >
+                    <RemoveFormatting />
+                  </Button>
+                </TooltipTrigger>
+
+                <TooltipContent>{t("remove")}</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
+        </div>
+
+        <div className="grid gap-1 grid-cols-6 grid-rows-2">
+          {presetColors.map(({ color, name }) => (
+            <button
+              key={name}
+              className="size-7 rounded-sm border"
+              style={{
+                backgroundColor: `hsl(${color.h}, ${color.s}%, ${color.l}%)`
+              }}
+              onClick={() => {
+                setColor(color);
+                setInternalColor(color);
+                onClose?.();
+              }}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -27,11 +27,7 @@ export const LinkToolbarEditor = ({ editor }: Props) => {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <ButtonToolbarEditor
-          name="link.title"
-          active={editor.isActive("link")}
-          onClick={() => {}}
-        >
+        <ButtonToolbarEditor name="link.title" active={editor.isActive("link")}>
           <LinkIcon />
         </ButtonToolbarEditor>
       </PopoverTrigger>

@@ -346,6 +346,7 @@
           "success": "Grupa została stworzona"
         },
         "edit": {
+          "title": "Edytuj grupę",
           "success": "Grupa została zaktualizowana"
         },
         "delete": {

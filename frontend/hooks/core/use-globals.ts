@@ -24,7 +24,8 @@ export const GlobalsContext = createContext<Args>({
       themes: false
     },
     editor: {
-      sticky: false
+      sticky: false,
+      allow_head_h1: false
     },
     settings: {
       general: {

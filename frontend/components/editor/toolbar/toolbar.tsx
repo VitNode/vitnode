@@ -24,6 +24,7 @@ import { LinkToolbarEditor } from "./custom/link/link";
 import { HeadingToolbarEditor } from "./custom/heading";
 import { useGlobals } from "@/hooks/core/use-globals";
 import { cn } from "@/functions/classnames";
+import { ColorToolbarEditor } from "./custom/color/color";
 
 interface Props {
   editor: Editor;
@@ -60,8 +61,6 @@ export const ToolBarEditor = ({ editor }: Props) => {
 
       <SeparatorToolbarEditor />
 
-      <HeadingToolbarEditor editor={editor} />
-
       <ToggleToolbarEditor
         pressed={editor.isActive("bold")}
         name="bold"
@@ -92,6 +91,24 @@ export const ToolBarEditor = ({ editor }: Props) => {
         onPressedChange={() => editor.chain().focus().toggleStrike().run()}
       >
         <Strikethrough />
+      </ToggleToolbarEditor>
+
+      <SeparatorToolbarEditor />
+
+      <ToggleToolbarEditor
+        pressed={editor.isActive("bulletList")}
+        name="bullet_list"
+        onPressedChange={() => editor.chain().focus().toggleBulletList().run()}
+      >
+        <List />
+      </ToggleToolbarEditor>
+
+      <ToggleToolbarEditor
+        pressed={editor.isActive("orderedList")}
+        name="ordered_list"
+        onPressedChange={() => editor.chain().focus().toggleOrderedList().run()}
+      >
+        <ListOrdered />
       </ToggleToolbarEditor>
 
       <SeparatorToolbarEditor />
@@ -142,21 +159,8 @@ export const ToolBarEditor = ({ editor }: Props) => {
 
       <SeparatorToolbarEditor />
 
-      <ToggleToolbarEditor
-        pressed={editor.isActive("bulletList")}
-        name="bullet_list"
-        onPressedChange={() => editor.chain().focus().toggleBulletList().run()}
-      >
-        <List />
-      </ToggleToolbarEditor>
-
-      <ToggleToolbarEditor
-        pressed={editor.isActive("orderedList")}
-        name="ordered_list"
-        onPressedChange={() => editor.chain().focus().toggleOrderedList().run()}
-      >
-        <ListOrdered />
-      </ToggleToolbarEditor>
+      <HeadingToolbarEditor editor={editor} />
+      <ColorToolbarEditor editor={editor} />
 
       <SeparatorToolbarEditor />
 

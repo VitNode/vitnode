@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 
 import { Tabs } from "@/components/tabs/tabs";
 import {
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle
@@ -53,12 +54,11 @@ export const CreateEditFormGroupsMembersAdmin = ({
 
   return (
     <>
-      <DialogHeader className="flex flex-col gap-4">
-        <DialogTitle>
-          {data
-            ? tCore("edit_with_value", { value: convertText(data.name) })
-            : t("create.title")}
-        </DialogTitle>
+      <DialogHeader>
+        <DialogTitle>{data ? t("edit.title") : t("create.title")}</DialogTitle>
+        {data && (
+          <DialogDescription>{convertText(data.name)}</DialogDescription>
+        )}
 
         <Tabs>
           <TabsTrigger

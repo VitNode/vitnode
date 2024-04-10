@@ -21,7 +21,6 @@
     "version": "Wersja: {version}",
     "delete": "Usuń",
     "edit": "Edytuj",
-    "edit_with_value": "Edytuj - {value}",
     "create": "Utwórz",
     "upload": "Prześlij",
     "upload_new_version": "Prześlij nową wersję",
@@ -102,6 +101,7 @@
         "h6": "Nagłówek H6",
         "paragraph": "Paragraf"
       },
+      "color_text": "Kolor tekstu",
       "change_language": "Zmień język",
 
       "remove_formatting": "Usuń formatowanie",
