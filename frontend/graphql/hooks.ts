@@ -256,6 +256,7 @@ export type MutationAdmin__Core_Groups__EditArgs = {
 
 
 export type MutationAdmin__Core_Languages__CreateArgs = {
+  allow_in_input: Scalars['Boolean']['input'];
   code: Scalars['String']['input'];
   locale: Scalars['String']['input'];
   name: Scalars['String']['input'];
@@ -277,6 +278,7 @@ export type MutationAdmin__Core_Languages__DownloadArgs = {
 
 
 export type MutationAdmin__Core_Languages__EditArgs = {
+  allow_in_input: Scalars['Boolean']['input'];
   default: Scalars['Boolean']['input'];
   enabled: Scalars['Boolean']['input'];
   id: Scalars['Int']['input'];
@@ -980,6 +982,7 @@ export type ShowBlogCategoriesObj = {
 
 export type ShowCoreLanguages = {
   __typename?: 'ShowCoreLanguages';
+  allow_in_input: Scalars['Boolean']['output'];
   code: Scalars['String']['output'];
   created: Scalars['DateTime']['output'];
   default: Scalars['Boolean']['output'];
@@ -1280,6 +1283,7 @@ export type Admin__Core_Languages__CreateMutationVariables = Exact<{
   timezone: Scalars['String']['input'];
   locale: Scalars['String']['input'];
   time24: Scalars['Boolean']['input'];
+  allowInInput: Scalars['Boolean']['input'];
 }>;
 
 
@@ -1309,6 +1313,7 @@ export type Admin__Core_Languages__EditMutationVariables = Exact<{
   timezone: Scalars['String']['input'];
   locale: Scalars['String']['input'];
   time24: Scalars['Boolean']['input'];
+  allowInInput: Scalars['Boolean']['input'];
 }>;
 
 
@@ -1812,7 +1817,7 @@ export type Admin_Blog_Categories__ShowQuery = { __typename?: 'Query', blog_cate
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_MiddlewareQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean, locale: string, time_24: boolean }> }, core_themes__show: { __typename?: 'ShowCoreThemesObj', edges: Array<{ __typename?: 'ShowCoreThemes', id: number, name: string }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string }> };
+export type Core_MiddlewareQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean, locale: string, allow_in_input: boolean, time_24: boolean }> }, core_themes__show: { __typename?: 'ShowCoreThemesObj', edges: Array<{ __typename?: 'ShowCoreThemes', id: number, name: string }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string }> };
 
 export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1828,7 +1833,7 @@ export type Core_Languages__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Core_Languages__ShowQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string, default: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string, locale: string, time_24: boolean, updated: Date, created: Date }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Core_Languages__ShowQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string, default: boolean, allow_in_input: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string, locale: string, time_24: boolean, updated: Date, created: Date }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Core_Members__Show__SearchQueryVariables = Exact<{
   search?: InputMaybe<Scalars['String']['input']>;
@@ -1909,13 +1914,14 @@ export const Admin__Install__Create_Database = gql`
 }
     `;
 export const Admin__Core_Languages__Create = gql`
-    mutation Admin__core_languages__create($code: String!, $name: String!, $timezone: String!, $locale: String!, $time24: Boolean!) {
+    mutation Admin__core_languages__create($code: String!, $name: String!, $timezone: String!, $locale: String!, $time24: Boolean!, $allowInInput: Boolean!) {
   admin__core_languages__create(
     code: $code
     name: $name
     timezone: $timezone
     locale: $locale
     time_24: $time24
+    allow_in_input: $allowInInput
   ) {
     code
     id
@@ -1934,7 +1940,7 @@ export const Admin__Core_Languages__Download = gql`
 }
     `;
 export const Admin__Core_Languages__Edit = gql`
-    mutation Admin__core_languages__edit($default: Boolean!, $enabled: Boolean!, $id: Int!, $name: String!, $timezone: String!, $locale: String!, $time24: Boolean!) {
+    mutation Admin__core_languages__edit($default: Boolean!, $enabled: Boolean!, $id: Int!, $name: String!, $timezone: String!, $locale: String!, $time24: Boolean!, $allowInInput: Boolean!) {
   admin__core_languages__edit(
     default: $default
     enabled: $enabled
@@ -1943,6 +1949,7 @@ export const Admin__Core_Languages__Edit = gql`
     timezone: $timezone
     locale: $locale
     time_24: $time24
+    allow_in_input: $allowInInput
   ) {
     code
     default
@@ -2864,6 +2871,7 @@ export const Core_Middleware = gql`
       timezone
       enabled
       locale
+      allow_in_input
       time_24
     }
   }
@@ -2965,6 +2973,7 @@ export const Core_Languages__Show = gql`
     edges {
       code
       default
+      allow_in_input
       enabled
       id
       name

@@ -6,6 +6,7 @@ mutation Admin__core_languages__edit(
   $timezone: String!
   $locale: String!
   $time24: Boolean!
+  $allowInInput: Boolean!
 ) {
   admin__core_languages__edit(
     default: $default
@@ -15,6 +16,7 @@ mutation Admin__core_languages__edit(
     timezone: $timezone
     locale: $locale
     time_24: $time24
+    allow_in_input: $allowInInput
   ) {
     code
     default

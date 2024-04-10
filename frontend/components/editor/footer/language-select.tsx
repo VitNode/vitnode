@@ -29,7 +29,8 @@ export const LanguageSelectFooterEditor = ({
   setSelectedLanguage
 }: LanguageSelectFooterEditorProps) => {
   const t = useTranslations("core.editor");
-  const { languages } = useGlobals();
+  const { languages: languagesFromGlobal } = useGlobals();
+  const languages = languagesFromGlobal.filter(item => item.allow_in_input);
 
   if (languages.length <= 1) return null;
 

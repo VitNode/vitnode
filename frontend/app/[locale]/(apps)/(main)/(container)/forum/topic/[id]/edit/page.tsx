@@ -5,7 +5,7 @@ import { lazy, type LazyExoticComponent } from "react";
 import { getSessionData } from "@/functions/get-session-data";
 import { getTopicData } from "../query-api";
 import type { EditTopicViewProps } from "@/themes/1/forum/views/forum/topic/views/edit/edit-topic-view";
-import { getConvertTextLang } from "@/hooks/core/use-text-lang";
+import { useTextLang } from "@/hooks/core/use-text-lang";
 import { ErrorViewSSR } from "@/components/views/error-view-ssr";
 
 interface Props {
@@ -27,9 +27,12 @@ export async function generateMetadata({
     };
   }
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { convertText } = useTextLang();
+
   return {
     title: t("title", {
-      title: getConvertTextLang({ locale, text: forum.title })
+      title: convertText(forum.title)
     }),
     robots: "noindex, nofollow"
   };

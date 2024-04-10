@@ -273,6 +273,10 @@
             "locale": {
               "label": "Locale"
             },
+            "allow_in_input": {
+              "label": "allow_in_input",
+              "desc": "allow_in_input"
+            },
             "submit": "Create Language",
             "success": "Language has been created."
           },

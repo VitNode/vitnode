@@ -23,6 +23,9 @@ export class CreateCoreAdminLanguagesArgs {
   @Field(() => Boolean)
   time_24: boolean;
 
+  @Field(() => Boolean)
+  allow_in_input: boolean;
+
   @Field(() => String)
   @IsNotEmpty()
   locale: string;

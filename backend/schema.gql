@@ -161,10 +161,10 @@ type Mutation {
   admin__blog_categories__create(color: String!, description: [TextLanguageInput!]!, name: [TextLanguageInput!]!): ShowBlogCategories!
   admin__core_groups__delete(id: Int!): String!
   admin__core_groups__edit(id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
-  admin__core_languages__create(code: String!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
+  admin__core_languages__create(allow_in_input: Boolean!, code: String!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_languages__delete(code: String!): String!
   admin__core_languages__download(all: Boolean!, code: String!, plugins: [String!]!): String!
-  admin__core_languages__edit(default: Boolean!, enabled: Boolean!, id: Int!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
+  admin__core_languages__edit(allow_in_input: Boolean!, default: Boolean!, enabled: Boolean!, id: Int!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_languages__update(code: String!, file: Upload!): String!
   admin__core_nav__change_position(id: Int!, index_to_move: Int!, parent_id: Int!): String!
   admin__core_nav__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, name: [TextLanguageInput!]!): ShowCoreNav!
@@ -496,6 +496,7 @@ type ShowBlogCategoriesObj {
 }
 
 type ShowCoreLanguages {
+  allow_in_input: Boolean!
   code: String!
   created: DateTime!
   default: Boolean!

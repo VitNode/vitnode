@@ -18,7 +18,7 @@ export interface ForumForumViewProps {
 export default function ForumForumView({
   data: { forum_forums__show, forum_topics__show }
 }: ForumForumViewProps) {
-  const { convertText } = useTextLang();
+  const { convertNameToLink, convertText } = useTextLang();
   const t = useTranslations("forum.topics");
 
   const { edges } = forum_forums__show;
@@ -32,7 +32,7 @@ export default function ForumForumView({
           items={forumData.breadcrumbs.slice(0, -1).map(item => ({
             id: item.id,
             text: convertText(item.name),
-            href: `/forum/${item.id}`
+            href: `/forum/${convertNameToLink({ ...item })}`
           }))}
         />
       )}
