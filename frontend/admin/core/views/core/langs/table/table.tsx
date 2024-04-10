@@ -82,7 +82,8 @@ export const TableLangsCoreAdmin = ({ data }: LangsCoreAdminViewProps) => {
                 const mutation = await editMutationApi({
                   ...data,
                   enabled: !data.enabled,
-                  time24: data.time_24
+                  time24: data.time_24,
+                  allowInInput: data.allow_in_input
                 });
                 if (mutation.error) {
                   toast.error(tCore("errors.title"), {

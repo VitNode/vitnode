@@ -274,8 +274,8 @@
               "label": "Locale"
             },
             "allow_in_input": {
-              "label": "allow_in_input",
-              "desc": "allow_in_input"
+              "label": "Allow in Input",
+              "desc": "Allow users to select this language in the input field."
             },
             "submit": "Create Language",
             "success": "Language has been created."
