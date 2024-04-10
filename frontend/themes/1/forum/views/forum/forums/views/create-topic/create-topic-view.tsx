@@ -11,13 +11,13 @@ export interface CreateTopicViewProps {
 }
 
 export default function CreateTopicView({ data }: CreateTopicViewProps) {
-  const { convertText } = useTextLang();
+  const { convertNameToLink, convertText } = useTextLang();
 
   const breadcrumbsItems = data.forum_forums__show.edges[0].breadcrumbs.map(
     item => ({
       id: item.id,
       text: convertText(item.name),
-      href: `/forum/${item.id}`
+      href: `/forum/${convertNameToLink({ ...item })}`
     })
   );
 

@@ -138,6 +138,29 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
             )}
           />
 
+          <FormField
+            control={form.control}
+            name="allow_in_input"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 gap-2">
+                <div className="space-y-0.5">
+                  <FormLabel className="text-base">
+                    {t("create.allow_in_input.label")}
+                  </FormLabel>
+                  <FormDescription>
+                    {t("create.allow_in_input.desc")}
+                  </FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
           <DialogFooter>
             <Button
               type="submit"

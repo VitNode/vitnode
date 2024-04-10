@@ -3,7 +3,7 @@ import { useLocale } from "next-intl";
 import type { TextLanguage } from "@/graphql/hooks";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 
-export const getConvertTextLang = ({
+const getConvertTextLang = ({
   locale,
   text
 }: {

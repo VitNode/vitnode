@@ -8,6 +8,7 @@ query Core_middleware {
       timezone
       enabled
       locale
+      allow_in_input
       time_24
     }
   }

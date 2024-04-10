@@ -274,6 +274,10 @@
             "locale": {
               "label": "Lokalizacja"
             },
+            "allow_in_input": {
+              "label": "Zezwól w inpucie",
+              "desc": "Zezwól użytkownikom na wybór tego języka w polu input."
+            },
             "submit": "Stwórz język",
             "success": "Język został stworzony."
           },

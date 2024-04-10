@@ -92,7 +92,7 @@ export const HeadingToolbarEditor = ({ editor }: Props) => {
         {[...Array(allowH1 ? 6 : 5).keys()].map(i => (
           <SelectItem key={i} value={`h${i + (allowH1 ? 1 : 2)}`}>
             <span className="flex gap-1 [&>svg]:size-5 flex-wrap">
-              {getHeadingIcon(i + 1)}
+              {getHeadingIcon(i + (allowH1 ? 1 : 2))}
               {/* eslint-disable-next-line react/jsx-no-comment-textnodes, @typescript-eslint/ban-ts-comment */}
               {/* @ts-expect-error */}
               {t(`h${i + (allowH1 ? 1 : 2)}`)}

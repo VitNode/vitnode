@@ -24,7 +24,8 @@ interface Props
 const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
   ({ className, onChange, value, ...props }, ref) => {
     const locale = useLocale();
-    const { defaultLanguage, languages } = useGlobals();
+    const { defaultLanguage, languages: languagesFromGlobal } = useGlobals();
+    const languages = languagesFromGlobal.filter(item => item.allow_in_input);
     const [selectedLanguage, setSelectedLanguage] = useState(
       locale ?? defaultLanguage
     );

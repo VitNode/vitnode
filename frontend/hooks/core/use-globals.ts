@@ -8,7 +8,14 @@ interface Args {
   defaultLanguage: string;
   languages: Pick<
     ShowCoreLanguages,
-    "code" | "default" | "enabled" | "locale" | "time_24" | "name" | "timezone"
+    | "code"
+    | "default"
+    | "enabled"
+    | "locale"
+    | "time_24"
+    | "name"
+    | "timezone"
+    | "allow_in_input"
   >[];
   themes: Pick<ShowCoreThemes, "id" | "name">[];
 }
