@@ -1,24 +1,21 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useMemo } from "react";
-import { toast } from "sonner";
 
 import type { LangsCoreAdminViewProps } from "../langs-core-admin-view";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 import { Badge } from "@/components/ui/badge";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
 import { DateFormat } from "@/components/date-format/date-format";
-import { Switch } from "@/components/ui/switch";
-import { editMutationApi } from "../create-edit/hooks/edit-mutation-api";
 import { ActionsTableLangsCoreAdmin } from "./actions/actions";
 import { DataTable } from "@/components/data-table/data-table";
+import { EnabledRowTableLangsCoreAdmin } from "./enabled-row";
 
 export const TableLangsCoreAdmin = ({ data }: LangsCoreAdminViewProps) => {
   const t = useTranslations("admin.core.langs");
   const tCore = useTranslations("core");
-  const locale = useLocale();
 
   const columns: ColumnDef<ShowCoreLanguages>[] = useMemo(
     () => [
@@ -74,27 +71,7 @@ export const TableLangsCoreAdmin = ({ data }: LangsCoreAdminViewProps) => {
         cell: ({ row }) => {
           const data = row.original;
 
-          return (
-            <Switch
-              disabled={data.default || data.protected || data.code === locale}
-              checked={data.enabled}
-              onClick={async () => {
-                const mutation = await editMutationApi({
-                  ...data,
-                  enabled: !data.enabled,
-                  time24: data.time_24,
-                  allowInInput: data.allow_in_input
-                });
-                if (mutation.error) {
-                  toast.error(tCore("errors.title"), {
-                    description: tCore("errors.internal_server_error")
-                  });
-
-                  return;
-                }
-              }}
-            />
-          );
+          return <EnabledRowTableLangsCoreAdmin data={data} />;
         }
       },
       {
