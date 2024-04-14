@@ -45,9 +45,11 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
       tgz
         .createReadStream()
         .pipe(
-          tar.x({
-            cwd: this.tempPath
-          })
+          // TODO: Fix this type
+          tar.extract({
+            C: this.tempPath,
+            strip: 1
+          }) as ReturnType<typeof tar.extract> & NodeJS.WritableStream
         )
         .on("error", err => {
           reject(err.message);

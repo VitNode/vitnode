@@ -29,6 +29,8 @@ export class DeleteAdminPluginsService {
 
   protected async deleteMigration({ code }: { code: string }) {
     const migrationPath = pluginPaths({ code }).backend.database_migration_info;
+    if (!fs.existsSync(migrationPath)) return;
+
     const migrationData: { entries: { when: number }[] } = JSON.parse(
       fs.readFileSync(migrationPath, "utf-8")
     );

@@ -12,9 +12,13 @@ export default getRequestConfig(async ({ locale }) => {
       ? [...data.core_plugins__show, ...defaultPlugins]
       : defaultPlugins
     ).map(async plugin => {
-      return {
-        ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
-      };
+      try {
+        return {
+          ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
+        };
+      } catch (e) {
+        return {};
+      }
     })
   );
 

@@ -310,7 +310,7 @@
       "no_connection_api": "Brak połączenia z API",
       "no_connection_api_dev": "To się zdarza, gdy API wprowadza zmiany w kodzie lub gdy API jest wyłączone.",
       "access_denied": "Brak dostępu",
-      "internal_server_error": "Wewnętrzny błąd serwera",
+      "internal_server_error": "Wewnętrzny błąd serwera.",
       "required": "To pole jest wymagane.",
       "min_length": "Minimalna długość to {length} znaków.",
       "max_length": "Maksymalna długość to {length} znaków.",
