@@ -56,7 +56,7 @@ export class DownloadAdminCoreLanguageService {
 
     // Create tgz
     try {
-      tar.c(
+      tar.create(
         { gzip: true, file: `temp/${name}.tgz`, cwd: path },
         all ? ["."] : pluginsPath
       );

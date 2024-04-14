@@ -5,16 +5,20 @@ import { middlewareQueryApi } from "./hooks/core/middleware-query-api";
 
 export default getRequestConfig(async ({ locale }) => {
   const data = await middlewareQueryApi();
-  const defaultPlugins = [{ code: "core", name: "admin" }];
+  const defaultPlugins = [{ code: "core" }, { code: "admin" }];
 
   const messagesFormApps = await Promise.all(
     (data
       ? [...data.core_plugins__show, ...defaultPlugins]
       : defaultPlugins
     ).map(async plugin => {
-      return {
-        ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
-      };
+      try {
+        return {
+          ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
+        };
+      } catch (e) {
+        return {};
+      }
     })
   );
 

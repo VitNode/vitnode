@@ -72,7 +72,7 @@ export class DownloadAdminThemesService {
 
     // Create tgz
     try {
-      tar.c({ gzip: true, file: `temp/${name}.tgz`, cwd: path }, ["."]);
+      tar.create({ gzip: true, file: `temp/${name}.tgz`, cwd: path }, ["."]);
     } catch (error) {
       throw new CustomError({
         code: "DOWNLOAD_ADMIN_THEMES_SERVICE_ERROR",

@@ -22,7 +22,7 @@ export default async function LocaleLayout({
   children,
   params: { locale }
 }: Props) {
-  const defaultPlugins = [{ code: "core", name: "admin" }];
+  const defaultPlugins = [{ code: "core" }, { code: "admin" }];
 
   try {
     const { data } = await getSessionData();
@@ -32,9 +32,13 @@ export default async function LocaleLayout({
         ? [...data.core_plugins__show, ...defaultPlugins]
         : defaultPlugins
       ).map(async plugin => {
-        return {
-          ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
-        };
+        try {
+          return {
+            ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
+          };
+        } catch (e) {
+          return {};
+        }
       })
     );
 
@@ -61,9 +65,13 @@ export default async function LocaleLayout({
   } catch (error) {
     const messagesFormApps = await Promise.all(
       defaultPlugins.map(async plugin => {
-        return {
-          ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
-        };
+        try {
+          return {
+            ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
+          };
+        } catch (e) {
+          return {};
+        }
       })
     );
 

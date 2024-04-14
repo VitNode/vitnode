@@ -1,5 +1,5 @@
 {
-  "id": "50a6cbb7-e8f0-4cce-8117-ba805525b30f",
+  "id": "03f6a0fe-3293-47aa-b57d-ec71716ac406",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -573,6 +573,13 @@
           "primaryKey": false,
           "notNull": true,
           "default": "'enUS'"
+        },
+        "allow_in_input": {
+          "name": "allow_in_input",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
         }
       },
       "indexes": {
@@ -735,7 +742,8 @@
           "name": "parent_id",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": 0
         },
         "icon": {
           "name": "icon",
@@ -781,7 +789,7 @@
         },
         "value": {
           "name": "value",
-          "type": "varchar(50)",
+          "type": "varchar(200)",
           "primaryKey": false,
           "notNull": true
         }
@@ -857,7 +865,7 @@
         },
         "value": {
           "name": "value",
-          "type": "varchar(50)",
+          "type": "varchar(100)",
           "primaryKey": false,
           "notNull": true
         }
@@ -1385,6 +1393,24 @@
         "group_id": {
           "name": "group_id",
           "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "first_name": {
+          "name": "first_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_name": {
+          "name": "last_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "birthday": {
+          "name": "birthday",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": false
         }

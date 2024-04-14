@@ -57,9 +57,11 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
       tgz
         .createReadStream()
         .pipe(
-          tar.x({
-            cwd: this.tempPath
-          })
+          // TODO: Fix this type
+          tar.extract({
+            C: this.tempPath,
+            strip: 1
+          }) as ReturnType<typeof tar.extract> & NodeJS.WritableStream
         )
         .on("error", err => {
           reject(err.message);
@@ -319,9 +321,11 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
     // Run migration
     const migrationPath = pluginPaths({ code: config.code }).backend
       .database_migration;
-    await migrate(this.databaseService.db, {
-      migrationsFolder: migrationPath
-    });
+    if (fs.existsSync(migrationPath)) {
+      await migrate(this.databaseService.db, {
+        migrationsFolder: migrationPath
+      });
+    }
 
     return plugin;
   }

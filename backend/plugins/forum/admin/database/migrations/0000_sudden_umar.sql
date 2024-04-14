@@ -7,7 +7,7 @@ END $$;
 CREATE TABLE IF NOT EXISTS "forum_forums" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"created" timestamp DEFAULT now() NOT NULL,
-	"parent_id" integer,
+	"parent_id" integer DEFAULT 0 NOT NULL,
 	"position" integer DEFAULT 0 NOT NULL,
 	"can_all_view" boolean DEFAULT false NOT NULL,
 	"can_all_read" boolean DEFAULT false NOT NULL,
@@ -55,15 +55,6 @@ CREATE TABLE IF NOT EXISTS "forum_posts_content" (
 	"value" varchar NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "forum_posts_timeline" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"post_id" integer,
-	"log" text,
-	"topic_log_id" integer,
-	"created" timestamp DEFAULT now() NOT NULL,
-	"topic_id" integer NOT NULL
-);
---> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "forum_topics" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"forum_id" integer NOT NULL,
@@ -99,9 +90,6 @@ CREATE INDEX IF NOT EXISTS "forum_posts_topic_id_idx" ON "forum_posts" ("topic_i
 CREATE INDEX IF NOT EXISTS "forum_posts_user_id_idx" ON "forum_posts" ("user_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "forum_posts_content_post_id_idx" ON "forum_posts_content" ("post_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "forum_posts_content_language_code_idx" ON "forum_posts_content" ("language_code");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "forum_posts_timeline_post_id_idx" ON "forum_posts_timeline" ("post_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "forum_posts_timeline_topic_log_id_idx" ON "forum_posts_timeline" ("topic_log_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "forum_posts_timeline_topic_id_idx" ON "forum_posts_timeline" ("topic_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "forum_topics_forum_id_idx" ON "forum_topics" ("forum_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "forum_topics_logs_user_id_idx" ON "forum_topics_logs" ("user_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "forum_topics_logs_topic_id_idx" ON "forum_topics_logs" ("topic_id");--> statement-breakpoint
@@ -163,24 +151,6 @@ END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "forum_posts_content" ADD CONSTRAINT "forum_posts_content_language_code_core_languages_code_fk" FOREIGN KEY ("language_code") REFERENCES "core_languages"("code") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "forum_posts_timeline" ADD CONSTRAINT "forum_posts_timeline_post_id_forum_posts_id_fk" FOREIGN KEY ("post_id") REFERENCES "forum_posts"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "forum_posts_timeline" ADD CONSTRAINT "forum_posts_timeline_topic_log_id_forum_topics_logs_id_fk" FOREIGN KEY ("topic_log_id") REFERENCES "forum_topics_logs"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "forum_posts_timeline" ADD CONSTRAINT "forum_posts_timeline_topic_id_forum_topics_id_fk" FOREIGN KEY ("topic_id") REFERENCES "forum_topics"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

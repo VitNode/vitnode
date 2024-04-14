@@ -310,7 +310,7 @@
       "no_connection_api": "No connection to the API",
       "no_connection_api_dev": "This happens when the API makes some changes in your code or when the API is down.",
       "access_denied": "Access denied",
-      "internal_server_error": "Internal server error",
+      "internal_server_error": "Internal server error.",
       "required": "This field is required.",
       "min_length": "This field must be at least {length} characters.",
       "max_length": "This field must be less than {length} characters.",
