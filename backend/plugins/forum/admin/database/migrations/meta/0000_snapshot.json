@@ -1,5 +1,5 @@
 {
-  "id": "52c9ca53-e156-4799-b7a0-51d60626ac8e",
+  "id": "87d137f0-e9d0-4174-b192-9a756f006a64",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -25,7 +25,8 @@
           "name": "parent_id",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": 0
         },
         "position": {
           "name": "position",
@@ -484,115 +485,6 @@
           ],
           "columnsTo": [
             "code"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "forum_posts_timeline": {
-      "name": "forum_posts_timeline",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "post_id": {
-          "name": "post_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "log": {
-          "name": "log",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "topic_log_id": {
-          "name": "topic_log_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "created": {
-          "name": "created",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "topic_id": {
-          "name": "topic_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {
-        "forum_posts_timeline_post_id_idx": {
-          "name": "forum_posts_timeline_post_id_idx",
-          "columns": [
-            "post_id"
-          ],
-          "isUnique": false
-        },
-        "forum_posts_timeline_topic_log_id_idx": {
-          "name": "forum_posts_timeline_topic_log_id_idx",
-          "columns": [
-            "topic_log_id"
-          ],
-          "isUnique": false
-        },
-        "forum_posts_timeline_topic_id_idx": {
-          "name": "forum_posts_timeline_topic_id_idx",
-          "columns": [
-            "topic_id"
-          ],
-          "isUnique": false
-        }
-      },
-      "foreignKeys": {
-        "forum_posts_timeline_post_id_forum_posts_id_fk": {
-          "name": "forum_posts_timeline_post_id_forum_posts_id_fk",
-          "tableFrom": "forum_posts_timeline",
-          "tableTo": "forum_posts",
-          "columnsFrom": [
-            "post_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "forum_posts_timeline_topic_log_id_forum_topics_logs_id_fk": {
-          "name": "forum_posts_timeline_topic_log_id_forum_topics_logs_id_fk",
-          "tableFrom": "forum_posts_timeline",
-          "tableTo": "forum_topics_logs",
-          "columnsFrom": [
-            "topic_log_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "forum_posts_timeline_topic_id_forum_topics_id_fk": {
-          "name": "forum_posts_timeline_topic_id_forum_topics_id_fk",
-          "tableFrom": "forum_posts_timeline",
-          "tableTo": "forum_topics",
-          "columnsFrom": [
-            "topic_id"
-          ],
-          "columnsTo": [
-            "id"
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"

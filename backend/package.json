@@ -8,6 +8,7 @@
     "config:finish": "ts-node ./functions/config/finish-build-config-file.ts",
     "migrate:forum": "drizzle-kit generate:pg --out plugins/forum/admin/database/migrations --schema plugins/forum/admin/database/schema/*.ts",
     "migrate:admin": "drizzle-kit generate:pg --out plugins/core/admin/database/migrations --schema plugins/core/admin/database/schema/*.ts",
+    "migrate:blog": "drizzle-kit generate:pg --out plugins/blog/admin/database/migrations --schema plugins/blog/admin/database/schema/*.ts",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "cross-env NODE_ENV=test pnpm config:finish && nest start",

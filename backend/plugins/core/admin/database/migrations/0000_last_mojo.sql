@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS "core_languages" (
 	"updated" timestamp DEFAULT now() NOT NULL,
 	"time_24" boolean DEFAULT false NOT NULL,
 	"locale" varchar(50) DEFAULT 'enUS' NOT NULL,
+	"allow_in_input" boolean DEFAULT true,
 	CONSTRAINT "core_languages_code_unique" UNIQUE("code")
 );
 --> statement-breakpoint
@@ -89,7 +90,7 @@ CREATE TABLE IF NOT EXISTS "core_nav" (
 	"href" varchar(255) NOT NULL,
 	"external" boolean DEFAULT false NOT NULL,
 	"position" integer DEFAULT 0 NOT NULL,
-	"parent_id" integer,
+	"parent_id" integer DEFAULT 0 NOT NULL,
 	"icon" varchar(50)
 );
 --> statement-breakpoint
@@ -97,14 +98,14 @@ CREATE TABLE IF NOT EXISTS "core_nav_description" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"nav_id" serial NOT NULL,
 	"language_code" varchar NOT NULL,
-	"value" varchar(50) NOT NULL
+	"value" varchar(200) NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "core_nav_name" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"nav_id" serial NOT NULL,
 	"language_code" varchar NOT NULL,
-	"value" varchar(50) NOT NULL
+	"value" varchar(100) NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "core_plugins" (
@@ -179,6 +180,9 @@ CREATE TABLE IF NOT EXISTS "core_users" (
 	"newsletter" boolean DEFAULT false NOT NULL,
 	"avatar_color" varchar(6) NOT NULL,
 	"group_id" integer,
+	"first_name" varchar(255),
+	"last_name" varchar(255),
+	"birthday" timestamp,
 	CONSTRAINT "core_users_name_seo_unique" UNIQUE("name_seo"),
 	CONSTRAINT "core_users_name_unique" UNIQUE("name"),
 	CONSTRAINT "core_users_email_unique" UNIQUE("email")

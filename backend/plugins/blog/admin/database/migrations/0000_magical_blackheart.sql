@@ -24,7 +24,8 @@ CREATE TABLE IF NOT EXISTS "blog_articles_title" (
 CREATE TABLE IF NOT EXISTS "blog_categories" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"created" timestamp DEFAULT now() NOT NULL,
-	"position" integer DEFAULT 0 NOT NULL
+	"position" integer DEFAULT 0 NOT NULL,
+	"color" varchar(30) DEFAULT '' NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "blog_categories_description" (
