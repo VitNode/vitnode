@@ -22,7 +22,7 @@ export default async function LocaleLayout({
   children,
   params: { locale }
 }: Props) {
-  const defaultPlugins = [{ code: "core", name: "admin" }];
+  const defaultPlugins = [{ code: "core" }, { code: "admin" }];
 
   try {
     const { data } = await getSessionData();
