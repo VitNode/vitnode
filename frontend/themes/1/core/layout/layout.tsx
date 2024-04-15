@@ -33,7 +33,6 @@ export default function Layout({ children, copyright }: Props) {
   return (
     <>
       <Header />
-
       {children}
       {poweredBy}
       <QuickMenu />
