@@ -1,8 +1,8 @@
 import { Module } from "@nestjs/common";
 
-import { AdminGeneralSettingsModule } from "./general/general.module";
+import { AdminMainSettingsModule } from "./main/general.module";
 
 @Module({
-  imports: [AdminGeneralSettingsModule]
+  imports: [AdminMainSettingsModule]
 })
 export class AdminSettingsModule {}

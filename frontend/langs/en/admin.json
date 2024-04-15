@@ -17,6 +17,12 @@
           "title": "Main Settings",
           "name": {
             "label": "Name Site"
+          },
+          "description": {
+            "label": "Description Site"
+          },
+          "copyright": {
+            "label": "Copyright Site"
           }
         },
         "security": {

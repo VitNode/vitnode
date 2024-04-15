@@ -270,7 +270,7 @@ const update = await Promise.all(
 ### Delete remaining translations
 
 ```ts
-Promise.all(
+await Promise.all(
   names.map(async item => {
     const exist = update.find(name => name.id === item.id);
     if (exist) return;

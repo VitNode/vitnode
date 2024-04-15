@@ -187,7 +187,6 @@ export type LayoutAdminInstallObj = {
 export type Mutation = {
   __typename?: 'Mutation';
   admin__blog_categories__create: ShowBlogCategories;
-  admin__core_general_settings__edit: ShowSettingsObj;
   admin__core_groups__delete: Scalars['String']['output'];
   admin__core_groups__edit: ShowAdminGroups;
   admin__core_languages__create: ShowCoreLanguages;
@@ -195,6 +194,7 @@ export type Mutation = {
   admin__core_languages__download: Scalars['String']['output'];
   admin__core_languages__edit: ShowCoreLanguages;
   admin__core_languages__update: Scalars['String']['output'];
+  admin__core_main_settings__edit: ShowSettingsObj;
   admin__core_nav__change_position: Scalars['String']['output'];
   admin__core_nav__create: ShowCoreNav;
   admin__core_nav__delete: Scalars['String']['output'];
@@ -242,11 +242,6 @@ export type MutationAdmin__Blog_Categories__CreateArgs = {
   color: Scalars['String']['input'];
   description: Array<TextLanguageInput>;
   name: Array<TextLanguageInput>;
-};
-
-
-export type MutationAdmin__Core_General_Settings__EditArgs = {
-  site_name: Scalars['String']['input'];
 };
 
 
@@ -298,6 +293,13 @@ export type MutationAdmin__Core_Languages__EditArgs = {
 export type MutationAdmin__Core_Languages__UpdateArgs = {
   code: Scalars['String']['input'];
   file: Scalars['Upload']['input'];
+};
+
+
+export type MutationAdmin__Core_Main_Settings__EditArgs = {
+  site_copyright: Array<TextLanguageInput>;
+  site_description: Array<TextLanguageInput>;
+  site_name: Scalars['String']['input'];
 };
 
 
@@ -1189,6 +1191,8 @@ export const ShowPostsForumsSortingEnum = {
 export type ShowPostsForumsSortingEnum = typeof ShowPostsForumsSortingEnum[keyof typeof ShowPostsForumsSortingEnum];
 export type ShowSettingsObj = {
   __typename?: 'ShowSettingsObj';
+  site_copyright: Array<TextLanguage>;
+  site_description: Array<TextLanguage>;
   site_name: Scalars['String']['output'];
 };
 
@@ -1522,12 +1526,14 @@ export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: n
 
 export type Admin_Sessions__Sign_OutMutation = { __typename?: 'Mutation', admin_sessions__sign_out: string };
 
-export type Admin__Core_General_Settings__EditMutationVariables = Exact<{
+export type Admin__Core_Main_Settings__EditMutationVariables = Exact<{
   siteName: Scalars['String']['input'];
+  siteDescription: Array<TextLanguageInput> | TextLanguageInput;
+  siteCopyright: Array<TextLanguageInput> | TextLanguageInput;
 }>;
 
 
-export type Admin__Core_General_Settings__EditMutation = { __typename?: 'Mutation', admin__core_general_settings__edit: { __typename?: 'ShowSettingsObj', site_name: string } };
+export type Admin__Core_Main_Settings__EditMutation = { __typename?: 'Mutation', admin__core_main_settings__edit: { __typename?: 'ShowSettingsObj', site_name: string } };
 
 export type Admin__Core_Themes__CreateMutationVariables = Exact<{
   author: Scalars['String']['input'];
@@ -1818,10 +1824,10 @@ export type Admin__Core_Plugins__Nav__ShowQueryVariables = Exact<{
 
 export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, id: number, icon?: string | null, position: number, href: string }> };
 
-export type Core_General_Settings__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+export type Core_Main_Settings__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_General_Settings__ShowQuery = { __typename?: 'Query', core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string } };
+export type Core_Main_Settings__ShowQuery = { __typename?: 'Query', core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
 export type Admin_Core_Themes__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -2206,9 +2212,13 @@ export const Admin_Sessions__Sign_Out = gql`
   admin_sessions__sign_out
 }
     `;
-export const Admin__Core_General_Settings__Edit = gql`
-    mutation Admin__core_general_settings__edit($siteName: String!) {
-  admin__core_general_settings__edit(site_name: $siteName) {
+export const Admin__Core_Main_Settings__Edit = gql`
+    mutation Admin__core_main_settings__edit($siteName: String!, $siteDescription: [TextLanguageInput!]!, $siteCopyright: [TextLanguageInput!]!) {
+  admin__core_main_settings__edit(
+    site_name: $siteName
+    site_description: $siteDescription
+    site_copyright: $siteCopyright
+  ) {
     site_name
   }
 }
@@ -2841,10 +2851,18 @@ export const Admin__Core_Plugins__Nav__Show = gql`
   }
 }
     `;
-export const Core_General_Settings__Show = gql`
-    query Core_general_settings__show {
+export const Core_Main_Settings__Show = gql`
+    query Core_main_settings__show {
   core_settings__show {
     site_name
+    site_copyright {
+      language_code
+      value
+    }
+    site_description {
+      language_code
+      value
+    }
   }
 }
     `;

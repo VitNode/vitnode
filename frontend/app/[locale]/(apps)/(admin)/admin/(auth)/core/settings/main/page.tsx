@@ -5,17 +5,17 @@ import { HeaderContent } from "@/components/header-content/header-content";
 import { Card } from "@/components/ui/card";
 import { fetcher } from "@/graphql/fetcher";
 import {
-  Core_General_Settings__Show,
-  type Core_General_Settings__ShowQuery,
-  type Core_General_Settings__ShowQueryVariables
+  Core_Main_Settings__Show,
+  type Core_Main_Settings__ShowQuery,
+  type Core_Main_Settings__ShowQueryVariables
 } from "@/graphql/hooks";
 
 const getData = async () => {
   const { data } = await fetcher<
-    Core_General_Settings__ShowQuery,
-    Core_General_Settings__ShowQueryVariables
+    Core_Main_Settings__ShowQuery,
+    Core_Main_Settings__ShowQueryVariables
   >({
-    query: Core_General_Settings__Show
+    query: Core_Main_Settings__Show
   });
 
   return data;
