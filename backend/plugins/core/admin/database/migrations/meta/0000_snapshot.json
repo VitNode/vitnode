@@ -1,5 +1,5 @@
 {
-  "id": "03f6a0fe-3293-47aa-b57d-ec71716ac406",
+  "id": "f25dfa82-6a36-484e-a6cc-4a4d0a369233",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -580,6 +580,20 @@
           "primaryKey": false,
           "notNull": false,
           "default": true
+        },
+        "site_description": {
+          "name": "site_description",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "''"
+        },
+        "site_copyright": {
+          "name": "site_copyright",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "''"
         }
       },
       "indexes": {

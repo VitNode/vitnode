@@ -13,10 +13,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useSettingsCoreAdmin } from "./hooks/use-settings-core-admin";
-import type { ConfigType } from "@/config/get-config-file";
+import type { Core_General_Settings__ShowQuery } from "@/graphql/hooks";
 
 export const MainSettingsCoreAdmin = (
-  props: ConfigType["settings"]["general"]
+  props: Core_General_Settings__ShowQuery
 ) => {
   const t = useTranslations("admin.core.settings.main");
   const tCore = useTranslations("core");

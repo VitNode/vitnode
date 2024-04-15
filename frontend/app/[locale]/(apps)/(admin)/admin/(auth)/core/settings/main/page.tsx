@@ -3,12 +3,28 @@ import { getTranslations } from "next-intl/server";
 import { MainSettingsCoreAdmin } from "@/admin/core/views/core/settings/main/main-settings-core-admin";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Card } from "@/components/ui/card";
-import { getConfigFile } from "@/config/get-config-file";
+import { fetcher } from "@/graphql/fetcher";
+import {
+  Core_General_Settings__Show,
+  type Core_General_Settings__ShowQuery,
+  type Core_General_Settings__ShowQueryVariables
+} from "@/graphql/hooks";
+
+const getData = async () => {
+  const { data } = await fetcher<
+    Core_General_Settings__ShowQuery,
+    Core_General_Settings__ShowQueryVariables
+  >({
+    query: Core_General_Settings__Show
+  });
+
+  return data;
+};
 
 export default async function Page() {
   const [t, data] = await Promise.all([
     getTranslations("admin.core.settings.main"),
-    getConfigFile()
+    getData()
   ]);
 
   return (
@@ -16,7 +32,7 @@ export default async function Page() {
       <HeaderContent h1={t("title")} />
 
       <Card className="p-6">
-        <MainSettingsCoreAdmin {...data.settings.general} />
+        <MainSettingsCoreAdmin {...data} />
       </Card>
     </>
   );

@@ -1,0 +1,5 @@
+query Core_general_settings__show {
+  core_settings__show {
+    site_name
+  }
+}

@@ -6,11 +6,11 @@ import { toast } from "sonner";
 
 import { mutationApi } from "./mutation-api";
 import { zodInput } from "@/functions/zod";
-import type { ConfigType } from "@/config/get-config-file";
+import type { Core_General_Settings__ShowQuery } from "@/graphql/hooks";
 
-export const useSettingsCoreAdmin = (
-  data: ConfigType["settings"]["general"]
-) => {
+export const useSettingsCoreAdmin = ({
+  core_settings__show: data
+}: Core_General_Settings__ShowQuery) => {
   const t = useTranslations("core");
 
   const formSchema = z.object({
@@ -20,14 +20,14 @@ export const useSettingsCoreAdmin = (
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: data.side_name
+      name: data.site_name
     }
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await mutationApi({
-        side_name: values.name
+        site_name: values.name
       });
 
       toast.success(t("saved_success"));

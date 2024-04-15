@@ -5,7 +5,7 @@ import { getConfigFile } from "@/config/get-config-file";
 
 export async function generateMetadata(): Promise<Metadata> {
   const config = await getConfigFile();
-  const defaultTitle = config.settings.general.side_name;
+  const defaultTitle = config.settings.general.site_name;
 
   return {
     title: {

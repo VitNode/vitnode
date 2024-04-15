@@ -286,6 +286,7 @@ type Query {
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
   core_plugins__show: [ShowCorePluginsObj!]!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
+  core_settings__show: ShowSettingsObj!
   core_themes__show(cursor: Int, first: Int, last: Int): ShowCoreThemesObj!
   forum_forums__show(
     cursor: Int
@@ -671,6 +672,10 @@ type ShowPostsForumsObj {
 enum ShowPostsForumsSortingEnum {
   newest
   oldest
+}
+
+type ShowSettingsObj {
+  site_name: String!
 }
 
 type ShowTopicsForums {

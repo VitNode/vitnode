@@ -616,6 +616,7 @@ export type Query = {
   core_nav__show: ShowCoreNavObj;
   core_plugins__show: Array<ShowCorePluginsObj>;
   core_sessions__authorization: AuthorizationCoreSessionsObj;
+  core_settings__show: ShowSettingsObj;
   core_themes__show: ShowCoreThemesObj;
   forum_forums__show: ShowForumForumsObj;
   forum_posts__show: ShowPostsForumsObj;
@@ -1180,6 +1181,11 @@ export const ShowPostsForumsSortingEnum = {
 } as const;
 
 export type ShowPostsForumsSortingEnum = typeof ShowPostsForumsSortingEnum[keyof typeof ShowPostsForumsSortingEnum];
+export type ShowSettingsObj = {
+  __typename?: 'ShowSettingsObj';
+  site_name: Scalars['String']['output'];
+};
+
 export type ShowTopicsForums = {
   __typename?: 'ShowTopicsForums';
   breadcrumbs: Array<BreadcrumbsForumForums>;
@@ -1798,6 +1804,11 @@ export type Admin__Core_Plugins__Nav__ShowQueryVariables = Exact<{
 
 
 export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, id: number, icon?: string | null, position: number, href: string }> };
+
+export type Core_General_Settings__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Core_General_Settings__ShowQuery = { __typename?: 'Query', core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string } };
 
 export type Admin_Core_Themes__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -2807,6 +2818,13 @@ export const Admin__Core_Plugins__Nav__Show = gql`
     icon
     position
     href
+  }
+}
+    `;
+export const Core_General_Settings__Show = gql`
+    query Core_general_settings__show {
+  core_settings__show {
+    site_name
   }
 }
     `;

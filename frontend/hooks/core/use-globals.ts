@@ -36,7 +36,7 @@ export const GlobalsContext = createContext<Args>({
     },
     settings: {
       general: {
-        side_name: ""
+        site_name: ""
       }
     }
   }
