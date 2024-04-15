@@ -4,4 +4,7 @@ import { Field, ObjectType } from "@nestjs/graphql";
 export class ShowCorePluginsObj {
   @Field(() => String)
   code: string;
+
+  @Field(() => Boolean)
+  allow_default: boolean;
 }

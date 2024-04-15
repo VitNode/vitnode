@@ -590,6 +590,7 @@ type ShowCoreNavObj {
 }
 
 type ShowCorePluginsObj {
+  allow_default: Boolean!
   code: String!
 }
 

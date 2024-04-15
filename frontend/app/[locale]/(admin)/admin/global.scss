@@ -42,8 +42,8 @@
     --foreground: 0 0% 98%;
     --card: 240deg 17.07% 8.04%;
     --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    // --popover: var(--card);
+    // --popover-foreground: var(--card-foreground);
     --primary: 221.2deg 84.31% 59.32%;
     --primary-foreground: 210 40% 98%;
     --secondary: 240deg 16.92% 12.75%;
@@ -56,6 +56,6 @@
     --destructive-foreground: 210 40% 98%;
     --border: 240deg 15.61% 13.28%;
     // --input: var(--border);
-    /* --ring: var(--primary); */
+    // --ring: var(--primary);
   }
 }

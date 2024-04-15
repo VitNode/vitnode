@@ -13,6 +13,6 @@ export class ShowCorePluginsService {
       where: (table, { eq }) => eq(table.enabled, true)
     });
 
-    return [{ code: "admin" }, { code: "core" }, ...plugins];
+    return plugins;
   }
 }

@@ -49,5 +49,5 @@ export default async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next|icons|robots.txt).*)"]
+  matcher: ["/((?!api|_next|icons|robots.txt|sitemap.xml).*)"]
 };
