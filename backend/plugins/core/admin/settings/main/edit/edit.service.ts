@@ -4,6 +4,7 @@ import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
 
 import { EditAdminMainSettingsArgs } from "./dto/edit.args";
+import { EditAdminSettingsObj } from "./dto/edit.obj";
 
 import { DatabaseService } from "@/plugins/database/database.service";
 import {
@@ -11,7 +12,6 @@ import {
   configPath,
   getConfigFile
 } from "@/config/get-config-file";
-import { ShowSettingsObj } from "@/plugins/core/settings/show/dto/show.obj";
 import { core_languages } from "../../../database/schema/languages";
 
 @Injectable()
@@ -116,7 +116,7 @@ export class EditAdminMainSettingsService {
     site_copyright,
     site_description,
     site_name
-  }: EditAdminMainSettingsArgs): Promise<ShowSettingsObj> {
+  }: EditAdminMainSettingsArgs): Promise<EditAdminSettingsObj> {
     const config = await getConfigFile();
     const newData: ConfigType = {
       ...config,

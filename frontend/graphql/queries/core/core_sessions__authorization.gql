@@ -22,7 +22,6 @@ query Core_sessions__authorization {
         id
       }
     }
-    theme_id
     rebuild_required {
       themes
       langs
@@ -69,5 +68,16 @@ query Core_sessions__authorization {
   }
   core_plugins__show {
     code
+  }
+  core_settings__show {
+    site_copyright {
+      language_code
+      value
+    }
+    site_description {
+      language_code
+      value
+    }
+    theme_id
   }
 }

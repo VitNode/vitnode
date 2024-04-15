@@ -1,5 +1,4 @@
 import { Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
 
 import { InternalAuthorizationCoreSessionsService } from "./internal/internal_authorization.service";
 import { AuthorizationCoreSessionsObj } from "./dto/authorization.obj";
@@ -12,28 +11,8 @@ import { getConfigFile } from "@/config/get-config-file";
 export class AuthorizationCoreSessionsService {
   constructor(
     private databaseService: DatabaseService,
-    private readonly service: InternalAuthorizationCoreSessionsService,
-    private configService: ConfigService
+    private readonly service: InternalAuthorizationCoreSessionsService
   ) {}
-
-  protected async getThemeId({
-    req
-  }: Pick<Ctx, "req">): Promise<number | null> {
-    const cookie_theme_id: string | null =
-      req.cookies[this.configService.getOrThrow("cookies.theme_id.name")];
-
-    if (cookie_theme_id) {
-      const theme = await this.databaseService.db.query.core_themes.findFirst({
-        where: (table, { eq }) => eq(table.id, parseInt(cookie_theme_id))
-      });
-
-      if (theme) {
-        return theme.id;
-      }
-    }
-
-    return null;
-  }
 
   protected async isAdmin({
     group_id,
@@ -69,7 +48,6 @@ export class AuthorizationCoreSessionsService {
     req,
     res
   }: Ctx): Promise<AuthorizationCoreSessionsObj> {
-    const theme_id = await this.getThemeId({ req });
     const config = await getConfigFile();
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
       where: (table, { eq }) => eq(table.default, true)
@@ -103,14 +81,12 @@ export class AuthorizationCoreSessionsService {
           }),
           avatar_color: user.avatar_color
         },
-        theme_id,
         rebuild_required: config.rebuild_required,
         plugin_default: plugin?.code ?? ""
       };
     } catch (error) {
       return {
         user: null,
-        theme_id,
         rebuild_required: config.rebuild_required,
         plugin_default: plugin?.code ?? ""
       };

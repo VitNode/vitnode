@@ -12,4 +12,7 @@ export class ShowSettingsObj {
 
   @Field(() => [TextLanguage])
   site_copyright: TextLanguage[];
+
+  @Field(() => Number, { nullable: true })
+  theme_id: number | null;
 }

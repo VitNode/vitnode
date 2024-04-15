@@ -25,7 +25,6 @@ export const pluginPaths = ({ code }: { code: string }) => {
         frontend_root,
         "app",
         "[locale]",
-        "(apps)",
         "(admin)",
         "admin",
         "(auth)",
@@ -36,7 +35,6 @@ export const pluginPaths = ({ code }: { code: string }) => {
         frontend_root,
         "app",
         "[locale]",
-        "(apps)",
         "(main)",
         "(container)",
         code
@@ -48,7 +46,7 @@ export const pluginPaths = ({ code }: { code: string }) => {
         code,
         "default-page.tsx"
       ),
-      pages: join(frontend_root, "app", "[locale]", "(apps)", "(main)", code),
+      pages: join(frontend_root, "app", "[locale]", "(main)", code),
       hooks: join(frontend_root, "hooks", code),
       templates: join(frontend_root, "themes", "1", code),
       graphql_queries: join(frontend_root, "graphql", "queries", code),
