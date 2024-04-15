@@ -187,6 +187,7 @@ export type LayoutAdminInstallObj = {
 export type Mutation = {
   __typename?: 'Mutation';
   admin__blog_categories__create: ShowBlogCategories;
+  admin__core_general_settings__edit: ShowSettingsObj;
   admin__core_groups__delete: Scalars['String']['output'];
   admin__core_groups__edit: ShowAdminGroups;
   admin__core_languages__create: ShowCoreLanguages;
@@ -241,6 +242,11 @@ export type MutationAdmin__Blog_Categories__CreateArgs = {
   color: Scalars['String']['input'];
   description: Array<TextLanguageInput>;
   name: Array<TextLanguageInput>;
+};
+
+
+export type MutationAdmin__Core_General_Settings__EditArgs = {
+  site_name: Scalars['String']['input'];
 };
 
 
@@ -1516,6 +1522,13 @@ export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: n
 
 export type Admin_Sessions__Sign_OutMutation = { __typename?: 'Mutation', admin_sessions__sign_out: string };
 
+export type Admin__Core_General_Settings__EditMutationVariables = Exact<{
+  siteName: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_General_Settings__EditMutation = { __typename?: 'Mutation', admin__core_general_settings__edit: { __typename?: 'ShowSettingsObj', site_name: string } };
+
 export type Admin__Core_Themes__CreateMutationVariables = Exact<{
   author: Scalars['String']['input'];
   authorUrl?: InputMaybe<Scalars['String']['input']>;
@@ -2191,6 +2204,13 @@ export const Admin__Core_Plugins__Nav__Edit = gql`
 export const Admin_Sessions__Sign_Out = gql`
     mutation Admin_sessions__sign_out {
   admin_sessions__sign_out
+}
+    `;
+export const Admin__Core_General_Settings__Edit = gql`
+    mutation Admin__core_general_settings__edit($siteName: String!) {
+  admin__core_general_settings__edit(site_name: $siteName) {
+    site_name
+  }
 }
     `;
 export const Admin__Core_Themes__Create = gql`
