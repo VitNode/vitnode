@@ -15,7 +15,7 @@ export interface ConfigType {
   };
   settings: {
     general: {
-      side_name: string;
+      site_name: string;
     };
   };
 }

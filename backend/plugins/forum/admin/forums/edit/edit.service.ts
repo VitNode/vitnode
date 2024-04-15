@@ -67,7 +67,7 @@ export class EditForumForumsService {
     );
 
     // Delete remaining translations
-    Promise.all(
+    await Promise.all(
       names.map(async item => {
         const exist = update.find(name => name.id === item.id);
         if (exist) return;
@@ -118,7 +118,7 @@ export class EditForumForumsService {
     );
 
     // Delete remaining translations
-    Promise.all(
+    await Promise.all(
       descriptions.map(async item => {
         const exist = update.find(name => name.id === item.id);
         if (exist) return;

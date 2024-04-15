@@ -17,6 +17,7 @@ interface Args {
     | "timezone"
     | "allow_in_input"
   >[];
+  themeId: number;
   themes: Pick<ShowCoreThemes, "id" | "name">[];
 }
 
@@ -36,10 +37,11 @@ export const GlobalsContext = createContext<Args>({
     },
     settings: {
       general: {
-        side_name: ""
+        site_name: ""
       }
     }
-  }
+  },
+  themeId: 1
 });
 
 export const useGlobals = () => useContext(GlobalsContext);

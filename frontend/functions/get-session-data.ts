@@ -19,7 +19,7 @@ export const getSessionData = async () => {
 
   return {
     data,
-    theme_id: data.core_sessions__authorization.theme_id ?? 1,
+    theme_id: data.core_settings__show.theme_id ?? 1,
     default_plugin: data.core_sessions__authorization.plugin_default
   };
 };

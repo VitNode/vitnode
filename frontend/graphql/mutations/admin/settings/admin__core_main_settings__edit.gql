@@ -1,0 +1,13 @@
+mutation Admin__core_main_settings__edit(
+  $siteName: String!
+  $siteDescription: [TextLanguageInput!]!
+  $siteCopyright: [TextLanguageInput!]!
+) {
+  admin__core_main_settings__edit(
+    site_name: $siteName
+    site_description: $siteDescription
+    site_copyright: $siteCopyright
+  ) {
+    site_name
+  }
+}

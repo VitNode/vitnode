@@ -45,14 +45,18 @@ export class CreateDatabaseAdminInstallService {
         default: true,
         protected: true,
         timezone: "America/New_York",
-        locale: "enUS"
+        locale: "enUS",
+        site_description: "Welcome to VitNode!",
+        site_copyright: `Copyright © VitNode ${new Date().getFullYear()}`
       },
       {
         code: "pl",
         name: "Polski (Polish)",
         timezone: "Europe/Warsaw",
         time_24: true,
-        locale: "pl"
+        locale: "pl",
+        site_description: "Witaj w VitNode!",
+        site_copyright: `Prawa autorskie © VitNode ${new Date().getFullYear()}`
       }
     ]);
 

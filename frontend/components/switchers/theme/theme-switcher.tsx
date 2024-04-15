@@ -17,8 +17,8 @@ import { mutationApi } from "./mutation-api";
 
 export const ThemeSwitcher = () => {
   const t = useTranslations("core");
-  const { themes } = useGlobals();
-  const { rebuild_required, theme_id } = useSession();
+  const { themeId, themes } = useGlobals();
+  const { rebuild_required } = useSession();
 
   if (themes.length <= 1 || rebuild_required.themes) return null;
 
@@ -35,7 +35,7 @@ export const ThemeSwitcher = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuRadioGroup
-          value={theme_id?.toString() ?? "1"}
+          value={themeId?.toString() ?? "1"}
           onValueChange={async id => {
             await mutationApi({ id: parseInt(id) });
             // window.location.reload();

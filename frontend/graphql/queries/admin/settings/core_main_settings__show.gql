@@ -1,0 +1,13 @@
+query Core_main_settings__show {
+  core_settings__show {
+    site_name
+    site_copyright {
+      language_code
+      value
+    }
+    site_description {
+      language_code
+      value
+    }
+  }
+}

@@ -42,7 +42,7 @@ const TextLanguageInput = forwardRef<HTMLInputElement, Props>(
           onChange={e => {
             const value = e.target.value;
 
-            if (value) {
+            if (value.length > 0) {
               onChange([
                 ...valueAsArray.filter(
                   item => item.language_code !== selectedLanguage

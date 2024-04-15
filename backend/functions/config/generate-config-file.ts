@@ -15,7 +15,7 @@ const DATA: ConfigType = {
   },
   settings: {
     general: {
-      side_name: "VitNode Community"
+      site_name: "VitNode Community"
     }
   }
 };

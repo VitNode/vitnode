@@ -17,6 +17,12 @@
           "title": "Ustawienia główne",
           "name": {
             "label": "Nazwa strony"
+          },
+          "description": {
+            "label": "Opis strony"
+          },
+          "copyright": {
+            "label": "Prawa autorskie strony"
           }
         },
         "security": {

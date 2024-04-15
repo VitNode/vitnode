@@ -1,24 +1,30 @@
 "use server";
 
-import * as fs from "fs";
+import { revalidatePath } from "next/cache";
 
+import { fetcher } from "@/graphql/fetcher";
 import {
-  configPath,
-  getConfigFile,
-  type ConfigType
-} from "@/config/get-config-file";
+  Admin__Core_Main_Settings__Edit,
+  type Admin__Core_Main_Settings__EditMutation,
+  type Admin__Core_Main_Settings__EditMutationVariables
+} from "@/graphql/hooks";
 
 export const mutationApi = async (
-  variables: ConfigType["settings"]["general"]
+  variables: Admin__Core_Main_Settings__EditMutationVariables
 ) => {
-  const config = await getConfigFile();
-  const newData: ConfigType = {
-    ...config,
-    settings: {
-      ...config.settings,
-      general: variables
-    }
-  };
+  try {
+    const { data } = await fetcher<
+      Admin__Core_Main_Settings__EditMutation,
+      Admin__Core_Main_Settings__EditMutationVariables
+    >({
+      query: Admin__Core_Main_Settings__Edit,
+      variables
+    });
 
-  fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), "utf8");
+    revalidatePath("/", "layout");
+
+    return { data };
+  } catch (error) {
+    return { error };
+  }
 };

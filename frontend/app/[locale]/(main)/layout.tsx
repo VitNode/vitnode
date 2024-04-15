@@ -5,6 +5,7 @@ import { SessionProvider } from "./session-provider";
 import { InternalErrorView } from "@/admin/core/global/internal-error/internal-error-view";
 import { redirect } from "@/i18n";
 import { getSessionData } from "@/functions/get-session-data";
+import type { TextLanguage } from "@/graphql/hooks";
 
 interface Props {
   children: ReactNode;
@@ -19,7 +20,12 @@ export default async function Layout({ children }: Props) {
     }
 
     const Layout: LazyExoticComponent<
-      ({ children }: { children: ReactNode }) => JSX.Element
+      ({
+        children
+      }: {
+        children: ReactNode;
+        copyright?: TextLanguage[];
+      }) => JSX.Element
     > = lazy(() =>
       import(`@/themes/${theme_id}/core/layout/layout`).catch(
         () => import("@/themes/1/core/layout/layout")
@@ -28,7 +34,9 @@ export default async function Layout({ children }: Props) {
 
     return (
       <SessionProvider data={data}>
-        <Layout>{children}</Layout>
+        <Layout copyright={data.core_settings__show.site_copyright}>
+          {children}
+        </Layout>
       </SessionProvider>
     );
   } catch (error) {

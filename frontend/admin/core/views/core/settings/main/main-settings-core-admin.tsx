@@ -13,11 +13,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useSettingsCoreAdmin } from "./hooks/use-settings-core-admin";
-import type { ConfigType } from "@/config/get-config-file";
+import type { Core_Main_Settings__ShowQuery } from "@/graphql/hooks";
+import { TextLanguageInput } from "@/components/text-language-input";
 
-export const MainSettingsCoreAdmin = (
-  props: ConfigType["settings"]["general"]
-) => {
+export const MainSettingsCoreAdmin = (props: Core_Main_Settings__ShowQuery) => {
   const t = useTranslations("admin.core.settings.main");
   const tCore = useTranslations("core");
   const { form, onSubmit } = useSettingsCoreAdmin(props);
@@ -42,7 +41,39 @@ export const MainSettingsCoreAdmin = (
           )}
         />
 
-        <Button type="submit" loading={form.formState.isSubmitting}>
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("description.label")}</FormLabel>
+              <FormControl>
+                <TextLanguageInput {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="copyright"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("copyright.label")}</FormLabel>
+              <FormControl>
+                <TextLanguageInput {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <Button
+          type="submit"
+          disabled={!form.formState.isValid}
+          loading={form.formState.isSubmitting}
+        >
           {tCore("save")}
         </Button>
       </form>

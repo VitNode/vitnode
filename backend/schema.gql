@@ -12,7 +12,6 @@ type AuthorizationAdminSessionsObj {
 type AuthorizationCoreSessionsObj {
   plugin_default: String!
   rebuild_required: RebuildRequiredObj!
-  theme_id: Int
   user: AuthorizationCurrentUserObj
 }
 
@@ -68,6 +67,12 @@ type CreateForumForumsObj {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+type EditAdminSettingsObj {
+  site_copyright: [TextLanguage!]!
+  site_description: [TextLanguage!]!
+  site_name: String!
+}
 
 type FilesAdminPluginsObj {
   admin_pages: Int!
@@ -166,6 +171,7 @@ type Mutation {
   admin__core_languages__download(all: Boolean!, code: String!, plugins: [String!]!): String!
   admin__core_languages__edit(allow_in_input: Boolean!, default: Boolean!, enabled: Boolean!, id: Int!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_languages__update(code: String!, file: Upload!): String!
+  admin__core_main_settings__edit(site_copyright: [TextLanguageInput!]!, site_description: [TextLanguageInput!]!, site_name: String!): EditAdminSettingsObj!
   admin__core_nav__change_position(id: Int!, index_to_move: Int!, parent_id: Int!): String!
   admin__core_nav__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, name: [TextLanguageInput!]!): ShowCoreNav!
   admin__core_nav__delete(id: Int!): String!
@@ -286,6 +292,7 @@ type Query {
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
   core_plugins__show: [ShowCorePluginsObj!]!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
+  core_settings__show: ShowSettingsObj!
   core_themes__show(cursor: Int, first: Int, last: Int): ShowCoreThemesObj!
   forum_forums__show(
     cursor: Int
@@ -671,6 +678,13 @@ type ShowPostsForumsObj {
 enum ShowPostsForumsSortingEnum {
   newest
   oldest
+}
+
+type ShowSettingsObj {
+  site_copyright: [TextLanguage!]!
+  site_description: [TextLanguage!]!
+  site_name: String!
+  theme_id: Float
 }
 
 type ShowTopicsForums {

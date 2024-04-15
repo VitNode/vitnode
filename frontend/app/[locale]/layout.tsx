@@ -2,10 +2,27 @@ import { type ReactNode } from "react";
 import { NextIntlClientProvider, type AbstractIntlMessages } from "next-intl";
 import { Inter } from "next/font/google";
 
-import { ThemeProvider } from "./theme-provider";
+import { Providers } from "./providers";
 import { InternalErrorView } from "@/admin/core/global/internal-error/internal-error-view";
 import "./global.scss";
-import { getSessionData } from "@/functions/get-session-data";
+import { fetcher } from "@/graphql/fetcher";
+import {
+  Core_Middleware,
+  type Core_MiddlewareQuery,
+  type Core_MiddlewareQueryVariables
+} from "@/graphql/hooks";
+import { getConfigFile } from "@/config/get-config-file";
+
+const getData = async () => {
+  const { data } = await fetcher<
+    Core_MiddlewareQuery,
+    Core_MiddlewareQueryVariables
+  >({
+    query: Core_Middleware
+  });
+
+  return data;
+};
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,7 +42,8 @@ export default async function LocaleLayout({
   const defaultPlugins = [{ code: "core" }, { code: "admin" }];
 
   try {
-    const { data } = await getSessionData();
+    const [data, config] = await Promise.all([getData(), getConfigFile()]);
+    // const { data } = await getSessionData();
 
     const messagesFormApps = await Promise.all(
       (data
@@ -51,14 +69,12 @@ export default async function LocaleLayout({
 
     return (
       <html lang={locale} className={inter.variable}>
-        <body
-          className={`theme_${data.core_sessions__authorization.theme_id ?? 1}`}
-        >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <body className={`theme_${data.core_settings__show.theme_id ?? 1}`}>
+          <Providers data={data} config={config}>
             <NextIntlClientProvider messages={messages}>
               {children}
             </NextIntlClientProvider>
-          </ThemeProvider>
+          </Providers>
         </body>
       </html>
     );
@@ -81,15 +97,16 @@ export default async function LocaleLayout({
         {}
       )
     };
+    const config = await getConfigFile();
 
     return (
       <html lang={locale} className={inter.variable}>
         <body>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Providers config={config}>
             <NextIntlClientProvider messages={messages}>
-              <InternalErrorView />
+              <InternalErrorView showPoweredBy />
             </NextIntlClientProvider>
-          </ThemeProvider>
+          </Providers>
         </body>
       </html>
     );
