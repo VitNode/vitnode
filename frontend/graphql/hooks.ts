@@ -1905,6 +1905,13 @@ export type Forum_Forums__ShowQueryVariables = Exact<{
 
 export type Forum_Forums__ShowQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithChildren', id: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, children: Array<{ __typename?: 'ChildrenShowForumForums', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, children: Array<{ __typename?: 'LastChildShowForumForums', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, _count: { __typename?: 'ShowForumForumsCounts', total_posts: number, total_topics: number, topics: number, posts: number }, last_posts: { __typename?: 'LastPostsShowForumForumsObj', edges: Array<{ __typename?: 'LastPostsShowForumForums', id: number, created: Date, user: { __typename?: 'User', avatar_color: string, id: number, name: string, name_seo: string, avatar?: { __typename?: 'AvatarUser', dir_folder: string, id: number, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }, topic: { __typename?: 'TopicLastPostsShowForumForums', id: number, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } }> }> } };
 
+export type Forum_Forums__Show__SitemapQueryVariables = Exact<{
+  lastPostsArgs?: InputMaybe<LastPostsShowForumForumsArgs>;
+}>;
+
+
+export type Forum_Forums__Show__SitemapQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithChildren', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, last_posts: { __typename?: 'LastPostsShowForumForumsObj', edges: Array<{ __typename?: 'LastPostsShowForumForums', created: Date }> } }> } };
+
 export type Forum_Forums__Show_ItemQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -3262,6 +3269,24 @@ export const Forum_Forums__Show = gql`
             }
             created
           }
+        }
+      }
+    }
+  }
+}
+    `;
+export const Forum_Forums__Show__Sitemap = gql`
+    query Forum_forums__show__sitemap($lastPostsArgs: LastPostsShowForumForumsArgs) {
+  forum_forums__show(last_posts_args: $lastPostsArgs) {
+    edges {
+      id
+      name {
+        language_code
+        value
+      }
+      last_posts {
+        edges {
+          created
         }
       }
     }

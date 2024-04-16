@@ -1,0 +1,18 @@
+query Forum_forums__show__sitemap(
+  $lastPostsArgs: LastPostsShowForumForumsArgs
+) {
+  forum_forums__show(last_posts_args: $lastPostsArgs) {
+    edges {
+      id
+      name {
+        language_code
+        value
+      }
+      last_posts {
+        edges {
+          created
+        }
+      }
+    }
+  }
+}

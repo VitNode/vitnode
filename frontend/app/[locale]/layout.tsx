@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 
 import { Providers } from "./providers";
 import { InternalErrorView } from "@/admin/core/global/internal-error/internal-error-view";
-import "./global.scss";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Middleware,
@@ -12,6 +11,7 @@ import {
   type Core_MiddlewareQueryVariables
 } from "@/graphql/hooks";
 import { getConfigFile } from "@/config/get-config-file";
+import "./global.scss";
 
 const getData = async () => {
   const { data } = await fetcher<

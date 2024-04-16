@@ -27,26 +27,29 @@ const getConvertTextLang = ({
   return text[0].value;
 };
 
+export const getConvertNameToLink = ({
+  id,
+  locale,
+  name
+}: {
+  id: number;
+  locale: string;
+  name: TextLanguage[];
+}) => {
+  const text = removeSpecialCharacters(
+    getConvertTextLang({ locale, text: name })
+  ).toLowerCase();
+
+  return `${text}-${id}`;
+};
+
 export const useTextLang = () => {
   const locale = useLocale();
-
-  const convertNameToLink = ({
-    id,
-    name
-  }: {
-    id: number;
-    name: TextLanguage[];
-  }) => {
-    const text = removeSpecialCharacters(
-      getConvertTextLang({ locale, text: name })
-    ).toLowerCase();
-
-    return `${text}-${id}`;
-  };
 
   return {
     convertText: (text?: TextLanguage[]) =>
       getConvertTextLang({ locale, text }),
-    convertNameToLink
+    convertNameToLink: ({ id, name }: { id: number; name: TextLanguage[] }) =>
+      getConvertNameToLink({ id, name, locale })
   };
 };

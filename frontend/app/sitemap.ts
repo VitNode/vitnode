@@ -2,20 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { CONFIG } from "@/config";
 import { getSessionData } from "@/functions/get-session-data";
-
-const generateAlternateLanguages = ({
-  languages,
-  url
-}: {
-  languages: { code: string }[];
-  url: string;
-}): { [lang: string]: string } => {
-  return languages.reduce((acc: { [lang: string]: string }, { code }) => {
-    acc[code] = `${url}/${code}`;
-
-    return acc;
-  }, {});
-};
+import { generateAlternateLanguages } from "@/functions/sitemap";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const {
@@ -33,7 +20,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       alternates: {
         languages: generateAlternateLanguages({
           languages,
-          url: `${CONFIG.frontend_url}/${plugin.code}`
+          frontendUrl: CONFIG.frontend_url,
+          slug: () => `/${plugin.code}`
         })
       }
     };
@@ -46,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       alternates: {
         languages: generateAlternateLanguages({
           languages,
-          url: CONFIG.frontend_url
+          frontendUrl: CONFIG.frontend_url
         })
       }
     },
