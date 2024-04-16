@@ -28,7 +28,7 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME:-vitnode}
       - LOGIN_TOKEN_SECRET=${LOGIN_TOKEN_SECRET}
-      - FRONTEND_URL=${FRONTEND_URL}
+      - NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL}
     restart: on-failure
     ports:
       - "8080:8080"

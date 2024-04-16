@@ -27,6 +27,10 @@
         },
         "security": {
           "title": "Bezpieczeństwo"
+        },
+        "sitemap": {
+          "title": "Mapa strony (sitemap)",
+          "desc": "Sitemap to plik, w którym podajesz informacje o stronach, filmach i innych plikach na swojej stronie oraz relacjach między nimi. Wyszukiwarki, takie jak Google, czytają ten plik, aby bardziej inteligentnie przeszukiwać Twoją stronę."
         }
       },
       "plugins": {

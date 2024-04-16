@@ -68,6 +68,7 @@ query Core_sessions__authorization {
   }
   core_plugins__show {
     code
+    allow_default
   }
   core_settings__show {
     site_copyright {

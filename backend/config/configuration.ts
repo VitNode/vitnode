@@ -4,7 +4,9 @@ export const configuration = () => {
     port: parseInt(process.env.PORT, 10) || 8080,
     password_salt: 10,
     cookies: {
-      domain: process.env.FRONTEND_URL ? process.env.FRONTEND_URL : "localhost",
+      domain: process.env.NEXT_PUBLIC_FRONTEND_URL
+        ? process.env.NEXT_PUBLIC_FRONTEND_URL
+        : "localhost",
       login_token: {
         expiresIn: 7, // 7 days
         expiresInRemember: 90, // 90 days

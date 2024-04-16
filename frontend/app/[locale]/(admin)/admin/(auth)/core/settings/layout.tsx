@@ -20,6 +20,9 @@ export default async function Layout({ children }: Props) {
         <TabsTrigger id="security" href="/admin/core/settings/security">
           {t("security.title")}
         </TabsTrigger>
+        <TabsTrigger id="sitemap" href="/admin/core/settings/sitemap">
+          {t("sitemap.title")}
+        </TabsTrigger>
       </Tabs>
 
       {children}
