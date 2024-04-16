@@ -18,6 +18,9 @@
           "name": {
             "label": "Name Site"
           },
+          "short_name": {
+            "label": "Short Name Site"
+          },
           "description": {
             "label": "Description Site"
           },

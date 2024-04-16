@@ -19,7 +19,8 @@ const DATA: ConfigType = {
   },
   settings: {
     general: {
-      site_name: "VitNode Community"
+      site_name: "VitNode Community",
+      site_short_name: "VitNode"
     }
   }
 };

@@ -115,7 +115,8 @@ export class EditAdminMainSettingsService {
   async edit({
     site_copyright,
     site_description,
-    site_name
+    site_name,
+    site_short_name
   }: EditAdminMainSettingsArgs): Promise<EditAdminSettingsObj> {
     const config = await getConfigFile();
     const newData: ConfigType = {
@@ -124,7 +125,8 @@ export class EditAdminMainSettingsService {
         ...config.settings,
         general: {
           ...config.settings.general,
-          site_name
+          site_name,
+          site_short_name
         }
       }
     };

@@ -18,6 +18,9 @@
           "name": {
             "label": "Nazwa strony"
           },
+          "short_name": {
+            "label": "Krótka nazwa strony"
+          },
           "description": {
             "label": "Opis strony"
           },

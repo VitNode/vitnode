@@ -43,6 +43,20 @@ export const MainSettingsCoreAdmin = (props: Core_Main_Settings__ShowQuery) => {
 
         <FormField
           control={form.control}
+          name="short_name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("short_name.label")}</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
           name="description"
           render={({ field }) => (
             <FormItem>

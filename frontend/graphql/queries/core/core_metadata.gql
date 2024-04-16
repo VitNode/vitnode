@@ -1,7 +1,5 @@
-query Core_main_settings__show {
+query Core_metadata {
   core_settings__show {
-    site_name
-    site_short_name
     site_copyright {
       language_code
       value
@@ -10,5 +8,7 @@ query Core_main_settings__show {
       language_code
       value
     }
+    site_name
+    site_short_name
   }
 }

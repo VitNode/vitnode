@@ -329,6 +329,7 @@
         "settings": "Settings",
         "plugins": "Plugins",
         "styles": "Styles",
+        "metadata": "Metadata",
         "langs": "Languages"
       }
     }

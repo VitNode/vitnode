@@ -25,22 +25,7 @@ export const GlobalsContext = createContext<Args>({
   languages: [],
   defaultLanguage: "",
   themes: [],
-  config: {
-    rebuild_required: {
-      langs: false,
-      plugins: false,
-      themes: false
-    },
-    editor: {
-      sticky: false,
-      allow_head_h1: false
-    },
-    settings: {
-      general: {
-        site_name: ""
-      }
-    }
-  },
+  config: {} as ConfigType,
   themeId: 1
 });
 

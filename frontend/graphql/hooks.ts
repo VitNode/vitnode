@@ -306,6 +306,7 @@ export type MutationAdmin__Core_Main_Settings__EditArgs = {
   site_copyright: Array<TextLanguageInput>;
   site_description: Array<TextLanguageInput>;
   site_name: Scalars['String']['input'];
+  site_short_name: Scalars['String']['input'];
 };
 
 
@@ -1201,6 +1202,7 @@ export type ShowSettingsObj = {
   site_copyright: Array<TextLanguage>;
   site_description: Array<TextLanguage>;
   site_name: Scalars['String']['output'];
+  site_short_name: Scalars['String']['output'];
   theme_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -1536,6 +1538,7 @@ export type Admin_Sessions__Sign_OutMutation = { __typename?: 'Mutation', admin_
 
 export type Admin__Core_Main_Settings__EditMutationVariables = Exact<{
   siteName: Scalars['String']['input'];
+  siteShortName: Scalars['String']['input'];
   siteDescription: Array<TextLanguageInput> | TextLanguageInput;
   siteCopyright: Array<TextLanguageInput> | TextLanguageInput;
 }>;
@@ -1835,7 +1838,7 @@ export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin_
 export type Core_Main_Settings__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_Main_Settings__ShowQuery = { __typename?: 'Query', core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+export type Core_Main_Settings__ShowQuery = { __typename?: 'Query', core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_short_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
 export type Admin_Core_Themes__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -1851,6 +1854,11 @@ export type Admin_Blog_Categories__ShowQueryVariables = Exact<{ [key: string]: n
 
 
 export type Admin_Blog_Categories__ShowQuery = { __typename?: 'Query', blog_categories__show: { __typename?: 'ShowBlogCategoriesObj', edges: Array<{ __typename?: 'ShowBlogCategories', color: string, id: number, position: number, description?: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> | null, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
+
+export type Core_MetadataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Core_MetadataQuery = { __typename?: 'Query', core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_short_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2228,9 +2236,10 @@ export const Admin_Sessions__Sign_Out = gql`
 }
     `;
 export const Admin__Core_Main_Settings__Edit = gql`
-    mutation Admin__core_main_settings__edit($siteName: String!, $siteDescription: [TextLanguageInput!]!, $siteCopyright: [TextLanguageInput!]!) {
+    mutation Admin__core_main_settings__edit($siteName: String!, $siteShortName: String!, $siteDescription: [TextLanguageInput!]!, $siteCopyright: [TextLanguageInput!]!) {
   admin__core_main_settings__edit(
     site_name: $siteName
+    site_short_name: $siteShortName
     site_description: $siteDescription
     site_copyright: $siteCopyright
   ) {
@@ -2870,6 +2879,7 @@ export const Core_Main_Settings__Show = gql`
     query Core_main_settings__show {
   core_settings__show {
     site_name
+    site_short_name
     site_copyright {
       language_code
       value
@@ -2928,6 +2938,22 @@ export const Admin_Blog_Categories__Show = gql`
       }
       position
     }
+  }
+}
+    `;
+export const Core_Metadata = gql`
+    query Core_metadata {
+  core_settings__show {
+    site_copyright {
+      language_code
+      value
+    }
+    site_description {
+      language_code
+      value
+    }
+    site_name
+    site_short_name
   }
 }
     `;

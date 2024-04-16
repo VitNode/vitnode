@@ -15,6 +15,7 @@ export const useSettingsCoreAdmin = ({
 
   const formSchema = z.object({
     name: zodInput.string.min(1),
+    short_name: zodInput.string.min(1),
     description: zodInput.languageInput.min(1),
     copyright: zodInput.languageInput.min(1)
   });
@@ -23,6 +24,7 @@ export const useSettingsCoreAdmin = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: data.site_name,
+      short_name: data.site_short_name,
       description: data.site_description,
       copyright: data.site_copyright
     }
@@ -31,6 +33,7 @@ export const useSettingsCoreAdmin = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const mutation = await mutationApi({
       siteName: values.name,
+      siteShortName: values.short_name,
       siteDescription: values.description,
       siteCopyright: values.copyright
     });

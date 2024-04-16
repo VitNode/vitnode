@@ -42,7 +42,7 @@ export class ShowSettingsService {
       });
 
     return {
-      site_name: config.settings.general.site_name,
+      ...config.settings.general,
       site_description: languages.map(item => ({
         language_code: item.code,
         value: item.site_description
