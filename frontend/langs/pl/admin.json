@@ -36,6 +36,32 @@
           "desc": "Sitemap to plik, w którym podajesz informacje o stronach, filmach i innych plikach na swojej stronie oraz relacjach między nimi. Wyszukiwarki, takie jak Google, czytają ten plik, aby bardziej inteligentnie przeszukiwać Twoją stronę."
         }
       },
+      "metadata": {
+        "manifest": {
+          "title": "Manifest",
+          "desc": "Manifest aplikacji internetowej zawiera informacje o aplikacji (takie jak nazwa, autor, ikona i opis) w pliku tekstowym JSON. Manifest jest używany do zainstalowania aplikacji internetowej (PWA) na ekranie głównym urządzenia.",
+          "display": {
+            "label": "Wyświetlanie",
+            "desc": "Właściwość display kontroluje sposób wyświetlania aplikacji.",
+            "fullscreen": {
+              "title": "Pełny ekran",
+              "desc": "Bez żadnego interfejsu przeglądarki i żadnego interfejsu urządzenia."
+            },
+            "standalone": {
+              "title": "Samodzielny",
+              "desc": "Bez żadnego interfejsu przeglądarki."
+            },
+            "minimal-ui": {
+              "title": "Minimalny interfejs",
+              "desc": "Z minimalnym interfejsem przeglądarki."
+            },
+            "browser": {
+              "title": "Przeglądarka",
+              "desc": "Z interfejsem przeglądarki."
+            }
+          }
+        }
+      },
       "plugins": {
         "title": "Wtyczki",
         "set_default": "Ustaw jako domyślną",
