@@ -50,6 +50,6 @@ export default async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!api|_next|icons|robots.txt|sitemap.xml|sitemap|manifest.json|manifest.webmanifest).*)"
+    "/((?!api|_next|icons|robots.txt|sitemap.xml|sitemap|manifest.json).*)"
   ]
 };

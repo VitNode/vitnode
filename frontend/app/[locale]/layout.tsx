@@ -1,6 +1,7 @@
 import { type ReactNode } from "react";
 import { NextIntlClientProvider, type AbstractIntlMessages } from "next-intl";
 import { Inter } from "next/font/google";
+import type { Metadata } from "next";
 
 import { Providers } from "./providers";
 import { InternalErrorView } from "@/admin/core/global/internal-error/internal-error-view";
@@ -11,6 +12,7 @@ import {
   type Core_MiddlewareQueryVariables
 } from "@/graphql/hooks";
 import { getConfigFile } from "@/config/get-config-file";
+import { CONFIG } from "@/config";
 import "./global.scss";
 
 const getData = async () => {
@@ -33,6 +35,12 @@ const inter = Inter({
 interface Props {
   children: ReactNode;
   params: { locale: string };
+}
+
+export function generateMetadata({ params: { locale } }: Props): Metadata {
+  return {
+    manifest: `${CONFIG.backend_url}/public/${locale}/manifest.webmanifest`
+  };
 }
 
 export default async function LocaleLayout({

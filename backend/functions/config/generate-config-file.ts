@@ -1,6 +1,9 @@
 /* eslint-disable no-console */
 import * as fs from "fs";
 
+import { generateManifest } from "./manifest";
+import { updateObject } from "./update-object";
+
 import {
   ConfigType,
   configPath,
@@ -25,23 +28,6 @@ const DATA: ConfigType = {
   }
 };
 
-function updateConfig<T>(config: T, defaultData: ConfigType): T {
-  for (const key in defaultData) {
-    if (typeof defaultData[key] === "object" && defaultData[key] !== null) {
-      if (!config[key]) {
-        config[key] = {};
-      }
-      updateConfig(config[key], defaultData[key]);
-    } else {
-      if (!config[key]) {
-        config[key] = defaultData[key];
-      }
-    }
-  }
-
-  return config;
-}
-
 (async () => {
   if (!fs.existsSync(configPath)) {
     fs.writeFile(configPath, JSON.stringify(DATA, null, 2), "utf8", err => {
@@ -54,7 +40,7 @@ function updateConfig<T>(config: T, defaultData: ConfigType): T {
 
     // Update config file
     const config = await getConfigFile();
-    const updatedConfig = updateConfig(config, DATA);
+    const updatedConfig = updateObject(config, DATA);
 
     fs.writeFile(
       configPath,
@@ -64,6 +50,8 @@ function updateConfig<T>(config: T, defaultData: ConfigType): T {
         if (err) throw err;
       }
     );
+
+    await generateManifest(updatedConfig);
 
     console.log("[VitNode] - Config file has been updated");
   }
