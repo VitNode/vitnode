@@ -8,7 +8,6 @@ import { ChangeFilesAdminPluginsService } from "../helpers/files/change/change.s
 import { DatabaseService } from "@/plugins/database/database.service";
 import { CustomError } from "@/utils/errors/CustomError";
 import { core_plugins } from "../../database/schema/plugins";
-import { setRebuildRequired } from "@/functions/config/rebuild-required";
 
 @Injectable()
 export class CreateAdminPluginsService {
@@ -61,8 +60,6 @@ export class CreateAdminPluginsService {
         author_url
       })
       .returning();
-
-    await setRebuildRequired({ set: "plugins" });
 
     return data[0];
   }

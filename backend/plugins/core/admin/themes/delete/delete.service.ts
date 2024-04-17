@@ -11,6 +11,7 @@ import { DatabaseService } from "@/plugins/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_themes } from "../../database/schema/themes";
 import { CustomError } from "@/utils/errors/CustomError";
+import { setRebuildRequired } from "@/functions/config/rebuild-required";
 
 @Injectable()
 export class DeleteAdminThemesService {
@@ -41,6 +42,8 @@ export class DeleteAdminThemesService {
     if (fs.existsSync(path)) {
       rm(join("..", "frontend", "themes", id.toString()), { recursive: true });
     }
+
+    await setRebuildRequired({ set: "themes" });
 
     return "Success!";
   }

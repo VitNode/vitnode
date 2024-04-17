@@ -14,17 +14,18 @@ import {
 import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "@/i18n";
 import { useGlobals } from "@/hooks/core/use-globals";
-import { useSession } from "@/hooks/core/use-session";
 import { CONFIG } from "@/config";
 
 export const LanguageSwitcher = () => {
   const t = useTranslations("core");
-  const { languages } = useGlobals();
+  const {
+    config: { rebuild_required },
+    languages
+  } = useGlobals();
   const locale = useLocale();
   const { replace } = useRouter();
   const pathname = usePathname();
   const enableLocales = languages.filter(lang => lang.enabled);
-  const { rebuild_required } = useSession();
 
   if (
     enableLocales.length <= 1 ||

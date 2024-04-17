@@ -5,12 +5,14 @@ import { useTranslations } from "next-intl";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { buttonVariants } from "@/components/ui/button";
-import { useSessionAdmin } from "../hooks/use-session-admin";
 import { CONFIG } from "@/config";
+import { useGlobals } from "@/hooks/core/use-globals";
 
 export const RebuildRequiredAdmin = () => {
   const t = useTranslations("admin.rebuild_required");
-  const { rebuild_required } = useSessionAdmin();
+  const {
+    config: { rebuild_required }
+  } = useGlobals();
 
   if (
     (!rebuild_required.langs &&

@@ -1,7 +1,6 @@
 import { Field, ObjectType } from "@nestjs/graphql";
 
 import { User } from "@/utils/decorators/user.decorator";
-import { RebuildRequiredObj } from "@/plugins/core/admin/sessions/authorization/dto/authorization.obj";
 
 @ObjectType()
 export class AuthorizationCurrentUserObj extends User {
@@ -21,9 +20,6 @@ export class AuthorizationCurrentUserObj extends User {
 export class AuthorizationCoreSessionsObj {
   @Field(() => AuthorizationCurrentUserObj, { nullable: true })
   user: AuthorizationCurrentUserObj | null;
-
-  @Field(() => RebuildRequiredObj)
-  rebuild_required: RebuildRequiredObj;
 
   @Field(() => String)
   plugin_default: string;

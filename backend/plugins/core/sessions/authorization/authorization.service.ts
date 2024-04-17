@@ -5,7 +5,6 @@ import { AuthorizationCoreSessionsObj } from "./dto/authorization.obj";
 
 import { Ctx } from "@/types/context.type";
 import { DatabaseService } from "@/plugins/database/database.service";
-import { getConfigFile } from "@/config/get-config-file";
 
 @Injectable()
 export class AuthorizationCoreSessionsService {
@@ -48,7 +47,6 @@ export class AuthorizationCoreSessionsService {
     req,
     res
   }: Ctx): Promise<AuthorizationCoreSessionsObj> {
-    const config = await getConfigFile();
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
       where: (table, { eq }) => eq(table.default, true)
     });
@@ -81,13 +79,11 @@ export class AuthorizationCoreSessionsService {
           }),
           avatar_color: user.avatar_color
         },
-        rebuild_required: config.rebuild_required,
         plugin_default: plugin?.code ?? ""
       };
     } catch (error) {
       return {
         user: null,
-        rebuild_required: config.rebuild_required,
         plugin_default: plugin?.code ?? ""
       };
     }

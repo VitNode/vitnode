@@ -17,6 +17,7 @@ import { CustomError } from "@/utils/errors/CustomError";
 import { core_themes } from "../../database/schema/themes";
 import { FileUpload } from "@/utils/graphql-upload/Upload";
 import { NotFoundError } from "@/utils/errors/not-found-error";
+import { setRebuildRequired } from "@/functions/config/rebuild-required";
 
 @Injectable()
 export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService {
@@ -64,7 +65,7 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
     const config: ConfigTheme = JSON.parse(themeFile);
 
     // Check if variables exists
-    if (!config.name || !config.author || !config.author_url) {
+    if (!config.name || !config.author || !config.support_url) {
       throw new CustomError({
         code: "THEME_CONFIG_VARIABLES_NOT_FOUND",
         message: "Theme config variables not found"
@@ -88,6 +89,11 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
   async upload({ file, id }: UploadAdminThemesArgs): Promise<ShowAdminThemes> {
     const tgz = await file;
     const config = await this.getThemeConfig({ tgz });
+    const pathSCSSFile = join(this.tempPath, "core", "layout", "global.scss");
+    const pathSCSSFileContent = await fs.promises.readFile(
+      pathSCSSFile,
+      "utf8"
+    );
 
     // Update existing theme
     if (id) {
@@ -116,6 +122,12 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
         });
       }
 
+      // Update CSS files
+      await fs.promises.writeFile(
+        pathSCSSFile,
+        pathSCSSFileContent.replaceAll(/\.theme_\d+/g, `.theme_${id}`)
+      );
+
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { name, ...rest } = config;
 
@@ -135,6 +147,7 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
 
       await this.deleteTempFolder();
       const themeUpdate = themesUpdate[0];
+      await setRebuildRequired({ set: "themes" });
 
       return themeUpdate;
     }
@@ -154,12 +167,7 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
 
     const theme = themes[0];
 
-    // Update CSS
-    const pathSCSSFile = join(this.tempPath, "core", "layout", "global.scss");
-    const pathSCSSFileContent = await fs.promises.readFile(
-      pathSCSSFile,
-      "utf8"
-    );
+    // Update CSS files
     await fs.promises.writeFile(
       pathSCSSFile,
       pathSCSSFileContent.replaceAll(/\.theme_\d+/g, `.theme_${theme.id}`)
@@ -189,6 +197,7 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
     }
 
     await this.deleteTempFolder();
+    await setRebuildRequired({ set: "themes" });
 
     return theme;
   }

@@ -12,15 +12,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { useGlobals } from "@/hooks/core/use-globals";
-import { useSession } from "@/hooks/core/use-session";
 import { mutationApi } from "./mutation-api";
 
 export const ThemeSwitcher = () => {
   const t = useTranslations("core");
-  const { themeId, themes } = useGlobals();
-  const { rebuild_required } = useSession();
+  const { config, themeId, themes } = useGlobals();
 
-  if (themes.length <= 1 || rebuild_required.themes) return null;
+  if (themes.length <= 1 || config.rebuild_required.themes) return null;
 
   return (
     <DropdownMenu>
