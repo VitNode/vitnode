@@ -63,6 +63,12 @@
           "start_url": {
             "label": "Start URL",
             "desc": "Gdy użytkownik uruchamia aplikację, ta strona zostanie załadowana."
+          },
+          "theme_color": {
+            "label": "Kolor motywu"
+          },
+          "background_color": {
+            "label": "Kolor tła"
           }
         }
       },

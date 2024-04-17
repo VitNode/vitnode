@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import type { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";
 import { Input } from "@/components/ui/input";
 import { CONFIG } from "@/config";
+import { ColorInput } from "@/components/color/color-input";
 
 export const ManifestMetadataCoreView = (
   props: Admin__Core_Manifest_Metadata__ShowQuery
@@ -88,6 +89,34 @@ export const ManifestMetadataCoreView = (
                 </FormControl>
               </div>
               <FormDescription>{t("start_url.desc")}</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="theme_color"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("theme_color.label")}</FormLabel>
+              <FormControl>
+                <ColorInput {...field} disableRemoveColor />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="background_color"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("background_color.label")}</FormLabel>
+              <FormControl>
+                <ColorInput {...field} disableRemoveColor />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}

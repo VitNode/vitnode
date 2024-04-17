@@ -63,6 +63,12 @@
           "start_url": {
             "label": "Start URL",
             "desc": "When user launches the app, this is the page that will be loaded."
+          },
+          "theme_color": {
+            "label": "Theme Color"
+          },
+          "background_color": {
+            "label": "Background Color"
           }
         }
       },

@@ -13,4 +13,10 @@ export class ShowAdminManifestMetadataObj {
 
   @Field(() => String)
   id: string;
+
+  @Field(() => String)
+  theme_color: string;
+
+  @Field(() => String)
+  background_color: string;
 }

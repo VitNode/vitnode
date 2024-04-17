@@ -81,6 +81,8 @@ export const generateManifest = async (config: ConfigType) => {
       lang: language,
       description: "",
       display: "standalone",
+      theme_color: "#2463eb",
+      background_color: "#09090b",
       start_url: `${frontendUrl}/${language}/`,
       icons: [
         {

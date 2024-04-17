@@ -312,8 +312,10 @@ export type MutationAdmin__Core_Main_Settings__EditArgs = {
 
 
 export type MutationAdmin__Core_Manifest_Metadata__EditArgs = {
+  background_color: Scalars['String']['input'];
   display: Scalars['String']['input'];
   start_url: Scalars['String']['input'];
+  theme_color: Scalars['String']['input'];
 };
 
 
@@ -829,9 +831,12 @@ export const ShowAdminGroupsSortingColumnEnum = {
 export type ShowAdminGroupsSortingColumnEnum = typeof ShowAdminGroupsSortingColumnEnum[keyof typeof ShowAdminGroupsSortingColumnEnum];
 export type ShowAdminManifestMetadataObj = {
   __typename?: 'ShowAdminManifestMetadataObj';
+  background_color: Scalars['String']['output'];
   display: Scalars['String']['output'];
+  id: Scalars['String']['output'];
   lang: Scalars['String']['output'];
   start_url: Scalars['String']['output'];
+  theme_color: Scalars['String']['output'];
 };
 
 export type ShowAdminMembers = {
@@ -1425,6 +1430,8 @@ export type Admin__Core_Staff_Moderators__DeleteMutation = { __typename?: 'Mutat
 export type Admin__Core_Manifest_Metadata__EditMutationVariables = Exact<{
   display: Scalars['String']['input'];
   startUrl: Scalars['String']['input'];
+  backgroundColor: Scalars['String']['input'];
+  themeColor: Scalars['String']['input'];
 }>;
 
 
@@ -1823,7 +1830,7 @@ export type Admin__Core_Members__ShowQuery = { __typename?: 'Query', admin__core
 export type Admin__Core_Manifest_Metadata__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Admin__Core_Manifest_Metadata__ShowQuery = { __typename?: 'Query', admin__core_manifest_metadata__show: { __typename?: 'ShowAdminManifestMetadataObj', display: string, start_url: string } };
+export type Admin__Core_Manifest_Metadata__ShowQuery = { __typename?: 'Query', admin__core_manifest_metadata__show: { __typename?: 'ShowAdminManifestMetadataObj', display: string, start_url: string, theme_color: string, background_color: string } };
 
 export type Admin__Core_Nav__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2125,8 +2132,13 @@ export const Admin__Core_Staff_Moderators__Delete = gql`
 }
     `;
 export const Admin__Core_Manifest_Metadata__Edit = gql`
-    mutation Admin__core_manifest_metadata__edit($display: String!, $startUrl: String!) {
-  admin__core_manifest_metadata__edit(display: $display, start_url: $startUrl) {
+    mutation Admin__core_manifest_metadata__edit($display: String!, $startUrl: String!, $backgroundColor: String!, $themeColor: String!) {
+  admin__core_manifest_metadata__edit(
+    display: $display
+    start_url: $startUrl
+    background_color: $backgroundColor
+    theme_color: $themeColor
+  ) {
     display
   }
 }
@@ -2793,6 +2805,8 @@ export const Admin__Core_Manifest_Metadata__Show = gql`
   admin__core_manifest_metadata__show {
     display
     start_url
+    theme_color
+    background_color
   }
 }
     `;

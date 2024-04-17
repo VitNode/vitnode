@@ -7,4 +7,10 @@ export class EditAdminManifestMetadataObj {
 
   @Field(() => String)
   start_url: string;
+
+  @Field(() => String)
+  theme_color: string;
+
+  @Field(() => String)
+  background_color: string;
 }
