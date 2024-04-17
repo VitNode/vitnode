@@ -1,0 +1,5 @@
+query Admin__core_manifest_metadata__show {
+  admin__core_manifest_metadata__show {
+    display
+  }
+}

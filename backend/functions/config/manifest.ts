@@ -6,7 +6,7 @@ import { objectToArray, updateObject } from "./update-object";
 
 import { ConfigType } from "@/config/get-config-file";
 
-interface Manifest {
+interface ManifestType {
   background_color?: string;
   description?: string;
   display?: "fullscreen" | "standalone" | "minimal-ui" | "browser";
@@ -65,11 +65,12 @@ export const generateManifest = async (config: ConfigType) => {
     .map(dirent => dirent.name);
 
   languages.forEach(language => {
-    const defaultManifest: Manifest = {
+    const defaultManifest: ManifestType = {
       name: config.settings.general.site_name,
       short_name: config.settings.general.site_short_name,
       lang: language,
       description: "",
+      display: "standalone",
       icons: [
         {
           src: "/public/icons/favicon.ico",
@@ -83,7 +84,7 @@ export const generateManifest = async (config: ConfigType) => {
 
     if (fs.existsSync(filePath)) {
       const data = fs.readFileSync(filePath, "utf8");
-      const manifest: Manifest = JSON.parse(data);
+      const manifest: ManifestType = JSON.parse(data);
 
       const updatedManifest = objectToArray(
         updateObject(manifest, {

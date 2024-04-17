@@ -614,6 +614,7 @@ export type PermissionsTopicForums = {
 export type Query = {
   __typename?: 'Query';
   admin__core_groups__show: ShowAdminGroupsObj;
+  admin__core_manifest_metadata__show: ShowAdminManifestMetadataObj;
   admin__core_members__show: ShowAdminMembersObj;
   admin__core_members__stats_sign_up: Array<SignUpStatsAdminMembers>;
   admin__core_plugins__files: FilesAdminPluginsObj;
@@ -819,6 +820,11 @@ export const ShowAdminGroupsSortingColumnEnum = {
 } as const;
 
 export type ShowAdminGroupsSortingColumnEnum = typeof ShowAdminGroupsSortingColumnEnum[keyof typeof ShowAdminGroupsSortingColumnEnum];
+export type ShowAdminManifestMetadataObj = {
+  __typename?: 'ShowAdminManifestMetadataObj';
+  display: Scalars['String']['output'];
+};
+
 export type ShowAdminMembers = {
   __typename?: 'ShowAdminMembers';
   avatar?: Maybe<AvatarUser>;
@@ -1797,6 +1803,11 @@ export type Admin__Core_Members__ShowQueryVariables = Exact<{
 
 export type Admin__Core_Members__ShowQuery = { __typename?: 'Query', admin__core_members__show: { __typename?: 'ShowAdminMembersObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminMembers', avatar_color: string, email: string, id: number, name_seo: string, joined: Date, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
 
+export type Admin__Core_Manifest_Metadata__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Admin__Core_Manifest_Metadata__ShowQuery = { __typename?: 'Query', admin__core_manifest_metadata__show: { __typename?: 'ShowAdminManifestMetadataObj', display: string } };
+
 export type Admin__Core_Nav__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2750,6 +2761,13 @@ export const Admin__Core_Members__Show = gql`
         }
       }
     }
+  }
+}
+    `;
+export const Admin__Core_Manifest_Metadata__Show = gql`
+    query Admin__core_manifest_metadata__show {
+  admin__core_manifest_metadata__show {
+    display
   }
 }
     `;

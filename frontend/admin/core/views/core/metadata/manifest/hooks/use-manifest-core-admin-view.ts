@@ -2,7 +2,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-export const useManifestCoreAdminView = () => {
+import type { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";
+
+export const useManifestCoreAdminView = ({
+  admin__core_manifest_metadata__show: data
+}: Admin__Core_Manifest_Metadata__ShowQuery) => {
   const formSchema = z.object({
     display: z.enum(["fullscreen", "standalone", "minimal-ui", "browser"])
   });
@@ -10,7 +14,7 @@ export const useManifestCoreAdminView = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      display: "standalone"
+      display: data.display as z.infer<typeof formSchema>["display"]
     }
   });
 

@@ -13,6 +13,7 @@ import { AdminThemesModule } from "./themes/themes.module";
 import { AdminNavModule } from "./nav/nav.module";
 import { AdminLanguagesModule } from "./languages/languages.module";
 import { AdminSettingsModule } from "./settings/settings.module";
+import { AdminMetadataModule } from "./metadata/metadata.module";
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { AdminSettingsModule } from "./settings/settings.module";
     AdminThemesModule,
     AdminNavModule,
     AdminLanguagesModule,
-    AdminSettingsModule
+    AdminSettingsModule,
+    AdminMetadataModule
   ]
 })
 export class AdminModule {}

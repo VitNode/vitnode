@@ -14,11 +14,14 @@ import {
 import { useManifestCoreAdminView } from "./hooks/use-manifest-core-admin-view";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
+import type { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";
 
-export const ManifestMetadataCoreView = () => {
+export const ManifestMetadataCoreView = (
+  props: Admin__Core_Manifest_Metadata__ShowQuery
+) => {
   const t = useTranslations("admin.core.metadata.manifest");
   const tCore = useTranslations("core");
-  const { form, onSubmit } = useManifestCoreAdminView();
+  const { form, onSubmit } = useManifestCoreAdminView(props);
 
   return (
     <Form {...form}>
