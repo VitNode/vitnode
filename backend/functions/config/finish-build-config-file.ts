@@ -65,11 +65,20 @@ import { db } from "@/plugins/database/client";
           }
 
           // Run migration
-          await migrate(db, {
-            migrationsFolder: migrationPath
-          });
+          try {
+            await migrate(db, {
+              migrationsFolder: migrationPath
+            });
+          } catch (error) {
+            console.error(`[VitNode] - Error running migration for ${plugin}`);
+            console.error(error);
 
-          console.log(`[VitNode] - Running migration for ${plugin}`);
+            throw error;
+          }
+
+          console.log(
+            `[VitNode] - Running migration for ${plugin} - ${migrationPath}`
+          );
         })
     );
   });

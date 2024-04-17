@@ -19,7 +19,8 @@ import { DatabaseModule } from "@/plugins/database/database.module";
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [configuration]
+      load: [configuration],
+      envFilePath: join(process.cwd(), "..", ".env")
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
