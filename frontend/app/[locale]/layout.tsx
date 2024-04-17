@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 
 import { Providers } from "./providers";
-import { InternalErrorView } from "@/admin/core/global/internal-error/internal-error-view";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Middleware,
@@ -13,7 +12,10 @@ import {
 } from "@/graphql/hooks";
 import { getConfigFile } from "@/config/get-config-file";
 import { CONFIG } from "@/config";
+import { cn } from "@/functions/classnames";
+import { CatchLayout } from "./catch";
 import "./global.scss";
+import "@/app/[locale]/(admin)/admin/global.scss";
 
 const getData = async () => {
   const { data } = await fetcher<
@@ -76,7 +78,7 @@ export default async function LocaleLayout({
     };
 
     return (
-      <html lang={locale} className={inter.variable}>
+      <html lang={locale} className={cn(inter.variable, "vitnode")}>
         <body className={`theme_${data.core_settings__show.theme_id ?? 1}`}>
           <Providers data={data} config={config}>
             <NextIntlClientProvider messages={messages}>
@@ -87,36 +89,6 @@ export default async function LocaleLayout({
       </html>
     );
   } catch (error) {
-    const messagesFormApps = await Promise.all(
-      defaultPlugins.map(async plugin => {
-        try {
-          return {
-            ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
-          };
-        } catch (e) {
-          return {};
-        }
-      })
-    );
-
-    const messages: AbstractIntlMessages = {
-      ...messagesFormApps.reduce(
-        (acc, messages) => ({ ...acc, ...messages }),
-        {}
-      )
-    };
-    const config = await getConfigFile();
-
-    return (
-      <html lang={locale} className={inter.variable}>
-        <body>
-          <Providers config={config}>
-            <NextIntlClientProvider messages={messages}>
-              <InternalErrorView showPoweredBy />
-            </NextIntlClientProvider>
-          </Providers>
-        </body>
-      </html>
-    );
+    return <CatchLayout defaultPlugins={defaultPlugins} locale={locale} />;
   }
 }

@@ -11,7 +11,7 @@ import { Ctx } from "@/types/context.type";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { currentDate } from "@/functions/date";
 import { DatabaseService } from "@/plugins/database/database.service";
-import { getConfigFile, getCoreInfo } from "@/config/get-config-file";
+import { getCoreInfo } from "@/config/get-config-file";
 import { AuthorizationCurrentUserObj } from "@/plugins/core/sessions/authorization/dto/authorization.obj";
 
 @Injectable()
@@ -86,13 +86,10 @@ export class AuthorizationAdminSessionsService {
 
   async authorization(ctx: Ctx): Promise<AuthorizationAdminSessionsObj> {
     const user = await this.initialAuthorization(ctx);
-
-    const config = await getConfigFile();
     const coreInfo = await getCoreInfo();
 
     return {
       user,
-      rebuild_required: config.rebuild_required,
       version: coreInfo.version,
       nav: await this.getAdminNav()
     };

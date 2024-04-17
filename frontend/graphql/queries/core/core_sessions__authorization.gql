@@ -22,11 +22,6 @@ query Core_sessions__authorization {
         id
       }
     }
-    rebuild_required {
-      themes
-      langs
-      plugins
-    }
     plugin_default
   }
   core_languages__show {

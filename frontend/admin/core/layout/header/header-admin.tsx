@@ -1,9 +1,9 @@
 import { UserBarAdmin } from "./user-bar/user-bar-admin";
 import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";
-import { LangSwitcherHeaderAdmin } from "./lang-switcher";
 import { CONFIG } from "@/config";
 import { Link } from "@/i18n";
 import { LogoVitNode } from "@/components/logo-vitnode";
+import { LanguageSwitcher } from "@/components/switchers/language-switcher";
 
 export const HeaderAdmin = () => {
   return (
@@ -27,7 +27,7 @@ export const HeaderAdmin = () => {
 
       <div className="flex items-center gap-5 px-5 h-full flex-1">
         <div className="ml-auto flex items-center justify-center gap-2">
-          <LangSwitcherHeaderAdmin />
+          <LanguageSwitcher />
           <DarkLightModeSwitcher />
           <UserBarAdmin />
         </div>

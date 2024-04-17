@@ -4,14 +4,12 @@
 
 type AuthorizationAdminSessionsObj {
   nav: [NavAdminPluginsAuthorization!]!
-  rebuild_required: RebuildRequiredObj!
   user: AuthorizationCurrentUserObj
   version: String!
 }
 
 type AuthorizationCoreSessionsObj {
   plugin_default: String!
-  rebuild_required: RebuildRequiredObj!
   user: AuthorizationCurrentUserObj
 }
 
@@ -310,12 +308,6 @@ type Query {
   ): ShowForumForumsObj!
   forum_posts__show(limit: Int!, page: Int, sortBy: ShowPostsForumsSortingEnum, topic_id: Int!): ShowPostsForumsObj!
   forum_topics__show(cursor: Int, first: Int, forum_id: Int, id: Int, last: Int): ShowTopicsForumsObj!
-}
-
-type RebuildRequiredObj {
-  langs: Boolean!
-  plugins: Boolean!
-  themes: Boolean!
 }
 
 type ShowAdminGroups {
