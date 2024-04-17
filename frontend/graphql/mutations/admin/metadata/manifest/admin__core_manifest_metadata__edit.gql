@@ -1,0 +1,5 @@
+mutation Admin__core_manifest_metadata__edit($display: String!) {
+  admin__core_manifest_metadata__edit(display: $display) {
+    display
+  }
+}

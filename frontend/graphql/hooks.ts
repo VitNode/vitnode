@@ -201,6 +201,7 @@ export type Mutation = {
   admin__core_languages__edit: ShowCoreLanguages;
   admin__core_languages__update: Scalars['String']['output'];
   admin__core_main_settings__edit: EditAdminSettingsObj;
+  admin__core_manifest_metadata__edit: ShowAdminManifestMetadataObj;
   admin__core_nav__change_position: Scalars['String']['output'];
   admin__core_nav__create: ShowCoreNav;
   admin__core_nav__delete: Scalars['String']['output'];
@@ -307,6 +308,11 @@ export type MutationAdmin__Core_Main_Settings__EditArgs = {
   site_description: Array<TextLanguageInput>;
   site_name: Scalars['String']['input'];
   site_short_name: Scalars['String']['input'];
+};
+
+
+export type MutationAdmin__Core_Manifest_Metadata__EditArgs = {
+  display: Scalars['String']['input'];
 };
 
 
@@ -823,6 +829,7 @@ export type ShowAdminGroupsSortingColumnEnum = typeof ShowAdminGroupsSortingColu
 export type ShowAdminManifestMetadataObj = {
   __typename?: 'ShowAdminManifestMetadataObj';
   display: Scalars['String']['output'];
+  lang: Scalars['String']['output'];
 };
 
 export type ShowAdminMembers = {
@@ -1412,6 +1419,13 @@ export type Admin__Core_Staff_Moderators__DeleteMutationVariables = Exact<{
 
 
 export type Admin__Core_Staff_Moderators__DeleteMutation = { __typename?: 'Mutation', admin__core_staff_moderators__delete: string };
+
+export type Admin__Core_Manifest_Metadata__EditMutationVariables = Exact<{
+  display: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Manifest_Metadata__EditMutation = { __typename?: 'Mutation', admin__core_manifest_metadata__edit: { __typename?: 'ShowAdminManifestMetadataObj', display: string } };
 
 export type Admin__Core_Nav__Change_PositionMutationVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -2105,6 +2119,13 @@ export const Admin__Core_Staff_Moderators__Create = gql`
 export const Admin__Core_Staff_Moderators__Delete = gql`
     mutation Admin__core_staff_moderators__delete($id: Int!) {
   admin__core_staff_moderators__delete(id: $id)
+}
+    `;
+export const Admin__Core_Manifest_Metadata__Edit = gql`
+    mutation Admin__core_manifest_metadata__edit($display: String!) {
+  admin__core_manifest_metadata__edit(display: $display) {
+    display
+  }
 }
     `;
 export const Admin__Core_Nav__Change_Position = gql`

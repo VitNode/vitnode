@@ -4,4 +4,7 @@ import { Field, ObjectType } from "@nestjs/graphql";
 export class ShowAdminManifestMetadataObj {
   @Field(() => String)
   display: string;
+
+  @Field(() => String)
+  lang: string;
 }
