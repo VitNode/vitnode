@@ -18,6 +18,9 @@
           "name": {
             "label": "Name Site"
           },
+          "short_name": {
+            "label": "Short Name Site"
+          },
           "description": {
             "label": "Description Site"
           },
@@ -31,6 +34,42 @@
         "sitemap": {
           "title": "Sitemap",
           "desc": "Sitemap is a file where you provide information about the pages, videos, and other files on your site, and the relationships between them. Search engines like Google read this file to more intelligently crawl your site."
+        }
+      },
+      "metadata": {
+        "manifest": {
+          "title": "Manifest",
+          "desc": "The web app manifest provides information about an application (such as name, author, icon, and description) in a JSON text file. The manifest is used to install the web application (PWA) to the home screen of a device.",
+          "display": {
+            "label": "Display",
+            "desc": "The display property controls how the app is displayed.",
+            "fullscreen": {
+              "title": "Fullscreen",
+              "desc": "Without any browser UI and any device UI."
+            },
+            "standalone": {
+              "title": "Standalone",
+              "desc": "Without any browser UI."
+            },
+            "minimal-ui": {
+              "title": "Minimal UI",
+              "desc": "Minimal browser UI."
+            },
+            "browser": {
+              "title": "Browser",
+              "desc": "With browser UI."
+            }
+          },
+          "start_url": {
+            "label": "Start URL",
+            "desc": "When user launches the app, this is the page that will be loaded."
+          },
+          "theme_color": {
+            "label": "Theme Color"
+          },
+          "background_color": {
+            "label": "Background Color"
+          }
         }
       },
       "plugins": {

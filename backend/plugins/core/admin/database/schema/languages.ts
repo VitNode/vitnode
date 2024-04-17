@@ -22,7 +22,6 @@ export const core_languages = pgTable(
     time_24: boolean("time_24").notNull().default(false),
     locale: varchar("locale", { length: 50 }).notNull().default("enUS"),
     allow_in_input: boolean("allow_in_input").default(true),
-    site_description: varchar("site_description", { length: 255 }).default(""),
     site_copyright: varchar("site_copyright", {
       length: 255
     }).default("")

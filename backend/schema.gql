@@ -171,7 +171,8 @@ type Mutation {
   admin__core_languages__download(all: Boolean!, code: String!, plugins: [String!]!): String!
   admin__core_languages__edit(allow_in_input: Boolean!, default: Boolean!, enabled: Boolean!, id: Int!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_languages__update(code: String!, file: Upload!): String!
-  admin__core_main_settings__edit(site_copyright: [TextLanguageInput!]!, site_description: [TextLanguageInput!]!, site_name: String!): EditAdminSettingsObj!
+  admin__core_main_settings__edit(site_copyright: [TextLanguageInput!]!, site_description: [TextLanguageInput!]!, site_name: String!, site_short_name: String!): EditAdminSettingsObj!
+  admin__core_manifest_metadata__edit(background_color: String!, display: String!, start_url: String!, theme_color: String!): ShowAdminManifestMetadataObj!
   admin__core_nav__change_position(id: Int!, index_to_move: Int!, parent_id: Int!): String!
   admin__core_nav__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, name: [TextLanguageInput!]!): ShowCoreNav!
   admin__core_nav__delete(id: Int!): String!
@@ -264,6 +265,7 @@ type PermissionsTopicForums {
 
 type Query {
   admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
+  admin__core_manifest_metadata__show: ShowAdminManifestMetadataObj!
   admin__core_members__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
   admin__core_members__stats_sign_up: [SignUpStatsAdminMembers!]!
   admin__core_plugins__files(code: String!): FilesAdminPluginsObj!
@@ -341,6 +343,15 @@ input ShowAdminGroupsSortByArgs {
 enum ShowAdminGroupsSortingColumnEnum {
   created
   updated
+}
+
+type ShowAdminManifestMetadataObj {
+  background_color: String!
+  display: String!
+  id: String!
+  lang: String!
+  start_url: String!
+  theme_color: String!
 }
 
 type ShowAdminMembers {
@@ -685,6 +696,7 @@ type ShowSettingsObj {
   site_copyright: [TextLanguage!]!
   site_description: [TextLanguage!]!
   site_name: String!
+  site_short_name: String!
   theme_id: Float
 }
 

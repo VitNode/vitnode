@@ -14,6 +14,7 @@ export interface ConfigType {
   settings: {
     general: {
       site_name: string;
+      site_short_name: string;
     };
   };
 }

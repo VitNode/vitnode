@@ -201,6 +201,7 @@ export type Mutation = {
   admin__core_languages__edit: ShowCoreLanguages;
   admin__core_languages__update: Scalars['String']['output'];
   admin__core_main_settings__edit: EditAdminSettingsObj;
+  admin__core_manifest_metadata__edit: ShowAdminManifestMetadataObj;
   admin__core_nav__change_position: Scalars['String']['output'];
   admin__core_nav__create: ShowCoreNav;
   admin__core_nav__delete: Scalars['String']['output'];
@@ -306,6 +307,15 @@ export type MutationAdmin__Core_Main_Settings__EditArgs = {
   site_copyright: Array<TextLanguageInput>;
   site_description: Array<TextLanguageInput>;
   site_name: Scalars['String']['input'];
+  site_short_name: Scalars['String']['input'];
+};
+
+
+export type MutationAdmin__Core_Manifest_Metadata__EditArgs = {
+  background_color: Scalars['String']['input'];
+  display: Scalars['String']['input'];
+  start_url: Scalars['String']['input'];
+  theme_color: Scalars['String']['input'];
 };
 
 
@@ -613,6 +623,7 @@ export type PermissionsTopicForums = {
 export type Query = {
   __typename?: 'Query';
   admin__core_groups__show: ShowAdminGroupsObj;
+  admin__core_manifest_metadata__show: ShowAdminManifestMetadataObj;
   admin__core_members__show: ShowAdminMembersObj;
   admin__core_members__stats_sign_up: Array<SignUpStatsAdminMembers>;
   admin__core_plugins__files: FilesAdminPluginsObj;
@@ -818,6 +829,16 @@ export const ShowAdminGroupsSortingColumnEnum = {
 } as const;
 
 export type ShowAdminGroupsSortingColumnEnum = typeof ShowAdminGroupsSortingColumnEnum[keyof typeof ShowAdminGroupsSortingColumnEnum];
+export type ShowAdminManifestMetadataObj = {
+  __typename?: 'ShowAdminManifestMetadataObj';
+  background_color: Scalars['String']['output'];
+  display: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  lang: Scalars['String']['output'];
+  start_url: Scalars['String']['output'];
+  theme_color: Scalars['String']['output'];
+};
+
 export type ShowAdminMembers = {
   __typename?: 'ShowAdminMembers';
   avatar?: Maybe<AvatarUser>;
@@ -1201,6 +1222,7 @@ export type ShowSettingsObj = {
   site_copyright: Array<TextLanguage>;
   site_description: Array<TextLanguage>;
   site_name: Scalars['String']['output'];
+  site_short_name: Scalars['String']['output'];
   theme_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -1405,6 +1427,16 @@ export type Admin__Core_Staff_Moderators__DeleteMutationVariables = Exact<{
 
 export type Admin__Core_Staff_Moderators__DeleteMutation = { __typename?: 'Mutation', admin__core_staff_moderators__delete: string };
 
+export type Admin__Core_Manifest_Metadata__EditMutationVariables = Exact<{
+  display: Scalars['String']['input'];
+  startUrl: Scalars['String']['input'];
+  backgroundColor: Scalars['String']['input'];
+  themeColor: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Manifest_Metadata__EditMutation = { __typename?: 'Mutation', admin__core_manifest_metadata__edit: { __typename?: 'ShowAdminManifestMetadataObj', display: string } };
+
 export type Admin__Core_Nav__Change_PositionMutationVariables = Exact<{
   id: Scalars['Int']['input'];
   indexToMove: Scalars['Int']['input'];
@@ -1536,6 +1568,7 @@ export type Admin_Sessions__Sign_OutMutation = { __typename?: 'Mutation', admin_
 
 export type Admin__Core_Main_Settings__EditMutationVariables = Exact<{
   siteName: Scalars['String']['input'];
+  siteShortName: Scalars['String']['input'];
   siteDescription: Array<TextLanguageInput> | TextLanguageInput;
   siteCopyright: Array<TextLanguageInput> | TextLanguageInput;
 }>;
@@ -1794,6 +1827,11 @@ export type Admin__Core_Members__ShowQueryVariables = Exact<{
 
 export type Admin__Core_Members__ShowQuery = { __typename?: 'Query', admin__core_members__show: { __typename?: 'ShowAdminMembersObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminMembers', avatar_color: string, email: string, id: number, name_seo: string, joined: Date, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
 
+export type Admin__Core_Manifest_Metadata__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Admin__Core_Manifest_Metadata__ShowQuery = { __typename?: 'Query', admin__core_manifest_metadata__show: { __typename?: 'ShowAdminManifestMetadataObj', display: string, start_url: string, theme_color: string, background_color: string } };
+
 export type Admin__Core_Nav__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1835,7 +1873,7 @@ export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin_
 export type Core_Main_Settings__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_Main_Settings__ShowQuery = { __typename?: 'Query', core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+export type Core_Main_Settings__ShowQuery = { __typename?: 'Query', core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_short_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
 export type Admin_Core_Themes__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -1851,6 +1889,11 @@ export type Admin_Blog_Categories__ShowQueryVariables = Exact<{ [key: string]: n
 
 
 export type Admin_Blog_Categories__ShowQuery = { __typename?: 'Query', blog_categories__show: { __typename?: 'ShowBlogCategoriesObj', edges: Array<{ __typename?: 'ShowBlogCategories', color: string, id: number, position: number, description?: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> | null, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
+
+export type Core_MetadataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Core_MetadataQuery = { __typename?: 'Query', core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_short_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2088,6 +2131,18 @@ export const Admin__Core_Staff_Moderators__Delete = gql`
   admin__core_staff_moderators__delete(id: $id)
 }
     `;
+export const Admin__Core_Manifest_Metadata__Edit = gql`
+    mutation Admin__core_manifest_metadata__edit($display: String!, $startUrl: String!, $backgroundColor: String!, $themeColor: String!) {
+  admin__core_manifest_metadata__edit(
+    display: $display
+    start_url: $startUrl
+    background_color: $backgroundColor
+    theme_color: $themeColor
+  ) {
+    display
+  }
+}
+    `;
 export const Admin__Core_Nav__Change_Position = gql`
     mutation Admin__core_nav__change_position($id: Int!, $indexToMove: Int!, $parentId: Int!) {
   admin__core_nav__change_position(
@@ -2228,9 +2283,10 @@ export const Admin_Sessions__Sign_Out = gql`
 }
     `;
 export const Admin__Core_Main_Settings__Edit = gql`
-    mutation Admin__core_main_settings__edit($siteName: String!, $siteDescription: [TextLanguageInput!]!, $siteCopyright: [TextLanguageInput!]!) {
+    mutation Admin__core_main_settings__edit($siteName: String!, $siteShortName: String!, $siteDescription: [TextLanguageInput!]!, $siteCopyright: [TextLanguageInput!]!) {
   admin__core_main_settings__edit(
     site_name: $siteName
+    site_short_name: $siteShortName
     site_description: $siteDescription
     site_copyright: $siteCopyright
   ) {
@@ -2744,6 +2800,16 @@ export const Admin__Core_Members__Show = gql`
   }
 }
     `;
+export const Admin__Core_Manifest_Metadata__Show = gql`
+    query Admin__core_manifest_metadata__show {
+  admin__core_manifest_metadata__show {
+    display
+    start_url
+    theme_color
+    background_color
+  }
+}
+    `;
 export const Admin__Core_Nav__Show = gql`
     query Admin__Core_nav__show {
   core_nav__show {
@@ -2870,6 +2936,7 @@ export const Core_Main_Settings__Show = gql`
     query Core_main_settings__show {
   core_settings__show {
     site_name
+    site_short_name
     site_copyright {
       language_code
       value
@@ -2928,6 +2995,22 @@ export const Admin_Blog_Categories__Show = gql`
       }
       position
     }
+  }
+}
+    `;
+export const Core_Metadata = gql`
+    query Core_metadata {
+  core_settings__show {
+    site_copyright {
+      language_code
+      value
+    }
+    site_description {
+      language_code
+      value
+    }
+    site_name
+    site_short_name
   }
 }
     `;

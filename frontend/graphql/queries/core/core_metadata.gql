@@ -1,0 +1,14 @@
+query Core_metadata {
+  core_settings__show {
+    site_copyright {
+      language_code
+      value
+    }
+    site_description {
+      language_code
+      value
+    }
+    site_name
+    site_short_name
+  }
+}

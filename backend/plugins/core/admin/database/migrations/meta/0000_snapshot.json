@@ -1,5 +1,5 @@
 {
-  "id": "f25dfa82-6a36-484e-a6cc-4a4d0a369233",
+  "id": "b1ebd1c8-4188-4e65-84f0-d04e96574bfd",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -580,13 +580,6 @@
           "primaryKey": false,
           "notNull": false,
           "default": true
-        },
-        "site_description": {
-          "name": "site_description",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false,
-          "default": "''"
         },
         "site_copyright": {
           "name": "site_copyright",

@@ -1,10 +1,12 @@
 mutation Admin__core_main_settings__edit(
   $siteName: String!
+  $siteShortName: String!
   $siteDescription: [TextLanguageInput!]!
   $siteCopyright: [TextLanguageInput!]!
 ) {
   admin__core_main_settings__edit(
     site_name: $siteName
+    site_short_name: $siteShortName
     site_description: $siteDescription
     site_copyright: $siteCopyright
   ) {
