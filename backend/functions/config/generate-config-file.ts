@@ -29,27 +29,32 @@ const DATA: ConfigType = {
 };
 
 (async () => {
-  let config = await getConfigFile();
-
-  // Update config file
   if (!fs.existsSync(configPath)) {
     fs.writeFile(configPath, JSON.stringify(DATA, null, 2), "utf8", err => {
       if (err) throw err;
     });
 
+    await generateManifest(DATA);
+
     console.log("[VitNode] - Config file has been generated");
   } else {
     console.log("[VitNode] - Config file already exists. Updating...");
 
+    // Update config file
+    const config = await getConfigFile();
     const updatedConfig = updateObject(config, DATA);
-    config = updatedConfig;
 
-    fs.writeFile(configPath, JSON.stringify(config, null, 2), "utf8", err => {
-      if (err) throw err;
-    });
+    fs.writeFile(
+      configPath,
+      JSON.stringify(updatedConfig, null, 2),
+      "utf8",
+      err => {
+        if (err) throw err;
+      }
+    );
+
+    await generateManifest(updatedConfig);
 
     console.log("[VitNode] - Config file has been updated");
   }
-
-  await generateManifest(config);
 })();
