@@ -172,7 +172,7 @@ type Mutation {
   admin__core_languages__edit(allow_in_input: Boolean!, default: Boolean!, enabled: Boolean!, id: Int!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_languages__update(code: String!, file: Upload!): String!
   admin__core_main_settings__edit(site_copyright: [TextLanguageInput!]!, site_description: [TextLanguageInput!]!, site_name: String!, site_short_name: String!): EditAdminSettingsObj!
-  admin__core_manifest_metadata__edit(display: String!): ShowAdminManifestMetadataObj!
+  admin__core_manifest_metadata__edit(display: String!, start_url: String!): ShowAdminManifestMetadataObj!
   admin__core_nav__change_position(id: Int!, index_to_move: Int!, parent_id: Int!): String!
   admin__core_nav__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, name: [TextLanguageInput!]!): ShowCoreNav!
   admin__core_nav__delete(id: Int!): String!
@@ -347,7 +347,9 @@ enum ShowAdminGroupsSortingColumnEnum {
 
 type ShowAdminManifestMetadataObj {
   display: String!
+  id: String!
   lang: String!
+  start_url: String!
 }
 
 type ShowAdminMembers {

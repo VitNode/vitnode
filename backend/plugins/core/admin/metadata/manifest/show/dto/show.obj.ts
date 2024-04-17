@@ -7,4 +7,10 @@ export class ShowAdminManifestMetadataObj {
 
   @Field(() => String)
   lang: string;
+
+  @Field(() => String)
+  start_url: string;
+
+  @Field(() => String)
+  id: string;
 }

@@ -59,6 +59,10 @@
               "title": "Przeglądarka",
               "desc": "Z interfejsem przeglądarki."
             }
+          },
+          "start_url": {
+            "label": "Start URL",
+            "desc": "Gdy użytkownik uruchamia aplikację, ta strona zostanie załadowana."
           }
         }
       },

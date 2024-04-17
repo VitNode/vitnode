@@ -2,6 +2,7 @@ import * as fs from "fs";
 import { join } from "path";
 
 import { Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 
 import { EditAdminManifestMetadataObj } from "./dto/edit.args";
 import { ShowAdminManifestMetadataObj } from "../show/dto/show.obj";
@@ -12,7 +13,10 @@ import { core_languages } from "../../../database/schema/languages";
 
 @Injectable()
 export class EditAdminManifestMetadataService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private configService: ConfigService
+  ) {}
 
   protected updateManifest({
     data,
@@ -21,10 +25,13 @@ export class EditAdminManifestMetadataService {
     data: EditAdminManifestMetadataObj;
     lang_code: string;
   }): ShowAdminManifestMetadataObj {
+    const frontendUrl: string = this.configService.getOrThrow("frontend_url");
     const manifest = getManifest({ lang_code });
     const newManifest: ShowAdminManifestMetadataObj = {
       ...manifest,
-      ...data
+      ...data,
+      start_url: `${frontendUrl}/${lang_code}${data.start_url}`,
+      id: `${frontendUrl}/${lang_code}${data.start_url}`
     };
 
     fs.writeFileSync(

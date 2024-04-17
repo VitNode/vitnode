@@ -4,4 +4,7 @@ import { ArgsType, Field } from "@nestjs/graphql";
 export class EditAdminManifestMetadataObj {
   @Field(() => String)
   display: string;
+
+  @Field(() => String)
+  start_url: string;
 }

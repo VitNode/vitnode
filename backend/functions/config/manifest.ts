@@ -2,9 +2,15 @@ import { readdir } from "fs/promises";
 import { join } from "path";
 import * as fs from "fs";
 
+import * as dotenv from "dotenv";
+
 import { objectToArray, updateObject } from "./update-object";
 
 import { ConfigType } from "@/config/get-config-file";
+
+dotenv.config({
+  path: join(process.cwd(), "..", ".env")
+});
 
 interface ManifestType {
   background_color?: string;
@@ -63,14 +69,19 @@ export const generateManifest = async (config: ConfigType) => {
   )
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name);
+  const frontendUrl = process.env.NEXT_PUBLIC_FRONTEND_URL
+    ? `https://${process.env.NEXT_PUBLIC_FRONTEND_URL}`
+    : "http://localhost:3000";
 
   languages.forEach(language => {
     const defaultManifest: ManifestType = {
+      id: `${frontendUrl}/${language}/`,
       name: config.settings.general.site_name,
       short_name: config.settings.general.site_short_name,
       lang: language,
       description: "",
       display: "standalone",
+      start_url: `${frontendUrl}/${language}/`,
       icons: [
         {
           src: "/public/icons/favicon.ico",

@@ -1,6 +1,9 @@
 export const configuration = () => {
   const data = {
     login_token_secret: process.env.LOGIN_TOKEN_SECRET ?? "",
+    frontend_url: process.env.NEXT_PUBLIC_FRONTEND_URL
+      ? `https://${process.env.NEXT_PUBLIC_FRONTEND_URL}`
+      : "http://localhost:3000",
     port: parseInt(process.env.PORT, 10) || 8080,
     password_salt: 10,
     cookies: {

@@ -313,6 +313,7 @@ export type MutationAdmin__Core_Main_Settings__EditArgs = {
 
 export type MutationAdmin__Core_Manifest_Metadata__EditArgs = {
   display: Scalars['String']['input'];
+  start_url: Scalars['String']['input'];
 };
 
 
@@ -830,6 +831,7 @@ export type ShowAdminManifestMetadataObj = {
   __typename?: 'ShowAdminManifestMetadataObj';
   display: Scalars['String']['output'];
   lang: Scalars['String']['output'];
+  start_url: Scalars['String']['output'];
 };
 
 export type ShowAdminMembers = {
@@ -1422,6 +1424,7 @@ export type Admin__Core_Staff_Moderators__DeleteMutation = { __typename?: 'Mutat
 
 export type Admin__Core_Manifest_Metadata__EditMutationVariables = Exact<{
   display: Scalars['String']['input'];
+  startUrl: Scalars['String']['input'];
 }>;
 
 
@@ -1820,7 +1823,7 @@ export type Admin__Core_Members__ShowQuery = { __typename?: 'Query', admin__core
 export type Admin__Core_Manifest_Metadata__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Admin__Core_Manifest_Metadata__ShowQuery = { __typename?: 'Query', admin__core_manifest_metadata__show: { __typename?: 'ShowAdminManifestMetadataObj', display: string } };
+export type Admin__Core_Manifest_Metadata__ShowQuery = { __typename?: 'Query', admin__core_manifest_metadata__show: { __typename?: 'ShowAdminManifestMetadataObj', display: string, start_url: string } };
 
 export type Admin__Core_Nav__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2122,8 +2125,8 @@ export const Admin__Core_Staff_Moderators__Delete = gql`
 }
     `;
 export const Admin__Core_Manifest_Metadata__Edit = gql`
-    mutation Admin__core_manifest_metadata__edit($display: String!) {
-  admin__core_manifest_metadata__edit(display: $display) {
+    mutation Admin__core_manifest_metadata__edit($display: String!, $startUrl: String!) {
+  admin__core_manifest_metadata__edit(display: $display, start_url: $startUrl) {
     display
   }
 }
@@ -2789,6 +2792,7 @@ export const Admin__Core_Manifest_Metadata__Show = gql`
     query Admin__core_manifest_metadata__show {
   admin__core_manifest_metadata__show {
     display
+    start_url
   }
 }
     `;

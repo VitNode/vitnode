@@ -1,5 +1,8 @@
-mutation Admin__core_manifest_metadata__edit($display: String!) {
-  admin__core_manifest_metadata__edit(display: $display) {
+mutation Admin__core_manifest_metadata__edit(
+  $display: String!
+  $startUrl: String!
+) {
+  admin__core_manifest_metadata__edit(display: $display, start_url: $startUrl) {
     display
   }
 }

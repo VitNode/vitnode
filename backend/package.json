@@ -11,7 +11,7 @@
     "migrate:blog": "drizzle-kit generate:pg --out plugins/blog/admin/database/migrations --schema plugins/blog/admin/database/schema/*.ts",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "cross-env NODE_ENV=test pnpm config:finish && nest start",
+    "start": "pnpm config:finish && nest start",
     "dev": "pnpm config:init && cross-env NODE_ENV=development pnpm config:finish && cross-env NODE_ENV=development nest start --watch",
     "dev:save": "pnpm config:init && cross-env NODE_ENV=development nest start --watch",
     "start:debug": "nest start --debug --w",

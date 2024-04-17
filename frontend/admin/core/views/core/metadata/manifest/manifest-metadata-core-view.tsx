@@ -15,6 +15,8 @@ import { useManifestCoreAdminView } from "./hooks/use-manifest-core-admin-view";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 import type { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";
+import { Input } from "@/components/ui/input";
+import { CONFIG } from "@/config";
 
 export const ManifestMetadataCoreView = (
   props: Admin__Core_Manifest_Metadata__ShowQuery
@@ -68,6 +70,24 @@ export const ManifestMetadataCoreView = (
                   )}
                 </RadioGroup>
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="start_url"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("start_url.label")}</FormLabel>
+              <div className="flex gap-1 items-center flex-wrap">
+                <span>{CONFIG.frontend_url}</span>
+                <FormControl>
+                  <Input className="w-64" {...field} />
+                </FormControl>
+              </div>
+              <FormDescription>{t("start_url.desc")}</FormDescription>
               <FormMessage />
             </FormItem>
           )}

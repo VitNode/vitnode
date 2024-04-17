@@ -59,6 +59,10 @@
               "title": "Browser",
               "desc": "With browser UI."
             }
+          },
+          "start_url": {
+            "label": "Start URL",
+            "desc": "When user launches the app, this is the page that will be loaded."
           }
         }
       },
