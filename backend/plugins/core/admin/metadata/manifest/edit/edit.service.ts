@@ -35,7 +35,15 @@ export class EditAdminManifestMetadataService {
     };
 
     fs.writeFileSync(
-      join(process.cwd(), "public", lang_code, "manifest.webmanifest"),
+      join(
+        process.cwd(),
+        "..",
+        "frontend",
+        "public",
+        "assets",
+        lang_code,
+        "manifest.webmanifest"
+      ),
       JSON.stringify(newManifest, null, 2)
     );
 

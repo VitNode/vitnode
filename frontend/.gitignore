@@ -35,4 +35,5 @@ yarn-error.log*
 next-env.d.ts
 config/config.json
 
-themes/10
+/public/assets
+/public/uploads

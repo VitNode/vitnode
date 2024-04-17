@@ -1,4 +1,5 @@
 import { existsSync, unlink } from "fs";
+import { join } from "path";
 
 import { Injectable } from "@nestjs/common";
 
@@ -9,16 +10,17 @@ import { CustomError } from "@/utils/errors/CustomError";
 @Injectable()
 export class DeleteCoreFilesService {
   checkIfFileExists({ dir_folder, name }: DeleteCoreFilesArgs) {
+    const path = join(process.cwd(), "..", "frontend", "public", dir_folder);
     // Check if folder exists
-    if (!existsSync(dir_folder)) {
+    if (!existsSync(path)) {
       throw new CustomError({
         code: "FOLDER_NOT_FOUND",
-        message: `Folder "${dir_folder}" not found`
+        message: `Folder "${path}" not found`
       });
     }
 
     // Check if file exists
-    if (!existsSync(`${dir_folder}/${name}`)) {
+    if (!existsSync(`${path}/${name}`)) {
       throw new CustomError({
         code: "FILE_NOT_FOUND",
         message: `File "${name}" not found`
@@ -30,7 +32,8 @@ export class DeleteCoreFilesService {
     this.checkIfFileExists({ dir_folder, name });
 
     // Remove file from server
-    unlink(`${dir_folder}/${name}`, err => {
+    const path = join(process.cwd(), "..", "frontend", "public", dir_folder);
+    unlink(`${path}/${name}`, err => {
       // eslint-disable-next-line no-console
       if (err) console.error(err);
     });

@@ -11,7 +11,6 @@ import {
   type Core_MiddlewareQueryVariables
 } from "@/graphql/hooks";
 import { getConfigFile } from "@/config/get-config-file";
-import { CONFIG } from "@/config";
 import { cn } from "@/functions/classnames";
 import { CatchLayout } from "./catch";
 import "./global.scss";
@@ -41,7 +40,7 @@ interface Props {
 
 export function generateMetadata({ params: { locale } }: Props): Metadata {
   return {
-    manifest: `${CONFIG.backend_url}/public/${locale}/manifest.webmanifest`
+    manifest: `/assets/${locale}/manifest.webmanifest`
   };
 }
 

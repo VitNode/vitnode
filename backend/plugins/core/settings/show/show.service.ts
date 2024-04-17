@@ -44,7 +44,15 @@ export class ShowSettingsService {
     langCodes: string[];
   }): ManifestWithLang[] {
     return langCodes.map(lang => {
-      const path = join(process.cwd(), "public", lang, "manifest.webmanifest");
+      const path = join(
+        process.cwd(),
+        "..",
+        "frontend",
+        "public",
+        "assets",
+        lang,
+        "manifest.webmanifest"
+      );
       const data = fs.readFileSync(path, "utf8");
       const manifest: ManifestWithLang = JSON.parse(data);
 
