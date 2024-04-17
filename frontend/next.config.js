@@ -9,12 +9,12 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 const config = () => {
-  const envBackend =
-    process.env.NEXT_PUBLIC_GRAPHQL_URL ?? "http://localhost:8080";
-  const backend = {
-    hostname: new URL(envBackend).hostname,
-    port: new URL(envBackend).port,
-    protocol: new URL(envBackend).protocol.replace(":", "")
+  const envFrontend =
+    process.env.NEXT_PUBLIC_FRONTEND_URL ?? "http://localhost:3000";
+  const frontend = {
+    hostname: new URL(envFrontend).hostname,
+    port: new URL(envFrontend).port,
+    protocol: new URL(envFrontend).protocol.replace(":", "")
   };
 
   return {
@@ -30,15 +30,15 @@ const config = () => {
       remotePatterns: [
         {
           hostname: "localhost",
-          port: "8080",
+          port: "3000",
           protocol: "http",
-          pathname: "/public/**"
+          pathname: "/uploads/**"
         },
         {
-          hostname: backend.hostname,
-          port: backend.port,
-          protocol: backend.protocol,
-          pathname: "/public/**"
+          hostname: frontend.hostname,
+          port: frontend.port,
+          protocol: frontend.protocol,
+          pathname: "/uploads/**"
         }
       ]
     }

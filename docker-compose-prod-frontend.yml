@@ -22,6 +22,7 @@ services:
       - ./frontend/admin:/app/admin # admin
       - ./frontend/graphql:/app/graphql # graphql
       - ./frontend/hooks:/app/hooks # hooks
+      - ./frontend/public:/app/public # static files
 
 networks:
   vitnode_production:

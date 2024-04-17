@@ -26,7 +26,7 @@ const AvatarUser = forwardRef<HTMLImageElement, Props>(
         imageClassName="object-cover"
         src={
           avatar
-            ? `${CONFIG.graphql_url}/${avatar.dir_folder}/${avatar.name}`
+            ? `${CONFIG.frontend_url}/${avatar.dir_folder}/${avatar.name}`
             : generateLetterPhoto(name.slice(0, 1), avatar_color)
         }
         alt={name}

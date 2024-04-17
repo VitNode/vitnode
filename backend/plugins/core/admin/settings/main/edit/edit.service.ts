@@ -36,7 +36,10 @@ export class EditAdminMainSettingsService {
 
       const path = join(
         process.cwd(),
+        "..",
+        "frontend",
         "public",
+        "assets",
         item.language_code,
         "manifest.webmanifest"
       );
@@ -63,7 +66,10 @@ export class EditAdminMainSettingsService {
 
         const path = join(
           process.cwd(),
+          "..",
+          "frontend",
           "public",
+          "assets",
           item.code,
           "manifest.webmanifest"
         );

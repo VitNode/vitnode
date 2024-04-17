@@ -87,13 +87,20 @@ export const generateManifest = async (config: ConfigType) => {
       orientation: "any",
       icons: [
         {
-          src: "/public/icons/favicon.ico",
+          src: "/icons/favicon.ico",
           sizes: "any",
           type: "image/x-icon"
         }
       ]
     };
-    const path = join(process.cwd(), "public", language);
+    const path = join(
+      process.cwd(),
+      "..",
+      "frontend",
+      "public",
+      "assets",
+      language
+    );
     const filePath = join(path, "manifest.webmanifest");
 
     if (fs.existsSync(filePath)) {

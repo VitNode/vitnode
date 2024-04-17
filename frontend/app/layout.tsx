@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 import { getConfigFile } from "@/config/get-config-file";
-import { CONFIG } from "@/config";
 
 export async function generateMetadata(): Promise<Metadata> {
   const config = await getConfigFile();
@@ -14,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s - ${defaultTitle}`
     },
     icons: {
-      icon: `${CONFIG.backend_url}/public/icons/favicon.ico`
+      icon: "/icons/favicon.ico"
     }
   };
 }

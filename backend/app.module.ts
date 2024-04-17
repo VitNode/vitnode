@@ -5,7 +5,6 @@ import { GraphQLModule } from "@nestjs/graphql";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { ApolloServerPluginLandingPageLocalDefault } from "@apollo/server/plugin/landingPage/default";
 import { JwtModule } from "@nestjs/jwt";
-import { ServeStaticModule } from "@nestjs/serve-static";
 import { ScheduleModule } from "@nestjs/schedule";
 import { ConfigModule } from "@nestjs/config";
 
@@ -32,10 +31,6 @@ import { DatabaseModule } from "@/plugins/database/database.module";
     }),
     JwtModule.register({ global: true }),
     PluginsModule,
-    ServeStaticModule.forRoot({
-      rootPath: join(process.cwd(), "public"),
-      serveRoot: "/public"
-    }),
     ScheduleModule.forRoot(),
     DatabaseModule
   ]

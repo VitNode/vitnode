@@ -55,7 +55,6 @@
     "@nestjs/platform-socket.io": "^10.3.7",
     "@nestjs/schedule": "^4.0.1",
     "@nestjs/schematics": "^10.1.1",
-    "@nestjs/serve-static": "^4.0.2",
     "@nestjs/testing": "^10.3.7",
     "@types/archiver": "^6.0.2",
     "@types/bcrypt": "^5.0.2",

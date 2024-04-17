@@ -10,7 +10,15 @@ export const getManifest = ({
 }: {
   lang_code: string;
 }): ShowAdminManifestMetadataObj => {
-  const path = join(process.cwd(), "public", lang_code, "manifest.webmanifest");
+  const path = join(
+    process.cwd(),
+    "..",
+    "frontend",
+    "public",
+    "assets",
+    lang_code,
+    "manifest.webmanifest"
+  );
 
   if (!fs.existsSync(path)) {
     throw new NotFoundError(`Manifest for language code: ${lang_code}`);

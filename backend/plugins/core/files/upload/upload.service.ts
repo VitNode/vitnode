@@ -81,11 +81,11 @@ export class UploadCoreFilesService {
     // Create folders
     const date = new Date();
     const dir = join(
-      "public",
+      "uploads",
       `monthly_${date.getMonth() + 1}_${date.getFullYear()}`,
       module_name
     );
-    const dirFolder = join(process.cwd(), dir);
+    const dirFolder = join(process.cwd(), "..", "frontend", "public", dir);
     if (!existsSync(dirFolder)) {
       mkdirSync(dirFolder, { recursive: true });
     }
