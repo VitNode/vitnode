@@ -10,7 +10,6 @@ import {
   CardHeader
 } from "@/components/ui/card";
 import { PoweredByVitNode } from "../powered-by";
-import "@/app/[locale]/(admin)/admin/global.scss";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "@/i18n";
 import { mutationClearCache } from "./mutation-clear-cache";

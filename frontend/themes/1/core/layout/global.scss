@@ -14,7 +14,7 @@
     @apply cursor-pointer;
   }
 
-  .theme_1 {
+  html.vitnode .theme_1 {
     --background: 204deg 45.45% 95.69%;
     --foreground: 213.33deg 25.71% 6.86%;
     --card: 0 0% 100%;
@@ -35,27 +35,27 @@
     --input: var(--border);
     --ring: var(--primary);
     --radius: 0.5rem;
+  }
 
-    html.dark & {
-      --background: 240 10% 3.9%;
-      --foreground: 0 0% 98%;
-      --card: 240deg 17.07% 8.04%;
-      --card-foreground: 0 0% 98%;
-      // --popover: var(--card);
-      // --popover-foreground: var(--card-foreground);
-      --primary: 221.2deg 84.31% 59.32%;
-      --primary-foreground: 210 40% 98%;
-      --secondary: 240deg 16.92% 12.75%;
-      --secondary-foreground: 0 0% 98%;
-      --muted: 240deg 15.19% 13.32%;
-      --muted-foreground: 240 5% 64.9%;
-      --accent: 240deg 16.63% 16.36%;
-      --accent-foreground: 0 0% 98%;
-      --destructive: 359.67deg 80.36% 43.92%;
-      --destructive-foreground: 210 40% 98%;
-      --border: 240deg 15.61% 13.28%;
-      // --input: var(--border);
-      // --ring: var(--primary);
-    }
+  html.vitnode.dark .theme_1 {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240deg 17.07% 8.04%;
+    --card-foreground: 0 0% 98%;
+    // --popover: var(--card);
+    // --popover-foreground: var(--card-foreground);
+    --primary: 221.2deg 84.31% 59.32%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 240deg 16.92% 12.75%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240deg 15.19% 13.32%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240deg 16.63% 16.36%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 359.67deg 80.36% 43.92%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 240deg 15.61% 13.28%;
+    // --input: var(--border);
+    // --ring: var(--primary);
   }
 }

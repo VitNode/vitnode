@@ -162,7 +162,7 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
     );
     await fs.promises.writeFile(
       pathSCSSFile,
-      pathSCSSFileContent.replace(/\.theme_\d+/g, `.theme_${theme.id}`)
+      pathSCSSFileContent.replaceAll(/\.theme_\d+/g, `.theme_${theme.id}`)
     );
 
     // Copy from temp to frontend
