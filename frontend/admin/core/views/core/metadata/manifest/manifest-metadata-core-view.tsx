@@ -30,7 +30,7 @@ export const ManifestMetadataCoreView = (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4 sm:max-w-2xl"
+        className="space-y-8 sm:max-w-2xl"
       >
         <FormField
           control={form.control}
@@ -38,7 +38,6 @@ export const ManifestMetadataCoreView = (
           render={({ field }) => (
             <FormItem>
               <FormLabel>{t("display.label")}</FormLabel>
-              <FormDescription>{t("display.desc")}</FormDescription>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
@@ -71,6 +70,7 @@ export const ManifestMetadataCoreView = (
                   )}
                 </RadioGroup>
               </FormControl>
+              <FormDescription>{t("display.desc")}</FormDescription>
               <FormMessage />
             </FormItem>
           )}

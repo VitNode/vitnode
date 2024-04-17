@@ -1,11 +1,16 @@
+import { join } from "path";
+import * as fs from "fs";
+
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 
 import { ShowSettingsObj } from "./dto/show.obj";
+import { ManifestWithLang } from "../settings.module";
 
 import { DatabaseService } from "@/plugins/database/database.service";
 import { getConfigFile } from "@/config/get-config-file";
 import { Ctx } from "@/types/context.type";
+import { core_languages } from "../../admin/database/schema/languages";
 
 @Injectable()
 export class ShowSettingsService {
@@ -33,21 +38,42 @@ export class ShowSettingsService {
     return null;
   }
 
+  protected getManifest({
+    langCodes
+  }: {
+    langCodes: string[];
+  }): ManifestWithLang[] {
+    return langCodes.map(lang => {
+      const path = join(process.cwd(), "public", lang, "manifest.webmanifest");
+      const data = fs.readFileSync(path, "utf8");
+      const manifest: ManifestWithLang = JSON.parse(data);
+
+      return manifest;
+    });
+  }
+
   async show({ req }: Ctx): Promise<ShowSettingsObj> {
     const config = await getConfigFile();
 
-    const languages =
-      await this.databaseService.db.query.core_languages.findMany({
-        where: (table, { eq }) => eq(table.enabled, true)
-      });
+    const languages = await this.databaseService.db
+      .select({
+        code: core_languages.code,
+        enabled: core_languages.enabled,
+        site_copyright: core_languages.site_copyright
+      })
+      .from(core_languages);
+    const enabledLanguages = languages.filter(item => item.enabled);
+    const manifest = this.getManifest({
+      langCodes: enabledLanguages.map(item => item.code)
+    });
 
     return {
       ...config.settings.general,
-      site_description: languages.map(item => ({
-        language_code: item.code,
-        value: item.site_description
+      site_description: manifest.map(item => ({
+        language_code: item.lang,
+        value: item.description
       })),
-      site_copyright: languages.map(item => ({
+      site_copyright: enabledLanguages.map(item => ({
         language_code: item.code,
         value: item.site_copyright
       })),

@@ -72,7 +72,6 @@ CREATE TABLE IF NOT EXISTS "core_languages" (
 	"time_24" boolean DEFAULT false NOT NULL,
 	"locale" varchar(50) DEFAULT 'enUS' NOT NULL,
 	"allow_in_input" boolean DEFAULT true,
-	"site_description" varchar(255) DEFAULT '',
 	"site_copyright" varchar(255) DEFAULT '',
 	CONSTRAINT "core_languages_code_unique" UNIQUE("code")
 );

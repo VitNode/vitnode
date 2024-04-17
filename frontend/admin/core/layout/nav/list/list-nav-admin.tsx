@@ -55,7 +55,7 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
           {
             id: "metadata",
             href: "metadata",
-            icon: "Settings"
+            icon: "Tag"
           },
           {
             id: "langs",

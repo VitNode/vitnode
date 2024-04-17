@@ -79,11 +79,12 @@ export const generateManifest = async (config: ConfigType) => {
       name: config.settings.general.site_name,
       short_name: config.settings.general.site_short_name,
       lang: language,
-      description: "",
+      description: "Welcome to VitNode!",
       display: "standalone",
       theme_color: "#2463eb",
       background_color: "#09090b",
       start_url: `${frontendUrl}/${language}/`,
+      orientation: "any",
       icons: [
         {
           src: "/public/icons/favicon.ico",
