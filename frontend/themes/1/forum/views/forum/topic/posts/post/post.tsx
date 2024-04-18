@@ -7,7 +7,7 @@ import { DateFormat } from "@/components/date-format/date-format";
 import { GroupFormat } from "@/components/groups/group-format";
 import type { ShowPostsForums } from "@/graphql/hooks";
 import { DivMotion } from "@/components/animations/div-motion";
-import { ReadOnlyEditor } from "@/components/editor/read-only";
+import { ReadOnlyEditor } from "@/components/editor/read-only/read-only";
 
 interface Props
   extends Pick<ShowPostsForums, "content" | "created" | "post_id" | "user"> {

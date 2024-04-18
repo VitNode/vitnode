@@ -11,7 +11,7 @@ import { WrapperItemForum } from "./wrapper-item-forum";
 import { ChildButtonItemForum } from "./child";
 import { StatsItemForum } from "./stats";
 import { LastPostItemForum } from "./last-post/last-post";
-import { ReadOnlyEditor } from "@/components/editor/read-only";
+import { ReadOnlyEditor } from "@/components/editor/read-only/read-only";
 
 export interface ItemForumProps {
   _count: Pick<ShowForumForumsCounts, "total_posts" | "total_topics">;

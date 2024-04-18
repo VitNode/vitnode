@@ -29,10 +29,15 @@ const config = () => {
       formats: ["image/avif", "image/webp"],
       remotePatterns: [
         {
+          protocol: "https",
+          hostname: "*",
+          port: ""
+        },
+        {
           hostname: "localhost",
           port: "3000",
-          protocol: "http",
-          pathname: "/uploads/**"
+          protocol: "http"
+          // pathname: "/uploads/**"
         },
         {
           hostname: frontend.hostname,
