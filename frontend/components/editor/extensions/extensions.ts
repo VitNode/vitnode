@@ -7,10 +7,15 @@ import { all, createLowlight } from "lowlight";
 import { Link } from "@tiptap/extension-link";
 import { Color } from "@tiptap/extension-color";
 import { TextStyle } from "@tiptap/extension-text-style";
+import js from "highlight.js/lib/languages/javascript";
+import ts from "highlight.js/lib/languages/typescript";
 
 import { ImageExtensionEditor } from "./image/image";
 
-const lowlight = createLowlight(all);
+export const lowlight = createLowlight(all);
+
+lowlight.register({ js });
+lowlight.register({ ts });
 
 export const extensionsEditor: Extensions = [
   StarterKit.configure({

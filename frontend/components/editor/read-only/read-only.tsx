@@ -1,5 +1,5 @@
 import { useLocale } from "next-intl";
-import parse, { Element } from "html-react-parser";
+import parse, { Element, type HTMLReactParserOptions } from "html-react-parser";
 import { generateHTML } from "@tiptap/html";
 import Image from "next/image";
 
@@ -7,6 +7,7 @@ import type { TextLanguage } from "@/graphql/hooks";
 import { cn } from "@/functions/classnames";
 import { extensionsEditor } from "../extensions/extensions";
 import { HeadingExtensionEditor } from "../extensions/heading";
+import { changeCodeBlock } from "./code-block";
 
 interface Props {
   value: TextLanguage[];
@@ -50,31 +51,39 @@ export const ReadOnlyEditor = async ({ className, value }: Props) => {
     }
   };
 
+  const options: HTMLReactParserOptions = {
+    replace: domNode => {
+      if (!(domNode instanceof Element && domNode.attribs)) {
+        return;
+      }
+
+      const { children, name } = domNode;
+
+      if (name === "img") {
+        return (
+          <Image
+            src={domNode.attribs.src}
+            alt=""
+            sizes="100vw"
+            style={{
+              width: "100%",
+              height: "auto"
+            }}
+            width={500}
+            height={300}
+          />
+        );
+      }
+
+      if (name === "pre" && children.length > 0) {
+        return changeCodeBlock(domNode);
+      }
+    }
+  };
+
   return (
     <div className={cn("break-all", className)}>
-      {parse(getText(), {
-        replace: domNode => {
-          if (!(domNode instanceof Element && domNode.attribs)) {
-            return;
-          }
-
-          if (domNode.name === "img") {
-            return (
-              <Image
-                src={domNode.attribs.src}
-                alt="Picture of the author"
-                sizes="100vw"
-                style={{
-                  width: "100%",
-                  height: "auto"
-                }}
-                width={500}
-                height={300}
-              />
-            );
-          }
-        }
-      })}
+      {parse(getText(), options)}
     </div>
   );
 };
