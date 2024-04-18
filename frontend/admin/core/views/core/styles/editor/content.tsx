@@ -31,7 +31,7 @@ export const ContentEditorAdmin = ({ data }: EditorAdminArgs) => {
             control={form.control}
             name="sticky"
             render={({ field }) => (
-              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 gap-2">
+              <FormItem className="flex flex-row items-center justify-between rounded-lg gap-2">
                 <div className="space-y-0.5">
                   <FormLabel className="text-base">
                     {t("sticky.label")}
@@ -52,7 +52,7 @@ export const ContentEditorAdmin = ({ data }: EditorAdminArgs) => {
             control={form.control}
             name="allow_head_h1"
             render={({ field }) => (
-              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 gap-2">
+              <FormItem className="flex flex-row items-center justify-between rounded-lg gap-2">
                 <div className="space-y-0.5">
                   <FormLabel className="text-base">
                     {t("allow_head_h1.label")}

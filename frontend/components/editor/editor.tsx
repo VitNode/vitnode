@@ -9,7 +9,8 @@ import type { TextLanguage } from "@/graphql/hooks";
 import { ToolBarEditor } from "./toolbar/toolbar";
 import { FooterEditor } from "./footer/footer";
 import { useGlobals } from "@/hooks/core/use-globals";
-import { extensionsEditor, headingExtensionEditor } from "./extensions";
+import { extensionsEditor } from "./extensions/extensions";
+import { HeadingExtensionEditor } from "./extensions/heading";
 
 interface Props {
   autoFocus?: boolean;
@@ -44,7 +45,7 @@ export const Editor = ({
     autofocus: autoFocus,
     extensions: [
       ...extensionsEditor,
-      headingExtensionEditor({ allowH1: config.editor.allow_head_h1 })
+      HeadingExtensionEditor({ allowH1: config.editor.allow_head_h1 })
     ],
     editorProps: {
       attributes: {

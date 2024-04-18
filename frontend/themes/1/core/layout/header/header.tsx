@@ -8,7 +8,7 @@ import { Nav } from "../nav/nav";
 
 export const Header = () => {
   return (
-    <header className="sticky top-0 z-20 w-full transition-colors border-b bg-background/50 backdrop-blur">
+    <header className="sticky top-0 z-20 w-full transition-colors border-b bg-background/75 backdrop-blur">
       <div className="flex items-center gap-5 h-16 max-w-[110rem] mx-auto px-5">
         <Link href="/">
           <LogoVitNode className="h-8" />

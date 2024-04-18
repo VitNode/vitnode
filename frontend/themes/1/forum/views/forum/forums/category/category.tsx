@@ -7,7 +7,7 @@ import { useTextLang } from "@/hooks/core/use-text-lang";
 import { WrapperCategoryForum } from "./wrapper";
 import { ChevronCategoryForumButton } from "./chevron-button";
 import { ChildrenWrapperCategoryForum } from "./children-wrapper";
-import { ReadOnlyEditor } from "@/components/editor/read-only";
+import { ReadOnlyEditor } from "@/components/editor/read-only/read-only";
 
 interface Props
   extends Pick<ShowForumForumsWithChildren, "description" | "id" | "name"> {

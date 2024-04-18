@@ -7,7 +7,7 @@ import type { Forum_Forums__Show_ItemQuery } from "@/graphql/hooks";
 import { TopicsListForum } from "./topics-list/topics-list";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { ReadOnlyEditor } from "@/components/editor/read-only";
+import { ReadOnlyEditor } from "@/components/editor/read-only/read-only";
 
 import { ItemForum } from "../../item/item";
 
