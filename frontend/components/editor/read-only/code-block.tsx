@@ -2,6 +2,15 @@ import { type Element } from "html-react-parser";
 import { Fragment, createElement } from "react";
 
 import { lowlight } from "../extensions/extensions";
+import { cn } from "@/functions/classnames";
+import { generateRandomString } from "@/functions/generate-random-string";
+
+export const classNameCodeBlock = cn(
+  "[&_.hljs-keyword]:text-red-500",
+  "[&_.hljs-string]:text-blue-700 dark:[&_.hljs-string]:text-blue-500",
+  "[&_.hljs-title]:text-purple-600 dark:[&_.hljs-title]:text-purple-400",
+  "[&_.hljs-number]:text-sky-600 dark:[&_.hljs-number]:text-sky-500"
+);
 
 interface Node {
   type: "text";
@@ -20,15 +29,23 @@ interface WithTagName {
 
 const renderElement = (node: Node | WithTagName): JSX.Element => {
   if (node.value !== undefined) {
-    return createElement(Fragment, null, node.value);
+    return createElement(
+      Fragment,
+      { key: `${new Date().getTime()}-${generateRandomString(10)}` },
+      node.value
+    );
   }
 
   const children = (node.children ?? []).map(child => renderElement(child));
-  const props = {
-    className: node.properties?.className?.join(" ")
-  };
 
-  return createElement(node.tagName, props, ...children);
+  return createElement(
+    node.tagName,
+    {
+      className: node.properties?.className?.join(" "),
+      key: `${node.tagName}-${new Date().getTime()}-${generateRandomString(10)}`
+    },
+    ...children
+  );
 };
 
 export const changeCodeBlock = ({ children }: Element) => {
@@ -37,9 +54,10 @@ export const changeCodeBlock = ({ children }: Element) => {
     return;
   }
 
-  const language = element.attribs.class
-    .replace("language-", "")
-    .replace("react", "");
+  const language =
+    (element?.attribs?.class ?? "")
+      .replace("language-", "")
+      .replace("react", "") || "plaintext";
   const text = (
     element.children[0] as {
       data: string;
@@ -54,7 +72,15 @@ export const changeCodeBlock = ({ children }: Element) => {
 
   return createElement(
     "pre",
-    { className: "bg-muted p-5 rounded-md overflow-auto" },
-    content
+    {
+      className: cn("bg-muted p-5 rounded-md overflow-auto", classNameCodeBlock)
+    },
+    createElement(
+      "code",
+      {
+        className: element?.attribs?.class
+      },
+      content
+    )
   );
 };

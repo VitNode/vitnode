@@ -11,6 +11,8 @@ import js from "highlight.js/lib/languages/javascript";
 import ts from "highlight.js/lib/languages/typescript";
 
 import { ImageExtensionEditor } from "./image/image";
+import { cn } from "@/functions/classnames";
+import { classNameCodeBlock } from "../read-only/code-block";
 
 export const lowlight = createLowlight(all);
 
@@ -63,10 +65,12 @@ export const extensionsEditor: Extensions = [
   TextAlign.configure({
     types: ["heading", "paragraph"]
   }),
-  CodeBlockLowlight.configure({
+  CodeBlockLowlight.extend({}).configure({
     lowlight,
+    languageClassPrefix: "language-",
+    defaultLanguage: "plaintext",
     HTMLAttributes: {
-      class: "bg-muted p-5 rounded-md overflow-auto"
+      class: cn("bg-muted p-5 rounded-md overflow-auto", classNameCodeBlock)
     }
   }),
   Link.extend({ inclusive: false }),

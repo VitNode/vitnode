@@ -3,6 +3,7 @@
     "clsx",
     "Codegen",
     "hookform",
+    "lowlight",
     "lucide",
     "nestjs",
     "nextra",
