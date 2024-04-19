@@ -84,7 +84,10 @@
       "undo": "Cofnij",
       "redo": "Ponów",
       "horizontal_rule": "Linia pozioma",
-      "code_block": "Blok kodu",
+      "code_block": {
+        "title": "Blok kodu",
+        "auto": "Automatyczny"
+      },
       "link": {
         "title": "Link",
         "text": "Tekst",

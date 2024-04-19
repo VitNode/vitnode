@@ -84,7 +84,10 @@
       "undo": "Undo",
       "redo": "Redo",
       "horizontal_rule": "Horizontal Rule",
-      "code_block": "Code Block",
+      "code_block": {
+        "title": "Code Block",
+        "auto": "Auto"
+      },
       "link": {
         "title": "Link",
         "text": "Text",
