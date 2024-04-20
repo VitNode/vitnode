@@ -21,7 +21,7 @@ export const classNameCodeBlock = cn(
   "[&_.hljs-regexp]:text-rose-600"
 );
 
-export const CodeBlockLowlightSSR = CodeBlockLowlight.extend({
+export const CodeBlockLowlightExtensionEditor = CodeBlockLowlight.extend({
   addNodeView() {
     return renderReactNode();
   }
