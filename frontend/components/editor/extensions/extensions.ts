@@ -2,15 +2,12 @@ import { TextAlign } from "@tiptap/extension-text-align";
 import { Underline } from "@tiptap/extension-underline";
 import { type Extensions } from "@tiptap/react";
 import { StarterKit } from "@tiptap/starter-kit";
-import { CodeBlockLowlight } from "@tiptap/extension-code-block-lowlight";
-import { all, createLowlight } from "lowlight";
 import { Link } from "@tiptap/extension-link";
 import { Color } from "@tiptap/extension-color";
 import { TextStyle } from "@tiptap/extension-text-style";
 
 import { ImageExtensionEditor } from "./image/image";
-
-const lowlight = createLowlight(all);
+import { CodeBlockLowlightSSR } from "./code/code";
 
 export const extensionsEditor: Extensions = [
   StarterKit.configure({
@@ -58,12 +55,7 @@ export const extensionsEditor: Extensions = [
   TextAlign.configure({
     types: ["heading", "paragraph"]
   }),
-  CodeBlockLowlight.configure({
-    lowlight,
-    HTMLAttributes: {
-      class: "bg-muted p-5 rounded-md overflow-auto"
-    }
-  }),
+  CodeBlockLowlightSSR,
   Link.extend({ inclusive: false }),
   Color,
   TextStyle,

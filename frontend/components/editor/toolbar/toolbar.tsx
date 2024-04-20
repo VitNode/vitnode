@@ -36,9 +36,9 @@ export const ToolBarEditor = ({ editor }: Props) => {
   return (
     <div
       className={cn(
-        "bg-background p-1 rounded-md flex gap-1 items-center flex-wrap m-1 border",
+        "bg-background p-1 rounded-t-sm flex gap-1 items-center flex-wrap border-b",
         {
-          "sticky top-[4.5rem] z-10 overflow-auto max-h-[32vh] shadow-sm":
+          "sticky top-[4rem] z-10 overflow-auto max-h-[26vh]":
             config.editor.sticky
         }
       )}
@@ -183,7 +183,7 @@ export const ToolBarEditor = ({ editor }: Props) => {
 
       <ToggleToolbarEditor
         pressed={editor.isActive("codeBlock")}
-        name="code_block"
+        name="code_block.title"
         onPressedChange={() => editor.chain().focus().toggleCodeBlock().run()}
       >
         <Code />
