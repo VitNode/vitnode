@@ -17,7 +17,7 @@ export const QuickMenu = () => {
   const { session } = useSession();
 
   return (
-    <div className="supports-backdrop-blur:bg-background/60 fixed bottom-0 z-50 w-full border-t bg-card/75 backdrop-blur sm:hidden flex">
+    <div className="supports-backdrop-blur:bg-background/60 fixed bottom-0 z-20 w-full border-t bg-card/75 backdrop-blur sm:hidden flex">
       {pathname !== "/" && (
         <ItemQuickMenu onClick={back}>
           <ArrowLeft />

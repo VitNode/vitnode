@@ -183,7 +183,7 @@ export const ToolBarEditor = ({ editor }: Props) => {
 
       <ToggleToolbarEditor
         pressed={editor.isActive("codeBlock")}
-        name="code_block"
+        name="code_block.title"
         onPressedChange={() => editor.chain().focus().toggleCodeBlock().run()}
       >
         <Code />

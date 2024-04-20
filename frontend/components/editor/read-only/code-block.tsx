@@ -1,20 +1,9 @@
 import { type Element } from "html-react-parser";
 import { Fragment, createElement } from "react";
 
-import { cn } from "@/functions/classnames";
 import { generateRandomString } from "@/functions/generate-random-string";
-import { lowlight } from "../extensions/code/code";
-
-export const classNameCodeBlock = cn(
-  "bg-muted p-5 rounded-md overflow-auto text-sm block whitespace-pre-wrap",
-  "[&_.hljs-keyword]:text-red-500",
-  "[&_.hljs-string]:text-blue-700 dark:[&_.hljs-string]:text-blue-400",
-  "[&_.hljs-title]:text-purple-600 dark:[&_.hljs-title]:text-purple-400",
-  "[&_.hljs-number]:text-sky-600 dark:[&_.hljs-number]:text-sky-500",
-  "[&_.hljs-name]:text-yellow-700 dark:[&_.hljs-name]:text-yellow-500",
-  String.raw`[&_.hljs-built\_in]:text-green-700 dark:[&_.hljs-built\_in]:text-green-400`,
-  "[&_.hljs-variable]:text-muted-foreground"
-);
+import { classNameCodeBlock, lowlight } from "../extensions/code/code";
+import { cn } from "@/functions/classnames";
 
 interface Node {
   type: "text";
@@ -77,7 +66,7 @@ export const changeCodeBlock = ({ children }: Element) => {
   return createElement(
     "pre",
     {
-      className: classNameCodeBlock
+      className: cn(classNameCodeBlock, "bg-muted rounded-md")
     },
     createElement(
       "code",
