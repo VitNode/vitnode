@@ -11,6 +11,7 @@ import { FooterEditor } from "./footer/footer";
 import { useGlobals } from "@/hooks/core/use-globals";
 import { extensionsEditor } from "./extensions/extensions";
 import { HeadingExtensionEditor } from "./extensions/heading";
+import { EmojiExtensionEditor } from "./extensions/emoji/emoji";
 
 interface Props {
   autoFocus?: boolean;
@@ -45,6 +46,7 @@ export const Editor = ({
     autofocus: autoFocus,
     extensions: [
       ...extensionsEditor,
+      EmojiExtensionEditor,
       HeadingExtensionEditor({ allowH1: config.editor.allow_head_h1 })
     ],
     editorProps: {

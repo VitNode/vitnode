@@ -7,7 +7,8 @@ import { Color } from "@tiptap/extension-color";
 import { TextStyle } from "@tiptap/extension-text-style";
 
 import { ImageExtensionEditor } from "./image/image";
-import { CodeBlockLowlightSSR } from "./code/code";
+import { CodeBlockLowlightExtensionEditor } from "./code/code";
+import { MentionExtensionEditor } from "./mentions/emoji";
 
 export const extensionsEditor: Extensions = [
   StarterKit.configure({
@@ -55,9 +56,10 @@ export const extensionsEditor: Extensions = [
   TextAlign.configure({
     types: ["heading", "paragraph"]
   }),
-  CodeBlockLowlightSSR,
+  CodeBlockLowlightExtensionEditor,
   Link.extend({ inclusive: false }),
   Color,
   TextStyle,
-  ImageExtensionEditor
+  ImageExtensionEditor,
+  MentionExtensionEditor
 ];

@@ -25,6 +25,7 @@ import { HeadingToolbarEditor } from "./custom/heading";
 import { useGlobals } from "@/hooks/core/use-globals";
 import { cn } from "@/functions/classnames";
 import { ColorToolbarEditor } from "./custom/color/color";
+import { EmojiToolbarEditor } from "./custom/emoji/emoji";
 
 interface Props {
   editor: Editor;
@@ -61,6 +62,10 @@ export const ToolBarEditor = ({ editor }: Props) => {
 
       <SeparatorToolbarEditor />
 
+      <HeadingToolbarEditor editor={editor} />
+
+      <SeparatorToolbarEditor />
+
       <ToggleToolbarEditor
         pressed={editor.isActive("bold")}
         name="bold"
@@ -92,6 +97,8 @@ export const ToolBarEditor = ({ editor }: Props) => {
       >
         <Strikethrough />
       </ToggleToolbarEditor>
+
+      <ColorToolbarEditor editor={editor} />
 
       <SeparatorToolbarEditor />
 
@@ -159,11 +166,6 @@ export const ToolBarEditor = ({ editor }: Props) => {
 
       <SeparatorToolbarEditor />
 
-      <HeadingToolbarEditor editor={editor} />
-      <ColorToolbarEditor editor={editor} />
-
-      <SeparatorToolbarEditor />
-
       <LinkToolbarEditor editor={editor} />
 
       <ToggleToolbarEditor
@@ -188,6 +190,8 @@ export const ToolBarEditor = ({ editor }: Props) => {
       >
         <Code />
       </ToggleToolbarEditor>
+
+      <EmojiToolbarEditor editor={editor} />
     </div>
   );
 };

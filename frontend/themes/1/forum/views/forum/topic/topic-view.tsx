@@ -117,7 +117,7 @@ export default function TopicView({ data: dataApi }: TopicViewProps) {
             </>
           )}
         </AnimatePresenceClient>
-        {permissions.can_reply && <CreatePost className="mt-5" />}
+        {permissions.can_reply && <CreatePost className="mt-5 -mx-4 sm:mx-0" />}
       </div>
     </div>
   );

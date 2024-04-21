@@ -27,7 +27,7 @@ export const CreatePost = ({ className }: Props) => {
 
   return (
     <Card className={className}>
-      <CardContent className="p-5 flex gap-5 items-start">
+      <CardContent className="sm:p-5 p-4 flex gap-5 items-start">
         <AvatarUser
           className="mt-1 hidden sm:block"
           sizeInRem={3}

@@ -106,19 +106,6 @@
       },
       "color_text": "Kolor tekstu",
       "change_language": "Zmień język",
-
-      "remove_formatting": "Usuń formatowanie",
-      "mixed": "Mieszane",
-      "font_size": "Rozmiar czcionki",
-      "font_color": "Kolor czcionki",
-      "font_background_color": "Kolor tła czcionki",
-      "set_default_color": "Ustaw domyślny kolor",
-      "copy_code": "Kopiuj kod",
-      "code_language": "Język kodu",
-      "prettier": {
-        "format_code": "Formatuj kod",
-        "error_title": "Błąd Prettier"
-      },
       "emoji": {
         "title": "Emoji",
         "search_results": "Wyniki wyszukiwania",
@@ -145,29 +132,8 @@
           "skin_5": "Ciemny"
         }
       },
-      "text": {
-        "bold": "Pogrubienie",
-        "italic": "Kursywa",
-        "underline": "Podkreślenie",
-        "strikethrough": "Przekreślenie",
-        "code": "Kod",
-        "subscript": "Indeks dolny",
-        "superscript": "Indeks górny"
-      },
-      "move": {
-        "undo": "Cofnij",
-        "redo": "Ponów"
-      },
-      "roots": {
-        "title": "Typ bloku",
-        "paragraph": "Normalny",
-        "h1": "Nagłówek H1",
-        "h2": "Nagłówek H2",
-        "h3": "Nagłówek H3",
-        "bullet": "Lista punktowana",
-        "number": "Lista numerowana",
-        "code": "Blok kodu"
-      }
+
+      "remove_formatting": "Usuń formatowanie"
     },
     "icon_picker": {
       "title": "Wybierz ikonę",
