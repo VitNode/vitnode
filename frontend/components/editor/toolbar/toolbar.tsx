@@ -25,6 +25,7 @@ import { HeadingToolbarEditor } from "./custom/heading";
 import { useGlobals } from "@/hooks/core/use-globals";
 import { cn } from "@/functions/classnames";
 import { ColorToolbarEditor } from "./custom/color/color";
+import { EmojiToolbarEditor } from "./custom/emoji/emoji";
 
 interface Props {
   editor: Editor;
@@ -188,6 +189,8 @@ export const ToolBarEditor = ({ editor }: Props) => {
       >
         <Code />
       </ToggleToolbarEditor>
+
+      <EmojiToolbarEditor editor={editor} />
     </div>
   );
 };

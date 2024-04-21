@@ -7,6 +7,7 @@ import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 import { Input } from "@/components/ui/input";
 import { CONFIG } from "@/config";
 import { Loader } from "@/components/loader";
+import { SkinSelectEmojisContentIconInput } from "./emojis/skin-select";
 
 // import { SkinSelectEmojiButtonEditor } from "@/components/editor/toolbar/buttons/emoji/skin-select";
 
@@ -76,12 +77,12 @@ export const ContentIconInput = (props: IconInputProps) => {
             className="h-9"
           />
 
-          {/* {activeTab === Tab.Emoji && (
-            <SkinSelectEmojiButtonEditor
+          {activeTab === Tab.Emoji && (
+            <SkinSelectEmojisContentIconInput
               skinToneIndex={skinToneIndex}
               setSkinToneIndex={setSkinToneIndex}
             />
-          )} */}
+          )}
         </div>
       </div>
 

@@ -1,40 +1,18 @@
 "use client";
 
-import type { EditorView } from "@tiptap/pm/view";
-import { type Editor, ReactRenderer } from "@tiptap/react";
+import { ReactRenderer } from "@tiptap/react";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
-import tippy, {
-  type GetReferenceClientRect,
-  type Instance,
-  type Props
-} from "tippy.js";
+import tippy, { type Instance, type Props } from "tippy.js";
 import { useTranslations } from "next-intl";
 
 import { cn } from "@/functions/classnames";
 import { classPopover } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-
-interface SuggestionProps<I> {
-  command: (props: I) => void;
-  contentComponent: React.ComponentType<{ item: I }>;
-  decorationNode: Element | null;
-  editor: Editor;
-  items: I[];
-  query: string;
-  range: Range;
-  text: string;
-  clientRect?: GetReferenceClientRect;
-}
-
-interface SuggestionKeyDownProps {
-  event: KeyboardEvent;
-  range: Range;
-  view: EditorView;
-}
-
-interface ComponentListRef {
-  onKeyDown: (props: SuggestionKeyDownProps) => boolean;
-}
+import type {
+  ComponentListRef,
+  SuggestionKeyDownProps,
+  SuggestionProps
+} from "../mentions/client";
 
 const ComponentList = forwardRef<
   ComponentListRef,
