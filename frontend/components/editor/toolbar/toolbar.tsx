@@ -62,6 +62,10 @@ export const ToolBarEditor = ({ editor }: Props) => {
 
       <SeparatorToolbarEditor />
 
+      <HeadingToolbarEditor editor={editor} />
+
+      <SeparatorToolbarEditor />
+
       <ToggleToolbarEditor
         pressed={editor.isActive("bold")}
         name="bold"
@@ -93,6 +97,8 @@ export const ToolBarEditor = ({ editor }: Props) => {
       >
         <Strikethrough />
       </ToggleToolbarEditor>
+
+      <ColorToolbarEditor editor={editor} />
 
       <SeparatorToolbarEditor />
 
@@ -157,11 +163,6 @@ export const ToolBarEditor = ({ editor }: Props) => {
       >
         <AlignJustify />
       </ToggleToolbarEditor>
-
-      <SeparatorToolbarEditor />
-
-      <HeadingToolbarEditor editor={editor} />
-      <ColorToolbarEditor editor={editor} />
 
       <SeparatorToolbarEditor />
 

@@ -4,6 +4,7 @@ import { ReactRenderer } from "@tiptap/react";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import tippy, { type Instance, type Props } from "tippy.js";
 import { useTranslations } from "next-intl";
+import type { Emoji } from "@emoji-mart/data";
 
 import { cn } from "@/functions/classnames";
 import { classPopover } from "@/components/ui/popover";
@@ -13,19 +14,30 @@ import type {
   SuggestionKeyDownProps,
   SuggestionProps
 } from "../mentions/client";
+import { CONFIG } from "@/config";
 
 const ComponentList = forwardRef<
   ComponentListRef,
-  { command: (_props: { id: string }) => void; items: string[] }
+  { command: (_props: { id: string }) => void; items: Emoji[] }
 >(({ command, items }, ref) => {
   const t = useTranslations("core");
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const skinToneIndexLocalStorage = localStorage.getItem(
+    CONFIG.local_storage.editor_skin_tone
+  );
+  const skinToneIndex = skinToneIndexLocalStorage
+    ? +skinToneIndexLocalStorage
+    : 0;
 
   const selectItem = (index: number) => {
-    const item = items[index];
+    const emoji = items[index];
+    const icon =
+      emoji.skins.length > skinToneIndex
+        ? emoji.skins[skinToneIndex].native
+        : emoji.skins[0].native;
 
-    if (item) {
-      command({ id: item });
+    if (emoji) {
+      command({ id: icon });
     }
   };
 
@@ -66,19 +78,26 @@ const ComponentList = forwardRef<
   return (
     <>
       {items.length ? (
-        items.map((item, index) => (
-          <Button
-            variant="ghost"
-            className={cn("justify-start", {
-              "bg-accent": index === selectedIndex
-            })}
-            key={index}
-            onClick={() => selectItem(index)}
-            size="sm"
-          >
-            {item}
-          </Button>
-        ))
+        items.map((emoji, index) => {
+          const icon =
+            emoji.skins.length > skinToneIndex
+              ? emoji.skins[skinToneIndex].native
+              : emoji.skins[0].native;
+
+          return (
+            <Button
+              variant="ghost"
+              className={cn("justify-start", {
+                "bg-accent": index === selectedIndex
+              })}
+              key={index}
+              onClick={() => selectItem(index)}
+              size="sm"
+            >
+              <span>{icon}</span> {emoji.id}
+            </Button>
+          );
+        })
       ) : (
         <div className="italic text-muted-foreground">{t("no_results")}</div>
       )}

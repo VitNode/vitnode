@@ -8,7 +8,6 @@ import { TextStyle } from "@tiptap/extension-text-style";
 
 import { ImageExtensionEditor } from "./image/image";
 import { CodeBlockLowlightExtensionEditor } from "./code/code";
-import { EmojiExtensionEditor } from "./emoji/emoji";
 import { MentionExtensionEditor } from "./mentions/emoji";
 
 export const extensionsEditor: Extensions = [
@@ -62,6 +61,5 @@ export const extensionsEditor: Extensions = [
   Color,
   TextStyle,
   ImageExtensionEditor,
-  EmojiExtensionEditor,
   MentionExtensionEditor
 ];
