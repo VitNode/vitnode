@@ -271,6 +271,10 @@
       "notifications": {
         "title": "Powiadomienia",
         "desc": "Konfiguruj jak otrzymujesz powiadomienia."
+      },
+      "files": {
+        "title": "Moje pliki",
+        "desc": "Zarządzaj swoimi plikami."
       }
     },
     "errors": {

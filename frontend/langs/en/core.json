@@ -271,6 +271,10 @@
       "notifications": {
         "title": "Notifications",
         "desc": "Configure how you receive notifications."
+      },
+      "files": {
+        "title": "My Files",
+        "desc": "Manage your files."
       }
     },
     "errors": {
