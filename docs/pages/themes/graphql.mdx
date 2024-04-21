@@ -12,7 +12,7 @@ VitNode use [GraphQL Codegen](https://the-guild.dev/graphql/codegen) to generate
 <Steps>
 ### Find Query or Mutation
 
-First we need to define the GraphQL query in the `graphql/queries/${module_name}` (if you want query) or `graphql/mutations/${module_name}` folder.  
+First we need to define the GraphQL query in the `graphql/queries/{plugin_name}` (if you want query) or `graphql/mutations/{plugin_name}` folder.  
 You can find list of available queries in your API.
 
 If you are running development server go to [http://localhost:8080/graphql](http://localhost:8080/graphql) to see the list of available queries.
@@ -21,7 +21,7 @@ If you are running development server go to [http://localhost:8080/graphql](http
 
 When you find the query or mutation you want to use, copy the query/mutation and paste it in a new file with `.gql` extension. Remember to sort the query by module.
 
-For example file `graphql/queries/module_name/authorization.gql`:
+For example file `graphql/queries/{plugin_name}/authorization.gql`:
 
 ```graphql
 query Authorization_custom_app {

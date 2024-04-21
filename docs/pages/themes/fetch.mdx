@@ -70,7 +70,7 @@ Using [TanStack Query (React Query)](https://tanstack.com/query/latest/docs/reac
 
 ### Create hook
 
-Inside `hooks/{module_name}` create new files with:
+Inside `hooks/{plugin_name}` create new files with:
 
 - suffix `api`, for example `query-api.ts` _(For Server Action)_,
 - prefix `use`, for example `use-use-short-show-groups.ts`
@@ -79,7 +79,7 @@ Your schema should be similar like this:
 
 <FileTree>
   <FileTree.Folder name="hooks" defaultOpen>
-    <FileTree.Folder name="module_name" defaultOpen>
+    <FileTree.Folder name="{plugin_name}" defaultOpen>
       <FileTree.Folder name="groups" defaultOpen>
         <FileTree.File name="query-api.ts" />
         <FileTree.File name="use-use-short-show-groups.ts" />
@@ -146,8 +146,8 @@ export const useShortShowGroupsAdminAPI = () => {
 `refetchOnMount` - is used for refetching data when component is mounted
 
 <Callout type="info" emoji="ℹ️">
-  `queryKey` have to be unique in your app. The best practise to name it is
-  `module_name.method_name`.
+  `queryKey` have to be unique in your app. The best practise to name it is `
+  {plugin_name}.method_name`.
 </Callout>
 
 ### Example use
@@ -199,11 +199,11 @@ Using [TanStack Infinite Queries (React Query)](https://tanstack.com/query/lates
 
 ### Create hook
 
-Inside `hooks/{module_name}` create new file with prefix `use`, for example `use-use-topics-list.ts`.
+Inside `hooks/{plugin_name}` create new file with prefix `use`, for example `use-use-topics-list.ts`.
 
 <FileTree>
   <FileTree.Folder name="hooks" defaultOpen>
-    <FileTree.Folder name="module_name" defaultOpen>
+    <FileTree.Folder name="{plugin_name}" defaultOpen>
       <FileTree.Folder name="topics" defaultOpen>
         <FileTree.File name="query-api.ts" />
         <FileTree.File name="use-use-topics-list.ts" />

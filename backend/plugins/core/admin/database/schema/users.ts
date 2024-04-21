@@ -11,7 +11,6 @@ import {
 } from "drizzle-orm/pg-core";
 
 import { core_groups } from "./groups";
-import { core_files_avatars } from "./files";
 
 export const core_users = pgTable(
   "core_users",
@@ -47,3 +46,26 @@ export const core_users_relations = relations(core_users, ({ one }) => ({
     references: [core_files_avatars.user_id]
   })
 }));
+
+export const core_files_avatars = pgTable("core_files_avatars", {
+  id: serial("id").primaryKey(),
+  dir_folder: varchar("dir_folder", { length: 255 }).notNull(),
+  name: varchar("name", { length: 255 }).notNull(),
+  created: integer("created").notNull(),
+  file_size: integer("file_size").notNull(),
+  mimetype: varchar("mimetype", { length: 255 }).notNull(),
+  extension: varchar("extension", { length: 32 }).notNull(),
+  user_id: integer("user_id").references(() => core_users.id, {
+    onDelete: "cascade"
+  })
+});
+
+export const core_files_avatars_relations = relations(
+  core_files_avatars,
+  ({ one }) => ({
+    user: one(core_users, {
+      fields: [core_files_avatars.user_id],
+      references: [core_users.id]
+    })
+  })
+);

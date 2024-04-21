@@ -758,8 +758,8 @@ type UploadAvatarCoreMembersObj {
   extension: String!
   id: Int!
   mimetype: String!
-  module_name: String!
   name: String!
+  plugin: String!
   size: Int!
 }
 

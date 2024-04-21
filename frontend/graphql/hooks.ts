@@ -1290,8 +1290,8 @@ export type UploadAvatarCoreMembersObj = {
   extension: Scalars['String']['output'];
   id: Scalars['Int']['output'];
   mimetype: Scalars['String']['output'];
-  module_name: Scalars['String']['output'];
   name: Scalars['String']['output'];
+  plugin: Scalars['String']['output'];
   size: Scalars['Int']['output'];
 };
 
@@ -1641,7 +1641,7 @@ export type Core_Members__Avatar__UploadMutationVariables = Exact<{
 }>;
 
 
-export type Core_Members__Avatar__UploadMutation = { __typename?: 'Mutation', core_members__avatar__upload: { __typename?: 'UploadAvatarCoreMembersObj', dir_folder: string, extension: string, id: number, mimetype: string, module_name: string, name: string, size: number } };
+export type Core_Members__Avatar__UploadMutation = { __typename?: 'Mutation', core_members__avatar__upload: { __typename?: 'UploadAvatarCoreMembersObj', id: number } };
 
 export type Core_Sessions__Sign_InMutationVariables = Exact<{
   email: Scalars['String']['input'];
@@ -2365,13 +2365,7 @@ export const Core_Members__Avatar__Delete = gql`
 export const Core_Members__Avatar__Upload = gql`
     mutation Core_members__avatar__upload($file: Upload!) {
   core_members__avatar__upload(file: $file) {
-    dir_folder
-    extension
     id
-    mimetype
-    module_name
-    name
-    size
   }
 }
     `;

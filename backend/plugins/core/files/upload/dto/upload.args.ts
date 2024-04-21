@@ -15,5 +15,5 @@ export class UploadCoreFilesArgs {
   acceptMimeType: string[];
 
   @Field(() => String)
-  module_name: string;
+  plugin: string;
 }

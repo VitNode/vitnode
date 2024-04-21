@@ -8,9 +8,9 @@ import { User } from "@/utils/decorators/user.decorator";
 import { CustomError } from "@/utils/errors/CustomError";
 import { UploadCoreFilesService } from "@/plugins/core/files/upload/upload.service";
 import { DatabaseService } from "@/plugins/database/database.service";
-import { core_files_avatars } from "@/plugins/core/admin/database/schema/files";
 import { currentDate } from "@/functions/date";
 import { DeleteCoreFilesService } from "@/plugins/core/files/delete/delete.service";
+import { core_files_avatars } from "@/plugins/core/admin/database/schema/users";
 
 @Injectable()
 export class UploadAvatarCoreMembersService {
@@ -47,7 +47,7 @@ export class UploadAvatarCoreMembersService {
       files: [file],
       maxUploadSizeBytes: 1e6, // 1MB,
       acceptMimeType: ["image/png", "image/jpeg"],
-      module_name: "avatars"
+      plugin: "avatars"
     });
 
     const uploadFile = uploadFiles[0];

@@ -4,7 +4,8 @@ import { eq } from "drizzle-orm";
 import { User } from "@/utils/decorators/user.decorator";
 import { DeleteCoreFilesService } from "@/plugins/core/files/delete/delete.service";
 import { DatabaseService } from "@/plugins/database/database.service";
-import { core_files_avatars } from "@/plugins/core/admin/database/schema/files";
+import { core_files_avatars } from "@/plugins/core/admin/database/schema/users";
+
 @Injectable()
 export class DeleteAvatarCoreMembersService {
   constructor(
