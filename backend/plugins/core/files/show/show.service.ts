@@ -43,7 +43,8 @@ export class ShowCoreFilesService {
 
     const totalCount = await this.databaseService.db
       .select({ count: count() })
-      .from(core_files);
+      .from(core_files)
+      .where(where);
 
     return outputPagination({ edges, totalCount, first, cursor, last });
   }

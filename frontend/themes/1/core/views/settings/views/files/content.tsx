@@ -9,6 +9,7 @@ import type {
   Core_Members__Files__ShowQuery,
   ShowCoreFiles
 } from "@/graphql/hooks";
+import { DateFormat } from "@/components/date-format/date-format";
 
 export const ContentFilesSettings = ({
   core_files__show: { edges, pageInfo }
@@ -18,12 +19,21 @@ export const ContentFilesSettings = ({
   const columns: ColumnDef<ShowCoreFiles>[] = useMemo(
     () => [
       {
+        header: "id",
+        accessorKey: "id"
+      },
+      {
         header: tCore("table.name"),
         accessorKey: "file_name"
       },
       {
         header: tCore("table.created"),
-        accessorKey: "created"
+        accessorKey: "created",
+        cell: ({ row }) => {
+          const data = row.original;
+
+          return <DateFormat date={data.created} />;
+        }
       }
     ],
     []

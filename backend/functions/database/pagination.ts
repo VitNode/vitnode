@@ -34,13 +34,11 @@ export function outputPagination<T>({
 }: OutputPaginationArgs<T>): OutputPaginationReturn<T> {
   let currentEdges: DataInterface<T>[] = edges;
 
-  if (cursor) {
-    currentEdges = first ? edges.slice(0, first) : edges.slice(-last);
-  }
-
   if (last) {
     currentEdges = currentEdges.reverse();
   }
+
+  currentEdges = first ? edges.slice(0, first) : edges.slice(-last);
 
   const edgesCursor = {
     start: currentEdges.at(0)?.id,
@@ -64,7 +62,9 @@ export function outputPagination<T>({
   return {
     edges: currentEdges,
     pageInfo: {
-      hasNextPage: cursor ? !!edges.at(first) : currentEdges.length === first,
+      hasNextPage: cursor
+        ? !!edges.at(first)
+        : edges.length > currentEdges.length,
       startCursor: edgesCursor.start,
       endCursor: edgesCursor.end,
       totalCount: totalCount[0].count,
@@ -145,7 +145,7 @@ export async function inputPaginationCursor<T extends TableConfig>({
     return {
       where: undefined,
       orderBy,
-      limit: (first || last) ?? 0
+      limit: (first || last) + 1 ?? 0
     };
   }
 
@@ -165,14 +165,11 @@ export async function inputPaginationCursor<T extends TableConfig>({
   const cursorItem = cursorData[0];
 
   if (!cursorItem) {
-    throw new CustomError({
-      code: "PAGINATION_ERROR",
-      message: `Cursor item not found`
-    });
-  }
-
-  if (!cursorItem) {
-    return undefined;
+    return {
+      limit: 0,
+      orderBy,
+      where: undefined
+    };
   }
 
   const matrix = generateSubArrays([...cursors, primaryCursor]);

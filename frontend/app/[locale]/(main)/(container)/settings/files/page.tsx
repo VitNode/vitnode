@@ -18,11 +18,7 @@ const getData = async (variables: Core_Members__Files__ShowQueryVariables) => {
     Core_Members__Files__ShowQueryVariables
   >({
     query: Core_Members__Files__Show,
-    variables,
-    cache: "force-cache",
-    next: {
-      tags: ["Core_Members__Files__Show"]
-    }
+    variables
   });
 
   return data;

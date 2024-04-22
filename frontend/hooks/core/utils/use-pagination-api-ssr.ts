@@ -31,7 +31,9 @@ export function usePaginationAPISsr<T extends { [key: string]: unknown }>({
   sortByEnum
 }: Args<T>): ReturnValues<T> {
   const pagination = {
-    first: Number(searchParams.first ?? 0),
+    first: Number(searchParams.last ?? 0)
+      ? null
+      : Number(searchParams.first ?? 0),
     last: Number(searchParams.last ?? 0),
     cursor: Number(searchParams.cursor) ?? null,
     search: search ? searchParams.search ?? "" : "",

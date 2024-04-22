@@ -241,3 +241,28 @@ const variables = usePaginationAPISsr({
 ```
 
 </Steps>
+
+## Custom Cell
+
+You can create a custom cell for the table. To do this, you need to add `cell()` function to the column.
+
+```tsx {10-14}
+const columns: ColumnDef<ShowCoreFiles>[] = useMemo(
+  () => [
+    {
+      header: tCore("table.name"),
+      accessorKey: "file_name"
+    },
+    {
+      header: tCore("table.created"),
+      accessorKey: "created",
+      cell: ({ row }) => {
+        const data = row.original;
+
+        return <DateFormat date={data.created} />;
+      }
+    }
+  ],
+  []
+);
+```
