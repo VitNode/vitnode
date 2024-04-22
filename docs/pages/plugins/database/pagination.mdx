@@ -33,6 +33,19 @@ import { PaginationArgs } from "@/types/database/pagination.type";
 export class ShowBlogCategoriesArgs extends PaginationArgs {}
 ```
 
+#### InputType
+
+If you want to use `InputType` you can use `PaginationInput` from `pagination.type`.
+
+```ts
+import { ArgsType } from "@nestjs/graphql";
+
+import { PaginationInput } from "@/types/database/pagination.type";
+
+@InputType()
+export class ShowBlogCategoriesArgs extends PaginationInput {}
+```
+
 ### Object
 
 File: `show/dto/show.obj.ts`

@@ -1,7 +1,7 @@
 import { Field, InputType, registerEnumType } from "@nestjs/graphql";
 
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
-import { PaginationArgs } from "@/types/database/pagination.type";
+import { PaginationInput } from "@/types/database/pagination.type";
 
 enum LastPostsShowForumForumsSortingColumnEnum {
   created = "created",
@@ -22,7 +22,7 @@ class LastPostsShowForumForumsSortByArgs {
 }
 
 @InputType()
-export class LastPostsShowForumForumsArgs extends PaginationArgs {
+export class LastPostsShowForumForumsArgs extends PaginationInput {
   @Field(() => [LastPostsShowForumForumsSortByArgs], { nullable: true })
   sortBy: LastPostsShowForumForumsSortByArgs[] | null;
 }

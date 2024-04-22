@@ -153,6 +153,9 @@ export type LastPostsShowForumForums = {
 };
 
 export type LastPostsShowForumForumsArgs = {
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   sortBy?: InputMaybe<Array<LastPostsShowForumForumsSortByArgs>>;
 };
 
