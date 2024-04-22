@@ -266,3 +266,62 @@ const columns: ColumnDef<ShowCoreFiles>[] = useMemo(
   []
 );
 ```
+
+## Sorting Coluumn
+
+You can sort the column by clicking on the column header.
+
+<Steps>
+
+### Prepare Query
+
+You need to add `sortBy` param for your query. See more in [Sorting for Database](/plugins/database/sorting) documentation.
+
+### DataTable
+
+You need to modyfy `header()` function to the column.
+
+```tsx {1, 10-16}
+import { HeaderSortingDataTable } from "@/components/data-table/header";
+
+const columns: ColumnDef<ShowCoreFiles>[] = useMemo(
+  () => [
+    {
+      header: tCore("table.name"),
+      accessorKey: "file_name"
+    },
+    {
+      header: val => {
+        return (
+          <HeaderSortingDataTable {...val}>
+            {tCore("table.created")}
+          </HeaderSortingDataTable>
+        );
+      },
+      accessorKey: "created",
+      cell: ({ row }) => {
+        const data = row.original;
+
+        return <DateFormat date={data.created} />;
+      }
+    }
+  ],
+  []
+);
+```
+
+### usePaginationAPISsr
+
+Next you need to provide `sortByEnum` enum to `usePaginationAPISsr` hook.
+
+```tsx {6}
+import { ShowCoreFilesSortingColumnEnum } from "@/graphql/hooks";
+
+const variables = usePaginationAPISsr({
+  searchParams,
+  defaultPageSize: 10,
+  sortByEnum: ShowCoreFilesSortingColumnEnum
+});
+```
+
+</Steps>

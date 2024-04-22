@@ -10,6 +10,7 @@ import type {
   ShowCoreFiles
 } from "@/graphql/hooks";
 import { DateFormat } from "@/components/date-format/date-format";
+import { HeaderSortingDataTable } from "@/components/data-table/header";
 
 export const ContentFilesSettings = ({
   core_files__show: { edges, pageInfo }
@@ -27,7 +28,13 @@ export const ContentFilesSettings = ({
         accessorKey: "file_name"
       },
       {
-        header: tCore("table.created"),
+        header: val => {
+          return (
+            <HeaderSortingDataTable {...val}>
+              {tCore("table.created")}
+            </HeaderSortingDataTable>
+          );
+        },
         accessorKey: "created",
         cell: ({ row }) => {
           const data = row.original;

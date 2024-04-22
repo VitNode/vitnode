@@ -288,7 +288,7 @@ type Query {
   admin__install__layout: LayoutAdminInstallObj!
   admin__sessions__authorization: AuthorizationAdminSessionsObj!
   blog_categories__show(cursor: Int, first: Int, last: Int): ShowBlogCategoriesObj!
-  core_files__show(cursor: Int, first: Int, last: Int): ShowCoreFilesObj!
+  core_files__show(cursor: Int, first: Int, last: Int, sortBy: [SortByArgs!]): ShowCoreFilesObj!
   core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowCoreLanguagesSortByArgs!]): ShowCoreLanguagesObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
@@ -518,6 +518,10 @@ type ShowCoreFilesObj {
   pageInfo: PageInfo!
 }
 
+enum ShowCoreFilesSortingColumnEnum {
+  created
+}
+
 type ShowCoreLanguages {
   allow_in_input: Boolean!
   code: String!
@@ -731,6 +735,11 @@ type SignUpCoreMembersObj {
 type SignUpStatsAdminMembers {
   joined_date: String!
   users_joined: Int!
+}
+
+input SortByArgs {
+  column: ShowCoreFilesSortingColumnEnum!
+  direction: SortDirectionEnum!
 }
 
 enum SortDirectionEnum {

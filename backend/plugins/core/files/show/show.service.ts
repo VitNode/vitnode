@@ -19,7 +19,7 @@ export class ShowCoreFilesService {
 
   async show(
     { id: user_id }: User,
-    { cursor, first, last }: ShowCoreFilesArgs
+    { cursor, first, last, sortBy }: ShowCoreFilesArgs
   ): Promise<ShowCoreFilesObj> {
     const pagination = await inputPaginationCursor({
       cursor,
@@ -29,9 +29,10 @@ export class ShowCoreFilesService {
       last,
       primaryCursor: { order: "ASC", key: "id", schema: core_files.id },
       defaultSortBy: {
-        direction: SortDirectionEnum.desc,
+        direction: SortDirectionEnum.asc,
         column: "created"
-      }
+      },
+      sortBy
     });
 
     const where = eq(core_files.user_id, user_id);

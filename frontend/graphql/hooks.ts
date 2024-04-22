@@ -742,6 +742,7 @@ export type QueryCore_Files__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<Array<SortByArgs>>;
 };
 
 
@@ -1036,6 +1037,11 @@ export type ShowCoreFilesObj = {
   pageInfo: PageInfo;
 };
 
+export const ShowCoreFilesSortingColumnEnum = {
+  created: 'created'
+} as const;
+
+export type ShowCoreFilesSortingColumnEnum = typeof ShowCoreFilesSortingColumnEnum[keyof typeof ShowCoreFilesSortingColumnEnum];
 export type ShowCoreLanguages = {
   __typename?: 'ShowCoreLanguages';
   allow_in_input: Scalars['Boolean']['output'];
@@ -1276,6 +1282,11 @@ export type SignUpStatsAdminMembers = {
   __typename?: 'SignUpStatsAdminMembers';
   joined_date: Scalars['String']['output'];
   users_joined: Scalars['Int']['output'];
+};
+
+export type SortByArgs = {
+  column: ShowCoreFilesSortingColumnEnum | `${ShowCoreFilesSortingColumnEnum}`;
+  direction: SortDirectionEnum | `${SortDirectionEnum}`;
 };
 
 export const SortDirectionEnum = {
@@ -1959,6 +1970,7 @@ export type Core_Members__Files__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<Array<SortByArgs> | SortByArgs>;
 }>;
 
 
@@ -3221,8 +3233,8 @@ export const Core_Members__Show__Search = gql`
 }
     `;
 export const Core_Members__Files__Show = gql`
-    query Core_members__files__show($cursor: Int, $first: Int, $last: Int) {
-  core_files__show(cursor: $cursor, first: $first, last: $last) {
+    query Core_members__files__show($cursor: Int, $first: Int, $last: Int, $sortBy: [SortByArgs!]) {
+  core_files__show(cursor: $cursor, first: $first, last: $last, sortBy: $sortBy) {
     edges {
       id
       file_name

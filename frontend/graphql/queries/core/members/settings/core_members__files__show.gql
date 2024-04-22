@@ -1,5 +1,15 @@
-query Core_members__files__show($cursor: Int, $first: Int, $last: Int) {
-  core_files__show(cursor: $cursor, first: $first, last: $last) {
+query Core_members__files__show(
+  $cursor: Int
+  $first: Int
+  $last: Int
+  $sortBy: [SortByArgs!]
+) {
+  core_files__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+    sortBy: $sortBy
+  ) {
     edges {
       id
       file_name

@@ -3,6 +3,7 @@ import { lazy, type LazyExoticComponent } from "react";
 import { getSessionData } from "@/functions/get-session-data";
 import {
   Core_Members__Files__Show,
+  ShowCoreFilesSortingColumnEnum,
   type Core_Members__Files__ShowQuery,
   type Core_Members__Files__ShowQueryVariables
 } from "@/graphql/hooks";
@@ -33,7 +34,8 @@ export default async function Page({ searchParams }: Props) {
   const variables = usePaginationAPISsr({
     searchParams,
     defaultPageSize: 10,
-    search: true
+    search: true,
+    sortByEnum: ShowCoreFilesSortingColumnEnum
   });
   const data = await getData(variables);
 
