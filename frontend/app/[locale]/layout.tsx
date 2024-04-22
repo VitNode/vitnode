@@ -13,8 +13,8 @@ import {
 import { getConfigFile } from "@/config/get-config-file";
 import { cn } from "@/functions/classnames";
 import { CatchLayout } from "./catch";
-import "./global.scss";
-import "@/app/[locale]/(admin)/admin/global.scss";
+import "./global.css";
+import "@/app/[locale]/(admin)/admin/global.css";
 
 const getData = async () => {
   const { data } = await fetcher<

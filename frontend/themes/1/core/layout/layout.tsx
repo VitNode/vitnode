@@ -5,7 +5,7 @@ import { QuickMenu } from "./quick-menu/quick-menu";
 import { PoweredByVitNode } from "@/admin/core/global/powered-by";
 import type { TextLanguage } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
-import "./global.scss";
+import "./global.css";
 
 interface Props {
   children: ReactNode;
