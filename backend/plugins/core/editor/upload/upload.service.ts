@@ -6,9 +6,9 @@ import { UploadCoreEditorObj } from "./dto/upload.obj";
 
 import { DatabaseService } from "@/plugins/database/database.service";
 import { User } from "@/utils/decorators/user.decorator";
-import { UploadCoreFilesService } from "../../files/upload/upload.service";
-import { HelpersUploadCoreFilesService } from "../../files/upload/helpers";
-import { UploadCoreFilesArgs } from "../../files/upload/dto/upload.args";
+import { UploadCoreFilesService } from "../../files/helpers/upload/upload.service";
+import { HelpersUploadCoreFilesService } from "../../files/helpers/upload/helpers";
+import { UploadCoreFilesArgs } from "../../files/helpers/upload/dto/upload.args";
 import { core_files } from "../../admin/database/schema/files";
 
 @Injectable()
