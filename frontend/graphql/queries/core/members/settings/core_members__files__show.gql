@@ -1,0 +1,17 @@
+query Core_members__files__show($cursor: Int, $first: Int, $last: Int) {
+  core_files__show(cursor: $cursor, first: $first, last: $last) {
+    edges {
+      id
+      file_name
+      created
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+  }
+}

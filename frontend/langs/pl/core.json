@@ -277,7 +277,8 @@
       },
       "files": {
         "title": "Moje pliki",
-        "desc": "Zarządzaj swoimi plikami."
+        "desc": "Zarządzaj swoimi plikami.",
+        "search": "Szukaj plików przez nazwę..."
       }
     },
     "errors": {

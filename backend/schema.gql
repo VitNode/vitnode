@@ -505,6 +505,8 @@ type ShowBlogCategoriesObj {
 }
 
 type ShowCoreFiles {
+  created: DateTime!
+  file_name: String!
   id: Int!
 }
 

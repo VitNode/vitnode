@@ -37,7 +37,10 @@ const getData = async (variables: Forum_Forums__ShowQueryVariables) => {
   >({
     query: Forum_Forums__Show,
     variables,
-    cache: "force-cache" // this option is used for caching data for GraphQL
+    cache: "force-cache" // this option is used for caching data for GraphQL,
+    next: {
+      tags: ["Forum_Forums__Show"] // this option is used for caching data for GraphQL
+    }
   });
 
   return data;

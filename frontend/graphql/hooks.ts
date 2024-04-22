@@ -1022,6 +1022,8 @@ export type ShowBlogCategoriesObj = {
 
 export type ShowCoreFiles = {
   __typename?: 'ShowCoreFiles';
+  created: Scalars['DateTime']['output'];
+  file_name: Scalars['String']['output'];
   id: Scalars['Int']['output'];
 };
 
@@ -1949,6 +1951,15 @@ export type Core_Members__Show__SearchQueryVariables = Exact<{
 
 
 export type Core_Members__Show__SearchQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, id: number, name: string, name_seo: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
+
+export type Core_Members__Files__ShowQueryVariables = Exact<{
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type Core_Members__Files__ShowQuery = { __typename?: 'Query', core_files__show: { __typename?: 'ShowCoreFilesObj', edges: Array<{ __typename?: 'ShowCoreFiles', id: number, file_name: string, created: Date }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Core_Members__ProfilesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -3202,6 +3213,25 @@ export const Core_Members__Show__Search = gql`
       id
       name
       name_seo
+    }
+  }
+}
+    `;
+export const Core_Members__Files__Show = gql`
+    query Core_members__files__show($cursor: Int, $first: Int, $last: Int) {
+  core_files__show(cursor: $cursor, first: $first, last: $last) {
+    edges {
+      id
+      file_name
+      created
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
     }
   }
 }

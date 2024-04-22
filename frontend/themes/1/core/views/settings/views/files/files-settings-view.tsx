@@ -6,8 +6,12 @@ import {
   CardDescription,
   CardHeader
 } from "@/components/ui/card";
+import { ContentFilesSettings } from "./content";
+import type { Core_Members__Files__ShowQuery } from "@/graphql/hooks";
 
-export default function FilesSettingsView() {
+export default function FilesSettingsView(
+  props: Core_Members__Files__ShowQuery
+) {
   const t = useTranslations("core.settings.files");
 
   return (
@@ -19,7 +23,9 @@ export default function FilesSettingsView() {
         <CardDescription>{t("desc")}</CardDescription>
       </CardHeader>
 
-      <CardContent>Not implemented!</CardContent>
+      <CardContent>
+        <ContentFilesSettings {...props} />
+      </CardContent>
     </Card>
   );
 }

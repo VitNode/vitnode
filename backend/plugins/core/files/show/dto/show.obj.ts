@@ -6,6 +6,12 @@ import { PageInfo } from "@/types/database/pagination.type";
 class ShowCoreFiles {
   @Field(() => Int)
   id: number;
+
+  @Field(() => Date)
+  created: Date;
+
+  @Field(() => String)
+  file_name: string;
 }
 
 @ObjectType()
