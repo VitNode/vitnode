@@ -4,6 +4,8 @@ import { UploadCoreFilesService } from "./helpers/upload/upload.service";
 import { DeleteCoreFilesService } from "./helpers/delete/delete.service";
 import { DownloadFilesController } from "./download/download.controller";
 import { AuthorizationAdminSessionsService } from "../admin/sessions/authorization/authorization.service";
+import { ShowCoreFilesService } from "./show/show.service";
+import { ShowCoreFilesResolver } from "./show/show.resolver";
 
 @Global()
 @Module({
@@ -14,5 +16,10 @@ import { AuthorizationAdminSessionsService } from "../admin/sessions/authorizati
   ],
   exports: [UploadCoreFilesService, DeleteCoreFilesService],
   controllers: [DownloadFilesController]
+})
+export class CoreFilesModuleGlobal {}
+
+@Module({
+  providers: [ShowCoreFilesService, ShowCoreFilesResolver]
 })
 export class CoreFilesModule {}

@@ -285,6 +285,7 @@ type Query {
   admin__install__layout: LayoutAdminInstallObj!
   admin__sessions__authorization: AuthorizationAdminSessionsObj!
   blog_categories__show(cursor: Int, first: Int, last: Int): ShowBlogCategoriesObj!
+  core_files__show(cursor: Int, first: Int, last: Int): ShowCoreFilesObj!
   core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowCoreLanguagesSortByArgs!]): ShowCoreLanguagesObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
@@ -500,6 +501,15 @@ type ShowBlogCategories {
 
 type ShowBlogCategoriesObj {
   edges: [ShowBlogCategories!]!
+  pageInfo: PageInfo!
+}
+
+type ShowCoreFiles {
+  id: Int!
+}
+
+type ShowCoreFilesObj {
+  edges: [ShowCoreFiles!]!
   pageInfo: PageInfo!
 }
 

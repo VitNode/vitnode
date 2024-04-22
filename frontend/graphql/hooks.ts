@@ -153,9 +153,6 @@ export type LastPostsShowForumForums = {
 };
 
 export type LastPostsShowForumForumsArgs = {
-  cursor?: InputMaybe<Scalars['Int']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
   sortBy?: InputMaybe<Array<LastPostsShowForumForumsSortByArgs>>;
 };
 
@@ -228,6 +225,7 @@ export type Mutation = {
   admin__forum_forums__edit: CreateForumForumsObj;
   admin__install__create_database: Scalars['String']['output'];
   admin_sessions__sign_out: Scalars['String']['output'];
+  core_editor__upload: UploadCoreEditorObj;
   core_groups__admin_create: ShowAdminGroups;
   core_members__avatar__delete: Scalars['String']['output'];
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
@@ -504,6 +502,13 @@ export type MutationAdmin__Forum_Forums__EditArgs = {
 };
 
 
+export type MutationCore_Editor__UploadArgs = {
+  file: Scalars['Upload']['input'];
+  folder: Scalars['String']['input'];
+  plugin: Scalars['String']['input'];
+};
+
+
 export type MutationCore_Groups__Admin_CreateArgs = {
   name: Array<TextLanguageInput>;
 };
@@ -634,6 +639,7 @@ export type Query = {
   admin__install__layout: LayoutAdminInstallObj;
   admin__sessions__authorization: AuthorizationAdminSessionsObj;
   blog_categories__show: ShowBlogCategoriesObj;
+  core_files__show: ShowCoreFilesObj;
   core_languages__show: ShowCoreLanguagesObj;
   core_members__show: ShowCoreMembersObj;
   core_nav__show: ShowCoreNavObj;
@@ -723,6 +729,13 @@ export type QueryAdmin__Forum_Forums__ShowArgs = {
 
 
 export type QueryBlog_Categories__ShowArgs = {
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryCore_Files__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
@@ -1004,6 +1017,17 @@ export type ShowBlogCategories = {
 export type ShowBlogCategoriesObj = {
   __typename?: 'ShowBlogCategoriesObj';
   edges: Array<ShowBlogCategories>;
+  pageInfo: PageInfo;
+};
+
+export type ShowCoreFiles = {
+  __typename?: 'ShowCoreFiles';
+  id: Scalars['Int']['output'];
+};
+
+export type ShowCoreFilesObj = {
+  __typename?: 'ShowCoreFilesObj';
+  edges: Array<ShowCoreFiles>;
   pageInfo: PageInfo;
 };
 
@@ -1293,6 +1317,17 @@ export type UploadAvatarCoreMembersObj = {
   id: Scalars['Int']['output'];
   mimetype: Scalars['String']['output'];
   plugin: Scalars['String']['output'];
+};
+
+export type UploadCoreEditorObj = {
+  __typename?: 'UploadCoreEditorObj';
+  dir_folder: Scalars['String']['output'];
+  extension: Scalars['String']['output'];
+  file_name: Scalars['String']['output'];
+  file_size: Scalars['Int']['output'];
+  mimetype: Scalars['String']['output'];
+  plugin: Scalars['String']['output'];
+  user_id: Scalars['Int']['output'];
 };
 
 export type User = {
