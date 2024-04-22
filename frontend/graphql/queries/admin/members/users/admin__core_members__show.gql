@@ -27,7 +27,7 @@ query Admin__core_members__show(
       avatar {
         id
         dir_folder
-        name
+        file_name
       }
       email
       id

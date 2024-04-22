@@ -6,5 +6,5 @@ export class DeleteCoreFilesArgs {
   dir_folder: string;
 
   @Field(() => String)
-  name: string;
+  file_name: string;
 }

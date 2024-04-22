@@ -13,6 +13,7 @@ import { CoreNavModule } from "./nav/nav.module";
 import { AdminModule } from "./admin/admin.module";
 import { CorePluginsModule } from "./plugins/plugins.module";
 import { CoreSettingsModule } from "./settings/settings.module";
+import { CoreEditorModule } from "./editor/editor.module";
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { CoreSettingsModule } from "./settings/settings.module";
     CoreThemesModule,
     CoreNavModule,
     CorePluginsModule,
-    CoreSettingsModule
+    CoreSettingsModule,
+    CoreEditorModule
   ]
 })
 export class CoreModule {}

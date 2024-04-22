@@ -5,7 +5,7 @@ query Core_members__profiles($first: Int, $nameSeo: String!) {
       avatar {
         id
         dir_folder
-        name
+        file_name
       }
       group {
         name {

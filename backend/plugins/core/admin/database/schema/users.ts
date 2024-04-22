@@ -50,7 +50,7 @@ export const core_users_relations = relations(core_users, ({ one }) => ({
 export const core_files_avatars = pgTable("core_files_avatars", {
   id: serial("id").primaryKey(),
   dir_folder: varchar("dir_folder", { length: 255 }).notNull(),
-  name: varchar("name", { length: 255 }).notNull(),
+  file_name: varchar("file_name", { length: 255 }).notNull(),
   created: integer("created").notNull(),
   file_size: integer("file_size").notNull(),
   mimetype: varchar("mimetype", { length: 255 }).notNull(),

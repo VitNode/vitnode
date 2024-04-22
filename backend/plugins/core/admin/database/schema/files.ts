@@ -1,4 +1,11 @@
-import { index, integer, pgTable, serial, varchar } from "drizzle-orm/pg-core";
+import {
+  index,
+  integer,
+  pgTable,
+  serial,
+  timestamp,
+  varchar
+} from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
 import { core_users } from "./users";
@@ -8,17 +15,18 @@ export const core_files = pgTable(
   {
     id: serial("id").primaryKey(),
     extension: varchar("extension", { length: 32 }).notNull(),
-    alt: varchar("alt", { length: 255 }).notNull(),
+    file_alt: varchar("file_alt", { length: 255 }),
+    file_name: varchar("file_name", { length: 255 }).notNull(),
     dir_folder: varchar("dir_folder", { length: 255 }).notNull(),
     user_id: integer("user_id")
       .notNull()
       .references(() => core_users.id, {
         onDelete: "cascade"
       }),
-    created: integer("created").notNull(),
+    created: timestamp("created").notNull().defaultNow(),
     file_size: integer("file_size").notNull(),
     plugin: varchar("plugin", { length: 255 }).notNull(),
-    mimetype: varchar("mimetype", { length: 255 }),
+    mimetype: varchar("mimetype", { length: 255 }).notNull(),
     width: integer("width"),
     height: integer("height"),
     security_key: varchar("security_key", { length: 255 })

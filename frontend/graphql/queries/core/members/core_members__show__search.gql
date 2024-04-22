@@ -5,7 +5,7 @@ query Core_members__show__search($search: String, $first: Int) {
       avatar {
         id
         dir_folder
-        name
+        file_name
       }
       group {
         id

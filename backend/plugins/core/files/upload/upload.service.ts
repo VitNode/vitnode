@@ -9,15 +9,39 @@ import { HelpersUploadCoreFilesService } from "./helpers";
 
 import { generateRandomString } from "@/functions/generate-random-string";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
+import { DatabaseService } from "@/plugins/database/database.service";
+import { CustomError } from "@/utils/errors/CustomError";
 
 @Injectable()
 export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
+  constructor(private readonly databaseService: DatabaseService) {
+    super();
+  }
+
   async upload({
     acceptMimeType,
     files,
+    folder,
     maxUploadSizeBytes,
-    plugin
+    plugin,
+    secure = false
   }: UploadCoreFilesArgs): Promise<UploadCoreFilesObj[]> {
+    // Check if plugin exists
+    const pluginExists =
+      await this.databaseService.db.query.core_plugins.findFirst({
+        where: (table, { eq }) => eq(table.code, plugin),
+        columns: {
+          code: true
+        }
+      });
+
+    if (!pluginExists && plugin !== "core") {
+      throw new CustomError({
+        code: "PLUGIN_NOT_FOUND",
+        message: `Plugin "${plugin}" not found`
+      });
+    }
+
     // Validate files
     await Promise.all(
       files.map(async file => {
@@ -31,19 +55,21 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
     const dir = join(
       "uploads",
       `monthly_${date.getMonth() + 1}_${date.getFullYear()}`,
-      plugin
+      plugin,
+      folder
     );
-    const dirFolder = join(process.cwd(), "..", "frontend", "public", dir);
+    const dirFolder = secure
+      ? join(process.cwd(), dir) // Save files in the backend folder
+      : join(process.cwd(), "..", "frontend", "public", dir); // Save files in the frontend folder
     if (!existsSync(dirFolder)) {
       mkdirSync(dirFolder, { recursive: true });
     }
 
-    const saveFiles = await Promise.all(
+    return await Promise.all(
       files.map(async file => {
         const { createReadStream, filename, mimetype } = await file;
         const extension = filename.split(".").pop();
         const name = filename.split(".").shift();
-
         const stream = createReadStream();
 
         // Generate file name
@@ -66,14 +92,12 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
         return {
           plugin,
           mimetype,
-          name: currentFileName,
+          file_name: currentFileName,
           dir_folder: dir,
           extension,
-          size: stat.size
+          file_size: stat.size
         };
       })
     );
-
-    return saveFiles;
   }
 }

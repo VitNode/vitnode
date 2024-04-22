@@ -28,8 +28,8 @@ type AuthorizationCurrentUserObj {
 
 type AvatarUser {
   dir_folder: String!
+  file_name: String!
   id: Int!
-  name: String!
 }
 
 type BreadcrumbsForumForums {
@@ -199,6 +199,7 @@ type Mutation {
   admin__forum_forums__edit(description: [TextLanguageInput!]!, id: Int!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
   admin__install__create_database: String!
   admin_sessions__sign_out: String!
+  core_editor__upload(file: Upload!, folder: String!, plugin: String!): UploadCoreEditorObj!
   core_groups__admin_create(name: [TextLanguageInput!]!): ShowAdminGroups!
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
@@ -756,11 +757,21 @@ scalar Upload
 type UploadAvatarCoreMembersObj {
   dir_folder: String!
   extension: String!
+  file_name: String!
+  file_size: Int!
   id: Int!
   mimetype: String!
-  name: String!
   plugin: String!
-  size: Int!
+}
+
+type UploadCoreEditorObj {
+  dir_folder: String!
+  extension: String!
+  file_name: String!
+  file_size: Int!
+  mimetype: String!
+  plugin: String!
+  user_id: Int!
 }
 
 type User {

@@ -9,7 +9,7 @@ mutation Forum_posts__create($content: [TextLanguageInput!]!, $topicId: Int!) {
       avatar {
         dir_folder
         id
-        name
+        file_name
       }
       avatar_color
       group {

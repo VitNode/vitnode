@@ -9,7 +9,7 @@ export class UploadCoreFilesObj {
   mimetype: string;
 
   @Field(() => String)
-  name: string;
+  file_name: string;
 
   @Field(() => String)
   dir_folder: string;
@@ -18,5 +18,5 @@ export class UploadCoreFilesObj {
   extension: string;
 
   @Field(() => Int)
-  size: number;
+  file_size: number;
 }

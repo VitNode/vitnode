@@ -8,7 +8,7 @@ export class HelpersUploadCoreFilesService {
   }: {
     file: Promise<FileUpload>;
     maxUploadSizeBytes: number;
-  }) {
+  }): Promise<number> {
     const { createReadStream, filename } = await file;
     const stream = createReadStream();
     const chunks = [];
@@ -34,16 +34,19 @@ export class HelpersUploadCoreFilesService {
 
   protected async checkAcceptMimeType({
     acceptMimeType,
+    disableThrowError,
     file
   }: {
     acceptMimeType: string[];
     file: Promise<FileUpload>;
-  }) {
-    if (acceptMimeType.length === 0) return;
-
+    disableThrowError?: boolean;
+  }): Promise<boolean> {
     const { filename, mimetype } = await file;
+    if (acceptMimeType.length === 0) {
+      return true;
+    }
 
-    if (!acceptMimeType.includes(mimetype)) {
+    if (!acceptMimeType.includes(mimetype) && !disableThrowError) {
       throw new CustomError({
         code: "INVALID_TYPE_FILE",
         message: `${filename} file has invalid type! We only accept the following types: ${acceptMimeType.join(
@@ -51,5 +54,7 @@ export class HelpersUploadCoreFilesService {
         )}.`
       });
     }
+
+    return acceptMimeType.includes(mimetype);
   }
 }

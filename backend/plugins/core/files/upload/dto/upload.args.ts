@@ -16,4 +16,10 @@ export class UploadCoreFilesArgs {
 
   @Field(() => String)
   plugin: string;
+
+  @Field(() => String)
+  folder: string;
+
+  @Field(() => Boolean, { nullable: true })
+  secure?: boolean | null;
 }

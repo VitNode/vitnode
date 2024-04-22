@@ -26,10 +26,7 @@ export class UploadAvatarCoreMembersService {
   ): Promise<UploadAvatarCoreMembersObj> {
     if (avatar) {
       // Check if avatar exists
-      this.deleteFile.checkIfFileExists({
-        dir_folder: avatar.dir_folder,
-        name: avatar.name
-      });
+      this.deleteFile.checkIfFileExists(avatar);
 
       // Delete from database
       await this.databaseService.db
@@ -37,17 +34,15 @@ export class UploadAvatarCoreMembersService {
         .where(eq(core_files_avatars.id, avatar.id));
 
       // Delete from server
-      this.deleteFile.delete({
-        dir_folder: avatar.dir_folder,
-        name: avatar.name
-      });
+      this.deleteFile.delete(avatar);
     }
 
     const uploadFiles = await this.uploadFile.upload({
       files: [file],
       maxUploadSizeBytes: 1e6, // 1MB,
       acceptMimeType: ["image/png", "image/jpeg"],
-      plugin: "avatars"
+      plugin: "core",
+      folder: "avatars"
     });
 
     const uploadFile = uploadFiles[0];
@@ -65,8 +60,7 @@ export class UploadAvatarCoreMembersService {
       .values({
         user_id: id,
         created: currentDate(),
-        ...uploadFile,
-        file_size: uploadFile.size
+        ...uploadFile
       })
       .returning();
 

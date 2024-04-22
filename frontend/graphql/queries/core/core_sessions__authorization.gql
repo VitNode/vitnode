@@ -12,7 +12,7 @@ query Core_sessions__authorization {
       avatar {
         id
         dir_folder
-        name
+        file_name
       }
       group {
         name {
