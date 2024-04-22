@@ -2,17 +2,10 @@ import { ArgsType, Field, Int } from "@nestjs/graphql";
 
 import { LastPostsShowForumForumsArgs } from "../last_posts/dto/last_posts.args";
 
+import { PaginationArgs } from "@/types/database/pagination.type";
+
 @ArgsType()
-export class ShowForumForumsArgs {
-  @Field(() => Int, { nullable: true })
-  cursor: number | null;
-
-  @Field(() => Int, { nullable: true })
-  first: number | null;
-
-  @Field(() => Int, { nullable: true })
-  last: number | null;
-
+export class ShowForumForumsArgs extends PaginationArgs {
   @Field(() => Int, { nullable: true })
   parent_id: number | null;
 

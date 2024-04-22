@@ -9,6 +9,7 @@ import { Transform } from "class-transformer";
 
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 import { TransformString } from "@/types/database/text-language.type";
+import { PaginationArgs } from "@/types/database/pagination.type";
 
 export enum ShowAdminMembersSortingColumnEnum {
   name = "name",
@@ -34,16 +35,7 @@ class ShowAdminMembersSortByArgs {
 }
 
 @ArgsType()
-export class ShowAdminMembersArgs {
-  @Field(() => Int, { nullable: true })
-  cursor: number | null;
-
-  @Field(() => Int, { nullable: true })
-  first: number | null;
-
-  @Field(() => Int, { nullable: true })
-  last: number | null;
-
+export class ShowAdminMembersArgs extends PaginationArgs {
   @Field(() => [ShowAdminMembersSortByArgs], { nullable: true })
   sortBy: ShowAdminMembersSortByArgs[] | null;
 

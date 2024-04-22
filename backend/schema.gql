@@ -129,9 +129,6 @@ type LastPostsShowForumForums {
 }
 
 input LastPostsShowForumForumsArgs {
-  cursor: Int
-  first: Int
-  last: Int
   sortBy: [LastPostsShowForumForumsSortByArgs!]
 }
 

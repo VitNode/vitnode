@@ -124,19 +124,12 @@ Create the `backend/plugins/blog/categories/show/dto` folder.
 Create a file called `show.args.ts` inside the `backend/plugins/blog/categories/show/dto` folder and add the following code:
 
 ```ts
-import { ArgsType, Field, Int } from "@nestjs/graphql";
+import { ArgsType } from "@nestjs/graphql";
+
+import { PaginationArgs } from "@/types/database/pagination.type";
 
 @ArgsType()
-export class ShowBlogCategoriesArgs {
-  @Field(() => Int, { nullable: true })
-  cursor: number | null;
-
-  @Field(() => Int, { nullable: true })
-  first: number | null;
-
-  @Field(() => Int, { nullable: true })
-  last: number | null;
-}
+export class ShowBlogCategoriesArgs extends PaginationArgs {}
 ```
 
 Class name should be unique. For example `{Action}{Plugin}{Module}Args`.

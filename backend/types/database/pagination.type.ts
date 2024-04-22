@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from "@nestjs/graphql";
+import { ArgsType, Field, Int, ObjectType } from "@nestjs/graphql";
 
 @ObjectType()
 export class PageInfo {
@@ -19,4 +19,16 @@ export class PageInfo {
 
   @Field(() => Number)
   count: number;
+}
+
+@ArgsType()
+export class PaginationArgs {
+  @Field(() => Int, { nullable: true })
+  cursor: number | null;
+
+  @Field(() => Int, { nullable: true })
+  first: number | null;
+
+  @Field(() => Int, { nullable: true })
+  last: number | null;
 }

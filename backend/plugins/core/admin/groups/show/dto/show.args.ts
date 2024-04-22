@@ -1,14 +1,9 @@
-import {
-  ArgsType,
-  Field,
-  InputType,
-  Int,
-  registerEnumType
-} from "@nestjs/graphql";
+import { ArgsType, Field, InputType, registerEnumType } from "@nestjs/graphql";
 import { Transform } from "class-transformer";
 
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 import { TransformString } from "@/types/database/text-language.type";
+import { PaginationArgs } from "@/types/database/pagination.type";
 
 enum ShowAdminGroupsSortingColumnEnum {
   created = "created",
@@ -29,16 +24,7 @@ class ShowAdminGroupsSortByArgs {
 }
 
 @ArgsType()
-export class ShowAdminGroupsArgs {
-  @Field(() => Int, { nullable: true })
-  cursor: number | null;
-
-  @Field(() => Int, { nullable: true })
-  first: number | null;
-
-  @Field(() => Int, { nullable: true })
-  last: number | null;
-
+export class ShowAdminGroupsArgs extends PaginationArgs {
   @Field(() => [ShowAdminGroupsSortByArgs], { nullable: true })
   sortBy: ShowAdminGroupsSortByArgs[] | null;
 
