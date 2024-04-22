@@ -132,6 +132,9 @@
           "skin_5": "Ciemny"
         }
       },
+      "files": {
+        "attach": "Załącz pliki"
+      },
 
       "remove_formatting": "Usuń formatowanie"
     },

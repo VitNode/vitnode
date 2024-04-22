@@ -9,6 +9,7 @@ import { TextStyle } from "@tiptap/extension-text-style";
 import { ImageExtensionEditor } from "./image/image";
 import { CodeBlockLowlightExtensionEditor } from "./code/code";
 import { MentionExtensionEditor } from "./mentions/emoji";
+import { FilesHandler } from "./files/files";
 
 export const extensionsEditor: Extensions = [
   StarterKit.configure({
@@ -61,5 +62,6 @@ export const extensionsEditor: Extensions = [
   Color,
   TextStyle,
   ImageExtensionEditor,
-  MentionExtensionEditor
+  MentionExtensionEditor,
+  FilesHandler
 ];

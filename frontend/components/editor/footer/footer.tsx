@@ -4,6 +4,7 @@ import {
   LanguageSelectFooterEditor,
   type LanguageSelectFooterEditorProps
 } from "./language-select";
+import { FilesButtonFooterEditor } from "./files/files-button";
 
 interface Props extends LanguageSelectFooterEditorProps {
   editor: Editor;
@@ -17,7 +18,7 @@ export const FooterEditor = ({
   setSelectedLanguage
 }: Props) => {
   return (
-    <div className="bg-background p-1 rounded-b-md">
+    <div className="bg-background p-1 rounded-b-md flex items-center gap-2 justify-between">
       {!disableLanguage && (
         <LanguageSelectFooterEditor
           editor={editor}
@@ -25,6 +26,8 @@ export const FooterEditor = ({
           setSelectedLanguage={setSelectedLanguage}
         />
       )}
+
+      <FilesButtonFooterEditor />
     </div>
   );
 };
