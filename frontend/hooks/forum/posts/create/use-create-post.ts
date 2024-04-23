@@ -9,11 +9,7 @@ import { mutationApi } from "./mutation-api";
 import { getIdFormString } from "@/functions/url";
 import { zodInput } from "@/functions/zod";
 
-interface Args {
-  setOpen: (value: boolean) => void;
-}
-
-export const useCreatePost = ({ setOpen }: Args) => {
+export const useCreatePost = () => {
   const t = useTranslations("core");
   const { id } = useParams();
 
@@ -40,8 +36,6 @@ export const useCreatePost = ({ setOpen }: Args) => {
 
       return;
     }
-
-    setOpen(false);
   };
 
   return {

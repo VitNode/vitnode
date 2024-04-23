@@ -12,6 +12,7 @@ import { useGlobals } from "@/hooks/core/use-globals";
 import { extensionsEditor } from "./extensions/extensions";
 import { HeadingExtensionEditor } from "./extensions/heading";
 import { EmojiExtensionEditor } from "./extensions/emoji/emoji";
+import { Skeleton } from "../ui/skeleton";
 
 interface Props {
   autoFocus?: boolean;
@@ -109,7 +110,7 @@ export const Editor = ({
     editor.commands.setContent(JSON.parse(findValue));
   }, [selectedLanguage]);
 
-  if (!editor) return null;
+  if (!editor) return <Skeleton className="w-full h-32" />;
 
   return (
     <div className={cn("border border-input rounded-md shadow-sm", className)}>
