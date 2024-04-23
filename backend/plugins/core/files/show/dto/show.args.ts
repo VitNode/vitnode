@@ -12,7 +12,7 @@ registerEnumType(ShowCoreFilesSortingColumnEnum, {
 });
 
 @InputType()
-class SortByArgs {
+class ShowCoreFilesSortByArgs {
   @Field(() => ShowCoreFilesSortingColumnEnum)
   column: ShowCoreFilesSortingColumnEnum;
 
@@ -22,6 +22,6 @@ class SortByArgs {
 
 @ArgsType()
 export class ShowCoreFilesArgs extends PaginationArgs {
-  @Field(() => [SortByArgs], { nullable: true })
-  sortBy: SortByArgs[] | null;
+  @Field(() => ShowCoreFilesSortByArgs, { nullable: true })
+  sortBy: ShowCoreFilesSortByArgs | null;
 }

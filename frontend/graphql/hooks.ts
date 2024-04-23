@@ -156,7 +156,7 @@ export type LastPostsShowForumForumsArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  sortBy?: InputMaybe<Array<LastPostsShowForumForumsSortByArgs>>;
+  sortBy?: InputMaybe<LastPostsShowForumForumsSortByArgs>;
 };
 
 export type LastPostsShowForumForumsObj = {
@@ -661,7 +661,7 @@ export type QueryAdmin__Core_Groups__ShowArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
-  sortBy?: InputMaybe<Array<ShowAdminGroupsSortByArgs>>;
+  sortBy?: InputMaybe<ShowAdminGroupsSortByArgs>;
 };
 
 
@@ -671,7 +671,7 @@ export type QueryAdmin__Core_Members__ShowArgs = {
   groups?: InputMaybe<Array<Scalars['Int']['input']>>;
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
-  sortBy?: InputMaybe<Array<ShowAdminMembersSortByArgs>>;
+  sortBy?: InputMaybe<ShowAdminMembersSortByArgs>;
 };
 
 
@@ -691,7 +691,7 @@ export type QueryAdmin__Core_Plugins__ShowArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
-  sortBy?: InputMaybe<Array<ShowAdminPluginsSortByArgs>>;
+  sortBy?: InputMaybe<ShowAdminPluginsSortByArgs>;
 };
 
 
@@ -699,7 +699,7 @@ export type QueryAdmin__Core_Staff_Administrators__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  sortBy?: InputMaybe<Array<ShowAdminStaffAdministratorsSortByArgs>>;
+  sortBy?: InputMaybe<ShowAdminStaffAdministratorsSortByArgs>;
 };
 
 
@@ -707,7 +707,7 @@ export type QueryAdmin__Core_Staff_Moderators__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  sortBy?: InputMaybe<Array<ShowAdminStaffModeratorsSortByArgs>>;
+  sortBy?: InputMaybe<ShowAdminStaffModeratorsSortByArgs>;
 };
 
 
@@ -715,7 +715,7 @@ export type QueryAdmin__Core_Themes__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  sortBy?: InputMaybe<Array<ShowAdminThemesSortByArgs>>;
+  sortBy?: InputMaybe<ShowAdminThemesSortByArgs>;
 };
 
 
@@ -742,7 +742,7 @@ export type QueryCore_Files__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  sortBy?: InputMaybe<Array<SortByArgs>>;
+  sortBy?: InputMaybe<ShowCoreFilesSortByArgs>;
 };
 
 
@@ -751,7 +751,7 @@ export type QueryCore_Languages__ShowArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
-  sortBy?: InputMaybe<Array<ShowCoreLanguagesSortByArgs>>;
+  sortBy?: InputMaybe<ShowCoreLanguagesSortByArgs>;
 };
 
 
@@ -761,7 +761,7 @@ export type QueryCore_Members__ShowArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   name_seo?: InputMaybe<Scalars['String']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
-  sortBy?: InputMaybe<Array<ShowCoreMembersSortByArgs>>;
+  sortBy?: InputMaybe<ShowCoreMembersSortByArgs>;
 };
 
 
@@ -1037,6 +1037,11 @@ export type ShowCoreFilesObj = {
   pageInfo: PageInfo;
 };
 
+export type ShowCoreFilesSortByArgs = {
+  column: ShowCoreFilesSortingColumnEnum | `${ShowCoreFilesSortingColumnEnum}`;
+  direction: SortDirectionEnum | `${SortDirectionEnum}`;
+};
+
 export const ShowCoreFilesSortingColumnEnum = {
   created: 'created'
 } as const;
@@ -1282,11 +1287,6 @@ export type SignUpStatsAdminMembers = {
   __typename?: 'SignUpStatsAdminMembers';
   joined_date: Scalars['String']['output'];
   users_joined: Scalars['Int']['output'];
-};
-
-export type SortByArgs = {
-  column: ShowCoreFilesSortingColumnEnum | `${ShowCoreFilesSortingColumnEnum}`;
-  direction: SortDirectionEnum | `${SortDirectionEnum}`;
 };
 
 export const SortDirectionEnum = {
@@ -1822,7 +1822,7 @@ export type Admin__Core_Groups__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   cursor?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
-  sortBy?: InputMaybe<Array<ShowAdminGroupsSortByArgs> | ShowAdminGroupsSortByArgs>;
+  sortBy?: InputMaybe<ShowAdminGroupsSortByArgs>;
   last?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
@@ -1841,14 +1841,14 @@ export type Admin__Core_Staff_Administrators__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  sortBy?: InputMaybe<Array<ShowAdminStaffAdministratorsSortByArgs> | ShowAdminStaffAdministratorsSortByArgs>;
+  sortBy?: InputMaybe<ShowAdminStaffAdministratorsSortByArgs>;
 }>;
 
 
 export type Admin__Core_Staff_Administrators__ShowQuery = { __typename?: 'Query', admin__core_staff_administrators__show: { __typename?: 'ShowAdminStaffAdministratorsObj', edges: Array<{ __typename?: 'ShowAdminStaffAdministrators', created: Date, id: number, unrestricted: boolean, updated: Date, protected: boolean, user_or_group: { __typename: 'StaffGroupUser', id: number, group_name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } | { __typename: 'User', avatar_color: string, name_seo: string, id: number, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Admin__Core_Staff_Moderators__ShowQueryVariables = Exact<{
-  sortBy?: InputMaybe<Array<ShowAdminStaffModeratorsSortByArgs> | ShowAdminStaffModeratorsSortByArgs>;
+  sortBy?: InputMaybe<ShowAdminStaffModeratorsSortByArgs>;
   last?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -1862,7 +1862,7 @@ export type Admin__Core_Members__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
-  sortBy?: InputMaybe<Array<ShowAdminMembersSortByArgs> | ShowAdminMembersSortByArgs>;
+  sortBy?: InputMaybe<ShowAdminMembersSortByArgs>;
   groups?: InputMaybe<Array<Scalars['Int']['input']> | Scalars['Int']['input']>;
 }>;
 
@@ -1883,7 +1883,7 @@ export type Admin__Core_Plugins__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  sortBy?: InputMaybe<Array<ShowAdminPluginsSortByArgs> | ShowAdminPluginsSortByArgs>;
+  sortBy?: InputMaybe<ShowAdminPluginsSortByArgs>;
   search?: InputMaybe<Scalars['String']['input']>;
 }>;
 
@@ -1921,7 +1921,7 @@ export type Admin_Core_Themes__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  sortBy?: InputMaybe<Array<ShowAdminThemesSortByArgs> | ShowAdminThemesSortByArgs>;
+  sortBy?: InputMaybe<ShowAdminThemesSortByArgs>;
 }>;
 
 
@@ -1952,7 +1952,7 @@ export type Core_Languages__ShowQueryVariables = Exact<{
   last?: InputMaybe<Scalars['Int']['input']>;
   cursor?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
-  sortBy?: InputMaybe<Array<ShowCoreLanguagesSortByArgs> | ShowCoreLanguagesSortByArgs>;
+  sortBy?: InputMaybe<ShowCoreLanguagesSortByArgs>;
 }>;
 
 
@@ -1970,7 +1970,7 @@ export type Core_Members__Files__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  sortBy?: InputMaybe<Array<SortByArgs> | SortByArgs>;
+  sortBy?: InputMaybe<ShowCoreFilesSortByArgs>;
 }>;
 
 
@@ -2645,7 +2645,7 @@ export const Admin__Core__Dashboard = gql`
 }
     `;
 export const Admin__Core_Groups__Show = gql`
-    query Admin__Core_groups__show($first: Int, $cursor: Int, $search: String, $sortBy: [ShowAdminGroupsSortByArgs!], $last: Int) {
+    query Admin__Core_groups__show($first: Int, $cursor: Int, $search: String, $sortBy: ShowAdminGroupsSortByArgs, $last: Int) {
   admin__core_groups__show(
     first: $first
     cursor: $cursor
@@ -2693,7 +2693,7 @@ export const Admin__Core_Groups__Show_Short = gql`
 }
     `;
 export const Admin__Core_Staff_Administrators__Show = gql`
-    query Admin__core_staff_administrators__show($cursor: Int, $first: Int, $last: Int, $sortBy: [ShowAdminStaffAdministratorsSortByArgs!]) {
+    query Admin__core_staff_administrators__show($cursor: Int, $first: Int, $last: Int, $sortBy: ShowAdminStaffAdministratorsSortByArgs) {
   admin__core_staff_administrators__show(
     cursor: $cursor
     first: $first
@@ -2747,7 +2747,7 @@ export const Admin__Core_Staff_Administrators__Show = gql`
 }
     `;
 export const Admin__Core_Staff_Moderators__Show = gql`
-    query Admin__core_staff_moderators__show($sortBy: [ShowAdminStaffModeratorsSortByArgs!], $last: Int, $first: Int, $cursor: Int) {
+    query Admin__core_staff_moderators__show($sortBy: ShowAdminStaffModeratorsSortByArgs, $last: Int, $first: Int, $cursor: Int) {
   admin__core_staff_moderators__show(
     sortBy: $sortBy
     last: $last
@@ -2801,7 +2801,7 @@ export const Admin__Core_Staff_Moderators__Show = gql`
 }
     `;
 export const Admin__Core_Members__Show = gql`
-    query Admin__core_members__show($cursor: Int, $first: Int, $last: Int, $search: String, $sortBy: [ShowAdminMembersSortByArgs!], $groups: [Int!]) {
+    query Admin__core_members__show($cursor: Int, $first: Int, $last: Int, $search: String, $sortBy: ShowAdminMembersSortByArgs, $groups: [Int!]) {
   admin__core_members__show(
     cursor: $cursor
     first: $first
@@ -2888,7 +2888,7 @@ export const Admin__Core_Nav__Show = gql`
 }
     `;
 export const Admin__Core_Plugins__Show = gql`
-    query Admin__core_plugins__show($cursor: Int, $first: Int, $last: Int, $sortBy: [ShowAdminPluginsSortByArgs!], $search: String) {
+    query Admin__core_plugins__show($cursor: Int, $first: Int, $last: Int, $sortBy: ShowAdminPluginsSortByArgs, $search: String) {
   admin__core_plugins__show(
     cursor: $cursor
     first: $first
@@ -2990,7 +2990,7 @@ export const Core_Main_Settings__Show = gql`
 }
     `;
 export const Admin_Core_Themes__Show = gql`
-    query Admin_core_themes__show($cursor: Int, $first: Int, $last: Int, $sortBy: [ShowAdminThemesSortByArgs!]) {
+    query Admin_core_themes__show($cursor: Int, $first: Int, $last: Int, $sortBy: ShowAdminThemesSortByArgs) {
   admin__core_themes__show(
     cursor: $cursor
     first: $first
@@ -3175,7 +3175,7 @@ export const Core_Sessions__Authorization = gql`
 }
     `;
 export const Core_Languages__Show = gql`
-    query Core_languages__show($first: Int, $last: Int, $cursor: Int, $search: String, $sortBy: [ShowCoreLanguagesSortByArgs!]) {
+    query Core_languages__show($first: Int, $last: Int, $cursor: Int, $search: String, $sortBy: ShowCoreLanguagesSortByArgs) {
   core_languages__show(
     first: $first
     last: $last
@@ -3233,7 +3233,7 @@ export const Core_Members__Show__Search = gql`
 }
     `;
 export const Core_Members__Files__Show = gql`
-    query Core_members__files__show($cursor: Int, $first: Int, $last: Int, $sortBy: [SortByArgs!]) {
+    query Core_members__files__show($cursor: Int, $first: Int, $last: Int, $sortBy: ShowCoreFilesSortByArgs) {
   core_files__show(cursor: $cursor, first: $first, last: $last, sortBy: $sortBy) {
     edges {
       id

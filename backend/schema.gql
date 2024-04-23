@@ -132,7 +132,7 @@ input LastPostsShowForumForumsArgs {
   cursor: Int
   first: Int
   last: Int
-  sortBy: [LastPostsShowForumForumsSortByArgs!]
+  sortBy: LastPostsShowForumForumsSortByArgs
 }
 
 type LastPostsShowForumForumsObj {
@@ -263,16 +263,16 @@ type PermissionsTopicForums {
 }
 
 type Query {
-  admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
+  admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminGroupsSortByArgs): ShowAdminGroupsObj!
   admin__core_manifest_metadata__show: ShowAdminManifestMetadataObj!
-  admin__core_members__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
+  admin__core_members__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: ShowAdminMembersSortByArgs): ShowAdminMembersObj!
   admin__core_members__stats_sign_up: [SignUpStatsAdminMembers!]!
   admin__core_plugins__files(code: String!): FilesAdminPluginsObj!
   admin__core_plugins__nav__show(plugin_code: String!): [ShowAdminNavPluginsObj!]!
-  admin__core_plugins__show(code: String, cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminPluginsSortByArgs!]): ShowAdminPluginsObj!
-  admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
-  admin__core_staff_moderators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
-  admin__core_themes__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminThemesSortByArgs!]): ShowAdminThemesObj!
+  admin__core_plugins__show(code: String, cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminPluginsSortByArgs): ShowAdminPluginsObj!
+  admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminStaffAdministratorsSortByArgs): ShowAdminStaffAdministratorsObj!
+  admin__core_staff_moderators__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminStaffModeratorsSortByArgs): ShowAdminStaffModeratorsObj!
+  admin__core_themes__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminThemesSortByArgs): ShowAdminThemesObj!
   admin__forum_forums__show(
     cursor: Int
     first: Int
@@ -288,9 +288,9 @@ type Query {
   admin__install__layout: LayoutAdminInstallObj!
   admin__sessions__authorization: AuthorizationAdminSessionsObj!
   blog_categories__show(cursor: Int, first: Int, last: Int): ShowBlogCategoriesObj!
-  core_files__show(cursor: Int, first: Int, last: Int, sortBy: [SortByArgs!]): ShowCoreFilesObj!
-  core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowCoreLanguagesSortByArgs!]): ShowCoreLanguagesObj!
-  core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
+  core_files__show(cursor: Int, first: Int, last: Int, sortBy: ShowCoreFilesSortByArgs): ShowCoreFilesObj!
+  core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreLanguagesSortByArgs): ShowCoreLanguagesObj!
+  core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: ShowCoreMembersSortByArgs): ShowCoreMembersObj!
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
   core_plugins__show: [ShowCorePluginsObj!]!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
@@ -518,6 +518,11 @@ type ShowCoreFilesObj {
   pageInfo: PageInfo!
 }
 
+input ShowCoreFilesSortByArgs {
+  column: ShowCoreFilesSortingColumnEnum!
+  direction: SortDirectionEnum!
+}
+
 enum ShowCoreFilesSortingColumnEnum {
   created
 }
@@ -735,11 +740,6 @@ type SignUpCoreMembersObj {
 type SignUpStatsAdminMembers {
   joined_date: String!
   users_joined: Int!
-}
-
-input SortByArgs {
-  column: ShowCoreFilesSortingColumnEnum!
-  direction: SortDirectionEnum!
 }
 
 enum SortDirectionEnum {

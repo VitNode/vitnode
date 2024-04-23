@@ -30,7 +30,10 @@ export class ShowAdminMembersService {
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: "ASC", key: "id", schema: core_users.id },
+      primaryCursor: {
+        column: "id",
+        schema: core_users.id
+      },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
         column: "joined"

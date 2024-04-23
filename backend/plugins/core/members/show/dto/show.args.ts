@@ -30,8 +30,8 @@ class ShowCoreMembersSortByArgs {
 
 @ArgsType()
 export class ShowCoreMembersArgs extends PaginationArgs {
-  @Field(() => [ShowCoreMembersSortByArgs], { nullable: true })
-  sortBy: ShowCoreMembersSortByArgs[] | null;
+  @Field(() => ShowCoreMembersSortByArgs, { nullable: true })
+  sortBy: ShowCoreMembersSortByArgs | null;
 
   @Transform(TransformString)
   @Field(() => String, { nullable: true })

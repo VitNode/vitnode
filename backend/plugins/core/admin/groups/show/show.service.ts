@@ -43,7 +43,10 @@ export class ShowAdminGroupsService {
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: "ASC", key: "id", schema: core_groups.id },
+      primaryCursor: {
+        column: "id",
+        schema: core_groups.id
+      },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
         column: "updated"

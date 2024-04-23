@@ -27,9 +27,12 @@ export class ShowCoreFilesService {
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: "ASC", key: "id", schema: core_files.id },
+      primaryCursor: {
+        column: "id",
+        schema: core_files.id
+      },
       defaultSortBy: {
-        direction: SortDirectionEnum.asc,
+        direction: SortDirectionEnum.desc,
         column: "created"
       },
       sortBy

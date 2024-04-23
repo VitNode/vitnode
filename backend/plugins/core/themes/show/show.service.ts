@@ -27,7 +27,10 @@ export class ShowCoreThemesService {
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: "ASC", key: "id", schema: core_themes.id },
+      primaryCursor: {
+        column: "id",
+        schema: core_themes.id
+      },
       defaultSortBy: {
         direction: SortDirectionEnum.asc,
         column: "created"

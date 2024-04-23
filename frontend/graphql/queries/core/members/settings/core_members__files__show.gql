@@ -2,7 +2,7 @@ query Core_members__files__show(
   $cursor: Int
   $first: Int
   $last: Int
-  $sortBy: [SortByArgs!]
+  $sortBy: ShowCoreFilesSortByArgs
 ) {
   core_files__show(
     cursor: $cursor

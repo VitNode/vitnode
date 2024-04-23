@@ -29,8 +29,7 @@ export class ShowAdminStaffAdministratorsService {
       first,
       last,
       primaryCursor: {
-        order: "ASC",
-        key: "id",
+        column: "id",
         schema: core_admin_permissions.id
       },
       defaultSortBy: {

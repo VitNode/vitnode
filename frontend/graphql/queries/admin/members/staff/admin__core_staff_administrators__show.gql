@@ -2,7 +2,7 @@ query Admin__core_staff_administrators__show(
   $cursor: Int
   $first: Int
   $last: Int
-  $sortBy: [ShowAdminStaffAdministratorsSortByArgs!]
+  $sortBy: ShowAdminStaffAdministratorsSortByArgs
 ) {
   admin__core_staff_administrators__show(
     cursor: $cursor

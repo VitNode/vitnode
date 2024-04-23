@@ -23,6 +23,6 @@ class LastPostsShowForumForumsSortByArgs {
 
 @InputType()
 export class LastPostsShowForumForumsArgs extends PaginationInput {
-  @Field(() => [LastPostsShowForumForumsSortByArgs], { nullable: true })
-  sortBy: LastPostsShowForumForumsSortByArgs[] | null;
+  @Field(() => LastPostsShowForumForumsSortByArgs, { nullable: true })
+  sortBy: LastPostsShowForumForumsSortByArgs | null;
 }

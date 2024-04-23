@@ -1,8 +1,7 @@
-import { AnyColumn, SQL, and, asc, desc, eq, gt, lt, or } from "drizzle-orm";
+import { AnyColumn, SQL, asc, desc, eq, gt, gte, lt, lte } from "drizzle-orm";
 import { PgTableWithColumns, TableConfig } from "drizzle-orm/pg-core";
 
 import { PageInfo } from "@/types/database/pagination.type";
-import { CustomError } from "@/utils/errors/CustomError";
 import { DatabaseService } from "@/plugins/database/database.service";
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
@@ -38,7 +37,9 @@ export function outputPagination<T>({
     currentEdges = currentEdges.reverse();
   }
 
-  currentEdges = first ? edges.slice(0, first) : edges.slice(-last);
+  currentEdges = last
+    ? edges.slice(-last - 1).slice(0, last)
+    : edges.slice(0, first);
 
   const edgesCursor = {
     start: currentEdges.at(0)?.id,
@@ -71,14 +72,17 @@ export function outputPagination<T>({
       count: currentEdges.length,
       hasPreviousPage:
         last && cursor
-          ? cursor > last
+          ? edges.length > currentEdges.length + 1
           : edgesCursor.start !== undefined && !!cursor
     }
   };
 }
 
 // Input Pagination Cursor
-export type Cursor = { key: string; schema: AnyColumn; order?: "ASC" | "DESC" };
+export type Cursor = {
+  column: string;
+  schema: AnyColumn;
+};
 
 interface InputPaginationCursorArgs<T extends TableConfig> {
   cursor: number | null;
@@ -94,22 +98,13 @@ interface InputPaginationCursorArgs<T extends TableConfig> {
   sortBy?: {
     column: string;
     direction: SortDirectionEnum;
-  }[];
+  };
 }
 
 interface Return {
   limit: number;
-  orderBy: SQL<unknown>[];
+  orderBy: SQL<unknown>;
   where: SQL<unknown>;
-}
-
-function generateSubArrays<T>(arr: ReadonlyArray<T>): T[][] {
-  const subArrays: T[][] = [];
-  for (let i = 0; i < arr.length; i++) {
-    subArrays.push([...arr.slice(0, i + 1)]);
-  }
-
-  return subArrays;
 }
 
 export async function inputPaginationCursor<T extends TableConfig>({
@@ -122,84 +117,52 @@ export async function inputPaginationCursor<T extends TableConfig>({
   primaryCursor,
   sortBy
 }: InputPaginationCursorArgs<T>): Promise<Return> {
-  const sortArray = sortBy?.find(el => el.column === defaultSortBy.column)
-    ? sortBy
-    : [...(sortBy ?? []), defaultSortBy];
-  const cursors: Cursor[] = sortArray.map(item => ({
-    key: item.column,
-    order: item.direction === SortDirectionEnum.asc ? "ASC" : "DESC",
-    schema: database[item.column]
-  }));
+  const currentSortBy: {
+    column: string;
+    direction: SortDirectionEnum;
+  } = sortBy ? sortBy : defaultSortBy;
 
-  const orderBy: SQL[] = [];
-  for (const { order = "ASC", schema } of [...cursors, primaryCursor]) {
+  const fn = last
+    ? currentSortBy.direction === SortDirectionEnum.asc
+      ? desc
+      : asc
+    : currentSortBy.direction === SortDirectionEnum.asc
+      ? asc
+      : desc;
+  const orderBy: SQL = fn(database[currentSortBy.column]);
+
+  let where: SQL<unknown> | undefined;
+  if (cursorId) {
+    const cursorData = await databaseService.db
+      .select()
+      .from(database)
+      .where(eq(database.id, cursorId))
+      .limit(1);
+
+    const cursorItem = cursorData[0];
+
+    if (!cursorItem) {
+      return {
+        where: eq(database.id, -1),
+        orderBy,
+        limit: 0
+      };
+    }
+
+    const { column, schema } = primaryCursor;
     const fn = last
-      ? order === "ASC"
-        ? desc
-        : asc
-      : order === "ASC"
-        ? asc
-        : desc;
-    const sql = fn(schema);
-    orderBy.push(sql);
+      ? currentSortBy.direction === SortDirectionEnum.asc
+        ? lte
+        : gte
+      : currentSortBy.direction === SortDirectionEnum.asc
+        ? gt
+        : lt;
+    where = fn(schema, cursorItem[column]);
   }
-
-  if (!cursorId) {
-    return {
-      where: undefined,
-      orderBy,
-      limit: (first || last) + 1 ?? 0
-    };
-  }
-
-  if (!database[primaryCursor.key]) {
-    throw new CustomError({
-      code: "PAGINATION_ERROR",
-      message: `You must provide \`${primaryCursor.key}\` column in database`
-    });
-  }
-
-  const cursorData = await databaseService.db
-    .select()
-    .from(database)
-    .where(eq(database.id, cursorId))
-    .limit(1);
-
-  const cursorItem = cursorData[0];
-
-  if (!cursorItem) {
-    return {
-      limit: 0,
-      orderBy,
-      where: undefined
-    };
-  }
-
-  const matrix = generateSubArrays([...cursors, primaryCursor]);
-
-  const ors: SQL[] = [];
-  for (const posibilities of matrix) {
-    const ands: SQL[] = [];
-    for (const cursor of posibilities) {
-      const lastValue = cursor === posibilities?.at(-1);
-      const { key, order = "ASC", schema } = cursor;
-      const fn = last ? (order === "ASC" ? lt : gt) : order === "ASC" ? gt : lt;
-      const sql = !lastValue
-        ? eq(schema, cursorItem[key])
-        : fn(schema, cursorItem[key]);
-      ands.push(sql);
-    }
-    const _and = and(...ands);
-    if (!_and) {
-      continue;
-    }
-    ors.push(_and);
-  }
-  const where = or(...ors);
 
   return {
     where,
     orderBy,
-    limit: first || last ? (first || last) + 1 : 0
+    limit: first || last ? (last ? last + 1 : first) + 1 : 0
   };
 }

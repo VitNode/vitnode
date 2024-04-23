@@ -41,7 +41,10 @@ export class ShowTopicsForumsService {
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: "ASC", key: "id", schema: forum_topics.id },
+      primaryCursor: {
+        column: "id",
+        schema: forum_topics.id
+      },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
         column: "created"
