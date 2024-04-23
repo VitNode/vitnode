@@ -1,4 +1,4 @@
-import { AnyColumn, SQL, asc, desc, eq, gt, lt } from "drizzle-orm";
+import { AnyColumn, SQL, asc, desc, eq, gt, gte, lt, lte } from "drizzle-orm";
 import { PgTableWithColumns, TableConfig } from "drizzle-orm/pg-core";
 
 import { PageInfo } from "@/types/database/pagination.type";
@@ -37,7 +37,9 @@ export function outputPagination<T>({
     currentEdges = currentEdges.reverse();
   }
 
-  currentEdges = first ? edges.slice(0, first) : edges.slice(-last);
+  currentEdges = last
+    ? edges.slice(-last - 1).slice(0, last)
+    : edges.slice(0, first);
 
   const edgesCursor = {
     start: currentEdges.at(0)?.id,
@@ -70,7 +72,7 @@ export function outputPagination<T>({
       count: currentEdges.length,
       hasPreviousPage:
         last && cursor
-          ? cursor > last
+          ? edges.length > currentEdges.length + 1
           : edgesCursor.start !== undefined && !!cursor
     }
   };
@@ -120,7 +122,13 @@ export async function inputPaginationCursor<T extends TableConfig>({
     direction: SortDirectionEnum;
   } = sortBy ? sortBy : defaultSortBy;
 
-  const fn = currentSortBy.direction === SortDirectionEnum.asc ? asc : desc;
+  const fn = last
+    ? currentSortBy.direction === SortDirectionEnum.asc
+      ? desc
+      : asc
+    : currentSortBy.direction === SortDirectionEnum.asc
+      ? asc
+      : desc;
   const orderBy: SQL = fn(database[currentSortBy.column]);
 
   let where: SQL<unknown> | undefined;
@@ -142,13 +150,19 @@ export async function inputPaginationCursor<T extends TableConfig>({
     }
 
     const { column, schema } = primaryCursor;
-    const fn = currentSortBy.direction === SortDirectionEnum.asc ? gt : lt;
+    const fn = last
+      ? currentSortBy.direction === SortDirectionEnum.asc
+        ? lte
+        : gte
+      : currentSortBy.direction === SortDirectionEnum.asc
+        ? gt
+        : lt;
     where = fn(schema, cursorItem[column]);
   }
 
   return {
     where,
     orderBy,
-    limit: first || last ? (first || last) + 1 : 0
+    limit: first || last ? (last ? last + 1 : first) + 1 : 0
   };
 }

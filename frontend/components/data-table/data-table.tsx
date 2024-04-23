@@ -132,11 +132,7 @@ export function DataTable<TData extends TDataMin>({
       last: pagination.last ? pagination.last : `${defaultPageSize}`
     };
 
-    if (
-      nextPage ||
-      (pageSize && !nextPage) ||
-      (!cursor && !nextPage && pageSize)
-    ) {
+    if (nextPage) {
       params.set("first", pageSize ? pageSize : currentDefaultPageSize.first);
       params.delete("last");
     } else {
@@ -243,12 +239,12 @@ export function DataTable<TData extends TDataMin>({
                   size="icon"
                   disabled={!pageInfo.hasPreviousPage}
                   ariaLabel={t("pagination.previous")}
-                  onClick={() =>
+                  onClick={() => {
                     changeState({
                       cursor: pageInfo.startCursor,
                       pageSize: pagination.last
-                    })
-                  }
+                    });
+                  }}
                 >
                   <ChevronLeftIcon className="size-4" />
                 </Button>
@@ -257,13 +253,13 @@ export function DataTable<TData extends TDataMin>({
                   size="icon"
                   ariaLabel={t("pagination.next")}
                   disabled={!pageInfo.hasNextPage}
-                  onClick={() =>
+                  onClick={() => {
                     changeState({
                       cursor: pageInfo.endCursor,
                       pageSize: pagination.first,
                       nextPage: true
-                    })
-                  }
+                    });
+                  }}
                 >
                   <ChevronRightIcon className="size-4" />
                 </Button>
