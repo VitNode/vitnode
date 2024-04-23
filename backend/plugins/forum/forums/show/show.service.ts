@@ -118,7 +118,10 @@ export class ShowForumForumsService {
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: "ASC", key: "id", schema: forum_forums.id },
+      primaryCursor: {
+        column: "id",
+        schema: forum_forums.id
+      },
       defaultSortBy: {
         direction: SortDirectionEnum.asc,
         column: "position"

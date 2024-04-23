@@ -27,7 +27,10 @@ export class ShowCoreNavService {
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: "ASC", key: "id", schema: core_nav.id },
+      primaryCursor: {
+        column: "id",
+        schema: core_nav.id
+      },
       defaultSortBy: {
         direction: SortDirectionEnum.asc,
         column: "position"

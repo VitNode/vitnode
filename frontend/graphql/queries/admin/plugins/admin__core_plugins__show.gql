@@ -2,7 +2,7 @@ query Admin__core_plugins__show(
   $cursor: Int
   $first: Int
   $last: Int
-  $sortBy: [ShowAdminPluginsSortByArgs!]
+  $sortBy: ShowAdminPluginsSortByArgs
   $search: String
 ) {
   admin__core_plugins__show(

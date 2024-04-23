@@ -36,8 +36,8 @@ class ShowAdminMembersSortByArgs {
 
 @ArgsType()
 export class ShowAdminMembersArgs extends PaginationArgs {
-  @Field(() => [ShowAdminMembersSortByArgs], { nullable: true })
-  sortBy: ShowAdminMembersSortByArgs[] | null;
+  @Field(() => ShowAdminMembersSortByArgs, { nullable: true })
+  sortBy: ShowAdminMembersSortByArgs | null;
 
   @Transform(TransformString)
   @Field(() => String, { nullable: true })

@@ -22,6 +22,6 @@ class ShowAdminStaffAdministratorsSortByArgs {
 
 @ArgsType()
 export class ShowAdminStaffAdministratorsArgs extends PaginationArgs {
-  @Field(() => [ShowAdminStaffAdministratorsSortByArgs], { nullable: true })
-  sortBy: ShowAdminStaffAdministratorsSortByArgs[] | null;
+  @Field(() => ShowAdminStaffAdministratorsSortByArgs, { nullable: true })
+  sortBy: ShowAdminStaffAdministratorsSortByArgs | null;
 }

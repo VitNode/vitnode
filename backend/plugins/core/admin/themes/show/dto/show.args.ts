@@ -22,6 +22,6 @@ class ShowAdminThemesSortByArgs {
 
 @ArgsType()
 export class ShowAdminThemesArgs extends PaginationArgs {
-  @Field(() => [ShowAdminThemesSortByArgs], { nullable: true })
-  sortBy: ShowAdminThemesSortByArgs[] | null;
+  @Field(() => ShowAdminThemesSortByArgs, { nullable: true })
+  sortBy: ShowAdminThemesSortByArgs | null;
 }
