@@ -228,7 +228,7 @@ export type Mutation = {
   admin__forum_forums__edit: CreateForumForumsObj;
   admin__install__create_database: Scalars['String']['output'];
   admin_sessions__sign_out: Scalars['String']['output'];
-  core_editor__upload: UploadCoreEditorObj;
+  core_files__upload: ShowCoreFiles;
   core_groups__admin_create: ShowAdminGroups;
   core_members__avatar__delete: Scalars['String']['output'];
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
@@ -505,7 +505,7 @@ export type MutationAdmin__Forum_Forums__EditArgs = {
 };
 
 
-export type MutationCore_Editor__UploadArgs = {
+export type MutationCore_Files__UploadArgs = {
   file: Scalars['Upload']['input'];
   folder: Scalars['String']['input'];
   plugin: Scalars['String']['input'];
@@ -1027,8 +1027,13 @@ export type ShowBlogCategoriesObj = {
 export type ShowCoreFiles = {
   __typename?: 'ShowCoreFiles';
   created: Scalars['DateTime']['output'];
+  dir_folder: Scalars['String']['output'];
+  extension: Scalars['String']['output'];
   file_name: Scalars['String']['output'];
+  file_size: Scalars['Int']['output'];
   id: Scalars['Int']['output'];
+  mimetype: Scalars['String']['output'];
+  plugin: Scalars['String']['output'];
 };
 
 export type ShowCoreFilesObj = {
@@ -1333,17 +1338,6 @@ export type UploadAvatarCoreMembersObj = {
   id: Scalars['Int']['output'];
   mimetype: Scalars['String']['output'];
   plugin: Scalars['String']['output'];
-};
-
-export type UploadCoreEditorObj = {
-  __typename?: 'UploadCoreEditorObj';
-  dir_folder: Scalars['String']['output'];
-  extension: Scalars['String']['output'];
-  file_name: Scalars['String']['output'];
-  file_size: Scalars['Int']['output'];
-  mimetype: Scalars['String']['output'];
-  plugin: Scalars['String']['output'];
-  user_id: Scalars['Int']['output'];
 };
 
 export type User = {
@@ -1671,6 +1665,15 @@ export type Admin__Blog_Categories__CreateMutationVariables = Exact<{
 
 
 export type Admin__Blog_Categories__CreateMutation = { __typename?: 'Mutation', admin__blog_categories__create: { __typename?: 'ShowBlogCategories', id: number } };
+
+export type Core_Files__UploadMutationVariables = Exact<{
+  file: Scalars['Upload']['input'];
+  folder: Scalars['String']['input'];
+  plugin: Scalars['String']['input'];
+}>;
+
+
+export type Core_Files__UploadMutation = { __typename?: 'Mutation', core_files__upload: { __typename?: 'ShowCoreFiles', dir_folder: string, extension: string, file_name: string, file_size: number, mimetype: string, plugin: string, created: Date, id: number } };
 
 export type Core_Members__Sign_UpMutationVariables = Exact<{
   email: Scalars['String']['input'];
@@ -2400,6 +2403,20 @@ export const Admin__Blog_Categories__Create = gql`
     name: $name
     color: $color
   ) {
+    id
+  }
+}
+    `;
+export const Core_Files__Upload = gql`
+    mutation Core_files__upload($file: Upload!, $folder: String!, $plugin: String!) {
+  core_files__upload(file: $file, folder: $folder, plugin: $plugin) {
+    dir_folder
+    extension
+    file_name
+    file_size
+    mimetype
+    plugin
+    created
     id
   }
 }

@@ -4,6 +4,7 @@
   "license": "GPL-3.0 license",
   "scripts": {
     "dev": "next dev",
+    "dev:turbo": "next dev --turbo",
     "build": "next build",
     "analyze": "cross-env ANALYZE=true pnpm build",
     "start": "next start",
@@ -46,7 +47,6 @@
     "@tiptap/react": "^2.3.0",
     "@tiptap/starter-kit": "^2.3.0",
     "autoprefixer": "^10.4.19",
-    "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^1.0.0",

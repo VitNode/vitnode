@@ -199,7 +199,7 @@ type Mutation {
   admin__forum_forums__edit(description: [TextLanguageInput!]!, id: Int!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
   admin__install__create_database: String!
   admin_sessions__sign_out: String!
-  core_editor__upload(file: Upload!, folder: String!, plugin: String!): UploadCoreEditorObj!
+  core_files__upload(file: Upload!, folder: String!, plugin: String!): ShowCoreFiles!
   core_groups__admin_create(name: [TextLanguageInput!]!): ShowAdminGroups!
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
@@ -509,8 +509,13 @@ type ShowBlogCategoriesObj {
 
 type ShowCoreFiles {
   created: DateTime!
+  dir_folder: String!
+  extension: String!
   file_name: String!
+  file_size: Int!
   id: Int!
+  mimetype: String!
+  plugin: String!
 }
 
 type ShowCoreFilesObj {
@@ -783,16 +788,6 @@ type UploadAvatarCoreMembersObj {
   id: Int!
   mimetype: String!
   plugin: String!
-}
-
-type UploadCoreEditorObj {
-  dir_folder: String!
-  extension: String!
-  file_name: String!
-  file_size: Int!
-  mimetype: String!
-  plugin: String!
-  user_id: Int!
 }
 
 type User {

@@ -2,7 +2,6 @@ import { Injectable } from "@nestjs/common";
 
 import { UploadCoreEditorArgs } from "./dto/upload.args";
 import { acceptMimeTypeImage, acceptMimeTypeVideo } from "../helpers";
-import { UploadCoreEditorObj } from "./dto/upload.obj";
 
 import { DatabaseService } from "@/plugins/database/database.service";
 import { User } from "@/utils/decorators/user.decorator";
@@ -10,6 +9,7 @@ import { UploadCoreFilesService } from "../../files/helpers/upload/upload.servic
 import { HelpersUploadCoreFilesService } from "../../files/helpers/upload/helpers";
 import { UploadCoreFilesArgs } from "../../files/helpers/upload/dto/upload.args";
 import { core_files } from "../../admin/database/schema/files";
+import { ShowCoreFiles } from "../../files/show/dto/show.obj";
 
 @Injectable()
 export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
@@ -36,7 +36,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
     });
     const args: Omit<UploadCoreFilesArgs, "secure" | "acceptMimeType"> = {
       files: [file],
-      maxUploadSizeBytes: 1e6, // 1MB,
+      maxUploadSizeBytes: 10 * 1024 * 1024 * 1024, // 10 GB
       plugin,
       folder
     };
@@ -62,18 +62,20 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
   async upload(
     { id: user_id }: User,
     { file, folder, plugin }: UploadCoreEditorArgs
-  ): Promise<UploadCoreEditorObj> {
+  ): Promise<ShowCoreFiles> {
     const uploadFile = await this.getFilesAfterUpload({ file, plugin, folder });
 
     // Save to database
-    await this.databaseService.db.insert(core_files).values({
-      user_id,
-      ...uploadFile
-    });
+    const data = await this.databaseService.db
+      .insert(core_files)
+      .values({
+        user_id,
+        ...uploadFile
+      })
+      .returning();
 
-    return {
-      ...uploadFile,
-      user_id
-    };
+    const returnData = data[0];
+
+    return returnData;
   }
 }

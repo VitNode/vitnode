@@ -5,7 +5,7 @@ import {
   LanguageSelectFooterEditor,
   type LanguageSelectFooterEditorProps
 } from "./language-select";
-import { FilesButtonFooterEditor } from "./files/button";
+import { FilesButtonFooterEditor, type FileStateEditor } from "./files/button";
 import { ListFilesFooterEditor } from "./files/list";
 import { Separator } from "@/components/ui/separator";
 
@@ -20,7 +20,7 @@ export const FooterEditor = ({
   selectedLanguage,
   setSelectedLanguage
 }: Props) => {
-  const [files, setFiles] = useState<File[]>([]);
+  const [files, setFiles] = useState<FileStateEditor[]>([]);
 
   return (
     <div className="bg-background p-2 rounded-b-md">

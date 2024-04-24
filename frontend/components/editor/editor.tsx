@@ -114,8 +114,10 @@ export const Editor = ({
 
   return (
     <div className={cn("border border-input rounded-md shadow-sm", className)}>
-      <ToolBarEditor editor={editor} />
-      <EditorContent className="break-all" editor={editor} />
+      <div className="relative">
+        <ToolBarEditor editor={editor} />
+        <EditorContent className="break-all" editor={editor} />
+      </div>
       <FooterEditor
         editor={editor}
         disableLanguage={disableLanguage}

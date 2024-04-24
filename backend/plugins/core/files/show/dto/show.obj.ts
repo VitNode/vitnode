@@ -3,7 +3,7 @@ import { Field, Int, ObjectType } from "@nestjs/graphql";
 import { PageInfo } from "@/types/database/pagination.type";
 
 @ObjectType()
-class ShowCoreFiles {
+export class ShowCoreFiles {
   @Field(() => Int)
   id: number;
 
@@ -11,7 +11,22 @@ class ShowCoreFiles {
   created: Date;
 
   @Field(() => String)
+  plugin: string;
+
+  @Field(() => String)
+  mimetype: string;
+
+  @Field(() => String)
   file_name: string;
+
+  @Field(() => String)
+  dir_folder: string;
+
+  @Field(() => String)
+  extension: string;
+
+  @Field(() => Int)
+  file_size: number;
 }
 
 @ObjectType()

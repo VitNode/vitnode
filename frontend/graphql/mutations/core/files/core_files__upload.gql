@@ -1,0 +1,16 @@
+mutation Core_files__upload(
+  $file: Upload!
+  $folder: String!
+  $plugin: String!
+) {
+  core_files__upload(file: $file, folder: $folder, plugin: $plugin) {
+    dir_folder
+    extension
+    file_name
+    file_size
+    mimetype
+    plugin
+    created
+    id
+  }
+}

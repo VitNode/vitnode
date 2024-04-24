@@ -1,4 +1,5 @@
 import {
+  boolean,
   index,
   integer,
   pgTable,
@@ -29,7 +30,8 @@ export const core_files = pgTable(
     mimetype: varchar("mimetype", { length: 255 }).notNull(),
     width: integer("width"),
     height: integer("height"),
-    security_key: varchar("security_key", { length: 255 })
+    security_key: varchar("security_key", { length: 255 }),
+    temp: boolean("temp").notNull().default(true)
   },
   table => ({
     user_id_idx: index("core_files_user_id_idx").on(table.user_id)
