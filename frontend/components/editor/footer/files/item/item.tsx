@@ -1,14 +1,18 @@
 import { Plus, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
+import type { Dispatch, SetStateAction } from "react";
 
 import type { FileStateEditor } from "../button";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/functions/classnames";
 import { IconItemListFilesFooterEditor } from "./icon";
 import { ContentItemListFilesFooterEditor } from "./content";
+import { deleteMutationApi } from "./hooks/delete-mutation-api";
 
 export interface ItemListFilesFooterEditorProps
   extends Omit<FileStateEditor, "file"> {
+  setFiles: Dispatch<SetStateAction<FileStateEditor[]>>;
   file?: File;
 }
 
@@ -16,9 +20,12 @@ export const ItemListFilesFooterEditor = ({
   data,
   error,
   file,
-  isLoading
+  id,
+  isLoading,
+  setFiles
 }: ItemListFilesFooterEditorProps) => {
   const t = useTranslations("core.editor.files");
+  const tCore = useTranslations("core");
 
   return (
     <>
@@ -61,7 +68,21 @@ export const ItemListFilesFooterEditor = ({
           <Button variant="ghost">
             <Plus /> {t("insert")}
           </Button>
-          <Button size="icon" variant="destructiveGhost" ariaLabel="Delete">
+          <Button
+            size="icon"
+            variant="destructiveGhost"
+            ariaLabel="Delete"
+            onClick={async () => {
+              setFiles(prev => prev.filter(item => item.id !== id));
+              const mutation = await deleteMutationApi({ id });
+
+              if (mutation.error) {
+                toast.error(tCore("errors.title"), {
+                  description: tCore("errors.internal_server_error")
+                });
+              }
+            }}
+          >
             <Trash2 />
           </Button>
         </div>

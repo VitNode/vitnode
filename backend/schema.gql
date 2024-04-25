@@ -199,7 +199,8 @@ type Mutation {
   admin__forum_forums__edit(description: [TextLanguageInput!]!, id: Int!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
   admin__install__create_database: String!
   admin_sessions__sign_out: String!
-  core_files__upload(file: Upload!, folder: String!, plugin: String!): ShowCoreFiles!
+  core_editor_files__delete(id: Int!): String!
+  core_editor_files__upload(file: Upload!, folder: String!, plugin: String!): ShowCoreFiles!
   core_groups__admin_create(name: [TextLanguageInput!]!): ShowAdminGroups!
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!

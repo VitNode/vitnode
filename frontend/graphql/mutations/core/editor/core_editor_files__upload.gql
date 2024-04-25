@@ -1,9 +1,9 @@
-mutation Core_files__upload(
+mutation core_editor_files__upload(
   $file: Upload!
   $folder: String!
   $plugin: String!
 ) {
-  core_files__upload(file: $file, folder: $folder, plugin: $plugin) {
+  core_editor_files__upload(file: $file, folder: $folder, plugin: $plugin) {
     extension
     file_name
     file_size

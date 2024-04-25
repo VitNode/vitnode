@@ -1,13 +1,14 @@
 import { useTranslations } from "next-intl";
 
 import type { ItemListFilesFooterEditorProps } from "./item";
+import { formatBytes } from "@/functions/format-bytes";
 
 export const ContentItemListFilesFooterEditor = ({
   data,
   error,
   file,
   isLoading
-}: Omit<ItemListFilesFooterEditorProps, "id">) => {
+}: Omit<ItemListFilesFooterEditorProps, "id" | "setFiles">) => {
   const t = useTranslations("core.editor.files");
 
   if (isLoading) {
@@ -22,7 +23,7 @@ export const ContentItemListFilesFooterEditor = ({
 
   return (
     <>
-      <span>{file?.size ?? data?.file_size ?? "Error!"}</span>
+      <span>{formatBytes(file?.size ?? data?.file_size ?? 0)}</span>
       <span>&middot;</span>
       <span>{file?.type ?? data?.mimetype ?? "Error!"}</span>
       {data?.width && data?.height && (

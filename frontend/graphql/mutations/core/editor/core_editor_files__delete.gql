@@ -1,0 +1,3 @@
+mutation Core_editor_files__delete($id: Int!) {
+  core_editor_files__delete(id: $id)
+}

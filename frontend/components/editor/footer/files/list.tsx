@@ -9,9 +9,9 @@ interface Props {
   setFiles: Dispatch<SetStateAction<FileStateEditor[]>>;
 }
 
-export const ListFilesFooterEditor = ({ files }: Props) => {
+export const ListFilesFooterEditor = ({ files, setFiles }: Props) => {
   return (
-    <ul className="space-y-5 mt-2">
+    <ul className="space-y-2 mt-2">
       {files.map(item => {
         return (
           <li
@@ -23,7 +23,7 @@ export const ListFilesFooterEditor = ({ files }: Props) => {
               }
             )}
           >
-            <ItemListFilesFooterEditor {...item} />
+            <ItemListFilesFooterEditor setFiles={setFiles} {...item} />
           </li>
         );
       })}

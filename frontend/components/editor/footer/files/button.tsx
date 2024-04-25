@@ -4,15 +4,15 @@ import { useRef, type Dispatch, type SetStateAction } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import { mutationApi } from "./mutation-api";
 import type { ErrorType } from "@/graphql/fetcher";
-import type { Core_Files__UploadMutation } from "@/graphql/hooks";
+import type { Core_Editor_Files__UploadMutation } from "@/graphql/hooks";
+import { uploadMutationApi } from "./hooks/upload-mutation-api";
 
 export interface FileStateEditor {
   file: File;
   id: number;
   isLoading: boolean;
-  data?: Core_Files__UploadMutation["core_files__upload"];
+  data?: Core_Editor_Files__UploadMutation["core_editor_files__upload"];
   error?: string;
 }
 
@@ -30,7 +30,7 @@ export const FilesButtonFooterEditor = ({ setFiles }: Props) => {
     formData.append("file", file);
     formData.append("plugin", "core");
     formData.append("folder", "testing");
-    const mutation = await mutationApi(formData);
+    const mutation = await uploadMutationApi(formData);
 
     const error = mutation.error as ErrorType | undefined;
 
@@ -47,9 +47,9 @@ export const FilesButtonFooterEditor = ({ setFiles }: Props) => {
         if (item.id === id) {
           return {
             ...item,
-            data: mutation.data.core_files__upload,
+            data: mutation.data.core_editor_files__upload,
             isLoading: false,
-            id: mutation.data.core_files__upload.id
+            id: mutation.data.core_editor_files__upload.id
           };
         }
 

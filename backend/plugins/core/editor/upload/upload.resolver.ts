@@ -14,7 +14,7 @@ export class UploadCoreEditorResolver {
 
   @Mutation(() => ShowCoreFiles)
   @UseGuards(AuthGuards)
-  async core_files__upload(
+  async core_editor_files__upload(
     @CurrentUser() currentUser: User,
     @Args() args: UploadCoreEditorArgs
   ): Promise<ShowCoreFiles> {

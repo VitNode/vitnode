@@ -2,22 +2,22 @@
 
 import { fetcher } from "@/graphql/fetcher";
 import {
-  Core_Files__Upload,
-  type Core_Files__UploadMutation,
-  type Core_Files__UploadMutationVariables
+  Core_Editor_Files__Upload,
+  type Core_Editor_Files__UploadMutation,
+  type Core_Editor_Files__UploadMutationVariables
 } from "@/graphql/hooks";
 
-export const mutationApi = async (formData: FormData) => {
+export const uploadMutationApi = async (formData: FormData) => {
   const file = formData.get("file") as File;
   const plugin = formData.get("plugin") as string;
   const folder = formData.get("folder") as string;
 
   try {
     const { data } = await fetcher<
-      Core_Files__UploadMutation,
-      Omit<Core_Files__UploadMutationVariables, "file">
+      Core_Editor_Files__UploadMutation,
+      Omit<Core_Editor_Files__UploadMutationVariables, "file">
     >({
-      query: Core_Files__Upload,
+      query: Core_Editor_Files__Upload,
       variables: {
         plugin,
         folder
