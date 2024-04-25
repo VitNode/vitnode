@@ -7,4 +7,7 @@ export class DeleteCoreFilesArgs {
 
   @Field(() => String)
   file_name: string;
+
+  @Field(() => Boolean, { nullable: true })
+  file_secure?: boolean;
 }

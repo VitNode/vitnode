@@ -10,6 +10,9 @@ export class ShowCoreFiles extends UploadCoreFilesObj {
 
   @Field(() => Date)
   created: Date;
+
+  @Field(() => String, { nullable: true })
+  security_key?: string;
 }
 
 @ObjectType()

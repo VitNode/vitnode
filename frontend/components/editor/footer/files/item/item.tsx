@@ -74,7 +74,10 @@ export const ItemListFilesFooterEditor = ({
             ariaLabel="Delete"
             onClick={async () => {
               setFiles(prev => prev.filter(item => item.id !== id));
-              const mutation = await deleteMutationApi({ id });
+              const mutation = await deleteMutationApi({
+                id,
+                securityKey: data?.security_key
+              });
 
               if (mutation.error) {
                 toast.error(tCore("errors.title"), {

@@ -30,9 +30,6 @@ export const uploadMutationApi = async (formData: FormData) => {
       ]
     });
 
-    // Sleep for 10 seconds
-    await new Promise(resolve => setTimeout(resolve, 10000));
-
     return { data };
   } catch (error) {
     return { error };

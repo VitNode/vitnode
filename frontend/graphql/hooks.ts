@@ -508,6 +508,7 @@ export type MutationAdmin__Forum_Forums__EditArgs = {
 
 export type MutationCore_Editor_Files__DeleteArgs = {
   id: Scalars['Int']['input'];
+  security_key?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -1041,6 +1042,7 @@ export type ShowCoreFiles = {
   id: Scalars['Int']['output'];
   mimetype: Scalars['String']['output'];
   plugin: Scalars['String']['output'];
+  security_key?: Maybe<Scalars['String']['output']>;
   width?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -1678,6 +1680,7 @@ export type Admin__Blog_Categories__CreateMutation = { __typename?: 'Mutation', 
 
 export type Core_Editor_Files__DeleteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
+  securityKey?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -1690,7 +1693,7 @@ export type Core_Editor_Files__UploadMutationVariables = Exact<{
 }>;
 
 
-export type Core_Editor_Files__UploadMutation = { __typename?: 'Mutation', core_editor_files__upload: { __typename?: 'ShowCoreFiles', extension: string, file_name: string, file_size: number, mimetype: string, id: number, height?: number | null, width?: number | null, dir_folder: string } };
+export type Core_Editor_Files__UploadMutation = { __typename?: 'Mutation', core_editor_files__upload: { __typename?: 'ShowCoreFiles', extension: string, file_name: string, file_size: number, mimetype: string, id: number, height?: number | null, width?: number | null, dir_folder: string, security_key?: string | null } };
 
 export type Core_Members__Sign_UpMutationVariables = Exact<{
   email: Scalars['String']['input'];
@@ -1994,7 +1997,7 @@ export type Core_Members__Files__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Core_Members__Files__ShowQuery = { __typename?: 'Query', core_files__show: { __typename?: 'ShowCoreFilesObj', edges: Array<{ __typename?: 'ShowCoreFiles', id: number, file_name: string, created: Date }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Core_Members__Files__ShowQuery = { __typename?: 'Query', core_files__show: { __typename?: 'ShowCoreFilesObj', edges: Array<{ __typename?: 'ShowCoreFiles', created: Date, dir_folder: string, extension: string, file_name: string, file_size: number, height?: number | null, id: number, mimetype: string, plugin: string, width?: number | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Core_Members__ProfilesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2425,8 +2428,8 @@ export const Admin__Blog_Categories__Create = gql`
 }
     `;
 export const Core_Editor_Files__Delete = gql`
-    mutation Core_editor_files__delete($id: Int!) {
-  core_editor_files__delete(id: $id)
+    mutation Core_editor_files__delete($id: Int!, $securityKey: String) {
+  core_editor_files__delete(id: $id, security_key: $securityKey)
 }
     `;
 export const Core_Editor_Files__Upload = gql`
@@ -2440,6 +2443,7 @@ export const Core_Editor_Files__Upload = gql`
     height
     width
     dir_folder
+    security_key
   }
 }
     `;
@@ -3275,9 +3279,16 @@ export const Core_Members__Files__Show = gql`
     query Core_members__files__show($cursor: Int, $first: Int, $last: Int, $sortBy: ShowCoreFilesSortByArgs) {
   core_files__show(cursor: $cursor, first: $first, last: $last, sortBy: $sortBy) {
     edges {
-      id
-      file_name
       created
+      dir_folder
+      extension
+      file_name
+      file_size
+      height
+      id
+      mimetype
+      plugin
+      width
     }
     pageInfo {
       count

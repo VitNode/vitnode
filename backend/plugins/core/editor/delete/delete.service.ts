@@ -18,13 +18,17 @@ export class DeleteCoreEditorService {
 
   async delete(
     { id: user_id }: User,
-    { id }: DeleteCoreEditorArgs
+    { id, security_key }: DeleteCoreEditorArgs
   ): Promise<string> {
     const findFile = await this.databaseService.db.query.core_files.findFirst({
       where: (table, { eq }) => eq(table.id, id)
     });
 
-    if (!findFile || findFile.user_id !== user_id) {
+    if (
+      !findFile ||
+      findFile.user_id !== user_id ||
+      (findFile.security_key && findFile.security_key !== security_key)
+    ) {
       throw new AccessDeniedError();
     }
 
@@ -32,7 +36,10 @@ export class DeleteCoreEditorService {
       .delete(core_files)
       .where(eq(core_files.id, id));
 
-    this.deleteFile.delete(findFile);
+    this.deleteFile.delete({
+      ...findFile,
+      file_secure: !!findFile.security_key
+    });
 
     return "Success!";
   }

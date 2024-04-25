@@ -10,6 +10,7 @@ import { HelpersUploadCoreFilesService } from "../../files/helpers/upload/helper
 import { UploadCoreFilesArgs } from "../../files/helpers/upload/dto/upload.args";
 import { core_files } from "../../admin/database/schema/files";
 import { ShowCoreFiles } from "../../files/show/dto/show.obj";
+import { generateRandomString } from "@/functions/generate-random-string";
 
 @Injectable()
 export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
@@ -20,18 +21,19 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
     super();
   }
 
+  protected acceptMimeTypeToFrontend = [
+    ...acceptMimeTypeImage,
+    ...acceptMimeTypeVideo
+  ];
+
   private async getFilesAfterUpload({
     file,
     folder,
     plugin
   }: UploadCoreEditorArgs) {
-    const acceptMimeTypeToFrontend = [
-      ...acceptMimeTypeImage,
-      ...acceptMimeTypeVideo
-    ];
     const allowUploadToFrontend = await this.checkAcceptMimeType({
       file,
-      acceptMimeType: acceptMimeTypeToFrontend,
+      acceptMimeType: this.acceptMimeTypeToFrontend,
       disableThrowError: true
     });
     const args: Omit<UploadCoreFilesArgs, "secure" | "acceptMimeType"> = {
@@ -44,7 +46,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
     if (allowUploadToFrontend) {
       const current = await this.uploadFile.upload({
         ...args,
-        acceptMimeType: acceptMimeTypeToFrontend
+        acceptMimeType: this.acceptMimeTypeToFrontend
       });
 
       return current[0];
@@ -65,12 +67,19 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
   ): Promise<ShowCoreFiles> {
     const uploadFile = await this.getFilesAfterUpload({ file, plugin, folder });
 
+    const securityKey = generateRandomString(32);
+
     // Save to database
     const data = await this.databaseService.db
       .insert(core_files)
       .values({
         user_id,
-        ...uploadFile
+        ...uploadFile,
+        security_key: this.acceptMimeTypeToFrontend.includes(
+          uploadFile.mimetype
+        )
+          ? null
+          : securityKey
       })
       .returning();
 

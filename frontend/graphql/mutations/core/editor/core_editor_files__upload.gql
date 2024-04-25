@@ -12,5 +12,6 @@ mutation core_editor_files__upload(
     height
     width
     dir_folder
+    security_key
   }
 }

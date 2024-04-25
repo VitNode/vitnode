@@ -11,9 +11,16 @@ query Core_members__files__show(
     sortBy: $sortBy
   ) {
     edges {
-      id
-      file_name
       created
+      dir_folder
+      extension
+      file_name
+      file_size
+      height
+      id
+      mimetype
+      plugin
+      width
     }
     pageInfo {
       count

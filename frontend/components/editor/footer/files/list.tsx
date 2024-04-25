@@ -3,6 +3,8 @@ import type { Dispatch, SetStateAction } from "react";
 import { ItemListFilesFooterEditor } from "./item/item";
 import type { FileStateEditor } from "./button";
 import { cn } from "@/functions/classnames";
+import { AnimatePresenceClient } from "@/components/animations/animate-presence";
+import { LiMotion } from "@/components/animations/div-motion";
 
 interface Props {
   files: FileStateEditor[];
@@ -11,22 +13,28 @@ interface Props {
 
 export const ListFilesFooterEditor = ({ files, setFiles }: Props) => {
   return (
-    <ul className="space-y-2 mt-2">
-      {files.map(item => {
-        return (
-          <li
-            key={`${item.file.name}${item.file.size}${item.file.type}`}
-            className={cn(
-              "bg-card px-5 py-4 border rounded-lg flex gap-5 flex-col md:flex-row items-center shadow-sm transition-colors",
-              {
-                "border-destructive": item.error
-              }
-            )}
-          >
-            <ItemListFilesFooterEditor setFiles={setFiles} {...item} />
-          </li>
-        );
-      })}
-    </ul>
+    <AnimatePresenceClient key="editor_files">
+      <ul className="space-y-2 mt-2">
+        {files.map(item => {
+          return (
+            <LiMotion
+              key={`editor_file_${item.id}`}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
+              layout
+              className={cn(
+                "bg-card px-5 py-4 border rounded-lg flex gap-5 flex-col md:flex-row items-center shadow-sm transition-colors",
+                {
+                  "border-destructive": item.error
+                }
+              )}
+            >
+              <ItemListFilesFooterEditor setFiles={setFiles} {...item} />
+            </LiMotion>
+          );
+        })}
+      </ul>
+    </AnimatePresenceClient>
   );
 };
