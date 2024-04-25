@@ -7,7 +7,6 @@ import {
 } from "./language-select";
 import { FilesButtonFooterEditor, type FileStateEditor } from "./files/button";
 import { ListFilesFooterEditor } from "./files/list";
-import { Separator } from "@/components/ui/separator";
 
 interface Props extends LanguageSelectFooterEditorProps {
   editor: Editor;
@@ -24,7 +23,7 @@ export const FooterEditor = ({
 
   return (
     <div className="bg-background p-2 rounded-b-md">
-      <div className="flex items-center gap-2 justify-between">
+      <div className="flex items-center gap-2 justify-between flex-wrap w-full [&>*]:w-full [&>*]:sm:w-auto">
         {!disableLanguage && (
           <LanguageSelectFooterEditor
             editor={editor}
@@ -37,11 +36,7 @@ export const FooterEditor = ({
       </div>
 
       {files.length > 0 && (
-        <>
-          <Separator className="my-2" />
-
-          <ListFilesFooterEditor files={files} setFiles={setFiles} />
-        </>
+        <ListFilesFooterEditor files={files} setFiles={setFiles} />
       )}
     </div>
   );

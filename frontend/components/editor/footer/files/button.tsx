@@ -6,13 +6,13 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { mutationApi } from "./mutation-api";
 import type { ErrorType } from "@/graphql/fetcher";
-import type { ShowCoreFiles } from "@/graphql/hooks";
+import type { Core_Files__UploadMutation } from "@/graphql/hooks";
 
 export interface FileStateEditor {
   file: File;
   id: number;
   isLoading: boolean;
-  data?: ShowCoreFiles;
+  data?: Core_Files__UploadMutation["core_files__upload"];
   error?: string;
 }
 
@@ -80,7 +80,7 @@ export const FilesButtonFooterEditor = ({ setFiles }: Props) => {
             file => ({
               file,
               isLoading: true,
-              id: Math.floor(Math.random() * 1000)
+              id: Math.floor(Math.random() * 1000) + file.size
             })
           );
 

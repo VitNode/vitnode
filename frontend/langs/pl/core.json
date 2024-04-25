@@ -133,7 +133,12 @@
         }
       },
       "files": {
-        "attach": "Załącz pliki"
+        "attach": "Załącz pliki",
+        "state": {
+          "loading": "Przesyłanie...",
+          "error": "Ups! Coś poszło nie tak. {error}"
+        },
+        "insert": "Wstaw"
       },
 
       "remove_formatting": "Usuń formatowanie"

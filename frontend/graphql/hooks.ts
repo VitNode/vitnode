@@ -1031,9 +1031,11 @@ export type ShowCoreFiles = {
   extension: Scalars['String']['output'];
   file_name: Scalars['String']['output'];
   file_size: Scalars['Int']['output'];
+  height?: Maybe<Scalars['Int']['output']>;
   id: Scalars['Int']['output'];
   mimetype: Scalars['String']['output'];
   plugin: Scalars['String']['output'];
+  width?: Maybe<Scalars['Int']['output']>;
 };
 
 export type ShowCoreFilesObj = {
@@ -1335,9 +1337,11 @@ export type UploadAvatarCoreMembersObj = {
   extension: Scalars['String']['output'];
   file_name: Scalars['String']['output'];
   file_size: Scalars['Int']['output'];
+  height?: Maybe<Scalars['Int']['output']>;
   id: Scalars['Int']['output'];
   mimetype: Scalars['String']['output'];
   plugin: Scalars['String']['output'];
+  width?: Maybe<Scalars['Int']['output']>;
 };
 
 export type User = {
@@ -1673,7 +1677,7 @@ export type Core_Files__UploadMutationVariables = Exact<{
 }>;
 
 
-export type Core_Files__UploadMutation = { __typename?: 'Mutation', core_files__upload: { __typename?: 'ShowCoreFiles', dir_folder: string, extension: string, file_name: string, file_size: number, mimetype: string, plugin: string, created: Date, id: number } };
+export type Core_Files__UploadMutation = { __typename?: 'Mutation', core_files__upload: { __typename?: 'ShowCoreFiles', extension: string, file_name: string, file_size: number, mimetype: string, id: number, height?: number | null, width?: number | null, dir_folder: string } };
 
 export type Core_Members__Sign_UpMutationVariables = Exact<{
   email: Scalars['String']['input'];
@@ -2410,14 +2414,14 @@ export const Admin__Blog_Categories__Create = gql`
 export const Core_Files__Upload = gql`
     mutation Core_files__upload($file: Upload!, $folder: String!, $plugin: String!) {
   core_files__upload(file: $file, folder: $folder, plugin: $plugin) {
-    dir_folder
     extension
     file_name
     file_size
     mimetype
-    plugin
-    created
     id
+    height
+    width
+    dir_folder
   }
 }
     `;

@@ -513,9 +513,11 @@ type ShowCoreFiles {
   extension: String!
   file_name: String!
   file_size: Int!
+  height: Int
   id: Int!
   mimetype: String!
   plugin: String!
+  width: Int
 }
 
 type ShowCoreFilesObj {
@@ -785,9 +787,11 @@ type UploadAvatarCoreMembersObj {
   extension: String!
   file_name: String!
   file_size: Int!
+  height: Int
   id: Int!
   mimetype: String!
   plugin: String!
+  width: Int
 }
 
 type User {

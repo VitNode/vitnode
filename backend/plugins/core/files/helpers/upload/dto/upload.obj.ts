@@ -19,4 +19,10 @@ export class UploadCoreFilesObj {
 
   @Field(() => Int)
   file_size: number;
+
+  @Field(() => Int, { nullable: true })
+  width?: number;
+
+  @Field(() => Int, { nullable: true })
+  height?: number;
 }

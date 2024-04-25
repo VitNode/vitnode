@@ -133,7 +133,12 @@
         }
       },
       "files": {
-        "attach": "Attach Files"
+        "attach": "Attach Files",
+        "state": {
+          "loading": "Uploading...",
+          "error": "Oops! Something went wrong. {error}"
+        },
+        "insert": "Insert"
       },
 
       "remove_formatting": "Remove Formatting"

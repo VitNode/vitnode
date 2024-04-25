@@ -1,32 +1,15 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
 
 import { PageInfo } from "@/types/database/pagination.type";
+import { UploadCoreFilesObj } from "../../helpers/upload/dto/upload.obj";
 
 @ObjectType()
-export class ShowCoreFiles {
+export class ShowCoreFiles extends UploadCoreFilesObj {
   @Field(() => Int)
   id: number;
 
   @Field(() => Date)
   created: Date;
-
-  @Field(() => String)
-  plugin: string;
-
-  @Field(() => String)
-  mimetype: string;
-
-  @Field(() => String)
-  file_name: string;
-
-  @Field(() => String)
-  dir_folder: string;
-
-  @Field(() => String)
-  extension: string;
-
-  @Field(() => Int)
-  file_size: number;
 }
 
 @ObjectType()

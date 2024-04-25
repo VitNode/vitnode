@@ -1,6 +1,13 @@
-import { createWriteStream, existsSync, mkdirSync, statSync } from "fs";
+import {
+  createWriteStream,
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  statSync
+} from "fs";
 import { join } from "path";
 
+import * as sharp from "sharp";
 import { Injectable } from "@nestjs/common";
 
 import { UploadCoreFilesArgs } from "./dto/upload.args";
@@ -11,6 +18,7 @@ import { generateRandomString } from "@/functions/generate-random-string";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 import { DatabaseService } from "@/plugins/database/database.service";
 import { CustomError } from "@/utils/errors/CustomError";
+import { acceptMimeTypeImage } from "@/plugins/core/editor/helpers";
 
 @Injectable()
 export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
@@ -88,6 +96,24 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
 
         // Get file stats
         const stat = statSync(url);
+
+        if (acceptMimeTypeImage.includes(mimetype)) {
+          const file = readFileSync(url);
+
+          const image = sharp(file);
+          const metadata = await image.metadata();
+
+          return {
+            plugin,
+            mimetype,
+            file_name: currentFileName,
+            dir_folder: dir,
+            extension,
+            file_size: stat.size,
+            width: metadata.width,
+            height: metadata.height
+          };
+        }
 
         return {
           plugin,
