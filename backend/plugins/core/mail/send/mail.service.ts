@@ -1,17 +1,15 @@
-import fs = require("fs");
+import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
-import nodemailer = require("nodemailer");
+import { createTransport } from "nodemailer";
 
 import { MailArgs } from "./dto/mail.args";
-
-require("fs");
-require("nodemailer");
 
 @Injectable()
 export class MailService {
   private readonly mailCredentials: {
     host: string;
+
     pass: string;
     user: string;
   };
@@ -28,12 +26,12 @@ export class MailService {
     receiver_address,
     subject
   }: MailArgs): Promise<string> {
-    const transporter = nodemailer.createTransport({
+    const transporter = createTransport({
       host: this.mailCredentials.host,
       port: 587,
       auth: {
-        pass: this.mailCredentials.pass,
-        user: this.mailCredentials.user
+        user: this.mailCredentials.user,
+        pass: this.mailCredentials.pass
       }
     });
 
