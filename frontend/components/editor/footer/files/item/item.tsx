@@ -40,6 +40,7 @@ export const ItemListFilesFooterEditor = ({
         <IconItemListFilesFooterEditor
           isLoading={isLoading}
           isError={!!error}
+          alt={data?.file_alt ?? data?.file_name ?? file?.name ?? ""}
           src={
             data && data.width && data.height
               ? `/${data.dir_folder}/${data.file_name}`

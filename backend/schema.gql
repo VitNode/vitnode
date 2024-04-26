@@ -512,6 +512,7 @@ type ShowCoreFiles {
   created: DateTime!
   dir_folder: String!
   extension: String!
+  file_alt: String
   file_name: String!
   file_size: Int!
   height: Int
@@ -519,6 +520,7 @@ type ShowCoreFiles {
   mimetype: String!
   plugin: String!
   security_key: String
+  temp: Boolean!
   width: Int
 }
 

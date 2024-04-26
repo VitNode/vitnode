@@ -283,7 +283,11 @@
       "files": {
         "title": "My Files",
         "desc": "Manage your files.",
-        "search": "Search files by name..."
+        "search": "Search files by name...",
+        "temp_file": "Temporary File - Will be deleted after 24 hours",
+        "table": {
+          "file_size": "File Size"
+        }
       }
     },
     "errors": {

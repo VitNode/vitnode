@@ -283,7 +283,11 @@
       "files": {
         "title": "Moje pliki",
         "desc": "Zarządzaj swoimi plikami.",
-        "search": "Szukaj plików przez nazwę..."
+        "search": "Szukaj plików przez nazwę...",
+        "temp_file": "Plik tymczasowy - zostanie usunięty po 24 godzinach",
+        "table": {
+          "file_size": "Rozmiar pliku"
+        }
       }
     },
     "errors": {

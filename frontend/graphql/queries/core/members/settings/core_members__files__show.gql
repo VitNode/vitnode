@@ -21,6 +21,8 @@ query Core_members__files__show(
       mimetype
       plugin
       width
+      file_alt
+      temp
     }
     pageInfo {
       count

@@ -13,6 +13,12 @@ export class ShowCoreFiles extends UploadCoreFilesObj {
 
   @Field(() => String, { nullable: true })
   security_key?: string;
+
+  @Field(() => String, { nullable: true })
+  file_alt: string | null;
+
+  @Field(() => Boolean)
+  temp: boolean;
 }
 
 @ObjectType()

@@ -83,7 +83,7 @@ export function DataTable<TData extends TDataMin>({
       params.set("sortBy", sorting[0].id);
       params.set("sortDirection", sorting[0].desc ? "desc" : "asc");
 
-      push(`${pathname}?${params.toString()}`);
+      push(`${pathname}?${params.toString()}`, { scroll: false });
     },
     state: {
       sorting: defaultSorting
@@ -194,7 +194,7 @@ export function DataTable<TData extends TDataMin>({
                       params.set("first", value);
                       params.delete("last");
                     }
-                    push(`${pathname}?${params.toString()}`);
+                    push(`${pathname}?${params.toString()}`, { scroll: false });
                   }}
                 >
                   <SelectTrigger className="h-8 w-[70px]">
@@ -223,7 +223,7 @@ export function DataTable<TData extends TDataMin>({
                     params.set("cursor", `${pageInfo.startCursor}`);
                     params.set("last", `${pageSizeValue}`);
                     params.delete("first");
-                    push(`${pathname}?${params.toString()}`);
+                    push(`${pathname}?${params.toString()}`, { scroll: false });
                   }}
                 >
                   <ChevronLeftIcon className="size-4" />
@@ -240,7 +240,7 @@ export function DataTable<TData extends TDataMin>({
                     params.set("cursor", `${pageInfo.endCursor}`);
                     params.set("first", `${pageSizeValue}`);
                     params.delete("last");
-                    push(`${pathname}?${params.toString()}`);
+                    push(`${pathname}?${params.toString()}`, { scroll: false });
                   }}
                 >
                   <ChevronRightIcon className="size-4" />
