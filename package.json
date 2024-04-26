@@ -23,7 +23,11 @@
     "lint:fix": "cd backend && pnpm lint:fix && cd .. && cd frontend && pnpm lint:fix && cd .."
   },
   "devDependencies": {
+    "@types/nodemailer": "^6.4.14",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.13"
   }
 }

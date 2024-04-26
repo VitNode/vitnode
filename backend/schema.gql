@@ -200,6 +200,7 @@ type Mutation {
   admin__install__create_database: String!
   admin_sessions__sign_out: String!
   core_groups__admin_create(name: [TextLanguageInput!]!): ShowAdminGroups!
+  core_mail_send(content: String!, receiver_address: String!, subject: String!): String!
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
   core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
