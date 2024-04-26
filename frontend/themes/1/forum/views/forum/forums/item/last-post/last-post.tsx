@@ -6,7 +6,7 @@ import { DateFormat } from "@/components/date-format/date-format";
 import { UserLastPostItemForum } from "./user";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { WrapperLastPostItemForum } from "./wrapper";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n/link";
 
 interface Props {
   lastPosts: LastPostsShowForumForums[];

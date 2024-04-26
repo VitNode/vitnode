@@ -29,7 +29,7 @@ import {
   SelectTrigger,
   SelectValue
 } from "../ui/select";
-import { usePathname, useRouter } from "@/i18n";
+import { usePathname, useRouter } from "@/utils/i18n";
 import { ToolbarDataTable } from "./toolbar/toolbar";
 import type { ToolbarDataTableProps } from "./toolbar/toolbar";
 import { cn } from "@/functions/classnames";

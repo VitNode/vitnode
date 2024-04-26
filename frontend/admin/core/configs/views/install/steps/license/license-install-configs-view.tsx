@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import { CardContent, CardFooter } from "@/components/ui/card";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n/link";
 import { FormLicenseInstallConfigs } from "./form-license-install-configs";
 
 export const LicenseInstallConfigsView = () => {

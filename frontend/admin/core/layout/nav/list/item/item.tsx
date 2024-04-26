@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/functions/classnames";
 import { LinkItemListNavAdmin, type ItemListNavAdminProps } from "./link";
-import { usePathname } from "@/i18n";
+import { usePathname } from "@/utils/i18n";
 
 interface Props {
   activeItems: string[];

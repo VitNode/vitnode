@@ -2,7 +2,7 @@
 
 import { Folder } from "lucide-react";
 
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n/link";
 import type { ItemForumProps } from "./item";
 import { buttonVariants } from "@/components/ui/button";
 import { useTextLang } from "@/hooks/core/use-text-lang";

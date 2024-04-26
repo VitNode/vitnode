@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { PoweredByVitNode } from "../powered-by";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "@/i18n";
+import { useRouter } from "@/utils/i18n";
 import { mutationClearCache } from "./mutation-clear-cache";
 import { CONFIG } from "@/config";
 

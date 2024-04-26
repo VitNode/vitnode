@@ -3,8 +3,9 @@ import { Menu } from "lucide-react";
 
 import { cn } from "@/functions/classnames";
 import { buttonVariants } from "@/components/ui/button";
-import { Link, usePathname } from "@/i18n";
+import { usePathname } from "@/utils/i18n";
 import { Icon } from "@/components/icon/icon";
+import { Link } from "@/utils/i18n/link";
 
 export interface ItemListNavAdminProps {
   href: string;

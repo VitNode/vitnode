@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, type CSSProperties } from "react";
 import Image, { type StaticImageData } from "next/image";
 
 import { cn } from "@/functions/classnames";
@@ -11,6 +11,7 @@ interface InitialProps {
   priority?: boolean;
   quality?: number;
   sizes?: string;
+  style?: CSSProperties;
 }
 
 interface PropsWithWidthAndHeight extends InitialProps {
@@ -42,7 +43,8 @@ const Img = forwardRef<HTMLImageElement, ImgProps>(
       quality,
       sizes,
       src,
-      width
+      width,
+      style
     },
     ref
   ) => {
@@ -69,7 +71,8 @@ const Img = forwardRef<HTMLImageElement, ImgProps>(
           fill={fill}
           className={imageClassName}
           style={{
-            height: height !== undefined ? `${height}px` : undefined
+            height: height !== undefined ? `${height}px` : undefined,
+            ...style
           }}
           ref={ref}
         />

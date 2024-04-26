@@ -1,4 +1,4 @@
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n/link";
 import { UserBar } from "./user-bar/user-bar";
 import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";
 import { LanguageSwitcher } from "@/components/switchers/language-switcher";

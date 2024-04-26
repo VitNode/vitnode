@@ -7,7 +7,7 @@ import {
   CardTitle
 } from "@/components/ui/card";
 import { FormSignUp } from "./form/form-sign-up";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n/link";
 
 export default function SignUpView() {
   const t = useTranslations("core.sign_up");

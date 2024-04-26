@@ -1,9 +1,10 @@
 "use client";
 
-import { Link, usePathname } from "@/i18n";
+import { usePathname } from "@/utils/i18n";
 import { cn } from "@/functions/classnames";
 import { buttonVariants } from "@/components/ui/button";
 import { type LinkItemNavSettingsProps } from "@/hooks/core/settings/use-settings-view";
+import { Link } from "@/utils/i18n/link";
 
 export const LinkItemNavSettings = ({
   children,

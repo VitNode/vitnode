@@ -2,7 +2,7 @@ import { Mailbox } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { buttonVariants } from "@/components/ui/button";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n/link";
 
 interface Props {
   name: string;

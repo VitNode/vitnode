@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 import { useSessionAdmin } from "@/admin/core/hooks/use-session-admin";
 import { mutationApi } from "./mutation-api";
 import { useDialog } from "@/components/ui/dialog";
-import { usePathname, useRouter } from "@/i18n";
+import { usePathname, useRouter } from "@/utils/i18n";
 import { zodInput } from "@/functions/zod";
 
 export const codeThemeRegex = /^[a-z0-9-]*$/;

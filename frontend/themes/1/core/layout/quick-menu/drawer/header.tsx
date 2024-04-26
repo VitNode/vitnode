@@ -4,7 +4,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { DrawerClose } from "@/components/ui/drawer";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import { useSession } from "@/hooks/core/use-session";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n/link";
 import { ThemeSwitcher } from "@/components/switchers/theme/theme-switcher";
 import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";
 import { LanguageSwitcher } from "@/components/switchers/language-switcher";

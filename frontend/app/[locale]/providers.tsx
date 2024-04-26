@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { GlobalsContext } from "@/hooks/core/use-globals";
 import type { ConfigType } from "@/config/get-config-file";
 import type { Core_MiddlewareQuery } from "@/graphql/hooks";
+import { ViewTransitions } from "@/utils/next-view-transitions/transition-context";
 
 interface Props {
   children: ReactNode;
@@ -30,28 +31,30 @@ export const Providers = ({ children, config, data }: Props) => {
   );
 
   return (
-    <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
-      <QueryClientProvider client={queryClient}>
-        <GlobalsContext.Provider
-          value={{
-            languages:
-              data?.core_languages__show.edges.filter(lang => lang.enabled) ??
-              [],
-            defaultLanguage:
-              data?.core_languages__show.edges.find(lang => lang.default)
-                ?.code ?? "en",
-            themes: data?.core_themes__show.edges ?? [],
-            config,
-            themeId: data?.core_settings__show.theme_id ?? 1
-          }}
-        >
-          {children}
-          <Toaster closeButton />
-          {process.env.NEXT_PUBLIC_DEBUG && (
-            <ReactQueryDevtools initialIsOpen={false} />
-          )}
-        </GlobalsContext.Provider>
-      </QueryClientProvider>
-    </NextThemesProvider>
+    <ViewTransitions>
+      <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
+        <QueryClientProvider client={queryClient}>
+          <GlobalsContext.Provider
+            value={{
+              languages:
+                data?.core_languages__show.edges.filter(lang => lang.enabled) ??
+                [],
+              defaultLanguage:
+                data?.core_languages__show.edges.find(lang => lang.default)
+                  ?.code ?? "en",
+              themes: data?.core_themes__show.edges ?? [],
+              config,
+              themeId: data?.core_settings__show.theme_id ?? 1
+            }}
+          >
+            {children}
+            <Toaster closeButton />
+            {process.env.NEXT_PUBLIC_DEBUG && (
+              <ReactQueryDevtools initialIsOpen={false} />
+            )}
+          </GlobalsContext.Provider>
+        </QueryClientProvider>
+      </NextThemesProvider>
+    </ViewTransitions>
   );
 };

@@ -1,7 +1,7 @@
 import { UserBarAdmin } from "./user-bar/user-bar-admin";
 import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";
 import { CONFIG } from "@/config";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n/link";
 import { LogoVitNode } from "@/components/logo-vitnode";
 import { LanguageSwitcher } from "@/components/switchers/language-switcher";
 

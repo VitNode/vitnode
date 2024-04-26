@@ -2,9 +2,10 @@
 
 import type { ReactNode } from "react";
 
-import { Link, usePathname } from "@/i18n";
+import { usePathname } from "@/utils/i18n";
 import { buttonVariants } from "../ui/button";
 import { cn } from "@/functions/classnames";
+import { Link } from "@/utils/i18n/link";
 
 export interface TabsTriggerProps {
   children: ReactNode;

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 import { LayoutAdminInstallEnum } from "@/graphql/hooks";
 import type { Admin__Install__LayoutQuery } from "@/graphql/hooks";
-import { usePathname, useRouter } from "@/i18n";
+import { usePathname, useRouter } from "@/utils/i18n";
 import { FinishInstallConfigsView } from "./finish/finish-install-config-view";
 
 interface Props {

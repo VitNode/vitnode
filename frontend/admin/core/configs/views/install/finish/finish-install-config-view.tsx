@@ -9,8 +9,8 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
-import { Link } from "@/i18n";
 import { buttonVariants } from "@/components/ui/button";
+import { Link } from "@/utils/i18n/link";
 
 export const FinishInstallConfigsView = () => {
   const t = useTranslations("admin.configs.install.finish");

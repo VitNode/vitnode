@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 import { mutationCreateApi } from "./mutation-create-api";
 import { useDialog } from "@/components/ui/dialog";
-import { useRouter } from "@/i18n";
+import { useRouter } from "@/utils/i18n";
 import { zodInput } from "@/functions/zod";
 import type { EditTopicData } from "@/themes/1/forum/views/forum/topic/create-edit/create-edit";
 import { mutationEditApi } from "./mutation-edit-api";

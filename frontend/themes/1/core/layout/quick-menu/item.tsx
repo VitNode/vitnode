@@ -1,6 +1,6 @@
 import { forwardRef, type ReactNode, type Ref } from "react";
 
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n/link";
 import { cn } from "@/functions/classnames";
 
 interface Props {

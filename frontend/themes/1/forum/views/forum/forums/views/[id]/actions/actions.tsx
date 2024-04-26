@@ -4,8 +4,9 @@ import { useTranslations } from "next-intl";
 import { Plus } from "lucide-react";
 
 import type { PermissionsForumForums } from "@/graphql/hooks";
-import { Link, usePathname } from "@/i18n";
+import { usePathname } from "@/utils/i18n";
 import { buttonVariants } from "@/components/ui/button";
+import { Link } from "@/utils/i18n/link";
 
 interface Props {
   permissions: Pick<PermissionsForumForums, "can_create">;

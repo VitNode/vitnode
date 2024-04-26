@@ -8,7 +8,7 @@ import {
   type Core_Sessions__Sign_InMutation,
   type Core_Sessions__Sign_InMutationVariables
 } from "@/graphql/hooks";
-import { redirect } from "@/i18n";
+import { redirect } from "@/utils/i18n";
 
 export const mutationApi = async (
   variables: Core_Sessions__Sign_InMutationVariables

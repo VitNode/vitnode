@@ -3,8 +3,9 @@ import { DrawerClose } from "@/components/ui/drawer";
 import { cn } from "@/functions/classnames";
 import type { ShowCoreNav } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
-import { Link, usePathname } from "@/i18n";
+import { usePathname } from "@/utils/i18n";
 import { classNameDrawerQuickMenu } from "../drawer";
+import { Link } from "@/utils/i18n/link";
 
 export const ItemNavDrawerQuickMenu = ({
   description,

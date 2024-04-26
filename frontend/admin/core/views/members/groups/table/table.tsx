@@ -5,7 +5,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { useMemo } from "react";
 
 import { DataTable } from "@/components/data-table/data-table";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n/link";
 import type { ShowAdminGroups } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { ActionsTableGroupsMembersAdmin } from "./actions/actions";

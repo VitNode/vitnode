@@ -19,7 +19,10 @@ interface Props {
 }
 
 const AvatarUser = forwardRef<HTMLImageElement, Props>(
-  ({ className, sizeInRem, user: { avatar, avatar_color, name } }, ref) => {
+  (
+    { className, sizeInRem, user: { avatar, avatar_color, name, name_seo } },
+    ref
+  ) => {
     return (
       <Img
         className={cn("rounded-full flex-shrink-0", className)}
@@ -34,6 +37,7 @@ const AvatarUser = forwardRef<HTMLImageElement, Props>(
         width={sizeInRem * 16}
         height={sizeInRem * 16}
         priority={!avatar}
+        // style={{ viewTransitionName: `avatar-user` }}
       />
     );
   }

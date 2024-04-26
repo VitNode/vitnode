@@ -8,7 +8,7 @@ import {
   type Admin_Sessions__Sign_OutMutation,
   type Admin_Sessions__Sign_OutMutationVariables
 } from "@/graphql/hooks";
-import { redirect } from "@/i18n";
+import { redirect } from "@/utils/i18n";
 
 export const mutationApi = async () => {
   try {

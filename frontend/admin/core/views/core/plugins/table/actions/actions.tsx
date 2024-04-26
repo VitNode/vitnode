@@ -12,9 +12,10 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Link, usePathname, useRouter } from "@/i18n";
+import { usePathname, useRouter } from "@/utils/i18n";
 import { UploadPluginActionsAdmin } from "./upload";
 import { CONFIG } from "@/config";
+import { Link } from "@/utils/i18n/link";
 
 export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
   const t = useTranslations("admin.core.plugins");

@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import { Button, buttonVariants } from "@/components/ui/button";
 import { SheetClose } from "@/components/ui/sheet";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n/link";
 import { cn } from "@/functions/classnames";
 
 interface Props {
