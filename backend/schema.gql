@@ -211,6 +211,7 @@ type Mutation {
   forum_topics__actions__lock_toggle(id: Int!): Boolean!
   forum_topics__create(content: [TextLanguageInput!]!, forum_id: Int!, title: [TextLanguageInput!]!): ShowTopicsForums!
   forum_topics__edit(content: [TextLanguageInput!]!, id: Int!, title: [TextLanguageInput!]!): ShowTopicsForums!
+  send_mail(content: String!, receiver_address: String!, subject: String!): String!
 }
 
 type NavAdminPluginsAuthorization {

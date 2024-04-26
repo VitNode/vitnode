@@ -25,5 +25,9 @@
   "devDependencies": {
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14"
+  },
+  "dependencies": {
+    "axios": "^1.6.8",
+    "nodemailer": "^6.9.13"
   }
 }
