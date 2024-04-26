@@ -200,6 +200,7 @@ type Mutation {
   admin__install__create_database: String!
   admin_sessions__sign_out: String!
   core_groups__admin_create(name: [TextLanguageInput!]!): ShowAdminGroups!
+  core_mail_send(content: String!, receiver_address: String!, subject: String!): String!
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
   core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
@@ -211,7 +212,6 @@ type Mutation {
   forum_topics__actions__lock_toggle(id: Int!): Boolean!
   forum_topics__create(content: [TextLanguageInput!]!, forum_id: Int!, title: [TextLanguageInput!]!): ShowTopicsForums!
   forum_topics__edit(content: [TextLanguageInput!]!, id: Int!, title: [TextLanguageInput!]!): ShowTopicsForums!
-  send_mail(content: String!, receiver_address: String!, subject: String!): String!
 }
 
 type NavAdminPluginsAuthorization {
