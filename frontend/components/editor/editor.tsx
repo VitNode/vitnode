@@ -31,6 +31,10 @@ interface WithoutLanguage extends Props {
   value: string;
 }
 
+export const EditorSkeleton = ({ className }: { className?: string }) => {
+  return <Skeleton className={cn("w-full h-32", className)} />;
+};
+
 export const Editor = ({
   autoFocus,
   className,
@@ -110,7 +114,7 @@ export const Editor = ({
     editor.commands.setContent(JSON.parse(findValue));
   }, [selectedLanguage]);
 
-  if (!editor) return <Skeleton className="w-full h-32" />;
+  if (!editor) return null;
 
   return (
     <div className={cn("border border-input rounded-md shadow-sm", className)}>

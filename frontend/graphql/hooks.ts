@@ -113,6 +113,7 @@ export type GroupUser = {
 
 export type GroupsPermissionsCreateForumForums = {
   can_create: Scalars['Boolean']['input'];
+  can_download_files: Scalars['Boolean']['input'];
   can_read: Scalars['Boolean']['input'];
   can_reply: Scalars['Boolean']['input'];
   can_view: Scalars['Boolean']['input'];
@@ -122,6 +123,7 @@ export type GroupsPermissionsCreateForumForums = {
 export type GroupsPermissionsForumForums = {
   __typename?: 'GroupsPermissionsForumForums';
   can_create: Scalars['Boolean']['output'];
+  can_download_files: Scalars['Boolean']['output'];
   can_read: Scalars['Boolean']['output'];
   can_reply: Scalars['Boolean']['output'];
   can_view: Scalars['Boolean']['output'];
@@ -605,6 +607,7 @@ export type PageInfoShowPostsForums = {
 
 export type PermissionsCreateForumForums = {
   can_all_create: Scalars['Boolean']['input'];
+  can_all_download_files: Scalars['Boolean']['input'];
   can_all_read: Scalars['Boolean']['input'];
   can_all_reply: Scalars['Boolean']['input'];
   can_all_view: Scalars['Boolean']['input'];
@@ -621,6 +624,7 @@ export type PermissionsForumForums = {
 export type PermissionsForumForumsAdmin = {
   __typename?: 'PermissionsForumForumsAdmin';
   can_all_create: Scalars['Boolean']['output'];
+  can_all_download_files: Scalars['Boolean']['output'];
   can_all_read: Scalars['Boolean']['output'];
   can_all_reply: Scalars['Boolean']['output'];
   can_all_view: Scalars['Boolean']['output'];
@@ -2016,7 +2020,7 @@ export type Admin__Forum_Forums__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Admin__Forum_Forums__ShowQuery = { __typename?: 'Query', admin__forum_forums__show: { __typename?: 'ShowForumForumsAdminObj', edges: Array<{ __typename?: 'ShowForumForumsAdmin', id: number, position: number, created: Date, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, children: Array<{ __typename?: 'ChildrenShowForumForums', created: Date, id: number, position: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, _count: { __typename?: 'ShowForumForumsCounts', posts: number, topics: number, total_posts: number, total_topics: number } }>, permissions: { __typename?: 'PermissionsForumForumsAdmin', can_all_create: boolean, can_all_read: boolean, can_all_reply: boolean, can_all_view: boolean, groups: Array<{ __typename?: 'GroupsPermissionsForumForums', can_create: boolean, can_read: boolean, can_reply: boolean, can_view: boolean, id: number }> }, _count: { __typename?: 'ShowForumForumsCounts', posts: number, topics: number, total_posts: number, total_topics: number } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Admin__Forum_Forums__ShowQuery = { __typename?: 'Query', admin__forum_forums__show: { __typename?: 'ShowForumForumsAdminObj', edges: Array<{ __typename?: 'ShowForumForumsAdmin', id: number, position: number, created: Date, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, children: Array<{ __typename?: 'ChildrenShowForumForums', created: Date, id: number, position: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, _count: { __typename?: 'ShowForumForumsCounts', posts: number, topics: number, total_posts: number, total_topics: number } }>, permissions: { __typename?: 'PermissionsForumForumsAdmin', can_all_create: boolean, can_all_read: boolean, can_all_reply: boolean, can_all_view: boolean, can_all_download_files: boolean, groups: Array<{ __typename?: 'GroupsPermissionsForumForums', can_create: boolean, can_read: boolean, can_reply: boolean, can_view: boolean, can_download_files: boolean, id: number }> }, _count: { __typename?: 'ShowForumForumsCounts', posts: number, topics: number, total_posts: number, total_topics: number } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Forum_Forums__ShowQueryVariables = Exact<{
   lastPostsArgs?: InputMaybe<LastPostsShowForumForumsArgs>;
@@ -3370,11 +3374,13 @@ export const Admin__Forum_Forums__Show = gql`
         can_all_read
         can_all_reply
         can_all_view
+        can_all_download_files
         groups {
           can_create
           can_read
           can_reply
           can_view
+          can_download_files
           id
         }
       }

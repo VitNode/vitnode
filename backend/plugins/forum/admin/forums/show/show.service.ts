@@ -51,6 +51,7 @@ export class ShowForumForumsAdminService {
                 can_all_read: edge.can_all_read,
                 can_all_reply: edge.can_all_reply,
                 can_all_view: edge.can_all_view,
+                can_all_download_files: edge.can_all_download_files,
                 groups: edge.permissions
               }
             })),

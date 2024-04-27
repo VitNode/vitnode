@@ -22,10 +22,13 @@ export const forum_forums = pgTable(
     // ! Warning: this is a recursive relation. It's not supported by drizzle-orm yet.
     parent_id: integer("parent_id").notNull().default(0),
     position: integer("position").notNull().default(0),
-    can_all_view: boolean("can_all_view").notNull().default(false),
-    can_all_read: boolean("can_all_read").notNull().default(false),
-    can_all_create: boolean("can_all_create").notNull().default(false),
-    can_all_reply: boolean("can_all_reply").notNull().default(false)
+    can_all_view: boolean("can_all_view").notNull().default(true),
+    can_all_read: boolean("can_all_read").notNull().default(true),
+    can_all_create: boolean("can_all_create").notNull().default(true),
+    can_all_reply: boolean("can_all_reply").notNull().default(true),
+    can_all_download_files: boolean("can_all_download_files")
+      .notNull()
+      .default(true)
   },
   table => ({
     parent_id_idx: index("forum_forums_parent_id_idx").on(table.parent_id)
@@ -137,7 +140,8 @@ export const forum_forums_permissions = pgTable(
     can_view: boolean("can_view").notNull().default(false),
     can_read: boolean("can_read").notNull().default(false),
     can_create: boolean("can_create").notNull().default(false),
-    can_reply: boolean("can_reply").notNull().default(false)
+    can_reply: boolean("can_reply").notNull().default(false),
+    can_download_files: boolean("can_download_files").notNull().default(false)
   },
   table => ({
     forum_id_idx: index("forum_forums_permissions_forum_id_idx").on(

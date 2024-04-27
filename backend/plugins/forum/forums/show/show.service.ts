@@ -29,11 +29,13 @@ interface ShowArgs extends ShowForumForumsArgs {
 interface ShowForumForumsWithPermissions
   extends Omit<ShowForumForumsWithChildren, "permissions"> {
   can_all_create: boolean;
+  can_all_download_files: boolean;
   can_all_read: boolean;
   can_all_reply: boolean;
   can_all_view: boolean;
   permissions: {
     can_create: boolean;
+    can_download_files: boolean;
     can_read: boolean;
     can_reply: boolean;
     can_view: boolean;
@@ -282,7 +284,10 @@ export class ShowForumForumsService {
                 permissions: {
                   can_create: permissions?.can_create || edge.can_all_create,
                   can_read: permissions?.can_read || edge.can_all_read,
-                  can_reply: permissions?.can_reply || edge.can_all_reply
+                  can_reply: permissions?.can_reply || edge.can_all_reply,
+                  can_download_files:
+                    permissions?.can_download_files ||
+                    edge.can_all_download_files
                 }
               };
             }),

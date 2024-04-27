@@ -144,7 +144,8 @@ export class EditForumForumsService {
         can_create: permissions.can_all_create,
         can_read: permissions.can_all_read,
         can_reply: permissions.can_all_reply,
-        can_view: permissions.can_all_view
+        can_view: permissions.can_all_view,
+        can_download_files: permissions.can_all_download_files
       })
       .where(eq(forum_forums_permissions.forum_id, id))
       .returning();
@@ -217,6 +218,7 @@ export class EditForumForumsService {
         can_all_read: permissions.can_all_read,
         can_all_reply: permissions.can_all_reply,
         can_all_view: permissions.can_all_view,
+        can_all_download_files: permissions.can_all_download_files,
         parent_id
       })
       .where(eq(forum_forums.id, id))
