@@ -2,6 +2,7 @@ import { Plus, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import type { Dispatch, SetStateAction } from "react";
+import type { Editor } from "@tiptap/react";
 
 import type { FileStateEditor } from "../button";
 import { Button } from "@/components/ui/button";
@@ -12,12 +13,14 @@ import { deleteMutationApi } from "./hooks/delete-mutation-api";
 
 export interface ItemListFilesFooterEditorProps
   extends Omit<FileStateEditor, "file"> {
+  editor: Editor;
   setFiles: Dispatch<SetStateAction<FileStateEditor[]>>;
   file?: File;
 }
 
 export const ItemListFilesFooterEditor = ({
   data,
+  editor,
   error,
   file,
   id,
@@ -64,9 +67,19 @@ export const ItemListFilesFooterEditor = ({
         </div>
       </div>
 
-      {!error && !isLoading && (
+      {!error && !isLoading && data && (
         <div className="flex gap-1 items-center flex-wrap flex-shrink-0">
-          <Button variant="ghost">
+          <Button
+            variant="ghost"
+            onClick={() => {
+              editor.commands.insertFile({
+                ...data,
+                file_alt: data.file_alt ?? "",
+                id
+              });
+              editor.commands.focus();
+            }}
+          >
             <Plus /> {t("insert")}
           </Button>
           <Button

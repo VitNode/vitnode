@@ -36,7 +36,11 @@ export const FooterEditor = ({
       </div>
 
       {files.length > 0 && (
-        <ListFilesFooterEditor files={files} setFiles={setFiles} />
+        <ListFilesFooterEditor
+          files={files}
+          setFiles={setFiles}
+          editor={editor}
+        />
       )}
     </div>
   );

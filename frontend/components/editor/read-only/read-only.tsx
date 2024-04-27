@@ -8,6 +8,7 @@ import { cn } from "@/functions/classnames";
 import { extensionsEditor } from "../extensions/extensions";
 import { HeadingExtensionEditor } from "../extensions/heading";
 import { changeCodeBlock } from "./code-block";
+import { FileDownloadButton } from "./file-download-button";
 
 interface Props {
   value: TextLanguage[];
@@ -78,11 +79,17 @@ export const ReadOnlyEditor = async ({ className, value }: Props) => {
       if (name === "pre" && children.length > 0) {
         return changeCodeBlock(domNode);
       }
+
+      if (name === "button" && domNode.attribs["data-type"] === "file") {
+        return <FileDownloadButton file_name={domNode.attribs["file_name"]} />;
+      }
     }
   };
 
   return (
-    <div className={cn("break-all", className)}>
+    <div
+      className={cn("break-all [&>*:not(:last-child)]:mb-[0.5rem]", className)}
+    >
       {parse(getText(), options)}
     </div>
   );

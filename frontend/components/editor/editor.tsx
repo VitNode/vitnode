@@ -53,7 +53,7 @@ export const Editor = ({
     editorProps: {
       attributes: {
         class: cn(
-          "min-h-32 p-4 focus:outline-none bg-card resize-y overflow-auto"
+          "min-h-32 p-4 focus:outline-none bg-card resize-y overflow-auto [&>*:not(:last-child)]:mb-[0.5rem]"
         )
       }
     },
@@ -116,7 +116,10 @@ export const Editor = ({
     <div className={cn("border border-input rounded-md shadow-sm", className)}>
       <div className="relative">
         <ToolBarEditor editor={editor} />
-        <EditorContent className="break-all" editor={editor} />
+        <EditorContent
+          className="break-all [&_.ProseMirror-selectednode]:outline-none [&_.ProseMirror-selectednode]:ring-1 [&_.ProseMirror-selectednode]:ring-ring [&_.ProseMirror-selectednode]:rounded-md [&_.ProseMirror-selectednode]:w-fit"
+          editor={editor}
+        />
       </div>
       <FooterEditor
         editor={editor}

@@ -2,33 +2,47 @@ import { Node, mergeAttributes } from "@tiptap/react";
 
 import { renderReactNode } from "./client";
 
-export interface FilesHandlerStorage {
-  files: string[];
+export interface FilesHandlerAttributes {
+  dir_folder: string;
+  file_name: string;
+  file_size: number;
+  id: number;
+  file_alt?: string;
 }
 
 declare module "@tiptap/react" {
   interface Commands<ReturnType> {
     files: {
-      setFiles: () => ReturnType;
+      insertFile: (options: FilesHandlerAttributes) => ReturnType;
     };
   }
 }
 
-export const FilesHandler = Node.create<object, FilesHandlerStorage>({
+export const FilesHandler = Node.create<FilesHandlerAttributes>({
   name: "files",
   group: "block",
+  inline: false,
+  atom: true,
+  selectable: true,
   draggable: true,
+  isolating: false,
 
-  addStorage() {
+  addAttributes() {
     return {
-      files: []
-    };
-  },
-
-  addCommands() {
-    return {
-      setFiles: () => () => {
-        return false;
+      file_name: {
+        default: ""
+      },
+      dir_folder: {
+        default: ""
+      },
+      file_alt: {
+        default: ""
+      },
+      file_size: {
+        default: 0
+      },
+      id: {
+        default: 0
       }
     };
   },
@@ -38,6 +52,25 @@ export const FilesHandler = Node.create<object, FilesHandlerStorage>({
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ["files-component", mergeAttributes(HTMLAttributes), 0];
+    return [
+      "button",
+      mergeAttributes(HTMLAttributes, {
+        ["data-type"]: "file",
+        type: "button"
+      })
+    ];
+  },
+
+  addCommands() {
+    return {
+      insertFile:
+        attributes =>
+        ({ commands }) => {
+          return commands.insertContent({
+            type: this.name,
+            attrs: attributes
+          });
+        }
+    };
   }
 });

@@ -1,4 +1,5 @@
 import type { Dispatch, SetStateAction } from "react";
+import type { Editor } from "@tiptap/react";
 
 import { ItemListFilesFooterEditor } from "./item/item";
 import type { FileStateEditor } from "./button";
@@ -7,11 +8,12 @@ import { AnimatePresenceClient } from "@/components/animations/animate-presence"
 import { LiMotion } from "@/components/animations/div-motion";
 
 interface Props {
+  editor: Editor;
   files: FileStateEditor[];
   setFiles: Dispatch<SetStateAction<FileStateEditor[]>>;
 }
 
-export const ListFilesFooterEditor = ({ files, setFiles }: Props) => {
+export const ListFilesFooterEditor = ({ editor, files, setFiles }: Props) => {
   return (
     <AnimatePresenceClient key="editor_files">
       <ul className="space-y-2 mt-2">
@@ -30,7 +32,11 @@ export const ListFilesFooterEditor = ({ files, setFiles }: Props) => {
                 }
               )}
             >
-              <ItemListFilesFooterEditor setFiles={setFiles} {...item} />
+              <ItemListFilesFooterEditor
+                setFiles={setFiles}
+                editor={editor}
+                {...item}
+              />
             </LiMotion>
           );
         })}

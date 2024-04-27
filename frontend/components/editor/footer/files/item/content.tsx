@@ -8,7 +8,7 @@ export const ContentItemListFilesFooterEditor = ({
   error,
   file,
   isLoading
-}: Omit<ItemListFilesFooterEditorProps, "id" | "setFiles">) => {
+}: Omit<ItemListFilesFooterEditorProps, "id" | "setFiles" | "editor">) => {
   const t = useTranslations("core.editor.files");
 
   if (isLoading) {

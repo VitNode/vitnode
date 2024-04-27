@@ -14,11 +14,6 @@ import { FilesHandler } from "./files/files";
 export const extensionsEditor: Extensions = [
   StarterKit.configure({
     heading: false,
-    paragraph: {
-      HTMLAttributes: {
-        class: "[&:not(:last-child)]:mb-[0.5rem]"
-      }
-    },
     bulletList: {
       HTMLAttributes: {
         class: "list-disc"
