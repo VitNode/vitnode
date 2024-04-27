@@ -12,6 +12,9 @@ export class UploadCoreFilesObj {
   file_name: string;
 
   @Field(() => String)
+  file_name_original: string;
+
+  @Field(() => String)
   dir_folder: string;
 
   @Field(() => String)

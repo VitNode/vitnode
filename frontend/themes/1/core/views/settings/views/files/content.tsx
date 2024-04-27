@@ -64,7 +64,9 @@ export const ContentFilesSettings = ({
 
           return (
             <div>
-              <span className="leading-tight">{data.file_name}</span>
+              <span className="truncate leading-tight max-w-80 block">
+                {data.file_name_original}
+              </span>
               <div className="text-sm text-muted-foreground flex gap-2 flex-wrap items-center">
                 {data.temp && (
                   <>

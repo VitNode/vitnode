@@ -4,9 +4,10 @@ import { renderReactNode } from "./client";
 
 export interface FilesHandlerAttributes {
   dir_folder: string;
-  file_name: string;
+  file_name_original: string;
   file_size: number;
   id: number;
+  mimetype: string;
   file_alt?: string;
 }
 
@@ -29,7 +30,7 @@ export const FilesHandler = Node.create<FilesHandlerAttributes>({
 
   addAttributes() {
     return {
-      file_name: {
+      file_name_original: {
         default: ""
       },
       dir_folder: {
@@ -40,6 +41,9 @@ export const FilesHandler = Node.create<FilesHandlerAttributes>({
       },
       file_size: {
         default: 0
+      },
+      mimetype: {
+        default: ""
       },
       id: {
         default: 0

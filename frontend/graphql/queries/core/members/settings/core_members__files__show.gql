@@ -16,6 +16,7 @@ query Core_members__files__show(
       extension
       file_name
       file_size
+      file_name_original
       height
       id
       mimetype

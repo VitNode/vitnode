@@ -81,7 +81,14 @@ export const ReadOnlyEditor = async ({ className, value }: Props) => {
       }
 
       if (name === "button" && domNode.attribs["data-type"] === "file") {
-        return <FileDownloadButton file_name={domNode.attribs["file_name"]} />;
+        return (
+          <FileDownloadButton
+            file_name_original={domNode.attribs["file_name_original"]}
+            mimetype={domNode.attribs["mimetype"]}
+            file_size={parseInt(domNode.attribs["file_size"], 10)}
+            id={+domNode.attribs["id"]}
+          />
+        );
       }
     }
   };

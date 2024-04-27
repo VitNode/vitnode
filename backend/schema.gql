@@ -518,6 +518,7 @@ type ShowCoreFiles {
   extension: String!
   file_alt: String
   file_name: String!
+  file_name_original: String!
   file_size: Int!
   height: Int
   id: Int!
@@ -794,6 +795,7 @@ type UploadAvatarCoreMembersObj {
   dir_folder: String!
   extension: String!
   file_name: String!
+  file_name_original: String!
   file_size: Int!
   height: Int
   id: Int!

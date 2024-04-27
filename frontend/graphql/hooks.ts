@@ -1042,6 +1042,7 @@ export type ShowCoreFiles = {
   extension: Scalars['String']['output'];
   file_alt?: Maybe<Scalars['String']['output']>;
   file_name: Scalars['String']['output'];
+  file_name_original: Scalars['String']['output'];
   file_size: Scalars['Int']['output'];
   height?: Maybe<Scalars['Int']['output']>;
   id: Scalars['Int']['output'];
@@ -1350,6 +1351,7 @@ export type UploadAvatarCoreMembersObj = {
   dir_folder: Scalars['String']['output'];
   extension: Scalars['String']['output'];
   file_name: Scalars['String']['output'];
+  file_name_original: Scalars['String']['output'];
   file_size: Scalars['Int']['output'];
   height?: Maybe<Scalars['Int']['output']>;
   id: Scalars['Int']['output'];
@@ -1699,7 +1701,7 @@ export type Core_Editor_Files__UploadMutationVariables = Exact<{
 }>;
 
 
-export type Core_Editor_Files__UploadMutation = { __typename?: 'Mutation', core_editor_files__upload: { __typename?: 'ShowCoreFiles', extension: string, file_name: string, file_size: number, mimetype: string, id: number, height?: number | null, width?: number | null, dir_folder: string, security_key?: string | null, file_alt?: string | null } };
+export type Core_Editor_Files__UploadMutation = { __typename?: 'Mutation', core_editor_files__upload: { __typename?: 'ShowCoreFiles', extension: string, file_name: string, file_size: number, mimetype: string, id: number, height?: number | null, width?: number | null, dir_folder: string, security_key?: string | null, file_alt?: string | null, file_name_original: string } };
 
 export type Core_Members__Sign_UpMutationVariables = Exact<{
   email: Scalars['String']['input'];
@@ -2003,7 +2005,7 @@ export type Core_Members__Files__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Core_Members__Files__ShowQuery = { __typename?: 'Query', core_files__show: { __typename?: 'ShowCoreFilesObj', edges: Array<{ __typename?: 'ShowCoreFiles', created: Date, dir_folder: string, extension: string, file_name: string, file_size: number, height?: number | null, id: number, mimetype: string, plugin: string, width?: number | null, file_alt?: string | null, temp: boolean }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Core_Members__Files__ShowQuery = { __typename?: 'Query', core_files__show: { __typename?: 'ShowCoreFilesObj', edges: Array<{ __typename?: 'ShowCoreFiles', created: Date, dir_folder: string, extension: string, file_name: string, file_size: number, file_name_original: string, height?: number | null, id: number, mimetype: string, plugin: string, width?: number | null, file_alt?: string | null, temp: boolean }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Core_Members__ProfilesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2451,6 +2453,7 @@ export const Core_Editor_Files__Upload = gql`
     dir_folder
     security_key
     file_alt
+    file_name_original
   }
 }
     `;
@@ -3291,6 +3294,7 @@ export const Core_Members__Files__Show = gql`
       extension
       file_name
       file_size
+      file_name_original
       height
       id
       mimetype

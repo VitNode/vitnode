@@ -18,6 +18,9 @@ export const core_files = pgTable(
     extension: varchar("extension", { length: 32 }).notNull(),
     file_alt: varchar("file_alt", { length: 255 }),
     file_name: varchar("file_name", { length: 255 }).notNull(),
+    file_name_original: varchar("file_name_original", {
+      length: 255
+    }).notNull(),
     dir_folder: varchar("dir_folder", { length: 255 }).notNull(),
     user_id: integer("user_id")
       .notNull()

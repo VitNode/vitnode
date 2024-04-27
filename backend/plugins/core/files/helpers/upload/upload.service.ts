@@ -107,6 +107,7 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
             plugin,
             mimetype,
             file_name: currentFileName,
+            file_name_original: filename,
             dir_folder: dir,
             extension,
             file_size: stat.size,
@@ -119,6 +120,7 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
           plugin,
           mimetype,
           file_name: currentFileName,
+          file_name_original: filename,
           dir_folder: dir,
           extension,
           file_size: stat.size

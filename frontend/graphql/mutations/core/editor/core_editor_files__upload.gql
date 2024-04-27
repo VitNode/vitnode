@@ -14,5 +14,6 @@ mutation core_editor_files__upload(
     dir_folder
     security_key
     file_alt
+    file_name_original
   }
 }
