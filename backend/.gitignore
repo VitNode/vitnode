@@ -40,3 +40,5 @@ uploads/*
 !uploads/index.html
 temp/*
 !temp/index.html
+public/*
+!public/index.html

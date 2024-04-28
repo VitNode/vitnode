@@ -37,8 +37,6 @@ export class EditAdminManifestMetadataService {
     fs.writeFileSync(
       join(
         process.cwd(),
-        "..",
-        "frontend",
         "public",
         "assets",
         lang_code,

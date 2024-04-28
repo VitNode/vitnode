@@ -15,6 +15,7 @@ import { cn } from "@/functions/classnames";
 import { CatchLayout } from "./catch";
 import "./global.css";
 import "@/app/[locale]/(admin)/admin/global.css";
+import { CONFIG } from "@/config";
 
 const getData = async () => {
   const { data } = await fetcher<
@@ -40,7 +41,7 @@ interface Props {
 
 export function generateMetadata({ params: { locale } }: Props): Metadata {
   return {
-    manifest: `/assets/${locale}/manifest.webmanifest`
+    manifest: `${CONFIG.backend_url}/public/assets/${locale}/manifest.webmanifest`
   };
 }
 

@@ -34,8 +34,7 @@ export const PermissionsContentCreateEditFormForumAdmin = () => {
               },
               {
                 id: "download_files",
-                title: "Download Files",
-                disableForGuest: true
+                title: "Download Files"
               }
             ]}
             field={field}

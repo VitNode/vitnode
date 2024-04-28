@@ -10,6 +10,7 @@ import { cn } from "@/functions/classnames";
 import { IconItemListFilesFooterEditor } from "./icon";
 import { ContentItemListFilesFooterEditor } from "./content";
 import { deleteMutationApi } from "./hooks/delete-mutation-api";
+import { CONFIG } from "@/config";
 
 export interface ItemListFilesFooterEditorProps
   extends Omit<FileStateEditor, "file"> {
@@ -46,7 +47,7 @@ export const ItemListFilesFooterEditor = ({
           alt={data?.file_alt ?? data?.file_name ?? file?.name ?? ""}
           src={
             data && data.width && data.height
-              ? `/${data.dir_folder}/${data.file_name}`
+              ? `${CONFIG.backend_url}/public/${data.dir_folder}/${data.file_name}`
               : null
           }
         />

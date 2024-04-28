@@ -46,8 +46,6 @@ export class ShowSettingsService {
     return langCodes.map(lang => {
       const path = join(
         process.cwd(),
-        "..",
-        "frontend",
         "public",
         "assets",
         lang,

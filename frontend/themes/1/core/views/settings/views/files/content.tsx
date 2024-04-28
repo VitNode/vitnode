@@ -20,6 +20,7 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
+import { CONFIG } from "@/config";
 
 export const ContentFilesSettings = ({
   core_files__show: { edges, pageInfo }
@@ -35,7 +36,7 @@ export const ContentFilesSettings = ({
           const data = row.original;
           const src =
             data && data.width && data.height
-              ? `/${data.dir_folder}/${data.file_name}`
+              ? `${CONFIG.backend_url}/public/${data.dir_folder}/${data.file_name}`
               : null;
           const alt = data?.file_alt ?? data?.file_name ?? "";
 

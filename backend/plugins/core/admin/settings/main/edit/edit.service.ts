@@ -36,8 +36,6 @@ export class EditAdminMainSettingsService {
 
       const path = join(
         process.cwd(),
-        "..",
-        "frontend",
         "public",
         "assets",
         item.language_code,
@@ -66,8 +64,6 @@ export class EditAdminMainSettingsService {
 
         const path = join(
           process.cwd(),
-          "..",
-          "frontend",
           "public",
           "assets",
           item.code,

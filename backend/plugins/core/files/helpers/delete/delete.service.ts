@@ -22,7 +22,7 @@ export class DeleteCoreFilesService {
   delete({ dir_folder, file_name, file_secure }: DeleteCoreFilesArgs) {
     const path = file_secure
       ? join(process.cwd(), dir_folder)
-      : join(process.cwd(), "..", "frontend", "public", dir_folder);
+      : join(process.cwd(), "public", dir_folder);
     this.checkIfFileExists(`${path}/${file_name}`);
 
     // Remove file from server

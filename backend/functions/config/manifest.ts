@@ -93,14 +93,7 @@ export const generateManifest = async (config: ConfigType) => {
         }
       ]
     };
-    const path = join(
-      process.cwd(),
-      "..",
-      "frontend",
-      "public",
-      "assets",
-      language
-    );
+    const path = join(process.cwd(), "public", "assets", language);
     const filePath = join(path, "manifest.webmanifest");
 
     if (fs.existsSync(filePath)) {
