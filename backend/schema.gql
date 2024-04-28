@@ -513,6 +513,7 @@ type ShowBlogCategoriesObj {
 }
 
 type ShowCoreFiles {
+  count_uses: Int!
   created: DateTime!
   dir_folder: String!
   extension: String!
@@ -523,9 +524,7 @@ type ShowCoreFiles {
   height: Int
   id: Int!
   mimetype: String!
-  plugin: String!
   security_key: String
-  temp: Boolean!
   width: Int
 }
 
@@ -800,7 +799,6 @@ type UploadAvatarCoreMembersObj {
   height: Int
   id: Int!
   mimetype: String!
-  plugin: String!
   width: Int
 }
 

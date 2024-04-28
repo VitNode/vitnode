@@ -83,8 +83,6 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
       })
       .returning();
 
-    const returnData = data[0];
-
-    return returnData;
+    return { ...data[0], count_uses: 0 };
   }
 }

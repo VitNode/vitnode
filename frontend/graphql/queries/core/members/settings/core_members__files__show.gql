@@ -20,10 +20,9 @@ query Core_members__files__show(
       height
       id
       mimetype
-      plugin
       width
       file_alt
-      temp
+      count_uses
     }
     pageInfo {
       count

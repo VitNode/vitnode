@@ -1037,6 +1037,7 @@ export type ShowBlogCategoriesObj = {
 
 export type ShowCoreFiles = {
   __typename?: 'ShowCoreFiles';
+  count_uses: Scalars['Int']['output'];
   created: Scalars['DateTime']['output'];
   dir_folder: Scalars['String']['output'];
   extension: Scalars['String']['output'];
@@ -1047,9 +1048,7 @@ export type ShowCoreFiles = {
   height?: Maybe<Scalars['Int']['output']>;
   id: Scalars['Int']['output'];
   mimetype: Scalars['String']['output'];
-  plugin: Scalars['String']['output'];
   security_key?: Maybe<Scalars['String']['output']>;
-  temp: Scalars['Boolean']['output'];
   width?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -1356,7 +1355,6 @@ export type UploadAvatarCoreMembersObj = {
   height?: Maybe<Scalars['Int']['output']>;
   id: Scalars['Int']['output'];
   mimetype: Scalars['String']['output'];
-  plugin: Scalars['String']['output'];
   width?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -2005,7 +2003,7 @@ export type Core_Members__Files__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Core_Members__Files__ShowQuery = { __typename?: 'Query', core_files__show: { __typename?: 'ShowCoreFilesObj', edges: Array<{ __typename?: 'ShowCoreFiles', created: Date, dir_folder: string, extension: string, file_name: string, file_size: number, file_name_original: string, height?: number | null, id: number, mimetype: string, plugin: string, width?: number | null, file_alt?: string | null, temp: boolean }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Core_Members__Files__ShowQuery = { __typename?: 'Query', core_files__show: { __typename?: 'ShowCoreFilesObj', edges: Array<{ __typename?: 'ShowCoreFiles', created: Date, dir_folder: string, extension: string, file_name: string, file_size: number, file_name_original: string, height?: number | null, id: number, mimetype: string, width?: number | null, file_alt?: string | null, count_uses: number }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Core_Members__ProfilesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -3298,10 +3296,9 @@ export const Core_Members__Files__Show = gql`
       height
       id
       mimetype
-      plugin
       width
       file_alt
-      temp
+      count_uses
     }
     pageInfo {
       count

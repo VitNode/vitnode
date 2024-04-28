@@ -17,8 +17,8 @@ export class ShowCoreFiles extends UploadCoreFilesObj {
   @Field(() => String, { nullable: true })
   file_alt: string | null;
 
-  @Field(() => Boolean)
-  temp: boolean;
+  @Field(() => Int)
+  count_uses: number;
 }
 
 @ObjectType()

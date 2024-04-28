@@ -3,9 +3,6 @@ import { Field, Int, ObjectType } from "@nestjs/graphql";
 @ObjectType()
 export class UploadCoreFilesObj {
   @Field(() => String)
-  plugin: string;
-
-  @Field(() => String)
   mimetype: string;
 
   @Field(() => String)

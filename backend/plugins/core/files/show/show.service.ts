@@ -9,7 +9,10 @@ import {
   inputPaginationCursor,
   outputPagination
 } from "@/functions/database/pagination";
-import { core_files } from "../../admin/database/schema/files";
+import {
+  core_files_using,
+  core_files
+} from "../../admin/database/schema/files";
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 import { User } from "@/utils/decorators/user.decorator";
 
@@ -40,7 +43,7 @@ export class ShowCoreFilesService {
 
     const where = eq(core_files.user_id, user_id);
 
-    const edges = await this.databaseService.db.query.core_files.findMany({
+    const initEdges = await this.databaseService.db.query.core_files.findMany({
       ...pagination,
       where: and(pagination.where, where)
     });
@@ -49,6 +52,22 @@ export class ShowCoreFilesService {
       .select({ count: count() })
       .from(core_files)
       .where(where);
+
+    const edges = await Promise.all(
+      initEdges.map(async edge => {
+        const countFileUsing = await this.databaseService.db
+          .select({
+            count: count()
+          })
+          .from(core_files_using)
+          .where(eq(core_files_using.file_id, edge.id));
+
+        return {
+          ...edge,
+          count_uses: countFileUsing[0].count
+        };
+      })
+    );
 
     return outputPagination({ edges, totalCount, first, cursor, last });
   }

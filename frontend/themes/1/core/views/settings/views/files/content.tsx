@@ -69,19 +69,6 @@ export const ContentFilesSettings = ({
                 {data.file_name_original}
               </span>
               <div className="text-sm text-muted-foreground flex gap-2 flex-wrap items-center">
-                {data.temp && (
-                  <>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <Clock className="size-4 text-destructive" />
-                        </TooltipTrigger>
-                        <TooltipContent>{t("temp_file")}</TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                    <span>&middot;</span>
-                  </>
-                )}
                 <span>{data.mimetype}</span>
                 {data?.width && data?.height && (
                   <>
@@ -118,6 +105,31 @@ export const ContentFilesSettings = ({
           const data = row.original;
 
           return formatBytes(data.file_size);
+        }
+      },
+      {
+        header: t("table.count_uses"),
+        accessorKey: "count_uses",
+        cell: ({ row }) => {
+          const data = row.original;
+
+          if (data.count_uses === 0) {
+            return (
+              <div className="flex gap-2 items-center">
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <Clock className="size-4 text-destructive" />
+                    </TooltipTrigger>
+                    <TooltipContent>{t("temp_file")}</TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+                {data.count_uses}
+              </div>
+            );
+          }
+
+          return data.count_uses;
         }
       }
     ],
