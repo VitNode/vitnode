@@ -6,4 +6,6 @@ export const ImageExtensionEditor = ImageExtension.extend({
   addNodeView() {
     return renderReactNode();
   }
+}).configure({
+  inline: true
 });

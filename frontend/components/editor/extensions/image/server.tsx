@@ -7,7 +7,7 @@ export const ImageFromNextWithNode = ({
   node: { attrs: { src: string } };
 }) => {
   return (
-    <NodeViewWrapper>
+    <NodeViewWrapper className="inline-block">
       <Image src={node.attrs.src} alt="" width={500} height={500} />
     </NodeViewWrapper>
   );

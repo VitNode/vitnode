@@ -284,7 +284,7 @@
         "title": "My Files",
         "desc": "Manage your files.",
         "search": "Search files by name...",
-        "temp_file": "Temporary File - Will be deleted after 12 hours",
+        "temp_file": "Temporary File will be deleted soon",
         "table": {
           "file_size": "File Size",
           "count_uses": "Count Uses"

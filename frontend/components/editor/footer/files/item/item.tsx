@@ -2,7 +2,8 @@ import { Plus, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import type { Dispatch, SetStateAction } from "react";
-import type { Editor } from "@tiptap/react";
+import { findChildren, type Editor } from "@tiptap/react";
+import type { Node } from "@tiptap/pm/model";
 
 import type { FileStateEditor } from "../button";
 import { Button } from "@/components/ui/button";
@@ -88,12 +89,36 @@ export const ItemListFilesFooterEditor = ({
             variant="destructiveGhost"
             ariaLabel="Delete"
             onClick={async () => {
+              const nodes: Node[] = [];
+              editor.state.tr.doc.descendants(node => {
+                if (node.type.name === "files" && node.attrs.id === id) {
+                  nodes.push(node);
+                }
+              });
+
+              editor.commands.forEach(
+                nodes.map(item => item.attrs.id),
+                (id, { commands, tr }) => {
+                  const item = findChildren(tr.doc, node => {
+                    return node.type.name === "files" && id === node.attrs.id;
+                  })?.[0];
+
+                  if (!item) {
+                    return true;
+                  }
+
+                  return commands.deleteRange({
+                    from: item.pos,
+                    to: item.pos + item.node.nodeSize
+                  });
+                }
+              );
+
               setFiles(prev => prev.filter(item => item.id !== id));
               const mutation = await deleteMutationApi({
                 id,
                 securityKey: data?.security_key
               });
-
               if (mutation.error) {
                 toast.error(tCore("errors.title"), {
                   description: tCore("errors.internal_server_error")

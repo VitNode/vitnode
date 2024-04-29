@@ -12,7 +12,7 @@ const FileFromNextWithNode = ({
   node: { attrs: FilesHandlerAttributes };
 }) => {
   return (
-    <NodeViewWrapper>
+    <NodeViewWrapper className="inline-block">
       <button
         className="bg-muted hover:bg-accent rounded-md text-sm font-medium transition-colors px-5 py-2 flex gap-5 items-center cursor-pointer text-left"
         data-drag-handle=""

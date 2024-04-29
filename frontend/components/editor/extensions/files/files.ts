@@ -1,4 +1,4 @@
-import { Node, mergeAttributes } from "@tiptap/react";
+import { Node as ReactNodeTipTap, mergeAttributes } from "@tiptap/react";
 
 import { renderReactNode } from "./client";
 
@@ -19,10 +19,10 @@ declare module "@tiptap/react" {
   }
 }
 
-export const FilesHandler = Node.create<FilesHandlerAttributes>({
+export const FilesHandler = ReactNodeTipTap.create<FilesHandlerAttributes>({
   name: "files",
-  group: "block",
-  inline: false,
+  group: "inline",
+  inline: true,
   atom: true,
   selectable: true,
   draggable: true,
@@ -68,11 +68,11 @@ export const FilesHandler = Node.create<FilesHandlerAttributes>({
   addCommands() {
     return {
       insertFile:
-        attributes =>
+        options =>
         ({ commands }) => {
           return commands.insertContent({
             type: this.name,
-            attrs: attributes
+            attrs: options
           });
         }
     };
