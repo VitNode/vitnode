@@ -5,7 +5,13 @@
   "description": "VitNode app",
   "author": "Maciej Piotr (aXenDev) Balcerzak",
   "license": "GPL-3.0 license",
+  "workspaces": [
+    "backend/*",
+    "frontend/*"
+  ],
   "scripts": {
+    "build": "turbo build",
+    "preinstall": "npx only-allow pnpm",
     "config:init": "cd backend && pnpm config:init && cd ..",
     "config:finish": "cd backend && pnpm config:finish && cd ..",
     "backend:build": "cd backend && pnpm build && cd .. pnpm config:finish",
@@ -24,6 +30,7 @@
   },
   "devDependencies": {
     "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.5.14"
+    "prettier-plugin-tailwindcss": "^0.5.14",
+    "turbo": "^1.13.3"
   }
 }
