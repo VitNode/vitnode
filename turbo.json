@@ -4,6 +4,11 @@
     "build": {
       "outputs": [".next/**", "!.next/cache/**", "dist/**"],
       "dependsOn": ["^build"]
+    },
+    "dev": {
+      "dependsOn": ["^dev"],
+      "cache": false,
+      "persistent": true
     }
   },
   "globalDotEnv": [".env"]

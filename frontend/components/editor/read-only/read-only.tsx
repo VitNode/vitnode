@@ -87,6 +87,11 @@ export const ReadOnlyEditor = async ({ className, value }: Props) => {
             mimetype={domNode.attribs["mimetype"]}
             file_size={parseInt(domNode.attribs["file_size"], 10)}
             id={+domNode.attribs["id"]}
+            width={+domNode.attribs["width"]}
+            height={+domNode.attribs["height"]}
+            dir_folder={domNode.attribs["dir_folder"]}
+            file_name={domNode.attribs["file_name"]}
+            file_alt={domNode.attribs["file_alt"]}
           />
         );
       }

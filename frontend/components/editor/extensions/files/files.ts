@@ -2,13 +2,26 @@ import { Node as ReactNodeTipTap, mergeAttributes } from "@tiptap/react";
 
 import { renderReactNode } from "./client";
 
+export const acceptMimeTypeImage = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/gif",
+  "image/avif"
+];
+
+export const acceptMimeTypeVideo = ["video/mp4", "video/webm", "video/ogg"];
+
 export interface FilesHandlerAttributes {
   dir_folder: string;
+  file_name: string;
   file_name_original: string;
   file_size: number;
   id: number;
   mimetype: string;
   file_alt?: string;
+  height?: number;
+  width?: number;
 }
 
 declare module "@tiptap/react" {
@@ -33,6 +46,9 @@ export const FilesHandler = ReactNodeTipTap.create<FilesHandlerAttributes>({
       file_name_original: {
         default: ""
       },
+      file_name: {
+        default: ""
+      },
       dir_folder: {
         default: ""
       },
@@ -46,6 +62,12 @@ export const FilesHandler = ReactNodeTipTap.create<FilesHandlerAttributes>({
         default: ""
       },
       id: {
+        default: 0
+      },
+      width: {
+        default: 0
+      },
+      height: {
         default: 0
       }
     };

@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "build": "turbo build",
+    "dev": "turbo dev",
     "preinstall": "npx only-allow pnpm",
     "config:init": "cd backend && pnpm config:init && cd ..",
     "config:finish": "cd backend && pnpm config:finish && cd ..",

@@ -6,7 +6,6 @@ import { Link } from "@tiptap/extension-link";
 import { Color } from "@tiptap/extension-color";
 import { TextStyle } from "@tiptap/extension-text-style";
 
-import { ImageExtensionEditor } from "./image/image";
 import { CodeBlockLowlightExtensionEditor } from "./code/code";
 import { MentionExtensionEditor } from "./mentions/emoji";
 import { FilesHandler } from "./files/files";
@@ -56,7 +55,7 @@ export const extensionsEditor: Extensions = [
   Link.extend({ inclusive: false }),
   Color,
   TextStyle,
-  ImageExtensionEditor,
+  // ImageExtensionEditor,
   MentionExtensionEditor,
   FilesHandler
 ];

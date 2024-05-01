@@ -2,15 +2,36 @@
 
 import { NodeViewWrapper, ReactNodeViewRenderer } from "@tiptap/react";
 import { File } from "lucide-react";
+import Image from "next/image";
 
-import type { FilesHandlerAttributes } from "./files";
+import { acceptMimeTypeImage, type FilesHandlerAttributes } from "./files";
 import { formatBytes } from "@/functions/format-bytes";
+import { CONFIG } from "@/config";
 
 const FileFromNextWithNode = ({
   node: { attrs: data }
 }: {
   node: { attrs: FilesHandlerAttributes };
 }) => {
+  if (
+    acceptMimeTypeImage.includes(data.mimetype) &&
+    data.width &&
+    data.height
+  ) {
+    return (
+      <NodeViewWrapper className="inline-block">
+        <Image
+          src={`${CONFIG.backend_public_url}/${data.dir_folder}/${data.file_name}`}
+          alt={data.file_alt ?? data.file_name_original}
+          sizes="100vw"
+          className="w-full h-auto"
+          width={data.width}
+          height={data.height}
+        />
+      </NodeViewWrapper>
+    );
+  }
+
   return (
     <NodeViewWrapper className="inline-block">
       <button

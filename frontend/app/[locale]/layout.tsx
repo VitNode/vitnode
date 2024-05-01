@@ -41,7 +41,7 @@ interface Props {
 
 export function generateMetadata({ params: { locale } }: Props): Metadata {
   return {
-    manifest: `${CONFIG.backend_url}/public/assets/${locale}/manifest.webmanifest`
+    manifest: `${CONFIG.backend_public_url}/assets/${locale}/manifest.webmanifest`
   };
 }
 

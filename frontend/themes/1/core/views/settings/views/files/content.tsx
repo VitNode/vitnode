@@ -36,7 +36,7 @@ export const ContentFilesSettings = ({
           const data = row.original;
           const src =
             data && data.width && data.height
-              ? `${CONFIG.backend_url}/public/${data.dir_folder}/${data.file_name}`
+              ? `${CONFIG.backend_public_url}/${data.dir_folder}/${data.file_name}`
               : null;
           const alt = data?.file_alt ?? data?.file_name ?? "";
 

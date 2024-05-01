@@ -42,7 +42,7 @@ export const TableCategoriesCategoryAdmin = ({
       collisionDetection={closestCorners}
       onDragCancel={resetState}
       onDragOver={onDragOver}
-      // onDragMove={e => onDragMove({ ...e, flattenedItems, maxDepth: 0 })}
+      onDragMove={e => onDragMove({ ...e, flattenedItems, maxDepth: 0 })}
       onDragStart={onDragStart}
       onDragEnd={async event => {
         const moveTo = onDragEnd<ShowBlogCategories>({

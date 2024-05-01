@@ -48,7 +48,7 @@ export const ItemListFilesFooterEditor = ({
           alt={data?.file_alt ?? data?.file_name ?? file?.name ?? ""}
           src={
             data && data.width && data.height
-              ? `${CONFIG.backend_url}/public/${data.dir_folder}/${data.file_name}`
+              ? `${CONFIG.backend_public_url}/${data.dir_folder}/${data.file_name}`
               : null
           }
         />
@@ -77,6 +77,8 @@ export const ItemListFilesFooterEditor = ({
               editor.commands.insertFile({
                 ...data,
                 file_alt: data.file_alt ?? "",
+                width: data.width ?? 0,
+                height: data.height ?? 0,
                 id
               });
               editor.commands.focus();
