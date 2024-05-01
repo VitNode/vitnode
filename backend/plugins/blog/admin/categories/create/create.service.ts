@@ -9,10 +9,14 @@ import {
   blog_categories_description,
   blog_categories_name
 } from "../../database/schema/categories";
+import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
 
 @Injectable()
 export class CreateBlogCategoriesService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private parserTextLang: ParserTextLanguageCoreHelpersService
+  ) {}
 
   async create({
     color,
@@ -26,17 +30,17 @@ export class CreateBlogCategoriesService {
 
     const categoryId = categories[0].id;
 
-    await this.databaseService.db
-      .insert(blog_categories_name)
-      .values(name.map(item => ({ ...item, category_id: categoryId })));
+    await this.parserTextLang.parse({
+      item_id: categoryId,
+      database: blog_categories_name,
+      data: name
+    });
 
-    if (description.length) {
-      await this.databaseService.db
-        .insert(blog_categories_description)
-        .values(
-          description.map(item => ({ ...item, category_id: categoryId }))
-        );
-    }
+    await this.parserTextLang.parse({
+      item_id: categoryId,
+      database: blog_categories_description,
+      data: description
+    });
 
     const data = await this.databaseService.db.query.blog_categories.findFirst({
       where: (table, { eq }) => eq(table.id, categoryId),

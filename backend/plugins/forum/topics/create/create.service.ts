@@ -13,13 +13,15 @@ import {
 } from "@/plugins/forum/admin/database/schema/topics";
 import { CreateForumsPostsService } from "../../posts/create/create.service";
 import { StatsShowForumForumsService } from "../../forums/show/stats.service";
+import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
 
 @Injectable()
 export class CreateForumTopicsService {
   constructor(
     private databaseService: DatabaseService,
     private createPostService: CreateForumsPostsService,
-    private statsForumService: StatsShowForumForumsService
+    private statsForumService: StatsShowForumForumsService,
+    private parserTextLang: ParserTextLanguageCoreHelpersService
   ) {}
 
   async create(
@@ -49,12 +51,11 @@ export class CreateForumTopicsService {
       .returning();
 
     // Create title
-    await this.databaseService.db.insert(forum_topics_titles).values(
-      title.map(item => ({
-        ...item,
-        topic_id: data[0].id
-      }))
-    );
+    await this.parserTextLang.parse({
+      item_id: data[0].id,
+      database: forum_topics_titles,
+      data: title
+    });
 
     // Create first post
     const post = await this.createPostService.create(

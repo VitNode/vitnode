@@ -12,10 +12,14 @@ import {
   forum_forums_permissions
 } from "@/plugins/forum/admin/database/schema/forums";
 import { NotFoundError } from "@/utils/errors/not-found-error";
+import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
 
 @Injectable()
 export class CreateForumForumsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private parserTextLang: ParserTextLanguageCoreHelpersService
+  ) {}
 
   async create({
     description,
@@ -59,22 +63,18 @@ export class CreateForumForumsService {
       .returning();
 
     // Set name
-    await this.databaseService.db.insert(forum_forums_name).values(
-      name.map(item => ({
-        forum_id: data[0].id,
-        ...item
-      }))
-    );
+    await this.parserTextLang.parse({
+      item_id: data[0].id,
+      database: forum_forums_name,
+      data: name
+    });
 
     // Set description
-    if (description.length > 0) {
-      await this.databaseService.db.insert(forum_forums_description).values(
-        description.map(item => ({
-          forum_id: data[0].id,
-          ...item
-        }))
-      );
-    }
+    await this.parserTextLang.parse({
+      item_id: data[0].id,
+      database: forum_forums_description,
+      data: description
+    });
 
     // Set permissions
     if (permissions.groups.length > 0) {

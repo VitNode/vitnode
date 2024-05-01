@@ -1,5 +1,5 @@
 {
-  "id": "b1ebd1c8-4188-4e65-84f0-d04e96574bfd",
+  "id": "7a3f4013-61be-4b25-ae49-d08c5cc9120e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -201,14 +201,26 @@
           "primaryKey": false,
           "notNull": true
         },
-        "name": {
-          "name": "name",
+        "file_alt": {
+          "name": "file_alt",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "file_name": {
+          "name": "file_name",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
         },
-        "url": {
-          "name": "url",
+        "file_name_original": {
+          "name": "file_name_original",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dir_folder": {
+          "name": "dir_folder",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
@@ -221,9 +233,10 @@
         },
         "created": {
           "name": "created",
-          "type": "integer",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "file_size": {
           "name": "file_size",
@@ -231,33 +244,26 @@
           "primaryKey": false,
           "notNull": true
         },
-        "position": {
-          "name": "position",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        },
-        "description": {
-          "name": "description",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "module": {
-          "name": "module",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "module_id": {
-          "name": "module_id",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
-        },
         "mimetype": {
           "name": "mimetype",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "width": {
+          "name": "width",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "height": {
+          "name": "height",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "security_key": {
+          "name": "security_key",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false
@@ -290,72 +296,44 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "core_files_avatars": {
-      "name": "core_files_avatars",
+    "core_files_using": {
+      "name": "core_files_using",
       "schema": "",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "dir_folder": {
-          "name": "dir_folder",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created": {
-          "name": "created",
+        "file_id": {
+          "name": "file_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
-        "file_size": {
-          "name": "file_size",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "mimetype": {
-          "name": "mimetype",
+        "plugin": {
+          "name": "plugin",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
-        },
-        "extension": {
-          "name": "extension",
-          "type": "varchar(32)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "user_id": {
-          "name": "user_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
         }
       },
-      "indexes": {},
+      "indexes": {
+        "core_files_using_file_id_idx": {
+          "name": "core_files_using_file_id_idx",
+          "columns": [
+            "file_id"
+          ],
+          "isUnique": false
+        }
+      },
       "foreignKeys": {
-        "core_files_avatars_user_id_core_users_id_fk": {
-          "name": "core_files_avatars_user_id_core_users_id_fk",
-          "tableFrom": "core_files_avatars",
-          "tableTo": "core_users",
+        "core_files_using_file_id_core_files_id_fk": {
+          "name": "core_files_using_file_id_core_files_id_fk",
+          "tableFrom": "core_files_using",
+          "tableTo": "core_files",
           "columnsFrom": [
-            "user_id"
+            "file_id"
           ],
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
+          "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
@@ -430,8 +408,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "group_id": {
-          "name": "group_id",
+        "item_id": {
+          "name": "item_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -450,10 +428,10 @@
         }
       },
       "indexes": {
-        "core_groups_names_group_id_idx": {
-          "name": "core_groups_names_group_id_idx",
+        "core_groups_names_item_id_idx": {
+          "name": "core_groups_names_item_id_idx",
           "columns": [
-            "group_id"
+            "item_id"
           ],
           "isUnique": false
         },
@@ -466,12 +444,12 @@
         }
       },
       "foreignKeys": {
-        "core_groups_names_group_id_core_groups_id_fk": {
-          "name": "core_groups_names_group_id_core_groups_id_fk",
+        "core_groups_names_item_id_core_groups_id_fk": {
+          "name": "core_groups_names_item_id_core_groups_id_fk",
           "tableFrom": "core_groups_names",
           "tableTo": "core_groups",
           "columnsFrom": [
-            "group_id"
+            "item_id"
           ],
           "columnsTo": [
             "id"
@@ -782,8 +760,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "nav_id": {
-          "name": "nav_id",
+        "item_id": {
+          "name": "item_id",
           "type": "serial",
           "primaryKey": false,
           "notNull": true
@@ -802,10 +780,10 @@
         }
       },
       "indexes": {
-        "core_nav_description_nav_id_idx": {
-          "name": "core_nav_description_nav_id_idx",
+        "core_nav_description_item_id_idx": {
+          "name": "core_nav_description_item_id_idx",
           "columns": [
-            "nav_id"
+            "item_id"
           ],
           "isUnique": false
         },
@@ -818,12 +796,12 @@
         }
       },
       "foreignKeys": {
-        "core_nav_description_nav_id_core_nav_id_fk": {
-          "name": "core_nav_description_nav_id_core_nav_id_fk",
+        "core_nav_description_item_id_core_nav_id_fk": {
+          "name": "core_nav_description_item_id_core_nav_id_fk",
           "tableFrom": "core_nav_description",
           "tableTo": "core_nav",
           "columnsFrom": [
-            "nav_id"
+            "item_id"
           ],
           "columnsTo": [
             "id"
@@ -858,8 +836,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "nav_id": {
-          "name": "nav_id",
+        "item_id": {
+          "name": "item_id",
           "type": "serial",
           "primaryKey": false,
           "notNull": true
@@ -878,10 +856,10 @@
         }
       },
       "indexes": {
-        "core_nav_name_nav_id_idx": {
-          "name": "core_nav_name_nav_id_idx",
+        "core_nav_name_item_id_idx": {
+          "name": "core_nav_name_item_id_idx",
           "columns": [
-            "nav_id"
+            "item_id"
           ],
           "isUnique": false
         },
@@ -894,12 +872,12 @@
         }
       },
       "foreignKeys": {
-        "core_nav_name_nav_id_core_nav_id_fk": {
-          "name": "core_nav_name_nav_id_core_nav_id_fk",
+        "core_nav_name_item_id_core_nav_id_fk": {
+          "name": "core_nav_name_item_id_core_nav_id_fk",
           "tableFrom": "core_nav_name",
           "tableTo": "core_nav",
           "columnsFrom": [
-            "nav_id"
+            "item_id"
           ],
           "columnsTo": [
             "id"
@@ -1333,6 +1311,78 @@
       },
       "indexes": {},
       "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "core_files_avatars": {
+      "name": "core_files_avatars",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "dir_folder": {
+          "name": "dir_folder",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "file_name": {
+          "name": "file_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created": {
+          "name": "created",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "file_size": {
+          "name": "file_size",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mimetype": {
+          "name": "mimetype",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "extension": {
+          "name": "extension",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "core_files_avatars_user_id_core_users_id_fk": {
+          "name": "core_files_avatars_user_id_core_users_id_fk",
+          "tableFrom": "core_files_avatars",
+          "tableTo": "core_users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },

@@ -1,5 +1,4 @@
 import { Injectable } from "@nestjs/common";
-import { eq } from "drizzle-orm";
 
 import { EditForumTopicsArgs } from "./dto/edit.args";
 import { ShowTopicsForums } from "../show/dto/show.obj";
@@ -8,123 +7,18 @@ import { DatabaseService } from "@/plugins/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { User } from "@/utils/decorators/user.decorator";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
-import { TextLanguageInput } from "@/types/database/text-language.type";
 import { forum_topics_titles } from "@/plugins/forum/admin/database/schema/topics";
 import { forum_posts_content } from "@/plugins/forum/admin/database/schema/posts";
 import { StatsShowForumForumsService } from "../../forums/show/stats.service";
+import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
 
 @Injectable()
 export class EditForumTopicsService {
   constructor(
     private databaseService: DatabaseService,
-    private statsForumService: StatsShowForumForumsService
+    private statsForumService: StatsShowForumForumsService,
+    private parserTextLang: ParserTextLanguageCoreHelpersService
   ) {}
-
-  protected updateTitle = async ({
-    id,
-    title
-  }: {
-    id: number;
-    title: TextLanguageInput[];
-  }) => {
-    const names =
-      await this.databaseService.db.query.forum_topics_titles.findMany({
-        where: (table, { eq }) => eq(table.topic_id, id)
-      });
-
-    const update = await Promise.all(
-      title.map(async item => {
-        const itemExist = names.find(
-          el => el.language_code === item.language_code
-        );
-
-        if (itemExist) {
-          // If value is empty, do nothing
-          if (!itemExist.value.trim()) return;
-
-          const update = await this.databaseService.db
-            .update(forum_topics_titles)
-            .set({ ...item, topic_id: id })
-            .where(eq(forum_topics_titles.id, itemExist.id))
-            .returning();
-
-          return update[0];
-        }
-
-        const insert = await this.databaseService.db
-          .insert(forum_topics_titles)
-          .values({ ...item, topic_id: id })
-          .returning();
-
-        return insert[0];
-      })
-    );
-
-    // Delete remaining translations
-    await Promise.all(
-      names.map(async item => {
-        const exist = update.find(name => name.id === item.id);
-        if (exist) return;
-
-        await this.databaseService.db
-          .delete(forum_topics_titles)
-          .where(eq(forum_topics_titles.id, item.id));
-      })
-    );
-  };
-
-  protected updateContent = async ({
-    content,
-    postId
-  }: {
-    content: TextLanguageInput[];
-    postId: number;
-  }) => {
-    const names =
-      await this.databaseService.db.query.forum_posts_content.findMany({
-        where: (table, { eq }) => eq(table.post_id, postId)
-      });
-
-    const update = await Promise.all(
-      content.map(async item => {
-        const itemExist = names.find(
-          el => el.language_code === item.language_code
-        );
-
-        if (itemExist) {
-          // If value is empty, do nothing
-          if (!itemExist.value.trim()) return;
-
-          const update = await this.databaseService.db
-            .update(forum_posts_content)
-            .set({ ...item, post_id: postId })
-            .where(eq(forum_posts_content.id, itemExist.id))
-            .returning();
-
-          return update[0];
-        }
-
-        const insert = await this.databaseService.db
-          .insert(forum_posts_content)
-          .values({ ...item, post_id: postId })
-          .returning();
-
-        return insert[0];
-      })
-    );
-
-    // Delete remaining translations
-    await Promise.all(
-      names.map(async item => {
-        const exist = update.find(name => name.id === item.id);
-        if (exist) return;
-
-        await this.databaseService.db
-          .delete(forum_posts_content)
-          .where(eq(forum_posts_content.id, item.id));
-      })
-    );
-  };
 
   async edit(
     { content, id, title }: EditForumTopicsArgs,
@@ -149,8 +43,17 @@ export class EditForumTopicsService {
       throw new AccessDeniedError();
     }
 
-    await this.updateTitle({ id, title });
-    await this.updateContent({ postId: post.id, content });
+    await this.parserTextLang.parse({
+      item_id: id,
+      database: forum_topics_titles,
+      data: title
+    });
+
+    await this.parserTextLang.parse({
+      item_id: post.id,
+      database: forum_posts_content,
+      data: content
+    });
 
     const dataTopic =
       await this.databaseService.db.query.forum_topics.findFirst({

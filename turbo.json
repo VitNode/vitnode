@@ -9,6 +9,16 @@
       "dependsOn": ["^dev"],
       "cache": false,
       "persistent": true
+    },
+    "lint": {
+      "dependsOn": ["^lint"],
+      "cache": false,
+      "persistent": true
+    },
+    "lint:fix": {
+      "dependsOn": ["^lint:fix"],
+      "cache": false,
+      "persistent": true
     }
   },
   "globalDotEnv": [".env"]

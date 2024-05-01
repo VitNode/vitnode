@@ -55,7 +55,7 @@ export const blog_articles_content = pgTable(
   "blog_articles_content",
   {
     id: serial("id").primaryKey(),
-    article_id: integer("article_id").references(() => blog_articles.id, {
+    item_id: integer("item_id").references(() => blog_articles.id, {
       onDelete: "cascade"
     }),
     language_code: varchar("language_code")
@@ -66,9 +66,7 @@ export const blog_articles_content = pgTable(
     value: varchar("value").notNull()
   },
   table => ({
-    article_id_idx: index("blog_articles_content_article_id_idx").on(
-      table.article_id
-    ),
+    item_id_idx: index("blog_articles_content_item_id_idx").on(table.item_id),
     language_code_idx: index("blog_articles_content_language_code_idx").on(
       table.language_code
     )
@@ -79,7 +77,7 @@ export const blog_articles_content_relations = relations(
   blog_articles_content,
   ({ one }) => ({
     article: one(blog_articles, {
-      fields: [blog_articles_content.article_id],
+      fields: [blog_articles_content.item_id],
       references: [blog_articles.id]
     })
   })
@@ -89,7 +87,7 @@ export const blog_articles_title = pgTable(
   "blog_articles_title",
   {
     id: serial("id").primaryKey(),
-    article_id: integer("article_id").references(() => blog_articles.id, {
+    item_id: integer("item_id").references(() => blog_articles.id, {
       onDelete: "cascade"
     }),
     language_code: varchar("language_code")
@@ -100,9 +98,7 @@ export const blog_articles_title = pgTable(
     value: varchar("value", { length: 100 }).notNull()
   },
   table => ({
-    article_id_idx: index("blog_articles_title_article_id_idx").on(
-      table.article_id
-    ),
+    item_id_idx: index("blog_articles_title_item_id_idx").on(table.item_id),
     language_code_idx: index("blog_articles_title_language_code_idx").on(
       table.language_code
     )
@@ -113,7 +109,7 @@ export const blog_articles_title_relations = relations(
   blog_articles_title,
   ({ one }) => ({
     article: one(blog_articles, {
-      fields: [blog_articles_title.article_id],
+      fields: [blog_articles_title.item_id],
       references: [blog_articles.id]
     })
   })

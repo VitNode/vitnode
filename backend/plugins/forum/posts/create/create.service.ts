@@ -10,10 +10,14 @@ import {
   forum_posts_content
 } from "@/plugins/forum/admin/database/schema/posts";
 import { NotFoundError } from "@/utils/errors/not-found-error";
+import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
 
 @Injectable()
 export class CreateForumsPostsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private parserTextLang: ParserTextLanguageCoreHelpersService
+  ) {}
 
   async create(
     { id }: User,
@@ -40,12 +44,11 @@ export class CreateForumsPostsService {
     const post = createPost[0];
 
     // Post content
-    await this.databaseService.db.insert(forum_posts_content).values(
-      content.map(item => ({
-        ...item,
-        post_id: post.id
-      }))
-    );
+    await this.parserTextLang.parse({
+      item_id: post.id,
+      database: forum_posts_content,
+      data: content
+    });
 
     const data = await this.databaseService.db.query.forum_posts.findFirst({
       where: (table, { eq }) => eq(table.id, post.id),

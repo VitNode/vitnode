@@ -31,10 +31,10 @@ export class ShowAdminGroupsService {
 
     if (search) {
       filtersName = await this.databaseService.db
-        .select({ group_id: core_groups_names.group_id })
+        .select({ item_id: core_groups_names.item_id })
         .from(core_groups_names)
         .where(ilike(core_groups_names.value, `%${search}%`))
-        .then(res => res.map(({ group_id }) => group_id));
+        .then(res => res.map(({ item_id }) => item_id));
     }
 
     const pagination = await inputPaginationCursor({

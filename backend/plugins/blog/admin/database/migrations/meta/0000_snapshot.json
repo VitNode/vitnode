@@ -1,5 +1,5 @@
 {
-  "id": "deb4d2e6-d9f1-4c75-85d3-2cb2bd20599c",
+  "id": "79425ce4-a4cb-493a-ae6c-7b57d595b06c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -104,8 +104,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "article_id": {
-          "name": "article_id",
+        "item_id": {
+          "name": "item_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -124,10 +124,10 @@
         }
       },
       "indexes": {
-        "blog_articles_content_article_id_idx": {
-          "name": "blog_articles_content_article_id_idx",
+        "blog_articles_content_item_id_idx": {
+          "name": "blog_articles_content_item_id_idx",
           "columns": [
-            "article_id"
+            "item_id"
           ],
           "isUnique": false
         },
@@ -140,12 +140,12 @@
         }
       },
       "foreignKeys": {
-        "blog_articles_content_article_id_blog_articles_id_fk": {
-          "name": "blog_articles_content_article_id_blog_articles_id_fk",
+        "blog_articles_content_item_id_blog_articles_id_fk": {
+          "name": "blog_articles_content_item_id_blog_articles_id_fk",
           "tableFrom": "blog_articles_content",
           "tableTo": "blog_articles",
           "columnsFrom": [
-            "article_id"
+            "item_id"
           ],
           "columnsTo": [
             "id"
@@ -180,8 +180,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "article_id": {
-          "name": "article_id",
+        "item_id": {
+          "name": "item_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -200,10 +200,10 @@
         }
       },
       "indexes": {
-        "blog_articles_title_article_id_idx": {
-          "name": "blog_articles_title_article_id_idx",
+        "blog_articles_title_item_id_idx": {
+          "name": "blog_articles_title_item_id_idx",
           "columns": [
-            "article_id"
+            "item_id"
           ],
           "isUnique": false
         },
@@ -216,12 +216,12 @@
         }
       },
       "foreignKeys": {
-        "blog_articles_title_article_id_blog_articles_id_fk": {
-          "name": "blog_articles_title_article_id_blog_articles_id_fk",
+        "blog_articles_title_item_id_blog_articles_id_fk": {
+          "name": "blog_articles_title_item_id_blog_articles_id_fk",
           "tableFrom": "blog_articles_title",
           "tableTo": "blog_articles",
           "columnsFrom": [
-            "article_id"
+            "item_id"
           ],
           "columnsTo": [
             "id"

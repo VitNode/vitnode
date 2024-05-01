@@ -95,7 +95,7 @@ export class ShowPostsForumsService {
 
         const content =
           await this.databaseService.db.query.forum_posts_content.findMany({
-            where: (table, { eq }) => eq(table.post_id, edge.post_id)
+            where: (table, { eq }) => eq(table.item_id, edge.post_id)
           });
 
         return {

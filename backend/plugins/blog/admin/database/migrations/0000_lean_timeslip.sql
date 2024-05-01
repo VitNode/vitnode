@@ -9,14 +9,14 @@ CREATE TABLE IF NOT EXISTS "blog_articles" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "blog_articles_content" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"article_id" integer,
+	"item_id" integer,
 	"language_code" varchar NOT NULL,
 	"value" varchar NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "blog_articles_title" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"article_id" integer,
+	"item_id" integer,
 	"language_code" varchar NOT NULL,
 	"value" varchar(100) NOT NULL
 );
@@ -44,9 +44,9 @@ CREATE TABLE IF NOT EXISTS "blog_categories_name" (
 --> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "blog_articles_author_id_idx" ON "blog_articles" ("author_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "blog_articles_category_id_idx" ON "blog_articles" ("category_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "blog_articles_content_article_id_idx" ON "blog_articles_content" ("article_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "blog_articles_content_item_id_idx" ON "blog_articles_content" ("item_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "blog_articles_content_language_code_idx" ON "blog_articles_content" ("language_code");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "blog_articles_title_article_id_idx" ON "blog_articles_title" ("article_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "blog_articles_title_item_id_idx" ON "blog_articles_title" ("item_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "blog_articles_title_language_code_idx" ON "blog_articles_title" ("language_code");--> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "blog_articles" ADD CONSTRAINT "blog_articles_author_id_core_users_id_fk" FOREIGN KEY ("author_id") REFERENCES "core_users"("id") ON DELETE cascade ON UPDATE no action;
@@ -61,7 +61,7 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "blog_articles_content" ADD CONSTRAINT "blog_articles_content_article_id_blog_articles_id_fk" FOREIGN KEY ("article_id") REFERENCES "blog_articles"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "blog_articles_content" ADD CONSTRAINT "blog_articles_content_item_id_blog_articles_id_fk" FOREIGN KEY ("item_id") REFERENCES "blog_articles"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -73,7 +73,7 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "blog_articles_title" ADD CONSTRAINT "blog_articles_title_article_id_blog_articles_id_fk" FOREIGN KEY ("article_id") REFERENCES "blog_articles"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "blog_articles_title" ADD CONSTRAINT "blog_articles_title_item_id_blog_articles_id_fk" FOREIGN KEY ("item_id") REFERENCES "blog_articles"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

@@ -39,7 +39,7 @@ export const core_nav_name = pgTable(
   "core_nav_name",
   {
     id: serial("id").primaryKey(),
-    nav_id: serial("nav_id")
+    item_id: serial("item_id")
       .notNull()
       .references(() => core_nav.id, {
         onDelete: "cascade"
@@ -52,7 +52,7 @@ export const core_nav_name = pgTable(
     value: varchar("value", { length: 100 }).notNull()
   },
   table => ({
-    nav_id_idx: index("core_nav_name_nav_id_idx").on(table.nav_id),
+    item_id_idx: index("core_nav_name_item_id_idx").on(table.item_id),
     language_code_idx: index("core_nav_name_language_code_idx").on(
       table.language_code
     )
@@ -61,7 +61,7 @@ export const core_nav_name = pgTable(
 
 export const core_nav_name_relations = relations(core_nav_name, ({ one }) => ({
   nav: one(core_nav, {
-    fields: [core_nav_name.nav_id],
+    fields: [core_nav_name.item_id],
     references: [core_nav.id]
   }),
   language: one(core_languages, {
@@ -74,7 +74,7 @@ export const core_nav_description = pgTable(
   "core_nav_description",
   {
     id: serial("id").primaryKey(),
-    nav_id: serial("nav_id")
+    item_id: serial("item_id")
       .notNull()
       .references(() => core_nav.id, {
         onDelete: "cascade"
@@ -87,7 +87,7 @@ export const core_nav_description = pgTable(
     value: varchar("value", { length: 200 }).notNull()
   },
   table => ({
-    nav_id_idx: index("core_nav_description_nav_id_idx").on(table.nav_id),
+    item_id_idx: index("core_nav_description_item_id_idx").on(table.item_id),
     language_code_idx: index("core_nav_description_language_code_idx").on(
       table.language_code
     )
@@ -98,7 +98,7 @@ export const core_nav_description_relations = relations(
   core_nav_description,
   ({ one }) => ({
     nav: one(core_nav, {
-      fields: [core_nav_description.nav_id],
+      fields: [core_nav_description.item_id],
       references: [core_nav.id]
     }),
     language: one(core_languages, {

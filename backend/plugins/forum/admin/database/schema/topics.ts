@@ -51,7 +51,7 @@ export const forum_topics_titles = pgTable(
   "forum_topics_titles",
   {
     id: serial("id").primaryKey(),
-    topic_id: integer("topic_id")
+    item_id: integer("item_id")
       .notNull()
       .references(() => forum_topics.id, {
         onDelete: "cascade"
@@ -64,7 +64,7 @@ export const forum_topics_titles = pgTable(
     value: varchar("value", { length: 100 }).notNull()
   },
   table => ({
-    topic_id_idx: index("forum_topics_titles_topic_id_idx").on(table.topic_id),
+    item_id_idx: index("forum_topics_titles_item_id_idx").on(table.item_id),
     language_code_idx: index("forum_topics_titles_language_code_idx").on(
       table.language_code
     )
@@ -75,7 +75,7 @@ export const forum_topics_titles_relations = relations(
   forum_topics_titles,
   ({ one }) => ({
     topic: one(forum_topics, {
-      fields: [forum_topics_titles.topic_id],
+      fields: [forum_topics_titles.item_id],
       references: [forum_topics.id]
     }),
     language: one(core_languages, {
