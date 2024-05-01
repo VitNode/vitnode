@@ -29,7 +29,7 @@ export const core_groups_names = pgTable(
   "core_groups_names",
   {
     id: serial("id").primaryKey(),
-    group_id: integer("group_id")
+    item_id: integer("item_id")
       .notNull()
       .references(() => core_groups.id, {
         onDelete: "cascade"
@@ -42,7 +42,7 @@ export const core_groups_names = pgTable(
     value: varchar("value", { length: 255 }).notNull()
   },
   table => ({
-    group_id_idx: index("core_groups_names_group_id_idx").on(table.group_id),
+    item_id_idx: index("core_groups_names_item_id_idx").on(table.item_id),
     language_code_idx: index("core_groups_names_language_code_idx").on(
       table.language_code
     )
@@ -53,7 +53,7 @@ export const core_groups_names_relations = relations(
   core_groups_names,
   ({ one }) => ({
     group: one(core_groups, {
-      fields: [core_groups_names.group_id],
+      fields: [core_groups_names.item_id],
       references: [core_groups.id]
     })
   })

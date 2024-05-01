@@ -53,7 +53,7 @@ export const forum_forums_name = pgTable(
   "forum_forums_name",
   {
     id: serial("id").primaryKey(),
-    forum_id: integer("forum_id")
+    item_id: integer("item_id")
       .notNull()
       .references(() => forum_forums.id, {
         onDelete: "cascade"
@@ -66,7 +66,7 @@ export const forum_forums_name = pgTable(
     value: varchar("value", { length: 50 }).notNull()
   },
   table => ({
-    forum_id_idx: index("forum_forums_name_forum_id_idx").on(table.forum_id),
+    item_id_idx: index("forum_forums_name_item_id_idx").on(table.item_id),
     language_code_idx: index("forum_forums_name_language_code_idx").on(
       table.language_code
     )
@@ -77,7 +77,7 @@ export const forum_forums_name_relations = relations(
   forum_forums_name,
   ({ one }) => ({
     forum: one(forum_forums, {
-      fields: [forum_forums_name.forum_id],
+      fields: [forum_forums_name.item_id],
       references: [forum_forums.id]
     }),
     language: one(core_languages, {
@@ -91,7 +91,7 @@ export const forum_forums_description = pgTable(
   "forum_forums_description",
   {
     id: serial("id").primaryKey(),
-    forum_id: integer("forum_id")
+    item_id: integer("item_id")
       .notNull()
       .references(() => forum_forums.id, {
         onDelete: "cascade"
@@ -104,8 +104,8 @@ export const forum_forums_description = pgTable(
     value: varchar("value").notNull()
   },
   table => ({
-    forum_id_idx: index("forum_forums_description_forum_id_idx").on(
-      table.forum_id
+    item_id_idx: index("forum_forums_description_item_id_idx").on(
+      table.item_id
     ),
     language_code_idx: index("forum_forums_description_language_code_idx").on(
       table.language_code
@@ -117,7 +117,7 @@ export const forum_forums_description_relations = relations(
   forum_forums_description,
   ({ one }) => ({
     forum: one(forum_forums, {
-      fields: [forum_forums_description.forum_id],
+      fields: [forum_forums_description.item_id],
       references: [forum_forums.id]
     }),
     language: one(core_languages, {

@@ -14,6 +14,7 @@ import { AdminModule } from "./admin/admin.module";
 import { CorePluginsModule } from "./plugins/plugins.module";
 import { CoreSettingsModule } from "./settings/settings.module";
 import { CoreEditorModule } from "./editor/editor.module";
+import { GlobalCoreHelpersModule } from "./helpers/helpers.module";
 
 @Module({
   imports: [
@@ -29,7 +30,8 @@ import { CoreEditorModule } from "./editor/editor.module";
     CoreNavModule,
     CorePluginsModule,
     CoreSettingsModule,
-    CoreEditorModule
+    CoreEditorModule,
+    GlobalCoreHelpersModule
   ]
 })
 export class CoreModule {}

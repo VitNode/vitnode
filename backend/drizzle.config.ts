@@ -9,8 +9,6 @@ export const drizzleEnvs = {
 };
 
 export default {
-  schema: "./plugins/**/database/schema/*.ts",
-  out: "./drizzle",
   driver: "pg",
   dbCredentials: drizzleEnvs
 } satisfies Config;

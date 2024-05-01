@@ -19,27 +19,22 @@ CREATE TABLE IF NOT EXISTS "core_admin_sessions" (
 CREATE TABLE IF NOT EXISTS "core_files" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"extension" varchar(32) NOT NULL,
-	"name" varchar(255) NOT NULL,
-	"url" varchar(255) NOT NULL,
-	"user_id" integer NOT NULL,
-	"created" integer NOT NULL,
-	"file_size" integer NOT NULL,
-	"position" integer DEFAULT 0 NOT NULL,
-	"description" text,
-	"module" varchar(255),
-	"module_id" varchar(255),
-	"mimetype" varchar(255)
-);
---> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "core_files_avatars" (
-	"id" serial PRIMARY KEY NOT NULL,
+	"file_alt" varchar(255),
+	"file_name" varchar(255) NOT NULL,
+	"file_name_original" varchar(255) NOT NULL,
 	"dir_folder" varchar(255) NOT NULL,
-	"name" varchar(255) NOT NULL,
-	"created" integer NOT NULL,
+	"user_id" integer NOT NULL,
+	"created" timestamp DEFAULT now() NOT NULL,
 	"file_size" integer NOT NULL,
 	"mimetype" varchar(255) NOT NULL,
-	"extension" varchar(32) NOT NULL,
-	"user_id" integer
+	"width" integer,
+	"height" integer,
+	"security_key" varchar(255)
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "core_files_using" (
+	"file_id" integer NOT NULL,
+	"plugin" varchar(255) NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "core_groups" (
@@ -54,7 +49,7 @@ CREATE TABLE IF NOT EXISTS "core_groups" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "core_groups_names" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"group_id" integer NOT NULL,
+	"item_id" integer NOT NULL,
 	"language_code" varchar NOT NULL,
 	"value" varchar(255) NOT NULL
 );
@@ -97,14 +92,14 @@ CREATE TABLE IF NOT EXISTS "core_nav" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "core_nav_description" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"nav_id" serial NOT NULL,
+	"item_id" serial NOT NULL,
 	"language_code" varchar NOT NULL,
 	"value" varchar(200) NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "core_nav_name" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"nav_id" serial NOT NULL,
+	"item_id" serial NOT NULL,
 	"language_code" varchar NOT NULL,
 	"value" varchar(100) NOT NULL
 );
@@ -170,6 +165,17 @@ CREATE TABLE IF NOT EXISTS "core_themes" (
 	"default" boolean DEFAULT false NOT NULL
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "core_files_avatars" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"dir_folder" varchar(255) NOT NULL,
+	"file_name" varchar(255) NOT NULL,
+	"created" integer NOT NULL,
+	"file_size" integer NOT NULL,
+	"mimetype" varchar(255) NOT NULL,
+	"extension" varchar(32) NOT NULL,
+	"user_id" integer
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "core_users" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"name_seo" varchar(255),
@@ -194,16 +200,17 @@ CREATE INDEX IF NOT EXISTS "core_admin_permissions_user_id_idx" ON "core_admin_p
 CREATE INDEX IF NOT EXISTS "core_admin_sessions_login_token_idx" ON "core_admin_sessions" ("login_token");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_admin_sessions_user_id_idx" ON "core_admin_sessions" ("user_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_files_user_id_idx" ON "core_files" ("user_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_groups_names_group_id_idx" ON "core_groups_names" ("group_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_files_using_file_id_idx" ON "core_files_using" ("file_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_groups_names_item_id_idx" ON "core_groups_names" ("item_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_groups_names_language_code_idx" ON "core_groups_names" ("language_code");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_languages_code_idx" ON "core_languages" ("code");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_languages_name_idx" ON "core_languages" ("name");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_moderators_permissions_group_id_idx" ON "core_moderators_permissions" ("group_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_moderators_permissions_user_id_idx" ON "core_moderators_permissions" ("user_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_nav_parent_id_idx" ON "core_nav" ("parent_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_nav_description_nav_id_idx" ON "core_nav_description" ("nav_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_nav_description_item_id_idx" ON "core_nav_description" ("item_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_nav_description_language_code_idx" ON "core_nav_description" ("language_code");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_nav_name_nav_id_idx" ON "core_nav_name" ("nav_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_nav_name_item_id_idx" ON "core_nav_name" ("item_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_nav_name_language_code_idx" ON "core_nav_name" ("language_code");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_plugins_code_idx" ON "core_plugins" ("code");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_plugins_name_idx" ON "core_plugins" ("name");--> statement-breakpoint
@@ -243,13 +250,13 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "core_files_avatars" ADD CONSTRAINT "core_files_avatars_user_id_core_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "core_users"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "core_files_using" ADD CONSTRAINT "core_files_using_file_id_core_files_id_fk" FOREIGN KEY ("file_id") REFERENCES "core_files"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "core_groups_names" ADD CONSTRAINT "core_groups_names_group_id_core_groups_id_fk" FOREIGN KEY ("group_id") REFERENCES "core_groups"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "core_groups_names" ADD CONSTRAINT "core_groups_names_item_id_core_groups_id_fk" FOREIGN KEY ("item_id") REFERENCES "core_groups"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -273,7 +280,7 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "core_nav_description" ADD CONSTRAINT "core_nav_description_nav_id_core_nav_id_fk" FOREIGN KEY ("nav_id") REFERENCES "core_nav"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "core_nav_description" ADD CONSTRAINT "core_nav_description_item_id_core_nav_id_fk" FOREIGN KEY ("item_id") REFERENCES "core_nav"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -285,7 +292,7 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "core_nav_name" ADD CONSTRAINT "core_nav_name_nav_id_core_nav_id_fk" FOREIGN KEY ("nav_id") REFERENCES "core_nav"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "core_nav_name" ADD CONSTRAINT "core_nav_name_item_id_core_nav_id_fk" FOREIGN KEY ("item_id") REFERENCES "core_nav"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -310,6 +317,12 @@ END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "core_sessions" ADD CONSTRAINT "core_sessions_device_id_core_sessions_known_devices_id_fk" FOREIGN KEY ("device_id") REFERENCES "core_sessions_known_devices"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_files_avatars" ADD CONSTRAINT "core_files_avatars_user_id_core_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "core_users"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

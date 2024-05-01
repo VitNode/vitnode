@@ -31,7 +31,7 @@ The translation table must have:
 
 - `language_code` with `varchar` type,
 - `value` with `varchar` type _(You can set `length` option)_,
-- any fields for relation with main table (in our case `nav_id`)
+- `item_id` with `number` type and `references` to main table.
 
 ```ts
 import { relations } from "drizzle-orm";
@@ -41,7 +41,7 @@ export const core_nav_name = pgTable(
   "core_nav_name",
   {
     id: serial("id").primaryKey(),
-    nav_id: serial("nav_id")
+    item_id: serial("item_id")
       .notNull()
       .references(() => core_nav.id, {
         onDelete: "cascade"
@@ -51,10 +51,10 @@ export const core_nav_name = pgTable(
       .references(() => core_languages.code, {
         onDelete: "cascade"
       }),
-    value: varchar("value", { length: 50 }).notNull()
+    value: varchar("value", { length: 100 }).notNull()
   },
   table => ({
-    nav_id_idx: index("core_nav_name_nav_id_idx").on(table.nav_id),
+    item_id_idx: index("core_nav_name_item_id_idx").on(table.item_id),
     language_code_idx: index("core_nav_name_language_code_idx").on(
       table.language_code
     )
@@ -150,137 +150,113 @@ class ShowCoreNavItem {
 }
 ```
 
-## Create Mutation
+## Create / Edit Mutation
 
 Now let's create a mutation for adding new record to database with translations.
 
 <Steps>
 
-### Create record
+### Main Record
 
 Create a record in main table and get the id.
 
-```ts
-const nav = await this.databaseService.db
-  .insert(core_nav)
-  .values({
+```ts {6, 18-25, 27}
+import { Injectable } from "@nestjs/common";
+
+import { CreateAdminNavArgs } from "./dto/create.args";
+
+import { DatabaseService } from "@/plugins/database/database.service";
+import { core_nav } from "../../database/schema/nav";
+import { ShowCoreNav } from "@/plugins/core/nav/show/dto/show.obj";
+
+@Injectable()
+export class CreateAdminNavService {
+  constructor(private databaseService: DatabaseService) {}
+
+  async create({
+    external,
     href,
-    external
-  })
-  .returning();
-
-const id = nav[0].id;
-```
-
-### Create translations
-
-Create translations for each language.
-
-```ts
-const namesNav = await this.databaseService.db
-  .insert(core_nav_name)
-  .values(
-    name.map(n => ({
-      nav_id: id,
-      language_code: n.language_code,
-      value: n.value
-    }))
-  )
-  .returning();
-```
-
-But if you have empty array of translations, you have to handle it. You can't create empty translation.
-We want `description` to be optional, so we have create an empty array if it's not passed.
-
-```ts
-const descriptionNav =
-  description.length > 0
-    ? await this.databaseService.db
-        .insert(core_nav_description)
-        .values(
-          description.map(n => ({
-            nav_id: id,
-            language_code: n.language_code,
-            value: n.value
-          }))
-        )
-        .returning()
-    : [];
-```
-
-</Steps>
-
-## Update Mutation
-
-In this case update data is a bit different.
-
-You have to check if the translation:
-
-- exists, update it,
-- doesn't exist, create it,
-- exists, but the value is empty or not passed, delete it.
-
-It may sound complicated, but it's not. We will show you how to do it.
-
-<Callout type="warning" emoji="⚠️">
-  Remember to always check if redord exists before you update it. If it doesn't
-  exist, you have to throw an error.
-</Callout>
-
-<Steps>
-
-### Get translation
-
-```ts
-const names = await this.databaseService.db.query.core_nav_name.findMany({
-  where: (table, { eq }) => eq(table.nav_id, id)
-});
-```
-
-### Process data
-
-```ts
-const update = await Promise.all(
-  name.map(async item => {
-    const itemExist = names.find(el => el.language_code === item.language_code);
-
-    if (itemExist) {
-      // If value is empty, do nothing
-      if (!itemExist.value.trim()) return;
-
-      const update = await this.databaseService.db
-        .update(core_nav_name)
-        .set({ ...item, nav_id: id })
-        .where(eq(core_nav_name.id, itemExist.id))
-        .returning();
-
-      return update[0];
-    }
-
-    const insert = await this.databaseService.db
-      .insert(core_nav_name)
-      .values({ ...item, nav_id: id })
+    icon
+  }: CreateAdminNavArgs): Promise<ShowCoreNav> {
+    const nav = await this.databaseService.db
+      .insert(core_nav)
+      .values({
+        href,
+        external,
+        icon
+      })
       .returning();
 
-    return insert[0];
-  })
-);
+    const id = nav[0].id;
+
+    return {};
+  }
+}
 ```
 
-### Delete remaining translations
+### Translations
 
-```ts
-await Promise.all(
-  names.map(async item => {
-    const exist = update.find(name => name.id === item.id);
-    if (exist) return;
+We're created a new service `ParserTextLanguageCoreHelpersService` for you, which will help you with translations.
 
-    await this.databaseService.db
-      .delete(core_nav_name)
-      .where(eq(core_nav_name.id, item.id));
-  })
-);
+```ts {8-9, 12, 18, 22, 26, 39-43, 45-49}
+import { Injectable } from "@nestjs/common";
+
+import { CreateAdminNavArgs } from "./dto/create.args";
+
+import { DatabaseService } from "@/plugins/database/database.service";
+import {
+  core_nav,
+  core_nav_description,
+  core_nav_name
+} from "../../database/schema/nav";
+import { ShowCoreNav } from "@/plugins/core/nav/show/dto/show.obj";
+import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
+
+@Injectable()
+export class CreateAdminNavService {
+  constructor(
+    private databaseService: DatabaseService,
+    private parserTextLang: ParserTextLanguageCoreHelpersService
+  ) {}
+
+  async create({
+    description,
+    external,
+    href,
+    icon,
+    name
+  }: CreateAdminNavArgs): Promise<ShowCoreNav> {
+    const nav = await this.databaseService.db
+      .insert(core_nav)
+      .values({
+        href,
+        external,
+        icon
+      })
+      .returning();
+
+    const id = nav[0].id;
+
+    const namesNav = await this.parserTextLang.parse({
+      item_id: id,
+      database: core_nav_name,
+      data: name
+    });
+
+    const descriptionNav = await this.parserTextLang.parse({
+      item_id: id,
+      database: core_nav_description,
+      data: description
+    });
+
+    return {};
+  }
+}
 ```
+
+### Edit
+
+If you want to edit record, you can use the same `ParserTextLanguageCoreHelpersService` service.
 
 </Steps>
 

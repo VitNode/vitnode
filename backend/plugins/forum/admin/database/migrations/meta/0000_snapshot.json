@@ -1,5 +1,5 @@
 {
-  "id": "b160cead-ca17-4808-890a-e7b12fac7a7e",
+  "id": "46f90293-c638-4fe2-b59f-964607b4ba66",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -40,28 +40,35 @@
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
-          "default": false
+          "default": true
         },
         "can_all_read": {
           "name": "can_all_read",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
-          "default": false
+          "default": true
         },
         "can_all_create": {
           "name": "can_all_create",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
-          "default": false
+          "default": true
         },
         "can_all_reply": {
           "name": "can_all_reply",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
-          "default": false
+          "default": true
+        },
+        "can_all_download_files": {
+          "name": "can_all_download_files",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
         }
       },
       "indexes": {
@@ -87,8 +94,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "forum_id": {
-          "name": "forum_id",
+        "item_id": {
+          "name": "item_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -107,10 +114,10 @@
         }
       },
       "indexes": {
-        "forum_forums_description_forum_id_idx": {
-          "name": "forum_forums_description_forum_id_idx",
+        "forum_forums_description_item_id_idx": {
+          "name": "forum_forums_description_item_id_idx",
           "columns": [
-            "forum_id"
+            "item_id"
           ],
           "isUnique": false
         },
@@ -123,12 +130,12 @@
         }
       },
       "foreignKeys": {
-        "forum_forums_description_forum_id_forum_forums_id_fk": {
-          "name": "forum_forums_description_forum_id_forum_forums_id_fk",
+        "forum_forums_description_item_id_forum_forums_id_fk": {
+          "name": "forum_forums_description_item_id_forum_forums_id_fk",
           "tableFrom": "forum_forums_description",
           "tableTo": "forum_forums",
           "columnsFrom": [
-            "forum_id"
+            "item_id"
           ],
           "columnsTo": [
             "id"
@@ -163,8 +170,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "forum_id": {
-          "name": "forum_id",
+        "item_id": {
+          "name": "item_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -183,10 +190,10 @@
         }
       },
       "indexes": {
-        "forum_forums_name_forum_id_idx": {
-          "name": "forum_forums_name_forum_id_idx",
+        "forum_forums_name_item_id_idx": {
+          "name": "forum_forums_name_item_id_idx",
           "columns": [
-            "forum_id"
+            "item_id"
           ],
           "isUnique": false
         },
@@ -199,12 +206,12 @@
         }
       },
       "foreignKeys": {
-        "forum_forums_name_forum_id_forum_forums_id_fk": {
-          "name": "forum_forums_name_forum_id_forum_forums_id_fk",
+        "forum_forums_name_item_id_forum_forums_id_fk": {
+          "name": "forum_forums_name_item_id_forum_forums_id_fk",
           "tableFrom": "forum_forums_name",
           "tableTo": "forum_forums",
           "columnsFrom": [
-            "forum_id"
+            "item_id"
           ],
           "columnsTo": [
             "id"
@@ -274,6 +281,13 @@
         },
         "can_reply": {
           "name": "can_reply",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "can_download_files": {
+          "name": "can_download_files",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
@@ -427,8 +441,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "post_id": {
-          "name": "post_id",
+        "item_id": {
+          "name": "item_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -447,10 +461,10 @@
         }
       },
       "indexes": {
-        "forum_posts_content_post_id_idx": {
-          "name": "forum_posts_content_post_id_idx",
+        "forum_posts_content_item_id_idx": {
+          "name": "forum_posts_content_item_id_idx",
           "columns": [
-            "post_id"
+            "item_id"
           ],
           "isUnique": false
         },
@@ -463,12 +477,12 @@
         }
       },
       "foreignKeys": {
-        "forum_posts_content_post_id_forum_posts_id_fk": {
-          "name": "forum_posts_content_post_id_forum_posts_id_fk",
+        "forum_posts_content_item_id_forum_posts_id_fk": {
+          "name": "forum_posts_content_item_id_forum_posts_id_fk",
           "tableFrom": "forum_posts_content",
           "tableTo": "forum_posts",
           "columnsFrom": [
-            "post_id"
+            "item_id"
           ],
           "columnsTo": [
             "id"
@@ -656,8 +670,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "topic_id": {
-          "name": "topic_id",
+        "item_id": {
+          "name": "item_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -676,10 +690,10 @@
         }
       },
       "indexes": {
-        "forum_topics_titles_topic_id_idx": {
-          "name": "forum_topics_titles_topic_id_idx",
+        "forum_topics_titles_item_id_idx": {
+          "name": "forum_topics_titles_item_id_idx",
           "columns": [
-            "topic_id"
+            "item_id"
           ],
           "isUnique": false
         },
@@ -692,12 +706,12 @@
         }
       },
       "foreignKeys": {
-        "forum_topics_titles_topic_id_forum_topics_id_fk": {
-          "name": "forum_topics_titles_topic_id_forum_topics_id_fk",
+        "forum_topics_titles_item_id_forum_topics_id_fk": {
+          "name": "forum_topics_titles_item_id_forum_topics_id_fk",
           "tableFrom": "forum_topics_titles",
           "tableTo": "forum_topics",
           "columnsFrom": [
-            "topic_id"
+            "item_id"
           ],
           "columnsTo": [
             "id"
