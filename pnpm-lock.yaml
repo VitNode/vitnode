@@ -44,6 +44,9 @@ importers:
       graphql:
         specifier: ^16.8.1
         version: 16.8.1
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       object-path:
         specifier: ^0.11.8
         version: 0.11.8
@@ -135,6 +138,9 @@ importers:
       '@types/express':
         specifier: ^4.17.21
         version: 4.17.21
+      '@types/lodash':
+        specifier: ^4.17.0
+        version: 4.17.0
       '@types/node':
         specifier: ^20.12.7
         version: 20.12.7

@@ -52,7 +52,8 @@ export const core_files_using = pgTable(
     file_id: integer("file_id")
       .notNull()
       .references(() => core_files.id),
-    plugin: varchar("plugin", { length: 255 }).notNull()
+    plugin: varchar("plugin", { length: 255 }).notNull(),
+    folder: varchar("folder", { length: 255 }).notNull()
   },
   table => ({
     file_id_idx: index("core_files_using_file_id_idx").on(table.file_id)

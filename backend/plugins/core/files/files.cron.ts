@@ -3,12 +3,12 @@ import { Cron, CronExpression } from "@nestjs/schedule";
 import { desc, eq, lt, sql } from "drizzle-orm";
 
 import { core_files_using, core_files } from "../admin/database/schema/files";
-import { DeleteCoreFilesService } from "../files/helpers/delete/delete.service";
+import { DeleteCoreFilesService } from "./helpers/delete/delete.service";
 
 import { DatabaseService } from "@/plugins/database/database.service";
 
 @Injectable()
-export class CoreEditorCron {
+export class CoreFilesCron {
   constructor(
     private databaseService: DatabaseService,
     private readonly deleteFile: DeleteCoreFilesService
@@ -20,8 +20,13 @@ export class CoreEditorCron {
       .select()
       .from(core_files)
       .leftJoin(core_files_using, eq(core_files_using.file_id, core_files.id))
-      .where(lt(core_files.created, new Date(Date.now() - 1000 * 60 * 60 * 12)))
-      .groupBy(core_files.id, core_files_using.file_id, core_files_using.plugin)
+      .where(lt(core_files.created, new Date(Date.now() - 1000 * 60 * 60 * 24)))
+      .groupBy(
+        core_files.id,
+        core_files_using.file_id,
+        core_files_using.plugin,
+        core_files_using.folder
+      )
       .orderBy(desc(core_files.created))
       .having(sql`count(${core_files_using.file_id}) = 0`);
 

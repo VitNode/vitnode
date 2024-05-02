@@ -2,15 +2,19 @@ import { Injectable } from "@nestjs/common";
 import { Placeholder, SQL, eq } from "drizzle-orm";
 import { PgTableWithColumns, TableConfig } from "drizzle-orm/pg-core";
 
+import {
+  HelpersParserTextLanguageCoreHelpersService,
+  InfoFromTextLanguageContentReturnValues
+} from "./helpers.service";
+
 import { DatabaseService } from "@/plugins/database/database.service";
 import { TextLanguageInput } from "@/types/database/text-language.type";
 import { CustomError } from "@/utils/errors/CustomError";
+import { core_files_using } from "@/plugins/core/admin/database/schema/files";
 
 interface Args<T extends TableConfig> {
   data: TextLanguageInput[];
   database: PgTableWithColumns<T>;
-  // plugin: string;
-  // folder: string;
   item_id: number;
 }
 
@@ -20,12 +24,80 @@ interface ReturnValues extends TextLanguageInput {
 }
 
 @Injectable()
-export class ParserTextLanguageCoreHelpersService {
-  constructor(private databaseService: DatabaseService) {}
+export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLanguageCoreHelpersService {
+  constructor(private databaseService: DatabaseService) {
+    super();
+  }
+
+  private state: InfoFromTextLanguageContentReturnValues = {
+    fileIds: []
+  };
+
+  async parseFiles({
+    fileIds,
+    oldFileIds
+  }: {
+    fileIds: InfoFromTextLanguageContentReturnValues["fileIds"];
+    oldFileIds: InfoFromTextLanguageContentReturnValues["fileIds"];
+  }) {
+    await Promise.all(
+      fileIds.map(async id => {
+        if (this.state.fileIds.includes(id)) return;
+
+        this.state.fileIds.push(id);
+
+        if (oldFileIds.includes(id)) return;
+
+        await this.databaseService.db.insert(core_files_using).values({
+          file_id: id,
+          plugin: "core",
+          folder: "text-language"
+        });
+      })
+    );
+
+    // Delete remaining files
+    await Promise.all(
+      oldFileIds.map(async id => {
+        const exist = this.state.fileIds.find(fileId => fileId === id);
+        if (exist) return;
+
+        await this.databaseService.db
+          .delete(core_files_using)
+          .where(eq(core_files_using.file_id, id));
+      })
+    );
+  }
+
+  protected async contentParser({
+    content,
+    infoOldData
+  }: {
+    content: string;
+    infoOldData: InfoFromTextLanguageContentReturnValues[];
+  }) {
+    const oldInfo = infoOldData.reduce(
+      (acc, item) => {
+        // Check if already exists file id
+        item.fileIds.forEach(id => {
+          if (!acc.fileIds.includes(id)) {
+            acc.fileIds.push(id);
+          }
+        });
+
+        return acc;
+      },
+      { fileIds: [] } as InfoFromTextLanguageContentReturnValues
+    );
+    const info = this.getInfoFromContent({ content });
+
+    await this.parseFiles({
+      oldFileIds: oldInfo.fileIds,
+      fileIds: info.fileIds
+    });
+  }
 
   async parse<T extends TableConfig>({
-    // plugin,
-    // folder,
     data,
     database,
     item_id
@@ -39,10 +111,6 @@ export class ParserTextLanguageCoreHelpersService {
       }
     });
 
-    if (!data.length) {
-      return [];
-    }
-
     const oldData: ReturnValues[] = (await this.databaseService.db
       .select({
         id: database.id,
@@ -52,11 +120,20 @@ export class ParserTextLanguageCoreHelpersService {
       .from(database)
       .where(eq(database.item_id, item_id))) as unknown as ReturnValues[];
 
-    const parseData: Promise<ReturnValues[]> = Promise.all(
+    const infoOldData: InfoFromTextLanguageContentReturnValues[] = oldData.map(
+      item => this.getInfoFromContent({ content: item.value })
+    );
+
+    const updateData: ReturnValues[] = await Promise.all(
       data.map(async item => {
         const itemExist = oldData.find(
           el => el.language_code === item.language_code
         );
+
+        await this.contentParser({
+          content: item.value,
+          infoOldData
+        });
 
         if (itemExist) {
           const update = await this.databaseService.db
@@ -83,10 +160,15 @@ export class ParserTextLanguageCoreHelpersService {
     // Delete remaining translations
     await Promise.all(
       oldData.map(async item => {
-        const exist = await parseData.then(data =>
-          data.find(name => name.id === item.id)
+        const exist = updateData.find(
+          el => el.language_code === item.language_code
         );
         if (exist) return;
+
+        await this.contentParser({
+          content: "",
+          infoOldData
+        });
 
         await this.databaseService.db
           .delete(database)
@@ -94,6 +176,11 @@ export class ParserTextLanguageCoreHelpersService {
       })
     );
 
-    return parseData;
+    // Reset state
+    this.state = {
+      fileIds: []
+    };
+
+    return updateData;
   }
 }
