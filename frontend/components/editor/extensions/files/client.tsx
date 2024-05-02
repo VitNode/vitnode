@@ -20,35 +20,38 @@ const FileFromNextWithNode = ({
   ) {
     return (
       <NodeViewWrapper className="inline-block">
-        <Image
-          src={`${CONFIG.backend_public_url}/${data.dir_folder}/${data.file_name}`}
-          alt={data.file_alt ?? data.file_name_original}
-          sizes="100vw"
-          className="w-full h-auto"
-          width={data.width}
-          height={data.height}
-        />
+        <div data-drag-handle="" draggable>
+          <Image
+            src={`${CONFIG.backend_public_url}/${data.dir_folder}/${data.file_name}`}
+            alt={data.file_alt ?? data.file_name_original}
+            sizes="100vw"
+            className="w-full h-auto"
+            width={data.width}
+            height={data.height}
+          />
+        </div>
       </NodeViewWrapper>
     );
   }
 
   return (
-    <NodeViewWrapper className="inline-block">
+    <NodeViewWrapper className="inline-block" data-drag-handle="" draggable>
       <button
-        className="bg-muted hover:bg-accent rounded-md text-sm font-medium transition-colors px-5 py-2 flex gap-5 items-center cursor-pointer text-left"
-        data-drag-handle=""
-        draggable
+        className="bg-muted hover:bg-accent rounded-md text-sm font-medium transition-colors cursor-gap text-left"
         type="button"
+        tabIndex={-1}
       >
-        <File className="size-7 text-muted-foreground" />
-        <div>
-          <span className="truncate block leading-tight max-w-80">
-            {data.file_name_original}
-          </span>
-          <div className="text-sm text-muted-foreground space-x-2">
-            <span>{formatBytes(data?.file_size ?? 0)}</span>
-            <span>&middot;</span>
-            <span>{data.mimetype}</span>
+        <div className="flex gap-5 items-center px-5 py-2">
+          <File className="size-7 text-muted-foreground" />
+          <div className="pointer-events-none select-none">
+            <span className="truncate block leading-tight max-w-80">
+              {data.file_name_original}
+            </span>
+            <div className="text-sm text-muted-foreground space-x-2">
+              <span>{formatBytes(data?.file_size ?? 0)}</span>
+              <span>&middot;</span>
+              <span>{data.mimetype}</span>
+            </div>
           </div>
         </div>
       </button>

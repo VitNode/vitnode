@@ -52,10 +52,11 @@ export const extensionsEditor: Extensions = [
     types: ["heading", "paragraph"]
   }),
   CodeBlockLowlightExtensionEditor,
-  Link.extend({ inclusive: false }),
+  Link.extend({ inclusive: false }).configure({
+    openOnClick: "whenNotEditable"
+  }),
   Color,
   TextStyle,
-  // ImageExtensionEditor,
   MentionExtensionEditor,
   FilesHandler
 ];

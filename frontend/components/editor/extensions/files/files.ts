@@ -36,10 +36,13 @@ export const FilesHandler = ReactNodeTipTap.create<FilesHandlerAttributes>({
   name: "files",
   group: "inline",
   inline: true,
+  // content: "inline*",
   atom: true,
   selectable: true,
   draggable: true,
   isolating: false,
+
+  priority: 10000,
 
   addAttributes() {
     return {

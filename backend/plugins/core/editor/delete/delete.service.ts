@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { eq } from "drizzle-orm";
+import { count, eq } from "drizzle-orm";
 
 import { DeleteCoreEditorArgs } from "./dto/delete.args";
 
@@ -7,7 +7,10 @@ import { DatabaseService } from "@/plugins/database/database.service";
 import { DeleteCoreFilesService } from "../../files/helpers/delete/delete.service";
 import { User } from "@/utils/decorators/user.decorator";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
-import { core_files } from "../../admin/database/schema/files";
+import {
+  core_files,
+  core_files_using
+} from "../../admin/database/schema/files";
 
 @Injectable()
 export class DeleteCoreEditorService {
@@ -30,6 +33,17 @@ export class DeleteCoreEditorService {
       (findFile.security_key && findFile.security_key !== security_key)
     ) {
       throw new AccessDeniedError();
+    }
+
+    const uses = await this.databaseService.db
+      .select({
+        count: count()
+      })
+      .from(core_files_using)
+      .where(eq(core_files_using.file_id, id));
+
+    if (uses[0].count > 0) {
+      return "Skipped! File is being used.";
     }
 
     await this.databaseService.db
