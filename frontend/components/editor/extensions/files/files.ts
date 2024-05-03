@@ -3,6 +3,7 @@ import { Plugin } from "@tiptap/pm/state";
 
 import { renderReactNode } from "./client";
 import type { Core_Editor_Files__UploadMutation } from "@/graphql/hooks";
+import type { UploadFilesHandlerArgs } from "./hooks/use-upload-files-handler-editor.ts";
 
 export const acceptMimeTypeImage = [
   "image/jpeg",
@@ -43,7 +44,7 @@ export interface FileStateEditor {
 }
 
 export interface FilesHandlerArgs {
-  uploadFiles?: ({ files }: { files: FileStateEditor[] }) => Promise<void>;
+  uploadFiles?: (args: UploadFilesHandlerArgs) => Promise<void>;
 }
 
 export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
@@ -130,8 +131,16 @@ export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
                 id: Math.floor(Math.random() * 1000) + file.size
               }));
               if (!files.length || !uploadFiles) return false;
+              const { schema } = view.state;
 
-              uploadFiles({ files });
+              uploadFiles({
+                files,
+                finishUpload: file => {
+                  const node = schema.nodes.files.create(file.data);
+                  const transaction = view.state.tr.replaceSelectionWith(node);
+                  view.dispatch(transaction);
+                }
+              });
 
               return true;
             },
@@ -145,7 +154,25 @@ export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
               }));
               if ((moved && !files.length) || !uploadFiles) return false;
 
-              uploadFiles({ files });
+              uploadFiles({
+                files,
+                finishUpload: file => {
+                  const { schema } = view.state;
+                  const coordinates = view.posAtCoords({
+                    left: event.clientX,
+                    top: event.clientY
+                  });
+
+                  if (!coordinates) return;
+
+                  const node = schema.nodes.files.create(file.data);
+                  const transaction = view.state.tr.insert(
+                    coordinates.pos,
+                    node
+                  );
+                  view.dispatch(transaction);
+                }
+              });
 
               return true;
             }

@@ -6,11 +6,22 @@ import type { FileStateEditor } from "../files";
 import { uploadMutationApi } from "./upload-mutation-api";
 import type { ErrorType } from "@/graphql/fetcher";
 
+export interface UploadFilesHandlerArgs {
+  files: FileStateEditor[];
+  finishUpload?: (file: FileStateEditor) => void;
+}
+
 export const useUploadFilesHandlerEditor = () => {
   const [files, setFiles] = useState<FileStateEditor[]>([]);
   const t = useTranslations("core");
 
-  const handleUpload = async ({ data }: { data: FileStateEditor }) => {
+  const handleUpload = async ({
+    data,
+    finishUpload
+  }: {
+    data: FileStateEditor;
+    finishUpload?: (file: FileStateEditor) => void;
+  }) => {
     const formData = new FormData();
     formData.append("file", data.file);
     formData.append("plugin", "core");
@@ -41,14 +52,24 @@ export const useUploadFilesHandlerEditor = () => {
         return item;
       })
     );
+
+    finishUpload?.({
+      ...data,
+      data: mutation.data.core_editor_files__upload,
+      id: mutation.data.core_editor_files__upload.id,
+      isLoading: false
+    });
   };
 
-  const uploadFiles = async ({ files }: { files: FileStateEditor[] }) => {
+  const uploadFiles = async ({
+    files,
+    finishUpload
+  }: UploadFilesHandlerArgs) => {
     setFiles(prev => [...prev, ...files]);
 
     await Promise.all(
       files.map(async data => {
-        await handleUpload({ data });
+        await handleUpload({ data, finishUpload });
       })
     );
   };

@@ -128,7 +128,7 @@ export const Editor = ({
         <div className="relative">
           <ToolBarEditor editor={editor} />
           <EditorContent
-            className="break-all [&_.ProseMirror-selectednode]:outline-none [&_.ProseMirror-selectednode]:ring-1 [&_.ProseMirror-selectednode]:ring-ring [&_.ProseMirror-selectednode]:rounded-md [&_.ProseMirror-selectednode]:w-fit [&_.node-files]:inline-block"
+            className="break-all [&_.ProseMirror-selectednode]:outline-none [&_.ProseMirror-selectednode]:ring-1 [&_.ProseMirror-selectednode]:ring-ring [&_.ProseMirror-selectednode]:w-fit [&_.node-files]:inline-flex"
             editor={editor}
           />
         </div>
