@@ -15,6 +15,7 @@ import { CorePluginsModule } from "./plugins/plugins.module";
 import { CoreSettingsModule } from "./settings/settings.module";
 import { CoreEditorModule } from "./editor/editor.module";
 import { GlobalCoreHelpersModule } from "./helpers/helpers.module";
+import { CoreMailModule } from "./mail/mail.module";
 
 @Module({
   imports: [
@@ -31,7 +32,8 @@ import { GlobalCoreHelpersModule } from "./helpers/helpers.module";
     CorePluginsModule,
     CoreSettingsModule,
     CoreEditorModule,
-    GlobalCoreHelpersModule
+    GlobalCoreHelpersModule,
+    CoreMailModule
   ]
 })
 export class CoreModule {}
