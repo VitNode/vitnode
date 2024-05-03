@@ -1,17 +1,11 @@
-import type { Dispatch, SetStateAction } from "react";
-import type { Editor } from "@tiptap/react";
-
 import { ItemListFilesFooterEditor } from "./item/item";
-import type { FileStateEditor } from "./button";
 import { cn } from "@/functions/classnames";
 
-interface Props {
-  editor: Editor;
-  files: FileStateEditor[];
-  setFiles: Dispatch<SetStateAction<FileStateEditor[]>>;
-}
+import { useEditorState } from "../../hooks/use-editor-state";
 
-export const ListFilesFooterEditor = ({ editor, files, setFiles }: Props) => {
+export const ListFilesFooterEditor = () => {
+  const { files } = useEditorState();
+
   return (
     <ul className="space-y-2 mt-2">
       {files.map(item => {
@@ -25,11 +19,7 @@ export const ListFilesFooterEditor = ({ editor, files, setFiles }: Props) => {
               }
             )}
           >
-            <ItemListFilesFooterEditor
-              setFiles={setFiles}
-              editor={editor}
-              {...item}
-            />
+            <ItemListFilesFooterEditor {...item} />
           </li>
         );
       })}

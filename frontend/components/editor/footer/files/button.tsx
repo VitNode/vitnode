@@ -1,70 +1,16 @@
 import { Paperclip } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useRef, type Dispatch, type SetStateAction } from "react";
-import { toast } from "sonner";
+import { useRef } from "react";
 
 import { Button } from "@/components/ui/button";
-import type { ErrorType } from "@/graphql/fetcher";
-import type { Core_Editor_Files__UploadMutation } from "@/graphql/hooks";
-import { uploadMutationApi } from "./hooks/upload-mutation-api";
 
-export interface FileStateEditor {
-  file: File;
-  id: number;
-  isLoading: boolean;
-  data?: Core_Editor_Files__UploadMutation["core_editor_files__upload"];
-  error?: string;
-}
+import type { FileStateEditor } from "../../extensions/files/files";
+import { useEditorState } from "../../hooks/use-editor-state";
 
-interface Props {
-  setFiles: Dispatch<SetStateAction<FileStateEditor[]>>;
-}
-
-export const FilesButtonFooterEditor = ({ setFiles }: Props) => {
+export const FilesButtonFooterEditor = () => {
   const t = useTranslations("core.editor");
-  const tCore = useTranslations("core");
   const ref = useRef<HTMLInputElement>(null);
-
-  const handleUpload = async ({ file, id }: { file: File; id: number }) => {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("plugin", "core");
-    formData.append("folder", "testing");
-    const mutation = await uploadMutationApi(formData);
-
-    const error = mutation.error as ErrorType | undefined;
-
-    if (error || !mutation.data) {
-      toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
-      });
-
-      return;
-    }
-
-    setFiles(prev =>
-      prev.map(item => {
-        if (item.id === id) {
-          return {
-            ...item,
-            data: mutation.data.core_editor_files__upload,
-            isLoading: false,
-            id: mutation.data.core_editor_files__upload.id
-          };
-        }
-
-        return item;
-      })
-    );
-  };
-
-  const onHandleUpload = async (files: FileStateEditor[]) => {
-    await Promise.all(
-      files.map(async file => {
-        await handleUpload(file);
-      })
-    );
-  };
+  const { uploadFiles } = useEditorState();
 
   return (
     <>
@@ -76,7 +22,7 @@ export const FilesButtonFooterEditor = ({ setFiles }: Props) => {
         className="hidden"
         ref={ref}
         onChange={async e => {
-          const newFiles: FileStateEditor[] = [...(e.target.files ?? [])].map(
+          const files: FileStateEditor[] = [...(e.target.files ?? [])].map(
             file => ({
               file,
               isLoading: true,
@@ -84,9 +30,7 @@ export const FilesButtonFooterEditor = ({ setFiles }: Props) => {
             })
           );
 
-          setFiles(prev => [...prev, ...newFiles]);
-
-          onHandleUpload(newFiles);
+          await uploadFiles({ files });
         }}
         multiple
         value=""

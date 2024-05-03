@@ -8,9 +8,17 @@ import { TextStyle } from "@tiptap/extension-text-style";
 
 import { CodeBlockLowlightExtensionEditor } from "./code/code";
 import { MentionExtensionEditor } from "./mentions/emoji";
-import { FilesHandler } from "./files/files";
+import { FilesHandler, type FilesHandlerArgs } from "./files/files";
+import { HeadingExtensionEditor } from "./heading";
 
-export const extensionsEditor: Extensions = [
+interface Args extends FilesHandlerArgs {
+  allowH1: boolean;
+}
+
+export const extensionsEditor = ({
+  allowH1,
+  uploadFiles
+}: Args): Extensions => [
   StarterKit.configure({
     heading: false,
     bulletList: {
@@ -58,5 +66,6 @@ export const extensionsEditor: Extensions = [
   Color,
   TextStyle,
   MentionExtensionEditor,
-  FilesHandler
+  FilesHandler({ uploadFiles }),
+  HeadingExtensionEditor({ allowH1 })
 ];

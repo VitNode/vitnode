@@ -9,7 +9,7 @@
     "analyze": "cross-env ANALYZE=true pnpm build",
     "start": "next start",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix --fix",
+    "lint:fix": "eslint . --fix",
     "codegen": "cd .. && pnpm codegen",
     "docker:build": "docker build -t vitnode_frontend .",
     "docker:run": "docker run -p 3000:3000 vitnode_frontend"

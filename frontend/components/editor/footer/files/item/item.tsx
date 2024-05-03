@@ -1,36 +1,33 @@
 import { Plus, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import type { Dispatch, SetStateAction } from "react";
-import { findChildren, type Editor } from "@tiptap/react";
+import { findChildren } from "@tiptap/react";
 import type { Node } from "@tiptap/pm/model";
 
-import type { FileStateEditor } from "../button";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/functions/classnames";
 import { IconItemListFilesFooterEditor } from "./icon";
 import { ContentItemListFilesFooterEditor } from "./content";
 import { deleteMutationApi } from "./hooks/delete-mutation-api";
 import { CONFIG } from "@/config";
+import type { FileStateEditor } from "@/components/editor/extensions/files/files";
+import { useEditorState } from "@/components/editor/hooks/use-editor-state";
 
 export interface ItemListFilesFooterEditorProps
   extends Omit<FileStateEditor, "file"> {
-  editor: Editor;
-  setFiles: Dispatch<SetStateAction<FileStateEditor[]>>;
   file?: File;
 }
 
 export const ItemListFilesFooterEditor = ({
   data,
-  editor,
   error,
   file,
   id,
-  isLoading,
-  setFiles
+  isLoading
 }: ItemListFilesFooterEditorProps) => {
   const t = useTranslations("core.editor.files");
   const tCore = useTranslations("core");
+  const { editor } = useEditorState();
 
   return (
     <>
@@ -116,7 +113,7 @@ export const ItemListFilesFooterEditor = ({
                 }
               );
 
-              setFiles(prev => prev.filter(item => item.id !== id));
+              // setFiles(prev => prev.filter(item => item.id !== id));
               const mutation = await deleteMutationApi({
                 id,
                 securityKey: data?.security_key

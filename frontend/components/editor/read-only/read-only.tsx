@@ -6,7 +6,6 @@ import Image from "next/image";
 import type { TextLanguage } from "@/graphql/hooks";
 import { cn } from "@/functions/classnames";
 import { extensionsEditor } from "../extensions/extensions";
-import { HeadingExtensionEditor } from "../extensions/heading";
 import { changeCodeBlock } from "./code-block";
 import { FileDownloadButton } from "./file-download-button";
 
@@ -43,10 +42,10 @@ export const ReadOnlyEditor = async ({ className, value }: Props) => {
 
   const getText = (): string => {
     try {
-      return generateHTML(JSON.parse(currentValue()), [
-        ...extensionsEditor,
-        HeadingExtensionEditor({ allowH1: true })
-      ]);
+      return generateHTML(
+        JSON.parse(currentValue()),
+        extensionsEditor({ allowH1: true })
+      );
     } catch (e) {
       return currentValue();
     }

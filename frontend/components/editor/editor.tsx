@@ -10,9 +10,10 @@ import { ToolBarEditor } from "./toolbar/toolbar";
 import { FooterEditor } from "./footer/footer";
 import { useGlobals } from "@/hooks/core/use-globals";
 import { extensionsEditor } from "./extensions/extensions";
-import { HeadingExtensionEditor } from "./extensions/heading";
 import { EmojiExtensionEditor } from "./extensions/emoji/emoji";
 import { Skeleton } from "../ui/skeleton";
+import { useUploadFilesHandlerEditor } from "./extensions/files/hooks/use-upload-files-handler-editor.ts";
+import { EditorStateContext } from "./hooks/use-editor-state";
 
 interface Props {
   autoFocus?: boolean;
@@ -42,6 +43,7 @@ export const Editor = ({
   onChange,
   value
 }: WithLanguage | WithoutLanguage) => {
+  const { files, uploadFiles } = useUploadFilesHandlerEditor();
   const locale = useLocale();
   const { config, defaultLanguage } = useGlobals();
   const [selectedLanguage, setSelectedLanguage] = useState(
@@ -50,9 +52,11 @@ export const Editor = ({
   const editor = useEditor({
     autofocus: autoFocus,
     extensions: [
-      ...extensionsEditor,
-      EmojiExtensionEditor,
-      HeadingExtensionEditor({ allowH1: config.editor.allow_head_h1 })
+      ...extensionsEditor({
+        allowH1: config.editor.allow_head_h1,
+        uploadFiles
+      }),
+      EmojiExtensionEditor
     ],
     editorProps: {
       attributes: {
@@ -117,20 +121,23 @@ export const Editor = ({
   if (!editor) return null;
 
   return (
-    <div className={cn("border border-input rounded-md shadow-sm", className)}>
-      <div className="relative">
-        <ToolBarEditor editor={editor} />
-        <EditorContent
-          className="break-all [&_.ProseMirror-selectednode]:outline-none [&_.ProseMirror-selectednode]:ring-1 [&_.ProseMirror-selectednode]:ring-ring [&_.ProseMirror-selectednode]:rounded-md [&_.ProseMirror-selectednode]:w-fit [&_.node-files]:inline-block"
-          editor={editor}
+    <EditorStateContext.Provider value={{ files, editor, uploadFiles }}>
+      <div
+        className={cn("border border-input rounded-md shadow-sm", className)}
+      >
+        <div className="relative">
+          <ToolBarEditor editor={editor} />
+          <EditorContent
+            className="break-all [&_.ProseMirror-selectednode]:outline-none [&_.ProseMirror-selectednode]:ring-1 [&_.ProseMirror-selectednode]:ring-ring [&_.ProseMirror-selectednode]:rounded-md [&_.ProseMirror-selectednode]:w-fit [&_.node-files]:inline-block"
+            editor={editor}
+          />
+        </div>
+        <FooterEditor
+          disableLanguage={disableLanguage}
+          selectedLanguage={selectedLanguage}
+          setSelectedLanguage={setSelectedLanguage}
         />
       </div>
-      <FooterEditor
-        editor={editor}
-        disableLanguage={disableLanguage}
-        selectedLanguage={selectedLanguage}
-        setSelectedLanguage={setSelectedLanguage}
-      />
-    </div>
+    </EditorStateContext.Provider>
   );
 };

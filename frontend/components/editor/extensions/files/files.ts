@@ -1,6 +1,8 @@
-import { Node as ReactNodeTipTap, mergeAttributes } from "@tiptap/react";
+import { Node, mergeAttributes } from "@tiptap/react";
+import { Plugin } from "@tiptap/pm/state";
 
 import { renderReactNode } from "./client";
+import type { Core_Editor_Files__UploadMutation } from "@/graphql/hooks";
 
 export const acceptMimeTypeImage = [
   "image/jpeg",
@@ -32,74 +34,123 @@ declare module "@tiptap/react" {
   }
 }
 
-export const FilesHandler = ReactNodeTipTap.create<FilesHandlerAttributes>({
-  name: "files",
-  group: "inline",
-  inline: true,
-  // content: "inline*",
-  atom: true,
-  selectable: true,
-  draggable: true,
-  isolating: false,
+export interface FileStateEditor {
+  file: File;
+  id: number;
+  isLoading: boolean;
+  data?: Core_Editor_Files__UploadMutation["core_editor_files__upload"];
+  error?: string;
+}
 
-  priority: 10000,
+export interface FilesHandlerArgs {
+  uploadFiles?: ({ files }: { files: FileStateEditor[] }) => Promise<void>;
+}
 
-  addAttributes() {
-    return {
-      file_name_original: {
-        default: ""
-      },
-      file_name: {
-        default: ""
-      },
-      dir_folder: {
-        default: ""
-      },
-      file_alt: {
-        default: ""
-      },
-      file_size: {
-        default: 0
-      },
-      mimetype: {
-        default: ""
-      },
-      id: {
-        default: 0
-      },
-      width: {
-        default: 0
-      },
-      height: {
-        default: 0
-      }
-    };
-  },
+export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
+  Node.create({
+    name: "files",
+    group: "inline",
+    inline: true,
+    // content: "inline*",
+    atom: true,
+    selectable: true,
+    draggable: true,
+    isolating: false,
+    priority: 10000,
 
-  addNodeView() {
-    return renderReactNode();
-  },
-
-  renderHTML({ HTMLAttributes }) {
-    return [
-      "button",
-      mergeAttributes(HTMLAttributes, {
-        ["data-type"]: "file",
-        type: "button"
-      })
-    ];
-  },
-
-  addCommands() {
-    return {
-      insertFile:
-        options =>
-        ({ commands }) => {
-          return commands.insertContent({
-            type: this.name,
-            attrs: options
-          });
+    addAttributes() {
+      return {
+        file_name_original: {
+          default: ""
+        },
+        file_name: {
+          default: ""
+        },
+        dir_folder: {
+          default: ""
+        },
+        file_alt: {
+          default: ""
+        },
+        file_size: {
+          default: 0
+        },
+        mimetype: {
+          default: ""
+        },
+        id: {
+          default: 0
+        },
+        width: {
+          default: 0
+        },
+        height: {
+          default: 0
         }
-    };
-  }
-});
+      };
+    },
+
+    addNodeView() {
+      return renderReactNode();
+    },
+
+    renderHTML({ HTMLAttributes }) {
+      return [
+        "button",
+        mergeAttributes(HTMLAttributes, {
+          ["data-type"]: "file",
+          type: "button"
+        })
+      ];
+    },
+
+    addCommands() {
+      return {
+        insertFile:
+          options =>
+          ({ commands }) => {
+            return commands.insertContent({
+              type: this.name,
+              attrs: options
+            });
+          }
+      };
+    },
+
+    addProseMirrorPlugins() {
+      return [
+        new Plugin({
+          props: {
+            handlePaste(view, event) {
+              const files: FileStateEditor[] = [
+                ...(event.clipboardData?.files ?? [])
+              ].map(file => ({
+                file,
+                isLoading: true,
+                id: Math.floor(Math.random() * 1000) + file.size
+              }));
+              if (!files.length || !uploadFiles) return false;
+
+              uploadFiles({ files });
+
+              return true;
+            },
+            handleDrop(view, event, slice, moved) {
+              const files: FileStateEditor[] = [
+                ...(event.dataTransfer?.files ?? [])
+              ].map(file => ({
+                file,
+                isLoading: true,
+                id: Math.floor(Math.random() * 1000) + file.size
+              }));
+              if ((moved && !files.length) || !uploadFiles) return false;
+
+              uploadFiles({ files });
+
+              return true;
+            }
+          }
+        })
+      ];
+    }
+  });

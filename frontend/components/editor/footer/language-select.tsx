@@ -1,4 +1,3 @@
-import type { Editor } from "@tiptap/react";
 import { useTranslations } from "next-intl";
 
 import { buttonVariants } from "@/components/ui/button";
@@ -16,20 +15,20 @@ import {
   TooltipTrigger
 } from "@/components/ui/tooltip";
 import { useGlobals } from "@/hooks/core/use-globals";
+import { useEditorState } from "../hooks/use-editor-state";
 
 export interface LanguageSelectFooterEditorProps {
-  editor: Editor;
   selectedLanguage: string;
   setSelectedLanguage: (value: string) => void;
 }
 
 export const LanguageSelectFooterEditor = ({
-  editor,
   selectedLanguage,
   setSelectedLanguage
 }: LanguageSelectFooterEditorProps) => {
   const t = useTranslations("core.editor");
   const { languages: languagesFromGlobal } = useGlobals();
+  const { editor } = useEditorState();
   const languages = languagesFromGlobal.filter(item => item.allow_in_input);
 
   if (languages.length <= 1) return null;
