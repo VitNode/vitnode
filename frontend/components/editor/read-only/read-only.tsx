@@ -6,8 +6,8 @@ import Image from "next/image";
 import type { TextLanguage } from "@/graphql/hooks";
 import { cn } from "@/functions/classnames";
 import { extensionsEditor } from "../extensions/extensions";
-import { HeadingExtensionEditor } from "../extensions/heading";
 import { changeCodeBlock } from "./code-block";
+import { FileDownloadButton } from "./file-download-button";
 
 interface Props {
   value: TextLanguage[];
@@ -42,10 +42,10 @@ export const ReadOnlyEditor = async ({ className, value }: Props) => {
 
   const getText = (): string => {
     try {
-      return generateHTML(JSON.parse(currentValue()), [
-        ...extensionsEditor,
-        HeadingExtensionEditor({ allowH1: true })
-      ]);
+      return generateHTML(
+        JSON.parse(currentValue()),
+        extensionsEditor({ allowH1: true })
+      );
     } catch (e) {
       return currentValue();
     }
@@ -78,11 +78,29 @@ export const ReadOnlyEditor = async ({ className, value }: Props) => {
       if (name === "pre" && children.length > 0) {
         return changeCodeBlock(domNode);
       }
+
+      if (name === "button" && domNode.attribs["data-type"] === "file") {
+        return (
+          <FileDownloadButton
+            file_name_original={domNode.attribs["file_name_original"]}
+            mimetype={domNode.attribs["mimetype"]}
+            file_size={parseInt(domNode.attribs["file_size"], 10)}
+            id={+domNode.attribs["id"]}
+            width={+domNode.attribs["width"]}
+            height={+domNode.attribs["height"]}
+            dir_folder={domNode.attribs["dir_folder"]}
+            file_name={domNode.attribs["file_name"]}
+            file_alt={domNode.attribs["file_alt"]}
+          />
+        );
+      }
     }
   };
 
   return (
-    <div className={cn("break-all", className)}>
+    <div
+      className={cn("break-all [&>*:not(:last-child)]:mb-[0.5rem]", className)}
+    >
       {parse(getText(), options)}
     </div>
   );

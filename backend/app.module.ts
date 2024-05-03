@@ -7,6 +7,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from "@apollo/server/plugin
 import { JwtModule } from "@nestjs/jwt";
 import { ScheduleModule } from "@nestjs/schedule";
 import { ConfigModule } from "@nestjs/config";
+import { ServeStaticModule } from "@nestjs/serve-static";
 
 import { PluginsModule } from "./plugins/plugins.module";
 import { configuration } from "./config/configuration";
@@ -32,7 +33,11 @@ import { DatabaseModule } from "@/plugins/database/database.module";
     JwtModule.register({ global: true }),
     PluginsModule,
     ScheduleModule.forRoot(),
-    DatabaseModule
+    DatabaseModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(process.cwd(), "public"),
+      serveRoot: "/public"
+    })
   ]
 })
 export class AppModule {}

@@ -11,113 +11,14 @@ import {
   core_nav_description,
   core_nav_name
 } from "../../database/schema/nav";
+import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
 
 @Injectable()
 export class EditAdminNavService {
-  constructor(private databaseService: DatabaseService) {}
-
-  protected async updateNames({
-    id,
-    name
-  }: Pick<EditAdminNavArgs, "name" | "id">) {
-    const names = await this.databaseService.db.query.core_nav_name.findMany({
-      where: (table, { eq }) => eq(table.nav_id, id)
-    });
-
-    const update = await Promise.all(
-      name.map(async item => {
-        const itemExist = names.find(
-          el => el.language_code === item.language_code
-        );
-
-        if (itemExist) {
-          // If value is empty, do nothing
-          if (!itemExist.value.trim()) return;
-
-          const update = await this.databaseService.db
-            .update(core_nav_name)
-            .set({ ...item, nav_id: id })
-            .where(eq(core_nav_name.id, itemExist.id))
-            .returning();
-
-          return update[0];
-        }
-
-        const insert = await this.databaseService.db
-          .insert(core_nav_name)
-          .values({ ...item, nav_id: id })
-          .returning();
-
-        return insert[0];
-      })
-    );
-
-    // Delete
-    Promise.all(
-      names.map(async item => {
-        const exist = update.find(name => name.id === item.id);
-        if (exist) return;
-
-        await this.databaseService.db
-          .delete(core_nav_name)
-          .where(eq(core_nav_name.id, item.id));
-      })
-    );
-
-    return update;
-  }
-
-  protected async updateDescriptions({
-    description,
-    id
-  }: Pick<EditAdminNavArgs, "description" | "id">) {
-    const descriptions =
-      await this.databaseService.db.query.core_nav_description.findMany({
-        where: (table, { eq }) => eq(table.nav_id, id)
-      });
-
-    const update = await Promise.all(
-      description.map(async item => {
-        const itemExist = descriptions.find(
-          el => el.language_code === item.language_code
-        );
-
-        if (itemExist) {
-          // If value is empty, do nothing
-          if (!itemExist.value.trim()) return;
-
-          const update = await this.databaseService.db
-            .update(core_nav_description)
-            .set({ ...item, nav_id: id })
-            .where(eq(core_nav_description.id, itemExist.id))
-            .returning();
-
-          return update[0];
-        }
-
-        const insert = await this.databaseService.db
-          .insert(core_nav_description)
-          .values({ ...item, nav_id: id })
-          .returning();
-
-        return insert[0];
-      })
-    );
-
-    // Delete
-    Promise.all(
-      descriptions.map(async item => {
-        const exist = update.find(name => name.id === item.id);
-        if (exist) return;
-
-        await this.databaseService.db
-          .delete(core_nav_description)
-          .where(eq(core_nav_description.id, item.id));
-      })
-    );
-
-    return update;
-  }
+  constructor(
+    private databaseService: DatabaseService,
+    private parserTextLang: ParserTextLanguageCoreHelpersService
+  ) {}
 
   async edit({
     description,
@@ -145,10 +46,16 @@ export class EditAdminNavService {
       .where(eq(core_nav.id, id))
       .returning();
 
-    const updatedName = await this.updateNames({ id, name });
-    const updatedDescription = await this.updateDescriptions({
-      id,
-      description
+    const updatedName = await this.parserTextLang.parse({
+      item_id: id,
+      database: core_nav_name,
+      data: name
+    });
+
+    const updatedDescription = await this.parserTextLang.parse({
+      item_id: id,
+      database: core_nav_description,
+      data: description
     });
 
     const children = await this.databaseService.db.query.core_nav.findMany({

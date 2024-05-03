@@ -29,7 +29,10 @@ export class ShowCoreLanguageService {
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: "ASC", key: "id", schema: core_languages.id },
+      primaryCursor: {
+        column: "id",
+        schema: core_languages.id
+      },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
         column: "created"

@@ -12,8 +12,6 @@ export const getManifest = ({
 }): ShowAdminManifestMetadataObj => {
   const path = join(
     process.cwd(),
-    "..",
-    "frontend",
     "public",
     "assets",
     lang_code,

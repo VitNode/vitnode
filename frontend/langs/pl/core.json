@@ -132,6 +132,14 @@
           "skin_5": "Ciemny"
         }
       },
+      "files": {
+        "attach": "Załącz pliki",
+        "state": {
+          "loading": "Przesyłanie...",
+          "error": "Ups! Coś poszło nie tak. {error}"
+        },
+        "insert": "Wstaw"
+      },
 
       "remove_formatting": "Usuń formatowanie"
     },
@@ -271,6 +279,16 @@
       "notifications": {
         "title": "Powiadomienia",
         "desc": "Konfiguruj jak otrzymujesz powiadomienia."
+      },
+      "files": {
+        "title": "Moje pliki",
+        "desc": "Zarządzaj swoimi plikami.",
+        "search": "Szukaj plików przez nazwę...",
+        "temp_file": "Plik tymczasowy zostanie usunięty wkrótce.",
+        "table": {
+          "file_size": "Rozmiar pliku",
+          "count_uses": "Liczba użyć"
+        }
       }
     },
     "errors": {

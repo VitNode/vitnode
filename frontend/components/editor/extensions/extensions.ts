@@ -6,18 +6,21 @@ import { Link } from "@tiptap/extension-link";
 import { Color } from "@tiptap/extension-color";
 import { TextStyle } from "@tiptap/extension-text-style";
 
-import { ImageExtensionEditor } from "./image/image";
 import { CodeBlockLowlightExtensionEditor } from "./code/code";
 import { MentionExtensionEditor } from "./mentions/emoji";
+import { FilesHandler, type FilesHandlerArgs } from "./files/files";
+import { HeadingExtensionEditor } from "./heading";
 
-export const extensionsEditor: Extensions = [
+interface Args extends FilesHandlerArgs {
+  allowH1: boolean;
+}
+
+export const extensionsEditor = ({
+  allowH1,
+  uploadFiles
+}: Args): Extensions => [
   StarterKit.configure({
     heading: false,
-    paragraph: {
-      HTMLAttributes: {
-        class: "[&:not(:last-child)]:mb-[0.5rem]"
-      }
-    },
     bulletList: {
       HTMLAttributes: {
         class: "list-disc"
@@ -57,9 +60,12 @@ export const extensionsEditor: Extensions = [
     types: ["heading", "paragraph"]
   }),
   CodeBlockLowlightExtensionEditor,
-  Link.extend({ inclusive: false }),
+  Link.extend({ inclusive: false }).configure({
+    openOnClick: "whenNotEditable"
+  }),
   Color,
   TextStyle,
-  ImageExtensionEditor,
-  MentionExtensionEditor
+  MentionExtensionEditor,
+  FilesHandler({ uploadFiles }),
+  HeadingExtensionEditor({ allowH1 })
 ];

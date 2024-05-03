@@ -11,7 +11,12 @@ interface Props extends AnimationProps, LayoutProps {
 const DivMotion = forwardRef<HTMLDivElement, Props>((props, ref) => {
   return <motion.div ref={ref} {...props} />;
 });
-
 DivMotion.displayName = "DivMotion";
 
-export { DivMotion };
+const LiMotion = forwardRef<HTMLLIElement, Props>((props, ref) => {
+  return <motion.li ref={ref} {...props} />;
+});
+
+LiMotion.displayName = "LiMotion";
+
+export { DivMotion, LiMotion };

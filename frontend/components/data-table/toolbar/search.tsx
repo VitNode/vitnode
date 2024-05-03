@@ -36,7 +36,9 @@ export const SearchToolbarDataTable = ({
     }
 
     startTransition(() => {
-      push(params.toString() ? `${pathname}?${params.toString()}` : pathname);
+      push(params.toString() ? `${pathname}?${params.toString()}` : pathname, {
+        scroll: false
+      });
     });
   }, 500);
 

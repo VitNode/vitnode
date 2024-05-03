@@ -9,10 +9,14 @@ import {
   core_nav_name
 } from "../../database/schema/nav";
 import { ShowCoreNav } from "@/plugins/core/nav/show/dto/show.obj";
+import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
 
 @Injectable()
 export class CreateAdminNavService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private parserTextLang: ParserTextLanguageCoreHelpersService
+  ) {}
 
   async create({
     description,
@@ -41,30 +45,17 @@ export class CreateAdminNavService {
 
     const id = nav[0].id;
 
-    const namesNav = await this.databaseService.db
-      .insert(core_nav_name)
-      .values(
-        name.map(n => ({
-          nav_id: id,
-          language_code: n.language_code,
-          value: n.value
-        }))
-      )
-      .returning();
+    const namesNav = await this.parserTextLang.parse({
+      item_id: id,
+      database: core_nav_name,
+      data: name
+    });
 
-    const descriptionNav =
-      description.length > 0
-        ? await this.databaseService.db
-            .insert(core_nav_description)
-            .values(
-              description.map(n => ({
-                nav_id: id,
-                language_code: n.language_code,
-                value: n.value
-              }))
-            )
-            .returning()
-        : [];
+    const descriptionNav = await this.parserTextLang.parse({
+      item_id: id,
+      database: core_nav_description,
+      data: description
+    });
 
     return {
       ...nav[0],

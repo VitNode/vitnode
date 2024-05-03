@@ -13,7 +13,7 @@ interface Props {
     avatar_color: string;
     name: string;
     name_seo: string;
-    avatar?: Maybe<Pick<AvatarUserType, "dir_folder" | "name">>;
+    avatar?: Maybe<Pick<AvatarUserType, "dir_folder" | "file_name">>;
   };
   className?: string;
 }
@@ -26,7 +26,7 @@ const AvatarUser = forwardRef<HTMLImageElement, Props>(
         imageClassName="object-cover"
         src={
           avatar
-            ? `${CONFIG.frontend_url}/${avatar.dir_folder}/${avatar.name}`
+            ? `${CONFIG.backend_public_url}/${avatar.dir_folder}/${avatar.file_name}`
             : generateLetterPhoto(name.slice(0, 1), avatar_color)
         }
         alt={name}

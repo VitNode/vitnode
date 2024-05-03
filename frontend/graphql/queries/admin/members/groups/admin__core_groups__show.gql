@@ -2,7 +2,7 @@ query Admin__Core_groups__show(
   $first: Int
   $cursor: Int
   $search: String
-  $sortBy: [ShowAdminGroupsSortByArgs!]
+  $sortBy: ShowAdminGroupsSortByArgs
   $last: Int
 ) {
   admin__core_groups__show(

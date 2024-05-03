@@ -20,7 +20,7 @@ export const HeadingExtensionEditor = ({ allowH1 }: { allowH1: boolean }) => {
       return [
         `h${level}`,
         mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
-          class: `${classes[level]} [&:not(:last-child)]:mb-[0.5rem]`
+          class: `${classes[level]}`
         }),
         0
       ];

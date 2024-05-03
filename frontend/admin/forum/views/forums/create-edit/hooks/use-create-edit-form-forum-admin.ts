@@ -30,13 +30,15 @@ export const useCreateEditFormForumAdmin = ({
       can_all_read: z.boolean(),
       can_all_create: z.boolean(),
       can_all_reply: z.boolean(),
+      can_all_download_files: z.boolean(),
       groups: z.array(
         z.object({
           id: z.number(),
           can_view: z.boolean(),
           can_read: z.boolean(),
           can_create: z.boolean(),
-          can_reply: z.boolean()
+          can_reply: z.boolean(),
+          can_download_files: z.boolean()
         })
       )
     })
@@ -52,6 +54,8 @@ export const useCreateEditFormForumAdmin = ({
         can_all_read: data?.permissions.can_all_read ?? true,
         can_all_create: data?.permissions.can_all_create ?? true,
         can_all_reply: data?.permissions.can_all_reply ?? true,
+        can_all_download_files:
+          data?.permissions.can_all_download_files ?? true,
         groups: data?.permissions.groups ?? []
       }
     },

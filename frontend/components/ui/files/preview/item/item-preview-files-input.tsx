@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { X } from "lucide-react";
 
 import { Img } from "@/components/img";
+import { acceptMimeTypeImage } from "@/components/editor/extensions/files/files";
 
 interface Props {
   file: File;
@@ -9,8 +10,6 @@ interface Props {
   onChange: (e: File[]) => void;
   value: File[] | undefined;
 }
-
-const IMAGE_FILE_TYPES = ["image/png", "image/jpeg", "image/gif"];
 
 export const ItemPreviewFilesInput = ({
   file,
@@ -46,7 +45,7 @@ export const ItemPreviewFilesInput = ({
 
   return (
     <li className="relative p-4 rounded-md bg-background border border-input flex gap-4 overflow-hidden">
-      {IMAGE_FILE_TYPES.includes(file.type) && (
+      {acceptMimeTypeImage.includes(file.type) && (
         <Img
           className="rounded-sm flex-shrink-0"
           imageClassName="object-cover"

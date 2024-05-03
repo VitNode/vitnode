@@ -30,7 +30,7 @@ export class AvatarUser {
   dir_folder: string;
 
   @Field(() => String)
-  name: string;
+  file_name: string;
 }
 
 @ObjectType()

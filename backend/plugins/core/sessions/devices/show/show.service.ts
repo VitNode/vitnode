@@ -28,7 +28,10 @@ export class ShowCoreSessionDevicesService {
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: "ASC", key: "id", schema: core_sessions.user_id },
+      primaryCursor: {
+        column: "id",
+        schema: core_sessions.user_id
+      },
       defaultSortBy: {
         direction: SortDirectionEnum.asc,
         column: "position"

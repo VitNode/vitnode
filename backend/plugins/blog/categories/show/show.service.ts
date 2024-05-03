@@ -27,7 +27,10 @@ export class ShowBlogCategoriesService {
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: "ASC", key: "id", schema: blog_categories.id },
+      primaryCursor: {
+        column: "id",
+        schema: blog_categories.id
+      },
       defaultSortBy: {
         direction: SortDirectionEnum.asc,
         column: "position"

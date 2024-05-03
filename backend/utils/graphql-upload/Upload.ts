@@ -5,7 +5,7 @@ interface FileUploadCreateReadStreamOptions {
   highWaterMark: ReadStreamOptions["highWaterMark"];
 }
 
-export type FileUploadCreateReadStream = (
+type FileUploadCreateReadStream = (
   options?: FileUploadCreateReadStreamOptions
 ) => ReadStream;
 

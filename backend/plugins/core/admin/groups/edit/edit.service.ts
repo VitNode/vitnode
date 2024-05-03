@@ -11,10 +11,14 @@ import {
   core_groups_names
 } from "@/plugins/core/admin/database/schema/groups";
 import { core_users } from "@/plugins/core/admin/database/schema/users";
+import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
 
 @Injectable()
 export class EditAdminGroupsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private parserTextLang: ParserTextLanguageCoreHelpersService
+  ) {}
 
   async edit({ id, name }: EditAdminGroupsArgs): Promise<ShowAdminGroups> {
     const group = await this.databaseService.db.query.core_groups.findFirst({
@@ -25,57 +29,11 @@ export class EditAdminGroupsService {
       throw new NotFoundError("Group");
     }
 
-    const groupNames =
-      await this.databaseService.db.query.core_groups_names.findMany({
-        where: (table, { eq }) => eq(table.group_id, id)
-      });
-
-    // Update name languages
-    const updatedName = await Promise.all(
-      name.map(async item => {
-        const nameExist = groupNames.find(
-          name => name.language_code === item.language_code
-        );
-
-        if (nameExist) {
-          // If value is empty, do nothing
-          if (!nameExist.value.trim()) return;
-
-          const update = await this.databaseService.db
-            .update(core_groups_names)
-            .set({
-              value: item.value
-            })
-            .where(eq(core_groups_names.id, nameExist.id))
-            .returning();
-
-          return update[0];
-        }
-
-        const update = await this.databaseService.db
-          .insert(core_groups_names)
-          .values({
-            group_id: id,
-            language_code: item.language_code,
-            value: item.value
-          })
-          .returning();
-
-        return update[0];
-      })
-    );
-
-    // Check remaining languages
-    Promise.all(
-      groupNames.map(async item => {
-        const nameExist = updatedName.find(name => name.id === item.id);
-        if (nameExist) return;
-
-        await this.databaseService.db
-          .delete(core_groups_names)
-          .where(eq(core_groups_names.id, item.id));
-      })
-    );
+    await this.parserTextLang.parse({
+      item_id: id,
+      database: core_groups_names,
+      data: name
+    });
 
     const usersCount = await this.databaseService.db
       .select({ count: count() })

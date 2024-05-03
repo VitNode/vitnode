@@ -1,13 +1,6 @@
-import { ArgsType, Field, Int } from "@nestjs/graphql";
+import { ArgsType } from "@nestjs/graphql";
+
+import { PaginationArgs } from "@/types/database/pagination.type";
 
 @ArgsType()
-export class ShowCoreNavArgs {
-  @Field(() => Int, { nullable: true })
-  cursor: number | null;
-
-  @Field(() => Int, { nullable: true })
-  first: number | null;
-
-  @Field(() => Int, { nullable: true })
-  last: number | null;
-}
+export class ShowCoreNavArgs extends PaginationArgs {}

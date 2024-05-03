@@ -1,8 +1,8 @@
 import { Args, Query, Resolver } from "@nestjs/graphql";
 
 import { ShowCoreNavService } from "./show.service";
-import { ShowCoreNavArgs } from "./dto/show.args";
 import { ShowCoreNavObj } from "./dto/show.obj";
+import { ShowCoreNavArgs } from "./dto/show.args";
 
 @Resolver()
 export class ShowCoreNavResolver {

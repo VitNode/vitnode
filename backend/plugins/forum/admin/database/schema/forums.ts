@@ -22,10 +22,13 @@ export const forum_forums = pgTable(
     // ! Warning: this is a recursive relation. It's not supported by drizzle-orm yet.
     parent_id: integer("parent_id").notNull().default(0),
     position: integer("position").notNull().default(0),
-    can_all_view: boolean("can_all_view").notNull().default(false),
-    can_all_read: boolean("can_all_read").notNull().default(false),
-    can_all_create: boolean("can_all_create").notNull().default(false),
-    can_all_reply: boolean("can_all_reply").notNull().default(false)
+    can_all_view: boolean("can_all_view").notNull().default(true),
+    can_all_read: boolean("can_all_read").notNull().default(true),
+    can_all_create: boolean("can_all_create").notNull().default(true),
+    can_all_reply: boolean("can_all_reply").notNull().default(true),
+    can_all_download_files: boolean("can_all_download_files")
+      .notNull()
+      .default(true)
   },
   table => ({
     parent_id_idx: index("forum_forums_parent_id_idx").on(table.parent_id)
@@ -50,7 +53,7 @@ export const forum_forums_name = pgTable(
   "forum_forums_name",
   {
     id: serial("id").primaryKey(),
-    forum_id: integer("forum_id")
+    item_id: integer("item_id")
       .notNull()
       .references(() => forum_forums.id, {
         onDelete: "cascade"
@@ -63,7 +66,7 @@ export const forum_forums_name = pgTable(
     value: varchar("value", { length: 50 }).notNull()
   },
   table => ({
-    forum_id_idx: index("forum_forums_name_forum_id_idx").on(table.forum_id),
+    item_id_idx: index("forum_forums_name_item_id_idx").on(table.item_id),
     language_code_idx: index("forum_forums_name_language_code_idx").on(
       table.language_code
     )
@@ -74,7 +77,7 @@ export const forum_forums_name_relations = relations(
   forum_forums_name,
   ({ one }) => ({
     forum: one(forum_forums, {
-      fields: [forum_forums_name.forum_id],
+      fields: [forum_forums_name.item_id],
       references: [forum_forums.id]
     }),
     language: one(core_languages, {
@@ -88,7 +91,7 @@ export const forum_forums_description = pgTable(
   "forum_forums_description",
   {
     id: serial("id").primaryKey(),
-    forum_id: integer("forum_id")
+    item_id: integer("item_id")
       .notNull()
       .references(() => forum_forums.id, {
         onDelete: "cascade"
@@ -101,8 +104,8 @@ export const forum_forums_description = pgTable(
     value: varchar("value").notNull()
   },
   table => ({
-    forum_id_idx: index("forum_forums_description_forum_id_idx").on(
-      table.forum_id
+    item_id_idx: index("forum_forums_description_item_id_idx").on(
+      table.item_id
     ),
     language_code_idx: index("forum_forums_description_language_code_idx").on(
       table.language_code
@@ -114,7 +117,7 @@ export const forum_forums_description_relations = relations(
   forum_forums_description,
   ({ one }) => ({
     forum: one(forum_forums, {
-      fields: [forum_forums_description.forum_id],
+      fields: [forum_forums_description.item_id],
       references: [forum_forums.id]
     }),
     language: one(core_languages, {
@@ -137,7 +140,8 @@ export const forum_forums_permissions = pgTable(
     can_view: boolean("can_view").notNull().default(false),
     can_read: boolean("can_read").notNull().default(false),
     can_create: boolean("can_create").notNull().default(false),
-    can_reply: boolean("can_reply").notNull().default(false)
+    can_reply: boolean("can_reply").notNull().default(false),
+    can_download_files: boolean("can_download_files").notNull().default(false)
   },
   table => ({
     forum_id_idx: index("forum_forums_permissions_forum_id_idx").on(

@@ -13,122 +13,19 @@ import {
   forum_forums_name,
   forum_forums_permissions
 } from "../../database/schema/forums";
-import { TextLanguageInput } from "@/types/database/text-language.type";
 import { StatsShowForumForumsService } from "@/plugins/forum/forums/show/stats.service";
 import { LastPostsForumForumsService } from "@/plugins/forum/forums/show/last_posts/last_posts.service";
 import { User } from "@/utils/decorators/user.decorator";
+import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
 
 @Injectable()
 export class EditForumForumsService {
   constructor(
     private databaseService: DatabaseService,
     private statsService: StatsShowForumForumsService,
-    private lastPostsService: LastPostsForumForumsService
+    private lastPostsService: LastPostsForumForumsService,
+    private parserTextLang: ParserTextLanguageCoreHelpersService
   ) {}
-
-  protected updateName = async ({
-    id,
-    name
-  }: {
-    id: number;
-    name: TextLanguageInput[];
-  }) => {
-    const names =
-      await this.databaseService.db.query.forum_forums_name.findMany({
-        where: (table, { eq }) => eq(table.forum_id, id)
-      });
-
-    const update = await Promise.all(
-      name.map(async item => {
-        const itemExist = names.find(
-          el => el.language_code === item.language_code
-        );
-
-        if (itemExist) {
-          // If value is empty, do nothing
-          if (!itemExist.value.trim()) return;
-
-          const update = await this.databaseService.db
-            .update(forum_forums_name)
-            .set({ ...item, forum_id: id })
-            .where(eq(forum_forums_name.id, itemExist.id))
-            .returning();
-
-          return update[0];
-        }
-
-        const insert = await this.databaseService.db
-          .insert(forum_forums_name)
-          .values({ ...item, forum_id: id })
-          .returning();
-
-        return insert[0];
-      })
-    );
-
-    // Delete remaining translations
-    await Promise.all(
-      names.map(async item => {
-        const exist = update.find(name => name.id === item.id);
-        if (exist) return;
-
-        await this.databaseService.db
-          .delete(forum_forums_name)
-          .where(eq(forum_forums_name.id, item.id));
-      })
-    );
-  };
-
-  protected updateDescription = async ({
-    description,
-    id
-  }: {
-    description: TextLanguageInput[];
-    id: number;
-  }) => {
-    const descriptions =
-      await this.databaseService.db.query.forum_forums_description.findMany({
-        where: (table, { eq }) => eq(table.forum_id, id)
-      });
-
-    const update = await Promise.all(
-      description.map(async item => {
-        const itemExist = descriptions.find(
-          el => el.language_code === item.language_code
-        );
-
-        if (itemExist) {
-          // If value is empty, do nothing
-          if (!itemExist.value.trim()) return;
-
-          const update = await this.databaseService.db
-            .update(forum_forums_description)
-            .set({ ...item, forum_id: id })
-            .where(eq(forum_forums_description.id, itemExist.id))
-            .returning();
-
-          return update[0];
-        }
-
-        await this.databaseService.db
-          .insert(forum_forums_description)
-          .values({ ...item, forum_id: id })
-          .returning();
-      })
-    );
-
-    // Delete remaining translations
-    await Promise.all(
-      descriptions.map(async item => {
-        const exist = update.find(name => name.id === item.id);
-        if (exist) return;
-
-        await this.databaseService.db
-          .delete(forum_forums_description)
-          .where(eq(forum_forums_description.id, item.id));
-      })
-    );
-  };
 
   protected updatePermissions = async ({
     id,
@@ -144,7 +41,8 @@ export class EditForumForumsService {
         can_create: permissions.can_all_create,
         can_read: permissions.can_all_read,
         can_reply: permissions.can_all_reply,
-        can_view: permissions.can_all_view
+        can_view: permissions.can_all_view,
+        can_download_files: permissions.can_all_download_files
       })
       .where(eq(forum_forums_permissions.forum_id, id))
       .returning();
@@ -217,13 +115,23 @@ export class EditForumForumsService {
         can_all_read: permissions.can_all_read,
         can_all_reply: permissions.can_all_reply,
         can_all_view: permissions.can_all_view,
+        can_all_download_files: permissions.can_all_download_files,
         parent_id
       })
       .where(eq(forum_forums.id, id))
       .returning();
 
-    await this.updateName({ name, id });
-    await this.updateDescription({ description, id });
+    await this.parserTextLang.parse({
+      item_id: id,
+      database: forum_forums_name,
+      data: name
+    });
+
+    await this.parserTextLang.parse({
+      item_id: id,
+      database: forum_forums_description,
+      data: description
+    });
 
     const dataUpdate =
       await this.databaseService.db.query.forum_forums.findFirst({

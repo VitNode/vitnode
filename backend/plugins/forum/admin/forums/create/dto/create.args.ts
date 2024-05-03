@@ -24,6 +24,9 @@ class GroupsPermissionsCreateForumForums {
 
   @Field(() => Boolean)
   can_reply: boolean;
+
+  @Field(() => Boolean)
+  can_download_files: boolean;
 }
 
 @InputType()
@@ -39,6 +42,9 @@ export class PermissionsCreateForumForums {
 
   @Field(() => Boolean)
   can_all_reply: boolean;
+
+  @Field(() => Boolean)
+  can_all_download_files: boolean;
 
   @Field(() => [GroupsPermissionsCreateForumForums])
   groups: GroupsPermissionsCreateForumForums[];

@@ -28,8 +28,8 @@ type AuthorizationCurrentUserObj {
 
 type AvatarUser {
   dir_folder: String!
+  file_name: String!
   id: Int!
-  name: String!
 }
 
 type BreadcrumbsForumForums {
@@ -93,6 +93,7 @@ type GroupUser {
 
 input GroupsPermissionsCreateForumForums {
   can_create: Boolean!
+  can_download_files: Boolean!
   can_read: Boolean!
   can_reply: Boolean!
   can_view: Boolean!
@@ -101,6 +102,7 @@ input GroupsPermissionsCreateForumForums {
 
 type GroupsPermissionsForumForums {
   can_create: Boolean!
+  can_download_files: Boolean!
   can_read: Boolean!
   can_reply: Boolean!
   can_view: Boolean!
@@ -132,7 +134,7 @@ input LastPostsShowForumForumsArgs {
   cursor: Int
   first: Int
   last: Int
-  sortBy: [LastPostsShowForumForumsSortByArgs!]
+  sortBy: LastPostsShowForumForumsSortByArgs
 }
 
 type LastPostsShowForumForumsObj {
@@ -199,6 +201,8 @@ type Mutation {
   admin__forum_forums__edit(description: [TextLanguageInput!]!, id: Int!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
   admin__install__create_database: String!
   admin_sessions__sign_out: String!
+  core_editor_files__delete(id: Int!, security_key: String): String!
+  core_editor_files__upload(file: Upload!, folder: String!, plugin: String!): ShowCoreFiles!
   core_groups__admin_create(name: [TextLanguageInput!]!): ShowAdminGroups!
   core_mail_send(content: String!, receiver_address: String!, subject: String!): String!
   core_members__avatar__delete: String!
@@ -237,6 +241,7 @@ type PageInfoShowPostsForums {
 
 input PermissionsCreateForumForums {
   can_all_create: Boolean!
+  can_all_download_files: Boolean!
   can_all_read: Boolean!
   can_all_reply: Boolean!
   can_all_view: Boolean!
@@ -251,6 +256,7 @@ type PermissionsForumForums {
 
 type PermissionsForumForumsAdmin {
   can_all_create: Boolean!
+  can_all_download_files: Boolean!
   can_all_read: Boolean!
   can_all_reply: Boolean!
   can_all_view: Boolean!
@@ -263,16 +269,16 @@ type PermissionsTopicForums {
 }
 
 type Query {
-  admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminGroupsSortByArgs!]): ShowAdminGroupsObj!
+  admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminGroupsSortByArgs): ShowAdminGroupsObj!
   admin__core_manifest_metadata__show: ShowAdminManifestMetadataObj!
-  admin__core_members__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: [ShowAdminMembersSortByArgs!]): ShowAdminMembersObj!
+  admin__core_members__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: ShowAdminMembersSortByArgs): ShowAdminMembersObj!
   admin__core_members__stats_sign_up: [SignUpStatsAdminMembers!]!
   admin__core_plugins__files(code: String!): FilesAdminPluginsObj!
   admin__core_plugins__nav__show(plugin_code: String!): [ShowAdminNavPluginsObj!]!
-  admin__core_plugins__show(code: String, cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowAdminPluginsSortByArgs!]): ShowAdminPluginsObj!
-  admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffAdministratorsSortByArgs!]): ShowAdminStaffAdministratorsObj!
-  admin__core_staff_moderators__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminStaffModeratorsSortByArgs!]): ShowAdminStaffModeratorsObj!
-  admin__core_themes__show(cursor: Int, first: Int, last: Int, sortBy: [ShowAdminThemesSortByArgs!]): ShowAdminThemesObj!
+  admin__core_plugins__show(code: String, cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminPluginsSortByArgs): ShowAdminPluginsObj!
+  admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminStaffAdministratorsSortByArgs): ShowAdminStaffAdministratorsObj!
+  admin__core_staff_moderators__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminStaffModeratorsSortByArgs): ShowAdminStaffModeratorsObj!
+  admin__core_themes__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminThemesSortByArgs): ShowAdminThemesObj!
   admin__forum_forums__show(
     cursor: Int
     first: Int
@@ -288,8 +294,9 @@ type Query {
   admin__install__layout: LayoutAdminInstallObj!
   admin__sessions__authorization: AuthorizationAdminSessionsObj!
   blog_categories__show(cursor: Int, first: Int, last: Int): ShowBlogCategoriesObj!
-  core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: [ShowCoreLanguagesSortByArgs!]): ShowCoreLanguagesObj!
-  core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: [ShowCoreMembersSortByArgs!]): ShowCoreMembersObj!
+  core_files__show(cursor: Int, first: Int, last: Int, sortBy: ShowCoreFilesSortByArgs): ShowCoreFilesObj!
+  core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreLanguagesSortByArgs): ShowCoreLanguagesObj!
+  core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: ShowCoreMembersSortByArgs): ShowCoreMembersObj!
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
   core_plugins__show: [ShowCorePluginsObj!]!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
@@ -504,6 +511,36 @@ type ShowBlogCategories {
 type ShowBlogCategoriesObj {
   edges: [ShowBlogCategories!]!
   pageInfo: PageInfo!
+}
+
+type ShowCoreFiles {
+  count_uses: Int!
+  created: DateTime!
+  dir_folder: String!
+  extension: String!
+  file_alt: String
+  file_name: String!
+  file_name_original: String!
+  file_size: Int!
+  height: Int
+  id: Int!
+  mimetype: String!
+  security_key: String
+  width: Int
+}
+
+type ShowCoreFilesObj {
+  edges: [ShowCoreFiles!]!
+  pageInfo: PageInfo!
+}
+
+input ShowCoreFilesSortByArgs {
+  column: ShowCoreFilesSortingColumnEnum!
+  direction: SortDirectionEnum!
+}
+
+enum ShowCoreFilesSortingColumnEnum {
+  created
 }
 
 type ShowCoreLanguages {
@@ -757,11 +794,13 @@ scalar Upload
 type UploadAvatarCoreMembersObj {
   dir_folder: String!
   extension: String!
+  file_name: String!
+  file_name_original: String!
+  file_size: Int!
+  height: Int
   id: Int!
   mimetype: String!
-  module_name: String!
-  name: String!
-  size: Int!
+  width: Int
 }
 
 type User {

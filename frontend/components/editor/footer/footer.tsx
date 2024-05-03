@@ -1,30 +1,36 @@
-import type { Editor } from "@tiptap/react";
-
 import {
   LanguageSelectFooterEditor,
   type LanguageSelectFooterEditorProps
 } from "./language-select";
+import { FilesButtonFooterEditor } from "./files/button";
+import { ListFilesFooterEditor } from "./files/list";
+import { useEditorState } from "../hooks/use-editor-state";
 
 interface Props extends LanguageSelectFooterEditorProps {
-  editor: Editor;
   disableLanguage?: boolean;
 }
 
 export const FooterEditor = ({
   disableLanguage,
-  editor,
   selectedLanguage,
   setSelectedLanguage
 }: Props) => {
+  const { files } = useEditorState();
+
   return (
-    <div className="bg-background p-1 rounded-b-md">
-      {!disableLanguage && (
-        <LanguageSelectFooterEditor
-          editor={editor}
-          selectedLanguage={selectedLanguage}
-          setSelectedLanguage={setSelectedLanguage}
-        />
-      )}
+    <div className="bg-background p-2 rounded-b-md">
+      <div className="flex items-center gap-2 justify-between flex-wrap w-full [&>*]:w-full [&>*]:sm:w-auto">
+        {!disableLanguage && (
+          <LanguageSelectFooterEditor
+            selectedLanguage={selectedLanguage}
+            setSelectedLanguage={setSelectedLanguage}
+          />
+        )}
+
+        <FilesButtonFooterEditor />
+      </div>
+
+      {files.length > 0 && <ListFilesFooterEditor />}
     </div>
   );
 };

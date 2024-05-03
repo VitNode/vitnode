@@ -43,82 +43,76 @@ export default function TopicView({ data: dataApi }: TopicViewProps) {
   if (!forum) return null;
 
   return (
-    <div className="flex flex-col md:flex-row gap-5">
-      <div className="flex-1">
-        <div className="flex flex-col gap-1 mb-5">
-          <h1 className="text-2xl font-semibold tracking-tight leading-tight flex-1 break-words">
-            {convertText(title)}
-          </h1>
+    <div className="space-y-5">
+      <div className="flex flex-col gap-1 mb-5">
+        <h1 className="text-2xl font-semibold tracking-tight leading-tight flex-1 break-words">
+          {convertText(title)}
+        </h1>
 
-          <div className="flex items-center gap-2 flex-wrap text-sm">
-            {locked && (
-              <TitleIconTopic variant="destructive">
-                <Lock /> {t("closed")}
-              </TitleIconTopic>
-            )}
-
-            <span>
-              {t.rich("user_wrote_in_forum", {
-                user: () => <UserLink className="font-semibold" user={user} />,
-                forum: () => (
-                  <Link
-                    href={`/forum/${convertNameToLink({ ...forum })}`}
-                    className={badgeVariants({
-                      className: "[&>svg]:size-3"
-                    })}
-                  >
-                    <MessagesSquare /> {convertText(forum.name)}
-                  </Link>
-                )
-              })}
-            </span>
-          </div>
-        </div>
-
-        <PostTopic
-          post_id={id}
-          content={content}
-          user={user}
-          created={created}
-          disableInitialAnimation
-          customMoreMenu={
-            <ActionsTopic
-              id={id}
-              state={{ locked }}
-              permissions={permissions}
-            />
-          }
-        />
-
-        <HeaderPosts totalComments={pageInfo.totalPostsCount} />
-
-        <AnimatePresenceClient key={`topic_posts_${id}`} initial={false}>
-          {edgesPosts.length > 0 && (
-            <>
-              <ListPosts
-                id="first"
-                edges={
-                  pageInfo.totalCount <= pageInfo.limit * 2
-                    ? [...edgesPosts, ...lastEdges]
-                    : edgesPosts
-                }
-              />
-
-              {pageInfo.totalCount > pageInfo.limit * 2 && (
-                <>
-                  <LoadMorePosts
-                    totalCount={pageInfo.totalCount}
-                    initialCount={edgesPosts.length + lastEdges.length}
-                    limit={pageInfo.limit}
-                  />
-                  <ListPosts id="last" edges={lastEdges} />
-                </>
-              )}
-            </>
+        <div className="flex items-center gap-2 flex-wrap text-sm">
+          {locked && (
+            <TitleIconTopic variant="destructive">
+              <Lock /> {t("closed")}
+            </TitleIconTopic>
           )}
-        </AnimatePresenceClient>
-        {permissions.can_reply && <CreatePost className="mt-5 -mx-4 sm:mx-0" />}
+
+          <span>
+            {t.rich("user_wrote_in_forum", {
+              user: () => <UserLink className="font-semibold" user={user} />,
+              forum: () => (
+                <Link
+                  href={`/forum/${convertNameToLink({ ...forum })}`}
+                  className={badgeVariants({
+                    className: "[&>svg]:size-3"
+                  })}
+                >
+                  <MessagesSquare /> {convertText(forum.name)}
+                </Link>
+              )
+            })}
+          </span>
+        </div>
       </div>
+
+      <PostTopic
+        post_id={id}
+        content={content}
+        user={user}
+        created={created}
+        disableInitialAnimation
+        customMoreMenu={
+          <ActionsTopic id={id} state={{ locked }} permissions={permissions} />
+        }
+      />
+
+      <HeaderPosts totalComments={pageInfo.totalPostsCount} />
+
+      <AnimatePresenceClient key={`topic_posts_${id}`} initial={false}>
+        {edgesPosts.length > 0 && (
+          <>
+            <ListPosts
+              id="first"
+              edges={
+                pageInfo.totalCount <= pageInfo.limit * 2
+                  ? [...edgesPosts, ...lastEdges]
+                  : edgesPosts
+              }
+            />
+
+            {pageInfo.totalCount > pageInfo.limit * 2 && (
+              <>
+                <LoadMorePosts
+                  totalCount={pageInfo.totalCount}
+                  initialCount={edgesPosts.length + lastEdges.length}
+                  limit={pageInfo.limit}
+                />
+                <ListPosts id="last" edges={lastEdges} />
+              </>
+            )}
+          </>
+        )}
+      </AnimatePresenceClient>
+      {permissions.can_reply && <CreatePost className="mt-5 -mx-4 sm:mx-0" />}
     </div>
   );
 }

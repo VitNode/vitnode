@@ -1,16 +1,9 @@
 import { ArgsType, Field, Int } from "@nestjs/graphql";
 
+import { PaginationArgs } from "@/types/database/pagination.type";
+
 @ArgsType()
-export class ShowTopicsForumsArgs {
-  @Field(() => Int, { nullable: true })
-  cursor: number | null;
-
-  @Field(() => Int, { nullable: true })
-  first: number | null;
-
-  @Field(() => Int, { nullable: true })
-  last: number | null;
-
+export class ShowTopicsForumsArgs extends PaginationArgs {
   @Field(() => Int, { nullable: true })
   forum_id: number | null;
 

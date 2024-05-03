@@ -21,7 +21,7 @@ query Forum_topics__show(
         avatar {
           id
           dir_folder
-          name
+          file_name
         }
         group {
           id
@@ -60,7 +60,7 @@ query Forum_topics__show(
           avatar {
             id
             dir_folder
-            name
+            file_name
           }
           group {
             id
@@ -83,7 +83,7 @@ query Forum_topics__show(
           avatar {
             id
             dir_folder
-            name
+            file_name
           }
           group {
             id
@@ -112,7 +112,7 @@ query Forum_topics__show(
           avatar {
             id
             dir_folder
-            name
+            file_name
           }
           group {
             id
@@ -135,7 +135,7 @@ query Forum_topics__show(
           avatar {
             id
             dir_folder
-            name
+            file_name
           }
           group {
             id

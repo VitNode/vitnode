@@ -51,11 +51,12 @@ export const changeCodeBlock = ({ children }: Element) => {
     (element?.attribs?.class ?? "")
       .replace("language-", "")
       .replace("react", "") || "plaintext";
-  const text = (
-    element.children[0] as {
-      data: string;
-    }
-  ).data;
+  const text =
+    (
+      element.children[0] as {
+        data: string;
+      }
+    )?.data ?? "";
 
   const highlighted = lowlight.highlight(language, text);
 

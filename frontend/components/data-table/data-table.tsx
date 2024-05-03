@@ -83,7 +83,7 @@ export function DataTable<TData extends TDataMin>({
       params.set("sortBy", sorting[0].id);
       params.set("sortDirection", sorting[0].desc ? "desc" : "asc");
 
-      push(`${pathname}?${params.toString()}`);
+      push(`${pathname}?${params.toString()}`, { scroll: false });
     },
     state: {
       sorting: defaultSorting
@@ -98,7 +98,7 @@ export function DataTable<TData extends TDataMin>({
   });
 
   const enablePageSize = [10, 20, 30, 40, 50];
-  const pageSizeValue = useMemo(() => {
+  const pageSizeValue: number = useMemo(() => {
     if (enablePageSize.includes(Number(pagination.first))) {
       return Number(pagination.first);
     }
@@ -109,43 +109,6 @@ export function DataTable<TData extends TDataMin>({
 
     return defaultPageSize;
   }, [pagination, defaultPageSize]);
-
-  const changeState = ({
-    cursor,
-    nextPage,
-    pageSize
-  }: {
-    cursor?: number | null;
-    nextPage?: boolean;
-    pageSize?: string | null;
-  }) => {
-    const params = new URLSearchParams(searchParams);
-
-    if (cursor) {
-      params.set("cursor", `${cursor}`);
-    } else {
-      params.delete("cursor");
-    }
-
-    const currentDefaultPageSize = {
-      first: pagination.first ? pagination.first : `${defaultPageSize}`,
-      last: pagination.last ? pagination.last : `${defaultPageSize}`
-    };
-
-    if (
-      nextPage ||
-      (pageSize && !nextPage) ||
-      (!cursor && !nextPage && pageSize)
-    ) {
-      params.set("first", pageSize ? pageSize : currentDefaultPageSize.first);
-      params.delete("last");
-    } else {
-      params.set("last", pageSize ? pageSize : currentDefaultPageSize.last);
-      params.delete("first");
-    }
-
-    push(`${pathname}?${params.toString()}`);
-  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -221,7 +184,17 @@ export function DataTable<TData extends TDataMin>({
                 <Select
                   value={`${pageSizeValue}`}
                   onValueChange={value => {
-                    changeState({ pageSize: value });
+                    // changeState({ pageSize: value });
+
+                    const params = new URLSearchParams(searchParams.toString());
+                    if (params.has("last")) {
+                      params.set("last", value);
+                      params.delete("first");
+                    } else {
+                      params.set("first", value);
+                      params.delete("last");
+                    }
+                    push(`${pathname}?${params.toString()}`, { scroll: false });
                   }}
                 >
                   <SelectTrigger className="h-8 w-[70px]">
@@ -243,12 +216,15 @@ export function DataTable<TData extends TDataMin>({
                   size="icon"
                   disabled={!pageInfo.hasPreviousPage}
                   ariaLabel={t("pagination.previous")}
-                  onClick={() =>
-                    changeState({
-                      cursor: pageInfo.startCursor,
-                      pageSize: pagination.last
-                    })
-                  }
+                  onClick={() => {
+                    if (!pageInfo.startCursor) return;
+
+                    const params = new URLSearchParams(searchParams.toString());
+                    params.set("cursor", `${pageInfo.startCursor}`);
+                    params.set("last", `${pageSizeValue}`);
+                    params.delete("first");
+                    push(`${pathname}?${params.toString()}`, { scroll: false });
+                  }}
                 >
                   <ChevronLeftIcon className="size-4" />
                 </Button>
@@ -257,13 +233,15 @@ export function DataTable<TData extends TDataMin>({
                   size="icon"
                   ariaLabel={t("pagination.next")}
                   disabled={!pageInfo.hasNextPage}
-                  onClick={() =>
-                    changeState({
-                      cursor: pageInfo.endCursor,
-                      pageSize: pagination.first,
-                      nextPage: true
-                    })
-                  }
+                  onClick={() => {
+                    if (!pageInfo.endCursor) return;
+
+                    const params = new URLSearchParams(searchParams.toString());
+                    params.set("cursor", `${pageInfo.endCursor}`);
+                    params.set("first", `${pageSizeValue}`);
+                    params.delete("last");
+                    push(`${pathname}?${params.toString()}`, { scroll: false });
+                  }}
                 >
                   <ChevronRightIcon className="size-4" />
                 </Button>

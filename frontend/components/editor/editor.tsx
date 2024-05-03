@@ -10,8 +10,10 @@ import { ToolBarEditor } from "./toolbar/toolbar";
 import { FooterEditor } from "./footer/footer";
 import { useGlobals } from "@/hooks/core/use-globals";
 import { extensionsEditor } from "./extensions/extensions";
-import { HeadingExtensionEditor } from "./extensions/heading";
 import { EmojiExtensionEditor } from "./extensions/emoji/emoji";
+import { Skeleton } from "../ui/skeleton";
+import { useUploadFilesHandlerEditor } from "./extensions/files/hooks/use-upload-files-handler-editor.ts";
+import { EditorStateContext } from "./hooks/use-editor-state";
 
 interface Props {
   autoFocus?: boolean;
@@ -30,6 +32,10 @@ interface WithoutLanguage extends Props {
   value: string;
 }
 
+export const EditorSkeleton = ({ className }: { className?: string }) => {
+  return <Skeleton className={cn("w-full h-32", className)} />;
+};
+
 export const Editor = ({
   autoFocus,
   className,
@@ -37,6 +43,7 @@ export const Editor = ({
   onChange,
   value
 }: WithLanguage | WithoutLanguage) => {
+  const { files, uploadFiles } = useUploadFilesHandlerEditor();
   const locale = useLocale();
   const { config, defaultLanguage } = useGlobals();
   const [selectedLanguage, setSelectedLanguage] = useState(
@@ -45,14 +52,16 @@ export const Editor = ({
   const editor = useEditor({
     autofocus: autoFocus,
     extensions: [
-      ...extensionsEditor,
-      EmojiExtensionEditor,
-      HeadingExtensionEditor({ allowH1: config.editor.allow_head_h1 })
+      ...extensionsEditor({
+        allowH1: config.editor.allow_head_h1,
+        uploadFiles
+      }),
+      EmojiExtensionEditor
     ],
     editorProps: {
       attributes: {
         class: cn(
-          "min-h-32 p-4 focus:outline-none bg-card resize-y overflow-auto"
+          "min-h-32 p-4 focus:outline-none bg-card resize-y overflow-auto [&>*:not(:last-child)]:mb-[0.5rem]"
         )
       }
     },
@@ -112,15 +121,23 @@ export const Editor = ({
   if (!editor) return null;
 
   return (
-    <div className={cn("border border-input rounded-md shadow-sm", className)}>
-      <ToolBarEditor editor={editor} />
-      <EditorContent className="break-all" editor={editor} />
-      <FooterEditor
-        editor={editor}
-        disableLanguage={disableLanguage}
-        selectedLanguage={selectedLanguage}
-        setSelectedLanguage={setSelectedLanguage}
-      />
-    </div>
+    <EditorStateContext.Provider value={{ files, editor, uploadFiles }}>
+      <div
+        className={cn("border border-input rounded-md shadow-sm", className)}
+      >
+        <div className="relative">
+          <ToolBarEditor editor={editor} />
+          <EditorContent
+            className="break-all [&_.ProseMirror-selectednode]:outline-none [&_.ProseMirror-selectednode]:ring-1 [&_.ProseMirror-selectednode]:ring-ring [&_.ProseMirror-selectednode]:w-fit [&_.node-files]:inline-flex"
+            editor={editor}
+          />
+        </div>
+        <FooterEditor
+          disableLanguage={disableLanguage}
+          selectedLanguage={selectedLanguage}
+          setSelectedLanguage={setSelectedLanguage}
+        />
+      </div>
+    </EditorStateContext.Provider>
   );
 };

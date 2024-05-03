@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-import "./global.scss";
+import "./global.css";
 
 interface Props {
   children: ReactNode;

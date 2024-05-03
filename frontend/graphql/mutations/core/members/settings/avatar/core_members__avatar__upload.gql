@@ -1,11 +1,5 @@
 mutation Core_members__avatar__upload($file: Upload!) {
   core_members__avatar__upload(file: $file) {
-    dir_folder
-    extension
     id
-    mimetype
-    module_name
-    name
-    size
   }
 }

@@ -30,7 +30,10 @@ export class ShowAdminPluginsService {
       databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: { order: "ASC", key: "id", schema: core_plugins.id },
+      primaryCursor: {
+        column: "id",
+        schema: core_plugins.id
+      },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
         column: "updated"

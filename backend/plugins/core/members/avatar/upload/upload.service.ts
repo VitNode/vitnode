@@ -6,11 +6,11 @@ import { UploadAvatarCoreMembersObj } from "./dto/upload.obj";
 
 import { User } from "@/utils/decorators/user.decorator";
 import { CustomError } from "@/utils/errors/CustomError";
-import { UploadCoreFilesService } from "@/plugins/core/files/upload/upload.service";
+import { UploadCoreFilesService } from "@/plugins/core/files/helpers/upload/upload.service";
 import { DatabaseService } from "@/plugins/database/database.service";
-import { core_files_avatars } from "@/plugins/core/admin/database/schema/files";
 import { currentDate } from "@/functions/date";
-import { DeleteCoreFilesService } from "@/plugins/core/files/delete/delete.service";
+import { DeleteCoreFilesService } from "@/plugins/core/files/helpers/delete/delete.service";
+import { core_files_avatars } from "@/plugins/core/admin/database/schema/users";
 
 @Injectable()
 export class UploadAvatarCoreMembersService {
@@ -26,10 +26,9 @@ export class UploadAvatarCoreMembersService {
   ): Promise<UploadAvatarCoreMembersObj> {
     if (avatar) {
       // Check if avatar exists
-      this.deleteFile.checkIfFileExists({
-        dir_folder: avatar.dir_folder,
-        name: avatar.name
-      });
+      this.deleteFile.checkIfFileExists(
+        `${avatar.dir_folder}/${avatar.file_name}`
+      );
 
       // Delete from database
       await this.databaseService.db
@@ -37,17 +36,15 @@ export class UploadAvatarCoreMembersService {
         .where(eq(core_files_avatars.id, avatar.id));
 
       // Delete from server
-      this.deleteFile.delete({
-        dir_folder: avatar.dir_folder,
-        name: avatar.name
-      });
+      this.deleteFile.delete(avatar);
     }
 
     const uploadFiles = await this.uploadFile.upload({
       files: [file],
       maxUploadSizeBytes: 1e6, // 1MB,
       acceptMimeType: ["image/png", "image/jpeg"],
-      module_name: "avatars"
+      plugin: "core",
+      folder: "avatars"
     });
 
     const uploadFile = uploadFiles[0];
@@ -65,8 +62,7 @@ export class UploadAvatarCoreMembersService {
       .values({
         user_id: id,
         created: currentDate(),
-        ...uploadFile,
-        file_size: uploadFile.size
+        ...uploadFile
       })
       .returning();
 

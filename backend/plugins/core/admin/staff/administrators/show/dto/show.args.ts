@@ -1,12 +1,7 @@
-import {
-  ArgsType,
-  Field,
-  InputType,
-  Int,
-  registerEnumType
-} from "@nestjs/graphql";
+import { ArgsType, Field, InputType, registerEnumType } from "@nestjs/graphql";
 
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
+import { PaginationArgs } from "@/types/database/pagination.type";
 
 enum ShowAdminStaffAdministratorsSortingColumnEnum {
   updated = "updated"
@@ -26,16 +21,7 @@ class ShowAdminStaffAdministratorsSortByArgs {
 }
 
 @ArgsType()
-export class ShowAdminStaffAdministratorsArgs {
-  @Field(() => Int, { nullable: true })
-  cursor: number | null;
-
-  @Field(() => Int, { nullable: true })
-  first: number | null;
-
-  @Field(() => Int, { nullable: true })
-  last: number | null;
-
-  @Field(() => [ShowAdminStaffAdministratorsSortByArgs], { nullable: true })
-  sortBy: ShowAdminStaffAdministratorsSortByArgs[] | null;
+export class ShowAdminStaffAdministratorsArgs extends PaginationArgs {
+  @Field(() => ShowAdminStaffAdministratorsSortByArgs, { nullable: true })
+  sortBy: ShowAdminStaffAdministratorsSortByArgs | null;
 }

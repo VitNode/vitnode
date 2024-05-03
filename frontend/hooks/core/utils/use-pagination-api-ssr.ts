@@ -16,24 +16,33 @@ interface Args<T> {
   sortByEnum?: T;
 }
 
+interface ReturnValues<T> {
+  cursor: number | null;
+  first: number;
+  last: number;
+  search: string;
+  sortBy: { column: keyof T; direction: SortDirectionEnum } | null;
+}
+
 export function usePaginationAPISsr<T extends { [key: string]: unknown }>({
   defaultPageSize,
   search,
   searchParams,
   sortByEnum
-}: Args<T>) {
+}: Args<T>): ReturnValues<T> {
   const pagination = {
-    first: Number(searchParams.first ?? 0),
+    first: Number(searchParams.last ?? 0)
+      ? null
+      : Number(searchParams.first ?? 0),
     last: Number(searchParams.last ?? 0),
     cursor: Number(searchParams.cursor) ?? null,
     search: search ? searchParams.search ?? "" : "",
     sortBy: useGetSortByParamsAPI({ constEnum: sortByEnum, searchParams })
   };
-  const defaultFirst = !pagination.last ? defaultPageSize : null;
 
   return {
     ...pagination,
-    first: pagination.first ? pagination.first : defaultFirst
+    first: pagination.first ? pagination.first : defaultPageSize
   };
 }
 

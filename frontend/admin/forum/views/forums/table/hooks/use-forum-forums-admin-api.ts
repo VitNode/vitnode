@@ -72,6 +72,7 @@ export const useForumForumsAdminAPI = ({ initData }: Args) => {
                 can_all_create: false,
                 can_all_reply: false,
                 can_all_view: false,
+                can_all_download_files: false,
                 groups: []
               }
             })) ?? []

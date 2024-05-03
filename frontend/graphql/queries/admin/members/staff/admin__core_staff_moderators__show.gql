@@ -1,5 +1,5 @@
 query Admin__core_staff_moderators__show(
-  $sortBy: [ShowAdminStaffModeratorsSortByArgs!]
+  $sortBy: ShowAdminStaffModeratorsSortByArgs
   $last: Int
   $first: Int
   $cursor: Int
@@ -21,7 +21,7 @@ query Admin__core_staff_moderators__show(
           avatar {
             id
             dir_folder
-            name
+            file_name
           }
           group {
             id

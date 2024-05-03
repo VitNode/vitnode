@@ -11,17 +11,16 @@ import { Button } from "@/components/ui/button";
 import { useCreatePost } from "@/hooks/forum/posts/create/use-create-post";
 import { Editor } from "@/components/editor/editor";
 
-interface Props {
-  setOpen: (open: boolean) => void;
-}
-
-export const ContentCreatePost = ({ setOpen }: Props) => {
+export const ContentCreatePost = () => {
   const t = useTranslations("forum.topics.post");
-  const { form, onSubmit } = useCreatePost({ setOpen });
+  const { form, onSubmit } = useCreatePost();
+
+  // TODO: Add placeholder to Editor
+  // t('placeholder')
 
   return (
     <Form {...form}>
-      <form className="flex-1" onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="flex-1 min-w-0" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name="content"

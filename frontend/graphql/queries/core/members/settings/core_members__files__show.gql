@@ -1,0 +1,36 @@
+query Core_members__files__show(
+  $cursor: Int
+  $first: Int
+  $last: Int
+  $sortBy: ShowCoreFilesSortByArgs
+) {
+  core_files__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+    sortBy: $sortBy
+  ) {
+    edges {
+      created
+      dir_folder
+      extension
+      file_name
+      file_size
+      file_name_original
+      height
+      id
+      mimetype
+      width
+      file_alt
+      count_uses
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+  }
+}

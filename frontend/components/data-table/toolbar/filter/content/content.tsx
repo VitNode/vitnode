@@ -77,7 +77,7 @@ export const ContentFilterToolbarDataTable = ({
             <CommandSeparator />
             <CommandGroup>
               <CommandItem
-                onSelect={() => push(pathname)}
+                onSelect={() => push(pathname, { scroll: false })}
                 className="justify-center text-center"
               >
                 {t("clear")}

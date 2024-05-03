@@ -3,7 +3,7 @@ query Admin__core_members__show(
   $first: Int
   $last: Int
   $search: String
-  $sortBy: [ShowAdminMembersSortByArgs!]
+  $sortBy: ShowAdminMembersSortByArgs
   $groups: [Int!]
 ) {
   admin__core_members__show(
@@ -27,7 +27,7 @@ query Admin__core_members__show(
       avatar {
         id
         dir_folder
-        name
+        file_name
       }
       email
       id

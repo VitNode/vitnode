@@ -132,6 +132,14 @@
           "skin_5": "Dark"
         }
       },
+      "files": {
+        "attach": "Attach Files",
+        "state": {
+          "loading": "Uploading...",
+          "error": "Oops! Something went wrong. {error}"
+        },
+        "insert": "Insert"
+      },
 
       "remove_formatting": "Remove Formatting"
     },
@@ -271,6 +279,16 @@
       "notifications": {
         "title": "Notifications",
         "desc": "Configure how you receive notifications."
+      },
+      "files": {
+        "title": "My Files",
+        "desc": "Manage your files.",
+        "search": "Search files by name...",
+        "temp_file": "Temporary File will be deleted soon",
+        "table": {
+          "file_size": "File Size",
+          "count_uses": "Count Uses"
+        }
       }
     },
     "errors": {

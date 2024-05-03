@@ -40,11 +40,13 @@ query Admin__forum_forums__show($first: Int, $cursor: Int, $parentId: Int) {
         can_all_read
         can_all_reply
         can_all_view
+        can_all_download_files
         groups {
           can_create
           can_read
           can_reply
           can_view
+          can_download_files
           id
         }
       }

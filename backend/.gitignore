@@ -36,7 +36,9 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 # Static files
-public/*
-!public/index.html
+uploads/*
+!uploads/index.html
 temp/*
 !temp/index.html
+public/*
+!public/index.html

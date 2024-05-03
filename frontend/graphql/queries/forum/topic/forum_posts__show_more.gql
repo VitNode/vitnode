@@ -22,7 +22,7 @@ query Forum_posts__show_more(
           avatar {
             id
             dir_folder
-            name
+            file_name
           }
           group {
             id
@@ -45,7 +45,7 @@ query Forum_posts__show_more(
           avatar {
             id
             dir_folder
-            name
+            file_name
           }
           group {
             id

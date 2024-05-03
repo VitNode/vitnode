@@ -33,6 +33,7 @@ export const MetaTagTopic = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 50 }}
       className="ml-2.5 flex gap-4 items-center"
+      layout
     >
       <div
         className={cn(

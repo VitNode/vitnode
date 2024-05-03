@@ -2,7 +2,7 @@ query Admin_core_themes__show(
   $cursor: Int
   $first: Int
   $last: Int
-  $sortBy: [ShowAdminThemesSortByArgs!]
+  $sortBy: ShowAdminThemesSortByArgs
 ) {
   admin__core_themes__show(
     cursor: $cursor

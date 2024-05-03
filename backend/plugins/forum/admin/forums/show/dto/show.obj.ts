@@ -4,7 +4,7 @@ import { ShowForumForumsWithChildren } from "../../../../forums/show/dto/show.ob
 import { PageInfo } from "@/types/database/pagination.type";
 
 @ObjectType()
-class GroupsPermissionsForumForums {
+export class GroupsPermissionsForumForums {
   @Field(() => Int)
   id: number;
 
@@ -19,6 +19,9 @@ class GroupsPermissionsForumForums {
 
   @Field(() => Boolean)
   can_reply: boolean;
+
+  @Field(() => Boolean)
+  can_download_files: boolean;
 }
 
 @ObjectType()
@@ -34,6 +37,9 @@ export class PermissionsForumForumsAdmin {
 
   @Field(() => Boolean)
   can_all_reply: boolean;
+
+  @Field(() => Boolean)
+  can_all_download_files: boolean;
 
   @Field(() => [GroupsPermissionsForumForums])
   groups: GroupsPermissionsForumForums[];

@@ -40,7 +40,7 @@ query Forum_forums__show($lastPostsArgs: LastPostsShowForumForumsArgs) {
               avatar {
                 dir_folder
                 id
-                name
+                file_name
               }
               avatar_color
               group {

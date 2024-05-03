@@ -32,6 +32,7 @@ export const PostTopic = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 50 }}
       className="rounded-lg border bg-card text-card-foreground shadow-sm"
+      layout
     >
       <div className="p-4 pb-0 flex gap-4 items-center">
         <div className="flex-1 flex gap-2 items-center">

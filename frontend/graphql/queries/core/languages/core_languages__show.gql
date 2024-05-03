@@ -3,7 +3,7 @@ query Core_languages__show(
   $last: Int
   $cursor: Int
   $search: String
-  $sortBy: [ShowCoreLanguagesSortByArgs!]
+  $sortBy: ShowCoreLanguagesSortByArgs
 ) {
   core_languages__show(
     first: $first

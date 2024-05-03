@@ -98,12 +98,12 @@ export class CreateDatabaseAdminInstallService {
 
     await this.databaseService.db.insert(core_groups_names).values([
       {
-        group_id: guestGroup[0].id,
+        item_id: guestGroup[0].id,
         language_code: "en",
         value: "Guest"
       },
       {
-        group_id: guestGroup[0].id,
+        item_id: guestGroup[0].id,
         language_code: "pl",
         value: "Gość"
       }
@@ -119,12 +119,12 @@ export class CreateDatabaseAdminInstallService {
 
     await this.databaseService.db.insert(core_groups_names).values([
       {
-        group_id: memberGroup[0].id,
+        item_id: memberGroup[0].id,
         language_code: "en",
         value: "Member"
       },
       {
-        group_id: memberGroup[0].id,
+        item_id: memberGroup[0].id,
         language_code: "pl",
         value: "Użytkownik"
       }
@@ -139,12 +139,12 @@ export class CreateDatabaseAdminInstallService {
 
     await this.databaseService.db.insert(core_groups_names).values([
       {
-        group_id: moderatorGroup[0].id,
+        item_id: moderatorGroup[0].id,
         language_code: "en",
         value: "Moderator"
       },
       {
-        group_id: moderatorGroup[0].id,
+        item_id: moderatorGroup[0].id,
         language_code: "pl",
         value: "Moderator"
       }
@@ -166,12 +166,12 @@ export class CreateDatabaseAdminInstallService {
 
     await this.databaseService.db.insert(core_groups_names).values([
       {
-        group_id: adminGroup[0].id,
+        item_id: adminGroup[0].id,
         language_code: "en",
         value: "Administrator"
       },
       {
-        group_id: adminGroup[0].id,
+        item_id: adminGroup[0].id,
         language_code: "pl",
         value: "Administrator"
       }
@@ -205,17 +205,17 @@ export class CreateDatabaseAdminInstallService {
 
     await this.databaseService.db.insert(core_nav_name).values([
       {
-        nav_id: nav[0].id,
+        item_id: nav[0].id,
         language_code: "en",
         value: "Home"
       },
       {
-        nav_id: nav[0].id,
+        item_id: nav[0].id,
         language_code: "pl",
         value: "Strona główna"
       },
       {
-        nav_id: nav[1].id,
+        item_id: nav[1].id,
         language_code: "en",
         value: "VitNode"
       }
