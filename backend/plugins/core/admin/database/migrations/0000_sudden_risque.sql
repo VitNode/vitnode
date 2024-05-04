@@ -33,8 +33,10 @@ CREATE TABLE IF NOT EXISTS "core_files" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "core_files_using" (
+	"id" serial PRIMARY KEY NOT NULL,
 	"file_id" integer NOT NULL,
-	"plugin" varchar(255) NOT NULL
+	"plugin" varchar(255) NOT NULL,
+	"folder" varchar(255) NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "core_groups" (

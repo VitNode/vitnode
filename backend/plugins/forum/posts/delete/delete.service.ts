@@ -2,16 +2,23 @@ import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
 
 import { User } from "@/utils/decorators/user.decorator";
-import { forum_posts } from "@/plugins/forum/admin/database/schema/posts";
+import {
+  forum_posts,
+  forum_posts_content
+} from "@/plugins/forum/admin/database/schema/posts";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
 import { DeletePostsForumsArgs } from "@/plugins/forum/posts/delete/dto/delete.args";
 import { DatabaseService } from "@/plugins/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { CustomError } from "@/utils/errors/CustomError";
+import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
 
 @Injectable()
 export class DeleteForumsPostsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private parserTextLang: ParserTextLanguageCoreHelpersService
+  ) {}
 
   async delete(user: User, { id }: DeletePostsForumsArgs): Promise<string> {
     const post = await this.databaseService.db.query.forum_posts.findFirst({
@@ -35,6 +42,11 @@ export class DeleteForumsPostsService {
         message: "You can't delete the first post of a topic"
       });
     }
+
+    await this.parserTextLang.delete({
+      database: forum_posts_content,
+      item_id: post.id
+    });
 
     await this.databaseService.db
       .delete(forum_posts)

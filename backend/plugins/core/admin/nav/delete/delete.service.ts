@@ -5,11 +5,19 @@ import { DeleteAdminNavArgs } from "./dto/delete.args";
 
 import { DatabaseService } from "@/plugins/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
-import { core_nav } from "../../database/schema/nav";
+import {
+  core_nav,
+  core_nav_description,
+  core_nav_name
+} from "../../database/schema/nav";
+import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
 
 @Injectable()
 export class DeleteAdminNavService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private parserTextLang: ParserTextLanguageCoreHelpersService
+  ) {}
 
   async delete({ id }: DeleteAdminNavArgs): Promise<string> {
     const nav = await this.databaseService.db.query.core_nav.findFirst({
@@ -25,6 +33,16 @@ export class DeleteAdminNavService {
       .update(core_nav)
       .set({ parent_id: 0 })
       .where(eq(core_nav.parent_id, id));
+
+    await this.parserTextLang.delete({
+      database: core_nav_name,
+      item_id: id
+    });
+
+    await this.parserTextLang.delete({
+      database: core_nav_description,
+      item_id: id
+    });
 
     // Delete nav
     await this.databaseService.db.delete(core_nav).where(eq(core_nav.id, id));
