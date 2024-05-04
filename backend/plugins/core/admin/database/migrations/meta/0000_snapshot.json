@@ -1,5 +1,5 @@
 {
-  "id": "7a3f4013-61be-4b25-ae49-d08c5cc9120e",
+  "id": "a747c350-9b9b-4831-899d-0cdedbedcefd",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -300,6 +300,12 @@
       "name": "core_files_using",
       "schema": "",
       "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
         "file_id": {
           "name": "file_id",
           "type": "integer",
@@ -308,6 +314,12 @@
         },
         "plugin": {
           "name": "plugin",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "folder": {
+          "name": "folder",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true

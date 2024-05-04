@@ -25,48 +25,8 @@ interface ReturnValues extends TextLanguageInput {
 
 @Injectable()
 export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLanguageCoreHelpersService {
-  constructor(private databaseService: DatabaseService) {
-    super();
-  }
-
-  private state: InfoFromTextLanguageContentReturnValues = {
-    fileIds: []
-  };
-
-  async parseFiles({
-    fileIds,
-    oldFileIds
-  }: {
-    fileIds: InfoFromTextLanguageContentReturnValues["fileIds"];
-    oldFileIds: InfoFromTextLanguageContentReturnValues["fileIds"];
-  }) {
-    await Promise.all(
-      fileIds.map(async id => {
-        if (this.state.fileIds.includes(id)) return;
-
-        this.state.fileIds.push(id);
-
-        if (oldFileIds.includes(id)) return;
-
-        await this.databaseService.db.insert(core_files_using).values({
-          file_id: id,
-          plugin: "core",
-          folder: "text-language"
-        });
-      })
-    );
-
-    // Delete remaining files
-    await Promise.all(
-      oldFileIds.map(async id => {
-        const exist = this.state.fileIds.find(fileId => fileId === id);
-        if (exist) return;
-
-        await this.databaseService.db
-          .delete(core_files_using)
-          .where(eq(core_files_using.file_id, id));
-      })
-    );
+  constructor(databaseService: DatabaseService) {
+    super(databaseService);
   }
 
   protected async contentParser({
@@ -182,5 +142,37 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
     };
 
     return updateData;
+  }
+
+  async delete<T extends TableConfig>({
+    database,
+    item_id
+  }: Omit<Args<T>, "data">) {
+    ["language_code", "value", "item_id"].forEach(key => {
+      if (!database[key]) {
+        throw new CustomError({
+          code: "DATABASE_COLUMN_NOT_FOUND",
+          message: `Column ${key} not found in database`
+        });
+      }
+    });
+
+    const oldData: ReturnValues[] = (await this.databaseService.db
+      .select({
+        id: database.id,
+        language_code: database.language_code,
+        value: database.value
+      })
+      .from(database)
+      .where(eq(database.item_id, item_id))) as unknown as ReturnValues[];
+
+    const infoOldData: InfoFromTextLanguageContentReturnValues[] = oldData.map(
+      item => this.getInfoFromContent({ content: item.value })
+    );
+
+    await this.contentParser({
+      content: "",
+      infoOldData
+    });
   }
 }

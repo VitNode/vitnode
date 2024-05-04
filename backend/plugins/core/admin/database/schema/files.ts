@@ -49,6 +49,7 @@ export const core_files_relations = relations(core_files, ({ many, one }) => ({
 export const core_files_using = pgTable(
   "core_files_using",
   {
+    id: serial("id").primaryKey(),
     file_id: integer("file_id")
       .notNull()
       .references(() => core_files.id),
