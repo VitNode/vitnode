@@ -14,20 +14,14 @@ if (
   });
 }
 
-const envs = {
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  name: process.env.DB_NAME
+export const DATABASE_ENVS = {
+  host: process.env.DB_HOST ?? "localhost",
+  port: process.env.DB_PORT ? +process.env.DB_PORT : 5432,
+  user: process.env.DB_USER ?? "root",
+  password: process.env.DB_PASSWORD ?? "root",
+  database: process.env.DB_DATABASE ?? "vitnode"
 };
 
-export const poolDB = new Pool({
-  host: envs.host ?? "localhost",
-  port: envs.port ? +envs.port : 5432,
-  user: envs.user ?? "root",
-  password: envs.password ?? "root",
-  database: envs.name ?? "vitnode"
-});
+export const poolDB = new Pool(DATABASE_ENVS);
 
 export const db = drizzle(poolDB, { schema: schemaDatabase });

@@ -1,10 +1,10 @@
 {
-  "id": "70cd07de-9c2f-43b5-9717-fdcf43df5072",
+  "id": "93949e0e-20f6-414b-949e-06c8d667389e",
   "prevId": "00000000-0000-0000-0000-000000000000",
-  "version": "5",
-  "dialect": "pg",
+  "version": "6",
+  "dialect": "postgresql",
   "tables": {
-    "forum_forums": {
+    "public.forum_forums": {
       "name": "forum_forums",
       "schema": "",
       "columns": {
@@ -84,7 +84,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "forum_forums_description": {
+    "public.forum_forums_description": {
       "name": "forum_forums_description",
       "schema": "",
       "columns": {
@@ -160,7 +160,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "forum_forums_name": {
+    "public.forum_forums_name": {
       "name": "forum_forums_name",
       "schema": "",
       "columns": {
@@ -236,7 +236,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "forum_forums_permissions": {
+    "public.forum_forums_permissions": {
       "name": "forum_forums_permissions",
       "schema": "",
       "columns": {
@@ -341,7 +341,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "forum_posts": {
+    "public.forum_posts": {
       "name": "forum_posts",
       "schema": "",
       "columns": {
@@ -431,7 +431,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "forum_posts_content": {
+    "public.forum_posts_content": {
       "name": "forum_posts_content",
       "schema": "",
       "columns": {
@@ -507,7 +507,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "forum_topics": {
+    "public.forum_topics": {
       "name": "forum_topics",
       "schema": "",
       "columns": {
@@ -571,7 +571,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "forum_topics_logs": {
+    "public.forum_topics_logs": {
       "name": "forum_topics_logs",
       "schema": "",
       "columns": {
@@ -603,6 +603,7 @@
         "action": {
           "name": "action",
           "type": "actions",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
         },
@@ -660,7 +661,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "forum_topics_titles": {
+    "public.forum_topics_titles": {
       "name": "forum_topics_titles",
       "schema": "",
       "columns": {
@@ -738,12 +739,13 @@
     }
   },
   "enums": {
-    "actions": {
+    "public.actions": {
       "name": "actions",
-      "values": {
-        "lock": "lock",
-        "unlock": "unlock"
-      }
+      "schema": "public",
+      "values": [
+        "lock",
+        "unlock"
+      ]
     }
   },
   "schemas": {},

@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME:-vitnode}
+      POSTGRES_DB: ${DB_DATABASE:-vitnode}
     ports:
       - "${DB_PORT:-5432}:${DB_PORT:-5432}"
     restart: on-failure
@@ -26,7 +26,7 @@ services:
       - DB_PORT=${DB_PORT:-5432}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
-      - DB_NAME=${DB_NAME:-vitnode}
+      - DB_DATABASE=${DB_DATABASE:-vitnode}
       - LOGIN_TOKEN_SECRET=${LOGIN_TOKEN_SECRET}
       - NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL}
     restart: on-failure

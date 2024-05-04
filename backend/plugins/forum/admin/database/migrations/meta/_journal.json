@@ -1,12 +1,12 @@
 {
-  "version": "5",
-  "dialect": "pg",
+  "version": "6",
+  "dialect": "postgresql",
   "entries": [
     {
       "idx": 0,
-      "version": "5",
-      "when": 1714822298241,
-      "tag": "0000_careless_kabuki",
+      "version": "6",
+      "when": 1714826340173,
+      "tag": "0000_polite_overlord",
       "breakpoints": true
     }
   ]

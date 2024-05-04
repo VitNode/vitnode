@@ -1,7 +1,8 @@
-import { core_files_using } from "@/plugins/core/admin/database/schema/files";
-import { DatabaseService } from "@/plugins/database/database.service";
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
+
+import { core_files_using } from "@/plugins/core/admin/database/schema/files";
+import { DatabaseService } from "@/plugins/database/database.service";
 
 interface TextLanguageJSONContentType {
   type: string;

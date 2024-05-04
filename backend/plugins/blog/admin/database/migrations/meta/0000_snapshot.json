@@ -1,10 +1,10 @@
 {
-  "id": "b030bb66-7389-484b-be9b-834fa780aed4",
+  "id": "5ecab02e-94e6-4828-823d-2e1950fa12fa",
   "prevId": "00000000-0000-0000-0000-000000000000",
-  "version": "5",
-  "dialect": "pg",
+  "version": "6",
+  "dialect": "postgresql",
   "tables": {
-    "blog_articles": {
+    "public.blog_articles": {
       "name": "blog_articles",
       "schema": "",
       "columns": {
@@ -94,7 +94,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "blog_articles_content": {
+    "public.blog_articles_content": {
       "name": "blog_articles_content",
       "schema": "",
       "columns": {
@@ -170,7 +170,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "blog_articles_title": {
+    "public.blog_articles_title": {
       "name": "blog_articles_title",
       "schema": "",
       "columns": {
@@ -246,7 +246,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "blog_categories": {
+    "public.blog_categories": {
       "name": "blog_categories",
       "schema": "",
       "columns": {
@@ -283,7 +283,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "blog_categories_description": {
+    "public.blog_categories_description": {
       "name": "blog_categories_description",
       "schema": "",
       "columns": {
@@ -344,7 +344,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "blog_categories_name": {
+    "public.blog_categories_name": {
       "name": "blog_categories_name",
       "schema": "",
       "columns": {

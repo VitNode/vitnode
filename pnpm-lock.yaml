@@ -175,8 +175,8 @@ importers:
         specifier: ^16.4.5
         version: 16.4.5
       drizzle-kit:
-        specifier: ^0.20.17
-        version: 0.20.17
+        specifier: 0.20.17-e38e63d
+        version: 0.20.17-e38e63d
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
@@ -5139,6 +5139,10 @@ packages:
     resolution: {integrity: sha512-k4MGaQl5TGo/iipqb2UDG2UwjXziSWkh0uysQelTlJpX1qGlpUZYm8PnO4DxG1qBomtJUdYJ6qR6xdIah10JLg==}
     dev: true
 
+  /@types/json-diff@1.0.3:
+    resolution: {integrity: sha512-Qvxm8fpRMv/1zZR3sQWImeRK2mBYJji20xF51Fq9Gt//Ed18u0x6/FNLogLS1xhfUWTEmDyqveJqn95ltB6Kvw==}
+    dev: true
+
   /@types/json-schema@7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
     dev: true
@@ -7107,13 +7111,14 @@ packages:
       wordwrap: 1.0.0
     dev: true
 
-  /drizzle-kit@0.20.17:
-    resolution: {integrity: sha512-mLVDS4nXmO09wFVlzGrdshWnAL+U9eQGC5zRs6hTN6Q9arwQGWU2XnZ17I8BM8Quau8CQRx3Ms6VPgRWJFVp7Q==}
+  /drizzle-kit@0.20.17-e38e63d:
+    resolution: {integrity: sha512-6EB/Xs95R34Jj5Lz+8h5YwWYIoo2HUkY/puTGAJd8N5GTy1ICocefFM0rWE5je8V6GxlzJw1t8qPAvsry29zOw==}
     hasBin: true
     dependencies:
       '@esbuild-kit/esm-loader': 2.6.5
       '@hono/node-server': 1.11.1
       '@hono/zod-validator': 0.2.1(hono@4.2.9)(zod@3.23.5)
+      '@types/json-diff': 1.0.3
       camelcase: 7.0.1
       chalk: 5.3.0
       commander: 9.5.0
@@ -7125,11 +7130,15 @@ packages:
       hono: 4.2.9
       json-diff: 0.9.0
       minimatch: 7.4.6
+      pluralize: 8.0.0
       semver: 7.6.0
       superjson: 2.2.1
+      ws: 8.17.0
       zod: 3.23.5
     transitivePeerDependencies:
+      - bufferutil
       - supports-color
+      - utf-8-validate
     dev: true
 
   /drizzle-orm@0.30.9(@types/pg@8.11.5)(pg@8.11.5):
