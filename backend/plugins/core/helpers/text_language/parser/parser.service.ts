@@ -10,7 +10,6 @@ import {
 import { DatabaseService } from "@/plugins/database/database.service";
 import { TextLanguageInput } from "@/types/database/text-language.type";
 import { CustomError } from "@/utils/errors/CustomError";
-import { core_files_using } from "@/plugins/core/admin/database/schema/files";
 
 interface Args<T extends TableConfig> {
   data: TextLanguageInput[];

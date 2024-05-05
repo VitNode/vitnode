@@ -197,6 +197,120 @@ CREATE TABLE IF NOT EXISTS "core_users" (
 	CONSTRAINT "core_users_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_admin_permissions" ADD CONSTRAINT "core_admin_permissions_group_id_core_groups_id_fk" FOREIGN KEY ("group_id") REFERENCES "public"."core_groups"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_admin_permissions" ADD CONSTRAINT "core_admin_permissions_user_id_core_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."core_users"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_admin_sessions" ADD CONSTRAINT "core_admin_sessions_user_id_core_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."core_users"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_admin_sessions" ADD CONSTRAINT "core_admin_sessions_device_id_core_sessions_known_devices_id_fk" FOREIGN KEY ("device_id") REFERENCES "public"."core_sessions_known_devices"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_files" ADD CONSTRAINT "core_files_user_id_core_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."core_users"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_files_using" ADD CONSTRAINT "core_files_using_file_id_core_files_id_fk" FOREIGN KEY ("file_id") REFERENCES "public"."core_files"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_groups_names" ADD CONSTRAINT "core_groups_names_item_id_core_groups_id_fk" FOREIGN KEY ("item_id") REFERENCES "public"."core_groups"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_groups_names" ADD CONSTRAINT "core_groups_names_language_code_core_languages_code_fk" FOREIGN KEY ("language_code") REFERENCES "public"."core_languages"("code") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_moderators_permissions" ADD CONSTRAINT "core_moderators_permissions_group_id_core_groups_id_fk" FOREIGN KEY ("group_id") REFERENCES "public"."core_groups"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_moderators_permissions" ADD CONSTRAINT "core_moderators_permissions_user_id_core_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."core_users"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_nav_description" ADD CONSTRAINT "core_nav_description_item_id_core_nav_id_fk" FOREIGN KEY ("item_id") REFERENCES "public"."core_nav"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_nav_description" ADD CONSTRAINT "core_nav_description_language_code_core_languages_code_fk" FOREIGN KEY ("language_code") REFERENCES "public"."core_languages"("code") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_nav_name" ADD CONSTRAINT "core_nav_name_item_id_core_nav_id_fk" FOREIGN KEY ("item_id") REFERENCES "public"."core_nav"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_nav_name" ADD CONSTRAINT "core_nav_name_language_code_core_languages_code_fk" FOREIGN KEY ("language_code") REFERENCES "public"."core_languages"("code") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_plugins_nav" ADD CONSTRAINT "core_plugins_nav_plugin_id_core_plugins_id_fk" FOREIGN KEY ("plugin_id") REFERENCES "public"."core_plugins"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_sessions" ADD CONSTRAINT "core_sessions_user_id_core_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."core_users"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_sessions" ADD CONSTRAINT "core_sessions_device_id_core_sessions_known_devices_id_fk" FOREIGN KEY ("device_id") REFERENCES "public"."core_sessions_known_devices"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_files_avatars" ADD CONSTRAINT "core_files_avatars_user_id_core_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."core_users"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "core_users" ADD CONSTRAINT "core_users_group_id_core_groups_id_fk" FOREIGN KEY ("group_id") REFERENCES "public"."core_groups"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_admin_permissions_group_id_idx" ON "core_admin_permissions" ("group_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_admin_permissions_user_id_idx" ON "core_admin_permissions" ("user_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_admin_sessions_login_token_idx" ON "core_admin_sessions" ("login_token");--> statement-breakpoint
@@ -220,117 +334,4 @@ CREATE INDEX IF NOT EXISTS "core_plugins__nav_plugin_id_idx" ON "core_plugins_na
 CREATE INDEX IF NOT EXISTS "core_sessions_user_id_idx" ON "core_sessions" ("user_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_users_name_seo_idx" ON "core_users" ("name_seo");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_users_name_idx" ON "core_users" ("name");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_users_email_idx" ON "core_users" ("email");--> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_admin_permissions" ADD CONSTRAINT "core_admin_permissions_group_id_core_groups_id_fk" FOREIGN KEY ("group_id") REFERENCES "core_groups"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_admin_permissions" ADD CONSTRAINT "core_admin_permissions_user_id_core_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "core_users"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_admin_sessions" ADD CONSTRAINT "core_admin_sessions_user_id_core_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "core_users"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_admin_sessions" ADD CONSTRAINT "core_admin_sessions_device_id_core_sessions_known_devices_id_fk" FOREIGN KEY ("device_id") REFERENCES "core_sessions_known_devices"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_files" ADD CONSTRAINT "core_files_user_id_core_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "core_users"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_files_using" ADD CONSTRAINT "core_files_using_file_id_core_files_id_fk" FOREIGN KEY ("file_id") REFERENCES "core_files"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_groups_names" ADD CONSTRAINT "core_groups_names_item_id_core_groups_id_fk" FOREIGN KEY ("item_id") REFERENCES "core_groups"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_groups_names" ADD CONSTRAINT "core_groups_names_language_code_core_languages_code_fk" FOREIGN KEY ("language_code") REFERENCES "core_languages"("code") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_moderators_permissions" ADD CONSTRAINT "core_moderators_permissions_group_id_core_groups_id_fk" FOREIGN KEY ("group_id") REFERENCES "core_groups"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_moderators_permissions" ADD CONSTRAINT "core_moderators_permissions_user_id_core_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "core_users"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_nav_description" ADD CONSTRAINT "core_nav_description_item_id_core_nav_id_fk" FOREIGN KEY ("item_id") REFERENCES "core_nav"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_nav_description" ADD CONSTRAINT "core_nav_description_language_code_core_languages_code_fk" FOREIGN KEY ("language_code") REFERENCES "core_languages"("code") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_nav_name" ADD CONSTRAINT "core_nav_name_item_id_core_nav_id_fk" FOREIGN KEY ("item_id") REFERENCES "core_nav"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_nav_name" ADD CONSTRAINT "core_nav_name_language_code_core_languages_code_fk" FOREIGN KEY ("language_code") REFERENCES "core_languages"("code") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_plugins_nav" ADD CONSTRAINT "core_plugins_nav_plugin_id_core_plugins_id_fk" FOREIGN KEY ("plugin_id") REFERENCES "core_plugins"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_sessions" ADD CONSTRAINT "core_sessions_user_id_core_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "core_users"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_sessions" ADD CONSTRAINT "core_sessions_device_id_core_sessions_known_devices_id_fk" FOREIGN KEY ("device_id") REFERENCES "core_sessions_known_devices"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_files_avatars" ADD CONSTRAINT "core_files_avatars_user_id_core_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "core_users"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "core_users" ADD CONSTRAINT "core_users_group_id_core_groups_id_fk" FOREIGN KEY ("group_id") REFERENCES "core_groups"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
+CREATE INDEX IF NOT EXISTS "core_users_email_idx" ON "core_users" ("email");

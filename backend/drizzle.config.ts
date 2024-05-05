@@ -1,16 +1,9 @@
-import type { Config } from "drizzle-kit";
+import { defineConfig } from "drizzle-kit";
 
-export const drizzleEnvs = {
-  host: process.env.DB_HOST ?? "localhost",
-  port: process.env.DB_PORT ? +process.env.DB_PORT : 5432,
-  user: process.env.DB_USER ?? "root",
-  password: process.env.DB_PASSWORD ?? "root",
-  database: process.env.DB_NAME ?? "vitnode"
-};
+import { DATABASE_ENVS } from "./plugins/database/client";
 
-export default {
-  schema: "./plugins/**/database/schema/*.ts",
-  out: "./drizzle",
-  driver: "pg",
-  dbCredentials: drizzleEnvs
-} satisfies Config;
+export default defineConfig({
+  dialect: "postgresql",
+  dbCredentials: DATABASE_ENVS,
+  schema: "./plugins/**/database/schema/*.ts"
+});

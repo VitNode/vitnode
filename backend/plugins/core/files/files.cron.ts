@@ -25,7 +25,8 @@ export class CoreFilesCron {
         core_files.id,
         core_files_using.file_id,
         core_files_using.plugin,
-        core_files_using.folder
+        core_files_using.folder,
+        core_files_using.id
       )
       .orderBy(desc(core_files.created))
       .having(sql`count(${core_files_using.file_id}) = 0`);

@@ -194,7 +194,7 @@ export class DownloadAdminPluginsService {
 
     try {
       await execShellCommand(
-        `npx drizzle-kit generate:pg --out plugins/${code}/admin/database/migrations --schema plugins/${code}/admin/database/schema/*.ts`
+        `npx drizzle-kit generate --out --config plugins/${code}/admin/database/drizzle.config.ts`
       );
     } catch (err) {
       throw new CustomError({

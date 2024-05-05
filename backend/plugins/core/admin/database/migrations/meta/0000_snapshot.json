@@ -1,10 +1,10 @@
 {
-  "id": "a747c350-9b9b-4831-899d-0cdedbedcefd",
+  "id": "424a9323-41cd-4ace-972d-f5c61d22975d",
   "prevId": "00000000-0000-0000-0000-000000000000",
-  "version": "5",
-  "dialect": "pg",
+  "version": "6",
+  "dialect": "postgresql",
   "tables": {
-    "core_admin_permissions": {
+    "public.core_admin_permissions": {
       "name": "core_admin_permissions",
       "schema": "",
       "columns": {
@@ -102,7 +102,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "core_admin_sessions": {
+    "public.core_admin_sessions": {
       "name": "core_admin_sessions",
       "schema": "",
       "columns": {
@@ -185,7 +185,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "core_files": {
+    "public.core_files": {
       "name": "core_files",
       "schema": "",
       "columns": {
@@ -296,7 +296,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "core_files_using": {
+    "public.core_files_using": {
       "name": "core_files_using",
       "schema": "",
       "columns": {
@@ -352,7 +352,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "core_groups": {
+    "public.core_groups": {
       "name": "core_groups",
       "schema": "",
       "columns": {
@@ -410,7 +410,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "core_groups_names": {
+    "public.core_groups_names": {
       "name": "core_groups_names",
       "schema": "",
       "columns": {
@@ -486,7 +486,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "core_languages": {
+    "public.core_languages": {
       "name": "core_languages",
       "schema": "",
       "columns": {
@@ -607,7 +607,7 @@
         }
       }
     },
-    "core_moderators_permissions": {
+    "public.core_moderators_permissions": {
       "name": "core_moderators_permissions",
       "schema": "",
       "columns": {
@@ -705,7 +705,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "core_nav": {
+    "public.core_nav": {
       "name": "core_nav",
       "schema": "",
       "columns": {
@@ -762,7 +762,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "core_nav_description": {
+    "public.core_nav_description": {
       "name": "core_nav_description",
       "schema": "",
       "columns": {
@@ -838,7 +838,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "core_nav_name": {
+    "public.core_nav_name": {
       "name": "core_nav_name",
       "schema": "",
       "columns": {
@@ -914,7 +914,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "core_plugins": {
+    "public.core_plugins": {
       "name": "core_plugins",
       "schema": "",
       "columns": {
@@ -1028,7 +1028,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "core_plugins_nav": {
+    "public.core_plugins_nav": {
       "name": "core_plugins_nav",
       "schema": "",
       "columns": {
@@ -1105,7 +1105,7 @@
         }
       }
     },
-    "core_sessions": {
+    "public.core_sessions": {
       "name": "core_sessions",
       "schema": "",
       "columns": {
@@ -1181,7 +1181,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "core_sessions_known_devices": {
+    "public.core_sessions_known_devices": {
       "name": "core_sessions_known_devices",
       "schema": "",
       "columns": {
@@ -1246,7 +1246,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "core_themes": {
+    "public.core_themes": {
       "name": "core_themes",
       "schema": "",
       "columns": {
@@ -1326,7 +1326,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "core_files_avatars": {
+    "public.core_files_avatars": {
       "name": "core_files_avatars",
       "schema": "",
       "columns": {
@@ -1398,7 +1398,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "core_users": {
+    "public.core_users": {
       "name": "core_users",
       "schema": "",
       "columns": {
