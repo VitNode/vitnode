@@ -43,7 +43,7 @@ export const Editor = ({
   onChange,
   value
 }: WithLanguage | WithoutLanguage) => {
-  const { files, uploadFiles } = useUploadFilesHandlerEditor();
+  const { files, uploadFiles } = useUploadFilesHandlerEditor({ value });
   const locale = useLocale();
   const { config, defaultLanguage } = useGlobals();
   const [selectedLanguage, setSelectedLanguage] = useState(

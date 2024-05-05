@@ -36,11 +36,11 @@ declare module "@tiptap/react" {
 }
 
 export interface FileStateEditor {
-  file: File;
   id: number;
   isLoading: boolean;
   data?: Core_Editor_Files__UploadMutation["core_editor_files__upload"];
   error?: string;
+  file?: File;
 }
 
 export interface FilesHandlerArgs {

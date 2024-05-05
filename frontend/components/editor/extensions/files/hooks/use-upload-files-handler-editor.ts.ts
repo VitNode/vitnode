@@ -5,14 +5,22 @@ import { toast } from "sonner";
 import type { FileStateEditor } from "../files";
 import { uploadMutationApi } from "./upload-mutation-api";
 import type { ErrorType } from "@/graphql/fetcher";
+import type { TextLanguage } from "@/graphql/hooks";
+import { getFilesFromContent } from "@/components/editor/extensions/files/hooks/functions";
 
 export interface UploadFilesHandlerArgs {
   files: FileStateEditor[];
   finishUpload?: (file: FileStateEditor) => void;
 }
 
-export const useUploadFilesHandlerEditor = () => {
-  const [files, setFiles] = useState<FileStateEditor[]>([]);
+interface Args {
+  value: string | TextLanguage[];
+}
+
+export const useUploadFilesHandlerEditor = ({ value }: Args) => {
+  const [files, setFiles] = useState<FileStateEditor[]>(
+    Array.isArray(value) ? getFilesFromContent(value) : []
+  );
   const t = useTranslations("core");
 
   const handleUpload = async ({
@@ -23,6 +31,7 @@ export const useUploadFilesHandlerEditor = () => {
     finishUpload?: (file: FileStateEditor) => void;
   }) => {
     const formData = new FormData();
+    if (!data.file) return;
     formData.append("file", data.file);
     formData.append("plugin", "core");
     formData.append("folder", "testing");
