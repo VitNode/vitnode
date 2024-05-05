@@ -3,7 +3,7 @@
   "author": "Maciej Piotr (aXenDev) Balcerzak",
   "license": "GPL-3.0 license",
   "scripts": {
-    "db": "drizzle-kit push:pg",
+    "db": "drizzle-kit push",
     "config:init": "ts-node ./functions/config/generate-config-file.ts",
     "config:finish": "ts-node ./functions/config/finish-build-config-file.ts",
     "migrate:forum": "drizzle-kit generate --config plugins/forum/admin/database/drizzle.config.ts",
