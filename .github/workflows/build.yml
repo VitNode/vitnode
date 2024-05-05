@@ -1,4 +1,4 @@
-name: Backend Build
+name: Build
 
 on:
   pull_request:
@@ -34,4 +34,4 @@ jobs:
         run: pnpm config:init
 
       - name: Build
-        run: pnpm backend:build
+        run: pnpm build
