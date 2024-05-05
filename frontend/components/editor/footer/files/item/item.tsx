@@ -51,7 +51,7 @@ export const ItemListFilesFooterEditor = ({
         />
       </div>
 
-      <div className="flex-1 min-w-0 md:truncate break-all">
+      <div className="flex-1 min-w-0 md:truncate break-words">
         <span className="leading-tight">
           {file?.name ?? data?.file_name ?? "Error!"}
         </span>
@@ -76,6 +76,7 @@ export const ItemListFilesFooterEditor = ({
                 file_alt: data.file_alt ?? "",
                 width: data.width ?? 0,
                 height: data.height ?? 0,
+                security_key: data.security_key ?? "",
                 id
               });
               editor.commands.focus();
