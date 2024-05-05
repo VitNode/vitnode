@@ -91,6 +91,7 @@ export const ReadOnlyEditor = async ({ className, value }: Props) => {
             dir_folder={domNode.attribs["dir_folder"]}
             file_name={domNode.attribs["file_name"]}
             file_alt={domNode.attribs["file_alt"]}
+            security_key={domNode.attribs["security_key"]}
           />
         );
       }

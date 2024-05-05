@@ -24,6 +24,7 @@ export interface FilesHandlerAttributes {
   mimetype: string;
   file_alt?: string;
   height?: number;
+  security_key?: string;
   width?: number;
 }
 
@@ -52,7 +53,6 @@ export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
     name: "files",
     group: "inline",
     inline: true,
-    // content: "inline*",
     atom: true,
     selectable: true,
     draggable: true,
@@ -87,6 +87,9 @@ export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
         },
         height: {
           default: 0
+        },
+        security_key: {
+          default: ""
         }
       };
     },

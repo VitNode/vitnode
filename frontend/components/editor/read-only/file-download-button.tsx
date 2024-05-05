@@ -17,6 +17,7 @@ interface Props {
   mimetype: string;
   file_alt?: string;
   height?: number;
+  security_key?: string;
   width?: number;
 }
 
@@ -29,6 +30,7 @@ export const FileDownloadButton = ({
   height,
   id,
   mimetype,
+  security_key,
   width
 }: Props) => {
   if (acceptMimeTypeImage.includes(mimetype) && width && height) {
@@ -50,6 +52,14 @@ export const FileDownloadButton = ({
     <Button
       variant="outline"
       className="bg-muted [&>svg]:size-7 text-left h-auto gap-5 px-5 py-2"
+      onClick={() => {
+        if (!security_key) return;
+
+        window.open(
+          `${CONFIG.backend_url}/secure_files/${id}?security_key=${security_key}`,
+          "_blank"
+        );
+      }}
     >
       <File className="text-muted-foreground" />
       <div>
