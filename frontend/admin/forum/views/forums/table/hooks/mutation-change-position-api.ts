@@ -1,7 +1,5 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
-
 import { fetcher } from "@/graphql/fetcher";
 import {
   type Admin__Forum_Forums__Change_PositionMutation,
@@ -20,9 +18,6 @@ export const mutationChangePositionApi = async (
       query: Admin__Forum_Forums__Change_Position,
       variables
     });
-
-    revalidateTag("Forum_Forums__Show");
-    revalidateTag("Forum_Forums__Show_Item");
 
     return { data };
   } catch (error) {

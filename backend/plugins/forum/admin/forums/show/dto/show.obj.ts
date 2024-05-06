@@ -6,7 +6,7 @@ import { PageInfo } from "@/types/database/pagination.type";
 @ObjectType()
 export class GroupsPermissionsForumForums {
   @Field(() => Int)
-  id: number;
+  group_id: number;
 
   @Field(() => Boolean)
   can_view: boolean;

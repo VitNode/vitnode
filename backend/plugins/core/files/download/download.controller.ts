@@ -1,106 +1,46 @@
-import { createReadStream, existsSync, unlinkSync } from "fs";
+import { createReadStream } from "fs";
 import { join } from "path";
 
 import {
   Controller,
   Get,
   Param,
-  Req,
   Res,
-  StreamableFile
+  StreamableFile,
+  Query
 } from "@nestjs/common";
-import { Request, Response } from "express";
+import { Response } from "express";
 
-import { InternalAuthorizationCoreSessionsService } from "../../sessions/authorization/internal/internal_authorization.service";
 import { DatabaseService } from "@/plugins/database/database.service";
-import { AuthorizationAdminSessionsService } from "../../admin/sessions/authorization/authorization.service";
 
-@Controller("files")
-export class DownloadFilesController {
-  constructor(
-    private service: InternalAuthorizationCoreSessionsService,
-    private readonly serviceAdmin: AuthorizationAdminSessionsService,
-    private databaseService: DatabaseService
-  ) {}
+@Controller("secure_files")
+export class DownloadSecureFilesController {
+  constructor(private databaseService: DatabaseService) {}
 
-  @Get(":file")
+  @Get(":id")
   async getFile(
     @Res({ passthrough: true }) res: Response,
-    @Req() req: Request,
-    @Param() { file }: { file: string }
+    @Param() { id }: { id: string },
+    @Query() { security_key }: { security_key: string }
   ): Promise<StreamableFile> {
-    const path = join(process.cwd(), "temp", file);
-    if (!existsSync(path)) {
-      res.status(404);
-
-      return;
-    }
-    const userId = file.split(".")[0].split("--")[1].split("-")[0];
-    const currentFile = {
-      name: file.split("--")[0],
-      type: file.split(".")[1]
-    };
-
-    const user = await this.databaseService.db.query.core_users.findFirst({
-      where: (table, { eq }) => eq(table.id, +userId)
+    const file = await this.databaseService.db.query.core_files.findFirst({
+      where: (table, { eq }) => eq(table.id, +id)
     });
 
-    if (!user) {
+    if (!file || file.security_key !== security_key) {
       res.status(404);
 
       return;
     }
 
-    const isAdmin =
-      await this.databaseService.db.query.core_admin_permissions.findFirst({
-        where: (table, { eq, or }) =>
-          or(eq(table.user_id, +userId), eq(table.group_id, user.group_id))
-      });
+    const path = join(process.cwd(), file.dir_folder, file.file_name);
 
-    if (isAdmin) {
-      try {
-        const data = await this.serviceAdmin.initialAuthorization({
-          req,
-          res
-        });
-
-        if (+userId !== data.id) {
-          res.status(404);
-
-          return;
-        }
-      } catch (e) {
-        res.status(404);
-
-        return;
-      }
-    } else {
-      try {
-        const data = await this.service.authorization({
-          req,
-          res
-        });
-
-        if (+userId !== data.id) {
-          res.status(404);
-
-          return;
-        }
-      } catch (e) {
-        res.status(404);
-
-        return;
-      }
-    }
+    const mediaType = file.mimetype.split("/")[0];
 
     const streamFile = createReadStream(path);
     res.set({
-      "Content-Type": `application/${currentFile.type}`,
-      "Content-Disposition": `attachment; filename="${currentFile.name}.${currentFile.type}"`
-    });
-
-    streamFile.on("close", () => {
-      unlinkSync(path);
+      "Content-Type": `application/${mediaType}`,
+      "Content-Disposition": `attachment; filename="${file.file_name}"`
     });
 
     return new StreamableFile(streamFile);

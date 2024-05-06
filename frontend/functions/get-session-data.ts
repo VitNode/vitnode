@@ -1,3 +1,4 @@
+import { CoreApiTags } from "@/admin/core/api-tags";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Sessions__Authorization,
@@ -13,7 +14,7 @@ export const getSessionData = async () => {
     query: Core_Sessions__Authorization,
     cache: "force-cache",
     next: {
-      tags: ["Core_Sessions__Authorization"]
+      tags: [CoreApiTags.Core_Sessions__Authorization]
     }
   });
 

@@ -8,6 +8,7 @@ import {
   type Admin__Core_Languages__DeleteMutation,
   type Admin__Core_Languages__DeleteMutationVariables
 } from "@/graphql/hooks";
+import { CoreApiTags } from "@/admin/core/api-tags";
 
 export const mutationApi = async (
   variables: Admin__Core_Languages__DeleteMutationVariables
@@ -22,7 +23,7 @@ export const mutationApi = async (
     });
 
     revalidatePath("/", "layout");
-    revalidateTag("Core_Sessions__Authorization");
+    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
     revalidatePath("/admin/core/langs", "page");
 
     return { data };

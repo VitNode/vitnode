@@ -16,26 +16,25 @@ import { DeleteActionPost } from "./delete/delete";
 
 interface Props {
   id: number;
-  permissions: {
-    can_delete: boolean;
-    can_edit: boolean;
-  };
   state: {
     locked: boolean;
   };
 }
 
-export const ActionsPost = ({
-  id,
-  permissions: { can_delete, can_edit }
-}: Props) => {
+export const ActionsPost = ({ id }: Props) => {
+  const permissions = {
+    //TODO: retrieving permissions from backend, more elastic approach
+    can_edit: true,
+    can_delete: true
+  };
+
   const t = useTranslations("forum.topics.actions");
   const tCore = useTranslations("core");
   const editPost = async () => {}; //TODO: implementation
   const [isPending, setPending] = useState(false);
 
-  if (!can_edit) return null;
-  if (!can_delete) return null;
+  if (!permissions.can_edit) return null;
+  if (!permissions.can_delete) return null;
 
   return (
     <DropdownMenu>

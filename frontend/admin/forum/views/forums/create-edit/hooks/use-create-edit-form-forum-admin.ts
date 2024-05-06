@@ -17,13 +17,7 @@ export const useCreateEditFormForumAdmin = ({
   const { setOpen } = useDialog();
 
   const formSchema = z.object({
-    name: zodInput.languageInput
-      .min(1, {
-        message: t("errors.required")
-      })
-      .refine(value => value.every(item => item.value.length <= 50), {
-        message: t("errors.max_length", { length: 50 })
-      }),
+    name: zodInput.languageInput,
     description: zodInput.languageInput,
     permissions: z.object({
       can_all_view: z.boolean(),
@@ -33,7 +27,7 @@ export const useCreateEditFormForumAdmin = ({
       can_all_download_files: z.boolean(),
       groups: z.array(
         z.object({
-          id: z.number(),
+          group_id: z.number(),
           can_view: z.boolean(),
           can_read: z.boolean(),
           can_create: z.boolean(),
@@ -50,12 +44,12 @@ export const useCreateEditFormForumAdmin = ({
       name: data?.name ?? [],
       description: data?.description ?? [],
       permissions: {
-        can_all_view: data?.permissions.can_all_view ?? true,
-        can_all_read: data?.permissions.can_all_read ?? true,
-        can_all_create: data?.permissions.can_all_create ?? true,
-        can_all_reply: data?.permissions.can_all_reply ?? true,
+        can_all_view: data?.permissions.can_all_view ?? false,
+        can_all_read: data?.permissions.can_all_read ?? false,
+        can_all_create: data?.permissions.can_all_create ?? false,
+        can_all_reply: data?.permissions.can_all_reply ?? false,
         can_all_download_files:
-          data?.permissions.can_all_download_files ?? true,
+          data?.permissions.can_all_download_files ?? false,
         groups: data?.permissions.groups ?? []
       }
     },

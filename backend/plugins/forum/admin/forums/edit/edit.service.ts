@@ -34,19 +34,6 @@ export class EditForumForumsService {
     id: number;
     permissions: PermissionsCreateForumForums;
   }) => {
-    // Uprate main permissions
-    await this.databaseService.db
-      .update(forum_forums_permissions)
-      .set({
-        can_create: permissions.can_all_create,
-        can_read: permissions.can_all_read,
-        can_reply: permissions.can_all_reply,
-        can_view: permissions.can_all_view,
-        can_download_files: permissions.can_all_download_files
-      })
-      .where(eq(forum_forums_permissions.forum_id, id))
-      .returning();
-
     const getAllPermissions =
       await this.databaseService.db.query.forum_forums_permissions.findMany({
         where: (table, { eq }) => eq(table.forum_id, id)
@@ -54,12 +41,17 @@ export class EditForumForumsService {
 
     const update = await Promise.all(
       permissions.groups.map(async item => {
-        const itemExist = getAllPermissions.find(el => el.group_id === item.id);
+        const itemExist = getAllPermissions.find(
+          el => el.group_id === item.group_id
+        );
 
         if (itemExist) {
           const update = await this.databaseService.db
             .update(forum_forums_permissions)
-            .set({ ...item, forum_id: id })
+            .set({
+              forum_id: id,
+              ...item
+            })
             .where(eq(forum_forums_permissions.id, itemExist.id))
             .returning();
 
@@ -68,7 +60,10 @@ export class EditForumForumsService {
 
         const insert = await this.databaseService.db
           .insert(forum_forums_permissions)
-          .values({ ...item, forum_id: id })
+          .values({
+            forum_id: id,
+            ...item
+          })
           .returning();
 
         return insert[0];
@@ -111,15 +106,16 @@ export class EditForumForumsService {
     await this.databaseService.db
       .update(forum_forums)
       .set({
-        can_all_create: permissions.can_all_create,
-        can_all_read: permissions.can_all_read,
-        can_all_reply: permissions.can_all_reply,
-        can_all_view: permissions.can_all_view,
-        can_all_download_files: permissions.can_all_download_files,
+        ...permissions,
         parent_id
       })
       .where(eq(forum_forums.id, id))
       .returning();
+
+    await this.updatePermissions({
+      id,
+      permissions
+    });
 
     await this.parserTextLang.parse({
       item_id: id,

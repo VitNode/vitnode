@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
 import {
@@ -18,11 +18,10 @@ export const mutationApi = async () => {
     >({
       query: Core_Sessions__Sign_Out
     });
-
-    revalidateTag("Core_Sessions__Authorization");
   } catch (error) {
     return { error };
   }
 
+  revalidatePath("/", "layout");
   redirect("/");
 };

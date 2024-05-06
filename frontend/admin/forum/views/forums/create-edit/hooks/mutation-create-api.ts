@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
 import {
@@ -21,9 +21,6 @@ export const mutationCreateApi = async (
       variables
     });
 
-    revalidateTag("Forum_Forums__Show");
-    revalidateTag("Forum_Forums__Show_Item");
-    revalidateTag("Forum_Topics__Show");
     revalidatePath("/admin/forum/forums", "page");
 
     return { data };

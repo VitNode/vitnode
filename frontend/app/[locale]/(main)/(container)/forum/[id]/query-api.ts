@@ -19,10 +19,6 @@ export const getForumItemData = async ({ id }: { id: string }) => {
         lastPostsArgs: {
           first: 1
         }
-      },
-      cache: "force-cache",
-      next: {
-        tags: ["Forum_Forums__Show_Item"]
       }
     });
 

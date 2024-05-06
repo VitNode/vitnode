@@ -8,6 +8,7 @@ import {
   type Core_Members__Sign_UpMutation,
   type Core_Members__Sign_UpMutationVariables
 } from "@/graphql/hooks";
+import { CoreApiTags } from "@/admin/core/api-tags";
 
 interface Args {
   variables: Core_Members__Sign_UpMutationVariables;
@@ -25,7 +26,7 @@ export const mutationApi = async ({ installPage, variables }: Args) => {
     });
 
     if (installPage) {
-      revalidateTag("Core_Sessions__Authorization");
+      revalidateTag(CoreApiTags.Core_Sessions__Authorization);
     }
 
     return { data };

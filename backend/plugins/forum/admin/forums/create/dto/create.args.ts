@@ -11,7 +11,7 @@ import {
 @InputType()
 class GroupsPermissionsCreateForumForums {
   @Field(() => Int)
-  id: number;
+  group_id: number;
 
   @Field(() => Boolean)
   can_view: boolean;

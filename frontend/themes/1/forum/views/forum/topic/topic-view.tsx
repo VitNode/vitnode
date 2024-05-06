@@ -80,6 +80,7 @@ export default function TopicView({ data: dataApi }: TopicViewProps) {
         user={user}
         created={created}
         disableInitialAnimation
+        permissions={permissions}
         customMoreMenu={
           <ActionsTopic id={id} state={{ locked }} permissions={permissions} />
         }
@@ -97,6 +98,7 @@ export default function TopicView({ data: dataApi }: TopicViewProps) {
                   ? [...edgesPosts, ...lastEdges]
                   : edgesPosts
               }
+              permissions={permissions}
             />
 
             {pageInfo.totalCount > pageInfo.limit * 2 && (
@@ -105,8 +107,13 @@ export default function TopicView({ data: dataApi }: TopicViewProps) {
                   totalCount={pageInfo.totalCount}
                   initialCount={edgesPosts.length + lastEdges.length}
                   limit={pageInfo.limit}
+                  permissions={permissions}
                 />
-                <ListPosts id="last" edges={lastEdges} />
+                <ListPosts
+                  id="last"
+                  permissions={permissions}
+                  edges={lastEdges}
+                />
               </>
             )}
           </>

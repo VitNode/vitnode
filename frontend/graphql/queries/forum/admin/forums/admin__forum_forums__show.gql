@@ -47,7 +47,7 @@ query Admin__forum_forums__show($first: Int, $cursor: Int, $parentId: Int) {
           can_reply
           can_view
           can_download_files
-          id
+          group_id
         }
       }
       _count {

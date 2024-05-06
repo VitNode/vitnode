@@ -32,10 +32,6 @@ export const getTopicData = async ({
       id: getIdFormString(id),
       sortBy,
       limit
-    },
-    cache: "force-cache",
-    next: {
-      tags: ["Forum_Topics__Show"]
     }
   });
 

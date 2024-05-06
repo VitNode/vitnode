@@ -1,7 +1,5 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
-
 import {
   Forum_Topics__Edit,
   type Forum_Topics__EditMutation,
@@ -20,10 +18,6 @@ export const mutationEditApi = async (
       query: Forum_Topics__Edit,
       variables
     });
-
-    revalidateTag("Forum_Forums__Show");
-    revalidateTag("Forum_Forums__Show_Item");
-    revalidateTag("Forum_Topics__Show");
 
     return { data };
   } catch (error) {

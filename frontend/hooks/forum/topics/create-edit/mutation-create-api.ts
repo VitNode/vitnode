@@ -1,7 +1,5 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
-
 import {
   Forum_Topics__Create,
   type Forum_Topics__CreateMutation,
@@ -20,10 +18,6 @@ export const mutationCreateApi = async (
       query: Forum_Topics__Create,
       variables
     });
-
-    revalidateTag("Forum_Forums__Show");
-    revalidateTag("Forum_Forums__Show_Item");
-    revalidateTag("Forum_Topics__Show");
 
     return { data };
   } catch (error) {

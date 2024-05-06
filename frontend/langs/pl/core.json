@@ -138,7 +138,8 @@
           "loading": "Przesyłanie...",
           "error": "Ups! Coś poszło nie tak. {error}"
         },
-        "insert": "Wstaw"
+        "insert": "Wstaw",
+        "access_denied_download": "Nie masz uprawnień do pobrania tego pliku."
       },
 
       "remove_formatting": "Usuń formatowanie"

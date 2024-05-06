@@ -101,7 +101,10 @@ export class EditForumTopicsService {
         can_reply:
           dataTopic.forum.permissions.at(0)?.can_reply ||
           dataTopic.forum.can_all_reply,
-        can_edit: user.id === dataTopic.posts[0].user.id
+        can_edit: user.id === dataTopic.posts[0].user.id,
+        can_download_files:
+          dataTopic.forum.permissions.at(0)?.can_download_files ||
+          dataTopic.forum.can_all_download_files
       }
     };
   }

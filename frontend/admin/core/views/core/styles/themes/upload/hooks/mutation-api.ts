@@ -8,6 +8,7 @@ import {
   type Admin__Core_Themes__UploadMutation,
   type Admin__Core_Themes__UploadMutationVariables
 } from "@/graphql/hooks";
+import { CoreApiTags } from "@/admin/core/api-tags";
 
 export const mutationApi = async (formData: FormData) => {
   try {
@@ -29,7 +30,7 @@ export const mutationApi = async (formData: FormData) => {
       ]
     });
 
-    revalidateTag("Core_Sessions__Authorization");
+    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
     revalidatePath("/admin/core/styles/themes", "page");
 
     return { data };

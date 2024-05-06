@@ -11,10 +11,15 @@ import { FileDownloadButton } from "./file-download-button";
 
 interface Props {
   value: TextLanguage[];
+  allowDownloadAttachments?: boolean;
   className?: string;
 }
 
-export const ReadOnlyEditor = async ({ className, value }: Props) => {
+export const ReadOnlyEditor = async ({
+  allowDownloadAttachments,
+  className,
+  value
+}: Props) => {
   const locale = useLocale();
 
   const currentValue = (): string => {
@@ -91,6 +96,8 @@ export const ReadOnlyEditor = async ({ className, value }: Props) => {
             dir_folder={domNode.attribs["dir_folder"]}
             file_name={domNode.attribs["file_name"]}
             file_alt={domNode.attribs["file_alt"]}
+            security_key={domNode.attribs["security_key"]}
+            allowDownloadAttachments={allowDownloadAttachments}
           />
         );
       }
@@ -99,7 +106,10 @@ export const ReadOnlyEditor = async ({ className, value }: Props) => {
 
   return (
     <div
-      className={cn("break-all [&>*:not(:last-child)]:mb-[0.5rem]", className)}
+      className={cn(
+        "break-words [&>*:not(:last-child)]:mb-[0.5rem]",
+        className
+      )}
     >
       {parse(getText(), options)}
     </div>

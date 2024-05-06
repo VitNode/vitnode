@@ -21,6 +21,9 @@ export class PermissionsTopicForums {
 
   @Field(() => Boolean)
   can_edit: boolean;
+
+  @Field(() => Boolean)
+  can_download_files: boolean;
 }
 
 @ObjectType()

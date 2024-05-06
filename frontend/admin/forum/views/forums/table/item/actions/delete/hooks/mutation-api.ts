@@ -1,7 +1,5 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
-
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Forum_Forums__Delete,
@@ -20,10 +18,6 @@ export const mutationApi = async (
       query: Admin__Forum_Forums__Delete,
       variables
     });
-
-    revalidateTag("Forum_Forums__Show");
-    revalidateTag("Forum_Forums__Show_Item");
-    revalidateTag("Forum_Topics__Show");
 
     return { data };
   } catch (error) {

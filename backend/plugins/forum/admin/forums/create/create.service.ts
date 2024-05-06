@@ -55,10 +55,7 @@ export class CreateForumForumsService {
           ? theMostHighestPosition.position + 1
           : 0,
         parent_id,
-        can_all_create: permissions.can_all_create,
-        can_all_read: permissions.can_all_read,
-        can_all_reply: permissions.can_all_reply,
-        can_all_view: permissions.can_all_view
+        ...permissions
       })
       .returning();
 
@@ -81,7 +78,7 @@ export class CreateForumForumsService {
       await this.databaseService.db.insert(forum_forums_permissions).values(
         permissions.groups.map(item => ({
           forum_id: data[0].id,
-          group_id: item.id,
+          group_id: item.group_id,
           ...item
         }))
       );
