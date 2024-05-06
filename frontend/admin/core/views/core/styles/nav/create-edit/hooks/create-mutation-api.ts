@@ -8,6 +8,7 @@ import {
   type Admin__Core_Nav__CreateMutation,
   type Admin__Core_Nav__CreateMutationVariables
 } from "@/graphql/hooks";
+import { CoreApiTags } from "@/admin/core/api-tags";
 
 export const createMutationApi = async (
   variables: Admin__Core_Nav__CreateMutationVariables
@@ -21,7 +22,7 @@ export const createMutationApi = async (
       variables
     });
 
-    revalidateTag("Core_Sessions__Authorization");
+    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
     revalidatePath("/admin/core/styles/nav", "page");
 
     return { data };

@@ -21,10 +21,6 @@ export const mutationCreateApi = async (
       variables
     });
 
-    revalidateTag("Forum_Forums__Show");
-    revalidateTag("Forum_Forums__Show_Item");
-    revalidateTag("Forum_Topics__Show");
-
     return { data };
   } catch (error) {
     return { error };

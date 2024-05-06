@@ -72,7 +72,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
             <th />
             {permissions.map(permission => (
               <th
-                key={permission.id}
+                key={`header_can_${permission.id}`}
                 className="px-4 py-3 align-middle font-medium text-muted-foreground"
               >
                 <div className="flex gap-4 items-center justify-center">
@@ -88,7 +88,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
         )}
         itemContent={(index, item) => {
           const findItem = field.value.groups.find(
-            (group: { id: number }) => group.id === item.id
+            (group: { group_id: number }) => group.group_id === item.id
           );
           // Check if:
           // 1. The permission is enabled for all groups
@@ -99,7 +99,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
             ) ||
             permissions.every(
               permission =>
-                findItem?.[permission.id] ||
+                findItem?.[`can_${permission.id}`] ||
                 field.value[`can_all_${permission.id}`]
             );
 
@@ -132,7 +132,8 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
                         ...field.value,
                         groups: [
                           ...field.value.groups.filter(
-                            (group: { id: number }) => group.id !== item.id
+                            (group: { group_id: number }) =>
+                              group.group_id !== item.id
                           ),
                           {
                             id: item.id,
@@ -152,17 +153,25 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
                 // 2. The permission is enabled for the current group
                 const checked: boolean = !!(
                   (field.value[`can_all_${permission.id}`] ||
-                    (findItem && findItem[permission.id])) &&
+                    (findItem && findItem[`can_${permission.id}`])) &&
                   item.guest !== permission.disableForGuest
                 );
 
                 return (
-                  <td key={permission.id} className="px-4 py-2 text-center">
+                  <td
+                    key={`can_${permission.id}`}
+                    className="px-4 py-2 text-center"
+                  >
                     <Switch
                       onClick={() => {
                         if (field.value[`can_all_${permission.id}`]) {
                           const groupPermissions = mapValues(
-                            keyBy(permissions, "id"),
+                            keyBy(
+                              permissions.map(item => ({
+                                id: `can_${item.id}`
+                              })),
+                              "id"
+                            ),
                             () => false
                           );
 
@@ -173,16 +182,16 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
                               (group: Pick<ShowAdminGroups, "id">) => {
                                 if (group.id === item.id) {
                                   return {
-                                    id: group.id,
+                                    group_id: group.id,
                                     ...groupPermissions,
-                                    [permission.id]: false
+                                    [`can_${permission.id}`]: false
                                   };
                                 }
 
                                 return {
-                                  id: group.id,
+                                  group_id: group.id,
                                   ...groupPermissions,
-                                  [permission.id]: true
+                                  [`can_${permission.id}`]: true
                                 };
                               }
                             )
@@ -193,7 +202,12 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
 
                         if (!findItem) {
                           const groupPermissions = mapValues(
-                            keyBy(permissions, "id"),
+                            keyBy(
+                              permissions.map(item => ({
+                                id: `can_${item.id}`
+                              })),
+                              "id"
+                            ),
                             item => {
                               if (item.id === permission.id) {
                                 return true;
@@ -221,11 +235,13 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
                           ...field.value,
                           groups: [
                             ...field.value.groups.filter(
-                              (group: { id: number }) => group.id !== item.id
+                              (group: { group_id: number }) =>
+                                group.group_id !== item.id
                             ),
                             {
                               ...findItem,
-                              [permission.id]: !findItem[permission.id]
+                              [`can_${permission.id}`]:
+                                !findItem[`can_${permission.id}`]
                             }
                           ]
                         });

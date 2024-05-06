@@ -8,6 +8,7 @@ import {
   type Admin__Core_Nav__Change_PositionMutationVariables,
   Admin__Core_Nav__Change_Position
 } from "@/graphql/hooks";
+import { CoreApiTags } from "@/admin/core/api-tags";
 
 export const mutationChangePositionApi = async (
   variables: Admin__Core_Nav__Change_PositionMutationVariables
@@ -21,7 +22,7 @@ export const mutationChangePositionApi = async (
       variables
     });
 
-    revalidateTag("Core_Sessions__Authorization");
+    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
 
     return { data };
   } catch (error) {

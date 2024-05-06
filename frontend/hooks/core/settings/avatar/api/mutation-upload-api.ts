@@ -8,6 +8,7 @@ import {
   type Core_Members__Avatar__UploadMutation,
   type Core_Members__Avatar__UploadMutationVariables
 } from "@/graphql/hooks";
+import { CoreApiTags } from "@/admin/core/api-tags";
 
 export const mutationUploadApi = async (formData: FormData) => {
   try {
@@ -26,7 +27,7 @@ export const mutationUploadApi = async (formData: FormData) => {
       ]
     });
 
-    revalidateTag("Core_Sessions__Authorization");
+    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
 
     return { data };
   } catch (error) {

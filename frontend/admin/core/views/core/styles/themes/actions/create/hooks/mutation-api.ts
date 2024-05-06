@@ -8,6 +8,7 @@ import {
   type Admin__Core_Themes__CreateMutation,
   type Admin__Core_Themes__CreateMutationVariables
 } from "@/graphql/hooks";
+import { CoreApiTags } from "@/admin/core/api-tags";
 
 export const mutationApi = async (
   variables: Admin__Core_Themes__CreateMutationVariables
@@ -22,7 +23,7 @@ export const mutationApi = async (
     });
 
     revalidatePath("/admin/core/styles/themes", "page");
-    revalidateTag("Core_Sessions__Authorization");
+    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
 
     return { data };
   } catch (error) {

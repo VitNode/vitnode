@@ -19,10 +19,6 @@ const getData = async () => {
       lastPostsArgs: {
         first: 1
       }
-    },
-    cache: "force-cache",
-    next: {
-      tags: ["Forum_Forums__Show"]
     }
   });
 

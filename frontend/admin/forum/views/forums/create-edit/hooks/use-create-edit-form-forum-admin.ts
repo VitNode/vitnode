@@ -17,13 +17,7 @@ export const useCreateEditFormForumAdmin = ({
   const { setOpen } = useDialog();
 
   const formSchema = z.object({
-    name: zodInput.languageInput
-      .min(1, {
-        message: t("errors.required")
-      })
-      .refine(value => value.every(item => item.value.length <= 50), {
-        message: t("errors.max_length", { length: 50 })
-      }),
+    name: zodInput.languageInput,
     description: zodInput.languageInput,
     permissions: z.object({
       can_all_view: z.boolean(),
@@ -33,7 +27,7 @@ export const useCreateEditFormForumAdmin = ({
       can_all_download_files: z.boolean(),
       groups: z.array(
         z.object({
-          id: z.number(),
+          group_id: z.number(),
           can_view: z.boolean(),
           can_read: z.boolean(),
           can_create: z.boolean(),

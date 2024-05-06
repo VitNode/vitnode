@@ -21,9 +21,6 @@ export const mutationChangePositionApi = async (
       variables
     });
 
-    revalidateTag("Forum_Forums__Show");
-    revalidateTag("Forum_Forums__Show_Item");
-
     return { data };
   } catch (error) {
     return { error };

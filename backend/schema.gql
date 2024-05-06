@@ -97,7 +97,7 @@ input GroupsPermissionsCreateForumForums {
   can_read: Boolean!
   can_reply: Boolean!
   can_view: Boolean!
-  id: Int!
+  group_id: Int!
 }
 
 type GroupsPermissionsForumForums {
@@ -106,7 +106,7 @@ type GroupsPermissionsForumForums {
   can_read: Boolean!
   can_reply: Boolean!
   can_view: Boolean!
-  id: Int!
+  group_id: Int!
 }
 
 type ItemNavAdminPluginsAuthorization {

@@ -8,6 +8,7 @@ import {
   type Core_Members__Avatar__DeleteMutation,
   type Core_Members__Avatar__DeleteMutationVariables
 } from "@/graphql/hooks";
+import { CoreApiTags } from "@/admin/core/api-tags";
 
 export const mutationDeleteApi = async () => {
   try {
@@ -18,7 +19,7 @@ export const mutationDeleteApi = async () => {
       query: Core_Members__Avatar__Delete
     });
 
-    revalidateTag("Core_Sessions__Authorization");
+    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
 
     return { data };
   } catch (error) {
