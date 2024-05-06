@@ -13,11 +13,18 @@ export interface UploadFilesHandlerArgs {
   finishUpload?: (file: FileStateEditor) => void;
 }
 
-interface Args {
+export interface UploadFilesHandlerEditorArgs {
   value: string | TextLanguage[];
+  allowUploadFiles?: {
+    folder: string;
+    plugin: string;
+  };
 }
 
-export const useUploadFilesHandlerEditor = ({ value }: Args) => {
+export const useUploadFilesHandlerEditor = ({
+  allowUploadFiles,
+  value
+}: UploadFilesHandlerEditorArgs) => {
   const [files, setFiles] = useState<FileStateEditor[]>(
     Array.isArray(value) ? getFilesFromContent(value) : []
   );
@@ -31,10 +38,10 @@ export const useUploadFilesHandlerEditor = ({ value }: Args) => {
     finishUpload?: (file: FileStateEditor) => void;
   }) => {
     const formData = new FormData();
-    if (!data.file) return;
+    if (!data.file || !allowUploadFiles) return;
     formData.append("file", data.file);
-    formData.append("plugin", "core");
-    formData.append("folder", "testing");
+    formData.append("plugin", allowUploadFiles.plugin);
+    formData.append("folder", allowUploadFiles.folder);
     const mutation = await uploadMutationApi(formData);
 
     const error = mutation.error as ErrorType | undefined;
@@ -74,6 +81,8 @@ export const useUploadFilesHandlerEditor = ({ value }: Args) => {
     files,
     finishUpload
   }: UploadFilesHandlerArgs) => {
+    if (!files.length || !allowUploadFiles) return;
+
     setFiles(prev => [...prev, ...files]);
 
     await Promise.all(

@@ -15,7 +15,7 @@ export const FooterEditor = ({
   selectedLanguage,
   setSelectedLanguage
 }: Props) => {
-  const { files } = useEditorState();
+  const { allowUploadFiles, files } = useEditorState();
 
   return (
     <div className="bg-background p-2 rounded-b-md">
@@ -27,7 +27,7 @@ export const FooterEditor = ({
           />
         )}
 
-        <FilesButtonFooterEditor />
+        {allowUploadFiles && <FilesButtonFooterEditor />}
       </div>
 
       {files.length > 0 && <ListFilesFooterEditor />}

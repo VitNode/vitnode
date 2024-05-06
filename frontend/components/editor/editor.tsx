@@ -12,10 +12,13 @@ import { useGlobals } from "@/hooks/core/use-globals";
 import { extensionsEditor } from "./extensions/extensions";
 import { EmojiExtensionEditor } from "./extensions/emoji/emoji";
 import { Skeleton } from "../ui/skeleton";
-import { useUploadFilesHandlerEditor } from "./extensions/files/hooks/use-upload-files-handler-editor.ts";
+import {
+  useUploadFilesHandlerEditor,
+  type UploadFilesHandlerEditorArgs
+} from "./extensions/files/hooks/use-upload-files-handler-editor.ts";
 import { EditorStateContext } from "./hooks/use-editor-state";
 
-interface Props {
+interface Props extends Omit<UploadFilesHandlerEditorArgs, "value"> {
   autoFocus?: boolean;
   className?: string;
 }
@@ -37,13 +40,17 @@ export const EditorSkeleton = ({ className }: { className?: string }) => {
 };
 
 export const Editor = ({
+  allowUploadFiles,
   autoFocus,
   className,
   disableLanguage,
   onChange,
   value
 }: WithLanguage | WithoutLanguage) => {
-  const { files, uploadFiles } = useUploadFilesHandlerEditor({ value });
+  const { files, uploadFiles } = useUploadFilesHandlerEditor({
+    value,
+    allowUploadFiles
+  });
   const locale = useLocale();
   const { config, defaultLanguage } = useGlobals();
   const [selectedLanguage, setSelectedLanguage] = useState(
@@ -121,7 +128,9 @@ export const Editor = ({
   if (!editor) return null;
 
   return (
-    <EditorStateContext.Provider value={{ files, editor, uploadFiles }}>
+    <EditorStateContext.Provider
+      value={{ files, editor, uploadFiles, allowUploadFiles }}
+    >
       <div
         className={cn("border border-input rounded-md shadow-sm", className)}
       >
