@@ -122,11 +122,17 @@ export class ShowTopicsForumsService {
               ? {
                   can_reply:
                     permissionsData?.can_reply || edge.forum.can_all_reply,
-                  can_edit: user.id === post.user.id
+                  can_edit: user.id === post.user.id,
+                  can_download_files:
+                    permissionsData?.can_download_files ||
+                    edge.forum.can_all_download_files
                 }
               : {
                   can_reply: false,
-                  can_edit: false
+                  can_edit: false,
+                  can_download_files:
+                    permissionsData?.can_download_files ||
+                    edge.forum.can_all_download_files
                 };
 
             return {

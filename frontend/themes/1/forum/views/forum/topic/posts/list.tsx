@@ -1,6 +1,10 @@
 import type { ReactNode } from "react";
 
-import type { ShowPostsForums, ShowPostsForumsMetaTags } from "@/graphql/hooks";
+import type {
+  ShowPostsForums,
+  ShowPostsForumsMetaTags,
+  ShowTopicsForums
+} from "@/graphql/hooks";
 import { PostTopic } from "./post/post";
 import { MetaTagTopic } from "./meta-tags/meta-tag";
 import { cn } from "@/functions/classnames";
@@ -9,17 +13,12 @@ import { ActionsPost } from "./post/actions/actions";
 interface Props {
   edges: (ShowPostsForums | ShowPostsForumsMetaTags)[];
   id: string;
+  permissions: ShowTopicsForums["permissions"];
   className?: string;
   customMoreMenu?: ReactNode;
 }
 
-export const ListPosts = ({ className, edges, id }: Props) => {
-  const permissions = {
-    //TODO: retrieving permissions from backend, more elastic approach
-    can_edit: true,
-    can_delete: true
-  };
-
+export const ListPosts = ({ className, edges, id, permissions }: Props) => {
   return (
     <div
       key={`post_list_${id}`}
@@ -34,13 +33,10 @@ export const ListPosts = ({ className, edges, id }: Props) => {
             <PostTopic
               key={`post_list_${edge.post_id}`}
               {...edge}
+              permissions={permissions}
               customMoreMenu={
                 <>
-                  <ActionsPost
-                    id={edge.post_id}
-                    state={{ locked: false }}
-                    permissions={permissions}
-                  />
+                  <ActionsPost id={edge.post_id} state={{ locked: false }} />
                 </>
               }
             />

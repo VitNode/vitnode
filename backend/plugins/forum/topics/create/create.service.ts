@@ -90,7 +90,10 @@ export class CreateForumTopicsService {
       permissions: {
         can_reply:
           topic.forum.permissions.at(0)?.can_reply || topic.forum.can_all_reply,
-        can_edit: user.id === post.user.id
+        can_edit: user.id === post.user.id,
+        can_download_files:
+          topic.forum.permissions.at(0)?.can_download_files ||
+          topic.forum.can_all_download_files
       }
     };
   }

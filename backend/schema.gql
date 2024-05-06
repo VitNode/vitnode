@@ -264,6 +264,7 @@ type PermissionsForumForumsAdmin {
 }
 
 type PermissionsTopicForums {
+  can_download_files: Boolean!
   can_edit: Boolean!
   can_reply: Boolean!
 }

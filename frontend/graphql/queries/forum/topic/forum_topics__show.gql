@@ -44,6 +44,7 @@ query Forum_topics__show(
       permissions {
         can_reply
         can_edit
+        can_download_files
       }
     }
   }
