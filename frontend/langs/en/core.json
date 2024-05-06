@@ -139,7 +139,15 @@
           "error": "Oops! Something went wrong. {error}"
         },
         "insert": "Insert",
-        "access_denied_download": "You don't have permission to download this file."
+        "access_denied_download": "You don't have permission to download this file.",
+        "images_videos": "Images & Videos",
+        "images": "Images",
+        "errors": {
+          "invalid_file_type": {
+            "title": "Invalid file type!",
+            "desc": "Allowed types: {types}."
+          }
+        }
       },
 
       "remove_formatting": "Remove Formatting"

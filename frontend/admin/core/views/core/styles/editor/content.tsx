@@ -14,6 +14,7 @@ import {
 import { useEditorAdmin, type EditorAdminArgs } from "./hooks/use-editor-admin";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { FilesSectionContentEditorAdmin } from "./sections/files";
 
 export const ContentEditorAdmin = ({ data }: EditorAdminArgs) => {
   const t = useTranslations("admin.core.styles.editor");
@@ -68,6 +69,8 @@ export const ContentEditorAdmin = ({ data }: EditorAdminArgs) => {
               </FormItem>
             )}
           />
+
+          <FilesSectionContentEditorAdmin />
 
           <Button type="submit" loading={form.formState.isSubmitting}>
             {tCore("save")}

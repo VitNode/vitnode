@@ -3,38 +3,22 @@ import * as fs from "fs";
 
 import { generateManifest } from "./manifest";
 import { updateObject } from "./update-object";
+import { DEFAULT_CONFIG_DATA } from "./default-config-data";
 
-import {
-  ConfigType,
-  configPath,
-  getConfigFile
-} from "../../config/get-config-file";
-
-const DATA: ConfigType = {
-  rebuild_required: {
-    themes: false,
-    langs: false,
-    plugins: false
-  },
-  editor: {
-    sticky: true,
-    allow_head_h1: false
-  },
-  settings: {
-    general: {
-      site_name: "VitNode Community",
-      site_short_name: "VitNode"
-    }
-  }
-};
+import { configPath, getConfigFile } from "../../config/get-config-file";
 
 (async () => {
   if (!fs.existsSync(configPath)) {
-    fs.writeFile(configPath, JSON.stringify(DATA, null, 2), "utf8", err => {
-      if (err) throw err;
-    });
+    fs.writeFile(
+      configPath,
+      JSON.stringify(DEFAULT_CONFIG_DATA, null, 2),
+      "utf8",
+      err => {
+        if (err) throw err;
+      }
+    );
 
-    await generateManifest(DATA);
+    await generateManifest(DEFAULT_CONFIG_DATA);
 
     console.log("[VitNode] - Config file has been generated");
   } else {
@@ -42,7 +26,7 @@ const DATA: ConfigType = {
 
     // Update config file
     const config = await getConfigFile();
-    const updatedConfig = updateObject(config, DATA);
+    const updatedConfig = updateObject(config, DEFAULT_CONFIG_DATA);
 
     fs.writeFile(
       configPath,

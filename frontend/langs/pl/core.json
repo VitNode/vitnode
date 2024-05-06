@@ -139,7 +139,15 @@
           "error": "Ups! Coś poszło nie tak. {error}"
         },
         "insert": "Wstaw",
-        "access_denied_download": "Nie masz uprawnień do pobrania tego pliku."
+        "access_denied_download": "Nie masz uprawnień do pobrania tego pliku.",
+        "images_videos": "Obrazy i filmy",
+        "images": "Obrazy",
+        "errors": {
+          "invalid_file_type": {
+            "title": "Nieprawidłowy typ pliku!",
+            "desc": "Dozwolone typy plików: {types}."
+          }
+        }
       },
 
       "remove_formatting": "Usuń formatowanie"

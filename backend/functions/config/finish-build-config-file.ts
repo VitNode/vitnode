@@ -6,6 +6,7 @@ import { join } from "path";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 
 import { updatePlugins } from "./update-plugins";
+import { DEFAULT_CONFIG_DATA } from "./default-config-data";
 
 import {
   ConfigType,
@@ -19,16 +20,9 @@ import { db } from "@/plugins/database/client";
   const config = await getConfigFile();
   const newData: ConfigType = {
     ...config,
-    rebuild_required: {
-      langs: false,
-      plugins: false,
-      themes: false
-    },
-    editor: {
-      sticky: true,
-      allow_head_h1: false
-    }
+    ...DEFAULT_CONFIG_DATA
   };
+
   fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), "utf8");
 
   // Migration for database

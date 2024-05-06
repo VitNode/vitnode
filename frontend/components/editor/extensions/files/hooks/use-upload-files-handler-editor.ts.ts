@@ -2,11 +2,16 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
-import type { FileStateEditor } from "../files";
+import {
+  acceptMimeTypeImage,
+  acceptMimeTypeVideo,
+  type FileStateEditor
+} from "../files";
 import { uploadMutationApi } from "./upload-mutation-api";
 import type { ErrorType } from "@/graphql/fetcher";
 import type { TextLanguage } from "@/graphql/hooks";
 import { getFilesFromContent } from "@/components/editor/extensions/files/hooks/functions";
+import { useGlobals } from "@/hooks/core/use-globals";
 
 export interface UploadFilesHandlerArgs {
   files: FileStateEditor[];
@@ -25,10 +30,12 @@ export const useUploadFilesHandlerEditor = ({
   allowUploadFiles,
   value
 }: UploadFilesHandlerEditorArgs) => {
+  const { config } = useGlobals();
   const [files, setFiles] = useState<FileStateEditor[]>(
     Array.isArray(value) ? getFilesFromContent(value) : []
   );
-  const t = useTranslations("core");
+  const t = useTranslations("core.editor.files");
+  const tCore = useTranslations("core");
 
   const handleUpload = async ({
     data,
@@ -47,8 +54,8 @@ export const useUploadFilesHandlerEditor = ({
     const error = mutation.error as ErrorType | undefined;
 
     if (error || !mutation.data) {
-      toast.error(t("errors.title"), {
-        description: t("errors.internal_server_error")
+      toast.error(tCore("errors.title"), {
+        description: tCore("errors.internal_server_error")
       });
 
       return;
@@ -77,13 +84,52 @@ export const useUploadFilesHandlerEditor = ({
     });
   };
 
+  const validateMineTypeFiles = (
+    files: FileStateEditor[]
+  ): FileStateEditor[] => {
+    // console.log(files);
+    if (config.editor.files.allow_type === "all") return files;
+
+    return files.filter(file => {
+      if (config.editor.files.allow_type === "images_videos") {
+        return [...acceptMimeTypeImage, ...acceptMimeTypeVideo].includes(
+          file.file?.type || ""
+        );
+      }
+
+      if (config.editor.files.allow_type === "images") {
+        return acceptMimeTypeImage.includes(file.file?.type || "");
+      }
+    });
+  };
+
   const uploadFiles = async ({
     files,
     finishUpload
   }: UploadFilesHandlerArgs) => {
-    if (!files.length || !allowUploadFiles) return;
+    if (
+      !files.length ||
+      !allowUploadFiles ||
+      config.editor.files.allow_type === "none"
+    ) {
+      return;
+    }
 
-    setFiles(prev => [...prev, ...files]);
+    const validateMineType = validateMineTypeFiles(files);
+
+    if (validateMineType.length !== files.length) {
+      toast.error(t("errors.invalid_file_type.title"), {
+        description: t("errors.invalid_file_type.desc", {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
+          types: t(config.editor.files.allow_type)
+        })
+      });
+    }
+
+    if (!validateMineType.length) return;
+
+    setFiles(prev => [...prev, ...validateMineType]);
 
     await Promise.all(
       files.map(async data => {

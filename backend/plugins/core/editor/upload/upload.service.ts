@@ -11,6 +11,7 @@ import { UploadCoreFilesArgs } from "../../files/helpers/upload/dto/upload.args"
 import { core_files } from "../../admin/database/schema/files";
 import { ShowCoreFiles } from "../../files/show/dto/show.obj";
 import { generateRandomString } from "@/functions/generate-random-string";
+import { getConfigFile } from "@/config/get-config-file";
 
 @Injectable()
 export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
@@ -26,11 +27,30 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
     ...acceptMimeTypeVideo
   ];
 
+  private async getAcceptMineType(): Promise<string[]> {
+    const {
+      editor: {
+        files: { allow_type }
+      }
+    } = await getConfigFile();
+
+    if (allow_type === "images_videos") {
+      return [...acceptMimeTypeImage, ...acceptMimeTypeVideo];
+    }
+
+    if (allow_type === "images") {
+      return acceptMimeTypeImage;
+    }
+
+    return [];
+  }
+
   private async getFilesAfterUpload({
     file,
     folder,
     plugin
   }: UploadCoreEditorArgs) {
+    const acceptMimeType = await this.getAcceptMineType();
     const allowUploadToFrontend = await this.checkAcceptMimeType({
       file,
       acceptMimeType: this.acceptMimeTypeToFrontend,
@@ -46,7 +66,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
     if (allowUploadToFrontend) {
       const current = await this.uploadFile.upload({
         ...args,
-        acceptMimeType: this.acceptMimeTypeToFrontend
+        acceptMimeType
       });
 
       return current[0];
@@ -54,7 +74,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
 
     const current = await this.uploadFile.upload({
       ...args,
-      acceptMimeType: [],
+      acceptMimeType,
       secure: true
     });
 

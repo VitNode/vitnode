@@ -5,6 +5,7 @@ import {
 import { FilesButtonFooterEditor } from "./files/button";
 import { ListFilesFooterEditor } from "./files/list";
 import { useEditorState } from "../hooks/use-editor-state";
+import { useGlobals } from "@/hooks/core/use-globals";
 
 interface Props extends LanguageSelectFooterEditorProps {
   disableLanguage?: boolean;
@@ -16,6 +17,7 @@ export const FooterEditor = ({
   setSelectedLanguage
 }: Props) => {
   const { allowUploadFiles, files } = useEditorState();
+  const { config } = useGlobals();
 
   return (
     <div className="bg-background p-2 rounded-b-md">
@@ -27,7 +29,9 @@ export const FooterEditor = ({
           />
         )}
 
-        {allowUploadFiles && <FilesButtonFooterEditor />}
+        {allowUploadFiles && config.editor.files.allow_type !== "none" && (
+          <FilesButtonFooterEditor />
+        )}
       </div>
 
       {files.length > 0 && <ListFilesFooterEditor />}

@@ -87,7 +87,7 @@ export const ItemListFilesFooterEditor = ({
           <Button
             size="icon"
             variant="destructiveGhost"
-            ariaLabel="Delete"
+            ariaLabel={tCore("delete")}
             onClick={async () => {
               const nodes: Node[] = [];
               editor.state.tr.doc.descendants(node => {
