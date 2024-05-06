@@ -79,7 +79,14 @@ export const CreateEditTopic = ({ data }: Props) => {
                 <FormItem>
                   <FormLabel>{t("create.form.content")}</FormLabel>
                   <FormControl>
-                    <Editor onChange={field.onChange} value={field.value} />
+                    <Editor
+                      onChange={field.onChange}
+                      value={field.value}
+                      allowUploadFiles={{
+                        plugin: "forum",
+                        folder: "posts"
+                      }}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
