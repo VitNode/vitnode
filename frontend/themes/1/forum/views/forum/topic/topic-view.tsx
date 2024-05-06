@@ -107,6 +107,7 @@ export default function TopicView({ data: dataApi }: TopicViewProps) {
                   totalCount={pageInfo.totalCount}
                   initialCount={edgesPosts.length + lastEdges.length}
                   limit={pageInfo.limit}
+                  permissions={permissions}
                 />
                 <ListPosts
                   id="last"

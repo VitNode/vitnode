@@ -39,10 +39,18 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
     []
   );
 
-  const onToggleAll = (value: string) => {
+  const onToggleAll = (id: string) => {
+    const stateToUpdate = !field.value[`can_all_${id}`];
+
     field.onChange({
       ...field.value,
-      [value]: !field.value[value]
+      [`can_all_${id}`]: stateToUpdate,
+      groups: field.value.groups.map((group: { group_id: number }) => {
+        return {
+          ...group,
+          [`can_${id}`]: stateToUpdate
+        };
+      })
     });
   };
 
@@ -78,7 +86,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
                 <div className="flex gap-4 items-center justify-center">
                   <span>{permission.title}</span>
                   <Switch
-                    onClick={() => onToggleAll(`can_all_${permission.id}`)}
+                    onClick={() => onToggleAll(permission.id)}
                     checked={field.value[`can_all_${permission.id}`]}
                   />
                 </div>
@@ -175,26 +183,35 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
                             () => false
                           );
 
-                          field.onChange({
-                            ...field.value,
-                            [`can_all_${permission.id}`]: false,
-                            groups: data.map(
-                              (group: Pick<ShowAdminGroups, "id">) => {
-                                if (group.id === item.id) {
-                                  return {
-                                    group_id: group.id,
-                                    ...groupPermissions,
-                                    [`can_${permission.id}`]: false
-                                  };
-                                }
+                          const groups = data.map(
+                            (group: Pick<ShowAdminGroups, "id">) => {
+                              const findExistingGroup = field.value.groups.find(
+                                ({ group_id }: { group_id: number }) =>
+                                  group_id === group.id
+                              );
 
+                              if (group.id === item.id) {
                                 return {
                                   group_id: group.id,
                                   ...groupPermissions,
-                                  [`can_${permission.id}`]: true
+                                  ...findExistingGroup,
+                                  [`can_${permission.id}`]: false
                                 };
                               }
-                            )
+
+                              return {
+                                group_id: group.id,
+                                ...groupPermissions,
+                                ...findExistingGroup,
+                                [`can_${permission.id}`]: true
+                              };
+                            }
+                          );
+
+                          field.onChange({
+                            ...field.value,
+                            [`can_all_${permission.id}`]: false,
+                            groups
                           });
 
                           return;

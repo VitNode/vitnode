@@ -4,14 +4,21 @@ import { useMorePosts } from "@/hooks/forum/posts/use-more-posts";
 import { ButtonLoadMorePosts } from "./button";
 import { ListPosts } from "../list";
 import { cn } from "@/functions/classnames";
+import type { ShowTopicsForums } from "@/graphql/hooks";
 
 interface Props {
   initialCount: number;
   limit: number;
+  permissions: ShowTopicsForums["permissions"];
   totalCount: number;
 }
 
-export const LoadMorePosts = ({ initialCount, limit, totalCount }: Props) => {
+export const LoadMorePosts = ({
+  initialCount,
+  limit,
+  permissions,
+  totalCount
+}: Props) => {
   const { data, fetchNextPage, isFetching } = useMorePosts({
     totalCount,
     initialCount,
@@ -28,6 +35,7 @@ export const LoadMorePosts = ({ initialCount, limit, totalCount }: Props) => {
             "pb-0": countToLoad > 0
           })}
           edges={data}
+          permissions={permissions}
         />
       )}
 

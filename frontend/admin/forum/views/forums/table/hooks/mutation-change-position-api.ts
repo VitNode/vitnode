@@ -1,7 +1,5 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
-
 import { fetcher } from "@/graphql/fetcher";
 import {
   type Admin__Forum_Forums__Change_PositionMutation,

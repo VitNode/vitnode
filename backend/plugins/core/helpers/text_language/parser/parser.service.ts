@@ -104,7 +104,7 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
           return update[0];
         }
 
-        await this.databaseService.db
+        const data = await this.databaseService.db
           .insert(database)
           .values({ ...item, item_id } as {
             [Key in keyof PgTableWithColumns<T>["$inferInsert"]]:
@@ -113,6 +113,8 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
               | PgTableWithColumns<T>["$inferInsert"][Key];
           })
           .returning();
+
+        return data[0];
       })
     );
 

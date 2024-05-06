@@ -15,7 +15,6 @@ import { Button } from "@/components/ui/button";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 import type { ShowForumForumsAdminWithChildren } from "../table/hooks/use-forum-forums-admin-api";
 import { useTextLang } from "@/hooks/core/use-text-lang";
-import { DevTool } from "@hookform/devtools";
 
 const MainContentCreateEditFormForumAdmin = lazy(() =>
   import("./content/main").then(module => ({
@@ -90,8 +89,6 @@ export const CreateEditForumAdmin = ({ data }: CreateEditForumAdminProps) => {
           </DialogFooter>
         </form>
       </Form>
-
-      <DevTool control={form.control} />
     </>
   );
 };

@@ -44,12 +44,12 @@ export const useCreateEditFormForumAdmin = ({
       name: data?.name ?? [],
       description: data?.description ?? [],
       permissions: {
-        can_all_view: data?.permissions.can_all_view ?? true,
-        can_all_read: data?.permissions.can_all_read ?? true,
-        can_all_create: data?.permissions.can_all_create ?? true,
-        can_all_reply: data?.permissions.can_all_reply ?? true,
+        can_all_view: data?.permissions.can_all_view ?? false,
+        can_all_read: data?.permissions.can_all_read ?? false,
+        can_all_create: data?.permissions.can_all_create ?? false,
+        can_all_reply: data?.permissions.can_all_reply ?? false,
         can_all_download_files:
-          data?.permissions.can_all_download_files ?? true,
+          data?.permissions.can_all_download_files ?? false,
         groups: data?.permissions.groups ?? []
       }
     },
