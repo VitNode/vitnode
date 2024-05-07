@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import { acceptMimeTypeImage, type FilesHandlerAttributes } from "./files";
 import { formatBytes } from "@/functions/format-bytes";
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 
 const FileFromNextWithNode = ({
   node: { attrs: data }

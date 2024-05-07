@@ -14,7 +14,7 @@ import type {
   ShowAdminThemes
 } from "@/graphql/hooks";
 import { ActionsItemThemesAdmin } from "./actions/actions";
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 
 export const TableThemesAdmin = ({
   admin__core_themes__show: { edges, pageInfo }

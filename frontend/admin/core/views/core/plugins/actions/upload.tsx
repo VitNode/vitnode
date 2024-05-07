@@ -7,7 +7,7 @@ import { Suspense, lazy } from "react";
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 
 const Content = lazy(() =>
   import("../upload/upload").then(module => ({

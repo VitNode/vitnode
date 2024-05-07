@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 import { queryApi } from "./query-api";
 import { mutationApi } from "./mutation-api";
 import { useDialog } from "@/components/ui/dialog";
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 
 export const useDownloadLangAdmin = ({

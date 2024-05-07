@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { Tabs } from "@/components/tabs/tabs";
@@ -9,7 +9,6 @@ import {
   DialogTitle
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
-import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import {
   useCreateEditFormGroupsMembersAdmin,
@@ -17,21 +16,8 @@ import {
 } from "./hooks/use-create-edit-form-groups-members-admin";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
-
-const MainContentCreateEditFormGroupsMembersAdmin = lazy(() =>
-  import("./content/main-content-create-edit-form-groups-members-admin").then(
-    module => ({
-      default: module.MainContentCreateEditFormGroupsMembersAdmin
-    })
-  )
-);
-const ContentContentCreateEditFormGroupsMembersAdmin = lazy(() =>
-  import(
-    "./content/content-content-create-edit-form-groups-members-admin"
-  ).then(module => ({
-    default: module.ContentContentCreateEditFormGroupsMembersAdmin
-  }))
-);
+import { MainContentCreateEditFormGroupsMembersAdmin } from "./content/main";
+import { ContentContentCreateEditFormGroupsMembersAdmin } from "./content/content";
 
 enum TabsEnum {
   MAIN = "main",
@@ -66,21 +52,21 @@ export const CreateEditFormGroupsMembersAdmin = ({
             active={activeTab === TabsEnum.MAIN}
             onClick={() => setActiveTab(TabsEnum.MAIN)}
           >
-            Main
+            {t("create_edit.main")}
           </TabsTrigger>
           <TabsTrigger
             id="content"
             active={activeTab === TabsEnum.CONTENT}
             onClick={() => setActiveTab(TabsEnum.CONTENT)}
           >
-            Content
+            {t("create_edit.content")}
           </TabsTrigger>
         </Tabs>
       </DialogHeader>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <Suspense fallback={<Loader />}>{tabsContent[activeTab]}</Suspense>
+          {tabsContent[activeTab]}
 
           <DialogFooter>
             <Button

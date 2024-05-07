@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 import { generateLetterPhoto } from "@/functions/generate-letter-photo";
 import type { Maybe, AvatarUser as AvatarUserType } from "@/graphql/hooks";
 import { cn } from "@/functions/classnames";

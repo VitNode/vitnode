@@ -4,7 +4,7 @@ import type { DocumentNode } from "graphql";
 import { cookies, headers as nextHeaders } from "next/headers";
 
 import { getGqlString } from "@/functions/get-qql-string";
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 import { setCookieFromApi } from "@/functions/cookie-from-string-to-object";
 
 interface Args<TVariables> {
