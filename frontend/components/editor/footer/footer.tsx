@@ -6,6 +6,7 @@ import { FilesButtonFooterEditor } from "./files/button";
 import { ListFilesFooterEditor } from "./files/list";
 import { useEditorState } from "../hooks/use-editor-state";
 import { useGlobals } from "@/hooks/core/use-globals";
+import { useSession } from "@/hooks/core/use-session";
 
 interface Props extends LanguageSelectFooterEditorProps {
   disableLanguage?: boolean;
@@ -16,6 +17,7 @@ export const FooterEditor = ({
   selectedLanguage,
   setSelectedLanguage
 }: Props) => {
+  const { files: permissionFiles } = useSession();
   const { allowUploadFiles, files } = useEditorState();
   const { config } = useGlobals();
 
@@ -29,9 +31,9 @@ export const FooterEditor = ({
           />
         )}
 
-        {allowUploadFiles && config.editor.files.allow_type !== "none" && (
-          <FilesButtonFooterEditor />
-        )}
+        {allowUploadFiles &&
+          config.editor.files.allow_type !== "none" &&
+          permissionFiles.allow_upload && <FilesButtonFooterEditor />}
       </div>
 
       {files.length > 0 && <ListFilesFooterEditor />}

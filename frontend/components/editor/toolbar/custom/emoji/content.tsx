@@ -5,7 +5,7 @@ import { useState } from "react";
 import { EmojisContentIconInput } from "@/components/icon/input/content/emojis/emojis";
 import { SkinSelectEmojisContentIconInput } from "@/components/icon/input/content/emojis/skin-select";
 import { Input } from "@/components/ui/input";
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 
 interface Props {
   editor: Editor;

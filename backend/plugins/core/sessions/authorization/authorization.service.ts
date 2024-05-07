@@ -1,10 +1,12 @@
 import { Injectable } from "@nestjs/common";
+import { eq, sum } from "drizzle-orm";
 
 import { InternalAuthorizationCoreSessionsService } from "./internal/internal_authorization.service";
 import { AuthorizationCoreSessionsObj } from "./dto/authorization.obj";
 
 import { Ctx } from "@/types/context.type";
 import { DatabaseService } from "@/plugins/database/database.service";
+import { core_files } from "../../admin/database/schema/files";
 
 @Injectable()
 export class AuthorizationCoreSessionsService {
@@ -66,9 +68,17 @@ export class AuthorizationCoreSessionsService {
         }
       });
 
+      const countStorageUsed = await this.databaseService.db
+        .select({
+          space_used: sum(core_files.file_size)
+        })
+        .from(core_files)
+        .where(eq(core_files.user_id, user.id));
+
       return {
         user: {
           ...user,
+          group: currentUser.group,
           is_admin: await this.isAdmin({
             group_id: user.group.id,
             user_id: user.id
@@ -79,12 +89,33 @@ export class AuthorizationCoreSessionsService {
           }),
           avatar_color: user.avatar_color
         },
-        plugin_default: plugin?.code ?? ""
+        plugin_default: plugin?.code ?? "",
+        files: {
+          allow_upload: user.group.files_allow_upload,
+          max_storage_for_submit: user.group.files_max_storage_for_submit
+            ? user.group.files_max_storage_for_submit * 1024
+            : user.group.files_max_storage_for_submit,
+          total_max_storage: user.group.files_total_max_storage
+            ? user.group.files_total_max_storage * 1024
+            : user.group.files_total_max_storage,
+          space_used: (+countStorageUsed[0].space_used ?? 0) * 1024
+        }
       };
     } catch (error) {
+      const guestGroup =
+        await this.databaseService.db.query.core_groups.findFirst({
+          where: (table, { eq }) => eq(table.guest, true)
+        });
+
       return {
         user: null,
-        plugin_default: plugin?.code ?? ""
+        plugin_default: plugin?.code ?? "",
+        files: {
+          allow_upload: guestGroup.files_allow_upload,
+          max_storage_for_submit: guestGroup.files_max_storage_for_submit,
+          total_max_storage: guestGroup.files_total_max_storage,
+          space_used: 0
+        }
       };
     }
   }

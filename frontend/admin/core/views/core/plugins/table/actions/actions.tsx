@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Link, usePathname, useRouter } from "@/i18n";
 import { UploadPluginActionsAdmin } from "./upload";
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 
 export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
   const t = useTranslations("admin.core.plugins");

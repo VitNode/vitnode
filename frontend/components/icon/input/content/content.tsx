@@ -5,7 +5,7 @@ import type { IconLucideNames } from "@/components/icon/icon";
 import { Tabs } from "@/components/tabs/tabs";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 import { Input } from "@/components/ui/input";
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 import { Loader } from "@/components/loader";
 import { SkinSelectEmojisContentIconInput } from "./emojis/skin-select";
 

@@ -4,6 +4,8 @@
     "link_url_with_link": "Link URL: <link></link>",
     "yes": "Tak",
     "no": "Nie",
+    "or": "lub",
+    "unlimited": "Bez limitu",
     "clear_cache_and_reload": "Wyczyść pamięć podręczną i przeładuj",
     "drag_to_change_position": "Przeciągnij, aby zmienić pozycję",
     "optional": "Opcjonalne",
@@ -146,6 +148,10 @@
           "invalid_file_type": {
             "title": "Nieprawidłowy typ pliku!",
             "desc": "Dozwolone typy plików: {types}."
+          },
+          "max_storage_for_submit": {
+            "title": "Osiągnięto maksymalną pojemność!",
+            "desc": "Nie możesz przesłać więcej plików niż łączne {size} dla jednego wysłania."
           }
         }
       },

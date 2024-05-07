@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useGlobals } from "@/hooks/core/use-globals";
 import { mutationApi } from "./mutation-api";
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 
 export const ThemeSwitcher = () => {
   const t = useTranslations("core");

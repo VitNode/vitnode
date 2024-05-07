@@ -1,14 +1,9 @@
-mutation Admin__core_groups__edit($id: Int!, $name: [TextLanguageInput!]!) {
-  admin__core_groups__edit(id: $id, name: $name) {
-    created
+mutation Admin__core_groups__edit(
+  $id: Int!
+  $name: [TextLanguageInput!]!
+  $content: ContentCreateAdminGroups!
+) {
+  admin__core_groups__edit(id: $id, name: $name, content: $content) {
     id
-    name {
-      language_code
-      value
-    }
-    protected
-    users_count
-    guest
-    updated
   }
 }

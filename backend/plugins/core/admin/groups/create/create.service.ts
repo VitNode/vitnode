@@ -17,10 +17,15 @@ export class CreateAdminGroupsService {
     private parserTextLang: ParserTextLanguageCoreHelpersService
   ) {}
 
-  async create({ name }: CreateAdminGroupsArgs): Promise<ShowAdminGroups> {
+  async create({
+    content,
+    name
+  }: CreateAdminGroupsArgs): Promise<ShowAdminGroups> {
     const group = await this.databaseService.db
       .insert(core_groups)
-      .values({})
+      .values({
+        ...content
+      })
       .returning();
 
     const groupNames = await this.parserTextLang.parse({
@@ -32,7 +37,8 @@ export class CreateAdminGroupsService {
     return {
       ...group[0],
       name: groupNames,
-      users_count: 0
+      users_count: 0,
+      content
     };
   }
 }

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 import { getSessionData } from "@/functions/get-session-data";
 import { generateAlternateLanguages } from "@/functions/sitemap";
 

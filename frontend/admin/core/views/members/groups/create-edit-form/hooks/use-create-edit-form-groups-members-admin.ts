@@ -13,7 +13,7 @@ import { usePathname, useRouter } from "@/i18n";
 import { zodInput } from "@/functions/zod";
 
 export interface CreateEditFormGroupsMembersAdminArgs {
-  data?: Pick<ShowAdminGroups, "name" | "id">;
+  data?: Pick<ShowAdminGroups, "name" | "id" | "content">;
 }
 
 export const useCreateEditFormGroupsMembersAdmin = ({
@@ -28,16 +28,24 @@ export const useCreateEditFormGroupsMembersAdmin = ({
 
   const formSchema = z.object({
     name: zodInput.languageInput.min(1),
-    test: zodInput.string,
-    color: zodInput.string
+    color: zodInput.string,
+    content: z.object({
+      files_allow_upload: z.boolean(),
+      files_total_max_storage: z.number(),
+      files_max_storage_for_submit: z.number().min(-1)
+    })
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: data?.name ?? [],
-      test: "",
-      color: ""
+      color: "",
+      content: data?.content ?? {
+        files_allow_upload: true,
+        files_total_max_storage: 500000,
+        files_max_storage_for_submit: 10000
+      }
     }
   });
 
@@ -46,16 +54,14 @@ export const useCreateEditFormGroupsMembersAdmin = ({
     if (data) {
       const mutationEdit = await mutationEditApi({
         id: data.id,
-        name: values.name
+        ...values
       });
 
       if (mutationEdit.error) {
         isError = true;
       }
     } else {
-      const mutationCreate = await mutationCreateApi({
-        name: values.name
-      });
+      const mutationCreate = await mutationCreateApi(values);
 
       if (mutationCreate.error) {
         isError = true;

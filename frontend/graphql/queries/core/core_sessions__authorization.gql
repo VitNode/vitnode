@@ -23,6 +23,12 @@ query Core_sessions__authorization {
       }
     }
     plugin_default
+    files {
+      allow_upload
+      max_storage_for_submit
+      total_max_storage
+      space_used
+    }
   }
   core_languages__show {
     edges {

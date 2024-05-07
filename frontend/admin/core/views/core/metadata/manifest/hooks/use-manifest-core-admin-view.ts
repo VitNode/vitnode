@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 import type { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 import { colorConverter, getHSLFromString } from "@/functions/colors";
 
 export const useManifestCoreAdminView = ({

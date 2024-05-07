@@ -20,7 +20,7 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 
 export const ContentFilesSettings = ({
   core_files__show: { edges, pageInfo }

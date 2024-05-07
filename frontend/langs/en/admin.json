@@ -396,9 +396,17 @@
           "users_count": "Users"
         },
         "create_edit": {
-          "form": {
-            "name": {
-              "label": "Name"
+          "main": "Main",
+          "content": "Content",
+          "name": "Name",
+          "in_kb": "in kB",
+          "files": {
+            "title": "Files",
+            "allow_upload": "Allow Upload Files",
+            "total_max_storage": "Total Max Storage",
+            "max_storage_for_submit": {
+              "label": "Max Storage for Submit",
+              "desc": "If you set 1000, user can upload only 1 file with size 1000kB or 2 files with size 500kB for each submit."
             }
           }
         },

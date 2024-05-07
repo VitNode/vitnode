@@ -33,6 +33,11 @@ query Admin__Core_groups__show(
       }
       root
       default
+      content {
+        files_allow_upload
+        files_max_storage_for_submit
+        files_total_max_storage
+      }
     }
   }
 }

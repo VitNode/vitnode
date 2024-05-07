@@ -89,14 +89,22 @@ export class ShowAdminGroupsService {
       })
     );
 
-    const test = outputPagination({
-      edges: search && filtersName.length === 0 ? [] : currentEdges,
+    return outputPagination({
+      edges:
+        search && filtersName.length === 0
+          ? []
+          : currentEdges.map(edge => ({
+              ...edge,
+              content: {
+                files_allow_upload: edge.files_allow_upload,
+                files_max_storage_for_submit: edge.files_max_storage_for_submit,
+                files_total_max_storage: edge.files_total_max_storage
+              }
+            })),
       totalCount,
       first,
       cursor,
       last
     });
-
-    return test;
   }
 }

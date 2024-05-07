@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { formatBytes } from "@/functions/format-bytes";
 import { acceptMimeTypeImage } from "../extensions/files/files";
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 
 interface Props {
   dir_folder: string;

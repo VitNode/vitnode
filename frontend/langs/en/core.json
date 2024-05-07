@@ -4,6 +4,8 @@
     "link_url_with_link": "Link URL: <link></link>",
     "yes": "Yes",
     "no": "No",
+    "or": "or",
+    "unlimited": "Unlimited",
     "clear_cache_and_reload": "Clear Cache and Reload",
     "drag_to_change_position": "Drag to change position",
     "optional": "Optional",
@@ -146,6 +148,10 @@
           "invalid_file_type": {
             "title": "Invalid file type!",
             "desc": "Allowed types: {types}."
+          },
+          "max_storage_for_submit": {
+            "title": "Maximum storage reached!",
+            "desc": "You can't upload more files then total {size} for one submit."
           }
         }
       },

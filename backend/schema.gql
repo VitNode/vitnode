@@ -9,6 +9,7 @@ type AuthorizationAdminSessionsObj {
 }
 
 type AuthorizationCoreSessionsObj {
+  files: FilesAuthorizationCoreSessions!
   plugin_default: String!
   user: AuthorizationCurrentUserObj
 }
@@ -49,6 +50,18 @@ type ChildrenShowForumForums {
   position: Int!
 }
 
+input ContentCreateAdminGroups {
+  files_allow_upload: Boolean!
+  files_max_storage_for_submit: Int!
+  files_total_max_storage: Int!
+}
+
+type ContentShowAdminGroups {
+  files_allow_upload: Boolean!
+  files_max_storage_for_submit: Int!
+  files_total_max_storage: Int!
+}
+
 type CreateForumForumsObj {
   _count: ShowForumForumsCounts!
   breadcrumbs: [BreadcrumbsForumForums!]!
@@ -84,6 +97,13 @@ type FilesAdminPluginsObj {
   pages: Int!
   pages_container: Int!
   templates: Int!
+}
+
+type FilesAuthorizationCoreSessions {
+  allow_upload: Boolean!
+  max_storage_for_submit: Int!
+  space_used: Int!
+  total_max_storage: Int!
 }
 
 type GroupUser {
@@ -165,7 +185,7 @@ type LayoutAdminInstallObj {
 type Mutation {
   admin__blog_categories__create(color: String!, description: [TextLanguageInput!]!, name: [TextLanguageInput!]!): ShowBlogCategories!
   admin__core_groups__delete(id: Int!): String!
-  admin__core_groups__edit(id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
+  admin__core_groups__edit(content: ContentCreateAdminGroups!, id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
   admin__core_languages__create(allow_in_input: Boolean!, code: String!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_languages__delete(code: String!): String!
   admin__core_languages__download(all: Boolean!, code: String!, plugins: [String!]!): String!
@@ -203,7 +223,7 @@ type Mutation {
   admin_sessions__sign_out: String!
   core_editor_files__delete(id: Int!, security_key: String): String!
   core_editor_files__upload(file: Upload!, folder: String!, plugin: String!): ShowCoreFiles!
-  core_groups__admin_create(name: [TextLanguageInput!]!): ShowAdminGroups!
+  core_groups__admin_create(content: ContentCreateAdminGroups!, name: [TextLanguageInput!]!): ShowAdminGroups!
   core_mail_send(content: String!, receiver_address: String!, subject: String!): String!
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
@@ -320,6 +340,7 @@ type Query {
 }
 
 type ShowAdminGroups {
+  content: ContentShowAdminGroups!
   created: DateTime!
   default: Boolean!
   guest: Boolean!

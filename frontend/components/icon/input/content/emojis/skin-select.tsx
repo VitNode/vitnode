@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 
 const skinToneEmoji = [
   "43.55deg 100% 61.37%",

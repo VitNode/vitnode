@@ -1,4 +1,5 @@
 import {
+  index,
   integer,
   pgTable,
   serial,
@@ -27,24 +28,33 @@ export const blog_categories_relations = relations(
   })
 );
 
-export const blog_categories_name = pgTable("blog_categories_name", {
-  id: serial("id").primaryKey(),
-  category_id: integer("category_id").references(() => blog_categories.id, {
-    onDelete: "cascade"
-  }),
-  language_code: varchar("language_code")
-    .notNull()
-    .references(() => core_languages.code, {
+export const blog_categories_name = pgTable(
+  "blog_categories_name",
+  {
+    id: serial("id").primaryKey(),
+    item_id: integer("item_id").references(() => blog_categories.id, {
       onDelete: "cascade"
     }),
-  value: varchar("value", { length: 100 }).notNull()
-});
+    language_code: varchar("language_code")
+      .notNull()
+      .references(() => core_languages.code, {
+        onDelete: "cascade"
+      }),
+    value: varchar("value", { length: 100 }).notNull()
+  },
+  table => ({
+    item_id_idx: index("blog_categories_name_item_id_idx").on(table.item_id),
+    language_code_idx: index("blog_categories_name_language_code_idx").on(
+      table.language_code
+    )
+  })
+);
 
 export const blog_categories_name_relations = relations(
   blog_categories_name,
   ({ one }) => ({
     category: one(blog_categories, {
-      fields: [blog_categories_name.category_id],
+      fields: [blog_categories_name.item_id],
       references: [blog_categories.id]
     })
   })
@@ -54,7 +64,7 @@ export const blog_categories_description = pgTable(
   "blog_categories_description",
   {
     id: serial("id").primaryKey(),
-    category_id: integer("category_id").references(() => blog_categories.id, {
+    item_id: integer("item_id").references(() => blog_categories.id, {
       onDelete: "cascade"
     }),
     language_code: varchar("language_code")
@@ -63,14 +73,22 @@ export const blog_categories_description = pgTable(
         onDelete: "cascade"
       }),
     value: varchar("value").notNull()
-  }
+  },
+  table => ({
+    item_id_idx: index("blog_categories_description_item_id_idx").on(
+      table.item_id
+    ),
+    language_code_idx: index(
+      "blog_categories_description_language_code_idx"
+    ).on(table.language_code)
+  })
 );
 
 export const blog_categories_description_relations = relations(
   blog_categories_description,
   ({ one }) => ({
     category: one(blog_categories, {
-      fields: [blog_categories_description.category_id],
+      fields: [blog_categories_description.item_id],
       references: [blog_categories.id]
     })
   })

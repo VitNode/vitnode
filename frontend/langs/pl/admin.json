@@ -397,9 +397,17 @@
           "users_count": "Użytkownicy"
         },
         "create_edit": {
-          "form": {
-            "name": {
-              "label": "Nazwa"
+          "main": "Główne",
+          "content": "Zawartość",
+          "name": "Nazwa",
+          "in_kb": "w kB",
+          "files": {
+            "title": "Pliki",
+            "allow_upload": "Zezwól na przesyłanie plików",
+            "total_max_storage": "Całkowita maksymalna pamięć",
+            "max_storage_for_submit": {
+              "label": "Maksymalna pamięć dla jednego wysłania",
+              "desc": "Jeśli ustawisz 1000, użytkownik może przesłać tylko 1 plik o wielkości 1000kB lub 2 pliki o wielkości 500kB dla każdego wysłania."
             }
           }
         },

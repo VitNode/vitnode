@@ -13,7 +13,7 @@ import { PoweredByVitNode } from "../powered-by";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "@/i18n";
 import { mutationClearCache } from "./mutation-clear-cache";
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 
 interface Props {
   showPoweredBy?: boolean;

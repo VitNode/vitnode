@@ -9,7 +9,7 @@ import { cn } from "@/functions/classnames";
 import { IconItemListFilesFooterEditor } from "./icon";
 import { ContentItemListFilesFooterEditor } from "./content";
 import { deleteMutationApi } from "./hooks/delete-mutation-api";
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 import type { FileStateEditor } from "@/components/editor/extensions/files/files";
 import { useEditorState } from "@/components/editor/hooks/use-editor-state";
 

@@ -20,7 +20,11 @@ export class EditAdminGroupsService {
     private parserTextLang: ParserTextLanguageCoreHelpersService
   ) {}
 
-  async edit({ id, name }: EditAdminGroupsArgs): Promise<ShowAdminGroups> {
+  async edit({
+    content,
+    id,
+    name
+  }: EditAdminGroupsArgs): Promise<ShowAdminGroups> {
     const group = await this.databaseService.db.query.core_groups.findFirst({
       where: (table, { eq }) => eq(table.id, id)
     });
@@ -43,7 +47,8 @@ export class EditAdminGroupsService {
     await this.databaseService.db
       .update(core_groups)
       .set({
-        updated: new Date()
+        updated: new Date(),
+        ...content
       })
       .where(eq(core_groups.id, id))
       .returning();
@@ -58,7 +63,8 @@ export class EditAdminGroupsService {
 
     return {
       users_count: usersCount[0].count,
-      ...updateGroup
+      ...updateGroup,
+      content
     };
   }
 }

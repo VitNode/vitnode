@@ -15,7 +15,7 @@ import { cn } from "@/functions/classnames";
 import { CatchLayout } from "./catch";
 import "./global.css";
 import "@/app/[locale]/(admin)/admin/global.css";
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 
 const getData = async () => {
   const { data } = await fetcher<

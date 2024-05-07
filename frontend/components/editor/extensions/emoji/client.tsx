@@ -14,7 +14,7 @@ import type {
   SuggestionKeyDownProps,
   SuggestionProps
 } from "../mentions/client";
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config/config";
 
 const ComponentList = forwardRef<
   ComponentListRef,
