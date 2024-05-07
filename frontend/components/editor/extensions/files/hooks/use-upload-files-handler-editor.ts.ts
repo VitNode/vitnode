@@ -12,6 +12,8 @@ import type { ErrorType } from "@/graphql/fetcher";
 import type { TextLanguage } from "@/graphql/hooks";
 import { getFilesFromContent } from "@/components/editor/extensions/files/hooks/functions";
 import { useGlobals } from "@/hooks/core/use-globals";
+import { useSession } from "@/hooks/core/use-session";
+import { formatBytes } from "@/functions/format-bytes";
 
 export interface UploadFilesHandlerArgs {
   files: FileStateEditor[];
@@ -30,6 +32,7 @@ export const useUploadFilesHandlerEditor = ({
   allowUploadFiles,
   value
 }: UploadFilesHandlerEditorArgs) => {
+  const { files: permissionFiles } = useSession();
   const { config } = useGlobals();
   const [files, setFiles] = useState<FileStateEditor[]>(
     Array.isArray(value) ? getFilesFromContent(value) : []
@@ -103,6 +106,33 @@ export const useUploadFilesHandlerEditor = ({
     });
   };
 
+  const validateSizeFiles = (items: FileStateEditor[]): FileStateEditor[] => {
+    const remainingStorage =
+      permissionFiles.total_max_storage - permissionFiles.space_used;
+    const max =
+      remainingStorage < permissionFiles.max_storage_for_submit &&
+      remainingStorage > 0
+        ? remainingStorage
+        : permissionFiles.max_storage_for_submit;
+    const totalSize = [...files, ...items].reduce((acc, file) => {
+      if (!file.file) return acc;
+
+      return acc + file.file.size;
+    }, 0);
+
+    if (totalSize > max) {
+      toast.error(t("errors.max_storage_for_submit.title"), {
+        description: t.rich("errors.max_storage_for_submit.desc", {
+          size: formatBytes(max)
+        })
+      });
+
+      return [];
+    }
+
+    return items;
+  };
+
   const uploadFiles = async ({
     files,
     finishUpload
@@ -110,7 +140,8 @@ export const useUploadFilesHandlerEditor = ({
     if (
       !files.length ||
       !allowUploadFiles ||
-      config.editor.files.allow_type === "none"
+      config.editor.files.allow_type === "none" ||
+      !permissionFiles.allow_upload
     ) {
       return;
     }
@@ -126,13 +157,14 @@ export const useUploadFilesHandlerEditor = ({
         })
       });
     }
-
     if (!validateMineType.length) return;
 
-    setFiles(prev => [...prev, ...validateMineType]);
+    const validateSize = validateSizeFiles(validateMineType);
+    if (!validateSize.length) return;
 
+    setFiles(prev => [...prev, ...validateMineType]);
     await Promise.all(
-      files.map(async data => {
+      validateMineType.map(async data => {
         await handleUpload({ data, finishUpload });
       })
     );

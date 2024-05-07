@@ -15,7 +15,13 @@ import { Switch } from "@/components/ui/switch";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
-export const ContentContentCreateEditFormGroupsMembersAdmin = () => {
+interface Props {
+  isGuest?: boolean;
+}
+
+export const ContentContentCreateEditFormGroupsMembersAdmin = ({
+  isGuest
+}: Props) => {
   const t = useTranslations("admin.members.groups.create_edit");
   const tCore = useTranslations("core");
   const form = useFormContext();
@@ -43,61 +49,66 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = () => {
 
       {form.watch("content.files_allow_upload") && (
         <>
-          <FormField
-            control={form.control}
-            name="content.files_total_max_storage"
-            render={({ field }) => {
-              const currentValue = +form.watch(
-                "content.files_total_max_storage"
-              );
+          {!isGuest && (
+            <FormField
+              control={form.control}
+              name="content.files_total_max_storage"
+              render={({ field }) => {
+                const currentValue = +form.watch(
+                  "content.files_total_max_storage"
+                );
 
-              return (
-                <FormItem>
-                  <FormLabel>{t("files.total_max_storage")}</FormLabel>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <FormControl>
-                      <Input
-                        className="max-w-32"
-                        type="number"
-                        {...field}
-                        onChange={e =>
-                          form.setValue(field.name, +e.target.value)
-                        }
-                        value={currentValue === -1 ? "" : currentValue}
-                        disabled={currentValue === -1}
-                        min={-1}
-                      />
-                    </FormControl>
-                    <span>{t("in_kb")}</span>
-                    <div className="flex items-center gap-2 flex-shrink-0">
-                      <span>{tCore("or")}</span>
-                      <Checkbox
-                        id="content.files_total_max_storage.unlimited"
-                        onClick={() => {
-                          if (currentValue === -1) {
+                return (
+                  <FormItem>
+                    <FormLabel>{t("files.total_max_storage")}</FormLabel>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <FormControl>
+                        <Input
+                          className="max-w-32"
+                          type="number"
+                          {...field}
+                          onChange={e =>
+                            form.setValue(field.name, +e.target.value)
+                          }
+                          value={currentValue === -1 ? "" : currentValue}
+                          disabled={currentValue === -1}
+                          min={-1}
+                        />
+                      </FormControl>
+                      <span>{t("in_kb")}</span>
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        <span>{tCore("or")}</span>
+                        <Checkbox
+                          id="content.files_total_max_storage.unlimited"
+                          onClick={() => {
+                            if (currentValue === -1) {
+                              form.setValue(
+                                "content.files_total_max_storage",
+                                500000
+                              );
+
+                              return;
+                            }
+
                             form.setValue(
                               "content.files_total_max_storage",
-                              500000
+                              -1
                             );
-
-                            return;
-                          }
-
-                          form.setValue("content.files_total_max_storage", -1);
-                        }}
-                        checked={currentValue === -1}
-                      />
-                      <Label htmlFor="content.files_total_max_storage.unlimited">
-                        {tCore("unlimited")}
-                      </Label>
+                          }}
+                          checked={currentValue === -1}
+                        />
+                        <Label htmlFor="content.files_total_max_storage.unlimited">
+                          {tCore("unlimited")}
+                        </Label>
+                      </div>
                     </div>
-                  </div>
 
-                  <FormMessage />
-                </FormItem>
-              );
-            }}
-          />
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
+          )}
 
           <FormField
             control={form.control}

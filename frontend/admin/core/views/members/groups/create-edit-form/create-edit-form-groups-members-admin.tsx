@@ -35,7 +35,11 @@ export const CreateEditFormGroupsMembersAdmin = ({
 
   const tabsContent = {
     [TabsEnum.MAIN]: <MainContentCreateEditFormGroupsMembersAdmin />,
-    [TabsEnum.CONTENT]: <ContentContentCreateEditFormGroupsMembersAdmin />
+    [TabsEnum.CONTENT]: (
+      <ContentContentCreateEditFormGroupsMembersAdmin
+        isGuest={data?.id === 1}
+      />
+    )
   };
 
   return (

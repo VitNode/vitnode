@@ -16,7 +16,7 @@ const CreateEditFormGroupsMembersAdmin = lazy(() =>
 );
 
 interface Props {
-  data: Pick<ShowAdminGroups, "id" | "name">;
+  data: ShowAdminGroups;
 }
 
 export const EditGroupsMembersDialogAdmin = ({ data }: Props) => {

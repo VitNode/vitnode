@@ -148,6 +148,10 @@
           "invalid_file_type": {
             "title": "Invalid file type!",
             "desc": "Allowed types: {types}."
+          },
+          "max_storage_for_submit": {
+            "title": "Maximum storage reached!",
+            "desc": "You can't upload more files then total {size} for one submit."
           }
         }
       },

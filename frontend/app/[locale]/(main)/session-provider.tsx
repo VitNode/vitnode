@@ -15,7 +15,8 @@ export const SessionProvider = ({ children, data }: Props) => {
     <SessionContext.Provider
       value={{
         session: data?.core_sessions__authorization.user,
-        nav: data?.core_nav__show.edges ?? []
+        nav: data?.core_nav__show.edges ?? [],
+        files: data?.core_sessions__authorization.files
       }}
     >
       {children}

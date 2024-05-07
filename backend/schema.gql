@@ -9,6 +9,7 @@ type AuthorizationAdminSessionsObj {
 }
 
 type AuthorizationCoreSessionsObj {
+  files: FilesAuthorizationCoreSessions!
   plugin_default: String!
   user: AuthorizationCurrentUserObj
 }
@@ -96,6 +97,13 @@ type FilesAdminPluginsObj {
   pages: Int!
   pages_container: Int!
   templates: Int!
+}
+
+type FilesAuthorizationCoreSessions {
+  allow_upload: Boolean!
+  max_storage_for_submit: Int!
+  space_used: Int!
+  total_max_storage: Int!
 }
 
 type GroupUser {

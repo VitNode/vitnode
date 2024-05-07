@@ -148,6 +148,10 @@
           "invalid_file_type": {
             "title": "Nieprawidłowy typ pliku!",
             "desc": "Dozwolone typy plików: {types}."
+          },
+          "max_storage_for_submit": {
+            "title": "Osiągnięto maksymalną pojemność!",
+            "desc": "Nie możesz przesłać więcej plików niż łączne {size} dla jednego wysłania."
           }
         }
       },

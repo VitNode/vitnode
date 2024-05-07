@@ -1,5 +1,8 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
+
+import { CoreApiTags } from "@/admin/core/api-tags";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Editor_Files__Upload,
@@ -29,6 +32,8 @@ export const uploadMutationApi = async (formData: FormData) => {
         }
       ]
     });
+
+    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
 
     return { data };
   } catch (error) {
