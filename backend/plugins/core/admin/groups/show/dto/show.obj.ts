@@ -4,6 +4,18 @@ import { PageInfo } from "@/types/database/pagination.type";
 import { TextLanguage } from "@/types/database/text-language.type";
 
 @ObjectType()
+export class ContentShowAdminGroups {
+  @Field(() => Boolean)
+  files_allow_upload: boolean;
+
+  @Field(() => Int)
+  files_total_max_storage: number;
+
+  @Field(() => Int)
+  files_max_storage_for_submit: number;
+}
+
+@ObjectType()
 export class ShowAdminGroups {
   @Field(() => Int)
   id: number;
@@ -31,6 +43,9 @@ export class ShowAdminGroups {
 
   @Field(() => Boolean)
   guest: boolean;
+
+  @Field(() => ContentShowAdminGroups)
+  content: ContentShowAdminGroups;
 }
 
 @ObjectType()

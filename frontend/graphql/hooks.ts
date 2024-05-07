@@ -70,6 +70,19 @@ export type ChildrenShowForumForums = {
   position: Scalars['Int']['output'];
 };
 
+export type ContentCreateAdminGroups = {
+  files_allow_upload: Scalars['Boolean']['input'];
+  files_max_storage_for_submit: Scalars['Int']['input'];
+  files_total_max_storage: Scalars['Int']['input'];
+};
+
+export type ContentShowAdminGroups = {
+  __typename?: 'ContentShowAdminGroups';
+  files_allow_upload: Scalars['Boolean']['output'];
+  files_max_storage_for_submit: Scalars['Int']['output'];
+  files_total_max_storage: Scalars['Int']['output'];
+};
+
 export type CreateForumForumsObj = {
   __typename?: 'CreateForumForumsObj';
   _count: ShowForumForumsCounts;
@@ -261,6 +274,7 @@ export type MutationAdmin__Core_Groups__DeleteArgs = {
 
 
 export type MutationAdmin__Core_Groups__EditArgs = {
+  content: ContentCreateAdminGroups;
   id: Scalars['Int']['input'];
   name: Array<TextLanguageInput>;
 };
@@ -523,6 +537,7 @@ export type MutationCore_Editor_Files__UploadArgs = {
 
 
 export type MutationCore_Groups__Admin_CreateArgs = {
+  content: ContentCreateAdminGroups;
   name: Array<TextLanguageInput>;
 };
 
@@ -829,6 +844,7 @@ export type QueryForum_Topics__ShowArgs = {
 
 export type ShowAdminGroups = {
   __typename?: 'ShowAdminGroups';
+  content: ContentShowAdminGroups;
   created: Scalars['DateTime']['output'];
   default: Scalars['Boolean']['output'];
   guest: Scalars['Boolean']['output'];
@@ -1446,17 +1462,19 @@ export type Admin__Core_Groups__DeleteMutation = { __typename?: 'Mutation', admi
 export type Admin__Core_Groups__EditMutationVariables = Exact<{
   id: Scalars['Int']['input'];
   name: Array<TextLanguageInput> | TextLanguageInput;
+  content: ContentCreateAdminGroups;
 }>;
 
 
-export type Admin__Core_Groups__EditMutation = { __typename?: 'Mutation', admin__core_groups__edit: { __typename?: 'ShowAdminGroups', created: Date, id: number, protected: boolean, users_count: number, guest: boolean, updated: Date, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+export type Admin__Core_Groups__EditMutation = { __typename?: 'Mutation', admin__core_groups__edit: { __typename?: 'ShowAdminGroups', id: number } };
 
 export type Core_Groups__Admin_CreateMutationVariables = Exact<{
   name: Array<TextLanguageInput> | TextLanguageInput;
+  content: ContentCreateAdminGroups;
 }>;
 
 
-export type Core_Groups__Admin_CreateMutation = { __typename?: 'Mutation', core_groups__admin_create: { __typename?: 'ShowAdminGroups', created: Date, id: number, protected: boolean, users_count: number, guest: boolean, updated: Date, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+export type Core_Groups__Admin_CreateMutation = { __typename?: 'Mutation', core_groups__admin_create: { __typename?: 'ShowAdminGroups', id: number } };
 
 export type Admin__Core_Staff_Administrators__CreateMutationVariables = Exact<{
   groupId?: InputMaybe<Scalars['Int']['input']>;
@@ -1865,7 +1883,7 @@ export type Admin__Core_Groups__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Groups__ShowQuery = { __typename?: 'Query', admin__core_groups__show: { __typename?: 'ShowAdminGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, startCursor?: number | null, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowAdminGroups', created: Date, updated: Date, id: number, users_count: number, protected: boolean, guest: boolean, root: boolean, default: boolean, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
+export type Admin__Core_Groups__ShowQuery = { __typename?: 'Query', admin__core_groups__show: { __typename?: 'ShowAdminGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, startCursor?: number | null, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowAdminGroups', created: Date, updated: Date, id: number, users_count: number, protected: boolean, guest: boolean, root: boolean, default: boolean, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, content: { __typename?: 'ContentShowAdminGroups', files_allow_upload: boolean, files_max_storage_for_submit: number, files_total_max_storage: number } }> } };
 
 export type Admin__Core_Groups__Show_ShortQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2150,34 +2168,16 @@ export const Admin__Core_Groups__Delete = gql`
 }
     `;
 export const Admin__Core_Groups__Edit = gql`
-    mutation Admin__core_groups__edit($id: Int!, $name: [TextLanguageInput!]!) {
-  admin__core_groups__edit(id: $id, name: $name) {
-    created
+    mutation Admin__core_groups__edit($id: Int!, $name: [TextLanguageInput!]!, $content: ContentCreateAdminGroups!) {
+  admin__core_groups__edit(id: $id, name: $name, content: $content) {
     id
-    name {
-      language_code
-      value
-    }
-    protected
-    users_count
-    guest
-    updated
   }
 }
     `;
 export const Core_Groups__Admin_Create = gql`
-    mutation core_groups__admin_create($name: [TextLanguageInput!]!) {
-  core_groups__admin_create(name: $name) {
-    created
+    mutation core_groups__admin_create($name: [TextLanguageInput!]!, $content: ContentCreateAdminGroups!) {
+  core_groups__admin_create(name: $name, content: $content) {
     id
-    name {
-      language_code
-      value
-    }
-    protected
-    users_count
-    guest
-    updated
   }
 }
     `;
@@ -2734,6 +2734,11 @@ export const Admin__Core_Groups__Show = gql`
       }
       root
       default
+      content {
+        files_allow_upload
+        files_max_storage_for_submit
+        files_total_max_storage
+      }
     }
   }
 }
