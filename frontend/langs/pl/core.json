@@ -303,7 +303,8 @@
         "temp_file": "Plik tymczasowy zostanie usunięty wkrótce.",
         "table": {
           "file_size": "Rozmiar pliku",
-          "count_uses": "Liczba użyć"
+          "count_uses": "Liczba użyć",
+          "user": "Użytkownik"
         }
       }
     },

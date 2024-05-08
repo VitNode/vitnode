@@ -32,7 +32,6 @@ import {
 import { usePathname, useRouter } from "@/i18n";
 import { ToolbarDataTable } from "./toolbar/toolbar";
 import type { ToolbarDataTableProps } from "./toolbar/toolbar";
-import { cn } from "@/functions/classnames";
 import { SkeletonDataTable } from "./skeleton";
 import {
   Tooltip,
@@ -152,15 +151,19 @@ export function DataTable<TData extends TDataMin>({
                       data-state={row.getIsSelected() && "selected"}
                     >
                       {row.getVisibleCells().map(cell => (
-                        <TableCell
-                          className={cn({
-                            "space-x-1 text-right": cell.column.id === "actions"
-                          })}
-                          key={cell.id}
-                        >
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
+                        <TableCell key={cell.id}>
+                          {cell.column.id === "actions" ? (
+                            <div className="flex items-center gap-1 justify-end">
+                              {flexRender(
+                                cell.column.columnDef.cell,
+                                cell.getContext()
+                              )}
+                            </div>
+                          ) : (
+                            flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )
                           )}
                         </TableCell>
                       ))}

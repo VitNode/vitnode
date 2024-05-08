@@ -290,6 +290,7 @@ type PermissionsTopicForums {
 }
 
 type Query {
+  admin__core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowAdminFilesObj!
   admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminGroupsSortByArgs): ShowAdminGroupsObj!
   admin__core_manifest_metadata__show: ShowAdminManifestMetadataObj!
   admin__core_members__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: ShowAdminMembersSortByArgs): ShowAdminMembersObj!
@@ -337,6 +338,28 @@ type Query {
   ): ShowForumForumsObj!
   forum_posts__show(limit: Int!, page: Int, sortBy: ShowPostsForumsSortingEnum, topic_id: Int!): ShowPostsForumsObj!
   forum_topics__show(cursor: Int, first: Int, forum_id: Int, id: Int, last: Int): ShowTopicsForumsObj!
+}
+
+type ShowAdminFiles {
+  count_uses: Int!
+  created: DateTime!
+  dir_folder: String!
+  extension: String!
+  file_alt: String
+  file_name: String!
+  file_name_original: String!
+  file_size: Int!
+  height: Int
+  id: Int!
+  mimetype: String!
+  security_key: String
+  user: User!
+  width: Int
+}
+
+type ShowAdminFilesObj {
+  edges: [ShowAdminFiles!]!
+  pageInfo: PageInfo!
 }
 
 type ShowAdminGroups {

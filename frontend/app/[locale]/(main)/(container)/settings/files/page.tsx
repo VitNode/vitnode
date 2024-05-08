@@ -30,13 +30,13 @@ interface Props {
 }
 
 export default async function Page({ searchParams }: Props) {
-  const { theme_id } = await getSessionData();
   const variables = usePaginationAPISsr({
     searchParams,
     defaultPageSize: 10,
     search: true,
     sortByEnum: ShowCoreFilesSortingColumnEnum
   });
+  const { theme_id } = await getSessionData();
   const data = await getData(variables);
 
   const PageFromTheme: LazyExoticComponent<

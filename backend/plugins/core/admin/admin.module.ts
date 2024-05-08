@@ -14,7 +14,7 @@ import { AdminNavModule } from "./nav/nav.module";
 import { AdminLanguagesModule } from "./languages/languages.module";
 import { AdminSettingsModule } from "./settings/settings.module";
 import { AdminMetadataModule } from "./metadata/metadata.module";
-import { DownloadFilesAdminController } from "./files/download/download.controller";
+import { AdminFilesModule } from "./files/files.module";
 
 @Module({
   imports: [
@@ -29,8 +29,8 @@ import { DownloadFilesAdminController } from "./files/download/download.controll
     AdminNavModule,
     AdminLanguagesModule,
     AdminSettingsModule,
-    AdminMetadataModule
-  ],
-  controllers: [DownloadFilesAdminController]
+    AdminMetadataModule,
+    AdminFilesModule
+  ]
 })
 export class AdminModule {}

@@ -303,7 +303,8 @@
         "temp_file": "Temporary File will be deleted soon",
         "table": {
           "file_size": "File Size",
-          "count_uses": "Count Uses"
+          "count_uses": "Count Uses",
+          "user": "User"
         }
       }
     },
