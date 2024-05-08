@@ -786,6 +786,7 @@ export type QueryCore_Files__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<ShowCoreFilesSortByArgs>;
 };
 
@@ -1098,7 +1099,8 @@ export type ShowCoreFilesSortByArgs = {
 };
 
 export const ShowCoreFilesSortingColumnEnum = {
-  created: 'created'
+  created: 'created',
+  file_size: 'file_size'
 } as const;
 
 export type ShowCoreFilesSortingColumnEnum = typeof ShowCoreFilesSortingColumnEnum[keyof typeof ShowCoreFilesSortingColumnEnum];
@@ -2036,10 +2038,11 @@ export type Core_Members__Files__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   sortBy?: InputMaybe<ShowCoreFilesSortByArgs>;
+  search?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type Core_Members__Files__ShowQuery = { __typename?: 'Query', core_files__show: { __typename?: 'ShowCoreFilesObj', edges: Array<{ __typename?: 'ShowCoreFiles', created: Date, dir_folder: string, extension: string, file_name: string, file_size: number, file_name_original: string, height?: number | null, id: number, mimetype: string, width?: number | null, file_alt?: string | null, count_uses: number }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Core_Members__Files__ShowQuery = { __typename?: 'Query', core_files__show: { __typename?: 'ShowCoreFilesObj', edges: Array<{ __typename?: 'ShowCoreFiles', created: Date, dir_folder: string, extension: string, file_name: string, file_size: number, file_name_original: string, height?: number | null, id: number, mimetype: string, width?: number | null, file_alt?: string | null, count_uses: number, security_key?: string | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Core_Members__ProfilesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -3313,8 +3316,14 @@ export const Core_Members__Show__Search = gql`
 }
     `;
 export const Core_Members__Files__Show = gql`
-    query Core_members__files__show($cursor: Int, $first: Int, $last: Int, $sortBy: ShowCoreFilesSortByArgs) {
-  core_files__show(cursor: $cursor, first: $first, last: $last, sortBy: $sortBy) {
+    query Core_members__files__show($cursor: Int, $first: Int, $last: Int, $sortBy: ShowCoreFilesSortByArgs, $search: String) {
+  core_files__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+    sortBy: $sortBy
+    search: $search
+  ) {
     edges {
       created
       dir_folder
@@ -3328,6 +3337,7 @@ export const Core_Members__Files__Show = gql`
       width
       file_alt
       count_uses
+      security_key
     }
     pageInfo {
       count

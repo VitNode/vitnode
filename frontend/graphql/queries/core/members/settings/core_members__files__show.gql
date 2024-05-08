@@ -3,12 +3,14 @@ query Core_members__files__show(
   $first: Int
   $last: Int
   $sortBy: ShowCoreFilesSortByArgs
+  $search: String
 ) {
   core_files__show(
     cursor: $cursor
     first: $first
     last: $last
     sortBy: $sortBy
+    search: $search
   ) {
     edges {
       created
@@ -23,6 +25,7 @@ query Core_members__files__show(
       width
       file_alt
       count_uses
+      security_key
     }
     pageInfo {
       count

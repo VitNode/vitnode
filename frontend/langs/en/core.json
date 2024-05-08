@@ -69,7 +69,8 @@
       "version": "Version",
       "author": "Author",
       "enabled": "Enabled",
-      "rows_per_page": "Rows per page"
+      "rows_per_page": "Rows per page",
+      "total_count": "Total Count: {count}"
     },
     "editor": {
       "bold": "Bold",
