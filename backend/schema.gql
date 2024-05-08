@@ -184,6 +184,7 @@ type LayoutAdminInstallObj {
 
 type Mutation {
   admin__blog_categories__create(color: String!, description: [TextLanguageInput!]!, name: [TextLanguageInput!]!): ShowBlogCategories!
+  admin__core_files__delete(id: Int!): String!
   admin__core_groups__delete(id: Int!): String!
   admin__core_groups__edit(content: ContentCreateAdminGroups!, id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
   admin__core_languages__create(allow_in_input: Boolean!, code: String!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
@@ -290,6 +291,7 @@ type PermissionsTopicForums {
 }
 
 type Query {
+  admin__core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowAdminFilesObj!
   admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminGroupsSortByArgs): ShowAdminGroupsObj!
   admin__core_manifest_metadata__show: ShowAdminManifestMetadataObj!
   admin__core_members__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: ShowAdminMembersSortByArgs): ShowAdminMembersObj!
@@ -315,7 +317,7 @@ type Query {
   admin__install__layout: LayoutAdminInstallObj!
   admin__sessions__authorization: AuthorizationAdminSessionsObj!
   blog_categories__show(cursor: Int, first: Int, last: Int): ShowBlogCategoriesObj!
-  core_files__show(cursor: Int, first: Int, last: Int, sortBy: ShowCoreFilesSortByArgs): ShowCoreFilesObj!
+  core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowCoreFilesObj!
   core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreLanguagesSortByArgs): ShowCoreLanguagesObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: ShowCoreMembersSortByArgs): ShowCoreMembersObj!
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
@@ -337,6 +339,28 @@ type Query {
   ): ShowForumForumsObj!
   forum_posts__show(limit: Int!, page: Int, sortBy: ShowPostsForumsSortingEnum, topic_id: Int!): ShowPostsForumsObj!
   forum_topics__show(cursor: Int, first: Int, forum_id: Int, id: Int, last: Int): ShowTopicsForumsObj!
+}
+
+type ShowAdminFiles {
+  count_uses: Int!
+  created: DateTime!
+  dir_folder: String!
+  extension: String!
+  file_alt: String
+  file_name: String!
+  file_name_original: String!
+  file_size: Int!
+  height: Int
+  id: Int!
+  mimetype: String!
+  security_key: String
+  user: User!
+  width: Int
+}
+
+type ShowAdminFilesObj {
+  edges: [ShowAdminFiles!]!
+  pageInfo: PageInfo!
 }
 
 type ShowAdminGroups {
@@ -563,6 +587,7 @@ input ShowCoreFilesSortByArgs {
 
 enum ShowCoreFilesSortingColumnEnum {
   created
+  file_size
 }
 
 type ShowCoreLanguages {

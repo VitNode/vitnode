@@ -4,7 +4,8 @@ import { PaginationArgs } from "@/types/database/pagination.type";
 import { SortDirectionEnum } from "@/types/database/sortDirection.type";
 
 enum ShowCoreFilesSortingColumnEnum {
-  created = "created"
+  created = "created",
+  file_size = "file_size"
 }
 
 registerEnumType(ShowCoreFilesSortingColumnEnum, {
@@ -24,4 +25,7 @@ class ShowCoreFilesSortByArgs {
 export class ShowCoreFilesArgs extends PaginationArgs {
   @Field(() => ShowCoreFilesSortByArgs, { nullable: true })
   sortBy: ShowCoreFilesSortByArgs | null;
+
+  @Field(() => String, { nullable: true })
+  search: string | null;
 }

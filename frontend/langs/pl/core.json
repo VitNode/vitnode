@@ -69,7 +69,8 @@
       "version": "Wersja",
       "author": "Autor",
       "enabled": "Włączony",
-      "rows_per_page": "Wierszy na stronę"
+      "rows_per_page": "Wierszy na stronę",
+      "total_count": "Łącznie pozycji: {count}"
     },
     "editor": {
       "bold": "Pogrubienie",
@@ -302,7 +303,8 @@
         "temp_file": "Plik tymczasowy zostanie usunięty wkrótce.",
         "table": {
           "file_size": "Rozmiar pliku",
-          "count_uses": "Liczba użyć"
+          "count_uses": "Liczba użyć",
+          "user": "Użytkownik"
         }
       }
     },
@@ -332,7 +334,8 @@
         "plugins": "Wtyczki",
         "styles": "Style",
         "metadata": "Metadane",
-        "langs": "Języki"
+        "langs": "Języki",
+        "advanced": "Zaawansowane"
       }
     }
   },

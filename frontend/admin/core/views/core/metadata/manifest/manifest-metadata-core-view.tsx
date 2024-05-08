@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input";
 import { CONFIG } from "@/config/config";
 import { ColorInput } from "@/components/color/color-input";
 
-export const ManifestMetadataCoreView = (
+export const ManifestMetadataCoreAdminView = (
   props: Admin__Core_Manifest_Metadata__ShowQuery
 ) => {
   const t = useTranslations("admin.core.metadata.manifest");

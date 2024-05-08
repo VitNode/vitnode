@@ -1,11 +1,30 @@
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
+import type { Metadata } from "next";
 
 import { Tabs } from "@/components/tabs/tabs";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
+import { getConfigFile } from "@/config/get-config-file";
 
 interface Props {
   children: ReactNode;
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const [t, tCore, config] = await Promise.all([
+    getTranslations("admin"),
+    getTranslations("core.admin"),
+    getConfigFile()
+  ]);
+
+  const defaultTitle = `${tCore("nav.settings")} - ${t("title_short")} - ${config.settings.general.site_name}`;
+
+  return {
+    title: {
+      template: `%s - ${defaultTitle}`,
+      absolute: defaultTitle
+    }
+  };
 }
 
 export default async function Layout({ children }: Props) {
@@ -19,9 +38,6 @@ export default async function Layout({ children }: Props) {
         </TabsTrigger>
         <TabsTrigger id="security" href="/admin/core/settings/security">
           {t("security.title")}
-        </TabsTrigger>
-        <TabsTrigger id="sitemap" href="/admin/core/settings/sitemap">
-          {t("sitemap.title")}
         </TabsTrigger>
       </Tabs>
 

@@ -9,7 +9,7 @@ interface Props {
   data: FlatTree<ShowAdminNavPluginsObj>;
 }
 
-export const ItemContentTableNavDevPluginAdmin = ({ data }: Props) => {
+export const ItemContentNavDevPluginAdmin = ({ data }: Props) => {
   const { code: pluginCode } = useParams();
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error

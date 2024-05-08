@@ -15,9 +15,6 @@ import {
 } from "@/hooks/core/utils/use-pagination-api-ssr";
 
 interface Props {
-  params: {
-    locale: string;
-  };
   searchParams: SearchParamsPagination;
 }
 
@@ -33,13 +30,8 @@ const getData = async (variables: Admin_Core_Themes__ShowQueryVariables) => {
   return data;
 };
 
-export async function generateMetadata({
-  params: { locale }
-}: Props): Promise<Metadata> {
-  const t = await getTranslations({
-    locale,
-    namespace: "admin.core.styles.themes"
-  });
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("admin.core.styles.themes");
 
   return {
     title: t("title")

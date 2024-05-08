@@ -17,9 +17,6 @@ import {
 } from "@/hooks/core/utils/use-pagination-api-ssr";
 
 interface Props {
-  params: {
-    locale: string;
-  };
   searchParams: SearchParamsPagination;
 }
 
@@ -35,13 +32,8 @@ const getData = async (variables: Admin__Core_Groups__ShowQueryVariables) => {
   return data;
 };
 
-export async function generateMetadata({
-  params: { locale }
-}: Props): Promise<Metadata> {
-  const t = await getTranslations({
-    locale,
-    namespace: "admin.members.groups"
-  });
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("admin.members.groups");
 
   return {
     title: t("title")

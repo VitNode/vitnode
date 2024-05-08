@@ -215,6 +215,7 @@ export type LayoutAdminInstallObj = {
 export type Mutation = {
   __typename?: 'Mutation';
   admin__blog_categories__create: ShowBlogCategories;
+  admin__core_files__delete: Scalars['String']['output'];
   admin__core_groups__delete: Scalars['String']['output'];
   admin__core_groups__edit: ShowAdminGroups;
   admin__core_languages__create: ShowCoreLanguages;
@@ -274,6 +275,11 @@ export type MutationAdmin__Blog_Categories__CreateArgs = {
   color: Scalars['String']['input'];
   description: Array<TextLanguageInput>;
   name: Array<TextLanguageInput>;
+};
+
+
+export type MutationAdmin__Core_Files__DeleteArgs = {
+  id: Scalars['Int']['input'];
 };
 
 
@@ -672,6 +678,7 @@ export type PermissionsTopicForums = {
 
 export type Query = {
   __typename?: 'Query';
+  admin__core_files__show: ShowAdminFilesObj;
   admin__core_groups__show: ShowAdminGroupsObj;
   admin__core_manifest_metadata__show: ShowAdminManifestMetadataObj;
   admin__core_members__show: ShowAdminMembersObj;
@@ -697,6 +704,15 @@ export type Query = {
   forum_forums__show: ShowForumForumsObj;
   forum_posts__show: ShowPostsForumsObj;
   forum_topics__show: ShowTopicsForumsObj;
+};
+
+
+export type QueryAdmin__Core_Files__ShowArgs = {
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sortBy?: InputMaybe<ShowCoreFilesSortByArgs>;
 };
 
 
@@ -786,6 +802,7 @@ export type QueryCore_Files__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<ShowCoreFilesSortByArgs>;
 };
 
@@ -849,6 +866,30 @@ export type QueryForum_Topics__ShowArgs = {
   forum_id?: InputMaybe<Scalars['Int']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type ShowAdminFiles = {
+  __typename?: 'ShowAdminFiles';
+  count_uses: Scalars['Int']['output'];
+  created: Scalars['DateTime']['output'];
+  dir_folder: Scalars['String']['output'];
+  extension: Scalars['String']['output'];
+  file_alt?: Maybe<Scalars['String']['output']>;
+  file_name: Scalars['String']['output'];
+  file_name_original: Scalars['String']['output'];
+  file_size: Scalars['Int']['output'];
+  height?: Maybe<Scalars['Int']['output']>;
+  id: Scalars['Int']['output'];
+  mimetype: Scalars['String']['output'];
+  security_key?: Maybe<Scalars['String']['output']>;
+  user: User;
+  width?: Maybe<Scalars['Int']['output']>;
+};
+
+export type ShowAdminFilesObj = {
+  __typename?: 'ShowAdminFilesObj';
+  edges: Array<ShowAdminFiles>;
+  pageInfo: PageInfo;
 };
 
 export type ShowAdminGroups = {
@@ -1098,7 +1139,8 @@ export type ShowCoreFilesSortByArgs = {
 };
 
 export const ShowCoreFilesSortingColumnEnum = {
-  created: 'created'
+  created: 'created',
+  file_size: 'file_size'
 } as const;
 
 export type ShowCoreFilesSortingColumnEnum = typeof ShowCoreFilesSortingColumnEnum[keyof typeof ShowCoreFilesSortingColumnEnum];
@@ -1405,6 +1447,13 @@ export type User = {
 export type UserOrGroupCoreStaffUnion = StaffGroupUser | User;
 
 export type PostsWithMetaTagsUnion = ShowPostsForums | ShowPostsForumsMetaTags;
+
+export type Admin__Core_Files__DeleteMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type Admin__Core_Files__DeleteMutation = { __typename?: 'Mutation', admin__core_files__delete: string };
 
 export type Admin__Install__Create_DatabaseMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -1873,6 +1922,17 @@ export type Admin__Sessions__AuthorizationQueryVariables = Exact<{ [key: string]
 
 export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', version: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, nav: Array<{ __typename?: 'NavAdminPluginsAuthorization', code: string, nav: Array<{ __typename?: 'ItemNavAdminPluginsAuthorization', code: string, href: string, icon?: string | null }> }> } };
 
+export type Admin__Core_Files__ShowQueryVariables = Exact<{
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<ShowCoreFilesSortByArgs>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Admin__Core_Files__ShowQuery = { __typename?: 'Query', admin__core_files__show: { __typename?: 'ShowAdminFilesObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminFiles', count_uses: number, created: Date, dir_folder: string, extension: string, file_alt?: string | null, file_name: string, file_name_original: string, file_size: number, height?: number | null, id: number, mimetype: string, security_key?: string | null, width?: number | null, user: { __typename?: 'User', id: number, name: string, name_seo: string } }> } };
+
 export type Admin__Install__LayoutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2036,10 +2096,11 @@ export type Core_Members__Files__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   sortBy?: InputMaybe<ShowCoreFilesSortByArgs>;
+  search?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type Core_Members__Files__ShowQuery = { __typename?: 'Query', core_files__show: { __typename?: 'ShowCoreFilesObj', edges: Array<{ __typename?: 'ShowCoreFiles', created: Date, dir_folder: string, extension: string, file_name: string, file_size: number, file_name_original: string, height?: number | null, id: number, mimetype: string, width?: number | null, file_alt?: string | null, count_uses: number }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Core_Members__Files__ShowQuery = { __typename?: 'Query', core_files__show: { __typename?: 'ShowCoreFilesObj', edges: Array<{ __typename?: 'ShowCoreFiles', created: Date, dir_folder: string, extension: string, file_name: string, file_size: number, file_name_original: string, height?: number | null, id: number, mimetype: string, width?: number | null, file_alt?: string | null, count_uses: number, security_key?: string | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 export type Core_Members__ProfilesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2113,6 +2174,11 @@ export type Forum_Topics__ShowQueryVariables = Exact<{
 export type Forum_Topics__ShowQuery = { __typename?: 'Query', forum_topics__show: { __typename?: 'ShowTopicsForumsObj', edges: Array<{ __typename?: 'ShowTopicsForums', created: Date, id: number, locked: boolean, content: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, user: { __typename?: 'User', avatar_color: string, id: number, name_seo: string, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }, breadcrumbs: Array<{ __typename?: 'BreadcrumbsForumForums', id: number, name: Array<{ __typename?: 'TextLanguage', value: string, language_code: string }> }>, permissions: { __typename?: 'PermissionsTopicForums', can_reply: boolean, can_edit: boolean, can_download_files: boolean } }> }, forum_posts__show: { __typename?: 'ShowPostsForumsObj', edges: Array<{ __typename: 'ShowPostsForums', created: Date, post_id: number, content: Array<{ __typename?: 'TextLanguage', value: string, language_code: string }>, user: { __typename?: 'User', avatar_color: string, id: number, name_seo: string, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } } | { __typename: 'ShowPostsForumsMetaTags', action: TopicActions, created: Date, action_id: number, user: { __typename?: 'User', avatar_color: string, id: number, name_seo: string, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } }>, lastEdges: Array<{ __typename: 'ShowPostsForums', created: Date, post_id: number, content: Array<{ __typename?: 'TextLanguage', value: string, language_code: string }>, user: { __typename?: 'User', avatar_color: string, id: number, name_seo: string, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } } | { __typename: 'ShowPostsForumsMetaTags', action: TopicActions, created: Date, action_id: number, user: { __typename?: 'User', avatar_color: string, id: number, name_seo: string, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfoShowPostsForums', totalPostsCount: number, totalCount: number, limit: number, hasNextPage: boolean } } };
 
 
+export const Admin__Core_Files__Delete = gql`
+    mutation Admin__core_files__delete($id: Int!) {
+  admin__core_files__delete(id: $id)
+}
+    `;
 export const Admin__Install__Create_Database = gql`
     mutation Admin__install__create_database {
   admin__install__create_database
@@ -2694,6 +2760,46 @@ export const Admin__Sessions__Authorization = gql`
         href
         icon
       }
+    }
+  }
+}
+    `;
+export const Admin__Core_Files__Show = gql`
+    query Admin__core_files__show($cursor: Int, $first: Int, $sortBy: ShowCoreFilesSortByArgs, $last: Int, $search: String) {
+  admin__core_files__show(
+    cursor: $cursor
+    first: $first
+    sortBy: $sortBy
+    last: $last
+    search: $search
+  ) {
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+    edges {
+      count_uses
+      created
+      dir_folder
+      extension
+      file_alt
+      file_name
+      file_name_original
+      file_size
+      height
+      id
+      mimetype
+      security_key
+      user {
+        id
+        name
+        name_seo
+      }
+      width
     }
   }
 }
@@ -3313,8 +3419,14 @@ export const Core_Members__Show__Search = gql`
 }
     `;
 export const Core_Members__Files__Show = gql`
-    query Core_members__files__show($cursor: Int, $first: Int, $last: Int, $sortBy: ShowCoreFilesSortByArgs) {
-  core_files__show(cursor: $cursor, first: $first, last: $last, sortBy: $sortBy) {
+    query Core_members__files__show($cursor: Int, $first: Int, $last: Int, $sortBy: ShowCoreFilesSortByArgs, $search: String) {
+  core_files__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+    sortBy: $sortBy
+    search: $search
+  ) {
     edges {
       created
       dir_folder
@@ -3328,6 +3440,7 @@ export const Core_Members__Files__Show = gql`
       width
       file_alt
       count_uses
+      security_key
     }
     pageInfo {
       count

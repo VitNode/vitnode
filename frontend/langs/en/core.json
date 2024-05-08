@@ -69,7 +69,8 @@
       "version": "Version",
       "author": "Author",
       "enabled": "Enabled",
-      "rows_per_page": "Rows per page"
+      "rows_per_page": "Rows per page",
+      "total_count": "Total Count: {count}"
     },
     "editor": {
       "bold": "Bold",
@@ -302,7 +303,8 @@
         "temp_file": "Temporary File will be deleted soon",
         "table": {
           "file_size": "File Size",
-          "count_uses": "Count Uses"
+          "count_uses": "Count Uses",
+          "user": "User"
         }
       }
     },
@@ -332,7 +334,8 @@
         "plugins": "Plugins",
         "styles": "Styles",
         "metadata": "Metadata",
-        "langs": "Languages"
+        "langs": "Languages",
+        "advanced": "Advanced"
       }
     }
   },

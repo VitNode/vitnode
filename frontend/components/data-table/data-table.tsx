@@ -32,8 +32,13 @@ import {
 import { usePathname, useRouter } from "@/i18n";
 import { ToolbarDataTable } from "./toolbar/toolbar";
 import type { ToolbarDataTableProps } from "./toolbar/toolbar";
-import { cn } from "@/functions/classnames";
 import { SkeletonDataTable } from "./skeleton";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "../ui/tooltip";
 
 interface TDataMin {
   id: number;
@@ -146,16 +151,19 @@ export function DataTable<TData extends TDataMin>({
                       data-state={row.getIsSelected() && "selected"}
                     >
                       {row.getVisibleCells().map(cell => (
-                        <TableCell
-                          className={cn({
-                            "flex items-center justify-end":
-                              cell.column.id === "actions"
-                          })}
-                          key={cell.id}
-                        >
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
+                        <TableCell key={cell.id}>
+                          {cell.column.id === "actions" ? (
+                            <div className="flex items-center gap-1 justify-end">
+                              {flexRender(
+                                cell.column.columnDef.cell,
+                                cell.getContext()
+                              )}
+                            </div>
+                          ) : (
+                            flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )
                           )}
                         </TableCell>
                       ))}
@@ -176,75 +184,94 @@ export function DataTable<TData extends TDataMin>({
           </div>
 
           {pageInfo && (
-            <div className="flex items-center sm:justify-end justify-center px-2 pt-4 gap-4 lg:gap-8 flex-wrap">
-              <div className="flex items-center space-x-2">
-                <p className="text-sm font-medium">
-                  {t("table.rows_per_page")}
-                </p>
-                <Select
-                  value={`${pageSizeValue}`}
-                  onValueChange={value => {
-                    // changeState({ pageSize: value });
+            <div className="flex items-center sm:justify-end justify-center px-2 pt-4 gap-4 flex-wrap">
+              <span className="text-sm text-muted-foreground">
+                {t("table.total_count", { count: pageInfo.totalCount })}
+              </span>
 
-                    const params = new URLSearchParams(searchParams.toString());
-                    if (params.has("last")) {
-                      params.set("last", value);
+              <div className="flex items-center flex-wrap gap-4 justify-center">
+                <TooltipProvider>
+                  <Tooltip>
+                    <Select
+                      value={`${pageSizeValue}`}
+                      onValueChange={value => {
+                        const params = new URLSearchParams(
+                          searchParams.toString()
+                        );
+                        if (params.has("last")) {
+                          params.set("last", value);
+                          params.delete("first");
+                        } else {
+                          params.set("first", value);
+                          params.delete("last");
+                        }
+                        push(`${pathname}?${params.toString()}`, {
+                          scroll: false
+                        });
+                      }}
+                    >
+                      <TooltipTrigger asChild>
+                        <SelectTrigger className="h-8 w-[70px]">
+                          <SelectValue placeholder={pageSizeValue} />
+                        </SelectTrigger>
+                      </TooltipTrigger>
+                      <SelectContent side="top">
+                        {enablePageSize.map(pageSize => (
+                          <SelectItem key={pageSize} value={`${pageSize}`}>
+                            {pageSize}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
+                    <TooltipContent>{t("table.rows_per_page")}</TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+
+                <div className="flex items-center space-x-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    disabled={!pageInfo.hasPreviousPage}
+                    ariaLabel={t("pagination.previous")}
+                    onClick={() => {
+                      if (!pageInfo.startCursor) return;
+
+                      const params = new URLSearchParams(
+                        searchParams.toString()
+                      );
+                      params.set("cursor", `${pageInfo.startCursor}`);
+                      params.set("last", `${pageSizeValue}`);
                       params.delete("first");
-                    } else {
-                      params.set("first", value);
+                      push(`${pathname}?${params.toString()}`, {
+                        scroll: false
+                      });
+                    }}
+                  >
+                    <ChevronLeftIcon className="size-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    ariaLabel={t("pagination.next")}
+                    disabled={!pageInfo.hasNextPage}
+                    onClick={() => {
+                      if (!pageInfo.endCursor) return;
+
+                      const params = new URLSearchParams(
+                        searchParams.toString()
+                      );
+                      params.set("cursor", `${pageInfo.endCursor}`);
+                      params.set("first", `${pageSizeValue}`);
                       params.delete("last");
-                    }
-                    push(`${pathname}?${params.toString()}`, { scroll: false });
-                  }}
-                >
-                  <SelectTrigger className="h-8 w-[70px]">
-                    <SelectValue placeholder={pageSizeValue} />
-                  </SelectTrigger>
-                  <SelectContent side="top">
-                    {enablePageSize.map(pageSize => (
-                      <SelectItem key={pageSize} value={`${pageSize}`}>
-                        {pageSize}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="flex items-center space-x-2">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  disabled={!pageInfo.hasPreviousPage}
-                  ariaLabel={t("pagination.previous")}
-                  onClick={() => {
-                    if (!pageInfo.startCursor) return;
-
-                    const params = new URLSearchParams(searchParams.toString());
-                    params.set("cursor", `${pageInfo.startCursor}`);
-                    params.set("last", `${pageSizeValue}`);
-                    params.delete("first");
-                    push(`${pathname}?${params.toString()}`, { scroll: false });
-                  }}
-                >
-                  <ChevronLeftIcon className="size-4" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  ariaLabel={t("pagination.next")}
-                  disabled={!pageInfo.hasNextPage}
-                  onClick={() => {
-                    if (!pageInfo.endCursor) return;
-
-                    const params = new URLSearchParams(searchParams.toString());
-                    params.set("cursor", `${pageInfo.endCursor}`);
-                    params.set("first", `${pageSizeValue}`);
-                    params.delete("last");
-                    push(`${pathname}?${params.toString()}`, { scroll: false });
-                  }}
-                >
-                  <ChevronRightIcon className="size-4" />
-                </Button>
+                      push(`${pathname}?${params.toString()}`, {
+                        scroll: false
+                      });
+                    }}
+                  >
+                    <ChevronRightIcon className="size-4" />
+                  </Button>
+                </div>
               </div>
             </div>
           )}

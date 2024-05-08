@@ -11,14 +11,13 @@ import { ErrorViewSSR } from "@/components/views/error-view-ssr";
 interface Props {
   params: {
     id: string;
-    locale: string;
   };
 }
 
 export async function generateMetadata({
-  params: { id, locale }
+  params: { id }
 }: Props): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: "forum.topics.edit" });
+  const t = await getTranslations("forum.topics.edit");
   const data = await getTopicData({ id });
   const forum = data.forum_topics__show.edges.at(0);
   if (!forum) {

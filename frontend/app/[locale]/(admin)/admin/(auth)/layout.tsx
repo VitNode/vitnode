@@ -34,14 +34,13 @@ const getData = async () => {
 
 interface Props {
   children: ReactNode;
-  params: { locale: string };
 }
 
-export async function generateMetadata({
-  params: { locale }
-}: Props): Promise<Metadata> {
-  const config = await getConfigFile();
-  const t = await getTranslations({ locale, namespace: "admin" });
+export async function generateMetadata(): Promise<Metadata> {
+  const [config, t] = await Promise.all([
+    getConfigFile(),
+    getTranslations("admin")
+  ]);
 
   const defaultTitle = `${t("title_short")} - ${config.settings.general.site_name}`;
 

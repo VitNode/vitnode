@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { and, count, eq } from "drizzle-orm";
+import { and, count, eq, ilike, or } from "drizzle-orm";
 
 import { ShowCoreFilesArgs } from "./dto/show.args";
 import { ShowCoreFilesObj } from "./dto/show.obj";
@@ -22,7 +22,7 @@ export class ShowCoreFilesService {
 
   async show(
     { id: user_id }: User,
-    { cursor, first, last, sortBy }: ShowCoreFilesArgs
+    { cursor, first, last, search = "", sortBy }: ShowCoreFilesArgs
   ): Promise<ShowCoreFilesObj> {
     const pagination = await inputPaginationCursor({
       cursor,
@@ -41,7 +41,14 @@ export class ShowCoreFilesService {
       sortBy
     });
 
-    const where = eq(core_files.user_id, user_id);
+    const where = and(
+      eq(core_files.user_id, user_id),
+      or(
+        ilike(core_files.file_name_original, `%${search}%`),
+        ilike(core_files.file_name, `%${search}%`),
+        ilike(core_files.file_alt, `%${search}%`)
+      )
+    );
 
     const initEdges = await this.databaseService.db.query.core_files.findMany({
       ...pagination,

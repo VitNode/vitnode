@@ -4,7 +4,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { Clock, File } from "lucide-react";
+import { Clock, Download, File } from "lucide-react";
 
 import { DataTable } from "@/components/data-table/data-table";
 import type {
@@ -21,6 +21,8 @@ import {
   TooltipTrigger
 } from "@/components/ui/tooltip";
 import { CONFIG } from "@/config/config";
+import { buttonVariants } from "@/components/ui/button";
+import { Link } from "@/i18n";
 
 export const ContentFilesSettings = ({
   core_files__show: { edges, pageInfo }
@@ -99,7 +101,13 @@ export const ContentFilesSettings = ({
         }
       },
       {
-        header: t("table.file_size"),
+        header: val => {
+          return (
+            <HeaderSortingDataTable {...val}>
+              {t("table.file_size")}
+            </HeaderSortingDataTable>
+          );
+        },
         accessorKey: "file_size",
         cell: ({ row }) => {
           const data = row.original;
@@ -130,6 +138,39 @@ export const ContentFilesSettings = ({
           }
 
           return data.count_uses;
+        }
+      },
+      {
+        header: "",
+        accessorKey: "actions",
+        cell: ({ row }) => {
+          const data = row.original;
+
+          return (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link
+                    className={buttonVariants({
+                      size: "icon",
+                      variant: "ghost"
+                    })}
+                    href={
+                      data.width && data.height
+                        ? `${CONFIG.backend_public_url}/${data.dir_folder}/${data.file_name}`
+                        : `${CONFIG.backend_url}/secure_files/${data.id}?security_key=${data.security_key}`
+                    }
+                    target="_blank"
+                    aria-label={tCore("download")}
+                  >
+                    <Download />
+                  </Link>
+                </TooltipTrigger>
+
+                <TooltipContent>{tCore("download")}</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          );
         }
       }
     ],

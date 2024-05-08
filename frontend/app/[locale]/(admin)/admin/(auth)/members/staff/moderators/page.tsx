@@ -29,19 +29,11 @@ const getData = async (
 };
 
 interface Props {
-  params: {
-    locale: string;
-  };
   searchParams: SearchParamsPagination;
 }
 
-export async function generateMetadata({
-  params: { locale }
-}: Props): Promise<Metadata> {
-  const t = await getTranslations({
-    locale,
-    namespace: "admin.members.staff.moderators"
-  });
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("admin.members.staff.moderators");
 
   return {
     title: t("title")
