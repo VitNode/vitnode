@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
     getConfigFile()
   ]);
 
-  const defaultTitle = `${tCore("nav.settings")} - ${t("title_short")} - ${config.settings.general.site_name}`;
+  const defaultTitle = `${tCore("nav.advanced")} - ${t("title_short")} - ${config.settings.general.site_name}`;
 
   return {
     title: {
@@ -28,16 +28,13 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Layout({ children }: Props) {
-  const t = await getTranslations("admin.core.settings");
+  const t = await getTranslations("admin.core.advanced");
 
   return (
     <>
       <Tabs className="mb-5">
-        <TabsTrigger id="main" href="/admin/core/settings/main">
-          {t("main.title")}
-        </TabsTrigger>
-        <TabsTrigger id="security" href="/admin/core/settings/security">
-          {t("security.title")}
+        <TabsTrigger id="files" href="/admin/core/advanced/files">
+          {t("files.title")}
         </TabsTrigger>
       </Tabs>
 

@@ -30,10 +30,6 @@
         },
         "security": {
           "title": "Security"
-        },
-        "sitemap": {
-          "title": "Sitemap",
-          "desc": "Sitemap is a file where you provide information about the pages, videos, and other files on your site, and the relationships between them. Search engines like Google read this file to more intelligently crawl your site."
         }
       },
       "metadata": {
@@ -70,6 +66,10 @@
           "background_color": {
             "label": "Background Color"
           }
+        },
+        "sitemap": {
+          "title": "Sitemap",
+          "desc": "Sitemap is a file where you provide information about the pages, videos, and other files on your site, and the relationships between them. Search engines like Google read this file to more intelligently crawl your site."
         }
       },
       "plugins": {
@@ -83,7 +83,19 @@
             "title": "Overview"
           },
           "files": {
-            "title": "Files"
+            "title": "Files",
+            "databases": "Databases",
+            "admin_pages": "Admin Pages",
+            "admin_templates": "Admin Templates",
+            "graphql_mutations": "GraphQL Mutations",
+            "graphql_queries": "GraphQL Queries",
+            "hooks": "Hooks",
+            "language": "Language",
+            "pages": "Pages",
+            "pages_container": "Pages (container)",
+            "templates": "Templates",
+            "default_page": "Default Page",
+            "file_detected": "{count, plural, =0 {No files} =1 {1 file} other {# files}} detected"
           },
           "nav": {
             "title": "Navigation in AdminCP",
@@ -173,20 +185,6 @@
           },
           "version_code": {
             "label": "Version Code"
-          },
-          "check": {
-            "databases": "Databases",
-            "admin_pages": "Admin Pages",
-            "admin_templates": "Admin Templates",
-            "graphql_mutations": "GraphQL Mutations",
-            "graphql_queries": "GraphQL Queries",
-            "hooks": "Hooks",
-            "language": "Language",
-            "pages": "Pages",
-            "pages_container": "Pages (container)",
-            "templates": "Templates",
-            "default_page": "Default Page",
-            "file_detected": "{count, plural, =0 {No files} =1 {1 file} other {# files}} detected"
           },
           "submit": "Download"
         }
@@ -372,6 +370,11 @@
             "success": "Language has been updated."
           }
         }
+      },
+      "advanced": {
+        "files": {
+          "title": "Files"
+        }
       }
     },
     "members": {
@@ -426,6 +429,7 @@
         }
       },
       "staff": {
+        "title": "Staff",
         "unrestricted": "Unrestricted",
         "restricted": "Restricted",
         "user": "User",

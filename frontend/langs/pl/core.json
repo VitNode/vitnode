@@ -333,7 +333,8 @@
         "plugins": "Wtyczki",
         "styles": "Style",
         "metadata": "Metadane",
-        "langs": "Języki"
+        "langs": "Języki",
+        "advanced": "Zaawansowane"
       }
     }
   },

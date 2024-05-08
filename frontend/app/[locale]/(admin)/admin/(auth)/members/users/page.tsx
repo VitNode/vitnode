@@ -19,9 +19,6 @@ interface SearchParams extends SearchParamsPagination {
 }
 
 interface Props {
-  params: {
-    locale: string;
-  };
   searchParams: SearchParams;
 }
 
@@ -37,10 +34,8 @@ const getData = async (variables: Admin__Core_Members__ShowQueryVariables) => {
   return data;
 };
 
-export async function generateMetadata({
-  params: { locale }
-}: Props): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: "admin.members.users" });
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("admin.members.users");
 
   return {
     title: t("title")

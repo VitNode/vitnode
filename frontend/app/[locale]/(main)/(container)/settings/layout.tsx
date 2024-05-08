@@ -7,16 +7,11 @@ import { getSessionData } from "@/functions/get-session-data";
 
 interface Props {
   children: ReactNode;
-  params: {
-    locale: string;
-  };
 }
 
-export async function generateMetadata({
-  params: { locale }
-}: Props): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const config = await getConfigFile();
-  const t = await getTranslations({ locale, namespace: "core.settings" });
+  const t = await getTranslations("core.settings");
 
   return {
     title: {

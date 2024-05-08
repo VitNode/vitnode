@@ -61,6 +61,11 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
             id: "langs",
             href: "langs",
             icon: "Languages"
+          },
+          {
+            id: "advanced",
+            href: "advanced",
+            icon: "Cog"
           }
         ]}
       />

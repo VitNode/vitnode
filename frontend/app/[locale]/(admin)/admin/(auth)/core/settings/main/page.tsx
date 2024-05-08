@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
 
 import { MainSettingsCoreAdmin } from "@/admin/core/views/core/settings/main/main-settings-core-admin";
 import { HeaderContent } from "@/components/header-content/header-content";
@@ -20,6 +21,14 @@ const getData = async () => {
 
   return data;
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("admin.core.settings.main");
+
+  return {
+    title: t("title")
+  };
+}
 
 export default async function Page() {
   const [t, data] = await Promise.all([

@@ -32,13 +32,11 @@ interface Props {
   searchParams: SearchParamsPagination;
 }
 
-export async function generateMetadata({
-  params: { locale }
-}: Props): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: "admin" });
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("admin.core.langs");
 
   return {
-    title: t("core.langs.title")
+    title: t("title")
   };
 }
 

@@ -30,10 +30,6 @@
         },
         "security": {
           "title": "Bezpieczeństwo"
-        },
-        "sitemap": {
-          "title": "Mapa strony (sitemap)",
-          "desc": "Sitemap to plik, w którym podajesz informacje o stronach, filmach i innych plikach na swojej stronie oraz relacjach między nimi. Wyszukiwarki, takie jak Google, czytają ten plik, aby bardziej inteligentnie przeszukiwać Twoją stronę."
         }
       },
       "metadata": {
@@ -70,6 +66,10 @@
           "background_color": {
             "label": "Kolor tła"
           }
+        },
+        "sitemap": {
+          "title": "Mapa strony (sitemap)",
+          "desc": "Sitemap to plik, w którym podajesz informacje o stronach, filmach i innych plikach na swojej stronie oraz relacjach między nimi. Wyszukiwarki, takie jak Google, czytają ten plik, aby bardziej inteligentnie przeszukiwać Twoją stronę."
         }
       },
       "plugins": {
@@ -83,7 +83,19 @@
             "title": "Przegląd"
           },
           "files": {
-            "title": "Pliki"
+            "title": "Pliki",
+            "databases": "Bazy danych",
+            "admin_pages": "Strony administratora",
+            "admin_templates": "Szablony administratora",
+            "graphql_mutations": "Mutacje GraphQL",
+            "graphql_queries": "Zapytania GraphQL",
+            "hooks": "Hooki",
+            "language": "Język",
+            "pages": "Strony",
+            "pages_container": "Strony (kontener)",
+            "templates": "Szablony",
+            "default_page": "Strona domyślna",
+            "file_detected": "{count, plural, =0 {Brak plików} =1 {1 plik} few {# pliki} other {# plików}} wykryto"
           },
           "nav": {
             "title": "Nawigacja w AdminCP",
@@ -173,20 +185,6 @@
           },
           "version_code": {
             "label": "Kod wersji"
-          },
-          "check": {
-            "databases": "Bazy danych",
-            "admin_pages": "Strony administratora",
-            "admin_templates": "Szablony administratora",
-            "graphql_mutations": "Mutacje GraphQL",
-            "graphql_queries": "Zapytania GraphQL",
-            "hooks": "Hooki",
-            "language": "Język",
-            "pages": "Strony",
-            "pages_container": "Strony (kontener)",
-            "templates": "Szablony",
-            "default_page": "Strona domyślna",
-            "file_detected": "{count, plural, =0 {Brak plików} =1 {1 plik} few {# pliki} other {# plików}} wykryto"
           },
           "submit": "Pobierz"
         }
@@ -373,6 +371,11 @@
             "success": "Język został zaktualizowany."
           }
         }
+      },
+      "advanced": {
+        "files": {
+          "title": "Pliki"
+        }
       }
     },
     "members": {
@@ -427,6 +430,7 @@
         }
       },
       "staff": {
+        "title": "Personel",
         "unrestricted": "Nieograniczone",
         "restricted": "Ograniczone",
         "user": "Użytkownik",

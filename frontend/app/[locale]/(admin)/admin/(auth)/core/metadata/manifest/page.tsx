@@ -1,8 +1,9 @@
 import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Card } from "@/components/ui/card";
-import { ManifestMetadataCoreView } from "@/admin/core/views/core/metadata/manifest/manifest-metadata-core-view";
+import { ManifestMetadataCoreAdminView } from "@/admin/core/views/core/metadata/manifest/manifest-metadata-core-view";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Manifest_Metadata__Show,
@@ -21,6 +22,14 @@ const getData = async () => {
   return data;
 };
 
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("admin.core.metadata.manifest");
+
+  return {
+    title: t("title")
+  };
+}
+
 export default async function Page() {
   const t = await getTranslations("admin.core.metadata.manifest");
   const data = await getData();
@@ -30,7 +39,7 @@ export default async function Page() {
       <HeaderContent h1={t("title")} desc={t("desc")} />
 
       <Card className="p-6">
-        <ManifestMetadataCoreView {...data} />
+        <ManifestMetadataCoreAdminView {...data} />
       </Card>
     </>
   );

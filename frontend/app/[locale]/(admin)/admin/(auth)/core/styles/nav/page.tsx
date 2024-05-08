@@ -9,12 +9,6 @@ import {
   type Admin__Core_Nav__ShowQueryVariables
 } from "@/graphql/hooks";
 
-interface Props {
-  params: {
-    locale: string;
-  };
-}
-
 const getData = async () => {
   const { data } = await fetcher<
     Admin__Core_Nav__ShowQuery,
@@ -26,13 +20,8 @@ const getData = async () => {
   return data;
 };
 
-export async function generateMetadata({
-  params: { locale }
-}: Props): Promise<Metadata> {
-  const t = await getTranslations({
-    locale,
-    namespace: "admin.core.styles.nav"
-  });
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("admin.core.styles.nav");
 
   return {
     title: t("title")
