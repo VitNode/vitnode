@@ -46,14 +46,18 @@ export class DeleteCoreEditorService {
       return "Skipped! File is being used.";
     }
 
-    await this.databaseService.db
-      .delete(core_files)
-      .where(eq(core_files.id, id));
-
     this.deleteFile.delete({
       ...findFile,
       file_secure: !!findFile.security_key
     });
+
+    await this.databaseService.db
+      .delete(core_files_using)
+      .where(eq(core_files_using.file_id, id));
+
+    await this.databaseService.db
+      .delete(core_files)
+      .where(eq(core_files.id, id));
 
     return "Success!";
   }

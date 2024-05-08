@@ -1,7 +1,7 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
-import { Clock, Download, File, Trash2 } from "lucide-react";
+import { Clock, File } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useMemo } from "react";
@@ -19,7 +19,7 @@ import { CONFIG } from "@/config/config";
 import { formatBytes } from "@/functions/format-bytes";
 import type { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
 import { Link } from "@/i18n";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { ActionsFilesAdvancedCoreAdmin } from "./actions/actions";
 
 export const FilesAdvancedCoreAdminView = ({
   admin__core_files__show: { edges, pageInfo }
@@ -158,41 +158,7 @@ export const FilesAdvancedCoreAdminView = ({
         cell: ({ row }) => {
           const data = row.original;
 
-          return (
-            <>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link
-                      className={buttonVariants({
-                        size: "icon",
-                        variant: "ghost"
-                      })}
-                      href={
-                        data.width && data.height
-                          ? `${CONFIG.backend_public_url}/${data.dir_folder}/${data.file_name}`
-                          : `${CONFIG.backend_url}/secure_files/${data.id}?security_key=${data.security_key}`
-                      }
-                      target="_blank"
-                      aria-label={tCore("download")}
-                    >
-                      <Download />
-                    </Link>
-                  </TooltipTrigger>
-
-                  <TooltipContent>{tCore("download")}</TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-
-              <Button
-                size="icon"
-                variant="destructiveGhost"
-                ariaLabel={tCore("delete")}
-              >
-                <Trash2 />
-              </Button>
-            </>
-          );
+          return <ActionsFilesAdvancedCoreAdmin {...data} />;
         }
       }
     ],

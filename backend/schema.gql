@@ -184,6 +184,7 @@ type LayoutAdminInstallObj {
 
 type Mutation {
   admin__blog_categories__create(color: String!, description: [TextLanguageInput!]!, name: [TextLanguageInput!]!): ShowBlogCategories!
+  admin__core_files__delete(id: Int!): String!
   admin__core_groups__delete(id: Int!): String!
   admin__core_groups__edit(content: ContentCreateAdminGroups!, id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
   admin__core_languages__create(allow_in_input: Boolean!, code: String!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!

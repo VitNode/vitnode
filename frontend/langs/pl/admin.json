@@ -374,7 +374,13 @@
       },
       "advanced": {
         "files": {
-          "title": "Pliki"
+          "title": "Pliki",
+          "delete": {
+            "desc": "Ta akcja usunie plik <name></name>.",
+            "uses_warning": "Ten plik jest używany w innych częściach systemu.",
+            "success": "Plik został usunięty.",
+            "submit": "Tak, usuń plik"
+          }
         }
       }
     },

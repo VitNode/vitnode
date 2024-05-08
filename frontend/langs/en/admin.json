@@ -373,7 +373,13 @@
       },
       "advanced": {
         "files": {
-          "title": "Files"
+          "title": "Files",
+          "delete": {
+            "desc": "This action will delete the file <name></name>.",
+            "uses_warning": "This file is used in other part of the system.",
+            "success": "File has been deleted.",
+            "submit": "Yes, delete file"
+          }
         }
       }
     },
