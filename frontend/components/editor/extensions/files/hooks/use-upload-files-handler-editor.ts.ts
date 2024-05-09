@@ -170,5 +170,5 @@ export const useUploadFilesHandlerEditor = ({
     );
   };
 
-  return { uploadFiles, files };
+  return { uploadFiles, files, setFiles };
 };

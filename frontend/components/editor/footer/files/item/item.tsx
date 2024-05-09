@@ -1,8 +1,7 @@
 import { Plus, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { findChildren } from "@tiptap/react";
-import type { Node } from "@tiptap/pm/model";
+import { type JSONContent } from "@tiptap/react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/functions/classnames";
@@ -12,6 +11,7 @@ import { deleteMutationApi } from "./hooks/delete-mutation-api";
 import { CONFIG } from "@/config/config";
 import type { FileStateEditor } from "@/components/editor/extensions/files/files";
 import { useEditorState } from "@/components/editor/hooks/use-editor-state";
+import type { TextLanguage } from "@/graphql/hooks";
 
 export interface ItemListFilesFooterEditorProps
   extends Omit<FileStateEditor, "file"> {
@@ -27,7 +27,39 @@ export const ItemListFilesFooterEditor = ({
 }: ItemListFilesFooterEditorProps) => {
   const t = useTranslations("core.editor.files");
   const tCore = useTranslations("core");
-  const { editor } = useEditorState();
+  const { editor, onChange, selectedLanguage, setFiles, value } =
+    useEditorState();
+
+  const handleDelete = ({
+    content,
+    file_id
+  }: {
+    content: string;
+    file_id: number;
+  }): string => {
+    const parseValue: { content: JSONContent[]; type: string } =
+      JSON.parse(content);
+
+    const mapContent = (values: JSONContent[]): JSONContent[] => {
+      return values.filter(value => {
+        if (value.type === "files" && value.attrs?.id === file_id) {
+          return false;
+        }
+        if (value.content) {
+          value.content = mapContent(value.content);
+        }
+
+        return true;
+      });
+    };
+
+    const valueReturn = {
+      ...parseValue,
+      content: mapContent(parseValue.content)
+    };
+
+    return JSON.stringify(valueReturn);
+  };
 
   return (
     <>
@@ -89,32 +121,35 @@ export const ItemListFilesFooterEditor = ({
             variant="destructiveGhost"
             ariaLabel={tCore("delete")}
             onClick={async () => {
-              const nodes: Node[] = [];
-              editor.state.tr.doc.descendants(node => {
-                if (node.type.name === "files" && node.attrs.id === id) {
-                  nodes.push(node);
-                }
-              });
+              // Remove files from the editor
+              if (Array.isArray(value)) {
+                const content: TextLanguage[] = value.map(item => ({
+                  language_code: item.language_code,
+                  value: handleDelete({
+                    content: item.value,
+                    file_id: id
+                  })
+                }));
 
-              editor.commands.forEach(
-                nodes.map(item => item.attrs.id),
-                (id, { commands, tr }) => {
-                  const item = findChildren(tr.doc, node => {
-                    return node.type.name === "files" && id === node.attrs.id;
-                  })?.[0];
+                onChange(content);
 
-                  if (!item) {
-                    return true;
-                  }
+                const parseContent = JSON.parse(
+                  content.find(item => item.language_code === selectedLanguage)
+                    ?.value ?? ""
+                );
 
-                  return commands.deleteRange({
-                    from: item.pos,
-                    to: item.pos + item.node.nodeSize
-                  });
-                }
-              );
+                editor.commands.clearContent();
+                editor.commands.setContent(parseContent);
+              } else {
+                const content = handleDelete({
+                  content: value,
+                  file_id: id
+                });
 
-              // setFiles(prev => prev.filter(item => item.id !== id));
+                onChange(content);
+              }
+
+              setFiles(prev => prev.filter(item => item.id !== id));
               const mutation = await deleteMutationApi({
                 id,
                 securityKey: data?.security_key
