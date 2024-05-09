@@ -47,7 +47,7 @@ export const Editor = ({
   onChange,
   value
 }: WithLanguage | WithoutLanguage) => {
-  const { files, uploadFiles } = useUploadFilesHandlerEditor({
+  const { files, setFiles, uploadFiles } = useUploadFilesHandlerEditor({
     value,
     allowUploadFiles
   });
@@ -129,7 +129,16 @@ export const Editor = ({
 
   return (
     <EditorStateContext.Provider
-      value={{ files, editor, uploadFiles, allowUploadFiles }}
+      value={{
+        files,
+        editor,
+        uploadFiles,
+        allowUploadFiles,
+        value,
+        onChange: onChange as (value: TextLanguage[] | string) => void,
+        selectedLanguage,
+        setFiles
+      }}
     >
       <div
         className={cn("border border-input rounded-md shadow-sm", className)}
