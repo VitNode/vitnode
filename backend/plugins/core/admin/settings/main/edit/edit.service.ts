@@ -60,7 +60,8 @@ export class EditAdminMainSettingsService {
       .map(item => {
         const value =
           site_description.find(el => el.language_code === "en")?.value ??
-          site_description[0].value;
+          site_description[0]?.value ??
+          "";
 
         const path = join(
           process.cwd(),

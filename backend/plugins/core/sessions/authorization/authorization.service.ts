@@ -111,9 +111,9 @@ export class AuthorizationCoreSessionsService {
         user: null,
         plugin_default: plugin?.code ?? "",
         files: {
-          allow_upload: guestGroup.files_allow_upload,
-          max_storage_for_submit: guestGroup.files_max_storage_for_submit,
-          total_max_storage: guestGroup.files_total_max_storage,
+          allow_upload: guestGroup?.files_allow_upload ?? false,
+          max_storage_for_submit: guestGroup?.files_max_storage_for_submit ?? 0,
+          total_max_storage: guestGroup?.files_total_max_storage ?? 0,
           space_used: 0
         }
       };

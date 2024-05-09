@@ -1,5 +1,5 @@
 {
-  "id": "5ecab02e-94e6-4828-823d-2e1950fa12fa",
+  "id": "8feaa1f0-3755-4ba1-bb91-adf9708a21eb",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "6",
   "dialect": "postgresql",
@@ -293,8 +293,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "category_id": {
-          "name": "category_id",
+        "item_id": {
+          "name": "item_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -312,14 +312,29 @@
           "notNull": true
         }
       },
-      "indexes": {},
+      "indexes": {
+        "blog_categories_description_item_id_idx": {
+          "name": "blog_categories_description_item_id_idx",
+          "columns": [
+            "item_id"
+          ],
+          "isUnique": false
+        },
+        "blog_categories_description_language_code_idx": {
+          "name": "blog_categories_description_language_code_idx",
+          "columns": [
+            "language_code"
+          ],
+          "isUnique": false
+        }
+      },
       "foreignKeys": {
-        "blog_categories_description_category_id_blog_categories_id_fk": {
-          "name": "blog_categories_description_category_id_blog_categories_id_fk",
+        "blog_categories_description_item_id_blog_categories_id_fk": {
+          "name": "blog_categories_description_item_id_blog_categories_id_fk",
           "tableFrom": "blog_categories_description",
           "tableTo": "blog_categories",
           "columnsFrom": [
-            "category_id"
+            "item_id"
           ],
           "columnsTo": [
             "id"
@@ -354,8 +369,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "category_id": {
-          "name": "category_id",
+        "item_id": {
+          "name": "item_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -373,14 +388,29 @@
           "notNull": true
         }
       },
-      "indexes": {},
+      "indexes": {
+        "blog_categories_name_item_id_idx": {
+          "name": "blog_categories_name_item_id_idx",
+          "columns": [
+            "item_id"
+          ],
+          "isUnique": false
+        },
+        "blog_categories_name_language_code_idx": {
+          "name": "blog_categories_name_language_code_idx",
+          "columns": [
+            "language_code"
+          ],
+          "isUnique": false
+        }
+      },
       "foreignKeys": {
-        "blog_categories_name_category_id_blog_categories_id_fk": {
-          "name": "blog_categories_name_category_id_blog_categories_id_fk",
+        "blog_categories_name_item_id_blog_categories_id_fk": {
+          "name": "blog_categories_name_item_id_blog_categories_id_fk",
           "tableFrom": "blog_categories_name",
           "tableTo": "blog_categories",
           "columnsFrom": [
-            "category_id"
+            "item_id"
           ],
           "columnsTo": [
             "id"

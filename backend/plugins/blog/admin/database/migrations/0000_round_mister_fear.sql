@@ -30,14 +30,14 @@ CREATE TABLE IF NOT EXISTS "blog_categories" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "blog_categories_description" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"category_id" integer,
+	"item_id" integer,
 	"language_code" varchar NOT NULL,
 	"value" varchar NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "blog_categories_name" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"category_id" integer,
+	"item_id" integer,
 	"language_code" varchar NOT NULL,
 	"value" varchar(100) NOT NULL
 );
@@ -79,7 +79,7 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "blog_categories_description" ADD CONSTRAINT "blog_categories_description_category_id_blog_categories_id_fk" FOREIGN KEY ("category_id") REFERENCES "public"."blog_categories"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "blog_categories_description" ADD CONSTRAINT "blog_categories_description_item_id_blog_categories_id_fk" FOREIGN KEY ("item_id") REFERENCES "public"."blog_categories"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -91,7 +91,7 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "blog_categories_name" ADD CONSTRAINT "blog_categories_name_category_id_blog_categories_id_fk" FOREIGN KEY ("category_id") REFERENCES "public"."blog_categories"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "blog_categories_name" ADD CONSTRAINT "blog_categories_name_item_id_blog_categories_id_fk" FOREIGN KEY ("item_id") REFERENCES "public"."blog_categories"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -107,4 +107,8 @@ CREATE INDEX IF NOT EXISTS "blog_articles_category_id_idx" ON "blog_articles" ("
 CREATE INDEX IF NOT EXISTS "blog_articles_content_item_id_idx" ON "blog_articles_content" ("item_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "blog_articles_content_language_code_idx" ON "blog_articles_content" ("language_code");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "blog_articles_title_item_id_idx" ON "blog_articles_title" ("item_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "blog_articles_title_language_code_idx" ON "blog_articles_title" ("language_code");
+CREATE INDEX IF NOT EXISTS "blog_articles_title_language_code_idx" ON "blog_articles_title" ("language_code");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "blog_categories_description_item_id_idx" ON "blog_categories_description" ("item_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "blog_categories_description_language_code_idx" ON "blog_categories_description" ("language_code");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "blog_categories_name_item_id_idx" ON "blog_categories_name" ("item_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "blog_categories_name_language_code_idx" ON "blog_categories_name" ("language_code");

@@ -26,7 +26,7 @@ const getDescription = async ({
     return textFromLang.value;
   }
 
-  return site_description[0].value;
+  return site_description[0]?.value ?? "";
 };
 
 export async function generateMetadata({
