@@ -44,6 +44,21 @@ export const getTables = () => {
 `;
 };
 
+export const createConfigForDrizzle = ({ code }: { code: string }) => {
+  return `// !! Do not remove and edit this file !!
+import { defineConfig } from "drizzle-kit";
+
+import { DATABASE_ENVS } from "@/plugins/database/client";
+
+export default defineConfig({
+  dialect: "postgresql",
+  dbCredentials: DATABASE_ENVS,
+  schema: "./plugins/${code}/admin/database/schema/*.ts",
+  out: "./plugins/${code}/admin/database/migrations/"
+});
+`;
+};
+
 export const createInfoJSON = ({
   allow_default,
   author,

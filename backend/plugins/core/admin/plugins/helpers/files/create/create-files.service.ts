@@ -5,6 +5,7 @@ import { Injectable } from "@nestjs/common";
 
 import {
   PluginInfoJSONType,
+  createConfigForDrizzle,
   createFunctionsDatabase,
   createInfoJSON,
   createModuleAdminSchema,
@@ -58,6 +59,10 @@ export class CreateFilesAdminPluginsService {
           {
             name: "functions.ts",
             content: createFunctionsDatabase()
+          },
+          {
+            name: "drizzle.config.ts",
+            content: createConfigForDrizzle({ code })
           }
         ]
       }
