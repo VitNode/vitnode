@@ -8,9 +8,9 @@ import { ShowSettingsObj } from "./dto/show.obj";
 import { ManifestWithLang } from "../settings.module";
 
 import { DatabaseService } from "@/plugins/database/database.service";
-import { getConfigFile } from "@/config/get-config-file";
 import { Ctx } from "@/types/context.type";
 import { core_languages } from "../../admin/database/schema/languages";
+import { getConfigFile } from "@/config";
 
 @Injectable()
 export class ShowSettingsService {

@@ -20,6 +20,7 @@ export class TextLanguageInput {
 }
 
 export const IsTextLanguageInput = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (object: Record<string, any>, propertyName: string) => {
     registerDecorator({
       target: object.constructor,
@@ -39,6 +40,7 @@ export const IsTextLanguageInput = () => {
 };
 
 export const MaxLengthLanguageInput = ({ length }: { length: number }) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (object: Record<string, any>, propertyName: string) => {
     registerDecorator({
       target: object.constructor,
@@ -58,7 +60,7 @@ export const MaxLengthLanguageInput = ({ length }: { length: number }) => {
 };
 
 export const MinLengthLanguageInput = ({ length }: { length: number }) => {
-  return (object: Record<string, any>, propertyName: string) => {
+  return (object: Record<string, unknown>, propertyName: string) => {
     registerDecorator({
       target: object.constructor,
       propertyName,

@@ -1,11 +1,8 @@
 import * as fs from "fs";
 
-import {
-  ConfigType,
-  configPath,
-  getConfigFile
-} from "../../config/get-config-file";
 import { CustomError } from "@/utils/errors/CustomError";
+import { ConfigType } from "@vitnode/shared";
+import { configPath, getConfigFile } from "@/config";
 
 export const setRebuildRequired = async ({
   set

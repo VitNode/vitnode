@@ -3,10 +3,10 @@
 import { NodeViewWrapper, ReactNodeViewRenderer } from "@tiptap/react";
 import { File } from "lucide-react";
 import Image from "next/image";
+import { CONFIG } from "@vitnode/shared";
 
 import { acceptMimeTypeImage, type FilesHandlerAttributes } from "./files";
 import { formatBytes } from "@/functions/format-bytes";
-import { CONFIG } from "@/config/config";
 
 const FileFromNextWithNode = ({
   node: { attrs: data }

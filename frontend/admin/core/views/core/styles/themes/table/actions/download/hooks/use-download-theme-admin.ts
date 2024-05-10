@@ -3,11 +3,11 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import { CONFIG } from "@vitnode/shared";
 
 import { mutationApi } from "./mutation-api";
 import { increaseVersionString } from "@/functions/increase-version-string";
 import { useDialog } from "@/components/ui/dialog";
-import { CONFIG } from "@/config/config";
 import type { ShowAdminThemes } from "@/graphql/hooks";
 import { zodInput } from "@/functions/zod";
 

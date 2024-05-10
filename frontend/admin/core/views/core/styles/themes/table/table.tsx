@@ -4,6 +4,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
 import { ExternalLink } from "lucide-react";
+import { CONFIG } from "@vitnode/shared";
 
 import { DataTable } from "@/components/data-table/data-table";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
@@ -14,7 +15,6 @@ import type {
   ShowAdminThemes
 } from "@/graphql/hooks";
 import { ActionsItemThemesAdmin } from "./actions/actions";
-import { CONFIG } from "@/config/config";
 
 export const TableThemesAdmin = ({
   admin__core_themes__show: { edges, pageInfo }

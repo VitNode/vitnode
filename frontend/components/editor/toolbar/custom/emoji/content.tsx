@@ -1,11 +1,11 @@
 import type { Editor } from "@tiptap/react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { CONFIG } from "@vitnode/shared";
 
 import { EmojisContentIconInput } from "@/components/icon/input/content/emojis/emojis";
 import { SkinSelectEmojisContentIconInput } from "@/components/icon/input/content/emojis/skin-select";
 import { Input } from "@/components/ui/input";
-import { CONFIG } from "@/config/config";
 
 interface Props {
   editor: Editor;

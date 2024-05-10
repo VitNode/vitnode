@@ -1,2 +1,1 @@
-export * from './config';
-export * from './get-config-file';
+export * from "./config";

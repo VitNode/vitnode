@@ -5,6 +5,7 @@ import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import tippy, { type Instance, type Props } from "tippy.js";
 import { useTranslations } from "next-intl";
 import type { Emoji } from "@emoji-mart/data";
+import { CONFIG } from "@vitnode/shared";
 
 import { cn } from "@/functions/classnames";
 import { classPopover } from "@/components/ui/popover";
@@ -14,7 +15,6 @@ import type {
   SuggestionKeyDownProps,
   SuggestionProps
 } from "../mentions/client";
-import { CONFIG } from "@/config/config";
 
 const ComponentList = forwardRef<
   ComponentListRef,

@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-
-import { CONFIG } from "@/config/config";
+import { CONFIG } from "@vitnode/shared";
 
 export default function robots(): MetadataRoute.Robots {
   return {

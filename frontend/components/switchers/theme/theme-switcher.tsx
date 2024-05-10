@@ -2,6 +2,7 @@
 
 import { Palette } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { CONFIG } from "@vitnode/shared";
 
 import {
   DropdownMenu,
@@ -13,7 +14,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { useGlobals } from "@/hooks/core/use-globals";
 import { mutationApi } from "./mutation-api";
-import { CONFIG } from "@/config/config";
 
 export const ThemeSwitcher = () => {
   const t = useTranslations("core");

@@ -4,8 +4,7 @@ import * as fs from "fs";
 import { generateManifest } from "./manifest";
 import { updateObject } from "./update-object";
 import { DEFAULT_CONFIG_DATA } from "./default-config-data";
-
-import { configPath, getConfigFile } from "../../config/get-config-file";
+import { configPath, getConfigFile } from "@/config";
 
 (async () => {
   if (!fs.existsSync(configPath)) {

@@ -3,11 +3,11 @@
 import { File } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { CONFIG } from "@vitnode/shared";
 
 import { Button } from "@/components/ui/button";
 import { formatBytes } from "@/functions/format-bytes";
 import { acceptMimeTypeImage } from "../extensions/files/files";
-import { CONFIG } from "@/config/config";
 
 interface Props {
   dir_folder: string;

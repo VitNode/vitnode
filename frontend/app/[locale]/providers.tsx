@@ -4,10 +4,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { useState, type ReactNode } from "react";
+import type { ConfigType } from "@vitnode/shared";
 
 import { Toaster } from "@/components/ui/sonner";
 import { GlobalsContext } from "@/hooks/core/use-globals";
-import type { ConfigType } from "@/config/get-config-file";
 import type { Core_MiddlewareQuery } from "@/graphql/hooks";
 
 interface Props {

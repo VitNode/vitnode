@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { CONFIG } from "@vitnode/shared";
 
 import { useEditThemeAdmin } from "./hooks/use-edit-theme-admin";
 import {
@@ -17,7 +18,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { CONFIG } from "@/config/config";
 import type { ShowAdminThemes } from "@/graphql/hooks";
 
 export const ContentEditThemeActionsAdmin = (props: ShowAdminThemes) => {

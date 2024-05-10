@@ -6,7 +6,7 @@ import * as dotenv from "dotenv";
 
 import { objectToArray, updateObject } from "./update-object";
 
-import { ConfigType } from "@/config/get-config-file";
+import { ConfigType } from "@vitnode/shared";
 
 dotenv.config({
   path: join(process.cwd(), "..", ".env")

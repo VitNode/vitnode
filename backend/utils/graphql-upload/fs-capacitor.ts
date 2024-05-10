@@ -62,14 +62,14 @@ export class ReadStream extends Readable {
       // then this stream has reached the end.
       if (
         (
-          this._writeStream as any as {
+          this._writeStream as unknown as {
             _writableState: { finished: boolean };
           }
         )._writableState.finished
       ) {
         // Check if we have consumed the whole file up to where
         // the write stream has written before ending the stream
-        if (this._pos < (this._writeStream as any as { _pos: number })._pos)
+        if (this._pos < (this._writeStream as unknown as { _pos: number })._pos)
           this._read(n);
         else this.push(null);
 
@@ -187,7 +187,7 @@ export class WriteStream extends Writable {
     }
   };
 
-  _final(callback: (error?: null | Error) => any): void {
+  _final(callback: (error?: null | Error) => unknown): void {
     if (typeof this._fd !== "number") {
       this.once("ready", () => this._final(callback));
 
@@ -199,7 +199,7 @@ export class WriteStream extends Writable {
   _write(
     chunk: Buffer,
     encoding: string,
-    callback: (error?: null | Error) => any
+    callback: (error?: null | Error) => unknown
   ): void {
     if (typeof this._fd !== "number") {
       this.once("ready", () => this._write(chunk, encoding, callback));
@@ -234,7 +234,7 @@ export class WriteStream extends Writable {
 
   _destroy(
     error: undefined | null | Error,
-    callback: (error?: null | Error) => any
+    callback: (error?: null | Error) => unknown
   ): void {
     // Destroy all attached read streams.
     for (const readStream of this._readStreams) {

@@ -12,8 +12,8 @@ import { UploadCoreFilesArgs } from "../../files/helpers/upload/dto/upload.args"
 import { core_files } from "../../admin/database/schema/files";
 import { ShowCoreFiles } from "../../files/show/dto/show.obj";
 import { generateRandomString } from "@/functions/generate-random-string";
-import { getConfigFile } from "@/config/get-config-file";
 import { AccessDeniedError } from "@/utils/errors/AccessDeniedError";
+import { getConfigFile } from "@/config";
 
 interface GetFilesAfterUploadArgs extends UploadCoreEditorArgs {
   maxUploadSizeKb: number;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { CONFIG } from "@vitnode/shared";
 
 import {
   Form,
@@ -16,7 +17,6 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 import type { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";
 import { Input } from "@/components/ui/input";
-import { CONFIG } from "@/config/config";
 import { ColorInput } from "@/components/color/color-input";
 
 export const ManifestMetadataCoreAdminView = (

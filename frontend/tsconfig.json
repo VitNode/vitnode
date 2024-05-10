@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.base.json",
   "ts-node": {
     // these options are overrides used only by ts-node
     // same as the --compilerOptions flag and the TS_NODE_COMPILER_OPTIONS environment variable
@@ -12,6 +11,9 @@
     "target": "ES2021",
     "baseUrl": "./",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -19,6 +21,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "incremental": true,
     "verbatimModuleSyntax": true,
     "plugins": [
       {
@@ -27,7 +30,8 @@
     ],
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "next-env.d.ts",

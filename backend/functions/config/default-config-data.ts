@@ -1,4 +1,4 @@
-import { ConfigType } from "@/config/get-config-file";
+import { ConfigType } from "@vitnode/shared";
 
 export const DEFAULT_CONFIG_DATA: ConfigType = {
   rebuild_required: {

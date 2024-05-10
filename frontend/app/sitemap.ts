@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
+import { CONFIG } from "@vitnode/shared";
 
-import { CONFIG } from "@/config/config";
 import { getSessionData } from "@/functions/get-session-data";
 import { generateAlternateLanguages } from "@/functions/sitemap";
 

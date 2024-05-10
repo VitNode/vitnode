@@ -1,9 +1,9 @@
 import { AlertTriangle } from "lucide-react";
+import { CONFIG } from "@vitnode/shared";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Badge } from "@/components/ui/badge";
 import { RebuildRequiredAdmin } from "@/admin/core/global/rebuild-required";
-import { CONFIG } from "@/config/config";
 import { VersionDashboardCoreAdmin } from "./version";
 
 // interface Props {

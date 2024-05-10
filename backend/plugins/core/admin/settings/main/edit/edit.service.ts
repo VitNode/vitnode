@@ -8,13 +8,10 @@ import { EditAdminMainSettingsArgs } from "./dto/edit.args";
 import { EditAdminSettingsObj } from "./dto/edit.obj";
 
 import { DatabaseService } from "@/plugins/database/database.service";
-import {
-  ConfigType,
-  configPath,
-  getConfigFile
-} from "@/config/get-config-file";
+import { ConfigType } from "@vitnode/shared";
 import { core_languages } from "../../../database/schema/languages";
 import { ManifestWithLang } from "@/plugins/core/settings/settings.module";
+import { configPath, getConfigFile } from "@/config";
 
 @Injectable()
 export class EditAdminMainSettingsService {

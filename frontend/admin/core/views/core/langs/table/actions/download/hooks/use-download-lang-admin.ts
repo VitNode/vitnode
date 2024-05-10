@@ -4,11 +4,11 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import { CONFIG } from "@vitnode/shared";
 
 import { queryApi } from "./query-api";
 import { mutationApi } from "./mutation-api";
 import { useDialog } from "@/components/ui/dialog";
-import { CONFIG } from "@/config/config";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 
 export const useDownloadLangAdmin = ({

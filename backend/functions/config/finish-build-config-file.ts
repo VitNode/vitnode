@@ -8,12 +8,9 @@ import { migrate } from "drizzle-orm/node-postgres/migrator";
 import { updatePlugins } from "./update-plugins";
 import { DEFAULT_CONFIG_DATA } from "./default-config-data";
 
-import {
-  ConfigType,
-  configPath,
-  getConfigFile
-} from "../../config/get-config-file";
 import { db } from "@/plugins/database/client";
+import { ConfigType } from "@vitnode/shared";
+import { configPath, getConfigFile } from "@/config";
 
 (async () => {
   // Update config file

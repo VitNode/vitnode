@@ -1,10 +1,10 @@
 import { NextIntlClientProvider, type AbstractIntlMessages } from "next-intl";
 import { Inter } from "next/font/google";
 
-import { getConfigFile } from "@/config/get-config-file";
 import { Providers } from "./providers";
 import { InternalErrorView } from "@/admin/core/global/internal-error/internal-error-view";
 import { cn } from "@/functions/classnames";
+import { getConfigFile } from "@/config";
 
 const inter = Inter({
   subsets: ["latin"],

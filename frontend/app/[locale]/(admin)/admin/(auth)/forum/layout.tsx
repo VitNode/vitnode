@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 
-import { getConfigFile } from "@/config/get-config-file";
+import { getConfigFile } from "@/config";
 
 interface Props {
   children: ReactNode;
