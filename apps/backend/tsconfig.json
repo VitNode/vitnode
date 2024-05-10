@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "@vitnode/config/tsconfig.base.json",
   "compilerOptions": {
     "target": "ESNext",
     "module": "commonjs",

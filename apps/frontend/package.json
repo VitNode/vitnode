@@ -17,6 +17,8 @@
     "docker:run": "docker run -p 3000:3000 vitnode_frontend"
   },
   "dependencies": {
+    "@vitnode/shared": "workspace:*",
+    "@vitnode/config": "workspace:*",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-checkbox": "^1.0.4",

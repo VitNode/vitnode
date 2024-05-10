@@ -1,9 +1,9 @@
 import { UserBarAdmin } from "./user-bar/user-bar-admin";
 import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";
-import { CONFIG } from "@/config/config";
 import { Link } from "@/i18n";
 import { LogoVitNode } from "@/components/logo-vitnode";
 import { LanguageSwitcher } from "@/components/switchers/language-switcher";
+import {CONFIG} from "@vitnode/shared";
 
 export const HeaderAdmin = () => {
   return (

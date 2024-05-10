@@ -2,10 +2,10 @@
 
 import { RefreshCcw } from "lucide-react";
 import { useTranslations } from "next-intl";
+import test from "@vitnode/shared";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { buttonVariants } from "@/components/ui/button";
-import { CONFIG } from "@/config/config";
 import { useGlobals } from "@/hooks/core/use-globals";
 
 export const RebuildRequiredAdmin = () => {

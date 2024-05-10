@@ -6,8 +6,8 @@
   "author": "Maciej Piotr (aXenDev) Balcerzak",
   "license": "GPL-3.0 license",
   "workspaces": [
-    "backend/*",
-    "frontend/*"
+    "apps/*",
+    "packages/*"
   ],
   "scripts": {
     "build": "turbo build",
@@ -29,6 +29,10 @@
     "docker:prod": "sudo pnpm config:init && sudo docker compose -f ./docker-compose-prod-backend.yml -p vitnode-prod up -d --build && sudo docker compose -f ./docker-compose-prod-frontend.yml -p vitnode-prod up -d --build && sudo pnpm config:finish",
     "docker:dev": "docker-compose -f ./docker-compose-dev.yml -p vitnode-dev up -d",
     "docker:clean": "sudo docker system prune -a"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
   },
   "devDependencies": {
     "prettier": "^3.2.5",
