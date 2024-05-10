@@ -3,5 +3,8 @@
   "version": "0.0.0",
   "exports": {
     ".": "./index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.11"
   }
 }

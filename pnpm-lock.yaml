@@ -148,7 +148,7 @@ importers:
         specifier: ^4.17.1
         version: 4.17.1
       '@types/node':
-        specifier: ^20.12.10
+        specifier: ^20.12.11
         version: 20.12.11
       '@types/nodemailer':
         specifier: ^6.4.15
@@ -535,9 +535,9 @@ importers:
 
   shared:
     devDependencies:
-      typescript:
-        specifier: ^5.4.5
-        version: 5.4.5
+      '@types/node':
+        specifier: ^20.12.11
+        version: 20.12.11
 
 packages:
 
