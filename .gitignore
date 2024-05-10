@@ -1,5 +1,4 @@
 node_modules
 .env
 docker
-DRAFT.md
 .turbo

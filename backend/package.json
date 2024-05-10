@@ -23,7 +23,7 @@
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
-    "@vitnode/config": "workspace:*",
+    "@vitnode/shared": "workspace:*",
     "@nestjs/serve-static": "^4.0.2",
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",

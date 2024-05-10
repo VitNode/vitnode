@@ -10,9 +10,9 @@
     "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
-  "root": true,
   "parserOptions": {
     "project": "tsconfig.json",
+    "tsconfigRootDir": "./apps/backend",
     "sourceType": "module"
   },
   "plugins": [
@@ -38,14 +38,6 @@
     ],
     "sort-destructure-keys/sort-destructure-keys": "warn",
     "newline-before-return": "error",
-    "prettier/prettier": [
-      "warn",
-      {
-        "endOfLine": "auto",
-        "arrowParens": "avoid",
-        "trailingComma": "none"
-      }
-    ],
     "import/order": [
       "warn",
       {

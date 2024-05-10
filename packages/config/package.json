@@ -1,8 +1,0 @@
-{
-  "name": "@vitnode/config",
-  "version": "0.0.0",
-  "files": ["tsconfig.base.json"],
-  "devDependencies": {
-    "typescript": "^5.4.5"
-  }
-}
