@@ -1,0 +1,16 @@
+{
+  "name": "Blog",
+  "description": "Turn your ideas into viral blog posts.",
+  "code": "blog",
+  "author": "VitNode",
+  "author_url": "https://vitnode.com/",
+  "support_url": "https://github.com/aXenDeveloper/vitnode/issues",
+  "allow_default": true,
+  "nav": [
+    {
+      "code": "categories",
+      "href": "categories",
+      "icon": "Blocks"
+    }
+  ]
+}
