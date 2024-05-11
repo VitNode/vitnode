@@ -4,8 +4,7 @@ import { join } from "path";
 import { Injectable } from "@nestjs/common";
 
 import { DeleteCoreFilesArgs } from "./dto/delete.args";
-
-import { CustomError } from "@/utils/errors/CustomError";
+import { CustomError } from "@/utils/errors/custom-error";
 
 @Injectable()
 export class DeleteCoreFilesService {

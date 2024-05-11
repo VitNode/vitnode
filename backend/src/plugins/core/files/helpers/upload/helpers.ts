@@ -1,5 +1,15 @@
+import { CustomError } from "@/utils/errors/custom-error";
 import { FileUpload } from "@/utils/graphql-upload/Upload";
-import { CustomError } from "@/utils/errors/CustomError";
+
+export const acceptMimeTypeImage = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/gif",
+  "image/avif"
+];
+
+export const acceptMimeTypeVideo = ["video/mp4", "video/webm", "video/ogg"];
 
 export class HelpersUploadCoreFilesService {
   protected async checkSizeFile({

@@ -10,8 +10,7 @@ import {
   Query
 } from "@nestjs/common";
 import { Response } from "express";
-
-import { DatabaseService } from "@/plugins/database/database.service";
+import { DatabaseService } from "@/database/database.service";
 
 @Controller("secure_files")
 export class DownloadSecureFilesController {

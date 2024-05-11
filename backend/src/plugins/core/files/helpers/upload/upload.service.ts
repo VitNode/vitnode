@@ -12,13 +12,12 @@ import { Injectable } from "@nestjs/common";
 
 import { UploadCoreFilesArgs } from "./dto/upload.args";
 import { UploadCoreFilesObj } from "./dto/upload.obj";
-import { HelpersUploadCoreFilesService } from "./helpers";
+import { HelpersUploadCoreFilesService, acceptMimeTypeImage } from "./helpers";
 
 import { generateRandomString } from "@/functions/generate-random-string";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
-import { DatabaseService } from "@/plugins/database/database.service";
-import { CustomError } from "@/utils/errors/CustomError";
-import { acceptMimeTypeImage } from "@/plugins/core/editor/helpers";
+import { DatabaseService } from "@/database/database.service";
+import { CustomError } from "@/utils/errors/custom-error";
 
 @Injectable()
 export class UploadCoreFilesService extends HelpersUploadCoreFilesService {

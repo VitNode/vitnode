@@ -33,6 +33,18 @@ type AvatarUser {
   id: Int!
 }
 
+input ContentCreateAdminGroups {
+  files_allow_upload: Boolean!
+  files_max_storage_for_submit: Int!
+  files_total_max_storage: Int!
+}
+
+type ContentShowAdminGroups {
+  files_allow_upload: Boolean!
+  files_max_storage_for_submit: Int!
+  files_total_max_storage: Int!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -87,6 +99,14 @@ type LayoutAdminInstallObj {
 }
 
 type Mutation {
+  admin__core_files__delete(id: Int!): String!
+  admin__core_groups__delete(id: Int!): String!
+  admin__core_groups__edit(content: ContentCreateAdminGroups!, id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
+  admin__core_languages__create(allow_in_input: Boolean!, code: String!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
+  admin__core_languages__delete(code: String!): String!
+  admin__core_languages__download(all: Boolean!, code: String!, plugins: [String!]!): String!
+  admin__core_languages__edit(allow_in_input: Boolean!, default: Boolean!, enabled: Boolean!, id: Int!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
+  admin__core_languages__update(code: String!, file: Upload!): String!
   admin__core_main_settings__edit(site_copyright: [TextLanguageInput!]!, site_description: [TextLanguageInput!]!, site_name: String!, site_short_name: String!): EditAdminSettingsObj!
   admin__core_manifest_metadata__edit(background_color: String!, display: String!, start_url: String!, theme_color: String!): ShowAdminManifestMetadataObj!
   admin__core_plugins__create(author: String!, author_url: String, code: String!, description: String, name: String!, support_url: String!): ShowAdminPlugins!
@@ -105,6 +125,13 @@ type Mutation {
   admin__core_themes__upload(file: Upload!, id: Int): ShowAdminThemes!
   admin__install__create_database: String!
   admin_sessions__sign_out: String!
+  core_editor_files__delete(id: Int!, security_key: String): String!
+  core_editor_files__upload(file: Upload!, folder: String!, plugin: String!): ShowCoreFiles!
+  core_groups__admin_create(content: ContentCreateAdminGroups!, name: [TextLanguageInput!]!): ShowAdminGroups!
+  core_mail_send(content: String!, receiver_address: String!, subject: String!): String!
+  core_members__avatar__delete: String!
+  core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
+  core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
 }
@@ -124,6 +151,8 @@ type PageInfo {
 }
 
 type Query {
+  admin__core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowAdminFilesObj!
+  admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminGroupsSortByArgs): ShowAdminGroupsObj!
   admin__core_manifest_metadata__show: ShowAdminManifestMetadataObj!
   admin__core_plugins__files(code: String!): FilesAdminPluginsObj!
   admin__core_plugins__nav__show(plugin_code: String!): [ShowAdminNavPluginsObj!]!
@@ -131,9 +160,62 @@ type Query {
   admin__core_themes__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminThemesSortByArgs): ShowAdminThemesObj!
   admin__install__layout: LayoutAdminInstallObj!
   admin__sessions__authorization: AuthorizationAdminSessionsObj!
+  core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowCoreFilesObj!
+  core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreLanguagesSortByArgs): ShowCoreLanguagesObj!
+  core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: ShowCoreMembersSortByArgs): ShowCoreMembersObj!
+  core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_settings__show: ShowSettingsObj!
-  core_test__test: String!
+}
+
+type ShowAdminFiles {
+  count_uses: Int!
+  created: DateTime!
+  dir_folder: String!
+  extension: String!
+  file_alt: String
+  file_name: String!
+  file_name_original: String!
+  file_size: Int!
+  height: Int
+  id: Int!
+  mimetype: String!
+  security_key: String
+  user: User!
+  width: Int
+}
+
+type ShowAdminFilesObj {
+  edges: [ShowAdminFiles!]!
+  pageInfo: PageInfo!
+}
+
+type ShowAdminGroups {
+  content: ContentShowAdminGroups!
+  created: DateTime!
+  default: Boolean!
+  guest: Boolean!
+  id: Int!
+  name: [TextLanguage!]!
+  protected: Boolean!
+  root: Boolean!
+  updated: DateTime!
+  users_count: Int!
+}
+
+type ShowAdminGroupsObj {
+  edges: [ShowAdminGroups!]!
+  pageInfo: PageInfo!
+}
+
+input ShowAdminGroupsSortByArgs {
+  column: ShowAdminGroupsSortingColumnEnum!
+  direction: SortDirectionEnum!
+}
+
+enum ShowAdminGroupsSortingColumnEnum {
+  created
+  updated
 }
 
 type ShowAdminManifestMetadataObj {
@@ -212,6 +294,124 @@ enum ShowAdminThemesSortingColumnEnum {
   created
 }
 
+type ShowCoreFiles {
+  count_uses: Int!
+  created: DateTime!
+  dir_folder: String!
+  extension: String!
+  file_alt: String
+  file_name: String!
+  file_name_original: String!
+  file_size: Int!
+  height: Int
+  id: Int!
+  mimetype: String!
+  security_key: String
+  width: Int
+}
+
+type ShowCoreFilesObj {
+  edges: [ShowCoreFiles!]!
+  pageInfo: PageInfo!
+}
+
+input ShowCoreFilesSortByArgs {
+  column: ShowCoreFilesSortingColumnEnum!
+  direction: SortDirectionEnum!
+}
+
+enum ShowCoreFilesSortingColumnEnum {
+  created
+  file_size
+}
+
+type ShowCoreLanguages {
+  allow_in_input: Boolean!
+  code: String!
+  created: DateTime!
+  default: Boolean!
+  enabled: Boolean!
+  id: Int!
+  locale: String!
+  name: String!
+  protected: Boolean!
+  time_24: Boolean!
+  timezone: String!
+  updated: DateTime!
+}
+
+type ShowCoreLanguagesObj {
+  edges: [ShowCoreLanguages!]!
+  pageInfo: PageInfo!
+}
+
+input ShowCoreLanguagesSortByArgs {
+  column: ShowCoreLanguagesSortingColumnEnum!
+  direction: SortDirectionEnum!
+}
+
+enum ShowCoreLanguagesSortingColumnEnum {
+  created
+  updated
+}
+
+type ShowCoreMembers {
+  avatar: AvatarUser
+  avatar_color: String!
+  group: GroupUser!
+  id: Int!
+  joined: DateTime!
+  name: String!
+  name_seo: String!
+  posts: Int!
+}
+
+type ShowCoreMembersObj {
+  edges: [ShowCoreMembers!]!
+  pageInfo: PageInfo!
+}
+
+input ShowCoreMembersSortByArgs {
+  column: ShowCoreMembersSortingColumnEnum!
+  direction: SortDirectionEnum!
+}
+
+enum ShowCoreMembersSortingColumnEnum {
+  first_name
+  followers
+  joined
+  last_name
+  name
+  posts
+  reactions
+}
+
+type ShowCoreNav {
+  children: [ShowCoreNavItem!]!
+  description: [TextLanguage!]!
+  external: Boolean!
+  href: String!
+  icon: String
+  id: Int!
+  name: [TextLanguage!]!
+  position: Int!
+}
+
+type ShowCoreNavItem {
+  description: [TextLanguage!]!
+  external: Boolean!
+  href: String!
+  icon: String
+  id: Int!
+  name: [TextLanguage!]!
+  position: Int!
+}
+
+type ShowCoreNavObj {
+  edges: [ShowCoreNav!]!
+  pageInfo: PageInfo!
+}
+
 type ShowCoreSessionDevices {
   device_id: Int!
   expires: DateTime!
@@ -226,6 +426,13 @@ type ShowSettingsObj {
   site_name: String!
   site_short_name: String!
   theme_id: Float
+}
+
+type SignUpCoreMembersObj {
+  email: String!
+  group_id: Int!
+  name: String!
+  newsletter: Boolean
 }
 
 enum SortDirectionEnum {
@@ -245,3 +452,24 @@ input TextLanguageInput {
 
 """The `Upload` scalar type represents a file upload."""
 scalar Upload
+
+type UploadAvatarCoreMembersObj {
+  dir_folder: String!
+  extension: String!
+  file_name: String!
+  file_name_original: String!
+  file_size: Int!
+  height: Int
+  id: Int!
+  mimetype: String!
+  width: Int
+}
+
+type User {
+  avatar: AvatarUser
+  avatar_color: String!
+  group: GroupUser!
+  id: Int!
+  name: String!
+  name_seo: String!
+}
