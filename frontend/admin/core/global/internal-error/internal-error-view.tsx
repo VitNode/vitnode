@@ -2,8 +2,8 @@
 
 import { RefreshCcw, RotateCcw, WifiOff } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { CONFIG } from "@vitnode/shared";
 
+import { CONFIG } from "@/config";
 import {
   Card,
   CardContent,

@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
-import { CONFIG } from "@vitnode/shared";
 
+import { CONFIG } from "@/config";
 import { useEditThemeAdmin } from "./hooks/use-edit-theme-admin";
 import {
   DialogFooter,

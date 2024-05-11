@@ -5,8 +5,8 @@ import { Clock, File } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useMemo } from "react";
-import { CONFIG } from "@vitnode/shared";
 
+import { CONFIG } from "@/config";
 import { DataTable } from "@/components/data-table/data-table";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
 import { DateFormat } from "@/components/date-format/date-format";

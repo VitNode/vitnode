@@ -4,8 +4,8 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
 import { ExternalLink } from "lucide-react";
-import { CONFIG } from "@vitnode/shared";
 
+import { CONFIG } from "@/config";
 import { DataTable } from "@/components/data-table/data-table";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
 import { DateFormat } from "@/components/date-format/date-format";

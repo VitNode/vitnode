@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 
 import { Tabs } from "@/components/tabs/tabs";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
-import { getConfigFile } from "@/config";
+import { getConfigFile } from "@/config/helpers";
 
 interface Props {
   children: ReactNode;

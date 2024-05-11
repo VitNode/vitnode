@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
-import type { ConfigType } from "@vitnode/shared";
 
 import type { ShowCoreLanguages, ShowCoreThemes } from "@/graphql/hooks";
+import type { ConfigType } from "@/config";
 
 interface Args {
   config: ConfigType;

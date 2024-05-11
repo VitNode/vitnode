@@ -1,7 +1,7 @@
 import { Download } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { CONFIG } from "@vitnode/shared";
 
+import { CONFIG } from "@/config";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Tooltip,

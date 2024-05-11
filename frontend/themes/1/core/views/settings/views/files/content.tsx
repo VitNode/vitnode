@@ -5,8 +5,8 @@ import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Clock, Download, File } from "lucide-react";
-import { CONFIG } from "@vitnode/shared";
 
+import { CONFIG } from "@/config";
 import { DataTable } from "@/components/data-table/data-table";
 import type {
   Core_Members__Files__ShowQuery,

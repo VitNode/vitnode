@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server";
 
 import { getPluginDataAdmin } from "./query-api";
 import { DevPluginAdminLayout } from "@/admin/core/views/core/plugins/views/dev/layout/layout";
-import { getConfigFile } from "@/config";
+import { getConfigFile } from "@/config/helpers";
 
 interface Props {
   children: ReactNode;

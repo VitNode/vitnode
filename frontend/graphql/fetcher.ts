@@ -2,8 +2,8 @@ import "server-only";
 
 import type { DocumentNode } from "graphql";
 import { cookies, headers as nextHeaders } from "next/headers";
-import { CONFIG } from "@vitnode/shared";
 
+import { CONFIG } from "@/config";
 import { getGqlString } from "@/functions/get-qql-string";
 import { setCookieFromApi } from "@/functions/cookie-from-string-to-object";
 

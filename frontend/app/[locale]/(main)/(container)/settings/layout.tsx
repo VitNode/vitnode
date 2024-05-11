@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { getSessionData } from "@/functions/get-session-data";
-import { getConfigFile } from "@/config";
+import { getConfigFile } from "@/config/helpers";
 
 interface Props {
   children: ReactNode;

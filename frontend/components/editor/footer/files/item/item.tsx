@@ -2,8 +2,8 @@ import { Plus, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { type JSONContent } from "@tiptap/react";
-import { CONFIG } from "@vitnode/shared";
 
+import { CONFIG } from "@/config";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/functions/classnames";
 import { IconItemListFilesFooterEditor } from "./icon";

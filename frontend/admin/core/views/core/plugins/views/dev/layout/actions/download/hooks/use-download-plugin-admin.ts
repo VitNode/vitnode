@@ -3,8 +3,8 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
-import { CONFIG } from "@vitnode/shared";
 
+import { CONFIG } from "@/config";
 import { useDialog } from "@/components/ui/dialog";
 import { increaseVersionString } from "@/functions/increase-version-string";
 import { zodInput } from "@/functions/zod";

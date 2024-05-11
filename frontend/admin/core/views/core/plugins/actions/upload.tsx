@@ -3,8 +3,8 @@
 import { Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Suspense, lazy } from "react";
-import { CONFIG } from "@vitnode/shared";
 
+import { CONFIG } from "@/config";
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";

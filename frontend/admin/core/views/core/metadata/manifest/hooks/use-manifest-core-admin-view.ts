@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { CONFIG } from "@vitnode/shared";
 
+import { CONFIG } from "@/config";
 import type { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";
 import { colorConverter, getHSLFromString } from "@/functions/colors";

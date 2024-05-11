@@ -1,5 +1,4 @@
-import { CONFIG } from "@vitnode/shared";
-
+import { CONFIG } from "@/config";
 import { UserBarAdmin } from "./user-bar/user-bar-admin";
 import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";
 import { Link } from "@/i18n";

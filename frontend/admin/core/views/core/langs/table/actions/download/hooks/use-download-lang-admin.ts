@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
-import { CONFIG } from "@vitnode/shared";
 
+import { CONFIG } from "@/config";
 import { queryApi } from "./query-api";
 import { mutationApi } from "./mutation-api";
 import { useDialog } from "@/components/ui/dialog";
