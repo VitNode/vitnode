@@ -33,47 +33,6 @@ type AvatarUser {
   id: Int!
 }
 
-type BreadcrumbsForumForums {
-  id: Int!
-  name: [TextLanguage!]!
-}
-
-type ChildrenShowForumForums {
-  _count: ShowForumForumsCounts!
-  breadcrumbs: [BreadcrumbsForumForums!]!
-  children: [LastChildShowForumForums!]!
-  created: DateTime!
-  description: [TextLanguage!]!
-  id: Int!
-  last_posts: LastPostsShowForumForumsObj!
-  name: [TextLanguage!]!
-  position: Int!
-}
-
-input ContentCreateAdminGroups {
-  files_allow_upload: Boolean!
-  files_max_storage_for_submit: Int!
-  files_total_max_storage: Int!
-}
-
-type ContentShowAdminGroups {
-  files_allow_upload: Boolean!
-  files_max_storage_for_submit: Int!
-  files_total_max_storage: Int!
-}
-
-type CreateForumForumsObj {
-  _count: ShowForumForumsCounts!
-  breadcrumbs: [BreadcrumbsForumForums!]!
-  children: [ChildrenShowForumForums!]!
-  created: DateTime!
-  description: [TextLanguage!]!
-  id: Int!
-  last_posts: LastPostsShowForumForumsObj!
-  name: [TextLanguage!]!
-  position: Int!
-}
-
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -111,65 +70,10 @@ type GroupUser {
   name: [TextLanguage!]!
 }
 
-input GroupsPermissionsCreateForumForums {
-  can_create: Boolean!
-  can_download_files: Boolean!
-  can_read: Boolean!
-  can_reply: Boolean!
-  can_view: Boolean!
-  group_id: Int!
-}
-
-type GroupsPermissionsForumForums {
-  can_create: Boolean!
-  can_download_files: Boolean!
-  can_read: Boolean!
-  can_reply: Boolean!
-  can_view: Boolean!
-  group_id: Int!
-}
-
 type ItemNavAdminPluginsAuthorization {
   code: String!
   href: String!
   icon: String
-}
-
-type LastChildShowForumForums {
-  created: DateTime!
-  description: [TextLanguage!]!
-  id: Int!
-  name: [TextLanguage!]!
-  position: Int!
-}
-
-type LastPostsShowForumForums {
-  created: DateTime!
-  id: Int!
-  topic: TopicLastPostsShowForumForums!
-  user: User!
-}
-
-input LastPostsShowForumForumsArgs {
-  cursor: Int
-  first: Int
-  last: Int
-  sortBy: LastPostsShowForumForumsSortByArgs
-}
-
-type LastPostsShowForumForumsObj {
-  edges: [LastPostsShowForumForums!]!
-  pageInfo: PageInfo!
-}
-
-input LastPostsShowForumForumsSortByArgs {
-  column: LastPostsShowForumForumsSortingColumnEnum!
-  direction: SortDirectionEnum!
-}
-
-enum LastPostsShowForumForumsSortingColumnEnum {
-  created
-  updated
 }
 
 enum LayoutAdminInstallEnum {
@@ -183,21 +87,8 @@ type LayoutAdminInstallObj {
 }
 
 type Mutation {
-  admin__blog_categories__create(color: String!, description: [TextLanguageInput!]!, name: [TextLanguageInput!]!): ShowBlogCategories!
-  admin__core_files__delete(id: Int!): String!
-  admin__core_groups__delete(id: Int!): String!
-  admin__core_groups__edit(content: ContentCreateAdminGroups!, id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
-  admin__core_languages__create(allow_in_input: Boolean!, code: String!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
-  admin__core_languages__delete(code: String!): String!
-  admin__core_languages__download(all: Boolean!, code: String!, plugins: [String!]!): String!
-  admin__core_languages__edit(allow_in_input: Boolean!, default: Boolean!, enabled: Boolean!, id: Int!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
-  admin__core_languages__update(code: String!, file: Upload!): String!
   admin__core_main_settings__edit(site_copyright: [TextLanguageInput!]!, site_description: [TextLanguageInput!]!, site_name: String!, site_short_name: String!): EditAdminSettingsObj!
   admin__core_manifest_metadata__edit(background_color: String!, display: String!, start_url: String!, theme_color: String!): ShowAdminManifestMetadataObj!
-  admin__core_nav__change_position(id: Int!, index_to_move: Int!, parent_id: Int!): String!
-  admin__core_nav__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, name: [TextLanguageInput!]!): ShowCoreNav!
-  admin__core_nav__delete(id: Int!): String!
-  admin__core_nav__edit(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, id: Int!, name: [TextLanguageInput!]!): ShowCoreNav!
   admin__core_plugins__create(author: String!, author_url: String, code: String!, description: String, name: String!, support_url: String!): ShowAdminPlugins!
   admin__core_plugins__delete(code: String!): String!
   admin__core_plugins__download(code: String!, version: String, version_code: Int): String!
@@ -207,36 +98,15 @@ type Mutation {
   admin__core_plugins__nav__delete(id: Int!): String!
   admin__core_plugins__nav__edit(code: String!, href: String!, icon: String, id: Int!): ShowAdminNavPluginsObj!
   admin__core_plugins__upload(code: String, file: Upload!): ShowAdminPlugins!
-  admin__core_staff_administrators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffAdministrators!
-  admin__core_staff_administrators__delete(id: Int!): String!
-  admin__core_staff_moderators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffModerators!
-  admin__core_staff_moderators__delete(id: Int!): String!
   admin__core_themes__create(author: String!, author_url: String, name: String!, support_url: String!): ShowAdminThemes!
   admin__core_themes__delete(id: Int!): String!
   admin__core_themes__download(id: Int!, version: String, version_code: Int): String!
   admin__core_themes__edit(author: String!, author_url: String, id: Int!, name: String!, support_url: String!): ShowAdminThemes!
   admin__core_themes__upload(file: Upload!, id: Int): ShowAdminThemes!
-  admin__forum_forums__change_position(id: Int!, index_to_move: Int!, parent_id: Int!): String!
-  admin__forum_forums__create(description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
-  admin__forum_forums__delete(id: Int!, move_topics_to: Int): String!
-  admin__forum_forums__edit(description: [TextLanguageInput!]!, id: Int!, name: [TextLanguageInput!]!, parent_id: Int, permissions: PermissionsCreateForumForums!): CreateForumForumsObj!
   admin__install__create_database: String!
   admin_sessions__sign_out: String!
-  core_editor_files__delete(id: Int!, security_key: String): String!
-  core_editor_files__upload(file: Upload!, folder: String!, plugin: String!): ShowCoreFiles!
-  core_groups__admin_create(content: ContentCreateAdminGroups!, name: [TextLanguageInput!]!): ShowAdminGroups!
-  core_mail_send(content: String!, receiver_address: String!, subject: String!): String!
-  core_members__avatar__delete: String!
-  core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
-  core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
-  core_themes__change(id: Int!): String!
-  forum_posts__create(content: [TextLanguageInput!]!, topic_id: Int!): ShowPostsForums!
-  forum_posts__delete(id: Int!): String!
-  forum_topics__actions__lock_toggle(id: Int!): Boolean!
-  forum_topics__create(content: [TextLanguageInput!]!, forum_id: Int!, title: [TextLanguageInput!]!): ShowTopicsForums!
-  forum_topics__edit(content: [TextLanguageInput!]!, id: Int!, title: [TextLanguageInput!]!): ShowTopicsForums!
 }
 
 type NavAdminPluginsAuthorization {
@@ -253,142 +123,17 @@ type PageInfo {
   totalCount: Float!
 }
 
-type PageInfoShowPostsForums {
-  hasNextPage: Boolean!
-  limit: Int!
-  totalCount: Int!
-  totalPostsCount: Int!
-}
-
-input PermissionsCreateForumForums {
-  can_all_create: Boolean!
-  can_all_download_files: Boolean!
-  can_all_read: Boolean!
-  can_all_reply: Boolean!
-  can_all_view: Boolean!
-  groups: [GroupsPermissionsCreateForumForums!]!
-}
-
-type PermissionsForumForums {
-  can_create: Boolean!
-  can_read: Boolean!
-  can_reply: Boolean!
-}
-
-type PermissionsForumForumsAdmin {
-  can_all_create: Boolean!
-  can_all_download_files: Boolean!
-  can_all_read: Boolean!
-  can_all_reply: Boolean!
-  can_all_view: Boolean!
-  groups: [GroupsPermissionsForumForums!]!
-}
-
-type PermissionsTopicForums {
-  can_download_files: Boolean!
-  can_edit: Boolean!
-  can_reply: Boolean!
-}
-
 type Query {
-  admin__core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowAdminFilesObj!
-  admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminGroupsSortByArgs): ShowAdminGroupsObj!
   admin__core_manifest_metadata__show: ShowAdminManifestMetadataObj!
-  admin__core_members__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: ShowAdminMembersSortByArgs): ShowAdminMembersObj!
-  admin__core_members__stats_sign_up: [SignUpStatsAdminMembers!]!
   admin__core_plugins__files(code: String!): FilesAdminPluginsObj!
   admin__core_plugins__nav__show(plugin_code: String!): [ShowAdminNavPluginsObj!]!
   admin__core_plugins__show(code: String, cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminPluginsSortByArgs): ShowAdminPluginsObj!
-  admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminStaffAdministratorsSortByArgs): ShowAdminStaffAdministratorsObj!
-  admin__core_staff_moderators__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminStaffModeratorsSortByArgs): ShowAdminStaffModeratorsObj!
   admin__core_themes__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminThemesSortByArgs): ShowAdminThemesObj!
-  admin__forum_forums__show(
-    cursor: Int
-    first: Int
-    ids: [Int!]
-    last: Int
-    last_posts_args: LastPostsShowForumForumsArgs
-    parent_id: Int
-    search: String
-
-    """Show all forums without children"""
-    show_all_forums: Boolean
-  ): ShowForumForumsAdminObj!
   admin__install__layout: LayoutAdminInstallObj!
   admin__sessions__authorization: AuthorizationAdminSessionsObj!
-  blog_categories__show(cursor: Int, first: Int, last: Int): ShowBlogCategoriesObj!
-  core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowCoreFilesObj!
-  core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreLanguagesSortByArgs): ShowCoreLanguagesObj!
-  core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: ShowCoreMembersSortByArgs): ShowCoreMembersObj!
-  core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
-  core_plugins__show: [ShowCorePluginsObj!]!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_settings__show: ShowSettingsObj!
-  core_themes__show(cursor: Int, first: Int, last: Int): ShowCoreThemesObj!
-  forum_forums__show(
-    cursor: Int
-    first: Int
-    ids: [Int!]
-    last: Int
-    last_posts_args: LastPostsShowForumForumsArgs
-    parent_id: Int
-    search: String
-
-    """Show all forums without children"""
-    show_all_forums: Boolean
-  ): ShowForumForumsObj!
-  forum_posts__show(limit: Int!, page: Int, sortBy: ShowPostsForumsSortingEnum, topic_id: Int!): ShowPostsForumsObj!
-  forum_topics__show(cursor: Int, first: Int, forum_id: Int, id: Int, last: Int): ShowTopicsForumsObj!
-}
-
-type ShowAdminFiles {
-  count_uses: Int!
-  created: DateTime!
-  dir_folder: String!
-  extension: String!
-  file_alt: String
-  file_name: String!
-  file_name_original: String!
-  file_size: Int!
-  height: Int
-  id: Int!
-  mimetype: String!
-  security_key: String
-  user: User!
-  width: Int
-}
-
-type ShowAdminFilesObj {
-  edges: [ShowAdminFiles!]!
-  pageInfo: PageInfo!
-}
-
-type ShowAdminGroups {
-  content: ContentShowAdminGroups!
-  created: DateTime!
-  default: Boolean!
-  guest: Boolean!
-  id: Int!
-  name: [TextLanguage!]!
-  protected: Boolean!
-  root: Boolean!
-  updated: DateTime!
-  users_count: Int!
-}
-
-type ShowAdminGroupsObj {
-  edges: [ShowAdminGroups!]!
-  pageInfo: PageInfo!
-}
-
-input ShowAdminGroupsSortByArgs {
-  column: ShowAdminGroupsSortingColumnEnum!
-  direction: SortDirectionEnum!
-}
-
-enum ShowAdminGroupsSortingColumnEnum {
-  created
-  updated
+  core_test__test: String!
 }
 
 type ShowAdminManifestMetadataObj {
@@ -398,39 +143,6 @@ type ShowAdminManifestMetadataObj {
   lang: String!
   start_url: String!
   theme_color: String!
-}
-
-type ShowAdminMembers {
-  avatar: AvatarUser
-  avatar_color: String!
-  email: String!
-  group: GroupUser!
-  id: Int!
-  joined: DateTime!
-  name: String!
-  name_seo: String!
-  newsletter: Boolean!
-  posts: Int!
-}
-
-type ShowAdminMembersObj {
-  edges: [ShowAdminMembers!]!
-  pageInfo: PageInfo!
-}
-
-input ShowAdminMembersSortByArgs {
-  column: ShowAdminMembersSortingColumnEnum!
-  direction: SortDirectionEnum!
-}
-
-enum ShowAdminMembersSortingColumnEnum {
-  first_name
-  followers
-  joined
-  last_name
-  name
-  posts
-  reactions
 }
 
 type ShowAdminNavPluginsObj {
@@ -473,52 +185,6 @@ enum ShowAdminPluginsSortingColumnEnum {
   updated
 }
 
-type ShowAdminStaffAdministrators {
-  created: DateTime!
-  id: Int!
-  protected: Boolean!
-  unrestricted: Boolean!
-  updated: DateTime!
-  user_or_group: UserOrGroupCoreStaffUnion!
-}
-
-type ShowAdminStaffAdministratorsObj {
-  edges: [ShowAdminStaffAdministrators!]!
-  pageInfo: PageInfo!
-}
-
-input ShowAdminStaffAdministratorsSortByArgs {
-  column: ShowAdminStaffAdministratorsSortingColumnEnum!
-  direction: SortDirectionEnum!
-}
-
-enum ShowAdminStaffAdministratorsSortingColumnEnum {
-  updated
-}
-
-type ShowAdminStaffModerators {
-  created: DateTime!
-  id: Int!
-  protected: Boolean!
-  unrestricted: Boolean!
-  updated: DateTime!
-  user_or_group: UserOrGroupCoreStaffUnion!
-}
-
-type ShowAdminStaffModeratorsObj {
-  edges: [ShowAdminStaffModerators!]!
-  pageInfo: PageInfo!
-}
-
-input ShowAdminStaffModeratorsSortByArgs {
-  column: ShowAdminStaffModeratorsSortingColumnEnum!
-  direction: SortDirectionEnum!
-}
-
-enum ShowAdminStaffModeratorsSortingColumnEnum {
-  updated
-}
-
 type ShowAdminThemes {
   author: String!
   author_url: String
@@ -546,227 +212,12 @@ enum ShowAdminThemesSortingColumnEnum {
   created
 }
 
-type ShowBlogCategories {
-  color: String!
-  description: [TextLanguage!]
-  id: Int!
-  name: [TextLanguage!]!
-  position: Int!
-}
-
-type ShowBlogCategoriesObj {
-  edges: [ShowBlogCategories!]!
-  pageInfo: PageInfo!
-}
-
-type ShowCoreFiles {
-  count_uses: Int!
-  created: DateTime!
-  dir_folder: String!
-  extension: String!
-  file_alt: String
-  file_name: String!
-  file_name_original: String!
-  file_size: Int!
-  height: Int
-  id: Int!
-  mimetype: String!
-  security_key: String
-  width: Int
-}
-
-type ShowCoreFilesObj {
-  edges: [ShowCoreFiles!]!
-  pageInfo: PageInfo!
-}
-
-input ShowCoreFilesSortByArgs {
-  column: ShowCoreFilesSortingColumnEnum!
-  direction: SortDirectionEnum!
-}
-
-enum ShowCoreFilesSortingColumnEnum {
-  created
-  file_size
-}
-
-type ShowCoreLanguages {
-  allow_in_input: Boolean!
-  code: String!
-  created: DateTime!
-  default: Boolean!
-  enabled: Boolean!
-  id: Int!
-  locale: String!
-  name: String!
-  protected: Boolean!
-  time_24: Boolean!
-  timezone: String!
-  updated: DateTime!
-}
-
-type ShowCoreLanguagesObj {
-  edges: [ShowCoreLanguages!]!
-  pageInfo: PageInfo!
-}
-
-input ShowCoreLanguagesSortByArgs {
-  column: ShowCoreLanguagesSortingColumnEnum!
-  direction: SortDirectionEnum!
-}
-
-enum ShowCoreLanguagesSortingColumnEnum {
-  created
-  updated
-}
-
-type ShowCoreMembers {
-  avatar: AvatarUser
-  avatar_color: String!
-  group: GroupUser!
-  id: Int!
-  joined: DateTime!
-  name: String!
-  name_seo: String!
-  posts: Int!
-}
-
-type ShowCoreMembersObj {
-  edges: [ShowCoreMembers!]!
-  pageInfo: PageInfo!
-}
-
-input ShowCoreMembersSortByArgs {
-  column: ShowCoreMembersSortingColumnEnum!
-  direction: SortDirectionEnum!
-}
-
-enum ShowCoreMembersSortingColumnEnum {
-  first_name
-  followers
-  joined
-  last_name
-  name
-  posts
-  reactions
-}
-
-type ShowCoreNav {
-  children: [ShowCoreNavItem!]!
-  description: [TextLanguage!]!
-  external: Boolean!
-  href: String!
-  icon: String
-  id: Int!
-  name: [TextLanguage!]!
-  position: Int!
-}
-
-type ShowCoreNavItem {
-  description: [TextLanguage!]!
-  external: Boolean!
-  href: String!
-  icon: String
-  id: Int!
-  name: [TextLanguage!]!
-  position: Int!
-}
-
-type ShowCoreNavObj {
-  edges: [ShowCoreNav!]!
-  pageInfo: PageInfo!
-}
-
-type ShowCorePluginsObj {
-  allow_default: Boolean!
-  code: String!
-}
-
 type ShowCoreSessionDevices {
   device_id: Int!
   expires: DateTime!
   last_seen: DateTime!
   login_token: String!
   user_id: Int!
-}
-
-type ShowCoreThemes {
-  default: Boolean!
-  id: Int!
-  name: String!
-}
-
-type ShowCoreThemesObj {
-  edges: [ShowCoreThemes!]!
-  pageInfo: PageInfo!
-}
-
-type ShowForumForumsAdmin {
-  _count: ShowForumForumsCounts!
-  breadcrumbs: [BreadcrumbsForumForums!]!
-  children: [ChildrenShowForumForums!]!
-  created: DateTime!
-  description: [TextLanguage!]!
-  id: Int!
-  last_posts: LastPostsShowForumForumsObj!
-  name: [TextLanguage!]!
-  permissions: PermissionsForumForumsAdmin!
-  position: Int!
-}
-
-type ShowForumForumsAdminObj {
-  edges: [ShowForumForumsAdmin!]!
-  pageInfo: PageInfo!
-}
-
-type ShowForumForumsCounts {
-  posts: Int!
-  topics: Int!
-  total_posts: Int!
-  total_topics: Int!
-}
-
-type ShowForumForumsObj {
-  edges: [ShowForumForumsWithChildren!]!
-  pageInfo: PageInfo!
-}
-
-type ShowForumForumsWithChildren {
-  _count: ShowForumForumsCounts!
-  breadcrumbs: [BreadcrumbsForumForums!]!
-  children: [ChildrenShowForumForums!]!
-  created: DateTime!
-  description: [TextLanguage!]!
-  id: Int!
-  last_posts: LastPostsShowForumForumsObj!
-  name: [TextLanguage!]!
-  permissions: PermissionsForumForums!
-  position: Int!
-}
-
-type ShowPostsForums {
-  content: [TextLanguage!]!
-  created: DateTime!
-  post_id: Int!
-  user: User!
-}
-
-type ShowPostsForumsMetaTags {
-  action: TopicActions!
-  action_id: Int!
-  created: DateTime!
-  user: User!
-}
-
-type ShowPostsForumsObj {
-  edges: [postsWithMetaTagsUnion!]!
-  lastEdges: [postsWithMetaTagsUnion!]!
-  pageInfo: PageInfoShowPostsForums!
-}
-
-enum ShowPostsForumsSortingEnum {
-  newest
-  oldest
 }
 
 type ShowSettingsObj {
@@ -777,42 +228,9 @@ type ShowSettingsObj {
   theme_id: Float
 }
 
-type ShowTopicsForums {
-  breadcrumbs: [BreadcrumbsForumForums!]!
-  content: [TextLanguage!]!
-  created: DateTime!
-  id: Int!
-  locked: Boolean!
-  permissions: PermissionsTopicForums!
-  title: [TextLanguage!]!
-  user: User!
-}
-
-type ShowTopicsForumsObj {
-  edges: [ShowTopicsForums!]!
-  pageInfo: PageInfo!
-}
-
-type SignUpCoreMembersObj {
-  email: String!
-  group_id: Int!
-  name: String!
-  newsletter: Boolean
-}
-
-type SignUpStatsAdminMembers {
-  joined_date: String!
-  users_joined: Int!
-}
-
 enum SortDirectionEnum {
   asc
   desc
-}
-
-type StaffGroupUser {
-  group_name: [TextLanguage!]!
-  id: Int!
 }
 
 type TextLanguage {
@@ -825,40 +243,5 @@ input TextLanguageInput {
   value: String!
 }
 
-enum TopicActions {
-  lock
-  unlock
-}
-
-type TopicLastPostsShowForumForums {
-  id: Int!
-  title: [TextLanguage!]!
-}
-
 """The `Upload` scalar type represents a file upload."""
 scalar Upload
-
-type UploadAvatarCoreMembersObj {
-  dir_folder: String!
-  extension: String!
-  file_name: String!
-  file_name_original: String!
-  file_size: Int!
-  height: Int
-  id: Int!
-  mimetype: String!
-  width: Int
-}
-
-type User {
-  avatar: AvatarUser
-  avatar_color: String!
-  group: GroupUser!
-  id: Int!
-  name: String!
-  name_seo: String!
-}
-
-union UserOrGroupCoreStaffUnion = StaffGroupUser | User
-
-union postsWithMetaTagsUnion = ShowPostsForums | ShowPostsForumsMetaTags
