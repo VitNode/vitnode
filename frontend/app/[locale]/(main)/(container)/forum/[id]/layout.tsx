@@ -6,7 +6,7 @@ import { getSessionData } from "@/functions/get-session-data";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { getForumItemData } from "./query-api";
 import { ErrorViewSSR } from "@/components/views/error-view-ssr";
-import { getConfigFile } from "@/config";
+import { getConfigFile } from "@/config/helpers";
 
 interface Props {
   children: ReactNode;

@@ -5,8 +5,8 @@ import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import tippy, { type Instance, type Props } from "tippy.js";
 import { useTranslations } from "next-intl";
 import type { Emoji } from "@emoji-mart/data";
-import { CONFIG } from "@vitnode/shared";
 
+import { CONFIG } from "@/config";
 import { cn } from "@/functions/classnames";
 import { classPopover } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";

@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 
 import { ContentEditorAdmin } from "./content";
 import { HeaderContent } from "@/components/header-content/header-content";
-import { getConfigFile } from "@/config";
+import { getConfigFile } from "@/config/helpers";
 
 export const EditorAdminView = async () => {
   const data = await getConfigFile();

@@ -33,9 +33,7 @@ export class EditAdminMainSettingsService {
           : site_description.filter(el => el.value)[0];
 
       const path = join(
-        process.cwd(),
-        "uploads",
-        "public",
+        ABSOLUTE_PATHS.uploads.public,
         "assets",
         item.language_code,
         "manifest.webmanifest"

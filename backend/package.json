@@ -5,10 +5,11 @@
   "license": "GPL-3.0 license",
   "scripts": {
     "db": "drizzle-kit push",
+    "config:finish": "ts-node ./src/utils/actions/finish/finish-build.ts",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start -b swc",
-    "dev": "nest start -b swc -w",
+    "dev": "cross-env NODE_ENV=development pnpm config:finish && nest start -b swc -w",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
@@ -16,7 +17,10 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "migrate:forum": "drizzle-kit generate --config src/plugins/forum/admin/database/drizzle.config.ts",
+    "migrate:admin": "drizzle-kit generate --config src/plugins/core/admin/database/drizzle.config.ts",
+    "migrate:blog": "drizzle-kit generate --config src/plugins/blog/admin/database/drizzle.config.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.10.4",
@@ -65,6 +69,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "cookie-parser": "^1.4.6",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "drizzle-kit": "^0.21.1",
     "drizzle-orm": "^0.30.10",

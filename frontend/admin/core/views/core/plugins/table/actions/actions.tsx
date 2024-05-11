@@ -1,8 +1,8 @@
 import { BadgeHelp, ChevronDown, CodeXml, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { CONFIG } from "@vitnode/shared";
 
+import { CONFIG } from "@/config";
 import type { ShowAdminPlugins } from "@/graphql/hooks";
 import { DeletePluginActionsAdmin } from "./delete/delete";
 import { SetDefaultPluginActionsAdmin } from "./set-default/set-default";

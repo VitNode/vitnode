@@ -1,8 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { CONFIG } from "@vitnode/shared";
 
+import { CONFIG } from "@/config";
 import {
   Form,
   FormControl,

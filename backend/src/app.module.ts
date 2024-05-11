@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { JwtModule } from "@nestjs/jwt";
-import { configForAppModule } from "./config";
+import { ABSOLUTE_PATHS, configForAppModule } from "./config";
 import { join } from "path";
 import { PluginsModule } from "./plugins/plugins.module";
 import { GraphQLModule } from "@nestjs/graphql";
@@ -26,7 +26,7 @@ import { ServeStaticModule } from "@nestjs/serve-static";
     }),
     JwtModule.register({ global: true }),
     ServeStaticModule.forRoot({
-      rootPath: join(process.cwd(), "uploads", "public"),
+      rootPath: join(ABSOLUTE_PATHS.uploads.public),
       serveRoot: "/public"
     }),
     PluginsModule,

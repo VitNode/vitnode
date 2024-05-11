@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
-import type { ConfigType } from "@vitnode/shared";
 
 import { mutationApi } from "./mutation-api";
+import type { ConfigType } from "@/config";
 
 export interface EditorAdminArgs {
   data: ConfigType;

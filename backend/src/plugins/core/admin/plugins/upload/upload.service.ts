@@ -18,8 +18,8 @@ import { core_plugins } from "../../database/schema/plugins";
 import { DatabaseService } from "@/database/database.service";
 import { generateRandomString } from "@/functions/generate-random-string";
 import { CustomError } from "@/utils/errors/custom-error";
-import { updateNavAdminPlugin } from "../helpers/update-plugins";
 import { ChangeTemplatesAdminThemesService } from "../../themes/change_templates.service";
+import { updateNavAdminPlugin } from "@/utils/actions/helpers/update-plugins";
 
 @Injectable()
 export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService {

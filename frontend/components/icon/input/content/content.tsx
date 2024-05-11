@@ -1,7 +1,7 @@
 import { Suspense, lazy, useState } from "react";
 import { useTranslations } from "next-intl";
-import { CONFIG } from "@vitnode/shared";
 
+import { CONFIG } from "@/config";
 import type { IconLucideNames } from "@/components/icon/icon";
 import { Tabs } from "@/components/tabs/tabs";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";

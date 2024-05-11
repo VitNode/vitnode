@@ -6,6 +6,6 @@ import { defineConfig } from "drizzle-kit";
 export default defineConfig({
   dialect: "postgresql",
   dbCredentials: DATABASE_ENVS,
-  schema: "./plugins/forum/admin/database/schema/*.ts",
-  out: "./plugins/forum/admin/database/migrations/"
+  schema: "./src/plugins/forum/admin/database/schema/*.ts",
+  out: "./src/plugins/forum/admin/database/migrations/"
 });

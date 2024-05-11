@@ -3,8 +3,8 @@
 
 import { Languages } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { CONFIG } from "@vitnode/shared";
 
+import { CONFIG } from "@/config";
 import {
   DropdownMenu,
   DropdownMenuContent,

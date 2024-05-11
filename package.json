@@ -7,8 +7,7 @@
   "license": "GPL-3.0 license",
   "workspaces": [
     "frontend",
-    "backend",
-    "shared"
+    "backend"
   ],
   "scripts": {
     "build": "turbo build",
