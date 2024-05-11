@@ -11,6 +11,9 @@ import { AdminMetadataModule } from "./metadata/metadata.module";
 import { AdminFilesModule } from "./files/files.module";
 import { AdminGroupsModule } from "./groups/groups.module";
 import { AdminLanguagesModule } from "./languages/languages.module";
+import { AdminMembersModule } from "./members/members.module";
+import { AdminNavModule } from "./nav/nav.module";
+import { AdminStaffModule } from "./staff/staff.module";
 
 @Module({
   imports: [
@@ -23,7 +26,10 @@ import { AdminLanguagesModule } from "./languages/languages.module";
     AdminMetadataModule,
     AdminFilesModule,
     AdminGroupsModule,
-    AdminLanguagesModule
+    AdminLanguagesModule,
+    AdminMembersModule,
+    AdminNavModule,
+    AdminStaffModule
   ]
 })
 export class AdminModule {}
