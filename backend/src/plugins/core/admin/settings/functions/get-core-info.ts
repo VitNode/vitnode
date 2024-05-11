@@ -3,7 +3,7 @@ import * as fs from "fs";
 import { PluginInfoJSONType } from "../../plugins/helpers/files/create/contents";
 
 export const getCoreInfo = async () => {
-  const path = join(process.cwd(), "plugins", "core");
+  const path = join(process.cwd(), "src", "plugins", "core");
   const config = fs.readFileSync(join(path, "plugin.json"), "utf8");
   const data: PluginInfoJSONType = JSON.parse(config);
 

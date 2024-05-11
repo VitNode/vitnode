@@ -60,7 +60,7 @@ export class DownloadAdminPluginsService {
     this.createFolders(frontendPath);
 
     // Copy backend files
-    const backendSource = join(process.cwd(), "plugins", code);
+    const backendSource = join(process.cwd(), "src", "plugins", code);
     fs.cpSync(backendSource, backendPath, { recursive: true });
 
     // Copy frontend files

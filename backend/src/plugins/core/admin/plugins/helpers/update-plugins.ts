@@ -71,7 +71,7 @@ export const updatePlugins = async ({
 }: {
   db: NodePgDatabase<typeof schemaDatabase>;
 }) => {
-  fs.readdir(join(process.cwd(), "plugins"), async (err, plugins) => {
+  fs.readdir(join(process.cwd(), "src", "plugins"), async (err, plugins) => {
     let isDefaultIndex: number | null = null;
     await Promise.all(
       plugins
@@ -81,6 +81,7 @@ export const updatePlugins = async ({
         .map(async (pluginName, index) => {
           const configPath = join(
             process.cwd(),
+            "src",
             "plugins",
             pluginName,
             "plugin.json"
@@ -94,6 +95,7 @@ export const updatePlugins = async ({
           }
           const versionsPath = join(
             process.cwd(),
+            "src",
             "plugins",
             pluginName,
             "versions.json"

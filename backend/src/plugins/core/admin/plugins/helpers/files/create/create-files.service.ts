@@ -15,7 +15,7 @@ import { CustomError } from "@/utils/errors/custom-error";
 
 @Injectable()
 export class CreateFilesAdminPluginsService {
-  protected path = join(process.cwd(), "plugins");
+  protected path = join(process.cwd(), "src", "plugins");
 
   createFiles({ code, ...rest }: PluginInfoJSONType): void {
     const folders: {

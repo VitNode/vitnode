@@ -1,7 +1,7 @@
 import { join } from "path";
 
 export const pluginPaths = ({ code }: { code: string }) => {
-  const backend_root = join(process.cwd(), "plugins", code);
+  const backend_root = join(process.cwd(), "src", "plugins", code);
   const frontend_root = join(process.cwd(), "..", "frontend");
 
   return {

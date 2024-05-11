@@ -19,7 +19,7 @@ interface ChangeFilesContentType {
 
 @Injectable()
 export class ChangeFilesAdminPluginsService {
-  protected path = join(process.cwd(), "plugins");
+  protected path = join(process.cwd(), "src", "plugins");
 
   protected changeContent({
     files
