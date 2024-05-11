@@ -5,7 +5,7 @@
   "license": "GPL-3.0 license",
   "scripts": {
     "db": "drizzle-kit push",
-    "config:finish": "ts-node ./src/utils/actions/finish/finish-build.ts",
+    "config:finish": "ts-node ./src/utils/actions/finish-build.ts",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start -b swc",
@@ -20,7 +20,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "migrate:forum": "drizzle-kit generate --config src/plugins/forum/admin/database/drizzle.config.ts",
     "migrate:admin": "drizzle-kit generate --config src/plugins/core/admin/database/drizzle.config.ts",
-    "migrate:blog": "drizzle-kit generate --config src/plugins/blog/admin/database/drizzle.config.ts"
+    "migrate:blog": "drizzle-kit generate --config src/plugins/blog/admin/database/drizzle.config.ts",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.10.4",
@@ -46,6 +47,10 @@
     "ua-parser-js": "^1.0.37"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/typescript": "^4.0.6",
+    "@graphql-codegen/typescript-document-nodes": "^4.0.6",
+    "@graphql-codegen/typescript-operations": "^4.2.0",
     "@nestjs/cli": "^10.3.2",
     "@nestjs/schematics": "^10.1.1",
     "@nestjs/testing": "^10.3.8",

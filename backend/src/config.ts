@@ -1,3 +1,4 @@
+import { promises } from "fs";
 import { join } from "path";
 
 export const configForAppModule = () => {
@@ -50,4 +51,39 @@ export const ABSOLUTE_PATHS = {
     private: join(internalPaths.uploads, "private"),
     temp: join(internalPaths.uploads, "temp")
   }
+};
+
+export interface ConfigType {
+  editor: {
+    allow_head_h1: boolean;
+    files: {
+      allow_type: "all" | "images_videos" | "images" | "none";
+    };
+    sticky: boolean;
+  };
+  rebuild_required: {
+    langs: boolean;
+    plugins: boolean;
+    themes: boolean;
+  };
+  settings: {
+    general: {
+      site_name: string;
+      site_short_name: string;
+    };
+  };
+}
+
+export const configPath = join(
+  process.cwd(),
+  "..",
+  "frontend",
+  "config",
+  "config.json"
+);
+
+export const getConfigFile = async () => {
+  const file = await promises.readFile(configPath, "utf8");
+
+  return JSON.parse(file) as ConfigType;
 };

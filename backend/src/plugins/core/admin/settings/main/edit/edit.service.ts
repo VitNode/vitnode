@@ -8,11 +8,14 @@ import { EditAdminMainSettingsArgs } from "./dto/edit.args";
 import { EditAdminSettingsObj } from "./dto/edit.obj";
 
 import { core_languages } from "../../../database/schema/languages";
-import { configPath, getConfigFile } from "@/utils/DELETE/config_test";
 import { DatabaseService } from "@/database/database.service";
-import { ConfigType } from "@/utils/DELETE/config";
 import { ManifestWithLang } from "@/plugins/core/settings/settings.module";
-import { ABSOLUTE_PATHS } from "@/config";
+import {
+  ABSOLUTE_PATHS,
+  ConfigType,
+  configPath,
+  getConfigFile
+} from "@/config";
 
 @Injectable()
 export class EditAdminMainSettingsService {

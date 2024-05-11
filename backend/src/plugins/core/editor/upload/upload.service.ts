@@ -15,7 +15,7 @@ import { ShowCoreFiles } from "../../files/show/dto/show.obj";
 import { generateRandomString } from "@/functions/generate-random-string";
 import { DatabaseService } from "@/database/database.service";
 import { AccessDeniedError } from "@/utils/errors/access-denied-error";
-import { getConfigFile } from "@/utils/DELETE/config_test";
+import { getConfigFile } from "@/config";
 
 interface GetFilesAfterUploadArgs extends UploadCoreEditorArgs {
   maxUploadSizeKb: number;

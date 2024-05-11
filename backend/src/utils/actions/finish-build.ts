@@ -5,20 +5,12 @@ import { join } from "path";
 
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 
-import { ConfigType, DEFAULT_CONFIG_DATA } from "@/utils/DELETE/config";
-import { configPath, getConfigFile } from "@/utils/DELETE/config_test";
 import { db } from "@/database/client";
-import { updatePlugins } from "../helpers/update-plugins";
+import { updatePlugins } from "./helpers/update-plugins";
+import { generateManifest } from "./helpers/manifest";
 
 (async () => {
-  // Update config file
-  const config = await getConfigFile();
-  const newData: ConfigType = {
-    ...config,
-    ...DEFAULT_CONFIG_DATA
-  };
-
-  fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), "utf8");
+  await generateManifest();
 
   // Migration for database
   await migrate(db, {

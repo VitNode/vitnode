@@ -10,8 +10,7 @@ import { ManifestWithLang } from "../settings.module";
 import { core_languages } from "../../admin/database/schema/languages";
 import { DatabaseService } from "@/database/database.service";
 import { Ctx } from "@/utils/types/context.type";
-import { getConfigFile } from "@/utils/DELETE/config_test";
-import { ABSOLUTE_PATHS } from "@/config";
+import { ABSOLUTE_PATHS, getConfigFile } from "@/config";
 
 @Injectable()
 export class ShowSettingsService {

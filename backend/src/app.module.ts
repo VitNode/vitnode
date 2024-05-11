@@ -3,6 +3,7 @@ import { ConfigModule } from "@nestjs/config";
 import { JwtModule } from "@nestjs/jwt";
 import { ABSOLUTE_PATHS, configForAppModule } from "./config";
 import { join } from "path";
+import { ScheduleModule } from "@nestjs/schedule";
 import { PluginsModule } from "./plugins/plugins.module";
 import { GraphQLModule } from "@nestjs/graphql";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
@@ -29,6 +30,7 @@ import { ServeStaticModule } from "@nestjs/serve-static";
       rootPath: join(ABSOLUTE_PATHS.uploads.public),
       serveRoot: "/public"
     }),
+    ScheduleModule.forRoot(),
     PluginsModule,
     DatabaseModule
   ]

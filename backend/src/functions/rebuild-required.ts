@@ -1,5 +1,4 @@
-import { ConfigType } from "@/utils/DELETE/config";
-import { configPath, getConfigFile } from "@/utils/DELETE/config_test";
+import { ConfigType, configPath, getConfigFile } from "@/config";
 import { CustomError } from "@/utils/errors/custom-error";
 import * as fs from "fs";
 

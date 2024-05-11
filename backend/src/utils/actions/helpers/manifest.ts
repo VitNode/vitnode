@@ -5,8 +5,7 @@ import * as fs from "fs";
 import * as dotenv from "dotenv";
 
 import { objectToArray, updateObject } from "./update-object";
-
-import { ConfigType } from "@vitnode/shared";
+import { ABSOLUTE_PATHS, getConfigFile } from "@/config";
 
 dotenv.config({
   path: join(process.cwd(), "..", ".env")
@@ -63,7 +62,8 @@ interface ManifestType {
   theme_color?: string;
 }
 
-export const generateManifest = async (config: ConfigType) => {
+export const generateManifest = async () => {
+  const config = await getConfigFile();
   const languages = (
     await readdir(join("..", "frontend", "langs"), { withFileTypes: true })
   )
@@ -93,7 +93,7 @@ export const generateManifest = async (config: ConfigType) => {
         }
       ]
     };
-    const path = join(process.cwd(), "public", "assets", language);
+    const path = join(ABSOLUTE_PATHS.uploads.public, "assets", language);
     const filePath = join(path, "manifest.webmanifest");
 
     if (fs.existsSync(filePath)) {
