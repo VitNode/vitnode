@@ -12,6 +12,7 @@ import { configPath, getConfigFile } from "@/utils/DELETE/config_test";
 import { DatabaseService } from "@/database/database.service";
 import { ConfigType } from "@/utils/DELETE/config";
 import { ManifestWithLang } from "@/plugins/core/settings/settings.module";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class EditAdminMainSettingsService {
@@ -33,6 +34,7 @@ export class EditAdminMainSettingsService {
 
       const path = join(
         process.cwd(),
+        "uploads",
         "public",
         "assets",
         item.language_code,
@@ -61,8 +63,7 @@ export class EditAdminMainSettingsService {
           "";
 
         const path = join(
-          process.cwd(),
-          "public",
+          ABSOLUTE_PATHS.uploads.public,
           "assets",
           item.code,
           "manifest.webmanifest"

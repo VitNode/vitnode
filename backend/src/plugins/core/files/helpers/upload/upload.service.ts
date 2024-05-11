@@ -18,6 +18,7 @@ import { generateRandomString } from "@/functions/generate-random-string";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 import { DatabaseService } from "@/database/database.service";
 import { CustomError } from "@/utils/errors/custom-error";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
@@ -67,7 +68,7 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
     );
     const dirFolder = secure
       ? join(process.cwd(), dir) // Save files in the backend folder
-      : join(process.cwd(), "public", dir); // Save files in the public folder
+      : join(ABSOLUTE_PATHS.uploads.public, dir); // Save files in the public folder
     if (!existsSync(dirFolder)) {
       mkdirSync(dirFolder, { recursive: true });
     }

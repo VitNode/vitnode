@@ -8,13 +8,14 @@ import { GraphQLModule } from "@nestjs/graphql";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { ApolloServerPluginLandingPageLocalDefault } from "@apollo/server/plugin/landingPage/default";
 import { DatabaseModule } from "./database/database.module";
+import { ServeStaticModule } from "@nestjs/serve-static";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configForAppModule],
-      envFilePath: join(process.cwd(), "..", ".env") // TODO: Change this
+      envFilePath: join(process.cwd(), "..", ".env")
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
@@ -24,6 +25,10 @@ import { DatabaseModule } from "./database/database.module";
       plugins: [ApolloServerPluginLandingPageLocalDefault()]
     }),
     JwtModule.register({ global: true }),
+    ServeStaticModule.forRoot({
+      rootPath: join(process.cwd(), "uploads", "public"),
+      serveRoot: "/public"
+    }),
     PluginsModule,
     DatabaseModule
   ]

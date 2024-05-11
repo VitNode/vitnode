@@ -10,6 +10,7 @@ import { getManifest } from "../functions";
 
 import { core_languages } from "../../../database/schema/languages";
 import { DatabaseService } from "@/database/database.service";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class EditAdminManifestMetadataService {
@@ -36,8 +37,7 @@ export class EditAdminManifestMetadataService {
 
     fs.writeFileSync(
       join(
-        process.cwd(),
-        "public",
+        ABSOLUTE_PATHS.uploads.public,
         "assets",
         lang_code,
         "manifest.webmanifest"

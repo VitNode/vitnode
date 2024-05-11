@@ -1,10 +1,8 @@
 {
   "name": "backend",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "private": true,
-  "license": "UNLICENSED",
+  "version": "0.1.0",
+  "author": "Maciej Piotr (aXenDev) Balcerzak",
+  "license": "GPL-3.0 license",
   "scripts": {
     "db": "drizzle-kit push",
     "build": "nest build",
@@ -30,6 +28,7 @@
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/platform-express": "^10.3.8",
     "@nestjs/schedule": "^4.0.2",
+    "@nestjs/serve-static": "^4.0.2",
     "bcrypt": "^5.1.1",
     "child_process": "^1.0.2",
     "date-fns": "^3.6.0",

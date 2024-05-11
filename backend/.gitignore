@@ -37,3 +37,11 @@ lerna-debug.log*
 
 # Others
 .env
+
+/uploads/public/*
+/uploads/private/*
+/uploads/temp/*
+!/uploads/index.html
+!/uploads/public/index.html
+!/uploads/private/index.html
+!/uploads/temp/index.html

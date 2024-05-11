@@ -11,6 +11,7 @@ import { core_languages } from "../../admin/database/schema/languages";
 import { DatabaseService } from "@/database/database.service";
 import { Ctx } from "@/utils/types/context.type";
 import { getConfigFile } from "@/utils/DELETE/config_test";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class ShowSettingsService {
@@ -45,8 +46,7 @@ export class ShowSettingsService {
   }): ManifestWithLang[] {
     return langCodes.map(lang => {
       const path = join(
-        process.cwd(),
-        "public",
+        ABSOLUTE_PATHS.uploads.public,
         "assets",
         lang,
         "manifest.webmanifest"

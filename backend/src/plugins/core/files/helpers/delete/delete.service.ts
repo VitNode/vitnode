@@ -5,6 +5,7 @@ import { Injectable } from "@nestjs/common";
 
 import { DeleteCoreFilesArgs } from "./dto/delete.args";
 import { CustomError } from "@/utils/errors/custom-error";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class DeleteCoreFilesService {
@@ -21,7 +22,7 @@ export class DeleteCoreFilesService {
   delete({ dir_folder, file_name, file_secure }: DeleteCoreFilesArgs) {
     const path = file_secure
       ? join(process.cwd(), dir_folder)
-      : join(process.cwd(), "public", dir_folder);
+      : join(ABSOLUTE_PATHS.uploads.public, dir_folder);
     this.checkIfFileExists(`${path}/${file_name}`);
 
     // Remove file from server

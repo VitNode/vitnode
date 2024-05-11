@@ -4,6 +4,7 @@ import * as fs from "fs";
 import { ShowAdminManifestMetadataObj } from "./show/dto/show.obj";
 
 import { NotFoundError } from "@/utils/errors/not-found-error";
+import { ABSOLUTE_PATHS } from "@/config";
 
 export const getManifest = ({
   lang_code
@@ -11,8 +12,7 @@ export const getManifest = ({
   lang_code: string;
 }): ShowAdminManifestMetadataObj => {
   const path = join(
-    process.cwd(),
-    "public",
+    ABSOLUTE_PATHS.uploads.public,
     "assets",
     lang_code,
     "manifest.webmanifest"
