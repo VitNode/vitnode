@@ -3,8 +3,8 @@ version: "3.8"
 services:
   postgres:
     container_name: vitnode_postgres_dev
-    image: postgres:16.2-alpine
-    restart: on-failure
+    image: postgres:16.3-alpine
+    restart: unless-stopped
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
@@ -20,7 +20,7 @@ services:
   pgadmin:
     container_name: vitnode_pgadmin_dev
     image: dpage/pgadmin4:latest
-    restart: on-failure
+    restart: unless-stopped
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin

@@ -67,8 +67,8 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
       folder
     );
     const dirFolder = secure
-      ? join(process.cwd(), dir) // Save files in the backend folder
-      : join(ABSOLUTE_PATHS.uploads.public, dir); // Save files in the public folder
+      ? join(ABSOLUTE_PATHS.uploads.private, dir)
+      : join(ABSOLUTE_PATHS.uploads.public, dir);
     if (!existsSync(dirFolder)) {
       mkdirSync(dirFolder, { recursive: true });
     }

@@ -11,6 +11,7 @@ import {
 } from "@nestjs/common";
 import { Response } from "express";
 import { DatabaseService } from "@/database/database.service";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Controller("secure_files")
 export class DownloadSecureFilesController {
@@ -32,7 +33,11 @@ export class DownloadSecureFilesController {
       return;
     }
 
-    const path = join(process.cwd(), file.dir_folder, file.file_name);
+    const path = join(
+      ABSOLUTE_PATHS.uploads.private,
+      file.dir_folder,
+      file.file_name
+    );
 
     const mediaType = file.mimetype.split("/")[0];
 

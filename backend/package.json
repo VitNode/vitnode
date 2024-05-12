@@ -8,7 +8,7 @@
     "config:database": "ts-node ./src/utils/actions/finish-build.ts",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "dev": "cross-env NODE_ENV=development pnpm config:database && nest start -b swc -w",
+    "dev": "pnpm config:database && cross-env NODE_ENV=development nest start -b swc -w",
     "start": "nest start -b swc",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
