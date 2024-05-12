@@ -12,7 +12,7 @@ import { ChangeFilesAdminPluginsService } from "../helpers/files/change/change.s
 import { pluginPaths } from "../paths";
 import { ConfigPlugin } from "../plugins.module";
 
-import { FileUpload } from "@/utils/graphql-upload/uploads";
+import { FileUpload } from "@/utils/graphql-upload/upload";
 import { currentDate } from "@/functions/date";
 import { core_plugins } from "../../database/schema/plugins";
 import { DatabaseService } from "@/database/database.service";

@@ -4,7 +4,7 @@ import busboy from "busboy";
 import createError from "http-errors";
 import objectPath from "object-path";
 
-import Upload, { FileUpload } from "./uploads";
+import Upload, { FileUpload } from "./upload";
 import ignoreStream from "./ignore-stream";
 import { ProcessRequestOptions } from "./graphql-upload-express";
 import { WriteStream } from "./fs-capacitor";
