@@ -1,6 +1,6 @@
 import { GraphQLError, GraphQLScalarType } from "graphql";
 
-import Upload from "./Upload";
+import Upload from "./uploads";
 
 export const GraphQLUpload = new GraphQLScalarType({
   name: "Upload",

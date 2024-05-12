@@ -1,10 +1,10 @@
 import { IncomingMessage, ServerResponse } from "http";
 
-import * as busboy from "busboy";
-import * as createError from "http-errors";
-import * as objectPath from "object-path";
+import busboy from "busboy";
+import createError from "http-errors";
+import objectPath from "object-path";
 
-import Upload, { FileUpload } from "./Upload";
+import Upload, { FileUpload } from "./uploads";
 import ignoreStream from "./ignore-stream";
 import { ProcessRequestOptions } from "./graphql-upload-express";
 import { WriteStream } from "./fs-capacitor";

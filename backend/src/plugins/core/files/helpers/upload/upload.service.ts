@@ -7,7 +7,7 @@ import {
 } from "fs";
 import { join } from "path";
 
-import * as sharp from "sharp";
+import sharp from "sharp";
 import { Injectable } from "@nestjs/common";
 
 import { UploadCoreFilesArgs } from "./dto/upload.args";

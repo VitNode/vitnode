@@ -1,5 +1,5 @@
 import { CustomError } from "@/utils/errors/custom-error";
-import { FileUpload } from "@/utils/graphql-upload/Upload";
+import { FileUpload } from "@/utils/graphql-upload/uploads";
 
 export const acceptMimeTypeImage = [
   "image/jpeg",

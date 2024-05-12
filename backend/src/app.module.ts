@@ -10,6 +10,7 @@ import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { ApolloServerPluginLandingPageLocalDefault } from "@apollo/server/plugin/landingPage/default";
 import { DatabaseModule } from "./database/database.module";
 import { ServeStaticModule } from "@nestjs/serve-static";
+import { Ctx } from "./utils/types/context.type";
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { ServeStaticModule } from "@nestjs/serve-static";
       autoSchemaFile: join(process.cwd(), "schema.gql"),
       sortSchema: true,
       playground: false,
-      plugins: [ApolloServerPluginLandingPageLocalDefault()]
+      plugins: [ApolloServerPluginLandingPageLocalDefault()],
+      context: ({ req, res }): Ctx => ({ req, res })
     }),
     JwtModule.register({ global: true }),
     ServeStaticModule.forRoot({

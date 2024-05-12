@@ -1,6 +1,6 @@
 import { ArgsType, Field, Int } from "@nestjs/graphql";
 
-import { FileUpload } from "@/utils/graphql-upload/Upload";
+import { FileUpload } from "@/utils/graphql-upload/uploads";
 import { GraphQLUpload } from "@/utils/graphql-upload/graphql-upload";
 
 @ArgsType()
