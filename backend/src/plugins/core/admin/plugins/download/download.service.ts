@@ -188,6 +188,8 @@ export class DownloadAdminPluginsService {
 
   protected async generateMigration({ code }: { code: string }): Promise<void> {
     const path = pluginPaths({ code }).backend.database_migration;
+    const schemaPath = pluginPaths({ code }).backend.database_schema;
+    if (!fs.existsSync(schemaPath)) return;
     if (!fs.existsSync(path)) {
       fs.mkdirSync(path, {
         recursive: true
