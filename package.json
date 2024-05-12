@@ -17,7 +17,7 @@
     "test": "turbo test:once",
     "start": "pnpm config:database && turbo start",
     "preinstall": "npx only-allow pnpm",
-    "config:finish": "cd backend && pnpm config:finish && cd ..",
+    "config:init": "cd frontend && pnpm config:init && cd ..",
     "codegen": "cd backend && pnpm codegen && cd ..",
     "docker:test": "pnpm config:init && docker-compose -f ./docker-compose-prod-backend.yml -p vitnode-test up -d --build && docker-compose -f ./docker-compose-prod-frontend.yml -p vitnode-test up -d --build && pnpm config:finish",
     "docker:prod": "sudo pnpm config:init && sudo docker compose -f ./docker-compose-prod-backend.yml -p vitnode-prod up -d --build && sudo docker compose -f ./docker-compose-prod-frontend.yml -p vitnode-prod up -d --build && sudo pnpm config:finish",

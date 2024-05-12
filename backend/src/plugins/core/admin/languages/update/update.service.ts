@@ -11,12 +11,11 @@ import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_languages } from "../../database/schema/languages";
 import { DatabaseService } from "@/database/database.service";
 import { setRebuildRequired } from "@/functions/rebuild-required";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class UpdateAdminCoreLanguageService {
   constructor(private databaseService: DatabaseService) {}
-
-  protected path: string = join("..", "frontend", "langs");
 
   async update({ code, file }: UpdateCoreAdminLanguagesArgs): Promise<string> {
     const lang = await this.databaseService.db.query.core_languages.findFirst({
@@ -30,7 +29,7 @@ export class UpdateAdminCoreLanguageService {
     const tgz = await file;
 
     // Check if folder exists
-    const folder = join(this.path, code);
+    const folder = join(ABSOLUTE_PATHS.frontend.langs, code);
     if (!fs.existsSync(folder)) {
       fs.mkdirSync(folder);
     }

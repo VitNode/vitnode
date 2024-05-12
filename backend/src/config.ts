@@ -41,7 +41,8 @@ export const configForAppModule = () => {
 };
 
 const internalPaths = {
-  uploads: join(process.cwd(), "uploads")
+  uploads: join(process.cwd(), "uploads"),
+  frontend: join(process.cwd(), "..", "frontend")
 };
 
 export const ABSOLUTE_PATHS = {
@@ -50,6 +51,11 @@ export const ABSOLUTE_PATHS = {
     public: join(internalPaths.uploads, "public"),
     private: join(internalPaths.uploads, "private"),
     temp: join(internalPaths.uploads, "temp")
+  },
+  frontend: {
+    init: internalPaths.frontend,
+    themes: join(internalPaths.frontend, "themes"),
+    langs: join(internalPaths.frontend, "langs")
   }
 };
 

@@ -65,7 +65,7 @@ interface ManifestType {
 export const generateManifest = async () => {
   const config = await getConfigFile();
   const languages = (
-    await readdir(join("..", "frontend", "langs"), { withFileTypes: true })
+    await readdir(join(ABSOLUTE_PATHS.frontend.langs), { withFileTypes: true })
   )
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name);

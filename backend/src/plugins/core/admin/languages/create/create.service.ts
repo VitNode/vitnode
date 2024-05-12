@@ -10,6 +10,7 @@ import { core_languages } from "../../database/schema/languages";
 import { DatabaseService } from "@/database/database.service";
 import { CustomError } from "@/utils/errors/custom-error";
 import { setRebuildRequired } from "@/functions/rebuild-required";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class CreateAdminCoreLanguageService {
@@ -50,8 +51,8 @@ export class CreateAdminCoreLanguageService {
 
     // Clone JSONs from lang folder in frontend
     fs.cpSync(
-      join("..", "frontend", "langs", "en"),
-      join("..", "frontend", "langs", code),
+      join(ABSOLUTE_PATHS.frontend.langs, "en"),
+      join(ABSOLUTE_PATHS.frontend.langs, code),
       { recursive: true }
     );
 

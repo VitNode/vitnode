@@ -12,6 +12,7 @@ import { core_languages } from "../../database/schema/languages";
 import { DatabaseService } from "@/database/database.service";
 import { CustomError } from "@/utils/errors/custom-error";
 import { setRebuildRequired } from "@/functions/rebuild-required";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class DeleteAdminCoreLanguageService {
@@ -45,7 +46,7 @@ export class DeleteAdminCoreLanguageService {
       .delete(core_languages)
       .where(eq(core_languages.code, code));
 
-    const path = join("..", "frontend", "langs", code);
+    const path = join(ABSOLUTE_PATHS.frontend.langs, code);
     if (existsSync(path)) {
       rm(path, { recursive: true });
     }

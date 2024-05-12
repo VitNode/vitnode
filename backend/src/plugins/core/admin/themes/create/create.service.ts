@@ -9,6 +9,7 @@ import { ShowAdminThemes } from "../show/dto/show.obj";
 
 import { core_themes } from "../../database/schema/themes";
 import { DatabaseService } from "@/database/database.service";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class CreateAdminThemesService {
@@ -33,8 +34,8 @@ export class CreateAdminThemesService {
     const { id } = theme[0];
 
     // Copy the default theme to the new theme
-    const path = join("..", "frontend", "themes", id.toString());
-    fs.cpSync(join("..", "frontend", "themes", "1"), path, {
+    const path = join(ABSOLUTE_PATHS.frontend.themes, id.toString());
+    fs.cpSync(join(ABSOLUTE_PATHS.frontend.themes, "1"), path, {
       recursive: true
     });
 
@@ -49,8 +50,8 @@ export class CreateAdminThemesService {
       )
     );
 
-    // Update the global.scss file
-    const pathSCSSFile = `${path}/core/layout/global.scss`;
+    // Update the global.css file
+    const pathSCSSFile = `${path}/core/layout/global.css`;
     const pathSCSSFileContent = fs.readFileSync(pathSCSSFile, "utf8");
     await writeFile(
       pathSCSSFile,

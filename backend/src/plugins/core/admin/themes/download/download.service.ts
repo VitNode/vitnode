@@ -16,6 +16,7 @@ import { currentDate } from "@/functions/date";
 import { core_themes } from "../../database/schema/themes";
 import { DatabaseService } from "@/database/database.service";
 import { CustomError } from "@/utils/errors/custom-error";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class DownloadAdminThemesService {
@@ -33,7 +34,7 @@ export class DownloadAdminThemesService {
       throw new NotFoundError("Theme");
     }
 
-    const path = join("..", "frontend", "themes", theme.id.toString());
+    const path = join(ABSOLUTE_PATHS.frontend.themes, theme.id.toString());
     // Check if theme exists
     if (!fs.existsSync(path)) {
       throw new NotFoundError("Theme directory");

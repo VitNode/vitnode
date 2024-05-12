@@ -12,6 +12,7 @@ import { core_themes } from "../../database/schema/themes";
 import { DatabaseService } from "@/database/database.service";
 import { CustomError } from "@/utils/errors/custom-error";
 import { setRebuildRequired } from "@/functions/rebuild-required";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class DeleteAdminThemesService {
@@ -37,10 +38,12 @@ export class DeleteAdminThemesService {
       .delete(core_themes)
       .where(eq(core_themes.id, id));
 
-    const path = join("..", "frontend", "themes", id.toString());
+    const path = join(ABSOLUTE_PATHS.frontend.themes, id.toString());
     // Check if folder exists
     if (fs.existsSync(path)) {
-      rm(join("..", "frontend", "themes", id.toString()), { recursive: true });
+      rm(join(ABSOLUTE_PATHS.frontend.themes, id.toString()), {
+        recursive: true
+      });
     }
 
     await setRebuildRequired({ set: "themes" });

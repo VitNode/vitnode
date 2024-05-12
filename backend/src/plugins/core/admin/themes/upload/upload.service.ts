@@ -90,7 +90,7 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
   async upload({ file, id }: UploadAdminThemesArgs): Promise<ShowAdminThemes> {
     const tgz = await file;
     const config = await this.getThemeConfig({ tgz });
-    const pathSCSSFile = join(this.tempPath, "core", "layout", "global.scss");
+    const pathSCSSFile = join(this.tempPath, "core", "layout", "global.css");
     const pathSCSSFileContent = await fs.promises.readFile(
       pathSCSSFile,
       "utf8"

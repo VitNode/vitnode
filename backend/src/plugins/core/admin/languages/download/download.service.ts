@@ -13,6 +13,7 @@ import { generateRandomString } from "@/functions/generate-random-string";
 import { currentDate } from "@/functions/date";
 import { DatabaseService } from "@/database/database.service";
 import { CustomError } from "@/utils/errors/custom-error";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class DownloadAdminCoreLanguageService {
@@ -31,7 +32,7 @@ export class DownloadAdminCoreLanguageService {
       throw new NotFoundError("Language");
     }
 
-    const path = join("..", "frontend", "langs", code);
+    const path = join(ABSOLUTE_PATHS.frontend.langs, code);
     // Check if language exists
     if (!fs.existsSync(path)) {
       throw new NotFoundError("Language directory");
