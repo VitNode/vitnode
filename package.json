@@ -15,7 +15,7 @@
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
     "test": "turbo test:once",
-    "start": "pnpm config:database && turbo start",
+    "start": "turbo start",
     "preinstall": "npx only-allow pnpm",
     "config:init": "cd frontend && pnpm config:init && cd ..",
     "codegen": "cd backend && pnpm codegen && cd ..",

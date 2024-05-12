@@ -35,6 +35,11 @@ export class CreateAdminCoreLanguageService {
       });
     }
 
+    const defaultLanguage =
+      await this.databaseService.db.query.core_languages.findFirst({
+        where: (table, { eq }) => eq(table.code, "en")
+      });
+
     const newLanguage = await this.databaseService.db
       .insert(core_languages)
       .values({
@@ -45,7 +50,8 @@ export class CreateAdminCoreLanguageService {
         protected: false,
         enabled: true,
         time_24,
-        locale
+        locale,
+        site_copyright: defaultLanguage.site_copyright
       })
       .returning();
 
@@ -54,6 +60,22 @@ export class CreateAdminCoreLanguageService {
       join(ABSOLUTE_PATHS.frontend.langs, "en"),
       join(ABSOLUTE_PATHS.frontend.langs, code),
       { recursive: true }
+    );
+
+    // Clone JSON for manifest
+    fs.cpSync(
+      join(
+        ABSOLUTE_PATHS.uploads.public,
+        "assets",
+        "en",
+        "manifest.webmanifest"
+      ),
+      join(
+        ABSOLUTE_PATHS.uploads.public,
+        "assets",
+        code,
+        "manifest.webmanifest"
+      )
     );
 
     await setRebuildRequired({ set: "langs" });

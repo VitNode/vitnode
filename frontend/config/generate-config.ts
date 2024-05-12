@@ -23,7 +23,17 @@ import { DEFAULT_CONFIG_DATA } from ".";
 
     // Update config file
     const config = await getConfigFile();
-    const updatedConfig = updateObject(config, DEFAULT_CONFIG_DATA);
+    const updatedConfig = updateObject(
+      {
+        ...config,
+        rebuild_required: {
+          langs: false,
+          plugins: false,
+          themes: false
+        }
+      },
+      DEFAULT_CONFIG_DATA
+    );
 
     fs.writeFile(
       configPath,

@@ -51,6 +51,10 @@ export class DeleteAdminCoreLanguageService {
       rm(path, { recursive: true });
     }
 
+    // Remove assets
+    const assetsPath = join(ABSOLUTE_PATHS.uploads.public, "assets", code);
+    rm(assetsPath, { recursive: true });
+
     await setRebuildRequired({ set: "langs" });
 
     return "Success!";
