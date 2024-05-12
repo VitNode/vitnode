@@ -19,7 +19,7 @@ interface ChangeFilesContentType {
 
 @Injectable()
 export class ChangeFilesAdminPluginsService {
-  protected path = join(process.cwd(), "src", "plugins");
+  protected path = join(process.cwd(), "src");
 
   protected changeContent({
     files
@@ -55,7 +55,7 @@ export class ChangeFilesAdminPluginsService {
   changeFilesWhenCreate({ code }: { code: string }): void {
     const files: ChangeFilesContentType[] = [
       {
-        path: "plugins.module.ts",
+        path: join("plugins", "plugins.module.ts"),
         content: content =>
           changeModuleRootSchema({
             content,
@@ -80,7 +80,7 @@ export class ChangeFilesAdminPluginsService {
   changeFilesWhenDelete({ code }: { code: string }): void {
     const files: ChangeFilesContentType[] = [
       {
-        path: "plugins.module.ts",
+        path: join("plugins", "plugins.module.ts"),
         content: content =>
           removeModuleFromRootSchema({
             content,

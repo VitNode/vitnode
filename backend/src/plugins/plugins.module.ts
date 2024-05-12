@@ -1,14 +1,14 @@
 import { Module } from "@nestjs/common";
 
 import { CoreModule } from "./core/core.module";
-import { BlogModule } from "./blog/blog.module";
 import { ForumModule } from "./forum/forum.module";
+import { BlogModule } from "./blog/blog.module";
 // ! === IMPORT ===
 
 @Module({
   imports: [
-    BlogModule,
     ForumModule,
+    BlogModule,
     // ! === MODULE ===
     CoreModule
   ]

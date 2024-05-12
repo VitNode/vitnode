@@ -12,7 +12,6 @@ export const removeModuleFromRootSchema = ({
   return content
     .replace(`\n    ${name}Module,`, "")
     .replace(`\nimport { ${name}Module } from "./${code}/${code}.module";`, "");
-  // .replace(`,\n    // ! === MODULE ===`, "\n    // ! === MODULE ===");
 };
 
 export const removeDatabaseFromService = ({
@@ -27,8 +26,7 @@ export const removeDatabaseFromService = ({
   return content
     .replace(`\n  ...table${name},`, "")
     .replace(
-      `\nimport table${name} from "../${code}/admin/database/index";`,
+      `\nimport table${name} from "../plugins/${code}/admin/database/index";`,
       ""
     );
-  // .replace(`,\n  // ! === MODULE ===`, "\n  // ! === MODULE ===");
 };
