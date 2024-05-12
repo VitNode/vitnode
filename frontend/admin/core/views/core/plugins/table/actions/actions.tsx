@@ -2,6 +2,7 @@ import { BadgeHelp, ChevronDown, CodeXml, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
+import { CONFIG } from "@/config";
 import type { ShowAdminPlugins } from "@/graphql/hooks";
 import { DeletePluginActionsAdmin } from "./delete/delete";
 import { SetDefaultPluginActionsAdmin } from "./set-default/set-default";
@@ -14,7 +15,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Link, usePathname, useRouter } from "@/i18n";
 import { UploadPluginActionsAdmin } from "./upload";
-import { CONFIG } from "@/config/config";
 
 export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
   const t = useTranslations("admin.core.plugins");

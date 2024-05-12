@@ -4,8 +4,8 @@ import * as z from "zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
-import type { ConfigType } from "@/config/get-config-file";
 import { mutationApi } from "./mutation-api";
+import type { ConfigType } from "@/config";
 
 export interface EditorAdminArgs {
   data: ConfigType;

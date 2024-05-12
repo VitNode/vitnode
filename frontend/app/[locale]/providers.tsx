@@ -7,8 +7,8 @@ import { useState, type ReactNode } from "react";
 
 import { Toaster } from "@/components/ui/sonner";
 import { GlobalsContext } from "@/hooks/core/use-globals";
-import type { ConfigType } from "@/config/get-config-file";
 import type { Core_MiddlewareQuery } from "@/graphql/hooks";
+import type { ConfigType } from "@/config";
 
 interface Props {
   children: ReactNode;

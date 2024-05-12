@@ -1,4 +1,4 @@
-import { CONFIG } from "@/config/config";
+import { CONFIG } from "@/config";
 import { CreateActionPluginAdmin } from "./create/create";
 import { UploadActionPluginAdmin } from "./upload";
 

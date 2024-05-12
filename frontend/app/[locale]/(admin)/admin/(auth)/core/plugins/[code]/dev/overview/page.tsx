@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { CONFIG } from "@/config/config";
+import { CONFIG } from "@/config";
 import { getPluginDataAdmin } from "../query-api";
 import { OverviewDevPluginAdminView } from "@/admin/core/views/core/plugins/views/dev/overview";
 

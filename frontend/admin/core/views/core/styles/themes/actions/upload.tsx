@@ -4,10 +4,10 @@ import { Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Suspense, lazy } from "react";
 
+import { CONFIG } from "@/config";
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { CONFIG } from "@/config/config";
 
 const Content = lazy(() =>
   import("../upload/upload").then(module => ({

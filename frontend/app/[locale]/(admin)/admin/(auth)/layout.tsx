@@ -13,7 +13,7 @@ import {
   type Admin__Sessions__AuthorizationQuery,
   type Admin__Sessions__AuthorizationQueryVariables
 } from "@/graphql/hooks";
-import { getConfigFile } from "@/config/get-config-file";
+import { getConfigFile } from "@/config/helpers";
 
 const getData = async () => {
   const cookieStore = cookies();

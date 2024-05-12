@@ -28,17 +28,20 @@ lerna-debug.log*
 *.sublime-workspace
 
 # IDE - VSCode
-.env
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# Static files
-uploads/*
-!uploads/index.html
-temp/*
-!temp/index.html
-public/*
-!public/index.html
+
+# Others
+.env
+
+/uploads/public/*
+/uploads/private/*
+/uploads/temp/*
+!/uploads/index.html
+!/uploads/public/index.html
+!/uploads/private/index.html
+!/uploads/temp/index.html
