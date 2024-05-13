@@ -4,6 +4,7 @@
     "Codegen",
     "hljs",
     "hookform",
+    "ilike",
     "lowlight",
     "lucide",
     "nestjs",

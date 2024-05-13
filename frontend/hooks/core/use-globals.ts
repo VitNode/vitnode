@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 
 import type { ShowCoreLanguages, ShowCoreThemes } from "@/graphql/hooks";
-import type { ConfigType } from "@/config/get-config-file";
+import type { ConfigType } from "@/config";
 
 interface Args {
   config: ConfigType;

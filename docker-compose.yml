@@ -1,0 +1,71 @@
+version: "3.8"
+
+services:
+  database:
+    container_name: vitnode_database
+    image: postgres:16.3-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE:-vitnode}
+    ports:
+      - "${DB_PORT:-5432}:${DB_PORT:-5432}"
+    volumes:
+      - ./docker/prod/database:/var/lib/postgresql/data
+    networks:
+      - vitnode
+  backend:
+    container_name: vitnode_backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - DB_HOST=${DB_HOST:-database}
+      - DB_PORT=${DB_PORT:-5432}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE:-vitnode}
+      - LOGIN_TOKEN_SECRET=${LOGIN_TOKEN_SECRET}
+      # - NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL}
+    command: sh -c "pnpm start:prod"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    volumes:
+      - ./frontend/config:/frontend/config # config
+      - ./frontend/themes:/frontend/themes # themes
+      - ./frontend/langs:/frontend/langs # langs
+      - ./frontend/app:/frontend/app # app
+      - ./frontend/admin:/frontend/admin # admin
+      - ./frontend/graphql:/frontend/graphql # graphql
+      - ./frontend/hooks:/frontend/hooks # hooks
+      - ./backend/uploads:/backend/uploads # uploads
+    networks:
+      - vitnode
+  frontend:
+    container_name: vitnode_frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    command: sh -c "pnpm start:prod"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      # - ./frontend/config:/app/config # config
+      - ./frontend/themes:/app/themes # themes
+      - ./frontend/langs:/app/langs # langs
+      - ./frontend/app:/app/app # app
+      - ./frontend/admin:/app/admin # admin
+      - ./frontend/graphql:/app/graphql # graphql
+      - ./frontend/hooks:/app/hooks # hooks
+    networks:
+      - vitnode
+
+networks:
+  vitnode:

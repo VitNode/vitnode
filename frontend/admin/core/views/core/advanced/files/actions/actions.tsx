@@ -1,6 +1,7 @@
 import { Download } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { CONFIG } from "@/config";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Tooltip,
@@ -8,7 +9,6 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import { CONFIG } from "@/config/config";
 import type { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
 import { Link } from "@/i18n";
 import { DeleteActionFilesAdvancedCoreAdmin } from "./delete/delete";

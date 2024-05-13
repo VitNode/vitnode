@@ -4,11 +4,11 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
 
+import { CONFIG } from "@/config";
 import { useDialog } from "@/components/ui/dialog";
 import { increaseVersionString } from "@/functions/increase-version-string";
 import { zodInput } from "@/functions/zod";
 import type { ShowAdminPlugins } from "@/graphql/hooks";
-import { CONFIG } from "@/config/config";
 import { mutationApi } from "./mutation-api";
 
 export const useDownloadPluginAdmin = ({

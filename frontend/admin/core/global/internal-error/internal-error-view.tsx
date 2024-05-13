@@ -3,6 +3,7 @@
 import { RefreshCcw, RotateCcw, WifiOff } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { CONFIG } from "@/config";
 import {
   Card,
   CardContent,
@@ -13,7 +14,6 @@ import { PoweredByVitNode } from "../powered-by";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "@/i18n";
 import { mutationClearCache } from "./mutation-clear-cache";
-import { CONFIG } from "@/config/config";
 
 interface Props {
   showPoweredBy?: boolean;

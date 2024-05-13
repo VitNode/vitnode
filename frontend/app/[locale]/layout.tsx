@@ -3,6 +3,7 @@ import { NextIntlClientProvider, type AbstractIntlMessages } from "next-intl";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 
+import { CONFIG } from "@/config";
 import { Providers } from "./providers";
 import { fetcher } from "@/graphql/fetcher";
 import {
@@ -10,12 +11,11 @@ import {
   type Core_MiddlewareQuery,
   type Core_MiddlewareQueryVariables
 } from "@/graphql/hooks";
-import { getConfigFile } from "@/config/get-config-file";
 import { cn } from "@/functions/classnames";
 import { CatchLayout } from "./catch";
-import "./global.css";
 import "@/app/[locale]/(admin)/admin/global.css";
-import { CONFIG } from "@/config/config";
+import "./global.css";
+import { getConfigFile } from "@/config/helpers";
 
 const getData = async () => {
   const { data } = await fetcher<
