@@ -14,8 +14,11 @@ export const configForAppModule = () => {
       domain:
         frontend_url.hostname === "localhost"
           ? "localhost"
-          : `*.${frontend_url.hostname.replace(/:\d+$/, "").split(".").slice(-2).join(".")}`,
-
+          : frontend_url.hostname
+              .replace(/:\d+$/, "")
+              .split(".")
+              .slice(-2)
+              .join("."),
       login_token: {
         expiresIn: 7, // 7 days
         expiresInRemember: 90, // 90 days
