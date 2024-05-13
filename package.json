@@ -19,12 +19,9 @@
     "preinstall": "npx only-allow pnpm",
     "config:init": "cd frontend && pnpm config:init && cd ..",
     "codegen": "cd backend && pnpm codegen && cd ..",
-    "docker:test": "pnpm config:init && docker-compose -f ./docker-compose-prod-backend.yml -p vitnode-test up -d --build && docker-compose -f ./docker-compose-prod-frontend.yml -p vitnode-test up -d --build && pnpm config:finish",
-    "docker:prod": "sudo pnpm config:init && sudo docker compose -f ./docker-compose-prod-backend.yml -p vitnode-prod up -d --build && sudo docker compose -f ./docker-compose-prod-frontend.yml -p vitnode-prod up -d --build && sudo pnpm config:finish",
     "docker:dev": "docker-compose -f ./docker-compose-dev.yml -p vitnode-dev up -d",
-    "docker": "docker-compose -f ./docker-compose.yml -p vitnode up -d",
-    "docker:clear": "sudo docker system prune -a",
-    "docker:bash": "bash docker-prod.bash"
+    "docker:prod": "sh docker-prod.sh",
+    "docker:clear": "sudo docker system prune -a"
   },
   "engines": {
     "node": ">=20.0.0",
