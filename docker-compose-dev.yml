@@ -6,8 +6,8 @@ services:
     image: postgres:16.3-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
+      POSTGRES_USER: ${DB_USER-root}
+      POSTGRES_PASSWORD: ${DB_PASSWORD-root}
       POSTGRES_DB: vitnode
     command: ["postgres", "-c", "log_statement=all"] # log all sql queries
     volumes:
