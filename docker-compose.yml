@@ -50,13 +50,13 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_DEBUG=${NEXT_PUBLIC_DEBUG:-false}
+        - NEXT_PUBLIC_GRAPHQL_URL=${NEXT_PUBLIC_GRAPHQL_URL:-http://backend:8080}
+        - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL:-http://localhost:8080}
+        - NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL:-http://localhost:3000}
     restart: unless-stopped
     command: sh -c "pnpm start:prod"
-    args:
-      - NEXT_PUBLIC_DEBUG=${NEXT_PUBLIC_DEBUG:-false}
-      - NEXT_PUBLIC_GRAPHQL_URL=${NEXT_PUBLIC_GRAPHQL_URL:-http://backend:8080}
-      - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL:-http://localhost:8080}
-      - NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL:-http://localhost:3000}
     # environment:
     #   - NEXT_PUBLIC_DEBUG=${NEXT_PUBLIC_DEBUG:-false}
     #   - NEXT_PUBLIC_GRAPHQL_URL=${NEXT_PUBLIC_GRAPHQL_URL:-http://backend:8080}
