@@ -6,8 +6,8 @@ services:
     image: postgres:16.3-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_USER: ${DB_USER:-vitnode_user}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-vitnode_password}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_DATABASE:-vitnode}
     ports:
       - "${DB_PORT:-5432}:${DB_PORT:-5432}"
@@ -24,12 +24,12 @@ services:
     environment:
       - DB_HOST=${DB_HOST:-database}
       - DB_PORT=${DB_PORT:-5432}
-      - DB_USER=${DB_USER:-vitnode_user}
-      - DB_PASSWORD=${DB_PASSWORD:-vitnode_password}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
       - DB_DATABASE=${DB_DATABASE:-vitnode}
       - LOGIN_TOKEN_SECRET=${LOGIN_TOKEN_SECRET}
-      - NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL}
-    command: sh -c "pnpm start:prod"
+      - NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL:-http://localhost:3000}
+    command: sh -c "pnpm config:database && pnpm start:prod"
     ports:
       - "8080:8080"
     depends_on:
@@ -52,6 +52,11 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     command: sh -c "pnpm start:prod"
+    environment:
+      - NEXT_PUBLIC_DEBUG=${NEXT_PUBLIC_DEBUG:-false}
+      - NEXT_PUBLIC_GRAPHQL_URL=${NEXT_PUBLIC_GRAPHQL_URL:-http://backend:8080}
+      - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL:-http://localhost:8080}
+      - NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL:-http://localhost:3000}
     ports:
       - "3000:3000"
     depends_on:
