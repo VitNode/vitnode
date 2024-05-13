@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
@@ -23,5 +24,14 @@ interface Props {
 }
 
 export default function RootLayout({ children }: Props) {
+  if (process.env.NEXT_PUBLIC_DEBUG === "true") {
+    console.log(
+      "NEXT_PUBLIC_FRONTEND_URL",
+      process.env.NEXT_PUBLIC_FRONTEND_URL
+    );
+    console.log("NEXT_PUBLIC_BACKEND_URL", process.env.NEXT_PUBLIC_BACKEND_URL);
+    console.log("NEXT_PUBLIC_GRAPHQL_URL", process.env.NEXT_PUBLIC_GRAPHQL_URL);
+  }
+
   return children;
 }

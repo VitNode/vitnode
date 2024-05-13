@@ -11,7 +11,7 @@
     "test": "vitest",
     "test:once": "vitest --run",
     "start": "next start",
-    "start:prod": "pnpm config:init && node server.js",
+    "start:prod": "node server.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "codegen": "cd .. && pnpm codegen",

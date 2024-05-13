@@ -1,18 +1,24 @@
 import { promises } from "fs";
 import { join } from "path";
+import { parseFrontendUrlFromEnv } from "./functions/envs";
 
 export const configForAppModule = () => {
+  const frontend_url = parseFrontendUrlFromEnv();
+
   const data = {
     login_token_secret: process.env.LOGIN_TOKEN_SECRET ?? "",
-    frontend_url: process.env.NEXT_PUBLIC_FRONTEND_URL
-      ? `https://${process.env.NEXT_PUBLIC_FRONTEND_URL}`
-      : "http://localhost:3000",
+    frontend_url: frontend_url.url,
     port: parseInt(process.env.PORT, 10) || 8080,
     password_salt: 10,
     cookies: {
-      domain: process.env.NEXT_PUBLIC_FRONTEND_URL
-        ? process.env.NEXT_PUBLIC_FRONTEND_URL
-        : "localhost",
+      domain:
+        frontend_url.hostname === "localhost"
+          ? "localhost"
+          : frontend_url.hostname
+              .replace(/:\d+$/, "")
+              .split(".")
+              .slice(-2)
+              .join("."),
       login_token: {
         expiresIn: 7, // 7 days
         expiresInRemember: 90, // 90 days

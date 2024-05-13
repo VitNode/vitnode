@@ -111,6 +111,12 @@ export class SignInCoreSessionsService {
       device_id: device.id
     });
 
+    console.log(
+      "cookies.domain",
+      this.configService.getOrThrow("cookies.domain")
+    );
+    console.log("frontend_url", this.configService.getOrThrow("frontend_url"));
+
     // Set cookie for session
     res.cookie(
       this.configService.getOrThrow("cookies.login_token.name"),
