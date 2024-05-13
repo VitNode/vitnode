@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import cookieParser from "cookie-parser";
@@ -11,7 +12,7 @@ async function bootstrap() {
     credentials: true,
     origin: [
       process.env.NEXT_PUBLIC_FRONTEND_URL
-        ? `https://${process.env.NEXT_PUBLIC_FRONTEND_URL}`
+        ? process.env.NEXT_PUBLIC_FRONTEND_URL
         : "http://localhost:3000",
       "https://sandbox.embed.apollographql.com"
     ]
@@ -26,7 +27,24 @@ async function bootstrap() {
   );
 
   await app.listen(process.env.PORT ?? "8080", null, () => {
-    // eslint-disable-next-line no-console
+    if (process.env.NEXT_PUBLIC_DEBUG) {
+      console.warn(
+        "WARNING: Debug mode is enabled. Do not use this in production."
+      );
+      console.log(
+        "DEBUG ENV: NEXT_PUBLIC_FRONTEND_URL -",
+        process.env.NEXT_PUBLIC_FRONTEND_URL
+      );
+      console.log("DEBUG ENV: DB_HOST -", process.env.DB_HOST);
+      console.log("DEBUG ENV: DB_PORT -", process.env.DB_PORT);
+      console.log("DEBUG ENV: DB_PASSWORD -", process.env.DB_PASSWORD);
+      console.log("DEBUG ENV: DB_DATABASE -", process.env.DB_DATABASE);
+      console.log(
+        "DEBUG ENV: LOGIN_TOKEN_SECRET -",
+        process.env.LOGIN_TOKEN_SECRET
+      );
+    }
+
     console.log(
       `Application is running on: http://localhost:${process.env.PORT ?? 8080}/graphql`
     );
