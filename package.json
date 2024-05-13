@@ -23,7 +23,8 @@
     "docker:prod": "sudo pnpm config:init && sudo docker compose -f ./docker-compose-prod-backend.yml -p vitnode-prod up -d --build && sudo docker compose -f ./docker-compose-prod-frontend.yml -p vitnode-prod up -d --build && sudo pnpm config:finish",
     "docker:dev": "docker-compose -f ./docker-compose-dev.yml -p vitnode-dev up -d",
     "docker": "docker-compose -f ./docker-compose.yml -p vitnode up -d",
-    "docker:clear": "sudo docker system prune -a"
+    "docker:clear": "sudo docker system prune -a",
+    "docker:bash": "bash docker-prod.bash"
   },
   "engines": {
     "node": ">=20.0.0",

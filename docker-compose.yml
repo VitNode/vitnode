@@ -57,7 +57,7 @@ services:
     depends_on:
       - backend
     volumes:
-      # - ./frontend/config:/app/config # config
+      - ./frontend/config:/app/config # config
       - ./frontend/themes:/app/themes # themes
       - ./frontend/langs:/app/langs # langs
       - ./frontend/app:/app/app # app
