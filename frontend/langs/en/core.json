@@ -39,6 +39,12 @@
     "checked_number": "Checked: {count}",
     "prev_page": "Previous Page",
     "home": "Home",
+    "theme_editor": {
+      "title": "Theme Editor",
+      "desktop": "Desktop",
+      "tablet": "Tablet",
+      "mobile": "Mobile"
+    },
     "colors": {
       "none": "No Color",
       "remove": "Remove color"

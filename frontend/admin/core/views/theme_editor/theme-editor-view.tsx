@@ -1,59 +1,63 @@
 "use client";
 
-import { Monitor, Smartphone, Tablet } from "lucide-react";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { X } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { CONFIG } from "@/config";
 import { cn } from "@/functions/classnames";
+import { ThemeEditorViewEnum, ToolbarThemeEditor } from "./toolbar";
+import { buttonVariants } from "@/components/ui/button";
+import { Link } from "@/i18n";
+import { ThemeEditorContext, ThemeEditorTab } from "./hooks/use-theme-editor";
+import { ContentThemeEditor } from "./content/content";
 
 export const ThemeEditorView = () => {
-  const [activeMode, setActiveMode] = useState<"desktop" | "tablet" | "mobile">(
-    "desktop"
+  const t = useTranslations("core");
+  const [activeMode, setActiveMode] = useState<ThemeEditorViewEnum>(
+    ThemeEditorViewEnum.Desktop
   );
+  const [activeTab, setActiveTab] = useState<ThemeEditorTab>(
+    ThemeEditorTab.Main
+  );
+  const direction: number = activeTab === ThemeEditorTab.Main ? -1 : 1;
 
   return (
-    <>
+    <ThemeEditorContext.Provider value={{ activeTab, setActiveTab, direction }}>
       <div className="flex-1 flex items-center justify-center">
         <iframe
           title={CONFIG.frontend_url}
-          className={cn("border bg-background rounded-md transition-all", {
+          className={cn("border bg-background transition-all", {
             "w-full h-full": activeMode === "desktop",
-            "w-[768px] h-5/6": activeMode === "tablet",
-            "w-[375px] h-5/6": activeMode === "mobile"
+            "w-[768px] h-5/6 rounded-md": activeMode === "tablet",
+            "w-[375px] h-5/6 rounded-md": activeMode === "mobile"
           })}
           src={CONFIG.frontend_url}
         />
       </div>
 
-      <div className="w-80 flex-shrink-0 shadow-lg border-l flex">
-        <div className="p-1 border-r flex flex-col gap-1">
-          <Button
-            size="icon"
-            ariaLabel="test"
-            variant="ghost"
-            onClick={() => setActiveMode("desktop")}
-          >
-            <Monitor />
-          </Button>
-          <Button
-            size="icon"
-            ariaLabel="test"
-            variant="ghost"
-            onClick={() => setActiveMode("tablet")}
-          >
-            <Tablet />
-          </Button>
-          <Button
-            size="icon"
-            ariaLabel="test"
-            variant="ghost"
-            onClick={() => setActiveMode("mobile")}
-          >
-            <Smartphone />
-          </Button>
+      <div className="w-96 flex-shrink-0 shadow-lg border-l flex">
+        <ToolbarThemeEditor setActiveMode={setActiveMode} />
+
+        <div className="flex-1">
+          <header className="flex justify-between items-center px-6 py-4">
+            <h1 className="font-semibold text-lg">{t("theme_editor.title")}</h1>
+
+            <Link
+              href="/"
+              className={buttonVariants({
+                variant: "ghost",
+                size: "icon"
+              })}
+              aria-label={t("close")}
+            >
+              <X />
+            </Link>
+          </header>
+
+          <ContentThemeEditor />
         </div>
       </div>
-    </>
+    </ThemeEditorContext.Provider>
   );
 };

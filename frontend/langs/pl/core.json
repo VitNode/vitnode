@@ -39,6 +39,12 @@
     "checked_number": "Zaznaczono: {count}",
     "prev_page": "Poprzednia strona",
     "home": "Strona główna",
+    "theme_editor": {
+      "title": "Edytor motywu",
+      "desktop": "Komputer",
+      "tablet": "Tablet",
+      "mobile": "Mobile"
+    },
     "colors": {
       "none": "Brak koloru",
       "remove": "Usuń kolor"
