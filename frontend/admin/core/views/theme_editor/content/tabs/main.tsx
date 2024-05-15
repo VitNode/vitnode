@@ -17,6 +17,30 @@ export const MainTabThemeEditor = () => {
         <span>Colors</span>
         <ChevronRight className="ml-auto text-muted-foreground" />
       </Button>
+
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
+      <div>Test elo 123</div>
     </div>
   );
 };

@@ -1,39 +1,69 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 import { ThemeEditorTab, useThemeEditor } from "../hooks/use-theme-editor";
 import { ColorTabThemeEditor } from "./tabs/color-tab";
 import { MainTabThemeEditor } from "./tabs/main";
+import { useThemeEditorApi } from "./hooks/use-theme-editor-api";
+import { Form } from "@/components/ui/form";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Link } from "@/i18n";
 
 export const ContentThemeEditor = () => {
+  const { form, onSubmit } = useThemeEditorApi();
   const { activeTab, direction } = useThemeEditor();
+  const t = useTranslations("core");
   const tabs = {
     [ThemeEditorTab.Main]: MainTabThemeEditor,
     [ThemeEditorTab.Colors]: ColorTabThemeEditor
   };
 
   return (
-    <form className="px-2 relative overflow-hidden">
-      <AnimatePresence mode="popLayout" initial={false}>
-        <motion.div
-          key={activeTab}
-          variants={{
-            initial: direction => {
-              return { x: `${110 * direction}%`, opacity: 0 };
-            },
-            active: { x: "0%", opacity: 1 },
-            exit: direction => {
-              return { x: `${110 * direction}%`, opacity: 0 };
-            }
-          }}
-          initial="initial"
-          animate="active"
-          exit="exit"
-          custom={direction}
-          transition={{ duration: 0.5, type: "spring", bounce: 0 }}
-        >
-          {tabs[activeTab]()}
-        </motion.div>
-      </AnimatePresence>
-    </form>
+    <Form {...form}>
+      <form
+        className="flex flex-col flex-1"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.div
+            key={activeTab}
+            variants={{
+              initial: direction => {
+                return { x: `${110 * direction}%`, opacity: 0 };
+              },
+              active: { x: "0%", opacity: 1 },
+              exit: direction => {
+                return { x: `${110 * direction}%`, opacity: 0 };
+              }
+            }}
+            initial="initial"
+            animate="active"
+            exit="exit"
+            custom={direction}
+            className="px-2 pb-2"
+            transition={{ duration: 0.25, type: "spring", bounce: 0 }}
+          >
+            {tabs[activeTab]()}
+          </motion.div>
+
+          <div className="mt-auto sticky bottom-0 left-0 w-full p-3 flex items-center gap-1 border-t bg-card/75 backdrop-blur">
+            <Link
+              href="/"
+              className={buttonVariants({
+                variant: "ghost",
+                size: "sm",
+                className: "w-full"
+              })}
+              aria-label={t("close")}
+            >
+              {t("cancel")}
+            </Link>
+            <Button type="submit" className="w-full" size="sm">
+              {t("save")}
+            </Button>
+          </div>
+        </AnimatePresence>
+      </form>
+    </Form>
   );
 };

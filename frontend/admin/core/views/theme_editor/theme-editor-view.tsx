@@ -2,13 +2,10 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { X } from "lucide-react";
 
 import { CONFIG } from "@/config";
 import { cn } from "@/functions/classnames";
 import { ThemeEditorViewEnum, ToolbarThemeEditor } from "./toolbar";
-import { buttonVariants } from "@/components/ui/button";
-import { Link } from "@/i18n";
 import { ThemeEditorContext, ThemeEditorTab } from "./hooks/use-theme-editor";
 import { ContentThemeEditor } from "./content/content";
 
@@ -39,22 +36,10 @@ export const ThemeEditorView = () => {
       <div className="w-96 flex-shrink-0 shadow-lg border-l flex">
         <ToolbarThemeEditor setActiveMode={setActiveMode} />
 
-        <div className="flex-1">
-          <header className="flex justify-between items-center px-6 py-4">
-            <h1 className="font-semibold text-lg">{t("theme_editor.title")}</h1>
-
-            <Link
-              href="/"
-              className={buttonVariants({
-                variant: "ghost",
-                size: "icon"
-              })}
-              aria-label={t("close")}
-            >
-              <X />
-            </Link>
-          </header>
-
+        <div className="flex-1 overflow-auto relative flex flex-col">
+          <h1 className="font-semibold text-lg px-6 py-4">
+            {t("theme_editor.title")}
+          </h1>
           <ContentThemeEditor />
         </div>
       </div>
