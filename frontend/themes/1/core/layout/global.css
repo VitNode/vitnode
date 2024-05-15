@@ -14,7 +14,7 @@
     @apply cursor-pointer;
   }
 
-  html.vitnode .theme_1 {
+  html[data-theme-id="1"] {
     --background: 228deg 45.45% 97.84%;
     --foreground: 213.33deg 25.71% 6.86%;
     --card: 0 0% 100%;
@@ -37,7 +37,7 @@
     --radius: 0.5rem;
   }
 
-  html.vitnode.dark .theme_1 {
+  html[data-theme-id="1"].dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
     --card: 240deg 17.07% 8.04%;

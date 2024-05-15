@@ -78,8 +78,12 @@ export default async function LocaleLayout({
     };
 
     return (
-      <html lang={locale} className={cn(inter.variable, "vitnode")}>
-        <body className={`theme_${data.core_settings__show.theme_id ?? 1}`}>
+      <html
+        lang={locale}
+        className={cn(inter.variable, "vitnode")}
+        data-theme-id={data.core_settings__show.theme_id ?? 1}
+      >
+        <body>
           <Providers data={data} config={config}>
             <NextIntlClientProvider messages={messages}>
               {children}

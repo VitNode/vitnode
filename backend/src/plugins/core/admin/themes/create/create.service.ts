@@ -55,7 +55,10 @@ export class CreateAdminThemesService {
     const pathSCSSFileContent = fs.readFileSync(pathSCSSFile, "utf8");
     await writeFile(
       pathSCSSFile,
-      pathSCSSFileContent.replaceAll(".theme_1", `.theme_${id}`)
+      pathSCSSFileContent.replaceAll(
+        `[data-theme-id="1"]`,
+        `[data-theme-id="${id}"]`
+      )
     );
 
     return theme[0];
