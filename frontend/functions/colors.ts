@@ -1,6 +1,6 @@
 import type { HslColor } from "react-colorful";
 
-export const colorConverter = {
+export const convertColor = {
   hslToHex: ({ h, l, s }: { h: number; l: number; s: number }): string => {
     l /= 100;
     const a = (s * Math.min(l, 1 - l)) / 100;
@@ -174,4 +174,8 @@ export const getHSLFromString = (string: string): HslColor | null => {
     .map(Number);
 
   return { h, s, l };
+};
+
+export const getStringFromHSL = ({ h, l, s }: HslColor): string => {
+  return `hsl(${h}, ${s}%, ${l}%)`;
 };

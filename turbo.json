@@ -23,11 +23,6 @@
       "dependsOn": ["^lint:fix"],
       "cache": false,
       "persistent": true
-    },
-    "test:once": {
-      "dependsOn": ["^test:once"],
-      "cache": false,
-      "persistent": true
     }
   },
   "globalDotEnv": [".env"]

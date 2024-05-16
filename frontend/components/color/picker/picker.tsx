@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { useRef, useState, type ChangeEvent } from "react";
+import { useRef, useState } from "react";
 import { HslColorPicker, type HslColor } from "react-colorful";
 import { RemoveFormatting } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { checkColorType, colorConverter } from "@/functions/colors";
+import { checkColorType, convertColor } from "@/functions/colors";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/functions/classnames";
 import { Button } from "@/components/ui/button";
@@ -118,26 +118,20 @@ interface Props {
   color: HslColor | null;
   setColor: (color: HslColor | null) => void;
   disableRemoveColor?: boolean;
-  onClose?: () => void;
 }
 
-export const PickerColor = ({
-  color,
-  disableRemoveColor,
-  onClose,
-  setColor
-}: Props) => {
+export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
   const t = useTranslations("core.colors");
   const [internalColor, setInternalColor] = useState<HslColor | null>(color);
   const inputRef = useRef<HTMLInputElement>(null);
   const isColorBrightness = internalColor && internalColor.l > 55;
 
-  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
-    const input = e.target.value.trim();
+  const handleInput = (value: string) => {
+    const input = value.trim();
     const type = checkColorType(input);
 
     if (type === "hex") {
-      const hsl = colorConverter.hexToHSL(input);
+      const hsl = convertColor.hexToHSL(input);
       if (!hsl) return;
       setColor(hsl);
       setInternalColor(hsl);
@@ -154,7 +148,7 @@ export const PickerColor = ({
             .split(" ")
             .map(Number);
 
-      const { h, l, s } = colorConverter.RGBToHSL(r, g, b);
+      const { h, l, s } = convertColor.RGBToHSL(r, g, b);
       setColor({ h, s, l });
       setInternalColor({ h, s, l });
     } else if (type === "hsl") {
@@ -181,13 +175,11 @@ export const PickerColor = ({
           }
         }
         onChange={color => {
-          setInternalColor(color);
+          handleInput(`hsl(${color.h}, ${color.s}%, ${color.l}%)`);
 
+          // Change value of input
           if (!inputRef.current) return;
           inputRef.current.value = `hsl(${color.h}, ${color.s}%, ${color.l}%)`;
-        }}
-        onClick={() => {
-          setColor(internalColor);
         }}
       />
 
@@ -210,7 +202,7 @@ export const PickerColor = ({
                 ? `hsl(${internalColor.h}, ${internalColor.s}%, ${internalColor.l}%)`
                 : ""
             }}
-            onChange={handleInput}
+            onChange={e => handleInput(e.target.value)}
           />
 
           {!disableRemoveColor && (
@@ -225,7 +217,6 @@ export const PickerColor = ({
                     onClick={() => {
                       setColor(null);
                       setInternalColor(null);
-                      onClose?.();
                     }}
                   >
                     <RemoveFormatting />
@@ -249,7 +240,10 @@ export const PickerColor = ({
               onClick={() => {
                 setColor(color);
                 setInternalColor(color);
-                onClose?.();
+
+                // Change value of input
+                if (!inputRef.current) return;
+                inputRef.current.value = `hsl(${color.h}, ${color.s}%, ${color.l}%)`;
               }}
             />
           ))}

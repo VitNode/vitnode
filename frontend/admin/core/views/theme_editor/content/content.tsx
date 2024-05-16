@@ -4,66 +4,70 @@ import { useTranslations } from "next-intl";
 import { ThemeEditorTab, useThemeEditor } from "../hooks/use-theme-editor";
 import { ColorTabThemeEditor } from "./tabs/color-tab";
 import { MainTabThemeEditor } from "./tabs/main";
-import { useThemeEditorApi } from "./hooks/use-theme-editor-api";
 import { Form } from "@/components/ui/form";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n";
 
 export const ContentThemeEditor = () => {
-  const { form, onSubmit } = useThemeEditorApi();
-  const { activeTab, direction } = useThemeEditor();
+  const { activeTab, direction, form, onSubmit } = useThemeEditor();
   const t = useTranslations("core");
   const tabs = {
-    [ThemeEditorTab.Main]: MainTabThemeEditor,
-    [ThemeEditorTab.Colors]: ColorTabThemeEditor
+    [ThemeEditorTab.Main]: <MainTabThemeEditor />,
+    [ThemeEditorTab.Colors]: <ColorTabThemeEditor />
   };
 
   return (
-    <Form {...form}>
-      <form
-        className="flex flex-col flex-1"
-        onSubmit={form.handleSubmit(onSubmit)}
-      >
-        <AnimatePresence mode="popLayout" initial={false}>
-          <motion.div
-            key={activeTab}
-            variants={{
-              initial: direction => {
-                return { x: `${110 * direction}%`, opacity: 0 };
-              },
-              active: { x: "0%", opacity: 1 },
-              exit: direction => {
-                return { x: `${110 * direction}%`, opacity: 0 };
-              }
-            }}
-            initial="initial"
-            animate="active"
-            exit="exit"
-            custom={direction}
-            className="px-2 pb-2"
-            transition={{ duration: 0.25, type: "spring", bounce: 0 }}
-          >
-            {tabs[activeTab]()}
-          </motion.div>
-
-          <div className="mt-auto sticky bottom-0 left-0 w-full p-3 flex items-center gap-1 border-t bg-card/75 backdrop-blur">
-            <Link
-              href="/"
-              className={buttonVariants({
-                variant: "ghost",
-                size: "sm",
-                className: "w-full"
-              })}
-              aria-label={t("close")}
+    <div className="flex-1 relative flex flex-col">
+      <Form {...form}>
+        <form
+          className="flex flex-col flex-1 overflow-hidden relative"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
+          <AnimatePresence mode="popLayout" initial={false}>
+            <motion.div
+              key={activeTab}
+              variants={{
+                initial: direction => {
+                  return { x: `${110 * direction}%`, opacity: 0 };
+                },
+                active: { x: "0%", opacity: 1 },
+                exit: direction => {
+                  return { x: `${110 * direction}%`, opacity: 0 };
+                }
+              }}
+              initial="initial"
+              animate="active"
+              exit="exit"
+              custom={direction}
+              transition={{ duration: 0.25, type: "spring", bounce: 0 }}
             >
-              {t("cancel")}
-            </Link>
-            <Button type="submit" className="w-full" size="sm">
-              {t("save")}
-            </Button>
-          </div>
-        </AnimatePresence>
-      </form>
-    </Form>
+              {tabs[activeTab]}
+            </motion.div>
+
+            <div className="mt-auto sticky bottom-0 left-0 w-full p-3 flex items-center gap-1 border-t bg-card/75 backdrop-blur">
+              <Link
+                href="/"
+                className={buttonVariants({
+                  variant: "ghost",
+                  size: "sm",
+                  className: "w-full"
+                })}
+                aria-label={t("close")}
+              >
+                {t("cancel")}
+              </Link>
+              <Button
+                type="submit"
+                className="w-full"
+                size="sm"
+                disabled={!form.formState.isValid}
+              >
+                {t("save")}
+              </Button>
+            </div>
+          </AnimatePresence>
+        </form>
+      </Form>
+    </div>
   );
 };

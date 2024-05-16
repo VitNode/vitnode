@@ -1,6 +1,7 @@
-import { Monitor, Smartphone, Tablet } from "lucide-react";
+import { Monitor, Moon, Smartphone, Sun, Tablet } from "lucide-react";
 import { useTranslations } from "next-intl";
-import type { ReactNode } from "react";
+import { type ReactNode } from "react";
+import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -9,6 +10,7 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
+import { Separator } from "@/components/ui/separator";
 
 export enum ThemeEditorViewEnum {
   Desktop = "desktop",
@@ -16,65 +18,95 @@ export enum ThemeEditorViewEnum {
   Mobile = "mobile"
 }
 
-const ButtonView = ({
-  children,
-  setActiveMode,
-  type
-}: {
-  children: ReactNode;
-  setActiveMode: (mode: ThemeEditorViewEnum) => void;
-  type: ThemeEditorViewEnum;
-}) => {
-  const t = useTranslations("core.theme_editor");
-
-  return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            size="icon"
-            ariaLabel={t(type)}
-            variant="ghost"
-            className="flex-shrink-0"
-            onClick={() => setActiveMode(type)}
-          >
-            {children}
-          </Button>
-        </TooltipTrigger>
-
-        <TooltipContent side="left">{t(type)}</TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
-  );
-};
-
 interface Props {
+  activeMode: ThemeEditorViewEnum;
   setActiveMode: (mode: ThemeEditorViewEnum) => void;
 }
 
-export const ToolbarThemeEditor = ({ setActiveMode }: Props) => {
+export const ToolbarThemeEditor = ({ activeMode, setActiveMode }: Props) => {
+  const t = useTranslations("core");
+  const { resolvedTheme, setTheme, theme } = useTheme();
+  const activeTheme = resolvedTheme ?? theme ?? "light";
+
+  const ButtonWithTooltip = ({
+    active,
+    ariaLabel,
+    children,
+    onClick
+  }: {
+    active: boolean;
+    ariaLabel: string;
+    children: ReactNode;
+    onClick: () => void;
+  }) => {
+    return (
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              size="icon"
+              ariaLabel={ariaLabel}
+              variant={active ? "default" : "ghost"}
+              className="flex-shrink-0 relative"
+              onClick={onClick}
+            >
+              {children}
+            </Button>
+          </TooltipTrigger>
+
+          <TooltipContent side="left">{ariaLabel}</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
+  };
+
   return (
-    <div className="p-1 border-r flex flex-col gap-1">
-      <ButtonView
-        type={ThemeEditorViewEnum.Desktop}
-        setActiveMode={setActiveMode}
-      >
-        <Monitor />
-      </ButtonView>
+    <div className="border-r sticky top-0">
+      <div className="flex flex-col gap-1 p-2">
+        <ButtonWithTooltip
+          active={activeMode === ThemeEditorViewEnum.Desktop}
+          onClick={() => setActiveMode(ThemeEditorViewEnum.Desktop)}
+          ariaLabel={t(`theme_editor.${ThemeEditorViewEnum.Desktop}`)}
+        >
+          <Monitor />
+        </ButtonWithTooltip>
 
-      <ButtonView
-        type={ThemeEditorViewEnum.Tablet}
-        setActiveMode={setActiveMode}
-      >
-        <Tablet />
-      </ButtonView>
+        <ButtonWithTooltip
+          active={activeMode === ThemeEditorViewEnum.Tablet}
+          onClick={() => setActiveMode(ThemeEditorViewEnum.Tablet)}
+          ariaLabel={t(`theme_editor.${ThemeEditorViewEnum.Tablet}`)}
+        >
+          <Tablet />
+        </ButtonWithTooltip>
 
-      <ButtonView
-        type={ThemeEditorViewEnum.Mobile}
-        setActiveMode={setActiveMode}
-      >
-        <Smartphone />
-      </ButtonView>
+        <ButtonWithTooltip
+          active={activeMode === ThemeEditorViewEnum.Mobile}
+          onClick={() => setActiveMode(ThemeEditorViewEnum.Mobile)}
+          ariaLabel={t(`theme_editor.${ThemeEditorViewEnum.Mobile}`)}
+        >
+          <Smartphone />
+        </ButtonWithTooltip>
+      </div>
+
+      <Separator />
+
+      <div className="flex flex-col gap-1 p-2">
+        <ButtonWithTooltip
+          active={activeTheme === "light"}
+          onClick={() => setTheme("light")}
+          ariaLabel={t("user-bar.dark_light_switcher.light")}
+        >
+          <Sun />
+        </ButtonWithTooltip>
+
+        <ButtonWithTooltip
+          active={activeTheme === "dark"}
+          onClick={() => setTheme("dark")}
+          ariaLabel={t("user-bar.dark_light_switcher.dark")}
+        >
+          <Moon />
+        </ButtonWithTooltip>
+      </div>
     </div>
   );
 };

@@ -1,46 +1,28 @@
 import { ChevronRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 
 import { ThemeEditorTab, useThemeEditor } from "../../hooks/use-theme-editor";
 
 export const MainTabThemeEditor = () => {
+  const t = useTranslations("core.theme_editor");
   const { setActiveTab } = useThemeEditor();
 
   return (
     <div>
-      <Button
-        className="w-full justify-start"
-        variant="ghost"
-        onClick={() => setActiveTab(ThemeEditorTab.Colors)}
-      >
-        <span>Colors</span>
-        <ChevronRight className="ml-auto text-muted-foreground" />
-      </Button>
+      <h1 className="font-bold text-lg p-5 pb-0">{t("title")}</h1>
 
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
-      <div>Test elo 123</div>
+      <div className="p-2 py-5">
+        <Button
+          className="w-full justify-start"
+          variant="ghost"
+          onClick={() => setActiveTab(ThemeEditorTab.Colors)}
+        >
+          <span>Colors</span>
+          <ChevronRight className="ml-auto text-muted-foreground" />
+        </Button>
+      </div>
     </div>
   );
 };

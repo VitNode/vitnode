@@ -45,11 +45,7 @@ export const ColorToolbarEditor = ({ editor }: Props) => {
       </PopoverTrigger>
 
       <PopoverContent className="w-auto">
-        <PickerColor
-          color={color}
-          setColor={setColor}
-          onClose={() => setOpen(false)}
-        />
+        <PickerColor color={color} setColor={setColor} />
       </PopoverContent>
     </Popover>
   );

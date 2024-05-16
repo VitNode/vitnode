@@ -68,7 +68,6 @@ export const ColorInput = forwardRef<HTMLButtonElement, Props>(
             <PickerColor
               color={color}
               setColor={setColor}
-              onClose={() => setOpen(false)}
               disableRemoveColor={disableRemoveColor}
             />
           </PopoverContent>
