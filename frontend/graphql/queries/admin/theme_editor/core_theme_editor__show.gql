@@ -1,0 +1,16 @@
+query Core_theme_editor__show {
+  core_theme_editor__show {
+    primary {
+      dark {
+        h
+        l
+        s
+      }
+      light {
+        h
+        l
+        s
+      }
+    }
+  }
+}

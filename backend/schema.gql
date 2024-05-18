@@ -129,6 +129,12 @@ type GroupsPermissionsForumForums {
   group_id: Int!
 }
 
+type HslColor {
+  h: Int!
+  l: Int!
+  s: Int!
+}
+
 type ItemNavAdminPluginsAuthorization {
   code: String!
   href: String!
@@ -324,6 +330,7 @@ type Query {
   core_plugins__show: [ShowCorePluginsObj!]!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_settings__show: ShowSettingsObj!
+  core_theme_editor__show: ShowCoreThemeEditor!
   core_themes__show(cursor: Int, first: Int, last: Int): ShowCoreThemesObj!
   forum_forums__show(
     cursor: Int
@@ -690,6 +697,10 @@ type ShowCoreSessionDevices {
   user_id: Int!
 }
 
+type ShowCoreThemeEditor {
+  primary: ThemeVariable!
+}
+
 type ShowCoreThemes {
   default: Boolean!
   id: Int!
@@ -823,6 +834,11 @@ type TextLanguage {
 input TextLanguageInput {
   language_code: String!
   value: String!
+}
+
+type ThemeVariable {
+  dark: HslColor!
+  light: HslColor!
 }
 
 enum TopicActions {

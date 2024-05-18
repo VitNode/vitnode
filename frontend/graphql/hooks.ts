@@ -152,6 +152,13 @@ export type GroupsPermissionsForumForums = {
   group_id: Scalars['Int']['output'];
 };
 
+export type HslColor = {
+  __typename?: 'HslColor';
+  h: Scalars['Int']['output'];
+  l: Scalars['Int']['output'];
+  s: Scalars['Int']['output'];
+};
+
 export type ItemNavAdminPluginsAuthorization = {
   __typename?: 'ItemNavAdminPluginsAuthorization';
   code: Scalars['String']['output'];
@@ -700,6 +707,7 @@ export type Query = {
   core_plugins__show: Array<ShowCorePluginsObj>;
   core_sessions__authorization: AuthorizationCoreSessionsObj;
   core_settings__show: ShowSettingsObj;
+  core_theme_editor__show: ShowCoreThemeEditor;
   core_themes__show: ShowCoreThemesObj;
   forum_forums__show: ShowForumForumsObj;
   forum_posts__show: ShowPostsForumsObj;
@@ -1255,6 +1263,11 @@ export type ShowCoreSessionDevices = {
   user_id: Scalars['Int']['output'];
 };
 
+export type ShowCoreThemeEditor = {
+  __typename?: 'ShowCoreThemeEditor';
+  primary: ThemeVariable;
+};
+
 export type ShowCoreThemes = {
   __typename?: 'ShowCoreThemes';
   default: Scalars['Boolean']['output'];
@@ -1407,6 +1420,12 @@ export type TextLanguage = {
 export type TextLanguageInput = {
   language_code: Scalars['String']['input'];
   value: Scalars['String']['input'];
+};
+
+export type ThemeVariable = {
+  __typename?: 'ThemeVariable';
+  dark: HslColor;
+  light: HslColor;
 };
 
 export const TopicActions = {
@@ -2041,6 +2060,11 @@ export type Core_Main_Settings__ShowQueryVariables = Exact<{ [key: string]: neve
 
 
 export type Core_Main_Settings__ShowQuery = { __typename?: 'Query', core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_short_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+
+export type Core_Theme_Editor__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Core_Theme_Editor__ShowQuery = { __typename?: 'Query', core_theme_editor__show: { __typename?: 'ShowCoreThemeEditor', primary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } } } };
 
 export type Admin_Core_Themes__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -3165,6 +3189,24 @@ export const Core_Main_Settings__Show = gql`
     site_description {
       language_code
       value
+    }
+  }
+}
+    `;
+export const Core_Theme_Editor__Show = gql`
+    query Core_theme_editor__show {
+  core_theme_editor__show {
+    primary {
+      dark {
+        h
+        l
+        s
+      }
+      light {
+        h
+        l
+        s
+      }
     }
   }
 }

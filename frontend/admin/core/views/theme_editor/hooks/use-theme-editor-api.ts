@@ -2,9 +2,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useRef } from "react";
+import { useTheme } from "next-themes";
 
 import { useRouter } from "@/i18n";
 import { getHSLFromString } from "@/functions/colors";
+import type { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
 
 const zObjectHsl = z.object({
   h: z.number(),
@@ -15,29 +17,26 @@ const zObjectHslWithTheme = z.object({
   light: zObjectHsl,
   dark: zObjectHsl
 });
+export const formSchemaColorsThemeEditor = z.object({
+  primary: zObjectHslWithTheme
+});
 
-export const useThemeEditorApi = () => {
+export const useThemeEditorApi = ({
+  core_theme_editor__show
+}: Core_Theme_Editor__ShowQuery) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const { push } = useRouter();
   const formSchema = z.object({
-    color_primary: zObjectHslWithTheme
+    colors: formSchemaColorsThemeEditor
   });
+  const { resolvedTheme, theme } = useTheme();
+  const activeTheme: "light" | "dark" =
+    (resolvedTheme ?? theme) === "dark" ? "dark" : "light";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      color_primary: {
-        light: {
-          h: 0,
-          s: 0,
-          l: 0
-        },
-        dark: {
-          h: 0,
-          s: 0,
-          l: 0
-        }
-      }
+      colors: core_theme_editor__show
     }
   });
 
@@ -47,16 +46,36 @@ export const useThemeEditorApi = () => {
     //  push("/");
   };
 
-  const changeColor = ({ color, name }: { color: string; name: string }) => {
+  const changeColor = ({
+    color,
+    name
+  }: {
+    color: string;
+    name: keyof typeof formSchemaColorsThemeEditor.shape;
+  }) => {
     const iframe =
       iframeRef.current?.contentWindow?.document.querySelector("html");
     const hslFromColor = getHSLFromString(color);
 
-    if (iframe && hslFromColor) {
-      iframe.style.setProperty(
-        name,
-        `${hslFromColor.h} ${hslFromColor.s}% ${hslFromColor.l}%`
-      );
+    if (!iframe || !hslFromColor) {
+      return;
+    }
+
+    iframe.style.setProperty(
+      `--${name}`,
+      `${hslFromColor.h} ${hslFromColor.s}% ${hslFromColor.l}%`
+    );
+
+    if (activeTheme === "light") {
+      form.setValue(`colors.${name}`, {
+        light: hslFromColor,
+        dark: form.getValues(`colors.${name}`).dark
+      });
+    } else {
+      form.setValue(`colors.${name}`, {
+        light: form.getValues(`colors.${name}`).light,
+        dark: hslFromColor
+      });
     }
   };
 
@@ -64,6 +83,7 @@ export const useThemeEditorApi = () => {
     form,
     onSubmit,
     iframeRef,
-    changeColor
+    changeColor,
+    activeTheme
   };
 };

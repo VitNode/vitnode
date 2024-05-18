@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTheme } from "next-themes";
 
 import { CONFIG } from "@/config";
 import { cn } from "@/functions/classnames";
@@ -10,9 +9,11 @@ import { ThemeEditorContext, ThemeEditorTab } from "./hooks/use-theme-editor";
 import { ContentThemeEditor } from "./content/content";
 import { useThemeEditorApi } from "./hooks/use-theme-editor-api";
 import { Loader } from "@/components/loader";
+import type { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
 
-export const ThemeEditorView = () => {
-  const { changeColor, form, iframeRef, onSubmit } = useThemeEditorApi();
+export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
+  const { activeTheme, changeColor, form, iframeRef, onSubmit } =
+    useThemeEditorApi(props);
   const [activeMode, setActiveMode] = useState<ThemeEditorViewEnum>(
     ThemeEditorViewEnum.Desktop
   );
@@ -21,9 +22,6 @@ export const ThemeEditorView = () => {
   );
   const [mounted, setMounted] = useState(false);
   const direction: number = activeTab === ThemeEditorTab.Main ? -1 : 1;
-  const { resolvedTheme, theme } = useTheme();
-  const activeTheme: "light" | "dark" =
-    (resolvedTheme ?? theme) === "dark" ? "dark" : "light";
 
   useEffect(() => {
     setMounted(true);

@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/form";
 import { ColorInput } from "@/components/color/color-input";
 import { Separator } from "@/components/ui/separator";
-import { getHSLFromString, getStringFromHSL } from "@/functions/colors";
+import { getStringFromHSL } from "@/functions/colors";
 
 import { ThemeEditorTab, useThemeEditor } from "../../hooks/use-theme-editor";
 
@@ -36,7 +36,7 @@ export const ColorTabThemeEditor = () => {
       <div className="p-5">
         <FormField
           control={form.control}
-          name="color_primary"
+          name="colors.primary"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Primary</FormLabel>
@@ -45,23 +45,8 @@ export const ColorTabThemeEditor = () => {
                   {...field}
                   key={`color_primary__${activeTheme}`}
                   onChange={val => {
-                    const color = getHSLFromString(val);
-                    if (!color) return;
-
-                    if (activeTheme === "light") {
-                      form.setValue("color_primary", {
-                        light: color,
-                        dark: field.value.dark
-                      });
-                    } else {
-                      form.setValue("color_primary", {
-                        light: field.value.light,
-                        dark: color
-                      });
-                    }
-
                     changeColor({
-                      name: "--primary",
+                      name: "primary",
                       color: val
                     });
                   }}

@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { isRedirectError } from "next/dist/client/components/redirect";
 
 import { AdminLayout } from "@/admin/core/layout/admin-layout";
-import { SessionAdminProvider } from "./session-admin-provider";
+import { Providers } from "./providers";
 import { redirect } from "@/i18n";
 import { fetcher } from "@/graphql/fetcher";
 import {
@@ -60,9 +60,9 @@ export default async function Layout({ children }: Props) {
     }
 
     return (
-      <SessionAdminProvider data={data}>
+      <Providers data={data}>
         <AdminLayout>{children}</AdminLayout>
-      </SessionAdminProvider>
+      </Providers>
     );
   } catch (error) {
     if (isRedirectError(error)) {
