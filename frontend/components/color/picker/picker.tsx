@@ -4,7 +4,11 @@ import { HslColorPicker, type HslColor } from "react-colorful";
 import { RemoveFormatting } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { checkColorType, convertColor } from "@/functions/colors";
+import {
+  checkColorType,
+  convertColor,
+  isColorBrightness
+} from "@/functions/colors";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/functions/classnames";
 import { Button } from "@/components/ui/button";
@@ -124,7 +128,9 @@ export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
   const t = useTranslations("core.colors");
   const [internalColor, setInternalColor] = useState<HslColor | null>(color);
   const inputRef = useRef<HTMLInputElement>(null);
-  const isColorBrightness = internalColor && internalColor.l > 55;
+  const colorBrightness = internalColor
+    ? isColorBrightness(internalColor)
+    : false;
 
   const handleInput = (value: string) => {
     const input = value.trim();
@@ -188,8 +194,8 @@ export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
           <Input
             type="text"
             className={cn("h-9", {
-              "text-black": internalColor && isColorBrightness,
-              "text-white": internalColor && !isColorBrightness
+              "text-black": internalColor && colorBrightness,
+              "text-white": internalColor && !colorBrightness
             })}
             ref={inputRef}
             defaultValue={

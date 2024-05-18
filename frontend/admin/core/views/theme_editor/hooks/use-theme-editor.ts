@@ -9,12 +9,17 @@ export enum ThemeEditorTab {
   Colors = "colors"
 }
 
+interface ColorObj {
+  dark: HslColor;
+  light: HslColor;
+}
+
 interface ThemeEditorFormObj {
   colors: {
-    primary: {
-      dark: HslColor;
-      light: HslColor;
-    };
+    background: ColorObj;
+    primary: ColorObj;
+    "primary-foreground": ColorObj;
+    secondary: ColorObj;
   };
 }
 
@@ -22,10 +27,10 @@ interface Args {
   activeTab: ThemeEditorTab;
   activeTheme: "light" | "dark";
   changeColor: ({
-    color,
+    hslColor,
     name
   }: {
-    color: string;
+    hslColor: HslColor;
     name: keyof typeof formSchemaColorsThemeEditor.shape;
   }) => void;
   direction: number;

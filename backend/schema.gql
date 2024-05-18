@@ -50,6 +50,13 @@ type ChildrenShowForumForums {
   position: Int!
 }
 
+type ColorsShowCoreThemeEditor {
+  background: ThemeVariable!
+  primary: ThemeVariable!
+  primary_foreground: ThemeVariable!
+  secondary: ThemeVariable!
+}
+
 input ContentCreateAdminGroups {
   files_allow_upload: Boolean!
   files_max_storage_for_submit: Int!
@@ -698,7 +705,7 @@ type ShowCoreSessionDevices {
 }
 
 type ShowCoreThemeEditor {
-  primary: ThemeVariable!
+  colors: ColorsShowCoreThemeEditor!
 }
 
 type ShowCoreThemes {

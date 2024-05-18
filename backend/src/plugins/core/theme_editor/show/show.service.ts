@@ -88,15 +88,25 @@ export class ShowCoreThemeEditorService {
     }
 
     const cssString = fs.readFileSync(pathToCss, "utf8");
-    const test = this.getVariable({
-      cssAsString: cssString,
-      variable: "primary"
-    });
 
     return {
-      primary: {
-        light: test.light,
-        dark: test.dark
+      colors: {
+        primary: this.getVariable({
+          cssAsString: cssString,
+          variable: "primary"
+        }),
+        background: this.getVariable({
+          cssAsString: cssString,
+          variable: "background"
+        }),
+        secondary: this.getVariable({
+          cssAsString: cssString,
+          variable: "secondary"
+        }),
+        primary_foreground: this.getVariable({
+          cssAsString: cssString,
+          variable: "primary-foreground"
+        })
       }
     };
   }

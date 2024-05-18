@@ -71,6 +71,14 @@ export type ChildrenShowForumForums = {
   position: Scalars['Int']['output'];
 };
 
+export type ColorsShowCoreThemeEditor = {
+  __typename?: 'ColorsShowCoreThemeEditor';
+  background: ThemeVariable;
+  primary: ThemeVariable;
+  primary_foreground: ThemeVariable;
+  secondary: ThemeVariable;
+};
+
 export type ContentCreateAdminGroups = {
   files_allow_upload: Scalars['Boolean']['input'];
   files_max_storage_for_submit: Scalars['Int']['input'];
@@ -1265,7 +1273,7 @@ export type ShowCoreSessionDevices = {
 
 export type ShowCoreThemeEditor = {
   __typename?: 'ShowCoreThemeEditor';
-  primary: ThemeVariable;
+  colors: ColorsShowCoreThemeEditor;
 };
 
 export type ShowCoreThemes = {
@@ -2064,7 +2072,7 @@ export type Core_Main_Settings__ShowQuery = { __typename?: 'Query', core_setting
 export type Core_Theme_Editor__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_Theme_Editor__ShowQuery = { __typename?: 'Query', core_theme_editor__show: { __typename?: 'ShowCoreThemeEditor', primary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } } } };
+export type Core_Theme_Editor__ShowQuery = { __typename?: 'Query', core_theme_editor__show: { __typename?: 'ShowCoreThemeEditor', colors: { __typename?: 'ColorsShowCoreThemeEditor', background: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, primary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, secondary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, primary_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } } } } };
 
 export type Admin_Core_Themes__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -3196,16 +3204,54 @@ export const Core_Main_Settings__Show = gql`
 export const Core_Theme_Editor__Show = gql`
     query Core_theme_editor__show {
   core_theme_editor__show {
-    primary {
-      dark {
-        h
-        l
-        s
+    colors {
+      background {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
       }
-      light {
-        h
-        l
-        s
+      primary {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      secondary {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      primary_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
       }
     }
   }

@@ -22,7 +22,22 @@ class ThemeVariable {
 }
 
 @ObjectType()
-export class ShowCoreThemeEditor {
+export class ColorsShowCoreThemeEditor {
   @Field(() => ThemeVariable)
   primary: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  primary_foreground: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  secondary: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  background: ThemeVariable;
+}
+
+@ObjectType()
+export class ShowCoreThemeEditor {
+  @Field(() => ColorsShowCoreThemeEditor)
+  colors: ColorsShowCoreThemeEditor;
 }

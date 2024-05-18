@@ -1,15 +1,53 @@
 query Core_theme_editor__show {
   core_theme_editor__show {
-    primary {
-      dark {
-        h
-        l
-        s
+    colors {
+      background {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
       }
-      light {
-        h
-        l
-        s
+      primary {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      secondary {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      primary_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
       }
     }
   }
