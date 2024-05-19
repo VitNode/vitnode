@@ -20,7 +20,6 @@ export class TextLanguageInput {
 }
 
 export const IsTextLanguageInput = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (object: Record<string, any>, propertyName: string) => {
     registerDecorator({
       target: object.constructor,
@@ -40,7 +39,6 @@ export const IsTextLanguageInput = () => {
 };
 
 export const MaxLengthLanguageInput = ({ length }: { length: number }) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (object: Record<string, any>, propertyName: string) => {
     registerDecorator({
       target: object.constructor,
@@ -108,7 +106,7 @@ export const TransformTextLanguageInput = ({
   };
 };
 
-export const TransformString = ({ value }: { value: string | string[] }) => {
+export const TransformString = ({ value }: { value: string[] | string }) => {
   if (Array.isArray(value)) {
     return value.map(item => item.trimStart().trimEnd());
   }

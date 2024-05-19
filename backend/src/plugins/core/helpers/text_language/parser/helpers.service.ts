@@ -16,11 +16,11 @@ export interface InfoFromTextLanguageContentReturnValues {
 
 @Injectable()
 export class HelpersParserTextLanguageCoreHelpersService {
-  constructor(protected databaseService: DatabaseService) {}
-
   protected state: InfoFromTextLanguageContentReturnValues = {
     fileIds: []
   };
+
+  constructor(protected databaseService: DatabaseService) {}
 
   protected async parseFiles({
     fileIds,
@@ -87,7 +87,7 @@ export class HelpersParserTextLanguageCoreHelpersService {
       const json = JSON.parse(content).content as TextLanguageJSONContentType[];
 
       mapContent(json);
-    } catch (error) {
+    } catch (_error) {
       /* empty */
     }
 

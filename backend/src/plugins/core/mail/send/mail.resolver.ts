@@ -9,6 +9,6 @@ export class MailResolver {
 
   @Mutation(() => String)
   async core_mail_send(@Args() args: MailArgs): Promise<string> {
-    return await this.service.send(args);
+    return this.service.send(args);
   }
 }

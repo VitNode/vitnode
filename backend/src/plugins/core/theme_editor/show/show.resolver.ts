@@ -11,6 +11,6 @@ export class ShowCoreThemeEditorResolver {
   async core_theme_editor__show(
     @Context() ctx: Ctx
   ): Promise<ShowCoreThemeEditor> {
-    return await this.service.show(ctx);
+    return this.service.show(ctx);
   }
 }

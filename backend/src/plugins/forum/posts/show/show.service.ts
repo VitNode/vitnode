@@ -18,7 +18,7 @@ import { AccessDeniedError } from "@/utils/errors/access-denied-error";
 
 @Injectable()
 export class ShowPostsForumsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   protected async getData({
     first_post_id,
@@ -70,7 +70,7 @@ export class ShowPostsForumsService {
       .limit(limit)
       .offset(offset);
 
-    return await Promise.all(
+    return Promise.all(
       data.map(async edge => {
         const user = await this.databaseService.db.query.core_users.findFirst({
           where: (table, { eq }) => eq(table.id, edge.user_id),

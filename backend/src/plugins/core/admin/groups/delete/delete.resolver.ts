@@ -15,6 +15,6 @@ export class DeleteAdminGroupsResolver {
   async admin__core_groups__delete(
     @Args() args: DeleteAdminGroupsArgs
   ): Promise<string> {
-    return await this.service.delete(args);
+    return this.service.delete(args);
   }
 }

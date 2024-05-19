@@ -8,7 +8,7 @@ import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class ShowAdminNavPluginsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async show({
     plugin_code

@@ -12,6 +12,6 @@ export class ShowCoreThemesResolver {
   async core_themes__show(
     @Args() args: ShowCoreThemesArgs
   ): Promise<ShowCoreThemesObj> {
-    return await this.service.show(args);
+    return this.service.show(args);
   }
 }

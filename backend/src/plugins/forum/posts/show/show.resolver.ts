@@ -19,6 +19,6 @@ export class ShowPostsForumsResolver {
     @Args() args: ShowPostsForumsArgs,
     @CurrentUser() user: User | null
   ): Promise<ShowPostsForumsObj> {
-    return await this.service.show(args, user);
+    return this.service.show(args, user);
   }
 }

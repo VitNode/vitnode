@@ -12,6 +12,6 @@ export class AuthorizationAdminSessionsResolver {
   async admin__sessions__authorization(
     @Context() context: Ctx
   ): Promise<AuthorizationAdminSessionsObj> {
-    return await this.service.authorization(context);
+    return this.service.authorization(context);
   }
 }

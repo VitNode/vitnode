@@ -10,7 +10,7 @@ import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class DeleteAdminGroupsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async delete({ id }: DeleteAdminGroupsArgs): Promise<string> {
     const group = await this.databaseService.db.query.core_groups.findFirst({

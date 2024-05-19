@@ -23,6 +23,7 @@
     "jsx": "preserve",
     "incremental": true,
     "verbatimModuleSyntax": true,
+    "noImplicitReturns": true,
     "plugins": [
       {
         "name": "next"

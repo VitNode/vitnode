@@ -18,9 +18,9 @@ import { DatabaseService } from "@/database/database.service";
 @Controller("files")
 export class DownloadFilesAdminController {
   constructor(
-    private service: InternalAuthorizationCoreSessionsService,
+    private readonly service: InternalAuthorizationCoreSessionsService,
     private readonly serviceAdmin: AuthorizationAdminSessionsService,
-    private databaseService: DatabaseService
+    private readonly databaseService: DatabaseService
   ) {}
 
   @Get(":file")
@@ -28,7 +28,7 @@ export class DownloadFilesAdminController {
     @Res({ passthrough: true }) res: Response,
     @Req() req: Request,
     @Param() { file }: { file: string }
-  ): Promise<StreamableFile> {
+  ): Promise<StreamableFile | void> {
     const path = join(process.cwd(), "temp", file);
     if (!existsSync(path)) {
       res.status(404);
@@ -69,7 +69,7 @@ export class DownloadFilesAdminController {
 
           return;
         }
-      } catch (e) {
+      } catch (_e) {
         res.status(404);
 
         return;
@@ -86,7 +86,7 @@ export class DownloadFilesAdminController {
 
           return;
         }
-      } catch (e) {
+      } catch (_e) {
         res.status(404);
 
         return;

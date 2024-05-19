@@ -18,6 +18,6 @@ export class EditAdminPluginsResolver {
   async admin__core_plugins__edit(
     @Args() args: EditAdminPluginsArgs
   ): Promise<ShowAdminPlugins> {
-    return await this.service.edit(args);
+    return this.service.edit(args);
   }
 }

@@ -78,10 +78,10 @@ export function outputPagination<T>({
 }
 
 // Input Pagination Cursor
-export type Cursor = {
+export interface Cursor {
   column: string;
   schema: AnyColumn;
-};
+}
 
 interface InputPaginationCursorArgs<T extends TableConfig> {
   cursor: number | null;

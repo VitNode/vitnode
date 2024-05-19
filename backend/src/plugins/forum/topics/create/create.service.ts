@@ -18,10 +18,10 @@ import { AccessDeniedError } from "@/utils/errors/access-denied-error";
 @Injectable()
 export class CreateForumTopicsService {
   constructor(
-    private databaseService: DatabaseService,
-    private createPostService: CreateForumsPostsService,
-    private statsForumService: StatsShowForumForumsService,
-    private parserTextLang: ParserTextLanguageCoreHelpersService
+    private readonly databaseService: DatabaseService,
+    private readonly createPostService: CreateForumsPostsService,
+    private readonly statsForumService: StatsShowForumForumsService,
+    private readonly parserTextLang: ParserTextLanguageCoreHelpersService
   ) {}
 
   async create(

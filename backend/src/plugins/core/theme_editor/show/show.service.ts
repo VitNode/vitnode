@@ -12,8 +12,8 @@ import { HslColor, ShowCoreThemeEditor } from "./dto/show.obj";
 @Injectable()
 export class ShowCoreThemeEditorService {
   constructor(
-    private databaseService: DatabaseService,
-    private configService: ConfigService
+    private readonly databaseService: DatabaseService,
+    private readonly configService: ConfigService
   ) {}
 
   private parseStringToHsl(string: string): HslColor {

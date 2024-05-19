@@ -15,7 +15,7 @@ import { SortDirectionEnum } from "@/utils/types/database/sort-direction.type";
 
 @Injectable()
 export class ShowCoreSessionDevicesService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async show(
     { cursor, first, last }: ShowCoreSessionDevicesArgs,

@@ -15,6 +15,6 @@ export class DeleteAdminFilesResolver {
   async admin__core_files__delete(
     @Args() args: DeleteAdminFilesArgs
   ): Promise<string> {
-    return await this.service.delete(args);
+    return this.service.delete(args);
   }
 }

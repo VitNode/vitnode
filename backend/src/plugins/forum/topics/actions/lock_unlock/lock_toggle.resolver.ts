@@ -18,6 +18,6 @@ export class LockToggleForumTopicsResolver {
     @Args() args: LockToggleForumTopicsArgs,
     @Context() context: Ctx
   ): Promise<boolean> {
-    return await this.service.lockToggle(user, args, context);
+    return this.service.lockToggle(user, args, context);
   }
 }

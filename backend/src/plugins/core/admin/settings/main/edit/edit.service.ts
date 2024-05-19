@@ -19,7 +19,7 @@ import {
 
 @Injectable()
 export class EditAdminMainSettingsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   protected async updateDescription({
     languages,

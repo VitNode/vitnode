@@ -24,8 +24,9 @@ import { generateRandomString } from "@/functions/generate-random-string";
 
 @Injectable()
 export class DownloadAdminPluginsService {
-  constructor(private databaseService: DatabaseService) {}
   protected tempPath = join(process.cwd(), "temp", "plugins");
+
+  constructor(private readonly databaseService: DatabaseService) {}
 
   protected createFolders(path: string): void {
     if (!fs.existsSync(path)) {
@@ -110,7 +111,7 @@ export class DownloadAdminPluginsService {
           // Remove temp folder
           fs.rmSync(path, { recursive: true });
         });
-    } catch (error) {
+    } catch (_error) {
       throw new CustomError({
         code: "CREATE_TGZ_ERROR",
         message: "Error creating tgz file"
@@ -179,7 +180,7 @@ export class DownloadAdminPluginsService {
       });
     }
 
-    const versions: { [version_code: number]: string } = JSON.parse(
+    const versions: Record<number, string> = JSON.parse(
       fs.readFileSync(pathToVersions, "utf-8")
     );
     versions[version_code] = version;
@@ -200,7 +201,7 @@ export class DownloadAdminPluginsService {
       await execShellCommand(
         `npx drizzle-kit generate --config src/plugins/${code}/admin/database/drizzle.config.ts`
       );
-    } catch (err) {
+    } catch (_err) {
       throw new CustomError({
         code: "GENERATE_MIGRATION_ERROR",
         message: "Error generating migration"

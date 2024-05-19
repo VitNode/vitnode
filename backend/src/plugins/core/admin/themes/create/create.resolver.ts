@@ -18,6 +18,6 @@ export class CreateAdminThemesResolver {
   async admin__core_themes__create(
     @Args() args: CreateAdminThemesArgs
   ): Promise<ShowAdminThemes> {
-    return await this.service.create(args);
+    return this.service.create(args);
   }
 }

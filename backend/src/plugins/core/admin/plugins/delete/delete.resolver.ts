@@ -15,6 +15,6 @@ export class DeleteAdminPluginsResolver {
   async admin__core_plugins__delete(
     @Args() args: DeleteAdminPluginsArgs
   ): Promise<string> {
-    return await this.service.delete(args);
+    return this.service.delete(args);
   }
 }

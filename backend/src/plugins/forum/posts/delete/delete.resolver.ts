@@ -16,6 +16,6 @@ export class DeleteForumPostsResolver {
     @CurrentUser() user: User,
     @Args() args: DeletePostsForumsArgs
   ): Promise<string> {
-    return await this.service.delete(user, args);
+    return this.service.delete(user, args);
   }
 }

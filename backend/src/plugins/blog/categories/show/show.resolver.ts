@@ -12,6 +12,6 @@ export class ShowBlogCategoriesResolver {
   async blog_categories__show(
     @Args() args: ShowBlogCategoriesArgs
   ): Promise<ShowBlogCategoriesObj> {
-    return await this.service.show(args);
+    return this.service.show(args);
   }
 }

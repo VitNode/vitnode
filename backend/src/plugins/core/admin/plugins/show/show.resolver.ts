@@ -16,6 +16,6 @@ export class ShowAdminPluginsResolver {
   async admin__core_plugins__show(
     @Args() args: ShowAdminPluginsArgs
   ): Promise<ShowAdminPluginsObj> {
-    return await this.service.show(args);
+    return this.service.show(args);
   }
 }

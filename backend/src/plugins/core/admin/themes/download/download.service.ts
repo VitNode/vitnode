@@ -20,7 +20,7 @@ import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class DownloadAdminThemesService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async download(
     { id: userId }: User,
@@ -74,7 +74,7 @@ export class DownloadAdminThemesService {
     // Create tgz
     try {
       tar.create({ gzip: true, file: `temp/${name}.tgz`, cwd: path }, ["."]);
-    } catch (error) {
+    } catch (_error) {
       throw new CustomError({
         code: "DOWNLOAD_ADMIN_THEMES_SERVICE_ERROR",
         message: "Error creating tgz"

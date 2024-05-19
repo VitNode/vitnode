@@ -10,8 +10,8 @@ import { Ctx } from "@/utils/types/context.type";
 @Injectable()
 export class ChangeCoreThemesService {
   constructor(
-    private databaseService: DatabaseService,
-    private configService: ConfigService
+    private readonly databaseService: DatabaseService,
+    private readonly configService: ConfigService
   ) {}
 
   async change({ id }: ChangeCoreThemesArgs, { res }: Ctx): Promise<string> {

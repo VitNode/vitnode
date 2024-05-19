@@ -13,6 +13,6 @@ export class ChangeThemesResolver {
     @Args() args: ChangeCoreThemesArgs,
     @Context() context: Ctx
   ): Promise<string> {
-    return await this.service.change(args, context);
+    return this.service.change(args, context);
   }
 }

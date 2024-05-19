@@ -13,6 +13,6 @@ export class SignInCoreSessionsResolver {
     @Args() args: SignInCoreSessionsArgs,
     @Context() context: Ctx
   ): Promise<string> {
-    return await this.service.signIn(args, context);
+    return this.service.signIn(args, context);
   }
 }

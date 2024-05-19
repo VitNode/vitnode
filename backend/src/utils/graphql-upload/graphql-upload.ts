@@ -5,7 +5,7 @@ import Upload from "./upload";
 export const GraphQLUpload = new GraphQLScalarType({
   name: "Upload",
   description: "The `Upload` scalar type represents a file upload.",
-  parseValue(value) {
+  async parseValue(value) {
     if (value instanceof Upload) return value.promise;
     throw new GraphQLError("Upload value invalid.");
   },

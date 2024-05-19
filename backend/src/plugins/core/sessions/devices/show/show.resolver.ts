@@ -18,6 +18,6 @@ export class ShowCoreSessionDevicesResolver {
     @Args() args: ShowCoreSessionDevicesArgs,
     @CurrentUser() user: User | null
   ): Promise<ShowCoreSessionDevicesObj> {
-    return await this.service.show(args, user);
+    return this.service.show(args, user);
   }
 }

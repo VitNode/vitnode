@@ -16,6 +16,6 @@ export class EditAdminManifestMetadataResolver {
   async admin__core_manifest_metadata__edit(
     @Args() args: EditAdminManifestMetadataObj
   ): Promise<ShowAdminManifestMetadataObj> {
-    return await this.service.edit(args);
+    return this.service.edit(args);
   }
 }

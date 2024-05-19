@@ -18,6 +18,6 @@ export class EditForumForumsResolver {
     @Args() args: EditForumForumsArgs,
     @CurrentUser() user: User | null
   ): Promise<CreateForumForumsObj> {
-    return await this.service.edit(args, user);
+    return this.service.edit(args, user);
   }
 }

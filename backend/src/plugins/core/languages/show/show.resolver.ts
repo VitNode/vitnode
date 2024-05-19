@@ -12,6 +12,6 @@ export class ShowCoreLanguagesResolver {
   async core_languages__show(
     @Args() args: ShowCoreLanguagesArgs
   ): Promise<ShowCoreLanguagesObj> {
-    return await this.service.show(args);
+    return this.service.show(args);
   }
 }

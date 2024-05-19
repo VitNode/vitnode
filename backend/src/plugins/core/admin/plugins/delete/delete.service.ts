@@ -17,8 +17,8 @@ import { setRebuildRequired } from "@/functions/rebuild-required";
 @Injectable()
 export class DeleteAdminPluginsService {
   constructor(
-    private databaseService: DatabaseService,
-    private changeFilesService: ChangeFilesAdminPluginsService
+    private readonly databaseService: DatabaseService,
+    private readonly changeFilesService: ChangeFilesAdminPluginsService
   ) {}
 
   protected deleteFolderWhenExists(path: string) {
@@ -40,7 +40,7 @@ export class DeleteAdminPluginsService {
 
     try {
       await this.databaseService.db.execute(sql.raw(deleteQueries.join(" ")));
-    } catch (error) {
+    } catch (_error) {
       throw new CustomError({
         code: "DELETE_TABLE_ERROR",
         message: `Error deleting migration for plugin ${code}`
@@ -78,7 +78,7 @@ export class DeleteAdminPluginsService {
 
     try {
       await this.databaseService.db.execute(sql.raw(deleteQueries.join(" ")));
-    } catch (error) {
+    } catch (_error) {
       throw new CustomError({
         code: "DELETE_TABLE_ERROR",
         message: `Error deleting tables for plugin ${code}`

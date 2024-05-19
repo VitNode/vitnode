@@ -9,7 +9,7 @@ import { CustomError } from "@/utils/errors/custom-error";
 
 @Injectable()
 export class CreateAdminStaffModeratorsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async create({
     group_id,

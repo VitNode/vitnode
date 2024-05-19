@@ -18,7 +18,7 @@ interface Args extends LastPostsShowForumForumsArgs {
 
 @Injectable()
 export class LastPostsForumForumsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async lastPosts({
     cursor,

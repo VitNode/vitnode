@@ -9,6 +9,6 @@ export class ShowCorePluginsResolver {
 
   @Query(() => [ShowCorePluginsObj])
   async core_plugins__show(): Promise<ShowCorePluginsObj[]> {
-    return await this.service.show();
+    return this.service.show();
   }
 }

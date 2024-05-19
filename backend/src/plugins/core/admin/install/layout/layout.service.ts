@@ -15,7 +15,7 @@ import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class LayoutAdminInstallService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async layout(): Promise<LayoutAdminInstallObj> {
     const users = await this.databaseService.db

@@ -17,7 +17,7 @@ import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class DownloadAdminCoreLanguageService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async download(
     { id: userId }: User,
@@ -61,7 +61,7 @@ export class DownloadAdminCoreLanguageService {
         { gzip: true, file: `temp/${name}.tgz`, cwd: path },
         all ? ["."] : pluginsPath
       );
-    } catch (error) {
+    } catch (_error) {
       throw new CustomError({
         code: "LANGUAGE_DOWNLOAD_ERROR",
         message: "Error creating tgz"

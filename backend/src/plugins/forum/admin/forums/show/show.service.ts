@@ -12,8 +12,8 @@ import { DatabaseService } from "@/database/database.service";
 @Injectable()
 export class ShowForumForumsAdminService {
   constructor(
-    private databaseService: DatabaseService,
-    private forumService: ShowForumForumsService
+    private readonly databaseService: DatabaseService,
+    private readonly forumService: ShowForumForumsService
   ) {}
 
   async show({

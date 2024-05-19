@@ -15,6 +15,6 @@ export class DeleteAdminThemesResolver {
   async admin__core_themes__delete(
     @Args() args: DeleteAdminThemesArgs
   ): Promise<string> {
-    return await this.service.delete(args);
+    return this.service.delete(args);
   }
 }

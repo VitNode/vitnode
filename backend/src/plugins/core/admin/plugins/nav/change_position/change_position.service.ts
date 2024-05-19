@@ -9,7 +9,7 @@ import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class ChangePositionAdminNavPluginsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async changePosition({
     id,

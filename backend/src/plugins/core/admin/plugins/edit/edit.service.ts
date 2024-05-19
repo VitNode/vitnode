@@ -16,7 +16,7 @@ import { CustomError } from "@/utils/errors/custom-error";
 
 @Injectable()
 export class EditAdminPluginsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async edit({
     code,
@@ -67,7 +67,7 @@ export class EditAdminPluginsService {
     // Update plugin.json
     const path = join(pluginPaths({ code }).backend.root, "plugin.json");
     const pluginFile = fs.readFileSync(path, "utf8");
-    const config: Omit<ConfigPlugin, "versions" | "version_code"> =
+    const config: Omit<ConfigPlugin, "version_code" | "versions"> =
       JSON.parse(pluginFile);
 
     config.name = rest.name;

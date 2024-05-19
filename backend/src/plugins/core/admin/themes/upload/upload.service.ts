@@ -22,10 +22,6 @@ import { setRebuildRequired } from "@/functions/rebuild-required";
 
 @Injectable()
 export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService {
-  constructor(private databaseService: DatabaseService) {
-    super();
-  }
-
   protected path: string = join(process.cwd(), "..", "frontend", "themes");
   protected tempPath: string = join(
     process.cwd(),
@@ -33,6 +29,10 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
     "themes",
     `${generateRandomString(5)}${currentDate()}`
   );
+
+  constructor(private readonly databaseService: DatabaseService) {
+    super();
+  }
 
   protected async getThemeConfig({
     tgz
@@ -51,7 +51,7 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
           tar.extract({
             C: this.tempPath,
             strip: 1
-          }) as ReturnType<typeof tar.extract> & NodeJS.WritableStream
+          }) as NodeJS.WritableStream & ReturnType<typeof tar.extract>
         )
         .on("error", err => {
           reject(err.message);

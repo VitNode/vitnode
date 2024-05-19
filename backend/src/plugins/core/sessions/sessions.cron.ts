@@ -7,7 +7,7 @@ import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class CoreSessionsCron {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   @Cron(CronExpression.EVERY_MINUTE)
   async clearExpiredSessions() {

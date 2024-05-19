@@ -18,7 +18,7 @@ import { SortDirectionEnum } from "@/utils/types/database/sort-direction.type";
 
 @Injectable()
 export class ShowCoreFilesService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async show(
     { id: user_id }: User,

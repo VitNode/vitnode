@@ -18,6 +18,6 @@ export class CreateAdminPluginsResolver {
   async admin__core_plugins__create(
     @Args() args: CreateAdminPluginsArgs
   ): Promise<ShowAdminPlugins> {
-    return await this.service.create(args);
+    return this.service.create(args);
   }
 }

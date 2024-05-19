@@ -11,7 +11,7 @@ import { Ctx } from "@/utils/types/context.type";
 @Injectable()
 export class AuthorizationCoreSessionsService {
   constructor(
-    private databaseService: DatabaseService,
+    private readonly databaseService: DatabaseService,
     private readonly service: InternalAuthorizationCoreSessionsService
   ) {}
 
@@ -101,7 +101,7 @@ export class AuthorizationCoreSessionsService {
           space_used: (+countStorageUsed[0].space_used ?? 0) * 1024
         }
       };
-    } catch (error) {
+    } catch (_error) {
       const guestGroup =
         await this.databaseService.db.query.core_groups.findFirst({
           where: (table, { eq }) => eq(table.guest, true)

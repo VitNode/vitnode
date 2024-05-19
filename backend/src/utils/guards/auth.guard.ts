@@ -8,8 +8,8 @@ import { Ctx } from "../types/context.type";
 @Injectable()
 export class AuthGuards implements CanActivate {
   constructor(
-    private reflector: Reflector,
-    private service: InternalAuthorizationCoreSessionsService
+    private readonly reflector: Reflector,
+    private readonly service: InternalAuthorizationCoreSessionsService
   ) {}
 
   protected async getAuth({ req, res }: Ctx) {
@@ -33,7 +33,7 @@ export class AuthGuards implements CanActivate {
     } else {
       try {
         return !!(await this.getAuth(ctx));
-      } catch (e) {
+      } catch (_e) {
         // Return true if auth is optional
         return true;
       }
