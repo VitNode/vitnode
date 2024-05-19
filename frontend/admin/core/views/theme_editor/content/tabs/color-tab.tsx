@@ -71,18 +71,6 @@ export const ColorTabThemeEditor = () => {
                             l: 98
                           }
                     });
-
-                    // const backgroundHSL =
-                    //   form.getValues("colors.background")[activeTheme];
-
-                    // changeColor({
-                    //   name: "background",
-                    //   hslColor: {
-                    //     h: hslFromColor.h,
-                    //     s: backgroundHSL.s,
-                    //     l: backgroundHSL.l
-                    //   }
-                    // });
                   }}
                   value={getStringFromHSL(field.value[activeTheme])}
                   disableRemoveColor
@@ -177,7 +165,7 @@ export const ColorTabThemeEditor = () => {
                       name: "muted",
                       hslColor: {
                         h: hslFromColor.h,
-                        s: hslFromColor.s / 2,
+                        s: Math.floor(hslFromColor.s / 2),
                         l: colorMuted.l
                       }
                     });
@@ -189,7 +177,7 @@ export const ColorTabThemeEditor = () => {
                       name: "accent",
                       hslColor: {
                         h: hslFromColor.h,
-                        s: hslFromColor.s / 2,
+                        s: Math.floor(hslFromColor.s / 2),
                         l: colorAccent.l
                       }
                     });
@@ -201,7 +189,7 @@ export const ColorTabThemeEditor = () => {
                       name: "background",
                       hslColor: {
                         h: hslFromColor.h,
-                        s: hslFromColor.s / 2,
+                        s: Math.floor(hslFromColor.s / 2),
                         l: colorBackground.l
                       }
                     });
@@ -213,7 +201,7 @@ export const ColorTabThemeEditor = () => {
                       name: "card",
                       hslColor: {
                         h: hslFromColor.h,
-                        s: hslFromColor.s / 2,
+                        s: Math.floor(hslFromColor.s / 2),
                         l: colorCard.l
                       }
                     });
@@ -225,7 +213,7 @@ export const ColorTabThemeEditor = () => {
                       name: "border",
                       hslColor: {
                         h: hslFromColor.h,
-                        s: hslFromColor.s / 2,
+                        s: Math.floor(hslFromColor.s / 4),
                         l: colorBorder.l
                       }
                     });
