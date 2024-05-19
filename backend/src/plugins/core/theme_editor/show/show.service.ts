@@ -95,6 +95,10 @@ export class ShowCoreThemeEditorService {
           cssAsString: cssString,
           variable: "primary"
         }),
+        primary_foreground: this.getVariable({
+          cssAsString: cssString,
+          variable: "primary-foreground"
+        }),
         background: this.getVariable({
           cssAsString: cssString,
           variable: "background"
@@ -103,9 +107,49 @@ export class ShowCoreThemeEditorService {
           cssAsString: cssString,
           variable: "secondary"
         }),
-        primary_foreground: this.getVariable({
+        secondary_foreground: this.getVariable({
           cssAsString: cssString,
-          variable: "primary-foreground"
+          variable: "secondary-foreground"
+        }),
+        destructive: this.getVariable({
+          cssAsString: cssString,
+          variable: "destructive"
+        }),
+        destructive_foreground: this.getVariable({
+          cssAsString: cssString,
+          variable: "destructive-foreground"
+        }),
+        base: this.getVariable({
+          cssAsString: cssString,
+          variable: "base"
+        }),
+        base_foreground: this.getVariable({
+          cssAsString: cssString,
+          variable: "base-foreground"
+        }),
+        muted: this.getVariable({
+          cssAsString: cssString,
+          variable: "muted"
+        }),
+        muted_foreground: this.getVariable({
+          cssAsString: cssString,
+          variable: "muted-foreground"
+        }),
+        accent: this.getVariable({
+          cssAsString: cssString,
+          variable: "accent"
+        }),
+        accent_foreground: this.getVariable({
+          cssAsString: cssString,
+          variable: "accent-foreground"
+        }),
+        card: this.getVariable({
+          cssAsString: cssString,
+          variable: "card"
+        }),
+        border: this.getVariable({
+          cssAsString: cssString,
+          variable: "border"
         })
       }
     };

@@ -49,6 +49,138 @@ query Core_theme_editor__show {
           s
         }
       }
+      secondary_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      destructive {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      destructive_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      base {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      base_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      muted {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      muted_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      accent {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      accent_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      card {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      border {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
     }
   }
 }

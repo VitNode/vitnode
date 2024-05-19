@@ -21,7 +21,18 @@ export const formSchemaColorsThemeEditor = z.object({
   primary: zObjectHslWithTheme,
   ["primary-foreground"]: zObjectHslWithTheme,
   secondary: zObjectHslWithTheme,
-  background: zObjectHslWithTheme
+  ["secondary-foreground"]: zObjectHslWithTheme,
+  background: zObjectHslWithTheme,
+  destructive: zObjectHslWithTheme,
+  ["destructive-foreground"]: zObjectHslWithTheme,
+  base: zObjectHslWithTheme,
+  ["base-foreground"]: zObjectHslWithTheme,
+  accent: zObjectHslWithTheme,
+  ["accent-foreground"]: zObjectHslWithTheme,
+  muted: zObjectHslWithTheme,
+  ["muted-foreground"]: zObjectHslWithTheme,
+  card: zObjectHslWithTheme,
+  border: zObjectHslWithTheme
 });
 
 export const useThemeEditorApi = ({
@@ -42,7 +53,14 @@ export const useThemeEditorApi = ({
       colors: {
         ...core_theme_editor__show.colors,
         ["primary-foreground"]:
-          core_theme_editor__show.colors.primary_foreground
+          core_theme_editor__show.colors.primary_foreground,
+        ["secondary-foreground"]:
+          core_theme_editor__show.colors.secondary_foreground,
+        ["destructive-foreground"]:
+          core_theme_editor__show.colors.destructive_foreground,
+        ["base-foreground"]: core_theme_editor__show.colors.base_foreground,
+        ["accent-foreground"]: core_theme_editor__show.colors.accent_foreground,
+        ["muted-foreground"]: core_theme_editor__show.colors.muted_foreground
       }
     }
   });

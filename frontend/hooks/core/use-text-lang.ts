@@ -53,3 +53,12 @@ export const useTextLang = () => {
       getConvertNameToLink({ id, name, locale })
   };
 };
+
+export const getTextLang = ({ locale }: { locale: string }) => {
+  return {
+    convertText: (text?: TextLanguage[]) =>
+      getConvertTextLang({ locale, text }),
+    convertNameToLink: ({ id, name }: { id: number; name: TextLanguage[] }) =>
+      getConvertNameToLink({ id, name, locale })
+  };
+};

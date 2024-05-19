@@ -48,10 +48,10 @@ export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
           <iframe
             ref={iframeRef}
             title={CONFIG.frontend_url}
-            className={cn("border bg-background transition-all", {
+            className={cn("bg-background transition-all", {
               "w-full h-full": activeMode === "desktop",
-              "w-[768px] h-5/6 rounded-md": activeMode === "tablet",
-              "w-[375px] h-5/6 rounded-md": activeMode === "mobile"
+              "w-[768px] h-5/6 rounded-md border": activeMode === "tablet",
+              "w-[375px] h-5/6 rounded-md border": activeMode === "mobile"
             })}
             src={CONFIG.frontend_url}
           />

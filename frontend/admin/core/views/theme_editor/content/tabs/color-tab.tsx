@@ -37,7 +37,7 @@ export const ColorTabThemeEditor = () => {
 
       <Separator />
 
-      <div className="p-5">
+      <div className="p-5 space-y-2">
         <FormField
           control={form.control}
           name="colors.primary"
@@ -110,6 +110,167 @@ export const ColorTabThemeEditor = () => {
                     changeColor({
                       name: "secondary",
                       hslColor: hslFromColor
+                    });
+
+                    changeColor({
+                      name: "secondary-foreground",
+                      hslColor: isColorBrightness(hslFromColor)
+                        ? {
+                            h: 210,
+                            s: 40,
+                            l: 2
+                          }
+                        : {
+                            h: 210,
+                            s: 40,
+                            l: 98
+                          }
+                    });
+                  }}
+                  value={getStringFromHSL(field.value[activeTheme])}
+                  disableRemoveColor
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="colors.base"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Base</FormLabel>
+              <FormControl>
+                <ColorInput
+                  {...field}
+                  key={`color_base__${activeTheme}`}
+                  onChange={val => {
+                    const hslFromColor = getHSLFromString(val);
+                    if (!hslFromColor) return;
+
+                    changeColor({
+                      name: "base",
+                      hslColor: hslFromColor
+                    });
+
+                    changeColor({
+                      name: "base-foreground",
+                      hslColor: isColorBrightness(hslFromColor)
+                        ? {
+                            h: 210,
+                            s: 40,
+                            l: 2
+                          }
+                        : {
+                            h: 210,
+                            s: 40,
+                            l: 98
+                          }
+                    });
+
+                    const colorMuted =
+                      form.getValues("colors.muted")[activeTheme];
+
+                    changeColor({
+                      name: "muted",
+                      hslColor: {
+                        h: hslFromColor.h,
+                        s: hslFromColor.s / 2,
+                        l: colorMuted.l
+                      }
+                    });
+
+                    const colorAccent =
+                      form.getValues("colors.accent")[activeTheme];
+
+                    changeColor({
+                      name: "accent",
+                      hslColor: {
+                        h: hslFromColor.h,
+                        s: hslFromColor.s / 2,
+                        l: colorAccent.l
+                      }
+                    });
+
+                    const colorBackground =
+                      form.getValues("colors.background")[activeTheme];
+
+                    changeColor({
+                      name: "background",
+                      hslColor: {
+                        h: hslFromColor.h,
+                        s: hslFromColor.s / 2,
+                        l: colorBackground.l
+                      }
+                    });
+
+                    const colorCard =
+                      form.getValues("colors.card")[activeTheme];
+
+                    changeColor({
+                      name: "card",
+                      hslColor: {
+                        h: hslFromColor.h,
+                        s: hslFromColor.s / 2,
+                        l: colorCard.l
+                      }
+                    });
+
+                    const colorBorder =
+                      form.getValues("colors.border")[activeTheme];
+
+                    changeColor({
+                      name: "border",
+                      hslColor: {
+                        h: hslFromColor.h,
+                        s: hslFromColor.s / 2,
+                        l: colorBorder.l
+                      }
+                    });
+                  }}
+                  value={getStringFromHSL(field.value[activeTheme])}
+                  disableRemoveColor
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="colors.destructive"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Destructive</FormLabel>
+              <FormControl>
+                <ColorInput
+                  {...field}
+                  key={`color_destructive__${activeTheme}`}
+                  onChange={val => {
+                    const hslFromColor = getHSLFromString(val);
+                    if (!hslFromColor) return;
+
+                    changeColor({
+                      name: "destructive",
+                      hslColor: hslFromColor
+                    });
+
+                    changeColor({
+                      name: "destructive-foreground",
+                      hslColor: isColorBrightness(hslFromColor)
+                        ? {
+                            h: 210,
+                            s: 40,
+                            l: 2
+                          }
+                        : {
+                            h: 210,
+                            s: 40,
+                            l: 98
+                          }
                     });
                   }}
                   value={getStringFromHSL(field.value[activeTheme])}

@@ -183,6 +183,6 @@ export const getStringFromHSL = ({ h, l, s }: HslColor): string => {
 export const isColorBrightness = (color: HslColor): boolean => {
   return (
     color.l > 70 ||
-    (color.h >= 44 && color.h <= 190 && color.s > 50 && color.l > 40)
+    (color.h >= 40 && color.h <= 190 && color.s > 50 && color.l > 40)
   );
 };

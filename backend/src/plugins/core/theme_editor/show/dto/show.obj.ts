@@ -33,7 +33,40 @@ export class ColorsShowCoreThemeEditor {
   secondary: ThemeVariable;
 
   @Field(() => ThemeVariable)
+  secondary_foreground: ThemeVariable;
+
+  @Field(() => ThemeVariable)
   background: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  destructive: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  destructive_foreground: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  base: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  base_foreground: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  muted: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  muted_foreground: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  accent: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  accent_foreground: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  card: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  border: ThemeVariable;
 }
 
 @ObjectType()

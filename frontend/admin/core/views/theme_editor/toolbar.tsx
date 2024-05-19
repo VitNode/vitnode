@@ -10,7 +10,6 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import { Separator } from "@/components/ui/separator";
 
 export enum ThemeEditorViewEnum {
   Desktop = "desktop",
@@ -87,8 +86,6 @@ export const ToolbarThemeEditor = ({ activeMode, setActiveMode }: Props) => {
           <Smartphone />
         </ButtonWithTooltip>
       </div>
-
-      <Separator />
 
       <div className="flex flex-col gap-1 p-2">
         <ButtonWithTooltip

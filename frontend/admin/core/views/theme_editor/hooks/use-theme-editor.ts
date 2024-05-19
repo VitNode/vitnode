@@ -16,10 +16,21 @@ interface ColorObj {
 
 interface ThemeEditorFormObj {
   colors: {
+    accent: ColorObj;
+    "accent-foreground": ColorObj;
     background: ColorObj;
+    base: ColorObj;
+    "base-foreground": ColorObj;
+    border: ColorObj;
+    card: ColorObj;
+    destructive: ColorObj;
+    "destructive-foreground": ColorObj;
+    muted: ColorObj;
+    "muted-foreground": ColorObj;
     primary: ColorObj;
     "primary-foreground": ColorObj;
     secondary: ColorObj;
+    "secondary-foreground": ColorObj;
   };
 }
 

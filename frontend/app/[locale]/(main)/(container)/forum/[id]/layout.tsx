@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { type ReactNode } from "react";
 
 import { getSessionData } from "@/functions/get-session-data";
-import { useTextLang } from "@/hooks/core/use-text-lang";
+import { getTextLang } from "@/hooks/core/use-text-lang";
 import { getForumItemData } from "./query-api";
 import { ErrorViewSSR } from "@/components/views/error-view-ssr";
 import { getConfigFile } from "@/config/helpers";
@@ -17,12 +17,11 @@ interface Props {
 }
 
 export async function generateMetadata({
-  params: { id }
+  params: { id, locale }
 }: Props): Promise<Metadata> {
   const { data } = await getForumItemData({ id });
   const config = await getConfigFile();
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { convertText } = useTextLang();
+  const { convertText } = getTextLang({ locale });
 
   if (!data?.forum_forums__show.edges.at(0)) return {};
 

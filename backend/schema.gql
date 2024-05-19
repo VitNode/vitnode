@@ -51,10 +51,21 @@ type ChildrenShowForumForums {
 }
 
 type ColorsShowCoreThemeEditor {
+  accent: ThemeVariable!
+  accent_foreground: ThemeVariable!
   background: ThemeVariable!
+  base: ThemeVariable!
+  base_foreground: ThemeVariable!
+  border: ThemeVariable!
+  card: ThemeVariable!
+  destructive: ThemeVariable!
+  destructive_foreground: ThemeVariable!
+  muted: ThemeVariable!
+  muted_foreground: ThemeVariable!
   primary: ThemeVariable!
   primary_foreground: ThemeVariable!
   secondary: ThemeVariable!
+  secondary_foreground: ThemeVariable!
 }
 
 input ContentCreateAdminGroups {
@@ -109,7 +120,7 @@ type FilesAdminPluginsObj {
 type FilesAuthorizationCoreSessions {
   allow_upload: Boolean!
   max_storage_for_submit: Int!
-  space_used: Int!
+  space_used: Float!
   total_max_storage: Int!
 }
 
