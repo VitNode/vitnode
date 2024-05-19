@@ -1,4 +1,11 @@
-import { KeyRound, LogOut, Settings, Shield, User } from "lucide-react";
+import {
+  KeyRound,
+  LogOut,
+  PaintRoller,
+  Settings,
+  Shield,
+  User
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
@@ -13,12 +20,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useSession } from "@/hooks/core/use-session";
 import { useSignOutAPI } from "@/hooks/core/sign/out/use-sign-out-api";
-import { useRouter } from "@/i18n";
+import { Link } from "@/i18n";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 
 export const AuthUserBar = () => {
   const t = useTranslations("core");
-  const { push } = useRouter();
   const { session } = useSession();
   const { onSubmit } = useSignOutAPI();
 
@@ -50,13 +56,17 @@ export const AuthUserBar = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => push(`/profile/${name_seo}`)}>
-            <User />
-            <span>{t("user-bar.my_profile")}</span>
+          <DropdownMenuItem asChild>
+            <Link href={`/profile/${name_seo}`}>
+              <User />
+              <span>{t("user-bar.my_profile")}</span>
+            </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => push("/settings")}>
-            <Settings />
-            <span>{t("user-bar.settings")}</span>
+          <DropdownMenuItem asChild>
+            <Link href="/settings">
+              <Settings />
+              <span>{t("user-bar.settings")}</span>
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
 
@@ -65,19 +75,30 @@ export const AuthUserBar = () => {
             <DropdownMenuSeparator />
 
             <DropdownMenuGroup>
+              {is_admin && (
+                <DropdownMenuItem asChild>
+                  <Link href="/theme-editor">
+                    <PaintRoller />
+                    <span>{t("user-bar.theme_editor")}</span>
+                  </Link>
+                </DropdownMenuItem>
+              )}
+
               {is_mod && (
-                <DropdownMenuItem onClick={() => push("/mod")}>
-                  <Shield />
-                  <span>{t("user-bar.mod_cp")}</span>
+                <DropdownMenuItem asChild>
+                  <Link href="/mod">
+                    <Shield />
+                    <span>{t("user-bar.mod_cp")}</span>
+                  </Link>
                 </DropdownMenuItem>
               )}
 
               {is_admin && (
-                <DropdownMenuItem
-                  onClick={() => window.open("/admin", "_blank")}
-                >
-                  <KeyRound />
-                  <span>{t("user-bar.admin_cp")}</span>
+                <DropdownMenuItem asChild>
+                  <Link href="/admin" target="_blank">
+                    <KeyRound />
+                    <span>{t("user-bar.admin_cp")}</span>
+                  </Link>
                 </DropdownMenuItem>
               )}
             </DropdownMenuGroup>

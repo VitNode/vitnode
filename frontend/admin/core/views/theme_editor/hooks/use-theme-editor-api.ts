@@ -5,7 +5,6 @@ import { useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 import type { HslColor } from "react-colorful";
 
-import { useRouter } from "@/i18n";
 import type { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
 
 const zObjectHsl = z.object({
@@ -39,7 +38,6 @@ export const useThemeEditorApi = ({
   core_theme_editor__show
 }: Core_Theme_Editor__ShowQuery) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const { push } = useRouter();
   const formSchema = z.object({
     colors: formSchemaColorsThemeEditor
   });
@@ -88,7 +86,6 @@ export const useThemeEditorApi = ({
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     // eslint-disable-next-line no-console
     console.log(values);
-    //  push("/");
   };
 
   const changeColor = ({

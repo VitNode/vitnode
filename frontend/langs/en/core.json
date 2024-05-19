@@ -189,6 +189,7 @@
       "settings": "Settings",
       "mod_cp": "Moderator Panel",
       "admin_cp": "Admin Panel",
+      "theme_editor": "Theme Editor",
       "dark_light_switcher": {
         "light": "Light",
         "dark": "Dark",
