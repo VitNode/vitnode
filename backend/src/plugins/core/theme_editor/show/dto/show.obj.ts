@@ -45,10 +45,10 @@ export class ColorsShowCoreThemeEditor {
   destructive_foreground: ThemeVariable;
 
   @Field(() => ThemeVariable)
-  base: ThemeVariable;
+  cover: ThemeVariable;
 
   @Field(() => ThemeVariable)
-  base_foreground: ThemeVariable;
+  cover_foreground: ThemeVariable;
 
   @Field(() => ThemeVariable)
   muted: ThemeVariable;

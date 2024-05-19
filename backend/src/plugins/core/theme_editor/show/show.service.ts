@@ -119,13 +119,13 @@ export class ShowCoreThemeEditorService {
           cssAsString: cssString,
           variable: "destructive-foreground"
         }),
-        base: this.getVariable({
+        cover: this.getVariable({
           cssAsString: cssString,
-          variable: "base"
+          variable: "cover"
         }),
-        base_foreground: this.getVariable({
+        cover_foreground: this.getVariable({
           cssAsString: cssString,
-          variable: "base-foreground"
+          variable: "cover-foreground"
         }),
         muted: this.getVariable({
           cssAsString: cssString,

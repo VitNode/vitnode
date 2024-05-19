@@ -19,10 +19,10 @@ interface ThemeEditorFormObj {
     accent: ColorObj;
     "accent-foreground": ColorObj;
     background: ColorObj;
-    base: ColorObj;
-    "base-foreground": ColorObj;
     border: ColorObj;
     card: ColorObj;
+    cover: ColorObj;
+    "cover-foreground": ColorObj;
     destructive: ColorObj;
     "destructive-foreground": ColorObj;
     muted: ColorObj;

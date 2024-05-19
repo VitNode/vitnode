@@ -24,8 +24,8 @@ export const formSchemaColorsThemeEditor = z.object({
   background: zObjectHslWithTheme,
   destructive: zObjectHslWithTheme,
   ["destructive-foreground"]: zObjectHslWithTheme,
-  base: zObjectHslWithTheme,
-  ["base-foreground"]: zObjectHslWithTheme,
+  cover: zObjectHslWithTheme,
+  ["cover-foreground"]: zObjectHslWithTheme,
   accent: zObjectHslWithTheme,
   ["accent-foreground"]: zObjectHslWithTheme,
   muted: zObjectHslWithTheme,
@@ -56,7 +56,7 @@ export const useThemeEditorApi = ({
           core_theme_editor__show.colors.secondary_foreground,
         ["destructive-foreground"]:
           core_theme_editor__show.colors.destructive_foreground,
-        ["base-foreground"]: core_theme_editor__show.colors.base_foreground,
+        ["cover-foreground"]: core_theme_editor__show.colors.cover_foreground,
         ["accent-foreground"]: core_theme_editor__show.colors.accent_foreground,
         ["muted-foreground"]: core_theme_editor__show.colors.muted_foreground
       }

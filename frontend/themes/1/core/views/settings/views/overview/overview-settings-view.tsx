@@ -12,7 +12,7 @@ export default function OverviewSettingsView() {
       <div className="bg-destructive p-10 text-destructive-foreground">
         destructive
       </div>
-      <div className="bg-base p-10 text-base-foreground">base</div>
+      <div className="bg-cover p-10 text-cover-foreground">base</div>
       <div className="size-10 bg-border" /> border
       <div className="size-10 bg-input" /> input
       <div className="size-10 bg-ring" /> ring

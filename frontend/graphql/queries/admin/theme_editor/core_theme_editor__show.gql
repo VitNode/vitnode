@@ -85,7 +85,7 @@ query Core_theme_editor__show {
           s
         }
       }
-      base {
+      cover {
         dark {
           h
           l
@@ -97,7 +97,7 @@ query Core_theme_editor__show {
           s
         }
       }
-      base_foreground {
+      cover_foreground {
         dark {
           h
           l

@@ -43,7 +43,13 @@
       "title": "Edytor motywu",
       "desktop": "Komputer",
       "tablet": "Tablet",
-      "mobile": "Mobile"
+      "mobile": "Mobile",
+      "colors": {
+        "primary": "Główny",
+        "secondary": "Dodatkowy",
+        "cover": "Okładka",
+        "destructive": "Niszczący"
+      }
     },
     "colors": {
       "none": "Brak koloru",

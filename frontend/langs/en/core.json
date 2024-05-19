@@ -43,7 +43,13 @@
       "title": "Theme Editor",
       "desktop": "Desktop",
       "tablet": "Tablet",
-      "mobile": "Mobile"
+      "mobile": "Mobile",
+      "colors": {
+        "primary": "Primary",
+        "secondary": "Secondary",
+        "cover": "Cover",
+        "destructive": "Destructive"
+      }
     },
     "colors": {
       "none": "No Color",

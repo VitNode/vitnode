@@ -54,10 +54,10 @@ type ColorsShowCoreThemeEditor {
   accent: ThemeVariable!
   accent_foreground: ThemeVariable!
   background: ThemeVariable!
-  base: ThemeVariable!
-  base_foreground: ThemeVariable!
   border: ThemeVariable!
   card: ThemeVariable!
+  cover: ThemeVariable!
+  cover_foreground: ThemeVariable!
   destructive: ThemeVariable!
   destructive_foreground: ThemeVariable!
   muted: ThemeVariable!

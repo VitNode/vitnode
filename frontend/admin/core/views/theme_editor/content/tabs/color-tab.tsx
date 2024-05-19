@@ -1,4 +1,5 @@
 import { ChevronLeft } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -19,6 +20,8 @@ import {
 import { ThemeEditorTab, useThemeEditor } from "../../hooks/use-theme-editor";
 
 export const ColorTabThemeEditor = () => {
+  const t = useTranslations("core.theme_editor.colors");
+  const tCore = useTranslations("core");
   const { activeTheme, changeColor, form, setActiveTab } = useThemeEditor();
 
   return (
@@ -31,7 +34,7 @@ export const ColorTabThemeEditor = () => {
           onClick={() => setActiveTab(ThemeEditorTab.Main)}
         >
           <ChevronLeft />
-          <span>Back</span>
+          <span>{tCore("go_back")}</span>
         </Button>
       </div>
 
@@ -43,7 +46,7 @@ export const ColorTabThemeEditor = () => {
           name="colors.primary"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Primary</FormLabel>
+              <FormLabel>{t("primary")}</FormLabel>
               <FormControl>
                 <ColorInput
                   {...field}
@@ -86,7 +89,7 @@ export const ColorTabThemeEditor = () => {
           name="colors.secondary"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Secondary</FormLabel>
+              <FormLabel>{t("secondary")}</FormLabel>
               <FormControl>
                 <ColorInput
                   {...field}
@@ -126,25 +129,25 @@ export const ColorTabThemeEditor = () => {
 
         <FormField
           control={form.control}
-          name="colors.base"
+          name="colors.cover"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Base</FormLabel>
+              <FormLabel>{t("cover")}</FormLabel>
               <FormControl>
                 <ColorInput
                   {...field}
-                  key={`color_base__${activeTheme}`}
+                  key={`color_cover__${activeTheme}`}
                   onChange={val => {
                     const hslFromColor = getHSLFromString(val);
                     if (!hslFromColor) return;
 
                     changeColor({
-                      name: "base",
+                      name: "cover",
                       hslColor: hslFromColor
                     });
 
                     changeColor({
-                      name: "base-foreground",
+                      name: "cover-foreground",
                       hslColor: isColorBrightness(hslFromColor)
                         ? {
                             h: 210,
@@ -232,7 +235,7 @@ export const ColorTabThemeEditor = () => {
           name="colors.destructive"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Destructive</FormLabel>
+              <FormLabel>{t("destructive")}</FormLabel>
               <FormControl>
                 <ColorInput
                   {...field}
