@@ -39,6 +39,24 @@ export const formSchemaColorsThemeEditor = z.object({
   border: zObjectHslWithTheme
 });
 
+export const keysFromCSSThemeEditor = [
+  "primary",
+  "primary-foreground",
+  "secondary",
+  "secondary-foreground",
+  "background",
+  "destructive",
+  "destructive-foreground",
+  "cover",
+  "cover-foreground",
+  "muted",
+  "muted-foreground",
+  "accent",
+  "accent-foreground",
+  "card",
+  "border"
+] as const;
+
 export const useThemeEditorApi = ({
   core_theme_editor__show
 }: Core_Theme_Editor__ShowQuery) => {

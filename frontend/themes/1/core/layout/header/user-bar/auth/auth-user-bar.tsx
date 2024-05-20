@@ -77,7 +77,7 @@ export const AuthUserBar = () => {
             <DropdownMenuGroup>
               {is_admin && (
                 <DropdownMenuItem asChild>
-                  <Link href="/theme-editor">
+                  <Link href="/admin/theme-editor">
                     <PaintRoller />
                     <span>{t("user-bar.theme_editor")}</span>
                   </Link>

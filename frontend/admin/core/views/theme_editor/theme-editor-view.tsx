@@ -7,12 +7,15 @@ import { cn } from "@/functions/classnames";
 import { ThemeEditorViewEnum, ToolbarThemeEditor } from "./toolbar";
 import { ThemeEditorContext, ThemeEditorTab } from "./hooks/use-theme-editor";
 import { ContentThemeEditor } from "./content/content";
-import { useThemeEditorApi } from "./hooks/use-theme-editor-api";
+import {
+  keysFromCSSThemeEditor,
+  useThemeEditorApi
+} from "./hooks/use-theme-editor-api";
 import { Loader } from "@/components/loader";
 import type { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
 
 export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
-  const { iframeRef, ...rest } = useThemeEditorApi(props);
+  const { activeTheme, iframeRef, ...rest } = useThemeEditorApi(props);
   const [activeMode, setActiveMode] = useState<ThemeEditorViewEnum>(
     ThemeEditorViewEnum.Desktop
   );
@@ -36,6 +39,7 @@ export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
         activeTab,
         setActiveTab,
         direction,
+        activeTheme,
         ...rest
       }}
     >
@@ -50,6 +54,23 @@ export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
               "w-[375px] h-5/6 rounded-md border": activeMode === "mobile"
             })}
             src={CONFIG.frontend_url}
+            onLoad={() => {
+              if (CONFIG.node_development) return;
+
+              const iframe =
+                iframeRef.current?.contentWindow?.document.querySelector(
+                  "html"
+                );
+              if (!iframe) return;
+
+              keysFromCSSThemeEditor.forEach(key => {
+                const color = rest.form.getValues().colors[key][activeTheme];
+                iframe.style.setProperty(
+                  `--${key}`,
+                  `${color.h} ${color.s}% ${color.l}%`
+                );
+              });
+            }}
           />
         </div>
 
