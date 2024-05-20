@@ -76,15 +76,7 @@ export const useThemeEditorApi = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       colors: {
-        primary: core_theme_editor__show.colors.primary,
-        secondary: core_theme_editor__show.colors.secondary,
-        background: core_theme_editor__show.colors.background,
-        destructive: core_theme_editor__show.colors.destructive,
-        cover: core_theme_editor__show.colors.cover,
-        accent: core_theme_editor__show.colors.accent,
-        muted: core_theme_editor__show.colors.muted,
-        card: core_theme_editor__show.colors.card,
-        border: core_theme_editor__show.colors.border,
+        ...core_theme_editor__show.colors,
         ["primary-foreground"]:
           core_theme_editor__show.colors.primary_foreground,
         ["secondary-foreground"]:

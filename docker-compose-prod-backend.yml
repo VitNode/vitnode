@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  postgres:
+  database:
     container_name: vitnode_postgres_production
     image: postgres:16.2-alpine
     environment:
@@ -22,7 +22,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     environment:
-      - DB_HOST=${DB_HOST:-postgres}
+      - DB_HOST=${DB_HOST:-database}
       - DB_PORT=${DB_PORT:-5432}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
@@ -33,7 +33,7 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - postgres
+      - database
     networks:
       - vitnode_production
     volumes:
