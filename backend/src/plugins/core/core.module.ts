@@ -15,6 +15,7 @@ import { CoreMiddlewareModule } from "./middleware/middleware.module";
 import { CoreNavModule } from "./nav/nav.module";
 import { CorePluginsModule } from "./plugins/plugins.module";
 import { CoreThemesModule } from "./themes/themes.module";
+import { CoreThemeEditorModule } from "./theme_editor/theme_editor.module";
 
 @Module({
   imports: [
@@ -32,7 +33,8 @@ import { CoreThemesModule } from "./themes/themes.module";
     CoreMiddlewareModule,
     CoreNavModule,
     CorePluginsModule,
-    CoreThemesModule
+    CoreThemesModule,
+    CoreThemeEditorModule
   ]
 })
 export class CoreModule {}

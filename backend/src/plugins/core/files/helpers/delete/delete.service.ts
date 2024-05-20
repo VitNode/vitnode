@@ -21,7 +21,7 @@ export class DeleteCoreFilesService {
 
   delete({ dir_folder, file_name, file_secure }: DeleteCoreFilesArgs) {
     const path = file_secure
-      ? join(process.cwd(), dir_folder)
+      ? join(ABSOLUTE_PATHS.uploads.private, dir_folder)
       : join(ABSOLUTE_PATHS.uploads.public, dir_folder);
     this.checkIfFileExists(`${path}/${file_name}`);
 

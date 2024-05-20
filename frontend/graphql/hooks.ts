@@ -71,6 +71,43 @@ export type ChildrenShowForumForums = {
   position: Scalars['Int']['output'];
 };
 
+export type ColorsEditAdminThemeEditor = {
+  accent: ThemeVariableInput;
+  accent_foreground: ThemeVariableInput;
+  background: ThemeVariableInput;
+  border: ThemeVariableInput;
+  card: ThemeVariableInput;
+  cover: ThemeVariableInput;
+  cover_foreground: ThemeVariableInput;
+  destructive: ThemeVariableInput;
+  destructive_foreground: ThemeVariableInput;
+  muted: ThemeVariableInput;
+  muted_foreground: ThemeVariableInput;
+  primary: ThemeVariableInput;
+  primary_foreground: ThemeVariableInput;
+  secondary: ThemeVariableInput;
+  secondary_foreground: ThemeVariableInput;
+};
+
+export type ColorsShowCoreThemeEditor = {
+  __typename?: 'ColorsShowCoreThemeEditor';
+  accent: ThemeVariable;
+  accent_foreground: ThemeVariable;
+  background: ThemeVariable;
+  border: ThemeVariable;
+  card: ThemeVariable;
+  cover: ThemeVariable;
+  cover_foreground: ThemeVariable;
+  destructive: ThemeVariable;
+  destructive_foreground: ThemeVariable;
+  muted: ThemeVariable;
+  muted_foreground: ThemeVariable;
+  primary: ThemeVariable;
+  primary_foreground: ThemeVariable;
+  secondary: ThemeVariable;
+  secondary_foreground: ThemeVariable;
+};
+
 export type ContentCreateAdminGroups = {
   files_allow_upload: Scalars['Boolean']['input'];
   files_max_storage_for_submit: Scalars['Int']['input'];
@@ -123,7 +160,7 @@ export type FilesAuthorizationCoreSessions = {
   __typename?: 'FilesAuthorizationCoreSessions';
   allow_upload: Scalars['Boolean']['output'];
   max_storage_for_submit: Scalars['Int']['output'];
-  space_used: Scalars['Int']['output'];
+  space_used: Scalars['Float']['output'];
   total_max_storage: Scalars['Int']['output'];
 };
 
@@ -150,6 +187,19 @@ export type GroupsPermissionsForumForums = {
   can_reply: Scalars['Boolean']['output'];
   can_view: Scalars['Boolean']['output'];
   group_id: Scalars['Int']['output'];
+};
+
+export type HslColor = {
+  __typename?: 'HslColor';
+  h: Scalars['Int']['output'];
+  l: Scalars['Int']['output'];
+  s: Scalars['Int']['output'];
+};
+
+export type HslColorInput = {
+  h: Scalars['Int']['input'];
+  l: Scalars['Int']['input'];
+  s: Scalars['Int']['input'];
 };
 
 export type ItemNavAdminPluginsAuthorization = {
@@ -242,6 +292,7 @@ export type Mutation = {
   admin__core_staff_administrators__delete: Scalars['String']['output'];
   admin__core_staff_moderators__create: ShowAdminStaffModerators;
   admin__core_staff_moderators__delete: Scalars['String']['output'];
+  admin__core_theme_editor__edit: Scalars['String']['output'];
   admin__core_themes__create: ShowAdminThemes;
   admin__core_themes__delete: Scalars['String']['output'];
   admin__core_themes__download: Scalars['String']['output'];
@@ -473,6 +524,11 @@ export type MutationAdmin__Core_Staff_Moderators__DeleteArgs = {
 };
 
 
+export type MutationAdmin__Core_Theme_Editor__EditArgs = {
+  colors: ColorsEditAdminThemeEditor;
+};
+
+
 export type MutationAdmin__Core_Themes__CreateArgs = {
   author: Scalars['String']['input'];
   author_url?: InputMaybe<Scalars['String']['input']>;
@@ -700,6 +756,7 @@ export type Query = {
   core_plugins__show: Array<ShowCorePluginsObj>;
   core_sessions__authorization: AuthorizationCoreSessionsObj;
   core_settings__show: ShowSettingsObj;
+  core_theme_editor__show: ShowCoreThemeEditorObj;
   core_themes__show: ShowCoreThemesObj;
   forum_forums__show: ShowForumForumsObj;
   forum_posts__show: ShowPostsForumsObj;
@@ -1255,6 +1312,11 @@ export type ShowCoreSessionDevices = {
   user_id: Scalars['Int']['output'];
 };
 
+export type ShowCoreThemeEditorObj = {
+  __typename?: 'ShowCoreThemeEditorObj';
+  colors: ColorsShowCoreThemeEditor;
+};
+
 export type ShowCoreThemes = {
   __typename?: 'ShowCoreThemes';
   default: Scalars['Boolean']['output'];
@@ -1407,6 +1469,17 @@ export type TextLanguage = {
 export type TextLanguageInput = {
   language_code: Scalars['String']['input'];
   value: Scalars['String']['input'];
+};
+
+export type ThemeVariable = {
+  __typename?: 'ThemeVariable';
+  dark: HslColor;
+  light: HslColor;
+};
+
+export type ThemeVariableInput = {
+  dark: HslColorInput;
+  light: HslColorInput;
 };
 
 export const TopicActions = {
@@ -1714,6 +1787,13 @@ export type Admin__Core_Main_Settings__EditMutationVariables = Exact<{
 
 
 export type Admin__Core_Main_Settings__EditMutation = { __typename?: 'Mutation', admin__core_main_settings__edit: { __typename?: 'EditAdminSettingsObj', site_name: string } };
+
+export type Admin__Core_Theme_Editor__EditMutationVariables = Exact<{
+  colors: ColorsEditAdminThemeEditor;
+}>;
+
+
+export type Admin__Core_Theme_Editor__EditMutation = { __typename?: 'Mutation', admin__core_theme_editor__edit: string };
 
 export type Admin__Core_Themes__CreateMutationVariables = Exact<{
   author: Scalars['String']['input'];
@@ -2041,6 +2121,11 @@ export type Core_Main_Settings__ShowQueryVariables = Exact<{ [key: string]: neve
 
 
 export type Core_Main_Settings__ShowQuery = { __typename?: 'Query', core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_short_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+
+export type Core_Theme_Editor__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Core_Theme_Editor__ShowQuery = { __typename?: 'Query', core_theme_editor__show: { __typename?: 'ShowCoreThemeEditorObj', colors: { __typename?: 'ColorsShowCoreThemeEditor', background: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, primary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, secondary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, primary_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, secondary_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, destructive: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, destructive_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, cover: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, cover_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, muted: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, muted_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, accent: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, accent_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, card: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, border: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } } } } };
 
 export type Admin_Core_Themes__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -2457,6 +2542,11 @@ export const Admin__Core_Main_Settings__Edit = gql`
   ) {
     site_name
   }
+}
+    `;
+export const Admin__Core_Theme_Editor__Edit = gql`
+    mutation Admin__core_theme_editor__edit($colors: ColorsEditAdminThemeEditor!) {
+  admin__core_theme_editor__edit(colors: $colors)
 }
     `;
 export const Admin__Core_Themes__Create = gql`
@@ -3165,6 +3255,194 @@ export const Core_Main_Settings__Show = gql`
     site_description {
       language_code
       value
+    }
+  }
+}
+    `;
+export const Core_Theme_Editor__Show = gql`
+    query Core_theme_editor__show {
+  core_theme_editor__show {
+    colors {
+      background {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      primary {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      secondary {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      primary_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      secondary_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      destructive {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      destructive_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      cover {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      cover_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      muted {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      muted_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      accent {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      accent_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      card {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      border {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
     }
   }
 }

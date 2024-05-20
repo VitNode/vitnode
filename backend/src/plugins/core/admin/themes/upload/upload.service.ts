@@ -126,7 +126,10 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
       // Update CSS files
       await fs.promises.writeFile(
         pathSCSSFile,
-        pathSCSSFileContent.replaceAll(/\.theme_\d+/g, `.theme_${id}`)
+        pathSCSSFileContent.replaceAll(
+          /\[data-theme-id="\d+"\]/g,
+          `[data-theme-id="${id}"]`
+        )
       );
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -171,7 +174,10 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
     // Update CSS files
     await fs.promises.writeFile(
       pathSCSSFile,
-      pathSCSSFileContent.replaceAll(/\.theme_\d+/g, `.theme_${theme.id}`)
+      pathSCSSFileContent.replaceAll(
+        /\[data-theme-id="\d+"\]/g,
+        `[data-theme-id="${theme.id}"]`
+      )
     );
 
     // Copy from temp to frontend

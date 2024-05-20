@@ -14,6 +14,7 @@ import { AdminLanguagesModule } from "./languages/languages.module";
 import { AdminMembersModule } from "./members/members.module";
 import { AdminNavModule } from "./nav/nav.module";
 import { AdminStaffModule } from "./staff/staff.module";
+import { AdminThemeEditorModule } from "./theme_editor/theme_editor.module";
 
 @Module({
   imports: [
@@ -29,7 +30,8 @@ import { AdminStaffModule } from "./staff/staff.module";
     AdminLanguagesModule,
     AdminMembersModule,
     AdminNavModule,
-    AdminStaffModule
+    AdminStaffModule,
+    AdminThemeEditorModule
   ]
 })
 export class AdminModule {}

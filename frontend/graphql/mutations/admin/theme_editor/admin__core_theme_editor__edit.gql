@@ -1,0 +1,3 @@
+mutation Admin__core_theme_editor__edit($colors: ColorsEditAdminThemeEditor!) {
+  admin__core_theme_editor__edit(colors: $colors)
+}

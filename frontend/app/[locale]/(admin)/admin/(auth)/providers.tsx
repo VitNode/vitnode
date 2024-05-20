@@ -10,7 +10,7 @@ interface Props {
   data: Admin__Sessions__AuthorizationQuery;
 }
 
-export const SessionAdminProvider = ({
+export const Providers = ({
   children,
   data: {
     admin__sessions__authorization: { nav, user: session, version }

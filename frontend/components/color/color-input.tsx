@@ -8,7 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { PickerColor } from "./picker/picker";
 import { Button } from "../ui/button";
 import { cn } from "@/functions/classnames";
-import { getHSLFromString } from "@/functions/colors";
+import { getHSLFromString, isColorBrightness } from "@/functions/colors";
 
 interface Props {
   onChange: (value: string) => void;
@@ -30,7 +30,7 @@ export const ColorInput = forwardRef<HTMLButtonElement, Props>(
       onChange(color ? `hsl(${color.h}, ${color.s}%, ${color.l}%)` : "");
     }, [color]);
 
-    const isColorBrightness = color && color.l > 55;
+    const colorBrightness = color ? isColorBrightness(color) : false;
 
     return (
       <Popover open={open} onOpenChange={setOpen}>
@@ -39,8 +39,8 @@ export const ColorInput = forwardRef<HTMLButtonElement, Props>(
             <Button
               variant="outline"
               className={cn("justify-start flex-1 max-w-52", {
-                "text-black": color && isColorBrightness,
-                "text-white": color && !isColorBrightness
+                "text-black": color && colorBrightness,
+                "text-white": color && !colorBrightness
               })}
               style={{
                 backgroundColor: color
@@ -68,7 +68,6 @@ export const ColorInput = forwardRef<HTMLButtonElement, Props>(
             <PickerColor
               color={color}
               setColor={setColor}
-              onClose={() => setOpen(false)}
               disableRemoveColor={disableRemoveColor}
             />
           </PopoverContent>

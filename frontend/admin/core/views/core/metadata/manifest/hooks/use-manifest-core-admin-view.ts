@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { CONFIG } from "@/config";
 import type { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";
-import { colorConverter, getHSLFromString } from "@/functions/colors";
+import { convertColor, getHSLFromString } from "@/functions/colors";
 
 export const useManifestCoreAdminView = ({
   admin__core_manifest_metadata__show: data
@@ -20,8 +20,8 @@ export const useManifestCoreAdminView = ({
     background_color: z.string().min(1)
   });
 
-  const themeColor = colorConverter.hexToHSL(data.theme_color);
-  const backgroundColor = colorConverter.hexToHSL(data.background_color);
+  const themeColor = convertColor.hexToHSL(data.theme_color);
+  const backgroundColor = convertColor.hexToHSL(data.background_color);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,9 +42,9 @@ export const useManifestCoreAdminView = ({
     const mutation = await mutationApi({
       ...values,
       startUrl: values.start_url,
-      themeColor: themeColor ? colorConverter.hslToHex(themeColor) : "",
+      themeColor: themeColor ? convertColor.hslToHex(themeColor) : "",
       backgroundColor: backgroundColor
-        ? colorConverter.hslToHex(backgroundColor)
+        ? convertColor.hslToHex(backgroundColor)
         : ""
     });
 

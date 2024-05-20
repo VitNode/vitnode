@@ -13,9 +13,9 @@ import {
 } from "@/graphql/hooks";
 import { cn } from "@/functions/classnames";
 import { CatchLayout } from "./catch";
+import { getConfigFile } from "@/config/helpers";
 import "@/app/[locale]/(admin)/admin/global.css";
 import "./global.css";
-import { getConfigFile } from "@/config/helpers";
 
 const getData = async () => {
   const { data } = await fetcher<
@@ -78,8 +78,12 @@ export default async function LocaleLayout({
     };
 
     return (
-      <html lang={locale} className={cn(inter.variable, "vitnode")}>
-        <body className={`theme_${data.core_settings__show.theme_id ?? 1}`}>
+      <html
+        lang={locale}
+        className={cn(inter.variable, "vitnode")}
+        data-theme-id={data.core_settings__show.theme_id ?? 1}
+      >
+        <body>
           <Providers data={data} config={config}>
             <NextIntlClientProvider messages={messages}>
               {children}

@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from "@nestjs/graphql";
+import { Field, Float, Int, ObjectType } from "@nestjs/graphql";
 
 import { User } from "@/utils/decorators/user.decorator";
 
@@ -28,7 +28,7 @@ class FilesAuthorizationCoreSessions {
   @Field(() => Int)
   max_storage_for_submit: number;
 
-  @Field(() => Int)
+  @Field(() => Float)
   space_used: number;
 }
 

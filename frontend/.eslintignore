@@ -17,3 +17,5 @@ next.config.js
 tailwind.config.js
 postcss.config.js
 vitest.config.mts
+.next
+.turbo

@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 export const DarkLightModeSwitcher = () => {
-  const t = useTranslations("core");
+  const t = useTranslations("core.user-bar.dark_light_switcher");
   const { setTheme, theme } = useTheme();
 
   return (
@@ -24,7 +24,7 @@ export const DarkLightModeSwitcher = () => {
           variant="ghost"
           size="icon"
           className="relative"
-          ariaLabel={t("user-bar.dark_light_switcher.toggle")}
+          ariaLabel={t("toggle")}
         >
           <Sun className="size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Moon className="absolute size-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
@@ -41,16 +41,16 @@ export const DarkLightModeSwitcher = () => {
             value="light"
             onClick={() => setTheme("light")}
           >
-            <span>{t("user-bar.dark_light_switcher.light")}</span>
+            <span>{t("light")}</span>
           </DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="dark" onClick={() => setTheme("dark")}>
-            <span>{t("user-bar.dark_light_switcher.dark")}</span>
+            <span>{t("dark")}</span>
           </DropdownMenuRadioItem>
           <DropdownMenuRadioItem
             value="system"
             onClick={() => setTheme("system")}
           >
-            <span>{t("user-bar.dark_light_switcher.system")}</span>
+            <span>{t("system")}</span>
           </DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>

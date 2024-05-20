@@ -14,7 +14,6 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
-    "test": "turbo test:once",
     "start": "turbo start",
     "preinstall": "npx only-allow pnpm",
     "config:init": "cd frontend && pnpm config:init && cd ..",

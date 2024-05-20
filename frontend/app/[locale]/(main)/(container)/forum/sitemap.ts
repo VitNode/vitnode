@@ -9,7 +9,7 @@ import {
   type Forum_Forums__Show__SitemapQuery,
   type Forum_Forums__Show__SitemapQueryVariables
 } from "@/graphql/hooks";
-import { getConvertNameToLink, useTextLang } from "@/hooks/core/use-text-lang";
+import { getConvertNameToLink, getTextLang } from "@/hooks/core/use-text-lang";
 
 const getData = async () => {
   const { data } = await fetcher<
@@ -27,9 +27,16 @@ const getData = async () => {
   return data;
 };
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { convertNameToLink } = useTextLang();
+interface Props {
+  params: {
+    locale: string;
+  };
+}
+
+export default async function sitemap({
+  params: { locale }
+}: Props): Promise<MetadataRoute.Sitemap> {
+  const { convertNameToLink } = getTextLang({ locale });
   const [session, forums] = await Promise.all([getSessionData(), getData()]);
   const {
     data: {

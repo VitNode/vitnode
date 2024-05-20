@@ -11,6 +11,7 @@ import { core_languages } from "../../admin/database/schema/languages";
 import { DatabaseService } from "@/database/database.service";
 import { Ctx } from "@/utils/types/context.type";
 import { ABSOLUTE_PATHS, getConfigFile } from "@/config";
+import { getThemeId } from "../helpers/get-theme-id";
 
 @Injectable()
 export class ShowSettingsService {
@@ -18,25 +19,6 @@ export class ShowSettingsService {
     private databaseService: DatabaseService,
     private configService: ConfigService
   ) {}
-
-  protected async getThemeId({
-    req
-  }: Pick<Ctx, "req">): Promise<number | null> {
-    const cookie_theme_id: string | null =
-      req.cookies[this.configService.getOrThrow("cookies.theme_id.name")];
-
-    if (cookie_theme_id) {
-      const theme = await this.databaseService.db.query.core_themes.findFirst({
-        where: (table, { eq }) => eq(table.id, parseInt(cookie_theme_id))
-      });
-
-      if (theme) {
-        return theme.id;
-      }
-    }
-
-    return null;
-  }
 
   protected getManifest({
     langCodes
@@ -82,7 +64,11 @@ export class ShowSettingsService {
         language_code: item.code,
         value: item.site_copyright
       })),
-      theme_id: await this.getThemeId({ req })
+      theme_id: await getThemeId({
+        ctx: { req },
+        databaseService: this.databaseService,
+        configService: this.configService
+      })
     };
   }
 }

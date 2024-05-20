@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { getTopicData } from "./query-api";
-import { useTextLang } from "@/hooks/core/use-text-lang";
+import { getTextLang } from "@/hooks/core/use-text-lang";
 import type { ErrorType } from "@/graphql/fetcher";
 import { getSessionData } from "@/functions/get-session-data";
 import { ErrorViewSSR } from "@/components/views/error-view-ssr";
@@ -16,9 +16,12 @@ interface Props {
   };
 }
 
-export default async function Layout({ children, params: { id } }: Props) {
+export default async function Layout({
+  children,
+  params: { id, locale }
+}: Props) {
   const { theme_id } = await getSessionData();
-  const { convertNameToLink, convertText } = useTextLang();
+  const { convertNameToLink, convertText } = getTextLang({ locale });
 
   try {
     const data = await getTopicData({ id });
