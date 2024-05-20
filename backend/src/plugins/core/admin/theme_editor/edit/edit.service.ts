@@ -9,6 +9,7 @@ import * as fs from "fs";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 
 import { EditAdminThemeEditorArgs, ThemeVariableInput } from "./dto/edit.args";
+import { setRebuildRequired } from "@/functions/rebuild-required";
 
 export const keysFromCSSThemeEditor = [
   "primary",
@@ -98,6 +99,7 @@ export class EditAdminThemeEditorService {
     });
 
     fs.writeFileSync(pathToCss, colorsStringUpdate);
+    await setRebuildRequired({ set: "themes" });
 
     return "Success!";
   }

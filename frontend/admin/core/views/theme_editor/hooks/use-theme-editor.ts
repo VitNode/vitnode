@@ -47,7 +47,9 @@ interface Args {
   direction: number;
   form: UseFormReturn<ThemeEditorFormObj>;
   onSubmit: (values: ThemeEditorFormObj) => void;
+  openSubmitDialog: boolean;
   setActiveTab: (tab: ThemeEditorTab) => void;
+  setOpenSubmitDialog: (open: boolean) => void;
 }
 
 export const ThemeEditorContext = createContext<Args>({
@@ -57,7 +59,9 @@ export const ThemeEditorContext = createContext<Args>({
   form: {} as UseFormReturn<ThemeEditorFormObj>,
   onSubmit: () => {},
   changeColor: () => {},
-  activeTheme: "light"
+  activeTheme: "light",
+  openSubmitDialog: false,
+  setOpenSubmitDialog: () => {}
 });
 
 export const useThemeEditor = () => useContext(ThemeEditorContext);

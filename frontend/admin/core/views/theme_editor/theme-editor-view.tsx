@@ -12,8 +12,7 @@ import { Loader } from "@/components/loader";
 import type { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
 
 export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
-  const { activeTheme, changeColor, form, iframeRef, onSubmit } =
-    useThemeEditorApi(props);
+  const { iframeRef, ...rest } = useThemeEditorApi(props);
   const [activeMode, setActiveMode] = useState<ThemeEditorViewEnum>(
     ThemeEditorViewEnum.Desktop
   );
@@ -37,10 +36,7 @@ export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
         activeTab,
         setActiveTab,
         direction,
-        form,
-        onSubmit,
-        changeColor,
-        activeTheme
+        ...rest
       }}
     >
       <div className="flex h-screen bg-card w-full">

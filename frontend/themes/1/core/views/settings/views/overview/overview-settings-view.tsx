@@ -6,7 +6,9 @@ export default function OverviewSettingsView() {
     <Card>
       <HeaderOverviewSettings />
       <div className="size-10 bg-primary" /> primary
-      <div className="size-10 bg-secondary" /> secondary
+      <div className="bg-secondary p-10 text-secondary-foreground">
+        secondary
+      </div>
       <div className="size-10 bg-muted" /> muted
       <div className="size-10 bg-accent" /> accent
       <div className="bg-destructive p-10 text-destructive-foreground">

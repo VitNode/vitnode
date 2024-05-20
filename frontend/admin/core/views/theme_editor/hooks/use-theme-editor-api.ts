@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 import type { HslColor } from "react-colorful";
 import { toast } from "sonner";
@@ -9,6 +9,8 @@ import { useTranslations } from "next-intl";
 
 import type { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";
+import { CONFIG } from "@/config";
+import { useRouter } from "@/i18n";
 
 const zObjectHsl = z.object({
   h: z.number(),
@@ -40,7 +42,10 @@ export const formSchemaColorsThemeEditor = z.object({
 export const useThemeEditorApi = ({
   core_theme_editor__show
 }: Core_Theme_Editor__ShowQuery) => {
-  const t = useTranslations("core");
+  const [openSubmitDialog, setOpenSubmitDialog] = useState(false);
+  const t = useTranslations("core.theme_editor.submit");
+  const tCore = useTranslations("core");
+  const { push } = useRouter();
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const formSchema = z.object({
     colors: formSchemaColorsThemeEditor
@@ -117,12 +122,19 @@ export const useThemeEditorApi = ({
     });
 
     if (mutation.error) {
-      toast.error(t("errors.title"), {
-        description: t("errors.internal_server_error")
+      toast.error(tCore("errors.title"), {
+        description: tCore("errors.internal_server_error")
       });
 
       return;
     }
+
+    setOpenSubmitDialog(false);
+    push("/");
+
+    toast.success(t("success.title"), {
+      description: !CONFIG.node_development && t("success.desc")
+    });
   };
 
   const changeColor = ({
@@ -159,6 +171,8 @@ export const useThemeEditorApi = ({
     onSubmit,
     iframeRef,
     changeColor,
-    activeTheme
+    activeTheme,
+    openSubmitDialog,
+    setOpenSubmitDialog
   };
 };

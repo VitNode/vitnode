@@ -19,7 +19,7 @@ export const MainTabThemeEditor = () => {
           variant="ghost"
           onClick={() => setActiveTab(ThemeEditorTab.Colors)}
         >
-          <span>Colors</span>
+          <span>{t("colors.title")}</span>
           <ChevronRight className="ml-auto text-muted-foreground" />
         </Button>
       </div>

@@ -5,11 +5,19 @@ import { ThemeEditorTab, useThemeEditor } from "../hooks/use-theme-editor";
 import { ColorTabThemeEditor } from "./tabs/color-tab";
 import { MainTabThemeEditor } from "./tabs/main";
 import { Form } from "@/components/ui/form";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n";
+import { SubmitContentThemeEditor } from "./submit";
 
 export const ContentThemeEditor = () => {
-  const { activeTab, direction, form, onSubmit } = useThemeEditor();
+  const {
+    activeTab,
+    direction,
+    form,
+    onSubmit,
+    openSubmitDialog,
+    setOpenSubmitDialog
+  } = useThemeEditor();
   const t = useTranslations("core");
   const tabs = {
     [ThemeEditorTab.Main]: <MainTabThemeEditor />,
@@ -56,9 +64,13 @@ export const ContentThemeEditor = () => {
               >
                 {t("cancel")}
               </Link>
-              <Button type="submit" className="w-full" size="sm">
-                {t("save")}
-              </Button>
+
+              <SubmitContentThemeEditor
+                onClick={() => form.handleSubmit(onSubmit)()}
+                isPending={form.formState.isSubmitting}
+                openSubmitDialog={openSubmitDialog}
+                setOpenSubmitDialog={setOpenSubmitDialog}
+              />
             </div>
           </AnimatePresence>
         </form>

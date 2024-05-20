@@ -45,10 +45,23 @@
       "tablet": "Tablet",
       "mobile": "Mobile",
       "colors": {
+        "title": "Kolory",
         "primary": "Główny",
         "secondary": "Dodatkowy",
         "cover": "Okładka",
         "destructive": "Niszczący"
+      },
+      "submit": {
+        "desc": "Ta akcja wymaga przebudowania aplikacji. Po zapisaniu motywu nie wszystko będzie widoczne, dopóki aplikacja nie zostanie przebudowana.",
+        "dev": {
+          "title": "Jesteś w trybie deweloperskim!",
+          "desc": "Nie musisz się martwić o przebudowę aplikacji. Zmiany będą widoczne natychmiast."
+        },
+        "submit": "Zapisz motyw",
+        "success": {
+          "title": "Motyw został zapisany pomyślnie!",
+          "desc": "Zmiany będą widoczne po przebudowie aplikacji."
+        }
       }
     },
     "colors": {
