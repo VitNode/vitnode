@@ -4,8 +4,11 @@ import * as z from "zod";
 import { useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 import type { HslColor } from "react-colorful";
+import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 import type { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
+import { mutationApi } from "./mutation-api";
 
 const zObjectHsl = z.object({
   h: z.number(),
@@ -37,6 +40,7 @@ export const formSchemaColorsThemeEditor = z.object({
 export const useThemeEditorApi = ({
   core_theme_editor__show
 }: Core_Theme_Editor__ShowQuery) => {
+  const t = useTranslations("core");
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const formSchema = z.object({
     colors: formSchemaColorsThemeEditor
@@ -49,7 +53,15 @@ export const useThemeEditorApi = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       colors: {
-        ...core_theme_editor__show.colors,
+        primary: core_theme_editor__show.colors.primary,
+        secondary: core_theme_editor__show.colors.secondary,
+        background: core_theme_editor__show.colors.background,
+        destructive: core_theme_editor__show.colors.destructive,
+        cover: core_theme_editor__show.colors.cover,
+        accent: core_theme_editor__show.colors.accent,
+        muted: core_theme_editor__show.colors.muted,
+        card: core_theme_editor__show.colors.card,
+        border: core_theme_editor__show.colors.border,
         ["primary-foreground"]:
           core_theme_editor__show.colors.primary_foreground,
         ["secondary-foreground"]:
@@ -83,9 +95,34 @@ export const useThemeEditorApi = ({
     });
   }, [activeTheme]);
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    // eslint-disable-next-line no-console
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const mutation = await mutationApi({
+      colors: {
+        primary: values.colors.primary,
+        secondary: values.colors.secondary,
+        background: values.colors.background,
+        destructive: values.colors.destructive,
+        cover: values.colors.cover,
+        accent: values.colors.accent,
+        muted: values.colors.muted,
+        card: values.colors.card,
+        border: values.colors.border,
+        primary_foreground: values.colors["primary-foreground"],
+        secondary_foreground: values.colors["secondary-foreground"],
+        destructive_foreground: values.colors["destructive-foreground"],
+        cover_foreground: values.colors["cover-foreground"],
+        accent_foreground: values.colors["accent-foreground"],
+        muted_foreground: values.colors["muted-foreground"]
+      }
+    });
+
+    if (mutation.error) {
+      toast.error(t("errors.title"), {
+        description: t("errors.internal_server_error")
+      });
+
+      return;
+    }
   };
 
   const changeColor = ({

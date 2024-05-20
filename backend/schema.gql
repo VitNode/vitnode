@@ -50,6 +50,24 @@ type ChildrenShowForumForums {
   position: Int!
 }
 
+input ColorsEditAdminThemeEditor {
+  accent: ThemeVariableInput!
+  accent_foreground: ThemeVariableInput!
+  background: ThemeVariableInput!
+  border: ThemeVariableInput!
+  card: ThemeVariableInput!
+  cover: ThemeVariableInput!
+  cover_foreground: ThemeVariableInput!
+  destructive: ThemeVariableInput!
+  destructive_foreground: ThemeVariableInput!
+  muted: ThemeVariableInput!
+  muted_foreground: ThemeVariableInput!
+  primary: ThemeVariableInput!
+  primary_foreground: ThemeVariableInput!
+  secondary: ThemeVariableInput!
+  secondary_foreground: ThemeVariableInput!
+}
+
 type ColorsShowCoreThemeEditor {
   accent: ThemeVariable!
   accent_foreground: ThemeVariable!
@@ -153,6 +171,12 @@ type HslColor {
   s: Int!
 }
 
+input HslColorInput {
+  h: Int!
+  l: Int!
+  s: Int!
+}
+
 type ItemNavAdminPluginsAuthorization {
   code: String!
   href: String!
@@ -235,6 +259,7 @@ type Mutation {
   admin__core_staff_administrators__delete(id: Int!): String!
   admin__core_staff_moderators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffModerators!
   admin__core_staff_moderators__delete(id: Int!): String!
+  admin__core_theme_editor__edit(colors: ColorsEditAdminThemeEditor!): String!
   admin__core_themes__create(author: String!, author_url: String, name: String!, support_url: String!): ShowAdminThemes!
   admin__core_themes__delete(id: Int!): String!
   admin__core_themes__download(id: Int!, version: String, version_code: Int): String!
@@ -348,7 +373,7 @@ type Query {
   core_plugins__show: [ShowCorePluginsObj!]!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_settings__show: ShowSettingsObj!
-  core_theme_editor__show: ShowCoreThemeEditor!
+  core_theme_editor__show: ShowCoreThemeEditorObj!
   core_themes__show(cursor: Int, first: Int, last: Int): ShowCoreThemesObj!
   forum_forums__show(
     cursor: Int
@@ -715,7 +740,7 @@ type ShowCoreSessionDevices {
   user_id: Int!
 }
 
-type ShowCoreThemeEditor {
+type ShowCoreThemeEditorObj {
   colors: ColorsShowCoreThemeEditor!
 }
 
@@ -857,6 +882,11 @@ input TextLanguageInput {
 type ThemeVariable {
   dark: HslColor!
   light: HslColor!
+}
+
+input ThemeVariableInput {
+  dark: HslColorInput!
+  light: HslColorInput!
 }
 
 enum TopicActions {

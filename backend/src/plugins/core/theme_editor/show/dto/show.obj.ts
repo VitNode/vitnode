@@ -70,7 +70,7 @@ export class ColorsShowCoreThemeEditor {
 }
 
 @ObjectType()
-export class ShowCoreThemeEditor {
+export class ShowCoreThemeEditorObj {
   @Field(() => ColorsShowCoreThemeEditor)
   colors: ColorsShowCoreThemeEditor;
 }

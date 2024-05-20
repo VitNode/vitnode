@@ -56,12 +56,7 @@ export const ContentThemeEditor = () => {
               >
                 {t("cancel")}
               </Link>
-              <Button
-                type="submit"
-                className="w-full"
-                size="sm"
-                disabled={!form.formState.isValid}
-              >
+              <Button type="submit" className="w-full" size="sm">
                 {t("save")}
               </Button>
             </div>

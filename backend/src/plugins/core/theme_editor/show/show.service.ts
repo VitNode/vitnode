@@ -7,7 +7,12 @@ import { ABSOLUTE_PATHS } from "@/config";
 import { join } from "path";
 import * as fs from "fs";
 import { NotFoundError } from "@/utils/errors/not-found-error";
-import { HslColor, ShowCoreThemeEditor } from "./dto/show.obj";
+import {
+  ColorsShowCoreThemeEditor,
+  HslColor,
+  ShowCoreThemeEditorObj
+} from "./dto/show.obj";
+import { keysFromCSSThemeEditor } from "../../admin/theme_editor/edit/edit.service";
 
 @Injectable()
 export class ShowCoreThemeEditorService {
@@ -33,16 +38,20 @@ export class ShowCoreThemeEditorService {
 
   protected getVariable({
     cssAsString,
-    variable
+    variable,
+    themeId
   }: {
     cssAsString: string;
     variable: string;
+    themeId: number;
   }): {
     light: HslColor;
     dark: HslColor;
   } {
-    const regex =
-      /html\[data-theme-id="1"\]\s*{([^}]*)}|html\[data-theme-id="1"\]\.dark\s*{([^}]*)}/g;
+    const regex = new RegExp(
+      `html\\[data-theme-id="${themeId}"\\]\\s*{([^}]*)}|html\\[data-theme-id="${themeId}"\\]\\.dark\\s*{([^}]*)}`,
+      "g"
+    );
     let match: RegExpExecArray | null;
     const values = {
       light: "",
@@ -69,15 +78,15 @@ export class ShowCoreThemeEditorService {
     };
   }
 
-  async show({ req }: Ctx): Promise<ShowCoreThemeEditor> {
-    const theme_id = await getThemeId({
+  async show({ req }: Ctx): Promise<ShowCoreThemeEditorObj> {
+    const themeId = await getThemeId({
       ctx: { req },
       databaseService: this.databaseService,
       configService: this.configService
     });
     const pathToCss = join(
       ABSOLUTE_PATHS.frontend.themes,
-      `${theme_id}`,
+      `${themeId}`,
       "core",
       "layout",
       "global.css"
@@ -87,71 +96,22 @@ export class ShowCoreThemeEditorService {
       throw new NotFoundError("CSS file in Theme not found!");
     }
 
-    const cssString = fs.readFileSync(pathToCss, "utf8");
+    const cssAsString = fs.readFileSync(pathToCss, "utf8");
+    const colors: ColorsShowCoreThemeEditor = keysFromCSSThemeEditor.reduce(
+      (acc, variable) => {
+        acc[variable.replace("-", "_")] = this.getVariable({
+          cssAsString,
+          variable,
+          themeId
+        });
+
+        return acc;
+      },
+      {} as ColorsShowCoreThemeEditor
+    );
 
     return {
-      colors: {
-        primary: this.getVariable({
-          cssAsString: cssString,
-          variable: "primary"
-        }),
-        primary_foreground: this.getVariable({
-          cssAsString: cssString,
-          variable: "primary-foreground"
-        }),
-        background: this.getVariable({
-          cssAsString: cssString,
-          variable: "background"
-        }),
-        secondary: this.getVariable({
-          cssAsString: cssString,
-          variable: "secondary"
-        }),
-        secondary_foreground: this.getVariable({
-          cssAsString: cssString,
-          variable: "secondary-foreground"
-        }),
-        destructive: this.getVariable({
-          cssAsString: cssString,
-          variable: "destructive"
-        }),
-        destructive_foreground: this.getVariable({
-          cssAsString: cssString,
-          variable: "destructive-foreground"
-        }),
-        cover: this.getVariable({
-          cssAsString: cssString,
-          variable: "cover"
-        }),
-        cover_foreground: this.getVariable({
-          cssAsString: cssString,
-          variable: "cover-foreground"
-        }),
-        muted: this.getVariable({
-          cssAsString: cssString,
-          variable: "muted"
-        }),
-        muted_foreground: this.getVariable({
-          cssAsString: cssString,
-          variable: "muted-foreground"
-        }),
-        accent: this.getVariable({
-          cssAsString: cssString,
-          variable: "accent"
-        }),
-        accent_foreground: this.getVariable({
-          cssAsString: cssString,
-          variable: "accent-foreground"
-        }),
-        card: this.getVariable({
-          cssAsString: cssString,
-          variable: "card"
-        }),
-        border: this.getVariable({
-          cssAsString: cssString,
-          variable: "border"
-        })
-      }
+      colors
     };
   }
 }
