@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Loader } from "@/components/loader";
 
-const Content = lazy(() =>
+const Content = lazy(async () =>
   import("../create-edit/create-edit").then(module => ({
     default: module.CreateEditNavDevPluginAdmin
   }))

@@ -13,7 +13,7 @@ import { usePathname, useRouter } from "@/i18n";
 import { zodInput } from "@/functions/zod";
 
 export interface CreateEditFormGroupsMembersAdminArgs {
-  data?: Pick<ShowAdminGroups, "name" | "id" | "content">;
+  data?: Pick<ShowAdminGroups, "content" | "id" | "name">;
 }
 
 export const useCreateEditFormGroupsMembersAdmin = ({

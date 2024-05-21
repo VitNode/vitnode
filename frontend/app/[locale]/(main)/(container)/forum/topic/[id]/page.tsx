@@ -1,6 +1,6 @@
 import { lazy, type LazyExoticComponent } from "react";
 
-import { type TopicViewProps } from "@/themes/1/forum/views/forum/topic/topic-view";
+import type { TopicViewProps } from "@/themes/1/forum/views/forum/topic/topic-view";
 import { getSessionData } from "@/functions/get-session-data";
 import { getTopicData } from "./query-api";
 
@@ -22,9 +22,9 @@ export default async function Page({
 
   const PageFromTheme: LazyExoticComponent<
     (props: TopicViewProps) => JSX.Element
-  > = lazy(() =>
+  > = lazy(async () =>
     import(`@/themes/${theme_id}/forum/views/forum/topic/topic-view`).catch(
-      () => import("@/themes/1/forum/views/forum/topic/topic-view")
+      async () => import("@/themes/1/forum/views/forum/topic/topic-view")
     )
   );
 

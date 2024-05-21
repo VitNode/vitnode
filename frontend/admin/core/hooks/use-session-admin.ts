@@ -7,7 +7,7 @@ import type {
 
 interface Args {
   nav: NavAdminPluginsAuthorization[];
-  session: Omit<AuthorizationCurrentUserObj, "posts"> | undefined | null;
+  session: Omit<AuthorizationCurrentUserObj, "posts"> | null | undefined;
   version: string;
 }
 

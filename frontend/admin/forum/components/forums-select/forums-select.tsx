@@ -14,7 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import type { TextLanguage } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 
-const Content = lazy(() =>
+const Content = lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentForumsSelect
   }))
@@ -45,7 +45,7 @@ interface SingleProps extends Props {
 
 export const ForumsSelect = forwardRef<
   HTMLButtonElement,
-  SingleProps | MultiProps
+  MultiProps | SingleProps
 >(
   (
     {

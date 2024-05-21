@@ -2,6 +2,7 @@ import { Context, Query, Resolver } from "@nestjs/graphql";
 
 import { ShowSettingsService } from "./show.service";
 import { ShowSettingsObj } from "./dto/show.obj";
+
 import { Ctx } from "@/utils/types/context.type";
 
 @Resolver()

@@ -11,7 +11,7 @@ import {
 import { useDateFormat } from "./hooks/use-date-format";
 
 interface Props {
-  date: number | Date;
+  date: Date | number;
   className?: string;
 }
 

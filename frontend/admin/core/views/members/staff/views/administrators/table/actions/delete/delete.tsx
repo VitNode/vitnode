@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
 import type { ShowAdminStaffAdministrators } from "@/graphql/hooks";
 
-const ContentDeleteActionsTableAdministratorsStaffAdmin = lazy(() =>
+const ContentDeleteActionsTableAdministratorsStaffAdmin = lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentDeleteActionsAdministratorsStaffAdmin
   }))

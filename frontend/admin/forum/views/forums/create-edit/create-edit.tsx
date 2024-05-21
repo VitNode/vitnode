@@ -16,12 +16,12 @@ import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 import type { ShowForumForumsAdminWithChildren } from "../table/hooks/use-forum-forums-admin-api";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 
-const MainContentCreateEditFormForumAdmin = lazy(() =>
+const MainContentCreateEditFormForumAdmin = lazy(async () =>
   import("./content/main").then(module => ({
     default: module.MainContentCreateEditFormForumAdmin
   }))
 );
-const PermissionsContentCreateEditFormForumAdmin = lazy(() =>
+const PermissionsContentCreateEditFormForumAdmin = lazy(async () =>
   import("./content/permissions/permissions").then(module => ({
     default: module.PermissionsContentCreateEditFormForumAdmin
   }))

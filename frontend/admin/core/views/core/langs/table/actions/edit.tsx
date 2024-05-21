@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Loader } from "@/components/loader";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 
-const Content = lazy(() =>
+const Content = lazy(async () =>
   import("../../create-edit/create-edit").then(module => ({
     default: module.CreateEditLangAdmin
   }))

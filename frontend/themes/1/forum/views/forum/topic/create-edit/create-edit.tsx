@@ -28,7 +28,7 @@ import { useCreateEditTopic } from "@/hooks/forum/topics/create-edit/use-create-
 import { Editor } from "@/components/editor/editor";
 
 export interface EditTopicData
-  extends Pick<ShowTopicsForums, "title" | "content" | "id"> {}
+  extends Pick<ShowTopicsForums, "content" | "id" | "title"> {}
 
 interface Props {
   data?: EditTopicData;

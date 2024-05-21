@@ -10,7 +10,7 @@ import { PreviewFilesInput } from "./preview/preview-files-input";
 export interface InputProps
   extends Omit<
     InputHTMLAttributes<HTMLInputElement>,
-    "type" | "onChange" | "value"
+    "onChange" | "type" | "value"
   > {
   acceptExtensions: string[];
   maxFileSizeInMb: number;

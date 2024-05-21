@@ -12,7 +12,7 @@ export const ItemNavDrawerQuickMenu = ({
   href,
   id,
   name
-}: Omit<ShowCoreNav, "children" | "__typename">) => {
+}: Omit<ShowCoreNav, "__typename" | "children">) => {
   const { convertText } = useTextLang();
   const pathname = usePathname();
   const active =

@@ -15,7 +15,7 @@ import {
   TooltipTrigger
 } from "@/components/ui/tooltip";
 
-const Content = lazy(() =>
+const Content = lazy(async () =>
   import("../../create-edit/create-edit").then(module => ({
     default: module.ContentCreateEditNavAdmin
   }))

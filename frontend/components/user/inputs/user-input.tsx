@@ -12,7 +12,7 @@ import {
 import { Loader } from "@/components/loader";
 import { Badge } from "@/components/ui/badge";
 
-const UserInputContent = lazy(() =>
+const UserInputContent = lazy(async () =>
   import("./content/content").then(module => ({
     default: module.UserInputContent
   }))
@@ -42,7 +42,7 @@ interface SingleProps extends Props {
 
 export const UserInput = forwardRef<
   HTMLButtonElement,
-  SingleProps | MultiProps
+  MultiProps | SingleProps
 >(({ className, multiple, onChange, value: currentValue, ...rest }, ref) => {
   const t = useTranslations("core.user_input");
   const values = Array.isArray(currentValue)

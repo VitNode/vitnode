@@ -23,7 +23,7 @@ interface Props {
   children: ReactNode;
 }
 
-export default function RootLayout({ children }: Props) {
+export default async function RootLayout({ children }: Props) {
   if (process.env.NEXT_PUBLIC_DEBUG === "true") {
     console.log(
       "NEXT_PUBLIC_FRONTEND_URL",

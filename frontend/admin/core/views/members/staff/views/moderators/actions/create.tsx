@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
 
-const CreateEditFormModeratorsStaffAdmin = lazy(() =>
+const CreateEditFormModeratorsStaffAdmin = lazy(async () =>
   import("../create-edit-form/create-edit-form").then(module => ({
     default: module.CreateEditFormModeratorsStaffAdmin
   }))

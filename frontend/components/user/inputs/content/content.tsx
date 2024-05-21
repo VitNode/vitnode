@@ -28,7 +28,7 @@ export const UserInputContent = (props: Props) => {
   const { data, isLoading } = useQuery({
     queryKey: ["Core_Members__Show__Search", { search }],
     queryFn: async () =>
-      await queryApi({
+      queryApi({
         first: 10,
         search
       })

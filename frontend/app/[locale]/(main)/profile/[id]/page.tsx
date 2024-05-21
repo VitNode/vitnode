@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { lazy, type LazyExoticComponent } from "react";
 
-import { type ProfileViewProps } from "@/themes/1/core/views/profile/profile-view";
+import type { ProfileViewProps } from "@/themes/1/core/views/profile/profile-view";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Members__Profiles,
@@ -53,9 +53,9 @@ export default async function Page({ params: { id } }: Props) {
   const { theme_id } = await getSessionData();
   const PageFromTheme: LazyExoticComponent<
     (props: ProfileViewProps) => JSX.Element
-  > = lazy(() =>
+  > = lazy(async () =>
     import(`@/themes/${theme_id}/core/views/profile/profile-view`).catch(
-      () => import("@/themes/1/core/views/profile/profile-view")
+      async () => import("@/themes/1/core/views/profile/profile-view")
     )
   );
 

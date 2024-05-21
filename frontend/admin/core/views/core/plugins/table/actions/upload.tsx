@@ -18,7 +18,7 @@ export const UploadPluginActionsAdmin = (
 ) => {
   const t = useTranslations("core");
 
-  const Content = lazy(() =>
+  const Content = lazy(async () =>
     import("../../upload/upload").then(module => ({
       default: module.UploadPluginAdmin
     }))

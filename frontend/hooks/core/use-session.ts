@@ -9,7 +9,7 @@ import type {
 interface Args {
   files: Core_Sessions__AuthorizationQuery["core_sessions__authorization"]["files"];
   nav: ShowCoreNav[];
-  session: Omit<AuthorizationCurrentUserObj, "posts"> | undefined | null;
+  session: Omit<AuthorizationCurrentUserObj, "posts"> | null | undefined;
 }
 
 export const SessionContext = createContext<Args>({

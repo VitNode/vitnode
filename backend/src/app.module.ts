@@ -1,15 +1,17 @@
+import { join } from "path";
+
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { JwtModule } from "@nestjs/jwt";
-import { ABSOLUTE_PATHS, configForAppModule } from "./config";
-import { join } from "path";
 import { ScheduleModule } from "@nestjs/schedule";
-import { PluginsModule } from "./plugins/plugins.module";
 import { GraphQLModule } from "@nestjs/graphql";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { ApolloServerPluginLandingPageLocalDefault } from "@apollo/server/plugin/landingPage/default";
-import { DatabaseModule } from "./database/database.module";
 import { ServeStaticModule } from "@nestjs/serve-static";
+
+import { DatabaseModule } from "./database/database.module";
+import { PluginsModule } from "./plugins/plugins.module";
+import { ABSOLUTE_PATHS, configForAppModule } from "./config";
 import { Ctx } from "./utils/types/context.type";
 
 @Module({

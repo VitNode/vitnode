@@ -1,6 +1,7 @@
+import { ArgsType, Field, InputType, registerEnumType } from "@nestjs/graphql";
+
 import { PaginationArgs } from "@/utils/types/database/pagination.type";
 import { SortDirectionEnum } from "@/utils/types/database/sort-direction.type";
-import { ArgsType, Field, InputType, registerEnumType } from "@nestjs/graphql";
 
 enum ShowAdminStaffModeratorsSortingColumnEnum {
   updated = "updated"

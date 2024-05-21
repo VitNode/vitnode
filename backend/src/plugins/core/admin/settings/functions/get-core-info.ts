@@ -1,5 +1,6 @@
 import { join } from "path";
 import * as fs from "fs";
+
 import { PluginInfoJSONType } from "../../plugins/helpers/files/create/contents";
 
 export const getCoreInfo = async () => {

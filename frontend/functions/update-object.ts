@@ -17,15 +17,15 @@ export function updateObject<T>(config: T, defaultData: T): T {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function objectToArray<T extends { [key: string]: any }>(
+export function objectToArray<T extends Record<string, any>>(
   obj: T
-): { [key: string]: unknown } {
+): Record<string, unknown> {
   if (typeof obj !== "object" || obj === null) {
     return obj;
   }
 
   return Object.entries(obj).reduce(
-    (acc: { [key: string]: unknown }, [key, value]) => {
+    (acc: Record<string, unknown>, [key, value]) => {
       if (Array.isArray(value)) {
         acc[key] = value.map(objectToArray);
       } else if (typeof value === "object" && value !== null) {

@@ -40,7 +40,7 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
     ) {
       form.setError("file", {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        // @ts-expect-error
         message: t(`errors.${error?.extensions?.code}`)
       });
 

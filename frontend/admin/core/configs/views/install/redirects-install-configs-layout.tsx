@@ -13,14 +13,15 @@ interface Props {
   data: Admin__Install__LayoutQuery;
 }
 
-export const RedirectsInstallConfigsLayout = ({ children, data }: Props) => {
+export const RedirectsInstallConfigsLayout = async ({
+  children,
+  data
+}: Props) => {
   const { replace } = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    const redirectItems: {
-      [key: string]: string;
-    } = {
+    const redirectItems: Record<string, string> = {
       [LayoutAdminInstallEnum.database]: "/admin/install",
       [LayoutAdminInstallEnum.account]: "/admin/install/account"
     };

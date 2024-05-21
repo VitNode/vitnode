@@ -7,7 +7,7 @@ import { Link } from "@/i18n";
 import { WrapperItemTopicListForum } from "./wrapper-item";
 
 export interface ItemTopicListForumProps
-  extends Pick<ShowTopicsForums, "title" | "user" | "id" | "created"> {}
+  extends Pick<ShowTopicsForums, "created" | "id" | "title" | "user"> {}
 
 export const ItemTopicListForum = ({
   created,

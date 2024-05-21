@@ -39,9 +39,9 @@ export async function generateMetadata({
 
 export default async function Page() {
   const { default_plugin, theme_id } = await getSessionData();
-  const PageFromTheme: LazyExoticComponent<() => JSX.Element> = lazy(() =>
+  const PageFromTheme: LazyExoticComponent<() => JSX.Element> = lazy(async () =>
     import(`@/themes/${theme_id}/${default_plugin}/default-page`).catch(
-      () => import(`@/themes/1/${default_plugin}/default-page`)
+      async () => import(`@/themes/1/${default_plugin}/default-page`)
     )
   );
 

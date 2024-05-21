@@ -26,10 +26,12 @@ export default async function Layout({ children }: Props) {
   const { theme_id } = await getSessionData();
   const LayoutFromLazy: LazyExoticComponent<
     ({ children }: { children: ReactNode }) => JSX.Element
-  > = lazy(() =>
+  > = lazy(async () =>
     import(
       `@/themes/${theme_id}/core/views/settings/layout-settings-view`
-    ).catch(() => import("@/themes/1/core/views/settings/layout-settings-view"))
+    ).catch(
+      async () => import("@/themes/1/core/views/settings/layout-settings-view")
+    )
   );
 
   return <LayoutFromLazy>{children}</LayoutFromLazy>;

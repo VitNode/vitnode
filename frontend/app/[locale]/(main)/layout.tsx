@@ -26,9 +26,9 @@ export default async function Layout({ children }: Props) {
         children: ReactNode;
         copyright?: TextLanguage[];
       }) => JSX.Element
-    > = lazy(() =>
+    > = lazy(async () =>
       import(`@/themes/${theme_id}/core/layout/layout`).catch(
-        () => import("@/themes/1/core/layout/layout")
+        async () => import("@/themes/1/core/layout/layout")
       )
     );
 

@@ -15,7 +15,7 @@ export const useDownloadThemeAdmin = ({
   id,
   version,
   version_code
-}: Pick<ShowAdminThemes, "id" | "version" | "version_code">) => {
+}: Pick<ShowAdminThemes, "id" | "version_code" | "version">) => {
   const t = useTranslations("core");
   const { setOpen } = useDialog();
   const formSchema = z.object({

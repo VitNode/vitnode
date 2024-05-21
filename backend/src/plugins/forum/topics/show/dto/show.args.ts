@@ -1,5 +1,6 @@
-import { PaginationArgs } from "@/utils/types/database/pagination.type";
 import { ArgsType, Field, Int } from "@nestjs/graphql";
+
+import { PaginationArgs } from "@/utils/types/database/pagination.type";
 
 @ArgsType()
 export class ShowTopicsForumsArgs extends PaginationArgs {

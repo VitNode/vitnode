@@ -5,6 +5,7 @@ import * as fs from "fs";
 import * as dotenv from "dotenv";
 
 import { objectToArray, updateObject } from "./update-object";
+
 import { ABSOLUTE_PATHS, getConfigFile } from "@/config";
 import { parseFrontendUrlFromEnv } from "@/functions/envs";
 
@@ -69,8 +70,8 @@ const generateDefaultManifest = ({
   site_name,
   site_short_name
 }: {
-  lang_code: string;
   frontend_url: string;
+  lang_code: string;
   site_name: string;
   site_short_name: string;
 }): ManifestType => ({

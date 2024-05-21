@@ -20,7 +20,7 @@ export interface ItemForumProps {
   last_posts: Pick<LastPostsShowForumForumsObj, "edges">;
   name: TextLanguage[];
   children?:
-    | Omit<ItemForumProps, "description" | "_count" | "last_posts">[]
+    | Omit<ItemForumProps, "_count" | "description" | "last_posts">[]
     | null;
 }
 

@@ -1,7 +1,9 @@
 import { Context, Query, Resolver } from "@nestjs/graphql";
+
 import { ShowCoreThemeEditorService } from "./show.service";
-import { Ctx } from "@/utils/types/context.type";
 import { ShowCoreThemeEditorObj } from "./dto/show.obj";
+
+import { Ctx } from "@/utils/types/context.type";
 
 @Resolver()
 export class ShowCoreThemeEditorResolver {

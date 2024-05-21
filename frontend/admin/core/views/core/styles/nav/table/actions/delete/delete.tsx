@@ -17,14 +17,14 @@ import {
   TooltipTrigger
 } from "@/components/ui/tooltip";
 
-const Content = lazy(() =>
+const Content = lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentDeleteActionTableNavAdmin
   }))
 );
 
 export const DeleteActionTableNavAdmin = (
-  props: Pick<ShowCoreNav, "id" | "children" | "name">
+  props: Pick<ShowCoreNav, "children" | "id" | "name">
 ) => {
   const t = useTranslations("core");
 

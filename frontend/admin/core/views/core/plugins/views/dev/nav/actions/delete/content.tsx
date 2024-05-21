@@ -13,7 +13,7 @@ import { SubmitDeleteActionTableNavDevPluginAdmin } from "./submit";
 import { useDeleteNavPluginAdmin } from "./hooks/use-delete-nav-plugin-admin";
 
 export interface ContentDeleteActionTableNavDevPluginAdminProps
-  extends Pick<ShowAdminNavPluginsObj, "id" | "code"> {}
+  extends Pick<ShowAdminNavPluginsObj, "code" | "id"> {}
 
 export const ContentDeleteActionTableNavDevPluginAdmin = ({
   code,

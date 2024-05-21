@@ -33,11 +33,11 @@ export default async function Page({ params: { id } }: Props) {
 
   const PageFromTheme: LazyExoticComponent<
     (props: CreateTopicViewProps) => JSX.Element
-  > = lazy(() =>
+  > = lazy(async () =>
     import(
       `@/themes/${theme_id}/forum/views/forum/forums/views/create-topic/create-topic-view`
     ).catch(
-      () =>
+      async () =>
         import(
           "@/themes/1/forum/views/forum/forums/views/create-topic/create-topic-view"
         )

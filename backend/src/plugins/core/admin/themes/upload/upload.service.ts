@@ -12,7 +12,6 @@ import { ChangeTemplatesAdminThemesService } from "../change_templates.service";
 
 import { generateRandomString } from "@/functions/generate-random-string";
 import { currentDate } from "@/functions/date";
-
 import { core_themes } from "../../database/schema/themes";
 import { FileUpload } from "@/utils/graphql-upload/upload";
 import { NotFoundError } from "@/utils/errors/not-found-error";

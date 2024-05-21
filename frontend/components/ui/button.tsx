@@ -43,7 +43,7 @@ export interface ButtonProps
   ariaLabel?: string;
   asChild?: boolean;
   loading?: boolean;
-  size?: "default" | "sm" | "lg";
+  size?: "default" | "lg" | "sm";
 }
 
 interface IconButtonProps extends Omit<ButtonProps, "size"> {
@@ -51,7 +51,7 @@ interface IconButtonProps extends Omit<ButtonProps, "size"> {
   size: "icon";
 }
 
-const Button = forwardRef<HTMLButtonElement, IconButtonProps | ButtonProps>(
+const Button = forwardRef<HTMLButtonElement, ButtonProps | IconButtonProps>(
   (
     {
       ariaLabel,

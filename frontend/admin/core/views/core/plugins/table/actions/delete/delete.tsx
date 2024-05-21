@@ -4,7 +4,7 @@ import { Loader } from "@/components/loader";
 import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
 import type { ShowAdminPlugins } from "@/graphql/hooks";
 
-const ContentDeletePluginActionsAdmin = lazy(() =>
+const ContentDeletePluginActionsAdmin = lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentDeletePluginActionsAdmin
   }))

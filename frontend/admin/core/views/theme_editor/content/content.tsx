@@ -66,7 +66,7 @@ export const ContentThemeEditor = () => {
               </Link>
 
               <SubmitContentThemeEditor
-                onClick={() => form.handleSubmit(onSubmit)()}
+                onClick={async () => form.handleSubmit(onSubmit)()}
                 isPending={form.formState.isSubmitting}
                 openSubmitDialog={openSubmitDialog}
                 setOpenSubmitDialog={setOpenSubmitDialog}

@@ -8,7 +8,7 @@ import { useDialog } from "@/components/ui/dialog";
 
 interface FormType {
   file: File[];
-  type: "upload" | "delete";
+  type: "delete" | "upload";
 }
 
 export const useModalChangeAvatar = () => {

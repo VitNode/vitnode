@@ -10,7 +10,7 @@ import {
 import type { Core_Members__Files__ShowQuery } from "@/graphql/hooks";
 import { Loader } from "@/components/loader";
 
-const ContentFilesSettings = lazy(() =>
+const ContentFilesSettings = lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentFilesSettings
   }))

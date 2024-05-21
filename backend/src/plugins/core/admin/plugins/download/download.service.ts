@@ -12,9 +12,7 @@ import { ShowAdminNavPluginsObj } from "../nav/show/dto/show.obj";
 
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { User } from "@/utils/decorators/user.decorator";
-
 import { currentDate } from "@/functions/date";
-
 import { core_plugins } from "../../database/schema/plugins";
 import { execShellCommand } from "@/functions/exec-shell-command";
 import { DatabaseService } from "@/database/database.service";

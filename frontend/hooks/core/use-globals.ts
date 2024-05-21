@@ -8,14 +8,14 @@ interface Args {
   defaultLanguage: string;
   languages: Pick<
     ShowCoreLanguages,
+    | "allow_in_input"
     | "code"
     | "default"
     | "enabled"
     | "locale"
-    | "time_24"
     | "name"
+    | "time_24"
     | "timezone"
-    | "allow_in_input"
   >[];
   themeId: number;
   themes: Pick<ShowCoreThemes, "id" | "name">[];

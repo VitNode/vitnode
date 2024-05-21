@@ -1,5 +1,6 @@
-import { PageInfo } from "@/utils/types/database/pagination.type";
 import { Field, Int, ObjectType } from "@nestjs/graphql";
+
+import { PageInfo } from "@/utils/types/database/pagination.type";
 
 @ObjectType()
 export class ShowCoreLanguagesObj {

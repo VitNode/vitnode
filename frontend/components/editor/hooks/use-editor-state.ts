@@ -20,7 +20,7 @@ interface Args extends Omit<UploadFilesHandlerEditorArgs, "value"> {
   selectedLanguage: string;
   setFiles: Dispatch<SetStateAction<FileStateEditor[]>>;
   uploadFiles: (args: UploadFilesHandlerArgs) => Promise<void>;
-  value: string | TextLanguage[];
+  value: TextLanguage[] | string;
 }
 
 export const EditorStateContext = createContext<Args>({

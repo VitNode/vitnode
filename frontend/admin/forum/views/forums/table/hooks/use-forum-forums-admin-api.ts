@@ -14,7 +14,7 @@ import {
 export interface ShowForumForumsAdminWithChildren
   extends Omit<
     ShowForumForumsAdmin,
-    "children" | "__typename" | "last_posts" | "breadcrumbs"
+    "__typename" | "breadcrumbs" | "children" | "last_posts"
   > {
   children: ShowForumForumsAdminWithChildren[];
 }

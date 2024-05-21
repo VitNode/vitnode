@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
 import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app.module";
 import cookieParser from "cookie-parser";
 import { ValidationPipe } from "@nestjs/common";
+
+import { AppModule } from "./app.module";
 import { graphqlUploadExpress } from "./utils/graphql-upload/graphql-upload-express";
 
 async function bootstrap() {

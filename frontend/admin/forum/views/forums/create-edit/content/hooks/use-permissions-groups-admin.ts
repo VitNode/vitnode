@@ -10,7 +10,7 @@ interface Args {
 export const usePermissionsGroupsAdminAPI = ({ searchValue }: Args) => {
   const query = useQuery({
     queryKey: [APIKeys.GROUPS_MEMBERS_FORUMS_ADMIN, { search: searchValue }],
-    queryFn: async () => await queryApi({ search: searchValue }),
+    queryFn: async () => queryApi({ search: searchValue }),
     placeholderData: previousData => previousData,
     refetchOnMount: true
   });

@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 
 import { ShowCorePluginsObj } from "./dto/show.obj";
+
 import { DatabaseService } from "@/database/database.service";
 
 @Injectable()

@@ -1,7 +1,8 @@
 // !! Do not remove and edit this file !!
 
-import { DATABASE_ENVS } from "@/database/client";
 import { defineConfig } from "drizzle-kit";
+
+import { DATABASE_ENVS } from "@/database/client";
 
 export default defineConfig({
   dialect: "postgresql",

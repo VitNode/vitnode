@@ -1,6 +1,6 @@
 import { TextAlign } from "@tiptap/extension-text-align";
 import { Underline } from "@tiptap/extension-underline";
-import { type Extensions } from "@tiptap/react";
+import type { Extensions } from "@tiptap/react";
 import { StarterKit } from "@tiptap/starter-kit";
 import { Link } from "@tiptap/extension-link";
 import { Color } from "@tiptap/extension-color";
