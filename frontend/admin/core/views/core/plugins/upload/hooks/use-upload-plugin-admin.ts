@@ -39,8 +39,6 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
       error?.extensions?.code === "PLUGIN_VERSION_IS_LOWER"
     ) {
       form.setError("file", {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
         message: t(`errors.${error?.extensions?.code}`)
       });
 

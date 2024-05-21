@@ -37,5 +37,5 @@ export const RedirectsInstallConfigsLayout = async ({
     return <FinishInstallConfigsView />;
   }
 
-  return children;
+  return <>{children}</>;
 };
