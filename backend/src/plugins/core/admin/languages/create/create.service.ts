@@ -14,7 +14,7 @@ import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class CreateAdminCoreLanguageService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async create({
     code,

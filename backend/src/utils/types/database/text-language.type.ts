@@ -108,7 +108,7 @@ export const TransformTextLanguageInput = ({
   };
 };
 
-export const TransformString = ({ value }: { value: string | string[] }) => {
+export const TransformString = ({ value }: { value: string[] | string }) => {
   if (Array.isArray(value)) {
     return value.map(item => item.trimStart().trimEnd());
   }

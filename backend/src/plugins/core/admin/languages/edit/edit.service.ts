@@ -10,7 +10,7 @@ import { ShowCoreLanguages } from "@/plugins/core/languages/show/dto/show.obj";
 
 @Injectable()
 export class EditAdminCoreLanguagesService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async edit({
     id,

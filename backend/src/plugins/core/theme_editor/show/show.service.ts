@@ -17,8 +17,8 @@ import { keysFromCSSThemeEditor } from "../../admin/theme_editor/edit/edit.servi
 @Injectable()
 export class ShowCoreThemeEditorService {
   constructor(
-    private databaseService: DatabaseService,
-    private configService: ConfigService
+    private readonly databaseService: DatabaseService,
+    private readonly configService: ConfigService
   ) {}
 
   private parseStringToHsl(string: string): HslColor {

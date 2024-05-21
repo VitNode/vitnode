@@ -17,6 +17,6 @@ export class DeleteCoreEditorResolver {
     @CurrentUser() currentUser: User,
     @Args() args: DeleteCoreEditorArgs
   ): Promise<string> {
-    return await this.service.delete(currentUser, args);
+    return this.service.delete(currentUser, args);
   }
 }

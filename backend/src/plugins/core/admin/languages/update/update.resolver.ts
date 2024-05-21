@@ -15,6 +15,6 @@ export class UpdateAdminCoreLanguagesResolver {
   async admin__core_languages__update(
     @Args() args: UpdateCoreAdminLanguagesArgs
   ): Promise<string> {
-    return await this.service.update(args);
+    return this.service.update(args);
   }
 }

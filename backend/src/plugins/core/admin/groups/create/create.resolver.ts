@@ -16,6 +16,6 @@ export class CreateAdminGroupsResolver {
   async core_groups__admin_create(
     @Args() args: CreateAdminGroupsArgs
   ): Promise<ShowAdminGroups> {
-    return await this.service.create(args);
+    return this.service.create(args);
   }
 }

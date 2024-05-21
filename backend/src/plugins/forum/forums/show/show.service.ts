@@ -48,9 +48,9 @@ interface ShowForumForumsWithPermissions
 @Injectable()
 export class ShowForumForumsService {
   constructor(
-    private databaseService: DatabaseService,
-    private statsService: StatsShowForumForumsService,
-    private lastPostsService: LastPostsForumForumsService
+    private readonly databaseService: DatabaseService,
+    private readonly statsService: StatsShowForumForumsService,
+    private readonly lastPostsService: LastPostsForumForumsService
   ) {}
 
   protected async whereAccessToView({

@@ -20,6 +20,6 @@ export class CreateForumTopicsResolver {
     @Args() args: CreateForumTopicsArgs,
     @Context() context: Ctx
   ): Promise<ShowTopicsForums> {
-    return await this.service.create(user, args, context);
+    return this.service.create(user, args, context);
   }
 }

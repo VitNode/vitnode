@@ -16,8 +16,8 @@ import { getThemeId } from "../helpers/get-theme-id";
 @Injectable()
 export class ShowSettingsService {
   constructor(
-    private databaseService: DatabaseService,
-    private configService: ConfigService
+    private readonly databaseService: DatabaseService,
+    private readonly configService: ConfigService
   ) {}
 
   protected getManifest({

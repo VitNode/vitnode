@@ -107,9 +107,9 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
           .insert(database)
           .values({ ...item, item_id } as {
             [Key in keyof PgTableWithColumns<T>["$inferInsert"]]:
-              | SQL<unknown>
+              | PgTableWithColumns<T>["$inferInsert"][Key]
               | Placeholder<string, unknown>
-              | PgTableWithColumns<T>["$inferInsert"][Key];
+              | SQL<unknown>;
           })
           .returning();
 

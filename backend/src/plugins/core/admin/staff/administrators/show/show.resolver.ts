@@ -16,6 +16,6 @@ export class ShowAdminStaffAdministratorResolver {
   async admin__core_staff_administrators__show(
     @Args() args: ShowAdminStaffAdministratorsArgs
   ): Promise<ShowAdminStaffAdministratorsObj> {
-    return await this.service.show(args);
+    return this.service.show(args);
   }
 }

@@ -16,6 +16,6 @@ export class EditAdminThemesResolver {
   async admin__core_themes__edit(
     @Args() args: EditAdminThemesArgs
   ): Promise<ShowAdminThemes> {
-    return await this.service.edit(args);
+    return this.service.edit(args);
   }
 }

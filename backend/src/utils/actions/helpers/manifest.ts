@@ -15,17 +15,17 @@ dotenv.config({
 interface ManifestType {
   background_color?: string;
   description?: string;
-  display?: "fullscreen" | "standalone" | "minimal-ui" | "browser";
+  display?: "browser" | "fullscreen" | "minimal-ui" | "standalone";
   display_override?: (
-    | "fullscreen"
-    | "standalone"
-    | "minimal-ui"
     | "browser"
+    | "fullscreen"
+    | "minimal-ui"
+    | "standalone"
     | "window-controls-overlay"
   )[];
   icons?: {
     src: string;
-    purpose?: "any" | "maskable" | "monochrome" | "badge";
+    purpose?: "any" | "badge" | "maskable" | "monochrome";
     sizes?: string;
     type?: string;
   }[];
@@ -34,13 +34,13 @@ interface ManifestType {
   name?: string;
   orientation?:
     | "any"
-    | "natural"
+    | "landscape-primary"
+    | "landscape-secondary"
     | "landscape"
-    | "portrait"
+    | "natural"
     | "portrait-primary"
     | "portrait-secondary"
-    | "landscape-primary"
-    | "landscape-secondary";
+    | "portrait";
   screenshots?: {
     src: string;
     sizes?: string;
@@ -53,7 +53,7 @@ interface ManifestType {
     description?: string;
     icons?: {
       src: string;
-      purpose?: "any" | "maskable" | "monochrome" | "badge";
+      purpose?: "any" | "badge" | "maskable" | "monochrome";
       sizes?: string;
       type?: string;
     }[];

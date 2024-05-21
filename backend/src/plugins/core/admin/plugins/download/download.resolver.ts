@@ -19,6 +19,6 @@ export class DownloadAdminPluginsResolver {
     @Args() args: DownloadAdminPluginsArgs,
     @CurrentUser() user: User
   ): Promise<string> {
-    return await this.service.download(args, user);
+    return this.service.download(args, user);
   }
 }

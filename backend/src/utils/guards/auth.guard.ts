@@ -8,8 +8,8 @@ import { Ctx } from "../types/context.type";
 @Injectable()
 export class AuthGuards implements CanActivate {
   constructor(
-    private reflector: Reflector,
-    private service: InternalAuthorizationCoreSessionsService
+    private readonly reflector: Reflector,
+    private readonly service: InternalAuthorizationCoreSessionsService
   ) {}
 
   protected async getAuth({ req, res }: Ctx) {

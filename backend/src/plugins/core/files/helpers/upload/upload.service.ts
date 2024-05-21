@@ -73,7 +73,7 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
       mkdirSync(dirFolder, { recursive: true });
     }
 
-    return await Promise.all(
+    return Promise.all(
       files.map(async file => {
         const { createReadStream, filename, mimetype } = await file;
         const extension = filename.split(".").pop();

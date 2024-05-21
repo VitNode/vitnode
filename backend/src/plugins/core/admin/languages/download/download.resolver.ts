@@ -17,6 +17,6 @@ export class DownloadAdminCoreLanguagesResolver {
     @CurrentUser() user: User,
     @Args() args: DownloadCoreAdminLanguagesArgs
   ): Promise<string> {
-    return await this.service.download(user, args);
+    return this.service.download(user, args);
   }
 }

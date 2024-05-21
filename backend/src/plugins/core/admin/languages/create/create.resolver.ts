@@ -16,6 +16,6 @@ export class CreateAdminCoreLanguagesResolver {
   async admin__core_languages__create(
     @Args() args: CreateCoreAdminLanguagesArgs
   ): Promise<ShowCoreLanguages> {
-    return await this.service.create(args);
+    return this.service.create(args);
   }
 }

@@ -9,6 +9,6 @@ export class LayoutAdminInstallResolver {
 
   @Query(() => LayoutAdminInstallObj)
   async admin__install__layout(): Promise<LayoutAdminInstallObj> {
-    return await this.service.layout();
+    return this.service.layout();
   }
 }

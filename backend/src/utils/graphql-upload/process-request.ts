@@ -12,7 +12,7 @@ import { WriteStream } from "./fs-capacitor";
 const GRAPHQL_MULTIPART_REQUEST_SPEC_URL =
   "https://github.com/jaydenseric/graphql-multipart-request-spec";
 
-export default function processRequest(
+export default async function processRequest(
   request: IncomingMessage,
   response: ServerResponse,
   {
@@ -20,18 +20,16 @@ export default function processRequest(
     maxFileSize = Infinity,
     maxFiles = Infinity
   }: ProcessRequestOptions = {}
-): Promise<{ [key: string]: unknown } | { [key: string]: unknown }[]> {
+): Promise<Record<string, unknown> | Record<string, unknown>[]> {
   return new Promise((resolve, reject) => {
     let released: boolean;
 
     let exitError: Error;
 
-    let operations:
-      | { [key: string]: unknown }
-      | Array<{ [key: string]: unknown }>;
+    let operations: Array<Record<string, unknown>> | Record<string, unknown>;
 
     let operationsPath: objectPath.ObjectPathBound<
-      { [key: string]: unknown } | { [key: string]: unknown }[]
+      Record<string, unknown> | Record<string, unknown>[]
     >;
 
     let map: Map<string, Upload>;
@@ -119,7 +117,7 @@ export default function processRequest(
               )
             );
 
-          let parsedMap: { [s: string]: unknown } | ArrayLike<unknown>;
+          let parsedMap: ArrayLike<unknown> | Record<string, unknown>;
           try {
             parsedMap = JSON.parse(value);
           } catch (error) {

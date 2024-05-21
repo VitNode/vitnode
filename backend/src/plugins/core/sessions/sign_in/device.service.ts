@@ -21,8 +21,8 @@ interface DeviceType {
 @Injectable()
 export class DeviceSignInCoreSessionsService {
   constructor(
-    private databaseService: DatabaseService,
-    private configService: ConfigService
+    private readonly databaseService: DatabaseService,
+    private readonly configService: ConfigService
   ) {}
 
   protected getUserAgentData(userAgent: string) {
@@ -78,7 +78,7 @@ export class DeviceSignInCoreSessionsService {
       +req.cookies[this.configService.getOrThrow("cookies.known_device.name")];
 
     if (!know_device_id) {
-      return await this.createDevice({ req, res });
+      return this.createDevice({ req, res });
     }
 
     const device =
@@ -89,7 +89,7 @@ export class DeviceSignInCoreSessionsService {
       );
 
     if (!device) {
-      return await this.createDevice({ req, res });
+      return this.createDevice({ req, res });
     }
 
     return device;

@@ -18,9 +18,9 @@ import { getCoreInfo } from "../../settings/functions/get-core-info";
 @Injectable()
 export class AuthorizationAdminSessionsService {
   constructor(
-    private databaseService: DatabaseService,
-    private jwtService: JwtService,
-    private configService: ConfigService
+    private readonly databaseService: DatabaseService,
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService
   ) {}
 
   protected async getAdminNav(): Promise<NavAdminPluginsAuthorization[]> {

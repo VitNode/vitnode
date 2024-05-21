@@ -9,7 +9,7 @@ import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class DeleteAdminNavPluginsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async delete({ id }: DeleteCreateAdminNavPluginsArgs): Promise<string> {
     const nav = await this.databaseService.db.query.core_plugins_nav.findFirst({

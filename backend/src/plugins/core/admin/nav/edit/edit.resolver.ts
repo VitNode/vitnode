@@ -16,6 +16,6 @@ export class EditAdminNavResolver {
   async admin__core_nav__edit(
     @Args() args: EditAdminNavArgs
   ): Promise<ShowCoreNav> {
-    return await this.service.edit(args);
+    return this.service.edit(args);
   }
 }

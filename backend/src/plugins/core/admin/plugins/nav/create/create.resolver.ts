@@ -18,6 +18,6 @@ export class CreateAdminNavPluginsResolver {
   async admin__core_plugins__nav__create(
     @Args() args: CreateAdminNavPluginsArgs
   ): Promise<ShowAdminNavPluginsObj> {
-    return await this.service.create(args);
+    return this.service.create(args);
   }
 }

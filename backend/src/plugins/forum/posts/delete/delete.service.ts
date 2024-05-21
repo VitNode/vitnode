@@ -16,8 +16,8 @@ import { CustomError } from "@/utils/errors/custom-error";
 @Injectable()
 export class DeleteForumsPostsService {
   constructor(
-    private databaseService: DatabaseService,
-    private parserTextLang: ParserTextLanguageCoreHelpersService
+    private readonly databaseService: DatabaseService,
+    private readonly parserTextLang: ParserTextLanguageCoreHelpersService
   ) {}
 
   async delete(user: User, { id }: DeletePostsForumsArgs): Promise<string> {

@@ -15,8 +15,8 @@ import { DatabaseService } from "@/database/database.service";
 @Injectable()
 export class DeleteAdminNavService {
   constructor(
-    private databaseService: DatabaseService,
-    private parserTextLang: ParserTextLanguageCoreHelpersService
+    private readonly databaseService: DatabaseService,
+    private readonly parserTextLang: ParserTextLanguageCoreHelpersService
   ) {}
 
   async delete({ id }: DeleteAdminNavArgs): Promise<string> {

@@ -17,6 +17,6 @@ export class DownloadAdminThemesResolver {
     @CurrentUser() user: User,
     @Args() args: DownloadAdminThemesArgs
   ): Promise<string> {
-    return await this.service.download(user, args);
+    return this.service.download(user, args);
   }
 }

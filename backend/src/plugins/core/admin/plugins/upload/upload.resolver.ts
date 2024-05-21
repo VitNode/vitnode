@@ -16,6 +16,6 @@ export class UploadAdminPluginsResolver {
   async admin__core_plugins__upload(
     @Args() args: UploadAdminPluginsArgs
   ): Promise<ShowAdminPlugins> {
-    return await this.service.upload(args);
+    return this.service.upload(args);
   }
 }

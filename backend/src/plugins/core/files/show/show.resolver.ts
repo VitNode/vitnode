@@ -18,6 +18,6 @@ export class ShowCoreFilesResolver {
     @CurrentUser() currentUser: User,
     @Args() args: ShowCoreFilesArgs
   ): Promise<ShowCoreFilesObj> {
-    return await this.service.show(currentUser, args);
+    return this.service.show(currentUser, args);
   }
 }

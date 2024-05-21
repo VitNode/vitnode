@@ -16,6 +16,6 @@ export class EditAdminMainSettingsResolver {
   async admin__core_main_settings__edit(
     @Args() args: EditAdminMainSettingsArgs
   ): Promise<EditAdminSettingsObj> {
-    return await this.service.edit(args);
+    return this.service.edit(args);
   }
 }

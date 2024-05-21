@@ -17,6 +17,6 @@ export class DeleteAdminNavPluginsResolver {
   async admin__core_plugins__nav__delete(
     @Args() args: DeleteCreateAdminNavPluginsArgs
   ): Promise<string> {
-    return await this.service.delete(args);
+    return this.service.delete(args);
   }
 }

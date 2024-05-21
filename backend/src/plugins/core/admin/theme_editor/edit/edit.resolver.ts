@@ -15,6 +15,6 @@ export class EditAdminThemeEditorResolver {
     @Context() ctx: Ctx,
     @Args() args: EditAdminThemeEditorArgs
   ): Promise<string> {
-    return await this.service.edit(ctx, args);
+    return this.service.edit(ctx, args);
   }
 }

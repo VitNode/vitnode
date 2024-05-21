@@ -24,8 +24,9 @@ import { generateRandomString } from "@/functions/generate-random-string";
 
 @Injectable()
 export class DownloadAdminPluginsService {
-  constructor(private databaseService: DatabaseService) {}
   protected tempPath = join(process.cwd(), "temp", "plugins");
+
+  constructor(private readonly databaseService: DatabaseService) {}
 
   protected createFolders(path: string): void {
     if (!fs.existsSync(path)) {
@@ -179,7 +180,7 @@ export class DownloadAdminPluginsService {
       });
     }
 
-    const versions: { [version_code: number]: string } = JSON.parse(
+    const versions: Record<number, string> = JSON.parse(
       fs.readFileSync(pathToVersions, "utf-8")
     );
     versions[version_code] = version;

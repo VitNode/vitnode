@@ -16,6 +16,6 @@ export class EditAdminGroupsResolver {
   async admin__core_groups__edit(
     @Args() args: EditAdminGroupsArgs
   ): Promise<ShowAdminGroups> {
-    return await this.service.edit(args);
+    return this.service.edit(args);
   }
 }

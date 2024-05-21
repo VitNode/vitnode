@@ -11,7 +11,7 @@ import { Ctx } from "@/utils/types/context.type";
 @Injectable()
 export class AuthorizationCoreSessionsService {
   constructor(
-    private databaseService: DatabaseService,
+    private readonly databaseService: DatabaseService,
     private readonly service: InternalAuthorizationCoreSessionsService
   ) {}
 

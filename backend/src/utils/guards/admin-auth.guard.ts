@@ -5,7 +5,7 @@ import { AuthorizationAdminSessionsService } from "@/plugins/core/admin/sessions
 
 @Injectable()
 export class AdminAuthGuards implements CanActivate {
-  constructor(private service: AuthorizationAdminSessionsService) {}
+  constructor(private readonly service: AuthorizationAdminSessionsService) {}
 
   protected async getAuth({ req, res }: Ctx) {
     const data = await this.service.authorization({

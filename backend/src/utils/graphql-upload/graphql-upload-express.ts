@@ -14,14 +14,7 @@ type ProcessRequestFunction = (
   request: IncomingMessage,
   response: ServerResponse,
   options?: ProcessRequestOptions
-) => Promise<
-  | {
-      [key: string]: unknown;
-    }
-  | {
-      [key: string]: unknown;
-    }[]
->;
+) => Promise<Record<string, unknown> | Record<string, unknown>[]>;
 
 export function graphqlUploadExpress({
   processRequest = defaultProcessRequest,
@@ -47,7 +40,7 @@ export function graphqlUploadExpress({
     const { send } = response;
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore Todo: Find a less hacky way to prevent sending a response
+    // @ts-expect-error Todo: Find a less hacky way to prevent sending a response
     // before the request has ended.
     response.send =
       /** @param {Array<unknown>} args */

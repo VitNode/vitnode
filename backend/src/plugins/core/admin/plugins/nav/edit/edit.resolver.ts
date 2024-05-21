@@ -18,6 +18,6 @@ export class EditAdminNavPluginsResolver {
   async admin__core_plugins__nav__edit(
     @Args() args: EditCreateAdminNavPluginsArgs
   ): Promise<ShowAdminNavPluginsObj> {
-    return await this.service.edit(args);
+    return this.service.edit(args);
   }
 }

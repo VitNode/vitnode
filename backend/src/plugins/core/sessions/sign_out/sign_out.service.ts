@@ -9,8 +9,8 @@ import { DatabaseService } from "@/database/database.service";
 @Injectable()
 export class SignOutCoreSessionsService {
   constructor(
-    private databaseService: DatabaseService,
-    private configService: ConfigService
+    private readonly databaseService: DatabaseService,
+    private readonly configService: ConfigService
   ) {}
 
   async signOut({ req, res }: Ctx) {

@@ -16,7 +16,7 @@ import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class DeleteAdminThemesService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async delete({ id }: DeleteAdminThemesArgs): Promise<string> {
     const theme = await this.databaseService.db.query.core_themes.findFirst({

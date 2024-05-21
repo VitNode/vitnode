@@ -32,8 +32,8 @@ export const keysFromCSSThemeEditor = [
 @Injectable()
 export class EditAdminThemeEditorService {
   constructor(
-    private databaseService: DatabaseService,
-    private configService: ConfigService
+    private readonly databaseService: DatabaseService,
+    private readonly configService: ConfigService
   ) {}
 
   protected changeVariable({

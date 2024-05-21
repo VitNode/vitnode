@@ -17,6 +17,6 @@ export class ChangePositionAdminNavPluginsResolver {
   async admin__core_plugins__nav__change_position(
     @Args() args: ChangePositionAdminNavPluginsArgs
   ): Promise<string> {
-    return await this.service.changePosition(args);
+    return this.service.changePosition(args);
   }
 }

@@ -9,6 +9,6 @@ export class SignOutAdminSessionsResolver {
 
   @Mutation(() => String)
   async admin_sessions__sign_out(@Context() context: Ctx): Promise<string> {
-    return await this.service.signOut(context);
+    return this.service.signOut(context);
   }
 }

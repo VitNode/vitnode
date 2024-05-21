@@ -12,9 +12,9 @@ import { CustomError } from "@/utils/errors/custom-error";
 @Injectable()
 export class CreateAdminPluginsService {
   constructor(
-    private databaseService: DatabaseService,
-    private createFilesService: CreateFilesAdminPluginsService,
-    private changeFilesService: ChangeFilesAdminPluginsService
+    private readonly databaseService: DatabaseService,
+    private readonly createFilesService: CreateFilesAdminPluginsService,
+    private readonly changeFilesService: ChangeFilesAdminPluginsService
   ) {}
 
   async create({

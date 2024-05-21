@@ -15,7 +15,7 @@ import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class UpdateAdminCoreLanguageService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async update({ code, file }: UpdateCoreAdminLanguagesArgs): Promise<string> {
     const lang = await this.databaseService.db.query.core_languages.findFirst({
@@ -39,13 +39,11 @@ export class UpdateAdminCoreLanguageService {
         .createReadStream()
         .pipe(
           // TODO: Fix this type
-          tar.extract({ C: folder, strip: 1 }) as ReturnType<
-            typeof tar.extract
-          > &
-            NodeJS.WritableStream
+          tar.extract({ C: folder, strip: 1 }) as NodeJS.WritableStream &
+            ReturnType<typeof tar.extract>
         )
         .on("error", function (err) {
-          reject(err.message);
+          throw new reject(err.message);
         })
         .on("finish", function () {
           resolve("success");

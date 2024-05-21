@@ -5,7 +5,7 @@ import * as fs from "fs";
 export const setRebuildRequired = async ({
   set
 }: {
-  set: "themes" | "langs" | "plugins";
+  set: "langs" | "plugins" | "themes";
 }) => {
   const config = await getConfigFile();
 

@@ -100,7 +100,7 @@ export const updatePlugins = async ({
             pluginName,
             "versions.json"
           );
-          const versions: { [key: string]: string } = JSON.parse(
+          const versions: Record<string, string> = JSON.parse(
             fs.readFileSync(versionsPath, "utf8")
           );
           const latestVersion = Object.keys(versions).sort().reverse()[0];

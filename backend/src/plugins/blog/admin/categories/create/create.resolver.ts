@@ -16,6 +16,6 @@ export class CreateBlogCategoriesResolver {
   async admin__blog_categories__create(
     @Args() args: CreatePluginCategoriesArgs
   ): Promise<ShowBlogCategories> {
-    return await this.service.create(args);
+    return this.service.create(args);
   }
 }

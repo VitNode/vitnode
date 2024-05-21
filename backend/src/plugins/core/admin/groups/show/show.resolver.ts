@@ -16,6 +16,6 @@ export class ShowAdminGroupsResolver {
   async admin__core_groups__show(
     @Args() args: ShowAdminGroupsArgs
   ): Promise<ShowAdminGroupsObj> {
-    return await this.service.show(args);
+    return this.service.show(args);
   }
 }

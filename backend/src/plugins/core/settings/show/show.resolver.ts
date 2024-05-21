@@ -10,6 +10,6 @@ export class ShowCoreSettingsResolver {
 
   @Query(() => ShowSettingsObj)
   async core_settings__show(@Context() context: Ctx): Promise<ShowSettingsObj> {
-    return await this.service.show(context);
+    return this.service.show(context);
   }
 }

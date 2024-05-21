@@ -15,9 +15,9 @@ import { AccessDeniedError } from "@/utils/errors/access-denied-error";
 @Injectable()
 export class EditForumTopicsService {
   constructor(
-    private databaseService: DatabaseService,
-    private statsForumService: StatsShowForumForumsService,
-    private parserTextLang: ParserTextLanguageCoreHelpersService
+    private readonly databaseService: DatabaseService,
+    private readonly statsForumService: StatsShowForumForumsService,
+    private readonly parserTextLang: ParserTextLanguageCoreHelpersService
   ) {}
 
   async edit(
