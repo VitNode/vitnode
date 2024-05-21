@@ -6,7 +6,13 @@
     "allowJs": false,
     "skipLibCheck": true,
     "composite": false,
-    "removeComments": true
+    "removeComments": true,
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
+    "incremental": true,
+    "strictNullChecks": true,
+    "strictBindCallApply": false,
+    "allowSyntheticDefaultImports": true
   },
   "exclude": ["node_modules", ".turbo"]
 }

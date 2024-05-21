@@ -2,22 +2,19 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "eslint-config-vitnode/tsconfig.base.json",
   "compilerOptions": {
+    "target": "ESNext",
     "module": "commonjs",
+    "baseUrl": "./",
+    "outDir": "./dist",
     "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "ESNext",
     "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
-    "strictNullChecks": false,
     "noImplicitAny": false,
-    "strictBindCallApply": false,
+    "strictNullChecks": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "resolveJsonModule": true,
+    "strictPropertyInitialization": false,
     "paths": {
       "@/*": ["./src/*"]
     }

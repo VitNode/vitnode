@@ -177,7 +177,9 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
     await Promise.all(
       frontendPaths.map(async path => {
         const source = join(this.tempPath, "frontend", path);
-        const destination = pluginPaths({ code: config.code }).frontend[path];
+        const destination: string = pluginPaths({ code: config.code }).frontend[
+          path
+        ];
 
         return this.copyFilesToPluginFolder({ source, destination });
       })
