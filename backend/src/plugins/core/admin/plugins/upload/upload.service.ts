@@ -18,7 +18,6 @@ import { DatabaseService } from "@/database/database.service";
 import { generateRandomString } from "@/functions/generate-random-string";
 import { CustomError } from "@/utils/errors/custom-error";
 import { ChangeTemplatesAdminThemesService } from "../../themes/change_templates.service";
-import { updateNavAdminPlugin } from "@/utils/actions/helpers/update-plugins";
 import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
@@ -292,12 +291,6 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
 
       const plugin = plugins[0];
 
-      await updateNavAdminPlugin({
-        db: this.databaseService.db,
-        id: plugin.id,
-        config
-      });
-
       return plugin;
     }
 
@@ -309,12 +302,6 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
       .returning();
 
     const plugin = plugins[0];
-
-    await updateNavAdminPlugin({
-      db: this.databaseService.db,
-      id: plugin.id,
-      config
-    });
 
     // Run migration
     const migrationPath = ABSOLUTE_PATHS.plugin({ code: config.code }).database
