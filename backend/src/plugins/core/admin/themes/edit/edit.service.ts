@@ -32,13 +32,13 @@ export class EditAdminThemesService {
       throw new NotFoundError("Theme");
     }
 
-    // Update the theme.json file
+    // Update the config.json file
     const pathThemeConfig = join(
       "..",
       "frontend",
       "themes",
       id.toString(),
-      "theme.json"
+      "config.json"
     );
     const themeFile = fs.readFileSync(pathThemeConfig, "utf8");
     const config: ConfigTheme = JSON.parse(themeFile);

@@ -5,6 +5,7 @@ import { ShowAdminNavPluginsObj } from "./dto/show.obj";
 
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { DatabaseService } from "@/database/database.service";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class ShowAdminNavPluginsService {
@@ -13,6 +14,8 @@ export class ShowAdminNavPluginsService {
   async show({
     plugin_code
   }: ShowAdminNavPluginsArgs): Promise<ShowAdminNavPluginsObj[]> {
+    const path = ABSOLUTE_PATHS.plugin({ code: plugin_code });
+
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
       where: (table, { eq }) => eq(table.code, plugin_code)
     });

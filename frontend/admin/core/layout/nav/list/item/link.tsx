@@ -36,9 +36,9 @@ export const LinkItemListNavAdmin = ({
         href={href}
         className={cn(
           buttonVariants({ variant: "ghost", size: "sm" }),
-          "w-full justify-start relative pl-4 hover:bg-secondary font-normal text-foreground [&>svg]:size-4 [&>svg]:flex-shrink-0 [&>svg]:flex [&>svg]:items-center [&>svg]:justify-center [&>svg]:text-muted-foreground",
+          "w-full justify-start relative pl-4 hover:bg-accent font-normal text-foreground [&>svg]:size-4 [&>svg]:flex-shrink-0 [&>svg]:flex [&>svg]:items-center [&>svg]:justify-center [&>svg]:text-muted-foreground",
           {
-            "font-semibold": active
+            "font-bold": active
           }
         )}
         onClick={onClick}

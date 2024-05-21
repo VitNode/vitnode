@@ -75,8 +75,7 @@ export class EditAdminThemeEditorService {
       configService: this.configService
     });
     const pathToCss = join(
-      ABSOLUTE_PATHS.frontend.themes,
-      `${themeId}`,
+      ABSOLUTE_PATHS.frontend.theme({ theme_id: themeId }).root,
       "core",
       "layout",
       "global.css"

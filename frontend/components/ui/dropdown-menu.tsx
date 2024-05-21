@@ -83,14 +83,16 @@ DropdownMenuContent.displayName = DropdownMenuPrimitive.Content.displayName;
 const DropdownMenuItem = forwardRef<
   ElementRef<typeof DropdownMenuPrimitive.Item>,
   ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> & {
+    destructive?: boolean;
     inset?: boolean;
   }
->(({ className, inset, ...props }, ref) => (
+>(({ className, inset, destructive, ...props }, ref) => (
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
       "relative flex gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 cursor-pointer [&_svg]:size-4 [&_svg]:flex-shrink-0 [&_svg]:text-muted-foreground text-current",
       inset && "pl-8",
+      destructive && "[&_svg]:text-destructive",
       className
     )}
     {...props}

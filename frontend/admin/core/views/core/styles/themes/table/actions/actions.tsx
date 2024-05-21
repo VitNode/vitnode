@@ -44,8 +44,11 @@ export const ActionsItemThemesAdmin = (props: ShowAdminThemes) => {
               </DropdownMenuItem>
 
               {!props.default && (
-                <DropdownMenuItem onClick={() => setIsOpenDeleteDialog(true)}>
-                  <Trash2 className="text-destructive" /> {tCore("delete")}
+                <DropdownMenuItem
+                  onClick={() => setIsOpenDeleteDialog(true)}
+                  destructive
+                >
+                  <Trash2 /> {tCore("delete")}
                 </DropdownMenuItem>
               )}
             </DropdownMenuContent>

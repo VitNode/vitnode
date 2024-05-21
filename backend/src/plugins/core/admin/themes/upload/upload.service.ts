@@ -60,7 +60,7 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
         });
     });
 
-    const pathThemeJSON = join(this.tempPath, "theme.json");
+    const pathThemeJSON = join(this.tempPath, "config.json");
     const themeFile = await fs.promises.readFile(pathThemeJSON, "utf8");
     const config: ConfigTheme = JSON.parse(themeFile);
 

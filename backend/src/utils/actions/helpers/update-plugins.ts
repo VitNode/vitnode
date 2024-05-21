@@ -11,6 +11,7 @@ import {
 } from "@/plugins/core/admin/database/schema/plugins";
 import { schemaDatabase } from "@/database/schema";
 import { poolDB } from "@/database/client";
+import { ABSOLUTE_PATHS } from "@/config";
 
 export const updateNavAdminPlugin = async ({
   config,
@@ -78,37 +79,24 @@ export const updatePlugins = async ({
         .filter(
           plugin => !["database", "plugins.module.ts", "core"].includes(plugin)
         )
-        .map(async (pluginName, index) => {
-          const configPath = join(
-            process.cwd(),
-            "src",
-            "plugins",
-            pluginName,
-            "plugin.json"
-          );
+        .map(async (code, index) => {
+          const paths = ABSOLUTE_PATHS.plugin({ code });
           const config: ConfigPlugin = JSON.parse(
-            fs.readFileSync(configPath, "utf8")
+            fs.readFileSync(paths.config, "utf8")
           );
 
           if (config.allow_default) {
             isDefaultIndex = index;
           }
-          const versionsPath = join(
-            process.cwd(),
-            "src",
-            "plugins",
-            pluginName,
-            "versions.json"
-          );
           const versions: Record<string, string> = JSON.parse(
-            fs.readFileSync(versionsPath, "utf8")
+            fs.readFileSync(paths.versions, "utf8")
           );
           const latestVersion = Object.keys(versions).sort().reverse()[0];
           const version = versions[latestVersion];
 
           let pluginId: number | null = null;
           const plugin = await db.query.core_plugins.findFirst({
-            where: (table, { eq }) => eq(table.code, pluginName)
+            where: (table, { eq }) => eq(table.code, code)
           });
 
           if (plugin) {

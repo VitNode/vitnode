@@ -1,5 +1,4 @@
 import { rm } from "fs/promises";
-import { join } from "path";
 import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
@@ -38,10 +37,10 @@ export class DeleteAdminThemesService {
       .delete(core_themes)
       .where(eq(core_themes.id, id));
 
-    const path = join(ABSOLUTE_PATHS.frontend.themes, id.toString());
+    const path = ABSOLUTE_PATHS.frontend.theme({ theme_id: id }).root;
     // Check if folder exists
     if (fs.existsSync(path)) {
-      rm(join(ABSOLUTE_PATHS.frontend.themes, id.toString()), {
+      rm(path, {
         recursive: true
       });
     }

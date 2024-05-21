@@ -6,13 +6,13 @@ import { eq, sql } from "drizzle-orm";
 
 import { DeleteAdminPluginsArgs } from "./dto/delete.args";
 import { ChangeFilesAdminPluginsService } from "../helpers/files/change/change.service";
-import { pluginPaths } from "../paths";
 
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_plugins } from "../../database/schema/plugins";
 import { DatabaseService } from "@/database/database.service";
 import { CustomError } from "@/utils/errors/custom-error";
 import { setRebuildRequired } from "@/functions/rebuild-required";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class DeleteAdminPluginsService {
@@ -28,11 +28,12 @@ export class DeleteAdminPluginsService {
   }
 
   protected async deleteMigration({ code }: { code: string }) {
-    const migrationPath = pluginPaths({ code }).backend.database_migration_info;
-    if (!fs.existsSync(migrationPath)) return;
+    const migrationPathInfo = ABSOLUTE_PATHS.plugin({ code }).database
+      .migration_info;
+    if (!fs.existsSync(migrationPathInfo)) return;
 
     const migrationData: { entries: { when: number }[] } = JSON.parse(
-      fs.readFileSync(migrationPath, "utf-8")
+      fs.readFileSync(migrationPathInfo, "utf-8")
     );
     const deleteQueries = migrationData.entries.map(entry => {
       return `DELETE FROM drizzle.__drizzle_migrations WHERE created_at = ${entry.when};`;
@@ -87,7 +88,7 @@ export class DeleteAdminPluginsService {
 
     this.changeFilesService.changeFilesWhenDelete({ code });
 
-    const modulePath = pluginPaths({ code }).backend.root;
+    const modulePath = ABSOLUTE_PATHS.plugin({ code }).root;
     this.deleteFolderWhenExists(modulePath);
     // Frontend
     const frontendPaths = [
@@ -99,7 +100,9 @@ export class DeleteAdminPluginsService {
       "graphql_mutations"
     ];
     frontendPaths.forEach(path => {
-      this.deleteFolderWhenExists(pluginPaths({ code }).frontend[path]);
+      this.deleteFolderWhenExists(
+        ABSOLUTE_PATHS.plugin({ code }).frontend[path]
+      );
     });
 
     // Frontend - Delete Templates
@@ -110,7 +113,9 @@ export class DeleteAdminPluginsService {
     });
     themes.forEach(({ id }) => {
       this.deleteFolderWhenExists(
-        join(process.cwd(), "..", "frontend", "themes", id.toString(), code)
+        ABSOLUTE_PATHS.plugin({ code }).frontend.theme({
+          theme_id: id
+        })
       );
     });
 

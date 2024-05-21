@@ -14,7 +14,7 @@ import { core_themes } from "../../database/schema/themes";
 import { core_nav, core_nav_name } from "../../database/schema/nav";
 import { DatabaseService } from "@/database/database.service";
 import { CustomError } from "@/utils/errors/custom-error";
-import { pluginPaths } from "../../plugins/paths";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {
@@ -60,7 +60,7 @@ export class CreateDatabaseAdminInstallService {
 
     // Create plugins
     const coreVersions: Record<number, string> = JSON.parse(
-      fs.readFileSync(pluginPaths({ code: "core" }).backend.versions, "utf8")
+      fs.readFileSync(ABSOLUTE_PATHS.plugin({ code: "core" }).versions, "utf8")
     );
 
     const coreVersionCode = +Object.keys(coreVersions).sort().reverse()[0];

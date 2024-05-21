@@ -49,7 +49,8 @@ export const configForAppModule = () => {
 
 const internalPaths = {
   uploads: join(process.cwd(), "uploads"),
-  frontend: join(process.cwd(), "..", "frontend")
+  frontend: join(process.cwd(), "..", "frontend"),
+  plugins: join(process.cwd(), "src", "plugins")
 };
 
 export const ABSOLUTE_PATHS = {
@@ -62,8 +63,82 @@ export const ABSOLUTE_PATHS = {
   frontend: {
     init: internalPaths.frontend,
     themes: join(internalPaths.frontend, "themes"),
+    theme: ({ theme_id }: { theme_id: number }) => ({
+      root: join(internalPaths.frontend, "themes"),
+      config: join(
+        internalPaths.frontend,
+        "themes",
+        theme_id.toString(),
+        "config.json"
+      )
+    }),
     langs: join(internalPaths.frontend, "langs")
-  }
+  },
+  plugins: internalPaths.plugins,
+  plugin: ({ code }: { code: string }) => ({
+    root: join(internalPaths.plugins, code),
+    config: join(internalPaths.plugins, "plugins", code, "config.json"),
+    versions: join(internalPaths.plugins, code, "versions.json"),
+    database: {
+      schema: join(internalPaths.plugins, code, "admin", "database", "schema"),
+      migrations: join(
+        internalPaths.plugins,
+        code,
+        "admin",
+        "database",
+        "migrations"
+      ),
+      migration_info: join(
+        internalPaths.plugins,
+        code,
+        "admin",
+        "database",
+        "migrations",
+        "meta",
+        "_journal.json"
+      )
+    },
+    frontend: {
+      admin_pages: join(
+        internalPaths.frontend,
+        "app",
+        "[locale]",
+        "(admin)",
+        "admin",
+        "(auth)",
+        code
+      ),
+      admin_templates: join(internalPaths.frontend, "admin", code),
+      pages_container: join(
+        internalPaths.frontend,
+        "app",
+        "[locale]",
+        "(main)",
+        "(container)",
+        code
+      ),
+      default_page: join(
+        internalPaths.frontend,
+        "themes",
+        "1",
+        code,
+        "default-page.tsx"
+      ),
+      pages: join(internalPaths.frontend, "app", "[locale]", "(main)", code),
+      hooks: join(internalPaths.frontend, "hooks", code),
+      templates: join(internalPaths.frontend, "themes", "1", code),
+      graphql_queries: join(internalPaths.frontend, "graphql", "queries", code),
+      graphql_mutations: join(
+        internalPaths.frontend,
+        "graphql",
+        "mutations",
+        code
+      ),
+      language: join(internalPaths.frontend, "langs", "en", `${code}.json`),
+      theme: ({ theme_id }: { theme_id: number }) =>
+        join(internalPaths.frontend, "themes", theme_id.toString(), code)
+    }
+  })
 };
 
 export interface ConfigType {
