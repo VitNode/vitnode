@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Default",
+  "compilerOptions": {
+    "strict": true,
+    "allowJs": false,
+    "skipLibCheck": true,
+    "composite": false,
+    "removeComments": true
+  },
+  "exclude": ["node_modules", ".turbo"]
+}

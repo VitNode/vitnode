@@ -1,0 +1,32 @@
+{
+  "name": "eslint-config-vitnode",
+  "version": "1.0.0",
+  "description": "ESLint config for VitNode",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix"
+  },
+  "type": "module",
+  "keywords": [
+    "eslint",
+    "eslintconfig",
+    "prettier",
+    "vitnode"
+  ],
+  "files": [
+    "tsconfig.base.json",
+    ".eslintrc.json"
+  ],
+  "author": "VitNode",
+  "license": "MIT",
+  "homepage": "https://vitnode.com/",
+  "peerDependencies": {
+    "eslint": "8"
+  },
+  "devDependencies": {
+    "eslint": "8.57.0",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.10.0"
+  }
+}

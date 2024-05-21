@@ -1,0 +1,19 @@
+{
+  // "parser": "@typescript-eslint/parser",
+  // "parserOptions": {
+  //   "project": "./tsconfig.json",
+  //   "sourceType": "module"
+  // },
+  // "plugins": ["@typescript-eslint/eslint-plugin"],
+  "extends": ["eslint-config-vitnode/.eslintrc.json"],
+  "env": {
+    "node": true
+  },
+  "ignorePatterns": [
+    ".eslintrc.json",
+    "node_modules",
+    "uploads",
+    "dist",
+    ".turbo"
+  ]
+}
