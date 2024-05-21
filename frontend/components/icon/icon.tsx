@@ -16,7 +16,7 @@ export const Icon = memo(({ className, name, ...props }: Props) => {
     return <span className={className}>{name}</span>;
   }
 
-  const LucideIcon = lazy<ComponentType<Lucide.LucideProps>>(() =>
+  const LucideIcon = lazy<ComponentType<Lucide.LucideProps>>(async () =>
     import("lucide-react")
       .then(mod => mod[name as IconLucideNames])
       .then(mod => ({ default: mod }))

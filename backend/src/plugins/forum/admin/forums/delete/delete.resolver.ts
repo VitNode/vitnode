@@ -15,6 +15,6 @@ export class DeleteForumForumsResolver {
   async admin__forum_forums__delete(
     @Args() args: DeleteForumForumsArgs
   ): Promise<string> {
-    return await this.service.delete(args);
+    return this.service.delete(args);
   }
 }

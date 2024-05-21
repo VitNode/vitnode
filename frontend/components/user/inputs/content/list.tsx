@@ -12,7 +12,7 @@ import { GroupFormat } from "../../../groups/group-format";
 interface Props {
   edges: Pick<
     ShowCoreMembers,
-    "id" | "name" | "avatar_color" | "avatar" | "group" | "name_seo"
+    "avatar_color" | "avatar" | "group" | "id" | "name_seo" | "name"
   >[];
   onSelect: (value: UserInputItem) => void;
   values: UserInputItem[];

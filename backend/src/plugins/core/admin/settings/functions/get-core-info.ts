@@ -1,5 +1,6 @@
 import { join } from "path";
 import * as fs from "fs";
+
 import { PluginInfoJSONType } from "../../plugins/helpers/files/create/contents";
 
 export const getCoreInfo = async () => {
@@ -9,7 +10,7 @@ export const getCoreInfo = async () => {
 
   const pathVersionsJSON = join(path, "versions.json");
   const versionsFile = await fs.promises.readFile(pathVersionsJSON, "utf8");
-  const versions: { [key: string]: string } = JSON.parse(versionsFile);
+  const versions: Record<string, string> = JSON.parse(versionsFile);
 
   // Find the latest version
   const latestVersion = Object.keys(versions).sort().reverse()[0];

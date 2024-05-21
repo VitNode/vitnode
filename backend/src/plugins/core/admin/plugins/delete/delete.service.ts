@@ -17,8 +17,8 @@ import { setRebuildRequired } from "@/functions/rebuild-required";
 @Injectable()
 export class DeleteAdminPluginsService {
   constructor(
-    private databaseService: DatabaseService,
-    private changeFilesService: ChangeFilesAdminPluginsService
+    private readonly databaseService: DatabaseService,
+    private readonly changeFilesService: ChangeFilesAdminPluginsService
   ) {}
 
   protected deleteFolderWhenExists(path: string) {

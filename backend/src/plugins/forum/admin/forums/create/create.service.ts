@@ -17,8 +17,8 @@ import { CustomError } from "@/utils/errors/custom-error";
 @Injectable()
 export class CreateForumForumsService {
   constructor(
-    private databaseService: DatabaseService,
-    private parserTextLang: ParserTextLanguageCoreHelpersService
+    private readonly databaseService: DatabaseService,
+    private readonly parserTextLang: ParserTextLanguageCoreHelpersService
   ) {}
 
   async create({

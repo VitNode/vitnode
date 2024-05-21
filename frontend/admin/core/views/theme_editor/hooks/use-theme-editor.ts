@@ -36,7 +36,7 @@ interface ThemeEditorFormObj {
 
 interface Args {
   activeTab: ThemeEditorTab;
-  activeTheme: "light" | "dark";
+  activeTheme: "dark" | "light";
   changeColor: ({
     hslColor,
     name

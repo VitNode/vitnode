@@ -12,7 +12,6 @@ import { ChangeTemplatesAdminThemesService } from "../change_templates.service";
 
 import { generateRandomString } from "@/functions/generate-random-string";
 import { currentDate } from "@/functions/date";
-
 import { core_themes } from "../../database/schema/themes";
 import { FileUpload } from "@/utils/graphql-upload/upload";
 import { NotFoundError } from "@/utils/errors/not-found-error";
@@ -22,10 +21,6 @@ import { setRebuildRequired } from "@/functions/rebuild-required";
 
 @Injectable()
 export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService {
-  constructor(private databaseService: DatabaseService) {
-    super();
-  }
-
   protected path: string = join(process.cwd(), "..", "frontend", "themes");
   protected tempPath: string = join(
     process.cwd(),
@@ -33,6 +28,10 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
     "themes",
     `${generateRandomString(5)}${currentDate()}`
   );
+
+  constructor(private readonly databaseService: DatabaseService) {
+    super();
+  }
 
   protected async getThemeConfig({
     tgz
@@ -51,10 +50,10 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
           tar.extract({
             C: this.tempPath,
             strip: 1
-          }) as ReturnType<typeof tar.extract> & NodeJS.WritableStream
+          }) as NodeJS.WritableStream & ReturnType<typeof tar.extract>
         )
         .on("error", err => {
-          reject(err.message);
+          throw new reject(err.message);
         })
         .on("finish", () => {
           resolve("success");

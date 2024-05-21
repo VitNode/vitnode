@@ -16,7 +16,7 @@ import { Loader } from "@/components/loader";
 import { useModalChangeAvatar } from "@/hooks/core/settings/avatar/use-modal-change-avatar";
 import { useSession } from "@/hooks/core/use-session";
 
-const CropperModalChangeAvatar = lazy(() =>
+const CropperModalChangeAvatar = lazy(async () =>
   import("./cropper/cropper-modal-change-avatar").then(module => ({
     default: module.CropperModalChangeAvatar
   }))

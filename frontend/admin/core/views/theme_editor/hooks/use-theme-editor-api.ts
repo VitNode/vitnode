@@ -69,7 +69,7 @@ export const useThemeEditorApi = ({
     colors: formSchemaColorsThemeEditor
   });
   const { resolvedTheme, theme } = useTheme();
-  const activeTheme: "light" | "dark" =
+  const activeTheme: "dark" | "light" =
     (resolvedTheme ?? theme) === "dark" ? "dark" : "light";
 
   const form = useForm<z.infer<typeof formSchema>>({

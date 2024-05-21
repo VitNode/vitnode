@@ -6,7 +6,7 @@ import { useGlobals } from "@/hooks/core/use-globals";
 import { convertUnixTime } from "@/functions/date";
 
 interface Args {
-  date: number | Date;
+  date: Date | number;
 }
 
 export const useDateFormat = ({ date }: Args) => {

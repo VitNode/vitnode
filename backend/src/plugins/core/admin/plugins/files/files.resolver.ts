@@ -18,6 +18,6 @@ export class FilesAdminPluginsResolver {
   async admin__core_plugins__files(
     @Args() args: FilesAdminPluginsArgs
   ): Promise<FilesAdminPluginsObj> {
-    return await this.service.check(args);
+    return this.service.check(args);
   }
 }

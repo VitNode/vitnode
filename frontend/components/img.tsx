@@ -5,7 +5,7 @@ import { cn } from "@/functions/classnames";
 
 interface InitialProps {
   alt: string;
-  src: string | StaticImageData;
+  src: StaticImageData | string;
   className?: string;
   imageClassName?: string;
   priority?: boolean;
@@ -27,7 +27,7 @@ interface PropsWithFill extends InitialProps {
   width?: never;
 }
 
-export type ImgProps = PropsWithWidthAndHeight | PropsWithFill;
+export type ImgProps = PropsWithFill | PropsWithWidthAndHeight;
 
 const Img = forwardRef<HTMLImageElement, ImgProps>(
   (

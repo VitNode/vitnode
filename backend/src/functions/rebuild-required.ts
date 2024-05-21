@@ -1,11 +1,12 @@
+import * as fs from "fs";
+
 import { ConfigType, configPath, getConfigFile } from "@/config";
 import { CustomError } from "@/utils/errors/custom-error";
-import * as fs from "fs";
 
 export const setRebuildRequired = async ({
   set
 }: {
-  set: "themes" | "langs" | "plugins";
+  set: "langs" | "plugins" | "themes";
 }) => {
   const config = await getConfigFile();
 

@@ -41,11 +41,11 @@ export default async function Page({ searchParams }: Props) {
 
   const PageFromTheme: LazyExoticComponent<
     (props: Core_Members__Files__ShowQuery) => JSX.Element
-  > = lazy(() =>
+  > = lazy(async () =>
     import(
       `@/themes/${theme_id}/core/views/settings/views/files/files-settings-view`
     ).catch(
-      () =>
+      async () =>
         import("@/themes/1/core/views/settings/views/files/files-settings-view")
     )
   );

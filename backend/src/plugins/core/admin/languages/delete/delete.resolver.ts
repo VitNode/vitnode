@@ -15,6 +15,6 @@ export class DeleteAdminCoreLanguagesResolver {
   async admin__core_languages__delete(
     @Args() args: DeleteCoreAdminLanguagesArgs
   ): Promise<string> {
-    return await this.service.delete(args);
+    return this.service.delete(args);
   }
 }

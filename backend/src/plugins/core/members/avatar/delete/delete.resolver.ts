@@ -15,6 +15,6 @@ export class DeleteAvatarCoreMembersResolver {
   async core_members__avatar__delete(
     @CurrentUser() currentUser: User
   ): Promise<string> {
-    return await this.service.deleteAvatar(currentUser);
+    return this.service.deleteAvatar(currentUser);
   }
 }

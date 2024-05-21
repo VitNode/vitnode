@@ -11,14 +11,14 @@ import {
 import { Button } from "@/components/ui/button";
 import type { ShowForumForumsAdmin } from "@/graphql/hooks";
 
-const Content = lazy(() =>
+const Content = lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentDeleteActionForumAdmin
   }))
 );
 
 export const DeleteActionForumAdmin = (
-  props: Pick<ShowForumForumsAdmin, "id" | "name" | "_count">
+  props: Pick<ShowForumForumsAdmin, "_count" | "id" | "name">
 ) => {
   const t = useTranslations("core");
 

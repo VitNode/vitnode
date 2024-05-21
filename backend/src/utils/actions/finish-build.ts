@@ -5,9 +5,10 @@ import { join } from "path";
 
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 
-import { db } from "@/database/client";
 import { updatePlugins } from "./helpers/update-plugins";
 import { generateManifest } from "./helpers/manifest";
+
+import { db } from "@/database/client";
 
 (async () => {
   await generateManifest();

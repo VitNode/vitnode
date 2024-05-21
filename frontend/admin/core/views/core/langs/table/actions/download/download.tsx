@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 
-const Content = lazy(() =>
+const Content = lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentDownloadActionsTableLangsCoreAdmin
   }))

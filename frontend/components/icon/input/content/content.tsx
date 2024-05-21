@@ -11,13 +11,13 @@ import { SkinSelectEmojisContentIconInput } from "./emojis/skin-select";
 
 // import { SkinSelectEmojiButtonEditor } from "@/components/editor/toolbar/buttons/emoji/skin-select";
 
-const EmojisContentIconInput = lazy(() =>
+const EmojisContentIconInput = lazy(async () =>
   import("./emojis/emojis").then(module => ({
     default: module.EmojisContentIconInput
   }))
 );
 
-const IconsContentIconInput = lazy(() =>
+const IconsContentIconInput = lazy(async () =>
   import("./icons/icons").then(module => ({
     default: module.IconsContentIconInput
   }))

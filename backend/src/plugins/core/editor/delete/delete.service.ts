@@ -15,7 +15,7 @@ import { AccessDeniedError } from "@/utils/errors/access-denied-error";
 @Injectable()
 export class DeleteCoreEditorService {
   constructor(
-    private databaseService: DatabaseService,
+    private readonly databaseService: DatabaseService,
     private readonly deleteFile: DeleteCoreFilesService
   ) {}
 

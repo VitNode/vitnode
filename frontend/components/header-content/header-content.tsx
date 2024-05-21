@@ -10,12 +10,12 @@ interface HeaderContentProps {
 }
 
 interface HeaderContentH1Props extends HeaderContentProps {
-  h1: string | ReactNode;
+  h1: ReactNode | string;
   h2?: never;
 }
 
 interface HeaderContentH2Props extends HeaderContentProps {
-  h2: string | ReactNode;
+  h2: ReactNode | string;
   h1?: never;
 }
 

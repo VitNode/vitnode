@@ -9,7 +9,7 @@ import { CustomError } from "@/utils/errors/custom-error";
 
 @Injectable()
 export class DeleteAdminStaffModeratorsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
   async delete({ id }: DeleteAdminStaffModeratorsArgs): Promise<string> {
     const permission =
       await this.databaseService.db.query.core_moderators_permissions.findFirst(

@@ -18,7 +18,7 @@ import { pluginPaths } from "../../plugins/paths";
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   protected throwError() {
     throw new CustomError({
@@ -59,7 +59,7 @@ export class CreateDatabaseAdminInstallService {
     ]);
 
     // Create plugins
-    const coreVersions: { [version_code: number]: string } = JSON.parse(
+    const coreVersions: Record<number, string> = JSON.parse(
       fs.readFileSync(pluginPaths({ code: "core" }).backend.versions, "utf8")
     );
 

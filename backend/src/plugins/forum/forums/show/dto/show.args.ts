@@ -1,6 +1,7 @@
 import { ArgsType, Field, Int } from "@nestjs/graphql";
 
 import { LastPostsShowForumForumsArgs } from "../last_posts/dto/last_posts.args";
+
 import { PaginationArgs } from "@/utils/types/database/pagination.type";
 
 @ArgsType()

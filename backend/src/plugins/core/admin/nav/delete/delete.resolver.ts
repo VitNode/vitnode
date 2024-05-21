@@ -15,6 +15,6 @@ export class DeleteAdminNavResolver {
   async admin__core_nav__delete(
     @Args() args: DeleteAdminNavArgs
   ): Promise<string> {
-    return await this.service.delete(args);
+    return this.service.delete(args);
   }
 }

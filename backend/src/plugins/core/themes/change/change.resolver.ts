@@ -2,6 +2,7 @@ import { Args, Context, Mutation, Resolver } from "@nestjs/graphql";
 
 import { ChangeCoreThemesArgs } from "./dto/change.args";
 import { ChangeCoreThemesService } from "./change.service";
+
 import { Ctx } from "@/utils/types/context.type";
 
 @Resolver()
@@ -13,6 +14,6 @@ export class ChangeThemesResolver {
     @Args() args: ChangeCoreThemesArgs,
     @Context() context: Ctx
   ): Promise<string> {
-    return await this.service.change(args, context);
+    return this.service.change(args, context);
   }
 }

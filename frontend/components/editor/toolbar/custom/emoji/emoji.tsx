@@ -11,7 +11,7 @@ import { Loader } from "@/components/loader";
 
 import { ButtonToolbarEditor } from "../../button";
 
-const Content = lazy(() =>
+const Content = lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentEmojiToolbarEditor
   }))

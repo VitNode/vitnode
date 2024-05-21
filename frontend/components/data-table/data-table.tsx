@@ -49,7 +49,7 @@ interface DataTableProps<TData extends TDataMin>
   columns: ColumnDef<TData>[];
   data: TData[];
   defaultPageSize: 10 | 20 | 30 | 40 | 50;
-  defaultSorting?: { sortBy: keyof TData; sortDirection: "desc" | "asc" };
+  defaultSorting?: { sortBy: keyof TData; sortDirection: "asc" | "desc" };
   filters?: ReactNode;
   pageInfo?: PageInfo;
   searchPlaceholder?: string;

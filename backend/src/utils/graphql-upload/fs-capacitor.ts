@@ -23,7 +23,7 @@ process.once("exit", () => processExitProxy.emit("exit"));
 
 export class ReadStream extends Readable {
   private _pos = 0;
-  private _writeStream: WriteStream;
+  private readonly _writeStream: WriteStream;
 
   constructor(writeStream: WriteStream, options?: ReadStreamOptions) {
     super({
@@ -96,10 +96,10 @@ export interface WriteStreamOptions {
 }
 
 export class WriteStream extends Writable {
-  private _fd: null | number = null;
-  private _path: null | string = null;
+  private _fd: number | null = null;
+  private _path: string | null = null;
   private _pos = 0;
-  private _readStreams: Set<ReadStream> = new Set();
+  private readonly _readStreams: Set<ReadStream> = new Set();
   private _released = false;
 
   constructor(options?: WriteStreamOptions) {
@@ -139,7 +139,7 @@ export class WriteStream extends Writable {
     });
   }
 
-  _cleanup = (callback: (error: null | Error) => void): void => {
+  _cleanup = (callback: (error: Error | null) => void): void => {
     const fd = this._fd;
     const path = this._path;
 
@@ -187,7 +187,7 @@ export class WriteStream extends Writable {
     }
   };
 
-  _final(callback: (error?: null | Error) => unknown): void {
+  _final(callback: (error?: Error | null) => unknown): void {
     if (typeof this._fd !== "number") {
       this.once("ready", () => this._final(callback));
 
@@ -199,7 +199,7 @@ export class WriteStream extends Writable {
   _write(
     chunk: Buffer,
     encoding: string,
-    callback: (error?: null | Error) => unknown
+    callback: (error?: Error | null) => unknown
   ): void {
     if (typeof this._fd !== "number") {
       this.once("ready", () => this._write(chunk, encoding, callback));
@@ -233,8 +233,8 @@ export class WriteStream extends Writable {
   }
 
   _destroy(
-    error: undefined | null | Error,
-    callback: (error?: null | Error) => unknown
+    error: Error | null | undefined,
+    callback: (error?: Error | null) => unknown
   ): void {
     // Destroy all attached read streams.
     for (const readStream of this._readStreams) {

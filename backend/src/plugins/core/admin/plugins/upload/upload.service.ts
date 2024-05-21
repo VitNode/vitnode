@@ -23,13 +23,6 @@ import { updateNavAdminPlugin } from "@/utils/actions/helpers/update-plugins";
 
 @Injectable()
 export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService {
-  constructor(
-    private databaseService: DatabaseService,
-    private changeFilesService: ChangeFilesAdminPluginsService
-  ) {
-    super();
-  }
-
   protected path: string = join(process.cwd());
   protected tempFolderName: string = `${generateRandomString(5)}${currentDate()}`;
   protected tempPath: string = join(
@@ -38,6 +31,13 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
     "plugins",
     this.tempFolderName
   );
+
+  constructor(
+    private readonly databaseService: DatabaseService,
+    private readonly changeFilesService: ChangeFilesAdminPluginsService
+  ) {
+    super();
+  }
 
   protected async removeTempFolder(): Promise<void> {
     // Delete temp folder
@@ -61,10 +61,10 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
           tar.extract({
             C: this.tempPath,
             strip: 1
-          }) as ReturnType<typeof tar.extract> & NodeJS.WritableStream
+          }) as NodeJS.WritableStream & ReturnType<typeof tar.extract>
         )
         .on("error", err => {
-          reject(err.message);
+          throw new reject(err.message);
         })
         .on("finish", () => {
           resolve("success");
@@ -73,7 +73,7 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
 
     const pathInfoJSON = join(this.tempPath, "backend", "plugin.json");
     const pluginFile = await fs.promises.readFile(pathInfoJSON, "utf8");
-    const config: Omit<ConfigPlugin, "versions" | "version_code"> =
+    const config: Omit<ConfigPlugin, "version_code" | "versions"> =
       JSON.parse(pluginFile);
 
     // Check if variables exists
@@ -87,7 +87,7 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
 
     const pathVersionsJSON = join(this.tempPath, "backend", "versions.json");
     const versionsFile = await fs.promises.readFile(pathVersionsJSON, "utf8");
-    const versions: { [key: string]: string } = JSON.parse(versionsFile);
+    const versions: Record<string, string> = JSON.parse(versionsFile);
 
     // Find the latest version
     const latestVersion = Object.keys(versions).sort().reverse()[0];
@@ -177,7 +177,9 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
     await Promise.all(
       frontendPaths.map(async path => {
         const source = join(this.tempPath, "frontend", path);
-        const destination = pluginPaths({ code: config.code }).frontend[path];
+        const destination: string = pluginPaths({ code: config.code }).frontend[
+          path
+        ];
 
         return this.copyFilesToPluginFolder({ source, destination });
       })

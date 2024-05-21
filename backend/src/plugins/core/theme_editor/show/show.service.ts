@@ -1,24 +1,27 @@
-import { Injectable } from "@nestjs/common";
-import { getThemeId } from "../../settings/helpers/get-theme-id";
-import { DatabaseService } from "@/database/database.service";
-import { ConfigService } from "@nestjs/config";
-import { Ctx } from "@/utils/types/context.type";
-import { ABSOLUTE_PATHS } from "@/config";
 import { join } from "path";
 import * as fs from "fs";
-import { NotFoundError } from "@/utils/errors/not-found-error";
+
+import { Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+
 import {
   ColorsShowCoreThemeEditor,
   HslColor,
   ShowCoreThemeEditorObj
 } from "./dto/show.obj";
+
+import { getThemeId } from "../../settings/helpers/get-theme-id";
+import { DatabaseService } from "@/database/database.service";
+import { Ctx } from "@/utils/types/context.type";
+import { ABSOLUTE_PATHS } from "@/config";
+import { NotFoundError } from "@/utils/errors/not-found-error";
 import { keysFromCSSThemeEditor } from "../../admin/theme_editor/edit/edit.service";
 
 @Injectable()
 export class ShowCoreThemeEditorService {
   constructor(
-    private databaseService: DatabaseService,
-    private configService: ConfigService
+    private readonly databaseService: DatabaseService,
+    private readonly configService: ConfigService
   ) {}
 
   private parseStringToHsl(string: string): HslColor {
@@ -42,11 +45,11 @@ export class ShowCoreThemeEditorService {
     themeId
   }: {
     cssAsString: string;
-    variable: string;
     themeId: number;
+    variable: string;
   }): {
-    light: HslColor;
     dark: HslColor;
+    light: HslColor;
   } {
     const regex = new RegExp(
       `html\\[data-theme-id="${themeId}"\\]\\s*{([^}]*)}|html\\[data-theme-id="${themeId}"\\]\\.dark\\s*{([^}]*)}`,

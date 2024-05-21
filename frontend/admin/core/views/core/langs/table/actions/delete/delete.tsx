@@ -4,7 +4,7 @@ import { Loader } from "@/components/loader";
 import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 
-const Content = lazy(() =>
+const Content = lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentDeleteActionsTableLangsCoreAdmin
   }))

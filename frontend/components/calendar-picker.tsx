@@ -31,11 +31,11 @@ export const CalendarPicker = ({ onSelect, selected }: Props) => {
           {selected?.from ? (
             selected?.to ? (
               <>
-                {format(selected!.from, "LLL dd, y")} -{" "}
-                {format(selected!.to, "LLL dd, y")}
+                {format(selected.from, "LLL dd, y")} -{" "}
+                {format(selected.to, "LLL dd, y")}
               </>
             ) : (
-              format(selected!.from, "LLL dd, y")
+              format(selected.from, "LLL dd, y")
             )
           ) : (
             <span>Pick a date</span>

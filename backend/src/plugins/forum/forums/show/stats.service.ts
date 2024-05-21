@@ -9,7 +9,7 @@ import { TextLanguage } from "@/utils/types/database/text-language.type";
 
 @Injectable()
 export class StatsShowForumForumsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async whereAccessToRead({
     isAdmin,

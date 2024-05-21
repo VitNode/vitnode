@@ -11,7 +11,7 @@ import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class FilesAdminPluginsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   protected async checkNumberOfFiles({
     paths

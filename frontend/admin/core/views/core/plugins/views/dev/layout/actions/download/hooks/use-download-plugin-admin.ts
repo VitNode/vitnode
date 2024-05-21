@@ -15,7 +15,7 @@ export const useDownloadPluginAdmin = ({
   code,
   version,
   version_code
-}: Pick<ShowAdminPlugins, "version_code" | "version" | "code">) => {
+}: Pick<ShowAdminPlugins, "code" | "version_code" | "version">) => {
   const t = useTranslations("core");
   const { setOpen } = useDialog();
   const formSchema = z.object({

@@ -8,6 +8,6 @@ export class CreateDatabaseAdminInstallResolver {
 
   @Mutation(() => String)
   async admin__install__create_database(): Promise<string> {
-    return await this.service.create();
+    return this.service.create();
   }
 }

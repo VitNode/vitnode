@@ -16,6 +16,6 @@ export class UploadAdminThemesResolver {
   async admin__core_themes__upload(
     @Args() args: UploadAdminThemesArgs
   ): Promise<ShowAdminThemes> {
-    return await this.service.upload(args);
+    return this.service.upload(args);
   }
 }

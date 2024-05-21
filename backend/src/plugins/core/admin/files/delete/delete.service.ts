@@ -11,7 +11,7 @@ import { DatabaseService } from "@/database/database.service";
 @Injectable()
 export class DeleteAdminFilesService {
   constructor(
-    private databaseService: DatabaseService,
+    private readonly databaseService: DatabaseService,
     private readonly deleteFile: DeleteCoreFilesService
   ) {}
 

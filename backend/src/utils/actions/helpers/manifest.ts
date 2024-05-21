@@ -5,6 +5,7 @@ import * as fs from "fs";
 import * as dotenv from "dotenv";
 
 import { objectToArray, updateObject } from "./update-object";
+
 import { ABSOLUTE_PATHS, getConfigFile } from "@/config";
 import { parseFrontendUrlFromEnv } from "@/functions/envs";
 
@@ -15,17 +16,17 @@ dotenv.config({
 interface ManifestType {
   background_color?: string;
   description?: string;
-  display?: "fullscreen" | "standalone" | "minimal-ui" | "browser";
+  display?: "browser" | "fullscreen" | "minimal-ui" | "standalone";
   display_override?: (
-    | "fullscreen"
-    | "standalone"
-    | "minimal-ui"
     | "browser"
+    | "fullscreen"
+    | "minimal-ui"
+    | "standalone"
     | "window-controls-overlay"
   )[];
   icons?: {
     src: string;
-    purpose?: "any" | "maskable" | "monochrome" | "badge";
+    purpose?: "any" | "badge" | "maskable" | "monochrome";
     sizes?: string;
     type?: string;
   }[];
@@ -34,13 +35,13 @@ interface ManifestType {
   name?: string;
   orientation?:
     | "any"
-    | "natural"
+    | "landscape-primary"
+    | "landscape-secondary"
     | "landscape"
-    | "portrait"
+    | "natural"
     | "portrait-primary"
     | "portrait-secondary"
-    | "landscape-primary"
-    | "landscape-secondary";
+    | "portrait";
   screenshots?: {
     src: string;
     sizes?: string;
@@ -53,7 +54,7 @@ interface ManifestType {
     description?: string;
     icons?: {
       src: string;
-      purpose?: "any" | "maskable" | "monochrome" | "badge";
+      purpose?: "any" | "badge" | "maskable" | "monochrome";
       sizes?: string;
       type?: string;
     }[];
@@ -69,8 +70,8 @@ const generateDefaultManifest = ({
   site_name,
   site_short_name
 }: {
-  lang_code: string;
   frontend_url: string;
+  lang_code: string;
   site_name: string;
   site_short_name: string;
 }): ManifestType => ({

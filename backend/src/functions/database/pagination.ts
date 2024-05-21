@@ -1,8 +1,9 @@
+import { AnyColumn, SQL, asc, desc, eq, gt, gte, lt, lte } from "drizzle-orm";
+import { PgTableWithColumns, TableConfig } from "drizzle-orm/pg-core";
+
 import { DatabaseService } from "@/database/database.service";
 import { PageInfo } from "@/utils/types/database/pagination.type";
 import { SortDirectionEnum } from "@/utils/types/database/sort-direction.type";
-import { AnyColumn, SQL, asc, desc, eq, gt, gte, lt, lte } from "drizzle-orm";
-import { PgTableWithColumns, TableConfig } from "drizzle-orm/pg-core";
 
 type DataInterface<T> = T & {
   id: number;
@@ -78,10 +79,10 @@ export function outputPagination<T>({
 }
 
 // Input Pagination Cursor
-export type Cursor = {
+export interface Cursor {
   column: string;
   schema: AnyColumn;
-};
+}
 
 interface InputPaginationCursorArgs<T extends TableConfig> {
   cursor: number | null;

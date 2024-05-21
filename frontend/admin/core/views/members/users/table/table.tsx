@@ -27,13 +27,13 @@ interface UsersMembersAdminAPIDataType
   extends Pick<
     ShowAdminMembers,
     | "avatar_color"
+    | "avatar"
     | "email"
     | "group"
     | "id"
     | "joined"
-    | "name"
-    | "avatar"
     | "name_seo"
+    | "name"
   > {}
 
 export const TableUsersMembersAdmin = ({

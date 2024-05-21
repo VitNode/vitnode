@@ -16,6 +16,6 @@ export class EditAdminCoreLanguagesResolver {
   async admin__core_languages__edit(
     @Args() args: EditCoreAdminLanguagesArgs
   ): Promise<ShowCoreLanguages> {
-    return await this.service.edit(args);
+    return this.service.edit(args);
   }
 }

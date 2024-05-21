@@ -27,7 +27,7 @@ export const GroupInputContent = ({ onSelect, values }: Props) => {
 
   const { data, isLoading } = useQuery({
     queryKey: ["Admin__Core_Groups__Show_Short", { search }],
-    queryFn: async () => await queryApi({ first: 10, search })
+    queryFn: async () => queryApi({ first: 10, search })
   });
 
   const handleSearchInput = useDebouncedCallback((value: string) => {

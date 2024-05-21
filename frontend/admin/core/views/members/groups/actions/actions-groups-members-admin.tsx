@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Loader } from "@/components/loader";
 
-const CreateEditFormGroupsMembersAdmin = lazy(() =>
+const CreateEditFormGroupsMembersAdmin = lazy(async () =>
   import("../create-edit-form/create-edit-form-groups-members-admin").then(
     module => ({
       default: module.CreateEditFormGroupsMembersAdmin

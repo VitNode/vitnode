@@ -21,7 +21,7 @@ export interface UploadFilesHandlerArgs {
 }
 
 export interface UploadFilesHandlerEditorArgs {
-  value: string | TextLanguage[];
+  value: TextLanguage[] | string;
   allowUploadFiles?: {
     folder: string;
     plugin: string;

@@ -4,7 +4,7 @@ import { useMemo } from "react";
 
 import { getIdFormString } from "@/functions/url";
 import { APIKeys } from "@/graphql/api-keys";
-import { type Forum_Forums__Show_ItemQuery } from "@/graphql/hooks";
+import type { Forum_Forums__Show_ItemQuery } from "@/graphql/hooks";
 import { queryApi } from "./query-api";
 
 interface Args {
@@ -19,7 +19,7 @@ export const useTopicsList = ({ initData }: Args) => {
   const query = useInfiniteQuery({
     queryKey: [APIKeys.TOPICS_IN_FORUM, { id }],
     queryFn: async ({ pageParam }) =>
-      await queryApi({
+      queryApi({
         ...pageParam,
         forumId: getIdFormString(id)
       }),

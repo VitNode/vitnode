@@ -8,7 +8,6 @@ import {
 } from "./dto/authorization.obj";
 
 import { currentDate } from "@/functions/date";
-
 import { AuthorizationCurrentUserObj } from "@/plugins/core/sessions/authorization/dto/authorization.obj";
 import { DatabaseService } from "@/database/database.service";
 import { AccessDeniedError } from "@/utils/errors/access-denied-error";
@@ -18,9 +17,9 @@ import { getCoreInfo } from "../../settings/functions/get-core-info";
 @Injectable()
 export class AuthorizationAdminSessionsService {
   constructor(
-    private databaseService: DatabaseService,
-    private jwtService: JwtService,
-    private configService: ConfigService
+    private readonly databaseService: DatabaseService,
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService
   ) {}
 
   protected async getAdminNav(): Promise<NavAdminPluginsAuthorization[]> {

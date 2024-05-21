@@ -24,7 +24,7 @@ interface ReturnValues<T> {
   sortBy: { column: keyof T; direction: SortDirectionEnum } | null;
 }
 
-export function usePaginationAPISsr<T extends { [key: string]: unknown }>({
+export function usePaginationAPISsr<T extends Record<string, unknown>>({
   defaultPageSize,
   search,
   searchParams,
@@ -46,7 +46,7 @@ export function usePaginationAPISsr<T extends { [key: string]: unknown }>({
   };
 }
 
-function useGetSortByParamsAPI<T extends { [key: string]: unknown }>({
+function useGetSortByParamsAPI<T extends Record<string, unknown>>({
   constEnum,
   searchParams
 }: {

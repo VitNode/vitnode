@@ -9,7 +9,7 @@ import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class ChangePositionForumForumsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async changeOrderingForumForums({
     id,

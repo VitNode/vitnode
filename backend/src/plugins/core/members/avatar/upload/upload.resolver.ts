@@ -18,6 +18,6 @@ export class UploadAvatarCoreMembersResolver {
     @CurrentUser() currentUser: User,
     @Args() args: UploadAvatarCoreMembersArgs
   ): Promise<UploadAvatarCoreMembersObj> {
-    return await this.service.uploadAvatar(currentUser, args);
+    return this.service.uploadAvatar(currentUser, args);
   }
 }

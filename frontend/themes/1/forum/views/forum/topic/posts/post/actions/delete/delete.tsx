@@ -3,7 +3,7 @@ import { Suspense, lazy } from "react";
 import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
 import { Loader } from "@/components/loader";
 
-const Content = lazy(() =>
+const Content = lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentDeleteActionPost
   }))

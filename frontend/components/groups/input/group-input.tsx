@@ -38,7 +38,7 @@ interface SingleProps extends Props {
 
 export const GroupInput = forwardRef<
   HTMLButtonElement,
-  SingleProps | MultiProps
+  MultiProps | SingleProps
 >(({ className, multiple, onChange, value: currentValue, ...rest }, ref) => {
   const t = useTranslations("core.group_input");
   const values = Array.isArray(currentValue)

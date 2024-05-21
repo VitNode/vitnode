@@ -18,7 +18,7 @@ export const useDownloadLangAdmin = ({
   const { setOpen } = useDialog();
   const query = useQuery({
     queryKey: ["Admin__Core_Plugins__Show"],
-    queryFn: async () => await queryApi({})
+    queryFn: async () => queryApi({})
   });
 
   const formSchema = z.object({

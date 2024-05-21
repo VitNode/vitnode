@@ -10,7 +10,7 @@ import { CustomError } from "@/utils/errors/custom-error";
 
 @Injectable()
 export class DeleteAdminStaffAdministratorsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async delete({ id }: DeleteAdminStaffAdministratorsArgs): Promise<string> {
     const permission =

@@ -25,7 +25,7 @@ export const ContentDeleteActionForumAdmin = ({
   _count,
   id,
   name
-}: Pick<ShowForumForumsAdmin, "id" | "name" | "_count">) => {
+}: Pick<ShowForumForumsAdmin, "_count" | "id" | "name">) => {
   const t = useTranslations("admin_forum.forums.delete");
   const tCore = useTranslations("core");
   const { form, onSubmit } = useDeleteForumAdmin({ id, name });

@@ -1,14 +1,16 @@
+import { join } from "path";
+import * as fs from "fs";
+
+import { Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+
+import { EditAdminThemeEditorArgs, ThemeVariableInput } from "./dto/edit.args";
+
 import { ABSOLUTE_PATHS } from "@/config";
 import { DatabaseService } from "@/database/database.service";
 import { getThemeId } from "@/plugins/core/settings/helpers/get-theme-id";
 import { Ctx } from "@/utils/types/context.type";
-import { Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { join } from "path";
-import * as fs from "fs";
 import { NotFoundError } from "@/utils/errors/not-found-error";
-
-import { EditAdminThemeEditorArgs, ThemeVariableInput } from "./dto/edit.args";
 import { setRebuildRequired } from "@/functions/rebuild-required";
 
 export const keysFromCSSThemeEditor = [
@@ -32,8 +34,8 @@ export const keysFromCSSThemeEditor = [
 @Injectable()
 export class EditAdminThemeEditorService {
   constructor(
-    private databaseService: DatabaseService,
-    private configService: ConfigService
+    private readonly databaseService: DatabaseService,
+    private readonly configService: ConfigService
   ) {}
 
   protected changeVariable({
@@ -43,9 +45,9 @@ export class EditAdminThemeEditorService {
     newValues
   }: {
     cssAsString: string;
-    variable: string;
-    themeId: number;
     newValues: ThemeVariableInput;
+    themeId: number;
+    variable: string;
   }): string {
     const regex = new RegExp(
       `(html\\[data-theme-id="${themeId}"\\]\\s*{[^}]*)--${variable}:\\s*([^;]*)([^}]*)|(html\\[data-theme-id="${themeId}"\\]\\.dark\\s*{[^}]*)--${variable}:\\s*([^;]*)([^}]*)`,

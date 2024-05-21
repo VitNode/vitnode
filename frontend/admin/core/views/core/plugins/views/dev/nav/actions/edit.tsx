@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/tooltip";
 import type { ShowAdminNavPluginsObj } from "@/graphql/hooks";
 
-const Content = lazy(() =>
+const Content = lazy(async () =>
   import("../create-edit/create-edit").then(module => ({
     default: module.CreateEditNavDevPluginAdmin
   }))

@@ -1,4 +1,5 @@
 import { Module } from "@nestjs/common";
+
 import { CreateForumForumsService } from "./create/create.service";
 import { CreateForumForumsResolver } from "./create/create.resolver";
 import { ChangePositionForumForumsResolver } from "./change_position/change_position.resolver";
@@ -9,6 +10,7 @@ import { EditForumForumsResolver } from "./edit/edit.resolver";
 import { EditForumForumsService } from "./edit/edit.service";
 import { DeleteForumForumsResolver } from "./delete/delete.resolver";
 import { DeleteForumForumsService } from "./delete/delete.service";
+
 import { ForumsForumModule } from "../../forums/forums.module";
 
 @Module({

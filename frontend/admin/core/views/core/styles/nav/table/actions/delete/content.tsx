@@ -19,7 +19,7 @@ export const ContentDeleteActionTableNavAdmin = ({
   children,
   id,
   name
-}: Pick<ShowCoreNav, "id" | "children" | "name">) => {
+}: Pick<ShowCoreNav, "children" | "id" | "name">) => {
   const t = useTranslations("admin.core.styles.nav.delete");
   const tCore = useTranslations("core");
   const { onSubmit } = useDeleteNavAdmin({ id, name });

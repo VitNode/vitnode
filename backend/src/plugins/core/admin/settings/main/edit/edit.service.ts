@@ -19,7 +19,7 @@ import {
 
 @Injectable()
 export class EditAdminMainSettingsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   protected async updateDescription({
     languages,
@@ -33,7 +33,7 @@ export class EditAdminMainSettingsService {
         ? el
         : site_description.find(el => el.language_code === "en")?.value
           ? site_description.find(el => el.language_code === "en")
-          : site_description.filter(el => el.value)[0];
+          : site_description.find(el => el.value);
 
       const path = join(
         ABSOLUTE_PATHS.uploads.public,

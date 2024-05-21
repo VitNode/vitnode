@@ -14,8 +14,8 @@ import { DatabaseService } from "@/database/database.service";
 @Injectable()
 export class CreateAdminNavService {
   constructor(
-    private databaseService: DatabaseService,
-    private parserTextLang: ParserTextLanguageCoreHelpersService
+    private readonly databaseService: DatabaseService,
+    private readonly parserTextLang: ParserTextLanguageCoreHelpersService
   ) {}
 
   async create({

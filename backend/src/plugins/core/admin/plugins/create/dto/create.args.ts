@@ -1,4 +1,3 @@
-import { TransformString } from "@/utils/types/database/text-language.type";
 import { ArgsType, Field } from "@nestjs/graphql";
 import { Transform } from "class-transformer";
 import {
@@ -8,6 +7,8 @@ import {
   MaxLength,
   MinLength
 } from "class-validator";
+
+import { TransformString } from "@/utils/types/database/text-language.type";
 
 @ArgsType()
 export class CreateAdminPluginsArgs {

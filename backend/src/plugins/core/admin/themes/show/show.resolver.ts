@@ -16,6 +16,6 @@ export class ShowAdminThemesResolver {
   async admin__core_themes__show(
     @Args() args: ShowAdminThemesArgs
   ): Promise<ShowAdminThemesObj> {
-    return await this.service.show(args);
+    return this.service.show(args);
   }
 }

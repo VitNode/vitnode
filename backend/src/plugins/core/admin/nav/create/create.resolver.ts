@@ -16,6 +16,6 @@ export class CreateAdminNavResolver {
   async admin__core_nav__create(
     @Args() args: CreateAdminNavArgs
   ): Promise<ShowCoreNav> {
-    return await this.service.create(args);
+    return this.service.create(args);
   }
 }

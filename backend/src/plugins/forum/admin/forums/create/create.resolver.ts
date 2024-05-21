@@ -16,6 +16,6 @@ export class CreateForumForumsResolver {
   async admin__forum_forums__create(
     @Args() args: CreateForumForumsArgs
   ): Promise<CreateForumForumsObj> {
-    return await this.service.create(args);
+    return this.service.create(args);
   }
 }

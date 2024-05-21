@@ -1,15 +1,16 @@
+import { ConfigService } from "@nestjs/config";
+
 import { DatabaseService } from "@/database/database.service";
 import { Ctx } from "@/utils/types/context.type";
-import { ConfigService } from "@nestjs/config";
 
 export const getThemeId = async ({
   ctx,
   databaseService,
   configService
 }: {
+  configService: ConfigService;
   ctx: Pick<Ctx, "req">;
   databaseService: DatabaseService;
-  configService: ConfigService;
 }): Promise<number> => {
   const cookie_theme_id: string | null =
     ctx.req.cookies[configService.getOrThrow("cookies.theme_id.name")];

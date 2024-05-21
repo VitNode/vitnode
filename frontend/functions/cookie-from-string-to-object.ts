@@ -3,13 +3,14 @@ import { cookies } from "next/headers";
 const cookieFromStringToObject = (
   str: string[]
 ): {
-  [key: string]: string | boolean | "lax" | "strict" | "none" | undefined;
   Domain: string;
   Expires: string;
   HttpOnly: boolean;
   Path: string;
-  SameSite: boolean | "lax" | "strict" | "none" | undefined;
+  SameSite: boolean | "lax" | "none" | "strict" | undefined;
   Secure: boolean;
+  // eslint-disable-next-line typescript-sort-keys/interface
+  [key: string]: boolean | string | "lax" | "none" | "strict" | undefined;
 }[] => {
   return str.map(item =>
     Object.fromEntries(

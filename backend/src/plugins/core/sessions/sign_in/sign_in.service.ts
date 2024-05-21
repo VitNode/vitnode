@@ -24,10 +24,10 @@ interface CreateSessionArgs extends Ctx {
 @Injectable()
 export class SignInCoreSessionsService {
   constructor(
-    private databaseService: DatabaseService,
-    private jwtService: JwtService,
-    private configService: ConfigService,
-    private deviceService: DeviceSignInCoreSessionsService
+    private readonly databaseService: DatabaseService,
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
+    private readonly deviceService: DeviceSignInCoreSessionsService
   ) {}
 
   protected async createSession({
@@ -111,12 +111,6 @@ export class SignInCoreSessionsService {
       device_id: device.id
     });
 
-    console.log(
-      "cookies.domain",
-      this.configService.getOrThrow("cookies.domain")
-    );
-    console.log("frontend_url", this.configService.getOrThrow("frontend_url"));
-
     // Set cookie for session
     res.cookie(
       this.configService.getOrThrow("cookies.login_token.name"),
@@ -157,7 +151,7 @@ export class SignInCoreSessionsService {
       if (!accessToAdminCP) throw new AccessDeniedError();
     }
 
-    return await this.createSession({
+    return this.createSession({
       name: user.name,
       email: user.email,
       userId: user.id,

@@ -18,6 +18,6 @@ export class CreateAdminStaffAdministratorResolver {
   async admin__core_staff_administrators__create(
     @Args() args: CreateAdminStaffAdministratorsArgs
   ): Promise<ShowAdminStaffAdministrators> {
-    return await this.service.create(args);
+    return this.service.create(args);
   }
 }

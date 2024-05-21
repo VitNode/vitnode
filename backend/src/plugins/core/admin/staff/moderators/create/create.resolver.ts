@@ -16,6 +16,6 @@ export class CreateAdminStaffModeratorsResolver {
   async admin__core_staff_moderators__create(
     @Args() args: CreateAdminStaffModeratorsArgs
   ): Promise<ShowAdminStaffModerators> {
-    return await this.service.create(args);
+    return this.service.create(args);
   }
 }

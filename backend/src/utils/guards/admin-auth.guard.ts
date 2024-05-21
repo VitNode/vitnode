@@ -1,11 +1,13 @@
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { GqlExecutionContext } from "@nestjs/graphql";
+
 import { Ctx } from "../types/context.type";
+
 import { AuthorizationAdminSessionsService } from "@/plugins/core/admin/sessions/authorization/authorization.service";
 
 @Injectable()
 export class AdminAuthGuards implements CanActivate {
-  constructor(private service: AuthorizationAdminSessionsService) {}
+  constructor(private readonly service: AuthorizationAdminSessionsService) {}
 
   protected async getAuth({ req, res }: Ctx) {
     const data = await this.service.authorization({

@@ -11,7 +11,7 @@ import { CustomError } from "@/utils/errors/custom-error";
 
 @Injectable()
 export class DeleteForumForumsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async delete({ id, move_topics_to }: DeleteForumForumsArgs): Promise<string> {
     const forum = await this.databaseService.db.query.forum_forums.findFirst({

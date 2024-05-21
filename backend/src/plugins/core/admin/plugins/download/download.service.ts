@@ -12,9 +12,7 @@ import { ShowAdminNavPluginsObj } from "../nav/show/dto/show.obj";
 
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { User } from "@/utils/decorators/user.decorator";
-
 import { currentDate } from "@/functions/date";
-
 import { core_plugins } from "../../database/schema/plugins";
 import { execShellCommand } from "@/functions/exec-shell-command";
 import { DatabaseService } from "@/database/database.service";
@@ -24,8 +22,9 @@ import { generateRandomString } from "@/functions/generate-random-string";
 
 @Injectable()
 export class DownloadAdminPluginsService {
-  constructor(private databaseService: DatabaseService) {}
   protected tempPath = join(process.cwd(), "temp", "plugins");
+
+  constructor(private readonly databaseService: DatabaseService) {}
 
   protected createFolders(path: string): void {
     if (!fs.existsSync(path)) {
@@ -179,7 +178,7 @@ export class DownloadAdminPluginsService {
       });
     }
 
-    const versions: { [version_code: number]: string } = JSON.parse(
+    const versions: Record<number, string> = JSON.parse(
       fs.readFileSync(pathToVersions, "utf-8")
     );
     versions[version_code] = version;

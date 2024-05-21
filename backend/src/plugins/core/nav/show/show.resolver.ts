@@ -10,6 +10,6 @@ export class ShowCoreNavResolver {
 
   @Query(() => ShowCoreNavObj)
   async core_nav__show(@Args() args: ShowCoreNavArgs): Promise<ShowCoreNavObj> {
-    return await this.service.show(args);
+    return this.service.show(args);
   }
 }

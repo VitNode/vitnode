@@ -15,7 +15,7 @@ import { cn } from "@/functions/classnames";
 import { Loader } from "@/components/loader";
 import type { IconInputProps } from "./content/content";
 
-const Content = lazy(() =>
+const Content = lazy(async () =>
   import("./content/content").then(module => ({
     default: module.ContentIconInput
   }))

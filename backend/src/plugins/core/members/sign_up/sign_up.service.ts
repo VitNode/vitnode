@@ -15,8 +15,8 @@ import { CustomError } from "@/utils/errors/custom-error";
 @Injectable()
 export class SignUpCoreMembersService {
   constructor(
-    private databaseService: DatabaseService,
-    private configService: ConfigService
+    private readonly databaseService: DatabaseService,
+    private readonly configService: ConfigService
   ) {}
 
   protected getGroupId = async (): Promise<number> => {

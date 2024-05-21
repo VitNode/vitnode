@@ -15,7 +15,7 @@ import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class EditAdminThemesService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async edit({
     author,

@@ -8,7 +8,7 @@ export const HeadingExtensionEditor = ({ allowH1 }: { allowH1: boolean }) => {
       const level = this.options.levels.includes(node.attrs.level)
         ? node.attrs.level
         : this.options.levels[0];
-      const classes: { [index: number]: string } = {
+      const classes: Record<number, string> = {
         1: "text-4xl font-extrabold",
         2: "text-3xl font-bold",
         3: "text-2xl font-bold",

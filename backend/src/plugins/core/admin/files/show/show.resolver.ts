@@ -16,6 +16,6 @@ export class ShowAdminFilesResolver {
   async admin__core_files__show(
     @Args() args: ShowAdminFilesArgs
   ): Promise<ShowAdminFilesObj> {
-    return await this.service.show(args);
+    return this.service.show(args);
   }
 }

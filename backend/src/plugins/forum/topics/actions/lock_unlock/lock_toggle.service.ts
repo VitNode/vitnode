@@ -14,7 +14,7 @@ import { AccessDeniedError } from "@/utils/errors/access-denied-error";
 
 @Injectable()
 export class LockToggleForumTopicsService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async lockToggle(
     { group, id: user_id }: User,

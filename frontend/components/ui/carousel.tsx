@@ -24,21 +24,21 @@ type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
 type CarouselOptions = UseCarouselParameters[0];
 type CarouselPlugin = UseCarouselParameters[1];
 
-type CarouselProps = {
+interface CarouselProps {
   opts?: CarouselOptions;
   orientation?: "horizontal" | "vertical";
   plugins?: CarouselPlugin;
   setApi?: (api: CarouselApi) => void;
-};
+}
 
-type CarouselContextProps = {
+type CarouselContextProps = CarouselProps & {
   api: ReturnType<typeof useEmblaCarousel>[1];
   canScrollNext: boolean;
   canScrollPrev: boolean;
   carouselRef: ReturnType<typeof useEmblaCarousel>[0];
   scrollNext: () => void;
   scrollPrev: () => void;
-} & CarouselProps;
+};
 
 const CarouselContext = createContext<CarouselContextProps | null>(null);
 
@@ -54,7 +54,7 @@ function useCarousel() {
 
 const Carousel = forwardRef<
   HTMLDivElement,
-  HTMLAttributes<HTMLDivElement> & CarouselProps
+  CarouselProps & HTMLAttributes<HTMLDivElement>
 >(
   (
     {
@@ -213,7 +213,7 @@ const CarouselPrevious = forwardRef<
     <Button
       ref={ref}
       variant={variant}
-      size={size as "default" | "sm" | "lg" | undefined}
+      size={size as "default" | "lg" | "sm" | undefined}
       className={cn(
         "absolute  h-8 w-8 rounded-full",
         orientation === "horizontal"
@@ -242,7 +242,7 @@ const CarouselNext = forwardRef<
     <Button
       ref={ref}
       variant={variant}
-      size={size as "default" | "sm" | "lg" | undefined}
+      size={size as "default" | "lg" | "sm" | undefined}
       className={cn(
         "absolute h-8 w-8 rounded-full",
         orientation === "horizontal"

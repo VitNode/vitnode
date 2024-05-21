@@ -2,7 +2,7 @@ import { useSearchParams } from "next/navigation";
 
 import { SortDirectionEnum } from "@/graphql/hooks";
 
-export function useGetSortByParamsAPI<T extends { [key: string]: unknown }>({
+export function useGetSortByParamsAPI<T extends Record<string, unknown>>({
   constEnum
 }: {
   constEnum?: T;

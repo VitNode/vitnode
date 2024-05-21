@@ -9,7 +9,7 @@ import type { GroupInputItem } from "../group-input";
 import { GroupFormat } from "../../../groups/group-format";
 
 interface Props {
-  edges: Pick<ShowAdminGroups, "id" | "name" | "guest">[];
+  edges: Pick<ShowAdminGroups, "guest" | "id" | "name">[];
   onSelect: (value: GroupInputItem) => void;
   values: GroupInputItem[];
   multiple?: boolean;

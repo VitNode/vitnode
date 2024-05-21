@@ -20,9 +20,7 @@ export const LayoutInstallConfigsView = ({ children }: Props) => {
   const t = useTranslations("admin.configs.install");
   const segment = useSelectedLayoutSegment();
 
-  const stepsNumber: {
-    [key: string]: number;
-  } = {
+  const stepsNumber: Record<string, number> = {
     license: 2,
     database: 3,
     account: 4

@@ -10,12 +10,13 @@ import {
   Query
 } from "@nestjs/common";
 import { Response } from "express";
+
 import { DatabaseService } from "@/database/database.service";
 import { ABSOLUTE_PATHS } from "@/config";
 
 @Controller("secure_files")
 export class DownloadSecureFilesController {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   @Get(":id")
   async getFile(

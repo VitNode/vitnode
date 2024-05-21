@@ -5,7 +5,7 @@ import { Suspense, lazy } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { EditorSkeleton } from "@/components/editor/editor";
 
-const ContentCreatePost = lazy(() =>
+const ContentCreatePost = lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentCreatePost
   }))

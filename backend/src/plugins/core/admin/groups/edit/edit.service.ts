@@ -16,8 +16,8 @@ import { DatabaseService } from "@/database/database.service";
 @Injectable()
 export class EditAdminGroupsService {
   constructor(
-    private databaseService: DatabaseService,
-    private parserTextLang: ParserTextLanguageCoreHelpersService
+    private readonly databaseService: DatabaseService,
+    private readonly parserTextLang: ParserTextLanguageCoreHelpersService
   ) {}
 
   async edit({

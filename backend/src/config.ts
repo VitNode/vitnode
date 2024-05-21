@@ -1,5 +1,6 @@
 import { promises } from "fs";
 import { join } from "path";
+
 import { parseFrontendUrlFromEnv } from "./functions/envs";
 
 export const configForAppModule = () => {

@@ -17,6 +17,6 @@ export class ShowCoreMembersResolver {
   async core_members__show(
     @Args() args: ShowCoreMembersArgs
   ): Promise<ShowCoreMembersObj> {
-    return await this.service.show(args);
+    return this.service.show(args);
   }
 }

@@ -18,9 +18,9 @@ import { DatabaseService } from "@/database/database.service";
 @Controller("files")
 export class DownloadFilesAdminController {
   constructor(
-    private service: InternalAuthorizationCoreSessionsService,
+    private readonly service: InternalAuthorizationCoreSessionsService,
     private readonly serviceAdmin: AuthorizationAdminSessionsService,
-    private databaseService: DatabaseService
+    private readonly databaseService: DatabaseService
   ) {}
 
   @Get(":file")

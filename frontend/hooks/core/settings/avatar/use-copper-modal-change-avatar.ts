@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { type ReactCropperElement } from "react-cropper";
+import type { ReactCropperElement } from "react-cropper";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
@@ -20,8 +20,8 @@ export const useCopperModalChangeAvatar = () => {
 
     const cropper = cropperRef.current?.cropper;
     if (!cropper) return;
-    const blob = await fetch(cropper.getCroppedCanvas().toDataURL()).then(res =>
-      res.blob()
+    const blob = await fetch(cropper.getCroppedCanvas().toDataURL()).then(
+      async res => res.blob()
     );
     const file = new File([blob], `${session.id}.webp`, {
       type: blob.type

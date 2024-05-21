@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { eq, sum } from "drizzle-orm";
 
 import { UploadCoreEditorArgs } from "./dto/upload.args";
+
 import { User } from "@/utils/decorators/user.decorator";
 import { UploadCoreFilesService } from "../../files/helpers/upload/upload.service";
 import {
@@ -23,17 +24,17 @@ interface GetFilesAfterUploadArgs extends UploadCoreEditorArgs {
 
 @Injectable()
 export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
-  constructor(
-    private databaseService: DatabaseService,
-    private readonly uploadFile: UploadCoreFilesService
-  ) {
-    super();
-  }
-
   protected acceptMimeTypeToFrontend = [
     ...acceptMimeTypeImage,
     ...acceptMimeTypeVideo
   ];
+
+  constructor(
+    private readonly databaseService: DatabaseService,
+    private readonly uploadFile: UploadCoreFilesService
+  ) {
+    super();
+  }
 
   private async getAcceptMineType(): Promise<string[]> {
     const {
@@ -65,7 +66,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
       acceptMimeType: this.acceptMimeTypeToFrontend,
       disableThrowError: true
     });
-    const args: Omit<UploadCoreFilesArgs, "secure" | "acceptMimeType"> = {
+    const args: Omit<UploadCoreFilesArgs, "acceptMimeType" | "secure"> = {
       files: [file],
       maxUploadSizeBytes: maxUploadSizeKb * 1024,
       plugin,

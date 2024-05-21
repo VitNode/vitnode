@@ -4,8 +4,8 @@ import { Link } from "@/i18n";
 import type { User } from "@/graphql/hooks";
 
 interface Props
-  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "children"> {
-  user: Pick<User, "name" | "name_seo">;
+  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "children" | "href"> {
+  user: Pick<User, "name_seo" | "name">;
 }
 
 export const UserLink = forwardRef<HTMLAnchorElement, Props>(

@@ -34,5 +34,5 @@ export class ShowAdminStaffModerators {
   protected: boolean;
 
   @Field(() => UserOrGroupCoreStaffUnion)
-  user_or_group: User | StaffGroupUser;
+  user_or_group: StaffGroupUser | User;
 }

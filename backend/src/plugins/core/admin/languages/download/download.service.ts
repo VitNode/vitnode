@@ -17,7 +17,7 @@ import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class DownloadAdminCoreLanguageService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async download(
     { id: userId }: User,

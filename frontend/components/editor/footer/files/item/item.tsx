@@ -1,7 +1,7 @@
 import { Plus, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { type JSONContent } from "@tiptap/react";
+import type { JSONContent } from "@tiptap/react";
 
 import { CONFIG } from "@/config";
 import { Button } from "@/components/ui/button";
@@ -76,7 +76,7 @@ export const ItemListFilesFooterEditor = ({
           isError={!!error}
           alt={data?.file_alt ?? data?.file_name ?? file?.name ?? ""}
           src={
-            data && data.width && data.height
+            data?.width && data.height
               ? `${CONFIG.backend_public_url}/${data.dir_folder}/${data.file_name}`
               : null
           }

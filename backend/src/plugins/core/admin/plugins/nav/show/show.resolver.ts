@@ -18,6 +18,6 @@ export class ShowAdminNavPluginsResolver {
   async admin__core_plugins__nav__show(
     @Args() args: ShowAdminNavPluginsArgs
   ): Promise<ShowAdminNavPluginsObj[]> {
-    return await this.service.show(args);
+    return this.service.show(args);
   }
 }

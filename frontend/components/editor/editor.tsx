@@ -74,8 +74,7 @@ export const Editor = ({
     },
     content: (() => {
       const current = Array.isArray(value)
-        ? value.filter(v => v.language_code === selectedLanguage)[0]?.value ??
-          ""
+        ? value.find(v => v.language_code === selectedLanguage)?.value ?? ""
         : value;
 
       try {

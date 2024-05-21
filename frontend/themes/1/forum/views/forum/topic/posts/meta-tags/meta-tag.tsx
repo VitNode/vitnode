@@ -7,9 +7,7 @@ import { cn } from "@/functions/classnames";
 import { UserLink } from "@/components/user/link/user-link";
 import { DivMotion } from "@/components/animations/div-motion";
 
-const icon: {
-  [key: string]: LucideIcon;
-} = {
+const icon: Record<string, LucideIcon> = {
   lock: Lock,
   unlock: Unlock
 };
@@ -21,7 +19,7 @@ export const MetaTagTopic = ({
   user
 }: Pick<
   ShowPostsForumsMetaTags,
-  "created" | "action" | "user" | "action_id"
+  "action_id" | "action" | "created" | "user"
 >) => {
   const t = useTranslations("forum.topics.actions.meta");
   const Icon = icon[action] ? icon[action] : Tag;

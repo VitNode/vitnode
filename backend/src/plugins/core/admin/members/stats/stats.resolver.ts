@@ -15,6 +15,6 @@ export class StatsAdminMembersResolver {
   async admin__core_members__stats_sign_up(): Promise<
     SignUpStatsAdminMembers[]
   > {
-    return await this.service.signupStats();
+    return this.service.signupStats();
   }
 }

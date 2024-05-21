@@ -20,7 +20,7 @@ import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class DownloadAdminThemesService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async download(
     { id: userId }: User,

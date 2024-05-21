@@ -15,9 +15,9 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import { type ContentDeleteActionFilesAdvancedCoreAdminProps } from "./content";
+import type { ContentDeleteActionFilesAdvancedCoreAdminProps } from "./content";
 
-const Content = lazy(() =>
+const Content = lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentDeleteActionFilesAdvancedCoreAdmin
   }))

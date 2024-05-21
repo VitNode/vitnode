@@ -22,7 +22,7 @@ import { Label } from "@/components/ui/label";
 import type { ShowAdminThemes } from "@/graphql/hooks";
 
 export interface DownloadThemeActionsAdminProps
-  extends Pick<ShowAdminThemes, "id" | "name" | "version" | "version_code"> {}
+  extends Pick<ShowAdminThemes, "id" | "name" | "version_code" | "version"> {}
 
 export const ContentDownloadThemeActionsAdmin = ({
   id,

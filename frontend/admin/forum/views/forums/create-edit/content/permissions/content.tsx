@@ -161,7 +161,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
                 // 2. The permission is enabled for the current group
                 const checked: boolean = !!(
                   (field.value[`can_all_${permission.id}`] ||
-                    (findItem && findItem[`can_${permission.id}`])) &&
+                    findItem?.[`can_${permission.id}`]) &&
                   item.guest !== permission.disableForGuest
                 );
 

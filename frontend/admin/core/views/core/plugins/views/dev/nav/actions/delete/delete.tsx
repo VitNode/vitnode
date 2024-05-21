@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/tooltip";
 import type { ContentDeleteActionTableNavDevPluginAdminProps } from "./content";
 
-const Content = lazy(() =>
+const Content = lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentDeleteActionTableNavDevPluginAdmin
   }))

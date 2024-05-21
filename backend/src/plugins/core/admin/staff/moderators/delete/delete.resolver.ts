@@ -15,6 +15,6 @@ export class DeleteAdminStaffModeratorsResolver {
   async admin__core_staff_moderators__delete(
     @Args() args: DeleteAdminStaffModeratorsArgs
   ): Promise<string> {
-    return await this.service.delete(args);
+    return this.service.delete(args);
   }
 }

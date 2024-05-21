@@ -16,7 +16,7 @@ import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class DeleteAdminCoreLanguageService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async delete({ code }: DeleteCoreAdminLanguagesArgs): Promise<string> {
     const language =

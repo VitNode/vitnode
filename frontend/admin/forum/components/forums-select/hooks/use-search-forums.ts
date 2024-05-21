@@ -13,7 +13,7 @@ export const useSearchForums = ({ exclude }: Args) => {
   const query = useQuery({
     queryKey: ["Forum_Forums__Show_Short", { search }],
     queryFn: async () =>
-      await queryApi({
+      queryApi({
         first: 10,
         search,
         showAllForums: true

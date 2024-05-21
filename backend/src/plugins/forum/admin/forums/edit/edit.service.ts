@@ -21,10 +21,10 @@ import { DatabaseService } from "@/database/database.service";
 @Injectable()
 export class EditForumForumsService {
   constructor(
-    private databaseService: DatabaseService,
-    private statsService: StatsShowForumForumsService,
-    private lastPostsService: LastPostsForumForumsService,
-    private parserTextLang: ParserTextLanguageCoreHelpersService
+    private readonly databaseService: DatabaseService,
+    private readonly statsService: StatsShowForumForumsService,
+    private readonly lastPostsService: LastPostsForumForumsService,
+    private readonly parserTextLang: ParserTextLanguageCoreHelpersService
   ) {}
 
   protected updatePermissions = async ({

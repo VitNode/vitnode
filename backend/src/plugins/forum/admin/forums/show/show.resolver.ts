@@ -16,6 +16,6 @@ export class ShowForumForumsAdminResolver {
   async admin__forum_forums__show(
     @Args() args: ShowForumForumsArgs
   ): Promise<ShowForumForumsAdminObj> {
-    return await this.service.show(args);
+    return this.service.show(args);
   }
 }
