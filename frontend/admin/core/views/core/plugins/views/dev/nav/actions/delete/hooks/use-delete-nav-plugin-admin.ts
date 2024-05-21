@@ -7,8 +7,7 @@ import type { ContentDeleteActionTableNavDevPluginAdminProps } from "../content"
 import { mutationApi } from "./mutation-api";
 
 export const useDeleteNavPluginAdmin = ({
-  code,
-  id
+  code
 }: ContentDeleteActionTableNavDevPluginAdminProps) => {
   const t = useTranslations("admin.core.plugins.dev.nav.delete");
   const tCore = useTranslations("core");
@@ -17,7 +16,7 @@ export const useDeleteNavPluginAdmin = ({
 
   const onSubmit = async () => {
     const mutation = await mutationApi({
-      id,
+      code,
       pluginCode: Array.isArray(pluginCode) ? pluginCode[0] : pluginCode
     });
     if (mutation.error) {

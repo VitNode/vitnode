@@ -131,7 +131,8 @@ export async function fetcher<TData, TVariables>({
   const json = await res.json();
 
   if (json.errors) {
-    throw new Error(json.errors.at(0));
+    // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
+    return Promise.reject(json.errors.at(0));
   }
 
   return {

@@ -202,13 +202,6 @@ export type HslColorInput = {
   s: Scalars['Int']['input'];
 };
 
-export type ItemNavAdminPluginsAuthorization = {
-  __typename?: 'ItemNavAdminPluginsAuthorization';
-  code: Scalars['String']['output'];
-  href: Scalars['String']['output'];
-  icon?: Maybe<Scalars['String']['output']>;
-};
-
 export type LastChildShowForumForums = {
   __typename?: 'LastChildShowForumForums';
   created: Scalars['DateTime']['output'];
@@ -468,8 +461,9 @@ export type MutationAdmin__Core_Plugins__EditArgs = {
 
 
 export type MutationAdmin__Core_Plugins__Nav__Change_PositionArgs = {
-  id: Scalars['Int']['input'];
+  code: Scalars['String']['input'];
   index_to_move: Scalars['Int']['input'];
+  plugin_code: Scalars['String']['input'];
 };
 
 
@@ -482,7 +476,8 @@ export type MutationAdmin__Core_Plugins__Nav__CreateArgs = {
 
 
 export type MutationAdmin__Core_Plugins__Nav__DeleteArgs = {
-  id: Scalars['Int']['input'];
+  code: Scalars['String']['input'];
+  plugin_code: Scalars['String']['input'];
 };
 
 
@@ -490,7 +485,8 @@ export type MutationAdmin__Core_Plugins__Nav__EditArgs = {
   code: Scalars['String']['input'];
   href: Scalars['String']['input'];
   icon?: InputMaybe<Scalars['String']['input']>;
-  id: Scalars['Int']['input'];
+  plugin_code: Scalars['String']['input'];
+  previous_code: Scalars['String']['input'];
 };
 
 
@@ -678,7 +674,7 @@ export type MutationForum_Topics__EditArgs = {
 export type NavAdminPluginsAuthorization = {
   __typename?: 'NavAdminPluginsAuthorization';
   code: Scalars['String']['output'];
-  nav: Array<ItemNavAdminPluginsAuthorization>;
+  nav: Array<ShowAdminNavPluginsObj>;
 };
 
 export type PageInfo = {
@@ -1031,8 +1027,6 @@ export type ShowAdminNavPluginsObj = {
   code: Scalars['String']['output'];
   href: Scalars['String']['output'];
   icon?: Maybe<Scalars['String']['output']>;
-  id: Scalars['Int']['output'];
-  position: Scalars['Int']['output'];
 };
 
 export type ShowAdminPlugins = {
@@ -1739,8 +1733,9 @@ export type Admin__Core_Plugins__EditMutationVariables = Exact<{
 export type Admin__Core_Plugins__EditMutation = { __typename?: 'Mutation', admin__core_plugins__edit: { __typename?: 'ShowAdminPlugins', id: number, name: string } };
 
 export type Admin__Core_Plugins__Nav__Change_PositionMutationVariables = Exact<{
-  id: Scalars['Int']['input'];
   indexToMove: Scalars['Int']['input'];
+  pluginCode: Scalars['String']['input'];
+  code: Scalars['String']['input'];
 }>;
 
 
@@ -1754,10 +1749,11 @@ export type Admin__Core_Plugins__Nav__CreateMutationVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Plugins__Nav__CreateMutation = { __typename?: 'Mutation', admin__core_plugins__nav__create: { __typename?: 'ShowAdminNavPluginsObj', id: number, code: string, icon?: string | null, href: string } };
+export type Admin__Core_Plugins__Nav__CreateMutation = { __typename?: 'Mutation', admin__core_plugins__nav__create: { __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null, href: string } };
 
 export type Admin__Core_Plugins__Nav__DeleteMutationVariables = Exact<{
-  id: Scalars['Int']['input'];
+  code: Scalars['String']['input'];
+  pluginCode: Scalars['String']['input'];
 }>;
 
 
@@ -1766,12 +1762,13 @@ export type Admin__Core_Plugins__Nav__DeleteMutation = { __typename?: 'Mutation'
 export type Admin__Core_Plugins__Nav__EditMutationVariables = Exact<{
   code: Scalars['String']['input'];
   href: Scalars['String']['input'];
-  id: Scalars['Int']['input'];
   icon?: InputMaybe<Scalars['String']['input']>;
+  pluginCode: Scalars['String']['input'];
+  previousCode: Scalars['String']['input'];
 }>;
 
 
-export type Admin__Core_Plugins__Nav__EditMutation = { __typename?: 'Mutation', admin__core_plugins__nav__edit: { __typename?: 'ShowAdminNavPluginsObj', id: number } };
+export type Admin__Core_Plugins__Nav__EditMutation = { __typename?: 'Mutation', admin__core_plugins__nav__edit: { __typename?: 'ShowAdminNavPluginsObj', code: string } };
 
 export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -2000,7 +1997,7 @@ export type Forum_Topics__EditMutation = { __typename?: 'Mutation', forum_topics
 export type Admin__Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', version: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, nav: Array<{ __typename?: 'NavAdminPluginsAuthorization', code: string, nav: Array<{ __typename?: 'ItemNavAdminPluginsAuthorization', code: string, href: string, icon?: string | null }> }> } };
+export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', version: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, nav: Array<{ __typename?: 'NavAdminPluginsAuthorization', code: string, nav: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, href: string, icon?: string | null }> }> } };
 
 export type Admin__Core_Files__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -2115,7 +2112,7 @@ export type Admin__Core_Plugins__Nav__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, id: number, icon?: string | null, position: number, href: string }> };
+export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null, href: string }> };
 
 export type Core_Main_Settings__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2496,8 +2493,12 @@ export const Admin__Core_Plugins__Edit = gql`
 }
     `;
 export const Admin__Core_Plugins__Nav__Change_Position = gql`
-    mutation Admin__core_plugins__nav__change_position($id: Int!, $indexToMove: Int!) {
-  admin__core_plugins__nav__change_position(id: $id, index_to_move: $indexToMove)
+    mutation Admin__core_plugins__nav__change_position($indexToMove: Int!, $pluginCode: String!, $code: String!) {
+  admin__core_plugins__nav__change_position(
+    index_to_move: $indexToMove
+    plugin_code: $pluginCode
+    code: $code
+  )
 }
     `;
 export const Admin__Core_Plugins__Nav__Create = gql`
@@ -2508,7 +2509,6 @@ export const Admin__Core_Plugins__Nav__Create = gql`
     icon: $icon
     href: $href
   ) {
-    id
     code
     icon
     href
@@ -2516,14 +2516,20 @@ export const Admin__Core_Plugins__Nav__Create = gql`
 }
     `;
 export const Admin__Core_Plugins__Nav__Delete = gql`
-    mutation Admin__core_plugins__nav__delete($id: Int!) {
-  admin__core_plugins__nav__delete(id: $id)
+    mutation Admin__core_plugins__nav__delete($code: String!, $pluginCode: String!) {
+  admin__core_plugins__nav__delete(code: $code, plugin_code: $pluginCode)
 }
     `;
 export const Admin__Core_Plugins__Nav__Edit = gql`
-    mutation Admin__core_plugins__nav__edit($code: String!, $href: String!, $id: Int!, $icon: String) {
-  admin__core_plugins__nav__edit(code: $code, href: $href, id: $id, icon: $icon) {
-    id
+    mutation Admin__core_plugins__nav__edit($code: String!, $href: String!, $icon: String, $pluginCode: String!, $previousCode: String!) {
+  admin__core_plugins__nav__edit(
+    code: $code
+    href: $href
+    icon: $icon
+    plugin_code: $pluginCode
+    previous_code: $previousCode
+  ) {
+    code
   }
 }
     `;
@@ -3236,9 +3242,7 @@ export const Admin__Core_Plugins__Nav__Show = gql`
     query Admin__core_plugins__nav__show($pluginCode: String!) {
   admin__core_plugins__nav__show(plugin_code: $pluginCode) {
     code
-    id
     icon
-    position
     href
   }
 }

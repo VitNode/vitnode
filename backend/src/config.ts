@@ -77,7 +77,7 @@ export const ABSOLUTE_PATHS = {
   plugins: internalPaths.plugins,
   plugin: ({ code }: { code: string }) => ({
     root: join(internalPaths.plugins, code),
-    config: join(internalPaths.plugins, "plugins", code, "config.json"),
+    config: join(internalPaths.plugins, code, "config.json"),
     versions: join(internalPaths.plugins, code, "versions.json"),
     database: {
       schema: join(internalPaths.plugins, code, "admin", "database", "schema"),

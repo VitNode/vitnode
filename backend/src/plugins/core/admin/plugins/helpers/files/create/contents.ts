@@ -6,7 +6,7 @@ export interface PluginInfoJSONType extends CreateAdminPluginsArgs {
   nav: {
     code: string;
     href: string;
-    icon?: string;
+    icon: string | null;
   }[];
 }
 

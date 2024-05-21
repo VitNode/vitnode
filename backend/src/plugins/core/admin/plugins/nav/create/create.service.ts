@@ -1,38 +1,34 @@
+import * as fs from "fs";
+
 import { Injectable } from "@nestjs/common";
 
 import { ShowAdminNavPluginsObj } from "../show/dto/show.obj";
 import { CreateAdminNavPluginsArgs } from "./dto/create.args";
 
 import { NotFoundError } from "@/utils/errors/not-found-error";
-import { core_plugins_nav } from "../../../database/schema/plugins";
-import { DatabaseService } from "@/database/database.service";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 import { CustomError } from "@/utils/errors/custom-error";
+import { ABSOLUTE_PATHS } from "@/config";
+import { ConfigPlugin } from "../../plugins.module";
 
 @Injectable()
 export class CreateAdminNavPluginsService {
-  constructor(private readonly databaseService: DatabaseService) {}
-
-  async create({
+  create({
     code,
     href,
     icon,
     plugin_code
-  }: CreateAdminNavPluginsArgs): Promise<ShowAdminNavPluginsObj> {
-    const currentCode = removeSpecialCharacters(code);
-
-    const plugin = await this.databaseService.db.query.core_plugins.findFirst({
-      where: (table, { eq }) => eq(table.code, plugin_code)
-    });
-
-    if (!plugin) {
+  }: CreateAdminNavPluginsArgs): ShowAdminNavPluginsObj {
+    const pathConfig = ABSOLUTE_PATHS.plugin({ code: plugin_code }).config;
+    if (!fs.existsSync(pathConfig)) {
       throw new NotFoundError("Plugin");
     }
+    const config: ConfigPlugin = JSON.parse(
+      fs.readFileSync(pathConfig, "utf8")
+    );
 
-    const codeExists =
-      await this.databaseService.db.query.core_plugins_nav.findFirst({
-        where: (table, { eq }) => eq(table.code, currentCode)
-      });
+    const currentCode = removeSpecialCharacters(code);
+    const codeExists = config.nav.find(nav => nav.code === currentCode);
 
     if (codeExists) {
       throw new CustomError({
@@ -41,22 +37,20 @@ export class CreateAdminNavPluginsService {
       });
     }
 
-    const getLastPosition =
-      await this.databaseService.db.query.core_plugins_nav.findFirst({
-        orderBy: (table, { desc }) => desc(table.position)
-      });
+    // Update config
+    config.nav.push({
+      code: currentCode,
+      href,
+      icon
+    });
 
-    const nav = await this.databaseService.db
-      .insert(core_plugins_nav)
-      .values({
-        plugin_id: plugin.id,
-        code: currentCode,
-        icon,
-        position: getLastPosition ? getLastPosition.position + 1 : 0,
-        href: removeSpecialCharacters(href)
-      })
-      .returning();
+    // Save config
+    fs.writeFileSync(pathConfig, JSON.stringify(config, null, 2));
 
-    return nav[0];
+    return {
+      code: currentCode,
+      href,
+      icon
+    };
   }
 }

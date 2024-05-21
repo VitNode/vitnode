@@ -1,34 +1,26 @@
+import * as fs from "fs";
+
 import { Injectable } from "@nestjs/common";
 
 import { ShowAdminNavPluginsArgs } from "./dto/show.args";
 import { ShowAdminNavPluginsObj } from "./dto/show.obj";
 
 import { NotFoundError } from "@/utils/errors/not-found-error";
-import { DatabaseService } from "@/database/database.service";
 import { ABSOLUTE_PATHS } from "@/config";
+import { ConfigPlugin } from "../../plugins.module";
 
 @Injectable()
 export class ShowAdminNavPluginsService {
-  constructor(private readonly databaseService: DatabaseService) {}
-
-  async show({
-    plugin_code
-  }: ShowAdminNavPluginsArgs): Promise<ShowAdminNavPluginsObj[]> {
-    const path = ABSOLUTE_PATHS.plugin({ code: plugin_code });
-
-    const plugin = await this.databaseService.db.query.core_plugins.findFirst({
-      where: (table, { eq }) => eq(table.code, plugin_code)
-    });
-
-    if (!plugin) {
+  show({ plugin_code }: ShowAdminNavPluginsArgs): ShowAdminNavPluginsObj[] {
+    const pathConfig = ABSOLUTE_PATHS.plugin({ code: plugin_code }).config;
+    if (!fs.existsSync(pathConfig)) {
       throw new NotFoundError("Plugin");
     }
 
-    const nav = await this.databaseService.db.query.core_plugins_nav.findMany({
-      where: (table, { eq }) => eq(table.plugin_id, plugin.id),
-      orderBy: (table, { asc }) => asc(table.position)
-    });
+    const config: ConfigPlugin = JSON.parse(
+      fs.readFileSync(pathConfig, "utf8")
+    );
 
-    return nav;
+    return config.nav;
   }
 }

@@ -71,7 +71,11 @@ export const TableNavAdmin = ({
 
         if (!moveTo) return;
 
-        await mutationChangePositionApi(moveTo);
+        await mutationChangePositionApi({
+          id: Number(moveTo.id),
+          indexToMove: moveTo.indexToMove,
+          parentId: Number(moveTo.parentId)
+        });
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>

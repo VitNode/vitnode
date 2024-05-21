@@ -15,9 +15,9 @@ export class ShowAdminNavPluginsResolver {
   @Query(() => [ShowAdminNavPluginsObj])
   @UseGuards(AdminAuthGuards)
   @UseGuards(OnlyForDevelopment)
-  async admin__core_plugins__nav__show(
+  admin__core_plugins__nav__show(
     @Args() args: ShowAdminNavPluginsArgs
-  ): Promise<ShowAdminNavPluginsObj[]> {
+  ): ShowAdminNavPluginsObj[] {
     return this.service.show(args);
   }
 }

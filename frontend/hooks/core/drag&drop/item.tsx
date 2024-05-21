@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 interface Props {
   active: boolean;
   children: ReactNode;
-  id: number;
+  id: number | string;
   isDropHere: boolean;
   onCollapse: () => void;
   childrenLength?: number;
