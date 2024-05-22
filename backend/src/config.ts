@@ -64,7 +64,7 @@ export const ABSOLUTE_PATHS = {
     init: internalPaths.frontend,
     themes: join(internalPaths.frontend, "themes"),
     theme: ({ theme_id }: { theme_id: number }) => ({
-      root: join(internalPaths.frontend, "themes"),
+      root: join(internalPaths.frontend, "themes", theme_id.toString()),
       config: join(
         internalPaths.frontend,
         "themes",
