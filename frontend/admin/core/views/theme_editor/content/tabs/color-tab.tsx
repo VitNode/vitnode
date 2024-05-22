@@ -173,6 +173,19 @@ export const ColorTabThemeEditor = () => {
                       }
                     });
 
+                    const colorMutedForeground = form.getValues(
+                      "colors.muted-foreground"
+                    )[activeTheme];
+
+                    changeColor({
+                      name: "muted-foreground",
+                      hslColor: {
+                        h: hslFromColor.h,
+                        s: colorMutedForeground.s,
+                        l: colorMutedForeground.l
+                      }
+                    });
+
                     const colorAccent =
                       form.getValues("colors.accent")[activeTheme];
 
