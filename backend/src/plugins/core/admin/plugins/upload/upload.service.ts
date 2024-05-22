@@ -4,7 +4,6 @@ import * as fs from "fs";
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 import { eq } from "drizzle-orm";
-import { migrate } from "drizzle-orm/node-postgres/migrator";
 
 import { ShowAdminPlugins } from "../show/dto/show.obj";
 import { UploadAdminPluginsArgs } from "./dto/upload.args";
@@ -18,8 +17,8 @@ import { DatabaseService } from "@/database/database.service";
 import { generateRandomString } from "@/functions/generate-random-string";
 import { CustomError } from "@/utils/errors/custom-error";
 import { ChangeTemplatesAdminThemesService } from "../../themes/change_templates.service";
-import { updateNavAdminPlugin } from "@/utils/actions/helpers/update-plugins";
 import { ABSOLUTE_PATHS } from "@/config";
+import { migrate } from "@/utils/actions/migrate";
 
 @Injectable()
 export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService {
@@ -292,12 +291,6 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
 
       const plugin = plugins[0];
 
-      await updateNavAdminPlugin({
-        db: this.databaseService.db,
-        id: plugin.id,
-        config
-      });
-
       return plugin;
     }
 
@@ -310,20 +303,8 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
 
     const plugin = plugins[0];
 
-    await updateNavAdminPlugin({
-      db: this.databaseService.db,
-      id: plugin.id,
-      config
-    });
-
     // Run migration
-    const migrationPath = ABSOLUTE_PATHS.plugin({ code: config.code }).database
-      .migrations;
-    if (fs.existsSync(migrationPath)) {
-      await migrate(this.databaseService.db, {
-        migrationsFolder: migrationPath
-      });
-    }
+    await migrate({ pluginCode: config.code });
 
     return plugin;
   }
