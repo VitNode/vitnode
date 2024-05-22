@@ -1,18 +1,17 @@
 import * as fs from "fs";
-import { join } from "path";
 
 import { Injectable } from "@nestjs/common";
 import { eq, ne } from "drizzle-orm";
 
 import { ShowAdminPlugins } from "../show/dto/show.obj";
 import { EditAdminPluginsArgs } from "./dto/edit.args";
-import { pluginPaths } from "../paths";
 import { ConfigPlugin } from "../plugins.module";
 
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_plugins } from "../../database/schema/plugins";
 import { DatabaseService } from "@/database/database.service";
 import { CustomError } from "@/utils/errors/custom-error";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class EditAdminPluginsService {
@@ -64,8 +63,8 @@ export class EditAdminPluginsService {
       .where(eq(core_plugins.code, code))
       .returning();
 
-    // Update plugin.json
-    const path = join(pluginPaths({ code }).backend.root, "plugin.json");
+    // Update config.json
+    const path = ABSOLUTE_PATHS.plugin({ code }).config;
     const pluginFile = fs.readFileSync(path, "utf8");
     const config: Omit<ConfigPlugin, "version_code" | "versions"> =
       JSON.parse(pluginFile);

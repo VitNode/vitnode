@@ -6,7 +6,6 @@ import * as tar from "tar";
 import { eq } from "drizzle-orm";
 
 import { DownloadAdminPluginsArgs } from "./dto/download.args";
-import { pluginPaths } from "../paths";
 import { PluginInfoJSONType } from "../helpers/files/create/contents";
 import { ShowAdminNavPluginsObj } from "../nav/show/dto/show.obj";
 
@@ -19,6 +18,7 @@ import { DatabaseService } from "@/database/database.service";
 import { CustomError } from "@/utils/errors/custom-error";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 import { generateRandomString } from "@/functions/generate-random-string";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class DownloadAdminPluginsService {
@@ -75,12 +75,13 @@ export class DownloadAdminPluginsService {
     frontendPaths.forEach(path => {
       this.copyFiles({
         destination: join(frontendPath, path),
-        source: pluginPaths({ code }).frontend[path]
+        source: ABSOLUTE_PATHS.plugin({ code }).frontend[path]
       });
     });
 
     // Copy frontend files - language
-    const frontendLanguageSource = pluginPaths({ code }).frontend.language;
+    const frontendLanguageSource = ABSOLUTE_PATHS.plugin({ code }).frontend
+      .language;
     if (fs.existsSync(frontendLanguageSource)) {
       fs.cpSync(
         frontendLanguageSource,
@@ -122,13 +123,13 @@ export class DownloadAdminPluginsService {
     version,
     version_code
   }: DownloadAdminPluginsArgs): Promise<void> {
-    // Update allow_default in plugin.json
-    const pathInfoJSON = pluginPaths({ code }).backend.info;
+    // Update allow_default in config.json
+    const pathInfoJSON = ABSOLUTE_PATHS.plugin({ code }).config;
     const infoJSON: PluginInfoJSONType = JSON.parse(
       fs.readFileSync(pathInfoJSON, "utf-8")
     );
     const allow_default = fs.existsSync(
-      pluginPaths({ code }).frontend.default_page
+      ABSOLUTE_PATHS.plugin({ code }).frontend.default_page
     );
     infoJSON.allow_default = allow_default;
 
@@ -170,7 +171,7 @@ export class DownloadAdminPluginsService {
       .where(eq(core_plugins.code, code))
       .returning();
 
-    const pathToVersions = pluginPaths({ code }).backend.versions;
+    const pathToVersions = ABSOLUTE_PATHS.plugin({ code }).versions;
     if (!fs.existsSync(pathToVersions)) {
       throw new CustomError({
         code: "VERSIONS_FILE_NOT_FOUND",
@@ -186,8 +187,8 @@ export class DownloadAdminPluginsService {
   }
 
   protected async generateMigration({ code }: { code: string }): Promise<void> {
-    const path = pluginPaths({ code }).backend.database_migration;
-    const schemaPath = pluginPaths({ code }).backend.database_schema;
+    const path = ABSOLUTE_PATHS.plugin({ code }).database.migrations;
+    const schemaPath = ABSOLUTE_PATHS.plugin({ code }).database.schema;
     if (!fs.existsSync(schemaPath)) return;
     if (!fs.existsSync(path)) {
       fs.mkdirSync(path, {
@@ -214,7 +215,7 @@ export class DownloadAdminPluginsService {
     code: string;
     nav: ShowAdminNavPluginsObj[];
   }): Promise<void> {
-    const path = pluginPaths({ code }).backend.info;
+    const path = ABSOLUTE_PATHS.plugin({ code }).config;
     const readFile = fs.readFileSync(path, "utf-8");
     const infoJSON: PluginInfoJSONType = JSON.parse(readFile);
 

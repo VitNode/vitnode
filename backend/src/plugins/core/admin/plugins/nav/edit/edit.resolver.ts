@@ -15,9 +15,9 @@ export class EditAdminNavPluginsResolver {
   @Mutation(() => ShowAdminNavPluginsObj)
   @UseGuards(AdminAuthGuards)
   @UseGuards(OnlyForDevelopment)
-  async admin__core_plugins__nav__edit(
+  admin__core_plugins__nav__edit(
     @Args() args: EditCreateAdminNavPluginsArgs
-  ): Promise<ShowAdminNavPluginsObj> {
+  ): ShowAdminNavPluginsObj {
     return this.service.edit(args);
   }
 }

@@ -1,5 +1,4 @@
 import * as fs from "fs";
-import { join } from "path";
 import { writeFile } from "fs/promises";
 
 import { Injectable } from "@nestjs/common";
@@ -34,13 +33,13 @@ export class CreateAdminThemesService {
     const { id } = theme[0];
 
     // Copy the default theme to the new theme
-    const path = join(ABSOLUTE_PATHS.frontend.themes, id.toString());
-    fs.cpSync(join(ABSOLUTE_PATHS.frontend.themes, "1"), path, {
+    const path = ABSOLUTE_PATHS.frontend.theme({ theme_id: id }).root;
+    fs.cpSync(ABSOLUTE_PATHS.frontend.theme({ theme_id: 1 }).root, path, {
       recursive: true
     });
 
-    // Update the theme.json file
-    const pathThemeConfig = `${path}/theme.json`;
+    // Update the config.json file
+    const pathThemeConfig = `${path}/config.json`;
     await writeFile(
       pathThemeConfig,
       JSON.stringify(

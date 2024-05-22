@@ -1,66 +1,41 @@
+import * as fs from "fs";
+
 import { Injectable } from "@nestjs/common";
-import { eq } from "drizzle-orm";
 
 import { ChangePositionAdminNavPluginsArgs } from "./dto/change_position.args";
 
 import { NotFoundError } from "@/utils/errors/not-found-error";
-import { core_plugins_nav } from "../../../database/schema/plugins";
-import { DatabaseService } from "@/database/database.service";
+import { ABSOLUTE_PATHS } from "@/config";
+import { ConfigPlugin } from "../../plugins.module";
 
 @Injectable()
 export class ChangePositionAdminNavPluginsService {
-  constructor(private readonly databaseService: DatabaseService) {}
-
-  async changePosition({
-    id,
+  changePosition({
+    code,
+    plugin_code,
     index_to_move
-  }: ChangePositionAdminNavPluginsArgs): Promise<string> {
-    const nav = await this.databaseService.db.query.core_plugins_nav.findFirst({
-      where: (table, { eq }) => eq(table.id, id)
-    });
+  }: ChangePositionAdminNavPluginsArgs): string {
+    const pathConfig = ABSOLUTE_PATHS.plugin({ code: plugin_code }).config;
+    if (!fs.existsSync(pathConfig)) {
+      throw new NotFoundError("Plugin");
+    }
+    const config: ConfigPlugin = JSON.parse(
+      fs.readFileSync(pathConfig, "utf8")
+    );
 
-    if (!nav) {
-      throw new NotFoundError("Plugin Nav");
+    const codeExists = config.nav.find(nav => nav.code === code);
+    if (!codeExists) {
+      throw new NotFoundError("Plugin nav");
     }
 
-    const getAllNav =
-      await this.databaseService.db.query.core_plugins_nav.findMany({
-        where: (table, { eq }) => eq(table.plugin_id, nav.plugin_id),
-        orderBy: (table, { asc }) => asc(table.position)
-      });
+    // Update config
+    const navIndex = config.nav.findIndex(nav => nav.code === code);
+    const nav = config.nav[navIndex];
+    config.nav.splice(navIndex, 1);
+    config.nav.splice(index_to_move, 0, nav);
 
-    let index = 0;
-    const newIndexes: { id: number; position: number }[] = [];
-    getAllNav
-      .filter(item => item.id !== id)
-      .forEach(item => {
-        // Skip the item that we want to move
-        if (index_to_move === index) {
-          index++;
-        }
-
-        newIndexes.push({
-          id: item.id,
-          position: index
-        });
-        index++;
-      });
-
-    newIndexes.push({
-      id,
-      position: index_to_move < 0 ? index : index_to_move
-    });
-
-    await Promise.all(
-      newIndexes.map(async item => {
-        await this.databaseService.db
-          .update(core_plugins_nav)
-          .set({
-            position: item.position
-          })
-          .where(eq(core_plugins_nav.id, item.id));
-      })
-    );
+    // Save config
+    fs.writeFileSync(pathConfig, JSON.stringify(config, null, 2));
 
     return "Success!";
   }

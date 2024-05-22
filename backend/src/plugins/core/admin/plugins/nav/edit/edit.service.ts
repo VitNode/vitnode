@@ -1,59 +1,57 @@
+import * as fs from "fs";
+
 import { Injectable } from "@nestjs/common";
-import { eq } from "drizzle-orm";
 
 import { ShowAdminNavPluginsObj } from "../show/dto/show.obj";
 import { EditCreateAdminNavPluginsArgs } from "./dto/edit.args";
 
 import { NotFoundError } from "@/utils/errors/not-found-error";
-import { core_plugins_nav } from "../../../database/schema/plugins";
-import { DatabaseService } from "@/database/database.service";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 import { CustomError } from "@/utils/errors/custom-error";
+import { ABSOLUTE_PATHS } from "@/config";
+import { ConfigPlugin } from "../../plugins.module";
 
 @Injectable()
 export class EditAdminNavPluginsService {
-  constructor(private readonly databaseService: DatabaseService) {}
-
-  async edit({
+  edit({
     code,
     href,
     icon,
-    id
-  }: EditCreateAdminNavPluginsArgs): Promise<ShowAdminNavPluginsObj> {
-    const nav = await this.databaseService.db.query.core_plugins_nav.findFirst({
-      where: (table, { eq }) => eq(table.id, id)
-    });
-
-    if (!nav) {
-      throw new NotFoundError("Plugin Nav");
+    previous_code,
+    plugin_code
+  }: EditCreateAdminNavPluginsArgs): ShowAdminNavPluginsObj {
+    const pathConfig = ABSOLUTE_PATHS.plugin({ code: plugin_code }).config;
+    if (!fs.existsSync(pathConfig)) {
+      throw new NotFoundError("Plugin");
     }
+    const config: ConfigPlugin = JSON.parse(
+      fs.readFileSync(pathConfig, "utf8")
+    );
 
     const currentCode = removeSpecialCharacters(code);
-
-    if (currentCode !== nav.code) {
-      const codeExists =
-        await this.databaseService.db.query.core_plugins_nav.findFirst({
-          where: (table, { eq }) => eq(table.code, currentCode)
-        });
-
-      if (codeExists) {
-        throw new CustomError({
-          message: "Code already exists",
-          code: "CODE_ALREADY_EXISTS"
-        });
-      }
+    const existsNavCode = config.nav.find(nav => nav.code === currentCode);
+    if (existsNavCode) {
+      throw new CustomError({
+        message: "Code already exists",
+        code: "CODE_ALREADY_EXISTS"
+      });
     }
 
-    const navUpdate = await this.databaseService.db
-      .update(core_plugins_nav)
-      .set({
-        code: currentCode,
-        icon,
-        href: removeSpecialCharacters(href)
-      })
-      .where(eq(core_plugins_nav.id, id))
-      .returning();
+    // Update config
+    const navIndex = config.nav.findIndex(nav => nav.code === previous_code);
+    config.nav[navIndex] = {
+      code: currentCode,
+      href,
+      icon
+    };
 
-    return navUpdate[0];
+    // Save config
+    fs.writeFileSync(pathConfig, JSON.stringify(config, null, 2));
+
+    return {
+      code: currentCode,
+      href,
+      icon
+    };
   }
 }

@@ -1,3 +1,6 @@
-mutation Admin__core_plugins__nav__delete($id: Int!) {
-  admin__core_plugins__nav__delete(id: $id)
+mutation Admin__core_plugins__nav__delete(
+  $code: String!
+  $pluginCode: String!
+) {
+  admin__core_plugins__nav__delete(code: $code, plugin_code: $pluginCode)
 }

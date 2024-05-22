@@ -33,9 +33,9 @@ export const HeaderContent = forwardRef<
     >
       <div className="space-y-1 text-left flex-1 sm:self-center h-full">
         {h1 ? (
-          <h1 className="font-semibold tracking-tight text-2xl">{h1}</h1>
+          <h1 className="font-bold tracking-tight text-2xl">{h1}</h1>
         ) : (
-          <h2 className="font-semibold tracking-tight text-xl">{h2}</h2>
+          <h2 className="font-bold tracking-tight text-xl">{h2}</h2>
         )}
         {desc && (
           <div className="text-sm text-muted-foreground [&_p]:text-left">

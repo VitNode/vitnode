@@ -37,7 +37,7 @@ export const ItemListNavAdmin = ({
             variant: id === pathnameId ? "default" : "ghost",
             size: "sm",
             className: cn("w-full justify-start flex gap-2", {
-              ["hover:bg-secondary"]: id !== pathnameId
+              ["hover:bg-accent"]: id !== pathnameId
             })
           })}
           onClick={() =>

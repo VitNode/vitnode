@@ -5,7 +5,7 @@ import { PluginInfoJSONType } from "../../plugins/helpers/files/create/contents"
 
 export const getCoreInfo = async () => {
   const path = join(process.cwd(), "src", "plugins", "core");
-  const config = fs.readFileSync(join(path, "plugin.json"), "utf8");
+  const config = fs.readFileSync(join(path, "config.json"), "utf8");
   const data: PluginInfoJSONType = JSON.parse(config);
 
   const pathVersionsJSON = join(path, "versions.json");

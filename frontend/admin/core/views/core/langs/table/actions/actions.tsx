@@ -41,8 +41,9 @@ export const ActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
               <DropdownMenuItem
                 onClick={() => setIsOpenDeleteDialog(true)}
                 disabled={locale === data.code}
+                destructive
               >
-                <Trash2 className="text-destructive" /> {t("delete")}
+                <Trash2 /> {t("delete")}
               </DropdownMenuItem>
             )}
           </DropdownMenuContent>

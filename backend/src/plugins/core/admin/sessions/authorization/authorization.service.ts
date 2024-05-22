@@ -1,3 +1,5 @@
+import * as fs from "fs";
+
 import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
@@ -13,6 +15,8 @@ import { DatabaseService } from "@/database/database.service";
 import { AccessDeniedError } from "@/utils/errors/access-denied-error";
 import { Ctx } from "@/utils/types/context.type";
 import { getCoreInfo } from "../../settings/functions/get-core-info";
+import { ABSOLUTE_PATHS } from "@/config";
+import { ConfigPlugin } from "../../plugins/plugins.module";
 
 @Injectable()
 export class AuthorizationAdminSessionsService {
@@ -27,15 +31,29 @@ export class AuthorizationAdminSessionsService {
       orderBy: (table, { asc }) => asc(table.created),
       columns: {
         code: true
-      },
-      with: {
-        nav: {
-          orderBy: (table, { asc }) => asc(table.position)
-        }
       }
     });
 
-    return adminNav.filter(plugin => plugin.nav.length > 0);
+    return adminNav
+      .map(({ code }) => {
+        const pathConfig = ABSOLUTE_PATHS.plugin({ code }).config;
+        if (!fs.existsSync(pathConfig)) {
+          return {
+            code,
+            nav: []
+          };
+        }
+
+        const config: ConfigPlugin = JSON.parse(
+          fs.readFileSync(pathConfig, "utf8")
+        );
+
+        return {
+          code,
+          nav: config.nav
+        };
+      })
+      .filter(plugin => plugin.nav.length > 0);
   }
 
   async initialAuthorization({

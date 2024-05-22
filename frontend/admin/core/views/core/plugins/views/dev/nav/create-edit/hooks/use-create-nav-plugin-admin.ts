@@ -41,7 +41,7 @@ export const useCreateNavPluginAdmin = ({ data }: Props) => {
     if (data) {
       const mutation = await editMutationApi({
         ...values,
-        id: data.id,
+        previousCode: data.code,
         pluginCode: Array.isArray(code) ? code[0] : code
       });
       if (mutation.error) {

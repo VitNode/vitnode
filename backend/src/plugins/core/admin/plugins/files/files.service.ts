@@ -4,10 +4,10 @@ import { Injectable } from "@nestjs/common";
 
 import { FilesAdminPluginsArgs } from "./dto/files.args";
 import { FilesAdminPluginsObj } from "./dto/files.obj";
-import { pluginPaths } from "../paths";
 
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { DatabaseService } from "@/database/database.service";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class FilesAdminPluginsService {
@@ -34,35 +34,37 @@ export class FilesAdminPluginsService {
       throw new NotFoundError("Plugin");
     }
 
+    const pluginPaths = ABSOLUTE_PATHS.plugin({ code });
+
     return {
       databases: await this.checkNumberOfFiles({
-        paths: pluginPaths({ code }).backend.database_schema
+        paths: pluginPaths.database.schema
       }),
       admin_pages: await this.checkNumberOfFiles({
-        paths: pluginPaths({ code }).frontend.admin_pages
+        paths: pluginPaths.frontend.admin_pages
       }),
       admin_templates: await this.checkNumberOfFiles({
-        paths: pluginPaths({ code }).frontend.admin_templates
+        paths: pluginPaths.frontend.admin_templates
       }),
       pages: await this.checkNumberOfFiles({
-        paths: pluginPaths({ code }).frontend.pages
+        paths: pluginPaths.frontend.pages
       }),
       pages_container: await this.checkNumberOfFiles({
-        paths: pluginPaths({ code }).frontend.pages_container
+        paths: pluginPaths.frontend.pages_container
       }),
-      default_page: fs.existsSync(pluginPaths({ code }).frontend.default_page),
-      language: fs.existsSync(pluginPaths({ code }).frontend.language),
+      default_page: fs.existsSync(pluginPaths.frontend.default_page),
+      language: fs.existsSync(pluginPaths.frontend.language),
       hooks: await this.checkNumberOfFiles({
-        paths: pluginPaths({ code }).frontend.hooks
+        paths: pluginPaths.frontend.hooks
       }),
       templates: await this.checkNumberOfFiles({
-        paths: pluginPaths({ code }).frontend.templates
+        paths: pluginPaths.frontend.templates
       }),
       graphql_mutations: await this.checkNumberOfFiles({
-        paths: pluginPaths({ code }).frontend.graphql_mutations
+        paths: pluginPaths.frontend.graphql_mutations
       }),
       graphql_queries: await this.checkNumberOfFiles({
-        paths: pluginPaths({ code }).frontend.graphql_queries
+        paths: pluginPaths.frontend.graphql_queries
       })
     };
   }

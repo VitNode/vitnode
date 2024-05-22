@@ -1,5 +1,4 @@
 import * as fs from "fs";
-import { join } from "path";
 import { writeFile } from "fs/promises";
 
 import * as tar from "tar";
@@ -34,7 +33,7 @@ export class DownloadAdminThemesService {
       throw new NotFoundError("Theme");
     }
 
-    const path = join(ABSOLUTE_PATHS.frontend.themes, theme.id.toString());
+    const path = ABSOLUTE_PATHS.frontend.theme({ theme_id: theme.id }).root;
     // Check if theme exists
     if (!fs.existsSync(path)) {
       throw new NotFoundError("Theme directory");
@@ -53,7 +52,7 @@ export class DownloadAdminThemesService {
       version_code > theme.version_code &&
       id !== 1
     ) {
-      const pathThemeConfig = `${path}/theme.json`;
+      const pathThemeConfig = `${path}/config.json`;
       const getInfoJson = fs.readFileSync(pathThemeConfig, "utf8");
       const infoJson: { name: string } = JSON.parse(getInfoJson);
 

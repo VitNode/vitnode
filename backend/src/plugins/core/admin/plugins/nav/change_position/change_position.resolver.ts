@@ -14,9 +14,9 @@ export class ChangePositionAdminNavPluginsResolver {
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
   @UseGuards(OnlyForDevelopment)
-  async admin__core_plugins__nav__change_position(
+  admin__core_plugins__nav__change_position(
     @Args() args: ChangePositionAdminNavPluginsArgs
-  ): Promise<string> {
+  ): string {
     return this.service.changePosition(args);
   }
 }

@@ -13,15 +13,14 @@ import { SubmitDeleteActionTableNavDevPluginAdmin } from "./submit";
 import { useDeleteNavPluginAdmin } from "./hooks/use-delete-nav-plugin-admin";
 
 export interface ContentDeleteActionTableNavDevPluginAdminProps
-  extends Pick<ShowAdminNavPluginsObj, "code" | "id"> {}
+  extends Pick<ShowAdminNavPluginsObj, "code"> {}
 
 export const ContentDeleteActionTableNavDevPluginAdmin = ({
-  code,
-  id
+  code
 }: ContentDeleteActionTableNavDevPluginAdminProps) => {
   const t = useTranslations("admin.core.plugins.dev.nav.delete");
   const tCore = useTranslations("core");
-  const { onSubmit } = useDeleteNavPluginAdmin({ code, id });
+  const { onSubmit } = useDeleteNavPluginAdmin({ code });
 
   return (
     <form action={onSubmit}>

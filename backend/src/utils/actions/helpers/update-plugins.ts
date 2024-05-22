@@ -5,66 +5,10 @@ import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { eq } from "drizzle-orm";
 
 import { ConfigPlugin } from "@/plugins/core/admin/plugins/plugins.module";
-import {
-  core_plugins,
-  core_plugins_nav
-} from "@/plugins/core/admin/database/schema/plugins";
+import { core_plugins } from "@/plugins/core/admin/database/schema/plugins";
 import { schemaDatabase } from "@/database/schema";
 import { poolDB } from "@/database/client";
-
-export const updateNavAdminPlugin = async ({
-  config,
-  db,
-  id
-}: {
-  config: Pick<ConfigPlugin, "nav">;
-  db: NodePgDatabase<typeof schemaDatabase>;
-  id: number;
-}) => {
-  const navFromDatabase = await db.query.core_plugins_nav.findMany({
-    where: (table, { eq }) => eq(table.plugin_id, id)
-  });
-
-  const update = await Promise.all(
-    config.nav.map(async item => {
-      const itemExist = navFromDatabase.find(el => el.code === item.code);
-
-      if (itemExist) {
-        const update = await db
-          .update(core_plugins_nav)
-          .set({ ...item, plugin_id: id })
-          .where(eq(core_plugins_nav.id, itemExist.id))
-          .returning();
-
-        return update[0];
-      }
-
-      const lastPosition = await db.query.core_plugins_nav.findFirst({
-        orderBy: (table, { desc }) => desc(table.position)
-      });
-
-      const insert = await db
-        .insert(core_plugins_nav)
-        .values({
-          ...item,
-          plugin_id: id,
-          position: lastPosition?.position ? lastPosition.position + 1 : 0
-        })
-        .returning();
-
-      return insert[0];
-    })
-  );
-
-  Promise.all(
-    navFromDatabase.map(async item => {
-      const exist = update.find(el => el.id === item.id);
-      if (exist) return;
-
-      await db.delete(core_plugins_nav).where(eq(core_plugins_nav.id, item.id));
-    })
-  );
-};
+import { ABSOLUTE_PATHS } from "@/config";
 
 export const updatePlugins = async ({
   db
@@ -78,37 +22,24 @@ export const updatePlugins = async ({
         .filter(
           plugin => !["database", "plugins.module.ts", "core"].includes(plugin)
         )
-        .map(async (pluginName, index) => {
-          const configPath = join(
-            process.cwd(),
-            "src",
-            "plugins",
-            pluginName,
-            "plugin.json"
-          );
+        .map(async (code, index) => {
+          const paths = ABSOLUTE_PATHS.plugin({ code });
           const config: ConfigPlugin = JSON.parse(
-            fs.readFileSync(configPath, "utf8")
+            fs.readFileSync(paths.config, "utf8")
           );
 
           if (config.allow_default) {
             isDefaultIndex = index;
           }
-          const versionsPath = join(
-            process.cwd(),
-            "src",
-            "plugins",
-            pluginName,
-            "versions.json"
-          );
           const versions: Record<string, string> = JSON.parse(
-            fs.readFileSync(versionsPath, "utf8")
+            fs.readFileSync(paths.versions, "utf8")
           );
           const latestVersion = Object.keys(versions).sort().reverse()[0];
           const version = versions[latestVersion];
 
           let pluginId: number | null = null;
           const plugin = await db.query.core_plugins.findFirst({
-            where: (table, { eq }) => eq(table.code, pluginName)
+            where: (table, { eq }) => eq(table.code, code)
           });
 
           if (plugin) {
@@ -149,12 +80,6 @@ export const updatePlugins = async ({
 
             pluginId = plugin[0].id;
           }
-
-          await updateNavAdminPlugin({
-            db,
-            config,
-            id: pluginId
-          });
         })
     );
 

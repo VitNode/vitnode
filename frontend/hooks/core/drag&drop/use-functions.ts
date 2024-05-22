@@ -245,8 +245,8 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
     }
 
     return {
-      id: Number(active.id),
-      parentId: Number(parentId),
+      id: active.id,
+      parentId: parentId,
       indexToMove
     };
   }
@@ -257,7 +257,7 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
     onCollapse
   }: {
     data: {
-      id: number;
+      id: number | string;
       children?: unknown[];
       depth?: number;
     };

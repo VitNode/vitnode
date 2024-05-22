@@ -31,7 +31,7 @@ export class CreateFilesAdminPluginsService {
             content: createModuleSchema({ code })
           },
           {
-            name: "plugin.json",
+            name: "config.json",
             content: createInfoJSON({ code, allow_default: true, ...rest })
           },
           {

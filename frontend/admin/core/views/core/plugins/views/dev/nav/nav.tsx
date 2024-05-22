@@ -7,6 +7,7 @@ import {
 } from "@dnd-kit/sortable";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 
 import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
 import type {
@@ -21,8 +22,9 @@ export const NavDevPluginAdminView = ({
   admin__core_plugins__nav__show: edges
 }: Admin__Core_Plugins__Nav__ShowQuery) => {
   const t = useTranslations("core");
+  const { code } = useParams();
   const [initData, setData] = useState<ShowAdminNavPluginsObj[]>(edges);
-  const data = initData.map(item => ({ ...item, children: [] }));
+  const data = initData.map(item => ({ ...item, children: [], id: item.code }));
   const {
     actionsItem,
     activeItemOverlay,
@@ -64,7 +66,11 @@ export const NavDevPluginAdminView = ({
 
         if (!moveTo) return;
 
-        await mutationChangePositionApi(moveTo);
+        await mutationChangePositionApi({
+          code: moveTo.id.toString(),
+          pluginCode: Array.isArray(code) ? code[0] : code,
+          indexToMove: moveTo.indexToMove
+        });
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>

@@ -4,12 +4,10 @@ import * as fs from "fs";
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 import { eq } from "drizzle-orm";
-import { migrate } from "drizzle-orm/node-postgres/migrator";
 
 import { ShowAdminPlugins } from "../show/dto/show.obj";
 import { UploadAdminPluginsArgs } from "./dto/upload.args";
 import { ChangeFilesAdminPluginsService } from "../helpers/files/change/change.service";
-import { pluginPaths } from "../paths";
 import { ConfigPlugin } from "../plugins.module";
 
 import { FileUpload } from "@/utils/graphql-upload/upload";
@@ -19,7 +17,8 @@ import { DatabaseService } from "@/database/database.service";
 import { generateRandomString } from "@/functions/generate-random-string";
 import { CustomError } from "@/utils/errors/custom-error";
 import { ChangeTemplatesAdminThemesService } from "../../themes/change_templates.service";
-import { updateNavAdminPlugin } from "@/utils/actions/helpers/update-plugins";
+import { ABSOLUTE_PATHS } from "@/config";
+import { migrate } from "@/utils/actions/migrate";
 
 @Injectable()
 export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService {
@@ -71,7 +70,7 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
         });
     });
 
-    const pathInfoJSON = join(this.tempPath, "backend", "plugin.json");
+    const pathInfoJSON = join(this.tempPath, "backend", "config.json");
     const pluginFile = await fs.promises.readFile(pathInfoJSON, "utf8");
     const config: Omit<ConfigPlugin, "version_code" | "versions"> =
       JSON.parse(pluginFile);
@@ -107,7 +106,7 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
     config: ConfigPlugin;
     upload_new_version?: boolean;
   }): Promise<void> {
-    const newPathBackend = pluginPaths({ code: config.code }).backend.root;
+    const newPathBackend = ABSOLUTE_PATHS.plugin({ code: config.code }).root;
     if (fs.existsSync(newPathBackend)) {
       await fs.promises.rm(newPathBackend, { recursive: true });
     }
@@ -177,9 +176,8 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
     await Promise.all(
       frontendPaths.map(async path => {
         const source = join(this.tempPath, "frontend", path);
-        const destination: string = pluginPaths({ code: config.code }).frontend[
-          path
-        ];
+        const destination: string = ABSOLUTE_PATHS.plugin({ code: config.code })
+          .frontend[path];
 
         return this.copyFilesToPluginFolder({ source, destination });
       })
@@ -196,14 +194,11 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
         themes.map(async ({ id }) => {
           await this.changeTemplates({
             tempPath: join(this.tempPath, "frontend", "templates"),
-            destinationPath: join(
-              process.cwd(),
-              "..",
-              "frontend",
-              "themes",
-              id.toString(),
-              config.code
-            )
+            destinationPath: ABSOLUTE_PATHS.plugin({
+              code: config.code
+            }).frontend.theme({
+              theme_id: id
+            })
           });
         })
       );
@@ -296,12 +291,6 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
 
       const plugin = plugins[0];
 
-      await updateNavAdminPlugin({
-        db: this.databaseService.db,
-        id: plugin.id,
-        config
-      });
-
       return plugin;
     }
 
@@ -314,20 +303,8 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
 
     const plugin = plugins[0];
 
-    await updateNavAdminPlugin({
-      db: this.databaseService.db,
-      id: plugin.id,
-      config
-    });
-
     // Run migration
-    const migrationPath = pluginPaths({ code: config.code }).backend
-      .database_migration;
-    if (fs.existsSync(migrationPath)) {
-      await migrate(this.databaseService.db, {
-        migrationsFolder: migrationPath
-      });
-    }
+    await migrate({ pluginCode: config.code });
 
     return plugin;
   }
