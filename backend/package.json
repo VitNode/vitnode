@@ -16,7 +16,6 @@
     "migrate:forum": "drizzle-kit generate --config src/plugins/forum/admin/database/drizzle.config.ts",
     "migrate:admin": "drizzle-kit generate --config src/plugins/core/admin/database/drizzle.config.ts",
     "migrate:blog": "drizzle-kit generate --config src/plugins/blog/admin/database/drizzle.config.ts",
-    "migrate:test": "ts-node ./src/utils/actions/migrate.ts",
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {

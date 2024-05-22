@@ -3,10 +3,9 @@
 import * as fs from "fs";
 import { join } from "path";
 
-import { migrate } from "drizzle-orm/node-postgres/migrator";
-
 import { updatePlugins } from "./helpers/update-plugins";
 import { generateManifest } from "./helpers/manifest";
+import { migrate } from "./migrate";
 
 import { db } from "@/database/client";
 
@@ -14,17 +13,7 @@ import { db } from "@/database/client";
   await generateManifest();
 
   // Migration for database
-  await migrate(db, {
-    migrationsFolder: join(
-      process.cwd(),
-      "src",
-      "plugins",
-      "core",
-      "admin",
-      "database",
-      "migrations"
-    )
-  });
+  await migrate({ pluginCode: "core" });
 
   fs.readdir(join(process.cwd(), "src", "plugins"), async (err, plugins) => {
     await Promise.all(
@@ -33,36 +22,14 @@ import { db } from "@/database/client";
           plugin => !["database", "plugins.module.ts", "core"].includes(plugin)
         )
         .map(async plugin => {
-          // Check if migration folder exists
-          const migrationPath = join(
-            process.cwd(),
-            "src",
-            "plugins",
-            plugin,
-            "admin",
-            "database",
-            "migrations"
-          );
-
-          if (!fs.existsSync(migrationPath)) {
-            return;
-          }
-
-          // Run migration
           try {
-            await migrate(db, {
-              migrationsFolder: migrationPath
-            });
+            await migrate({ pluginCode: plugin });
           } catch (error) {
             console.error(`[VitNode] - Error running migration for ${plugin}`);
             console.error(error);
 
             throw error;
           }
-
-          console.log(
-            `[VitNode] - Running migration for ${plugin} - ${migrationPath}`
-          );
         })
     );
   });

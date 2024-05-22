@@ -8,12 +8,19 @@ import { ABSOLUTE_PATHS } from "@/config";
 import { db } from "@/database/client";
 
 // Source: https://github.com/drizzle-team/drizzle-orm/blob/main/drizzle-orm/src/migrator.ts
-const readMigrationFiles = (): MigrationMeta[] => {
-  const migrationFolderTo = ABSOLUTE_PATHS.plugin({ code: "forum" }).database
+const readMigrationFiles = ({
+  pluginCode
+}: {
+  pluginCode: string;
+}): MigrationMeta[] => {
+  const migrationFolderTo = ABSOLUTE_PATHS.plugin({ code: pluginCode }).database
     .migrations;
   const journalPath = `${migrationFolderTo}/meta/_journal.json`;
   if (!fs.existsSync(journalPath)) {
-    throw new Error(`Can't find meta/_journal.json file`);
+    // eslint-disable-next-line no-console
+    console.log(`No migration found for ${pluginCode}`);
+
+    return;
   }
   const journalAsString = fs
     .readFileSync(`${migrationFolderTo}/meta/_journal.json`)
@@ -53,7 +60,7 @@ const readMigrationFiles = (): MigrationMeta[] => {
 };
 
 // Source: https://github.com/drizzle-team/drizzle-orm/blob/main/drizzle-orm/src/pg-core/dialect.ts
-(async () => {
+export const migrate = async ({ pluginCode }: { pluginCode: string }) => {
   const migrationsTable = "core_migrations";
   const migrationsSchema = "public";
 
@@ -65,26 +72,40 @@ const readMigrationFiles = (): MigrationMeta[] => {
   CREATE TABLE IF NOT EXISTS ${sql.identifier(migrationsSchema)}.${sql.identifier(migrationsTable)} (
     id SERIAL PRIMARY KEY,
     hash text NOT NULL,
-    created_at bigint
+    plugin varchar(255) NOT NULL,
+    created_migration bigint,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   )`);
 
-  const migrations = readMigrationFiles();
+  const dbMigrations = await db.execute<{
+    created_migration: string;
+    hash: string;
+  }>(sql`
+    SELECT hash, created_migration FROM ${sql.identifier(migrationsSchema)}.${sql.identifier(migrationsTable)}
+    WHERE plugin = ${pluginCode} ORDER BY created_migration DESC LIMIT 1
+  `);
+  const lastDbMigration = dbMigrations.rows[0];
 
-  // TODO: Add handle for core_migrations
+  const migrations = readMigrationFiles({ pluginCode });
 
   await db.transaction(async tx => {
     for await (const migration of migrations) {
-      // Execute the migration
-      for (const stmt of migration.sql) {
-        await tx.execute(sql.raw(stmt));
-      }
+      if (
+        !lastDbMigration ||
+        Number(lastDbMigration.created_migration) < migration.folderMillis
+      ) {
+        // Execute the migration
+        for (const stmt of migration.sql) {
+          await tx.execute(sql.raw(stmt));
+        }
 
-      // Insert the migration into the migrations table
-      await tx.execute(
-        sql`insert into ${sql.identifier(migrationsSchema)}.${sql.identifier(
-          migrationsTable
-        )} ("hash", "created_at") values(${migration.hash}, ${migration.folderMillis})`
-      );
+        // Insert the migration into the migrations table
+        await tx.execute(
+          sql`insert into ${sql.identifier(migrationsSchema)}.${sql.identifier(
+            migrationsTable
+          )} ("hash", "created_migration", "plugin") values(${migration.hash}, ${migration.folderMillis}, ${pluginCode})`
+        );
+      }
     }
   });
-})();
+};
