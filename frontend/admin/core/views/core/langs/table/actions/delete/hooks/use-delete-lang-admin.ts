@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import { useAlertDialog } from "@/components/ui/alert-dialog";
-import { usePathname, useRouter } from "@/i18n";
+import { usePathname, useRouter } from "@/utils/i18n";
 import { mutationApi } from "./mutation-api";
 import type { ShowCoreLanguages } from "@/graphql/hooks";
 

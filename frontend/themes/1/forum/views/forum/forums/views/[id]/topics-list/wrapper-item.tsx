@@ -4,7 +4,7 @@
 
 import type { ReactNode } from "react";
 
-import { useRouter } from "@/i18n";
+import { useRouter } from "@/utils/i18n";
 
 interface Props {
   children: ReactNode;

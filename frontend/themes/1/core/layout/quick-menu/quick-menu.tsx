@@ -4,7 +4,7 @@ import { ArrowLeft, Menu, Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { ItemQuickMenu } from "./item";
-import { usePathname, useRouter } from "@/i18n";
+import { usePathname, useRouter } from "@/utils/i18n";
 import { useSession } from "@/hooks/core/use-session";
 import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
 import { DrawerQuickMenu } from "./drawer/drawer";

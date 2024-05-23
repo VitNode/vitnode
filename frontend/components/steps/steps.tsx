@@ -1,7 +1,7 @@
 import { Check } from "lucide-react";
 
 import { cn } from "@/functions/classnames";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n";
 
 export interface ItemStepProps {
   id: string;

@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
-import { zodInput } from "@/functions/zod";
+import { zodInput } from "@/utils/zod";
 import { useDialog } from "@/components/ui/dialog";
 import { createMutationApi } from "./create-mutation-api";
 import type { ErrorType } from "@/graphql/fetcher";

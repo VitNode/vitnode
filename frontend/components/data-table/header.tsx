@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { Button } from "../ui/button";
-import { usePathname, useRouter } from "@/i18n";
+import { usePathname, useRouter } from "@/utils/i18n";
 
 interface Props<T> extends HeaderContext<T, unknown> {
   children: ReactNode;

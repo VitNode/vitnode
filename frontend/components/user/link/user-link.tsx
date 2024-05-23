@@ -1,6 +1,6 @@
 import { forwardRef, type AnchorHTMLAttributes } from "react";
 
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n";
 import type { User } from "@/graphql/hooks";
 
 interface Props

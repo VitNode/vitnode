@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import * as z from "zod";
 
 import { mutationApi } from "./mutation-api";
-import { usePathname, useRouter } from "@/i18n";
+import { usePathname, useRouter } from "@/utils/i18n";
 import { useAlertDialog } from "@/components/ui/alert-dialog";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import type { ShowAdminGroups } from "@/graphql/hooks";

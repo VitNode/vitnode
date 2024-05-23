@@ -6,7 +6,7 @@ import { isRedirectError } from "next/dist/client/components/redirect";
 
 import { AdminLayout } from "@/admin/core/layout/admin-layout";
 import { Providers } from "./providers";
-import { redirect } from "@/i18n";
+import { redirect } from "@/utils/i18n";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Sessions__Authorization,

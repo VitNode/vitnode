@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { Plus } from "lucide-react";
 
 import type { PermissionsForumForums } from "@/graphql/hooks";
-import { Link, usePathname } from "@/i18n";
+import { Link, usePathname } from "@/utils/i18n";
 import { buttonVariants } from "@/components/ui/button";
 
 interface Props {

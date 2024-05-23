@@ -4,7 +4,7 @@ import * as z from "zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
-import { zodInput } from "@/functions/zod";
+import { zodInput } from "@/utils/zod";
 import { mutationApi } from "./mutation-api";
 import { useAlertDialog } from "@/components/ui/alert-dialog";
 import { useTextLang } from "@/hooks/core/use-text-lang";

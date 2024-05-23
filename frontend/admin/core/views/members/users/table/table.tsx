@@ -11,7 +11,7 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n";
 import { buttonVariants } from "@/components/ui/button";
 import { DataTable } from "@/components/data-table/data-table";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";

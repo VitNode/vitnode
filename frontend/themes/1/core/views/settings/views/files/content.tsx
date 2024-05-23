@@ -22,7 +22,7 @@ import {
   TooltipTrigger
 } from "@/components/ui/tooltip";
 import { buttonVariants } from "@/components/ui/button";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n";
 
 export const ContentFilesSettings = ({
   core_files__show: { edges, pageInfo }

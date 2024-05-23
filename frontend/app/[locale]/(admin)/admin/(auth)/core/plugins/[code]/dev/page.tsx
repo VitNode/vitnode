@@ -1,4 +1,4 @@
-import { redirect } from "@/i18n";
+import { redirect } from "@/utils/i18n";
 
 interface Props {
   params: {

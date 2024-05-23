@@ -2,7 +2,7 @@ import { ChevronRight, Home } from "lucide-react";
 import { forwardRef, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n";
 import { buttonVariants } from "./button";
 import { cn } from "@/functions/classnames";
 

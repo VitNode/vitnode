@@ -6,7 +6,7 @@ import { ColorTabThemeEditor } from "./tabs/color-tab";
 import { MainTabThemeEditor } from "./tabs/main";
 import { Form } from "@/components/ui/form";
 import { buttonVariants } from "@/components/ui/button";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n";
 import { SubmitContentThemeEditor } from "./submit";
 
 export const ContentThemeEditor = () => {

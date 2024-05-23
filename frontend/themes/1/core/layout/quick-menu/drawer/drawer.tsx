@@ -7,7 +7,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useSignOutAPI } from "@/hooks/core/sign/out/use-sign-out-api";
 import { useSession } from "@/hooks/core/use-session";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n";
 import { cn } from "@/functions/classnames";
 import { NavDrawerQuickMenu } from "./nav/nav";
 

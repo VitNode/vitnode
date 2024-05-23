@@ -1,5 +1,4 @@
 import { getRequestConfig } from "next-intl/server";
-import { createSharedPathnamesNavigation } from "next-intl/navigation";
 
 import { middlewareQueryApi } from "./hooks/core/middleware-query-api";
 
@@ -32,6 +31,3 @@ export default getRequestConfig(async ({ locale }) => {
     timeZone: "UTC"
   };
 });
-
-export const { Link, redirect, usePathname, useRouter } =
-  createSharedPathnamesNavigation();

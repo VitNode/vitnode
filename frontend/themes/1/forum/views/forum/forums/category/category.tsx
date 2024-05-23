@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n";
 import { cn } from "@/functions/classnames";
 import { ItemForum, type ItemForumProps } from "../item/item";
 import type { ShowForumForumsWithChildren } from "@/graphql/hooks";

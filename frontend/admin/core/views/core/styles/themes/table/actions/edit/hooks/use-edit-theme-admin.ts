@@ -6,8 +6,8 @@ import { useTranslations } from "next-intl";
 
 import { useDialog } from "@/components/ui/dialog";
 import { mutationApi } from "./mutation-api";
-import { usePathname, useRouter } from "@/i18n";
-import { zodInput } from "@/functions/zod";
+import { usePathname, useRouter } from "@/utils/i18n";
+import { zodInput } from "@/utils/zod";
 import type { ShowAdminThemes } from "@/graphql/hooks";
 
 export const useEditThemeAdmin = ({

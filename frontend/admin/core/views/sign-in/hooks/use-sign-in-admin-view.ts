@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import { mutationApi } from "@/hooks/core/sign/in/mutation-api";
 import type { ErrorType } from "@/graphql/fetcher";
-import { zodInput } from "@/functions/zod";
+import { zodInput } from "@/utils/zod";
 
 export const useSignInAdminView = () => {
   const [error, setError] = useState<ErrorType | null>(null);

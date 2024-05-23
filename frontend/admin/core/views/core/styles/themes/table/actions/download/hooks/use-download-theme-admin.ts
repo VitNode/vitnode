@@ -9,7 +9,7 @@ import { mutationApi } from "./mutation-api";
 import { increaseVersionString } from "@/functions/increase-version-string";
 import { useDialog } from "@/components/ui/dialog";
 import type { ShowAdminThemes } from "@/graphql/hooks";
-import { zodInput } from "@/functions/zod";
+import { zodInput } from "@/utils/zod";
 
 export const useDownloadThemeAdmin = ({
   id,

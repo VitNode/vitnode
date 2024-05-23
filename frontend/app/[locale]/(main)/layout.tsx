@@ -3,7 +3,7 @@ import { isRedirectError } from "next/dist/client/components/redirect";
 
 import { SessionProvider } from "./session-provider";
 import { InternalErrorView } from "@/admin/core/global/internal-error/internal-error-view";
-import { redirect } from "@/i18n";
+import { redirect } from "@/utils/i18n";
 import { getSessionData } from "@/functions/get-session-data";
 import type { TextLanguage } from "@/graphql/hooks";
 
