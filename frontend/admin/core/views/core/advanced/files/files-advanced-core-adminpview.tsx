@@ -37,7 +37,7 @@ export const FilesAdvancedCoreAdminView = ({
           const data = row.original;
           const src =
             data?.width && data.height
-              ? `${CONFIG.backend_public_url}/${data.dir_folder}/${data.file_name}`
+              ? `${CONFIG.graphql_public_url}/${data.dir_folder}/${data.file_name}`
               : null;
           const alt = data?.file_alt ?? data?.file_name ?? "";
 

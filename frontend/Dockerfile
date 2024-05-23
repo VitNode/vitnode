@@ -1,18 +1,32 @@
 FROM node:20-alpine AS base
 RUN npm i -g pnpm
 
-# Install dependencies
-FROM base AS deps
+FROM base AS builder
+# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+RUN apk add --no-cache libc6-compat
+RUN apk update
+# Set working directory
 WORKDIR /app
-COPY package.json ./
-COPY config ./config
+RUN npm i -g turbo
+COPY . .
+RUN turbo prune frontend --docker
+
+# Add lockfile and package.json's of isolated subworkspace
+FROM base AS installer
+RUN apk add --no-cache libc6-compat
+RUN apk update
+WORKDIR /app
+
+# First install the dependencies (as they change less often)
+COPY .gitignore .gitignore
+COPY --from=builder /app/out/json/ .
 RUN pnpm i
 
-# Build the app
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+# Build the project
+COPY --from=builder /app/out/full/ .
+COPY turbo.json turbo.json
+COPY .prettierrc .prettierrc
+COPY frontend/config/config.json ./frontend/config/config.json
 
 ARG NEXT_PUBLIC_GRAPHQL_URL
 ENV NEXT_PUBLIC_GRAPHQL_URL=${NEXT_PUBLIC_GRAPHQL_URL}
@@ -23,36 +37,31 @@ ENV NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL}
 ARG NEXT_PUBLIC_DEBUG
 ENV NEXT_PUBLIC_DEBUG=${NEXT_PUBLIC_DEBUG}
 
-RUN pnpm build
+RUN pnpm turbo build --filter=frontend...
 
-# Run the app
 FROM base AS runner
 WORKDIR /app
-ENV NODE_ENV production
 
-# Uncomment the following line in case you want to disable telemetry during runtime.
-# ENV NEXT_TELEMETRY_DISABLED 1
-
+# # Don't run production as root
 # RUN addgroup --system --gid 1001 nodejs
 # RUN adduser --system --uid 1001 nextjs
-
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/config/config.json ./config.json
-
-# Set the correct permission for prerender cache
-RUN mkdir .next
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-
 # USER nextjs
+
+# COPY --from=installer /app/frontend/next.config.js .
+# COPY --from=installer /app/frontend/package.json .
+
+# # Automatically leverage output traces to reduce image size
+# # https://nextjs.org/docs/advanced-features/output-file-tracing
+# COPY --from=installer --chown=nextjs:nodejs /app/frontend/.next/standalone ./
+# COPY --from=installer --chown=nextjs:nodejs /app/frontend/.next/static ./frontend/.next/static
+# COPY --from=installer --chown=nextjs:nodejs /app/frontend/public ./frontend/public
+# COPY --from=installer --chown=nextjs:nodejs /app/frontend/config/config.json ./frontend/config/config.json
+
+COPY --from=installer /app/frontend/.next/standalone ./
+COPY --from=installer /app/frontend/.next/static ./frontend/.next/static
+COPY --from=installer /app/frontend/public ./frontend/public
+COPY --from=installer /app/frontend/config/config.json ./frontend/config/config.json
 
 EXPOSE 3000
 ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
-
-# # server.js is created by next build from the standalone output
-# # https://nextjs.org/docs/pages/api-reference/next-config-js/output
-# CMD ["node", "server.js"]
