@@ -1,4 +1,4 @@
-import { Suspense, forwardRef, lazy, useState } from "react";
+import { Suspense, lazy, useState } from "react";
 import { useTranslations } from "next-intl";
 import { X } from "lucide-react";
 
@@ -40,10 +40,13 @@ interface SingleProps extends Props {
   value?: UserInputItem;
 }
 
-export const UserInput = forwardRef<
-  HTMLButtonElement,
-  MultiProps | SingleProps
->(({ className, multiple, onChange, value: currentValue, ...rest }, ref) => {
+export const UserInput = ({
+  className,
+  multiple,
+  onChange,
+  value: currentValue,
+  ...rest
+}: MultiProps | SingleProps) => {
   const t = useTranslations("core.user_input");
   const values = Array.isArray(currentValue)
     ? currentValue
@@ -60,7 +63,6 @@ export const UserInput = forwardRef<
           className={cn("w-full justify-start", className, {
             "text-muted-foreground": values.length === 0
           })}
-          ref={ref}
           {...rest}
         >
           {values.length === 0
@@ -125,6 +127,4 @@ export const UserInput = forwardRef<
       </PopoverContent>
     </Popover>
   );
-});
-
-UserInput.displayName = "UserInput";
+};

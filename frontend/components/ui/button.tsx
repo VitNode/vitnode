@@ -1,6 +1,6 @@
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-import { forwardRef, type ButtonHTMLAttributes } from "react";
+import type { ButtonHTMLAttributes } from "react";
 import { useTranslations } from "next-intl";
 
 import { cn } from "@/functions/classnames";
@@ -51,50 +51,42 @@ interface IconButtonProps extends Omit<ButtonProps, "size"> {
   size: "icon";
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps | IconButtonProps>(
-  (
-    {
-      ariaLabel,
-      asChild = false,
-      className,
-      loading,
-      size,
-      type = "button",
-      variant,
-      ...props
-    },
-    ref
-  ) => {
-    const t = useTranslations("core");
-    const Comp = asChild ? Slot : "button";
+const Button = ({
+  ariaLabel,
+  asChild = false,
+  className,
+  loading,
+  size,
+  type = "button",
+  variant,
+  ...props
+}: ButtonProps | IconButtonProps) => {
+  const t = useTranslations("core");
+  const Comp = asChild ? Slot : "button";
 
-    if (loading) {
-      return (
-        <Comp
-          className={cn(buttonVariants({ variant, size, className }))}
-          ref={ref}
-          {...props}
-          type="button"
-          aria-label={t("loading")}
-          disabled
-        >
-          <Loader small />
-          {size !== "icon" && t("loading")}
-        </Comp>
-      );
-    }
-
+  if (loading) {
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
-        type={type}
-        ref={ref}
-        aria-label={ariaLabel}
         {...props}
-      />
+        type="button"
+        aria-label={t("loading")}
+        disabled
+      >
+        <Loader small />
+        {size !== "icon" && t("loading")}
+      </Comp>
     );
   }
-);
-Button.displayName = "Button";
+
+  return (
+    <Comp
+      className={cn(buttonVariants({ variant, size, className }))}
+      type={type}
+      aria-label={ariaLabel}
+      {...props}
+    />
+  );
+};
 
 export { Button, buttonVariants };

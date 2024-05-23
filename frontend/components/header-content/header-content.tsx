@@ -1,5 +1,4 @@
-import type { ReactNode } from "react";
-import { forwardRef } from "react";
+import type { ReactNode, RefCallback } from "react";
 
 import { cn } from "@/functions/classnames";
 
@@ -7,6 +6,7 @@ interface HeaderContentProps {
   children?: ReactNode;
   className?: string;
   desc?: ReactNode;
+  ref?: RefCallback<HTMLDivElement>;
 }
 
 interface HeaderContentH1Props extends HeaderContentProps {
@@ -19,10 +19,14 @@ interface HeaderContentH2Props extends HeaderContentProps {
   h1?: never;
 }
 
-export const HeaderContent = forwardRef<
-  HTMLDivElement,
-  HeaderContentH1Props | HeaderContentH2Props
->(({ children, className, desc, h1, h2 }, ref) => {
+export const HeaderContent = ({
+  children,
+  className,
+  desc,
+  h1,
+  h2,
+  ref
+}: HeaderContentH1Props | HeaderContentH2Props) => {
   return (
     <div
       ref={ref}
@@ -51,6 +55,4 @@ export const HeaderContent = forwardRef<
       )}
     </div>
   );
-});
-
-HeaderContent.displayName = "HeaderContent";
+};

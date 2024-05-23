@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/heading-has-content */
 import { cva, type VariantProps } from "class-variance-authority";
-import { forwardRef, type HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 
 import { cn } from "@/functions/classnames";
 
@@ -19,41 +19,33 @@ const alertVariants = cva(
   }
 );
 
-const Alert = forwardRef<
-  HTMLDivElement,
-  HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>
->(({ className, variant, ...props }, ref) => (
+const Alert = ({
+  className,
+  variant,
+  ...props
+}: HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>) => (
   <div
-    ref={ref}
     role="alert"
     className={cn(alertVariants({ variant }), className)}
     {...props}
   />
-));
-Alert.displayName = "Alert";
+);
 
-const AlertTitle = forwardRef<
-  HTMLParagraphElement,
-  HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
+const AlertTitle = ({
+  className,
+  ...props
+}: HTMLAttributes<HTMLHeadingElement>) => (
   <h5
-    ref={ref}
     className={cn("mb-1 font-medium leading-none tracking-tight", className)}
     {...props}
   />
-));
-AlertTitle.displayName = "AlertTitle";
+);
 
-const AlertDescription = forwardRef<
-  HTMLParagraphElement,
-  HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("text-sm [&_p]:leading-relaxed", className)}
-    {...props}
-  />
-));
-AlertDescription.displayName = "AlertDescription";
+const AlertDescription = ({
+  className,
+  ...props
+}: HTMLAttributes<HTMLParagraphElement>) => (
+  <div className={cn("text-sm [&_p]:leading-relaxed", className)} {...props} />
+);
 
 export { Alert, AlertTitle, AlertDescription };

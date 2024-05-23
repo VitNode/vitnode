@@ -1,4 +1,4 @@
-import { forwardRef, type ReactNode, type Ref } from "react";
+import type { ReactNode, Ref, RefObject } from "react";
 
 import { Link } from "@/utils/i18n";
 import { cn } from "@/functions/classnames";
@@ -8,12 +8,16 @@ interface Props {
   active?: boolean;
   href?: string;
   onClick?: () => void;
+  ref?: Ref<HTMLAnchorElement> | RefObject<HTMLButtonElement>;
 }
 
-export const ItemQuickMenu = forwardRef<
-  HTMLAnchorElement | HTMLButtonElement,
-  Props
->(({ active, children, href, onClick }: Props, ref) => {
+export const ItemQuickMenu = ({
+  active,
+  children,
+  href,
+  onClick,
+  ref
+}: Props) => {
   const className = cn(
     "flex-1 text-center flex items-center justify-center flex-col gap-1.5 pt-1.5 pb-2 px-1 text-foreground no-underline text-xs [&>svg]:size-6 [&>span]:text-muted-foreground leading-none",
     {
@@ -44,6 +48,4 @@ export const ItemQuickMenu = forwardRef<
       {children}
     </button>
   );
-});
-
-ItemQuickMenu.displayName = "ItemQuickMenu";
+};

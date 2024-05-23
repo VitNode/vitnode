@@ -1,4 +1,3 @@
-import { forwardRef } from "react";
 import Image, { type StaticImageData } from "next/image";
 
 import { cn } from "@/functions/classnames";
@@ -29,54 +28,44 @@ interface PropsWithFill extends InitialProps {
 
 export type ImgProps = PropsWithFill | PropsWithWidthAndHeight;
 
-const Img = forwardRef<HTMLImageElement, ImgProps>(
-  (
-    {
-      alt,
-      className,
-      fill,
-      height,
-      heightLoading,
-      imageClassName,
-      priority,
-      quality,
-      sizes,
-      src,
-      width
-    },
-    ref
-  ) => {
-    return (
-      <div
-        className={cn("relative overflow-hidden leading-[0] w-fit", className)}
+export const Img = ({
+  alt,
+  className,
+  fill,
+  height,
+  heightLoading,
+  imageClassName,
+  priority,
+  quality,
+  sizes,
+  src,
+  width
+}: ImgProps) => {
+  return (
+    <div
+      className={cn("relative overflow-hidden leading-[0] w-fit", className)}
+      style={{
+        height: !height
+          ? heightLoading
+            ? `${heightLoading}px`
+            : "100%"
+          : undefined
+      }}
+    >
+      <Image
+        width={width}
+        height={height}
+        sizes={sizes}
+        quality={quality}
+        src={src}
+        alt={alt}
+        priority={priority}
+        fill={fill}
+        className={imageClassName}
         style={{
-          height: !height
-            ? heightLoading
-              ? `${heightLoading}px`
-              : "100%"
-            : undefined
+          height: height !== undefined ? `${height}px` : undefined
         }}
-        ref={ref}
-      >
-        <Image
-          width={width}
-          height={height}
-          sizes={sizes}
-          quality={quality}
-          src={src}
-          alt={alt}
-          priority={priority}
-          fill={fill}
-          className={imageClassName}
-          style={{
-            height: height !== undefined ? `${height}px` : undefined
-          }}
-          ref={ref}
-        />
-      </div>
-    );
-  }
-);
-Img.displayName = "Img";
-
-export { Img };
+      />
+    </div>
+  );
+};
