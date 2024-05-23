@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { NextIntlClientProvider, type AbstractIntlMessages } from "next-intl";
 import { Inter } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
 import type { Metadata } from "next";
 
 import { CONFIG } from "@/config";
@@ -84,6 +85,7 @@ export default async function LocaleLayout({
         data-theme-id={data.core_settings__show.theme_id ?? 1}
       >
         <body>
+          <NextTopLoader color="hsl(var(--primary))" showSpinner={false} />
           <Providers data={data} config={config}>
             <NextIntlClientProvider messages={messages}>
               {children}
