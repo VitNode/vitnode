@@ -85,7 +85,11 @@ export default async function LocaleLayout({
         data-theme-id={data.core_settings__show.theme_id ?? 1}
       >
         <body>
-          <NextTopLoader color="hsl(var(--primary))" showSpinner={false} />
+          <NextTopLoader
+            color="hsl(var(--primary))"
+            showSpinner={false}
+            height={4}
+          />
           <Providers data={data} config={config}>
             <NextIntlClientProvider messages={messages}>
               {children}
