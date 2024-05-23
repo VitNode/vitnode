@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Suspense, forwardRef, useState } from "react";
+import { Suspense, useState } from "react";
 import { X } from "lucide-react";
 
 import { GroupInputContent } from "./content/content";
@@ -36,10 +36,13 @@ interface SingleProps extends Props {
   value?: GroupInputItem;
 }
 
-export const GroupInput = forwardRef<
-  HTMLButtonElement,
-  MultiProps | SingleProps
->(({ className, multiple, onChange, value: currentValue, ...rest }, ref) => {
+export const GroupInput = ({
+  className,
+  multiple,
+  onChange,
+  value: currentValue,
+  ...rest
+}: MultiProps | SingleProps) => {
   const t = useTranslations("core.group_input");
   const values = Array.isArray(currentValue)
     ? currentValue
@@ -57,7 +60,6 @@ export const GroupInput = forwardRef<
           className={cn("w-full justify-start", className, {
             "text-muted-foreground": values.length === 0
           })}
-          ref={ref}
           {...rest}
         >
           {values.length === 0
@@ -122,6 +124,4 @@ export const GroupInput = forwardRef<
       </PopoverContent>
     </Popover>
   );
-});
-
-GroupInput.displayName = "GroupInput";
+};

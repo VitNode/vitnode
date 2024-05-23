@@ -2,7 +2,12 @@
 
 import type { EditorView } from "@tiptap/pm/view";
 import { type Editor, ReactRenderer } from "@tiptap/react";
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import {
+  useEffect,
+  useImperativeHandle,
+  useState,
+  type RefCallback
+} from "react";
 import tippy, {
   type GetReferenceClientRect,
   type Instance,
@@ -39,80 +44,77 @@ export interface ComponentListRef {
 export interface ComponentListProps {
   command: (_props: { id: string }) => void;
   items: string[];
+  ref?: RefCallback<ComponentListRef>;
 }
 
-const ComponentList = forwardRef<ComponentListRef, ComponentListProps>(
-  ({ command, items }, ref) => {
-    const t = useTranslations("core");
-    const [selectedIndex, setSelectedIndex] = useState(0);
+const ComponentList = ({ command, items, ref }: ComponentListProps) => {
+  const t = useTranslations("core");
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
-    const selectItem = (index: number) => {
-      const item = items[index];
+  const selectItem = (index: number) => {
+    const item = items[index];
 
-      if (item) {
-        command({ id: item });
+    if (item) {
+      command({ id: item });
+    }
+  };
+
+  const upHandler = () =>
+    setSelectedIndex((selectedIndex + items.length - 1) % items.length);
+  const downHandler = () =>
+    setSelectedIndex((selectedIndex + 1) % items.length);
+  const enterHandler = () => selectItem(selectedIndex);
+
+  useEffect(() => {
+    setSelectedIndex(0);
+  }, [items]);
+
+  useImperativeHandle(ref, () => ({
+    onKeyDown: ({ event }) => {
+      if (event.key === "ArrowUp") {
+        upHandler();
+
+        return true;
       }
-    };
 
-    const upHandler = () =>
-      setSelectedIndex((selectedIndex + items.length - 1) % items.length);
-    const downHandler = () =>
-      setSelectedIndex((selectedIndex + 1) % items.length);
-    const enterHandler = () => selectItem(selectedIndex);
+      if (event.key === "ArrowDown") {
+        downHandler();
 
-    useEffect(() => {
-      setSelectedIndex(0);
-    }, [items]);
-
-    useImperativeHandle(ref, () => ({
-      onKeyDown: ({ event }) => {
-        if (event.key === "ArrowUp") {
-          upHandler();
-
-          return true;
-        }
-
-        if (event.key === "ArrowDown") {
-          downHandler();
-
-          return true;
-        }
-
-        if (event.key === "Enter") {
-          enterHandler();
-
-          return true;
-        }
-
-        return false;
+        return true;
       }
-    }));
 
-    return (
-      <>
-        {items.length ? (
-          items.map((item, index) => (
-            <Button
-              variant="ghost"
-              className={cn("justify-start", {
-                "bg-accent": index === selectedIndex
-              })}
-              key={index}
-              onClick={() => selectItem(index)}
-              size="sm"
-            >
-              {item}
-            </Button>
-          ))
-        ) : (
-          <div className="italic text-muted-foreground">{t("no_results")}</div>
-        )}
-      </>
-    );
-  }
-);
+      if (event.key === "Enter") {
+        enterHandler();
 
-ComponentList.displayName = "ComponentList";
+        return true;
+      }
+
+      return false;
+    }
+  }));
+
+  return (
+    <>
+      {items.length ? (
+        items.map((item, index) => (
+          <Button
+            variant="ghost"
+            className={cn("justify-start", {
+              "bg-accent": index === selectedIndex
+            })}
+            key={index}
+            onClick={() => selectItem(index)}
+            size="sm"
+          >
+            {item}
+          </Button>
+        ))
+      ) : (
+        <div className="italic text-muted-foreground">{t("no_results")}</div>
+      )}
+    </>
+  );
+};
 
 let component: ReactRenderer<ComponentListRef> | null = null;
 let popup: Instance<Props>[] | null = null;

@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef } from "react";
+import type { RefCallback } from "react";
 
 import {
   Tooltip,
@@ -13,41 +13,38 @@ import { useDateFormat } from "./hooks/use-date-format";
 interface Props {
   date: Date | number;
   className?: string;
+  ref?: RefCallback<HTMLTimeElement>;
 }
 
-export const DateFormat = forwardRef<HTMLTimeElement, Props>(
-  ({ className, date }, ref) => {
-    const { currentTime, fullDate, getDateWithFormatDistance } = useDateFormat({
-      date
-    });
+export const DateFormat = ({ className, date, ref }: Props) => {
+  const { currentTime, fullDate, getDateWithFormatDistance } = useDateFormat({
+    date
+  });
 
-    if (currentTime.getFullYear() == new Date().getFullYear()) {
-      return (
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <time
-                ref={ref}
-                dateTime={currentTime.toString()}
-                className={className}
-              >
-                {getDateWithFormatDistance()}
-              </time>
-            </TooltipTrigger>
-            <TooltipContent>
-              <span>{fullDate}</span>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      );
-    }
-
+  if (currentTime.getFullYear() == new Date().getFullYear()) {
     return (
-      <time ref={ref} dateTime={currentTime.toString()} className={className}>
-        {fullDate}
-      </time>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <time
+              ref={ref}
+              dateTime={currentTime.toString()}
+              className={className}
+            >
+              {getDateWithFormatDistance()}
+            </time>
+          </TooltipTrigger>
+          <TooltipContent>
+            <span>{fullDate}</span>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     );
   }
-);
 
-DateFormat.displayName = "DateFormat";
+  return (
+    <time ref={ref} dateTime={currentTime.toString()} className={className}>
+      {fullDate}
+    </time>
+  );
+};

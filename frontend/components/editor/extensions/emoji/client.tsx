@@ -1,7 +1,12 @@
 "use client";
 
 import { ReactRenderer } from "@tiptap/react";
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import {
+  useEffect,
+  useImperativeHandle,
+  useState,
+  type RefCallback
+} from "react";
 import tippy, { type Instance, type Props } from "tippy.js";
 import { useTranslations } from "next-intl";
 import type { Emoji } from "@emoji-mart/data";
@@ -16,10 +21,15 @@ import type {
   SuggestionProps
 } from "../mentions/client";
 
-const ComponentList = forwardRef<
-  ComponentListRef,
-  { command: (_props: { id: string }) => void; items: Emoji[] }
->(({ command, items }, ref) => {
+const ComponentList = ({
+  command,
+  items,
+  ref
+}: {
+  command: (_props: { id: string }) => void;
+  items: Emoji[];
+  ref: RefCallback<ComponentListRef>;
+}) => {
   const t = useTranslations("core");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const skinToneIndexLocalStorage = localStorage.getItem(
@@ -103,9 +113,7 @@ const ComponentList = forwardRef<
       )}
     </>
   );
-});
-
-ComponentList.displayName = "ComponentList";
+};
 
 let component: ReactRenderer<ComponentListRef> | null = null;
 let popup: Instance<Props>[] | null = null;

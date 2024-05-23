@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { motion, type AnimationProps, type LayoutProps } from "framer-motion";
 
 interface Props extends AnimationProps, LayoutProps {
@@ -8,15 +8,12 @@ interface Props extends AnimationProps, LayoutProps {
   className?: string;
 }
 
-const DivMotion = forwardRef<HTMLDivElement, Props>((props, ref) => {
-  return <motion.div ref={ref} {...props} />;
-});
-DivMotion.displayName = "DivMotion";
+const DivMotion = (props: Props) => {
+  return <motion.div {...props} />;
+};
 
-const LiMotion = forwardRef<HTMLLIElement, Props>((props, ref) => {
-  return <motion.li ref={ref} {...props} />;
-});
-
-LiMotion.displayName = "LiMotion";
+const LiMotion = (props: Props) => {
+  return <motion.li {...props} />;
+};
 
 export { DivMotion, LiMotion };

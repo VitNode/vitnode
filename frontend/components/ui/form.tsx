@@ -12,9 +12,7 @@ import {
 } from "react-hook-form";
 import {
   createContext,
-  forwardRef,
   useContext,
-  type ElementRef,
   type ComponentPropsWithoutRef,
   type HTMLAttributes,
   useId,
@@ -111,34 +109,32 @@ const FormItemContext = createContext<FormItemContextValue>(
   {} as FormItemContextValue
 );
 
-const FormItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => {
-    const id = useId();
+const FormItem = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => {
+  const id = useId();
 
-    return (
-      <FormItemContext.Provider value={{ id }}>
-        <div ref={ref} className={cn("space-y-1", className)} {...props} />
-      </FormItemContext.Provider>
-    );
-  }
-);
-FormItem.displayName = "FormItem";
+  return (
+    <FormItemContext.Provider value={{ id }}>
+      <div className={cn("space-y-1", className)} {...props} />
+    </FormItemContext.Provider>
+  );
+};
 
 interface FormLabelProps
   extends ComponentPropsWithoutRef<typeof LabelPrimitive.Root> {
   optional?: boolean;
 }
 
-const FormLabel = forwardRef<
-  ElementRef<typeof LabelPrimitive.Root>,
-  FormLabelProps
->(({ children, className, optional, ...props }, ref) => {
+const FormLabel = ({
+  children,
+  className,
+  optional,
+  ...props
+}: FormLabelProps) => {
   const { error, formItemId } = useFormField();
   const t = useTranslations("core");
 
   return (
     <Label
-      ref={ref}
       className={cn(error && "text-destructive", "space-x-2", className)}
       htmlFor={formItemId}
       {...props}
@@ -149,19 +145,14 @@ const FormLabel = forwardRef<
       )}
     </Label>
   );
-});
-FormLabel.displayName = "FormLabel";
+};
 
-const FormControl = forwardRef<
-  ElementRef<typeof Slot>,
-  ComponentPropsWithoutRef<typeof Slot>
->(({ ...props }, ref) => {
+const FormControl = (props: ComponentPropsWithoutRef<typeof Slot>) => {
   const { error, formDescriptionId, formItemId, formMessageId } =
     useFormField();
 
   return (
     <Slot
-      ref={ref}
       id={formItemId}
       aria-describedby={
         !error
@@ -172,30 +163,28 @@ const FormControl = forwardRef<
       {...props}
     />
   );
-});
-FormControl.displayName = "FormControl";
+};
 
-const FormDescription = forwardRef<
-  HTMLParagraphElement,
-  HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => {
+const FormDescription = ({
+  className,
+  ...props
+}: HTMLAttributes<HTMLParagraphElement>) => {
   const { formDescriptionId } = useFormField();
 
   return (
     <p
-      ref={ref}
       id={formDescriptionId}
       className={cn("text-[0.8rem] text-muted-foreground", className)}
       {...props}
     />
   );
-});
-FormDescription.displayName = "FormDescription";
+};
 
-const FormMessage = forwardRef<
-  HTMLParagraphElement,
-  HTMLAttributes<HTMLParagraphElement>
->(({ children, className, ...props }, ref) => {
+const FormMessage = ({
+  children,
+  className,
+  ...props
+}: HTMLAttributes<HTMLParagraphElement>) => {
   const { error, formMessageId } = useFormField();
   const body = error ? String(error?.message) : children;
 
@@ -205,7 +194,6 @@ const FormMessage = forwardRef<
 
   return (
     <p
-      ref={ref}
       id={formMessageId}
       className={cn("text-[0.8rem] font-medium text-destructive", className)}
       {...props}
@@ -213,8 +201,7 @@ const FormMessage = forwardRef<
       {body}
     </p>
   );
-});
-FormMessage.displayName = "FormMessage";
+};
 
 export {
   useFormField,
