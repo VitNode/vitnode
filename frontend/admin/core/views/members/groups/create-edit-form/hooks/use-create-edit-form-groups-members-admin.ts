@@ -9,8 +9,8 @@ import { mutationCreateApi } from "./mutation-create-api";
 import { mutationEditApi } from "./mutation-edit-api";
 import { useDialog } from "@/components/ui/dialog";
 import { useTextLang } from "@/hooks/core/use-text-lang";
-import { usePathname, useRouter } from "@/i18n";
-import { zodInput } from "@/functions/zod";
+import { usePathname, useRouter } from "@/utils/i18n";
+import { zodInput } from "@/utils/zod";
 
 export interface CreateEditFormGroupsMembersAdminArgs {
   data?: Pick<ShowAdminGroups, "content" | "id" | "name">;

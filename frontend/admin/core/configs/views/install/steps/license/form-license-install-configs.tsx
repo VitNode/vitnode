@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "@/i18n";
+import { useRouter } from "@/utils/i18n";
 
 export const FormLicenseInstallConfigs = () => {
   const t = useTranslations("admin.configs.install.steps");

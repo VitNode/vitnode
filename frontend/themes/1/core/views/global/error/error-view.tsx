@@ -9,7 +9,7 @@ import {
   CardFooter,
   CardHeader
 } from "@/components/ui/card";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/functions/classnames";
 import type { ErrorViewProps } from "@/components/views/error-view-ssr";

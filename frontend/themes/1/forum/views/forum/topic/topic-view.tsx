@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { Lock, MessagesSquare } from "lucide-react";
 
 import { badgeVariants } from "@/components/ui/badge";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n";
 import type { Forum_Topics__ShowQuery } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { UserLink } from "@/components/user/link/user-link";

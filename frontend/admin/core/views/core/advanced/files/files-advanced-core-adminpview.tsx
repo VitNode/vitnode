@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/tooltip";
 import { formatBytes } from "@/functions/format-bytes";
 import type { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n";
 import { ActionsFilesAdvancedCoreAdmin } from "./actions/actions";
 
 export const FilesAdvancedCoreAdminView = ({

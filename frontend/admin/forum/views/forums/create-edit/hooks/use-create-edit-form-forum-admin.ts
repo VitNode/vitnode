@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 import { useDialog } from "@/components/ui/dialog";
 import { mutationCreateApi } from "./mutation-create-api";
-import { zodInput } from "@/functions/zod";
+import { zodInput } from "@/utils/zod";
 import type { CreateEditForumAdminProps } from "../create-edit";
 import { mutationEditApi } from "./mutation-edit-api";
 

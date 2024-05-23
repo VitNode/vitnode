@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { CONFIG } from "@/config";
 import { useDialog } from "@/components/ui/dialog";
 import { increaseVersionString } from "@/functions/increase-version-string";
-import { zodInput } from "@/functions/zod";
+import { zodInput } from "@/utils/zod";
 import type { ShowAdminPlugins } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";
 

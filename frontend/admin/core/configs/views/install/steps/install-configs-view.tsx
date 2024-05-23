@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 
 import { CardContent, CardFooter } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n";
 
 export const InstallConfigsView = () => {
   const t = useTranslations("admin.configs.install");

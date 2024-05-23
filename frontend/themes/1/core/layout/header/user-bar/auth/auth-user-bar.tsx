@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useSession } from "@/hooks/core/use-session";
 import { useSignOutAPI } from "@/hooks/core/sign/out/use-sign-out-api";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 
 export const AuthUserBar = () => {

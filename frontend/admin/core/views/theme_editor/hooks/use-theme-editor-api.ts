@@ -10,7 +10,7 @@ import { useTranslations } from "next-intl";
 import type { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";
 import { CONFIG } from "@/config";
-import { useRouter } from "@/i18n";
+import { useRouter } from "@/utils/i18n";
 
 const zObjectHsl = z.object({
   h: z.number(),

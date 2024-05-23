@@ -7,7 +7,7 @@ import { toast } from "sonner";
 
 import { mutationApi } from "./mutation-api";
 import { getIdFormString } from "@/functions/url";
-import { zodInput } from "@/functions/zod";
+import { zodInput } from "@/utils/zod";
 
 export const useCreatePost = () => {
   const t = useTranslations("core");

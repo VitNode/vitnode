@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 
 import { Tabs } from "@/components/tabs/tabs";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
-import { usePathname, useRouter } from "@/i18n";
+import { usePathname, useRouter } from "@/utils/i18n";
 
 const allowedSorting = ["oldest", "newest"];
 

@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import type { ErrorViewProps } from "@/components/views/error-view-ssr";
 import { cn } from "@/functions/classnames";
-import { Link } from "@/i18n";
+import { Link } from "@/utils/i18n";
 
 export const ErrorAdminView = ({ className, code }: ErrorViewProps) => {
   const t = useTranslations("core");

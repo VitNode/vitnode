@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
-import { zodInput } from "@/functions/zod";
+import { zodInput } from "@/utils/zod";
 import { mutationCreateApi } from "./create-mutation-api";
 import type { ShowBlogCategories } from "@/graphql/hooks";
 import { useDialog } from "@/components/ui/dialog";

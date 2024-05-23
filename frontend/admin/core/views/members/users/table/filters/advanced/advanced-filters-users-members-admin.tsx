@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { SheetClose, SheetFooter } from "@/components/ui/sheet";
 import { CalendarPicker } from "@/components/calendar-picker";
-import { usePathname, useRouter } from "@/i18n";
+import { usePathname, useRouter } from "@/utils/i18n";
 import { convertDateToUnixTime } from "@/functions/date";
 
 export const AdvancedFiltersUsersMembersAdmin = () => {

@@ -8,7 +8,7 @@ import { mutationApi } from "./mutation-api";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { useDialog } from "@/components/ui/dialog";
 import type { ErrorType } from "@/graphql/fetcher";
-import { zodInput } from "@/functions/zod";
+import { zodInput } from "@/utils/zod";
 
 export const useFormCreateEditFormGroupsMembersAdmin = () => {
   const t = useTranslations("admin.members.staff");

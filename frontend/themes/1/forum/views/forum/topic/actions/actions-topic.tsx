@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { LockToggleActionsTopic } from "./lock-toggle/lock-toggle";
-import { usePathname, useRouter } from "@/i18n";
+import { usePathname, useRouter } from "@/utils/i18n";
 import type { PermissionsTopicForums } from "@/graphql/hooks";
 
 interface Props {
