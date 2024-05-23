@@ -19,9 +19,11 @@ export class DeleteAvatarCoreMembersService {
     }
 
     // Check if avatar exists
-    this.deleteFile.checkIfFileExists(
-      `${avatar.dir_folder}/${avatar.file_name}`
-    );
+    this.deleteFile.checkIfFileExistsAndReturnPath({
+      dir_folder: avatar.dir_folder,
+      file_name: avatar.file_name,
+      file_secure: false
+    });
 
     // Delete from database
     await this.databaseService.db

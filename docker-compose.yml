@@ -18,8 +18,8 @@ services:
   backend:
     container_name: vitnode_backend
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./backend/Dockerfile
     restart: unless-stopped
     environment:
       - DB_HOST=${DB_HOST:-database}
@@ -29,34 +29,36 @@ services:
       - DB_DATABASE=${DB_DATABASE:-vitnode}
       - LOGIN_TOKEN_SECRET=${LOGIN_TOKEN_SECRET}
       - NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL:-http://localhost:3000}
-    command: sh -c "pnpm config:database && pnpm start:prod"
+    command: sh -c "cd backend && pnpm config:database && pnpm start:prod"
     ports:
       - "8080:8080"
     depends_on:
       - database
     volumes:
-      - ./frontend/config:/frontend/config # config
-      - ./frontend/themes:/frontend/themes # themes
-      - ./frontend/langs:/frontend/langs # langs
-      - ./frontend/app:/frontend/app # app
-      - ./frontend/admin:/frontend/admin # admin
-      - ./frontend/graphql:/frontend/graphql # graphql
-      - ./frontend/hooks:/frontend/hooks # hooks
-      - ./backend/uploads:/backend/uploads # uploads
+      - ./frontend/config:/app/frontend/config # config
+      - ./frontend/themes:/app/frontend/themes # themes
+      - ./frontend/langs:/app/frontend/langs # langs
+      - ./frontend/app:/app/frontend/app # app
+      - ./frontend/admin:/app/frontend/admin # admin
+      - ./frontend/graphql:/app/frontend/graphql # graphql
+      - ./frontend/hooks:/app/frontend/hooks # hooks
+      - ./backend/uploads:/app/backend/uploads # uploads
+      - ./backend/schema.gql:/app/backend/schema.gql # schema
+      - ./backend/src/plugins:/app/backend/src/plugins # plugins
     networks:
       - vitnode
   frontend:
     container_name: vitnode_frontend
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./frontend/Dockerfile
       args:
         - NEXT_PUBLIC_DEBUG=${NEXT_PUBLIC_DEBUG:-false}
         - NEXT_PUBLIC_GRAPHQL_URL=${NEXT_PUBLIC_GRAPHQL_URL:-http://backend:8080}
         - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL:-http://localhost:8080}
         - NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL:-http://localhost:3000}
     restart: unless-stopped
-    command: sh -c "pnpm start:prod"
+    command: sh -c "cd frontend && pnpm start:prod"
     # environment:
     #   - NEXT_PUBLIC_DEBUG=${NEXT_PUBLIC_DEBUG:-false}
     #   - NEXT_PUBLIC_GRAPHQL_URL=${NEXT_PUBLIC_GRAPHQL_URL:-http://backend:8080}
@@ -67,13 +69,13 @@ services:
     depends_on:
       - backend
     volumes:
-      - ./frontend/config:/app/config # config
-      - ./frontend/themes:/app/themes # themes
-      - ./frontend/langs:/app/langs # langs
-      - ./frontend/app:/app/app # app
-      - ./frontend/admin:/app/admin # admin
-      - ./frontend/graphql:/app/graphql # graphql
-      - ./frontend/hooks:/app/hooks # hooks
+      - ./frontend/config:/app/frontend/config # config
+      - ./frontend/themes:/app/frontend/themes # themes
+      - ./frontend/langs:/app/frontend/langs # langs
+      - ./frontend/app:/app/frontend/app # app
+      - ./frontend/admin:/app/frontend/admin # admin
+      - ./frontend/graphql:/app/frontend/graphql # graphql
+      - ./frontend/hooks:/app/frontend/hooks # hooks
     networks:
       - vitnode
 

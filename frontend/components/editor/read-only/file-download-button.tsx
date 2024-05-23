@@ -42,7 +42,7 @@ export const FileDownloadButton = ({
     return (
       <span className="inline-block">
         <Image
-          src={`${CONFIG.backend_public_url}/${dir_folder}/${file_name}`}
+          src={`${CONFIG.graphql_public_url}/${dir_folder}/${file_name}`}
           alt={file_alt ?? file_name_original}
           sizes="100vw"
           className="w-full h-auto"

@@ -22,7 +22,7 @@ const FileFromNextWithNode = ({
       <NodeViewWrapper className="inline-block">
         <div data-drag-handle="" draggable>
           <Image
-            src={`${CONFIG.backend_public_url}/${data.dir_folder}/${data.file_name}`}
+            src={`${CONFIG.graphql_public_url}/${data.dir_folder}/${data.file_name}`}
             alt={data.file_alt ?? data.file_name_original}
             sizes="100vw"
             className="w-full h-auto"
