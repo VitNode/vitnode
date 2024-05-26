@@ -5,8 +5,8 @@ import { revalidatePath } from "next/cache";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Themes__Download,
-  type Admin__Core_Themes__DownloadMutation,
-  type Admin__Core_Themes__DownloadMutationVariables
+  Admin__Core_Themes__DownloadMutation,
+  Admin__Core_Themes__DownloadMutationVariables
 } from "@/graphql/hooks";
 
 export const mutationApi = async (

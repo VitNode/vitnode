@@ -2,10 +2,10 @@
 
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
-import type { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import { ExternalLink } from "lucide-react";
 
-import type {
+import {
   Admin__Core_Plugins__ShowQuery,
   ShowAdminPlugins
 } from "@/graphql/hooks";

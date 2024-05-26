@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
+import { Metadata } from "next";
 
 import { FilesAdvancedCoreAdminView } from "@/admin/core/views/core/advanced/files/files-advanced-core-adminpview";
 import { HeaderContent } from "@/components/header-content/header-content";
@@ -7,13 +7,13 @@ import { Card } from "@/components/ui/card";
 import {
   Admin__Core_Files__Show,
   ShowCoreFilesSortingColumnEnum,
-  type Admin__Core_Files__ShowQuery,
-  type Admin__Core_Files__ShowQueryVariables
+  Admin__Core_Files__ShowQuery,
+  Admin__Core_Files__ShowQueryVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 import {
   usePaginationAPISsr,
-  type SearchParamsPagination
+  SearchParamsPagination
 } from "@/hooks/core/utils/use-pagination-api-ssr";
 
 const getData = async (variables: Admin__Core_Files__ShowQueryVariables) => {

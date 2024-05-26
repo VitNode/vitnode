@@ -1,4 +1,4 @@
-import { lazy, type LazyExoticComponent } from "react";
+import { lazy, LazyExoticComponent } from "react";
 
 export interface ErrorViewProps {
   code: string | "403" | "404" | "500";

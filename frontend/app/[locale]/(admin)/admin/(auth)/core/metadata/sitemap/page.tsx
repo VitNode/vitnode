@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
+import { Metadata } from "next";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Card } from "@/components/ui/card";

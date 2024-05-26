@@ -1,6 +1,6 @@
 import "server-only";
 
-import type { DocumentNode } from "graphql";
+import { DocumentNode } from "graphql";
 import { cookies, headers as nextHeaders } from "next/headers";
 
 import { CONFIG } from "@/config";

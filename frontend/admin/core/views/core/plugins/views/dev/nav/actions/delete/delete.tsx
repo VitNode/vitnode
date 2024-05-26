@@ -15,7 +15,7 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import type { ContentDeleteActionTableNavDevPluginAdminProps } from "./content";
+import { ContentDeleteActionTableNavDevPluginAdminProps } from "./content";
 
 const Content = lazy(async () =>
   import("./content").then(module => ({

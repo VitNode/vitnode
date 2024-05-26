@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { LangsCoreAdminView } from "@/admin/core/views/core/langs/langs-core-admin-view";
@@ -6,12 +6,12 @@ import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Languages__Show,
   ShowCoreLanguagesSortingColumnEnum,
-  type Core_Languages__ShowQuery,
-  type Core_Languages__ShowQueryVariables
+  Core_Languages__ShowQuery,
+  Core_Languages__ShowQueryVariables
 } from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
-  type SearchParamsPagination
+  SearchParamsPagination
 } from "@/hooks/core/utils/use-pagination-api-ssr";
 
 const getData = async (variables: Core_Languages__ShowQueryVariables) => {

@@ -1,4 +1,4 @@
-import type { Editor } from "@tiptap/react";
+import { Editor } from "@tiptap/react";
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import {

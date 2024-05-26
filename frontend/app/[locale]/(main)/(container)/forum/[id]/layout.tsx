@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import type { ReactNode } from "react";
+import { ReactNode } from "react";
 
 import { getSessionData } from "@/functions/get-session-data";
 import { getTextLang } from "@/hooks/core/use-text-lang";

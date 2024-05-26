@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState, type RefCallback } from "react";
-import type { HslColor } from "react-colorful";
+import { useEffect, useState, RefCallback } from "react";
+import { HslColor } from "react-colorful";
 import { useTranslations } from "next-intl";
 
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";

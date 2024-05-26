@@ -7,7 +7,7 @@ import {
   ChevronUpIcon
 } from "@radix-ui/react-icons";
 import * as SelectPrimitive from "@radix-ui/react-select";
-import type { ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithoutRef } from "react";
 
 import { cn } from "@/functions/classnames";
 

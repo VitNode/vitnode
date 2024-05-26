@@ -1,17 +1,12 @@
-import {
-  createContext,
-  useContext,
-  type Dispatch,
-  type SetStateAction
-} from "react";
-import type { Editor } from "@tiptap/react";
+import { createContext, useContext, Dispatch, SetStateAction } from "react";
+import { Editor } from "@tiptap/react";
 
-import type { FileStateEditor } from "../extensions/files/files";
-import type {
+import { FileStateEditor } from "../extensions/files/files";
+import {
   UploadFilesHandlerArgs,
   UploadFilesHandlerEditorArgs
 } from "../extensions/files/hooks/use-upload-files-handler-editor.ts";
-import type { TextLanguage } from "@/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 
 interface Args extends Omit<UploadFilesHandlerEditorArgs, "value"> {
   editor: Editor;

@@ -3,8 +3,8 @@
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Editor_Files__Delete,
-  type Core_Editor_Files__DeleteMutation,
-  type Core_Editor_Files__DeleteMutationVariables
+  Core_Editor_Files__DeleteMutation,
+  Core_Editor_Files__DeleteMutationVariables
 } from "@/graphql/hooks";
 
 export const deleteMutationApi = async (

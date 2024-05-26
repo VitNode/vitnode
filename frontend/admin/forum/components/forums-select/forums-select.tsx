@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/popover";
 import { Loader } from "@/components/loader";
 import { Badge } from "@/components/ui/badge";
-import type { TextLanguage } from "@/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 
 const Content = lazy(async () =>

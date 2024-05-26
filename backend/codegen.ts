@@ -1,6 +1,6 @@
 import { join } from "path";
 
-import type { CodegenConfig } from "@graphql-codegen/cli";
+import { CodegenConfig } from "@graphql-codegen/cli";
 import * as dotenv from "dotenv";
 
 if (process.env.NODE_ENV === "production") {

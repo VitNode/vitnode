@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Trash } from "lucide-react";
 
-import type { ShowCoreNav } from "@/graphql/hooks";
+import { ShowCoreNav } from "@/graphql/hooks";
 import { useDeleteNavAdmin } from "./hooks/use-delete-nav-admin";
 import {
   AlertDialogCancel,

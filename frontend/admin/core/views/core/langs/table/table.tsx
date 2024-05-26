@@ -1,11 +1,11 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import type { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import { useMemo } from "react";
 
-import type { LangsCoreAdminViewProps } from "../langs-core-admin-view";
-import type { ShowCoreLanguages } from "@/graphql/hooks";
+import { LangsCoreAdminViewProps } from "../langs-core-admin-view";
+import { ShowCoreLanguages } from "@/graphql/hooks";
 import { Badge } from "@/components/ui/badge";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
 import { DateFormat } from "@/components/date-format/date-format";

@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 
-import type { ShowAdminNavPluginsObj } from "@/graphql/hooks";
-import type { FlatTree } from "@/hooks/core/drag&drop/use-functions";
+import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
+import { FlatTree } from "@/hooks/core/drag&drop/use-functions";
 import { ActionsTableNavDevPluginAdmin } from "./actions/actions";
 
 interface Props {

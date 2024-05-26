@@ -1,7 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import * as Accordion from "@radix-ui/react-accordion";
 import { useSelectedLayoutSegments } from "next/navigation";
 

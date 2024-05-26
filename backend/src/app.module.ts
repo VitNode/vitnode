@@ -32,7 +32,7 @@ import { Ctx } from "./utils/types/context.type";
     JwtModule.register({ global: true }),
     ServeStaticModule.forRoot({
       rootPath: join(ABSOLUTE_PATHS.uploads.public),
-      serveRoot: "/public"
+      serveRoot: "/public/"
     }),
     ScheduleModule.forRoot(),
     PluginsModule,

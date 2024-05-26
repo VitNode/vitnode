@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 
 import {
   useCreateEditNavAdmin,
-  type CreateEditNavAdminArgs
+  CreateEditNavAdminArgs
 } from "./hooks/use-create-edit-nav-admin";
 import {
   DialogFooter,

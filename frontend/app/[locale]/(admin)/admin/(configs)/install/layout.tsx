@@ -1,11 +1,11 @@
-import type { ReactNode } from "react";
+import { ReactNode } from "react";
 
 import { LayoutInstallConfigsView } from "@/admin/core/configs/views/install/layout-install-configs-view";
-import { fetcher, type ErrorType } from "@/graphql/fetcher";
+import { fetcher, ErrorType } from "@/graphql/fetcher";
 import {
   Admin__Install__Layout,
-  type Admin__Install__LayoutQuery,
-  type Admin__Install__LayoutQueryVariables
+  Admin__Install__LayoutQuery,
+  Admin__Install__LayoutQueryVariables
 } from "@/graphql/hooks";
 import { InternalErrorView } from "@/admin/core/global/internal-error/internal-error-view";
 import { redirect } from "@/utils/i18n";

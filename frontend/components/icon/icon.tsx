@@ -1,5 +1,5 @@
 import * as Lucide from "lucide-react";
-import { lazy, memo, type ComponentType, Suspense } from "react";
+import { lazy, memo, ComponentType, Suspense } from "react";
 import { Loader2 } from "lucide-react";
 
 import { cn } from "@/functions/classnames";

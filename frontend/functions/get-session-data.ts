@@ -2,8 +2,8 @@ import { CoreApiTags } from "@/admin/core/api-tags";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Sessions__Authorization,
-  type Core_Sessions__AuthorizationQuery,
-  type Core_Sessions__AuthorizationQueryVariables
+  Core_Sessions__AuthorizationQuery,
+  Core_Sessions__AuthorizationQueryVariables
 } from "@/graphql/hooks";
 
 export const getSessionData = async () => {

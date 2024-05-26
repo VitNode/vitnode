@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import { useAlertDialog } from "@/components/ui/alert-dialog";
-import type { ShowCoreNav } from "@/graphql/hooks";
+import { ShowCoreNav } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { mutationApi } from "./mutation-api";
 

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { EditorAdminView } from "@/admin/core/views/core/styles/editor/editor-admin-view";

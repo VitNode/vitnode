@@ -9,9 +9,9 @@ import { mutationCreateApi } from "./mutation-create-api";
 import { useDialog } from "@/components/ui/dialog";
 import { usePathname, useRouter } from "@/utils/i18n";
 import { zodInput } from "@/utils/zod";
-import type { ShowAdminPlugins } from "@/graphql/hooks";
+import { ShowAdminPlugins } from "@/graphql/hooks";
 import { mutationEditApi } from "./mutation-edit-api";
-import type { ErrorType } from "@/graphql/fetcher";
+import { ErrorType } from "@/graphql/fetcher";
 
 export const codePluginRegex = /^[a-z0-9-]*$/;
 

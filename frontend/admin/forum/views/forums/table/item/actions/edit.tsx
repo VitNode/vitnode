@@ -6,7 +6,7 @@ import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
-import type { ShowForumForumsAdminWithChildren } from "../../hooks/use-forum-forums-admin-api";
+import { ShowForumForumsAdminWithChildren } from "../../hooks/use-forum-forums-admin-api";
 
 const Content = lazy(async () =>
   import("../../../create-edit/create-edit").then(module => ({

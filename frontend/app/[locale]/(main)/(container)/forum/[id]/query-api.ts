@@ -1,9 +1,9 @@
 import { getIdFormString } from "@/functions/url";
-import { fetcher, type ErrorType } from "@/graphql/fetcher";
+import { fetcher, ErrorType } from "@/graphql/fetcher";
 import {
   Forum_Forums__Show_Item,
-  type Forum_Forums__Show_ItemQuery,
-  type Forum_Forums__Show_ItemQueryVariables
+  Forum_Forums__Show_ItemQuery,
+  Forum_Forums__Show_ItemQueryVariables
 } from "@/graphql/hooks";
 
 export const getForumItemData = async ({ id }: { id: string }) => {

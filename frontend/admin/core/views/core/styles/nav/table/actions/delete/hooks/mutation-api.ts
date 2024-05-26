@@ -5,8 +5,8 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Nav__Delete,
-  type Admin__Core_Nav__DeleteMutation,
-  type Admin__Core_Nav__DeleteMutationVariables
+  Admin__Core_Nav__DeleteMutation,
+  Admin__Core_Nav__DeleteMutationVariables
 } from "@/graphql/hooks";
 import { CoreApiTags } from "@/admin/core/api-tags";
 

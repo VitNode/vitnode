@@ -1,10 +1,10 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { useSelectedLayoutSegment } from "next/navigation";
 
-import { Steps, type ItemStepProps } from "@/components/steps/steps";
+import { Steps, ItemStepProps } from "@/components/steps/steps";
 import {
   Card,
   CardDescription,

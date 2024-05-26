@@ -1,18 +1,9 @@
 "use client";
 
-import type { EditorView } from "@tiptap/pm/view";
-import { type Editor, ReactRenderer } from "@tiptap/react";
-import {
-  useEffect,
-  useImperativeHandle,
-  useState,
-  type RefCallback
-} from "react";
-import tippy, {
-  type GetReferenceClientRect,
-  type Instance,
-  type Props
-} from "tippy.js";
+import { EditorView } from "@tiptap/pm/view";
+import { Editor, ReactRenderer } from "@tiptap/react";
+import { useEffect, useImperativeHandle, useState, RefCallback } from "react";
+import tippy, { GetReferenceClientRect, Instance, Props } from "tippy.js";
 import { useTranslations } from "next-intl";
 
 import { cn } from "@/functions/classnames";

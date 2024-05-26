@@ -4,8 +4,8 @@ import { getSessionData } from "@/functions/get-session-data";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Theme_Editor__Show,
-  type Core_Theme_Editor__ShowQuery,
-  type Core_Theme_Editor__ShowQueryVariables
+  Core_Theme_Editor__ShowQuery,
+  Core_Theme_Editor__ShowQueryVariables
 } from "@/graphql/hooks";
 
 const getData = async () => {

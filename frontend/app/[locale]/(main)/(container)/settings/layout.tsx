@@ -1,5 +1,5 @@
-import { lazy, type LazyExoticComponent, type ReactNode } from "react";
-import type { Metadata } from "next";
+import { lazy, LazyExoticComponent, ReactNode } from "react";
+import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { getSessionData } from "@/functions/get-session-data";

@@ -8,7 +8,7 @@ import { mutationApi } from "./mutation-api";
 import { usePathname, useRouter } from "@/utils/i18n";
 import { useAlertDialog } from "@/components/ui/alert-dialog";
 import { useTextLang } from "@/hooks/core/use-text-lang";
-import type { ShowAdminGroups } from "@/graphql/hooks";
+import { ShowAdminGroups } from "@/graphql/hooks";
 
 export const useDeleteGroupAdmin = ({
   id,

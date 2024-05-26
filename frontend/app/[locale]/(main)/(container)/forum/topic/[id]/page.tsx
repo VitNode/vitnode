@@ -1,6 +1,6 @@
-import { lazy, type LazyExoticComponent } from "react";
+import { lazy, LazyExoticComponent } from "react";
 
-import type { TopicViewProps } from "@/themes/1/forum/views/forum/topic/topic-view";
+import { TopicViewProps } from "@/themes/1/forum/views/forum/topic/topic-view";
 import { getSessionData } from "@/functions/get-session-data";
 import { getTopicData } from "./query-api";
 

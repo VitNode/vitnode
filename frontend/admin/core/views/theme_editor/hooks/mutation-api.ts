@@ -3,8 +3,8 @@
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Theme_Editor__Edit,
-  type Admin__Core_Theme_Editor__EditMutation,
-  type Admin__Core_Theme_Editor__EditMutationVariables
+  Admin__Core_Theme_Editor__EditMutation,
+  Admin__Core_Theme_Editor__EditMutationVariables
 } from "@/graphql/hooks";
 
 export const mutationApi = async (

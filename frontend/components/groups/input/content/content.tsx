@@ -12,7 +12,7 @@ import {
   CommandList,
   commandInputClassName
 } from "@/components/ui/command";
-import type { GroupInputItem } from "../group-input";
+import { GroupInputItem } from "../group-input";
 import { GroupInputContentList } from "./list";
 import { queryApi } from "./query-api";
 

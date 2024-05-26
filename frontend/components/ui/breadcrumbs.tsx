@@ -1,5 +1,5 @@
 import { ChevronRight, Home } from "lucide-react";
-import type { ReactNode, RefCallback } from "react";
+import { ReactNode, RefCallback } from "react";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/utils/i18n";

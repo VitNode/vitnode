@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { AdministratorsStaffAdminView } from "@/admin/core/views/members/staff/views/administrators/administrators-view";
 import {
   Admin__Core_Staff_Administrators__Show,
   ShowAdminStaffAdministratorsSortingColumnEnum,
-  type Admin__Core_Staff_Administrators__ShowQuery,
-  type Admin__Core_Staff_Administrators__ShowQueryVariables
+  Admin__Core_Staff_Administrators__ShowQuery,
+  Admin__Core_Staff_Administrators__ShowQueryVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 import {
   usePaginationAPISsr,
-  type SearchParamsPagination
+  SearchParamsPagination
 } from "@/hooks/core/utils/use-pagination-api-ssr";
 
 const getData = async (

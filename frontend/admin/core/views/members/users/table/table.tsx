@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
-import type { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import { Pencil } from "lucide-react";
 
 import {
@@ -20,8 +20,8 @@ import { GroupsFiltersUsersMembersAdmin } from "./filters/groups-filters-users-m
 import { AdvancedFiltersUsersMembersAdmin } from "./filters/advanced/advanced-filters-users-members-admin";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
-import type { UsersMembersAdminViewProps } from "../users-members-admin-view";
-import type { ShowAdminMembers } from "@/graphql/hooks";
+import { UsersMembersAdminViewProps } from "../users-members-admin-view";
+import { ShowAdminMembers } from "@/graphql/hooks";
 
 interface UsersMembersAdminAPIDataType
   extends Pick<

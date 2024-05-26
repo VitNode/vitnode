@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
 
-import type { ErrorType } from "@/graphql/fetcher";
+import { ErrorType } from "@/graphql/fetcher";
 import { mutationApi } from "./mutation-api";
 
 const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;

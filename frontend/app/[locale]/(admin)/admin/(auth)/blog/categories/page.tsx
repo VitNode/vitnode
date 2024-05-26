@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { CategoriesBlogAdminView } from "@/admin/blog/views/categories/categories-view";

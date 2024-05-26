@@ -8,7 +8,7 @@ import {
   AlertDialogTitle
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import type { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
+import { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
 import { SubmitDeleteActionFilesAdvancedCoreAdmin } from "./submit";
 import { useDeleteFileAdvancedAdmin } from "./hooks/use-delete-file-advanced-admin";
 

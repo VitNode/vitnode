@@ -4,8 +4,8 @@ import { NextRequest } from "next/server";
 import { fetcher } from "./graphql/fetcher";
 import {
   Core_Languages__Show,
-  type Core_Languages__ShowQuery,
-  type Core_Languages__ShowQueryVariables
+  Core_Languages__ShowQuery,
+  Core_Languages__ShowQueryVariables
 } from "./graphql/hooks";
 
 export default async function middleware(request: NextRequest) {

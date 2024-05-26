@@ -5,8 +5,8 @@ import { revalidatePath } from "next/cache";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Plugins__Nav__Edit,
-  type Admin__Core_Plugins__Nav__EditMutation,
-  type Admin__Core_Plugins__Nav__EditMutationVariables
+  Admin__Core_Plugins__Nav__EditMutation,
+  Admin__Core_Plugins__Nav__EditMutationVariables
 } from "@/graphql/hooks";
 
 interface Args extends Admin__Core_Plugins__Nav__EditMutationVariables {

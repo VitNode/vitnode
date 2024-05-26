@@ -4,7 +4,7 @@ import { useMemo } from "react";
 
 import { getIdFormString } from "@/functions/url";
 import { APIKeys } from "@/graphql/api-keys";
-import type { Forum_Forums__Show_ItemQuery } from "@/graphql/hooks";
+import { Forum_Forums__Show_ItemQuery } from "@/graphql/hooks";
 import { queryApi } from "./query-api";
 
 interface Args {

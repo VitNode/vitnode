@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 import { mutationApi } from "./mutation-api";
 import { zodInput } from "@/utils/zod";
-import type { Core_Main_Settings__ShowQuery } from "@/graphql/hooks";
+import { Core_Main_Settings__ShowQuery } from "@/graphql/hooks";
 
 export const useSettingsCoreAdmin = ({
   core_settings__show: data

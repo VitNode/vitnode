@@ -11,7 +11,7 @@ import {
   FormItem,
   FormLabel
 } from "@/components/ui/form";
-import { useEditorAdmin, type EditorAdminArgs } from "./hooks/use-editor-admin";
+import { useEditorAdmin, EditorAdminArgs } from "./hooks/use-editor-admin";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { FilesSectionContentEditorAdmin } from "./sections/files";

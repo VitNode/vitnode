@@ -5,7 +5,7 @@ import { X } from "lucide-react";
 import { GroupInputContent } from "./content/content";
 import { cn } from "@/functions/classnames";
 
-import type { TextLanguage } from "../../../graphql/hooks";
+import { TextLanguage } from "../../../graphql/hooks";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { Button } from "../../ui/button";
 import { Badge } from "../../ui/badge";

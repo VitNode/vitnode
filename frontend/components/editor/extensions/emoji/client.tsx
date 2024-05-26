@@ -1,21 +1,16 @@
 "use client";
 
 import { ReactRenderer } from "@tiptap/react";
-import {
-  useEffect,
-  useImperativeHandle,
-  useState,
-  type RefCallback
-} from "react";
-import tippy, { type Instance, type Props } from "tippy.js";
+import { useEffect, useImperativeHandle, useState, RefCallback } from "react";
+import tippy, { Instance, Props } from "tippy.js";
 import { useTranslations } from "next-intl";
-import type { Emoji } from "@emoji-mart/data";
+import { Emoji } from "@emoji-mart/data";
 
 import { CONFIG } from "@/config";
 import { cn } from "@/functions/classnames";
 import { classPopover } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import type {
+import {
   ComponentListRef,
   SuggestionKeyDownProps,
   SuggestionProps

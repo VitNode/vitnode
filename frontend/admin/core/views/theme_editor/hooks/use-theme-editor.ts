@@ -1,8 +1,8 @@
 import { createContext, useContext } from "react";
-import type { HslColor } from "react-colorful";
-import type { UseFormReturn } from "react-hook-form";
+import { HslColor } from "react-colorful";
+import { UseFormReturn } from "react-hook-form";
 
-import type { formSchemaColorsThemeEditor } from "./use-theme-editor-api";
+import { formSchemaColorsThemeEditor } from "./use-theme-editor-api";
 
 export enum ThemeEditorTab {
   Main = "main",

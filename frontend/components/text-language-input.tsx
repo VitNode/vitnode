@@ -1,4 +1,4 @@
-import { useState, type InputHTMLAttributes } from "react";
+import { useState, InputHTMLAttributes } from "react";
 import { useLocale } from "next-intl";
 
 import { useGlobals } from "@/hooks/core/use-globals";
@@ -11,7 +11,7 @@ import {
   SelectValue
 } from "./ui/select";
 import { FormControl } from "./ui/form";
-import type { TextLanguage } from "@/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 import { cn } from "@/functions/classnames";
 
 interface Props

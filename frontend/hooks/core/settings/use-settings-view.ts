@@ -1,6 +1,6 @@
-import { Bell, Cog, Files, type LucideIcon } from "lucide-react";
+import { Bell, Cog, Files, LucideIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import type { ReactNode } from "react";
+import { ReactNode } from "react";
 
 export interface ItemNavSettingsProps {
   href: string;

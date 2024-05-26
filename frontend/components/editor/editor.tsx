@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useLocale } from "next-intl";
 
 import { cn } from "@/functions/classnames";
-import type { TextLanguage } from "@/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 import { ToolBarEditor } from "./toolbar/toolbar";
 import { FooterEditor } from "./footer/footer";
 import { useGlobals } from "@/hooks/core/use-globals";
@@ -14,7 +14,7 @@ import { EmojiExtensionEditor } from "./extensions/emoji/emoji";
 import { Skeleton } from "../ui/skeleton";
 import {
   useUploadFilesHandlerEditor,
-  type UploadFilesHandlerEditorArgs
+  UploadFilesHandlerEditorArgs
 } from "./extensions/files/hooks/use-upload-files-handler-editor.ts";
 import { EditorStateContext } from "./hooks/use-editor-state";
 

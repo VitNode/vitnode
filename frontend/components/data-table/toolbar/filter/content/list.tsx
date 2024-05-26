@@ -6,7 +6,7 @@ import { CommandGroup, CommandItem } from "@/components/ui/command";
 import { Loader } from "@/components/loader";
 import { usePathname, useRouter } from "@/utils/i18n";
 import { cn } from "@/functions/classnames";
-import type { ContentFilterToolbarDataTableProps } from "./content";
+import { ContentFilterToolbarDataTableProps } from "./content";
 import { useFilterToolbarDataTable } from "../hooks/use-filter-toolbar-data-table";
 
 export const ListContentFilterToolbarDataTable = ({

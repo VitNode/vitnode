@@ -5,12 +5,12 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
-  type ColumnDef,
-  type SortingState
+  ColumnDef,
+  SortingState
 } from "@tanstack/react-table";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { useMemo, type ReactNode, useTransition } from "react";
+import { useMemo, ReactNode, useTransition } from "react";
 
 import {
   Table,
@@ -21,7 +21,7 @@ import {
   TableRow
 } from "@/components/ui/table";
 import { Button } from "../ui/button";
-import type { PageInfo } from "@/graphql/hooks";
+import { PageInfo } from "@/graphql/hooks";
 import {
   Select,
   SelectContent,
@@ -30,8 +30,7 @@ import {
   SelectValue
 } from "../ui/select";
 import { usePathname, useRouter } from "@/utils/i18n";
-import { ToolbarDataTable } from "./toolbar/toolbar";
-import type { ToolbarDataTableProps } from "./toolbar/toolbar";
+import { ToolbarDataTable, ToolbarDataTableProps } from "./toolbar/toolbar";
 import { SkeletonDataTable } from "./skeleton";
 import {
   Tooltip,

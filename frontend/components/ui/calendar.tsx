@@ -2,7 +2,7 @@
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { DayPicker } from "react-day-picker";
-import type { ComponentProps } from "react";
+import { ComponentProps } from "react";
 
 import { cn } from "@/functions/classnames";
 import { buttonVariants } from "@/components/ui/button";

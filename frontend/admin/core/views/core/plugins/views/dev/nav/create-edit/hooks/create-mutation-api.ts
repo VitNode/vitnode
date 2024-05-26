@@ -5,8 +5,8 @@ import { revalidatePath } from "next/cache";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Plugins__Nav__Create,
-  type Admin__Core_Plugins__Nav__CreateMutation,
-  type Admin__Core_Plugins__Nav__CreateMutationVariables
+  Admin__Core_Plugins__Nav__CreateMutation,
+  Admin__Core_Plugins__Nav__CreateMutationVariables
 } from "@/graphql/hooks";
 
 export const createMutationApi = async (

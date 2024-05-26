@@ -1,6 +1,6 @@
 "use client";
 
-import type { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import { Clock, File } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -17,7 +17,7 @@ import {
   TooltipTrigger
 } from "@/components/ui/tooltip";
 import { formatBytes } from "@/functions/format-bytes";
-import type { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
+import { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
 import { Link } from "@/utils/i18n";
 import { ActionsFilesAdvancedCoreAdmin } from "./actions/actions";
 

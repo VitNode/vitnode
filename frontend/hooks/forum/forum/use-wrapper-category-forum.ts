@@ -1,9 +1,4 @@
-import {
-  createContext,
-  useContext,
-  type Dispatch,
-  type SetStateAction
-} from "react";
+import { createContext, useContext, Dispatch, SetStateAction } from "react";
 
 interface Args {
   open: boolean;

@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { TableLangsCoreAdmin } from "./table/table";
-import type { Core_Languages__ShowQuery } from "@/graphql/hooks";
+import { Core_Languages__ShowQuery } from "@/graphql/hooks";
 import { ActionsLangsAdmin } from "./actions/actions";
 import { RebuildRequiredAdmin } from "@/admin/core/global/rebuild-required";
 import { Card } from "@/components/ui/card";

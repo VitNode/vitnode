@@ -2,7 +2,7 @@ import { Suspense, lazy } from "react";
 
 import { Loader } from "@/components/loader";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import type { ShowAdminThemes } from "@/graphql/hooks";
+import { ShowAdminThemes } from "@/graphql/hooks";
 
 const Content = lazy(async () =>
   import("../../upload/upload").then(module => ({

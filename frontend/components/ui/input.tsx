@@ -1,4 +1,4 @@
-import type { Ref } from "react";
+import { Ref } from "react";
 
 import { cn } from "@/functions/classnames";
 

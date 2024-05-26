@@ -1,9 +1,9 @@
 import { AdminCoreApiTags } from "@/admin/core/api-tags";
-import { fetcher, type ErrorType } from "@/graphql/fetcher";
+import { fetcher, ErrorType } from "@/graphql/fetcher";
 import {
   Admin__Core_Plugins__Show__Item,
-  type Admin__Core_Plugins__Show__ItemQuery,
-  type Admin__Core_Plugins__Show__ItemQueryVariables
+  Admin__Core_Plugins__Show__ItemQuery,
+  Admin__Core_Plugins__Show__ItemQueryVariables
 } from "@/graphql/hooks";
 
 export const getPluginDataAdmin = async (

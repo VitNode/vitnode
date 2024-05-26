@@ -1,7 +1,7 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { ChevronRight, Grip } from "lucide-react";
-import type { CSSProperties, ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 
 import { cn } from "@/functions/classnames";
 import { Button } from "@/components/ui/button";

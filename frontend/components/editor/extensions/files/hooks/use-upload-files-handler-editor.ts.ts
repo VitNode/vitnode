@@ -5,11 +5,11 @@ import { toast } from "sonner";
 import {
   acceptMimeTypeImage,
   acceptMimeTypeVideo,
-  type FileStateEditor
+  FileStateEditor
 } from "../files";
 import { uploadMutationApi } from "./upload-mutation-api";
-import type { ErrorType } from "@/graphql/fetcher";
-import type { TextLanguage } from "@/graphql/hooks";
+import { ErrorType } from "@/graphql/fetcher";
+import { TextLanguage } from "@/graphql/hooks";
 import { getFilesFromContent } from "@/components/editor/extensions/files/hooks/functions";
 import { useGlobals } from "@/hooks/core/use-globals";
 import { useSession } from "@/hooks/core/use-session";

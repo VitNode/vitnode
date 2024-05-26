@@ -1,4 +1,4 @@
-import type { ReactNode, RefCallback } from "react";
+import { ReactNode, RefCallback } from "react";
 
 import { cn } from "@/functions/classnames";
 

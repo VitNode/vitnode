@@ -5,8 +5,8 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Sessions__Sign_In,
-  type Core_Sessions__Sign_InMutation,
-  type Core_Sessions__Sign_InMutationVariables
+  Core_Sessions__Sign_InMutation,
+  Core_Sessions__Sign_InMutationVariables
 } from "@/graphql/hooks";
 import { redirect } from "@/utils/i18n";
 import { CoreApiTags } from "@/admin/core/api-tags";

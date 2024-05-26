@@ -5,8 +5,8 @@ import { revalidatePath } from "next/cache";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Staff_Administrators__Delete,
-  type Admin__Core_Staff_Administrators__DeleteMutation,
-  type Admin__Core_Staff_Administrators__DeleteMutationVariables
+  Admin__Core_Staff_Administrators__DeleteMutation,
+  Admin__Core_Staff_Administrators__DeleteMutationVariables
 } from "@/graphql/hooks";
 
 export const mutationApi = async (

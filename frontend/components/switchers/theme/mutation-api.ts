@@ -3,8 +3,8 @@
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Themes__Change,
-  type Core_Themes__ChangeMutation,
-  type Core_Themes__ChangeMutationVariables
+  Core_Themes__ChangeMutation,
+  Core_Themes__ChangeMutationVariables
 } from "@/graphql/hooks";
 import { setCookieFromApi } from "@/functions/cookie-from-string-to-object";
 

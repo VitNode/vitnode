@@ -2,7 +2,7 @@
 
 import * as fs from "fs";
 
-import type { ConfigType } from "@/config";
+import { ConfigType } from "@/config";
 import { configPath, getConfigFile } from "@/config/helpers";
 
 export const mutationApi = async (variables: ConfigType["editor"]) => {

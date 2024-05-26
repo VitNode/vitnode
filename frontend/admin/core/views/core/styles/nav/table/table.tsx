@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { ItemContentTableContentNavAdmin } from "./item";
-import type { Admin__Core_Nav__ShowQuery, ShowCoreNav } from "@/graphql/hooks";
+import { Admin__Core_Nav__ShowQuery, ShowCoreNav } from "@/graphql/hooks";
 import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
 import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
 import { ItemDragAndDrop } from "@/hooks/core/drag&drop/item";

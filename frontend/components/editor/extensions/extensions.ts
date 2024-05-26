@@ -1,6 +1,6 @@
 import { TextAlign } from "@tiptap/extension-text-align";
 import { Underline } from "@tiptap/extension-underline";
-import type { Extensions } from "@tiptap/react";
+import { Extensions } from "@tiptap/react";
 import { StarterKit } from "@tiptap/starter-kit";
 import { Link } from "@tiptap/extension-link";
 import { Color } from "@tiptap/extension-color";
@@ -8,7 +8,7 @@ import { TextStyle } from "@tiptap/extension-text-style";
 
 import { CodeBlockLowlightExtensionEditor } from "./code/code";
 import { MentionExtensionEditor } from "./mentions/emoji";
-import { FilesHandler, type FilesHandlerArgs } from "./files/files";
+import { FilesHandler, FilesHandlerArgs } from "./files/files";
 import { HeadingExtensionEditor } from "./heading";
 
 interface Args extends FilesHandlerArgs {

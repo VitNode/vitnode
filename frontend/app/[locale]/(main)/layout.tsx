@@ -1,11 +1,11 @@
-import { lazy, type LazyExoticComponent, type ReactNode } from "react";
+import { lazy, LazyExoticComponent, ReactNode } from "react";
 import { isRedirectError } from "next/dist/client/components/redirect";
 
 import { SessionProvider } from "./session-provider";
 import { InternalErrorView } from "@/admin/core/global/internal-error/internal-error-view";
 import { redirect } from "@/utils/i18n";
 import { getSessionData } from "@/functions/get-session-data";
-import type { TextLanguage } from "@/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 
 interface Props {
   children: ReactNode;

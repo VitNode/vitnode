@@ -1,4 +1,4 @@
-import type { Element } from "html-react-parser";
+import { Element } from "html-react-parser";
 import { Fragment, createElement } from "react";
 
 import { generateRandomString } from "@/functions/generate-random-string";

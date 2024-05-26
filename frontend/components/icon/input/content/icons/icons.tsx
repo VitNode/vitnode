@@ -1,8 +1,8 @@
 import * as Lucide from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { Icon, type IconLucideNames } from "@/components/icon/icon";
-import type { IconInputProps } from "../content";
+import { Icon, IconLucideNames } from "@/components/icon/icon";
+import { IconInputProps } from "../content";
 import { Button } from "@/components/ui/button";
 
 interface Props extends IconInputProps {

@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import type { ReactNode } from "react";
+import { ReactNode } from "react";
 
 import { getConfigFile } from "@/config/helpers";
 

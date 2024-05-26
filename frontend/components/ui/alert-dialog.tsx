@@ -2,8 +2,8 @@
 
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import {
-  type ComponentPropsWithoutRef,
-  type HTMLAttributes,
+  ComponentPropsWithoutRef,
+  HTMLAttributes,
   createContext,
   useContext,
   useState

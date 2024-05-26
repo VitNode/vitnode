@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import type { ShowAdminThemes } from "@/graphql/hooks";
+import { ShowAdminThemes } from "@/graphql/hooks";
 
 export const ContentEditThemeActionsAdmin = (props: ShowAdminThemes) => {
   const t = useTranslations("admin.core.styles.themes");

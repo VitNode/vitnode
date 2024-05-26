@@ -2,8 +2,8 @@
 
 import {
   Forum_Topics__Create,
-  type Forum_Topics__CreateMutation,
-  type Forum_Topics__CreateMutationVariables
+  Forum_Topics__CreateMutation,
+  Forum_Topics__CreateMutationVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 

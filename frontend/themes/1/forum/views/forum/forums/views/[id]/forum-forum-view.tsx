@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { ActionsForumsForum } from "./actions/actions";
-import type { Forum_Forums__Show_ItemQuery } from "@/graphql/hooks";
+import { Forum_Forums__Show_ItemQuery } from "@/graphql/hooks";
 import { TopicsListForum } from "./topics-list/topics-list";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
