@@ -1,7 +1,7 @@
-import type { Editor } from "@tiptap/react";
+import { Editor } from "@tiptap/react";
 import { Baseline } from "lucide-react";
 import { useEffect, useState } from "react";
-import type { HslColor } from "react-colorful";
+import { HslColor } from "react-colorful";
 
 import {
   Popover,

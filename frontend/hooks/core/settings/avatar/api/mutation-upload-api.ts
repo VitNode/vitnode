@@ -5,8 +5,8 @@ import { revalidateTag } from "next/cache";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Members__Avatar__Upload,
-  type Core_Members__Avatar__UploadMutation,
-  type Core_Members__Avatar__UploadMutationVariables
+  Core_Members__Avatar__UploadMutation,
+  Core_Members__Avatar__UploadMutationVariables
 } from "@/graphql/hooks";
 import { CoreApiTags } from "@/admin/core/api-tags";
 

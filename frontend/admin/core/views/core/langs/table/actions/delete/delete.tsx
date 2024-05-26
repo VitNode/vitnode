@@ -2,7 +2,7 @@ import { Suspense, lazy } from "react";
 
 import { Loader } from "@/components/loader";
 import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
-import type { ShowCoreLanguages } from "@/graphql/hooks";
+import { ShowCoreLanguages } from "@/graphql/hooks";
 
 const Content = lazy(async () =>
   import("./content").then(module => ({

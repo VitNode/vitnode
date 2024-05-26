@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import type { Metadata } from "next";
-import type { ReactNode } from "react";
+import { Metadata } from "next";
+import { ReactNode } from "react";
 
 import { getConfigFile } from "@/config/helpers";
 

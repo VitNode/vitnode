@@ -4,7 +4,7 @@ import * as z from "zod";
 import { useState } from "react";
 
 import { mutationApi } from "@/hooks/core/sign/in/mutation-api";
-import type { ErrorType } from "@/graphql/fetcher";
+import { ErrorType } from "@/graphql/fetcher";
 import { zodInput } from "@/utils/zod";
 
 export const useSignInAdminView = () => {

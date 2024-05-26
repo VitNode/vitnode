@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { useRef, useState } from "react";
-import { HslColorPicker, type HslColor } from "react-colorful";
+import { HslColorPicker, HslColor } from "react-colorful";
 import { RemoveFormatting } from "lucide-react";
 import { useTranslations } from "next-intl";
 

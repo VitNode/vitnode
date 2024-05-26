@@ -3,8 +3,8 @@
 import { fetcher } from "@/graphql/fetcher";
 import {
   Forum_Posts__Delete,
-  type Forum_Posts__DeleteMutation,
-  type Forum_Posts__DeleteMutationVariables
+  Forum_Posts__DeleteMutation,
+  Forum_Posts__DeleteMutationVariables
 } from "@/graphql/hooks";
 
 export const mutationApi = async (

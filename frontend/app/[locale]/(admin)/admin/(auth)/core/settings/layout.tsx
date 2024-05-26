@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
-import type { ReactNode } from "react";
-import type { Metadata } from "next";
+import { ReactNode } from "react";
+import { Metadata } from "next";
 
 import { Tabs } from "@/components/tabs/tabs";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";

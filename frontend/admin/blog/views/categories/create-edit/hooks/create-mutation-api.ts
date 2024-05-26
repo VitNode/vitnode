@@ -2,9 +2,9 @@
 
 import { fetcher } from "@/graphql/fetcher";
 import {
-  type Admin__Blog_Categories__CreateMutation,
+  Admin__Blog_Categories__CreateMutation,
   Admin__Blog_Categories__Create,
-  type Admin__Blog_Categories__CreateMutationVariables
+  Admin__Blog_Categories__CreateMutationVariables
 } from "@/graphql/hooks";
 
 export const mutationCreateApi = async (

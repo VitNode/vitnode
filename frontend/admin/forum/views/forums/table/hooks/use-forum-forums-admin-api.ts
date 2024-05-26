@@ -3,12 +3,12 @@ import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
 import { mutationUpdateDataApi } from "./mutation-update-data-api";
-import type { ShowForumForumsAdmin } from "@/graphql/hooks";
+import { ShowForumForumsAdmin } from "@/graphql/hooks";
 
 import {
   buildTree,
   flattenTree,
-  type FlatTree
+  FlatTree
 } from "../../../../../../hooks/core/drag&drop/use-functions";
 
 export interface ShowForumForumsAdminWithChildren

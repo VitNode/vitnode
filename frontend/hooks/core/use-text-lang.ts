@@ -1,6 +1,6 @@
 import { useLocale } from "next-intl";
 
-import type { TextLanguage } from "@/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 
 const getConvertTextLang = ({

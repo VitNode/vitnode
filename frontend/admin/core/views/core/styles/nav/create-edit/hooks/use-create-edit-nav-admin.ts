@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { createMutationApi } from "./create-mutation-api";
 import { useDialog } from "@/components/ui/dialog";
 import { useTextLang } from "@/hooks/core/use-text-lang";
-import type { ShowCoreNav } from "@/graphql/hooks";
+import { ShowCoreNav } from "@/graphql/hooks";
 import { editMutationApi } from "./edit-mutation-api";
 import { zodInput } from "@/utils/zod";
 

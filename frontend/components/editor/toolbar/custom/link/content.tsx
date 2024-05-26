@@ -2,7 +2,7 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { Editor } from "@tiptap/react";
+import { Editor } from "@tiptap/react";
 
 import {
   Form,

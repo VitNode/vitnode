@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import type { ReactNode } from "react";
+import { ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
 import {

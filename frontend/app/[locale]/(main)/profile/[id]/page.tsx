@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { lazy, type LazyExoticComponent } from "react";
+import { lazy, LazyExoticComponent } from "react";
 
-import type { ProfileViewProps } from "@/themes/1/core/views/profile/profile-view";
+import { ProfileViewProps } from "@/themes/1/core/views/profile/profile-view";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Members__Profiles,
-  type Core_Members__ProfilesQuery,
-  type Core_Members__ProfilesQueryVariables
+  Core_Members__ProfilesQuery,
+  Core_Members__ProfilesQueryVariables
 } from "@/graphql/hooks";
 import { getSessionData } from "@/functions/get-session-data";
 

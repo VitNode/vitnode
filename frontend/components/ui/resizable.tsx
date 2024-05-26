@@ -2,7 +2,7 @@
 
 import { DragHandleDots2Icon } from "@radix-ui/react-icons";
 import * as ResizablePrimitive from "react-resizable-panels";
-import type { ComponentProps } from "react";
+import { ComponentProps } from "react";
 
 import { cn } from "@/functions/classnames";
 

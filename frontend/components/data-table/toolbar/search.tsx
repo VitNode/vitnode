@@ -1,5 +1,5 @@
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState, type TransitionStartFunction } from "react";
+import { useEffect, useState, TransitionStartFunction } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
 import { usePathname, useRouter } from "@/utils/i18n";

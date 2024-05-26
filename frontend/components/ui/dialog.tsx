@@ -3,12 +3,12 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import {
-  type ComponentPropsWithoutRef,
-  type HTMLAttributes,
+  ComponentPropsWithoutRef,
+  HTMLAttributes,
   useContext,
   createContext,
   useState,
-  type MouseEvent
+  MouseEvent
 } from "react";
 import { useTranslations } from "next-intl";
 

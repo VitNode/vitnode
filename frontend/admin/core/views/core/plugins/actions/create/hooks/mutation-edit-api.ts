@@ -3,8 +3,8 @@
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Plugins__Edit,
-  type Admin__Core_Plugins__EditMutation,
-  type Admin__Core_Plugins__EditMutationVariables
+  Admin__Core_Plugins__EditMutation,
+  Admin__Core_Plugins__EditMutationVariables
 } from "@/graphql/hooks";
 import { cleanAdminCorePluginsCache } from "@/admin/core/api-tags";
 

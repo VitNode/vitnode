@@ -3,11 +3,11 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
-import type { HslColor } from "react-colorful";
+import { HslColor } from "react-colorful";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
-import type { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
+import { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";
 import { CONFIG } from "@/config";
 import { useRouter } from "@/utils/i18n";

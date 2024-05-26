@@ -1,9 +1,4 @@
-import {
-  type InputHTMLAttributes,
-  useRef,
-  useState,
-  type RefCallback
-} from "react";
+import { InputHTMLAttributes, useRef, useState, RefCallback } from "react";
 import { Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";

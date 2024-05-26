@@ -1,4 +1,4 @@
-import type { ReactNode, Ref, RefObject } from "react";
+import { ReactNode, Ref, RefObject } from "react";
 
 import { Link } from "@/utils/i18n";
 import { cn } from "@/functions/classnames";

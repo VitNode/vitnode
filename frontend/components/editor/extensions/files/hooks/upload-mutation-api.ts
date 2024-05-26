@@ -6,8 +6,8 @@ import { CoreApiTags } from "@/admin/core/api-tags";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Editor_Files__Upload,
-  type Core_Editor_Files__UploadMutation,
-  type Core_Editor_Files__UploadMutationVariables
+  Core_Editor_Files__UploadMutation,
+  Core_Editor_Files__UploadMutationVariables
 } from "@/graphql/hooks";
 
 export const uploadMutationApi = async (formData: FormData) => {

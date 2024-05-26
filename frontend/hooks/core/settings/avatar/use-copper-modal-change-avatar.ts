@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import type { ReactCropperElement } from "react-cropper";
+import { ReactCropperElement } from "react-cropper";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 

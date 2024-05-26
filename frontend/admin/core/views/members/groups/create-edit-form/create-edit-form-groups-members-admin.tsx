@@ -12,7 +12,7 @@ import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import {
   useCreateEditFormGroupsMembersAdmin,
-  type CreateEditFormGroupsMembersAdminArgs
+  CreateEditFormGroupsMembersAdminArgs
 } from "./hooks/use-create-edit-form-groups-members-admin";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";

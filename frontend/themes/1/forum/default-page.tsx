@@ -5,8 +5,8 @@ import { HeaderContent } from "@/components/header-content/header-content";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Forum_Forums__Show,
-  type Forum_Forums__ShowQuery,
-  type Forum_Forums__ShowQueryVariables
+  Forum_Forums__ShowQuery,
+  Forum_Forums__ShowQueryVariables
 } from "@/graphql/hooks";
 
 const getData = async () => {

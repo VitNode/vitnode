@@ -1,9 +1,9 @@
-import type { ReactNode } from "react";
+import { ReactNode } from "react";
 
 import { Header } from "./header/header";
 import { QuickMenu } from "./quick-menu/quick-menu";
 import { PoweredByVitNode } from "@/admin/core/global/powered-by";
-import type { TextLanguage } from "@/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import "./global.css";
 

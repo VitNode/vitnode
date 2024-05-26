@@ -1,4 +1,4 @@
-import type { HslColor } from "react-colorful";
+import { HslColor } from "react-colorful";
 
 export const convertColor = {
   hslToHex: ({ h, l, s }: { h: number; l: number; s: number }): string => {

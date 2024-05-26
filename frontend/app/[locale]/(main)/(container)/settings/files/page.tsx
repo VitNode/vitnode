@@ -1,16 +1,16 @@
-import { lazy, type LazyExoticComponent } from "react";
+import { lazy, LazyExoticComponent } from "react";
 
 import { getSessionData } from "@/functions/get-session-data";
 import {
   Core_Members__Files__Show,
   ShowCoreFilesSortingColumnEnum,
-  type Core_Members__Files__ShowQuery,
-  type Core_Members__Files__ShowQueryVariables
+  Core_Members__Files__ShowQuery,
+  Core_Members__Files__ShowQueryVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 import {
   usePaginationAPISsr,
-  type SearchParamsPagination
+  SearchParamsPagination
 } from "@/hooks/core/utils/use-pagination-api-ssr";
 
 const getData = async (variables: Core_Members__Files__ShowQueryVariables) => {

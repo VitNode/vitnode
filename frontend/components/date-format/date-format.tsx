@@ -1,6 +1,6 @@
 "use client";
 
-import type { RefCallback } from "react";
+import { RefCallback } from "react";
 
 import {
   Tooltip,

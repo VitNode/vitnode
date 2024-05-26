@@ -2,7 +2,7 @@ import { Suspense, lazy } from "react";
 
 import { Loader } from "@/components/loader";
 import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
-import type { ShowAdminThemes } from "@/graphql/hooks";
+import { ShowAdminThemes } from "@/graphql/hooks";
 
 const ContentDeleteThemeActionsAdmin = lazy(async () =>
   import("./content").then(module => ({

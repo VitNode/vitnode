@@ -3,12 +3,12 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { useState, type ReactNode } from "react";
+import { useState, ReactNode } from "react";
 
 import { Toaster } from "@/components/ui/sonner";
 import { GlobalsContext } from "@/hooks/core/use-globals";
-import type { Core_MiddlewareQuery } from "@/graphql/hooks";
-import type { ConfigType } from "@/config";
+import { Core_MiddlewareQuery } from "@/graphql/hooks";
+import { ConfigType } from "@/config";
 
 interface Props {
   children: ReactNode;

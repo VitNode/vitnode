@@ -2,8 +2,8 @@ import { Node, mergeAttributes } from "@tiptap/react";
 import { Plugin } from "@tiptap/pm/state";
 
 import { renderReactNode } from "./client";
-import type { Core_Editor_Files__UploadMutation } from "@/graphql/hooks";
-import type { UploadFilesHandlerArgs } from "./hooks/use-upload-files-handler-editor.ts";
+import { Core_Editor_Files__UploadMutation } from "@/graphql/hooks";
+import { UploadFilesHandlerArgs } from "./hooks/use-upload-files-handler-editor.ts";
 
 export const acceptMimeTypeImage = [
   "image/jpeg",

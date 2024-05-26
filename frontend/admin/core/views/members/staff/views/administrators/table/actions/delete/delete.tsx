@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
-import type { ShowAdminStaffAdministrators } from "@/graphql/hooks";
+import { ShowAdminStaffAdministrators } from "@/graphql/hooks";
 
 const ContentDeleteActionsTableAdministratorsStaffAdmin = lazy(async () =>
   import("./content").then(module => ({

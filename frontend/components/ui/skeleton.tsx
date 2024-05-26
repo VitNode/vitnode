@@ -1,4 +1,4 @@
-import type { HTMLAttributes } from "react";
+import { HTMLAttributes } from "react";
 
 import { cn } from "@/functions/classnames";
 

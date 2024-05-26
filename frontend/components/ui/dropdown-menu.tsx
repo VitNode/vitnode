@@ -2,7 +2,7 @@
 
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { CheckIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import type { ComponentPropsWithoutRef, HTMLAttributes } from "react";
+import { ComponentPropsWithoutRef, HTMLAttributes } from "react";
 
 import { cn } from "@/functions/classnames";
 

@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 "use client";
 
-import type { ReactNode } from "react";
+import { ReactNode } from "react";
 
 import { useRouter } from "@/utils/i18n";
 

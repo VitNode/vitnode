@@ -3,18 +3,18 @@ import { Slot } from "@radix-ui/react-slot";
 import { useBeforeUnload } from "react-use";
 import {
   Controller,
-  type ControllerProps,
-  type FieldPath,
-  type FieldValues,
+  ControllerProps,
+  FieldPath,
+  FieldValues,
   FormProvider,
   useFormContext,
-  type FormProviderProps
+  FormProviderProps
 } from "react-hook-form";
 import {
   createContext,
   useContext,
-  type ComponentPropsWithoutRef,
-  type HTMLAttributes,
+  ComponentPropsWithoutRef,
+  HTMLAttributes,
   useId,
   useEffect
 } from "react";

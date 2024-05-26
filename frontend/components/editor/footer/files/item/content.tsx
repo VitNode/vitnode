@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 
-import type { ItemListFilesFooterEditorProps } from "./item";
+import { ItemListFilesFooterEditorProps } from "./item";
 import { formatBytes } from "@/functions/format-bytes";
 
 export const ContentItemListFilesFooterEditor = ({

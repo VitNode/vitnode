@@ -13,7 +13,7 @@ import { Tabs } from "@/components/tabs/tabs";
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
-import type { ShowForumForumsAdminWithChildren } from "../table/hooks/use-forum-forums-admin-api";
+import { ShowForumForumsAdminWithChildren } from "../table/hooks/use-forum-forums-admin-api";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 
 const MainContentCreateEditFormForumAdmin = lazy(async () =>

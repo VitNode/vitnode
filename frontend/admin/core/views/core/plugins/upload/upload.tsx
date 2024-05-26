@@ -10,7 +10,7 @@ import { useUploadPluginAdmin } from "./hooks/use-upload-plugin-admin";
 import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { FilesInput } from "@/components/ui/files/files-input";
 import { Button } from "@/components/ui/button";
-import type { ShowAdminPlugins } from "@/graphql/hooks";
+import { ShowAdminPlugins } from "@/graphql/hooks";
 
 export interface UploadPluginAdminProps {
   data?: Pick<ShowAdminPlugins, "code" | "name">;

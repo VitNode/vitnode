@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 
-import type {
+import {
   AuthorizationCurrentUserObj,
   NavAdminPluginsAuthorization
 } from "@/graphql/hooks";

@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { ActionsForumsForumAdmin } from "./actions/actions";
 import { TableForumsForumAdmin } from "./table/table";
-import type { Admin__Forum_Forums__ShowQuery } from "@/graphql/hooks";
+import { Admin__Forum_Forums__ShowQuery } from "@/graphql/hooks";
 import { Card } from "@/components/ui/card";
 
 export const ForumsForumAdminView = (props: Admin__Forum_Forums__ShowQuery) => {

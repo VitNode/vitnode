@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { CheckIcon } from "lucide-react";
 
-import type { ShowCoreMembers } from "@/graphql/hooks";
-import type { UserInputItem } from "../user-input";
+import { ShowCoreMembers } from "@/graphql/hooks";
+import { UserInputItem } from "../user-input";
 import { cn } from "@/functions/classnames";
 import { CommandGroup, CommandItem } from "@/components/ui/command";
 

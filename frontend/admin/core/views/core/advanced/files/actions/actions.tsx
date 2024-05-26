@@ -9,7 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import type { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
+import { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
 import { Link } from "@/utils/i18n";
 import { DeleteActionFilesAdvancedCoreAdmin } from "./delete/delete";
 

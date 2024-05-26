@@ -4,7 +4,7 @@ import { useRef } from "react";
 
 import { Button } from "@/components/ui/button";
 
-import type { FileStateEditor } from "../../extensions/files/files";
+import { FileStateEditor } from "../../extensions/files/files";
 import { useEditorState } from "../../hooks/use-editor-state";
 
 export const FilesButtonFooterEditor = () => {

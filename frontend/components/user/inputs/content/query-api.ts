@@ -3,8 +3,8 @@
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Members__Show__Search,
-  type Core_Members__Show__SearchQuery,
-  type Core_Members__Show__SearchQueryVariables
+  Core_Members__Show__SearchQuery,
+  Core_Members__Show__SearchQueryVariables
 } from "@/graphql/hooks";
 
 export const queryApi = async (

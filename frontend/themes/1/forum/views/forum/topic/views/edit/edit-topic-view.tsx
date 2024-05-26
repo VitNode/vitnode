@@ -1,7 +1,4 @@
-import {
-  CreateEditTopic,
-  type EditTopicData
-} from "../../create-edit/create-edit";
+import { CreateEditTopic, EditTopicData } from "../../create-edit/create-edit";
 
 export interface EditTopicViewProps {
   data: EditTopicData;

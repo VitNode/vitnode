@@ -1,4 +1,4 @@
-import type { TextareaHTMLAttributes } from "react";
+import { TextareaHTMLAttributes } from "react";
 
 import { cn } from "@/functions/classnames";
 

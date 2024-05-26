@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/functions/classnames";
 import { Loader } from "@/components/loader";
 import { ListContentForumsSelect } from "./list";
-import type { ForumSelectItem } from "./forums-select";
+import { ForumSelectItem } from "./forums-select";
 
 export interface ContentForumsSelectProps {
   onSelect: (value: ForumSelectItem) => void;

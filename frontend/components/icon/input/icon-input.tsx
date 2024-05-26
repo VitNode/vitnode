@@ -4,7 +4,7 @@ import { Plus, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Suspense, lazy, useState } from "react";
 
-import { Icon, type IconLucideNames } from "@/components/icon/icon";
+import { Icon, IconLucideNames } from "@/components/icon/icon";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/functions/classnames";
 import { Loader } from "@/components/loader";
-import type { IconInputProps } from "./content/content";
+import { IconInputProps } from "./content/content";
 
 const Content = lazy(async () =>
   import("./content/content").then(module => ({

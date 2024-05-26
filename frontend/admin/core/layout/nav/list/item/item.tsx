@@ -1,11 +1,11 @@
 import { ChevronDown } from "lucide-react";
-import type { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import * as Accordion from "@radix-ui/react-accordion";
 import { useTranslations } from "next-intl";
 
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/functions/classnames";
-import { LinkItemListNavAdmin, type ItemListNavAdminProps } from "./link";
+import { LinkItemListNavAdmin, ItemListNavAdminProps } from "./link";
 import { usePathname } from "@/utils/i18n";
 
 interface Props {

@@ -1,4 +1,4 @@
-import { lazy, type LazyExoticComponent } from "react";
+import { lazy, LazyExoticComponent } from "react";
 
 import { getSessionData } from "@/functions/get-session-data";
 

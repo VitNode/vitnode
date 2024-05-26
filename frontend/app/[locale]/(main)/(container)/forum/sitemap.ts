@@ -1,4 +1,4 @@
-import type { MetadataRoute } from "next";
+import { MetadataRoute } from "next";
 
 import { CONFIG } from "@/config";
 import { getSessionData } from "@/functions/get-session-data";
@@ -6,8 +6,8 @@ import { generateAlternateLanguages } from "@/functions/sitemap";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Forum_Forums__Show__Sitemap,
-  type Forum_Forums__Show__SitemapQuery,
-  type Forum_Forums__Show__SitemapQueryVariables
+  Forum_Forums__Show__SitemapQuery,
+  Forum_Forums__Show__SitemapQueryVariables
 } from "@/graphql/hooks";
 import { getConvertNameToLink, getTextLang } from "@/hooks/core/use-text-lang";
 

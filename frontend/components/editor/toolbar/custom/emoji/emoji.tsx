@@ -1,4 +1,4 @@
-import type { Editor } from "@tiptap/react";
+import { Editor } from "@tiptap/react";
 import { Suspense, lazy } from "react";
 import { SmileIcon } from "lucide-react";
 

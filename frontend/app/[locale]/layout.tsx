@@ -1,16 +1,16 @@
-import type { ReactNode } from "react";
-import { NextIntlClientProvider, type AbstractIntlMessages } from "next-intl";
+import { ReactNode } from "react";
+import { NextIntlClientProvider, AbstractIntlMessages } from "next-intl";
 import { Inter } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
-import type { Metadata } from "next";
+import { Metadata } from "next";
 
 import { CONFIG } from "@/config";
 import { Providers } from "./providers";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Middleware,
-  type Core_MiddlewareQuery,
-  type Core_MiddlewareQueryVariables
+  Core_MiddlewareQuery,
+  Core_MiddlewareQueryVariables
 } from "@/graphql/hooks";
 import { cn } from "@/functions/classnames";
 import { CatchLayout } from "./catch";

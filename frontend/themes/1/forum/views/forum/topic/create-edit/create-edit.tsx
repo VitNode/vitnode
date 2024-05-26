@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/form";
 import { getIdFormString } from "@/functions/url";
 import { useRouter } from "@/utils/i18n";
-import type { ShowTopicsForums } from "@/graphql/hooks";
+import { ShowTopicsForums } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { useCreateEditTopic } from "@/hooks/forum/topics/create-edit/use-create-edit-topic";
 import { Editor } from "@/components/editor/editor";

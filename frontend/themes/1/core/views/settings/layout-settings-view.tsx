@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { ReactNode } from "react";
 import { useTranslations } from "next-intl";
 
 import { NavSettings } from "./nav/nav-settings";

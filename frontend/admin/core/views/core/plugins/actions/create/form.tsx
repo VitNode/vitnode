@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import type { UseFormReturn } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 
 import {
   FormControl,

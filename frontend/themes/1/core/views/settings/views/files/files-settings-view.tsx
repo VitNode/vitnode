@@ -7,7 +7,7 @@ import {
   CardDescription,
   CardHeader
 } from "@/components/ui/card";
-import type { Core_Members__Files__ShowQuery } from "@/graphql/hooks";
+import { Core_Members__Files__ShowQuery } from "@/graphql/hooks";
 import { Loader } from "@/components/loader";
 
 const ContentFilesSettings = lazy(async () =>

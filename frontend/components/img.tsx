@@ -1,4 +1,4 @@
-import Image, { type StaticImageData } from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 import { cn } from "@/functions/classnames";
 

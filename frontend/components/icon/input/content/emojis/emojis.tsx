@@ -1,13 +1,10 @@
-import emojiMartData, {
-  type Emoji,
-  type EmojiMartData
-} from "@emoji-mart/data";
+import emojiMartData, { Emoji, EmojiMartData } from "@emoji-mart/data";
 import { init, SearchIndex } from "emoji-mart";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
-import type { IconInputProps } from "../content";
+import { IconInputProps } from "../content";
 import { cn } from "@/functions/classnames";
 
 interface Props extends Omit<IconInputProps, "setOpen"> {

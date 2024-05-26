@@ -9,7 +9,7 @@ import {
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import type { ShowCoreNav } from "@/graphql/hooks";
+import { ShowCoreNav } from "@/graphql/hooks";
 import {
   Tooltip,
   TooltipContent,

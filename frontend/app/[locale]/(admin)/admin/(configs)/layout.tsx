@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { ReactNode } from "react";
 
 import { LayoutConfigs } from "@/admin/core/configs/layout-configs";
 

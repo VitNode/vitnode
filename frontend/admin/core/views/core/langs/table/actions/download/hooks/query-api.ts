@@ -3,8 +3,8 @@
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Plugins__Show,
-  type Admin__Core_Plugins__ShowQuery,
-  type Admin__Core_Plugins__ShowQueryVariables
+  Admin__Core_Plugins__ShowQuery,
+  Admin__Core_Plugins__ShowQueryVariables
 } from "@/graphql/hooks";
 
 export const queryApi = async (

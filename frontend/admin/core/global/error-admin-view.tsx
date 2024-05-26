@@ -8,7 +8,7 @@ import {
   CardFooter,
   CardHeader
 } from "@/components/ui/card";
-import type { ErrorViewProps } from "@/components/views/error-view-ssr";
+import { ErrorViewProps } from "@/components/views/error-view-ssr";
 import { cn } from "@/functions/classnames";
 import { Link } from "@/utils/i18n";
 

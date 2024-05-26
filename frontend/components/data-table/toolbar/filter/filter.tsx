@@ -1,6 +1,5 @@
 import { PlusCircledIcon } from "@radix-ui/react-icons";
-import type { ReactNode } from "react";
-import { Suspense } from "react";
+import { ReactNode, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 import {

@@ -8,9 +8,9 @@ import { mutationCreateApi } from "./mutation-create-api";
 import { useDialog } from "@/components/ui/dialog";
 import { useRouter } from "@/utils/i18n";
 import { zodInput } from "@/utils/zod";
-import type { EditTopicData } from "@/themes/1/forum/views/forum/topic/create-edit/create-edit";
+import { EditTopicData } from "@/themes/1/forum/views/forum/topic/create-edit/create-edit";
 import { mutationEditApi } from "./mutation-edit-api";
-import type { TextLanguage } from "@/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 
 import { useTextLang } from "../../../core/use-text-lang";
 

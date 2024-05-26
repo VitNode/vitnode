@@ -1,5 +1,5 @@
 import { LinkIcon } from "lucide-react";
-import type { Editor } from "@tiptap/react";
+import { Editor } from "@tiptap/react";
 import { Suspense, lazy, useState } from "react";
 
 import {

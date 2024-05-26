@@ -42,11 +42,14 @@
     "ua-parser-js": "^1.0.37"
   },
   "devDependencies": {
+    "@as-integrations/fastify": "^2.1.1",
+    "@fastify/static": "^7.0.4",
     "@graphql-codegen/cli": "^5.0.2",
     "@graphql-codegen/typescript": "^4.0.7",
     "@graphql-codegen/typescript-document-nodes": "^4.0.7",
     "@graphql-codegen/typescript-operations": "^4.2.1",
     "@nestjs/cli": "^10.3.2",
+    "@nestjs/platform-fastify": "^10.3.8",
     "@nestjs/schematics": "^10.1.1",
     "@swc/cli": "^0.3.12",
     "@swc/core": "^1.5.7",
@@ -70,6 +73,7 @@
     "drizzle-orm": "^0.30.10",
     "eslint": "^8.57.0",
     "eslint-config-vitnode": "workspace:*",
+    "fastify": "^4.27.0",
     "http-errors": "^2.0.0",
     "object-path": "^0.11.8",
     "pg": "^8.11.5",

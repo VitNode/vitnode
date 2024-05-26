@@ -60,6 +60,10 @@
     "@typescript-eslint/return-await": "error",
     "@typescript-eslint/sort-type-constituents": "warn",
     "@typescript-eslint/unified-signatures": "error",
+    "@typescript-eslint/consistent-type-imports": [
+      "warn",
+      { "prefer": "no-type-imports" }
+    ],
     // "@typescript-eslint/use-unknown-in-catch-callback-variable": "error",
     "@typescript-eslint/no-unused-vars": [
       "warn",

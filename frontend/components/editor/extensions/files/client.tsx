@@ -5,7 +5,7 @@ import { File } from "lucide-react";
 import Image from "next/image";
 
 import { CONFIG } from "@/config";
-import { acceptMimeTypeImage, type FilesHandlerAttributes } from "./files";
+import { acceptMimeTypeImage, FilesHandlerAttributes } from "./files";
 import { formatBytes } from "@/functions/format-bytes";
 
 const FileFromNextWithNode = ({

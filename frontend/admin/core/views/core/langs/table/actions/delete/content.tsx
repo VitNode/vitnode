@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import type { ShowCoreLanguages } from "@/graphql/hooks";
+import { ShowCoreLanguages } from "@/graphql/hooks";
 
 export const ContentDeleteActionsTableLangsCoreAdmin = ({
   code,

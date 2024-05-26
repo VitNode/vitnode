@@ -7,7 +7,7 @@ import { Suspense, lazy } from "react";
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import type { ShowCoreNav } from "@/graphql/hooks";
+import { ShowCoreNav } from "@/graphql/hooks";
 import {
   Tooltip,
   TooltipContent,

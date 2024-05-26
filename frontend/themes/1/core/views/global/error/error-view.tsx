@@ -12,7 +12,7 @@ import {
 import { Link } from "@/utils/i18n";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/functions/classnames";
-import type { ErrorViewProps } from "@/components/views/error-view-ssr";
+import { ErrorViewProps } from "@/components/views/error-view-ssr";
 
 export default function ErrorView({ className, code }: ErrorViewProps) {
   const t = useTranslations("core");

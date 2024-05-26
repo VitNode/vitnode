@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import * as localeDate from "date-fns/locale";
 import { Check } from "lucide-react";
-import type { ControllerRenderProps, FieldValues, Path } from "react-hook-form";
+import { ControllerRenderProps, FieldValues, Path } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 import {

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { ModeratorsStaffAdminView } from "@/admin/core/views/members/staff/views/moderators/moderators-view";
@@ -6,12 +6,12 @@ import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Staff_Moderators__Show,
   ShowAdminStaffModeratorsSortingColumnEnum,
-  type Admin__Core_Staff_Moderators__ShowQuery,
-  type Admin__Core_Staff_Moderators__ShowQueryVariables
+  Admin__Core_Staff_Moderators__ShowQuery,
+  Admin__Core_Staff_Moderators__ShowQueryVariables
 } from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
-  type SearchParamsPagination
+  SearchParamsPagination
 } from "@/hooks/core/utils/use-pagination-api-ssr";
 
 const getData = async (

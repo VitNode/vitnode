@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
 import { mutationApi } from "./mutation-api";
-import type { ConfigType } from "@/config";
+import { ConfigType } from "@/config";
 
 export interface EditorAdminArgs {
   data: ConfigType;

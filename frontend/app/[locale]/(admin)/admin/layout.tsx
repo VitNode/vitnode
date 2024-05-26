@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
-import type { Metadata } from "next";
+import { ReactNode } from "react";
+import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import "./global.css";

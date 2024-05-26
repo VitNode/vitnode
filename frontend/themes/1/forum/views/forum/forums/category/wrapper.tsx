@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode, useEffect } from "react";
+import { useState, ReactNode, useEffect } from "react";
 
 import { WrapperCategoryForumContext } from "@/hooks/forum/forum/use-wrapper-category-forum";
 

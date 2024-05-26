@@ -1,10 +1,10 @@
-import { lazy, type LazyExoticComponent } from "react";
-import type { Metadata } from "next";
+import { lazy, LazyExoticComponent } from "react";
+import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { getSessionData } from "@/functions/get-session-data";
 import { getForumItemData } from "../query-api";
-import type { CreateTopicViewProps } from "@/themes/1/forum/views/forum/forums/views/create-topic/create-topic-view";
+import { CreateTopicViewProps } from "@/themes/1/forum/views/forum/forums/views/create-topic/create-topic-view";
 import { ErrorViewSSR } from "@/components/views/error-view-ssr";
 
 interface Props {

@@ -2,7 +2,7 @@ import { ChevronDown, Trash2, Upload } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 
-import type { ShowCoreLanguages } from "@/graphql/hooks";
+import { ShowCoreLanguages } from "@/graphql/hooks";
 import { EditActionsTableLangsCoreAdmin } from "./edit";
 import { DeleteActionsTableLangsCoreAdmin } from "./delete/delete";
 import { DownloadActionsTableLangsCoreAdmin } from "./download/download";

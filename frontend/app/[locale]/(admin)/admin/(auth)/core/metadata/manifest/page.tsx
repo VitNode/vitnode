@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
+import { Metadata } from "next";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Card } from "@/components/ui/card";
@@ -7,8 +7,8 @@ import { ManifestMetadataCoreAdminView } from "@/admin/core/views/core/metadata/
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Manifest_Metadata__Show,
-  type Admin__Core_Manifest_Metadata__ShowQuery,
-  type Admin__Core_Manifest_Metadata__ShowQueryVariables
+  Admin__Core_Manifest_Metadata__ShowQuery,
+  Admin__Core_Manifest_Metadata__ShowQueryVariables
 } from "@/graphql/hooks";
 
 const getData = async () => {

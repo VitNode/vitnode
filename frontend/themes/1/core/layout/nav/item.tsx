@@ -2,7 +2,7 @@ import { ChevronDown } from "lucide-react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 
 import { buttonVariants } from "@/components/ui/button";
-import type { ShowCoreNav } from "@/graphql/hooks";
+import { ShowCoreNav } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { Link, usePathname } from "@/utils/i18n";
 import { cn } from "@/functions/classnames";

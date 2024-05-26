@@ -2,7 +2,7 @@
 
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { useTextLang } from "@/hooks/core/use-text-lang";
-import type { Forum_Forums__Show_ItemQuery } from "@/graphql/hooks";
+import { Forum_Forums__Show_ItemQuery } from "@/graphql/hooks";
 
 import { CreateEditTopic } from "../../../topic/create-edit/create-edit";
 

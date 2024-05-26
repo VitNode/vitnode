@@ -1,9 +1,9 @@
 import { useState } from "react";
-import type { UniqueIdentifier } from "@dnd-kit/core";
+import { UniqueIdentifier } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
-import type { Coordinates } from "@dnd-kit/utilities";
+import { Coordinates } from "@dnd-kit/utilities";
 
-import type { FlatTree } from "./use-functions";
+import { FlatTree } from "./use-functions";
 
 const getDragDepth = ({
   indentationWidth,

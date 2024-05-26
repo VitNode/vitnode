@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
-import type {
+import {
   Admin__Core_Plugins__Nav__ShowQuery,
   ShowAdminNavPluginsObj
 } from "@/graphql/hooks";

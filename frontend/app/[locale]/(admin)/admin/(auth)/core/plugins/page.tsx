@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { PluginsCoreAdminView } from "@/admin/core/views/core/plugins/plugins-admin-view";
 import {
   Admin__Core_Plugins__Show,
   ShowAdminPluginsSortingColumnEnum,
-  type Admin__Core_Plugins__ShowQuery,
-  type Admin__Core_Plugins__ShowQueryVariables
+  Admin__Core_Plugins__ShowQuery,
+  Admin__Core_Plugins__ShowQueryVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 import {
   usePaginationAPISsr,
-  type SearchParamsPagination
+  SearchParamsPagination
 } from "@/hooks/core/utils/use-pagination-api-ssr";
 
 interface Props {

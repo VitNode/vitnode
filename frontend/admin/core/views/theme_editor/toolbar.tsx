@@ -1,6 +1,6 @@
 import { Monitor, Moon, Smartphone, Sun, Tablet } from "lucide-react";
 import { useTranslations } from "next-intl";
-import type { ReactNode } from "react";
+import { ReactNode } from "react";
 import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";

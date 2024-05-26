@@ -3,8 +3,8 @@
 import { fetcher } from "@/graphql/fetcher";
 import {
   Forum_Forums__Show_Item_More,
-  type Forum_Forums__Show_Item_MoreQuery,
-  type Forum_Forums__Show_Item_MoreQueryVariables
+  Forum_Forums__Show_Item_MoreQuery,
+  Forum_Forums__Show_Item_MoreQueryVariables
 } from "@/graphql/hooks";
 
 export const queryApi = async (

@@ -7,7 +7,7 @@ import {
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 
-import type {
+import {
   Admin_Blog_Categories__ShowQuery,
   ShowBlogCategories
 } from "@/graphql/hooks";

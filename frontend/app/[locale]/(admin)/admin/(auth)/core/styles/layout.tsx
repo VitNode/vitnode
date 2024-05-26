@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
 
 import { Tabs } from "@/components/tabs/tabs";
