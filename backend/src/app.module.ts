@@ -8,6 +8,7 @@ import { GraphQLModule } from "@nestjs/graphql";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { ApolloServerPluginLandingPageLocalDefault } from "@apollo/server/plugin/landingPage/default";
 import { ServeStaticModule } from "@nestjs/serve-static";
+import { FastifyReply, FastifyRequest } from "fastify";
 
 import { DatabaseModule } from "./database/database.module";
 import { PluginsModule } from "./plugins/plugins.module";
@@ -27,7 +28,12 @@ import { Ctx } from "./utils/types/context.type";
       sortSchema: true,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      context: ({ req, res }): Ctx => ({ req, res })
+      context: (req: FastifyRequest, res: FastifyReply): Ctx => {
+        return {
+          req,
+          res
+        };
+      }
     }),
     JwtModule.register({ global: true }),
     ServeStaticModule.forRoot({

@@ -1,21 +1,46 @@
 /* eslint-disable no-console */
 import { NestFactory } from "@nestjs/core";
-import cookieParser from "cookie-parser";
 import {
   FastifyAdapter,
   NestFastifyApplication
 } from "@nestjs/platform-fastify";
 import { ValidationPipe } from "@nestjs/common";
+import fastifyCookie from "@fastify/cookie";
+import multiPart from "@fastify/multipart";
 
 import { AppModule } from "./app.module";
-import { graphqlUploadExpress } from "./utils/graphql-upload/graphql-upload-express";
+import processRequest from "./utils/graphql-upload/process-request";
 
 async function bootstrap() {
+  const adapter = new FastifyAdapter();
+  const fastify = adapter.getInstance();
+
+  fastify.addContentTypeParser("multipart", (request, done) => {
+    request.isMultipart = true;
+    done();
+  });
+
+  fastify.addHook("preValidation", async function (request: any, reply) {
+    if (!request.headers["content-type"]?.includes("multipart/form-data")) {
+      return;
+    }
+
+    request.body = await processRequest(request.raw, reply.raw);
+  });
+
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter()
+    adapter
   );
-  app.use(cookieParser());
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  await app.register(fastifyCookie, {
+    secret: "my-secret" // for cookies signature
+  });
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  await app.register(multiPart);
+
   app.enableCors({
     credentials: true,
     origin: [
@@ -25,7 +50,8 @@ async function bootstrap() {
       "https://sandbox.embed.apollographql.com"
     ]
   });
-  app.use(graphqlUploadExpress({ maxFiles: 100 }));
+
+  // app.use(graphqlUploadExpress({ maxFiles: 100 }));
 
   // Class Validation
   app.useGlobalPipes(

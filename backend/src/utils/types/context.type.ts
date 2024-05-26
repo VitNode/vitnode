@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
+import { FastifyRequest, FastifyReply } from "fastify";
 
 import { User } from "@/utils/decorators/user.decorator";
 
-export interface AuthRequest extends Request {
+export interface AuthRequest extends FastifyRequest {
   user?: {
     id: User["id"];
   };
@@ -10,5 +10,5 @@ export interface AuthRequest extends Request {
 
 export interface Ctx {
   req: AuthRequest;
-  res: Response;
+  res: FastifyReply;
 }

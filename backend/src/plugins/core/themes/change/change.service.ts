@@ -30,14 +30,18 @@ export class ChangeCoreThemesService {
     );
     expires.setDate(expires.getDate() + expiresIn);
 
-    res.cookie(this.configService.getOrThrow("cookies.theme_id.name"), id, {
-      httpOnly: true,
-      secure: true,
-      domain: this.configService.getOrThrow("cookies.domain"),
-      path: "/",
-      expires,
-      sameSite: "none"
-    });
+    res.setCookie(
+      this.configService.getOrThrow("cookies.theme_id.name"),
+      id.toString(),
+      {
+        httpOnly: true,
+        secure: true,
+        domain: this.configService.getOrThrow("cookies.domain"),
+        path: "/",
+        expires,
+        sameSite: "none"
+      }
+    );
 
     return "Success!";
   }

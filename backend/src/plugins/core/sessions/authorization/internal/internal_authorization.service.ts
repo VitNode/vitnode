@@ -80,9 +80,9 @@ export class InternalAuthorizationCoreSessionsService {
       "cookies.known_device.expiresIn"
     );
     expires.setDate(expires.getDate() + expiresIn);
-    res.cookie(
+    res.setCookie(
       this.configService.getOrThrow("cookies.known_device.name"),
-      know_device_id,
+      know_device_id.toString(),
       {
         httpOnly: true,
         secure: true,

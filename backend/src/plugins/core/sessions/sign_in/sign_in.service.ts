@@ -85,7 +85,7 @@ export class SignInCoreSessionsService {
       });
 
       // Set cookie for session
-      res.cookie(
+      res.setCookie(
         this.configService.getOrThrow("cookies.login_token.admin.name"),
         login_token,
         {
@@ -112,7 +112,7 @@ export class SignInCoreSessionsService {
     });
 
     // Set cookie for session
-    res.cookie(
+    res.setCookie(
       this.configService.getOrThrow("cookies.login_token.name"),
       login_token,
       {

@@ -57,9 +57,9 @@ export class DeviceSignInCoreSessionsService {
       "cookies.known_device.expiresIn"
     );
     expires.setDate(expires.getDate() + expiresIn);
-    res.cookie(
+    res.setCookie(
       this.configService.getOrThrow("cookies.known_device.name"),
-      device.id,
+      device.id.toString(),
       {
         httpOnly: true,
         secure: true,

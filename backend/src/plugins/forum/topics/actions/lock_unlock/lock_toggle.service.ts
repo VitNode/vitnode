@@ -60,7 +60,7 @@ export class LockToggleForumTopicsService {
         topic_id: topic.id,
         user_id,
         action: topic.locked ? "unlock" : "lock",
-        ip_address: req.ip
+        ip_address: req.socket.remoteAddress
       })
       .returning();
 

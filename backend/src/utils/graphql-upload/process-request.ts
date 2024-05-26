@@ -6,8 +6,13 @@ import objectPath from "object-path";
 
 import Upload, { FileUpload } from "./upload";
 import ignoreStream from "./ignore-stream";
-import { ProcessRequestOptions } from "./graphql-upload-express";
 import { WriteStream } from "./fs-capacitor";
+
+interface ProcessRequestOptions {
+  maxFieldSize?: number;
+  maxFileSize?: number;
+  maxFiles?: number;
+}
 
 const GRAPHQL_MULTIPART_REQUEST_SPEC_URL =
   "https://github.com/jaydenseric/graphql-multipart-request-spec";

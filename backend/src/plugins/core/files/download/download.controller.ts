@@ -9,7 +9,7 @@ import {
   StreamableFile,
   Query
 } from "@nestjs/common";
-import { Response } from "express";
+import { FastifyReply } from "fastify";
 
 import { DatabaseService } from "@/database/database.service";
 import { ABSOLUTE_PATHS } from "@/config";
@@ -20,7 +20,7 @@ export class DownloadSecureFilesController {
 
   @Get(":id")
   async getFile(
-    @Res({ passthrough: true }) res: Response,
+    @Res({ passthrough: true }) res: FastifyReply,
     @Param() { id }: { id: string },
     @Query() { security_key }: { security_key: string }
   ): Promise<StreamableFile> {
@@ -43,7 +43,7 @@ export class DownloadSecureFilesController {
     const mediaType = file.mimetype.split("/")[0];
 
     const streamFile = createReadStream(path);
-    res.set({
+    res.headers({
       "Content-Type": `application/${mediaType}`,
       "Content-Disposition": `attachment; filename="${file.file_name}"`
     });

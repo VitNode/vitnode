@@ -35,7 +35,7 @@ export class CreateForumsPostsService {
     const createPost = await this.databaseService.db
       .insert(forum_posts)
       .values({
-        ip_address: req.ip,
+        ip_address: req.socket.remoteAddress,
         topic_id,
         user_id: id
       })

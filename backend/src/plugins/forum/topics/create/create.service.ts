@@ -45,7 +45,7 @@ export class CreateForumTopicsService {
     const data = await this.databaseService.db
       .insert(forum_topics)
       .values({
-        ip_address: req.ip,
+        ip_address: req.socket.remoteAddress,
         forum_id
       })
       .returning();

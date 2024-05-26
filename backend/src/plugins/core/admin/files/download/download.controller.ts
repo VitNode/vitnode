@@ -9,7 +9,7 @@ import {
   Res,
   StreamableFile
 } from "@nestjs/common";
-import { Request, Response } from "express";
+import { FastifyReply, FastifyRequest } from "fastify";
 
 import { AuthorizationAdminSessionsService } from "../../sessions/authorization/authorization.service";
 import { InternalAuthorizationCoreSessionsService } from "@/plugins/core/sessions/authorization/internal/internal_authorization.service";
@@ -25,8 +25,8 @@ export class DownloadFilesAdminController {
 
   @Get(":file")
   async getFile(
-    @Res({ passthrough: true }) res: Response,
-    @Req() req: Request,
+    @Res({ passthrough: true }) res: FastifyReply,
+    @Req() req: FastifyRequest,
     @Param() { file }: { file: string }
   ): Promise<StreamableFile> {
     const path = join(process.cwd(), "temp", file);
@@ -94,10 +94,11 @@ export class DownloadFilesAdminController {
     }
 
     const streamFile = createReadStream(path);
-    res.set({
-      "Content-Type": `application/${currentFile.type}`,
-      "Content-Disposition": `attachment; filename="${currentFile.name}.${currentFile.type}"`
-    });
+    res.header("Content-Type", `application/${currentFile.type}`);
+    res.header(
+      "Content-Disposition",
+      `attachment; filename="${currentFile.name}.${currentFile.type}"`
+    );
 
     streamFile.on("close", () => {
       unlinkSync(path);
