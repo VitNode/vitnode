@@ -1,6 +1,6 @@
 import { Search } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import * as React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useDebouncedCallback } from "use-debounce";
 
@@ -23,7 +23,7 @@ interface Props {
 
 export const GroupInputContent = ({ onSelect, values }: Props) => {
   const t = useTranslations("core");
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = React.useState("");
 
   const { data, isLoading } = useQuery({
     queryKey: ["Admin__Core_Groups__Show_Short", { search }],

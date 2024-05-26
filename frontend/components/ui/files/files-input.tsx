@@ -31,8 +31,8 @@ export const FilesInput = ({
   ...props
 }: InputProps) => {
   const t = useTranslations("core");
-  const [isDrag, setDrag] = useState(false);
-  const currentRef = useRef<HTMLInputElement>(null);
+  const [isDrag, setDrag] = React.useState(false);
+  const currentRef = React.useRef<HTMLInputElement>(null);
   const inputRef = useMergeRefs([ref, currentRef]);
 
   const handleUploadFile = (files: FileList | null) => {

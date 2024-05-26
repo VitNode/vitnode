@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import * as React from "react";
 
 import { queryApi } from "./admin-query-api";
 
@@ -8,7 +8,7 @@ interface Args {
 }
 
 export const useSearchForums = ({ exclude }: Args) => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = React.useState("");
 
   const query = useQuery({
     queryKey: ["Forum_Forums__Show_Short", { search }],

@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import * as React from "react";
 
 import { ShowCoreLanguages, ShowCoreThemes } from "@/graphql/hooks";
 import { ConfigType } from "@/config";
@@ -21,7 +21,7 @@ interface Args {
   themes: Pick<ShowCoreThemes, "id" | "name">[];
 }
 
-export const GlobalsContext = createContext<Args>({
+export const GlobalsContext = React.createContext<Args>({
   languages: [],
   defaultLanguage: "",
   themes: [],
@@ -29,4 +29,4 @@ export const GlobalsContext = createContext<Args>({
   themeId: 1
 });
 
-export const useGlobals = () => useContext(GlobalsContext);
+export const useGlobals = () => React.useContext(GlobalsContext);

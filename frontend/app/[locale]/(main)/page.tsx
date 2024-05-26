@@ -1,4 +1,4 @@
-import { lazy, LazyExoticComponent } from "react";
+import * as React from "react";
 import { Metadata } from "next";
 
 import { getSessionData } from "@/functions/get-session-data";
@@ -39,11 +39,12 @@ export async function generateMetadata({
 
 export default async function Page() {
   const { default_plugin, theme_id } = await getSessionData();
-  const PageFromTheme: LazyExoticComponent<() => JSX.Element> = lazy(async () =>
-    import(`@/themes/${theme_id}/${default_plugin}/default-page`).catch(
-      async () => import(`@/themes/1/${default_plugin}/default-page`)
-    )
-  );
+  const PageFromTheme: React.LazyExoticComponent<() => JSX.Element> =
+    React.lazy(async () =>
+      import(`@/themes/${theme_id}/${default_plugin}/default-page`).catch(
+        async () => import(`@/themes/1/${default_plugin}/default-page`)
+      )
+    );
 
   return <PageFromTheme />;
 }

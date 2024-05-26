@@ -1,14 +1,15 @@
-import { lazy, LazyExoticComponent } from "react";
+import * as React from "react";
 
 import { getSessionData } from "@/functions/get-session-data";
 
 export default async function Page() {
   const { theme_id } = await getSessionData();
-  const PageFromTheme: LazyExoticComponent<() => JSX.Element> = lazy(async () =>
-    import(`@/themes/${theme_id}/forum/default-page`).catch(
-      async () => import(`@/themes/1/forum/default-page`)
-    )
-  );
+  const PageFromTheme: React.LazyExoticComponent<() => JSX.Element> =
+    React.lazy(async () =>
+      import(`@/themes/${theme_id}/forum/default-page`).catch(
+        async () => import(`@/themes/1/forum/default-page`)
+      )
+    );
 
   return <PageFromTheme />;
 }

@@ -1,6 +1,6 @@
 import { Editor } from "@tiptap/react";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import * as React from "react";
 
 import { CONFIG } from "@/config";
 import { EmojisContentIconInput } from "@/components/icon/input/content/emojis/emojis";
@@ -13,11 +13,11 @@ interface Props {
 
 export const ContentEmojiToolbarEditor = ({ editor }: Props) => {
   const t = useTranslations("core.icon_picker");
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = React.useState("");
   const localStorageSkinToneIndex = localStorage.getItem(
     CONFIG.local_storage.editor_skin_tone
   );
-  const [skinToneIndex, setSkinToneIndex] = useState(
+  const [skinToneIndex, setSkinToneIndex] = React.useState(
     localStorageSkinToneIndex ? +localStorageSkinToneIndex : 0
   );
 

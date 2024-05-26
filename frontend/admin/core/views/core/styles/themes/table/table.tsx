@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { useTranslations } from "next-intl";
-import { useMemo } from "react";
+import * as React from "react";
 import { ExternalLink } from "lucide-react";
 
 import { CONFIG } from "@/config";
@@ -18,7 +18,7 @@ export const TableThemesAdmin = ({
 }: Admin_Core_Themes__ShowQuery) => {
   const t = useTranslations("core");
 
-  const columns: ColumnDef<ShowAdminThemes>[] = useMemo(
+  const columns: ColumnDef<ShowAdminThemes>[] = React.useMemo(
     () => [
       {
         header: t("table.name"),

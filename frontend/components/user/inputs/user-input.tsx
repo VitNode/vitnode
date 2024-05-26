@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 import { X } from "lucide-react";
 
@@ -12,7 +12,7 @@ import {
 import { Loader } from "@/components/loader";
 import { Badge } from "@/components/ui/badge";
 
-const UserInputContent = lazy(async () =>
+const UserInputContent = React.lazy(async () =>
   import("./content/content").then(module => ({
     default: module.UserInputContent
   }))
@@ -53,7 +53,7 @@ export const UserInput = ({
     : currentValue
       ? [currentValue]
       : [];
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   return (
     <Popover open={open} onOpenChange={setOpen} modal>
@@ -104,7 +104,7 @@ export const UserInput = ({
       </PopoverTrigger>
 
       <PopoverContent className="p-0 w-64" align="start">
-        <Suspense fallback={<Loader className="p-4" />}>
+        <React.Suspense fallback={<Loader className="p-4" />}>
           <UserInputContent
             values={values}
             onSelect={item => {
@@ -123,7 +123,7 @@ export const UserInput = ({
               setOpen(false);
             }}
           />
-        </Suspense>
+        </React.Suspense>
       </PopoverContent>
     </Popover>
   );

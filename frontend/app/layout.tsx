@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { Metadata } from "next";
-import { ReactNode } from "react";
+import * as React from "react";
 
 import { getConfigFile } from "@/config/helpers";
 
@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export default async function RootLayout({ children }: Props) {

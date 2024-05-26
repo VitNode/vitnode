@@ -5,16 +5,16 @@ import { useState, ReactNode, useEffect } from "react";
 import { WrapperCategoryForumContext } from "@/hooks/forum/forum/use-wrapper-category-forum";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
   id: number;
 }
 
 export const LOCAL_STORAGE_KEY = "forum:category-accordion";
 
 export const WrapperCategoryForum = ({ children, id }: Props) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = React.useState(true);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const ids = localStorage.getItem(LOCAL_STORAGE_KEY)?.split(",");
 
     if (ids?.includes(id.toString())) {

@@ -1,6 +1,6 @@
 import { ChevronDown, Trash2, Upload } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useState } from "react";
+import * as React from "react";
 
 import { ShowCoreLanguages } from "@/graphql/hooks";
 import { EditActionsTableLangsCoreAdmin } from "./edit";
@@ -18,8 +18,8 @@ import { Button } from "@/components/ui/button";
 export const ActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
   const t = useTranslations("core");
   const locale = useLocale();
-  const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
-  const [isOpenUploadDialog, setIsOpenUploadDialog] = useState(false);
+  const [isOpenDeleteDialog, setIsOpenDeleteDialog] = React.useState(false);
+  const [isOpenUploadDialog, setIsOpenUploadDialog] = React.useState(false);
 
   return (
     <>

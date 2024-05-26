@@ -1,12 +1,12 @@
 "use client";
 
-import { ReactNode } from "react";
+import * as React from "react";
 
 import { Admin__Sessions__AuthorizationQuery } from "@/graphql/hooks";
 import { SessionAdminContext } from "@/admin/core/hooks/use-session-admin";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
   data: Admin__Sessions__AuthorizationQuery;
 }
 

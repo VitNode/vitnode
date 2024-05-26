@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { ReactNode } from "react";
+import * as React from "react";
 import { Metadata } from "next";
 
 import { Tabs } from "@/components/tabs/tabs";
@@ -7,7 +7,7 @@ import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 import { getConfigFile } from "@/config/helpers";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export async function generateMetadata(): Promise<Metadata> {

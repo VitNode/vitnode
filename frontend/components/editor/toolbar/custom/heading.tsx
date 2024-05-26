@@ -1,5 +1,5 @@
 import { Editor } from "@tiptap/react";
-import { useMemo } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 import {
   Heading1,
@@ -46,7 +46,7 @@ export const HeadingToolbarEditor = ({ editor }: Props) => {
   const { config } = useGlobals();
   const allowH1 = config.editor.allow_head_h1;
 
-  const value = useMemo(() => {
+  const value = React.useMemo(() => {
     const findActiveHeading = [...Array(6).keys()].find(i =>
       editor.isActive("heading", { level: i + 1 })
     );

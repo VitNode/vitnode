@@ -4,7 +4,7 @@ import { Link } from "@/utils/i18n";
 import { cn } from "@/functions/classnames";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
   active?: boolean;
   href?: string;
   onClick?: () => void;

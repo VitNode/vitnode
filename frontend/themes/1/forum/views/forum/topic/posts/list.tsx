@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import * as React from "react";
 
 import {
   ShowPostsForums,
@@ -15,7 +15,7 @@ interface Props {
   id: string;
   permissions: ShowTopicsForums["permissions"];
   className?: string;
-  customMoreMenu?: ReactNode;
+  customMoreMenu?: React.ReactNode;
 }
 
 export const ListPosts = ({ className, edges, id, permissions }: Props) => {

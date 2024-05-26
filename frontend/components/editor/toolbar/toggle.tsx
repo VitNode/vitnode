@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { ReactNode } from "react";
+import * as React from "react";
 
 import {
   Tooltip,
@@ -10,7 +10,7 @@ import {
 import { Toggle } from "@/components/ui/toggle";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
   name: string;
   onPressedChange: () => void;
   pressed: boolean;

@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { ColumnDef } from "@tanstack/react-table";
-import { useMemo } from "react";
+import * as React from "react";
 
 import { DataTable } from "@/components/data-table/data-table";
 import { Link } from "@/utils/i18n";
@@ -21,7 +21,7 @@ export const TableGroupsMembersAdmin = ({
   const tCore = useTranslations("core");
   const { convertText } = useTextLang();
 
-  const columns: ColumnDef<ShowAdminGroups>[] = useMemo(
+  const columns: ColumnDef<ShowAdminGroups>[] = React.useMemo(
     () => [
       {
         header: tCore("table.name"),

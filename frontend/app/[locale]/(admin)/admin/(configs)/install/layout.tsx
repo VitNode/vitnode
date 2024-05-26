@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import * as React from "react";
 
 import { LayoutInstallConfigsView } from "@/admin/core/configs/views/install/layout-install-configs-view";
 import { fetcher, ErrorType } from "@/graphql/fetcher";
@@ -12,7 +12,7 @@ import { redirect } from "@/utils/i18n";
 import { RedirectsInstallConfigsLayout } from "@/admin/core/configs/views/install/redirects-install-configs-layout";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 const getData = async () => {

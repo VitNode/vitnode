@@ -1,4 +1,4 @@
-import { useState } from "react";
+import * as React from "react";
 import * as Accordion from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
 
@@ -12,7 +12,7 @@ import { Separator } from "@/components/ui/separator";
 
 export const NavDrawerQuickMenu = () => {
   const { nav, session } = useSession();
-  const [activeItems, setActiveItems] = useState<string[]>([]);
+  const [activeItems, setActiveItems] = React.useState<string[]>([]);
   const { convertText } = useTextLang();
 
   if (nav.length === 0) return null;

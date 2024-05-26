@@ -1,6 +1,6 @@
 import { Bell, Cog, Files, LucideIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { ReactNode } from "react";
+import * as React from "react";
 
 export interface ItemNavSettingsProps {
   href: string;
@@ -11,7 +11,7 @@ export interface ItemNavSettingsProps {
 
 export interface LinkItemNavSettingsProps
   extends Omit<ItemNavSettingsProps, "icon" | "text"> {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 interface ReturnValues {

@@ -8,7 +8,7 @@ import { cn } from "@/functions/classnames";
 
 interface Props {
   items: { href: string; id: number | string; text: string }[];
-  children?: ReactNode;
+  children?: React.ReactNode;
   ref?: RefCallback<HTMLDivElement>;
 }
 

@@ -1,5 +1,5 @@
 import { PlusCircledIcon } from "@radix-ui/react-icons";
-import { ReactNode, Suspense } from "react";
+import * as React from "react";
 import { useSearchParams } from "next/navigation";
 
 import {
@@ -14,7 +14,7 @@ import { Loader } from "@/components/loader";
 import { FilterToolbarDataTableContext } from "./hooks/use-filter-toolbar-data-table";
 
 export interface FilterToolbarDataTableProps {
-  children: ReactNode;
+  children: React.ReactNode;
   id: string;
   title: string;
 }
@@ -57,7 +57,9 @@ export function FilterToolbarDataTable({
 
       <PopoverContent className="w-[14rem] p-0" align="start">
         <FilterToolbarDataTableContext.Provider value={{ title, id }}>
-          <Suspense fallback={<Loader className="p-4" />}>{children}</Suspense>
+          <React.Suspense fallback={<Loader className="p-4" />}>
+            {children}
+          </React.Suspense>
         </FilterToolbarDataTableContext.Provider>
       </PopoverContent>
     </Popover>

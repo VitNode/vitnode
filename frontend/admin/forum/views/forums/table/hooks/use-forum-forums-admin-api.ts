@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import * as React from "react";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
@@ -26,9 +26,9 @@ interface Args {
 export const useForumForumsAdminAPI = ({ initData }: Args) => {
   const t = useTranslations("core");
   const [data, setData] =
-    useState<ShowForumForumsAdminWithChildren[]>(initData);
+    React.useState<ShowForumForumsAdminWithChildren[]>(initData);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!initData || !data || data.length === initData.length) return;
 
     setData(initData);

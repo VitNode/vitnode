@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { ColumnDef } from "@tanstack/react-table";
-import { useMemo } from "react";
+import * as React from "react";
 import { InfinityIcon, ShieldAlert } from "lucide-react";
 
 import { AdministratorsStaffAdminViewProps } from "../administrators-view";
@@ -20,7 +20,7 @@ export const TableAdministratorsStaffAdmin = ({
 }: AdministratorsStaffAdminViewProps) => {
   const t = useTranslations("admin.members.staff");
 
-  const columns: ColumnDef<ShowAdminStaffAdministrators>[] = useMemo(
+  const columns: ColumnDef<ShowAdminStaffAdministrators>[] = React.useMemo(
     () => [
       {
         header: t("table.administrator"),

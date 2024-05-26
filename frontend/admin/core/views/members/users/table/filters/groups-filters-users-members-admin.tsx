@@ -1,9 +1,9 @@
-import { lazy } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 
 import { FilterToolbarDataTable } from "@/components/data-table/toolbar/filter/filter";
 
-const ContentGroupsFiltersUsersMembersAdmin = lazy(async () =>
+const ContentGroupsFiltersUsersMembersAdmin = React.lazy(async () =>
   import("./content-groups-filters-users-members-admin").then(module => ({
     default: module.ContentGroupsFiltersUsersMembersAdmin
   }))

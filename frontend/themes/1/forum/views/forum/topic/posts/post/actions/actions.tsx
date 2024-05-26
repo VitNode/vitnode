@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import * as React from "react";
 import { MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -31,7 +31,7 @@ export const ActionsPost = ({ id }: Props) => {
   const t = useTranslations("forum.topics.actions");
   const tCore = useTranslations("core");
   const editPost = async () => {}; //TODO: implementation
-  const [isPending, setPending] = useState(false);
+  const [isPending, setPending] = React.useState(false);
 
   if (!permissions.can_edit) return null;
   if (!permissions.can_delete) return null;

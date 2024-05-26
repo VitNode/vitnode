@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Clock, File } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useMemo } from "react";
+import * as React from "react";
 
 import { CONFIG } from "@/config";
 import { DataTable } from "@/components/data-table/data-table";
@@ -28,7 +28,7 @@ export const FilesAdvancedCoreAdminView = ({
   const tCore = useTranslations("core");
   const columns: ColumnDef<
     Admin__Core_Files__ShowQuery["admin__core_files__show"]["edges"][0]
-  >[] = useMemo(
+  >[] = React.useMemo(
     () => [
       {
         header: "",

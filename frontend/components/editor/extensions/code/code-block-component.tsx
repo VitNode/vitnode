@@ -1,7 +1,7 @@
 "use client";
 
 import { NodeViewContent, NodeViewWrapper } from "@tiptap/react";
-import { useState } from "react";
+import * as React from "react";
 import { CaretSortIcon } from "@radix-ui/react-icons";
 import { CheckIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -40,8 +40,8 @@ export const CodeBlockComponent = ({
   node: { attrs: { language: string } };
   updateAttributes: (attrs: { language: string }) => void;
 }) => {
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(defaultLanguage);
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState(defaultLanguage);
   const t = useTranslations("core.editor.code_block");
   const tCore = useTranslations("core");
 

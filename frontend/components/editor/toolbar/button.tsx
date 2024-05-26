@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { ReactNode } from "react";
+import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -11,7 +11,7 @@ import {
 import { cn } from "@/functions/classnames";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
   name: string;
   active?: boolean;
   disabled?: boolean;

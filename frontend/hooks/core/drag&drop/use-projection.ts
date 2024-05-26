@@ -1,4 +1,4 @@
-import { useState } from "react";
+import * as React from "react";
 import { UniqueIdentifier } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 import { Coordinates } from "@dnd-kit/utilities";
@@ -39,9 +39,10 @@ export interface ProjectionReturnType {
 }
 
 export const useProjection = () => {
-  const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
-  const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
-  const [projected, setProjected] = useState<ProjectionReturnType | null>();
+  const [activeId, setActiveId] = React.useState<UniqueIdentifier | null>(null);
+  const [overId, setOverId] = React.useState<UniqueIdentifier | null>(null);
+  const [projected, setProjected] =
+    React.useState<ProjectionReturnType | null>();
 
   function getProjection<T extends object>({
     delta,

@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 import { ExternalLink } from "lucide-react";
 
@@ -12,7 +12,7 @@ import { ActionsDevPluginAdmin } from "./actions/actions";
 import { Card } from "@/components/ui/card";
 
 interface Props extends Admin__Core_Plugins__Show__ItemQuery {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export const DevPluginAdminLayout = ({

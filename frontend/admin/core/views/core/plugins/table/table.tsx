@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 import { ColumnDef } from "@tanstack/react-table";
 import { ExternalLink } from "lucide-react";
@@ -21,7 +21,7 @@ export const TablePluginsAdmin = ({
   const t = useTranslations("admin.core.plugins");
   const tCore = useTranslations("core");
 
-  const columns: ColumnDef<ShowAdminPlugins>[] = useMemo(
+  const columns: ColumnDef<ShowAdminPlugins>[] = React.useMemo(
     () => [
       {
         header: tCore("table.name"),

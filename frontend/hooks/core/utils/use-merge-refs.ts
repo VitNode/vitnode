@@ -7,7 +7,7 @@ import { Ref, RefCallback, useMemo, MutableRefObject } from "react";
 export function useMergeRefs<Instance>(
   refs: Array<Ref<Instance> | undefined>
 ): RefCallback<Instance> | null {
-  return useMemo(() => {
+  return React.useMemo(() => {
     if (refs.every(ref => ref == null)) {
       return null;
     }

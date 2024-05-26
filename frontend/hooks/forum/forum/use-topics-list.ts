@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
-import { useMemo } from "react";
+import * as React from "react";
 
 import { getIdFormString } from "@/functions/url";
 import { APIKeys } from "@/graphql/api-keys";
@@ -40,7 +40,7 @@ export const useTopicsList = ({ initData }: Args) => {
     }
   });
 
-  const data = useMemo(
+  const data = React.useMemo(
     () => query.data.pages.flatMap(page => page.forum_topics__show.edges) ?? [],
     [query.data.pages]
   );

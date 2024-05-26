@@ -2,13 +2,13 @@ import { createContext, useContext, Dispatch, SetStateAction } from "react";
 
 interface Args {
   open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const WrapperCategoryForumContext = createContext<Args>({
+export const WrapperCategoryForumContext = React.createContext<Args>({
   open: true,
   setOpen: () => {}
 });
 
 export const useWrapperCategoryForum = () =>
-  useContext(WrapperCategoryForumContext);
+  React.useContext(WrapperCategoryForumContext);

@@ -2,12 +2,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 "use client";
 
-import { ReactNode } from "react";
+import * as React from "react";
 
 import { useRouter } from "@/utils/i18n";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
   href: string;
   className?: string;
 }

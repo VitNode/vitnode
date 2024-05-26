@@ -1,11 +1,11 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { ReactNode } from "react";
+import * as React from "react";
 
 import { getConfigFile } from "@/config/helpers";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export async function generateMetadata(): Promise<Metadata> {

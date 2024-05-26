@@ -1,6 +1,6 @@
 import { Monitor, Moon, Smartphone, Sun, Tablet } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { ReactNode } from "react";
+import * as React from "react";
 import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
@@ -35,7 +35,7 @@ export const ToolbarThemeEditor = ({ activeMode, setActiveMode }: Props) => {
   }: {
     active: boolean;
     ariaLabel: string;
-    children: ReactNode;
+    children: React.ReactNode;
     onClick: () => void;
   }) => {
     return (

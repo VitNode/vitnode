@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Suspense, lazy } from "react";
+import * as React from "react";
 
 import {
   DialogDescription,
@@ -16,7 +16,7 @@ import { Loader } from "@/components/loader";
 import { useModalChangeAvatar } from "@/hooks/core/settings/avatar/use-modal-change-avatar";
 import { useSession } from "@/hooks/core/use-session";
 
-const CropperModalChangeAvatar = lazy(async () =>
+const CropperModalChangeAvatar = React.lazy(async () =>
   import("./cropper/cropper-modal-change-avatar").then(module => ({
     default: module.CropperModalChangeAvatar
   }))
@@ -39,9 +39,9 @@ export const ModalChangeAvatar = () => {
       </DialogHeader>
 
       {form.watch("type") === "upload" && form.watch("file").length > 0 ? (
-        <Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
           <CropperModalChangeAvatar file={form.watch("file")[0]} />
-        </Suspense>
+        </React.Suspense>
       ) : (
         <>
           <Form {...form}>

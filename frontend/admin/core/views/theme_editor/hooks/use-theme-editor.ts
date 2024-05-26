@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import * as React from "react";
 import { HslColor } from "react-colorful";
 import { UseFormReturn } from "react-hook-form";
 
@@ -52,7 +52,7 @@ interface Args {
   setOpenSubmitDialog: (open: boolean) => void;
 }
 
-export const ThemeEditorContext = createContext<Args>({
+export const ThemeEditorContext = React.createContext<Args>({
   activeTab: ThemeEditorTab.Main,
   setActiveTab: () => {},
   direction: -1,
@@ -64,4 +64,4 @@ export const ThemeEditorContext = createContext<Args>({
   setOpenSubmitDialog: () => {}
 });
 
-export const useThemeEditor = () => useContext(ThemeEditorContext);
+export const useThemeEditor = () => React.useContext(ThemeEditorContext);

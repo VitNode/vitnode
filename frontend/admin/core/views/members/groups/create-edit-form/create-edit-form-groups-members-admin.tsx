@@ -1,4 +1,4 @@
-import { useState } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 
 import { Tabs } from "@/components/tabs/tabs";
@@ -29,7 +29,7 @@ export const CreateEditFormGroupsMembersAdmin = ({
 }: CreateEditFormGroupsMembersAdminArgs) => {
   const t = useTranslations("admin.members.groups");
   const tCore = useTranslations("core");
-  const [activeTab, setActiveTab] = useState<TabsEnum>(TabsEnum.MAIN);
+  const [activeTab, setActiveTab] = React.useState<TabsEnum>(TabsEnum.MAIN);
   const { form, onSubmit } = useCreateEditFormGroupsMembersAdmin({ data });
   const { convertText } = useTextLang();
 

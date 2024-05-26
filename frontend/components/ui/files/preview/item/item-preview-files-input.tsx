@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import * as React from "react";
 import { X } from "lucide-react";
 
 import { Img } from "@/components/img";
@@ -17,11 +17,11 @@ export const ItemPreviewFilesInput = ({
   onChange,
   value
 }: Props) => {
-  const previewURL = useMemo(
+  const previewURL = React.useMemo(
     () => (file instanceof File ? URL.createObjectURL(file) : ``),
     [file]
   );
-  const size = useMemo(() => {
+  const size = React.useMemo(() => {
     if (file instanceof File) {
       const sizeInKb = file.size / 1024;
       if (sizeInKb < 1024) return `${sizeInKb.toFixed(2)} KB`;

@@ -5,7 +5,7 @@ import {
   SortableContext,
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
-import { useEffect, useState } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 
 import { ItemContentTableContentNavAdmin } from "./item";
@@ -22,7 +22,7 @@ export const TableNavAdmin = ({
 }: Admin__Core_Nav__ShowQuery) => {
   const t = useTranslations("core");
   const [initData, setData] =
-    useState<Omit<ShowCoreNav, "__typename">[]>(edges);
+    React.useState<Omit<ShowCoreNav, "__typename">[]>(edges);
   const data = initData.map(item => ({
     ...item,
     children: item.children.map(child => ({ ...child, children: [] }))
@@ -43,7 +43,7 @@ export const TableNavAdmin = ({
   });
 
   // Revalidate items when edges change
-  useEffect(() => {
+  React.useEffect(() => {
     if (!edges || !data) return;
 
     setData(edges);

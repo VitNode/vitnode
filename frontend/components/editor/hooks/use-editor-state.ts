@@ -1,4 +1,4 @@
-import { createContext, useContext, Dispatch, SetStateAction } from "react";
+import * as React from "react";
 import { Editor } from "@tiptap/react";
 
 import { FileStateEditor } from "../extensions/files/files";
@@ -13,12 +13,12 @@ interface Args extends Omit<UploadFilesHandlerEditorArgs, "value"> {
   files: FileStateEditor[];
   onChange: (value: TextLanguage[] | string) => void;
   selectedLanguage: string;
-  setFiles: Dispatch<SetStateAction<FileStateEditor[]>>;
+  setFiles: React.Dispatch<React.SetStateAction<FileStateEditor[]>>;
   uploadFiles: (args: UploadFilesHandlerArgs) => Promise<void>;
   value: TextLanguage[] | string;
 }
 
-export const EditorStateContext = createContext<Args>({
+export const EditorStateContext = React.createContext<Args>({
   files: [],
   editor: {} as Editor,
   uploadFiles: async () => {},
@@ -28,4 +28,4 @@ export const EditorStateContext = createContext<Args>({
   setFiles: () => {}
 });
 
-export const useEditorState = () => useContext(EditorStateContext);
+export const useEditorState = () => React.useContext(EditorStateContext);

@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
+import * as React from "react";
 
 import { LayoutConfigs } from "@/admin/core/configs/layout-configs";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export default function Layout({ children }: Props) {

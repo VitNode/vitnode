@@ -2,7 +2,7 @@
 
 import { EditorView } from "@tiptap/pm/view";
 import { Editor, ReactRenderer } from "@tiptap/react";
-import { useEffect, useImperativeHandle, useState, RefCallback } from "react";
+import * as React from "react";
 import tippy, { GetReferenceClientRect, Instance, Props } from "tippy.js";
 import { useTranslations } from "next-intl";
 
@@ -35,12 +35,12 @@ export interface ComponentListRef {
 export interface ComponentListProps {
   command: (_props: { id: string }) => void;
   items: string[];
-  ref?: RefCallback<ComponentListRef>;
+  ref?: React.RefCallback<ComponentListRef>;
 }
 
 const ComponentList = ({ command, items, ref }: ComponentListProps) => {
   const t = useTranslations("core");
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const selectItem = (index: number) => {
     const item = items[index];
@@ -56,11 +56,11 @@ const ComponentList = ({ command, items, ref }: ComponentListProps) => {
     setSelectedIndex((selectedIndex + 1) % items.length);
   const enterHandler = () => selectItem(selectedIndex);
 
-  useEffect(() => {
+  React.useEffect(() => {
     setSelectedIndex(0);
   }, [items]);
 
-  useImperativeHandle(ref, () => ({
+  React.useImperativeHandle(ref, () => ({
     onKeyDown: ({ event }) => {
       if (event.key === "ArrowUp") {
         upHandler();

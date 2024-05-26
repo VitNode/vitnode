@@ -1,21 +1,21 @@
-import { ReactNode, RefCallback } from "react";
+import * as React from "react";
 
 import { cn } from "@/functions/classnames";
 
 interface HeaderContentProps {
-  children?: ReactNode;
+  children?: React.ReactNode;
   className?: string;
-  desc?: ReactNode;
-  ref?: RefCallback<HTMLDivElement>;
+  desc?: React.ReactNode;
+  ref?: React.RefCallback<HTMLDivElement>;
 }
 
 interface HeaderContentH1Props extends HeaderContentProps {
-  h1: ReactNode | string;
+  h1: React.ReactNode | string;
   h2?: never;
 }
 
 interface HeaderContentH2Props extends HeaderContentProps {
-  h2: ReactNode | string;
+  h2: React.ReactNode | string;
   h1?: never;
 }
 

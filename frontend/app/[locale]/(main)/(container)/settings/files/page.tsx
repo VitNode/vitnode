@@ -1,4 +1,4 @@
-import { lazy, LazyExoticComponent } from "react";
+import * as React from "react";
 
 import { getSessionData } from "@/functions/get-session-data";
 import {
@@ -39,9 +39,9 @@ export default async function Page({ searchParams }: Props) {
   const { theme_id } = await getSessionData();
   const data = await getData(variables);
 
-  const PageFromTheme: LazyExoticComponent<
+  const PageFromTheme: React.LazyExoticComponent<
     (props: Core_Members__Files__ShowQuery) => JSX.Element
-  > = lazy(async () =>
+  > = React.lazy(async () =>
     import(
       `@/themes/${theme_id}/core/views/settings/views/files/files-settings-view`
     ).catch(

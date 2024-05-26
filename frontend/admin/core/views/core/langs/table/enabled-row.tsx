@@ -1,6 +1,6 @@
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { useOptimistic } from "react";
+import * as React from "react";
 
 import { Switch } from "@/components/ui/switch";
 import { ShowCoreLanguages } from "@/graphql/hooks";
@@ -13,7 +13,7 @@ interface Props {
 export const EnabledRowTableLangsCoreAdmin = ({ data }: Props) => {
   const locale = useLocale();
   const t = useTranslations("core");
-  const [checked, changeChecked] = useOptimistic(data.enabled);
+  const [checked, changeChecked] = React.useOptimistic(data.enabled);
 
   return (
     <Switch

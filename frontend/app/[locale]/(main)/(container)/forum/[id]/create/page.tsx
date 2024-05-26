@@ -1,4 +1,4 @@
-import { lazy, LazyExoticComponent } from "react";
+import * as React from "react";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
@@ -31,9 +31,9 @@ export default async function Page({ params: { id } }: Props) {
     return <ErrorViewSSR theme_id={theme_id} code="403" />;
   }
 
-  const PageFromTheme: LazyExoticComponent<
+  const PageFromTheme: React.LazyExoticComponent<
     (props: CreateTopicViewProps) => JSX.Element
-  > = lazy(async () =>
+  > = React.lazy(async () =>
     import(
       `@/themes/${theme_id}/forum/views/forum/forums/views/create-topic/create-topic-view`
     ).catch(

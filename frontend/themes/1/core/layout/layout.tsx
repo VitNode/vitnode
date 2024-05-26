@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import * as React from "react";
 
 import { Header } from "./header/header";
 import { QuickMenu } from "./quick-menu/quick-menu";
@@ -8,7 +8,7 @@ import { useTextLang } from "@/hooks/core/use-text-lang";
 import "./global.css";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
   copyright?: TextLanguage[];
 }
 

@@ -1,5 +1,5 @@
 import { Editor } from "@tiptap/react";
-import { Suspense, lazy } from "react";
+import * as React from "react";
 import { SmileIcon } from "lucide-react";
 
 import {
@@ -11,7 +11,7 @@ import { Loader } from "@/components/loader";
 
 import { ButtonToolbarEditor } from "../../button";
 
-const Content = lazy(async () =>
+const Content = React.lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentEmojiToolbarEditor
   }))
@@ -34,9 +34,9 @@ export const EmojiToolbarEditor = ({ editor }: Props) => {
         className="w-72 p-0"
         onCloseAutoFocus={() => editor.commands.focus()}
       >
-        <Suspense fallback={<Loader className="p-2" />}>
+        <React.Suspense fallback={<Loader className="p-2" />}>
           <Content editor={editor} />
-        </Suspense>
+        </React.Suspense>
       </PopoverContent>
     </Popover>
   );

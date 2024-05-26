@@ -1,13 +1,13 @@
 "use client";
 
-import { ReactNode } from "react";
+import * as React from "react";
 
 import { Link, usePathname } from "@/utils/i18n";
 import { buttonVariants } from "../ui/button";
 import { cn } from "@/functions/classnames";
 
 export interface TabsTriggerProps {
-  children: ReactNode;
+  children: React.ReactNode;
   id: string;
   active?: boolean;
   className?: string;

@@ -1,6 +1,6 @@
 import { Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Suspense, lazy } from "react";
+import * as React from "react";
 
 import {
   AlertDialog,
@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
 import { ShowAdminStaffModerators } from "@/graphql/hooks";
 
-const ContentDeleteActionsTableModeratorsStaffAdmin = lazy(async () =>
+const ContentDeleteActionsTableModeratorsStaffAdmin = React.lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentDeleteActionsTableModeratorsStaffAdmin
   }))
@@ -33,9 +33,9 @@ export const DeleteActionsTableModeratorsStaffAdmin = (props: Props) => {
       </AlertDialogTrigger>
 
       <AlertDialogContent>
-        <Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
           <ContentDeleteActionsTableModeratorsStaffAdmin {...props} />
-        </Suspense>
+        </React.Suspense>
       </AlertDialogContent>
     </AlertDialog>
   );

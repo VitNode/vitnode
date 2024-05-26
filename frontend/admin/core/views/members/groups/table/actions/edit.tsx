@@ -1,5 +1,5 @@
 import { Pencil } from "lucide-react";
-import { Suspense, lazy } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Loader } from "@/components/loader";
 import { ShowAdminGroups } from "@/graphql/hooks";
 
-const CreateEditFormGroupsMembersAdmin = lazy(async () =>
+const CreateEditFormGroupsMembersAdmin = React.lazy(async () =>
   import("../../create-edit-form/create-edit-form-groups-members-admin").then(
     module => ({
       default: module.CreateEditFormGroupsMembersAdmin
@@ -31,9 +31,9 @@ export const EditGroupsMembersDialogAdmin = ({ data }: Props) => {
       </DialogTrigger>
 
       <DialogContent className="max-w-4xl">
-        <Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
           <CreateEditFormGroupsMembersAdmin data={data} />
-        </Suspense>
+        </React.Suspense>
       </DialogContent>
     </Dialog>
   );

@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import * as React from "react";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -8,7 +8,7 @@ import { DevPluginAdminLayout } from "@/admin/core/views/core/plugins/views/dev/
 import { getConfigFile } from "@/config/helpers";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
   params: {
     code: string;
   };

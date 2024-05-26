@@ -21,14 +21,14 @@ interface DialogContextArgs {
   setOpen?: (value: boolean) => void;
 }
 
-export const DialogContext = createContext<DialogContextArgs>({
+export const DialogContext = React.createContext<DialogContextArgs>({
   open: false,
   setOpen: () => {},
   isDirty: false,
   setIsDirty: () => {}
 });
 
-export const useDialog = () => useContext(DialogContext);
+export const useDialog = () => React.useContext(DialogContext);
 
 const Dialog = ({
   children,
@@ -36,8 +36,8 @@ const Dialog = ({
   open: openProp,
   ...props
 }: DialogPrimitive.DialogProps) => {
-  const [open, setOpen] = useState(false);
-  const [isDirty, setIsDirty] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [isDirty, setIsDirty] = React.useState(false);
 
   return (
     <DialogContext.Provider

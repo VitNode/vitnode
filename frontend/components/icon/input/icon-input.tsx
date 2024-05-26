@@ -2,7 +2,7 @@
 
 import { Plus, X } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Suspense, lazy, useState } from "react";
+import * as React from "react";
 
 import { Icon, IconLucideNames } from "@/components/icon/icon";
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,7 @@ import { cn } from "@/functions/classnames";
 import { Loader } from "@/components/loader";
 import { IconInputProps } from "./content/content";
 
-const Content = lazy(async () =>
+const Content = React.lazy(async () =>
   import("./content/content").then(module => ({
     default: module.ContentIconInput
   }))
@@ -27,7 +27,7 @@ interface Props extends Omit<IconInputProps, "setOpen"> {
 
 export const IconInput = ({ className, onChange, value }: Props) => {
   const t = useTranslations("core");
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   return (
     <Popover open={open} onOpenChange={setOpen} modal>
@@ -57,9 +57,9 @@ export const IconInput = ({ className, onChange, value }: Props) => {
       </div>
 
       <PopoverContent align="start" className="w-72 p-0">
-        <Suspense fallback={<Loader className="p-4" />}>
+        <React.Suspense fallback={<Loader className="p-4" />}>
           <Content onChange={onChange} value={value} setOpen={setOpen} />
-        </Suspense>
+        </React.Suspense>
       </PopoverContent>
     </Popover>
   );

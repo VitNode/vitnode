@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import * as React from "react";
 import { toast } from "sonner";
 
 import { mutationDeleteApi } from "./api/mutation-delete-api";
@@ -12,7 +12,7 @@ interface FormType {
 }
 
 export const useModalChangeAvatar = () => {
-  const [isPending, setPending] = useState(false);
+  const [isPending, setPending] = React.useState(false);
   const t = useTranslations("core");
   const { setOpen } = useDialog();
 

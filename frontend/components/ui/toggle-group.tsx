@@ -7,7 +7,9 @@ import { createContext, ComponentPropsWithoutRef, useContext } from "react";
 import { cn } from "@/functions/classnames";
 import { toggleVariants } from "@/components/ui/toggle";
 
-const ToggleGroupContext = createContext<VariantProps<typeof toggleVariants>>({
+const ToggleGroupContext = React.createContext<
+  VariantProps<typeof toggleVariants>
+>({
   size: "default",
   variant: "default"
 });
@@ -38,7 +40,7 @@ const ToggleGroupItem = ({
   ...props
 }: ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> &
   VariantProps<typeof toggleVariants>) => {
-  const context = useContext(ToggleGroupContext);
+  const context = React.useContext(ToggleGroupContext);
 
   return (
     <ToggleGroupPrimitive.Item

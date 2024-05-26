@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import * as React from "react";
 
 import {
   AuthorizationCurrentUserObj,
@@ -11,10 +11,11 @@ interface Args {
   version: string;
 }
 
-export const SessionAdminContext = createContext<Args>({
+export const SessionAdminContext = React.React.createContext<Args>({
   session: undefined,
   version: "",
   nav: []
 });
 
-export const useSessionAdmin = () => useContext(SessionAdminContext);
+export const useSessionAdmin = () =>
+  React.React.useContext(SessionAdminContext);

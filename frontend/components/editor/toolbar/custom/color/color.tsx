@@ -1,6 +1,6 @@
 import { Editor } from "@tiptap/react";
 import { Baseline } from "lucide-react";
-import { useEffect, useState } from "react";
+import * as React from "react";
 import { HslColor } from "react-colorful";
 
 import {
@@ -18,12 +18,12 @@ interface Props {
 }
 
 export const ColorToolbarEditor = ({ editor }: Props) => {
-  const [open, setOpen] = useState(false);
-  const [color, setColor] = useState<HslColor | null>(
+  const [open, setOpen] = React.useState(false);
+  const [color, setColor] = React.useState<HslColor | null>(
     getHSLFromString(editor.getAttributes("textStyle").color)
   );
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!color) {
       editor.commands.unsetColor();
 

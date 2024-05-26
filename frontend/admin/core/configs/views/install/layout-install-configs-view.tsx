@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 import { useSelectedLayoutSegment } from "next/navigation";
 
@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/card";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export const LayoutInstallConfigsView = ({ children }: Props) => {

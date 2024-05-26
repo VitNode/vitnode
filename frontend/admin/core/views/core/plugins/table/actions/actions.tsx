@@ -1,6 +1,6 @@
 import { BadgeHelp, ChevronDown, CodeXml, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import * as React from "react";
 
 import { CONFIG } from "@/config";
 import { ShowAdminPlugins } from "@/graphql/hooks";
@@ -22,7 +22,7 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
   const pathname = usePathname();
   const { push } = useRouter();
 
-  const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
+  const [isOpenDeleteDialog, setIsOpenDeleteDialog] = React.useState(false);
 
   return (
     <>

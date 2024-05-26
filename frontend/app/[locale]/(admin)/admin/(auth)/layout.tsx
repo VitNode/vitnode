@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import * as React from "react";
 import { cookies } from "next/headers";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
@@ -33,7 +33,7 @@ const getData = async () => {
 };
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export async function generateMetadata(): Promise<Metadata> {

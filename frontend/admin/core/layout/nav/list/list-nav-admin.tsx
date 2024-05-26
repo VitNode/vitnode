@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import * as React from "react";
 import * as Accordion from "@radix-ui/react-accordion";
 import { useSelectedLayoutSegments } from "next/navigation";
 
@@ -9,7 +9,7 @@ import { cn } from "@/functions/classnames";
 import { useSessionAdmin } from "@/admin/core/hooks/use-session-admin";
 
 interface Props {
-  children?: ReactNode;
+  children?: React.ReactNode;
   className?: string;
   onClickItem?: () => void;
 }
@@ -17,7 +17,9 @@ interface Props {
 export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
   const { nav } = useSessionAdmin();
   const segments = useSelectedLayoutSegments();
-  const [activeItems, setActiveItems] = useState([segments.at(0) ?? "core"]);
+  const [activeItems, setActiveItems] = React.useState([
+    segments.at(0) ?? "core"
+  ]);
 
   return (
     <Accordion.Root

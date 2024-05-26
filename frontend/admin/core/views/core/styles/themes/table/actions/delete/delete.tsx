@@ -1,10 +1,10 @@
-import { Suspense, lazy } from "react";
+import * as React from "react";
 
 import { Loader } from "@/components/loader";
 import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
 import { ShowAdminThemes } from "@/graphql/hooks";
 
-const ContentDeleteThemeActionsAdmin = lazy(async () =>
+const ContentDeleteThemeActionsAdmin = React.lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentDeleteThemeActionsAdmin
   }))
@@ -19,9 +19,9 @@ export const DeleteThemeActionsAdmin = ({ open, setOpen, ...props }: Props) => {
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
-        <Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
           <ContentDeleteThemeActionsAdmin {...props} />
-        </Suspense>
+        </React.Suspense>
       </AlertDialogContent>
     </AlertDialog>
   );

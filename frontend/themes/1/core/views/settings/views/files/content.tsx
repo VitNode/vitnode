@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { useMemo } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Clock, Download, File } from "lucide-react";
@@ -26,7 +26,7 @@ export const ContentFilesSettings = ({
 }: Core_Members__Files__ShowQuery) => {
   const t = useTranslations("core.settings.files");
   const tCore = useTranslations("core");
-  const columns: ColumnDef<ShowCoreFiles>[] = useMemo(
+  const columns: ColumnDef<ShowCoreFiles>[] = React.useMemo(
     () => [
       {
         header: "",

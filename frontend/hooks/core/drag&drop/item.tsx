@@ -8,14 +8,14 @@ import { Button } from "@/components/ui/button";
 
 interface Props {
   active: boolean;
-  children: ReactNode;
+  children: React.ReactNode;
   id: number | string;
   isDropHere: boolean;
   onCollapse: () => void;
   childrenLength?: number;
   depth?: number;
   draggableButtonClassName?: string;
-  draggableChildren?: ReactNode;
+  draggableChildren?: React.ReactNode;
   draggableStyle?: CSSProperties;
   indentationWidth?: number;
   isOpenChildren?: boolean;

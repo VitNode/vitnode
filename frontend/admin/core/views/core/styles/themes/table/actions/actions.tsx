@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { ChevronDown, Trash2, Upload } from "lucide-react";
-import { useState } from "react";
+import * as React from "react";
 
 import { ShowAdminThemes } from "@/graphql/hooks";
 import { DeleteThemeActionsAdmin } from "./delete/delete";
@@ -17,8 +17,8 @@ import { Button } from "@/components/ui/button";
 
 export const ActionsItemThemesAdmin = (props: ShowAdminThemes) => {
   const tCore = useTranslations("core");
-  const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
-  const [isOpenUploadDialog, setIsOpenUploadDialog] = useState(false);
+  const [isOpenDeleteDialog, setIsOpenDeleteDialog] = React.useState(false);
+  const [isOpenUploadDialog, setIsOpenUploadDialog] = React.useState(false);
 
   return (
     <>

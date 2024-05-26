@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import * as React from "react";
 import { TableVirtuoso } from "react-virtuoso";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import { keyBy, mapValues } from "lodash";
@@ -19,17 +19,17 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
   field,
   permissions
 }: Props) => {
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = React.useState("");
   const { data, isError, isLoading } = usePermissionsGroupsAdminAPI({
     searchValue
   });
   const { convertText } = useTextLang();
 
-  const Table = useCallback(
+  const Table = React.useCallback(
     ({ ...props }) => <table className="w-full" {...props} />,
     []
   );
-  const TableRow = useCallback(
+  const TableRow = React.useCallback(
     ({ ...props }) => (
       <tr
         className="[&:not(:last-child)]:border-b transition-colors hover:bg-muted/50"

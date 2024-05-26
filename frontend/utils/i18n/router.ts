@@ -20,7 +20,7 @@ const useRouter = () => {
     push(href, options);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     NProgress.done();
   }, [pathname, searchParams]);
 

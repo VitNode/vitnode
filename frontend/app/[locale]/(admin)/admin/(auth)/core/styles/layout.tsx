@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
+import * as React from "react";
 import { getTranslations } from "next-intl/server";
 
 import { Tabs } from "@/components/tabs/tabs";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export default async function Layout({ children }: Props) {

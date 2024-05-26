@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 import { X } from "lucide-react";
 
@@ -14,7 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { TextLanguage } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 
-const Content = lazy(async () =>
+const Content = React.lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentForumsSelect
   }))
@@ -55,7 +55,7 @@ export const ForumsSelect = ({
   const tCore = useTranslations("core");
   const values = Array.isArray(currentValue) ? currentValue : [currentValue];
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const { convertText } = useTextLang();
 
   const placeholder = () => {
@@ -122,7 +122,7 @@ export const ForumsSelect = ({
       </PopoverTrigger>
 
       <PopoverContent className="p-0 w-64" align="start">
-        <Suspense fallback={<Loader className="p-2" />}>
+        <React.Suspense fallback={<Loader className="p-2" />}>
           <Content
             values={values}
             exclude={exclude}
@@ -142,7 +142,7 @@ export const ForumsSelect = ({
               setOpen(false);
             }}
           />
-        </Suspense>
+        </React.Suspense>
       </PopoverContent>
     </Popover>
   );

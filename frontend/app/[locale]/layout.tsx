@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import * as React from "react";
 import { NextIntlClientProvider, AbstractIntlMessages } from "next-intl";
 import { GeistSans } from "geist/font/sans";
 import NextTopLoader from "nextjs-toploader";
@@ -30,7 +30,7 @@ const getData = async () => {
 };
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
   params: { locale: string };
 }
 

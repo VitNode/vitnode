@@ -1,13 +1,13 @@
 import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react";
 import { HeaderContext } from "@tanstack/react-table";
-import { ReactNode } from "react";
+import * as React from "react";
 import { useSearchParams } from "next/navigation";
 
 import { Button } from "../ui/button";
 import { usePathname, useRouter } from "@/utils/i18n";
 
 interface Props<T> extends HeaderContext<T, unknown> {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export function HeaderSortingDataTable<T>({

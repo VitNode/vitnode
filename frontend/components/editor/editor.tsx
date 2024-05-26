@@ -1,7 +1,7 @@
 "use client";
 
 import { useEditor, EditorContent } from "@tiptap/react";
-import { useEffect, useState } from "react";
+import * as React from "react";
 import { useLocale } from "next-intl";
 
 import { cn } from "@/functions/classnames";
@@ -53,7 +53,7 @@ export const Editor = ({
   });
   const locale = useLocale();
   const { config, defaultLanguage } = useGlobals();
-  const [selectedLanguage, setSelectedLanguage] = useState(
+  const [selectedLanguage, setSelectedLanguage] = React.useState(
     locale ?? defaultLanguage
   );
   const editor = useEditor({
@@ -110,7 +110,7 @@ export const Editor = ({
   });
 
   // Toggle the editor content when the selected language changes
-  useEffect(() => {
+  React.useEffect(() => {
     if (!editor || disableLanguage || !Array.isArray(value)) return;
 
     const findValue =

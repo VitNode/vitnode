@@ -1,4 +1,4 @@
-import { lazy, LazyExoticComponent, ReactNode } from "react";
+import * as React from "react";
 import { isRedirectError } from "next/dist/client/components/redirect";
 
 import { SessionProvider } from "./session-provider";
@@ -8,7 +8,7 @@ import { getSessionData } from "@/functions/get-session-data";
 import { TextLanguage } from "@/graphql/hooks";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
   params: { locale: string };
 }
 
@@ -19,14 +19,14 @@ export default async function Layout({ children }: Props) {
       redirect("/admin/install");
     }
 
-    const Layout: LazyExoticComponent<
+    const Layout: React.LazyExoticComponent<
       ({
         children
       }: {
-        children: ReactNode;
+        children: React.ReactNode;
         copyright?: TextLanguage[];
       }) => JSX.Element
-    > = lazy(async () =>
+    > = React.lazy(async () =>
       import(`@/themes/${theme_id}/core/layout/layout`).catch(
         async () => import("@/themes/1/core/layout/layout")
       )

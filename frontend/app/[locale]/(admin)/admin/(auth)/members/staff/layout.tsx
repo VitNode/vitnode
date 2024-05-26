@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import * as React from "react";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
@@ -6,7 +6,7 @@ import { StaffAdminLayout } from "@/admin/core/views/members/staff/staff-admin-l
 import { getConfigFile } from "@/config/helpers";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export async function generateMetadata(): Promise<Metadata> {

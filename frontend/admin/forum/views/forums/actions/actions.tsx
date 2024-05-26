@@ -2,13 +2,13 @@
 
 import { useTranslations } from "next-intl";
 import { Plus } from "lucide-react";
-import { Suspense, lazy } from "react";
+import * as React from "react";
 
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
 
-const Content = lazy(async () =>
+const Content = React.lazy(async () =>
   import("../create-edit/create-edit").then(module => ({
     default: module.CreateEditForumAdmin
   }))
@@ -27,9 +27,9 @@ export const ActionsForumsForumAdmin = () => {
       </DialogTrigger>
 
       <DialogContent className="max-w-6xl">
-        <Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
           <Content />
-        </Suspense>
+        </React.Suspense>
       </DialogContent>
     </Dialog>
   );

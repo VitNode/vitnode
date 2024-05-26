@@ -10,7 +10,7 @@ import {
 } from "@tanstack/react-table";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { useMemo, ReactNode, useTransition } from "react";
+import * as React from "react";
 
 import {
   Table,
@@ -49,7 +49,7 @@ interface DataTableProps<TData extends TDataMin>
   data: TData[];
   defaultPageSize: 10 | 20 | 30 | 40 | 50;
   defaultSorting?: { sortBy: keyof TData; sortDirection: "asc" | "desc" };
-  filters?: ReactNode;
+  filters?: React.ReactNode;
   pageInfo?: PageInfo;
   searchPlaceholder?: string;
 }
@@ -62,7 +62,7 @@ export function DataTable<TData extends TDataMin>({
   pageInfo,
   ...props
 }: DataTableProps<TData>) {
-  const [isPending, startTransition] = useTransition();
+  const [isPending, startTransition] = React.useTransition();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { push } = useRouter();
@@ -74,8 +74,8 @@ export function DataTable<TData extends TDataMin>({
   };
 
   const table = useReactTable({
-    data: useMemo(() => data, [data]),
-    columns: useMemo(() => columns, [columns]),
+    data: React.useMemo(() => data, [data]),
+    columns: React.useMemo(() => columns, [columns]),
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
     getRowId: row => row.id.toString(),
@@ -102,7 +102,7 @@ export function DataTable<TData extends TDataMin>({
   });
 
   const enablePageSize = [10, 20, 30, 40, 50];
-  const pageSizeValue: number = useMemo(() => {
+  const pageSizeValue: number = React.useMemo(() => {
     if (enablePageSize.includes(Number(pagination.first))) {
       return Number(pagination.first);
     }

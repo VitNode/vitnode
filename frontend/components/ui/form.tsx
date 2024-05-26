@@ -45,7 +45,7 @@ function Form<
   );
   const { setIsDirty } = useDialog();
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (props.disableBeforeUnload) return;
 
     setIsDirty?.(formIsDirty);
@@ -61,7 +61,7 @@ interface FormFieldContextValue<
   name: TName;
 }
 
-const FormFieldContext = createContext<FormFieldContextValue>(
+const FormFieldContext = React.createContext<FormFieldContextValue>(
   {} as FormFieldContextValue
 );
 
@@ -79,8 +79,8 @@ const FormField = <
 };
 
 const useFormField = () => {
-  const fieldContext = useContext(FormFieldContext);
-  const itemContext = useContext(FormItemContext);
+  const fieldContext = React.useContext(FormFieldContext);
+  const itemContext = React.useContext(FormItemContext);
   const { formState, getFieldState } = useFormContext();
 
   const fieldState = getFieldState(fieldContext.name, formState);
@@ -105,7 +105,7 @@ interface FormItemContextValue {
   id: string;
 }
 
-const FormItemContext = createContext<FormItemContextValue>(
+const FormItemContext = React.createContext<FormItemContextValue>(
   {} as FormItemContextValue
 );
 

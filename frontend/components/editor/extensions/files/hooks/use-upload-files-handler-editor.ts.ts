@@ -1,4 +1,4 @@
-import { useState } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
@@ -34,7 +34,7 @@ export const useUploadFilesHandlerEditor = ({
 }: UploadFilesHandlerEditorArgs) => {
   const { files: permissionFiles } = useSession();
   const { config } = useGlobals();
-  const [files, setFiles] = useState<FileStateEditor[]>(
+  const [files, setFiles] = React.useState<FileStateEditor[]>(
     Array.isArray(value) ? getFilesFromContent(value) : []
   );
   const t = useTranslations("core.editor.files");

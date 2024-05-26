@@ -114,7 +114,9 @@ interface Args<T extends object> {
 }
 
 export function useDragAndDrop<T extends object>({ data }: Args<T>) {
-  const [isOpenChildren, setIsOpenChildren] = useState<UniqueIdentifier[]>([]);
+  const [isOpenChildren, setIsOpenChildren] = React.useState<
+    UniqueIdentifier[]
+  >([]);
   const {
     activeId,
     getProjection,
@@ -127,7 +129,7 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
   } = useProjection();
   const flattenedItems = flattItems({ data });
   const activeItem = flattenedItems.find(i => i.id === activeId);
-  const sortedIds = useMemo(
+  const sortedIds = React.useMemo(
     () => flattenedItems.map(({ id }) => id),
     [flattenedItems]
   );

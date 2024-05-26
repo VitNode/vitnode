@@ -1,9 +1,9 @@
-import { Suspense, lazy } from "react";
+import * as React from "react";
 
 import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
 import { Loader } from "@/components/loader";
 
-const Content = lazy(async () =>
+const Content = React.lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentDeleteActionPost
   }))
@@ -19,9 +19,9 @@ export const DeleteActionPost = ({ id, open, setOpen }: Props) => {
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
-        <Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
           <Content id={id} />
-        </Suspense>
+        </React.Suspense>
       </AlertDialogContent>
     </AlertDialog>
   );

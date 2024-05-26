@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 
 import { CONFIG } from "@/config";
@@ -11,13 +11,13 @@ import { SkinSelectEmojisContentIconInput } from "./emojis/skin-select";
 
 // import { SkinSelectEmojiButtonEditor } from "@/components/editor/toolbar/buttons/emoji/skin-select";
 
-const EmojisContentIconInput = lazy(async () =>
+const EmojisContentIconInput = React.lazy(async () =>
   import("./emojis/emojis").then(module => ({
     default: module.EmojisContentIconInput
   }))
 );
 
-const IconsContentIconInput = lazy(async () =>
+const IconsContentIconInput = React.lazy(async () =>
   import("./icons/icons").then(module => ({
     default: module.IconsContentIconInput
   }))
@@ -36,12 +36,12 @@ enum Tab {
 
 export const ContentIconInput = (props: IconInputProps) => {
   const t = useTranslations("core.icon_picker");
-  const [search, setSearch] = useState("");
-  const [activeTab, setActiveTab] = useState<Tab>(Tab.Icon);
+  const [search, setSearch] = React.useState("");
+  const [activeTab, setActiveTab] = React.useState<Tab>(Tab.Icon);
   const localStorageSkinToneIndex = localStorage.getItem(
     CONFIG.local_storage.editor_skin_tone
   );
-  const [skinToneIndex, setSkinToneIndex] = useState(
+  const [skinToneIndex, setSkinToneIndex] = React.useState(
     localStorageSkinToneIndex ? +localStorageSkinToneIndex : 0
   );
 
@@ -87,7 +87,7 @@ export const ContentIconInput = (props: IconInputProps) => {
       </div>
 
       <div className="p-4 pt-0 max-h-64">
-        <Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
           {activeTab === Tab.Icon ? (
             <IconsContentIconInput search={search} {...props} />
           ) : (
@@ -97,7 +97,7 @@ export const ContentIconInput = (props: IconInputProps) => {
               {...props}
             />
           )}
-        </Suspense>
+        </React.Suspense>
       </div>
     </>
   );

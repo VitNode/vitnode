@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { ColumnDef } from "@tanstack/react-table";
-import { useMemo } from "react";
+import * as React from "react";
 
 import { LangsCoreAdminViewProps } from "../langs-core-admin-view";
 import { ShowCoreLanguages } from "@/graphql/hooks";
@@ -17,7 +17,7 @@ export const TableLangsCoreAdmin = ({ data }: LangsCoreAdminViewProps) => {
   const t = useTranslations("admin.core.langs");
   const tCore = useTranslations("core");
 
-  const columns: ColumnDef<ShowCoreLanguages>[] = useMemo(
+  const columns: ColumnDef<ShowCoreLanguages>[] = React.useMemo(
     () => [
       {
         header: tCore("table.name"),

@@ -1,5 +1,5 @@
 import { ChevronDown } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
+import * as React from "react";
 import * as Accordion from "@radix-ui/react-accordion";
 import { useTranslations } from "next-intl";
 
@@ -12,7 +12,7 @@ interface Props {
   activeItems: string[];
   id: string;
   items: ItemListNavAdminProps[];
-  setActiveItems: Dispatch<SetStateAction<string[]>>;
+  setActiveItems: React.Dispatch<React.SetStateAction<string[]>>;
   onClickItem?: () => void;
 }
 

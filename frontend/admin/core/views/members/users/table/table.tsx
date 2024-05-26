@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useMemo } from "react";
+import * as React from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Pencil } from "lucide-react";
 
@@ -43,7 +43,7 @@ export const TableUsersMembersAdmin = ({
   const tCore = useTranslations("core");
   const { convertText } = useTextLang();
 
-  const columns: ColumnDef<UsersMembersAdminAPIDataType>[] = useMemo(
+  const columns: ColumnDef<UsersMembersAdminAPIDataType>[] = React.useMemo(
     () => [
       {
         header: tCore("table.name"),

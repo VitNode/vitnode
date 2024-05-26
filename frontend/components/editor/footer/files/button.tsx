@@ -1,6 +1,6 @@
 import { Paperclip } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useRef } from "react";
+import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 
@@ -9,7 +9,7 @@ import { useEditorState } from "../../hooks/use-editor-state";
 
 export const FilesButtonFooterEditor = () => {
   const t = useTranslations("core.editor");
-  const ref = useRef<HTMLInputElement>(null);
+  const ref = React.useRef<HTMLInputElement>(null);
   const { uploadFiles } = useEditorState();
 
   return (
