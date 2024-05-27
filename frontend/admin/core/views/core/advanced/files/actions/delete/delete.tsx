@@ -1,6 +1,5 @@
 import { Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-
 import * as React from "react";
 
 import { Loader } from "@/components/loader";

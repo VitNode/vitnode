@@ -1,7 +1,7 @@
 "use client";
 
+import * as React from "react";
 import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
-import { ComponentPropsWithoutRef } from "react";
 
 import { cn } from "@/functions/classnames";
 
@@ -10,11 +10,11 @@ const HoverCard = HoverCardPrimitive.Root;
 const HoverCardTrigger = HoverCardPrimitive.Trigger;
 
 const HoverCardContent = ({
-  align = "center",
   className,
+  align = "center",
   sideOffset = 4,
   ...props
-}: ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>) => (
+}: React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>) => (
   <HoverCardPrimitive.Content
     align={align}
     sideOffset={sideOffset}

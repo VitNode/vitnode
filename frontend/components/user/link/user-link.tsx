@@ -1,10 +1,13 @@
-import { AnchorHTMLAttributes } from "react";
+import * as React from "react";
 
 import { Link } from "@/utils/i18n";
 import { User } from "@/graphql/hooks";
 
 interface Props
-  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "children" | "href"> {
+  extends Omit<
+    React.AnchorHTMLAttributes<HTMLAnchorElement>,
+    "children" | "href"
+  > {
   user: Pick<User, "name_seo" | "name">;
 }
 

@@ -1,5 +1,5 @@
 import { ChevronRight, Home } from "lucide-react";
-import { ReactNode, RefCallback } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/utils/i18n";
@@ -9,7 +9,7 @@ import { cn } from "@/functions/classnames";
 interface Props {
   items: { href: string; id: number | string; text: string }[];
   children?: React.ReactNode;
-  ref?: RefCallback<HTMLDivElement>;
+  ref?: React.Ref<HTMLDivElement>;
 }
 
 export const Breadcrumbs = ({ children, items, ref }: Props) => {

@@ -5,7 +5,7 @@ import {
   DragStartEvent,
   UniqueIdentifier
 } from "@dnd-kit/core";
-import { useMemo, useState } from "react";
+import * as React from "react";
 import { arrayMove } from "@dnd-kit/sortable";
 
 import { useProjection } from "./use-projection";

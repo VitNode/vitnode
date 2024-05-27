@@ -1,17 +1,8 @@
 "use client";
 
-import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
+import * as React from "react";
 import useEmblaCarousel, { UseEmblaCarouselType } from "embla-carousel-react";
-import {
-  createContext,
-  useContext,
-  HTMLAttributes,
-  useState,
-  useCallback,
-  KeyboardEvent,
-  useEffect,
-  ComponentProps
-} from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { cn } from "@/functions/classnames";
 import { Button } from "@/components/ui/button";
@@ -49,15 +40,15 @@ function useCarousel() {
   return context;
 }
 
-const Carousel = ({
-  children,
-  className,
-  opts,
+function Carousel({
   orientation = "horizontal",
-  plugins,
+  opts,
   setApi,
+  plugins,
+  className,
+  children,
   ...props
-}: CarouselProps & HTMLAttributes<HTMLDivElement>) => {
+}: CarouselProps & React.HTMLAttributes<HTMLDivElement>) {
   const [carouselRef, api] = useEmblaCarousel(
     {
       ...opts,
@@ -86,7 +77,7 @@ const Carousel = ({
   }, [api]);
 
   const handleKeyDown = React.useCallback(
-    (event: KeyboardEvent<HTMLDivElement>) => {
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
       if (event.key === "ArrowLeft") {
         event.preventDefault();
         scrollPrev();
@@ -145,12 +136,12 @@ const Carousel = ({
       </div>
     </CarouselContext.Provider>
   );
-};
+}
 
-const CarouselContent = ({
+function CarouselContent({
   className,
   ...props
-}: HTMLAttributes<HTMLDivElement>) => {
+}: React.HTMLAttributes<HTMLDivElement>) {
   const { carouselRef, orientation } = useCarousel();
 
   return (
@@ -165,12 +156,12 @@ const CarouselContent = ({
       />
     </div>
   );
-};
+}
 
-const CarouselItem = ({
+function CarouselItem({
   className,
   ...props
-}: HTMLAttributes<HTMLDivElement>) => {
+}: React.HTMLAttributes<HTMLDivElement>) {
   const { orientation } = useCarousel();
 
   return (
@@ -185,15 +176,15 @@ const CarouselItem = ({
       {...props}
     />
   );
-};
+}
 
-const CarouselPrevious = ({
+function CarouselPrevious({
   className,
-  size = "icon",
   variant = "outline",
+  size = "icon",
   ...props
-}: ComponentProps<typeof Button>) => {
-  const { canScrollPrev, orientation, scrollPrev } = useCarousel();
+}: React.ComponentProps<typeof Button>) {
+  const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
   return (
     <Button
@@ -210,19 +201,19 @@ const CarouselPrevious = ({
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeftIcon className="size-4" />
+      <ArrowLeft className="h-4 w-4" />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
-};
+}
 
-const CarouselNext = ({
+function CarouselNext({
   className,
-  size = "icon",
   variant = "outline",
+  size = "icon",
   ...props
-}: ComponentProps<typeof Button>) => {
-  const { canScrollNext, orientation, scrollNext } = useCarousel();
+}: React.ComponentProps<typeof Button>) {
+  const { orientation, scrollNext, canScrollNext } = useCarousel();
 
   return (
     <Button
@@ -239,14 +230,13 @@ const CarouselNext = ({
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRightIcon className="h-4 w-4" />
+      <ArrowRight className="h-4 w-4" />
       <span className="sr-only">Next slide</span>
     </Button>
   );
-};
+}
 
 export {
-  type CarouselApi,
   Carousel,
   CarouselContent,
   CarouselItem,

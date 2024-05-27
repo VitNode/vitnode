@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Layout({ children }: Props) {
   const { theme_id } = await getSessionData();
   const LayoutFromLazy: React.LazyExoticComponent<
-    ({ children }: { children: ReactNode }) => JSX.Element
+    ({ children }: { children: React.ReactNode }) => JSX.Element
   > = React.lazy(async () =>
     import(
       `@/themes/${theme_id}/core/views/settings/layout-settings-view`

@@ -24,7 +24,7 @@ export const FormSignInAdmin = () => {
   return (
     <Form {...form} disableBeforeUnload>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <CardContent>
+        <CardContent className="p-6">
           <div className="space-y-4">
             {error?.extensions?.code === "ACCESS_DENIED" && (
               <Alert variant="destructive">

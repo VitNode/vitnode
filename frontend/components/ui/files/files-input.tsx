@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useRef, useState, RefCallback } from "react";
+import * as React from "react";
 import { Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
@@ -9,14 +9,14 @@ import { PreviewFilesInput } from "./preview/preview-files-input";
 
 export interface InputProps
   extends Omit<
-    InputHTMLAttributes<HTMLInputElement>,
+    React.InputHTMLAttributes<HTMLInputElement>,
     "onChange" | "type" | "value"
   > {
   acceptExtensions: string[];
   maxFileSizeInMb: number;
   onChange: (e: File[]) => void;
   value: File[] | undefined;
-  ref?: RefCallback<HTMLInputElement>;
+  ref?: React.RefCallback<HTMLInputElement>;
 }
 
 export const FilesInput = ({

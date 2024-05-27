@@ -11,11 +11,10 @@ interface Args {
   version: string;
 }
 
-export const SessionAdminContext = React.React.createContext<Args>({
+export const SessionAdminContext = React.createContext<Args>({
   session: undefined,
   version: "",
   nav: []
 });
 
-export const useSessionAdmin = () =>
-  React.React.useContext(SessionAdminContext);
+export const useSessionAdmin = () => React.useContext(SessionAdminContext);

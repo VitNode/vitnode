@@ -1,24 +1,17 @@
+import * as React from "react";
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
-import { useBeforeUnload } from "react-use";
 import {
   Controller,
   ControllerProps,
   FieldPath,
   FieldValues,
   FormProvider,
-  useFormContext,
-  FormProviderProps
+  FormProviderProps,
+  useFormContext
 } from "react-hook-form";
-import {
-  createContext,
-  useContext,
-  ComponentPropsWithoutRef,
-  HTMLAttributes,
-  useId,
-  useEffect
-} from "react";
 import { useTranslations } from "next-intl";
+import { useBeforeUnload } from "react-use";
 
 import { cn } from "@/functions/classnames";
 import { Label } from "@/components/ui/label";
@@ -81,7 +74,7 @@ const FormField = <
 const useFormField = () => {
   const fieldContext = React.useContext(FormFieldContext);
   const itemContext = React.useContext(FormItemContext);
-  const { formState, getFieldState } = useFormContext();
+  const { getFieldState, formState } = useFormContext();
 
   const fieldState = getFieldState(fieldContext.name, formState);
 
@@ -109,18 +102,21 @@ const FormItemContext = React.createContext<FormItemContextValue>(
   {} as FormItemContextValue
 );
 
-const FormItem = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => {
-  const id = useId();
+const FormItem = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => {
+  const id = React.useId();
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div className={cn("space-y-1", className)} {...props} />
+      <div className={cn("space-y-2", className)} {...props} />
     </FormItemContext.Provider>
   );
 };
 
 interface FormLabelProps
-  extends ComponentPropsWithoutRef<typeof LabelPrimitive.Root> {
+  extends React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> {
   optional?: boolean;
 }
 
@@ -147,8 +143,10 @@ const FormLabel = ({
   );
 };
 
-const FormControl = (props: ComponentPropsWithoutRef<typeof Slot>) => {
-  const { error, formDescriptionId, formItemId, formMessageId } =
+const FormControl = ({
+  ...props
+}: React.ComponentPropsWithoutRef<typeof Slot>) => {
+  const { error, formItemId, formDescriptionId, formMessageId } =
     useFormField();
 
   return (
@@ -168,23 +166,23 @@ const FormControl = (props: ComponentPropsWithoutRef<typeof Slot>) => {
 const FormDescription = ({
   className,
   ...props
-}: HTMLAttributes<HTMLParagraphElement>) => {
+}: React.HTMLAttributes<HTMLParagraphElement>) => {
   const { formDescriptionId } = useFormField();
 
   return (
     <p
       id={formDescriptionId}
-      className={cn("text-[0.8rem] text-muted-foreground", className)}
+      className={cn("text-sm text-muted-foreground", className)}
       {...props}
     />
   );
 };
 
 const FormMessage = ({
-  children,
   className,
+  children,
   ...props
-}: HTMLAttributes<HTMLParagraphElement>) => {
+}: React.HTMLAttributes<HTMLParagraphElement>) => {
   const { error, formMessageId } = useFormField();
   const body = error ? String(error?.message) : children;
 
@@ -195,7 +193,7 @@ const FormMessage = ({
   return (
     <p
       id={formMessageId}
-      className={cn("text-[0.8rem] font-medium text-destructive", className)}
+      className={cn("text-sm font-medium text-destructive", className)}
       {...props}
     >
       {body}

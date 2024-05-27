@@ -3,7 +3,7 @@
 import NProgress from "nprogress";
 import { createSharedPathnamesNavigation } from "next-intl/navigation";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import * as React from "react";
 
 import { usePathname } from ".";
 
