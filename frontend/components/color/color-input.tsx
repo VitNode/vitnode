@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState, type RefCallback } from "react";
-import type { HslColor } from "react-colorful";
+import * as React from "react";
+import { HslColor } from "react-colorful";
 import { useTranslations } from "next-intl";
 
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -15,7 +15,7 @@ interface Props {
   value: string;
   disableRemoveColor?: boolean;
   disabled?: boolean;
-  ref?: RefCallback<HTMLButtonElement>;
+  ref?: React.RefCallback<HTMLButtonElement>;
 }
 
 export const ColorInput = ({
@@ -26,11 +26,13 @@ export const ColorInput = ({
   ...rest
 }: Props) => {
   const t = useTranslations("core.colors");
-  const [open, setOpen] = useState(false);
-  const [color, setColor] = useState<HslColor | null>(getHSLFromString(value));
+  const [open, setOpen] = React.useState(false);
+  const [color, setColor] = React.useState<HslColor | null>(
+    getHSLFromString(value)
+  );
 
   // Set color from value
-  useEffect(() => {
+  React.useEffect(() => {
     onChange(color ? `hsl(${color.h}, ${color.s}%, ${color.l}%)` : "");
   }, [color]);
 

@@ -1,15 +1,16 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { useEffect } from "react";
+import * as React from "react";
 
-import { LayoutAdminInstallEnum } from "@/graphql/hooks";
-import type { Admin__Install__LayoutQuery } from "@/graphql/hooks";
+import {
+  LayoutAdminInstallEnum,
+  Admin__Install__LayoutQuery
+} from "@/graphql/hooks";
 import { FinishInstallConfigsView } from "./finish/finish-install-config-view";
 import { usePathname, useRouter } from "@/utils/i18n";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
   data: Admin__Install__LayoutQuery;
 }
 
@@ -20,7 +21,7 @@ export const RedirectsInstallConfigsLayout = async ({
   const { replace } = useRouter();
   const pathname = usePathname();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const redirectItems: Record<string, string> = {
       [LayoutAdminInstallEnum.database]: "/admin/install",
       [LayoutAdminInstallEnum.account]: "/admin/install/account"

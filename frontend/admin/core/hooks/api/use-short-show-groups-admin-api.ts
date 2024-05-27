@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import * as React from "react";
 
 import { APIKeys } from "@/graphql/api-keys";
 import { queryApi } from "./query-api";
 
 export const useShortShowGroupsAdminAPI = () => {
-  const [textSearch, setTextSearch] = useState("");
+  const [textSearch, setTextSearch] = React.useState("");
 
   const api = useQuery({
     queryKey: [APIKeys.SHORT_GROUPS_MEMBERS, { textSearch }],

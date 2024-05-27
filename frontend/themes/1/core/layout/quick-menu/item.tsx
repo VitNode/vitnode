@@ -1,14 +1,14 @@
-import type { ReactNode, Ref, RefObject } from "react";
+import * as React from "react";
 
 import { Link } from "@/utils/i18n";
 import { cn } from "@/functions/classnames";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
   active?: boolean;
   href?: string;
   onClick?: () => void;
-  ref?: Ref<HTMLAnchorElement> | RefObject<HTMLButtonElement>;
+  ref?: React.Ref<HTMLAnchorElement> | React.RefObject<HTMLButtonElement>;
 }
 
 export const ItemQuickMenu = ({
@@ -31,7 +31,7 @@ export const ItemQuickMenu = ({
         href={href}
         className={className}
         onClick={onClick}
-        ref={ref as Ref<HTMLAnchorElement>}
+        ref={ref as React.Ref<HTMLAnchorElement>}
       >
         {children}
       </Link>
@@ -43,7 +43,7 @@ export const ItemQuickMenu = ({
       type="button"
       className={className}
       onClick={onClick}
-      ref={ref as Ref<HTMLButtonElement>}
+      ref={ref as React.Ref<HTMLButtonElement>}
     >
       {children}
     </button>

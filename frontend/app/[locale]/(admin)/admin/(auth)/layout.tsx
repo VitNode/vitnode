@@ -1,7 +1,7 @@
-import type { ReactNode } from "react";
+import * as React from "react";
 import { cookies } from "next/headers";
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { isRedirectError } from "next/dist/client/components/redirect";
 
 import { AdminLayout } from "@/admin/core/layout/admin-layout";
@@ -10,8 +10,8 @@ import { redirect } from "@/utils/i18n";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Sessions__Authorization,
-  type Admin__Sessions__AuthorizationQuery,
-  type Admin__Sessions__AuthorizationQueryVariables
+  Admin__Sessions__AuthorizationQuery,
+  Admin__Sessions__AuthorizationQueryVariables
 } from "@/graphql/hooks";
 import { getConfigFile } from "@/config/helpers";
 
@@ -33,7 +33,7 @@ const getData = async () => {
 };
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export async function generateMetadata(): Promise<Metadata> {

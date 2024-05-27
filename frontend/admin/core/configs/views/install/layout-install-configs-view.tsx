@@ -1,10 +1,10 @@
 "use client";
 
-import type { ReactNode } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 import { useSelectedLayoutSegment } from "next/navigation";
 
-import { Steps, type ItemStepProps } from "@/components/steps/steps";
+import { Steps, ItemStepProps } from "@/components/steps/steps";
 import {
   Card,
   CardDescription,
@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/card";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export const LayoutInstallConfigsView = ({ children }: Props) => {

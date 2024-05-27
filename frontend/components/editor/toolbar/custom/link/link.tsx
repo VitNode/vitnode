@@ -1,6 +1,5 @@
 import { LinkIcon } from "lucide-react";
-import type { Editor } from "@tiptap/react";
-import { Suspense, lazy, useState } from "react";
+import * as React from "react";
 
 import {
   Popover,
@@ -8,21 +7,19 @@ import {
   PopoverTrigger
 } from "@/components/ui/popover";
 import { Loader } from "@/components/loader";
+import { useEditorState } from "@/components/editor/hooks/use-editor-state";
 
 import { ButtonToolbarEditor } from "../../button";
 
-const Content = lazy(async () =>
+const Content = React.lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentLinkToolbarEditor
   }))
 );
 
-interface Props {
-  editor: Editor;
-}
-
-export const LinkToolbarEditor = ({ editor }: Props) => {
-  const [open, setOpen] = useState(false);
+export const LinkToolbarEditor = () => {
+  const [open, setOpen] = React.useState(false);
+  const { editor } = useEditorState();
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -36,9 +33,9 @@ export const LinkToolbarEditor = ({ editor }: Props) => {
         className="w-80"
         onCloseAutoFocus={() => editor.commands.focus()}
       >
-        <Suspense fallback={<Loader />}>
-          <Content editor={editor} setOpen={setOpen} />
-        </Suspense>
+        <React.Suspense fallback={<Loader />}>
+          <Content setOpen={setOpen} />
+        </React.Suspense>
       </PopoverContent>
     </Popover>
   );

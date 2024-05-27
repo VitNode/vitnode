@@ -1,12 +1,12 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import type { ReactNode } from "react";
+import * as React from "react";
 
 import { useWrapperCategoryForum } from "@/hooks/forum/forum/use-wrapper-category-forum";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export const ChildrenWrapperCategoryForum = ({ children }: Props) => {

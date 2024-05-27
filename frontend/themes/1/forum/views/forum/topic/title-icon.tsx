@@ -1,10 +1,10 @@
-import type { ReactNode } from "react";
+import * as React from "react";
 
 import { cn } from "@/functions/classnames";
-import { Badge, type BadgeProps } from "@/components/ui/badge";
+import { Badge, BadgeProps } from "@/components/ui/badge";
 
 interface Props extends Pick<BadgeProps, "variant"> {
-  children: ReactNode;
+  children: React.ReactNode;
   className?: string;
 }
 

@@ -1,6 +1,5 @@
 export interface ConfigType {
   editor: {
-    allow_head_h1: boolean;
     files: {
       allow_type: "all" | "images_videos" | "images" | "none";
     };
@@ -27,7 +26,6 @@ export const DEFAULT_CONFIG_DATA: ConfigType = {
   },
   editor: {
     sticky: true,
-    allow_head_h1: false,
     files: {
       allow_type: "all"
     }

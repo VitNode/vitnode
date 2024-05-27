@@ -1,7 +1,7 @@
 import { Heading } from "@tiptap/extension-heading";
 import { mergeAttributes } from "@tiptap/react";
 
-export const HeadingExtensionEditor = ({ allowH1 }: { allowH1: boolean }) => {
+export const HeadingExtensionEditor = () => {
   return Heading.extend({
     levels: [1, 2],
     renderHTML({ HTMLAttributes, node }) {
@@ -26,6 +26,6 @@ export const HeadingExtensionEditor = ({ allowH1 }: { allowH1: boolean }) => {
       ];
     }
   }).configure({
-    levels: allowH1 ? [1, 2, 3, 4, 5, 6] : [2, 3, 4, 5, 6]
+    levels: [1, 2, 3, 4, 5, 6]
   });
 };

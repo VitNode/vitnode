@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/form";
 import { ForumsSelect } from "@/admin/forum/components/forums-select/forums-select";
 import { Button } from "@/components/ui/button";
-import type { ShowForumForumsAdmin } from "@/graphql/hooks";
+import { ShowForumForumsAdmin } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 
 export const ContentDeleteActionForumAdmin = ({

@@ -1,14 +1,14 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import * as React from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { mutationApi } from "./mutation-api";
 
 export const SubmitDatabaseInstallConfigs = () => {
-  const [isPending, setPending] = useState(false);
+  const [isPending, setPending] = React.useState(false);
   const t = useTranslations("admin.configs.install.steps.database");
   const tCore = useTranslations("core");
 

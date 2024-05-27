@@ -1,19 +1,17 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { GroupsMembersAdminView } from "@/admin/core/views/members/groups/groups-members-admin-view";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Groups__Show,
-  ShowAdminGroupsSortingColumnEnum
-} from "@/graphql/hooks";
-import type {
+  ShowAdminGroupsSortingColumnEnum,
   Admin__Core_Groups__ShowQuery,
   Admin__Core_Groups__ShowQueryVariables
 } from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
-  type SearchParamsPagination
+  SearchParamsPagination
 } from "@/hooks/core/utils/use-pagination-api-ssr";
 
 interface Props {

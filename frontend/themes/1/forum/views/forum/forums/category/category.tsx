@@ -1,8 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "@/utils/i18n";
 import { cn } from "@/functions/classnames";
-import { ItemForum, type ItemForumProps } from "../item/item";
-import type { ShowForumForumsWithChildren } from "@/graphql/hooks";
+import { ItemForum, ItemForumProps } from "../item/item";
+import { ShowForumForumsWithChildren } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { WrapperCategoryForum } from "./wrapper";
 import { ChevronCategoryForumButton } from "./chevron-button";

@@ -1,10 +1,10 @@
-import { Suspense, lazy } from "react";
+import * as React from "react";
 
 import { Loader } from "@/components/loader";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import type { ShowAdminThemes } from "@/graphql/hooks";
+import { ShowAdminThemes } from "@/graphql/hooks";
 
-const Content = lazy(async () =>
+const Content = React.lazy(async () =>
   import("../../upload/upload").then(module => ({
     default: module.UploadThemeAdmin
   }))
@@ -19,9 +19,9 @@ export const UploadThemeActionsAdmin = ({ open, setOpen, ...props }: Props) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="max-w-xl">
-        <Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
           <Content data={props} />
-        </Suspense>
+        </React.Suspense>
       </DialogContent>
     </Dialog>
   );

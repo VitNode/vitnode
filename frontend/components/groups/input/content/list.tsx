@@ -1,10 +1,10 @@
 import { useTranslations } from "next-intl";
 import { CheckIcon } from "lucide-react";
 
-import type { ShowAdminGroups } from "@/graphql/hooks";
+import { ShowAdminGroups } from "@/graphql/hooks";
 import { cn } from "@/functions/classnames";
 import { CommandGroup, CommandItem } from "@/components/ui/command";
-import type { GroupInputItem } from "../group-input";
+import { GroupInputItem } from "../group-input";
 
 import { GroupFormat } from "../../../groups/group-format";
 

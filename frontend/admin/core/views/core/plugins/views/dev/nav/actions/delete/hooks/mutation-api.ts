@@ -5,8 +5,8 @@ import { revalidatePath } from "next/cache";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Plugins__Nav__Delete,
-  type Admin__Core_Plugins__Nav__DeleteMutation,
-  type Admin__Core_Plugins__Nav__DeleteMutationVariables
+  Admin__Core_Plugins__Nav__DeleteMutation,
+  Admin__Core_Plugins__Nav__DeleteMutationVariables
 } from "@/graphql/hooks";
 
 interface Args extends Admin__Core_Plugins__Nav__DeleteMutationVariables {

@@ -1,5 +1,5 @@
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState, type TransitionStartFunction } from "react";
+import * as React from "react";
 import { useDebouncedCallback } from "use-debounce";
 
 import { usePathname, useRouter } from "@/utils/i18n";
@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "@/utils/i18n";
 import { Input } from "../../ui/input";
 
 interface Props {
-  startTransition: TransitionStartFunction;
+  startTransition: React.TransitionStartFunction;
   searchPlaceholder?: string;
 }
 
@@ -18,10 +18,10 @@ export const SearchToolbarDataTable = ({
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { push } = useRouter();
-  const [value, setValue] = useState(searchParams.get("search") ?? "");
+  const [value, setValue] = React.useState(searchParams.get("search") ?? "");
 
   // Clear search input when search param is removed
-  useEffect(() => {
+  React.useEffect(() => {
     if (searchParams.get("search")) return;
 
     setValue("");

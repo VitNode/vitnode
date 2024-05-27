@@ -1,5 +1,5 @@
-import type { Element } from "html-react-parser";
-import { Fragment, createElement } from "react";
+import { Element } from "html-react-parser";
+import * as React from "react";
 
 import { generateRandomString } from "@/functions/generate-random-string";
 import { classNameCodeBlock, lowlight } from "../extensions/code/code";
@@ -22,8 +22,8 @@ interface WithTagName {
 
 const renderElement = (node: Node | WithTagName): JSX.Element => {
   if (node.value !== undefined) {
-    return createElement(
-      Fragment,
+    return React.createElement(
+      React.Fragment,
       { key: `${new Date().getTime()}-${generateRandomString(10)}` },
       node.value
     );
@@ -31,7 +31,7 @@ const renderElement = (node: Node | WithTagName): JSX.Element => {
 
   const children = (node.children ?? []).map(child => renderElement(child));
 
-  return createElement(
+  return React.createElement(
     node.tagName,
     {
       className: node.properties?.className?.join(" "),
@@ -64,12 +64,12 @@ export const changeCodeBlock = ({ children }: Element) => {
   // @ts-expect-error
   const content = highlighted.children.map(renderElement);
 
-  return createElement(
+  return React.createElement(
     "pre",
     {
       className: cn(classNameCodeBlock, "bg-muted rounded-md")
     },
-    createElement(
+    React.createElement(
       "code",
       {
         className: element?.attribs?.class

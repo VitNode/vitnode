@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
-import type { LastPostsShowForumForums } from "@/graphql/hooks";
+import { LastPostsShowForumForums } from "@/graphql/hooks";
 import { DateFormat } from "@/components/date-format/date-format";
 import { UserLastPostItemForum } from "./user";
 import { useTextLang } from "@/hooks/core/use-text-lang";

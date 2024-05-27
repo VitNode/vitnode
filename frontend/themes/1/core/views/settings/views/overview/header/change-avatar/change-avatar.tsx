@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Suspense, lazy } from "react";
+import * as React from "react";
 import { ImageIcon } from "lucide-react";
 
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
 import { useSession } from "@/hooks/core/use-session";
 
-const ModalChangeAvatar = lazy(async () =>
+const ModalChangeAvatar = React.lazy(async () =>
   import("./modal/modal-change-avatar").then(module => ({
     default: module.ModalChangeAvatar
   }))
@@ -45,9 +45,9 @@ export const ChangeAvatar = () => {
             </TooltipTrigger>
 
             <DialogContent>
-              <Suspense fallback={<Loader />}>
+              <React.Suspense fallback={<Loader />}>
                 <ModalChangeAvatar />
-              </Suspense>
+              </React.Suspense>
             </DialogContent>
 
             <TooltipContent>

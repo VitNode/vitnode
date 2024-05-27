@@ -1,7 +1,7 @@
 import { Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import type { ComponentType } from "react";
+import * as React from "react";
 import { useDebouncedCallback } from "use-debounce";
 
 import { Input } from "@/components/ui/input";
@@ -24,7 +24,7 @@ export interface ContentFilterToolbarDataTableProps {
   options: {
     label: string;
     value: string;
-    icon?: ComponentType<{ className?: string }>;
+    icon?: React.ComponentType<{ className?: string }>;
   }[];
   isFetching?: boolean;
   searchOnChange?: (value: string) => void;

@@ -6,11 +6,11 @@ import {
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import * as React from "react";
 import { useParams } from "next/navigation";
 
 import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
-import type {
+import {
   Admin__Core_Plugins__Nav__ShowQuery,
   ShowAdminNavPluginsObj
 } from "@/graphql/hooks";
@@ -23,7 +23,7 @@ export const NavDevPluginAdminView = ({
 }: Admin__Core_Plugins__Nav__ShowQuery) => {
   const t = useTranslations("core");
   const { code } = useParams();
-  const [initData, setData] = useState<ShowAdminNavPluginsObj[]>(edges);
+  const [initData, setData] = React.useState<ShowAdminNavPluginsObj[]>(edges);
   const data = initData.map(item => ({ ...item, children: [], id: item.code }));
   const {
     actionsItem,
@@ -40,7 +40,7 @@ export const NavDevPluginAdminView = ({
   });
 
   // Revalidate items when edges change
-  useEffect(() => {
+  React.useEffect(() => {
     if (!edges || !data) return;
 
     setData(edges);

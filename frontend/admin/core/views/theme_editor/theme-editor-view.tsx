@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import * as React from "react";
 
 import { CONFIG } from "@/config";
 import { cn } from "@/functions/classnames";
@@ -12,20 +12,20 @@ import {
   useThemeEditorApi
 } from "./hooks/use-theme-editor-api";
 import { Loader } from "@/components/loader";
-import type { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
+import { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
 
 export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
   const { activeTheme, iframeRef, ...rest } = useThemeEditorApi(props);
-  const [activeMode, setActiveMode] = useState<ThemeEditorViewEnum>(
+  const [activeMode, setActiveMode] = React.useState<ThemeEditorViewEnum>(
     ThemeEditorViewEnum.Desktop
   );
-  const [activeTab, setActiveTab] = useState<ThemeEditorTab>(
+  const [activeTab, setActiveTab] = React.useState<ThemeEditorTab>(
     ThemeEditorTab.Main
   );
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = React.useState(false);
   const direction: number = activeTab === ThemeEditorTab.Main ? -1 : 1;
 
-  useEffect(() => {
+  React.useEffect(() => {
     setMounted(true);
   }, []);
 

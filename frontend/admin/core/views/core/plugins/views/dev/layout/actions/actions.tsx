@@ -1,6 +1,6 @@
 "use client";
 
-import type { ShowAdminPlugins } from "@/graphql/hooks";
+import { ShowAdminPlugins } from "@/graphql/hooks";
 import { DownloadActionDevPluginAdmin } from "./download/download";
 
 export const ActionsDevPluginAdmin = (props: ShowAdminPlugins) => {

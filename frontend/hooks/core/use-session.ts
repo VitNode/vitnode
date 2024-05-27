@@ -1,6 +1,6 @@
-import { createContext, useContext } from "react";
+import * as React from "react";
 
-import type {
+import {
   AuthorizationCurrentUserObj,
   Core_Sessions__AuthorizationQuery,
   ShowCoreNav
@@ -12,7 +12,7 @@ interface Args {
   session: Omit<AuthorizationCurrentUserObj, "posts"> | null | undefined;
 }
 
-export const SessionContext = createContext<Args>({
+export const SessionContext = React.createContext<Args>({
   session: null,
   nav: [],
   files: {
@@ -23,4 +23,4 @@ export const SessionContext = createContext<Args>({
   }
 });
 
-export const useSession = () => useContext(SessionContext);
+export const useSession = () => React.useContext(SessionContext);

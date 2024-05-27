@@ -1,17 +1,17 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import type { ColumnDef } from "@tanstack/react-table";
-import { useMemo } from "react";
+import { ColumnDef } from "@tanstack/react-table";
+import * as React from "react";
 
 import { DataTable } from "@/components/data-table/data-table";
 import { Link } from "@/utils/i18n";
-import type { ShowAdminGroups } from "@/graphql/hooks";
+import { ShowAdminGroups } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { ActionsTableGroupsMembersAdmin } from "./actions/actions";
 import { DateFormat } from "@/components/date-format/date-format";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
-import type { GroupsMembersAdminViewProps } from "../groups-members-admin-view";
+import { GroupsMembersAdminViewProps } from "../groups-members-admin-view";
 import { Badge } from "@/components/ui/badge";
 
 export const TableGroupsMembersAdmin = ({
@@ -21,7 +21,7 @@ export const TableGroupsMembersAdmin = ({
   const tCore = useTranslations("core");
   const { convertText } = useTextLang();
 
-  const columns: ColumnDef<ShowAdminGroups>[] = useMemo(
+  const columns: ColumnDef<ShowAdminGroups>[] = React.useMemo(
     () => [
       {
         header: tCore("table.name"),

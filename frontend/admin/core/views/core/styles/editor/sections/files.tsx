@@ -2,24 +2,28 @@ import { useTranslations } from "next-intl";
 import { useFormContext } from "react-hook-form";
 
 import { HeaderContent } from "@/components/header-content/header-content";
-import { FormField, FormItem, FormLabel } from "@/components/ui/form";
+import { FormField, FormFieldRender } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Separator } from "@/components/ui/separator";
 
 export const FilesSectionContentEditorAdmin = () => {
   const t = useTranslations("admin.core.styles.editor");
   const form = useFormContext();
 
   return (
-    <div>
-      <HeaderContent h2={"Files"} className="m-0" />
+    <>
+      <div className="self-start w-full space-y-2">
+        <HeaderContent h2={"Files"} className="m-0" />
+
+        <Separator />
+      </div>
 
       <FormField
         control={form.control}
         name="files.allow_type"
         render={({ field }) => (
-          <FormItem>
-            <FormLabel>{t("files.allow_type.title")}</FormLabel>
+          <FormFieldRender label={t("files.allow_type.title")}>
             <RadioGroup
               onValueChange={field.onChange}
               defaultValue={field.value}
@@ -52,9 +56,9 @@ export const FilesSectionContentEditorAdmin = () => {
                 </Label>
               </div>
             </RadioGroup>
-          </FormItem>
+          </FormFieldRender>
         )}
       />
-    </div>
+    </>
   );
 };

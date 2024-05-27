@@ -2,8 +2,8 @@
 
 import {
   Forum_Topics__Edit,
-  type Forum_Topics__EditMutation,
-  type Forum_Topics__EditMutationVariables
+  Forum_Topics__EditMutation,
+  Forum_Topics__EditMutationVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 

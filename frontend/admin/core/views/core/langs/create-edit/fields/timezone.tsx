@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import * as React from "react";
 import { Check } from "lucide-react";
-import type { ControllerRenderProps, FieldValues, Path } from "react-hook-form";
+import { ControllerRenderProps, FieldValues, Path } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -36,7 +36,7 @@ export function TimezoneFieldCreateEditLangAdmin<
 >({ field }: Props<T, TName>) {
   const t = useTranslations("admin.core.langs.actions");
   const tCore = useTranslations("core");
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   return (
     <FormItem>

@@ -2,12 +2,12 @@
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { DayPicker } from "react-day-picker";
-import type { ComponentProps } from "react";
+import * as React from "react";
 
 import { cn } from "@/functions/classnames";
 import { buttonVariants } from "@/components/ui/button";
 
-export type CalendarProps = ComponentProps<typeof DayPicker>;
+export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
 function Calendar({
   className,

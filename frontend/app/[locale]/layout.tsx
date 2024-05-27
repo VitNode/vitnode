@@ -1,16 +1,16 @@
-import type { ReactNode } from "react";
-import { NextIntlClientProvider, type AbstractIntlMessages } from "next-intl";
-import { Inter } from "next/font/google";
+import * as React from "react";
+import { NextIntlClientProvider, AbstractIntlMessages } from "next-intl";
+import { GeistSans } from "geist/font/sans";
 import NextTopLoader from "nextjs-toploader";
-import type { Metadata } from "next";
+import { Metadata } from "next";
 
 import { CONFIG } from "@/config";
 import { Providers } from "./providers";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Middleware,
-  type Core_MiddlewareQuery,
-  type Core_MiddlewareQueryVariables
+  Core_MiddlewareQuery,
+  Core_MiddlewareQueryVariables
 } from "@/graphql/hooks";
 import { cn } from "@/functions/classnames";
 import { CatchLayout } from "./catch";
@@ -29,14 +29,8 @@ const getData = async () => {
   return data;
 };
 
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter"
-});
-
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
   params: { locale: string };
 }
 
@@ -81,7 +75,7 @@ export default async function LocaleLayout({
     return (
       <html
         lang={locale}
-        className={cn(inter.variable, "vitnode")}
+        className={cn(GeistSans.className, "vitnode")}
         data-theme-id={data.core_settings__show.theme_id ?? 1}
       >
         <body>

@@ -143,7 +143,6 @@ export const ABSOLUTE_PATHS = {
 
 export interface ConfigType {
   editor: {
-    allow_head_h1: boolean;
     files: {
       allow_type: "all" | "images_videos" | "images" | "none";
     };

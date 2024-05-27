@@ -1,6 +1,6 @@
 import { TextAlign } from "@tiptap/extension-text-align";
 import { Underline } from "@tiptap/extension-underline";
-import type { Extensions } from "@tiptap/react";
+import { Extensions } from "@tiptap/react";
 import { StarterKit } from "@tiptap/starter-kit";
 import { Link } from "@tiptap/extension-link";
 import { Color } from "@tiptap/extension-color";
@@ -8,17 +8,12 @@ import { TextStyle } from "@tiptap/extension-text-style";
 
 import { CodeBlockLowlightExtensionEditor } from "./code/code";
 import { MentionExtensionEditor } from "./mentions/emoji";
-import { FilesHandler, type FilesHandlerArgs } from "./files/files";
+import { FilesHandler, FilesHandlerArgs } from "./files/files";
 import { HeadingExtensionEditor } from "./heading";
 
-interface Args extends FilesHandlerArgs {
-  allowH1: boolean;
-}
+interface Args extends FilesHandlerArgs {}
 
-export const extensionsEditor = ({
-  allowH1,
-  uploadFiles
-}: Args): Extensions => [
+export const extensionsEditor = ({ uploadFiles }: Args): Extensions => [
   StarterKit.configure({
     heading: false,
     bulletList: {
@@ -67,5 +62,5 @@ export const extensionsEditor = ({
   TextStyle,
   MentionExtensionEditor,
   FilesHandler({ uploadFiles }),
-  HeadingExtensionEditor({ allowH1 })
+  HeadingExtensionEditor()
 ];

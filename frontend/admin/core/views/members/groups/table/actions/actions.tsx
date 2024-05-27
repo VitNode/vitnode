@@ -1,4 +1,4 @@
-import type { ShowAdminGroups } from "@/graphql/hooks";
+import { ShowAdminGroups } from "@/graphql/hooks";
 import { EditGroupsMembersDialogAdmin } from "./edit";
 import { DeleteGroupsMembersDialogAdmin } from "./delete/delete";
 

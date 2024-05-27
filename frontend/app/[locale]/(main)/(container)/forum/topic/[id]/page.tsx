@@ -1,6 +1,6 @@
-import { lazy, type LazyExoticComponent } from "react";
+import * as React from "react";
 
-import type { TopicViewProps } from "@/themes/1/forum/views/forum/topic/topic-view";
+import { TopicViewProps } from "@/themes/1/forum/views/forum/topic/topic-view";
 import { getSessionData } from "@/functions/get-session-data";
 import { getTopicData } from "./query-api";
 
@@ -20,9 +20,9 @@ export default async function Page({
   const { theme_id } = await getSessionData();
   const data = await getTopicData({ id, sort });
 
-  const PageFromTheme: LazyExoticComponent<
+  const PageFromTheme: React.LazyExoticComponent<
     (props: TopicViewProps) => JSX.Element
-  > = lazy(async () =>
+  > = React.lazy(async () =>
     import(`@/themes/${theme_id}/forum/views/forum/topic/topic-view`).catch(
       async () => import("@/themes/1/forum/views/forum/topic/topic-view")
     )

@@ -1,21 +1,16 @@
 "use client";
 
 import { ReactRenderer } from "@tiptap/react";
-import {
-  useEffect,
-  useImperativeHandle,
-  useState,
-  type RefCallback
-} from "react";
-import tippy, { type Instance, type Props } from "tippy.js";
+import * as React from "react";
+import tippy, { Instance, Props } from "tippy.js";
 import { useTranslations } from "next-intl";
-import type { Emoji } from "@emoji-mart/data";
+import { Emoji } from "@emoji-mart/data";
 
 import { CONFIG } from "@/config";
 import { cn } from "@/functions/classnames";
 import { classPopover } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import type {
+import {
   ComponentListRef,
   SuggestionKeyDownProps,
   SuggestionProps
@@ -28,10 +23,10 @@ const ComponentList = ({
 }: {
   command: (_props: { id: string }) => void;
   items: Emoji[];
-  ref: RefCallback<ComponentListRef>;
+  ref: React.RefCallback<ComponentListRef>;
 }) => {
   const t = useTranslations("core");
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
   const skinToneIndexLocalStorage = localStorage.getItem(
     CONFIG.local_storage.editor_skin_tone
   );
@@ -57,11 +52,11 @@ const ComponentList = ({
     setSelectedIndex((selectedIndex + 1) % items.length);
   const enterHandler = () => selectItem(selectedIndex);
 
-  useEffect(() => {
+  React.useEffect(() => {
     setSelectedIndex(0);
   }, [items]);
 
-  useImperativeHandle(ref, () => ({
+  React.useImperativeHandle(ref, () => ({
     onKeyDown: ({ event }) => {
       if (event.key === "ArrowUp") {
         upHandler();

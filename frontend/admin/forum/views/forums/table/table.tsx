@@ -20,12 +20,12 @@ import { useTranslations } from "next-intl";
 import { ItemTableForumsForumAdmin } from "./item/item";
 import {
   useForumForumsAdminAPI,
-  type ShowForumForumsAdminWithChildren
+  ShowForumForumsAdminWithChildren
 } from "./hooks/use-forum-forums-admin-api";
 import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
 import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
 import { ItemDragAndDrop } from "@/hooks/core/drag&drop/item";
-import type { Admin__Forum_Forums__ShowQuery } from "@/graphql/hooks";
+import { Admin__Forum_Forums__ShowQuery } from "@/graphql/hooks";
 
 const indentationWidth = 20;
 

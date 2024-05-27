@@ -1,18 +1,18 @@
 import { useTranslations } from "next-intl";
-import type { ReactNode } from "react";
+import * as React from "react";
 
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import { UserLink } from "@/components/user/link/user-link";
 import { DateFormat } from "@/components/date-format/date-format";
 import { GroupFormat } from "@/components/groups/group-format";
-import type { ShowPostsForums, ShowTopicsForums } from "@/graphql/hooks";
+import { ShowPostsForums, ShowTopicsForums } from "@/graphql/hooks";
 import { DivMotion } from "@/components/animations/div-motion";
 import { ReadOnlyEditor } from "@/components/editor/read-only/read-only";
 
 interface Props
   extends Pick<ShowPostsForums, "content" | "created" | "post_id" | "user"> {
   permissions: ShowTopicsForums["permissions"];
-  customMoreMenu?: ReactNode;
+  customMoreMenu?: React.ReactNode;
   disableInitialAnimation?: boolean;
 }
 

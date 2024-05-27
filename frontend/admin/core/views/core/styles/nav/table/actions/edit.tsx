@@ -2,12 +2,12 @@
 
 import { Pencil } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Suspense, lazy } from "react";
+import * as React from "react";
 
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import type { ShowCoreNav } from "@/graphql/hooks";
+import { ShowCoreNav } from "@/graphql/hooks";
 import {
   Tooltip,
   TooltipContent,
@@ -15,7 +15,7 @@ import {
   TooltipTrigger
 } from "@/components/ui/tooltip";
 
-const Content = lazy(async () =>
+const Content = React.lazy(async () =>
   import("../../create-edit/create-edit").then(module => ({
     default: module.ContentCreateEditNavAdmin
   }))
@@ -43,9 +43,9 @@ export const EditActionTableNavAdmin = (
       </TooltipProvider>
 
       <DialogContent className="max-w-2xl">
-        <Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
           <Content data={props} />
-        </Suspense>
+        </React.Suspense>
       </DialogContent>
     </Dialog>
   );

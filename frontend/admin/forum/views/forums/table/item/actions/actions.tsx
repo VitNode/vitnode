@@ -1,7 +1,7 @@
 import { EditActionForumAdmin } from "./edit";
 import { DeleteActionForumAdmin } from "./delete/delete";
 
-import type { ShowForumForumsAdminWithChildren } from "../../hooks/use-forum-forums-admin-api";
+import { ShowForumForumsAdminWithChildren } from "../../hooks/use-forum-forums-admin-api";
 
 interface ActionsForumAdminProps
   extends Omit<ShowForumForumsAdminWithChildren, "children"> {

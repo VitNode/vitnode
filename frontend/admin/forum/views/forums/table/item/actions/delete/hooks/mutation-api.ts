@@ -3,8 +3,8 @@
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Forum_Forums__Delete,
-  type Admin__Forum_Forums__DeleteMutation,
-  type Admin__Forum_Forums__DeleteMutationVariables
+  Admin__Forum_Forums__DeleteMutation,
+  Admin__Forum_Forums__DeleteMutationVariables
 } from "@/graphql/hooks";
 
 export const mutationApi = async (

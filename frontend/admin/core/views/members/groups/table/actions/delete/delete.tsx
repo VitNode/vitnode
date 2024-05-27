@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Trash2 } from "lucide-react";
-import { Suspense, lazy } from "react";
+import * as React from "react";
 
 import {
   Tooltip,
@@ -9,7 +9,7 @@ import {
   TooltipTrigger
 } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
-import type { ShowAdminGroups } from "@/graphql/hooks";
+import { ShowAdminGroups } from "@/graphql/hooks";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Loader } from "@/components/loader";
 
-const Content = lazy(async () =>
+const Content = React.lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentDeleteGroupsMembersDialogAdmin
   }))
@@ -51,9 +51,9 @@ export const DeleteGroupsMembersDialogAdmin = (
       </TooltipProvider>
 
       <AlertDialogContent>
-        <Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
           <Content {...props} />
-        </Suspense>
+        </React.Suspense>
       </AlertDialogContent>
     </AlertDialog>
   );

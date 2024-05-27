@@ -1,6 +1,6 @@
 import { Pencil } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Suspense, lazy } from "react";
+import * as React from "react";
 
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
@@ -11,9 +11,9 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import type { ShowAdminNavPluginsObj } from "@/graphql/hooks";
+import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
 
-const Content = lazy(async () =>
+const Content = React.lazy(async () =>
   import("../create-edit/create-edit").then(module => ({
     default: module.CreateEditNavDevPluginAdmin
   }))
@@ -41,9 +41,9 @@ export const EditActionTableNavDevPluginAdmin = (
       </TooltipProvider>
 
       <DialogContent className="max-w-2xl">
-        <Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
           <Content data={props} />
-        </Suspense>
+        </React.Suspense>
       </DialogContent>
     </Dialog>
   );

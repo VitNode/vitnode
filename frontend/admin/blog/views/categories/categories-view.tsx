@@ -7,8 +7,8 @@ import { TableCategoriesCategoryAdmin } from "./table/table";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin_Blog_Categories__Show,
-  type Admin_Blog_Categories__ShowQuery,
-  type Admin_Blog_Categories__ShowQueryVariables
+  Admin_Blog_Categories__ShowQuery,
+  Admin_Blog_Categories__ShowQueryVariables
 } from "@/graphql/hooks";
 
 const getData = async () => {

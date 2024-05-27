@@ -5,8 +5,8 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Languages__Delete,
-  type Admin__Core_Languages__DeleteMutation,
-  type Admin__Core_Languages__DeleteMutationVariables
+  Admin__Core_Languages__DeleteMutation,
+  Admin__Core_Languages__DeleteMutationVariables
 } from "@/graphql/hooks";
 import { CoreApiTags } from "@/admin/core/api-tags";
 

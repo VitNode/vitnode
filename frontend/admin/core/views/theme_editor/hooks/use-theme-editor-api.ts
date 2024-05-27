@@ -1,13 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { useEffect, useRef, useState } from "react";
+import * as React from "react";
 import { useTheme } from "next-themes";
-import type { HslColor } from "react-colorful";
+import { HslColor } from "react-colorful";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
-import type { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
+import { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";
 import { CONFIG } from "@/config";
 import { useRouter } from "@/utils/i18n";
@@ -60,11 +60,11 @@ export const keysFromCSSThemeEditor = [
 export const useThemeEditorApi = ({
   core_theme_editor__show
 }: Core_Theme_Editor__ShowQuery) => {
-  const [openSubmitDialog, setOpenSubmitDialog] = useState(false);
+  const [openSubmitDialog, setOpenSubmitDialog] = React.useState(false);
   const t = useTranslations("core.theme_editor.submit");
   const tCore = useTranslations("core");
   const { push } = useRouter();
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const formSchema = z.object({
     colors: formSchemaColorsThemeEditor
   });
@@ -91,7 +91,7 @@ export const useThemeEditorApi = ({
   });
 
   // Set values to iframe when theme changes
-  useEffect(() => {
+  React.useEffect(() => {
     const iframe =
       iframeRef.current?.contentWindow?.document.querySelector("html");
     if (!iframe) return;

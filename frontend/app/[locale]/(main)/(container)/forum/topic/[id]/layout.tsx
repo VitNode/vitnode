@@ -1,15 +1,15 @@
-import type { ReactNode } from "react";
+import * as React from "react";
 import { notFound } from "next/navigation";
 
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { getTopicData } from "./query-api";
 import { getTextLang } from "@/hooks/core/use-text-lang";
-import type { ErrorType } from "@/graphql/fetcher";
+import { ErrorType } from "@/graphql/fetcher";
 import { getSessionData } from "@/functions/get-session-data";
 import { ErrorViewSSR } from "@/components/views/error-view-ssr";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
   params: {
     id: string;
     locale: string;

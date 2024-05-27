@@ -1,6 +1,5 @@
 import { Filter } from "lucide-react";
-import type { ReactNode } from "react";
-import { Suspense } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "../../../ui/button";
@@ -14,7 +13,7 @@ import {
 import { Loader } from "../../../loader";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export const AdvancedFilterToolbarDataTable = ({ children }: Props) => {
@@ -38,7 +37,7 @@ export const AdvancedFilterToolbarDataTable = ({ children }: Props) => {
           <SheetTitle>{t("filters")}</SheetTitle>
         </SheetHeader>
 
-        <Suspense fallback={<Loader />}>{children}</Suspense>
+        <React.Suspense fallback={<Loader />}>{children}</React.Suspense>
       </SheetContent>
     </Sheet>
   );

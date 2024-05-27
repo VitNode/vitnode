@@ -1,11 +1,11 @@
-import type { ReactNode } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 
 import { Tabs } from "@/components/tabs/tabs";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export const StaffAdminLayout = ({ children }: Props) => {

@@ -1,35 +1,21 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { useState } from "react";
-import * as Accordion from "@radix-ui/react-accordion";
-import { useSelectedLayoutSegments } from "next/navigation";
+import * as React from "react";
 
 import { ItemListNavAdmin } from "./item/item";
-import { cn } from "@/functions/classnames";
 import { useSessionAdmin } from "@/admin/core/hooks/use-session-admin";
 
 interface Props {
-  children?: ReactNode;
-  className?: string;
   onClickItem?: () => void;
 }
 
-export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
+export const ListNavAdmin = ({ onClickItem }: Props) => {
   const { nav } = useSessionAdmin();
-  const segments = useSelectedLayoutSegments();
-  const [activeItems, setActiveItems] = useState([segments.at(0) ?? "core"]);
 
   return (
-    <Accordion.Root
-      type="multiple"
-      defaultValue={activeItems}
-      className={cn("flex flex-col", className)}
-    >
+    <div className="space-y-5">
       <ItemListNavAdmin
         id="core"
-        activeItems={activeItems}
-        setActiveItems={setActiveItems}
         onClickItem={onClickItem}
         items={[
           {
@@ -39,7 +25,7 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
           },
           {
             id: "settings",
-            href: "settings",
+            href: "settings/main",
             icon: "Settings"
           },
           {
@@ -49,12 +35,12 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
           },
           {
             id: "styles",
-            href: "styles",
+            href: "styles/themes",
             icon: "Paintbrush"
           },
           {
             id: "metadata",
-            href: "metadata",
+            href: "metadata/manifest",
             icon: "Tag"
           },
           {
@@ -64,15 +50,13 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
           },
           {
             id: "advanced",
-            href: "advanced",
+            href: "advanced/files",
             icon: "Cog"
           }
         ]}
       />
       <ItemListNavAdmin
         id="members"
-        activeItems={activeItems}
-        setActiveItems={setActiveItems}
         onClickItem={onClickItem}
         items={[
           {
@@ -87,30 +71,15 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
           },
           {
             id: "staff",
-            href: "staff",
+            href: "staff/moderators",
             icon: "UserCog"
           }
         ]}
       />
-      {/* <ItemListNavAdmin
-        id="forum"
-        activeItems={activeItems}
-        setActiveItems={setActiveItems}
-        onClickItem={onClickItem}
-        items={[
-          {
-            id: "forums",
-            href: "/forums",
-            icon: MessagesSquare
-          }
-        ]}
-      /> */}
       {nav.map(item => (
         <ItemListNavAdmin
           key={item.code}
           id={item.code}
-          activeItems={activeItems}
-          setActiveItems={setActiveItems}
           onClickItem={onClickItem}
           items={item.nav.map(navItem => ({
             id: navItem.code,
@@ -119,7 +88,6 @@ export const ListNavAdmin = ({ children, className, onClickItem }: Props) => {
           }))}
         />
       ))}
-      {children}
-    </Accordion.Root>
+    </div>
   );
 };

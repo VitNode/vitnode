@@ -1,9 +1,9 @@
 import { useLocale } from "next-intl";
-import parse, { Element, type HTMLReactParserOptions } from "html-react-parser";
+import parse, { Element, HTMLReactParserOptions } from "html-react-parser";
 import { generateHTML } from "@tiptap/html";
 import Image from "next/image";
 
-import type { TextLanguage } from "@/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 import { cn } from "@/functions/classnames";
 import { extensionsEditor } from "../extensions/extensions";
 import { changeCodeBlock } from "./code-block";
@@ -47,10 +47,7 @@ export const ReadOnlyEditor = async ({
 
   const getText = (): string => {
     try {
-      return generateHTML(
-        JSON.parse(currentValue()),
-        extensionsEditor({ allowH1: true })
-      );
+      return generateHTML(JSON.parse(currentValue()), extensionsEditor({}));
     } catch (e) {
       return currentValue();
     }

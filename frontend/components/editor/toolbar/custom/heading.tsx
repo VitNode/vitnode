@@ -1,7 +1,7 @@
-import type { Editor } from "@tiptap/react";
-import { useMemo } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 import {
+  Code,
   Heading1,
   Heading2,
   Heading3,
@@ -15,49 +15,53 @@ import {
   Select,
   SelectContent,
   SelectItem,
-  SelectTrigger,
-  SelectValue
+  SelectTrigger
 } from "@/components/ui/select";
-import { useGlobals } from "@/hooks/core/use-globals";
 
-interface Props {
-  editor: Editor;
-}
+import { useEditorState } from "../../hooks/use-editor-state";
 
 const getHeadingIcon = (level: number) => {
   switch (level) {
+    case 0:
+      return <Pilcrow />;
     case 1:
-      return <Heading1 />;
+      return <Code />;
     case 2:
-      return <Heading2 />;
+      return <Heading1 />;
     case 3:
-      return <Heading3 />;
+      return <Heading2 />;
     case 4:
-      return <Heading4 />;
+      return <Heading3 />;
     case 5:
-      return <Heading5 />;
+      return <Heading4 />;
     case 6:
+      return <Heading5 />;
+    case 7:
       return <Heading6 />;
   }
 };
 
-export const HeadingToolbarEditor = ({ editor }: Props) => {
+export const HeadingToolbarEditor = () => {
   const t = useTranslations("core.editor.heading");
-  const { config } = useGlobals();
-  const allowH1 = config.editor.allow_head_h1;
+  const { editor } = useEditorState();
 
-  const value = useMemo(() => {
+  const value = React.useMemo(() => {
     const findActiveHeading = [...Array(6).keys()].find(i =>
       editor.isActive("heading", { level: i + 1 })
     );
 
     if (findActiveHeading !== undefined) {
-      return `h${findActiveHeading + 1}`;
+      return findActiveHeading + 2;
     }
 
-    return "paragraph";
+    if (editor.isActive("codeBlock")) {
+      return 1;
+    }
+
+    return 0;
   }, [
     editor.isActive("paragraph"),
+    editor.isActive("codeBlock"),
     editor.isActive("heading", { level: 1 }),
     editor.isActive("heading", { level: 2 }),
     editor.isActive("heading", { level: 3 }),
@@ -68,37 +72,56 @@ export const HeadingToolbarEditor = ({ editor }: Props) => {
 
   return (
     <Select
-      value={value}
+      value={value.toString()}
       onValueChange={val => {
-        if (val === "paragraph") {
+        const value = Number(val);
+        if (value === 0) {
           editor.chain().setParagraph().run();
 
           return;
         }
 
-        const level = Number(val.replace("h", "")) as 1 | 2 | 3 | 4 | 5 | 6;
+        if (value === 1) {
+          editor.chain().setCodeBlock().run();
+
+          return;
+        }
+
+        const level = (value - 1) as 1 | 2 | 3 | 4 | 5 | 6;
         editor.chain().setHeading({ level }).run();
       }}
     >
-      <SelectTrigger className="w-[180px] shadow-none border-0 hover:bg-muted">
-        <SelectValue />
+      <SelectTrigger className="shadow-none border-0 hover:bg-muted h-9 [&>svg:not(:last-child)]:size-5 w-14 p-0 justify-center gap-1">
+        {getHeadingIcon(value)}
       </SelectTrigger>
+
       <SelectContent onCloseAutoFocus={() => editor.commands.focus()}>
-        <SelectItem value="paragraph">
-          <span className="flex gap-1 [&>svg]:size-5 flex-wrap">
+        <SelectItem value="0">
+          <span className="flex gap-2 items-center [&>svg]:size-4 flex-wrap">
             <Pilcrow /> {t("paragraph")}
           </span>
         </SelectItem>
-        {[...Array(allowH1 ? 6 : 5).keys()].map(i => (
-          <SelectItem key={i} value={`h${i + (allowH1 ? 1 : 2)}`}>
-            <span className="flex gap-1 [&>svg]:size-5 flex-wrap">
-              {getHeadingIcon(i + (allowH1 ? 1 : 2))}
-              {/* eslint-disable-next-line react/jsx-no-comment-textnodes, @typescript-eslint/ban-ts-comment */}
-              {/* @ts-expect-error */}
-              {t(`h${i + (allowH1 ? 1 : 2)}`)}
-            </span>
-          </SelectItem>
-        ))}
+
+        <SelectItem value="1">
+          <span className="flex gap-2 items-center [&>svg]:size-4 flex-wrap">
+            <Code /> {t("code_block.title")}
+          </span>
+        </SelectItem>
+
+        {[...Array(6).keys()].map(i => {
+          const current = i + 1;
+
+          return (
+            <SelectItem key={i} value={(i + 2).toString()}>
+              <span className="flex gap-2 items-center [&>svg]:size-4 flex-wrap">
+                {getHeadingIcon(i + 2)}
+                {/* eslint-disable-next-line react/jsx-no-comment-textnodes, @typescript-eslint/ban-ts-comment */}
+                {/* @ts-expect-error */}
+                {t(`h${current}`)}
+              </span>
+            </SelectItem>
+          );
+        })}
       </SelectContent>
     </Select>
   );

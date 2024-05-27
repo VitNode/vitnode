@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useParams, useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import * as React from "react";
 
 import { getIdFormString } from "@/functions/url";
 import { APIKeys } from "@/graphql/api-keys";
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const useMorePosts = ({ initialCount, limit, totalCount }: Props) => {
-  const [enabled, setEnabled] = useState(false);
+  const [enabled, setEnabled] = React.useState(false);
   const { id } = useParams();
   const postsToLoad = totalCount - initialCount;
   const searchParams = useSearchParams();
@@ -64,7 +64,7 @@ export const useMorePosts = ({ initialCount, limit, totalCount }: Props) => {
     enabled
   });
 
-  const data = useMemo(
+  const data = React.useMemo(
     () => query.data?.pages.flatMap(item => item.forum_posts__show.edges) ?? [],
     [query.data]
   );

@@ -1,12 +1,12 @@
-import type { ReactNode, TransitionStartFunction } from "react";
+import * as React from "react";
 
 import { SearchToolbarDataTable } from "./search";
 import { AdvancedFilterToolbarDataTable } from "./advanced-filter/advanced-filter-toolbar-data-table";
 
 export interface ToolbarDataTableProps {
-  startTransition: TransitionStartFunction;
-  advancedFilters?: ReactNode;
-  filters?: ReactNode;
+  startTransition: React.TransitionStartFunction;
+  advancedFilters?: React.ReactNode;
+  filters?: React.ReactNode;
   searchPlaceholder?: string;
 }
 

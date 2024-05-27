@@ -1,9 +1,9 @@
-import type { ReactNode } from "react";
+import * as React from "react";
 
 import { cn } from "@/functions/classnames";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
   className?: string;
 }
 

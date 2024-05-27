@@ -3,8 +3,8 @@
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Forum_Forums__Edit,
-  type Admin__Forum_Forums__EditMutation,
-  type Admin__Forum_Forums__EditMutationVariables
+  Admin__Forum_Forums__EditMutation,
+  Admin__Forum_Forums__EditMutationVariables
 } from "@/graphql/hooks";
 
 export const mutationEditApi = async (

@@ -1,13 +1,10 @@
-import emojiMartData, {
-  type Emoji,
-  type EmojiMartData
-} from "@emoji-mart/data";
+import emojiMartData, { Emoji, EmojiMartData } from "@emoji-mart/data";
 import { init, SearchIndex } from "emoji-mart";
-import { useEffect, useState } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
-import type { IconInputProps } from "../content";
+import { IconInputProps } from "../content";
 import { cn } from "@/functions/classnames";
 
 interface Props extends Omit<IconInputProps, "setOpen"> {
@@ -30,7 +27,9 @@ export const EmojisContentIconInput = ({
   value
 }: Props) => {
   const t = useTranslations("core");
-  const [searchResults, setSearchResults] = useState<string[] | null>(null);
+  const [searchResults, setSearchResults] = React.useState<string[] | null>(
+    null
+  );
 
   const setResults = async (value: string) => {
     if (!value) {
@@ -43,7 +42,7 @@ export const EmojisContentIconInput = ({
     setSearchResults(emojis.map(emoji => emoji.id));
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     setResults(search);
   }, [search]);
 
@@ -74,7 +73,7 @@ export const EmojisContentIconInput = ({
                 <Button
                   key={`search_${id}`}
                   size="icon"
-                  className="text-2xl"
+                  className="text-2xl size-9"
                   ariaLabel={emoji.name}
                   variant={value === icon ? "default" : "ghost"}
                   onClick={() => {
@@ -126,7 +125,7 @@ export const EmojisContentIconInput = ({
                 <Button
                   key={`${id}_${category.id}`}
                   size="icon"
-                  className="text-2xl"
+                  className="text-2xl size-9"
                   ariaLabel={emoji.name}
                   variant={value === icon ? "default" : "ghost"}
                   onClick={() => {

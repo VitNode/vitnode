@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 
 import { Card } from "@/components/ui/card";
@@ -7,7 +7,7 @@ import { LogoVitNode } from "@/components/logo-vitnode";
 import { PoweredByVitNode } from "../global/powered-by";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export const LayoutConfigs = ({ children }: Props) => {

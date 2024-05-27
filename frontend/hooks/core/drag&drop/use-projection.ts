@@ -1,9 +1,9 @@
-import { useState } from "react";
-import type { UniqueIdentifier } from "@dnd-kit/core";
+import * as React from "react";
+import { UniqueIdentifier } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
-import type { Coordinates } from "@dnd-kit/utilities";
+import { Coordinates } from "@dnd-kit/utilities";
 
-import type { FlatTree } from "./use-functions";
+import { FlatTree } from "./use-functions";
 
 const getDragDepth = ({
   indentationWidth,
@@ -39,9 +39,10 @@ export interface ProjectionReturnType {
 }
 
 export const useProjection = () => {
-  const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
-  const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
-  const [projected, setProjected] = useState<ProjectionReturnType | null>();
+  const [activeId, setActiveId] = React.useState<UniqueIdentifier | null>(null);
+  const [overId, setOverId] = React.useState<UniqueIdentifier | null>(null);
+  const [projected, setProjected] =
+    React.useState<ProjectionReturnType | null>();
 
   function getProjection<T extends object>({
     delta,

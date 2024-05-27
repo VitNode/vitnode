@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import { DateFormat } from "@/components/date-format/date-format";
-import type { ShowTopicsForums } from "@/graphql/hooks";
+import { ShowTopicsForums } from "@/graphql/hooks";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 import { Link } from "@/utils/i18n";
 import { WrapperItemTopicListForum } from "./wrapper-item";

@@ -3,8 +3,8 @@
 import { revalidatePath } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
-import { Admin__Core_Groups__Edit } from "@/graphql/hooks";
-import type {
+import {
+  Admin__Core_Groups__Edit,
   Admin__Core_Groups__EditMutation,
   Admin__Core_Groups__EditMutationVariables
 } from "@/graphql/hooks";

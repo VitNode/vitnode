@@ -1,4 +1,4 @@
-import { useState, type InputHTMLAttributes } from "react";
+import * as React from "react";
 import { useLocale } from "next-intl";
 
 import { useGlobals } from "@/hooks/core/use-globals";
@@ -11,11 +11,14 @@ import {
   SelectValue
 } from "./ui/select";
 import { FormControl } from "./ui/form";
-import type { TextLanguage } from "@/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 import { cn } from "@/functions/classnames";
 
 interface Props
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "value"> {
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    "onChange" | "value"
+  > {
   onChange: (value: TextLanguage[]) => void;
   value: TextLanguage[];
   className?: string;
@@ -30,7 +33,7 @@ export const TextLanguageInput = ({
   const locale = useLocale();
   const { defaultLanguage, languages: languagesFromGlobal } = useGlobals();
   const languages = languagesFromGlobal.filter(item => item.allow_in_input);
-  const [selectedLanguage, setSelectedLanguage] = useState(
+  const [selectedLanguage, setSelectedLanguage] = React.useState(
     locale ?? defaultLanguage
   );
   const valueAsArray = Array.isArray(value) ? value : [];
@@ -39,9 +42,9 @@ export const TextLanguageInput = ({
     "";
 
   return (
-    <div className={cn("flex gap-2", className)}>
+    <div className={cn("flex gap-2 flex-col w-full", className)}>
       <Input
-        className="flex-grow max-h-full"
+        className="w-full"
         type="text"
         onChange={e => {
           const value = e.target.value;
@@ -71,7 +74,7 @@ export const TextLanguageInput = ({
       {languages.length > 1 && (
         <Select onValueChange={setSelectedLanguage} value={selectedLanguage}>
           <FormControl>
-            <SelectTrigger className="basis-64 max-h-full">
+            <SelectTrigger className="w-40">
               <SelectValue />
             </SelectTrigger>
           </FormControl>

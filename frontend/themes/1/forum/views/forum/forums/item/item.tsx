@@ -1,7 +1,7 @@
 import { MessagesSquare } from "lucide-react";
 
 import { Link } from "@/utils/i18n";
-import type {
+import {
   LastPostsShowForumForumsObj,
   ShowForumForumsCounts,
   TextLanguage

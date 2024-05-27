@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
 
-import type { ShowAdminGroups } from "@/graphql/hooks";
+import { ShowAdminGroups } from "@/graphql/hooks";
 import { mutationCreateApi } from "./mutation-create-api";
 import { mutationEditApi } from "./mutation-edit-api";
 import { useDialog } from "@/components/ui/dialog";

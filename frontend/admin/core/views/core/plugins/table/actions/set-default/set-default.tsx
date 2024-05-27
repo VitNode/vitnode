@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/tooltip";
 import { ButtonSetDefaultPluginActionsAdmin } from "./button";
 import { useSetDefaultPluginAdmin } from "./hooks/use-set-default-admin";
-import type { ShowAdminPlugins } from "@/graphql/hooks";
+import { ShowAdminPlugins } from "@/graphql/hooks";
 
 export const SetDefaultPluginActionsAdmin = (props: ShowAdminPlugins) => {
   const t = useTranslations("admin.core.plugins");

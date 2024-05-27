@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { LangsCoreAdminView } from "@/admin/core/views/core/langs/langs-core-admin-view";
@@ -6,13 +6,17 @@ import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Languages__Show,
   ShowCoreLanguagesSortingColumnEnum,
-  type Core_Languages__ShowQuery,
-  type Core_Languages__ShowQueryVariables
+  Core_Languages__ShowQuery,
+  Core_Languages__ShowQueryVariables
 } from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
-  type SearchParamsPagination
+  SearchParamsPagination
 } from "@/hooks/core/utils/use-pagination-api-ssr";
+import { HeaderContent } from "@/components/header-content/header-content";
+import { ActionsLangsAdmin } from "@/admin/core/views/core/langs/actions/actions";
+import { Card } from "@/components/ui/card";
+import { RebuildRequiredAdmin } from "@/admin/core/global/rebuild-required";
 
 const getData = async (variables: Core_Languages__ShowQueryVariables) => {
   const { data } = await fetcher<
@@ -48,7 +52,21 @@ export default async function Page({ searchParams }: Props) {
     sortByEnum: ShowCoreLanguagesSortingColumnEnum
   });
 
-  const data = await getData(variables);
+  const [t, data] = await Promise.all([
+    getTranslations("admin.core.langs"),
+    getData(variables)
+  ]);
 
-  return <LangsCoreAdminView data={data} />;
+  return (
+    <>
+      <HeaderContent h1={t("title")}>
+        <ActionsLangsAdmin />
+      </HeaderContent>
+
+      <Card className="p-6">
+        <RebuildRequiredAdmin />
+        <LangsCoreAdminView data={data} />
+      </Card>
+    </>
+  );
 }

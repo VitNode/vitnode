@@ -1,29 +1,24 @@
-import {
-  createContext,
-  useContext,
-  type Dispatch,
-  type SetStateAction
-} from "react";
-import type { Editor } from "@tiptap/react";
+import * as React from "react";
+import { Editor } from "@tiptap/react";
 
-import type { FileStateEditor } from "../extensions/files/files";
-import type {
+import { FileStateEditor } from "../extensions/files/files";
+import {
   UploadFilesHandlerArgs,
   UploadFilesHandlerEditorArgs
 } from "../extensions/files/hooks/use-upload-files-handler-editor.ts";
-import type { TextLanguage } from "@/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 
 interface Args extends Omit<UploadFilesHandlerEditorArgs, "value"> {
   editor: Editor;
   files: FileStateEditor[];
   onChange: (value: TextLanguage[] | string) => void;
   selectedLanguage: string;
-  setFiles: Dispatch<SetStateAction<FileStateEditor[]>>;
+  setFiles: React.Dispatch<React.SetStateAction<FileStateEditor[]>>;
   uploadFiles: (args: UploadFilesHandlerArgs) => Promise<void>;
   value: TextLanguage[] | string;
 }
 
-export const EditorStateContext = createContext<Args>({
+export const EditorStateContext = React.createContext<Args>({
   files: [],
   editor: {} as Editor,
   uploadFiles: async () => {},
@@ -33,4 +28,4 @@ export const EditorStateContext = createContext<Args>({
   setFiles: () => {}
 });
 
-export const useEditorState = () => useContext(EditorStateContext);
+export const useEditorState = () => React.useContext(EditorStateContext);

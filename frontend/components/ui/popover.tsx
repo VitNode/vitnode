@@ -1,7 +1,7 @@
 "use client";
 
 import * as PopoverPrimitive from "@radix-ui/react-popover";
-import type { ComponentPropsWithoutRef } from "react";
+import * as React from "react";
 
 import { cn } from "@/functions/classnames";
 
@@ -20,7 +20,7 @@ const PopoverContent = ({
   className,
   sideOffset = 4,
   ...props
-}: ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>) => (
+}: React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>) => (
   <PopoverPrimitive.Portal>
     <PopoverPrimitive.Content
       align={align}

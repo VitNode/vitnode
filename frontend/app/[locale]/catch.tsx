@@ -1,4 +1,4 @@
-import { NextIntlClientProvider, type AbstractIntlMessages } from "next-intl";
+import { NextIntlClientProvider, AbstractIntlMessages } from "next-intl";
 import { Inter } from "next/font/google";
 
 import { Providers } from "./providers";

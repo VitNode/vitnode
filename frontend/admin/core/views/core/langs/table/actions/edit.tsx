@@ -1,13 +1,13 @@
 import { Pencil } from "lucide-react";
-import { Suspense, lazy } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Loader } from "@/components/loader";
-import type { ShowCoreLanguages } from "@/graphql/hooks";
+import { ShowCoreLanguages } from "@/graphql/hooks";
 
-const Content = lazy(async () =>
+const Content = React.lazy(async () =>
   import("../../create-edit/create-edit").then(module => ({
     default: module.CreateEditLangAdmin
   }))
@@ -25,9 +25,9 @@ export const EditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
       </DialogTrigger>
 
       <DialogContent>
-        <Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
           <Content data={data} />
-        </Suspense>
+        </React.Suspense>
       </DialogContent>
     </Dialog>
   );

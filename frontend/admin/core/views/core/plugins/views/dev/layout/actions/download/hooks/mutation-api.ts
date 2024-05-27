@@ -3,8 +3,8 @@
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Plugins__Download,
-  type Admin__Core_Plugins__DownloadMutation,
-  type Admin__Core_Plugins__DownloadMutationVariables
+  Admin__Core_Plugins__DownloadMutation,
+  Admin__Core_Plugins__DownloadMutationVariables
 } from "@/graphql/hooks";
 import { cleanAdminCorePluginsCache } from "@/admin/core/api-tags";
 

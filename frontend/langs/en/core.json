@@ -98,24 +98,9 @@
       "total_count": "Total Count: {count}"
     },
     "editor": {
-      "bold": "Bold",
-      "italic": "Italic",
-      "underline": "Underline",
-      "strike": "Strike",
-      "text_align_left": "Text Align Left",
-      "text_align_center": "Text Align Center",
-      "text_align_right": "Text Align Right",
-      "text_align_justify": "Text Align Justify",
-      "block_quote": "Block Quote",
-      "bullet_list": "Bullet List",
-      "ordered_list": "Ordered List",
-      "undo": "Undo",
-      "redo": "Redo",
+      "extra_tools": "Extra Tools",
+      "text_align": "Text Align",
       "horizontal_rule": "Horizontal Rule",
-      "code_block": {
-        "title": "Code Block",
-        "auto": "Auto"
-      },
       "link": {
         "title": "Link",
         "text": "Text",
@@ -130,7 +115,11 @@
         "h4": "Heading H4",
         "h5": "Heading H5",
         "h6": "Heading H6",
-        "paragraph": "Paragraph"
+        "paragraph": "Paragraph",
+        "code_block": {
+          "title": "Code Block",
+          "auto": "Auto"
+        }
       },
       "color_text": "Text Color",
       "change_language": "Change Language",

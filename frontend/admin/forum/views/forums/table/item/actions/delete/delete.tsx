@@ -1,6 +1,6 @@
 import { Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Suspense, lazy } from "react";
+import * as React from "react";
 
 import { Loader } from "@/components/loader";
 import {
@@ -9,9 +9,9 @@ import {
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import type { ShowForumForumsAdmin } from "@/graphql/hooks";
+import { ShowForumForumsAdmin } from "@/graphql/hooks";
 
-const Content = lazy(async () =>
+const Content = React.lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentDeleteActionForumAdmin
   }))
@@ -31,9 +31,9 @@ export const DeleteActionForumAdmin = (
       </AlertDialogTrigger>
 
       <AlertDialogContent>
-        <Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
           <Content {...props} />
-        </Suspense>
+        </React.Suspense>
       </AlertDialogContent>
     </AlertDialog>
   );

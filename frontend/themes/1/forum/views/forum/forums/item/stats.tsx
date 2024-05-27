@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 
-import type { ShowForumForumsCounts } from "@/graphql/hooks";
+import { ShowForumForumsCounts } from "@/graphql/hooks";
 
 export const StatsItemForum = ({
   total_posts,

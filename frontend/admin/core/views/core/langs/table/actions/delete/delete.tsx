@@ -1,10 +1,10 @@
-import { Suspense, lazy } from "react";
+import * as React from "react";
 
 import { Loader } from "@/components/loader";
 import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
-import type { ShowCoreLanguages } from "@/graphql/hooks";
+import { ShowCoreLanguages } from "@/graphql/hooks";
 
-const Content = lazy(async () =>
+const Content = React.lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentDeleteActionsTableLangsCoreAdmin
   }))
@@ -23,9 +23,9 @@ export const DeleteActionsTableLangsCoreAdmin = ({
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
-        <Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
           <Content {...props} />
-        </Suspense>
+        </React.Suspense>
       </AlertDialogContent>
     </AlertDialog>
   );

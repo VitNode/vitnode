@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import * as React from "react";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
 import { mutationUpdateDataApi } from "./mutation-update-data-api";
-import type { ShowForumForumsAdmin } from "@/graphql/hooks";
+import { ShowForumForumsAdmin } from "@/graphql/hooks";
 
 import {
   buildTree,
   flattenTree,
-  type FlatTree
+  FlatTree
 } from "../../../../../../hooks/core/drag&drop/use-functions";
 
 export interface ShowForumForumsAdminWithChildren
@@ -26,9 +26,9 @@ interface Args {
 export const useForumForumsAdminAPI = ({ initData }: Args) => {
   const t = useTranslations("core");
   const [data, setData] =
-    useState<ShowForumForumsAdminWithChildren[]>(initData);
+    React.useState<ShowForumForumsAdminWithChildren[]>(initData);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!initData || !data || data.length === initData.length) return;
 
     setData(initData);

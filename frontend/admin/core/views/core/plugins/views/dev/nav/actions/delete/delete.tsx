@@ -1,6 +1,6 @@
 import { Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Suspense, lazy } from "react";
+import * as React from "react";
 
 import { Loader } from "@/components/loader";
 import {
@@ -15,9 +15,9 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import type { ContentDeleteActionTableNavDevPluginAdminProps } from "./content";
+import { ContentDeleteActionTableNavDevPluginAdminProps } from "./content";
 
-const Content = lazy(async () =>
+const Content = React.lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentDeleteActionTableNavDevPluginAdmin
   }))
@@ -49,9 +49,9 @@ export const DeleteActionTableNavDevPluginAdmin = (
       </TooltipProvider>
 
       <AlertDialogContent>
-        <Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
           <Content {...props} />
-        </Suspense>
+        </React.Suspense>
       </AlertDialogContent>
     </AlertDialog>
   );

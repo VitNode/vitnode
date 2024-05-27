@@ -1,6 +1,6 @@
-import { useCallback, useState } from "react";
+import * as React from "react";
 import { TableVirtuoso } from "react-virtuoso";
-import type { ControllerRenderProps, FieldValues } from "react-hook-form";
+import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import { keyBy, mapValues } from "lodash";
 
 import { useTextLang } from "@/hooks/core/use-text-lang";
@@ -8,7 +8,7 @@ import { usePermissionsGroupsAdminAPI } from "../hooks/use-permissions-groups-ad
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Loader } from "@/components/loader";
-import type { ShowAdminGroups } from "@/graphql/hooks";
+import { ShowAdminGroups } from "@/graphql/hooks";
 
 interface Props {
   field: ControllerRenderProps<FieldValues, "permissions">;
@@ -19,17 +19,17 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
   field,
   permissions
 }: Props) => {
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = React.useState("");
   const { data, isError, isLoading } = usePermissionsGroupsAdminAPI({
     searchValue
   });
   const { convertText } = useTextLang();
 
-  const Table = useCallback(
+  const Table = React.useCallback(
     ({ ...props }) => <table className="w-full" {...props} />,
     []
   );
-  const TableRow = useCallback(
+  const TableRow = React.useCallback(
     ({ ...props }) => (
       <tr
         className="[&:not(:last-child)]:border-b transition-colors hover:bg-muted/50"

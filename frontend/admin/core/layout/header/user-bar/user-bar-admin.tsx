@@ -3,7 +3,7 @@
 import { Home, LogOut } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { useState } from "react";
+import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
@@ -24,7 +24,7 @@ export const UserBarAdmin = () => {
   const t = useTranslations("admin");
   const tCore = useTranslations("core");
   const { session } = useSessionAdmin();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   if (!session) return null;
   const { email, name, ...rest } = session;
@@ -53,7 +53,7 @@ export const UserBarAdmin = () => {
           </div>
         </SheetHeader>
 
-        <div className="sm:hidden block">
+        <div className="md:hidden block">
           <div className="p-2">
             <ListNavAdmin onClickItem={() => setOpen(false)} />
           </div>

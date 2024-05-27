@@ -3,8 +3,8 @@
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Languages__Download,
-  type Admin__Core_Languages__DownloadMutation,
-  type Admin__Core_Languages__DownloadMutationVariables
+  Admin__Core_Languages__DownloadMutation,
+  Admin__Core_Languages__DownloadMutationVariables
 } from "@/graphql/hooks";
 
 export const mutationApi = async (

@@ -1,17 +1,14 @@
 "use client";
 
-import type { ColumnDef } from "@tanstack/react-table";
-import { useMemo } from "react";
+import { ColumnDef } from "@tanstack/react-table";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Clock, Download, File } from "lucide-react";
 
 import { CONFIG } from "@/config";
 import { DataTable } from "@/components/data-table/data-table";
-import type {
-  Core_Members__Files__ShowQuery,
-  ShowCoreFiles
-} from "@/graphql/hooks";
+import { Core_Members__Files__ShowQuery, ShowCoreFiles } from "@/graphql/hooks";
 import { DateFormat } from "@/components/date-format/date-format";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
 import { formatBytes } from "@/functions/format-bytes";
@@ -29,7 +26,7 @@ export const ContentFilesSettings = ({
 }: Core_Members__Files__ShowQuery) => {
   const t = useTranslations("core.settings.files");
   const tCore = useTranslations("core");
-  const columns: ColumnDef<ShowCoreFiles>[] = useMemo(
+  const columns: ColumnDef<ShowCoreFiles>[] = React.useMemo(
     () => [
       {
         header: "",

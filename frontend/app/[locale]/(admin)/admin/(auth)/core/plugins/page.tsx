@@ -1,18 +1,22 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { PluginsCoreAdminView } from "@/admin/core/views/core/plugins/plugins-admin-view";
 import {
   Admin__Core_Plugins__Show,
   ShowAdminPluginsSortingColumnEnum,
-  type Admin__Core_Plugins__ShowQuery,
-  type Admin__Core_Plugins__ShowQueryVariables
+  Admin__Core_Plugins__ShowQuery,
+  Admin__Core_Plugins__ShowQueryVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 import {
   usePaginationAPISsr,
-  type SearchParamsPagination
+  SearchParamsPagination
 } from "@/hooks/core/utils/use-pagination-api-ssr";
+import { HeaderContent } from "@/components/header-content/header-content";
+import { RebuildRequiredAdmin } from "@/admin/core/global/rebuild-required";
+import { Card } from "@/components/ui/card";
+import { ActionsPluginsAdmin } from "@/admin/core/views/core/plugins/actions/actions";
 
 interface Props {
   searchParams: SearchParamsPagination;
@@ -48,7 +52,22 @@ export default async function Page({ searchParams }: Props) {
     sortByEnum: ShowAdminPluginsSortingColumnEnum,
     defaultPageSize: 10
   });
-  const data = await getData(variables);
+  const [data, t] = await Promise.all([
+    getData(variables),
+    getTranslations("admin.core.plugins")
+  ]);
 
-  return <PluginsCoreAdminView {...data} />;
+  return (
+    <>
+      <HeaderContent h1={t("title")}>
+        <ActionsPluginsAdmin />
+      </HeaderContent>
+
+      <Card className="p-6">
+        <RebuildRequiredAdmin />
+
+        <PluginsCoreAdminView {...data} />
+      </Card>
+    </>
+  );
 }

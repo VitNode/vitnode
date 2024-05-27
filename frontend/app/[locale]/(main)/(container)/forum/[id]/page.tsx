@@ -1,7 +1,7 @@
-import { lazy, type LazyExoticComponent } from "react";
+import * as React from "react";
 
 import { getSessionData } from "@/functions/get-session-data";
-import type { ForumForumViewProps } from "@/themes/1/forum/views/forum/forums/views/[id]/forum-forum-view";
+import { ForumForumViewProps } from "@/themes/1/forum/views/forum/forums/views/[id]/forum-forum-view";
 import { getForumItemData } from "./query-api";
 
 interface Props {
@@ -15,9 +15,9 @@ export default async function Page({ params: { id } }: Props) {
   const { data } = await getForumItemData({ id });
   if (!data) return null;
 
-  const PageFromTheme: LazyExoticComponent<
+  const PageFromTheme: React.LazyExoticComponent<
     (props: ForumForumViewProps) => JSX.Element
-  > = lazy(async () =>
+  > = React.lazy(async () =>
     import(
       `@/themes/${theme_id}/forum/views/forum/forums/views/[id]/forum-forum-view`
     ).catch(

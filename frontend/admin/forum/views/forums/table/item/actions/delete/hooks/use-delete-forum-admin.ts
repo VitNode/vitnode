@@ -8,7 +8,7 @@ import { zodInput } from "@/utils/zod";
 import { mutationApi } from "./mutation-api";
 import { useAlertDialog } from "@/components/ui/alert-dialog";
 import { useTextLang } from "@/hooks/core/use-text-lang";
-import type { ShowForumForumsAdmin } from "@/graphql/hooks";
+import { ShowForumForumsAdmin } from "@/graphql/hooks";
 
 export const useDeleteForumAdmin = ({
   id,

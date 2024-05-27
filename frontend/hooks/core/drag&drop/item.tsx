@@ -1,22 +1,22 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { ChevronRight, Grip } from "lucide-react";
-import type { CSSProperties, ReactNode } from "react";
+import * as React from "react";
 
 import { cn } from "@/functions/classnames";
 import { Button } from "@/components/ui/button";
 
 interface Props {
   active: boolean;
-  children: ReactNode;
+  children: React.ReactNode;
   id: number | string;
   isDropHere: boolean;
   onCollapse: () => void;
   childrenLength?: number;
   depth?: number;
   draggableButtonClassName?: string;
-  draggableChildren?: ReactNode;
-  draggableStyle?: CSSProperties;
+  draggableChildren?: React.ReactNode;
+  draggableStyle?: React.CSSProperties;
   indentationWidth?: number;
   isOpenChildren?: boolean;
 }
@@ -58,7 +58,7 @@ export const ItemDragAndDrop = ({
       style={
         {
           "--spacing": `${indentationWidth * depth}px`
-        } as CSSProperties
+        } as React.CSSProperties
       }
     >
       <div

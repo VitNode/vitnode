@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import * as React from "react";
 import { DndContext, DragOverlay, closestCorners } from "@dnd-kit/core";
 import {
   SortableContext,
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 
-import type {
+import {
   Admin_Blog_Categories__ShowQuery,
   ShowBlogCategories
 } from "@/graphql/hooks";
@@ -18,7 +18,7 @@ import { ItemTableCategoriesCategoryAdmin } from "./item";
 export const TableCategoriesCategoryAdmin = ({
   blog_categories__show: { edges }
 }: Admin_Blog_Categories__ShowQuery) => {
-  const [initData, setData] = useState<ShowBlogCategories[]>(edges);
+  const [initData, setData] = React.useState<ShowBlogCategories[]>(edges);
   const data = initData.map(item => ({
     ...item,
     children: []

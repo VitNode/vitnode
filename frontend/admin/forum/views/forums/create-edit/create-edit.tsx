@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Suspense, lazy, useState } from "react";
+import * as React from "react";
 
 import {
   DialogDescription,
@@ -13,15 +13,15 @@ import { Tabs } from "@/components/tabs/tabs";
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
-import type { ShowForumForumsAdminWithChildren } from "../table/hooks/use-forum-forums-admin-api";
+import { ShowForumForumsAdminWithChildren } from "../table/hooks/use-forum-forums-admin-api";
 import { useTextLang } from "@/hooks/core/use-text-lang";
 
-const MainContentCreateEditFormForumAdmin = lazy(async () =>
+const MainContentCreateEditFormForumAdmin = React.lazy(async () =>
   import("./content/main").then(module => ({
     default: module.MainContentCreateEditFormForumAdmin
   }))
 );
-const PermissionsContentCreateEditFormForumAdmin = lazy(async () =>
+const PermissionsContentCreateEditFormForumAdmin = React.lazy(async () =>
   import("./content/permissions/permissions").then(module => ({
     default: module.PermissionsContentCreateEditFormForumAdmin
   }))
@@ -40,7 +40,7 @@ export const CreateEditForumAdmin = ({ data }: CreateEditForumAdminProps) => {
   const t = useTranslations("admin_forum.forums.create_edit");
   const tCore = useTranslations("core");
   const { form, onSubmit } = useCreateEditFormForumAdmin({ data });
-  const [activeTab, setActiveTab] = useState<TabsEnum>(TabsEnum.MAIN);
+  const [activeTab, setActiveTab] = React.useState<TabsEnum>(TabsEnum.MAIN);
   const { convertText } = useTextLang();
 
   const tabsContent = {
@@ -76,7 +76,9 @@ export const CreateEditForumAdmin = ({ data }: CreateEditForumAdminProps) => {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <Suspense fallback={<Loader />}>{tabsContent[activeTab]}</Suspense>
+          <React.Suspense fallback={<Loader />}>
+            {tabsContent[activeTab]}
+          </React.Suspense>
 
           <DialogFooter>
             <Button

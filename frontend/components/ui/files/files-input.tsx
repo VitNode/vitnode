@@ -1,9 +1,4 @@
-import {
-  type InputHTMLAttributes,
-  useRef,
-  useState,
-  type RefCallback
-} from "react";
+import * as React from "react";
 import { Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
@@ -14,14 +9,14 @@ import { PreviewFilesInput } from "./preview/preview-files-input";
 
 export interface InputProps
   extends Omit<
-    InputHTMLAttributes<HTMLInputElement>,
+    React.InputHTMLAttributes<HTMLInputElement>,
     "onChange" | "type" | "value"
   > {
   acceptExtensions: string[];
   maxFileSizeInMb: number;
   onChange: (e: File[]) => void;
   value: File[] | undefined;
-  ref?: RefCallback<HTMLInputElement>;
+  ref?: React.RefCallback<HTMLInputElement>;
 }
 
 export const FilesInput = ({
@@ -36,8 +31,8 @@ export const FilesInput = ({
   ...props
 }: InputProps) => {
   const t = useTranslations("core");
-  const [isDrag, setDrag] = useState(false);
-  const currentRef = useRef<HTMLInputElement>(null);
+  const [isDrag, setDrag] = React.useState(false);
+  const currentRef = React.useRef<HTMLInputElement>(null);
   const inputRef = useMergeRefs([ref, currentRef]);
 
   const handleUploadFile = (files: FileList | null) => {

@@ -4,16 +4,14 @@ import { useTranslations } from "next-intl";
 
 import {
   Form,
-  FormControl,
   FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
+  FormFieldRender,
+  FormWrapper
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useSettingsCoreAdmin } from "./hooks/use-settings-core-admin";
-import type { Core_Main_Settings__ShowQuery } from "@/graphql/hooks";
+import { Core_Main_Settings__ShowQuery } from "@/graphql/hooks";
 import { TextLanguageInput } from "@/components/text-language-input";
 
 export const MainSettingsCoreAdmin = (props: Core_Main_Settings__ShowQuery) => {
@@ -23,21 +21,14 @@ export const MainSettingsCoreAdmin = (props: Core_Main_Settings__ShowQuery) => {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 sm:max-w-2xl"
-      >
+      <FormWrapper onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("name.label")}</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+            <FormFieldRender label={t("name.label")}>
+              <Input {...field} />
+            </FormFieldRender>
           )}
         />
 
@@ -45,13 +36,9 @@ export const MainSettingsCoreAdmin = (props: Core_Main_Settings__ShowQuery) => {
           control={form.control}
           name="short_name"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("short_name.label")}</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+            <FormFieldRender label={t("short_name.label")}>
+              <Input {...field} />
+            </FormFieldRender>
           )}
         />
 
@@ -59,13 +46,9 @@ export const MainSettingsCoreAdmin = (props: Core_Main_Settings__ShowQuery) => {
           control={form.control}
           name="description"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("description.label")}</FormLabel>
-              <FormControl>
-                <TextLanguageInput {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+            <FormFieldRender label={t("description.label")} optional>
+              <TextLanguageInput {...field} />
+            </FormFieldRender>
           )}
         />
 
@@ -73,13 +56,9 @@ export const MainSettingsCoreAdmin = (props: Core_Main_Settings__ShowQuery) => {
           control={form.control}
           name="copyright"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("copyright.label")}</FormLabel>
-              <FormControl>
-                <TextLanguageInput {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+            <FormFieldRender label={t("copyright.label")}>
+              <TextLanguageInput {...field} />
+            </FormFieldRender>
           )}
         />
 
@@ -90,7 +69,7 @@ export const MainSettingsCoreAdmin = (props: Core_Main_Settings__ShowQuery) => {
         >
           {tCore("save")}
         </Button>
-      </form>
+      </FormWrapper>
     </Form>
   );
 };

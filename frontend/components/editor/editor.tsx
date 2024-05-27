@@ -1,11 +1,11 @@
 "use client";
 
 import { useEditor, EditorContent } from "@tiptap/react";
-import { useEffect, useState } from "react";
+import * as React from "react";
 import { useLocale } from "next-intl";
 
 import { cn } from "@/functions/classnames";
-import type { TextLanguage } from "@/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 import { ToolBarEditor } from "./toolbar/toolbar";
 import { FooterEditor } from "./footer/footer";
 import { useGlobals } from "@/hooks/core/use-globals";
@@ -14,7 +14,7 @@ import { EmojiExtensionEditor } from "./extensions/emoji/emoji";
 import { Skeleton } from "../ui/skeleton";
 import {
   useUploadFilesHandlerEditor,
-  type UploadFilesHandlerEditorArgs
+  UploadFilesHandlerEditorArgs
 } from "./extensions/files/hooks/use-upload-files-handler-editor.ts";
 import { EditorStateContext } from "./hooks/use-editor-state";
 
@@ -52,15 +52,14 @@ export const Editor = ({
     allowUploadFiles
   });
   const locale = useLocale();
-  const { config, defaultLanguage } = useGlobals();
-  const [selectedLanguage, setSelectedLanguage] = useState(
+  const { defaultLanguage } = useGlobals();
+  const [selectedLanguage, setSelectedLanguage] = React.useState(
     locale ?? defaultLanguage
   );
   const editor = useEditor({
     autofocus: autoFocus,
     extensions: [
       ...extensionsEditor({
-        allowH1: config.editor.allow_head_h1,
         uploadFiles
       }),
       EmojiExtensionEditor
@@ -110,7 +109,7 @@ export const Editor = ({
   });
 
   // Toggle the editor content when the selected language changes
-  useEffect(() => {
+  React.useEffect(() => {
     if (!editor || disableLanguage || !Array.isArray(value)) return;
 
     const findValue =
@@ -143,9 +142,9 @@ export const Editor = ({
         className={cn("border border-input rounded-md shadow-sm", className)}
       >
         <div className="relative">
-          <ToolBarEditor editor={editor} />
+          <ToolBarEditor />
           <EditorContent
-            className="break-words [&_.ProseMirror-selectednode]:outline-none [&_.ProseMirror-selectednode]:ring-1 [&_.ProseMirror-selectednode]:ring-ring [&_.ProseMirror-selectednode]:w-fit [&_.node-files]:inline-flex"
+            className="break-words [&_.ProseMirror-selectednode]:outline-none [&_.ProseMirror-selectednode]:ring-offset-2 [&_.ProseMirror-selectednode]:ring-4 [&_.ProseMirror-selectednode]:ring-ring [&_.ProseMirror-selectednode]:w-fit [&_.node-files]:inline-flex"
             editor={editor}
           />
         </div>

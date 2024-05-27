@@ -1,6 +1,6 @@
 import { Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Suspense, lazy } from "react";
+import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -9,7 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import type { ShowAdminPlugins } from "@/graphql/hooks";
+import { ShowAdminPlugins } from "@/graphql/hooks";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Loader } from "@/components/loader";
 
@@ -18,7 +18,7 @@ export const UploadPluginActionsAdmin = (
 ) => {
   const t = useTranslations("core");
 
-  const Content = lazy(async () =>
+  const Content = React.lazy(async () =>
     import("../../upload/upload").then(module => ({
       default: module.UploadPluginAdmin
     }))
@@ -44,9 +44,9 @@ export const UploadPluginActionsAdmin = (
       </TooltipProvider>
 
       <DialogContent className="max-w-xl">
-        <Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
           <Content data={props} />
-        </Suspense>
+        </React.Suspense>
       </DialogContent>
     </Dialog>
   );

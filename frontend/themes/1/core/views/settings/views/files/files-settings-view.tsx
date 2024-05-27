@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Suspense, lazy } from "react";
+import * as React from "react";
 
 import {
   Card,
@@ -7,10 +7,10 @@ import {
   CardDescription,
   CardHeader
 } from "@/components/ui/card";
-import type { Core_Members__Files__ShowQuery } from "@/graphql/hooks";
+import { Core_Members__Files__ShowQuery } from "@/graphql/hooks";
 import { Loader } from "@/components/loader";
 
-const ContentFilesSettings = lazy(async () =>
+const ContentFilesSettings = React.lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentFilesSettings
   }))
@@ -31,9 +31,9 @@ export default function FilesSettingsView(
       </CardHeader>
 
       <CardContent>
-        <Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
           <ContentFilesSettings {...props} />
-        </Suspense>
+        </React.Suspense>
       </CardContent>
     </Card>
   );

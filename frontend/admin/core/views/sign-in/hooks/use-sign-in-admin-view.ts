@@ -1,14 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { useState } from "react";
+import * as React from "react";
 
 import { mutationApi } from "@/hooks/core/sign/in/mutation-api";
-import type { ErrorType } from "@/graphql/fetcher";
+import { ErrorType } from "@/graphql/fetcher";
 import { zodInput } from "@/utils/zod";
 
 export const useSignInAdminView = () => {
-  const [error, setError] = useState<ErrorType | null>(null);
+  const [error, setError] = React.useState<ErrorType | null>(null);
 
   const formSchema = z.object({
     email: zodInput.string.min(1),

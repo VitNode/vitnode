@@ -1,9 +1,9 @@
 import { BadgeHelp, ChevronDown, CodeXml, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import * as React from "react";
 
 import { CONFIG } from "@/config";
-import type { ShowAdminPlugins } from "@/graphql/hooks";
+import { ShowAdminPlugins } from "@/graphql/hooks";
 import { DeletePluginActionsAdmin } from "./delete/delete";
 import { SetDefaultPluginActionsAdmin } from "./set-default/set-default";
 import {
@@ -22,7 +22,7 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
   const pathname = usePathname();
   const { push } = useRouter();
 
-  const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
+  const [isOpenDeleteDialog, setIsOpenDeleteDialog] = React.useState(false);
 
   return (
     <>
@@ -44,7 +44,7 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
           {CONFIG.node_development && (
             <>
               <DropdownMenuItem
-                onClick={() => push(`${pathname}/${props.code}/dev`)}
+                onClick={() => push(`${pathname}/${props.code}/dev/overview`)}
               >
                 <CodeXml /> {t("dev_tools")}
               </DropdownMenuItem>

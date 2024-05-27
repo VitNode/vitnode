@@ -1,6 +1,6 @@
 "use client";
 
-import type { RefCallback } from "react";
+import * as React from "react";
 
 import {
   Tooltip,
@@ -13,7 +13,7 @@ import { useDateFormat } from "./hooks/use-date-format";
 interface Props {
   date: Date | number;
   className?: string;
-  ref?: RefCallback<HTMLTimeElement>;
+  ref?: React.RefCallback<HTMLTimeElement>;
 }
 
 export const DateFormat = ({ className, date, ref }: Props) => {

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { CreateNavDevPluginAdmin } from "@/admin/core/views/core/plugins/views/dev/nav/create/create";
@@ -7,8 +7,8 @@ import { HeaderContent } from "@/components/header-content/header-content";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Plugins__Nav__Show,
-  type Admin__Core_Plugins__Nav__ShowQuery,
-  type Admin__Core_Plugins__Nav__ShowQueryVariables
+  Admin__Core_Plugins__Nav__ShowQuery,
+  Admin__Core_Plugins__Nav__ShowQueryVariables
 } from "@/graphql/hooks";
 
 interface Props {

@@ -1,10 +1,10 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { motion, type AnimationProps, type LayoutProps } from "framer-motion";
+import * as React from "react";
+import { motion, AnimationProps, LayoutProps } from "framer-motion";
 
 interface Props extends AnimationProps, LayoutProps {
-  children?: ReactNode;
+  children?: React.ReactNode;
   className?: string;
 }
 

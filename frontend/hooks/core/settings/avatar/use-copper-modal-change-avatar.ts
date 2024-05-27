@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import type { ReactCropperElement } from "react-cropper";
+import * as React from "react";
+import { ReactCropperElement } from "react-cropper";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
@@ -10,8 +10,8 @@ import { useSession } from "../../use-session";
 
 export const useCopperModalChangeAvatar = () => {
   const t = useTranslations("core");
-  const cropperRef = useRef<ReactCropperElement>(null);
-  const [isPending, setPending] = useState(false);
+  const cropperRef = React.useRef<ReactCropperElement>(null);
+  const [isPending, setPending] = React.useState(false);
   const { session } = useSession();
   const { setOpen } = useDialog();
 

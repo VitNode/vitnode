@@ -2,8 +2,8 @@ import { fetcher } from "@/graphql/fetcher";
 import {
   Forum_Topics__Show,
   ShowPostsForumsSortingEnum,
-  type Forum_Topics__ShowQuery,
-  type Forum_Topics__ShowQueryVariables
+  Forum_Topics__ShowQuery,
+  Forum_Topics__ShowQueryVariables
 } from "@/graphql/hooks";
 import { getIdFormString } from "@/functions/url";
 

@@ -4,9 +4,9 @@ import { revalidatePath } from "next/cache";
 
 import { fetcher } from "@/graphql/fetcher";
 import {
-  type Admin__Core_Languages__UpdateMutation,
+  Admin__Core_Languages__UpdateMutation,
   Admin__Core_Languages__Update,
-  type Admin__Core_Languages__UpdateMutationVariables
+  Admin__Core_Languages__UpdateMutationVariables
 } from "@/graphql/hooks";
 
 export const mutationApi = async (formData: FormData) => {

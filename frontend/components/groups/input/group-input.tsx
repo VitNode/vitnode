@@ -1,11 +1,11 @@
 import { useTranslations } from "next-intl";
-import { Suspense, useState } from "react";
+import * as React from "react";
 import { X } from "lucide-react";
 
 import { GroupInputContent } from "./content/content";
 import { cn } from "@/functions/classnames";
 
-import type { TextLanguage } from "../../../graphql/hooks";
+import { TextLanguage } from "../../../graphql/hooks";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { Button } from "../../ui/button";
 import { Badge } from "../../ui/badge";
@@ -49,7 +49,7 @@ export const GroupInput = ({
     : currentValue
       ? [currentValue]
       : [];
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const { convertText } = useTextLang();
 
   return (
@@ -101,7 +101,7 @@ export const GroupInput = ({
       </PopoverTrigger>
 
       <PopoverContent className="p-0 w-64" align="start">
-        <Suspense fallback={<Loader className="p-4" />}>
+        <React.Suspense fallback={<Loader className="p-4" />}>
           <GroupInputContent
             values={values}
             onSelect={item => {
@@ -120,7 +120,7 @@ export const GroupInput = ({
               setOpen(false);
             }}
           />
-        </Suspense>
+        </React.Suspense>
       </PopoverContent>
     </Popover>
   );

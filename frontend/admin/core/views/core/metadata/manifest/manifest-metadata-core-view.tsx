@@ -8,14 +8,15 @@ import {
   FormControl,
   FormDescription,
   FormField,
+  FormFieldRender,
   FormItem,
   FormLabel,
-  FormMessage
+  FormWrapper
 } from "@/components/ui/form";
 import { useManifestCoreAdminView } from "./hooks/use-manifest-core-admin-view";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
-import type { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";
+import { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";
 import { Input } from "@/components/ui/input";
 import { ColorInput } from "@/components/color/color-input";
 
@@ -28,51 +29,46 @@ export const ManifestMetadataCoreAdminView = (
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 sm:max-w-2xl"
-      >
+      <FormWrapper onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name="display"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("display.label")}</FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className="flex flex-col space-y-1"
-                >
-                  {["fullscreen", "standalone", "minimal-ui", "browser"].map(
-                    item => (
-                      <FormItem
-                        key={item}
-                        className="flex items-center space-x-3 space-y-0"
-                      >
-                        <FormControl>
-                          <RadioGroupItem value={item} />
-                        </FormControl>
-                        <div>
-                          <FormLabel className="font-normal">
-                            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                            {/* @ts-expect-error */}
-                            {t(`display.${item}.title`)}
-                          </FormLabel>
-                          <FormDescription>
-                            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                            {/* @ts-expect-error */}
-                            {t(`display.${item}.desc`)}
-                          </FormDescription>
-                        </div>
-                      </FormItem>
-                    )
-                  )}
-                </RadioGroup>
-              </FormControl>
-              <FormDescription>{t("display.desc")}</FormDescription>
-              <FormMessage />
-            </FormItem>
+            <FormFieldRender
+              label={t("display.label")}
+              description={t("display.desc")}
+            >
+              <RadioGroup
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                className="flex flex-col space-y-1"
+              >
+                {["fullscreen", "standalone", "minimal-ui", "browser"].map(
+                  item => (
+                    <FormItem
+                      key={item}
+                      className="flex items-center space-x-3 space-y-0"
+                    >
+                      <FormControl>
+                        <RadioGroupItem value={item} />
+                      </FormControl>
+                      <div>
+                        <FormLabel className="font-normal">
+                          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                          {/* @ts-expect-error */}
+                          {t(`display.${item}.title`)}
+                        </FormLabel>
+                        <FormDescription>
+                          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                          {/* @ts-expect-error */}
+                          {t(`display.${item}.desc`)}
+                        </FormDescription>
+                      </div>
+                    </FormItem>
+                  )
+                )}
+              </RadioGroup>
+            </FormFieldRender>
           )}
         />
 
@@ -80,17 +76,17 @@ export const ManifestMetadataCoreAdminView = (
           control={form.control}
           name="start_url"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("start_url.label")}</FormLabel>
+            <FormFieldRender
+              label={t("start_url.label")}
+              description={t("start_url.desc")}
+            >
               <div className="flex gap-1 items-center flex-wrap">
                 <span>{CONFIG.frontend_url}</span>
                 <FormControl>
                   <Input className="w-64" {...field} />
                 </FormControl>
               </div>
-              <FormDescription>{t("start_url.desc")}</FormDescription>
-              <FormMessage />
-            </FormItem>
+            </FormFieldRender>
           )}
         />
 
@@ -98,13 +94,9 @@ export const ManifestMetadataCoreAdminView = (
           control={form.control}
           name="theme_color"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("theme_color.label")}</FormLabel>
-              <FormControl>
-                <ColorInput {...field} disableRemoveColor />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+            <FormFieldRender label={t("theme_color.label")}>
+              <ColorInput {...field} disableRemoveColor />
+            </FormFieldRender>
           )}
         />
 
@@ -112,13 +104,9 @@ export const ManifestMetadataCoreAdminView = (
           control={form.control}
           name="background_color"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("background_color.label")}</FormLabel>
-              <FormControl>
-                <ColorInput {...field} disableRemoveColor />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+            <FormFieldRender label={t("background_color.label")}>
+              <ColorInput {...field} disableRemoveColor />
+            </FormFieldRender>
           )}
         />
 
@@ -129,7 +117,7 @@ export const ManifestMetadataCoreAdminView = (
         >
           {tCore("save")}
         </Button>
-      </form>
+      </FormWrapper>
     </Form>
   );
 };

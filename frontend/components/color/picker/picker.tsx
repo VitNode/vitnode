@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { useRef, useState } from "react";
-import { HslColorPicker, type HslColor } from "react-colorful";
+import * as React from "react";
+import { HslColorPicker, HslColor } from "react-colorful";
 import { RemoveFormatting } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -126,8 +126,10 @@ interface Props {
 
 export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
   const t = useTranslations("core.colors");
-  const [internalColor, setInternalColor] = useState<HslColor | null>(color);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [internalColor, setInternalColor] = React.useState<HslColor | null>(
+    color
+  );
+  const inputRef = React.useRef<HTMLInputElement>(null);
   const colorBrightness = internalColor
     ? isColorBrightness(internalColor)
     : false;
@@ -223,6 +225,10 @@ export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
                     onClick={() => {
                       setColor(null);
                       setInternalColor(null);
+
+                      // Change value of input
+                      if (!inputRef.current) return;
+                      inputRef.current.value = "hsl(0, 0%, 0%)";
                     }}
                   >
                     <RemoveFormatting />

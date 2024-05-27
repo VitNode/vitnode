@@ -1,11 +1,11 @@
-import type { ReactNode } from "react";
+import * as React from "react";
 import { useTranslations } from "next-intl";
 
 import { NavSettings } from "./nav/nav-settings";
 import { HeaderContent } from "@/components/header-content/header-content";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export default function LayoutSettingsView({ children }: Props) {

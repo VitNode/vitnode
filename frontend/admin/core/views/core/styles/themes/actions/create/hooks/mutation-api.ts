@@ -5,8 +5,8 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Themes__Create,
-  type Admin__Core_Themes__CreateMutation,
-  type Admin__Core_Themes__CreateMutationVariables
+  Admin__Core_Themes__CreateMutation,
+  Admin__Core_Themes__CreateMutationVariables
 } from "@/graphql/hooks";
 import { CoreApiTags } from "@/admin/core/api-tags";
 

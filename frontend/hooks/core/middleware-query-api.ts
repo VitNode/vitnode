@@ -3,8 +3,8 @@
 import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Middleware,
-  type Core_MiddlewareQuery,
-  type Core_MiddlewareQueryVariables
+  Core_MiddlewareQuery,
+  Core_MiddlewareQueryVariables
 } from "@/graphql/hooks";
 
 export const middlewareQueryApi = async () => {

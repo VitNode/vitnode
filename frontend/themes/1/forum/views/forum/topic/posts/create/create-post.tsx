@@ -1,11 +1,11 @@
 "use client";
 
-import { Suspense, lazy } from "react";
+import * as React from "react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { EditorSkeleton } from "@/components/editor/editor";
 
-const ContentCreatePost = lazy(async () =>
+const ContentCreatePost = React.lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentCreatePost
   }))
@@ -19,9 +19,9 @@ export const CreatePost = ({ className }: Props) => {
   return (
     <Card className={className}>
       <CardContent className="sm:p-5 p-4">
-        <Suspense fallback={<EditorSkeleton />}>
+        <React.Suspense fallback={<EditorSkeleton />}>
           <ContentCreatePost />
-        </Suspense>
+        </React.Suspense>
       </CardContent>
     </Card>
   );

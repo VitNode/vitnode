@@ -8,8 +8,8 @@ import { useTranslations } from "next-intl";
 import { zodInput } from "@/utils/zod";
 import { useDialog } from "@/components/ui/dialog";
 import { createMutationApi } from "./create-mutation-api";
-import type { ErrorType } from "@/graphql/fetcher";
-import type { ShowAdminNavPluginsObj } from "@/graphql/hooks";
+import { ErrorType } from "@/graphql/fetcher";
+import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
 import { editMutationApi } from "./edit-mutation-api";
 
 interface Props {

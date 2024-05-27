@@ -1,8 +1,8 @@
 "use client";
 
-import type { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import { useTranslations } from "next-intl";
-import { useMemo } from "react";
+import * as React from "react";
 import { ExternalLink } from "lucide-react";
 
 import { CONFIG } from "@/config";
@@ -10,10 +10,7 @@ import { DataTable } from "@/components/data-table/data-table";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
 import { DateFormat } from "@/components/date-format/date-format";
 import { Badge } from "@/components/ui/badge";
-import type {
-  Admin_Core_Themes__ShowQuery,
-  ShowAdminThemes
-} from "@/graphql/hooks";
+import { Admin_Core_Themes__ShowQuery, ShowAdminThemes } from "@/graphql/hooks";
 import { ActionsItemThemesAdmin } from "./actions/actions";
 
 export const TableThemesAdmin = ({
@@ -21,7 +18,7 @@ export const TableThemesAdmin = ({
 }: Admin_Core_Themes__ShowQuery) => {
   const t = useTranslations("core");
 
-  const columns: ColumnDef<ShowAdminThemes>[] = useMemo(
+  const columns: ColumnDef<ShowAdminThemes>[] = React.useMemo(
     () => [
       {
         header: t("table.name"),

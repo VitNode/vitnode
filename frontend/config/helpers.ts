@@ -1,7 +1,7 @@
 import { join } from "path";
 import { promises } from "fs";
 
-import type { ConfigType } from ".";
+import { ConfigType } from ".";
 
 export const configPath = join(process.cwd(), "config", "config.json");
 

@@ -2,8 +2,8 @@
 
 import { fetcher } from "@/graphql/fetcher";
 import {
-  type Admin__Forum_Forums__Change_PositionMutation,
-  type Admin__Forum_Forums__Change_PositionMutationVariables,
+  Admin__Forum_Forums__Change_PositionMutation,
+  Admin__Forum_Forums__Change_PositionMutationVariables,
   Admin__Forum_Forums__Change_Position
 } from "@/graphql/hooks";
 

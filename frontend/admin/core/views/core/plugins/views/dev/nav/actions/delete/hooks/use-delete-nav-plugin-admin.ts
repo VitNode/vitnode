@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { useParams } from "next/navigation";
 
 import { useAlertDialog } from "@/components/ui/alert-dialog";
-import type { ContentDeleteActionTableNavDevPluginAdminProps } from "../content";
+import { ContentDeleteActionTableNavDevPluginAdminProps } from "../content";
 import { mutationApi } from "./mutation-api";
 
 export const useDeleteNavPluginAdmin = ({

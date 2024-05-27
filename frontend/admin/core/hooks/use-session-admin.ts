@@ -1,6 +1,6 @@
-import { createContext, useContext } from "react";
+import * as React from "react";
 
-import type {
+import {
   AuthorizationCurrentUserObj,
   NavAdminPluginsAuthorization
 } from "@/graphql/hooks";
@@ -11,10 +11,10 @@ interface Args {
   version: string;
 }
 
-export const SessionAdminContext = createContext<Args>({
+export const SessionAdminContext = React.createContext<Args>({
   session: undefined,
   version: "",
   nav: []
 });
 
-export const useSessionAdmin = () => useContext(SessionAdminContext);
+export const useSessionAdmin = () => React.useContext(SessionAdminContext);

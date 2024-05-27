@@ -1,6 +1,6 @@
 import {
   LanguageSelectFooterEditor,
-  type LanguageSelectFooterEditorProps
+  LanguageSelectFooterEditorProps
 } from "./language-select";
 import { FilesButtonFooterEditor } from "./files/button";
 import { ListFilesFooterEditor } from "./files/list";

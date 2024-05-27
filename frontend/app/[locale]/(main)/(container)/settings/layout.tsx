@@ -1,12 +1,12 @@
-import { lazy, type LazyExoticComponent, type ReactNode } from "react";
-import type { Metadata } from "next";
+import * as React from "react";
+import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { getSessionData } from "@/functions/get-session-data";
 import { getConfigFile } from "@/config/helpers";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -24,9 +24,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Layout({ children }: Props) {
   const { theme_id } = await getSessionData();
-  const LayoutFromLazy: LazyExoticComponent<
-    ({ children }: { children: ReactNode }) => JSX.Element
-  > = lazy(async () =>
+  const LayoutFromLazy: React.LazyExoticComponent<
+    ({ children }: { children: React.ReactNode }) => JSX.Element
+  > = React.lazy(async () =>
     import(
       `@/themes/${theme_id}/core/views/settings/layout-settings-view`
     ).catch(

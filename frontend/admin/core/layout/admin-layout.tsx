@@ -1,10 +1,10 @@
-import type { ReactNode } from "react";
+import * as React from "react";
 
 import { NavAdmin } from "./nav/nav-admin";
 import { HeaderAdmin } from "./header/header-admin";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export const AdminLayout = ({ children }: Props) => {
@@ -12,8 +12,8 @@ export const AdminLayout = ({ children }: Props) => {
     <>
       <HeaderAdmin />
       <NavAdmin />
-      <main className="sm:ml-64 mt-16 p-5 sm:pl-2 text-card-foreground">
-        {children}
+      <main className="md:ml-64 mt-16 p-5 sm:pl-2 text-card-foreground">
+        <div className="container">{children}</div>
       </main>
     </>
   );
