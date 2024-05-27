@@ -98,24 +98,9 @@
       "total_count": "Łącznie pozycji: {count}"
     },
     "editor": {
-      "bold": "Pogrubienie",
-      "italic": "Kursywa",
-      "underline": "Podkreślenie",
-      "strike": "Przekreślenie",
-      "text_align_left": "Wyrównaj do lewej",
-      "text_align_center": "Wyrównaj do środka",
-      "text_align_right": "Wyrównaj do prawej",
-      "text_align_justify": "Wyjustuj",
-      "block_quote": "Cytat",
-      "bullet_list": "Lista punktowana",
-      "ordered_list": "Lista numerowana",
-      "undo": "Cofnij",
-      "redo": "Ponów",
+      "extra_tools": "Dodatkowe narzędzia",
+      "text_align": "Wyrównanie tekstu",
       "horizontal_rule": "Linia pozioma",
-      "code_block": {
-        "title": "Blok kodu",
-        "auto": "Automatyczny"
-      },
       "link": {
         "title": "Link",
         "text": "Tekst",
@@ -130,7 +115,11 @@
         "h4": "Nagłówek H4",
         "h5": "Nagłówek H5",
         "h6": "Nagłówek H6",
-        "paragraph": "Paragraf"
+        "paragraph": "Paragraf",
+        "code_block": {
+          "title": "Blok kodu",
+          "auto": "Automatyczny"
+        }
       },
       "color_text": "Kolor tekstu",
       "change_language": "Zmień język",

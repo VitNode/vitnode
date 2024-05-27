@@ -2,7 +2,6 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Editor } from "@tiptap/react";
 
 import {
   Form,
@@ -13,14 +12,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useEditorState } from "@/components/editor/hooks/use-editor-state";
 
 interface Props {
-  editor: Editor;
   setOpen: (open: boolean) => void;
 }
 
-export const ContentLinkToolbarEditor = ({ editor, setOpen }: Props) => {
+export const ContentLinkToolbarEditor = ({ setOpen }: Props) => {
   const t = useTranslations("core.editor.link");
+  const { editor } = useEditorState();
   const tCore = useTranslations("core");
   const formSchema = z.object({
     text: z.string().min(1, { message: tCore("errors.required") }),

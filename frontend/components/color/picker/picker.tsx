@@ -225,6 +225,10 @@ export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
                     onClick={() => {
                       setColor(null);
                       setInternalColor(null);
+
+                      // Change value of input
+                      if (!inputRef.current) return;
+                      inputRef.current.value = "hsl(0, 0%, 0%)";
                     }}
                   >
                     <RemoveFormatting />

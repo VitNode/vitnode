@@ -1,6 +1,5 @@
-import { Editor } from "@tiptap/react";
 import * as React from "react";
-import { SmileIcon } from "lucide-react";
+import { ChevronDownIcon, SmileIcon } from "lucide-react";
 
 import {
   Popover,
@@ -8,6 +7,7 @@ import {
   PopoverTrigger
 } from "@/components/ui/popover";
 import { Loader } from "@/components/loader";
+import { useEditorState } from "@/components/editor/hooks/use-editor-state";
 
 import { ButtonToolbarEditor } from "../../button";
 
@@ -17,16 +17,19 @@ const Content = React.lazy(async () =>
   }))
 );
 
-interface Props {
-  editor: Editor;
-}
+export const EmojiToolbarEditor = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const { editor } = useEditorState();
 
-export const EmojiToolbarEditor = ({ editor }: Props) => {
   return (
-    <Popover modal>
+    <Popover modal open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
-        <ButtonToolbarEditor name="emoji.title">
+        <ButtonToolbarEditor
+          name="emoji.title"
+          className="w-14 p-0 justify-center gap-1 [&>svg:not(:last-child)]:size-5 [&>svg:last-child]:size-4"
+        >
           <SmileIcon />
+          <ChevronDownIcon className="opacity-50" />
         </ButtonToolbarEditor>
       </PopoverTrigger>
 
@@ -35,7 +38,7 @@ export const EmojiToolbarEditor = ({ editor }: Props) => {
         onCloseAutoFocus={() => editor.commands.focus()}
       >
         <React.Suspense fallback={<Loader className="p-2" />}>
-          <Content editor={editor} />
+          <Content setIsOpen={setIsOpen} />
         </React.Suspense>
       </PopoverContent>
     </Popover>

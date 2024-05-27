@@ -42,7 +42,7 @@ export const CodeBlockComponent = ({
 }) => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(defaultLanguage);
-  const t = useTranslations("core.editor.code_block");
+  const t = useTranslations("core.editor.heading.code_block");
   const tCore = useTranslations("core");
 
   return (

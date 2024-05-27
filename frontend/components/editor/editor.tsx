@@ -142,9 +142,9 @@ export const Editor = ({
         className={cn("border border-input rounded-md shadow-sm", className)}
       >
         <div className="relative">
-          <ToolBarEditor editor={editor} />
+          <ToolBarEditor />
           <EditorContent
-            className="break-words [&_.ProseMirror-selectednode]:outline-none [&_.ProseMirror-selectednode]:ring-1 [&_.ProseMirror-selectednode]:ring-ring [&_.ProseMirror-selectednode]:w-fit [&_.node-files]:inline-flex"
+            className="break-words [&_.ProseMirror-selectednode]:outline-none [&_.ProseMirror-selectednode]:ring-offset-2 [&_.ProseMirror-selectednode]:ring-4 [&_.ProseMirror-selectednode]:ring-ring [&_.ProseMirror-selectednode]:w-fit [&_.node-files]:inline-flex"
             editor={editor}
           />
         </div>

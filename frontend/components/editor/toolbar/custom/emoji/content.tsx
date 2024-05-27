@@ -1,4 +1,3 @@
-import { Editor } from "@tiptap/react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
 
@@ -6,13 +5,15 @@ import { CONFIG } from "@/config";
 import { EmojisContentIconInput } from "@/components/icon/input/content/emojis/emojis";
 import { SkinSelectEmojisContentIconInput } from "@/components/icon/input/content/emojis/skin-select";
 import { Input } from "@/components/ui/input";
+import { useEditorState } from "@/components/editor/hooks/use-editor-state";
 
 interface Props {
-  editor: Editor;
+  setIsOpen?: (open: boolean) => void;
 }
 
-export const ContentEmojiToolbarEditor = ({ editor }: Props) => {
+export const ContentEmojiToolbarEditor = ({ setIsOpen }: Props) => {
   const t = useTranslations("core.icon_picker");
+  const { editor } = useEditorState();
   const [search, setSearch] = React.useState("");
   const localStorageSkinToneIndex = localStorage.getItem(
     CONFIG.local_storage.editor_skin_tone
@@ -44,6 +45,7 @@ export const ContentEmojiToolbarEditor = ({ editor }: Props) => {
           search={search}
           onChange={emoji => {
             editor.commands.insertContent(emoji);
+            setIsOpen?.(false);
           }}
           skinToneIndex={skinToneIndex}
           classNameHeaders="top-[4rem]"
