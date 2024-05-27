@@ -25,7 +25,7 @@ export const ListNavAdmin = ({ onClickItem }: Props) => {
           },
           {
             id: "settings",
-            href: "settings",
+            href: "settings/main",
             icon: "Settings"
           },
           {
@@ -35,12 +35,12 @@ export const ListNavAdmin = ({ onClickItem }: Props) => {
           },
           {
             id: "styles",
-            href: "styles",
+            href: "styles/themes",
             icon: "Paintbrush"
           },
           {
             id: "metadata",
-            href: "metadata",
+            href: "metadata/manifest",
             icon: "Tag"
           },
           {
@@ -50,7 +50,7 @@ export const ListNavAdmin = ({ onClickItem }: Props) => {
           },
           {
             id: "advanced",
-            href: "advanced",
+            href: "advanced/files",
             icon: "Cog"
           }
         ]}
@@ -71,7 +71,7 @@ export const ListNavAdmin = ({ onClickItem }: Props) => {
           },
           {
             id: "staff",
-            href: "staff",
+            href: "staff/moderators",
             icon: "UserCog"
           }
         ]}

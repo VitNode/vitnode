@@ -12,8 +12,8 @@ export const AdminLayout = ({ children }: Props) => {
     <>
       <HeaderAdmin />
       <NavAdmin />
-      <main className="sm:ml-64 mt-16 p-5 sm:pl-2 text-card-foreground">
-        {children}
+      <main className="md:ml-64 mt-16 p-5 sm:pl-2 text-card-foreground">
+        <div className="container">{children}</div>
       </main>
     </>
   );

@@ -44,7 +44,7 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
           {CONFIG.node_development && (
             <>
               <DropdownMenuItem
-                onClick={() => push(`${pathname}/${props.code}/dev`)}
+                onClick={() => push(`${pathname}/${props.code}/dev/overview`)}
               >
                 <CodeXml /> {t("dev_tools")}
               </DropdownMenuItem>

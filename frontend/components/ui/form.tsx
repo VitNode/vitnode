@@ -201,6 +201,47 @@ const FormMessage = ({
   );
 };
 
+const FormWrapper = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLFormElement>) => {
+  return (
+    <form
+      className={cn("space-y-6 @container flex flex-col items-end", className)}
+      {...props}
+    />
+  );
+};
+
+const FormFieldRender = ({
+  children,
+  label,
+  optional,
+  description
+}: {
+  children: React.ReactNode;
+  label: string;
+  description?: string;
+  optional?: boolean;
+}) => {
+  const t = useTranslations("core");
+
+  return (
+    <FormItem className="flex @xs:gap-6 flex-col @xs:flex-row w-full">
+      <div className="@4xl:w-[26rem] @3xl:w-[24rem] @xl:w-[18rem] @xs:flex-shrink-0 @sm:w-[10rem] @xs:w-[8rem] @xs:text-right w-full flex flex-col gap-1 @xs:mt-3">
+        <FormLabel>{label}</FormLabel>
+        {optional && (
+          <span className="text-muted-foreground text-xs">{t("optional")}</span>
+        )}
+        {description && <FormDescription>{description}</FormDescription>}
+      </div>
+
+      <FormControl>{children}</FormControl>
+      <FormMessage />
+    </FormItem>
+  );
+};
+
 export {
   useFormField,
   Form,
@@ -209,5 +250,7 @@ export {
   FormControl,
   FormDescription,
   FormMessage,
-  FormField
+  FormField,
+  FormWrapper,
+  FormFieldRender
 };

@@ -13,6 +13,10 @@ import {
   usePaginationAPISsr,
   SearchParamsPagination
 } from "@/hooks/core/utils/use-pagination-api-ssr";
+import { HeaderContent } from "@/components/header-content/header-content";
+import { ActionsLangsAdmin } from "@/admin/core/views/core/langs/actions/actions";
+import { Card } from "@/components/ui/card";
+import { RebuildRequiredAdmin } from "@/admin/core/global/rebuild-required";
 
 const getData = async (variables: Core_Languages__ShowQueryVariables) => {
   const { data } = await fetcher<
@@ -48,7 +52,21 @@ export default async function Page({ searchParams }: Props) {
     sortByEnum: ShowCoreLanguagesSortingColumnEnum
   });
 
-  const data = await getData(variables);
+  const [t, data] = await Promise.all([
+    getTranslations("admin.core.langs"),
+    getData(variables)
+  ]);
 
-  return <LangsCoreAdminView data={data} />;
+  return (
+    <>
+      <HeaderContent h1={t("title")}>
+        <ActionsLangsAdmin />
+      </HeaderContent>
+
+      <Card className="p-6">
+        <RebuildRequiredAdmin />
+        <LangsCoreAdminView data={data} />
+      </Card>
+    </>
+  );
 }

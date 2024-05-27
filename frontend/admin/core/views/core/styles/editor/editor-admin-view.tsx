@@ -1,17 +1,67 @@
-import { getTranslations } from "next-intl/server";
+"use client";
 
-import { ContentEditorAdmin } from "./content";
-import { HeaderContent } from "@/components/header-content/header-content";
-import { getConfigFile } from "@/config/helpers";
+import { useTranslations } from "next-intl";
 
-export const EditorAdminView = async () => {
-  const data = await getConfigFile();
-  const t = await getTranslations("admin.core.styles.editor");
+import { Card } from "@/components/ui/card";
+import {
+  Form,
+  FormField,
+  FormFieldRender,
+  FormWrapper
+} from "@/components/ui/form";
+import { useEditorAdmin, EditorAdminArgs } from "./hooks/use-editor-admin";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { FilesSectionContentEditorAdmin } from "./sections/files";
+
+export const EditorAdminView = ({ data }: EditorAdminArgs) => {
+  const t = useTranslations("admin.core.styles.editor");
+  const tCore = useTranslations("core");
+  const { form, onSubmit } = useEditorAdmin({ data });
 
   return (
-    <>
-      <HeaderContent h1={t("title")} />
-      <ContentEditorAdmin data={data} />
-    </>
+    <Card className="p-6">
+      <Form {...form}>
+        <FormWrapper onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            control={form.control}
+            name="sticky"
+            render={({ field }) => (
+              <FormFieldRender
+                label={t("sticky.label")}
+                description={t("sticky.desc")}
+              >
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormFieldRender>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="allow_head_h1"
+            render={({ field }) => (
+              <FormFieldRender
+                label={t("allow_head_h1.label")}
+                description={t("allow_head_h1.desc")}
+              >
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormFieldRender>
+            )}
+          />
+
+          <FilesSectionContentEditorAdmin />
+
+          <Button type="submit" loading={form.formState.isSubmitting}>
+            {tCore("save")}
+          </Button>
+        </FormWrapper>
+      </Form>
+    </Card>
   );
 };

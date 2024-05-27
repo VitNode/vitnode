@@ -53,7 +53,7 @@ export const UserBarAdmin = () => {
           </div>
         </SheetHeader>
 
-        <div className="sm:hidden block">
+        <div className="md:hidden block">
           <div className="p-2">
             <ListNavAdmin onClickItem={() => setOpen(false)} />
           </div>

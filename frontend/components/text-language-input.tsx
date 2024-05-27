@@ -42,9 +42,9 @@ export const TextLanguageInput = ({
     "";
 
   return (
-    <div className={cn("flex gap-2", className)}>
+    <div className={cn("flex gap-2 flex-col w-full", className)}>
       <Input
-        className="flex-grow max-h-full"
+        className="w-full"
         type="text"
         onChange={e => {
           const value = e.target.value;
@@ -74,7 +74,7 @@ export const TextLanguageInput = ({
       {languages.length > 1 && (
         <Select onValueChange={setSelectedLanguage} value={selectedLanguage}>
           <FormControl>
-            <SelectTrigger className="basis-64 max-h-full">
+            <SelectTrigger className="w-40">
               <SelectValue />
             </SelectTrigger>
           </FormControl>
