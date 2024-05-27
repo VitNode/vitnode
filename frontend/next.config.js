@@ -18,6 +18,8 @@ const config = () => {
   };
 
   return {
+    // TODO: Remove this when the framer-motion issue is fixed for React 19
+    reactStrictMode: false,
     // logging: {
     //   fetches: {
     //     fullUrl: true
