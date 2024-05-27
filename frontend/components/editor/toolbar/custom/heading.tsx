@@ -15,10 +15,8 @@ import {
   Select,
   SelectContent,
   SelectItem,
-  SelectTrigger,
-  SelectValue
+  SelectTrigger
 } from "@/components/ui/select";
-import { useGlobals } from "@/hooks/core/use-globals";
 
 interface Props {
   editor: Editor;
@@ -26,6 +24,8 @@ interface Props {
 
 const getHeadingIcon = (level: number) => {
   switch (level) {
+    case 0:
+      return <Pilcrow />;
     case 1:
       return <Heading1 />;
     case 2:
@@ -43,8 +43,6 @@ const getHeadingIcon = (level: number) => {
 
 export const HeadingToolbarEditor = ({ editor }: Props) => {
   const t = useTranslations("core.editor.heading");
-  const { config } = useGlobals();
-  const allowH1 = config.editor.allow_head_h1;
 
   const value = React.useMemo(() => {
     const findActiveHeading = [...Array(6).keys()].find(i =>
@@ -80,22 +78,19 @@ export const HeadingToolbarEditor = ({ editor }: Props) => {
         editor.chain().setHeading({ level }).run();
       }}
     >
-      <SelectTrigger className="w-[180px] shadow-none border-0 hover:bg-muted h-9">
-        <SelectValue />
+      <SelectTrigger className="w-[4.5rem] shadow-none border-0 hover:bg-muted h-9">
+        {getHeadingIcon(
+          value === "paragraph" ? 0 : Number(value.replace("h", ""))
+        )}
       </SelectTrigger>
       <SelectContent onCloseAutoFocus={() => editor.commands.focus()}>
-        <SelectItem value="paragraph">
-          <span className="flex gap-1 [&>svg]:size-5 flex-wrap">
-            <Pilcrow /> {t("paragraph")}
-          </span>
-        </SelectItem>
-        {[...Array(allowH1 ? 6 : 5).keys()].map(i => (
-          <SelectItem key={i} value={`h${i + (allowH1 ? 1 : 2)}`}>
+        {[...Array(7).keys()].map(i => (
+          <SelectItem key={i} value={i === 0 ? "paragraph" : `h${i}`}>
             <span className="flex gap-1 [&>svg]:size-5 flex-wrap">
-              {getHeadingIcon(i + (allowH1 ? 1 : 2))}
+              {getHeadingIcon(i)}
               {/* eslint-disable-next-line react/jsx-no-comment-textnodes, @typescript-eslint/ban-ts-comment */}
               {/* @ts-expect-error */}
-              {t(`h${i + (allowH1 ? 1 : 2)}`)}
+              {t(i === 0 ? "paragraph" : `h${i}`)}
             </span>
           </SelectItem>
         ))}

@@ -15,7 +15,6 @@ export const useEditorAdmin = ({ data }: EditorAdminArgs) => {
   const t = useTranslations("core");
   const formSchema = z.object({
     sticky: z.boolean(),
-    allow_head_h1: z.boolean(),
     files: z.object({
       allow_type: z.enum(["all", "images_videos", "images", "none"])
     })
@@ -25,7 +24,6 @@ export const useEditorAdmin = ({ data }: EditorAdminArgs) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       sticky: data.editor.sticky,
-      allow_head_h1: data.editor.allow_head_h1,
       files: data.editor.files
     }
   });

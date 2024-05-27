@@ -73,7 +73,7 @@ export const EmojisContentIconInput = ({
                 <Button
                   key={`search_${id}`}
                   size="icon"
-                  className="text-2xl"
+                  className="text-2xl size-9"
                   ariaLabel={emoji.name}
                   variant={value === icon ? "default" : "ghost"}
                   onClick={() => {
@@ -125,7 +125,7 @@ export const EmojisContentIconInput = ({
                 <Button
                   key={`${id}_${category.id}`}
                   size="icon"
-                  className="text-2xl"
+                  className="text-2xl size-9"
                   ariaLabel={emoji.name}
                   variant={value === icon ? "default" : "ghost"}
                   onClick={() => {

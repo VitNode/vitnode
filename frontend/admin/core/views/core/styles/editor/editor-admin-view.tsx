@@ -39,22 +39,6 @@ export const EditorAdminView = ({ data }: EditorAdminArgs) => {
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="allow_head_h1"
-            render={({ field }) => (
-              <FormFieldRender
-                label={t("allow_head_h1.label")}
-                description={t("allow_head_h1.desc")}
-              >
-                <Switch
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-              </FormFieldRender>
-            )}
-          />
-
           <FilesSectionContentEditorAdmin />
 
           <Button type="submit" loading={form.formState.isSubmitting}>

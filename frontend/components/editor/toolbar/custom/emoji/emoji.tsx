@@ -23,7 +23,7 @@ interface Props {
 
 export const EmojiToolbarEditor = ({ editor }: Props) => {
   return (
-    <Popover>
+    <Popover modal>
       <PopoverTrigger asChild>
         <ButtonToolbarEditor name="emoji.title">
           <SmileIcon />

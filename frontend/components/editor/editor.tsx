@@ -52,7 +52,7 @@ export const Editor = ({
     allowUploadFiles
   });
   const locale = useLocale();
-  const { config, defaultLanguage } = useGlobals();
+  const { defaultLanguage } = useGlobals();
   const [selectedLanguage, setSelectedLanguage] = React.useState(
     locale ?? defaultLanguage
   );
@@ -60,7 +60,6 @@ export const Editor = ({
     autofocus: autoFocus,
     extensions: [
       ...extensionsEditor({
-        allowH1: config.editor.allow_head_h1,
         uploadFiles
       }),
       EmojiExtensionEditor

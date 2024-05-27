@@ -47,10 +47,7 @@ export const ReadOnlyEditor = async ({
 
   const getText = (): string => {
     try {
-      return generateHTML(
-        JSON.parse(currentValue()),
-        extensionsEditor({ allowH1: true })
-      );
+      return generateHTML(JSON.parse(currentValue()), extensionsEditor({}));
     } catch (e) {
       return currentValue();
     }
