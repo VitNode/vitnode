@@ -16,7 +16,7 @@
 
   :root {
     --background: 220 40% 98%;
-    --foreground: 213deg 26% 7%;
+    --foreground: 213deg 5% 8%;
     --card: 220 40% 100%;
     --card-foreground: 213deg 26% 7%;
     --popover: var(--card);

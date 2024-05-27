@@ -18,7 +18,7 @@ export const HeaderAdmin = () => {
         />
       )}
 
-      <div className="sm:w-64 pl-5 flex items-center justify-center h-full">
+      <div className="sm:w-64 pl-5 flex items-center h-full">
         <Link href="/admin/core/dashboard">
           <LogoVitNode className="h-8 sm:block hidden" />
           <LogoVitNode className="h-8 sm:hidden" shrink />

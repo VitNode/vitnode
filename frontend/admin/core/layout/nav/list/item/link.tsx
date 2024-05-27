@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Menu } from "lucide-react";
+import { motion } from "framer-motion";
 
 import { cn } from "@/functions/classnames";
 import { buttonVariants } from "@/components/ui/button";
@@ -36,9 +37,10 @@ export const LinkItemListNavAdmin = ({
         href={href}
         className={cn(
           buttonVariants({ variant: "ghost", size: "sm" }),
-          "w-full justify-start relative pl-4 hover:bg-accent font-normal text-foreground [&>svg]:size-4 [&>svg]:flex-shrink-0 [&>svg]:flex [&>svg]:items-center [&>svg]:justify-center [&>svg]:text-muted-foreground",
+          "w-full justify-start relative pl-4 font-normal hover:bg-primary/10 text-foreground [&>svg]:size-4 [&>svg]:flex-shrink-0 [&>svg]:flex [&>svg]:items-center [&>svg]:justify-center [&>svg]:text-muted-foreground h-8",
           {
-            "font-bold": active
+            "bg-primary/10 font-semibold text-primary [&>svg]:text-primary":
+              active
           }
         )}
         onClick={onClick}
@@ -48,7 +50,10 @@ export const LinkItemListNavAdmin = ({
         {/* @ts-expect-error */}
         <span>{t(id)}</span>
         {active && (
-          <div className="absolute top-1/2 left-1 w-1 h-[calc(100%_-_0.5rem)] bg-primary rounded-md -translate-y-1/2" />
+          <motion.div
+            className="absolute left-1 w-1 h-[calc(100%_-_1rem)] bg-primary rounded-md"
+            layoutId="admin_nav_underline"
+          />
         )}
       </Link>
     </li>
