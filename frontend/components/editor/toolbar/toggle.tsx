@@ -35,6 +35,7 @@ export const ToggleToolbarEditor = ({
               pressed={pressed}
               onPressedChange={onPressedChange}
               disabled={disabled}
+              size="sm"
             >
               {children}
             </Toggle>

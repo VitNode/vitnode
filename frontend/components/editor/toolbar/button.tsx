@@ -23,7 +23,8 @@ export const ButtonToolbarEditor = ({
   children,
   disabled,
   name,
-  onClick
+  onClick,
+  ...rest
 }: Props) => {
   const t = useTranslations("core.editor");
 
@@ -33,7 +34,7 @@ export const ButtonToolbarEditor = ({
         <TooltipTrigger asChild>
           <Button
             variant="ghost"
-            className={cn("shadow-none", {
+            className={cn("shadow-none size-9", {
               "bg-accent": active
             })}
             size="icon"
@@ -42,6 +43,7 @@ export const ButtonToolbarEditor = ({
             // @ts-expect-error
             ariaLabel={t(name)}
             disabled={disabled}
+            {...rest}
           >
             {children}
           </Button>

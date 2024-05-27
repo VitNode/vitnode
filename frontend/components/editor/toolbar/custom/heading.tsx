@@ -80,7 +80,7 @@ export const HeadingToolbarEditor = ({ editor }: Props) => {
         editor.chain().setHeading({ level }).run();
       }}
     >
-      <SelectTrigger className="w-[180px] shadow-none border-0 hover:bg-muted">
+      <SelectTrigger className="w-[180px] shadow-none border-0 hover:bg-muted h-9">
         <SelectValue />
       </SelectTrigger>
       <SelectContent onCloseAutoFocus={() => editor.commands.focus()}>
