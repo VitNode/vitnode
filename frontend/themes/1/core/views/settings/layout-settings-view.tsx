@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 
 import { NavSettings } from "./nav/nav-settings";
 import { HeaderContent } from "@/components/header-content/header-content";
+import { Card } from "@/components/ui/card";
 
 interface Props {
   children: React.ReactNode;
@@ -19,9 +20,9 @@ export default function LayoutSettingsView({ children }: Props) {
         desc={t("settings.desc")}
       />
 
-      <div className="lg:gap-8 flex flex-col lg:flex-row gap-4">
+      <div className="lg:gap-8 flex flex-col lg:flex-row gap-4 items-start">
         <NavSettings />
-        <main className="flex-grow">{children}</main>
+        <Card className="flex-grow">{children}</Card>
       </div>
     </>
   );

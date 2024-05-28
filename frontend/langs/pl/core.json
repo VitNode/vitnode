@@ -321,6 +321,10 @@
           "count_uses": "Liczba użyć",
           "user": "Użytkownik"
         }
+      },
+      "devices": {
+        "title": "Urządzenia",
+        "desc": "Zarządzaj urządzeniami, na których jesteś zalogowany."
       }
     },
     "errors": {

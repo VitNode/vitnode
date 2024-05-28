@@ -321,6 +321,10 @@
           "count_uses": "Count Uses",
           "user": "User"
         }
+      },
+      "devices": {
+        "title": "Devices",
+        "desc": "Manage your devices where you are logged in."
       }
     },
     "errors": {

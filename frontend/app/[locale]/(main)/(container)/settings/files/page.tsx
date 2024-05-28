@@ -36,8 +36,10 @@ export default async function Page({ searchParams }: Props) {
     search: true,
     sortByEnum: ShowCoreFilesSortingColumnEnum
   });
-  const { theme_id } = await getSessionData();
-  const data = await getData(variables);
+  const [{ theme_id }, data] = await Promise.all([
+    getSessionData(),
+    getData(variables)
+  ]);
 
   const PageFromTheme: React.LazyExoticComponent<
     (props: Core_Members__Files__ShowQuery) => JSX.Element

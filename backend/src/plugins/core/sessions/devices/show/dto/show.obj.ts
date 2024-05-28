@@ -1,24 +1,7 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
 
-import { PageInfo } from "@/utils/types/database/pagination.type";
-
 @ObjectType()
 export class ShowCoreSessionDevicesObj {
-  @Field(() => [ShowCoreSessionDevices])
-  edges: ShowCoreSessionDevices[];
-
-  @Field(() => PageInfo)
-  pageInfo: PageInfo;
-}
-
-@ObjectType()
-export class ShowCoreSessionDevices {
-  @Field(() => Int)
-  user_id: number;
-
-  @Field(() => String)
-  login_token: string;
-
   @Field(() => Date)
   last_seen: Date;
 
@@ -26,5 +9,20 @@ export class ShowCoreSessionDevices {
   expires: Date;
 
   @Field(() => Int)
-  device_id: number;
+  id: number;
+
+  @Field(() => String)
+  uagent_browser: string;
+
+  @Field(() => String)
+  uagent_version: string;
+
+  @Field(() => String)
+  uagent_os: string;
+
+  @Field(() => String)
+  uagent_device_vendor: string;
+
+  @Field(() => String)
+  uagent_device_model: string;
 }

@@ -1,4 +1,4 @@
-import { Bell, Cog, Files, LucideIcon } from "lucide-react";
+import { Bell, Cog, Files, LucideIcon, MonitorSmartphone } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
 
@@ -32,6 +32,11 @@ export const useSettingsView = (): ReturnValues => {
         href: "/settings/files",
         icon: Files,
         text: t("files.title")
+      },
+      {
+        href: "/settings/devices",
+        icon: MonitorSmartphone,
+        text: t("devices.title")
       },
       {
         href: "/settings/notifications",
