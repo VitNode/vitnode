@@ -728,7 +728,9 @@ type ShowCorePluginsObj {
 type ShowCoreSessionDevicesObj {
   expires: DateTime!
   id: Int!
+  ip_address: String!
   last_seen: DateTime!
+  login_token: String!
   uagent_browser: String!
   uagent_device_model: String!
   uagent_device_vendor: String!

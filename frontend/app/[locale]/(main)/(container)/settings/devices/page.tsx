@@ -1,21 +1,47 @@
 import * as React from "react";
+import { cookies } from "next/headers";
 
 import { getSessionData } from "@/functions/get-session-data";
+import { fetcher } from "@/graphql/fetcher";
+import {
+  Core_Sessions__Devices__Show,
+  Core_Sessions__Devices__ShowQuery,
+  Core_Sessions__Devices__ShowQueryVariables
+} from "@/graphql/hooks";
+import { DevicesSettingsViewProps } from "@/themes/1/core/views/settings/views/devices/devices-settings-view";
+
+const getData = async () => {
+  const { data } = await fetcher<
+    Core_Sessions__Devices__ShowQuery,
+    Core_Sessions__Devices__ShowQueryVariables
+  >({
+    query: Core_Sessions__Devices__Show
+  });
+
+  return data;
+};
 
 export default async function Page() {
-  const [{ theme_id }] = await Promise.all([getSessionData()]);
+  const [{ theme_id }, data] = await Promise.all([getSessionData(), getData()]);
+  const cookieStore = cookies();
+  const loginToken = cookieStore.get("vitnode-login-token")?.value;
 
-  const PageFromTheme: React.LazyExoticComponent<() => JSX.Element> =
-    React.lazy(async () =>
-      import(
-        `@/themes/${theme_id}/core/views/settings/views/devices/devices-settings-view`
-      ).catch(
-        async () =>
-          import(
-            "@/themes/1/core/views/settings/views/devices/devices-settings-view"
-          )
-      )
-    );
+  if (!loginToken) {
+    return null;
+  }
 
-  return <PageFromTheme />;
+  const PageFromTheme: React.LazyExoticComponent<
+    (props: DevicesSettingsViewProps) => JSX.Element
+  > = React.lazy(async () =>
+    import(
+      `@/themes/${theme_id}/core/views/settings/views/devices/devices-settings-view`
+    ).catch(
+      async () =>
+        import(
+          "@/themes/1/core/views/settings/views/devices/devices-settings-view"
+        )
+    )
+  );
+
+  return <PageFromTheme {...data} loginToken={loginToken} />;
 }

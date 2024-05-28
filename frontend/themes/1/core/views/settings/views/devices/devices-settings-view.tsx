@@ -1,8 +1,15 @@
 import { useTranslations } from "next-intl";
 
 import { CardContent, CardDescription, CardHeader } from "@/components/ui/card";
+import { Core_Sessions__Devices__ShowQuery } from "@/graphql/hooks";
+import { ContentDevicesSettings } from "./content";
 
-export default function DevicesSettingsView() {
+export interface DevicesSettingsViewProps
+  extends Core_Sessions__Devices__ShowQuery {
+  loginToken: string;
+}
+
+export default function DevicesSettingsView(props: DevicesSettingsViewProps) {
   const t = useTranslations("core.settings.devices");
 
   return (
@@ -14,7 +21,9 @@ export default function DevicesSettingsView() {
         <CardDescription>{t("desc")}</CardDescription>
       </CardHeader>
 
-      <CardContent>DevicesSettingsView</CardContent>
+      <CardContent>
+        <ContentDevicesSettings {...props} />
+      </CardContent>
     </>
   );
 }

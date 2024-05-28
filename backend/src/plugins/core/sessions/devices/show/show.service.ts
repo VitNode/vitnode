@@ -24,14 +24,9 @@ export class ShowCoreSessionDevicesService {
         (a, b) => b.device.last_seen.getTime() - a.device.last_seen.getTime()
       )
       .map(item => ({
-        id: item.device.id,
-        last_seen: item.device.last_seen,
+        ...item.device,
         expires: item.expires,
-        uagent_browser: item.device.uagent_browser,
-        uagent_version: item.device.uagent_version,
-        uagent_os: item.device.uagent_os,
-        uagent_device_vendor: item.device.uagent_device_vendor,
-        uagent_device_model: item.device.uagent_device_model
+        login_token: item.login_token
       }));
   }
 }

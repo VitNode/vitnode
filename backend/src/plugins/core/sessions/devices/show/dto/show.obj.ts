@@ -25,4 +25,10 @@ export class ShowCoreSessionDevicesObj {
 
   @Field(() => String)
   uagent_device_model: string;
+
+  @Field(() => String)
+  login_token: string;
+
+  @Field(() => String)
+  ip_address: string;
 }
