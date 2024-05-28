@@ -4,6 +4,8 @@ import * as React from "react";
 
 import { getConfigFile } from "@/config/helpers";
 
+import "./_supressLogs";
+
 export async function generateMetadata(): Promise<Metadata> {
   const config = await getConfigFile();
   const defaultTitle = config.settings.general.site_name;

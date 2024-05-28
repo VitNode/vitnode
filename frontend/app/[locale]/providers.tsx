@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import * as React from "react";
+import "../_supressLogs";
 
 import { Toaster } from "@/components/ui/sonner";
 import { GlobalsContext } from "@/hooks/core/use-globals";
