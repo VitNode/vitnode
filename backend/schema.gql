@@ -366,6 +366,7 @@ type Query {
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
   core_plugins__show: [ShowCorePluginsObj!]!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
+  core_sessions__devices__show: [ShowCoreSessionDevicesObj!]!
   core_settings__show: ShowSettingsObj!
   core_theme_editor__show: ShowCoreThemeEditorObj!
   core_themes__show(cursor: Int, first: Int, last: Int): ShowCoreThemesObj!
@@ -724,12 +725,17 @@ type ShowCorePluginsObj {
   code: String!
 }
 
-type ShowCoreSessionDevices {
-  device_id: Int!
+type ShowCoreSessionDevicesObj {
   expires: DateTime!
+  id: Int!
+  ip_address: String!
   last_seen: DateTime!
   login_token: String!
-  user_id: Int!
+  uagent_browser: String!
+  uagent_device_model: String!
+  uagent_device_vendor: String!
+  uagent_os: String!
+  uagent_version: String!
 }
 
 type ShowCoreThemeEditorObj {

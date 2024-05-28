@@ -19,9 +19,9 @@ import { DevicesCoreSessionsModule } from "./devices/devices.module";
     AuthorizationCoreSessionsResolver,
     SignOutCoreSessionsService,
     SignOutCoreSessionsResolver,
-    CoreSessionsCron,
-    DevicesCoreSessionsModule
-  ]
+    CoreSessionsCron
+  ],
+  imports: [DevicesCoreSessionsModule]
 })
 export class CoreSessionsModule {}
 
@@ -31,8 +31,7 @@ export class CoreSessionsModule {}
     AuthorizationCoreSessionsService,
     AuthorizationCoreSessionsResolver,
     InternalAuthorizationCoreSessionsService,
-    DeviceSignInCoreSessionsService,
-    DevicesCoreSessionsModule
+    DeviceSignInCoreSessionsService
   ],
   exports: [
     AuthorizationCoreSessionsService,

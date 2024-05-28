@@ -321,6 +321,15 @@
           "count_uses": "Liczba użyć",
           "user": "Użytkownik"
         }
+      },
+      "devices": {
+        "title": "Urządzenia",
+        "desc": "Zarządzaj urządzeniami, na których jesteś zalogowany.",
+        "last_active": "Ostatnio aktywny: <time></time>",
+        "browser": "Przeglądarka",
+        "os": "System operacyjny",
+        "current_device": "To urządzenie",
+        "ip_address": "Adres IP"
       }
     },
     "errors": {

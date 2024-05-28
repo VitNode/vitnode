@@ -1,12 +1,7 @@
 import { useTranslations } from "next-intl";
 import * as React from "react";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader
-} from "@/components/ui/card";
+import { CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { Core_Members__Files__ShowQuery } from "@/graphql/hooks";
 import { Loader } from "@/components/loader";
 
@@ -22,7 +17,7 @@ export default function FilesSettingsView(
   const t = useTranslations("core.settings.files");
 
   return (
-    <Card>
+    <>
       <CardHeader>
         <h1 className="text-2xl font-semibold leading-none tracking-tight">
           {t("title")}
@@ -35,6 +30,6 @@ export default function FilesSettingsView(
           <ContentFilesSettings {...props} />
         </React.Suspense>
       </CardContent>
-    </Card>
+    </>
   );
 }

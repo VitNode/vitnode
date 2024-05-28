@@ -751,6 +751,7 @@ export type Query = {
   core_nav__show: ShowCoreNavObj;
   core_plugins__show: Array<ShowCorePluginsObj>;
   core_sessions__authorization: AuthorizationCoreSessionsObj;
+  core_sessions__devices__show: Array<ShowCoreSessionDevicesObj>;
   core_settings__show: ShowSettingsObj;
   core_theme_editor__show: ShowCoreThemeEditorObj;
   core_themes__show: ShowCoreThemesObj;
@@ -1297,13 +1298,18 @@ export type ShowCorePluginsObj = {
   code: Scalars['String']['output'];
 };
 
-export type ShowCoreSessionDevices = {
-  __typename?: 'ShowCoreSessionDevices';
-  device_id: Scalars['Int']['output'];
+export type ShowCoreSessionDevicesObj = {
+  __typename?: 'ShowCoreSessionDevicesObj';
   expires: Scalars['DateTime']['output'];
+  id: Scalars['Int']['output'];
+  ip_address: Scalars['String']['output'];
   last_seen: Scalars['DateTime']['output'];
   login_token: Scalars['String']['output'];
-  user_id: Scalars['Int']['output'];
+  uagent_browser: Scalars['String']['output'];
+  uagent_device_model: Scalars['String']['output'];
+  uagent_device_vendor: Scalars['String']['output'];
+  uagent_os: Scalars['String']['output'];
+  uagent_version: Scalars['String']['output'];
 };
 
 export type ShowCoreThemeEditorObj = {
@@ -2183,6 +2189,11 @@ export type Core_Members__Files__ShowQueryVariables = Exact<{
 
 
 export type Core_Members__Files__ShowQuery = { __typename?: 'Query', core_files__show: { __typename?: 'ShowCoreFilesObj', edges: Array<{ __typename?: 'ShowCoreFiles', created: Date, dir_folder: string, extension: string, file_name: string, file_size: number, file_name_original: string, height?: number | null, id: number, mimetype: string, width?: number | null, file_alt?: string | null, count_uses: number, security_key?: string | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+
+export type Core_Sessions__Devices__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Core_Sessions__Devices__ShowQuery = { __typename?: 'Query', core_sessions__devices__show: Array<{ __typename?: 'ShowCoreSessionDevicesObj', expires: Date, id: number, last_seen: Date, uagent_browser: string, uagent_device_model: string, uagent_device_vendor: string, uagent_os: string, uagent_version: string, login_token: string, ip_address: string }> };
 
 export type Core_Members__ProfilesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -3732,6 +3743,22 @@ export const Core_Members__Files__Show = gql`
       startCursor
       totalCount
     }
+  }
+}
+    `;
+export const Core_Sessions__Devices__Show = gql`
+    query Core_sessions__devices__show {
+  core_sessions__devices__show {
+    expires
+    id
+    last_seen
+    uagent_browser
+    uagent_device_model
+    uagent_device_vendor
+    uagent_os
+    uagent_version
+    login_token
+    ip_address
   }
 }
     `;
