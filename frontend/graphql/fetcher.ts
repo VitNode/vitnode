@@ -95,9 +95,14 @@ export async function fetcher<TData, TVariables>({
     });
   }
 
+  const nextInternalHeaders = nextHeaders();
+
   const internalHeaders = {
     Cookie: cookies().toString(),
-    ["user-agent"]: nextHeaders().get("user-agent") ?? "node",
+    ["user-agent"]: nextInternalHeaders.get("user-agent") ?? "node",
+    ["x-forwarded-for"]:
+      nextInternalHeaders.get("x-forwarded-for") ?? "0.0.0.0",
+    ["x-real-ip"]: nextInternalHeaders.get("x-real-ip") ?? "0.0.0.0",
     ...headers
   };
 
