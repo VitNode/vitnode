@@ -53,8 +53,6 @@ export const core_sessions_known_devices = pgTable(
     uagent_browser: varchar("uagent_browser", { length: 200 }).notNull(),
     uagent_version: varchar("uagent_version", { length: 100 }).notNull(),
     uagent_os: varchar("uagent_os", { length: 100 }).notNull(),
-    uagent_device_vendor: varchar("uagent_device_vendor", { length: 200 }),
-    uagent_device_model: varchar("uagent_device_model", { length: 200 }),
     last_seen: timestamp("last_seen").notNull().defaultNow()
   }
 );

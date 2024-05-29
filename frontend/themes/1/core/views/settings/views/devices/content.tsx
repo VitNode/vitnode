@@ -10,7 +10,8 @@ const getDeviceIcon = (device: string) => {
   if (
     device.includes("Android") ||
     device.includes("Windows Phone") ||
-    device.includes("iPhone")
+    device.includes("iPhone") ||
+    device.includes("iPad")
   ) {
     return <Phone />;
   }
@@ -30,12 +31,12 @@ export const ContentDevicesSettings = ({
         <div key={device.id} className="border p-6 rounded-md space-y-4">
           <div className="flex gap-4 flex-wrap items-center">
             <div className="bg-primary/10 flex items-center justify-center flex-shrink-0 [&>svg]:text-primary [&>svg]:size-8 p-2 rounded-sm">
-              {getDeviceIcon(device.uagent_device_model)}
+              {getDeviceIcon(device.uagent_os)}
             </div>
             <div className="flex flex-col gap-1">
               <div className="flex gap-2 flex-wrap items-center">
                 <h3 className="text-lg font-medium leading-none">
-                  {device.uagent_device_vendor} {device.uagent_device_model}
+                  {device.uagent_os}
                 </h3>
                 {loginToken === device.login_token ? (
                   <Badge>{t("current_device")}</Badge>
@@ -57,11 +58,6 @@ export const ContentDevicesSettings = ({
               <div>
                 {device.uagent_browser} {device.uagent_version}
               </div>
-            </li>
-
-            <li>
-              <div>{t("os")}</div>
-              <div>{device.uagent_os}</div>
             </li>
 
             <li>

@@ -329,7 +329,6 @@
         "desc": "Zarządzaj urządzeniami, na których jesteś zalogowany.",
         "last_active": "Ostatnio aktywny: <time></time>",
         "browser": "Przeglądarka",
-        "os": "System operacyjny",
         "current_device": "To urządzenie",
         "ip_address": "Adres IP"
       }

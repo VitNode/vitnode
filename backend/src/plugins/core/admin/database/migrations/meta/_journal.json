@@ -15,6 +15,13 @@
       "when": 1716309263498,
       "tag": "0001_certain_proemial_gods",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1716987616857,
+      "tag": "0002_smart_taskmaster",
+      "breakpoints": true
     }
   ]
 }

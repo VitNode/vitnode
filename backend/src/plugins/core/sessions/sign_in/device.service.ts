@@ -11,8 +11,6 @@ interface DeviceType {
   ip_address: string;
   last_seen: Date;
   uagent_browser: string;
-  uagent_device_model: string;
-  uagent_device_vendor: string;
   uagent_os: string;
   uagent_version: string;
   user_agent: string;
@@ -34,9 +32,7 @@ export class DeviceSignInCoreSessionsService {
       uagent_version: user_parser.browser.version ?? "Uagent from tests",
       uagent_os: user_parser.os.name
         ? `${user_parser.os.name} ${user_parser.os.version}`
-        : "Uagent from tests",
-      uagent_device_vendor: user_parser.device.vendor ?? "Uagent from tests",
-      uagent_device_model: user_parser.device.model ?? "Uagent from tests"
+        : "Uagent from tests"
     };
   }
 
