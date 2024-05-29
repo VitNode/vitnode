@@ -11,6 +11,7 @@ import {
 import { DatabaseService } from "@/database/database.service";
 import { Ctx } from "@/utils/types/context.type";
 import { AccessDeniedError } from "@/utils/errors/access-denied-error";
+import { getUserIp } from "@/functions/get-user-ip";
 
 @Injectable()
 export class LockToggleForumTopicsService {
@@ -60,7 +61,7 @@ export class LockToggleForumTopicsService {
         topic_id: topic.id,
         user_id,
         action: topic.locked ? "unlock" : "lock",
-        ip_address: req.ip
+        ip_address: getUserIp(req)
       })
       .returning();
 

@@ -11,6 +11,7 @@ import { Ctx } from "@/utils/types/context.type";
 import { AccessDeniedError } from "@/utils/errors/access-denied-error";
 import { CustomError } from "@/utils/errors/custom-error";
 import { currentDate } from "@/functions/date";
+import { getUserIp } from "@/functions/get-user-ip";
 
 @Injectable()
 export class InternalAuthorizationCoreSessionsService {
@@ -70,7 +71,8 @@ export class InternalAuthorizationCoreSessionsService {
     await this.databaseService.db
       .update(core_sessions_known_devices)
       .set({
-        last_seen: new Date()
+        last_seen: new Date(),
+        ip_address: getUserIp(req)
       })
       .where(eq(core_sessions_known_devices.id, know_device_id));
 

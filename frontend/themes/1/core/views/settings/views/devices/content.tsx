@@ -1,4 +1,4 @@
-import { Monitor, Phone } from "lucide-react";
+import { Monitor, Smartphone } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { DateFormat } from "@/components/date-format/date-format";
@@ -13,7 +13,7 @@ const getDeviceIcon = (device: string) => {
     device.includes("iPhone") ||
     device.includes("iPad")
   ) {
-    return <Phone />;
+    return <Smartphone />;
   }
 
   return <Monitor />;

@@ -5,6 +5,7 @@ import { ConfigService } from "@nestjs/config";
 import { core_sessions_known_devices } from "@/plugins/core/admin/database/schema/sessions";
 import { DatabaseService } from "@/database/database.service";
 import { Ctx } from "@/utils/types/context.type";
+import { getUserIp } from "@/functions/get-user-ip";
 
 interface DeviceType {
   id: number;
@@ -41,7 +42,7 @@ export class DeviceSignInCoreSessionsService {
       .insert(core_sessions_known_devices)
       .values({
         ...this.getUserAgentData(req.headers["user-agent"]),
-        ip_address: req.ip
+        ip_address: getUserIp(req)
       })
       .returning();
 
