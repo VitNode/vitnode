@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "6",
-      "when": 1715430494181,
-      "tag": "0000_friendly_valkyrie",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1716309263498,
-      "tag": "0001_certain_proemial_gods",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1716987616857,
-      "tag": "0002_smart_taskmaster",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "6",
-      "when": 1717081219236,
-      "tag": "0003_brainy_purple_man",
+      "when": 1717089668180,
+      "tag": "0000_pretty_garia",
       "breakpoints": true
     }
   ]

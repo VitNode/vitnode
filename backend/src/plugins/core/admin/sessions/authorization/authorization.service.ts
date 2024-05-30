@@ -21,6 +21,7 @@ import { ConfigPlugin } from "../../plugins/plugins.module";
 import { DeviceSignInCoreSessionsService } from "@/plugins/core/sessions/sign_in/device.service";
 import { core_sessions_known_devices } from "../../database/schema/sessions";
 import { getUserIp } from "@/functions/get-user-ip";
+import { getUserAgentData } from "@/functions/get-user-agent-data";
 
 @Injectable()
 export class AuthorizationAdminSessionsService {
@@ -112,11 +113,11 @@ export class AuthorizationAdminSessionsService {
     }
 
     // Update last seen
-    // TODO: Add update uagent
     await this.databaseService.db
       .update(core_sessions_known_devices)
       .set({
         last_seen: new Date(),
+        ...getUserAgentData(req.headers["user-agent"]),
         ip_address: getUserIp(req)
       })
       .where(eq(core_sessions_known_devices.id, device.id));

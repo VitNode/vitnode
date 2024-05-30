@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS "core_admin_permissions" (
 CREATE TABLE IF NOT EXISTS "core_admin_sessions" (
 	"login_token" varchar(255) PRIMARY KEY NOT NULL,
 	"user_id" integer NOT NULL,
+	"created" timestamp DEFAULT now() NOT NULL,
 	"last_seen" timestamp DEFAULT now() NOT NULL,
 	"expires" timestamp NOT NULL,
 	"device_id" integer NOT NULL
@@ -126,33 +127,21 @@ CREATE TABLE IF NOT EXISTS "core_plugins" (
 	"allow_default" boolean DEFAULT true NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "core_plugins_nav" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"code" varchar(50) NOT NULL,
-	"plugin_id" integer NOT NULL,
-	"position" integer DEFAULT 0 NOT NULL,
-	"icon" varchar(50),
-	"href" varchar(100) NOT NULL,
-	CONSTRAINT "core_plugins_nav_code_unique" UNIQUE("code")
-);
---> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "core_sessions" (
 	"login_token" varchar(255) PRIMARY KEY NOT NULL,
 	"user_id" integer NOT NULL,
-	"last_seen" timestamp DEFAULT now() NOT NULL,
+	"created" timestamp DEFAULT now() NOT NULL,
 	"expires" timestamp NOT NULL,
 	"device_id" integer NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "core_sessions_known_devices" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"ip_address" varchar(255),
+	"ip_address" varchar(255) NOT NULL,
 	"user_agent" text NOT NULL,
 	"uagent_browser" varchar(200) NOT NULL,
 	"uagent_version" varchar(100) NOT NULL,
 	"uagent_os" varchar(100) NOT NULL,
-	"uagent_device_vendor" varchar(200),
-	"uagent_device_model" varchar(200),
 	"last_seen" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
@@ -195,6 +184,7 @@ CREATE TABLE IF NOT EXISTS "core_users" (
 	"first_name" varchar(255),
 	"last_name" varchar(255),
 	"birthday" timestamp,
+	"ip_address" varchar(255) NOT NULL,
 	CONSTRAINT "core_users_name_seo_unique" UNIQUE("name_seo"),
 	CONSTRAINT "core_users_name_unique" UNIQUE("name"),
 	CONSTRAINT "core_users_email_unique" UNIQUE("email")
@@ -285,12 +275,6 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "core_plugins_nav" ADD CONSTRAINT "core_plugins_nav_plugin_id_core_plugins_id_fk" FOREIGN KEY ("plugin_id") REFERENCES "public"."core_plugins"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
  ALTER TABLE "core_sessions" ADD CONSTRAINT "core_sessions_user_id_core_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."core_users"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
@@ -333,8 +317,8 @@ CREATE INDEX IF NOT EXISTS "core_nav_name_item_id_idx" ON "core_nav_name" ("item
 CREATE INDEX IF NOT EXISTS "core_nav_name_language_code_idx" ON "core_nav_name" ("language_code");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_plugins_code_idx" ON "core_plugins" ("code");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_plugins_name_idx" ON "core_plugins" ("name");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_plugins__nav_plugin_id_idx" ON "core_plugins_nav" ("plugin_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_sessions_user_id_idx" ON "core_sessions" ("user_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_sessions_known_devices_ip_address_idx" ON "core_sessions_known_devices" ("ip_address");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_users_name_seo_idx" ON "core_users" ("name_seo");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_users_name_idx" ON "core_users" ("name");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "core_users_email_idx" ON "core_users" ("email");
