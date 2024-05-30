@@ -40,6 +40,14 @@ CREATE TABLE IF NOT EXISTS "core_files_using" (
 	"folder" varchar(255) NOT NULL
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "core_migrations" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"hash" text NOT NULL,
+	"plugin" varchar(255) NOT NULL,
+	"created_migration" bigint,
+	"created" timestamp DEFAULT now() NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "core_groups" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"created" timestamp DEFAULT now() NOT NULL,
