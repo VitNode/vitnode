@@ -1,4 +1,4 @@
-import { Monitor, Phone } from "lucide-react";
+import { Monitor, Smartphone } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { DateFormat } from "@/components/date-format/date-format";
@@ -10,9 +10,10 @@ const getDeviceIcon = (device: string) => {
   if (
     device.includes("Android") ||
     device.includes("Windows Phone") ||
-    device.includes("iPhone")
+    device.includes("iPhone") ||
+    device.includes("iPad")
   ) {
-    return <Phone />;
+    return <Smartphone />;
   }
 
   return <Monitor />;
@@ -30,12 +31,12 @@ export const ContentDevicesSettings = ({
         <div key={device.id} className="border p-6 rounded-md space-y-4">
           <div className="flex gap-4 flex-wrap items-center">
             <div className="bg-primary/10 flex items-center justify-center flex-shrink-0 [&>svg]:text-primary [&>svg]:size-8 p-2 rounded-sm">
-              {getDeviceIcon(device.uagent_device_model)}
+              {getDeviceIcon(device.uagent_os)}
             </div>
             <div className="flex flex-col gap-1">
               <div className="flex gap-2 flex-wrap items-center">
                 <h3 className="text-lg font-medium leading-none">
-                  {device.uagent_device_vendor} {device.uagent_device_model}
+                  {device.uagent_os}
                 </h3>
                 {loginToken === device.login_token ? (
                   <Badge>{t("current_device")}</Badge>
@@ -51,7 +52,7 @@ export const ContentDevicesSettings = ({
 
           <Separator />
 
-          <ul className="[&>li]:flex [&>li]:flex-col sm:[&>li]:flex-row [&>li]:gap-1 sm:[&>li]:gap-4 sm:[&>li>div:first-child]:w-52 sm:[&>li>div:first-child]:flex-shrink-0 [&>li>div:first-child]:text-muted-foreground space-y-2">
+          <ul className="[&>li]:flex [&>li]:flex-col sm:[&>li]:flex-row [&>li]:gap-1 sm:[&>li]:gap-4 sm:[&>li>div:first-child]:w-52 sm:[&>li>div:first-child]:flex-shrink-0 [&>li>div:first-child]:text-muted-foreground space-y-2 [&>li>div]:truncate">
             <li>
               <div>{t("browser")}</div>
               <div>
@@ -60,13 +61,15 @@ export const ContentDevicesSettings = ({
             </li>
 
             <li>
-              <div>{t("os")}</div>
-              <div>{device.uagent_os}</div>
+              <div>{t("ip_address")}</div>
+              <div>{device.ip_address}</div>
             </li>
 
             <li>
-              <div>{t("ip_address")}</div>
-              <div>{device.ip_address}</div>
+              <div>{t("session_expires")}</div>
+              <div>
+                <DateFormat date={device.expires} showFullDate />
+              </div>
             </li>
           </ul>
         </div>

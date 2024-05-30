@@ -27,7 +27,8 @@ export const core_users = pgTable(
     group_id: integer("group_id").references(() => core_groups.id),
     first_name: varchar("first_name", { length: 255 }),
     last_name: varchar("last_name", { length: 255 }),
-    birthday: timestamp("birthday")
+    birthday: timestamp("birthday"),
+    ip_address: varchar("ip_address", { length: 255 }).notNull()
   },
   table => ({
     name_seo_idx: index("core_users_name_seo_idx").on(table.name_seo),

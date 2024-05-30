@@ -9,8 +9,9 @@ import { DeviceSignInCoreSessionsService } from "../../sign_in/device.service";
 import { DatabaseService } from "@/database/database.service";
 import { Ctx } from "@/utils/types/context.type";
 import { AccessDeniedError } from "@/utils/errors/access-denied-error";
-import { CustomError } from "@/utils/errors/custom-error";
 import { currentDate } from "@/functions/date";
+import { getUserIp } from "@/functions/get-user-ip";
+import { getUserAgentData } from "@/functions/get-user-agent-data";
 
 @Injectable()
 export class InternalAuthorizationCoreSessionsService {
@@ -38,7 +39,12 @@ export class InternalAuthorizationCoreSessionsService {
 
     const session = await this.databaseService.db.query.core_sessions.findFirst(
       {
-        where: (table, { eq }) => eq(table.login_token, login_token),
+        where: (table, { eq, and, gt }) =>
+          and(
+            eq(table.login_token, login_token),
+            eq(table.device_id, device.id),
+            gt(table.expires, new Date())
+          ),
         with: {
           user: {
             with: {
@@ -59,27 +65,27 @@ export class InternalAuthorizationCoreSessionsService {
       throw new AccessDeniedError();
     }
 
-    if (session.device.id !== device.id) {
-      throw new CustomError({
-        code: "DEVICE_CHANGED",
-        message: "Device has been changed"
-      });
+    const decodeAccessToken = this.jwtService.decode(login_token);
+    if (!decodeAccessToken || decodeAccessToken["exp"] < currentDate()) {
+      throw new AccessDeniedError();
     }
 
     // Update last seen
     await this.databaseService.db
       .update(core_sessions_known_devices)
       .set({
-        last_seen: new Date()
+        last_seen: new Date(),
+        ...getUserAgentData(req.headers["user-agent"]),
+        ip_address: getUserIp(req)
       })
-      .where(eq(core_sessions_known_devices.id, know_device_id));
+      .where(eq(core_sessions_known_devices.id, device.id));
 
-    // Update sign in date
+    // Update known device cookie
     const expires = new Date();
-    const expiresIn: number = this.configService.getOrThrow(
+    const expiresInDeviceCookie: number = this.configService.getOrThrow(
       "cookies.known_device.expiresIn"
     );
-    expires.setDate(expires.getDate() + expiresIn);
+    expires.setDate(expires.getDate() + expiresInDeviceCookie);
     res.cookie(
       this.configService.getOrThrow("cookies.known_device.name"),
       know_device_id,
@@ -92,11 +98,6 @@ export class InternalAuthorizationCoreSessionsService {
         sameSite: "none"
       }
     );
-
-    const decodeAccessToken = this.jwtService.decode(login_token);
-    if (!decodeAccessToken || decodeAccessToken["exp"] < currentDate()) {
-      throw new AccessDeniedError();
-    }
 
     return session.user;
   }

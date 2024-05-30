@@ -24,7 +24,10 @@ export class SignOutAdminSessionsService {
     }
 
     await this.databaseService.db
-      .delete(core_admin_sessions)
+      .update(core_admin_sessions)
+      .set({
+        expires: new Date()
+      })
       .where(eq(core_admin_sessions.login_token, login_token));
 
     res.clearCookie(

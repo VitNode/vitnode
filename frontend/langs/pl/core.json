@@ -101,6 +101,8 @@
       "extra_tools": "Dodatkowe narzędzia",
       "text_align": "Wyrównanie tekstu",
       "horizontal_rule": "Linia pozioma",
+      "more": "Więcej",
+      "align": "Wyrównanie",
       "link": {
         "title": "Link",
         "text": "Tekst",
@@ -327,7 +329,7 @@
         "desc": "Zarządzaj urządzeniami, na których jesteś zalogowany.",
         "last_active": "Ostatnio aktywny: <time></time>",
         "browser": "Przeglądarka",
-        "os": "System operacyjny",
+        "session_expires": "Sesja wygasa",
         "current_device": "To urządzenie",
         "ip_address": "Adres IP"
       }

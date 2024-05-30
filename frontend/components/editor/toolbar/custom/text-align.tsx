@@ -5,7 +5,6 @@ import {
   AlignRight,
   ChevronDownIcon
 } from "lucide-react";
-import { useTranslations } from "next-intl";
 
 import { ButtonToolbarEditor } from "../button";
 import {
@@ -18,7 +17,6 @@ import { ToggleToolbarEditor } from "../toggle";
 import { useEditorState } from "../../hooks/use-editor-state";
 
 export const TextAlignToolbarEditor = () => {
-  const t = useTranslations("core.editor");
   const { editor } = useEditorState();
 
   const getCurrentIcon = () => {
@@ -37,7 +35,7 @@ export const TextAlignToolbarEditor = () => {
     <Popover>
       <PopoverTrigger asChild>
         <ButtonToolbarEditor
-          name={t("extra_tools")}
+          name="align"
           className="w-14 p-0 justify-center gap-1 h-9 [&>svg:not(:last-child)]:size-5 [&>svg:last-child]:size-4"
         >
           {getCurrentIcon()}

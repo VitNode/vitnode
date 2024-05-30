@@ -101,6 +101,8 @@
       "extra_tools": "Extra Tools",
       "text_align": "Text Align",
       "horizontal_rule": "Horizontal Rule",
+      "more": "More",
+      "align": "Align",
       "link": {
         "title": "Link",
         "text": "Text",
@@ -327,7 +329,7 @@
         "desc": "Manage your devices where you are logged in.",
         "last_active": "Last Active: <time></time>",
         "browser": "Browser",
-        "os": "Operating System",
+        "session_expires": "Session Expires",
         "current_device": "Current Device",
         "ip_address": "IP Address"
       }

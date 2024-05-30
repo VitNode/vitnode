@@ -10,7 +10,7 @@ export const ItemNavSettings = ({
 
   return (
     <LinkItemNavSettings {...props}>
-      <Icon className="w-5 h-5" />
+      <Icon className="size-5" />
       <span>{text}</span>
     </LinkItemNavSettings>
   );

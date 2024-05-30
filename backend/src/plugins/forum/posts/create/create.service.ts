@@ -11,6 +11,7 @@ import { NotFoundError } from "@/utils/errors/not-found-error";
 import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
 import { DatabaseService } from "@/database/database.service";
 import { Ctx } from "@/utils/types/context.type";
+import { getUserIp } from "@/functions/get-user-ip";
 
 @Injectable()
 export class CreateForumsPostsService {
@@ -35,7 +36,7 @@ export class CreateForumsPostsService {
     const createPost = await this.databaseService.db
       .insert(forum_posts)
       .values({
-        ip_address: req.ip,
+        ip_address: getUserIp(req),
         topic_id,
         user_id: id
       })

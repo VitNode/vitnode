@@ -5,7 +5,6 @@ import {
   ListOrdered,
   Strikethrough
 } from "lucide-react";
-import { useTranslations } from "next-intl";
 
 import {
   Popover,
@@ -18,14 +17,13 @@ import { ButtonToolbarEditor } from "../button";
 import { useEditorState } from "../../hooks/use-editor-state";
 
 export const PlusToolbarEditor = () => {
-  const t = useTranslations("core.editor");
   const { editor } = useEditorState();
 
   return (
     <Popover>
       <PopoverTrigger asChild>
         <ButtonToolbarEditor
-          name={t("extra_tools")}
+          name="extra_tools"
           active={
             editor.isActive("strike") ||
             editor.isActive("bulletList") ||

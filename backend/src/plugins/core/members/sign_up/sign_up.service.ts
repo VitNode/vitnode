@@ -11,6 +11,8 @@ import { generateAvatarColor } from "@/plugins/core/members/sign_up/functions/ge
 import { core_users } from "@/plugins/core/admin/database/schema/users";
 import { DatabaseService } from "@/database/database.service";
 import { CustomError } from "@/utils/errors/custom-error";
+import { getUserIp } from "@/functions/get-user-ip";
+import { Ctx } from "@/utils/types/context.type";
 
 @Injectable()
 export class SignUpCoreMembersService {
@@ -44,12 +46,10 @@ export class SignUpCoreMembersService {
     return defaultGroup.id;
   };
 
-  async signUp({
-    email: emailRaw,
-    name,
-    newsletter,
-    password
-  }: SignUpCoreMembersArgs): Promise<SignUpCoreMembersObj> {
+  async signUp(
+    { email: emailRaw, name, newsletter, password }: SignUpCoreMembersArgs,
+    { req }: Ctx
+  ): Promise<SignUpCoreMembersObj> {
     const email = emailRaw.toLowerCase();
 
     const checkEmail = await this.databaseService.db.query.core_users.findFirst(
@@ -92,7 +92,8 @@ export class SignUpCoreMembersService {
         newsletter,
         password: hashPassword,
         avatar_color: generateAvatarColor(name),
-        group_id: await this.getGroupId()
+        group_id: await this.getGroupId(),
+        ip_address: getUserIp(req)
       })
       .returning();
 

@@ -20,7 +20,7 @@ export default function LayoutSettingsView({ children }: Props) {
         desc={t("settings.desc")}
       />
 
-      <div className="lg:gap-8 flex flex-col lg:flex-row gap-4 items-start">
+      <div className="lg:gap-8 flex flex-col lg:flex-row gap-4 lg:items-start">
         <NavSettings />
         <Card className="flex-grow">{children}</Card>
       </div>

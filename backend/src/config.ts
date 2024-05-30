@@ -21,7 +21,7 @@ export const configForAppModule = () => {
               .slice(-2)
               .join("."),
       login_token: {
-        expiresIn: 7, // 7 days
+        expiresIn: 3, // 3 days
         expiresInRemember: 90, // 90 days
         name: "vitnode-login-token",
         admin: {

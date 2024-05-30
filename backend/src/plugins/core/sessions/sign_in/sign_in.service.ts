@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { compare } from "bcrypt";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
+import { and, eq } from "drizzle-orm";
 
 import { SignInCoreSessionsArgs } from "./dto/sign_in.args";
 import { DeviceSignInCoreSessionsService } from "./device.service";
@@ -77,12 +78,34 @@ export class SignInCoreSessionsService {
     if (admin) {
       const expires = new Date();
       expires.setDate(expires.getDate() + 1);
-      await this.databaseService.db.insert(core_admin_sessions).values({
-        login_token,
-        user_id: userId,
-        expires,
-        device_id: device.id
-      });
+
+      const activeSession =
+        await this.databaseService.db.query.core_admin_sessions.findFirst({
+          where: (table, { eq, and }) =>
+            and(eq(table.user_id, userId), eq(table.device_id, device.id))
+        });
+
+      if (activeSession) {
+        await this.databaseService.db
+          .update(core_admin_sessions)
+          .set({
+            login_token,
+            expires
+          })
+          .where(
+            and(
+              eq(core_admin_sessions.user_id, userId),
+              eq(core_admin_sessions.device_id, device.id)
+            )
+          );
+      } else {
+        await this.databaseService.db.insert(core_admin_sessions).values({
+          login_token,
+          user_id: userId,
+          expires,
+          device_id: device.id
+        });
+      }
 
       // Set cookie for session
       res.cookie(
@@ -104,12 +127,34 @@ export class SignInCoreSessionsService {
     const expires = new Date();
     expires.setDate(expires.getDate() + expiresValue);
 
-    await this.databaseService.db.insert(core_sessions).values({
-      login_token,
-      user_id: userId,
-      expires,
-      device_id: device.id
-    });
+    // Check if user has an active session in the same device
+    const activeSession =
+      await this.databaseService.db.query.core_sessions.findFirst({
+        where: (table, { eq, and }) =>
+          and(eq(table.user_id, userId), eq(table.device_id, device.id))
+      });
+
+    if (activeSession) {
+      await this.databaseService.db
+        .update(core_sessions)
+        .set({
+          login_token,
+          expires
+        })
+        .where(
+          and(
+            eq(core_sessions.user_id, userId),
+            eq(core_sessions.device_id, device.id)
+          )
+        );
+    } else {
+      await this.databaseService.db.insert(core_sessions).values({
+        login_token,
+        user_id: userId,
+        expires,
+        device_id: device.id
+      });
+    }
 
     // Set cookie for session
     res.cookie(

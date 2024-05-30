@@ -14,6 +14,7 @@ import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/tex
 import { DatabaseService } from "@/database/database.service";
 import { Ctx } from "@/utils/types/context.type";
 import { AccessDeniedError } from "@/utils/errors/access-denied-error";
+import { getUserIp } from "@/functions/get-user-ip";
 
 @Injectable()
 export class CreateForumTopicsService {
@@ -45,7 +46,7 @@ export class CreateForumTopicsService {
     const data = await this.databaseService.db
       .insert(forum_topics)
       .values({
-        ip_address: req.ip,
+        ip_address: getUserIp(req),
         forum_id
       })
       .returning();

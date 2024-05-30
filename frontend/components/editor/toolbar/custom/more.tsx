@@ -17,7 +17,7 @@ export const MoreToolbarEditor = () => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <ButtonToolbarEditor name="more.title" active={editor.isActive("link")}>
+        <ButtonToolbarEditor name="more" active={editor.isActive("link")}>
           <Ellipsis />
         </ButtonToolbarEditor>
       </PopoverTrigger>

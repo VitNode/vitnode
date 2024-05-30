@@ -21,14 +21,11 @@ export class ShowCoreSessionDevicesObj {
   uagent_os: string;
 
   @Field(() => String)
-  uagent_device_vendor: string;
-
-  @Field(() => String)
-  uagent_device_model: string;
-
-  @Field(() => String)
   login_token: string;
 
   @Field(() => String)
   ip_address: string;
+
+  @Field(() => Date)
+  created: Date;
 }

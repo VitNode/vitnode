@@ -1,5 +1,5 @@
 {
-  "id": "6c96d06f-4b50-4752-bb91-ba90ddbb3b47",
+  "id": "6a49a905-10ef-4399-974c-1c85032269dc",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "6",
   "dialect": "postgresql",
@@ -117,6 +117,13 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": true
+        },
+        "created": {
+          "name": "created",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         },
         "last_seen": {
           "name": "last_seen",
@@ -1049,83 +1056,6 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "public.core_plugins_nav": {
-      "name": "core_plugins_nav",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "code": {
-          "name": "code",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "plugin_id": {
-          "name": "plugin_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "position": {
-          "name": "position",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        },
-        "icon": {
-          "name": "icon",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "href": {
-          "name": "href",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {
-        "core_plugins__nav_plugin_id_idx": {
-          "name": "core_plugins__nav_plugin_id_idx",
-          "columns": [
-            "plugin_id"
-          ],
-          "isUnique": false
-        }
-      },
-      "foreignKeys": {
-        "core_plugins_nav_plugin_id_core_plugins_id_fk": {
-          "name": "core_plugins_nav_plugin_id_core_plugins_id_fk",
-          "tableFrom": "core_plugins_nav",
-          "tableTo": "core_plugins",
-          "columnsFrom": [
-            "plugin_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "core_plugins_nav_code_unique": {
-          "name": "core_plugins_nav_code_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "code"
-          ]
-        }
-      }
-    },
     "public.core_sessions": {
       "name": "core_sessions",
       "schema": "",
@@ -1142,8 +1072,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "last_seen": {
-          "name": "last_seen",
+        "created": {
+          "name": "created",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
@@ -1216,7 +1146,7 @@
           "name": "ip_address",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "user_agent": {
           "name": "user_agent",
@@ -1242,18 +1172,6 @@
           "primaryKey": false,
           "notNull": true
         },
-        "uagent_device_vendor": {
-          "name": "uagent_device_vendor",
-          "type": "varchar(200)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "uagent_device_model": {
-          "name": "uagent_device_model",
-          "type": "varchar(200)",
-          "primaryKey": false,
-          "notNull": false
-        },
         "last_seen": {
           "name": "last_seen",
           "type": "timestamp",
@@ -1262,7 +1180,15 @@
           "default": "now()"
         }
       },
-      "indexes": {},
+      "indexes": {
+        "core_sessions_known_devices_ip_address_idx": {
+          "name": "core_sessions_known_devices_ip_address_idx",
+          "columns": [
+            "ip_address"
+          ],
+          "isUnique": false
+        }
+      },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
@@ -1503,6 +1429,12 @@
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false
+        },
+        "ip_address": {
+          "name": "ip_address",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {

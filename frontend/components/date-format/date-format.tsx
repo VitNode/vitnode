@@ -14,14 +14,15 @@ interface Props {
   date: Date | number;
   className?: string;
   ref?: React.RefCallback<HTMLTimeElement>;
+  showFullDate?: boolean;
 }
 
-export const DateFormat = ({ className, date, ref }: Props) => {
+export const DateFormat = ({ className, date, ref, showFullDate }: Props) => {
   const { currentTime, fullDate, getDateWithFormatDistance } = useDateFormat({
     date
   });
 
-  if (currentTime.getFullYear() == new Date().getFullYear()) {
+  if (currentTime.getFullYear() == new Date().getFullYear() && !showFullDate) {
     return (
       <TooltipProvider>
         <Tooltip>

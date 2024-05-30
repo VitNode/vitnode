@@ -6,8 +6,8 @@ export const NavSettings = () => {
   const { navItems } = useSettingsView();
 
   return (
-    <aside className="lg:w-72 rounded-lg border bg-card text-card-foreground shadow-sm h-fit">
-      <div className="lg:flex flex-col hidden p-5">
+    <aside className="lg:w-64 h-fit lg:bg-transparent lg:border-none border bg-card rounded-md">
+      <div className="lg:flex flex-col hidden gap-1">
         {navItems.map(item => (
           <ItemNavSettings key={item.href} {...item} />
         ))}

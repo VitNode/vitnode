@@ -1300,14 +1300,13 @@ export type ShowCorePluginsObj = {
 
 export type ShowCoreSessionDevicesObj = {
   __typename?: 'ShowCoreSessionDevicesObj';
+  created: Scalars['DateTime']['output'];
   expires: Scalars['DateTime']['output'];
   id: Scalars['Int']['output'];
   ip_address: Scalars['String']['output'];
   last_seen: Scalars['DateTime']['output'];
   login_token: Scalars['String']['output'];
   uagent_browser: Scalars['String']['output'];
-  uagent_device_model: Scalars['String']['output'];
-  uagent_device_vendor: Scalars['String']['output'];
   uagent_os: Scalars['String']['output'];
   uagent_version: Scalars['String']['output'];
 };
@@ -2193,7 +2192,7 @@ export type Core_Members__Files__ShowQuery = { __typename?: 'Query', core_files_
 export type Core_Sessions__Devices__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_Sessions__Devices__ShowQuery = { __typename?: 'Query', core_sessions__devices__show: Array<{ __typename?: 'ShowCoreSessionDevicesObj', expires: Date, id: number, last_seen: Date, uagent_browser: string, uagent_device_model: string, uagent_device_vendor: string, uagent_os: string, uagent_version: string, login_token: string, ip_address: string }> };
+export type Core_Sessions__Devices__ShowQuery = { __typename?: 'Query', core_sessions__devices__show: Array<{ __typename?: 'ShowCoreSessionDevicesObj', expires: Date, id: number, last_seen: Date, uagent_browser: string, uagent_os: string, uagent_version: string, login_token: string, ip_address: string, created: Date }> };
 
 export type Core_Members__ProfilesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -3753,12 +3752,11 @@ export const Core_Sessions__Devices__Show = gql`
     id
     last_seen
     uagent_browser
-    uagent_device_model
-    uagent_device_vendor
     uagent_os
     uagent_version
     login_token
     ip_address
+    created
   }
 }
     `;
