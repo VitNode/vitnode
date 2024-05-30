@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { Cron, CronExpression } from "@nestjs/schedule";
-import { eq, lt, or } from "drizzle-orm";
+import { lte } from "drizzle-orm";
 import { ConfigService } from "@nestjs/config";
 
 import { core_sessions_known_devices } from "@/plugins/core/admin/database/schema/sessions";
@@ -14,20 +14,16 @@ export class CoreMiddlewareCron {
   ) {}
 
   @Cron(CronExpression.EVERY_HOUR)
+  // Clear known devices that have not been seen for 90 days
   async clearKnowDevices() {
     const lastSeen = new Date();
-    const lastSeenIn: number = this.configService.getOrThrow(
-      "cookies.login_token.expiresInRemember"
+    const lastSeenInDeviceCookie: number = this.configService.getOrThrow(
+      "cookies.known_device.expiresIn"
     );
-    lastSeen.setDate(lastSeen.getDate() - lastSeenIn);
+    lastSeen.setDate(lastSeen.getDate() - lastSeenInDeviceCookie);
 
     await this.databaseService.db
       .delete(core_sessions_known_devices)
-      .where(
-        or(
-          eq(core_sessions_known_devices.ip_address, null),
-          lt(core_sessions_known_devices.last_seen, lastSeen)
-        )
-      );
+      .where(lte(core_sessions_known_devices.last_seen, lastSeen));
   }
 }

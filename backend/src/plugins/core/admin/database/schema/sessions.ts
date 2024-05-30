@@ -11,6 +11,7 @@ import { relations } from "drizzle-orm";
 
 import { core_users } from "./users";
 import { core_admin_sessions } from "./admins";
+
 export const core_sessions = pgTable(
   "core_sessions",
   {
@@ -20,7 +21,7 @@ export const core_sessions = pgTable(
       .references(() => core_users.id, {
         onDelete: "cascade"
       }),
-    last_seen: timestamp("last_seen").notNull().defaultNow(),
+    created: timestamp("created").notNull().defaultNow(),
     expires: timestamp("expires").notNull(),
     device_id: integer("device_id")
       .references(() => core_sessions_known_devices.id, {
@@ -48,13 +49,18 @@ export const core_sessions_known_devices = pgTable(
   "core_sessions_known_devices",
   {
     id: serial("id").primaryKey(),
-    ip_address: varchar("ip_address", { length: 255 }),
+    ip_address: varchar("ip_address", { length: 255 }).notNull(),
     user_agent: text("user_agent").notNull(),
     uagent_browser: varchar("uagent_browser", { length: 200 }).notNull(),
     uagent_version: varchar("uagent_version", { length: 100 }).notNull(),
     uagent_os: varchar("uagent_os", { length: 100 }).notNull(),
     last_seen: timestamp("last_seen").notNull().defaultNow()
-  }
+  },
+  table => ({
+    ip_address_idx: index("core_sessions_known_devices_ip_address_idx").on(
+      table.ip_address
+    )
+  })
 );
 
 export const core_sessions_known_devices_relations = relations(

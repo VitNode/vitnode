@@ -22,7 +22,10 @@ export class SignOutCoreSessionsService {
     }
 
     await this.databaseService.db
-      .delete(core_sessions)
+      .update(core_sessions)
+      .set({
+        expires: new Date()
+      })
       .where(eq(core_sessions.login_token, login_token));
 
     res.clearCookie(this.configService.getOrThrow("cookies.login_token.name"), {
