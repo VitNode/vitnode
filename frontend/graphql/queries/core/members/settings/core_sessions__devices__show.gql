@@ -8,5 +8,6 @@ query Core_sessions__devices__show {
     uagent_version
     login_token
     ip_address
+    created
   }
 }

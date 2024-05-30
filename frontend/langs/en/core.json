@@ -329,6 +329,7 @@
         "desc": "Manage your devices where you are logged in.",
         "last_active": "Last Active: <time></time>",
         "browser": "Browser",
+        "session_expires": "Session Expires",
         "current_device": "Current Device",
         "ip_address": "IP Address"
       }

@@ -52,7 +52,7 @@ export const ContentDevicesSettings = ({
 
           <Separator />
 
-          <ul className="[&>li]:flex [&>li]:flex-col sm:[&>li]:flex-row [&>li]:gap-1 sm:[&>li]:gap-4 sm:[&>li>div:first-child]:w-52 sm:[&>li>div:first-child]:flex-shrink-0 [&>li>div:first-child]:text-muted-foreground space-y-2">
+          <ul className="[&>li]:flex [&>li]:flex-col sm:[&>li]:flex-row [&>li]:gap-1 sm:[&>li]:gap-4 sm:[&>li>div:first-child]:w-52 sm:[&>li>div:first-child]:flex-shrink-0 [&>li>div:first-child]:text-muted-foreground space-y-2 [&>li>div]:truncate">
             <li>
               <div>{t("browser")}</div>
               <div>
@@ -63,6 +63,13 @@ export const ContentDevicesSettings = ({
             <li>
               <div>{t("ip_address")}</div>
               <div>{device.ip_address}</div>
+            </li>
+
+            <li>
+              <div>{t("session_expires")}</div>
+              <div>
+                <DateFormat date={device.expires} showFullDate />
+              </div>
             </li>
           </ul>
         </div>

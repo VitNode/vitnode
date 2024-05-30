@@ -726,6 +726,7 @@ type ShowCorePluginsObj {
 }
 
 type ShowCoreSessionDevicesObj {
+  created: DateTime!
   expires: DateTime!
   id: Int!
   ip_address: String!

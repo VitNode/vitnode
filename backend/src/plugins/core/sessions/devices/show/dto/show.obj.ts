@@ -25,4 +25,7 @@ export class ShowCoreSessionDevicesObj {
 
   @Field(() => String)
   ip_address: string;
+
+  @Field(() => Date)
+  created: Date;
 }
