@@ -48,7 +48,6 @@ export default async function LocaleLayout({
 
   try {
     const [data, config] = await Promise.all([getData(), getConfigFile()]);
-    // const { data } = await getSessionData();
 
     const messagesFormApps = await Promise.all(
       (data
@@ -57,7 +56,8 @@ export default async function LocaleLayout({
       ).map(async plugin => {
         try {
           return {
-            ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
+            ...(await import(`@/plugins/${plugin.code}/langs/${locale}.json`))
+              .default
           };
         } catch (e) {
           return {};

@@ -1,5 +1,5 @@
-type IntlMessages = typeof import("@/langs/en/core.json") &
+type IntlMessages = typeof import("@/plugins/core/langs/en.json") &
   // ! === IMPORT ===
-  typeof import("@/langs/en/admin.json") &
-  typeof import("@/langs/en/forum.json") &
-  typeof import("@/langs/en/blog.json");
+  typeof import("@/plugins/core/langs/en.json") &
+  typeof import("@/plugins/forum/langs/en.json") &
+  typeof import("@/plugins/blog/langs/en.json");

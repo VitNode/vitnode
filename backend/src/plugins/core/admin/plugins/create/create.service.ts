@@ -29,7 +29,7 @@ export class CreateAdminPluginsService {
       where: (table, { eq }) => eq(table.code, code)
     });
 
-    if (plugin) {
+    if (plugin || code === "admin" || code === "core") {
       throw new CustomError({
         code: "PLUGIN_ALREADY_EXISTS",
         message: `Plugin already exists with "${code}" code!`
