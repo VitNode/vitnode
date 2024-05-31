@@ -35,5 +35,5 @@
     ".next/types/**/*.ts",
     "vitest.config.mts"
   ],
-  "exclude": ["node_modules", "postcss.config.js", "next.config.js"]
+  "exclude": ["node_modules", "postcss.config.js"]
 }

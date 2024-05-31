@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/** @type {import('next').NextConfig} */
-const withNextIntl = require("next-intl/plugin")(
-  // This is the default (also the `src` folder is supported out of the box)
-  "./i18n.ts"
-);
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
+import createBundleAnalyzer from "@next/bundle-analyzer";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin();
+const withBundleAnalyzer = createBundleAnalyzer({
   enabled: process.env.ANALYZE === "true"
 });
 
@@ -17,6 +15,7 @@ const config = () => {
     protocol: new URL(envBackend).protocol.replace(":", "")
   };
 
+  /** @type {import('next').NextConfig} */
   return {
     // TODO: Remove this when the framer-motion issue is fixed for React 19
     reactStrictMode: false,
@@ -51,4 +50,4 @@ const config = () => {
   };
 };
 
-module.exports = withBundleAnalyzer(withNextIntl(config()));
+export default withBundleAnalyzer(withNextIntl(config()));

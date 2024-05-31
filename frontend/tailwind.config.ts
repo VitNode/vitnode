@@ -5,13 +5,10 @@ import tailwindContainerQuery from "@tailwindcss/container-queries";
 const config = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
     "./themes/**/*.{ts,tsx}",
-    "./admin/**/*.{ts,tsx}",
-    "./hooks/**/*.{ts,tsx}"
+    "./plugins/**/*.{ts,tsx}"
   ],
   prefix: "",
   theme: {
