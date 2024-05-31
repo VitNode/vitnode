@@ -23,12 +23,10 @@ import { migrate } from "@/utils/actions/migrate";
 @Injectable()
 export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService {
   protected path: string = join(process.cwd());
-  protected tempFolderName: string = `${generateRandomString(5)}${currentDate()}`;
   protected tempPath: string = join(
-    process.cwd(),
-    "temp",
+    ABSOLUTE_PATHS.uploads.temp,
     "plugins",
-    this.tempFolderName
+    `-upload-${generateRandomString(5)}${currentDate()}`
   );
 
   constructor(
