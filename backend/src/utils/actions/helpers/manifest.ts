@@ -96,7 +96,7 @@ const generateDefaultManifest = ({
 export const generateManifest = async () => {
   const config = await getConfigFile();
   const languages = fs
-    .readdirSync(ABSOLUTE_PATHS.frontend.langs)
+    .readdirSync(ABSOLUTE_PATHS.plugin({ code: "core" }).frontend.language)
     .map(fileName => fileName.replace(".json", ""));
   const frontend_url = parseFrontendUrlFromEnv().url;
 

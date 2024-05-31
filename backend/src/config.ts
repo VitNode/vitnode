@@ -71,8 +71,7 @@ export const ABSOLUTE_PATHS = {
         theme_id.toString(),
         "config.json"
       )
-    }),
-    langs: join(internalPaths.frontend, "plugins", "core", "langs")
+    })
   },
   plugins: internalPaths.plugins,
   plugin: ({ code }: { code: string }) => ({
@@ -134,13 +133,7 @@ export const ABSOLUTE_PATHS = {
         "mutations",
         code
       ),
-      language: join(
-        internalPaths.frontend,
-        "plugins",
-        code,
-        "langs",
-        "en.json"
-      ),
+      language: join(internalPaths.frontend, "plugins", code, "langs"),
       theme: ({ theme_id }: { theme_id: number }) =>
         join(internalPaths.frontend, "themes", theme_id.toString(), code)
     }

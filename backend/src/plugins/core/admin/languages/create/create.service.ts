@@ -16,6 +16,29 @@ import { ABSOLUTE_PATHS } from "@/config";
 export class CreateAdminCoreLanguageService {
   constructor(private readonly databaseService: DatabaseService) {}
 
+  private async cloneLangInPlugins(pluginCode: string) {
+    const plugins = await this.databaseService.db.query.core_plugins.findMany({
+      orderBy: (table, { desc }) => desc(table.updated),
+      columns: {
+        code: true
+      }
+    });
+
+    [...plugins, { code: "core" }, { code: "admin" }].forEach(async plugin => {
+      fs.cpSync(
+        join(
+          ABSOLUTE_PATHS.plugin({ code: plugin.code }).frontend.language,
+          "en.json"
+        ),
+        join(
+          ABSOLUTE_PATHS.plugin({ code: plugin.code }).frontend.language,
+          `${pluginCode}.json`
+        ),
+        { recursive: true }
+      );
+    });
+  }
+
   async create({
     code,
     locale,
@@ -34,6 +57,24 @@ export class CreateAdminCoreLanguageService {
         message: "Language already exists"
       });
     }
+
+    await this.cloneLangInPlugins(code);
+
+    // Clone JSON for manifest
+    fs.cpSync(
+      join(
+        ABSOLUTE_PATHS.uploads.public,
+        "assets",
+        "en",
+        "manifest.webmanifest"
+      ),
+      join(
+        ABSOLUTE_PATHS.uploads.public,
+        "assets",
+        code,
+        "manifest.webmanifest"
+      )
+    );
 
     const defaultLanguage =
       await this.databaseService.db.query.core_languages.findFirst({
@@ -54,29 +95,6 @@ export class CreateAdminCoreLanguageService {
         site_copyright: defaultLanguage.site_copyright
       })
       .returning();
-
-    // Clone JSONs from lang folder in frontend
-    fs.cpSync(
-      join(ABSOLUTE_PATHS.frontend.langs, "en"),
-      join(ABSOLUTE_PATHS.frontend.langs, code),
-      { recursive: true }
-    );
-
-    // Clone JSON for manifest
-    fs.cpSync(
-      join(
-        ABSOLUTE_PATHS.uploads.public,
-        "assets",
-        "en",
-        "manifest.webmanifest"
-      ),
-      join(
-        ABSOLUTE_PATHS.uploads.public,
-        "assets",
-        code,
-        "manifest.webmanifest"
-      )
-    );
 
     await setRebuildRequired({ set: "langs" });
 

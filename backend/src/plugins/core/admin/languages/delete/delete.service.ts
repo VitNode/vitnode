@@ -1,6 +1,6 @@
 import { rm } from "fs/promises";
 import { join } from "path";
-import { existsSync } from "fs";
+import { unlinkSync } from "fs";
 
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
@@ -42,18 +42,29 @@ export class DeleteAdminCoreLanguageService {
       });
     }
 
-    await this.databaseService.db
-      .delete(core_languages)
-      .where(eq(core_languages.code, code));
+    const plugins = await this.databaseService.db.query.core_plugins.findMany({
+      orderBy: (table, { desc }) => desc(table.updated),
+      columns: {
+        code: true
+      }
+    });
 
-    const path = join(ABSOLUTE_PATHS.frontend.langs, code);
-    if (existsSync(path)) {
-      rm(path, { recursive: true });
-    }
+    [...plugins, { code: "core" }, { code: "admin" }].forEach(async plugin => {
+      unlinkSync(
+        join(
+          ABSOLUTE_PATHS.plugin({ code: plugin.code }).frontend.language,
+          `${code}.json`
+        )
+      );
+    });
 
     // Remove assets
     const assetsPath = join(ABSOLUTE_PATHS.uploads.public, "assets", code);
     rm(assetsPath, { recursive: true });
+
+    await this.databaseService.db
+      .delete(core_languages)
+      .where(eq(core_languages.code, code));
 
     await setRebuildRequired({ set: "langs" });
 

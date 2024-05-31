@@ -37,8 +37,7 @@ export const useDownloadLangAdmin = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const mutation = await mutationApi({
       code,
-      all: values.all,
-      plugins: values.plugins
+      plugins: values.all ? [] : values.plugins
     });
 
     if (mutation.error || !mutation.data) {
