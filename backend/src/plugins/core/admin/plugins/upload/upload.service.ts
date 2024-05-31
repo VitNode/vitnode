@@ -165,14 +165,7 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
   }: {
     config: ConfigPlugin;
   }): Promise<void> {
-    const frontendPaths = [
-      "admin_pages",
-      "admin_templates",
-      "pages",
-      "hooks",
-      "graphql_queries",
-      "graphql_mutations"
-    ];
+    const frontendPaths = ["admin_pages", "admin_templates", "pages", "plugin"];
     await Promise.all(
       frontendPaths.map(async path => {
         const source = join(this.tempPath, "frontend", path);

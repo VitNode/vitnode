@@ -147,10 +147,6 @@ export type FilesAdminPluginsObj = {
   admin_templates: Scalars['Int']['output'];
   databases: Scalars['Int']['output'];
   default_page: Scalars['Boolean']['output'];
-  graphql_mutations: Scalars['Int']['output'];
-  graphql_queries: Scalars['Int']['output'];
-  hooks: Scalars['Int']['output'];
-  language: Scalars['Boolean']['output'];
   pages: Scalars['Int']['output'];
   pages_container: Scalars['Int']['output'];
   templates: Scalars['Int']['output'];
@@ -1943,7 +1939,7 @@ export type Admin__Core_Plugins__FilesQueryVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Plugins__FilesQuery = { __typename?: 'Query', admin__core_plugins__files: { __typename?: 'FilesAdminPluginsObj', admin_pages: number, admin_templates: number, databases: number, graphql_mutations: number, graphql_queries: number, hooks: number, language: boolean, pages: number, pages_container: number, templates: number, default_page: boolean } };
+export type Admin__Core_Plugins__FilesQuery = { __typename?: 'Query', admin__core_plugins__files: { __typename?: 'FilesAdminPluginsObj', admin_pages: number, admin_templates: number, databases: number, pages: number, pages_container: number, templates: number, default_page: boolean } };
 
 export type Admin__Core_Plugins__Show__ItemQueryVariables = Exact<{
   code?: InputMaybe<Scalars['String']['input']>;
@@ -2992,10 +2988,6 @@ export const Admin__Core_Plugins__Files = gql`
     admin_pages
     admin_templates
     databases
-    graphql_mutations
-    graphql_queries
-    hooks
-    language
     pages
     pages_container
     templates

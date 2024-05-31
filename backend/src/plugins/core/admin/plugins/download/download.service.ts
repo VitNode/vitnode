@@ -21,7 +21,7 @@ import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class DownloadAdminPluginsService {
-  protected tempPath = join(process.cwd(), "temp", "plugins");
+  protected tempPath = join(ABSOLUTE_PATHS.uploads.temp, "plugins");
 
   constructor(private readonly databaseService: DatabaseService) {}
 
@@ -46,9 +46,11 @@ export class DownloadAdminPluginsService {
       });
     }
   }
-  protected async prepareTgz({ code }: { code: string }): Promise<void> {
+
+  protected async prepareTgz({ code }: { code: string }): Promise<string> {
     // Create temp folder
-    const tempPath = join(this.tempPath, code);
+    const tempNameFolder = `${code}-download-${generateRandomString(5)}-${currentDate()}`;
+    const tempPath = join(this.tempPath, tempNameFolder);
     this.createFolders(tempPath);
 
     // Create folders for backend and frontend
@@ -66,10 +68,8 @@ export class DownloadAdminPluginsService {
       "admin_pages",
       "admin_templates",
       "pages",
-      "hooks",
-      "templates",
-      "graphql_queries",
-      "graphql_mutations"
+      "plugin",
+      "templates"
     ];
     frontendPaths.forEach(path => {
       this.copyFiles({
@@ -78,43 +78,7 @@ export class DownloadAdminPluginsService {
       });
     });
 
-    // Copy frontend files - language
-    const frontendLanguageSource = ABSOLUTE_PATHS.plugin({ code }).frontend
-      .language;
-    if (fs.existsSync(frontendLanguageSource)) {
-      fs.cpSync(
-        frontendLanguageSource,
-        join(frontendPath, "langs", `${code}.json`),
-        {
-          recursive: true
-        }
-      );
-    }
-  }
-
-  protected async createTgz({
-    code,
-    name
-  }: {
-    code: string;
-    name: string;
-  }): Promise<void> {
-    this.prepareTgz({ code });
-
-    const path = join(this.tempPath, code);
-    try {
-      tar
-        .c({ gzip: true, file: join("temp", `${name}.tgz`), cwd: path }, ["."])
-        .then(() => {
-          // Remove temp folder
-          fs.rmSync(path, { recursive: true });
-        });
-    } catch (error) {
-      throw new CustomError({
-        code: "CREATE_TGZ_ERROR",
-        message: "Error creating tgz file"
-      });
-    }
+    return tempPath;
   }
 
   protected async updateVersion({
@@ -228,7 +192,28 @@ export class DownloadAdminPluginsService {
         version && version_code ? version_code : plugin.version_code
       }--${userId}-${generateRandomString(5)}-${currentDate()}`
     );
-    await this.createTgz({ code, name });
+    const tempPath = await this.prepareTgz({ code });
+
+    try {
+      tar
+        .c(
+          {
+            gzip: true,
+            file: join(ABSOLUTE_PATHS.uploads.temp, `${name}.tgz`),
+            cwd: tempPath
+          },
+          ["."]
+        )
+        .then(() => {
+          // Remove temp folder
+          fs.rmSync(tempPath, { recursive: true });
+        });
+    } catch (error) {
+      throw new CustomError({
+        code: "CREATE_TGZ_ERROR",
+        message: "Error creating tgz file"
+      });
+    }
 
     return `${name}.tgz`;
   }

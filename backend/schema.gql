@@ -126,10 +126,6 @@ type FilesAdminPluginsObj {
   admin_templates: Int!
   databases: Int!
   default_page: Boolean!
-  graphql_mutations: Int!
-  graphql_queries: Int!
-  hooks: Int!
-  language: Boolean!
   pages: Int!
   pages_container: Int!
   templates: Int!

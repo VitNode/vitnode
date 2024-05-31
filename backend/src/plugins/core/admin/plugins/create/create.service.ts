@@ -68,9 +68,15 @@ export class CreateAdminPluginsService {
 
       fs.writeFileSync(
         join(langPath, `${lang.code}.json`),
-        JSON.stringify({
-          [code]: {}
-        }),
+        JSON.stringify(
+          {
+            [code]: {
+              admin: {}
+            }
+          },
+          null,
+          2
+        ),
         "utf-8"
       );
     });

@@ -21,17 +21,5 @@ export class FilesAdminPluginsObj {
   default_page: boolean;
 
   @Field(() => Int)
-  hooks: number;
-
-  @Field(() => Int)
   templates: number;
-
-  @Field(() => Int)
-  graphql_queries: number;
-
-  @Field(() => Int)
-  graphql_mutations: number;
-
-  @Field(() => Boolean)
-  language: boolean;
 }
