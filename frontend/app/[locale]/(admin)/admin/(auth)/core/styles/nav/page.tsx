@@ -7,7 +7,7 @@ import {
   Admin__Core_Nav__ShowQueryVariables
 } from "@/utils/graphql/hooks";
 import { fetcher } from "@/utils/graphql/fetcher";
-import { NavAdminView } from "@/plugins/core/admin/views/core/styles/nav/nav-admin-view";
+import { NavAdminView } from "@/plugins/admin/views/core/styles/nav/nav-admin-view";
 
 const getData = async () => {
   const { data } = await fetcher<

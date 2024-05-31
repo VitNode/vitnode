@@ -5,8 +5,8 @@ import {
   Core_Theme_Editor__ShowQueryVariables
 } from "@/utils/graphql/hooks";
 import { fetcher } from "@/utils/graphql/fetcher";
-import { ThemeEditorView } from "@/plugins/core/admin/views/theme_editor/theme-editor-view";
-import { ErrorAdminView } from "@/plugins/core/admin/global/error-admin-view";
+import { ThemeEditorView } from "@/plugins/admin/views/theme_editor/theme-editor-view";
+import { ErrorAdminView } from "@/plugins/admin/global/error-admin-view";
 
 const getData = async () => {
   const { data } = await fetcher<

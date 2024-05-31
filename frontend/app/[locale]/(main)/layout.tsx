@@ -5,7 +5,7 @@ import { SessionProvider } from "./session-provider";
 import { redirect } from "@/utils/i18n";
 import { getSessionData } from "@/functions/get-session-data";
 import { TextLanguage } from "@/utils/graphql/hooks";
-import { InternalErrorView } from "@/plugins/core/admin/global/internal-error/internal-error-view";
+import { InternalErrorView } from "@/plugins/admin/global/internal-error/internal-error-view";
 
 interface Props {
   children: React.ReactNode;

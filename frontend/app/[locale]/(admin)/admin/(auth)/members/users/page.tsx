@@ -12,7 +12,7 @@ import {
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { fetcher } from "@/utils/graphql/fetcher";
-import { UsersMembersAdminView } from "@/plugins/core/admin/views/members/users/users-members-admin-view";
+import { UsersMembersAdminView } from "@/plugins/admin/views/members/users/users-members-admin-view";
 
 interface SearchParams extends SearchParamsPagination {
   groups?: string[];

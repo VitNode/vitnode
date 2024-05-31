@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import { cn } from "@/functions/classnames";
 import { getConfigFile } from "@/config/helpers";
-import { InternalErrorView } from "@/plugins/core/admin/global/internal-error/internal-error-view";
+import { InternalErrorView } from "@/plugins/admin/global/internal-error/internal-error-view";
 
 const inter = Inter({
   subsets: ["latin"],

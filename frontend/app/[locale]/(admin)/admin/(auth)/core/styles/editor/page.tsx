@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 
 import { getConfigFile } from "@/config/helpers";
 import { HeaderContent } from "@/components/header-content/header-content";
-import { EditorAdminView } from "@/plugins/core/admin/views/core/styles/editor/editor-admin-view";
+import { EditorAdminView } from "@/plugins/admin/views/core/styles/editor/editor-admin-view";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("admin.core.styles.editor");

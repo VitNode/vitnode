@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 
 import { CONFIG } from "@/config";
 import { getPluginDataAdmin } from "../query-api";
-import { OverviewDevPluginAdminView } from "@/plugins/core/admin/views/core/plugins/views/dev/overview";
+import { OverviewDevPluginAdminView } from "@/plugins/admin/views/core/plugins/views/dev/overview";
 
 interface Props {
   params: {

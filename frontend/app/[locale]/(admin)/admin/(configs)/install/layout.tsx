@@ -7,9 +7,9 @@ import {
 } from "@/utils/graphql/hooks";
 import { redirect } from "@/utils/i18n";
 import { fetcher, ErrorType } from "@/utils/graphql/fetcher";
-import { LayoutInstallConfigsView } from "@/plugins/core/admin/configs/views/install/layout-install-configs-view";
-import { InternalErrorView } from "@/plugins/core/admin/global/internal-error/internal-error-view";
-import { RedirectsInstallConfigsLayout } from "@/plugins/core/admin/configs/views/install/redirects-install-configs-layout";
+import { LayoutInstallConfigsView } from "@/plugins/admin/configs/views/install/layout-install-configs-view";
+import { InternalErrorView } from "@/plugins/admin/global/internal-error/internal-error-view";
+import { RedirectsInstallConfigsLayout } from "@/plugins/admin/configs/views/install/redirects-install-configs-layout";
 
 interface Props {
   children: React.ReactNode;

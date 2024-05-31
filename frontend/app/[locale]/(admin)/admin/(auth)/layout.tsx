@@ -13,7 +13,7 @@ import {
 } from "@/utils/graphql/hooks";
 import { getConfigFile } from "@/config/helpers";
 import { fetcher } from "@/utils/graphql/fetcher";
-import { AdminLayout } from "@/plugins/core/admin/layout/admin-layout";
+import { AdminLayout } from "@/plugins/admin/layout/admin-layout";
 
 const getData = async () => {
   const cookieStore = cookies();

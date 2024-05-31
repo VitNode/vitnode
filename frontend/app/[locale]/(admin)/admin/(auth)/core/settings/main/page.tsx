@@ -9,7 +9,7 @@ import {
   Core_Main_Settings__ShowQueryVariables
 } from "@/utils/graphql/hooks";
 import { fetcher } from "@/utils/graphql/fetcher";
-import { MainSettingsCoreAdmin } from "@/plugins/core/admin/views/core/settings/main/main-settings-core-admin";
+import { MainSettingsCoreAdmin } from "@/plugins/admin/views/core/settings/main/main-settings-core-admin";
 
 const getData = async () => {
   const { data } = await fetcher<

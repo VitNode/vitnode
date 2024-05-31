@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { getConfigFile } from "@/config/helpers";
-import { StaffAdminLayout } from "@/plugins/core/admin/views/members/staff/staff-admin-layout";
+import { StaffAdminLayout } from "@/plugins/admin/views/members/staff/staff-admin-layout";
 
 interface Props {
   children: React.ReactNode;

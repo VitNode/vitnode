@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import { Admin__Sessions__AuthorizationQuery } from "@/utils/graphql/hooks";
-import { SessionAdminContext } from "@/plugins/core/admin/hooks/use-session-admin";
+import { SessionAdminContext } from "@/plugins/admin/hooks/use-session-admin";
 
 interface Props {
   children: React.ReactNode;

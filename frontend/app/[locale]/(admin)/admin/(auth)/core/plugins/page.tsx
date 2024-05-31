@@ -14,9 +14,9 @@ import {
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Card } from "@/components/ui/card";
 import { fetcher } from "@/utils/graphql/fetcher";
-import { RebuildRequiredAdmin } from "@/plugins/core/admin/global/rebuild-required";
-import { ActionsPluginsAdmin } from "@/plugins/core/admin/views/core/plugins/actions/actions";
-import { PluginsCoreAdminView } from "@/plugins/core/admin/views/core/plugins/plugins-admin-view";
+import { RebuildRequiredAdmin } from "@/plugins/admin/global/rebuild-required";
+import { ActionsPluginsAdmin } from "@/plugins/admin/views/core/plugins/actions/actions";
+import { PluginsCoreAdminView } from "@/plugins/admin/views/core/plugins/plugins-admin-view";
 
 interface Props {
   searchParams: SearchParamsPagination;

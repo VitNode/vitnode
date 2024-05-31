@@ -14,7 +14,7 @@ import {
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { fetcher } from "@/utils/graphql/fetcher";
-import { FilesAdvancedCoreAdminView } from "@/plugins/core/admin/views/core/advanced/files/files-advanced-core-adminpview";
+import { FilesAdvancedCoreAdminView } from "@/plugins/admin/views/core/advanced/files/files-advanced-core-adminpview";
 
 const getData = async (variables: Admin__Core_Files__ShowQueryVariables) => {
   const { data } = await fetcher<

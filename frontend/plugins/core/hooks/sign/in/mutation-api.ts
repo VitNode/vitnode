@@ -9,7 +9,7 @@ import {
 } from "@/utils/graphql/hooks";
 import { redirect } from "@/utils/i18n";
 import { fetcher } from "@/utils/graphql/fetcher";
-import { CoreApiTags } from "@/plugins/core/admin/api-tags";
+import { CoreApiTags } from "@/plugins/admin/api-tags";
 
 export const mutationApi = async (
   variables: Core_Sessions__Sign_InMutationVariables

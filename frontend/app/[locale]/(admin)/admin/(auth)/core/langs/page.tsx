@@ -14,9 +14,9 @@ import {
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Card } from "@/components/ui/card";
 import { fetcher } from "@/utils/graphql/fetcher";
-import { ActionsLangsAdmin } from "@/plugins/core/admin/views/core/langs/actions/actions";
-import { RebuildRequiredAdmin } from "@/plugins/core/admin/global/rebuild-required";
-import { LangsCoreAdminView } from "@/plugins/core/admin/views/core/langs/langs-core-admin-view";
+import { ActionsLangsAdmin } from "@/plugins/admin/views/core/langs/actions/actions";
+import { RebuildRequiredAdmin } from "@/plugins/admin/global/rebuild-required";
+import { LangsCoreAdminView } from "@/plugins/admin/views/core/langs/langs-core-admin-view";
 
 const getData = async (variables: Core_Languages__ShowQueryVariables) => {
   const { data } = await fetcher<

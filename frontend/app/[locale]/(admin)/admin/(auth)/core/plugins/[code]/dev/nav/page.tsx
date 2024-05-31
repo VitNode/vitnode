@@ -8,8 +8,8 @@ import {
   Admin__Core_Plugins__Nav__ShowQueryVariables
 } from "@/utils/graphql/hooks";
 import { fetcher } from "@/utils/graphql/fetcher";
-import { NavDevPluginAdminView } from "@/plugins/core/admin/views/core/plugins/views/dev/nav/nav";
-import { CreateNavDevPluginAdmin } from "@/plugins/core/admin/views/core/plugins/views/dev/nav/create/create";
+import { NavDevPluginAdminView } from "@/plugins/admin/views/core/plugins/views/dev/nav/nav";
+import { CreateNavDevPluginAdmin } from "@/plugins/admin/views/core/plugins/views/dev/nav/create/create";
 
 interface Props {
   params: {

@@ -4,7 +4,7 @@ import { Header } from "./header/header";
 import { QuickMenu } from "./quick-menu/quick-menu";
 import { TextLanguage } from "@/utils/graphql/hooks";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
-import { PoweredByVitNode } from "@/plugins/core/admin/global/powered-by";
+import { PoweredByVitNode } from "@/plugins/admin/global/powered-by";
 import "./global.css";
 
 interface Props {

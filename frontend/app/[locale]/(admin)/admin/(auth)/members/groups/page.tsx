@@ -12,7 +12,7 @@ import {
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { fetcher } from "@/utils/graphql/fetcher";
-import { GroupsMembersAdminView } from "@/plugins/core/admin/views/members/groups/groups-members-admin-view";
+import { GroupsMembersAdminView } from "@/plugins/admin/views/members/groups/groups-members-admin-view";
 
 interface Props {
   searchParams: SearchParamsPagination;
