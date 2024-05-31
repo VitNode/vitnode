@@ -12,6 +12,7 @@ import { DatabaseService } from "@/database/database.service";
 import { CustomError } from "@/utils/errors/custom-error";
 import { setRebuildRequired } from "@/functions/rebuild-required";
 import { ABSOLUTE_PATHS } from "@/config";
+import { core_migrations } from "../../database/schema/files";
 
 @Injectable()
 export class DeleteAdminPluginsService {
@@ -23,28 +24,6 @@ export class DeleteAdminPluginsService {
   protected deleteFolderWhenExists(path: string) {
     if (fs.existsSync(path)) {
       fs.rmSync(path, { recursive: true });
-    }
-  }
-
-  protected async deleteMigration({ code }: { code: string }) {
-    const migrationPathInfo = ABSOLUTE_PATHS.plugin({ code }).database
-      .migration_info;
-    if (!fs.existsSync(migrationPathInfo)) return;
-
-    const migrationData: { entries: { when: number }[] } = JSON.parse(
-      fs.readFileSync(migrationPathInfo, "utf-8")
-    );
-    const deleteQueries = migrationData.entries.map(entry => {
-      return `DELETE FROM drizzle.__drizzle_migrations WHERE created_at = ${entry.when};`;
-    });
-
-    try {
-      await this.databaseService.db.execute(sql.raw(deleteQueries.join(" ")));
-    } catch (error) {
-      throw new CustomError({
-        code: "DELETE_TABLE_ERROR",
-        message: `Error deleting migration for plugin ${code}`
-      });
     }
   }
 
@@ -65,7 +44,6 @@ export class DeleteAdminPluginsService {
     }
 
     // Drop tables
-    await this.deleteMigration({ code });
     const tables: { getTables: () => string[] } = await import(
       `../../../../${code}/admin/database/functions`
     );
@@ -84,7 +62,9 @@ export class DeleteAdminPluginsService {
         message: `Error deleting tables for plugin ${code}`
       });
     }
-
+    await this.databaseService.db
+      .delete(core_migrations)
+      .where(eq(core_migrations.plugin, code));
     this.changeFilesService.changeFilesWhenDelete({ code });
 
     const modulePath = ABSOLUTE_PATHS.plugin({ code }).root;

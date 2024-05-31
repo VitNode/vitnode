@@ -26,7 +26,7 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
   protected tempPath: string = join(
     ABSOLUTE_PATHS.uploads.temp,
     "plugins",
-    `-upload-${generateRandomString(5)}${currentDate()}`
+    `upload-${generateRandomString(5)}${currentDate()}`
   );
 
   constructor(
@@ -125,11 +125,14 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
     destination: string;
     source: string;
   }): Promise<void> {
-    if (!fs.existsSync(source)) return;
+    if (!fs.existsSync(source)) {
+      fs.mkdirSync(source, { recursive: true });
+    }
 
     try {
       await fs.promises.cp(source, destination, {
-        recursive: true
+        recursive: true,
+        force: true
       });
     } catch (error) {
       throw new CustomError({
@@ -163,7 +166,19 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
   }: {
     config: ConfigPlugin;
   }): Promise<void> {
-    const frontendPaths = ["admin_pages", "admin_templates", "pages", "plugin"];
+    // Copy plugin folder
+    const pluginPath = ABSOLUTE_PATHS.plugin({ code: config.code }).frontend
+      .plugin;
+    if (!fs.existsSync(pluginPath)) {
+      await fs.promises.mkdir(pluginPath, { recursive: true });
+    }
+
+    this.copyFilesToPluginFolder({
+      source: join(this.tempPath, "frontend", "plugin"),
+      destination: pluginPath
+    });
+
+    const frontendPaths = ["admin_pages", "admin_templates", "plugin"];
     await Promise.all(
       frontendPaths.map(async path => {
         const source = join(this.tempPath, "frontend", path);
@@ -196,30 +211,30 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
     }
 
     // Copy language
-    const languages =
-      await this.databaseService.db.query.core_languages.findMany({
-        columns: {
-          code: true
-        }
-      });
-    languages.forEach(lang => {
-      const source = join(
-        this.tempPath,
-        "frontend",
-        "langs",
-        `${config.code}.json`
-      );
-      const destination = join(
-        process.cwd(),
-        "..",
-        "frontend",
-        "langs",
-        lang.code,
-        `${config.code}.json`
-      );
+    // const languages =
+    //   await this.databaseService.db.query.core_languages.findMany({
+    //     columns: {
+    //       code: true
+    //     }
+    //   });
+    // languages.forEach(lang => {
+    //   const source = join(
+    //     this.tempPath,
+    //     "frontend",
+    //     "langs",
+    //     `${config.code}.json`
+    //   );
+    //   const destination = join(
+    //     process.cwd(),
+    //     "..",
+    //     "frontend",
+    //     "langs",
+    //     lang.code,
+    //     `${config.code}.json`
+    //   );
 
-      this.copyFileToPluginFolder({ source, destination });
-    });
+    //   this.copyFileToPluginFolder({ source, destination });
+    // });
   }
 
   async upload({
