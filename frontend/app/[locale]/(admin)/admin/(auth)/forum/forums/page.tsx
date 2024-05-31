@@ -1,4 +1,4 @@
-import { ForumsForumAdminView } from "@/admin/forum/views/forums/forums-forum-admin-view";
+import { ForumsForumAdminView } from "@/plugins/forum/admin/views/forums/forums-forum-admin-view";
 import {
   Admin__Forum_Forums__Show,
   Admin__Forum_Forums__ShowQuery,

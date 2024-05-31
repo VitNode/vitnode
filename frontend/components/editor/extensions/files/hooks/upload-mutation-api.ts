@@ -2,13 +2,13 @@
 
 import { revalidateTag } from "next/cache";
 
-import { CoreApiTags } from "@/admin/core/api-tags";
 import {
   Core_Editor_Files__Upload,
   Core_Editor_Files__UploadMutation,
   Core_Editor_Files__UploadMutationVariables
 } from "@/utils/graphql/hooks";
 import { fetcher } from "@/utils/graphql/fetcher";
+import { CoreApiTags } from "@/plugins/core/admin/api-tags";
 
 export const uploadMutationApi = async (formData: FormData) => {
   const file = formData.get("file") as File;

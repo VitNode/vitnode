@@ -7,8 +7,8 @@ import {
   Core_Members__Sign_UpMutation,
   Core_Members__Sign_UpMutationVariables
 } from "@/utils/graphql/hooks";
-import { CoreApiTags } from "@/admin/core/api-tags";
 import { fetcher } from "@/utils/graphql/fetcher";
+import { CoreApiTags } from "@/plugins/core/admin/api-tags";
 
 interface Args {
   variables: Core_Members__Sign_UpMutationVariables;

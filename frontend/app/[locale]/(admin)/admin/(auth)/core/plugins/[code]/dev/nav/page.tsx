@@ -1,8 +1,6 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-import { CreateNavDevPluginAdmin } from "@/admin/core/views/core/plugins/views/dev/nav/create/create";
-import { NavDevPluginAdminView } from "@/admin/core/views/core/plugins/views/dev/nav/nav";
 import { HeaderContent } from "@/components/header-content/header-content";
 import {
   Admin__Core_Plugins__Nav__Show,
@@ -10,6 +8,8 @@ import {
   Admin__Core_Plugins__Nav__ShowQueryVariables
 } from "@/utils/graphql/hooks";
 import { fetcher } from "@/utils/graphql/fetcher";
+import { NavDevPluginAdminView } from "@/plugins/core/admin/views/core/plugins/views/dev/nav/nav";
+import { CreateNavDevPluginAdmin } from "@/plugins/core/admin/views/core/plugins/views/dev/nav/create/create";
 
 interface Props {
   params: {

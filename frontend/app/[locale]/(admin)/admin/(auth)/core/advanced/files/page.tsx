@@ -1,7 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 
-import { FilesAdvancedCoreAdminView } from "@/admin/core/views/core/advanced/files/files-advanced-core-adminpview";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Card } from "@/components/ui/card";
 import {
@@ -15,6 +14,7 @@ import {
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { fetcher } from "@/utils/graphql/fetcher";
+import { FilesAdvancedCoreAdminView } from "@/plugins/core/admin/views/core/advanced/files/files-advanced-core-adminpview";
 
 const getData = async (variables: Admin__Core_Files__ShowQueryVariables) => {
   const { data } = await fetcher<

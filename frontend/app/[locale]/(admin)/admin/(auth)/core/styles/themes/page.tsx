@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-import { ThemesAdminView } from "@/admin/core/views/core/styles/themes/themes-admin-view";
 import {
   Admin_Core_Themes__Show,
   ShowAdminThemesSortingColumnEnum,
@@ -13,6 +12,7 @@ import {
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { fetcher } from "@/utils/graphql/fetcher";
+import { ThemesAdminView } from "@/plugins/core/admin/views/core/styles/themes/themes-admin-view";
 
 interface Props {
   searchParams: SearchParamsPagination;

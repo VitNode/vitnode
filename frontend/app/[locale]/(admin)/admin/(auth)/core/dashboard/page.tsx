@@ -1,5 +1,3 @@
-import { DashboardCoreAdminView } from "@/admin/core/views/core/dashboard/dashboard-core-admin-view";
-
 // const getData = async (variables: Admin__Core__DashboardQueryVariables) => {
 //   const { data } = await fetcher<
 //     Admin__Core__DashboardQuery,
@@ -8,6 +6,8 @@ import { DashboardCoreAdminView } from "@/admin/core/views/core/dashboard/dashbo
 //     query: Admin__Core__Dashboard,
 //     variables
 //   });
+
+import { DashboardCoreAdminView } from "@/plugins/core/admin/views/core/dashboard/dashboard-core-admin-view";
 
 //   return data;
 // };

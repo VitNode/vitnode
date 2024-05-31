@@ -1,5 +1,3 @@
-import { ErrorAdminView } from "@/admin/core/global/error-admin-view";
-import { ThemeEditorView } from "@/admin/core/views/theme_editor/theme-editor-view";
 import { getSessionData } from "@/functions/get-session-data";
 import {
   Core_Theme_Editor__Show,
@@ -7,6 +5,8 @@ import {
   Core_Theme_Editor__ShowQueryVariables
 } from "@/utils/graphql/hooks";
 import { fetcher } from "@/utils/graphql/fetcher";
+import { ThemeEditorView } from "@/plugins/core/admin/views/theme_editor/theme-editor-view";
+import { ErrorAdminView } from "@/plugins/core/admin/global/error-admin-view";
 
 const getData = async () => {
   const { data } = await fetcher<

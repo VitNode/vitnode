@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-import { ModeratorsStaffAdminView } from "@/admin/core/views/members/staff/views/moderators/moderators-view";
 import {
   Admin__Core_Staff_Moderators__Show,
   ShowAdminStaffModeratorsSortingColumnEnum,
@@ -13,6 +12,7 @@ import {
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { fetcher } from "@/utils/graphql/fetcher";
+import { ModeratorsStaffAdminView } from "@/plugins/core/admin/views/members/staff/views/moderators/moderators-view";
 
 const getData = async (
   variables: Admin__Core_Staff_Moderators__ShowQueryVariables

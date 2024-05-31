@@ -4,7 +4,6 @@ import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { isRedirectError } from "next/dist/client/components/redirect";
 
-import { AdminLayout } from "@/admin/core/layout/admin-layout";
 import { Providers } from "./providers";
 import { redirect } from "@/utils/i18n";
 import {
@@ -14,6 +13,7 @@ import {
 } from "@/utils/graphql/hooks";
 import { getConfigFile } from "@/config/helpers";
 import { fetcher } from "@/utils/graphql/fetcher";
+import { AdminLayout } from "@/plugins/core/admin/layout/admin-layout";
 
 const getData = async () => {
   const cookieStore = cookies();

@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-import { GroupsMembersAdminView } from "@/admin/core/views/members/groups/groups-members-admin-view";
 import {
   Admin__Core_Groups__Show,
   ShowAdminGroupsSortingColumnEnum,
@@ -13,6 +12,7 @@ import {
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { fetcher } from "@/utils/graphql/fetcher";
+import { GroupsMembersAdminView } from "@/plugins/core/admin/views/members/groups/groups-members-admin-view";
 
 interface Props {
   searchParams: SearchParamsPagination;

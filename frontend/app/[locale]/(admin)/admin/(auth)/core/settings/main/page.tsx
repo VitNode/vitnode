@@ -1,7 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 
-import { MainSettingsCoreAdmin } from "@/admin/core/views/core/settings/main/main-settings-core-admin";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Card } from "@/components/ui/card";
 import {
@@ -10,6 +9,7 @@ import {
   Core_Main_Settings__ShowQueryVariables
 } from "@/utils/graphql/hooks";
 import { fetcher } from "@/utils/graphql/fetcher";
+import { MainSettingsCoreAdmin } from "@/plugins/core/admin/views/core/settings/main/main-settings-core-admin";
 
 const getData = async () => {
   const { data } = await fetcher<

@@ -8,8 +8,8 @@ import {
   Core_Sessions__Sign_InMutationVariables
 } from "@/utils/graphql/hooks";
 import { redirect } from "@/utils/i18n";
-import { CoreApiTags } from "@/admin/core/api-tags";
 import { fetcher } from "@/utils/graphql/fetcher";
+import { CoreApiTags } from "@/plugins/core/admin/api-tags";
 
 export const mutationApi = async (
   variables: Core_Sessions__Sign_InMutationVariables

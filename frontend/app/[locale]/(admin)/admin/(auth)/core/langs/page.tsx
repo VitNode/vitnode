@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-import { LangsCoreAdminView } from "@/admin/core/views/core/langs/langs-core-admin-view";
 import {
   Core_Languages__Show,
   ShowCoreLanguagesSortingColumnEnum,
@@ -13,10 +12,11 @@ import {
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { HeaderContent } from "@/components/header-content/header-content";
-import { ActionsLangsAdmin } from "@/admin/core/views/core/langs/actions/actions";
 import { Card } from "@/components/ui/card";
-import { RebuildRequiredAdmin } from "@/admin/core/global/rebuild-required";
 import { fetcher } from "@/utils/graphql/fetcher";
+import { ActionsLangsAdmin } from "@/plugins/core/admin/views/core/langs/actions/actions";
+import { RebuildRequiredAdmin } from "@/plugins/core/admin/global/rebuild-required";
+import { LangsCoreAdminView } from "@/plugins/core/admin/views/core/langs/langs-core-admin-view";
 
 const getData = async (variables: Core_Languages__ShowQueryVariables) => {
   const { data } = await fetcher<

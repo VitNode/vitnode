@@ -2,9 +2,9 @@ import * as React from "react";
 
 import { Header } from "./header/header";
 import { QuickMenu } from "./quick-menu/quick-menu";
-import { PoweredByVitNode } from "@/admin/core/global/powered-by";
 import { TextLanguage } from "@/utils/graphql/hooks";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
+import { PoweredByVitNode } from "@/plugins/core/admin/global/powered-by";
 import "./global.css";
 
 interface Props {
