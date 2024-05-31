@@ -7,16 +7,16 @@ import {
   ShowAdminPluginsSortingColumnEnum,
   Admin__Core_Plugins__ShowQuery,
   Admin__Core_Plugins__ShowQueryVariables
-} from "@/graphql/hooks";
-import { fetcher } from "@/graphql/fetcher";
+} from "@/utils/graphql/hooks";
 import {
   usePaginationAPISsr,
   SearchParamsPagination
-} from "@/hooks/core/utils/use-pagination-api-ssr";
+} from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { RebuildRequiredAdmin } from "@/admin/core/global/rebuild-required";
 import { Card } from "@/components/ui/card";
 import { ActionsPluginsAdmin } from "@/admin/core/views/core/plugins/actions/actions";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 interface Props {
   searchParams: SearchParamsPagination;

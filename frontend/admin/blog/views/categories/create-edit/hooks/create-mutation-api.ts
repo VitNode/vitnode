@@ -1,11 +1,11 @@
 "use server";
 
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Blog_Categories__CreateMutation,
   Admin__Blog_Categories__Create,
   Admin__Blog_Categories__CreateMutationVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 export const mutationCreateApi = async (
   variables: Admin__Blog_Categories__CreateMutationVariables

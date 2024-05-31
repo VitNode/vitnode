@@ -3,13 +3,13 @@ import { notFound } from "next/navigation";
 import * as React from "react";
 
 import { ProfileViewProps } from "@/themes/1/core/views/profile/profile-view";
-import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Members__Profiles,
   Core_Members__ProfilesQuery,
   Core_Members__ProfilesQueryVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
 import { getSessionData } from "@/functions/get-session-data";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 const getData = async ({ id }: { id: string }) => {
   const { data } = await fetcher<

@@ -1,11 +1,11 @@
 "use server";
 
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Languages__Download,
   Admin__Core_Languages__DownloadMutation,
   Admin__Core_Languages__DownloadMutationVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 export const mutationApi = async (
   variables: Admin__Core_Languages__DownloadMutationVariables

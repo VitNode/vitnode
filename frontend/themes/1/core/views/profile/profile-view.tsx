@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Core_Members__ProfilesQuery } from "@/graphql/hooks";
+import { Core_Members__ProfilesQuery } from "@/utils/graphql/hooks";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
-import { useTextLang } from "@/hooks/core/use-text-lang";
+import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 
 export interface ProfileViewProps {
   data: Core_Members__ProfilesQuery;

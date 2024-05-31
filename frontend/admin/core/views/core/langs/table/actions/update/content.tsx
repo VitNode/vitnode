@@ -5,7 +5,7 @@ import {
   DialogHeader,
   DialogTitle
 } from "@/components/ui/dialog";
-import { ShowCoreLanguages } from "@/graphql/hooks";
+import { ShowCoreLanguages } from "@/utils/graphql/hooks";
 import { Form, FormField } from "@/components/ui/form";
 import { useUpdateLangAdmin } from "./hooks/use-update-lang-admin";
 import { FilesInput } from "@/components/ui/files/files-input";

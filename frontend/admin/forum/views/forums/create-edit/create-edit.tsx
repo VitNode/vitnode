@@ -14,7 +14,7 @@ import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 import { ShowForumForumsAdminWithChildren } from "../table/hooks/use-forum-forums-admin-api";
-import { useTextLang } from "@/hooks/core/use-text-lang";
+import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 
 const MainContentCreateEditFormForumAdmin = React.lazy(async () =>
   import("./content/main").then(module => ({

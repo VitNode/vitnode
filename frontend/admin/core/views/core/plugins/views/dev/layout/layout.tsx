@@ -2,7 +2,7 @@ import * as React from "react";
 import { useTranslations } from "next-intl";
 import { ExternalLink } from "lucide-react";
 
-import { Admin__Core_Plugins__Show__ItemQuery } from "@/graphql/hooks";
+import { Admin__Core_Plugins__Show__ItemQuery } from "@/utils/graphql/hooks";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Badge } from "@/components/ui/badge";
 import { Tabs } from "@/components/tabs/tabs";

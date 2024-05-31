@@ -1,4 +1,4 @@
-import { ShowCoreNav } from "@/graphql/hooks";
+import { ShowCoreNav } from "@/utils/graphql/hooks";
 import { DeleteActionTableNavAdmin } from "./delete/delete";
 import { EditActionTableNavAdmin } from "./edit";
 

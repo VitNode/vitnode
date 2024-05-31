@@ -10,7 +10,10 @@ import { DataTable } from "@/components/data-table/data-table";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
 import { DateFormat } from "@/components/date-format/date-format";
 import { Badge } from "@/components/ui/badge";
-import { Admin_Core_Themes__ShowQuery, ShowAdminThemes } from "@/graphql/hooks";
+import {
+  Admin_Core_Themes__ShowQuery,
+  ShowAdminThemes
+} from "@/utils/graphql/hooks";
 import { ActionsItemThemesAdmin } from "./actions/actions";
 
 export const TableThemesAdmin = ({

@@ -22,9 +22,9 @@ import {
 } from "@/components/ui/form";
 import { getIdFormString } from "@/functions/url";
 import { useRouter } from "@/utils/i18n";
-import { ShowTopicsForums } from "@/graphql/hooks";
-import { useTextLang } from "@/hooks/core/use-text-lang";
-import { useCreateEditTopic } from "@/hooks/forum/topics/create-edit/use-create-edit-topic";
+import { ShowTopicsForums } from "@/utils/graphql/hooks";
+import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
+import { useCreateEditTopic } from "@/plugins/forum/hooks/topics/create-edit/use-create-edit-topic";
 import { Editor } from "@/components/editor/editor";
 
 export interface EditTopicData

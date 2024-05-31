@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { CheckIcon } from "lucide-react";
 
-import { ShowAdminGroups } from "@/graphql/hooks";
+import { ShowAdminGroups } from "@/utils/graphql/hooks";
 import { cn } from "@/functions/classnames";
 import { CommandGroup, CommandItem } from "@/components/ui/command";
 import { GroupInputItem } from "../group-input";

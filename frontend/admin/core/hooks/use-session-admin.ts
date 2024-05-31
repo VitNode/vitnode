@@ -3,7 +3,7 @@ import * as React from "react";
 import {
   AuthorizationCurrentUserObj,
   NavAdminPluginsAuthorization
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
 
 interface Args {
   nav: NavAdminPluginsAuthorization[];

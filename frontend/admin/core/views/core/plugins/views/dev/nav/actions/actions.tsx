@@ -1,4 +1,4 @@
-import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
+import { ShowAdminNavPluginsObj } from "@/utils/graphql/hooks";
 import { EditActionTableNavDevPluginAdmin } from "./edit";
 import { DeleteActionTableNavDevPluginAdmin } from "./delete/delete";
 

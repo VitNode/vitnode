@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { SubmitDeleteActionsTableModeratorsStaffAdmin } from "./submit";
 import { mutationApi } from "./mutation-api";
-import { ShowAdminStaffModerators } from "@/graphql/hooks";
+import { ShowAdminStaffModerators } from "@/utils/graphql/hooks";
 
 interface Props {
   data: Pick<ShowAdminStaffModerators, "id">;

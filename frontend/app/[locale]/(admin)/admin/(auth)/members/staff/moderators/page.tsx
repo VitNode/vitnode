@@ -2,17 +2,17 @@ import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { ModeratorsStaffAdminView } from "@/admin/core/views/members/staff/views/moderators/moderators-view";
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Staff_Moderators__Show,
   ShowAdminStaffModeratorsSortingColumnEnum,
   Admin__Core_Staff_Moderators__ShowQuery,
   Admin__Core_Staff_Moderators__ShowQueryVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
 import {
   usePaginationAPISsr,
   SearchParamsPagination
-} from "@/hooks/core/utils/use-pagination-api-ssr";
+} from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 const getData = async (
   variables: Admin__Core_Staff_Moderators__ShowQueryVariables

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { APIKeys } from "@/graphql/api-keys";
 import { queryApi } from "./query-api";
+import { APIKeys } from "@/utils/graphql/api-keys";
 
 interface Args {
   searchValue: string;

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Link } from "@/utils/i18n";
-import { User } from "@/graphql/hooks";
+import { User } from "@/utils/graphql/hooks";
 
 interface Props
   extends Omit<

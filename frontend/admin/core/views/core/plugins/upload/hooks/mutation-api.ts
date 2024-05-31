@@ -2,12 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Plugins__Upload,
   Admin__Core_Plugins__UploadMutation,
   Admin__Core_Plugins__UploadMutationVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 export const mutationApi = async (formData: FormData) => {
   try {

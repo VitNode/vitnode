@@ -1,11 +1,11 @@
 "use server";
 
-import { fetcher } from "@/graphql/fetcher";
 import {
   Forum_Topics__Actions__Lock_Toggle,
   Forum_Topics__Actions__Lock_ToggleMutation,
   Forum_Topics__Actions__Lock_ToggleMutationVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 export const mutationApi = async (
   variables: Forum_Topics__Actions__Lock_ToggleMutationVariables

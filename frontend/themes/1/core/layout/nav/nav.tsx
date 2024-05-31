@@ -2,7 +2,7 @@
 
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 
-import { useSession } from "@/hooks/core/use-session";
+import { useSession } from "@/plugins/core/hooks/use-session";
 import { ItemNav } from "./item";
 
 export const Nav = () => {

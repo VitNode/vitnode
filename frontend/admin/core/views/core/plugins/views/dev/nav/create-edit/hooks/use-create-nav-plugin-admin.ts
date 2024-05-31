@@ -8,9 +8,9 @@ import { useTranslations } from "next-intl";
 import { zodInput } from "@/utils/zod";
 import { useDialog } from "@/components/ui/dialog";
 import { createMutationApi } from "./create-mutation-api";
-import { ErrorType } from "@/graphql/fetcher";
-import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
+import { ShowAdminNavPluginsObj } from "@/utils/graphql/hooks";
 import { editMutationApi } from "./edit-mutation-api";
+import { ErrorType } from "@/utils/graphql/fetcher";
 
 interface Props {
   data?: ShowAdminNavPluginsObj;

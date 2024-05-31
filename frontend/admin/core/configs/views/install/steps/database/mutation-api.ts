@@ -2,12 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Install__Create_Database,
   Admin__Install__Create_DatabaseMutation,
   Admin__Install__Create_DatabaseMutationVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 export const mutationApi = async () => {
   try {

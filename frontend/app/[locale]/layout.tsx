@@ -6,15 +6,15 @@ import { Metadata } from "next";
 
 import { CONFIG } from "@/config";
 import { Providers } from "./providers";
-import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Middleware,
   Core_MiddlewareQuery,
   Core_MiddlewareQueryVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
 import { cn } from "@/functions/classnames";
 import { CatchLayout } from "./catch";
 import { getConfigFile } from "@/config/helpers";
+import { fetcher } from "@/utils/graphql/fetcher";
 import "@/app/[locale]/(admin)/admin/global.css";
 import "./global.css";
 

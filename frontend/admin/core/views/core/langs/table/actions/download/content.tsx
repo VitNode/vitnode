@@ -34,7 +34,7 @@ import {
   CommandList
 } from "@/components/ui/command";
 import { Loader } from "@/components/loader";
-import { ShowCoreLanguages } from "@/graphql/hooks";
+import { ShowCoreLanguages } from "@/utils/graphql/hooks";
 import { useSessionAdmin } from "@/admin/core/hooks/use-session-admin";
 
 export const ContentDownloadActionsTableLangsCoreAdmin = ({

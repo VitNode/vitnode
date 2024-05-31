@@ -6,9 +6,9 @@ import { useTranslations } from "next-intl";
 
 import { zodInput } from "@/utils/zod";
 import { mutationCreateApi } from "./create-mutation-api";
-import { ShowBlogCategories } from "@/graphql/hooks";
+import { ShowBlogCategories } from "@/utils/graphql/hooks";
 import { useDialog } from "@/components/ui/dialog";
-import { useTextLang } from "@/hooks/core/use-text-lang";
+import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 
 interface Args {
   data?: ShowBlogCategories;

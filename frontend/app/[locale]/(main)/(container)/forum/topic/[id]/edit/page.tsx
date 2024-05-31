@@ -5,7 +5,7 @@ import * as React from "react";
 import { getSessionData } from "@/functions/get-session-data";
 import { getTopicData } from "../query-api";
 import { EditTopicViewProps } from "@/themes/1/forum/views/forum/topic/views/edit/edit-topic-view";
-import { useTextLang } from "@/hooks/core/use-text-lang";
+import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { ErrorViewSSR } from "@/components/views/error-view-ssr";
 
 interface Props {

@@ -8,7 +8,7 @@ import { useDialog } from "@/components/ui/dialog";
 import { mutationApi } from "./mutation-api";
 import { usePathname, useRouter } from "@/utils/i18n";
 import { zodInput } from "@/utils/zod";
-import { ShowAdminThemes } from "@/graphql/hooks";
+import { ShowAdminThemes } from "@/utils/graphql/hooks";
 
 export const useEditThemeAdmin = ({
   author,

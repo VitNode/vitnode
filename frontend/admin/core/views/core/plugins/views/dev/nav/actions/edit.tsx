@@ -11,7 +11,7 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
+import { ShowAdminNavPluginsObj } from "@/utils/graphql/hooks";
 
 const Content = React.lazy(async () =>
   import("../create-edit/create-edit").then(module => ({

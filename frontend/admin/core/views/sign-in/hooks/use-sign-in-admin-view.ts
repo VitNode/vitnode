@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import * as React from "react";
 
-import { mutationApi } from "@/hooks/core/sign/in/mutation-api";
-import { ErrorType } from "@/graphql/fetcher";
+import { mutationApi } from "@/plugins/core/hooks/sign/in/mutation-api";
 import { zodInput } from "@/utils/zod";
+import { ErrorType } from "@/utils/graphql/fetcher";
 
 export const useSignInAdminView = () => {
   const [error, setError] = React.useState<ErrorType | null>(null);

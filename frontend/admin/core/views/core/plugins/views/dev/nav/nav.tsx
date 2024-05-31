@@ -9,14 +9,14 @@ import { useTranslations } from "next-intl";
 import * as React from "react";
 import { useParams } from "next/navigation";
 
-import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
+import { useDragAndDrop } from "@/plugins/core/hooks/drag&drop/use-functions";
 import {
   Admin__Core_Plugins__Nav__ShowQuery,
   ShowAdminNavPluginsObj
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
 import { ItemContentNavDevPluginAdmin } from "./item";
 import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
-import { ItemDragAndDrop } from "@/hooks/core/drag&drop/item";
+import { ItemDragAndDrop } from "@/plugins/core/hooks/drag&drop/item";
 
 export const NavDevPluginAdminView = ({
   admin__core_plugins__nav__show: edges

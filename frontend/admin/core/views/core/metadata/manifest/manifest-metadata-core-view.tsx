@@ -16,7 +16,7 @@ import {
 import { useManifestCoreAdminView } from "./hooks/use-manifest-core-admin-view";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
-import { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";
+import { Admin__Core_Manifest_Metadata__ShowQuery } from "@/utils/graphql/hooks";
 import { Input } from "@/components/ui/input";
 import { ColorInput } from "@/components/color/color-input";
 

@@ -1,8 +1,8 @@
 "use client";
 
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { useTextLang } from "@/hooks/core/use-text-lang";
-import { Forum_Forums__Show_ItemQuery } from "@/graphql/hooks";
+import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
+import { Forum_Forums__Show_ItemQuery } from "@/utils/graphql/hooks";
 
 import { CreateEditTopic } from "../../../topic/create-edit/create-edit";
 

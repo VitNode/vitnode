@@ -1,10 +1,10 @@
 import { ExternalLink } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { ShowCoreNav } from "@/graphql/hooks";
-import { useTextLang } from "@/hooks/core/use-text-lang";
+import { ShowCoreNav } from "@/utils/graphql/hooks";
+import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { ActionsTableNavAdmin } from "./actions/actions";
-import { FlatTree } from "@/hooks/core/drag&drop/use-functions";
+import { FlatTree } from "@/plugins/core/hooks/drag&drop/use-functions";
 
 interface Props {
   data: FlatTree<Omit<ShowCoreNav, "__typename">>;

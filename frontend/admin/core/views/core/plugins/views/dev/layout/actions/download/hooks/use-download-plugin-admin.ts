@@ -8,7 +8,7 @@ import { CONFIG } from "@/config";
 import { useDialog } from "@/components/ui/dialog";
 import { increaseVersionString } from "@/functions/increase-version-string";
 import { zodInput } from "@/utils/zod";
-import { ShowAdminPlugins } from "@/graphql/hooks";
+import { ShowAdminPlugins } from "@/utils/graphql/hooks";
 import { mutationApi } from "./mutation-api";
 
 export const useDownloadPluginAdmin = ({

@@ -1,7 +1,7 @@
-import { useTextLang } from "@/hooks/core/use-text-lang";
+import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { ActionsForumAdmin } from "./actions/actions";
 import { ShowForumForumsAdminWithChildren } from "../hooks/use-forum-forums-admin-api";
-import { FlatTree } from "@/hooks/core/drag&drop/use-functions";
+import { FlatTree } from "@/plugins/core/hooks/drag&drop/use-functions";
 
 interface Props {
   data: FlatTree<ShowForumForumsAdminWithChildren>;

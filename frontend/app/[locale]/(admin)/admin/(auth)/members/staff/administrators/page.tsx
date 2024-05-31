@@ -7,12 +7,12 @@ import {
   ShowAdminStaffAdministratorsSortingColumnEnum,
   Admin__Core_Staff_Administrators__ShowQuery,
   Admin__Core_Staff_Administrators__ShowQueryVariables
-} from "@/graphql/hooks";
-import { fetcher } from "@/graphql/fetcher";
+} from "@/utils/graphql/hooks";
 import {
   usePaginationAPISsr,
   SearchParamsPagination
-} from "@/hooks/core/utils/use-pagination-api-ssr";
+} from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 const getData = async (
   variables: Admin__Core_Staff_Administrators__ShowQueryVariables

@@ -1,12 +1,12 @@
 import createIntlMiddleware from "next-intl/middleware";
 import { NextRequest } from "next/server";
 
-import { fetcher } from "./graphql/fetcher";
+import { fetcher } from "./utils/graphql/fetcher";
 import {
   Core_Languages__Show,
   Core_Languages__ShowQuery,
   Core_Languages__ShowQueryVariables
-} from "./graphql/hooks";
+} from "./utils/graphql/hooks";
 
 export default async function middleware(request: NextRequest) {
   const defaultLocale = request.headers.get("x-default-locale") || "en";

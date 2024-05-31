@@ -7,13 +7,13 @@ import { isRedirectError } from "next/dist/client/components/redirect";
 import { AdminLayout } from "@/admin/core/layout/admin-layout";
 import { Providers } from "./providers";
 import { redirect } from "@/utils/i18n";
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Sessions__Authorization,
   Admin__Sessions__AuthorizationQuery,
   Admin__Sessions__AuthorizationQueryVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
 import { getConfigFile } from "@/config/helpers";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 const getData = async () => {
   const cookieStore = cookies();

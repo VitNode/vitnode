@@ -2,12 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Plugins__Nav__Delete,
   Admin__Core_Plugins__Nav__DeleteMutation,
   Admin__Core_Plugins__Nav__DeleteMutationVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 interface Args extends Admin__Core_Plugins__Nav__DeleteMutationVariables {
   pluginCode: string;

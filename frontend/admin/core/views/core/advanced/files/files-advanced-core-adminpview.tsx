@@ -17,7 +17,7 @@ import {
   TooltipTrigger
 } from "@/components/ui/tooltip";
 import { formatBytes } from "@/functions/format-bytes";
-import { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
+import { Admin__Core_Files__ShowQuery } from "@/utils/graphql/hooks";
 import { Link } from "@/utils/i18n";
 import { ActionsFilesAdvancedCoreAdmin } from "./actions/actions";
 

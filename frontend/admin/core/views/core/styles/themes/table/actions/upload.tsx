@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Loader } from "@/components/loader";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { ShowAdminThemes } from "@/graphql/hooks";
+import { ShowAdminThemes } from "@/utils/graphql/hooks";
 
 const Content = React.lazy(async () =>
   import("../../upload/upload").then(module => ({

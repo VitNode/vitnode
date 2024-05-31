@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { Admin__Sessions__AuthorizationQuery } from "@/graphql/hooks";
+import { Admin__Sessions__AuthorizationQuery } from "@/utils/graphql/hooks";
 import { SessionAdminContext } from "@/admin/core/hooks/use-session-admin";
 
 interface Props {

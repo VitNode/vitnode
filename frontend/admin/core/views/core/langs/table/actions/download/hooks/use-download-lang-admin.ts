@@ -9,7 +9,7 @@ import { CONFIG } from "@/config";
 import { queryApi } from "./query-api";
 import { mutationApi } from "./mutation-api";
 import { useDialog } from "@/components/ui/dialog";
-import { ShowCoreLanguages } from "@/graphql/hooks";
+import { ShowCoreLanguages } from "@/utils/graphql/hooks";
 
 export const useDownloadLangAdmin = ({
   code

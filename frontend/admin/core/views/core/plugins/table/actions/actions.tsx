@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import * as React from "react";
 
 import { CONFIG } from "@/config";
-import { ShowAdminPlugins } from "@/graphql/hooks";
+import { ShowAdminPlugins } from "@/utils/graphql/hooks";
 import { DeletePluginActionsAdmin } from "./delete/delete";
 import { SetDefaultPluginActionsAdmin } from "./set-default/set-default";
 import {

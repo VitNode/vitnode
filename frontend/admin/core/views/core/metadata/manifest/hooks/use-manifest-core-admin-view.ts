@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import { CONFIG } from "@/config";
-import { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";
+import { Admin__Core_Manifest_Metadata__ShowQuery } from "@/utils/graphql/hooks";
 import { mutationApi } from "./mutation-api";
 import { convertColor, getHSLFromString } from "@/functions/colors";
 

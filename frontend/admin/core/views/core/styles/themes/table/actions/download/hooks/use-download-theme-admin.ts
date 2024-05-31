@@ -8,7 +8,7 @@ import { CONFIG } from "@/config";
 import { mutationApi } from "./mutation-api";
 import { increaseVersionString } from "@/functions/increase-version-string";
 import { useDialog } from "@/components/ui/dialog";
-import { ShowAdminThemes } from "@/graphql/hooks";
+import { ShowAdminThemes } from "@/utils/graphql/hooks";
 import { zodInput } from "@/utils/zod";
 
 export const useDownloadThemeAdmin = ({

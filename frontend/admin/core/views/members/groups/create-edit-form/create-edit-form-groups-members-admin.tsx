@@ -14,7 +14,7 @@ import {
   useCreateEditFormGroupsMembersAdmin,
   CreateEditFormGroupsMembersAdminArgs
 } from "./hooks/use-create-edit-form-groups-members-admin";
-import { useTextLang } from "@/hooks/core/use-text-lang";
+import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 import { MainContentCreateEditFormGroupsMembersAdmin } from "./content/main";
 import { ContentContentCreateEditFormGroupsMembersAdmin } from "./content/content";

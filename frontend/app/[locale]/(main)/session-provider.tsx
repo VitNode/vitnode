@@ -2,8 +2,8 @@
 
 import * as React from "react";
 
-import { SessionContext } from "@/hooks/core/use-session";
-import { Core_Sessions__AuthorizationQuery } from "@/graphql/hooks";
+import { SessionContext } from "@/plugins/core/hooks/use-session";
+import { Core_Sessions__AuthorizationQuery } from "@/utils/graphql/hooks";
 
 interface Props {
   children: React.ReactNode;

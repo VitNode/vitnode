@@ -1,12 +1,12 @@
 "use server";
 
-import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Themes__Change,
   Core_Themes__ChangeMutation,
   Core_Themes__ChangeMutationVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
 import { setCookieFromApi } from "@/functions/cookie-from-string-to-object";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 export const mutationApi = async (
   variables: Core_Themes__ChangeMutationVariables

@@ -5,7 +5,7 @@ import * as React from "react";
 import {
   LayoutAdminInstallEnum,
   Admin__Install__LayoutQuery
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
 import { FinishInstallConfigsView } from "./finish/finish-install-config-view";
 import { usePathname, useRouter } from "@/utils/i18n";
 

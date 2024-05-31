@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { TableThemesAdmin } from "./table/table";
-import { Admin_Core_Themes__ShowQuery } from "@/graphql/hooks";
+import { Admin_Core_Themes__ShowQuery } from "@/utils/graphql/hooks";
 import { ActionsThemesAdmin } from "./actions/actions";
 import { RebuildRequiredAdmin } from "@/admin/core/global/rebuild-required";
 import { Card } from "@/components/ui/card";

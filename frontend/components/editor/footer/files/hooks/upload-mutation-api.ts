@@ -3,12 +3,12 @@
 import { revalidateTag } from "next/cache";
 
 import { CoreApiTags } from "@/admin/core/api-tags";
-import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Editor_Files__Upload,
   Core_Editor_Files__UploadMutation,
   Core_Editor_Files__UploadMutationVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 export const uploadMutationApi = async (formData: FormData) => {
   const file = formData.get("file") as File;

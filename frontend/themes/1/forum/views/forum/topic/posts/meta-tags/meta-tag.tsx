@@ -2,7 +2,7 @@ import { Lock, Tag, Unlock, LucideIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { DateFormat } from "@/components/date-format/date-format";
-import { ShowPostsForumsMetaTags } from "@/graphql/hooks";
+import { ShowPostsForumsMetaTags } from "@/utils/graphql/hooks";
 import { cn } from "@/functions/classnames";
 import { UserLink } from "@/components/user/link/user-link";
 import { DivMotion } from "@/components/animations/div-motion";

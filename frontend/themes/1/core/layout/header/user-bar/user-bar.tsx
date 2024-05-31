@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 
 import { buttonVariants } from "@/components/ui/button";
 import { AuthUserBar } from "./auth/auth-user-bar";
-import { useSession } from "@/hooks/core/use-session";
+import { useSession } from "@/plugins/core/hooks/use-session";
 import { Link } from "@/utils/i18n";
 
 export const UserBar = () => {

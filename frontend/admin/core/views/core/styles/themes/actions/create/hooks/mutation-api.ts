@@ -2,13 +2,13 @@
 
 import { revalidatePath, revalidateTag } from "next/cache";
 
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Themes__Create,
   Admin__Core_Themes__CreateMutation,
   Admin__Core_Themes__CreateMutationVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
 import { CoreApiTags } from "@/admin/core/api-tags";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 export const mutationApi = async (
   variables: Admin__Core_Themes__CreateMutationVariables

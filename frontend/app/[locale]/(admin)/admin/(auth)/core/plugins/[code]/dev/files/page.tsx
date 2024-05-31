@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { cn } from "@/functions/classnames";
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Plugins__Files,
   Admin__Core_Plugins__FilesQuery,
   Admin__Core_Plugins__FilesQueryVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 interface Props {
   params: {

@@ -14,7 +14,7 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import { useGlobals } from "@/hooks/core/use-globals";
+import { useGlobals } from "@/plugins/core/hooks/use-globals";
 import { useEditorState } from "../hooks/use-editor-state";
 
 export interface LanguageSelectFooterEditorProps {

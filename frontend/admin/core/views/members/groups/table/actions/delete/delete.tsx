@@ -9,7 +9,7 @@ import {
   TooltipTrigger
 } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
-import { ShowAdminGroups } from "@/graphql/hooks";
+import { ShowAdminGroups } from "@/utils/graphql/hooks";
 import {
   AlertDialog,
   AlertDialogContent,

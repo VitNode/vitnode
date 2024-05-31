@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
-import { useDeletePost } from "@/hooks/forum/posts/delete/use-delete-post";
+import { useDeletePost } from "@/plugins/forum/hooks/posts/delete/use-delete-post";
 import {
   AlertDialogCancel,
   AlertDialogFooter,

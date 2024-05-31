@@ -4,12 +4,12 @@ import { HeaderContent } from "@/components/header-content/header-content";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { CreateCategoryBlogAdmin } from "./actions/create";
 import { TableCategoriesCategoryAdmin } from "./table/table";
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin_Blog_Categories__Show,
   Admin_Blog_Categories__ShowQuery,
   Admin_Blog_Categories__ShowQueryVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 const getData = async () => {
   const { data } = await fetcher<

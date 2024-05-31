@@ -18,10 +18,10 @@ import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import { DateFormat } from "@/components/date-format/date-format";
 import { GroupsFiltersUsersMembersAdmin } from "./filters/groups-filters-users-members-admin";
 import { AdvancedFiltersUsersMembersAdmin } from "./filters/advanced/advanced-filters-users-members-admin";
-import { useTextLang } from "@/hooks/core/use-text-lang";
+import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
 import { UsersMembersAdminViewProps } from "../users-members-admin-view";
-import { ShowAdminMembers } from "@/graphql/hooks";
+import { ShowAdminMembers } from "@/utils/graphql/hooks";
 
 interface UsersMembersAdminAPIDataType
   extends Pick<

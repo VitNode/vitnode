@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { mutationApi } from "./mutation-api";
 import { useDialog } from "@/components/ui/dialog";
 import { UploadThemeAdminProps } from "../upload";
-import { ErrorType } from "@/graphql/fetcher";
+import { ErrorType } from "@/utils/graphql/fetcher";
 
 export const useUploadThemeAdmin = ({ data }: UploadThemeAdminProps) => {
   const t = useTranslations("admin.core.styles.themes.upload");

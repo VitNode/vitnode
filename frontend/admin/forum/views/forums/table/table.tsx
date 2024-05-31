@@ -23,9 +23,9 @@ import {
   ShowForumForumsAdminWithChildren
 } from "./hooks/use-forum-forums-admin-api";
 import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
-import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
-import { ItemDragAndDrop } from "@/hooks/core/drag&drop/item";
-import { Admin__Forum_Forums__ShowQuery } from "@/graphql/hooks";
+import { useDragAndDrop } from "@/plugins/core/hooks/drag&drop/use-functions";
+import { ItemDragAndDrop } from "@/plugins/core/hooks/drag&drop/item";
+import { Admin__Forum_Forums__ShowQuery } from "@/utils/graphql/hooks";
 
 const indentationWidth = 20;
 

@@ -1,5 +1,5 @@
-import { ShowBlogCategories } from "@/graphql/hooks";
-import { useTextLang } from "@/hooks/core/use-text-lang";
+import { ShowBlogCategories } from "@/utils/graphql/hooks";
+import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 
 interface Props {
   data: ShowBlogCategories;

@@ -10,7 +10,7 @@ import {
   DialogTitle
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { ShowAdminThemes } from "@/graphql/hooks";
+import { ShowAdminThemes } from "@/utils/graphql/hooks";
 
 export interface UploadThemeAdminProps {
   data?: Pick<ShowAdminThemes, "id" | "name">;

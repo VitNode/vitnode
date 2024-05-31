@@ -11,8 +11,8 @@ import {
 } from "@/components/ui/popover";
 import { Loader } from "@/components/loader";
 import { Badge } from "@/components/ui/badge";
-import { TextLanguage } from "@/graphql/hooks";
-import { useTextLang } from "@/hooks/core/use-text-lang";
+import { TextLanguage } from "@/utils/graphql/hooks";
+import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 
 const Content = React.lazy(async () =>
   import("./content").then(module => ({

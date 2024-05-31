@@ -2,12 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 
-import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Groups__Admin_Create,
   Core_Groups__Admin_CreateMutation,
   Core_Groups__Admin_CreateMutationVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 export const mutationCreateApi = async (
   variables: Core_Groups__Admin_CreateMutationVariables

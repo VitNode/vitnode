@@ -3,7 +3,7 @@ import { Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
-import { useMergeRefs } from "@/hooks/core/utils/use-merge-refs";
+import { useMergeRefs } from "@/plugins/core/hooks/utils/use-merge-refs";
 import { cn } from "@/functions/classnames";
 import { PreviewFilesInput } from "./preview/preview-files-input";
 

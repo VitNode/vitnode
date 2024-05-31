@@ -8,7 +8,10 @@ import { Clock, Download, File } from "lucide-react";
 
 import { CONFIG } from "@/config";
 import { DataTable } from "@/components/data-table/data-table";
-import { Core_Members__Files__ShowQuery, ShowCoreFiles } from "@/graphql/hooks";
+import {
+  Core_Members__Files__ShowQuery,
+  ShowCoreFiles
+} from "@/utils/graphql/hooks";
 import { DateFormat } from "@/components/date-format/date-format";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
 import { formatBytes } from "@/functions/format-bytes";

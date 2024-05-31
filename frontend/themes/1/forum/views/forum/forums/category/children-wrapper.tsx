@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import * as React from "react";
 
-import { useWrapperCategoryForum } from "@/hooks/forum/forum/use-wrapper-category-forum";
+import { useWrapperCategoryForum } from "@/plugins/forum/hooks/forum/use-wrapper-category-forum";
 
 interface Props {
   children: React.ReactNode;

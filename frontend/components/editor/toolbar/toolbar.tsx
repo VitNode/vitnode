@@ -3,7 +3,7 @@ import { Bold, Italic, Underline } from "lucide-react";
 import { ToggleToolbarEditor } from "./toggle";
 import { LinkToolbarEditor } from "./custom/link/link";
 import { HeadingToolbarEditor } from "./custom/heading";
-import { useGlobals } from "@/hooks/core/use-globals";
+import { useGlobals } from "@/plugins/core/hooks/use-globals";
 import { cn } from "@/functions/classnames";
 import { ColorToolbarEditor } from "./custom/color/color";
 import { EmojiToolbarEditor } from "./custom/emoji/emoji";

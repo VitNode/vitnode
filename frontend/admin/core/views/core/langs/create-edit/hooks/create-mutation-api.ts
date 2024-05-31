@@ -2,13 +2,13 @@
 
 import { revalidatePath, revalidateTag } from "next/cache";
 
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Languages__CreateMutationVariables,
   Admin__Core_Languages__Create,
   Admin__Core_Languages__CreateMutation
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
 import { CoreApiTags } from "@/admin/core/api-tags";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 export const createMutationApi = async (
   variables: Admin__Core_Languages__CreateMutationVariables

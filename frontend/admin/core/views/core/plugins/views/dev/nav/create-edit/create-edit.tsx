@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { IconInput } from "@/components/icon/input/icon-input";
-import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
+import { ShowAdminNavPluginsObj } from "@/utils/graphql/hooks";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 
 interface Props {

@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "@/utils/i18n";
-import { useGlobals } from "@/hooks/core/use-globals";
+import { useGlobals } from "@/plugins/core/hooks/use-globals";
 
 export const LanguageSwitcher = () => {
   const t = useTranslations("core");

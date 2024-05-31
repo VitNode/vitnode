@@ -12,7 +12,7 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { useSignUpView } from "@/hooks/core/sign/up/use-sign-up-view";
+import { useSignUpView } from "@/plugins/core/hooks/sign/up/use-sign-up-view";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";

@@ -2,13 +2,13 @@
 
 import { revalidateTag } from "next/cache";
 
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Nav__Change_PositionMutation,
   Admin__Core_Nav__Change_PositionMutationVariables,
   Admin__Core_Nav__Change_Position
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
 import { CoreApiTags } from "@/admin/core/api-tags";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 export const mutationChangePositionApi = async (
   variables: Admin__Core_Nav__Change_PositionMutationVariables

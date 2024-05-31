@@ -1,11 +1,11 @@
 "use server";
 
-import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Members__Show__Search,
   Core_Members__Show__SearchQuery,
   Core_Members__Show__SearchQueryVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 export const queryApi = async (
   variables: Core_Members__Show__SearchQueryVariables

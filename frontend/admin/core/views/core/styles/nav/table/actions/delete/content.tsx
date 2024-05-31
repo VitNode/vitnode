@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Trash } from "lucide-react";
 
-import { ShowCoreNav } from "@/graphql/hooks";
+import { ShowCoreNav } from "@/utils/graphql/hooks";
 import { useDeleteNavAdmin } from "./hooks/use-delete-nav-admin";
 import {
   AlertDialogCancel,
@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { SubmitDeleteActionTableNavAdmin } from "./submit";
-import { useTextLang } from "@/hooks/core/use-text-lang";
+import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export const ContentDeleteActionTableNavAdmin = ({

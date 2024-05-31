@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { buttonVariants } from "@/components/ui/button";
-import { useGlobals } from "@/hooks/core/use-globals";
+import { useGlobals } from "@/plugins/core/hooks/use-globals";
 import { CONFIG } from "@/config";
 
 export const RebuildRequiredAdmin = () => {

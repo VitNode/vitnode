@@ -8,7 +8,7 @@ import { ExternalLink } from "lucide-react";
 import {
   Admin__Core_Plugins__ShowQuery,
   ShowAdminPlugins
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
 import { Badge } from "@/components/ui/badge";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
 import { DateFormat } from "@/components/date-format/date-format";

@@ -7,7 +7,7 @@ import { HslColor } from "react-colorful";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
-import { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
+import { Core_Theme_Editor__ShowQuery } from "@/utils/graphql/hooks";
 import { mutationApi } from "./mutation-api";
 import { CONFIG } from "@/config";
 import { useRouter } from "@/utils/i18n";

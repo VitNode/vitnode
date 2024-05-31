@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LockToggleActionsTopic } from "./lock-toggle/lock-toggle";
 import { usePathname, useRouter } from "@/utils/i18n";
-import { PermissionsTopicForums } from "@/graphql/hooks";
+import { PermissionsTopicForums } from "@/utils/graphql/hooks";
 
 interface Props {
   id: number;

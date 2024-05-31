@@ -9,7 +9,7 @@ import {
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { ShowForumForumsAdmin } from "@/graphql/hooks";
+import { ShowForumForumsAdmin } from "@/utils/graphql/hooks";
 
 const Content = React.lazy(async () =>
   import("./content").then(module => ({

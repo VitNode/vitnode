@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 
-import { ShowCoreLanguages } from "@/graphql/hooks";
+import { ShowCoreLanguages } from "@/utils/graphql/hooks";
 import { useDialog } from "@/components/ui/dialog";
 import { editMutationApi } from "./edit-mutation-api";
 import { createMutationApi } from "./create-mutation-api";

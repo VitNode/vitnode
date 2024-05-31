@@ -9,10 +9,10 @@ import * as React from "react";
 import { useTranslations } from "next-intl";
 
 import { ItemContentTableContentNavAdmin } from "./item";
-import { Admin__Core_Nav__ShowQuery, ShowCoreNav } from "@/graphql/hooks";
+import { Admin__Core_Nav__ShowQuery, ShowCoreNav } from "@/utils/graphql/hooks";
 import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
-import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
-import { ItemDragAndDrop } from "@/hooks/core/drag&drop/item";
+import { useDragAndDrop } from "@/plugins/core/hooks/drag&drop/use-functions";
+import { ItemDragAndDrop } from "@/plugins/core/hooks/drag&drop/item";
 import { Icon } from "@/components/icon/icon";
 
 const indentationWidth = 20;

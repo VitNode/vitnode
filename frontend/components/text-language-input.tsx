@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useLocale } from "next-intl";
 
-import { useGlobals } from "@/hooks/core/use-globals";
+import { useGlobals } from "@/plugins/core/hooks/use-globals";
 import { Input } from "./ui/input";
 import {
   Select,
@@ -11,7 +11,7 @@ import {
   SelectValue
 } from "./ui/select";
 import { FormControl } from "./ui/form";
-import { TextLanguage } from "@/graphql/hooks";
+import { TextLanguage } from "@/utils/graphql/hooks";
 import { cn } from "@/functions/classnames";
 
 interface Props

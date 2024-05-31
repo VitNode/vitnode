@@ -2,13 +2,13 @@
 
 import { revalidatePath } from "next/cache";
 
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin_Sessions__Sign_Out,
   Admin_Sessions__Sign_OutMutation,
   Admin_Sessions__Sign_OutMutationVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
 import { redirect } from "@/utils/i18n";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 export const mutationApi = async () => {
   try {

@@ -1,6 +1,6 @@
 import { getRequestConfig } from "next-intl/server";
 
-import { middlewareQueryApi } from "./hooks/core/middleware-query-api";
+import { middlewareQueryApi } from "./plugins/core/hooks/middleware-query-api";
 
 export default getRequestConfig(async ({ locale }) => {
   const data = await middlewareQueryApi();

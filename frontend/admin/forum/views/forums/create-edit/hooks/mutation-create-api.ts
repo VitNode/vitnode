@@ -2,12 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Forum_Forums__Create,
   Admin__Forum_Forums__CreateMutation,
   Admin__Forum_Forums__CreateMutationVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 export const mutationCreateApi = async (
   variables: Admin__Forum_Forums__CreateMutationVariables

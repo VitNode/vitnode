@@ -1,11 +1,11 @@
 "use server";
 
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Groups__Show_Short,
   Admin__Core_Groups__Show_ShortQuery,
   Admin__Core_Groups__Show_ShortQueryVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 export const queryApi = async (
   variables: Admin__Core_Groups__Show_ShortQueryVariables

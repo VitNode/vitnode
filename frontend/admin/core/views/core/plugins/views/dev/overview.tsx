@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
-import { ShowAdminPlugins } from "@/graphql/hooks";
+import { ShowAdminPlugins } from "@/utils/graphql/hooks";
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 

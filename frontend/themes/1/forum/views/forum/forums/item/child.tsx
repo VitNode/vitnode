@@ -5,7 +5,7 @@ import { Folder } from "lucide-react";
 import { Link } from "@/utils/i18n";
 import { ItemForumProps } from "./item";
 import { buttonVariants } from "@/components/ui/button";
-import { useTextLang } from "@/hooks/core/use-text-lang";
+import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 
 export const ChildButtonItemForum = ({
   id,

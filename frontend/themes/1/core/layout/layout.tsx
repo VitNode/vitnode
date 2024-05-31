@@ -3,8 +3,8 @@ import * as React from "react";
 import { Header } from "./header/header";
 import { QuickMenu } from "./quick-menu/quick-menu";
 import { PoweredByVitNode } from "@/admin/core/global/powered-by";
-import { TextLanguage } from "@/graphql/hooks";
-import { useTextLang } from "@/hooks/core/use-text-lang";
+import { TextLanguage } from "@/utils/graphql/hooks";
+import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import "./global.css";
 
 interface Props {

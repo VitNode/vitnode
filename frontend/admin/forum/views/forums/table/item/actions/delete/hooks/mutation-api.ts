@@ -1,11 +1,11 @@
 "use server";
 
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Forum_Forums__Delete,
   Admin__Forum_Forums__DeleteMutation,
   Admin__Forum_Forums__DeleteMutationVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 export const mutationApi = async (
   variables: Admin__Forum_Forums__DeleteMutationVariables

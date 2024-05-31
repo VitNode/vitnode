@@ -2,12 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Plugins__Nav__Change_Position,
   Admin__Core_Plugins__Nav__Change_PositionMutation,
   Admin__Core_Plugins__Nav__Change_PositionMutationVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 export const mutationChangePositionApi = async (
   variables: Admin__Core_Plugins__Nav__Change_PositionMutationVariables

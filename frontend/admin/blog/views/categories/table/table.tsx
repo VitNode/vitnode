@@ -10,9 +10,9 @@ import {
 import {
   Admin_Blog_Categories__ShowQuery,
   ShowBlogCategories
-} from "@/graphql/hooks";
-import { useDragAndDrop } from "@/hooks/core/drag&drop/use-functions";
-import { ItemDragAndDrop } from "@/hooks/core/drag&drop/item";
+} from "@/utils/graphql/hooks";
+import { useDragAndDrop } from "@/plugins/core/hooks/drag&drop/use-functions";
+import { ItemDragAndDrop } from "@/plugins/core/hooks/drag&drop/item";
 import { ItemTableCategoriesCategoryAdmin } from "./item";
 
 export const TableCategoriesCategoryAdmin = ({
