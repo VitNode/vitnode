@@ -13,18 +13,17 @@ import {
 } from "./contents";
 
 import { CustomError } from "@/utils/errors/custom-error";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class CreateFilesAdminPluginsService {
-  protected path = join(process.cwd(), "src", "plugins");
-
   createFiles({ code, ...rest }: PluginInfoJSONType): void {
     const folders: {
       files: { content: string; name: string }[];
       path: string;
     }[] = [
       {
-        path: code,
+        path: join(ABSOLUTE_PATHS.plugins, code),
         files: [
           {
             name: `${code}.module.ts`,
@@ -41,7 +40,7 @@ export class CreateFilesAdminPluginsService {
         ]
       },
       {
-        path: join(code, "admin"),
+        path: join(ABSOLUTE_PATHS.plugins, code, "admin"),
         files: [
           {
             name: "admin.module.ts",
@@ -50,7 +49,7 @@ export class CreateFilesAdminPluginsService {
         ]
       },
       {
-        path: join(code, "admin", "database"),
+        path: join(ABSOLUTE_PATHS.plugins, code, "admin", "database"),
         files: [
           {
             name: "index.ts",
@@ -70,22 +69,21 @@ export class CreateFilesAdminPluginsService {
 
     // Check if folder exists
     folders.forEach(folder => {
-      if (fs.existsSync(join(this.path, folder.path))) {
+      if (fs.existsSync(folder.path)) {
         throw new CustomError({
           code: "PLUGIN_ALREADY_EXISTS",
-          message: `Plugin already exists with "${code}" code!`
+          message: `Plugin already exists in filesystem with "${code}" code!`
         });
       }
     });
 
     folders.forEach(folder => {
-      const path = join(this.path, folder.path);
       // Create folders
-      fs.mkdirSync(path, { recursive: true });
+      fs.mkdirSync(folder.path, { recursive: true });
 
       // Create files
       folder.files.forEach(file => {
-        fs.writeFile(join(path, file.name), file.content, err => {
+        fs.writeFile(join(folder.path, file.name), file.content, err => {
           if (err) {
             throw new CustomError({
               code: "ERROR_CREATING_FILE",

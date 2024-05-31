@@ -1,5 +1,4 @@
 import * as fs from "fs";
-import { join } from "path";
 
 import { Injectable } from "@nestjs/common";
 import { eq, sql } from "drizzle-orm";
@@ -91,14 +90,7 @@ export class DeleteAdminPluginsService {
     const modulePath = ABSOLUTE_PATHS.plugin({ code }).root;
     this.deleteFolderWhenExists(modulePath);
     // Frontend
-    const frontendPaths = [
-      "admin_pages",
-      "admin_templates",
-      "pages",
-      "hooks",
-      "graphql_queries",
-      "graphql_mutations"
-    ];
+    const frontendPaths = ["admin_pages", "admin_templates", "pages", "plugin"];
     frontendPaths.forEach(path => {
       this.deleteFolderWhenExists(
         ABSOLUTE_PATHS.plugin({ code }).frontend[path]
@@ -116,26 +108,6 @@ export class DeleteAdminPluginsService {
         ABSOLUTE_PATHS.plugin({ code }).frontend.theme({
           theme_id: id
         })
-      );
-    });
-
-    // Frontend - Delete Language
-    const languages =
-      await this.databaseService.db.query.core_languages.findMany({
-        columns: {
-          code: true
-        }
-      });
-    languages.forEach(lang => {
-      this.deleteFolderWhenExists(
-        join(
-          process.cwd(),
-          "..",
-          "frontend",
-          "langs",
-          lang.code,
-          `${code}.json`
-        )
       );
     });
 
