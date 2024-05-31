@@ -125,14 +125,11 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
     destination: string;
     source: string;
   }): Promise<void> {
-    if (!fs.existsSync(source)) {
-      fs.mkdirSync(source, { recursive: true });
-    }
+    if (!fs.existsSync(source)) return;
 
     try {
       await fs.promises.cp(source, destination, {
-        recursive: true,
-        force: true
+        recursive: true
       });
     } catch (error) {
       throw new CustomError({
@@ -166,19 +163,7 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
   }: {
     config: ConfigPlugin;
   }): Promise<void> {
-    // Copy plugin folder
-    const pluginPath = ABSOLUTE_PATHS.plugin({ code: config.code }).frontend
-      .plugin;
-    if (!fs.existsSync(pluginPath)) {
-      await fs.promises.mkdir(pluginPath, { recursive: true });
-    }
-
-    this.copyFilesToPluginFolder({
-      source: join(this.tempPath, "frontend", "plugin"),
-      destination: pluginPath
-    });
-
-    const frontendPaths = ["admin_pages", "admin_templates", "plugin"];
+    const frontendPaths = ["admin_pages", "pages", "plugin"];
     await Promise.all(
       frontendPaths.map(async path => {
         const source = join(this.tempPath, "frontend", path);
@@ -211,30 +196,40 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
     }
 
     // Copy language
-    // const languages =
-    //   await this.databaseService.db.query.core_languages.findMany({
-    //     columns: {
-    //       code: true
-    //     }
-    //   });
-    // languages.forEach(lang => {
-    //   const source = join(
-    //     this.tempPath,
-    //     "frontend",
-    //     "langs",
-    //     `${config.code}.json`
-    //   );
-    //   const destination = join(
-    //     process.cwd(),
-    //     "..",
-    //     "frontend",
-    //     "langs",
-    //     lang.code,
-    //     `${config.code}.json`
-    //   );
+    const languages =
+      await this.databaseService.db.query.core_languages.findMany({
+        columns: {
+          code: true
+        }
+      });
 
-    //   this.copyFileToPluginFolder({ source, destination });
-    // });
+    languages.forEach(lang => {
+      const checkExist = join(
+        ABSOLUTE_PATHS.plugin({
+          code: config.code
+        }).frontend.language,
+        `${lang.code}.json`
+      );
+
+      if (fs.existsSync(checkExist)) {
+        return;
+      }
+
+      const source = join(
+        ABSOLUTE_PATHS.plugin({
+          code: config.code
+        }).frontend.language,
+        `en.json`
+      );
+      const destination = join(
+        ABSOLUTE_PATHS.plugin({
+          code: config.code
+        }).frontend.language,
+        `${lang.code}.json`
+      );
+
+      this.copyFileToPluginFolder({ source, destination });
+    });
   }
 
   async upload({
