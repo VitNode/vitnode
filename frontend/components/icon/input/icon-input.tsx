@@ -4,7 +4,6 @@ import { Plus, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
 
-// import { Icon, IconLucideNames } from "@/components/icon/icon";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -14,6 +13,8 @@ import {
 import { cn } from "@/functions/classnames";
 import { Loader } from "@/components/loader";
 import { IconInputProps } from "./content/content";
+import { IconLucideDynamic } from "./content/icons/icons";
+import { IconLucideNames } from "../icon";
 
 const Content = React.lazy(async () =>
   import("./content/content").then(module => ({
@@ -51,9 +52,12 @@ export const IconInput = ({ className, onChange, value }: Props) => {
           )}
         </div>
 
-        {/* {value && (
-          <Icon className="size-10 text-4xl" name={value as IconLucideNames} />
-        )} */}
+        {value && (
+          <IconLucideDynamic
+            className="size-10 text-4xl"
+            name={value as IconLucideNames}
+          />
+        )}
       </div>
 
       <PopoverContent align="start" className="w-72 p-0">

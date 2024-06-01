@@ -1,20 +1,20 @@
+"use client";
+
 import { ChevronDown } from "lucide-react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
+import * as React from "react";
 
 import { buttonVariants } from "@/components/ui/button";
 import { ShowCoreNav } from "@/utils/graphql/hooks";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { Link, usePathname } from "@/utils/i18n";
 import { cn } from "@/functions/classnames";
-import { Icon } from "@/components/icon/icon";
 
-export const ItemNav = ({
-  children,
-  external,
-  href,
-  icon,
-  name
-}: ShowCoreNav) => {
+interface Props extends Omit<ShowCoreNav, "icon"> {
+  icon?: React.ReactNode;
+}
+
+export const ItemNav = ({ children, external, href, icon, name }: Props) => {
   const { convertText } = useTextLang();
   const pathname = usePathname();
   const active =
@@ -36,7 +36,7 @@ export const ItemNav = ({
           target={external ? "_blank" : undefined}
           rel={external ? "noopener noreferrer" : undefined}
         >
-          {/* {icon && <Icon className="text-lg" name={icon} />} */}
+          {icon}
           {convertText(name)} {children.length > 0 && <ChevronDown />}
         </Link>
       </NavigationMenu.Trigger>
