@@ -3,7 +3,6 @@ import { getSessionData } from "@/functions/get-session-data";
 import { NavListWrapper } from "./list-wrapper";
 import { ItemNav } from "./item";
 import { Icon } from "@/components/icon/icon";
-import { IconImportAll } from "@/components/icon/test";
 
 export const Nav = async () => {
   const { data } = await getSessionData();
@@ -18,7 +17,7 @@ export const Nav = async () => {
                 key={nav.id}
                 {...nav}
                 icon={
-                  nav.icon ? <IconImportAll icon="AcademicCapIcon" /> : null
+                  nav.icon ? <Icon className="size-4" name={nav.icon} /> : null
                 }
               />
             );

@@ -13,14 +13,19 @@ import {
 import { cn } from "@/functions/classnames";
 import { Loader } from "@/components/loader";
 import { IconInputProps } from "./content/content";
-// import { IconLucideDynamic } from "./content/icons/icons";
 import { IconLucideNames } from "../icon";
 
-// const Content = React.lazy(async () =>
-//   import("./content/content").then(module => ({
-//     default: module.ContentIconInput
-//   }))
-// );
+const IconLucideDynamic = React.lazy(async () =>
+  import("./content/icons/icons").then(module => ({
+    default: module.IconLucideDynamic
+  }))
+);
+
+const Content = React.lazy(async () =>
+  import("./content/content").then(module => ({
+    default: module.ContentIconInput
+  }))
+);
 
 interface Props extends Omit<IconInputProps, "setOpen"> {
   className?: string;
@@ -52,17 +57,19 @@ export const IconInput = ({ className, onChange, value }: Props) => {
           )}
         </div>
 
-        {/* {value && (
-          <IconLucideDynamic
-            className="size-10 text-4xl"
-            name={value as IconLucideNames}
-          />
-        )} */}
+        <React.Suspense fallback={<Loader className="p-4" />}>
+          {value && (
+            <IconLucideDynamic
+              className="size-10 text-4xl"
+              name={value as IconLucideNames}
+            />
+          )}
+        </React.Suspense>
       </div>
 
       <PopoverContent align="start" className="w-72 p-0">
         <React.Suspense fallback={<Loader className="p-4" />}>
-          {/* <Content onChange={onChange} value={value} setOpen={setOpen} /> */}
+          <Content onChange={onChange} value={value} setOpen={setOpen} />
         </React.Suspense>
       </PopoverContent>
     </Popover>
