@@ -38,7 +38,7 @@ ENV NEXT_PUBLIC_DEBUG=${NEXT_PUBLIC_DEBUG}
 
 RUN pnpm turbo build --filter=frontend...
 
-COPY frontend/config/config.json ./frontend/config/config.json
+# COPY frontend/config/config.json ./frontend/config/config.json
 
 FROM base AS runner
 WORKDIR /app
@@ -61,7 +61,7 @@ WORKDIR /app
 COPY --from=installer /app/frontend/.next/standalone ./
 COPY --from=installer /app/frontend/.next/static ./frontend/.next/static
 COPY --from=installer /app/frontend/public ./frontend/public
-COPY --from=installer /app/frontend/config/config.json ./frontend/config/config.json
+COPY --from=installer /app/frontend/config/config.json ./frontend/config.json
 
 EXPOSE 3000
 ENV PORT 3000

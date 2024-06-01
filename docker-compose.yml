@@ -38,9 +38,7 @@ services:
       - ./frontend/config:/app/frontend/config # config
       - ./frontend/themes:/app/frontend/themes # themes
       - ./frontend/app:/app/frontend/app # app
-      - ./frontend/admin:/app/frontend/admin # admin
-      - ./frontend/graphql:/app/frontend/graphql # graphql
-      - ./frontend/hooks:/app/frontend/hooks # hooks
+      - ./frontend/plugins:/app/frontend/plugins # plugins
       - ./backend/uploads:/app/backend/uploads # uploads
       - ./backend/schema.gql:/app/backend/schema.gql # schema
       - ./backend/src/plugins:/app/backend/src/plugins # plugins
@@ -71,9 +69,7 @@ services:
       - ./frontend/config:/app/frontend/config # config
       - ./frontend/themes:/app/frontend/themes # themes
       - ./frontend/app:/app/frontend/app # app
-      - ./frontend/admin:/app/frontend/admin # admin
-      - ./frontend/graphql:/app/frontend/graphql # graphql
-      - ./frontend/hooks:/app/frontend/hooks # hooks
+      - ./frontend/plugins:/app/frontend/plugins # admin
     networks:
       - vitnode
 
