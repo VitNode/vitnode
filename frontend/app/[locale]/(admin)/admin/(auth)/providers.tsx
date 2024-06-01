@@ -13,15 +13,14 @@ interface Props {
 export const Providers = ({
   children,
   data: {
-    admin__sessions__authorization: { nav, user: session, version }
+    admin__sessions__authorization: { user: session, version }
   }
 }: Props) => {
   return (
     <SessionAdminContext.Provider
       value={{
         session,
-        version,
-        nav
+        version
       }}
     >
       {children}

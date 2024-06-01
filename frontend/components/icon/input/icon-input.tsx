@@ -4,7 +4,7 @@ import { Plus, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
 
-import { Icon, IconLucideNames } from "@/components/icon/icon";
+// import { Icon, IconLucideNames } from "@/components/icon/icon";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -51,9 +51,9 @@ export const IconInput = ({ className, onChange, value }: Props) => {
           )}
         </div>
 
-        {value && (
+        {/* {value && (
           <Icon className="size-10 text-4xl" name={value as IconLucideNames} />
-        )}
+        )} */}
       </div>
 
       <PopoverContent align="start" className="w-72 p-0">

@@ -1,8 +1,7 @@
+import "server-only";
+
 import * as Lucide from "lucide-react";
 import * as React from "react";
-import { Loader2 } from "lucide-react";
-
-import { cn } from "@/functions/classnames";
 
 export type IconLucideNames = keyof typeof Lucide.icons;
 
@@ -23,13 +22,7 @@ export const Icon = React.memo(({ className, name, ...props }: Props) => {
         .then(mod => ({ default: mod }))
   );
 
-  return (
-    <React.Suspense
-      fallback={<Loader2 className={cn("animate-spin", className)} />}
-    >
-      <LucideIcon className={className} {...props} />
-    </React.Suspense>
-  );
+  return <LucideIcon className={className} {...props} />;
 });
 
 Icon.displayName = "Icon";

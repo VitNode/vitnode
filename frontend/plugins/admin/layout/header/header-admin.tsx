@@ -4,6 +4,7 @@ import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-sw
 import { Link } from "@/utils/i18n";
 import { LogoVitNode } from "@/components/logo-vitnode";
 import { LanguageSwitcher } from "@/components/switchers/language-switcher";
+import { NavAdmin } from "../nav/nav-admin";
 
 export const HeaderAdmin = () => {
   return (
@@ -29,7 +30,7 @@ export const HeaderAdmin = () => {
         <div className="ml-auto flex items-center justify-center gap-2">
           <LanguageSwitcher />
           <DarkLightModeSwitcher />
-          <UserBarAdmin />
+          <UserBarAdmin navComponent={<NavAdmin />} />
         </div>
       </div>
     </header>

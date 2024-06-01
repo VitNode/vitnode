@@ -1,22 +1,13 @@
-"use client";
+import { getSessionAdminData } from "@/app/[locale]/(admin)/admin/(auth)/get-session-admin";
+import { ItemNavAdmin } from "./item/item";
 
-import * as React from "react";
-
-import { ItemListNavAdmin } from "./item/item";
-import { useSessionAdmin } from "@/plugins/admin/hooks/use-session-admin";
-
-interface Props {
-  onClickItem?: () => void;
-}
-
-export const ListNavAdmin = ({ onClickItem }: Props) => {
-  const { nav } = useSessionAdmin();
+export const ContentNavAdmin = async () => {
+  const data = await getSessionAdminData();
 
   return (
     <div className="space-y-5">
-      <ItemListNavAdmin
+      <ItemNavAdmin
         id="core"
-        onClickItem={onClickItem}
         items={[
           {
             id: "dashboard",
@@ -55,9 +46,8 @@ export const ListNavAdmin = ({ onClickItem }: Props) => {
           }
         ]}
       />
-      <ItemListNavAdmin
+      <ItemNavAdmin
         id="members"
-        onClickItem={onClickItem}
         items={[
           {
             id: "list",
@@ -76,11 +66,11 @@ export const ListNavAdmin = ({ onClickItem }: Props) => {
           }
         ]}
       />
-      {nav.map(item => (
-        <ItemListNavAdmin
+
+      {data?.admin__sessions__authorization.nav.map(item => (
+        <ItemNavAdmin
           key={item.code}
           id={item.code}
-          onClickItem={onClickItem}
           items={item.nav.map(navItem => ({
             id: navItem.code,
             href: navItem.href,

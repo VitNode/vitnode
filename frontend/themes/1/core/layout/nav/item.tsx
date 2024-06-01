@@ -36,8 +36,8 @@ export const ItemNav = ({
           target={external ? "_blank" : undefined}
           rel={external ? "noopener noreferrer" : undefined}
         >
-          {icon && <Icon className="text-lg" name={icon} />} {convertText(name)}{" "}
-          {children.length > 0 && <ChevronDown />}
+          {/* {icon && <Icon className="text-lg" name={icon} />} */}
+          {convertText(name)} {children.length > 0 && <ChevronDown />}
         </Link>
       </NavigationMenu.Trigger>
 
@@ -78,9 +78,9 @@ export const ItemNav = ({
                       rel={item.external ? "noopener noreferrer" : undefined}
                     >
                       <div className="font-medium flex gap-1">
-                        {item.icon && (
+                        {/* {item.icon && (
                           <Icon className="size-4" name={item.icon} />
-                        )}
+                        )} */}
                         {convertText(item.name)}
                       </div>
                       {item.description && (
