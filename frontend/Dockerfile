@@ -26,7 +26,6 @@ RUN pnpm i
 COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
 COPY .prettierrc .prettierrc
-COPY frontend/config/config.json ./frontend/config/config.json
 
 ARG NEXT_PUBLIC_GRAPHQL_URL
 ENV NEXT_PUBLIC_GRAPHQL_URL=${NEXT_PUBLIC_GRAPHQL_URL}
@@ -38,6 +37,8 @@ ARG NEXT_PUBLIC_DEBUG
 ENV NEXT_PUBLIC_DEBUG=${NEXT_PUBLIC_DEBUG}
 
 RUN pnpm turbo build --filter=frontend...
+
+COPY frontend/config/config.json ./frontend/config/config.json
 
 FROM base AS runner
 WORKDIR /app
