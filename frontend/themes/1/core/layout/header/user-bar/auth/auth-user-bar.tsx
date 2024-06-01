@@ -18,8 +18,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuLabel
 } from "@/components/ui/dropdown-menu";
-import { useSession } from "@/hooks/core/use-session";
-import { useSignOutAPI } from "@/hooks/core/sign/out/use-sign-out-api";
+import { useSession } from "@/plugins/core/hooks/use-session";
+import { useSignOutAPI } from "@/plugins/core/hooks/sign/out/use-sign-out-api";
 import { Link } from "@/utils/i18n";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 

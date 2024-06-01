@@ -8,7 +8,7 @@ import {
   DrawerTrigger
 } from "@/components/ui/drawer";
 import { cn } from "@/functions/classnames";
-import { useSettingsView } from "@/hooks/core/settings/use-settings-view";
+import { useSettingsView } from "@/plugins/core/hooks/settings/use-settings-view";
 import { ItemNavSettings } from "./item/item-nav-settings";
 
 export const DrawerNavSettings = () => {

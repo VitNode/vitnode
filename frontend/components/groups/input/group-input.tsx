@@ -5,12 +5,12 @@ import { X } from "lucide-react";
 import { GroupInputContent } from "./content/content";
 import { cn } from "@/functions/classnames";
 
-import { TextLanguage } from "../../../graphql/hooks";
+import { TextLanguage } from "../../../utils/graphql/hooks";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { Button } from "../../ui/button";
 import { Badge } from "../../ui/badge";
 import { Loader } from "../../loader";
-import { useTextLang } from "../../../hooks/core/use-text-lang";
+import { useTextLang } from "../../../plugins/core/hooks/use-text-lang";
 
 export interface GroupInputItem {
   id: number;

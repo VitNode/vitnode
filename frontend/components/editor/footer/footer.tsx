@@ -5,8 +5,8 @@ import {
 import { FilesButtonFooterEditor } from "./files/button";
 import { ListFilesFooterEditor } from "./files/list";
 import { useEditorState } from "../hooks/use-editor-state";
-import { useGlobals } from "@/hooks/core/use-globals";
-import { useSession } from "@/hooks/core/use-session";
+import { useGlobals } from "@/plugins/core/hooks/use-globals";
+import { useSession } from "@/plugins/core/hooks/use-session";
 
 interface Props extends LanguageSelectFooterEditorProps {
   disableLanguage?: boolean;

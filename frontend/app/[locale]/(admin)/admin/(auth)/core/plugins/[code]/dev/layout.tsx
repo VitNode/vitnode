@@ -4,8 +4,8 @@ import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { getPluginDataAdmin } from "./query-api";
-import { DevPluginAdminLayout } from "@/admin/core/views/core/plugins/views/dev/layout/layout";
 import { getConfigFile } from "@/config/helpers";
+import { DevPluginAdminLayout } from "@/plugins/admin/views/core/plugins/views/dev/layout/layout";
 
 interface Props {
   children: React.ReactNode;

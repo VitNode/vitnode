@@ -2,12 +2,12 @@ import { getTranslations } from "next-intl/server";
 
 import { CategoryForum } from "./views/forum/forums/category/category";
 import { HeaderContent } from "@/components/header-content/header-content";
-import { fetcher } from "@/graphql/fetcher";
 import {
   Forum_Forums__Show,
   Forum_Forums__ShowQuery,
   Forum_Forums__ShowQueryVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 const getData = async () => {
   const { data } = await fetcher<

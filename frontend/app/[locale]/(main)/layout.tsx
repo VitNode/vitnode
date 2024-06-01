@@ -2,10 +2,10 @@ import * as React from "react";
 import { isRedirectError } from "next/dist/client/components/redirect";
 
 import { SessionProvider } from "./session-provider";
-import { InternalErrorView } from "@/admin/core/global/internal-error/internal-error-view";
 import { redirect } from "@/utils/i18n";
 import { getSessionData } from "@/functions/get-session-data";
-import { TextLanguage } from "@/graphql/hooks";
+import { TextLanguage } from "@/utils/graphql/hooks";
+import { InternalErrorView } from "@/plugins/admin/global/internal-error/internal-error-view";
 
 interface Props {
   children: React.ReactNode;

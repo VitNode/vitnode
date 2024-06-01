@@ -1,13 +1,13 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-import { NavAdminView } from "@/admin/core/views/core/styles/nav/nav-admin-view";
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Nav__Show,
   Admin__Core_Nav__ShowQuery,
   Admin__Core_Nav__ShowQueryVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
+import { NavAdminView } from "@/plugins/admin/views/core/styles/nav/nav-admin-view";
 
 const getData = async () => {
   const { data } = await fetcher<

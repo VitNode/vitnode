@@ -2,7 +2,7 @@ import { useLocale } from "next-intl";
 import * as localeDate from "date-fns/locale";
 import { format, formatDistance } from "date-fns";
 
-import { useGlobals } from "@/hooks/core/use-globals";
+import { useGlobals } from "@/plugins/core/hooks/use-globals";
 import { convertUnixTime } from "@/functions/date";
 
 interface Args {

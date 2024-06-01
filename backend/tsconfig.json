@@ -19,6 +19,7 @@
       "@/*": ["./src/*"]
     }
   },
+  "exclude": ["uploads"],
   "ts-node": {
     // `pnpm add -D tsconfig-paths` / Paths for ts-node
     "require": ["tsconfig-paths/register"]

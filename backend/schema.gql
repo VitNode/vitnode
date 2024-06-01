@@ -126,10 +126,6 @@ type FilesAdminPluginsObj {
   admin_templates: Int!
   databases: Int!
   default_page: Boolean!
-  graphql_mutations: Int!
-  graphql_queries: Int!
-  hooks: Int!
-  language: Boolean!
   pages: Int!
   pages_container: Int!
   templates: Int!
@@ -231,7 +227,7 @@ type Mutation {
   admin__core_groups__edit(content: ContentCreateAdminGroups!, id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
   admin__core_languages__create(allow_in_input: Boolean!, code: String!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_languages__delete(code: String!): String!
-  admin__core_languages__download(all: Boolean!, code: String!, plugins: [String!]!): String!
+  admin__core_languages__download(code: String!, plugins: [String!]!): String!
   admin__core_languages__edit(allow_in_input: Boolean!, default: Boolean!, enabled: Boolean!, id: Int!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_languages__update(code: String!, file: Upload!): String!
   admin__core_main_settings__edit(site_copyright: [TextLanguageInput!]!, site_description: [TextLanguageInput!]!, site_name: String!, site_short_name: String!): EditAdminSettingsObj!

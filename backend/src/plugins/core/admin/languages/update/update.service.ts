@@ -12,6 +12,8 @@ import { core_languages } from "../../database/schema/languages";
 import { DatabaseService } from "@/database/database.service";
 import { setRebuildRequired } from "@/functions/rebuild-required";
 import { ABSOLUTE_PATHS } from "@/config";
+import { currentDate } from "@/functions/date";
+import { generateRandomString } from "@/functions/generate-random-string";
 
 @Injectable()
 export class UpdateAdminCoreLanguageService {
@@ -26,12 +28,12 @@ export class UpdateAdminCoreLanguageService {
       throw new NotFoundError("Language");
     }
 
+    // Unpack the file to the temp folder
     const tgz = await file;
-
-    // Check if folder exists
-    const folder = join(ABSOLUTE_PATHS.frontend.langs, code);
-    if (!fs.existsSync(folder)) {
-      fs.mkdirSync(folder);
+    const tempNameFolder = `${code}-update--${generateRandomString(5)}-${currentDate()}`;
+    const pathTemp = join(ABSOLUTE_PATHS.uploads.temp, "langs", tempNameFolder);
+    if (!fs.existsSync(pathTemp)) {
+      fs.mkdirSync(pathTemp, { recursive: true });
     }
 
     await new Promise((resolve, reject) => {
@@ -39,13 +41,36 @@ export class UpdateAdminCoreLanguageService {
         .createReadStream()
         .pipe(
           // TODO: Fix this type
-          tar.extract({ C: folder, strip: 1 }) as NodeJS.WritableStream &
+          tar.extract({ C: pathTemp, strip: 1 }) as NodeJS.WritableStream &
             ReturnType<typeof tar.extract>
         )
         .on("error", function (err) {
           throw new reject(err.message);
         })
         .on("finish", function () {
+          const plugins = fs
+            .readdirSync(pathTemp)
+            .map(fileName => fileName.replace(".json", ""));
+
+          plugins.forEach(plugin => {
+            // Check if the plugin exists
+            const path = ABSOLUTE_PATHS.plugin({ code: plugin }).frontend
+              .language;
+
+            if (!fs.existsSync(path)) {
+              return;
+            }
+
+            // Copy the file to the plugin folder
+            fs.copyFileSync(
+              join(pathTemp, `${plugin}.json`),
+              join(path, `${code}.json`)
+            );
+          });
+
+          // Remove the temp folder
+          fs.rmdirSync(pathTemp, { recursive: true });
+
           resolve("success");
         });
     });

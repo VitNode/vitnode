@@ -15,7 +15,7 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { useSignInView } from "@/hooks/core/sign/in/use-sign-in-view";
+import { useSignInView } from "@/plugins/core/hooks/sign/in/use-sign-in-view";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 

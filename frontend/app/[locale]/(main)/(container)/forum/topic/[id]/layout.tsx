@@ -3,10 +3,10 @@ import { notFound } from "next/navigation";
 
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { getTopicData } from "./query-api";
-import { getTextLang } from "@/hooks/core/use-text-lang";
-import { ErrorType } from "@/graphql/fetcher";
+import { getTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { getSessionData } from "@/functions/get-session-data";
 import { ErrorViewSSR } from "@/components/views/error-view-ssr";
+import { ErrorType } from "@/utils/graphql/fetcher";
 
 interface Props {
   children: React.ReactNode;

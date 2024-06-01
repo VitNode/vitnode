@@ -53,18 +53,8 @@ export class FilesAdminPluginsService {
         paths: pluginPaths.frontend.pages_container
       }),
       default_page: fs.existsSync(pluginPaths.frontend.default_page),
-      language: fs.existsSync(pluginPaths.frontend.language),
-      hooks: await this.checkNumberOfFiles({
-        paths: pluginPaths.frontend.hooks
-      }),
       templates: await this.checkNumberOfFiles({
         paths: pluginPaths.frontend.templates
-      }),
-      graphql_mutations: await this.checkNumberOfFiles({
-        paths: pluginPaths.frontend.graphql_mutations
-      }),
-      graphql_queries: await this.checkNumberOfFiles({
-        paths: pluginPaths.frontend.graphql_queries
       })
     };
   }

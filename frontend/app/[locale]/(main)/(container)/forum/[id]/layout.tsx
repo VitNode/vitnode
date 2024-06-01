@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import * as React from "react";
 
 import { getSessionData } from "@/functions/get-session-data";
-import { getTextLang } from "@/hooks/core/use-text-lang";
+import { getTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { getForumItemData } from "./query-api";
 import { ErrorViewSSR } from "@/components/views/error-view-ssr";
 import { getConfigFile } from "@/config/helpers";

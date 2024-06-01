@@ -7,8 +7,8 @@ import * as React from "react";
 import "../_supressLogs";
 
 import { Toaster } from "@/components/ui/sonner";
-import { GlobalsContext } from "@/hooks/core/use-globals";
-import { Core_MiddlewareQuery } from "@/graphql/hooks";
+import { GlobalsContext } from "@/plugins/core/hooks/use-globals";
+import { Core_MiddlewareQuery } from "@/utils/graphql/hooks";
 import { ConfigType } from "@/config";
 
 interface Props {

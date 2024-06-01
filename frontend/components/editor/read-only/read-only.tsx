@@ -3,7 +3,7 @@ import parse, { Element, HTMLReactParserOptions } from "html-react-parser";
 import { generateHTML } from "@tiptap/html";
 import Image from "next/image";
 
-import { TextLanguage } from "@/graphql/hooks";
+import { TextLanguage } from "@/utils/graphql/hooks";
 import { cn } from "@/functions/classnames";
 import { extensionsEditor } from "../extensions/extensions";
 import { changeCodeBlock } from "./code-block";

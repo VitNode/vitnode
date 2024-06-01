@@ -14,7 +14,7 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { useSignUpView } from "@/hooks/core/sign/up/use-sign-up-view";
+import { useSignUpView } from "@/plugins/core/hooks/sign/up/use-sign-up-view";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";

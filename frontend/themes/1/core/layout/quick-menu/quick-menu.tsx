@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 
 import { ItemQuickMenu } from "./item";
 import { usePathname, useRouter } from "@/utils/i18n";
-import { useSession } from "@/hooks/core/use-session";
+import { useSession } from "@/plugins/core/hooks/use-session";
 import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
 import { DrawerQuickMenu } from "./drawer/drawer";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";

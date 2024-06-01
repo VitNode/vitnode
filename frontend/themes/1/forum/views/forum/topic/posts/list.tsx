@@ -4,7 +4,7 @@ import {
   ShowPostsForums,
   ShowPostsForumsMetaTags,
   ShowTopicsForums
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
 import { PostTopic } from "./post/post";
 import { MetaTagTopic } from "./meta-tags/meta-tag";
 import { cn } from "@/functions/classnames";

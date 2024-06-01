@@ -23,12 +23,10 @@ import { migrate } from "@/utils/actions/migrate";
 @Injectable()
 export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService {
   protected path: string = join(process.cwd());
-  protected tempFolderName: string = `${generateRandomString(5)}${currentDate()}`;
   protected tempPath: string = join(
-    process.cwd(),
-    "temp",
+    ABSOLUTE_PATHS.uploads.temp,
     "plugins",
-    this.tempFolderName
+    `upload-${generateRandomString(5)}${currentDate()}`
   );
 
   constructor(
@@ -165,14 +163,7 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
   }: {
     config: ConfigPlugin;
   }): Promise<void> {
-    const frontendPaths = [
-      "admin_pages",
-      "admin_templates",
-      "pages",
-      "hooks",
-      "graphql_queries",
-      "graphql_mutations"
-    ];
+    const frontendPaths = ["admin_pages", "pages", "plugin"];
     await Promise.all(
       frontendPaths.map(async path => {
         const source = join(this.tempPath, "frontend", path);
@@ -211,20 +202,30 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
           code: true
         }
       });
+
     languages.forEach(lang => {
+      const checkExist = join(
+        ABSOLUTE_PATHS.plugin({
+          code: config.code
+        }).frontend.language,
+        `${lang.code}.json`
+      );
+
+      if (fs.existsSync(checkExist)) {
+        return;
+      }
+
       const source = join(
-        this.tempPath,
-        "frontend",
-        "langs",
-        `${config.code}.json`
+        ABSOLUTE_PATHS.plugin({
+          code: config.code
+        }).frontend.language,
+        `en.json`
       );
       const destination = join(
-        process.cwd(),
-        "..",
-        "frontend",
-        "langs",
-        lang.code,
-        `${config.code}.json`
+        ABSOLUTE_PATHS.plugin({
+          code: config.code
+        }).frontend.language,
+        `${lang.code}.json`
       );
 
       this.copyFileToPluginFolder({ source, destination });

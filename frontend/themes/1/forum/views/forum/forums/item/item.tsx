@@ -5,8 +5,8 @@ import {
   LastPostsShowForumForumsObj,
   ShowForumForumsCounts,
   TextLanguage
-} from "@/graphql/hooks";
-import { useTextLang } from "@/hooks/core/use-text-lang";
+} from "@/utils/graphql/hooks";
+import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { WrapperItemForum } from "./wrapper-item-forum";
 import { ChildButtonItemForum } from "./child";
 import { StatsItemForum } from "./stats";

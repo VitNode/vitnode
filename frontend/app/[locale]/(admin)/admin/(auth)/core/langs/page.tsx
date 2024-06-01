@@ -1,22 +1,22 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-import { LangsCoreAdminView } from "@/admin/core/views/core/langs/langs-core-admin-view";
-import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Languages__Show,
   ShowCoreLanguagesSortingColumnEnum,
   Core_Languages__ShowQuery,
   Core_Languages__ShowQueryVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
 import {
   usePaginationAPISsr,
   SearchParamsPagination
-} from "@/hooks/core/utils/use-pagination-api-ssr";
+} from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { HeaderContent } from "@/components/header-content/header-content";
-import { ActionsLangsAdmin } from "@/admin/core/views/core/langs/actions/actions";
 import { Card } from "@/components/ui/card";
-import { RebuildRequiredAdmin } from "@/admin/core/global/rebuild-required";
+import { fetcher } from "@/utils/graphql/fetcher";
+import { ActionsLangsAdmin } from "@/plugins/admin/views/core/langs/actions/actions";
+import { RebuildRequiredAdmin } from "@/plugins/admin/global/rebuild-required";
+import { LangsCoreAdminView } from "@/plugins/admin/views/core/langs/langs-core-admin-view";
 
 const getData = async (variables: Core_Languages__ShowQueryVariables) => {
   const { data } = await fetcher<

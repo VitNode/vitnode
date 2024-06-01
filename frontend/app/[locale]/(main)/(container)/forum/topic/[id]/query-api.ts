@@ -1,11 +1,11 @@
-import { fetcher } from "@/graphql/fetcher";
 import {
   Forum_Topics__Show,
   ShowPostsForumsSortingEnum,
   Forum_Topics__ShowQuery,
   Forum_Topics__ShowQueryVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
 import { getIdFormString } from "@/functions/url";
+import { fetcher } from "@/utils/graphql/fetcher";
 
 export const limit = 25;
 

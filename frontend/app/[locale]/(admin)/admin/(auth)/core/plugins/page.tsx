@@ -1,22 +1,22 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-import { PluginsCoreAdminView } from "@/admin/core/views/core/plugins/plugins-admin-view";
 import {
   Admin__Core_Plugins__Show,
   ShowAdminPluginsSortingColumnEnum,
   Admin__Core_Plugins__ShowQuery,
   Admin__Core_Plugins__ShowQueryVariables
-} from "@/graphql/hooks";
-import { fetcher } from "@/graphql/fetcher";
+} from "@/utils/graphql/hooks";
 import {
   usePaginationAPISsr,
   SearchParamsPagination
-} from "@/hooks/core/utils/use-pagination-api-ssr";
+} from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { HeaderContent } from "@/components/header-content/header-content";
-import { RebuildRequiredAdmin } from "@/admin/core/global/rebuild-required";
 import { Card } from "@/components/ui/card";
-import { ActionsPluginsAdmin } from "@/admin/core/views/core/plugins/actions/actions";
+import { fetcher } from "@/utils/graphql/fetcher";
+import { RebuildRequiredAdmin } from "@/plugins/admin/global/rebuild-required";
+import { ActionsPluginsAdmin } from "@/plugins/admin/views/core/plugins/actions/actions";
+import { PluginsCoreAdminView } from "@/plugins/admin/views/core/plugins/plugins-admin-view";
 
 interface Props {
   searchParams: SearchParamsPagination;

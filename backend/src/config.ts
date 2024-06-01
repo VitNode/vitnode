@@ -71,9 +71,9 @@ export const ABSOLUTE_PATHS = {
         theme_id.toString(),
         "config.json"
       )
-    }),
-    langs: join(internalPaths.frontend, "langs")
+    })
   },
+  backend: join(process.cwd(), "src"),
   plugins: internalPaths.plugins,
   plugin: ({ code }: { code: string }) => ({
     root: join(internalPaths.plugins, code),
@@ -108,7 +108,7 @@ export const ABSOLUTE_PATHS = {
         "(auth)",
         code
       ),
-      admin_templates: join(internalPaths.frontend, "admin", code),
+      admin_templates: join(internalPaths.frontend, "plugins", code, "admin"),
       pages_container: join(
         internalPaths.frontend,
         "app",
@@ -125,16 +125,9 @@ export const ABSOLUTE_PATHS = {
         "default-page.tsx"
       ),
       pages: join(internalPaths.frontend, "app", "[locale]", "(main)", code),
-      hooks: join(internalPaths.frontend, "hooks", code),
       templates: join(internalPaths.frontend, "themes", "1", code),
-      graphql_queries: join(internalPaths.frontend, "graphql", "queries", code),
-      graphql_mutations: join(
-        internalPaths.frontend,
-        "graphql",
-        "mutations",
-        code
-      ),
-      language: join(internalPaths.frontend, "langs", "en", `${code}.json`),
+      plugin: join(internalPaths.frontend, "plugins", code),
+      language: join(internalPaths.frontend, "plugins", code, "langs"),
       theme: ({ theme_id }: { theme_id: number }) =>
         join(internalPaths.frontend, "themes", theme_id.toString(), code)
     }

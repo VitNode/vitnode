@@ -1,18 +1,18 @@
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 
-import { UsersMembersAdminView } from "@/admin/core/views/members/users/users-members-admin-view";
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Members__Show,
   ShowAdminMembersSortingColumnEnum,
   Admin__Core_Members__ShowQuery,
   Admin__Core_Members__ShowQueryVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
 import {
   usePaginationAPISsr,
   SearchParamsPagination
-} from "@/hooks/core/utils/use-pagination-api-ssr";
+} from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
+import { fetcher } from "@/utils/graphql/fetcher";
+import { UsersMembersAdminView } from "@/plugins/admin/views/members/users/users-members-admin-view";
 
 interface SearchParams extends SearchParamsPagination {
   groups?: string[];

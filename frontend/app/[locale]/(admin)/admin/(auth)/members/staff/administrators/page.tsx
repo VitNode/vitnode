@@ -1,18 +1,18 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-import { AdministratorsStaffAdminView } from "@/admin/core/views/members/staff/views/administrators/administrators-view";
 import {
   Admin__Core_Staff_Administrators__Show,
   ShowAdminStaffAdministratorsSortingColumnEnum,
   Admin__Core_Staff_Administrators__ShowQuery,
   Admin__Core_Staff_Administrators__ShowQueryVariables
-} from "@/graphql/hooks";
-import { fetcher } from "@/graphql/fetcher";
+} from "@/utils/graphql/hooks";
 import {
   usePaginationAPISsr,
   SearchParamsPagination
-} from "@/hooks/core/utils/use-pagination-api-ssr";
+} from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
+import { fetcher } from "@/utils/graphql/fetcher";
+import { AdministratorsStaffAdminView } from "@/plugins/admin/views/members/staff/views/administrators/administrators-view";
 
 const getData = async (
   variables: Admin__Core_Staff_Administrators__ShowQueryVariables

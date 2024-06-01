@@ -1,0 +1,30 @@
+"use server";
+
+import { revalidatePath } from "next/cache";
+
+import {
+  Admin__Forum_Forums__Create,
+  Admin__Forum_Forums__CreateMutation,
+  Admin__Forum_Forums__CreateMutationVariables
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
+
+export const mutationCreateApi = async (
+  variables: Admin__Forum_Forums__CreateMutationVariables
+) => {
+  try {
+    const { data } = await fetcher<
+      Admin__Forum_Forums__CreateMutation,
+      Admin__Forum_Forums__CreateMutationVariables
+    >({
+      query: Admin__Forum_Forums__Create,
+      variables
+    });
+
+    revalidatePath("/admin/forum/forums", "page");
+
+    return { data };
+  } catch (error) {
+    return { error };
+  }
+};

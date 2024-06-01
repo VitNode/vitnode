@@ -5,7 +5,7 @@ import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import { UserLink } from "@/components/user/link/user-link";
 import { DateFormat } from "@/components/date-format/date-format";
 import { GroupFormat } from "@/components/groups/group-format";
-import { ShowPostsForums, ShowTopicsForums } from "@/graphql/hooks";
+import { ShowPostsForums, ShowTopicsForums } from "@/utils/graphql/hooks";
 import { DivMotion } from "@/components/animations/div-motion";
 import { ReadOnlyEditor } from "@/components/editor/read-only/read-only";
 

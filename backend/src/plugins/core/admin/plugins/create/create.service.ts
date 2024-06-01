@@ -1,3 +1,6 @@
+import { join } from "path";
+import * as fs from "fs";
+
 import { Injectable } from "@nestjs/common";
 
 import { CreateAdminPluginsArgs } from "./dto/create.args";
@@ -8,6 +11,7 @@ import { ChangeFilesAdminPluginsService } from "../helpers/files/change/change.s
 import { core_plugins } from "../../database/schema/plugins";
 import { DatabaseService } from "@/database/database.service";
 import { CustomError } from "@/utils/errors/custom-error";
+import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class CreateAdminPluginsService {
@@ -29,7 +33,7 @@ export class CreateAdminPluginsService {
       where: (table, { eq }) => eq(table.code, code)
     });
 
-    if (plugin) {
+    if (plugin || code === "admin" || code === "core") {
       throw new CustomError({
         code: "PLUGIN_ALREADY_EXISTS",
         message: `Plugin already exists with "${code}" code!`
@@ -48,6 +52,34 @@ export class CreateAdminPluginsService {
       nav: []
     });
     this.changeFilesService.changeFilesWhenCreate({ code });
+
+    // Create lang.json file inside the plugin frontend folder
+    const languages =
+      await this.databaseService.db.query.core_languages.findMany({
+        orderBy: (table, { asc }) => asc(table.code)
+      });
+
+    languages.forEach(async lang => {
+      const langPath = join(ABSOLUTE_PATHS.plugin({ code }).frontend.language);
+
+      if (!fs.existsSync(langPath)) {
+        fs.mkdirSync(langPath, { recursive: true });
+      }
+
+      fs.writeFileSync(
+        join(langPath, `${lang.code}.json`),
+        JSON.stringify(
+          {
+            [code]: {
+              admin: {}
+            }
+          },
+          null,
+          2
+        ),
+        "utf-8"
+      );
+    });
 
     const data = await this.databaseService.db
       .insert(core_plugins)

@@ -2,9 +2,9 @@ import { NextIntlClientProvider, AbstractIntlMessages } from "next-intl";
 import { Inter } from "next/font/google";
 
 import { Providers } from "./providers";
-import { InternalErrorView } from "@/admin/core/global/internal-error/internal-error-view";
 import { cn } from "@/functions/classnames";
 import { getConfigFile } from "@/config/helpers";
+import { InternalErrorView } from "@/plugins/admin/global/internal-error/internal-error-view";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,7 +22,8 @@ export const CatchLayout = async ({ defaultPlugins, locale }: Props) => {
     defaultPlugins.map(async plugin => {
       try {
         return {
-          ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
+          ...(await import(`@/plugins/${plugin.code}/langs/${locale}.json`))
+            .default
         };
       } catch (e) {
         return {};

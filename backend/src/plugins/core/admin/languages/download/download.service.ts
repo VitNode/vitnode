@@ -1,5 +1,6 @@
 import { join } from "path";
 import * as fs from "fs";
+import { copyFile } from "fs/promises";
 
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
@@ -21,7 +22,7 @@ export class DownloadAdminCoreLanguageService {
 
   async download(
     { id: userId }: User,
-    { all, code, plugins }: DownloadCoreAdminLanguagesArgs
+    { code, plugins: pluginsToInclude }: DownloadCoreAdminLanguagesArgs
   ): Promise<string> {
     const language =
       await this.databaseService.db.query.core_languages.findFirst({
@@ -32,35 +33,52 @@ export class DownloadAdminCoreLanguageService {
       throw new NotFoundError("Language");
     }
 
-    const path = join(ABSOLUTE_PATHS.frontend.langs, code);
-    // Check if language exists
-    if (!fs.existsSync(path)) {
-      throw new NotFoundError("Language directory");
+    // Create temp folder
+    const tempNameFolder = `${code}-download--${generateRandomString(5)}-${currentDate()}`;
+    const pathTemp = join(ABSOLUTE_PATHS.uploads.temp, "langs", tempNameFolder);
+    if (!fs.existsSync(pathTemp)) {
+      fs.mkdirSync(pathTemp, { recursive: true });
     }
+
+    const plugins = await this.databaseService.db.query.core_plugins.findMany({
+      orderBy: (plugin, { desc }) => desc(plugin.updated),
+      columns: {
+        code: true
+      }
+    });
+
+    [...plugins, { code: "admin" }, { code: "core" }].forEach(plugin => {
+      const path = join(
+        ABSOLUTE_PATHS.plugin({ code: plugin.code }).frontend.language,
+        `${code}.json`
+      );
+      if (
+        !fs.existsSync(path) ||
+        (pluginsToInclude.length > 0 && !pluginsToInclude.includes(plugin.code))
+      ) {
+        return;
+      }
+
+      copyFile(path, join(pathTemp, `${plugin.code}.json`));
+    });
 
     const name = removeSpecialCharacters(
       `${language.code}--${userId}-${generateRandomString(5)}-${currentDate()}`
     );
 
-    const pluginsPath: string[] = [];
-    if (plugins.length > 0 && !all) {
-      plugins.forEach(plugin => {
-        const name = `${plugin}.json`;
-        const pluginPath = join(path, name);
-        if (!fs.existsSync(pluginPath)) {
-          return;
-        }
-
-        pluginsPath.push(name);
-      });
-    }
-
     // Create tgz
     try {
-      tar.create(
-        { gzip: true, file: `temp/${name}.tgz`, cwd: path },
-        all ? ["."] : pluginsPath
+      await tar.create(
+        {
+          gzip: true,
+          file: join(ABSOLUTE_PATHS.uploads.temp, `${name}.tgz`),
+          cwd: pathTemp
+        },
+        ["."]
       );
+
+      // Remove temp folder
+      fs.rmSync(pathTemp, { recursive: true });
     } catch (error) {
       throw new CustomError({
         code: "LANGUAGE_DOWNLOAD_ERROR",

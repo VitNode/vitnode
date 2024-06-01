@@ -1,10 +1,10 @@
 "use client";
 
-import { useMorePosts } from "@/hooks/forum/posts/use-more-posts";
+import { useMorePosts } from "@/plugins/forum/hooks/posts/use-more-posts";
 import { ButtonLoadMorePosts } from "./button";
 import { ListPosts } from "../list";
 import { cn } from "@/functions/classnames";
-import { ShowTopicsForums } from "@/graphql/hooks";
+import { ShowTopicsForums } from "@/utils/graphql/hooks";
 
 interface Props {
   initialCount: number;

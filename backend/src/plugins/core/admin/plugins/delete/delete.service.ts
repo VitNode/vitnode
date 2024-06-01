@@ -1,5 +1,4 @@
 import * as fs from "fs";
-import { join } from "path";
 
 import { Injectable } from "@nestjs/common";
 import { eq, sql } from "drizzle-orm";
@@ -13,6 +12,7 @@ import { DatabaseService } from "@/database/database.service";
 import { CustomError } from "@/utils/errors/custom-error";
 import { setRebuildRequired } from "@/functions/rebuild-required";
 import { ABSOLUTE_PATHS } from "@/config";
+import { core_migrations } from "../../database/schema/files";
 
 @Injectable()
 export class DeleteAdminPluginsService {
@@ -24,28 +24,6 @@ export class DeleteAdminPluginsService {
   protected deleteFolderWhenExists(path: string) {
     if (fs.existsSync(path)) {
       fs.rmSync(path, { recursive: true });
-    }
-  }
-
-  protected async deleteMigration({ code }: { code: string }) {
-    const migrationPathInfo = ABSOLUTE_PATHS.plugin({ code }).database
-      .migration_info;
-    if (!fs.existsSync(migrationPathInfo)) return;
-
-    const migrationData: { entries: { when: number }[] } = JSON.parse(
-      fs.readFileSync(migrationPathInfo, "utf-8")
-    );
-    const deleteQueries = migrationData.entries.map(entry => {
-      return `DELETE FROM drizzle.__drizzle_migrations WHERE created_at = ${entry.when};`;
-    });
-
-    try {
-      await this.databaseService.db.execute(sql.raw(deleteQueries.join(" ")));
-    } catch (error) {
-      throw new CustomError({
-        code: "DELETE_TABLE_ERROR",
-        message: `Error deleting migration for plugin ${code}`
-      });
     }
   }
 
@@ -66,7 +44,6 @@ export class DeleteAdminPluginsService {
     }
 
     // Drop tables
-    await this.deleteMigration({ code });
     const tables: { getTables: () => string[] } = await import(
       `../../../../${code}/admin/database/functions`
     );
@@ -85,20 +62,15 @@ export class DeleteAdminPluginsService {
         message: `Error deleting tables for plugin ${code}`
       });
     }
-
+    await this.databaseService.db
+      .delete(core_migrations)
+      .where(eq(core_migrations.plugin, code));
     this.changeFilesService.changeFilesWhenDelete({ code });
 
     const modulePath = ABSOLUTE_PATHS.plugin({ code }).root;
     this.deleteFolderWhenExists(modulePath);
     // Frontend
-    const frontendPaths = [
-      "admin_pages",
-      "admin_templates",
-      "pages",
-      "hooks",
-      "graphql_queries",
-      "graphql_mutations"
-    ];
+    const frontendPaths = ["admin_pages", "pages", "plugin"];
     frontendPaths.forEach(path => {
       this.deleteFolderWhenExists(
         ABSOLUTE_PATHS.plugin({ code }).frontend[path]
@@ -116,26 +88,6 @@ export class DeleteAdminPluginsService {
         ABSOLUTE_PATHS.plugin({ code }).frontend.theme({
           theme_id: id
         })
-      );
-    });
-
-    // Frontend - Delete Language
-    const languages =
-      await this.databaseService.db.query.core_languages.findMany({
-        columns: {
-          code: true
-        }
-      });
-    languages.forEach(lang => {
-      this.deleteFolderWhenExists(
-        join(
-          process.cwd(),
-          "..",
-          "frontend",
-          "langs",
-          lang.code,
-          `${code}.json`
-        )
       );
     });
 

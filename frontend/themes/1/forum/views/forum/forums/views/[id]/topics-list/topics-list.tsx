@@ -2,9 +2,9 @@
 
 import { Virtuoso } from "react-virtuoso";
 
-import { Forum_Forums__Show_ItemQuery } from "@/graphql/hooks";
+import { Forum_Forums__Show_ItemQuery } from "@/utils/graphql/hooks";
 import { ItemTopicListForum } from "./item";
-import { useTopicsList } from "@/hooks/forum/forum/use-topics-list";
+import { useTopicsList } from "@/plugins/forum/hooks/forum/use-topics-list";
 import { Loader } from "@/components/loader";
 
 interface Props {

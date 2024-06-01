@@ -1,4 +1,3 @@
-import { readdir } from "fs/promises";
 import { join } from "path";
 import * as fs from "fs";
 
@@ -96,11 +95,9 @@ const generateDefaultManifest = ({
 
 export const generateManifest = async () => {
   const config = await getConfigFile();
-  const languages = (
-    await readdir(join(ABSOLUTE_PATHS.frontend.langs), { withFileTypes: true })
-  )
-    .filter(dirent => dirent.isDirectory())
-    .map(dirent => dirent.name);
+  const languages = fs
+    .readdirSync(ABSOLUTE_PATHS.plugin({ code: "core" }).frontend.language)
+    .map(fileName => fileName.replace(".json", ""));
   const frontend_url = parseFrontendUrlFromEnv().url;
 
   languages.forEach(lang_code => {

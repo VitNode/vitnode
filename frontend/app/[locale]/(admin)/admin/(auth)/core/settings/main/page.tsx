@@ -1,15 +1,15 @@
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 
-import { MainSettingsCoreAdmin } from "@/admin/core/views/core/settings/main/main-settings-core-admin";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Card } from "@/components/ui/card";
-import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Main_Settings__Show,
   Core_Main_Settings__ShowQuery,
   Core_Main_Settings__ShowQueryVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
+import { MainSettingsCoreAdmin } from "@/plugins/admin/views/core/settings/main/main-settings-core-admin";
 
 const getData = async () => {
   const { data } = await fetcher<

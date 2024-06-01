@@ -8,7 +8,7 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { useCreatePost } from "@/hooks/forum/posts/create/use-create-post";
+import { useCreatePost } from "@/plugins/forum/hooks/posts/create/use-create-post";
 import { Editor } from "@/components/editor/editor";
 
 export const ContentCreatePost = () => {

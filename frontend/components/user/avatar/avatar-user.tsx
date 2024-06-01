@@ -1,6 +1,6 @@
 import { CONFIG } from "@/config";
 import { generateLetterPhoto } from "@/functions/generate-letter-photo";
-import { Maybe, AvatarUser as AvatarUserType } from "@/graphql/hooks";
+import { Maybe, AvatarUser as AvatarUserType } from "@/utils/graphql/hooks";
 import { cn } from "@/functions/classnames";
 
 import { Img } from "../../img";

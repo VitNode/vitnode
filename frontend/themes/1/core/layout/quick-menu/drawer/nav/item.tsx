@@ -1,8 +1,8 @@
 import { buttonVariants } from "@/components/ui/button";
 import { DrawerClose } from "@/components/ui/drawer";
 import { cn } from "@/functions/classnames";
-import { ShowCoreNav } from "@/graphql/hooks";
-import { useTextLang } from "@/hooks/core/use-text-lang";
+import { ShowCoreNav } from "@/utils/graphql/hooks";
+import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { Link, usePathname } from "@/utils/i18n";
 import { classNameDrawerQuickMenu } from "../drawer";
 

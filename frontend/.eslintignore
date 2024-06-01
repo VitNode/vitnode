@@ -1,4 +1,4 @@
-graphql/hooks.ts
+/utils/graphql/hooks.ts
 
 # next-pwa
 /public/precache.*.*.js

@@ -37,7 +37,6 @@ services:
     volumes:
       - ./frontend/config:/app/frontend/config # config
       - ./frontend/themes:/app/frontend/themes # themes
-      - ./frontend/langs:/app/frontend/langs # langs
       - ./frontend/app:/app/frontend/app # app
       - ./frontend/admin:/app/frontend/admin # admin
       - ./frontend/graphql:/app/frontend/graphql # graphql
@@ -71,7 +70,6 @@ services:
     volumes:
       - ./frontend/config:/app/frontend/config # config
       - ./frontend/themes:/app/frontend/themes # themes
-      - ./frontend/langs:/app/frontend/langs # langs
       - ./frontend/app:/app/frontend/app # app
       - ./frontend/admin:/app/frontend/admin # admin
       - ./frontend/graphql:/app/frontend/graphql # graphql

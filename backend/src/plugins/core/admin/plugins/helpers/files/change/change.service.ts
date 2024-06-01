@@ -10,6 +10,7 @@ import {
   removeModuleFromRootSchema
 } from "../../../delete/contents";
 import { CustomError } from "@/utils/errors/custom-error";
+import { ABSOLUTE_PATHS } from "@/config";
 
 interface ChangeFilesContentType {
   condition: (content: string) => boolean;
@@ -19,32 +20,28 @@ interface ChangeFilesContentType {
 
 @Injectable()
 export class ChangeFilesAdminPluginsService {
-  protected path = join(process.cwd(), "src");
-
   protected changeContent({
     files
   }: {
     files: ChangeFilesContentType[];
   }): void {
     files.forEach(file => {
-      const path = join(this.path, file.path);
-
-      if (!fs.existsSync(path)) {
+      if (!fs.existsSync(file.path)) {
         throw new CustomError({
           code: "CANNOT_FIND_PLUGIN_PATH",
-          message: `Cannot find plugin path with "${path}"!`
+          message: `Cannot find plugin path with "${file.path}"!`
         });
       }
 
-      const content = fs.readFileSync(path, "utf8");
+      const content = fs.readFileSync(file.path, "utf8");
 
       // Write files
       if (file.condition(content)) {
-        fs.writeFile(path, file.content(content), err => {
+        fs.writeFile(file.path, file.content(content), err => {
           if (err) {
             throw new CustomError({
               code: "CANNOT_WRITE_FILE",
-              message: `Cannot write file with "${path}" path!`
+              message: `Cannot write file with "${file.path}" path!`
             });
           }
         });
@@ -55,7 +52,7 @@ export class ChangeFilesAdminPluginsService {
   changeFilesWhenCreate({ code }: { code: string }): void {
     const files: ChangeFilesContentType[] = [
       {
-        path: join("plugins", "plugins.module.ts"),
+        path: join(ABSOLUTE_PATHS.plugins, "plugins.module.ts"),
         content: content =>
           changeModuleRootSchema({
             content,
@@ -64,7 +61,7 @@ export class ChangeFilesAdminPluginsService {
         condition: content => !content.includes(`./${code}/${code}.module`)
       },
       {
-        path: join("database", "schema.ts"),
+        path: join(ABSOLUTE_PATHS.backend, "database", "schema.ts"),
         content: content =>
           changeDatabaseService({
             content,
@@ -80,7 +77,7 @@ export class ChangeFilesAdminPluginsService {
   changeFilesWhenDelete({ code }: { code: string }): void {
     const files: ChangeFilesContentType[] = [
       {
-        path: join("plugins", "plugins.module.ts"),
+        path: join(ABSOLUTE_PATHS.plugins, "plugins.module.ts"),
         content: content =>
           removeModuleFromRootSchema({
             content,
@@ -89,7 +86,7 @@ export class ChangeFilesAdminPluginsService {
         condition: () => true
       },
       {
-        path: join("database", "schema.ts"),
+        path: join(ABSOLUTE_PATHS.backend, "database", "schema.ts"),
         content: content =>
           removeDatabaseFromService({
             content,

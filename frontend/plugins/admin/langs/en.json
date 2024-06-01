@@ -1,0 +1,520 @@
+{
+  "admin": {
+    "title": "Admin Control Panel",
+    "title_short": "Admin",
+    "home_page": "Home Page",
+    "rebuild_required": {
+      "title": "Rebuild Required",
+      "desc": "We're detecting that you need to rebuild your website, because you have made changes in:",
+      "plugins": "<bold>Plugins</bold> - Temporary disabled",
+      "themes": "<bold>Themes</bold> - Changing theme disabled",
+      "langs": "<bold>Languages</bold> - Changing language disabled",
+      "submit": "Read How To Rebuild"
+    },
+    "core": {
+      "settings": {
+        "main": {
+          "title": "Main Settings",
+          "name": {
+            "label": "Name Site"
+          },
+          "short_name": {
+            "label": "Short Name Site"
+          },
+          "description": {
+            "label": "Description Site"
+          },
+          "copyright": {
+            "label": "Copyright Site"
+          }
+        },
+        "security": {
+          "title": "Security"
+        }
+      },
+      "metadata": {
+        "manifest": {
+          "title": "Manifest",
+          "desc": "The web app manifest provides information about an application (such as name, author, icon, and description) in a JSON text file. The manifest is used to install the web application (PWA) to the home screen of a device.",
+          "display": {
+            "label": "Display",
+            "desc": "The display property controls how the app is displayed.",
+            "fullscreen": {
+              "title": "Fullscreen",
+              "desc": "Without any browser UI and any device UI."
+            },
+            "standalone": {
+              "title": "Standalone",
+              "desc": "Without any browser UI."
+            },
+            "minimal-ui": {
+              "title": "Minimal UI",
+              "desc": "Minimal browser UI."
+            },
+            "browser": {
+              "title": "Browser",
+              "desc": "With browser UI."
+            }
+          },
+          "start_url": {
+            "label": "Start URL",
+            "desc": "When user launches the app, this is the page that will be loaded."
+          },
+          "theme_color": {
+            "label": "Theme Color"
+          },
+          "background_color": {
+            "label": "Background Color"
+          }
+        },
+        "sitemap": {
+          "title": "Sitemap",
+          "desc": "Sitemap is a file where you provide information about the pages, videos, and other files on your site, and the relationships between them. Search engines like Google read this file to more intelligently crawl your site."
+        }
+      },
+      "plugins": {
+        "title": "Plugins",
+        "set_default": "Set as default",
+        "get_help": "Get help",
+        "search_placeholder": "Search by name...",
+        "dev_tools": "Developer Tools",
+        "dev": {
+          "overview": {
+            "title": "Overview"
+          },
+          "files": {
+            "title": "Files",
+            "databases": "Databases",
+            "admin_pages": "Admin Pages",
+            "admin_templates": "Admin Templates",
+            "pages": "Pages",
+            "pages_container": "Pages (container)",
+            "templates": "Templates",
+            "default_page": "Default Page",
+            "file_detected": "{count, plural, =0 {No files} =1 {1 file} other {# files}} detected"
+          },
+          "nav": {
+            "title": "Navigation in AdminCP",
+            "key": "Key: <key></key>",
+            "create": {
+              "title": "Create Navigation",
+              "code": {
+                "label": "Code",
+                "desc": "Should be unique. Min 3-50 characters.",
+                "exists": "Navigation with this code already exists."
+              },
+              "href": {
+                "label": "URL",
+                "desc": "Your link will be: /admin/<link></link>"
+              },
+              "icon": {
+                "label": "Icon"
+              },
+              "success": "Navigation has been created."
+            },
+            "edit": {
+              "title": "Edit Navigation",
+              "success": "Navigation has been updated."
+            },
+            "delete": {
+              "submit": "Yes, delete navigation",
+              "desc": "This action will delete <code></code> navigation.",
+              "success": "Navigation has been deleted."
+            }
+          }
+        },
+        "create": {
+          "title": "Create Plugin",
+          "success": "Plugin has been created.",
+          "name": {
+            "label": "Name",
+            "desc": "Min 3-50 characters."
+          },
+          "code": {
+            "label": "Code",
+            "desc": "Must be unique. Min 3-50 characters. Allowed characters: a-z, 0-9, -",
+            "invalid": "You can use only a-z, 0-9, -",
+            "exists": "Plugin with this code already exists."
+          },
+          "description": {
+            "label": "Description"
+          },
+          "support_url": {
+            "label": "Support URL",
+            "desc": "URL to the support page for this plugin."
+          },
+          "author": {
+            "label": "Author"
+          },
+          "author_url": {
+            "label": "Author URL"
+          }
+        },
+        "edit": {
+          "title": "Edit Plugin",
+          "success": "Plugin has been updated."
+        },
+        "upload": {
+          "title": "Upload Plugin",
+          "title_new_version": "Upload New Version Plugin",
+          "success": "Successfully uploaded plugin.",
+          "success_update": "Successfully updated plugin.",
+          "errors": {
+            "PLUGIN_ALREADY_EXISTS": "Plugin with this code already exists.",
+            "PLUGIN_VERSION_IS_LOWER": "The version of the uploaded plugin is lower than the current version."
+          },
+          "submit": "Upload"
+        },
+        "delete": {
+          "submit": "Yes, delete plugin",
+          "desc": "This action will delete <name></name> plugin created by <author></author> and all data associated with it.",
+          "success": "Plugin has been deleted."
+        },
+        "download": {
+          "title": "Download Plugin",
+          "type": {
+            "rebuild": "Rebuild current version - {version}",
+            "new_version": "Create new version"
+          },
+          "version": {
+            "label": "Version"
+          },
+          "version_code": {
+            "label": "Version Code"
+          },
+          "submit": "Download"
+        }
+      },
+      "styles": {
+        "themes": {
+          "title": "Themes",
+          "create": {
+            "title": "Create Theme",
+            "success": "Theme has been created.",
+            "name": {
+              "label": "Name",
+              "desc": "Min 3-50 characters."
+            },
+            "support_url": {
+              "label": "Support URL",
+              "desc": "URL to the support page for this theme."
+            },
+            "author": {
+              "label": "Author"
+            },
+            "author_url": {
+              "label": "Author URL"
+            }
+          },
+          "edit": {
+            "title": "Edit Theme",
+            "success": "Theme has been updated."
+          },
+          "delete": {
+            "submit": "Yes, delete theme",
+            "desc": "This action will delete <name></name> theme created by <author></author>.",
+            "success": "Theme has been deleted."
+          },
+          "download": {
+            "title": "Download Theme",
+            "submit": "Download",
+            "version": {
+              "label": "Version"
+            },
+            "version_code": {
+              "label": "Version Code"
+            },
+            "type": {
+              "rebuild": "Rebuild current version - {version}",
+              "new_version": "Create new version"
+            }
+          },
+          "upload": {
+            "title": "Upload Theme",
+            "title_new_version": "Upload New Version Theme",
+            "success": "Successfully uploaded theme.",
+            "errors": {
+              "THEME_VERSION_CODE_LOWER": "The version of the uploaded theme is lower than the current version."
+            },
+            "submit": "Upload"
+          }
+        },
+        "nav": {
+          "title": "Navigation",
+          "href": "URL: {href}",
+          "create": {
+            "title": "Create Navigation",
+            "success": "Navigation has been created.",
+            "name": {
+              "label": "Name"
+            },
+            "description": {
+              "label": "Description"
+            },
+            "href": {
+              "label": "URL",
+              "desc": "Internal link format: /path/to/page"
+            },
+            "icon": {
+              "label": "Icon"
+            },
+            "external": {
+              "label": "External link?",
+              "desc": "The link will open in a new tab."
+            }
+          },
+          "edit": {
+            "title": "Edit Navigation",
+            "success": "Navigation has been updated."
+          },
+          "delete": {
+            "submit": "Yes, delete navigation",
+            "desc": "This action will delete <name></name> navigation.",
+            "desc_with_children": "You have sub-navigations. If you delete this navigation, all sub-navigations will be moved to the parent navigation.",
+            "success": "Navigation has been deleted."
+          }
+        },
+        "editor": {
+          "title": "Editor",
+          "sticky": {
+            "label": "Sticky Toolbar",
+            "desc": "The toolbar will be fixed at the top of the screen."
+          },
+          "files": {
+            "allow_type": {
+              "title": "Allow File Type",
+              "all": "All",
+              "images_videos": "Images & Videos",
+              "images": "Images",
+              "none": "None"
+            }
+          }
+        }
+      },
+      "langs": {
+        "title": "Languages",
+        "search_placeholder": "Search by name...",
+        "table": {
+          "key": "Key",
+          "time_24": "24h Format",
+          "locale": "Locale"
+        },
+        "actions": {
+          "create": {
+            "title": "Create Language",
+            "name": {
+              "label": "Name",
+              "placeholder": "English (USA)"
+            },
+            "code": {
+              "label": "Code",
+              "placeholder": "en",
+              "desc": "This code uses as a language identifier in your URL, like: /en/page"
+            },
+            "timezone": {
+              "label": "Timezone"
+            },
+            "time_24": {
+              "label": "24h Time Format",
+              "desc": "Shows 24h time format instead of 12h."
+            },
+            "locale": {
+              "label": "Locale"
+            },
+            "allow_in_input": {
+              "label": "Allow in Input",
+              "desc": "Allow users to select this language in the input field."
+            },
+            "submit": "Create Language",
+            "success": "Language has been created."
+          },
+          "edit": {
+            "title": "Edit Language",
+            "submit": "Edit Language",
+            "default": {
+              "label": "Default",
+              "desc": "Set this language as the default language for your applications."
+            },
+            "success": "Language has been updated."
+          },
+          "delete": {
+            "text": "This action cannot be undone. This will permanently delete this language and all user content associated with it. This may impact your app's SEO.",
+            "form_confirm_text": "Type the name of the language <text></text> to confirm.",
+            "success": "Language has been deleted.",
+            "submit": "Yes, delete language"
+          },
+          "download": {
+            "title": "Download Language - {code}",
+            "desc": "Choose which plugins language you want to download.",
+            "all": {
+              "label": "All",
+              "desc": "Download language for all plugins."
+            },
+            "plugins": "Plugins",
+            "search": "Search by name...",
+            "empty": "No plugins found.",
+            "selected": "{count, plural, =0 {No plugins} =1 {1 plugin} other {# plugins}} selected",
+            "submit": "Download"
+          },
+          "update": {
+            "title": "Update Language - {code}",
+            "submit": "Update Language",
+            "success": "Language has been updated."
+          }
+        }
+      },
+      "advanced": {
+        "files": {
+          "title": "Files",
+          "delete": {
+            "desc": "This action will delete the file <name></name>.",
+            "uses_warning": "This file is used in other part of the system.",
+            "success": "File has been deleted.",
+            "submit": "Yes, delete file"
+          }
+        }
+      }
+    },
+    "members": {
+      "users": {
+        "title": "Users",
+        "search_placeholder": "Search by name or email...",
+        "filters": {
+          "groups": "Groups"
+        },
+        "table": {
+          "email": "Email",
+          "group": "Group",
+          "joined": "Joined"
+        }
+      },
+      "groups": {
+        "title": "Groups",
+        "search_placeholder": "Search by name...",
+        "default": "Default",
+        "root": "Admin Root",
+        "table": {
+          "users_count": "Users"
+        },
+        "create_edit": {
+          "main": "Main",
+          "content": "Content",
+          "name": "Name",
+          "in_kb": "in kB",
+          "files": {
+            "title": "Files",
+            "allow_upload": "Allow Upload Files",
+            "total_max_storage": "Total Max Storage",
+            "max_storage_for_submit": {
+              "label": "Max Storage for Submit",
+              "desc": "If you set 1000, user can upload only 1 file with size 1000kB or 2 files with size 500kB for each submit."
+            }
+          }
+        },
+        "create": {
+          "title": "Create Group",
+          "success": "Group has been created"
+        },
+        "edit": {
+          "title": "Edit Group",
+          "success": "Group has been updated"
+        },
+        "delete": {
+          "text": "This action cannot be undone. This will permanently delete this group and all users in it will be moved to the default group.",
+          "form_confirm_text": "Type the name of the group <text></text> to confirm.",
+          "submit": "Yes, delete group",
+          "success": "Group has been deleted"
+        }
+      },
+      "staff": {
+        "title": "Staff",
+        "unrestricted": "Unrestricted",
+        "restricted": "Restricted",
+        "user": "User",
+        "group": "Group",
+        "already_exists": "This permission is already on the list.",
+        "table": {
+          "administrator": "Administrator",
+          "moderator": "Moderator",
+          "type": "Type",
+          "updated": "Updated",
+          "permissions": "Permissions"
+        },
+        "create_edit": {
+          "type": {
+            "title": "Type",
+            "user": "User",
+            "group": "Group"
+          },
+          "unrestricted": {
+            "title": "Unrestricted",
+            "desc": "Unrestricted administrators have full access to the admin control panel (AdminCP)."
+          }
+        },
+        "moderators": {
+          "title": "Moderators",
+          "add": {
+            "title": "Add Moderator",
+            "success": "Moderator has been added"
+          },
+          "delete": {
+            "desc": "This action will deprive the user or users of this group of access to the moderator panel (ModCP).",
+            "submit": "Yes, delete permissions",
+            "success": "Permissions has been deleted"
+          }
+        },
+        "administrators": {
+          "title": "Administrators",
+          "add": {
+            "title": "Add Administrator",
+            "success": "Administrator has been added"
+          },
+          "delete": {
+            "desc": "This action will deprive the user or users of this group of access to the administrator panel (AdminCP).",
+            "submit": "Yes, delete permissions",
+            "success": "Permissions has been deleted"
+          }
+        }
+      }
+    },
+    "configs": {
+      "mobile_not_supported": "This view is not supported on mobile devices.",
+      "install": {
+        "title": "Install {name}",
+        "steps": {
+          "next_step": "Next step",
+          "welcome": {
+            "title": "Welcome",
+            "desc": "Before you begin...",
+            "text": "Welcome to the installation wizard for {name}. This wizard will guide you through the installation process."
+          },
+          "license": {
+            "title": "License",
+            "desc": "Read carefully",
+            "link": "Click here to read the license agreement.",
+            "agree": "I agree to the terms of the license agreement."
+          },
+          "database": {
+            "title": "Database",
+            "text": "Now VitNode needs to create default records in your database.",
+            "desc": "Create schema and first records",
+            "submit": "Create Records"
+          },
+          "account": {
+            "title": "Admin Account",
+            "desc": "Create admin account"
+          }
+        },
+        "finish": {
+          "title": "Welcome to {name}!",
+          "desc": "Your website is ready.",
+          "text": "The installation process is complete. You can now use your website.",
+          "buttons": {
+            "home_page": "Home Page",
+            "admin_control_panel": "Admin Control Panel"
+          }
+        }
+      }
+    }
+  }
+}

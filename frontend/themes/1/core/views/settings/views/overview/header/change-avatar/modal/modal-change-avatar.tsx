@@ -13,8 +13,8 @@ import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import { FilesInput } from "@/components/ui/files/files-input";
 import { Loader } from "@/components/loader";
-import { useModalChangeAvatar } from "@/hooks/core/settings/avatar/use-modal-change-avatar";
-import { useSession } from "@/hooks/core/use-session";
+import { useModalChangeAvatar } from "@/plugins/core/hooks/settings/avatar/use-modal-change-avatar";
+import { useSession } from "@/plugins/core/hooks/use-session";
 
 const CropperModalChangeAvatar = React.lazy(async () =>
   import("./cropper/cropper-modal-change-avatar").then(module => ({

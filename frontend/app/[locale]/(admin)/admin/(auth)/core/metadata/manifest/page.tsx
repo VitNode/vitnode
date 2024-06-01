@@ -3,13 +3,13 @@ import { Metadata } from "next";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Card } from "@/components/ui/card";
-import { ManifestMetadataCoreAdminView } from "@/admin/core/views/core/metadata/manifest/manifest-metadata-core-view";
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Manifest_Metadata__Show,
   Admin__Core_Manifest_Metadata__ShowQuery,
   Admin__Core_Manifest_Metadata__ShowQueryVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
+import { fetcher } from "@/utils/graphql/fetcher";
+import { ManifestMetadataCoreAdminView } from "@/plugins/admin/views/core/metadata/manifest/manifest-metadata-core-view";
 
 const getData = async () => {
   const { data } = await fetcher<

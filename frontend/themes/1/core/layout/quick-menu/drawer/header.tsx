@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { buttonVariants } from "@/components/ui/button";
 import { DrawerClose } from "@/components/ui/drawer";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
-import { useSession } from "@/hooks/core/use-session";
+import { useSession } from "@/plugins/core/hooks/use-session";
 import { Link } from "@/utils/i18n";
 import { ThemeSwitcher } from "@/components/switchers/theme/theme-switcher";
 import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";

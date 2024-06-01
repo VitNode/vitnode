@@ -6,15 +6,15 @@ import { Metadata } from "next";
 
 import { CONFIG } from "@/config";
 import { Providers } from "./providers";
-import { fetcher } from "@/graphql/fetcher";
 import {
   Core_Middleware,
   Core_MiddlewareQuery,
   Core_MiddlewareQueryVariables
-} from "@/graphql/hooks";
+} from "@/utils/graphql/hooks";
 import { cn } from "@/functions/classnames";
 import { CatchLayout } from "./catch";
 import { getConfigFile } from "@/config/helpers";
+import { fetcher } from "@/utils/graphql/fetcher";
 import "@/app/[locale]/(admin)/admin/global.css";
 import "./global.css";
 
@@ -48,7 +48,6 @@ export default async function LocaleLayout({
 
   try {
     const [data, config] = await Promise.all([getData(), getConfigFile()]);
-    // const { data } = await getSessionData();
 
     const messagesFormApps = await Promise.all(
       (data
@@ -57,7 +56,8 @@ export default async function LocaleLayout({
       ).map(async plugin => {
         try {
           return {
-            ...(await import(`@/langs/${locale}/${plugin.code}.json`)).default
+            ...(await import(`@/plugins/${plugin.code}/langs/${locale}.json`))
+              .default
           };
         } catch (e) {
           return {};
