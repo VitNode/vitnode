@@ -15,9 +15,9 @@ import { Loader } from "@/components/loader";
 import { IconInputProps } from "./content/content";
 import { IconLucideNames } from "../icon";
 
-const IconLucideDynamic = React.lazy(async () =>
-  import("./content/icons/icons").then(module => ({
-    default: module.IconLucideDynamic
+const IconClient = React.lazy(async () =>
+  import("../icon-client").then(module => ({
+    default: module.IconClient
   }))
 );
 
@@ -59,7 +59,7 @@ export const IconInput = ({ className, onChange, value }: Props) => {
 
         <React.Suspense fallback={<Loader className="p-4" />}>
           {value && (
-            <IconLucideDynamic
+            <IconClient
               className="size-10 text-4xl"
               name={value as IconLucideNames}
             />

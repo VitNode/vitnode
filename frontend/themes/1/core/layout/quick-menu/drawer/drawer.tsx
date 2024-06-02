@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { KeyRound, LogOut, Settings, Shield, User } from "lucide-react";
+import * as React from "react";
 
 import { DrawerClose, DrawerContent } from "@/components/ui/drawer";
 import { HeaderDrawerQuickMenu } from "./header";
@@ -14,7 +15,11 @@ import { NavDrawerQuickMenu } from "./nav/nav";
 export const classNameDrawerQuickMenu =
   "w-full justify-start [&>svg]:text-muted-foreground font-normal";
 
-export const DrawerQuickMenu = () => {
+interface Props {
+  navIcons: { icon: React.ReactNode; id: number }[];
+}
+
+export const DrawerQuickMenu = ({ navIcons }: Props) => {
   const t = useTranslations("core");
   const { onSubmit } = useSignOutAPI();
   const { session } = useSession();
@@ -59,7 +64,7 @@ export const DrawerQuickMenu = () => {
         </div>
       )}
 
-      <NavDrawerQuickMenu />
+      <NavDrawerQuickMenu navIcons={navIcons} />
 
       {session && (
         <div className="px-2 pb-5 flex flex-col">

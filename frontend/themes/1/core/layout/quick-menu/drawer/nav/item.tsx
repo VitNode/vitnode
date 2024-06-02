@@ -1,19 +1,23 @@
+import * as React from "react";
+
 import { buttonVariants } from "@/components/ui/button";
 import { DrawerClose } from "@/components/ui/drawer";
 import { cn } from "@/functions/classnames";
 import { ShowCoreNav } from "@/utils/graphql/hooks";
-import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { Link, usePathname } from "@/utils/i18n";
 import { classNameDrawerQuickMenu } from "../drawer";
 
+interface Props extends Omit<ShowCoreNav, "__typename" | "children"> {
+  children: React.ReactNode;
+}
+
 export const ItemNavDrawerQuickMenu = ({
-  description,
   external,
   href,
   id,
-  name
-}: Omit<ShowCoreNav, "__typename" | "children">) => {
-  const { convertText } = useTextLang();
+
+  children
+}: Props) => {
   const pathname = usePathname();
   const active =
     href === pathname || (pathname.startsWith(href) && href !== "/");
@@ -37,12 +41,7 @@ export const ItemNavDrawerQuickMenu = ({
         target={external ? "_blank" : undefined}
         rel={external ? "noopener noreferrer" : undefined}
       >
-        <span>{convertText(name)}</span>
-        {description.length > 0 && (
-          <span className="text-sm leading-none text-muted-foreground">
-            {convertText(description)}
-          </span>
-        )}
+        {children}
       </Link>
     </DrawerClose>
   );

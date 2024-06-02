@@ -5,32 +5,11 @@ import { useTranslations } from "next-intl";
 import { IconLucideNames } from "@/components/icon/icon";
 import { IconInputProps } from "../content";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/functions/classnames";
+import { IconClient } from "@/components/icon/icon-client";
 
 interface Props extends IconInputProps {
   search: string;
 }
-
-export const IconLucideDynamic = React.memo(
-  ({ name, className }: { name: IconLucideNames; className?: string }) => {
-    const LucideIcon = React.lazy<React.ComponentType<Lucide.LucideProps>>(
-      async () =>
-        import("lucide-react")
-          .then(mod => mod[name as IconLucideNames])
-          .then(mod => ({ default: mod }))
-    );
-
-    return (
-      <React.Suspense
-        fallback={<Lucide.Loader2 className={cn("animate-spin", className)} />}
-      >
-        <LucideIcon className={className} />
-      </React.Suspense>
-    );
-  }
-);
-
-IconLucideDynamic.displayName = "IconLucide";
 
 const iconNamesArray = Object.keys(Lucide.icons) as IconLucideNames[];
 
@@ -69,7 +48,7 @@ export const IconsContentIconInput = ({
             setOpen(false);
           }}
         >
-          <IconLucideDynamic name={name} />
+          <IconClient name={name} />
         </Button>
       ))}
     </>

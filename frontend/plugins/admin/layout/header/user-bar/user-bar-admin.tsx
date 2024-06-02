@@ -56,10 +56,7 @@ export const UserBarAdmin = ({ navComponent }: Props) => {
         </SheetHeader>
 
         <div className="md:hidden block">
-          <div className="p-2 space-y-2">
-            {navComponent}
-            {/* <ListNavAdmin onClickItem={() => setOpen(false)} /> */}
-          </div>
+          <div className="p-2 space-y-2">{navComponent}</div>
 
           <Separator className="my-2" />
         </div>

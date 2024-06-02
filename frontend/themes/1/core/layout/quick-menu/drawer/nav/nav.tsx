@@ -10,7 +10,11 @@ import { buttonVariants } from "@/components/ui/button";
 import { classNameDrawerQuickMenu } from "../drawer";
 import { Separator } from "@/components/ui/separator";
 
-export const NavDrawerQuickMenu = () => {
+interface Props {
+  navIcons: { icon: React.ReactNode; id: number }[];
+}
+
+export const NavDrawerQuickMenu = ({ navIcons }: Props) => {
   const { nav, session } = useSession();
   const [activeItems, setActiveItems] = React.useState<string[]>([]);
   const { convertText } = useTextLang();
@@ -48,6 +52,9 @@ export const NavDrawerQuickMenu = () => {
                     )
                   }
                 >
+                  {item.icon
+                    ? navIcons.find(el => el.id === item.id)?.icon
+                    : null}
                   <span>{convertText(item.name)}</span>
                   <ChevronDown
                     className={cn(
@@ -65,7 +72,19 @@ export const NavDrawerQuickMenu = () => {
               <Accordion.Content className="transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden">
                 <div className="pl-5">
                   {item.children.map(child => (
-                    <ItemNavDrawerQuickMenu key={child.id} {...child} />
+                    <ItemNavDrawerQuickMenu key={child.id} {...child}>
+                      <div className="flex items-center gap-2 [&>svg]:text-muted-foreground">
+                        {child.icon
+                          ? navIcons.find(el => el.id === child.id)?.icon
+                          : null}
+                        <span>{convertText(child.name)}</span>
+                      </div>
+                      {child.description.length > 0 && (
+                        <span className="text-sm leading-none text-muted-foreground">
+                          {convertText(child.description)}
+                        </span>
+                      )}
+                    </ItemNavDrawerQuickMenu>
                   ))}
                 </div>
               </Accordion.Content>
@@ -73,7 +92,17 @@ export const NavDrawerQuickMenu = () => {
           );
         }
 
-        return <ItemNavDrawerQuickMenu key={item.id} {...item} />;
+        return (
+          <ItemNavDrawerQuickMenu key={item.id} {...item}>
+            {item.icon ? navIcons.find(el => el.id === item.id)?.icon : null}
+            <span>{convertText(item.name)}</span>
+            {item.description.length > 0 && (
+              <span className="text-sm leading-none text-muted-foreground">
+                {convertText(item.description)}
+              </span>
+            )}
+          </ItemNavDrawerQuickMenu>
+        );
       })}
 
       <Separator className="my-2" />
