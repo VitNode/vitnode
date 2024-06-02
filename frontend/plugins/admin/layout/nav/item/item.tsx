@@ -1,5 +1,4 @@
 import { useTranslations } from "next-intl";
-import { Menu } from "lucide-react";
 
 import { ItemItemNavAdminProps, LinkItemNavAdmin } from "./link";
 import { Icon } from "@/components/icon/icon";
@@ -16,7 +15,7 @@ export const ItemNavAdmin = ({ id, items }: Props) => {
   const t = useTranslations(`${id}.admin`);
 
   return (
-    <div>
+    <>
       {id !== "core" && (
         <div className="text-muted-foreground text-sm px-4">
           {t("nav.title")}
@@ -29,16 +28,19 @@ export const ItemNavAdmin = ({ id, items }: Props) => {
             <li key={item.id}>
               <LinkItemNavAdmin
                 key={item.id}
-                href={`/admin/${id}/${item.href}`}
-                id={item.id}
                 primaryId={id}
-              >
-                {item.icon ? <Icon name={item.icon} /> : <Menu />}
-              </LinkItemNavAdmin>
+                {...item}
+                icons={[
+                  {
+                    id: item.id,
+                    icon: item.icon ? <Icon name={item.icon} /> : null
+                  }
+                ]}
+              />
             </li>
           ))}
         </ul>
       </div>
-    </div>
+    </>
   );
 };

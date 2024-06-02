@@ -1,13 +1,19 @@
 import { CreateAdminPluginsArgs } from "../../../create/dto/create.args";
 import { changeCodePluginToCapitalLetters } from "../../change-code-plugin-to-capital-letters";
 
+interface NavPluginInfoJSONType {
+  code: string;
+  href: string;
+  icon: string | null;
+}
+
+interface NavPluginInfoJSONTypeWithChildren extends NavPluginInfoJSONType {
+  children: NavPluginInfoJSONType[];
+}
+
 export interface PluginInfoJSONType extends CreateAdminPluginsArgs {
   allow_default: boolean;
-  nav: {
-    code: string;
-    href: string;
-    icon: string | null;
-  }[];
+  nav: NavPluginInfoJSONTypeWithChildren[];
 }
 
 export const createModuleSchema = ({ code }: { code: string }) => {

@@ -33,41 +33,36 @@ export const NavDrawerQuickMenu = ({ navIcons }: Props) => {
         if (item.children.length > 0) {
           return (
             <Accordion.Item key={item.id} value={item.id.toString()}>
-              <Accordion.Header>
-                <Accordion.Trigger
+              <Accordion.Trigger
+                className={cn(
+                  buttonVariants({
+                    variant: "ghost",
+                    className: cn(classNameDrawerQuickMenu, "focus:bg-inherit")
+                  })
+                )}
+                onClick={() =>
+                  setActiveItems(prev =>
+                    prev.includes(item.id.toString())
+                      ? prev.filter(el => el !== item.id.toString())
+                      : [...prev, item.id.toString()]
+                  )
+                }
+              >
+                {item.icon
+                  ? navIcons.find(el => el.id === item.id)?.icon
+                  : null}
+                <span>{convertText(item.name)}</span>
+                <ChevronDown
                   className={cn(
-                    buttonVariants({
-                      variant: "ghost",
-                      className: cn(
-                        classNameDrawerQuickMenu,
-                        "focus:bg-inherit"
+                    "w-5 h-5 ml-auto transition-transform flex-shrink-0",
+                    {
+                      "transform rotate-180": activeItems.includes(
+                        item.id.toString()
                       )
-                    })
+                    }
                   )}
-                  onClick={() =>
-                    setActiveItems(prev =>
-                      prev.includes(item.id.toString())
-                        ? prev.filter(el => el !== item.id.toString())
-                        : [...prev, item.id.toString()]
-                    )
-                  }
-                >
-                  {item.icon
-                    ? navIcons.find(el => el.id === item.id)?.icon
-                    : null}
-                  <span>{convertText(item.name)}</span>
-                  <ChevronDown
-                    className={cn(
-                      "w-5 h-5 ml-auto transition-transform flex-shrink-0",
-                      {
-                        "transform rotate-180": activeItems.includes(
-                          item.id.toString()
-                        )
-                      }
-                    )}
-                  />
-                </Accordion.Trigger>
-              </Accordion.Header>
+                />
+              </Accordion.Trigger>
 
               <Accordion.Content className="transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden">
                 <div className="pl-5">

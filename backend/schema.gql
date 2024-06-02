@@ -474,7 +474,14 @@ enum ShowAdminMembersSortingColumnEnum {
   reactions
 }
 
+type ShowAdminNavPlugins {
+  code: String!
+  href: String!
+  icon: String
+}
+
 type ShowAdminNavPluginsObj {
+  children: [ShowAdminNavPlugins!]!
   code: String!
   href: String!
   icon: String

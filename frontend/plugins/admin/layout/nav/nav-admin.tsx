@@ -1,11 +1,12 @@
 import { getSessionAdminData } from "@/app/[locale]/(admin)/admin/(auth)/get-session-admin";
 import { ItemNavAdmin } from "./item/item";
+import { NavAdminWrapper } from "./wrapper";
 
 export const NavAdmin = async () => {
   const data = await getSessionAdminData();
 
   return (
-    <>
+    <NavAdminWrapper>
       <ItemNavAdmin
         id="core"
         items={[
@@ -17,7 +18,13 @@ export const NavAdmin = async () => {
           {
             id: "settings",
             href: "settings/main",
-            icon: "Settings"
+            icon: "Settings",
+            children: [
+              {
+                id: "settings",
+                href: "settings/main"
+              }
+            ]
           },
           {
             id: "plugins",
@@ -27,7 +34,13 @@ export const NavAdmin = async () => {
           {
             id: "styles",
             href: "styles/themes",
-            icon: "Paintbrush"
+            icon: "Paintbrush",
+            children: [
+              {
+                id: "themes",
+                href: "styles/themes"
+              }
+            ]
           },
           {
             id: "metadata",
@@ -78,6 +91,6 @@ export const NavAdmin = async () => {
           }))}
         />
       ))}
-    </>
+    </NavAdminWrapper>
   );
 };
