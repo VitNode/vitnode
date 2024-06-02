@@ -13,13 +13,14 @@ import { Admin__Core_Nav__ShowQuery, ShowCoreNav } from "@/utils/graphql/hooks";
 import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
 import { useDragAndDrop } from "@/plugins/core/hooks/drag&drop/use-functions";
 import { ItemDragAndDrop } from "@/plugins/core/hooks/drag&drop/item";
-// import { Icon } from "@/components/icon/icon";
 
 const indentationWidth = 20;
 
-export const TableNavAdmin = ({
-  core_nav__show: { edges }
-}: Admin__Core_Nav__ShowQuery) => {
+interface Props extends Admin__Core_Nav__ShowQuery {
+  icons: { icon: React.ReactNode; id: number }[];
+}
+
+export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
   const t = useTranslations("core");
   const [initData, setData] =
     React.useState<Omit<ShowCoreNav, "__typename">[]>(edges);
@@ -86,7 +87,9 @@ export const TableNavAdmin = ({
               data: item,
               indentationWidth
             })}
-            // draggableChildren={item.icon ? <Icon name={item.icon} /> : null}
+            draggableChildren={
+              item.icon ? icons.find(el => el.id === item.id)?.icon : null
+            }
           >
             <ItemContentTableContentNavAdmin data={item} />
           </ItemDragAndDrop>
@@ -98,11 +101,11 @@ export const TableNavAdmin = ({
               {...actionsItem({
                 data: activeItemOverlay
               })}
-              // draggableChildren={
-              //   activeItemOverlay.icon ? (
-              //     <Icon name={activeItemOverlay.icon} />
-              //   ) : null
-              // }
+              draggableChildren={
+                activeItemOverlay.icon
+                  ? icons.find(el => el.id === activeItemOverlay.id)?.icon
+                  : null
+              }
             >
               <ItemContentTableContentNavAdmin data={activeItemOverlay} />
             </ItemDragAndDrop>

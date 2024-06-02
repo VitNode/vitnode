@@ -4,12 +4,9 @@ import { useTranslations } from "next-intl";
 
 import { mutationUpdateDataApi } from "./mutation-update-data-api";
 import { ShowForumForumsAdmin } from "@/utils/graphql/hooks";
+import { FlatTree, flattenTree } from "@/functions/flatten-tree";
 
-import {
-  buildTree,
-  flattenTree,
-  FlatTree
-} from "../../../../../../core/hooks/drag&drop/use-functions";
+import { buildTree } from "../../../../../../core/hooks/drag&drop/use-functions";
 
 export interface ShowForumForumsAdminWithChildren
   extends Omit<

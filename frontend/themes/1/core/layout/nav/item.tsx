@@ -11,10 +11,17 @@ import { Link, usePathname } from "@/utils/i18n";
 import { cn } from "@/functions/classnames";
 
 interface Props extends Omit<ShowCoreNav, "icon"> {
-  icon?: React.ReactNode;
+  icons: { icon: React.ReactNode; id: number }[];
 }
 
-export const ItemNav = ({ children, external, href, icon, name }: Props) => {
+export const ItemNav = ({
+  children,
+  external,
+  href,
+  name,
+  icons,
+  id
+}: Props) => {
   const { convertText } = useTextLang();
   const pathname = usePathname();
   const active =
@@ -36,7 +43,7 @@ export const ItemNav = ({ children, external, href, icon, name }: Props) => {
           target={external ? "_blank" : undefined}
           rel={external ? "noopener noreferrer" : undefined}
         >
-          {icon}
+          {icons.find(icon => icon.id === id)?.icon}
           {convertText(name)} {children.length > 0 && <ChevronDown />}
         </Link>
       </NavigationMenu.Trigger>
@@ -56,6 +63,10 @@ export const ItemNav = ({ children, external, href, icon, name }: Props) => {
               const activeItem =
                 item.href === pathname ||
                 (pathname.startsWith(item.href) && item.href !== "/");
+
+              const icon = icons.find(
+                childIcon => childIcon.id === item.id
+              )?.icon;
 
               return (
                 <li
@@ -78,9 +89,7 @@ export const ItemNav = ({ children, external, href, icon, name }: Props) => {
                       rel={item.external ? "noopener noreferrer" : undefined}
                     >
                       <div className="font-medium flex gap-1">
-                        {/* {item.icon && (
-                          <Icon className="size-4" name={item.icon} />
-                        )} */}
+                        {icon}
                         {convertText(item.name)}
                       </div>
                       {item.description && (

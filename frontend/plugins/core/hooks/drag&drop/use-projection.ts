@@ -3,7 +3,7 @@ import { UniqueIdentifier } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 import { Coordinates } from "@dnd-kit/utilities";
 
-import { FlatTree } from "./use-functions";
+import { FlatTree } from "@/functions/flatten-tree";
 
 const getDragDepth = ({
   indentationWidth,
