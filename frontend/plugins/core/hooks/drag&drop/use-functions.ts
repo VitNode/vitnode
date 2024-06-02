@@ -10,48 +10,11 @@ import { arrayMove } from "@dnd-kit/sortable";
 
 import { useProjection } from "./use-projection";
 
-type WithChildren<T extends object> = Omit<T, "__typename" | "children"> & {
-  children: WithChildren<T>[];
-  id: number | string;
-};
-
-export type FlatTree<T extends object> = WithChildren<T> & {
-  depth: number;
-  index: number;
-  parentId: number | string | null;
-};
-
-export function flattenTree<T extends object>({
-  depth = 0,
-  parentId = null,
-  tree
-}: {
-  tree: WithChildren<T>[];
-  depth?: number;
-  parentId?: number | string | null;
-}): FlatTree<T>[] {
-  return tree.reduce<FlatTree<T>[]>((previousValue, currentValue, index) => {
-    const children = currentValue.children
-      ? flattenTree({
-          tree: currentValue.children,
-          parentId: currentValue.id,
-          depth: depth + 1
-        })
-      : [];
-
-    return [
-      ...previousValue,
-      {
-        ...currentValue,
-        parentId: parentId,
-        depth: depth,
-        index,
-        children
-      },
-      ...children
-    ];
-  }, []);
-}
+import {
+  FlatTree,
+  WithChildren,
+  flattenTree
+} from "../../../../functions/flatten-tree";
 
 function removeChildrenOf<T extends object>({
   ids,

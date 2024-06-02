@@ -18,9 +18,11 @@ import { Separator } from "@/components/ui/separator";
 import { mutationApi } from "./mutation-api";
 import { useSessionAdmin } from "@/plugins/admin/hooks/use-session-admin";
 
-import { ListNavAdmin } from "../../nav/list/list-nav-admin";
+interface Props {
+  navComponent: React.ReactNode;
+}
 
-export const UserBarAdmin = () => {
+export const UserBarAdmin = ({ navComponent }: Props) => {
   const t = useTranslations("admin");
   const tCore = useTranslations("core");
   const { session } = useSessionAdmin();
@@ -54,9 +56,7 @@ export const UserBarAdmin = () => {
         </SheetHeader>
 
         <div className="md:hidden block">
-          <div className="p-2">
-            <ListNavAdmin onClickItem={() => setOpen(false)} />
-          </div>
+          <div className="p-2 space-y-2">{navComponent}</div>
 
           <Separator className="my-2" />
         </div>

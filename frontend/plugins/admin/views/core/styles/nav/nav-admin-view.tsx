@@ -1,13 +1,34 @@
 import { useTranslations } from "next-intl";
+import * as React from "react";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { TableNavAdmin } from "./table/table";
-import { Admin__Core_Nav__ShowQuery } from "@/utils/graphql/hooks";
+import { Admin__Core_Nav__ShowQuery, ShowCoreNav } from "@/utils/graphql/hooks";
 import { ActionsNavAdmin } from "./actions/actions";
 import { Card } from "@/components/ui/card";
+import { Icon } from "@/components/icon/icon";
+import { flattenTree } from "@/functions/flatten-tree";
 
 export const NavAdminView = (props: Admin__Core_Nav__ShowQuery) => {
   const t = useTranslations("admin.core.styles.nav");
+
+  const flattenData = flattenTree<ShowCoreNav>({
+    tree: props.core_nav__show.edges.map(nav => ({
+      ...nav,
+      children: nav.children.map(child => ({
+        ...child,
+        children: []
+      }))
+    }))
+  });
+
+  const icons: {
+    icon: React.ReactNode;
+    id: number;
+  }[] = flattenData.map(item => ({
+    icon: item.icon ? <Icon className="size-4" name={item.icon} /> : null,
+    id: item.id
+  }));
 
   return (
     <>
@@ -16,7 +37,7 @@ export const NavAdminView = (props: Admin__Core_Nav__ShowQuery) => {
       </HeaderContent>
 
       <Card className="p-6">
-        <TableNavAdmin {...props} />
+        <TableNavAdmin {...props} icons={icons} />
       </Card>
     </>
   );

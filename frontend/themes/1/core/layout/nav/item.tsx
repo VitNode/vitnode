@@ -1,20 +1,27 @@
+"use client";
+
 import { ChevronDown } from "lucide-react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
+import * as React from "react";
 
 import { buttonVariants } from "@/components/ui/button";
 import { ShowCoreNav } from "@/utils/graphql/hooks";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { Link, usePathname } from "@/utils/i18n";
 import { cn } from "@/functions/classnames";
-import { Icon } from "@/components/icon/icon";
+
+interface Props extends Omit<ShowCoreNav, "icon"> {
+  icons: { icon: React.ReactNode; id: number }[];
+}
 
 export const ItemNav = ({
   children,
   external,
   href,
-  icon,
-  name
-}: ShowCoreNav) => {
+  name,
+  icons,
+  id
+}: Props) => {
   const { convertText } = useTextLang();
   const pathname = usePathname();
   const active =
@@ -36,8 +43,8 @@ export const ItemNav = ({
           target={external ? "_blank" : undefined}
           rel={external ? "noopener noreferrer" : undefined}
         >
-          {icon && <Icon className="text-lg" name={icon} />} {convertText(name)}{" "}
-          {children.length > 0 && <ChevronDown />}
+          {icons.find(icon => icon.id === id)?.icon}
+          {convertText(name)} {children.length > 0 && <ChevronDown />}
         </Link>
       </NavigationMenu.Trigger>
 
@@ -56,6 +63,10 @@ export const ItemNav = ({
               const activeItem =
                 item.href === pathname ||
                 (pathname.startsWith(item.href) && item.href !== "/");
+
+              const icon = icons.find(
+                childIcon => childIcon.id === item.id
+              )?.icon;
 
               return (
                 <li
@@ -78,9 +89,7 @@ export const ItemNav = ({
                       rel={item.external ? "noopener noreferrer" : undefined}
                     >
                       <div className="font-medium flex gap-1">
-                        {item.icon && (
-                          <Icon className="size-4" name={item.icon} />
-                        )}
+                        {icon}
                         {convertText(item.name)}
                       </div>
                       {item.description && (
