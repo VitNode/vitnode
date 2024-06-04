@@ -26,6 +26,8 @@ RUN pnpm i
 COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
 COPY .prettierrc .prettierrc
+ENV TURBO_TELEMETRY_DISABLED=1
+
 RUN pnpm turbo build --filter=backend...
 
 # FROM base AS runner
