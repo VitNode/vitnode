@@ -9,6 +9,7 @@ RUN apk update
 WORKDIR /app
 RUN npm i -g turbo
 COPY . .
+RUN turbo telemetry disable
 RUN turbo prune frontend --docker
 
 # Add lockfile and package.json's of isolated subworkspace
@@ -35,7 +36,6 @@ ARG NEXT_PUBLIC_FRONTEND_URL
 ENV NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL}
 ARG NEXT_PUBLIC_DEBUG
 ENV NEXT_PUBLIC_DEBUG=${NEXT_PUBLIC_DEBUG}
-ENV TURBO_TELEMETRY_DISABLED=1
 
 RUN pnpm turbo build --filter=frontend...
 

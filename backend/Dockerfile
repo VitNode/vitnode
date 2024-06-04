@@ -9,6 +9,7 @@ RUN apk update
 WORKDIR /app
 RUN npm i -g turbo
 COPY . .
+RUN turbo telemetry disable
 RUN turbo prune backend --docker
 
 # Add lockfile and package.json's of isolated subworkspace
@@ -26,7 +27,6 @@ RUN pnpm i
 COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
 COPY .prettierrc .prettierrc
-ENV TURBO_TELEMETRY_DISABLED=1
 
 RUN pnpm turbo build --filter=backend...
 
