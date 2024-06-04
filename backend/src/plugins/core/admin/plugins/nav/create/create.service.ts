@@ -4,6 +4,7 @@ import { Injectable } from "@nestjs/common";
 
 import { ShowAdminNavPluginsObj } from "../show/dto/show.obj";
 import { CreateAdminNavPluginsArgs } from "./dto/create.args";
+import { HelpersAdminNavPluginsService } from "../helpers.service";
 
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
@@ -12,7 +13,7 @@ import { ABSOLUTE_PATHS } from "@/config";
 import { ConfigPlugin } from "../../plugins.module";
 
 @Injectable()
-export class CreateAdminNavPluginsService {
+export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService {
   create({
     code,
     href,
@@ -29,7 +30,10 @@ export class CreateAdminNavPluginsService {
     );
 
     const currentCode = removeSpecialCharacters(code);
-    const codeExists = config.nav.find(nav => nav.code === currentCode);
+    const codeExists = this.findItemByCode({
+      items: config.nav,
+      code: currentCode
+    });
 
     if (codeExists) {
       throw new CustomError({

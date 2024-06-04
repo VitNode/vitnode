@@ -4,7 +4,7 @@ import * as React from "react";
 import * as Accordion from "@radix-ui/react-accordion";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Menu } from "lucide-react";
 
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/functions/classnames";
@@ -61,7 +61,7 @@ export const LinkItemNavAdmin = ({
             size="sm"
             className={primaryButtonClass(active && !isChildActive)}
           >
-            {icon ? icons.find(i => i.id === id)?.icon : "null"}
+            {icon ? icons.find(i => i.id === id)?.icon : <Menu />}
             {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
             {/* @ts-expect-error */}
             <span>{t(id)}</span>
@@ -82,7 +82,7 @@ export const LinkItemNavAdmin = ({
             primaryButtonClass(active)
           )}
         >
-          {icon ? icons.find(i => i.id === id)?.icon : "null"}
+          {icon ? icons.find(i => i.id === id)?.icon : <Menu />}
           {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
           {/* @ts-expect-error */}
           <span>{t(id)}</span>

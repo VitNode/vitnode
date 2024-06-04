@@ -17,6 +17,8 @@ import {
 } from "@/components/ui/tooltip";
 import { ContentDeleteActionTableNavDevPluginAdminProps } from "./content";
 
+import { useItemNavDevPluginAdmin } from "../../hooks/use-item-nav-dev-plugin-admin";
+
 const Content = React.lazy(async () =>
   import("./content").then(module => ({
     default: module.ContentDeleteActionTableNavDevPluginAdmin
@@ -27,6 +29,7 @@ export const DeleteActionTableNavDevPluginAdmin = (
   props: ContentDeleteActionTableNavDevPluginAdminProps
 ) => {
   const t = useTranslations("core");
+  const { parentId } = useItemNavDevPluginAdmin();
 
   return (
     <AlertDialog>
@@ -50,7 +53,7 @@ export const DeleteActionTableNavDevPluginAdmin = (
 
       <AlertDialogContent>
         <React.Suspense fallback={<Loader />}>
-          <Content {...props} />
+          <Content {...props} parentCode={parentId} />
         </React.Suspense>
       </AlertDialogContent>
     </AlertDialog>

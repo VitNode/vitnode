@@ -36,7 +36,7 @@ export const NavDevPluginAdminView = ({
     children:
       item.children?.map(child => ({
         ...child,
-        id: `${item.code}_${child.code}`,
+        id: child.code,
         children: []
       })) ?? [],
     id: item.code
@@ -96,7 +96,8 @@ export const NavDevPluginAdminView = ({
           <ItemDragAndDrop
             key={item.id}
             {...actionsItem({
-              data: item
+              data: item,
+              indentationWidth: 20
             })}
           >
             <ItemNavDevPluginAdminContext.Provider

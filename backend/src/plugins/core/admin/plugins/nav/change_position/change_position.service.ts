@@ -3,13 +3,37 @@ import * as fs from "fs";
 import { Injectable } from "@nestjs/common";
 
 import { ChangePositionAdminNavPluginsArgs } from "./dto/change_position.args";
+import { HelpersAdminNavPluginsService } from "../helpers.service";
 
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { ABSOLUTE_PATHS } from "@/config";
 import { ConfigPlugin } from "../../plugins.module";
 
 @Injectable()
-export class ChangePositionAdminNavPluginsService {
+export class ChangePositionAdminNavPluginsService extends HelpersAdminNavPluginsService {
+  protected findAndRemoveItemByCode({
+    items,
+    code
+  }: {
+    code: string;
+    items: ConfigPlugin["nav"];
+  }): ConfigPlugin["nav"] {
+    return items.filter(item => {
+      if (item.code === code) {
+        return false;
+      }
+
+      if (item.children) {
+        item.children = this.findAndRemoveItemByCode({
+          items: item.children,
+          code
+        });
+      }
+
+      return true;
+    });
+  }
+
   changePosition({
     code,
     plugin_code,
@@ -24,29 +48,33 @@ export class ChangePositionAdminNavPluginsService {
       fs.readFileSync(pathConfig, "utf8")
     );
 
-    const codeExists = config.nav.find(nav => nav.code === code);
-    if (!codeExists) {
-      throw new NotFoundError("Plugin nav");
+    // Find the item to be moved
+    const itemToMove = this.findItemByCode({ items: config.nav, code });
+    if (!itemToMove) {
+      throw new NotFoundError("Item");
     }
 
-    // Update config
-    if (parent_code) {
-      const parent = config.nav.find(nav => nav.code === parent_code);
+    // Remove the item from its current position
+    config.nav = this.findAndRemoveItemByCode({
+      items: config.nav,
+      code
+    });
 
-      if (!parent) {
+    // If parent_code is provided, add the item to the parent's children
+    if (parent_code) {
+      const parentItem = this.findItemByCode({
+        items: config.nav,
+        code: parent_code
+      });
+      if (!parentItem) {
         throw new NotFoundError("Parent");
       }
 
-      const children = parent.children || [];
-      const navIndex = children.findIndex(nav => nav.code === code);
-      const nav = children[navIndex];
-      children.splice(navIndex, 1);
-      children.splice(index_to_move, 0, nav);
+      parentItem.children = parentItem.children || [];
+      parentItem.children.splice(index_to_move, 0, itemToMove);
     } else {
-      const navIndex = config.nav.findIndex(nav => nav.code === code);
-      const nav = config.nav[navIndex];
-      config.nav.splice(navIndex, 1);
-      config.nav.splice(index_to_move, 0, nav);
+      // If parent_code is not provided, add the item to the root of the nav array
+      config.nav.splice(index_to_move, 0, itemToMove);
     }
 
     // Save config

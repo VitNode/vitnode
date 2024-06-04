@@ -7,7 +7,8 @@ interface NavPluginInfoJSONType {
   icon: string | null;
 }
 
-interface NavPluginInfoJSONTypeWithChildren extends NavPluginInfoJSONType {
+export interface NavPluginInfoJSONTypeWithChildren
+  extends NavPluginInfoJSONType {
   children?: NavPluginInfoJSONType[];
 }
 

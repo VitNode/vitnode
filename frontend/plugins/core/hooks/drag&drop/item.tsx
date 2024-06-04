@@ -30,7 +30,7 @@ export const ItemDragAndDrop = ({
   draggableChildren,
   draggableStyle,
   id,
-  indentationWidth = 20,
+  indentationWidth = 0,
   isDropHere,
   isOpenChildren,
   onCollapse

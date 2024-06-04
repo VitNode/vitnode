@@ -11,12 +11,7 @@
       "code": "categories",
       "href": "categories",
       "icon": "Blocks",
-      "children": [
-        {
-          "code": "categories",
-          "href": "categories"
-        }
-      ]
+      "children": []
     }
   ]
 }
