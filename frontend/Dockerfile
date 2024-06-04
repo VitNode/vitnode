@@ -7,7 +7,7 @@ RUN apk add --no-cache libc6-compat
 RUN apk update
 # Set working directory
 WORKDIR /app
-RUN npm i -g turbo
+RUN npm i -g turbo@~2.0.0
 COPY . .
 RUN turbo telemetry disable
 RUN turbo prune frontend --docker
@@ -36,6 +36,7 @@ ARG NEXT_PUBLIC_FRONTEND_URL
 ENV NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL}
 ARG NEXT_PUBLIC_DEBUG
 ENV NEXT_PUBLIC_DEBUG=${NEXT_PUBLIC_DEBUG}
+ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN pnpm turbo build --filter=frontend...
 
