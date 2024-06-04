@@ -29,6 +29,10 @@ query Admin__sessions__authorization {
         code
         href
         icon
+        children {
+          code
+          href
+        }
       }
     }
   }

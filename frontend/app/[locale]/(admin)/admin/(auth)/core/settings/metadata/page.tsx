@@ -9,7 +9,7 @@ import {
   Admin__Core_Manifest_Metadata__ShowQueryVariables
 } from "@/utils/graphql/hooks";
 import { fetcher } from "@/utils/graphql/fetcher";
-import { ManifestMetadataCoreAdminView } from "@/plugins/admin/views/core/metadata/manifest/manifest-metadata-core-view";
+import { ManifestMetadataCoreAdminView } from "@/plugins/admin/views/core/settings/metadata/manifest/manifest-metadata-core-view";
 
 const getData = async () => {
   const { data } = await fetcher<

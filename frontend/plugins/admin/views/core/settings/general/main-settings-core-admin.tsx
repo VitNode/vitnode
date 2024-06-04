@@ -14,7 +14,9 @@ import { useSettingsCoreAdmin } from "./hooks/use-settings-core-admin";
 import { Core_Main_Settings__ShowQuery } from "@/utils/graphql/hooks";
 import { TextLanguageInput } from "@/components/text-language-input";
 
-export const MainSettingsCoreAdmin = (props: Core_Main_Settings__ShowQuery) => {
+export const GeneralSettingsCoreAdmin = (
+  props: Core_Main_Settings__ShowQuery
+) => {
   const t = useTranslations("admin.core.settings.main");
   const tCore = useTranslations("core");
   const { form, onSubmit } = useSettingsCoreAdmin(props);

@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
+import { Ban } from "lucide-react";
 
 import {
   DialogFooter,
@@ -21,16 +22,37 @@ import { Input } from "@/components/ui/input";
 import { IconInput } from "@/components/icon/input/icon-input";
 import { ShowAdminNavPluginsObj } from "@/utils/graphql/hooks";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "@/components/ui/select";
 
-interface Props {
+export interface CreateEditNavDevPluginAdminProps {
+  dataFromSSR: ShowAdminNavPluginsObj[];
+  icons: { icon: React.ReactNode; id: string }[];
   data?: ShowAdminNavPluginsObj;
+  parentId?: string;
 }
 
-export const CreateEditNavDevPluginAdmin = ({ data }: Props) => {
+export const CreateEditNavDevPluginAdmin = ({
+  data,
+  dataFromSSR,
+  icons,
+  parentId
+}: CreateEditNavDevPluginAdminProps) => {
   const t = useTranslations("admin.core.plugins.dev.nav");
   const tCore = useTranslations("core");
-  const { form, onSubmit } = useCreateNavPluginAdmin({ data });
+  const { form, onSubmit } = useCreateNavPluginAdmin({ data, parentId });
   const { code } = useParams();
+  const tPlugin = useTranslations(
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    `${Array.isArray(code) ? code[0] : code}.admin.nav`
+  );
+  const parentCode = form.watch("parent_code");
 
   return (
     <>
@@ -67,10 +89,54 @@ export const CreateEditNavDevPluginAdmin = ({ data }: Props) => {
                 <FormDescription>
                   {t.rich("create.href.desc", {
                     link: () => (
-                      <span className="font-bold text-foreground">{`${code}/${removeSpecialCharacters(form.watch("href"))}`}</span>
+                      <span className="font-bold text-foreground">{`${code}/${parentCode !== "null" ? `${parentCode}/` : ""}${removeSpecialCharacters(form.watch("href"))}`}</span>
                     )
                   })}
                 </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="parent_code"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("create.parent.label")}</FormLabel>
+                <FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="null">
+                        <div className="flex gap-2 items-center flex-wrap">
+                          <Ban className="size-4 text-muted-foreground" />
+                          <span>{t("create.parent.null")}</span>
+                        </div>
+                      </SelectItem>
+                      {dataFromSSR.map(nav => (
+                        <SelectItem value={nav.code} key={nav.code}>
+                          <div className="flex gap-2 items-center flex-wrap">
+                            {nav.icon
+                              ? icons.find(icon => icon.id === nav.code)?.icon
+                              : null}
+                            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                            {/* @ts-expect-error */}
+                            <span>{tPlugin(nav.code)}</span>
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+
                 <FormMessage />
               </FormItem>
             )}

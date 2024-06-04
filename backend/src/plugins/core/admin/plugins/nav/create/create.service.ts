@@ -4,6 +4,7 @@ import { Injectable } from "@nestjs/common";
 
 import { ShowAdminNavPluginsObj } from "../show/dto/show.obj";
 import { CreateAdminNavPluginsArgs } from "./dto/create.args";
+import { HelpersAdminNavPluginsService } from "../helpers.service";
 
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
@@ -12,12 +13,13 @@ import { ABSOLUTE_PATHS } from "@/config";
 import { ConfigPlugin } from "../../plugins.module";
 
 @Injectable()
-export class CreateAdminNavPluginsService {
+export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService {
   create({
     code,
     href,
     icon,
-    plugin_code
+    plugin_code,
+    parent_code
   }: CreateAdminNavPluginsArgs): ShowAdminNavPluginsObj {
     const pathConfig = ABSOLUTE_PATHS.plugin({ code: plugin_code }).config;
     if (!fs.existsSync(pathConfig)) {
@@ -28,7 +30,10 @@ export class CreateAdminNavPluginsService {
     );
 
     const currentCode = removeSpecialCharacters(code);
-    const codeExists = config.nav.find(nav => nav.code === currentCode);
+    const codeExists = this.findItemByCode({
+      items: config.nav,
+      code: currentCode
+    });
 
     if (codeExists) {
       throw new CustomError({
@@ -38,11 +43,26 @@ export class CreateAdminNavPluginsService {
     }
 
     // Update config
-    config.nav.push({
-      code: currentCode,
-      href,
-      icon
-    });
+    if (parent_code) {
+      const parent = config.nav.find(nav => nav.code === parent_code);
+
+      if (!parent) {
+        throw new NotFoundError("Parent");
+      }
+
+      parent.children = parent.children || [];
+      parent.children.push({
+        code: currentCode,
+        href,
+        icon
+      });
+    } else {
+      config.nav.push({
+        code: currentCode,
+        href,
+        icon
+      });
+    }
 
     // Save config
     fs.writeFileSync(pathConfig, JSON.stringify(config, null, 2));

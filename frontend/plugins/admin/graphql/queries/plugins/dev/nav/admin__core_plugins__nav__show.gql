@@ -3,5 +3,10 @@ query Admin__core_plugins__nav__show($pluginCode: String!) {
     code
     icon
     href
+    children {
+      code
+      href
+      icon
+    }
   }
 }

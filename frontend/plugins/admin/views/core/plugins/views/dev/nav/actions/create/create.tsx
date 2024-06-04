@@ -8,13 +8,17 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Loader } from "@/components/loader";
 
+import { CreateEditNavDevPluginAdminProps } from "../../create-edit/create-edit";
+
 const Content = React.lazy(async () =>
-  import("../create-edit/create-edit").then(module => ({
+  import("../../create-edit/create-edit").then(module => ({
     default: module.CreateEditNavDevPluginAdmin
   }))
 );
 
-export const CreateNavDevPluginAdmin = () => {
+export const CreateNavDevPluginAdmin = (
+  props: CreateEditNavDevPluginAdminProps
+) => {
   const t = useTranslations("core");
 
   return (
@@ -28,7 +32,7 @@ export const CreateNavDevPluginAdmin = () => {
 
       <DialogContent className="max-w-2xl">
         <React.Suspense fallback={<Loader />}>
-          <Content />
+          <Content {...props} />
         </React.Suspense>
       </DialogContent>
     </Dialog>

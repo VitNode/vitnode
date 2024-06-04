@@ -11,18 +11,21 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
+import { FlatTree } from "@/functions/flatten-tree";
 import { ShowAdminNavPluginsObj } from "@/utils/graphql/hooks";
+import { useItemNavDevPluginAdmin } from "../hooks/use-item-nav-dev-plugin-admin";
 
 const Content = React.lazy(async () =>
-  import("../create-edit/create-edit").then(module => ({
+  import("../../create-edit/create-edit").then(module => ({
     default: module.CreateEditNavDevPluginAdmin
   }))
 );
 
 export const EditActionTableNavDevPluginAdmin = (
-  props: ShowAdminNavPluginsObj
+  data: FlatTree<ShowAdminNavPluginsObj>
 ) => {
   const t = useTranslations("core");
+  const rest = useItemNavDevPluginAdmin();
 
   return (
     <Dialog>
@@ -42,7 +45,7 @@ export const EditActionTableNavDevPluginAdmin = (
 
       <DialogContent className="max-w-2xl">
         <React.Suspense fallback={<Loader />}>
-          <Content data={props} />
+          <Content data={data} {...rest} />
         </React.Suspense>
       </DialogContent>
     </Dialog>

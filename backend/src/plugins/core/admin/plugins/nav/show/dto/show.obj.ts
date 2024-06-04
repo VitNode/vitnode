@@ -1,7 +1,7 @@
 import { Field, ObjectType } from "@nestjs/graphql";
 
 @ObjectType()
-export class ShowAdminNavPluginsObj {
+export class ShowAdminNavPlugins {
   @Field(() => String)
   code: string;
 
@@ -10,4 +10,10 @@ export class ShowAdminNavPluginsObj {
 
   @Field(() => String)
   href: string;
+}
+
+@ObjectType()
+export class ShowAdminNavPluginsObj extends ShowAdminNavPlugins {
+  @Field(() => [ShowAdminNavPlugins], { nullable: true })
+  children?: ShowAdminNavPlugins[] | null;
 }

@@ -18,7 +18,8 @@ export class EditAdminNavPluginsService {
     href,
     icon,
     previous_code,
-    plugin_code
+    plugin_code,
+    parent_code
   }: EditCreateAdminNavPluginsArgs): ShowAdminNavPluginsObj {
     const pathConfig = ABSOLUTE_PATHS.plugin({ code: plugin_code }).config;
     if (!fs.existsSync(pathConfig)) {
@@ -37,13 +38,30 @@ export class EditAdminNavPluginsService {
       });
     }
 
-    // Update config
-    const navIndex = config.nav.findIndex(nav => nav.code === previous_code);
-    config.nav[navIndex] = {
-      code: currentCode,
-      href,
-      icon
-    };
+    if (parent_code) {
+      const parent = config.nav.find(nav => nav.code === parent_code);
+
+      if (!parent) {
+        throw new NotFoundError("Parent");
+      }
+
+      // Build new children nav
+      const children = parent.children || [];
+      const navIndex = children.findIndex(nav => nav.code === previous_code);
+
+      children[navIndex] = {
+        code: currentCode,
+        href,
+        icon
+      };
+    } else {
+      const navIndex = config.nav.findIndex(nav => nav.code === previous_code);
+      config.nav[navIndex] = {
+        code: currentCode,
+        href,
+        icon
+      };
+    }
 
     // Save config
     fs.writeFileSync(pathConfig, JSON.stringify(config, null, 2));

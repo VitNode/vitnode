@@ -10,7 +10,11 @@ import { ConfigPlugin } from "../../plugins.module";
 
 @Injectable()
 export class DeleteAdminNavPluginsService {
-  delete({ code, plugin_code }: DeleteCreateAdminNavPluginsArgs): string {
+  delete({
+    code,
+    plugin_code,
+    parent_code
+  }: DeleteCreateAdminNavPluginsArgs): string {
     const pathConfig = ABSOLUTE_PATHS.plugin({ code: plugin_code }).config;
     if (!fs.existsSync(pathConfig)) {
       throw new NotFoundError("Plugin");
@@ -19,13 +23,23 @@ export class DeleteAdminNavPluginsService {
       fs.readFileSync(pathConfig, "utf8")
     );
 
-    const codeExists = config.nav.find(nav => nav.code === code);
-    if (!codeExists) {
-      throw new NotFoundError("Plugin nav");
-    }
-
     // Update config
-    config.nav = config.nav.filter(nav => nav.code !== code);
+    if (parent_code) {
+      const parent = config.nav.find(nav => nav.code === parent_code);
+
+      if (!parent) {
+        throw new NotFoundError("Parent nav");
+      }
+
+      parent.children = parent.children.filter(child => child.code !== code);
+    } else {
+      const codeExists = config.nav.find(nav => nav.code === code);
+      if (!codeExists) {
+        throw new NotFoundError("Plugin nav");
+      }
+
+      config.nav = config.nav.filter(nav => nav.code !== code);
+    }
 
     // Save config
     fs.writeFileSync(pathConfig, JSON.stringify(config, null, 2));

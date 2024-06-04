@@ -1,11 +1,12 @@
 import { getSessionAdminData } from "@/app/[locale]/(admin)/admin/(auth)/get-session-admin";
 import { ItemNavAdmin } from "./item/item";
+import { NavAdminWrapper } from "./wrapper";
 
 export const NavAdmin = async () => {
   const data = await getSessionAdminData();
 
   return (
-    <>
+    <NavAdminWrapper>
       <ItemNavAdmin
         id="core"
         items={[
@@ -16,8 +17,18 @@ export const NavAdmin = async () => {
           },
           {
             id: "settings",
-            href: "settings/main",
-            icon: "Settings"
+            href: "general",
+            icon: "Settings",
+            children: [
+              {
+                id: "general",
+                href: "general"
+              },
+              {
+                id: "metadata",
+                href: "metadata"
+              }
+            ]
           },
           {
             id: "plugins",
@@ -26,13 +37,22 @@ export const NavAdmin = async () => {
           },
           {
             id: "styles",
-            href: "styles/themes",
-            icon: "Paintbrush"
-          },
-          {
-            id: "metadata",
-            href: "metadata/manifest",
-            icon: "Tag"
+            href: "themes",
+            icon: "Paintbrush",
+            children: [
+              {
+                id: "themes",
+                href: "themes"
+              },
+              {
+                id: "nav",
+                href: "nav"
+              },
+              {
+                id: "editor",
+                href: "editor"
+              }
+            ]
           },
           {
             id: "langs",
@@ -42,7 +62,13 @@ export const NavAdmin = async () => {
           {
             id: "advanced",
             href: "advanced/files",
-            icon: "Cog"
+            icon: "Cog",
+            children: [
+              {
+                id: "files",
+                href: "files"
+              }
+            ]
           }
         ]}
       />
@@ -62,7 +88,17 @@ export const NavAdmin = async () => {
           {
             id: "staff",
             href: "staff/moderators",
-            icon: "UserCog"
+            icon: "UserCog",
+            children: [
+              {
+                id: "moderators",
+                href: "moderators"
+              },
+              {
+                id: "administrators",
+                href: "administrators"
+              }
+            ]
           }
         ]}
       />
@@ -74,10 +110,14 @@ export const NavAdmin = async () => {
           items={item.nav.map(navItem => ({
             id: navItem.code,
             href: navItem.href,
-            icon: navItem.icon ?? undefined
+            icon: navItem.icon ?? undefined,
+            children: navItem.children?.map(child => ({
+              id: child.code,
+              href: child.href
+            }))
           }))}
         />
       ))}
-    </>
+    </NavAdminWrapper>
   );
 };
