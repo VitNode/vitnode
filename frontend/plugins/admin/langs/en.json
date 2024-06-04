@@ -27,9 +27,6 @@
           "copyright": {
             "label": "Copyright Site"
           }
-        },
-        "security": {
-          "title": "Security"
         }
       },
       "metadata": {
@@ -66,10 +63,6 @@
           "background_color": {
             "label": "Background Color"
           }
-        },
-        "sitemap": {
-          "title": "Sitemap",
-          "desc": "Sitemap is a file where you provide information about the pages, videos, and other files on your site, and the relationships between them. Search engines like Google read this file to more intelligently crawl your site."
         }
       },
       "plugins": {

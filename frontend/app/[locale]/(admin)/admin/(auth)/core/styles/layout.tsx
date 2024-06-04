@@ -1,31 +1,30 @@
-import * as React from "react";
 import { getTranslations } from "next-intl/server";
+import * as React from "react";
+import { Metadata } from "next";
 
-import { Tabs } from "@/components/tabs/tabs";
-import { TabsTrigger } from "@/components/tabs/tabs-trigger";
+import { getConfigFile } from "@/config/helpers";
 
 interface Props {
   children: React.ReactNode;
 }
 
+export async function generateMetadata(): Promise<Metadata> {
+  const [t, tCore, config] = await Promise.all([
+    getTranslations("admin"),
+    getTranslations("core.admin"),
+    getConfigFile()
+  ]);
+
+  const defaultTitle = `${tCore("nav.styles")} - ${t("title_short")} - ${config.settings.general.site_name}`;
+
+  return {
+    title: {
+      template: `%s - ${defaultTitle}`,
+      absolute: defaultTitle
+    }
+  };
+}
+
 export default async function Layout({ children }: Props) {
-  const t = await getTranslations("admin.core.styles");
-
-  return (
-    <>
-      <Tabs className="mb-5">
-        <TabsTrigger id="themes" href="/admin/core/styles/themes">
-          {t("themes.title")}
-        </TabsTrigger>
-        <TabsTrigger id="nav" href="/admin/core/styles/nav">
-          {t("nav.title")}
-        </TabsTrigger>
-        <TabsTrigger id="editor" href="/admin/core/styles/editor">
-          {t("editor.title")}
-        </TabsTrigger>
-      </Tabs>
-
-      {children}
-    </>
-  );
+  return children;
 }

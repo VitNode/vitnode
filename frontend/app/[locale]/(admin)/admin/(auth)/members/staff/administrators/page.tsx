@@ -12,7 +12,7 @@ import {
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { fetcher } from "@/utils/graphql/fetcher";
-import { AdministratorsStaffAdminView } from "@/plugins/admin/views/members/staff/views/administrators/administrators-view";
+import { AdministratorsStaffAdminView } from "@/plugins/admin/views/members/staff/administrators/administrators-view";
 
 const getData = async (
   variables: Admin__Core_Staff_Administrators__ShowQueryVariables

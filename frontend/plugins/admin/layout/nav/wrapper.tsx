@@ -1,22 +1,23 @@
 "use client";
 
 import * as Accordion from "@radix-ui/react-accordion";
+import { useSelectedLayoutSegments } from "next/navigation";
 import * as React from "react";
-
-import { AdminNavContext } from "./hooks/use-admin-nav";
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const NavAdminWrapper = ({ children }: Props) => {
-  const [activeItems, setActiveItems] = React.useState<string[]>([]);
+  const layoutSegments = useSelectedLayoutSegments();
 
   return (
-    <AdminNavContext.Provider value={{ setActiveItems }}>
-      <Accordion.Root type="multiple" defaultValue={activeItems}>
-        {children}
-      </Accordion.Root>
-    </AdminNavContext.Provider>
+    <Accordion.Root
+      type="multiple"
+      defaultValue={[`${layoutSegments[0]}_${layoutSegments[1]}`]}
+      className="space-y-4"
+    >
+      {children}
+    </Accordion.Root>
   );
 };

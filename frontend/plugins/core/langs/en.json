@@ -357,11 +357,16 @@
         "title": "Core",
         "dashboard": "Dashboard",
         "settings": "Settings",
+        "settings_general": "General",
+        "settings_metadata": "Metadata",
         "plugins": "Plugins",
         "styles": "Styles",
-        "metadata": "Metadata",
+        "styles_themes": "Themes",
+        "styles_nav": "Navigation",
+        "styles_editor": "Editor",
         "langs": "Languages",
-        "advanced": "Advanced"
+        "advanced": "Advanced",
+        "advanced_files": "Files"
       }
     }
   },
@@ -371,7 +376,9 @@
         "title": "Members",
         "list": "Users",
         "groups": "Groups",
-        "staff": "Staff"
+        "staff": "Staff",
+        "staff_moderators": "Moderators",
+        "staff_administrators": "Administrators"
       }
     }
   }

@@ -357,11 +357,16 @@
         "title": "Rdzeń",
         "dashboard": "Pulpit",
         "settings": "Ustawienia",
+        "settings_general": "Ogólne",
+        "settings_metadata": "Metadane",
         "plugins": "Wtyczki",
         "styles": "Style",
-        "metadata": "Metadane",
+        "styles_themes": "Motywy",
+        "styles_nav": "Nawigacja",
+        "styles_editor": "Edytor",
         "langs": "Języki",
-        "advanced": "Zaawansowane"
+        "advanced": "Zaawansowane",
+        "advanced_files": "Pliki"
       }
     }
   },
@@ -371,7 +376,9 @@
         "title": "Użytkownicy",
         "list": "Użytkownicy",
         "groups": "Grupy",
-        "staff": "Personel"
+        "staff": "Personel",
+        "staff_moderators": "Moderatorzy",
+        "staff_administrators": "Administratorzy"
       }
     }
   }

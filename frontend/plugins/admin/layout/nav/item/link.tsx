@@ -35,7 +35,7 @@ export const LinkItemNavAdmin = ({
   const t = useTranslations(`${primaryId}.admin.nav`);
   const pathname = usePathname();
   const href = `/admin/${primaryId}/${hrefFromProps}`;
-  const active = pathname.startsWith(href);
+  const active = pathname.startsWith(`/admin/${primaryId}/${id}`);
   const isChildActive =
     children?.some(child =>
       pathname.startsWith(`/admin/${primaryId}/${child.href}`)
@@ -100,7 +100,7 @@ export const LinkItemNavAdmin = ({
         <Accordion.Content className="transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden my-1">
           <div className="space-y-1 ml-7">
             {children.map(child => {
-              const href = `/admin/${primaryId}/${child.href}`;
+              const href = `/admin/${primaryId}/${id}/${child.href}`;
               const active = pathname.startsWith(href);
 
               return (
@@ -114,7 +114,7 @@ export const LinkItemNavAdmin = ({
                 >
                   {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
                   {/* @ts-expect-error */}
-                  <span>{t(child.id)}</span>
+                  <span>{t(`${id}_${child.id}`)}</span>
                 </Link>
               );
             })}

@@ -17,12 +17,16 @@ export const NavAdmin = async () => {
           },
           {
             id: "settings",
-            href: "settings/main",
+            href: "general",
             icon: "Settings",
             children: [
               {
-                id: "settings",
-                href: "settings/main"
+                id: "general",
+                href: "general"
+              },
+              {
+                id: "metadata",
+                href: "metadata"
               }
             ]
           },
@@ -33,19 +37,22 @@ export const NavAdmin = async () => {
           },
           {
             id: "styles",
-            href: "styles/themes",
+            href: "themes",
             icon: "Paintbrush",
             children: [
               {
                 id: "themes",
-                href: "styles/themes"
+                href: "themes"
+              },
+              {
+                id: "nav",
+                href: "nav"
+              },
+              {
+                id: "editor",
+                href: "editor"
               }
             ]
-          },
-          {
-            id: "metadata",
-            href: "metadata/manifest",
-            icon: "Tag"
           },
           {
             id: "langs",
@@ -55,7 +62,13 @@ export const NavAdmin = async () => {
           {
             id: "advanced",
             href: "advanced/files",
-            icon: "Cog"
+            icon: "Cog",
+            children: [
+              {
+                id: "files",
+                href: "files"
+              }
+            ]
           }
         ]}
       />
@@ -75,7 +88,17 @@ export const NavAdmin = async () => {
           {
             id: "staff",
             href: "staff/moderators",
-            icon: "UserCog"
+            icon: "UserCog",
+            children: [
+              {
+                id: "moderators",
+                href: "moderators"
+              },
+              {
+                id: "administrators",
+                href: "administrators"
+              }
+            ]
           }
         ]}
       />

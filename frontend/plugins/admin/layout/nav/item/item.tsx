@@ -15,7 +15,7 @@ export const ItemNavAdmin = ({ id, items }: Props) => {
   const t = useTranslations(`${id}.admin`);
 
   return (
-    <>
+    <div>
       {id !== "core" && (
         <div className="text-muted-foreground text-sm px-4">
           {t("nav.title")}
@@ -41,6 +41,6 @@ export const ItemNavAdmin = ({ id, items }: Props) => {
           ))}
         </ul>
       </div>
-    </>
+    </div>
   );
 };

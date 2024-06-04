@@ -9,7 +9,7 @@ import {
   Core_Main_Settings__ShowQueryVariables
 } from "@/utils/graphql/hooks";
 import { fetcher } from "@/utils/graphql/fetcher";
-import { MainSettingsCoreAdmin } from "@/plugins/admin/views/core/settings/main/main-settings-core-admin";
+import { GeneralSettingsCoreAdmin } from "@/plugins/admin/views/core/settings/general/main-settings-core-admin";
 
 const getData = async () => {
   const { data } = await fetcher<
@@ -23,25 +23,25 @@ const getData = async () => {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("admin.core.settings.main");
+  const t = await getTranslations("core.admin.nav");
 
   return {
-    title: t("title")
+    title: t("settings_general")
   };
 }
 
 export default async function Page() {
   const [t, data] = await Promise.all([
-    getTranslations("admin.core.settings.main"),
+    getTranslations("core.admin.nav"),
     getData()
   ]);
 
   return (
     <>
-      <HeaderContent h1={t("title")} />
+      <HeaderContent h1={t("settings_general")} />
 
       <Card className="p-6">
-        <MainSettingsCoreAdmin {...data} />
+        <GeneralSettingsCoreAdmin {...data} />
       </Card>
     </>
   );
