@@ -240,10 +240,10 @@ type Mutation {
   admin__core_plugins__delete(code: String!): String!
   admin__core_plugins__download(code: String!, version: String, version_code: Int): String!
   admin__core_plugins__edit(author: String!, author_url: String, code: String!, default: Boolean, description: String, enabled: Boolean, name: String!, support_url: String!): ShowAdminPlugins!
-  admin__core_plugins__nav__change_position(code: String!, index_to_move: Int!, plugin_code: String!): String!
-  admin__core_plugins__nav__create(code: String!, href: String!, icon: String, plugin_code: String!): ShowAdminNavPluginsObj!
-  admin__core_plugins__nav__delete(code: String!, plugin_code: String!): String!
-  admin__core_plugins__nav__edit(code: String!, href: String!, icon: String, plugin_code: String!, previous_code: String!): ShowAdminNavPluginsObj!
+  admin__core_plugins__nav__change_position(code: String!, index_to_move: Int!, parent_code: String, plugin_code: String!): String!
+  admin__core_plugins__nav__create(code: String!, href: String!, icon: String, parent_code: String, plugin_code: String!): ShowAdminNavPluginsObj!
+  admin__core_plugins__nav__delete(code: String!, parent_code: String, plugin_code: String!): String!
+  admin__core_plugins__nav__edit(code: String!, href: String!, icon: String, parent_code: String, plugin_code: String!, previous_code: String!): ShowAdminNavPluginsObj!
   admin__core_plugins__upload(code: String, file: Upload!): ShowAdminPlugins!
   admin__core_staff_administrators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffAdministrators!
   admin__core_staff_administrators__delete(id: Int!): String!
@@ -481,7 +481,7 @@ type ShowAdminNavPlugins {
 }
 
 type ShowAdminNavPluginsObj {
-  children: [ShowAdminNavPlugins!]!
+  children: [ShowAdminNavPlugins!]
   code: String!
   href: String!
   icon: String

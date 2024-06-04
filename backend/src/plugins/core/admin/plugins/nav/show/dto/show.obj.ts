@@ -14,6 +14,6 @@ export class ShowAdminNavPlugins {
 
 @ObjectType()
 export class ShowAdminNavPluginsObj extends ShowAdminNavPlugins {
-  @Field(() => [ShowAdminNavPlugins])
-  children: ShowAdminNavPlugins[];
+  @Field(() => [ShowAdminNavPlugins], { nullable: true })
+  children?: ShowAdminNavPlugins[] | null;
 }

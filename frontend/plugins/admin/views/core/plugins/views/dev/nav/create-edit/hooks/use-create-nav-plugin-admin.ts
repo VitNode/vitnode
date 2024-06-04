@@ -8,15 +8,16 @@ import { useTranslations } from "next-intl";
 import { zodInput } from "@/utils/zod";
 import { useDialog } from "@/components/ui/dialog";
 import { createMutationApi } from "./create-mutation-api";
-import { ShowAdminNavPluginsObj } from "@/utils/graphql/hooks";
 import { editMutationApi } from "./edit-mutation-api";
 import { ErrorType } from "@/utils/graphql/fetcher";
+import { ShowAdminNavPluginsObj } from "@/utils/graphql/hooks";
 
 interface Props {
   data?: ShowAdminNavPluginsObj;
+  parentId?: string;
 }
 
-export const useCreateNavPluginAdmin = ({ data }: Props) => {
+export const useCreateNavPluginAdmin = ({ data, parentId }: Props) => {
   const t = useTranslations("admin.core.plugins.dev.nav");
   const tCore = useTranslations("core");
   const { setOpen } = useDialog();
@@ -24,7 +25,8 @@ export const useCreateNavPluginAdmin = ({ data }: Props) => {
   const formSchema = z.object({
     code: zodInput.string.min(3).max(50),
     icon: z.string(),
-    href: zodInput.string.min(1).max(100)
+    href: zodInput.string.min(1).max(100),
+    parent_code: z.string().optional()
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -32,7 +34,8 @@ export const useCreateNavPluginAdmin = ({ data }: Props) => {
     defaultValues: {
       code: data?.code ?? "",
       icon: data?.icon ?? "",
-      href: data?.href ?? ""
+      href: data?.href ?? "",
+      parent_code: parentId ?? "null"
     }
   });
 
@@ -42,7 +45,8 @@ export const useCreateNavPluginAdmin = ({ data }: Props) => {
       const mutation = await editMutationApi({
         ...values,
         previousCode: data.code,
-        pluginCode: Array.isArray(code) ? code[0] : code
+        pluginCode: Array.isArray(code) ? code[0] : code,
+        parentCode: values.parent_code === "null" ? null : values.parent_code
       });
       if (mutation.error) {
         error = mutation.error as ErrorType | undefined;
@@ -50,7 +54,8 @@ export const useCreateNavPluginAdmin = ({ data }: Props) => {
     } else {
       const mutation = await createMutationApi({
         ...values,
-        pluginCode: Array.isArray(code) ? code[0] : code
+        pluginCode: Array.isArray(code) ? code[0] : code,
+        parentCode: values.parent_code === "null" ? null : values.parent_code
       });
       if (mutation.error) {
         error = mutation.error as ErrorType | undefined;

@@ -15,16 +15,33 @@ import {
   ShowAdminNavPluginsObj
 } from "@/utils/graphql/hooks";
 import { ItemContentNavDevPluginAdmin } from "./item";
-import { mutationChangePositionApi } from "./hooks/mutation-change-position-api";
+import { mutationChangePositionApi } from "./item/hooks/mutation-change-position-api";
 import { ItemDragAndDrop } from "@/plugins/core/hooks/drag&drop/item";
+import { WithChildren } from "@/functions/flatten-tree";
+import { ItemNavDevPluginAdminContext } from "./item/hooks/use-item-nav-dev-plugin-admin";
+
+interface Props extends Admin__Core_Plugins__Nav__ShowQuery {
+  icons: { icon: React.ReactNode; id: string }[];
+}
 
 export const NavDevPluginAdminView = ({
-  admin__core_plugins__nav__show: edges
-}: Admin__Core_Plugins__Nav__ShowQuery) => {
+  admin__core_plugins__nav__show: edges,
+  icons
+}: Props) => {
   const t = useTranslations("core");
   const { code } = useParams();
   const [initData, setData] = React.useState<ShowAdminNavPluginsObj[]>(edges);
-  const data = initData.map(item => ({ ...item, children: [], id: item.code }));
+  const data: WithChildren<ShowAdminNavPluginsObj>[] = initData.map(item => ({
+    ...item,
+    children:
+      item.children?.map(child => ({
+        ...child,
+        id: `${item.code}_${child.code}`,
+        children: []
+      })) ?? [],
+    id: item.code
+  }));
+
   const {
     actionsItem,
     activeItemOverlay,
@@ -55,7 +72,7 @@ export const NavDevPluginAdminView = ({
       collisionDetection={closestCorners}
       onDragCancel={resetState}
       onDragOver={onDragOver}
-      onDragMove={e => onDragMove({ ...e, flattenedItems, maxDepth: 0 })}
+      onDragMove={e => onDragMove({ ...e, flattenedItems, maxDepth: 1 })}
       onDragStart={onDragStart}
       onDragEnd={async event => {
         const moveTo = onDragEnd<ShowAdminNavPluginsObj>({
@@ -69,7 +86,8 @@ export const NavDevPluginAdminView = ({
         await mutationChangePositionApi({
           code: moveTo.id.toString(),
           pluginCode: Array.isArray(code) ? code[0] : code,
-          indexToMove: moveTo.indexToMove
+          indexToMove: moveTo.indexToMove,
+          parentCode: moveTo.parentId?.toString()
         });
       }}
     >
@@ -81,7 +99,15 @@ export const NavDevPluginAdminView = ({
               data: item
             })}
           >
-            <ItemContentNavDevPluginAdmin data={item} />
+            <ItemNavDevPluginAdminContext.Provider
+              value={{
+                dataFromSSR: edges,
+                parentId: item.parentId?.toString(),
+                icons
+              }}
+            >
+              <ItemContentNavDevPluginAdmin {...item} />
+            </ItemNavDevPluginAdminContext.Provider>
           </ItemDragAndDrop>
         ))}
 
@@ -92,7 +118,14 @@ export const NavDevPluginAdminView = ({
                 data: activeItemOverlay
               })}
             >
-              <ItemContentNavDevPluginAdmin data={activeItemOverlay} />
+              <ItemNavDevPluginAdminContext.Provider
+                value={{
+                  dataFromSSR: edges,
+                  icons
+                }}
+              >
+                <ItemContentNavDevPluginAdmin {...activeItemOverlay} />
+              </ItemNavDevPluginAdminContext.Provider>
             </ItemDragAndDrop>
           )}
         </DragOverlay>

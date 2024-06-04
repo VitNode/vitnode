@@ -30,7 +30,7 @@ export const ItemDragAndDrop = ({
   draggableChildren,
   draggableStyle,
   id,
-  indentationWidth = 0,
+  indentationWidth = 20,
   isDropHere,
   isOpenChildren,
   onCollapse
@@ -54,7 +54,7 @@ export const ItemDragAndDrop = ({
   return (
     <div
       ref={setDroppableNodeRef}
-      className="pl-[var(--spacing)] [&:not(:first-child)>div]:border-t-0"
+      className="pl-[var(--spacing)] border-t-0"
       style={
         {
           "--spacing": `${indentationWidth * depth}px`

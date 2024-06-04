@@ -23,4 +23,7 @@ export class CreateAdminNavPluginsArgs {
 
   @Field(() => String, { nullable: true })
   icon: string | null;
+
+  @Field(() => String, { nullable: true })
+  parent_code: string | null;
 }

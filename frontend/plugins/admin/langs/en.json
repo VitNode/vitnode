@@ -88,7 +88,7 @@
           },
           "nav": {
             "title": "Navigation in AdminCP",
-            "key": "Key: <key></key>",
+            "lang_key": "Lang Key: <key></key>",
             "create": {
               "title": "Create Navigation",
               "code": {
@@ -102,6 +102,10 @@
               },
               "icon": {
                 "label": "Icon"
+              },
+              "parent": {
+                "label": "Parent Navigation",
+                "null": "No parent"
               },
               "success": "Navigation has been created."
             },

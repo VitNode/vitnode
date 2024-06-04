@@ -4,6 +4,7 @@ mutation Admin__core_plugins__nav__edit(
   $icon: String
   $pluginCode: String!
   $previousCode: String!
+  $parentCode: String
 ) {
   admin__core_plugins__nav__edit(
     code: $code
@@ -11,6 +12,7 @@ mutation Admin__core_plugins__nav__edit(
     icon: $icon
     plugin_code: $pluginCode
     previous_code: $previousCode
+    parent_code: $parentCode
   ) {
     code
   }

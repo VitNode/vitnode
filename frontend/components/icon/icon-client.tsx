@@ -8,7 +8,17 @@ import { cn } from "@/functions/classnames";
 export type IconLucideNames = keyof typeof Lucide.icons;
 
 export const IconClient = React.memo(
-  ({ name, className }: { name: IconLucideNames; className?: string }) => {
+  ({
+    name,
+    className
+  }: {
+    name: IconLucideNames | string;
+    className?: string;
+  }) => {
+    if (/\p{Extended_Pictographic}/gu.test(name)) {
+      return <span className={className}>{name}</span>;
+    }
+
     const LucideIcon = React.lazy<React.ComponentType<Lucide.LucideProps>>(
       async () =>
         import("lucide-react")

@@ -88,7 +88,7 @@
           },
           "nav": {
             "title": "Nawigacja w AdminCP",
-            "key": "Klucz: <key></key>",
+            "lang_key": "Klucz języka: <key></key>",
             "create": {
               "title": "Stwórz nawigację",
               "code": {
@@ -102,6 +102,10 @@
               },
               "icon": {
                 "label": "Ikona"
+              },
+              "parent": {
+                "label": "Nadrzędna nawigacja",
+                "null": "Brak"
               },
               "success": "Nawigacja została stworzona."
             },

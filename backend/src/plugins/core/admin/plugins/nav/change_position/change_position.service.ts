@@ -13,7 +13,8 @@ export class ChangePositionAdminNavPluginsService {
   changePosition({
     code,
     plugin_code,
-    index_to_move
+    index_to_move,
+    parent_code
   }: ChangePositionAdminNavPluginsArgs): string {
     const pathConfig = ABSOLUTE_PATHS.plugin({ code: plugin_code }).config;
     if (!fs.existsSync(pathConfig)) {
@@ -29,10 +30,24 @@ export class ChangePositionAdminNavPluginsService {
     }
 
     // Update config
-    const navIndex = config.nav.findIndex(nav => nav.code === code);
-    const nav = config.nav[navIndex];
-    config.nav.splice(navIndex, 1);
-    config.nav.splice(index_to_move, 0, nav);
+    if (parent_code) {
+      const parent = config.nav.find(nav => nav.code === parent_code);
+
+      if (!parent) {
+        throw new NotFoundError("Parent");
+      }
+
+      const children = parent.children || [];
+      const navIndex = children.findIndex(nav => nav.code === code);
+      const nav = children[navIndex];
+      children.splice(navIndex, 1);
+      children.splice(index_to_move, 0, nav);
+    } else {
+      const navIndex = config.nav.findIndex(nav => nav.code === code);
+      const nav = config.nav[navIndex];
+      config.nav.splice(navIndex, 1);
+      config.nav.splice(index_to_move, 0, nav);
+    }
 
     // Save config
     fs.writeFileSync(pathConfig, JSON.stringify(config, null, 2));

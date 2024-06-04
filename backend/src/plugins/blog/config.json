@@ -10,7 +10,13 @@
     {
       "code": "categories",
       "href": "categories",
-      "icon": "Blocks"
+      "icon": "Blocks",
+      "children": [
+        {
+          "code": "categories",
+          "href": "categories"
+        }
+      ]
     }
   ]
 }

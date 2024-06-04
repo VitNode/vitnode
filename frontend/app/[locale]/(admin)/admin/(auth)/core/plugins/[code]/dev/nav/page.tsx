@@ -5,11 +5,14 @@ import { HeaderContent } from "@/components/header-content/header-content";
 import {
   Admin__Core_Plugins__Nav__Show,
   Admin__Core_Plugins__Nav__ShowQuery,
-  Admin__Core_Plugins__Nav__ShowQueryVariables
+  Admin__Core_Plugins__Nav__ShowQueryVariables,
+  ShowAdminNavPluginsObj
 } from "@/utils/graphql/hooks";
 import { fetcher } from "@/utils/graphql/fetcher";
 import { NavDevPluginAdminView } from "@/plugins/admin/views/core/plugins/views/dev/nav/nav";
-import { CreateNavDevPluginAdmin } from "@/plugins/admin/views/core/plugins/views/dev/nav/create/create";
+import { CreateNavDevPluginAdmin } from "@/plugins/admin/views/core/plugins/views/dev/nav/actions/create/create";
+import { flattenTree } from "@/functions/flatten-tree";
+import { Icon } from "@/components/icon/icon";
 
 interface Props {
   params: {
@@ -43,13 +46,37 @@ export default async function Page({ params: { code } }: Props) {
   const data = await getData({ pluginCode: code });
   const t = await getTranslations("admin.core.plugins.dev.nav");
 
+  const flattenData = flattenTree<ShowAdminNavPluginsObj>({
+    tree: data.admin__core_plugins__nav__show.map(nav => ({
+      id: nav.code,
+      ...nav,
+      children:
+        nav.children?.map(child => ({
+          id: `${nav.code}_${child.code}`,
+          ...child,
+          children: []
+        })) ?? []
+    }))
+  });
+
+  const icons: {
+    icon: React.ReactNode;
+    id: string;
+  }[] = flattenData.map(item => ({
+    icon: item.icon ? <Icon className="size-4" name={item.icon} /> : null,
+    id: item.id.toString()
+  }));
+
   return (
     <>
       <HeaderContent h1={t("title")}>
-        <CreateNavDevPluginAdmin />
+        <CreateNavDevPluginAdmin
+          dataFromSSR={data.admin__core_plugins__nav__show}
+          icons={icons}
+        />
       </HeaderContent>
 
-      <NavDevPluginAdminView {...data} />
+      <NavDevPluginAdminView {...data} icons={icons} />
     </>
   );
 }
