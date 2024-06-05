@@ -3,10 +3,15 @@ import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
 
-import { changeDatabaseService, changeModuleRootSchema } from "./contents";
+import {
+  changeDatabaseService,
+  changeLangTypes,
+  changeModuleRootSchema
+} from "./contents";
 
 import {
   removeDatabaseFromService,
+  removeLangFromTypes,
   removeModuleFromRootSchema
 } from "../../../delete/contents";
 import { CustomError } from "@/utils/errors/custom-error";
@@ -68,6 +73,15 @@ export class ChangeFilesAdminPluginsService {
             code
           }),
         condition: () => true
+      },
+      {
+        path: join(ABSOLUTE_PATHS.frontend.init, "global.d.ts"),
+        content: content =>
+          changeLangTypes({
+            content,
+            code
+          }),
+        condition: () => true
       }
     ];
 
@@ -89,6 +103,15 @@ export class ChangeFilesAdminPluginsService {
         path: join(ABSOLUTE_PATHS.backend, "database", "schema.ts"),
         content: content =>
           removeDatabaseFromService({
+            content,
+            code
+          }),
+        condition: () => true
+      },
+      {
+        path: join(ABSOLUTE_PATHS.frontend.init, "global.d.ts"),
+        content: content =>
+          removeLangFromTypes({
             content,
             code
           }),

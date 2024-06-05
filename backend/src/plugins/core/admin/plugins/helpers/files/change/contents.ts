@@ -43,3 +43,16 @@ export const changeDatabaseService = ({
       `\n  ...table${name},\n  // ! === MODULE ===`
     );
 };
+
+export const changeLangTypes = ({
+  code,
+  content
+}: {
+  code: string;
+  content: string;
+}) => {
+  return content.replace(
+    "// ! === IMPORT ===",
+    `typeof import("@/plugins/${code}/langs/en.json") &\n  // ! === IMPORT ===`
+  );
+};

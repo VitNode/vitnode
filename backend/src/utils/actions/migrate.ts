@@ -87,6 +87,7 @@ export const migrate = async ({ pluginCode }: { pluginCode: string }) => {
   const lastDbMigration = dbMigrations.rows[0];
 
   const migrations = readMigrationFiles({ pluginCode });
+  if (!migrations) return;
 
   await db.transaction(async tx => {
     for await (const migration of migrations) {

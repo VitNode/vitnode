@@ -30,3 +30,16 @@ export const removeDatabaseFromService = ({
       ""
     );
 };
+
+export const removeLangFromTypes = ({
+  code,
+  content
+}: {
+  code: string;
+  content: string;
+}) => {
+  return content.replace(
+    `\n  typeof import("@/plugins/${code}/langs/en.json") &`,
+    ""
+  );
+};

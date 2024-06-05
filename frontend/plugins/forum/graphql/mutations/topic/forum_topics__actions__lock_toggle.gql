@@ -1,3 +1,0 @@
-mutation Forum_topics__actions__lock_toggle($id: Int!) {
-  forum_topics__actions__lock_toggle(id: $id)
-}
