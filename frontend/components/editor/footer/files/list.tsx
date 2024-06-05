@@ -7,13 +7,13 @@ export const ListFilesFooterEditor = () => {
   const { files } = useEditorState();
 
   return (
-    <ul className="space-y-2 mt-2">
+    <ul className="mt-2 space-y-2">
       {files.map(item => {
         return (
           <li
             key={`editor_file_${item.id}`}
             className={cn(
-              "bg-card px-5 py-4 border rounded-lg flex gap-5 flex-col md:flex-row items-center shadow-sm transition-colors",
+              "bg-card flex flex-col items-center gap-5 rounded-lg border px-5 py-4 shadow-sm transition-colors md:flex-row",
               {
                 "border-destructive": item.error
               }

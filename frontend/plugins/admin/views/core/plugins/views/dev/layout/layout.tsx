@@ -40,7 +40,7 @@ export const DevPluginAdminLayout = ({
     <>
       <HeaderContent
         h1={
-          <div className="flex gap-2 items-center flex-wrap">
+          <div className="flex flex-wrap items-center gap-2">
             <span>{name}</span>
             {isDefault && <Badge>{tCore("default")}</Badge>}
           </div>
@@ -48,10 +48,10 @@ export const DevPluginAdminLayout = ({
         desc={
           <div>
             {description && (
-              <p className="text-sm max-w-80 truncate">{description}</p>
+              <p className="max-w-80 truncate text-sm">{description}</p>
             )}
             {version && version_code && (
-              <span className="flex gap-1 flex-wrap">
+              <span className="flex flex-wrap gap-1">
                 <span>{version}</span>
                 <span>
                   ({version_code}), <DateFormat date={updated} />

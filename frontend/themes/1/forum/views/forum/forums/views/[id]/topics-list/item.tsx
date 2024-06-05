@@ -22,18 +22,18 @@ export const ItemTopicListForum = ({
   return (
     <WrapperItemTopicListForum
       href={href}
-      className="px-6 py-4 hover:bg-muted/50 cursor-pointer select-none md:select-auto"
+      className="hover:bg-muted/50 cursor-pointer select-none px-6 py-4 md:select-auto"
     >
       <div className="flex flex-col">
-        <h3 className="font-semibold text-base">
+        <h3 className="text-base font-semibold">
           <Link
             href={href}
-            className="text-foreground no-underline break-words"
+            className="text-foreground break-words no-underline"
           >
             {convertText(title)}
           </Link>
         </h3>
-        <span className="text-sm text-muted-foreground">
+        <span className="text-muted-foreground text-sm">
           {t.rich("by", {
             user: () => (
               <Link href={`/profile/${user.name_seo}`}>{user.name}</Link>

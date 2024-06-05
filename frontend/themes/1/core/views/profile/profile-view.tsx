@@ -19,15 +19,15 @@ export default function ProfileView({ data: dataApi }: ProfileViewProps) {
       <div className="bg-card">
         <div className="container">
           <div className="bg-secondary h-40 rounded-b-md" />
-          <div className="md:-mt-16 -mt-24 px-5 pb-5 flex flex-col md:flex-row md:items-end items-center md:gap-4 gap-2">
+          <div className="-mt-24 flex flex-col items-center gap-2 px-5 pb-5 md:-mt-16 md:flex-row md:items-end md:gap-4">
             <AvatarUser sizeInRem={8} user={data} />
 
-            <div className="flex flex-col md:flex-row text-center md:text-left md:mt-20 w-full gap-4">
-              <div className="flex flex-col md:items-start items-center md:mr-auto gap-1">
-                <h1 className="font-semibold text-2xl">{data.name}</h1>
+            <div className="flex w-full flex-col gap-4 text-center md:mt-20 md:flex-row md:text-left">
+              <div className="flex flex-col items-center gap-1 md:mr-auto md:items-start">
+                <h1 className="text-2xl font-semibold">{data.name}</h1>
                 <span>{convertText(data.group.name)}</span>
               </div>
-              <div className="flex md:justify-end justify-center items-center gap-2 flex-wrap">
+              <div className="flex flex-wrap items-center justify-center gap-2 md:justify-end">
                 <Button>Test 123</Button>
                 <Button>Test 123</Button>
                 <Button>Test 123</Button>

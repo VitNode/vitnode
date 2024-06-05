@@ -40,7 +40,7 @@ export const ColorTabThemeEditor = () => {
 
       <Separator />
 
-      <div className="p-5 space-y-2">
+      <div className="space-y-2 p-5">
         <FormField
           control={form.control}
           name="colors.primary"

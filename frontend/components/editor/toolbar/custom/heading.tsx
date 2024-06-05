@@ -91,19 +91,19 @@ export const HeadingToolbarEditor = () => {
         editor.chain().setHeading({ level }).run();
       }}
     >
-      <SelectTrigger className="shadow-none border-0 hover:bg-muted h-9 [&>svg:not(:last-child)]:size-5 w-14 p-0 justify-center gap-1">
+      <SelectTrigger className="hover:bg-muted h-9 w-14 justify-center gap-1 border-0 p-0 shadow-none [&>svg:not(:last-child)]:size-5">
         {getHeadingIcon(value)}
       </SelectTrigger>
 
       <SelectContent onCloseAutoFocus={() => editor.commands.focus()}>
         <SelectItem value="0">
-          <span className="flex gap-2 items-center [&>svg]:size-4 flex-wrap">
+          <span className="flex flex-wrap items-center gap-2 [&>svg]:size-4">
             <Pilcrow /> {t("paragraph")}
           </span>
         </SelectItem>
 
         <SelectItem value="1">
-          <span className="flex gap-2 items-center [&>svg]:size-4 flex-wrap">
+          <span className="flex flex-wrap items-center gap-2 [&>svg]:size-4">
             <Code /> {t("code_block.title")}
           </span>
         </SelectItem>
@@ -113,7 +113,7 @@ export const HeadingToolbarEditor = () => {
 
           return (
             <SelectItem key={i} value={(i + 2).toString()}>
-              <span className="flex gap-2 items-center [&>svg]:size-4 flex-wrap">
+              <span className="flex flex-wrap items-center gap-2 [&>svg]:size-4">
                 {getHeadingIcon(i + 2)}
                 {/* eslint-disable-next-line react/jsx-no-comment-textnodes, @typescript-eslint/ban-ts-comment */}
                 {/* @ts-expect-error */}

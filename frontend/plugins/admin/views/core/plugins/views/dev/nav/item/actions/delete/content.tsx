@@ -32,7 +32,7 @@ export const ContentDeleteActionTableNavDevPluginAdmin = ({
         <AlertDialogDescription>
           {t.rich("desc", {
             code: () => (
-              <span className="font-bold text-foreground">{code}</span>
+              <span className="text-foreground font-bold">{code}</span>
             )
           })}
         </AlertDialogDescription>

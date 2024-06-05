@@ -37,31 +37,31 @@ export const ItemForum = ({
 
   return (
     <WrapperItemForum
-      className="px-6 py-4 border-t hover:bg-muted/50 flex gap-4 cursor-pointer flex-col md:flex-row select-none md:select-auto"
+      className="hover:bg-muted/50 flex cursor-pointer select-none flex-col gap-4 border-t px-6 py-4 md:select-auto md:flex-row"
       href={href}
     >
-      <div className="flex gap-4 flex-1">
-        <div className="bg-primary/20 w-10 h-10 rounded-md flex items-center justify-center [&>svg]:w-5 [&>svg]:h-5 text-primary flex-shrink-0">
+      <div className="flex flex-1 gap-4">
+        <div className="bg-primary/20 text-primary flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md [&>svg]:h-5 [&>svg]:w-5">
           <MessagesSquare />
         </div>
 
         <div className="flex flex-col justify-center">
           <Link
             href={href}
-            className="text-lg font-medium text-foreground no-underline"
+            className="text-foreground text-lg font-medium no-underline"
           >
             {convertText(name)}
           </Link>
 
           {description.length > 0 && (
             <ReadOnlyEditor
-              className="text-muted-foreground text-sm [&_p]:m-0 pointer-events-none md:pointer-events-auto"
+              className="text-muted-foreground pointer-events-none text-sm md:pointer-events-auto [&_p]:m-0"
               value={description}
             />
           )}
 
           {children && children.length > 0 && (
-            <div className="flex mt-2 flex-wrap">
+            <div className="mt-2 flex flex-wrap">
               {children.map(child => (
                 <ChildButtonItemForum key={child.id} {...child} />
               ))}
@@ -71,7 +71,7 @@ export const ItemForum = ({
       </div>
 
       {_count.total_topics > 0 && (
-        <div className="flex-shrink-0 flex md:gap-4 gap-2 md:flex-row flex-col md:items-center">
+        <div className="flex shrink-0 flex-col gap-2 md:flex-row md:items-center md:gap-4">
           <StatsItemForum {..._count} />
           <LastPostItemForum lastPosts={lastPosts} />
         </div>

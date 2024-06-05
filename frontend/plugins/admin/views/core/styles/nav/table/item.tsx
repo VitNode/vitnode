@@ -16,18 +16,18 @@ export const ItemContentTableContentNavAdmin = ({ data }: Props) => {
 
   return (
     <>
-      <div className="flex flex-col flex-1">
-        <div className="flex gap-2 items-center">
+      <div className="flex flex-1 flex-col">
+        <div className="flex items-center gap-2">
           <span className="font-semibold">{convertText(data.name)}</span>
         </div>
 
-        <span className="text-muted-foreground text-sm line-clamp-2 flex gap-2 items-center">
+        <span className="text-muted-foreground line-clamp-2 flex items-center gap-2 text-sm">
           {t("href", { href: data.href })}{" "}
           {data.external && <ExternalLink className="size-4" />}
         </span>
 
         {data.description.length > 0 && (
-          <span className="text-muted-foreground text-sm line-clamp-2">
+          <span className="text-muted-foreground line-clamp-2 text-sm">
             {convertText(data.description)}
           </span>
         )}

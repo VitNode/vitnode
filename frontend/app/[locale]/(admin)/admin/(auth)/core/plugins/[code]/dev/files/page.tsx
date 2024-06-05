@@ -42,10 +42,10 @@ export default async function Page({ params: { code } }: Props) {
   ]);
 
   return (
-    <ul className="rounded-md border [&>li:not(:last-child)]:border-b max-w-[40rem]">
+    <ul className="max-w-[40rem] rounded-md border [&>li:not(:last-child)]:border-b">
       {Object.entries(data.admin__core_plugins__files).map(item => (
         <li
-          className="p-4 flex gap-2 items-center justify-between"
+          className="flex items-center justify-between gap-2 p-4"
           key={item[0]}
         >
           {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
@@ -53,7 +53,7 @@ export default async function Page({ params: { code } }: Props) {
           {t(item[0])}
 
           <span
-            className={cn("text-sm text-right", {
+            className={cn("text-right text-sm", {
               "text-muted-foreground italic": !item[1],
               "text-primary font-semibold": item[1],
               "text-destructive font-semibold":

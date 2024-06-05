@@ -42,7 +42,7 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({
             <p>
               {t.rich("form_confirm_text", {
                 text: () => (
-                  <span className="font-semibold text-foreground">
+                  <span className="text-foreground font-semibold">
                     {formatName}
                   </span>
                 )

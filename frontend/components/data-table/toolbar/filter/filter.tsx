@@ -31,7 +31,7 @@ export function FilterToolbarDataTable({
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline" size="sm" className="h-10">
-          <PlusCircledIcon className="mr-2 h-4 w-4" />
+          <PlusCircledIcon className="mr-2 size-4" />
           {title}
           {selectedValues.length > 0 && (
             <>
@@ -55,7 +55,7 @@ export function FilterToolbarDataTable({
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="w-[14rem] p-0" align="start">
+      <PopoverContent className="w-56 p-0" align="start">
         <FilterToolbarDataTableContext.Provider value={{ title, id }}>
           <React.Suspense fallback={<Loader className="p-4" />}>
             {children}

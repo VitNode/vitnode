@@ -31,12 +31,12 @@ export const PluginsCoreAdminView = ({
 
           return (
             <div>
-              <div className="flex gap-2 items-center">
+              <div className="flex items-center gap-2">
                 <span className="font-semibold">{data.name}</span>
                 {data.default && <Badge>{tCore("default")}</Badge>}
               </div>
               {data.description && (
-                <p className="text-sm text-muted-foreground max-w-80 truncate">
+                <p className="text-muted-foreground max-w-80 truncate text-sm">
                   {data.description}
                 </p>
               )}

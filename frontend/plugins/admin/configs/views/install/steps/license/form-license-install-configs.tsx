@@ -41,7 +41,7 @@ export const FormLicenseInstallConfigs = () => {
   return (
     <Form {...form}>
       <form
-        className="flex flex-col gap-4 items-start"
+        className="flex flex-col items-start gap-4"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField

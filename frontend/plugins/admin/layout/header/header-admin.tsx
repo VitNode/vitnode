@@ -8,10 +8,10 @@ import { NavAdmin } from "../nav/nav-admin";
 
 export const HeaderAdmin = () => {
   return (
-    <header className="h-16 fixed top-0 left-0 right-0 z-20 bg-card/75 border-b backdrop-blur flex">
+    <header className="bg-card/75 fixed left-0 right-0 top-0 z-20 flex h-16 border-b backdrop-blur">
       {CONFIG.node_development && (
         <div
-          className="absolute top-0 left-0 w-full h-1 z-50"
+          className="absolute left-0 top-0 z-50 h-1 w-full"
           style={{
             backgroundImage:
               "repeating-linear-gradient(-55deg,#000, #000 20px, #ffb103 20px, #feb100 40px)"
@@ -19,14 +19,14 @@ export const HeaderAdmin = () => {
         />
       )}
 
-      <div className="sm:w-64 pl-5 flex items-center h-full">
+      <div className="flex h-full items-center pl-5 sm:w-64">
         <Link href="/admin/core/dashboard">
-          <LogoVitNode className="h-8 sm:block hidden" />
+          <LogoVitNode className="hidden h-8 sm:block" />
           <LogoVitNode className="h-8 sm:hidden" shrink />
         </Link>
       </div>
 
-      <div className="flex items-center gap-5 px-5 h-full flex-1">
+      <div className="flex h-full flex-1 items-center gap-5 px-5">
         <div className="ml-auto flex items-center justify-center gap-2">
           <LanguageSwitcher />
           <DarkLightModeSwitcher />

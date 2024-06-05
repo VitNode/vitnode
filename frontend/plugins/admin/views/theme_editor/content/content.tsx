@@ -25,10 +25,10 @@ export const ContentThemeEditor = () => {
   };
 
   return (
-    <div className="flex-1 relative flex flex-col">
+    <div className="relative flex flex-1 flex-col">
       <Form {...form}>
         <form
-          className="flex flex-col flex-1 overflow-hidden relative"
+          className="relative flex flex-1 flex-col overflow-hidden"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <AnimatePresence mode="popLayout" initial={false}>
@@ -52,7 +52,7 @@ export const ContentThemeEditor = () => {
               {tabs[activeTab]}
             </motion.div>
 
-            <div className="mt-auto sticky bottom-0 left-0 w-full p-3 flex items-center gap-1 border-t bg-card/75 backdrop-blur">
+            <div className="bg-card/75 sticky bottom-0 left-0 mt-auto flex w-full items-center gap-1 border-t p-3 backdrop-blur">
               <Link
                 href="/"
                 className={buttonVariants({

@@ -17,13 +17,13 @@ export const ItemNavAdmin = ({ id, items }: Props) => {
   return (
     <div>
       {id !== "core" && (
-        <div className="text-muted-foreground text-sm px-4">
+        <div className="text-muted-foreground px-4 text-sm">
           {t("nav.title")}
         </div>
       )}
 
-      <div className="transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden">
-        <ul className="py-2 space-y-1">
+      <div className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden transition-all">
+        <ul className="space-y-1 py-2">
           {items.map(item => (
             <li key={item.id}>
               <LinkItemNavAdmin

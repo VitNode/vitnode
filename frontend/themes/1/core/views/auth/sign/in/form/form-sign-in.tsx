@@ -30,7 +30,7 @@ export const FormSignIn = () => {
           <div className="space-y-4">
             {error?.extensions?.code === "ACCESS_DENIED" && (
               <Alert variant="destructive">
-                <AlertCircle className="h-4 w-4" />
+                <AlertCircle className="size-4" />
                 <AlertTitle>{t("sign_in.error.title")}</AlertTitle>
                 <AlertDescription>{t("sign_in.error.desc")}</AlertDescription>
               </Alert>
@@ -38,7 +38,7 @@ export const FormSignIn = () => {
 
             {error && error.extensions?.code !== "ACCESS_DENIED" && (
               <Alert variant="destructive">
-                <AlertCircle className="h-4 w-4" />
+                <AlertCircle className="size-4" />
                 <AlertTitle>{t("errors.title")}</AlertTitle>
                 <AlertDescription>
                   {t("errors.internal_server_error")}

@@ -43,7 +43,7 @@ export const Img = ({
 }: ImgProps) => {
   return (
     <div
-      className={cn("relative overflow-hidden leading-[0] w-fit", className)}
+      className={cn("relative w-fit overflow-hidden leading-[0]", className)}
       style={{
         height: !height
           ? heightLoading

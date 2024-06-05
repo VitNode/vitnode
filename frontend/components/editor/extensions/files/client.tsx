@@ -25,7 +25,7 @@ const FileFromNextWithNode = ({
             src={`${CONFIG.graphql_public_url}/${data.dir_folder}/${data.file_name}`}
             alt={data.file_alt ?? data.file_name_original}
             sizes="100vw"
-            className="w-full h-auto"
+            className="h-auto w-full"
             width={data.width}
             height={data.height}
           />
@@ -37,17 +37,17 @@ const FileFromNextWithNode = ({
   return (
     <NodeViewWrapper className="inline-block" data-drag-handle="" draggable>
       <button
-        className="bg-muted hover:bg-accent rounded-md text-sm font-medium transition-colors cursor-gap text-left"
+        className="cursor-gap bg-muted hover:bg-accent rounded-md text-left text-sm font-medium transition-colors"
         type="button"
         tabIndex={-1}
       >
-        <div className="flex gap-5 items-center px-5 py-2">
-          <File className="size-7 text-muted-foreground" />
+        <div className="flex items-center gap-5 px-5 py-2">
+          <File className="text-muted-foreground size-7" />
           <div className="pointer-events-none select-none">
-            <span className="truncate block leading-tight max-w-80">
+            <span className="block max-w-80 truncate leading-tight">
               {data.file_name_original}
             </span>
-            <div className="text-sm text-muted-foreground space-x-2">
+            <div className="text-muted-foreground space-x-2 text-sm">
               <span>{formatBytes(data?.file_size ?? 0)}</span>
               <span>&middot;</span>
               <span>{data.mimetype}</span>

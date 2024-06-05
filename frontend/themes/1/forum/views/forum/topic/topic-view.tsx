@@ -44,12 +44,12 @@ export default function TopicView({ data: dataApi }: TopicViewProps) {
 
   return (
     <div className="space-y-5">
-      <div className="flex flex-col gap-1 mb-5">
-        <h1 className="text-2xl font-semibold tracking-tight leading-tight flex-1 break-words">
+      <div className="mb-5 flex flex-col gap-1">
+        <h1 className="flex-1 break-words text-2xl font-semibold leading-tight tracking-tight">
           {convertText(title)}
         </h1>
 
-        <div className="flex items-center gap-2 flex-wrap text-sm">
+        <div className="flex flex-wrap items-center gap-2 text-sm">
           {locked && (
             <TitleIconTopic variant="destructive">
               <Lock /> {t("closed")}
@@ -119,7 +119,7 @@ export default function TopicView({ data: dataApi }: TopicViewProps) {
           </>
         )}
       </AnimatePresenceClient>
-      {permissions.can_reply && <CreatePost className="mt-5 -mx-4 sm:mx-0" />}
+      {permissions.can_reply && <CreatePost className="-mx-4 mt-5 sm:mx-0" />}
     </div>
   );
 }

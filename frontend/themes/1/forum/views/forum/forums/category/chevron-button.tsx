@@ -17,7 +17,7 @@ export const ChevronCategoryForumButton = ({ id }: Props) => {
 
   return (
     <Button
-      className="text-muted-foreground hover:text-foreground flex-shrink-0 [&[data-state=open]>svg]:rotate-180 [&>svg]:transition-transform"
+      className="text-muted-foreground hover:text-foreground flex-shrink-0 [&>svg]:transition-transform [&[data-state=open]>svg]:rotate-180"
       variant="ghost"
       size="icon"
       data-state={open ? "open" : "closed"}

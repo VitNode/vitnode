@@ -9,7 +9,7 @@ interface Props {
 
 export const Loader = ({ className, small }: Props) => {
   return (
-    <div className={cn("flex justify-center items-center", className)}>
+    <div className={cn("flex items-center justify-center", className)}>
       <Loader2
         className={cn("h-10 w-10 animate-spin", {
           "h-4 w-4": small

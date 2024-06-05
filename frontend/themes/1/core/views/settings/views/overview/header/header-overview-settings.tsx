@@ -11,11 +11,11 @@ export const HeaderOverviewSettings = () => {
 
   return (
     <CardHeader>
-      <div className="flex flex-col gap-4 items-center sm:flex-row sm:gap-5">
+      <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-5">
         <ChangeAvatar />
         <div className="flex flex-col space-y-1 text-center sm:text-left">
           <h1 className="text-3xl font-medium leading-none">{name}</h1>
-          <p className="leading-none text-muted-foreground">{email}</p>
+          <p className="text-muted-foreground leading-none">{email}</p>
         </div>
       </div>
     </CardHeader>

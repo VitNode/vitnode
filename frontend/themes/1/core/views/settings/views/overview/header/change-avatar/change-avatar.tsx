@@ -36,7 +36,7 @@ export const ChangeAvatar = () => {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="absolute bottom-[-0.5rem] left-[-0.5rem]"
+                  className="absolute -bottom-2 -left-2"
                   ariaLabel=""
                 >
                   <ImageIcon size={20} />

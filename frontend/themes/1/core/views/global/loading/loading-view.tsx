@@ -14,7 +14,7 @@ export const LoadingView = ({ className, global }: Props) => {
 
   const content = (
     <Card>
-      <CardHeader className="gap-2 items-center text-center">
+      <CardHeader className="items-center gap-2 text-center">
         {t("loading")} <Loader />
       </CardHeader>
     </Card>

@@ -36,14 +36,14 @@ export const TextAlignToolbarEditor = () => {
       <PopoverTrigger asChild>
         <ButtonToolbarEditor
           name="align"
-          className="w-14 p-0 justify-center gap-1 h-9 [&>svg:not(:last-child)]:size-5 [&>svg:last-child]:size-4"
+          className="h-9 w-14 justify-center gap-1 p-0 [&>svg:last-child]:size-4 [&>svg:not(:last-child)]:size-5"
         >
           {getCurrentIcon()}
           <ChevronDownIcon className="opacity-50" />
         </ButtonToolbarEditor>
       </PopoverTrigger>
 
-      <PopoverContent className="p-2 flex flex-wrap gap-1 max-w-80 w-fit">
+      <PopoverContent className="flex w-fit max-w-80 flex-wrap gap-1 p-2">
         <ToggleToolbarEditor
           pressed={editor.isActive({ textAlign: "left" })}
           onPressedChange={() => {

@@ -19,9 +19,9 @@ export const ToolBarEditor = () => {
   return (
     <div
       className={cn(
-        "bg-background p-1 rounded-t-sm flex gap-1 items-center flex-wrap border-b",
+        "bg-background flex flex-wrap items-center gap-1 rounded-t-sm border-b p-1",
         {
-          "sticky top-[4rem] z-10 overflow-auto max-h-[26vh]":
+          "sticky top-[4rem] z-10 max-h-[26vh] overflow-auto":
             config.editor.sticky
         }
       )}

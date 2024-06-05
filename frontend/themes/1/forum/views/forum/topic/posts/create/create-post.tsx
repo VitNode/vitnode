@@ -18,7 +18,7 @@ interface Props {
 export const CreatePost = ({ className }: Props) => {
   return (
     <Card className={className}>
-      <CardContent className="sm:p-5 p-4">
+      <CardContent className="p-4 sm:p-5">
         <React.Suspense fallback={<EditorSkeleton />}>
           <ContentCreatePost />
         </React.Suspense>

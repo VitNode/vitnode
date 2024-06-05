@@ -43,7 +43,7 @@ export const ContentFilesSettings = ({
           const alt = data?.file_alt ?? data?.file_name ?? "";
 
           return (
-            <div className="rounded-lg flex items-center w-20 h-14 justify-center relative overflow-hidden flex-shrink-0">
+            <div className="relative flex h-14 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg">
               {data.width && data.height && src ? (
                 <Image
                   src={src}
@@ -53,7 +53,7 @@ export const ContentFilesSettings = ({
                   fill
                 />
               ) : (
-                <File className="size-8 text-muted-foreground" />
+                <File className="text-muted-foreground size-8" />
               )}
             </div>
           );
@@ -67,10 +67,10 @@ export const ContentFilesSettings = ({
 
           return (
             <div>
-              <span className="truncate leading-tight max-w-80 block">
+              <span className="block max-w-80 truncate leading-tight">
                 {data.file_name_original}
               </span>
-              <div className="text-sm text-muted-foreground flex gap-2 flex-wrap items-center">
+              <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-sm">
                 <span>{data.mimetype}</span>
                 {data?.width && data?.height && (
                   <>
@@ -123,11 +123,11 @@ export const ContentFilesSettings = ({
 
           if (data.count_uses === 0) {
             return (
-              <div className="flex gap-2 items-center">
+              <div className="flex items-center gap-2">
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger>
-                      <Clock className="size-4 text-destructive" />
+                      <Clock className="text-destructive size-4" />
                     </TooltipTrigger>
                     <TooltipContent>{t("temp_file")}</TooltipContent>
                   </Tooltip>

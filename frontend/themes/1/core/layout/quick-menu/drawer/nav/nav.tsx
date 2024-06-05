@@ -25,7 +25,7 @@ export const NavDrawerQuickMenu = ({ navIcons }: Props) => {
     <Accordion.Root
       type="multiple"
       defaultValue={activeItems}
-      className={cn("px-2 flex flex-col", {
+      className={cn("flex flex-col px-2", {
         "pb-5": !session
       })}
     >
@@ -54,9 +54,9 @@ export const NavDrawerQuickMenu = ({ navIcons }: Props) => {
                 <span>{convertText(item.name)}</span>
                 <ChevronDown
                   className={cn(
-                    "w-5 h-5 ml-auto transition-transform flex-shrink-0",
+                    "ml-auto h-5 w-5 flex-shrink-0 transition-transform",
                     {
-                      "transform rotate-180": activeItems.includes(
+                      "rotate-180 transform": activeItems.includes(
                         item.id.toString()
                       )
                     }
@@ -64,18 +64,18 @@ export const NavDrawerQuickMenu = ({ navIcons }: Props) => {
                 />
               </Accordion.Trigger>
 
-              <Accordion.Content className="transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden">
+              <Accordion.Content className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden transition-all">
                 <div className="pl-5">
                   {item.children.map(child => (
                     <ItemNavDrawerQuickMenu key={child.id} {...child}>
-                      <div className="flex items-center gap-2 [&>svg]:text-muted-foreground">
+                      <div className="[&>svg]:text-muted-foreground flex items-center gap-2">
                         {child.icon
                           ? navIcons.find(el => el.id === child.id)?.icon
                           : null}
                         <span>{convertText(child.name)}</span>
                       </div>
                       {child.description.length > 0 && (
-                        <span className="text-sm leading-none text-muted-foreground">
+                        <span className="text-muted-foreground text-sm leading-none">
                           {convertText(child.description)}
                         </span>
                       )}
@@ -92,7 +92,7 @@ export const NavDrawerQuickMenu = ({ navIcons }: Props) => {
             {item.icon ? navIcons.find(el => el.id === item.id)?.icon : null}
             <span>{convertText(item.name)}</span>
             {item.description.length > 0 && (
-              <span className="text-sm leading-none text-muted-foreground">
+              <span className="text-muted-foreground text-sm leading-none">
                 {convertText(item.description)}
               </span>
             )}

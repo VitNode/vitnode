@@ -24,7 +24,7 @@ export default function Layout({ children, copyright }: Props) {
    * ! Thank you for your support!
    */
   const poweredBy = (
-    <footer className="text-center p-5 text-sm md:mb-0 mb-16 flex flex-col gap-2 items-center justify-center">
+    <footer className="mb-16 flex flex-col items-center justify-center gap-2 p-5 text-center text-sm md:mb-0">
       {copyright && <span>{convertText(copyright)}</span>}
       <PoweredByVitNode className="text-muted-foreground no-underline" />
     </footer>

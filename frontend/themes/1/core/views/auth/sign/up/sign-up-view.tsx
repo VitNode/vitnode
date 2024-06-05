@@ -13,7 +13,7 @@ export default function SignUpView() {
   const t = useTranslations("core.sign_up");
 
   return (
-    <div className="max-w-[32rem] mx-auto py-10">
+    <div className="mx-auto max-w-lg py-10">
       <Card>
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl">{t("title")}</CardTitle>

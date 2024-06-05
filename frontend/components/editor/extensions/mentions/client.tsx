@@ -101,7 +101,7 @@ const ComponentList = ({ command, items, ref }: ComponentListProps) => {
           </Button>
         ))
       ) : (
-        <div className="italic text-muted-foreground">{t("no_results")}</div>
+        <div className="text-muted-foreground italic">{t("no_results")}</div>
       )}
     </>
   );

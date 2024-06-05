@@ -38,14 +38,14 @@ export const LinkItemNavAdmin = ({
   const active = pathname.startsWith(`/admin/${primaryId}/${id}`);
   const isChildActive =
     children?.some(child =>
-      pathname.startsWith(`/admin/${primaryId}/${child.href}`)
+      pathname.startsWith(`/admin/${primaryId}/${id}/${child.href}`)
     ) ?? false;
 
   const buttonClass = (active: boolean) =>
     cn(
-      "w-full justify-start relative hover:bg-primary/10 text-foreground [&>svg]:size-4 [&>svg]:flex-shrink-0 [&>svg]:flex [&>svg]:items-center [&>svg]:justify-center [&>svg]:text-muted-foreground h-8 font-normal [&[data-state=open]>svg:not(:first-child)]:rotate-180",
+      "hover:bg-primary/10 text-foreground [&>svg]:text-muted-foreground relative h-8 w-full justify-start font-normal [&>svg]:flex [&>svg]:size-4 [&>svg]:flex-shrink-0 [&>svg]:items-center [&>svg]:justify-center [&[data-state=open]>svg:not(:first-child)]:rotate-180",
       {
-        "bg-primary/10 ": active
+        "bg-primary/10": active
       }
     );
 
@@ -68,7 +68,7 @@ export const LinkItemNavAdmin = ({
             <ChevronDown className="ml-auto transition-transform" />
             {active && (
               <motion.div
-                className="absolute left-1 w-1 h-[calc(100%_-_1rem)] bg-primary rounded-md"
+                className="bg-primary absolute left-1 h-[calc(100%_-_1rem)] w-1 rounded-md"
                 layoutId="admin_nav_underline"
               />
             )}
@@ -89,7 +89,7 @@ export const LinkItemNavAdmin = ({
 
           {active && (
             <motion.div
-              className="absolute left-1 w-1 h-[calc(100%_-_1rem)] bg-primary rounded-md"
+              className="bg-primary absolute left-1 h-[calc(100%_-_1rem)] w-1 rounded-md"
               layoutId="admin_nav_underline"
             />
           )}
@@ -97,8 +97,8 @@ export const LinkItemNavAdmin = ({
       )}
 
       {children && children.length > 0 && (
-        <Accordion.Content className="transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden my-1">
-          <div className="space-y-1 ml-7">
+        <Accordion.Content className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down my-1 overflow-hidden transition-all">
+          <div className="ml-7 space-y-1">
             {children.map(child => {
               const href = `/admin/${primaryId}/${id}/${child.href}`;
               const active = pathname.startsWith(href);

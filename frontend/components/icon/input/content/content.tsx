@@ -47,7 +47,7 @@ export const ContentIconInput = (props: IconInputProps) => {
 
   return (
     <>
-      <div className="flex flex-col gap-3 sticky top-0 bg-popover z-10 p-4">
+      <div className="bg-popover sticky top-0 z-10 flex flex-col gap-3 p-4">
         <Tabs>
           <TabsTrigger
             id={Tab.Icon}
@@ -86,7 +86,7 @@ export const ContentIconInput = (props: IconInputProps) => {
         </div>
       </div>
 
-      <div className="p-4 pt-0 max-h-64">
+      <div className="max-h-64 p-4 pt-0">
         <React.Suspense fallback={<Loader />}>
           {activeTab === Tab.Icon ? (
             <IconsContentIconInput search={search} {...props} />

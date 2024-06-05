@@ -34,7 +34,7 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
         control={form.control}
         name="content.files_allow_upload"
         render={({ field }) => (
-          <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 gap-2">
+          <FormItem className="flex flex-row items-center justify-between gap-2 rounded-lg border p-4">
             <div className="space-y-0.5">
               <FormLabel className="text-base">
                 {t("files.allow_upload")}
@@ -61,7 +61,7 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
                 return (
                   <FormItem>
                     <FormLabel>{t("files.total_max_storage")}</FormLabel>
-                    <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex flex-wrap items-center gap-2">
                       <FormControl>
                         <Input
                           className="max-w-32"
@@ -76,7 +76,7 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
                         />
                       </FormControl>
                       <span>{t("in_kb")}</span>
-                      <div className="flex items-center gap-2 flex-shrink-0">
+                      <div className="flex shrink-0 items-center gap-2">
                         <span>{tCore("or")}</span>
                         <Checkbox
                           id="content.files_total_max_storage.unlimited"
@@ -123,7 +123,7 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
                   <FormLabel>
                     {t("files.max_storage_for_submit.label")}
                   </FormLabel>
-                  <div className="flex items-center gap-2 flex-wrap">
+                  <div className="flex flex-wrap items-center gap-2">
                     <FormControl>
                       <Input
                         className="max-w-32"
@@ -138,7 +138,7 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
                       />
                     </FormControl>
                     <span>{t("in_kb")}</span>
-                    <div className="flex items-center gap-2 flex-shrink-0">
+                    <div className="flex shrink-0 items-center gap-2">
                       <span>{tCore("or")}</span>
                       <Checkbox
                         id="content.files_max_storage_for_submit.unlimited"

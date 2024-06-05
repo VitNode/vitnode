@@ -28,7 +28,7 @@ export const ButtonToolbarEditor = ({
   return (
     <Button
       variant="ghost"
-      className={cn("shadow-none size-9 hover:bg-muted", className, {
+      className={cn("hover:bg-muted size-9 shadow-none", className, {
         "bg-accent": active
       })}
       size="icon"

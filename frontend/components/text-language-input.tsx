@@ -42,7 +42,7 @@ export const TextLanguageInput = ({
     "";
 
   return (
-    <div className={cn("flex gap-2 flex-col w-full", className)}>
+    <div className={cn("flex w-full flex-col gap-2", className)}>
       <Input
         className="w-full"
         type="text"

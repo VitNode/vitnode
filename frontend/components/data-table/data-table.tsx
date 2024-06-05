@@ -152,7 +152,7 @@ export function DataTable<TData extends TDataMin>({
                       {row.getVisibleCells().map(cell => (
                         <TableCell key={cell.id}>
                           {cell.column.id === "actions" ? (
-                            <div className="flex items-center gap-1 justify-end">
+                            <div className="flex items-center justify-end gap-1">
                               {flexRender(
                                 cell.column.columnDef.cell,
                                 cell.getContext()
@@ -183,12 +183,12 @@ export function DataTable<TData extends TDataMin>({
           </div>
 
           {pageInfo && (
-            <div className="flex items-center sm:justify-end justify-center px-2 pt-4 gap-4 flex-wrap">
-              <span className="text-sm text-muted-foreground">
+            <div className="flex flex-wrap items-center justify-center gap-4 px-2 pt-4 sm:justify-end">
+              <span className="text-muted-foreground text-sm">
                 {t("table.total_count", { count: pageInfo.totalCount })}
               </span>
 
-              <div className="flex items-center flex-wrap gap-4 justify-center">
+              <div className="flex flex-wrap items-center justify-center gap-4">
                 <TooltipProvider>
                   <Tooltip>
                     <Select

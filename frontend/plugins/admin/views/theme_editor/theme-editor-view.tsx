@@ -43,15 +43,15 @@ export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
         ...rest
       }}
     >
-      <div className="flex h-screen bg-card w-full">
-        <div className="flex-1 flex items-center justify-center">
+      <div className="bg-card flex h-screen w-full">
+        <div className="flex flex-1 items-center justify-center">
           <iframe
             ref={iframeRef}
             title={CONFIG.frontend_url}
             className={cn("bg-background transition-all", {
-              "w-full h-full": activeMode === "desktop",
-              "w-[768px] h-5/6 rounded-md border": activeMode === "tablet",
-              "w-[375px] h-5/6 rounded-md border": activeMode === "mobile"
+              "h-full w-full": activeMode === "desktop",
+              "h-5/6 w-[768px] rounded-md border": activeMode === "tablet",
+              "h-5/6 w-[375px] rounded-md border": activeMode === "mobile"
             })}
             src={CONFIG.frontend_url}
             onLoad={() => {
@@ -74,7 +74,7 @@ export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
           />
         </div>
 
-        <div className="w-80 flex-shrink-0 shadow-lg border-l flex overflow-auto">
+        <div className="flex w-80 shrink-0 overflow-auto border-l shadow-lg">
           <ToolbarThemeEditor
             setActiveMode={setActiveMode}
             activeMode={activeMode}

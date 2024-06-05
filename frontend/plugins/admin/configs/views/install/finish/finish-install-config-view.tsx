@@ -24,7 +24,7 @@ export const FinishInstallConfigsView = () => {
       <CardContent>
         <p>{t("text")}</p>
       </CardContent>
-      <CardFooter className="flex justify-center items-center gap-4">
+      <CardFooter className="flex items-center justify-center gap-4">
         <Link href="/" className={buttonVariants()}>
           <Home /> {t("buttons.home_page")}
         </Link>

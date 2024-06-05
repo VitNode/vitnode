@@ -19,7 +19,7 @@ export const ToolbarDataTable = ({
   if (!searchPlaceholder && filters && filters && advancedFilters) return null;
 
   return (
-    <div className="flex gap-2 items-center flex-wrap">
+    <div className="flex flex-wrap items-center gap-2">
       {searchPlaceholder && (
         <SearchToolbarDataTable
           startTransition={startTransition}

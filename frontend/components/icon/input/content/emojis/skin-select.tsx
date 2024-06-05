@@ -34,13 +34,13 @@ export const SkinSelectEmojisContentIconInput = ({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          className="flex-shrink-0 size-9"
+          className="size-9 shrink-0"
           size="icon"
           variant="ghost"
           ariaLabel={t("skin.title")}
         >
           <div
-            className="w-5 h-5 rounded-md"
+            className="size-5 rounded-md"
             style={{ backgroundColor: `hsl(${skinToneEmoji[skinToneIndex]})` }}
           />
         </Button>
@@ -59,9 +59,9 @@ export const SkinSelectEmojisContentIconInput = ({
               setSkinToneIndex(index);
             }}
           >
-            {skinToneIndex === index && <Check className="h-4 w-4" />}
+            {skinToneIndex === index && <Check className="size-4" />}
             <div
-              className="w-5 h-5 rounded-md"
+              className="size-5 rounded-md"
               style={{ backgroundColor: `hsl(${skinToneEmoji[index]})` }}
             />
             {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
