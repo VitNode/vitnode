@@ -163,7 +163,7 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
   }: {
     config: ConfigPlugin;
   }): Promise<void> {
-    const frontendPaths = ["admin_pages", "pages", "plugin"];
+    const frontendPaths = ["admin_pages", "pages", "plugin", "pages_container"];
     await Promise.all(
       frontendPaths.map(async path => {
         const source = join(this.tempPath, "frontend", path);
