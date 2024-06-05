@@ -29,11 +29,12 @@ export class EditAdminMainSettingsService {
     site_description: EditAdminMainSettingsArgs["site_description"];
   }) {
     const update = site_description.map(el => {
-      const item = el.value
-        ? el
-        : site_description.find(el => el.language_code === "en")?.value
-          ? site_description.find(el => el.language_code === "en")
-          : site_description.find(el => el.value);
+      const item =
+        el.value !== undefined
+          ? el
+          : site_description.find(el => el.language_code === "en")?.value
+            ? site_description.find(el => el.language_code === "en")
+            : site_description.find(el => el.value);
 
       const path = join(
         ABSOLUTE_PATHS.uploads.public,

@@ -76,7 +76,7 @@ export const NavAdmin = async () => {
         id="members"
         items={[
           {
-            id: "list",
+            id: "users",
             href: "users",
             icon: "Users"
           },

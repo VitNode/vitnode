@@ -19,11 +19,15 @@ const config = () => {
   return {
     // TODO: Remove this when the framer-motion issue is fixed for React 19
     reactStrictMode: false,
-    // logging: {
-    //   fetches: {
-    //     fullUrl: true
-    //   }
-    // },
+    logging: {
+      fetches: {
+        fullUrl: true,
+        reactCompiler: true
+      }
+    },
+    experimental: {
+      ppr: true
+    },
     output: "standalone",
     transpilePackages: ["lucide-react"],
     images: {

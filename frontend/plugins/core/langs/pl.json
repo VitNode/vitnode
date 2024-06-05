@@ -374,7 +374,7 @@
     "admin": {
       "nav": {
         "title": "Użytkownicy",
-        "list": "Użytkownicy",
+        "users": "Lista użytkowników",
         "groups": "Grupy",
         "staff": "Personel",
         "staff_moderators": "Moderatorzy",

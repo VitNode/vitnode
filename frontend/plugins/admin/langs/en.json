@@ -374,7 +374,7 @@
     },
     "members": {
       "users": {
-        "title": "Users",
+        "title": "Users List",
         "search_placeholder": "Search by name or email...",
         "filters": {
           "groups": "Groups"

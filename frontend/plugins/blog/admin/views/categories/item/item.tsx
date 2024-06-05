@@ -5,7 +5,7 @@ interface Props {
   data: ShowBlogCategories;
 }
 
-export const ItemTableCategoriesCategoryAdmin = ({ data }: Props) => {
+export const ItemCategoriesCategoryAdmin = ({ data }: Props) => {
   const { convertText } = useTextLang();
 
   return (
