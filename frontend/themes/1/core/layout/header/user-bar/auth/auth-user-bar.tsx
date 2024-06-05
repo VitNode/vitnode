@@ -36,7 +36,7 @@ export const AuthUserBar = () => {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="sm:flex hidden rounded-full flex-shrink-0"
+          className="hidden shrink-0 rounded-full sm:flex"
           size="icon"
           ariaLabel=""
         >
@@ -46,8 +46,8 @@ export const AuthUserBar = () => {
       <DropdownMenuContent className="w-80 p-2" align="end">
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="font-medium leading-none text-base">{name}</p>
-            <p className="text-xs leading-none text-muted-foreground">
+            <p className="text-base font-medium leading-none">{name}</p>
+            <p className="text-muted-foreground text-xs leading-none">
               {email}
             </p>
           </div>

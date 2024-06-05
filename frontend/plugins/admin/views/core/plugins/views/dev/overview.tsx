@@ -22,7 +22,7 @@ export const OverviewDevPluginAdminView = ({ data }: Props) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-4 max-w-[40rem]"
+          className="max-w-[40rem] space-y-4"
         >
           <FormCreateEditPluginAdmin form={form} isEdit />
 

@@ -30,7 +30,7 @@ export const TableThemesAdmin = ({
           const data = row.original;
 
           return (
-            <div className="flex gap-2 items-center">
+            <div className="flex items-center gap-2">
               <span className="font-semibold">{data.name}</span>
               {CONFIG.node_development && (
                 <Badge variant="outline">ID: {data.id}</Badge>

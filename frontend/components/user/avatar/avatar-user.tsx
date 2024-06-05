@@ -23,7 +23,7 @@ export const AvatarUser = ({
 }: Props) => {
   return (
     <Img
-      className={cn("rounded-full flex-shrink-0", className)}
+      className={cn("flex-shrink-0 rounded-full", className)}
       imageClassName="object-cover"
       src={
         avatar

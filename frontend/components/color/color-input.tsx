@@ -44,7 +44,7 @@ export const ColorInput = ({
         <PopoverTrigger asChild>
           <Button
             variant="outline"
-            className={cn("justify-start flex-1 max-w-52", {
+            className={cn("max-w-52 flex-1 justify-start", {
               "text-black": color && colorBrightness,
               "text-white": color && !colorBrightness
             })}

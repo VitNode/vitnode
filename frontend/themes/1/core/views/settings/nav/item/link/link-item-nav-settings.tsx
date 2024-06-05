@@ -20,7 +20,7 @@ export const LinkItemNavSettings = ({
       href={href}
       className={cn(
         buttonVariants({ variant: "ghost", size: "sm" }),
-        "justify-start gap-2 relative pl-4",
+        "relative justify-start gap-2 pl-4",
         { "bg-primary/10": active }
       )}
       onClick={onClick}
@@ -29,7 +29,7 @@ export const LinkItemNavSettings = ({
 
       {active && (
         <motion.div
-          className="absolute left-1 w-1 h-[calc(100%_-_1rem)] bg-primary rounded-md"
+          className="bg-primary absolute left-1 h-[calc(100%_-_1rem)] w-1 rounded-md"
           layoutId="settings_user_nav_underline"
         />
       )}

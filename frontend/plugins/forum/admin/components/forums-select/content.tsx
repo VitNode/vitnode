@@ -34,7 +34,7 @@ export const ContentForumsSelect = ({
   return (
     <Command>
       <div className="flex items-center border-b px-3">
-        <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+        <Search className="mr-2 size-4 shrink-0 opacity-50" />
         <Input
           className={cn(
             "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0",

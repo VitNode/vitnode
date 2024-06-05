@@ -80,7 +80,7 @@ export const ManifestMetadataCoreAdminView = (
               label={t("start_url.label")}
               description={t("start_url.desc")}
             >
-              <div className="flex gap-1 items-center flex-wrap">
+              <div className="flex flex-wrap items-center gap-1">
                 <span>{CONFIG.frontend_url}</span>
                 <FormControl>
                   <Input className="w-64" {...field} />

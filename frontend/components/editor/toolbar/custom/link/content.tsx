@@ -97,7 +97,7 @@ export const ContentLinkToolbarEditor = ({ setOpen }: Props) => {
           )}
         />
 
-        <div className="flex gap-2 items-center [&>button]:flex-1 [&>button]:flex-shrink-0">
+        <div className="flex items-center gap-2 [&>button]:flex-1 [&>button]:shrink-0">
           <Button
             onClick={() => {
               editor.chain().unsetLink().run();

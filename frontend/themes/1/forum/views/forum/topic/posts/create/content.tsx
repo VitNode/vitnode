@@ -20,7 +20,7 @@ export const ContentCreatePost = () => {
 
   return (
     <Form {...form}>
-      <form className="flex-1 min-w-0" onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="min-w-0 flex-1" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name="content"

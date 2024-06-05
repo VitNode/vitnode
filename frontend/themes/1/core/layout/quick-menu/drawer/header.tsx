@@ -41,7 +41,7 @@ export const HeaderDrawerQuickMenu = () => {
           </DrawerClose>
         </div>
 
-        <div className="flex gap-2 mt-5 justify-center">
+        <div className="mt-5 flex justify-center gap-2">
           <ThemeSwitcher />
           <LanguageSwitcher />
           <DarkLightModeSwitcher />
@@ -52,12 +52,12 @@ export const HeaderDrawerQuickMenu = () => {
   const { email, name, ...rest } = session;
 
   return (
-    <div className="p-5 py-5 flex gap-2 items-center justify-between">
-      <div className="flex flex-row items-center space-y-0 gap-2 text-left">
+    <div className="flex items-center justify-between gap-2 p-5">
+      <div className="flex flex-row items-center gap-2 space-y-0 text-left">
         <AvatarUser user={{ name, ...rest }} sizeInRem={1.75} />
         <div className="flex flex-col gap-1">
-          <p className="font-medium leading-none text-base">{name}</p>
-          <p className="text-sm leading-none text-muted-foreground">{email}</p>
+          <p className="text-base font-medium leading-none">{name}</p>
+          <p className="text-muted-foreground text-sm leading-none">{email}</p>
         </div>
       </div>
 

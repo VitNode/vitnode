@@ -39,7 +39,7 @@ export const ContentDeleteActionsTableLangsCoreAdmin = ({
             <p>
               {t.rich("form_confirm_text", {
                 text: () => (
-                  <span className="font-semibold text-foreground">{name}</span>
+                  <span className="text-foreground font-semibold">{name}</span>
                 )
               })}
             </p>

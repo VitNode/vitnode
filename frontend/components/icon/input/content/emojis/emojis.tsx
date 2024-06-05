@@ -51,7 +51,7 @@ export const EmojisContentIconInput = ({
       <>
         <div
           className={cn(
-            "pb-2 text-sm sticky top-[7.5rem] bg-popover/80 backdrop-blur",
+            "bg-popover/80 sticky top-[7.5rem] pb-2 text-sm backdrop-blur",
             classNameHeaders
           )}
         >
@@ -59,7 +59,7 @@ export const EmojisContentIconInput = ({
         </div>
         <div className="pb-3 pt-1">
           {searchResults?.length === 0 ? (
-            <div className="p-2 text-muted-foreground">{t("no_results")}</div>
+            <div className="text-muted-foreground p-2">{t("no_results")}</div>
           ) : (
             searchResults?.map(id => {
               const emoji = emojiMart.emojis[id];
@@ -73,7 +73,7 @@ export const EmojisContentIconInput = ({
                 <Button
                   key={`search_${id}`}
                   size="icon"
-                  className="text-2xl size-9"
+                  className="size-9 text-2xl"
                   ariaLabel={emoji.name}
                   variant={value === icon ? "default" : "ghost"}
                   onClick={() => {
@@ -104,7 +104,7 @@ export const EmojisContentIconInput = ({
         <div key={category.id}>
           <div
             className={cn(
-              "pb-2 text-sm sticky top-[7.5rem] bg-popover/80 backdrop-blur",
+              "bg-popover/80 sticky top-[7.5rem] pb-2 text-sm backdrop-blur",
               classNameHeaders
             )}
           >
@@ -125,7 +125,7 @@ export const EmojisContentIconInput = ({
                 <Button
                   key={`${id}_${category.id}`}
                   size="icon"
-                  className="text-2xl size-9"
+                  className="size-9 text-2xl"
                   ariaLabel={emoji.name}
                   variant={value === icon ? "default" : "ghost"}
                   onClick={() => {

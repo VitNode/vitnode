@@ -16,7 +16,7 @@ export const UserBar = () => {
   }
 
   return (
-    <div className="hidden gap-4 items-center justify-center sm:flex">
+    <div className="hidden items-center justify-center gap-4 sm:flex">
       <Link
         href="/login"
         className={buttonVariants({

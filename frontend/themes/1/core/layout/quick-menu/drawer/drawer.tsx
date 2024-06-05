@@ -29,7 +29,7 @@ export const DrawerQuickMenu = ({ navIcons }: Props) => {
       <HeaderDrawerQuickMenu />
 
       {session && (
-        <div className="px-2 flex flex-col">
+        <div className="flex flex-col px-2">
           <DrawerClose asChild>
             <Link
               href={`/profile/${session.name_seo}`}
@@ -67,7 +67,7 @@ export const DrawerQuickMenu = ({ navIcons }: Props) => {
       <NavDrawerQuickMenu navIcons={navIcons} />
 
       {session && (
-        <div className="px-2 pb-5 flex flex-col">
+        <div className="flex flex-col px-2 pb-5">
           {session.is_mod && (
             <DrawerClose asChild>
               <Link

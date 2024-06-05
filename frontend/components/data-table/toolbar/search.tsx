@@ -51,7 +51,7 @@ export const SearchToolbarDataTable = ({
         setValue(value);
         handleSearch(value);
       }}
-      className="w-[150px] lg:w-[250px] flex-grow"
+      className="w-[150px] grow lg:w-[250px]"
     />
   );
 };

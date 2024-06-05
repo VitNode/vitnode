@@ -46,7 +46,7 @@ export const ToolbarThemeEditor = ({ activeMode, setActiveMode }: Props) => {
               size="icon"
               ariaLabel={ariaLabel}
               variant={active ? "default" : "ghost"}
-              className="flex-shrink-0 relative"
+              className="relative shrink-0"
               onClick={onClick}
             >
               {children}
@@ -60,7 +60,7 @@ export const ToolbarThemeEditor = ({ activeMode, setActiveMode }: Props) => {
   };
 
   return (
-    <div className="border-r sticky top-0">
+    <div className="sticky top-0 border-r">
       <div className="flex flex-col gap-1 p-2">
         <ButtonWithTooltip
           active={activeMode === ThemeEditorViewEnum.Desktop}

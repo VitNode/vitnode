@@ -96,7 +96,7 @@ export const AccountInstallConfigsView = () => {
                   </FormControl>
                   {(fieldState.invalid || value.length > 0) && (
                     <div className="mt-1">
-                      <div className="flex justify-between text-xs font-semibold mb-2">
+                      <div className="mb-2 flex justify-between text-xs font-semibold">
                         <span>Weak</span>
                         <span>Strong</span>
                       </div>

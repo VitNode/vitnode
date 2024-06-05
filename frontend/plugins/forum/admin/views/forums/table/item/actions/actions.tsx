@@ -10,7 +10,7 @@ interface ActionsForumAdminProps
 
 export const ActionsForumAdmin = (props: ActionsForumAdminProps) => {
   return (
-    <div className="flex gap-2 flex-shrink-0">
+    <div className="flex shrink-0 gap-2">
       <EditActionForumAdmin {...props} />
       {props.childrenCount === 0 && <DeleteActionForumAdmin {...props} />}
     </div>

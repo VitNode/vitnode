@@ -26,7 +26,7 @@ export const EmojiToolbarEditor = () => {
       <PopoverTrigger asChild>
         <ButtonToolbarEditor
           name="emoji.title"
-          className="w-14 p-0 justify-center gap-1 [&>svg:not(:last-child)]:size-5 [&>svg:last-child]:size-4"
+          className="w-14 justify-center gap-1 p-0 [&>svg:last-child]:size-4 [&>svg:not(:last-child)]:size-5"
         >
           <SmileIcon />
           <ChevronDownIcon className="opacity-50" />

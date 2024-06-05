@@ -22,14 +22,14 @@ export const CategoryForum = ({ children, description, id, name }: Props) => {
       <Card>
         <CardContent className="p-0">
           <div
-            className={cn("px-6 py-4 flex items-center gap-4 justify-between", {
+            className={cn("flex items-center justify-between gap-4 px-6 py-4", {
               //  'border-b': children && children.length > 0
             })}
           >
             <div>
               <Link
                 href={`/forum/${convertNameToLink({ id, name })}`}
-                className="font-medium text-foreground no-underline"
+                className="text-foreground font-medium no-underline"
               >
                 {convertText(name)}
               </Link>

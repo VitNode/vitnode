@@ -15,16 +15,16 @@ export const LayoutConfigs = ({ children }: Props) => {
 
   return (
     <div className="container my-10">
-      <div className="flex items-center justify-center mb-5">
+      <div className="mb-5 flex items-center justify-center">
         <LogoVitNode className="h-16" />
       </div>
 
       {children}
-      <Card className="sm:hidden p-5 text-center">
+      <Card className="p-5 text-center sm:hidden">
         {t("mobile_not_supported")}
       </Card>
 
-      <div className="mt-5 flex flex-col justify-center items-center gap-4">
+      <div className="mt-5 flex flex-col items-center justify-center gap-4">
         <PoweredByVitNode />
 
         <div>

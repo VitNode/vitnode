@@ -21,7 +21,7 @@ export const IconItemListFilesFooterEditor = ({
   }
 
   if (isError) {
-    return <CircleX className="size-8 text-destructive" />;
+    return <CircleX className="text-destructive size-8" />;
   }
 
   if (src) {
@@ -36,5 +36,5 @@ export const IconItemListFilesFooterEditor = ({
     );
   }
 
-  return <File className="size-8 text-muted-foreground" />;
+  return <File className="text-muted-foreground size-8" />;
 };

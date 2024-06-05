@@ -65,9 +65,9 @@ export const ItemListFilesFooterEditor = ({
     <>
       <div
         className={cn(
-          "rounded-lg flex items-center size-10 justify-center relative overflow-hidden flex-shrink-0",
+          "relative flex size-10 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg",
           {
-            "w-20 h-14": data?.width && data?.height && !isLoading && !error
+            "h-14 w-20": data?.width && data?.height && !isLoading && !error
           }
         )}
       >
@@ -83,12 +83,12 @@ export const ItemListFilesFooterEditor = ({
         />
       </div>
 
-      <div className="flex-1 min-w-0 md:truncate break-words">
+      <div className="min-w-0 flex-1 break-words md:truncate">
         <span className="leading-tight">
           {file?.name ?? data?.file_name ?? "Error!"}
         </span>
 
-        <div className="text-sm text-muted-foreground space-x-2">
+        <div className="text-muted-foreground space-x-2 text-sm">
           <ContentItemListFilesFooterEditor
             data={data}
             file={file}
@@ -99,7 +99,7 @@ export const ItemListFilesFooterEditor = ({
       </div>
 
       {!error && !isLoading && data && (
-        <div className="flex gap-1 items-center flex-wrap flex-shrink-0">
+        <div className="flex shrink-0 flex-wrap items-center gap-1">
           <Button
             variant="ghost"
             onClick={() => {

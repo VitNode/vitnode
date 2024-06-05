@@ -24,7 +24,7 @@ export const ContentEmojiToolbarEditor = ({ setIsOpen }: Props) => {
 
   return (
     <>
-      <div className="flex flex-col gap-3 sticky top-0 bg-popover z-10 p-4">
+      <div className="bg-popover sticky top-0 z-10 flex flex-col gap-3 p-4">
         <div className="flex gap-2">
           <Input
             placeholder={t("emojis.placeholder")}
@@ -40,7 +40,7 @@ export const ContentEmojiToolbarEditor = ({ setIsOpen }: Props) => {
         </div>
       </div>
 
-      <div className="p-4 pt-0 max-h-64">
+      <div className="max-h-64 p-4 pt-0">
         <EmojisContentIconInput
           search={search}
           onChange={emoji => {

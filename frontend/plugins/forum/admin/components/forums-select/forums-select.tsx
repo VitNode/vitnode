@@ -62,7 +62,7 @@ export const ForumsSelect = ({
     if (values.length > 1) {
       return (
         <Badge
-          className="[&>svg]:size-4 flex-shrink-0"
+          className="shrink-0 [&>svg]:size-4"
           tabIndex={0}
           onClick={e => {
             e.stopPropagation();
@@ -85,7 +85,7 @@ export const ForumsSelect = ({
     return values.map(item => {
       return (
         <Badge
-          className="[&>svg]:size-4 flex-shrink-0"
+          className="shrink-0 [&>svg]:size-4"
           key={item.id}
           tabIndex={0}
           onClick={e => {
@@ -121,7 +121,7 @@ export const ForumsSelect = ({
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="p-0 w-64" align="start">
+      <PopoverContent className="w-64 p-0" align="start">
         <React.Suspense fallback={<Loader className="p-2" />}>
           <Content
             values={values}

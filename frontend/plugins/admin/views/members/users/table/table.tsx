@@ -52,7 +52,7 @@ export const TableUsersMembersAdmin = ({
           const data = row.original;
 
           return (
-            <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex flex-wrap items-center gap-2">
               <AvatarUser user={data} sizeInRem={2} />
 
               <span>{data.name}</span>

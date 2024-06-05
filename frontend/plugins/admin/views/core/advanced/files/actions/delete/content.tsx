@@ -39,7 +39,7 @@ export const ContentDeleteActionFilesAdvancedCoreAdmin = ({
         <AlertDialogDescription>
           {t.rich("desc", {
             name: () => (
-              <span className="font-bold text-foreground">
+              <span className="text-foreground font-bold">
                 {file_name_original}
               </span>
             )

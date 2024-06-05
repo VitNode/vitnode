@@ -9,15 +9,15 @@ export const StatsItemForum = ({
   const t = useTranslations("forum");
 
   return (
-    <div className="flex items-center md:justify-center md:w-32 gap-4 justify-start">
-      <div className="flex md:flex-col text-center flex-row md:gap-0 gap-1 items-center justify-center">
+    <div className="flex items-center justify-start gap-4 md:w-32 md:justify-center">
+      <div className="flex flex-row items-center justify-center gap-1 text-center md:flex-col md:gap-0">
         <span className="font-bold">{total_topics}</span>
         <span className="text-muted-foreground text-sm">
           {t("topics_title_count", { count: total_topics })}
         </span>
       </div>
 
-      <div className="flex md:flex-col text-center flex-row md:gap-0 gap-1 items-center justify-center">
+      <div className="flex flex-row items-center justify-center gap-1 text-center md:flex-col md:gap-0">
         <span className="font-bold">{total_posts}</span>
         <span className="text-muted-foreground text-sm">
           {t("posts_title_count", { count: total_posts })}

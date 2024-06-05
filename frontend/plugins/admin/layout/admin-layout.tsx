@@ -11,10 +11,10 @@ export const AdminLayout = ({ children }: Props) => {
   return (
     <>
       <HeaderAdmin />
-      <nav className="fixed top-16 left-0 h-[calc(100vh_-_4rem)] w-64 overflow-y-auto z-10 hidden md:block overflow-auto px-4 py-2 space-y-5">
+      <nav className="fixed left-0 top-16 z-10 hidden h-[calc(100vh_-_4rem)] w-64 space-y-5 overflow-auto px-4 py-2 md:block">
         <NavAdmin />
       </nav>
-      <main className="md:ml-64 mt-16 p-5 sm:pl-2 text-card-foreground">
+      <main className="text-card-foreground mt-16 p-5 sm:pl-2 md:ml-64">
         <div className="container">{children}</div>
       </main>
     </>

@@ -173,7 +173,7 @@ export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
   };
 
   return (
-    <div className="flex flex-col gap-2 items-center">
+    <div className="flex flex-col items-center gap-2">
       <HslColorPicker
         color={
           internalColor ?? {
@@ -192,7 +192,7 @@ export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
       />
 
       <div className="space-y-2">
-        <div className="w-[200px] flex gap-2">
+        <div className="flex w-[200px] gap-2">
           <Input
             type="text"
             className={cn("h-9", {
@@ -219,7 +219,7 @@ export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
                 <TooltipTrigger asChild>
                   <Button
                     size="icon"
-                    className="flex-shrink-0"
+                    className="shrink-0"
                     ariaLabel={t("remove")}
                     variant="ghost"
                     onClick={() => {
@@ -241,7 +241,7 @@ export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
           )}
         </div>
 
-        <div className="grid gap-1 grid-cols-6 grid-rows-2">
+        <div className="grid grid-cols-6 grid-rows-2 gap-1">
           {presetColors.map(({ color, name }) => (
             <button
               key={name}

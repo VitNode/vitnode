@@ -27,7 +27,7 @@ export const QuickMenu = async () => {
   }));
 
   return (
-    <div className="supports-backdrop-blur:bg-background/60 fixed bottom-0 z-20 w-full border-t bg-card/75 backdrop-blur sm:hidden flex">
+    <div className="supports-backdrop-blur:bg-background/60 bg-card/75 fixed bottom-0 z-20 flex w-full border-t backdrop-blur sm:hidden">
       <QuickMenuWrapper>
         <ButtonDrawer navIcons={navIcons} />
       </QuickMenuWrapper>

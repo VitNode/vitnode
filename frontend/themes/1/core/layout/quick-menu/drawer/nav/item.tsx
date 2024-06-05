@@ -31,7 +31,7 @@ export const ItemNavDrawerQuickMenu = ({
             variant: "ghost",
             className: cn(
               classNameDrawerQuickMenu,
-              "flex-col h-auto items-start gap-1",
+              "h-auto flex-col items-start gap-1",
               {
                 "bg-accent": active
               }

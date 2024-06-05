@@ -92,7 +92,7 @@ export const CreateEditFormModeratorsStaffAdmin = () => {
           control={form.control}
           name="unrestricted"
           render={({ field }) => (
-            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 gap-2">
+            <FormItem className="flex flex-row items-center justify-between gap-2 rounded-lg border p-4">
               <div className="space-y-0.5">
                 <FormLabel className="text-base">
                   {t("create_edit.unrestricted.title")}

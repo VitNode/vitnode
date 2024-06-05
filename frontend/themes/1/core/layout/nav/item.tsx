@@ -28,7 +28,7 @@ export const ItemNav = ({
     href === pathname || (pathname.startsWith(href) && href !== "/");
 
   return (
-    <NavigationMenu.Item className="flex-shrink-0">
+    <NavigationMenu.Item className="shrink-0">
       <NavigationMenu.Trigger asChild>
         <Link
           href={href}
@@ -51,14 +51,14 @@ export const ItemNav = ({
       {children.length > 0 && (
         <NavigationMenu.Content
           className={cn(
-            "top-0 left-0 duration-200 ease-in-out data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 w-56",
+            "data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 left-0 top-0 w-56 duration-200 ease-in-out",
             {
               "w-[30rem]": children.length >= 3,
               "lg:w-[50rem]": children.length >= 5
             }
           )}
         >
-          <ul className="flex gap-1 flex-wrap p-2">
+          <ul className="flex flex-wrap gap-1 p-2">
             {children.map(item => {
               const activeItem =
                 item.href === pathname ||
@@ -80,7 +80,7 @@ export const ItemNav = ({
                     <Link
                       href={item.href}
                       className={cn(
-                        "flex flex-col justify-center select-none gap-1 rounded-md px-3 py-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground h-full text-accent-foreground",
+                        "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-accent-foreground flex h-full select-none flex-col justify-center gap-1 rounded-md px-3 py-2 leading-none no-underline outline-none transition-colors",
                         {
                           "bg-accent": activeItem
                         }
@@ -88,12 +88,12 @@ export const ItemNav = ({
                       target={item.external ? "_blank" : undefined}
                       rel={item.external ? "noopener noreferrer" : undefined}
                     >
-                      <div className="font-medium flex gap-1">
+                      <div className="flex gap-1 font-medium">
                         {icon}
                         {convertText(item.name)}
                       </div>
                       {item.description && (
-                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                        <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
                           {convertText(item.description)}
                         </p>
                       )}

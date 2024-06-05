@@ -77,10 +77,10 @@ export const FilesInput = ({
       {((stateValue && stateValue.length === 0 && !multiple) || multiple) && (
         <div
           className={cn(
-            "flex flex-col items-center justify-center w-full m-h-32 rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+            "m-h-32 border-input bg-background placeholder:text-muted-foreground focus-visible:ring-ring flex w-full flex-col items-center justify-center rounded-md border px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50",
             className,
             {
-              "opacity-50 cursor-not-allowed": disabled
+              "cursor-not-allowed opacity-50": disabled
             }
           )}
           role="button"
@@ -115,9 +115,9 @@ export const FilesInput = ({
             handleUploadFile(e.dataTransfer.files);
           }}
         >
-          <div className="flex flex-col items-center justify-center pt-5 pb-6 text-muted-foreground">
+          <div className="text-muted-foreground flex flex-col items-center justify-center pb-6 pt-5">
             <Upload />
-            <p className="mb-2 text-sm mt-2 font-semibold">
+            <p className="my-2 text-sm font-semibold">
               {t(isDrag ? "forms.files.drop_here" : "forms.files.title")}
             </p>
             <p className="text-xs">

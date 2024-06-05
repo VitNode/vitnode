@@ -5,7 +5,7 @@ import { PoweredByVitNode } from "@/plugins/admin/global/powered-by";
 
 export const SignInAdminView = () => {
   return (
-    <div className="max-w-[32rem] mx-auto my-10 py-10 flex flex-col gap-10">
+    <div className="mx-auto my-10 flex max-w-lg flex-col gap-10 py-10">
       <header className="flex justify-center">
         <LogoVitNode className="h-16" />
       </header>

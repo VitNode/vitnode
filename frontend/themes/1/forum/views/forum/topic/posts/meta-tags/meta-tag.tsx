@@ -30,12 +30,12 @@ export const MetaTagTopic = ({
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 50 }}
-      className="ml-2.5 flex gap-4 items-center"
+      className="ml-2.5 flex items-center gap-4"
       layout
     >
       <div
         className={cn(
-          "border size-8 bg-border [&>svg]:size-4 flex items-center justify-center rounded-full",
+          "bg-border flex size-8 items-center justify-center rounded-full border [&>svg]:size-4",
           {
             "bg-destructive border-destructive text-white": action === "lock"
           }

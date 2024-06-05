@@ -39,7 +39,7 @@ export const ContentDeleteActionForumAdmin = ({
           <AlertDialogDescription>
             {t.rich("desc", {
               name: () => (
-                <span className="font-semibold text-foreground">
+                <span className="text-foreground font-semibold">
                   {convertText(name)}
                 </span>
               )

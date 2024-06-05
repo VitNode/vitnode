@@ -54,7 +54,7 @@ export const ItemDragAndDrop = ({
   return (
     <div
       ref={setDroppableNodeRef}
-      className="pl-[var(--spacing)] border-t-0"
+      className="border-t-0 pl-[var(--spacing)]"
       style={
         {
           "--spacing": `${indentationWidth * depth}px`
@@ -63,9 +63,9 @@ export const ItemDragAndDrop = ({
     >
       <div
         className={cn(
-          "p-4 flex sm:gap-4 gap-2 bg-card items-center transition-[background-color,opacity] relative flex-wrap border",
+          "bg-card relative flex flex-wrap items-center gap-2 border p-4 transition-[background-color,opacity] sm:gap-4",
           {
-            "animate-pulse bg-primary/20": isDropHere,
+            "bg-primary/20 animate-pulse": isDropHere,
             "z-10": isDragging,
             "opacity-50": active
           }
@@ -76,10 +76,10 @@ export const ItemDragAndDrop = ({
         }}
         ref={setDraggableNodeRef}
       >
-        <div className="flex flex-shrink-0 gap-2">
+        <div className="flex shrink-0 gap-2">
           <Button
             className={cn(
-              "sm:flex hidden flex-shrink-0 focus:outline-none hover:text-foreground cursor-grab bg-primary/20 text-primary",
+              "hover:text-foreground bg-primary/20 text-primary hidden flex-shrink-0 cursor-grab focus:outline-none sm:flex",
               draggableButtonClassName
             )}
             style={draggableStyle}
@@ -100,7 +100,7 @@ export const ItemDragAndDrop = ({
               ariaLabel=""
             >
               <ChevronRight
-                className={cn("transition-transform text-muted-foreground", {
+                className={cn("text-muted-foreground transition-transform", {
                   "rotate-90": isOpenChildren
                 })}
               />

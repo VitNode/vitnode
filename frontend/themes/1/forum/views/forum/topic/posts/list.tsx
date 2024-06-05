@@ -23,7 +23,7 @@ export const ListPosts = ({ className, edges, id, permissions }: Props) => {
     <div
       key={`post_list_${id}`}
       className={cn(
-        "flex flex-col gap-5 relative after:absolute after:top-0 after:left-6 after:w-1 after:h-full after:block after:-z-10 after:bg-border",
+        "after:bg-border relative flex flex-col gap-5 after:absolute after:left-6 after:top-0 after:-z-10 after:block after:h-full after:w-1",
         className
       )}
     >

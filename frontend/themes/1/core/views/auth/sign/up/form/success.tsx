@@ -12,14 +12,14 @@ export const SuccessFormSignUp = ({ name }: Props) => {
   const t = useTranslations("core.sign_up.form.success");
 
   return (
-    <div className="p-5 pt-0 flex flex-col items-center justify-center text-center mx-16">
+    <div className="mx-16 flex flex-col items-center justify-center p-5 pt-0 text-center">
       <Mailbox className="size-20" />
       <span className="text-xl font-semibold">
         {t.rich("title", {
           name: () => <span className="text-primary">{name}</span>
         })}
       </span>
-      <p className="mt-2 mb-4 text-muted-foreground">{t("desc")}</p>
+      <p className="text-muted-foreground mb-4 mt-2">{t("desc")}</p>
 
       <Link
         href="/login"

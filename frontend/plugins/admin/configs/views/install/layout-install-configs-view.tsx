@@ -57,9 +57,9 @@ export const LayoutInstallConfigsView = ({ children }: Props) => {
 
   return (
     <Card className="hidden sm:flex">
-      <Steps className="p-5 max-w-[16rem] pr-0" items={items} />
+      <Steps className="max-w-64 p-5 pr-0" items={items} />
 
-      <div className="flex-grow">
+      <div className="grow">
         <CardHeader>
           <CardDescription>{t("title", { name: "VitNode" })}</CardDescription>
           <CardTitle>

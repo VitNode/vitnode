@@ -20,7 +20,7 @@ export const ItemContentNavDevPluginAdmin = (
 
   return (
     <>
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-1 flex-col">
         <span className="font-semibold">
           {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
           {/* @ts-expect-error */}

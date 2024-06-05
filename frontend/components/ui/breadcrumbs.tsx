@@ -18,13 +18,13 @@ export const Breadcrumbs = ({ children, items, ref }: Props) => {
     buttonVariants({
       variant: "link",
       size: "sm",
-      className: "px-0 h-5 text-muted-foreground"
+      className: "text-muted-foreground h-5 px-0"
     })
   );
 
   return (
-    <div className="mb-2 flex justify-between gap-5 items-center" ref={ref}>
-      <ul className="flex gap-2 text-muted-foreground py-3 overflow-auto">
+    <div className="mb-2 flex items-center justify-between gap-5" ref={ref}>
+      <ul className="text-muted-foreground flex gap-2 overflow-auto py-3">
         <li className="leading-none">
           <Link className={classNameItem} aria-label={t("home")} href="/">
             <Home />
@@ -32,7 +32,7 @@ export const Breadcrumbs = ({ children, items, ref }: Props) => {
         </li>
 
         {items.map(item => (
-          <li key={item.id} className="flex gap-2 items-center flex-shrink-0">
+          <li key={item.id} className="flex shrink-0 items-center gap-2">
             <ChevronRight className="size-4" />
             <Link className={classNameItem} href={item.href}>
               {item.text}

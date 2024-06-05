@@ -22,8 +22,8 @@ export const FooterEditor = ({
   const { config } = useGlobals();
 
   return (
-    <div className="bg-background p-2 rounded-b-md">
-      <div className="flex items-center gap-2 justify-between flex-wrap w-full [&>*]:w-full [&>*]:sm:w-auto">
+    <div className="bg-background rounded-b-md p-2">
+      <div className="flex w-full flex-wrap items-center justify-between gap-2 [&>*]:w-full [&>*]:sm:w-auto">
         {!disableLanguage && (
           <LanguageSelectFooterEditor
             selectedLanguage={selectedLanguage}

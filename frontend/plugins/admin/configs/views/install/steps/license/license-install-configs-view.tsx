@@ -13,7 +13,7 @@ export const LicenseInstallConfigsView = () => {
         <Link
           href="https://github.com/aXenDeveloper/vitnode/blob/canary/LICENSE.md"
           target="_blank"
-          className="underline text-primary"
+          className="text-primary underline"
         >
           {t("license.link")}
         </Link>

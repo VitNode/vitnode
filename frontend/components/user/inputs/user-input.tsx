@@ -80,7 +80,7 @@ export const UserInput = ({
 
                 return (
                   <Badge
-                    className="[&>svg]:size-4 flex-shrink-0"
+                    className="shrink-0 [&>svg]:size-4"
                     key={item.id}
                     tabIndex={0}
                     onClick={e => {
@@ -103,7 +103,7 @@ export const UserInput = ({
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="p-0 w-64" align="start">
+      <PopoverContent className="w-64 p-0" align="start">
         <React.Suspense fallback={<Loader className="p-4" />}>
           <UserInputContent
             values={values}

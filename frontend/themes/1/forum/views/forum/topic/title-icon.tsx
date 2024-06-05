@@ -17,7 +17,7 @@ export const TitleIconTopic = ({
     <Badge
       variant={variant}
       className={cn(
-        "px-3 py-1 [&>svg]:size-4 flex-shrink-0 text-sm",
+        "flex-shrink-0 px-3 py-1 text-sm [&>svg]:size-4",
         className
       )}
     >

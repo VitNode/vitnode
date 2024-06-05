@@ -28,10 +28,10 @@ export const ContentDeletePluginActionsAdmin = ({
         <AlertDialogDescription>
           {t.rich("desc", {
             name: () => (
-              <span className="font-bold text-foreground">{name}</span>
+              <span className="text-foreground font-bold">{name}</span>
             ),
             author: () => (
-              <span className="font-bold text-foreground">{author}</span>
+              <span className="text-foreground font-bold">{author}</span>
             )
           })}
         </AlertDialogDescription>

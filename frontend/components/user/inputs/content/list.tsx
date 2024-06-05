@@ -40,7 +40,7 @@ export const UserInputContentList = ({ edges, onSelect, values }: Props) => {
         >
           <div
             className={cn(
-              "mr-2 flex size-4 items-center justify-center rounded-sm border border-primary",
+              "border-primary mr-2 flex size-4 items-center justify-center rounded-sm border",
               values.find(value => item.id === value.id)
                 ? "bg-primary text-primary-foreground"
                 : "opacity-50 [&_svg]:invisible"

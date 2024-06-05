@@ -69,7 +69,7 @@ export default function ForumForumView({
           {forum_topics__show.edges.length > 0 ? (
             <TopicsListForum initData={forum_topics__show} />
           ) : (
-            <div className="p-5 flex flex-col items-center justify-center gap-4 text-center">
+            <div className="flex flex-col items-center justify-center gap-4 p-5 text-center">
               <span>{t("not_found")}</span>
               <ActionsForumsForum permissions={forumData.permissions} />
             </div>

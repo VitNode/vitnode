@@ -45,18 +45,18 @@ export const UserBarAdmin = ({ navComponent }: Props) => {
       </SheetTrigger>
 
       <SheetContent className="p-0">
-        <SheetHeader className="p-4 flex-row items-center space-y-0 gap-2 text-left">
+        <SheetHeader className="flex-row items-center gap-2 space-y-0 p-4 text-left">
           <AvatarUser user={{ name, ...rest }} sizeInRem={1.75} />
           <div className="flex flex-col gap-1">
-            <p className="font-medium leading-none text-base">{name}</p>
-            <p className="text-sm leading-none text-muted-foreground">
+            <p className="text-base font-medium leading-none">{name}</p>
+            <p className="text-muted-foreground text-sm leading-none">
               {email}
             </p>
           </div>
         </SheetHeader>
 
-        <div className="md:hidden block">
-          <div className="p-2 space-y-2">{navComponent}</div>
+        <div className="block md:hidden">
+          <div className="space-y-2 p-2">{navComponent}</div>
 
           <Separator className="my-2" />
         </div>

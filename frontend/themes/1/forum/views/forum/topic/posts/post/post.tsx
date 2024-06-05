@@ -33,11 +33,11 @@ export const PostTopic = ({
       initial={disableInitialAnimation ? false : { opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 50 }}
-      className="rounded-lg border bg-card text-card-foreground shadow-sm"
+      className="bg-card text-card-foreground rounded-lg border shadow-sm"
       layout
     >
-      <div className="p-4 pb-0 flex gap-4 items-center">
-        <div className="flex-1 flex gap-2 items-center">
+      <div className="flex items-center gap-4 p-4 pb-0">
+        <div className="flex flex-1 items-center gap-2">
           <AvatarUser sizeInRem={2} user={user} />
           <div className="flex flex-col leading-none">
             <div>

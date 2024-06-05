@@ -46,7 +46,7 @@ export const CodeBlockComponent = ({
   const tCore = useTranslations("core");
 
   return (
-    <NodeViewWrapper className="relative bg-muted rounded-md">
+    <NodeViewWrapper className="bg-muted relative rounded-md">
       <pre>
         <NodeViewContent
           as="code"
@@ -55,7 +55,7 @@ export const CodeBlockComponent = ({
         />
       </pre>
 
-      <div className="p-2 border-t border-muted-foreground/10">
+      <div className="border-muted-foreground/10 border-t p-2">
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
             <Button
@@ -63,14 +63,14 @@ export const CodeBlockComponent = ({
               role="combobox"
               size="sm"
               aria-expanded={open}
-              className="w-[10rem] justify-between"
+              className="w-40 justify-between"
             >
               {value ?? t("auto")}
               <CaretSortIcon className="ml-2 size-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
 
-          <PopoverContent className="w-[10rem] p-0">
+          <PopoverContent className="w-40 p-0">
             <Command>
               <CommandInput placeholder={tCore("search")} className="h-9" />
 

@@ -32,7 +32,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
   const TableRow = React.useCallback(
     ({ ...props }) => (
       <tr
-        className="[&:not(:last-child)]:border-b transition-colors hover:bg-muted/50"
+        className="hover:bg-muted/50 transition-colors [&:not(:last-child)]:border-b"
         {...props}
       />
     ),
@@ -70,7 +70,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
         style={{ height: "50vh" }}
         data={data}
         overscan={200}
-        className="border rounded-md"
+        className="rounded-md border"
         components={{
           Table,
           TableRow
@@ -81,9 +81,9 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
             {permissions.map(permission => (
               <th
                 key={`header_can_${permission.id}`}
-                className="px-4 py-3 align-middle font-medium text-muted-foreground"
+                className="text-muted-foreground px-4 py-3 align-middle font-medium"
               >
-                <div className="flex gap-4 items-center justify-center">
+                <div className="flex items-center justify-center gap-4">
                   <span>{permission.title}</span>
                   <Switch
                     onClick={() => onToggleAll(permission.id)}
@@ -114,7 +114,7 @@ export const ContentPermissionsContentCreateEditFormForumAdmin = ({
           return (
             <>
               <td className="px-4 py-2">
-                <div className="flex gap-2 flex-col">
+                <div className="flex flex-col gap-2">
                   <span>{convertText(item.name)}</span>
                   <Switch
                     onClick={() => {

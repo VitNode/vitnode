@@ -36,7 +36,7 @@ interface WithoutLanguage extends Props {
 }
 
 export const EditorSkeleton = ({ className }: { className?: string }) => {
-  return <Skeleton className={cn("w-full h-32", className)} />;
+  return <Skeleton className={cn("h-32 w-full", className)} />;
 };
 
 export const Editor = ({
@@ -67,7 +67,7 @@ export const Editor = ({
     editorProps: {
       attributes: {
         class: cn(
-          "min-h-32 p-4 focus:outline-none bg-card resize-y overflow-auto [&>*:not(:last-child)]:mb-[0.5rem]"
+          "bg-card min-h-32 resize-y overflow-auto p-4 focus:outline-none [&>*:not(:last-child)]:mb-[0.5rem]"
         )
       }
     },
@@ -139,12 +139,12 @@ export const Editor = ({
       }}
     >
       <div
-        className={cn("border border-input rounded-md shadow-sm", className)}
+        className={cn("border-input rounded-md border shadow-sm", className)}
       >
         <div className="relative">
           <ToolBarEditor />
           <EditorContent
-            className="break-words [&_.ProseMirror-selectednode]:outline-none [&_.ProseMirror-selectednode]:ring-offset-2 [&_.ProseMirror-selectednode]:ring-4 [&_.ProseMirror-selectednode]:ring-ring [&_.ProseMirror-selectednode]:w-fit [&_.node-files]:inline-flex"
+            className="[&_.ProseMirror-selectednode]:ring-ring break-words [&_.ProseMirror-selectednode]:w-fit [&_.ProseMirror-selectednode]:outline-none [&_.ProseMirror-selectednode]:ring-4 [&_.ProseMirror-selectednode]:ring-offset-2 [&_.node-files]:inline-flex"
             editor={editor}
           />
         </div>

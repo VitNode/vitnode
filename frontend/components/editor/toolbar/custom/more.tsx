@@ -22,7 +22,7 @@ export const MoreToolbarEditor = () => {
         </ButtonToolbarEditor>
       </PopoverTrigger>
 
-      <PopoverContent className="p-2 flex flex-wrap gap-1 max-w-80 w-fit">
+      <PopoverContent className="flex w-fit max-w-80 flex-wrap gap-1 p-2">
         <ButtonToolbarEditor
           name="horizontal_rule"
           onClick={() => editor.chain().focus().setHorizontalRule().run()}

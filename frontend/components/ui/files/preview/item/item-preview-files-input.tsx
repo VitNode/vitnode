@@ -44,10 +44,10 @@ export const ItemPreviewFilesInput = ({
   };
 
   return (
-    <li className="relative p-4 rounded-md bg-background border border-input flex gap-4 overflow-hidden">
+    <li className="border-input bg-background relative flex gap-4 overflow-hidden rounded-md border p-4">
       {acceptMimeTypeImage.includes(file.type) && (
         <Img
-          className="rounded-sm flex-shrink-0"
+          className="shrink-0 rounded-sm"
           imageClassName="object-cover"
           src={previewURL}
           alt={file instanceof File ? file.name : ""}
@@ -57,14 +57,14 @@ export const ItemPreviewFilesInput = ({
       )}
       <div className="mr-6 overflow-hidden">
         <p className="truncate">{file.name}</p>
-        <p className="text-sm text-muted-foreground">{size}</p>
+        <p className="text-muted-foreground text-sm">{size}</p>
       </div>
       <button
         type="button"
-        className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+        className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
         onClick={handleRemoveFile}
       >
-        <X className="h-6 w-6" />
+        <X className="size-6" />
         <span className="sr-only">Close</span>
       </button>
     </li>

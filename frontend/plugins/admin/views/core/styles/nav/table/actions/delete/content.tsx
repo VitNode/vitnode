@@ -32,7 +32,7 @@ export const ContentDeleteActionTableNavAdmin = ({
         <AlertDialogDescription>
           {t.rich("desc", {
             name: () => (
-              <span className="font-bold text-foreground">
+              <span className="text-foreground font-bold">
                 {convertText(name)}
               </span>
             )

@@ -89,7 +89,7 @@ export const CreateEditNavDevPluginAdmin = ({
                 <FormDescription>
                   {t.rich("create.href.desc", {
                     link: () => (
-                      <span className="font-bold text-foreground">{`${code}/${parentCode !== "null" ? `${parentCode}/` : ""}${removeSpecialCharacters(form.watch("href"))}`}</span>
+                      <span className="text-foreground font-bold">{`${code}/${parentCode !== "null" ? `${parentCode}/` : ""}${removeSpecialCharacters(form.watch("href"))}`}</span>
                     )
                   })}
                 </FormDescription>
@@ -116,14 +116,14 @@ export const CreateEditNavDevPluginAdmin = ({
                     </FormControl>
                     <SelectContent>
                       <SelectItem value="null">
-                        <div className="flex gap-2 items-center flex-wrap">
-                          <Ban className="size-4 text-muted-foreground" />
+                        <div className="flex flex-wrap items-center gap-2">
+                          <Ban className="text-muted-foreground size-4" />
                           <span>{t("create.parent.null")}</span>
                         </div>
                       </SelectItem>
                       {dataFromSSR.map(nav => (
                         <SelectItem value={nav.code} key={nav.code}>
-                          <div className="flex gap-2 items-center flex-wrap">
+                          <div className="flex flex-wrap items-center gap-2">
                             {nav.icon
                               ? icons.find(icon => icon.id === nav.code)?.icon
                               : null}

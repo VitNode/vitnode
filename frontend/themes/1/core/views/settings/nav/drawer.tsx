@@ -16,7 +16,7 @@ export const DrawerNavSettings = () => {
   const { navItems } = useSettingsView();
 
   return (
-    <div className="lg:hidden block">
+    <div className="block lg:hidden">
       <Drawer>
         <DrawerTrigger
           className={cn(buttonVariants({ variant: "ghost" }), "w-full")}

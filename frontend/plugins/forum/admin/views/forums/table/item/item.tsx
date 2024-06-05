@@ -12,7 +12,7 @@ export const ItemTableForumsForumAdmin = ({ data }: Props) => {
 
   return (
     <>
-      <div className="flex-grow flex flex-col">
+      <div className="flex grow flex-col">
         <span>{convertText(data.name)}</span>
       </div>
 

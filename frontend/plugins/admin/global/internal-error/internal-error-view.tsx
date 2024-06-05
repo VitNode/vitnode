@@ -24,25 +24,25 @@ export const InternalErrorView = ({ showPoweredBy }: Props) => {
   const { back } = useRouter();
 
   return (
-    <div className="mx-auto max-w-2xl px-4 my-10">
+    <div className="mx-auto my-10 max-w-2xl px-4">
       <Card>
         <CardHeader className="items-center pb-2">
-          <WifiOff className="w-16 h-16" />
+          <WifiOff className="size-16" />
         </CardHeader>
-        <CardContent className="flex flex-col items-center text-center pb-4">
+        <CardContent className="flex flex-col items-center pb-4 text-center">
           <span className="text-muted-foreground">{t("errors.title")}</span>
 
-          <p className="text-xl font-semibold tracking-tight mt-1">
+          <p className="mt-1 text-xl font-semibold tracking-tight">
             {t("errors.no_connection_api")}
           </p>
 
           {CONFIG.node_development && (
-            <p className="text-muted-foreground mt-10 text-sm max-w-96">
+            <p className="text-muted-foreground mt-10 max-w-96 text-sm">
               {t("errors.no_connection_api_dev")}
             </p>
           )}
         </CardContent>
-        <CardFooter className="flex gap-2 justify-center flex-col flex-wrap items-stretch sm:flex-row">
+        <CardFooter className="flex flex-col flex-wrap items-stretch justify-center gap-2 sm:flex-row">
           <Button onClick={back} variant="ghost">
             <RotateCcw /> {t("go_back")}
           </Button>
@@ -63,14 +63,14 @@ export const InternalErrorView = ({ showPoweredBy }: Props) => {
           </Button>
         </CardFooter>
       </Card>
-      <div className="text-right pt-2 text-muted-foreground italic">
+      <div className="text-muted-foreground pt-2 text-right italic">
         {t.rich("errors.code", {
           code: () => <span className="font-semibold">{500}</span>
         })}
       </div>
 
       {showPoweredBy && (
-        <footer className="text-center p-5 text-sm">
+        <footer className="p-5 text-center text-sm">
           <PoweredByVitNode className="text-muted-foreground no-underline" />
         </footer>
       )}

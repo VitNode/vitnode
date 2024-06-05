@@ -12,7 +12,7 @@ export const DatabaseInstallConfigsView = () => {
         <p>{t("text")}</p>
       </CardContent>
 
-      <CardFooter className="flex flex-col gap-4 items-start">
+      <CardFooter className="flex flex-col items-start gap-4">
         <SubmitDatabaseInstallConfigs />
       </CardFooter>
     </>

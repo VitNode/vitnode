@@ -24,12 +24,12 @@ export const LastPostItemForum = ({ lastPosts }: Props) => {
   return (
     <WrapperLastPostItemForum
       href={href}
-      className="md:w-64 flex gap-2 items-center"
+      className="flex items-center gap-2 md:w-64"
     >
       <AvatarUser user={user} sizeInRem={2.25} />
-      <div className="flex flex-col overflow-hidden justify-center flex-1">
+      <div className="flex flex-1 flex-col justify-center overflow-hidden">
         <Link
-          className="truncate text-foreground leading-tight hover:text-primary"
+          className="text-foreground hover:text-primary truncate leading-tight"
           href={href}
         >
           {convertText(topic.title)}

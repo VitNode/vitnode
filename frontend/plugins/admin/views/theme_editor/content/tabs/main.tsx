@@ -11,7 +11,7 @@ export const MainTabThemeEditor = () => {
 
   return (
     <div>
-      <h1 className="font-bold text-lg p-5 pb-0">{t("title")}</h1>
+      <h1 className="p-5 pb-0 text-lg font-bold">{t("title")}</h1>
 
       <div className="p-2 py-5">
         <Button
@@ -20,7 +20,7 @@ export const MainTabThemeEditor = () => {
           onClick={() => setActiveTab(ThemeEditorTab.Colors)}
         >
           <span>{t("colors.title")}</span>
-          <ChevronRight className="ml-auto text-muted-foreground" />
+          <ChevronRight className="text-muted-foreground ml-auto" />
         </Button>
       </div>
     </div>

@@ -45,7 +45,7 @@ export const FileDownloadButton = ({
           src={`${CONFIG.graphql_public_url}/${dir_folder}/${file_name}`}
           alt={file_alt ?? file_name_original}
           sizes="100vw"
-          className="w-full h-auto"
+          className="h-auto w-full"
           width={width}
           height={height}
         />
@@ -57,11 +57,11 @@ export const FileDownloadButton = ({
     return (
       <Button
         variant="outline"
-        className="bg-muted [&>svg]:size-7 text-left h-auto gap-5 px-5 py-2 max-w-full"
+        className="bg-muted h-auto max-w-full gap-5 px-5 py-2 text-left [&>svg]:size-7"
         disabled
       >
         <File className="text-muted-foreground" />
-        <div className="text-sm text-muted-foreground">
+        <div className="text-muted-foreground text-sm">
           <span>{t("access_denied_download")}</span>
         </div>
       </Button>
@@ -71,7 +71,7 @@ export const FileDownloadButton = ({
   return (
     <Button
       variant="outline"
-      className="bg-muted [&>svg]:size-7 text-left h-auto gap-5 px-5 py-2"
+      className="bg-muted h-auto gap-5 px-5 py-2 text-left [&>svg]:size-7"
       onClick={() => {
         if (!security_key) return;
 
@@ -82,9 +82,9 @@ export const FileDownloadButton = ({
       }}
     >
       <File className="text-muted-foreground" />
-      <div className="flex-1 min-w-0 overflow-hidden truncate">
+      <div className="min-w-0 flex-1 overflow-hidden truncate">
         <span className="leading-tight">{file_name_original}</span>
-        <div className="text-sm text-muted-foreground space-x-2">
+        <div className="text-muted-foreground space-x-2 text-sm">
           <span>{formatBytes(file_size)}</span>
           <span>&middot;</span>
           <span>{mimetype}</span>

@@ -7,13 +7,13 @@ import { Nav } from "../nav/nav";
 
 export const Header = () => {
   return (
-    <header className="sticky top-0 z-20 w-full transition-colors border-b bg-background/75 backdrop-blur">
-      <div className="flex items-center gap-5 h-16 container px-5">
+    <header className="bg-background/75 sticky top-0 z-20 w-full border-b backdrop-blur transition-colors">
+      <div className="container flex h-16 items-center gap-5 px-5">
         <Link href="/">Logo</Link>
 
         <Nav />
 
-        <div className="ml-auto sm:flex gap-2 hidden">
+        <div className="ml-auto hidden gap-2 sm:flex">
           <ThemeSwitcher />
           <LanguageSwitcher />
           <DarkLightModeSwitcher />
