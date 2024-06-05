@@ -17,6 +17,10 @@ export const updatePlugins = async ({
 }) => {
   fs.readdir(join(process.cwd(), "src", "plugins"), async (err, plugins) => {
     let isDefaultIndex: number | null = null;
+    const defaultPlugin = await db.query.core_plugins.findFirst({
+      where: (table, { eq }) => eq(table.default, true)
+    });
+
     await Promise.all(
       plugins
         .filter(
@@ -48,7 +52,6 @@ export const updatePlugins = async ({
             await db
               .update(core_plugins)
               .set({
-                updated: new Date(),
                 name: config.name,
                 description: config.description,
                 support_url: config.support_url,
@@ -60,7 +63,7 @@ export const updatePlugins = async ({
               })
               .where(eq(core_plugins.id, pluginId));
           } else {
-            const plugin = await db
+            const pluginInsert = await db
               .insert(core_plugins)
               .values([
                 {
@@ -73,12 +76,12 @@ export const updatePlugins = async ({
                   allow_default: config.allow_default,
                   version: version ?? null,
                   version_code: latestVersion ? +latestVersion : null,
-                  default: isDefaultIndex === index
+                  default: isDefaultIndex === index && !defaultPlugin
                 }
               ])
               .returning();
 
-            pluginId = plugin[0].id;
+            pluginId = pluginInsert[0].id;
           }
         })
     );
