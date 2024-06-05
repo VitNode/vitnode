@@ -25,15 +25,18 @@ export class CreateAdminCoreLanguageService {
     });
 
     [...plugins, { code: "core" }, { code: "admin" }].forEach(async plugin => {
+      const path = join(
+        ABSOLUTE_PATHS.plugin({ code: plugin.code }).frontend.language,
+        `${pluginCode}.json`
+      );
+      if (fs.existsSync(path)) return;
+
       fs.cpSync(
         join(
           ABSOLUTE_PATHS.plugin({ code: plugin.code }).frontend.language,
           "en.json"
         ),
-        join(
-          ABSOLUTE_PATHS.plugin({ code: plugin.code }).frontend.language,
-          `${pluginCode}.json`
-        ),
+        path,
         { recursive: true }
       );
     });
