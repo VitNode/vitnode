@@ -28,9 +28,12 @@ export default async function Layout({ children }: Props) {
     ({ children }: { children: React.ReactNode }) => JSX.Element
   > = React.lazy(async () =>
     import(
-      `@/themes/${theme_id}/core/views/settings/layout-settings-view`
+      `../../../../../themes/${theme_id}/core/views/settings/layout-settings-view`
     ).catch(
-      async () => import("@/themes/1/core/views/settings/layout-settings-view")
+      async () =>
+        import(
+          "../../../../../themes/1/core/views/settings/layout-settings-view"
+        )
     )
   );
 

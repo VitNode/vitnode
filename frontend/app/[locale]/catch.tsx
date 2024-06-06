@@ -22,7 +22,7 @@ export const CatchLayout = async ({ defaultPlugins, locale }: Props) => {
     defaultPlugins.map(async plugin => {
       try {
         return {
-          ...(await import(`@/plugins/${plugin.code}/langs/${locale}.json`))
+          ...(await import(`../../plugins/${plugin.code}/langs/${locale}.json`))
             .default
         };
       } catch (e) {

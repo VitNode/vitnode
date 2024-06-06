@@ -41,8 +41,10 @@ export default async function Page() {
   const { default_plugin, theme_id } = await getSessionData();
   const PageFromTheme: React.LazyExoticComponent<() => JSX.Element> =
     React.lazy(async () =>
-      import(`@/themes/${theme_id}/${default_plugin}/default-page`).catch(
-        async () => import(`@/themes/1/${default_plugin}/default-page`)
+      import(
+        `../../../themes/${theme_id}/${default_plugin}/default-page`
+      ).catch(
+        async () => import(`../../../themes/1/${default_plugin}/default-page`)
       )
     );
 
