@@ -16,6 +16,7 @@ import { AdminMembersModule } from "./members/members.module";
 import { AdminNavModule } from "./nav/nav.module";
 import { AdminStaffModule } from "./staff/staff.module";
 import { AdminThemeEditorModule } from "./theme_editor/theme_editor.module";
+import { AdminEmailModule } from "./email/email.module";
 
 @Module({
   imports: [
@@ -32,7 +33,8 @@ import { AdminThemeEditorModule } from "./theme_editor/theme_editor.module";
     AdminMembersModule,
     AdminNavModule,
     AdminStaffModule,
-    AdminThemeEditorModule
+    AdminThemeEditorModule,
+    AdminEmailModule
   ]
 })
 export class AdminModule {}
