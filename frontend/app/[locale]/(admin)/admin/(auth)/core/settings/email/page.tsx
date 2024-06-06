@@ -3,6 +3,24 @@ import { getTranslations } from "next-intl/server";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Card } from "@/components/ui/card";
+import { EmailSettingsAdminView } from "@/plugins/admin/views/core/settings/email/email-settings-admin-view";
+import { fetcher } from "@/utils/graphql/fetcher";
+import {
+  Admin__Core_Email_Settings__Show,
+  Admin__Core_Email_Settings__ShowQuery,
+  Admin__Core_Email_Settings__ShowQueryVariables
+} from "@/utils/graphql/hooks";
+
+const getData = async () => {
+  const { data } = await fetcher<
+    Admin__Core_Email_Settings__ShowQuery,
+    Admin__Core_Email_Settings__ShowQueryVariables
+  >({
+    query: Admin__Core_Email_Settings__Show
+  });
+
+  return data;
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("core.admin.nav");
@@ -13,13 +31,18 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const [t] = await Promise.all([getTranslations("core.admin.nav")]);
+  const [t, data] = await Promise.all([
+    getTranslations("core.admin.nav"),
+    getData()
+  ]);
 
   return (
     <>
       <HeaderContent h1={t("settings_email")} />
 
-      <Card className="p-6">Test</Card>
+      <Card className="p-6">
+        <EmailSettingsAdminView {...data} />
+      </Card>
     </>
   );
 }

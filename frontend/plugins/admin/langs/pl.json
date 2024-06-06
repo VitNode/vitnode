@@ -27,6 +27,16 @@
           "copyright": {
             "label": "Prawa autorskie strony"
           }
+        },
+        "email": {
+          "smtp_host": "Host SMTP",
+          "smtp_user": "Użytkownik SMTP",
+          "smtp_password": "Hasło SMTP",
+          "smtp_port": "Port SMTP",
+          "smtp_secure": {
+            "label": "Bezpieczne SMTP (SSL/TLS)",
+            "desc": "Użyj `tak` jeśli Twój host używa portu 465, `nie` dla wszystkich innych portów"
+          }
         }
       },
       "metadata": {

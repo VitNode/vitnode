@@ -27,6 +27,16 @@
           "copyright": {
             "label": "Copyright Site"
           }
+        },
+        "email": {
+          "smtp_host": "SMTP Host",
+          "smtp_user": "SMTP User",
+          "smtp_password": "SMTP Password",
+          "smtp_port": "SMTP Port",
+          "smtp_secure": {
+            "label": "SMTP Secure (SSL/TLS)",
+            "desc": "Use `true` if your host using port 465, `false` for all other ports"
+          }
         }
       },
       "metadata": {
