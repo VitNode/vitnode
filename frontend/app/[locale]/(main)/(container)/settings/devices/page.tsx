@@ -34,11 +34,11 @@ export default async function Page() {
     (props: DevicesSettingsViewProps) => JSX.Element
   > = React.lazy(async () =>
     import(
-      `@/themes/${theme_id}/core/views/settings/views/devices/devices-settings-view`
+      `../../../../../../themes/${theme_id}/core/views/settings/views/devices/devices-settings-view`
     ).catch(
       async () =>
         import(
-          "@/themes/1/core/views/settings/views/devices/devices-settings-view"
+          "../../../../../../themes/1/core/views/settings/views/devices/devices-settings-view"
         )
     )
   );

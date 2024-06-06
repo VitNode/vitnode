@@ -54,8 +54,11 @@ export default async function Page({ params: { id } }: Props) {
   const PageFromTheme: React.LazyExoticComponent<
     (props: ProfileViewProps) => JSX.Element
   > = React.lazy(async () =>
-    import(`@/themes/${theme_id}/core/views/profile/profile-view`).catch(
-      async () => import("@/themes/1/core/views/profile/profile-view")
+    import(
+      `../../../../../themes/${theme_id}/core/views/profile/profile-view`
+    ).catch(
+      async () =>
+        import("../../../../../themes/1/core/views/profile/profile-view")
     )
   );
 

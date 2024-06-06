@@ -45,10 +45,12 @@ export default async function Page({ searchParams }: Props) {
     (props: Core_Members__Files__ShowQuery) => JSX.Element
   > = React.lazy(async () =>
     import(
-      `@/themes/${theme_id}/core/views/settings/views/files/files-settings-view`
+      `../../../../../../themes/${theme_id}/core/views/settings/views/files/files-settings-view`
     ).catch(
       async () =>
-        import("@/themes/1/core/views/settings/views/files/files-settings-view")
+        import(
+          "../../../../../../themes/1/core/views/settings/views/files/files-settings-view"
+        )
     )
   );
 

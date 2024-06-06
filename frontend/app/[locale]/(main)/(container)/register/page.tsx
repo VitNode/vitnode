@@ -6,8 +6,11 @@ export default async function Page() {
   const { theme_id } = await getSessionData();
   const PageFromTheme: React.LazyExoticComponent<() => JSX.Element> =
     React.lazy(async () =>
-      import(`@/themes/${theme_id}/core/views/auth/sign/up/sign-up-view`).catch(
-        async () => import("@/themes/1/core/views/auth/sign/up/sign-up-view")
+      import(
+        `../../../../../themes/${theme_id}/core/views/auth/sign/up/sign-up-view`
+      ).catch(
+        async () =>
+          import("../../../../../themes/1/core/views/auth/sign/up/sign-up-view")
       )
     );
 

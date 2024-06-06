@@ -7,11 +7,11 @@ export default async function Page() {
   const PageFromTheme: React.LazyExoticComponent<() => JSX.Element> =
     React.lazy(async () =>
       import(
-        `@/themes/${theme_id}/core/views/settings/views/notifications/notifications-settings-view`
+        `../../../../../../themes/${theme_id}/core/views/settings/views/notifications/notifications-settings-view`
       ).catch(
         async () =>
           import(
-            "@/themes/1/core/views/settings/views/notifications/notifications-settings-view"
+            "../../../../../../themes/1/core/views/settings/views/notifications/notifications-settings-view"
           )
       )
     );

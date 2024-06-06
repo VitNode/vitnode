@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import {
   Admin__Blog_Categories__CreateMutation,
   Admin__Blog_Categories__Create,
@@ -18,6 +20,8 @@ export const mutationCreateApi = async (
       query: Admin__Blog_Categories__Create,
       variables
     });
+
+    revalidatePath("/admin/blog/categories", "page");
 
     return { data };
   } catch (error) {

@@ -25,6 +25,12 @@ export const CategoriesBlogAdminView = ({
     ...item,
     children: []
   }));
+
+  // Update data when edges change
+  React.useEffect(() => {
+    setData(edges);
+  }, [edges]);
+
   const {
     actionsItem,
     activeItemOverlay,

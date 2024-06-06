@@ -56,8 +56,9 @@ export default async function LocaleLayout({
       ).map(async plugin => {
         try {
           return {
-            ...(await import(`@/plugins/${plugin.code}/langs/${locale}.json`))
-              .default
+            ...(
+              await import(`../../plugins/${plugin.code}/langs/${locale}.json`)
+            ).default
           };
         } catch (e) {
           return {};

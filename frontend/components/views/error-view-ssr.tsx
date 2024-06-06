@@ -13,8 +13,8 @@ export const ErrorViewSSR = ({ theme_id, ...props }: Props) => {
   const ErrorView: React.LazyExoticComponent<
     (props: ErrorViewProps) => JSX.Element
   > = React.lazy(async () =>
-    import(`@/themes/${theme_id}/core/views/global/error/error-view`).catch(
-      async () => import("@/themes/1/core/views/global/error/error-view")
+    import(`../../themes/${theme_id}/core/views/global/error/error-view`).catch(
+      async () => import("../../themes/1/core/views/global/error/error-view")
     )
   );
 
