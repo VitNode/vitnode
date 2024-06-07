@@ -1,4 +1,3 @@
-import { join } from "path";
 import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
@@ -6,22 +5,13 @@ import { Injectable } from "@nestjs/common";
 import { ShowAdminEmailSettingsServiceObj } from "../show/dto/show.obj";
 import { EditAdminEmailSettingsServiceArgs } from "./dto/edit.args";
 
-import { ABSOLUTE_PATHS } from "@/config";
-
-interface ShowAdminEmailSettingsServiceObjWithPassword
-  extends ShowAdminEmailSettingsServiceObj {
-  password: string;
-}
+import {
+  HelpersAdminEmailSettingsService,
+  ShowAdminEmailSettingsServiceObjWithPassword
+} from "../../helpers.service";
 
 @Injectable()
-export class EditAdminEmailSettingsService {
-  private readonly path: string = join(
-    ABSOLUTE_PATHS.plugin({ code: "core" }).root,
-    "admin",
-    "email",
-    "email.config.json"
-  );
-
+export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsService {
   edit(
     data: EditAdminEmailSettingsServiceArgs
   ): ShowAdminEmailSettingsServiceObj {
@@ -35,18 +25,12 @@ export class EditAdminEmailSettingsService {
     const config: ShowAdminEmailSettingsServiceObjWithPassword =
       JSON.parse(read);
     const { password, ...rest } = data;
+    const dataToSave = {
+      ...rest,
+      password: password || config.password
+    };
 
-    fs.writeFileSync(
-      this.path,
-      JSON.stringify(
-        {
-          ...rest,
-          password: password || config.password
-        },
-        null,
-        2
-      )
-    );
+    fs.writeFileSync(this.path, JSON.stringify(dataToSave, null, 2));
 
     return rest;
   }

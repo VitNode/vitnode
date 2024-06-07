@@ -1,21 +1,13 @@
-import { join } from "path";
 import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
 
 import { ShowAdminEmailSettingsServiceObj } from "./dto/show.obj";
 
-import { ABSOLUTE_PATHS } from "@/config";
+import { HelpersAdminEmailSettingsService } from "../../helpers.service";
 
 @Injectable()
-export class ShowAdminEmailSettingsService {
-  private readonly path = join(
-    ABSOLUTE_PATHS.plugin({ code: "core" }).root,
-    "admin",
-    "email",
-    "email.config.json"
-  );
-
+export class ShowAdminEmailSettingsService extends HelpersAdminEmailSettingsService {
   show(): ShowAdminEmailSettingsServiceObj {
     if (!fs.existsSync(this.path)) {
       return {

@@ -33,10 +33,7 @@
           "smtp_user": "SMTP User",
           "smtp_password": "SMTP Password",
           "smtp_port": "SMTP Port",
-          "smtp_secure": {
-            "label": "SMTP Secure (SSL/TLS)",
-            "desc": "Use `true` if your host using port 465, `false` for all other ports"
-          }
+          "smtp_secure": "SMTP Secure (SSL/TLS)"
         }
       },
       "metadata": {

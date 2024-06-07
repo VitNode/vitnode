@@ -56,23 +56,28 @@ export const EmailSettingsAdminView = (
 
         <FormField
           control={form.control}
-          name="port"
+          name="secure"
           render={({ field }) => (
-            <FormFieldRender label={t("smtp_port")}>
-              <Input {...field} type="number" min={1} max={999} />
+            <FormFieldRender label={t("smtp_secure")}>
+              <Switch
+                checked={field.value}
+                onCheckedChange={val => {
+                  field.onChange(val);
+                  if (val) {
+                    form.setValue("port", 465);
+                  }
+                }}
+              />
             </FormFieldRender>
           )}
         />
 
         <FormField
           control={form.control}
-          name="secure"
+          name="port"
           render={({ field }) => (
-            <FormFieldRender
-              label={t("smtp_secure.label")}
-              description={t("smtp_secure.desc")}
-            >
-              <Switch checked={field.value} onCheckedChange={field.onChange} />
+            <FormFieldRender label={t("smtp_port")}>
+              <Input {...field} type="number" min={1} max={999} />
             </FormFieldRender>
           )}
         />
