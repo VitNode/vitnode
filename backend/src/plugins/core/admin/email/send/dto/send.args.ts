@@ -15,4 +15,12 @@ export class SendAdminEmailSettingsServiceArgs {
   @Field(() => String)
   @Transform(TransformString)
   from: string;
+
+  @Field(() => String)
+  @Transform(TransformString)
+  subject: string;
+
+  @Field(() => String)
+  @Transform(TransformString)
+  message: string;
 }

@@ -2,9 +2,9 @@ import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
 
 import { TestAdminEmailSettingsService } from "./test.service";
-import { TestAdminEmailSettingsServiceArgs } from "./dto/test.args";
 
 import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
+import { SendAdminEmailSettingsServiceArgs } from "../../send/dto/send.args";
 
 @Resolver()
 export class TestAdminEmailSettingsResolver {
@@ -13,7 +13,7 @@ export class TestAdminEmailSettingsResolver {
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
   async admin__core_email_settings__test(
-    @Args() args: TestAdminEmailSettingsServiceArgs
+    @Args() args: SendAdminEmailSettingsServiceArgs
   ): Promise<string> {
     return this.service.test(args);
   }

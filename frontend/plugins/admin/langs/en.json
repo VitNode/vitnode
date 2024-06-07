@@ -29,11 +29,24 @@
           }
         },
         "email": {
+          "smtp": "SMTP",
           "smtp_host": "SMTP Host",
           "smtp_user": "SMTP User",
           "smtp_password": "SMTP Password",
           "smtp_port": "SMTP Port",
-          "smtp_secure": "SMTP Secure (SSL/TLS)"
+          "smtp_secure": "SMTP Secure (SSL/TLS)",
+          "test": {
+            "title": "Test Email Sending",
+            "from": "From",
+            "to": "To",
+            "subject": "Subject",
+            "message": "Message",
+            "success": {
+              "title": "Email has been sent",
+              "desc": "Check your email inbox to see if you received the email."
+            },
+            "send_testing_email": "Send Testing Email"
+          }
         }
       },
       "metadata": {

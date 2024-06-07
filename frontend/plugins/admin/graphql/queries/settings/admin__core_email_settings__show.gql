@@ -1,8 +1,8 @@
 query Admin__core_email_settings__show {
   admin__core_email_settings__show {
-    host
-    port
-    secure
-    user
+    smtp_host
+    smtp_port
+    smtp_secure
+    smtp_user
   }
 }

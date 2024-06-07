@@ -8,7 +8,7 @@ import { ABSOLUTE_PATHS } from "@/config";
 
 export interface ShowAdminEmailSettingsServiceObjWithPassword
   extends ShowAdminEmailSettingsServiceObj {
-  password: string;
+  smtp_password: string;
 }
 
 @Injectable()

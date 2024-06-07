@@ -207,7 +207,10 @@ const FormWrapper = ({
 }: React.HTMLAttributes<HTMLFormElement>) => {
   return (
     <form
-      className={cn("@container flex flex-col items-end space-y-6", className)}
+      className={cn(
+        "@container flex flex-col items-start space-y-6 [&>a:last-child]:self-end [&>button:last-child]:self-end",
+        className
+      )}
       {...props}
     />
   );

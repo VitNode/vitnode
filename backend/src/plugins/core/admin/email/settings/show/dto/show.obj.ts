@@ -3,14 +3,14 @@ import { Field, Int, ObjectType } from "@nestjs/graphql";
 @ObjectType()
 export class ShowAdminEmailSettingsServiceObj {
   @Field(() => String)
-  host: string;
+  smtp_host: string;
 
   @Field(() => String)
-  user: string;
+  smtp_user: string;
 
   @Field(() => Int)
-  port: number;
+  smtp_port: number;
 
   @Field(() => Boolean)
-  secure: boolean;
+  smtp_secure: boolean;
 }

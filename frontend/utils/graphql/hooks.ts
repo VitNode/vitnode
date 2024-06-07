@@ -163,6 +163,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   admin__blog_categories__create: ShowBlogCategories;
   admin__core_email_settings__edit: ShowAdminEmailSettingsServiceObj;
+  admin__core_email_settings__test: Scalars['String']['output'];
   admin__core_files__delete: Scalars['String']['output'];
   admin__core_groups__delete: Scalars['String']['output'];
   admin__core_groups__edit: ShowAdminGroups;
@@ -218,11 +219,19 @@ export type MutationAdmin__Blog_Categories__CreateArgs = {
 
 
 export type MutationAdmin__Core_Email_Settings__EditArgs = {
-  host: Scalars['String']['input'];
-  password: Scalars['String']['input'];
-  port: Scalars['Int']['input'];
-  secure: Scalars['Boolean']['input'];
-  user: Scalars['String']['input'];
+  smtp_host: Scalars['String']['input'];
+  smtp_password: Scalars['String']['input'];
+  smtp_port: Scalars['Int']['input'];
+  smtp_secure: Scalars['Boolean']['input'];
+  smtp_user: Scalars['String']['input'];
+};
+
+
+export type MutationAdmin__Core_Email_Settings__TestArgs = {
+  from: Scalars['String']['input'];
+  message: Scalars['String']['input'];
+  subject: Scalars['String']['input'];
+  to: Scalars['String']['input'];
 };
 
 
@@ -679,10 +688,10 @@ export type QueryCore_Themes__ShowArgs = {
 
 export type ShowAdminEmailSettingsServiceObj = {
   __typename?: 'ShowAdminEmailSettingsServiceObj';
-  host: Scalars['String']['output'];
-  port: Scalars['Int']['output'];
-  secure: Scalars['Boolean']['output'];
-  user: Scalars['String']['output'];
+  smtp_host: Scalars['String']['output'];
+  smtp_port: Scalars['Int']['output'];
+  smtp_secure: Scalars['Boolean']['output'];
+  smtp_user: Scalars['String']['output'];
 };
 
 export type ShowAdminFiles = {
@@ -1435,17 +1444,6 @@ export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: n
 
 export type Admin_Sessions__Sign_OutMutation = { __typename?: 'Mutation', admin_sessions__sign_out: string };
 
-export type Admin__Core_Email_Settings__EditMutationVariables = Exact<{
-  host: Scalars['String']['input'];
-  password: Scalars['String']['input'];
-  port: Scalars['Int']['input'];
-  secure: Scalars['Boolean']['input'];
-  user: Scalars['String']['input'];
-}>;
-
-
-export type Admin__Core_Email_Settings__EditMutation = { __typename?: 'Mutation', admin__core_email_settings__edit: { __typename?: 'ShowAdminEmailSettingsServiceObj', host: string } };
-
 export type Admin__Core_Main_Settings__EditMutationVariables = Exact<{
   siteName: Scalars['String']['input'];
   siteShortName: Scalars['String']['input'];
@@ -1465,6 +1463,27 @@ export type Admin__Core_Manifest_Metadata__EditMutationVariables = Exact<{
 
 
 export type Admin__Core_Manifest_Metadata__EditMutation = { __typename?: 'Mutation', admin__core_manifest_metadata__edit: { __typename?: 'ShowAdminManifestMetadataObj', display: string } };
+
+export type Admin__Core_Email_Settings__EditMutationVariables = Exact<{
+  smtpHost: Scalars['String']['input'];
+  smtpPassword: Scalars['String']['input'];
+  smtpPort: Scalars['Int']['input'];
+  smtpSecure: Scalars['Boolean']['input'];
+  smtpUser: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Email_Settings__EditMutation = { __typename?: 'Mutation', admin__core_email_settings__edit: { __typename?: 'ShowAdminEmailSettingsServiceObj', smtp_host: string } };
+
+export type Admin__Core_Email_Settings__TestMutationVariables = Exact<{
+  to: Scalars['String']['input'];
+  from: Scalars['String']['input'];
+  message: Scalars['String']['input'];
+  subject: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Email_Settings__TestMutation = { __typename?: 'Mutation', admin__core_email_settings__test: string };
 
 export type Admin__Core_Theme_Editor__EditMutationVariables = Exact<{
   colors: ColorsEditAdminThemeEditor;
@@ -1636,7 +1655,7 @@ export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin_
 export type Admin__Core_Email_Settings__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Admin__Core_Email_Settings__ShowQuery = { __typename?: 'Query', admin__core_email_settings__show: { __typename?: 'ShowAdminEmailSettingsServiceObj', host: string, port: number, secure: boolean, user: string } };
+export type Admin__Core_Email_Settings__ShowQuery = { __typename?: 'Query', admin__core_email_settings__show: { __typename?: 'ShowAdminEmailSettingsServiceObj', smtp_host: string, smtp_port: number, smtp_secure: boolean, smtp_user: string } };
 
 export type Admin__Core_Manifest_Metadata__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2074,19 +2093,6 @@ export const Admin_Sessions__Sign_Out = gql`
   admin_sessions__sign_out
 }
     `;
-export const Admin__Core_Email_Settings__Edit = gql`
-    mutation Admin__core_email_settings__edit($host: String!, $password: String!, $port: Int!, $secure: Boolean!, $user: String!) {
-  admin__core_email_settings__edit(
-    host: $host
-    password: $password
-    port: $port
-    secure: $secure
-    user: $user
-  ) {
-    host
-  }
-}
-    `;
 export const Admin__Core_Main_Settings__Edit = gql`
     mutation Admin__core_main_settings__edit($siteName: String!, $siteShortName: String!, $siteDescription: [TextLanguageInput!]!, $siteCopyright: [TextLanguageInput!]!) {
   admin__core_main_settings__edit(
@@ -2109,6 +2115,29 @@ export const Admin__Core_Manifest_Metadata__Edit = gql`
   ) {
     display
   }
+}
+    `;
+export const Admin__Core_Email_Settings__Edit = gql`
+    mutation Admin__core_email_settings__edit($smtpHost: String!, $smtpPassword: String!, $smtpPort: Int!, $smtpSecure: Boolean!, $smtpUser: String!) {
+  admin__core_email_settings__edit(
+    smtp_host: $smtpHost
+    smtp_password: $smtpPassword
+    smtp_port: $smtpPort
+    smtp_secure: $smtpSecure
+    smtp_user: $smtpUser
+  ) {
+    smtp_host
+  }
+}
+    `;
+export const Admin__Core_Email_Settings__Test = gql`
+    mutation Admin__core_email_settings__test($to: String!, $from: String!, $message: String!, $subject: String!) {
+  admin__core_email_settings__test(
+    to: $to
+    from: $from
+    message: $message
+    subject: $subject
+  )
 }
     `;
 export const Admin__Core_Theme_Editor__Edit = gql`
@@ -2585,10 +2614,10 @@ export const Admin__Core_Plugins__Nav__Show = gql`
 export const Admin__Core_Email_Settings__Show = gql`
     query Admin__core_email_settings__show {
   admin__core_email_settings__show {
-    host
-    port
-    secure
-    user
+    smtp_host
+    smtp_port
+    smtp_secure
+    smtp_user
   }
 }
     `;

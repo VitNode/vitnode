@@ -13,6 +13,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { HeaderContent } from "@/components/header-content/header-content";
+import { Separator } from "@/components/ui/separator";
 
 export const EmailSettingsAdminView = (
   props: Admin__Core_Email_Settings__ShowQuery
@@ -24,9 +26,16 @@ export const EmailSettingsAdminView = (
   return (
     <Form {...form}>
       <FormWrapper onSubmit={form.handleSubmit(onSubmit)}>
+        <div>text</div>
+
+        <div className="w-full space-y-2">
+          <HeaderContent h2={t("smtp")} className="m-0" />
+          <Separator />
+        </div>
+
         <FormField
           control={form.control}
-          name="host"
+          name="smtp_host"
           render={({ field }) => (
             <FormFieldRender label={t("smtp_host")}>
               <Input {...field} placeholder="smtp.gmail.com" />
@@ -36,7 +45,7 @@ export const EmailSettingsAdminView = (
 
         <FormField
           control={form.control}
-          name="user"
+          name="smtp_user"
           render={({ field }) => (
             <FormFieldRender label={t("smtp_user")}>
               <Input {...field} placeholder="user" />
@@ -46,7 +55,7 @@ export const EmailSettingsAdminView = (
 
         <FormField
           control={form.control}
-          name="password"
+          name="smtp_password"
           render={({ field }) => (
             <FormFieldRender label={t("smtp_password")}>
               <Input {...field} type="password" placeholder="**********" />
@@ -56,7 +65,7 @@ export const EmailSettingsAdminView = (
 
         <FormField
           control={form.control}
-          name="secure"
+          name="smtp_secure"
           render={({ field }) => (
             <FormFieldRender label={t("smtp_secure")}>
               <Switch
@@ -64,7 +73,7 @@ export const EmailSettingsAdminView = (
                 onCheckedChange={val => {
                   field.onChange(val);
                   if (val) {
-                    form.setValue("port", 465);
+                    form.setValue("smtp_port", 465);
                   }
                 }}
               />
@@ -74,7 +83,7 @@ export const EmailSettingsAdminView = (
 
         <FormField
           control={form.control}
-          name="port"
+          name="smtp_port"
           render={({ field }) => (
             <FormFieldRender label={t("smtp_port")}>
               <Input {...field} type="number" min={1} max={999} />

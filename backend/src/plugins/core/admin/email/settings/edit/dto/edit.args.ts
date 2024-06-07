@@ -3,17 +3,17 @@ import { ArgsType, Field, Int } from "@nestjs/graphql";
 @ArgsType()
 export class EditAdminEmailSettingsServiceArgs {
   @Field(() => String)
-  host: string;
+  smtp_host: string;
 
   @Field(() => String)
-  user: string;
+  smtp_user: string;
 
   @Field(() => String)
-  password: string;
+  smtp_password: string;
 
   @Field(() => Int)
-  port: number;
+  smtp_port: number;
 
   @Field(() => Boolean)
-  secure: boolean;
+  smtp_secure: boolean;
 }

@@ -24,10 +24,10 @@ export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
     const read = fs.readFileSync(this.path, "utf-8");
     const config: ShowAdminEmailSettingsServiceObjWithPassword =
       JSON.parse(read);
-    const { password, ...rest } = data;
+    const { smtp_password, ...rest } = data;
     const dataToSave = {
       ...rest,
-      password: password || config.password
+      smtp_password: smtp_password || config.smtp_password
     };
 
     fs.writeFileSync(this.path, JSON.stringify(dataToSave, null, 2));

@@ -1,0 +1,17 @@
+mutation Admin__core_email_settings__edit(
+  $smtpHost: String!
+  $smtpPassword: String!
+  $smtpPort: Int!
+  $smtpSecure: Boolean!
+  $smtpUser: String!
+) {
+  admin__core_email_settings__edit(
+    smtp_host: $smtpHost
+    smtp_password: $smtpPassword
+    smtp_port: $smtpPort
+    smtp_secure: $smtpSecure
+    smtp_user: $smtpUser
+  ) {
+    smtp_host
+  }
+}

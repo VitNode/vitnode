@@ -13,26 +13,32 @@ export const useEmailSettingsFormAdmin = ({
   const t = useTranslations("core");
 
   const formSchema = z.object({
-    host: z.string().min(1),
-    user: z.string().min(1),
-    port: z.number().int().min(1).max(999),
-    secure: z.boolean(),
-    password: z.string()
+    smtp_host: z.string().min(1),
+    smtp_user: z.string().min(1),
+    smtp_port: z.number().int().min(1).max(999),
+    smtp_secure: z.boolean(),
+    smtp_password: z.string()
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      host: data.host || "",
-      user: data.user || "",
-      port: data.port || 0,
-      secure: data.secure || false,
-      password: "" // Password is not fetched from the server
+      smtp_host: data.smtp_host || "",
+      smtp_user: data.smtp_user || "",
+      smtp_port: data.smtp_port || 0,
+      smtp_secure: data.smtp_secure || false,
+      smtp_password: "" // Password is not fetched from the server
     }
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const mutation = await mutationApi(values);
+    const mutation = await mutationApi({
+      smtpHost: values.smtp_host,
+      smtpUser: values.smtp_user,
+      smtpPort: values.smtp_port,
+      smtpSecure: values.smtp_secure,
+      smtpPassword: values.smtp_password
+    });
 
     if (mutation.error) {
       toast.error(t("errors.title"), {

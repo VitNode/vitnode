@@ -17,30 +17,31 @@ export class SendAdminEmailService extends HelpersAdminEmailSettingsService {
       JSON.parse(data);
 
     return createTransport({
-      host: config.host,
-      port: config.port,
+      host: config.smtp_host,
+      port: config.smtp_port,
       auth: {
-        user: config.user,
-        pass: config.password
+        user: config.smtp_user,
+        pass: config.smtp_password
       },
-      secure: config.secure,
+      secure: config.smtp_secure,
       pool: pool ? true : undefined
     });
   };
 
-  async send({ to, from }: SendAdminEmailSettingsServiceArgs): Promise<string> {
+  async send({
+    to,
+    from,
+    subject,
+    message
+  }: SendAdminEmailSettingsServiceArgs): Promise<string> {
     const transporter = this.createTransport({});
 
-    try {
-      await transporter.sendMail({
-        from,
-        to,
-        subject: "Test email",
-        text: "Test email"
-      });
-    } catch (error) {
-      return "Email not sent!";
-    }
+    await transporter.sendMail({
+      from,
+      to,
+      subject,
+      text: message
+    });
 
     return "Email sent!";
   }

@@ -10,6 +10,7 @@ import {
   Admin__Core_Email_Settings__ShowQuery,
   Admin__Core_Email_Settings__ShowQueryVariables
 } from "@/utils/graphql/hooks";
+import { ActionsEmailSettingsAdmin } from "@/plugins/admin/views/core/settings/email/actions/actions";
 
 const getData = async () => {
   const { data } = await fetcher<
@@ -38,7 +39,9 @@ export default async function Page() {
 
   return (
     <>
-      <HeaderContent h1={t("settings_email")} />
+      <HeaderContent h1={t("settings_email")}>
+        <ActionsEmailSettingsAdmin />
+      </HeaderContent>
 
       <Card className="p-6">
         <EmailSettingsAdminView {...data} />

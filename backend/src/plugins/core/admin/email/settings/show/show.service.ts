@@ -11,10 +11,10 @@ export class ShowAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
   show(): ShowAdminEmailSettingsServiceObj {
     if (!fs.existsSync(this.path)) {
       return {
-        host: "",
-        user: "",
-        secure: false,
-        port: 587
+        smtp_host: "",
+        smtp_user: "",
+        smtp_secure: false,
+        smtp_port: 587
       };
     }
 
