@@ -1,9 +1,12 @@
-import { Injectable } from "@nestjs/common";
-import { ShowAdminEmailSettingsServiceObj } from "../show/dto/show.obj";
 import { join } from "path";
-import { ABSOLUTE_PATHS } from "@/config";
 import * as fs from "fs";
+
+import { Injectable } from "@nestjs/common";
+
+import { ShowAdminEmailSettingsServiceObj } from "../show/dto/show.obj";
 import { EditAdminEmailSettingsServiceArgs } from "./dto/edit.args";
+
+import { ABSOLUTE_PATHS } from "@/config";
 
 interface ShowAdminEmailSettingsServiceObjWithPassword
   extends ShowAdminEmailSettingsServiceObj {
@@ -16,7 +19,7 @@ export class EditAdminEmailSettingsService {
     ABSOLUTE_PATHS.plugin({ code: "core" }).root,
     "admin",
     "email",
-    "main.config.json"
+    "email.config.json"
   );
 
   edit(

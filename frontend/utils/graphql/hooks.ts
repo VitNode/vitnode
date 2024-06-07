@@ -162,6 +162,7 @@ export type LayoutAdminInstallObj = {
 export type Mutation = {
   __typename?: 'Mutation';
   admin__blog_categories__create: ShowBlogCategories;
+  admin__core_email_settings__edit: ShowAdminEmailSettingsServiceObj;
   admin__core_files__delete: Scalars['String']['output'];
   admin__core_groups__delete: Scalars['String']['output'];
   admin__core_groups__edit: ShowAdminGroups;
@@ -213,6 +214,15 @@ export type MutationAdmin__Blog_Categories__CreateArgs = {
   color: Scalars['String']['input'];
   description: Array<TextLanguageInput>;
   name: Array<TextLanguageInput>;
+};
+
+
+export type MutationAdmin__Core_Email_Settings__EditArgs = {
+  host: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+  port: Scalars['Int']['input'];
+  secure: Scalars['Boolean']['input'];
+  user: Scalars['String']['input'];
 };
 
 
@@ -1289,16 +1299,6 @@ export type Admin__Core_Staff_Moderators__DeleteMutationVariables = Exact<{
 
 export type Admin__Core_Staff_Moderators__DeleteMutation = { __typename?: 'Mutation', admin__core_staff_moderators__delete: string };
 
-export type Admin__Core_Manifest_Metadata__EditMutationVariables = Exact<{
-  display: Scalars['String']['input'];
-  startUrl: Scalars['String']['input'];
-  backgroundColor: Scalars['String']['input'];
-  themeColor: Scalars['String']['input'];
-}>;
-
-
-export type Admin__Core_Manifest_Metadata__EditMutation = { __typename?: 'Mutation', admin__core_manifest_metadata__edit: { __typename?: 'ShowAdminManifestMetadataObj', display: string } };
-
 export type Admin__Core_Nav__Change_PositionMutationVariables = Exact<{
   id: Scalars['Int']['input'];
   indexToMove: Scalars['Int']['input'];
@@ -1435,6 +1435,17 @@ export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: n
 
 export type Admin_Sessions__Sign_OutMutation = { __typename?: 'Mutation', admin_sessions__sign_out: string };
 
+export type Admin__Core_Email_Settings__EditMutationVariables = Exact<{
+  host: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+  port: Scalars['Int']['input'];
+  secure: Scalars['Boolean']['input'];
+  user: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Email_Settings__EditMutation = { __typename?: 'Mutation', admin__core_email_settings__edit: { __typename?: 'ShowAdminEmailSettingsServiceObj', host: string } };
+
 export type Admin__Core_Main_Settings__EditMutationVariables = Exact<{
   siteName: Scalars['String']['input'];
   siteShortName: Scalars['String']['input'];
@@ -1444,6 +1455,16 @@ export type Admin__Core_Main_Settings__EditMutationVariables = Exact<{
 
 
 export type Admin__Core_Main_Settings__EditMutation = { __typename?: 'Mutation', admin__core_main_settings__edit: { __typename?: 'EditAdminSettingsObj', site_name: string } };
+
+export type Admin__Core_Manifest_Metadata__EditMutationVariables = Exact<{
+  display: Scalars['String']['input'];
+  startUrl: Scalars['String']['input'];
+  backgroundColor: Scalars['String']['input'];
+  themeColor: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Manifest_Metadata__EditMutation = { __typename?: 'Mutation', admin__core_manifest_metadata__edit: { __typename?: 'ShowAdminManifestMetadataObj', display: string } };
 
 export type Admin__Core_Theme_Editor__EditMutationVariables = Exact<{
   colors: ColorsEditAdminThemeEditor;
@@ -1898,18 +1919,6 @@ export const Admin__Core_Staff_Moderators__Delete = gql`
   admin__core_staff_moderators__delete(id: $id)
 }
     `;
-export const Admin__Core_Manifest_Metadata__Edit = gql`
-    mutation Admin__core_manifest_metadata__edit($display: String!, $startUrl: String!, $backgroundColor: String!, $themeColor: String!) {
-  admin__core_manifest_metadata__edit(
-    display: $display
-    start_url: $startUrl
-    background_color: $backgroundColor
-    theme_color: $themeColor
-  ) {
-    display
-  }
-}
-    `;
 export const Admin__Core_Nav__Change_Position = gql`
     mutation Admin__core_nav__change_position($id: Int!, $indexToMove: Int!, $parentId: Int!) {
   admin__core_nav__change_position(
@@ -2065,6 +2074,19 @@ export const Admin_Sessions__Sign_Out = gql`
   admin_sessions__sign_out
 }
     `;
+export const Admin__Core_Email_Settings__Edit = gql`
+    mutation Admin__core_email_settings__edit($host: String!, $password: String!, $port: Int!, $secure: Boolean!, $user: String!) {
+  admin__core_email_settings__edit(
+    host: $host
+    password: $password
+    port: $port
+    secure: $secure
+    user: $user
+  ) {
+    host
+  }
+}
+    `;
 export const Admin__Core_Main_Settings__Edit = gql`
     mutation Admin__core_main_settings__edit($siteName: String!, $siteShortName: String!, $siteDescription: [TextLanguageInput!]!, $siteCopyright: [TextLanguageInput!]!) {
   admin__core_main_settings__edit(
@@ -2074,6 +2096,18 @@ export const Admin__Core_Main_Settings__Edit = gql`
     site_copyright: $siteCopyright
   ) {
     site_name
+  }
+}
+    `;
+export const Admin__Core_Manifest_Metadata__Edit = gql`
+    mutation Admin__core_manifest_metadata__edit($display: String!, $startUrl: String!, $backgroundColor: String!, $themeColor: String!) {
+  admin__core_manifest_metadata__edit(
+    display: $display
+    start_url: $startUrl
+    background_color: $backgroundColor
+    theme_color: $themeColor
+  ) {
+    display
   }
 }
     `;

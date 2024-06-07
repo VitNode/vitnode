@@ -6,6 +6,11 @@ import { EditAdminEmailSettingsResolver } from "./settings/edit/edit.resolver";
 import { EditAdminEmailSettingsService } from "./settings/edit/edit.service";
 
 @Module({
-  providers: [ShowAdminEmailSettingsService, ShowAdminEmailSettingsResolver, EditAdminEmailSettingsResolver, EditAdminEmailSettingsService]
+  providers: [
+    ShowAdminEmailSettingsService,
+    ShowAdminEmailSettingsResolver,
+    EditAdminEmailSettingsResolver,
+    EditAdminEmailSettingsService
+  ]
 })
 export class AdminEmailModule {}

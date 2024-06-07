@@ -1,0 +1,17 @@
+mutation Admin__core_email_settings__edit(
+  $host: String!
+  $password: String!
+  $port: Int!
+  $secure: Boolean!
+  $user: String!
+) {
+  admin__core_email_settings__edit(
+    host: $host
+    password: $password
+    port: $port
+    secure: $secure
+    user: $user
+  ) {
+    host
+  }
+}

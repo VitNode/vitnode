@@ -13,7 +13,7 @@ export class ShowAdminEmailSettingsService {
     ABSOLUTE_PATHS.plugin({ code: "core" }).root,
     "admin",
     "email",
-    "main.config.json"
+    "email.config.json"
   );
 
   show(): ShowAdminEmailSettingsServiceObj {

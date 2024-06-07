@@ -138,7 +138,7 @@ type LayoutAdminInstallObj {
 
 type Mutation {
   admin__blog_categories__create(color: String!, description: [TextLanguageInput!]!, name: [TextLanguageInput!]!): ShowBlogCategories!
-  admin__core_email_settings__show(host: String!, password: String!, port: Int!, secure: Boolean!, user: String!): ShowAdminEmailSettingsServiceObj!
+  admin__core_email_settings__edit(host: String!, password: String!, port: Int!, secure: Boolean!, user: String!): ShowAdminEmailSettingsServiceObj!
   admin__core_files__delete(id: Int!): String!
   admin__core_groups__delete(id: Int!): String!
   admin__core_groups__edit(content: ContentCreateAdminGroups!, id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!

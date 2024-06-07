@@ -1,12 +1,17 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 import { Admin__Core_Email_Settings__ShowQuery } from "@/utils/graphql/hooks";
+import { mutationApi } from "./mutation-api";
 
 export const useEmailSettingsFormAdmin = ({
   admin__core_email_settings__show: data
 }: Admin__Core_Email_Settings__ShowQuery) => {
+  const t = useTranslations("core");
+
   const formSchema = z.object({
     host: z.string().min(1),
     user: z.string().min(1),
@@ -27,6 +32,17 @@ export const useEmailSettingsFormAdmin = ({
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const mutation = await mutationApi(values);
+
+    if (mutation.error) {
+      toast.error(t("errors.title"), {
+        description: t("errors.internal_server_error")
+      });
+
+      return;
+    }
+
+    toast.success(t("saved_success"));
     form.reset(values);
   };
 
