@@ -21,12 +21,12 @@ const config = () => {
     reactStrictMode: false,
     logging: {
       fetches: {
-        fullUrl: true,
-        reactCompiler: true
+        fullUrl: true
       }
     },
     experimental: {
-      ppr: true
+      ppr: true,
+      reactCompiler: true
     },
     output: "standalone",
     transpilePackages: ["lucide-react"],

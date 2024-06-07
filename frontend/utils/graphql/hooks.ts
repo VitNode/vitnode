@@ -52,25 +52,6 @@ export type AvatarUser = {
   id: Scalars['Int']['output'];
 };
 
-export type BreadcrumbsForumForums = {
-  __typename?: 'BreadcrumbsForumForums';
-  id: Scalars['Int']['output'];
-  name: Array<TextLanguage>;
-};
-
-export type ChildrenShowForumForums = {
-  __typename?: 'ChildrenShowForumForums';
-  _count: ShowForumForumsCounts;
-  breadcrumbs: Array<BreadcrumbsForumForums>;
-  children: Array<LastChildShowForumForums>;
-  created: Scalars['DateTime']['output'];
-  description: Array<TextLanguage>;
-  id: Scalars['Int']['output'];
-  last_posts: LastPostsShowForumForumsObj;
-  name: Array<TextLanguage>;
-  position: Scalars['Int']['output'];
-};
-
 export type ColorsEditAdminThemeEditor = {
   accent: ThemeVariableInput;
   accent_foreground: ThemeVariableInput;
@@ -121,19 +102,6 @@ export type ContentShowAdminGroups = {
   files_total_max_storage: Scalars['Int']['output'];
 };
 
-export type CreateForumForumsObj = {
-  __typename?: 'CreateForumForumsObj';
-  _count: ShowForumForumsCounts;
-  breadcrumbs: Array<BreadcrumbsForumForums>;
-  children: Array<ChildrenShowForumForums>;
-  created: Scalars['DateTime']['output'];
-  description: Array<TextLanguage>;
-  id: Scalars['Int']['output'];
-  last_posts: LastPostsShowForumForumsObj;
-  name: Array<TextLanguage>;
-  position: Scalars['Int']['output'];
-};
-
 export type EditAdminSettingsObj = {
   __typename?: 'EditAdminSettingsObj';
   site_copyright: Array<TextLanguage>;
@@ -166,25 +134,6 @@ export type GroupUser = {
   name: Array<TextLanguage>;
 };
 
-export type GroupsPermissionsCreateForumForums = {
-  can_create: Scalars['Boolean']['input'];
-  can_download_files: Scalars['Boolean']['input'];
-  can_read: Scalars['Boolean']['input'];
-  can_reply: Scalars['Boolean']['input'];
-  can_view: Scalars['Boolean']['input'];
-  group_id: Scalars['Int']['input'];
-};
-
-export type GroupsPermissionsForumForums = {
-  __typename?: 'GroupsPermissionsForumForums';
-  can_create: Scalars['Boolean']['output'];
-  can_download_files: Scalars['Boolean']['output'];
-  can_read: Scalars['Boolean']['output'];
-  can_reply: Scalars['Boolean']['output'];
-  can_view: Scalars['Boolean']['output'];
-  group_id: Scalars['Int']['output'];
-};
-
 export type HslColor = {
   __typename?: 'HslColor';
   h: Scalars['Int']['output'];
@@ -198,47 +147,6 @@ export type HslColorInput = {
   s: Scalars['Int']['input'];
 };
 
-export type LastChildShowForumForums = {
-  __typename?: 'LastChildShowForumForums';
-  created: Scalars['DateTime']['output'];
-  description: Array<TextLanguage>;
-  id: Scalars['Int']['output'];
-  name: Array<TextLanguage>;
-  position: Scalars['Int']['output'];
-};
-
-export type LastPostsShowForumForums = {
-  __typename?: 'LastPostsShowForumForums';
-  created: Scalars['DateTime']['output'];
-  id: Scalars['Int']['output'];
-  topic: TopicLastPostsShowForumForums;
-  user: User;
-};
-
-export type LastPostsShowForumForumsArgs = {
-  cursor?: InputMaybe<Scalars['Int']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  sortBy?: InputMaybe<LastPostsShowForumForumsSortByArgs>;
-};
-
-export type LastPostsShowForumForumsObj = {
-  __typename?: 'LastPostsShowForumForumsObj';
-  edges: Array<LastPostsShowForumForums>;
-  pageInfo: PageInfo;
-};
-
-export type LastPostsShowForumForumsSortByArgs = {
-  column: LastPostsShowForumForumsSortingColumnEnum | `${LastPostsShowForumForumsSortingColumnEnum}`;
-  direction: SortDirectionEnum | `${SortDirectionEnum}`;
-};
-
-export const LastPostsShowForumForumsSortingColumnEnum = {
-  created: 'created',
-  updated: 'updated'
-} as const;
-
-export type LastPostsShowForumForumsSortingColumnEnum = typeof LastPostsShowForumForumsSortingColumnEnum[keyof typeof LastPostsShowForumForumsSortingColumnEnum];
 export const LayoutAdminInstallEnum = {
   account: 'ACCOUNT',
   database: 'DATABASE',
@@ -254,6 +162,8 @@ export type LayoutAdminInstallObj = {
 export type Mutation = {
   __typename?: 'Mutation';
   admin__blog_categories__create: ShowBlogCategories;
+  admin__core_email_settings__edit: ShowAdminEmailSettingsServiceObj;
+  admin__core_email_settings__test: Scalars['String']['output'];
   admin__core_files__delete: Scalars['String']['output'];
   admin__core_groups__delete: Scalars['String']['output'];
   admin__core_groups__edit: ShowAdminGroups;
@@ -287,27 +197,17 @@ export type Mutation = {
   admin__core_themes__download: Scalars['String']['output'];
   admin__core_themes__edit: ShowAdminThemes;
   admin__core_themes__upload: ShowAdminThemes;
-  admin__forum_forums__change_position: Scalars['String']['output'];
-  admin__forum_forums__create: CreateForumForumsObj;
-  admin__forum_forums__delete: Scalars['String']['output'];
-  admin__forum_forums__edit: CreateForumForumsObj;
   admin__install__create_database: Scalars['String']['output'];
   admin_sessions__sign_out: Scalars['String']['output'];
   core_editor_files__delete: Scalars['String']['output'];
   core_editor_files__upload: ShowCoreFiles;
   core_groups__admin_create: ShowAdminGroups;
-  core_mail_send: Scalars['String']['output'];
   core_members__avatar__delete: Scalars['String']['output'];
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
   core_members__sign_up: SignUpCoreMembersObj;
   core_sessions__sign_in: Scalars['String']['output'];
   core_sessions__sign_out: Scalars['String']['output'];
   core_themes__change: Scalars['String']['output'];
-  forum_posts__create: ShowPostsForums;
-  forum_posts__delete: Scalars['String']['output'];
-  forum_topics__actions__lock_toggle: Scalars['Boolean']['output'];
-  forum_topics__create: ShowTopicsForums;
-  forum_topics__edit: ShowTopicsForums;
 };
 
 
@@ -315,6 +215,23 @@ export type MutationAdmin__Blog_Categories__CreateArgs = {
   color: Scalars['String']['input'];
   description: Array<TextLanguageInput>;
   name: Array<TextLanguageInput>;
+};
+
+
+export type MutationAdmin__Core_Email_Settings__EditArgs = {
+  smtp_host: Scalars['String']['input'];
+  smtp_password: Scalars['String']['input'];
+  smtp_port: Scalars['Int']['input'];
+  smtp_secure: Scalars['Boolean']['input'];
+  smtp_user: Scalars['String']['input'];
+};
+
+
+export type MutationAdmin__Core_Email_Settings__TestArgs = {
+  from: Scalars['String']['input'];
+  message: Scalars['String']['input'];
+  subject: Scalars['String']['input'];
+  to: Scalars['String']['input'];
 };
 
 
@@ -559,36 +476,6 @@ export type MutationAdmin__Core_Themes__UploadArgs = {
 };
 
 
-export type MutationAdmin__Forum_Forums__Change_PositionArgs = {
-  id: Scalars['Int']['input'];
-  index_to_move: Scalars['Int']['input'];
-  parent_id: Scalars['Int']['input'];
-};
-
-
-export type MutationAdmin__Forum_Forums__CreateArgs = {
-  description: Array<TextLanguageInput>;
-  name: Array<TextLanguageInput>;
-  parent_id?: InputMaybe<Scalars['Int']['input']>;
-  permissions: PermissionsCreateForumForums;
-};
-
-
-export type MutationAdmin__Forum_Forums__DeleteArgs = {
-  id: Scalars['Int']['input'];
-  move_topics_to?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type MutationAdmin__Forum_Forums__EditArgs = {
-  description: Array<TextLanguageInput>;
-  id: Scalars['Int']['input'];
-  name: Array<TextLanguageInput>;
-  parent_id?: InputMaybe<Scalars['Int']['input']>;
-  permissions: PermissionsCreateForumForums;
-};
-
-
 export type MutationCore_Editor_Files__DeleteArgs = {
   id: Scalars['Int']['input'];
   security_key?: InputMaybe<Scalars['String']['input']>;
@@ -605,13 +492,6 @@ export type MutationCore_Editor_Files__UploadArgs = {
 export type MutationCore_Groups__Admin_CreateArgs = {
   content: ContentCreateAdminGroups;
   name: Array<TextLanguageInput>;
-};
-
-
-export type MutationCore_Mail_SendArgs = {
-  content: Scalars['String']['input'];
-  receiver_address: Scalars['String']['input'];
-  subject: Scalars['String']['input'];
 };
 
 
@@ -640,36 +520,6 @@ export type MutationCore_Themes__ChangeArgs = {
   id: Scalars['Int']['input'];
 };
 
-
-export type MutationForum_Posts__CreateArgs = {
-  content: Array<TextLanguageInput>;
-  topic_id: Scalars['Int']['input'];
-};
-
-
-export type MutationForum_Posts__DeleteArgs = {
-  id: Scalars['Int']['input'];
-};
-
-
-export type MutationForum_Topics__Actions__Lock_ToggleArgs = {
-  id: Scalars['Int']['input'];
-};
-
-
-export type MutationForum_Topics__CreateArgs = {
-  content: Array<TextLanguageInput>;
-  forum_id: Scalars['Int']['input'];
-  title: Array<TextLanguageInput>;
-};
-
-
-export type MutationForum_Topics__EditArgs = {
-  content: Array<TextLanguageInput>;
-  id: Scalars['Int']['input'];
-  title: Array<TextLanguageInput>;
-};
-
 export type NavAdminPluginsAuthorization = {
   __typename?: 'NavAdminPluginsAuthorization';
   code: Scalars['String']['output'];
@@ -686,49 +536,9 @@ export type PageInfo = {
   totalCount: Scalars['Float']['output'];
 };
 
-export type PageInfoShowPostsForums = {
-  __typename?: 'PageInfoShowPostsForums';
-  hasNextPage: Scalars['Boolean']['output'];
-  limit: Scalars['Int']['output'];
-  totalCount: Scalars['Int']['output'];
-  totalPostsCount: Scalars['Int']['output'];
-};
-
-export type PermissionsCreateForumForums = {
-  can_all_create: Scalars['Boolean']['input'];
-  can_all_download_files: Scalars['Boolean']['input'];
-  can_all_read: Scalars['Boolean']['input'];
-  can_all_reply: Scalars['Boolean']['input'];
-  can_all_view: Scalars['Boolean']['input'];
-  groups: Array<GroupsPermissionsCreateForumForums>;
-};
-
-export type PermissionsForumForums = {
-  __typename?: 'PermissionsForumForums';
-  can_create: Scalars['Boolean']['output'];
-  can_read: Scalars['Boolean']['output'];
-  can_reply: Scalars['Boolean']['output'];
-};
-
-export type PermissionsForumForumsAdmin = {
-  __typename?: 'PermissionsForumForumsAdmin';
-  can_all_create: Scalars['Boolean']['output'];
-  can_all_download_files: Scalars['Boolean']['output'];
-  can_all_read: Scalars['Boolean']['output'];
-  can_all_reply: Scalars['Boolean']['output'];
-  can_all_view: Scalars['Boolean']['output'];
-  groups: Array<GroupsPermissionsForumForums>;
-};
-
-export type PermissionsTopicForums = {
-  __typename?: 'PermissionsTopicForums';
-  can_download_files: Scalars['Boolean']['output'];
-  can_edit: Scalars['Boolean']['output'];
-  can_reply: Scalars['Boolean']['output'];
-};
-
 export type Query = {
   __typename?: 'Query';
+  admin__core_email_settings__show: ShowAdminEmailSettingsServiceObj;
   admin__core_files__show: ShowAdminFilesObj;
   admin__core_groups__show: ShowAdminGroupsObj;
   admin__core_manifest_metadata__show: ShowAdminManifestMetadataObj;
@@ -740,7 +550,6 @@ export type Query = {
   admin__core_staff_administrators__show: ShowAdminStaffAdministratorsObj;
   admin__core_staff_moderators__show: ShowAdminStaffModeratorsObj;
   admin__core_themes__show: ShowAdminThemesObj;
-  admin__forum_forums__show: ShowForumForumsAdminObj;
   admin__install__layout: LayoutAdminInstallObj;
   admin__sessions__authorization: AuthorizationAdminSessionsObj;
   blog_categories__show: ShowBlogCategoriesObj;
@@ -754,9 +563,6 @@ export type Query = {
   core_settings__show: ShowSettingsObj;
   core_theme_editor__show: ShowCoreThemeEditorObj;
   core_themes__show: ShowCoreThemesObj;
-  forum_forums__show: ShowForumForumsObj;
-  forum_posts__show: ShowPostsForumsObj;
-  forum_topics__show: ShowTopicsForumsObj;
 };
 
 
@@ -832,18 +638,6 @@ export type QueryAdmin__Core_Themes__ShowArgs = {
 };
 
 
-export type QueryAdmin__Forum_Forums__ShowArgs = {
-  cursor?: InputMaybe<Scalars['Int']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  ids?: InputMaybe<Array<Scalars['Int']['input']>>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  last_posts_args?: InputMaybe<LastPostsShowForumForumsArgs>;
-  parent_id?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  show_all_forums?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
 export type QueryBlog_Categories__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -892,33 +686,12 @@ export type QueryCore_Themes__ShowArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
-export type QueryForum_Forums__ShowArgs = {
-  cursor?: InputMaybe<Scalars['Int']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  ids?: InputMaybe<Array<Scalars['Int']['input']>>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  last_posts_args?: InputMaybe<LastPostsShowForumForumsArgs>;
-  parent_id?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  show_all_forums?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-export type QueryForum_Posts__ShowArgs = {
-  limit: Scalars['Int']['input'];
-  page?: InputMaybe<Scalars['Int']['input']>;
-  sortBy?: InputMaybe<ShowPostsForumsSortingEnum>;
-  topic_id: Scalars['Int']['input'];
-};
-
-
-export type QueryForum_Topics__ShowArgs = {
-  cursor?: InputMaybe<Scalars['Int']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  forum_id?: InputMaybe<Scalars['Int']['input']>;
-  id?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
+export type ShowAdminEmailSettingsServiceObj = {
+  __typename?: 'ShowAdminEmailSettingsServiceObj';
+  smtp_host: Scalars['String']['output'];
+  smtp_port: Scalars['Int']['output'];
+  smtp_secure: Scalars['Boolean']['output'];
+  smtp_user: Scalars['String']['output'];
 };
 
 export type ShowAdminFiles = {
@@ -1336,83 +1109,6 @@ export type ShowCoreThemesObj = {
   pageInfo: PageInfo;
 };
 
-export type ShowForumForumsAdmin = {
-  __typename?: 'ShowForumForumsAdmin';
-  _count: ShowForumForumsCounts;
-  breadcrumbs: Array<BreadcrumbsForumForums>;
-  children: Array<ChildrenShowForumForums>;
-  created: Scalars['DateTime']['output'];
-  description: Array<TextLanguage>;
-  id: Scalars['Int']['output'];
-  last_posts: LastPostsShowForumForumsObj;
-  name: Array<TextLanguage>;
-  permissions: PermissionsForumForumsAdmin;
-  position: Scalars['Int']['output'];
-};
-
-export type ShowForumForumsAdminObj = {
-  __typename?: 'ShowForumForumsAdminObj';
-  edges: Array<ShowForumForumsAdmin>;
-  pageInfo: PageInfo;
-};
-
-export type ShowForumForumsCounts = {
-  __typename?: 'ShowForumForumsCounts';
-  posts: Scalars['Int']['output'];
-  topics: Scalars['Int']['output'];
-  total_posts: Scalars['Int']['output'];
-  total_topics: Scalars['Int']['output'];
-};
-
-export type ShowForumForumsObj = {
-  __typename?: 'ShowForumForumsObj';
-  edges: Array<ShowForumForumsWithChildren>;
-  pageInfo: PageInfo;
-};
-
-export type ShowForumForumsWithChildren = {
-  __typename?: 'ShowForumForumsWithChildren';
-  _count: ShowForumForumsCounts;
-  breadcrumbs: Array<BreadcrumbsForumForums>;
-  children: Array<ChildrenShowForumForums>;
-  created: Scalars['DateTime']['output'];
-  description: Array<TextLanguage>;
-  id: Scalars['Int']['output'];
-  last_posts: LastPostsShowForumForumsObj;
-  name: Array<TextLanguage>;
-  permissions: PermissionsForumForums;
-  position: Scalars['Int']['output'];
-};
-
-export type ShowPostsForums = {
-  __typename?: 'ShowPostsForums';
-  content: Array<TextLanguage>;
-  created: Scalars['DateTime']['output'];
-  post_id: Scalars['Int']['output'];
-  user: User;
-};
-
-export type ShowPostsForumsMetaTags = {
-  __typename?: 'ShowPostsForumsMetaTags';
-  action: TopicActions | `${TopicActions}`;
-  action_id: Scalars['Int']['output'];
-  created: Scalars['DateTime']['output'];
-  user: User;
-};
-
-export type ShowPostsForumsObj = {
-  __typename?: 'ShowPostsForumsObj';
-  edges: Array<PostsWithMetaTagsUnion>;
-  lastEdges: Array<PostsWithMetaTagsUnion>;
-  pageInfo: PageInfoShowPostsForums;
-};
-
-export const ShowPostsForumsSortingEnum = {
-  newest: 'newest',
-  oldest: 'oldest'
-} as const;
-
-export type ShowPostsForumsSortingEnum = typeof ShowPostsForumsSortingEnum[keyof typeof ShowPostsForumsSortingEnum];
 export type ShowSettingsObj = {
   __typename?: 'ShowSettingsObj';
   site_copyright: Array<TextLanguage>;
@@ -1420,24 +1116,6 @@ export type ShowSettingsObj = {
   site_name: Scalars['String']['output'];
   site_short_name: Scalars['String']['output'];
   theme_id?: Maybe<Scalars['Float']['output']>;
-};
-
-export type ShowTopicsForums = {
-  __typename?: 'ShowTopicsForums';
-  breadcrumbs: Array<BreadcrumbsForumForums>;
-  content: Array<TextLanguage>;
-  created: Scalars['DateTime']['output'];
-  id: Scalars['Int']['output'];
-  locked: Scalars['Boolean']['output'];
-  permissions: PermissionsTopicForums;
-  title: Array<TextLanguage>;
-  user: User;
-};
-
-export type ShowTopicsForumsObj = {
-  __typename?: 'ShowTopicsForumsObj';
-  edges: Array<ShowTopicsForums>;
-  pageInfo: PageInfo;
 };
 
 export type SignUpCoreMembersObj = {
@@ -1488,18 +1166,6 @@ export type ThemeVariableInput = {
   light: HslColorInput;
 };
 
-export const TopicActions = {
-  lock: 'lock',
-  unlock: 'unlock'
-} as const;
-
-export type TopicActions = typeof TopicActions[keyof typeof TopicActions];
-export type TopicLastPostsShowForumForums = {
-  __typename?: 'TopicLastPostsShowForumForums';
-  id: Scalars['Int']['output'];
-  title: Array<TextLanguage>;
-};
-
 export type UploadAvatarCoreMembersObj = {
   __typename?: 'UploadAvatarCoreMembersObj';
   dir_folder: Scalars['String']['output'];
@@ -1524,8 +1190,6 @@ export type User = {
 };
 
 export type UserOrGroupCoreStaffUnion = StaffGroupUser | User;
-
-export type PostsWithMetaTagsUnion = ShowPostsForums | ShowPostsForumsMetaTags;
 
 export type Admin__Core_Files__DeleteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -1643,16 +1307,6 @@ export type Admin__Core_Staff_Moderators__DeleteMutationVariables = Exact<{
 
 
 export type Admin__Core_Staff_Moderators__DeleteMutation = { __typename?: 'Mutation', admin__core_staff_moderators__delete: string };
-
-export type Admin__Core_Manifest_Metadata__EditMutationVariables = Exact<{
-  display: Scalars['String']['input'];
-  startUrl: Scalars['String']['input'];
-  backgroundColor: Scalars['String']['input'];
-  themeColor: Scalars['String']['input'];
-}>;
-
-
-export type Admin__Core_Manifest_Metadata__EditMutation = { __typename?: 'Mutation', admin__core_manifest_metadata__edit: { __typename?: 'ShowAdminManifestMetadataObj', display: string } };
 
 export type Admin__Core_Nav__Change_PositionMutationVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -1800,6 +1454,37 @@ export type Admin__Core_Main_Settings__EditMutationVariables = Exact<{
 
 export type Admin__Core_Main_Settings__EditMutation = { __typename?: 'Mutation', admin__core_main_settings__edit: { __typename?: 'EditAdminSettingsObj', site_name: string } };
 
+export type Admin__Core_Manifest_Metadata__EditMutationVariables = Exact<{
+  display: Scalars['String']['input'];
+  startUrl: Scalars['String']['input'];
+  backgroundColor: Scalars['String']['input'];
+  themeColor: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Manifest_Metadata__EditMutation = { __typename?: 'Mutation', admin__core_manifest_metadata__edit: { __typename?: 'ShowAdminManifestMetadataObj', display: string } };
+
+export type Admin__Core_Email_Settings__EditMutationVariables = Exact<{
+  smtpHost: Scalars['String']['input'];
+  smtpPassword: Scalars['String']['input'];
+  smtpPort: Scalars['Int']['input'];
+  smtpSecure: Scalars['Boolean']['input'];
+  smtpUser: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Email_Settings__EditMutation = { __typename?: 'Mutation', admin__core_email_settings__edit: { __typename?: 'ShowAdminEmailSettingsServiceObj', smtp_host: string } };
+
+export type Admin__Core_Email_Settings__TestMutationVariables = Exact<{
+  to: Scalars['String']['input'];
+  from: Scalars['String']['input'];
+  message: Scalars['String']['input'];
+  subject: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Email_Settings__TestMutation = { __typename?: 'Mutation', admin__core_email_settings__test: string };
+
 export type Admin__Core_Theme_Editor__EditMutationVariables = Exact<{
   colors: ColorsEditAdminThemeEditor;
 }>;
@@ -1929,11 +1614,6 @@ export type Admin__Core_Members__ShowQueryVariables = Exact<{
 
 export type Admin__Core_Members__ShowQuery = { __typename?: 'Query', admin__core_members__show: { __typename?: 'ShowAdminMembersObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminMembers', avatar_color: string, email: string, id: number, name_seo: string, joined: Date, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
 
-export type Admin__Core_Manifest_Metadata__ShowQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Admin__Core_Manifest_Metadata__ShowQuery = { __typename?: 'Query', admin__core_manifest_metadata__show: { __typename?: 'ShowAdminManifestMetadataObj', display: string, start_url: string, theme_color: string, background_color: string } };
-
 export type Admin__Core_Nav__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1971,6 +1651,16 @@ export type Admin__Core_Plugins__Nav__ShowQueryVariables = Exact<{
 
 
 export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null, href: string, children?: Array<{ __typename?: 'ShowAdminNavPlugins', code: string, href: string, icon?: string | null }> | null }> };
+
+export type Admin__Core_Email_Settings__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Admin__Core_Email_Settings__ShowQuery = { __typename?: 'Query', admin__core_email_settings__show: { __typename?: 'ShowAdminEmailSettingsServiceObj', smtp_host: string, smtp_port: number, smtp_secure: boolean, smtp_user: string } };
+
+export type Admin__Core_Manifest_Metadata__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Admin__Core_Manifest_Metadata__ShowQuery = { __typename?: 'Query', admin__core_manifest_metadata__show: { __typename?: 'ShowAdminManifestMetadataObj', display: string, start_url: string, theme_color: string, background_color: string } };
 
 export type Core_Main_Settings__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2125,156 +1815,6 @@ export type Core_Members__ProfilesQueryVariables = Exact<{
 
 export type Core_Members__ProfilesQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, id: number, joined: Date, name: string, name_seo: string, posts: number, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
 
-export type Admin__Forum_Forums__Change_PositionMutationVariables = Exact<{
-  id: Scalars['Int']['input'];
-  indexToMove: Scalars['Int']['input'];
-  parentId: Scalars['Int']['input'];
-}>;
-
-
-export type Admin__Forum_Forums__Change_PositionMutation = { __typename?: 'Mutation', admin__forum_forums__change_position: string };
-
-export type Admin__Forum_Forums__CreateMutationVariables = Exact<{
-  name: Array<TextLanguageInput> | TextLanguageInput;
-  description: Array<TextLanguageInput> | TextLanguageInput;
-  parentId?: InputMaybe<Scalars['Int']['input']>;
-  permissions: PermissionsCreateForumForums;
-}>;
-
-
-export type Admin__Forum_Forums__CreateMutation = { __typename?: 'Mutation', admin__forum_forums__create: { __typename?: 'CreateForumForumsObj', created: Date, id: number, position: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
-
-export type Admin__Forum_Forums__DeleteMutationVariables = Exact<{
-  id: Scalars['Int']['input'];
-  moveTopicsTo?: InputMaybe<Scalars['Int']['input']>;
-}>;
-
-
-export type Admin__Forum_Forums__DeleteMutation = { __typename?: 'Mutation', admin__forum_forums__delete: string };
-
-export type Admin__Forum_Forums__EditMutationVariables = Exact<{
-  description: Array<TextLanguageInput> | TextLanguageInput;
-  id: Scalars['Int']['input'];
-  name: Array<TextLanguageInput> | TextLanguageInput;
-  permissions: PermissionsCreateForumForums;
-  parentId?: InputMaybe<Scalars['Int']['input']>;
-}>;
-
-
-export type Admin__Forum_Forums__EditMutation = { __typename?: 'Mutation', admin__forum_forums__edit: { __typename?: 'CreateForumForumsObj', id: number, position: number, created: Date, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
-
-export type Admin__Forum_Forums__Show_ShortQueryVariables = Exact<{
-  search?: InputMaybe<Scalars['String']['input']>;
-  showAllForums?: InputMaybe<Scalars['Boolean']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-}>;
-
-
-export type Admin__Forum_Forums__Show_ShortQuery = { __typename?: 'Query', admin__forum_forums__show: { __typename?: 'ShowForumForumsAdminObj', edges: Array<{ __typename?: 'ShowForumForumsAdmin', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
-
-export type Forum_Posts__CreateMutationVariables = Exact<{
-  content: Array<TextLanguageInput> | TextLanguageInput;
-  topicId: Scalars['Int']['input'];
-}>;
-
-
-export type Forum_Posts__CreateMutation = { __typename?: 'Mutation', forum_posts__create: { __typename?: 'ShowPostsForums', created: Date, content: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, user: { __typename?: 'User', avatar_color: string, id: number, name: string, name_seo: string, avatar?: { __typename?: 'AvatarUser', dir_folder: string, id: number, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } } };
-
-export type Forum_Posts__DeleteMutationVariables = Exact<{
-  id: Scalars['Int']['input'];
-}>;
-
-
-export type Forum_Posts__DeleteMutation = { __typename?: 'Mutation', forum_posts__delete: string };
-
-export type Forum_Topics__Actions__Lock_ToggleMutationVariables = Exact<{
-  id: Scalars['Int']['input'];
-}>;
-
-
-export type Forum_Topics__Actions__Lock_ToggleMutation = { __typename?: 'Mutation', forum_topics__actions__lock_toggle: boolean };
-
-export type Forum_Topics__CreateMutationVariables = Exact<{
-  content: Array<TextLanguageInput> | TextLanguageInput;
-  forumId: Scalars['Int']['input'];
-  title: Array<TextLanguageInput> | TextLanguageInput;
-}>;
-
-
-export type Forum_Topics__CreateMutation = { __typename?: 'Mutation', forum_topics__create: { __typename?: 'ShowTopicsForums', created: Date, id: number, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
-
-export type Forum_Topics__EditMutationVariables = Exact<{
-  content: Array<TextLanguageInput> | TextLanguageInput;
-  id: Scalars['Int']['input'];
-  title: Array<TextLanguageInput> | TextLanguageInput;
-}>;
-
-
-export type Forum_Topics__EditMutation = { __typename?: 'Mutation', forum_topics__edit: { __typename?: 'ShowTopicsForums', id: number, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, content: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
-
-export type Admin__Forum_Forums__ShowQueryVariables = Exact<{
-  first?: InputMaybe<Scalars['Int']['input']>;
-  cursor?: InputMaybe<Scalars['Int']['input']>;
-  parentId?: InputMaybe<Scalars['Int']['input']>;
-}>;
-
-
-export type Admin__Forum_Forums__ShowQuery = { __typename?: 'Query', admin__forum_forums__show: { __typename?: 'ShowForumForumsAdminObj', edges: Array<{ __typename?: 'ShowForumForumsAdmin', id: number, position: number, created: Date, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, children: Array<{ __typename?: 'ChildrenShowForumForums', created: Date, id: number, position: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, _count: { __typename?: 'ShowForumForumsCounts', posts: number, topics: number, total_posts: number, total_topics: number } }>, permissions: { __typename?: 'PermissionsForumForumsAdmin', can_all_create: boolean, can_all_read: boolean, can_all_reply: boolean, can_all_view: boolean, can_all_download_files: boolean, groups: Array<{ __typename?: 'GroupsPermissionsForumForums', can_create: boolean, can_read: boolean, can_reply: boolean, can_view: boolean, can_download_files: boolean, group_id: number }> }, _count: { __typename?: 'ShowForumForumsCounts', posts: number, topics: number, total_posts: number, total_topics: number } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
-
-export type Forum_Forums__ShowQueryVariables = Exact<{
-  lastPostsArgs?: InputMaybe<LastPostsShowForumForumsArgs>;
-}>;
-
-
-export type Forum_Forums__ShowQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithChildren', id: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, children: Array<{ __typename?: 'ChildrenShowForumForums', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, children: Array<{ __typename?: 'LastChildShowForumForums', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, _count: { __typename?: 'ShowForumForumsCounts', total_posts: number, total_topics: number, topics: number, posts: number }, last_posts: { __typename?: 'LastPostsShowForumForumsObj', edges: Array<{ __typename?: 'LastPostsShowForumForums', id: number, created: Date, user: { __typename?: 'User', avatar_color: string, id: number, name: string, name_seo: string, avatar?: { __typename?: 'AvatarUser', dir_folder: string, id: number, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }, topic: { __typename?: 'TopicLastPostsShowForumForums', id: number, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } }> }> } };
-
-export type Forum_Forums__Show__SitemapQueryVariables = Exact<{
-  lastPostsArgs?: InputMaybe<LastPostsShowForumForumsArgs>;
-}>;
-
-
-export type Forum_Forums__Show__SitemapQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithChildren', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, last_posts: { __typename?: 'LastPostsShowForumForumsObj', edges: Array<{ __typename?: 'LastPostsShowForumForums', created: Date }> } }> } };
-
-export type Forum_Forums__Show_ItemQueryVariables = Exact<{
-  cursor?: InputMaybe<Scalars['Int']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  forumId: Scalars['Int']['input'];
-  lastPostsArgs?: InputMaybe<LastPostsShowForumForumsArgs>;
-}>;
-
-
-export type Forum_Forums__Show_ItemQuery = { __typename?: 'Query', forum_forums__show: { __typename?: 'ShowForumForumsObj', edges: Array<{ __typename?: 'ShowForumForumsWithChildren', id: number, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, children: Array<{ __typename?: 'ChildrenShowForumForums', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, children: Array<{ __typename?: 'LastChildShowForumForums', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, _count: { __typename?: 'ShowForumForumsCounts', total_posts: number, total_topics: number, topics: number, posts: number }, last_posts: { __typename?: 'LastPostsShowForumForumsObj', edges: Array<{ __typename?: 'LastPostsShowForumForums', created: Date, id: number, user: { __typename?: 'User', avatar_color: string, id: number, name: string, name_seo: string, avatar?: { __typename?: 'AvatarUser', dir_folder: string, id: number, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }, topic: { __typename?: 'TopicLastPostsShowForumForums', id: number, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } }>, permissions: { __typename?: 'PermissionsForumForums', can_create: boolean }, breadcrumbs: Array<{ __typename?: 'BreadcrumbsForumForums', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> }> }, forum_topics__show: { __typename?: 'ShowTopicsForumsObj', edges: Array<{ __typename?: 'ShowTopicsForums', created: Date, id: number, locked: boolean, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, user: { __typename?: 'User', id: number, name_seo: string, name: string, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }, content: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
-
-export type Forum_Forums__Show_Item_MoreQueryVariables = Exact<{
-  cursor?: InputMaybe<Scalars['Int']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  forumId: Scalars['Int']['input'];
-}>;
-
-
-export type Forum_Forums__Show_Item_MoreQuery = { __typename?: 'Query', forum_topics__show: { __typename?: 'ShowTopicsForumsObj', edges: Array<{ __typename?: 'ShowTopicsForums', created: Date, id: number, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, user: { __typename?: 'User', id: number, name_seo: string, name: string, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
-
-export type Forum_Posts__Show_MoreQueryVariables = Exact<{
-  id: Scalars['Int']['input'];
-  limit: Scalars['Int']['input'];
-  sortBy?: InputMaybe<ShowPostsForumsSortingEnum>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-}>;
-
-
-export type Forum_Posts__Show_MoreQuery = { __typename?: 'Query', forum_posts__show: { __typename?: 'ShowPostsForumsObj', edges: Array<{ __typename: 'ShowPostsForums', created: Date, post_id: number, content: Array<{ __typename?: 'TextLanguage', value: string, language_code: string }>, user: { __typename?: 'User', avatar_color: string, id: number, name_seo: string, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } } | { __typename: 'ShowPostsForumsMetaTags', action: TopicActions, created: Date, action_id: number, user: { __typename?: 'User', avatar_color: string, id: number, name_seo: string, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfoShowPostsForums', totalCount: number, hasNextPage: boolean } } };
-
-export type Forum_Topics__ShowQueryVariables = Exact<{
-  id: Scalars['Int']['input'];
-  sortBy?: InputMaybe<ShowPostsForumsSortingEnum>;
-  limit: Scalars['Int']['input'];
-}>;
-
-
-export type Forum_Topics__ShowQuery = { __typename?: 'Query', forum_topics__show: { __typename?: 'ShowTopicsForumsObj', edges: Array<{ __typename?: 'ShowTopicsForums', created: Date, id: number, locked: boolean, content: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, user: { __typename?: 'User', avatar_color: string, id: number, name_seo: string, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }, breadcrumbs: Array<{ __typename?: 'BreadcrumbsForumForums', id: number, name: Array<{ __typename?: 'TextLanguage', value: string, language_code: string }> }>, permissions: { __typename?: 'PermissionsTopicForums', can_reply: boolean, can_edit: boolean, can_download_files: boolean } }> }, forum_posts__show: { __typename?: 'ShowPostsForumsObj', edges: Array<{ __typename: 'ShowPostsForums', created: Date, post_id: number, content: Array<{ __typename?: 'TextLanguage', value: string, language_code: string }>, user: { __typename?: 'User', avatar_color: string, id: number, name_seo: string, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } } | { __typename: 'ShowPostsForumsMetaTags', action: TopicActions, created: Date, action_id: number, user: { __typename?: 'User', avatar_color: string, id: number, name_seo: string, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } }>, lastEdges: Array<{ __typename: 'ShowPostsForums', created: Date, post_id: number, content: Array<{ __typename?: 'TextLanguage', value: string, language_code: string }>, user: { __typename?: 'User', avatar_color: string, id: number, name_seo: string, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } } | { __typename: 'ShowPostsForumsMetaTags', action: TopicActions, created: Date, action_id: number, user: { __typename?: 'User', avatar_color: string, id: number, name_seo: string, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfoShowPostsForums', totalPostsCount: number, totalCount: number, limit: number, hasNextPage: boolean } } };
-
 
 export const Admin__Core_Files__Delete = gql`
     mutation Admin__core_files__delete($id: Int!) {
@@ -2396,18 +1936,6 @@ export const Admin__Core_Staff_Moderators__Create = gql`
 export const Admin__Core_Staff_Moderators__Delete = gql`
     mutation Admin__core_staff_moderators__delete($id: Int!) {
   admin__core_staff_moderators__delete(id: $id)
-}
-    `;
-export const Admin__Core_Manifest_Metadata__Edit = gql`
-    mutation Admin__core_manifest_metadata__edit($display: String!, $startUrl: String!, $backgroundColor: String!, $themeColor: String!) {
-  admin__core_manifest_metadata__edit(
-    display: $display
-    start_url: $startUrl
-    background_color: $backgroundColor
-    theme_color: $themeColor
-  ) {
-    display
-  }
 }
     `;
 export const Admin__Core_Nav__Change_Position = gql`
@@ -2575,6 +2103,41 @@ export const Admin__Core_Main_Settings__Edit = gql`
   ) {
     site_name
   }
+}
+    `;
+export const Admin__Core_Manifest_Metadata__Edit = gql`
+    mutation Admin__core_manifest_metadata__edit($display: String!, $startUrl: String!, $backgroundColor: String!, $themeColor: String!) {
+  admin__core_manifest_metadata__edit(
+    display: $display
+    start_url: $startUrl
+    background_color: $backgroundColor
+    theme_color: $themeColor
+  ) {
+    display
+  }
+}
+    `;
+export const Admin__Core_Email_Settings__Edit = gql`
+    mutation Admin__core_email_settings__edit($smtpHost: String!, $smtpPassword: String!, $smtpPort: Int!, $smtpSecure: Boolean!, $smtpUser: String!) {
+  admin__core_email_settings__edit(
+    smtp_host: $smtpHost
+    smtp_password: $smtpPassword
+    smtp_port: $smtpPort
+    smtp_secure: $smtpSecure
+    smtp_user: $smtpUser
+  ) {
+    smtp_host
+  }
+}
+    `;
+export const Admin__Core_Email_Settings__Test = gql`
+    mutation Admin__core_email_settings__test($to: String!, $from: String!, $message: String!, $subject: String!) {
+  admin__core_email_settings__test(
+    to: $to
+    from: $from
+    message: $message
+    subject: $subject
+  )
 }
     `;
 export const Admin__Core_Theme_Editor__Edit = gql`
@@ -2927,16 +2490,6 @@ export const Admin__Core_Members__Show = gql`
   }
 }
     `;
-export const Admin__Core_Manifest_Metadata__Show = gql`
-    query Admin__core_manifest_metadata__show {
-  admin__core_manifest_metadata__show {
-    display
-    start_url
-    theme_color
-    background_color
-  }
-}
-    `;
 export const Admin__Core_Nav__Show = gql`
     query Admin__Core_nav__show {
   core_nav__show {
@@ -3055,6 +2608,26 @@ export const Admin__Core_Plugins__Nav__Show = gql`
       href
       icon
     }
+  }
+}
+    `;
+export const Admin__Core_Email_Settings__Show = gql`
+    query Admin__core_email_settings__show {
+  admin__core_email_settings__show {
+    smtp_host
+    smtp_port
+    smtp_secure
+    smtp_user
+  }
+}
+    `;
+export const Admin__Core_Manifest_Metadata__Show = gql`
+    query Admin__core_manifest_metadata__show {
+  admin__core_manifest_metadata__show {
+    display
+    start_url
+    theme_color
+    background_color
   }
 }
     `;
@@ -3661,701 +3234,6 @@ export const Core_Members__Profiles = gql`
       name
       name_seo
       posts
-    }
-  }
-}
-    `;
-export const Admin__Forum_Forums__Change_Position = gql`
-    mutation Admin__forum_forums__change_position($id: Int!, $indexToMove: Int!, $parentId: Int!) {
-  admin__forum_forums__change_position(
-    id: $id
-    index_to_move: $indexToMove
-    parent_id: $parentId
-  )
-}
-    `;
-export const Admin__Forum_Forums__Create = gql`
-    mutation Admin__forum_forums__create($name: [TextLanguageInput!]!, $description: [TextLanguageInput!]!, $parentId: Int, $permissions: PermissionsCreateForumForums!) {
-  admin__forum_forums__create(
-    name: $name
-    description: $description
-    parent_id: $parentId
-    permissions: $permissions
-  ) {
-    created
-    description {
-      language_code
-      value
-    }
-    id
-    name {
-      language_code
-      value
-    }
-    position
-  }
-}
-    `;
-export const Admin__Forum_Forums__Delete = gql`
-    mutation Admin__forum_forums__delete($id: Int!, $moveTopicsTo: Int) {
-  admin__forum_forums__delete(id: $id, move_topics_to: $moveTopicsTo)
-}
-    `;
-export const Admin__Forum_Forums__Edit = gql`
-    mutation Admin__forum_forums__edit($description: [TextLanguageInput!]!, $id: Int!, $name: [TextLanguageInput!]!, $permissions: PermissionsCreateForumForums!, $parentId: Int) {
-  admin__forum_forums__edit(
-    description: $description
-    id: $id
-    name: $name
-    permissions: $permissions
-    parent_id: $parentId
-  ) {
-    id
-    name {
-      language_code
-      value
-    }
-    description {
-      language_code
-      value
-    }
-    position
-    created
-  }
-}
-    `;
-export const Admin__Forum_Forums__Show_Short = gql`
-    query Admin__forum_forums__show_short($search: String, $showAllForums: Boolean, $first: Int) {
-  admin__forum_forums__show(
-    search: $search
-    show_all_forums: $showAllForums
-    first: $first
-  ) {
-    edges {
-      name {
-        language_code
-        value
-      }
-      id
-    }
-  }
-}
-    `;
-export const Forum_Posts__Create = gql`
-    mutation Forum_posts__create($content: [TextLanguageInput!]!, $topicId: Int!) {
-  forum_posts__create(content: $content, topic_id: $topicId) {
-    content {
-      language_code
-      value
-    }
-    created
-    user {
-      avatar {
-        dir_folder
-        id
-        file_name
-      }
-      avatar_color
-      group {
-        id
-        name {
-          language_code
-          value
-        }
-      }
-      id
-      name
-      name_seo
-    }
-  }
-}
-    `;
-export const Forum_Posts__Delete = gql`
-    mutation Forum_posts__delete($id: Int!) {
-  forum_posts__delete(id: $id)
-}
-    `;
-export const Forum_Topics__Actions__Lock_Toggle = gql`
-    mutation Forum_topics__actions__lock_toggle($id: Int!) {
-  forum_topics__actions__lock_toggle(id: $id)
-}
-    `;
-export const Forum_Topics__Create = gql`
-    mutation Forum_topics__create($content: [TextLanguageInput!]!, $forumId: Int!, $title: [TextLanguageInput!]!) {
-  forum_topics__create(content: $content, forum_id: $forumId, title: $title) {
-    created
-    id
-    title {
-      language_code
-      value
-    }
-  }
-}
-    `;
-export const Forum_Topics__Edit = gql`
-    mutation Forum_topics__edit($content: [TextLanguageInput!]!, $id: Int!, $title: [TextLanguageInput!]!) {
-  forum_topics__edit(content: $content, id: $id, title: $title) {
-    id
-    title {
-      language_code
-      value
-    }
-    content {
-      language_code
-      value
-    }
-  }
-}
-    `;
-export const Admin__Forum_Forums__Show = gql`
-    query Admin__forum_forums__show($first: Int, $cursor: Int, $parentId: Int) {
-  admin__forum_forums__show(first: $first, cursor: $cursor, parent_id: $parentId) {
-    edges {
-      id
-      description {
-        language_code
-        value
-      }
-      name {
-        language_code
-        value
-      }
-      position
-      created
-      children {
-        created
-        description {
-          language_code
-          value
-        }
-        id
-        name {
-          language_code
-          value
-        }
-        position
-        _count {
-          posts
-          topics
-          total_posts
-          total_topics
-        }
-      }
-      permissions {
-        can_all_create
-        can_all_read
-        can_all_reply
-        can_all_view
-        can_all_download_files
-        groups {
-          can_create
-          can_read
-          can_reply
-          can_view
-          can_download_files
-          group_id
-        }
-      }
-      _count {
-        posts
-        topics
-        total_posts
-        total_topics
-      }
-    }
-    pageInfo {
-      count
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-      totalCount
-    }
-  }
-}
-    `;
-export const Forum_Forums__Show = gql`
-    query Forum_forums__show($lastPostsArgs: LastPostsShowForumForumsArgs) {
-  forum_forums__show(last_posts_args: $lastPostsArgs) {
-    edges {
-      id
-      description {
-        language_code
-        value
-      }
-      name {
-        language_code
-        value
-      }
-      children {
-        id
-        name {
-          language_code
-          value
-        }
-        children {
-          id
-          name {
-            language_code
-            value
-          }
-        }
-        description {
-          language_code
-          value
-        }
-        _count {
-          total_posts
-          total_topics
-          topics
-          posts
-        }
-        last_posts {
-          edges {
-            id
-            user {
-              avatar {
-                dir_folder
-                id
-                file_name
-              }
-              avatar_color
-              group {
-                id
-                name {
-                  language_code
-                  value
-                }
-              }
-              id
-              name
-              name_seo
-            }
-            topic {
-              id
-              title {
-                language_code
-                value
-              }
-            }
-            created
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const Forum_Forums__Show__Sitemap = gql`
-    query Forum_forums__show__sitemap($lastPostsArgs: LastPostsShowForumForumsArgs) {
-  forum_forums__show(last_posts_args: $lastPostsArgs) {
-    edges {
-      id
-      name {
-        language_code
-        value
-      }
-      last_posts {
-        edges {
-          created
-        }
-      }
-    }
-  }
-}
-    `;
-export const Forum_Forums__Show_Item = gql`
-    query Forum_forums__show_item($cursor: Int, $first: Int, $last: Int, $forumId: Int!, $lastPostsArgs: LastPostsShowForumForumsArgs) {
-  forum_forums__show(ids: [$forumId], last_posts_args: $lastPostsArgs) {
-    edges {
-      id
-      description {
-        language_code
-        value
-      }
-      name {
-        language_code
-        value
-      }
-      children {
-        id
-        name {
-          language_code
-          value
-        }
-        children {
-          id
-          name {
-            language_code
-            value
-          }
-        }
-        description {
-          language_code
-          value
-        }
-        _count {
-          total_posts
-          total_topics
-          topics
-          posts
-        }
-        last_posts {
-          edges {
-            created
-            id
-            user {
-              avatar {
-                dir_folder
-                id
-                file_name
-              }
-              avatar_color
-              group {
-                id
-                name {
-                  language_code
-                  value
-                }
-              }
-              id
-              name
-              name_seo
-            }
-            topic {
-              id
-              title {
-                language_code
-                value
-              }
-            }
-          }
-        }
-      }
-      permissions {
-        can_create
-      }
-      breadcrumbs {
-        id
-        name {
-          language_code
-          value
-        }
-      }
-    }
-  }
-  forum_topics__show(
-    cursor: $cursor
-    first: $first
-    last: $last
-    forum_id: $forumId
-  ) {
-    edges {
-      created
-      id
-      title {
-        language_code
-        value
-      }
-      user {
-        id
-        name_seo
-        name
-        avatar_color
-        avatar {
-          id
-          dir_folder
-          file_name
-        }
-        group {
-          id
-          name {
-            language_code
-            value
-          }
-        }
-      }
-      content {
-        language_code
-        value
-      }
-      locked
-    }
-    pageInfo {
-      count
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-      totalCount
-    }
-  }
-}
-    `;
-export const Forum_Forums__Show_Item_More = gql`
-    query Forum_forums__show_item_more($cursor: Int, $first: Int, $last: Int, $forumId: Int!) {
-  forum_topics__show(
-    cursor: $cursor
-    first: $first
-    last: $last
-    forum_id: $forumId
-  ) {
-    edges {
-      created
-      id
-      title {
-        language_code
-        value
-      }
-      user {
-        id
-        name_seo
-        name
-        avatar_color
-        avatar {
-          id
-          dir_folder
-          file_name
-        }
-        group {
-          id
-          name {
-            language_code
-            value
-          }
-        }
-      }
-    }
-    pageInfo {
-      count
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-      totalCount
-    }
-  }
-}
-    `;
-export const Forum_Posts__Show_More = gql`
-    query Forum_posts__show_more($id: Int!, $limit: Int!, $sortBy: ShowPostsForumsSortingEnum, $page: Int) {
-  forum_posts__show(topic_id: $id, limit: $limit, sortBy: $sortBy, page: $page) {
-    edges {
-      __typename
-      ... on ShowPostsForums {
-        content {
-          value
-          language_code
-        }
-        user {
-          avatar_color
-          avatar {
-            id
-            dir_folder
-            file_name
-          }
-          group {
-            id
-            name {
-              language_code
-              value
-            }
-          }
-          id
-          name_seo
-          name
-        }
-        created
-        post_id
-      }
-      ... on ShowPostsForumsMetaTags {
-        action
-        user {
-          avatar_color
-          avatar {
-            id
-            dir_folder
-            file_name
-          }
-          group {
-            id
-            name {
-              language_code
-              value
-            }
-          }
-          id
-          name_seo
-          name
-        }
-        created
-        action_id
-      }
-    }
-    pageInfo {
-      totalCount
-      hasNextPage
-    }
-  }
-}
-    `;
-export const Forum_Topics__Show = gql`
-    query Forum_topics__show($id: Int!, $sortBy: ShowPostsForumsSortingEnum, $limit: Int!) {
-  forum_topics__show(id: $id) {
-    edges {
-      content {
-        language_code
-        value
-      }
-      created
-      id
-      locked
-      title {
-        language_code
-        value
-      }
-      user {
-        avatar_color
-        avatar {
-          id
-          dir_folder
-          file_name
-        }
-        group {
-          id
-          name {
-            language_code
-            value
-          }
-        }
-        id
-        name_seo
-        name
-      }
-      breadcrumbs {
-        id
-        name {
-          value
-          language_code
-        }
-      }
-      permissions {
-        can_reply
-        can_edit
-        can_download_files
-      }
-    }
-  }
-  forum_posts__show(topic_id: $id, sortBy: $sortBy, limit: $limit) {
-    edges {
-      __typename
-      ... on ShowPostsForums {
-        content {
-          value
-          language_code
-        }
-        user {
-          avatar_color
-          avatar {
-            id
-            dir_folder
-            file_name
-          }
-          group {
-            id
-            name {
-              language_code
-              value
-            }
-          }
-          id
-          name_seo
-          name
-        }
-        created
-        post_id
-      }
-      ... on ShowPostsForumsMetaTags {
-        action
-        user {
-          avatar_color
-          avatar {
-            id
-            dir_folder
-            file_name
-          }
-          group {
-            id
-            name {
-              language_code
-              value
-            }
-          }
-          id
-          name_seo
-          name
-        }
-        created
-        action_id
-      }
-    }
-    lastEdges {
-      __typename
-      ... on ShowPostsForums {
-        content {
-          value
-          language_code
-        }
-        user {
-          avatar_color
-          avatar {
-            id
-            dir_folder
-            file_name
-          }
-          group {
-            id
-            name {
-              language_code
-              value
-            }
-          }
-          id
-          name_seo
-          name
-        }
-        created
-        post_id
-      }
-      ... on ShowPostsForumsMetaTags {
-        action
-        user {
-          avatar_color
-          avatar {
-            id
-            dir_folder
-            file_name
-          }
-          group {
-            id
-            name {
-              language_code
-              value
-            }
-          }
-          id
-          name_seo
-          name
-        }
-        created
-        action_id
-      }
-    }
-    pageInfo {
-      totalPostsCount
-      totalCount
-      limit
-      hasNextPage
     }
   }
 }

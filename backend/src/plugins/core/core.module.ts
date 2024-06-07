@@ -10,7 +10,6 @@ import { CoreFilesModule, GlobalCoreFilesModule } from "./files/files.module";
 import { CoreEditorModule } from "./editor/editor.module";
 import { GlobalCoreHelpersModule } from "./helpers/helpers.module";
 import { CoreLanguagesModule } from "./languages/languages.module";
-import { CoreMailModule } from "./mail/mail.module";
 import { CoreMembersModule } from "./members/members.module";
 import { CoreMiddlewareModule } from "./middleware/middleware.module";
 import { CoreNavModule } from "./nav/nav.module";
@@ -29,7 +28,6 @@ import { CoreThemeEditorModule } from "./theme_editor/theme_editor.module";
     CoreEditorModule,
     GlobalCoreHelpersModule,
     CoreLanguagesModule,
-    CoreMailModule,
     CoreMembersModule,
     CoreMiddlewareModule,
     CoreNavModule,

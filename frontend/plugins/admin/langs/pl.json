@@ -27,6 +27,29 @@
           "copyright": {
             "label": "Prawa autorskie strony"
           }
+        },
+        "email": {
+          "smtp": "SMTP",
+          "smtp_host": "Host SMTP",
+          "smtp_user": "Użytkownik SMTP",
+          "smtp_password": "Hasło SMTP",
+          "smtp_port": "Port SMTP",
+          "smtp_secure": {
+            "label": "Bezpieczne SMTP (SSL/TLS)",
+            "desc": "Użyj `tak` jeśli Twój host używa portu 465, `nie` dla wszystkich innych portów"
+          },
+          "test": {
+            "title": "Testuj wysyłanie emaili",
+            "from": "Od",
+            "to": "Do",
+            "subject": "Temat",
+            "message": "Wiadomość",
+            "success": {
+              "title": "Email został wysłany",
+              "desc": "Sprawdź swoją skrzynkę odbiorczą, aby zobaczyć czy email został dostarczony."
+            },
+            "send_testing_email": "Wyślij testowy email"
+          }
         }
       },
       "metadata": {

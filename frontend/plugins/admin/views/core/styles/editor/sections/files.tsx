@@ -13,7 +13,7 @@ export const FilesSectionContentEditorAdmin = () => {
 
   return (
     <>
-      <div className="w-full space-y-2 self-start">
+      <div className="w-full space-y-2">
         <HeaderContent h2={"Files"} className="m-0" />
 
         <Separator />

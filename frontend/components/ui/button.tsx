@@ -43,6 +43,7 @@ export interface ButtonProps
   ariaLabel?: string;
   asChild?: boolean;
   loading?: boolean;
+  loadingText?: string;
   size?: "default" | "lg" | "sm";
 }
 
@@ -59,22 +60,25 @@ const Button = ({
   size,
   type = "button",
   variant,
+  loadingText,
   ...props
 }: ButtonProps | IconButtonProps) => {
   const t = useTranslations("core");
   const Comp = asChild ? Slot : "button";
 
   if (loading) {
+    const text = loadingText ? loadingText : t("loading");
+
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         {...props}
         type="button"
-        aria-label={t("loading")}
+        aria-label={text}
         disabled
       >
         <Loader small />
-        {size !== "icon" && t("loading")}
+        {size !== "icon" && text}
       </Comp>
     );
   }
