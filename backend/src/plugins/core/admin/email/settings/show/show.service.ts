@@ -9,15 +9,15 @@ import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class ShowAdminEmailSettingsService {
-  show(): ShowAdminEmailSettingsServiceObj {
-    const path = join(
-      ABSOLUTE_PATHS.plugin({ code: "core" }).root,
-      "admin",
-      "email",
-      "main.config.json"
-    );
+  private readonly path = join(
+    ABSOLUTE_PATHS.plugin({ code: "core" }).root,
+    "admin",
+    "email",
+    "main.config.json"
+  );
 
-    if (!fs.existsSync(path)) {
+  show(): ShowAdminEmailSettingsServiceObj {
+    if (!fs.existsSync(this.path)) {
       return {
         host: "",
         user: "",
@@ -26,7 +26,7 @@ export class ShowAdminEmailSettingsService {
       };
     }
 
-    const read = fs.readFileSync(path, "utf-8");
+    const read = fs.readFileSync(this.path, "utf-8");
     const config: ShowAdminEmailSettingsServiceObj = JSON.parse(read);
 
     return config;
