@@ -8,6 +8,13 @@
       "when": 1717093167312,
       "tag": "0000_fine_supernaut",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1717837200014,
+      "tag": "0001_married_big_bertha",
+      "breakpoints": true
     }
   ]
 }

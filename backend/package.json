@@ -14,8 +14,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "migrate:forum": "drizzle-kit generate --config src/plugins/forum/admin/database/drizzle.config.ts",
-    "migrate:admin": "drizzle-kit generate --config src/plugins/core/admin/database/drizzle.config.ts",
-    "migrate:blog": "drizzle-kit generate --config src/plugins/blog/admin/database/drizzle.config.ts",
+    "migrate:admin": "drizzle-kit up --config src/plugins/core/admin/database/drizzle.config.ts && drizzle-kit generate --config src/plugins/core/admin/database/drizzle.config.ts",
+    "migrate:blog": "drizzle-kit up --config src/plugins/blog/admin/database/drizzle.config.ts && drizzle-kit generate --config src/plugins/blog/admin/database/drizzle.config.ts",
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
@@ -66,8 +66,8 @@
     "cookie-parser": "^1.4.6",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
-    "drizzle-kit": "^0.22.4",
-    "drizzle-orm": "^0.31.1",
+    "drizzle-kit": "^0.22.5",
+    "drizzle-orm": "^0.31.2",
     "eslint": "^8.57.0",
     "eslint-config-vitnode": "workspace:*",
     "http-errors": "^2.0.0",

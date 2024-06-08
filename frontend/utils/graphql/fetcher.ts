@@ -103,6 +103,7 @@ export async function fetcher<TData, TVariables>({
     ["x-forwarded-for"]:
       nextInternalHeaders.get("x-forwarded-for") ?? "0.0.0.0",
     ["x-real-ip"]: nextInternalHeaders.get("x-real-ip") ?? "0.0.0.0",
+    "x-vitnode-user-language": cookies().get("NEXT_LOCALE")?.value ?? "en",
     ...headers
   };
 

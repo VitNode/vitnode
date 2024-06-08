@@ -161,7 +161,7 @@ export class DownloadAdminPluginsService {
 
     try {
       await execShellCommand(
-        `npx drizzle-kit generate --config src/plugins/${code}/admin/database/drizzle.config.ts`
+        `npx drizzle-kit up --config src/plugins/${code}/admin/database/drizzle.config.ts && npx drizzle-kit generate --config src/plugins/${code}/admin/database/drizzle.config.ts`
       );
     } catch (err) {
       throw new CustomError({
