@@ -1,5 +1,6 @@
 import * as fs from "fs";
 
+import { generateHTMLEmail } from "@vitnode/utils";
 import { Injectable } from "@nestjs/common";
 import { createTransport } from "nodemailer";
 
@@ -59,7 +60,9 @@ export class SendAdminEmailService extends HelpersAdminEmailSettingsService {
     const transporter = this.createTransport({});
 
     if (html) {
-      return "Email sent with HTML!";
+      const test = await generateHTMLEmail();
+
+      return test;
     }
 
     await transporter.sendMail({

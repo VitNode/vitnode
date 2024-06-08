@@ -4,6 +4,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "commonjs",
+    "jsx": "preserve",
     "baseUrl": "./",
     "outDir": "./dist",
     "declaration": true,
