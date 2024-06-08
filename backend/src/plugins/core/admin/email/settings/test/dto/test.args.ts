@@ -1,15 +1,26 @@
-import { ArgsType, Field, OmitType } from "@nestjs/graphql";
+import { ArgsType, Field } from "@nestjs/graphql";
 import { Transform } from "class-transformer";
+import { IsEmail } from "class-validator";
 
-import { SendAdminEmailServiceArgs } from "../../../send/dto/send.args";
 import { TransformString } from "@/utils/types/database/text-language.type";
 
 @ArgsType()
-export class TestAdminEmailSettingsServiceArgs extends OmitType(
-  SendAdminEmailServiceArgs,
-  ["message", "html"] as const
-) {
+export class TestAdminEmailSettingsServiceArgs {
   @Field(() => String)
   @Transform(TransformString)
   message: string;
+
+  @IsEmail()
+  @Field(() => String)
+  @Transform(TransformString)
+  to: string;
+
+  @IsEmail()
+  @Field(() => String)
+  @Transform(TransformString)
+  from: string;
+
+  @Field(() => String)
+  @Transform(TransformString)
+  subject: string;
 }

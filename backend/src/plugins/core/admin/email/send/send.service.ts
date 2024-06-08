@@ -7,9 +7,26 @@ import {
   HelpersAdminEmailSettingsService,
   ShowAdminEmailSettingsServiceObjWithPassword
 } from "../helpers.service";
-import { SendAdminEmailServiceArgs } from "./dto/send.args";
 
-import { NotFoundError } from "@/utils/errors/not-found-error";
+interface SendAdminEmailServiceArgs {
+  from: string;
+  subject: string;
+  to: string;
+}
+
+interface SendAdminEmailServiceArgsWithMessage
+  extends SendAdminEmailServiceArgs {
+  message: string;
+  html?: never;
+}
+
+interface SendAdminEmailServiceArgsWithHtml extends SendAdminEmailServiceArgs {
+  html: {
+    context: Record<string, any>;
+    path: string;
+  };
+  message?: never;
+}
 
 @Injectable()
 export class SendAdminEmailService extends HelpersAdminEmailSettingsService {
@@ -36,21 +53,22 @@ export class SendAdminEmailService extends HelpersAdminEmailSettingsService {
     subject,
     message,
     html
-  }: SendAdminEmailServiceArgs): Promise<string> {
+  }:
+    | SendAdminEmailServiceArgsWithHtml
+    | SendAdminEmailServiceArgsWithMessage): Promise<string> {
     const transporter = this.createTransport({});
 
-    if (!html && !message) {
-      throw new NotFoundError("HTML & Message are missing");
+    if (html) {
+      return "Email sent with HTML!";
     }
 
     await transporter.sendMail({
       from,
       to,
       subject,
-      text: message,
-      html
+      text: message
     });
 
-    return "Email sent!";
+    return "Email sent with Message!";
   }
 }
