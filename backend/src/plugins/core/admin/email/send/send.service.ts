@@ -1,14 +1,8 @@
-import * as fs from "fs";
-import { join } from "path";
-
-import { generateHTMLEmail } from "@vitnode/utils";
 import { Injectable } from "@nestjs/common";
-import { createTransport } from "nodemailer";
+import * as React from "react";
 
-import {
-  HelpersAdminEmailSettingsService,
-  ShowAdminEmailSettingsServiceObjWithPassword
-} from "../helpers.service";
+import { MailService } from "../mail.service";
+import { VercelInviteUserEmail } from "../templates/email";
 
 interface SendAdminEmailServiceArgs {
   from: string;
@@ -23,31 +17,13 @@ interface SendAdminEmailServiceArgsWithMessage
 }
 
 interface SendAdminEmailServiceArgsWithHtml extends SendAdminEmailServiceArgs {
-  html: {
-    context: Record<string, any>;
-    path: string;
-  };
+  html: React.ReactNode;
   message?: never;
 }
 
 @Injectable()
-export class SendAdminEmailService extends HelpersAdminEmailSettingsService {
-  protected createTransport = ({ pool = false }: { pool?: boolean }) => {
-    const data = fs.readFileSync(this.path, "utf-8");
-    const config: ShowAdminEmailSettingsServiceObjWithPassword =
-      JSON.parse(data);
-
-    return createTransport({
-      host: config.smtp_host,
-      port: config.smtp_port,
-      auth: {
-        user: config.smtp_user,
-        pass: config.smtp_password
-      },
-      secure: config.smtp_secure,
-      pool: pool ? true : undefined
-    });
-  };
+export class SendAdminEmailService {
+  constructor(private readonly mailService: MailService) {}
 
   async send({
     to,
@@ -58,36 +34,15 @@ export class SendAdminEmailService extends HelpersAdminEmailSettingsService {
   }:
     | SendAdminEmailServiceArgsWithHtml
     | SendAdminEmailServiceArgsWithMessage): Promise<string> {
-    const transporter = this.createTransport({});
-
     if (html) {
-      const test = await generateHTMLEmail({
-        pathToTemplate: join(
-          process.cwd(),
-          "..",
-          "packages",
-          "utils",
-          "src",
-          "email.tsx"
-        )
+      await this.mailService.sendMail({
+        to,
+        subject,
+        template: VercelInviteUserEmail({})
       });
 
-      // await transporter.sendMail({
-      //   from,
-      //   to,
-      //   subject,
-      //   html: test
-      // });
-
-      return test;
+      return "";
     }
-
-    await transporter.sendMail({
-      from,
-      to,
-      subject,
-      text: message
-    });
 
     return "Email sent with Message!";
   }

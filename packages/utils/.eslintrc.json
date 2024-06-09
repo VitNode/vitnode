@@ -1,8 +1,0 @@
-{
-  "$schema": "https://json.schemastore.org/eslintrc",
-  "extends": ["eslint-config-vitnode/.eslintrc.json"],
-  "env": {
-    "node": true
-  },
-  "ignorePatterns": ["node_modules", "uploads", "dist", ".turbo"]
-}

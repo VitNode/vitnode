@@ -1,5 +1,3 @@
-import { join } from "path";
-
 import { Injectable } from "@nestjs/common";
 
 import { TestAdminEmailSettingsServiceArgs } from "./dto/test.args";
@@ -17,10 +15,7 @@ export class TestAdminEmailSettingsService extends SendAdminEmailService {
       from,
       to,
       subject,
-      html: {
-        path: join(__dirname, "test.email.tsx"),
-        context: {}
-      }
+      html: "<h1>Test Email</h1>"
     });
 
     return "Email sent!";
