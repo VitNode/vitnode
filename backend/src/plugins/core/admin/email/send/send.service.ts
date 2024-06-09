@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import { join } from "path";
 
 import { generateHTMLEmail } from "@vitnode/utils";
 import { Injectable } from "@nestjs/common";
@@ -60,7 +61,23 @@ export class SendAdminEmailService extends HelpersAdminEmailSettingsService {
     const transporter = this.createTransport({});
 
     if (html) {
-      const test = await generateHTMLEmail();
+      const test = await generateHTMLEmail({
+        pathToTemplate: join(
+          process.cwd(),
+          "..",
+          "packages",
+          "utils",
+          "src",
+          "email.tsx"
+        )
+      });
+
+      // await transporter.sendMail({
+      //   from,
+      //   to,
+      //   subject,
+      //   html: test
+      // });
 
       return test;
     }

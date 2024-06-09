@@ -1,14 +1,14 @@
 import * as React from "react";
-import { Html, Button } from "@react-email/components";
+import { Button, Html } from "@react-email/components";
 
-interface Props {
-  url: string;
-}
+import { getTranslationForEmail } from "./get-translation-for-email";
 
-export function Email({ url }: Props) {
+export default function Email() {
+  const t = getTranslationForEmail("admin");
+
   return (
     <Html lang="en">
-      <Button href={url}>Click me</Button>
+      <Button>XDDD - {t("title")}</Button>
     </Html>
   );
 }

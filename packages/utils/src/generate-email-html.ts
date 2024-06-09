@@ -1,11 +1,19 @@
-import { render } from "@react-email/render";
+import * as fs from "fs";
 
-export const generateHTMLEmail = async () => {
-  const lang = "en";
+import { renderAsync } from "@react-email/render";
 
-  const Email = (await import(`./email`)).Email;
+export const generateHTMLEmail = async ({
+  pathToTemplate
+}: {
+  pathToTemplate: string;
+}) => {
+  if (!fs.existsSync(pathToTemplate)) {
+    throw new Error(`File ${pathToTemplate} does not exist`);
+  }
 
-  const emailHtml = render(Email({ url: "https://example.com" }));
+  const Email = (await import(pathToTemplate)).default;
+
+  const emailHtml = renderAsync(Email());
 
   return emailHtml;
 };
