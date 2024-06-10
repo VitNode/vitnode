@@ -39,6 +39,7 @@
           "smtp_password": "SMTP Password",
           "smtp_port": "SMTP Port",
           "smtp_secure": "SMTP Secure (SSL/TLS)",
+          "color_primary": "Primary Color",
           "test": {
             "title": "Test Email Sending",
             "from": "From",

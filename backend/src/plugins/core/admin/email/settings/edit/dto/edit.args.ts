@@ -16,4 +16,10 @@ export class EditAdminEmailSettingsServiceArgs {
 
   @Field(() => Boolean)
   smtp_secure: boolean;
+
+  @Field(() => String)
+  color_primary: string;
+
+  @Field(() => String)
+  color_primary_foreground: string;
 }

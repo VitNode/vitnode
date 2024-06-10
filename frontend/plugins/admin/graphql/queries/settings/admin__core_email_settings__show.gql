@@ -4,5 +4,6 @@ query Admin__core_email_settings__show {
     smtp_port
     smtp_secure
     smtp_user
+    color_primary
   }
 }

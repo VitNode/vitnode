@@ -4,6 +4,8 @@ mutation Admin__core_email_settings__edit(
   $smtpPort: Int!
   $smtpSecure: Boolean!
   $smtpUser: String!
+  $colorPrimaryForeground: String!
+  $colorPrimary: String!
 ) {
   admin__core_email_settings__edit(
     smtp_host: $smtpHost
@@ -11,6 +13,8 @@ mutation Admin__core_email_settings__edit(
     smtp_port: $smtpPort
     smtp_secure: $smtpSecure
     smtp_user: $smtpUser
+    color_primary_foreground: $colorPrimaryForeground
+    color_primary: $colorPrimary
   ) {
     smtp_host
   }

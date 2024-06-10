@@ -12,22 +12,8 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
-import { getTranslationForEmail } from "../helpers";
+import { getHelpersForEmail, getTranslationForEmail } from "../helpers";
 import { HeaderEmail } from "./_components/header";
-
-import { getConfigFile } from "@/config";
-import { parseFrontendUrlFromEnv } from "@/functions/envs";
-
-const color = {
-  background: "[#f8f9fc]",
-  foreground: "[#131415]",
-  card: "[#fff]",
-  border: "[#e0e4eb]",
-  muted: {
-    DEFAULT: "[#f1f3f9]",
-    foreground: "[#676d79]"
-  }
-};
 
 interface Props {
   children: React.ReactNode;
@@ -35,14 +21,14 @@ interface Props {
   header?: React.ReactNode;
 }
 
-export default function EmailTemplate({
+export const EmailTemplate = ({
   previewText = "previewText",
   header = <HeaderEmail />,
   children = "This is the email template."
-}: Props) {
+}: Props) => {
   const t = getTranslationForEmail("admin.core.email");
-  const config = getConfigFile();
-  const frontend_url = parseFrontendUrlFromEnv();
+  const { color, frontend_url, site_name, site_short_name } =
+    getHelpersForEmail();
 
   return (
     <Html>
@@ -110,16 +96,18 @@ export default function EmailTemplate({
           className={`bg-${color.background} mx-auto px-2 font-sans text-${color.foreground}`}
         >
           <Container className="max-w-[600px]">
-            <Section className="my-8 text-xl">
-              {config.settings.general.site_name}
-            </Section>
+            <Section className="my-8 text-xl">{site_name}</Section>
 
             <Section
               className={`rounded border border-solid border-${color.border} p-5 bg-${color.card}`}
             >
               {header}
               <Text className="mt-0">
-                {t("hello")} <span className="font-bold">aXen</span>,
+                {t("hello")}{" "}
+                <span className={`font-bold text-${color.primary.DEFAULT}`}>
+                  aXen
+                </span>
+                ,
               </Text>
               {typeof children === "string" ? (
                 <Text className="text-[14px] leading-[24px] text-black">
@@ -134,7 +122,10 @@ export default function EmailTemplate({
               />
               <Text className={`text-xs text-${color.muted.foreground}`}>
                 {t("footer")}{" "}
-                <Link href="mailto:aXenDeveloper@gmail.com">
+                <Link
+                  href="mailto:aXenDeveloper@gmail.com"
+                  className={`text-${color.primary.DEFAULT}`}
+                >
                   aXenDeveloper@gmail.com
                 </Link>
               </Text>
@@ -145,8 +136,7 @@ export default function EmailTemplate({
                 href={frontend_url.url}
                 className={`text-${color.muted.foreground}`}
               >
-                {config.settings.general.site_short_name} ©{" "}
-                {new Date().getFullYear()}
+                {site_short_name} © {new Date().getFullYear()}
               </Link>
             </Section>
           </Container>
@@ -154,4 +144,6 @@ export default function EmailTemplate({
       </Tailwind>
     </Html>
   );
-}
+};
+
+export default EmailTemplate;

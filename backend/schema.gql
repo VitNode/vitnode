@@ -138,7 +138,7 @@ type LayoutAdminInstallObj {
 
 type Mutation {
   admin__blog_categories__create(color: String!, description: [TextLanguageInput!]!, name: [TextLanguageInput!]!): ShowBlogCategories!
-  admin__core_email_settings__edit(smtp_host: String!, smtp_password: String!, smtp_port: Int!, smtp_secure: Boolean!, smtp_user: String!): ShowAdminEmailSettingsServiceObj!
+  admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, smtp_host: String!, smtp_password: String!, smtp_port: Int!, smtp_secure: Boolean!, smtp_user: String!): ShowAdminEmailSettingsServiceObj!
   admin__core_email_settings__test(from: String!, message: String!, subject: String!, to: String!): String!
   admin__core_files__delete(id: Int!): String!
   admin__core_groups__delete(id: Int!): String!
@@ -230,6 +230,7 @@ type Query {
 }
 
 type ShowAdminEmailSettingsServiceObj {
+  color_primary: String!
   smtp_host: String!
   smtp_port: Int!
   smtp_secure: Boolean!

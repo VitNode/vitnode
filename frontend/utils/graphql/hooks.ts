@@ -219,6 +219,8 @@ export type MutationAdmin__Blog_Categories__CreateArgs = {
 
 
 export type MutationAdmin__Core_Email_Settings__EditArgs = {
+  color_primary: Scalars['String']['input'];
+  color_primary_foreground: Scalars['String']['input'];
   smtp_host: Scalars['String']['input'];
   smtp_password: Scalars['String']['input'];
   smtp_port: Scalars['Int']['input'];
@@ -688,6 +690,7 @@ export type QueryCore_Themes__ShowArgs = {
 
 export type ShowAdminEmailSettingsServiceObj = {
   __typename?: 'ShowAdminEmailSettingsServiceObj';
+  color_primary: Scalars['String']['output'];
   smtp_host: Scalars['String']['output'];
   smtp_port: Scalars['Int']['output'];
   smtp_secure: Scalars['Boolean']['output'];
@@ -1470,6 +1473,8 @@ export type Admin__Core_Email_Settings__EditMutationVariables = Exact<{
   smtpPort: Scalars['Int']['input'];
   smtpSecure: Scalars['Boolean']['input'];
   smtpUser: Scalars['String']['input'];
+  colorPrimaryForeground: Scalars['String']['input'];
+  colorPrimary: Scalars['String']['input'];
 }>;
 
 
@@ -1655,7 +1660,7 @@ export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin_
 export type Admin__Core_Email_Settings__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Admin__Core_Email_Settings__ShowQuery = { __typename?: 'Query', admin__core_email_settings__show: { __typename?: 'ShowAdminEmailSettingsServiceObj', smtp_host: string, smtp_port: number, smtp_secure: boolean, smtp_user: string } };
+export type Admin__Core_Email_Settings__ShowQuery = { __typename?: 'Query', admin__core_email_settings__show: { __typename?: 'ShowAdminEmailSettingsServiceObj', smtp_host: string, smtp_port: number, smtp_secure: boolean, smtp_user: string, color_primary: string } };
 
 export type Admin__Core_Manifest_Metadata__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2118,13 +2123,15 @@ export const Admin__Core_Manifest_Metadata__Edit = gql`
 }
     `;
 export const Admin__Core_Email_Settings__Edit = gql`
-    mutation Admin__core_email_settings__edit($smtpHost: String!, $smtpPassword: String!, $smtpPort: Int!, $smtpSecure: Boolean!, $smtpUser: String!) {
+    mutation Admin__core_email_settings__edit($smtpHost: String!, $smtpPassword: String!, $smtpPort: Int!, $smtpSecure: Boolean!, $smtpUser: String!, $colorPrimaryForeground: String!, $colorPrimary: String!) {
   admin__core_email_settings__edit(
     smtp_host: $smtpHost
     smtp_password: $smtpPassword
     smtp_port: $smtpPort
     smtp_secure: $smtpSecure
     smtp_user: $smtpUser
+    color_primary_foreground: $colorPrimaryForeground
+    color_primary: $colorPrimary
   ) {
     smtp_host
   }
@@ -2618,6 +2625,7 @@ export const Admin__Core_Email_Settings__Show = gql`
     smtp_port
     smtp_secure
     smtp_user
+    color_primary
   }
 }
     `;
