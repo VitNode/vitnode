@@ -5,7 +5,11 @@ import { IsEmail } from "class-validator";
 import { TransformString } from "@/utils/types/database/text-language.type";
 
 @ArgsType()
-export class SendAdminEmailSettingsServiceArgs {
+export class TestAdminEmailSettingsServiceArgs {
+  @Field(() => String)
+  @Transform(TransformString)
+  message: string;
+
   @IsEmail()
   @Field(() => String)
   @Transform(TransformString)
@@ -19,8 +23,4 @@ export class SendAdminEmailSettingsServiceArgs {
   @Field(() => String)
   @Transform(TransformString)
   subject: string;
-
-  @Field(() => String)
-  @Transform(TransformString)
-  message: string;
 }

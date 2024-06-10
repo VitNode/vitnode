@@ -12,6 +12,10 @@
     },
     "home_page": "Strona główna",
     "core": {
+      "email": {
+        "hello": "Cześć",
+        "footer": "Otrzymujesz ten email, ponieważ aktywność Twojego konta spowodowała wysłanie tego emaila. Prosimy nie odpowiadać na ten email. Jeśli masz jakiekolwiek pytania, skontaktuj się z nami pod adresem:"
+      },
       "settings": {
         "main": {
           "title": "Ustawienia główne",

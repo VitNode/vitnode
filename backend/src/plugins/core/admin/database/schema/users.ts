@@ -28,7 +28,8 @@ export const core_users = pgTable(
     first_name: varchar("first_name", { length: 255 }),
     last_name: varchar("last_name", { length: 255 }),
     birthday: timestamp("birthday"),
-    ip_address: varchar("ip_address", { length: 255 }).notNull()
+    ip_address: varchar("ip_address", { length: 255 }).notNull(),
+    language: varchar("language", { length: 5 }).notNull().default("en")
   },
   table => ({
     name_seo_idx: index("core_users_name_seo_idx").on(table.name_seo),
