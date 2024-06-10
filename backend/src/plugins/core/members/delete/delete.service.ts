@@ -6,7 +6,6 @@ import { DeleteCoreMembersArgs } from "./dto/delete.args";
 import { core_users } from "@/plugins/core/admin/database/schema/users";
 import { DatabaseService } from "@/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
-import { core_admin_permissions } from "../../admin/database/schema/admins";
 import { AccessDeniedError } from "@/utils/errors/access-denied-error";
 
 @Injectable()
@@ -22,10 +21,8 @@ export class DeleteCoreMembersService {
 
     const admin =
       await this.databaseService.db.query.core_admin_permissions.findFirst({
-        where: or(
-          eq(core_admin_permissions.user_id, user.id),
-          eq(core_admin_permissions.group_id, user.group_id)
-        )
+        where: (table, { or, eq }) =>
+          or(eq(table.user_id, user.id), eq(table.group_id, user.group_id))
       });
 
     if (admin) throw new AccessDeniedError();
