@@ -36,12 +36,12 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
     super();
   }
 
-  private async getAcceptMineType(): Promise<string[]> {
+  private getAcceptMineType(): string[] {
     const {
       editor: {
         files: { allow_type }
       }
-    } = await getConfigFile();
+    } = getConfigFile();
 
     if (allow_type === "images_videos") {
       return [...acceptMimeTypeImage, ...acceptMimeTypeVideo];

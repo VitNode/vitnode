@@ -10,7 +10,7 @@ import { migrate } from "./migrate";
 import { db } from "@/database/client";
 
 (async () => {
-  await generateManifest();
+  generateManifest();
 
   // Migration for database
   await migrate({ pluginCode: "core" });

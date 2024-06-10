@@ -8,7 +8,7 @@ export const setRebuildRequired = async ({
 }: {
   set: "langs" | "plugins" | "themes";
 }) => {
-  const config = await getConfigFile();
+  const config = getConfigFile();
 
   const newData: ConfigType = {
     ...config,

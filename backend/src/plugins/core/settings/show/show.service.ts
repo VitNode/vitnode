@@ -40,7 +40,7 @@ export class ShowSettingsService {
   }
 
   async show({ req }: Ctx): Promise<ShowSettingsObj> {
-    const config = await getConfigFile();
+    const config = getConfigFile();
 
     const languages = await this.databaseService.db
       .select({

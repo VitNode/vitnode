@@ -13,6 +13,7 @@
   "scripts": {
     "build": "cross-env TURBO_TELEMETRY_DISABLED=1 turbo build",
     "dev": "turbo dev",
+    "email:dev": "cd backend && pnpm email:dev",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
     "start": "turbo start",

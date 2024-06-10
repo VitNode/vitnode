@@ -9,13 +9,14 @@ export class TestAdminEmailSettingsService extends SendAdminEmailService {
   async test({
     from,
     to,
-    subject
+    subject,
+    message
   }: TestAdminEmailSettingsServiceArgs): Promise<string> {
     await this.send({
       from,
       to,
       subject,
-      html: "<h1>Test Email</h1>"
+      message
     });
 
     return "Email sent!";

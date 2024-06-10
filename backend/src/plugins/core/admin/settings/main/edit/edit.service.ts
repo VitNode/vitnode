@@ -132,7 +132,7 @@ export class EditAdminMainSettingsService {
     site_name,
     site_short_name
   }: EditAdminMainSettingsArgs): Promise<EditAdminSettingsObj> {
-    const config = await getConfigFile();
+    const config = getConfigFile();
     const newData: ConfigType = {
       ...config,
       settings: {

@@ -18,7 +18,7 @@ export const TestingActionEmailSettingsAdmin = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="default">
+        <Button variant="outline">
           <FlaskConical />
           {t("title")}
         </Button>
