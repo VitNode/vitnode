@@ -13,4 +13,7 @@ export class ShowAdminEmailSettingsServiceObj {
 
   @Field(() => Boolean)
   smtp_secure: boolean;
+
+  @Field(() => String)
+  color_primary: string;
 }

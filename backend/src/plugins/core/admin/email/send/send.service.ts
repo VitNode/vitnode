@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 
 import { MailService } from "../mail.service";
-import EmailTemplate from "../emails/email-template";
+import { EmailTemplate } from "../emails/email-template";
 
 interface Args {
   from: string;

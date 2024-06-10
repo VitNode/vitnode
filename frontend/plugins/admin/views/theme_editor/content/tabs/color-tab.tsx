@@ -64,12 +64,12 @@ export const ColorTabThemeEditor = () => {
                       name: "primary-foreground",
                       hslColor: isColorBrightness(hslFromColor)
                         ? {
-                            h: 210,
+                            h: hslFromColor.h,
                             s: 40,
                             l: 2
                           }
                         : {
-                            h: 210,
+                            h: hslFromColor.h,
                             s: 40,
                             l: 98
                           }

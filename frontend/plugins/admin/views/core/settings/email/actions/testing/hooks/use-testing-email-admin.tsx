@@ -25,8 +25,9 @@ export const useTestingEmailAdmin = () => {
     defaultValues: {
       from: "",
       to: session?.email || "",
-      subject: "",
-      message: ""
+      subject: "Test Email from Admin Panel",
+      message:
+        "This email confirms that your email settings in your website by VitNode are working correctly."
     }
   });
 

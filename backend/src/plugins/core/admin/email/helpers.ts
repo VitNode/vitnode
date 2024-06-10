@@ -1,6 +1,44 @@
 import { join } from "path";
 import * as fs from "fs";
 
+import { getConfigFile } from "@/config";
+import { parseFrontendUrlFromEnv } from "@/functions/envs";
+import { convertColor, getHSLFromString } from "@/functions/colors";
+
+export const getHelpersForEmail = () => {
+  const config = getConfigFile();
+  const frontend_url = parseFrontendUrlFromEnv();
+
+  const primaryHSL = getHSLFromString(config.settings.email.color_primary);
+  const primaryForegroundHSL = getHSLFromString(
+    config.settings.email.color_primary_foreground
+  );
+
+  return {
+    site_name: config.settings.general.site_name,
+    site_short_name: config.settings.general.site_short_name,
+    frontend_url,
+    color: {
+      primary: {
+        DEFAULT: `[${primaryHSL ? convertColor.hslToHex(primaryHSL) : "#215fdc"}]`,
+        foreground: `[${
+          primaryForegroundHSL
+            ? convertColor.hslToHex(primaryForegroundHSL)
+            : "#131415"
+        }]`
+      },
+      background: "[#f8f9fc]",
+      foreground: "[#131415]",
+      card: "[#fff]",
+      border: "[#e0e4eb]",
+      muted: {
+        DEFAULT: "[#f1f3f9]",
+        foreground: "[#676d79]"
+      }
+    }
+  };
+};
+
 export const getTranslationForEmail = (plugin: string) => {
   const resolvePlugin = plugin.split(".");
   const path = join(
