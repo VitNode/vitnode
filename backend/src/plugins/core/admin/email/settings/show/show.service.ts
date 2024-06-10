@@ -10,7 +10,9 @@ import { getConfigFile } from "@/config";
 @Injectable()
 export class ShowAdminEmailSettingsService extends HelpersAdminEmailSettingsService {
   show(): ShowAdminEmailSettingsServiceObj {
-    const configSettings = getConfigFile();
+    const {
+      settings: { email: emailSettings }
+    } = getConfigFile();
 
     if (!fs.existsSync(this.path)) {
       return {
@@ -18,7 +20,7 @@ export class ShowAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
         smtp_user: "",
         smtp_secure: false,
         smtp_port: 587,
-        ...configSettings.settings.email
+        ...emailSettings
       };
     }
 
@@ -27,7 +29,7 @@ export class ShowAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
 
     return {
       ...config,
-      ...configSettings.settings.email
+      ...emailSettings
     };
   }
 }
