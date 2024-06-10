@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { and, eq, or } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 import { DeleteCoreMembersArgs } from "./dto/delete.args";
 
