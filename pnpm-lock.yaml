@@ -153,6 +153,9 @@ importers:
       '@types/ua-parser-js':
         specifier: ^0.7.39
         version: 0.7.39
+      '@vitnode/shared':
+        specifier: workspace:*
+        version: link:../packages/shared
       busboy:
         specifier: ^1.6.0
         version: 1.6.0
@@ -478,6 +481,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.3.0
         version: 18.3.0
+      '@vitnode/shared':
+        specifier: workspace:*
+        version: link:../packages/shared
       babel-plugin-react-compiler:
         specifier: 0.0.0-experimental-938cd9a-20240601
         version: 0.0.0-experimental-938cd9a-20240601
@@ -535,6 +541,15 @@ importers:
       eslint-plugin-typescript-sort-keys:
         specifier: ^3.2.0
         version: 3.2.0(@typescript-eslint/parser@7.11.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
+
+  packages/shared:
+    devDependencies:
+      eslint-config-vitnode:
+        specifier: workspace:*
+        version: link:../eslint-config-vitnode
       typescript:
         specifier: ^5.4.5
         version: 5.4.5

@@ -1,0 +1,16 @@
+{
+  "name": "@vitnode/shared",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "eslint-config-vitnode": "workspace:*"
+  }
+}

@@ -8,22 +8,20 @@
     },
     "start": {
       "outputs": [".next/**", "!.next/cache/**", "dist/**"],
-      "dependsOn": ["^start"]
+      "dependsOn": ["^start"],
+      "persistent": true
     },
     "dev": {
-      "dependsOn": ["^dev"],
       "cache": false,
       "persistent": true
     },
     "lint": {
       "dependsOn": ["^lint"],
-      "cache": false,
-      "persistent": true
+      "cache": false
     },
     "lint:fix": {
       "dependsOn": ["^lint:fix"],
-      "cache": false,
-      "persistent": true
+      "cache": false
     }
   }
 }
