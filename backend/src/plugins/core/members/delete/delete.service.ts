@@ -18,7 +18,7 @@ export class DeleteCoreMembersService {
       where: eq(core_users.id, id)
     });
 
-    if (!user) throw new NotFoundError("No user found with the provided id.");
+    if (!user) throw new NotFoundError("User");
 
     const admin =
       await this.databaseService.db.query.core_admin_permissions.findFirst({
