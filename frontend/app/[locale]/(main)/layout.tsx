@@ -3,9 +3,9 @@ import { isRedirectError } from "next/dist/client/components/redirect";
 import { redirect } from "@vitnode/frontend/navigation";
 
 import { SessionProvider } from "./session-provider";
-import { getSessionData } from "@/functions/get-session-data";
-import { TextLanguage } from "@/utils/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 import { InternalErrorView } from "@/plugins/admin/global/internal-error/internal-error-view";
+import { getSessionData } from "@/graphql/get-session-data";
 
 interface Props {
   children: React.ReactNode;

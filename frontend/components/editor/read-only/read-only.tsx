@@ -4,7 +4,7 @@ import { generateHTML } from "@tiptap/html";
 import Image from "next/image";
 import { cn } from "@vitnode/frontend/helpers";
 
-import { TextLanguage } from "@/utils/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 import { extensionsEditor } from "../extensions/extensions";
 import { changeCodeBlock } from "./code-block";
 import { FileDownloadButton } from "./file-download-button";

@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { CheckIcon } from "lucide-react";
 import { cn } from "@vitnode/frontend/helpers";
 
-import { ShowCoreMembers } from "@/utils/graphql/hooks";
+import { ShowCoreMembers } from "@/graphql/hooks";
 import { UserInputItem } from "../user-input";
 import { CommandGroup, CommandItem } from "@/components/ui/command";
 

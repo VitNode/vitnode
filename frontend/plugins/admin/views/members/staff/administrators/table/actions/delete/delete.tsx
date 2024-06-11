@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
-import { ShowAdminStaffAdministrators } from "@/utils/graphql/hooks";
+import { ShowAdminStaffAdministrators } from "@/graphql/hooks";
 
 const ContentDeleteActionsTableAdministratorsStaffAdmin = React.lazy(async () =>
   import("./content").then(module => ({

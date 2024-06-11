@@ -19,7 +19,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { ShowAdminThemes } from "@/utils/graphql/hooks";
+import { ShowAdminThemes } from "@/graphql/hooks";
 
 export interface DownloadThemeActionsAdminProps
   extends Pick<ShowAdminThemes, "id" | "name" | "version_code" | "version"> {}

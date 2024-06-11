@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { SubmitContentDeletePluginActionsAdmin } from "./submit";
 import { useDeletePluginAdmin } from "./hooks/use-delete-plugin-admin";
-import { ShowAdminPlugins } from "@/utils/graphql/hooks";
+import { ShowAdminPlugins } from "@/graphql/hooks";
 
 export const ContentDeletePluginActionsAdmin = ({
   author,

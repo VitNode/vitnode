@@ -7,8 +7,8 @@ import {
   Core_Sessions__Sign_Out,
   Core_Sessions__Sign_OutMutation,
   Core_Sessions__Sign_OutMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const mutationApi = async () => {
   try {

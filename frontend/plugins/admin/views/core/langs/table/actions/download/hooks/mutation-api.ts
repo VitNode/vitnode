@@ -4,8 +4,8 @@ import {
   Admin__Core_Languages__Download,
   Admin__Core_Languages__DownloadMutation,
   Admin__Core_Languages__DownloadMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const mutationApi = async (
   variables: Admin__Core_Languages__DownloadMutationVariables

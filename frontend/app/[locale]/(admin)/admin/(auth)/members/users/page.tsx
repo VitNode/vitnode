@@ -6,12 +6,12 @@ import {
   ShowAdminMembersSortingColumnEnum,
   Admin__Core_Members__ShowQuery,
   Admin__Core_Members__ShowQueryVariables
-} from "@/utils/graphql/hooks";
+} from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
-import { fetcher } from "@/utils/graphql/fetcher";
+import { fetcher } from "@/graphql/fetcher";
 import { UsersMembersAdminView } from "@/plugins/admin/views/members/users/users-members-admin-view";
 
 interface SearchParams extends SearchParamsPagination {

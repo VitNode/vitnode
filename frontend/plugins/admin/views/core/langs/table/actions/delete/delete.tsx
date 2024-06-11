@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Loader } from "@/components/loader";
 import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
-import { ShowCoreLanguages } from "@/utils/graphql/hooks";
+import { ShowCoreLanguages } from "@/graphql/hooks";
 
 const Content = React.lazy(async () =>
   import("./content").then(module => ({

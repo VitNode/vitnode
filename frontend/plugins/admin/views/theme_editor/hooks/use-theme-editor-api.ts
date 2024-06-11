@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@vitnode/frontend/navigation";
 
-import { Core_Theme_Editor__ShowQuery } from "@/utils/graphql/hooks";
+import { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";
 import { CONFIG } from "@/config";
 

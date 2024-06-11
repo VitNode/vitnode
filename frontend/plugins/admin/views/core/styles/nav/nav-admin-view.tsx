@@ -1,13 +1,13 @@
 import { useTranslations } from "next-intl";
 import * as React from "react";
+import { flattenTree } from "@vitnode/frontend/helpers";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { TableNavAdmin } from "./table/table";
-import { Admin__Core_Nav__ShowQuery, ShowCoreNav } from "@/utils/graphql/hooks";
+import { Admin__Core_Nav__ShowQuery, ShowCoreNav } from "@/graphql/hooks";
 import { ActionsNavAdmin } from "./actions/actions";
 import { Card } from "@/components/ui/card";
 import { Icon } from "@/components/icon/icon";
-import { flattenTree } from "@/functions/flatten-tree";
 
 export const NavAdminView = (props: Admin__Core_Nav__ShowQuery) => {
   const t = useTranslations("admin.core.styles.nav");

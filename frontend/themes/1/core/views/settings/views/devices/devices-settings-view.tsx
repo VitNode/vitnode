@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import { CardContent, CardDescription, CardHeader } from "@/components/ui/card";
-import { Core_Sessions__Devices__ShowQuery } from "@/utils/graphql/hooks";
+import { Core_Sessions__Devices__ShowQuery } from "@/graphql/hooks";
 import { ContentDevicesSettings } from "./content";
 
 export interface DevicesSettingsViewProps

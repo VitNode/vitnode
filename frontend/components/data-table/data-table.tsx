@@ -22,7 +22,7 @@ import {
   TableRow
 } from "@/components/ui/table";
 import { Button } from "../ui/button";
-import { PageInfo } from "@/utils/graphql/hooks";
+import { PageInfo } from "@/graphql/hooks";
 import {
   Select,
   SelectContent,

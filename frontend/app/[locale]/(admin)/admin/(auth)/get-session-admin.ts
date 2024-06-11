@@ -1,11 +1,11 @@
 import { cookies } from "next/headers";
 
-import { fetcher } from "@/utils/graphql/fetcher";
+import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Sessions__Authorization,
   Admin__Sessions__AuthorizationQuery,
   Admin__Sessions__AuthorizationQueryVariables
-} from "@/utils/graphql/hooks";
+} from "@/graphql/hooks";
 
 export const getSessionAdminData = async () => {
   const cookieStore = cookies();

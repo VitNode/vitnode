@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "@vitnode/frontend/navigation";
 
-import { User } from "@/utils/graphql/hooks";
+import { User } from "@/graphql/hooks";
 
 interface Props
   extends Omit<

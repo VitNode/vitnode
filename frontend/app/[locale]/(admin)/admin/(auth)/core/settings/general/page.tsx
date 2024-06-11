@@ -7,8 +7,8 @@ import {
   Core_Main_Settings__Show,
   Core_Main_Settings__ShowQuery,
   Core_Main_Settings__ShowQueryVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 import { GeneralSettingsCoreAdmin } from "@/plugins/admin/views/core/settings/general/main-settings-core-admin";
 
 const getData = async () => {

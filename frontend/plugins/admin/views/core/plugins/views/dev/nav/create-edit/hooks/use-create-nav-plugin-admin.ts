@@ -4,13 +4,13 @@ import * as z from "zod";
 import { useParams } from "next/navigation";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import { zodInput } from "@vitnode/frontend/helpers";
 
-import { zodInput } from "@/utils/zod";
 import { useDialog } from "@/components/ui/dialog";
 import { createMutationApi } from "./create-mutation-api";
 import { editMutationApi } from "./edit-mutation-api";
-import { ErrorType } from "@/utils/graphql/fetcher";
-import { ShowAdminNavPluginsObj } from "@/utils/graphql/hooks";
+import { ErrorType } from "@/graphql/fetcher";
+import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
 
 interface Props {
   data?: ShowAdminNavPluginsObj;

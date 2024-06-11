@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "@vitnode/frontend/navigation";
 
 import { useAlertDialog } from "@/components/ui/alert-dialog";
 import { mutationApi } from "./mutation-api";
-import { ShowCoreLanguages } from "@/utils/graphql/hooks";
+import { ShowCoreLanguages } from "@/graphql/hooks";
 
 export const useDeleteLangAdmin = ({
   code,

@@ -18,6 +18,7 @@
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
+    "@vitnode/shared": "workspace:*",
     "@types/nprogress": "^0.2.3",
     "@types/react": "npm:types-react@rc",
     "@types/react-dom": "npm:types-react-dom@rc",

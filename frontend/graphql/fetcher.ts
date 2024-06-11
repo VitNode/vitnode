@@ -4,8 +4,11 @@ import { DocumentNode } from "graphql";
 import { cookies, headers as nextHeaders } from "next/headers";
 
 import { CONFIG } from "@/config";
-import { getGqlString } from "@/functions/get-qql-string";
-import { setCookieFromApi } from "@/functions/cookie-from-string-to-object";
+import { setCookieFromApi } from "./cookie-from-string-to-object";
+
+const getGqlString = (doc: DocumentNode) => {
+  return doc.loc?.source.body ?? "";
+};
 
 interface Args<TVariables> {
   query: DocumentNode;

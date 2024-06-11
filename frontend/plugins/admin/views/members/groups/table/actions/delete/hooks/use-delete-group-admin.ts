@@ -8,7 +8,7 @@ import { usePathname, useRouter } from "@vitnode/frontend/navigation";
 import { mutationApi } from "./mutation-api";
 import { useAlertDialog } from "@/components/ui/alert-dialog";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
-import { ShowAdminGroups } from "@/utils/graphql/hooks";
+import { ShowAdminGroups } from "@/graphql/hooks";
 
 export const useDeleteGroupAdmin = ({
   id,

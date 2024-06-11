@@ -7,7 +7,7 @@ import "../_supressLogs";
 
 import { Toaster } from "@/components/ui/sonner";
 import { GlobalsContext } from "@/plugins/core/hooks/use-globals";
-import { Core_MiddlewareQuery } from "@/utils/graphql/hooks";
+import { Core_MiddlewareQuery } from "@/graphql/hooks";
 import { ConfigType } from "@/config";
 
 interface Props {

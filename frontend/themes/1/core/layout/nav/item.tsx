@@ -7,7 +7,7 @@ import { Link, usePathname } from "@vitnode/frontend/navigation";
 import { cn } from "@vitnode/frontend/helpers";
 
 import { buttonVariants } from "@/components/ui/button";
-import { ShowCoreNav } from "@/utils/graphql/hooks";
+import { ShowCoreNav } from "@/graphql/hooks";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 
 interface Props extends Omit<ShowCoreNav, "icon"> {

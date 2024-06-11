@@ -10,7 +10,7 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import { Admin__Core_Files__ShowQuery } from "@/utils/graphql/hooks";
+import { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
 import { DeleteActionFilesAdvancedCoreAdmin } from "./delete/delete";
 
 export const ActionsFilesAdvancedCoreAdmin = (

@@ -9,11 +9,11 @@ import {
   FileStateEditor
 } from "../files";
 import { uploadMutationApi } from "./upload-mutation-api";
-import { TextLanguage } from "@/utils/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 import { getFilesFromContent } from "@/components/editor/extensions/files/hooks/functions";
 import { useGlobals } from "@/plugins/core/hooks/use-globals";
 import { useSession } from "@/plugins/core/hooks/use-session";
-import { ErrorType } from "@/utils/graphql/fetcher";
+import { ErrorType } from "@/graphql/fetcher";
 
 export interface UploadFilesHandlerArgs {
   files: FileStateEditor[];

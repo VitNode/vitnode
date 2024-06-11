@@ -5,7 +5,7 @@ import { cn } from "@vitnode/frontend/helpers";
 
 import { GroupInputContent } from "./content/content";
 
-import { TextLanguage } from "../../../utils/graphql/hooks";
+import { TextLanguage } from "../../../graphql/hooks";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { Button } from "../../ui/button";
 import { Badge } from "../../ui/badge";

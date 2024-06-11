@@ -12,7 +12,7 @@ import {
   useThemeEditorApi
 } from "./hooks/use-theme-editor-api";
 import { Loader } from "@/components/loader";
-import { Core_Theme_Editor__ShowQuery } from "@/utils/graphql/hooks";
+import { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
 
 export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
   const { activeTheme, iframeRef, ...rest } = useThemeEditorApi(props);

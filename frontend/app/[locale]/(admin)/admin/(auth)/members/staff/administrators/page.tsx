@@ -6,12 +6,12 @@ import {
   ShowAdminStaffAdministratorsSortingColumnEnum,
   Admin__Core_Staff_Administrators__ShowQuery,
   Admin__Core_Staff_Administrators__ShowQueryVariables
-} from "@/utils/graphql/hooks";
+} from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
-import { fetcher } from "@/utils/graphql/fetcher";
+import { fetcher } from "@/graphql/fetcher";
 import { AdministratorsStaffAdminView } from "@/plugins/admin/views/members/staff/administrators/administrators-view";
 
 const getData = async (

@@ -1,12 +1,12 @@
 import createIntlMiddleware from "next-intl/middleware";
 import { NextRequest } from "next/server";
 
-import { fetcher } from "./utils/graphql/fetcher";
+import { fetcher } from "./graphql/fetcher";
 import {
   Core_Languages__Show,
   Core_Languages__ShowQuery,
   Core_Languages__ShowQueryVariables
-} from "./utils/graphql/hooks";
+} from "./graphql/hooks";
 
 export default async function middleware(request: NextRequest) {
   try {

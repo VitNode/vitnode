@@ -32,7 +32,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "../packages/frontend/src/helpers/classnames.ts"
+    "../packages/frontend/src/helpers/classnames.ts",
+    "../packages/frontend/src/helpers/flatten-tree.ts"
   ],
   "exclude": ["postcss.config.js"]
 }

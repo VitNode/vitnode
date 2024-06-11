@@ -4,7 +4,7 @@ import * as React from "react";
 import { Link, usePathname, useRouter } from "@vitnode/frontend/navigation";
 
 import { CONFIG } from "@/config";
-import { ShowAdminPlugins } from "@/utils/graphql/hooks";
+import { ShowAdminPlugins } from "@/graphql/hooks";
 import { DeletePluginActionsAdmin } from "./delete/delete";
 import { SetDefaultPluginActionsAdmin } from "./set-default/set-default";
 import {

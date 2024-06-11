@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useSettingsCoreAdmin } from "./hooks/use-settings-core-admin";
-import { Core_Main_Settings__ShowQuery } from "@/utils/graphql/hooks";
+import { Core_Main_Settings__ShowQuery } from "@/graphql/hooks";
 import { TextLanguageInput } from "@/components/text-language-input";
 
 export const GeneralSettingsCoreAdmin = (

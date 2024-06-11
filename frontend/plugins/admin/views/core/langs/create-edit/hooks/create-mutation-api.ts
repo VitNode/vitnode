@@ -6,8 +6,8 @@ import {
   Admin__Core_Languages__CreateMutationVariables,
   Admin__Core_Languages__Create,
   Admin__Core_Languages__CreateMutation
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 import { CoreApiTags } from "@/plugins/admin/api-tags";
 
 export const createMutationApi = async (

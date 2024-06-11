@@ -4,7 +4,7 @@ import { cn } from "@vitnode/frontend/helpers";
 
 import { buttonVariants } from "@/components/ui/button";
 import { DrawerClose } from "@/components/ui/drawer";
-import { ShowCoreNav } from "@/utils/graphql/hooks";
+import { ShowCoreNav } from "@/graphql/hooks";
 import { classNameDrawerQuickMenu } from "../drawer";
 
 interface Props extends Omit<ShowCoreNav, "__typename" | "children"> {

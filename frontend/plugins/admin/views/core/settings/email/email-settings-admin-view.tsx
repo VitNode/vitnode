@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
-import { Admin__Core_Email_Settings__ShowQuery } from "@/utils/graphql/hooks";
+import { Admin__Core_Email_Settings__ShowQuery } from "@/graphql/hooks";
 import { useEmailSettingsFormAdmin } from "./hooks/use-email-settings-form-admin";
 import {
   Form,

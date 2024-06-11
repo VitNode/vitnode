@@ -12,7 +12,7 @@ import {
   SelectValue
 } from "./ui/select";
 import { FormControl } from "./ui/form";
-import { TextLanguage } from "@/utils/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 
 interface Props
   extends Omit<

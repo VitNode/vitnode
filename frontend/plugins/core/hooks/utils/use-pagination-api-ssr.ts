@@ -1,4 +1,4 @@
-import { SortDirectionEnum } from "@/utils/graphql/hooks";
+import { SortDirectionEnum } from "@/graphql/hooks";
 
 export interface SearchParamsPagination {
   cursor?: string;

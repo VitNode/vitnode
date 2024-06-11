@@ -6,8 +6,8 @@ import {
   Admin__Core_Themes__Delete,
   Admin__Core_Themes__DeleteMutation,
   Admin__Core_Themes__DeleteMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 import { CoreApiTags } from "@/plugins/admin/api-tags";
 
 export const mutationApi = async (

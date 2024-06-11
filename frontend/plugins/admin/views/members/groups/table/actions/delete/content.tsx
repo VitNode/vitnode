@@ -7,7 +7,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle
 } from "@/components/ui/alert-dialog";
-import { ShowAdminGroups } from "@/utils/graphql/hooks";
+import { ShowAdminGroups } from "@/graphql/hooks";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import {
   Form,

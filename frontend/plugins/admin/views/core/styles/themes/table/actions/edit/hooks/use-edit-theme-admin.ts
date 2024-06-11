@@ -4,11 +4,11 @@ import * as z from "zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@vitnode/frontend/navigation";
+import { zodInput } from "@vitnode/frontend/helpers";
 
 import { useDialog } from "@/components/ui/dialog";
 import { mutationApi } from "./mutation-api";
-import { zodInput } from "@/utils/zod";
-import { ShowAdminThemes } from "@/utils/graphql/hooks";
+import { ShowAdminThemes } from "@/graphql/hooks";
 
 export const useEditThemeAdmin = ({
   author,

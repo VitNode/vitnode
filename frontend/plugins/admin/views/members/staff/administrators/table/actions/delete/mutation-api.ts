@@ -6,8 +6,8 @@ import {
   Admin__Core_Staff_Administrators__Delete,
   Admin__Core_Staff_Administrators__DeleteMutation,
   Admin__Core_Staff_Administrators__DeleteMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const mutationApi = async (
   variables: Admin__Core_Staff_Administrators__DeleteMutationVariables

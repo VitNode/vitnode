@@ -7,8 +7,8 @@ import {
   Admin_Sessions__Sign_Out,
   Admin_Sessions__Sign_OutMutation,
   Admin_Sessions__Sign_OutMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const mutationApi = async () => {
   try {
