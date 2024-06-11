@@ -3,6 +3,7 @@ import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import { NotFoundError } from "@vitnode/backend";
 
 import { EditAdminThemeEditorArgs, ThemeVariableInput } from "./dto/edit.args";
 
@@ -10,7 +11,6 @@ import { ABSOLUTE_PATHS } from "@/config";
 import { DatabaseService } from "@/database/database.service";
 import { getThemeId } from "@/plugins/core/settings/helpers/get-theme-id";
 import { Ctx } from "@/utils/types/context.type";
-import { NotFoundError } from "@/utils/errors/not-found-error";
 import { setRebuildRequired } from "@/functions/rebuild-required";
 
 export const keysFromCSSThemeEditor = [

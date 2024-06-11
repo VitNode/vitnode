@@ -5,6 +5,7 @@ import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
 import { eq } from "drizzle-orm";
 import { currentUnixDate } from "@vitnode/shared";
+import { AccessDeniedError, getUserAgentData } from "@vitnode/backend";
 
 import {
   AuthorizationAdminSessionsObj,
@@ -13,7 +14,6 @@ import {
 
 import { AuthorizationCurrentUserObj } from "@/plugins/core/sessions/authorization/dto/authorization.obj";
 import { DatabaseService } from "@/database/database.service";
-import { AccessDeniedError } from "@/utils/errors/access-denied-error";
 import { Ctx } from "@/utils/types/context.type";
 import { getCoreInfo } from "../../settings/functions/get-core-info";
 import { ABSOLUTE_PATHS } from "@/config";
@@ -21,7 +21,6 @@ import { ConfigPlugin } from "../../plugins/plugins.module";
 import { DeviceSignInCoreSessionsService } from "@/plugins/core/sessions/sign_in/device.service";
 import { core_sessions_known_devices } from "../../database/schema/sessions";
 import { getUserIp } from "@/functions/get-user-ip";
-import { getUserAgentData } from "@/functions/get-user-agent-data";
 
 @Injectable()
 export class AuthorizationAdminSessionsService {

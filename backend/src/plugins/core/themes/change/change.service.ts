@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import { NotFoundError } from "@vitnode/backend";
 
 import { ChangeCoreThemesArgs } from "./dto/change.args";
 
-import { NotFoundError } from "@/utils/errors/not-found-error";
 import { DatabaseService } from "@/database/database.service";
 import { Ctx } from "@/utils/types/context.type";
 

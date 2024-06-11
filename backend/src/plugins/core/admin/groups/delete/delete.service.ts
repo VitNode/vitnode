@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
+import { NotFoundError } from "@vitnode/backend";
 
 import { DeleteAdminGroupsArgs } from "./dto/delete.args";
 
-import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_users } from "@/plugins/core/admin/database/schema/users";
 import { core_groups } from "@/plugins/core/admin/database/schema/groups";
 import { DatabaseService } from "@/database/database.service";

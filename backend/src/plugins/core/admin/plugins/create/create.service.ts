@@ -2,6 +2,7 @@ import { join } from "path";
 import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
+import { CustomError } from "@vitnode/backend";
 
 import { CreateAdminPluginsArgs } from "./dto/create.args";
 import { ShowAdminPlugins } from "../show/dto/show.obj";
@@ -10,7 +11,6 @@ import { ChangeFilesAdminPluginsService } from "../helpers/files/change/change.s
 
 import { core_plugins } from "../../database/schema/plugins";
 import { DatabaseService } from "@/database/database.service";
-import { CustomError } from "@/utils/errors/custom-error";
 import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()

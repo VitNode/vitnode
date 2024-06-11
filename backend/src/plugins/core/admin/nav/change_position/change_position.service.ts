@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
+import { NotFoundError } from "@vitnode/backend";
 
 import { ChangePositionAdminNavArgs } from "./dto/change_position.args";
 
-import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_nav } from "../../database/schema/nav";
 import { DatabaseService } from "@/database/database.service";
 

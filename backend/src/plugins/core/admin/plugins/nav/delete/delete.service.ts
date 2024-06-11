@@ -1,10 +1,10 @@
 import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
+import { NotFoundError } from "@vitnode/backend";
 
 import { DeleteCreateAdminNavPluginsArgs } from "./dto/delete.args";
 
-import { NotFoundError } from "@/utils/errors/not-found-error";
 import { ABSOLUTE_PATHS } from "@/config";
 import { ConfigPlugin } from "../../plugins.module";
 

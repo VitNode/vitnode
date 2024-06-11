@@ -4,12 +4,12 @@ import { writeFile } from "fs/promises";
 
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
+import { NotFoundError } from "@vitnode/backend";
 
 import { ShowAdminThemes } from "../show/dto/show.obj";
 import { EditAdminThemesArgs } from "./dto/edit.args";
 import { ConfigTheme } from "../themes.module";
 
-import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_themes } from "../../database/schema/themes";
 import { DatabaseService } from "@/database/database.service";
 

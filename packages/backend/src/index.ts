@@ -1,1 +1,3 @@
-export * from "./graphql-upload/index"
+export * from "./graphql-upload";
+export * from "./errors";
+export * from "./functions";

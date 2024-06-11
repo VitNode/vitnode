@@ -3,15 +3,14 @@ import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
 import { eq } from "drizzle-orm";
 import { currentUnixDate } from "@vitnode/shared";
+import { AccessDeniedError, getUserAgentData } from "@vitnode/backend";
 
 import { User } from "@/utils/decorators/user.decorator";
 import { core_sessions_known_devices } from "@/plugins/core/admin/database/schema/sessions";
 import { DeviceSignInCoreSessionsService } from "../../sign_in/device.service";
 import { DatabaseService } from "@/database/database.service";
 import { Ctx } from "@/utils/types/context.type";
-import { AccessDeniedError } from "@/utils/errors/access-denied-error";
 import { getUserIp } from "@/functions/get-user-ip";
-import { getUserAgentData } from "@/functions/get-user-agent-data";
 import { core_users } from "@/plugins/core/admin/database/schema/users";
 
 @Injectable()

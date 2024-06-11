@@ -5,7 +5,7 @@ import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 import { eq } from "drizzle-orm";
 import { currentUnixDate, generateRandomString } from "@vitnode/shared";
-import { FileUpload } from "@vitnode/backend";
+import { FileUpload, CustomError } from "@vitnode/backend";
 
 import { ShowAdminPlugins } from "../show/dto/show.obj";
 import { UploadAdminPluginsArgs } from "./dto/upload.args";
@@ -14,7 +14,6 @@ import { ConfigPlugin } from "../plugins.module";
 
 import { core_plugins } from "../../database/schema/plugins";
 import { DatabaseService } from "@/database/database.service";
-import { CustomError } from "@/utils/errors/custom-error";
 import { ChangeTemplatesAdminThemesService } from "../../themes/change_templates.service";
 import { ABSOLUTE_PATHS } from "@/config";
 import { migrate } from "@/utils/actions/migrate";

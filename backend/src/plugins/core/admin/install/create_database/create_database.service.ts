@@ -2,6 +2,7 @@ import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
 import { count } from "drizzle-orm";
+import { CustomError } from "@vitnode/backend";
 
 import { core_languages } from "@/plugins/core/admin/database/schema/languages";
 import {
@@ -13,7 +14,6 @@ import { core_moderators_permissions } from "../../database/schema/moderators";
 import { core_themes } from "../../database/schema/themes";
 import { core_nav, core_nav_name } from "../../database/schema/nav";
 import { DatabaseService } from "@/database/database.service";
-import { CustomError } from "@/utils/errors/custom-error";
 import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()

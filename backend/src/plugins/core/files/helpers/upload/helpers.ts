@@ -1,6 +1,4 @@
-import { FileUpload } from "@vitnode/backend";
-
-import { CustomError } from "@/utils/errors/custom-error";
+import { FileUpload, CustomError } from "@vitnode/backend";
 
 export const acceptMimeTypeImage = [
   "image/jpeg",
