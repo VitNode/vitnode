@@ -18,10 +18,9 @@
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "@vitnode/shared": "workspace:*",
     "@types/nprogress": "^0.2.3",
-    "@types/react": "npm:types-react@rc",
-    "@types/react-dom": "npm:types-react-dom@rc",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "clsx": "^2.1.1",
     "eslint-config-vitnode": "workspace:*",
     "tailwind-merge": "^2.3.0",
@@ -34,9 +33,5 @@
     "react": "^19.0.0-rc.0",
     "react-dom": "^19.0.0-rc.0",
     "zod": "^3.23.8"
-  },
-  "overrides": {
-    "@types/react": "npm:types-react@rc",
-    "@types/react-dom": "npm:types-react-dom@rc"
   }
 }
