@@ -2,7 +2,6 @@
 import { NestFactory } from "@nestjs/core";
 import cookieParser from "cookie-parser";
 import { ValidationPipe } from "@nestjs/common";
-import { add } from "@vitnode/shared";
 
 import { AppModule } from "./app.module";
 import { graphqlUploadExpress } from "./utils/graphql-upload/graphql-upload-express";
@@ -29,7 +28,6 @@ async function bootstrap() {
   );
 
   await app.listen(process.env.PORT ?? "8080", null, () => {
-    console.log(add(1, 2));
     if (process.env.NEXT_PUBLIC_DEBUG) {
       console.warn(
         "WARNING: Debug mode is enabled. Do not use this in production."

@@ -2,8 +2,7 @@ import { join } from "path";
 import * as fs from "fs";
 
 import * as dotenv from "dotenv";
-
-import { objectToArray, updateObject } from "./update-object";
+import { objectToArray, updateObject } from "@vitnode/shared";
 
 import { ABSOLUTE_PATHS, getConfigFile } from "@/config";
 import { parseFrontendUrlFromEnv } from "@/functions/envs";

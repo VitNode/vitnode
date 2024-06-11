@@ -3,10 +3,10 @@
 import { File } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { formatBytes } from "@vitnode/shared";
 
 import { CONFIG } from "@/config";
 import { Button } from "@/components/ui/button";
-import { formatBytes } from "@/functions/format-bytes";
 import { acceptMimeTypeImage } from "../extensions/files/files";
 
 interface Props {

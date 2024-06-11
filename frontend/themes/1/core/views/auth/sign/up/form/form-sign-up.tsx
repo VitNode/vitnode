@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { removeSpecialCharacters } from "@vitnode/shared";
 
 import { CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -17,7 +18,6 @@ import {
 import { useSignUpView } from "@/plugins/core/hooks/sign/up/use-sign-up-view";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
-import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 import { SuccessFormSignUp } from "./success";
 
 export const FormSignUp = () => {

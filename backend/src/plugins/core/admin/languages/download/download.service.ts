@@ -4,14 +4,16 @@ import { copyFile } from "fs/promises";
 
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
-import { currentUnixDate } from "@vitnode/shared";
+import {
+  currentUnixDate,
+  generateRandomString,
+  removeSpecialCharacters
+} from "@vitnode/shared";
 
 import { DownloadCoreAdminLanguagesArgs } from "./dto/download.args";
 
 import { NotFoundError } from "@/utils/errors/not-found-error";
-import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 import { User } from "@/utils/decorators/user.decorator";
-import { generateRandomString } from "@/functions/generate-random-string";
 import { DatabaseService } from "@/database/database.service";
 import { CustomError } from "@/utils/errors/custom-error";
 import { ABSOLUTE_PATHS } from "@/config";

@@ -4,14 +4,13 @@ import * as fs from "fs";
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 import { eq } from "drizzle-orm";
-import { currentUnixDate } from "@vitnode/shared";
+import { currentUnixDate, generateRandomString } from "@vitnode/shared";
 
 import { UploadAdminThemesArgs } from "./dto/upload.args";
 import { ConfigTheme } from "../themes.module";
 import { ShowAdminThemes } from "../show/dto/show.obj";
 import { ChangeTemplatesAdminThemesService } from "../change_templates.service";
 
-import { generateRandomString } from "@/functions/generate-random-string";
 import { core_themes } from "../../database/schema/themes";
 import { FileUpload } from "@/utils/graphql-upload/upload";
 import { NotFoundError } from "@/utils/errors/not-found-error";

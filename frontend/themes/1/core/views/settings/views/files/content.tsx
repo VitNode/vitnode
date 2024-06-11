@@ -5,6 +5,7 @@ import * as React from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Clock, Download, File } from "lucide-react";
+import { formatBytes } from "@vitnode/shared";
 
 import { CONFIG } from "@/config";
 import { DataTable } from "@/components/data-table/data-table";
@@ -14,7 +15,6 @@ import {
 } from "@/utils/graphql/hooks";
 import { DateFormat } from "@/components/date-format/date-format";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
-import { formatBytes } from "@/functions/format-bytes";
 import {
   Tooltip,
   TooltipContent,

@@ -7,6 +7,8 @@ export const removeSpecialCharacters = (text: string) =>
     .replace(/\p{Diacritic}/gu, "")
     .replace(/[#%&?^|'{}\\/]/g, "")
     .replace(/ł/g, "l")
+    .replace(/@/g, "-at-")
+    .replace(/\./g, "-")
     .trim();
 
 export const checkSpecialCharacters = (text: string) => {

@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import * as fs from "fs";
 
-import { updateObject } from "../functions/update-object";
+import { updateObject } from "@vitnode/shared";
+
 import { configPath, getConfigFile } from "./helpers";
 
 import { DEFAULT_CONFIG_DATA } from ".";

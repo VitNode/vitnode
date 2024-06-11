@@ -8,9 +8,9 @@ import {
   PopoverTrigger
 } from "@/components/ui/popover";
 import { PickerColor } from "@/components/color/picker/picker";
-import { getHSLFromString } from "@/functions/colors";
 import { useEditorState } from "@/components/editor/hooks/use-editor-state";
 
+import { getHSLFromString } from "@/functions/colors";
 import { ButtonToolbarEditor } from "../../button";
 
 export const ColorToolbarEditor = () => {

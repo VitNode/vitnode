@@ -5,6 +5,7 @@ import { Clock, File } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import * as React from "react";
+import { formatBytes } from "@vitnode/shared";
 
 import { CONFIG } from "@/config";
 import { DataTable } from "@/components/data-table/data-table";
@@ -16,7 +17,6 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import { formatBytes } from "@/functions/format-bytes";
 import { Admin__Core_Files__ShowQuery } from "@/utils/graphql/hooks";
 import { Link } from "@/utils/i18n";
 import { ActionsFilesAdvancedCoreAdmin } from "./actions/actions";

@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 
 import { Admin__Core_Email_Settings__ShowQuery } from "@/utils/graphql/hooks";
 import { mutationApi } from "./mutation-api";
+
 import { getHSLFromString, isColorBrightness } from "@/functions/colors";
 
 export const useEmailSettingsFormAdmin = ({

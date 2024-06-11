@@ -11,12 +11,12 @@ import {
 } from "@/components/ui/form";
 import { ColorInput } from "@/components/color/color-input";
 import { Separator } from "@/components/ui/separator";
+
 import {
   getHSLFromString,
   getStringFromHSL,
   isColorBrightness
 } from "@/functions/colors";
-
 import { ThemeEditorTab, useThemeEditor } from "../../hooks/use-theme-editor";
 
 export const ColorTabThemeEditor = () => {

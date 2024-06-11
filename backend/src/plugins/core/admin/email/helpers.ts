@@ -1,9 +1,10 @@
 import { join } from "path";
 import * as fs from "fs";
 
+import { convertColor, getHSLFromString } from "@vitnode/shared";
+
 import { getConfigFile } from "@/config";
 import { parseFrontendUrlFromEnv } from "@/functions/envs";
-import { convertColor, getHSLFromString } from "@/functions/colors";
 
 export const getHelpersForEmail = () => {
   const config = getConfigFile();

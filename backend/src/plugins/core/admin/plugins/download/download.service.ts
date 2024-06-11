@@ -4,7 +4,11 @@ import * as fs from "fs";
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 import { eq } from "drizzle-orm";
-import { currentUnixDate } from "@vitnode/shared";
+import {
+  currentUnixDate,
+  generateRandomString,
+  removeSpecialCharacters
+} from "@vitnode/shared";
 
 import { DownloadAdminPluginsArgs } from "./dto/download.args";
 import { PluginInfoJSONType } from "../helpers/files/create/contents";
@@ -15,8 +19,6 @@ import { core_plugins } from "../../database/schema/plugins";
 import { execShellCommand } from "@/functions/exec-shell-command";
 import { DatabaseService } from "@/database/database.service";
 import { CustomError } from "@/utils/errors/custom-error";
-import { removeSpecialCharacters } from "@/functions/remove-special-characters";
-import { generateRandomString } from "@/functions/generate-random-string";
 import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()

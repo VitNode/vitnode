@@ -76,28 +76,6 @@ export const convertColor = {
     };
   },
 
-  hexToRGB(hex: string) {
-    const r = parseInt(hex.slice(1, 3), 16),
-      g = parseInt(hex.slice(3, 5), 16),
-      b = parseInt(hex.slice(5, 7), 16);
-
-    return { r, g, b };
-  },
-
-  RGBToHSV(r: number, g: number, b: number) {
-    const v = Math.max(r, g, b),
-      c = v - Math.min(r, g, b);
-    const h =
-      c &&
-      (v === r ? (g - b) / c : v === g ? 2 + (b - r) / c : 4 + (r - g) / c);
-
-    return {
-      h: 60 * (h < 0 ? h + 6 : h),
-      s: v && (c / v) * 100,
-      v: (v / 255) * 100
-    };
-  },
-
   RGBToHSL(r: number, g: number, b: number) {
     // Make r, g, and b fractions of 1
     r /= 255;

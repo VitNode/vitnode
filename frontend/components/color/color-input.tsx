@@ -8,6 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { PickerColor } from "./picker/picker";
 import { Button } from "../ui/button";
 import { cn } from "@/functions/classnames";
+
 import { getHSLFromString, isColorBrightness } from "@/functions/colors";
 
 interface Props {

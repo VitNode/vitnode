@@ -1,7 +1,7 @@
 import { useLocale } from "next-intl";
+import { removeSpecialCharacters } from "@vitnode/shared";
 
 import { TextLanguage } from "@/utils/graphql/hooks";
-import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 
 const getConvertTextLang = ({
   locale,
