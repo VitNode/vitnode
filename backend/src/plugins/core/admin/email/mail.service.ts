@@ -28,6 +28,19 @@ export class MailService {
   private readonly transporter: nodemailer.Transporter;
 
   constructor() {
+    if (!fs.existsSync(this.path)) {
+      // Create a default config file
+      fs.writeFileSync(
+        this.path,
+        JSON.stringify({
+          smtp_host: "",
+          smtp_user: "",
+          smtp_secure: false,
+          smtp_port: 587
+        })
+      );
+    }
+
     const data = fs.readFileSync(this.path, "utf-8");
     const config: ShowAdminEmailSettingsServiceObjWithPassword =
       JSON.parse(data);
