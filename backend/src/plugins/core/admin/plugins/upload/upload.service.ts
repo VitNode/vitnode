@@ -4,6 +4,7 @@ import * as fs from "fs";
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 import { eq } from "drizzle-orm";
+import { currentUnixDate } from "@vitnode/shared";
 
 import { ShowAdminPlugins } from "../show/dto/show.obj";
 import { UploadAdminPluginsArgs } from "./dto/upload.args";
@@ -11,7 +12,6 @@ import { ChangeFilesAdminPluginsService } from "../helpers/files/change/change.s
 import { ConfigPlugin } from "../plugins.module";
 
 import { FileUpload } from "@/utils/graphql-upload/upload";
-import { currentDate } from "@/functions/date";
 import { core_plugins } from "../../database/schema/plugins";
 import { DatabaseService } from "@/database/database.service";
 import { generateRandomString } from "@/functions/generate-random-string";
@@ -26,7 +26,7 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
   protected tempPath: string = join(
     ABSOLUTE_PATHS.uploads.temp,
     "plugins",
-    `upload-${generateRandomString(5)}${currentDate()}`
+    `upload-${generateRandomString(5)}${currentUnixDate()}`
   );
 
   constructor(

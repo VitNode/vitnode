@@ -5,6 +5,7 @@ import { join } from "path";
 import * as tar from "tar";
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
+import { currentUnixDate } from "@vitnode/shared";
 
 import { DownloadAdminThemesArgs } from "./dto/download.args";
 
@@ -12,7 +13,6 @@ import { NotFoundError } from "@/utils/errors/not-found-error";
 import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 import { User } from "@/utils/decorators/user.decorator";
 import { generateRandomString } from "@/functions/generate-random-string";
-import { currentDate } from "@/functions/date";
 import { core_themes } from "../../database/schema/themes";
 import { DatabaseService } from "@/database/database.service";
 import { CustomError } from "@/utils/errors/custom-error";
@@ -43,7 +43,7 @@ export class DownloadAdminThemesService {
     const name = removeSpecialCharacters(
       `${theme.name}-${
         version && version_code ? version_code : theme.version_code
-      }--${userId}-${generateRandomString(5)}-${currentDate()}`
+      }--${userId}-${generateRandomString(5)}-${currentUnixDate()}`
     );
 
     // Update version

@@ -10,7 +10,7 @@
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "typescript": "^5.4.5",
-    "eslint-config-vitnode": "workspace:*"
+    "eslint-config-vitnode": "workspace:*",
+    "typescript": "^5.4.5"
   }
 }

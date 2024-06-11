@@ -4,13 +4,13 @@ import * as fs from "fs";
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 import { eq } from "drizzle-orm";
+import { currentUnixDate } from "@vitnode/shared";
 
 import { DownloadAdminPluginsArgs } from "./dto/download.args";
 import { PluginInfoJSONType } from "../helpers/files/create/contents";
 
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { User } from "@/utils/decorators/user.decorator";
-import { currentDate } from "@/functions/date";
 import { core_plugins } from "../../database/schema/plugins";
 import { execShellCommand } from "@/functions/exec-shell-command";
 import { DatabaseService } from "@/database/database.service";
@@ -49,7 +49,7 @@ export class DownloadAdminPluginsService {
 
   protected async prepareTgz({ code }: { code: string }): Promise<string> {
     // Create temp folder
-    const tempNameFolder = `${code}-download-${generateRandomString(5)}-${currentDate()}`;
+    const tempNameFolder = `${code}-download-${generateRandomString(5)}-${currentUnixDate()}`;
     const tempPath = join(this.tempPath, tempNameFolder);
     this.createFolders(tempPath);
 
@@ -190,7 +190,7 @@ export class DownloadAdminPluginsService {
     const name = removeSpecialCharacters(
       `${code}${
         version && version_code ? version_code : plugin.version_code
-      }--${userId}-${generateRandomString(5)}-${currentDate()}`
+      }--${userId}-${generateRandomString(5)}-${currentUnixDate()}`
     );
     const tempPath = await this.prepareTgz({ code });
 
