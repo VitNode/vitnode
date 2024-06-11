@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { KeyRound, LogOut, Settings, Shield, User } from "lucide-react";
 import * as React from "react";
+import { Link } from "@vitnode/frontend/navigation";
 
 import { DrawerClose, DrawerContent } from "@/components/ui/drawer";
 import { HeaderDrawerQuickMenu } from "./header";
@@ -8,7 +9,6 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useSignOutAPI } from "@/plugins/core/hooks/sign/out/use-sign-out-api";
 import { useSession } from "@/plugins/core/hooks/use-session";
-import { Link } from "@/utils/i18n";
 import { cn } from "@/functions/classnames";
 import { NavDrawerQuickMenu } from "./nav/nav";
 

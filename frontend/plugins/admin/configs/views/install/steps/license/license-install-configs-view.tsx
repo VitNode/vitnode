@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
+import { Link } from "@vitnode/frontend/navigation";
 
 import { CardContent, CardFooter } from "@/components/ui/card";
-import { Link } from "@/utils/i18n";
 import { FormLicenseInstallConfigs } from "./form-license-install-configs";
 
 export const LicenseInstallConfigsView = () => {

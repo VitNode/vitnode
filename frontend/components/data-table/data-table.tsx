@@ -11,6 +11,7 @@ import {
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import * as React from "react";
+import { usePathname, useRouter } from "@vitnode/frontend/navigation";
 
 import {
   Table,
@@ -29,7 +30,6 @@ import {
   SelectTrigger,
   SelectValue
 } from "../ui/select";
-import { usePathname, useRouter } from "@/utils/i18n";
 import { ToolbarDataTable, ToolbarDataTableProps } from "./toolbar/toolbar";
 import { SkeletonDataTable } from "./skeleton";
 import {

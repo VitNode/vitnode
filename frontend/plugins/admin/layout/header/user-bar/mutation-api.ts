@@ -1,13 +1,13 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "@vitnode/frontend/navigation";
 
 import {
   Admin_Sessions__Sign_Out,
   Admin_Sessions__Sign_OutMutation,
   Admin_Sessions__Sign_OutMutationVariables
 } from "@/utils/graphql/hooks";
-import { redirect } from "@/utils/i18n";
 import { fetcher } from "@/utils/graphql/fetcher";
 
 export const mutationApi = async () => {

@@ -3,6 +3,5 @@
   "extends": ["eslint-config-vitnode/.eslintrc.json"],
   "env": {
     "node": true
-  },
-  "ignorePatterns": ["uploads"]
+  }
 }

@@ -14,5 +14,5 @@
     "strictBindCallApply": false,
     "allowSyntheticDefaultImports": true
   },
-  "exclude": ["node_modules", ".turbo", "uploads"]
+  "exclude": ["node_modules", ".turbo", "dist"]
 }

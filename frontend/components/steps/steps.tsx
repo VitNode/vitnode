@@ -1,7 +1,7 @@
 import { Check } from "lucide-react";
+import { Link } from "@vitnode/frontend/navigation";
 
 import { cn } from "@/functions/classnames";
-import { Link } from "@/utils/i18n";
 
 export interface ItemStepProps {
   id: string;

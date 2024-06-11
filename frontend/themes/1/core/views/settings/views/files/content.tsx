@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Clock, Download, File } from "lucide-react";
 import { formatBytes } from "@vitnode/shared";
+import { Link } from "@vitnode/frontend/navigation";
 
 import { CONFIG } from "@/config";
 import { DataTable } from "@/components/data-table/data-table";
@@ -22,7 +23,6 @@ import {
   TooltipTrigger
 } from "@/components/ui/tooltip";
 import { buttonVariants } from "@/components/ui/button";
-import { Link } from "@/utils/i18n";
 
 export const ContentFilesSettings = ({
   core_files__show: { edges, pageInfo }

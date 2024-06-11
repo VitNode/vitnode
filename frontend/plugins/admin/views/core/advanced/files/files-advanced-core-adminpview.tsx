@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import * as React from "react";
 import { formatBytes } from "@vitnode/shared";
+import { Link } from "@vitnode/frontend/navigation";
 
 import { CONFIG } from "@/config";
 import { DataTable } from "@/components/data-table/data-table";
@@ -18,7 +19,6 @@ import {
   TooltipTrigger
 } from "@/components/ui/tooltip";
 import { Admin__Core_Files__ShowQuery } from "@/utils/graphql/hooks";
-import { Link } from "@/utils/i18n";
 import { ActionsFilesAdvancedCoreAdmin } from "./actions/actions";
 
 export const FilesAdvancedCoreAdminView = ({

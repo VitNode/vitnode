@@ -29,7 +29,7 @@ const config = () => {
       reactCompiler: true
     },
     output: "standalone",
-    transpilePackages: ["lucide-react", "@vitnode/shared"],
+    transpilePackages: ["lucide-react", "@vitnode/shared", "@vitnode/frontend"],
     images: {
       formats: ["image/avif", "image/webp"],
       remotePatterns: [

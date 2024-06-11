@@ -2,9 +2,9 @@ import * as React from "react";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { isRedirectError } from "next/dist/client/components/redirect";
+import { redirect } from "@vitnode/frontend/navigation";
 
 import { Providers } from "./providers";
-import { redirect } from "@/utils/i18n";
 import { getConfigFile } from "@/config/helpers";
 import { AdminLayout } from "@/plugins/admin/layout/admin-layout";
 import { getSessionAdminData } from "./get-session-admin";

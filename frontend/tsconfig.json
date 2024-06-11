@@ -18,8 +18,7 @@
     ],
     "paths": {
       "@/*": ["./*"]
-    },
-    "forceConsistentCasingInFileNames": true
+    }
   },
   "ts-node": {
     // these options are overrides used only by ts-node
@@ -28,12 +27,6 @@
       "module": "commonjs"
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "vitest.config.mts"
-  ],
-  "exclude": ["node_modules", "postcss.config.js"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["postcss.config.js"]
 }

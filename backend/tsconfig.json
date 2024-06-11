@@ -13,7 +13,7 @@
     "sourceMap": true,
     "noImplicitAny": false,
     "strictNullChecks": false,
-    "forceConsistentCasingInFileNames": false,
+    "forceConsistentCasingInFileNames": false, // TODO: Improve this value
     "noFallthroughCasesInSwitch": false,
     "strictPropertyInitialization": false,
     "paths": {

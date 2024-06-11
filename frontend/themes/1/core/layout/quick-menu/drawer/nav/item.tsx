@@ -1,10 +1,10 @@
 import * as React from "react";
+import { Link, usePathname } from "@vitnode/frontend/navigation";
 
 import { buttonVariants } from "@/components/ui/button";
 import { DrawerClose } from "@/components/ui/drawer";
 import { cn } from "@/functions/classnames";
 import { ShowCoreNav } from "@/utils/graphql/hooks";
-import { Link, usePathname } from "@/utils/i18n";
 import { classNameDrawerQuickMenu } from "../drawer";
 
 interface Props extends Omit<ShowCoreNav, "__typename" | "children"> {

@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import * as React from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Pencil } from "lucide-react";
+import { Link } from "@vitnode/frontend/navigation";
 
 import {
   Tooltip,
@@ -11,7 +12,6 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import { Link } from "@/utils/i18n";
 import { buttonVariants } from "@/components/ui/button";
 import { DataTable } from "@/components/data-table/data-table";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";

@@ -1,6 +1,6 @@
 import * as React from "react";
+import { Link } from "@vitnode/frontend/navigation";
 
-import { Link } from "@/utils/i18n";
 import { cn } from "@/functions/classnames";
 
 interface Props {

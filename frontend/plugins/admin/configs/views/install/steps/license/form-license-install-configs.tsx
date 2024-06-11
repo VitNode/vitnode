@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { useRouter } from "@vitnode/frontend/navigation";
 
 import {
   Form,
@@ -14,7 +15,6 @@ import {
 } from "@/components/ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "@/utils/i18n";
 
 export const FormLicenseInstallConfigs = () => {
   const t = useTranslations("admin.configs.install.steps");

@@ -3,13 +3,13 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
+import { usePathname, useRouter } from "@vitnode/frontend/navigation";
 
 import { ShowAdminGroups } from "@/utils/graphql/hooks";
 import { mutationCreateApi } from "./mutation-create-api";
 import { mutationEditApi } from "./mutation-edit-api";
 import { useDialog } from "@/components/ui/dialog";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
-import { usePathname, useRouter } from "@/utils/i18n";
 import { zodInput } from "@/utils/zod";
 
 export interface CreateEditFormGroupsMembersAdminArgs {

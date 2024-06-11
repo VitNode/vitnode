@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Home, KeyRound } from "lucide-react";
+import { Link } from "@vitnode/frontend/navigation";
 
 import {
   Card,
@@ -10,7 +11,6 @@ import {
   CardTitle
 } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
-import { Link } from "@/utils/i18n";
 
 export const FinishInstallConfigsView = () => {
   const t = useTranslations("admin.configs.install.finish");

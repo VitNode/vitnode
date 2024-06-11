@@ -1,0 +1,39 @@
+{
+  "name": "@vitnode/frontend",
+  "version": "0.1.0",
+  "exports": {
+    "./navigation": {
+      "types": "./src/navigation/index.ts",
+      "import": "./dist/navigation/index.js"
+    },
+    "./helpers": {
+      "types": "./src/helpers/index.ts",
+      "import": "./dist/helpers/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "devDependencies": {
+    "@types/nprogress": "^0.2.3",
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc",
+    "eslint-config-vitnode": "workspace:*",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "next": "15.0.0-canary.25",
+    "next-intl": "^3.14.1",
+    "nprogress": "^0.2.0",
+    "react": "^19.0.0-rc.0",
+    "react-dom": "^19.0.0-rc.0",
+    "zod": "^3.23.8"
+  },
+  "overrides": {
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc"
+  }
+}

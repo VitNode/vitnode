@@ -3,9 +3,9 @@
 import { useTranslations } from "next-intl";
 import { ColumnDef } from "@tanstack/react-table";
 import * as React from "react";
+import { Link } from "@vitnode/frontend/navigation";
 
 import { DataTable } from "@/components/data-table/data-table";
-import { Link } from "@/utils/i18n";
 import { ShowAdminGroups } from "@/utils/graphql/hooks";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { ActionsTableGroupsMembersAdmin } from "./actions/actions";
