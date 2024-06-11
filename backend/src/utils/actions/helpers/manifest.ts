@@ -2,10 +2,10 @@ import { join } from "path";
 import * as fs from "fs";
 
 import * as dotenv from "dotenv";
-import { objectToArray, updateObject } from "@vitnode/shared";
 
 import { ABSOLUTE_PATHS, getConfigFile } from "@/config";
 import { parseFrontendUrlFromEnv } from "@/functions/envs";
+import { objectToArray, updateObject } from "@/functions/update-object";
 
 dotenv.config({
   path: join(process.cwd(), "..", ".env")
