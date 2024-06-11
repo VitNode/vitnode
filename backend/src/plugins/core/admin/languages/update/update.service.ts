@@ -4,6 +4,7 @@ import { join } from "path";
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 import { eq } from "drizzle-orm";
+import { currentUnixDate, generateRandomString } from "@vitnode/shared";
 
 import { UpdateCoreAdminLanguagesArgs } from "./dto/update.args";
 
@@ -12,8 +13,6 @@ import { core_languages } from "../../database/schema/languages";
 import { DatabaseService } from "@/database/database.service";
 import { setRebuildRequired } from "@/functions/rebuild-required";
 import { ABSOLUTE_PATHS } from "@/config";
-import { currentDate } from "@/functions/date";
-import { generateRandomString } from "@/functions/generate-random-string";
 
 @Injectable()
 export class UpdateAdminCoreLanguageService {
@@ -30,7 +29,7 @@ export class UpdateAdminCoreLanguageService {
 
     // Unpack the file to the temp folder
     const tgz = await file;
-    const tempNameFolder = `${code}-update--${generateRandomString(5)}-${currentDate()}`;
+    const tempNameFolder = `${code}-update--${generateRandomString(5)}-${currentUnixDate()}`;
     const pathTemp = join(ABSOLUTE_PATHS.uploads.temp, "langs", tempNameFolder);
     if (!fs.existsSync(pathTemp)) {
       fs.mkdirSync(pathTemp, { recursive: true });

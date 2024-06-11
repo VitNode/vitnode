@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
+import { convertDateToUnixTime } from "@vitnode/shared";
 
 import {
   Form,
@@ -15,7 +16,6 @@ import { Button } from "@/components/ui/button";
 import { SheetClose, SheetFooter } from "@/components/ui/sheet";
 import { CalendarPicker } from "@/components/calendar-picker";
 import { usePathname, useRouter } from "@/utils/i18n";
-import { convertDateToUnixTime } from "@/functions/date";
 
 export const AdvancedFiltersUsersMembersAdmin = () => {
   const t = useTranslations("admin.members.users");

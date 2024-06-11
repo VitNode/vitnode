@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
 import * as fs from "fs";
 
-import { updateObject } from "../functions/update-object";
-import { configPath, getConfigFile } from "./helpers";
+import { configPath, getConfigFile, updateObject } from "./helpers";
 
 import { DEFAULT_CONFIG_DATA } from ".";
 

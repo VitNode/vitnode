@@ -6,7 +6,6 @@ import { UploadAvatarCoreMembersObj } from "./dto/upload.obj";
 
 import { User } from "@/utils/decorators/user.decorator";
 import { UploadCoreFilesService } from "@/plugins/core/files/helpers/upload/upload.service";
-import { currentDate } from "@/functions/date";
 import { DeleteCoreFilesService } from "@/plugins/core/files/helpers/delete/delete.service";
 import { core_files_avatars } from "@/plugins/core/admin/database/schema/users";
 import { DatabaseService } from "@/database/database.service";
@@ -63,7 +62,6 @@ export class UploadAvatarCoreMembersService {
       .insert(core_files_avatars)
       .values({
         user_id: id,
-        created: currentDate(),
         ...uploadFile
       })
       .returning();

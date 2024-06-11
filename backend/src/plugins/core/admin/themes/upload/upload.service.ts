@@ -4,14 +4,13 @@ import * as fs from "fs";
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 import { eq } from "drizzle-orm";
+import { currentUnixDate, generateRandomString } from "@vitnode/shared";
 
 import { UploadAdminThemesArgs } from "./dto/upload.args";
 import { ConfigTheme } from "../themes.module";
 import { ShowAdminThemes } from "../show/dto/show.obj";
 import { ChangeTemplatesAdminThemesService } from "../change_templates.service";
 
-import { generateRandomString } from "@/functions/generate-random-string";
-import { currentDate } from "@/functions/date";
 import { core_themes } from "../../database/schema/themes";
 import { FileUpload } from "@/utils/graphql-upload/upload";
 import { NotFoundError } from "@/utils/errors/not-found-error";
@@ -26,7 +25,7 @@ export class UploadAdminThemesService extends ChangeTemplatesAdminThemesService 
     process.cwd(),
     "temp",
     "themes",
-    `${generateRandomString(5)}${currentDate()}`
+    `${generateRandomString(5)}${currentUnixDate()}`
   );
 
   constructor(private readonly databaseService: DatabaseService) {

@@ -3,11 +3,11 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
+import { convertColor, getHSLFromString } from "@vitnode/shared";
 
 import { CONFIG } from "@/config";
 import { Admin__Core_Manifest_Metadata__ShowQuery } from "@/utils/graphql/hooks";
 import { mutationApi } from "./mutation-api";
-import { convertColor, getHSLFromString } from "@/functions/colors";
 
 export const useManifestCoreAdminView = ({
   admin__core_manifest_metadata__show: data

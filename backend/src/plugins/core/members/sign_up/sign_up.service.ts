@@ -2,11 +2,11 @@ import { Injectable } from "@nestjs/common";
 import { genSalt, hash } from "bcrypt";
 import { count } from "drizzle-orm";
 import { ConfigService } from "@nestjs/config";
+import { removeSpecialCharacters } from "@vitnode/shared";
 
 import { SignUpCoreMembersArgs } from "./dto/sign_up.args";
 import { SignUpCoreMembersObj } from "./dto/sign_up.obj";
 
-import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 import { generateAvatarColor } from "@/plugins/core/members/sign_up/functions/generate-avatar-color";
 import { core_users } from "@/plugins/core/admin/database/schema/users";
 import { DatabaseService } from "@/database/database.service";

@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { removeSpecialCharacters } from "@vitnode/shared";
 
 import { CardContent, CardFooter } from "@/components/ui/card";
 import {
@@ -17,7 +18,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
-import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 
 export const AccountInstallConfigsView = () => {
   const t = useTranslations("core");

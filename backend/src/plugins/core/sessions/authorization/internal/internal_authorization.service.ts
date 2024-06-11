@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
 import { eq } from "drizzle-orm";
+import { currentUnixDate } from "@vitnode/shared";
 
 import { User } from "@/utils/decorators/user.decorator";
 import { core_sessions_known_devices } from "@/plugins/core/admin/database/schema/sessions";
@@ -9,7 +10,6 @@ import { DeviceSignInCoreSessionsService } from "../../sign_in/device.service";
 import { DatabaseService } from "@/database/database.service";
 import { Ctx } from "@/utils/types/context.type";
 import { AccessDeniedError } from "@/utils/errors/access-denied-error";
-import { currentDate } from "@/functions/date";
 import { getUserIp } from "@/functions/get-user-ip";
 import { getUserAgentData } from "@/functions/get-user-agent-data";
 import { core_users } from "@/plugins/core/admin/database/schema/users";
@@ -67,7 +67,7 @@ export class InternalAuthorizationCoreSessionsService {
     }
 
     const decodeAccessToken = this.jwtService.decode(login_token);
-    if (!decodeAccessToken || decodeAccessToken["exp"] < currentDate()) {
+    if (!decodeAccessToken || decodeAccessToken["exp"] < currentUnixDate()) {
       throw new AccessDeniedError();
     }
 

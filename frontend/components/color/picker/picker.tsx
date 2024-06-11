@@ -3,12 +3,12 @@ import * as React from "react";
 import { HslColorPicker, HslColor } from "react-colorful";
 import { RemoveFormatting } from "lucide-react";
 import { useTranslations } from "next-intl";
-
 import {
   checkColorType,
   convertColor,
   isColorBrightness
-} from "@/functions/colors";
+} from "@vitnode/shared";
+
 import { Input } from "@/components/ui/input";
 import { cn } from "@/functions/classnames";
 import { Button } from "@/components/ui/button";

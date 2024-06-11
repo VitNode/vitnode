@@ -11,7 +11,7 @@ import {
 import { useDateFormat } from "./hooks/use-date-format";
 
 interface Props {
-  date: Date | number;
+  date: Date;
   className?: string;
   ref?: React.RefCallback<HTMLTimeElement>;
   showFullDate?: boolean;
