@@ -5,8 +5,8 @@ import { Editor, ReactRenderer } from "@tiptap/react";
 import * as React from "react";
 import tippy, { GetReferenceClientRect, Instance, Props } from "tippy.js";
 import { useTranslations } from "next-intl";
+import { cn } from "@vitnode/frontend/helpers";
 
-import { cn } from "@/functions/classnames";
 import { classPopover } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 

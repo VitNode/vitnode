@@ -1,11 +1,11 @@
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { X } from "lucide-react";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { GroupInputContent } from "./content/content";
-import { cn } from "@/functions/classnames";
 
-import { TextLanguage } from "../../../utils/graphql/hooks";
+import { TextLanguage } from "../../../graphql/hooks";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { Button } from "../../ui/button";
 import { Badge } from "../../ui/badge";

@@ -1,8 +1,23 @@
 import { MetadataRoute } from "next";
 
 import { CONFIG } from "@/config";
-import { getSessionData } from "@/functions/get-session-data";
-import { generateAlternateLanguages } from "@/functions/sitemap";
+import { getSessionData } from "@/graphql/get-session-data";
+
+const generateAlternateLanguagesForSitemap = ({
+  frontendUrl,
+  languages,
+  slug
+}: {
+  frontendUrl: string;
+  languages: { code: string }[];
+  slug?: (locale: string) => string;
+}): Record<string, string> => {
+  return languages.reduce((acc: Record<string, string>, { code }) => {
+    acc[code] = `${frontendUrl}/${code}${slug ? slug(code) : ""}`;
+
+    return acc;
+  }, {});
+};
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const {
@@ -18,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${CONFIG.frontend_url}/${plugin.code}`,
       lastModified: new Date(),
       alternates: {
-        languages: generateAlternateLanguages({
+        languages: generateAlternateLanguagesForSitemap({
           languages,
           frontendUrl: CONFIG.frontend_url,
           slug: () => `/${plugin.code}`
@@ -32,7 +47,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: CONFIG.frontend_url,
       lastModified: new Date(),
       alternates: {
-        languages: generateAlternateLanguages({
+        languages: generateAlternateLanguagesForSitemap({
           languages,
           frontendUrl: CONFIG.frontend_url
         })

@@ -6,8 +6,8 @@ import {
   Admin__Core_Nav__Edit,
   Admin__Core_Nav__EditMutation,
   Admin__Core_Nav__EditMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 import { CoreApiTags } from "@/plugins/admin/api-tags";
 
 export const editMutationApi = async (

@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Check } from "lucide-react";
+import { cn } from "@vitnode/frontend/helpers";
 
 import {
   DialogDescription,
@@ -24,7 +25,6 @@ import {
   PopoverContent,
   PopoverTrigger
 } from "@/components/ui/popover";
-import { cn } from "@/functions/classnames";
 import {
   Command,
   CommandEmpty,
@@ -34,7 +34,7 @@ import {
   CommandList
 } from "@/components/ui/command";
 import { Loader } from "@/components/loader";
-import { ShowCoreLanguages } from "@/utils/graphql/hooks";
+import { ShowCoreLanguages } from "@/graphql/hooks";
 import { useSessionAdmin } from "@/plugins/admin/hooks/use-session-admin";
 
 export const ContentDownloadActionsTableLangsCoreAdmin = ({

@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { Link } from "@vitnode/frontend/navigation";
 
 import {
   Card,
@@ -7,7 +8,6 @@ import {
   CardTitle
 } from "@/components/ui/card";
 import { FormSignUp } from "./form/form-sign-up";
-import { Link } from "@/utils/i18n";
 
 export default function SignUpView() {
   const t = useTranslations("core.sign_up");

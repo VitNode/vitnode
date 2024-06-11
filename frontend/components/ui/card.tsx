@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/heading-has-content */
 import * as React from "react";
-
-import { cn } from "@/functions/classnames";
+import { cn } from "@vitnode/frontend/helpers";
 
 const Card = ({
   className,

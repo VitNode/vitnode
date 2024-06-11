@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useLocale } from "next-intl";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { useGlobals } from "@/plugins/core/hooks/use-globals";
 import { Input } from "./ui/input";
@@ -11,8 +12,7 @@ import {
   SelectValue
 } from "./ui/select";
 import { FormControl } from "./ui/form";
-import { TextLanguage } from "@/utils/graphql/hooks";
-import { cn } from "@/functions/classnames";
+import { TextLanguage } from "@/graphql/hooks";
 
 interface Props
   extends Omit<

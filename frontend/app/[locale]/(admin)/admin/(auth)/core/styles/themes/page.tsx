@@ -6,12 +6,12 @@ import {
   ShowAdminThemesSortingColumnEnum,
   Admin_Core_Themes__ShowQuery,
   Admin_Core_Themes__ShowQueryVariables
-} from "@/utils/graphql/hooks";
+} from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
-import { fetcher } from "@/utils/graphql/fetcher";
+import { fetcher } from "@/graphql/fetcher";
 import { ThemesAdminView } from "@/plugins/admin/views/core/styles/themes/themes-admin-view";
 
 interface Props {

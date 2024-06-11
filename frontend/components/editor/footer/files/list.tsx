@@ -1,5 +1,6 @@
+import { cn } from "@vitnode/frontend/helpers";
+
 import { ItemListFilesFooterEditor } from "./item/item";
-import { cn } from "@/functions/classnames";
 
 import { useEditorState } from "../../hooks/use-editor-state";
 

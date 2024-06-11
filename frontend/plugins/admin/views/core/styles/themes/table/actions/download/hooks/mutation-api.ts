@@ -6,8 +6,8 @@ import {
   Admin__Core_Themes__Download,
   Admin__Core_Themes__DownloadMutation,
   Admin__Core_Themes__DownloadMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const mutationApi = async (
   variables: Admin__Core_Themes__DownloadMutationVariables

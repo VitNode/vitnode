@@ -6,13 +6,11 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Clock, Download, File } from "lucide-react";
 import { formatBytes } from "@vitnode/shared";
+import { Link } from "@vitnode/frontend/navigation";
 
 import { CONFIG } from "@/config";
 import { DataTable } from "@/components/data-table/data-table";
-import {
-  Core_Members__Files__ShowQuery,
-  ShowCoreFiles
-} from "@/utils/graphql/hooks";
+import { Core_Members__Files__ShowQuery, ShowCoreFiles } from "@/graphql/hooks";
 import { DateFormat } from "@/components/date-format/date-format";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
 import {
@@ -22,7 +20,6 @@ import {
   TooltipTrigger
 } from "@/components/ui/tooltip";
 import { buttonVariants } from "@/components/ui/button";
-import { Link } from "@/utils/i18n";
 
 export const ContentFilesSettings = ({
   core_files__show: { edges, pageInfo }

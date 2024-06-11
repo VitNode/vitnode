@@ -11,7 +11,7 @@ import { useTranslations } from "next-intl";
 import {
   Admin_Blog_Categories__ShowQuery,
   ShowBlogCategories
-} from "@/utils/graphql/hooks";
+} from "@/graphql/hooks";
 import { useDragAndDrop } from "@/plugins/core/hooks/drag&drop/use-functions";
 import { ItemDragAndDrop } from "@/plugins/core/hooks/drag&drop/item";
 import { ItemCategoriesCategoryAdmin } from "./item/item";

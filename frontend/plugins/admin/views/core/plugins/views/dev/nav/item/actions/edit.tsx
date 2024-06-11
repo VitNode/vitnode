@@ -1,6 +1,7 @@
 import { Pencil } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
+import { FlatTree } from "@vitnode/frontend/helpers";
 
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
@@ -11,8 +12,7 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import { FlatTree } from "@/functions/flatten-tree";
-import { ShowAdminNavPluginsObj } from "@/utils/graphql/hooks";
+import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
 import { useItemNavDevPluginAdmin } from "../hooks/use-item-nav-dev-plugin-admin";
 
 const Content = React.lazy(async () =>

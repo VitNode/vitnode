@@ -1,6 +1,5 @@
 import * as React from "react";
-
-import { cn } from "@/functions/classnames";
+import { cn } from "@vitnode/frontend/helpers";
 
 const Table = ({
   className,

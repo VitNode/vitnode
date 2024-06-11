@@ -6,8 +6,8 @@ import {
   Core_Members__Avatar__Upload,
   Core_Members__Avatar__UploadMutation,
   Core_Members__Avatar__UploadMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 import { CoreApiTags } from "@/plugins/admin/api-tags";
 
 export const mutationUploadApi = async (formData: FormData) => {

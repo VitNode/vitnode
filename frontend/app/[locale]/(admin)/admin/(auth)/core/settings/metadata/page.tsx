@@ -7,8 +7,8 @@ import {
   Admin__Core_Manifest_Metadata__Show,
   Admin__Core_Manifest_Metadata__ShowQuery,
   Admin__Core_Manifest_Metadata__ShowQueryVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 import { ManifestMetadataCoreAdminView } from "@/plugins/admin/views/core/settings/metadata/manifest/manifest-metadata-core-view";
 
 const getData = async () => {

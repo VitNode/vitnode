@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Link, usePathname } from "@vitnode/frontend/navigation";
+import { cn } from "@vitnode/frontend/helpers";
 
-import { Link, usePathname } from "@/utils/i18n";
-import { cn } from "@/functions/classnames";
 import { buttonVariants } from "@/components/ui/button";
 import { LinkItemNavSettingsProps } from "@/plugins/core/hooks/settings/use-settings-view";
 

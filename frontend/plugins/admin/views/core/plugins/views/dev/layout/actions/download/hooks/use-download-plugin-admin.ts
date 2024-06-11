@@ -3,12 +3,11 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
+import { zodInput, increaseVersionString } from "@vitnode/frontend/helpers";
 
 import { CONFIG } from "@/config";
 import { useDialog } from "@/components/ui/dialog";
-import { increaseVersionString } from "@/functions/increase-version-string";
-import { zodInput } from "@/utils/zod";
-import { ShowAdminPlugins } from "@/utils/graphql/hooks";
+import { ShowAdminPlugins } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";
 
 export const useDownloadPluginAdmin = ({

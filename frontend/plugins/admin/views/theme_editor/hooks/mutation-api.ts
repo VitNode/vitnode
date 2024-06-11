@@ -4,8 +4,8 @@ import {
   Admin__Core_Theme_Editor__Edit,
   Admin__Core_Theme_Editor__EditMutation,
   Admin__Core_Theme_Editor__EditMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const mutationApi = async (
   variables: Admin__Core_Theme_Editor__EditMutationVariables

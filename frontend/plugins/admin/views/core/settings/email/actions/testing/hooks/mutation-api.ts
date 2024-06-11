@@ -1,11 +1,11 @@
 "use server";
 
-import { fetcher } from "@/utils/graphql/fetcher";
+import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Email_Settings__Test,
   Admin__Core_Email_Settings__TestMutation,
   Admin__Core_Email_Settings__TestMutationVariables
-} from "@/utils/graphql/hooks";
+} from "@/graphql/hooks";
 
 export const mutationApi = async (
   variables: Admin__Core_Email_Settings__TestMutationVariables

@@ -8,7 +8,7 @@ import {
   AlertDialogTitle
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { ShowAdminNavPluginsObj } from "@/utils/graphql/hooks";
+import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
 import { SubmitDeleteActionTableNavDevPluginAdmin } from "./submit";
 import { useDeleteNavPluginAdmin } from "./hooks/use-delete-nav-plugin-admin";
 

@@ -18,8 +18,7 @@
     ],
     "paths": {
       "@/*": ["./*"]
-    },
-    "forceConsistentCasingInFileNames": true
+    }
   },
   "ts-node": {
     // these options are overrides used only by ts-node
@@ -33,7 +32,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "vitest.config.mts"
+    "../packages/frontend/src/helpers/classnames.ts",
+    "../packages/frontend/src/helpers/flatten-tree.ts"
   ],
-  "exclude": ["node_modules", "postcss.config.js"]
+  "exclude": ["postcss.config.js"]
 }

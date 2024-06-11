@@ -3,13 +3,12 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import { zodInput, increaseVersionString } from "@vitnode/frontend/helpers";
 
 import { CONFIG } from "@/config";
 import { mutationApi } from "./mutation-api";
-import { increaseVersionString } from "@/functions/increase-version-string";
 import { useDialog } from "@/components/ui/dialog";
-import { ShowAdminThemes } from "@/utils/graphql/hooks";
-import { zodInput } from "@/utils/zod";
+import { ShowAdminThemes } from "@/graphql/hooks";
 
 export const useDownloadThemeAdmin = ({
   id,

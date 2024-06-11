@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Editor } from "@/components/editor/editor";
-import { ShowBlogCategories } from "@/utils/graphql/hooks";
+import { ShowBlogCategories } from "@/graphql/hooks";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { ColorInput } from "@/components/color/color-input";
 

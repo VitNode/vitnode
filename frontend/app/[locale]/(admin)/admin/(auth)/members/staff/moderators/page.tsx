@@ -6,12 +6,12 @@ import {
   ShowAdminStaffModeratorsSortingColumnEnum,
   Admin__Core_Staff_Moderators__ShowQuery,
   Admin__Core_Staff_Moderators__ShowQueryVariables
-} from "@/utils/graphql/hooks";
+} from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
-import { fetcher } from "@/utils/graphql/fetcher";
+import { fetcher } from "@/graphql/fetcher";
 import { ModeratorsStaffAdminView } from "@/plugins/admin/views/members/staff/moderators/moderators-view";
 
 const getData = async (

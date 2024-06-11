@@ -6,8 +6,8 @@ import {
   Core_Members__Avatar__Delete,
   Core_Members__Avatar__DeleteMutation,
   Core_Members__Avatar__DeleteMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 import { CoreApiTags } from "@/plugins/admin/api-tags";
 
 export const mutationDeleteApi = async () => {

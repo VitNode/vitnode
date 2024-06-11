@@ -7,9 +7,9 @@ import {
   Core_Members__Profiles,
   Core_Members__ProfilesQuery,
   Core_Members__ProfilesQueryVariables
-} from "@/utils/graphql/hooks";
-import { getSessionData } from "@/functions/get-session-data";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
+import { getSessionData } from "@/graphql/get-session-data";
 
 const getData = async ({ id }: { id: string }) => {
   const { data } = await fetcher<

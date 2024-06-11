@@ -1,14 +1,14 @@
 "use server";
 
 import { revalidatePath, revalidateTag } from "next/cache";
+import { redirect } from "@vitnode/frontend/navigation";
 
 import {
   Core_Sessions__Sign_In,
   Core_Sessions__Sign_InMutation,
   Core_Sessions__Sign_InMutationVariables
-} from "@/utils/graphql/hooks";
-import { redirect } from "@/utils/i18n";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 import { CoreApiTags } from "@/plugins/admin/api-tags";
 
 export const mutationApi = async (

@@ -1,10 +1,10 @@
 "use client";
 
 import * as React from "react";
+import { Link, usePathname } from "@vitnode/frontend/navigation";
+import { cn } from "@vitnode/frontend/helpers";
 
-import { Link, usePathname } from "@/utils/i18n";
 import { buttonVariants } from "../ui/button";
-import { cn } from "@/functions/classnames";
 
 export interface TabsTriggerProps {
   children: React.ReactNode;

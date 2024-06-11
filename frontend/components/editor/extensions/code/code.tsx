@@ -1,8 +1,8 @@
 import { CodeBlockLowlight } from "@tiptap/extension-code-block-lowlight";
 import { all, createLowlight } from "lowlight";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { renderReactNode } from "./client";
-import { cn } from "@/functions/classnames";
 
 export const lowlight = createLowlight(all);
 

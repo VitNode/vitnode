@@ -19,7 +19,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ShowAdminPlugins } from "@/utils/graphql/hooks";
+import { ShowAdminPlugins } from "@/graphql/hooks";
 
 export const ContentDownloadActionDevPluginAdmin = ({
   code,

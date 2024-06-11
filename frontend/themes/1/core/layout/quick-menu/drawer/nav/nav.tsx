@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as Accordion from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { useSession } from "@/plugins/core/hooks/use-session";
-import { cn } from "@/functions/classnames";
 import { ItemNavDrawerQuickMenu } from "./item";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { buttonVariants } from "@/components/ui/button";

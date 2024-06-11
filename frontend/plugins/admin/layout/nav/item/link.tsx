@@ -5,10 +5,10 @@ import * as Accordion from "@radix-ui/react-accordion";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { ChevronDown, Menu } from "lucide-react";
+import { Link, usePathname } from "@vitnode/frontend/navigation";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { Button, buttonVariants } from "@/components/ui/button";
-import { cn } from "@/functions/classnames";
-import { Link, usePathname } from "@/utils/i18n";
 
 export interface ItemItemNavAdminProps {
   href: string;

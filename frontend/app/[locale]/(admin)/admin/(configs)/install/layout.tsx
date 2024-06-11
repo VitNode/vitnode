@@ -1,12 +1,12 @@
 import * as React from "react";
+import { redirect } from "@vitnode/frontend/navigation";
 
 import {
   Admin__Install__Layout,
   Admin__Install__LayoutQuery,
   Admin__Install__LayoutQueryVariables
-} from "@/utils/graphql/hooks";
-import { redirect } from "@/utils/i18n";
-import { fetcher, ErrorType } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher, ErrorType } from "@/graphql/fetcher";
 import { LayoutInstallConfigsView } from "@/plugins/admin/configs/views/install/layout-install-configs-view";
 import { InternalErrorView } from "@/plugins/admin/global/internal-error/internal-error-view";
 import { RedirectsInstallConfigsLayout } from "@/plugins/admin/configs/views/install/redirects-install-configs-layout";

@@ -6,8 +6,8 @@ import {
   Admin__Core_Plugins__Nav__Edit,
   Admin__Core_Plugins__Nav__EditMutation,
   Admin__Core_Plugins__Nav__EditMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 interface Args extends Admin__Core_Plugins__Nav__EditMutationVariables {
   pluginCode: string;

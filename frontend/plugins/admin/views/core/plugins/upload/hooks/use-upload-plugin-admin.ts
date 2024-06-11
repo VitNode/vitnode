@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { useDialog } from "@/components/ui/dialog";
 import { mutationApi } from "./mutation-api";
 import { UploadPluginAdminProps } from "../upload";
-import { ErrorType } from "@/utils/graphql/fetcher";
+import { ErrorType } from "@/graphql/fetcher";
 
 export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
   const t = useTranslations("admin.core.plugins.upload");

@@ -3,8 +3,8 @@
 import * as React from "react";
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
 import { VariantProps } from "class-variance-authority";
+import { cn } from "@vitnode/frontend/helpers";
 
-import { cn } from "@/functions/classnames";
 import { toggleVariants } from "@/components/ui/toggle";
 
 const ToggleGroupContext = React.createContext<

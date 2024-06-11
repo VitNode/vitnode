@@ -4,8 +4,8 @@ import {
   Admin__Core_Plugins__Download,
   Admin__Core_Plugins__DownloadMutation,
   Admin__Core_Plugins__DownloadMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 import { cleanAdminCorePluginsCache } from "@/plugins/admin/api-tags";
 
 export const mutationApi = async (

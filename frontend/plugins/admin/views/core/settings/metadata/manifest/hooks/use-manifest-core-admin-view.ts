@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { convertColor, getHSLFromString } from "@vitnode/shared";
 
 import { CONFIG } from "@/config";
-import { Admin__Core_Manifest_Metadata__ShowQuery } from "@/utils/graphql/hooks";
+import { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";
 
 export const useManifestCoreAdminView = ({

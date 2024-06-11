@@ -5,9 +5,8 @@ import { createSharedPathnamesNavigation } from "next-intl/navigation";
 import { useSearchParams } from "next/navigation";
 import * as React from "react";
 
-import { usePathname } from ".";
-
-const { useRouter: useRouterI18n } = createSharedPathnamesNavigation();
+const { useRouter: useRouterI18n, usePathname } =
+  createSharedPathnamesNavigation();
 
 const useRouter = () => {
   const pathname = usePathname();

@@ -6,8 +6,8 @@ import {
   Admin__Core_Languages__UpdateMutation,
   Admin__Core_Languages__Update,
   Admin__Core_Languages__UpdateMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const mutationApi = async (formData: FormData) => {
   try {

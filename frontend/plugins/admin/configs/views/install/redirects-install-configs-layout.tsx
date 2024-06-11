@@ -1,13 +1,13 @@
 "use client";
 
 import * as React from "react";
+import { usePathname, useRouter } from "@vitnode/frontend/navigation";
 
 import {
   LayoutAdminInstallEnum,
   Admin__Install__LayoutQuery
-} from "@/utils/graphql/hooks";
+} from "@/graphql/hooks";
 import { FinishInstallConfigsView } from "./finish/finish-install-config-view";
-import { usePathname, useRouter } from "@/utils/i18n";
 
 interface Props {
   children: React.ReactNode;

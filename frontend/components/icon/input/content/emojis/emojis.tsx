@@ -2,10 +2,10 @@ import emojiMartData, { Emoji, EmojiMartData } from "@emoji-mart/data";
 import { init, SearchIndex } from "emoji-mart";
 import * as React from "react";
 import { useTranslations } from "next-intl";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { Button } from "@/components/ui/button";
 import { IconInputProps } from "../content";
-import { cn } from "@/functions/classnames";
 
 interface Props extends Omit<IconInputProps, "setOpen"> {
   search: string;

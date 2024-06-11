@@ -204,6 +204,7 @@ export type Mutation = {
   core_groups__admin_create: ShowAdminGroups;
   core_members__avatar__delete: Scalars['String']['output'];
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
+  core_members__delete: Scalars['String']['output'];
   core_members__sign_up: SignUpCoreMembersObj;
   core_sessions__sign_in: Scalars['String']['output'];
   core_sessions__sign_out: Scalars['String']['output'];
@@ -499,6 +500,11 @@ export type MutationCore_Groups__Admin_CreateArgs = {
 
 export type MutationCore_Members__Avatar__UploadArgs = {
   file: Scalars['Upload']['input'];
+};
+
+
+export type MutationCore_Members__DeleteArgs = {
+  id: Scalars['Int']['input'];
 };
 
 

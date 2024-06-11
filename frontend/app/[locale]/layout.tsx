@@ -3,6 +3,7 @@ import { NextIntlClientProvider, AbstractIntlMessages } from "next-intl";
 import { GeistSans } from "geist/font/sans";
 import NextTopLoader from "nextjs-toploader";
 import { Metadata } from "next";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { CONFIG } from "@/config";
 import { Providers } from "./providers";
@@ -10,11 +11,10 @@ import {
   Core_Middleware,
   Core_MiddlewareQuery,
   Core_MiddlewareQueryVariables
-} from "@/utils/graphql/hooks";
-import { cn } from "@/functions/classnames";
+} from "@/graphql/hooks";
 import { CatchLayout } from "./catch";
 import { getConfigFile } from "@/config/helpers";
-import { fetcher } from "@/utils/graphql/fetcher";
+import { fetcher } from "@/graphql/fetcher";
 import "@/app/[locale]/(admin)/admin/global.css";
 import "./global.css";
 

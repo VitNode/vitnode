@@ -12,8 +12,8 @@ import {
 } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { useBeforeUnload } from "react-use";
+import { cn } from "@vitnode/frontend/helpers";
 
-import { cn } from "@/functions/classnames";
 import { Label } from "@/components/ui/label";
 import { useDialog } from "./dialog";
 

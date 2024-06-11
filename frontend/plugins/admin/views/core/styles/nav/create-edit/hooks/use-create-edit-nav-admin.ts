@@ -3,13 +3,13 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
+import { zodInput } from "@vitnode/frontend/helpers";
 
 import { createMutationApi } from "./create-mutation-api";
 import { useDialog } from "@/components/ui/dialog";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
-import { ShowCoreNav } from "@/utils/graphql/hooks";
+import { ShowCoreNav } from "@/graphql/hooks";
 import { editMutationApi } from "./edit-mutation-api";
-import { zodInput } from "@/utils/zod";
 
 export interface CreateEditNavAdminArgs {
   data?: Omit<ShowCoreNav, "children">;

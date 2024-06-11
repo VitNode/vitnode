@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
 import { X } from "lucide-react";
+import { cn } from "@vitnode/frontend/helpers";
 
-import { cn } from "@/functions/classnames";
 import { Button } from "@/components/ui/button";
 import {
   Popover,

@@ -8,16 +8,16 @@ import {
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { useParams } from "next/navigation";
+import { WithChildren } from "@vitnode/frontend/helpers";
 
 import { useDragAndDrop } from "@/plugins/core/hooks/drag&drop/use-functions";
 import {
   Admin__Core_Plugins__Nav__ShowQuery,
   ShowAdminNavPluginsObj
-} from "@/utils/graphql/hooks";
+} from "@/graphql/hooks";
 import { ItemContentNavDevPluginAdmin } from "./item";
 import { mutationChangePositionApi } from "./item/hooks/mutation-change-position-api";
 import { ItemDragAndDrop } from "@/plugins/core/hooks/drag&drop/item";
-import { WithChildren } from "@/functions/flatten-tree";
 import { ItemNavDevPluginAdminContext } from "./item/hooks/use-item-nav-dev-plugin-admin";
 
 interface Props extends Admin__Core_Plugins__Nav__ShowQuery {

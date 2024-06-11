@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import * as React from "react";
 import { Check } from "lucide-react";
 import { ControllerRenderProps, FieldValues, Path } from "react-hook-form";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -23,7 +24,6 @@ import {
   PopoverContent,
   PopoverTrigger
 } from "@/components/ui/popover";
-import { cn } from "@/functions/classnames";
 import { timeZones } from "../timezones";
 
 interface Props<T extends FieldValues, TName extends Path<T>> {

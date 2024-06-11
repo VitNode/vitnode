@@ -3,12 +3,12 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
+import { zodInput } from "@vitnode/frontend/helpers";
 
 import { mutationApi } from "./mutation-api";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { useDialog } from "@/components/ui/dialog";
-import { zodInput } from "@/utils/zod";
-import { ErrorType } from "@/utils/graphql/fetcher";
+import { ErrorType } from "@/graphql/fetcher";
 
 export const useFormCreateEditFormGroupsMembersAdmin = () => {
   const t = useTranslations("admin.members.staff");

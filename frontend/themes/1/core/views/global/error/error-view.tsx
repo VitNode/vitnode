@@ -2,6 +2,8 @@
 
 import { AlertTriangle, Home } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Link } from "@vitnode/frontend/navigation";
+import { cn } from "@vitnode/frontend/helpers";
 
 import {
   Card,
@@ -9,9 +11,7 @@ import {
   CardFooter,
   CardHeader
 } from "@/components/ui/card";
-import { Link } from "@/utils/i18n";
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/functions/classnames";
 import { ErrorViewProps } from "@/components/views/error-view-ssr";
 
 export default function ErrorView({ className, code }: ErrorViewProps) {
