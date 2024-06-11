@@ -2,9 +2,9 @@
 import { NestFactory } from "@nestjs/core";
 import cookieParser from "cookie-parser";
 import { ValidationPipe } from "@nestjs/common";
+import { graphqlUploadExpress } from "@vitnode/backend";
 
 import { AppModule } from "./app.module";
-import { graphqlUploadExpress } from "./utils/graphql-upload/graphql-upload-express";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

@@ -46,6 +46,7 @@
     "ua-parser-js": "^2.0.0-beta.3"
   },
   "devDependencies": {
+    "@vitnode/backend": "workspace:*",
     "@graphql-codegen/cli": "^5.0.2",
     "@graphql-codegen/typescript": "^4.0.7",
     "@graphql-codegen/typescript-document-nodes": "^4.0.7",

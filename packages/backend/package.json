@@ -1,0 +1,28 @@
+{
+  "name": "@vitnode/backend",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "main": "./dist/index.js",
+  "types": "./src/index.ts",
+  "devDependencies": {
+    "@types/busboy": "^1.5.4",
+    "@types/express": "^4.17.21",
+    "@types/http-errors": "^2.0.4",
+    "@types/node": "^20.14.2",
+    "@types/object-path": "^0.11.4",
+    "busboy": "^1.6.0",
+    "crypto": "^1.0.1",
+    "eslint-config-vitnode": "workspace:*",
+    "http-errors": "^2.0.0",
+    "object-path": "^0.11.8",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "graphql": "^16.8.1"
+  }
+}

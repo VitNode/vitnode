@@ -153,6 +153,9 @@ importers:
       '@types/ua-parser-js':
         specifier: ^0.7.39
         version: 0.7.39
+      '@vitnode/backend':
+        specifier: workspace:*
+        version: link:../packages/backend
       '@vitnode/shared':
         specifier: workspace:*
         version: link:../packages/shared
@@ -353,7 +356,7 @@ importers:
         version: 15.0.0-canary.25(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
       next-intl:
         specifier: ^3.15.0
-        version: 3.15.0(next@15.0.0-canary.25(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
+        version: 3.15.0(next@15.0.0-canary.25(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
       next-themes:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
@@ -509,6 +512,49 @@ importers:
         specifier: ^5.4.5
         version: 5.4.5
 
+  packages/backend:
+    dependencies:
+      express:
+        specifier: ^4.19.2
+        version: 4.19.2
+      graphql:
+        specifier: ^16.8.1
+        version: 16.8.1
+    devDependencies:
+      '@types/busboy':
+        specifier: ^1.5.4
+        version: 1.5.4
+      '@types/express':
+        specifier: ^4.17.21
+        version: 4.17.21
+      '@types/http-errors':
+        specifier: ^2.0.4
+        version: 2.0.4
+      '@types/node':
+        specifier: ^20.14.2
+        version: 20.14.2
+      '@types/object-path':
+        specifier: ^0.11.4
+        version: 0.11.4
+      busboy:
+        specifier: ^1.6.0
+        version: 1.6.0
+      crypto:
+        specifier: ^1.0.1
+        version: 1.0.1
+      eslint-config-vitnode:
+        specifier: workspace:*
+        version: link:../eslint-config-vitnode
+      http-errors:
+        specifier: ^2.0.0
+        version: 2.0.0
+      object-path:
+        specifier: ^0.11.8
+        version: 0.11.8
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
+
   packages/eslint-config-vitnode:
     devDependencies:
       '@typescript-eslint/eslint-plugin':
@@ -543,7 +589,7 @@ importers:
         version: 15.0.0-canary.25(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
       next-intl:
         specifier: ^3.15.0
-        version: 3.15.0(next@15.0.0-canary.25(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
+        version: 3.15.0(next@15.0.0-canary.25(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
       nprogress:
         specifier: ^0.2.0
         version: 0.2.0
@@ -4478,6 +4524,10 @@ packages:
   cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
     engines: {node: '>= 8'}
+
+  crypto@1.0.1:
+    resolution: {integrity: sha512-VxBKmeNcqQdiUQUW2Tzq0t377b54N2bMtXO/qiLa+6eRRmmC4qT3D4OnTGoT/U6O9aklQ/jTwbOtRMTTY8G0Ig==}
+    deprecated: This package is no longer supported. It's now a built-in Node module. If you've depended on crypto, you should switch to the one that's built-in.
 
   css-in-js-utils@3.1.0:
     resolution: {integrity: sha512-fJAcud6B3rRu+KHYk+Bwf+WFL2MDCJJ1XG9x137tJQ0xYxor7XziQtuGFbWNdqrvF4Tk26O3H73nfVqXt/fW1A==}
@@ -12976,6 +13026,8 @@ snapshots:
       shebang-command: 2.0.0
       which: 2.0.2
 
+  crypto@1.0.1: {}
+
   css-in-js-utils@3.1.0:
     dependencies:
       hyphenate-style-name: 1.0.5
@@ -14951,7 +15003,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  next-intl@3.15.0(next@15.0.0-canary.25(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522):
+  next-intl@3.15.0(next@15.0.0-canary.25(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522):
     dependencies:
       '@formatjs/intl-localematcher': 0.2.32
       negotiator: 0.6.3
