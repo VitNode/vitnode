@@ -1,6 +1,7 @@
 import { Baseline, ChevronDownIcon } from "lucide-react";
 import * as React from "react";
 import { HslColor } from "react-colorful";
+import { getHSLFromString } from "@vitnode/shared";
 
 import {
   Popover,
@@ -10,7 +11,6 @@ import {
 import { PickerColor } from "@/components/color/picker/picker";
 import { useEditorState } from "@/components/editor/hooks/use-editor-state";
 
-import { getHSLFromString } from "@/functions/colors";
 import { ButtonToolbarEditor } from "../../button";
 
 export const ColorToolbarEditor = () => {
