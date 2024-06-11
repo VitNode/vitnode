@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Link } from "@vitnode/frontend/navigation";
-
-import { cn } from "@/functions/classnames";
+import { cn } from "@vitnode/frontend/helpers";
 
 interface Props {
   children: React.ReactNode;

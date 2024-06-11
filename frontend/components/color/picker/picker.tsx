@@ -8,9 +8,9 @@ import {
   convertColor,
   isColorBrightness
 } from "@vitnode/shared";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { Input } from "@/components/ui/input";
-import { cn } from "@/functions/classnames";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,

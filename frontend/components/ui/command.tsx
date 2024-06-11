@@ -4,9 +4,9 @@ import * as React from "react";
 import { DialogProps } from "@radix-ui/react-dialog";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { Command as CommandPrimitive } from "cmdk";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { cn } from "@/functions/classnames";
 
 const Command = ({
   className,

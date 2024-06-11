@@ -34,8 +34,6 @@ ARG NEXT_PUBLIC_BACKEND_URL
 ENV NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
 ARG NEXT_PUBLIC_FRONTEND_URL
 ENV NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL}
-ARG NEXT_PUBLIC_DEBUG
-ENV NEXT_PUBLIC_DEBUG=${NEXT_PUBLIC_DEBUG}
 ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN pnpm turbo build --filter=frontend...
@@ -57,12 +55,10 @@ WORKDIR /app
 # # https://nextjs.org/docs/advanced-features/output-file-tracing
 # COPY --from=installer --chown=nextjs:nodejs /app/frontend/.next/standalone ./
 # COPY --from=installer --chown=nextjs:nodejs /app/frontend/.next/static ./frontend/.next/static
-# COPY --from=installer --chown=nextjs:nodejs /app/frontend/public ./frontend/public
 # COPY --from=installer --chown=nextjs:nodejs /app/frontend/config/config.json ./frontend/config/config.json
 
 COPY --from=installer /app/frontend/.next/standalone ./
 COPY --from=installer /app/frontend/.next/static ./frontend/.next/static
-COPY --from=installer /app/frontend/public ./frontend/public
 COPY --from=installer /app/frontend/config/config.json ./frontend/config.json
 
 EXPOSE 3000

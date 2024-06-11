@@ -1,6 +1,7 @@
 import { AlertTriangle, Home } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@vitnode/frontend/navigation";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -10,7 +11,6 @@ import {
   CardHeader
 } from "@/components/ui/card";
 import { ErrorViewProps } from "@/components/views/error-view-ssr";
-import { cn } from "@/functions/classnames";
 
 export const ErrorAdminView = ({ className, code }: ErrorViewProps) => {
   const t = useTranslations("core");

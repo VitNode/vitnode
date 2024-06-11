@@ -3,6 +3,7 @@ import * as React from "react";
 import * as localeDate from "date-fns/locale";
 import { Check } from "lucide-react";
 import { ControllerRenderProps, FieldValues, Path } from "react-hook-form";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -24,7 +25,6 @@ import {
   PopoverContent,
   PopoverTrigger
 } from "@/components/ui/popover";
-import { cn } from "@/functions/classnames";
 
 interface Props<T extends FieldValues, TName extends Path<T>> {
   field: ControllerRenderProps<T, TName>;

@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { CONFIG } from "@/config";
-import { cn } from "@/functions/classnames";
 import { ThemeEditorViewEnum, ToolbarThemeEditor } from "./toolbar";
 import { ThemeEditorContext, ThemeEditorTab } from "./hooks/use-theme-editor";
 import { ContentThemeEditor } from "./content/content";

@@ -4,11 +4,11 @@ import { ChevronDown } from "lucide-react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import * as React from "react";
 import { Link, usePathname } from "@vitnode/frontend/navigation";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { buttonVariants } from "@/components/ui/button";
 import { ShowCoreNav } from "@/utils/graphql/hooks";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
-import { cn } from "@/functions/classnames";
 
 interface Props extends Omit<ShowCoreNav, "icon"> {
   icons: { icon: React.ReactNode; id: number }[];

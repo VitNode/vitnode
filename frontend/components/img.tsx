@@ -1,6 +1,5 @@
 import Image, { StaticImageData } from "next/image";
-
-import { cn } from "@/functions/classnames";
+import { cn } from "@vitnode/frontend/helpers";
 
 interface InitialProps {
   alt: string;

@@ -1,9 +1,9 @@
 import { useTranslations } from "next-intl";
 import { CheckIcon } from "lucide-react";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { ShowCoreMembers } from "@/utils/graphql/hooks";
 import { UserInputItem } from "../user-input";
-import { cn } from "@/functions/classnames";
 import { CommandGroup, CommandItem } from "@/components/ui/command";
 
 import { AvatarUser } from "../../avatar/avatar-user";
