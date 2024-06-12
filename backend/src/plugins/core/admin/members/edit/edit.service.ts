@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { eq } from "drizzle-orm";
+import { eq, return } from "drizzle-orm";
 
 import { EditAdminMembersArgs } from "./dto/edit.args";
 
@@ -7,6 +7,7 @@ import { core_users } from "@/plugins/core/admin/database/schema/users";
 import { DatabaseService } from "@/database/database.service";
 import { NotFoundError } from "@/utils/errors/not-found-error";
 import { AccessDeniedError } from "@/utils/errors/access-denied-error";
+import { EditAdminMembersObj } from "./dto/edit.obj";
 
 @Injectable()
 export class EditAdminMembersService {
@@ -20,7 +21,7 @@ export class EditAdminMembersService {
     first_name,
     last_name,
     birthday
-  }: EditAdminMembersArgs): Promise<string> {
+  }: EditAdminMembersArgs): Promise<EditAdminMembersObj> {
     const user = await this.databaseService.db.query.core_users.findFirst({
       where: eq(core_users.id, id)
     });
@@ -35,7 +36,7 @@ export class EditAdminMembersService {
 
     if (!admin) throw new AccessDeniedError();
 
-    await this.databaseService.db
+    const update = await this.databaseService.db
       .update(core_users)
       .set({
         name: name,
@@ -45,8 +46,8 @@ export class EditAdminMembersService {
         last_name: last_name,
         birthday: birthday
       })
-      .where(eq(core_users.id, id));
+      .where(eq(core_users.id, id)).returning();
 
-    return "Success!";
+    return update[0];
   }
 }
