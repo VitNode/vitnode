@@ -1,7 +1,7 @@
 import { ConfigService } from "@nestjs/config";
+import { Ctx } from "@vitnode/backend";
 
 import { DatabaseService } from "@/database/database.service";
-import { Ctx } from "@/utils/types/context.type";
 
 export const getThemeId = async ({
   ctx,

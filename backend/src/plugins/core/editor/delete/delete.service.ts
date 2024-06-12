@@ -1,11 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { count, eq } from "drizzle-orm";
-import { AccessDeniedError } from "@vitnode/backend";
+import { AccessDeniedError, User } from "@vitnode/backend";
 
 import { DeleteCoreEditorArgs } from "./dto/delete.args";
 
 import { DeleteCoreFilesService } from "../../files/helpers/delete/delete.service";
-import { User } from "@/utils/decorators/user.decorator";
 import {
   core_files,
   core_files_using

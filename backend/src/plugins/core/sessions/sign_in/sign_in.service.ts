@@ -3,7 +3,7 @@ import { compare } from "bcrypt";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
 import { and, eq } from "drizzle-orm";
-import { AccessDeniedError, CustomError } from "@vitnode/backend";
+import { AccessDeniedError, CustomError, Ctx } from "@vitnode/backend";
 
 import { SignInCoreSessionsArgs } from "./dto/sign_in.args";
 import { DeviceSignInCoreSessionsService } from "./device.service";
@@ -11,7 +11,6 @@ import { DeviceSignInCoreSessionsService } from "./device.service";
 import { core_admin_sessions } from "@/plugins/core/admin/database/schema/admins";
 import { core_sessions } from "@/plugins/core/admin/database/schema/sessions";
 import { DatabaseService } from "@/database/database.service";
-import { Ctx } from "@/utils/types/context.type";
 
 interface CreateSessionArgs extends Ctx {
   email: string;

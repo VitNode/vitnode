@@ -1,10 +1,10 @@
 import { Query, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
+import { CurrentUser, User } from "@vitnode/backend";
 
 import { ShowCoreSessionDevicesService } from "./show.service";
 import { ShowCoreSessionDevicesObj } from "./dto/show.obj";
 
-import { CurrentUser, User } from "@/utils/decorators/user.decorator";
 import { AuthGuards } from "@/utils/guards/auth.guard";
 
 @Resolver()

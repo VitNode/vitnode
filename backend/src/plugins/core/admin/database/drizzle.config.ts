@@ -1,4 +1,4 @@
-// !! Do not remove and edit this file !!
+// ! DO NOT REMOVE OR MODIFY THIS FILE!!!
 
 import { defineConfig } from "drizzle-kit";
 

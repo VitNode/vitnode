@@ -173,7 +173,7 @@ importers:
         version: 2.1.4(@swc/helpers@0.5.11)(eslint@8.57.0)(ts-node@10.9.2(@swc/core@1.5.28(@swc/helpers@0.5.11))(@types/node@20.14.2)(typescript@5.4.5))
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.5.28(@swc/helpers@0.5.11))(@types/node@20.14.2)(typescript@5.4.5)
+        version: 10.9.2(@swc/core@1.5.28)(@types/node@20.14.2)(typescript@5.4.5)
       tsconfig-paths:
         specifier: ^4.2.0
         version: 4.2.0
@@ -478,6 +478,12 @@ importers:
 
   packages/backend:
     dependencies:
+      class-validator:
+        specifier: ^0.14.1
+        version: 0.14.1
+      drizzle-orm:
+        specifier: ^0.31.2
+        version: 0.31.2(@types/pg@8.11.6)(@types/react@18.3.3)(pg@8.12.0)(react@18.3.1)
       express:
         specifier: ^4.19.2
         version: 4.19.2
@@ -488,6 +494,12 @@ importers:
         specifier: ^2.0.0-beta.3
         version: 2.0.0-beta.3
     devDependencies:
+      '@nestjs/common':
+        specifier: ^10.3.9
+        version: 10.3.9(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1)
+      '@nestjs/graphql':
+        specifier: ^12.1.1
+        version: 12.1.1(@nestjs/common@10.3.9(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.3.9(@nestjs/common@10.3.9(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.3.9)(@nestjs/websockets@10.3.8)(reflect-metadata@0.2.2)(rxjs@7.8.1))(class-transformer@0.5.1)(class-validator@0.14.1)(graphql@16.8.1)(reflect-metadata@0.2.2)
       '@types/busboy':
         specifier: ^1.5.4
         version: 1.5.4
@@ -13429,7 +13441,7 @@ snapshots:
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       eslint-plugin-jsx-a11y: 6.8.0(eslint@8.57.0)
       eslint-plugin-react: 7.34.2(eslint@8.57.0)
       eslint-plugin-react-hooks: 4.6.2(eslint@8.57.0)
@@ -13466,7 +13478,7 @@ snapshots:
       enhanced-resolve: 5.17.0
       eslint: 8.57.0
       eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.5
       is-core-module: 2.13.1
@@ -13488,7 +13500,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0):
+  eslint-plugin-import@2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0):
     dependencies:
       array-includes: 3.1.8
       array.prototype.findlastindex: 1.2.5
@@ -15359,14 +15371,6 @@ snapshots:
       camelcase-css: 2.0.1
       postcss: 8.4.38
 
-  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.28(@swc/helpers@0.5.11))(@types/node@20.14.2)(typescript@5.4.5)):
-    dependencies:
-      lilconfig: 3.1.2
-      yaml: 2.4.5
-    optionalDependencies:
-      postcss: 8.4.38
-      ts-node: 10.9.2(@swc/core@1.5.28(@swc/helpers@0.5.11))(@types/node@20.14.2)(typescript@5.4.5)
-
   postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.28)(@types/node@20.14.2)(typescript@5.4.5)):
     dependencies:
       lilconfig: 3.1.2
@@ -16440,7 +16444,7 @@ snapshots:
       postcss: 8.4.38
       postcss-import: 15.1.0(postcss@8.4.38)
       postcss-js: 4.0.1(postcss@8.4.38)
-      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.28(@swc/helpers@0.5.11))(@types/node@20.14.2)(typescript@5.4.5))
+      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.28)(@types/node@20.14.2)(typescript@5.4.5))
       postcss-nested: 6.0.1(postcss@8.4.38)
       postcss-selector-parser: 6.1.0
       resolve: 1.22.8
@@ -16588,26 +16592,6 @@ snapshots:
   ts-interface-checker@0.1.13: {}
 
   ts-log@2.2.5: {}
-
-  ts-node@10.9.2(@swc/core@1.5.28(@swc/helpers@0.5.11))(@types/node@20.14.2)(typescript@5.4.5):
-    dependencies:
-      '@cspotcode/source-map-support': 0.8.1
-      '@tsconfig/node10': 1.0.11
-      '@tsconfig/node12': 1.0.11
-      '@tsconfig/node14': 1.0.3
-      '@tsconfig/node16': 1.0.4
-      '@types/node': 20.14.2
-      acorn: 8.11.3
-      acorn-walk: 8.3.2
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.2
-      make-error: 1.3.6
-      typescript: 5.4.5
-      v8-compile-cache-lib: 3.0.1
-      yn: 3.1.1
-    optionalDependencies:
-      '@swc/core': 1.5.28(@swc/helpers@0.5.11)
 
   ts-node@10.9.2(@swc/core@1.5.28)(@types/node@20.14.2)(typescript@5.4.5):
     dependencies:

@@ -9,11 +9,10 @@ import {
   generateRandomString,
   removeSpecialCharacters
 } from "@vitnode/shared";
-import { NotFoundError, CustomError } from "@vitnode/backend";
+import { NotFoundError, CustomError, User } from "@vitnode/backend";
 
 import { DownloadCoreAdminLanguagesArgs } from "./dto/download.args";
 
-import { User } from "@/utils/decorators/user.decorator";
 import { DatabaseService } from "@/database/database.service";
 import { ABSOLUTE_PATHS } from "@/config";
 

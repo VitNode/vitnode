@@ -1,9 +1,8 @@
 import { Args, Context, Mutation, Resolver } from "@nestjs/graphql";
+import { Ctx } from "@vitnode/backend";
 
 import { ChangeCoreThemesArgs } from "./dto/change.args";
 import { ChangeCoreThemesService } from "./change.service";
-
-import { Ctx } from "@/utils/types/context.type";
 
 @Resolver()
 export class ChangeThemesResolver {

@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
+import { PageInfo } from "@vitnode/backend";
 
 import { UploadCoreFilesObj } from "../../helpers/upload/dto/upload.obj";
-import { PageInfo } from "@/utils/types/database/pagination.type";
 
 @ObjectType()
 export class ShowCoreFiles extends UploadCoreFilesObj {

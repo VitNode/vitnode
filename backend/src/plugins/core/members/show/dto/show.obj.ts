@@ -1,8 +1,5 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
-
-import { User } from "@/utils/decorators/user.decorator";
-import { PageInfo } from "@/utils/types/database/pagination.type";
-import { TextLanguage } from "@/utils/types/database/text-language.type";
+import { PageInfo, TextLanguage, User } from "@vitnode/backend";
 
 @ObjectType()
 export class ShowCoreMembersObj {

@@ -1,5 +1,10 @@
 import { ArgsType, Field, InputType, Int, ObjectType } from "@nestjs/graphql";
 
+export enum SortDirectionEnum {
+  asc = "asc",
+  desc = "desc"
+}
+
 @ObjectType()
 export class PageInfo {
   @Field(() => Boolean)

@@ -9,14 +9,17 @@ import {
   generateRandomString,
   removeSpecialCharacters
 } from "@vitnode/shared";
-import { NotFoundError, CustomError } from "@vitnode/backend";
+import {
+  NotFoundError,
+  CustomError,
+  execShellCommand,
+  User
+} from "@vitnode/backend";
 
 import { DownloadAdminPluginsArgs } from "./dto/download.args";
 import { PluginInfoJSONType } from "../helpers/files/create/contents";
 
-import { User } from "@/utils/decorators/user.decorator";
 import { core_plugins } from "../../database/schema/plugins";
-import { execShellCommand } from "@/functions/exec-shell-command";
 import { DatabaseService } from "@/database/database.service";
 import { ABSOLUTE_PATHS } from "@/config";
 

@@ -1,6 +1,5 @@
 import { Field, Float, Int, ObjectType } from "@nestjs/graphql";
-
-import { User } from "@/utils/decorators/user.decorator";
+import { User } from "@vitnode/backend";
 
 @ObjectType()
 export class AuthorizationCurrentUserObj extends User {

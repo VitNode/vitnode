@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
 import { ConfigService } from "@nestjs/config";
+import { Ctx } from "@vitnode/backend";
 
 import { core_sessions } from "@/plugins/core/admin/database/schema/sessions";
-import { Ctx } from "@/utils/types/context.type";
 import { DatabaseService } from "@/database/database.service";
 
 @Injectable()

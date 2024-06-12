@@ -1,11 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { eq, sum } from "drizzle-orm";
 import { generateRandomString } from "@vitnode/shared";
-import { AccessDeniedError } from "@vitnode/backend";
+import { AccessDeniedError, User } from "@vitnode/backend";
 
 import { UploadCoreEditorArgs } from "./dto/upload.args";
 
-import { User } from "@/utils/decorators/user.decorator";
 import { UploadCoreFilesService } from "../../files/helpers/upload/upload.service";
 import {
   HelpersUploadCoreFilesService,

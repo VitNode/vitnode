@@ -1,7 +1,7 @@
 import { Field, ObjectType } from "@nestjs/graphql";
+import { PageInfo } from "@vitnode/backend";
 
 import { ShowCoreMembers } from "@/plugins/core/members/show/dto/show.obj";
-import { PageInfo } from "@/utils/types/database/pagination.type";
 
 @ObjectType()
 export class ShowAdminMembersObj {

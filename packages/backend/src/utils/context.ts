@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-
-import { User } from "@/utils/decorators/user.decorator";
+import { User } from "../decorators";
 
 export interface AuthRequest extends Request {
   user?: {

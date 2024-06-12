@@ -7,13 +7,12 @@ import {
   ValidateNested
 } from "class-validator";
 import { Transform } from "class-transformer";
-
 import {
   IsTextLanguageInput,
   TextLanguageInput,
   TransformString,
   TransformTextLanguageInput
-} from "@/utils/types/database/text-language.type";
+} from "@vitnode/backend";
 
 @ArgsType()
 export class CreateAdminNavArgs {

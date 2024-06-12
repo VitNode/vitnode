@@ -1,14 +1,13 @@
 import { Injectable } from "@nestjs/common";
 import { Placeholder, SQL, eq } from "drizzle-orm";
 import { PgTableWithColumns, TableConfig } from "drizzle-orm/pg-core";
-import { CustomError } from "@vitnode/backend";
+import { CustomError, TextLanguageInput } from "@vitnode/backend";
 
 import {
   HelpersParserTextLanguageCoreHelpersService,
   InfoFromTextLanguageContentReturnValues
 } from "./helpers.service";
 
-import { TextLanguageInput } from "@/utils/types/database/text-language.type";
 import { DatabaseService } from "@/database/database.service";
 
 interface Args<T extends TableConfig> {

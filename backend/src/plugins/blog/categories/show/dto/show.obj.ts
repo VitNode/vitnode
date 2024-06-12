@@ -1,7 +1,5 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
-
-import { PageInfo } from "@/utils/types/database/pagination.type";
-import { TextLanguage } from "@/utils/types/database/text-language.type";
+import { PageInfo, TextLanguage } from "@vitnode/backend";
 
 @ObjectType()
 export class ShowBlogCategories {

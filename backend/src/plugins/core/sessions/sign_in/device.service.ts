@@ -1,11 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { getUserAgentData } from "@vitnode/backend";
+import { getUserAgentData, getUserIp, Ctx } from "@vitnode/backend";
 
 import { core_sessions_known_devices } from "@/plugins/core/admin/database/schema/sessions";
 import { DatabaseService } from "@/database/database.service";
-import { Ctx } from "@/utils/types/context.type";
-import { getUserIp } from "@/functions/get-user-ip";
 
 interface DeviceType {
   id: number;
