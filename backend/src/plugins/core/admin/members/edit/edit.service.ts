@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
 
-import { DeleteCoreMembersArgs } from "./dto/delete.args";
+import { EditAdminMembersArgs } from "./dto/edit.args";
 
 import { core_users } from "@/plugins/core/admin/database/schema/users";
 import { DatabaseService } from "@/database/database.service";
@@ -9,10 +9,18 @@ import { NotFoundError } from "@/utils/errors/not-found-error";
 import { AccessDeniedError } from "@/utils/errors/access-denied-error";
 
 @Injectable()
-export class DeleteCoreMembersService {
+export class EditAdminMembersService {
   constructor(private readonly databaseService: DatabaseService) {}
 
-  async delete({ id }: DeleteCoreMembersArgs): Promise<string> {
+  async edit({
+    id,
+    name,
+    email,
+    newsletter,
+    first_name,
+    last_name,
+    birthday
+  }: EditAdminMembersArgs): Promise<string> {
     const user = await this.databaseService.db.query.core_users.findFirst({
       where: eq(core_users.id, id)
     });
@@ -25,10 +33,18 @@ export class DeleteCoreMembersService {
           or(eq(table.user_id, user.id), eq(table.group_id, user.group_id))
       });
 
-    if (admin) throw new AccessDeniedError(); //Protects against deletion users with admin permisssions
+    if (!admin) throw new AccessDeniedError();
 
     await this.databaseService.db
-      .delete(core_users)
+      .update(core_users)
+      .set({
+        name: name,
+        email: email,
+        newsletter: newsletter,
+        first_name: first_name,
+        last_name: last_name,
+        birthday: birthday
+      })
       .where(eq(core_users.id, id));
 
     return "Success!";
