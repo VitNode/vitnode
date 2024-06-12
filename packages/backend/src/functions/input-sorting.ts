@@ -1,4 +1,4 @@
-import { SortDirectionEnum } from "@/utils/types/database/sort-direction.type";
+import { SortDirectionEnum } from "../utils";
 
 interface Args<T> {
   sortBy:

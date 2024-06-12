@@ -7,8 +7,7 @@ import {
   MaxLength,
   MinLength
 } from "class-validator";
-
-import { TransformString } from "@/utils/types/database/text-language.type";
+import { TransformString } from "@vitnode/backend";
 
 @ArgsType()
 export class CreateAdminPluginsArgs {

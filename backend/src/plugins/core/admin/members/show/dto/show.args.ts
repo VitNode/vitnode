@@ -6,10 +6,11 @@ import {
   registerEnumType
 } from "@nestjs/graphql";
 import { Transform } from "class-transformer";
-
-import { PaginationArgs } from "@/utils/types/database/pagination.type";
-import { SortDirectionEnum } from "@/utils/types/database/sort-direction.type";
-import { TransformString } from "@/utils/types/database/text-language.type";
+import {
+  PaginationArgs,
+  SortDirectionEnum,
+  TransformString
+} from "@vitnode/backend";
 
 export enum ShowAdminMembersSortingColumnEnum {
   name = "name",

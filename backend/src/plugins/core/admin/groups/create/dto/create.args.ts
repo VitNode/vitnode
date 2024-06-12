@@ -1,12 +1,11 @@
 import { ArgsType, Field, InputType, Int } from "@nestjs/graphql";
 import { ArrayMinSize, IsArray, Min, ValidateNested } from "class-validator";
 import { Transform } from "class-transformer";
-
 import {
   IsTextLanguageInput,
   TextLanguageInput,
   TransformTextLanguageInput
-} from "@/utils/types/database/text-language.type";
+} from "@vitnode/backend";
 
 @InputType()
 export class ContentCreateAdminGroups {

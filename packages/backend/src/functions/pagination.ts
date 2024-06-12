@@ -1,9 +1,8 @@
 import { AnyColumn, SQL, asc, desc, eq, gt, gte, lt, lte } from "drizzle-orm";
 import { PgTableWithColumns, TableConfig } from "drizzle-orm/pg-core";
+import { NodePgDatabase } from "drizzle-orm/node-postgres";
 
-import { DatabaseService } from "@/database/database.service";
-import { PageInfo } from "@/utils/types/database/pagination.type";
-import { SortDirectionEnum } from "@/utils/types/database/sort-direction.type";
+import { PageInfo, SortDirectionEnum } from "../utils";
 
 type DataInterface<T> = T & {
   id: number;
@@ -87,7 +86,9 @@ export interface Cursor {
 interface InputPaginationCursorArgs<T extends TableConfig> {
   cursor: number | null;
   database: PgTableWithColumns<T>;
-  databaseService: DatabaseService;
+  databaseService: {
+    db: NodePgDatabase<NonNullable<unknown>>;
+  };
   defaultSortBy: {
     column: string;
     direction: SortDirectionEnum;

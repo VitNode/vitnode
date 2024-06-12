@@ -2,13 +2,12 @@ import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
 import { removeSpecialCharacters } from "@vitnode/shared";
+import { NotFoundError, CustomError } from "@vitnode/backend";
 
 import { ShowAdminNavPluginsObj } from "../show/dto/show.obj";
 import { CreateAdminNavPluginsArgs } from "./dto/create.args";
 import { HelpersAdminNavPluginsService } from "../helpers.service";
 
-import { NotFoundError } from "@/utils/errors/not-found-error";
-import { CustomError } from "@/utils/errors/custom-error";
 import { ABSOLUTE_PATHS } from "@/config";
 import { ConfigPlugin } from "../../plugins.module";
 

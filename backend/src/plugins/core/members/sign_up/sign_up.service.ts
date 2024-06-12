@@ -3,6 +3,7 @@ import { genSalt, hash } from "bcrypt";
 import { count } from "drizzle-orm";
 import { ConfigService } from "@nestjs/config";
 import { removeSpecialCharacters } from "@vitnode/shared";
+import { CustomError, getUserIp, Ctx } from "@vitnode/backend";
 
 import { SignUpCoreMembersArgs } from "./dto/sign_up.args";
 import { SignUpCoreMembersObj } from "./dto/sign_up.obj";
@@ -10,9 +11,6 @@ import { SignUpCoreMembersObj } from "./dto/sign_up.obj";
 import { generateAvatarColor } from "@/plugins/core/members/sign_up/functions/generate-avatar-color";
 import { core_users } from "@/plugins/core/admin/database/schema/users";
 import { DatabaseService } from "@/database/database.service";
-import { CustomError } from "@/utils/errors/custom-error";
-import { getUserIp } from "@/functions/get-user-ip";
-import { Ctx } from "@/utils/types/context.type";
 
 @Injectable()
 export class SignUpCoreMembersService {

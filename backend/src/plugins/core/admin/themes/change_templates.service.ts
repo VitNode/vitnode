@@ -1,7 +1,7 @@
 import { join } from "path";
 import * as fs from "fs";
 
-import { CustomError } from "@/utils/errors/custom-error";
+import { CustomError } from "@vitnode/backend";
 
 interface Args {
   destinationPath: string;

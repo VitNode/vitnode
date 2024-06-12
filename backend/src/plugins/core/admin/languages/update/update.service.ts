@@ -5,10 +5,10 @@ import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 import { eq } from "drizzle-orm";
 import { currentUnixDate, generateRandomString } from "@vitnode/shared";
+import { NotFoundError } from "@vitnode/backend";
 
 import { UpdateCoreAdminLanguagesArgs } from "./dto/update.args";
 
-import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_languages } from "../../database/schema/languages";
 import { DatabaseService } from "@/database/database.service";
 import { setRebuildRequired } from "@/functions/rebuild-required";

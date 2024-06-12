@@ -5,10 +5,7 @@ import {
   OmitType,
   createUnionType
 } from "@nestjs/graphql";
-
-import { GroupUser, User } from "@/utils/decorators/user.decorator";
-import { PageInfo } from "@/utils/types/database/pagination.type";
-import { TextLanguage } from "@/utils/types/database/text-language.type";
+import { PageInfo, TextLanguage, GroupUser, User } from "@vitnode/backend";
 
 @ObjectType()
 export class ShowAdminStaffAdministratorsObj {

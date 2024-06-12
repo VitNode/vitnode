@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { eq, sum } from "drizzle-orm";
 import { generateRandomString } from "@vitnode/shared";
+import { AccessDeniedError, User } from "@vitnode/backend";
 
 import { UploadCoreEditorArgs } from "./dto/upload.args";
 
-import { User } from "@/utils/decorators/user.decorator";
 import { UploadCoreFilesService } from "../../files/helpers/upload/upload.service";
 import {
   HelpersUploadCoreFilesService,
@@ -15,7 +15,6 @@ import { UploadCoreFilesArgs } from "../../files/helpers/upload/dto/upload.args"
 import { core_files } from "../../admin/database/schema/files";
 import { ShowCoreFiles } from "../../files/show/dto/show.obj";
 import { DatabaseService } from "@/database/database.service";
-import { AccessDeniedError } from "@/utils/errors/access-denied-error";
 import { getConfigFile } from "@/config";
 
 interface GetFilesAfterUploadArgs extends UploadCoreEditorArgs {

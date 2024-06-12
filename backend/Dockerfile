@@ -1,5 +1,5 @@
-FROM node:20-alpine AS base
-RUN npm i -g pnpm@9.1.4
+FROM node:22-alpine AS base
+RUN npm i -g pnpm@9.3.0
 
 FROM base AS builder
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
@@ -7,7 +7,7 @@ RUN apk add --no-cache libc6-compat
 RUN apk update
 # Set working directory
 WORKDIR /app
-RUN npm i -g turbo@~2.0.0
+RUN npm i -g turbo@~2.0.3
 COPY . .
 RUN turbo telemetry disable
 RUN turbo prune backend --docker

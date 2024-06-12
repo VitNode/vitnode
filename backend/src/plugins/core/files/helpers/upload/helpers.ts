@@ -1,5 +1,4 @@
-import { CustomError } from "@/utils/errors/custom-error";
-import { FileUpload } from "@/utils/graphql-upload/upload";
+import { FileUpload, CustomError } from "@vitnode/backend";
 
 export const acceptMimeTypeImage = [
   "image/jpeg",

@@ -1,11 +1,11 @@
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
+import { CurrentUser, User } from "@vitnode/backend";
 
 import { DownloadAdminPluginsService } from "./download.service";
 import { DownloadAdminPluginsArgs } from "./dto/download.args";
 
 import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
-import { CurrentUser, User } from "@/utils/decorators/user.decorator";
 import { OnlyForDevelopment } from "@/utils/guards/dev.guard";
 
 @Resolver()

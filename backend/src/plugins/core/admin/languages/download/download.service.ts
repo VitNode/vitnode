@@ -9,13 +9,11 @@ import {
   generateRandomString,
   removeSpecialCharacters
 } from "@vitnode/shared";
+import { NotFoundError, CustomError, User } from "@vitnode/backend";
 
 import { DownloadCoreAdminLanguagesArgs } from "./dto/download.args";
 
-import { NotFoundError } from "@/utils/errors/not-found-error";
-import { User } from "@/utils/decorators/user.decorator";
 import { DatabaseService } from "@/database/database.service";
-import { CustomError } from "@/utils/errors/custom-error";
 import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()

@@ -1,8 +1,7 @@
 import { Context, Mutation, Resolver } from "@nestjs/graphql";
+import { Ctx } from "@vitnode/backend";
 
 import { SignOutAdminSessionsService } from "./sign_out.service";
-
-import { Ctx } from "@/utils/types/context.type";
 
 @Resolver()
 export class SignOutAdminSessionsResolver {

@@ -1,9 +1,8 @@
 import { Global, Module } from "@nestjs/common";
 import { registerEnumType } from "@nestjs/graphql";
+import { SortDirectionEnum } from "@vitnode/backend";
 
 import { DatabaseService } from "./database.service";
-
-import { SortDirectionEnum } from "@/utils/types/database/sort-direction.type";
 
 registerEnumType(SortDirectionEnum, {
   name: "SortDirectionEnum"

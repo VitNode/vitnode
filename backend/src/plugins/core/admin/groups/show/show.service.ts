@@ -1,5 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { and, count, eq, ilike, inArray } from "drizzle-orm";
+import {
+  inputPaginationCursor,
+  outputPagination,
+  SortDirectionEnum
+} from "@vitnode/backend";
 
 import { ShowAdminGroupsArgs } from "./dto/show.args";
 import { ShowAdminGroupsObj } from "./dto/show.obj";
@@ -8,13 +13,8 @@ import {
   core_groups,
   core_groups_names
 } from "@/plugins/core/admin/database/schema/groups";
-import {
-  inputPaginationCursor,
-  outputPagination
-} from "@/functions/database/pagination";
 import { core_users } from "../../database/schema/users";
 import { DatabaseService } from "@/database/database.service";
-import { SortDirectionEnum } from "@/utils/types/database/sort-direction.type";
 
 @Injectable()
 export class ShowAdminGroupsService {

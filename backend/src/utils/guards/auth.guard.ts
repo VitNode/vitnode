@@ -1,8 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { GqlExecutionContext } from "@nestjs/graphql";
 import { Reflector } from "@nestjs/core";
-
-import { Ctx } from "../types/context.type";
+import { Ctx } from "@vitnode/backend";
 
 import { InternalAuthorizationCoreSessionsService } from "@/plugins/core/sessions/authorization/internal/internal_authorization.service";
 

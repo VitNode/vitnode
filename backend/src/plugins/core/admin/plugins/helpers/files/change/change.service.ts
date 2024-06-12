@@ -2,6 +2,7 @@ import { join } from "path";
 import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
+import { CustomError } from "@vitnode/backend";
 
 import {
   changeDatabaseService,
@@ -14,7 +15,6 @@ import {
   removeLangFromTypes,
   removeModuleFromRootSchema
 } from "../../../delete/contents";
-import { CustomError } from "@/utils/errors/custom-error";
 import { ABSOLUTE_PATHS } from "@/config";
 
 interface ChangeFilesContentType {

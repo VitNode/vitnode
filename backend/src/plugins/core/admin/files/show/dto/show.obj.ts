@@ -1,8 +1,7 @@
 import { Field, ObjectType } from "@nestjs/graphql";
+import { PageInfo, User } from "@vitnode/backend";
 
 import { ShowCoreFiles } from "@/plugins/core/files/show/dto/show.obj";
-import { User } from "@/utils/decorators/user.decorator";
-import { PageInfo } from "@/utils/types/database/pagination.type";
 
 @ObjectType()
 export class ShowAdminFiles extends ShowCoreFiles {

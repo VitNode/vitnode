@@ -1,11 +1,11 @@
 import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
+import { NotFoundError } from "@vitnode/backend";
 
 import { FilesAdminPluginsArgs } from "./dto/files.args";
 import { FilesAdminPluginsObj } from "./dto/files.obj";
 
-import { NotFoundError } from "@/utils/errors/not-found-error";
 import { DatabaseService } from "@/database/database.service";
 import { ABSOLUTE_PATHS } from "@/config";
 

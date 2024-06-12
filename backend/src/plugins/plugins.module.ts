@@ -1,3 +1,5 @@
+// ! DO NOT REMOVE OR MODIFY THIS FILE!!!
+
 import { Module } from "@nestjs/common";
 
 import { CoreModule } from "./core/core.module";

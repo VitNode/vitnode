@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
+import { NotFoundError } from "@vitnode/backend";
 
 import { EditAdminNavArgs } from "./dto/edit.args";
 
 import { ShowCoreNav } from "@/plugins/core/nav/show/dto/show.obj";
-import { NotFoundError } from "@/utils/errors/not-found-error";
 import {
   core_nav,
   core_nav_description,

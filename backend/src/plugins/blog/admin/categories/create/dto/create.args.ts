@@ -1,12 +1,11 @@
 import { ArgsType, Field } from "@nestjs/graphql";
 import { Transform } from "class-transformer";
 import { ArrayMinSize, ValidateNested, IsArray } from "class-validator";
-
 import {
   IsTextLanguageInput,
   TextLanguageInput,
   TransformTextLanguageInput
-} from "@/utils/types/database/text-language.type";
+} from "@vitnode/backend";
 
 @ArgsType()
 export class CreatePluginCategoriesArgs {

@@ -1,15 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
+import { CustomError, User } from "@vitnode/backend";
 
 import { UploadAvatarCoreMembersArgs } from "./dto/upload.args";
 import { UploadAvatarCoreMembersObj } from "./dto/upload.obj";
 
-import { User } from "@/utils/decorators/user.decorator";
 import { UploadCoreFilesService } from "@/plugins/core/files/helpers/upload/upload.service";
 import { DeleteCoreFilesService } from "@/plugins/core/files/helpers/delete/delete.service";
 import { core_files_avatars } from "@/plugins/core/admin/database/schema/users";
 import { DatabaseService } from "@/database/database.service";
-import { CustomError } from "@/utils/errors/custom-error";
 
 @Injectable()
 export class UploadAvatarCoreMembersService {

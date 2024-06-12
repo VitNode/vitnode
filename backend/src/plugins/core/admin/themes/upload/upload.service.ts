@@ -5,6 +5,7 @@ import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 import { eq } from "drizzle-orm";
 import { currentUnixDate, generateRandomString } from "@vitnode/shared";
+import { FileUpload, NotFoundError, CustomError } from "@vitnode/backend";
 
 import { UploadAdminThemesArgs } from "./dto/upload.args";
 import { ConfigTheme } from "../themes.module";
@@ -12,10 +13,7 @@ import { ShowAdminThemes } from "../show/dto/show.obj";
 import { ChangeTemplatesAdminThemesService } from "../change_templates.service";
 
 import { core_themes } from "../../database/schema/themes";
-import { FileUpload } from "@/utils/graphql-upload/upload";
-import { NotFoundError } from "@/utils/errors/not-found-error";
 import { DatabaseService } from "@/database/database.service";
-import { CustomError } from "@/utils/errors/custom-error";
 import { setRebuildRequired } from "@/functions/rebuild-required";
 
 @Injectable()

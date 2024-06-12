@@ -7,9 +7,9 @@ import {
   MinLength
 } from "class-validator";
 import { Transform } from "class-transformer";
+import { TransformString } from "@vitnode/backend";
 
-import { TransformString } from "@/utils/types/database/text-language.type";
-import { nameRegex } from "@/utils/regex/name.regex";
+import { nameRegex } from "@/utils/regex";
 
 @ArgsType()
 export class SignUpCoreMembersArgs {
