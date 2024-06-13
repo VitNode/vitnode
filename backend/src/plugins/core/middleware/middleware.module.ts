@@ -1,14 +1,14 @@
 import { Module } from "@nestjs/common";
 
 import { CoreMiddlewareCron } from "./middleware.cron";
-import { LanguagesCoreMiddlewareService } from "./languages/languages.service";
-import { LanguagesCoreMiddlewareResolver } from "./languages/languages.resolver";
+import { ShowCoreMiddlewareService } from "./show/show.service";
+import { ShowCoreMiddlewareResolver } from "./show/show.resolver";
 
 @Module({
   providers: [
     CoreMiddlewareCron,
-    LanguagesCoreMiddlewareService,
-    LanguagesCoreMiddlewareResolver
+    ShowCoreMiddlewareService,
+    ShowCoreMiddlewareResolver
   ]
 })
 export class CoreMiddlewareModule {}

@@ -18,9 +18,7 @@ import { db } from "@/database/client";
   fs.readdir(join(process.cwd(), "src", "plugins"), async (err, plugins) => {
     await Promise.all(
       plugins
-        .filter(
-          plugin => !["database", "plugins.module.ts", "core"].includes(plugin)
-        )
+        .filter(plugin => !["plugins.module.ts", "core"].includes(plugin))
         .map(async plugin => {
           try {
             await migrate({ pluginCode: plugin });

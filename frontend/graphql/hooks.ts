@@ -158,8 +158,8 @@ export type HslColorInput = {
   s: Scalars['Int']['input'];
 };
 
-export type LanguagesCoreMiddlewareObj = {
-  __typename?: 'LanguagesCoreMiddlewareObj';
+export type LanguagesCoreMiddleware = {
+  __typename?: 'LanguagesCoreMiddleware';
   code: Scalars['String']['output'];
   default: Scalars['Boolean']['output'];
   enabled: Scalars['Boolean']['output'];
@@ -594,7 +594,7 @@ export type Query = {
   core_files__show: ShowCoreFilesObj;
   core_languages__show: ShowCoreLanguagesObj;
   core_members__show: ShowCoreMembersObj;
-  core_middleware__languages: Array<LanguagesCoreMiddlewareObj>;
+  core_middleware__show: ShowCoreMiddlewareObj;
   core_nav__show: ShowCoreNavObj;
   core_plugins__show: Array<ShowCorePluginsObj>;
   core_sessions__authorization: AuthorizationCoreSessionsObj;
@@ -1083,6 +1083,12 @@ export const ShowCoreMembersSortingColumnEnum = {
 } as const;
 
 export type ShowCoreMembersSortingColumnEnum = typeof ShowCoreMembersSortingColumnEnum[keyof typeof ShowCoreMembersSortingColumnEnum];
+export type ShowCoreMiddlewareObj = {
+  __typename?: 'ShowCoreMiddlewareObj';
+  languages: Array<LanguagesCoreMiddleware>;
+  plugins: Array<Scalars['String']['output']>;
+};
+
 export type ShowCoreNav = {
   __typename?: 'ShowCoreNav';
   children: Array<ShowCoreNavItem>;
@@ -1809,10 +1815,10 @@ export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type Core_MiddlewareQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean, locale: string, allow_in_input: boolean, time_24: boolean }> }, core_themes__show: { __typename?: 'ShowCoreThemesObj', edges: Array<{ __typename?: 'ShowCoreThemes', id: number, name: string }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string }>, core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, theme_id?: number | null, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
-export type Core_Middleware__LanguagesQueryVariables = Exact<{ [key: string]: never; }>;
+export type Core_Middleware__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_Middleware__LanguagesQuery = { __typename?: 'Query', core_middleware__languages: Array<{ __typename?: 'LanguagesCoreMiddlewareObj', code: string, default: boolean, enabled: boolean }> };
+export type Core_Middleware__ShowQuery = { __typename?: 'Query', core_middleware__show: { __typename?: 'ShowCoreMiddlewareObj', plugins: Array<string>, languages: Array<{ __typename?: 'LanguagesCoreMiddleware', code: string, default: boolean, enabled: boolean }> } };
 
 export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3068,12 +3074,15 @@ export const Core_Middleware = gql`
   }
 }
     `;
-export const Core_Middleware__Languages = gql`
-    query Core_middleware__languages {
-  core_middleware__languages {
-    code
-    default
-    enabled
+export const Core_Middleware__Show = gql`
+    query Core_middleware__show {
+  core_middleware__show {
+    languages {
+      code
+      default
+      enabled
+    }
+    plugins
   }
 }
     `;
