@@ -1,14 +1,11 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
-
 import {
   Core_Editor_Files__Upload,
   Core_Editor_Files__UploadMutation,
   Core_Editor_Files__UploadMutationVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
-import { CoreApiTags } from "@/plugins/admin/api-tags";
 
 export const uploadMutationApi = async (formData: FormData) => {
   const file = formData.get("file") as File;
@@ -32,8 +29,6 @@ export const uploadMutationApi = async (formData: FormData) => {
         }
       ]
     });
-
-    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
 
     return { data };
   } catch (error) {

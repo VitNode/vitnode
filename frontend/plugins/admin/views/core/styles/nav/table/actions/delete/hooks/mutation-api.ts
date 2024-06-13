@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 import {
   Admin__Core_Nav__Delete,
@@ -8,7 +8,6 @@ import {
   Admin__Core_Nav__DeleteMutationVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
-import { CoreApiTags } from "@/plugins/admin/api-tags";
 
 export const mutationApi = async (
   variables: Admin__Core_Nav__DeleteMutationVariables
@@ -22,7 +21,6 @@ export const mutationApi = async (
       variables
     });
 
-    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
     revalidatePath("/admin/core/styles/nav", "page");
     revalidatePath("/", "layout");
 

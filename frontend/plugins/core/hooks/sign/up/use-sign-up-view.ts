@@ -9,11 +9,7 @@ import { ErrorType } from "@/graphql/fetcher";
 
 const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 
-interface Args {
-  installPage?: boolean;
-}
-
-export const useSignUpView = ({ installPage }: Args) => {
+export const useSignUpView = () => {
   const t = useTranslations("core");
 
   const formSchema = z.object({
@@ -66,11 +62,7 @@ export const useSignUpView = ({ installPage }: Args) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { terms, ...rest } = values;
-
-    const mutation = await mutationApi({
-      variables: rest,
-      installPage
-    });
+    const mutation = await mutationApi(rest);
 
     if (mutation.error) {
       const error = mutation.error as ErrorType | undefined;

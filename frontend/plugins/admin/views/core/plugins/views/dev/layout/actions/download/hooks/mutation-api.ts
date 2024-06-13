@@ -6,7 +6,6 @@ import {
   Admin__Core_Plugins__DownloadMutationVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
-import { cleanAdminCorePluginsCache } from "@/plugins/admin/api-tags";
 
 export const mutationApi = async (
   variables: Admin__Core_Plugins__DownloadMutationVariables
@@ -21,7 +20,7 @@ export const mutationApi = async (
     });
 
     if (variables.version && variables.versionCode) {
-      cleanAdminCorePluginsCache();
+      // cleanAdminCorePluginsCache();
     }
 
     return { data };

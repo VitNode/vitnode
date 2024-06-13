@@ -4,7 +4,6 @@ import {
   Core_Sessions__AuthorizationQueryVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
-import { CoreApiTags } from "@/plugins/admin/api-tags";
 
 export const getSessionData = async () => {
   const { data } = await fetcher<
@@ -12,10 +11,7 @@ export const getSessionData = async () => {
     Core_Sessions__AuthorizationQueryVariables
   >({
     query: Core_Sessions__Authorization,
-    cache: "force-cache",
-    next: {
-      tags: [CoreApiTags.Core_Sessions__Authorization]
-    }
+    cache: "force-cache"
   });
 
   return {

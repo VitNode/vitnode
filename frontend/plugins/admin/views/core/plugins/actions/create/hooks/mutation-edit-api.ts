@@ -6,7 +6,6 @@ import {
   Admin__Core_Plugins__EditMutationVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
-import { cleanAdminCorePluginsCache } from "@/plugins/admin/api-tags";
 
 export const mutationEditApi = async (
   variables: Admin__Core_Plugins__EditMutationVariables
@@ -19,8 +18,6 @@ export const mutationEditApi = async (
       query: Admin__Core_Plugins__Edit,
       variables
     });
-
-    cleanAdminCorePluginsCache();
 
     return { data };
   } catch (error) {

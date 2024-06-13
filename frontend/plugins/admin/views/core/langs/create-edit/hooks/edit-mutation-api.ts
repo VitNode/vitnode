@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 import {
   Admin__Core_Languages__Edit,
@@ -8,7 +8,6 @@ import {
   Admin__Core_Languages__EditMutationVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
-import { CoreApiTags } from "@/plugins/admin/api-tags";
 
 export const editMutationApi = async (
   variables: Admin__Core_Languages__EditMutationVariables
@@ -23,7 +22,6 @@ export const editMutationApi = async (
     });
 
     revalidatePath("/", "layout");
-    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
     revalidatePath("/admin/core/langs", "page");
 
     return { data };

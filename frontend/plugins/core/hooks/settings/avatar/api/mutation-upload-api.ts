@@ -1,14 +1,11 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
-
 import {
   Core_Members__Avatar__Upload,
   Core_Members__Avatar__UploadMutation,
   Core_Members__Avatar__UploadMutationVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
-import { CoreApiTags } from "@/plugins/admin/api-tags";
 
 export const mutationUploadApi = async (formData: FormData) => {
   try {
@@ -26,8 +23,6 @@ export const mutationUploadApi = async (formData: FormData) => {
         }
       ]
     });
-
-    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
 
     return { data };
   } catch (error) {

@@ -21,9 +21,7 @@ import { Progress } from "@/components/ui/progress";
 
 export const AccountInstallConfigsView = () => {
   const t = useTranslations("core");
-  const { form, onSubmit } = useSignUpView({
-    installPage: true
-  });
+  const { form, onSubmit } = useSignUpView();
 
   return (
     <Form {...form}>
