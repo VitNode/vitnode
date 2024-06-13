@@ -1,0 +1,7 @@
+query Core_middleware__languages {
+  core_middleware__languages {
+    code
+    default
+    enabled
+  }
+}

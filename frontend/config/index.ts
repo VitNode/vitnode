@@ -7,6 +7,7 @@ export interface ConfigType {
   };
   langs: {
     code: string;
+    default: boolean;
     enabled: boolean;
   }[];
   rebuild_required: {
@@ -51,11 +52,13 @@ export const DEFAULT_CONFIG_DATA: ConfigType = {
   langs: [
     {
       code: "en",
-      enabled: true
+      enabled: true,
+      default: true
     },
     {
       code: "pl",
-      enabled: true
+      enabled: true,
+      default: false
     }
   ]
 };

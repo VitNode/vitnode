@@ -143,6 +143,7 @@ export interface ConfigType {
   };
   langs: {
     code: string;
+    default: boolean;
     enabled: boolean;
   }[];
   rebuild_required: {
