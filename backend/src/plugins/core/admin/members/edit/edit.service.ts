@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { eq, return } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 import { EditAdminMembersArgs } from "./dto/edit.args";
 
@@ -46,7 +46,8 @@ export class EditAdminMembersService {
         last_name: last_name,
         birthday: birthday
       })
-      .where(eq(core_users.id, id)).returning();
+      .where(eq(core_users.id, id))
+      .returning();
 
     return update[0];
   }
