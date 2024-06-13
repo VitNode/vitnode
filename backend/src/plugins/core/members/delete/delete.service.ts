@@ -24,7 +24,7 @@ export class DeleteCoreMembersService {
           or(eq(table.user_id, user.id), eq(table.group_id, user.group_id))
       });
 
-    if (admin) throw new AccessDeniedError();
+    if (admin) throw new AccessDeniedError(); //Protects against deletion users with admin permisssions
 
     await this.databaseService.db
       .delete(core_users)
