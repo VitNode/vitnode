@@ -141,6 +141,10 @@ export interface ConfigType {
     };
     sticky: boolean;
   };
+  langs: {
+    code: string;
+    enabled: boolean;
+  }[];
   rebuild_required: {
     langs: boolean;
     plugins: boolean;

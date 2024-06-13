@@ -3,9 +3,9 @@ import { UseGuards } from "@nestjs/common";
 
 import { EditAdminMembersService } from "./edit.service";
 import { EditAdminMembersArgs } from "./dto/edit.args";
+import { EditAdminMembersObj } from "./dto/edit.obj";
 
 import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
-import { EditAdminMembersObj } from "./dto/edit.obj";
 
 @Resolver()
 export class EditAdminMembersResolver {

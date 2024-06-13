@@ -5,15 +5,31 @@ import { ConfigType } from ".";
 
 export const configPath = join(process.cwd(), "config", "config.json");
 
-export function updateObject<T>(config: T, defaultData: T): T {
+export function updateObject<T extends Record<string, any>>(
+  config: T,
+  defaultData: T
+): T {
   const updatedConfig = config;
   for (const key in defaultData) {
-    if (typeof defaultData[key] === "object" && defaultData[key] !== null) {
+    if (Array.isArray(defaultData[key])) {
+      // If the key corresponds to an array and it's not empty, don't edit
+      if (!config[key] || config[key].length === 0) {
+        updatedConfig[key] = [] as any;
+      }
+    } else if (
+      typeof defaultData[key] === "object" &&
+      defaultData[key] !== null
+    ) {
+      // Handle nested objects
       if (!config[key]) {
         updatedConfig[key] = {} as T[Extract<keyof T, string>];
       }
-      updateObject(config[key], defaultData[key]);
+      updatedConfig[key] = updateObject(
+        (config[key] || {}) as T[Extract<keyof T, string>],
+        defaultData[key]
+      );
     } else {
+      // Handle primitive values
       if (!config[key]) {
         updatedConfig[key] = defaultData[key];
       }

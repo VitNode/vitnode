@@ -9,7 +9,17 @@ import { DEFAULT_CONFIG_DATA } from ".";
   if (!fs.existsSync(configPath)) {
     fs.writeFile(
       configPath,
-      JSON.stringify(DEFAULT_CONFIG_DATA, null, 2),
+      JSON.stringify(
+        {
+          ...DEFAULT_CONFIG_DATA,
+          lang: [
+            { code: "en", enabled: true },
+            { code: "pl", enabled: true }
+          ]
+        },
+        null,
+        2
+      ),
       "utf8",
       err => {
         if (err) throw err;
