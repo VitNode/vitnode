@@ -11,7 +11,7 @@ import { EditAdminMembersObj } from "./dto/edit.obj";
 export class EditAdminMembersResolver {
   constructor(private readonly service: EditAdminMembersService) {}
 
-  @Mutation(() => String)
+  @Mutation(() => EditAdminMembersObj)
   @UseGuards(AdminAuthGuards)
   async admin__core_members__edit(
     @Args() args: EditAdminMembersArgs
