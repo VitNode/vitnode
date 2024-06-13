@@ -5,8 +5,8 @@ import { EditAdminMembersArgs } from "./dto/edit.args";
 
 import { core_users } from "@/plugins/core/admin/database/schema/users";
 import { DatabaseService } from "@/database/database.service";
-import { NotFoundError } from "@/utils/errors/not-found-error";
-import { AccessDeniedError } from "@/utils/errors/access-denied-error";
+import { NotFoundError } from "@vitnode/backend";
+import { AccessDeniedError } from "@vitnode/backend";
 import { EditAdminMembersObj } from "./dto/edit.obj";
 
 @Injectable()
