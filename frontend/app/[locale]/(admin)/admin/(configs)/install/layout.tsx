@@ -20,7 +20,8 @@ const getData = async () => {
     Admin__Install__LayoutQuery,
     Admin__Install__LayoutQueryVariables
   >({
-    query: Admin__Install__Layout
+    query: Admin__Install__Layout,
+    cache: "force-cache"
   });
 
   return data;

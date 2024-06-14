@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 import {
   Core_Members__Avatar__Delete,
@@ -8,7 +8,6 @@ import {
   Core_Members__Avatar__DeleteMutationVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
-import { CoreApiTags } from "@/plugins/admin/api-tags";
 
 export const mutationDeleteApi = async () => {
   try {
@@ -19,7 +18,7 @@ export const mutationDeleteApi = async () => {
       query: Core_Members__Avatar__Delete
     });
 
-    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
+    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {

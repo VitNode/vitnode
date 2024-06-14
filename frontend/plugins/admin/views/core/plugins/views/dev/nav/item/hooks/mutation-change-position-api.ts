@@ -21,7 +21,10 @@ export const mutationChangePositionApi = async (
       variables
     });
 
-    revalidatePath("/admin", "layout");
+    revalidatePath(
+      `/admin/core/plugins/${variables.pluginCode}/dev/nav`,
+      "page"
+    );
 
     return { data };
   } catch (error) {

@@ -22,6 +22,7 @@ export const mutationApi = async (
     });
 
     revalidatePath("/admin/core/advanced/files", "page");
+    revalidatePath("/settings/files", "page");
 
     return { data };
   } catch (error) {

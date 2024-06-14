@@ -102,6 +102,17 @@ export type ContentShowAdminGroups = {
   files_total_max_storage: Scalars['Int']['output'];
 };
 
+export type EditAdminMembersObj = {
+  __typename?: 'EditAdminMembersObj';
+  birthday: Scalars['DateTime']['output'];
+  email: Scalars['String']['output'];
+  first_name: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  last_name: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  newsletter: Scalars['Boolean']['output'];
+};
+
 export type EditAdminSettingsObj = {
   __typename?: 'EditAdminSettingsObj';
   site_copyright: Array<TextLanguage>;
@@ -147,6 +158,13 @@ export type HslColorInput = {
   s: Scalars['Int']['input'];
 };
 
+export type LanguagesCoreMiddleware = {
+  __typename?: 'LanguagesCoreMiddleware';
+  code: Scalars['String']['output'];
+  default: Scalars['Boolean']['output'];
+  enabled: Scalars['Boolean']['output'];
+};
+
 export const LayoutAdminInstallEnum = {
   account: 'ACCOUNT',
   database: 'DATABASE',
@@ -174,6 +192,7 @@ export type Mutation = {
   admin__core_languages__update: Scalars['String']['output'];
   admin__core_main_settings__edit: EditAdminSettingsObj;
   admin__core_manifest_metadata__edit: ShowAdminManifestMetadataObj;
+  admin__core_members__edit: EditAdminMembersObj;
   admin__core_nav__change_position: Scalars['String']['output'];
   admin__core_nav__create: ShowCoreNav;
   admin__core_nav__delete: Scalars['String']['output'];
@@ -307,6 +326,17 @@ export type MutationAdmin__Core_Manifest_Metadata__EditArgs = {
   display: Scalars['String']['input'];
   start_url: Scalars['String']['input'];
   theme_color: Scalars['String']['input'];
+};
+
+
+export type MutationAdmin__Core_Members__EditArgs = {
+  birthday: Scalars['DateTime']['input'];
+  email: Scalars['String']['input'];
+  first_name: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
+  last_name: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  newsletter: Scalars['Boolean']['input'];
 };
 
 
@@ -564,6 +594,7 @@ export type Query = {
   core_files__show: ShowCoreFilesObj;
   core_languages__show: ShowCoreLanguagesObj;
   core_members__show: ShowCoreMembersObj;
+  core_middleware__show: ShowCoreMiddlewareObj;
   core_nav__show: ShowCoreNavObj;
   core_plugins__show: Array<ShowCorePluginsObj>;
   core_sessions__authorization: AuthorizationCoreSessionsObj;
@@ -1052,6 +1083,12 @@ export const ShowCoreMembersSortingColumnEnum = {
 } as const;
 
 export type ShowCoreMembersSortingColumnEnum = typeof ShowCoreMembersSortingColumnEnum[keyof typeof ShowCoreMembersSortingColumnEnum];
+export type ShowCoreMiddlewareObj = {
+  __typename?: 'ShowCoreMiddlewareObj';
+  languages: Array<LanguagesCoreMiddleware>;
+  plugins: Array<Scalars['String']['output']>;
+};
+
 export type ShowCoreNav = {
   __typename?: 'ShowCoreNav';
   children: Array<ShowCoreNavItem>;
@@ -1777,6 +1814,11 @@ export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type Core_MiddlewareQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean, locale: string, allow_in_input: boolean, time_24: boolean }> }, core_themes__show: { __typename?: 'ShowCoreThemesObj', edges: Array<{ __typename?: 'ShowCoreThemes', id: number, name: string }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string }>, core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, theme_id?: number | null, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+
+export type Core_Middleware__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Core_Middleware__ShowQuery = { __typename?: 'Query', core_middleware__show: { __typename?: 'ShowCoreMiddlewareObj', plugins: Array<string>, languages: Array<{ __typename?: 'LanguagesCoreMiddleware', code: string, default: boolean, enabled: boolean }> } };
 
 export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3029,6 +3071,18 @@ export const Core_Middleware = gql`
     }
     site_name
     theme_id
+  }
+}
+    `;
+export const Core_Middleware__Show = gql`
+    query Core_middleware__show {
+  core_middleware__show {
+    languages {
+      code
+      default
+      enabled
+    }
+    plugins
   }
 }
     `;

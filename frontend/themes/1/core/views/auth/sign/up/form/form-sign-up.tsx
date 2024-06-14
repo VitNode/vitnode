@@ -22,7 +22,7 @@ import { SuccessFormSignUp } from "./success";
 
 export const FormSignUp = () => {
   const t = useTranslations("core");
-  const { form, onSubmit } = useSignUpView({});
+  const { form, onSubmit } = useSignUpView();
 
   if (form.formState.isSubmitSuccessful) {
     return <SuccessFormSignUp name={form.watch("name")} />;

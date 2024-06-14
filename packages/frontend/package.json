@@ -27,11 +27,11 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "next": "15.0.0-canary.25",
+    "next": "15.0.0-canary.28",
     "next-intl": "^3.15.0",
     "nprogress": "^0.2.0",
-    "react": "19.0.0-rc-f994737d14-20240522",
-    "react-dom": "19.0.0-rc-f994737d14-20240522",
+    "react": "19.0.0-rc.0",
+    "react-dom": "19.0.0-rc.0",
     "zod": "^3.23.8"
   }
 }

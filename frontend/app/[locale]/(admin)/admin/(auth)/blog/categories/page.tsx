@@ -17,8 +17,7 @@ const getData = async () => {
     Admin_Blog_Categories__ShowQuery,
     Admin_Blog_Categories__ShowQueryVariables
   >({
-    query: Admin_Blog_Categories__Show,
-    cache: "force-cache"
+    query: Admin_Blog_Categories__Show
   });
 
   return data;

@@ -1,13 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
+import { NotFoundError, AccessDeniedError } from "@vitnode/backend";
 
 import { EditAdminMembersArgs } from "./dto/edit.args";
+import { EditAdminMembersObj } from "./dto/edit.obj";
 
 import { core_users } from "@/plugins/core/admin/database/schema/users";
 import { DatabaseService } from "@/database/database.service";
-import { NotFoundError } from "@vitnode/backend";
-import { AccessDeniedError } from "@vitnode/backend";
-import { EditAdminMembersObj } from "./dto/edit.obj";
 
 @Injectable()
 export class EditAdminMembersService {

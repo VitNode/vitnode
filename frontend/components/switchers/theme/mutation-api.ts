@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import {
   Core_Themes__Change,
   Core_Themes__ChangeMutation,
@@ -22,6 +24,8 @@ export const mutationApi = async (
 
     // Set cookie
     setCookieFromApi({ res });
+
+    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {

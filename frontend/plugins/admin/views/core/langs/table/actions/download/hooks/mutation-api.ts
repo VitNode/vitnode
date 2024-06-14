@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import {
   Admin__Core_Languages__Download,
   Admin__Core_Languages__DownloadMutation,
@@ -18,6 +20,8 @@ export const mutationApi = async (
       query: Admin__Core_Languages__Download,
       variables
     });
+
+    revalidatePath("/admin/core/langs", "page");
 
     return { data };
   } catch (error) {

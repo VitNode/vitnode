@@ -1,12 +1,13 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import {
   Admin__Core_Plugins__Delete,
   Admin__Core_Plugins__DeleteMutation,
   Admin__Core_Plugins__DeleteMutationVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
-import { cleanAdminCorePluginsCache } from "@/plugins/admin/api-tags";
 
 export const mutationApi = async (
   variables: Admin__Core_Plugins__DeleteMutationVariables
@@ -20,7 +21,7 @@ export const mutationApi = async (
       variables
     });
 
-    cleanAdminCorePluginsCache();
+    revalidatePath("/", "page");
 
     return { data };
   } catch (error) {

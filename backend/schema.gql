@@ -136,6 +136,12 @@ input HslColorInput {
   s: Int!
 }
 
+type LanguagesCoreMiddleware {
+  code: String!
+  default: Boolean!
+  enabled: Boolean!
+}
+
 enum LayoutAdminInstallEnum {
   ACCOUNT
   DATABASE
@@ -231,6 +237,7 @@ type Query {
   core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowCoreFilesObj!
   core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreLanguagesSortByArgs): ShowCoreLanguagesObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: ShowCoreMembersSortByArgs): ShowCoreMembersObj!
+  core_middleware__show: ShowCoreMiddlewareObj!
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
   core_plugins__show: [ShowCorePluginsObj!]!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
@@ -561,6 +568,11 @@ enum ShowCoreMembersSortingColumnEnum {
   name
   posts
   reactions
+}
+
+type ShowCoreMiddlewareObj {
+  languages: [LanguagesCoreMiddleware!]!
+  plugins: [String!]!
 }
 
 type ShowCoreNav {

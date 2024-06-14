@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import {
   Admin__Core_Theme_Editor__Edit,
   Admin__Core_Theme_Editor__EditMutation,
@@ -18,6 +20,8 @@ export const mutationApi = async (
       query: Admin__Core_Theme_Editor__Edit,
       variables
     });
+
+    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {
