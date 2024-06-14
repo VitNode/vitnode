@@ -28,10 +28,7 @@ const getData = async (variables: Admin__Core_Plugins__ShowQueryVariables) => {
     Admin__Core_Plugins__ShowQueryVariables
   >({
     query: Admin__Core_Plugins__Show,
-    variables,
-    next: {
-      tags: ["Admin__Core_Plugins__Show"]
-    }
+    variables
   });
 
   return data;

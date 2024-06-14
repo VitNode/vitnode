@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import {
   Admin__Core_Plugins__Edit,
   Admin__Core_Plugins__EditMutation,
@@ -18,6 +20,8 @@ export const mutationEditApi = async (
       query: Admin__Core_Plugins__Edit,
       variables
     });
+
+    revalidatePath("/admin/core/plugins/blog/dev/overview", "page");
 
     return { data };
   } catch (error) {

@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import {
   Admin__Core_Nav__Change_PositionMutation,
   Admin__Core_Nav__Change_PositionMutationVariables,
@@ -18,6 +20,8 @@ export const mutationChangePositionApi = async (
       query: Admin__Core_Nav__Change_Position,
       variables
     });
+
+    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {

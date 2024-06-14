@@ -29,7 +29,7 @@ export const mutationApi = async (formData: FormData) => {
       ]
     });
 
-    revalidatePath("/admin/core/styles/themes", "page");
+    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {

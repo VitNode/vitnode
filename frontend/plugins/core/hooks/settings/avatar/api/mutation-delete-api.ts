@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import {
   Core_Members__Avatar__Delete,
   Core_Members__Avatar__DeleteMutation,
@@ -15,6 +17,8 @@ export const mutationDeleteApi = async () => {
     >({
       query: Core_Members__Avatar__Delete
     });
+
+    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {

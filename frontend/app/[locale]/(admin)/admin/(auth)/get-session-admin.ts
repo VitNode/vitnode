@@ -18,7 +18,8 @@ export const getSessionAdminData = async () => {
     Admin__Sessions__AuthorizationQuery,
     Admin__Sessions__AuthorizationQueryVariables
   >({
-    query: Admin__Sessions__Authorization
+    query: Admin__Sessions__Authorization,
+    cache: "force-cache"
   });
 
   return data;

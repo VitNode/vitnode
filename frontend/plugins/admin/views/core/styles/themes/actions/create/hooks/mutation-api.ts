@@ -21,7 +21,7 @@ export const mutationApi = async (
       variables
     });
 
-    revalidatePath("/admin/core/styles/themes", "page");
+    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {

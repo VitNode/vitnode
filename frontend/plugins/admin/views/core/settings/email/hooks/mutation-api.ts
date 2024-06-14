@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Email_Settings__Edit,
@@ -18,6 +20,8 @@ export const mutationApi = async (
       query: Admin__Core_Email_Settings__Edit,
       variables
     });
+
+    revalidatePath("/admin/core/settings/email", "page");
 
     return { data };
   } catch (error) {

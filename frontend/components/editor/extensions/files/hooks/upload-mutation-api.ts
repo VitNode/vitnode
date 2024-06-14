@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import {
   Core_Editor_Files__Upload,
   Core_Editor_Files__UploadMutation,
@@ -29,6 +31,8 @@ export const uploadMutationApi = async (formData: FormData) => {
         }
       ]
     });
+
+    revalidatePath("/settings/files", "page");
 
     return { data };
   } catch (error) {

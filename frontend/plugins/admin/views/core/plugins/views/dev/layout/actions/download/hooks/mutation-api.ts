@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import {
   Admin__Core_Plugins__Download,
   Admin__Core_Plugins__DownloadMutation,
@@ -20,7 +22,7 @@ export const mutationApi = async (
     });
 
     if (variables.version && variables.versionCode) {
-      // cleanAdminCorePluginsCache();
+      revalidatePath(`/admin/core/plugins/${variables.code}/dev`, "layout");
     }
 
     return { data };

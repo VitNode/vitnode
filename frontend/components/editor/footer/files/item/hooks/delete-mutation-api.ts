@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import {
   Core_Editor_Files__Delete,
   Core_Editor_Files__DeleteMutation,
@@ -18,6 +20,8 @@ export const deleteMutationApi = async (
       query: Core_Editor_Files__Delete,
       variables
     });
+
+    revalidatePath("/settings/files", "page");
 
     return { data };
   } catch (error) {

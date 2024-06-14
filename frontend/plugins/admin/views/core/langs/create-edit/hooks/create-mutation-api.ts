@@ -22,7 +22,6 @@ export const createMutationApi = async (
     });
 
     revalidatePath("/", "layout");
-    revalidatePath("/admin/core/langs", "page");
 
     return { data };
   } catch (error) {

@@ -21,7 +21,6 @@ export const mutationApi = async (
       variables
     });
 
-    revalidatePath("/admin/core/styles/nav", "page");
     revalidatePath("/", "layout");
 
     return { data };

@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import {
   Admin__Core_Plugins__Delete,
   Admin__Core_Plugins__DeleteMutation,
@@ -18,6 +20,8 @@ export const mutationApi = async (
       query: Admin__Core_Plugins__Delete,
       variables
     });
+
+    revalidatePath("/", "page");
 
     return { data };
   } catch (error) {

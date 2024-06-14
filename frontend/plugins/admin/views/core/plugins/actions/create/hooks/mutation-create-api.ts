@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import {
   Admin__Core_Plugins__Create,
   Admin__Core_Plugins__CreateMutation,
@@ -18,6 +20,8 @@ export const mutationCreateApi = async (
       query: Admin__Core_Plugins__Create,
       variables
     });
+
+    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {

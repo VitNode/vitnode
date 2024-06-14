@@ -30,7 +30,7 @@ export const mutationApi = async (formData: FormData) => {
       }
     });
 
-    revalidatePath("/admin/core/langs", "page");
+    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {

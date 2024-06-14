@@ -21,7 +21,7 @@ export const mutationEditApi = async (
       variables
     });
 
-    revalidatePath("/admin/members/groups", "page");
+    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {

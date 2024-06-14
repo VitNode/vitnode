@@ -23,7 +23,8 @@ const getData = async () => {
     Core_MiddlewareQuery,
     Core_MiddlewareQueryVariables
   >({
-    query: Core_Middleware
+    query: Core_Middleware,
+    cache: "force-cache"
   });
 
   return data;
