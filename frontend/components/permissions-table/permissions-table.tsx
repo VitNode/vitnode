@@ -42,10 +42,10 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
     field.onChange({
       ...field.value,
       [`can_all_${id}`]: stateToUpdate,
-      groups: field.value.groups.map((group: { group_id: number }) => {
+      groups: field.value.groups.map((group: { id: number }) => {
         return {
           ...group,
-          [`can_${id}`]: stateToUpdate
+          [id]: stateToUpdate
         };
       })
     });
@@ -93,7 +93,7 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
         )}
         itemContent={(index, item) => {
           const findItem = field.value.groups.find(
-            (group: { group_id: number }) => group.group_id === item.id
+            (group: { id: number }) => group.id === item.id
           );
           // Check if:
           // 1. The permission is enabled for all groups
@@ -101,12 +101,7 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
           const isAllPermissionsEnabled =
             permissions.every(
               permission => field.value[`can_all_${permission.id}`]
-            ) ||
-            permissions.every(
-              permission =>
-                findItem?.[`can_${permission.id}`] ||
-                field.value[`can_all_${permission.id}`]
-            );
+            ) || permissions.every(permission => findItem?.[permission.id]);
 
           return (
             <>
@@ -116,13 +111,45 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                   <Switch
                     onClick={() => {
                       if (isAllPermissionsEnabled) {
+                        const disableAllPermissions = mapValues(
+                          keyBy(
+                            permissions.map(item => ({
+                              ...item,
+                              id: `can_all_${item.id}`
+                            })),
+                            "id"
+                          ),
+                          () => false
+                        );
+
+                        const groups = data
+                          .filter(group => group.id !== item.id)
+                          .map(group => {
+                            return {
+                              id: group.id,
+                              ...mapValues(keyBy(permissions, "id"), el => {
+                                // Find if the permission is enabled for all groups
+                                if (field.value[`can_all_${el.id}`]) {
+                                  return true;
+                                }
+
+                                const findGroupInField =
+                                  field.value.groups.find(
+                                    ({ id }: { id: number }) => id === group.id
+                                  );
+
+                                if (findGroupInField) {
+                                  return findGroupInField[el.id];
+                                }
+
+                                return false;
+                              })
+                            };
+                          });
+
                         field.onChange({
-                          ...field.value,
-                          groups: [
-                            ...field.value.groups.filter(
-                              (group: { id: number }) => group.id !== item.id
-                            )
-                          ]
+                          ...disableAllPermissions,
+                          groups
                         });
 
                         return;
@@ -137,8 +164,7 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                         ...field.value,
                         groups: [
                           ...field.value.groups.filter(
-                            (group: { group_id: number }) =>
-                              group.group_id !== item.id
+                            (group: { id: number }) => group.id !== item.id
                           ),
                           {
                             id: item.id,
@@ -158,22 +184,19 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                 // 2. The permission is enabled for the current group
                 const checked: boolean = !!(
                   (field.value[`can_all_${permission.id}`] ||
-                    findItem?.[`can_${permission.id}`]) &&
+                    findItem?.[permission.id]) &&
                   item.guest !== permission.disableForGuest
                 );
 
                 return (
-                  <td
-                    key={`can_${permission.id}`}
-                    className="px-4 py-2 text-center"
-                  >
+                  <td key={permission.id} className="px-4 py-2 text-center">
                     <Switch
                       onClick={() => {
                         if (field.value[`can_all_${permission.id}`]) {
                           const groupPermissions = mapValues(
                             keyBy(
                               permissions.map(item => ({
-                                id: `can_${item.id}`
+                                id: item.id
                               })),
                               "id"
                             ),
@@ -183,24 +206,23 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                           const groups = data.map(
                             (group: Pick<ShowAdminGroups, "id">) => {
                               const findExistingGroup = field.value.groups.find(
-                                ({ group_id }: { group_id: number }) =>
-                                  group_id === group.id
+                                ({ id }: { id: number }) => id === group.id
                               );
 
                               if (group.id === item.id) {
                                 return {
-                                  group_id: group.id,
+                                  id: group.id,
                                   ...groupPermissions,
                                   ...findExistingGroup,
-                                  [`can_${permission.id}`]: false
+                                  [permission.id]: false
                                 };
                               }
 
                               return {
-                                group_id: group.id,
+                                id: group.id,
                                 ...groupPermissions,
                                 ...findExistingGroup,
-                                [`can_${permission.id}`]: true
+                                [permission.id]: true
                               };
                             }
                           );
@@ -214,11 +236,12 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                           return;
                         }
 
+                        // Check only this field if the group is not in the list
                         if (!findItem) {
                           const groupPermissions = mapValues(
                             keyBy(
                               permissions.map(item => ({
-                                id: `can_${item.id}`
+                                id: item.id
                               })),
                               "id"
                             ),
@@ -245,17 +268,17 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                           return;
                         }
 
+                        const otherGroups = field.value.groups.filter(
+                          (group: { id: number }) => group.id !== item.id
+                        );
+
                         field.onChange({
                           ...field.value,
                           groups: [
-                            ...field.value.groups.filter(
-                              (group: { group_id: number }) =>
-                                group.group_id !== item.id
-                            ),
+                            ...otherGroups,
                             {
                               ...findItem,
-                              [`can_${permission.id}`]:
-                                !findItem[`can_${permission.id}`]
+                              [permission.id]: !findItem[permission.id]
                             }
                           ]
                         });

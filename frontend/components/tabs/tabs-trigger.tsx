@@ -39,6 +39,7 @@ export const TabsTrigger = ({
         duration: 0.18,
         ease: "easeInOut"
       }}
+      style={{ originY: "0px" }}
     />
   ) : null;
 
