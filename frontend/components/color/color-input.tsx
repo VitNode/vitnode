@@ -39,7 +39,7 @@ export const ColorInput = ({
   const colorBrightness = color ? isColorBrightness(color) : false;
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={open} onOpenChange={setOpen} modal>
       <div className="flex gap-2">
         <PopoverTrigger asChild>
           <Button

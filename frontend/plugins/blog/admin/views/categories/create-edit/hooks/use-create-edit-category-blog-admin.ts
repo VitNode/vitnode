@@ -23,7 +23,24 @@ export const useCreateEditCategoryBlogAdmin = ({ data }: Args) => {
   const formSchema = z.object({
     name: zodInput.languageInput.min(1),
     description: zodInput.languageInput,
-    color: zodInput.string
+    color: zodInput.string,
+    permissions: z.object({
+      can_all_view: z.boolean(),
+      can_all_read: z.boolean(),
+      can_all_create: z.boolean(),
+      can_all_reply: z.boolean(),
+      can_all_download_files: z.boolean(),
+      groups: z.array(
+        z.object({
+          group_id: z.number(),
+          can_view: z.boolean(),
+          can_read: z.boolean(),
+          can_create: z.boolean(),
+          can_reply: z.boolean(),
+          can_download_files: z.boolean()
+        })
+      )
+    })
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -31,7 +48,15 @@ export const useCreateEditCategoryBlogAdmin = ({ data }: Args) => {
     defaultValues: {
       name: data?.name ?? [],
       description: data?.description ?? [],
-      color: ""
+      color: "",
+      permissions: {
+        can_all_view: false,
+        can_all_read: false,
+        can_all_create: false,
+        can_all_reply: false,
+        can_all_download_files: false,
+        groups: []
+      }
     }
   });
 
