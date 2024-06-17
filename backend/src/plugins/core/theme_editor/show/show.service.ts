@@ -2,8 +2,7 @@ import { join } from "path";
 import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { NotFoundError, Ctx } from "@vitnode/backend";
+import { NotFoundError } from "@vitnode/backend";
 
 import {
   ColorsShowCoreThemeEditor,
@@ -11,18 +10,11 @@ import {
   ShowCoreThemeEditorObj
 } from "./dto/show.obj";
 
-import { getThemeId } from "../../settings/helpers/get-theme-id";
-import { DatabaseService } from "@/database/database.service";
 import { ABSOLUTE_PATHS } from "@/config";
 import { keysFromCSSThemeEditor } from "../../admin/theme_editor/edit/edit.service";
 
 @Injectable()
 export class ShowCoreThemeEditorService {
-  constructor(
-    private readonly databaseService: DatabaseService,
-    private readonly configService: ConfigService
-  ) {}
-
   private parseStringToHsl(string: string): HslColor {
     const values = string
       .trim()
@@ -40,20 +32,15 @@ export class ShowCoreThemeEditorService {
 
   protected getVariable({
     cssAsString,
-    variable,
-    themeId
+    variable
   }: {
     cssAsString: string;
-    themeId: number;
     variable: string;
   }): {
     dark: HslColor;
     light: HslColor;
   } {
-    const regex = new RegExp(
-      `html\\[data-theme-id="${themeId}"\\]\\s*{([^}]*)}|html\\[data-theme-id="${themeId}"\\]\\.dark\\s*{([^}]*)}`,
-      "g"
-    );
+    const regex = new RegExp(`:root\\s*{([^}]*)}|\\.dark\\s*{([^}]*)}`, "g");
     let match: RegExpExecArray | null;
     const values = {
       light: "",
@@ -80,15 +67,9 @@ export class ShowCoreThemeEditorService {
     };
   }
 
-  async show({ req }: Ctx): Promise<ShowCoreThemeEditorObj> {
-    const themeId = await getThemeId({
-      ctx: { req },
-      databaseService: this.databaseService,
-      configService: this.configService
-    });
+  show(): ShowCoreThemeEditorObj {
     const pathToCss = join(
-      ABSOLUTE_PATHS.frontend.theme({ theme_id: themeId }).root,
-      "core",
+      ABSOLUTE_PATHS.plugin({ code: "core" }).frontend.templates,
       "layout",
       "global.css"
     );
@@ -102,8 +83,7 @@ export class ShowCoreThemeEditorService {
       (acc, variable) => {
         acc[variable.replace("-", "_")] = this.getVariable({
           cssAsString,
-          variable,
-          themeId
+          variable
         });
 
         return acc;

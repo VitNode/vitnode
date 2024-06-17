@@ -5,7 +5,7 @@ import { redirect } from "@vitnode/frontend/navigation";
 import { SessionProvider } from "./session-provider";
 import { InternalErrorView } from "@/plugins/admin/global/internal-error/internal-error-view";
 import { getSessionData } from "@/graphql/get-session-data";
-import { Layout as LayoutCore } from "@/plugins/core/views/layout/layout";
+import { Layout as LayoutCore } from "@/plugins/core/templates/layout/layout";
 
 interface Props {
   children: React.ReactNode;

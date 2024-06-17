@@ -14,7 +14,7 @@
     @apply cursor-pointer;
   }
 
-  html[data-theme-id="1"] {
+  :root {
     --background: 220 40% 98%;
     --foreground: 213deg 5% 8%;
     --card: 220 40% 100%;
@@ -39,7 +39,7 @@
     --cover-foreground: 210 40% 98%;
   }
 
-  html[data-theme-id="1"].dark {
+  .dark {
     --background: 220 32% 7%;
     --foreground: 0 0% 98%;
     --card: 220 32% 10%;

@@ -674,7 +674,6 @@ type ShowSettingsObj {
   site_description: [TextLanguage!]!
   site_name: String!
   site_short_name: String!
-  theme_id: Float
 }
 
 type SignUpCoreMembersObj {

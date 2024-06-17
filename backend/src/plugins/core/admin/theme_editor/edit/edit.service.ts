@@ -3,13 +3,12 @@ import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { NotFoundError, Ctx } from "@vitnode/backend";
+import { NotFoundError } from "@vitnode/backend";
 
 import { EditAdminThemeEditorArgs, ThemeVariableInput } from "./dto/edit.args";
 
 import { ABSOLUTE_PATHS } from "@/config";
 import { DatabaseService } from "@/database/database.service";
-import { getThemeId } from "@/plugins/core/settings/helpers/get-theme-id";
 import { setRebuildRequired } from "@/functions/rebuild-required";
 
 export const keysFromCSSThemeEditor = [
@@ -40,16 +39,14 @@ export class EditAdminThemeEditorService {
   protected changeVariable({
     cssAsString,
     variable,
-    themeId,
     newValues
   }: {
     cssAsString: string;
     newValues: ThemeVariableInput;
-    themeId: number;
     variable: string;
   }): string {
     const regex = new RegExp(
-      `(html\\[data-theme-id="${themeId}"\\]\\s*{[^}]*)--${variable}:\\s*([^;]*)([^}]*)|(html\\[data-theme-id="${themeId}"\\]\\.dark\\s*{[^}]*)--${variable}:\\s*([^;]*)([^}]*)`,
+      `(:root\\s*{[^}]*)--${variable}:\\s*([^;]*)([^}]*)|(\\.dark\\s*{[^}]*)--${variable}:\\s*([^;]*)([^}]*)`,
       "g"
     );
 
@@ -64,18 +61,9 @@ export class EditAdminThemeEditorService {
     });
   }
 
-  async edit(
-    { req }: Ctx,
-    { colors }: EditAdminThemeEditorArgs
-  ): Promise<string> {
-    const themeId = await getThemeId({
-      ctx: { req },
-      databaseService: this.databaseService,
-      configService: this.configService
-    });
+  async edit({ colors }: EditAdminThemeEditorArgs): Promise<string> {
     const pathToCss = join(
-      ABSOLUTE_PATHS.frontend.theme({ theme_id: themeId }).root,
-      "core",
+      ABSOLUTE_PATHS.plugin({ code: "core" }).frontend.templates,
       "layout",
       "global.css"
     );
@@ -93,7 +81,6 @@ export class EditAdminThemeEditorService {
       colorsStringUpdate = this.changeVariable({
         cssAsString: colorsStringUpdate,
         variable: key,
-        themeId,
         newValues: colors[formatKey]
       });
     });
