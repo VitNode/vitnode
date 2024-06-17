@@ -2,6 +2,7 @@ import {
   boolean,
   index,
   integer,
+  jsonb,
   pgTable,
   serial,
   timestamp,
@@ -26,7 +27,8 @@ export const core_admin_permissions = pgTable(
     unrestricted: boolean("unrestricted").notNull().default(false),
     created: timestamp("created").notNull().defaultNow(),
     updated: timestamp("updated").notNull().defaultNow(),
-    protected: boolean("protected").notNull().default(false)
+    protected: boolean("protected").notNull().default(false),
+    permissions: jsonb("permissions").default("{}")
   },
   table => ({
     group_id_idx: index("core_admin_permissions_group_id_idx").on(
