@@ -1,3 +1,0 @@
-mutation Admin__core_themes__delete($id: Int!) {
-  admin__core_themes__delete(id: $id)
-}

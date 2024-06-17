@@ -9,7 +9,6 @@ import { EditAdminThemeEditorArgs, ThemeVariableInput } from "./dto/edit.args";
 
 import { ABSOLUTE_PATHS } from "@/config";
 import { DatabaseService } from "@/database/database.service";
-import { setRebuildRequired } from "@/functions/rebuild-required";
 
 export const keysFromCSSThemeEditor = [
   "primary",
@@ -86,7 +85,6 @@ export class EditAdminThemeEditorService {
     });
 
     fs.writeFileSync(pathToCss, colorsStringUpdate);
-    await setRebuildRequired({ set: "themes" });
 
     return "Success!";
   }

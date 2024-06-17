@@ -38,9 +38,7 @@ export const Providers = ({ children, config, data }: Props) => {
           defaultLanguage:
             data?.core_languages__show.edges.find(lang => lang.default)?.code ??
             "en",
-          themes: data?.core_themes__show.edges ?? [],
-          config,
-          themeId: data?.core_settings__show.theme_id ?? 1
+          config
         }}
       >
         <NextThemesProvider

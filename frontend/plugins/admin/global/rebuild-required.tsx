@@ -15,9 +15,7 @@ export const RebuildRequiredAdmin = () => {
   } = useGlobals();
 
   if (
-    (!rebuild_required.langs &&
-      !rebuild_required.plugins &&
-      !rebuild_required.themes) ||
+    (!rebuild_required.langs && !rebuild_required.plugins) ||
     CONFIG.node_development
   ) {
     return null;
@@ -42,14 +40,6 @@ export const RebuildRequiredAdmin = () => {
           {rebuild_required.plugins && (
             <li>
               {t.rich("plugins", {
-                bold: text => <span className="font-bold">{text}</span>
-              })}
-            </li>
-          )}
-
-          {rebuild_required.themes && (
-            <li>
-              {t.rich("themes", {
                 bold: text => <span className="font-bold">{text}</span>
               })}
             </li>

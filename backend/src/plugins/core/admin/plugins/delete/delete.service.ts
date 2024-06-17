@@ -76,20 +76,6 @@ export class DeleteAdminPluginsService {
       );
     });
 
-    // Frontend - Delete Templates
-    const themes = await this.databaseService.db.query.core_themes.findMany({
-      columns: {
-        id: true
-      }
-    });
-    themes.forEach(({ id }) => {
-      this.deleteFolderWhenExists(
-        ABSOLUTE_PATHS.plugin({ code }).frontend.theme({
-          theme_id: id
-        })
-      );
-    });
-
     await this.databaseService.db
       .delete(core_plugins)
       .where(eq(core_plugins.code, code));

@@ -14,12 +14,11 @@ import { ConfigPlugin } from "../plugins.module";
 
 import { core_plugins } from "../../database/schema/plugins";
 import { DatabaseService } from "@/database/database.service";
-import { ChangeTemplatesAdminThemesService } from "../../themes/change_templates.service";
 import { ABSOLUTE_PATHS } from "@/config";
 import { migrate } from "@/utils/actions/migrate";
 
 @Injectable()
-export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService {
+export class UploadAdminPluginsService {
   protected path: string = join(process.cwd());
   protected tempPath: string = join(
     ABSOLUTE_PATHS.uploads.temp,
@@ -30,9 +29,7 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly changeFilesService: ChangeFilesAdminPluginsService
-  ) {
-    super();
-  }
+  ) {}
 
   protected async removeTempFolder(): Promise<void> {
     // Delete temp folder
@@ -171,27 +168,6 @@ export class UploadAdminPluginsService extends ChangeTemplatesAdminThemesService
         return this.copyFilesToPluginFolder({ source, destination });
       })
     );
-
-    // Copy templates
-    const themes = await this.databaseService.db.query.core_themes.findMany({
-      columns: {
-        id: true
-      }
-    });
-    if (fs.existsSync(join(this.tempPath, "frontend", "templates"))) {
-      await Promise.all(
-        themes.map(async ({ id }) => {
-          await this.changeTemplates({
-            tempPath: join(this.tempPath, "frontend", "templates"),
-            destinationPath: ABSOLUTE_PATHS.plugin({
-              code: config.code
-            }).frontend.theme({
-              theme_id: id
-            })
-          });
-        })
-      );
-    }
 
     // Copy language
     const languages =

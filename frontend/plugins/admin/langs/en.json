@@ -7,7 +7,6 @@
       "title": "Rebuild Required",
       "desc": "We're detecting that you need to rebuild your website, because you have made changes in:",
       "plugins": "<bold>Plugins</bold> - Temporary disabled",
-      "themes": "<bold>Themes</bold> - Changing theme disabled",
       "langs": "<bold>Languages</bold> - Changing language disabled",
       "submit": "Read How To Rebuild"
     },
@@ -208,59 +207,6 @@
         }
       },
       "styles": {
-        "themes": {
-          "title": "Themes",
-          "create": {
-            "title": "Create Theme",
-            "success": "Theme has been created.",
-            "name": {
-              "label": "Name",
-              "desc": "Min 3-50 characters."
-            },
-            "support_url": {
-              "label": "Support URL",
-              "desc": "URL to the support page for this theme."
-            },
-            "author": {
-              "label": "Author"
-            },
-            "author_url": {
-              "label": "Author URL"
-            }
-          },
-          "edit": {
-            "title": "Edit Theme",
-            "success": "Theme has been updated."
-          },
-          "delete": {
-            "submit": "Yes, delete theme",
-            "desc": "This action will delete <name></name> theme created by <author></author>.",
-            "success": "Theme has been deleted."
-          },
-          "download": {
-            "title": "Download Theme",
-            "submit": "Download",
-            "version": {
-              "label": "Version"
-            },
-            "version_code": {
-              "label": "Version Code"
-            },
-            "type": {
-              "rebuild": "Rebuild current version - {version}",
-              "new_version": "Create new version"
-            }
-          },
-          "upload": {
-            "title": "Upload Theme",
-            "title_new_version": "Upload New Version Theme",
-            "success": "Successfully uploaded theme.",
-            "errors": {
-              "THEME_VERSION_CODE_LOWER": "The version of the uploaded theme is lower than the current version."
-            },
-            "submit": "Upload"
-          }
-        },
         "nav": {
           "title": "Navigation",
           "href": "URL: {href}",

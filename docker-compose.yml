@@ -36,7 +36,6 @@ services:
       - database
     volumes:
       - ./frontend/config:/app/frontend/config # config
-      - ./frontend/themes:/app/frontend/themes # themes
       - ./frontend/app:/app/frontend/app # app
       - ./frontend/plugins:/app/frontend/plugins # plugins
       - ./backend/uploads:/app/backend/uploads # uploads
@@ -61,7 +60,6 @@ services:
       - backend
     volumes:
       - ./frontend/config:/app/frontend/config # config
-      - ./frontend/themes:/app/frontend/themes # themes
       - ./frontend/app:/app/frontend/app # app
       - ./frontend/plugins:/app/frontend/plugins # admin
     networks:
