@@ -105,9 +105,9 @@ export const ABSOLUTE_PATHS = {
       ),
       default_page: join(
         internalPaths.frontend,
-        "themes",
-        "1",
+        "plugins",
         code,
+        "templates",
         "default-page.tsx"
       ),
       pages: join(internalPaths.frontend, "app", "[locale]", "(main)", code),
@@ -133,7 +133,6 @@ export interface ConfigType {
   rebuild_required: {
     langs: boolean;
     plugins: boolean;
-    themes: boolean;
   };
   settings: {
     email: {

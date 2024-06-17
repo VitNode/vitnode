@@ -5,7 +5,6 @@ import { buttonVariants } from "@/components/ui/button";
 import { DrawerClose } from "@/components/ui/drawer";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import { useSession } from "@/plugins/core/hooks/use-session";
-import { ThemeSwitcher } from "@/components/switchers/theme/theme-switcher";
 import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";
 import { LanguageSwitcher } from "@/components/switchers/language-switcher";
 
@@ -42,7 +41,6 @@ export const HeaderDrawerQuickMenu = () => {
         </div>
 
         <div className="mt-5 flex justify-center gap-2">
-          <ThemeSwitcher />
           <LanguageSwitcher />
           <DarkLightModeSwitcher />
         </div>
@@ -62,7 +60,6 @@ export const HeaderDrawerQuickMenu = () => {
       </div>
 
       <div className="flex gap-2">
-        <ThemeSwitcher />
         <LanguageSwitcher />
         <DarkLightModeSwitcher />
       </div>

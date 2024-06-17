@@ -211,11 +211,6 @@ type Mutation {
   admin__core_staff_moderators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffModerators!
   admin__core_staff_moderators__delete(id: Int!): String!
   admin__core_theme_editor__edit(colors: ColorsEditAdminThemeEditor!): String!
-  admin__core_themes__create(author: String!, author_url: String, name: String!, support_url: String!): ShowAdminThemes!
-  admin__core_themes__delete(id: Int!): String!
-  admin__core_themes__download(id: Int!, version: String, version_code: Int): String!
-  admin__core_themes__edit(author: String!, author_url: String, id: Int!, name: String!, support_url: String!): ShowAdminThemes!
-  admin__core_themes__upload(file: Upload!, id: Int): ShowAdminThemes!
   admin__install__create_database: String!
   admin_sessions__sign_out: String!
   core_editor_files__delete(id: Int!, security_key: String): String!
@@ -229,7 +224,6 @@ type Mutation {
   core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
-  core_themes__change(id: Int!): String!
 }
 
 type NavAdminPluginsAuthorization {
@@ -266,7 +260,6 @@ type Query {
   admin__core_plugins__show(code: String, cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminPluginsSortByArgs): ShowAdminPluginsObj!
   admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminStaffAdministratorsSortByArgs): ShowAdminStaffAdministratorsObj!
   admin__core_staff_moderators__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminStaffModeratorsSortByArgs): ShowAdminStaffModeratorsObj!
-  admin__core_themes__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminThemesSortByArgs): ShowAdminThemesObj!
   admin__install__layout: LayoutAdminInstallObj!
   admin__sessions__authorization: AuthorizationAdminSessionsObj!
   blog_categories__show(cursor: Int, first: Int, last: Int): ShowBlogCategoriesObj!
@@ -280,7 +273,6 @@ type Query {
   core_sessions__devices__show: [ShowCoreSessionDevicesObj!]!
   core_settings__show: ShowSettingsObj!
   core_theme_editor__show: ShowCoreThemeEditorObj!
-  core_themes__show(cursor: Int, first: Int, last: Int): ShowCoreThemesObj!
 }
 
 type ShowAdminEmailSettingsServiceObj {
@@ -474,33 +466,6 @@ enum ShowAdminStaffModeratorsSortingColumnEnum {
   updated
 }
 
-type ShowAdminThemes {
-  author: String!
-  author_url: String
-  created: DateTime!
-  default: Boolean!
-  id: Int!
-  name: String!
-  protected: Boolean!
-  support_url: String!
-  version: String
-  version_code: Int
-}
-
-type ShowAdminThemesObj {
-  edges: [ShowAdminThemes!]!
-  pageInfo: PageInfo!
-}
-
-input ShowAdminThemesSortByArgs {
-  column: ShowAdminThemesSortingColumnEnum!
-  direction: SortDirectionEnum!
-}
-
-enum ShowAdminThemesSortingColumnEnum {
-  created
-}
-
 type ShowBlogCategories {
   color: String!
   description: [TextLanguage!]
@@ -656,17 +621,6 @@ type ShowCoreSessionDevicesObj {
 
 type ShowCoreThemeEditorObj {
   colors: ColorsShowCoreThemeEditor!
-}
-
-type ShowCoreThemes {
-  default: Boolean!
-  id: Int!
-  name: String!
-}
-
-type ShowCoreThemesObj {
-  edges: [ShowCoreThemes!]!
-  pageInfo: PageInfo!
 }
 
 type ShowSettingsObj {

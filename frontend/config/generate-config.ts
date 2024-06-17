@@ -37,8 +37,7 @@ import { DEFAULT_CONFIG_DATA } from ".";
         ...config,
         rebuild_required: {
           langs: false,
-          plugins: false,
-          themes: false
+          plugins: false
         }
       },
       DEFAULT_CONFIG_DATA

@@ -75,11 +75,7 @@ export default async function LocaleLayout({
     };
 
     return (
-      <html
-        lang={locale}
-        className={cn(GeistSans.className, "vitnode")}
-        data-theme-id={data.core_settings__show.theme_id ?? 1}
-      >
+      <html lang={locale} className={cn(GeistSans.className, "vitnode")}>
         <body>
           <NextTopLoader
             color="hsl(var(--primary))"

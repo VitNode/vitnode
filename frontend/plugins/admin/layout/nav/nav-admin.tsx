@@ -41,13 +41,9 @@ export const NavAdmin = async () => {
           },
           {
             id: "styles",
-            href: "themes",
+            href: "nav",
             icon: "Paintbrush",
             children: [
-              {
-                id: "themes",
-                href: "themes"
-              },
               {
                 id: "nav",
                 href: "nav"

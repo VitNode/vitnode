@@ -12,12 +12,6 @@ query Core_middleware {
       time_24
     }
   }
-  core_themes__show {
-    edges {
-      id
-      name
-    }
-  }
   core_plugins__show {
     code
   }

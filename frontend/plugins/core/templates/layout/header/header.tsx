@@ -3,7 +3,6 @@ import { Link } from "@vitnode/frontend/navigation";
 import { UserBar } from "./user-bar/user-bar";
 import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";
 import { LanguageSwitcher } from "@/components/switchers/language-switcher";
-import { ThemeSwitcher } from "@/components/switchers/theme/theme-switcher";
 import { Nav } from "../nav/nav";
 
 export const Header = () => {
@@ -15,7 +14,6 @@ export const Header = () => {
         <Nav />
 
         <div className="ml-auto hidden gap-2 sm:flex">
-          <ThemeSwitcher />
           <LanguageSwitcher />
           <DarkLightModeSwitcher />
         </div>

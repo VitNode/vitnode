@@ -14,7 +14,6 @@ import { CoreMembersModule } from "./members/members.module";
 import { CoreMiddlewareModule } from "./middleware/middleware.module";
 import { CoreNavModule } from "./nav/nav.module";
 import { CorePluginsModule } from "./plugins/plugins.module";
-import { CoreThemesModule } from "./themes/themes.module";
 import { CoreThemeEditorModule } from "./theme_editor/theme_editor.module";
 
 @Module({
@@ -32,7 +31,6 @@ import { CoreThemeEditorModule } from "./theme_editor/theme_editor.module";
     CoreMiddlewareModule,
     CoreNavModule,
     CorePluginsModule,
-    CoreThemesModule,
     CoreThemeEditorModule
   ]
 })
