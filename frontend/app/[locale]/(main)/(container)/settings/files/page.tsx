@@ -11,7 +11,7 @@ import {
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { fetcher } from "@/graphql/fetcher";
-import { FilesSettingsView } from "@/plugins/core/views/views/settings/views/files/files-settings-view";
+import { FilesSettingsView } from "@/plugins/core/templates/views/settings/views/files/files-settings-view";
 
 const getData = async (variables: Core_Members__Files__ShowQueryVariables) => {
   const { data } = await fetcher<

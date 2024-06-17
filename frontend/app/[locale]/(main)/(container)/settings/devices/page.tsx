@@ -6,7 +6,7 @@ import {
   Core_Sessions__Devices__ShowQuery,
   Core_Sessions__Devices__ShowQueryVariables
 } from "@/graphql/hooks";
-import { DevicesSettingsView } from "@/plugins/core/views/views/settings/views/devices/devices-settings-view";
+import { DevicesSettingsView } from "@/plugins/core/templates/views/settings/views/devices/devices-settings-view";
 import { fetcher } from "@/graphql/fetcher";
 
 const getData = async () => {

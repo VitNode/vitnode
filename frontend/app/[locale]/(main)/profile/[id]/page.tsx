@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import * as React from "react";
 
-import { ProfileView } from "@/plugins/core/views/views/profile/profile-view";
+import { ProfileView } from "@/plugins/core/templates/views/profile/profile-view";
 import {
   Core_Members__Profiles,
   Core_Members__ProfilesQuery,

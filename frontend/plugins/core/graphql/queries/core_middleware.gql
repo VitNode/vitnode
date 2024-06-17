@@ -31,6 +31,5 @@ query Core_middleware {
       value
     }
     site_name
-    theme_id
   }
 }

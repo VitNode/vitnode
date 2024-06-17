@@ -42,7 +42,7 @@ export default async function Page() {
   const PageFromTheme: React.LazyExoticComponent<() => JSX.Element> =
     React.lazy(
       async () =>
-        import(`../../../plugins/${default_plugin}/views/default-page`)
+        import(`../../../plugins/${default_plugin}/templates/default-page`)
     );
 
   return <PageFromTheme />;
