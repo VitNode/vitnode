@@ -19,24 +19,23 @@ const config: CodegenConfig = {
     join(process.cwd(), "..", "frontend", "plugins/**/graphql/**/*.gql")
   ],
   generates: {
-    [`${join(process.cwd(), "..", "frontend", "utils", "graphql", "hooks.ts")}`]:
-      {
-        plugins: [
-          "typescript",
-          "typescript-operations",
-          "typescript-document-nodes"
-        ],
-        config: {
-          scalars: {
-            DateTime: "Date"
-          },
-          enumsAsConst: true,
-          allowEnumStringTypes: true,
-          namingConvention: {
-            enumValues: "change-case-all#lowerCase"
-          }
+    [`${join(process.cwd(), "..", "frontend", "graphql", "hooks.ts")}`]: {
+      plugins: [
+        "typescript",
+        "typescript-operations",
+        "typescript-document-nodes"
+      ],
+      config: {
+        scalars: {
+          DateTime: "Date"
+        },
+        enumsAsConst: true,
+        allowEnumStringTypes: true,
+        namingConvention: {
+          enumValues: "change-case-all#lowerCase"
         }
       }
+    }
   }
 };
 

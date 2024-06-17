@@ -1,6 +1,5 @@
 import { Field, ObjectType } from "@nestjs/graphql";
-
-import { TextLanguage } from "@/utils/types/database/text-language.type";
+import { TextLanguage } from "@vitnode/backend";
 
 @ObjectType()
 export class ShowSettingsObj {

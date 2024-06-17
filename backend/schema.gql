@@ -124,6 +124,14 @@ type GroupUser {
   name: [TextLanguage!]!
 }
 
+input GroupsPermissionsCreatePluginCategories {
+  can_create: Boolean!
+  can_download_files: Boolean!
+  can_read: Boolean!
+  can_reply: Boolean!
+  group_id: Int!
+}
+
 type HslColor {
   h: Int!
   l: Int!
@@ -134,6 +142,12 @@ input HslColorInput {
   h: Int!
   l: Int!
   s: Int!
+}
+
+type LanguagesCoreMiddleware {
+  code: String!
+  default: Boolean!
+  enabled: Boolean!
 }
 
 enum LayoutAdminInstallEnum {
@@ -147,8 +161,8 @@ type LayoutAdminInstallObj {
 }
 
 type Mutation {
-  admin__blog_categories__create(color: String!, description: [TextLanguageInput!]!, name: [TextLanguageInput!]!): ShowBlogCategories!
-  admin__core_email_settings__edit(smtp_host: String!, smtp_password: String!, smtp_port: Int!, smtp_secure: Boolean!, smtp_user: String!): ShowAdminEmailSettingsServiceObj!
+  admin__blog_categories__create(color: String!, description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, permissions: PermissionsCreatePluginCategories!): ShowBlogCategories!
+  admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, smtp_host: String!, smtp_password: String!, smtp_port: Int!, smtp_secure: Boolean!, smtp_user: String!): ShowAdminEmailSettingsServiceObj!
   admin__core_email_settings__test(from: String!, message: String!, subject: String!, to: String!): String!
   admin__core_files__delete(id: Int!): String!
   admin__core_groups__delete(id: Int!): String!
@@ -212,6 +226,14 @@ type PageInfo {
   totalCount: Float!
 }
 
+input PermissionsCreatePluginCategories {
+  can_all_create: Boolean!
+  can_all_download_files: Boolean!
+  can_all_read: Boolean!
+  can_all_reply: Boolean!
+  groups: [GroupsPermissionsCreatePluginCategories!]!
+}
+
 type Query {
   admin__core_email_settings__show: ShowAdminEmailSettingsServiceObj!
   admin__core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowAdminFilesObj!
@@ -231,6 +253,7 @@ type Query {
   core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowCoreFilesObj!
   core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreLanguagesSortByArgs): ShowCoreLanguagesObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: ShowCoreMembersSortByArgs): ShowCoreMembersObj!
+  core_middleware__show: ShowCoreMiddlewareObj!
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
   core_plugins__show: [ShowCorePluginsObj!]!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
@@ -241,6 +264,7 @@ type Query {
 }
 
 type ShowAdminEmailSettingsServiceObj {
+  color_primary: String!
   smtp_host: String!
   smtp_port: Int!
   smtp_secure: Boolean!
@@ -560,6 +584,11 @@ enum ShowCoreMembersSortingColumnEnum {
   name
   posts
   reactions
+}
+
+type ShowCoreMiddlewareObj {
+  languages: [LanguagesCoreMiddleware!]!
+  plugins: [String!]!
 }
 
 type ShowCoreNav {

@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { count, eq } from "drizzle-orm";
+import { NotFoundError } from "@vitnode/backend";
 
 import { EditAdminGroupsArgs } from "./dto/edit.args";
 import { ShowAdminGroups } from "../show/dto/show.obj";
 
-import { NotFoundError } from "@/utils/errors/not-found-error";
 import {
   core_groups,
   core_groups_names

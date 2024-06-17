@@ -12,6 +12,10 @@
     },
     "home_page": "Strona główna",
     "core": {
+      "email": {
+        "hello": "Cześć",
+        "footer": "Otrzymujesz ten email, ponieważ aktywność Twojego konta spowodowała wysłanie tego emaila. Prosimy nie odpowiadać na ten email. Jeśli masz jakiekolwiek pytania, skontaktuj się z nami pod adresem:"
+      },
       "settings": {
         "main": {
           "title": "Ustawienia główne",
@@ -34,10 +38,8 @@
           "smtp_user": "Użytkownik SMTP",
           "smtp_password": "Hasło SMTP",
           "smtp_port": "Port SMTP",
-          "smtp_secure": {
-            "label": "Bezpieczne SMTP (SSL/TLS)",
-            "desc": "Użyj `tak` jeśli Twój host używa portu 465, `nie` dla wszystkich innych portów"
-          },
+          "smtp_secure": "Bezpieczne SMTP (SSL/TLS)",
+          "color_primary": "Primary Color",
           "test": {
             "title": "Testuj wysyłanie emaili",
             "from": "Od",
@@ -499,43 +501,7 @@
       }
     },
     "configs": {
-      "mobile_not_supported": "Ten widok nie jest obsługiwany na urządzeniach mobilnych.",
-      "install": {
-        "title": "Instalacja {name}",
-        "steps": {
-          "next_step": "Następny krok",
-          "welcome": {
-            "title": "Witaj",
-            "desc": "Zanim zaczniesz...",
-            "text": "Witaj w kreatorze instalacji {name}. Ten kreator przeprowadzi Cię przez proces instalacji."
-          },
-          "license": {
-            "title": "Licencja",
-            "desc": "Przeczytaj uważnie",
-            "link": "Kliknij tutaj, aby przeczytać licencję.",
-            "agree": "Akceptuje warunki licencji"
-          },
-          "database": {
-            "title": "Baza danych",
-            "text": "Teraz VitNode potrzebuje stworzyć domyślne rekordy w Twojej bazie danych.",
-            "desc": "Stwórz schemat oraz pierwsze rekordy",
-            "submit": "Stwórz rekordy"
-          },
-          "account": {
-            "title": "Konto admina",
-            "desc": "Stwórz konto administratora"
-          }
-        },
-        "finish": {
-          "title": "Witaj w {name}!",
-          "desc": "Twoja strona jest gotowa.",
-          "text": "Proces instalacji jest gotowy. Możesz teraz użyć swojej strony internetowej.",
-          "buttons": {
-            "home_page": "Strona główna",
-            "admin_control_panel": "Panel kontrolny administratora"
-          }
-        }
-      }
+      "mobile_not_supported": "Ten widok nie jest obsługiwany na urządzeniach mobilnych."
     }
   }
 }

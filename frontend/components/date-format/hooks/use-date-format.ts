@@ -3,10 +3,9 @@ import * as localeDate from "date-fns/locale";
 import { format, formatDistance } from "date-fns";
 
 import { useGlobals } from "@/plugins/core/hooks/use-globals";
-import { convertUnixTime } from "@/functions/date";
 
 interface Args {
-  date: Date | number;
+  date: Date;
 }
 
 export const useDateFormat = ({ date }: Args) => {
@@ -16,8 +15,7 @@ export const useDateFormat = ({ date }: Args) => {
     language => language.code === currentLocale
   );
 
-  const currentTime =
-    typeof date === "number" ? convertUnixTime(date) : new Date(date);
+  const currentTime = new Date(date);
 
   const relative = Math.floor(
     (new Date().getTime() - currentTime.getTime()) / 1000

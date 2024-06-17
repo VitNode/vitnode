@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
+import { formatBytes } from "@vitnode/shared";
 
 import {
   acceptMimeTypeImage,
@@ -8,12 +9,11 @@ import {
   FileStateEditor
 } from "../files";
 import { uploadMutationApi } from "./upload-mutation-api";
-import { TextLanguage } from "@/utils/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 import { getFilesFromContent } from "@/components/editor/extensions/files/hooks/functions";
 import { useGlobals } from "@/plugins/core/hooks/use-globals";
 import { useSession } from "@/plugins/core/hooks/use-session";
-import { formatBytes } from "@/functions/format-bytes";
-import { ErrorType } from "@/utils/graphql/fetcher";
+import { ErrorType } from "@/graphql/fetcher";
 
 export interface UploadFilesHandlerArgs {
   files: FileStateEditor[];

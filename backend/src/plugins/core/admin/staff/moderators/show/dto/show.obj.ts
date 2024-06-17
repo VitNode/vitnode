@@ -1,11 +1,10 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
+import { PageInfo, User } from "@vitnode/backend";
 
-import { User } from "@/utils/decorators/user.decorator";
 import {
   StaffGroupUser,
   UserOrGroupCoreStaffUnion
 } from "../../../administrators/show/dto/show.obj";
-import { PageInfo } from "@/utils/types/database/pagination.type";
 
 @ObjectType()
 export class ShowAdminStaffModeratorsObj {

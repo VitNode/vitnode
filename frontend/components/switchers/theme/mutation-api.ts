@@ -1,12 +1,14 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import {
   Core_Themes__Change,
   Core_Themes__ChangeMutation,
   Core_Themes__ChangeMutationVariables
-} from "@/utils/graphql/hooks";
-import { setCookieFromApi } from "@/functions/cookie-from-string-to-object";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
+import { setCookieFromApi } from "@/graphql/cookie-from-string-to-object";
 
 export const mutationApi = async (
   variables: Core_Themes__ChangeMutationVariables
@@ -22,6 +24,8 @@ export const mutationApi = async (
 
     // Set cookie
     setCookieFromApi({ res });
+
+    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {

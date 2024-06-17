@@ -1,14 +1,13 @@
 "use server";
 
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 import {
   Admin__Core_Themes__Create,
   Admin__Core_Themes__CreateMutation,
   Admin__Core_Themes__CreateMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
-import { CoreApiTags } from "@/plugins/admin/api-tags";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const mutationApi = async (
   variables: Admin__Core_Themes__CreateMutationVariables
@@ -22,8 +21,7 @@ export const mutationApi = async (
       variables
     });
 
-    revalidatePath("/admin/core/styles/themes", "page");
-    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
+    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {

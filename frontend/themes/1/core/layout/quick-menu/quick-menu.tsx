@@ -1,9 +1,10 @@
+import { flattenTree } from "@vitnode/frontend/helpers";
+
 import { QuickMenuWrapper } from "./wrapper";
 import { ButtonDrawer } from "./drawer/button";
-import { getSessionData } from "@/functions/get-session-data";
-import { flattenTree } from "@/functions/flatten-tree";
-import { ShowCoreNav } from "@/utils/graphql/hooks";
+import { ShowCoreNav } from "@/graphql/hooks";
 import { Icon } from "@/components/icon/icon";
+import { getSessionData } from "@/graphql/get-session-data";
 
 export const QuickMenu = async () => {
   const { data } = await getSessionData();

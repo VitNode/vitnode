@@ -1,14 +1,13 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 import {
   Admin__Core_Nav__Change_PositionMutation,
   Admin__Core_Nav__Change_PositionMutationVariables,
   Admin__Core_Nav__Change_Position
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
-import { CoreApiTags } from "@/plugins/admin/api-tags";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const mutationChangePositionApi = async (
   variables: Admin__Core_Nav__Change_PositionMutationVariables
@@ -22,7 +21,7 @@ export const mutationChangePositionApi = async (
       variables
     });
 
-    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
+    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {

@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import { useCreateEditLangAdmin } from "./hooks/use-create-edit-lang-admin";
-import { ShowCoreLanguages } from "@/utils/graphql/hooks";
+import { ShowCoreLanguages } from "@/graphql/hooks";
 import {
   DialogDescription,
   DialogFooter,

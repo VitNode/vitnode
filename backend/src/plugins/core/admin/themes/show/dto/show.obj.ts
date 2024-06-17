@@ -1,6 +1,5 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
-
-import { PageInfo } from "@/utils/types/database/pagination.type";
+import { PageInfo } from "@vitnode/backend";
 
 @ObjectType()
 export class ShowAdminThemes {

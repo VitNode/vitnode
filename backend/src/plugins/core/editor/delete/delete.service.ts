@@ -1,16 +1,15 @@
 import { Injectable } from "@nestjs/common";
 import { count, eq } from "drizzle-orm";
+import { AccessDeniedError, User } from "@vitnode/backend";
 
 import { DeleteCoreEditorArgs } from "./dto/delete.args";
 
 import { DeleteCoreFilesService } from "../../files/helpers/delete/delete.service";
-import { User } from "@/utils/decorators/user.decorator";
 import {
   core_files,
   core_files_using
 } from "../../admin/database/schema/files";
 import { DatabaseService } from "@/database/database.service";
-import { AccessDeniedError } from "@/utils/errors/access-denied-error";
 
 @Injectable()
 export class DeleteCoreEditorService {

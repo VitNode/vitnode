@@ -9,15 +9,14 @@ import { join } from "path";
 
 import sharp from "sharp";
 import { Injectable } from "@nestjs/common";
+import { generateRandomString, removeSpecialCharacters } from "@vitnode/shared";
+import { CustomError } from "@vitnode/backend";
 
 import { UploadCoreFilesArgs } from "./dto/upload.args";
 import { UploadCoreFilesObj } from "./dto/upload.obj";
 import { HelpersUploadCoreFilesService, acceptMimeTypeImage } from "./helpers";
 
-import { generateRandomString } from "@/functions/generate-random-string";
-import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 import { DatabaseService } from "@/database/database.service";
-import { CustomError } from "@/utils/errors/custom-error";
 import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()

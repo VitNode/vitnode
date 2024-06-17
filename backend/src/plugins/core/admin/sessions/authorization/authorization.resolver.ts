@@ -1,9 +1,8 @@
 import { Context, Query, Resolver } from "@nestjs/graphql";
+import { Ctx } from "@vitnode/backend";
 
 import { AuthorizationAdminSessionsService } from "./authorization.service";
 import { AuthorizationAdminSessionsObj } from "./dto/authorization.obj";
-
-import { Ctx } from "@/utils/types/context.type";
 
 @Resolver()
 export class AuthorizationAdminSessionsResolver {

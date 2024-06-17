@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { removeSpecialCharacters } from "@vitnode/shared";
 
 import { CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -17,12 +18,11 @@ import {
 import { useSignUpView } from "@/plugins/core/hooks/sign/up/use-sign-up-view";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
-import { removeSpecialCharacters } from "@/functions/remove-special-characters";
 import { SuccessFormSignUp } from "./success";
 
 export const FormSignUp = () => {
   const t = useTranslations("core");
-  const { form, onSubmit } = useSignUpView({});
+  const { form, onSubmit } = useSignUpView();
 
   if (form.formState.isSubmitSuccessful) {
     return <SuccessFormSignUp name={form.watch("name")} />;
@@ -100,8 +100,8 @@ export const FormSignUp = () => {
                   {(fieldState.invalid || value.length > 0) && (
                     <div className="mt-1">
                       <div className="mb-2 flex justify-between text-xs font-semibold">
-                        <span>Weak</span>
-                        <span>Strong</span>
+                        <span>{t("week")}</span>
+                        <span>{t("strong")}</span>
                       </div>
                       <Progress
                         value={(100 / regexArray.length) * passRegexPassword}

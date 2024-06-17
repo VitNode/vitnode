@@ -1,14 +1,13 @@
 "use server";
 
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 import {
   Admin__Core_Themes__Upload,
   Admin__Core_Themes__UploadMutation,
   Admin__Core_Themes__UploadMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
-import { CoreApiTags } from "@/plugins/admin/api-tags";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const mutationApi = async (formData: FormData) => {
   try {
@@ -30,8 +29,7 @@ export const mutationApi = async (formData: FormData) => {
       ]
     });
 
-    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
-    revalidatePath("/admin/core/styles/themes", "page");
+    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {

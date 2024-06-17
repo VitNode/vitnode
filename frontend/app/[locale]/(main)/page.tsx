@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Metadata } from "next";
 
-import { getSessionData } from "@/functions/get-session-data";
+import { getSessionData } from "@/graphql/get-session-data";
 
 interface Props {
   params: {

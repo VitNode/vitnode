@@ -1,9 +1,9 @@
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
+import { FlatTree } from "@vitnode/frontend/helpers";
 
-import { ShowAdminNavPluginsObj } from "@/utils/graphql/hooks";
+import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
 import { ActionsTableNavDevPluginAdmin } from "./item/actions/actions";
-import { FlatTree } from "@/functions/flatten-tree";
 import { useItemNavDevPluginAdmin } from "./item/hooks/use-item-nav-dev-plugin-admin";
 
 export const ItemContentNavDevPluginAdmin = (

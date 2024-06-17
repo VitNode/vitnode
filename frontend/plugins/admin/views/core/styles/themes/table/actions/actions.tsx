@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { ChevronDown, Trash2, Upload } from "lucide-react";
 import * as React from "react";
 
-import { ShowAdminThemes } from "@/utils/graphql/hooks";
+import { ShowAdminThemes } from "@/graphql/hooks";
 import { DeleteThemeActionsAdmin } from "./delete/delete";
 import { DownloadThemeActionsAdmin } from "./download/download";
 import { EditThemeActionsAdmin } from "./edit/edit";

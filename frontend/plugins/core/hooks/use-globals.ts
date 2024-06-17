@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ShowCoreLanguages, ShowCoreThemes } from "@/utils/graphql/hooks";
+import { ShowCoreLanguages, ShowCoreThemes } from "@/graphql/hooks";
 import { ConfigType } from "@/config";
 
 interface Args {

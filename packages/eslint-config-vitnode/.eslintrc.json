@@ -6,6 +6,7 @@
     "project": "./tsconfig.json",
     "sourceType": "module"
   },
+  "ignorePatterns": ["node_modules", "dist", ".turbo", ".next"],
   "plugins": [
     "@typescript-eslint",
     "typescript-sort-keys",
@@ -19,6 +20,27 @@
     "plugin:import/warnings"
   ],
   "rules": {
+    "no-restricted-imports": [
+      "error",
+      {
+        "name": "next/link",
+        "message": "Please import from `@vitnode/frontend/navigation` instead."
+      },
+      {
+        "name": "drizzle-orm/mysql-core",
+        "message": "Please import from `drizzle-orm/pg-core` instead."
+      },
+      {
+        "name": "next/navigation",
+        "importNames": [
+          "redirect",
+          "permanentRedirect",
+          "useRouter",
+          "usePathname"
+        ],
+        "message": "Please import from `@vitnode/frontend/navigation` instead."
+      }
+    ],
     "no-console": "error",
     "newline-before-return": "warn",
     "@typescript-eslint/interface-name-prefix": "off",

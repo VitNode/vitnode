@@ -6,14 +6,14 @@ import {
   ShowAdminPluginsSortingColumnEnum,
   Admin__Core_Plugins__ShowQuery,
   Admin__Core_Plugins__ShowQueryVariables
-} from "@/utils/graphql/hooks";
+} from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Card } from "@/components/ui/card";
-import { fetcher } from "@/utils/graphql/fetcher";
+import { fetcher } from "@/graphql/fetcher";
 import { RebuildRequiredAdmin } from "@/plugins/admin/global/rebuild-required";
 import { ActionsPluginsAdmin } from "@/plugins/admin/views/core/plugins/actions/actions";
 import { PluginsCoreAdminView } from "@/plugins/admin/views/core/plugins/plugins-admin-view";
@@ -28,10 +28,7 @@ const getData = async (variables: Admin__Core_Plugins__ShowQueryVariables) => {
     Admin__Core_Plugins__ShowQueryVariables
   >({
     query: Admin__Core_Plugins__Show,
-    variables,
-    next: {
-      tags: ["Admin__Core_Plugins__Show"]
-    }
+    variables
   });
 
   return data;

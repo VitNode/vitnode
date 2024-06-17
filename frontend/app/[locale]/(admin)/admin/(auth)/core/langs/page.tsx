@@ -6,14 +6,14 @@ import {
   ShowCoreLanguagesSortingColumnEnum,
   Core_Languages__ShowQuery,
   Core_Languages__ShowQueryVariables
-} from "@/utils/graphql/hooks";
+} from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Card } from "@/components/ui/card";
-import { fetcher } from "@/utils/graphql/fetcher";
+import { fetcher } from "@/graphql/fetcher";
 import { ActionsLangsAdmin } from "@/plugins/admin/views/core/langs/actions/actions";
 import { RebuildRequiredAdmin } from "@/plugins/admin/global/rebuild-required";
 import { LangsCoreAdminView } from "@/plugins/admin/views/core/langs/langs-core-admin-view";

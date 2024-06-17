@@ -1,10 +1,10 @@
 import { ExternalLink } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { FlatTree } from "@vitnode/frontend/helpers";
 
-import { ShowCoreNav } from "@/utils/graphql/hooks";
+import { ShowCoreNav } from "@/graphql/hooks";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { ActionsTableNavAdmin } from "./actions/actions";
-import { FlatTree } from "@/functions/flatten-tree";
 
 interface Props {
   data: FlatTree<Omit<ShowCoreNav, "__typename">>;

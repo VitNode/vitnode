@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { Ban } from "lucide-react";
+import { removeSpecialCharacters } from "@vitnode/shared";
 
 import {
   DialogFooter,
@@ -20,8 +21,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { IconInput } from "@/components/icon/input/icon-input";
-import { ShowAdminNavPluginsObj } from "@/utils/graphql/hooks";
-import { removeSpecialCharacters } from "@/functions/remove-special-characters";
+import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
 import {
   Select,
   SelectContent,

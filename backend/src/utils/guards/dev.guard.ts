@@ -1,6 +1,5 @@
 import { CanActivate, Injectable } from "@nestjs/common";
-
-import { AccessDeniedError } from "../errors/access-denied-error";
+import { AccessDeniedError } from "@vitnode/backend";
 
 @Injectable()
 export class OnlyForDevelopment implements CanActivate {

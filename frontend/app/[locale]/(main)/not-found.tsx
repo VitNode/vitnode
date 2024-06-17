@@ -1,5 +1,5 @@
-import { getSessionData } from "@/functions/get-session-data";
 import { ErrorViewSSR } from "@/components/views/error-view-ssr";
+import { getSessionData } from "@/graphql/get-session-data";
 
 export default async function NotFoundPage() {
   const { theme_id } = await getSessionData();

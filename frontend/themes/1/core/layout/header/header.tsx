@@ -1,4 +1,5 @@
-import { Link } from "@/utils/i18n";
+import { Link } from "@vitnode/frontend/navigation";
+
 import { UserBar } from "./user-bar/user-bar";
 import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";
 import { LanguageSwitcher } from "@/components/switchers/language-switcher";

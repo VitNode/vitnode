@@ -2,9 +2,8 @@ import {
   Admin__Core_Plugins__Show__Item,
   Admin__Core_Plugins__Show__ItemQuery,
   Admin__Core_Plugins__Show__ItemQueryVariables
-} from "@/utils/graphql/hooks";
-import { fetcher, ErrorType } from "@/utils/graphql/fetcher";
-import { AdminCoreApiTags } from "@/plugins/admin/api-tags";
+} from "@/graphql/hooks";
+import { fetcher, ErrorType } from "@/graphql/fetcher";
 
 export const getPluginDataAdmin = async (
   variables: Admin__Core_Plugins__Show__ItemQueryVariables
@@ -15,11 +14,7 @@ export const getPluginDataAdmin = async (
       Admin__Core_Plugins__Show__ItemQueryVariables
     >({
       query: Admin__Core_Plugins__Show__Item,
-      variables,
-      cache: "force-cache",
-      next: {
-        tags: [AdminCoreApiTags.Admin__Core_Plugins__Show__Item]
-      }
+      variables
     });
 
     return { data };

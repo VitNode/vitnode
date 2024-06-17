@@ -1,15 +1,14 @@
 "use server";
 
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
+import { redirect } from "@vitnode/frontend/navigation";
 
 import {
   Core_Sessions__Sign_In,
   Core_Sessions__Sign_InMutation,
   Core_Sessions__Sign_InMutationVariables
-} from "@/utils/graphql/hooks";
-import { redirect } from "@/utils/i18n";
-import { fetcher } from "@/utils/graphql/fetcher";
-import { CoreApiTags } from "@/plugins/admin/api-tags";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const mutationApi = async (
   variables: Core_Sessions__Sign_InMutationVariables
@@ -22,8 +21,6 @@ export const mutationApi = async (
       query: Core_Sessions__Sign_In,
       variables
     });
-
-    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
   } catch (error) {
     return { error };
   }

@@ -7,6 +7,7 @@ import {
   User
 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Link } from "@vitnode/frontend/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -20,7 +21,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useSession } from "@/plugins/core/hooks/use-session";
 import { useSignOutAPI } from "@/plugins/core/hooks/sign/out/use-sign-out-api";
-import { Link } from "@/utils/i18n";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 
 export const AuthUserBar = () => {

@@ -1,9 +1,9 @@
 import { Element } from "html-react-parser";
 import * as React from "react";
+import { generateRandomString } from "@vitnode/shared";
+import { cn } from "@vitnode/frontend/helpers";
 
-import { generateRandomString } from "@/functions/generate-random-string";
 import { classNameCodeBlock, lowlight } from "../extensions/code/code";
-import { cn } from "@/functions/classnames";
 
 interface Node {
   type: "text";

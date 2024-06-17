@@ -5,9 +5,9 @@ import * as React from "react";
 import tippy, { Instance, Props } from "tippy.js";
 import { useTranslations } from "next-intl";
 import { Emoji } from "@emoji-mart/data";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { CONFIG } from "@/config";
-import { cn } from "@/functions/classnames";
 import { classPopover } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import {

@@ -2,10 +2,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import * as React from "react";
+import { zodInput } from "@vitnode/frontend/helpers";
 
 import { mutationApi } from "@/plugins/core/hooks/sign/in/mutation-api";
-import { zodInput } from "@/utils/zod";
-import { ErrorType } from "@/utils/graphql/fetcher";
+import { ErrorType } from "@/graphql/fetcher";
 
 export const useSignInAdminView = () => {
   const [error, setError] = React.useState<ErrorType | null>(null);

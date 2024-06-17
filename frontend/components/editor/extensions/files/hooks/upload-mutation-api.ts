@@ -1,14 +1,13 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 import {
   Core_Editor_Files__Upload,
   Core_Editor_Files__UploadMutation,
   Core_Editor_Files__UploadMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
-import { CoreApiTags } from "@/plugins/admin/api-tags";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const uploadMutationApi = async (formData: FormData) => {
   const file = formData.get("file") as File;
@@ -33,7 +32,7 @@ export const uploadMutationApi = async (formData: FormData) => {
       ]
     });
 
-    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
+    revalidatePath("/settings/files", "page");
 
     return { data };
   } catch (error) {

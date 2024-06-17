@@ -1,5 +1,5 @@
-import { useTranslations } from "next-intl";
 import { Home, KeyRound } from "lucide-react";
+import { Link } from "@vitnode/frontend/navigation";
 
 import {
   Card,
@@ -10,31 +10,30 @@ import {
   CardTitle
 } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
-import { Link } from "@/utils/i18n";
 
 export const FinishInstallConfigsView = () => {
-  const t = useTranslations("admin.configs.install.finish");
-
   return (
     <Card className="text-center">
       <CardHeader>
-        <CardTitle>{t("title", { name: "VitNode" })}</CardTitle>
-        <CardDescription>{t("desc")}</CardDescription>
+        <CardTitle>Welcome to VitNode!</CardTitle>
+        <CardDescription>Your website is ready.</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>{t("text")}</p>
+        <p>
+          The installation process is complete. You can now use your website.
+        </p>
       </CardContent>
       <CardFooter className="flex items-center justify-center gap-4">
         <Link href="/" className={buttonVariants()}>
-          <Home /> {t("buttons.home_page")}
+          <Home /> Home Page
         </Link>
         <Link
           href="/admin"
           className={buttonVariants({
-            variant: "secondary"
+            variant: "ghost"
           })}
         >
-          <KeyRound /> {t("buttons.admin_control_panel")}
+          <KeyRound /> Admin Control Panel
         </Link>
       </CardFooter>
     </Card>

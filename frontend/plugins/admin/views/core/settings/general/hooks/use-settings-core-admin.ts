@@ -3,10 +3,10 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
+import { zodInput } from "@vitnode/frontend/helpers";
 
 import { mutationApi } from "./mutation-api";
-import { zodInput } from "@/utils/zod";
-import { Core_Main_Settings__ShowQuery } from "@/utils/graphql/hooks";
+import { Core_Main_Settings__ShowQuery } from "@/graphql/hooks";
 
 export const useSettingsCoreAdmin = ({
   core_settings__show: data

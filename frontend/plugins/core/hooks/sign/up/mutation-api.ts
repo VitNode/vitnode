@@ -1,21 +1,17 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 import {
   Core_Members__Sign_Up,
   Core_Members__Sign_UpMutation,
   Core_Members__Sign_UpMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
-import { CoreApiTags } from "@/plugins/admin/api-tags";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
-interface Args {
-  variables: Core_Members__Sign_UpMutationVariables;
-  installPage?: boolean;
-}
-
-export const mutationApi = async ({ installPage, variables }: Args) => {
+export const mutationApi = async (
+  variables: Core_Members__Sign_UpMutationVariables
+) => {
   try {
     const { data } = await fetcher<
       Core_Members__Sign_UpMutation,
@@ -25,9 +21,7 @@ export const mutationApi = async ({ installPage, variables }: Args) => {
       variables
     });
 
-    if (installPage) {
-      revalidateTag(CoreApiTags.Core_Sessions__Authorization);
-    }
+    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {

@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import * as React from "react";
 
 import { Switch } from "@/components/ui/switch";
-import { ShowCoreLanguages } from "@/utils/graphql/hooks";
+import { ShowCoreLanguages } from "@/graphql/hooks";
 import { editMutationApi } from "./create-edit/hooks/edit-mutation-api";
 
 interface Props {

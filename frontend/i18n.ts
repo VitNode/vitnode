@@ -1,20 +1,36 @@
 import { getRequestConfig } from "next-intl/server";
 
-import { middlewareQueryApi } from "./plugins/core/hooks/middleware-query-api";
+import {
+  Core_Middleware__Show,
+  Core_Middleware__ShowQuery,
+  Core_Middleware__ShowQueryVariables
+} from "./graphql/hooks";
+import { fetcher } from "./graphql/fetcher";
 
 export default getRequestConfig(async ({ locale }) => {
-  const data = await middlewareQueryApi();
-  const defaultPlugins = [{ code: "core" }, { code: "admin" }];
+  let plugins: string[] = [];
+  try {
+    const {
+      data: {
+        core_middleware__show: { plugins: pluginsFromServer }
+      }
+    } = await fetcher<
+      Core_Middleware__ShowQuery,
+      Core_Middleware__ShowQueryVariables
+    >({
+      query: Core_Middleware__Show
+    });
+
+    plugins = pluginsFromServer;
+  } catch (e) {
+    plugins = ["core", "admin"];
+  }
 
   const messagesFormApps = await Promise.all(
-    (data
-      ? [...data.core_plugins__show, ...defaultPlugins]
-      : defaultPlugins
-    ).map(async plugin => {
+    plugins.map(async plugin => {
       try {
         return {
-          ...(await import(`./plugins/${plugin.code}/langs/${locale}.json`))
-            .default
+          ...(await import(`./plugins/${plugin}/langs/${locale}.json`)).default
         };
       } catch (e) {
         return {};

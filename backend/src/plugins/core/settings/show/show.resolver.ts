@@ -1,9 +1,8 @@
 import { Context, Query, Resolver } from "@nestjs/graphql";
+import { Ctx } from "@vitnode/backend";
 
 import { ShowSettingsService } from "./show.service";
 import { ShowSettingsObj } from "./dto/show.obj";
-
-import { Ctx } from "@/utils/types/context.type";
 
 @Resolver()
 export class ShowCoreSettingsResolver {

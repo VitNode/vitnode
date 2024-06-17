@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import * as React from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Pencil } from "lucide-react";
+import { Link } from "@vitnode/frontend/navigation";
 
 import {
   Tooltip,
@@ -11,7 +12,6 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import { Link } from "@/utils/i18n";
 import { buttonVariants } from "@/components/ui/button";
 import { DataTable } from "@/components/data-table/data-table";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
@@ -21,7 +21,7 @@ import { AdvancedFiltersUsersMembersAdmin } from "./filters/advanced/advanced-fi
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
 import { UsersMembersAdminViewProps } from "../users-members-admin-view";
-import { ShowAdminMembers } from "@/utils/graphql/hooks";
+import { ShowAdminMembers } from "@/graphql/hooks";
 
 interface UsersMembersAdminAPIDataType
   extends Pick<

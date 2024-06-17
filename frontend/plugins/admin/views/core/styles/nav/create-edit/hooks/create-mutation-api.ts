@@ -1,14 +1,13 @@
 "use server";
 
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 import {
   Admin__Core_Nav__Create,
   Admin__Core_Nav__CreateMutation,
   Admin__Core_Nav__CreateMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
-import { CoreApiTags } from "@/plugins/admin/api-tags";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const createMutationApi = async (
   variables: Admin__Core_Nav__CreateMutationVariables
@@ -22,8 +21,7 @@ export const createMutationApi = async (
       variables
     });
 
-    revalidateTag(CoreApiTags.Core_Sessions__Authorization);
-    revalidatePath("/admin/core/styles/nav", "page");
+    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {

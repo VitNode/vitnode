@@ -1,8 +1,7 @@
 import { ArgsType, Field } from "@nestjs/graphql";
 import { Transform } from "class-transformer";
 import { IsNotEmpty, MaxLength, MinLength } from "class-validator";
-
-import { TransformString } from "@/utils/types/database/text-language.type";
+import { TransformString } from "@vitnode/backend";
 
 @ArgsType()
 export class CreateAdminThemesArgs {

@@ -1,14 +1,13 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import * as React from "react";
 import "../_supressLogs";
 
 import { Toaster } from "@/components/ui/sonner";
 import { GlobalsContext } from "@/plugins/core/hooks/use-globals";
-import { Core_MiddlewareQuery } from "@/utils/graphql/hooks";
+import { Core_MiddlewareQuery } from "@/graphql/hooks";
 import { ConfigType } from "@/config";
 
 interface Props {
@@ -52,9 +51,6 @@ export const Providers = ({ children, config, data }: Props) => {
           {children}
           <Toaster closeButton />
         </NextThemesProvider>
-        {process.env.NEXT_PUBLIC_DEBUG && (
-          <ReactQueryDevtools initialIsOpen={false} />
-        )}
       </GlobalsContext.Provider>
     </QueryClientProvider>
   );

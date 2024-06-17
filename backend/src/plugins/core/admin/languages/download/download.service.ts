@@ -4,16 +4,16 @@ import { copyFile } from "fs/promises";
 
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
+import {
+  currentUnixDate,
+  generateRandomString,
+  removeSpecialCharacters
+} from "@vitnode/shared";
+import { NotFoundError, CustomError, User } from "@vitnode/backend";
 
 import { DownloadCoreAdminLanguagesArgs } from "./dto/download.args";
 
-import { NotFoundError } from "@/utils/errors/not-found-error";
-import { removeSpecialCharacters } from "@/functions/remove-special-characters";
-import { User } from "@/utils/decorators/user.decorator";
-import { generateRandomString } from "@/functions/generate-random-string";
-import { currentDate } from "@/functions/date";
 import { DatabaseService } from "@/database/database.service";
-import { CustomError } from "@/utils/errors/custom-error";
 import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
@@ -34,7 +34,7 @@ export class DownloadAdminCoreLanguageService {
     }
 
     // Create temp folder
-    const tempNameFolder = `${code}-download--${generateRandomString(5)}-${currentDate()}`;
+    const tempNameFolder = `${code}-download--${generateRandomString(5)}-${currentUnixDate()}`;
     const pathTemp = join(ABSOLUTE_PATHS.uploads.temp, "langs", tempNameFolder);
     if (!fs.existsSync(pathTemp)) {
       fs.mkdirSync(pathTemp, { recursive: true });
@@ -63,7 +63,7 @@ export class DownloadAdminCoreLanguageService {
     });
 
     const name = removeSpecialCharacters(
-      `${language.code}--${userId}-${generateRandomString(5)}-${currentDate()}`
+      `${language.code}--${userId}-${generateRandomString(5)}-${currentUnixDate()}`
     );
 
     // Create tgz

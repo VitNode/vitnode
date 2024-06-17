@@ -5,12 +5,21 @@ export interface ConfigType {
     };
     sticky: boolean;
   };
+  langs: {
+    code: string;
+    default: boolean;
+    enabled: boolean;
+  }[];
   rebuild_required: {
     langs: boolean;
     plugins: boolean;
     themes: boolean;
   };
   settings: {
+    email: {
+      color_primary: string;
+      color_primary_foreground: string;
+    };
     general: {
       site_name: string;
       site_short_name: string;
@@ -34,8 +43,24 @@ export const DEFAULT_CONFIG_DATA: ConfigType = {
     general: {
       site_name: "VitNode Community",
       site_short_name: "VitNode"
+    },
+    email: {
+      color_primary: "hsl(220, 74%, 50%)",
+      color_primary_foreground: "hsl(210, 40%, 98%)"
     }
-  }
+  },
+  langs: [
+    {
+      code: "en",
+      enabled: true,
+      default: true
+    },
+    {
+      code: "pl",
+      enabled: true,
+      default: false
+    }
+  ]
 };
 
 const ENVS = {

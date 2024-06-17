@@ -1,14 +1,14 @@
 import * as React from "react";
 import { cookies } from "next/headers";
 
-import { getSessionData } from "@/functions/get-session-data";
 import {
   Core_Sessions__Devices__Show,
   Core_Sessions__Devices__ShowQuery,
   Core_Sessions__Devices__ShowQueryVariables
-} from "@/utils/graphql/hooks";
+} from "@/graphql/hooks";
 import { DevicesSettingsViewProps } from "@/themes/1/core/views/settings/views/devices/devices-settings-view";
-import { fetcher } from "@/utils/graphql/fetcher";
+import { fetcher } from "@/graphql/fetcher";
+import { getSessionData } from "@/graphql/get-session-data";
 
 const getData = async () => {
   const { data } = await fetcher<

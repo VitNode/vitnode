@@ -1,17 +1,17 @@
 import * as React from "react";
 
-import { getSessionData } from "@/functions/get-session-data";
 import {
   Core_Members__Files__Show,
   ShowCoreFilesSortingColumnEnum,
   Core_Members__Files__ShowQuery,
   Core_Members__Files__ShowQueryVariables
-} from "@/utils/graphql/hooks";
+} from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
-import { fetcher } from "@/utils/graphql/fetcher";
+import { fetcher } from "@/graphql/fetcher";
+import { getSessionData } from "@/graphql/get-session-data";
 
 const getData = async (variables: Core_Members__Files__ShowQueryVariables) => {
   const { data } = await fetcher<
@@ -19,7 +19,8 @@ const getData = async (variables: Core_Members__Files__ShowQueryVariables) => {
     Core_Members__Files__ShowQueryVariables
   >({
     query: Core_Members__Files__Show,
-    variables
+    variables,
+    cache: "force-cache"
   });
 
   return data;

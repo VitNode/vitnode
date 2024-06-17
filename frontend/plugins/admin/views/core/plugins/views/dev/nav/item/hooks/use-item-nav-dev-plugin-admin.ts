@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ShowAdminNavPluginsObj } from "@/utils/graphql/hooks";
+import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
 
 interface Args {
   dataFromSSR: ShowAdminNavPluginsObj[];

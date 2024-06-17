@@ -14,7 +14,7 @@ import {
   FlatTree,
   WithChildren,
   flattenTree
-} from "../../../../functions/flatten-tree";
+} from "../../../../../packages/frontend/src/helpers/flatten-tree";
 
 function removeChildrenOf<T extends object>({
   ids,

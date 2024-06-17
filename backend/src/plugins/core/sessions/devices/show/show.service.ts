@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { desc, eq } from "drizzle-orm";
+import { User } from "@vitnode/backend";
 
 import { ShowCoreSessionDevicesObj } from "./dto/show.obj";
 
-import { User } from "@/utils/decorators/user.decorator";
 import {
   core_sessions,
   core_sessions_known_devices

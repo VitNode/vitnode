@@ -4,12 +4,12 @@ import { getTranslations } from "next-intl/server";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Card } from "@/components/ui/card";
 import { EmailSettingsAdminView } from "@/plugins/admin/views/core/settings/email/email-settings-admin-view";
-import { fetcher } from "@/utils/graphql/fetcher";
+import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Email_Settings__Show,
   Admin__Core_Email_Settings__ShowQuery,
   Admin__Core_Email_Settings__ShowQueryVariables
-} from "@/utils/graphql/hooks";
+} from "@/graphql/hooks";
 import { ActionsEmailSettingsAdmin } from "@/plugins/admin/views/core/settings/email/actions/actions";
 
 const getData = async () => {

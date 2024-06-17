@@ -1,12 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
+import { NotFoundError, CustomError } from "@vitnode/backend";
 
 import { DeleteAdminStaffAdministratorsArgs } from "./dto/delete.args";
 
-import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_admin_permissions } from "@/plugins/core/admin/database/schema/admins";
 import { DatabaseService } from "@/database/database.service";
-import { CustomError } from "@/utils/errors/custom-error";
 
 @Injectable()
 export class DeleteAdminStaffAdministratorsService {

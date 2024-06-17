@@ -1,5 +1,6 @@
 import { Download } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Link } from "@vitnode/frontend/navigation";
 
 import { CONFIG } from "@/config";
 import { buttonVariants } from "@/components/ui/button";
@@ -9,8 +10,7 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import { Admin__Core_Files__ShowQuery } from "@/utils/graphql/hooks";
-import { Link } from "@/utils/i18n";
+import { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
 import { DeleteActionFilesAdvancedCoreAdmin } from "./delete/delete";
 
 export const ActionsFilesAdvancedCoreAdmin = (

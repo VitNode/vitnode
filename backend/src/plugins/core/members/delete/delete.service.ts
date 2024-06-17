@@ -1,12 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
+import { NotFoundError, AccessDeniedError } from "@vitnode/backend";
 
 import { DeleteCoreMembersArgs } from "./dto/delete.args";
 
 import { core_users } from "@/plugins/core/admin/database/schema/users";
 import { DatabaseService } from "@/database/database.service";
-import { NotFoundError } from "@/utils/errors/not-found-error";
-import { AccessDeniedError } from "@/utils/errors/access-denied-error";
 
 @Injectable()
 export class DeleteCoreMembersService {

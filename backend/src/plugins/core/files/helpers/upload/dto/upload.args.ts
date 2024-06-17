@@ -1,7 +1,5 @@
 import { ArgsType, Field } from "@nestjs/graphql";
-
-import { FileUpload } from "@/utils/graphql-upload/upload";
-import { GraphQLUpload } from "@/utils/graphql-upload/graphql-upload";
+import { FileUpload, GraphQLUpload } from "@vitnode/backend";
 
 @ArgsType()
 export class UploadCoreFilesArgs {

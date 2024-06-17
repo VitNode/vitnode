@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
+import { NotFoundError } from "@vitnode/backend";
 
 import { DeleteAdminNavArgs } from "./dto/delete.args";
 
-import { NotFoundError } from "@/utils/errors/not-found-error";
 import {
   core_nav,
   core_nav_description,

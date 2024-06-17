@@ -1,6 +1,6 @@
 import { useSearchParams } from "next/navigation";
 
-import { SortDirectionEnum } from "@/utils/graphql/hooks";
+import { SortDirectionEnum } from "@/graphql/hooks";
 
 export function useGetSortByParamsAPI<T extends Record<string, unknown>>({
   constEnum

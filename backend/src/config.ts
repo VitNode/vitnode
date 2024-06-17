@@ -1,4 +1,4 @@
-import { promises } from "fs";
+import * as fs from "fs";
 import { join } from "path";
 
 import { parseFrontendUrlFromEnv } from "./functions/envs";
@@ -41,7 +41,7 @@ export const configForAppModule = () => {
   };
 
   if (!data.login_token_secret) {
-    throw new Error("Login token secret is not defined in .env file");
+    throw new Error("`LOGIN_TOKEN_SECRET` is not defined in .env file");
   }
 
   return data;
@@ -141,12 +141,21 @@ export interface ConfigType {
     };
     sticky: boolean;
   };
+  langs: {
+    code: string;
+    default: boolean;
+    enabled: boolean;
+  }[];
   rebuild_required: {
     langs: boolean;
     plugins: boolean;
     themes: boolean;
   };
   settings: {
+    email: {
+      color_primary: string;
+      color_primary_foreground: string;
+    };
     general: {
       site_name: string;
       site_short_name: string;
@@ -162,8 +171,8 @@ export const configPath = join(
   "config.json"
 );
 
-export const getConfigFile = async () => {
-  const file = await promises.readFile(configPath, "utf8");
+export const getConfigFile = () => {
+  const file = fs.readFileSync(configPath, "utf-8");
 
   return JSON.parse(file) as ConfigType;
 };

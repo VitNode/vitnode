@@ -3,10 +3,9 @@ import * as fs from "fs";
 
 import * as dotenv from "dotenv";
 
-import { objectToArray, updateObject } from "./update-object";
-
 import { ABSOLUTE_PATHS, getConfigFile } from "@/config";
 import { parseFrontendUrlFromEnv } from "@/functions/envs";
+import { objectToArray, updateObject } from "@/functions/update-object";
 
 dotenv.config({
   path: join(process.cwd(), "..", ".env")
@@ -93,8 +92,8 @@ const generateDefaultManifest = ({
   ]
 });
 
-export const generateManifest = async () => {
-  const config = await getConfigFile();
+export const generateManifest = () => {
+  const config = getConfigFile();
   const languages = fs
     .readdirSync(ABSOLUTE_PATHS.plugin({ code: "core" }).frontend.language)
     .map(fileName => fileName.replace(".json", ""));

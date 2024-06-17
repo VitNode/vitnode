@@ -8,13 +8,13 @@ import {
   ShowCoreFilesSortingColumnEnum,
   Admin__Core_Files__ShowQuery,
   Admin__Core_Files__ShowQueryVariables
-} from "@/utils/graphql/hooks";
+} from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
-import { fetcher } from "@/utils/graphql/fetcher";
-import { FilesAdvancedCoreAdminView } from "@/plugins/admin/views/core/advanced/files/files-advanced-core-adminpview";
+import { fetcher } from "@/graphql/fetcher";
+import { FilesAdvancedCoreAdminView } from "@/plugins/admin/views/core/advanced/files/files-advanced-core-admin-view";
 
 const getData = async (variables: Admin__Core_Files__ShowQueryVariables) => {
   const { data } = await fetcher<

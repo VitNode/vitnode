@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { Card, CardHeader } from "@/components/ui/card";
 import { Loader } from "@/components/loader";
-import { cn } from "@/functions/classnames";
 
 interface Props {
   className?: string;

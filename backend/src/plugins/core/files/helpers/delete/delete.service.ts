@@ -2,10 +2,10 @@ import { existsSync, unlink } from "fs";
 import { join } from "path";
 
 import { Injectable } from "@nestjs/common";
+import { CustomError } from "@vitnode/backend";
 
 import { DeleteCoreFilesArgs } from "./dto/delete.args";
 
-import { CustomError } from "@/utils/errors/custom-error";
 import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()

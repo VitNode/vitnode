@@ -42,7 +42,7 @@ export class Admin${name}Module {}
 };
 
 export const createFunctionsDatabase = () => {
-  return `// !! Do not remove and edit this file !!
+  return `// ! DO NOT REMOVE OR MODIFY THIS FILE!!!
 import { default as tables } from "./index";
 
 export const getTables = () => {
@@ -52,7 +52,7 @@ export const getTables = () => {
 };
 
 export const createConfigForDrizzle = ({ code }: { code: string }) => {
-  return `// !! Do not remove and edit this file !!
+  return `// ! DO NOT REMOVE OR MODIFY THIS FILE!!!
 import { defineConfig } from "drizzle-kit";
 
 import { DATABASE_ENVS } from "@/database/client";

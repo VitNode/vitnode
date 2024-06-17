@@ -1,11 +1,13 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import {
   Admin__Core_Languages__Download,
   Admin__Core_Languages__DownloadMutation,
   Admin__Core_Languages__DownloadMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const mutationApi = async (
   variables: Admin__Core_Languages__DownloadMutationVariables
@@ -18,6 +20,8 @@ export const mutationApi = async (
       query: Admin__Core_Languages__Download,
       variables
     });
+
+    revalidatePath("/admin/core/langs", "page");
 
     return { data };
   } catch (error) {

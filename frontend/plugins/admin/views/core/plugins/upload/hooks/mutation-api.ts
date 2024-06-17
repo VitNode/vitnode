@@ -6,8 +6,8 @@ import {
   Admin__Core_Plugins__Upload,
   Admin__Core_Plugins__UploadMutation,
   Admin__Core_Plugins__UploadMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const mutationApi = async (formData: FormData) => {
   try {
@@ -29,7 +29,6 @@ export const mutationApi = async (formData: FormData) => {
       ]
     });
 
-    revalidatePath("/admin/core/plugins", "page");
     revalidatePath("/", "layout");
 
     return { data };

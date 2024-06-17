@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { CONFIG } from "@/config";
-import { cn } from "@/functions/classnames";
 import { ThemeEditorViewEnum, ToolbarThemeEditor } from "./toolbar";
 import { ThemeEditorContext, ThemeEditorTab } from "./hooks/use-theme-editor";
 import { ContentThemeEditor } from "./content/content";
@@ -12,7 +12,7 @@ import {
   useThemeEditorApi
 } from "./hooks/use-theme-editor-api";
 import { Loader } from "@/components/loader";
-import { Core_Theme_Editor__ShowQuery } from "@/utils/graphql/hooks";
+import { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
 
 export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
   const { activeTheme, iframeRef, ...rest } = useThemeEditorApi(props);

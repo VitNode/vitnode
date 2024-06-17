@@ -4,8 +4,8 @@ import {
   Admin__Core_Plugins__Show,
   Admin__Core_Plugins__ShowQuery,
   Admin__Core_Plugins__ShowQueryVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const queryApi = async (
   variables: Admin__Core_Plugins__ShowQueryVariables

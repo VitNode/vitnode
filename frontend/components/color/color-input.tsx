@@ -3,12 +3,12 @@
 import * as React from "react";
 import { HslColor } from "react-colorful";
 import { useTranslations } from "next-intl";
+import { getHSLFromString, isColorBrightness } from "@vitnode/shared";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { PickerColor } from "./picker/picker";
 import { Button } from "../ui/button";
-import { cn } from "@/functions/classnames";
-import { getHSLFromString, isColorBrightness } from "@/functions/colors";
 
 interface Props {
   onChange: (value: string) => void;
@@ -39,7 +39,7 @@ export const ColorInput = ({
   const colorBrightness = color ? isColorBrightness(color) : false;
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={open} onOpenChange={setOpen} modal>
       <div className="flex gap-2">
         <PopoverTrigger asChild>
           <Button

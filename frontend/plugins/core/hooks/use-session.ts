@@ -4,7 +4,7 @@ import {
   AuthorizationCurrentUserObj,
   Core_Sessions__AuthorizationQuery,
   ShowCoreNav
-} from "@/utils/graphql/hooks";
+} from "@/graphql/hooks";
 
 interface Args {
   files: Core_Sessions__AuthorizationQuery["core_sessions__authorization"]["files"];

@@ -1,14 +1,15 @@
 import * as fs from "fs";
 
+import { CustomError } from "@vitnode/backend";
+
 import { ConfigType, configPath, getConfigFile } from "@/config";
-import { CustomError } from "@/utils/errors/custom-error";
 
 export const setRebuildRequired = async ({
   set
 }: {
   set: "langs" | "plugins" | "themes";
 }) => {
-  const config = await getConfigFile();
+  const config = getConfigFile();
 
   const newData: ConfigType = {
     ...config,

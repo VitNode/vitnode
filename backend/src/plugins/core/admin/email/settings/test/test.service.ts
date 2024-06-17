@@ -1,12 +1,23 @@
 import { Injectable } from "@nestjs/common";
 
+import { TestAdminEmailSettingsServiceArgs } from "./dto/test.args";
+
 import { SendAdminEmailService } from "../../send/send.service";
-import { SendAdminEmailSettingsServiceArgs } from "../../send/dto/send.args";
 
 @Injectable()
 export class TestAdminEmailSettingsService extends SendAdminEmailService {
-  async test(args: SendAdminEmailSettingsServiceArgs): Promise<string> {
-    await this.send(args);
+  async test({
+    from,
+    to,
+    subject,
+    message
+  }: TestAdminEmailSettingsServiceArgs): Promise<string> {
+    await this.send({
+      from,
+      to,
+      subject,
+      message
+    });
 
     return "Email sent!";
   }

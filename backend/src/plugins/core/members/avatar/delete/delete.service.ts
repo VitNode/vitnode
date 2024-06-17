@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
+import { User } from "@vitnode/backend";
 
-import { User } from "@/utils/decorators/user.decorator";
 import { DeleteCoreFilesService } from "@/plugins/core/files/helpers/delete/delete.service";
 import { core_files_avatars } from "@/plugins/core/admin/database/schema/users";
 import { DatabaseService } from "@/database/database.service";

@@ -1,9 +1,9 @@
 import { Mutation, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
+import { User, CurrentUser } from "@vitnode/backend";
 
 import { DeleteAvatarCoreMembersService } from "./delete.service";
 
-import { User, CurrentUser } from "@/utils/decorators/user.decorator";
 import { AuthGuards } from "@/utils/guards/auth.guard";
 
 @Resolver()

@@ -1,5 +1,7 @@
 {
   "core": {
+    "week": "Słabe",
+    "strong": "Silne",
     "reload_page": "Przeładuj stronę",
     "link_url_with_link": "Link URL: <link></link>",
     "yes": "Tak",

@@ -6,8 +6,8 @@ import {
   Admin__Core_Groups__Delete,
   Admin__Core_Groups__DeleteMutation,
   Admin__Core_Groups__DeleteMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const mutationApi = async (
   variables: Admin__Core_Groups__DeleteMutationVariables
@@ -21,7 +21,7 @@ export const mutationApi = async (
       variables
     });
 
-    revalidatePath("/admin/members/groups", "page");
+    revalidatePath("/", "layout");
 
     return { data };
   } catch (error) {

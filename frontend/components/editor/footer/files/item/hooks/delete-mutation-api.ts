@@ -1,11 +1,13 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import {
   Core_Editor_Files__Delete,
   Core_Editor_Files__DeleteMutation,
   Core_Editor_Files__DeleteMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const deleteMutationApi = async (
   variables: Core_Editor_Files__DeleteMutationVariables
@@ -18,6 +20,8 @@ export const deleteMutationApi = async (
       query: Core_Editor_Files__Delete,
       variables
     });
+
+    revalidatePath("/settings/files", "page");
 
     return { data };
   } catch (error) {

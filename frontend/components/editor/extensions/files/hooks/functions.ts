@@ -1,6 +1,6 @@
 import { JSONContent } from "@tiptap/react";
 
-import { TextLanguage } from "@/utils/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 import { FileStateEditor } from "../files";
 
 export const getFilesFromContent = (

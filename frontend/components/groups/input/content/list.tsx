@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { CheckIcon } from "lucide-react";
+import { cn } from "@vitnode/frontend/helpers";
 
-import { ShowAdminGroups } from "@/utils/graphql/hooks";
-import { cn } from "@/functions/classnames";
+import { ShowAdminGroups } from "@/graphql/hooks";
 import { CommandGroup, CommandItem } from "@/components/ui/command";
 import { GroupInputItem } from "../group-input";
 

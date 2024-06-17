@@ -1,12 +1,12 @@
-import { getSessionData } from "@/functions/get-session-data";
 import {
   Core_Theme_Editor__Show,
   Core_Theme_Editor__ShowQuery,
   Core_Theme_Editor__ShowQueryVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 import { ThemeEditorView } from "@/plugins/admin/views/theme_editor/theme-editor-view";
 import { ErrorAdminView } from "@/plugins/admin/global/error-admin-view";
+import { getSessionData } from "@/graphql/get-session-data";
 
 const getData = async () => {
   const { data } = await fetcher<

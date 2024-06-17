@@ -1,9 +1,10 @@
 import { join } from "path";
 import * as fs from "fs";
 
+import { NotFoundError } from "@vitnode/backend";
+
 import { ShowAdminManifestMetadataObj } from "./show/dto/show.obj";
 
-import { NotFoundError } from "@/utils/errors/not-found-error";
 import { ABSOLUTE_PATHS } from "@/config";
 
 export const getManifest = ({

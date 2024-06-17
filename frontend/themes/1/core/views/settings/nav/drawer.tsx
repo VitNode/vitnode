@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -7,7 +8,6 @@ import {
   DrawerContent,
   DrawerTrigger
 } from "@/components/ui/drawer";
-import { cn } from "@/functions/classnames";
 import { useSettingsView } from "@/plugins/core/hooks/settings/use-settings-view";
 import { ItemNavSettings } from "./item/item-nav-settings";
 

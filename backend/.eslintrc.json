@@ -4,11 +4,5 @@
   "env": {
     "node": true
   },
-  "ignorePatterns": [
-    ".eslintrc.json",
-    "node_modules",
-    "uploads",
-    "dist",
-    ".turbo"
-  ]
+  "ignorePatterns": ["uploads"]
 }

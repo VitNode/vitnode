@@ -6,7 +6,7 @@ import * as React from "react";
 import { InfinityIcon, ShieldAlert } from "lucide-react";
 
 import { DataTable } from "@/components/data-table/data-table";
-import { ShowAdminStaffModerators } from "@/utils/graphql/hooks";
+import { ShowAdminStaffModerators } from "@/graphql/hooks";
 import { DateFormat } from "@/components/date-format/date-format";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
 import { Badge } from "@/components/ui/badge";

@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
-import { Admin__Core_Email_Settings__ShowQuery } from "@/utils/graphql/hooks";
+import { Admin__Core_Email_Settings__ShowQuery } from "@/graphql/hooks";
 import { useEmailSettingsFormAdmin } from "./hooks/use-email-settings-form-admin";
 import {
   Form,
@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Separator } from "@/components/ui/separator";
+import { ColorInput } from "@/components/color/color-input";
 
 export const EmailSettingsAdminView = (
   props: Admin__Core_Email_Settings__ShowQuery
@@ -26,7 +27,15 @@ export const EmailSettingsAdminView = (
   return (
     <Form {...form}>
       <FormWrapper onSubmit={form.handleSubmit(onSubmit)}>
-        <div>text</div>
+        <FormField
+          control={form.control}
+          name="color_primary"
+          render={({ field }) => (
+            <FormFieldRender label={t("color_primary")}>
+              <ColorInput {...field} disableRemoveColor />
+            </FormFieldRender>
+          )}
+        />
 
         <div className="w-full space-y-2">
           <HeaderContent h2={t("smtp")} className="m-0" />

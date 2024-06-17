@@ -2,13 +2,13 @@ import * as fs from "fs";
 import { join } from "path";
 
 import { Injectable } from "@nestjs/common";
+import { CustomError } from "@vitnode/backend";
 
 import { CreateCoreAdminLanguagesArgs } from "./dto/create.args";
 
 import { ShowCoreLanguages } from "@/plugins/core/languages/show/dto/show.obj";
 import { core_languages } from "../../database/schema/languages";
 import { DatabaseService } from "@/database/database.service";
-import { CustomError } from "@/utils/errors/custom-error";
 import { setRebuildRequired } from "@/functions/rebuild-required";
 import { ABSOLUTE_PATHS } from "@/config";
 

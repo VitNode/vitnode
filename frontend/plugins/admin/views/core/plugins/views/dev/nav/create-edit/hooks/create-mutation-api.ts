@@ -6,8 +6,8 @@ import {
   Admin__Core_Plugins__Nav__Create,
   Admin__Core_Plugins__Nav__CreateMutation,
   Admin__Core_Plugins__Nav__CreateMutationVariables
-} from "@/utils/graphql/hooks";
-import { fetcher } from "@/utils/graphql/fetcher";
+} from "@/graphql/hooks";
+import { fetcher } from "@/graphql/fetcher";
 
 export const createMutationApi = async (
   variables: Admin__Core_Plugins__Nav__CreateMutationVariables

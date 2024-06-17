@@ -1,48 +1,26 @@
-import * as fs from "fs";
-
 import { Injectable } from "@nestjs/common";
-import { createTransport } from "nodemailer";
 
-import {
-  HelpersAdminEmailSettingsService,
-  ShowAdminEmailSettingsServiceObjWithPassword
-} from "../helpers.service";
-import { SendAdminEmailSettingsServiceArgs } from "./dto/send.args";
+import { MailService } from "../mail.service";
+import { EmailTemplate } from "../emails/email-template";
+
+interface Args {
+  from: string;
+  message: string;
+  subject: string;
+  to: string;
+}
 
 @Injectable()
-export class SendAdminEmailService extends HelpersAdminEmailSettingsService {
-  protected createTransport = ({ pool = false }: { pool?: boolean }) => {
-    const data = fs.readFileSync(this.path, "utf-8");
-    const config: ShowAdminEmailSettingsServiceObjWithPassword =
-      JSON.parse(data);
+export class SendAdminEmailService {
+  constructor(private readonly mailService: MailService) {}
 
-    return createTransport({
-      host: config.smtp_host,
-      port: config.smtp_port,
-      auth: {
-        user: config.smtp_user,
-        pass: config.smtp_password
-      },
-      secure: config.smtp_secure,
-      pool: pool ? true : undefined
-    });
-  };
-
-  async send({
-    to,
-    from,
-    subject,
-    message
-  }: SendAdminEmailSettingsServiceArgs): Promise<string> {
-    const transporter = this.createTransport({});
-
-    await transporter.sendMail({
-      from,
+  async send({ to, from, subject, message }: Args): Promise<string> {
+    await this.mailService.sendMail({
       to,
       subject,
-      text: message
+      template: EmailTemplate({ previewText: "test", children: message })
     });
 
-    return "Email sent!";
+    return "Email sent with Message!";
   }
 }

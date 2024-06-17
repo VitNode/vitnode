@@ -2,6 +2,7 @@ import * as fs from "fs";
 import { join } from "path";
 
 import { Injectable } from "@nestjs/common";
+import { CustomError } from "@vitnode/backend";
 
 import {
   PluginInfoJSONType,
@@ -12,7 +13,6 @@ import {
   createModuleSchema
 } from "./contents";
 
-import { CustomError } from "@/utils/errors/custom-error";
 import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()

@@ -4,19 +4,23 @@ import * as fs from "fs";
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 import { eq } from "drizzle-orm";
+import {
+  currentUnixDate,
+  generateRandomString,
+  removeSpecialCharacters
+} from "@vitnode/shared";
+import {
+  NotFoundError,
+  CustomError,
+  execShellCommand,
+  User
+} from "@vitnode/backend";
 
 import { DownloadAdminPluginsArgs } from "./dto/download.args";
 import { PluginInfoJSONType } from "../helpers/files/create/contents";
 
-import { NotFoundError } from "@/utils/errors/not-found-error";
-import { User } from "@/utils/decorators/user.decorator";
-import { currentDate } from "@/functions/date";
 import { core_plugins } from "../../database/schema/plugins";
-import { execShellCommand } from "@/functions/exec-shell-command";
 import { DatabaseService } from "@/database/database.service";
-import { CustomError } from "@/utils/errors/custom-error";
-import { removeSpecialCharacters } from "@/functions/remove-special-characters";
-import { generateRandomString } from "@/functions/generate-random-string";
 import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
@@ -49,7 +53,7 @@ export class DownloadAdminPluginsService {
 
   protected async prepareTgz({ code }: { code: string }): Promise<string> {
     // Create temp folder
-    const tempNameFolder = `${code}-download-${generateRandomString(5)}-${currentDate()}`;
+    const tempNameFolder = `${code}-download-${generateRandomString(5)}-${currentUnixDate()}`;
     const tempPath = join(this.tempPath, tempNameFolder);
     this.createFolders(tempPath);
 
@@ -161,7 +165,7 @@ export class DownloadAdminPluginsService {
 
     try {
       await execShellCommand(
-        `npx drizzle-kit generate --config src/plugins/${code}/admin/database/drizzle.config.ts`
+        `npx drizzle-kit up --config src/plugins/${code}/admin/database/drizzle.config.ts && npx drizzle-kit generate --config src/plugins/${code}/admin/database/drizzle.config.ts`
       );
     } catch (err) {
       throw new CustomError({
@@ -190,7 +194,7 @@ export class DownloadAdminPluginsService {
     const name = removeSpecialCharacters(
       `${code}${
         version && version_code ? version_code : plugin.version_code
-      }--${userId}-${generateRandomString(5)}-${currentDate()}`
+      }--${userId}-${generateRandomString(5)}-${currentUnixDate()}`
     );
     const tempPath = await this.prepareTgz({ code });
 

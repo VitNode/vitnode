@@ -3,6 +3,7 @@
 import { Plus, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -10,7 +11,6 @@ import {
   PopoverContent,
   PopoverTrigger
 } from "@/components/ui/popover";
-import { cn } from "@/functions/classnames";
 import { Loader } from "@/components/loader";
 import { IconInputProps } from "./content/content";
 import { IconLucideNames } from "../icon";

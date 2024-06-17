@@ -1,35 +1,41 @@
 import { useTranslations } from "next-intl";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import * as React from "react";
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import { useCreateEditCategoryBlogAdmin } from "./hooks/use-create-edit-category-blog-admin";
-import { TextLanguageInput } from "@/components/text-language-input";
 import {
   DialogDescription,
   DialogFooter,
   DialogHeader
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Editor } from "@/components/editor/editor";
-import { ShowBlogCategories } from "@/utils/graphql/hooks";
+import { ShowBlogCategories } from "@/graphql/hooks";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
-import { ColorInput } from "@/components/color/color-input";
+import { MainTabCreateEditCategoryBlogAdmin } from "./tabs/main";
+import { Tabs } from "@/components/tabs/tabs";
+import { TabsTrigger } from "@/components/tabs/tabs-trigger";
+import { PermissionsTabCreateEditCategoryBlogAdmin } from "./tabs/permissions";
 
 interface Props {
   data?: ShowBlogCategories;
+}
+
+enum TabsEnum {
+  MAIN = "main",
+  PERMISSIONS = "permissions"
 }
 
 export const CreateEditCategoryBlogAdmin = ({ data }: Props) => {
   const t = useTranslations("blog.admin.categories");
   const { convertText } = useTextLang();
   const { form, onSubmit } = useCreateEditCategoryBlogAdmin({ data });
+  const [activeTab, setActiveTab] = React.useState<TabsEnum>(TabsEnum.MAIN);
+
+  const tabsContent = {
+    [TabsEnum.MAIN]: <MainTabCreateEditCategoryBlogAdmin />,
+    [TabsEnum.PERMISSIONS]: <PermissionsTabCreateEditCategoryBlogAdmin />
+  };
 
   return (
     <>
@@ -40,52 +46,29 @@ export const CreateEditCategoryBlogAdmin = ({ data }: Props) => {
         )}
       </DialogHeader>
 
+      <Tabs>
+        <TabsTrigger
+          id="main"
+          active={activeTab === TabsEnum.MAIN}
+          onClick={() => setActiveTab(TabsEnum.MAIN)}
+        >
+          {t("create.tabs.main")}
+        </TabsTrigger>
+        <TabsTrigger
+          id="permissions"
+          active={activeTab === TabsEnum.PERMISSIONS}
+          onClick={() => setActiveTab(TabsEnum.PERMISSIONS)}
+        >
+          {t("create.tabs.permissions")}
+        </TabsTrigger>
+      </Tabs>
+
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col gap-4"
         >
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("create.name.label")}</FormLabel>
-                <FormControl>
-                  <TextLanguageInput {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel optional>{t("create.description.label")}</FormLabel>
-                <FormControl>
-                  <Editor {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="color"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel optional>{t("create.color.label")}</FormLabel>
-                <FormControl>
-                  <ColorInput {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          {tabsContent[activeTab]}
 
           <DialogFooter>
             <Button

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Loader } from "@/components/loader";
 import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
-import { ShowAdminPlugins } from "@/utils/graphql/hooks";
+import { ShowAdminPlugins } from "@/graphql/hooks";
 
 const ContentDeletePluginActionsAdmin = React.lazy(async () =>
   import("./content").then(module => ({

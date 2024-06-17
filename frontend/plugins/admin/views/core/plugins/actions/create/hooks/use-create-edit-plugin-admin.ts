@@ -3,14 +3,14 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import { usePathname, useRouter } from "@vitnode/frontend/navigation";
+import { zodInput } from "@vitnode/frontend/helpers";
 
 import { mutationCreateApi } from "./mutation-create-api";
 import { useDialog } from "@/components/ui/dialog";
-import { usePathname, useRouter } from "@/utils/i18n";
-import { zodInput } from "@/utils/zod";
-import { ShowAdminPlugins } from "@/utils/graphql/hooks";
+import { ShowAdminPlugins } from "@/graphql/hooks";
 import { mutationEditApi } from "./mutation-edit-api";
-import { ErrorType } from "@/utils/graphql/fetcher";
+import { ErrorType } from "@/graphql/fetcher";
 import { useSessionAdmin } from "@/plugins/admin/hooks/use-session-admin";
 
 export const codePluginRegex = /^[a-z0-9-]*$/;

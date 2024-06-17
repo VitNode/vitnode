@@ -3,6 +3,7 @@ import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import { NotFoundError, Ctx } from "@vitnode/backend";
 
 import {
   ColorsShowCoreThemeEditor,
@@ -12,9 +13,7 @@ import {
 
 import { getThemeId } from "../../settings/helpers/get-theme-id";
 import { DatabaseService } from "@/database/database.service";
-import { Ctx } from "@/utils/types/context.type";
 import { ABSOLUTE_PATHS } from "@/config";
-import { NotFoundError } from "@/utils/errors/not-found-error";
 import { keysFromCSSThemeEditor } from "../../admin/theme_editor/edit/edit.service";
 
 @Injectable()

@@ -1,5 +1,3 @@
-"use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
@@ -14,12 +12,12 @@ import {
 } from "@/components/ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "@/utils/i18n";
+
+import { useInstallVitnode } from "../../hooks/use-install-vitnode";
 
 export const FormLicenseInstallConfigs = () => {
-  const t = useTranslations("admin.configs.install.steps");
   const tCore = useTranslations("core");
-  const { push } = useRouter();
+  const { setCurrentStep } = useInstallVitnode();
 
   const formSchema = z.object({
     agree: z.boolean({
@@ -35,7 +33,7 @@ export const FormLicenseInstallConfigs = () => {
   });
 
   const onSubmit = () => {
-    push("/admin/install/database");
+    setCurrentStep(prev => prev + 1);
   };
 
   return (
@@ -55,13 +53,15 @@ export const FormLicenseInstallConfigs = () => {
                   onCheckedChange={field.onChange}
                 />
               </FormControl>
-              <FormLabel>{t("license.agree")}</FormLabel>
+              <FormLabel>
+                I agree to the terms of the license agreement.
+              </FormLabel>
             </FormItem>
           )}
         />
 
         <Button type="submit" disabled={!form.watch("agree")}>
-          {t("next_step")}
+          Next step
         </Button>
       </form>
     </Form>

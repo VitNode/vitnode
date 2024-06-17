@@ -1,12 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import { eq, sum } from "drizzle-orm";
+import { Ctx } from "@vitnode/backend";
 
 import { InternalAuthorizationCoreSessionsService } from "./internal/internal_authorization.service";
 import { AuthorizationCoreSessionsObj } from "./dto/authorization.obj";
 
 import { core_files } from "../../admin/database/schema/files";
 import { DatabaseService } from "@/database/database.service";
-import { Ctx } from "@/utils/types/context.type";
 
 @Injectable()
 export class AuthorizationCoreSessionsService {

@@ -2,16 +2,16 @@ import { Plus, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { JSONContent } from "@tiptap/react";
+import { cn } from "@vitnode/frontend/helpers";
 
 import { CONFIG } from "@/config";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/functions/classnames";
 import { IconItemListFilesFooterEditor } from "./icon";
 import { ContentItemListFilesFooterEditor } from "./content";
 import { deleteMutationApi } from "./hooks/delete-mutation-api";
 import { FileStateEditor } from "@/components/editor/extensions/files/files";
 import { useEditorState } from "@/components/editor/hooks/use-editor-state";
-import { TextLanguage } from "@/utils/graphql/hooks";
+import { TextLanguage } from "@/graphql/hooks";
 
 export interface ItemListFilesFooterEditorProps
   extends Omit<FileStateEditor, "file"> {

@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
+import { NotFoundError } from "@vitnode/backend";
 
 import { DeleteAdminFilesArgs } from "./dto/delete.args";
 
-import { NotFoundError } from "@/utils/errors/not-found-error";
 import { core_files } from "../../database/schema/files";
 import { DeleteCoreFilesService } from "@/plugins/core/files/helpers/delete/delete.service";
 import { DatabaseService } from "@/database/database.service";
