@@ -5,7 +5,6 @@ import { CreateAdminGroupsService } from "./create.service";
 import { CreateAdminGroupsArgs } from "./dto/create.args";
 import { ShowAdminGroups } from "../show/dto/show.obj";
 
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
 import { AdminPermissionGuards } from "@/utils/guards/admin-permission.guard";
 
 @Resolver()
