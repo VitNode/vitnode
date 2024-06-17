@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { FormSignUp } from "./form/form-sign-up";
 
-export default function SignUpView() {
+export const SignUpView = () => {
   const t = useTranslations("core.sign_up");
 
   return (
@@ -28,4 +28,4 @@ export default function SignUpView() {
       </Card>
     </div>
   );
-}
+};

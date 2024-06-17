@@ -1,18 +1,7 @@
 import * as React from "react";
 
-import { getSessionData } from "@/graphql/get-session-data";
+import { SignInView } from "@/plugins/core/views/views/auth/sign/in/sign-in-view";
 
 export default async function Page() {
-  const { theme_id } = await getSessionData();
-  const PageFromTheme: React.LazyExoticComponent<() => JSX.Element> =
-    React.lazy(async () =>
-      import(
-        `../../../../../themes/${theme_id}/core/views/auth/sign/in/sign-in-view`
-      ).catch(
-        async () =>
-          import("../../../../../themes/1/core/views/auth/sign/in/sign-in-view")
-      )
-    );
-
-  return <PageFromTheme />;
+  return <SignInView />;
 }

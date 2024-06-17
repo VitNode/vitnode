@@ -1,5 +1,5 @@
 import { HeaderOverviewSettings } from "./header/header-overview-settings";
 
-export default function OverviewSettingsView() {
+export const OverviewSettingsView = () => {
   return <HeaderOverviewSettings />;
-}
+};

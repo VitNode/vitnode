@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { FormSignIn } from "./form/form-sign-in";
 
-export default function SignInView() {
+export const SignInView = () => {
   const t = useTranslations("core.sign_in");
 
   return (
@@ -27,4 +27,4 @@ export default function SignInView() {
       </Card>
     </div>
   );
-}
+};
