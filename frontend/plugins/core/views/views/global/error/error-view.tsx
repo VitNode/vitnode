@@ -14,7 +14,7 @@ import {
 import { buttonVariants } from "@/components/ui/button";
 import { ErrorViewProps } from "@/components/views/error-view-ssr";
 
-export default function ErrorView({ className, code }: ErrorViewProps) {
+export const ErrorView = ({ className, code }: ErrorViewProps) => {
   const t = useTranslations("core");
 
   return (
@@ -47,4 +47,4 @@ export default function ErrorView({ className, code }: ErrorViewProps) {
       </div>
     </div>
   );
-}
+};

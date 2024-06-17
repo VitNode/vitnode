@@ -12,7 +12,7 @@ interface Props {
   copyright?: TextLanguage[];
 }
 
-export default function Layout({ children, copyright }: Props) {
+export const Layout = ({ children, copyright }: Props) => {
   const { convertText } = useTextLang();
 
   /**
@@ -38,4 +38,4 @@ export default function Layout({ children, copyright }: Props) {
       <QuickMenu />
     </>
   );
-}
+};

@@ -11,9 +11,7 @@ const ContentFilesSettings = React.lazy(async () =>
   }))
 );
 
-export default function FilesSettingsView(
-  props: Core_Members__Files__ShowQuery
-) {
+export const FilesSettingsView = (props: Core_Members__Files__ShowQuery) => {
   const t = useTranslations("core.settings.files");
 
   return (
@@ -32,4 +30,4 @@ export default function FilesSettingsView(
       </CardContent>
     </>
   );
-}
+};

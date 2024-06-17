@@ -11,7 +11,7 @@ import {
   SearchParamsPagination
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { fetcher } from "@/graphql/fetcher";
-import { getSessionData } from "@/graphql/get-session-data";
+import { FilesSettingsView } from "@/plugins/core/views/views/settings/views/files/files-settings-view";
 
 const getData = async (variables: Core_Members__Files__ShowQueryVariables) => {
   const { data } = await fetcher<
@@ -37,23 +37,7 @@ export default async function Page({ searchParams }: Props) {
     search: true,
     sortByEnum: ShowCoreFilesSortingColumnEnum
   });
-  const [{ theme_id }, data] = await Promise.all([
-    getSessionData(),
-    getData(variables)
-  ]);
+  const data = await getData(variables);
 
-  const PageFromTheme: React.LazyExoticComponent<
-    (props: Core_Members__Files__ShowQuery) => JSX.Element
-  > = React.lazy(async () =>
-    import(
-      `../../../../../../themes/${theme_id}/core/views/settings/views/files/files-settings-view`
-    ).catch(
-      async () =>
-        import(
-          "../../../../../../themes/1/core/views/settings/views/files/files-settings-view"
-        )
-    )
-  );
-
-  return <PageFromTheme {...data} />;
+  return <FilesSettingsView {...data} />;
 }
