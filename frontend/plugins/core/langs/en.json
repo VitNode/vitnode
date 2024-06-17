@@ -1,5 +1,7 @@
 {
   "core": {
+    "week": "Week",
+    "strong": "Strong",
     "reload_page": "Reload Page",
     "link_url_with_link": "Link URL: <link></link>",
     "yes": "Yes",

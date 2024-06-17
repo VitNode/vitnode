@@ -100,8 +100,8 @@ export const FormSignUp = () => {
                   {(fieldState.invalid || value.length > 0) && (
                     <div className="mt-1">
                       <div className="mb-2 flex justify-between text-xs font-semibold">
-                        <span>Weak</span>
-                        <span>Strong</span>
+                        <span>{t("week")}</span>
+                        <span>{t("strong")}</span>
                       </div>
                       <Progress
                         value={(100 / regexArray.length) * passRegexPassword}

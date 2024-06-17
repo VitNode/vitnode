@@ -18,7 +18,7 @@ export const mutationApi = async () => {
       query: Admin__Install__Create_Database
     });
 
-    revalidatePath("/admin/(configs)/install/", "layout");
+    revalidatePath("/admin/install", "page");
 
     return { data };
   } catch (error) {

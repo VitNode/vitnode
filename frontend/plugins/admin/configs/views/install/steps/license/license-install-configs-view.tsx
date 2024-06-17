@@ -1,12 +1,9 @@
-import { useTranslations } from "next-intl";
 import { Link } from "@vitnode/frontend/navigation";
 
 import { CardContent, CardFooter } from "@/components/ui/card";
 import { FormLicenseInstallConfigs } from "./form-license-install-configs";
 
 export const LicenseInstallConfigsView = () => {
-  const t = useTranslations("admin.configs.install.steps");
-
   return (
     <>
       <CardContent>
@@ -15,7 +12,7 @@ export const LicenseInstallConfigsView = () => {
           target="_blank"
           className="text-primary underline"
         >
-          {t("license.link")}
+          Click here to read the license agreement.
         </Link>
       </CardContent>
 

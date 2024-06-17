@@ -1,8 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { useTranslations } from "next-intl";
-import { useSelectedLayoutSegment } from "next/navigation";
 
 import { Steps, ItemStepProps } from "@/components/steps/steps";
 import {
@@ -11,49 +9,65 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
+import { InstallConfigsView } from "./steps/install-configs-view";
+import { InstallVitNodeContext } from "./hooks/use-install-vitnode";
+import { LicenseInstallConfigsView } from "./steps/license/license-install-configs-view";
+import { DatabaseInstallConfigsView } from "./steps/database/database-install-configs-view";
+import { AccountInstallConfigsView } from "./steps/account/account-install-configs-view";
+import { LayoutAdminInstallEnum } from "@/graphql/hooks";
+import { FinishInstallConfigsView } from "./finish/finish-install-config-view";
 
 interface Props {
-  children: React.ReactNode;
+  data: LayoutAdminInstallEnum;
 }
 
-export const LayoutInstallConfigsView = ({ children }: Props) => {
-  const t = useTranslations("admin.configs.install");
-  const segment = useSelectedLayoutSegment();
-
-  const stepsNumber: Record<string, number> = {
-    license: 2,
-    database: 3,
-    account: 4
-  };
-
-  const activeStep = segment ? stepsNumber[segment] : 1;
+export const LayoutInstallConfigsView = ({ data }: Props) => {
+  const [currentStep, setCurrentStep] = React.useState(0);
 
   const items: ItemStepProps[] = [
     {
       id: "welcome",
-      title: t("steps.welcome.title"),
-      description: t("steps.welcome.desc"),
-      checked: activeStep >= 2
+      title: "Welcome",
+      description: "Before you begin...",
+      checked: currentStep >= 1,
+      component: <InstallConfigsView />
     },
     {
       id: "license",
-      title: t("steps.license.title"),
-      description: t("steps.license.desc"),
-      checked: activeStep >= 3
+      title: "License",
+      description: "Read carefully",
+      checked: currentStep >= 2,
+      component: <LicenseInstallConfigsView />
     },
     {
       id: "database",
-      title: t("steps.database.title"),
-      description: t("steps.database.desc"),
-      checked: activeStep >= 4
+      title: "Database",
+      description: "Create schema and first records",
+      checked: currentStep >= 3,
+      component: <DatabaseInstallConfigsView />
     },
     {
       id: "account",
-      title: t("steps.account.title"),
-      description: t("steps.account.desc"),
-      checked: activeStep >= 5
+      title: "Admin Account",
+      description: "Create admin account",
+      checked: currentStep >= 4,
+      component: <AccountInstallConfigsView />
     }
   ];
+
+  React.useEffect(() => {
+    if (currentStep < 2) {
+      return;
+    }
+
+    if (data === LayoutAdminInstallEnum.account && currentStep < 3) {
+      setCurrentStep(3);
+    }
+  }, [data, currentStep]);
+
+  if (currentStep === items.length) {
+    return <FinishInstallConfigsView />;
+  }
 
   return (
     <Card className="hidden sm:flex">
@@ -61,14 +75,18 @@ export const LayoutInstallConfigsView = ({ children }: Props) => {
 
       <div className="grow">
         <CardHeader>
-          <CardDescription>{t("title", { name: "VitNode" })}</CardDescription>
-          <CardTitle>
-            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-            {/* @ts-expect-error */}
-            {t(`steps.${items.at(activeStep - 1)?.id}.title`)}
-          </CardTitle>
+          <CardDescription>Install VitNode</CardDescription>
+          <CardTitle>{items.at(currentStep)?.title}</CardTitle>
         </CardHeader>
-        {children}
+
+        <InstallVitNodeContext.Provider
+          value={{
+            currentStep,
+            setCurrentStep
+          }}
+        >
+          {items.at(currentStep)?.component}
+        </InstallVitNodeContext.Provider>
       </div>
     </Card>
   );
