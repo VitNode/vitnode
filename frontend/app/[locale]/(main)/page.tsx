@@ -38,14 +38,11 @@ export async function generateMetadata({
 }
 
 export default async function Page() {
-  const { default_plugin, theme_id } = await getSessionData();
+  const { default_plugin } = await getSessionData();
   const PageFromTheme: React.LazyExoticComponent<() => JSX.Element> =
-    React.lazy(async () =>
-      import(
-        `../../../themes/${theme_id}/${default_plugin}/default-page`
-      ).catch(
-        async () => import(`../../../themes/1/${default_plugin}/default-page`)
-      )
+    React.lazy(
+      async () =>
+        import(`../../../plugins/${default_plugin}/templates/default-page`)
     );
 
   return <PageFromTheme />;

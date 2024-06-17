@@ -2,12 +2,9 @@ import { join } from "path";
 import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { Ctx } from "@vitnode/backend";
 
 import { ShowSettingsObj } from "./dto/show.obj";
 import { ManifestWithLang } from "../settings.module";
-import { getThemeId } from "../helpers/get-theme-id";
 
 import { core_languages } from "../../admin/database/schema/languages";
 import { DatabaseService } from "@/database/database.service";
@@ -15,10 +12,7 @@ import { ABSOLUTE_PATHS, getConfigFile } from "@/config";
 
 @Injectable()
 export class ShowSettingsService {
-  constructor(
-    private readonly databaseService: DatabaseService,
-    private readonly configService: ConfigService
-  ) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   protected getManifest({
     langCodes
@@ -39,7 +33,7 @@ export class ShowSettingsService {
     });
   }
 
-  async show({ req }: Ctx): Promise<ShowSettingsObj> {
+  async show(): Promise<ShowSettingsObj> {
     const config = getConfigFile();
 
     const languages = await this.databaseService.db
@@ -63,12 +57,7 @@ export class ShowSettingsService {
       site_copyright: enabledLanguages.map(item => ({
         language_code: item.code,
         value: item.site_copyright
-      })),
-      theme_id: await getThemeId({
-        ctx: { req },
-        databaseService: this.databaseService,
-        configService: this.configService
-      })
+      }))
     };
   }
 }

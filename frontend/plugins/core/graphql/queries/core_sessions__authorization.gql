@@ -80,6 +80,5 @@ query Core_sessions__authorization {
       language_code
       value
     }
-    theme_id
   }
 }

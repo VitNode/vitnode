@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ShowCoreLanguages, ShowCoreThemes } from "@/graphql/hooks";
+import { ShowCoreLanguages } from "@/graphql/hooks";
 import { ConfigType } from "@/config";
 
 interface Args {
@@ -17,16 +17,12 @@ interface Args {
     | "time_24"
     | "timezone"
   >[];
-  themeId: number;
-  themes: Pick<ShowCoreThemes, "id" | "name">[];
 }
 
 export const GlobalsContext = React.createContext<Args>({
   languages: [],
   defaultLanguage: "",
-  themes: [],
-  config: {} as ConfigType,
-  themeId: 1
+  config: {} as ConfigType
 });
 
 export const useGlobals = () => React.useContext(GlobalsContext);

@@ -1,5 +1,3 @@
-import * as fs from "fs";
-
 import { Injectable } from "@nestjs/common";
 import { count } from "drizzle-orm";
 import { CustomError } from "@vitnode/backend";
@@ -11,10 +9,8 @@ import {
 } from "@/plugins/core/admin/database/schema/groups";
 import { core_admin_permissions } from "@/plugins/core/admin/database/schema/admins";
 import { core_moderators_permissions } from "../../database/schema/moderators";
-import { core_themes } from "../../database/schema/themes";
 import { core_nav, core_nav_name } from "../../database/schema/nav";
 import { DatabaseService } from "@/database/database.service";
-import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {
@@ -57,26 +53,6 @@ export class CreateDatabaseAdminInstallService {
         site_copyright: `Prawa autorskie © VitNode ${new Date().getFullYear()}`
       }
     ]);
-
-    // Create plugins
-    const coreVersions: Record<number, string> = JSON.parse(
-      fs.readFileSync(ABSOLUTE_PATHS.plugin({ code: "core" }).versions, "utf8")
-    );
-
-    const coreVersionCode = +Object.keys(coreVersions).sort().reverse()[0];
-    const coreVersion: string = coreVersions[coreVersionCode];
-
-    // Create default theme
-    await this.databaseService.db.insert(core_themes).values({
-      name: "Default Theme",
-      version: coreVersion,
-      version_code: coreVersionCode,
-      author: "VitNode",
-      author_url: "https://vitnode.com/",
-      support_url: "https://github.com/aXenDeveloper/vitnode/issues",
-      protected: true,
-      default: true
-    });
 
     // Create default groups
     const groupCount = await this.databaseService.db

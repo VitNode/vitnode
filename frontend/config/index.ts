@@ -13,7 +13,6 @@ export interface ConfigType {
   rebuild_required: {
     langs: boolean;
     plugins: boolean;
-    themes: boolean;
   };
   settings: {
     email: {
@@ -29,7 +28,6 @@ export interface ConfigType {
 
 export const DEFAULT_CONFIG_DATA: ConfigType = {
   rebuild_required: {
-    themes: false,
     langs: false,
     plugins: false
   },

@@ -7,7 +7,6 @@ import {
 } from "./sessions/sessions.module";
 import { AdminSettingsModule } from "./settings/settings.module";
 import { AdminPluginsModule } from "./plugins/plugins.module";
-import { AdminThemesModule } from "./themes/themes.module";
 import { AdminMetadataModule } from "./metadata/metadata.module";
 import { AdminFilesModule } from "./files/files.module";
 import { AdminGroupsModule } from "./groups/groups.module";
@@ -25,7 +24,6 @@ import { AdminEmailModule } from "./email/email.module";
     AdminSessionsModule,
     AdminSettingsModule,
     AdminPluginsModule,
-    AdminThemesModule,
     AdminMetadataModule,
     AdminFilesModule,
     AdminGroupsModule,

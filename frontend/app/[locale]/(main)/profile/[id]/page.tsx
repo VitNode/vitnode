@@ -2,14 +2,13 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import * as React from "react";
 
-import { ProfileViewProps } from "@/themes/1/core/views/profile/profile-view";
+import { ProfileView } from "@/plugins/core/templates/views/profile/profile-view";
 import {
   Core_Members__Profiles,
   Core_Members__ProfilesQuery,
   Core_Members__ProfilesQueryVariables
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
-import { getSessionData } from "@/graphql/get-session-data";
 
 const getData = async ({ id }: { id: string }) => {
   const { data } = await fetcher<
@@ -50,17 +49,5 @@ export default async function Page({ params: { id } }: Props) {
     notFound();
   }
 
-  const { theme_id } = await getSessionData();
-  const PageFromTheme: React.LazyExoticComponent<
-    (props: ProfileViewProps) => JSX.Element
-  > = React.lazy(async () =>
-    import(
-      `../../../../../themes/${theme_id}/core/views/profile/profile-view`
-    ).catch(
-      async () =>
-        import("../../../../../themes/1/core/views/profile/profile-view")
-    )
-  );
-
-  return <PageFromTheme data={data} />;
+  return <ProfileView data={data} />;
 }

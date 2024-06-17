@@ -32,10 +32,6 @@ export const configForAppModule = () => {
       known_device: {
         name: "vitnode-device",
         expiresIn: 365 // 1 year
-      },
-      theme_id: {
-        name: "vitnode-theme-id",
-        expiresIn: 365 // 1 year
       }
     }
   };
@@ -61,17 +57,7 @@ export const ABSOLUTE_PATHS = {
     temp: join(internalPaths.uploads, "temp")
   },
   frontend: {
-    init: internalPaths.frontend,
-    themes: join(internalPaths.frontend, "themes"),
-    theme: ({ theme_id }: { theme_id: number }) => ({
-      root: join(internalPaths.frontend, "themes", theme_id.toString()),
-      config: join(
-        internalPaths.frontend,
-        "themes",
-        theme_id.toString(),
-        "config.json"
-      )
-    })
+    init: internalPaths.frontend
   },
   backend: join(process.cwd(), "src"),
   plugins: internalPaths.plugins,
@@ -119,17 +105,15 @@ export const ABSOLUTE_PATHS = {
       ),
       default_page: join(
         internalPaths.frontend,
-        "themes",
-        "1",
+        "plugins",
         code,
+        "templates",
         "default-page.tsx"
       ),
       pages: join(internalPaths.frontend, "app", "[locale]", "(main)", code),
-      templates: join(internalPaths.frontend, "themes", "1", code),
+      templates: join(internalPaths.frontend, "plugins", code, "templates"),
       plugin: join(internalPaths.frontend, "plugins", code),
-      language: join(internalPaths.frontend, "plugins", code, "langs"),
-      theme: ({ theme_id }: { theme_id: number }) =>
-        join(internalPaths.frontend, "themes", theme_id.toString(), code)
+      language: join(internalPaths.frontend, "plugins", code, "langs")
     }
   })
 };
@@ -149,7 +133,6 @@ export interface ConfigType {
   rebuild_required: {
     langs: boolean;
     plugins: boolean;
-    themes: boolean;
   };
   settings: {
     email: {

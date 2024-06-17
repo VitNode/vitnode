@@ -7,7 +7,7 @@ import { ConfigType, configPath, getConfigFile } from "@/config";
 export const setRebuildRequired = async ({
   set
 }: {
-  set: "langs" | "plugins" | "themes";
+  set: "langs" | "plugins";
 }) => {
   const config = getConfigFile();
 

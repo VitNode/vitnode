@@ -1,20 +1,7 @@
 import * as React from "react";
 
-import { getSessionData } from "@/graphql/get-session-data";
+import { OverviewSettingsView } from "@/plugins/core/templates/views/settings/views/overview/overview-settings-view";
 
 export default async function Page() {
-  const { theme_id } = await getSessionData();
-  const PageFromTheme: React.LazyExoticComponent<() => JSX.Element> =
-    React.lazy(async () =>
-      import(
-        `../../../../../themes/${theme_id}/core/views/settings/views/overview/overview-settings-view`
-      ).catch(
-        async () =>
-          import(
-            "../../../../../themes/1/core/views/settings/views/overview/overview-settings-view"
-          )
-      )
-    );
-
-  return <PageFromTheme />;
+  return <OverviewSettingsView />;
 }
