@@ -2,8 +2,8 @@ import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { GqlExecutionContext } from "@nestjs/graphql";
 import { eq } from "drizzle-orm";
-
 import { Ctx } from "@vitnode/backend";
+
 import { DatabaseService } from "@/database/database.service";
 import { AuthorizationAdminSessionsService } from "@/plugins/core/admin/sessions/authorization/authorization.service";
 import { core_users } from "@/plugins/core/admin/database/schema/users";
@@ -48,9 +48,10 @@ export class AdminPermissionGuards implements CanActivate {
             or(eq(table.user_id, user.id), eq(table.group_id, user.group_id))
         });
 
-      if (!admin || !admin.permissions) return false;
+      if (!admin?.permissions) return false;
       const permissions = admin.permissions;
       if (permissions[permission] === true) return true;
+
       return false;
     } catch (e) {
       // Return true if auth is optional
