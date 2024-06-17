@@ -1,4 +1,5 @@
 import {
+  boolean,
   index,
   integer,
   pgTable,
@@ -11,12 +12,19 @@ import { relations } from "drizzle-orm";
 import { blog_articles } from "./articles";
 
 import { core_languages } from "@/plugins/core/admin/database/schema/languages";
+import { core_groups } from "@/plugins/core/admin/database/schema/groups";
 
 export const blog_categories = pgTable("blog_categories", {
   id: serial("id").primaryKey(),
   created: timestamp("created").notNull().defaultNow(),
   position: integer("position").notNull().default(0),
-  color: varchar("color", { length: 30 }).notNull().default("")
+  color: varchar("color", { length: 30 }).notNull().default(""),
+  can_all_read: boolean("can_all_read").notNull().default(true),
+  can_all_create: boolean("can_all_create").notNull().default(true),
+  can_all_reply: boolean("can_all_reply").notNull().default(true),
+  can_all_download_files: boolean("can_all_download_files")
+    .notNull()
+    .default(true)
 });
 
 export const blog_categories_relations = relations(
@@ -24,7 +32,8 @@ export const blog_categories_relations = relations(
   ({ many }) => ({
     articles: many(blog_articles),
     name: many(blog_categories_name),
-    description: many(blog_categories_description)
+    description: many(blog_categories_description),
+    permissions: many(blog_categories_permissions)
   })
 );
 
@@ -91,5 +100,30 @@ export const blog_categories_description_relations = relations(
       fields: [blog_categories_description.item_id],
       references: [blog_categories.id]
     })
+  })
+);
+
+export const blog_categories_permissions = pgTable(
+  "blog_categories_permissions",
+  {
+    id: serial("id").primaryKey(),
+    blog_id: integer("blog_id").references(() => blog_categories.id, {
+      onDelete: "cascade"
+    }),
+    group_id: integer("group_id").references(() => core_groups.id, {
+      onDelete: "cascade"
+    }),
+    can_read: boolean("can_read").notNull().default(false),
+    can_create: boolean("can_create").notNull().default(false),
+    can_reply: boolean("can_reply").notNull().default(false),
+    can_download_files: boolean("can_download_files").notNull().default(false)
+  },
+  table => ({
+    blog_id_idx: index("blog_categories_permissions_blog_id_idx").on(
+      table.blog_id
+    ),
+    group_id_idx: index("blog_categories_permissions_group_id_idx").on(
+      table.group_id
+    )
   })
 );

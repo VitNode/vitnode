@@ -27,6 +27,10 @@
         "message": "Please import from `@vitnode/frontend/navigation` instead."
       },
       {
+        "name": "drizzle-orm/mysql-core",
+        "message": "Please import from `drizzle-orm/pg-core` instead."
+      },
+      {
         "name": "next/navigation",
         "importNames": [
           "redirect",

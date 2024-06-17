@@ -8,6 +8,10 @@
       "categories": {
         "title": "Categories",
         "create": {
+          "tabs": {
+            "main": "Main",
+            "permissions": "Permissions"
+          },
           "title": "Create Category",
           "name": {
             "label": "Title"

@@ -1,19 +1,12 @@
 {
-  "version": "6",
+  "version": "7",
   "dialect": "postgresql",
   "entries": [
     {
       "idx": 0,
-      "version": "6",
-      "when": 1716390721901,
-      "tag": "0000_daily_mysterio",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
       "version": "7",
-      "when": 1717837267320,
-      "tag": "0001_material_echo",
+      "when": 1718618177227,
+      "tag": "0000_tranquil_cammi",
       "breakpoints": true
     }
   ]

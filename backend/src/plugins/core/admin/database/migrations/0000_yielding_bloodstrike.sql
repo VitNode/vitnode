@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS "core_files_avatars" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"dir_folder" varchar(255) NOT NULL,
 	"file_name" varchar(255) NOT NULL,
-	"created" integer NOT NULL,
+	"created" timestamp DEFAULT now() NOT NULL,
 	"file_size" integer NOT NULL,
 	"mimetype" varchar(255) NOT NULL,
 	"extension" varchar(32) NOT NULL,
@@ -193,6 +193,7 @@ CREATE TABLE IF NOT EXISTS "core_users" (
 	"last_name" varchar(255),
 	"birthday" timestamp,
 	"ip_address" varchar(255) NOT NULL,
+	"language" varchar(5) DEFAULT 'en' NOT NULL,
 	CONSTRAINT "core_users_name_seo_unique" UNIQUE("name_seo"),
 	CONSTRAINT "core_users_name_unique" UNIQUE("name"),
 	CONSTRAINT "core_users_email_unique" UNIQUE("email")
@@ -306,27 +307,27 @@ EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_admin_permissions_group_id_idx" ON "core_admin_permissions" ("group_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_admin_permissions_user_id_idx" ON "core_admin_permissions" ("user_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_admin_sessions_login_token_idx" ON "core_admin_sessions" ("login_token");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_admin_sessions_user_id_idx" ON "core_admin_sessions" ("user_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_files_user_id_idx" ON "core_files" ("user_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_files_using_file_id_idx" ON "core_files_using" ("file_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_groups_names_item_id_idx" ON "core_groups_names" ("item_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_groups_names_language_code_idx" ON "core_groups_names" ("language_code");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_languages_code_idx" ON "core_languages" ("code");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_languages_name_idx" ON "core_languages" ("name");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_moderators_permissions_group_id_idx" ON "core_moderators_permissions" ("group_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_moderators_permissions_user_id_idx" ON "core_moderators_permissions" ("user_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_nav_parent_id_idx" ON "core_nav" ("parent_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_nav_description_item_id_idx" ON "core_nav_description" ("item_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_nav_description_language_code_idx" ON "core_nav_description" ("language_code");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_nav_name_item_id_idx" ON "core_nav_name" ("item_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_nav_name_language_code_idx" ON "core_nav_name" ("language_code");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_plugins_code_idx" ON "core_plugins" ("code");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_plugins_name_idx" ON "core_plugins" ("name");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_sessions_user_id_idx" ON "core_sessions" ("user_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_sessions_known_devices_ip_address_idx" ON "core_sessions_known_devices" ("ip_address");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_users_name_seo_idx" ON "core_users" ("name_seo");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_users_name_idx" ON "core_users" ("name");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "core_users_email_idx" ON "core_users" ("email");
+CREATE INDEX IF NOT EXISTS "core_admin_permissions_group_id_idx" ON "core_admin_permissions" USING btree ("group_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_admin_permissions_user_id_idx" ON "core_admin_permissions" USING btree ("user_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_admin_sessions_login_token_idx" ON "core_admin_sessions" USING btree ("login_token");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_admin_sessions_user_id_idx" ON "core_admin_sessions" USING btree ("user_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_files_user_id_idx" ON "core_files" USING btree ("user_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_files_using_file_id_idx" ON "core_files_using" USING btree ("file_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_groups_names_item_id_idx" ON "core_groups_names" USING btree ("item_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_groups_names_language_code_idx" ON "core_groups_names" USING btree ("language_code");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_languages_code_idx" ON "core_languages" USING btree ("code");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_languages_name_idx" ON "core_languages" USING btree ("name");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_moderators_permissions_group_id_idx" ON "core_moderators_permissions" USING btree ("group_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_moderators_permissions_user_id_idx" ON "core_moderators_permissions" USING btree ("user_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_nav_parent_id_idx" ON "core_nav" USING btree ("parent_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_nav_description_item_id_idx" ON "core_nav_description" USING btree ("item_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_nav_description_language_code_idx" ON "core_nav_description" USING btree ("language_code");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_nav_name_item_id_idx" ON "core_nav_name" USING btree ("item_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_nav_name_language_code_idx" ON "core_nav_name" USING btree ("language_code");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_plugins_code_idx" ON "core_plugins" USING btree ("code");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_plugins_name_idx" ON "core_plugins" USING btree ("name");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_sessions_user_id_idx" ON "core_sessions" USING btree ("user_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_sessions_known_devices_ip_address_idx" ON "core_sessions_known_devices" USING btree ("ip_address");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_users_name_seo_idx" ON "core_users" USING btree ("name_seo");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_users_name_idx" ON "core_users" USING btree ("name");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "core_users_email_idx" ON "core_users" USING btree ("email");

@@ -1,4 +1,4 @@
-import { ArgsType, Field } from "@nestjs/graphql";
+import { ArgsType, Field, InputType, Int } from "@nestjs/graphql";
 import { Transform } from "class-transformer";
 import { ArrayMinSize, ValidateNested, IsArray } from "class-validator";
 import {
@@ -6,6 +6,42 @@ import {
   TextLanguageInput,
   TransformTextLanguageInput
 } from "@vitnode/backend";
+
+@InputType()
+class GroupsPermissionsCreatePluginCategories {
+  @Field(() => Int)
+  group_id: number;
+
+  @Field(() => Boolean)
+  can_read: boolean;
+
+  @Field(() => Boolean)
+  can_create: boolean;
+
+  @Field(() => Boolean)
+  can_reply: boolean;
+
+  @Field(() => Boolean)
+  can_download_files: boolean;
+}
+
+@InputType()
+export class PermissionsCreatePluginCategories {
+  @Field(() => Boolean)
+  can_all_read: boolean;
+
+  @Field(() => Boolean)
+  can_all_create: boolean;
+
+  @Field(() => Boolean)
+  can_all_reply: boolean;
+
+  @Field(() => Boolean)
+  can_all_download_files: boolean;
+
+  @Field(() => [GroupsPermissionsCreatePluginCategories])
+  groups: GroupsPermissionsCreatePluginCategories[];
+}
 
 @ArgsType()
 export class CreatePluginCategoriesArgs {
@@ -25,4 +61,7 @@ export class CreatePluginCategoriesArgs {
 
   @Field(() => String)
   color: string;
+
+  @Field(() => PermissionsCreatePluginCategories)
+  permissions: PermissionsCreatePluginCategories;
 }

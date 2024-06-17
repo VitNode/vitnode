@@ -6,7 +6,8 @@ import { ShowBlogCategories } from "@/plugins/blog/categories/show/dto/show.obj"
 import {
   blog_categories,
   blog_categories_description,
-  blog_categories_name
+  blog_categories_name,
+  blog_categories_permissions
 } from "../../database/schema/categories";
 import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
 import { DatabaseService } from "@/database/database.service";
@@ -21,11 +22,12 @@ export class CreateBlogCategoriesService {
   async create({
     color,
     description,
-    name
+    name,
+    permissions
   }: CreatePluginCategoriesArgs): Promise<ShowBlogCategories> {
     const categories = await this.databaseService.db
       .insert(blog_categories)
-      .values({ color })
+      .values({ color, ...permissions })
       .returning();
 
     const categoryId = categories[0].id;
@@ -49,6 +51,17 @@ export class CreateBlogCategoriesService {
         description: true
       }
     });
+
+    // Set permissions
+    if (permissions.groups.length > 0) {
+      await this.databaseService.db.insert(blog_categories_permissions).values(
+        permissions.groups.map(item => ({
+          blog_id: data[0].id,
+          group_id: item.group_id,
+          ...item
+        }))
+      );
+    }
 
     return data;
   }
