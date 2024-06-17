@@ -3,6 +3,7 @@ import { Link } from "@vitnode/frontend/navigation";
 import { cn } from "@vitnode/frontend/helpers";
 
 export interface ItemStepProps {
+  component: React.ReactNode;
   id: string;
   title: string;
   checked?: boolean;

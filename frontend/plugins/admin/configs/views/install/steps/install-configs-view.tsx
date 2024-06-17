@@ -1,22 +1,21 @@
-import { useTranslations } from "next-intl";
-import { Link } from "@vitnode/frontend/navigation";
-
 import { CardContent, CardFooter } from "@/components/ui/card";
-import { buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
+import { useInstallVitnode } from "../hooks/use-install-vitnode";
 
 export const InstallConfigsView = () => {
-  const t = useTranslations("admin.configs.install");
+  const { setCurrentStep } = useInstallVitnode();
 
   return (
     <>
       <CardContent>
-        <p>{t("steps.welcome.text", { name: "VitNode" })}</p>
+        Welcome to the installation wizard for VitNode. This wizard will guide
+        you through the installation process.
       </CardContent>
 
       <CardFooter>
-        <Link href="/admin/install/license" className={buttonVariants()}>
-          {t("steps.next_step")}
-        </Link>
+        <Button onClick={() => setCurrentStep(prev => prev + 1)}>
+          Next step
+        </Button>
       </CardFooter>
     </>
   );

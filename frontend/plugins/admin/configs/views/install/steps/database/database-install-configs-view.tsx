@@ -1,15 +1,11 @@
-import { useTranslations } from "next-intl";
-
 import { CardContent, CardFooter } from "@/components/ui/card";
 import { SubmitDatabaseInstallConfigs } from "./submit-database-install-configs";
 
 export const DatabaseInstallConfigsView = () => {
-  const t = useTranslations("admin.configs.install.steps.database");
-
   return (
     <>
       <CardContent>
-        <p>{t("text")}</p>
+        <p>Now VitNode needs to create default records in your database.</p>
       </CardContent>
 
       <CardFooter className="flex flex-col items-start gap-4">
