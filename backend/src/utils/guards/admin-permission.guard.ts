@@ -5,7 +5,7 @@ import { DatabaseService } from "@/database/database.service";
 import { eq } from "drizzle-orm";
 import { core_users } from "@/plugins/core/admin/database/schema/users";
 import { Reflector } from "@nestjs/core";
-import { Ctx } from "../types/context.type";
+import { Ctx } from "@vitnode/backend";
 
 @Injectable()
 export class AdminPermissionGuards implements CanActivate {
@@ -34,8 +34,7 @@ export class AdminPermissionGuards implements CanActivate {
         context.getHandler()
       );
 
-      const { req } = ctx.getContext();
-      const userId = req.user.id;
+      const userId = ctx.getContext().user.id;
       const user = await this.databaseService.db.query.core_users.findFirst({
         where: eq(core_users.id, userId)
       });
