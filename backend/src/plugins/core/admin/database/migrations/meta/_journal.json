@@ -1,19 +1,12 @@
 {
-  "version": "6",
+  "version": "7",
   "dialect": "postgresql",
   "entries": [
     {
       "idx": 0,
-      "version": "6",
-      "when": 1717093167312,
-      "tag": "0000_fine_supernaut",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
       "version": "7",
-      "when": 1717837200014,
-      "tag": "0001_married_big_bertha",
+      "when": 1718618173631,
+      "tag": "0000_yielding_bloodstrike",
       "breakpoints": true
     }
   ]

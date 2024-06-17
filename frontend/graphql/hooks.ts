@@ -145,6 +145,14 @@ export type GroupUser = {
   name: Array<TextLanguage>;
 };
 
+export type GroupsPermissionsCreatePluginCategories = {
+  can_create: Scalars['Boolean']['input'];
+  can_download_files: Scalars['Boolean']['input'];
+  can_read: Scalars['Boolean']['input'];
+  can_reply: Scalars['Boolean']['input'];
+  group_id: Scalars['Int']['input'];
+};
+
 export type HslColor = {
   __typename?: 'HslColor';
   h: Scalars['Int']['output'];
@@ -235,6 +243,7 @@ export type MutationAdmin__Blog_Categories__CreateArgs = {
   color: Scalars['String']['input'];
   description: Array<TextLanguageInput>;
   name: Array<TextLanguageInput>;
+  permissions: PermissionsCreatePluginCategories;
 };
 
 
@@ -572,6 +581,14 @@ export type PageInfo = {
   hasPreviousPage: Scalars['Boolean']['output'];
   startCursor?: Maybe<Scalars['Int']['output']>;
   totalCount: Scalars['Float']['output'];
+};
+
+export type PermissionsCreatePluginCategories = {
+  can_all_create: Scalars['Boolean']['input'];
+  can_all_download_files: Scalars['Boolean']['input'];
+  can_all_read: Scalars['Boolean']['input'];
+  can_all_reply: Scalars['Boolean']['input'];
+  groups: Array<GroupsPermissionsCreatePluginCategories>;
 };
 
 export type Query = {
@@ -1734,6 +1751,7 @@ export type Admin__Blog_Categories__CreateMutationVariables = Exact<{
   description: Array<TextLanguageInput> | TextLanguageInput;
   name: Array<TextLanguageInput> | TextLanguageInput;
   color: Scalars['String']['input'];
+  permissions: PermissionsCreatePluginCategories;
 }>;
 
 
@@ -2923,11 +2941,12 @@ export const Admin_Core_Themes__Show = gql`
 }
     `;
 export const Admin__Blog_Categories__Create = gql`
-    mutation Admin__blog_categories__create($description: [TextLanguageInput!]!, $name: [TextLanguageInput!]!, $color: String!) {
+    mutation Admin__blog_categories__create($description: [TextLanguageInput!]!, $name: [TextLanguageInput!]!, $color: String!, $permissions: PermissionsCreatePluginCategories!) {
   admin__blog_categories__create(
     description: $description
     name: $name
     color: $color
+    permissions: $permissions
   ) {
     id
   }
