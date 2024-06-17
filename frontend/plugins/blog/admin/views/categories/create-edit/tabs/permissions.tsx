@@ -18,10 +18,6 @@ export const PermissionsTabCreateEditCategoryBlogAdmin = () => {
             <PermissionsTable
               permissions={[
                 {
-                  id: "view",
-                  title: "View"
-                },
-                {
                   id: "read",
                   title: "Read"
                 },

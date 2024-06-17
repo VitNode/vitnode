@@ -56,6 +56,10 @@ export const LayoutInstallConfigsView = ({ data }: Props) => {
   ];
 
   React.useEffect(() => {
+    if (data === LayoutAdminInstallEnum.finish) {
+      setCurrentStep(4);
+    }
+
     if (currentStep < 2) {
       return;
     }

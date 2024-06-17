@@ -25,7 +25,6 @@ export const useCreateEditCategoryBlogAdmin = ({ data }: Args) => {
     description: zodInput.languageInput,
     color: zodInput.string,
     permissions: z.object({
-      can_all_view: z.boolean(),
       can_all_read: z.boolean(),
       can_all_create: z.boolean(),
       can_all_reply: z.boolean(),
@@ -33,7 +32,6 @@ export const useCreateEditCategoryBlogAdmin = ({ data }: Args) => {
       groups: z.array(
         z.object({
           group_id: z.number(),
-          can_view: z.boolean(),
           can_read: z.boolean(),
           can_create: z.boolean(),
           can_reply: z.boolean(),
@@ -50,7 +48,6 @@ export const useCreateEditCategoryBlogAdmin = ({ data }: Args) => {
       description: data?.description ?? [],
       color: "",
       permissions: {
-        can_all_view: false,
         can_all_read: false,
         can_all_create: false,
         can_all_reply: false,
@@ -63,17 +60,13 @@ export const useCreateEditCategoryBlogAdmin = ({ data }: Args) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     let error = false;
     if (data) {
-      const mutation = await mutationCreateApi({
-        ...values
-      });
+      const mutation = await mutationCreateApi(values);
 
       if (mutation.error) {
         error = true;
       }
     } else {
-      const mutation = await mutationCreateApi({
-        ...values
-      });
+      const mutation = await mutationCreateApi(values);
 
       if (mutation.error) {
         error = true;
