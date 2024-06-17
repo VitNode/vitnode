@@ -7,7 +7,7 @@ RUN apk add --no-cache libc6-compat
 RUN apk update
 # Set working directory
 WORKDIR /app
-RUN npm i -g turbo@~2.0.3
+RUN npm i -g turbo@~2.0.4
 COPY . .
 RUN turbo telemetry disable
 RUN turbo prune backend --docker

@@ -4,11 +4,12 @@ import { CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { Core_Sessions__Devices__ShowQuery } from "@/graphql/hooks";
 import { ContentDevicesSettings } from "./content";
 
-interface Props extends Core_Sessions__Devices__ShowQuery {
+export interface DevicesSettingsViewProps
+  extends Core_Sessions__Devices__ShowQuery {
   loginToken: string;
 }
 
-export const DevicesSettingsView = (props: Props) => {
+export const DevicesSettingsView = (props: DevicesSettingsViewProps) => {
   const t = useTranslations("core.settings.devices");
 
   return (
