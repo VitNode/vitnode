@@ -68,13 +68,7 @@ export class DownloadAdminPluginsService {
     fs.cpSync(backendSource, backendPath, { recursive: true });
 
     // Copy frontend files
-    const frontendPaths = [
-      "admin_pages",
-      "pages",
-      "plugin",
-      "templates",
-      "pages_container"
-    ];
+    const frontendPaths = ["admin_pages", "pages", "plugin", "pages_container"];
     frontendPaths.forEach(path => {
       this.copyFiles({
         destination: join(frontendPath, path),
