@@ -5,6 +5,7 @@
     "target": "ESNext",
     "module": "CommonJS",
     "outDir": "dist",
+    "declaration": true,
     "experimentalDecorators": true,
     "strictNullChecks": false
   },
