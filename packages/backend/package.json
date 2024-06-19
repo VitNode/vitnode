@@ -1,5 +1,10 @@
 {
-  "name": "@vitnode/backend",
+  "name": "vitnode-backend",
+  "version": "0.0.1",
+  "homepage": "https://vitnode.com/",
+  "repository": {
+    "url": "https://github.com/aXenDeveloper/vitnode/"
+  },
   "scripts": {
     "build": "tsc",
     "dev": "tsc -w",
@@ -7,7 +12,7 @@
     "lint:fix": "eslint . --fix"
   },
   "main": "./dist/index.js",
-  "types": "./src/index.ts",
+  "types": "./dist/index.d.ts",
   "devDependencies": {
     "@nestjs/common": "^10.3.9",
     "@nestjs/graphql": "^12.1.1",
