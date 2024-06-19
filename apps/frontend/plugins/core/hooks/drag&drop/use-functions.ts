@@ -7,14 +7,9 @@ import {
 } from "@dnd-kit/core";
 import * as React from "react";
 import { arrayMove } from "@dnd-kit/sortable";
+import { FlatTree, WithChildren, flattenTree } from "@vitnode/frontend/helpers";
 
 import { useProjection } from "./use-projection";
-
-import {
-  FlatTree,
-  WithChildren,
-  flattenTree
-} from "../../../../../packages/frontend/src/helpers/flatten-tree";
 
 function removeChildrenOf<T extends object>({
   ids,
