@@ -4,3 +4,4 @@ export * from "./functions";
 export * from "./utils";
 export * from "./decorators";
 export * from "./main";
+export * from "./app.module";
