@@ -12,13 +12,13 @@
   "scripts": {
     "build": "cross-env TURBO_TELEMETRY_DISABLED=1 turbo build",
     "dev": "turbo dev",
-    "email:dev": "cd backend && pnpm email:dev",
+    "email:dev": "cd apps/backend && pnpm email:dev",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
     "start": "turbo start",
     "preinstall": "npx only-allow pnpm",
-    "config:init": "cd frontend && pnpm config:init && cd ..",
-    "codegen": "cd backend && pnpm codegen && cd ..",
+    "config:init": "cd apps/frontend && pnpm config:init && cd ../..",
+    "codegen": "cd apps/backend && pnpm codegen && cd ../..",
     "docker:dev": "docker-compose -f ./docker-compose-dev.yml -p vitnode-dev up -d",
     "docker:prod": "sh docker-prod.sh",
     "docker:clear": "sudo docker system prune -a"
