@@ -114,9 +114,6 @@ importers:
       '@types/bcrypt':
         specifier: ^5.0.2
         version: 5.0.2
-      '@types/cookie-parser':
-        specifier: ^1.4.7
-        version: 1.4.7
       '@types/express':
         specifier: ^4.17.21
         version: 4.17.21
@@ -141,9 +138,6 @@ importers:
       class-validator:
         specifier: ^0.14.1
         version: 0.14.1
-      cookie-parser:
-        specifier: ^1.4.6
-        version: 1.4.6
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -481,6 +475,9 @@ importers:
       class-validator:
         specifier: ^0.14.1
         version: 0.14.1
+      cookie-parser:
+        specifier: ^1.4.6
+        version: 1.4.6
       drizzle-orm:
         specifier: ^0.31.2
         version: 0.31.2(@types/pg@8.11.6)(@types/react@18.3.3)(pg@8.12.0)(react@18.3.1)
@@ -503,6 +500,9 @@ importers:
       '@types/busboy':
         specifier: ^1.5.4
         version: 1.5.4
+      '@types/cookie-parser':
+        specifier: ^1.4.7
+        version: 1.4.7
       '@types/express':
         specifier: ^4.17.21
         version: 4.17.21

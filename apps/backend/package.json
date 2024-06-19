@@ -52,17 +52,14 @@
     "@swc/cli": "^0.3.12",
     "@swc/core": "^1.6.1",
     "@types/bcrypt": "^5.0.2",
-    "@types/cookie-parser": "^1.4.7",
     "@types/express": "^4.17.21",
     "@types/node": "^20.14.2",
     "@types/nodemailer": "^6.4.15",
     "@types/pg": "^8.11.6",
     "@types/react": "^18.3.3",
-    "vitnode-backend": "workspace:*",
     "@vitnode/shared": "workspace:*",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
-    "cookie-parser": "^1.4.6",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "drizzle-kit": "^0.22.7",
@@ -73,6 +70,7 @@
     "react-email": "^2.1.4",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vitnode-backend": "workspace:*"
   }
 }
