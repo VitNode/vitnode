@@ -14,8 +14,13 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "devDependencies": {
+    "@apollo/server": "^4.10.4",
+    "@nestjs/apollo": "^12.1.0",
     "@nestjs/common": "^10.3.9",
     "@nestjs/graphql": "^12.1.1",
+    "@nestjs/jwt": "^10.2.0",
+    "@nestjs/schedule": "^4.0.2",
+    "@nestjs/serve-static": "^4.0.2",
     "@types/busboy": "^1.5.4",
     "@types/cookie-parser": "^1.4.7",
     "@types/express": "^4.17.21",
