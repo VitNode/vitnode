@@ -1,10 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
 import { ConfigService } from "@nestjs/config";
-import { Ctx } from "vitnode-backend";
+import { Ctx, DatabaseService } from "vitnode-backend";
 
 import { core_sessions } from "@/plugins/core/admin/database/schema/sessions";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class SignOutCoreSessionsService {

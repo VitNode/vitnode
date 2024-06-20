@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { DatabaseService } from "vitnode-backend";
 
 import { CreateAdminNavArgs } from "./dto/create.args";
 
@@ -9,7 +10,6 @@ import {
 } from "../../database/schema/nav";
 import { ShowCoreNav } from "@/plugins/core/nav/show/dto/show.obj";
 import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class CreateAdminNavService {

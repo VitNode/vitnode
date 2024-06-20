@@ -2,12 +2,12 @@ import { join } from "path";
 import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
+import { DatabaseService } from "vitnode-backend";
 
 import { ShowSettingsObj } from "./dto/show.obj";
 import { ManifestWithLang } from "../settings.module";
 
 import { core_languages } from "../../admin/database/schema/languages";
-import { DatabaseService } from "@/database/database.service";
 import { ABSOLUTE_PATHS, getConfigFile } from "@/config";
 
 @Injectable()

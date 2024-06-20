@@ -3,14 +3,14 @@ import { and, count, eq } from "drizzle-orm";
 import {
   inputPaginationCursor,
   outputPagination,
-  SortDirectionEnum
+  SortDirectionEnum,
+  DatabaseService
 } from "vitnode-backend";
 
 import { ShowCoreNavArgs } from "./dto/show.args";
 import { ShowCoreNavObj } from "./dto/show.obj";
 
 import { core_nav } from "@/plugins/core/admin/database/schema/nav";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class ShowCoreNavService {

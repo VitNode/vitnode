@@ -2,11 +2,11 @@ import { Injectable } from "@nestjs/common";
 import { Cron, CronExpression } from "@nestjs/schedule";
 import { and, lte } from "drizzle-orm";
 import { ConfigService } from "@nestjs/config";
+import { DatabaseService } from "vitnode-backend";
 
 import { core_admin_sessions } from "../admin/database/schema/admins";
 
 import { core_sessions } from "@/plugins/core/admin/database/schema/sessions";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class CoreSessionsCron {

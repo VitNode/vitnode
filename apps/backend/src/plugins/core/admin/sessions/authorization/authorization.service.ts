@@ -9,7 +9,8 @@ import {
   AccessDeniedError,
   getUserAgentData,
   getUserIp,
-  Ctx
+  Ctx,
+  DatabaseService
 } from "vitnode-backend";
 
 import {
@@ -18,7 +19,6 @@ import {
 } from "./dto/authorization.obj";
 
 import { AuthorizationCurrentUserObj } from "@/plugins/core/sessions/authorization/dto/authorization.obj";
-import { DatabaseService } from "@/database/database.service";
 import { getCoreInfo } from "../../settings/functions/get-core-info";
 import { ABSOLUTE_PATHS } from "@/config";
 import { ConfigPlugin } from "../../plugins/plugins.module";

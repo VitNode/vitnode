@@ -3,13 +3,13 @@ import { join } from "path";
 
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import { DatabaseService } from "vitnode-backend";
 
 import { EditAdminManifestMetadataObj } from "./dto/edit.args";
 import { ShowAdminManifestMetadataObj } from "../show/dto/show.obj";
 import { getManifest } from "../functions";
 
 import { core_languages } from "../../../database/schema/languages";
-import { DatabaseService } from "@/database/database.service";
 import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()

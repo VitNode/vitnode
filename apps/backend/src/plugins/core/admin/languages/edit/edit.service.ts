@@ -1,11 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
-import { NotFoundError } from "vitnode-backend";
+import { NotFoundError, DatabaseService } from "vitnode-backend";
 
 import { EditCoreAdminLanguagesArgs } from "./dto/edit.args";
 
 import { core_languages } from "@/plugins/core/admin/database/schema/languages";
-import { DatabaseService } from "@/database/database.service";
 import { ShowCoreLanguages } from "@/plugins/core/languages/show/dto/show.obj";
 
 @Injectable()

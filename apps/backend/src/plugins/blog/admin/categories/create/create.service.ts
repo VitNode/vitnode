@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { DatabaseService } from "vitnode-backend";
 
 import { CreatePluginCategoriesArgs } from "./dto/create.args";
 
@@ -10,7 +11,6 @@ import {
   blog_categories_permissions
 } from "../../database/schema/categories";
 import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class CreateBlogCategoriesService {

@@ -2,14 +2,13 @@ import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
 import { eq, ne } from "drizzle-orm";
-import { NotFoundError, CustomError } from "vitnode-backend";
+import { NotFoundError, CustomError, DatabaseService } from "vitnode-backend";
 
 import { ShowAdminPlugins } from "../show/dto/show.obj";
 import { EditAdminPluginsArgs } from "./dto/edit.args";
 import { ConfigPlugin } from "../plugins.module";
 
 import { core_plugins } from "../../database/schema/plugins";
-import { DatabaseService } from "@/database/database.service";
 import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()

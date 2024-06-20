@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { desc, eq } from "drizzle-orm";
-import { User } from "vitnode-backend";
+import { User, DatabaseService } from "vitnode-backend";
 
 import { ShowCoreSessionDevicesObj } from "./dto/show.obj";
 
@@ -8,7 +8,6 @@ import {
   core_sessions,
   core_sessions_known_devices
 } from "@/plugins/core/admin/database/schema/sessions";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class ShowCoreSessionDevicesService {

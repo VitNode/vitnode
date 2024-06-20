@@ -11,6 +11,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from "@apollo/server/plugin
 
 import { Ctx } from "./utils";
 import { CoreModule } from "./core/core.module";
+import { DatabaseModule, DatabaseModuleArgs } from "./database/database.module";
 
 export const ABSOLUTE_PATHS_BACKEND = {
   schema: join(process.cwd(), "schema.gql"),
@@ -77,13 +78,14 @@ export interface VitNodePaths {
 }
 
 interface Args {
+  database: DatabaseModuleArgs;
   paths: VitNodePaths;
-  schemaDatabase: Record<string, unknown>;
+  // schemaDatabase: Record<string, unknown>;
 }
 
 @Module({})
 export class VitNodeCoreModule {
-  static register({ paths, schemaDatabase }: Args): DynamicModule {
+  static register({ paths, database }: Args): DynamicModule {
     return {
       module: VitNodeCoreModule,
       imports: [
@@ -106,6 +108,7 @@ export class VitNodeCoreModule {
           rootPath: ABSOLUTE_PATHS_BACKEND.uploads.public,
           serveRoot: "/public/"
         }),
+        DatabaseModule.register(database),
         CoreModule
       ]
     };

@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { count } from "drizzle-orm";
-import { AccessDeniedError } from "vitnode-backend";
+import { AccessDeniedError, DatabaseService } from "vitnode-backend";
 
 import {
   LayoutAdminInstallEnum,
@@ -11,7 +11,6 @@ import { core_users } from "@/plugins/core/admin/database/schema/users";
 import { core_sessions } from "@/plugins/core/admin/database/schema/sessions";
 import { core_admin_sessions } from "@/plugins/core/admin/database/schema/admins";
 import { core_languages } from "@/plugins/core/admin/database/schema/languages";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class LayoutAdminInstallService {

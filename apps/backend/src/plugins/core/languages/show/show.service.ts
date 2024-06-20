@@ -3,14 +3,14 @@ import { and, count, ilike } from "drizzle-orm";
 import {
   inputPaginationCursor,
   outputPagination,
-  SortDirectionEnum
+  SortDirectionEnum,
+  DatabaseService
 } from "vitnode-backend";
 
 import { ShowCoreLanguagesArgs } from "./dto/show.args";
 import { ShowCoreLanguagesObj } from "./dto/show.obj";
 
 import { core_languages } from "@/plugins/core/admin/database/schema/languages";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class ShowCoreLanguageService {

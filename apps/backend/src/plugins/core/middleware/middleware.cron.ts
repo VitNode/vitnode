@@ -2,9 +2,9 @@ import { Injectable } from "@nestjs/common";
 import { Cron, CronExpression } from "@nestjs/schedule";
 import { lte } from "drizzle-orm";
 import { ConfigService } from "@nestjs/config";
+import { DatabaseService } from "vitnode-backend";
 
 import { core_sessions_known_devices } from "@/plugins/core/admin/database/schema/sessions";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class CoreMiddlewareCron {

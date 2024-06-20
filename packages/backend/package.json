@@ -29,6 +29,7 @@
     "@types/http-errors": "^2.0.4",
     "@types/node": "^20.14.2",
     "@types/object-path": "^0.11.4",
+    "@types/pg": "^8.11.6",
     "busboy": "^1.6.0",
     "eslint-config-vitnode": "workspace:*",
     "http-errors": "^2.0.0",
@@ -42,6 +43,7 @@
     "drizzle-orm": "^0.31.2",
     "express": "^4.19.2",
     "graphql": "^16.8.2",
+    "pg": "^8.12.0",
     "ua-parser-js": "2.0.0-beta.3"
   }
 }

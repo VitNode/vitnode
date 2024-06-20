@@ -3,14 +3,14 @@ import { count } from "drizzle-orm";
 import {
   inputPaginationCursor,
   outputPagination,
-  SortDirectionEnum
+  SortDirectionEnum,
+  DatabaseService
 } from "vitnode-backend";
 
 import { ShowAdminStaffAdministratorsArgs } from "./dto/show.args";
 import { ShowAdminStaffAdministratorsObj } from "./dto/show.obj";
 
 import { core_admin_permissions } from "@/plugins/core/admin/database/schema/admins";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class ShowAdminStaffAdministratorsService {

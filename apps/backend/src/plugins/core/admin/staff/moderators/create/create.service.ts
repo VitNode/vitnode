@@ -1,11 +1,10 @@
 import { Injectable } from "@nestjs/common";
-import { CustomError } from "vitnode-backend";
+import { CustomError, DatabaseService } from "vitnode-backend";
 
 import { ShowAdminStaffModerators } from "../show/dto/show.obj";
 import { CreateAdminStaffModeratorsArgs } from "./dto/create.args";
 
 import { core_moderators_permissions } from "@/plugins/core/admin/database/schema/moderators";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class CreateAdminStaffModeratorsService {

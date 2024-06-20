@@ -1,12 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
-import { NotFoundError } from "vitnode-backend";
+import { NotFoundError, DatabaseService } from "vitnode-backend";
 
 import { DeleteAdminFilesArgs } from "./dto/delete.args";
 
 import { core_files } from "../../database/schema/files";
 import { DeleteCoreFilesService } from "@/plugins/core/files/helpers/delete/delete.service";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class DeleteAdminFilesService {

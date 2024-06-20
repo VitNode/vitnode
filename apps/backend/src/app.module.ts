@@ -3,20 +3,20 @@ import { join } from "path";
 import { Module } from "@nestjs/common";
 import { VitNodeCoreModule } from "vitnode-backend";
 
-import { DatabaseModule } from "./database/database.module";
 import { PluginsModule } from "./plugins/plugins.module";
-import { schemaDatabase } from "./database/schema";
+import { DATABASE_ENVS } from "./database/client";
 
 @Module({
   imports: [
-    PluginsModule,
-    DatabaseModule,
     VitNodeCoreModule.register({
       paths: {
         envFile: join(process.cwd(), "..", "..", ".env")
       },
-      schemaDatabase
-    })
+      database: {
+        config: DATABASE_ENVS
+      }
+    }),
+    PluginsModule
   ]
 })
 export class AppModule {}

@@ -3,12 +3,11 @@ import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { NotFoundError } from "vitnode-backend";
+import { NotFoundError, DatabaseService } from "vitnode-backend";
 
 import { EditAdminThemeEditorArgs, ThemeVariableInput } from "./dto/edit.args";
 
 import { ABSOLUTE_PATHS } from "@/config";
-import { DatabaseService } from "@/database/database.service";
 
 export const keysFromCSSThemeEditor = [
   "primary",
