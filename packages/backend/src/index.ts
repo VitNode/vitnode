@@ -6,4 +6,3 @@ export * from "./decorators";
 export * from "./main";
 export * from "./app.module";
 export * from "./database";
-export * from "./scripts";

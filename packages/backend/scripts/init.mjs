@@ -1,14 +1,21 @@
 #!/usr/bin/env node
-
-import { join } from "path";
-import * as fs from "fs";
-
+// @ts-check
 /* eslint-disable no-console */
 
-const copyDatabaseSchema = ({ corePluginPath }: { corePluginPath: string }) => {
-  const currentPathToSchema = join(
+import * as path from "path";
+import * as fs from "fs";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+/**
+ *
+ * @param {string} corePluginPath
+ */
+const copyDatabaseSchema = corePluginPath => {
+  const currentPathToSchema = path.join(
     __dirname,
-    "..",
     "..",
     "templates",
     "core",
@@ -21,12 +28,12 @@ const copyDatabaseSchema = ({ corePluginPath }: { corePluginPath: string }) => {
     );
   }
 
-  const userPathToSchema = join(corePluginPath, "admin", "database");
+  const userPathToSchema = path.join(corePluginPath, "admin", "database");
   fs.cpSync(currentPathToSchema, userPathToSchema, { recursive: true });
 };
 
 export const init = () => {
-  const corePluginPath = join(process.cwd(), "src", "plugins", "core");
+  const corePluginPath = path.join(process.cwd(), "src", "plugins", "core");
 
   if (!fs.existsSync(corePluginPath)) {
     console.error("Plugin 'core' not found in 'src/plugins' directory.");
@@ -34,7 +41,7 @@ export const init = () => {
   }
 
   // Copy the schema from the template to the core plugin
-  copyDatabaseSchema({ corePluginPath });
+  copyDatabaseSchema(corePluginPath);
 
   console.log("Hello, world!", process.cwd());
 };

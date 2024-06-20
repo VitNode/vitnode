@@ -6,7 +6,7 @@
     "url": "https://github.com/aXenDeveloper/vitnode/"
   },
   "bin": {
-    "vitnode-backend": "./dist/scripts/init.js"
+    "vitnode-backend": "./scripts/init.mjs"
   },
   "scripts": {
     "build": "tsc",
