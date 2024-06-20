@@ -17,7 +17,8 @@
     "migrate:forum": "drizzle-kit generate --config src/plugins/forum/admin/database/drizzle.config.ts",
     "migrate:admin": "drizzle-kit up --config src/plugins/core/admin/database/drizzle.config.ts && drizzle-kit generate --config src/plugins/core/admin/database/drizzle.config.ts",
     "migrate:blog": "drizzle-kit up --config src/plugins/blog/admin/database/drizzle.config.ts && drizzle-kit generate --config src/plugins/blog/admin/database/drizzle.config.ts",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "codegen": "graphql-codegen --config codegen.ts",
+    "test123": "vitnode-backend init"
   },
   "dependencies": {
     "@apollo/server": "^4.10.4",

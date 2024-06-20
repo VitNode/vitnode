@@ -5,12 +5,14 @@
   "repository": {
     "url": "https://github.com/aXenDeveloper/vitnode/"
   },
+  "bin": {
+    "vitnode-backend": "./dist/scripts/init.js"
+  },
   "scripts": {
     "build": "tsc",
     "dev": "tsc -w",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "migrate:admin": "drizzle-kit up --config src/drizzle.config.ts && drizzle-kit generate --config src/drizzle.config.ts"
+    "lint:fix": "eslint . --fix"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
