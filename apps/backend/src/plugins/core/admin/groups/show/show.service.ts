@@ -3,7 +3,8 @@ import { and, count, eq, ilike, inArray } from "drizzle-orm";
 import {
   inputPaginationCursor,
   outputPagination,
-  SortDirectionEnum
+  SortDirectionEnum,
+  DatabaseService
 } from "vitnode-backend";
 
 import { ShowAdminGroupsArgs } from "./dto/show.args";
@@ -14,7 +15,6 @@ import {
   core_groups_names
 } from "@/plugins/core/admin/database/schema/groups";
 import { core_users } from "../../database/schema/users";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class ShowAdminGroupsService {

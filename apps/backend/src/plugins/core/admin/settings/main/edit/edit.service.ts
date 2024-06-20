@@ -3,12 +3,12 @@ import { join } from "path";
 
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
+import { DatabaseService } from "vitnode-backend";
 
 import { EditAdminMainSettingsArgs } from "./dto/edit.args";
 import { EditAdminSettingsObj } from "./dto/edit.obj";
 
 import { core_languages } from "../../../database/schema/languages";
-import { DatabaseService } from "@/database/database.service";
 import { ManifestWithLang } from "@/plugins/core/settings/settings.module";
 import {
   ABSOLUTE_PATHS,

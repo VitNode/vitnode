@@ -10,13 +10,12 @@ import { join } from "path";
 import sharp from "sharp";
 import { Injectable } from "@nestjs/common";
 import { generateRandomString, removeSpecialCharacters } from "@vitnode/shared";
-import { CustomError } from "vitnode-backend";
+import { CustomError, DatabaseService } from "vitnode-backend";
 
 import { UploadCoreFilesArgs } from "./dto/upload.args";
 import { UploadCoreFilesObj } from "./dto/upload.obj";
 import { HelpersUploadCoreFilesService, acceptMimeTypeImage } from "./helpers";
 
-import { DatabaseService } from "@/database/database.service";
 import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()

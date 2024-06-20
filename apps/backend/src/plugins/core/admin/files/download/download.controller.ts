@@ -10,10 +10,10 @@ import {
   StreamableFile
 } from "@nestjs/common";
 import { Request, Response } from "express";
+import { DatabaseService } from "vitnode-backend";
 
 import { AuthorizationAdminSessionsService } from "../../sessions/authorization/authorization.service";
 import { InternalAuthorizationCoreSessionsService } from "@/plugins/core/sessions/authorization/internal/internal_authorization.service";
-import { DatabaseService } from "@/database/database.service";
 import { ABSOLUTE_PATHS } from "@/config";
 
 @Controller("files")

@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { count } from "drizzle-orm";
-import { CustomError } from "vitnode-backend";
+import { CustomError, DatabaseService } from "vitnode-backend";
 
 import { core_languages } from "@/plugins/core/admin/database/schema/languages";
 import {
@@ -10,7 +10,6 @@ import {
 import { core_admin_permissions } from "@/plugins/core/admin/database/schema/admins";
 import { core_moderators_permissions } from "../../database/schema/moderators";
 import { core_nav, core_nav_name } from "../../database/schema/nav";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {

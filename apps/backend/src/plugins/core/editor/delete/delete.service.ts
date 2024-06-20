@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { count, eq } from "drizzle-orm";
-import { AccessDeniedError, User } from "vitnode-backend";
+import { AccessDeniedError, User, DatabaseService } from "vitnode-backend";
 
 import { DeleteCoreEditorArgs } from "./dto/delete.args";
 
@@ -9,7 +9,6 @@ import {
   core_files,
   core_files_using
 } from "../../admin/database/schema/files";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class DeleteCoreEditorService {

@@ -1,9 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { sql } from "drizzle-orm";
+import { DatabaseService } from "vitnode-backend";
 
 import { SignUpStatsAdminMembers } from "./dto/stats.obj";
-
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class StatsAdminMembersService {

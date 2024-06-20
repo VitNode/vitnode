@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { and, count, eq, ilike, or } from "drizzle-orm";
 import {
+  DatabaseService,
   inputPaginationCursor,
   outputPagination,
   SortDirectionEnum,
@@ -14,7 +15,6 @@ import {
   core_files_using,
   core_files
 } from "../../admin/database/schema/files";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class ShowCoreFilesService {

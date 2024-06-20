@@ -3,14 +3,14 @@ import { and, count, eq, ilike, or } from "drizzle-orm";
 import {
   inputPaginationCursor,
   outputPagination,
-  SortDirectionEnum
+  SortDirectionEnum,
+  DatabaseService
 } from "vitnode-backend";
 
 import { ShowAdminFilesArgs } from "./dto/show.args";
 import { ShowAdminFilesObj } from "./dto/show.obj";
 
 import { core_files, core_files_using } from "../../database/schema/files";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class ShowAdminFilesService {

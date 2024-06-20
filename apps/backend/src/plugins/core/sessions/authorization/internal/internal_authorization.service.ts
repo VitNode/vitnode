@@ -8,12 +8,12 @@ import {
   getUserAgentData,
   getUserIp,
   User,
-  Ctx
+  Ctx,
+  DatabaseService
 } from "vitnode-backend";
 
 import { core_sessions_known_devices } from "@/plugins/core/admin/database/schema/sessions";
 import { DeviceSignInCoreSessionsService } from "../../sign_in/device.service";
-import { DatabaseService } from "@/database/database.service";
 import { core_users } from "@/plugins/core/admin/database/schema/users";
 
 @Injectable()

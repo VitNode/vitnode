@@ -1,8 +1,7 @@
 import { Injectable } from "@nestjs/common";
+import { DatabaseService } from "vitnode-backend";
 
 import { ShowCorePluginsObj } from "./dto/show.obj";
-
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class ShowCorePluginsService {

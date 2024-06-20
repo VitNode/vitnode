@@ -3,14 +3,14 @@ import { count } from "drizzle-orm";
 import {
   inputPaginationCursor,
   outputPagination,
-  SortDirectionEnum
+  SortDirectionEnum,
+  DatabaseService
 } from "vitnode-backend";
 
 import { ShowBlogCategoriesArgs } from "./dto/show.args";
 import { ShowBlogCategoriesObj } from "./dto/show.obj";
 
 import { blog_categories } from "../../admin/database/schema/categories";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class ShowBlogCategoriesService {

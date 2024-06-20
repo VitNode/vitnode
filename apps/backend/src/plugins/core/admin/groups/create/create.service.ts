@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { DatabaseService } from "vitnode-backend";
 
 import { ShowAdminGroups } from "../show/dto/show.obj";
 import { CreateAdminGroupsArgs } from "./dto/create.args";
@@ -8,7 +9,6 @@ import {
   core_groups_names
 } from "@/plugins/core/admin/database/schema/groups";
 import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class CreateAdminGroupsService {

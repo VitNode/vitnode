@@ -1,11 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { Cron, CronExpression } from "@nestjs/schedule";
 import { desc, eq, lt, sql } from "drizzle-orm";
+import { DatabaseService } from "vitnode-backend";
 
 import { core_files_using, core_files } from "../admin/database/schema/files";
 import { DeleteCoreFilesService } from "./helpers/delete/delete.service";
-
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class CoreFilesCron {

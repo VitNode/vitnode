@@ -13,14 +13,14 @@ import {
   NotFoundError,
   CustomError,
   execShellCommand,
-  User
+  User,
+  DatabaseService
 } from "vitnode-backend";
 
 import { DownloadAdminPluginsArgs } from "./dto/download.args";
 import { PluginInfoJSONType } from "../helpers/files/create/contents";
 
 import { core_plugins } from "../../database/schema/plugins";
-import { DatabaseService } from "@/database/database.service";
 import { ABSOLUTE_PATHS } from "@/config";
 
 @Injectable()
