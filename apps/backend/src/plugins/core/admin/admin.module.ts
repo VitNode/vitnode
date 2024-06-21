@@ -12,7 +12,7 @@ import { AdminFilesModule } from "./files/files.module";
 import { AdminGroupsModule } from "./groups/groups.module";
 import { AdminLanguagesModule } from "./languages/languages.module";
 import { AdminMembersModule } from "./members/members.module";
-import { AdminNavModule } from "./nav/nav.module";
+// import { AdminNavModule } from "./nav/nav.module";
 import { AdminStaffModule } from "./staff/staff.module";
 import { AdminThemeEditorModule } from "./theme_editor/theme_editor.module";
 import { AdminEmailModule } from "./email/email.module";
@@ -29,7 +29,7 @@ import { AdminEmailModule } from "./email/email.module";
     AdminGroupsModule,
     AdminLanguagesModule,
     AdminMembersModule,
-    AdminNavModule,
+    // AdminNavModule,
     AdminStaffModule,
     AdminThemeEditorModule,
     AdminEmailModule

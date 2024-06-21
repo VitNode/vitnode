@@ -1,5 +1,6 @@
 import { ArgsType } from "@nestjs/graphql";
-import { PaginationArgs } from "vitnode-backend";
+
+import { PaginationArgs } from "../../../../utils";
 
 @ArgsType()
 export class ShowCoreNavArgs extends PaginationArgs {}

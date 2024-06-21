@@ -33,6 +33,7 @@
     "@types/object-path": "^0.11.4",
     "@types/pg": "^8.11.6",
     "busboy": "^1.6.0",
+    "class-transformer": "^0.5.1",
     "eslint-config-vitnode": "workspace:*",
     "http-errors": "^2.0.0",
     "object-path": "^0.11.8",

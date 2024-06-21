@@ -1,16 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import { and, count, eq } from "drizzle-orm";
-import {
-  inputPaginationCursor,
-  outputPagination,
-  SortDirectionEnum,
-  DatabaseService
-} from "vitnode-backend";
 
 import { ShowCoreNavArgs } from "./dto/show.args";
 import { ShowCoreNavObj } from "./dto/show.obj";
-
-import { core_nav } from "@/plugins/core/admin/database/schema/nav";
+import { DatabaseService } from "../../../database";
+import { inputPaginationCursor, outputPagination } from "../../../functions";
+import { core_nav } from "../../../templates/core/admin/database/schema/nav";
+import { SortDirectionEnum } from "../../../utils";
 
 @Injectable()
 export class ShowCoreNavService {
