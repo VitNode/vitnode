@@ -1,11 +1,10 @@
 import { UseGuards } from "@nestjs/common";
 import { Args, Query, Resolver } from "@nestjs/graphql";
+import { AdminAuthGuards } from "vitnode-backend";
 
 import { ShowAdminGroupsService } from "./show.service";
 import { ShowAdminGroupsObj } from "./dto/show.obj";
 import { ShowAdminGroupsArgs } from "./dto/show.args";
-
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
 
 @Resolver()
 export class ShowAdminGroupsResolver {

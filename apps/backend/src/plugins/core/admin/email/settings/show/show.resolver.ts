@@ -1,10 +1,9 @@
 import { Query, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
+import { AdminAuthGuards } from "vitnode-backend";
 
 import { ShowAdminEmailSettingsServiceObj } from "./dto/show.obj";
 import { ShowAdminEmailSettingsService } from "./show.service";
-
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
 
 @Resolver()
 export class ShowAdminEmailSettingsResolver {

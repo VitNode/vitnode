@@ -1,11 +1,10 @@
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
-import { CurrentUser, User } from "vitnode-backend";
+import { CurrentUser, User, AuthGuards, OptionalAuth } from "vitnode-backend";
 
 import { UploadCoreEditorService } from "./upload.service";
 import { UploadCoreEditorArgs } from "./dto/upload.args";
 
-import { AuthGuards, OptionalAuth } from "@/utils/guards/auth.guard";
 import { ShowCoreFiles } from "../../files/show/dto/show.obj";
 
 @Resolver()

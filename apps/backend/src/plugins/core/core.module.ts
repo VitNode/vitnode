@@ -24,6 +24,7 @@ import { CoreThemeEditorModule } from "./theme_editor/theme_editor.module";
     CoreMiddlewareModule,
     CorePluginsModule,
     CoreThemeEditorModule
-  ]
+  ],
+  providers: []
 })
 export class CoreModule {}

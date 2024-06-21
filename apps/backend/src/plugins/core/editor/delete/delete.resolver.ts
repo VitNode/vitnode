@@ -1,11 +1,9 @@
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
-import { CurrentUser, User } from "vitnode-backend";
+import { CurrentUser, User, AuthGuards } from "vitnode-backend";
 
 import { DeleteCoreEditorService } from "./delete.service";
 import { DeleteCoreEditorArgs } from "./dto/delete.args";
-
-import { AuthGuards } from "@/utils/guards/auth.guard";
 
 @Resolver()
 export class DeleteCoreEditorResolver {

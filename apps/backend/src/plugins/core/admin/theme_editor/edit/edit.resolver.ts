@@ -1,10 +1,9 @@
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
+import { AdminAuthGuards } from "vitnode-backend";
 
 import { EditAdminThemeEditorService } from "./edit.service";
 import { EditAdminThemeEditorArgs } from "./dto/edit.args";
-
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
 
 @Resolver()
 export class EditAdminThemeEditorResolver {

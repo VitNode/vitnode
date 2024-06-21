@@ -1,16 +1,25 @@
-import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
+import {
+  CanActivate,
+  ExecutionContext,
+  Inject,
+  Injectable
+} from "@nestjs/common";
 import { GqlExecutionContext } from "@nestjs/graphql";
 import { Reflector } from "@nestjs/core";
 
 import { Ctx } from "../context";
 
-import { InternalAuthorizationCoreSessionsService } from "../../core/sessions/authorization/internal/internal_authorization.service";
+import { User } from "../../decorators";
+
+interface IOAuthGuards {
+  authorization: (context: Ctx) => Promise<User>;
+}
 
 @Injectable()
 export class AuthGuards implements CanActivate {
   constructor(
     private readonly reflector: Reflector,
-    private readonly service: InternalAuthorizationCoreSessionsService
+    @Inject("IOAuthGuards") private readonly service: IOAuthGuards
   ) {}
 
   protected async getAuth({ req, res }: Ctx) {

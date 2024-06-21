@@ -14,7 +14,11 @@ export class AdminSessionsModule {}
 @Module({
   providers: [
     AuthorizationAdminSessionsResolver,
-    AuthorizationAdminSessionsService
+    AuthorizationAdminSessionsService,
+    {
+      provide: "IOAdminAuthGuards",
+      useClass: AuthorizationAdminSessionsService
+    }
   ],
   exports: [
     AuthorizationAdminSessionsResolver,

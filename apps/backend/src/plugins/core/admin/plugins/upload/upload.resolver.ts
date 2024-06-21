@@ -1,11 +1,10 @@
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
+import { AdminAuthGuards } from "vitnode-backend";
 
 import { UploadAdminPluginsService } from "./upload.service";
 import { UploadAdminPluginsArgs } from "./dto/upload.args";
 import { ShowAdminPlugins } from "../show/dto/show.obj";
-
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
 
 @Resolver()
 export class UploadAdminPluginsResolver {
