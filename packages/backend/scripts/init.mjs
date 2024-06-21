@@ -17,6 +17,7 @@ const copyDatabaseSchema = corePluginPath => {
   const currentPathToSchema = path.join(
     __dirname,
     "..",
+    "src",
     "templates",
     "core",
     "admin",
@@ -24,7 +25,7 @@ const copyDatabaseSchema = corePluginPath => {
   );
   if (!fs.existsSync(currentPathToSchema)) {
     throw new Error(
-      "Database schema not found in 'templates/core/admin/database' directory."
+      `Database schema not found in 'templates/core/admin/database' directory. "${currentPathToSchema}"`
     );
   }
 
