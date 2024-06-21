@@ -1,12 +1,10 @@
 import { Args, Query, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
-import { CurrentUser, User } from "vitnode-backend";
+import { CurrentUser, User, AuthGuards } from "vitnode-backend";
 
 import { ShowCoreFilesService } from "./show.service";
 import { ShowCoreFilesObj } from "./dto/show.obj";
 import { ShowCoreFilesArgs } from "./dto/show.args";
-
-import { AuthGuards } from "@/utils/guards/auth.guard";
 
 @Resolver()
 export class ShowCoreFilesResolver {

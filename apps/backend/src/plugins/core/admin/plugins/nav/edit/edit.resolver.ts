@@ -1,12 +1,10 @@
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
+import { AdminAuthGuards, OnlyForDevelopment } from "vitnode-backend";
 
 import { EditAdminNavPluginsService } from "./edit.service";
 import { ShowAdminNavPluginsObj } from "../show/dto/show.obj";
 import { EditCreateAdminNavPluginsArgs } from "./dto/edit.args";
-
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
-import { OnlyForDevelopment } from "@/utils/guards/dev.guard";
 
 @Resolver()
 export class EditAdminNavPluginsResolver {

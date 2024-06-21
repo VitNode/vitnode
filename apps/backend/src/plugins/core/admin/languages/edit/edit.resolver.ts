@@ -1,10 +1,10 @@
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
+import { AdminAuthGuards } from "vitnode-backend";
 
 import { EditAdminCoreLanguagesService } from "./edit.service";
 import { EditCoreAdminLanguagesArgs } from "./dto/edit.args";
 
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
 import { ShowCoreLanguages } from "@/plugins/core/languages/show/dto/show.obj";
 
 @Resolver()

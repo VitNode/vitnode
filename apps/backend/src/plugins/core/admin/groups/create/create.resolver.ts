@@ -1,11 +1,10 @@
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { SetMetadata, UseGuards } from "@nestjs/common";
+import { AdminPermissionGuards } from "vitnode-backend";
 
 import { CreateAdminGroupsService } from "./create.service";
 import { CreateAdminGroupsArgs } from "./dto/create.args";
 import { ShowAdminGroups } from "../show/dto/show.obj";
-
-import { AdminPermissionGuards } from "@/utils/guards/admin-permission.guard";
 
 @Resolver()
 export class CreateAdminGroupsResolver {

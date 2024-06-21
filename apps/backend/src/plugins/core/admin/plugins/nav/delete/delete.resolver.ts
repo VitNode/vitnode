@@ -1,11 +1,9 @@
 import { UseGuards } from "@nestjs/common";
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
+import { AdminAuthGuards, OnlyForDevelopment } from "vitnode-backend";
 
 import { DeleteAdminNavPluginsService } from "./delete.service";
 import { DeleteCreateAdminNavPluginsArgs } from "./dto/delete.args";
-
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
-import { OnlyForDevelopment } from "@/utils/guards/dev.guard";
 
 @Resolver()
 export class DeleteAdminNavPluginsResolver {

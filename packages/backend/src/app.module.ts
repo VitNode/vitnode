@@ -12,6 +12,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from "@apollo/server/plugin
 import { Ctx } from "./utils";
 import { CoreModule } from "./core/core.module";
 import { DatabaseModule, DatabaseModuleArgs } from "./database/database.module";
+import { GlobalGuardsModule } from "./guards.module";
 
 export const ABSOLUTE_PATHS_BACKEND = {
   schema: join(process.cwd(), "schema.gql"),
@@ -113,6 +114,7 @@ export class VitNodeCoreModule {
           serveRoot: "/public/"
         }),
         DatabaseModule.register(database),
+        GlobalGuardsModule,
         CoreModule
       ]
     };

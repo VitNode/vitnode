@@ -1,10 +1,9 @@
 import { Query, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
+import { AdminAuthGuards } from "vitnode-backend";
 
 import { ShowAdminManifestMetadataService } from "./show.service";
 import { ShowAdminManifestMetadataObj } from "./dto/show.obj";
-
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
 
 @Resolver()
 export class ShowAdminManifestMetadataResolver {

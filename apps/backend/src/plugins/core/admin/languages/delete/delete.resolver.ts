@@ -1,10 +1,9 @@
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
+import { AdminAuthGuards } from "vitnode-backend";
 
 import { DeleteAdminCoreLanguageService } from "./delete.service";
 import { DeleteCoreAdminLanguagesArgs } from "./dto/delete.args";
-
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
 
 @Resolver()
 export class DeleteAdminCoreLanguagesResolver {
