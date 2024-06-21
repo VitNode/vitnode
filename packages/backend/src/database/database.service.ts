@@ -4,7 +4,7 @@ import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { DatabaseModuleArgs } from "./database.module";
 import { createClientDatabase } from "./client";
 
-import coreSchemaDatabase from "@/../templates/core/admin/database";
+import coreSchemaDatabase from "@/templates/core/admin/database";
 
 @Injectable()
 export class DatabaseService {
