@@ -23,7 +23,7 @@ const AlertDialog = ({
   onOpenChange,
   open: openProp,
   ...props
-}: AlertDialogPrimitive.DialogProps) => {
+}: AlertDialogPrimitive.AlertDialogProps) => {
   const [open, setOpen] = React.useState(false);
 
   return (
