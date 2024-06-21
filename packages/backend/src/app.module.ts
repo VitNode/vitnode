@@ -17,7 +17,11 @@ export const ABSOLUTE_PATHS_BACKEND = {
   schema: join(process.cwd(), "schema.gql"),
   uploads: {
     public: join(process.cwd(), "uploads", "public")
-  }
+  },
+  plugin: ({ code }: { code: string }) => ({
+    root: join(process.cwd(), "src", "plugin", code),
+    config: join(process.cwd(), "src", "plugin", code, "config.json")
+  })
 };
 
 const parseFrontendUrlFromEnv = () => {

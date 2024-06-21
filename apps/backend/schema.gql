@@ -224,7 +224,6 @@ type Mutation {
 
 type NavAdminPluginsAuthorization {
   code: String!
-  nav: [ShowAdminNavPluginsObj!]!
 }
 
 type PageInfo {
