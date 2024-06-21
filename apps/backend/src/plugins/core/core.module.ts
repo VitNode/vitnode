@@ -12,7 +12,6 @@ import { GlobalCoreHelpersModule } from "./helpers/helpers.module";
 import { CoreLanguagesModule } from "./languages/languages.module";
 import { CoreMembersModule } from "./members/members.module";
 import { CoreMiddlewareModule } from "./middleware/middleware.module";
-import { CoreNavModule } from "./nav/nav.module";
 import { CorePluginsModule } from "./plugins/plugins.module";
 import { CoreThemeEditorModule } from "./theme_editor/theme_editor.module";
 
@@ -29,7 +28,6 @@ import { CoreThemeEditorModule } from "./theme_editor/theme_editor.module";
     CoreLanguagesModule,
     CoreMembersModule,
     CoreMiddlewareModule,
-    CoreNavModule,
     CorePluginsModule,
     CoreThemeEditorModule
   ]

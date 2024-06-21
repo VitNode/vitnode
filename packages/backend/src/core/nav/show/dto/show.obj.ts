@@ -1,5 +1,6 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
-import { PageInfo, TextLanguage } from "vitnode-backend";
+
+import { PageInfo, TextLanguage } from "../../../../utils";
 
 @ObjectType()
 class ShowCoreNavItem {

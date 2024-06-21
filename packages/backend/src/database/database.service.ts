@@ -3,8 +3,7 @@ import { NodePgDatabase } from "drizzle-orm/node-postgres";
 
 import { DatabaseModuleArgs } from "./database.module";
 import { createClientDatabase } from "./client";
-
-import coreSchemaDatabase from "@/templates/core/admin/database";
+import coreSchemaDatabase from "../templates/core/admin/database";
 
 @Injectable()
 export class DatabaseService {
@@ -15,7 +14,7 @@ export class DatabaseService {
     private readonly options: DatabaseModuleArgs
   ) {
     const client = createClientDatabase({
-      schemaDatabase: {},
+      schemaDatabase: this.options.schemaDatabase,
       config: this.options.config
     });
 

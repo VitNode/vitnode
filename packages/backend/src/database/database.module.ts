@@ -12,6 +12,7 @@ registerEnumType(SortDirectionEnum, {
 
 export interface DatabaseModuleArgs {
   config: PoolConfig;
+  schemaDatabase: Record<string, unknown>;
 }
 
 @Global()
