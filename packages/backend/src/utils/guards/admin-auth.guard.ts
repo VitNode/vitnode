@@ -1,6 +1,8 @@
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { GqlExecutionContext } from "@nestjs/graphql";
-import { AuthorizationAdminSessionsService, Ctx } from "vitnode-backend";
+
+import { Ctx } from "../context";
+import { AuthorizationAdminSessionsService } from "../../core/admin/sessions/authorization/authorization.service";
 
 @Injectable()
 export class AdminAuthGuards implements CanActivate {

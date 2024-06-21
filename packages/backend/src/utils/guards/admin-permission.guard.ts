@@ -2,13 +2,11 @@ import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { GqlExecutionContext } from "@nestjs/graphql";
 import { eq } from "drizzle-orm";
-import {
-  AuthorizationAdminSessionsService,
-  Ctx,
-  DatabaseService
-} from "vitnode-backend";
 
-import { core_users } from "@/plugins/core/admin/database/schema/users";
+import { Ctx } from "../context";
+
+import { DatabaseService } from "../../database";
+import { AuthorizationAdminSessionsService } from "../../core/admin/sessions/authorization/authorization.service";
 
 @Injectable()
 export class AdminPermissionGuards implements CanActivate {
@@ -39,7 +37,7 @@ export class AdminPermissionGuards implements CanActivate {
 
       const userId = ctx.getContext().user.id;
       const user = await this.databaseService.db.query.core_users.findFirst({
-        where: eq(core_users.id, userId)
+        where: (table, { eq }) => eq(table.id, userId)
       });
 
       if (!user) return false;

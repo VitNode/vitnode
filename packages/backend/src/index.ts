@@ -6,3 +6,7 @@ export * from "./decorators";
 export * from "./main";
 export * from "./app.module";
 export * from "./database";
+
+// Services
+export * from "./core/admin/sessions/authorization/authorization.service";
+export * from "./core/sessions/authorization/internal/internal_authorization.service";
