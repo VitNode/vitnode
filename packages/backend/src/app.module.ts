@@ -14,15 +14,82 @@ import { CoreModule } from "./core/core.module";
 import { DatabaseModule, DatabaseModuleArgs } from "./database/database.module";
 import { GlobalGuardsModule } from "./guards.module";
 
+const internalPaths = {
+  backend: join(process.cwd(), "src"),
+  frontend: join(process.cwd(), "..", "frontend"),
+  uploads: join(process.cwd(), "uploads"),
+  plugins: join(process.cwd(), "src", "plugins")
+};
+
 export const ABSOLUTE_PATHS_BACKEND = {
+  backend: internalPaths.backend,
   schema: join(process.cwd(), "schema.gql"),
   uploads: {
-    public: join(process.cwd(), "uploads", "public")
+    public: join(internalPaths.uploads, "public"),
+    private: join(internalPaths.uploads, "private"),
+    temp: join(internalPaths.uploads, "temp")
   },
+  plugins: internalPaths.plugins,
   plugin: ({ code }: { code: string }) => ({
-    root: join(process.cwd(), "src", "plugin", code),
-    config: join(process.cwd(), "src", "plugin", code, "config.json")
-  })
+    root: join(internalPaths.plugins, code),
+    versions: join(internalPaths.plugins, code, "versions.json"),
+    admin: join(internalPaths.plugins, code, "admin"),
+    config: join(internalPaths.plugins, code, "config.json"),
+    database: {
+      init: join(internalPaths.plugins, code, "admin", "database"),
+      schema: join(internalPaths.plugins, code, "admin", "database", "schema"),
+      migrations: join(
+        internalPaths.plugins,
+        code,
+        "admin",
+        "database",
+        "migrations"
+      ),
+      migration_info: join(
+        internalPaths.plugins,
+        code,
+        "admin",
+        "database",
+        "migrations",
+        "meta",
+        "_journal.json"
+      )
+    },
+    frontend: {
+      admin_pages: join(
+        internalPaths.frontend,
+        "app",
+        "[locale]",
+        "(admin)",
+        "admin",
+        "(auth)",
+        code
+      ),
+      admin_templates: join(internalPaths.frontend, "plugins", code, "admin"),
+      pages_container: join(
+        internalPaths.frontend,
+        "app",
+        "[locale]",
+        "(main)",
+        "(container)",
+        code
+      ),
+      default_page: join(
+        internalPaths.frontend,
+        "plugins",
+        code,
+        "templates",
+        "default-page.tsx"
+      ),
+      pages: join(internalPaths.frontend, "app", "[locale]", "(main)", code),
+      templates: join(internalPaths.frontend, "plugins", code, "templates"),
+      plugin: join(internalPaths.frontend, "plugins", code),
+      language: join(internalPaths.frontend, "plugins", code, "langs")
+    }
+  }),
+  frontend: {
+    init: join(process.cwd(), "..", "frontend")
+  }
 };
 
 const parseFrontendUrlFromEnv = () => {

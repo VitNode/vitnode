@@ -34,13 +34,13 @@
     "@types/node": "^20.14.7",
     "@types/object-path": "^0.11.4",
     "@types/pg": "^8.11.6",
+    "@vitnode/shared": "workspace:*",
     "busboy": "^1.6.0",
     "class-transformer": "^0.5.1",
     "eslint-config-vitnode": "workspace:*",
     "http-errors": "^2.0.0",
     "object-path": "^0.11.8",
-    "typescript": "^5.5.2",
-    "@vitnode/shared": "workspace:*"
+    "typescript": "^5.5.2"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -51,6 +51,7 @@
     "express": "^4.19.2",
     "graphql": "^16.8.2",
     "pg": "^8.12.0",
+    "tar": "^7.4.0",
     "ua-parser-js": "2.0.0-beta.3"
   }
 }

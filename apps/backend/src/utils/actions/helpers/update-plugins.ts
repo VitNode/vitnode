@@ -3,8 +3,8 @@ import * as fs from "fs";
 
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { eq } from "drizzle-orm";
+import { ConfigPlugin } from "vitnode-backend";
 
-import { ConfigPlugin } from "@/plugins/core/admin/plugins/plugins.module";
 import { core_plugins } from "@/plugins/core/admin/database/schema/plugins";
 import { schemaDatabase } from "@/database/schema";
 import { poolDB } from "@/database/client";

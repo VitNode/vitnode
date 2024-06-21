@@ -10,3 +10,4 @@ export * from "./database";
 // Services
 export * from "./core/admin/sessions/authorization/authorization.service";
 export * from "./core/sessions/authorization/internal/internal_authorization.service";
+export * from "./core/admin/plugins/type";

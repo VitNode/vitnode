@@ -2,7 +2,6 @@ import { Module } from "@nestjs/common";
 
 import { AdminInstallModule } from "./install/install.module";
 import { AdminSettingsModule } from "./settings/settings.module";
-import { AdminPluginsModule } from "./plugins/plugins.module";
 import { AdminMetadataModule } from "./metadata/metadata.module";
 import { AdminFilesModule } from "./files/files.module";
 import { AdminGroupsModule } from "./groups/groups.module";
@@ -16,7 +15,6 @@ import { AdminEmailModule } from "./email/email.module";
   imports: [
     AdminInstallModule,
     AdminSettingsModule,
-    AdminPluginsModule,
     AdminMetadataModule,
     AdminFilesModule,
     AdminGroupsModule,
