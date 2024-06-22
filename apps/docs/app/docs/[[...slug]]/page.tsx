@@ -1,10 +1,10 @@
-import { getPage, getPages } from '@/app/source';
-import type { Metadata } from 'next';
-import { DocsPage, DocsBody } from 'fumadocs-ui/page';
-import { notFound } from 'next/navigation';
+import { getPage, getPages } from "@/app/source";
+import type { Metadata } from "next";
+import { DocsPage, DocsBody } from "fumadocs-ui/page";
+import { notFound } from "next/navigation";
 
 export default async function Page({
-  params,
+  params
 }: {
   params: { slug?: string[] };
 }) {
@@ -19,7 +19,12 @@ export default async function Page({
   return (
     <DocsPage toc={page.data.exports.toc}>
       <DocsBody>
-        <h1>{page.data.title}</h1>
+        <h1 className="text-foreground m-0 text-3xl font-bold sm:text-4xl">
+          {page.data.title}
+        </h1>
+        <p className="text-muted-foreground mb-8 text-lg">
+          {page.data.description}
+        </p>
         <MDX />
       </DocsBody>
     </DocsPage>
@@ -27,8 +32,8 @@ export default async function Page({
 }
 
 export async function generateStaticParams() {
-  return getPages().map((page) => ({
-    slug: page.slugs,
+  return getPages().map(page => ({
+    slug: page.slugs
   }));
 }
 
@@ -39,6 +44,6 @@ export function generateMetadata({ params }: { params: { slug?: string[] } }) {
 
   return {
     title: page.data.title,
-    description: page.data.description,
+    description: page.data.description
   } satisfies Metadata;
 }
