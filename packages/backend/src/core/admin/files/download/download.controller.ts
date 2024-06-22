@@ -14,7 +14,7 @@ import { Request, Response } from "express";
 import { InternalAuthorizationCoreSessionsService } from "../../../sessions/authorization/internal/internal_authorization.service";
 import { AuthorizationAdminSessionsService } from "../../sessions/authorization/authorization.service";
 import { DatabaseService } from "../../../../database";
-import { ABSOLUTE_PATHS } from "../../../config";
+import { ABSOLUTE_PATHS_BACKEND } from "../../../..";
 
 @Controller("files")
 export class DownloadFilesAdminController {
@@ -30,7 +30,7 @@ export class DownloadFilesAdminController {
     @Req() req: Request,
     @Param() { file }: { file: string }
   ): Promise<StreamableFile> {
-    const path = join(ABSOLUTE_PATHS.uploads.temp, file);
+    const path = join(ABSOLUTE_PATHS_BACKEND.uploads.temp, file);
     if (!existsSync(path)) {
       res.status(404);
 

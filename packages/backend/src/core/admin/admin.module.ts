@@ -10,6 +10,9 @@ import { AdminStaffModule } from "./staff/staff.module";
 import { AdminLanguagesModule } from "./languages/languages.module";
 import { AdminFilesModule } from "./files/files.module";
 import { AdminMembersModule } from "./members/members.module";
+import { AdminGroupsModule } from "./groups/groups.module";
+import { AdminMetadataModule } from "./metadata/metadata.module";
+import { AdminSettingsModule } from "./settings/settings.module";
 
 @Module({
   imports: [
@@ -20,7 +23,10 @@ import { AdminMembersModule } from "./members/members.module";
     AdminStaffModule,
     AdminLanguagesModule,
     AdminFilesModule,
-    AdminMembersModule
+    AdminMembersModule,
+    AdminGroupsModule,
+    AdminMetadataModule,
+    AdminSettingsModule
   ]
 })
 export class AdminModule {}

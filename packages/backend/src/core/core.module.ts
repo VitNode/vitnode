@@ -12,6 +12,8 @@ import { CoreLanguagesModule } from "./languages/languages.module";
 import { CoreFilesModule, GlobalCoreFilesModule } from "./files/files.module";
 import { CoreEditorModule } from "./editor/editor.module";
 import { CoreMembersModule } from "./members/members.module";
+import { CoreMiddlewareModule } from "./middleware/middleware.module";
+import { CoreSettingsModule } from "./settings/settings.module";
 
 @Module({
   imports: [
@@ -25,7 +27,9 @@ import { CoreMembersModule } from "./members/members.module";
     GlobalCoreFilesModule,
     CoreFilesModule,
     CoreEditorModule,
-    CoreMembersModule
+    CoreMembersModule,
+    CoreMiddlewareModule,
+    CoreSettingsModule
   ]
 })
 export class CoreModule {}
