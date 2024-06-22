@@ -12,7 +12,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from "@apollo/server/plugin
 import { Ctx } from "./utils";
 import { CoreModule } from "./core/core.module";
 import { DatabaseModule, DatabaseModuleArgs } from "./database/database.module";
-import { GlobalGuardsModule } from "./guards.module";
+import { GlobalProvidersModule } from "./providers/providers.module";
 
 const internalPaths = {
   backend: join(process.cwd(), "src"),
@@ -181,7 +181,7 @@ export class VitNodeCoreModule {
           serveRoot: "/public/"
         }),
         DatabaseModule.register(database),
-        GlobalGuardsModule,
+        GlobalProvidersModule,
         CoreModule
       ]
     };

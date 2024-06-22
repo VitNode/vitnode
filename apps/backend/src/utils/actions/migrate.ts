@@ -4,7 +4,7 @@ import * as fs from "fs";
 import { sql } from "drizzle-orm";
 import { MigrationMeta } from "drizzle-orm/migrator";
 
-import { ABSOLUTE_PATHS } from "@/config";
+import { ABSOLUTE_PATHS_BACKEND } from "vitnode-backend";
 import { db } from "@/database/client";
 
 // Source: https://github.com/drizzle-team/drizzle-orm/blob/main/drizzle-orm/src/migrator.ts
@@ -13,8 +13,8 @@ const readMigrationFiles = ({
 }: {
   pluginCode: string;
 }): MigrationMeta[] => {
-  const migrationFolderTo = ABSOLUTE_PATHS.plugin({ code: pluginCode }).database
-    .migrations;
+  const migrationFolderTo = ABSOLUTE_PATHS_BACKEND.plugin({ code: pluginCode })
+    .database.migrations;
   const journalPath = `${migrationFolderTo}/meta/_journal.json`;
   if (!fs.existsSync(journalPath)) {
     // eslint-disable-next-line no-console

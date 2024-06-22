@@ -8,7 +8,7 @@ import { ConfigPlugin } from "vitnode-backend";
 import { core_plugins } from "@/plugins/core/admin/database/schema/plugins";
 import { schemaDatabase } from "@/database/schema";
 import { poolDB } from "@/database/client";
-import { ABSOLUTE_PATHS } from "@/config";
+import { ABSOLUTE_PATHS_BACKEND } from "vitnode-backend";
 
 export const updatePlugins = async ({
   db
@@ -27,7 +27,7 @@ export const updatePlugins = async ({
           plugin => !["database", "plugins.module.ts", "core"].includes(plugin)
         )
         .map(async (code, index) => {
-          const paths = ABSOLUTE_PATHS.plugin({ code });
+          const paths = ABSOLUTE_PATHS_BACKEND.plugin({ code });
           const config: ConfigPlugin = JSON.parse(
             fs.readFileSync(paths.config, "utf8")
           );

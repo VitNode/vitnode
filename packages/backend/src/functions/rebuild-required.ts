@@ -1,6 +1,6 @@
 import * as fs from "fs";
 
-import { ConfigType, configPath, getConfigFile } from "../core/config";
+import { ConfigType, configPath, getConfigFile } from "../providers/config";
 import { CustomError } from "../errors";
 
 export const setRebuildRequired = async ({
