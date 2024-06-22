@@ -15,6 +15,6 @@ export interface ShowAdminEmailSettingsServiceObjWithPassword
 export class HelpersAdminEmailSettingsService {
   protected readonly path: string = join(
     ABSOLUTE_PATHS_BACKEND.plugin({ code: "core" }).root,
-    "email.config.json"
+    "email.config.json",
   );
 }

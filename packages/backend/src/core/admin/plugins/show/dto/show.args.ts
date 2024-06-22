@@ -4,11 +4,11 @@ import { PaginationArgs, SortDirectionEnum } from "../../../../../utils";
 
 enum ShowAdminPluginsSortingColumnEnum {
   created = "created",
-  updated = "updated"
+  updated = "updated",
 }
 
 registerEnumType(ShowAdminPluginsSortingColumnEnum, {
-  name: "ShowAdminPluginsSortingColumnEnum"
+  name: "ShowAdminPluginsSortingColumnEnum",
 });
 
 @InputType()

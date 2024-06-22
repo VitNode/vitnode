@@ -15,7 +15,7 @@ export class CreateAdminNavPluginsResolver {
   @UseGuards(AdminAuthGuards)
   @UseGuards(OnlyForDevelopment)
   admin__core_plugins__nav__create(
-    @Args() args: CreateAdminNavPluginsArgs
+    @Args() args: CreateAdminNavPluginsArgs,
   ): ShowAdminNavPluginsObj {
     return this.service.create(args);
   }

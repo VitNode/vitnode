@@ -2,7 +2,7 @@ import { changeCodePluginToCapitalLetters } from "../helpers/change-code-plugin-
 
 export const removeModuleFromRootSchema = ({
   code,
-  content
+  content,
 }: {
   code: string;
   content: string;
@@ -16,7 +16,7 @@ export const removeModuleFromRootSchema = ({
 
 export const removeDatabaseFromService = ({
   code,
-  content
+  content,
 }: {
   code: string;
   content: string;
@@ -27,19 +27,19 @@ export const removeDatabaseFromService = ({
     .replace(`\n  ...table${name},`, "")
     .replace(
       `\nimport table${name} from "../plugins/${code}/admin/database/index";`,
-      ""
+      "",
     );
 };
 
 export const removeLangFromTypes = ({
   code,
-  content
+  content,
 }: {
   code: string;
   content: string;
 }) => {
   return content.replace(
     `\n  typeof import("@/plugins/${code}/langs/en.json") &`,
-    ""
+    "",
   );
 };

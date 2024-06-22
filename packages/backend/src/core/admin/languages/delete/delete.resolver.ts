@@ -13,7 +13,7 @@ export class DeleteAdminCoreLanguagesResolver {
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
   async admin__core_languages__delete(
-    @Args() args: DeleteCoreAdminLanguagesArgs
+    @Args() args: DeleteCoreAdminLanguagesArgs,
   ): Promise<string> {
     return this.service.delete(args);
   }

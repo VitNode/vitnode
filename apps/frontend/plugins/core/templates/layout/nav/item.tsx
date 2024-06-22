@@ -20,7 +20,7 @@ export const ItemNav = ({
   href,
   name,
   icons,
-  id
+  id,
 }: Props) => {
   const { convertText } = useTextLang();
   const pathname = usePathname();
@@ -36,9 +36,9 @@ export const ItemNav = ({
             buttonVariants({
               variant: active ? "outline" : "ghost",
               className: cn("px-6", {
-                "bg-card dark:bg-accent": active
-              })
-            })
+                "bg-card dark:bg-accent": active,
+              }),
+            }),
           )}
           target={external ? "_blank" : undefined}
           rel={external ? "noopener noreferrer" : undefined}
@@ -54,8 +54,8 @@ export const ItemNav = ({
             "data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 left-0 top-0 w-56 duration-200 ease-in-out",
             {
               "w-[30rem]": children.length >= 3,
-              "lg:w-[50rem]": children.length >= 5
-            }
+              "lg:w-[50rem]": children.length >= 5,
+            },
           )}
         >
           <ul className="flex flex-wrap gap-1 p-2">
@@ -65,7 +65,7 @@ export const ItemNav = ({
                 (pathname.startsWith(item.href) && item.href !== "/");
 
               const icon = icons.find(
-                childIcon => childIcon.id === item.id
+                childIcon => childIcon.id === item.id,
               )?.icon;
 
               return (
@@ -73,7 +73,7 @@ export const ItemNav = ({
                   key={item.id}
                   className={cn("flex-1 basis-full", {
                     "basis-[calc(50%-0.5rem)]": children.length >= 3,
-                    "lg:basis-[calc(33%-0.5rem)]": children.length >= 5
+                    "lg:basis-[calc(33%-0.5rem)]": children.length >= 5,
                   })}
                 >
                   <NavigationMenu.Link asChild>
@@ -82,8 +82,8 @@ export const ItemNav = ({
                       className={cn(
                         "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-accent-foreground flex h-full select-none flex-col justify-center gap-1 rounded-md px-3 py-2 leading-none no-underline outline-none transition-colors",
                         {
-                          "bg-accent": activeItem
-                        }
+                          "bg-accent": activeItem,
+                        },
                       )}
                       target={item.external ? "_blank" : undefined}
                       rel={item.external ? "noopener noreferrer" : undefined}

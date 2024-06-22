@@ -21,7 +21,7 @@ const getDeviceIcon = (device: string) => {
 
 export const ContentDevicesSettings = ({
   core_sessions__devices__show: devices,
-  loginToken
+  loginToken,
 }: DevicesSettingsViewProps) => {
   const t = useTranslations("core.settings.devices");
 
@@ -44,7 +44,7 @@ export const ContentDevicesSettings = ({
               </div>
               <p className="text-muted-foreground text-sm">
                 {t.rich("last_active", {
-                  time: () => <DateFormat date={device.last_seen} />
+                  time: () => <DateFormat date={device.last_seen} />,
                 })}
               </p>
             </div>

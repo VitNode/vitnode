@@ -17,7 +17,7 @@ import { setRebuildRequired } from "../../../../functions/rebuild-required";
 export class DeleteAdminPluginsService {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly changeFilesService: ChangeFilesAdminPluginsService
+    private readonly changeFilesService: ChangeFilesAdminPluginsService,
   ) {}
 
   protected deleteFolderWhenExists(path: string) {
@@ -28,7 +28,7 @@ export class DeleteAdminPluginsService {
 
   async delete({ code }: DeleteAdminPluginsArgs): Promise<string> {
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
-      where: (table, { eq }) => eq(table.code, code)
+      where: (table, { eq }) => eq(table.code, code),
     });
 
     if (!plugin) {
@@ -38,7 +38,7 @@ export class DeleteAdminPluginsService {
     if (plugin.default) {
       throw new CustomError({
         code: "DEFAULT_PLUGIN",
-        message: "This plugin is default and cannot be deleted"
+        message: "This plugin is default and cannot be deleted",
       });
     }
 
@@ -58,7 +58,7 @@ export class DeleteAdminPluginsService {
     } catch (error) {
       throw new CustomError({
         code: "DELETE_TABLE_ERROR",
-        message: `Error deleting tables for plugin ${code}`
+        message: `Error deleting tables for plugin ${code}`,
       });
     }
     await this.databaseService.db
@@ -72,7 +72,7 @@ export class DeleteAdminPluginsService {
     const frontendPaths = ["admin_pages", "pages", "plugin", "pages_container"];
     frontendPaths.forEach(path => {
       this.deleteFolderWhenExists(
-        ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend[path]
+        ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend[path],
       );
     });
 

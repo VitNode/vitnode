@@ -8,7 +8,7 @@ import {
   Preview,
   Section,
   Text,
-  Tailwind
+  Tailwind,
 } from "@react-email/components";
 import * as React from "react";
 
@@ -18,16 +18,16 @@ import { GetHelpersForEmailType } from "../email-helpers.type";
 
 export interface EmailTemplateProps {
   children: React.ReactNode;
+  helpers: GetHelpersForEmailType;
   previewText: string;
   header?: React.ReactNode;
-  helpers: GetHelpersForEmailType;
 }
 
 export const EmailTemplate = ({
   previewText = "previewText",
   header = <HeaderEmail />,
   children = "This is the email template.",
-  helpers: { color, frontend_url, site_name, site_short_name }
+  helpers: { color, frontend_url, site_name, site_short_name },
 }: EmailTemplateProps) => {
   const t = getTranslationForEmail("admin.core.email");
 
@@ -51,7 +51,7 @@ export const EmailTemplate = ({
               "6xl": ["60px", { lineHeight: "1" }],
               "7xl": ["72px", { lineHeight: "1" }],
               "8xl": ["96px", { lineHeight: "1" }],
-              "9xl": ["144px", { lineHeight: "1" }]
+              "9xl": ["144px", { lineHeight: "1" }],
             },
             spacing: {
               px: "1px",
@@ -88,9 +88,9 @@ export const EmailTemplate = ({
               64: "256px",
               72: "288px",
               80: "320px",
-              96: "384px"
-            }
-          }
+              96: "384px",
+            },
+          },
         }}
       >
         <Body

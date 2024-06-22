@@ -28,7 +28,7 @@ export const ColorInput = ({
   const t = useTranslations("core.colors");
   const [open, setOpen] = React.useState(false);
   const [color, setColor] = React.useState<HslColor | null>(
-    getHSLFromString(value)
+    getHSLFromString(value),
   );
 
   // Set color from value
@@ -46,19 +46,19 @@ export const ColorInput = ({
             variant="outline"
             className={cn("max-w-52 flex-1 justify-start", {
               "text-black": color && colorBrightness,
-              "text-white": color && !colorBrightness
+              "text-white": color && !colorBrightness,
             })}
             style={{
               backgroundColor: color
                 ? `hsl(${color.h}, ${color.s}%, ${color.l}%)`
-                : ""
+                : "",
             }}
             disabled={disabled}
             {...rest}
           >
             <span
               className={cn({
-                "text-muted-foreground": !color
+                "text-muted-foreground": !color,
               })}
             >
               {color ? `hsl(${color.h}, ${color.s}%, ${color.l}%)` : t("none")}

@@ -7,7 +7,7 @@ import { ExternalLink } from "lucide-react";
 
 import {
   Admin__Core_Plugins__ShowQuery,
-  ShowAdminPlugins
+  ShowAdminPlugins,
 } from "@/graphql/hooks";
 import { Badge } from "@/components/ui/badge";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
@@ -16,7 +16,7 @@ import { DataTable } from "@/components/data-table/data-table";
 import { ActionsItemPluginsAdmin } from "./table/actions/actions";
 
 export const PluginsCoreAdminView = ({
-  admin__core_plugins__show: { edges, pageInfo }
+  admin__core_plugins__show: { edges, pageInfo },
 }: Admin__Core_Plugins__ShowQuery) => {
   const t = useTranslations("admin.core.plugins");
   const tCore = useTranslations("core");
@@ -42,7 +42,7 @@ export const PluginsCoreAdminView = ({
               )}
             </div>
           );
-        }
+        },
       },
       {
         header: tCore("table.version"),
@@ -60,7 +60,7 @@ export const PluginsCoreAdminView = ({
               </span>
             </span>
           );
-        }
+        },
       },
       {
         header: tCore("table.author"),
@@ -82,7 +82,7 @@ export const PluginsCoreAdminView = ({
           }
 
           return <span className="flex gap-1">{data.author}</span>;
-        }
+        },
       },
       {
         header: val => {
@@ -97,7 +97,7 @@ export const PluginsCoreAdminView = ({
           const data = row.original;
 
           return <DateFormat date={data.updated} />;
-        }
+        },
       },
       // {
       //   header: tCore("table.enabled"),
@@ -131,10 +131,10 @@ export const PluginsCoreAdminView = ({
           const data = row.original;
 
           return <ActionsItemPluginsAdmin {...data} />;
-        }
-      }
+        },
+      },
     ],
-    []
+    [],
   );
 
   return (
@@ -146,7 +146,7 @@ export const PluginsCoreAdminView = ({
       searchPlaceholder={t("search_placeholder")}
       defaultSorting={{
         sortBy: "updated",
-        sortDirection: "desc"
+        sortDirection: "desc",
       }}
     />
   );

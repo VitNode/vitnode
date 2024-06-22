@@ -13,7 +13,7 @@ export class DeleteAdminFilesResolver {
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
   async admin__core_files__delete(
-    @Args() args: DeleteAdminFilesArgs
+    @Args() args: DeleteAdminFilesArgs,
   ): Promise<string> {
     return this.service.delete(args);
   }

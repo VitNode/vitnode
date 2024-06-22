@@ -1,5 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import { DatabaseService } from "vitnode-backend";
+import {
+  DatabaseService,
+  ParserTextLanguageCoreHelpersService,
+} from "vitnode-backend";
 
 import { CreatePluginCategoriesArgs } from "./dto/create.args";
 
@@ -8,22 +11,21 @@ import {
   blog_categories,
   blog_categories_description,
   blog_categories_name,
-  blog_categories_permissions
+  blog_categories_permissions,
 } from "../../database/schema/categories";
-import { ParserTextLanguageCoreHelpersService } from "vitnode-backend";
 
 @Injectable()
 export class CreateBlogCategoriesService {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly parserTextLang: ParserTextLanguageCoreHelpersService
+    private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
   ) {}
 
   async create({
     color,
     description,
     name,
-    permissions
+    permissions,
   }: CreatePluginCategoriesArgs): Promise<ShowBlogCategories> {
     const categories = await this.databaseService.db
       .insert(blog_categories)
@@ -35,21 +37,21 @@ export class CreateBlogCategoriesService {
     await this.parserTextLang.parse({
       item_id: categoryId,
       database: blog_categories_name,
-      data: name
+      data: name,
     });
 
     await this.parserTextLang.parse({
       item_id: categoryId,
       database: blog_categories_description,
-      data: description
+      data: description,
     });
 
     const data = await this.databaseService.db.query.blog_categories.findFirst({
       where: (table, { eq }) => eq(table.id, categoryId),
       with: {
         name: true,
-        description: true
-      }
+        description: true,
+      },
     });
 
     // Set permissions
@@ -58,8 +60,8 @@ export class CreateBlogCategoriesService {
         permissions.groups.map(item => ({
           blog_id: data[0].id,
           group_id: item.group_id,
-          ...item
-        }))
+          ...item,
+        })),
       );
     }
 

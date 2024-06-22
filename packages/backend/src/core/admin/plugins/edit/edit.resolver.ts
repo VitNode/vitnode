@@ -15,7 +15,7 @@ export class EditAdminPluginsResolver {
   @UseGuards(AdminAuthGuards)
   @UseGuards(OnlyForDevelopment)
   async admin__core_plugins__edit(
-    @Args() args: EditAdminPluginsArgs
+    @Args() args: EditAdminPluginsArgs,
   ): Promise<ShowAdminPlugins> {
     return this.service.edit(args);
   }

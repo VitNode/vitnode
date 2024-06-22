@@ -16,7 +16,7 @@ import {
   ABSOLUTE_PATHS_BACKEND,
   ConfigPlugin,
   CustomError,
-  FileUpload
+  FileUpload,
 } from "../../../..";
 
 @Injectable()
@@ -25,12 +25,12 @@ export class UploadAdminPluginsService {
   protected tempPath: string = join(
     ABSOLUTE_PATHS_BACKEND.uploads.temp,
     "plugins",
-    `upload-${generateRandomString(5)}${currentUnixDate()}`
+    `upload-${generateRandomString(5)}${currentUnixDate()}`,
   );
 
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly changeFilesService: ChangeFilesAdminPluginsService
+    private readonly changeFilesService: ChangeFilesAdminPluginsService,
   ) {}
 
   protected async removeTempFolder(): Promise<void> {
@@ -39,7 +39,7 @@ export class UploadAdminPluginsService {
   }
 
   protected async getPluginConfig({
-    tgz
+    tgz,
   }: {
     tgz: FileUpload;
   }): Promise<ConfigPlugin> {
@@ -54,8 +54,8 @@ export class UploadAdminPluginsService {
           // TODO: Fix this type
           tar.extract({
             C: this.tempPath,
-            strip: 1
-          }) as NodeJS.WritableStream & ReturnType<typeof tar.extract>
+            strip: 1,
+          }) as NodeJS.WritableStream & ReturnType<typeof tar.extract>,
         )
         .on("error", err => {
           throw new reject(err.message);
@@ -75,7 +75,7 @@ export class UploadAdminPluginsService {
       await this.removeTempFolder();
       throw new CustomError({
         code: "PLUGIN_CONFIG_VARIABLES_NOT_FOUND",
-        message: "Plugin config variables not found"
+        message: "Plugin config variables not found",
       });
     }
 
@@ -90,19 +90,19 @@ export class UploadAdminPluginsService {
     return {
       ...config,
       version,
-      version_code: +latestVersion
+      version_code: +latestVersion,
     };
   }
 
   protected async createPluginBackend({
     config,
-    upload_new_version
+    upload_new_version,
   }: {
     config: ConfigPlugin;
     upload_new_version?: boolean;
   }): Promise<void> {
     const newPathBackend = ABSOLUTE_PATHS_BACKEND.plugin({
-      code: config.code
+      code: config.code,
     }).root;
     if (fs.existsSync(newPathBackend)) {
       await fs.promises.rm(newPathBackend, { recursive: true });
@@ -119,7 +119,7 @@ export class UploadAdminPluginsService {
 
   protected async copyFilesToPluginFolder({
     destination,
-    source
+    source,
   }: {
     destination: string;
     source: string;
@@ -128,19 +128,19 @@ export class UploadAdminPluginsService {
 
     try {
       await fs.promises.cp(source, destination, {
-        recursive: true
+        recursive: true,
       });
     } catch (error) {
       throw new CustomError({
         code: "COPY_FILES_TO_PLUGIN_FOLDER_ERROR",
-        message: `Source: ${source}, Destination: ${destination}`
+        message: `Source: ${source}, Destination: ${destination}`,
       });
     }
   }
 
   protected async copyFileToPluginFolder({
     destination,
-    source
+    source,
   }: {
     destination: string;
     source: string;
@@ -152,13 +152,13 @@ export class UploadAdminPluginsService {
     } catch (error) {
       throw new CustomError({
         code: "COPY_FILE_TO_PLUGIN_FOLDER_ERROR",
-        message: `Source: ${source}, Destination: ${destination}`
+        message: `Source: ${source}, Destination: ${destination}`,
       });
     }
   }
 
   protected async createPluginFrontend({
-    config
+    config,
   }: {
     config: ConfigPlugin;
   }): Promise<void> {
@@ -167,27 +167,27 @@ export class UploadAdminPluginsService {
       frontendPaths.map(async path => {
         const source = join(this.tempPath, "frontend", path);
         const destination: string = ABSOLUTE_PATHS_BACKEND.plugin({
-          code: config.code
+          code: config.code,
         }).frontend[path];
 
         return this.copyFilesToPluginFolder({ source, destination });
-      })
+      }),
     );
 
     // Copy language
     const languages =
       await this.databaseService.db.query.core_languages.findMany({
         columns: {
-          code: true
-        }
+          code: true,
+        },
       });
 
     languages.forEach(lang => {
       const checkExist = join(
         ABSOLUTE_PATHS_BACKEND.plugin({
-          code: config.code
+          code: config.code,
         }).frontend.language,
-        `${lang.code}.json`
+        `${lang.code}.json`,
       );
 
       if (fs.existsSync(checkExist)) {
@@ -196,15 +196,15 @@ export class UploadAdminPluginsService {
 
       const source = join(
         ABSOLUTE_PATHS_BACKEND.plugin({
-          code: config.code
+          code: config.code,
         }).frontend.language,
-        `en.json`
+        `en.json`,
       );
       const destination = join(
         ABSOLUTE_PATHS_BACKEND.plugin({
-          code: config.code
+          code: config.code,
         }).frontend.language,
-        `${lang.code}.json`
+        `${lang.code}.json`,
       );
 
       this.copyFileToPluginFolder({ source, destination });
@@ -213,21 +213,21 @@ export class UploadAdminPluginsService {
 
   async upload({
     code,
-    file
+    file,
   }: UploadAdminPluginsArgs): Promise<ShowAdminPlugins> {
     const tgz = await file;
     const config = await this.getPluginConfig({ tgz });
 
     const checkPlugin =
       await this.databaseService.db.query.core_plugins.findFirst({
-        where: (table, { eq }) => eq(table.code, config.code)
+        where: (table, { eq }) => eq(table.code, config.code),
       });
 
     if (checkPlugin && !code) {
       await this.removeTempFolder();
       throw new CustomError({
         code: "PLUGIN_ALREADY_EXISTS",
-        message: "Plugin already exists"
+        message: "Plugin already exists",
       });
     }
 
@@ -235,7 +235,7 @@ export class UploadAdminPluginsService {
       await this.removeTempFolder();
       throw new CustomError({
         code: "PLUGIN_CODE_NOT_MATCH",
-        message: "Plugin code not match"
+        message: "Plugin code not match",
       });
     }
 
@@ -243,7 +243,7 @@ export class UploadAdminPluginsService {
       await this.removeTempFolder();
       throw new CustomError({
         code: "PLUGIN_VERSION_IS_LOWER",
-        message: "Plugin version is lower than the current version"
+        message: "Plugin version is lower than the current version",
       });
     }
 
@@ -264,7 +264,7 @@ export class UploadAdminPluginsService {
           author_url: config.author_url,
           version: config.version,
           version_code: config.version_code,
-          allow_default: config.allow_default
+          allow_default: config.allow_default,
         })
         .where(eq(core_plugins.code, code))
         .returning();
@@ -277,7 +277,7 @@ export class UploadAdminPluginsService {
     const plugins = await this.databaseService.db
       .insert(core_plugins)
       .values({
-        ...config
+        ...config,
       })
       .returning();
 

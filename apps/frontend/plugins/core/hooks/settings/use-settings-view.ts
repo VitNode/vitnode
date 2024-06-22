@@ -26,23 +26,23 @@ export const useSettingsView = (): ReturnValues => {
       {
         href: "/settings",
         icon: Cog,
-        text: t("overview.title")
+        text: t("overview.title"),
       },
       {
         href: "/settings/files",
         icon: Files,
-        text: t("files.title")
+        text: t("files.title"),
       },
       {
         href: "/settings/devices",
         icon: MonitorSmartphone,
-        text: t("devices.title")
+        text: t("devices.title"),
       },
       {
         href: "/settings/notifications",
         icon: Bell,
-        text: t("notifications.title")
-      }
-    ]
+        text: t("notifications.title"),
+      },
+    ],
   };
 };

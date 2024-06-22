@@ -21,24 +21,24 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
     user: z
       .object({
         id: z.number(),
-        name: zodInput.string
+        name: zodInput.string,
       })
       .optional(),
     group: z
       .object({
         id: z.number(),
-        name: zodInput.languageInput
+        name: zodInput.languageInput,
       })
       .optional(),
-    unrestricted: z.boolean()
+    unrestricted: z.boolean(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       type: "group",
-      unrestricted: true
-    }
+      unrestricted: true,
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -48,7 +48,7 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
     const mutation = await mutationApi({
       groupId: values.type === "group" ? values.group?.id : undefined,
       userId: values.type === "user" ? values.user?.id : undefined,
-      unrestricted: values.unrestricted
+      unrestricted: values.unrestricted,
     });
 
     if (mutation.error) {
@@ -56,14 +56,14 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
       if (error?.extensions && error.extensions?.code === "ALREADY_EXISTS") {
         form.setError(values.type === "user" ? "user" : "group", {
           type: "manual",
-          message: t("already_exists")
+          message: t("already_exists"),
         });
 
         return;
       }
 
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;
@@ -74,12 +74,12 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
       description:
         values.type === "group"
           ? convertText(values.group?.name)
-          : values.user?.name
+          : values.user?.name,
     });
   };
 
   return {
     form,
-    onSubmit
+    onSubmit,
   };
 };

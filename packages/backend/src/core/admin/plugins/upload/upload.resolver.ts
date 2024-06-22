@@ -14,7 +14,7 @@ export class UploadAdminPluginsResolver {
   @Mutation(() => ShowAdminPlugins)
   @UseGuards(AdminAuthGuards)
   async admin__core_plugins__upload(
-    @Args() args: UploadAdminPluginsArgs
+    @Args() args: UploadAdminPluginsArgs,
   ): Promise<ShowAdminPlugins> {
     return this.service.upload(args);
   }

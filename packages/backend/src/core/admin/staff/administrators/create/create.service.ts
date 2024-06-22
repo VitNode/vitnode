@@ -14,25 +14,25 @@ export class CreateAdminStaffAdministratorsService {
   async create({
     group_id,
     unrestricted,
-    user_id
+    user_id,
   }: CreateAdminStaffAdministratorsArgs): Promise<ShowAdminStaffAdministrators> {
     if (!group_id && !user_id) {
       throw new CustomError({
         code: "BAD_REQUEST",
-        message: "You must provide either a group_id or a user_id."
+        message: "You must provide either a group_id or a user_id.",
       });
     }
 
     const findPermission =
       await this.databaseService.db.query.core_admin_permissions.findFirst({
         where: (table, { eq, or }) =>
-          or(eq(table.user_id, user_id), eq(table.group_id, group_id))
+          or(eq(table.user_id, user_id), eq(table.group_id, group_id)),
       });
 
     if (findPermission) {
       throw new CustomError({
         code: "ALREADY_EXISTS",
-        message: "This user or group already has moderator permissions."
+        message: "This user or group already has moderator permissions.",
       });
     }
 
@@ -41,7 +41,7 @@ export class CreateAdminStaffAdministratorsService {
       .values({
         user_id,
         group_id,
-        unrestricted
+        unrestricted,
       })
       .returning();
 
@@ -54,25 +54,25 @@ export class CreateAdminStaffAdministratorsService {
               avatar: true,
               group: {
                 with: {
-                  name: true
-                }
-              }
-            }
+                  name: true,
+                },
+              },
+            },
           },
           group: {
             with: {
-              name: true
-            }
-          }
-        }
+              name: true,
+            },
+          },
+        },
       });
 
     if (data.user) {
       return {
         ...data,
         user_or_group: {
-          ...data.user
-        }
+          ...data.user,
+        },
       };
     }
 
@@ -80,8 +80,8 @@ export class CreateAdminStaffAdministratorsService {
       ...data,
       user_or_group: {
         ...data.group,
-        group_name: data.group.name
-      }
+        group_name: data.group.name,
+      },
     };
   }
 }

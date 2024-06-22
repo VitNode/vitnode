@@ -9,19 +9,19 @@ import { NotFoundError } from "../../../../errors";
 import {
   core_nav,
   core_nav_description,
-  core_nav_name
+  core_nav_name,
 } from "../../../../templates/core/admin/database/schema/nav";
 
 @Injectable()
 export class DeleteAdminNavService {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly parserTextLang: ParserTextLanguageCoreHelpersService
+    private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
   ) {}
 
   async delete({ id }: DeleteAdminNavArgs): Promise<string> {
     const nav = await this.databaseService.db.query.core_nav.findFirst({
-      where: (table, { eq }) => eq(table.id, id)
+      where: (table, { eq }) => eq(table.id, id),
     });
 
     if (!nav) {
@@ -36,12 +36,12 @@ export class DeleteAdminNavService {
 
     await this.parserTextLang.delete({
       database: core_nav_name,
-      item_id: id
+      item_id: id,
     });
 
     await this.parserTextLang.delete({
       database: core_nav_description,
-      item_id: id
+      item_id: id,
     });
 
     // Delete nav

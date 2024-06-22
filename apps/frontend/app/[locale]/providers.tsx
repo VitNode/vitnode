@@ -23,10 +23,10 @@ export const Providers = ({ children, config, data }: Props) => {
         defaultOptions: {
           queries: {
             refetchOnWindowFocus: false,
-            refetchOnMount: false
-          }
-        }
-      })
+            refetchOnMount: false,
+          },
+        },
+      }),
   );
 
   return (
@@ -38,7 +38,7 @@ export const Providers = ({ children, config, data }: Props) => {
           defaultLanguage:
             data?.core_languages__show.edges.find(lang => lang.default)?.code ??
             "en",
-          config
+          config,
         }}
       >
         <NextThemesProvider

@@ -1,6 +1,6 @@
 import {
   LanguageSelectFooterEditor,
-  LanguageSelectFooterEditorProps
+  LanguageSelectFooterEditorProps,
 } from "./language-select";
 import { FilesButtonFooterEditor } from "./files/button";
 import { ListFilesFooterEditor } from "./files/list";
@@ -15,7 +15,7 @@ interface Props extends LanguageSelectFooterEditorProps {
 export const FooterEditor = ({
   disableLanguage,
   selectedLanguage,
-  setSelectedLanguage
+  setSelectedLanguage,
 }: Props) => {
   const { files: permissionFiles } = useSession();
   const { allowUploadFiles, files } = useEditorState();

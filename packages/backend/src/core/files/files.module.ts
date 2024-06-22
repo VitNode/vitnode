@@ -8,7 +8,7 @@ import { CoreFilesCron } from "./files.cron";
 import { DownloadSecureFilesController } from "./download/download.controller";
 
 @Module({
-  providers: [ShowCoreFilesService, ShowCoreFilesResolver, CoreFilesCron]
+  providers: [ShowCoreFilesService, ShowCoreFilesResolver, CoreFilesCron],
 })
 export class CoreFilesModule {}
 
@@ -16,6 +16,6 @@ export class CoreFilesModule {}
 @Module({
   providers: [UploadCoreFilesService, DeleteCoreFilesService],
   exports: [UploadCoreFilesService, DeleteCoreFilesService],
-  controllers: [DownloadSecureFilesController]
+  controllers: [DownloadSecureFilesController],
 })
 export class GlobalCoreFilesModule {}

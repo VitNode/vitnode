@@ -13,7 +13,7 @@ export class DeleteAvatarCoreMembersResolver {
   @Mutation(() => String)
   @UseGuards(AuthGuards)
   async core_members__avatar__delete(
-    @CurrentUser() currentUser: User
+    @CurrentUser() currentUser: User,
   ): Promise<string> {
     return this.service.deleteAvatar(currentUser);
   }

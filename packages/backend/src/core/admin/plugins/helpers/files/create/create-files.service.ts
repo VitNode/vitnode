@@ -8,13 +8,13 @@ import {
   createFunctionsDatabase,
   createInfoJSON,
   createModuleAdminSchema,
-  createModuleSchema
+  createModuleSchema,
 } from "./contents";
 
 import {
   ABSOLUTE_PATHS_BACKEND,
   CustomError,
-  PluginInfoJSONType
+  PluginInfoJSONType,
 } from "../../../../../..";
 
 @Injectable()
@@ -29,44 +29,44 @@ export class CreateFilesAdminPluginsService {
         files: [
           {
             name: `${code}.module.ts`,
-            content: createModuleSchema({ code })
+            content: createModuleSchema({ code }),
           },
           {
             name: "config.json",
-            content: createInfoJSON({ code, allow_default: true, ...rest })
+            content: createInfoJSON({ code, allow_default: true, ...rest }),
           },
           {
             name: "versions.json",
-            content: "{}\n"
-          }
-        ]
+            content: "{}\n",
+          },
+        ],
       },
       {
         path: ABSOLUTE_PATHS_BACKEND.plugin({ code }).admin,
         files: [
           {
             name: "admin.module.ts",
-            content: createModuleAdminSchema({ code })
-          }
-        ]
+            content: createModuleAdminSchema({ code }),
+          },
+        ],
       },
       {
         path: ABSOLUTE_PATHS_BACKEND.plugin({ code }).database.init,
         files: [
           {
             name: "index.ts",
-            content: `export default {};\n`
+            content: `export default {};\n`,
           },
           {
             name: "functions.ts",
-            content: createFunctionsDatabase()
+            content: createFunctionsDatabase(),
           },
           {
             name: "drizzle.config.ts",
-            content: createConfigForDrizzle({ code })
-          }
-        ]
-      }
+            content: createConfigForDrizzle({ code }),
+          },
+        ],
+      },
     ];
 
     // Check if folder exists
@@ -74,7 +74,7 @@ export class CreateFilesAdminPluginsService {
       if (fs.existsSync(folder.path)) {
         throw new CustomError({
           code: "PLUGIN_ALREADY_EXISTS",
-          message: `Plugin already exists in filesystem with "${code}" code!`
+          message: `Plugin already exists in filesystem with "${code}" code!`,
         });
       }
     });
@@ -89,7 +89,7 @@ export class CreateFilesAdminPluginsService {
           if (err) {
             throw new CustomError({
               code: "ERROR_CREATING_FILE",
-              message: err.message
+              message: err.message,
             });
           }
         });

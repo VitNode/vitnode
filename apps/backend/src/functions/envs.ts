@@ -7,6 +7,6 @@ export const parseFrontendUrlFromEnv = () => {
     url: frontendUrl,
     protocol: urlObj.protocol,
     hostname: urlObj.hostname,
-    port: urlObj.port
+    port: urlObj.port,
   };
 };

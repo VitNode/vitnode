@@ -5,11 +5,11 @@ import {
   Admin__Core_Groups__Show,
   ShowAdminGroupsSortingColumnEnum,
   Admin__Core_Groups__ShowQuery,
-  Admin__Core_Groups__ShowQueryVariables
+  Admin__Core_Groups__ShowQueryVariables,
 } from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
-  SearchParamsPagination
+  SearchParamsPagination,
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { fetcher } from "@/graphql/fetcher";
 import { GroupsMembersAdminView } from "@/plugins/admin/views/members/groups/groups-members-admin-view";
@@ -24,7 +24,7 @@ const getData = async (variables: Admin__Core_Groups__ShowQueryVariables) => {
     Admin__Core_Groups__ShowQueryVariables
   >({
     query: Admin__Core_Groups__Show,
-    variables
+    variables,
   });
 
   return data;
@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("admin.members.groups");
 
   return {
-    title: t("title")
+    title: t("title"),
   };
 }
 
@@ -43,7 +43,7 @@ export default async function Page({ searchParams }: Props) {
     searchParams,
     search: true,
     sortByEnum: ShowAdminGroupsSortingColumnEnum,
-    defaultPageSize: 10
+    defaultPageSize: 10,
   });
   const data = await getData(variables);
 

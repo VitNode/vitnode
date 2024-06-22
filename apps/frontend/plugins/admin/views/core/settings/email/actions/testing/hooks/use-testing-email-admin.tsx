@@ -17,7 +17,7 @@ export const useTestingEmailAdmin = () => {
     from: z.string().min(1).email(),
     to: z.string().min(1).email(),
     subject: z.string().min(1),
-    message: z.string().min(1)
+    message: z.string().min(1),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -27,8 +27,8 @@ export const useTestingEmailAdmin = () => {
       to: session?.email || "",
       subject: "Test Email from Admin Panel",
       message:
-        "This email confirms that your email settings in your website by VitNode are working correctly."
-    }
+        "This email confirms that your email settings in your website by VitNode are working correctly.",
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -36,14 +36,14 @@ export const useTestingEmailAdmin = () => {
 
     if (mutation.error) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;
     }
 
     toast.success(t("success.title"), {
-      description: t("success.desc")
+      description: t("success.desc"),
     });
 
     setOpen?.(false);

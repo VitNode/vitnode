@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import {
   Core_Editor_Files__Upload,
   Core_Editor_Files__UploadMutation,
-  Core_Editor_Files__UploadMutationVariables
+  Core_Editor_Files__UploadMutationVariables,
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 
@@ -22,14 +22,14 @@ export const uploadMutationApi = async (formData: FormData) => {
       query: Core_Editor_Files__Upload,
       variables: {
         plugin,
-        folder
+        folder,
       },
       uploads: [
         {
           files: file,
-          variable: "file"
-        }
-      ]
+          variable: "file",
+        },
+      ],
     });
 
     revalidatePath("/settings/files", "page");

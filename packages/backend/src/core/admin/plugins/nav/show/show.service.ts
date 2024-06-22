@@ -12,14 +12,14 @@ import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from "../../../../..";
 export class ShowAdminNavPluginsService {
   show({ plugin_code }: ShowAdminNavPluginsArgs): ShowAdminNavPluginsObj[] {
     const pathConfig = ABSOLUTE_PATHS_BACKEND.plugin({
-      code: plugin_code
+      code: plugin_code,
     }).config;
     if (!fs.existsSync(pathConfig)) {
       throw new NotFoundError("Plugin");
     }
 
     const config: ConfigPlugin = JSON.parse(
-      fs.readFileSync(pathConfig, "utf8")
+      fs.readFileSync(pathConfig, "utf8"),
     );
 
     return config.nav;

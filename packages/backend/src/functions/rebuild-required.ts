@@ -4,7 +4,7 @@ import { ConfigType, configPath, getConfigFile } from "../providers/config";
 import { CustomError } from "../errors";
 
 export const setRebuildRequired = async ({
-  set
+  set,
 }: {
   set: "langs" | "plugins";
 }) => {
@@ -14,15 +14,15 @@ export const setRebuildRequired = async ({
     ...config,
     rebuild_required: {
       ...config.rebuild_required,
-      [set]: true
-    }
+      [set]: true,
+    },
   };
 
   fs.writeFile(configPath, JSON.stringify(newData, null, 2), "utf8", err => {
     if (err)
       throw new CustomError({
         code: "ERR_CONFIG_WRITE",
-        message: "Error writing to config file"
+        message: "Error writing to config file",
       });
   });
 };

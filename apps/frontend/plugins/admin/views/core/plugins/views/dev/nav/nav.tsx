@@ -3,7 +3,7 @@
 import { DndContext, DragOverlay, closestCorners } from "@dnd-kit/core";
 import {
   SortableContext,
-  verticalListSortingStrategy
+  verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useTranslations } from "next-intl";
 import * as React from "react";
@@ -13,7 +13,7 @@ import { WithChildren } from "@vitnode/frontend/helpers";
 import { useDragAndDrop } from "@/plugins/core/hooks/drag&drop/use-functions";
 import {
   Admin__Core_Plugins__Nav__ShowQuery,
-  ShowAdminNavPluginsObj
+  ShowAdminNavPluginsObj,
 } from "@/graphql/hooks";
 import { ItemContentNavDevPluginAdmin } from "./item";
 import { mutationChangePositionApi } from "./item/hooks/mutation-change-position-api";
@@ -26,7 +26,7 @@ interface Props extends Admin__Core_Plugins__Nav__ShowQuery {
 
 export const NavDevPluginAdminView = ({
   admin__core_plugins__nav__show: edges,
-  icons
+  icons,
 }: Props) => {
   const t = useTranslations("core");
   const { code } = useParams();
@@ -37,9 +37,9 @@ export const NavDevPluginAdminView = ({
       item.children?.map(child => ({
         ...child,
         id: child.code,
-        children: []
+        children: [],
       })) ?? [],
-    id: item.code
+    id: item.code,
   }));
 
   const {
@@ -51,9 +51,9 @@ export const NavDevPluginAdminView = ({
     onDragOver,
     onDragStart,
     resetState,
-    sortedIds
+    sortedIds,
   } = useDragAndDrop<ShowAdminNavPluginsObj>({
-    data
+    data,
   });
 
   // Revalidate items when edges change
@@ -78,7 +78,7 @@ export const NavDevPluginAdminView = ({
         const moveTo = onDragEnd<ShowAdminNavPluginsObj>({
           data,
           setData,
-          ...event
+          ...event,
         });
 
         if (!moveTo) return;
@@ -87,7 +87,7 @@ export const NavDevPluginAdminView = ({
           code: moveTo.id.toString(),
           pluginCode: Array.isArray(code) ? code[0] : code,
           indexToMove: moveTo.indexToMove,
-          parentCode: moveTo.parentId?.toString()
+          parentCode: moveTo.parentId?.toString(),
         });
       }}
     >
@@ -97,14 +97,14 @@ export const NavDevPluginAdminView = ({
             key={item.id}
             {...actionsItem({
               data: item,
-              indentationWidth: 20
+              indentationWidth: 20,
             })}
           >
             <ItemNavDevPluginAdminContext.Provider
               value={{
                 dataFromSSR: edges,
                 parentId: item.parentId?.toString(),
-                icons
+                icons,
               }}
             >
               <ItemContentNavDevPluginAdmin {...item} />
@@ -116,13 +116,13 @@ export const NavDevPluginAdminView = ({
           {activeItemOverlay && (
             <ItemDragAndDrop
               {...actionsItem({
-                data: activeItemOverlay
+                data: activeItemOverlay,
               })}
             >
               <ItemNavDevPluginAdminContext.Provider
                 value={{
                   dataFromSSR: edges,
-                  icons
+                  icons,
                 }}
               >
                 <ItemContentNavDevPluginAdmin {...activeItemOverlay} />

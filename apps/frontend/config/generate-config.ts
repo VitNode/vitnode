@@ -14,16 +14,16 @@ import { DEFAULT_CONFIG_DATA } from ".";
           ...DEFAULT_CONFIG_DATA,
           lang: [
             { code: "en", enabled: true },
-            { code: "pl", enabled: true }
-          ]
+            { code: "pl", enabled: true },
+          ],
         },
         null,
-        2
+        2,
       ),
       "utf8",
       err => {
         if (err) throw err;
-      }
+      },
     );
 
     console.log("[VitNode] - Config file has been generated");
@@ -37,10 +37,10 @@ import { DEFAULT_CONFIG_DATA } from ".";
         ...config,
         rebuild_required: {
           langs: false,
-          plugins: false
-        }
+          plugins: false,
+        },
       },
-      DEFAULT_CONFIG_DATA
+      DEFAULT_CONFIG_DATA,
     );
 
     fs.writeFile(
@@ -49,7 +49,7 @@ import { DEFAULT_CONFIG_DATA } from ".";
       "utf8",
       err => {
         if (err) throw err;
-      }
+      },
     );
 
     console.log("[VitNode] - Config file has been updated");

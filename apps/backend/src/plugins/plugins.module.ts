@@ -1,4 +1,4 @@
-// ! DO NOT REMOVE OR MODIFY THIS FILE!!!
+// ! DO NOT REMOVE, MODIFY OR MOVE THIS FILE!!!
 
 import { Module } from "@nestjs/common";
 
@@ -7,8 +7,8 @@ import { BlogModule } from "./blog/blog.module";
 
 @Module({
   imports: [
-    BlogModule
+    BlogModule,
     // ! === MODULE ===
-  ]
+  ],
 })
 export class PluginsModule {}

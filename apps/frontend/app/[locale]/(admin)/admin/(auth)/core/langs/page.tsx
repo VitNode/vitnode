@@ -5,11 +5,11 @@ import {
   Core_Languages__Show,
   ShowCoreLanguagesSortingColumnEnum,
   Core_Languages__ShowQuery,
-  Core_Languages__ShowQueryVariables
+  Core_Languages__ShowQueryVariables,
 } from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
-  SearchParamsPagination
+  SearchParamsPagination,
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Card } from "@/components/ui/card";
@@ -24,7 +24,7 @@ const getData = async (variables: Core_Languages__ShowQueryVariables) => {
     Core_Languages__ShowQueryVariables
   >({
     query: Core_Languages__Show,
-    variables
+    variables,
   });
 
   return data;
@@ -40,7 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("admin.core.langs");
 
   return {
-    title: t("title")
+    title: t("title"),
   };
 }
 
@@ -49,12 +49,12 @@ export default async function Page({ searchParams }: Props) {
     searchParams,
     defaultPageSize: 10,
     search: true,
-    sortByEnum: ShowCoreLanguagesSortingColumnEnum
+    sortByEnum: ShowCoreLanguagesSortingColumnEnum,
   });
 
   const [t, data] = await Promise.all([
     getTranslations("admin.core.langs"),
-    getData(variables)
+    getData(variables),
   ]);
 
   return (

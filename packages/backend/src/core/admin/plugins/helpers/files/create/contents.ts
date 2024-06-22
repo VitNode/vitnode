@@ -26,7 +26,7 @@ export class Admin${name}Module {}
 };
 
 export const createFunctionsDatabase = () => {
-  return `// ! DO NOT REMOVE OR MODIFY THIS FILE!!!
+  return `// ! DO NOT REMOVE, MODIFY OR MOVE THIS FILE!!!
 import { default as tables } from "./index";
 
 export const getTables = () => {
@@ -36,7 +36,7 @@ export const getTables = () => {
 };
 
 export const createConfigForDrizzle = ({ code }: { code: string }) => {
-  return `// ! DO NOT REMOVE OR MODIFY THIS FILE!!!
+  return `// ! DO NOT REMOVE, MODIFY OR MOVE THIS FILE!!!
 import { defineConfig } from "drizzle-kit";
 
 import { DATABASE_ENVS } from "@/database/client";
@@ -58,7 +58,7 @@ export const createInfoJSON = ({
   description,
   name,
   nav,
-  support_url
+  support_url,
 }: PluginInfoJSONType): string => {
   const json = {
     name,
@@ -68,7 +68,7 @@ export const createInfoJSON = ({
     author_url,
     support_url,
     allow_default,
-    nav
+    nav,
   };
 
   return JSON.stringify(json, null, 2);

@@ -13,7 +13,7 @@ export class UpdateAdminCoreLanguagesResolver {
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
   async admin__core_languages__update(
-    @Args() args: UpdateCoreAdminLanguagesArgs
+    @Args() args: UpdateCoreAdminLanguagesArgs,
   ): Promise<string> {
     return this.service.update(args);
   }

@@ -4,6 +4,6 @@ import { ShowCoreSessionDevicesResolver } from "./show/show.resolver";
 import { ShowCoreSessionDevicesService } from "./show/show.service";
 
 @Module({
-  providers: [ShowCoreSessionDevicesResolver, ShowCoreSessionDevicesService]
+  providers: [ShowCoreSessionDevicesResolver, ShowCoreSessionDevicesService],
 })
 export class DevicesCoreSessionsModule {}

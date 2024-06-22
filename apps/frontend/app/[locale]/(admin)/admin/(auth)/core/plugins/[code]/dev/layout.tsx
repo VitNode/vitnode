@@ -15,12 +15,12 @@ interface Props {
 }
 
 export async function generateMetadata({
-  params: { code }
+  params: { code },
 }: Props): Promise<Metadata> {
   const [t, tCore, config] = await Promise.all([
     getTranslations("admin"),
     getTranslations("core.admin"),
-    getConfigFile()
+    getConfigFile(),
   ]);
 
   const { data } = await getPluginDataAdmin({ code });
@@ -31,8 +31,8 @@ export async function generateMetadata({
   return {
     title: {
       template: `%s - ${defaultTitle}`,
-      absolute: defaultTitle
-    }
+      absolute: defaultTitle,
+    },
   };
 }
 

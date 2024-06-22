@@ -1,4 +1,4 @@
-// ! DO NOT REMOVE OR MODIFY THIS FILE!!!
+// ! DO NOT REMOVE, MODIFY OR MOVE THIS FILE!!!
 
 type IntlMessages = typeof import("@/plugins/core/langs/en.json") &
   // ! === IMPORT ===

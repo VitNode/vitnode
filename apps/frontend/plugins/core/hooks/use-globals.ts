@@ -22,7 +22,7 @@ interface Args {
 export const GlobalsContext = React.createContext<Args>({
   languages: [],
   defaultLanguage: "",
-  config: {} as ConfigType
+  config: {} as ConfigType,
 });
 
 export const useGlobals = () => React.useContext(GlobalsContext);

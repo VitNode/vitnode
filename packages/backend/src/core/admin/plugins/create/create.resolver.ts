@@ -15,7 +15,7 @@ export class CreateAdminPluginsResolver {
   @UseGuards(AdminAuthGuards)
   @UseGuards(OnlyForDevelopment)
   async admin__core_plugins__create(
-    @Args() args: CreateAdminPluginsArgs
+    @Args() args: CreateAdminPluginsArgs,
   ): Promise<ShowAdminPlugins> {
     return this.service.create(args);
   }

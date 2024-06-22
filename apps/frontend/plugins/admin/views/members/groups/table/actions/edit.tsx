@@ -10,9 +10,9 @@ import { ShowAdminGroups } from "@/graphql/hooks";
 const CreateEditFormGroupsMembersAdmin = React.lazy(async () =>
   import("../../create-edit-form/create-edit-form-groups-members-admin").then(
     module => ({
-      default: module.CreateEditFormGroupsMembersAdmin
-    })
-  )
+      default: module.CreateEditFormGroupsMembersAdmin,
+    }),
+  ),
 );
 
 interface Props {

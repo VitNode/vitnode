@@ -3,7 +3,7 @@ import { changeCodePluginToCapitalLetters } from "../../change-code-plugin-to-ca
 export const changeModuleRootSchema = ({
   admin,
   code,
-  content
+  content,
 }: {
   code: string;
   content: string;
@@ -14,18 +14,18 @@ export const changeModuleRootSchema = ({
   return content
     .replace(
       "// ! === IMPORT ===",
-      `import { ${name}Module } from "./${code}/${code}.module";\n// ! === IMPORT ===`
+      `import { ${name}Module } from "./${code}/${code}.module";\n// ! === IMPORT ===`,
     )
     .replace(
       "\n    // ! === MODULE ===",
-      `\n    ${name}Module,\n    // ! === MODULE ===`
+      `\n    ${name}Module,\n    // ! === MODULE ===`,
     );
 };
 
 export const changeDatabaseService = ({
   admin,
   code,
-  content
+  content,
 }: {
   code: string;
   content: string;
@@ -36,23 +36,23 @@ export const changeDatabaseService = ({
   return content
     .replace(
       "// ! === IMPORT ===",
-      `import table${name} from "../plugins/${code}/admin/database/index";\n// ! === IMPORT ===`
+      `import table${name} from "../plugins/${code}/admin/database/index";\n// ! === IMPORT ===`,
     )
     .replace(
       "\n  // ! === MODULE ===",
-      `\n  ...table${name},\n  // ! === MODULE ===`
+      `\n  ...table${name},\n  // ! === MODULE ===`,
     );
 };
 
 export const changeLangTypes = ({
   code,
-  content
+  content,
 }: {
   code: string;
   content: string;
 }) => {
   return content.replace(
     "// ! === IMPORT ===",
-    `typeof import("@/plugins/${code}/langs/en.json") &\n  // ! === IMPORT ===`
+    `typeof import("@/plugins/${code}/langs/en.json") &\n  // ! === IMPORT ===`,
   );
 };

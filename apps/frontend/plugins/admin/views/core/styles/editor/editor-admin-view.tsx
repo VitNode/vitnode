@@ -7,7 +7,7 @@ import {
   Form,
   FormField,
   FormFieldRender,
-  FormWrapper
+  FormWrapper,
 } from "@/components/ui/form";
 import { useEditorAdmin, EditorAdminArgs } from "./hooks/use-editor-admin";
 import { Button } from "@/components/ui/button";

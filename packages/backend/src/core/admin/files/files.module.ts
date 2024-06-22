@@ -11,8 +11,8 @@ import { DeleteAdminFilesService } from "./delete/delete.service";
     ShowAdminFilesResolver,
     ShowAdminFilesService,
     DeleteAdminFilesResolver,
-    DeleteAdminFilesService
+    DeleteAdminFilesService,
   ],
-  controllers: [DownloadFilesAdminController]
+  controllers: [DownloadFilesAdminController],
 })
 export class AdminFilesModule {}

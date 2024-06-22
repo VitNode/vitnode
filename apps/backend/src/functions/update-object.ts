@@ -1,6 +1,6 @@
 export function updateObject<T extends Record<string, any>>(
   config: T,
-  defaultData: T
+  defaultData: T,
 ): T {
   const updatedConfig = config;
   for (const key in defaultData) {
@@ -19,7 +19,7 @@ export function updateObject<T extends Record<string, any>>(
       }
       updatedConfig[key] = updateObject(
         (config[key] || {}) as T[Extract<keyof T, string>],
-        defaultData[key]
+        defaultData[key],
       );
     } else {
       // Handle primitive values
@@ -34,7 +34,7 @@ export function updateObject<T extends Record<string, any>>(
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function objectToArray<T extends Record<string, any>>(
-  obj: T
+  obj: T,
 ): Record<string, unknown> {
   if (typeof obj !== "object" || obj === null) {
     return obj;
@@ -52,6 +52,6 @@ export function objectToArray<T extends Record<string, any>>(
 
       return acc;
     },
-    {}
+    {},
   );
 }

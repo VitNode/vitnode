@@ -12,12 +12,12 @@ import { Ctx } from "../../../utils";
 export class AuthorizationCoreSessionsService {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly service: InternalAuthorizationCoreSessionsService
+    private readonly service: InternalAuthorizationCoreSessionsService,
   ) {}
 
   protected async isAdmin({
     group_id,
-    user_id
+    user_id,
   }: {
     group_id: number;
     user_id: number;
@@ -25,14 +25,14 @@ export class AuthorizationCoreSessionsService {
     return !!(await this.databaseService.db.query.core_admin_permissions.findFirst(
       {
         where: (table, { eq, or }) =>
-          or(eq(table.group_id, group_id), eq(table.user_id, user_id))
-      }
+          or(eq(table.group_id, group_id), eq(table.user_id, user_id)),
+      },
     ));
   }
 
   protected async isMod({
     group_id,
-    user_id
+    user_id,
   }: {
     group_id: number;
     user_id: number;
@@ -40,17 +40,17 @@ export class AuthorizationCoreSessionsService {
     return !!(await this.databaseService.db.query.core_moderators_permissions.findFirst(
       {
         where: (table, { eq, or }) =>
-          or(eq(table.group_id, group_id), eq(table.user_id, user_id))
-      }
+          or(eq(table.group_id, group_id), eq(table.user_id, user_id)),
+      },
     ));
   }
 
   async authorization({
     req,
-    res
+    res,
   }: Ctx): Promise<AuthorizationCoreSessionsObj> {
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
-      where: (table, { eq }) => eq(table.default, true)
+      where: (table, { eq }) => eq(table.default, true),
     });
 
     try {
@@ -62,15 +62,15 @@ export class AuthorizationCoreSessionsService {
           avatar: true,
           group: {
             with: {
-              name: true
-            }
-          }
-        }
+              name: true,
+            },
+          },
+        },
       });
 
       const countStorageUsed = await this.databaseService.db
         .select({
-          space_used: sum(core_files.file_size)
+          space_used: sum(core_files.file_size),
         })
         .from(core_files)
         .where(eq(core_files.user_id, user.id));
@@ -81,13 +81,13 @@ export class AuthorizationCoreSessionsService {
           group: currentUser.group,
           is_admin: await this.isAdmin({
             group_id: user.group.id,
-            user_id: user.id
+            user_id: user.id,
           }),
           is_mod: await this.isMod({
             group_id: user.group.id,
-            user_id: user.id
+            user_id: user.id,
           }),
-          avatar_color: user.avatar_color
+          avatar_color: user.avatar_color,
         },
         plugin_default: plugin?.code ?? "",
         files: {
@@ -98,13 +98,13 @@ export class AuthorizationCoreSessionsService {
           total_max_storage: user.group.files_total_max_storage
             ? user.group.files_total_max_storage * 1024
             : user.group.files_total_max_storage,
-          space_used: (+countStorageUsed[0].space_used ?? 0) * 1024
-        }
+          space_used: (+countStorageUsed[0].space_used ?? 0) * 1024,
+        },
       };
     } catch (error) {
       const guestGroup =
         await this.databaseService.db.query.core_groups.findFirst({
-          where: (table, { eq }) => eq(table.guest, true)
+          where: (table, { eq }) => eq(table.guest, true),
         });
 
       return {
@@ -114,8 +114,8 @@ export class AuthorizationCoreSessionsService {
           allow_upload: guestGroup?.files_allow_upload ?? false,
           max_storage_for_submit: guestGroup?.files_max_storage_for_submit ?? 0,
           total_max_storage: guestGroup?.files_total_max_storage ?? 0,
-          space_used: 0
-        }
+          space_used: 0,
+        },
       };
     }
   }

@@ -10,7 +10,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { buttonVariants } from "@/components/ui/button";
 import { DataTable } from "@/components/data-table/data-table";
@@ -37,7 +37,7 @@ interface UsersMembersAdminAPIDataType
   > {}
 
 export const TableUsersMembersAdmin = ({
-  data
+  data,
 }: UsersMembersAdminViewProps) => {
   const t = useTranslations("admin.members.users");
   const tCore = useTranslations("core");
@@ -58,11 +58,11 @@ export const TableUsersMembersAdmin = ({
               <span>{data.name}</span>
             </div>
           );
-        }
+        },
       },
       {
         header: t("table.email"),
-        accessorKey: "email"
+        accessorKey: "email",
       },
       {
         header: t("table.group"),
@@ -71,7 +71,7 @@ export const TableUsersMembersAdmin = ({
           const data = row.original;
 
           return convertText(data.group.name);
-        }
+        },
       },
       {
         header: val => {
@@ -86,7 +86,7 @@ export const TableUsersMembersAdmin = ({
           const data = row.original;
 
           return <DateFormat date={data.joined} />;
-        }
+        },
       },
       {
         id: "actions",
@@ -102,7 +102,7 @@ export const TableUsersMembersAdmin = ({
                       href={`/admin/members/users/${data.id}`}
                       className={buttonVariants({
                         variant: "ghost",
-                        size: "icon"
+                        size: "icon",
                       })}
                     >
                       <Pencil />
@@ -114,10 +114,10 @@ export const TableUsersMembersAdmin = ({
               </TooltipProvider>
             </>
           );
-        }
-      }
+        },
+      },
     ],
-    []
+    [],
   );
 
   return (
@@ -131,7 +131,7 @@ export const TableUsersMembersAdmin = ({
       advancedFilters={<AdvancedFiltersUsersMembersAdmin />}
       defaultSorting={{
         sortBy: "joined",
-        sortDirection: "desc"
+        sortDirection: "desc",
       }}
     />
   );

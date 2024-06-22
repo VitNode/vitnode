@@ -18,7 +18,7 @@ import { getUserIp } from "../../../functions";
 export class SignUpCoreMembersService {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly configService: ConfigService
+    private readonly configService: ConfigService,
   ) {}
 
   protected getGroupId = async (): Promise<number> => {
@@ -31,7 +31,7 @@ export class SignUpCoreMembersService {
       const rootGroup =
         await this.databaseService.db.query.core_groups.findFirst({
           where: (table, { and, eq }) =>
-            and(eq(table.default, false), eq(table.root, true))
+            and(eq(table.default, false), eq(table.root, true)),
         });
 
       return rootGroup.id;
@@ -40,7 +40,7 @@ export class SignUpCoreMembersService {
     const defaultGroup =
       await this.databaseService.db.query.core_groups.findFirst({
         where: (table, { and, eq }) =>
-          and(eq(table.default, true), eq(table.root, false))
+          and(eq(table.default, true), eq(table.root, false)),
       });
 
     return defaultGroup.id;
@@ -48,38 +48,38 @@ export class SignUpCoreMembersService {
 
   async signUp(
     { email: emailRaw, name, newsletter, password }: SignUpCoreMembersArgs,
-    { req }: Ctx
+    { req }: Ctx,
   ): Promise<SignUpCoreMembersObj> {
     const email = emailRaw.toLowerCase();
 
     const checkEmail = await this.databaseService.db.query.core_users.findFirst(
       {
-        where: (table, { eq }) => eq(table.email, email)
-      }
+        where: (table, { eq }) => eq(table.email, email),
+      },
     );
 
     if (checkEmail) {
       throw new CustomError({
         message: "Email already exists",
-        code: "EMAIL_ALREADY_EXISTS"
+        code: "EMAIL_ALREADY_EXISTS",
       });
     }
 
     const convertToNameSEO = removeSpecialCharacters(name);
     const checkNameSEO =
       await this.databaseService.db.query.core_users.findFirst({
-        where: (table, { ilike }) => ilike(table.name_seo, convertToNameSEO)
+        where: (table, { ilike }) => ilike(table.name_seo, convertToNameSEO),
       });
 
     if (checkNameSEO) {
       throw new CustomError({
         message: "Name already exists",
-        code: "NAME_ALREADY_EXISTS"
+        code: "NAME_ALREADY_EXISTS",
       });
     }
 
     const passwordSalt = await genSalt(
-      this.configService.getOrThrow("password_salt")
+      this.configService.getOrThrow("password_salt"),
     );
     const hashPassword = await hash(password, passwordSalt);
 
@@ -93,7 +93,7 @@ export class SignUpCoreMembersService {
         password: hashPassword,
         avatar_color: generateAvatarColor(name),
         group_id: await this.getGroupId(),
-        ip_address: getUserIp(req)
+        ip_address: getUserIp(req),
       })
       .returning();
 

@@ -11,11 +11,11 @@ export class DatabaseService {
 
   constructor(
     @Inject("DATABASE_MODULE_OPTIONS")
-    private readonly options: DatabaseModuleArgs
+    private readonly options: DatabaseModuleArgs,
   ) {
     const client = createClientDatabase({
       schemaDatabase: this.options.schemaDatabase,
-      config: this.options.config
+      config: this.options.config,
     });
 
     this.db = client.db as NodePgDatabase<typeof coreSchemaDatabase>;

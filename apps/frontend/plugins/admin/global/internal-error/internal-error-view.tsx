@@ -9,7 +9,7 @@ import {
   Card,
   CardContent,
   CardFooter,
-  CardHeader
+  CardHeader,
 } from "@/components/ui/card";
 import { PoweredByVitNode } from "../powered-by";
 import { Button } from "@/components/ui/button";
@@ -58,14 +58,16 @@ export const InternalErrorView = ({ showPoweredBy }: Props) => {
           >
             <RefreshCcw />
             {t(
-              CONFIG.node_development ? "clear_cache_and_reload" : "reload_page"
+              CONFIG.node_development
+                ? "clear_cache_and_reload"
+                : "reload_page",
             )}
           </Button>
         </CardFooter>
       </Card>
       <div className="text-muted-foreground pt-2 text-right italic">
         {t.rich("errors.code", {
-          code: () => <span className="font-semibold">{500}</span>
+          code: () => <span className="font-semibold">{500}</span>,
         })}
       </div>
 

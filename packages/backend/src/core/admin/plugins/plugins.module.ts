@@ -35,8 +35,8 @@ import { FilesAdminPluginsResolver } from "./files/files.resolver";
     FilesAdminPluginsService,
     FilesAdminPluginsResolver,
     EditAdminPluginsResolver,
-    EditAdminPluginsService
+    EditAdminPluginsService,
   ],
-  imports: [AdminNavPluginsModule]
+  imports: [AdminNavPluginsModule],
 })
 export class AdminPluginsModule {}

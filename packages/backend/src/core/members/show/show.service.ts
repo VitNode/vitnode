@@ -19,7 +19,7 @@ export class ShowCoreMembersService {
     last,
     name_seo,
     search,
-    sortBy
+    sortBy,
   }: ShowCoreMembersArgs): Promise<ShowCoreMembersObj> {
     // TODO: Add search
     // const where: Prisma.core_membersWhereInput = findByIds
@@ -42,13 +42,13 @@ export class ShowCoreMembersService {
       last,
       primaryCursor: {
         column: "id",
-        schema: core_users.id
+        schema: core_users.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: "joined"
+        column: "joined",
       },
-      sortBy
+      sortBy,
     });
 
     const where = or(
@@ -56,8 +56,8 @@ export class ShowCoreMembersService {
       or(
         ilike(core_users.name, `%${search}%`),
         ilike(core_users.email, `%${search}%`),
-        Number(search) ? eq(core_users.id, Number(search)) : undefined
-      )
+        Number(search) ? eq(core_users.id, Number(search)) : undefined,
+      ),
     );
 
     const edges = await this.databaseService.db.query.core_users.findMany({
@@ -67,10 +67,10 @@ export class ShowCoreMembersService {
         avatar: true,
         group: {
           with: {
-            name: true
-          }
-        }
-      }
+            name: true,
+          },
+        },
+      },
     });
 
     const totalCount = await this.databaseService.db

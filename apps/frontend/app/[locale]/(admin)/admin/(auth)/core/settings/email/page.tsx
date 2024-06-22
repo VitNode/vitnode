@@ -8,7 +8,7 @@ import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Email_Settings__Show,
   Admin__Core_Email_Settings__ShowQuery,
-  Admin__Core_Email_Settings__ShowQueryVariables
+  Admin__Core_Email_Settings__ShowQueryVariables,
 } from "@/graphql/hooks";
 import { ActionsEmailSettingsAdmin } from "@/plugins/admin/views/core/settings/email/actions/actions";
 
@@ -17,7 +17,7 @@ const getData = async () => {
     Admin__Core_Email_Settings__ShowQuery,
     Admin__Core_Email_Settings__ShowQueryVariables
   >({
-    query: Admin__Core_Email_Settings__Show
+    query: Admin__Core_Email_Settings__Show,
   });
 
   return data;
@@ -27,14 +27,14 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("core.admin.nav");
 
   return {
-    title: t("settings_email")
+    title: t("settings_email"),
   };
 }
 
 export default async function Page() {
   const [t, data] = await Promise.all([
     getTranslations("core.admin.nav"),
-    getData()
+    getData(),
   ]);
 
   return (

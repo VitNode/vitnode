@@ -12,16 +12,16 @@ export class DeleteAdminNavPluginsService {
   delete({
     code,
     plugin_code,
-    parent_code
+    parent_code,
   }: DeleteCreateAdminNavPluginsArgs): string {
     const pathConfig = ABSOLUTE_PATHS_BACKEND.plugin({
-      code: plugin_code
+      code: plugin_code,
     }).config;
     if (!fs.existsSync(pathConfig)) {
       throw new NotFoundError("Plugin");
     }
     const config: ConfigPlugin = JSON.parse(
-      fs.readFileSync(pathConfig, "utf8")
+      fs.readFileSync(pathConfig, "utf8"),
     );
 
     // Update config

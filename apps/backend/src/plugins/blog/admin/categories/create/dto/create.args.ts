@@ -4,7 +4,7 @@ import { ArrayMinSize, ValidateNested, IsArray } from "class-validator";
 import {
   IsTextLanguageInput,
   TextLanguageInput,
-  TransformTextLanguageInput
+  TransformTextLanguageInput,
 } from "vitnode-backend";
 
 @InputType()

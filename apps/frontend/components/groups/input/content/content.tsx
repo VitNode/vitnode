@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import {
   Command,
   CommandList,
-  commandInputClassName
+  commandInputClassName,
 } from "@/components/ui/command";
 import { GroupInputItem } from "../group-input";
 import { GroupInputContentList } from "./list";
@@ -27,7 +27,7 @@ export const GroupInputContent = ({ onSelect, values }: Props) => {
 
   const { data, isLoading } = useQuery({
     queryKey: ["Admin__Core_Groups__Show_Short", { search }],
-    queryFn: async () => queryApi({ first: 10, search })
+    queryFn: async () => queryApi({ first: 10, search }),
   });
 
   const handleSearchInput = useDebouncedCallback((value: string) => {
@@ -41,7 +41,7 @@ export const GroupInputContent = ({ onSelect, values }: Props) => {
         <Input
           className={cn(
             "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0",
-            commandInputClassName
+            commandInputClassName,
           )}
           onChange={e => handleSearchInput(e.target.value)}
           placeholder={t("group_input.search")}

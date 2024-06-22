@@ -10,7 +10,7 @@ import { cn } from "@vitnode/frontend/helpers";
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger
+  PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,16 +19,16 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList
+  CommandList,
 } from "@/components/ui/command";
 import { classNameCodeBlock } from "./code";
 
 export const CodeBlockComponent = ({
   extension,
   node: {
-    attrs: { language: defaultLanguage }
+    attrs: { language: defaultLanguage },
   },
-  updateAttributes
+  updateAttributes,
 }: {
   extension: {
     options: {
@@ -92,7 +92,7 @@ export const CodeBlockComponent = ({
                       <CheckIcon
                         className={cn(
                           "ml-auto h-4 w-4",
-                          value === lang ? "opacity-100" : "opacity-0"
+                          value === lang ? "opacity-100" : "opacity-0",
                         )}
                       />
                     </CommandItem>

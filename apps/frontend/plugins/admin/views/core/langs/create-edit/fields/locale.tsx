@@ -12,18 +12,18 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList
+  CommandList,
 } from "@/components/ui/command";
 import {
   FormControl,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger
+  PopoverTrigger,
 } from "@/components/ui/popover";
 
 interface Props<T extends FieldValues, TName extends Path<T>> {
@@ -32,7 +32,7 @@ interface Props<T extends FieldValues, TName extends Path<T>> {
 
 export function LocaleFieldCreateEditLangAdmin<
   T extends FieldValues,
-  TName extends Path<T>
+  TName extends Path<T>,
 >({ field }: Props<T, TName>) {
   const t = useTranslations("admin.core.langs.actions");
   const tCore = useTranslations("core");
@@ -50,7 +50,7 @@ export function LocaleFieldCreateEditLangAdmin<
               role="combobox"
               className={cn(
                 "w-full justify-between",
-                !field.value && "text-muted-foreground"
+                !field.value && "text-muted-foreground",
               )}
             >
               {field.value}
@@ -77,7 +77,7 @@ export function LocaleFieldCreateEditLangAdmin<
                     <Check
                       className={cn(
                         "size-4",
-                        field.value === item ? "opacity-100" : "opacity-0"
+                        field.value === item ? "opacity-100" : "opacity-0",
                       )}
                     />
                     <span>{item}</span>

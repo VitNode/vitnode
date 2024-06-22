@@ -10,7 +10,7 @@ import { CreateDatabaseAdminInstallService } from "./create_database/create_data
     LayoutAdminInstallResolver,
     LayoutAdminInstallService,
     CreateDatabaseAdminInstallResolver,
-    CreateDatabaseAdminInstallService
-  ]
+    CreateDatabaseAdminInstallService,
+  ],
 })
 export class AdminInstallModule {}

@@ -15,7 +15,7 @@ export class FilesAdminPluginsResolver {
   @UseGuards(AdminAuthGuards)
   @UseGuards(OnlyForDevelopment)
   async admin__core_plugins__files(
-    @Args() args: FilesAdminPluginsArgs
+    @Args() args: FilesAdminPluginsArgs,
   ): Promise<FilesAdminPluginsObj> {
     return this.service.check(args);
   }

@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import {
   getHSLFromString,
   getStringFromHSL,
-  isColorBrightness
+  isColorBrightness,
 } from "@vitnode/shared";
 
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { ColorInput } from "@/components/color/color-input";
 import { Separator } from "@/components/ui/separator";
@@ -57,7 +57,7 @@ export const ColorTabThemeEditor = () => {
 
                     changeColor({
                       name: "primary",
-                      hslColor: hslFromColor
+                      hslColor: hslFromColor,
                     });
 
                     changeColor({
@@ -66,13 +66,13 @@ export const ColorTabThemeEditor = () => {
                         ? {
                             h: hslFromColor.h,
                             s: 40,
-                            l: 2
+                            l: 2,
                           }
                         : {
                             h: hslFromColor.h,
                             s: 40,
-                            l: 98
-                          }
+                            l: 98,
+                          },
                     });
                   }}
                   value={getStringFromHSL(field.value[activeTheme])}
@@ -100,7 +100,7 @@ export const ColorTabThemeEditor = () => {
 
                     changeColor({
                       name: "secondary",
-                      hslColor: hslFromColor
+                      hslColor: hslFromColor,
                     });
 
                     changeColor({
@@ -109,13 +109,13 @@ export const ColorTabThemeEditor = () => {
                         ? {
                             h: 210,
                             s: 40,
-                            l: 2
+                            l: 2,
                           }
                         : {
                             h: 210,
                             s: 40,
-                            l: 98
-                          }
+                            l: 98,
+                          },
                     });
                   }}
                   value={getStringFromHSL(field.value[activeTheme])}
@@ -143,7 +143,7 @@ export const ColorTabThemeEditor = () => {
 
                     changeColor({
                       name: "cover",
-                      hslColor: hslFromColor
+                      hslColor: hslFromColor,
                     });
 
                     changeColor({
@@ -152,13 +152,13 @@ export const ColorTabThemeEditor = () => {
                         ? {
                             h: 210,
                             s: 40,
-                            l: 2
+                            l: 2,
                           }
                         : {
                             h: 210,
                             s: 40,
-                            l: 98
-                          }
+                            l: 98,
+                          },
                     });
 
                     const colorMuted =
@@ -169,12 +169,12 @@ export const ColorTabThemeEditor = () => {
                       hslColor: {
                         h: hslFromColor.h,
                         s: Math.floor(hslFromColor.s / 2),
-                        l: colorMuted.l
-                      }
+                        l: colorMuted.l,
+                      },
                     });
 
                     const colorMutedForeground = form.getValues(
-                      "colors.muted-foreground"
+                      "colors.muted-foreground",
                     )[activeTheme];
 
                     changeColor({
@@ -182,8 +182,8 @@ export const ColorTabThemeEditor = () => {
                       hslColor: {
                         h: hslFromColor.h,
                         s: colorMutedForeground.s,
-                        l: colorMutedForeground.l
-                      }
+                        l: colorMutedForeground.l,
+                      },
                     });
 
                     const colorAccent =
@@ -194,8 +194,8 @@ export const ColorTabThemeEditor = () => {
                       hslColor: {
                         h: hslFromColor.h,
                         s: Math.floor(hslFromColor.s / 2),
-                        l: colorAccent.l
-                      }
+                        l: colorAccent.l,
+                      },
                     });
 
                     const colorBackground =
@@ -206,8 +206,8 @@ export const ColorTabThemeEditor = () => {
                       hslColor: {
                         h: hslFromColor.h,
                         s: Math.floor(hslFromColor.s / 2),
-                        l: colorBackground.l
-                      }
+                        l: colorBackground.l,
+                      },
                     });
 
                     const colorCard =
@@ -218,8 +218,8 @@ export const ColorTabThemeEditor = () => {
                       hslColor: {
                         h: hslFromColor.h,
                         s: Math.floor(hslFromColor.s / 2),
-                        l: colorCard.l
-                      }
+                        l: colorCard.l,
+                      },
                     });
 
                     const colorBorder =
@@ -230,8 +230,8 @@ export const ColorTabThemeEditor = () => {
                       hslColor: {
                         h: hslFromColor.h,
                         s: Math.floor(hslFromColor.s / 4),
-                        l: colorBorder.l
-                      }
+                        l: colorBorder.l,
+                      },
                     });
                   }}
                   value={getStringFromHSL(field.value[activeTheme])}
@@ -259,7 +259,7 @@ export const ColorTabThemeEditor = () => {
 
                     changeColor({
                       name: "destructive",
-                      hslColor: hslFromColor
+                      hslColor: hslFromColor,
                     });
 
                     changeColor({
@@ -268,13 +268,13 @@ export const ColorTabThemeEditor = () => {
                         ? {
                             h: 210,
                             s: 40,
-                            l: 2
+                            l: 2,
                           }
                         : {
                             h: 210,
                             s: 40,
-                            l: 98
-                          }
+                            l: 98,
+                          },
                     });
                   }}
                   value={getStringFromHSL(field.value[activeTheme])}

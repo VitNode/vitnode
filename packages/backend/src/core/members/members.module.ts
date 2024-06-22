@@ -15,8 +15,8 @@ import { DeleteCoreMembersService } from "./delete/delete.service";
     SignUpCoreMembersResolver,
     SignUpCoreMembersService,
     DeleteCoreMembersResolver,
-    DeleteCoreMembersService
+    DeleteCoreMembersService,
   ],
-  imports: [AvatarCoreMembers]
+  imports: [AvatarCoreMembers],
 })
 export class CoreMembersModule {}

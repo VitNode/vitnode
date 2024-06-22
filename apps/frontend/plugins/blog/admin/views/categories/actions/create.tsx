@@ -10,8 +10,8 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const Content = React.lazy(async () =>
   import("../create-edit/create-edit").then(module => ({
-    default: module.CreateEditCategoryBlogAdmin
-  }))
+    default: module.CreateEditCategoryBlogAdmin,
+  })),
 );
 
 export const CreateCategoryBlogAdmin = () => {

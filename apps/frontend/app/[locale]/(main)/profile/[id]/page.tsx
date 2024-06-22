@@ -6,7 +6,7 @@ import { ProfileView } from "@/plugins/core/templates/views/profile/profile-view
 import {
   Core_Members__Profiles,
   Core_Members__ProfilesQuery,
-  Core_Members__ProfilesQueryVariables
+  Core_Members__ProfilesQueryVariables,
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 
@@ -18,9 +18,9 @@ const getData = async ({ id }: { id: string }) => {
     query: Core_Members__Profiles,
     variables: {
       first: 1,
-      nameSeo: id
+      nameSeo: id,
     },
-    cache: "force-cache"
+    cache: "force-cache",
   });
 
   return data;
@@ -31,14 +31,14 @@ interface Props {
 }
 
 export async function generateMetadata({
-  params: { id }
+  params: { id },
 }: Props): Promise<Metadata> {
   const api = await getData({ id });
   const data = api.core_members__show.edges.at(0);
   if (!data) return {};
 
   return {
-    title: data.name
+    title: data.name,
   };
 }
 

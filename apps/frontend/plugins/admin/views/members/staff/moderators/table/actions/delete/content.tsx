@@ -7,7 +7,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  useAlertDialog
+  useAlertDialog,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { SubmitDeleteActionsTableModeratorsStaffAdmin } from "./submit";
@@ -19,7 +19,7 @@ interface Props {
 }
 
 export const ContentDeleteActionsTableModeratorsStaffAdmin = ({
-  data: { id }
+  data: { id },
 }: Props) => {
   const t = useTranslations("admin.members.staff.moderators.delete");
   const tCore = useTranslations("core");
@@ -29,7 +29,7 @@ export const ContentDeleteActionsTableModeratorsStaffAdmin = ({
     const mutation = await mutationApi({ id });
     if (mutation.error) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;

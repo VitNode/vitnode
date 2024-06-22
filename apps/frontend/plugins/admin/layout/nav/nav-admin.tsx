@@ -13,7 +13,7 @@ export const NavAdmin = async () => {
           {
             id: "dashboard",
             href: "dashboard",
-            icon: "LayoutDashboard"
+            icon: "LayoutDashboard",
           },
           {
             id: "settings",
@@ -22,22 +22,22 @@ export const NavAdmin = async () => {
             children: [
               {
                 id: "general",
-                href: "general"
+                href: "general",
               },
               {
                 id: "metadata",
-                href: "metadata"
+                href: "metadata",
               },
               {
                 id: "email",
-                href: "email"
-              }
-            ]
+                href: "email",
+              },
+            ],
           },
           {
             id: "plugins",
             href: "plugins",
-            icon: "PlugIcon"
+            icon: "PlugIcon",
           },
           {
             id: "styles",
@@ -46,18 +46,18 @@ export const NavAdmin = async () => {
             children: [
               {
                 id: "nav",
-                href: "nav"
+                href: "nav",
               },
               {
                 id: "editor",
-                href: "editor"
-              }
-            ]
+                href: "editor",
+              },
+            ],
           },
           {
             id: "langs",
             href: "langs",
-            icon: "Languages"
+            icon: "Languages",
           },
           {
             id: "advanced",
@@ -66,10 +66,10 @@ export const NavAdmin = async () => {
             children: [
               {
                 id: "files",
-                href: "files"
-              }
-            ]
-          }
+                href: "files",
+              },
+            ],
+          },
         ]}
       />
       <ItemNavAdmin
@@ -78,12 +78,12 @@ export const NavAdmin = async () => {
           {
             id: "users",
             href: "users",
-            icon: "Users"
+            icon: "Users",
           },
           {
             id: "groups",
             href: "groups",
-            icon: "Group"
+            icon: "Group",
           },
           {
             id: "staff",
@@ -92,14 +92,14 @@ export const NavAdmin = async () => {
             children: [
               {
                 id: "moderators",
-                href: "moderators"
+                href: "moderators",
               },
               {
                 id: "administrators",
-                href: "administrators"
-              }
-            ]
-          }
+                href: "administrators",
+              },
+            ],
+          },
         ]}
       />
 
@@ -113,8 +113,8 @@ export const NavAdmin = async () => {
             icon: navItem.icon ?? undefined,
             children: navItem.children?.map(child => ({
               id: child.code,
-              href: child.href
-            }))
+              href: child.href,
+            })),
           }))}
         />
       ))}

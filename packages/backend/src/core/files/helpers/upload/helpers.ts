@@ -6,7 +6,7 @@ export const acceptMimeTypeImage = [
   "image/png",
   "image/webp",
   "image/gif",
-  "image/avif"
+  "image/avif",
 ];
 
 export const acceptMimeTypeVideo = ["video/mp4", "video/webm", "video/ogg"];
@@ -14,7 +14,7 @@ export const acceptMimeTypeVideo = ["video/mp4", "video/webm", "video/ogg"];
 export class HelpersUploadCoreFilesService {
   protected async checkSizeFile({
     file,
-    maxUploadSizeBytes
+    maxUploadSizeBytes,
   }: {
     file: Promise<FileUpload>;
     maxUploadSizeBytes: number;
@@ -33,7 +33,7 @@ export class HelpersUploadCoreFilesService {
     if (fileSizeInBytes > maxUploadSizeBytes) {
       throw new CustomError({
         code: "FILE_TOO_LARGE",
-        message: `${filename} file is too large! We only accept files up to ${maxUploadSizeBytes} bytes.`
+        message: `${filename} file is too large! We only accept files up to ${maxUploadSizeBytes} bytes.`,
       });
     }
 
@@ -45,7 +45,7 @@ export class HelpersUploadCoreFilesService {
   protected async checkAcceptMimeType({
     acceptMimeType,
     disableThrowError,
-    file
+    file,
   }: {
     acceptMimeType: string[];
     file: Promise<FileUpload>;
@@ -60,8 +60,8 @@ export class HelpersUploadCoreFilesService {
       throw new CustomError({
         code: "INVALID_TYPE_FILE",
         message: `${filename} file has invalid type! We only accept the following types: ${acceptMimeType.join(
-          ", "
-        )}.`
+          ", ",
+        )}.`,
       });
     }
 

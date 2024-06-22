@@ -6,25 +6,25 @@ import { Loader } from "@/components/loader";
 import {
   AlertDialog,
   AlertDialogContent,
-  AlertDialogTrigger
+  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ContentDeleteActionFilesAdvancedCoreAdminProps } from "./content";
 
 const Content = React.lazy(async () =>
   import("./content").then(module => ({
-    default: module.ContentDeleteActionFilesAdvancedCoreAdmin
-  }))
+    default: module.ContentDeleteActionFilesAdvancedCoreAdmin,
+  })),
 );
 
 export const DeleteActionFilesAdvancedCoreAdmin = (
-  props: ContentDeleteActionFilesAdvancedCoreAdminProps
+  props: ContentDeleteActionFilesAdvancedCoreAdminProps,
 ) => {
   const t = useTranslations("core");
 

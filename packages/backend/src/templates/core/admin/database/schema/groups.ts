@@ -6,7 +6,7 @@ import {
   pgTable,
   serial,
   timestamp,
-  varchar
+  varchar,
 } from "drizzle-orm/pg-core";
 
 import { core_languages } from "./languages";
@@ -25,11 +25,11 @@ export const core_groups = pgTable("core_groups", {
     .default(500000),
   files_max_storage_for_submit: integer("files_max_storage_for_submit")
     .notNull()
-    .default(10000)
+    .default(10000),
 });
 
 export const core_groups_relations = relations(core_groups, ({ many }) => ({
-  name: many(core_groups_names)
+  name: many(core_groups_names),
 }));
 
 export const core_groups_names = pgTable(
@@ -39,21 +39,21 @@ export const core_groups_names = pgTable(
     item_id: integer("item_id")
       .notNull()
       .references(() => core_groups.id, {
-        onDelete: "cascade"
+        onDelete: "cascade",
       }),
     language_code: varchar("language_code")
       .notNull()
       .references(() => core_languages.code, {
-        onDelete: "cascade"
+        onDelete: "cascade",
       }),
-    value: varchar("value", { length: 255 }).notNull()
+    value: varchar("value", { length: 255 }).notNull(),
   },
   table => ({
     item_id_idx: index("core_groups_names_item_id_idx").on(table.item_id),
     language_code_idx: index("core_groups_names_language_code_idx").on(
-      table.language_code
-    )
-  })
+      table.language_code,
+    ),
+  }),
 );
 
 export const core_groups_names_relations = relations(
@@ -61,7 +61,7 @@ export const core_groups_names_relations = relations(
   ({ one }) => ({
     group: one(core_groups, {
       fields: [core_groups_names.item_id],
-      references: [core_groups.id]
-    })
-  })
+      references: [core_groups.id],
+    }),
+  }),
 );

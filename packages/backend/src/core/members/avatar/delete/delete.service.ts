@@ -10,7 +10,7 @@ import { core_files_avatars } from "../../../../templates/core/admin/database/sc
 export class DeleteAvatarCoreMembersService {
   constructor(
     private readonly deleteFile: DeleteCoreFilesService,
-    private readonly databaseService: DatabaseService
+    private readonly databaseService: DatabaseService,
   ) {}
 
   async deleteAvatar({ avatar }: User): Promise<string> {
@@ -22,7 +22,7 @@ export class DeleteAvatarCoreMembersService {
     this.deleteFile.checkIfFileExistsAndReturnPath({
       dir_folder: avatar.dir_folder,
       file_name: avatar.file_name,
-      file_secure: false
+      file_secure: false,
     });
 
     // Delete from database

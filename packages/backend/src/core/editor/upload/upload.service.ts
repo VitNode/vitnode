@@ -8,7 +8,7 @@ import { UploadCoreFilesService } from "../../files/helpers/upload/upload.servic
 import {
   HelpersUploadCoreFilesService,
   acceptMimeTypeImage,
-  acceptMimeTypeVideo
+  acceptMimeTypeVideo,
 } from "../../files/helpers/upload/helpers";
 import { UploadCoreFilesArgs } from "../../files/helpers/upload/dto/upload.args";
 import { ShowCoreFiles } from "../../files/show/dto/show.obj";
@@ -26,12 +26,12 @@ interface GetFilesAfterUploadArgs extends UploadCoreEditorArgs {
 export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
   protected acceptMimeTypeToFrontend = [
     ...acceptMimeTypeImage,
-    ...acceptMimeTypeVideo
+    ...acceptMimeTypeVideo,
   ];
 
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly uploadFile: UploadCoreFilesService
+    private readonly uploadFile: UploadCoreFilesService,
   ) {
     super();
   }
@@ -39,8 +39,8 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
   private getAcceptMineType(): string[] {
     const {
       editor: {
-        files: { allow_type }
-      }
+        files: { allow_type },
+      },
     } = getConfigFile();
 
     if (allow_type === "images_videos") {
@@ -58,25 +58,25 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
     file,
     folder,
     maxUploadSizeKb,
-    plugin
+    plugin,
   }: GetFilesAfterUploadArgs) {
     const acceptMimeType = await this.getAcceptMineType();
     const allowUploadToFrontend = await this.checkAcceptMimeType({
       file,
       acceptMimeType: this.acceptMimeTypeToFrontend,
-      disableThrowError: true
+      disableThrowError: true,
     });
     const args: Omit<UploadCoreFilesArgs, "acceptMimeType" | "secure"> = {
       files: [file],
       maxUploadSizeBytes: maxUploadSizeKb * 1024,
       plugin,
-      folder
+      folder,
     };
 
     if (allowUploadToFrontend) {
       const current = await this.uploadFile.upload({
         ...args,
-        acceptMimeType
+        acceptMimeType,
       });
 
       return current[0];
@@ -85,7 +85,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
     const current = await this.uploadFile.upload({
       ...args,
       acceptMimeType,
-      secure: true
+      secure: true,
     });
 
     return current[0];
@@ -93,7 +93,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
 
   async upload(
     { group, id: user_id }: User | null,
-    { file, folder, plugin }: UploadCoreEditorArgs
+    { file, folder, plugin }: UploadCoreEditorArgs,
   ): Promise<ShowCoreFiles> {
     // Check permission for upload files
     const findGroup = await this.databaseService.db.query.core_groups.findFirst(
@@ -102,9 +102,9 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
         columns: {
           files_allow_upload: true,
           files_max_storage_for_submit: true,
-          files_total_max_storage: true
-        }
-      }
+          files_total_max_storage: true,
+        },
+      },
     );
 
     if (!findGroup?.files_allow_upload) {
@@ -115,7 +115,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
       ? +(
           await this.databaseService.db
             .select({
-              space_used: sum(core_files.file_size)
+              space_used: sum(core_files.file_size),
             })
             .from(core_files)
             .where(eq(core_files.user_id, user_id))
@@ -135,7 +135,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
       file,
       plugin,
       folder,
-      maxUploadSizeKb
+      maxUploadSizeKb,
     });
 
     // Save to database
@@ -145,10 +145,10 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
         user_id,
         ...uploadFile,
         security_key: this.acceptMimeTypeToFrontend.includes(
-          uploadFile.mimetype
+          uploadFile.mimetype,
         )
           ? null
-          : generateRandomString(32)
+          : generateRandomString(32),
       })
       .returning();
 

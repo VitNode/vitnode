@@ -16,7 +16,7 @@ import { ModeratorsStaffAdminViewProps } from "../moderators-view";
 import { ActionsTableModeratorsStaffAdmin } from "./actions/actions";
 
 export const TableModeratorsStaffAdmin = ({
-  data
+  data,
 }: ModeratorsStaffAdminViewProps) => {
   const t = useTranslations("admin.members.staff");
 
@@ -37,14 +37,14 @@ export const TableModeratorsStaffAdmin = ({
               <GroupFormat
                 group={{
                   ...data.user_or_group,
-                  name: data.user_or_group.group_name
+                  name: data.user_or_group.group_name,
                 }}
               />
             );
           }
 
           return null;
-        }
+        },
       },
       {
         header: t("table.type"),
@@ -57,7 +57,7 @@ export const TableModeratorsStaffAdmin = ({
               {t(data.user_or_group.__typename === "User" ? "user" : "group")}
             </Badge>
           );
-        }
+        },
       },
       {
         header: val => {
@@ -72,7 +72,7 @@ export const TableModeratorsStaffAdmin = ({
           const data = row.original;
 
           return <DateFormat date={data.updated} />;
-        }
+        },
       },
       {
         header: t("table.permissions"),
@@ -90,7 +90,7 @@ export const TableModeratorsStaffAdmin = ({
               {t(unrestricted ? "unrestricted" : "restricted")}
             </Badge>
           );
-        }
+        },
       },
       {
         id: "actions",
@@ -100,10 +100,10 @@ export const TableModeratorsStaffAdmin = ({
           if (data.protected) return null;
 
           return <ActionsTableModeratorsStaffAdmin data={data} />;
-        }
-      }
+        },
+      },
     ],
-    []
+    [],
   );
 
   return (
@@ -114,7 +114,7 @@ export const TableModeratorsStaffAdmin = ({
       columns={columns}
       defaultSorting={{
         sortBy: "updated",
-        sortDirection: "desc"
+        sortDirection: "desc",
       }}
     />
   );

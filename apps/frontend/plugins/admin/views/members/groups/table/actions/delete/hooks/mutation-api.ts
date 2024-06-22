@@ -5,12 +5,12 @@ import { revalidatePath } from "next/cache";
 import {
   Admin__Core_Groups__Delete,
   Admin__Core_Groups__DeleteMutation,
-  Admin__Core_Groups__DeleteMutationVariables
+  Admin__Core_Groups__DeleteMutationVariables,
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 
 export const mutationApi = async (
-  variables: Admin__Core_Groups__DeleteMutationVariables
+  variables: Admin__Core_Groups__DeleteMutationVariables,
 ) => {
   try {
     const { data } = await fetcher<
@@ -18,7 +18,7 @@ export const mutationApi = async (
       Admin__Core_Groups__DeleteMutationVariables
     >({
       query: Admin__Core_Groups__Delete,
-      variables
+      variables,
     });
 
     revalidatePath("/", "layout");

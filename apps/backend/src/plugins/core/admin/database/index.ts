@@ -17,5 +17,5 @@ export default {
   ...admins,
   ...moderators,
   ...plugins,
-  ...nav
+  ...nav,
 };

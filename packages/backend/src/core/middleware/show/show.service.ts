@@ -17,8 +17,8 @@ export class ShowCoreMiddlewareService {
       languages: config.langs,
       plugins: [
         "admin",
-        ...plugins.filter(plugin => !["plugins.module.ts"].includes(plugin))
-      ]
+        ...plugins.filter(plugin => !["plugins.module.ts"].includes(plugin)),
+      ],
     };
   }
 }

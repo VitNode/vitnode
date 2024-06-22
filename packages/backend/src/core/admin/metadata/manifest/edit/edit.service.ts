@@ -16,12 +16,12 @@ import { core_languages } from "../../../../../templates/core/admin/database/sch
 export class EditAdminManifestMetadataService {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly configService: ConfigService
+    private readonly configService: ConfigService,
   ) {}
 
   protected updateManifest({
     data,
-    lang_code
+    lang_code,
   }: {
     data: EditAdminManifestMetadataObj;
     lang_code: string;
@@ -32,7 +32,7 @@ export class EditAdminManifestMetadataService {
       ...manifest,
       ...data,
       start_url: `${frontendUrl}/${lang_code}${data.start_url}`,
-      id: `${frontendUrl}/${lang_code}${data.start_url}`
+      id: `${frontendUrl}/${lang_code}${data.start_url}`,
     };
 
     fs.writeFileSync(
@@ -40,28 +40,28 @@ export class EditAdminManifestMetadataService {
         ABSOLUTE_PATHS_BACKEND.uploads.public,
         "assets",
         lang_code,
-        "manifest.webmanifest"
+        "manifest.webmanifest",
       ),
-      JSON.stringify(newManifest, null, 2)
+      JSON.stringify(newManifest, null, 2),
     );
 
     return newManifest;
   }
 
   async edit(
-    data: EditAdminManifestMetadataObj
+    data: EditAdminManifestMetadataObj,
   ): Promise<ShowAdminManifestMetadataObj> {
     const languages = await this.databaseService.db
       .select({
-        code: core_languages.code
+        code: core_languages.code,
       })
       .from(core_languages);
 
     const manifests = languages.map(lang =>
       this.updateManifest({
         data,
-        lang_code: lang.code
-      })
+        lang_code: lang.code,
+      }),
     );
 
     return manifests.find(manifest => manifest.lang === "en");

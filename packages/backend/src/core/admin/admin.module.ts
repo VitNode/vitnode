@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 
 import {
   AdminSessionsModule,
-  GlobalAdminSessionsModule
+  GlobalAdminSessionsModule,
 } from "./sessions/sessions.module";
 import { AdminPluginsModule } from "./plugins/plugins.module";
 import { AdminNavModule } from "./nav/nav.module";
@@ -32,7 +32,7 @@ import { AdminEmailModule } from "./email/email.module";
     AdminSettingsModule,
     AdminThemeEditorModule,
     AdminInstallModule,
-    AdminEmailModule
-  ]
+    AdminEmailModule,
+  ],
 })
 export class AdminModule {}

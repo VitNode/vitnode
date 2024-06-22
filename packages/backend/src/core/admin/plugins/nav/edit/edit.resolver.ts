@@ -15,7 +15,7 @@ export class EditAdminNavPluginsResolver {
   @UseGuards(AdminAuthGuards)
   @UseGuards(OnlyForDevelopment)
   admin__core_plugins__nav__edit(
-    @Args() args: EditCreateAdminNavPluginsArgs
+    @Args() args: EditCreateAdminNavPluginsArgs,
   ): ShowAdminNavPluginsObj {
     return this.service.edit(args);
   }

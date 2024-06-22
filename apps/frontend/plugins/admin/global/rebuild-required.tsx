@@ -11,7 +11,7 @@ import { CONFIG } from "@/config";
 export const RebuildRequiredAdmin = () => {
   const t = useTranslations("admin.rebuild_required");
   const {
-    config: { rebuild_required }
+    config: { rebuild_required },
   } = useGlobals();
 
   if (
@@ -32,7 +32,7 @@ export const RebuildRequiredAdmin = () => {
           {rebuild_required.langs && (
             <li>
               {t.rich("langs", {
-                bold: text => <span className="font-bold">{text}</span>
+                bold: text => <span className="font-bold">{text}</span>,
               })}
             </li>
           )}
@@ -40,7 +40,7 @@ export const RebuildRequiredAdmin = () => {
           {rebuild_required.plugins && (
             <li>
               {t.rich("plugins", {
-                bold: text => <span className="font-bold">{text}</span>
+                bold: text => <span className="font-bold">{text}</span>,
               })}
             </li>
           )}
@@ -53,7 +53,7 @@ export const RebuildRequiredAdmin = () => {
           rel="noopener noreferrer"
           target="_blank"
           className={buttonVariants({
-            variant: "outline"
+            variant: "outline",
           })}
         >
           {t("submit")}

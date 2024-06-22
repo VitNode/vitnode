@@ -4,7 +4,7 @@ import { Transform } from "class-transformer";
 import {
   PaginationArgs,
   SortDirectionEnum,
-  TransformString
+  TransformString,
 } from "../../../../utils";
 
 enum ShowCoreMembersSortingColumnEnum {
@@ -14,11 +14,11 @@ enum ShowCoreMembersSortingColumnEnum {
   last_name = "last_name",
   posts = "posts",
   followers = "followers",
-  reactions = "reactions"
+  reactions = "reactions",
 }
 
 registerEnumType(ShowCoreMembersSortingColumnEnum, {
-  name: "ShowCoreMembersSortingColumnEnum"
+  name: "ShowCoreMembersSortingColumnEnum",
 });
 
 @InputType()

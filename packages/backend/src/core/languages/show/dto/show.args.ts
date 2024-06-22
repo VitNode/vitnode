@@ -4,11 +4,11 @@ import { PaginationArgs, SortDirectionEnum } from "../../../../utils";
 
 enum ShowCoreLanguagesSortingColumnEnum {
   created = "created",
-  updated = "updated"
+  updated = "updated",
 }
 
 registerEnumType(ShowCoreLanguagesSortingColumnEnum, {
-  name: "ShowCoreLanguagesSortingColumnEnum"
+  name: "ShowCoreLanguagesSortingColumnEnum",
 });
 
 @InputType()

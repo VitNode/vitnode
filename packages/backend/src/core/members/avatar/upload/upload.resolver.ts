@@ -16,7 +16,7 @@ export class UploadAvatarCoreMembersResolver {
   @UseGuards(AuthGuards)
   async core_members__avatar__upload(
     @CurrentUser() currentUser: User,
-    @Args() args: UploadAvatarCoreMembersArgs
+    @Args() args: UploadAvatarCoreMembersArgs,
   ): Promise<UploadAvatarCoreMembersObj> {
     return this.service.uploadAvatar(currentUser, args);
   }

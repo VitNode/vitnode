@@ -15,7 +15,7 @@ export const HeaderAdmin = () => {
           className="absolute left-0 top-0 z-50 h-1 w-full"
           style={{
             backgroundImage:
-              "repeating-linear-gradient(-55deg,#000, #000 20px, #ffb103 20px, #feb100 40px)"
+              "repeating-linear-gradient(-55deg,#000, #000 20px, #ffb103 20px, #feb100 40px)",
           }}
         />
       )}

@@ -14,7 +14,7 @@ export class CreateAdminCoreLanguagesResolver {
   @Mutation(() => ShowCoreLanguages)
   @UseGuards(AdminAuthGuards)
   async admin__core_languages__create(
-    @Args() args: CreateCoreAdminLanguagesArgs
+    @Args() args: CreateCoreAdminLanguagesArgs,
   ): Promise<ShowCoreLanguages> {
     return this.service.create(args);
   }

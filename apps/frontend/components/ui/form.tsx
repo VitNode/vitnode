@@ -8,7 +8,7 @@ import {
   FieldValues,
   FormProvider,
   FormProviderProps,
-  useFormContext
+  useFormContext,
 } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { useBeforeUnload } from "react-use";
@@ -20,7 +20,7 @@ import { useDialog } from "./dialog";
 interface FormProps<
   TFieldValues extends FieldValues,
   TContext = unknown,
-  TTransformedValues extends FieldValues = TFieldValues
+  TTransformedValues extends FieldValues = TFieldValues,
 > extends FormProviderProps<TFieldValues, TContext, TTransformedValues> {
   disableBeforeUnload?: boolean;
 }
@@ -28,13 +28,13 @@ interface FormProps<
 function Form<
   TFieldValues extends FieldValues,
   TContext = unknown,
-  TTransformedValues extends FieldValues = TFieldValues
+  TTransformedValues extends FieldValues = TFieldValues,
 >(props: FormProps<TFieldValues, TContext, TTransformedValues>) {
   const t = useTranslations("core");
   const formIsDirty = props.formState.isDirty;
   useBeforeUnload(
     formIsDirty && !props.disableBeforeUnload,
-    t("are_you_sure_want_to_leave_form")
+    t("are_you_sure_want_to_leave_form"),
   );
   const { setIsDirty } = useDialog();
 
@@ -49,18 +49,18 @@ function Form<
 
 interface FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > {
   name: TName;
 }
 
 const FormFieldContext = React.createContext<FormFieldContextValue>(
-  {} as FormFieldContextValue
+  {} as FormFieldContextValue,
 );
 
 const FormField = <
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({
   ...props
 }: ControllerProps<TFieldValues, TName>) => {
@@ -90,7 +90,7 @@ const useFormField = () => {
     formItemId: `${id}-form-item`,
     formDescriptionId: `${id}-form-item-description`,
     formMessageId: `${id}-form-item-message`,
-    ...fieldState
+    ...fieldState,
   };
 };
 
@@ -99,7 +99,7 @@ interface FormItemContextValue {
 }
 
 const FormItemContext = React.createContext<FormItemContextValue>(
-  {} as FormItemContextValue
+  {} as FormItemContextValue,
 );
 
 const FormItem = ({
@@ -209,7 +209,7 @@ const FormWrapper = ({
     <form
       className={cn(
         "@container flex flex-col items-start space-y-6 [&>a:last-child]:self-end [&>button:last-child]:self-end",
-        className
+        className,
       )}
       {...props}
     />
@@ -220,7 +220,7 @@ const FormFieldRender = ({
   children,
   label,
   optional,
-  description
+  description,
 }: {
   children: React.ReactNode;
   label: string;
@@ -255,5 +255,5 @@ export {
   FormMessage,
   FormField,
   FormWrapper,
-  FormFieldRender
+  FormFieldRender,
 };

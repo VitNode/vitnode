@@ -9,8 +9,8 @@ import { ShowCoreLanguages } from "@/graphql/hooks";
 
 const Content = React.lazy(async () =>
   import("../../create-edit/create-edit").then(module => ({
-    default: module.CreateEditLangAdmin
-  }))
+    default: module.CreateEditLangAdmin,
+  })),
 );
 
 export const EditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {

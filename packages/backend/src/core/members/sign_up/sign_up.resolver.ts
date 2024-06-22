@@ -13,7 +13,7 @@ export class SignUpCoreMembersResolver {
   @Mutation(() => SignUpCoreMembersObj)
   async core_members__sign_up(
     @Args() args: SignUpCoreMembersArgs,
-    @Context() ctx: Ctx
+    @Context() ctx: Ctx,
   ): Promise<SignUpCoreMembersObj> {
     return this.service.signUp(args, ctx);
   }

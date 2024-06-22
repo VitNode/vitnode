@@ -8,7 +8,7 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel
+  FormLabel,
 } from "@/components/ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
@@ -21,15 +21,15 @@ export const FormLicenseInstallConfigs = () => {
 
   const formSchema = z.object({
     agree: z.boolean({
-      required_error: tCore("forms.empty")
-    })
+      required_error: tCore("forms.empty"),
+    }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      agree: false
-    }
+      agree: false,
+    },
   });
 
   const onSubmit = () => {

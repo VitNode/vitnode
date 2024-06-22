@@ -3,7 +3,7 @@ import {
   existsSync,
   mkdirSync,
   readFileSync,
-  statSync
+  statSync,
 } from "fs";
 import { join } from "path";
 
@@ -31,21 +31,21 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
     folder,
     maxUploadSizeBytes,
     plugin,
-    secure = false
+    secure = false,
   }: UploadCoreFilesArgs): Promise<UploadCoreFilesObj[]> {
     // Check if plugin exists
     const pluginExists =
       await this.databaseService.db.query.core_plugins.findFirst({
         where: (table, { eq }) => eq(table.code, plugin),
         columns: {
-          code: true
-        }
+          code: true,
+        },
       });
 
     if (!pluginExists && plugin !== "core") {
       throw new CustomError({
         code: "PLUGIN_NOT_FOUND",
-        message: `Plugin "${plugin}" not found`
+        message: `Plugin "${plugin}" not found`,
       });
     }
 
@@ -54,7 +54,7 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
       files.map(async file => {
         await this.checkAcceptMimeType({ file, acceptMimeType });
         await this.checkSizeFile({ file, maxUploadSizeBytes });
-      })
+      }),
     );
 
     // Create folders
@@ -63,7 +63,7 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
       "uploads",
       `monthly_${date.getMonth() + 1}_${date.getFullYear()}`,
       plugin,
-      folder
+      folder,
     );
     const dirFolder = secure
       ? join(ABSOLUTE_PATHS_BACKEND.uploads.private, dir)
@@ -81,7 +81,7 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
 
         // Generate file name
         const currentFileName = `${date.getTime()}_${generateRandomString(
-          10
+          10,
         )}_${removeSpecialCharacters(name)}.${extension}`;
         const url = join(dirFolder, currentFileName);
 
@@ -90,7 +90,7 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
           stream
             .pipe(createWriteStream(url))
             .on("finish", () => resolve(url))
-            .on("error", reject)
+            .on("error", reject),
         );
 
         // Get file stats
@@ -111,7 +111,7 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
             extension,
             file_size: stat.size,
             width: metadata.width,
-            height: metadata.height
+            height: metadata.height,
           };
         }
 
@@ -122,9 +122,9 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
           file_name_original: filename,
           dir_folder: dir,
           extension,
-          file_size: stat.size
+          file_size: stat.size,
         };
-      })
+      }),
     );
   }
 }

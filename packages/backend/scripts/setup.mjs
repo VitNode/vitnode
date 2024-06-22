@@ -21,12 +21,13 @@ const copyDatabaseSchema = corePluginPath => {
     "templates",
     "core",
     "admin",
-    "database"
+    "database",
   );
   if (!fs.existsSync(currentPathToSchema)) {
-    throw new Error(
-      `Database schema not found in 'templates/core/admin/database' directory. "${currentPathToSchema}"`
+    console.log(
+      `⛔️ Database schema not found in 'templates/core/admin/database' directory. "${currentPathToSchema}"`,
     );
+    process.exit(1);
   }
 
   const userPathToSchema = path.join(corePluginPath, "admin", "database");
@@ -34,17 +35,23 @@ const copyDatabaseSchema = corePluginPath => {
 };
 
 export const init = () => {
+  console.log("\x1b[34m%s\x1b[0m", "[VitNode]", "🛠️ Setup the project...");
   const corePluginPath = path.join(process.cwd(), "src", "plugins", "core");
 
   if (!fs.existsSync(corePluginPath)) {
-    console.error("Plugin 'core' not found in 'src/plugins' directory.");
+    console.error("⛔️ Plugin 'core' not found in 'src/plugins' directory.");
     process.exit(1);
   }
 
   // Copy the schema from the template to the core plugin
   copyDatabaseSchema(corePluginPath);
 
-  console.log("Hello, world!", process.cwd());
+  console.log(
+    "\x1b[34m%s\x1b[0m",
+    "[VitNode]",
+    "✅ Project setup complete. Running the project...",
+  );
+  process.exit(0);
 };
 
 if (process.argv[2] === "init") {

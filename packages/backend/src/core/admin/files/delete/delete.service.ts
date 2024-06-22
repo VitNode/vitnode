@@ -12,12 +12,12 @@ import { core_files } from "../../../../templates/core/admin/database/schema/fil
 export class DeleteAdminFilesService {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly deleteFile: DeleteCoreFilesService
+    private readonly deleteFile: DeleteCoreFilesService,
   ) {}
 
   async delete({ id }: DeleteAdminFilesArgs): Promise<string> {
     const findFile = await this.databaseService.db.query.core_files.findFirst({
-      where: (table, { eq }) => eq(table.id, id)
+      where: (table, { eq }) => eq(table.id, id),
     });
 
     if (!findFile) {
@@ -26,7 +26,7 @@ export class DeleteAdminFilesService {
 
     this.deleteFile.delete({
       ...findFile,
-      file_secure: !!findFile.security_key
+      file_secure: !!findFile.security_key,
     });
 
     await this.databaseService.db

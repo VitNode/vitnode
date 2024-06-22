@@ -4,7 +4,7 @@ import { Editor } from "@tiptap/react";
 import { FileStateEditor } from "../extensions/files/files";
 import {
   UploadFilesHandlerArgs,
-  UploadFilesHandlerEditorArgs
+  UploadFilesHandlerEditorArgs,
 } from "../extensions/files/hooks/use-upload-files-handler-editor.ts";
 import { TextLanguage } from "@/graphql/hooks";
 
@@ -25,7 +25,7 @@ export const EditorStateContext = React.createContext<Args>({
   value: [],
   onChange: () => {},
   selectedLanguage: "",
-  setFiles: () => {}
+  setFiles: () => {},
 });
 
 export const useEditorState = () => React.useContext(EditorStateContext);

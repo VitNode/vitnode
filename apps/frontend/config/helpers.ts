@@ -7,7 +7,7 @@ export const configPath = join(process.cwd(), "config", "config.json");
 
 export function updateObject<T extends Record<string, any>>(
   config: T,
-  defaultData: T
+  defaultData: T,
 ): T {
   const updatedConfig = config;
   for (const key in defaultData) {
@@ -26,7 +26,7 @@ export function updateObject<T extends Record<string, any>>(
       }
       updatedConfig[key] = updateObject(
         (config[key] || {}) as T[Extract<keyof T, string>],
-        defaultData[key]
+        defaultData[key],
       );
     } else {
       // Handle primitive values

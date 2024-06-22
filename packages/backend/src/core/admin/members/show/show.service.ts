@@ -19,7 +19,7 @@ export class ShowAdminMembersService {
     groups,
     last,
     search,
-    sortBy
+    sortBy,
   }: ShowAdminMembersArgs): Promise<ShowAdminMembersObj> {
     const pagination = await inputPaginationCursor({
       cursor,
@@ -29,40 +29,40 @@ export class ShowAdminMembersService {
       last,
       primaryCursor: {
         column: "id",
-        schema: core_users.id
+        schema: core_users.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: "joined"
+        column: "joined",
       },
-      sortBy
+      sortBy,
     });
 
     const where = and(
       or(
         ilike(core_users.name, `%${search}%`),
         ilike(core_users.email, `%${search}%`),
-        Number(search) ? eq(core_users.id, Number(search)) : undefined
+        Number(search) ? eq(core_users.id, Number(search)) : undefined,
       ),
       groups && groups.length > 0
         ? inArray(core_users.group_id, groups)
-        : undefined
+        : undefined,
     );
 
     const edges = await this.databaseService.db.query.core_users.findMany({
       ...pagination,
       where: and(pagination.where, where),
       columns: {
-        password: false
+        password: false,
       },
       with: {
         group: {
           with: {
-            name: true
-          }
+            name: true,
+          },
         },
-        avatar: true
-      }
+        avatar: true,
+      },
     });
 
     const totalCount = await this.databaseService.db

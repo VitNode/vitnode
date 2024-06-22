@@ -15,7 +15,7 @@ export class ShowAdminNavPluginsResolver {
   @UseGuards(AdminAuthGuards)
   @UseGuards(OnlyForDevelopment)
   admin__core_plugins__nav__show(
-    @Args() args: ShowAdminNavPluginsArgs
+    @Args() args: ShowAdminNavPluginsArgs,
   ): ShowAdminNavPluginsObj[] {
     return this.service.show(args);
   }

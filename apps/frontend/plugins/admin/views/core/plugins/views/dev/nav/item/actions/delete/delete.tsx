@@ -6,14 +6,14 @@ import { Loader } from "@/components/loader";
 import {
   AlertDialog,
   AlertDialogContent,
-  AlertDialogTrigger
+  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ContentDeleteActionTableNavDevPluginAdminProps } from "./content";
 
@@ -21,12 +21,12 @@ import { useItemNavDevPluginAdmin } from "../../hooks/use-item-nav-dev-plugin-ad
 
 const Content = React.lazy(async () =>
   import("./content").then(module => ({
-    default: module.ContentDeleteActionTableNavDevPluginAdmin
-  }))
+    default: module.ContentDeleteActionTableNavDevPluginAdmin,
+  })),
 );
 
 export const DeleteActionTableNavDevPluginAdmin = (
-  props: ContentDeleteActionTableNavDevPluginAdminProps
+  props: ContentDeleteActionTableNavDevPluginAdminProps,
 ) => {
   const t = useTranslations("core");
   const { parentId } = useItemNavDevPluginAdmin();

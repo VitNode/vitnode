@@ -7,14 +7,14 @@ import { DeleteCoreFilesService } from "./helpers/delete/delete.service";
 import { DatabaseService } from "../../database";
 import {
   core_files,
-  core_files_using
+  core_files_using,
 } from "../../templates/core/admin/database/schema/files";
 
 @Injectable()
 export class CoreFilesCron {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly deleteFile: DeleteCoreFilesService
+    private readonly deleteFile: DeleteCoreFilesService,
   ) {}
 
   @Cron(CronExpression.EVERY_HOUR)
@@ -29,7 +29,7 @@ export class CoreFilesCron {
         core_files_using.file_id,
         core_files_using.plugin,
         core_files_using.folder,
-        core_files_using.id
+        core_files_using.id,
       )
       .orderBy(desc(core_files.created))
       .having(sql`count(${core_files_using.file_id}) = 0`);
@@ -42,9 +42,9 @@ export class CoreFilesCron {
 
         this.deleteFile.delete({
           ...file.core_files,
-          file_secure: !!file.core_files.security_key
+          file_secure: !!file.core_files.security_key,
         });
-      })
+      }),
     );
   }
 }

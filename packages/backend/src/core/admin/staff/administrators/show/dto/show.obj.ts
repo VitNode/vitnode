@@ -3,7 +3,7 @@ import {
   Int,
   ObjectType,
   OmitType,
-  createUnionType
+  createUnionType,
 } from "@nestjs/graphql";
 
 import { GroupUser, User } from "../../../../../../decorators";
@@ -37,7 +37,7 @@ export const UserOrGroupCoreStaffUnion = createUnionType({
     }
 
     return null;
-  }
+  },
 });
 
 @ObjectType()

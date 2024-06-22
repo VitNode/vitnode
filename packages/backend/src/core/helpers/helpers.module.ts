@@ -5,6 +5,6 @@ import { ParserTextLanguageCoreHelpersService } from "./text_language/parser/par
 @Global()
 @Module({
   providers: [ParserTextLanguageCoreHelpersService],
-  exports: [ParserTextLanguageCoreHelpersService]
+  exports: [ParserTextLanguageCoreHelpersService],
 })
 export class GlobalCoreHelpersModule {}

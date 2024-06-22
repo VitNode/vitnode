@@ -2,14 +2,14 @@ import { Injectable } from "@nestjs/common";
 
 import {
   ConfigPlugin,
-  NavPluginInfoJSONTypeWithChildren
+  NavPluginInfoJSONTypeWithChildren,
 } from "../../../../providers/plugins.type";
 
 @Injectable()
 export class HelpersAdminNavPluginsService {
   protected findItemByCode({
     items,
-    code
+    code,
   }: {
     code: string;
     items: ConfigPlugin["nav"];

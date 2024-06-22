@@ -9,7 +9,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from "./ui/select";
 import { FormControl } from "./ui/form";
 import { TextLanguage } from "@/graphql/hooks";
@@ -34,7 +34,7 @@ export const TextLanguageInput = ({
   const { defaultLanguage, languages: languagesFromGlobal } = useGlobals();
   const languages = languagesFromGlobal.filter(item => item.allow_in_input);
   const [selectedLanguage, setSelectedLanguage] = React.useState(
-    locale ?? defaultLanguage
+    locale ?? defaultLanguage,
   );
   const valueAsArray = Array.isArray(value) ? value : [];
   const currentValue =
@@ -52,19 +52,21 @@ export const TextLanguageInput = ({
           if (value.length > 0) {
             onChange([
               ...valueAsArray.filter(
-                item => item.language_code !== selectedLanguage
+                item => item.language_code !== selectedLanguage,
               ),
               {
                 language_code: selectedLanguage,
-                value: value
-              }
+                value: value,
+              },
             ]);
 
             return;
           }
 
           onChange(
-            valueAsArray.filter(item => item.language_code !== selectedLanguage)
+            valueAsArray.filter(
+              item => item.language_code !== selectedLanguage,
+            ),
           );
         }}
         value={currentValue}

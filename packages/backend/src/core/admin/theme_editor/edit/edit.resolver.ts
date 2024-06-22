@@ -13,7 +13,7 @@ export class EditAdminThemeEditorResolver {
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
   async admin__core_theme_editor__edit(
-    @Args() args: EditAdminThemeEditorArgs
+    @Args() args: EditAdminThemeEditorArgs,
   ): Promise<string> {
     return this.service.edit(args);
   }

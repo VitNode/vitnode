@@ -6,8 +6,8 @@ import { ShowCoreLanguages } from "@/graphql/hooks";
 
 const Content = React.lazy(async () =>
   import("./content").then(module => ({
-    default: module.ContentDeleteActionsTableLangsCoreAdmin
-  }))
+    default: module.ContentDeleteActionsTableLangsCoreAdmin,
+  })),
 );
 
 interface Props extends Pick<ShowCoreLanguages, "code" | "name"> {

@@ -26,7 +26,7 @@ import { DeleteAdminStaffModeratorsResolver } from "./moderators/delete/delete.r
     DeleteAdminStaffAdministratorsService,
     DeleteAdminStaffAdministratorsResolver,
     DeleteAdminStaffModeratorsService,
-    DeleteAdminStaffModeratorsResolver
-  ]
+    DeleteAdminStaffModeratorsResolver,
+  ],
 })
 export class AdminStaffModule {}

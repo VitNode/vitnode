@@ -11,7 +11,7 @@ import { useFilterToolbarDataTable } from "../hooks/use-filter-toolbar-data-tabl
 
 export const ListContentFilterToolbarDataTable = ({
   isFetching,
-  options
+  options,
 }: Pick<ContentFilterToolbarDataTableProps, "isFetching" | "options">) => {
   const t = useTranslations("core");
   const { id } = useFilterToolbarDataTable();
@@ -51,7 +51,7 @@ export const ListContentFilterToolbarDataTable = ({
                 "border-primary mr-2 flex h-4 w-4 items-center justify-center rounded-sm border",
                 isSelected
                   ? "bg-primary text-primary-foreground"
-                  : "opacity-50 [&_svg]:invisible"
+                  : "opacity-50 [&_svg]:invisible",
               )}
             >
               <CheckIcon className={cn("h-4 w-4")} />

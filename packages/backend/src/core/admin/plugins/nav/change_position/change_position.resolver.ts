@@ -14,7 +14,7 @@ export class ChangePositionAdminNavPluginsResolver {
   @UseGuards(AdminAuthGuards)
   @UseGuards(OnlyForDevelopment)
   admin__core_plugins__nav__change_position(
-    @Args() args: ChangePositionAdminNavPluginsArgs
+    @Args() args: ChangePositionAdminNavPluginsArgs,
   ): string {
     return this.service.changePosition(args);
   }

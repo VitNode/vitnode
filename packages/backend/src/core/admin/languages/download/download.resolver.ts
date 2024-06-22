@@ -15,7 +15,7 @@ export class DownloadAdminCoreLanguagesResolver {
   @UseGuards(AdminAuthGuards)
   async admin__core_languages__download(
     @CurrentUser() user: User,
-    @Args() args: DownloadCoreAdminLanguagesArgs
+    @Args() args: DownloadCoreAdminLanguagesArgs,
   ): Promise<string> {
     return this.service.download(user, args);
   }

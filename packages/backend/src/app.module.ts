@@ -27,7 +27,7 @@ const internalPaths = {
   backend: join(process.cwd(), "src"),
   frontend: join(process.cwd(), "..", "frontend"),
   uploads: join(process.cwd(), "uploads"),
-  plugins: join(process.cwd(), "src", "plugins")
+  plugins: join(process.cwd(), "src", "plugins"),
 };
 
 export const ABSOLUTE_PATHS_BACKEND = {
@@ -36,7 +36,7 @@ export const ABSOLUTE_PATHS_BACKEND = {
   uploads: {
     public: join(internalPaths.uploads, "public"),
     private: join(internalPaths.uploads, "private"),
-    temp: join(internalPaths.uploads, "temp")
+    temp: join(internalPaths.uploads, "temp"),
   },
   plugins: internalPaths.plugins,
   plugin: ({ code }: { code: string }) => ({
@@ -52,7 +52,7 @@ export const ABSOLUTE_PATHS_BACKEND = {
         code,
         "admin",
         "database",
-        "migrations"
+        "migrations",
       ),
       migration_info: join(
         internalPaths.plugins,
@@ -61,8 +61,8 @@ export const ABSOLUTE_PATHS_BACKEND = {
         "database",
         "migrations",
         "meta",
-        "_journal.json"
-      )
+        "_journal.json",
+      ),
     },
     frontend: {
       admin_pages: join(
@@ -72,7 +72,7 @@ export const ABSOLUTE_PATHS_BACKEND = {
         "(admin)",
         "admin",
         "(auth)",
-        code
+        code,
       ),
       admin_templates: join(internalPaths.frontend, "plugins", code, "admin"),
       pages_container: join(
@@ -81,24 +81,24 @@ export const ABSOLUTE_PATHS_BACKEND = {
         "[locale]",
         "(main)",
         "(container)",
-        code
+        code,
       ),
       default_page: join(
         internalPaths.frontend,
         "plugins",
         code,
         "templates",
-        "default-page.tsx"
+        "default-page.tsx",
       ),
       pages: join(internalPaths.frontend, "app", "[locale]", "(main)", code),
       templates: join(internalPaths.frontend, "plugins", code, "templates"),
       plugin: join(internalPaths.frontend, "plugins", code),
-      language: join(internalPaths.frontend, "plugins", code, "langs")
-    }
+      language: join(internalPaths.frontend, "plugins", code, "langs"),
+    },
   }),
   frontend: {
-    init: join(process.cwd(), "..", "frontend")
-  }
+    init: join(process.cwd(), "..", "frontend"),
+  },
 };
 
 const parseFrontendUrlFromEnv = () => {
@@ -110,7 +110,7 @@ const parseFrontendUrlFromEnv = () => {
     url: frontendUrl,
     protocol: urlObj.protocol,
     hostname: urlObj.hostname,
-    port: urlObj.port
+    port: urlObj.port,
   };
 };
 
@@ -137,14 +137,14 @@ const config = () => {
         name: "vitnode-login-token",
         admin: {
           name: "vitnode-login-token-admin",
-          expiresIn: 1 // 1 day
-        }
+          expiresIn: 1, // 1 day
+        },
       },
       known_device: {
         name: "vitnode-device",
-        expiresIn: 365 // 1 year
-      }
-    }
+        expiresIn: 365, // 1 year
+      },
+    },
   };
 
   if (!data.login_token_secret) {
@@ -163,7 +163,7 @@ export class VitNodeCoreModule {
         ConfigModule.forRoot({
           isGlobal: true,
           load: [config],
-          envFilePath: paths.envFile
+          envFilePath: paths.envFile,
         }),
         GraphQLModule.forRoot<ApolloDriverConfig>({
           driver: ApolloDriver,
@@ -171,18 +171,18 @@ export class VitNodeCoreModule {
           sortSchema: true,
           playground: false,
           plugins: [ApolloServerPluginLandingPageLocalDefault()],
-          context: ({ req, res }): Ctx => ({ req, res })
+          context: ({ req, res }): Ctx => ({ req, res }),
         }),
         ScheduleModule.forRoot(),
         JwtModule.register({ global: true }),
         ServeStaticModule.forRoot({
           rootPath: ABSOLUTE_PATHS_BACKEND.uploads.public,
-          serveRoot: "/public/"
+          serveRoot: "/public/",
         }),
         DatabaseModule.register(database),
         GlobalProvidersModule,
-        CoreModule
-      ]
+        CoreModule,
+      ],
     };
   }
 }

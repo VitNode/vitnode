@@ -17,12 +17,12 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { buttonVariants } from "@/components/ui/button";
 
 export const ContentFilesSettings = ({
-  core_files__show: { edges, pageInfo }
+  core_files__show: { edges, pageInfo },
 }: Core_Members__Files__ShowQuery) => {
   const t = useTranslations("core.settings.files");
   const tCore = useTranslations("core");
@@ -54,7 +54,7 @@ export const ContentFilesSettings = ({
               )}
             </div>
           );
-        }
+        },
       },
       {
         header: tCore("table.name"),
@@ -80,7 +80,7 @@ export const ContentFilesSettings = ({
               </div>
             </div>
           );
-        }
+        },
       },
       {
         header: val => {
@@ -95,7 +95,7 @@ export const ContentFilesSettings = ({
           const data = row.original;
 
           return <DateFormat date={data.created} />;
-        }
+        },
       },
       {
         header: val => {
@@ -110,7 +110,7 @@ export const ContentFilesSettings = ({
           const data = row.original;
 
           return formatBytes(data.file_size);
-        }
+        },
       },
       {
         header: t("table.count_uses"),
@@ -135,7 +135,7 @@ export const ContentFilesSettings = ({
           }
 
           return data.count_uses;
-        }
+        },
       },
       {
         header: "",
@@ -150,7 +150,7 @@ export const ContentFilesSettings = ({
                   <Link
                     className={buttonVariants({
                       size: "icon",
-                      variant: "ghost"
+                      variant: "ghost",
                     })}
                     href={
                       data.width && data.height
@@ -168,10 +168,10 @@ export const ContentFilesSettings = ({
               </Tooltip>
             </TooltipProvider>
           );
-        }
-      }
+        },
+      },
     ],
-    []
+    [],
   );
 
   return (
@@ -181,7 +181,7 @@ export const ContentFilesSettings = ({
       defaultPageSize={10}
       defaultSorting={{
         sortBy: "created",
-        sortDirection: "desc"
+        sortDirection: "desc",
       }}
       searchPlaceholder={t("search")}
       columns={columns}

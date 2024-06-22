@@ -14,7 +14,7 @@ export type FlatTree<T extends object> = WithChildren<T> & {
 export function flattenTree<T extends object>({
   depth = 0,
   parentId = null,
-  tree
+  tree,
 }: {
   tree: WithChildren<T>[];
   depth?: number;
@@ -25,7 +25,7 @@ export function flattenTree<T extends object>({
       ? flattenTree({
           tree: currentValue.children,
           parentId: currentValue.id,
-          depth: depth + 1
+          depth: depth + 1,
         })
       : [];
 
@@ -35,9 +35,9 @@ export function flattenTree<T extends object>({
         ...currentValue,
         parentId: parentId,
         depth: depth,
-        children
+        children,
       },
-      ...children
+      ...children,
     ];
   }, []);
 }

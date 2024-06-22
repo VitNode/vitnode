@@ -9,7 +9,7 @@ import { ParserTextLanguageCoreHelpersService } from "../../../helpers/text_lang
 import { NotFoundError } from "../../../../errors";
 import {
   core_groups,
-  core_groups_names
+  core_groups_names,
 } from "../../../../templates/core/admin/database/schema/groups";
 import { core_users } from "../../../../templates/core/admin/database/schema/users";
 
@@ -17,16 +17,16 @@ import { core_users } from "../../../../templates/core/admin/database/schema/use
 export class EditAdminGroupsService {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly parserTextLang: ParserTextLanguageCoreHelpersService
+    private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
   ) {}
 
   async edit({
     content,
     id,
-    name
+    name,
   }: EditAdminGroupsArgs): Promise<ShowAdminGroups> {
     const group = await this.databaseService.db.query.core_groups.findFirst({
-      where: (table, { eq }) => eq(table.id, id)
+      where: (table, { eq }) => eq(table.id, id),
     });
 
     if (!group) {
@@ -36,7 +36,7 @@ export class EditAdminGroupsService {
     await this.parserTextLang.parse({
       item_id: id,
       database: core_groups_names,
-      data: name
+      data: name,
     });
 
     const usersCount = await this.databaseService.db
@@ -48,7 +48,7 @@ export class EditAdminGroupsService {
       .update(core_groups)
       .set({
         updated: new Date(),
-        ...content
+        ...content,
       })
       .where(eq(core_groups.id, id))
       .returning();
@@ -57,14 +57,14 @@ export class EditAdminGroupsService {
       await this.databaseService.db.query.core_groups.findFirst({
         where: (table, { eq }) => eq(table.id, id),
         with: {
-          name: true
-        }
+          name: true,
+        },
       });
 
     return {
       users_count: usersCount[0].count,
       ...updateGroup,
-      content
+      content,
     };
   }
 }

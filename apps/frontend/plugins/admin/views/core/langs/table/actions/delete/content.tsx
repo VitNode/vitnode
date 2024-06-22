@@ -6,14 +6,14 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import {
   AlertDialogCancel,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle
+  AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -21,7 +21,7 @@ import { ShowCoreLanguages } from "@/graphql/hooks";
 
 export const ContentDeleteActionsTableLangsCoreAdmin = ({
   code,
-  name
+  name,
 }: Pick<ShowCoreLanguages, "code" | "name">) => {
   const t = useTranslations("admin.core.langs.actions.delete");
   const tCore = useTranslations("core");
@@ -40,7 +40,7 @@ export const ContentDeleteActionsTableLangsCoreAdmin = ({
               {t.rich("form_confirm_text", {
                 text: () => (
                   <span className="text-foreground font-semibold">{name}</span>
-                )
+                ),
               })}
             </p>
 

@@ -5,7 +5,7 @@ import { TextLanguage } from "@/graphql/hooks";
 
 const getConvertTextLang = ({
   locale,
-  text
+  text,
 }: {
   locale: string;
   text?: TextLanguage[];
@@ -30,14 +30,14 @@ const getConvertTextLang = ({
 export const getConvertNameToLink = ({
   id,
   locale,
-  name
+  name,
 }: {
   id: number;
   locale: string;
   name: TextLanguage[];
 }) => {
   const text = removeSpecialCharacters(
-    getConvertTextLang({ locale, text: name })
+    getConvertTextLang({ locale, text: name }),
   ).toLowerCase();
 
   return `${text}-${id}`;
@@ -50,7 +50,7 @@ export const useTextLang = () => {
     convertText: (text?: TextLanguage[]) =>
       getConvertTextLang({ locale, text }),
     convertNameToLink: ({ id, name }: { id: number; name: TextLanguage[] }) =>
-      getConvertNameToLink({ id, name, locale })
+      getConvertNameToLink({ id, name, locale }),
   };
 };
 
@@ -59,6 +59,6 @@ export const getTextLang = ({ locale }: { locale: string }) => {
     convertText: (text?: TextLanguage[]) =>
       getConvertTextLang({ locale, text }),
     convertNameToLink: ({ id, name }: { id: number; name: TextLanguage[] }) =>
-      getConvertNameToLink({ id, name, locale })
+      getConvertNameToLink({ id, name, locale }),
   };
 };

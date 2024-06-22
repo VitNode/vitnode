@@ -10,7 +10,7 @@ interface Args {
 
 export const ItemNavDevPluginAdminContext = React.createContext<Args>({
   dataFromSSR: [],
-  icons: []
+  icons: [],
 });
 
 export const useItemNavDevPluginAdmin = () =>

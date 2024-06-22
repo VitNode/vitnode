@@ -2,7 +2,7 @@ import {
   CanActivate,
   ExecutionContext,
   Inject,
-  Injectable
+  Injectable,
 } from "@nestjs/common";
 import { GqlExecutionContext } from "@nestjs/graphql";
 import { Reflector } from "@nestjs/core";
@@ -19,13 +19,13 @@ interface IOAuthGuards {
 export class AuthGuards implements CanActivate {
   constructor(
     private readonly reflector: Reflector,
-    @Inject("IOAuthGuards") private readonly service: IOAuthGuards
+    @Inject("IOAuthGuards") private readonly service: IOAuthGuards,
   ) {}
 
   protected async getAuth({ req, res }: Ctx) {
     const data = await this.service.authorization({
       req,
-      res
+      res,
     });
     req.user = data;
 

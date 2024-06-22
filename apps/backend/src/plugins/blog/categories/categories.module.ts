@@ -4,6 +4,6 @@ import { ShowBlogCategoriesService } from "./show/show.service";
 import { ShowBlogCategoriesResolver } from "./show/show.resolver";
 
 @Module({
-  providers: [ShowBlogCategoriesService, ShowBlogCategoriesResolver]
+  providers: [ShowBlogCategoriesService, ShowBlogCategoriesResolver],
 })
 export class BlogCategoriesModule {}

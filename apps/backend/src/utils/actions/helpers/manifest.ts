@@ -2,13 +2,13 @@ import { join } from "path";
 import * as fs from "fs";
 
 import * as dotenv from "dotenv";
+import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from "vitnode-backend";
 
 import { parseFrontendUrlFromEnv } from "@/functions/envs";
 import { objectToArray, updateObject } from "@/functions/update-object";
-import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from "vitnode-backend";
 
 dotenv.config({
-  path: join(process.cwd(), "..", ".env")
+  path: join(process.cwd(), "..", ".env"),
 });
 
 interface ManifestType {
@@ -66,7 +66,7 @@ const generateDefaultManifest = ({
   lang_code,
   frontend_url,
   site_name,
-  site_short_name
+  site_short_name,
 }: {
   frontend_url: string;
   lang_code: string;
@@ -87,16 +87,16 @@ const generateDefaultManifest = ({
     {
       src: "/icons/favicon.ico",
       sizes: "any",
-      type: "image/x-icon"
-    }
-  ]
+      type: "image/x-icon",
+    },
+  ],
 });
 
 export const generateManifest = () => {
   const config = getConfigFile();
   const languages = fs
     .readdirSync(
-      ABSOLUTE_PATHS_BACKEND.plugin({ code: "core" }).frontend.language
+      ABSOLUTE_PATHS_BACKEND.plugin({ code: "core" }).frontend.language,
     )
     .map(fileName => fileName.replace(".json", ""));
   const frontend_url = parseFrontendUrlFromEnv().url;
@@ -106,12 +106,12 @@ export const generateManifest = () => {
       lang_code,
       frontend_url,
       site_name: config.settings.general.site_name,
-      site_short_name: config.settings.general.site_short_name
+      site_short_name: config.settings.general.site_short_name,
     });
     const path = join(
       ABSOLUTE_PATHS_BACKEND.uploads.public,
       "assets",
-      lang_code
+      lang_code,
     );
     const filePath = join(path, "manifest.webmanifest");
 
@@ -124,10 +124,10 @@ export const generateManifest = () => {
           {
             ...manifest,
             start_url: `${start_url}${manifest.start_url.replace(start_url, "")}`,
-            id: `${start_url}${manifest.start_url.replace(start_url, "")}`
+            id: `${start_url}${manifest.start_url.replace(start_url, "")}`,
           },
-          defaultManifest
-        )
+          defaultManifest,
+        ),
       );
 
       fs.writeFile(
@@ -136,7 +136,7 @@ export const generateManifest = () => {
         "utf8",
         err => {
           if (err) throw err;
-        }
+        },
       );
 
       return;
@@ -150,7 +150,7 @@ export const generateManifest = () => {
       "utf8",
       err => {
         if (err) throw err;
-      }
+      },
     );
   });
 };

@@ -7,21 +7,21 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ShowAdminPlugins } from "@/graphql/hooks";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Loader } from "@/components/loader";
 
 export const UploadPluginActionsAdmin = (
-  props: Pick<ShowAdminPlugins, "code" | "name">
+  props: Pick<ShowAdminPlugins, "code" | "name">,
 ) => {
   const t = useTranslations("core");
 
   const Content = React.lazy(async () =>
     import("../../upload/upload").then(module => ({
-      default: module.UploadPluginAdmin
-    }))
+      default: module.UploadPluginAdmin,
+    })),
   );
 
   return (

@@ -10,7 +10,7 @@ export const getTranslationForEmail = (namespaces: string) => {
     "plugins",
     resolveNamespace[0],
     "langs",
-    "en.json"
+    "en.json",
   );
 
   const read = fs.readFileSync(path, "utf-8");

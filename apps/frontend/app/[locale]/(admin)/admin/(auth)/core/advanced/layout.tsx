@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const [t, tCore, config] = await Promise.all([
     getTranslations("admin"),
     getTranslations("core.admin"),
-    getConfigFile()
+    getConfigFile(),
   ]);
 
   const defaultTitle = `${tCore("nav.advanced")} - ${t("title_short")} - ${config.settings.general.site_name}`;
@@ -20,8 +20,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: {
       template: `%s - ${defaultTitle}`,
-      absolute: defaultTitle
-    }
+      absolute: defaultTitle,
+    },
   };
 }
 

@@ -15,7 +15,7 @@ export class EditAdminThemeEditorService {
   protected changeVariable({
     cssAsString,
     variable,
-    newValues
+    newValues,
   }: {
     cssAsString: string;
     newValues: ThemeVariableInput;
@@ -23,7 +23,7 @@ export class EditAdminThemeEditorService {
   }): string {
     const regex = new RegExp(
       `(:root\\s*{[^}]*)--${variable}:\\s*([^;]*)([^}]*)|(\\.dark\\s*{[^}]*)--${variable}:\\s*([^;]*)([^}]*)`,
-      "g"
+      "g",
     );
 
     return cssAsString.replace(regex, (match, p1, p2, p3, p4, p5, p6) => {
@@ -41,7 +41,7 @@ export class EditAdminThemeEditorService {
     const pathToCss = join(
       ABSOLUTE_PATHS_BACKEND.plugin({ code: "core" }).frontend.templates,
       "layout",
-      "global.css"
+      "global.css",
     );
 
     if (!fs.existsSync(pathToCss)) {
@@ -57,7 +57,7 @@ export class EditAdminThemeEditorService {
       colorsStringUpdate = this.changeVariable({
         cssAsString: colorsStringUpdate,
         variable: key,
-        newValues: colors[formatKey]
+        newValues: colors[formatKey],
       });
     });
 

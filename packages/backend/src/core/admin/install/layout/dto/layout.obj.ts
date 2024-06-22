@@ -3,11 +3,11 @@ import { Field, ObjectType, registerEnumType } from "@nestjs/graphql";
 export enum LayoutAdminInstallEnum {
   DATABASE = "DATABASE",
   ACCOUNT = "ACCOUNT",
-  FINISH = "FINISH"
+  FINISH = "FINISH",
 }
 
 registerEnumType(LayoutAdminInstallEnum, {
-  name: "LayoutAdminInstallEnum"
+  name: "LayoutAdminInstallEnum",
 });
 
 @ObjectType()

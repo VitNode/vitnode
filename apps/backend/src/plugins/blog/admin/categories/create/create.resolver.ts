@@ -14,7 +14,7 @@ export class CreateBlogCategoriesResolver {
   @Mutation(() => ShowBlogCategories)
   @UseGuards(AdminAuthGuards)
   async admin__blog_categories__create(
-    @Args() args: CreatePluginCategoriesArgs
+    @Args() args: CreatePluginCategoriesArgs,
   ): Promise<ShowBlogCategories> {
     return this.service.create(args);
   }

@@ -25,12 +25,12 @@ export const EnabledRowTableLangsCoreAdmin = ({ data }: Props) => {
           ...data,
           enabled: !data.enabled,
           time24: data.time_24,
-          allowInInput: data.allow_in_input
+          allowInInput: data.allow_in_input,
         });
 
         if (mutation.error) {
           toast.error(t("errors.title"), {
-            description: t("errors.internal_server_error")
+            description: t("errors.internal_server_error"),
           });
           changeChecked(!checked);
 

@@ -18,7 +18,7 @@ import { EditAdminNavService } from "./edit/edit.service";
     ChangePositionAdminNavService,
     ChangePositionAdminNavResolver,
     EditAdminNavResolver,
-    EditAdminNavService
-  ]
+    EditAdminNavService,
+  ],
 })
 export class AdminNavModule {}

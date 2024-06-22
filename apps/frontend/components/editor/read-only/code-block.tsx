@@ -25,7 +25,7 @@ const renderElement = (node: Node | WithTagName): JSX.Element => {
     return React.createElement(
       React.Fragment,
       { key: `${new Date().getTime()}-${generateRandomString(10)}` },
-      node.value
+      node.value,
     );
   }
 
@@ -35,9 +35,9 @@ const renderElement = (node: Node | WithTagName): JSX.Element => {
     node.tagName,
     {
       className: node.properties?.className?.join(" "),
-      key: `${node.tagName}-${new Date().getTime()}-${generateRandomString(10)}`
+      key: `${node.tagName}-${new Date().getTime()}-${generateRandomString(10)}`,
     },
-    ...children
+    ...children,
   );
 };
 
@@ -67,14 +67,14 @@ export const changeCodeBlock = ({ children }: Element) => {
   return React.createElement(
     "pre",
     {
-      className: cn(classNameCodeBlock, "bg-muted rounded-md")
+      className: cn(classNameCodeBlock, "bg-muted rounded-md"),
     },
     React.createElement(
       "code",
       {
-        className: element?.attribs?.class
+        className: element?.attribs?.class,
       },
-      content
-    )
+      content,
+    ),
   );
 };

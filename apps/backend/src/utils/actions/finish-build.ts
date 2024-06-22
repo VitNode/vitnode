@@ -28,7 +28,7 @@ import { db } from "@/database/client";
 
             throw error;
           }
-        })
+        }),
     );
   });
 

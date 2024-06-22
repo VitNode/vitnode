@@ -2,7 +2,7 @@ import {
   CanActivate,
   ExecutionContext,
   Inject,
-  Injectable
+  Injectable,
 } from "@nestjs/common";
 import { GqlExecutionContext } from "@nestjs/graphql";
 
@@ -17,13 +17,13 @@ export interface IOAdminAuthGuards {
 @Injectable()
 export class AdminAuthGuards implements CanActivate {
   constructor(
-    @Inject("IOAdminAuthGuards") private readonly service: IOAdminAuthGuards
+    @Inject("IOAdminAuthGuards") private readonly service: IOAdminAuthGuards,
   ) {}
 
   protected async getAuth({ req, res }: Ctx) {
     const data = await this.service.authorization({
       req,
-      res
+      res,
     });
 
     req.user = data.user;

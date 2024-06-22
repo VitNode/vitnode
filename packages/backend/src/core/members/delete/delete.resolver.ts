@@ -13,7 +13,7 @@ export class DeleteCoreMembersResolver {
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
   async core_members__delete(
-    @Args() args: DeleteCoreMembersArgs
+    @Args() args: DeleteCoreMembersArgs,
   ): Promise<string> {
     return this.service.delete(args);
   }

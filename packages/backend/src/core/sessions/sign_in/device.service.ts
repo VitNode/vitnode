@@ -20,7 +20,7 @@ interface DeviceType {
 export class DeviceSignInCoreSessionsService {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly configService: ConfigService
+    private readonly configService: ConfigService,
   ) {}
 
   protected async createDevice({ req, res }: Ctx): Promise<DeviceType> {
@@ -28,7 +28,7 @@ export class DeviceSignInCoreSessionsService {
       .insert(core_sessions_known_devices)
       .values({
         ...getUserAgentData(req.headers["user-agent"]),
-        ip_address: getUserIp(req)
+        ip_address: getUserIp(req),
       })
       .returning();
 
@@ -37,7 +37,7 @@ export class DeviceSignInCoreSessionsService {
     // Set cookie
     const expires = new Date();
     const expiresIn: number = this.configService.getOrThrow(
-      "cookies.known_device.expiresIn"
+      "cookies.known_device.expiresIn",
     );
     expires.setDate(expires.getDate() + expiresIn);
     res.cookie(
@@ -49,8 +49,8 @@ export class DeviceSignInCoreSessionsService {
         domain: this.configService.getOrThrow("cookies.domain"),
         path: "/",
         expires,
-        sameSite: "none"
-      }
+        sameSite: "none",
+      },
     );
 
     return device;
@@ -67,8 +67,8 @@ export class DeviceSignInCoreSessionsService {
     const device =
       await this.databaseService.db.query.core_sessions_known_devices.findFirst(
         {
-          where: (table, { eq }) => eq(table.id, know_device_id)
-        }
+          where: (table, { eq }) => eq(table.id, know_device_id),
+        },
       );
 
     if (!device) {

@@ -14,7 +14,7 @@ export class CreateAdminNavResolver {
   @Mutation(() => ShowCoreNav)
   @UseGuards(AdminAuthGuards)
   async admin__core_nav__create(
-    @Args() args: CreateAdminNavArgs
+    @Args() args: CreateAdminNavArgs,
   ): Promise<ShowCoreNav> {
     return this.service.create(args);
   }

@@ -5,7 +5,7 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle
+  AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
@@ -19,7 +19,7 @@ export interface ContentDeleteActionTableNavDevPluginAdminProps
 
 export const ContentDeleteActionTableNavDevPluginAdmin = ({
   code,
-  parentCode
+  parentCode,
 }: ContentDeleteActionTableNavDevPluginAdminProps) => {
   const t = useTranslations("admin.core.plugins.dev.nav.delete");
   const tCore = useTranslations("core");
@@ -33,7 +33,7 @@ export const ContentDeleteActionTableNavDevPluginAdmin = ({
           {t.rich("desc", {
             code: () => (
               <span className="text-foreground font-bold">{code}</span>
-            )
+            ),
           })}
         </AlertDialogDescription>
       </AlertDialogHeader>

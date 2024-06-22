@@ -24,7 +24,7 @@ export const CalendarPicker = ({ onSelect, selected }: Props) => {
           variant={"outline"}
           className={cn(
             "w-full justify-start text-left font-normal",
-            !selected && "text-muted-foreground"
+            !selected && "text-muted-foreground",
           )}
         >
           <CalendarIcon className="mr-2 size-4" />

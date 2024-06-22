@@ -8,7 +8,7 @@ import {
   Card,
   CardContent,
   CardFooter,
-  CardHeader
+  CardHeader,
 } from "@/components/ui/card";
 import { ErrorViewProps } from "@/components/views/error-view-ssr";
 
@@ -40,7 +40,7 @@ export const ErrorAdminView = ({ className, code }: ErrorViewProps) => {
         {t.rich("errors.code", {
           code: () => (
             <span className="font-semibold">{code.toLocaleLowerCase()}</span>
-          )
+          ),
         })}
       </div>
     </div>

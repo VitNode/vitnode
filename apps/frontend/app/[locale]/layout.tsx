@@ -10,7 +10,7 @@ import { Providers } from "./providers";
 import {
   Core_Middleware,
   Core_MiddlewareQuery,
-  Core_MiddlewareQueryVariables
+  Core_MiddlewareQueryVariables,
 } from "@/graphql/hooks";
 import { CatchLayout } from "./catch";
 import { getConfigFile } from "@/config/helpers";
@@ -24,7 +24,7 @@ const getData = async () => {
     Core_MiddlewareQueryVariables
   >({
     query: Core_Middleware,
-    cache: "force-cache"
+    cache: "force-cache",
   });
 
   return data;
@@ -37,13 +37,13 @@ interface Props {
 
 export function generateMetadata({ params: { locale } }: Props): Metadata {
   return {
-    manifest: `${CONFIG.backend_public_url}/assets/${locale}/manifest.webmanifest`
+    manifest: `${CONFIG.backend_public_url}/assets/${locale}/manifest.webmanifest`,
   };
 }
 
 export default async function LocaleLayout({
   children,
-  params: { locale }
+  params: { locale },
 }: Props) {
   const defaultPlugins = [{ code: "core" }, { code: "admin" }];
 
@@ -59,19 +59,19 @@ export default async function LocaleLayout({
           return {
             ...(
               await import(`../../plugins/${plugin.code}/langs/${locale}.json`)
-            ).default
+            ).default,
           };
         } catch (e) {
           return {};
         }
-      })
+      }),
     );
 
     const messages: AbstractIntlMessages = {
       ...messagesFormApps.reduce(
         (acc, messages) => ({ ...acc, ...messages }),
-        {}
-      )
+        {},
+      ),
     };
 
     return (

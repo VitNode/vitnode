@@ -23,7 +23,7 @@ export const ItemListFilesFooterEditor = ({
   error,
   file,
   id,
-  isLoading
+  isLoading,
 }: ItemListFilesFooterEditorProps) => {
   const t = useTranslations("core.editor.files");
   const tCore = useTranslations("core");
@@ -32,7 +32,7 @@ export const ItemListFilesFooterEditor = ({
 
   const handleDelete = ({
     content,
-    file_id
+    file_id,
   }: {
     content: string;
     file_id: number;
@@ -55,7 +55,7 @@ export const ItemListFilesFooterEditor = ({
 
     const valueReturn = {
       ...parseValue,
-      content: mapContent(parseValue.content)
+      content: mapContent(parseValue.content),
     };
 
     return JSON.stringify(valueReturn);
@@ -67,8 +67,8 @@ export const ItemListFilesFooterEditor = ({
         className={cn(
           "relative flex size-10 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg",
           {
-            "h-14 w-20": data?.width && data?.height && !isLoading && !error
-          }
+            "h-14 w-20": data?.width && data?.height && !isLoading && !error,
+          },
         )}
       >
         <IconItemListFilesFooterEditor
@@ -109,7 +109,7 @@ export const ItemListFilesFooterEditor = ({
                 width: data.width ?? 0,
                 height: data.height ?? 0,
                 security_key: data.security_key ?? "",
-                id
+                id,
               });
               editor.commands.focus();
             }}
@@ -127,15 +127,15 @@ export const ItemListFilesFooterEditor = ({
                   language_code: item.language_code,
                   value: handleDelete({
                     content: item.value,
-                    file_id: id
-                  })
+                    file_id: id,
+                  }),
                 }));
 
                 onChange(content);
 
                 const parseContent = JSON.parse(
                   content.find(item => item.language_code === selectedLanguage)
-                    ?.value ?? ""
+                    ?.value ?? "",
                 );
 
                 editor.commands.clearContent();
@@ -143,7 +143,7 @@ export const ItemListFilesFooterEditor = ({
               } else {
                 const content = handleDelete({
                   content: value,
-                  file_id: id
+                  file_id: id,
                 });
 
                 onChange(content);
@@ -152,11 +152,11 @@ export const ItemListFilesFooterEditor = ({
               setFiles(prev => prev.filter(item => item.id !== id));
               const mutation = await deleteMutationApi({
                 id,
-                securityKey: data?.security_key
+                securityKey: data?.security_key,
               });
               if (mutation.error) {
                 toast.error(tCore("errors.title"), {
-                  description: tCore("errors.internal_server_error")
+                  description: tCore("errors.internal_server_error"),
                 });
               }
             }}

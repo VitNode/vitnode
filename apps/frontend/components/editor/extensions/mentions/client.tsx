@@ -81,7 +81,7 @@ const ComponentList = ({ command, items, ref }: ComponentListProps) => {
       }
 
       return false;
-    }
+    },
   }));
 
   return (
@@ -91,7 +91,7 @@ const ComponentList = ({ command, items, ref }: ComponentListProps) => {
           <Button
             variant="ghost"
             className={cn("justify-start", {
-              "bg-accent": index === selectedIndex
+              "bg-accent": index === selectedIndex,
             })}
             key={index}
             onClick={() => selectItem(index)}
@@ -114,7 +114,7 @@ export function onStart<T>(props: SuggestionProps<T>) {
   component = new ReactRenderer(ComponentList, {
     props,
     editor: props.editor,
-    className: cn(classPopover, "flex flex-col p-2")
+    className: cn(classPopover, "flex flex-col p-2"),
   });
 
   if (!props.clientRect) {
@@ -128,7 +128,7 @@ export function onStart<T>(props: SuggestionProps<T>) {
     showOnCreate: true,
     interactive: true,
     trigger: "manual",
-    placement: "bottom-start"
+    placement: "bottom-start",
   });
 }
 
@@ -144,7 +144,7 @@ export function onUpdate<T>(props: SuggestionProps<T>) {
   }
 
   popup[0].setProps({
-    getReferenceClientRect: props.clientRect
+    getReferenceClientRect: props.clientRect,
   });
 }
 

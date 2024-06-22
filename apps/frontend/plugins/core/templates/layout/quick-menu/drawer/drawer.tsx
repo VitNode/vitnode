@@ -36,8 +36,8 @@ export const DrawerQuickMenu = ({ navIcons }: Props) => {
               className={cn(
                 buttonVariants({
                   variant: "ghost",
-                  className: classNameDrawerQuickMenu
-                })
+                  className: classNameDrawerQuickMenu,
+                }),
               )}
             >
               <User />
@@ -51,8 +51,8 @@ export const DrawerQuickMenu = ({ navIcons }: Props) => {
               className={cn(
                 buttonVariants({
                   variant: "ghost",
-                  className: classNameDrawerQuickMenu
-                })
+                  className: classNameDrawerQuickMenu,
+                }),
               )}
             >
               <Settings />
@@ -75,8 +75,8 @@ export const DrawerQuickMenu = ({ navIcons }: Props) => {
                 className={cn(
                   buttonVariants({
                     variant: "ghost",
-                    className: classNameDrawerQuickMenu
-                  })
+                    className: classNameDrawerQuickMenu,
+                  }),
                 )}
               >
                 <Shield />

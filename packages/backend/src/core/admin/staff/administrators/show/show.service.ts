@@ -7,7 +7,7 @@ import { ShowAdminStaffAdministratorsObj } from "./dto/show.obj";
 import { DatabaseService } from "../../../../../database";
 import {
   inputPaginationCursor,
-  outputPagination
+  outputPagination,
 } from "../../../../../functions";
 import { core_admin_permissions } from "../../../../../templates/core/admin/database/schema/admins";
 import { SortDirectionEnum } from "../../../../../utils";
@@ -20,7 +20,7 @@ export class ShowAdminStaffAdministratorsService {
     cursor,
     first,
     last,
-    sortBy
+    sortBy,
   }: ShowAdminStaffAdministratorsArgs): Promise<ShowAdminStaffAdministratorsObj> {
     const pagination = await inputPaginationCursor({
       cursor,
@@ -30,13 +30,13 @@ export class ShowAdminStaffAdministratorsService {
       last,
       primaryCursor: {
         column: "id",
-        schema: core_admin_permissions.id
+        schema: core_admin_permissions.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: "updated"
+        column: "updated",
       },
-      sortBy
+      sortBy,
     });
 
     const edges =
@@ -45,20 +45,20 @@ export class ShowAdminStaffAdministratorsService {
         with: {
           group: {
             with: {
-              name: true
-            }
+              name: true,
+            },
           },
           user: {
             with: {
               avatar: true,
               group: {
                 with: {
-                  name: true
-                }
-              }
-            }
-          }
-        }
+                  name: true,
+                },
+              },
+            },
+          },
+        },
       });
 
     const totalCount = await this.databaseService.db
@@ -71,8 +71,8 @@ export class ShowAdminStaffAdministratorsService {
           return {
             ...edge,
             user_or_group: {
-              ...edge.user
-            }
+              ...edge.user,
+            },
           };
         }
 
@@ -80,14 +80,14 @@ export class ShowAdminStaffAdministratorsService {
           ...edge,
           user_or_group: {
             ...edge.group,
-            group_name: edge.group.name
-          }
+            group_name: edge.group.name,
+          },
         };
       }),
       totalCount,
       first,
       cursor,
-      last
+      last,
     });
   }
 }

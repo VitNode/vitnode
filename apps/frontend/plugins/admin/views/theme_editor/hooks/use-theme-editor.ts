@@ -6,7 +6,7 @@ import { formSchemaColorsThemeEditor } from "./use-theme-editor-api";
 
 export enum ThemeEditorTab {
   Main = "main",
-  Colors = "colors"
+  Colors = "colors",
 }
 
 interface ColorObj {
@@ -39,7 +39,7 @@ interface Args {
   activeTheme: "dark" | "light";
   changeColor: ({
     hslColor,
-    name
+    name,
   }: {
     hslColor: HslColor;
     name: keyof typeof formSchemaColorsThemeEditor.shape;
@@ -61,7 +61,7 @@ export const ThemeEditorContext = React.createContext<Args>({
   changeColor: () => {},
   activeTheme: "light",
   openSubmitDialog: false,
-  setOpenSubmitDialog: () => {}
+  setOpenSubmitDialog: () => {},
 });
 
 export const useThemeEditor = () => React.useContext(ThemeEditorContext);

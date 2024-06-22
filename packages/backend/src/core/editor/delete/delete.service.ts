@@ -9,22 +9,22 @@ import { User } from "../../../decorators";
 import { AccessDeniedError } from "../../../errors";
 import {
   core_files,
-  core_files_using
+  core_files_using,
 } from "../../../templates/core/admin/database/schema/files";
 
 @Injectable()
 export class DeleteCoreEditorService {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly deleteFile: DeleteCoreFilesService
+    private readonly deleteFile: DeleteCoreFilesService,
   ) {}
 
   async delete(
     { id: user_id }: User,
-    { id, security_key }: DeleteCoreEditorArgs
+    { id, security_key }: DeleteCoreEditorArgs,
   ): Promise<string> {
     const findFile = await this.databaseService.db.query.core_files.findFirst({
-      where: (table, { eq }) => eq(table.id, id)
+      where: (table, { eq }) => eq(table.id, id),
     });
 
     if (
@@ -37,7 +37,7 @@ export class DeleteCoreEditorService {
 
     const uses = await this.databaseService.db
       .select({
-        count: count()
+        count: count(),
       })
       .from(core_files_using)
       .where(eq(core_files_using.file_id, id));
@@ -48,7 +48,7 @@ export class DeleteCoreEditorService {
 
     this.deleteFile.delete({
       ...findFile,
-      file_secure: !!findFile.security_key
+      file_secure: !!findFile.security_key,
     });
 
     await this.databaseService.db

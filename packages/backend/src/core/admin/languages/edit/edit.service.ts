@@ -18,7 +18,7 @@ export class EditAdminCoreLanguagesService {
   }: EditCoreAdminLanguagesArgs): Promise<ShowCoreLanguages> {
     const language =
       await this.databaseService.db.query.core_languages.findFirst({
-        where: (table, { eq }) => eq(table.id, id)
+        where: (table, { eq }) => eq(table.id, id),
       });
 
     if (!language) {

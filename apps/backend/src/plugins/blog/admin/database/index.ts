@@ -3,5 +3,5 @@ import * as categories from "./schema/categories";
 
 export default {
   ...articles,
-  ...categories
+  ...categories,
 };

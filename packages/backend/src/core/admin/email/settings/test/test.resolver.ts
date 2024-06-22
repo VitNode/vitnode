@@ -13,7 +13,7 @@ export class TestAdminEmailSettingsResolver {
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
   async admin__core_email_settings__test(
-    @Args() args: TestAdminEmailSettingsServiceArgs
+    @Args() args: TestAdminEmailSettingsServiceArgs,
   ): Promise<string> {
     return this.service.test(args);
   }

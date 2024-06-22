@@ -8,7 +8,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
@@ -16,8 +16,8 @@ import { useSession } from "@/plugins/core/hooks/use-session";
 
 const ModalChangeAvatar = React.lazy(async () =>
   import("./modal/modal-change-avatar").then(module => ({
-    default: module.ModalChangeAvatar
-  }))
+    default: module.ModalChangeAvatar,
+  })),
 );
 
 export const ChangeAvatar = () => {

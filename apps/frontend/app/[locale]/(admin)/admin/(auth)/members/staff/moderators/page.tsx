@@ -5,24 +5,24 @@ import {
   Admin__Core_Staff_Moderators__Show,
   ShowAdminStaffModeratorsSortingColumnEnum,
   Admin__Core_Staff_Moderators__ShowQuery,
-  Admin__Core_Staff_Moderators__ShowQueryVariables
+  Admin__Core_Staff_Moderators__ShowQueryVariables,
 } from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
-  SearchParamsPagination
+  SearchParamsPagination,
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { fetcher } from "@/graphql/fetcher";
 import { ModeratorsStaffAdminView } from "@/plugins/admin/views/members/staff/moderators/moderators-view";
 
 const getData = async (
-  variables: Admin__Core_Staff_Moderators__ShowQueryVariables
+  variables: Admin__Core_Staff_Moderators__ShowQueryVariables,
 ) => {
   const { data } = await fetcher<
     Admin__Core_Staff_Moderators__ShowQuery,
     Admin__Core_Staff_Moderators__ShowQueryVariables
   >({
     query: Admin__Core_Staff_Moderators__Show,
-    variables
+    variables,
   });
 
   return data;
@@ -36,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("admin.members.staff.moderators");
 
   return {
-    title: t("title")
+    title: t("title"),
   };
 }
 
@@ -45,7 +45,7 @@ export default async function Page({ searchParams }: Props) {
     searchParams,
     search: true,
     sortByEnum: ShowAdminStaffModeratorsSortingColumnEnum,
-    defaultPageSize: 10
+    defaultPageSize: 10,
   });
 
   const data = await getData(variables);

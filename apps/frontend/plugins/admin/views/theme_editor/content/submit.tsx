@@ -10,7 +10,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger
+  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { CONFIG } from "@/config";
@@ -26,7 +26,7 @@ export const SubmitContentThemeEditor = ({
   isPending,
   onClick,
   openSubmitDialog,
-  setOpenSubmitDialog
+  setOpenSubmitDialog,
 }: Props) => {
   const t = useTranslations("core.theme_editor.submit");
   const tCore = useTranslations("core");

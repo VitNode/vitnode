@@ -8,7 +8,7 @@ import { currentUnixDate } from "@vitnode/shared";
 
 import {
   AuthorizationAdminSessionsObj,
-  NavAdminPluginsAuthorization
+  NavAdminPluginsAuthorization,
 } from "./dto/authorization.obj";
 
 import { DatabaseService } from "../../../../database";
@@ -24,15 +24,15 @@ export class AuthorizationAdminSessionsService {
     private readonly databaseService: DatabaseService,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
-    private readonly deviceService: DeviceSignInCoreSessionsService
+    private readonly deviceService: DeviceSignInCoreSessionsService,
   ) {}
 
   protected async getAdminNav(): Promise<NavAdminPluginsAuthorization[]> {
     const adminNav = await this.databaseService.db.query.core_plugins.findMany({
       orderBy: (table, { asc }) => asc(table.created),
       columns: {
-        code: true
-      }
+        code: true,
+      },
     });
 
     return adminNav
@@ -41,7 +41,7 @@ export class AuthorizationAdminSessionsService {
         if (!fs.existsSync(pathConfig)) {
           return {
             code,
-            nav: []
+            nav: [],
           };
         }
 
@@ -53,7 +53,7 @@ export class AuthorizationAdminSessionsService {
 
         return {
           code,
-          nav: config.nav
+          nav: config.nav,
         };
       })
       .filter(plugin => plugin.nav.length > 0);
@@ -61,7 +61,7 @@ export class AuthorizationAdminSessionsService {
 
   async initialAuthorization({
     req,
-    res
+    res,
   }: Ctx): Promise<AuthorizationCurrentUserObj> {
     const login_token =
       req.cookies[
@@ -74,7 +74,7 @@ export class AuthorizationAdminSessionsService {
 
     const device = await this.deviceService.getDevice({
       req,
-      res
+      res,
     });
 
     // If access token exists, check it
@@ -84,7 +84,7 @@ export class AuthorizationAdminSessionsService {
           and(
             eq(table.login_token, login_token),
             eq(table.device_id, device.id),
-            gt(table.expires, new Date())
+            gt(table.expires, new Date()),
           ),
         with: {
           user: {
@@ -92,12 +92,12 @@ export class AuthorizationAdminSessionsService {
               avatar: true,
               group: {
                 with: {
-                  name: true
-                }
-              }
-            }
-          }
-        }
+                  name: true,
+                },
+              },
+            },
+          },
+        },
       });
 
     if (!session) {
@@ -115,14 +115,14 @@ export class AuthorizationAdminSessionsService {
       .set({
         last_seen: new Date(),
         ...getUserAgentData(req.headers["user-agent"]),
-        ip_address: getUserIp(req)
+        ip_address: getUserIp(req),
       })
       .where(eq(core_sessions_known_devices.id, device.id));
 
     return {
       ...session.user,
       is_admin: true,
-      is_mod: true
+      is_mod: true,
     };
   }
 
@@ -132,7 +132,7 @@ export class AuthorizationAdminSessionsService {
     return {
       user,
       version: "0.0.3", // TODO: Get version from package.json
-      nav: await this.getAdminNav()
+      nav: await this.getAdminNav(),
     };
   }
 }

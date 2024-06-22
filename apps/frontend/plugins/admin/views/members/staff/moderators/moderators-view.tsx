@@ -11,7 +11,7 @@ export interface ModeratorsStaffAdminViewProps {
 }
 
 export const ModeratorsStaffAdminView = (
-  props: ModeratorsStaffAdminViewProps
+  props: ModeratorsStaffAdminViewProps,
 ) => {
   const t = useTranslations("admin.members.staff.moderators");
 

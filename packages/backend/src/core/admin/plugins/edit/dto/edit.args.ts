@@ -4,7 +4,7 @@ import { CreateAdminPluginsArgs } from "../../create/dto/create.args";
 
 @ArgsType()
 export class EditAdminPluginsArgs extends OmitType(CreateAdminPluginsArgs, [
-  "code"
+  "code",
 ] as const) {
   @Field(() => String)
   code: string;

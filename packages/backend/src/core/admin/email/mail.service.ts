@@ -7,7 +7,7 @@ import * as React from "react";
 
 import {
   HelpersAdminEmailSettingsService,
-  ShowAdminEmailSettingsServiceObjWithPassword
+  ShowAdminEmailSettingsServiceObjWithPassword,
 } from "./helpers.service";
 
 interface SendMailConfiguration {
@@ -36,22 +36,22 @@ export class MailService extends HelpersAdminEmailSettingsService {
         secure: config.smtp_secure,
         auth: {
           user: config.smtp_user,
-          pass: config.smtp_password
-        }
+          pass: config.smtp_password,
+        },
       },
       {
         from: {
           name: "NestJs + React Emails Test App",
-          address: "Test App"
-        }
-      }
+          address: "Test App",
+        },
+      },
     );
 
     await transporter.sendMail({
       to,
       from: "test",
       subject,
-      html
+      html,
     });
   }
 }

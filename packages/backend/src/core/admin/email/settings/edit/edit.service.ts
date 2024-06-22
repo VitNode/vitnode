@@ -7,12 +7,12 @@ import { EditAdminEmailSettingsServiceArgs } from "./dto/edit.args";
 
 import {
   HelpersAdminEmailSettingsService,
-  ShowAdminEmailSettingsServiceObjWithPassword
+  ShowAdminEmailSettingsServiceObjWithPassword,
 } from "../../helpers.service";
 import {
   ConfigType,
   configPath,
-  getConfigFile
+  getConfigFile,
 } from "../../../../../providers/config";
 
 @Injectable()
@@ -24,7 +24,7 @@ export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
     smtp_secure,
     smtp_user,
     color_primary,
-    color_primary_foreground
+    color_primary_foreground,
   }: EditAdminEmailSettingsServiceArgs): ShowAdminEmailSettingsServiceObj {
     // Update settings
     const configSettings = getConfigFile();
@@ -34,9 +34,9 @@ export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
         ...configSettings.settings,
         email: {
           color_primary,
-          color_primary_foreground
-        }
-      }
+          color_primary_foreground,
+        },
+      },
     };
     fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), "utf8");
 
@@ -45,7 +45,7 @@ export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
       smtp_password,
       smtp_port,
       smtp_secure,
-      smtp_user
+      smtp_user,
     };
 
     if (!fs.existsSync(this.path)) {
@@ -53,7 +53,7 @@ export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
 
       return {
         ...smtpData,
-        color_primary
+        color_primary,
       };
     }
 
@@ -64,14 +64,14 @@ export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
     const { smtp_password: _, ...rest } = smtpData;
     const dataToSave = {
       ...rest,
-      smtp_password: smtp_password || config.smtp_password
+      smtp_password: smtp_password || config.smtp_password,
     };
 
     fs.writeFileSync(this.path, JSON.stringify(dataToSave, null, 2));
 
     return {
       ...smtpData,
-      color_primary
+      color_primary,
     };
   }
 }

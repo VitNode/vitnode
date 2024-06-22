@@ -11,9 +11,9 @@ export const useShortShowGroupsAdminAPI = () => {
     queryFn: async () =>
       queryApi({
         first: 25,
-        search: textSearch
+        search: textSearch,
       }),
-    refetchOnMount: true
+    refetchOnMount: true,
   });
 
   return { ...api, setTextSearch };

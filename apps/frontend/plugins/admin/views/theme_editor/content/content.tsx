@@ -16,12 +16,12 @@ export const ContentThemeEditor = () => {
     form,
     onSubmit,
     openSubmitDialog,
-    setOpenSubmitDialog
+    setOpenSubmitDialog,
   } = useThemeEditor();
   const t = useTranslations("core");
   const tabs = {
     [ThemeEditorTab.Main]: <MainTabThemeEditor />,
-    [ThemeEditorTab.Colors]: <ColorTabThemeEditor />
+    [ThemeEditorTab.Colors]: <ColorTabThemeEditor />,
   };
 
   return (
@@ -41,7 +41,7 @@ export const ContentThemeEditor = () => {
                 active: { x: "0%", opacity: 1 },
                 exit: direction => {
                   return { x: `${110 * direction}%`, opacity: 0 };
-                }
+                },
               }}
               initial="initial"
               animate="active"
@@ -58,7 +58,7 @@ export const ContentThemeEditor = () => {
                 className={buttonVariants({
                   variant: "ghost",
                   size: "sm",
-                  className: "w-full"
+                  className: "w-full",
                 })}
                 aria-label={t("close")}
               >

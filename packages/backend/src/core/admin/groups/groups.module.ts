@@ -18,7 +18,7 @@ import { DeleteAdminGroupsService } from "./delete/delete.service";
     EditAdminGroupsService,
     EditAdminGroupsResolver,
     DeleteAdminGroupsResolver,
-    DeleteAdminGroupsService
-  ]
+    DeleteAdminGroupsService,
+  ],
 })
 export class AdminGroupsModule {}

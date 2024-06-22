@@ -5,7 +5,7 @@ import { Transform } from "class-transformer";
 import {
   IsTextLanguageInput,
   TextLanguageInput,
-  TransformTextLanguageInput
+  TransformTextLanguageInput,
 } from "../../../../../utils";
 
 @InputType()

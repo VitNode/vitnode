@@ -5,7 +5,7 @@ import { CreateCoreAdminLanguagesArgs } from "../../create/dto/create.args";
 @ArgsType()
 export class EditCoreAdminLanguagesArgs extends OmitType(
   CreateCoreAdminLanguagesArgs,
-  ["code"] as const
+  ["code"] as const,
 ) {
   @Field(() => Int)
   id: number;

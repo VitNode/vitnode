@@ -10,7 +10,7 @@ import { DeleteCoreEditorService } from "./delete/delete.service";
     UploadCoreEditorService,
     UploadCoreEditorResolver,
     DeleteCoreEditorResolver,
-    DeleteCoreEditorService
-  ]
+    DeleteCoreEditorService,
+  ],
 })
 export class CoreEditorModule {}

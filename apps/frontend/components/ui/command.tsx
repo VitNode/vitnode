@@ -15,7 +15,7 @@ const Command = ({
   <CommandPrimitive
     className={cn(
       "bg-popover text-popover-foreground flex h-full w-full flex-col overflow-hidden rounded-md",
-      className
+      className,
     )}
     {...props}
   />
@@ -62,7 +62,7 @@ const CommandList = ({
 );
 
 const CommandEmpty = (
-  props: React.ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>
+  props: React.ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>,
 ) => <CommandPrimitive.Empty className="py-6 text-center text-sm" {...props} />;
 
 const CommandGroup = ({
@@ -72,7 +72,7 @@ const CommandGroup = ({
   <CommandPrimitive.Group
     className={cn(
       "text-foreground [&_[cmdk-group-heading]]:text-muted-foreground overflow-hidden p-1 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium",
-      className
+      className,
     )}
     {...props}
   />
@@ -95,7 +95,7 @@ const CommandItem = ({
   <CommandPrimitive.Item
     className={cn(
       "aria-selected:bg-accent aria-selected:text-accent-foreground relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
-      className
+      className,
     )}
     {...props}
   />
@@ -109,7 +109,7 @@ const CommandShortcut = ({
     <span
       className={cn(
         "text-muted-foreground ml-auto text-xs tracking-widest",
-        className
+        className,
       )}
       {...props}
     />
@@ -125,5 +125,5 @@ export {
   CommandGroup,
   CommandItem,
   CommandShortcut,
-  CommandSeparator
+  CommandSeparator,
 };

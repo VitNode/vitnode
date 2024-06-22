@@ -18,20 +18,20 @@ export const useDeletePluginAdmin = ({ code, name }: Args) => {
     const mutation = await mutationApi({ code });
     if (mutation.error) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;
     }
 
     toast.success(t("success"), {
-      description: name
+      description: name,
     });
 
     setOpen(false);
   };
 
   return {
-    onSubmit
+    onSubmit,
   };
 };

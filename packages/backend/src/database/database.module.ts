@@ -7,7 +7,7 @@ import { DatabaseService } from "./database.service";
 import { SortDirectionEnum } from "..";
 
 registerEnumType(SortDirectionEnum, {
-  name: "SortDirectionEnum"
+  name: "SortDirectionEnum",
 });
 
 export interface DatabaseModuleArgs {
@@ -24,11 +24,11 @@ export class DatabaseModule {
       providers: [
         {
           provide: "DATABASE_MODULE_OPTIONS",
-          useValue: options
+          useValue: options,
         },
-        DatabaseService
+        DatabaseService,
       ],
-      exports: [DatabaseService]
+      exports: [DatabaseService],
     };
   }
 }

@@ -8,7 +8,7 @@ import { ShowCoreMiddlewareResolver } from "./show/show.resolver";
   providers: [
     CoreMiddlewareCron,
     ShowCoreMiddlewareService,
-    ShowCoreMiddlewareResolver
-  ]
+    ShowCoreMiddlewareResolver,
+  ],
 })
 export class CoreMiddlewareModule {}

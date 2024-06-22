@@ -3,7 +3,7 @@ import "server-only";
 import { cookies } from "next/headers";
 
 const cookieFromStringToObject = (
-  str: string[]
+  str: string[],
 ): {
   Domain: string;
   Expires: string;
@@ -24,8 +24,8 @@ const cookieFromStringToObject = (
         }
 
         return current;
-      })
-    )
+      }),
+    ),
   );
 };
 
@@ -43,8 +43,8 @@ export const setCookieFromApi = ({ res }: { res: Response }) => {
         expires: new Date(cookie.Expires),
         secure: cookie.Secure,
         httpOnly: cookie.HttpOnly,
-        sameSite: cookie.SameSite
+        sameSite: cookie.SameSite,
       });
-    }
+    },
   );
 };

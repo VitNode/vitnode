@@ -9,6 +9,6 @@ export interface ManifestWithLang extends ShowAdminManifestMetadataObj {
 }
 
 @Module({
-  providers: [ShowSettingsService, ShowCoreSettingsResolver]
+  providers: [ShowSettingsService, ShowCoreSettingsResolver],
 })
 export class CoreSettingsModule {}

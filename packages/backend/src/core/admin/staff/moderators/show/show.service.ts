@@ -7,7 +7,7 @@ import { ShowAdminStaffModeratorsObj } from "./dto/show.obj";
 import { DatabaseService } from "../../../../../database";
 import {
   inputPaginationCursor,
-  outputPagination
+  outputPagination,
 } from "../../../../../functions";
 import { core_moderators_permissions } from "../../../../../templates/core/admin/database/schema/moderators";
 import { SortDirectionEnum } from "../../../../../utils";
@@ -20,7 +20,7 @@ export class ShowAdminStaffModeratorsService {
     cursor,
     first,
     last,
-    sortBy
+    sortBy,
   }: ShowAdminStaffModeratorsArgs): Promise<ShowAdminStaffModeratorsObj> {
     const pagination = await inputPaginationCursor({
       cursor,
@@ -30,13 +30,13 @@ export class ShowAdminStaffModeratorsService {
       last,
       primaryCursor: {
         column: "id",
-        schema: core_moderators_permissions.id
+        schema: core_moderators_permissions.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: "updated"
+        column: "updated",
       },
-      sortBy
+      sortBy,
     });
 
     const edges =
@@ -45,20 +45,20 @@ export class ShowAdminStaffModeratorsService {
         with: {
           group: {
             with: {
-              name: true
-            }
+              name: true,
+            },
           },
           user: {
             with: {
               avatar: true,
               group: {
                 with: {
-                  name: true
-                }
-              }
-            }
-          }
-        }
+                  name: true,
+                },
+              },
+            },
+          },
+        },
       });
 
     const totalCount = await this.databaseService.db
@@ -71,8 +71,8 @@ export class ShowAdminStaffModeratorsService {
           return {
             ...edge,
             user_or_group: {
-              ...edge.user
-            }
+              ...edge.user,
+            },
           };
         }
 
@@ -80,14 +80,14 @@ export class ShowAdminStaffModeratorsService {
           ...edge,
           user_or_group: {
             ...edge.group,
-            group_name: edge.group.name
-          }
+            group_name: edge.group.name,
+          },
         };
       }),
       totalCount,
       first,
       cursor,
-      last
+      last,
     });
   }
 }

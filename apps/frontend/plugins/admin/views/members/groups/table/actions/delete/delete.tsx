@@ -6,25 +6,25 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 import { ShowAdminGroups } from "@/graphql/hooks";
 import {
   AlertDialog,
   AlertDialogContent,
-  AlertDialogTrigger
+  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Loader } from "@/components/loader";
 
 const Content = React.lazy(async () =>
   import("./content").then(module => ({
-    default: module.ContentDeleteGroupsMembersDialogAdmin
-  }))
+    default: module.ContentDeleteGroupsMembersDialogAdmin,
+  })),
 );
 
 export const DeleteGroupsMembersDialogAdmin = (
-  props: Pick<ShowAdminGroups, "id" | "name" | "protected">
+  props: Pick<ShowAdminGroups, "id" | "name" | "protected">,
 ) => {
   const t = useTranslations("core");
 

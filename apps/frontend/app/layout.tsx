@@ -13,11 +13,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: {
       default: defaultTitle,
-      template: `%s - ${defaultTitle}`
+      template: `%s - ${defaultTitle}`,
     },
     icons: {
-      icon: "/icons/favicon.ico"
-    }
+      icon: "/icons/favicon.ico",
+    },
   };
 }
 

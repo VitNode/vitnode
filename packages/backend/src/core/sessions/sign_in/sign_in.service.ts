@@ -27,7 +27,7 @@ export class SignInCoreSessionsService {
     private readonly databaseService: DatabaseService,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
-    private readonly deviceService: DeviceSignInCoreSessionsService
+    private readonly deviceService: DeviceSignInCoreSessionsService,
   ) {}
 
   protected async createSession({
@@ -37,7 +37,7 @@ export class SignInCoreSessionsService {
     remember,
     req,
     res,
-    userId
+    userId,
   }: CreateSessionArgs) {
     const loginTokenSecret =
       this.configService.getOrThrow("login_token_secret");
@@ -51,14 +51,14 @@ export class SignInCoreSessionsService {
       throw new CustomError({
         code: "INVALID_DEVICE",
         message:
-          "We have detected that you are using an invalid device. Please try again."
+          "We have detected that you are using an invalid device. Please try again.",
       });
     }
 
     const login_token = this.jwtService.sign(
       {
         name,
-        email
+        email,
       },
       {
         secret: loginTokenSecret,
@@ -66,12 +66,12 @@ export class SignInCoreSessionsService {
           60 *
           60 *
           24 *
-          this.configService.getOrThrow("cookies.login_token.expiresIn")
-      }
+          this.configService.getOrThrow("cookies.login_token.expiresIn"),
+      },
     );
 
     const expiresValue: number = this.configService.getOrThrow(
-      `cookies.login_token.${remember ? "expiresInRemember" : "expiresIn"}`
+      `cookies.login_token.${remember ? "expiresInRemember" : "expiresIn"}`,
     );
 
     if (admin) {
@@ -81,7 +81,7 @@ export class SignInCoreSessionsService {
       const activeSession =
         await this.databaseService.db.query.core_admin_sessions.findFirst({
           where: (table, { eq, and }) =>
-            and(eq(table.user_id, userId), eq(table.device_id, device.id))
+            and(eq(table.user_id, userId), eq(table.device_id, device.id)),
         });
 
       if (activeSession) {
@@ -89,20 +89,20 @@ export class SignInCoreSessionsService {
           .update(core_admin_sessions)
           .set({
             login_token,
-            expires
+            expires,
           })
           .where(
             and(
               eq(core_admin_sessions.user_id, userId),
-              eq(core_admin_sessions.device_id, device.id)
-            )
+              eq(core_admin_sessions.device_id, device.id),
+            ),
           );
       } else {
         await this.databaseService.db.insert(core_admin_sessions).values({
           login_token,
           user_id: userId,
           expires,
-          device_id: device.id
+          device_id: device.id,
         });
       }
 
@@ -116,8 +116,8 @@ export class SignInCoreSessionsService {
           domain: this.configService.getOrThrow("cookies.domain"),
           path: "/",
           expires,
-          sameSite: "none"
-        }
+          sameSite: "none",
+        },
       );
 
       return login_token;
@@ -130,7 +130,7 @@ export class SignInCoreSessionsService {
     const activeSession =
       await this.databaseService.db.query.core_sessions.findFirst({
         where: (table, { eq, and }) =>
-          and(eq(table.user_id, userId), eq(table.device_id, device.id))
+          and(eq(table.user_id, userId), eq(table.device_id, device.id)),
       });
 
     if (activeSession) {
@@ -138,20 +138,20 @@ export class SignInCoreSessionsService {
         .update(core_sessions)
         .set({
           login_token,
-          expires
+          expires,
         })
         .where(
           and(
             eq(core_sessions.user_id, userId),
-            eq(core_sessions.device_id, device.id)
-          )
+            eq(core_sessions.device_id, device.id),
+          ),
         );
     } else {
       await this.databaseService.db.insert(core_sessions).values({
         login_token,
         user_id: userId,
         expires,
-        device_id: device.id
+        device_id: device.id,
       });
     }
 
@@ -165,8 +165,8 @@ export class SignInCoreSessionsService {
         domain: this.configService.getOrThrow("cookies.domain"),
         path: "/",
         expires: remember ? expires : null,
-        sameSite: "none"
-      }
+        sameSite: "none",
+      },
     );
 
     return login_token;
@@ -174,11 +174,11 @@ export class SignInCoreSessionsService {
 
   async signIn(
     { admin, email: emailRaw, password, remember }: SignInCoreSessionsArgs,
-    ctx: Ctx
+    ctx: Ctx,
   ) {
     const email = emailRaw.toLowerCase();
     const user = await this.databaseService.db.query.core_users.findFirst({
-      where: (table, { eq }) => eq(table.email, email)
+      where: (table, { eq }) => eq(table.email, email),
     });
     if (!user) throw new AccessDeniedError();
 
@@ -190,7 +190,7 @@ export class SignInCoreSessionsService {
       const accessToAdminCP =
         await this.databaseService.db.query.core_admin_permissions.findFirst({
           where: (table, { eq, or }) =>
-            or(eq(table.group_id, user.group_id), eq(table.user_id, user.id))
+            or(eq(table.group_id, user.group_id), eq(table.user_id, user.id)),
         });
       if (!accessToAdminCP) throw new AccessDeniedError();
     }
@@ -201,7 +201,7 @@ export class SignInCoreSessionsService {
       userId: user.id,
       admin,
       ...ctx,
-      remember
+      remember,
     });
   }
 }

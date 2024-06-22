@@ -9,13 +9,13 @@ import { AdminAuthGuards } from "../../../../../utils";
 @Resolver()
 export class DeleteAdminStaffAdministratorsResolver {
   constructor(
-    private readonly service: DeleteAdminStaffAdministratorsService
+    private readonly service: DeleteAdminStaffAdministratorsService,
   ) {}
 
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
   async admin__core_staff_administrators__delete(
-    @Args() args: DeleteAdminStaffAdministratorsArgs
+    @Args() args: DeleteAdminStaffAdministratorsArgs,
   ): Promise<string> {
     return this.service.delete(args);
   }

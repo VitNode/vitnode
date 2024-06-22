@@ -3,14 +3,14 @@ import {
   Field,
   InputType,
   Int,
-  registerEnumType
+  registerEnumType,
 } from "@nestjs/graphql";
 import { Transform } from "class-transformer";
 
 import {
   PaginationArgs,
   SortDirectionEnum,
-  TransformString
+  TransformString,
 } from "../../../../../utils";
 
 export enum ShowAdminMembersSortingColumnEnum {
@@ -20,11 +20,11 @@ export enum ShowAdminMembersSortingColumnEnum {
   last_name = "last_name",
   posts = "posts",
   followers = "followers",
-  reactions = "reactions"
+  reactions = "reactions",
 }
 
 registerEnumType(ShowAdminMembersSortingColumnEnum, {
-  name: "ShowAdminMembersSortingColumnEnum"
+  name: "ShowAdminMembersSortingColumnEnum",
 });
 
 @InputType()

@@ -8,7 +8,7 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SheetTrigger
+  SheetTrigger,
 } from "../../../ui/sheet";
 import { Loader } from "../../../loader";
 

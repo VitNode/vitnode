@@ -4,7 +4,7 @@ import { TextLanguage } from "@/graphql/hooks";
 import { FileStateEditor } from "../files";
 
 export const getFilesFromContent = (
-  content: TextLanguage[]
+  content: TextLanguage[],
 ): FileStateEditor[] => {
   const files: FileStateEditor[] = [];
 
@@ -34,8 +34,8 @@ export const getFilesFromContent = (
               dir_folder: value.attrs.dir_folder,
               security_key: value.attrs.security_key,
               file_alt: value.attrs.file_alt,
-              file_name_original: value.attrs.file_name_original
-            }
+              file_name_original: value.attrs.file_name_original,
+            },
           });
         }
 

@@ -17,7 +17,7 @@ export interface CreateEditFormGroupsMembersAdminArgs {
 }
 
 export const useCreateEditFormGroupsMembersAdmin = ({
-  data
+  data,
 }: CreateEditFormGroupsMembersAdminArgs) => {
   const t = useTranslations("admin.members.groups");
   const tCore = useTranslations("core");
@@ -32,8 +32,8 @@ export const useCreateEditFormGroupsMembersAdmin = ({
     content: z.object({
       files_allow_upload: z.boolean(),
       files_total_max_storage: z.number(),
-      files_max_storage_for_submit: z.number().min(-1)
-    })
+      files_max_storage_for_submit: z.number().min(-1),
+    }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -44,9 +44,9 @@ export const useCreateEditFormGroupsMembersAdmin = ({
       content: data?.content ?? {
         files_allow_upload: true,
         files_total_max_storage: 500000,
-        files_max_storage_for_submit: 10000
-      }
-    }
+        files_max_storage_for_submit: 10000,
+      },
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -54,7 +54,7 @@ export const useCreateEditFormGroupsMembersAdmin = ({
     if (data) {
       const mutationEdit = await mutationEditApi({
         id: data.id,
-        ...values
+        ...values,
       });
 
       if (mutationEdit.error) {
@@ -70,7 +70,7 @@ export const useCreateEditFormGroupsMembersAdmin = ({
 
     if (isError) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;
@@ -79,7 +79,7 @@ export const useCreateEditFormGroupsMembersAdmin = ({
     push(pathname);
 
     toast.success(data ? t("edit.success") : t("create.success"), {
-      description: convertText(values.name)
+      description: convertText(values.name),
     });
 
     setOpen?.(false);

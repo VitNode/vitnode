@@ -10,7 +10,7 @@ import { DeleteAvatarCoreMembersService } from "./delete/delete.service";
     UploadAvatarCoreMembersService,
     UploadAvatarCoreMembersResolver,
     DeleteAvatarCoreMembersResolver,
-    DeleteAvatarCoreMembersService
-  ]
+    DeleteAvatarCoreMembersService,
+  ],
 })
 export class AvatarCoreMembers {}

@@ -1,9 +1,10 @@
 import { Injectable } from "@nestjs/common";
-import { getConfigFile } from "../config";
 import { convertColor, getHSLFromString } from "@vitnode/shared";
+import { ConfigService } from "@nestjs/config";
+
+import { getConfigFile } from "../config";
 import { EmailHelpersServiceType } from "./email-helpers.type";
 import EmailTemplate from "./template/email-template";
-import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class EmailHelpersService {
@@ -17,7 +18,7 @@ export class EmailHelpersService {
 
     const primaryHSL = getHSLFromString(config.settings.email.color_primary);
     const primaryForegroundHSL = getHSLFromString(
-      config.settings.email.color_primary_foreground
+      config.settings.email.color_primary_foreground,
     );
 
     return {
@@ -31,7 +32,7 @@ export class EmailHelpersService {
             primaryForegroundHSL
               ? convertColor.hslToHex(primaryForegroundHSL)
               : "#131415"
-          }]`
+          }]`,
         },
         background: "[#f8f9fc]",
         foreground: "[#131415]",
@@ -39,9 +40,9 @@ export class EmailHelpersService {
         border: "[#e0e4eb]",
         muted: {
           DEFAULT: "[#f1f3f9]",
-          foreground: "[#676d79]"
-        }
-      }
+          foreground: "[#676d79]",
+        },
+      },
     };
   };
 

@@ -5,7 +5,7 @@ import {
   IsOptional,
   Matches,
   MaxLength,
-  MinLength
+  MinLength,
 } from "class-validator";
 
 import { TransformString } from "../../../../../utils";

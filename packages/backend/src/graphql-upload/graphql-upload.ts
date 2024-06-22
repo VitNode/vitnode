@@ -14,5 +14,5 @@ export const GraphQLUpload = new GraphQLScalarType({
   },
   serialize() {
     throw new GraphQLError("Upload serialization unsupported.");
-  }
+  },
 });

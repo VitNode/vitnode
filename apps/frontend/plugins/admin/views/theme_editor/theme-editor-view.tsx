@@ -9,7 +9,7 @@ import { ThemeEditorContext, ThemeEditorTab } from "./hooks/use-theme-editor";
 import { ContentThemeEditor } from "./content/content";
 import {
   keysFromCSSThemeEditor,
-  useThemeEditorApi
+  useThemeEditorApi,
 } from "./hooks/use-theme-editor-api";
 import { Loader } from "@/components/loader";
 import { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
@@ -17,10 +17,10 @@ import { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
 export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
   const { activeTheme, iframeRef, ...rest } = useThemeEditorApi(props);
   const [activeMode, setActiveMode] = React.useState<ThemeEditorViewEnum>(
-    ThemeEditorViewEnum.Desktop
+    ThemeEditorViewEnum.Desktop,
   );
   const [activeTab, setActiveTab] = React.useState<ThemeEditorTab>(
-    ThemeEditorTab.Main
+    ThemeEditorTab.Main,
   );
   const [mounted, setMounted] = React.useState(false);
   const direction: number = activeTab === ThemeEditorTab.Main ? -1 : 1;
@@ -40,7 +40,7 @@ export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
         setActiveTab,
         direction,
         activeTheme,
-        ...rest
+        ...rest,
       }}
     >
       <div className="bg-card flex h-screen w-full">
@@ -51,7 +51,7 @@ export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
             className={cn("bg-background transition-all", {
               "h-full w-full": activeMode === "desktop",
               "h-5/6 w-[768px] rounded-md border": activeMode === "tablet",
-              "h-5/6 w-[375px] rounded-md border": activeMode === "mobile"
+              "h-5/6 w-[375px] rounded-md border": activeMode === "mobile",
             })}
             src={CONFIG.frontend_url}
             onLoad={() => {
@@ -59,7 +59,7 @@ export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
 
               const iframe =
                 iframeRef.current?.contentWindow?.document.querySelector(
-                  "html"
+                  "html",
                 );
               if (!iframe) return;
 
@@ -67,7 +67,7 @@ export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
                 const color = rest.form.getValues().colors[key][activeTheme];
                 iframe.style.setProperty(
                   `--${key}`,
-                  `${color.h} ${color.s}% ${color.l}%`
+                  `${color.h} ${color.s}% ${color.l}%`,
                 );
               });
             }}

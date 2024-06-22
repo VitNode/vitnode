@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import {
   Admin__Core_Manifest_Metadata__Show,
   Admin__Core_Manifest_Metadata__ShowQuery,
-  Admin__Core_Manifest_Metadata__ShowQueryVariables
+  Admin__Core_Manifest_Metadata__ShowQueryVariables,
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 import { ManifestMetadataCoreAdminView } from "@/plugins/admin/views/core/settings/metadata/manifest/manifest-metadata-core-view";
@@ -16,7 +16,7 @@ const getData = async () => {
     Admin__Core_Manifest_Metadata__ShowQuery,
     Admin__Core_Manifest_Metadata__ShowQueryVariables
   >({
-    query: Admin__Core_Manifest_Metadata__Show
+    query: Admin__Core_Manifest_Metadata__Show,
   });
 
   return data;
@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("admin.core.metadata.manifest");
 
   return {
-    title: t("title")
+    title: t("title"),
   };
 }
 

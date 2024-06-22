@@ -8,14 +8,14 @@ import {
   Heading4,
   Heading5,
   Heading6,
-  Pilcrow
+  Pilcrow,
 } from "lucide-react";
 
 import {
   Select,
   SelectContent,
   SelectItem,
-  SelectTrigger
+  SelectTrigger,
 } from "@/components/ui/select";
 
 import { useEditorState } from "../../hooks/use-editor-state";
@@ -47,7 +47,7 @@ export const HeadingToolbarEditor = () => {
 
   const value = React.useMemo(() => {
     const findActiveHeading = [...Array(6).keys()].find(i =>
-      editor.isActive("heading", { level: i + 1 })
+      editor.isActive("heading", { level: i + 1 }),
     );
 
     if (findActiveHeading !== undefined) {
@@ -67,7 +67,7 @@ export const HeadingToolbarEditor = () => {
     editor.isActive("heading", { level: 3 }),
     editor.isActive("heading", { level: 4 }),
     editor.isActive("heading", { level: 5 }),
-    editor.isActive("heading", { level: 6 })
+    editor.isActive("heading", { level: 6 }),
   ]);
 
   return (

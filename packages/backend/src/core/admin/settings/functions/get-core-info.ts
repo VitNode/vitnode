@@ -18,6 +18,6 @@ export const getCoreInfo = async () => {
 
   return {
     ...data,
-    version
+    version,
   };
 };

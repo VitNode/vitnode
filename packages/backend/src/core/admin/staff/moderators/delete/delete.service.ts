@@ -14,14 +14,14 @@ export class DeleteAdminStaffModeratorsService {
     const permission =
       await this.databaseService.db.query.core_moderators_permissions.findFirst(
         {
-          where: (table, { eq }) => eq(table.id, id)
-        }
+          where: (table, { eq }) => eq(table.id, id),
+        },
       );
 
     if (permission.protected) {
       throw new CustomError({
         code: "BAD_REQUEST",
-        message: "You cannot delete this permission with protected flag."
+        message: "You cannot delete this permission with protected flag.",
       });
     }
 
