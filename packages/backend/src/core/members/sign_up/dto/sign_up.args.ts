@@ -4,7 +4,7 @@ import {
   IsStrongPassword,
   Matches,
   MaxLength,
-  MinLength
+  MinLength,
 } from "class-validator";
 import { Transform } from "class-transformer";
 
@@ -31,7 +31,7 @@ export class SignUpCoreMembersArgs {
     minLowercase: 1,
     minUppercase: 1,
     minNumbers: 1,
-    minSymbols: 1
+    minSymbols: 1,
   })
   @Field(() => String)
   password: string;

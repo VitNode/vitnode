@@ -16,25 +16,25 @@ interface Args<T> {
 
 export function inputSorting<T>({
   defaultSortBy,
-  sortBy
+  sortBy,
 }: Args<T>): Record<string, SortDirectionEnum>[] {
   const sortById = {
-    id: SortDirectionEnum.desc
+    id: SortDirectionEnum.desc,
   };
 
   if (!sortBy || sortBy.length === 0) {
     return [
       {
-        [`${defaultSortBy?.column}`]: defaultSortBy?.direction
+        [`${defaultSortBy?.column}`]: defaultSortBy?.direction,
       },
-      sortById
+      sortById,
     ];
   }
 
   return [
     ...sortBy.map(item => ({
-      [`${item.column}`]: item.direction
+      [`${item.column}`]: item.direction,
     })),
-    sortById
+    sortById,
   ];
 }

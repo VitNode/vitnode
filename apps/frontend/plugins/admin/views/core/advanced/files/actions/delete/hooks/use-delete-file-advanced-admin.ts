@@ -11,7 +11,7 @@ interface Args {
 
 export const useDeleteFileAdvancedAdmin = ({
   file_name_original,
-  id
+  id,
 }: Args) => {
   const t = useTranslations("admin.core.advanced.files.delete");
   const tCore = useTranslations("core");
@@ -19,18 +19,18 @@ export const useDeleteFileAdvancedAdmin = ({
 
   const onSubmit = async () => {
     const mutation = await mutationApi({
-      id
+      id,
     });
     if (mutation.error) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;
     }
 
     toast.success(t("success"), {
-      description: file_name_original
+      description: file_name_original,
     });
 
     setOpen(false);

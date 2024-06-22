@@ -2,7 +2,7 @@ import {
   CanActivate,
   ExecutionContext,
   Inject,
-  Injectable
+  Injectable,
 } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { GqlExecutionContext } from "@nestjs/graphql";
@@ -20,14 +20,14 @@ export class AdminPermissionGuards implements CanActivate {
   // TODO: Add inject for service // Basic service is not compatible with this package
   constructor(
     private readonly reflector: Reflector,
-    @Inject("IOAdminAuthGuards") private readonly service: IOAdminAuthGuards
+    @Inject("IOAdminAuthGuards") private readonly service: IOAdminAuthGuards,
     // private readonly databaseService: DatabaseService
   ) {}
 
   protected async getAuth({ req, res }: Ctx) {
     const data = await this.service.authorization({
       req,
-      res
+      res,
     });
     req.user = data.user;
 

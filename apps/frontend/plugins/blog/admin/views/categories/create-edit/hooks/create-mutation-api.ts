@@ -5,12 +5,12 @@ import { revalidatePath } from "next/cache";
 import {
   Admin__Blog_Categories__CreateMutation,
   Admin__Blog_Categories__Create,
-  Admin__Blog_Categories__CreateMutationVariables
+  Admin__Blog_Categories__CreateMutationVariables,
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 
 export const mutationCreateApi = async (
-  variables: Admin__Blog_Categories__CreateMutationVariables
+  variables: Admin__Blog_Categories__CreateMutationVariables,
 ) => {
   try {
     const { data } = await fetcher<
@@ -18,7 +18,7 @@ export const mutationCreateApi = async (
       Admin__Blog_Categories__CreateMutationVariables
     >({
       query: Admin__Blog_Categories__Create,
-      variables
+      variables,
     });
 
     revalidatePath("/admin/blog/categories", "page");

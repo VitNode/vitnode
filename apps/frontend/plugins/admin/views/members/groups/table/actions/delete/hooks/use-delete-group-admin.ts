@@ -12,7 +12,7 @@ import { ShowAdminGroups } from "@/graphql/hooks";
 
 export const useDeleteGroupAdmin = ({
   id,
-  name
+  name,
 }: Pick<ShowAdminGroups, "id" | "name">) => {
   const t = useTranslations("admin.members.groups.delete");
   const tCore = useTranslations("core");
@@ -23,14 +23,14 @@ export const useDeleteGroupAdmin = ({
   const { push } = useRouter();
 
   const formSchema = z.object({
-    name: z.string().refine(value => value === formatName)
+    name: z.string().refine(value => value === formatName),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: ""
-    }
+      name: "",
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -39,7 +39,7 @@ export const useDeleteGroupAdmin = ({
     const mutation = await mutationApi({ id });
     if (mutation.error) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;

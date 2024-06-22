@@ -19,7 +19,7 @@ export class DeleteAdminCoreLanguageService {
   async delete({ code }: DeleteCoreAdminLanguagesArgs): Promise<string> {
     const language =
       await this.databaseService.db.query.core_languages.findFirst({
-        where: (table, { eq }) => eq(table.code, code)
+        where: (table, { eq }) => eq(table.code, code),
       });
 
     if (!language) {
@@ -29,22 +29,22 @@ export class DeleteAdminCoreLanguageService {
     if (language.protected) {
       throw new CustomError({
         code: "PROTECTED_LANGUAGE",
-        message: "This language is protected and cannot be deleted"
+        message: "This language is protected and cannot be deleted",
       });
     }
 
     if (language.default) {
       throw new CustomError({
         code: "DEFAULT_LANGUAGE",
-        message: "This language is default and cannot be deleted"
+        message: "This language is default and cannot be deleted",
       });
     }
 
     const plugins = await this.databaseService.db.query.core_plugins.findMany({
       orderBy: (table, { desc }) => desc(table.updated),
       columns: {
-        code: true
-      }
+        code: true,
+      },
     });
 
     [...plugins, { code: "core" }, { code: "admin" }].forEach(async plugin => {
@@ -52,8 +52,8 @@ export class DeleteAdminCoreLanguageService {
         join(
           ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin.code }).frontend
             .language,
-          `${code}.json`
-        )
+          `${code}.json`,
+        ),
       );
     });
 
@@ -61,7 +61,7 @@ export class DeleteAdminCoreLanguageService {
     const assetsPath = join(
       ABSOLUTE_PATHS_BACKEND.uploads.public,
       "assets",
-      code
+      code,
     );
     rm(assetsPath, { recursive: true });
 

@@ -13,7 +13,7 @@ export class DeleteAdminPluginsResolver {
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
   async admin__core_plugins__delete(
-    @Args() args: DeleteAdminPluginsArgs
+    @Args() args: DeleteAdminPluginsArgs,
   ): Promise<string> {
     return this.service.delete(args);
   }

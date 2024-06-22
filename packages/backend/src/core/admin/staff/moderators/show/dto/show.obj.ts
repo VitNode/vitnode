@@ -2,7 +2,7 @@ import { Field, Int, ObjectType } from "@nestjs/graphql";
 
 import {
   StaffGroupUser,
-  UserOrGroupCoreStaffUnion
+  UserOrGroupCoreStaffUnion,
 } from "../../../administrators/show/dto/show.obj";
 import { PageInfo } from "../../../../../../utils";
 import { User } from "../../../../../../decorators";

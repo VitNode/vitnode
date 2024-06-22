@@ -22,13 +22,16 @@ import { MailService } from "../admin/email/mail.service";
     SignUpCoreMembersService,
     DeleteCoreMembersResolver,
     DeleteCoreMembersService,
+<<<<<<< HEAD
     ResetPasswordCoreMembersResolver,
     ResetPasswordCoreMembersService,
     ChangePasswordCoreMembersResolver,
     ChangePasswordCoreMembersService,
     MailService,
     SendAdminEmailService
+=======
+>>>>>>> 95500191 (chore: Change prettier config)
   ],
-  imports: [AvatarCoreMembers]
+  imports: [AvatarCoreMembers],
 })
 export class CoreMembersModule {}

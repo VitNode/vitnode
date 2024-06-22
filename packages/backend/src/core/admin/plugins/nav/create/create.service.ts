@@ -17,28 +17,28 @@ export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService 
     href,
     icon,
     plugin_code,
-    parent_code
+    parent_code,
   }: CreateAdminNavPluginsArgs): ShowAdminNavPluginsObj {
     const pathConfig = ABSOLUTE_PATHS_BACKEND.plugin({
-      code: plugin_code
+      code: plugin_code,
     }).config;
     if (!fs.existsSync(pathConfig)) {
       throw new NotFoundError("Plugin");
     }
     const config: ConfigPlugin = JSON.parse(
-      fs.readFileSync(pathConfig, "utf8")
+      fs.readFileSync(pathConfig, "utf8"),
     );
 
     const currentCode = removeSpecialCharacters(code);
     const codeExists = this.findItemByCode({
       items: config.nav,
-      code: currentCode
+      code: currentCode,
     });
 
     if (codeExists) {
       throw new CustomError({
         message: "Code already exists",
-        code: "CODE_ALREADY_EXISTS"
+        code: "CODE_ALREADY_EXISTS",
       });
     }
 
@@ -54,13 +54,13 @@ export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService 
       parent.children.push({
         code: currentCode,
         href,
-        icon
+        icon,
       });
     } else {
       config.nav.push({
         code: currentCode,
         href,
-        icon
+        icon,
       });
     }
 
@@ -70,7 +70,7 @@ export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService 
     return {
       code: currentCode,
       href,
-      icon
+      icon,
     };
   }
 }

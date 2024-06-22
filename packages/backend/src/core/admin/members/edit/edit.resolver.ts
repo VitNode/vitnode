@@ -14,7 +14,7 @@ export class EditAdminMembersResolver {
   @Mutation(() => EditAdminMembersObj)
   @UseGuards(AdminAuthGuards)
   async admin__core_members__edit(
-    @Args() args: EditAdminMembersArgs
+    @Args() args: EditAdminMembersArgs,
   ): Promise<EditAdminMembersObj> {
     return this.service.edit(args);
   }

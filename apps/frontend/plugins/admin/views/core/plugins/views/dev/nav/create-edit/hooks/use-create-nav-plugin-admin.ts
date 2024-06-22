@@ -26,7 +26,7 @@ export const useCreateNavPluginAdmin = ({ data, parentId }: Props) => {
     code: zodInput.string.min(3).max(50),
     icon: z.string(),
     href: zodInput.string.min(1).max(100),
-    parent_code: z.string().optional()
+    parent_code: z.string().optional(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -35,8 +35,8 @@ export const useCreateNavPluginAdmin = ({ data, parentId }: Props) => {
       code: data?.code ?? "",
       icon: data?.icon ?? "",
       href: data?.href ?? "",
-      parent_code: parentId ?? "null"
-    }
+      parent_code: parentId ?? "null",
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -46,7 +46,7 @@ export const useCreateNavPluginAdmin = ({ data, parentId }: Props) => {
         ...values,
         previousCode: data.code,
         pluginCode: Array.isArray(code) ? code[0] : code,
-        parentCode: values.parent_code === "null" ? null : values.parent_code
+        parentCode: values.parent_code === "null" ? null : values.parent_code,
       });
       if (mutation.error) {
         error = mutation.error as ErrorType | undefined;
@@ -55,7 +55,7 @@ export const useCreateNavPluginAdmin = ({ data, parentId }: Props) => {
       const mutation = await createMutationApi({
         ...values,
         pluginCode: Array.isArray(code) ? code[0] : code,
-        parentCode: values.parent_code === "null" ? null : values.parent_code
+        parentCode: values.parent_code === "null" ? null : values.parent_code,
       });
       if (mutation.error) {
         error = mutation.error as ErrorType | undefined;
@@ -64,7 +64,7 @@ export const useCreateNavPluginAdmin = ({ data, parentId }: Props) => {
 
     if (error?.extensions?.code === "CODE_ALREADY_EXISTS") {
       form.setError("code", {
-        message: t("create.code.exists")
+        message: t("create.code.exists"),
       });
 
       return;
@@ -72,7 +72,7 @@ export const useCreateNavPluginAdmin = ({ data, parentId }: Props) => {
 
     if (error) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;
@@ -85,6 +85,6 @@ export const useCreateNavPluginAdmin = ({ data, parentId }: Props) => {
 
   return {
     form,
-    onSubmit
+    onSubmit,
   };
 };

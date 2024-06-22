@@ -22,8 +22,8 @@ export const ToolBarEditor = () => {
         "bg-background flex flex-wrap items-center gap-1 rounded-t-sm border-b p-1",
         {
           "sticky top-[4rem] z-10 max-h-[26vh] overflow-auto":
-            config.editor.sticky
-        }
+            config.editor.sticky,
+        },
       )}
     >
       <ToggleToolbarEditor

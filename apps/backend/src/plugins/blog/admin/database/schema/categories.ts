@@ -5,7 +5,7 @@ import {
   pgTable,
   serial,
   timestamp,
-  varchar
+  varchar,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
@@ -24,7 +24,7 @@ export const blog_categories = pgTable("blog_categories", {
   can_all_reply: boolean("can_all_reply").notNull().default(true),
   can_all_download_files: boolean("can_all_download_files")
     .notNull()
-    .default(true)
+    .default(true),
 });
 
 export const blog_categories_relations = relations(
@@ -33,8 +33,8 @@ export const blog_categories_relations = relations(
     articles: many(blog_articles),
     name: many(blog_categories_name),
     description: many(blog_categories_description),
-    permissions: many(blog_categories_permissions)
-  })
+    permissions: many(blog_categories_permissions),
+  }),
 );
 
 export const blog_categories_name = pgTable(
@@ -42,21 +42,21 @@ export const blog_categories_name = pgTable(
   {
     id: serial("id").primaryKey(),
     item_id: integer("item_id").references(() => blog_categories.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
     language_code: varchar("language_code")
       .notNull()
       .references(() => core_languages.code, {
-        onDelete: "cascade"
+        onDelete: "cascade",
       }),
-    value: varchar("value", { length: 100 }).notNull()
+    value: varchar("value", { length: 100 }).notNull(),
   },
   table => ({
     item_id_idx: index("blog_categories_name_item_id_idx").on(table.item_id),
     language_code_idx: index("blog_categories_name_language_code_idx").on(
-      table.language_code
-    )
-  })
+      table.language_code,
+    ),
+  }),
 );
 
 export const blog_categories_name_relations = relations(
@@ -64,9 +64,9 @@ export const blog_categories_name_relations = relations(
   ({ one }) => ({
     category: one(blog_categories, {
       fields: [blog_categories_name.item_id],
-      references: [blog_categories.id]
-    })
-  })
+      references: [blog_categories.id],
+    }),
+  }),
 );
 
 export const blog_categories_description = pgTable(
@@ -74,23 +74,23 @@ export const blog_categories_description = pgTable(
   {
     id: serial("id").primaryKey(),
     item_id: integer("item_id").references(() => blog_categories.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
     language_code: varchar("language_code")
       .notNull()
       .references(() => core_languages.code, {
-        onDelete: "cascade"
+        onDelete: "cascade",
       }),
-    value: varchar("value").notNull()
+    value: varchar("value").notNull(),
   },
   table => ({
     item_id_idx: index("blog_categories_description_item_id_idx").on(
-      table.item_id
+      table.item_id,
     ),
     language_code_idx: index(
-      "blog_categories_description_language_code_idx"
-    ).on(table.language_code)
-  })
+      "blog_categories_description_language_code_idx",
+    ).on(table.language_code),
+  }),
 );
 
 export const blog_categories_description_relations = relations(
@@ -98,9 +98,9 @@ export const blog_categories_description_relations = relations(
   ({ one }) => ({
     category: one(blog_categories, {
       fields: [blog_categories_description.item_id],
-      references: [blog_categories.id]
-    })
-  })
+      references: [blog_categories.id],
+    }),
+  }),
 );
 
 export const blog_categories_permissions = pgTable(
@@ -108,22 +108,22 @@ export const blog_categories_permissions = pgTable(
   {
     id: serial("id").primaryKey(),
     blog_id: integer("blog_id").references(() => blog_categories.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
     group_id: integer("group_id").references(() => core_groups.id, {
-      onDelete: "cascade"
+      onDelete: "cascade",
     }),
     can_read: boolean("can_read").notNull().default(false),
     can_create: boolean("can_create").notNull().default(false),
     can_reply: boolean("can_reply").notNull().default(false),
-    can_download_files: boolean("can_download_files").notNull().default(false)
+    can_download_files: boolean("can_download_files").notNull().default(false),
   },
   table => ({
     blog_id_idx: index("blog_categories_permissions_blog_id_idx").on(
-      table.blog_id
+      table.blog_id,
     ),
     group_id_idx: index("blog_categories_permissions_group_id_idx").on(
-      table.group_id
-    )
-  })
+      table.group_id,
+    ),
+  }),
 );

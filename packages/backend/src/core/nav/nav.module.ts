@@ -4,6 +4,6 @@ import { ShowCoreNavResolver } from "./show/show.resolver";
 import { ShowCoreNavService } from "./show/show.service";
 
 @Module({
-  providers: [ShowCoreNavResolver, ShowCoreNavService]
+  providers: [ShowCoreNavResolver, ShowCoreNavService],
 })
 export class CoreNavModule {}

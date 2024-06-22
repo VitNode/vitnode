@@ -6,7 +6,7 @@ import { ShowAdminGroupsObj } from "./dto/show.obj";
 
 import {
   core_groups,
-  core_groups_names
+  core_groups_names,
 } from "../../../../templates/core/admin/database/schema/groups";
 import { inputPaginationCursor, outputPagination } from "../../../../functions";
 import { core_users } from "../../../../templates/core/admin/database/schema/users";
@@ -22,7 +22,7 @@ export class ShowAdminGroupsService {
     first,
     last,
     search,
-    sortBy
+    sortBy,
   }: ShowAdminGroupsArgs): Promise<ShowAdminGroupsObj> {
     let filtersName: number[] = [];
 
@@ -42,13 +42,13 @@ export class ShowAdminGroupsService {
       last,
       primaryCursor: {
         column: "id",
-        schema: core_groups.id
+        schema: core_groups.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: "updated"
+        column: "updated",
       },
-      sortBy
+      sortBy,
     });
 
     const where =
@@ -61,10 +61,10 @@ export class ShowAdminGroupsService {
         name: {
           columns: {
             value: true,
-            language_code: true
-          }
-        }
-      }
+            language_code: true,
+          },
+        },
+      },
     });
 
     const totalCount = await this.databaseService.db
@@ -81,9 +81,9 @@ export class ShowAdminGroupsService {
 
         return {
           ...edge,
-          users_count: usersCount[0].count
+          users_count: usersCount[0].count,
         };
-      })
+      }),
     );
 
     return outputPagination({
@@ -95,13 +95,13 @@ export class ShowAdminGroupsService {
               content: {
                 files_allow_upload: edge.files_allow_upload,
                 files_max_storage_for_submit: edge.files_max_storage_for_submit,
-                files_total_max_storage: edge.files_total_max_storage
-              }
+                files_total_max_storage: edge.files_total_max_storage,
+              },
             })),
       totalCount,
       first,
       cursor,
-      last
+      last,
     });
   }
 }

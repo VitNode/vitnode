@@ -5,7 +5,7 @@ import { cn } from "@vitnode/frontend/helpers";
 import {
   Admin__Core_Plugins__Files,
   Admin__Core_Plugins__FilesQuery,
-  Admin__Core_Plugins__FilesQueryVariables
+  Admin__Core_Plugins__FilesQueryVariables,
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 
@@ -21,7 +21,7 @@ const getData = async (variables: Admin__Core_Plugins__FilesQueryVariables) => {
     Admin__Core_Plugins__FilesQueryVariables
   >({
     query: Admin__Core_Plugins__Files,
-    variables
+    variables,
   });
 
   return data;
@@ -31,14 +31,14 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("admin.core.plugins.dev.files");
 
   return {
-    title: t("title")
+    title: t("title"),
   };
 }
 
 export default async function Page({ params: { code } }: Props) {
   const [data, t] = await Promise.all([
     getData({ code }),
-    getTranslations("admin.core.plugins.dev.files")
+    getTranslations("admin.core.plugins.dev.files"),
   ]);
 
   return (
@@ -57,7 +57,7 @@ export default async function Page({ params: { code } }: Props) {
               "text-muted-foreground italic": !item[1],
               "text-primary font-semibold": item[1],
               "text-destructive font-semibold":
-                !item[1] && item[0] === "default_page"
+                !item[1] && item[0] === "default_page",
             })}
           >
             {t("file_detected", { count: +item[1] })}

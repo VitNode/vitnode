@@ -11,14 +11,14 @@ import { core_admin_sessions } from "../../templates/core/admin/database/schema/
 export class CoreSessionsCron {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly configService: ConfigService
+    private readonly configService: ConfigService,
   ) {}
 
   @Cron(CronExpression.EVERY_MINUTE)
   async clearExpiredSessions() {
     const expiresIn = new Date();
     const expiresInDeviceCookie: number = this.configService.getOrThrow(
-      "cookies.known_device.expiresIn"
+      "cookies.known_device.expiresIn",
     );
     expiresIn.setDate(expiresIn.getDate() - expiresInDeviceCookie);
 
@@ -27,8 +27,8 @@ export class CoreSessionsCron {
       .where(
         and(
           lte(core_sessions.expires, new Date()),
-          lte(core_sessions.created, expiresIn)
-        )
+          lte(core_sessions.created, expiresIn),
+        ),
       );
 
     // Clear admin sessions
@@ -37,8 +37,8 @@ export class CoreSessionsCron {
       .where(
         and(
           lte(core_admin_sessions.expires, new Date()),
-          lte(core_admin_sessions.created, expiresIn)
-        )
+          lte(core_admin_sessions.created, expiresIn),
+        ),
       );
   }
 }

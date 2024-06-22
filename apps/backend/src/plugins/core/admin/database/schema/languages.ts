@@ -4,7 +4,7 @@ import {
   pgTable,
   serial,
   timestamp,
-  varchar
+  varchar,
 } from "drizzle-orm/pg-core";
 
 export const core_languages = pgTable(
@@ -23,11 +23,11 @@ export const core_languages = pgTable(
     locale: varchar("locale", { length: 50 }).notNull().default("enUS"),
     allow_in_input: boolean("allow_in_input").default(true),
     site_copyright: varchar("site_copyright", {
-      length: 255
-    }).default("")
+      length: 255,
+    }).default(""),
   },
   table => ({
     code_idx: index("core_languages_code_idx").on(table.code),
-    name_idx: index("core_languages_name_idx").on(table.name)
-  })
+    name_idx: index("core_languages_name_idx").on(table.name),
+  }),
 );

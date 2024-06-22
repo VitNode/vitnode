@@ -12,7 +12,7 @@ export class SignInCoreSessionsResolver {
   @Mutation(() => String)
   async core_sessions__sign_in(
     @Args() args: SignInCoreSessionsArgs,
-    @Context() context: Ctx
+    @Context() context: Ctx,
   ): Promise<string> {
     return this.service.signIn(args, context);
   }

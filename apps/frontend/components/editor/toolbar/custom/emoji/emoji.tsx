@@ -4,7 +4,7 @@ import { ChevronDownIcon, SmileIcon } from "lucide-react";
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger
+  PopoverTrigger,
 } from "@/components/ui/popover";
 import { Loader } from "@/components/loader";
 import { useEditorState } from "@/components/editor/hooks/use-editor-state";
@@ -13,8 +13,8 @@ import { ButtonToolbarEditor } from "../../button";
 
 const Content = React.lazy(async () =>
   import("./content").then(module => ({
-    default: module.ContentEmojiToolbarEditor
-  }))
+    default: module.ContentEmojiToolbarEditor,
+  })),
 );
 
 export const EmojiToolbarEditor = () => {

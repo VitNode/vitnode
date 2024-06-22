@@ -4,26 +4,26 @@ import * as React from "react";
 import { DndContext, DragOverlay, closestCorners } from "@dnd-kit/core";
 import {
   SortableContext,
-  verticalListSortingStrategy
+  verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useTranslations } from "next-intl";
 
 import {
   Admin_Blog_Categories__ShowQuery,
-  ShowBlogCategories
+  ShowBlogCategories,
 } from "@/graphql/hooks";
 import { useDragAndDrop } from "@/plugins/core/hooks/drag&drop/use-functions";
 import { ItemDragAndDrop } from "@/plugins/core/hooks/drag&drop/item";
 import { ItemCategoriesCategoryAdmin } from "./item/item";
 
 export const CategoriesBlogAdminView = ({
-  blog_categories__show: { edges }
+  blog_categories__show: { edges },
 }: Admin_Blog_Categories__ShowQuery) => {
   const t = useTranslations("core");
   const [initData, setData] = React.useState<ShowBlogCategories[]>(edges);
   const data = initData.map(item => ({
     ...item,
-    children: []
+    children: [],
   }));
 
   // Update data when edges change
@@ -40,9 +40,9 @@ export const CategoriesBlogAdminView = ({
     onDragOver,
     onDragStart,
     resetState,
-    sortedIds
+    sortedIds,
   } = useDragAndDrop<ShowBlogCategories>({
-    data
+    data,
   });
 
   if (!data.length) {
@@ -60,7 +60,7 @@ export const CategoriesBlogAdminView = ({
         const moveTo = onDragEnd<ShowBlogCategories>({
           data,
           setData,
-          ...event
+          ...event,
         });
 
         if (!moveTo) return;
@@ -75,7 +75,7 @@ export const CategoriesBlogAdminView = ({
             {...actionsItem({ data: item })}
             draggableStyle={{
               background: item.color.replace(")", ", 0.2 )"),
-              color: item.color
+              color: item.color,
             }}
           >
             <ItemCategoriesCategoryAdmin data={item} />
@@ -86,11 +86,11 @@ export const CategoriesBlogAdminView = ({
           {activeItemOverlay && (
             <ItemDragAndDrop
               {...actionsItem({
-                data: activeItemOverlay
+                data: activeItemOverlay,
               })}
               draggableStyle={{
                 background: activeItemOverlay.color.replace(")", ", 0.2 )"),
-                color: activeItemOverlay.color
+                color: activeItemOverlay.color,
               }}
             >
               <ItemCategoriesCategoryAdmin data={activeItemOverlay} />

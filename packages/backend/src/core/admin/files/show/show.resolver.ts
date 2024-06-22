@@ -14,7 +14,7 @@ export class ShowAdminFilesResolver {
   @Query(() => ShowAdminFilesObj)
   @UseGuards(AdminAuthGuards)
   async admin__core_files__show(
-    @Args() args: ShowAdminFilesArgs
+    @Args() args: ShowAdminFilesArgs,
   ): Promise<ShowAdminFilesObj> {
     return this.service.show(args);
   }

@@ -19,7 +19,7 @@ export class ShowAdminPluginsService {
     first,
     last,
     search = "",
-    sortBy
+    sortBy,
   }: ShowAdminPluginsArgs): Promise<ShowAdminPluginsObj> {
     const pagination = await inputPaginationCursor({
       cursor,
@@ -29,13 +29,13 @@ export class ShowAdminPluginsService {
       last,
       primaryCursor: {
         column: "id",
-        schema: core_plugins.id
+        schema: core_plugins.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: "updated"
+        column: "updated",
       },
-      sortBy
+      sortBy,
     });
 
     const where = code
@@ -44,7 +44,7 @@ export class ShowAdminPluginsService {
 
     const edges = await this.databaseService.db.query.core_plugins.findMany({
       ...pagination,
-      where: and(pagination.where, where)
+      where: and(pagination.where, where),
     });
 
     const totalCount = await this.databaseService.db
@@ -57,7 +57,7 @@ export class ShowAdminPluginsService {
       totalCount,
       first,
       cursor,
-      last
+      last,
     });
   }
 }

@@ -1,6 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
 
 import { MailService } from "../mail.service";
+
 import { EmailHelpersServiceType } from "../../../../providers/email/email-helpers.type";
 
 interface Args {
@@ -14,7 +15,7 @@ export class SendAdminEmailService {
   constructor(
     private readonly mailService: MailService,
     @Inject("EmailHelpersService")
-    private readonly emailHelpersService: EmailHelpersServiceType
+    private readonly emailHelpersService: EmailHelpersServiceType,
   ) {}
 
   async send({ to, subject, message }: Args): Promise<string> {
@@ -23,8 +24,8 @@ export class SendAdminEmailService {
       subject,
       template: this.emailHelpersService.template({
         previewText: "test",
-        children: message
-      })
+        children: message,
+      }),
     });
 
     return "Email sent with Message!";

@@ -20,7 +20,7 @@ export class StatsAdminMembersService {
 
     return data.rows.map(row => ({
       joined_date: row.joined_date as string,
-      users_joined: row.users_joined as number
+      users_joined: row.users_joined as number,
     }));
   }
 }

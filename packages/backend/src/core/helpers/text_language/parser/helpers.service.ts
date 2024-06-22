@@ -16,14 +16,14 @@ export interface InfoFromTextLanguageContentReturnValues {
 @Injectable()
 export class HelpersParserTextLanguageCoreHelpersService {
   protected state: InfoFromTextLanguageContentReturnValues = {
-    fileIds: []
+    fileIds: [],
   };
 
   constructor(protected databaseService: DatabaseService) {}
 
   protected async parseFiles({
     fileIds,
-    oldFileIds
+    oldFileIds,
   }: {
     fileIds: InfoFromTextLanguageContentReturnValues["fileIds"];
     oldFileIds: InfoFromTextLanguageContentReturnValues["fileIds"];
@@ -39,9 +39,9 @@ export class HelpersParserTextLanguageCoreHelpersService {
         await this.databaseService.db.insert(core_files_using).values({
           file_id: id,
           plugin: "core",
-          folder: "text-language"
+          folder: "text-language",
         });
-      })
+      }),
     );
 
     // Delete remaining files
@@ -52,18 +52,18 @@ export class HelpersParserTextLanguageCoreHelpersService {
 
         const fileUsing =
           await this.databaseService.db.query.core_files_using.findFirst({
-            where: (table, { eq }) => eq(table.file_id, id)
+            where: (table, { eq }) => eq(table.file_id, id),
           });
 
         await this.databaseService.db
           .delete(core_files_using)
           .where(eq(core_files_using.id, fileUsing.id));
-      })
+      }),
     );
   }
 
   protected getInfoFromContent({
-    content
+    content,
   }: {
     content: string;
   }): InfoFromTextLanguageContentReturnValues {

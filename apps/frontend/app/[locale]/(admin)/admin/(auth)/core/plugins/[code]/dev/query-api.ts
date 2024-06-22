@@ -1,12 +1,12 @@
 import {
   Admin__Core_Plugins__Show__Item,
   Admin__Core_Plugins__Show__ItemQuery,
-  Admin__Core_Plugins__Show__ItemQueryVariables
+  Admin__Core_Plugins__Show__ItemQueryVariables,
 } from "@/graphql/hooks";
 import { fetcher, ErrorType } from "@/graphql/fetcher";
 
 export const getPluginDataAdmin = async (
-  variables: Admin__Core_Plugins__Show__ItemQueryVariables
+  variables: Admin__Core_Plugins__Show__ItemQueryVariables,
 ) => {
   try {
     const { data } = await fetcher<
@@ -14,7 +14,7 @@ export const getPluginDataAdmin = async (
       Admin__Core_Plugins__Show__ItemQueryVariables
     >({
       query: Admin__Core_Plugins__Show__Item,
-      variables
+      variables,
     });
 
     return { data };

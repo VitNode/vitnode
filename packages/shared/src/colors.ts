@@ -72,7 +72,7 @@ export const convertColor = {
     return {
       h: Math.round(h * 360),
       s: Math.round(s * 100),
-      l: Math.round(l * 100)
+      l: Math.round(l * 100),
     };
   },
 
@@ -115,9 +115,9 @@ export const convertColor = {
     return {
       h,
       s,
-      l
+      l,
     };
-  }
+  },
 };
 
 type CheckColorReturn = "hex" | "hsl" | "rgb";

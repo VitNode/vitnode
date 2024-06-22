@@ -7,7 +7,7 @@ import {
   Card,
   CardDescription,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from "@/components/ui/card";
 import { InstallConfigsView } from "./steps/install-configs-view";
 import { InstallVitNodeContext } from "./hooks/use-install-vitnode";
@@ -30,29 +30,29 @@ export const LayoutInstallConfigsView = ({ data }: Props) => {
       title: "Welcome",
       description: "Before you begin...",
       checked: currentStep >= 1,
-      component: <InstallConfigsView />
+      component: <InstallConfigsView />,
     },
     {
       id: "license",
       title: "License",
       description: "Read carefully",
       checked: currentStep >= 2,
-      component: <LicenseInstallConfigsView />
+      component: <LicenseInstallConfigsView />,
     },
     {
       id: "database",
       title: "Database",
       description: "Create schema and first records",
       checked: currentStep >= 3,
-      component: <DatabaseInstallConfigsView />
+      component: <DatabaseInstallConfigsView />,
     },
     {
       id: "account",
       title: "Admin Account",
       description: "Create admin account",
       checked: currentStep >= 4,
-      component: <AccountInstallConfigsView />
-    }
+      component: <AccountInstallConfigsView />,
+    },
   ];
 
   React.useEffect(() => {
@@ -86,7 +86,7 @@ export const LayoutInstallConfigsView = ({ data }: Props) => {
         <InstallVitNodeContext.Provider
           value={{
             currentStep,
-            setCurrentStep
+            setCurrentStep,
           }}
         >
           {items.at(currentStep)?.component}

@@ -25,7 +25,7 @@ export const TabsTrigger = ({
   children,
   className: classNameFromProps,
   href,
-  onClick
+  onClick,
 }: TabsTriggerProps) => {
   const pathname = usePathname();
   const active = activeFromProps || (href && pathname.includes(href));
@@ -37,7 +37,7 @@ export const TabsTrigger = ({
       layoutId="tabs-trigger-active"
       transition={{
         duration: 0.18,
-        ease: "easeInOut"
+        ease: "easeInOut",
       }}
       style={{ originY: "0px" }}
     />
@@ -49,10 +49,10 @@ export const TabsTrigger = ({
       classNameFromProps,
       "text-muted-foreground hover:text-foreground flex-shrink-0",
       {
-        "text-foreground": active
-      }
+        "text-foreground": active,
+      },
     ),
-    size: "sm"
+    size: "sm",
   });
 
   if (href) {

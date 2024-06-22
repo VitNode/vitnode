@@ -9,7 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("admin.core.styles.editor");
 
   return {
-    title: t("title")
+    title: t("title"),
   };
 }
 

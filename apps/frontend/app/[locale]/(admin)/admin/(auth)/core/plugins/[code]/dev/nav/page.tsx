@@ -7,7 +7,7 @@ import {
   Admin__Core_Plugins__Nav__Show,
   Admin__Core_Plugins__Nav__ShowQuery,
   Admin__Core_Plugins__Nav__ShowQueryVariables,
-  ShowAdminNavPluginsObj
+  ShowAdminNavPluginsObj,
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 import { NavDevPluginAdminView } from "@/plugins/admin/views/core/plugins/views/dev/nav/nav";
@@ -21,14 +21,14 @@ interface Props {
 }
 
 const getData = async (
-  variables: Admin__Core_Plugins__Nav__ShowQueryVariables
+  variables: Admin__Core_Plugins__Nav__ShowQueryVariables,
 ) => {
   const { data } = await fetcher<
     Admin__Core_Plugins__Nav__ShowQuery,
     Admin__Core_Plugins__Nav__ShowQueryVariables
   >({
     query: Admin__Core_Plugins__Nav__Show,
-    variables
+    variables,
   });
 
   return data;
@@ -38,7 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("admin.core.plugins.dev.nav");
 
   return {
-    title: t("title")
+    title: t("title"),
   };
 }
 
@@ -54,9 +54,9 @@ export default async function Page({ params: { code } }: Props) {
         nav.children?.map(child => ({
           id: `${nav.code}_${child.code}`,
           ...child,
-          children: []
-        })) ?? []
-    }))
+          children: [],
+        })) ?? [],
+    })),
   });
 
   const icons: {
@@ -64,7 +64,7 @@ export default async function Page({ params: { code } }: Props) {
     id: string;
   }[] = flattenData.map(item => ({
     icon: item.icon ? <Icon className="size-4" name={item.icon} /> : null,
-    id: item.id.toString()
+    id: item.id.toString(),
   }));
 
   return (

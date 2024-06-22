@@ -7,7 +7,7 @@ import {
   serial,
   text,
   timestamp,
-  varchar
+  varchar,
 } from "drizzle-orm/pg-core";
 
 import { core_groups } from "./groups";
@@ -29,24 +29,24 @@ export const core_users = pgTable(
     last_name: varchar("last_name", { length: 255 }),
     birthday: timestamp("birthday"),
     ip_address: varchar("ip_address", { length: 255 }).notNull(),
-    language: varchar("language", { length: 5 }).notNull().default("en")
+    language: varchar("language", { length: 5 }).notNull().default("en"),
   },
   table => ({
     name_seo_idx: index("core_users_name_seo_idx").on(table.name_seo),
     name_idx: index("core_users_name_idx").on(table.name),
-    email_idx: index("core_users_email_idx").on(table.email)
-  })
+    email_idx: index("core_users_email_idx").on(table.email),
+  }),
 );
 
 export const core_users_relations = relations(core_users, ({ one }) => ({
   group: one(core_groups, {
     fields: [core_users.group_id],
-    references: [core_groups.id]
+    references: [core_groups.id],
   }),
   avatar: one(core_files_avatars, {
     fields: [core_users.id],
-    references: [core_files_avatars.user_id]
-  })
+    references: [core_files_avatars.user_id],
+  }),
 }));
 
 export const core_files_avatars = pgTable("core_files_avatars", {
@@ -58,8 +58,8 @@ export const core_files_avatars = pgTable("core_files_avatars", {
   mimetype: varchar("mimetype", { length: 255 }).notNull(),
   extension: varchar("extension", { length: 32 }).notNull(),
   user_id: integer("user_id").references(() => core_users.id, {
-    onDelete: "cascade"
-  })
+    onDelete: "cascade",
+  }),
 });
 
 export const core_files_avatars_relations = relations(
@@ -67,7 +67,7 @@ export const core_files_avatars_relations = relations(
   ({ one }) => ({
     user: one(core_users, {
       fields: [core_files_avatars.user_id],
-      references: [core_users.id]
-    })
-  })
+      references: [core_users.id],
+    }),
+  }),
 );

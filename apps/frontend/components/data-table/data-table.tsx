@@ -6,7 +6,7 @@ import {
   getCoreRowModel,
   useReactTable,
   ColumnDef,
-  SortingState
+  SortingState,
 } from "@tanstack/react-table";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
@@ -19,7 +19,7 @@ import {
   TableCell,
   TableHead,
   TableHeader,
-  TableRow
+  TableRow,
 } from "@/components/ui/table";
 import { Button } from "../ui/button";
 import { PageInfo } from "@/graphql/hooks";
@@ -28,7 +28,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from "../ui/select";
 import { ToolbarDataTable, ToolbarDataTableProps } from "./toolbar/toolbar";
 import { SkeletonDataTable } from "./skeleton";
@@ -36,7 +36,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "../ui/tooltip";
 
 interface TDataMin {
@@ -70,7 +70,7 @@ export function DataTable<TData extends TDataMin>({
   const pagination = {
     first: searchParams.get("first"),
     last: searchParams.get("last"),
-    cursor: searchParams.get("cursor")
+    cursor: searchParams.get("cursor"),
   };
 
   const table = useReactTable({
@@ -94,11 +94,11 @@ export function DataTable<TData extends TDataMin>({
         ? [
             {
               id: defaultSorting.sortBy.toString(),
-              desc: defaultSorting.sortDirection === "desc"
-            }
+              desc: defaultSorting.sortDirection === "desc",
+            },
           ]
-        : []
-    }
+        : [],
+    },
   });
 
   const enablePageSize = [10, 20, 30, 40, 50];
@@ -134,7 +134,7 @@ export function DataTable<TData extends TDataMin>({
                             ? null
                             : flexRender(
                                 header.column.columnDef.header,
-                                header.getContext()
+                                header.getContext(),
                               )}
                         </TableHead>
                       );
@@ -155,13 +155,13 @@ export function DataTable<TData extends TDataMin>({
                             <div className="flex items-center justify-end gap-1">
                               {flexRender(
                                 cell.column.columnDef.cell,
-                                cell.getContext()
+                                cell.getContext(),
                               )}
                             </div>
                           ) : (
                             flexRender(
                               cell.column.columnDef.cell,
-                              cell.getContext()
+                              cell.getContext(),
                             )
                           )}
                         </TableCell>
@@ -195,7 +195,7 @@ export function DataTable<TData extends TDataMin>({
                       value={`${pageSizeValue}`}
                       onValueChange={value => {
                         const params = new URLSearchParams(
-                          searchParams.toString()
+                          searchParams.toString(),
                         );
                         if (params.has("last")) {
                           params.set("last", value);
@@ -205,7 +205,7 @@ export function DataTable<TData extends TDataMin>({
                           params.delete("last");
                         }
                         push(`${pathname}?${params.toString()}`, {
-                          scroll: false
+                          scroll: false,
                         });
                       }}
                     >
@@ -237,13 +237,13 @@ export function DataTable<TData extends TDataMin>({
                       if (!pageInfo.startCursor) return;
 
                       const params = new URLSearchParams(
-                        searchParams.toString()
+                        searchParams.toString(),
                       );
                       params.set("cursor", `${pageInfo.startCursor}`);
                       params.set("last", `${pageSizeValue}`);
                       params.delete("first");
                       push(`${pathname}?${params.toString()}`, {
-                        scroll: false
+                        scroll: false,
                       });
                     }}
                   >
@@ -258,13 +258,13 @@ export function DataTable<TData extends TDataMin>({
                       if (!pageInfo.endCursor) return;
 
                       const params = new URLSearchParams(
-                        searchParams.toString()
+                        searchParams.toString(),
                       );
                       params.set("cursor", `${pageInfo.endCursor}`);
                       params.set("first", `${pageSizeValue}`);
                       params.delete("last");
                       push(`${pathname}?${params.toString()}`, {
-                        scroll: false
+                        scroll: false,
                       });
                     }}
                   >

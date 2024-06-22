@@ -10,12 +10,12 @@ export const useSignOutAPI = () => {
     const mutation = await mutationApi();
     if (mutation?.error) {
       toast.error(t("errors.title"), {
-        description: t("errors.internal_server_error")
+        description: t("errors.internal_server_error"),
       });
     }
   };
 
   return {
-    onSubmit
+    onSubmit,
   };
 };

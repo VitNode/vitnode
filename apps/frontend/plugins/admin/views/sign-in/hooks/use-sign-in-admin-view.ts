@@ -12,15 +12,15 @@ export const useSignInAdminView = () => {
 
   const formSchema = z.object({
     email: zodInput.string.min(1),
-    password: z.string().min(1)
+    password: z.string().min(1),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
-      password: ""
-    }
+      password: "",
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -39,6 +39,6 @@ export const useSignInAdminView = () => {
   return {
     form,
     onSubmit,
-    error
+    error,
   };
 };

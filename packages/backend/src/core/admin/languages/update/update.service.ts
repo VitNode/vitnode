@@ -20,7 +20,7 @@ export class UpdateAdminCoreLanguageService {
 
   async update({ code, file }: UpdateCoreAdminLanguagesArgs): Promise<string> {
     const lang = await this.databaseService.db.query.core_languages.findFirst({
-      where: (table, { eq }) => eq(table.code, code)
+      where: (table, { eq }) => eq(table.code, code),
     });
 
     if (!lang) {
@@ -33,7 +33,7 @@ export class UpdateAdminCoreLanguageService {
     const pathTemp = join(
       ABSOLUTE_PATHS_BACKEND.uploads.temp,
       "langs",
-      tempNameFolder
+      tempNameFolder,
     );
     if (!fs.existsSync(pathTemp)) {
       fs.mkdirSync(pathTemp, { recursive: true });
@@ -45,7 +45,7 @@ export class UpdateAdminCoreLanguageService {
         .pipe(
           // TODO: Fix this type
           tar.extract({ C: pathTemp, strip: 1 }) as NodeJS.WritableStream &
-            ReturnType<typeof tar.extract>
+            ReturnType<typeof tar.extract>,
         )
         .on("error", function (err) {
           throw new reject(err.message);
@@ -67,7 +67,7 @@ export class UpdateAdminCoreLanguageService {
             // Copy the file to the plugin folder
             fs.copyFileSync(
               join(pathTemp, `${plugin}.json`),
-              join(path, `${code}.json`)
+              join(path, `${code}.json`),
             );
           });
 

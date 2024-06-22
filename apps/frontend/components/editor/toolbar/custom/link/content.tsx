@@ -8,7 +8,7 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -24,7 +24,7 @@ export const ContentLinkToolbarEditor = ({ setOpen }: Props) => {
   const tCore = useTranslations("core");
   const formSchema = z.object({
     text: z.string().min(1, { message: tCore("errors.required") }),
-    href: z.string().min(1, { message: tCore("errors.required") })
+    href: z.string().min(1, { message: tCore("errors.required") }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -34,10 +34,10 @@ export const ContentLinkToolbarEditor = ({ setOpen }: Props) => {
         editor.state.doc.textBetween(
           editor.view.state.selection.from,
           editor.view.state.selection.to,
-          ""
+          "",
         ) ?? "",
-      href: editor.getAttributes("link").href ?? ""
-    }
+      href: editor.getAttributes("link").href ?? "",
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -55,7 +55,7 @@ export const ContentLinkToolbarEditor = ({ setOpen }: Props) => {
         tr.addMark(
           from,
           from + displayText.length,
-          editor.schema.marks.link.create({ href: values.href })
+          editor.schema.marks.link.create({ href: values.href }),
         );
 
         return true;

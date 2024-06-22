@@ -16,10 +16,10 @@ export const ContentEmojiToolbarEditor = ({ setIsOpen }: Props) => {
   const { editor } = useEditorState();
   const [search, setSearch] = React.useState("");
   const localStorageSkinToneIndex = localStorage.getItem(
-    CONFIG.local_storage.editor_skin_tone
+    CONFIG.local_storage.editor_skin_tone,
   );
   const [skinToneIndex, setSkinToneIndex] = React.useState(
-    localStorageSkinToneIndex ? +localStorageSkinToneIndex : 0
+    localStorageSkinToneIndex ? +localStorageSkinToneIndex : 0,
   );
 
   return (

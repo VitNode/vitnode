@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import {
   Core_Main_Settings__Show,
   Core_Main_Settings__ShowQuery,
-  Core_Main_Settings__ShowQueryVariables
+  Core_Main_Settings__ShowQueryVariables,
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 import { GeneralSettingsCoreAdmin } from "@/plugins/admin/views/core/settings/general/main-settings-core-admin";
@@ -16,7 +16,7 @@ const getData = async () => {
     Core_Main_Settings__ShowQuery,
     Core_Main_Settings__ShowQueryVariables
   >({
-    query: Core_Main_Settings__Show
+    query: Core_Main_Settings__Show,
   });
 
   return data;
@@ -26,14 +26,14 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("core.admin.nav");
 
   return {
-    title: t("settings_general")
+    title: t("settings_general"),
   };
 }
 
 export default async function Page() {
   const [t, data] = await Promise.all([
     getTranslations("core.admin.nav"),
-    getData()
+    getData(),
   ]);
 
   return (

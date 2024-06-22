@@ -18,7 +18,11 @@ export default {
   ...admins,
   ...moderators,
   ...plugins,
+<<<<<<< HEAD
   ...themes,
   ...nav,
   ...keys
+=======
+  ...nav,
+>>>>>>> 95500191 (chore: Change prettier config)
 };

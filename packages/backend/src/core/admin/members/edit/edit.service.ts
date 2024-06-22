@@ -19,10 +19,10 @@ export class EditAdminMembersService {
     newsletter,
     first_name,
     last_name,
-    birthday
+    birthday,
   }: EditAdminMembersArgs): Promise<EditAdminMembersObj> {
     const user = await this.databaseService.db.query.core_users.findFirst({
-      where: eq(core_users.id, id)
+      where: eq(core_users.id, id),
     });
 
     if (!user) throw new NotFoundError("User");
@@ -30,7 +30,7 @@ export class EditAdminMembersService {
     const admin =
       await this.databaseService.db.query.core_admin_permissions.findFirst({
         where: (table, { or, eq }) =>
-          or(eq(table.user_id, user.id), eq(table.group_id, user.group_id))
+          or(eq(table.user_id, user.id), eq(table.group_id, user.group_id)),
       });
 
     if (!admin) throw new AccessDeniedError();
@@ -43,7 +43,7 @@ export class EditAdminMembersService {
         newsletter: newsletter,
         first_name: first_name,
         last_name: last_name,
-        birthday: birthday
+        birthday: birthday,
       })
       .where(eq(core_users.id, id))
       .returning();

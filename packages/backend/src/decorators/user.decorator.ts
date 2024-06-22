@@ -9,7 +9,7 @@ export const CurrentUser = createParamDecorator(
     const dataFromContext = ctx.getContext().req.user;
 
     return dataFromContext;
-  }
+  },
 );
 
 @ObjectType()

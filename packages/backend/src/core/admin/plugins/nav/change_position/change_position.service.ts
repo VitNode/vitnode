@@ -12,7 +12,7 @@ import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from "../../../../..";
 export class ChangePositionAdminNavPluginsService extends HelpersAdminNavPluginsService {
   protected findAndRemoveItemByCode({
     items,
-    code
+    code,
   }: {
     code: string;
     items: ConfigPlugin["nav"];
@@ -25,7 +25,7 @@ export class ChangePositionAdminNavPluginsService extends HelpersAdminNavPlugins
       if (item.children) {
         item.children = this.findAndRemoveItemByCode({
           items: item.children,
-          code
+          code,
         });
       }
 
@@ -37,16 +37,16 @@ export class ChangePositionAdminNavPluginsService extends HelpersAdminNavPlugins
     code,
     plugin_code,
     index_to_move,
-    parent_code
+    parent_code,
   }: ChangePositionAdminNavPluginsArgs): string {
     const pathConfig = ABSOLUTE_PATHS_BACKEND.plugin({
-      code: plugin_code
+      code: plugin_code,
     }).config;
     if (!fs.existsSync(pathConfig)) {
       throw new NotFoundError("Plugin");
     }
     const config: ConfigPlugin = JSON.parse(
-      fs.readFileSync(pathConfig, "utf8")
+      fs.readFileSync(pathConfig, "utf8"),
     );
 
     // Find the item to be moved
@@ -58,14 +58,14 @@ export class ChangePositionAdminNavPluginsService extends HelpersAdminNavPlugins
     // Remove the item from its current position
     config.nav = this.findAndRemoveItemByCode({
       items: config.nav,
-      code
+      code,
     });
 
     // If parent_code is provided, add the item to the parent's children
     if (parent_code) {
       const parentItem = this.findItemByCode({
         items: config.nav,
-        code: parent_code
+        code: parent_code,
       });
       if (!parentItem) {
         throw new NotFoundError("Parent");

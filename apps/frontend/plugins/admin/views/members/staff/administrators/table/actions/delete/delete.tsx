@@ -5,7 +5,7 @@ import * as React from "react";
 import {
   AlertDialog,
   AlertDialogContent,
-  AlertDialogTrigger
+  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
@@ -13,8 +13,8 @@ import { ShowAdminStaffAdministrators } from "@/graphql/hooks";
 
 const ContentDeleteActionsTableAdministratorsStaffAdmin = React.lazy(async () =>
   import("./content").then(module => ({
-    default: module.ContentDeleteActionsAdministratorsStaffAdmin
-  }))
+    default: module.ContentDeleteActionsAdministratorsStaffAdmin,
+  })),
 );
 
 interface Props {

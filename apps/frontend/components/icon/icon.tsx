@@ -19,7 +19,7 @@ export const Icon = React.memo(({ className, name, ...props }: Props) => {
     async () =>
       import("lucide-react")
         .then(mod => mod[name as IconLucideNames])
-        .then(mod => ({ default: mod }))
+        .then(mod => ({ default: mod })),
   );
 
   return <LucideIcon className={className} {...props} />;

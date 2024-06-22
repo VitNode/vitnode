@@ -16,7 +16,7 @@ export class DownloadAdminPluginsResolver {
   @UseGuards(OnlyForDevelopment)
   async admin__core_plugins__download(
     @Args() args: DownloadAdminPluginsArgs,
-    @CurrentUser() user: User
+    @CurrentUser() user: User,
   ): Promise<string> {
     return this.service.download(args, user);
   }

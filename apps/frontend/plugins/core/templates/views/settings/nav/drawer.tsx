@@ -6,7 +6,7 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerTrigger
+  DrawerTrigger,
 } from "@/components/ui/drawer";
 import { useSettingsView } from "@/plugins/core/hooks/settings/use-settings-view";
 import { ItemNavSettings } from "./item/item-nav-settings";

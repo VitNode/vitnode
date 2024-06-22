@@ -15,7 +15,7 @@ export class ShowCoreMembersResolver {
   @OptionalAuth()
   @UseGuards(AuthGuards)
   async core_members__show(
-    @Args() args: ShowCoreMembersArgs
+    @Args() args: ShowCoreMembersArgs,
   ): Promise<ShowCoreMembersObj> {
     return this.service.show(args);
   }

@@ -5,8 +5,8 @@ import { FilterToolbarDataTable } from "@/components/data-table/toolbar/filter/f
 
 const ContentGroupsFiltersUsersMembersAdmin = React.lazy(async () =>
   import("./content-groups-filters-users-members-admin").then(module => ({
-    default: module.ContentGroupsFiltersUsersMembersAdmin
-  }))
+    default: module.ContentGroupsFiltersUsersMembersAdmin,
+  })),
 );
 
 export const GroupsFiltersUsersMembersAdmin = () => {

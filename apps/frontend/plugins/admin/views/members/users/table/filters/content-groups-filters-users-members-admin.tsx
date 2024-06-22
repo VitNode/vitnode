@@ -15,7 +15,7 @@ export const ContentGroupsFiltersUsersMembersAdmin = () => {
           .filter(item => !item.guest)
           .map(group => ({
             label: convertText(group.name),
-            value: `${group.id}`
+            value: `${group.id}`,
           })) ?? []
       }
     />

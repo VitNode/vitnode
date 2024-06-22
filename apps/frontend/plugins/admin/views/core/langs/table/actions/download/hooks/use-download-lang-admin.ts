@@ -12,37 +12,37 @@ import { useDialog } from "@/components/ui/dialog";
 import { ShowCoreLanguages } from "@/graphql/hooks";
 
 export const useDownloadLangAdmin = ({
-  code
+  code,
 }: Pick<ShowCoreLanguages, "code">) => {
   const t = useTranslations("core");
   const { setOpen } = useDialog();
   const query = useQuery({
     queryKey: ["Admin__Core_Plugins__Show"],
-    queryFn: async () => queryApi({})
+    queryFn: async () => queryApi({}),
   });
 
   const formSchema = z.object({
     all: z.boolean(),
-    plugins: z.array(z.string())
+    plugins: z.array(z.string()),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       all: true,
-      plugins: []
-    }
+      plugins: [],
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const mutation = await mutationApi({
       code,
-      plugins: values.all ? [] : values.plugins
+      plugins: values.all ? [] : values.plugins,
     });
 
     if (mutation.error || !mutation.data) {
       toast.error(t("errors.title"), {
-        description: t("errors.internal_server_error")
+        description: t("errors.internal_server_error"),
       });
 
       return;
@@ -52,7 +52,7 @@ export const useDownloadLangAdmin = ({
 
     window.open(
       `${CONFIG.backend_url}/files/${mutation.data.admin__core_languages__download}`,
-      "_blank"
+      "_blank",
     );
   };
 

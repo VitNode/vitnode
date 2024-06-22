@@ -419,5 +419,5 @@ export const timeZones = [
   "UTC",
   "W-SU",
   "WET",
-  "Zulu"
+  "Zulu",
 ];

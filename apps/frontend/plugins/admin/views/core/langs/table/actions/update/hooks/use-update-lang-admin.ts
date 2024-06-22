@@ -9,19 +9,19 @@ import { mutationApi } from "./mutation-api";
 
 export const useUpdateLangAdmin = ({
   code,
-  name
+  name,
 }: Pick<ShowCoreLanguages, "code" | "name">) => {
   const t = useTranslations("admin.core.langs.actions.update");
   const tCore = useTranslations("core");
   const { setOpen } = useDialog();
   const formSchema = z.object({
-    file: z.array(z.instanceof(File))
+    file: z.array(z.instanceof(File)),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
-      file: []
-    }
+      file: [],
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -34,7 +34,7 @@ export const useUpdateLangAdmin = ({
 
     if (mutation.error || !mutation.data) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;
@@ -42,7 +42,7 @@ export const useUpdateLangAdmin = ({
 
     setOpen?.(false);
     toast.success(t("success"), {
-      description: name
+      description: name,
     });
   };
 

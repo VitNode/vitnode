@@ -12,7 +12,7 @@ export class DeleteCoreFilesService {
   checkIfFileExistsAndReturnPath({
     dir_folder,
     file_name,
-    file_secure
+    file_secure,
   }: DeleteCoreFilesArgs) {
     const path = file_secure
       ? ABSOLUTE_PATHS_BACKEND.uploads.private
@@ -24,7 +24,7 @@ export class DeleteCoreFilesService {
     if (!existsSync(filePath)) {
       throw new CustomError({
         code: "FILE_NOT_FOUND",
-        message: `File "${filePath}" not found`
+        message: `File "${filePath}" not found`,
       });
     }
 
@@ -35,7 +35,7 @@ export class DeleteCoreFilesService {
     const path = this.checkIfFileExistsAndReturnPath({
       dir_folder,
       file_name,
-      file_secure
+      file_secure,
     });
 
     // Remove file from server

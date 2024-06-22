@@ -10,13 +10,13 @@ import { AdminAuthGuards } from "../../../../../utils";
 @Resolver()
 export class CreateAdminStaffAdministratorResolver {
   constructor(
-    private readonly service: CreateAdminStaffAdministratorsService
+    private readonly service: CreateAdminStaffAdministratorsService,
   ) {}
 
   @Mutation(() => ShowAdminStaffAdministrators)
   @UseGuards(AdminAuthGuards)
   async admin__core_staff_administrators__create(
-    @Args() args: CreateAdminStaffAdministratorsArgs
+    @Args() args: CreateAdminStaffAdministratorsArgs,
   ): Promise<ShowAdminStaffAdministrators> {
     return this.service.create(args);
   }

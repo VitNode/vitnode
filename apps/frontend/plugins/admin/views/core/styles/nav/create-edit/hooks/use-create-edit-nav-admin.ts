@@ -25,19 +25,19 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
       .array(
         z.object({
           language_code: zodInput.string,
-          value: zodInput.string.min(3).max(100)
-        })
+          value: zodInput.string.min(3).max(100),
+        }),
       )
       .min(1),
     description: z.array(
       z.object({
         language_code: zodInput.string,
-        value: zodInput.string.max(200)
-      })
+        value: zodInput.string.max(200),
+      }),
     ),
     href: zodInput.string.min(1).max(255),
     external: z.boolean(),
-    icon: z.string()
+    icon: z.string(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -47,8 +47,8 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
       description: data?.description ?? [],
       href: data?.href ?? "",
       external: data?.external ?? false,
-      icon: data?.icon ?? ""
-    }
+      icon: data?.icon ?? "",
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -63,14 +63,14 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
 
     if (isError) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;
     }
 
     toast.success(t(data ? "edit.success" : "create.success"), {
-      description: convertText(values.name)
+      description: convertText(values.name),
     });
 
     setOpen?.(false);
@@ -78,6 +78,6 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
 
   return {
     form,
-    onSubmit
+    onSubmit,
   };
 };

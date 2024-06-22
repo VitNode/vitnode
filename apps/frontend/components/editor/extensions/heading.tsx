@@ -14,18 +14,18 @@ export const HeadingExtensionEditor = () => {
         3: "text-2xl font-bold",
         4: "text-xl font-bold",
         5: "text-lg font-bold",
-        6: "text-base font-bold"
+        6: "text-base font-bold",
       };
 
       return [
         `h${level}`,
         mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
-          class: `${classes[level]}`
+          class: `${classes[level]}`,
         }),
-        0
+        0,
       ];
-    }
+    },
   }).configure({
-    levels: [1, 2, 3, 4, 5, 6]
+    levels: [1, 2, 3, 4, 5, 6],
   });
 };

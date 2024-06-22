@@ -17,11 +17,11 @@ export const IconsContentIconInput = ({
   onChange,
   search,
   setOpen,
-  value
+  value,
 }: Props) => {
   const t = useTranslations("core.icon_picker.icons");
   const data = iconNamesArray.filter(name =>
-    name.toLowerCase().includes(search.toLowerCase())
+    name.toLowerCase().includes(search.toLowerCase()),
   );
 
   if (data.length === 0) {

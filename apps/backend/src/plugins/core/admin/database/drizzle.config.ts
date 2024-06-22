@@ -1,4 +1,4 @@
-// ! DO NOT REMOVE OR MODIFY THIS FILE!!!
+// ! DO NOT REMOVE, MODIFY OR MOVE THIS FILE!!!
 
 import { defineConfig } from "drizzle-kit";
 
@@ -8,5 +8,5 @@ export default defineConfig({
   dialect: "postgresql",
   dbCredentials: DATABASE_ENVS,
   schema: "./src/plugins/core/admin/database/schema/*.ts",
-  out: "./src/plugins/core/admin/database/migrations/"
+  out: "./src/plugins/core/admin/database/migrations/",
 });

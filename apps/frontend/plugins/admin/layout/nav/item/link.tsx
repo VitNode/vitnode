@@ -28,7 +28,7 @@ export const LinkItemNavAdmin = ({
   primaryId,
   id,
   icon,
-  children
+  children,
 }: Props) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
@@ -38,15 +38,15 @@ export const LinkItemNavAdmin = ({
   const active = pathname.startsWith(`/admin/${primaryId}/${id}`);
   const isChildActive =
     children?.some(child =>
-      pathname.startsWith(`/admin/${primaryId}/${id}/${child.href}`)
+      pathname.startsWith(`/admin/${primaryId}/${id}/${child.href}`),
     ) ?? false;
 
   const buttonClass = (active: boolean) =>
     cn(
       "hover:bg-primary/10 text-foreground [&>svg]:text-muted-foreground relative h-8 w-full justify-start font-normal [&>svg]:flex [&>svg]:size-4 [&>svg]:flex-shrink-0 [&>svg]:items-center [&>svg]:justify-center [&[data-state=open]>svg:not(:first-child)]:rotate-180",
       {
-        "bg-primary/10 font-bold": active
-      }
+        "bg-primary/10 font-bold": active,
+      },
     );
 
   const primaryButtonClass = (active: boolean) =>
@@ -79,7 +79,7 @@ export const LinkItemNavAdmin = ({
           href={href}
           className={cn(
             buttonVariants({ variant: "ghost", size: "sm" }),
-            primaryButtonClass(active)
+            primaryButtonClass(active),
           )}
         >
           {icon ? icons.find(i => i.id === id)?.icon : <Menu />}
@@ -109,7 +109,7 @@ export const LinkItemNavAdmin = ({
                   href={href}
                   className={cn(
                     buttonVariants({ variant: "ghost", size: "sm" }),
-                    buttonClass(active)
+                    buttonClass(active),
                   )}
                 >
                   {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}

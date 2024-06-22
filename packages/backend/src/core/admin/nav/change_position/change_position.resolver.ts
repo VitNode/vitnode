@@ -13,7 +13,7 @@ export class ChangePositionAdminNavResolver {
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
   async admin__core_nav__change_position(
-    @Args() args: ChangePositionAdminNavArgs
+    @Args() args: ChangePositionAdminNavArgs,
   ): Promise<string> {
     return this.service.changePosition(args);
   }

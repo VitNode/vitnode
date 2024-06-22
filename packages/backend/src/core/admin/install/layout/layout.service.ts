@@ -3,7 +3,7 @@ import { count } from "drizzle-orm";
 
 import {
   LayoutAdminInstallEnum,
-  LayoutAdminInstallObj
+  LayoutAdminInstallObj,
 } from "./dto/layout.obj";
 
 import { DatabaseService } from "../../../../database";
@@ -28,7 +28,7 @@ export class LayoutAdminInstallService {
           .from(core_sessions),
         await this.databaseService.db
           .select({ count: count() })
-          .from(core_admin_sessions)
+          .from(core_admin_sessions),
       ];
 
       if (sessionCount[0].count > 0 || sessionCountAdmin[0].count > 0) {
@@ -36,7 +36,7 @@ export class LayoutAdminInstallService {
       }
 
       return {
-        status: LayoutAdminInstallEnum.FINISH
+        status: LayoutAdminInstallEnum.FINISH,
       };
     }
 
@@ -45,12 +45,12 @@ export class LayoutAdminInstallService {
       .from(core_languages);
     if (languages[0].count > 0) {
       return {
-        status: LayoutAdminInstallEnum.ACCOUNT
+        status: LayoutAdminInstallEnum.ACCOUNT,
       };
     }
 
     return {
-      status: LayoutAdminInstallEnum.DATABASE
+      status: LayoutAdminInstallEnum.DATABASE,
     };
   }
 }

@@ -6,8 +6,8 @@ import { ShowAdminPlugins } from "@/graphql/hooks";
 
 const ContentDeletePluginActionsAdmin = React.lazy(async () =>
   import("./content").then(module => ({
-    default: module.ContentDeletePluginActionsAdmin
-  }))
+    default: module.ContentDeletePluginActionsAdmin,
+  })),
 );
 
 interface Props extends ShowAdminPlugins {

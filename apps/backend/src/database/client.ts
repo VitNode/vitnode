@@ -7,7 +7,7 @@ import * as dotenv from "dotenv";
 import { schemaDatabase } from "./schema";
 
 dotenv.config({
-  path: join(process.cwd(), "..", "..", ".env")
+  path: join(process.cwd(), "..", "..", ".env"),
 });
 
 export const DATABASE_ENVS = {
@@ -15,7 +15,7 @@ export const DATABASE_ENVS = {
   port: process.env.DB_PORT ? +process.env.DB_PORT : 5432,
   user: process.env.DB_USER ?? "root",
   password: process.env.DB_PASSWORD ?? "root",
-  database: process.env.DB_DATABASE ?? "vitnode"
+  database: process.env.DB_DATABASE ?? "vitnode",
 };
 
 export const poolDB = new Pool(DATABASE_ENVS);

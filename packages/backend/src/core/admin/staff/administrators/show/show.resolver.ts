@@ -14,7 +14,7 @@ export class ShowAdminStaffAdministratorResolver {
   @Query(() => ShowAdminStaffAdministratorsObj)
   @UseGuards(AdminAuthGuards)
   async admin__core_staff_administrators__show(
-    @Args() args: ShowAdminStaffAdministratorsArgs
+    @Args() args: ShowAdminStaffAdministratorsArgs,
   ): Promise<ShowAdminStaffAdministratorsObj> {
     return this.service.show(args);
   }

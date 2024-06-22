@@ -17,16 +17,16 @@ export class EditAdminNavPluginsService {
     icon,
     previous_code,
     plugin_code,
-    parent_code
+    parent_code,
   }: EditCreateAdminNavPluginsArgs): ShowAdminNavPluginsObj {
     const pathConfig = ABSOLUTE_PATHS_BACKEND.plugin({
-      code: plugin_code
+      code: plugin_code,
     }).config;
     if (!fs.existsSync(pathConfig)) {
       throw new NotFoundError("Plugin");
     }
     const config: ConfigPlugin = JSON.parse(
-      fs.readFileSync(pathConfig, "utf8")
+      fs.readFileSync(pathConfig, "utf8"),
     );
 
     const currentCode = removeSpecialCharacters(code);
@@ -34,7 +34,7 @@ export class EditAdminNavPluginsService {
     if (existsNavCode) {
       throw new CustomError({
         message: "Code already exists",
-        code: "CODE_ALREADY_EXISTS"
+        code: "CODE_ALREADY_EXISTS",
       });
     }
 
@@ -52,14 +52,14 @@ export class EditAdminNavPluginsService {
       children[navIndex] = {
         code: currentCode,
         href,
-        icon
+        icon,
       };
     } else {
       const navIndex = config.nav.findIndex(nav => nav.code === previous_code);
       config.nav[navIndex] = {
         code: currentCode,
         href,
-        icon
+        icon,
       };
     }
 
@@ -69,7 +69,7 @@ export class EditAdminNavPluginsService {
     return {
       code: currentCode,
       href,
-      icon
+      icon,
     };
   }
 }

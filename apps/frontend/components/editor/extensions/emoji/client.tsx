@@ -13,13 +13,13 @@ import { Button } from "@/components/ui/button";
 import {
   ComponentListRef,
   SuggestionKeyDownProps,
-  SuggestionProps
+  SuggestionProps,
 } from "../mentions/client";
 
 const ComponentList = ({
   command,
   items,
-  ref
+  ref,
 }: {
   command: (_props: { id: string }) => void;
   items: Emoji[];
@@ -28,7 +28,7 @@ const ComponentList = ({
   const t = useTranslations("core");
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const skinToneIndexLocalStorage = localStorage.getItem(
-    CONFIG.local_storage.editor_skin_tone
+    CONFIG.local_storage.editor_skin_tone,
   );
   const skinToneIndex = skinToneIndexLocalStorage
     ? +skinToneIndexLocalStorage
@@ -77,7 +77,7 @@ const ComponentList = ({
       }
 
       return false;
-    }
+    },
   }));
 
   return (
@@ -93,7 +93,7 @@ const ComponentList = ({
             <Button
               variant="ghost"
               className={cn("justify-start", {
-                "bg-accent": index === selectedIndex
+                "bg-accent": index === selectedIndex,
               })}
               key={index}
               onClick={() => selectItem(index)}
@@ -117,7 +117,7 @@ export function onStart<T>(props: SuggestionProps<T>) {
   component = new ReactRenderer(ComponentList, {
     props,
     editor: props.editor,
-    className: cn(classPopover, "flex flex-col p-2")
+    className: cn(classPopover, "flex flex-col p-2"),
   });
 
   if (!props.clientRect) {
@@ -131,7 +131,7 @@ export function onStart<T>(props: SuggestionProps<T>) {
     showOnCreate: true,
     interactive: true,
     trigger: "manual",
-    placement: "bottom-start"
+    placement: "bottom-start",
   });
 }
 
@@ -147,7 +147,7 @@ export function onUpdate<T>(props: SuggestionProps<T>) {
   }
 
   popup[0].setProps({
-    getReferenceClientRect: props.clientRect
+    getReferenceClientRect: props.clientRect,
   });
 }
 

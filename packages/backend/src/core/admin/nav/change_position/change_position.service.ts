@@ -14,10 +14,10 @@ export class ChangePositionAdminNavService {
   async changePosition({
     id,
     index_to_move,
-    parent_id
+    parent_id,
   }: ChangePositionAdminNavArgs): Promise<string> {
     const nav = await this.databaseService.db.query.core_nav.findFirst({
-      where: (table, { eq }) => eq(table.id, id)
+      where: (table, { eq }) => eq(table.id, id),
     });
 
     if (!nav) {
@@ -27,7 +27,7 @@ export class ChangePositionAdminNavService {
     const allChildrenParent =
       await this.databaseService.db.query.core_nav.findMany({
         where: (table, { eq }) => eq(table.parent_id, parent_id),
-        orderBy: (table, { asc }) => asc(table.position)
+        orderBy: (table, { asc }) => asc(table.position),
       });
 
     let index = 0;
@@ -42,7 +42,7 @@ export class ChangePositionAdminNavService {
 
         newChildrenIndexes.push({
           id: item.id,
-          position: index
+          position: index,
         });
         index++;
       });
@@ -50,7 +50,7 @@ export class ChangePositionAdminNavService {
     // If index_to_move is below 0, it means that the item is at the end of the list
     newChildrenIndexes.push({
       id,
-      position: index_to_move < 0 ? index : index_to_move
+      position: index_to_move < 0 ? index : index_to_move,
     });
 
     await Promise.all(
@@ -59,10 +59,10 @@ export class ChangePositionAdminNavService {
           .update(core_nav)
           .set({
             position: item.position,
-            parent_id
+            parent_id,
           })
           .where(eq(core_nav.id, item.id));
-      })
+      }),
     );
 
     return "Success!";

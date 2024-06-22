@@ -13,7 +13,7 @@ export class DeleteCoreMembersService {
 
   async delete({ id }: DeleteCoreMembersArgs): Promise<string> {
     const user = await this.databaseService.db.query.core_users.findFirst({
-      where: eq(core_users.id, id)
+      where: eq(core_users.id, id),
     });
 
     if (!user) throw new NotFoundError("User");
@@ -21,7 +21,7 @@ export class DeleteCoreMembersService {
     const admin =
       await this.databaseService.db.query.core_admin_permissions.findFirst({
         where: (table, { or, eq }) =>
-          or(eq(table.user_id, user.id), eq(table.group_id, user.group_id))
+          or(eq(table.user_id, user.id), eq(table.group_id, user.group_id)),
       });
 
     if (admin) throw new AccessDeniedError(); //Protects against deletion users with admin permissions

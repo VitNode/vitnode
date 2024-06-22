@@ -6,7 +6,7 @@ import { getHSLFromString } from "@vitnode/shared";
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger
+  PopoverTrigger,
 } from "@/components/ui/popover";
 import { PickerColor } from "@/components/color/picker/picker";
 import { useEditorState } from "@/components/editor/hooks/use-editor-state";
@@ -17,7 +17,7 @@ export const ColorToolbarEditor = () => {
   const [open, setOpen] = React.useState(false);
   const { editor } = useEditorState();
   const [color, setColor] = React.useState<HslColor | null>(
-    getHSLFromString(editor.getAttributes("textStyle").color)
+    getHSLFromString(editor.getAttributes("textStyle").color),
   );
 
   React.useEffect(() => {
@@ -31,7 +31,7 @@ export const ColorToolbarEditor = () => {
   }, [color]);
 
   const currentColor = getHSLFromString(
-    editor.getAttributes("textStyle").color
+    editor.getAttributes("textStyle").color,
   );
 
   return (
@@ -45,7 +45,7 @@ export const ColorToolbarEditor = () => {
               : undefined,
             color: currentColor
               ? `hsl(${currentColor.h} ${currentColor.s}% ${currentColor.l}%)`
-              : undefined
+              : undefined,
           }}
           className="w-14 justify-center gap-1 p-0 [&>svg:last-child]:size-4 [&>svg:not(:last-child)]:size-5"
         >

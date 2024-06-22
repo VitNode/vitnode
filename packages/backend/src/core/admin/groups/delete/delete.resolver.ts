@@ -13,7 +13,7 @@ export class DeleteAdminGroupsResolver {
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
   async admin__core_groups__delete(
-    @Args() args: DeleteAdminGroupsArgs
+    @Args() args: DeleteAdminGroupsArgs,
   ): Promise<string> {
     return this.service.delete(args);
   }

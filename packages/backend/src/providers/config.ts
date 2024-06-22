@@ -34,7 +34,7 @@ export const configPath = join(
   "..",
   "frontend",
   "config",
-  "config.json"
+  "config.json",
 );
 
 export const getConfigFile = () => {

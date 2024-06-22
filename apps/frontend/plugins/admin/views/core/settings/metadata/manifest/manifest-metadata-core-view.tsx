@@ -11,7 +11,7 @@ import {
   FormFieldRender,
   FormItem,
   FormLabel,
-  FormWrapper
+  FormWrapper,
 } from "@/components/ui/form";
 import { useManifestCoreAdminView } from "./hooks/use-manifest-core-admin-view";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -21,7 +21,7 @@ import { Input } from "@/components/ui/input";
 import { ColorInput } from "@/components/color/color-input";
 
 export const ManifestMetadataCoreAdminView = (
-  props: Admin__Core_Manifest_Metadata__ShowQuery
+  props: Admin__Core_Manifest_Metadata__ShowQuery,
 ) => {
   const t = useTranslations("admin.core.metadata.manifest");
   const tCore = useTranslations("core");
@@ -65,7 +65,7 @@ export const ManifestMetadataCoreAdminView = (
                         </FormDescription>
                       </div>
                     </FormItem>
-                  )
+                  ),
                 )}
               </RadioGroup>
             </FormFieldRender>

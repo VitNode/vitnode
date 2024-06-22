@@ -10,12 +10,12 @@ export class TestAdminEmailSettingsService extends SendAdminEmailService {
     from,
     to,
     subject,
-    message
+    message,
   }: TestAdminEmailSettingsServiceArgs): Promise<string> {
     await this.send({
       to,
       subject,
-      message
+      message,
     });
 
     return "Email sent!";

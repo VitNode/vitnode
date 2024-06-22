@@ -8,7 +8,7 @@ import {
   Form,
   FormField,
   FormFieldRender,
-  FormWrapper
+  FormWrapper,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -18,7 +18,7 @@ import { Separator } from "@/components/ui/separator";
 import { ColorInput } from "@/components/color/color-input";
 
 export const EmailSettingsAdminView = (
-  props: Admin__Core_Email_Settings__ShowQuery
+  props: Admin__Core_Email_Settings__ShowQuery,
 ) => {
   const t = useTranslations("admin.core.settings.email");
   const tCore = useTranslations("core");

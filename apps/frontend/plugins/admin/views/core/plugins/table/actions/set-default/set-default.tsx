@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider
+  TooltipProvider,
 } from "@/components/ui/tooltip";
 import { ButtonSetDefaultPluginActionsAdmin } from "./button";
 import { useSetDefaultPluginAdmin } from "./hooks/use-set-default-admin";

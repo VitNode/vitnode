@@ -8,7 +8,7 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle
+  AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { SubmitDeleteActionTableNavAdmin } from "./submit";
@@ -18,7 +18,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 export const ContentDeleteActionTableNavAdmin = ({
   children,
   id,
-  name
+  name,
 }: Pick<ShowCoreNav, "children" | "id" | "name">) => {
   const t = useTranslations("admin.core.styles.nav.delete");
   const tCore = useTranslations("core");
@@ -35,7 +35,7 @@ export const ContentDeleteActionTableNavAdmin = ({
               <span className="text-foreground font-bold">
                 {convertText(name)}
               </span>
-            )
+            ),
           })}
         </AlertDialogDescription>
 

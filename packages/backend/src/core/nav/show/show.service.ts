@@ -16,7 +16,7 @@ export class ShowCoreNavService {
   async show({
     cursor,
     first,
-    last
+    last,
   }: ShowCoreNavArgs): Promise<ShowCoreNavObj> {
     const pagination = await inputPaginationCursor({
       cursor,
@@ -26,12 +26,12 @@ export class ShowCoreNavService {
       last,
       primaryCursor: {
         column: "id",
-        schema: core_nav.id
+        schema: core_nav.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.asc,
-        column: "position"
-      }
+        column: "position",
+      },
     });
 
     const itemsParent = await this.databaseService.db.query.core_nav.findMany({
@@ -39,8 +39,8 @@ export class ShowCoreNavService {
       where: and(pagination.where, eq(core_nav.parent_id, 0)),
       with: {
         name: true,
-        description: true
-      }
+        description: true,
+      },
     });
 
     const totalCount = await this.databaseService.db
@@ -54,15 +54,15 @@ export class ShowCoreNavService {
           orderBy: (table, { asc }) => asc(table.position),
           with: {
             name: true,
-            description: true
-          }
+            description: true,
+          },
         });
 
         return {
           ...item,
-          children
+          children,
         };
-      })
+      }),
     );
 
     return outputPagination({
@@ -70,7 +70,7 @@ export class ShowCoreNavService {
       totalCount,
       first,
       cursor,
-      last
+      last,
     });
   }
 }

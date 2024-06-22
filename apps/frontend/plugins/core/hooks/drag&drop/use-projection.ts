@@ -6,7 +6,7 @@ import { FlatTree } from "@vitnode/frontend/helpers";
 
 const getDragDepth = ({
   indentationWidth,
-  offset
+  offset,
 }: {
   indentationWidth: number;
   offset: number;
@@ -15,7 +15,7 @@ const getDragDepth = ({
 };
 
 function getMaxDepth<T extends object>({
-  previousItem
+  previousItem,
 }: {
   previousItem: FlatTree<T>;
 }) {
@@ -23,7 +23,7 @@ function getMaxDepth<T extends object>({
 }
 
 function getMinDepth<T extends object>({
-  nextItem
+  nextItem,
 }: {
   nextItem: FlatTree<T>;
 }) {
@@ -47,7 +47,7 @@ export const useProjection = () => {
     delta,
     flattenedItems,
     indentationWidth = 0,
-    maxDepth: maxDepthProp
+    maxDepth: maxDepthProp,
   }: {
     delta: Coordinates;
     flattenedItems: FlatTree<T>[];
@@ -57,7 +57,7 @@ export const useProjection = () => {
     const dragOffset = delta.x;
     const overItemIndex = flattenedItems.findIndex(({ id }) => id === overId);
     const activeItemIndex = flattenedItems.findIndex(
-      ({ id }) => id === activeId
+      ({ id }) => id === activeId,
     );
     const activeItem = flattenedItems[activeItemIndex];
     const newItems = arrayMove(flattenedItems, activeItemIndex, overItemIndex);
@@ -65,14 +65,14 @@ export const useProjection = () => {
     const nextItem = newItems[overItemIndex + 1];
     const dragDepth = getDragDepth({
       offset: dragOffset,
-      indentationWidth
+      indentationWidth,
     });
     const projectedDepth = activeItem.depth + dragDepth;
     const maxDepth =
       maxDepthProp !== undefined
         ? maxDepthProp
         : getMaxDepth({
-            previousItem
+            previousItem,
           });
     const minDepth = getMinDepth({ nextItem });
     let depth = projectedDepth;
@@ -114,6 +114,6 @@ export const useProjection = () => {
     setOverId,
     setActiveId,
     projected,
-    setProjected
+    setProjected,
   };
 };

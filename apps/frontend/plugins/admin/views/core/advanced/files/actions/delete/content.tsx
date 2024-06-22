@@ -5,7 +5,7 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle
+  AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
@@ -21,13 +21,13 @@ export interface ContentDeleteActionFilesAdvancedCoreAdminProps
 export const ContentDeleteActionFilesAdvancedCoreAdmin = ({
   count_uses,
   file_name_original,
-  id
+  id,
 }: ContentDeleteActionFilesAdvancedCoreAdminProps) => {
   const t = useTranslations("admin.core.advanced.files.delete");
   const tCore = useTranslations("core");
   const { onSubmit } = useDeleteFileAdvancedAdmin({
     file_name_original,
-    id
+    id,
   });
 
   return (
@@ -42,7 +42,7 @@ export const ContentDeleteActionFilesAdvancedCoreAdmin = ({
               <span className="text-foreground font-bold">
                 {file_name_original}
               </span>
-            )
+            ),
           })}
         </AlertDialogDescription>
         {count_uses > 0 && (

@@ -13,7 +13,7 @@ export const ToggleToolbarEditor = ({
   children,
   disabled,
   onPressedChange,
-  pressed
+  pressed,
 }: Props) => {
   return (
     <Toggle

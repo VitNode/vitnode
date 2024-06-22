@@ -11,7 +11,7 @@ import {
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { useGlobals } from "@/plugins/core/hooks/use-globals";
@@ -20,7 +20,7 @@ export const LanguageSwitcher = () => {
   const t = useTranslations("core");
   const {
     config: { rebuild_required },
-    languages
+    languages,
   } = useGlobals();
   const locale = useLocale();
   const { replace } = useRouter();

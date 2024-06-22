@@ -9,6 +9,6 @@ export const getUserAgentData = (userAgent: string) => {
     uagent_version: user_parser.browser.version ?? "Uagent from tests",
     uagent_os: user_parser.os.name
       ? `${user_parser.os.name} ${user_parser.os.version}`
-      : "Uagent from tests"
+      : "Uagent from tests",
   };
 };

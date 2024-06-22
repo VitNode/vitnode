@@ -10,7 +10,7 @@ import { EditAdminManifestMetadataService } from "./manifest/edit/edit.service";
     ShowAdminManifestMetadataService,
     ShowAdminManifestMetadataResolver,
     EditAdminManifestMetadataResolver,
-    EditAdminManifestMetadataService
-  ]
+    EditAdminManifestMetadataService,
+  ],
 })
 export class AdminMetadataModule {}

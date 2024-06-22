@@ -21,7 +21,7 @@ export class EditAdminPluginsService {
     ...rest
   }: EditAdminPluginsArgs): Promise<ShowAdminPlugins> {
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
-      where: (table, { eq }) => eq(table.code, code)
+      where: (table, { eq }) => eq(table.code, code),
     });
 
     if (!plugin) {
@@ -31,7 +31,7 @@ export class EditAdminPluginsService {
     if (code !== plugin.code) {
       throw new CustomError({
         code: "PLUGIN_CODE_MISMATCH",
-        message: "Plugin code mismatch!"
+        message: "Plugin code mismatch!",
       });
     }
 
@@ -39,7 +39,7 @@ export class EditAdminPluginsService {
       if (!plugin.enabled) {
         throw new CustomError({
           code: "PLUGIN_NOT_ENABLED",
-          message: "Plugin is not enabled!"
+          message: "Plugin is not enabled!",
         });
       }
 
@@ -47,7 +47,7 @@ export class EditAdminPluginsService {
       await this.databaseService.db
         .update(core_plugins)
         .set({
-          default: false
+          default: false,
         })
         .where(ne(core_plugins.code, code));
     }
@@ -56,7 +56,7 @@ export class EditAdminPluginsService {
       .update(core_plugins)
       .set({
         ...rest,
-        default: isDefault
+        default: isDefault,
       })
       .where(eq(core_plugins.code, code))
       .returning();
@@ -77,7 +77,7 @@ export class EditAdminPluginsService {
       if (err) {
         throw new CustomError({
           code: "CANNOT_WRITE_FILE",
-          message: `Cannot write file with "${path}" path!`
+          message: `Cannot write file with "${path}" path!`,
         });
       }
     });

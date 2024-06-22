@@ -14,20 +14,20 @@ export class FilesAdminPluginsService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   protected async checkNumberOfFiles({
-    paths
+    paths,
   }: {
     paths: string;
   }): Promise<number> {
     return fs.existsSync(paths)
       ? (await fs.promises.readdir(paths, { recursive: true })).filter(
-          fileName => fileName.includes(".")
+          fileName => fileName.includes("."),
         ).length
       : 0;
   }
 
   async check({ code }: FilesAdminPluginsArgs): Promise<FilesAdminPluginsObj> {
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
-      where: (table, { eq }) => eq(table.code, code)
+      where: (table, { eq }) => eq(table.code, code),
     });
 
     if (!plugin) {
@@ -38,24 +38,24 @@ export class FilesAdminPluginsService {
 
     return {
       databases: await this.checkNumberOfFiles({
-        paths: pluginPaths.database.schema
+        paths: pluginPaths.database.schema,
       }),
       admin_pages: await this.checkNumberOfFiles({
-        paths: pluginPaths.frontend.admin_pages
+        paths: pluginPaths.frontend.admin_pages,
       }),
       admin_templates: await this.checkNumberOfFiles({
-        paths: pluginPaths.frontend.admin_templates
+        paths: pluginPaths.frontend.admin_templates,
       }),
       pages: await this.checkNumberOfFiles({
-        paths: pluginPaths.frontend.pages
+        paths: pluginPaths.frontend.pages,
       }),
       pages_container: await this.checkNumberOfFiles({
-        paths: pluginPaths.frontend.pages_container
+        paths: pluginPaths.frontend.pages_container,
       }),
       default_page: fs.existsSync(pluginPaths.frontend.default_page),
       templates: await this.checkNumberOfFiles({
-        paths: pluginPaths.frontend.templates
-      })
+        paths: pluginPaths.frontend.templates,
+      }),
     };
   }
 }

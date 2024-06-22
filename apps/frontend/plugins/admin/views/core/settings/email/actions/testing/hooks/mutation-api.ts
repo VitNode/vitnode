@@ -4,11 +4,11 @@ import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Email_Settings__Test,
   Admin__Core_Email_Settings__TestMutation,
-  Admin__Core_Email_Settings__TestMutationVariables
+  Admin__Core_Email_Settings__TestMutationVariables,
 } from "@/graphql/hooks";
 
 export const mutationApi = async (
-  variables: Admin__Core_Email_Settings__TestMutationVariables
+  variables: Admin__Core_Email_Settings__TestMutationVariables,
 ) => {
   try {
     const { data } = await fetcher<
@@ -16,7 +16,7 @@ export const mutationApi = async (
       Admin__Core_Email_Settings__TestMutationVariables
     >({
       query: Admin__Core_Email_Settings__Test,
-      variables
+      variables,
     });
 
     return { data };

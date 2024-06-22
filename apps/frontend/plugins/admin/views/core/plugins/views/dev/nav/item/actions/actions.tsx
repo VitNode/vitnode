@@ -5,7 +5,7 @@ import { DeleteActionTableNavDevPluginAdmin } from "./delete/delete";
 import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
 
 export const ActionsTableNavDevPluginAdmin = (
-  props: FlatTree<ShowAdminNavPluginsObj>
+  props: FlatTree<ShowAdminNavPluginsObj>,
 ) => {
   return (
     <div className="flex gap-1">

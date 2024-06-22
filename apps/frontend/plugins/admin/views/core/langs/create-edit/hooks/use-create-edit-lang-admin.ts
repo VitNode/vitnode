@@ -26,7 +26,7 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
     default: z.boolean(),
     time_24: z.boolean(),
     locale: z.string(),
-    allow_in_input: z.boolean()
+    allow_in_input: z.boolean(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -38,8 +38,8 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
       default: data?.default ?? false,
       time_24: data?.time_24 ?? false,
       locale: data?.locale ?? "enUS",
-      allow_in_input: data?.allow_in_input ?? true
-    }
+      allow_in_input: data?.allow_in_input ?? true,
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -49,7 +49,7 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
         ...data,
         ...values,
         time24: values.time_24,
-        allowInInput: values.allow_in_input
+        allowInInput: values.allow_in_input,
       });
 
       if (mutation.error) {
@@ -59,7 +59,7 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
       const mutation = await createMutationApi({
         ...values,
         time24: values.time_24,
-        allowInInput: values.allow_in_input
+        allowInInput: values.allow_in_input,
       });
 
       if (mutation.error) {
@@ -69,20 +69,20 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
 
     if (error) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;
     }
 
     toast(t(data ? "edit.success" : "create.success"), {
-      description: values.name
+      description: values.name,
     });
     setOpen?.(false);
   };
 
   return {
     form,
-    onSubmit
+    onSubmit,
   };
 };

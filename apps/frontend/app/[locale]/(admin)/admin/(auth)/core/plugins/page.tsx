@@ -5,11 +5,11 @@ import {
   Admin__Core_Plugins__Show,
   ShowAdminPluginsSortingColumnEnum,
   Admin__Core_Plugins__ShowQuery,
-  Admin__Core_Plugins__ShowQueryVariables
+  Admin__Core_Plugins__ShowQueryVariables,
 } from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
-  SearchParamsPagination
+  SearchParamsPagination,
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Card } from "@/components/ui/card";
@@ -28,7 +28,7 @@ const getData = async (variables: Admin__Core_Plugins__ShowQueryVariables) => {
     Admin__Core_Plugins__ShowQueryVariables
   >({
     query: Admin__Core_Plugins__Show,
-    variables
+    variables,
   });
 
   return data;
@@ -38,7 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("admin.core.plugins");
 
   return {
-    title: t("title")
+    title: t("title"),
   };
 }
 
@@ -47,11 +47,11 @@ export default async function Page({ searchParams }: Props) {
     searchParams,
     search: true,
     sortByEnum: ShowAdminPluginsSortingColumnEnum,
-    defaultPageSize: 10
+    defaultPageSize: 10,
   });
   const [data, t] = await Promise.all([
     getData(variables),
-    getTranslations("admin.core.plugins")
+    getTranslations("admin.core.plugins"),
   ]);
 
   return (

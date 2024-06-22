@@ -15,9 +15,9 @@ export const Nav = async () => {
       ...nav,
       children: nav.children.map(child => ({
         ...child,
-        children: []
-      }))
-    }))
+        children: [],
+      })),
+    })),
   });
 
   const icons: {
@@ -25,7 +25,7 @@ export const Nav = async () => {
     id: number;
   }[] = flattenData.map(item => ({
     icon: item.icon ? <Icon className="size-4" name={item.icon} /> : null,
-    id: item.id
+    id: item.id,
   }));
 
   return (

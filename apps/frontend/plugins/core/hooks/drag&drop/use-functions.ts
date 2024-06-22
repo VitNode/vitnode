@@ -3,7 +3,7 @@ import {
   DragMoveEvent,
   DragOverEvent,
   DragStartEvent,
-  UniqueIdentifier
+  UniqueIdentifier,
 } from "@dnd-kit/core";
 import * as React from "react";
 import { arrayMove } from "@dnd-kit/sortable";
@@ -13,7 +13,7 @@ import { useProjection } from "./use-projection";
 
 function removeChildrenOf<T extends object>({
   ids,
-  tree
+  tree,
 }: {
   ids: UniqueIdentifier[];
   tree: FlatTree<T>[];
@@ -34,7 +34,7 @@ function removeChildrenOf<T extends object>({
 }
 
 export function buildTree<T extends object>({
-  flattenedTree
+  flattenedTree,
 }: {
   flattenedTree: FlatTree<T>[];
 }): WithChildren<T>[] {
@@ -49,7 +49,7 @@ export function buildTree<T extends object>({
 
     return {
       ...item,
-      children: []
+      children: [],
     };
   });
 
@@ -60,7 +60,7 @@ export function buildTree<T extends object>({
 
     tree[parentIndex] = {
       ...parent,
-      children: [...parent.children, item]
+      children: [...parent.children, item],
     };
   });
 
@@ -89,7 +89,7 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
   const activeItem = flattenedItems.find(i => i.id === activeId);
   const sortedIds = React.useMemo(
     () => flattenedItems.map(({ id }) => id),
-    [flattenedItems]
+    [flattenedItems],
   );
 
   // DndKit doesn't support nested sortable, so we need to flatten the data in one array
@@ -99,12 +99,12 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
     const collapsedItems = tree.reduce<UniqueIdentifier[]>(
       (acc, { children, id }) =>
         !isOpenChildren.includes(id) && children.length ? [...acc, id] : acc,
-      []
+      [],
     );
 
     return removeChildrenOf({
       tree,
-      ids: activeId ? [activeId, ...collapsedItems] : collapsedItems
+      ids: activeId ? [activeId, ...collapsedItems] : collapsedItems,
     });
   }
 
@@ -131,7 +131,7 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
     delta,
     flattenedItems,
     indentationWidth,
-    maxDepth
+    maxDepth,
   }: OnDragMoveArgs) => {
     if (maxDepth === undefined && !indentationWidth) {
       throw new Error("You must provide either maxDepth abd indentationWidth");
@@ -143,7 +143,7 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
       flattenedItems,
       delta,
       indentationWidth,
-      maxDepth
+      maxDepth,
     });
 
     if (projected?.parentId === currentProjection.parentId) {
@@ -162,7 +162,7 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
     active,
     data,
     over,
-    setData
+    setData,
   }: DragEndArgs<T>) {
     resetState();
 
@@ -177,18 +177,18 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
     sortedItems[activeIndex] = {
       ...sortedItems[activeIndex],
       depth,
-      parentId
+      parentId,
     };
 
     const dataAfterUpdate: FlatTree<FlatTree<T>>[] = sortedItems.map(item => ({
       ...item,
-      children: []
+      children: [],
     }));
 
     setData(
       buildTree({
-        flattenedTree: dataAfterUpdate
-      })
+        flattenedTree: dataAfterUpdate,
+      }),
     );
 
     const parents = sortedItems.filter(i => i.parentId === parentId);
@@ -207,14 +207,14 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
     return {
       id: active.id,
       parentId: parentId,
-      indexToMove
+      indexToMove,
     };
   }
 
   const actionsItem = ({
     data,
     indentationWidth,
-    onCollapse
+    onCollapse,
   }: {
     data: {
       id: number | string;
@@ -248,7 +248,7 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
         0,
       indentationWidth,
       id: data.id,
-      childrenLength: data.children ? data.children.length : 0
+      childrenLength: data.children ? data.children.length : 0,
     };
   };
 
@@ -262,6 +262,6 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
     flattenedItems,
     activeItemOverlay: activeId !== null && activeItem,
     sortedIds,
-    ...rest
+    ...rest,
   };
 }

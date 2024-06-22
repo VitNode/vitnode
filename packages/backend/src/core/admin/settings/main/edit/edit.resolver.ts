@@ -14,7 +14,7 @@ export class EditAdminMainSettingsResolver {
   @Mutation(() => EditAdminSettingsObj)
   @UseGuards(AdminAuthGuards)
   async admin__core_main_settings__edit(
-    @Args() args: EditAdminMainSettingsArgs
+    @Args() args: EditAdminMainSettingsArgs,
   ): Promise<EditAdminSettingsObj> {
     return this.service.edit(args);
   }

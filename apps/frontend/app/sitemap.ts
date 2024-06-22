@@ -6,7 +6,7 @@ import { getSessionData } from "@/graphql/get-session-data";
 const generateAlternateLanguagesForSitemap = ({
   frontendUrl,
   languages,
-  slug
+  slug,
 }: {
   frontendUrl: string;
   languages: { code: string }[];
@@ -23,8 +23,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const {
     data: {
       core_languages__show: { edges: languages },
-      core_plugins__show
-    }
+      core_plugins__show,
+    },
   } = await getSessionData();
   const plugins = core_plugins__show.filter(item => item.allow_default);
 
@@ -36,9 +36,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         languages: generateAlternateLanguagesForSitemap({
           languages,
           frontendUrl: CONFIG.frontend_url,
-          slug: () => `/${plugin.code}`
-        })
-      }
+          slug: () => `/${plugin.code}`,
+        }),
+      },
     };
   });
 
@@ -49,10 +49,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       alternates: {
         languages: generateAlternateLanguagesForSitemap({
           languages,
-          frontendUrl: CONFIG.frontend_url
-        })
-      }
+          frontendUrl: CONFIG.frontend_url,
+        }),
+      },
     },
-    ...data
+    ...data,
   ];
 }

@@ -4,16 +4,16 @@ import { Transform } from "class-transformer";
 import {
   PaginationArgs,
   SortDirectionEnum,
-  TransformString
+  TransformString,
 } from "../../../../../utils";
 
 enum ShowAdminGroupsSortingColumnEnum {
   created = "created",
-  updated = "updated"
+  updated = "updated",
 }
 
 registerEnumType(ShowAdminGroupsSortingColumnEnum, {
-  name: "ShowAdminGroupsSortingColumnEnum"
+  name: "ShowAdminGroupsSortingColumnEnum",
 });
 
 @InputType()

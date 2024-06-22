@@ -12,7 +12,7 @@ interface Props {
 
 export const SearchToolbarDataTable = ({
   searchPlaceholder,
-  startTransition
+  startTransition,
 }: Props) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -36,7 +36,7 @@ export const SearchToolbarDataTable = ({
 
     startTransition(() => {
       push(params.toString() ? `${pathname}?${params.toString()}` : pathname, {
-        scroll: false
+        scroll: false,
       });
     });
   }, 500);

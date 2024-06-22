@@ -14,7 +14,7 @@ export class ShowAdminPluginsResolver {
   @Query(() => ShowAdminPluginsObj)
   @UseGuards(AdminAuthGuards)
   async admin__core_plugins__show(
-    @Args() args: ShowAdminPluginsArgs
+    @Args() args: ShowAdminPluginsArgs,
   ): Promise<ShowAdminPluginsObj> {
     return this.service.show(args);
   }

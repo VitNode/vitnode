@@ -10,7 +10,7 @@ import { core_admin_sessions } from "../../../../templates/core/admin/database/s
 export class SignOutAdminSessionsService {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly configService: ConfigService
+    private readonly configService: ConfigService,
   ) {}
 
   async signOut({ req, res }: Ctx) {
@@ -26,7 +26,7 @@ export class SignOutAdminSessionsService {
     await this.databaseService.db
       .update(core_admin_sessions)
       .set({
-        expires: new Date()
+        expires: new Date(),
       })
       .where(eq(core_admin_sessions.login_token, login_token));
 
@@ -37,8 +37,8 @@ export class SignOutAdminSessionsService {
         secure: true,
         domain: this.configService.getOrThrow("cookies.domain"),
         path: "/",
-        sameSite: "none"
-      }
+        sameSite: "none",
+      },
     );
 
     return "You are logged out";

@@ -16,16 +16,16 @@ export const useEditorAdmin = ({ data }: EditorAdminArgs) => {
   const formSchema = z.object({
     sticky: z.boolean(),
     files: z.object({
-      allow_type: z.enum(["all", "images_videos", "images", "none"])
-    })
+      allow_type: z.enum(["all", "images_videos", "images", "none"]),
+    }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       sticky: data.editor.sticky,
-      files: data.editor.files
-    }
+      files: data.editor.files,
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -36,13 +36,13 @@ export const useEditorAdmin = ({ data }: EditorAdminArgs) => {
       form.reset(values);
     } catch (error) {
       toast.error(t("errors.title"), {
-        description: t("errors.internal_server_error")
+        description: t("errors.internal_server_error"),
       });
     }
   };
 
   return {
     form,
-    onSubmit
+    onSubmit,
   };
 };

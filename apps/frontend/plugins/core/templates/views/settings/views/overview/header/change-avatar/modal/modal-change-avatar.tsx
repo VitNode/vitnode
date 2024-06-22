@@ -5,7 +5,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -18,8 +18,8 @@ import { useSession } from "@/plugins/core/hooks/use-session";
 
 const CropperModalChangeAvatar = React.lazy(async () =>
   import("./cropper/cropper-modal-change-avatar").then(module => ({
-    default: module.CropperModalChangeAvatar
-  }))
+    default: module.CropperModalChangeAvatar,
+  })),
 );
 
 export const ModalChangeAvatar = () => {

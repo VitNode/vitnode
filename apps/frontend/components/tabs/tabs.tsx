@@ -11,7 +11,7 @@ export const Tabs = ({ children, className }: Props) => {
     <div
       className={cn(
         "no-scrollbar shadow-border overflow-x-auto shadow-[inset_0_-2px_0]",
-        className
+        className,
       )}
     >
       <div className="flex">{children}</div>

@@ -17,7 +17,7 @@ export class UploadCoreEditorResolver {
   @UseGuards(AuthGuards)
   async core_editor_files__upload(
     @Args() args: UploadCoreEditorArgs,
-    @CurrentUser() currentUser?: User
+    @CurrentUser() currentUser?: User,
   ): Promise<ShowCoreFiles> {
     return this.service.upload(currentUser, args);
   }

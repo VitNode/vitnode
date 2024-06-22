@@ -12,12 +12,12 @@ import { CreateEditNavDevPluginAdminProps } from "../../create-edit/create-edit"
 
 const Content = React.lazy(async () =>
   import("../../create-edit/create-edit").then(module => ({
-    default: module.CreateEditNavDevPluginAdmin
-  }))
+    default: module.CreateEditNavDevPluginAdmin,
+  })),
 );
 
 export const CreateNavDevPluginAdmin = (
-  props: CreateEditNavDevPluginAdminProps
+  props: CreateEditNavDevPluginAdminProps,
 ) => {
   const t = useTranslations("core");
 

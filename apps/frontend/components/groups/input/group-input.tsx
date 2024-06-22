@@ -58,7 +58,7 @@ export const GroupInput = ({
         <Button
           variant="outline"
           className={cn("w-full justify-start", className, {
-            "text-muted-foreground": values.length === 0
+            "text-muted-foreground": values.length === 0,
           })}
           {...rest}
         >

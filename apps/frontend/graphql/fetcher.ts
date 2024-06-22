@@ -30,7 +30,7 @@ export async function fetcher<TData, TVariables>({
   query,
   signal,
   uploads,
-  variables
+  variables,
 }: Args<TVariables>): Promise<{
   data: TData;
   res: Response;
@@ -54,9 +54,9 @@ export async function fetcher<TData, TVariables>({
         query: getGqlString(query),
         variables: {
           ...variables,
-          ...preVariables
-        }
-      })
+          ...preVariables,
+        },
+      }),
     );
 
     const preMap = new Map<string, string[]>();
@@ -107,7 +107,7 @@ export async function fetcher<TData, TVariables>({
       nextInternalHeaders.get("x-forwarded-for") ?? "0.0.0.0",
     ["x-real-ip"]: nextInternalHeaders.get("x-real-ip") ?? "0.0.0.0",
     "x-vitnode-user-language": cookies().get("NEXT_LOCALE")?.value ?? "en",
-    ...headers
+    ...headers,
   };
 
   const internalQuery = getGqlString(query);
@@ -120,17 +120,17 @@ export async function fetcher<TData, TVariables>({
     headers: uploads
       ? {
           "x-apollo-operation-name": "*",
-          ...internalHeaders
+          ...internalHeaders,
         }
       : {
           "Content-Type": "application/json",
-          ...internalHeaders
+          ...internalHeaders,
         },
     body: uploads
       ? formData
       : JSON.stringify({ query: internalQuery, variables }),
     next,
-    cache
+    cache,
   });
 
   if (internalQuery.trim().startsWith("mutation")) {
@@ -146,7 +146,7 @@ export async function fetcher<TData, TVariables>({
 
   return {
     data: json.data,
-    res
+    res,
   };
 }
 

@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server";
 import {
   Admin__Core_Nav__Show,
   Admin__Core_Nav__ShowQuery,
-  Admin__Core_Nav__ShowQueryVariables
+  Admin__Core_Nav__ShowQueryVariables,
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 import { NavAdminView } from "@/plugins/admin/views/core/styles/nav/nav-admin-view";
@@ -14,7 +14,7 @@ const getData = async () => {
     Admin__Core_Nav__ShowQuery,
     Admin__Core_Nav__ShowQueryVariables
   >({
-    query: Admin__Core_Nav__Show
+    query: Admin__Core_Nav__Show,
   });
 
   return data;
@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("admin.core.styles.nav");
 
   return {
-    title: t("title")
+    title: t("title"),
   };
 }
 

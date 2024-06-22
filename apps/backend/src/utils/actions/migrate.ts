@@ -3,13 +3,13 @@ import * as fs from "fs";
 
 import { sql } from "drizzle-orm";
 import { MigrationMeta } from "drizzle-orm/migrator";
-
 import { ABSOLUTE_PATHS_BACKEND } from "vitnode-backend";
+
 import { db } from "@/database/client";
 
 // Source: https://github.com/drizzle-team/drizzle-orm/blob/main/drizzle-orm/src/migrator.ts
 const readMigrationFiles = ({
-  pluginCode
+  pluginCode,
 }: {
   pluginCode: string;
 }): MigrationMeta[] => {
@@ -47,11 +47,11 @@ const readMigrationFiles = ({
         sql: result,
         bps: journalEntry.breakpoints,
         folderMillis: journalEntry.when,
-        hash: createHash("sha256").update(query).digest("hex")
+        hash: createHash("sha256").update(query).digest("hex"),
       });
     } catch {
       throw new Error(
-        `No file ${migrationPath} found in ${migrationFolderTo} folder`
+        `No file ${migrationPath} found in ${migrationFolderTo} folder`,
       );
     }
   }
@@ -66,7 +66,7 @@ export const migrate = async ({ pluginCode }: { pluginCode: string }) => {
 
   // Create the migration table
   await db.execute(
-    sql`CREATE SCHEMA IF NOT EXISTS ${sql.identifier(migrationsSchema)}`
+    sql`CREATE SCHEMA IF NOT EXISTS ${sql.identifier(migrationsSchema)}`,
   );
   await db.execute(sql`
   CREATE TABLE IF NOT EXISTS ${sql.identifier(migrationsSchema)}.${sql.identifier(migrationsTable)} (
@@ -103,8 +103,8 @@ export const migrate = async ({ pluginCode }: { pluginCode: string }) => {
         // Insert the migration into the migrations table
         await tx.execute(
           sql`insert into ${sql.identifier(migrationsSchema)}.${sql.identifier(
-            migrationsTable
-          )} ("hash", "created_migration", "plugin") values(${migration.hash}, ${migration.folderMillis}, ${pluginCode})`
+            migrationsTable,
+          )} ("hash", "created_migration", "plugin") values(${migration.hash}, ${migration.folderMillis}, ${pluginCode})`,
         );
       }
     }

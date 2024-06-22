@@ -35,10 +35,10 @@ export const useCreateEditCategoryBlogAdmin = ({ data }: Args) => {
           can_read: z.boolean(),
           can_create: z.boolean(),
           can_reply: z.boolean(),
-          can_download_files: z.boolean()
-        })
-      )
-    })
+          can_download_files: z.boolean(),
+        }),
+      ),
+    }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -52,9 +52,9 @@ export const useCreateEditCategoryBlogAdmin = ({ data }: Args) => {
         can_all_create: false,
         can_all_reply: false,
         can_all_download_files: false,
-        groups: []
-      }
-    }
+        groups: [],
+      },
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -75,14 +75,14 @@ export const useCreateEditCategoryBlogAdmin = ({ data }: Args) => {
 
     if (error) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;
     }
 
     toast.success(t(data ? "edit.success" : "create.success"), {
-      description: convertText(values.name)
+      description: convertText(values.name),
     });
 
     setOpen?.(false);

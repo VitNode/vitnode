@@ -6,7 +6,7 @@ import { Loader } from "@/components/loader";
 import {
   AlertDialog,
   AlertDialogContent,
-  AlertDialogTrigger
+  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { ShowCoreNav } from "@/graphql/hooks";
@@ -14,17 +14,17 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 
 const Content = React.lazy(async () =>
   import("./content").then(module => ({
-    default: module.ContentDeleteActionTableNavAdmin
-  }))
+    default: module.ContentDeleteActionTableNavAdmin,
+  })),
 );
 
 export const DeleteActionTableNavAdmin = (
-  props: Pick<ShowCoreNav, "children" | "id" | "name">
+  props: Pick<ShowCoreNav, "children" | "id" | "name">,
 ) => {
   const t = useTranslations("core");
 

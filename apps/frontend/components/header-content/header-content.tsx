@@ -24,14 +24,14 @@ export const HeaderContent = ({
   desc,
   h1,
   h2,
-  ref
+  ref,
 }: HeaderContentH1Props | HeaderContentH2Props) => {
   return (
     <div
       ref={ref}
       className={cn(
         "mb-4 flex min-h-9 flex-col items-start gap-2 sm:flex-row sm:gap-4",
-        className
+        className,
       )}
     >
       <div className="h-full flex-1 space-y-1 text-left sm:self-center">

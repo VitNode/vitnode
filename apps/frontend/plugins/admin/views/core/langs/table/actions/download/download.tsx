@@ -9,12 +9,12 @@ import { ShowCoreLanguages } from "@/graphql/hooks";
 
 const Content = React.lazy(async () =>
   import("./content").then(module => ({
-    default: module.ContentDownloadActionsTableLangsCoreAdmin
-  }))
+    default: module.ContentDownloadActionsTableLangsCoreAdmin,
+  })),
 );
 
 export const DownloadActionsTableLangsCoreAdmin = (
-  props: Pick<ShowCoreLanguages, "code">
+  props: Pick<ShowCoreLanguages, "code">,
 ) => {
   const t = useTranslations("core");
 

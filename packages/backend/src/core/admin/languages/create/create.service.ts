@@ -19,14 +19,14 @@ export class CreateAdminCoreLanguageService {
     const plugins = await this.databaseService.db.query.core_plugins.findMany({
       orderBy: (table, { desc }) => desc(table.updated),
       columns: {
-        code: true
-      }
+        code: true,
+      },
     });
 
     [...plugins, { code: "core" }, { code: "admin" }].forEach(async plugin => {
       const path = join(
         ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin.code }).frontend.language,
-        `${pluginCode}.json`
+        `${pluginCode}.json`,
       );
       if (fs.existsSync(path)) return;
 
@@ -34,10 +34,10 @@ export class CreateAdminCoreLanguageService {
         join(
           ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin.code }).frontend
             .language,
-          "en.json"
+          "en.json",
         ),
         path,
-        { recursive: true }
+        { recursive: true },
       );
     });
   }
@@ -47,17 +47,17 @@ export class CreateAdminCoreLanguageService {
     locale,
     name,
     time_24,
-    timezone
+    timezone,
   }: CreateCoreAdminLanguagesArgs): Promise<ShowCoreLanguages> {
     const language =
       await this.databaseService.db.query.core_languages.findFirst({
-        where: (table, { eq }) => eq(table.code, code)
+        where: (table, { eq }) => eq(table.code, code),
       });
 
     if (language) {
       throw new CustomError({
         code: "LANGUAGE_ALREADY_EXISTS",
-        message: "Language already exists"
+        message: "Language already exists",
       });
     }
 
@@ -69,19 +69,19 @@ export class CreateAdminCoreLanguageService {
         ABSOLUTE_PATHS_BACKEND.uploads.public,
         "assets",
         "en",
-        "manifest.webmanifest"
+        "manifest.webmanifest",
       ),
       join(
         ABSOLUTE_PATHS_BACKEND.uploads.public,
         "assets",
         code,
-        "manifest.webmanifest"
-      )
+        "manifest.webmanifest",
+      ),
     );
 
     const defaultLanguage =
       await this.databaseService.db.query.core_languages.findFirst({
-        where: (table, { eq }) => eq(table.code, "en")
+        where: (table, { eq }) => eq(table.code, "en"),
       });
 
     const newLanguage = await this.databaseService.db
@@ -95,7 +95,7 @@ export class CreateAdminCoreLanguageService {
         enabled: true,
         time_24,
         locale,
-        site_copyright: defaultLanguage.site_copyright
+        site_copyright: defaultLanguage.site_copyright,
       })
       .returning();
 

@@ -11,7 +11,7 @@ export const usePermissionsGroupsAdminAPI = ({ searchValue }: Args) => {
     queryKey: ["Admin__Core_Groups__Show_Short", { search: searchValue }],
     queryFn: async () => queryApi({ search: searchValue }),
     placeholderData: previousData => previousData,
-    refetchOnMount: true
+    refetchOnMount: true,
   });
 
   return { ...query, data: query.data?.admin__core_groups__show.edges ?? [] };

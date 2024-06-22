@@ -13,14 +13,14 @@ import { SkinSelectEmojisContentIconInput } from "./emojis/skin-select";
 
 const EmojisContentIconInput = React.lazy(async () =>
   import("./emojis/emojis").then(module => ({
-    default: module.EmojisContentIconInput
-  }))
+    default: module.EmojisContentIconInput,
+  })),
 );
 
 const IconsContentIconInput = React.lazy(async () =>
   import("./icons/icons").then(module => ({
-    default: module.IconsContentIconInput
-  }))
+    default: module.IconsContentIconInput,
+  })),
 );
 
 export interface IconInputProps {
@@ -31,7 +31,7 @@ export interface IconInputProps {
 
 enum Tab {
   Icon = "icon",
-  Emoji = "emoji"
+  Emoji = "emoji",
 }
 
 export const ContentIconInput = (props: IconInputProps) => {
@@ -39,10 +39,10 @@ export const ContentIconInput = (props: IconInputProps) => {
   const [search, setSearch] = React.useState("");
   const [activeTab, setActiveTab] = React.useState<Tab>(Tab.Icon);
   const localStorageSkinToneIndex = localStorage.getItem(
-    CONFIG.local_storage.editor_skin_tone
+    CONFIG.local_storage.editor_skin_tone,
   );
   const [skinToneIndex, setSkinToneIndex] = React.useState(
-    localStorageSkinToneIndex ? +localStorageSkinToneIndex : 0
+    localStorageSkinToneIndex ? +localStorageSkinToneIndex : 0,
   );
 
   return (
@@ -70,7 +70,7 @@ export const ContentIconInput = (props: IconInputProps) => {
             placeholder={t(
               activeTab === Tab.Icon
                 ? "icons.placeholder"
-                : "emojis.placeholder"
+                : "emojis.placeholder",
             )}
             onChange={e => setSearch(e.target.value)}
             value={search}

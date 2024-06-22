@@ -16,8 +16,8 @@ import { MailService } from "./mail.service";
     EditAdminEmailSettingsService,
     TestAdminEmailSettingsService,
     TestAdminEmailSettingsResolver,
-    MailService
+    MailService,
   ],
-  exports: [MailService]
+  exports: [MailService],
 })
 export class AdminEmailModule {}

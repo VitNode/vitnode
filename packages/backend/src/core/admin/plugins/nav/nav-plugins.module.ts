@@ -22,7 +22,7 @@ import { DeleteAdminNavPluginsService } from "./delete/delete.service";
     EditAdminNavPluginsResolver,
     EditAdminNavPluginsService,
     DeleteAdminNavPluginsResolver,
-    DeleteAdminNavPluginsService
-  ]
+    DeleteAdminNavPluginsService,
+  ],
 })
 export class AdminNavPluginsModule {}

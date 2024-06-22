@@ -10,7 +10,7 @@ import { core_sessions_known_devices } from "../../templates/core/admin/database
 export class CoreMiddlewareCron {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly configService: ConfigService
+    private readonly configService: ConfigService,
   ) {}
 
   @Cron(CronExpression.EVERY_HOUR)
@@ -18,7 +18,7 @@ export class CoreMiddlewareCron {
   async clearKnowDevices() {
     const lastSeen = new Date();
     const lastSeenInDeviceCookie: number = this.configService.getOrThrow(
-      "cookies.known_device.expiresIn"
+      "cookies.known_device.expiresIn",
     );
     lastSeen.setDate(lastSeen.getDate() - lastSeenInDeviceCookie);
 

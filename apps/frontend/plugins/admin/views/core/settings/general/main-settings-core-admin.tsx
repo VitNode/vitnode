@@ -6,7 +6,7 @@ import {
   Form,
   FormField,
   FormFieldRender,
-  FormWrapper
+  FormWrapper,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,7 @@ import { Core_Main_Settings__ShowQuery } from "@/graphql/hooks";
 import { TextLanguageInput } from "@/components/text-language-input";
 
 export const GeneralSettingsCoreAdmin = (
-  props: Core_Main_Settings__ShowQuery
+  props: Core_Main_Settings__ShowQuery,
 ) => {
   const t = useTranslations("admin.core.settings.main");
   const tCore = useTranslations("core");

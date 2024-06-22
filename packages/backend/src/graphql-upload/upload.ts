@@ -6,7 +6,7 @@ interface FileUploadCreateReadStreamOptions {
 }
 
 type FileUploadCreateReadStream = (
-  options?: FileUploadCreateReadStreamOptions
+  options?: FileUploadCreateReadStreamOptions,
 ) => ReadStream;
 
 export interface FileUpload {

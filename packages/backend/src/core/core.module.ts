@@ -3,7 +3,7 @@ import { Module } from "@nestjs/common";
 import { CoreNavModule } from "./nav/nav.module";
 import {
   CoreSessionsModule,
-  GlobalCoreSessionsModule
+  GlobalCoreSessionsModule,
 } from "./sessions/sessions.module";
 import { AdminModule } from "./admin/admin.module";
 import { GlobalCoreHelpersModule } from "./helpers/helpers.module";
@@ -31,7 +31,7 @@ import { CoreThemeEditorModule } from "./theme_editor/theme_editor.module";
     CoreMembersModule,
     CoreMiddlewareModule,
     CoreSettingsModule,
-    CoreThemeEditorModule
-  ]
+    CoreThemeEditorModule,
+  ],
 })
 export class CoreModule {}

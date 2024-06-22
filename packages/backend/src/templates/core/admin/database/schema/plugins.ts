@@ -5,7 +5,7 @@ import {
   pgTable,
   serial,
   timestamp,
-  varchar
+  varchar,
 } from "drizzle-orm/pg-core";
 
 export const core_plugins = pgTable(
@@ -24,10 +24,10 @@ export const core_plugins = pgTable(
     author: varchar("author", { length: 100 }).notNull(),
     author_url: varchar("author_url", { length: 255 }),
     default: boolean("default").notNull().default(false),
-    allow_default: boolean("allow_default").notNull().default(true)
+    allow_default: boolean("allow_default").notNull().default(true),
   },
   table => ({
     code_idx: index("core_plugins_code_idx").on(table.code),
-    name_idx: index("core_plugins_name_idx").on(table.name)
-  })
+    name_idx: index("core_plugins_name_idx").on(table.name),
+  }),
 );

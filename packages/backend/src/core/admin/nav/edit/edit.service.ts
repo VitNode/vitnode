@@ -10,14 +10,14 @@ import { NotFoundError } from "../../../../errors";
 import {
   core_nav,
   core_nav_description,
-  core_nav_name
+  core_nav_name,
 } from "../../../../templates/core/admin/database/schema/nav";
 
 @Injectable()
 export class EditAdminNavService {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly parserTextLang: ParserTextLanguageCoreHelpersService
+    private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
   ) {}
 
   async edit({
@@ -26,10 +26,10 @@ export class EditAdminNavService {
     href,
     icon,
     id,
-    name
+    name,
   }: EditAdminNavArgs): Promise<ShowCoreNav> {
     const nav = await this.databaseService.db.query.core_nav.findFirst({
-      where: (table, { eq }) => eq(table.id, id)
+      where: (table, { eq }) => eq(table.id, id),
     });
 
     if (!nav) {
@@ -41,7 +41,7 @@ export class EditAdminNavService {
       .set({
         href,
         external,
-        icon
+        icon,
       })
       .where(eq(core_nav.id, id))
       .returning();
@@ -49,28 +49,28 @@ export class EditAdminNavService {
     const updatedName = await this.parserTextLang.parse({
       item_id: id,
       database: core_nav_name,
-      data: name
+      data: name,
     });
 
     const updatedDescription = await this.parserTextLang.parse({
       item_id: id,
       database: core_nav_description,
-      data: description
+      data: description,
     });
 
     const children = await this.databaseService.db.query.core_nav.findMany({
       where: (table, { eq }) => eq(table.parent_id, id),
       with: {
         name: true,
-        description: true
-      }
+        description: true,
+      },
     });
 
     return {
       ...updatedNav[0],
       name: updatedName,
       description: updatedDescription,
-      children
+      children,
     };
   }
 }

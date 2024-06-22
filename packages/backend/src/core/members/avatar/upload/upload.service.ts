@@ -16,19 +16,19 @@ export class UploadAvatarCoreMembersService {
   constructor(
     private readonly uploadFile: UploadCoreFilesService,
     private readonly deleteFile: DeleteCoreFilesService,
-    private readonly databaseService: DatabaseService
+    private readonly databaseService: DatabaseService,
   ) {}
 
   async uploadAvatar(
     { avatar, id }: User,
-    { file }: UploadAvatarCoreMembersArgs
+    { file }: UploadAvatarCoreMembersArgs,
   ): Promise<UploadAvatarCoreMembersObj> {
     if (avatar) {
       // Check if avatar exists
       this.deleteFile.checkIfFileExistsAndReturnPath({
         dir_folder: avatar.dir_folder,
         file_name: avatar.file_name,
-        file_secure: false
+        file_secure: false,
       });
 
       // Delete from database
@@ -45,7 +45,7 @@ export class UploadAvatarCoreMembersService {
       maxUploadSizeBytes: 1e6, // 1MB,
       acceptMimeType: ["image/png", "image/jpeg"],
       plugin: "core",
-      folder: "avatars"
+      folder: "avatars",
     });
 
     const uploadFile = uploadFiles[0];
@@ -53,7 +53,7 @@ export class UploadAvatarCoreMembersService {
     if (!uploadFile) {
       throw new CustomError({
         code: "INTERNAL_SERVER_ERROR",
-        message: "We could not upload your avatar. This is error from engine."
+        message: "We could not upload your avatar. This is error from engine.",
       });
     }
 
@@ -62,20 +62,20 @@ export class UploadAvatarCoreMembersService {
       .insert(core_files_avatars)
       .values({
         user_id: id,
-        ...uploadFile
+        ...uploadFile,
       })
       .returning();
 
     if (recordFromDb.length === 0) {
       throw new CustomError({
         code: "INTERNAL_SERVER_ERROR",
-        message: "We could not upload your avatar. This is error from engine."
+        message: "We could not upload your avatar. This is error from engine.",
       });
     }
 
     return {
       ...recordFromDb[0],
-      ...uploadFile
+      ...uploadFile,
     };
   }
 }

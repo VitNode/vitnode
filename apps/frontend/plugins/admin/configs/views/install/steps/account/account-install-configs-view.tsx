@@ -11,7 +11,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { useSignUpView } from "@/plugins/core/hooks/sign/up/use-sign-up-view";
 import { Input } from "@/components/ui/input";
@@ -52,10 +52,10 @@ export const AccountInstallConfigsView = () => {
                       id: () => (
                         <span className="font-medium">
                           {removeSpecialCharacters(
-                            field.value.trimStart().trimEnd()
+                            field.value.trimStart().trimEnd(),
                           )}
                         </span>
-                      )
+                      ),
                     })}
                   </FormDescription>
                 )}
@@ -88,7 +88,7 @@ export const AccountInstallConfigsView = () => {
                 /[a-z]/, // Min 1 lowercase
                 /[A-Z]/, // Min 1 uppercase
                 /\d/, // Min 1 digit
-                /\W|_/ // Min 1 special character
+                /\W|_/, // Min 1 special character
               ];
 
               const passRegexPassword = regexArray.reduce((acc, regex) => {

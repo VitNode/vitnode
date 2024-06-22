@@ -17,12 +17,12 @@ export const useSetDefaultPluginAdmin = (data: ShowAdminPlugins) => {
       description: data.description,
       enabled: data.enabled,
       default: true,
-      supportUrl: data.support_url
+      supportUrl: data.support_url,
     });
 
     if (mutation.error) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;
@@ -30,6 +30,6 @@ export const useSetDefaultPluginAdmin = (data: ShowAdminPlugins) => {
   };
 
   return {
-    onSubmit
+    onSubmit,
   };
 };

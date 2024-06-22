@@ -18,7 +18,7 @@ export class ShowCoreLanguageService {
     first,
     last,
     search = "",
-    sortBy
+    sortBy,
   }: ShowCoreLanguagesArgs): Promise<ShowCoreLanguagesObj> {
     const pagination = await inputPaginationCursor({
       cursor,
@@ -28,20 +28,20 @@ export class ShowCoreLanguageService {
       last,
       primaryCursor: {
         column: "id",
-        schema: core_languages.id
+        schema: core_languages.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: "created"
+        column: "created",
       },
-      sortBy
+      sortBy,
     });
 
     const where = ilike(core_languages.name, `%${search}%`);
 
     const edges = await this.databaseService.db.query.core_languages.findMany({
       ...pagination,
-      where: and(pagination.where, where)
+      where: and(pagination.where, where),
     });
 
     const totalCount = await this.databaseService.db
@@ -54,7 +54,7 @@ export class ShowCoreLanguageService {
       totalCount,
       first,
       cursor,
-      last
+      last,
     });
   }
 }

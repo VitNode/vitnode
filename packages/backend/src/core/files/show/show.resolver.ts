@@ -16,7 +16,7 @@ export class ShowCoreFilesResolver {
   @UseGuards(AuthGuards)
   async core_files__show(
     @CurrentUser() currentUser: User,
-    @Args() args: ShowCoreFilesArgs
+    @Args() args: ShowCoreFilesArgs,
   ): Promise<ShowCoreFilesObj> {
     return this.service.show(currentUser, args);
   }

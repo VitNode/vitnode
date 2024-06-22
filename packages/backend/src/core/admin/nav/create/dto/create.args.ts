@@ -4,7 +4,7 @@ import {
   IsArray,
   IsNotEmpty,
   MaxLength,
-  ValidateNested
+  ValidateNested,
 } from "class-validator";
 import { Transform } from "class-transformer";
 
@@ -12,7 +12,7 @@ import {
   IsTextLanguageInput,
   TextLanguageInput,
   TransformString,
-  TransformTextLanguageInput
+  TransformTextLanguageInput,
 } from "../../../../../utils";
 
 @ArgsType()

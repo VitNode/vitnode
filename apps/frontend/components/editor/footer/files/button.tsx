@@ -26,8 +26,8 @@ export const FilesButtonFooterEditor = () => {
             file => ({
               file,
               isLoading: true,
-              id: Math.floor(Math.random() * 1000) + file.size
-            })
+              id: Math.floor(Math.random() * 1000) + file.size,
+            }),
           );
 
           await uploadFiles({ files });

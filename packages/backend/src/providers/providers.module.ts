@@ -9,17 +9,17 @@ import { EmailHelpersService } from "./email/email-helpers.service";
   providers: [
     {
       provide: "IOAdminAuthGuards",
-      useClass: AuthorizationAdminSessionsService
+      useClass: AuthorizationAdminSessionsService,
     },
     {
       provide: "IOAuthGuards",
-      useClass: InternalAuthorizationCoreSessionsService
+      useClass: InternalAuthorizationCoreSessionsService,
     },
     {
       provide: "EmailHelpersService",
-      useClass: EmailHelpersService
-    }
+      useClass: EmailHelpersService,
+    },
   ],
-  exports: ["IOAdminAuthGuards", "IOAuthGuards", "EmailHelpersService"]
+  exports: ["IOAdminAuthGuards", "IOAuthGuards", "EmailHelpersService"],
 })
 export class GlobalProvidersModule {}

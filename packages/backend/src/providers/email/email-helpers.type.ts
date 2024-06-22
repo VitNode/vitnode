@@ -1,23 +1,23 @@
 import { EmailTemplateProps } from "./template/email-template";
 
 export interface GetHelpersForEmailType {
-  site_name: string;
-  site_short_name: string;
-  frontend_url: string;
   color: {
-    primary: {
-      DEFAULT: string;
-      foreground: string;
-    };
     background: string;
-    foreground: string;
-    card: string;
     border: string;
+    card: string;
+    foreground: string;
     muted: {
       DEFAULT: string;
       foreground: string;
     };
+    primary: {
+      DEFAULT: string;
+      foreground: string;
+    };
   };
+  frontend_url: string;
+  site_name: string;
+  site_short_name: string;
 }
 
 export interface EmailHelpersServiceType {

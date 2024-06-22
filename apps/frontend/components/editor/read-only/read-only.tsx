@@ -18,7 +18,7 @@ interface Props {
 export const ReadOnlyEditor = async ({
   allowDownloadAttachments,
   className,
-  value
+  value,
 }: Props) => {
   const locale = useLocale();
 
@@ -31,7 +31,7 @@ export const ReadOnlyEditor = async ({
     }
 
     const currentEnglish = value.find(
-      item => item.language_code === "en"
+      item => item.language_code === "en",
     )?.value;
 
     if (currentEnglish) {
@@ -69,7 +69,7 @@ export const ReadOnlyEditor = async ({
             sizes="100vw"
             style={{
               width: "100%",
-              height: "auto"
+              height: "auto",
             }}
             width={500}
             height={300}
@@ -98,14 +98,14 @@ export const ReadOnlyEditor = async ({
           />
         );
       }
-    }
+    },
   };
 
   return (
     <div
       className={cn(
         "break-words [&>*:not(:last-child)]:mb-[0.5rem]",
-        className
+        className,
       )}
     >
       {parse(getText(), options)}

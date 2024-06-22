@@ -10,7 +10,7 @@ export class ShowCoreLanguagesResolver {
 
   @Query(() => ShowCoreLanguagesObj)
   async core_languages__show(
-    @Args() args: ShowCoreLanguagesArgs
+    @Args() args: ShowCoreLanguagesArgs,
   ): Promise<ShowCoreLanguagesObj> {
     return this.service.show(args);
   }

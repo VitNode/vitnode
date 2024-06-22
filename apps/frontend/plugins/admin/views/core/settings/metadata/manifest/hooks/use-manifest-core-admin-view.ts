@@ -10,14 +10,14 @@ import { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";
 
 export const useManifestCoreAdminView = ({
-  admin__core_manifest_metadata__show: data
+  admin__core_manifest_metadata__show: data,
 }: Admin__Core_Manifest_Metadata__ShowQuery) => {
   const t = useTranslations("core");
   const formSchema = z.object({
     display: z.enum(["fullscreen", "standalone", "minimal-ui", "browser"]),
     start_url: z.string().min(1),
     theme_color: z.string().min(1),
-    background_color: z.string().min(1)
+    background_color: z.string().min(1),
   });
 
   const themeColor = convertColor.hexToHSL(data.theme_color);
@@ -32,8 +32,8 @@ export const useManifestCoreAdminView = ({
         : "",
       background_color: backgroundColor
         ? `hsl(${backgroundColor.h}, ${backgroundColor.s}%, ${backgroundColor.l}%)`
-        : ""
-    }
+        : "",
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -45,12 +45,12 @@ export const useManifestCoreAdminView = ({
       themeColor: themeColor ? convertColor.hslToHex(themeColor) : "",
       backgroundColor: backgroundColor
         ? convertColor.hslToHex(backgroundColor)
-        : ""
+        : "",
     });
 
     if (mutation.error) {
       toast.error(t("errors.title"), {
-        description: t("errors.internal_server_error")
+        description: t("errors.internal_server_error"),
       });
 
       return;
@@ -62,6 +62,6 @@ export const useManifestCoreAdminView = ({
 
   return {
     form,
-    onSubmit
+    onSubmit,
   };
 };

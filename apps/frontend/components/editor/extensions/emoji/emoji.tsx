@@ -11,7 +11,7 @@ init({ data: emojiMartData });
 const EmojiPluginKey = new PluginKey("emoji-search");
 
 export const EmojiExtensionEditor = Mention.extend({
-  name: "emoji-search"
+  name: "emoji-search",
 }).configure({
   HTMLAttributes: {},
   suggestion: {
@@ -24,7 +24,7 @@ export const EmojiExtensionEditor = Mention.extend({
         .deleteRange(range)
         .insertContent({
           type: "text",
-          text: `${props.id}`
+          text: `${props.id}`,
         })
         .run();
     },
@@ -40,8 +40,8 @@ export const EmojiExtensionEditor = Mention.extend({
         onStart,
         onUpdate,
         onKeyDown,
-        onExit
+        onExit,
       };
-    }
-  }
+    },
+  },
 });

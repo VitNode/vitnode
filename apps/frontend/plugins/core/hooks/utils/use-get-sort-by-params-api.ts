@@ -3,7 +3,7 @@ import { useSearchParams } from "next/navigation";
 import { SortDirectionEnum } from "@/graphql/hooks";
 
 export function useGetSortByParamsAPI<T extends Record<string, unknown>>({
-  constEnum
+  constEnum,
 }: {
   constEnum?: T;
 }): {
@@ -13,7 +13,7 @@ export function useGetSortByParamsAPI<T extends Record<string, unknown>>({
   const searchParams = useSearchParams();
   const sort = {
     by: searchParams.get("sortBy")?.toLowerCase(),
-    direction: searchParams.get("sortDirection")?.toLowerCase()
+    direction: searchParams.get("sortDirection")?.toLowerCase(),
   };
 
   if (
@@ -29,6 +29,6 @@ export function useGetSortByParamsAPI<T extends Record<string, unknown>>({
   return {
     column: sort.by as keyof T,
     direction:
-      sort.direction === "asc" ? SortDirectionEnum.asc : SortDirectionEnum.desc
+      sort.direction === "asc" ? SortDirectionEnum.asc : SortDirectionEnum.desc,
   };
 }

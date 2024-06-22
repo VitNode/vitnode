@@ -4,7 +4,7 @@ import { CorsOptions } from "@nestjs/common/interfaces/external/cors-options.int
 
 import {
   ProcessRequestOptions,
-  graphqlUploadExpress
+  graphqlUploadExpress,
 } from "./graphql-upload/graphql-upload-express";
 
 interface CorsOptionsMain extends Omit<CorsOptions, "credentials"> {
@@ -23,21 +23,21 @@ export const nestjsMainApp = async (app: INestApplication, options?: Args) => {
     credentials: true,
     origin: [
       "https://sandbox.embed.apollographql.com",
-      ...(options?.cors?.origin ?? [])
-    ]
+      ...(options?.cors?.origin ?? []),
+    ],
   });
 
   // Class Validation
   app.useGlobalPipes(
     new ValidationPipe({
-      transform: true
-    })
+      transform: true,
+    }),
   );
 
   app.use(
     graphqlUploadExpress({
       maxFiles: options?.graphqlUpload ? options.graphqlUpload.maxFiles : 100,
-      ...options?.graphqlUpload
-    })
+      ...options?.graphqlUpload,
+    }),
   );
 };

@@ -7,7 +7,7 @@ import { eq } from "drizzle-orm";
 import {
   currentUnixDate,
   generateRandomString,
-  removeSpecialCharacters
+  removeSpecialCharacters,
 } from "@vitnode/shared";
 
 import { DownloadAdminPluginsArgs } from "./dto/download.args";
@@ -28,21 +28,21 @@ export class DownloadAdminPluginsService {
   protected createFolders(path: string): void {
     if (!fs.existsSync(path)) {
       fs.mkdirSync(path, {
-        recursive: true
+        recursive: true,
       });
     }
   }
 
   protected copyFiles({
     destination,
-    source
+    source,
   }: {
     destination: string;
     source: string;
   }): void {
     if (fs.existsSync(source)) {
       fs.cpSync(source, destination, {
-        recursive: true
+        recursive: true,
       });
     }
   }
@@ -68,7 +68,7 @@ export class DownloadAdminPluginsService {
     frontendPaths.forEach(path => {
       this.copyFiles({
         destination: join(frontendPath, path),
-        source: ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend[path]
+        source: ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend[path],
       });
     });
 
@@ -78,15 +78,15 @@ export class DownloadAdminPluginsService {
   protected async updateVersion({
     code,
     version,
-    version_code
+    version_code,
   }: DownloadAdminPluginsArgs): Promise<void> {
     // Update allow_default in config.json
     const pathInfoJSON = ABSOLUTE_PATHS_BACKEND.plugin({ code }).config;
     const infoJSON: PluginInfoJSONType = JSON.parse(
-      fs.readFileSync(pathInfoJSON, "utf-8")
+      fs.readFileSync(pathInfoJSON, "utf-8"),
     );
     const allow_default = fs.existsSync(
-      ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend.default_page
+      ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend.default_page,
     );
     infoJSON.allow_default = allow_default;
 
@@ -98,10 +98,10 @@ export class DownloadAdminPluginsService {
         if (err) {
           throw new CustomError({
             code: "ERROR_UPDATING_INFO_JSON",
-            message: err.message
+            message: err.message,
           });
         }
-      }
+      },
     );
 
     if (!version || !version_code) {
@@ -110,7 +110,7 @@ export class DownloadAdminPluginsService {
         .update(core_plugins)
         .set({
           allow_default,
-          updated: new Date()
+          updated: new Date(),
         })
         .where(eq(core_plugins.code, code));
 
@@ -123,7 +123,7 @@ export class DownloadAdminPluginsService {
         version,
         version_code,
         allow_default,
-        updated: new Date()
+        updated: new Date(),
       })
       .where(eq(core_plugins.code, code))
       .returning();
@@ -132,12 +132,12 @@ export class DownloadAdminPluginsService {
     if (!fs.existsSync(pathToVersions)) {
       throw new CustomError({
         code: "VERSIONS_FILE_NOT_FOUND",
-        message: "Versions file not found"
+        message: "Versions file not found",
       });
     }
 
     const versions: Record<number, string> = JSON.parse(
-      fs.readFileSync(pathToVersions, "utf-8")
+      fs.readFileSync(pathToVersions, "utf-8"),
     );
     versions[version_code] = version;
     fs.writeFileSync(pathToVersions, JSON.stringify(versions, null, 2));
@@ -149,28 +149,28 @@ export class DownloadAdminPluginsService {
     if (!fs.existsSync(schemaPath)) return;
     if (!fs.existsSync(path)) {
       fs.mkdirSync(path, {
-        recursive: true
+        recursive: true,
       });
     }
 
     try {
       await execShellCommand(
-        `npx drizzle-kit up --config src/plugins/${code}/admin/database/drizzle.config.ts && npx drizzle-kit generate --config src/plugins/${code}/admin/database/drizzle.config.ts`
+        `npx drizzle-kit up --config src/plugins/${code}/admin/database/drizzle.config.ts && npx drizzle-kit generate --config src/plugins/${code}/admin/database/drizzle.config.ts`,
       );
     } catch (err) {
       throw new CustomError({
         code: "GENERATE_MIGRATION_ERROR",
-        message: "Error generating migration"
+        message: "Error generating migration",
       });
     }
   }
 
   async download(
     { code, version, version_code }: DownloadAdminPluginsArgs,
-    { id: userId }: User
+    { id: userId }: User,
   ): Promise<string> {
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
-      where: (table, { eq }) => eq(table.code, code)
+      where: (table, { eq }) => eq(table.code, code),
     });
 
     if (!plugin) {
@@ -184,7 +184,7 @@ export class DownloadAdminPluginsService {
     const name = removeSpecialCharacters(
       `${code}${
         version && version_code ? version_code : plugin.version_code
-      }--${userId}-${generateRandomString(5)}-${currentUnixDate()}`
+      }--${userId}-${generateRandomString(5)}-${currentUnixDate()}`,
     );
     const tempPath = await this.prepareTgz({ code });
 
@@ -194,9 +194,9 @@ export class DownloadAdminPluginsService {
           {
             gzip: true,
             file: join(ABSOLUTE_PATHS_BACKEND.uploads.temp, `${name}.tgz`),
-            cwd: tempPath
+            cwd: tempPath,
           },
-          ["."]
+          ["."],
         )
         .then(() => {
           // Remove temp folder
@@ -205,7 +205,7 @@ export class DownloadAdminPluginsService {
     } catch (error) {
       throw new CustomError({
         code: "CREATE_TGZ_ERROR",
-        message: "Error creating tgz file"
+        message: "Error creating tgz file",
       });
     }
 

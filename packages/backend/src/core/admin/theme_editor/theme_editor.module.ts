@@ -4,6 +4,6 @@ import { EditAdminThemeEditorService } from "./edit/edit.service";
 import { EditAdminThemeEditorResolver } from "./edit/edit.resolver";
 
 @Module({
-  providers: [EditAdminThemeEditorService, EditAdminThemeEditorResolver]
+  providers: [EditAdminThemeEditorService, EditAdminThemeEditorResolver],
 })
 export class AdminThemeEditorModule {}

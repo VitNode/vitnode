@@ -4,7 +4,7 @@ import {
   PaintRoller,
   Settings,
   Shield,
-  User
+  User,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@vitnode/frontend/navigation";
@@ -17,7 +17,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
-  DropdownMenuLabel
+  DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import { useSession } from "@/plugins/core/hooks/use-session";
 import { useSignOutAPI } from "@/plugins/core/hooks/sign/out/use-sign-out-api";

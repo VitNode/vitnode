@@ -7,7 +7,7 @@ import * as tar from "tar";
 import {
   currentUnixDate,
   generateRandomString,
-  removeSpecialCharacters
+  removeSpecialCharacters,
 } from "@vitnode/shared";
 
 import { DownloadCoreAdminLanguagesArgs } from "./dto/download.args";
@@ -23,11 +23,11 @@ export class DownloadAdminCoreLanguageService {
 
   async download(
     { id: userId }: User,
-    { code, plugins: pluginsToInclude }: DownloadCoreAdminLanguagesArgs
+    { code, plugins: pluginsToInclude }: DownloadCoreAdminLanguagesArgs,
   ): Promise<string> {
     const language =
       await this.databaseService.db.query.core_languages.findFirst({
-        where: (language, { eq }) => eq(language.code, code)
+        where: (language, { eq }) => eq(language.code, code),
       });
 
     if (!language) {
@@ -39,7 +39,7 @@ export class DownloadAdminCoreLanguageService {
     const pathTemp = join(
       ABSOLUTE_PATHS_BACKEND.uploads.temp,
       "langs",
-      tempNameFolder
+      tempNameFolder,
     );
     if (!fs.existsSync(pathTemp)) {
       fs.mkdirSync(pathTemp, { recursive: true });
@@ -48,14 +48,14 @@ export class DownloadAdminCoreLanguageService {
     const plugins = await this.databaseService.db.query.core_plugins.findMany({
       orderBy: (plugin, { desc }) => desc(plugin.updated),
       columns: {
-        code: true
-      }
+        code: true,
+      },
     });
 
     [...plugins, { code: "admin" }, { code: "core" }].forEach(plugin => {
       const path = join(
         ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin.code }).frontend.language,
-        `${code}.json`
+        `${code}.json`,
       );
       if (
         !fs.existsSync(path) ||
@@ -68,7 +68,7 @@ export class DownloadAdminCoreLanguageService {
     });
 
     const name = removeSpecialCharacters(
-      `${language.code}--${userId}-${generateRandomString(5)}-${currentUnixDate()}`
+      `${language.code}--${userId}-${generateRandomString(5)}-${currentUnixDate()}`,
     );
 
     // Create tgz
@@ -77,9 +77,9 @@ export class DownloadAdminCoreLanguageService {
         {
           gzip: true,
           file: join(ABSOLUTE_PATHS_BACKEND.uploads.temp, `${name}.tgz`),
-          cwd: pathTemp
+          cwd: pathTemp,
         },
-        ["."]
+        ["."],
       );
 
       // Remove temp folder
@@ -87,7 +87,7 @@ export class DownloadAdminCoreLanguageService {
     } catch (error) {
       throw new CustomError({
         code: "LANGUAGE_DOWNLOAD_ERROR",
-        message: "Error creating tgz"
+        message: "Error creating tgz",
       });
     }
 

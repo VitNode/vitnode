@@ -10,14 +10,14 @@ interface Props {
 }
 
 const getDescription = async ({
-  locale
+  locale,
 }: {
   locale: Props["params"]["locale"];
 }): Promise<string> => {
   const {
     data: {
-      core_settings__show: { site_description }
-    }
+      core_settings__show: { site_description },
+    },
   } = await getSessionData();
 
   const textFromLang = site_description.find(t => t.language_code === locale);
@@ -30,10 +30,10 @@ const getDescription = async ({
 };
 
 export async function generateMetadata({
-  params: { locale }
+  params: { locale },
 }: Props): Promise<Metadata> {
   return {
-    description: await getDescription({ locale })
+    description: await getDescription({ locale }),
   };
 }
 
@@ -42,7 +42,7 @@ export default async function Page() {
   const PageFromTheme: React.LazyExoticComponent<() => JSX.Element> =
     React.lazy(
       async () =>
-        import(`../../../plugins/${default_plugin}/templates/default-page`)
+        import(`../../../plugins/${default_plugin}/templates/default-page`),
     );
 
   return <PageFromTheme />;

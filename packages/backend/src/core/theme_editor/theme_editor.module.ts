@@ -18,10 +18,10 @@ export const keysFromCSSThemeEditor = [
   "accent",
   "accent-foreground",
   "card",
-  "border"
+  "border",
 ] as const;
 
 @Module({
-  providers: [ShowCoreThemeEditorResolver, ShowCoreThemeEditorService]
+  providers: [ShowCoreThemeEditorResolver, ShowCoreThemeEditorService],
 })
 export class CoreThemeEditorModule {}

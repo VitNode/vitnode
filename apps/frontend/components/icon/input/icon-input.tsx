@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger
+  PopoverTrigger,
 } from "@/components/ui/popover";
 import { Loader } from "@/components/loader";
 import { IconInputProps } from "./content/content";
@@ -17,14 +17,14 @@ import { IconLucideNames } from "../icon";
 
 const IconClient = React.lazy(async () =>
   import("../icon-client").then(module => ({
-    default: module.IconClient
-  }))
+    default: module.IconClient,
+  })),
 );
 
 const Content = React.lazy(async () =>
   import("./content/content").then(module => ({
-    default: module.ContentIconInput
-  }))
+    default: module.ContentIconInput,
+  })),
 );
 
 interface Props extends Omit<IconInputProps, "setOpen"> {

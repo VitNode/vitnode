@@ -15,7 +15,7 @@ export class DeleteCoreEditorResolver {
   @UseGuards(AuthGuards)
   async core_editor_files__delete(
     @CurrentUser() currentUser: User,
-    @Args() args: DeleteCoreEditorArgs
+    @Args() args: DeleteCoreEditorArgs,
   ): Promise<string> {
     return this.service.delete(currentUser, args);
   }

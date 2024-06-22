@@ -18,7 +18,7 @@ export class CreateAdminPluginsService {
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly createFilesService: CreateFilesAdminPluginsService,
-    private readonly changeFilesService: ChangeFilesAdminPluginsService
+    private readonly changeFilesService: ChangeFilesAdminPluginsService,
   ) {}
 
   async create({
@@ -27,16 +27,16 @@ export class CreateAdminPluginsService {
     code,
     description,
     name,
-    support_url
+    support_url,
   }: CreateAdminPluginsArgs): Promise<ShowAdminPlugins> {
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
-      where: (table, { eq }) => eq(table.code, code)
+      where: (table, { eq }) => eq(table.code, code),
     });
 
     if (plugin || code === "admin" || code === "core" || code === "members") {
       throw new CustomError({
         code: "PLUGIN_ALREADY_EXISTS",
-        message: `Plugin already exists with "${code}" code!`
+        message: `Plugin already exists with "${code}" code!`,
       });
     }
 
@@ -49,19 +49,19 @@ export class CreateAdminPluginsService {
       name,
       support_url,
       allow_default: true,
-      nav: []
+      nav: [],
     });
     this.changeFilesService.changeFilesWhenCreate({ code });
 
     // Create lang.json file inside the plugin frontend folder
     const languages =
       await this.databaseService.db.query.core_languages.findMany({
-        orderBy: (table, { asc }) => asc(table.code)
+        orderBy: (table, { asc }) => asc(table.code),
       });
 
     languages.forEach(async lang => {
       const langPath = join(
-        ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend.language
+        ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend.language,
       );
 
       if (!fs.existsSync(langPath)) {
@@ -73,13 +73,13 @@ export class CreateAdminPluginsService {
         JSON.stringify(
           {
             [code]: {
-              admin: {}
-            }
+              admin: {},
+            },
           },
           null,
-          2
+          2,
         ),
-        "utf-8"
+        "utf-8",
       );
     });
 
@@ -91,7 +91,7 @@ export class CreateAdminPluginsService {
         name,
         support_url,
         author,
-        author_url
+        author_url,
       })
       .returning();
 

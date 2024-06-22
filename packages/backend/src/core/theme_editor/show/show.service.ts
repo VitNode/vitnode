@@ -6,7 +6,7 @@ import { Injectable } from "@nestjs/common";
 import {
   ColorsShowCoreThemeEditor,
   HslColor,
-  ShowCoreThemeEditorObj
+  ShowCoreThemeEditorObj,
 } from "./dto/show.obj";
 import { keysFromCSSThemeEditor } from "../theme_editor.module";
 
@@ -25,13 +25,13 @@ export class ShowCoreThemeEditorService {
     return {
       h: values[0],
       s: values[1],
-      l: values[2]
+      l: values[2],
     };
   }
 
   protected getVariable({
     cssAsString,
-    variable
+    variable,
   }: {
     cssAsString: string;
     variable: string;
@@ -43,7 +43,7 @@ export class ShowCoreThemeEditorService {
     let match: RegExpExecArray | null;
     const values = {
       light: "",
-      dark: ""
+      dark: "",
     };
 
     while ((match = regex.exec(cssAsString)) !== null) {
@@ -62,7 +62,7 @@ export class ShowCoreThemeEditorService {
 
     return {
       light: this.parseStringToHsl(values.light),
-      dark: this.parseStringToHsl(values.dark)
+      dark: this.parseStringToHsl(values.dark),
     };
   }
 
@@ -70,7 +70,7 @@ export class ShowCoreThemeEditorService {
     const pathToCss = join(
       ABSOLUTE_PATHS_BACKEND.plugin({ code: "core" }).frontend.templates,
       "layout",
-      "global.css"
+      "global.css",
     );
 
     if (!fs.existsSync(pathToCss)) {
@@ -82,16 +82,16 @@ export class ShowCoreThemeEditorService {
       (acc, variable) => {
         acc[variable.replace("-", "_")] = this.getVariable({
           cssAsString,
-          variable
+          variable,
         });
 
         return acc;
       },
-      {} as ColorsShowCoreThemeEditor
+      {} as ColorsShowCoreThemeEditor,
     );
 
     return {
-      colors
+      colors,
     };
   }
 }

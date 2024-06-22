@@ -3,13 +3,13 @@ import {
   ChevronDownIcon,
   List,
   ListOrdered,
-  Strikethrough
+  Strikethrough,
 } from "lucide-react";
 
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger
+  PopoverTrigger,
 } from "@/components/ui/popover";
 import { ToggleToolbarEditor } from "../toggle";
 import { ButtonToolbarEditor } from "../button";

@@ -14,7 +14,7 @@ export class EditAdminManifestMetadataResolver {
   @Mutation(() => ShowAdminManifestMetadataObj)
   @UseGuards(AdminAuthGuards)
   async admin__core_manifest_metadata__edit(
-    @Args() args: EditAdminManifestMetadataObj
+    @Args() args: EditAdminManifestMetadataObj,
   ): Promise<ShowAdminManifestMetadataObj> {
     return this.service.edit(args);
   }

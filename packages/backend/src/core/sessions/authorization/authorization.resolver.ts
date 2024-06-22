@@ -11,7 +11,7 @@ export class AuthorizationCoreSessionsResolver {
 
   @Query(() => AuthorizationCoreSessionsObj)
   async core_sessions__authorization(
-    @Context() context: Ctx
+    @Context() context: Ctx,
   ): Promise<AuthorizationCoreSessionsObj> {
     return this.service.authorization(context);
   }

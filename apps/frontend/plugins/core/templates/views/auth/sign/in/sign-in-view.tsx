@@ -5,7 +5,7 @@ import {
   Card,
   CardDescription,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from "@/components/ui/card";
 import { FormSignIn } from "./form/form-sign-in";
 
@@ -19,7 +19,7 @@ export const SignInView = () => {
           <CardTitle className="text-2xl">{t("title")}</CardTitle>
           <CardDescription>
             {t.rich("desc", {
-              link: () => <Link href="/register">{t("sign_up")}</Link>
+              link: () => <Link href="/register">{t("sign_up")}</Link>,
             })}
           </CardDescription>
         </CardHeader>

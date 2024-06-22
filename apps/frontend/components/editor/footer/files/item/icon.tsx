@@ -14,7 +14,7 @@ export const IconItemListFilesFooterEditor = ({
   alt,
   isError,
   isLoading,
-  src
+  src,
 }: Props) => {
   if (isLoading) {
     return <Loader />;

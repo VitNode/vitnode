@@ -5,7 +5,7 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle
+  AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { ShowAdminGroups } from "@/graphql/hooks";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
@@ -14,7 +14,7 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -22,7 +22,7 @@ import { useDeleteGroupAdmin } from "./hooks/use-delete-group-admin";
 
 export const ContentDeleteGroupsMembersDialogAdmin = ({
   id,
-  name
+  name,
 }: Pick<ShowAdminGroups, "id" | "name">) => {
   const t = useTranslations("admin.members.groups.delete");
   const tCore = useTranslations("core");
@@ -45,7 +45,7 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({
                   <span className="text-foreground font-semibold">
                     {formatName}
                   </span>
-                )
+                ),
               })}
             </p>
 

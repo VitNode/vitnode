@@ -14,7 +14,7 @@ export class EditAdminEmailSettingsResolver {
   @Mutation(() => ShowAdminEmailSettingsServiceObj)
   @UseGuards(AdminAuthGuards)
   admin__core_email_settings__edit(
-    @Args() args: EditAdminEmailSettingsServiceArgs
+    @Args() args: EditAdminEmailSettingsServiceArgs,
   ): ShowAdminEmailSettingsServiceObj {
     return this.service.edit(args);
   }

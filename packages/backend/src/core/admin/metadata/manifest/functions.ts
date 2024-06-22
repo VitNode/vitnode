@@ -6,7 +6,7 @@ import { ShowAdminManifestMetadataObj } from "./show/dto/show.obj";
 import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from "../../../..";
 
 export const getManifest = ({
-  lang_code
+  lang_code,
 }: {
   lang_code: string;
 }): ShowAdminManifestMetadataObj => {
@@ -14,7 +14,7 @@ export const getManifest = ({
     ABSOLUTE_PATHS_BACKEND.uploads.public,
     "assets",
     lang_code,
-    "manifest.webmanifest"
+    "manifest.webmanifest",
   );
 
   if (!fs.existsSync(path)) {

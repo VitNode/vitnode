@@ -9,8 +9,8 @@ import { ShowAdminPlugins } from "@/graphql/hooks";
 
 const Content = React.lazy(async () =>
   import("./content").then(module => ({
-    default: module.ContentDownloadActionDevPluginAdmin
-  }))
+    default: module.ContentDownloadActionDevPluginAdmin,
+  })),
 );
 
 export const DownloadActionDevPluginAdmin = (props: ShowAdminPlugins) => {

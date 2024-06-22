@@ -7,38 +7,38 @@ import { DatabaseService } from "../../../../database";
 import { ParserTextLanguageCoreHelpersService } from "../../../helpers/text_language/parser/parser.service";
 import {
   core_groups,
-  core_groups_names
+  core_groups_names,
 } from "../../../../templates/core/admin/database/schema/groups";
 
 @Injectable()
 export class CreateAdminGroupsService {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly parserTextLang: ParserTextLanguageCoreHelpersService
+    private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
   ) {}
 
   async create({
     content,
-    name
+    name,
   }: CreateAdminGroupsArgs): Promise<ShowAdminGroups> {
     const group = await this.databaseService.db
       .insert(core_groups)
       .values({
-        ...content
+        ...content,
       })
       .returning();
 
     const groupNames = await this.parserTextLang.parse({
       item_id: group[0].id,
       database: core_groups_names,
-      data: name
+      data: name,
     });
 
     return {
       ...group[0],
       name: groupNames,
       users_count: 0,
-      content
+      content,
     };
   }
 }

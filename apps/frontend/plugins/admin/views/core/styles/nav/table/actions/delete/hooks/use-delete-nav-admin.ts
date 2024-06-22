@@ -8,7 +8,7 @@ import { mutationApi } from "./mutation-api";
 
 export const useDeleteNavAdmin = ({
   id,
-  name
+  name,
 }: Pick<ShowCoreNav, "id" | "name">) => {
   const t = useTranslations("admin.core.styles.nav.delete");
   const tCore = useTranslations("core");
@@ -19,14 +19,14 @@ export const useDeleteNavAdmin = ({
     const mutation = await mutationApi({ id });
     if (mutation.error) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;
     }
 
     toast.success(t("success"), {
-      description: convertText(name)
+      description: convertText(name),
     });
 
     setOpen(false);

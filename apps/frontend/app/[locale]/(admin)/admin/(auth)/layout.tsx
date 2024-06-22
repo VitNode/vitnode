@@ -16,7 +16,7 @@ interface Props {
 export async function generateMetadata(): Promise<Metadata> {
   const [config, t] = await Promise.all([
     getConfigFile(),
-    getTranslations("admin")
+    getTranslations("admin"),
   ]);
 
   const defaultTitle = `${t("title_short")} - ${config.settings.general.site_name}`;
@@ -24,8 +24,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: {
       default: defaultTitle,
-      template: `%s - ${defaultTitle}`
-    }
+      template: `%s - ${defaultTitle}`,
+    },
   };
 }
 

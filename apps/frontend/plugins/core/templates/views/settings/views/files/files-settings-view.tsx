@@ -7,8 +7,8 @@ import { Loader } from "@/components/loader";
 
 const ContentFilesSettings = React.lazy(async () =>
   import("./content").then(module => ({
-    default: module.ContentFilesSettings
-  }))
+    default: module.ContentFilesSettings,
+  })),
 );
 
 export const FilesSettingsView = (props: Core_Members__Files__ShowQuery) => {

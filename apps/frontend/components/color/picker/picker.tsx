@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import {
   checkColorType,
   convertColor,
-  isColorBrightness
+  isColorBrightness,
 } from "@vitnode/shared";
 import { cn } from "@vitnode/frontend/helpers";
 
@@ -16,7 +16,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 
 const presetColors: { color: HslColor; name: string }[] = [
@@ -25,97 +25,97 @@ const presetColors: { color: HslColor; name: string }[] = [
     color: {
       h: 0,
       s: 80,
-      l: 45
-    }
+      l: 45,
+    },
   },
   {
     name: "Orange",
     color: {
       h: 30,
       s: 80,
-      l: 45
-    }
+      l: 45,
+    },
   },
   {
     name: "Yellow",
     color: {
       h: 60,
       s: 80,
-      l: 45
-    }
+      l: 45,
+    },
   },
   {
     name: "Lime",
     color: {
       h: 150,
       s: 80,
-      l: 45
-    }
+      l: 45,
+    },
   },
   {
     name: "Green",
     color: {
       h: 150,
       s: 80,
-      l: 45
-    }
+      l: 45,
+    },
   },
   {
     name: "Teal",
     color: {
       h: 180,
       s: 80,
-      l: 45
-    }
+      l: 45,
+    },
   },
   {
     name: "Cyan",
     color: {
       h: 210,
       s: 80,
-      l: 45
-    }
+      l: 45,
+    },
   },
   {
     name: "Blue",
     color: {
       h: 240,
       s: 80,
-      l: 45
-    }
+      l: 45,
+    },
   },
   {
     name: "Indigo",
     color: {
       h: 270,
       s: 80,
-      l: 45
-    }
+      l: 45,
+    },
   },
   {
     name: "Purple",
     color: {
       h: 300,
       s: 80,
-      l: 45
-    }
+      l: 45,
+    },
   },
   {
     name: "Magenta",
     color: {
       h: 330,
       s: 80,
-      l: 45
-    }
+      l: 45,
+    },
   },
   {
     name: "Primary",
     color: {
       h: 221.2,
       s: 83.2,
-      l: 53.3
-    }
-  }
+      l: 53.3,
+    },
+  },
 ];
 
 interface Props {
@@ -127,7 +127,7 @@ interface Props {
 export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
   const t = useTranslations("core.colors");
   const [internalColor, setInternalColor] = React.useState<HslColor | null>(
-    color
+    color,
   );
   const inputRef = React.useRef<HTMLInputElement>(null);
   const colorBrightness = internalColor
@@ -179,7 +179,7 @@ export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
           internalColor ?? {
             h: 0,
             s: 0,
-            l: 0
+            l: 0,
           }
         }
         onChange={color => {
@@ -197,7 +197,7 @@ export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
             type="text"
             className={cn("h-9", {
               "text-black": internalColor && colorBrightness,
-              "text-white": internalColor && !colorBrightness
+              "text-white": internalColor && !colorBrightness,
             })}
             ref={inputRef}
             defaultValue={
@@ -208,7 +208,7 @@ export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
             style={{
               backgroundColor: internalColor
                 ? `hsl(${internalColor.h}, ${internalColor.s}%, ${internalColor.l}%)`
-                : ""
+                : "",
             }}
             onChange={e => handleInput(e.target.value)}
           />
@@ -247,7 +247,7 @@ export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
               key={name}
               className="size-7 rounded-sm border"
               style={{
-                backgroundColor: `hsl(${color.h}, ${color.s}%, ${color.l}%)`
+                backgroundColor: `hsl(${color.h}, ${color.s}%, ${color.l}%)`,
               }}
               onClick={() => {
                 setColor(color);

@@ -16,9 +16,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: {
       default: t("title"),
-      template: `%s - ${t("title")} - ${config.settings.general.site_name}`
+      template: `%s - ${t("title")} - ${config.settings.general.site_name}`,
     },
-    robots: "noindex, nofollow"
+    robots: "noindex, nofollow",
   };
 }
 

@@ -6,7 +6,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { useDownloadLangAdmin } from "./hooks/use-download-lang-admin";
 import {
@@ -16,14 +16,14 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger
+  PopoverTrigger,
 } from "@/components/ui/popover";
 import {
   Command,
@@ -31,14 +31,14 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList
+  CommandList,
 } from "@/components/ui/command";
 import { Loader } from "@/components/loader";
 import { ShowCoreLanguages } from "@/graphql/hooks";
 import { useSessionAdmin } from "@/plugins/admin/hooks/use-session-admin";
 
 export const ContentDownloadActionsTableLangsCoreAdmin = ({
-  code
+  code,
 }: Pick<ShowCoreLanguages, "code">) => {
   const t = useTranslations("admin.core.langs.actions.download");
   const { form, onSubmit, query } = useDownloadLangAdmin({ code });
@@ -50,7 +50,7 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
   }
 
   const {
-    admin__core_plugins__show: { edges }
+    admin__core_plugins__show: { edges },
   } = data;
 
   const plugins = [
@@ -59,9 +59,9 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
       id: "admin",
       name: "Admin",
       version,
-      code: "admin"
+      code: "admin",
     },
-    ...edges
+    ...edges,
   ];
 
   return (
@@ -111,7 +111,7 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
                           role="combobox"
                           className={cn(
                             "w-full justify-between",
-                            !field.value && "text-muted-foreground"
+                            !field.value && "text-muted-foreground",
                           )}
                         >
                           {t("selected", { count: field.value.length })}
@@ -136,7 +136,7 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
                                   field.onChange(
                                     values.includes(value)
                                       ? values.filter(el => el !== value)
-                                      : [...values, item.code]
+                                      : [...values, item.code],
                                   );
                                 }}
                               >
@@ -145,7 +145,7 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
                                     "size-4",
                                     field.value.includes(item.code)
                                       ? "opacity-100"
-                                      : "opacity-0"
+                                      : "opacity-0",
                                   )}
                                 />
                                 <span className="font-semibold">

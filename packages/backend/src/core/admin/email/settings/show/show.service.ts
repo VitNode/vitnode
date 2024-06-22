@@ -11,7 +11,7 @@ import { getConfigFile } from "../../../../../providers/config";
 export class ShowAdminEmailSettingsService extends HelpersAdminEmailSettingsService {
   show(): ShowAdminEmailSettingsServiceObj {
     const {
-      settings: { email: emailSettings }
+      settings: { email: emailSettings },
     } = getConfigFile();
 
     const read = fs.readFileSync(this.path, "utf-8");
@@ -19,7 +19,7 @@ export class ShowAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
 
     return {
       ...config,
-      ...emailSettings
+      ...emailSettings,
     };
   }
 }

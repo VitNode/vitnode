@@ -6,7 +6,7 @@ import { removeSpecialCharacters } from "@vitnode/shared";
 import {
   DialogFooter,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { useCreateNavPluginAdmin } from "./hooks/use-create-nav-plugin-admin";
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { IconInput } from "@/components/icon/input/icon-input";
@@ -27,7 +27,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from "@/components/ui/select";
 
 export interface CreateEditNavDevPluginAdminProps {
@@ -41,7 +41,7 @@ export const CreateEditNavDevPluginAdmin = ({
   data,
   dataFromSSR,
   icons,
-  parentId
+  parentId,
 }: CreateEditNavDevPluginAdminProps) => {
   const t = useTranslations("admin.core.plugins.dev.nav");
   const tCore = useTranslations("core");
@@ -50,7 +50,7 @@ export const CreateEditNavDevPluginAdmin = ({
   const tPlugin = useTranslations(
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-    `${Array.isArray(code) ? code[0] : code}.admin.nav`
+    `${Array.isArray(code) ? code[0] : code}.admin.nav`,
   );
   const parentCode = form.watch("parent_code");
 
@@ -90,7 +90,7 @@ export const CreateEditNavDevPluginAdmin = ({
                   {t.rich("create.href.desc", {
                     link: () => (
                       <span className="text-foreground font-bold">{`${code}/${parentCode !== "null" ? `${parentCode}/` : ""}${removeSpecialCharacters(form.watch("href"))}`}</span>
-                    )
+                    ),
                   })}
                 </FormDescription>
                 <FormMessage />

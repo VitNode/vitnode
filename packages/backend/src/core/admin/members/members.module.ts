@@ -14,7 +14,7 @@ import { EditAdminMembersService } from "./edit/edit.service";
     StatsAdminMembersResolver,
     StatsAdminMembersService,
     EditAdminMembersResolver,
-    EditAdminMembersService
-  ]
+    EditAdminMembersService,
+  ],
 })
 export class AdminMembersModule {}

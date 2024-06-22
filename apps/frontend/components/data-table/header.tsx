@@ -13,7 +13,7 @@ interface Props<T> extends HeaderContext<T, unknown> {
 export function HeaderSortingDataTable<T>({
   children,
   column,
-  table
+  table,
 }: Props<T>) {
   const searchParams = useSearchParams();
   const pathname = usePathname();

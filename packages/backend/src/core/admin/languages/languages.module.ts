@@ -22,7 +22,7 @@ import { UpdateAdminCoreLanguagesResolver } from "./update/update.resolver";
     DownloadAdminCoreLanguageService,
     DownloadAdminCoreLanguagesResolver,
     UpdateAdminCoreLanguageService,
-    UpdateAdminCoreLanguagesResolver
-  ]
+    UpdateAdminCoreLanguagesResolver,
+  ],
 })
 export class AdminLanguagesModule {}

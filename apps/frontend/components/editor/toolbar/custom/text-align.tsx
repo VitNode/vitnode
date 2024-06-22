@@ -3,14 +3,14 @@ import {
   AlignJustify,
   AlignLeft,
   AlignRight,
-  ChevronDownIcon
+  ChevronDownIcon,
 } from "lucide-react";
 
 import { ButtonToolbarEditor } from "../button";
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger
+  PopoverTrigger,
 } from "@/components/ui/popover";
 import { ToggleToolbarEditor } from "../toggle";
 

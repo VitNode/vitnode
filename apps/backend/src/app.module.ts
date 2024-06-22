@@ -11,14 +11,14 @@ import { schemaDatabase } from "./database/schema";
   imports: [
     VitNodeCoreModule.register({
       paths: {
-        envFile: join(process.cwd(), "..", "..", ".env")
+        envFile: join(process.cwd(), "..", "..", ".env"),
       },
       database: {
         config: DATABASE_ENVS,
-        schemaDatabase
-      }
+        schemaDatabase,
+      },
     }),
-    PluginsModule
-  ]
+    PluginsModule,
+  ],
 })
 export class AppModule {}

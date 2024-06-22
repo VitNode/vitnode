@@ -8,13 +8,13 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 
 export enum ThemeEditorViewEnum {
   Desktop = "desktop",
   Tablet = "tablet",
-  Mobile = "mobile"
+  Mobile = "mobile",
 }
 
 interface Props {
@@ -31,7 +31,7 @@ export const ToolbarThemeEditor = ({ activeMode, setActiveMode }: Props) => {
     active,
     ariaLabel,
     children,
-    onClick
+    onClick,
   }: {
     active: boolean;
     ariaLabel: string;

@@ -6,7 +6,7 @@ import { fetcher } from "@/graphql/fetcher";
 import {
   Admin_Blog_Categories__Show,
   Admin_Blog_Categories__ShowQuery,
-  Admin_Blog_Categories__ShowQueryVariables
+  Admin_Blog_Categories__ShowQueryVariables,
 } from "@/graphql/hooks";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { HeaderContent } from "@/components/header-content/header-content";
@@ -17,7 +17,7 @@ const getData = async () => {
     Admin_Blog_Categories__ShowQuery,
     Admin_Blog_Categories__ShowQueryVariables
   >({
-    query: Admin_Blog_Categories__Show
+    query: Admin_Blog_Categories__Show,
   });
 
   return data;
@@ -27,14 +27,14 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("blog.admin.categories");
 
   return {
-    title: t("title")
+    title: t("title"),
   };
 }
 
 export default async function Page() {
   const [t, data] = await Promise.all([
     getTranslations("blog.admin.categories"),
-    getData()
+    getData(),
   ]);
 
   return (
