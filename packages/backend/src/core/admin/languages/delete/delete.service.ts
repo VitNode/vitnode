@@ -4,8 +4,10 @@ import { unlinkSync } from "fs";
 
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
-import { DatabaseService } from "../../../../database";
+
 import { DeleteCoreAdminLanguagesArgs } from "./dto/delete.args";
+
+import { DatabaseService } from "../../../../database";
 import { CustomError, NotFoundError } from "../../../../errors";
 import { ABSOLUTE_PATHS_BACKEND } from "../../../..";
 import { core_languages } from "../../../../templates/core/admin/database/schema/languages";
