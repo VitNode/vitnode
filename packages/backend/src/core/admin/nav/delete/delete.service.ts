@@ -1,15 +1,16 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
-import { NotFoundError, DatabaseService } from "vitnode-backend";
 
 import { DeleteAdminNavArgs } from "./dto/delete.args";
 
+import { DatabaseService } from "../../../../database";
+import { ParserTextLanguageCoreHelpersService } from "../../../helpers/text_language/parser/parser.service";
+import { NotFoundError } from "../../../../errors";
 import {
   core_nav,
   core_nav_description,
   core_nav_name
-} from "../../database/schema/nav";
-import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
+} from "../../../../templates/core/admin/database/schema/nav";
 
 @Injectable()
 export class DeleteAdminNavService {

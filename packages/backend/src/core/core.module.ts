@@ -6,13 +6,15 @@ import {
   GlobalCoreSessionsModule
 } from "./sessions/sessions.module";
 import { AdminModule } from "./admin/admin.module";
+import { GlobalCoreHelpersModule } from "./helpers/helpers.module";
 
 @Module({
   imports: [
     AdminModule,
     CoreNavModule,
     GlobalCoreSessionsModule,
-    CoreSessionsModule
+    CoreSessionsModule,
+    GlobalCoreHelpersModule
   ]
 })
 export class CoreModule {}

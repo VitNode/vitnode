@@ -1,9 +1,10 @@
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
-import { AdminAuthGuards } from "vitnode-backend";
 
 import { ChangePositionAdminNavService } from "./change_position.service";
 import { ChangePositionAdminNavArgs } from "./dto/change_position.args";
+
+import { AdminAuthGuards } from "../../../../utils";
 
 @Resolver()
 export class ChangePositionAdminNavResolver {

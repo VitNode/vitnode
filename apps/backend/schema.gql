@@ -175,6 +175,10 @@ type Mutation {
   admin__core_main_settings__edit(site_copyright: [TextLanguageInput!]!, site_description: [TextLanguageInput!]!, site_name: String!, site_short_name: String!): EditAdminSettingsObj!
   admin__core_manifest_metadata__edit(background_color: String!, display: String!, start_url: String!, theme_color: String!): ShowAdminManifestMetadataObj!
   admin__core_members__edit(birthday: DateTime!, email: String!, first_name: String!, id: Int!, last_name: String!, name: String!, newsletter: Boolean!): EditAdminMembersObj!
+  admin__core_nav__change_position(id: Int!, index_to_move: Int!, parent_id: Int!): String!
+  admin__core_nav__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, name: [TextLanguageInput!]!): ShowCoreNav!
+  admin__core_nav__delete(id: Int!): String!
+  admin__core_nav__edit(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, id: Int!, name: [TextLanguageInput!]!): ShowCoreNav!
   admin__core_plugins__create(author: String!, author_url: String, code: String!, description: String, name: String!, support_url: String!): ShowAdminPlugins!
   admin__core_plugins__delete(code: String!): String!
   admin__core_plugins__download(code: String!, version: String, version_code: Int): String!

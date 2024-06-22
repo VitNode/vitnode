@@ -1,10 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
-import { NotFoundError, DatabaseService } from "vitnode-backend";
 
 import { ChangePositionAdminNavArgs } from "./dto/change_position.args";
 
-import { core_nav } from "../../database/schema/nav";
+import { DatabaseService } from "../../../../database";
+import { NotFoundError } from "../../../../errors";
+import { core_nav } from "../../../../templates/core/admin/database/schema/nav";
 
 @Injectable()
 export class ChangePositionAdminNavService {
