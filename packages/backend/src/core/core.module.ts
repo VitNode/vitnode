@@ -7,6 +7,8 @@ import {
 } from "./sessions/sessions.module";
 import { AdminModule } from "./admin/admin.module";
 import { GlobalCoreHelpersModule } from "./helpers/helpers.module";
+import { CorePluginsModule } from "./plugins/plugins.module";
+import { CoreLanguagesModule } from "./languages/languages.module";
 
 @Module({
   imports: [
@@ -14,7 +16,9 @@ import { GlobalCoreHelpersModule } from "./helpers/helpers.module";
     CoreNavModule,
     GlobalCoreSessionsModule,
     CoreSessionsModule,
-    GlobalCoreHelpersModule
+    GlobalCoreHelpersModule,
+    CorePluginsModule,
+    CoreLanguagesModule
   ]
 })
 export class CoreModule {}
