@@ -8,8 +8,9 @@ import {
   HslColor,
   ShowCoreThemeEditorObj
 } from "./dto/show.obj";
-import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from "../../..";
 import { keysFromCSSThemeEditor } from "../theme_editor.module";
+
+import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from "../../..";
 
 @Injectable()
 export class ShowCoreThemeEditorService {

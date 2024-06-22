@@ -9,6 +9,7 @@ import { DatabaseService } from "../../../../database";
 import { ABSOLUTE_PATHS_BACKEND, CustomError } from "../../../..";
 import { core_languages } from "../../../../templates/core/admin/database/schema/languages";
 import { ShowCoreLanguages } from "../../../languages/show/dto/show.obj";
+import { setRebuildRequired } from "../../../../functions/rebuild-required";
 
 @Injectable()
 export class CreateAdminCoreLanguageService {
@@ -98,8 +99,7 @@ export class CreateAdminCoreLanguageService {
       })
       .returning();
 
-    // TODO: Fix this
-    // await setRebuildRequired({ set: "langs" });
+    await setRebuildRequired({ set: "langs" });
 
     return newLanguage[0];
   }

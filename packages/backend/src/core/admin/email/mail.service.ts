@@ -1,4 +1,3 @@
-import { join } from "path";
 import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
@@ -10,7 +9,6 @@ import {
   HelpersAdminEmailSettingsService,
   ShowAdminEmailSettingsServiceObjWithPassword
 } from "./helpers.service";
-import { ABSOLUTE_PATHS_BACKEND } from "../../..";
 
 interface SendMailConfiguration {
   subject: string;
@@ -21,27 +19,17 @@ interface SendMailConfiguration {
 
 @Injectable()
 export class MailService extends HelpersAdminEmailSettingsService {
-  private readonly transporter: nodemailer.Transporter;
-  constructor() {
-    super();
-    if (!fs.existsSync(this.path)) {
-      // Create a default config file
-      fs.writeFileSync(
-        this.path,
-        JSON.stringify({
-          smtp_host: "",
-          smtp_user: "",
-          smtp_secure: false,
-          smtp_port: 587
-        })
-      );
-    }
+  private readonly generateEmail = (template: React.ReactElement) => {
+    return render(template);
+  };
 
+  async sendMail({ to, subject, template }: SendMailConfiguration) {
+    const html = this.generateEmail(template);
     const data = fs.readFileSync(this.path, "utf-8");
     const config: ShowAdminEmailSettingsServiceObjWithPassword =
       JSON.parse(data);
 
-    this.transporter = nodemailer.createTransport(
+    const transporter = nodemailer.createTransport(
       {
         host: config.smtp_host,
         port: config.smtp_port,
@@ -58,16 +46,8 @@ export class MailService extends HelpersAdminEmailSettingsService {
         }
       }
     );
-  }
 
-  private readonly generateEmail = (template: React.ReactElement) => {
-    return render(template);
-  };
-
-  async sendMail({ to, subject, template }: SendMailConfiguration) {
-    const html = this.generateEmail(template);
-
-    await this.transporter.sendMail({
+    await transporter.sendMail({
       to,
       from: "test",
       subject,

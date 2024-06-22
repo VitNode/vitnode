@@ -2,13 +2,14 @@ import { join } from "path";
 import * as fs from "fs";
 
 import { convertColor, getHSLFromString } from "@vitnode/shared";
+
 import { getConfigFile } from "../../config";
 
 export interface HelpersForEmailReturnValues {
-  url: string;
-  protocol: string;
   hostname: string;
   port: string;
+  protocol: string;
+  url: string;
 }
 
 export const getHelpersForEmail = () => {
