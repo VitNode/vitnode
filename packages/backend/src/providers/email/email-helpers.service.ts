@@ -3,13 +3,17 @@ import { getConfigFile } from "../config";
 import { convertColor, getHSLFromString } from "@vitnode/shared";
 import { EmailHelpersServiceType } from "./email-helpers.type";
 import EmailTemplate from "./template/email-template";
+import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class EmailHelpersService {
+  constructor(private readonly configService: ConfigService) {}
+
   getHelpersForEmail: EmailHelpersServiceType["getHelpersForEmail"] = () => {
     const config = getConfigFile();
     // TODO: Implement parseFrontendUrlFromEnv
     // const frontend_url = parseFrontendUrlFromEnv();
+    const frontend_url: string = this.configService.getOrThrow("frontend_url");
 
     const primaryHSL = getHSLFromString(config.settings.email.color_primary);
     const primaryForegroundHSL = getHSLFromString(
@@ -19,9 +23,7 @@ export class EmailHelpersService {
     return {
       site_name: config.settings.general.site_name,
       site_short_name: config.settings.general.site_short_name,
-      frontend_url: {
-        url: "http://localhost:3000"
-      },
+      frontend_url,
       color: {
         primary: {
           DEFAULT: `[${primaryHSL ? convertColor.hslToHex(primaryHSL) : "#215fdc"}]`,

@@ -134,7 +134,7 @@ export const EmailTemplate = ({
 
             <Section className="my-8 text-center text-sm">
               <Link
-                href={frontend_url.url}
+                href={frontend_url}
                 className={`text-${color.muted.foreground}`}
               >
                 {site_short_name} © {new Date().getFullYear()}

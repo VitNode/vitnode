@@ -14,6 +14,15 @@ import { CoreModule } from "./core/core.module";
 import { DatabaseModule, DatabaseModuleArgs } from "./database/database.module";
 import { GlobalProvidersModule } from "./providers/providers.module";
 
+export interface VitNodePaths {
+  envFile: string;
+}
+
+interface Args {
+  database: DatabaseModuleArgs;
+  paths: VitNodePaths;
+}
+
 const internalPaths = {
   backend: join(process.cwd(), "src"),
   frontend: join(process.cwd(), "..", "frontend"),
@@ -144,16 +153,6 @@ const config = () => {
 
   return data;
 };
-
-export interface VitNodePaths {
-  envFile: string;
-}
-
-interface Args {
-  database: DatabaseModuleArgs;
-  paths: VitNodePaths;
-  // schemaDatabase: Record<string, unknown>;
-}
 
 @Module({})
 export class VitNodeCoreModule {

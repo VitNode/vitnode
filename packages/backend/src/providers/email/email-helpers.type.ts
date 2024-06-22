@@ -3,9 +3,7 @@ import { EmailTemplateProps } from "./template/email-template";
 export interface GetHelpersForEmailType {
   site_name: string;
   site_short_name: string;
-  frontend_url: {
-    url: string;
-  };
+  frontend_url: string;
   color: {
     primary: {
       DEFAULT: string;
