@@ -16,7 +16,7 @@ import { DatabaseService } from "../../../database";
 import { User } from "../../../decorators";
 import { AccessDeniedError } from "../../../errors";
 import { core_files } from "../../../templates/core/admin/database/schema/files";
-import { getConfigFile } from "../../config";
+import { getConfigFile } from "../../../providers/config";
 
 interface GetFilesAfterUploadArgs extends UploadCoreEditorArgs {
   maxUploadSizeKb: number;

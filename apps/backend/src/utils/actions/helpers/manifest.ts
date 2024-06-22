@@ -3,9 +3,9 @@ import * as fs from "fs";
 
 import * as dotenv from "dotenv";
 
-import { ABSOLUTE_PATHS, getConfigFile } from "@/config";
 import { parseFrontendUrlFromEnv } from "@/functions/envs";
 import { objectToArray, updateObject } from "@/functions/update-object";
+import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from "vitnode-backend";
 
 dotenv.config({
   path: join(process.cwd(), "..", ".env")
@@ -95,7 +95,9 @@ const generateDefaultManifest = ({
 export const generateManifest = () => {
   const config = getConfigFile();
   const languages = fs
-    .readdirSync(ABSOLUTE_PATHS.plugin({ code: "core" }).frontend.language)
+    .readdirSync(
+      ABSOLUTE_PATHS_BACKEND.plugin({ code: "core" }).frontend.language
+    )
     .map(fileName => fileName.replace(".json", ""));
   const frontend_url = parseFrontendUrlFromEnv().url;
 
@@ -106,7 +108,11 @@ export const generateManifest = () => {
       site_name: config.settings.general.site_name,
       site_short_name: config.settings.general.site_short_name
     });
-    const path = join(ABSOLUTE_PATHS.uploads.public, "assets", lang_code);
+    const path = join(
+      ABSOLUTE_PATHS_BACKEND.uploads.public,
+      "assets",
+      lang_code
+    );
     const filePath = join(path, "manifest.webmanifest");
 
     if (fs.existsSync(filePath)) {

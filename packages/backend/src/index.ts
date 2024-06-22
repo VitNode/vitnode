@@ -10,6 +10,7 @@ export * from "./database";
 // Services
 export * from "./core/admin/sessions/authorization/authorization.service";
 export * from "./core/sessions/authorization/internal/internal_authorization.service";
-export * from "./core/admin/plugins/type";
 export * from "./core/helpers/text_language/parser/parser.service";
-export * from "./core/config";
+
+// Providers / Helpers
+export * from "./providers";

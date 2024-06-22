@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 /**
- *
+ * Copy the database schema from the template to the core plugin
  * @param {string} corePluginPath
  */
 const copyDatabaseSchema = corePluginPath => {
