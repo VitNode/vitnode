@@ -11,6 +11,7 @@ import { CustomError, NotFoundError } from "../../../../errors";
 import { core_migrations } from "../../../../templates/core/admin/database/schema/files";
 import { ABSOLUTE_PATHS_BACKEND } from "../../../..";
 import { core_plugins } from "../../../../templates/core/admin/database/schema/plugins";
+import { setRebuildRequired } from "../../../../functions/rebuild-required";
 
 @Injectable()
 export class DeleteAdminPluginsService {
@@ -79,8 +80,7 @@ export class DeleteAdminPluginsService {
       .delete(core_plugins)
       .where(eq(core_plugins.code, code));
 
-    // TODO: Set rebuild required
-    // await setRebuildRequired({ set: "plugins" });
+    await setRebuildRequired({ set: "plugins" });
 
     return "Success!";
   }

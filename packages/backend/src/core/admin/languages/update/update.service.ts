@@ -12,6 +12,7 @@ import { DatabaseService } from "../../../../database";
 import { NotFoundError } from "../../../../errors";
 import { ABSOLUTE_PATHS_BACKEND } from "../../../..";
 import { core_languages } from "../../../../templates/core/admin/database/schema/languages";
+import { setRebuildRequired } from "../../../../functions/rebuild-required";
 
 @Injectable()
 export class UpdateAdminCoreLanguageService {
@@ -82,8 +83,7 @@ export class UpdateAdminCoreLanguageService {
       .set({ updated: new Date() })
       .where(eq(core_languages.code, code));
 
-    // TODO: Fix this
-    // await setRebuildRequired({ set: "langs" });
+    await setRebuildRequired({ set: "langs" });
 
     return "Success!";
   }

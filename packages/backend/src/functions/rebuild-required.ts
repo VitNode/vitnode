@@ -1,8 +1,7 @@
 import * as fs from "fs";
 
-import { CustomError } from "vitnode-backend";
-
-import { ConfigType, configPath, getConfigFile } from "@/config";
+import { ConfigType, configPath, getConfigFile } from "../core/config";
+import { CustomError } from "../errors";
 
 export const setRebuildRequired = async ({
   set

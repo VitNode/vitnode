@@ -11,6 +11,7 @@ import { DatabaseService } from "../../../../database";
 import { CustomError, NotFoundError } from "../../../../errors";
 import { ABSOLUTE_PATHS_BACKEND } from "../../../..";
 import { core_languages } from "../../../../templates/core/admin/database/schema/languages";
+import { setRebuildRequired } from "../../../../functions/rebuild-required";
 @Injectable()
 export class DeleteAdminCoreLanguageService {
   constructor(private readonly databaseService: DatabaseService) {}
@@ -68,8 +69,7 @@ export class DeleteAdminCoreLanguageService {
       .delete(core_languages)
       .where(eq(core_languages.code, code));
 
-    // TODO: Fix this
-    // await setRebuildRequired({ set: "langs" });
+    await setRebuildRequired({ set: "langs" });
 
     return "Success!";
   }
