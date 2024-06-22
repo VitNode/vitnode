@@ -14,6 +14,7 @@ import { CoreEditorModule } from "./editor/editor.module";
 import { CoreMembersModule } from "./members/members.module";
 import { CoreMiddlewareModule } from "./middleware/middleware.module";
 import { CoreSettingsModule } from "./settings/settings.module";
+import { CoreThemeEditorModule } from "./theme_editor/theme_editor.module";
 
 @Module({
   imports: [
@@ -29,7 +30,8 @@ import { CoreSettingsModule } from "./settings/settings.module";
     CoreEditorModule,
     CoreMembersModule,
     CoreMiddlewareModule,
-    CoreSettingsModule
+    CoreSettingsModule,
+    CoreThemeEditorModule
   ]
 })
 export class CoreModule {}

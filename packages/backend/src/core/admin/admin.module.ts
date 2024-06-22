@@ -13,6 +13,9 @@ import { AdminMembersModule } from "./members/members.module";
 import { AdminGroupsModule } from "./groups/groups.module";
 import { AdminMetadataModule } from "./metadata/metadata.module";
 import { AdminSettingsModule } from "./settings/settings.module";
+import { AdminThemeEditorModule } from "./theme_editor/theme_editor.module";
+import { AdminInstallModule } from "./install/install.module";
+import { AdminEmailModule } from "./email/email.module";
 
 @Module({
   imports: [
@@ -26,7 +29,10 @@ import { AdminSettingsModule } from "./settings/settings.module";
     AdminMembersModule,
     AdminGroupsModule,
     AdminMetadataModule,
-    AdminSettingsModule
+    AdminSettingsModule,
+    AdminThemeEditorModule,
+    AdminInstallModule,
+    AdminEmailModule
   ]
 })
 export class AdminModule {}

@@ -10,7 +10,7 @@ import {
   blog_categories_name,
   blog_categories_permissions
 } from "../../database/schema/categories";
-import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
+import { ParserTextLanguageCoreHelpersService } from "vitnode-backend";
 
 @Injectable()
 export class CreateBlogCategoriesService {
