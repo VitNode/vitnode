@@ -8,6 +8,8 @@ import { AdminPluginsModule } from "./plugins/plugins.module";
 import { AdminNavModule } from "./nav/nav.module";
 import { AdminStaffModule } from "./staff/staff.module";
 import { AdminLanguagesModule } from "./languages/languages.module";
+import { AdminFilesModule } from "./files/files.module";
+import { AdminMembersModule } from "./members/members.module";
 
 @Module({
   imports: [
@@ -16,7 +18,9 @@ import { AdminLanguagesModule } from "./languages/languages.module";
     AdminPluginsModule,
     AdminNavModule,
     AdminStaffModule,
-    AdminLanguagesModule
+    AdminLanguagesModule,
+    AdminFilesModule,
+    AdminMembersModule
   ]
 })
 export class AdminModule {}

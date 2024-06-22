@@ -9,6 +9,9 @@ import { AdminModule } from "./admin/admin.module";
 import { GlobalCoreHelpersModule } from "./helpers/helpers.module";
 import { CorePluginsModule } from "./plugins/plugins.module";
 import { CoreLanguagesModule } from "./languages/languages.module";
+import { CoreFilesModule, GlobalCoreFilesModule } from "./files/files.module";
+import { CoreEditorModule } from "./editor/editor.module";
+import { CoreMembersModule } from "./members/members.module";
 
 @Module({
   imports: [
@@ -18,7 +21,11 @@ import { CoreLanguagesModule } from "./languages/languages.module";
     CoreSessionsModule,
     GlobalCoreHelpersModule,
     CorePluginsModule,
-    CoreLanguagesModule
+    CoreLanguagesModule,
+    GlobalCoreFilesModule,
+    CoreFilesModule,
+    CoreEditorModule,
+    CoreMembersModule
   ]
 })
 export class CoreModule {}
