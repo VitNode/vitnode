@@ -1,15 +1,15 @@
 import { Injectable } from "@nestjs/common";
-import { DatabaseService } from "vitnode-backend";
 
 import { CreateAdminNavArgs } from "./dto/create.args";
 
+import { DatabaseService } from "../../../../database";
+import { ParserTextLanguageCoreHelpersService } from "../../../helpers/text_language/parser/parser.service";
+import { ShowCoreNav } from "../../../nav/show/dto/show.obj";
 import {
   core_nav,
   core_nav_description,
   core_nav_name
-} from "../../database/schema/nav";
-import { ShowCoreNav } from "@/plugins/core/nav/show/dto/show.obj";
-import { ParserTextLanguageCoreHelpersService } from "@/plugins/core/helpers/text_language/parser/parser.service";
+} from "../../../../templates/core/admin/database/schema/nav";
 
 @Injectable()
 export class CreateAdminNavService {
