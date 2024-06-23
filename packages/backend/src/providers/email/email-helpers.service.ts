@@ -12,8 +12,6 @@ export class EmailHelpersService {
 
   getHelpersForEmail: EmailHelpersServiceType["getHelpersForEmail"] = () => {
     const config = getConfigFile();
-    // TODO: Implement parseFrontendUrlFromEnv
-    // const frontend_url = parseFrontendUrlFromEnv();
     const frontend_url: string = this.configService.getOrThrow("frontend_url");
 
     const primaryHSL = getHSLFromString(config.settings.email.color_primary);
