@@ -9,12 +9,9 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const graphql_url =
-  process.env.NEXT_PUBLIC_GRAPHQL_URL ?? "http://localhost:8080";
-
 const config: CodegenConfig = {
   overwrite: true,
-  schema: `${graphql_url}/graphql`,
+  schema: `${process.env.NEXT_PUBLIC_GRAPHQL_URL ?? "http://localhost:8080"}/graphql`,
   documents: [
     join(process.cwd(), "..", "frontend", "plugins/**/graphql/**/*.gql"),
   ],
