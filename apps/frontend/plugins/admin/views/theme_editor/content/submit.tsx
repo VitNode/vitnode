@@ -1,7 +1,5 @@
 import { Check } from "lucide-react";
 import { useTranslations } from "next-intl";
-
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -11,8 +9,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
+  Button,
+} from "vitnode-frontend/components";
+
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { CONFIG } from "@/config";
 
 interface Props {

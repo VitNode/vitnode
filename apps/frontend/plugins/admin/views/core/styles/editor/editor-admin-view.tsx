@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { Button } from "vitnode-frontend/components";
 
 import { Card } from "@/components/ui/card";
 import {
@@ -10,7 +11,6 @@ import {
   FormWrapper,
 } from "@/components/ui/form";
 import { useEditorAdmin, EditorAdminArgs } from "./hooks/use-editor-admin";
-import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { FilesSectionContentEditorAdmin } from "./sections/files";
 

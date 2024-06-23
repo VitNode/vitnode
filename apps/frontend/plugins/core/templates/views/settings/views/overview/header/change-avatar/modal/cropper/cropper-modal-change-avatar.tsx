@@ -1,8 +1,8 @@
 import { Cropper } from "react-cropper";
 import { useTranslations } from "next-intl";
+import { Button } from "vitnode-frontend/components";
 
 import { DialogFooter } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { useCopperModalChangeAvatar } from "@/plugins/core/hooks/settings/avatar/use-copper-modal-change-avatar";
 import "cropperjs/dist/cropper.css";
 

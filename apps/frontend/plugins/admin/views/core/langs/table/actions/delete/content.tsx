@@ -1,4 +1,12 @@
 import { useTranslations } from "next-intl";
+import {
+  AlertDialogCancel,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  Button,
+} from "vitnode-frontend/components";
 
 import { useDeleteLangAdmin } from "./hooks/use-delete-lang-admin";
 import {
@@ -8,15 +16,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  AlertDialogCancel,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { ShowCoreLanguages } from "@/graphql/hooks";
 
 export const ContentDeleteActionsTableLangsCoreAdmin = ({

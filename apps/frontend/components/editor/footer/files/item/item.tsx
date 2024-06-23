@@ -3,9 +3,9 @@ import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { JSONContent } from "@tiptap/react";
 import { cn } from "vitnode-frontend/helpers";
+import { Button } from "vitnode-frontend/components";
 
 import { CONFIG } from "@/config";
-import { Button } from "@/components/ui/button";
 import { IconItemListFilesFooterEditor } from "./icon";
 import { ContentItemListFilesFooterEditor } from "./content";
 import { deleteMutationApi } from "./hooks/delete-mutation-api";

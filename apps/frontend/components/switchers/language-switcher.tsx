@@ -4,6 +4,7 @@
 import { Languages } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "vitnode-frontend/navigation";
+import { Button } from "vitnode-frontend/components";
 
 import { CONFIG } from "@/config";
 import {
@@ -13,7 +14,6 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 import { useGlobals } from "@/plugins/core/hooks/use-globals";
 
 export const LanguageSwitcher = () => {

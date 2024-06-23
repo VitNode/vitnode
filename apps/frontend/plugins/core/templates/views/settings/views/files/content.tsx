@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Clock, Download, File } from "lucide-react";
 import { formatBytes } from "@vitnode/shared";
 import { Link } from "vitnode-frontend/navigation";
+import { buttonVariants } from "vitnode-frontend/components";
 
 import { CONFIG } from "@/config";
 import { DataTable } from "@/components/data-table/data-table";
@@ -19,7 +20,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { buttonVariants } from "@/components/ui/button";
 
 export const ContentFilesSettings = ({
   core_files__show: { edges, pageInfo },

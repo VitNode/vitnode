@@ -1,6 +1,5 @@
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-
 import {
   AlertDialogCancel,
   AlertDialogDescription,
@@ -8,8 +7,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   useAlertDialog,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
+  Button,
+} from "vitnode-frontend/components";
+
 import { mutationApi } from "./mutation-api";
 import { SubmitDeleteActionsTableAdministratorsStaffAdmin } from "./submit";
 import { ShowAdminStaffAdministrators } from "@/graphql/hooks";

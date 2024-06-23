@@ -3,8 +3,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { ChevronRight, Grip } from "lucide-react";
 import * as React from "react";
 import { cn } from "vitnode-frontend/helpers";
-
-import { Button } from "@/components/ui/button";
+import { Button } from "vitnode-frontend/components";
 
 interface Props {
   active: boolean;

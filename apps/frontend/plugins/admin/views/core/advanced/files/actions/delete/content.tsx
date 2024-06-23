@@ -1,16 +1,16 @@
 import { useTranslations } from "next-intl";
-
 import {
   AlertDialogCancel,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
+  Button,
+} from "vitnode-frontend/components";
+
 import { SubmitDeleteActionFilesAdvancedCoreAdmin } from "./submit";
 import { useDeleteFileAdvancedAdmin } from "./hooks/use-delete-file-advanced-admin";
+import { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
 
 export interface ContentDeleteActionFilesAdvancedCoreAdminProps
   extends Pick<

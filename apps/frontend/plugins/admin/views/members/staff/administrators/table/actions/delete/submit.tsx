@@ -1,7 +1,6 @@
 import { useTranslations } from "next-intl";
 import { useFormStatus } from "react-dom";
-
-import { Button } from "@/components/ui/button";
+import { Button } from "vitnode-frontend/components";
 
 export const SubmitDeleteActionsTableAdministratorsStaffAdmin = () => {
   const t = useTranslations("admin.members.staff.administrators.delete");

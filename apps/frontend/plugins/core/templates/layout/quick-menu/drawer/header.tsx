@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "vitnode-frontend/navigation";
+import { buttonVariants } from "vitnode-frontend/components";
 
-import { buttonVariants } from "@/components/ui/button";
 import { DrawerClose } from "@/components/ui/drawer";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import { useSession } from "@/plugins/core/hooks/use-session";

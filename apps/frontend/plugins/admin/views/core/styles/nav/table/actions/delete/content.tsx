@@ -1,16 +1,16 @@
 import { useTranslations } from "next-intl";
 import { Trash } from "lucide-react";
-
-import { ShowCoreNav } from "@/graphql/hooks";
-import { useDeleteNavAdmin } from "./hooks/use-delete-nav-admin";
 import {
   AlertDialogCancel,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
+  Button,
+} from "vitnode-frontend/components";
+
+import { ShowCoreNav } from "@/graphql/hooks";
+import { useDeleteNavAdmin } from "./hooks/use-delete-nav-admin";
 import { SubmitDeleteActionTableNavAdmin } from "./submit";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";

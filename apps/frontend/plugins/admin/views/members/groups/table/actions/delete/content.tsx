@@ -1,12 +1,13 @@
 import { useTranslations } from "next-intl";
-
 import {
   AlertDialogCancel,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+  Button,
+} from "vitnode-frontend/components";
+
 import { ShowAdminGroups } from "@/graphql/hooks";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import {
@@ -17,7 +18,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { useDeleteGroupAdmin } from "./hooks/use-delete-group-admin";
 
 export const ContentDeleteGroupsMembersDialogAdmin = ({

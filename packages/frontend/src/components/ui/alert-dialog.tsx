@@ -2,9 +2,10 @@
 
 import * as React from "react";
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
-import { cn } from "vitnode-frontend/helpers";
 
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "./button";
+
+import { cn } from "../../helpers";
 
 interface AlertDialogContextArgs {
   open: boolean;

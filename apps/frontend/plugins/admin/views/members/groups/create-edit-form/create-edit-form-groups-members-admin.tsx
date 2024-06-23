@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
+import { Button } from "vitnode-frontend/components";
 
 import { Tabs } from "@/components/tabs/tabs";
 import {
@@ -9,7 +10,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
 import {
   useCreateEditFormGroupsMembersAdmin,
   CreateEditFormGroupsMembersAdminArgs,

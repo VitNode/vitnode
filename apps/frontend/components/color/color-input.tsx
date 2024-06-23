@@ -5,10 +5,10 @@ import { HslColor } from "react-colorful";
 import { useTranslations } from "next-intl";
 import { getHSLFromString, isColorBrightness } from "@vitnode/shared";
 import { cn } from "vitnode-frontend/helpers";
+import { Button } from "vitnode-frontend/components";
 
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { PickerColor } from "./picker/picker";
-import { Button } from "../ui/button";
 
 interface Props {
   onChange: (value: string) => void;

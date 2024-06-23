@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { Button } from "vitnode-frontend/components";
 
 import {
   DialogFooter,
@@ -7,7 +8,6 @@ import {
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import { useCreateEditPluginAdmin } from "./hooks/use-create-edit-plugin-admin";
-import { Button } from "@/components/ui/button";
 import { FormCreateEditPluginAdmin } from "./form";
 
 export const CreatePluginAdmin = () => {

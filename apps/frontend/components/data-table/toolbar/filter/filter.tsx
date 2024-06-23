@@ -1,13 +1,13 @@
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import * as React from "react";
 import { useSearchParams } from "next/navigation";
+import { Button } from "vitnode-frontend/components";
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Loader } from "@/components/loader";

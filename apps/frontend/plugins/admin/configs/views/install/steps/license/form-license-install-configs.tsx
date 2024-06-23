@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { Button } from "vitnode-frontend/components";
 
 import {
   Form,
@@ -11,7 +12,6 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
 
 import { useInstallVitnode } from "../../hooks/use-install-vitnode";
 

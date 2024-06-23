@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { toast } from "sonner";
+import { Button } from "vitnode-frontend/components";
 
-import { Button } from "@/components/ui/button";
 import { mutationApi } from "./mutation-api";
 
 import { useInstallVitnode } from "../../hooks/use-install-vitnode";

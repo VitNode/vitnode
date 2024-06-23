@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { Button } from "vitnode-frontend/components";
 
 import { Admin__Core_Email_Settings__ShowQuery } from "@/graphql/hooks";
 import { useEmailSettingsFormAdmin } from "./hooks/use-email-settings-form-admin";
@@ -11,7 +12,6 @@ import {
   FormWrapper,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Separator } from "@/components/ui/separator";

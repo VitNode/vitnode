@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { Button } from "vitnode-frontend/components";
 
 import {
   DialogFooter,
@@ -13,7 +14,6 @@ import {
   FormWrapper,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
 export const ContentTestingActionEmailSettingsAdmin = () => {

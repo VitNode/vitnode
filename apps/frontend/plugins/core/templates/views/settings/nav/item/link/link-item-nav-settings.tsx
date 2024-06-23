@@ -3,8 +3,8 @@
 import { motion } from "framer-motion";
 import { Link, usePathname } from "vitnode-frontend/navigation";
 import { cn } from "vitnode-frontend/helpers";
+import { buttonVariants } from "vitnode-frontend/components";
 
-import { buttonVariants } from "@/components/ui/button";
 import { LinkItemNavSettingsProps } from "@/plugins/core/hooks/settings/use-settings-view";
 
 export const LinkItemNavSettings = ({

@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { cn } from "vitnode-frontend/helpers";
+import { buttonVariants } from "vitnode-frontend/components";
 
-import { buttonVariants } from "@/components/ui/button";
 import {
   Drawer,
   DrawerClose,

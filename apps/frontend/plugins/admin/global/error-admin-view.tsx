@@ -2,8 +2,8 @@ import { AlertTriangle, Home } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "vitnode-frontend/navigation";
 import { cn } from "vitnode-frontend/helpers";
+import { buttonVariants } from "vitnode-frontend/components";
 
-import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,

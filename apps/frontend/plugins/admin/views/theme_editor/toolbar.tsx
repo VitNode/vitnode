@@ -2,8 +2,8 @@ import { Monitor, Moon, Smartphone, Sun, Tablet } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { useTheme } from "next-themes";
+import { Button } from "vitnode-frontend/components";
 
-import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
