@@ -1,6 +1,6 @@
 import { NextIntlClientProvider, AbstractIntlMessages } from "next-intl";
 import { Inter } from "next/font/google";
-import { cn } from "@vitnode/frontend/helpers";
+import { cn } from "vitnode-frontend/helpers";
 
 import { Providers } from "./providers";
 import { getConfigFile } from "@/config/helpers";

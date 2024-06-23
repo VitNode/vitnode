@@ -1,4 +1,4 @@
-import { redirect } from "@vitnode/frontend/navigation";
+import { redirect } from "vitnode-frontend/navigation";
 
 import { ErrorType, fetcher } from "@/graphql/fetcher";
 import {

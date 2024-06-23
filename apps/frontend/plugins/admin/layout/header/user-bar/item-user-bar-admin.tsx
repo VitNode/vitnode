@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Link } from "@vitnode/frontend/navigation";
-import { cn } from "@vitnode/frontend/helpers";
+import { Link } from "vitnode-frontend/navigation";
+import { cn } from "vitnode-frontend/helpers";
 
 import { Button, buttonVariants } from "@/components/ui/button";
 import { SheetClose } from "@/components/ui/sheet";

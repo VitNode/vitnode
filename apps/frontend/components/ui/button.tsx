@@ -2,7 +2,7 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { useTranslations } from "next-intl";
-import { cn } from "@vitnode/frontend/helpers";
+import { cn } from "vitnode-frontend/helpers";
 
 import { Loader } from "../loader";
 

@@ -1,4 +1,4 @@
-import { Link } from "@vitnode/frontend/navigation";
+import { Link } from "vitnode-frontend/navigation";
 
 import { CONFIG } from "@/config";
 import { UserBarAdmin } from "./user-bar/user-bar-admin";

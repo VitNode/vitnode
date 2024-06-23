@@ -5,7 +5,7 @@ import * as React from "react";
 import { CaretSortIcon } from "@radix-ui/react-icons";
 import { CheckIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { cn } from "@vitnode/frontend/helpers";
+import { cn } from "vitnode-frontend/helpers";
 
 import {
   Popover,

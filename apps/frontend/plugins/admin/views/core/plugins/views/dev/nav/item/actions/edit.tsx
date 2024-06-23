@@ -1,7 +1,7 @@
 import { Pencil } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
-import { FlatTree } from "@vitnode/frontend/helpers";
+import { FlatTree } from "vitnode-frontend/helpers";
 
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";

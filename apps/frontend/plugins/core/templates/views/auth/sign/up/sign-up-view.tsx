@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Link } from "@vitnode/frontend/navigation";
+import { Link } from "vitnode-frontend/navigation";
 
 import {
   Card,

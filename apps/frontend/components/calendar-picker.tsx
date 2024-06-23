@@ -1,7 +1,7 @@
 import { CalendarIcon } from "lucide-react";
 import { SelectRangeEventHandler } from "react-day-picker";
 import { format } from "date-fns";
-import { cn } from "@vitnode/frontend/helpers";
+import { cn } from "vitnode-frontend/helpers";
 
 import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";

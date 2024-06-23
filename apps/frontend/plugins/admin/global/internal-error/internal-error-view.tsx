@@ -2,7 +2,7 @@
 
 import { RefreshCcw, RotateCcw, WifiOff } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "@vitnode/frontend/navigation";
+import { useRouter } from "vitnode-frontend/navigation";
 
 import { CONFIG } from "@/config";
 import {

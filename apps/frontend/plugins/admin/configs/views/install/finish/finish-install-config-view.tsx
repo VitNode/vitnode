@@ -1,5 +1,5 @@
 import { Home, KeyRound } from "lucide-react";
-import { Link } from "@vitnode/frontend/navigation";
+import { Link } from "vitnode-frontend/navigation";
 
 import {
   Card,

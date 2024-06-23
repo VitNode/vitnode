@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import * as React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useDebouncedCallback } from "use-debounce";
-import { cn } from "@vitnode/frontend/helpers";
+import { cn } from "vitnode-frontend/helpers";
 
 import { Loader } from "@/components/loader";
 import { Input } from "@/components/ui/input";

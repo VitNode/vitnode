@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { zodInput } from "@vitnode/frontend/helpers";
+import { zodInput } from "vitnode-frontend/helpers";
 
 import { mutationApi } from "./mutation-api";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";

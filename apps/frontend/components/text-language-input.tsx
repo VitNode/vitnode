@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useLocale } from "next-intl";
-import { cn } from "@vitnode/frontend/helpers";
+import { cn } from "vitnode-frontend/helpers";
 
 import { useGlobals } from "@/plugins/core/hooks/use-globals";
 import { Input } from "./ui/input";

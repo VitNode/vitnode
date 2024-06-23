@@ -3,8 +3,8 @@ import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import * as React from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { usePathname, useRouter } from "@vitnode/frontend/navigation";
-import { cn } from "@vitnode/frontend/helpers";
+import { usePathname, useRouter } from "vitnode-frontend/navigation";
+import { cn } from "vitnode-frontend/helpers";
 
 import { Input } from "@/components/ui/input";
 import {

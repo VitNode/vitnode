@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import * as React from "react";
 import { Check } from "lucide-react";
 import { ControllerRenderProps, FieldValues, Path } from "react-hook-form";
-import { cn } from "@vitnode/frontend/helpers";
+import { cn } from "vitnode-frontend/helpers";
 
 import { Button } from "@/components/ui/button";
 import {

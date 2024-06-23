@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import * as React from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Pencil } from "lucide-react";
-import { Link } from "@vitnode/frontend/navigation";
+import { Link } from "vitnode-frontend/navigation";
 
 import {
   Tooltip,

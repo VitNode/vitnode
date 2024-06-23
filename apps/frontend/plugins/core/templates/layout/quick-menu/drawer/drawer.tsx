@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { KeyRound, LogOut, Settings, Shield, User } from "lucide-react";
 import * as React from "react";
-import { Link } from "@vitnode/frontend/navigation";
-import { cn } from "@vitnode/frontend/helpers";
+import { Link } from "vitnode-frontend/navigation";
+import { cn } from "vitnode-frontend/helpers";
 
 import { DrawerClose, DrawerContent } from "@/components/ui/drawer";
 import { HeaderDrawerQuickMenu } from "./header";

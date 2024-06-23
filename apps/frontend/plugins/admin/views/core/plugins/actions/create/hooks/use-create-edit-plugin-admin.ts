@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@vitnode/frontend/navigation";
-import { zodInput } from "@vitnode/frontend/helpers";
+import { usePathname, useRouter } from "vitnode-frontend/navigation";
+import { zodInput } from "vitnode-frontend/helpers";
 
 import { mutationCreateApi } from "./mutation-create-api";
 import { useDialog } from "@/components/ui/dialog";

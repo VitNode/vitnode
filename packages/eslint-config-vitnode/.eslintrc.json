@@ -24,7 +24,7 @@
       "error",
       {
         "name": "next/link",
-        "message": "Please import from `@vitnode/frontend/navigation` instead."
+        "message": "Please import from `vitnode-frontend/navigation` instead."
       },
       {
         "name": "drizzle-orm/mysql-core",
@@ -38,7 +38,7 @@
           "useRouter",
           "usePathname"
         ],
-        "message": "Please import from `@vitnode/frontend/navigation` instead."
+        "message": "Please import from `vitnode-frontend/navigation` instead."
       }
     ],
     "no-console": "error",

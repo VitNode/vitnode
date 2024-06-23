@@ -1,4 +1,4 @@
-import { FlatTree } from "@vitnode/frontend/helpers";
+import { FlatTree } from "vitnode-frontend/helpers";
 
 import { EditActionTableNavDevPluginAdmin } from "./edit";
 import { DeleteActionTableNavDevPluginAdmin } from "./delete/delete";

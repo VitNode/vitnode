@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "@vitnode/frontend/navigation";
+import { Link } from "vitnode-frontend/navigation";
 
 import { User } from "@/graphql/hooks";
 

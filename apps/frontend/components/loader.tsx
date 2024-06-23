@@ -1,5 +1,5 @@
 import { Loader2 } from "lucide-react";
-import { cn } from "@vitnode/frontend/helpers";
+import { cn } from "vitnode-frontend/helpers";
 
 interface Props {
   className?: string;

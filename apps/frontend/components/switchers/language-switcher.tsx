@@ -3,7 +3,7 @@
 
 import { Languages } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@vitnode/frontend/navigation";
+import { usePathname, useRouter } from "vitnode-frontend/navigation";
 
 import { CONFIG } from "@/config";
 import {
