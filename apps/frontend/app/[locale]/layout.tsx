@@ -3,7 +3,7 @@ import { NextIntlClientProvider, AbstractIntlMessages } from "next-intl";
 import { GeistSans } from "geist/font/sans";
 import NextTopLoader from "nextjs-toploader";
 import { Metadata } from "next";
-import { cn } from "@vitnode/frontend/helpers";
+import { cn } from "vitnode-frontend/helpers";
 
 import { CONFIG } from "@/config";
 import { Providers } from "./providers";

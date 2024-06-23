@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import * as React from "react";
-import { cn } from "@vitnode/frontend/helpers";
+import { cn } from "vitnode-frontend/helpers";
 
 import { Button } from "@/components/ui/button";
 

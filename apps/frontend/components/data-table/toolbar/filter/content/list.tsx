@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { CheckIcon } from "@radix-ui/react-icons";
-import { usePathname, useRouter } from "@vitnode/frontend/navigation";
-import { cn } from "@vitnode/frontend/helpers";
+import { usePathname, useRouter } from "vitnode-frontend/navigation";
+import { cn } from "vitnode-frontend/helpers";
 
 import { CommandGroup, CommandItem } from "@/components/ui/command";
 import { Loader } from "@/components/loader";

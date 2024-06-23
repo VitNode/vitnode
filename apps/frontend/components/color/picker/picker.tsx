@@ -8,7 +8,7 @@ import {
   convertColor,
   isColorBrightness,
 } from "@vitnode/shared";
-import { cn } from "@vitnode/frontend/helpers";
+import { cn } from "vitnode-frontend/helpers";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";

@@ -4,7 +4,7 @@ import * as z from "zod";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { convertDateToUnixTime } from "@vitnode/shared";
-import { usePathname, useRouter } from "@vitnode/frontend/navigation";
+import { usePathname, useRouter } from "vitnode-frontend/navigation";
 
 import {
   Form,

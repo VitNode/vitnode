@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import * as React from "react";
 import { formatBytes } from "@vitnode/shared";
-import { Link } from "@vitnode/frontend/navigation";
+import { Link } from "vitnode-frontend/navigation";
 
 import { CONFIG } from "@/config";
 import { DataTable } from "@/components/data-table/data-table";

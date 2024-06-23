@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { ColumnDef } from "@tanstack/react-table";
 import * as React from "react";
-import { Link } from "@vitnode/frontend/navigation";
+import { Link } from "vitnode-frontend/navigation";
 
 import { DataTable } from "@/components/data-table/data-table";
 import { ShowAdminGroups } from "@/graphql/hooks";

@@ -1,5 +1,5 @@
 import { Bold, Italic, Underline } from "lucide-react";
-import { cn } from "@vitnode/frontend/helpers";
+import { cn } from "vitnode-frontend/helpers";
 
 import { ToggleToolbarEditor } from "./toggle";
 import { LinkToolbarEditor } from "./custom/link/link";

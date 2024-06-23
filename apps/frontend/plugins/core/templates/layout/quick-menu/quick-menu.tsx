@@ -1,4 +1,4 @@
-import { flattenTree } from "@vitnode/frontend/helpers";
+import { flattenTree } from "vitnode-frontend/helpers";
 
 import { QuickMenuWrapper } from "./wrapper";
 import { ButtonDrawer } from "./drawer/button";

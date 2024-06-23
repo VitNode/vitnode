@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "@vitnode/frontend/navigation";
+import { redirect } from "vitnode-frontend/navigation";
 
 import {
   Admin_Sessions__Sign_Out,

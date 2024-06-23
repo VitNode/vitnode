@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 import { HslColor } from "react-colorful";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
-import { useRouter } from "@vitnode/frontend/navigation";
+import { useRouter } from "vitnode-frontend/navigation";
 
 import { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";

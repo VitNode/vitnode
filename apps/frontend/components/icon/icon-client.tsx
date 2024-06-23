@@ -2,7 +2,7 @@
 
 import * as Lucide from "lucide-react";
 import * as React from "react";
-import { cn } from "@vitnode/frontend/helpers";
+import { cn } from "vitnode-frontend/helpers";
 
 export type IconLucideNames = keyof typeof Lucide.icons;
 

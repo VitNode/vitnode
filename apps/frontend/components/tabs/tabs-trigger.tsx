@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { Link, usePathname } from "@vitnode/frontend/navigation";
-import { cn } from "@vitnode/frontend/helpers";
+import { Link, usePathname } from "vitnode-frontend/navigation";
+import { cn } from "vitnode-frontend/helpers";
 import { motion } from "framer-motion";
 
 import { buttonVariants } from "../ui/button";

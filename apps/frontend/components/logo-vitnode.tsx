@@ -1,4 +1,4 @@
-import { cn } from "@vitnode/frontend/helpers";
+import { cn } from "vitnode-frontend/helpers";
 
 interface Props {
   className?: string;

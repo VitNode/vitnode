@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
-import { zodInput } from "@vitnode/frontend/helpers";
+import { zodInput } from "vitnode-frontend/helpers";
 
 import { ShowCoreLanguages } from "@/graphql/hooks";
 import { useDialog } from "@/components/ui/dialog";

@@ -3,7 +3,7 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin();
 const withBundleAnalyzer = createBundleAnalyzer({
-  enabled: process.env.ANALYZE === "true"
+  enabled: process.env.ANALYZE === "true",
 });
 
 const config = () => {
@@ -12,7 +12,7 @@ const config = () => {
   const backend = {
     hostname: new URL(envBackend).hostname,
     port: new URL(envBackend).port,
-    protocol: new URL(envBackend).protocol.replace(":", "")
+    protocol: new URL(envBackend).protocol.replace(":", ""),
   };
 
   /** @type {import('next').NextConfig} */
@@ -21,36 +21,36 @@ const config = () => {
     reactStrictMode: false,
     logging: {
       fetches: {
-        fullUrl: true
-      }
+        fullUrl: true,
+      },
     },
     experimental: {
       ppr: true,
-      reactCompiler: true
+      reactCompiler: true,
     },
     output: "standalone",
-    transpilePackages: ["lucide-react", "@vitnode/shared", "@vitnode/frontend"],
+    transpilePackages: ["lucide-react", "@vitnode/shared", "vitnode-frontend"],
     images: {
       formats: ["image/avif", "image/webp"],
       remotePatterns: [
         {
           hostname: "*",
-          port: ""
+          port: "",
         },
         {
           hostname: "localhost",
           port: "8080",
           protocol: "http",
-          pathname: "/public/**"
+          pathname: "/public/**",
         },
         {
           hostname: backend.hostname,
           port: backend.port,
           protocol: backend.protocol,
-          pathname: "/public/**"
-        }
-      ]
-    }
+          pathname: "/public/**",
+        },
+      ],
+    },
   };
 };
 

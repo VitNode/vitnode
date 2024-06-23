@@ -8,7 +8,7 @@ import {
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { useParams } from "next/navigation";
-import { WithChildren } from "@vitnode/frontend/helpers";
+import { WithChildren } from "vitnode-frontend/helpers";
 
 import { useDragAndDrop } from "@/plugins/core/hooks/drag&drop/use-functions";
 import {

@@ -1,4 +1,4 @@
-import { cn } from "@vitnode/frontend/helpers";
+import { cn } from "vitnode-frontend/helpers";
 
 import { CONFIG } from "@/config";
 import { Maybe, AvatarUser as AvatarUserType } from "@/graphql/hooks";

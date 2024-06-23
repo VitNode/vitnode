@@ -3,7 +3,7 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import * as React from "react";
 import { useLocale } from "next-intl";
-import { cn } from "@vitnode/frontend/helpers";
+import { cn } from "vitnode-frontend/helpers";
 
 import { TextLanguage } from "@/graphql/hooks";
 import { ToolBarEditor } from "./toolbar/toolbar";

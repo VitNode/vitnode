@@ -1,5 +1,5 @@
 {
-  "name": "@vitnode/frontend",
+  "name": "vitnode-frontend",
   "version": "0.0.3",
   "exports": {
     "./navigation": {

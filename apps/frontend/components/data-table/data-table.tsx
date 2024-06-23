@@ -11,7 +11,7 @@ import {
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import * as React from "react";
-import { usePathname, useRouter } from "@vitnode/frontend/navigation";
+import { usePathname, useRouter } from "vitnode-frontend/navigation";
 
 import {
   Table,
