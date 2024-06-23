@@ -33,7 +33,7 @@ export const GroupInputContentList = ({ edges, onSelect, values }: Props) => {
             onSelect={() =>
               onSelect({
                 id: item.id,
-                name: item.name
+                name: item.name,
               })
             }
           >
@@ -42,7 +42,7 @@ export const GroupInputContentList = ({ edges, onSelect, values }: Props) => {
                 "border-primary mr-2 flex size-4 items-center justify-center rounded-sm border",
                 values.find(value => item.id === value.id)
                   ? "bg-primary text-primary-foreground"
-                  : "opacity-50 [&_svg]:invisible"
+                  : "opacity-50 [&_svg]:invisible",
               )}
             >
               <CheckIcon />

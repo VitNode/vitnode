@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import {
   Command,
   CommandList,
-  commandInputClassName
+  commandInputClassName,
 } from "@/components/ui/command";
 import { queryApi } from "./query-api";
 
@@ -30,8 +30,8 @@ export const UserInputContent = (props: Props) => {
     queryFn: async () =>
       queryApi({
         first: 10,
-        search
-      })
+        search,
+      }),
   });
 
   const handleSearchInput = useDebouncedCallback((value: string) => {
@@ -45,7 +45,7 @@ export const UserInputContent = (props: Props) => {
         <Input
           className={cn(
             "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0",
-            commandInputClassName
+            commandInputClassName,
           )}
           onChange={e => handleSearchInput(e.target.value)}
           placeholder={t("user_input.search")}

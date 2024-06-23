@@ -21,7 +21,7 @@ export const UserBar = () => {
         href="/login"
         className={buttonVariants({
           size: "sm",
-          variant: "outline"
+          variant: "outline",
         })}
       >
         {t("user-bar.sign_in")}
@@ -30,7 +30,7 @@ export const UserBar = () => {
       <Link
         href="/register"
         className={buttonVariants({
-          size: "sm"
+          size: "sm",
         })}
       >
         {t("user-bar.sign_up")}

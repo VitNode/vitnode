@@ -33,8 +33,8 @@ export const ItemNavAdmin = ({ id, items }: Props) => {
                 icons={[
                   {
                     id: item.id,
-                    icon: item.icon ? <Icon name={item.icon} /> : null
-                  }
+                    icon: item.icon ? <Icon name={item.icon} /> : null,
+                  },
                 ]}
               />
             </li>

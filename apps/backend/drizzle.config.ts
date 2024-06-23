@@ -6,7 +6,7 @@ export default defineConfig({
   dialect: "postgresql",
   dbCredentials: {
     ...DATABASE_ENVS,
-    ssl: false
+    ssl: false,
   },
-  schema: "./src/plugins/**/admin/database/schema/*.ts"
+  schema: "./src/plugins/**/admin/database/schema/*.ts",
 });

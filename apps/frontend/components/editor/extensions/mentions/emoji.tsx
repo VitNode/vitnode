@@ -31,7 +31,7 @@ export const MentionExtensionEditor = Mention.configure({
         "John Cusack",
         "Matthew Broderick",
         "Justine Bateman",
-        "Lisa Bonet"
+        "Lisa Bonet",
       ]
         .filter(item => item.toLowerCase().startsWith(query.toLowerCase()))
         .slice(0, 5);
@@ -42,8 +42,8 @@ export const MentionExtensionEditor = Mention.configure({
         onStart,
         onUpdate,
         onKeyDown,
-        onExit
+        onExit,
       };
-    }
-  }
+    },
+  },
 });

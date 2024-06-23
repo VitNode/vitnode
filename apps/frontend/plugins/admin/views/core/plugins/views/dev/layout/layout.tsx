@@ -17,7 +17,7 @@ interface Props extends Admin__Core_Plugins__Show__ItemQuery {
 
 export const DevPluginAdminLayout = ({
   admin__core_plugins__show: { edges },
-  children
+  children,
 }: Props) => {
   const t = useTranslations("admin.core.plugins.dev");
   const tCore = useTranslations("core");
@@ -33,7 +33,7 @@ export const DevPluginAdminLayout = ({
     name,
     updated,
     version,
-    version_code
+    version_code,
   } = plugin;
 
   return (

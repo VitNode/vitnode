@@ -8,7 +8,7 @@ import { mutationApi } from "./mutation-api";
 
 export const useDeleteNavPluginAdmin = ({
   code,
-  parentCode
+  parentCode,
 }: ContentDeleteActionTableNavDevPluginAdminProps) => {
   const t = useTranslations("admin.core.plugins.dev.nav.delete");
   const tCore = useTranslations("core");
@@ -19,18 +19,18 @@ export const useDeleteNavPluginAdmin = ({
     const mutation = await mutationApi({
       code,
       pluginCode: Array.isArray(pluginCode) ? pluginCode[0] : pluginCode,
-      parentCode
+      parentCode,
     });
     if (mutation.error) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;
     }
 
     toast.success(t("success"), {
-      description: code
+      description: code,
     });
 
     setOpen(false);

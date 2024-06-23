@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import {
   Core_Members__Avatar__Delete,
   Core_Members__Avatar__DeleteMutation,
-  Core_Members__Avatar__DeleteMutationVariables
+  Core_Members__Avatar__DeleteMutationVariables,
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 
@@ -15,7 +15,7 @@ export const mutationDeleteApi = async () => {
       Core_Members__Avatar__DeleteMutation,
       Core_Members__Avatar__DeleteMutationVariables
     >({
-      query: Core_Members__Avatar__Delete
+      query: Core_Members__Avatar__Delete,
     });
 
     revalidatePath("/", "layout");

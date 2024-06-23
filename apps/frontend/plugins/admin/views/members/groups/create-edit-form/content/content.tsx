@@ -7,7 +7,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { HeaderContent } from "@/components/header-content/header-content";
@@ -20,7 +20,7 @@ interface Props {
 }
 
 export const ContentContentCreateEditFormGroupsMembersAdmin = ({
-  isGuest
+  isGuest,
 }: Props) => {
   const t = useTranslations("admin.members.groups.create_edit");
   const tCore = useTranslations("core");
@@ -55,7 +55,7 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
               name="content.files_total_max_storage"
               render={({ field }) => {
                 const currentValue = +form.watch(
-                  "content.files_total_max_storage"
+                  "content.files_total_max_storage",
                 );
 
                 return (
@@ -84,7 +84,7 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
                             if (currentValue === -1) {
                               form.setValue(
                                 "content.files_total_max_storage",
-                                500000
+                                500000,
                               );
 
                               return;
@@ -92,7 +92,7 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
 
                             form.setValue(
                               "content.files_total_max_storage",
-                              -1
+                              -1,
                             );
                           }}
                           checked={currentValue === -1}
@@ -115,7 +115,7 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
             name="content.files_max_storage_for_submit"
             render={({ field }) => {
               const currentValue = +form.watch(
-                "content.files_max_storage_for_submit"
+                "content.files_max_storage_for_submit",
               );
 
               return (
@@ -146,7 +146,7 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
                           if (currentValue === -1) {
                             form.setValue(
                               "content.files_max_storage_for_submit",
-                              10000
+                              10000,
                             );
 
                             return;
@@ -154,7 +154,7 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
 
                           form.setValue(
                             "content.files_max_storage_for_submit",
-                            -1
+                            -1,
                           );
                         }}
                         checked={currentValue === -1}

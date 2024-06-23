@@ -16,7 +16,7 @@ export const ItemNavDrawerQuickMenu = ({
   href,
   id,
 
-  children
+  children,
 }: Props) => {
   const pathname = usePathname();
   const active =
@@ -33,10 +33,10 @@ export const ItemNavDrawerQuickMenu = ({
               classNameDrawerQuickMenu,
               "h-auto flex-col items-start gap-1",
               {
-                "bg-accent": active
-              }
-            )
-          })
+                "bg-accent": active,
+              },
+            ),
+          }),
         )}
         target={external ? "_blank" : undefined}
         rel={external ? "noopener noreferrer" : undefined}

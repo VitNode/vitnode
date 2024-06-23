@@ -7,7 +7,7 @@ import { useCreateEditCategoryBlogAdmin } from "./hooks/use-create-edit-category
 import {
   DialogDescription,
   DialogFooter,
-  DialogHeader
+  DialogHeader,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { ShowBlogCategories } from "@/graphql/hooks";
@@ -23,7 +23,7 @@ interface Props {
 
 enum TabsEnum {
   MAIN = "main",
-  PERMISSIONS = "permissions"
+  PERMISSIONS = "permissions",
 }
 
 export const CreateEditCategoryBlogAdmin = ({ data }: Props) => {
@@ -34,7 +34,7 @@ export const CreateEditCategoryBlogAdmin = ({ data }: Props) => {
 
   const tabsContent = {
     [TabsEnum.MAIN]: <MainTabCreateEditCategoryBlogAdmin />,
-    [TabsEnum.PERMISSIONS]: <PermissionsTabCreateEditCategoryBlogAdmin />
+    [TabsEnum.PERMISSIONS]: <PermissionsTabCreateEditCategoryBlogAdmin />,
   };
 
   return (

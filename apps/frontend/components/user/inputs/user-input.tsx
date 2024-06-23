@@ -7,15 +7,15 @@ import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger
+  PopoverTrigger,
 } from "@/components/ui/popover";
 import { Loader } from "@/components/loader";
 import { Badge } from "@/components/ui/badge";
 
 const UserInputContent = React.lazy(async () =>
   import("./content/content").then(module => ({
-    default: module.UserInputContent
-  }))
+    default: module.UserInputContent,
+  })),
 );
 
 export interface UserInputItem {
@@ -61,7 +61,7 @@ export const UserInput = ({
         <Button
           variant="outline"
           className={cn("w-full justify-start", className, {
-            "text-muted-foreground": values.length === 0
+            "text-muted-foreground": values.length === 0,
           })}
           {...rest}
         >

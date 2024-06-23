@@ -7,7 +7,7 @@ interface Args {
 
 export const FilterToolbarDataTableContext = React.createContext<Args>({
   id: "",
-  title: ""
+  title: "",
 });
 
 export const useFilterToolbarDataTable = () =>

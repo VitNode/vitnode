@@ -20,7 +20,7 @@ export const SubmitDatabaseInstallConfigs = () => {
         const mutation = await mutationApi();
         if (mutation?.error) {
           toast.error(tCore("errors.title"), {
-            description: tCore("errors.internal_server_error")
+            description: tCore("errors.internal_server_error"),
           });
           setPending(false);
 

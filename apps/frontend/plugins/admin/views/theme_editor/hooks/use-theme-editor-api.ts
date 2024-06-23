@@ -15,11 +15,11 @@ import { CONFIG } from "@/config";
 const zObjectHsl = z.object({
   h: z.number(),
   s: z.number(),
-  l: z.number()
+  l: z.number(),
 });
 const zObjectHslWithTheme = z.object({
   light: zObjectHsl,
-  dark: zObjectHsl
+  dark: zObjectHsl,
 });
 export const formSchemaColorsThemeEditor = z.object({
   primary: zObjectHslWithTheme,
@@ -36,7 +36,7 @@ export const formSchemaColorsThemeEditor = z.object({
   muted: zObjectHslWithTheme,
   ["muted-foreground"]: zObjectHslWithTheme,
   card: zObjectHslWithTheme,
-  border: zObjectHslWithTheme
+  border: zObjectHslWithTheme,
 });
 
 export const keysFromCSSThemeEditor = [
@@ -54,11 +54,11 @@ export const keysFromCSSThemeEditor = [
   "accent",
   "accent-foreground",
   "card",
-  "border"
+  "border",
 ] as const;
 
 export const useThemeEditorApi = ({
-  core_theme_editor__show
+  core_theme_editor__show,
 }: Core_Theme_Editor__ShowQuery) => {
   const [openSubmitDialog, setOpenSubmitDialog] = React.useState(false);
   const t = useTranslations("core.theme_editor.submit");
@@ -66,7 +66,7 @@ export const useThemeEditorApi = ({
   const { push } = useRouter();
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const formSchema = z.object({
-    colors: formSchemaColorsThemeEditor
+    colors: formSchemaColorsThemeEditor,
   });
   const { resolvedTheme, theme } = useTheme();
   const activeTheme: "dark" | "light" =
@@ -85,9 +85,9 @@ export const useThemeEditorApi = ({
           core_theme_editor__show.colors.destructive_foreground,
         ["cover-foreground"]: core_theme_editor__show.colors.cover_foreground,
         ["accent-foreground"]: core_theme_editor__show.colors.accent_foreground,
-        ["muted-foreground"]: core_theme_editor__show.colors.muted_foreground
-      }
-    }
+        ["muted-foreground"]: core_theme_editor__show.colors.muted_foreground,
+      },
+    },
   });
 
   // Set values to iframe when theme changes
@@ -98,14 +98,14 @@ export const useThemeEditorApi = ({
 
     const colors: (keyof typeof formSchemaColorsThemeEditor.shape)[] =
       Object.keys(
-        formSchemaColorsThemeEditor.shape
+        formSchemaColorsThemeEditor.shape,
       ) as (keyof typeof formSchemaColorsThemeEditor.shape)[];
 
     colors.forEach(color => {
       const hslColor = form.getValues(`colors.${color}`)[activeTheme];
       iframe.style.setProperty(
         `--${color}`,
-        `${hslColor.h} ${hslColor.s}% ${hslColor.l}%`
+        `${hslColor.h} ${hslColor.s}% ${hslColor.l}%`,
       );
     });
   }, [activeTheme]);
@@ -127,13 +127,13 @@ export const useThemeEditorApi = ({
         destructive_foreground: values.colors["destructive-foreground"],
         cover_foreground: values.colors["cover-foreground"],
         accent_foreground: values.colors["accent-foreground"],
-        muted_foreground: values.colors["muted-foreground"]
-      }
+        muted_foreground: values.colors["muted-foreground"],
+      },
     });
 
     if (mutation.error) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;
@@ -143,13 +143,13 @@ export const useThemeEditorApi = ({
     push("/");
 
     toast.success(t("success.title"), {
-      description: !CONFIG.node_development && t("success.desc")
+      description: !CONFIG.node_development && t("success.desc"),
     });
   };
 
   const changeColor = ({
     hslColor,
-    name
+    name,
   }: {
     hslColor: HslColor;
     name: keyof typeof formSchemaColorsThemeEditor.shape;
@@ -160,18 +160,18 @@ export const useThemeEditorApi = ({
 
     iframe.style.setProperty(
       `--${name}`,
-      `${hslColor.h} ${hslColor.s}% ${hslColor.l}%`
+      `${hslColor.h} ${hslColor.s}% ${hslColor.l}%`,
     );
 
     if (activeTheme === "light") {
       form.setValue(`colors.${name}`, {
         light: hslColor,
-        dark: form.getValues(`colors.${name}`).dark
+        dark: form.getValues(`colors.${name}`).dark,
       });
     } else {
       form.setValue(`colors.${name}`, {
         light: form.getValues(`colors.${name}`).light,
-        dark: hslColor
+        dark: hslColor,
       });
     }
   };
@@ -183,6 +183,6 @@ export const useThemeEditorApi = ({
     changeColor,
     activeTheme,
     openSubmitDialog,
-    setOpenSubmitDialog
+    setOpenSubmitDialog,
   };
 };

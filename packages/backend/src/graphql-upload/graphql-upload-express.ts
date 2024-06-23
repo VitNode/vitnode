@@ -13,7 +13,7 @@ export interface ProcessRequestOptions {
 type ProcessRequestFunction = (
   request: IncomingMessage,
   response: ServerResponse,
-  options?: ProcessRequestOptions
+  options?: ProcessRequestOptions,
 ) => Promise<Record<string, unknown> | Record<string, unknown>[]>;
 
 export function graphqlUploadExpress({
@@ -32,7 +32,7 @@ export function graphqlUploadExpress({
   function graphqlUploadExpressMiddleware(
     request: Request,
     response: Response,
-    next: NextFunction
+    next: NextFunction,
   ) {
     if (!request.is("multipart/form-data")) return next();
 

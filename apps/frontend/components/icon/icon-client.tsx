@@ -9,7 +9,7 @@ export type IconLucideNames = keyof typeof Lucide.icons;
 export const IconClient = React.memo(
   ({
     name,
-    className
+    className,
   }: {
     name: IconLucideNames | string;
     className?: string;
@@ -22,7 +22,7 @@ export const IconClient = React.memo(
       async () =>
         import("lucide-react")
           .then(mod => mod[name as IconLucideNames])
-          .then(mod => ({ default: mod }))
+          .then(mod => ({ default: mod })),
     );
 
     return (
@@ -33,7 +33,7 @@ export const IconClient = React.memo(
         <LucideIcon className={className} />
       </React.Suspense>
     );
-  }
+  },
 );
 
 IconClient.displayName = "IconLucide";

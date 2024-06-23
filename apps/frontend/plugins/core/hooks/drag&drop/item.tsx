@@ -33,7 +33,7 @@ export const ItemDragAndDrop = ({
   indentationWidth = 0,
   isDropHere,
   isOpenChildren,
-  onCollapse
+  onCollapse,
 }: Props) => {
   const {
     attributes,
@@ -42,11 +42,11 @@ export const ItemDragAndDrop = ({
     setDraggableNodeRef,
     setDroppableNodeRef,
     transform,
-    transition
+    transition,
   } = useSortable({
     id,
     animateLayoutChanges: ({ isSorting, wasDragging }) =>
-      !(isSorting || wasDragging)
+      !(isSorting || wasDragging),
   });
 
   const allowOpenChildren = !!(childrenLength && onCollapse);
@@ -57,7 +57,7 @@ export const ItemDragAndDrop = ({
       className="border-t-0 pl-[var(--spacing)]"
       style={
         {
-          "--spacing": `${indentationWidth * depth}px`
+          "--spacing": `${indentationWidth * depth}px`,
         } as React.CSSProperties
       }
     >
@@ -67,12 +67,12 @@ export const ItemDragAndDrop = ({
           {
             "bg-primary/20 animate-pulse": isDropHere,
             "z-10": isDragging,
-            "opacity-50": active
-          }
+            "opacity-50": active,
+          },
         )}
         style={{
           transform: CSS.Transform.toString(transform),
-          transition
+          transition,
         }}
         ref={setDraggableNodeRef}
       >
@@ -80,7 +80,7 @@ export const ItemDragAndDrop = ({
           <Button
             className={cn(
               "hover:text-foreground bg-primary/20 text-primary hidden flex-shrink-0 cursor-grab focus:outline-none sm:flex",
-              draggableButtonClassName
+              draggableButtonClassName,
             )}
             style={draggableStyle}
             variant="ghost"
@@ -101,7 +101,7 @@ export const ItemDragAndDrop = ({
             >
               <ChevronRight
                 className={cn("text-muted-foreground transition-transform", {
-                  "rotate-90": isOpenChildren
+                  "rotate-90": isOpenChildren,
                 })}
               />
             </Button>

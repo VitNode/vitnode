@@ -5,7 +5,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from "@/components/ui/dialog";
 import {
   Form,
@@ -13,7 +13,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -25,13 +25,13 @@ export const ContentDownloadActionDevPluginAdmin = ({
   code,
   name,
   version,
-  version_code
+  version_code,
 }: ShowAdminPlugins) => {
   const t = useTranslations("admin.core.plugins.download");
   const { form, onSubmit } = useDownloadPluginAdmin({
     version_code,
     version,
-    code
+    code,
   });
 
   return (
@@ -58,7 +58,7 @@ export const ContentDownloadActionDevPluginAdmin = ({
                     <RadioGroupItem value="rebuild" id="rebuild" />
                     <Label htmlFor="rebuild">
                       {t("type.rebuild", {
-                        version: `${version} (${version_code})`
+                        version: `${version} (${version_code})`,
                       })}
                     </Label>
                   </div>

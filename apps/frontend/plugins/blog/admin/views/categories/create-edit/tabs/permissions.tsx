@@ -19,22 +19,22 @@ export const PermissionsTabCreateEditCategoryBlogAdmin = () => {
               permissions={[
                 {
                   id: "read",
-                  title: "Read"
+                  title: "Read",
                 },
                 {
                   id: "create",
                   title: "Create",
-                  disableForGuest: true
+                  disableForGuest: true,
                 },
                 {
                   id: "reply",
                   title: "Reply",
-                  disableForGuest: true
+                  disableForGuest: true,
                 },
                 {
                   id: "download_files",
-                  title: "Download Files"
-                }
+                  title: "Download Files",
+                },
               ]}
               field={field}
             />

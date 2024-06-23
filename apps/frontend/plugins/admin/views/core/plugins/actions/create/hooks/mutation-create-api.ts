@@ -5,12 +5,12 @@ import { revalidatePath } from "next/cache";
 import {
   Admin__Core_Plugins__Create,
   Admin__Core_Plugins__CreateMutation,
-  Admin__Core_Plugins__CreateMutationVariables
+  Admin__Core_Plugins__CreateMutationVariables,
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 
 export const mutationCreateApi = async (
-  variables: Admin__Core_Plugins__CreateMutationVariables
+  variables: Admin__Core_Plugins__CreateMutationVariables,
 ) => {
   try {
     const { data } = await fetcher<
@@ -18,7 +18,7 @@ export const mutationCreateApi = async (
       Admin__Core_Plugins__CreateMutationVariables
     >({
       query: Admin__Core_Plugins__Create,
-      variables
+      variables,
     });
 
     revalidatePath("/", "layout");

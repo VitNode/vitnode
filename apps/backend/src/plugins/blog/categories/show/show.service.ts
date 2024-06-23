@@ -3,14 +3,14 @@ import { count } from "drizzle-orm";
 import {
   inputPaginationCursor,
   outputPagination,
-  SortDirectionEnum
+  SortDirectionEnum,
+  DatabaseService,
 } from "vitnode-backend";
 
 import { ShowBlogCategoriesArgs } from "./dto/show.args";
 import { ShowBlogCategoriesObj } from "./dto/show.obj";
 
 import { blog_categories } from "../../admin/database/schema/categories";
-import { DatabaseService } from "@/database/database.service";
 
 @Injectable()
 export class ShowBlogCategoriesService {
@@ -19,7 +19,7 @@ export class ShowBlogCategoriesService {
   async show({
     cursor,
     first,
-    last
+    last,
   }: ShowBlogCategoriesArgs): Promise<ShowBlogCategoriesObj> {
     const pagination = await inputPaginationCursor({
       cursor,
@@ -29,20 +29,20 @@ export class ShowBlogCategoriesService {
       last,
       primaryCursor: {
         column: "id",
-        schema: blog_categories.id
+        schema: blog_categories.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.asc,
-        column: "position"
-      }
+        column: "position",
+      },
     });
 
     const edges = await this.databaseService.db.query.blog_categories.findMany({
       ...pagination,
       with: {
         name: true,
-        description: true
-      }
+        description: true,
+      },
     });
 
     const totalCount = await this.databaseService.db
@@ -54,7 +54,7 @@ export class ShowBlogCategoriesService {
       totalCount,
       first,
       cursor,
-      last
+      last,
     });
   }
 }

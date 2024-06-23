@@ -2,12 +2,12 @@ import { useTranslations } from "next-intl";
 
 import {
   useCreateEditNavAdmin,
-  CreateEditNavAdminArgs
+  CreateEditNavAdminArgs,
 } from "./hooks/use-create-edit-nav-admin";
 import {
   DialogFooter,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from "@/components/ui/dialog";
 import {
   Form,
@@ -16,7 +16,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";

@@ -4,7 +4,7 @@ import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Sessions__Authorization,
   Admin__Sessions__AuthorizationQuery,
-  Admin__Sessions__AuthorizationQueryVariables
+  Admin__Sessions__AuthorizationQueryVariables,
 } from "@/graphql/hooks";
 
 export const getSessionAdminData = async () => {
@@ -19,7 +19,7 @@ export const getSessionAdminData = async () => {
     Admin__Sessions__AuthorizationQueryVariables
   >({
     query: Admin__Sessions__Authorization,
-    cache: "force-cache"
+    cache: "force-cache",
   });
 
   return data;

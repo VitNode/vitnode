@@ -4,7 +4,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { useUploadPluginAdmin } from "./hooks/use-upload-plugin-admin";
 import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";

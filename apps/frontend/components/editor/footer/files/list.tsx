@@ -16,8 +16,8 @@ export const ListFilesFooterEditor = () => {
             className={cn(
               "bg-card flex flex-col items-center gap-5 rounded-lg border px-5 py-4 shadow-sm transition-colors md:flex-row",
               {
-                "border-destructive": item.error
-              }
+                "border-destructive": item.error,
+              },
             )}
           >
             <ItemListFilesFooterEditor {...item} />

@@ -7,7 +7,7 @@ interface Args {
 
 export const InstallVitNodeContext = React.createContext<Args>({
   currentStep: 0,
-  setCurrentStep: () => {}
+  setCurrentStep: () => {},
 });
 
 export const useInstallVitnode = () => React.useContext(InstallVitNodeContext);

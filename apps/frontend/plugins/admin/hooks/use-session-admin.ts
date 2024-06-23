@@ -9,7 +9,7 @@ interface Args {
 
 export const SessionAdminContext = React.createContext<Args>({
   session: undefined,
-  version: ""
+  version: "",
 });
 
 export const useSessionAdmin = () => React.useContext(SessionAdminContext);

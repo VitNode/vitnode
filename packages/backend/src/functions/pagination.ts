@@ -28,7 +28,7 @@ export function outputPagination<T>({
   edges,
   first,
   last,
-  totalCount
+  totalCount,
 }: OutputPaginationArgs<T>): OutputPaginationReturn<T> {
   let currentEdges: DataInterface<T>[] = edges;
 
@@ -42,7 +42,7 @@ export function outputPagination<T>({
 
   const edgesCursor = {
     start: currentEdges.at(0)?.id,
-    end: currentEdges.at(-1)?.id
+    end: currentEdges.at(-1)?.id,
   };
 
   if (!first && !last) {
@@ -54,8 +54,8 @@ export function outputPagination<T>({
         hasNextPage: false,
         hasPreviousPage: false,
         startCursor: edgesCursor.start,
-        endCursor: edgesCursor.end
-      }
+        endCursor: edgesCursor.end,
+      },
     };
   }
 
@@ -72,8 +72,8 @@ export function outputPagination<T>({
       hasPreviousPage:
         last && cursor
           ? edges.length > currentEdges.length + 1
-          : edgesCursor.start !== undefined && !!cursor
-    }
+          : edgesCursor.start !== undefined && !!cursor,
+    },
   };
 }
 
@@ -116,7 +116,7 @@ export async function inputPaginationCursor<T extends TableConfig>({
   first,
   last,
   primaryCursor,
-  sortBy
+  sortBy,
 }: InputPaginationCursorArgs<T>): Promise<Return> {
   const currentSortBy: {
     column: string;
@@ -146,7 +146,7 @@ export async function inputPaginationCursor<T extends TableConfig>({
       return {
         where: eq(database.id, -1),
         orderBy,
-        limit: 0
+        limit: 0,
       };
     }
 
@@ -164,6 +164,6 @@ export async function inputPaginationCursor<T extends TableConfig>({
   return {
     where,
     orderBy,
-    limit: first || last ? (last ? last + 1 : first) + 1 : 0
+    limit: first || last ? (last ? last + 1 : first) + 1 : 0,
   };
 }

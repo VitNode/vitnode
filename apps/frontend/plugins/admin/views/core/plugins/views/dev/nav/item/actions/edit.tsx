@@ -10,19 +10,19 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
 import { useItemNavDevPluginAdmin } from "../hooks/use-item-nav-dev-plugin-admin";
 
 const Content = React.lazy(async () =>
   import("../../create-edit/create-edit").then(module => ({
-    default: module.CreateEditNavDevPluginAdmin
-  }))
+    default: module.CreateEditNavDevPluginAdmin,
+  })),
 );
 
 export const EditActionTableNavDevPluginAdmin = (
-  data: FlatTree<ShowAdminNavPluginsObj>
+  data: FlatTree<ShowAdminNavPluginsObj>,
 ) => {
   const t = useTranslations("core");
   const rest = useItemNavDevPluginAdmin();

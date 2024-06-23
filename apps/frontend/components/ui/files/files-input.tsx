@@ -80,8 +80,8 @@ export const FilesInput = ({
             "m-h-32 border-input bg-background placeholder:text-muted-foreground focus-visible:ring-ring flex w-full flex-col items-center justify-center rounded-md border px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50",
             className,
             {
-              "cursor-not-allowed opacity-50": disabled
-            }
+              "cursor-not-allowed opacity-50": disabled,
+            },
           )}
           role="button"
           tabIndex={disabled ? -1 : 0}
@@ -124,7 +124,7 @@ export const FilesInput = ({
               {acceptExtensions.join(", ").toUpperCase()}{" "}
               {maxFileSizeInMb
                 ? t("forms.files.allow_size_per_file", {
-                    size: maxFileSizeInMb
+                    size: maxFileSizeInMb,
                   })
                 : ""}
             </p>

@@ -6,7 +6,7 @@ import { formatBytes } from "@vitnode/shared";
 import {
   acceptMimeTypeImage,
   acceptMimeTypeVideo,
-  FileStateEditor
+  FileStateEditor,
 } from "../files";
 import { uploadMutationApi } from "./upload-mutation-api";
 import { TextLanguage } from "@/graphql/hooks";
@@ -30,19 +30,19 @@ export interface UploadFilesHandlerEditorArgs {
 
 export const useUploadFilesHandlerEditor = ({
   allowUploadFiles,
-  value
+  value,
 }: UploadFilesHandlerEditorArgs) => {
   const { files: permissionFiles } = useSession();
   const { config } = useGlobals();
   const [files, setFiles] = React.useState<FileStateEditor[]>(
-    Array.isArray(value) ? getFilesFromContent(value) : []
+    Array.isArray(value) ? getFilesFromContent(value) : [],
   );
   const t = useTranslations("core.editor.files");
   const tCore = useTranslations("core");
 
   const handleUpload = async ({
     data,
-    finishUpload
+    finishUpload,
   }: {
     data: FileStateEditor;
     finishUpload?: (file: FileStateEditor) => void;
@@ -58,7 +58,7 @@ export const useUploadFilesHandlerEditor = ({
 
     if (error || !mutation.data) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;
@@ -71,24 +71,24 @@ export const useUploadFilesHandlerEditor = ({
             ...item,
             data: mutation.data.core_editor_files__upload,
             isLoading: false,
-            id: mutation.data.core_editor_files__upload.id
+            id: mutation.data.core_editor_files__upload.id,
           };
         }
 
         return item;
-      })
+      }),
     );
 
     finishUpload?.({
       ...data,
       data: mutation.data.core_editor_files__upload,
       id: mutation.data.core_editor_files__upload.id,
-      isLoading: false
+      isLoading: false,
     });
   };
 
   const validateMineTypeFiles = (
-    files: FileStateEditor[]
+    files: FileStateEditor[],
   ): FileStateEditor[] => {
     // console.log(files);
     if (config.editor.files.allow_type === "all") return files;
@@ -96,7 +96,7 @@ export const useUploadFilesHandlerEditor = ({
     return files.filter(file => {
       if (config.editor.files.allow_type === "images_videos") {
         return [...acceptMimeTypeImage, ...acceptMimeTypeVideo].includes(
-          file.file?.type || ""
+          file.file?.type || "",
         );
       }
 
@@ -123,8 +123,8 @@ export const useUploadFilesHandlerEditor = ({
     if (totalSize > max) {
       toast.error(t("errors.max_storage_for_submit.title"), {
         description: t.rich("errors.max_storage_for_submit.desc", {
-          size: formatBytes(max)
-        })
+          size: formatBytes(max),
+        }),
       });
 
       return [];
@@ -135,7 +135,7 @@ export const useUploadFilesHandlerEditor = ({
 
   const uploadFiles = async ({
     files,
-    finishUpload
+    finishUpload,
   }: UploadFilesHandlerArgs) => {
     if (
       !files.length ||
@@ -153,8 +153,8 @@ export const useUploadFilesHandlerEditor = ({
         description: t("errors.invalid_file_type.desc", {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-expect-error
-          types: t(config.editor.files.allow_type)
-        })
+          types: t(config.editor.files.allow_type),
+        }),
       });
     }
     if (!validateMineType.length) return;
@@ -166,7 +166,7 @@ export const useUploadFilesHandlerEditor = ({
     await Promise.all(
       validateMineType.map(async data => {
         await handleUpload({ data, finishUpload });
-      })
+      }),
     );
   };
 

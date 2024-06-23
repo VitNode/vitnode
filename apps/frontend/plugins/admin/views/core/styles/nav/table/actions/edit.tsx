@@ -12,17 +12,17 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 
 const Content = React.lazy(async () =>
   import("../../create-edit/create-edit").then(module => ({
-    default: module.ContentCreateEditNavAdmin
-  }))
+    default: module.ContentCreateEditNavAdmin,
+  })),
 );
 
 export const EditActionTableNavAdmin = (
-  props: Omit<ShowCoreNav, "children">
+  props: Omit<ShowCoreNav, "children">,
 ) => {
   const t = useTranslations("core");
 

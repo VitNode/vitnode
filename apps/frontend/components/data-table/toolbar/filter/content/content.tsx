@@ -15,7 +15,7 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-  commandInputClassName
+  commandInputClassName,
 } from "@/components/ui/command";
 import { ListContentFilterToolbarDataTable } from "./list";
 import { useFilterToolbarDataTable } from "../hooks/use-filter-toolbar-data-table";
@@ -56,7 +56,7 @@ export const ContentFilterToolbarDataTable = ({
             onChange={e => handleSearchInput(e.target.value)}
             className={cn(
               commandInputClassName,
-              "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+              "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0",
             )}
             placeholder={title}
           />

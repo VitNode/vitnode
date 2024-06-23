@@ -3,7 +3,7 @@
 import { DndContext, closestCorners, DragOverlay } from "@dnd-kit/core";
 import {
   SortableContext,
-  verticalListSortingStrategy
+  verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import * as React from "react";
 import { useTranslations } from "next-intl";
@@ -26,7 +26,7 @@ export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
     React.useState<Omit<ShowCoreNav, "__typename">[]>(edges);
   const data = initData.map(item => ({
     ...item,
-    children: item.children.map(child => ({ ...child, children: [] }))
+    children: item.children.map(child => ({ ...child, children: [] })),
   }));
 
   const {
@@ -38,9 +38,9 @@ export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
     onDragOver,
     onDragStart,
     resetState,
-    sortedIds
+    sortedIds,
   } = useDragAndDrop<Omit<ShowCoreNav, "__typename">>({
-    data
+    data,
   });
 
   // Revalidate items when edges change
@@ -67,7 +67,7 @@ export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
         const moveTo = onDragEnd<ShowCoreNav>({
           data,
           setData,
-          ...event
+          ...event,
         });
 
         if (!moveTo) return;
@@ -75,7 +75,7 @@ export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
         await mutationChangePositionApi({
           id: Number(moveTo.id),
           indexToMove: moveTo.indexToMove,
-          parentId: Number(moveTo.parentId)
+          parentId: Number(moveTo.parentId),
         });
       }}
     >
@@ -85,7 +85,7 @@ export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
             key={item.id}
             {...actionsItem({
               data: item,
-              indentationWidth
+              indentationWidth,
             })}
             draggableChildren={
               item.icon ? icons.find(el => el.id === item.id)?.icon : null
@@ -99,7 +99,7 @@ export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
           {activeItemOverlay && (
             <ItemDragAndDrop
               {...actionsItem({
-                data: activeItemOverlay
+                data: activeItemOverlay,
               })}
               draggableChildren={
                 activeItemOverlay.icon

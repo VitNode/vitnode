@@ -5,7 +5,7 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle
+  AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { SubmitContentDeletePluginActionsAdmin } from "./submit";
@@ -15,7 +15,7 @@ import { ShowAdminPlugins } from "@/graphql/hooks";
 export const ContentDeletePluginActionsAdmin = ({
   author,
   code,
-  name
+  name,
 }: ShowAdminPlugins) => {
   const t = useTranslations("admin.core.plugins.delete");
   const tCore = useTranslations("core");
@@ -32,7 +32,7 @@ export const ContentDeletePluginActionsAdmin = ({
             ),
             author: () => (
               <span className="text-foreground font-bold">{author}</span>
-            )
+            ),
           })}
         </AlertDialogDescription>
       </AlertDialogHeader>

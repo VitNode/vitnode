@@ -9,7 +9,7 @@ import { CONFIG } from "@/config";
 import { acceptMimeTypeImage, FilesHandlerAttributes } from "./files";
 
 const FileFromNextWithNode = ({
-  node: { attrs: data }
+  node: { attrs: data },
 }: {
   node: { attrs: FilesHandlerAttributes };
 }) => {

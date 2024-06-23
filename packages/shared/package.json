@@ -1,6 +1,6 @@
 {
   "name": "@vitnode/shared",
-  "version": "1.0.0",
+  "version": "0.0.3",
   "main": "./dist/index.js",
   "types": "./src/index.ts",
   "scripts": {

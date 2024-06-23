@@ -5,12 +5,12 @@ import { revalidatePath } from "next/cache";
 import {
   Core_Editor_Files__Delete,
   Core_Editor_Files__DeleteMutation,
-  Core_Editor_Files__DeleteMutationVariables
+  Core_Editor_Files__DeleteMutationVariables,
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 
 export const deleteMutationApi = async (
-  variables: Core_Editor_Files__DeleteMutationVariables
+  variables: Core_Editor_Files__DeleteMutationVariables,
 ) => {
   try {
     const { data } = await fetcher<
@@ -18,7 +18,7 @@ export const deleteMutationApi = async (
       Core_Editor_Files__DeleteMutationVariables
     >({
       query: Core_Editor_Files__Delete,
-      variables
+      variables,
     });
 
     revalidatePath("/settings/files", "page");

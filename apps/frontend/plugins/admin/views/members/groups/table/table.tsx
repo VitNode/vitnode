@@ -15,7 +15,7 @@ import { GroupsMembersAdminViewProps } from "../groups-members-admin-view";
 import { Badge } from "@/components/ui/badge";
 
 export const TableGroupsMembersAdmin = ({
-  data
+  data,
 }: GroupsMembersAdminViewProps) => {
   const t = useTranslations("admin.members.groups");
   const tCore = useTranslations("core");
@@ -36,7 +36,7 @@ export const TableGroupsMembersAdmin = ({
               {data.root && <Badge>{t("root")}</Badge>}
             </div>
           );
-        }
+        },
       },
       {
         header: t("table.users_count"),
@@ -49,7 +49,7 @@ export const TableGroupsMembersAdmin = ({
               {data.users_count}
             </Link>
           ) : null;
-        }
+        },
       },
       {
         header: val => {
@@ -64,7 +64,7 @@ export const TableGroupsMembersAdmin = ({
           const data = row.original;
 
           return <DateFormat date={data.updated} />;
-        }
+        },
       },
       {
         id: "actions",
@@ -72,10 +72,10 @@ export const TableGroupsMembersAdmin = ({
           const data = row.original;
 
           return <ActionsTableGroupsMembersAdmin {...data} />;
-        }
-      }
+        },
+      },
     ],
-    []
+    [],
   );
 
   return (
@@ -87,7 +87,7 @@ export const TableGroupsMembersAdmin = ({
       searchPlaceholder={t("search_placeholder")}
       defaultSorting={{
         sortBy: "updated",
-        sortDirection: "desc"
+        sortDirection: "desc",
       }}
     />
   );

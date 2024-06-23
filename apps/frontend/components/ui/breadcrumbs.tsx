@@ -18,8 +18,8 @@ export const Breadcrumbs = ({ children, items, ref }: Props) => {
     buttonVariants({
       variant: "link",
       size: "sm",
-      className: "text-muted-foreground h-5 px-0"
-    })
+      className: "text-muted-foreground h-5 px-0",
+    }),
   );
 
   return (

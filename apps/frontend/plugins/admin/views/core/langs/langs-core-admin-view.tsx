@@ -34,15 +34,15 @@ export const LangsCoreAdminView = ({ data }: LangsCoreAdminViewProps) => {
               {data.default && <Badge>{tCore("default")}</Badge>}
             </div>
           );
-        }
+        },
       },
       {
         header: t("table.key"),
-        accessorKey: "code"
+        accessorKey: "code",
       },
       {
         header: t("table.locale"),
-        accessorKey: "locale"
+        accessorKey: "locale",
       },
       {
         header: t("table.time_24"),
@@ -51,7 +51,7 @@ export const LangsCoreAdminView = ({ data }: LangsCoreAdminViewProps) => {
           const data = row.original;
 
           return data.time_24 ? tCore("yes") : tCore("no");
-        }
+        },
       },
       {
         header: val => {
@@ -66,7 +66,7 @@ export const LangsCoreAdminView = ({ data }: LangsCoreAdminViewProps) => {
           const data = row.original;
 
           return <DateFormat date={data.created} />;
-        }
+        },
       },
       {
         header: tCore("table.enabled"),
@@ -75,16 +75,16 @@ export const LangsCoreAdminView = ({ data }: LangsCoreAdminViewProps) => {
           const data = row.original;
 
           return <EnabledRowTableLangsCoreAdmin data={data} />;
-        }
+        },
       },
       {
         id: "actions",
         cell: ({ row }) => {
           return <ActionsTableLangsCoreAdmin {...row.original} />;
-        }
-      }
+        },
+      },
     ],
-    []
+    [],
   );
 
   return (
@@ -95,7 +95,7 @@ export const LangsCoreAdminView = ({ data }: LangsCoreAdminViewProps) => {
       defaultPageSize={10}
       defaultSorting={{
         sortBy: "created",
-        sortDirection: "desc"
+        sortDirection: "desc",
       }}
       columns={columns}
     />

@@ -13,7 +13,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { useSignInView } from "@/plugins/core/hooks/sign/in/use-sign-in-view";
 import { Checkbox } from "@/components/ui/checkbox";

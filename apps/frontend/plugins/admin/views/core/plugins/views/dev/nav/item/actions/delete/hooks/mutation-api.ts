@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import {
   Admin__Core_Plugins__Nav__Delete,
   Admin__Core_Plugins__Nav__DeleteMutation,
-  Admin__Core_Plugins__Nav__DeleteMutationVariables
+  Admin__Core_Plugins__Nav__DeleteMutationVariables,
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 
@@ -20,12 +20,12 @@ export const mutationApi = async (variables: Args) => {
       Admin__Core_Plugins__Nav__DeleteMutationVariables
     >({
       query: Admin__Core_Plugins__Nav__Delete,
-      variables
+      variables,
     });
 
     revalidatePath(
       `/admin/core/plugins/${variables.pluginCode}/dev/nav`,
-      "page"
+      "page",
     );
 
     return { data };

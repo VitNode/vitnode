@@ -8,8 +8,8 @@ import { Loader } from "@/components/loader";
 
 const CreateEditFormAdministratorsStaffAdmin = React.lazy(async () =>
   import("../create-edit-form/create-edit-form").then(module => ({
-    default: module.CreateEditFormAdministratorsStaffAdmin
-  }))
+    default: module.CreateEditFormAdministratorsStaffAdmin,
+  })),
 );
 
 export const CreateActionsAdministratorsStaffAdmin = () => {

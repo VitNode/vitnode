@@ -17,35 +17,35 @@ export const useSignUpView = () => {
       .string()
       .trim()
       .min(1, {
-        message: t("forms.empty")
+        message: t("forms.empty"),
       })
       .max(32, {
-        message: t("forms.max_length", { length: 32 })
+        message: t("forms.max_length", { length: 32 }),
       })
       .refine(value => nameRegex.test(value), {
-        message: t("sign_up.form.name.invalid")
+        message: t("sign_up.form.name.invalid"),
       }),
     email: z
       .string()
       .trim()
       .min(1, {
-        message: t("forms.empty")
+        message: t("forms.empty"),
       }),
     password: z
       .string()
       .min(1, {
-        message: t("forms.empty")
+        message: t("forms.empty"),
       })
       .regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{8,}$/,
         {
-          message: t("sign_up.form.password.invalid")
-        }
+          message: t("sign_up.form.password.invalid"),
+        },
       ),
     terms: z.boolean().refine(value => value, {
-      message: t("sign_up.form.terms.empty")
+      message: t("sign_up.form.terms.empty"),
     }),
-    newsletter: z.boolean()
+    newsletter: z.boolean(),
   });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -54,9 +54,9 @@ export const useSignUpView = () => {
       email: "",
       password: "",
       terms: false,
-      newsletter: false
+      newsletter: false,
     },
-    mode: "onChange"
+    mode: "onChange",
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -74,11 +74,11 @@ export const useSignUpView = () => {
             "email",
             {
               type: "manual",
-              message: t("sign_up.form.email.already_exists")
+              message: t("sign_up.form.email.already_exists"),
             },
             {
-              shouldFocus: true
-            }
+              shouldFocus: true,
+            },
           );
 
           return;
@@ -89,18 +89,18 @@ export const useSignUpView = () => {
             "name",
             {
               type: "manual",
-              message: t("sign_up.form.name.already_exists")
+              message: t("sign_up.form.name.already_exists"),
             },
             {
-              shouldFocus: true
-            }
+              shouldFocus: true,
+            },
           );
 
           return;
         }
 
         toast.error(t("errors.title"), {
-          description: t("errors.internal_server_error")
+          description: t("errors.internal_server_error"),
         });
       }
     }
@@ -108,6 +108,6 @@ export const useSignUpView = () => {
 
   return {
     form,
-    onSubmit
+    onSubmit,
   };
 };

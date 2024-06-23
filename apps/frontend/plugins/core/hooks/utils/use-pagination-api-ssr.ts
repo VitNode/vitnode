@@ -28,7 +28,7 @@ export function usePaginationAPISsr<T extends Record<string, unknown>>({
   defaultPageSize,
   search,
   searchParams,
-  sortByEnum
+  sortByEnum,
 }: Args<T>): ReturnValues<T> {
   const pagination = {
     first: Number(searchParams.last ?? 0)
@@ -37,18 +37,18 @@ export function usePaginationAPISsr<T extends Record<string, unknown>>({
     last: Number(searchParams.last ?? 0),
     cursor: Number(searchParams.cursor) ?? null,
     search: search ? searchParams.search ?? "" : "",
-    sortBy: useGetSortByParamsAPI({ constEnum: sortByEnum, searchParams })
+    sortBy: useGetSortByParamsAPI({ constEnum: sortByEnum, searchParams }),
   };
 
   return {
     ...pagination,
-    first: pagination.first ? pagination.first : defaultPageSize
+    first: pagination.first ? pagination.first : defaultPageSize,
   };
 }
 
 function useGetSortByParamsAPI<T extends Record<string, unknown>>({
   constEnum,
-  searchParams
+  searchParams,
 }: {
   searchParams: Pick<SearchParamsPagination, "sortBy" | "sortDirection">;
   constEnum?: T;
@@ -58,7 +58,7 @@ function useGetSortByParamsAPI<T extends Record<string, unknown>>({
 } | null {
   const sort = {
     by: searchParams.sortBy?.toLowerCase(),
-    direction: searchParams.sortDirection?.toLowerCase()
+    direction: searchParams.sortDirection?.toLowerCase(),
   };
 
   if (
@@ -74,12 +74,12 @@ function useGetSortByParamsAPI<T extends Record<string, unknown>>({
   return {
     column: sort.by as keyof T,
     direction:
-      sort.direction === "asc" ? SortDirectionEnum.asc : SortDirectionEnum.desc
+      sort.direction === "asc" ? SortDirectionEnum.asc : SortDirectionEnum.desc,
   };
 }
 
 export const emptyPagination = ({
-  first
+  first,
 }: {
   first: 10 | 20 | 30 | 40 | 50;
 }) => {
@@ -88,6 +88,6 @@ export const emptyPagination = ({
     last: 0,
     cursor: null,
     search: "",
-    sortBy: null
+    sortBy: null,
   };
 };

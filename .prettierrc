@@ -1,7 +1,7 @@
 {
   "singleQuote": false,
   "arrowParens": "avoid",
-  "trailingComma": "none",
+  "trailingComma": "all",
   "printWidth": 80,
   "plugins": ["prettier-plugin-tailwindcss"],
   "tailwindFunctions": ["cn"]

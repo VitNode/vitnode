@@ -26,15 +26,15 @@ export const IsTextLanguageInput = () => {
       target: object.constructor,
       propertyName,
       options: {
-        message: "Each language must have a value"
+        message: "Each language must have a value",
       },
       validator: {
         validate(item: TextLanguageInput | TextLanguageInput[]) {
           return (Array.isArray(item) ? item : [item]).every(
-            item => item.value.trim().length > 0
+            item => item.value.trim().length > 0,
           );
-        }
-      }
+        },
+      },
     });
   };
 };
@@ -46,15 +46,15 @@ export const MaxLengthLanguageInput = ({ length }: { length: number }) => {
       target: object.constructor,
       propertyName,
       options: {
-        message: `Each language must have a value with a maximum length of ${length}`
+        message: `Each language must have a value with a maximum length of ${length}`,
       },
       validator: {
         validate(item: TextLanguageInput | TextLanguageInput[]) {
           return (Array.isArray(item) ? item : [item]).every(
-            item => item.value.trim().length <= length
+            item => item.value.trim().length <= length,
           );
-        }
-      }
+        },
+      },
     });
   };
 };
@@ -65,28 +65,28 @@ export const MinLengthLanguageInput = ({ length }: { length: number }) => {
       target: object.constructor,
       propertyName,
       options: {
-        message: `Each language must have a value with a minimum length of ${length}`
+        message: `Each language must have a value with a minimum length of ${length}`,
       },
       validator: {
         validate(item: TextLanguageInput | TextLanguageInput[]) {
           return (Array.isArray(item) ? item : [item]).every(
-            item => item.value.trim().length >= length
+            item => item.value.trim().length >= length,
           );
-        }
-      }
+        },
+      },
     });
   };
 };
 
 export const TransformTextLanguageInput = ({
-  value
+  value,
 }: {
   value: TextLanguageInput | TextLanguageInput[];
 }) => {
   if (Array.isArray(value)) {
     let current = value.map(item => ({
       ...item,
-      value: item.value.trimStart().trimEnd()
+      value: item.value.trimStart().trimEnd(),
     }));
 
     // If is only one item and isn't english then change to english
@@ -94,8 +94,8 @@ export const TransformTextLanguageInput = ({
       current = [
         {
           language_code: "en",
-          value: current[0].value
-        }
+          value: current[0].value,
+        },
       ];
     }
 
@@ -104,7 +104,7 @@ export const TransformTextLanguageInput = ({
 
   return {
     ...value,
-    value: value.value.trimStart().trimEnd()
+    value: value.value.trimStart().trimEnd(),
   };
 };
 

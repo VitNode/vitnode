@@ -14,7 +14,7 @@ import { EmojiExtensionEditor } from "./extensions/emoji/emoji";
 import { Skeleton } from "../ui/skeleton";
 import {
   useUploadFilesHandlerEditor,
-  UploadFilesHandlerEditorArgs
+  UploadFilesHandlerEditorArgs,
 } from "./extensions/files/hooks/use-upload-files-handler-editor.ts";
 import { EditorStateContext } from "./hooks/use-editor-state";
 
@@ -45,31 +45,31 @@ export const Editor = ({
   className,
   disableLanguage,
   onChange,
-  value
+  value,
 }: WithLanguage | WithoutLanguage) => {
   const { files, setFiles, uploadFiles } = useUploadFilesHandlerEditor({
     value,
-    allowUploadFiles
+    allowUploadFiles,
   });
   const locale = useLocale();
   const { defaultLanguage } = useGlobals();
   const [selectedLanguage, setSelectedLanguage] = React.useState(
-    locale ?? defaultLanguage
+    locale ?? defaultLanguage,
   );
   const editor = useEditor({
     autofocus: autoFocus,
     extensions: [
       ...extensionsEditor({
-        uploadFiles
+        uploadFiles,
       }),
-      EmojiExtensionEditor
+      EmojiExtensionEditor,
     ],
     editorProps: {
       attributes: {
         class: cn(
-          "bg-card min-h-32 resize-y overflow-auto p-4 focus:outline-none [&>*:not(:last-child)]:mb-[0.5rem]"
-        )
-      }
+          "bg-card min-h-32 resize-y overflow-auto p-4 focus:outline-none [&>*:not(:last-child)]:mb-[0.5rem]",
+        ),
+      },
     },
     content: (() => {
       const current = Array.isArray(value)
@@ -95,7 +95,7 @@ export const Editor = ({
       // Remove form the array if content is empty
       if (editor.isEmpty) {
         onChange(
-          currentValue.filter(v => v.language_code !== selectedLanguage)
+          currentValue.filter(v => v.language_code !== selectedLanguage),
         );
 
         return;
@@ -103,9 +103,9 @@ export const Editor = ({
 
       onChange([
         ...currentValue.filter(v => v.language_code !== selectedLanguage),
-        { language_code: selectedLanguage, value: content }
+        { language_code: selectedLanguage, value: content },
       ]);
-    }
+    },
   });
 
   // Toggle the editor content when the selected language changes
@@ -135,7 +135,7 @@ export const Editor = ({
         value,
         onChange: onChange as (value: TextLanguage[] | string) => void,
         selectedLanguage,
-        setFiles
+        setFiles,
       }}
     >
       <div

@@ -7,7 +7,7 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
 
@@ -30,7 +30,7 @@ export const FinishInstallConfigsView = () => {
         <Link
           href="/admin"
           className={buttonVariants({
-            variant: "ghost"
+            variant: "ghost",
           })}
         >
           <KeyRound /> Admin Control Panel

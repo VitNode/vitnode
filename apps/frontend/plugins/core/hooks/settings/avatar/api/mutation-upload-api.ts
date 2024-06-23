@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import {
   Core_Members__Avatar__Upload,
   Core_Members__Avatar__UploadMutation,
-  Core_Members__Avatar__UploadMutationVariables
+  Core_Members__Avatar__UploadMutationVariables,
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 
@@ -21,9 +21,9 @@ export const mutationUploadApi = async (formData: FormData) => {
       uploads: [
         {
           files,
-          variable: "file"
-        }
-      ]
+          variable: "file",
+        },
+      ],
     });
 
     revalidatePath("/", "layout");

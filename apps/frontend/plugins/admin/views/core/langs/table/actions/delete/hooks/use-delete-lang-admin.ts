@@ -11,7 +11,7 @@ import { ShowCoreLanguages } from "@/graphql/hooks";
 
 export const useDeleteLangAdmin = ({
   code,
-  name
+  name,
 }: Pick<ShowCoreLanguages, "code" | "name">) => {
   const t = useTranslations("admin.core.langs.actions.delete");
   const tCore = useTranslations("core");
@@ -19,14 +19,14 @@ export const useDeleteLangAdmin = ({
   const pathname = usePathname();
   const { push } = useRouter();
   const formSchema = z.object({
-    name: z.string().refine(value => value === name)
+    name: z.string().refine(value => value === name),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: ""
-    }
+      name: "",
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -35,7 +35,7 @@ export const useDeleteLangAdmin = ({
     const mutation = await mutationApi({ code });
     if (mutation.error) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;
@@ -44,7 +44,7 @@ export const useDeleteLangAdmin = ({
     push(pathname);
 
     toast.success(t("success"), {
-      description: name
+      description: name,
     });
 
     setOpen(false);

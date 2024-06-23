@@ -10,7 +10,7 @@ export class ShowBlogCategoriesResolver {
 
   @Query(() => ShowBlogCategoriesObj)
   async blog_categories__show(
-    @Args() args: ShowBlogCategoriesArgs
+    @Args() args: ShowBlogCategoriesArgs,
   ): Promise<ShowBlogCategoriesObj> {
     return this.service.show(args);
   }

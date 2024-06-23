@@ -8,13 +8,13 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
 import { DeleteActionFilesAdvancedCoreAdmin } from "./delete/delete";
 
 export const ActionsFilesAdvancedCoreAdmin = (
-  data: Admin__Core_Files__ShowQuery["admin__core_files__show"]["edges"][0]
+  data: Admin__Core_Files__ShowQuery["admin__core_files__show"]["edges"][0],
 ) => {
   const t = useTranslations("core");
 
@@ -26,7 +26,7 @@ export const ActionsFilesAdvancedCoreAdmin = (
             <Link
               className={buttonVariants({
                 size: "icon",
-                variant: "ghost"
+                variant: "ghost",
               })}
               href={
                 data.width && data.height

@@ -8,8 +8,8 @@ import { Loader } from "@/components/loader";
 
 const Content = React.lazy(async () =>
   import("./content").then(module => ({
-    default: module.ContentTestingActionEmailSettingsAdmin
-  }))
+    default: module.ContentTestingActionEmailSettingsAdmin,
+  })),
 );
 
 export const TestingActionEmailSettingsAdmin = () => {

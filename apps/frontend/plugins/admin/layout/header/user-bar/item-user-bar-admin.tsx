@@ -16,7 +16,7 @@ export const ItemUserBarAdmin = ({
   children,
   href,
   onClick,
-  target
+  target,
 }: Props) => {
   const content = () => {
     const className =
@@ -30,8 +30,8 @@ export const ItemUserBarAdmin = ({
             buttonVariants({
               variant: "ghost",
               size: "sm",
-              className
-            })
+              className,
+            }),
           )}
           target={target}
           onClick={onClick}

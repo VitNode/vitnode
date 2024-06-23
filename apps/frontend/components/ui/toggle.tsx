@@ -12,19 +12,19 @@ const toggleVariants = cva(
       variant: {
         default: "bg-transparent",
         outline:
-          "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground"
+          "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
       },
       size: {
         default: "size-10",
         sm: "size-9",
-        lg: "size-11"
-      }
+        lg: "size-11",
+      },
     },
     defaultVariants: {
       variant: "default",
-      size: "default"
-    }
-  }
+      size: "default",
+    },
+  },
 );
 
 const Toggle = ({
@@ -39,8 +39,8 @@ const Toggle = ({
       toggleVariants({
         variant,
         size,
-        className: cn("[&>svg]:size-5", className)
-      })
+        className: cn("[&>svg]:size-5", className),
+      }),
     )}
     {...props}
   />

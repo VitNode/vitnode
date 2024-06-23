@@ -16,13 +16,13 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
 import { ActionsFilesAdvancedCoreAdmin } from "./actions/actions";
 
 export const FilesAdvancedCoreAdminView = ({
-  admin__core_files__show: { edges, pageInfo }
+  admin__core_files__show: { edges, pageInfo },
 }: Admin__Core_Files__ShowQuery) => {
   const t = useTranslations("core.settings.files");
   const tCore = useTranslations("core");
@@ -56,7 +56,7 @@ export const FilesAdvancedCoreAdminView = ({
               )}
             </div>
           );
-        }
+        },
       },
       {
         header: tCore("table.name"),
@@ -82,7 +82,7 @@ export const FilesAdvancedCoreAdminView = ({
               </div>
             </div>
           );
-        }
+        },
       },
       {
         header: val => {
@@ -97,7 +97,7 @@ export const FilesAdvancedCoreAdminView = ({
           const data = row.original;
 
           return <DateFormat date={data.created} />;
-        }
+        },
       },
       {
         header: val => {
@@ -112,7 +112,7 @@ export const FilesAdvancedCoreAdminView = ({
           const data = row.original;
 
           return formatBytes(data.file_size);
-        }
+        },
       },
       {
         header: t("table.user"),
@@ -125,7 +125,7 @@ export const FilesAdvancedCoreAdminView = ({
               {data.user.name}
             </Link>
           );
-        }
+        },
       },
       {
         header: t("table.count_uses"),
@@ -150,7 +150,7 @@ export const FilesAdvancedCoreAdminView = ({
           }
 
           return data.count_uses;
-        }
+        },
       },
       {
         header: "",
@@ -159,10 +159,10 @@ export const FilesAdvancedCoreAdminView = ({
           const data = row.original;
 
           return <ActionsFilesAdvancedCoreAdmin {...data} />;
-        }
-      }
+        },
+      },
     ],
-    []
+    [],
   );
 
   return (
@@ -172,7 +172,7 @@ export const FilesAdvancedCoreAdminView = ({
       defaultPageSize={10}
       defaultSorting={{
         sortBy: "created",
-        sortDirection: "desc"
+        sortDirection: "desc",
       }}
       searchPlaceholder={t("search")}
       columns={columns}

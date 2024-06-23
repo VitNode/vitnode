@@ -34,7 +34,7 @@ export const FileDownloadButton = ({
   id,
   mimetype,
   security_key,
-  width
+  width,
 }: Props) => {
   const t = useTranslations("core.editor.files");
 
@@ -77,7 +77,7 @@ export const FileDownloadButton = ({
 
         window.open(
           `${CONFIG.backend_url}/secure_files/${id}?security_key=${security_key}`,
-          "_blank"
+          "_blank",
         );
       }}
     >

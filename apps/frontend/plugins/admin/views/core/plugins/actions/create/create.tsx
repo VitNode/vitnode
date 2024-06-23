@@ -10,8 +10,8 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const Content = React.lazy(async () =>
   import("./content").then(module => ({
-    default: module.CreatePluginAdmin
-  }))
+    default: module.CreatePluginAdmin,
+  })),
 );
 
 export const CreateActionPluginAdmin = () => {

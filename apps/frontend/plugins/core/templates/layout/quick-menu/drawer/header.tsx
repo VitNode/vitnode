@@ -21,7 +21,7 @@ export const HeaderDrawerQuickMenu = () => {
               href="/login"
               className={buttonVariants({
                 variant: "outline",
-                className: "flex-1"
+                className: "flex-1",
               })}
             >
               {t("user-bar.sign_in")}
@@ -32,7 +32,7 @@ export const HeaderDrawerQuickMenu = () => {
             <Link
               href="/register"
               className={buttonVariants({
-                className: "flex-1"
+                className: "flex-1",
               })}
             >
               {t("user-bar.sign_up")}

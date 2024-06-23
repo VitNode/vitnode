@@ -5,7 +5,7 @@ import { ButtonToolbarEditor } from "../button";
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger
+  PopoverTrigger,
 } from "@/components/ui/popover";
 import { ToggleToolbarEditor } from "../toggle";
 

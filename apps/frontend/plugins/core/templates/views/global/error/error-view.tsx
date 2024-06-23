@@ -9,7 +9,7 @@ import {
   Card,
   CardContent,
   CardFooter,
-  CardHeader
+  CardHeader,
 } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
 import { ErrorViewProps } from "@/components/views/error-view-ssr";
@@ -42,7 +42,7 @@ export const ErrorView = ({ className, code }: ErrorViewProps) => {
         {t.rich("errors.code", {
           code: () => (
             <span className="font-semibold">{code.toLocaleLowerCase()}</span>
-          )
+          ),
         })}
       </div>
     </div>

@@ -28,8 +28,8 @@ export const Steps = ({ className, items }: Props) => {
               className={cn(
                 "bg-background text-card-foreground absolute -left-4 flex h-8 w-8 items-center justify-center rounded-full border-2 font-bold",
                 {
-                  ["bg-primary border-primary text-white"]: item.checked
-                }
+                  ["bg-primary border-primary text-white"]: item.checked,
+                },
               )}
             >
               {item.checked ? <Check className="size-5" /> : index + 1}

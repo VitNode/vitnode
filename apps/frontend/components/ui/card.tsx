@@ -9,7 +9,7 @@ const Card = ({
   <div
     className={cn(
       "bg-card text-card-foreground rounded-lg border shadow-sm",
-      className
+      className,
     )}
     {...props}
   />
@@ -29,7 +29,7 @@ const CardTitle = ({
   <h3
     className={cn(
       "text-2xl font-semibold leading-none tracking-tight",
-      className
+      className,
     )}
     {...props}
   />
@@ -62,5 +62,5 @@ export {
   CardFooter,
   CardTitle,
   CardDescription,
-  CardContent
+  CardContent,
 };

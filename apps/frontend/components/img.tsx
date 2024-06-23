@@ -38,7 +38,7 @@ export const Img = ({
   quality,
   sizes,
   src,
-  width
+  width,
 }: ImgProps) => {
   return (
     <div
@@ -48,7 +48,7 @@ export const Img = ({
           ? heightLoading
             ? `${heightLoading}px`
             : "100%"
-          : undefined
+          : undefined,
       }}
     >
       <Image
@@ -62,7 +62,7 @@ export const Img = ({
         fill={fill}
         className={imageClassName}
         style={{
-          height: height !== undefined ? `${height}px` : undefined
+          height: height !== undefined ? `${height}px` : undefined,
         }}
       />
     </div>

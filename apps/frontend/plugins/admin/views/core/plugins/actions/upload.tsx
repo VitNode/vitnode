@@ -11,8 +11,8 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const Content = React.lazy(async () =>
   import("../upload/upload").then(module => ({
-    default: module.UploadPluginAdmin
-  }))
+    default: module.UploadPluginAdmin,
+  })),
 );
 
 export const UploadActionPluginAdmin = () => {

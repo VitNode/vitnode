@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import {
   Core_Sessions__Devices__Show,
   Core_Sessions__Devices__ShowQuery,
-  Core_Sessions__Devices__ShowQueryVariables
+  Core_Sessions__Devices__ShowQueryVariables,
 } from "@/graphql/hooks";
 import { DevicesSettingsView } from "@/plugins/core/templates/views/settings/views/devices/devices-settings-view";
 import { fetcher } from "@/graphql/fetcher";
@@ -14,7 +14,7 @@ const getData = async () => {
     Core_Sessions__Devices__ShowQuery,
     Core_Sessions__Devices__ShowQueryVariables
   >({
-    query: Core_Sessions__Devices__Show
+    query: Core_Sessions__Devices__Show,
   });
 
   return data;

@@ -12,7 +12,7 @@ import {
   Sheet,
   SheetContent,
   SheetHeader,
-  SheetTrigger
+  SheetTrigger,
 } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import { mutationApi } from "./mutation-api";
@@ -73,7 +73,7 @@ export const UserBarAdmin = ({ navComponent }: Props) => {
               const mutation = await mutationApi();
               if (mutation?.error) {
                 toast.error(tCore("errors.title"), {
-                  description: tCore("errors.internal_server_error")
+                  description: tCore("errors.internal_server_error"),
                 });
               }
             }}

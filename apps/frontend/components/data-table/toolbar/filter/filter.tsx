@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger
+  PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -22,7 +22,7 @@ export interface FilterToolbarDataTableProps {
 export function FilterToolbarDataTable({
   children,
   id,
-  title
+  title,
 }: FilterToolbarDataTableProps) {
   const searchParams = useSearchParams();
   const selectedValues = searchParams.getAll(id);

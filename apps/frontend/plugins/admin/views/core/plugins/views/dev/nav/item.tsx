@@ -7,7 +7,7 @@ import { ActionsTableNavDevPluginAdmin } from "./item/actions/actions";
 import { useItemNavDevPluginAdmin } from "./item/hooks/use-item-nav-dev-plugin-admin";
 
 export const ItemContentNavDevPluginAdmin = (
-  data: FlatTree<ShowAdminNavPluginsObj>
+  data: FlatTree<ShowAdminNavPluginsObj>,
 ) => {
   const { code: pluginCode } = useParams();
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -30,14 +30,14 @@ export const ItemContentNavDevPluginAdmin = (
           {tAdmin.rich("lang_key", {
             key: () => (
               <span className="text-foreground">{`${pluginCode}.admin.nav.${langKey}`}</span>
-            )
+            ),
           })}
         </p>
         <p className="text-muted-foreground text-sm">
           {tCore.rich("link_url_with_link", {
             link: () => (
               <span className="text-foreground">{`/admin/${pluginCode}/${parentId ? `${parentId}/` : ""}${data.code}`}</span>
-            )
+            ),
           })}
         </p>
       </div>

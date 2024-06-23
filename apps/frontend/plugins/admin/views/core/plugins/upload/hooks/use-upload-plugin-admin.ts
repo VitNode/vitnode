@@ -13,13 +13,13 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
   const tCore = useTranslations("core");
   const { setOpen } = useDialog();
   const formSchema = z.object({
-    file: z.array(z.instanceof(File))
+    file: z.array(z.instanceof(File)),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
-      file: []
-    }
+      file: [],
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -39,7 +39,7 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
       error?.extensions?.code === "PLUGIN_VERSION_IS_LOWER"
     ) {
       form.setError("file", {
-        message: t(`errors.${error?.extensions?.code}`)
+        message: t(`errors.${error?.extensions?.code}`),
       });
 
       return;
@@ -47,7 +47,7 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
 
     if (error || !mutation.data) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;
@@ -55,7 +55,7 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
 
     setOpen?.(false);
     toast.success(t(data ? "success_update" : "success"), {
-      description: mutation.data.admin__core_plugins__upload.name
+      description: mutation.data.admin__core_plugins__upload.name,
     });
   };
 

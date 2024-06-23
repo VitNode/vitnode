@@ -11,7 +11,7 @@ export interface AdministratorsStaffAdminViewProps {
 }
 
 export const AdministratorsStaffAdminView = (
-  props: AdministratorsStaffAdminViewProps
+  props: AdministratorsStaffAdminViewProps,
 ) => {
   const t = useTranslations("admin.members.staff.administrators");
 

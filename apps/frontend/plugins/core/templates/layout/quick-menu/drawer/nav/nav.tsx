@@ -26,7 +26,7 @@ export const NavDrawerQuickMenu = ({ navIcons }: Props) => {
       type="multiple"
       defaultValue={activeItems}
       className={cn("flex flex-col px-2", {
-        "pb-5": !session
+        "pb-5": !session,
       })}
     >
       {nav.map(item => {
@@ -37,14 +37,14 @@ export const NavDrawerQuickMenu = ({ navIcons }: Props) => {
                 className={cn(
                   buttonVariants({
                     variant: "ghost",
-                    className: cn(classNameDrawerQuickMenu, "focus:bg-inherit")
-                  })
+                    className: cn(classNameDrawerQuickMenu, "focus:bg-inherit"),
+                  }),
                 )}
                 onClick={() =>
                   setActiveItems(prev =>
                     prev.includes(item.id.toString())
                       ? prev.filter(el => el !== item.id.toString())
-                      : [...prev, item.id.toString()]
+                      : [...prev, item.id.toString()],
                   )
                 }
               >
@@ -57,9 +57,9 @@ export const NavDrawerQuickMenu = ({ navIcons }: Props) => {
                     "ml-auto h-5 w-5 flex-shrink-0 transition-transform",
                     {
                       "rotate-180 transform": activeItems.includes(
-                        item.id.toString()
-                      )
-                    }
+                        item.id.toString(),
+                      ),
+                    },
                   )}
                 />
               </Accordion.Trigger>

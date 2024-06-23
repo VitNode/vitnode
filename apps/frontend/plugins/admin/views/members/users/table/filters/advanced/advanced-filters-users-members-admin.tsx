@@ -11,7 +11,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { SheetClose, SheetFooter } from "@/components/ui/sheet";
@@ -28,13 +28,13 @@ export const AdvancedFiltersUsersMembersAdmin = () => {
     date: z
       .object({
         from: z.date(),
-        to: z.date()
+        to: z.date(),
       })
-      .optional()
+      .optional(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema)
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
@@ -44,14 +44,14 @@ export const AdvancedFiltersUsersMembersAdmin = () => {
     if (data.date?.from) {
       params.set(
         "dateFrom",
-        `${convertDateToUnixTime(data.date.from.toDateString())}`
+        `${convertDateToUnixTime(data.date.from.toDateString())}`,
       );
     }
 
     if (data.date?.to) {
       params.set(
         "dateTo",
-        `${convertDateToUnixTime(data.date.to.toDateString())}`
+        `${convertDateToUnixTime(data.date.to.toDateString())}`,
       );
     }
 

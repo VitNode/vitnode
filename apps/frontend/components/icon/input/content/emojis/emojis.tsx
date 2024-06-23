@@ -24,11 +24,11 @@ export const EmojisContentIconInput = ({
   search,
   setOpen,
   skinToneIndex,
-  value
+  value,
 }: Props) => {
   const t = useTranslations("core");
   const [searchResults, setSearchResults] = React.useState<string[] | null>(
-    null
+    null,
   );
 
   const setResults = async (value: string) => {
@@ -52,7 +52,7 @@ export const EmojisContentIconInput = ({
         <div
           className={cn(
             "bg-popover/80 sticky top-[7.5rem] pb-2 text-sm backdrop-blur",
-            classNameHeaders
+            classNameHeaders,
           )}
         >
           {t("editor.emoji.search_results")}
@@ -105,7 +105,7 @@ export const EmojisContentIconInput = ({
           <div
             className={cn(
               "bg-popover/80 sticky top-[7.5rem] pb-2 text-sm backdrop-blur",
-              classNameHeaders
+              classNameHeaders,
             )}
           >
             {/*  eslint-disable-next-line @typescript-eslint/ban-ts-comment */}

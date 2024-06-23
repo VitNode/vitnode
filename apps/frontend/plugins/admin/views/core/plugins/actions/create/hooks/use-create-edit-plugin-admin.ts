@@ -32,12 +32,12 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
       .min(3)
       .max(50)
       .refine(value => codePluginRegex.test(value), {
-        message: t("create.code.invalid")
+        message: t("create.code.invalid"),
       }),
     description: zodInput.string,
     support_url: zodInput.string.url(),
     author: zodInput.string.min(3).max(100),
-    author_url: zodInput.string.url().or(z.literal(""))
+    author_url: zodInput.string.url().or(z.literal("")),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -48,8 +48,8 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
       description: data?.description ?? "",
       support_url: data?.support_url ?? "",
       author: data ? data.author : session?.name ?? "",
-      author_url: data?.author_url ?? ""
-    }
+      author_url: data?.author_url ?? "",
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -63,7 +63,7 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
         supportUrl: values.support_url,
         author: values.author,
         authorUrl: values.author_url,
-        default: data.default
+        default: data.default,
       });
 
       if (mutation.error) {
@@ -76,7 +76,7 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
         description: values.description,
         supportUrl: values.support_url,
         author: values.author,
-        authorUrl: values.author_url
+        authorUrl: values.author_url,
       });
 
       if (mutation.error) {
@@ -86,7 +86,7 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
 
     if (error?.extensions?.code === "PLUGIN_ALREADY_EXISTS") {
       form.setError("code", {
-        message: t("create.code.exists")
+        message: t("create.code.exists"),
       });
 
       return;
@@ -94,14 +94,14 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
 
     if (error) {
       toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error")
+        description: tCore("errors.internal_server_error"),
       });
 
       return;
     }
 
     toast.success(t(data ? "edit.success" : "create.success"), {
-      description: values.name
+      description: values.name,
     });
 
     if (!data) {
@@ -112,6 +112,6 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
 
   return {
     form,
-    onSubmit
+    onSubmit,
   };
 };

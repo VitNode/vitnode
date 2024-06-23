@@ -10,7 +10,7 @@ export const acceptMimeTypeImage = [
   "image/png",
   "image/webp",
   "image/gif",
-  "image/avif"
+  "image/avif",
 ];
 
 export const acceptMimeTypeVideo = ["video/mp4", "video/webm", "video/ogg"];
@@ -62,35 +62,35 @@ export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
     addAttributes() {
       return {
         file_name_original: {
-          default: ""
+          default: "",
         },
         file_name: {
-          default: ""
+          default: "",
         },
         dir_folder: {
-          default: ""
+          default: "",
         },
         file_alt: {
-          default: ""
+          default: "",
         },
         file_size: {
-          default: 0
+          default: 0,
         },
         mimetype: {
-          default: ""
+          default: "",
         },
         id: {
-          default: 0
+          default: 0,
         },
         width: {
-          default: 0
+          default: 0,
         },
         height: {
-          default: 0
+          default: 0,
         },
         security_key: {
-          default: ""
-        }
+          default: "",
+        },
       };
     },
 
@@ -103,8 +103,8 @@ export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
         "button",
         mergeAttributes(HTMLAttributes, {
           ["data-type"]: "file",
-          type: "button"
-        })
+          type: "button",
+        }),
       ];
     },
 
@@ -115,9 +115,9 @@ export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
           ({ commands }) => {
             return commands.insertContent({
               type: this.name,
-              attrs: options
+              attrs: options,
             });
-          }
+          },
       };
     },
 
@@ -127,11 +127,11 @@ export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
           props: {
             handlePaste(view, event) {
               const files: FileStateEditor[] = [
-                ...(event.clipboardData?.files ?? [])
+                ...(event.clipboardData?.files ?? []),
               ].map(file => ({
                 file,
                 isLoading: true,
-                id: Math.floor(Math.random() * 1000) + file.size
+                id: Math.floor(Math.random() * 1000) + file.size,
               }));
               if (!files.length || !uploadFiles) return false;
               const { schema } = view.state;
@@ -142,18 +142,18 @@ export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
                   const node = schema.nodes.files.create(file.data);
                   const transaction = view.state.tr.replaceSelectionWith(node);
                   view.dispatch(transaction);
-                }
+                },
               });
 
               return true;
             },
             handleDrop(view, event, slice, moved) {
               const files: FileStateEditor[] = [
-                ...(event.dataTransfer?.files ?? [])
+                ...(event.dataTransfer?.files ?? []),
               ].map(file => ({
                 file,
                 isLoading: true,
-                id: Math.floor(Math.random() * 1000) + file.size
+                id: Math.floor(Math.random() * 1000) + file.size,
               }));
               if ((moved && !files.length) || !uploadFiles) return false;
 
@@ -163,7 +163,7 @@ export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
                   const { schema } = view.state;
                   const coordinates = view.posAtCoords({
                     left: event.clientX,
-                    top: event.clientY
+                    top: event.clientY,
                   });
 
                   if (!coordinates) return;
@@ -171,16 +171,16 @@ export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
                   const node = schema.nodes.files.create(file.data);
                   const transaction = view.state.tr.insert(
                     coordinates.pos,
-                    node
+                    node,
                   );
                   view.dispatch(transaction);
-                }
+                },
               });
 
               return true;
-            }
-          }
-        })
+            },
+          },
+        }),
       ];
-    }
+    },
   });

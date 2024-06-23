@@ -15,11 +15,11 @@ export const ItemPreviewFilesInput = ({
   file,
   index,
   onChange,
-  value
+  value,
 }: Props) => {
   const previewURL = React.useMemo(
     () => (file instanceof File ? URL.createObjectURL(file) : ``),
-    [file]
+    [file],
   );
   const size = React.useMemo(() => {
     if (file instanceof File) {

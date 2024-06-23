@@ -6,13 +6,13 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import {
   useCreateEditFormGroupsMembersAdmin,
-  CreateEditFormGroupsMembersAdminArgs
+  CreateEditFormGroupsMembersAdminArgs,
 } from "./hooks/use-create-edit-form-groups-members-admin";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { TabsTrigger } from "@/components/tabs/tabs-trigger";
@@ -21,11 +21,11 @@ import { ContentContentCreateEditFormGroupsMembersAdmin } from "./content/conten
 
 enum TabsEnum {
   MAIN = "main",
-  CONTENT = "content"
+  CONTENT = "content",
 }
 
 export const CreateEditFormGroupsMembersAdmin = ({
-  data
+  data,
 }: CreateEditFormGroupsMembersAdminArgs) => {
   const t = useTranslations("admin.members.groups");
   const tCore = useTranslations("core");
@@ -39,7 +39,7 @@ export const CreateEditFormGroupsMembersAdmin = ({
       <ContentContentCreateEditFormGroupsMembersAdmin
         isGuest={data?.id === 1}
       />
-    )
+    ),
   };
 
   return (

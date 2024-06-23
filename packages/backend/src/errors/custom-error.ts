@@ -8,7 +8,7 @@ export interface CustomErrorArgs {
 export class CustomError extends GraphQLError {
   constructor({ code, message }: CustomErrorArgs) {
     super(message, {
-      extensions: { code }
+      extensions: { code },
     });
 
     Object.defineProperty(this, "name", { value: "CustomError" });

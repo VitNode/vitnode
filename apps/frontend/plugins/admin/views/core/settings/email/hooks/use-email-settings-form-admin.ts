@@ -9,7 +9,7 @@ import { Admin__Core_Email_Settings__ShowQuery } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";
 
 export const useEmailSettingsFormAdmin = ({
-  admin__core_email_settings__show: data
+  admin__core_email_settings__show: data,
 }: Admin__Core_Email_Settings__ShowQuery) => {
   const t = useTranslations("core");
 
@@ -19,7 +19,7 @@ export const useEmailSettingsFormAdmin = ({
     smtp_port: z.number().int().min(1).max(999),
     smtp_secure: z.boolean(),
     smtp_password: z.string(),
-    color_primary: z.string()
+    color_primary: z.string(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -30,8 +30,8 @@ export const useEmailSettingsFormAdmin = ({
       smtp_port: data.smtp_port || 0,
       smtp_secure: data.smtp_secure || false,
       smtp_password: "", // Password is not fetched from the server,
-      color_primary: data.color_primary || "hsl(0, 0, 0)"
-    }
+      color_primary: data.color_primary || "hsl(0, 0, 0)",
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -45,12 +45,12 @@ export const useEmailSettingsFormAdmin = ({
       smtpSecure: values.smtp_secure,
       smtpPassword: values.smtp_password,
       colorPrimary: values.color_primary,
-      colorPrimaryForeground: `hsl(${isColorBrightness(primaryHSL) ? `${primaryHSL.h}, 40, 2` : `${primaryHSL.h}, 40, 98`})`
+      colorPrimaryForeground: `hsl(${isColorBrightness(primaryHSL) ? `${primaryHSL.h}, 40, 2` : `${primaryHSL.h}, 40, 98`})`,
     });
 
     if (mutation.error) {
       toast.error(t("errors.title"), {
-        description: t("errors.internal_server_error")
+        description: t("errors.internal_server_error"),
       });
 
       return;

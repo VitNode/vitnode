@@ -10,7 +10,7 @@ import { LinkItemNavSettingsProps } from "@/plugins/core/hooks/settings/use-sett
 export const LinkItemNavSettings = ({
   children,
   href,
-  onClick
+  onClick,
 }: LinkItemNavSettingsProps) => {
   const pathname = usePathname();
   const active = pathname === href;
@@ -21,7 +21,7 @@ export const LinkItemNavSettings = ({
       className={cn(
         buttonVariants({ variant: "ghost", size: "sm" }),
         "relative justify-start gap-2 pl-4",
-        { "bg-primary/10": active }
+        { "bg-primary/10": active },
       )}
       onClick={onClick}
     >

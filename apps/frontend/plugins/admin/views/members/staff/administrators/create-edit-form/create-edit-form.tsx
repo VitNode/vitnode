@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import {
   DialogFooter,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from "@/components/ui/dialog";
 import {
   Form,
@@ -12,7 +12,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { useFormCreateEditFormGroupsMembersAdmin } from "./hooks/use-form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";

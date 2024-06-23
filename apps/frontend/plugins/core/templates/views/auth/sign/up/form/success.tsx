@@ -16,7 +16,7 @@ export const SuccessFormSignUp = ({ name }: Props) => {
       <Mailbox className="size-20" />
       <span className="text-xl font-semibold">
         {t.rich("title", {
-          name: () => <span className="text-primary">{name}</span>
+          name: () => <span className="text-primary">{name}</span>,
         })}
       </span>
       <p className="text-muted-foreground mb-4 mt-2">{t("desc")}</p>
@@ -24,7 +24,7 @@ export const SuccessFormSignUp = ({ name }: Props) => {
       <Link
         href="/login"
         className={buttonVariants({
-          className: "px-10"
+          className: "px-10",
         })}
       >
         {t("sign_in")}

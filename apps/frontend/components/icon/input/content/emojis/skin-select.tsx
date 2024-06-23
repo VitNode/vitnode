@@ -7,7 +7,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 const skinToneEmoji = [
@@ -16,7 +16,7 @@ const skinToneEmoji = [
   "28.64deg 64.71% 73.33%",
   "25.05deg 48.36% 58.24%",
   "24.11deg 51.85% 42.35%",
-  "20.53deg 25.68% 29.02%"
+  "20.53deg 25.68% 29.02%",
 ];
 
 interface Props {
@@ -26,7 +26,7 @@ interface Props {
 
 export const SkinSelectEmojisContentIconInput = ({
   setSkinToneIndex,
-  skinToneIndex
+  skinToneIndex,
 }: Props) => {
   const t = useTranslations("core.editor.emoji");
 
@@ -54,7 +54,7 @@ export const SkinSelectEmojisContentIconInput = ({
             onClick={() => {
               localStorage.setItem(
                 CONFIG.local_storage.editor_skin_tone,
-                index.toString()
+                index.toString(),
               );
               setSkinToneIndex(index);
             }}

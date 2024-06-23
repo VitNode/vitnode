@@ -6,13 +6,13 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from "@/components/ui/select";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useGlobals } from "@/plugins/core/hooks/use-globals";
 import { useEditorState } from "../hooks/use-editor-state";
@@ -24,7 +24,7 @@ export interface LanguageSelectFooterEditorProps {
 
 export const LanguageSelectFooterEditor = ({
   selectedLanguage,
-  setSelectedLanguage
+  setSelectedLanguage,
 }: LanguageSelectFooterEditorProps) => {
   const t = useTranslations("core.editor");
   const { languages: languagesFromGlobal } = useGlobals();
@@ -42,7 +42,8 @@ export const LanguageSelectFooterEditor = ({
               className={buttonVariants({
                 variant: "ghost",
                 size: "sm",
-                className: "w-auto border-0 shadow-none [&>svg]:h-5 [&>svg]:w-5"
+                className:
+                  "w-auto border-0 shadow-none [&>svg]:h-5 [&>svg]:w-5",
               })}
             >
               <SelectValue />

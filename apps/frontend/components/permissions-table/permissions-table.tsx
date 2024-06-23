@@ -18,13 +18,13 @@ interface Props {
 export const PermissionsTable = ({ field, permissions }: Props) => {
   const [searchValue, setSearchValue] = React.useState("");
   const { data, isError, isLoading } = usePermissionsGroupsAdminAPI({
-    searchValue
+    searchValue,
   });
   const { convertText } = useTextLang();
 
   const Table = React.useCallback(
     ({ ...props }) => <table className="w-full" {...props} />,
-    []
+    [],
   );
   const TableRow = React.useCallback(
     ({ ...props }) => (
@@ -33,7 +33,7 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
         {...props}
       />
     ),
-    []
+    [],
   );
 
   const onToggleAll = (id: string) => {
@@ -45,9 +45,9 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
       groups: field.value.groups.map((group: { id: number }) => {
         return {
           ...group,
-          [id]: stateToUpdate
+          [id]: stateToUpdate,
         };
-      })
+      }),
     });
   };
 
@@ -70,7 +70,7 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
         className="rounded-md border"
         components={{
           Table,
-          TableRow
+          TableRow,
         }}
         fixedHeaderContent={() => (
           <tr className="bg-card border-b">
@@ -93,14 +93,14 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
         )}
         itemContent={(index, item) => {
           const findItem = field.value.groups.find(
-            (group: { id: number }) => group.id === item.id
+            (group: { id: number }) => group.id === item.id,
           );
           // Check if:
           // 1. The permission is enabled for all groups
           // 2. The all permissions is enabled for the current group
           const isAllPermissionsEnabled =
             permissions.every(
-              permission => field.value[`can_all_${permission.id}`]
+              permission => field.value[`can_all_${permission.id}`],
             ) || permissions.every(permission => findItem?.[permission.id]);
 
           return (
@@ -115,11 +115,11 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                           keyBy(
                             permissions.map(item => ({
                               ...item,
-                              id: `can_all_${item.id}`
+                              id: `can_all_${item.id}`,
                             })),
-                            "id"
+                            "id",
                           ),
-                          () => false
+                          () => false,
                         );
 
                         const groups = data
@@ -135,7 +135,7 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
 
                                 const findGroupInField =
                                   field.value.groups.find(
-                                    ({ id }: { id: number }) => id === group.id
+                                    ({ id }: { id: number }) => id === group.id,
                                   );
 
                                 if (findGroupInField) {
@@ -143,13 +143,13 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                                 }
 
                                 return false;
-                              })
+                              }),
                             };
                           });
 
                         field.onChange({
                           ...disableAllPermissions,
-                          groups
+                          groups,
                         });
 
                         return;
@@ -157,20 +157,20 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
 
                       const groupPermissions = mapValues(
                         keyBy(permissions, "id"),
-                        () => true
+                        () => true,
                       );
 
                       field.onChange({
                         ...field.value,
                         groups: [
                           ...field.value.groups.filter(
-                            (group: { id: number }) => group.id !== item.id
+                            (group: { id: number }) => group.id !== item.id,
                           ),
                           {
                             id: item.id,
-                            ...groupPermissions
-                          }
-                        ]
+                            ...groupPermissions,
+                          },
+                        ],
                       });
                     }}
                     checked={isAllPermissionsEnabled}
@@ -196,17 +196,17 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                           const groupPermissions = mapValues(
                             keyBy(
                               permissions.map(item => ({
-                                id: item.id
+                                id: item.id,
                               })),
-                              "id"
+                              "id",
                             ),
-                            () => false
+                            () => false,
                           );
 
                           const groups = data.map(
                             (group: Pick<ShowAdminGroups, "id">) => {
                               const findExistingGroup = field.value.groups.find(
-                                ({ id }: { id: number }) => id === group.id
+                                ({ id }: { id: number }) => id === group.id,
                               );
 
                               if (group.id === item.id) {
@@ -214,7 +214,7 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                                   id: group.id,
                                   ...groupPermissions,
                                   ...findExistingGroup,
-                                  [permission.id]: false
+                                  [permission.id]: false,
                                 };
                               }
 
@@ -222,15 +222,15 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                                 id: group.id,
                                 ...groupPermissions,
                                 ...findExistingGroup,
-                                [permission.id]: true
+                                [permission.id]: true,
                               };
-                            }
+                            },
                           );
 
                           field.onChange({
                             ...field.value,
                             [`can_all_${permission.id}`]: false,
-                            groups
+                            groups,
                           });
 
                           return;
@@ -241,9 +241,9 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                           const groupPermissions = mapValues(
                             keyBy(
                               permissions.map(item => ({
-                                id: item.id
+                                id: item.id,
                               })),
-                              "id"
+                              "id",
                             ),
                             item => {
                               if (item.id === permission.id) {
@@ -251,7 +251,7 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                               }
 
                               return false;
-                            }
+                            },
                           );
 
                           field.onChange({
@@ -260,16 +260,16 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                               ...field.value.groups,
                               {
                                 id: item.id,
-                                ...groupPermissions
-                              }
-                            ]
+                                ...groupPermissions,
+                              },
+                            ],
                           });
 
                           return;
                         }
 
                         const otherGroups = field.value.groups.filter(
-                          (group: { id: number }) => group.id !== item.id
+                          (group: { id: number }) => group.id !== item.id,
                         );
 
                         field.onChange({
@@ -278,9 +278,9 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                             ...otherGroups,
                             {
                               ...findItem,
-                              [permission.id]: !findItem[permission.id]
-                            }
-                          ]
+                              [permission.id]: !findItem[permission.id],
+                            },
+                          ],
                         });
                       }}
                       checked={checked}

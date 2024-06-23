@@ -9,7 +9,7 @@ import { InternalErrorView } from "@/plugins/admin/global/internal-error/interna
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter"
+  variable: "--font-inter",
 });
 
 interface Props {
@@ -23,16 +23,19 @@ export const CatchLayout = async ({ defaultPlugins, locale }: Props) => {
       try {
         return {
           ...(await import(`../../plugins/${plugin.code}/langs/${locale}.json`))
-            .default
+            .default,
         };
       } catch (e) {
         return {};
       }
-    })
+    }),
   );
 
   const messages: AbstractIntlMessages = {
-    ...messagesFormApps.reduce((acc, messages) => ({ ...acc, ...messages }), {})
+    ...messagesFormApps.reduce(
+      (acc, messages) => ({ ...acc, ...messages }),
+      {},
+    ),
   };
   const config = await getConfigFile();
 

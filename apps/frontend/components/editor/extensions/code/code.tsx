@@ -18,16 +18,16 @@ export const classNameCodeBlock = cn(
   "[&_.hljs-bullet]:text-yellow-700 dark:[&_.hljs-bullet]:text-yellow-500 [&_.hljs-name]:text-yellow-700 dark:[&_.hljs-name]:text-yellow-500 [&_.hljs-operator]:text-yellow-700 dark:[&_.hljs-operator]:text-yellow-500 [&_.hljs-punctuation]:text-yellow-700 dark:[&_.hljs-punctuation]:text-yellow-500 [&_.hljs-type]:text-yellow-700 dark:[&_.hljs-type]:text-yellow-500",
   "[&_.hljs-attribute]:text-orange-700 dark:[&_.hljs-attribute]:text-orange-500 [&_.hljs-selector-class]:text-orange-700 dark:[&_.hljs-selector-class]:text-orange-500 [&_.hljs-selector-tag]:text-orange-700 dark:[&_.hljs-selector-tag]:text-orange-500",
   "[&_.hljs-comment]:text-muted-foreground",
-  "[&_.hljs-regexp]:text-rose-600"
+  "[&_.hljs-regexp]:text-rose-600",
 );
 
 export const CodeBlockLowlightExtensionEditor = CodeBlockLowlight.extend({
   addNodeView() {
     return renderReactNode();
-  }
+  },
 }).configure({
   lowlight: lowlight,
-  languageClassPrefix: "language-"
+  languageClassPrefix: "language-",
 });
 
 // import { NodeViewWrapper } from "@tiptap/react";

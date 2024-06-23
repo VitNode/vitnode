@@ -5,7 +5,7 @@ import * as dotenv from "dotenv";
 
 if (process.env.NODE_ENV === "production") {
   dotenv.config({
-    path: join(process.cwd(), "..", "..", ".env")
+    path: join(process.cwd(), "..", "..", ".env"),
   });
 }
 
@@ -16,27 +16,27 @@ const config: CodegenConfig = {
   overwrite: true,
   schema: `${graphql_url}/graphql`,
   documents: [
-    join(process.cwd(), "..", "frontend", "plugins/**/graphql/**/*.gql")
+    join(process.cwd(), "..", "frontend", "plugins/**/graphql/**/*.gql"),
   ],
   generates: {
     [`${join(process.cwd(), "..", "frontend", "graphql", "hooks.ts")}`]: {
       plugins: [
         "typescript",
         "typescript-operations",
-        "typescript-document-nodes"
+        "typescript-document-nodes",
       ],
       config: {
         scalars: {
-          DateTime: "Date"
+          DateTime: "Date",
         },
         enumsAsConst: true,
         allowEnumStringTypes: true,
         namingConvention: {
-          enumValues: "change-case-all#lowerCase"
-        }
-      }
-    }
-  }
+          enumValues: "change-case-all#lowerCase",
+        },
+      },
+    },
+  },
 };
 
 export default config;

@@ -7,11 +7,11 @@ import {
   Admin__Core_Files__Show,
   ShowCoreFilesSortingColumnEnum,
   Admin__Core_Files__ShowQuery,
-  Admin__Core_Files__ShowQueryVariables
+  Admin__Core_Files__ShowQueryVariables,
 } from "@/graphql/hooks";
 import {
   usePaginationAPISsr,
-  SearchParamsPagination
+  SearchParamsPagination,
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { fetcher } from "@/graphql/fetcher";
 import { FilesAdvancedCoreAdminView } from "@/plugins/admin/views/core/advanced/files/files-advanced-core-admin-view";
@@ -22,7 +22,7 @@ const getData = async (variables: Admin__Core_Files__ShowQueryVariables) => {
     Admin__Core_Files__ShowQueryVariables
   >({
     query: Admin__Core_Files__Show,
-    variables
+    variables,
   });
 
   return data;
@@ -36,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("admin.core.advanced.files");
 
   return {
-    title: t("title")
+    title: t("title"),
   };
 }
 
@@ -45,11 +45,11 @@ export default async function Page({ searchParams }: Props) {
     searchParams,
     defaultPageSize: 10,
     search: true,
-    sortByEnum: ShowCoreFilesSortingColumnEnum
+    sortByEnum: ShowCoreFilesSortingColumnEnum,
   });
   const [t, data] = await Promise.all([
     getTranslations("admin.core.advanced.files"),
-    getData(variables)
+    getData(variables),
   ]);
 
   return (

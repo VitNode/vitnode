@@ -4,7 +4,7 @@ import { ErrorType, fetcher } from "@/graphql/fetcher";
 import {
   Admin__Install__Layout,
   Admin__Install__LayoutQuery,
-  Admin__Install__LayoutQueryVariables
+  Admin__Install__LayoutQueryVariables,
 } from "@/graphql/hooks";
 import { LayoutInstallConfigsView } from "@/plugins/admin/configs/views/install/layout-install-configs-view";
 import { InternalErrorView } from "@/plugins/admin/global/internal-error/internal-error-view";
@@ -15,7 +15,7 @@ const getData = async () => {
     Admin__Install__LayoutQueryVariables
   >({
     query: Admin__Install__Layout,
-    cache: "force-cache"
+    cache: "force-cache",
   });
 
   return data;

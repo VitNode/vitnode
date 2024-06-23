@@ -6,7 +6,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "../ui/tooltip";
 import { useDateFormat } from "./hooks/use-date-format";
 
@@ -19,7 +19,7 @@ interface Props {
 
 export const DateFormat = ({ className, date, ref, showFullDate }: Props) => {
   const { currentTime, fullDate, getDateWithFormatDistance } = useDateFormat({
-    date
+    date,
   });
 
   if (currentTime.getFullYear() == new Date().getFullYear() && !showFullDate) {

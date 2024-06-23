@@ -19,9 +19,9 @@ export const useModalChangeAvatar = () => {
   const form = useForm<FormType>({
     defaultValues: {
       type: "upload",
-      file: []
+      file: [],
     },
-    mode: "onChange"
+    mode: "onChange",
   });
 
   const onSubmit = async ({ type }: FormType) => {
@@ -31,11 +31,11 @@ export const useModalChangeAvatar = () => {
       const mutation = await mutationDeleteApi();
       if (mutation.error) {
         toast.error(t("errors.title"), {
-          description: t("settings.change_avatar.options.delete.error")
+          description: t("settings.change_avatar.options.delete.error"),
         });
       } else {
         toast.success(t("settings.change_avatar.options.delete.title"), {
-          description: t("settings.change_avatar.options.delete.success")
+          description: t("settings.change_avatar.options.delete.success"),
         });
         setOpen?.(false);
       }
@@ -47,6 +47,6 @@ export const useModalChangeAvatar = () => {
   return {
     form,
     onSubmit,
-    isPending
+    isPending,
   };
 };

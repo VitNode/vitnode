@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const [config, t, tAdmin] = await Promise.all([
     getConfigFile(),
     getTranslations("blog.admin.nav"),
-    getTranslations("admin")
+    getTranslations("admin"),
   ]);
 
   const defaultTitle = `${t("title")} - ${tAdmin("title_short")} - ${config.settings.general.site_name}`;
@@ -20,8 +20,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: {
       default: defaultTitle,
-      template: `%s - ${defaultTitle}`
-    }
+      template: `%s - ${defaultTitle}`,
+    },
   };
 }
 

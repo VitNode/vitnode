@@ -12,20 +12,20 @@ export const useDateFormat = ({ date }: Args) => {
   const currentLocale = useLocale();
   const { languages } = useGlobals();
   const currentLanguage = languages.find(
-    language => language.code === currentLocale
+    language => language.code === currentLocale,
   );
 
   const currentTime = new Date(date);
 
   const relative = Math.floor(
-    (new Date().getTime() - currentTime.getTime()) / 1000
+    (new Date().getTime() - currentTime.getTime()) / 1000,
   );
 
   const getDateFormat = (dateFormat: string) => {
     const locale = currentLanguage?.locale || "enUS";
 
     return format(currentTime, dateFormat, {
-      locale: localeDate[locale as keyof typeof localeDate]
+      locale: localeDate[locale as keyof typeof localeDate],
     });
   };
 
@@ -38,20 +38,20 @@ export const useDateFormat = ({ date }: Args) => {
 
       return formatDistance(currentTime, new Date(), {
         addSuffix: true,
-        locale: localeDate[locale as keyof typeof localeDate]
+        locale: localeDate[locale as keyof typeof localeDate],
       });
     }
 
     // When date is < 7 days
     if (relative < 604800) {
       return getDateFormat(
-        currentLanguage?.time_24 ? "EEEE, H:mm" : "EEEE, H:mm a"
+        currentLanguage?.time_24 ? "EEEE, H:mm" : "EEEE, H:mm a",
       );
     }
 
     // When date is < 1 year
     return getDateFormat(
-      currentLanguage?.time_24 ? "d MMMM, H:mm" : "MMMM d, H:mm a"
+      currentLanguage?.time_24 ? "d MMMM, H:mm" : "MMMM d, H:mm a",
     );
   };
 
@@ -60,6 +60,6 @@ export const useDateFormat = ({ date }: Args) => {
     getDateWithFormatDistance,
     currentTime,
     getDateFormat,
-    currentLanguage
+    currentLanguage,
   };
 };

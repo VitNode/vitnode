@@ -5,12 +5,12 @@ import { revalidatePath } from "next/cache";
 import {
   Admin__Core_Languages__Download,
   Admin__Core_Languages__DownloadMutation,
-  Admin__Core_Languages__DownloadMutationVariables
+  Admin__Core_Languages__DownloadMutationVariables,
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 
 export const mutationApi = async (
-  variables: Admin__Core_Languages__DownloadMutationVariables
+  variables: Admin__Core_Languages__DownloadMutationVariables,
 ) => {
   try {
     const { data } = await fetcher<
@@ -18,7 +18,7 @@ export const mutationApi = async (
       Admin__Core_Languages__DownloadMutationVariables
     >({
       query: Admin__Core_Languages__Download,
-      variables
+      variables,
     });
 
     revalidatePath("/admin/core/langs", "page");
