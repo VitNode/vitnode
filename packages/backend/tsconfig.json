@@ -11,5 +11,5 @@
     "strictNullChecks": false,
     "emitDecoratorMetadata": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "scripts/**/*"]
 }
