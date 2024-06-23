@@ -1,7 +1,7 @@
 import * as React from "react";
+import { AlertDialog, AlertDialogContent } from "vitnode-frontend/components";
 
 import { Loader } from "@/components/loader";
-import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
 import { ShowAdminPlugins } from "@/graphql/hooks";
 
 const ContentDeletePluginActionsAdmin = React.lazy(async () =>

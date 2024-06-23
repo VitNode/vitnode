@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Check } from "lucide-react";
 import { cn } from "vitnode-frontend/helpers";
+import { Button } from "vitnode-frontend/components";
 
 import {
   DialogDescription,
@@ -18,7 +19,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import {
   Popover,

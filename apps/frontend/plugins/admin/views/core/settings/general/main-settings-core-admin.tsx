@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { Button } from "vitnode-frontend/components";
 
 import {
   Form,
@@ -9,7 +10,6 @@ import {
   FormWrapper,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { useSettingsCoreAdmin } from "./hooks/use-settings-core-admin";
 import { Core_Main_Settings__ShowQuery } from "@/graphql/hooks";
 import { TextLanguageInput } from "@/components/text-language-input";

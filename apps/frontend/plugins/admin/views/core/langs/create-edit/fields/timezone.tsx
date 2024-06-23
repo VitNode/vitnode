@@ -3,8 +3,8 @@ import * as React from "react";
 import { Check } from "lucide-react";
 import { ControllerRenderProps, FieldValues, Path } from "react-hook-form";
 import { cn } from "vitnode-frontend/helpers";
+import { Button } from "vitnode-frontend/components";
 
-import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,

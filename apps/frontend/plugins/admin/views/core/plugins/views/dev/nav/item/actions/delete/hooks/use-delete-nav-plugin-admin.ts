@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { useParams } from "next/navigation";
+import { useAlertDialog } from "vitnode-frontend/components";
 
-import { useAlertDialog } from "@/components/ui/alert-dialog";
 import { ContentDeleteActionTableNavDevPluginAdminProps } from "../content";
 import { mutationApi } from "./mutation-api";
 

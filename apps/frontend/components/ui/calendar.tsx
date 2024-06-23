@@ -4,8 +4,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { DayPicker } from "react-day-picker";
 import * as React from "react";
 import { cn } from "vitnode-frontend/helpers";
-
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "vitnode-frontend/components";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 

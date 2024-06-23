@@ -2,10 +2,10 @@
 
 import { useTranslations } from "next-intl";
 import { AlertCircle } from "lucide-react";
+import { Button } from "vitnode-frontend/components";
 
 import { CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,

@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { Ban } from "lucide-react";
 import { removeSpecialCharacters } from "@vitnode/shared";
+import { Button } from "vitnode-frontend/components";
 
 import {
   DialogFooter,
@@ -9,7 +10,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useCreateNavPluginAdmin } from "./hooks/use-create-nav-plugin-admin";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,

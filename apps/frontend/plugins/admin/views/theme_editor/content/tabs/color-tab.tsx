@@ -5,8 +5,8 @@ import {
   getStringFromHSL,
   isColorBrightness,
 } from "@vitnode/shared";
+import { Button } from "vitnode-frontend/components";
 
-import { Button } from "@/components/ui/button";
 import {
   FormControl,
   FormField,

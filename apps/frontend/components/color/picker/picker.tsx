@@ -9,9 +9,9 @@ import {
   isColorBrightness,
 } from "@vitnode/shared";
 import { cn } from "vitnode-frontend/helpers";
+import { Button } from "vitnode-frontend/components";
 
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,

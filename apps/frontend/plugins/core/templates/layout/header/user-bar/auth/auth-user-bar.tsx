@@ -8,8 +8,8 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "vitnode-frontend/navigation";
+import { Button } from "vitnode-frontend/components";
 
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,

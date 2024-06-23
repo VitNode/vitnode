@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { convertDateToUnixTime } from "@vitnode/shared";
 import { usePathname, useRouter } from "vitnode-frontend/navigation";
+import { Button } from "vitnode-frontend/components";
 
 import {
   Form,
@@ -13,7 +14,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
 import { SheetClose, SheetFooter } from "@/components/ui/sheet";
 import { CalendarPicker } from "@/components/calendar-picker";
 

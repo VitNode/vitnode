@@ -3,6 +3,7 @@
 import { RefreshCcw, RotateCcw, WifiOff } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "vitnode-frontend/navigation";
+import { Button } from "vitnode-frontend/components";
 
 import { CONFIG } from "@/config";
 import {
@@ -12,7 +13,6 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { PoweredByVitNode } from "../powered-by";
-import { Button } from "@/components/ui/button";
 import { mutationClearCache } from "./mutation-clear-cache";
 
 interface Props {

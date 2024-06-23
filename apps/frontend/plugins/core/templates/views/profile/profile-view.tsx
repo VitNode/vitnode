@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "vitnode-frontend/components";
+
 import { Core_Members__ProfilesQuery } from "@/graphql/hooks";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";

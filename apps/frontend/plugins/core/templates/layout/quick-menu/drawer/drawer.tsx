@@ -3,10 +3,10 @@ import { KeyRound, LogOut, Settings, Shield, User } from "lucide-react";
 import * as React from "react";
 import { Link } from "vitnode-frontend/navigation";
 import { cn } from "vitnode-frontend/helpers";
+import { Button, buttonVariants } from "vitnode-frontend/components";
 
 import { DrawerClose, DrawerContent } from "@/components/ui/drawer";
 import { HeaderDrawerQuickMenu } from "./header";
-import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useSignOutAPI } from "@/plugins/core/hooks/sign/out/use-sign-out-api";
 import { useSession } from "@/plugins/core/hooks/use-session";

@@ -4,8 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { usePathname, useRouter } from "vitnode-frontend/navigation";
+import { useAlertDialog } from "vitnode-frontend/components";
 
-import { useAlertDialog } from "@/components/ui/alert-dialog";
 import { mutationApi } from "./mutation-api";
 import { ShowCoreLanguages } from "@/graphql/hooks";
 

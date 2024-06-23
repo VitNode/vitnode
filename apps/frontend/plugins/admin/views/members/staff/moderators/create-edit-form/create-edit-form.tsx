@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { Button } from "vitnode-frontend/components";
 
 import {
   DialogFooter,
@@ -20,7 +21,6 @@ import { Label } from "@/components/ui/label";
 import { UserInput } from "@/components/user/inputs/user-input";
 import { GroupInput } from "@/components/groups/input/group-input";
 import { Switch } from "@/components/ui/switch";
-import { Button } from "@/components/ui/button";
 
 export const CreateEditFormModeratorsStaffAdmin = () => {
   const t = useTranslations("admin.members.staff");

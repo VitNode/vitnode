@@ -1,10 +1,10 @@
 import * as Lucide from "lucide-react";
 import * as React from "react";
 import { useTranslations } from "next-intl";
+import { Button } from "vitnode-frontend/components";
 
 import { IconLucideNames } from "@/components/icon/icon";
 import { IconInputProps } from "../content";
-import { Button } from "@/components/ui/button";
 import { IconClient } from "@/components/icon/icon-client";
 
 interface Props extends IconInputProps {

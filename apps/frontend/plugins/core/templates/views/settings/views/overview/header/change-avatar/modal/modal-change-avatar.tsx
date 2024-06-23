@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import * as React from "react";
+import { Button } from "vitnode-frontend/components";
 
 import {
   DialogDescription,
@@ -9,7 +10,6 @@ import {
 } from "@/components/ui/dialog";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import { FilesInput } from "@/components/ui/files/files-input";
 import { Loader } from "@/components/loader";

@@ -1,12 +1,12 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Link } from "vitnode-frontend/navigation";
+import { buttonVariants } from "vitnode-frontend/components";
 
 import { ThemeEditorTab, useThemeEditor } from "../hooks/use-theme-editor";
 import { ColorTabThemeEditor } from "./tabs/color-tab";
 import { MainTabThemeEditor } from "./tabs/main";
 import { Form } from "@/components/ui/form";
-import { buttonVariants } from "@/components/ui/button";
 import { SubmitContentThemeEditor } from "./submit";
 
 export const ContentThemeEditor = () => {

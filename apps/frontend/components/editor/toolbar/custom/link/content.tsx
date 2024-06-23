@@ -2,6 +2,7 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "vitnode-frontend/components";
 
 import {
   Form,
@@ -11,7 +12,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { useEditorState } from "@/components/editor/hooks/use-editor-state";
 
 interface Props {

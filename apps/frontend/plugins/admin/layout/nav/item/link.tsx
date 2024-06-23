@@ -7,8 +7,7 @@ import { useTranslations } from "next-intl";
 import { ChevronDown, Menu } from "lucide-react";
 import { Link, usePathname } from "vitnode-frontend/navigation";
 import { cn } from "vitnode-frontend/helpers";
-
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "vitnode-frontend/components";
 
 export interface ItemItemNavAdminProps {
   href: string;

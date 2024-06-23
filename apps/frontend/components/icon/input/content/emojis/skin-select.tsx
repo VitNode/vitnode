@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { Check } from "lucide-react";
+import { Button } from "vitnode-frontend/components";
 
 import { CONFIG } from "@/config";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,

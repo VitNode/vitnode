@@ -1,13 +1,13 @@
 import { useTranslations } from "next-intl";
-
 import {
   AlertDialogCancel,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
+  Button,
+} from "vitnode-frontend/components";
+
 import { SubmitContentDeletePluginActionsAdmin } from "./submit";
 import { useDeletePluginAdmin } from "./hooks/use-delete-plugin-admin";
 import { ShowAdminPlugins } from "@/graphql/hooks";

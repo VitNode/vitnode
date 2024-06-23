@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { Button } from "vitnode-frontend/components";
 
 import {
   useCreateEditNavAdmin,
@@ -19,7 +20,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { TextLanguageInput } from "@/components/text-language-input";
 import { Switch } from "@/components/ui/switch";
 import { IconInput } from "@/components/icon/input/icon-input";

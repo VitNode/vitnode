@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { ImageIcon } from "lucide-react";
+import { Button } from "vitnode-frontend/components";
 
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
@@ -10,7 +11,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
 import { useSession } from "@/plugins/core/hooks/use-session";
 

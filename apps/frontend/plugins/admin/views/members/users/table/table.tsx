@@ -5,6 +5,7 @@ import * as React from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Pencil } from "lucide-react";
 import { Link } from "vitnode-frontend/navigation";
+import { buttonVariants } from "vitnode-frontend/components";
 
 import {
   Tooltip,
@@ -12,7 +13,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { buttonVariants } from "@/components/ui/button";
 import { DataTable } from "@/components/data-table/data-table";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import { DateFormat } from "@/components/date-format/date-format";

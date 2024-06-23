@@ -3,8 +3,8 @@
 import { useTranslations } from "next-intl";
 import { Plus } from "lucide-react";
 import * as React from "react";
+import { Button } from "vitnode-frontend/components";
 
-import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Loader } from "@/components/loader";
 

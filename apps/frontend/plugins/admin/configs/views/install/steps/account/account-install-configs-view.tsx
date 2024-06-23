@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { removeSpecialCharacters } from "@vitnode/shared";
+import { Button } from "vitnode-frontend/components";
 
 import { CardContent, CardFooter } from "@/components/ui/card";
 import {
@@ -15,7 +16,6 @@ import {
 } from "@/components/ui/form";
 import { useSignUpView } from "@/plugins/core/hooks/sign/up/use-sign-up-view";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
 

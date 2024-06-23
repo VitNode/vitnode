@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { Button } from "vitnode-frontend/components";
 
 import {
   DialogDescription,
@@ -9,7 +10,6 @@ import {
 import { useUploadPluginAdmin } from "./hooks/use-upload-plugin-admin";
 import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { FilesInput } from "@/components/ui/files/files-input";
-import { Button } from "@/components/ui/button";
 import { ShowAdminPlugins } from "@/graphql/hooks";
 
 export interface UploadPluginAdminProps {

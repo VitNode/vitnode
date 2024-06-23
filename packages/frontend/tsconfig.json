@@ -8,8 +8,6 @@
     "isolatedModules": true,
     "outDir": "./dist",
     "jsx": "preserve",
-    "paths": {
-      "@/*": ["./*"]
-    }
+    "rootDir": "./src"
   }
 }

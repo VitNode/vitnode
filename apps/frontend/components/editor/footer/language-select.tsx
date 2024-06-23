@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
+import { buttonVariants } from "vitnode-frontend/components";
 
-import { buttonVariants } from "@/components/ui/button";
 import {
   Select,
   SelectContent,

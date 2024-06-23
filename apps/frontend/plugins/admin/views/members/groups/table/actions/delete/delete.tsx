@@ -1,6 +1,12 @@
 import { useTranslations } from "next-intl";
 import { Trash2 } from "lucide-react";
 import * as React from "react";
+import {
+  Button,
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from "vitnode-frontend/components";
 
 import {
   Tooltip,
@@ -8,13 +14,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Button } from "@/components/ui/button";
 import { ShowAdminGroups } from "@/graphql/hooks";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import { Loader } from "@/components/loader";
 
 const Content = React.lazy(async () =>

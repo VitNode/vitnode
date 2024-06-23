@@ -1,8 +1,7 @@
 import { Paperclip } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
-
-import { Button } from "@/components/ui/button";
+import { Button } from "vitnode-frontend/components";
 
 import { FileStateEditor } from "../../extensions/files/files";
 import { useEditorState } from "../../hooks/use-editor-state";

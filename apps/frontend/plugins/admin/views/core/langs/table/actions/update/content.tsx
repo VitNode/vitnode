@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { Button } from "vitnode-frontend/components";
 
 import {
   DialogFooter,
@@ -9,7 +10,6 @@ import { ShowCoreLanguages } from "@/graphql/hooks";
 import { Form, FormField } from "@/components/ui/form";
 import { useUpdateLangAdmin } from "./hooks/use-update-lang-admin";
 import { FilesInput } from "@/components/ui/files/files-input";
-import { Button } from "@/components/ui/button";
 
 export const ContentUpdateActionsTableLangsCoreAdmin = ({
   code,
