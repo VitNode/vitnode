@@ -1,4 +1,5 @@
-import { CardContent } from "@/components/ui/card";
+import { CardContent } from "vitnode-frontend/components";
+
 import { HeaderNotificationsSettings } from "./header/header-notifications-settings";
 
 export const NotificationsSettingsView = () => {

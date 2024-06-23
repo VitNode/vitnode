@@ -1,6 +1,7 @@
 "use client";
 
-import { CardHeader } from "@/components/ui/card";
+import { CardHeader } from "vitnode-frontend/components";
+
 import { useSession } from "@/plugins/core/hooks/use-session";
 import { ChangeAvatar } from "./change-avatar/change-avatar";
 

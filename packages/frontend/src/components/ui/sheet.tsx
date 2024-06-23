@@ -4,7 +4,8 @@ import * as React from "react";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { cva, VariantProps } from "class-variance-authority";
 import { X } from "lucide-react";
-import { cn } from "vitnode-frontend/helpers";
+
+import { cn } from "../../helpers";
 
 const Sheet = SheetPrimitive.Root;
 

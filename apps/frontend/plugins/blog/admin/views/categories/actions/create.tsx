@@ -3,10 +3,13 @@
 import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
-import { Button } from "vitnode-frontend/components";
-
-import { Loader } from "@/components/loader";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Button,
+  Loader,
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "vitnode-frontend/components";
 
 const Content = React.lazy(async () =>
   import("../create-edit/create-edit").then(module => ({

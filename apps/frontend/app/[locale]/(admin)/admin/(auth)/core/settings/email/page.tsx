@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { Card } from "vitnode-frontend/components";
 
 import { HeaderContent } from "@/components/header-content/header-content";
-import { Card } from "@/components/ui/card";
 import { EmailSettingsAdminView } from "@/plugins/admin/views/core/settings/email/email-settings-admin-view";
 import { fetcher } from "@/graphql/fetcher";
 import {

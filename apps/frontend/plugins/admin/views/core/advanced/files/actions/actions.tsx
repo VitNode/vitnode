@@ -1,15 +1,15 @@
 import { Download } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "vitnode-frontend/navigation";
-import { buttonVariants } from "vitnode-frontend/components";
-
-import { CONFIG } from "@/config";
 import {
+  buttonVariants,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "vitnode-frontend/components";
+
+import { CONFIG } from "@/config";
 import { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
 import { DeleteActionFilesAdvancedCoreAdmin } from "./delete/delete";
 

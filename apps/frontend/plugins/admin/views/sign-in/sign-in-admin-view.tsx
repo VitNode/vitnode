@@ -1,4 +1,5 @@
-import { Card } from "@/components/ui/card";
+import { Card } from "vitnode-frontend/components";
+
 import { FormSignInAdmin } from "./form/form-sign-in-admin";
 import { LogoVitNode } from "@/components/logo-vitnode";
 import { PoweredByVitNode } from "@/plugins/admin/global/powered-by";

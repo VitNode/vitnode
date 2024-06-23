@@ -1,8 +1,8 @@
 import { AlertTriangle } from "lucide-react";
+import { Badge } from "vitnode-frontend/components";
 
 import { CONFIG } from "@/config";
 import { HeaderContent } from "@/components/header-content/header-content";
-import { Badge } from "@/components/ui/badge";
 import { VersionDashboardCoreAdmin } from "./version";
 import { RebuildRequiredAdmin } from "@/plugins/admin/global/rebuild-required";
 

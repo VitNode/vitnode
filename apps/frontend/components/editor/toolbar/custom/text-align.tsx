@@ -5,13 +5,13 @@ import {
   AlignRight,
   ChevronDownIcon,
 } from "lucide-react";
-
-import { ButtonToolbarEditor } from "../button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "vitnode-frontend/components";
+
+import { ButtonToolbarEditor } from "../button";
 import { ToggleToolbarEditor } from "../toggle";
 
 import { useEditorState } from "../../hooks/use-editor-state";

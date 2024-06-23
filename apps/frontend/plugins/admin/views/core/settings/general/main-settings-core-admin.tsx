@@ -1,15 +1,15 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Button } from "vitnode-frontend/components";
-
 import {
+  Button,
   Form,
   FormField,
   FormFieldRender,
   FormWrapper,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+  Input,
+} from "vitnode-frontend/components";
+
 import { useSettingsCoreAdmin } from "./hooks/use-settings-core-admin";
 import { Core_Main_Settings__ShowQuery } from "@/graphql/hooks";
 import { TextLanguageInput } from "@/components/text-language-input";

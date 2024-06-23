@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import * as SeparatorPrimitive from "@radix-ui/react-separator";
-import { cn } from "vitnode-frontend/helpers";
+
+import { cn } from "../../helpers";
 
 const Separator = ({
   className,

@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { Card } from "vitnode-frontend/components";
 
 import {
   Core_Languages__Show,
@@ -12,7 +13,6 @@ import {
   SearchParamsPagination,
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
 import { HeaderContent } from "@/components/header-content/header-content";
-import { Card } from "@/components/ui/card";
 import { fetcher } from "@/graphql/fetcher";
 import { ActionsLangsAdmin } from "@/plugins/admin/views/core/langs/actions/actions";
 import { RebuildRequiredAdmin } from "@/plugins/admin/global/rebuild-required";

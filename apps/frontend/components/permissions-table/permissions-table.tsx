@@ -2,11 +2,9 @@ import * as React from "react";
 import { TableVirtuoso } from "react-virtuoso";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import { keyBy, mapValues } from "lodash";
+import { Loader, Input, Switch } from "vitnode-frontend/components";
 
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
-import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
-import { Loader } from "@/components/loader";
 import { ShowAdminGroups } from "@/graphql/hooks";
 import { usePermissionsGroupsAdminAPI } from "./use-permissions-table-api";
 

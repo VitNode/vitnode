@@ -1,7 +1,6 @@
 import * as React from "react";
+import { Loader, Dialog, DialogContent } from "vitnode-frontend/components";
 
-import { Loader } from "@/components/loader";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ShowCoreLanguages } from "@/graphql/hooks";
 
 const Content = React.lazy(async () =>

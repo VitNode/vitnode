@@ -3,8 +3,8 @@
 import { Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
+import { Drawer, DrawerTrigger } from "vitnode-frontend/components";
 
-import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
 import { ItemQuickMenu } from "../item";
 import { useSession } from "@/plugins/core/hooks/use-session";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";

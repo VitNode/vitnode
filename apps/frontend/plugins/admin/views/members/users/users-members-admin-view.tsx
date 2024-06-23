@@ -1,9 +1,9 @@
 import { useTranslations } from "next-intl";
+import { Card } from "vitnode-frontend/components";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { TableUsersMembersAdmin } from "./table/table";
 import { Admin__Core_Members__ShowQuery } from "@/graphql/hooks";
-import { Card } from "@/components/ui/card";
 
 export interface UsersMembersAdminViewProps {
   data: Admin__Core_Members__ShowQuery;

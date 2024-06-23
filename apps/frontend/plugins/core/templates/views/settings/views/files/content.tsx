@@ -7,19 +7,19 @@ import Image from "next/image";
 import { Clock, Download, File } from "lucide-react";
 import { formatBytes } from "@vitnode/shared";
 import { Link } from "vitnode-frontend/navigation";
-import { buttonVariants } from "vitnode-frontend/components";
+import {
+  buttonVariants,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "vitnode-frontend/components";
 
 import { CONFIG } from "@/config";
 import { DataTable } from "@/components/data-table/data-table";
 import { Core_Members__Files__ShowQuery, ShowCoreFiles } from "@/graphql/hooks";
 import { DateFormat } from "@/components/date-format/date-format";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 export const ContentFilesSettings = ({
   core_files__show: { edges, pageInfo },

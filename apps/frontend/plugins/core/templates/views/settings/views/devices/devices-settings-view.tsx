@@ -1,6 +1,10 @@
 import { useTranslations } from "next-intl";
+import {
+  CardContent,
+  CardDescription,
+  CardHeader,
+} from "vitnode-frontend/components";
 
-import { CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { Core_Sessions__Devices__ShowQuery } from "@/graphql/hooks";
 import { ContentDevicesSettings } from "./content";
 

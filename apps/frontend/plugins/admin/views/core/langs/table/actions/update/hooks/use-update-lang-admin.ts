@@ -2,9 +2,9 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
+import { useDialog } from "vitnode-frontend/components";
 
 import { ShowCoreLanguages } from "@/graphql/hooks";
-import { useDialog } from "@/components/ui/dialog";
 import { mutationApi } from "./mutation-api";
 
 export const useUpdateLangAdmin = ({

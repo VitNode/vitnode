@@ -3,8 +3,7 @@ import { HeaderContext } from "@tanstack/react-table";
 import * as React from "react";
 import { useSearchParams } from "next/navigation";
 import { usePathname, useRouter } from "vitnode-frontend/navigation";
-
-import { Button } from "../ui/button";
+import { Button } from "vitnode-frontend/components";
 
 interface Props<T> extends HeaderContext<T, unknown> {
   children: React.ReactNode;

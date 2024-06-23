@@ -10,13 +10,12 @@ import {
   Heading6,
   Pilcrow,
 } from "lucide-react";
-
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-} from "@/components/ui/select";
+} from "vitnode-frontend/components";
 
 import { useEditorState } from "../../hooks/use-editor-state";
 

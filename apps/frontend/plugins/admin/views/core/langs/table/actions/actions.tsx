@@ -1,19 +1,19 @@
 import { ChevronDown, Trash2, Upload } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import * as React from "react";
-import { Button } from "vitnode-frontend/components";
+import {
+  Button,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "vitnode-frontend/components";
 
 import { ShowCoreLanguages } from "@/graphql/hooks";
 import { EditActionsTableLangsCoreAdmin } from "./edit";
 import { DeleteActionsTableLangsCoreAdmin } from "./delete/delete";
 import { DownloadActionsTableLangsCoreAdmin } from "./download/download";
 import { UpdateActionsTableLangsCoreAdmin } from "./update/update";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 export const ActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
   const t = useTranslations("core");

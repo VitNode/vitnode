@@ -8,9 +8,8 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "vitnode-frontend/navigation";
-import { Button } from "vitnode-frontend/components";
-
 import {
+  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -18,7 +17,8 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
   DropdownMenuLabel,
-} from "@/components/ui/dropdown-menu";
+} from "vitnode-frontend/components";
+
 import { useSession } from "@/plugins/core/hooks/use-session";
 import { useSignOutAPI } from "@/plugins/core/hooks/sign/out/use-sign-out-api";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";

@@ -2,11 +2,12 @@
 
 import * as React from "react";
 import { DialogProps } from "@radix-ui/react-dialog";
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { Command as CommandPrimitive } from "cmdk";
-import { cn } from "vitnode-frontend/helpers";
+import { Search } from "lucide-react";
 
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "./dialog";
+
+import { cn } from "../../helpers";
 
 const Command = ({
   className,
@@ -43,7 +44,7 @@ const CommandInput = ({
   ...props
 }: React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>) => (
   <div className="flex items-center border-b px-3">
-    <MagnifyingGlassIcon className="mr-2 size-4 shrink-0 opacity-50" />
+    <Search className="mr-2 size-4 shrink-0 opacity-50" />
     <CommandPrimitive.Input
       className={cn(commandInputClassName, className)}
       {...props}

@@ -1,8 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "vitnode-frontend/navigation";
-import { buttonVariants } from "vitnode-frontend/components";
+import { buttonVariants, DrawerClose } from "vitnode-frontend/components";
 
-import { DrawerClose } from "@/components/ui/drawer";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import { useSession } from "@/plugins/core/hooks/use-session";
 import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";

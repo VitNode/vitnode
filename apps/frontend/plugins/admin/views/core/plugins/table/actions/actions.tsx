@@ -2,18 +2,18 @@ import { BadgeHelp, ChevronDown, CodeXml, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { Link, usePathname, useRouter } from "vitnode-frontend/navigation";
-import { Button } from "vitnode-frontend/components";
+import {
+  Button,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "vitnode-frontend/components";
 
 import { CONFIG } from "@/config";
 import { ShowAdminPlugins } from "@/graphql/hooks";
 import { DeletePluginActionsAdmin } from "./delete/delete";
 import { SetDefaultPluginActionsAdmin } from "./set-default/set-default";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { UploadPluginActionsAdmin } from "./upload";
 
 export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {

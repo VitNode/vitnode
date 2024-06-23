@@ -1,12 +1,12 @@
 import { LinkIcon } from "lucide-react";
 import * as React from "react";
-
 import {
+  Loader,
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Loader } from "@/components/loader";
+} from "vitnode-frontend/components";
+
 import { useEditorState } from "@/components/editor/hooks/use-editor-state";
 
 import { ButtonToolbarEditor } from "../../button";

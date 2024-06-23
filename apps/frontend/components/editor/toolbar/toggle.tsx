@@ -1,6 +1,5 @@
 import * as React from "react";
-
-import { Toggle } from "@/components/ui/toggle";
+import { Toggle } from "vitnode-frontend/components";
 
 interface Props {
   children: React.ReactNode;

@@ -1,8 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
+import { Card } from "vitnode-frontend/components";
 
 import { HeaderContent } from "@/components/header-content/header-content";
-import { Card } from "@/components/ui/card";
 import {
   Admin__Core_Manifest_Metadata__Show,
   Admin__Core_Manifest_Metadata__ShowQuery,

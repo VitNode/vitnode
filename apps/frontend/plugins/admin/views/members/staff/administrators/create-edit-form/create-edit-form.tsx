@@ -1,12 +1,9 @@
 import { useTranslations } from "next-intl";
-import { Button } from "vitnode-frontend/components";
-
 import {
+  Button,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import {
   Form,
   FormControl,
   FormDescription,
@@ -14,13 +11,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+  Label,
+  RadioGroup,
+  RadioGroupItem,
+  Switch,
+} from "vitnode-frontend/components";
+
 import { useFormCreateEditFormGroupsMembersAdmin } from "./hooks/use-form";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
 import { UserInput } from "@/components/user/inputs/user-input";
 import { GroupInput } from "@/components/groups/input/group-input";
-import { Switch } from "@/components/ui/switch";
 
 export const CreateEditFormAdministratorsStaffAdmin = () => {
   const t = useTranslations("admin.members.staff");

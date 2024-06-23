@@ -1,15 +1,15 @@
 import { useTranslations } from "next-intl";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import * as React from "react";
-import { Button } from "vitnode-frontend/components";
-
-import { Form } from "@/components/ui/form";
-import { useCreateEditCategoryBlogAdmin } from "./hooks/use-create-edit-category-blog-admin";
 import {
+  Button,
   DialogDescription,
   DialogFooter,
   DialogHeader,
-} from "@/components/ui/dialog";
+  Form,
+} from "vitnode-frontend/components";
+
+import { useCreateEditCategoryBlogAdmin } from "./hooks/use-create-edit-category-blog-admin";
 import { ShowBlogCategories } from "@/graphql/hooks";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { MainTabCreateEditCategoryBlogAdmin } from "./tabs/main";

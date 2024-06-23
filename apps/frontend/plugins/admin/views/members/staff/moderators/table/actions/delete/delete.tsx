@@ -6,9 +6,9 @@ import {
   AlertDialogContent,
   AlertDialogTrigger,
   Button,
+  Loader,
 } from "vitnode-frontend/components";
 
-import { Loader } from "@/components/loader";
 import { ShowAdminStaffModerators } from "@/graphql/hooks";
 
 const ContentDeleteActionsTableModeratorsStaffAdmin = React.lazy(async () =>

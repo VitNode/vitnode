@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
+import { Card } from "vitnode-frontend/components";
 
 import { NavSettings } from "./nav/nav-settings";
 import { HeaderContent } from "@/components/header-content/header-content";
-import { Card } from "@/components/ui/card";
 
 interface Props {
   children: React.ReactNode;

@@ -1,17 +1,19 @@
 import { Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
-import { Button } from "vitnode-frontend/components";
-
 import {
+  Button,
+  Loader,
+  Dialog,
+  DialogContent,
+  DialogTrigger,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "vitnode-frontend/components";
+
 import { ShowAdminPlugins } from "@/graphql/hooks";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Loader } from "@/components/loader";
 
 export const UploadPluginActionsAdmin = (
   props: Pick<ShowAdminPlugins, "code" | "name">,

@@ -1,13 +1,10 @@
 "use client";
 
-import {
-  CheckIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-} from "@radix-ui/react-icons";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { ComponentPropsWithoutRef } from "react";
-import { cn } from "vitnode-frontend/helpers";
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
+
+import { cn } from "../../helpers";
 
 const Select = SelectPrimitive.Root;
 

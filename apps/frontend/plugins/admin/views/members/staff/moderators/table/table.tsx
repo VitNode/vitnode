@@ -4,12 +4,12 @@ import { useTranslations } from "next-intl";
 import { ColumnDef } from "@tanstack/react-table";
 import * as React from "react";
 import { InfinityIcon, ShieldAlert } from "lucide-react";
+import { Badge } from "vitnode-frontend/components";
 
 import { DataTable } from "@/components/data-table/data-table";
 import { ShowAdminStaffModerators } from "@/graphql/hooks";
 import { DateFormat } from "@/components/date-format/date-format";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
-import { Badge } from "@/components/ui/badge";
 import { UserLink } from "@/components/user/link/user-link";
 import { GroupFormat } from "@/components/groups/group-format";
 import { ModeratorsStaffAdminViewProps } from "../moderators-view";

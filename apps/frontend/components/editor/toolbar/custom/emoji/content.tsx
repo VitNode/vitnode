@@ -1,10 +1,10 @@
 import { useTranslations } from "next-intl";
 import * as React from "react";
+import { Input } from "vitnode-frontend/components";
 
 import { CONFIG } from "@/config";
 import { EmojisContentIconInput } from "@/components/icon/input/content/emojis/emojis";
 import { SkinSelectEmojisContentIconInput } from "@/components/icon/input/content/emojis/skin-select";
-import { Input } from "@/components/ui/input";
 import { useEditorState } from "@/components/editor/hooks/use-editor-state";
 
 interface Props {

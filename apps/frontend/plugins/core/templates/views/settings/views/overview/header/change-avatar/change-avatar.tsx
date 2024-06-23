@@ -1,17 +1,19 @@
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { ImageIcon } from "lucide-react";
-import { Button } from "vitnode-frontend/components";
-
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import {
+  Button,
+  Loader,
+  Dialog,
+  DialogContent,
+  DialogTrigger,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Loader } from "@/components/loader";
+} from "vitnode-frontend/components";
+
+import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import { useSession } from "@/plugins/core/hooks/use-session";
 
 const ModalChangeAvatar = React.lazy(async () =>

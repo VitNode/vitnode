@@ -3,7 +3,8 @@
 import * as React from "react";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { Circle } from "lucide-react";
-import { cn } from "vitnode-frontend/helpers";
+
+import { cn } from "../../helpers";
 
 const RadioGroup: React.FC<
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>

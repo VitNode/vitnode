@@ -5,14 +5,14 @@ import * as React from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Pencil } from "lucide-react";
 import { Link } from "vitnode-frontend/navigation";
-import { buttonVariants } from "vitnode-frontend/components";
-
 import {
+  buttonVariants,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "vitnode-frontend/components";
+
 import { DataTable } from "@/components/data-table/data-table";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import { DateFormat } from "@/components/date-format/date-format";

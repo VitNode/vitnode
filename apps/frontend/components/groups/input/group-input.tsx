@@ -2,14 +2,18 @@ import { useTranslations } from "next-intl";
 import * as React from "react";
 import { X } from "lucide-react";
 import { cn } from "vitnode-frontend/helpers";
+import {
+  Button,
+  Badge,
+  Loader,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "vitnode-frontend/components";
 
 import { GroupInputContent } from "./content/content";
 
 import { TextLanguage } from "../../../graphql/hooks";
-import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
-import { Button } from "../../ui/button";
-import { Badge } from "../../ui/badge";
-import { Loader } from "../../loader";
 import { useTextLang } from "../../../plugins/core/hooks/use-text-lang";
 
 export interface GroupInputItem {

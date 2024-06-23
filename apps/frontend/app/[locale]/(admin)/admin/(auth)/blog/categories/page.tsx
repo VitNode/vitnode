@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { Card, CardContent, CardHeader } from "vitnode-frontend/components";
 
 import { CategoriesBlogAdminView } from "@/plugins/blog/admin/views/categories/categories-view";
 import { fetcher } from "@/graphql/fetcher";
@@ -8,7 +9,6 @@ import {
   Admin_Blog_Categories__ShowQuery,
   Admin_Blog_Categories__ShowQueryVariables,
 } from "@/graphql/hooks";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { CreateCategoryBlogAdmin } from "@/plugins/blog/admin/views/categories/actions/create";
 

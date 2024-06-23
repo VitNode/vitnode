@@ -1,10 +1,9 @@
 import { Monitor, Smartphone } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Badge, Separator } from "vitnode-frontend/components";
 
 import { DateFormat } from "@/components/date-format/date-format";
-import { Separator } from "@/components/ui/separator";
 import { DevicesSettingsViewProps } from "./devices-settings-view";
-import { Badge } from "@/components/ui/badge";
 
 const getDeviceIcon = (device: string) => {
   if (

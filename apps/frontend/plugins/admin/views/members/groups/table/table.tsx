@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { ColumnDef } from "@tanstack/react-table";
 import * as React from "react";
 import { Link } from "vitnode-frontend/navigation";
+import { Badge } from "vitnode-frontend/components";
 
 import { DataTable } from "@/components/data-table/data-table";
 import { ShowAdminGroups } from "@/graphql/hooks";
@@ -12,7 +13,6 @@ import { ActionsTableGroupsMembersAdmin } from "./actions/actions";
 import { DateFormat } from "@/components/date-format/date-format";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
 import { GroupsMembersAdminViewProps } from "../groups-members-admin-view";
-import { Badge } from "@/components/ui/badge";
 
 export const TableGroupsMembersAdmin = ({
   data,

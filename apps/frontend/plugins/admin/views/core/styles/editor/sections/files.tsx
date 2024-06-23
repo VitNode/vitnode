@@ -1,11 +1,15 @@
 import { useTranslations } from "next-intl";
 import { useFormContext } from "react-hook-form";
+import {
+  FormField,
+  FormFieldRender,
+  Label,
+  RadioGroup,
+  RadioGroupItem,
+  Separator,
+} from "vitnode-frontend/components";
 
 import { HeaderContent } from "@/components/header-content/header-content";
-import { FormField, FormFieldRender } from "@/components/ui/form";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Separator } from "@/components/ui/separator";
 
 export const FilesSectionContentEditorAdmin = () => {
   const t = useTranslations("admin.core.styles.editor");

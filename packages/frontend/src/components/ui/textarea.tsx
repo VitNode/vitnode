@@ -1,5 +1,6 @@
 import * as React from "react";
-import { cn } from "vitnode-frontend/helpers";
+
+import { cn } from "../../helpers";
 
 export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {

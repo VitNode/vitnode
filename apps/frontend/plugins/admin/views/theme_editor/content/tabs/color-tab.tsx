@@ -5,17 +5,17 @@ import {
   getStringFromHSL,
   isColorBrightness,
 } from "@vitnode/shared";
-import { Button } from "vitnode-frontend/components";
-
 import {
+  Button,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+  Separator,
+} from "vitnode-frontend/components";
+
 import { ColorInput } from "@/components/color/color-input";
-import { Separator } from "@/components/ui/separator";
 
 import { ThemeEditorTab, useThemeEditor } from "../../hooks/use-theme-editor";
 

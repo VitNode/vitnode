@@ -1,16 +1,15 @@
 import { Filter } from "lucide-react";
 import * as React from "react";
 import { useTranslations } from "next-intl";
-
-import { Button } from "../../../ui/button";
 import {
+  Button,
+  Loader,
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "../../../ui/sheet";
-import { Loader } from "../../../loader";
+} from "vitnode-frontend/components";
 
 interface Props {
   children: React.ReactNode;

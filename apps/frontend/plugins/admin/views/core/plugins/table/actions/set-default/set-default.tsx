@@ -1,10 +1,10 @@
 import { useTranslations } from "next-intl";
-
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-} from "@/components/ui/tooltip";
+} from "vitnode-frontend/components";
+
 import { ButtonSetDefaultPluginActionsAdmin } from "./button";
 import { useSetDefaultPluginAdmin } from "./hooks/use-set-default-admin";
 import { ShowAdminPlugins } from "@/graphql/hooks";

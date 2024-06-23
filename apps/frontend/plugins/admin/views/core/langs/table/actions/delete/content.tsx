@@ -6,17 +6,15 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   Button,
-} from "vitnode-frontend/components";
-
-import { useDeleteLangAdmin } from "./hooks/use-delete-lang-admin";
-import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+  Input,
+} from "vitnode-frontend/components";
+
+import { useDeleteLangAdmin } from "./hooks/use-delete-lang-admin";
 import { ShowCoreLanguages } from "@/graphql/hooks";
 
 export const ContentDeleteActionsTableLangsCoreAdmin = ({
