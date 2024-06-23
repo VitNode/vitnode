@@ -5,9 +5,9 @@
   "license": "GPL-3.0 license",
   "scripts": {
     "db": "drizzle-kit push",
-    "config:database": "ts-node ./src/utils/actions/finish-build.ts",
+    "config:init": "source ../../.env && NEXT_PUBLIC_FRONTEND_URL=$NEXT_PUBLIC_FRONTEND_URL DB_HOST=$DB_HOST DB_PORT=$DB_PORT DB_USER=$DB_USER DB_PASSWORD=$DB_PASSWORD DB_DATABASE=$DB_DATABASE vitnode-backend init",
     "build": "nest build",
-    "dev": "pnpm config:database && cross-env NODE_ENV=development nest start -w",
+    "dev": "pnpm config:init && cross-env NODE_ENV=development nest start -w",
     "email:dev": "email dev -p 3001",
     "start": "nest start",
     "start:debug": "nest start --debug --watch",
@@ -17,8 +17,7 @@
     "migrate:forum": "drizzle-kit generate --config src/plugins/forum/admin/database/drizzle.config.ts",
     "migrate:admin": "drizzle-kit up --config src/plugins/core/admin/database/drizzle.config.ts && drizzle-kit generate --config src/plugins/core/admin/database/drizzle.config.ts",
     "migrate:blog": "drizzle-kit up --config src/plugins/blog/admin/database/drizzle.config.ts && drizzle-kit generate --config src/plugins/blog/admin/database/drizzle.config.ts",
-    "codegen": "graphql-codegen --config codegen.ts",
-    "test123": "vitnode-backend init"
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.10.4",

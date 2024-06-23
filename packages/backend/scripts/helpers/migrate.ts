@@ -1,26 +1,32 @@
+/* eslint-disable no-console */
 import { createHash } from "crypto";
 import * as fs from "fs";
+import { join } from "path";
 
 import { sql } from "drizzle-orm";
 import { MigrationMeta } from "drizzle-orm/migrator";
-import { ABSOLUTE_PATHS_BACKEND } from "vitnode-backend";
+import { NodePgDatabase } from "drizzle-orm/node-postgres";
 
-import { db } from "@/database/client";
+import coreSchemaDatabase from "../../src/templates/core/admin/database";
 
 // Source: https://github.com/drizzle-team/drizzle-orm/blob/main/drizzle-orm/src/migrator.ts
 const readMigrationFiles = ({
   pluginCode,
 }: {
   pluginCode: string;
-}): MigrationMeta[] => {
-  const migrationFolderTo = ABSOLUTE_PATHS_BACKEND.plugin({ code: pluginCode })
-    .database.migrations;
+}): MigrationMeta[] | null => {
+  const migrationFolderTo = join(
+    process.cwd(),
+    "src",
+    "plugins",
+    pluginCode,
+    "admin",
+    "database",
+    "migrations",
+  );
   const journalPath = `${migrationFolderTo}/meta/_journal.json`;
   if (!fs.existsSync(journalPath)) {
-    // eslint-disable-next-line no-console
-    console.log(`No migration found for ${pluginCode}`);
-
-    return;
+    return null;
   }
   const journalAsString = fs
     .readFileSync(`${migrationFolderTo}/meta/_journal.json`)
@@ -60,7 +66,13 @@ const readMigrationFiles = ({
 };
 
 // Source: https://github.com/drizzle-team/drizzle-orm/blob/main/drizzle-orm/src/pg-core/dialect.ts
-export const migrate = async ({ pluginCode }: { pluginCode: string }) => {
+export const migrate = async ({
+  pluginCode,
+  db,
+}: {
+  db: NodePgDatabase<typeof coreSchemaDatabase>;
+  pluginCode: string;
+}) => {
   const migrationsTable = "core_migrations";
   const migrationsSchema = "public";
 

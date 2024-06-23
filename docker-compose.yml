@@ -29,7 +29,7 @@ services:
       - DB_DATABASE=${DB_DATABASE:-vitnode}
       - LOGIN_TOKEN_SECRET=${LOGIN_TOKEN_SECRET}
       - NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL:-http://localhost:3000}
-    command: sh -c "cd backend && pnpm config:database && pnpm start:prod"
+    command: sh -c "cd backend && pnpm config:init && pnpm start:prod"
     ports:
       - "8080:8080"
     depends_on:
