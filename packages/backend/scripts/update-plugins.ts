@@ -79,15 +79,4 @@ export const updatePlugins = async ({
       }),
     );
   });
-
-  // Promise.all(
-  //   fs
-  //     .readdirSync(pluginsPath)
-  //     .filter(plugin => !["core", "plugins.module.ts"].includes(plugin))
-  //     .map(async (plugin, index) => {
-  //       const test = await db.execute(sql`SELECT * FROM core_plugins`);
-
-  //       console.log("test", test);
-  //     }),
-  // );
 };
