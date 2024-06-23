@@ -1,6 +1,5 @@
 import { useTranslations } from "next-intl";
 import { UseFormReturn } from "react-hook-form";
-
 import {
   FormControl,
   FormDescription,
@@ -8,8 +7,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+  Input,
+} from "vitnode-frontend/components";
 
 interface Props {
   form: UseFormReturn<{

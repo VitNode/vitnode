@@ -1,16 +1,9 @@
 import { useTranslations } from "next-intl";
-import { Button } from "vitnode-frontend/components";
-
 import {
-  useCreateEditNavAdmin,
-  CreateEditNavAdminArgs,
-} from "./hooks/use-create-edit-nav-admin";
-import {
+  Button,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import {
   Form,
   FormControl,
   FormDescription,
@@ -18,10 +11,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+  Input,
+  Switch,
+} from "vitnode-frontend/components";
+
+import {
+  useCreateEditNavAdmin,
+  CreateEditNavAdminArgs,
+} from "./hooks/use-create-edit-nav-admin";
 import { TextLanguageInput } from "@/components/text-language-input";
-import { Switch } from "@/components/ui/switch";
 import { IconInput } from "@/components/icon/input/icon-input";
 
 export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {

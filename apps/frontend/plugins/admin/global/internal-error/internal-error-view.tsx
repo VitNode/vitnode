@@ -3,15 +3,15 @@
 import { RefreshCcw, RotateCcw, WifiOff } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "vitnode-frontend/navigation";
-import { Button } from "vitnode-frontend/components";
-
-import { CONFIG } from "@/config";
 import {
+  Button,
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "@/components/ui/card";
+} from "vitnode-frontend/components";
+
+import { CONFIG } from "@/config";
 import { PoweredByVitNode } from "../powered-by";
 import { mutationClearCache } from "./mutation-clear-cache";
 

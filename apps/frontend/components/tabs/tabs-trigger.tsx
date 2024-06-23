@@ -4,8 +4,7 @@ import * as React from "react";
 import { Link, usePathname } from "vitnode-frontend/navigation";
 import { cn } from "vitnode-frontend/helpers";
 import { motion } from "framer-motion";
-
-import { buttonVariants } from "../ui/button";
+import { buttonVariants } from "vitnode-frontend/components";
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
   return <div className="relative pb-2">{children}</div>;

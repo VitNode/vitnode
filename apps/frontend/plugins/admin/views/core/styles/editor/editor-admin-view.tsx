@@ -1,17 +1,17 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Button } from "vitnode-frontend/components";
-
-import { Card } from "@/components/ui/card";
 import {
+  Button,
+  Card,
   Form,
   FormField,
   FormFieldRender,
   FormWrapper,
-} from "@/components/ui/form";
+  Switch,
+} from "vitnode-frontend/components";
+
 import { useEditorAdmin, EditorAdminArgs } from "./hooks/use-editor-admin";
-import { Switch } from "@/components/ui/switch";
 import { FilesSectionContentEditorAdmin } from "./sections/files";
 
 export const EditorAdminView = ({ data }: EditorAdminArgs) => {

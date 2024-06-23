@@ -1,20 +1,18 @@
 import { useTranslations } from "next-intl";
-import { Button } from "vitnode-frontend/components";
-
 import {
+  Button,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { useTestingEmailAdmin } from "./hooks/use-testing-email-admin";
-import {
   Form,
   FormField,
   FormFieldRender,
   FormWrapper,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+  Input,
+  Textarea,
+} from "vitnode-frontend/components";
+
+import { useTestingEmailAdmin } from "./hooks/use-testing-email-admin";
 
 export const ContentTestingActionEmailSettingsAdmin = () => {
   const t = useTranslations("admin.core.settings.email.test");

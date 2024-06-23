@@ -1,7 +1,10 @@
 import * as React from "react";
-import { AlertDialog, AlertDialogContent } from "vitnode-frontend/components";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  Loader,
+} from "vitnode-frontend/components";
 
-import { Loader } from "@/components/loader";
 import { ShowCoreLanguages } from "@/graphql/hooks";
 
 const Content = React.lazy(async () =>

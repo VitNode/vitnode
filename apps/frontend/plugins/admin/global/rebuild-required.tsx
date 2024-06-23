@@ -2,9 +2,13 @@
 
 import { RefreshCcw } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { buttonVariants } from "vitnode-frontend/components";
+import {
+  buttonVariants,
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "vitnode-frontend/components";
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useGlobals } from "@/plugins/core/hooks/use-globals";
 import { CONFIG } from "@/config";
 

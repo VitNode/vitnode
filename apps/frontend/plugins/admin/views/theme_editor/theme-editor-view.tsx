@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cn } from "vitnode-frontend/helpers";
+import { Loader } from "vitnode-frontend/components";
 
 import { CONFIG } from "@/config";
 import { ThemeEditorViewEnum, ToolbarThemeEditor } from "./toolbar";
@@ -11,7 +12,6 @@ import {
   keysFromCSSThemeEditor,
   useThemeEditorApi,
 } from "./hooks/use-theme-editor-api";
-import { Loader } from "@/components/loader";
 import { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
 
 export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {

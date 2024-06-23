@@ -5,9 +5,9 @@ import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "vitnode-frontend/navigation";
 import { zodInput } from "vitnode-frontend/helpers";
+import { useDialog } from "vitnode-frontend/components";
 
 import { mutationCreateApi } from "./mutation-create-api";
-import { useDialog } from "@/components/ui/dialog";
 import { ShowAdminPlugins } from "@/graphql/hooks";
 import { mutationEditApi } from "./mutation-edit-api";
 import { ErrorType } from "@/graphql/fetcher";

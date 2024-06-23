@@ -2,13 +2,12 @@ import * as React from "react";
 import * as Accordion from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
 import { cn } from "vitnode-frontend/helpers";
-import { buttonVariants } from "vitnode-frontend/components";
+import { buttonVariants, Separator } from "vitnode-frontend/components";
 
 import { useSession } from "@/plugins/core/hooks/use-session";
 import { ItemNavDrawerQuickMenu } from "./item";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { classNameDrawerQuickMenu } from "../drawer";
-import { Separator } from "@/components/ui/separator";
 
 interface Props {
   navIcons: { icon: React.ReactNode; id: number }[];

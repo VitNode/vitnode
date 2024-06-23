@@ -3,11 +3,15 @@
 import { Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
-import { Button } from "vitnode-frontend/components";
+import {
+  Button,
+  Loader,
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "vitnode-frontend/components";
 
 import { CONFIG } from "@/config";
-import { Loader } from "@/components/loader";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const Content = React.lazy(async () =>
   import("../upload/upload").then(module => ({

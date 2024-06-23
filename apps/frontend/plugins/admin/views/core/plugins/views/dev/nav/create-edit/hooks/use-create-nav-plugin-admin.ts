@@ -5,8 +5,8 @@ import { useParams } from "next/navigation";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { zodInput } from "vitnode-frontend/helpers";
+import { useDialog } from "vitnode-frontend/components";
 
-import { useDialog } from "@/components/ui/dialog";
 import { createMutationApi } from "./create-mutation-api";
 import { editMutationApi } from "./edit-mutation-api";
 import { ErrorType } from "@/graphql/fetcher";

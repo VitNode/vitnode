@@ -4,14 +4,14 @@ import { AlertTriangle, Home } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "vitnode-frontend/navigation";
 import { cn } from "vitnode-frontend/helpers";
-import { buttonVariants } from "vitnode-frontend/components";
-
 import {
+  buttonVariants,
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "@/components/ui/card";
+} from "vitnode-frontend/components";
+
 import { ErrorViewProps } from "@/components/views/error-view-ssr";
 
 export const ErrorView = ({ className, code }: ErrorViewProps) => {

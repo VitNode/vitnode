@@ -7,13 +7,15 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   Button,
+  Alert,
+  AlertDescription,
+  AlertTitle,
 } from "vitnode-frontend/components";
 
 import { ShowCoreNav } from "@/graphql/hooks";
 import { useDeleteNavAdmin } from "./hooks/use-delete-nav-admin";
 import { SubmitDeleteActionTableNavAdmin } from "./submit";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export const ContentDeleteActionTableNavAdmin = ({
   children,

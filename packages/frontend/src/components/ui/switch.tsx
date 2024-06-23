@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import * as SwitchPrimitives from "@radix-ui/react-switch";
-import { cn } from "vitnode-frontend/helpers";
+
+import { cn } from "../../helpers";
 
 const Switch = ({
   className,

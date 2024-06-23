@@ -1,15 +1,10 @@
 import { useTranslations } from "next-intl";
-import { Button } from "vitnode-frontend/components";
-
-import { useCreateEditLangAdmin } from "./hooks/use-create-edit-lang-admin";
-import { ShowCoreLanguages } from "@/graphql/hooks";
 import {
+  Button,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import {
   Form,
   FormControl,
   FormDescription,
@@ -17,9 +12,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
+  Input,
+  Switch,
+} from "vitnode-frontend/components";
+
+import { useCreateEditLangAdmin } from "./hooks/use-create-edit-lang-admin";
+import { ShowCoreLanguages } from "@/graphql/hooks";
 import { LocaleFieldCreateEditLangAdmin } from "./fields/locale";
 import { TimezoneFieldCreateEditLangAdmin } from "./fields/timezone";
 

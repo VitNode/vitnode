@@ -1,10 +1,11 @@
 import { ChevronRight, Home } from "lucide-react";
 import * as React from "react";
 import { useTranslations } from "next-intl";
-import { Link } from "vitnode-frontend/navigation";
-import { cn } from "vitnode-frontend/helpers";
 
 import { buttonVariants } from "./button";
+
+import { cn } from "../../helpers";
+import { Link } from "../../navigation";
 
 interface Props {
   items: { href: string; id: number | string; text: string }[];

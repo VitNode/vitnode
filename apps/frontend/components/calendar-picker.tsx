@@ -2,10 +2,14 @@ import { CalendarIcon } from "lucide-react";
 import { SelectRangeEventHandler } from "react-day-picker";
 import { format } from "date-fns";
 import { cn } from "vitnode-frontend/helpers";
+import {
+  Button,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "vitnode-frontend/components";
 
-import { Button } from "./ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Calendar } from "./ui/calendar";
+// import { Calendar } from "./ui/calendar";
 
 interface Props {
   onSelect?: SelectRangeEventHandler;
@@ -43,14 +47,14 @@ export const CalendarPicker = ({ onSelect, selected }: Props) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
-        <Calendar
+        {/* <Calendar
           selected={selected}
           onSelect={onSelect}
           disabled={date => date > new Date() || date < new Date("1900-01-01")}
           initialFocus
           captionLayout="dropdown-buttons"
           mode="range"
-        />
+        /> */}
       </PopoverContent>
     </Popover>
   );

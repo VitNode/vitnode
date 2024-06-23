@@ -1,9 +1,8 @@
 import * as React from "react";
 import { Link, usePathname } from "vitnode-frontend/navigation";
 import { cn } from "vitnode-frontend/helpers";
-import { buttonVariants } from "vitnode-frontend/components";
+import { buttonVariants, DrawerClose } from "vitnode-frontend/components";
 
-import { DrawerClose } from "@/components/ui/drawer";
 import { ShowCoreNav } from "@/graphql/hooks";
 import { classNameDrawerQuickMenu } from "../drawer";
 

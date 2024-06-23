@@ -2,12 +2,12 @@ import { Baseline, ChevronDownIcon } from "lucide-react";
 import * as React from "react";
 import { HslColor } from "react-colorful";
 import { getHSLFromString } from "@vitnode/shared";
-
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "vitnode-frontend/components";
+
 import { PickerColor } from "@/components/color/picker/picker";
 import { useEditorState } from "@/components/editor/hooks/use-editor-state";
 

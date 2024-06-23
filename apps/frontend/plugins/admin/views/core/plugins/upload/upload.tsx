@@ -1,14 +1,17 @@
 import { useTranslations } from "next-intl";
-import { Button } from "vitnode-frontend/components";
-
 import {
+  Button,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+  Form,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "vitnode-frontend/components";
+
 import { useUploadPluginAdmin } from "./hooks/use-upload-plugin-admin";
-import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { FilesInput } from "@/components/ui/files/files-input";
 import { ShowAdminPlugins } from "@/graphql/hooks";
 

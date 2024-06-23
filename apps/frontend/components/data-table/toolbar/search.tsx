@@ -2,8 +2,7 @@ import { useSearchParams } from "next/navigation";
 import * as React from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { usePathname, useRouter } from "vitnode-frontend/navigation";
-
-import { Input } from "../../ui/input";
+import { Input } from "vitnode-frontend/components";
 
 interface Props {
   startTransition: React.TransitionStartFunction;

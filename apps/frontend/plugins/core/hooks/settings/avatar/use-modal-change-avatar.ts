@@ -2,9 +2,9 @@ import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { toast } from "sonner";
+import { useDialog } from "vitnode-frontend/components";
 
 import { mutationDeleteApi } from "./api/mutation-delete-api";
-import { useDialog } from "@/components/ui/dialog";
 
 interface FormType {
   file: File[];

@@ -6,16 +6,14 @@ import {
   AlertDialogContent,
   AlertDialogTrigger,
   Button,
-} from "vitnode-frontend/components";
-
-import { Loader } from "@/components/loader";
-import { ShowCoreNav } from "@/graphql/hooks";
-import {
+  Loader,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "vitnode-frontend/components";
+
+import { ShowCoreNav } from "@/graphql/hooks";
 
 const Content = React.lazy(async () =>
   import("./content").then(module => ({

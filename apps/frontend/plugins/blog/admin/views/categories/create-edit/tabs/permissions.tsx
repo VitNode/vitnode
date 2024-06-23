@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { useFormContext } from "react-hook-form";
+import { FormField } from "vitnode-frontend/components";
 
 import { PermissionsTable } from "@/components/permissions-table/permissions-table";
-import { FormField } from "@/components/ui/form";
 
 export const PermissionsTabCreateEditCategoryBlogAdmin = () => {
   const t = useTranslations("blog.admin.categories");

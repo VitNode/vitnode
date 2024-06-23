@@ -1,19 +1,17 @@
 import { useTranslations } from "next-intl";
-import { buttonVariants } from "vitnode-frontend/components";
-
 import {
+  buttonVariants,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "vitnode-frontend/components";
+
 import { useGlobals } from "@/plugins/core/hooks/use-globals";
 import { useEditorState } from "../hooks/use-editor-state";
 

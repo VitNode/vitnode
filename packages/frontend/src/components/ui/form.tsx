@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
@@ -12,10 +14,11 @@ import {
 } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { useBeforeUnload } from "react-use";
-import { cn } from "vitnode-frontend/helpers";
 
-import { Label } from "@/components/ui/label";
+import { Label } from "./label";
 import { useDialog } from "./dialog";
+
+import { cn } from "../../helpers";
 
 interface FormProps<
   TFieldValues extends FieldValues,

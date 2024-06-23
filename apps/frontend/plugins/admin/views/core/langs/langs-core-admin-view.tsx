@@ -3,9 +3,9 @@
 import { useTranslations } from "next-intl";
 import { ColumnDef } from "@tanstack/react-table";
 import * as React from "react";
+import { Badge } from "vitnode-frontend/components";
 
 import { Core_Languages__ShowQuery, ShowCoreLanguages } from "@/graphql/hooks";
-import { Badge } from "@/components/ui/badge";
 import { HeaderSortingDataTable } from "@/components/data-table/header";
 import { DateFormat } from "@/components/date-format/date-format";
 import { ActionsTableLangsCoreAdmin } from "./table/actions/actions";

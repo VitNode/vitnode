@@ -6,15 +6,13 @@ import {
   AlertDialogContent,
   AlertDialogTrigger,
   Button,
-} from "vitnode-frontend/components";
-
-import { Loader } from "@/components/loader";
-import {
+  Loader,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "vitnode-frontend/components";
+
 import { ContentDeleteActionTableNavDevPluginAdminProps } from "./content";
 
 import { useItemNavDevPluginAdmin } from "../../hooks/use-item-nav-dev-plugin-admin";

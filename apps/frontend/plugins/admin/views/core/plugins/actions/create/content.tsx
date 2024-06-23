@@ -1,12 +1,12 @@
 import { useTranslations } from "next-intl";
-import { Button } from "vitnode-frontend/components";
-
 import {
+  Button,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Form } from "@/components/ui/form";
+  Form,
+} from "vitnode-frontend/components";
+
 import { useCreateEditPluginAdmin } from "./hooks/use-create-edit-plugin-admin";
 import { FormCreateEditPluginAdmin } from "./form";
 

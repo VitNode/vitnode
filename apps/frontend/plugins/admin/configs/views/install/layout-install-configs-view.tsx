@@ -1,14 +1,14 @@
 "use client";
 
 import * as React from "react";
-
-import { Steps, ItemStepProps } from "@/components/steps/steps";
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "vitnode-frontend/components";
+
+import { Steps, ItemStepProps } from "@/components/steps/steps";
 import { InstallConfigsView } from "./steps/install-configs-view";
 import { InstallVitNodeContext } from "./hooks/use-install-vitnode";
 import { LicenseInstallConfigsView } from "./steps/license/license-install-configs-view";

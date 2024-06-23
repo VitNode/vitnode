@@ -1,16 +1,19 @@
 import { useTranslations } from "next-intl";
 import { Check } from "lucide-react";
 import { cn } from "vitnode-frontend/helpers";
-import { Button } from "vitnode-frontend/components";
-
 import {
+  Button,
+  Loader,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { useDownloadLangAdmin } from "./hooks/use-download-lang-admin";
-import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
   Form,
   FormControl,
   FormDescription,
@@ -18,22 +21,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Switch } from "@/components/ui/switch";
-import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import { Loader } from "@/components/loader";
+  Switch,
+} from "vitnode-frontend/components";
+
+import { useDownloadLangAdmin } from "./hooks/use-download-lang-admin";
 import { ShowCoreLanguages } from "@/graphql/hooks";
 import { useSessionAdmin } from "@/plugins/admin/hooks/use-session-admin";
 

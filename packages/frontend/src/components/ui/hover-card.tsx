@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
-import { cn } from "vitnode-frontend/helpers";
+
+import { cn } from "../../helpers";
 
 const HoverCard = HoverCardPrimitive.Root;
 

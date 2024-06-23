@@ -1,17 +1,17 @@
 import * as React from "react";
 import { useLocale } from "next-intl";
 import { cn } from "vitnode-frontend/helpers";
-
-import { useGlobals } from "@/plugins/core/hooks/use-globals";
-import { Input } from "./ui/input";
 import {
+  FormControl,
+  Input,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
-import { FormControl } from "./ui/form";
+} from "vitnode-frontend/components";
+
+import { useGlobals } from "@/plugins/core/hooks/use-globals";
 import { TextLanguage } from "@/graphql/hooks";
 
 interface Props

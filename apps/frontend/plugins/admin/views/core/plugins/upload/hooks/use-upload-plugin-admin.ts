@@ -2,8 +2,8 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
+import { useDialog } from "vitnode-frontend/components";
 
-import { useDialog } from "@/components/ui/dialog";
 import { mutationApi } from "./mutation-api";
 import { UploadPluginAdminProps } from "../upload";
 import { ErrorType } from "@/graphql/fetcher";

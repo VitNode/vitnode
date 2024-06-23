@@ -7,17 +7,17 @@ import Image from "next/image";
 import * as React from "react";
 import { formatBytes } from "@vitnode/shared";
 import { Link } from "vitnode-frontend/navigation";
-
-import { CONFIG } from "@/config";
-import { DataTable } from "@/components/data-table/data-table";
-import { HeaderSortingDataTable } from "@/components/data-table/header";
-import { DateFormat } from "@/components/date-format/date-format";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "vitnode-frontend/components";
+
+import { CONFIG } from "@/config";
+import { DataTable } from "@/components/data-table/data-table";
+import { HeaderSortingDataTable } from "@/components/data-table/header";
+import { DateFormat } from "@/components/date-format/date-format";
 import { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
 import { ActionsFilesAdvancedCoreAdmin } from "./actions/actions";
 

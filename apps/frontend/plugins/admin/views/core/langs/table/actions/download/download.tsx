@@ -1,10 +1,14 @@
 import { Download } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
-import { Button } from "vitnode-frontend/components";
+import {
+  Button,
+  Loader,
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "vitnode-frontend/components";
 
-import { Loader } from "@/components/loader";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ShowCoreLanguages } from "@/graphql/hooks";
 
 const Content = React.lazy(async () =>

@@ -2,15 +2,14 @@ import * as React from "react";
 import { useTranslations } from "next-intl";
 import { X } from "lucide-react";
 import { cn } from "vitnode-frontend/helpers";
-import { Button } from "vitnode-frontend/components";
-
 import {
+  Button,
+  Badge,
+  Loader,
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Loader } from "@/components/loader";
-import { Badge } from "@/components/ui/badge";
+} from "vitnode-frontend/components";
 
 const UserInputContent = React.lazy(async () =>
   import("./content/content").then(module => ({

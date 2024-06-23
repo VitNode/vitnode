@@ -1,9 +1,11 @@
 import * as React from "react";
 import { Link } from "vitnode-frontend/navigation";
 import { cn } from "vitnode-frontend/helpers";
-import { Button, buttonVariants } from "vitnode-frontend/components";
-
-import { SheetClose } from "@/components/ui/sheet";
+import {
+  Button,
+  buttonVariants,
+  SheetClose,
+} from "vitnode-frontend/components";
 
 interface Props {
   children: React.ReactNode;

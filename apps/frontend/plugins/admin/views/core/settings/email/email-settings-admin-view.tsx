@@ -1,20 +1,20 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Button } from "vitnode-frontend/components";
-
-import { Admin__Core_Email_Settings__ShowQuery } from "@/graphql/hooks";
-import { useEmailSettingsFormAdmin } from "./hooks/use-email-settings-form-admin";
 import {
+  Button,
   Form,
   FormField,
   FormFieldRender,
   FormWrapper,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
+  Input,
+  Separator,
+  Switch,
+} from "vitnode-frontend/components";
+
+import { Admin__Core_Email_Settings__ShowQuery } from "@/graphql/hooks";
+import { useEmailSettingsFormAdmin } from "./hooks/use-email-settings-form-admin";
 import { HeaderContent } from "@/components/header-content/header-content";
-import { Separator } from "@/components/ui/separator";
 import { ColorInput } from "@/components/color/color-input";
 
 export const EmailSettingsAdminView = (

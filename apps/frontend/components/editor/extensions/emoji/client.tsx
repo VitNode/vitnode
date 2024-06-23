@@ -6,10 +6,9 @@ import tippy, { Instance, Props } from "tippy.js";
 import { useTranslations } from "next-intl";
 import { Emoji } from "@emoji-mart/data";
 import { cn } from "vitnode-frontend/helpers";
-import { Button } from "vitnode-frontend/components";
+import { Button, classPopover } from "vitnode-frontend/components";
 
 import { CONFIG } from "@/config";
-import { classPopover } from "@/components/ui/popover";
 import {
   ComponentListRef,
   SuggestionKeyDownProps,

@@ -1,19 +1,19 @@
 import { useFormContext } from "react-hook-form";
 import { useTranslations } from "next-intl";
-
 import {
+  Checkbox,
   FormControl,
   FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+  Label,
+  Input,
+  Switch,
+} from "vitnode-frontend/components";
+
 import { HeaderContent } from "@/components/header-content/header-content";
-import { Switch } from "@/components/ui/switch";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
 
 interface Props {
   isGuest?: boolean;

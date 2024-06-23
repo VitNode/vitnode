@@ -1,4 +1,4 @@
-import { Skeleton } from "../ui/skeleton";
+import { Skeleton } from "vitnode-frontend/components";
 
 export const SkeletonDataTable = () => {
   return (

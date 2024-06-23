@@ -1,15 +1,15 @@
 import { useFormContext } from "react-hook-form";
 import { useTranslations } from "next-intl";
-
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+  Separator,
+} from "vitnode-frontend/components";
+
 import { TextLanguageInput } from "@/components/text-language-input";
-import { Separator } from "@/components/ui/separator";
 import { IconInput } from "@/components/icon/input/icon-input";
 import { ColorInput } from "@/components/color/color-input";
 

@@ -1,15 +1,14 @@
 import { Home, KeyRound } from "lucide-react";
 import { Link } from "vitnode-frontend/navigation";
-import { buttonVariants } from "vitnode-frontend/components";
-
 import {
+  buttonVariants,
   Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "vitnode-frontend/components";
 
 export const FinishInstallConfigsView = () => {
   return (

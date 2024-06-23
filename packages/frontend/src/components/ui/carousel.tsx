@@ -3,8 +3,10 @@
 import * as React from "react";
 import useEmblaCarousel, { UseEmblaCarouselType } from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { cn } from "vitnode-frontend/helpers";
-import { Button } from "vitnode-frontend/components";
+
+import { Button } from "./button";
+
+import { cn } from "../../helpers";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;

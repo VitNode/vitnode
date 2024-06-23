@@ -5,12 +5,12 @@ import {
   ListOrdered,
   Strikethrough,
 } from "lucide-react";
-
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "vitnode-frontend/components";
+
 import { ToggleToolbarEditor } from "../toggle";
 import { ButtonToolbarEditor } from "../button";
 

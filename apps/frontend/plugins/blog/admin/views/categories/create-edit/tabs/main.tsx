@@ -1,15 +1,15 @@
 import { useTranslations } from "next-intl";
 import { useFormContext } from "react-hook-form";
-
-import { ColorInput } from "@/components/color/color-input";
-import { TextLanguageInput } from "@/components/text-language-input";
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "vitnode-frontend/components";
+
+import { ColorInput } from "@/components/color/color-input";
+import { TextLanguageInput } from "@/components/text-language-input";
 
 export const MainTabCreateEditCategoryBlogAdmin = () => {
   const t = useTranslations("blog.admin.categories");

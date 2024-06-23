@@ -4,6 +4,7 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import * as React from "react";
 import { useLocale } from "next-intl";
 import { cn } from "vitnode-frontend/helpers";
+import { Skeleton } from "vitnode-frontend/components";
 
 import { TextLanguage } from "@/graphql/hooks";
 import { ToolBarEditor } from "./toolbar/toolbar";
@@ -11,7 +12,6 @@ import { FooterEditor } from "./footer/footer";
 import { useGlobals } from "@/plugins/core/hooks/use-globals";
 import { extensionsEditor } from "./extensions/extensions";
 import { EmojiExtensionEditor } from "./extensions/emoji/emoji";
-import { Skeleton } from "../ui/skeleton";
 import {
   useUploadFilesHandlerEditor,
   UploadFilesHandlerEditorArgs,
