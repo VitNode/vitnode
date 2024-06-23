@@ -45,3 +45,6 @@ lerna-debug.log*
 !/uploads/public/index.html
 !/uploads/private/index.html
 !/uploads/temp/index.html
+
+# Migrations
+/src/plugins/*/admin/database/migrations
