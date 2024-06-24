@@ -2,12 +2,12 @@ import * as React from "react";
 import { Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { cn } from "vitnode-frontend/helpers";
 
-import { useMergeRefs } from "@/plugins/core/hooks/utils/use-merge-refs";
 import { PreviewFilesInput } from "./preview/preview-files-input";
 
-export interface InputProps
+import { cn, useMergeRefs } from "../../../helpers";
+
+export interface FilesInputInputProps
   extends Omit<
     React.InputHTMLAttributes<HTMLInputElement>,
     "onChange" | "type" | "value"
@@ -29,7 +29,7 @@ export const FilesInput = ({
   value: stateValue,
   ref,
   ...props
-}: InputProps) => {
+}: FilesInputInputProps) => {
   const t = useTranslations("core");
   const [isDrag, setDrag] = React.useState(false);
   const currentRef = React.useRef<HTMLInputElement>(null);

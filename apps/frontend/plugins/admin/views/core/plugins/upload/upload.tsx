@@ -9,10 +9,10 @@ import {
   FormField,
   FormItem,
   FormMessage,
+  FilesInput,
 } from "vitnode-frontend/components";
 
 import { useUploadPluginAdmin } from "./hooks/use-upload-plugin-admin";
-import { FilesInput } from "@/components/ui/files/files-input";
 import { ShowAdminPlugins } from "@/graphql/hooks";
 
 export interface UploadPluginAdminProps {

@@ -12,9 +12,9 @@ import {
   FormField,
   RadioGroup,
   RadioGroupItem,
+  FilesInput,
 } from "vitnode-frontend/components";
 
-import { FilesInput } from "@/components/ui/files/files-input";
 import { useModalChangeAvatar } from "@/plugins/core/hooks/settings/avatar/use-modal-change-avatar";
 import { useSession } from "@/plugins/core/hooks/use-session";
 

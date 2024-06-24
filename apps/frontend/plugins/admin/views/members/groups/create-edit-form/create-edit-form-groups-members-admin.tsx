@@ -7,17 +7,18 @@ import {
   DialogHeader,
   DialogTitle,
   Form,
+  TabsTrigger,
 } from "vitnode-frontend/components";
 
-import { Tabs } from "@/components/tabs/tabs";
 import {
   useCreateEditFormGroupsMembersAdmin,
   CreateEditFormGroupsMembersAdminArgs,
 } from "./hooks/use-create-edit-form-groups-members-admin";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
-import { TabsTrigger } from "@/components/tabs/tabs-trigger";
 import { MainContentCreateEditFormGroupsMembersAdmin } from "./content/main";
 import { ContentContentCreateEditFormGroupsMembersAdmin } from "./content/content";
+
+import { Tabs } from "@/components/tabs/tabs";
 
 enum TabsEnum {
   MAIN = "main",

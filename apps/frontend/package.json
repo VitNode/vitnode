@@ -104,7 +104,6 @@
     "@types/node": "^20.14.8",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "vitnode-frontend": "workspace:*",
     "@vitnode/shared": "workspace:*",
     "babel-plugin-react-compiler": "0.0.0-experimental-938cd9a-20240601",
     "cross-env": "^7.0.3",
@@ -116,6 +115,7 @@
     "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.2",
+    "vitnode-frontend": "workspace:*"
   }
 }

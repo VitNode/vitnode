@@ -1,9 +1,9 @@
 import { Link } from "vitnode-frontend/navigation";
+import { LogoVitNode } from "vitnode-frontend/components";
 
 import { CONFIG } from "@/config";
 import { UserBarAdmin } from "./user-bar/user-bar-admin";
 import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";
-import { LogoVitNode } from "@/components/logo-vitnode";
 import { LanguageSwitcher } from "@/components/switchers/language-switcher";
 import { NavAdmin } from "../nav/nav-admin";
 

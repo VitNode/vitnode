@@ -1,7 +1,6 @@
-import { Card } from "vitnode-frontend/components";
+import { Card, LogoVitNode } from "vitnode-frontend/components";
 
 import { FormSignInAdmin } from "./form/form-sign-in-admin";
-import { LogoVitNode } from "@/components/logo-vitnode";
 import { PoweredByVitNode } from "@/plugins/admin/global/powered-by";
 
 export const SignInAdminView = () => {

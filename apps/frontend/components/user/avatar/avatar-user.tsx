@@ -1,9 +1,8 @@
 import { cn } from "vitnode-frontend/helpers";
+import { Img } from "vitnode-frontend/components";
 
 import { CONFIG } from "@/config";
 import { Maybe, AvatarUser as AvatarUserType } from "@/graphql/hooks";
-
-import { Img } from "../../img";
 
 const generateLetterPhoto = (letter: string, color: string) =>
   `data:image/svg+xml,${encodeURIComponent(

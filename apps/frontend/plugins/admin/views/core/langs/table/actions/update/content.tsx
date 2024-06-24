@@ -6,11 +6,11 @@ import {
   DialogTitle,
   Form,
   FormField,
+  FilesInput,
 } from "vitnode-frontend/components";
 
 import { ShowCoreLanguages } from "@/graphql/hooks";
 import { useUpdateLangAdmin } from "./hooks/use-update-lang-admin";
-import { FilesInput } from "@/components/ui/files/files-input";
 
 export const ContentUpdateActionsTableLangsCoreAdmin = ({
   code,
