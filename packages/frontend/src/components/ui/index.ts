@@ -32,3 +32,6 @@ export * from "./tooltip";
 export * from "./toggle";
 export * from "./color/color-input";
 export * from "./color/picker/picker";
+export * from "./files/files-input";
+export * from "./tabs/tabs";
+export * from "./tabs/tabs-trigger";

@@ -1,8 +1,8 @@
 import * as React from "react";
 import { X } from "lucide-react";
 
-import { Img } from "@/components/img";
-import { acceptMimeTypeImage } from "@/components/editor/extensions/files/files";
+import { Img } from "../../../../img";
+import { acceptMimeTypeImage } from "../../../../../helpers";
 
 interface Props {
   file: File;
