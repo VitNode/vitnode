@@ -6,9 +6,9 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
+  PickerColor,
 } from "vitnode-frontend/components";
 
-import { PickerColor } from "@/components/color/picker/picker";
 import { useEditorState } from "@/components/editor/hooks/use-editor-state";
 
 import { ButtonToolbarEditor } from "../../button";

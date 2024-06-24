@@ -13,9 +13,8 @@ import {
   FormLabel,
   FormMessage,
   Separator,
+  ColorInput,
 } from "vitnode-frontend/components";
-
-import { ColorInput } from "@/components/color/color-input";
 
 import { ThemeEditorTab, useThemeEditor } from "../../hooks/use-theme-editor";
 

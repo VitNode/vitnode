@@ -10,12 +10,12 @@ import {
   Input,
   Separator,
   Switch,
+  ColorInput,
 } from "vitnode-frontend/components";
 
 import { Admin__Core_Email_Settings__ShowQuery } from "@/graphql/hooks";
 import { useEmailSettingsFormAdmin } from "./hooks/use-email-settings-form-admin";
 import { HeaderContent } from "@/components/header-content/header-content";
-import { ColorInput } from "@/components/color/color-input";
 
 export const EmailSettingsAdminView = (
   props: Admin__Core_Email_Settings__ShowQuery,

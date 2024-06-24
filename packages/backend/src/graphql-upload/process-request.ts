@@ -58,6 +58,7 @@ export default async function processRequest(
           if (!upload.file) upload.reject(exitError);
 
       // If the error came from the parser, don’t cause it to be emitted again.
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       isParserError ? parser.destroy() : parser.destroy(exitError);
 
       request.unpipe(parser);
