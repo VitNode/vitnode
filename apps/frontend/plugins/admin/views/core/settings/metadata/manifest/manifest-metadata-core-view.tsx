@@ -14,12 +14,12 @@ import {
   RadioGroup,
   RadioGroupItem,
   Input,
+  ColorInput,
 } from "vitnode-frontend/components";
 
 import { CONFIG } from "@/config";
 import { useManifestCoreAdminView } from "./hooks/use-manifest-core-admin-view";
 import { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";
-import { ColorInput } from "@/components/color/color-input";
 
 export const ManifestMetadataCoreAdminView = (
   props: Admin__Core_Manifest_Metadata__ShowQuery,

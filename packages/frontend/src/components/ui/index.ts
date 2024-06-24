@@ -30,3 +30,5 @@ export * from "./textarea";
 export * from "./toggle-group";
 export * from "./tooltip";
 export * from "./toggle";
+export * from "./color/color-input";
+export * from "./color/picker/picker";

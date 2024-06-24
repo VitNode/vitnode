@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import * as React from "react";
 import { HslColorPicker, HslColor } from "react-colorful";
 import { RemoveFormatting } from "lucide-react";
@@ -8,15 +7,16 @@ import {
   convertColor,
   isColorBrightness,
 } from "@vitnode/shared";
-import { cn } from "vitnode-frontend/helpers";
+
+import { Input } from "../../input";
+import { cn } from "../../../../helpers";
 import {
-  Button,
-  Input,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "vitnode-frontend/components";
+} from "../../tooltip";
+import { Button } from "../../button";
 
 const presetColors: { color: HslColor; name: string }[] = [
   {

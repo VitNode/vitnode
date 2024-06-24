@@ -6,9 +6,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  ColorInput,
 } from "vitnode-frontend/components";
 
-import { ColorInput } from "@/components/color/color-input";
 import { TextLanguageInput } from "@/components/text-language-input";
 
 export const MainTabCreateEditCategoryBlogAdmin = () => {
