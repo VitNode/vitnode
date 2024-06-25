@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Card } from "vitnode-frontend/components";
+import { Card } from "vitnode-frontend/components/ui/card";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { Admin__Core_Staff_Moderators__ShowQuery } from "@/graphql/hooks";

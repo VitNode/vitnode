@@ -1,5 +1,5 @@
 import { cn, CONFIG } from "vitnode-frontend/helpers";
-import { Img } from "vitnode-frontend/components";
+import { Img } from "vitnode-frontend/components/img";
 
 import { Maybe, AvatarUser as AvatarUserType } from "@/graphql/hooks";
 

@@ -1,6 +1,6 @@
-import { Button, CardContent, CardFooter } from "vitnode-frontend/components";
-
+import { CardContent, CardFooter } from "vitnode-frontend/components/ui/card";
 import { useInstallVitnode } from "../hooks/use-install-vitnode";
+import { Button } from "vitnode-frontend/components/ui/button";
 
 export const InstallConfigsView = () => {
   const { setCurrentStep } = useInstallVitnode();

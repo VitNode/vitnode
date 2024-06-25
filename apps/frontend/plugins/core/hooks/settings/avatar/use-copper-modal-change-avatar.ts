@@ -2,7 +2,7 @@ import * as React from "react";
 import { ReactCropperElement } from "react-cropper";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { useDialog } from "vitnode-frontend/components";
+import { useDialog } from "vitnode-frontend/components/ui/dialog";
 
 import { mutationUploadApi } from "./api/mutation-upload-api";
 

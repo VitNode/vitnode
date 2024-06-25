@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Loader, Dialog, DialogContent } from "vitnode-frontend/components";
+import { Dialog, DialogContent } from "vitnode-frontend/components/ui/dialog";
+import { Loader } from "vitnode-frontend/components/ui/loader";
 
 import { ShowCoreLanguages } from "@/graphql/hooks";
 

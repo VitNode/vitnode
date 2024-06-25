@@ -3,11 +3,11 @@ import { SelectRangeEventHandler } from "react-day-picker";
 import { format } from "date-fns";
 import { cn } from "vitnode-frontend/helpers";
 import {
-  Button,
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/popover";
+import { Button } from "vitnode-frontend/components/ui/button";
 
 // import { Calendar } from "./ui/calendar";
 

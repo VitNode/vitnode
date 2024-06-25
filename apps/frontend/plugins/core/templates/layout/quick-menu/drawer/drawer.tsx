@@ -4,12 +4,11 @@ import * as React from "react";
 import { Link } from "vitnode-frontend/navigation";
 import { cn } from "vitnode-frontend/helpers";
 import {
-  Button,
-  buttonVariants,
   DrawerClose,
   DrawerContent,
-  Separator,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/drawer";
+import { Button, buttonVariants } from "vitnode-frontend/components/ui/button";
+import { Separator } from "vitnode-frontend/components/ui/separator";
 
 import { HeaderDrawerQuickMenu } from "./header";
 import { useSignOutAPI } from "@/plugins/core/hooks/sign/out/use-sign-out-api";

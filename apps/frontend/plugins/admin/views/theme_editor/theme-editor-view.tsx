@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn, CONFIG } from "vitnode-frontend/helpers";
-import { Loader } from "vitnode-frontend/components";
+import { Loader } from "vitnode-frontend/components/ui/loader";
 
 import { ThemeEditorViewEnum, ToolbarThemeEditor } from "./toolbar";
 import { ThemeEditorContext, ThemeEditorTab } from "./hooks/use-theme-editor";

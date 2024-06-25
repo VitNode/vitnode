@@ -3,10 +3,14 @@ import { useSearchParams } from "next/navigation";
 import { CheckIcon } from "@radix-ui/react-icons";
 import { usePathname, useRouter } from "vitnode-frontend/navigation";
 import { cn } from "vitnode-frontend/helpers";
-import { Loader, CommandGroup, CommandItem } from "vitnode-frontend/components";
 
 import { ContentFilterToolbarDataTableProps } from "./content";
 import { useFilterToolbarDataTable } from "../hooks/use-filter-toolbar-data-table";
+import { Loader } from "vitnode-frontend/components/ui/loader";
+import {
+  CommandGroup,
+  CommandItem,
+} from "vitnode-frontend/components/ui/command";
 
 export const ListContentFilterToolbarDataTable = ({
   isFetching,

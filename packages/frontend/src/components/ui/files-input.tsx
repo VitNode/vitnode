@@ -3,9 +3,9 @@ import { Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
-import { PreviewFilesInput } from "./preview/preview-files-input";
+import { PreviewFilesInput } from "./files/preview/preview-files-input";
 
-import { cn, useMergeRefs } from "../../../helpers";
+import { cn, useMergeRefs } from "../../helpers";
 
 export interface FilesInputInputProps
   extends Omit<

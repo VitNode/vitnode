@@ -6,7 +6,8 @@ import * as React from "react";
 import tippy, { GetReferenceClientRect, Instance, Props } from "tippy.js";
 import { useTranslations } from "next-intl";
 import { cn } from "vitnode-frontend/helpers";
-import { Button, classPopover } from "vitnode-frontend/components";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { classPopover } from "vitnode-frontend/components/ui/popover";
 
 export interface SuggestionProps<I> {
   command: (props: I) => void;

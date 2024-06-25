@@ -1,5 +1,5 @@
 import { AlertTriangle } from "lucide-react";
-import { Badge } from "vitnode-frontend/components";
+import { Badge } from "vitnode-frontend/components/ui/badge";
 import { CONFIG } from "vitnode-frontend/helpers";
 
 import { HeaderContent } from "@/components/header-content/header-content";

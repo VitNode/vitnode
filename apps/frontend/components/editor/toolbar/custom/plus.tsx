@@ -9,7 +9,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/popover";
 
 import { ToggleToolbarEditor } from "../toggle";
 import { ButtonToolbarEditor } from "../button";

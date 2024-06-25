@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { cn } from "vitnode-frontend/helpers";
-import { Button } from "vitnode-frontend/components";
+import { Button } from "vitnode-frontend/components/ui/button";
 
 interface Props {
   children: React.ReactNode;

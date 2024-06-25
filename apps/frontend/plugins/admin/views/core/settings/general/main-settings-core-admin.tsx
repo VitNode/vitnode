@@ -2,13 +2,13 @@
 
 import { useTranslations } from "next-intl";
 import {
-  Button,
   Form,
   FormField,
   FormFieldRender,
   FormWrapper,
-  Input,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/form";
+import { Input } from "vitnode-frontend/components/ui/input";
+import { Button } from "vitnode-frontend/components/ui/button";
 
 import { useSettingsCoreAdmin } from "./hooks/use-settings-core-admin";
 import { Core_Main_Settings__ShowQuery } from "@/graphql/hooks";

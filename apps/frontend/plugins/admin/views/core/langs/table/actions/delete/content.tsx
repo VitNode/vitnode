@@ -5,17 +5,19 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  Button,
+} from "vitnode-frontend/components/ui/alert-dialog";
+import { Button } from "vitnode-frontend/components/ui/button";
+import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-  Input,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/form";
 
 import { useDeleteLangAdmin } from "./hooks/use-delete-lang-admin";
 import { ShowCoreLanguages } from "@/graphql/hooks";
+import { Input } from "vitnode-frontend/components/ui/input";
 
 export const ContentDeleteActionsTableLangsCoreAdmin = ({
   code,

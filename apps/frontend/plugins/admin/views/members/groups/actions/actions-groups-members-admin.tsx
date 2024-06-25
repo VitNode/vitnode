@@ -4,12 +4,12 @@ import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import {
-  Button,
-  Loader,
   Dialog,
   DialogContent,
   DialogTrigger,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/dialog";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Loader } from "vitnode-frontend/components/ui/loader";
 
 const CreateEditFormGroupsMembersAdmin = React.lazy(async () =>
   import("../create-edit-form/create-edit-form-groups-members-admin").then(

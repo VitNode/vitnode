@@ -2,16 +2,18 @@ import { useTranslations } from "next-intl";
 import { Trash2 } from "lucide-react";
 import * as React from "react";
 import {
-  Button,
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogTrigger,
-  Loader,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/tooltip";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from "vitnode-frontend/components/ui/alert-dialog";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Loader } from "vitnode-frontend/components/ui/loader";
 
 import { ShowAdminGroups } from "@/graphql/hooks";
 

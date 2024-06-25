@@ -4,12 +4,12 @@ import { useTranslations } from "next-intl";
 import { Plus } from "lucide-react";
 import * as React from "react";
 import {
-  Button,
-  Loader,
   Dialog,
   DialogContent,
   DialogTrigger,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/dialog";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Loader } from "vitnode-frontend/components/ui/loader";
 
 import { CreateEditNavDevPluginAdminProps } from "../../create-edit/create-edit";
 

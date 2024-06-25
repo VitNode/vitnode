@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Card } from "vitnode-frontend/components";
 
 import {
   Core_Languages__Show,
@@ -17,6 +16,7 @@ import { fetcher } from "@/graphql/fetcher";
 import { ActionsLangsAdmin } from "@/plugins/admin/views/core/langs/actions/actions";
 import { RebuildRequiredAdmin } from "@/plugins/admin/global/rebuild-required";
 import { LangsCoreAdminView } from "@/plugins/admin/views/core/langs/langs-core-admin-view";
+import { Card } from "vitnode-frontend/components/ui/card";
 
 const getData = async (variables: Core_Languages__ShowQueryVariables) => {
   const { data } = await fetcher<

@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Card } from "vitnode-frontend/components";
 
 import {
   Admin__Core_Plugins__Show,
@@ -17,6 +16,7 @@ import { fetcher } from "@/graphql/fetcher";
 import { RebuildRequiredAdmin } from "@/plugins/admin/global/rebuild-required";
 import { ActionsPluginsAdmin } from "@/plugins/admin/views/core/plugins/actions/actions";
 import { PluginsCoreAdminView } from "@/plugins/admin/views/core/plugins/plugins-admin-view";
+import { Card } from "vitnode-frontend/components/ui/card";
 
 interface Props {
   searchParams: SearchParamsPagination;

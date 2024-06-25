@@ -15,7 +15,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/select";
 
 import { useEditorState } from "../../hooks/use-editor-state";
 

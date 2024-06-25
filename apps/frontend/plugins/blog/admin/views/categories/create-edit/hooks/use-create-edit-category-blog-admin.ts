@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { zodInput } from "vitnode-frontend/helpers";
-import { useDialog } from "vitnode-frontend/components";
+import { useDialog } from "vitnode-frontend/components/ui/dialog";
 
 import { mutationCreateApi } from "./create-mutation-api";
 import { ShowBlogCategories } from "@/graphql/hooks";

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
-import { Card, LogoVitNode } from "vitnode-frontend/components";
+import { Card } from "vitnode-frontend/components/ui/card";
+import { LogoVitNode } from "vitnode-frontend/components/logo-vitnode";
 import { PoweredByVitNode } from "vitnode-frontend/views/global";
 
 import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";

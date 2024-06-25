@@ -3,11 +3,13 @@ import { useFormContext } from "react-hook-form";
 import {
   FormField,
   FormFieldRender,
-  Label,
+} from "vitnode-frontend/components/ui/form";
+import {
   RadioGroup,
   RadioGroupItem,
-  Separator,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/radio-group";
+import { Label } from "vitnode-frontend/components/ui/label";
+import { Separator } from "vitnode-frontend/components/ui/separator";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 

@@ -9,11 +9,13 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-  Button,
+} from "vitnode-frontend/components/ui/alert-dialog";
+import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/alert";
+import { Button } from "vitnode-frontend/components/ui/button";
 import { CONFIG } from "vitnode-frontend/helpers";
 
 interface Props {

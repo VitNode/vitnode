@@ -5,15 +5,18 @@ import {
   AlertDialog,
   AlertDialogContent,
   AlertDialogTrigger,
-  Button,
-  Loader,
+} from "vitnode-frontend/components/ui/alert-dialog";
+import { Button } from "vitnode-frontend/components/ui/button";
+
+import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/tooltip";
 
 import { ContentDeleteActionFilesAdvancedCoreAdminProps } from "./content";
+import { Loader } from "vitnode-frontend/components/ui/loader";
 
 const Content = React.lazy(async () =>
   import("./content").then(module => ({

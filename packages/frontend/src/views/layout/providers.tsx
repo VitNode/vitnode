@@ -5,8 +5,8 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConfigType } from "@vitnode/shared";
 
-import { Toaster } from "../../components";
 import { GlobalsContext } from "../../hooks/use-globals";
+import { Toaster } from "../../components/ui/sonner";
 
 export interface MiddlewareData {
   core_languages__show: {

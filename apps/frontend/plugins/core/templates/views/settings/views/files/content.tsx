@@ -8,12 +8,12 @@ import { Clock, Download, File } from "lucide-react";
 import { formatBytes } from "@vitnode/shared";
 import { Link } from "vitnode-frontend/navigation";
 import {
-  buttonVariants,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/tooltip";
+import { buttonVariants } from "vitnode-frontend/components/ui/button";
 import { CONFIG } from "vitnode-frontend/helpers";
 
 import { DataTable } from "@/components/data-table/data-table";

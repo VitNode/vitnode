@@ -1,13 +1,13 @@
 import { Download } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "vitnode-frontend/navigation";
+import { buttonVariants } from "vitnode-frontend/components/ui/button";
 import {
-  buttonVariants,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/tooltip";
 import { CONFIG } from "vitnode-frontend/helpers";
 
 import { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";

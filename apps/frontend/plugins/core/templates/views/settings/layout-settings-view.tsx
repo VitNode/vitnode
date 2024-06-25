@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
-import { Card } from "vitnode-frontend/components";
+import { Card } from "vitnode-frontend/components/ui/card";
 
 import { NavSettings } from "./nav/nav-settings";
 import { HeaderContent } from "@/components/header-content/header-content";

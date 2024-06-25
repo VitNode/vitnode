@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { useAlertDialog } from "vitnode-frontend/components";
+import { useAlertDialog } from "vitnode-frontend/components/ui/alert-dialog";
 
 import { ShowCoreNav } from "@/graphql/hooks";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";

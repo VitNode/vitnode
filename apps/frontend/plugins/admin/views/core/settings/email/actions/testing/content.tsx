@@ -1,16 +1,19 @@
 import { useTranslations } from "next-intl";
+
 import {
-  Button,
   DialogFooter,
   DialogHeader,
   DialogTitle,
+} from "vitnode-frontend/components/ui/dialog";
+import { Button } from "vitnode-frontend/components/ui/button";
+import {
   Form,
+  FormWrapper,
   FormField,
   FormFieldRender,
-  FormWrapper,
-  Input,
-  Textarea,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/form";
+import { Input } from "vitnode-frontend/components/ui/input";
+import { Textarea } from "vitnode-frontend/components/ui/textarea";
 
 import { useTestingEmailAdmin } from "./hooks/use-testing-email-admin";
 

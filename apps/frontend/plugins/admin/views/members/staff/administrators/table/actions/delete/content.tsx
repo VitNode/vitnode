@@ -7,8 +7,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   useAlertDialog,
-  Button,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/alert-dialog";
+import { Button } from "vitnode-frontend/components/ui/button";
 
 import { mutationApi } from "./mutation-api";
 import { SubmitDeleteActionsTableAdministratorsStaffAdmin } from "./submit";

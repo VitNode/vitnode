@@ -1,19 +1,20 @@
 import { useTranslations } from "next-intl";
 import * as React from "react";
+import { Form, FormField } from "vitnode-frontend/components/ui/form";
+import { Button } from "vitnode-frontend/components/ui/button";
 import {
-  Button,
-  Loader,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  Label,
-  Form,
-  FormField,
+} from "vitnode-frontend/components/ui/dialog";
+import { FilesInput } from "vitnode-frontend/components/ui/files-input";
+import { Label } from "vitnode-frontend/components/ui/label";
+import { Loader } from "vitnode-frontend/components/ui/loader";
+import {
   RadioGroup,
   RadioGroupItem,
-  FilesInput,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/radio-group";
 
 import { useModalChangeAvatar } from "@/plugins/core/hooks/settings/avatar/use-modal-change-avatar";
 import { useSession } from "@/plugins/core/hooks/use-session";

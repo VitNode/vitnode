@@ -1,13 +1,13 @@
 import { ChevronDown, Trash2, Upload } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import * as React from "react";
+import { Button } from "vitnode-frontend/components/ui/button";
 import {
-  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/dropdown-menu";
 
 import { ShowCoreLanguages } from "@/graphql/hooks";
 import { EditActionsTableLangsCoreAdmin } from "./edit";

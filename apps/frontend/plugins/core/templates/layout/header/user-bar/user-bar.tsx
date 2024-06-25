@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Link } from "vitnode-frontend/navigation";
-import { buttonVariants } from "vitnode-frontend/components";
+import { buttonVariants } from "vitnode-frontend/components/ui/button";
 
 import { AuthUserBar } from "./auth/auth-user-bar";
 import { useSession } from "@/plugins/core/hooks/use-session";

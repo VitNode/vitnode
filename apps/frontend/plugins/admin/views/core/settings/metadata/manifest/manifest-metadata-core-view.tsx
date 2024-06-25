@@ -2,7 +2,6 @@
 
 import { useTranslations } from "next-intl";
 import {
-  Button,
   Form,
   FormControl,
   FormDescription,
@@ -11,11 +10,15 @@ import {
   FormItem,
   FormLabel,
   FormWrapper,
+} from "vitnode-frontend/components/ui/form";
+import { Input } from "vitnode-frontend/components/ui/input";
+import { Button } from "vitnode-frontend/components/ui/button";
+import {
   RadioGroup,
   RadioGroupItem,
-  Input,
-  ColorInput,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/radio-group";
+import { ColorInput } from "vitnode-frontend/components/ui/color-input";
+
 import { CONFIG } from "vitnode-frontend/helpers";
 
 import { useManifestCoreAdminView } from "./hooks/use-manifest-core-admin-view";

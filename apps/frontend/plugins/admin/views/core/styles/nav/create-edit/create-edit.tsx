@@ -1,9 +1,5 @@
 import { useTranslations } from "next-intl";
 import {
-  Button,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
   Form,
   FormControl,
   FormDescription,
@@ -11,9 +7,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-  Switch,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/form";
+import { Input } from "vitnode-frontend/components/ui/input";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Switch } from "vitnode-frontend/components/ui/switch";
+import {
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "vitnode-frontend/components/ui/dialog";
 
 import {
   useCreateEditNavAdmin,

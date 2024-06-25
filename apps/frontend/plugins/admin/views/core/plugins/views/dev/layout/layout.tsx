@@ -1,7 +1,9 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
 import { ExternalLink } from "lucide-react";
-import { Badge, Card, TabsTrigger, Tabs } from "vitnode-frontend/components";
+import { Badge } from "vitnode-frontend/components/ui/badge";
+import { Card } from "vitnode-frontend/components/ui/card";
+import { Tabs, TabsTrigger } from "vitnode-frontend/components/ui/tabs";
 
 import { Admin__Core_Plugins__Show__ItemQuery } from "@/graphql/hooks";
 import { HeaderContent } from "@/components/header-content/header-content";

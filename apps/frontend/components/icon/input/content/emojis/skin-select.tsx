@@ -1,13 +1,13 @@
 import { useTranslations } from "next-intl";
 import { Check } from "lucide-react";
+import { CONFIG } from "vitnode-frontend/helpers";
+import { Button } from "vitnode-frontend/components/ui/button";
 import {
-  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "vitnode-frontend/components";
-import { CONFIG } from "vitnode-frontend/helpers";
+} from "vitnode-frontend/components/ui/dropdown-menu";
 
 const skinToneEmoji = [
   "43.55deg 100% 61.37%",

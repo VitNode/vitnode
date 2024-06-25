@@ -4,13 +4,13 @@ import * as React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useDebouncedCallback } from "use-debounce";
 import { cn } from "vitnode-frontend/helpers";
+import { Input } from "vitnode-frontend/components/ui/input";
+import { Loader } from "vitnode-frontend/components/ui/loader";
 import {
-  Loader,
   Command,
   CommandList,
   commandInputClassName,
-  Input,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/command";
 
 import { UserInputContentList } from "./list";
 import { UserInputItem } from "../user-input";

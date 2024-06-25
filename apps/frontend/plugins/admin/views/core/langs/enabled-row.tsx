@@ -1,7 +1,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import * as React from "react";
-import { Switch } from "vitnode-frontend/components";
+import { Switch } from "vitnode-frontend/components/ui/switch";
 
 import { ShowCoreLanguages } from "@/graphql/hooks";
 import { editMutationApi } from "./create-edit/hooks/edit-mutation-api";

@@ -8,7 +8,7 @@ import {
   increaseVersionString,
   CONFIG,
 } from "vitnode-frontend/helpers";
-import { useDialog } from "vitnode-frontend/components";
+import { useDialog } from "vitnode-frontend/components/ui/dialog";
 
 import { ShowAdminPlugins } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";

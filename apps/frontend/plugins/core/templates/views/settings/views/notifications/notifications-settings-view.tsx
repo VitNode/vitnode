@@ -1,4 +1,4 @@
-import { CardContent } from "vitnode-frontend/components";
+import { CardContent } from "vitnode-frontend/components/ui/card";
 
 import { HeaderNotificationsSettings } from "./header/header-notifications-settings";
 

@@ -1,5 +1,5 @@
 import { Link } from "vitnode-frontend/navigation";
-import { LogoVitNode } from "vitnode-frontend/components";
+import { LogoVitNode } from "vitnode-frontend/components/logo-vitnode";
 import { CONFIG } from "vitnode-frontend/helpers";
 
 import { UserBarAdmin } from "./user-bar/user-bar-admin";

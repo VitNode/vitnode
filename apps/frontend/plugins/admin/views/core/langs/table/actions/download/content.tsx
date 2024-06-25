@@ -1,19 +1,18 @@
 import { useTranslations } from "next-intl";
 import { Check } from "lucide-react";
 import { cn } from "vitnode-frontend/helpers";
+
+import { useDownloadLangAdmin } from "./hooks/use-download-lang-admin";
+import { ShowCoreLanguages } from "@/graphql/hooks";
+import { useSessionAdmin } from "@/plugins/admin/hooks/use-session-admin";
+import { Loader } from "vitnode-frontend/components/ui/loader";
 import {
-  Button,
-  Loader,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
+} from "vitnode-frontend/components/ui/dialog";
+import {
   Form,
   FormControl,
   FormDescription,
@@ -21,15 +20,22 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+} from "vitnode-frontend/components/ui/form";
+import { Switch } from "vitnode-frontend/components/ui/switch";
+import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-  Switch,
-} from "vitnode-frontend/components";
-
-import { useDownloadLangAdmin } from "./hooks/use-download-lang-admin";
-import { ShowCoreLanguages } from "@/graphql/hooks";
-import { useSessionAdmin } from "@/plugins/admin/hooks/use-session-admin";
+} from "vitnode-frontend/components/ui/popover";
+import { Button } from "vitnode-frontend/components/ui/button";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "vitnode-frontend/components/ui/command";
 
 export const ContentDownloadActionsTableLangsCoreAdmin = ({
   code,

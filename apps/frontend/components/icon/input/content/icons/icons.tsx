@@ -1,7 +1,7 @@
 import * as Lucide from "lucide-react";
 import * as React from "react";
 import { useTranslations } from "next-intl";
-import { Button } from "vitnode-frontend/components";
+import { Button } from "vitnode-frontend/components/ui/button";
 
 import { IconLucideNames } from "@/components/icon/icon";
 import { IconInputProps } from "../content";

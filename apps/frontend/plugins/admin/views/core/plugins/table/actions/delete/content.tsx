@@ -5,8 +5,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  Button,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/alert-dialog";
+import { Button } from "vitnode-frontend/components/ui/button";
 
 import { SubmitContentDeletePluginActionsAdmin } from "./submit";
 import { useDeletePluginAdmin } from "./hooks/use-delete-plugin-admin";

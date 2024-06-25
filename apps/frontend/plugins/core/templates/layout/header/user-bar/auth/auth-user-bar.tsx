@@ -9,7 +9,6 @@ import {
 import { useTranslations } from "next-intl";
 import { Link } from "vitnode-frontend/navigation";
 import {
-  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -17,7 +16,8 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
   DropdownMenuLabel,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/dropdown-menu";
+import { Button } from "vitnode-frontend/components/ui/button";
 
 import { useSession } from "@/plugins/core/hooks/use-session";
 import { useSignOutAPI } from "@/plugins/core/hooks/sign/out/use-sign-out-api";

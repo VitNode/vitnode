@@ -2,16 +2,18 @@ import { useTranslations } from "next-intl";
 import * as React from "react";
 import { ImageIcon } from "lucide-react";
 import {
-  Button,
-  Loader,
-  Dialog,
-  DialogContent,
-  DialogTrigger,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/tooltip";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "vitnode-frontend/components/ui/dialog";
+import { Loader } from "vitnode-frontend/components/ui/loader";
+import { Button } from "vitnode-frontend/components/ui/button";
 
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import { useSession } from "@/plugins/core/hooks/use-session";

@@ -3,11 +3,11 @@
 import { RefreshCcw } from "lucide-react";
 import { useTranslations } from "next-intl";
 import {
-  buttonVariants,
   Alert,
   AlertDescription,
   AlertTitle,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/alert";
+import { buttonVariants } from "vitnode-frontend/components/ui/button";
 import { useGlobals } from "vitnode-frontend/hooks";
 import { CONFIG } from "vitnode-frontend/helpers";
 

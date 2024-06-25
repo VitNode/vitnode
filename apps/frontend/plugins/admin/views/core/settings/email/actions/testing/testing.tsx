@@ -2,12 +2,12 @@ import { FlaskConical } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import {
-  Button,
-  Loader,
   Dialog,
   DialogContent,
   DialogTrigger,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/dialog";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Loader } from "vitnode-frontend/components/ui/loader";
 
 const Content = React.lazy(async () =>
   import("./content").then(module => ({

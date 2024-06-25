@@ -2,17 +2,16 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEditorState } from "@/components/editor/hooks/use-editor-state";
 import {
-  Button,
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-  Input,
-} from "vitnode-frontend/components";
-
-import { useEditorState } from "@/components/editor/hooks/use-editor-state";
+} from "vitnode-frontend/components/ui/form";
+import { Input } from "vitnode-frontend/components/ui/input";
+import { Button } from "vitnode-frontend/components/ui/button";
 
 interface Props {
   setOpen: (open: boolean) => void;

@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { ColumnDef } from "@tanstack/react-table";
 import * as React from "react";
 import { Link } from "vitnode-frontend/navigation";
-import { Badge } from "vitnode-frontend/components";
+import { Badge } from "vitnode-frontend/components/ui/badge";
 
 import { DataTable } from "@/components/data-table/data-table";
 import { ShowAdminGroups } from "@/graphql/hooks";

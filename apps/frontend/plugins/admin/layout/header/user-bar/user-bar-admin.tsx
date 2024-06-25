@@ -4,15 +4,14 @@ import { Home, LogOut } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import * as React from "react";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Separator } from "vitnode-frontend/components/ui/separator";
 import {
-  Button,
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTrigger,
-  Separator,
-} from "vitnode-frontend/components";
-
+} from "vitnode-frontend/components/ui/sheet";
 import { AvatarUser } from "@/components/user/avatar/avatar-user";
 import { ItemUserBarAdmin } from "./item-user-bar-admin";
 import { mutationApi } from "./mutation-api";

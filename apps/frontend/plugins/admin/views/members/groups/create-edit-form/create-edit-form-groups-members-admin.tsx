@@ -1,15 +1,14 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
 import {
-  Button,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  Form,
-  TabsTrigger,
-  Tabs,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/dialog";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Form } from "vitnode-frontend/components/ui/form";
+import { Tabs, TabsTrigger } from "vitnode-frontend/components/ui/tabs";
 
 import {
   useCreateEditFormGroupsMembersAdmin,

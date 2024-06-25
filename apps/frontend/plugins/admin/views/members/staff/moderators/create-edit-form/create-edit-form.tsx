@@ -1,9 +1,5 @@
 import { useTranslations } from "next-intl";
 import {
-  Button,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
   Form,
   FormControl,
   FormDescription,
@@ -11,11 +7,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Label,
+} from "vitnode-frontend/components/ui/form";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Switch } from "vitnode-frontend/components/ui/switch";
+import {
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "vitnode-frontend/components/ui/dialog";
+import {
   RadioGroup,
   RadioGroupItem,
-  Switch,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/radio-group";
+import { Label } from "vitnode-frontend/components/ui/label";
 
 import { useFormCreateEditFormGroupsMembersAdmin } from "./hooks/use-form";
 import { UserInput } from "@/components/user/inputs/user-input";

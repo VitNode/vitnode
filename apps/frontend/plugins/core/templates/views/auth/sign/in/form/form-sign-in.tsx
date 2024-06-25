@@ -3,13 +3,6 @@
 import { useTranslations } from "next-intl";
 import { AlertCircle } from "lucide-react";
 import {
-  Button,
-  CardContent,
-  CardFooter,
-  Alert,
-  AlertDescription,
-  AlertTitle,
-  Checkbox,
   Form,
   FormControl,
   FormDescription,
@@ -17,10 +10,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/form";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Input } from "vitnode-frontend/components/ui/input";
+import { CardContent, CardFooter } from "vitnode-frontend/components/ui/card";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "vitnode-frontend/components/ui/alert";
 
 import { useSignInView } from "@/plugins/core/hooks/sign/in/use-sign-in-view";
+import { Checkbox } from "vitnode-frontend/components/ui/checkbox";
 
 export const FormSignIn = () => {
   const t = useTranslations("core");

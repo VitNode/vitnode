@@ -5,13 +5,13 @@ import { Languages } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "vitnode-frontend/navigation";
 import {
-  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/dropdown-menu";
+import { Button } from "vitnode-frontend/components/ui/button";
 import { useGlobals } from "vitnode-frontend/hooks";
 import { CONFIG } from "vitnode-frontend/helpers";
 

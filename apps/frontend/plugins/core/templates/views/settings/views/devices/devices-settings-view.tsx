@@ -3,7 +3,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/card";
 
 import { Core_Sessions__Devices__ShowQuery } from "@/graphql/hooks";
 import { ContentDevicesSettings } from "./content";

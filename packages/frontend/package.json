@@ -13,10 +13,6 @@
       "types": "./src/helpers/index.ts",
       "import": "./dist/src/helpers/index.js"
     },
-    "./components": {
-      "types": "./src/components/index.ts",
-      "import": "./dist/src/components/index.js"
-    },
     "./hooks": {
       "types": "./src/hooks/index.ts",
       "import": "./dist/src/hooks/index.js"
@@ -32,7 +28,8 @@
     "./config": {
       "types": "./src/helpers/config/index.ts",
       "import": "./dist/src/helpers/config/index.js"
-    }
+    },
+    "./components/*": "./src/components/*.tsx"
   },
   "scripts": {
     "build": " tsc",

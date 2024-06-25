@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { JSONContent } from "@tiptap/react";
 import { cn, CONFIG } from "vitnode-frontend/helpers";
-import { Button } from "vitnode-frontend/components";
+import { Button } from "vitnode-frontend/components/ui/button";
 
 import { IconItemListFilesFooterEditor } from "./icon";
 import { ContentItemListFilesFooterEditor } from "./content";

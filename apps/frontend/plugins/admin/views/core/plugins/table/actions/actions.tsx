@@ -3,12 +3,12 @@ import { useTranslations } from "next-intl";
 import * as React from "react";
 import { Link, usePathname, useRouter } from "vitnode-frontend/navigation";
 import {
-  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/dropdown-menu";
+import { Button } from "vitnode-frontend/components/ui/button";
 import { CONFIG } from "vitnode-frontend/helpers";
 
 import { ShowAdminPlugins } from "@/graphql/hooks";

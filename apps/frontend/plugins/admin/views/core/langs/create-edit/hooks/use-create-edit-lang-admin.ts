@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 import { zodInput } from "vitnode-frontend/helpers";
-import { useDialog } from "vitnode-frontend/components";
+import { useDialog } from "vitnode-frontend/components/ui/dialog";
 
 import { ShowCoreLanguages } from "@/graphql/hooks";
 import { editMutationApi } from "./edit-mutation-api";

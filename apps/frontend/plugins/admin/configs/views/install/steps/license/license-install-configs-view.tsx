@@ -1,5 +1,5 @@
 import { Link } from "vitnode-frontend/navigation";
-import { CardContent, CardFooter } from "vitnode-frontend/components";
+import { CardContent, CardFooter } from "vitnode-frontend/components/ui/card";
 
 import { FormLicenseInstallConfigs } from "./form-license-install-configs";
 

@@ -5,7 +5,7 @@ import * as z from "zod";
 import { toast } from "sonner";
 import { usePathname, useRouter } from "vitnode-frontend/navigation";
 import { zodInput } from "vitnode-frontend/helpers";
-import { useDialog } from "vitnode-frontend/components";
+import { useDialog } from "vitnode-frontend/components/ui/dialog";
 
 import { ShowAdminGroups } from "@/graphql/hooks";
 import { mutationCreateApi } from "./mutation-create-api";
