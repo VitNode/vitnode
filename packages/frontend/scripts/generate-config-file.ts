@@ -2,13 +2,12 @@
 import * as fs from "fs";
 import { join } from "path";
 
-import { updateObject } from "@vitnode/shared";
-
 import {
   DEFAULT_CONFIG_DATA,
   configPath,
   getConfigFile,
 } from "../src/helpers/config";
+import { updateObject } from "./helpers/update-object";
 
 /* eslint-disable no-console */
 

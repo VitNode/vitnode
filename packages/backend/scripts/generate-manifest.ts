@@ -2,7 +2,7 @@
 import * as fs from "fs";
 import { join } from "path";
 
-import { objectToArray, updateObject } from "@vitnode/shared";
+import { objectToArray, updateObject } from "./helpers/update-object";
 
 interface ManifestType {
   background_color?: string;
