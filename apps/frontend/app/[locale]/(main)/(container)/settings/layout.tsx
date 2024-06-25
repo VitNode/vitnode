@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { getConfigFile } from "vitnode-frontend/config";
 
-import { getConfigFile } from "@/config/helpers";
 import { LayoutSettingsView } from "@/plugins/core/templates/views/settings/layout-settings-view";
 
 interface Props {
