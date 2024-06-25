@@ -2,10 +2,9 @@ import { Plus, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { JSONContent } from "@tiptap/react";
-import { cn } from "vitnode-frontend/helpers";
+import { cn, CONFIG } from "vitnode-frontend/helpers";
 import { Button } from "vitnode-frontend/components";
 
-import { CONFIG } from "@/config";
 import { IconItemListFilesFooterEditor } from "./icon";
 import { ContentItemListFilesFooterEditor } from "./content";
 import { deleteMutationApi } from "./hooks/delete-mutation-api";

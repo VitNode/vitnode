@@ -1,7 +1,7 @@
 import { join } from "path";
 import { promises } from "fs";
 
-import { ConfigType } from ".";
+import { ConfigType } from "@vitnode/shared";
 
 export const configPath = join(process.cwd(), "config", "config.json");
 

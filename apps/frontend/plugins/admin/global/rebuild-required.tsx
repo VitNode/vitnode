@@ -9,8 +9,7 @@ import {
   AlertTitle,
 } from "vitnode-frontend/components";
 import { useGlobals } from "vitnode-frontend/hooks";
-
-import { CONFIG } from "@/config";
+import { CONFIG } from "vitnode-frontend/helpers";
 
 export const RebuildRequiredAdmin = () => {
   const t = useTranslations("admin.rebuild_required");

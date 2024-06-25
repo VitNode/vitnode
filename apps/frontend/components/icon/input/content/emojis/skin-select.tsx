@@ -7,8 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "vitnode-frontend/components";
-
-import { CONFIG } from "@/config";
+import { CONFIG } from "vitnode-frontend/helpers";
 
 const skinToneEmoji = [
   "43.55deg 100% 61.37%",

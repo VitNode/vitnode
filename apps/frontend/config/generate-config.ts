@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 import * as fs from "fs";
 
-import { configPath, getConfigFile, updateObject } from "./helpers";
+import { DEFAULT_CONFIG_DATA } from "vitnode-frontend/config";
 
-import { DEFAULT_CONFIG_DATA } from ".";
+import { configPath, getConfigFile, updateObject } from "./helpers";
 
 (async () => {
   if (!fs.existsSync(configPath)) {

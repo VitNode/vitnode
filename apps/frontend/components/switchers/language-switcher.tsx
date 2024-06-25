@@ -13,8 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "vitnode-frontend/components";
 import { useGlobals } from "vitnode-frontend/hooks";
-
-import { CONFIG } from "@/config";
+import { CONFIG } from "vitnode-frontend/helpers";
 
 export const LanguageSwitcher = () => {
   const t = useTranslations("core");

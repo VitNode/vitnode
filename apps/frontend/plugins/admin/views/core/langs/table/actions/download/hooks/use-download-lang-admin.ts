@@ -5,8 +5,8 @@ import * as z from "zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { useDialog } from "vitnode-frontend/components";
+import { CONFIG } from "vitnode-frontend/helpers";
 
-import { CONFIG } from "@/config";
 import { queryApi } from "./query-api";
 import { mutationApi } from "./mutation-api";
 import { ShowCoreLanguages } from "@/graphql/hooks";

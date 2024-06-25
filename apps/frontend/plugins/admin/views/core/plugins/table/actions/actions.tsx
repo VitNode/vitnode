@@ -9,8 +9,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "vitnode-frontend/components";
+import { CONFIG } from "vitnode-frontend/helpers";
 
-import { CONFIG } from "@/config";
 import { ShowAdminPlugins } from "@/graphql/hooks";
 import { DeletePluginActionsAdmin } from "./delete/delete";
 import { SetDefaultPluginActionsAdmin } from "./set-default/set-default";

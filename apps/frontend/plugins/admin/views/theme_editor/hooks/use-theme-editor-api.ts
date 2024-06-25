@@ -7,10 +7,10 @@ import { HslColor } from "react-colorful";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { useRouter } from "vitnode-frontend/navigation";
+import { CONFIG } from "vitnode-frontend/helpers";
 
 import { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";
-import { CONFIG } from "@/config";
 
 const zObjectHsl = z.object({
   h: z.number(),

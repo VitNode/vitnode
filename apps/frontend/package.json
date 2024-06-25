@@ -5,9 +5,9 @@
   "license": "GPL-3.0 license",
   "scripts": {
     "config:init": "ts-node ./config/generate-config.ts",
-    "dev": "pnpm config:init && next dev --turbo",
+    "dev": " next dev --turbo",
     "dev:turbo": "next dev --turbo",
-    "build": "pnpm config:init && next build",
+    "build": "next build",
     "analyze": "cross-env ANALYZE=true pnpm build",
     "start": "next start",
     "start:prod": "node server.js",
