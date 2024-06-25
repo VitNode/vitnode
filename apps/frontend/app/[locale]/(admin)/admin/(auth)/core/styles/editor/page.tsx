@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { getConfigFile } from "vitnode-frontend/config";
 
-import { getConfigFile } from "@/config/helpers";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { EditorAdminView } from "@/plugins/admin/views/core/styles/editor/editor-admin-view";
 

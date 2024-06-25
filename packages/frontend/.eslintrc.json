@@ -4,5 +4,5 @@
   "env": {
     "node": true
   },
-  "ignorePatterns": ["postcss.config.js"]
+  "ignorePatterns": ["tailwind.config.ts"]
 }

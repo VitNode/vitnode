@@ -1,4 +1,4 @@
-#!/usr/bin/env ts-node-script
+#!/usr/bin/env ts-node
 /* eslint-disable no-console */
 
 import * as fs from "fs";
