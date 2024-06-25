@@ -5,7 +5,7 @@
   "license": "GPL-3.0 license",
   "scripts": {
     "db": "drizzle-kit push",
-    "config:init": "source ../../.env && NEXT_PUBLIC_FRONTEND_URL=$NEXT_PUBLIC_FRONTEND_URL DB_HOST=$DB_HOST DB_PORT=$DB_PORT DB_USER=$DB_USER DB_PASSWORD=$DB_PASSWORD DB_DATABASE=$DB_DATABASE vitnode-backend init",
+    "config:init": "vitnode-backend init",
     "build": "nest build",
     "dev": "pnpm config:init && cross-env NODE_ENV=development nest start -w",
     "email:dev": "email dev -p 3001",
