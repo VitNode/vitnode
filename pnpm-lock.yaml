@@ -72,9 +72,13 @@ importers:
       '@nestjs/cli':
         specifier: ^10.3.2
 <<<<<<< HEAD
+<<<<<<< HEAD
         version: 10.3.2(@swc/cli@0.3.12(@swc/core@1.6.3(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.3(@swc/helpers@0.5.11))
 =======
         version: 10.3.2(@swc/cli@0.3.14(@swc/core@1.6.5(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)
+=======
+        version: 10.3.2(@swc/cli@0.3.14(@swc/core@1.6.5(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.5(@swc/helpers@0.5.11))
+>>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
       '@nestjs/platform-express':
         specifier: ^10.3.9
         version: 10.3.9(@nestjs/common@10.3.9(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.3.9)
@@ -162,8 +166,12 @@ importers:
 =======
       ts-node:
         specifier: ^10.9.2
+<<<<<<< HEAD
         version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
 >>>>>>> 0aa27abf (chore: Update packages)
+=======
+        version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
+>>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
@@ -522,7 +530,7 @@ importers:
         version: 3.4.4(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2))
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
+        version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
@@ -644,6 +652,9 @@ importers:
       class-transformer:
         specifier: ^0.5.1
         version: 0.5.1
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
       eslint-config-vitnode:
         specifier: workspace:*
         version: link:../eslint-config-vitnode
@@ -658,7 +669,7 @@ importers:
         version: 2.1.4(@swc/helpers@0.5.11)(eslint@8.57.0)(ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2))
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
+        version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
@@ -842,7 +853,7 @@ importers:
         version: 2.3.0
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
+        version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
@@ -10860,6 +10871,7 @@ snapshots:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   '@nestjs/cli@10.3.2(@swc/cli@0.3.12(@swc/core@1.6.3(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.3(@swc/helpers@0.5.11))':
 =======
   '@nestjs/cli@10.3.2(@swc/cli@0.3.14(@swc/core@1.6.5(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)':
@@ -10870,6 +10882,9 @@ snapshots:
 =======
   '@nestjs/cli@10.3.2(@swc/cli@0.3.14(@swc/core@1.6.5(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)':
 >>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
+=======
+  '@nestjs/cli@10.3.2(@swc/cli@0.3.14(@swc/core@1.6.5(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.5(@swc/helpers@0.5.11))':
+>>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
     dependencies:
       '@angular-devkit/core': 17.1.2(chokidar@3.6.0)
       '@angular-devkit/schematics': 17.1.2(chokidar@3.6.0)
@@ -10880,10 +10895,14 @@ snapshots:
       cli-table3: 0.6.3
       commander: 4.1.1
 <<<<<<< HEAD
+<<<<<<< HEAD
       fork-ts-checker-webpack-plugin: 9.0.2(typescript@5.3.3)(webpack@5.90.1(@swc/core@1.6.3(@swc/helpers@0.5.11)))
 =======
       fork-ts-checker-webpack-plugin: 9.0.2(typescript@5.3.3)(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12))
 >>>>>>> 0aa27abf (chore: Update packages)
+=======
+      fork-ts-checker-webpack-plugin: 9.0.2(typescript@5.3.3)(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11)))
+>>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
       glob: 10.3.10
       inquirer: 8.2.6
       node-emoji: 1.11.0
@@ -10896,10 +10915,14 @@ snapshots:
       tsconfig-paths-webpack-plugin: 4.1.0
       typescript: 5.3.3
 <<<<<<< HEAD
+<<<<<<< HEAD
       webpack: 5.90.1(@swc/core@1.6.3(@swc/helpers@0.5.11))
 =======
       webpack: 5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)
 >>>>>>> 0aa27abf (chore: Update packages)
+=======
+      webpack: 5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))
+>>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
       webpack-node-externals: 3.0.0
     optionalDependencies:
       '@swc/cli': 0.3.14(@swc/core@1.6.5(@swc/helpers@0.5.11))(chokidar@3.6.0)
@@ -13271,7 +13294,7 @@ snapshots:
     dependencies:
       '@types/node': 20.14.8
       tapable: 2.2.1
-      webpack: 5.92.1(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11)
+      webpack: 5.92.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)
     transitivePeerDependencies:
       - '@swc/core'
       - esbuild
@@ -14856,7 +14879,7 @@ snapshots:
       eslint-import-resolver-node: 0.3.9
 <<<<<<< HEAD
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
       eslint-plugin-jsx-a11y: 6.9.0(eslint@8.57.0)
       eslint-plugin-react: 7.34.3(eslint@8.57.0)
 =======
@@ -14907,6 +14930,7 @@ snapshots:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
 =======
       eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0)
@@ -14921,6 +14945,9 @@ snapshots:
 =======
       eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
 >>>>>>> 4173750f (perf(frontend): Move generate config script to package)
+=======
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
+>>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.5
       is-core-module: 2.14.0
@@ -14950,7 +14977,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0):
+  eslint-plugin-import@2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0):
     dependencies:
       array-includes: 3.1.8
       array.prototype.findlastindex: 1.2.5
@@ -15391,10 +15418,14 @@ snapshots:
       signal-exit: 4.1.0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   fork-ts-checker-webpack-plugin@9.0.2(typescript@5.3.3)(webpack@5.90.1(@swc/core@1.6.3(@swc/helpers@0.5.11))):
 =======
   fork-ts-checker-webpack-plugin@9.0.2(typescript@5.3.3)(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)):
 >>>>>>> 0aa27abf (chore: Update packages)
+=======
+  fork-ts-checker-webpack-plugin@9.0.2(typescript@5.3.3)(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))):
+>>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
     dependencies:
       '@babel/code-frame': 7.24.7
       chalk: 4.1.2
@@ -15410,10 +15441,14 @@ snapshots:
       tapable: 2.2.1
       typescript: 5.3.3
 <<<<<<< HEAD
+<<<<<<< HEAD
       webpack: 5.90.1(@swc/core@1.6.3(@swc/helpers@0.5.11))
 =======
       webpack: 5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)
 >>>>>>> 0aa27abf (chore: Update packages)
+=======
+      webpack: 5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))
+>>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
 
   form-data@4.0.0:
     dependencies:
@@ -16996,6 +17031,7 @@ snapshots:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.3(@swc/helpers@0.5.11))(@types/node@20.14.7)(typescript@5.5.2)):
 =======
   postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.1(@swc/helpers@0.5.11))(@types/node@20.14.2)(typescript@5.4.5)):
@@ -17017,12 +17053,15 @@ snapshots:
 =======
   postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)):
 >>>>>>> 4173750f (perf(frontend): Move generate config script to package)
+=======
+  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)):
+>>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.4.5
     optionalDependencies:
       postcss: 8.4.38
-      ts-node: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
+      ts-node: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -18190,7 +18229,7 @@ snapshots:
       postcss: 8.4.38
       postcss-import: 15.1.0(postcss@8.4.38)
       postcss-js: 4.0.1(postcss@8.4.38)
-      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2))
+      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2))
       postcss-nested: 6.0.1(postcss@8.4.38)
       postcss-selector-parser: 6.1.0
       resolve: 1.22.8
@@ -18296,7 +18335,7 @@ snapshots:
       postcss: 8.4.38
       postcss-import: 15.1.0(postcss@8.4.38)
       postcss-js: 4.0.1(postcss@8.4.38)
-      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2))
+      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2))
       postcss-nested: 6.0.1(postcss@8.4.38)
       postcss-selector-parser: 6.1.0
       resolve: 1.22.8
@@ -18404,11 +18443,12 @@ snapshots:
       schema-utils: 3.3.0
       serialize-javascript: 6.0.2
       terser: 5.31.1
-      webpack: 5.92.1(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11)
+      webpack: 5.92.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)
     optionalDependencies:
       '@swc/core': 1.3.101(@swc/helpers@0.5.11)
       esbuild: 0.19.11
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 >>>>>>> 9e049073 (perf(docs): Remove docs)
@@ -18417,12 +18457,16 @@ snapshots:
 =======
   terser-webpack-plugin@5.3.10(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)):
 >>>>>>> 0aa27abf (chore: Update packages)
+=======
+  terser-webpack-plugin@5.3.10(@swc/core@1.6.5(@swc/helpers@0.5.11))(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))):
+>>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
       schema-utils: 3.3.0
       serialize-javascript: 6.0.2
       terser: 5.31.1
+<<<<<<< HEAD
 <<<<<<< HEAD
       webpack: 5.92.1(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11)
     optionalDependencies:
@@ -18445,6 +18489,11 @@ snapshots:
       '@swc/core': 1.6.5(@swc/helpers@0.5.11)
       esbuild: 0.19.12
 >>>>>>> 0aa27abf (chore: Update packages)
+=======
+      webpack: 5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))
+    optionalDependencies:
+      '@swc/core': 1.6.5(@swc/helpers@0.5.11)
+>>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
 
   terser@5.31.1:
     dependencies:
@@ -18588,8 +18637,12 @@ snapshots:
 =======
   ts-log@2.2.5: {}
 
+<<<<<<< HEAD
   ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2):
 >>>>>>> 0aa27abf (chore: Update packages)
+=======
+  ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2):
+>>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
@@ -18889,10 +18942,14 @@ snapshots:
   webpack-sources@3.2.3: {}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   webpack@5.90.1(@swc/core@1.6.3(@swc/helpers@0.5.11)):
 =======
   webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12):
 >>>>>>> 0aa27abf (chore: Update packages)
+=======
+  webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11)):
+>>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.5
@@ -18916,10 +18973,14 @@ snapshots:
       schema-utils: 3.3.0
       tapable: 2.2.1
 <<<<<<< HEAD
+<<<<<<< HEAD
       terser-webpack-plugin: 5.3.10(@swc/core@1.6.3(@swc/helpers@0.5.11))(webpack@5.90.1(@swc/core@1.6.3(@swc/helpers@0.5.11)))
 =======
       terser-webpack-plugin: 5.3.10(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12))
 >>>>>>> 0aa27abf (chore: Update packages)
+=======
+      terser-webpack-plugin: 5.3.10(@swc/core@1.6.5(@swc/helpers@0.5.11))(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11)))
+>>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
       watchpack: 2.4.1
       webpack-sources: 3.2.3
     transitivePeerDependencies:
@@ -18927,6 +18988,7 @@ snapshots:
       - esbuild
       - uglify-js
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
   webpack@5.92.1(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11):
@@ -18971,6 +19033,9 @@ snapshots:
 >>>>>>> 9e049073 (perf(docs): Remove docs)
   webpack@5.92.1(@swc/core@1.6.3(@swc/helpers@0.5.11))(esbuild@0.19.12):
 >>>>>>> d08ed456 (perf(backend): Move init scripts to package)
+=======
+  webpack@5.92.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12):
+>>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.5

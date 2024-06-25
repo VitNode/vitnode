@@ -1,8 +1,8 @@
 #!/usr/bin/env ts-node --project tsconfig.json
 import * as fs from "fs";
 import { join } from "path";
-import { updateObject } from "@vitnode/shared";
 import { DEFAULT_CONFIG_DATA, configPath, getConfigFile, } from "../src/helpers/config";
+import { updateObject } from "./helpers/update-object";
 const generateConfigFile = async () => {
     const pathToFolder = join(process.cwd(), "config");
     if (!fs.existsSync(pathToFolder)) {

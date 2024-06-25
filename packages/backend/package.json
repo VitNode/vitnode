@@ -39,6 +39,7 @@
     "@vitnode/shared": "workspace:*",
     "busboy": "^1.6.0",
     "class-transformer": "^0.5.1",
+    "dotenv": "^16.4.5",
     "eslint-config-vitnode": "workspace:*",
     "http-errors": "^2.0.0",
     "object-path": "^0.11.8",
