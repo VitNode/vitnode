@@ -5,8 +5,8 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { formatBytes } from "@vitnode/shared";
 import { Button } from "vitnode-frontend/components";
+import { CONFIG } from "vitnode-frontend/helpers";
 
-import { CONFIG } from "@/config";
 import { acceptMimeTypeImage } from "../extensions/files/files";
 
 interface Props {

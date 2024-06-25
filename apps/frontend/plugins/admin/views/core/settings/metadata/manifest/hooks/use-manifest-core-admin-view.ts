@@ -4,8 +4,8 @@ import * as z from "zod";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { convertColor, getHSLFromString } from "@vitnode/shared";
+import { CONFIG } from "vitnode-frontend/helpers";
 
-import { CONFIG } from "@/config";
 import { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";
 

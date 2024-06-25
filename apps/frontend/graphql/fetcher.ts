@@ -2,8 +2,8 @@ import "server-only";
 
 import { DocumentNode } from "graphql";
 import { cookies, headers as nextHeaders } from "next/headers";
+import { CONFIG } from "vitnode-frontend/helpers";
 
-import { CONFIG } from "@/config";
 import { setCookieFromApi } from "./cookie-from-string-to-object";
 
 const getGqlString = (doc: DocumentNode) => {

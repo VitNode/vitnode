@@ -16,8 +16,8 @@ import {
   Input,
   ColorInput,
 } from "vitnode-frontend/components";
+import { CONFIG } from "vitnode-frontend/helpers";
 
-import { CONFIG } from "@/config";
 import { useManifestCoreAdminView } from "./hooks/use-manifest-core-admin-view";
 import { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";
 

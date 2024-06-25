@@ -14,8 +14,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "vitnode-frontend/components";
+import { CONFIG } from "vitnode-frontend/helpers";
 
-import { CONFIG } from "@/config";
 import { DataTable } from "@/components/data-table/data-table";
 import { Core_Members__Files__ShowQuery, ShowCoreFiles } from "@/graphql/hooks";
 import { DateFormat } from "@/components/date-format/date-format";

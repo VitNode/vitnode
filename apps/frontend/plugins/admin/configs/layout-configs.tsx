@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
 import { Card, LogoVitNode } from "vitnode-frontend/components";
+import { PoweredByVitNode } from "vitnode-frontend/views/global";
 
 import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";
-import { PoweredByVitNode } from "vitnode-frontend/views/global";
 
 interface Props {
   children: React.ReactNode;

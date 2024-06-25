@@ -14,6 +14,7 @@ import {
   CardFooter,
   CardHeader,
 } from "../../../components";
+import { CONFIG } from "../../../helpers";
 
 interface Props {
   showPoweredBy?: boolean;
@@ -22,7 +23,6 @@ interface Props {
 export const InternalErrorView = ({ showPoweredBy }: Props) => {
   const t = useTranslations("core");
   const { back } = useRouter();
-  const DEV_MODE = process.env.NODE_ENV === "development";
 
   return (
     <div className="mx-auto my-10 max-w-2xl px-4">
@@ -37,7 +37,7 @@ export const InternalErrorView = ({ showPoweredBy }: Props) => {
             {t("errors.no_connection_api")}
           </p>
 
-          {DEV_MODE && (
+          {CONFIG.node_development && (
             <p className="text-muted-foreground mt-10 max-w-96 text-sm">
               {t("errors.no_connection_api_dev")}
             </p>
@@ -50,7 +50,7 @@ export const InternalErrorView = ({ showPoweredBy }: Props) => {
 
           <Button
             onClick={() => {
-              if (DEV_MODE) {
+              if (CONFIG.node_development) {
                 mutationClearCache();
               }
 
@@ -58,7 +58,11 @@ export const InternalErrorView = ({ showPoweredBy }: Props) => {
             }}
           >
             <RefreshCcw />
-            {t(DEV_MODE ? "clear_cache_and_reload" : "reload_page")}
+            {t(
+              CONFIG.node_development
+                ? "clear_cache_and_reload"
+                : "reload_page",
+            )}
           </Button>
         </CardFooter>
       </Card>

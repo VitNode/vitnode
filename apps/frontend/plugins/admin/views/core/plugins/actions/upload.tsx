@@ -10,8 +10,7 @@ import {
   DialogContent,
   DialogTrigger,
 } from "vitnode-frontend/components";
-
-import { CONFIG } from "@/config";
+import { CONFIG } from "vitnode-frontend/helpers";
 
 const Content = React.lazy(async () =>
   import("../upload/upload").then(module => ({

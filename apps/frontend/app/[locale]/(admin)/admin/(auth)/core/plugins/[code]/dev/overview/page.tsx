@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
+import { CONFIG } from "vitnode-frontend/helpers";
 
-import { CONFIG } from "@/config";
 import { getPluginDataAdmin } from "../query-api";
 import { OverviewDevPluginAdminView } from "@/plugins/admin/views/core/plugins/views/dev/overview";
 

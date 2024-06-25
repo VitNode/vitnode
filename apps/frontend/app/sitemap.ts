@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
+import { CONFIG } from "vitnode-frontend/helpers";
 
-import { CONFIG } from "@/config";
 import { getSessionData } from "@/graphql/get-session-data";
 
 const generateAlternateLanguagesForSitemap = ({

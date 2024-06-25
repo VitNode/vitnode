@@ -14,8 +14,7 @@ import {
   AlertDescription,
   AlertTitle,
 } from "vitnode-frontend/components";
-
-import { CONFIG } from "@/config";
+import { CONFIG } from "vitnode-frontend/helpers";
 
 interface Props {
   isPending: boolean;

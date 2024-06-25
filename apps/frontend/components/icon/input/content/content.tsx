@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
 import { Loader, Input, Tabs, TabsTrigger } from "vitnode-frontend/components";
+import { CONFIG } from "vitnode-frontend/helpers";
 
-import { CONFIG } from "@/config";
 import { IconLucideNames } from "@/components/icon/icon";
 import { SkinSelectEmojisContentIconInput } from "./emojis/skin-select";
 

@@ -3,10 +3,13 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
-import { zodInput, increaseVersionString } from "vitnode-frontend/helpers";
+import {
+  zodInput,
+  increaseVersionString,
+  CONFIG,
+} from "vitnode-frontend/helpers";
 import { useDialog } from "vitnode-frontend/components";
 
-import { CONFIG } from "@/config";
 import { ShowAdminPlugins } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";
 
