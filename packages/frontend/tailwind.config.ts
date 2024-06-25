@@ -4,10 +4,7 @@ import tailwindContainerQuery from "@tailwindcss/container-queries";
 
 const config = {
   darkMode: ["class"],
-  content: [
-    "./node_modules/vitnode-frontend/dist/**/*.js",
-    "./src/components/**/*.{ts,tsx}",
-  ],
+  content: ["./src/components/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
     container: {

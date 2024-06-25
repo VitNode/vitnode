@@ -1,8 +1,7 @@
 import { useLocale } from "next-intl";
 import * as localeDate from "date-fns/locale";
 import { format, formatDistance } from "date-fns";
-
-import { useGlobals } from "@/plugins/core/hooks/use-globals";
+import { useGlobals } from "vitnode-frontend/hooks";
 
 interface Args {
   date: Date;

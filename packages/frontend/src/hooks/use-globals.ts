@@ -1,22 +1,12 @@
+import { ConfigType } from "@vitnode/shared";
 import * as React from "react";
 
-import { ShowCoreLanguages } from "@/graphql/hooks";
-import { ConfigType } from "@/config";
+import { MiddlewareData } from "../views/layout/providers";
 
 interface Args {
   config: ConfigType;
   defaultLanguage: string;
-  languages: Pick<
-    ShowCoreLanguages,
-    | "allow_in_input"
-    | "code"
-    | "default"
-    | "enabled"
-    | "locale"
-    | "name"
-    | "time_24"
-    | "timezone"
-  >[];
+  languages: MiddlewareData["core_languages__show"]["edges"];
 }
 
 export const GlobalsContext = React.createContext<Args>({

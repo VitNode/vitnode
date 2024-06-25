@@ -10,8 +10,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "vitnode-frontend/components";
+import { useGlobals } from "vitnode-frontend/hooks";
 
-import { useGlobals } from "@/plugins/core/hooks/use-globals";
 import { TextLanguage } from "@/graphql/hooks";
 
 interface Props

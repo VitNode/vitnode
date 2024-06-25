@@ -8,6 +8,7 @@ import {
   DialogTitle,
   Form,
   TabsTrigger,
+  Tabs,
 } from "vitnode-frontend/components";
 
 import {
@@ -17,8 +18,6 @@ import {
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { MainContentCreateEditFormGroupsMembersAdmin } from "./content/main";
 import { ContentContentCreateEditFormGroupsMembersAdmin } from "./content/content";
-
-import { Tabs } from "@/components/tabs/tabs";
 
 enum TabsEnum {
   MAIN = "main",

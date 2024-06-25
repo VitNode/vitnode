@@ -2,18 +2,18 @@
 
 import { RefreshCcw, RotateCcw, WifiOff } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "vitnode-frontend/navigation";
+
+import { mutationClearCache } from "./mutation-clear-cache";
+import { PoweredByVitNode } from "../powered-by";
+
+import { useRouter } from "../../../navigation";
 import {
   Button,
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "vitnode-frontend/components";
-
-import { CONFIG } from "@/config";
-import { PoweredByVitNode } from "../powered-by";
-import { mutationClearCache } from "./mutation-clear-cache";
+} from "../../../components";
 
 interface Props {
   showPoweredBy?: boolean;
@@ -22,6 +22,7 @@ interface Props {
 export const InternalErrorView = ({ showPoweredBy }: Props) => {
   const t = useTranslations("core");
   const { back } = useRouter();
+  const DEV_MODE = process.env.NODE_ENV === "development";
 
   return (
     <div className="mx-auto my-10 max-w-2xl px-4">
@@ -36,7 +37,7 @@ export const InternalErrorView = ({ showPoweredBy }: Props) => {
             {t("errors.no_connection_api")}
           </p>
 
-          {CONFIG.node_development && (
+          {DEV_MODE && (
             <p className="text-muted-foreground mt-10 max-w-96 text-sm">
               {t("errors.no_connection_api_dev")}
             </p>
@@ -49,7 +50,7 @@ export const InternalErrorView = ({ showPoweredBy }: Props) => {
 
           <Button
             onClick={() => {
-              if (CONFIG.node_development) {
+              if (DEV_MODE) {
                 mutationClearCache();
               }
 
@@ -57,11 +58,7 @@ export const InternalErrorView = ({ showPoweredBy }: Props) => {
             }}
           >
             <RefreshCcw />
-            {t(
-              CONFIG.node_development
-                ? "clear_cache_and_reload"
-                : "reload_page",
-            )}
+            {t(DEV_MODE ? "clear_cache_and_reload" : "reload_page")}
           </Button>
         </CardFooter>
       </Card>

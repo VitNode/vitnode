@@ -8,6 +8,7 @@ import {
   DialogHeader,
   Form,
   TabsTrigger,
+  Tabs,
 } from "vitnode-frontend/components";
 
 import { useCreateEditCategoryBlogAdmin } from "./hooks/use-create-edit-category-blog-admin";
@@ -15,8 +16,6 @@ import { ShowBlogCategories } from "@/graphql/hooks";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
 import { MainTabCreateEditCategoryBlogAdmin } from "./tabs/main";
 import { PermissionsTabCreateEditCategoryBlogAdmin } from "./tabs/permissions";
-
-import { Tabs } from "@/components/tabs/tabs";
 
 interface Props {
   data?: ShowBlogCategories;
