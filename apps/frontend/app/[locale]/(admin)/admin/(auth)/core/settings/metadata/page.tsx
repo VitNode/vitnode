@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
-import { Card } from "vitnode-frontend/components";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import {
@@ -10,6 +9,7 @@ import {
 } from "@/graphql/hooks";
 import { fetcher } from "@/graphql/fetcher";
 import { ManifestMetadataCoreAdminView } from "@/plugins/admin/views/core/settings/metadata/manifest/manifest-metadata-core-view";
+import { Card } from "vitnode-frontend/components/ui/card";
 
 const getData = async () => {
   const { data } = await fetcher<

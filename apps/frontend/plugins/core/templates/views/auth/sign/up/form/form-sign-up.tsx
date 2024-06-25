@@ -3,10 +3,6 @@
 import { useTranslations } from "next-intl";
 import { removeSpecialCharacters } from "@vitnode/shared";
 import {
-  Button,
-  CardContent,
-  CardFooter,
-  Checkbox,
   Form,
   FormControl,
   FormDescription,
@@ -14,9 +10,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-  Progress,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/form";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Input } from "vitnode-frontend/components/ui/input";
+import { CardContent, CardFooter } from "vitnode-frontend/components/ui/card";
+import { Checkbox } from "vitnode-frontend/components/ui/checkbox";
+import { Progress } from "vitnode-frontend/components/ui/progress";
 
 import { useSignUpView } from "@/plugins/core/hooks/sign/up/use-sign-up-view";
 import { SuccessFormSignUp } from "./success";

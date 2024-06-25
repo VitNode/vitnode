@@ -2,19 +2,19 @@ import { useTranslations } from "next-intl";
 import * as React from "react";
 import { X } from "lucide-react";
 import { cn } from "vitnode-frontend/helpers";
-import {
-  Button,
-  Badge,
-  Loader,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "vitnode-frontend/components";
 
 import { GroupInputContent } from "./content/content";
 
 import { TextLanguage } from "../../../graphql/hooks";
 import { useTextLang } from "../../../plugins/core/hooks/use-text-lang";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "vitnode-frontend/components/ui/popover";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Badge } from "vitnode-frontend/components/ui/badge";
+import { Loader } from "vitnode-frontend/components/ui/loader";
 
 export interface GroupInputItem {
   id: number;

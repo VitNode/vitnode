@@ -1,7 +1,10 @@
 import { useTranslations } from "next-intl";
 import { CheckIcon } from "lucide-react";
 import { cn } from "vitnode-frontend/helpers";
-import { CommandGroup, CommandItem } from "vitnode-frontend/components";
+import {
+  CommandGroup,
+  CommandItem,
+} from "vitnode-frontend/components/ui/command";
 
 import { ShowCoreMembers } from "@/graphql/hooks";
 import { UserInputItem } from "../user-input";

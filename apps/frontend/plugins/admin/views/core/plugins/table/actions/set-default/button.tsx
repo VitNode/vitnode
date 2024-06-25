@@ -1,7 +1,8 @@
 import { Star } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useFormStatus } from "react-dom";
-import { Button, TooltipTrigger } from "vitnode-frontend/components";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { TooltipTrigger } from "vitnode-frontend/components/ui/tooltip";
 
 export const ButtonSetDefaultPluginActionsAdmin = () => {
   const t = useTranslations("admin.core.plugins");

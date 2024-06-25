@@ -6,7 +6,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/tooltip";
 
 import { useDateFormat } from "./hooks/use-date-format";
 

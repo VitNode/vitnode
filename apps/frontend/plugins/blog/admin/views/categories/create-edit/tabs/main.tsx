@@ -6,8 +6,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  ColorInput,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/form";
+import { ColorInput } from "vitnode-frontend/components/ui/color-input";
 
 import { TextLanguageInput } from "@/components/text-language-input";
 

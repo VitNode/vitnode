@@ -6,7 +6,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/card";
 
 import { Steps, ItemStepProps } from "@/components/steps/steps";
 import { InstallConfigsView } from "./steps/install-configs-view";

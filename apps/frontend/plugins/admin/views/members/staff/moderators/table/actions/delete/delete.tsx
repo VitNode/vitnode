@@ -5,9 +5,9 @@ import {
   AlertDialog,
   AlertDialogContent,
   AlertDialogTrigger,
-  Button,
-  Loader,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/alert-dialog";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Loader } from "vitnode-frontend/components/ui/loader";
 
 import { ShowAdminStaffModerators } from "@/graphql/hooks";
 

@@ -1,6 +1,6 @@
 import { CircleX, File } from "lucide-react";
 import Image from "next/image";
-import { Loader } from "vitnode-frontend/components";
+import { Loader } from "vitnode-frontend/components/ui/loader";
 
 interface Props {
   alt: string;

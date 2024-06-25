@@ -4,7 +4,7 @@ import { File } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { formatBytes } from "@vitnode/shared";
-import { Button } from "vitnode-frontend/components";
+import { Button } from "vitnode-frontend/components/ui/button";
 import { CONFIG } from "vitnode-frontend/helpers";
 
 import { acceptMimeTypeImage } from "../extensions/files/files";

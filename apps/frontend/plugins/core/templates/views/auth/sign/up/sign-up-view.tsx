@@ -5,7 +5,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/card";
 
 import { FormSignUp } from "./form/form-sign-up";
 

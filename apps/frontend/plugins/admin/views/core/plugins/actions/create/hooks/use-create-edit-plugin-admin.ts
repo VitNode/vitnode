@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "vitnode-frontend/navigation";
 import { zodInput } from "vitnode-frontend/helpers";
-import { useDialog } from "vitnode-frontend/components";
+import { useDialog } from "vitnode-frontend/components/ui/dialog";
 
 import { mutationCreateApi } from "./mutation-create-api";
 import { ShowAdminPlugins } from "@/graphql/hooks";

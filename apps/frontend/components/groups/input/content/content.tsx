@@ -4,17 +4,17 @@ import * as React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useDebouncedCallback } from "use-debounce";
 import { cn } from "vitnode-frontend/helpers";
-import {
-  Loader,
-  Command,
-  CommandList,
-  commandInputClassName,
-  Input,
-} from "vitnode-frontend/components";
 
 import { GroupInputItem } from "../group-input";
 import { GroupInputContentList } from "./list";
 import { queryApi } from "./query-api";
+import {
+  Command,
+  CommandList,
+  commandInputClassName,
+} from "vitnode-frontend/components/ui/command";
+import { Input } from "vitnode-frontend/components/ui/input";
+import { Loader } from "vitnode-frontend/components/ui/loader";
 
 interface Props {
   onSelect: (value: GroupInputItem) => void;

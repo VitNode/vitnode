@@ -1,13 +1,12 @@
 import { useTranslations } from "next-intl";
+import { Form, FormField } from "vitnode-frontend/components/ui/form";
+import { Button } from "vitnode-frontend/components/ui/button";
 import {
-  Button,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  Form,
-  FormField,
-  FilesInput,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/dialog";
+import { FilesInput } from "vitnode-frontend/components/ui/files-input";
 
 import { ShowCoreLanguages } from "@/graphql/hooks";
 import { useUpdateLangAdmin } from "./hooks/use-update-lang-admin";

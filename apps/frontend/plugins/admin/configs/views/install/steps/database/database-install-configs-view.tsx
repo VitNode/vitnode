@@ -1,4 +1,4 @@
-import { CardContent, CardFooter } from "vitnode-frontend/components";
+import { CardContent, CardFooter } from "vitnode-frontend/components/ui/card";
 
 import { SubmitDatabaseInstallConfigs } from "./submit-database-install-configs";
 

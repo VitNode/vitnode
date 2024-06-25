@@ -3,20 +3,21 @@
 import { useTranslations } from "next-intl";
 import { AlertCircle } from "lucide-react";
 import {
-  Button,
-  CardContent,
-  CardFooter,
-  Alert,
-  AlertDescription,
-  AlertTitle,
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/form";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Input } from "vitnode-frontend/components/ui/input";
+import { CardContent, CardFooter } from "vitnode-frontend/components/ui/card";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "vitnode-frontend/components/ui/alert";
 
 import { useSignInAdminView } from "../hooks/use-sign-in-admin-view";
 

@@ -1,25 +1,27 @@
 import { useTranslations } from "next-intl";
-import {
-  Button,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  Input,
-  Switch,
-} from "vitnode-frontend/components";
 
 import { useCreateEditLangAdmin } from "./hooks/use-create-edit-lang-admin";
 import { ShowCoreLanguages } from "@/graphql/hooks";
 import { LocaleFieldCreateEditLangAdmin } from "./fields/locale";
 import { TimezoneFieldCreateEditLangAdmin } from "./fields/timezone";
+import {
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "vitnode-frontend/components/ui/dialog";
+import { Button } from "vitnode-frontend/components/ui/button";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  FormControl,
+  FormDescription,
+} from "vitnode-frontend/components/ui/form";
+import { Input } from "vitnode-frontend/components/ui/input";
+import { Switch } from "vitnode-frontend/components/ui/switch";
 
 interface Props {
   data?: ShowCoreLanguages;

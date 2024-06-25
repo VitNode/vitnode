@@ -1,18 +1,20 @@
 import { useTranslations } from "next-intl";
 import {
-  AlertDialogCancel,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  Button,
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-  Input,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/form";
+import { Input } from "vitnode-frontend/components/ui/input";
+import { Button } from "vitnode-frontend/components/ui/button";
+import {
+  AlertDialogCancel,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "vitnode-frontend/components/ui/alert-dialog";
 
 import { ShowAdminGroups } from "@/graphql/hooks";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";

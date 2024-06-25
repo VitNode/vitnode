@@ -7,14 +7,14 @@ import { mutationClearCache } from "./mutation-clear-cache";
 import { PoweredByVitNode } from "../powered-by";
 
 import { useRouter } from "../../../navigation";
+import { CONFIG } from "../../../helpers";
 import {
-  Button,
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "../../../components";
-import { CONFIG } from "../../../helpers";
+} from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
 
 interface Props {
   showPoweredBy?: boolean;

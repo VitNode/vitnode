@@ -1,7 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Link } from "vitnode-frontend/navigation";
-import { buttonVariants, Form } from "vitnode-frontend/components";
+import { buttonVariants } from "vitnode-frontend/components/ui/button";
+import { Form } from "vitnode-frontend/components/ui/form";
 
 import { ThemeEditorTab, useThemeEditor } from "../hooks/use-theme-editor";
 import { ColorTabThemeEditor } from "./tabs/color-tab";

@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { HslColorPicker, HslColor } from "react-colorful";
 import { RemoveFormatting } from "lucide-react";
@@ -8,15 +10,16 @@ import {
   isColorBrightness,
 } from "@vitnode/shared";
 
-import { Input } from "../../input";
-import { cn } from "../../../../helpers";
+import { Input } from "./input";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "../../tooltip";
-import { Button } from "../../button";
+} from "./tooltip";
+import { Button } from "./button";
+
+import { cn } from "../../helpers";
 
 const presetColors: { color: HslColor; name: string }[] = [
   {

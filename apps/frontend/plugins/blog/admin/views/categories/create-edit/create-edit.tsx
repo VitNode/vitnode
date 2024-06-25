@@ -2,14 +2,13 @@ import { useTranslations } from "next-intl";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import * as React from "react";
 import {
-  Button,
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  Form,
-  TabsTrigger,
-  Tabs,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/dialog";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Form } from "vitnode-frontend/components/ui/form";
+import { Tabs, TabsTrigger } from "vitnode-frontend/components/ui/tabs";
 
 import { useCreateEditCategoryBlogAdmin } from "./hooks/use-create-edit-category-blog-admin";
 import { ShowBlogCategories } from "@/graphql/hooks";

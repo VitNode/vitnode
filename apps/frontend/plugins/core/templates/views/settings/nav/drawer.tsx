@@ -1,12 +1,12 @@
 import { useTranslations } from "next-intl";
 import { cn } from "vitnode-frontend/helpers";
 import {
-  buttonVariants,
   Drawer,
   DrawerClose,
   DrawerContent,
   DrawerTrigger,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/drawer";
+import { buttonVariants } from "vitnode-frontend/components/ui/button";
 
 import { useSettingsView } from "@/plugins/core/hooks/settings/use-settings-view";
 import { ItemNavSettings } from "./item/item-nav-settings";

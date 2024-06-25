@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { ColumnDef } from "@tanstack/react-table";
 import * as React from "react";
 import { InfinityIcon, ShieldAlert } from "lucide-react";
-import { Badge } from "vitnode-frontend/components";
+import { Badge } from "vitnode-frontend/components/ui/badge";
 
 import { AdministratorsStaffAdminViewProps } from "../administrators-view";
 import { DataTable } from "@/components/data-table/data-table";

@@ -6,11 +6,13 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  Button,
+} from "vitnode-frontend/components/ui/alert-dialog";
+import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/alert";
+import { Button } from "vitnode-frontend/components/ui/button";
 
 import { ShowCoreNav } from "@/graphql/hooks";
 import { useDeleteNavAdmin } from "./hooks/use-delete-nav-admin";

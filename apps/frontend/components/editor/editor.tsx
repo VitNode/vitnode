@@ -4,7 +4,7 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import * as React from "react";
 import { useLocale } from "next-intl";
 import { cn } from "vitnode-frontend/helpers";
-import { Skeleton } from "vitnode-frontend/components";
+import { Skeleton } from "vitnode-frontend/components/ui/skeleton";
 import { useGlobals } from "vitnode-frontend/hooks";
 
 import { TextLanguage } from "@/graphql/hooks";

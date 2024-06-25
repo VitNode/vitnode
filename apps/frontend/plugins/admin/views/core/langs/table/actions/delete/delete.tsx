@@ -2,8 +2,8 @@ import * as React from "react";
 import {
   AlertDialog,
   AlertDialogContent,
-  Loader,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/alert-dialog";
+import { Loader } from "vitnode-frontend/components/ui/loader";
 
 import { ShowCoreLanguages } from "@/graphql/hooks";
 

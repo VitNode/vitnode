@@ -1,24 +1,28 @@
 import { useTranslations } from "next-intl";
+
+import { useDownloadPluginAdmin } from "./hooks/use-download-plugin-admin";
+import { ShowAdminPlugins } from "@/graphql/hooks";
 import {
-  Button,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
+} from "vitnode-frontend/components/ui/dialog";
+import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  Label,
+} from "vitnode-frontend/components/ui/form";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Label } from "vitnode-frontend/components/ui/label";
+import { Input } from "vitnode-frontend/components/ui/input";
+import {
   RadioGroup,
   RadioGroupItem,
-  Input,
-} from "vitnode-frontend/components";
-
-import { useDownloadPluginAdmin } from "./hooks/use-download-plugin-admin";
-import { ShowAdminPlugins } from "@/graphql/hooks";
+} from "vitnode-frontend/components/ui/radio-group";
 
 export const ContentDownloadActionDevPluginAdmin = ({
   code,

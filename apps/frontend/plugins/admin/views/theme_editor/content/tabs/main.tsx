@@ -1,6 +1,6 @@
 import { ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Button } from "vitnode-frontend/components";
+import { Button } from "vitnode-frontend/components/ui/button";
 
 import { ThemeEditorTab, useThemeEditor } from "../../hooks/use-theme-editor";
 

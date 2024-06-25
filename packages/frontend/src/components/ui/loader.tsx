@@ -1,6 +1,6 @@
 import { Loader2 } from "lucide-react";
 
-import { cn } from "../helpers";
+import { cn } from "../../helpers";
 
 interface Props {
   className?: string;

@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import * as React from "react";
-import { Input } from "vitnode-frontend/components";
+import { Input } from "vitnode-frontend/components/ui/input";
 import { CONFIG } from "vitnode-frontend/helpers";
 
 import { EmojisContentIconInput } from "@/components/icon/input/content/emojis/emojis";

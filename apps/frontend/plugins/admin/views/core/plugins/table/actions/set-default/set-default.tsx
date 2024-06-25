@@ -3,7 +3,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/tooltip";
 
 import { ButtonSetDefaultPluginActionsAdmin } from "./button";
 import { useSetDefaultPluginAdmin } from "./hooks/use-set-default-admin";

@@ -1,17 +1,17 @@
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import * as React from "react";
 import { useSearchParams } from "next/navigation";
+
+import { FilterToolbarDataTableContext } from "./hooks/use-filter-toolbar-data-table";
 import {
-  Button,
-  Badge,
-  Loader,
   Popover,
   PopoverContent,
   PopoverTrigger,
-  Separator,
-} from "vitnode-frontend/components";
-
-import { FilterToolbarDataTableContext } from "./hooks/use-filter-toolbar-data-table";
+} from "vitnode-frontend/components/ui/popover";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Separator } from "vitnode-frontend/components/ui/separator";
+import { Badge } from "vitnode-frontend/components/ui/badge";
+import { Loader } from "vitnode-frontend/components/ui/loader";
 
 export interface FilterToolbarDataTableProps {
   children: React.ReactNode;

@@ -3,24 +3,28 @@ import * as React from "react";
 import { Check } from "lucide-react";
 import { ControllerRenderProps, FieldValues, Path } from "react-hook-form";
 import { cn } from "vitnode-frontend/helpers";
+
+import { timeZones } from "../timezones";
 import {
-  Button,
+  FormControl,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "vitnode-frontend/components/ui/form";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "vitnode-frontend/components/ui/popover";
+import { Button } from "vitnode-frontend/components/ui/button";
+import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
-  FormControl,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "vitnode-frontend/components";
-
-import { timeZones } from "../timezones";
+} from "vitnode-frontend/components/ui/command";
 
 interface Props<T extends FieldValues, TName extends Path<T>> {
   field: ControllerRenderProps<T, TName>;

@@ -1,12 +1,12 @@
 import { useTranslations } from "next-intl";
+import { Button } from "vitnode-frontend/components/ui/button";
 import {
   AlertDialogCancel,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  Button,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/alert-dialog";
 
 import { SubmitDeleteActionFilesAdvancedCoreAdmin } from "./submit";
 import { useDeleteFileAdvancedAdmin } from "./hooks/use-delete-file-advanced-admin";

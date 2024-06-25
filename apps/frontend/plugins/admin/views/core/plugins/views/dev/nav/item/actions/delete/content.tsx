@@ -5,8 +5,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  Button,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/alert-dialog";
+import { Button } from "vitnode-frontend/components/ui/button";
 
 import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
 import { SubmitDeleteActionTableNavDevPluginAdmin } from "./submit";

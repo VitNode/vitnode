@@ -2,14 +2,14 @@
 
 import { useTranslations } from "next-intl";
 import {
-  Button,
-  Card,
   Form,
   FormField,
   FormFieldRender,
   FormWrapper,
-  Switch,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/form";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Card } from "vitnode-frontend/components/ui/card";
+import { Switch } from "vitnode-frontend/components/ui/switch";
 
 import { useEditorAdmin, EditorAdminArgs } from "./hooks/use-editor-admin";
 import { FilesSectionContentEditorAdmin } from "./sections/files";

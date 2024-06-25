@@ -4,13 +4,13 @@ import { Plus, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { cn } from "vitnode-frontend/helpers";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Loader } from "vitnode-frontend/components/ui/loader";
 import {
-  Button,
-  Loader,
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/popover";
 
 import { IconInputProps } from "./content/content";
 import { IconLucideNames } from "../icon";

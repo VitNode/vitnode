@@ -1,15 +1,15 @@
 import * as React from "react";
 import { ChevronDownIcon, SmileIcon } from "lucide-react";
-import {
-  Loader,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "vitnode-frontend/components";
 
 import { useEditorState } from "@/components/editor/hooks/use-editor-state";
 
 import { ButtonToolbarEditor } from "../../button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "vitnode-frontend/components/ui/popover";
+import { Loader } from "vitnode-frontend/components/ui/loader";
 
 const Content = React.lazy(async () =>
   import("./content").then(module => ({

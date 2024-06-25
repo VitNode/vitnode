@@ -7,8 +7,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/form";
+import { Input } from "vitnode-frontend/components/ui/input";
 
 interface Props {
   form: UseFormReturn<{

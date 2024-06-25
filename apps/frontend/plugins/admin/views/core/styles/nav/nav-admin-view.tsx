@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { flattenTree } from "vitnode-frontend/helpers";
-import { Card } from "vitnode-frontend/components";
+import { Card } from "vitnode-frontend/components/ui/card";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { TableNavAdmin } from "./table/table";

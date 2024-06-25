@@ -6,15 +6,15 @@ import {
   isColorBrightness,
 } from "@vitnode/shared";
 import {
-  Button,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  Separator,
-  ColorInput,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/form";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { ColorInput } from "vitnode-frontend/components/ui/color-input";
+import { Separator } from "vitnode-frontend/components/ui/separator";
 
 import { ThemeEditorTab, useThemeEditor } from "../../hooks/use-theme-editor";
 

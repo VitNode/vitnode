@@ -4,7 +4,7 @@ import * as z from "zod";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { zodInput } from "vitnode-frontend/helpers";
-import { useDialog } from "vitnode-frontend/components";
+import { useDialog } from "vitnode-frontend/components/ui/dialog";
 
 import { mutationApi } from "./mutation-api";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";

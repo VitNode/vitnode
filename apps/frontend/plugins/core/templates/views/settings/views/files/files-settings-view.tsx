@@ -4,8 +4,8 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  Loader,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/card";
+import { Loader } from "vitnode-frontend/components/ui/loader";
 
 import { Core_Members__Files__ShowQuery } from "@/graphql/hooks";
 

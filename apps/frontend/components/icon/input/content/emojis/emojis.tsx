@@ -3,7 +3,7 @@ import { init, SearchIndex } from "emoji-mart";
 import * as React from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "vitnode-frontend/helpers";
-import { Button } from "vitnode-frontend/components";
+import { Button } from "vitnode-frontend/components/ui/button";
 
 import { IconInputProps } from "../content";
 

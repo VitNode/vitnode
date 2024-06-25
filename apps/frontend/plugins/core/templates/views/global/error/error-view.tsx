@@ -5,12 +5,12 @@ import { useTranslations } from "next-intl";
 import { Link } from "vitnode-frontend/navigation";
 import { cn } from "vitnode-frontend/helpers";
 import {
-  buttonVariants,
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/card";
+import { buttonVariants } from "vitnode-frontend/components/ui/button";
 
 import { ErrorViewProps } from "@/components/views/error-view-ssr";
 

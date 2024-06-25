@@ -1,6 +1,10 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Card, CardContent, CardHeader } from "vitnode-frontend/components";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+} from "vitnode-frontend/components/ui/card";
 
 import { CategoriesBlogAdminView } from "@/plugins/blog/admin/views/categories/categories-view";
 import { fetcher } from "@/graphql/fetcher";

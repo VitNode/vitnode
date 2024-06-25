@@ -1,5 +1,8 @@
 import { useTranslations } from "next-intl";
-import { CardDescription, CardHeader } from "vitnode-frontend/components";
+import {
+  CardDescription,
+  CardHeader,
+} from "vitnode-frontend/components/ui/card";
 
 export const HeaderNotificationsSettings = () => {
   const t = useTranslations("core");

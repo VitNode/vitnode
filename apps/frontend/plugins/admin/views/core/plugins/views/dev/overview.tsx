@@ -1,7 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Button, Form } from "vitnode-frontend/components";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { Form } from "vitnode-frontend/components/ui/form";
 
 import { ShowAdminPlugins } from "@/graphql/hooks";
 

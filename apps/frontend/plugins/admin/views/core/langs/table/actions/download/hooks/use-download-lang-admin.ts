@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
-import { useDialog } from "vitnode-frontend/components";
+import { useDialog } from "vitnode-frontend/components/ui/dialog";
 import { CONFIG } from "vitnode-frontend/helpers";
 
 import { queryApi } from "./query-api";

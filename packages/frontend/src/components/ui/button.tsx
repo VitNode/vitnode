@@ -3,7 +3,7 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, VariantProps } from "class-variance-authority";
 import { useTranslations } from "next-intl";
 
-import { Loader } from "../loader";
+import { Loader } from "./loader";
 
 import { cn } from "../../helpers";
 

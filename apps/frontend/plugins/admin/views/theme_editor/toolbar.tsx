@@ -3,12 +3,12 @@ import { useTranslations } from "next-intl";
 import * as React from "react";
 import { useTheme } from "next-themes";
 import {
-  Button,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "vitnode-frontend/components";
+} from "vitnode-frontend/components/ui/tooltip";
+import { Button } from "vitnode-frontend/components/ui/button";
 
 export enum ThemeEditorViewEnum {
   Desktop = "desktop",
