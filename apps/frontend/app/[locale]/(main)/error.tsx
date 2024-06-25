@@ -1,6 +1,6 @@
 "use client";
 
-import { InternalErrorView } from "@/plugins/admin/global/internal-error/internal-error-view";
+import { InternalErrorView } from "vitnode-frontend/views/global";
 
 export default function Error() {
   return (

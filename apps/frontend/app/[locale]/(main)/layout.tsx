@@ -1,9 +1,9 @@
 import * as React from "react";
 import { isRedirectError } from "next/dist/client/components/redirect";
 import { redirect } from "vitnode-frontend/navigation";
+import { InternalErrorView } from "vitnode-frontend/views/global";
 
 import { SessionProvider } from "./session-provider";
-import { InternalErrorView } from "@/plugins/admin/global/internal-error/internal-error-view";
 import { getSessionData } from "@/graphql/get-session-data";
 import { Layout as LayoutCore } from "@/plugins/core/templates/layout/layout";
 

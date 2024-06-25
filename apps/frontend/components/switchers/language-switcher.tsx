@@ -12,9 +12,9 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "vitnode-frontend/components";
+import { useGlobals } from "vitnode-frontend/hooks";
 
 import { CONFIG } from "@/config";
-import { useGlobals } from "@/plugins/core/hooks/use-globals";
 
 export const LanguageSwitcher = () => {
   const t = useTranslations("core");

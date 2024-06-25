@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { Card, LogoVitNode } from "vitnode-frontend/components";
 
 import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";
-import { PoweredByVitNode } from "../global/powered-by";
+import { PoweredByVitNode } from "vitnode-frontend/views/global";
 
 interface Props {
   children: React.ReactNode;

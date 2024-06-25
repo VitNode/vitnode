@@ -8,8 +8,8 @@ import {
   AlertDescription,
   AlertTitle,
 } from "vitnode-frontend/components";
+import { useGlobals } from "vitnode-frontend/hooks";
 
-import { useGlobals } from "@/plugins/core/hooks/use-globals";
 import { CONFIG } from "@/config";
 
 export const RebuildRequiredAdmin = () => {

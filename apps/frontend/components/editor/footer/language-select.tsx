@@ -11,8 +11,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "vitnode-frontend/components";
+import { useGlobals } from "vitnode-frontend/hooks";
 
-import { useGlobals } from "@/plugins/core/hooks/use-globals";
 import { useEditorState } from "../hooks/use-editor-state";
 
 export interface LanguageSelectFooterEditorProps {

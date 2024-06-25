@@ -7,6 +7,8 @@ const config = {
   content: [
     "./node_modules/vitnode-frontend/dist/src/components/**/*.js",
     "./node_modules/vitnode-frontend/dist/src/components/**/*.jsx",
+    "./node_modules/vitnode-frontend/dist/src/views/**/*.js",
+    "./node_modules/vitnode-frontend/dist/src/views/**/*.jsx",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./plugins/**/*.{ts,tsx}",

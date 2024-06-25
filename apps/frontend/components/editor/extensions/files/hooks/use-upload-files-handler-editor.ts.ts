@@ -2,6 +2,7 @@ import * as React from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { formatBytes } from "@vitnode/shared";
+import { useGlobals } from "vitnode-frontend/hooks";
 
 import {
   acceptMimeTypeImage,
@@ -11,7 +12,6 @@ import {
 import { uploadMutationApi } from "./upload-mutation-api";
 import { TextLanguage } from "@/graphql/hooks";
 import { getFilesFromContent } from "@/components/editor/extensions/files/hooks/functions";
-import { useGlobals } from "@/plugins/core/hooks/use-globals";
 import { useSession } from "@/plugins/core/hooks/use-session";
 import { ErrorType } from "@/graphql/fetcher";
 

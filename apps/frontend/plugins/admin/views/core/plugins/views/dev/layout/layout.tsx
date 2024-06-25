@@ -1,14 +1,12 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
 import { ExternalLink } from "lucide-react";
-import { Badge, Card, TabsTrigger } from "vitnode-frontend/components";
+import { Badge, Card, TabsTrigger, Tabs } from "vitnode-frontend/components";
 
 import { Admin__Core_Plugins__Show__ItemQuery } from "@/graphql/hooks";
 import { HeaderContent } from "@/components/header-content/header-content";
 import { DateFormat } from "@/components/date-format/date-format";
 import { ActionsDevPluginAdmin } from "./actions/actions";
-
-import { Tabs } from "@/components/tabs/tabs";
 
 interface Props extends Admin__Core_Plugins__Show__ItemQuery {
   children: React.ReactNode;

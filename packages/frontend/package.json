@@ -2,7 +2,6 @@
   "name": "vitnode-frontend",
   "version": "0.0.3",
   "exports": {
-    "./style.css": "./dist/style.css",
     "./navigation": {
       "types": "./src/navigation/index.ts",
       "import": "./dist/src/navigation/index.js"
@@ -14,11 +13,27 @@
     "./components": {
       "types": "./src/components/index.ts",
       "import": "./dist/src/components/index.js"
+    },
+    "./hooks": {
+      "types": "./src/hooks/index.ts",
+      "import": "./dist/src/hooks/index.js"
+    },
+    "./views/layout": {
+      "types": "./src/views/layout/index.ts",
+      "import": "./dist/src/views/layout/index.js"
+    },
+    "./views/global": {
+      "types": "./src/views/global/index.ts",
+      "import": "./dist/src/views/global/index.js"
+    },
+    "./config": {
+      "types": "./src/helpers/config/index.ts",
+      "import": "./dist/src/helpers/config/index.js"
     }
   },
   "scripts": {
-    "build": "postcss css/*.css --dir dist && tsc",
-    "dev": "concurrently \"tsc -w\" \"postcss css/*.css --dir dist --watch\"",
+    "build": " tsc",
+    "dev": "tsc -w",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -28,10 +43,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "clsx": "^2.1.1",
-    "concurrently": "^8.2.2",
     "eslint-config-vitnode": "workspace:*",
-    "postcss": "^8.4.38",
-    "postcss-cli": "^11.0.0",
     "tailwind-merge": "^2.3.0",
     "typescript": "^5.5.2"
   },
@@ -54,15 +66,18 @@
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.1",
     "@tailwindcss/container-queries": "^0.1.1",
+    "@tanstack/react-query": "^5.45.1",
     "@vitnode/shared": "workspace:*",
     "class-variance-authority": "^0.7.0",
     "cmdk": "^1.0.0",
+    "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.1.5",
     "framer-motion": "^11.2.11",
     "lucide-react": "^0.395.0",
     "next": "15.0.0-canary.28",
     "next-intl": "^3.15.2",
     "next-themes": "^0.3.0",
+    "nextjs-toploader": "^1.6.12",
     "nprogress": "^0.2.0",
     "react": "19.0.0-rc.0",
     "react-colorful": "^5.6.1",

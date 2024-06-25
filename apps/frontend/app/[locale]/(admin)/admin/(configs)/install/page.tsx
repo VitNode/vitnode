@@ -1,4 +1,5 @@
 import { redirect } from "vitnode-frontend/navigation";
+import { InternalErrorView } from "vitnode-frontend/views/global";
 
 import { ErrorType, fetcher } from "@/graphql/fetcher";
 import {
@@ -7,7 +8,6 @@ import {
   Admin__Install__LayoutQueryVariables,
 } from "@/graphql/hooks";
 import { LayoutInstallConfigsView } from "@/plugins/admin/configs/views/install/layout-install-configs-view";
-import { InternalErrorView } from "@/plugins/admin/global/internal-error/internal-error-view";
 
 const getData = async () => {
   const { data } = await fetcher<
