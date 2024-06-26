@@ -1,6 +1,6 @@
 'use client';
 
-import { Admin__Sessions__AuthorizationQuery } from '../../graphql/hooks';
+import { Admin__Sessions__AuthorizationQuery } from '../../graphql/code';
 import { SessionAdminContext } from '../../hooks/use-session-admin';
 
 interface Props {

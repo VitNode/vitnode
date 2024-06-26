@@ -7,7 +7,7 @@ import { ConfigType } from 'vitnode-shared';
 
 import { GlobalsContext } from '../../hooks/use-globals';
 import { Toaster } from '../../components/ui/sonner';
-import { Core_MiddlewareQuery } from '../../graphql/hooks';
+import { Core_MiddlewareQuery } from '../../graphql/code';
 
 interface Props {
   children: React.ReactNode;

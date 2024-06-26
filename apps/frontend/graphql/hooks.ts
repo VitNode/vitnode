@@ -1450,11 +1450,6 @@ export type Admin__Core_Theme_Editor__EditMutationVariables = Exact<{
 
 export type Admin__Core_Theme_Editor__EditMutation = { __typename?: 'Mutation', admin__core_theme_editor__edit: string };
 
-export type Admin__Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', version: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, nav: Array<{ __typename?: 'NavAdminPluginsAuthorization', code: string, nav: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, href: string, icon?: string | null, children?: Array<{ __typename?: 'ShowAdminNavPlugins', code: string, href: string }> | null }> }> } };
-
 export type Admin__Core_Files__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -1486,14 +1481,6 @@ export type Admin__Core_Groups__ShowQueryVariables = Exact<{
 
 
 export type Admin__Core_Groups__ShowQuery = { __typename?: 'Query', admin__core_groups__show: { __typename?: 'ShowAdminGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, startCursor?: number | null, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowAdminGroups', created: Date, updated: Date, id: number, users_count: number, protected: boolean, guest: boolean, root: boolean, default: boolean, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, content: { __typename?: 'ContentShowAdminGroups', files_allow_upload: boolean, files_max_storage_for_submit: number, files_total_max_storage: number } }> } };
-
-export type Admin__Core_Groups__Show_ShortQueryVariables = Exact<{
-  first?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type Admin__Core_Groups__Show_ShortQuery = { __typename?: 'Query', admin__core_groups__show: { __typename?: 'ShowAdminGroupsObj', edges: Array<{ __typename?: 'ShowAdminGroups', id: number, guest: boolean, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
 export type Admin__Core_Staff_Administrators__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -1657,14 +1644,6 @@ export type Core_Languages__ShowQueryVariables = Exact<{
 
 
 export type Core_Languages__ShowQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string, default: boolean, allow_in_input: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string, locale: string, time_24: boolean, updated: Date, created: Date }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
-
-export type Core_Members__Show__SearchQueryVariables = Exact<{
-  search?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-}>;
-
-
-export type Core_Members__Show__SearchQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, id: number, name: string, name_seo: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
 
 export type Core_Members__Files__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -2022,47 +2001,6 @@ export const Admin__Core_Theme_Editor__Edit = gql`
   admin__core_theme_editor__edit(colors: $colors)
 }
     `;
-export const Admin__Sessions__Authorization = gql`
-    query Admin__sessions__authorization {
-  admin__sessions__authorization {
-    user {
-      email
-      id
-      name_seo
-      is_admin
-      is_mod
-      name
-      newsletter
-      avatar_color
-      avatar {
-        id
-        dir_folder
-        file_name
-      }
-      group {
-        name {
-          language_code
-          value
-        }
-        id
-      }
-    }
-    version
-    nav {
-      code
-      nav {
-        code
-        href
-        icon
-        children {
-          code
-          href
-        }
-      }
-    }
-  }
-}
-    `;
 export const Admin__Core_Files__Show = gql`
     query Admin__core_files__show($cursor: Int, $first: Int, $sortBy: ShowCoreFilesSortByArgs, $last: Int, $search: String) {
   admin__core_files__show(
@@ -2153,20 +2091,6 @@ export const Admin__Core_Groups__Show = gql`
         files_max_storage_for_submit
         files_total_max_storage
       }
-    }
-  }
-}
-    `;
-export const Admin__Core_Groups__Show_Short = gql`
-    query Admin__Core_groups__show_short($first: Int, $search: String) {
-  admin__core_groups__show(first: $first, search: $search) {
-    edges {
-      id
-      name {
-        language_code
-        value
-      }
-      guest
     }
   }
 }
@@ -2811,30 +2735,6 @@ export const Core_Languages__Show = gql`
       hasPreviousPage
       startCursor
       totalCount
-    }
-  }
-}
-    `;
-export const Core_Members__Show__Search = gql`
-    query Core_members__show__search($search: String, $first: Int) {
-  core_members__show(search: $search, first: $first) {
-    edges {
-      avatar_color
-      avatar {
-        id
-        dir_folder
-        file_name
-      }
-      group {
-        id
-        name {
-          language_code
-          value
-        }
-      }
-      id
-      name
-      name_seo
     }
   }
 }

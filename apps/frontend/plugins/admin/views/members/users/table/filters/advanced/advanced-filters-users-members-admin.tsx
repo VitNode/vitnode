@@ -14,8 +14,7 @@ import {
 } from 'vitnode-frontend/components/ui/form';
 import { Button } from 'vitnode-frontend/components/ui/button';
 import { SheetClose, SheetFooter } from 'vitnode-frontend/components/ui/sheet';
-
-import { CalendarPicker } from '@/components/calendar-picker';
+import { CalendarPicker } from 'vitnode-frontend/components/ui/calendar-picker';
 
 export const AdvancedFiltersUsersMembersAdmin = () => {
   const t = useTranslations('admin.members.users');

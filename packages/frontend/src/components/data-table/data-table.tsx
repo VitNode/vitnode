@@ -38,7 +38,7 @@ import { Button } from '../ui/button';
 import { SkeletonDataTable } from './skeleton';
 import { ToolbarDataTable, ToolbarDataTableProps } from './toolbar/toolbar';
 
-import { PageInfo } from '../../graphql/hooks';
+import { PageInfo } from '../../graphql/code';
 
 interface TDataMin {
   id: number;
