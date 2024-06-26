@@ -9,7 +9,7 @@ import "./global.css";
 
 interface Props {
   children: React.ReactNode;
-  copyright?: TextLanguage[];
+  copyright?: TextLanguage[]; // TODO: Improve this
 }
 
 export const Layout = ({ children, copyright }: Props) => {

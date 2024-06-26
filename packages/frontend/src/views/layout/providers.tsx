@@ -7,42 +7,15 @@ import { ConfigType } from "vitnode-shared";
 
 import { GlobalsContext } from "../../hooks/use-globals";
 import { Toaster } from "../../components/ui/sonner";
-
-export interface MiddlewareData {
-  core_languages__show: {
-    edges: {
-      allow_in_input: boolean;
-      code: string;
-      default: boolean;
-      enabled: boolean;
-      id: number;
-      locale: string;
-      name: string;
-      time_24: boolean;
-      timezone: string;
-    }[];
-  };
-  core_plugins__show: { code: string }[];
-  core_settings__show: {
-    site_copyright: {
-      language_code: string;
-      value: string;
-    }[];
-    site_description: {
-      language_code: string;
-      value: string;
-    }[];
-    site_name: string;
-  };
-}
+import { Core_MiddlewareQuery } from "../../graphql/hooks";
 
 interface Props {
   children: React.ReactNode;
   config: ConfigType;
-  middlewareData?: MiddlewareData;
+  middlewareData?: Core_MiddlewareQuery;
 }
 
-export const Providers = ({ children, middlewareData, config }: Props) => {
+export const RootProviders = ({ children, middlewareData, config }: Props) => {
   const [queryClient] = React.useState(
     () =>
       new QueryClient({

@@ -3,14 +3,24 @@ import NextTopLoader from "nextjs-toploader";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 
-import { MiddlewareData, Providers } from "./providers";
 import { InternalErrorView } from "../global/internal-error/internal-error-view";
+import { RootProviders } from "./providers";
 
 import { getConfigFile } from "../../helpers/config";
+import { fetcher } from "../../graphql/fetcher";
+import { Core_Middleware, Core_MiddlewareQuery } from "../../graphql/hooks";
+
+const getMiddlewareData = async () => {
+  const { data } = await fetcher<Core_MiddlewareQuery>({
+    query: Core_Middleware,
+    cache: "force-cache",
+  });
+
+  return data;
+};
 
 interface Props {
   children: React.ReactNode;
-  getMiddlewareData: () => Promise<MiddlewareData>;
   params: { locale: string };
   className?: string;
 }
@@ -19,7 +29,6 @@ export const RootLayout = async ({
   children,
   params: { locale },
   className,
-  getMiddlewareData,
 }: Props) => {
   const [messages, config] = await Promise.all([
     getMessages(),
@@ -37,11 +46,11 @@ export const RootLayout = async ({
             showSpinner={false}
             height={4}
           />
-          <Providers middlewareData={middlewareData} config={config}>
+          <RootProviders middlewareData={middlewareData} config={config}>
             <NextIntlClientProvider messages={messages}>
               {children}
             </NextIntlClientProvider>
-          </Providers>
+          </RootProviders>
         </body>
       </html>
     );
@@ -49,11 +58,11 @@ export const RootLayout = async ({
     return (
       <html lang={locale} className={className}>
         <body>
-          <Providers config={config}>
+          <RootProviders config={config}>
             <NextIntlClientProvider messages={messages}>
               <InternalErrorView />
             </NextIntlClientProvider>
-          </Providers>
+          </RootProviders>
         </body>
       </html>
     );

@@ -1,4 +1,5 @@
-import { fetcher } from "vitnode-frontend/helpers/fetcher";
+import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import { getSessionData } from "vitnode-frontend/graphql/get-session-data";
 
 import {
   Core_Theme_Editor__Show,
@@ -7,7 +8,6 @@ import {
 } from "@/graphql/hooks";
 import { ThemeEditorView } from "@/plugins/admin/views/theme_editor/theme-editor-view";
 import { ErrorAdminView } from "@/plugins/admin/global/error-admin-view";
-import { getSessionData } from "@/graphql/get-session-data";
 
 const getData = async () => {
   const { data } = await fetcher<

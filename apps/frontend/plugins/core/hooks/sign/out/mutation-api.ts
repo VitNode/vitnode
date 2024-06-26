@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "vitnode-frontend/navigation";
-import { fetcher } from "vitnode-frontend/helpers/fetcher";
+import { fetcher } from "vitnode-frontend/graphql/fetcher";
 
 import {
   Core_Sessions__Sign_Out,

@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { fetcher } from "vitnode-frontend/helpers/fetcher";
+import { fetcher } from "vitnode-frontend/graphql/fetcher";
 
 import {
   Admin__Sessions__Authorization,

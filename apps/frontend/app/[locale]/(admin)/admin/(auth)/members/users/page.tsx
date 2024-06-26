@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
-import { fetcher } from "vitnode-frontend/helpers/fetcher";
+import { fetcher } from "vitnode-frontend/graphql/fetcher";
 
 import {
   Admin__Core_Members__Show,

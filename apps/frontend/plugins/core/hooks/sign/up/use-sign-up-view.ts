@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
-import { ErrorType } from "vitnode-frontend/helpers/fetcher";
+import { ErrorType } from "vitnode-frontend/graphql/fetcher";
 
 import { mutationApi } from "./mutation-api";
 

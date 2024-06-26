@@ -15,9 +15,9 @@ import {
   RadioGroup,
   RadioGroupItem,
 } from "vitnode-frontend/components/ui/radio-group";
+import { useSession } from "vitnode-frontend/hooks/use-session";
 
 import { useModalChangeAvatar } from "@/plugins/core/hooks/settings/avatar/use-modal-change-avatar";
-import { useSession } from "@/plugins/core/hooks/use-session";
 
 const CropperModalChangeAvatar = React.lazy(async () =>
   import("./cropper/cropper-modal-change-avatar").then(module => ({

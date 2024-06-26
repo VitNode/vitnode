@@ -1,6 +1,6 @@
 "use server";
 
-import { fetcher } from "vitnode-frontend/helpers/fetcher";
+import { fetcher } from "vitnode-frontend/graphql/fetcher";
 
 import {
   Admin__Core_Groups__Show_Short,

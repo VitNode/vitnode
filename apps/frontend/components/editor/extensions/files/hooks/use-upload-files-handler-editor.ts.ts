@@ -3,7 +3,8 @@ import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { formatBytes } from "vitnode-shared";
 import { useGlobals } from "vitnode-frontend/hooks/use-globals";
-import { ErrorType } from "vitnode-frontend/helpers/fetcher";
+import { ErrorType } from "vitnode-frontend/graphql/fetcher";
+import { useSession } from "vitnode-frontend/hooks/use-session";
 
 import {
   acceptMimeTypeImage,
@@ -13,7 +14,6 @@ import {
 import { uploadMutationApi } from "./upload-mutation-api";
 import { TextLanguage } from "@/graphql/hooks";
 import { getFilesFromContent } from "@/components/editor/extensions/files/hooks/functions";
-import { useSession } from "@/plugins/core/hooks/use-session";
 
 export interface UploadFilesHandlerArgs {
   files: FileStateEditor[];

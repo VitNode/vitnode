@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import * as React from "react";
-import { fetcher } from "vitnode-frontend/helpers/fetcher";
+import { fetcher } from "vitnode-frontend/graphql/fetcher";
 
 import { ProfileView } from "@/plugins/core/templates/views/profile/profile-view";
 import {

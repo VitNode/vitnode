@@ -1,16 +1,16 @@
 "use client";
 
 import * as React from "react";
-import { SessionContext } from "vitnode-frontend/hooks/use-session";
 
-import { Core_Sessions__AuthorizationQuery } from "@/graphql/hooks";
+import { SessionContext } from "../../../hooks/use-session";
+import { Core_Sessions__AuthorizationQuery } from "../../../graphql/hooks";
 
 interface Props {
   children: React.ReactNode;
   data: Core_Sessions__AuthorizationQuery;
 }
 
-export const SessionProvider = ({ children, data }: Props) => {
+export const AuthProviders = ({ children, data }: Props) => {
   return (
     <SessionContext.Provider
       value={{

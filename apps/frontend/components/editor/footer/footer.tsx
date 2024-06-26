@@ -1,4 +1,5 @@
 import { useGlobals } from "vitnode-frontend/hooks/use-globals";
+import { useSession } from "vitnode-frontend/hooks/use-session";
 
 import {
   LanguageSelectFooterEditor,
@@ -7,7 +8,6 @@ import {
 import { FilesButtonFooterEditor } from "./files/button";
 import { ListFilesFooterEditor } from "./files/list";
 import { useEditorState } from "../hooks/use-editor-state";
-import { useSession } from "@/plugins/core/hooks/use-session";
 
 interface Props extends LanguageSelectFooterEditorProps {
   disableLanguage?: boolean;

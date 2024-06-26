@@ -9,23 +9,32 @@
     "./helpers/*": "./src/helpers/*.ts",
     "./hooks/*": "./src/hooks/*.ts",
     "./views/root-layout": "./src/views/layout/root-layout.tsx",
+    "./views/auth-layout": "./src/views/layout/auth/auth-layout.tsx",
     "./views/global": "./src/views/global/index.ts",
     "./components/*": "./src/components/*.tsx",
     "./editor": "./src/editor/editor.tsx",
-    "./editor/read-only": "./src/editor/read-only/read-only.tsx"
+    "./editor/read-only": "./src/editor/read-only/read-only.tsx",
+    "./graphql/*": "./src/graphql/*.ts"
   },
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test123": "npx tsx scripts/generate-config-file.ts init"
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/typescript": "^4.0.7",
+    "@graphql-codegen/typescript-document-nodes": "^4.0.7",
+    "@graphql-codegen/typescript-operations": "^4.2.1",
     "@types/node": "^20.14.8",
     "@types/nprogress": "^0.2.3",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.5",
     "eslint-config-vitnode": "workspace:*",
+    "graphql": "^16.9.0",
+    "graphql-tag": "^2.12.6",
     "tailwind-merge": "^2.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.2"
@@ -70,7 +79,6 @@
     "embla-carousel-react": "^8.1.5",
     "emoji-mart": "^5.6.0",
     "framer-motion": "^11.2.12",
-    "graphql": "^16.9.0",
     "html-react-parser": "^5.1.10",
     "lowlight": "^3.1.0",
     "lucide-react": "^0.396.0",

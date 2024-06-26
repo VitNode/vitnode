@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { Card } from "vitnode-frontend/components/ui/card";
-import { fetcher } from "vitnode-frontend/helpers/fetcher";
+import { fetcher } from "vitnode-frontend/graphql/fetcher";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import {

@@ -1,6 +1,6 @@
 "use server";
 
-import { fetcher } from "vitnode-frontend/helpers/fetcher";
+import { fetcher } from "vitnode-frontend/graphql/fetcher";
 
 import {
   Core_Members__Show__Search,

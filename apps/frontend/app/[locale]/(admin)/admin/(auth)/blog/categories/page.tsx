@@ -5,7 +5,7 @@ import {
   CardContent,
   CardHeader,
 } from "vitnode-frontend/components/ui/card";
-import { fetcher } from "vitnode-frontend/helpers/fetcher";
+import { fetcher } from "vitnode-frontend/graphql/fetcher";
 
 import { CategoriesBlogAdminView } from "@/plugins/blog/admin/views/categories/categories-view";
 import {
