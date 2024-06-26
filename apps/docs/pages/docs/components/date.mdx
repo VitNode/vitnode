@@ -1,0 +1,17 @@
+# Date Format
+
+We're creating `DateFormat` component to help you formating date using [date-fns](https://date-fns.org/) library. This component automatically detect your locale and user timezone.
+
+## Usage
+
+```tsx
+import { DateFormat } from "@/components/date-format";
+
+<DateFormat date={data.joined} />;
+```
+
+## Props
+
+| Name              | Type | Default | Description    |
+| ----------------- | ---- | ------- | -------------- |
+| date _(Required)_ | Date | -       | Date to format |
