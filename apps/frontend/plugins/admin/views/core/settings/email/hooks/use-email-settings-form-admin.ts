@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
-import { getHSLFromString, isColorBrightness } from "@vitnode/shared";
+import { getHSLFromString, isColorBrightness } from "vitnode-shared";
 
 import { Admin__Core_Email_Settings__ShowQuery } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";

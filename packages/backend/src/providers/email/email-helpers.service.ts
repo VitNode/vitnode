@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { convertColor, getHSLFromString } from "@vitnode/shared";
+import { convertColor, getHSLFromString } from "vitnode-shared";
 import { ConfigService } from "@nestjs/config";
 
 import { getConfigFile } from "../config";

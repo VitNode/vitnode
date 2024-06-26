@@ -9,7 +9,7 @@ import { join } from "path";
 
 import sharp from "sharp";
 import { Injectable } from "@nestjs/common";
-import { generateRandomString, removeSpecialCharacters } from "@vitnode/shared";
+import { generateRandomString, removeSpecialCharacters } from "vitnode-shared";
 
 import { UploadCoreFilesArgs } from "./dto/upload.args";
 import { UploadCoreFilesObj } from "./dto/upload.obj";

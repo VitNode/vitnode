@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { genSalt, hash } from "bcrypt";
 import { count } from "drizzle-orm";
 import { ConfigService } from "@nestjs/config";
-import { removeSpecialCharacters } from "@vitnode/shared";
+import { removeSpecialCharacters } from "vitnode-shared";
 
 import { SignUpCoreMembersArgs } from "./dto/sign_up.args";
 import { SignUpCoreMembersObj } from "./dto/sign_up.obj";

@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { Ban } from "lucide-react";
-import { removeSpecialCharacters } from "@vitnode/shared";
+import { removeSpecialCharacters } from "vitnode-shared";
 import {
   DialogFooter,
   DialogHeader,

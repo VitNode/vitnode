@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { removeSpecialCharacters } from "@vitnode/shared";
+import { removeSpecialCharacters } from "vitnode-shared";
 import { CardContent, CardFooter } from "vitnode-frontend/components/ui/card";
 import {
   Form,

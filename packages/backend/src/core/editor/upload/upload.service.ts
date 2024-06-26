@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { eq, sum } from "drizzle-orm";
-import { generateRandomString } from "@vitnode/shared";
+import { generateRandomString } from "vitnode-shared";
 
 import { UploadCoreEditorArgs } from "./dto/upload.args";
 

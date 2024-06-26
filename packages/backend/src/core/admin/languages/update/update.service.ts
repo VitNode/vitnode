@@ -4,7 +4,7 @@ import { join } from "path";
 import { Injectable } from "@nestjs/common";
 import * as tar from "tar";
 import { eq } from "drizzle-orm";
-import { currentUnixDate, generateRandomString } from "@vitnode/shared";
+import { currentUnixDate, generateRandomString } from "vitnode-shared";
 
 import { UpdateCoreAdminLanguagesArgs } from "./dto/update.args";
 

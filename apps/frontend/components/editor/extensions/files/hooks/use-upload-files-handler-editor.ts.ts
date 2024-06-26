@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { formatBytes } from "@vitnode/shared";
+import { formatBytes } from "vitnode-shared";
 import { useGlobals } from "vitnode-frontend/hooks/use-globals";
 
 import {

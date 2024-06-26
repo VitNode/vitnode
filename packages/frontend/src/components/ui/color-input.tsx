@@ -3,7 +3,7 @@
 import * as React from "react";
 import { HslColor } from "react-colorful";
 import { useTranslations } from "next-intl";
-import { getHSLFromString, isColorBrightness } from "@vitnode/shared";
+import { getHSLFromString, isColorBrightness } from "vitnode-shared";
 
 import { PickerColor } from "./picker-color";
 import { Button } from "./button";

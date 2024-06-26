@@ -5,7 +5,7 @@ import * as React from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Clock, Download, File } from "lucide-react";
-import { formatBytes } from "@vitnode/shared";
+import { formatBytes } from "vitnode-shared";
 import { Link } from "vitnode-frontend/navigation";
 import {
   Tooltip,

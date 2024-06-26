@@ -1,7 +1,7 @@
 import * as fs from "fs";
 
 import { Injectable } from "@nestjs/common";
-import { removeSpecialCharacters } from "@vitnode/shared";
+import { removeSpecialCharacters } from "vitnode-shared";
 
 import { ShowAdminNavPluginsObj } from "../show/dto/show.obj";
 import { CreateAdminNavPluginsArgs } from "./dto/create.args";

@@ -4,7 +4,7 @@ import {
   getHSLFromString,
   getStringFromHSL,
   isColorBrightness,
-} from "@vitnode/shared";
+} from "vitnode-shared";
 import {
   FormControl,
   FormField,
