@@ -32,8 +32,8 @@ import {
   CommandItem,
   CommandList,
 } from 'vitnode-frontend/components/ui/command';
+import { useSessionAdmin } from 'vitnode-frontend/hooks/use-session-admin';
 
-import { useSessionAdmin } from '@/plugins/admin/hooks/use-session-admin';
 import { ShowCoreLanguages } from '@/graphql/hooks';
 import { useDownloadLangAdmin } from './hooks/use-download-lang-admin';
 

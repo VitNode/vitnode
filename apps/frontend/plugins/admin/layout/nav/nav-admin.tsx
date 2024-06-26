@@ -1,4 +1,5 @@
-import { getSessionAdminData } from '@/app/[locale]/(admin)/admin/(auth)/get-session-admin';
+import { getSessionAdminData } from 'vitnode-frontend/graphql/get-session-admin';
+
 import { ItemNavAdmin } from './item/item';
 import { NavAdminWrapper } from './wrapper';
 

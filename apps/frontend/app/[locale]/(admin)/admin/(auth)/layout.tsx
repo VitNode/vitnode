@@ -1,13 +1,10 @@
 import * as React from 'react';
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
-import { isRedirectError } from 'next/dist/client/components/redirect';
-import { redirect } from 'vitnode-frontend/navigation';
 import { getConfigFile } from 'vitnode-frontend/helpers/config';
+import { AdminLayout } from 'vitnode-frontend/views/admin-layout';
 
-import { Providers } from './providers';
-import { AdminLayout } from '@/plugins/admin/layout/admin-layout';
-import { getSessionAdminData } from './get-session-admin';
+import { AdminLayout as AdminCPLayout } from '@/plugins/admin/layout/admin-layout';
 
 interface Props {
   children: React.ReactNode;
@@ -30,22 +27,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Layout({ children }: Props) {
-  try {
-    const data = await getSessionAdminData();
-    if (!data) {
-      return redirect('/admin');
-    }
-
-    return (
-      <Providers data={data}>
-        <AdminLayout>{children}</AdminLayout>
-      </Providers>
-    );
-  } catch (error) {
-    if (isRedirectError(error)) {
-      redirect('/admin');
-    }
-
-    throw error;
-  }
+  return (
+    <AdminLayout>
+      <AdminCPLayout>{children}</AdminCPLayout>
+    </AdminLayout>
+  );
 }

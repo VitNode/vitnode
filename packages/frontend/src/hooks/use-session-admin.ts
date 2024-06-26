@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { AuthorizationCurrentUserObj } from '@/graphql/hooks';
+import { AuthorizationCurrentUserObj } from '../graphql/hooks';
 
 interface Args {
-  session: Omit<AuthorizationCurrentUserObj, 'posts'> | null | undefined;
+  session: AuthorizationCurrentUserObj | null | undefined;
   version: string;
 }
 

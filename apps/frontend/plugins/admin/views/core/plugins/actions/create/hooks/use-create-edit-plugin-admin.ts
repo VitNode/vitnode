@@ -7,11 +7,11 @@ import { usePathname, useRouter } from 'vitnode-frontend/navigation';
 import { zodInput } from 'vitnode-frontend/helpers/zod';
 import { useDialog } from 'vitnode-frontend/components/ui/dialog';
 import { ErrorType } from 'vitnode-frontend/graphql/fetcher';
+import { useSessionAdmin } from 'vitnode-frontend/hooks/use-session-admin';
 
 import { mutationCreateApi } from './mutation-create-api';
 import { ShowAdminPlugins } from '@/graphql/hooks';
 import { mutationEditApi } from './mutation-edit-api';
-import { useSessionAdmin } from '@/plugins/admin/hooks/use-session-admin';
 
 export const codePluginRegex = /^[a-z0-9-]*$/;
 
