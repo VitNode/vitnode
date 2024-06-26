@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
 import { eq } from "drizzle-orm";
-import { currentUnixDate } from "@vitnode/shared";
+import { currentUnixDate } from "vitnode-shared";
 
 import { DeviceSignInCoreSessionsService } from "../../sign_in/device.service";
 import { DatabaseService } from "../../../../database";

@@ -8,7 +8,7 @@ import {
   currentUnixDate,
   generateRandomString,
   removeSpecialCharacters,
-} from "@vitnode/shared";
+} from "vitnode-shared";
 
 import { DownloadCoreAdminLanguagesArgs } from "./dto/download.args";
 

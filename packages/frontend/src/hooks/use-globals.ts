@@ -1,4 +1,4 @@
-import { ConfigType } from "@vitnode/shared";
+import { ConfigType } from "vitnode-shared";
 import * as React from "react";
 
 import { MiddlewareData } from "../views/layout/providers";

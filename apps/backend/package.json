@@ -46,7 +46,7 @@
     "@types/node": "^20.14.8",
     "@types/pg": "^8.11.6",
     "@types/react": "^18.3.3",
-    "@vitnode/shared": "workspace:*",
+    "vitnode-shared": "workspace:*",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "cross-env": "^7.0.3",

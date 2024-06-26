@@ -1,7 +1,7 @@
 import { join } from "path";
 import * as fs from "fs";
 
-import { ConfigType } from "@vitnode/shared";
+import { ConfigType } from "vitnode-shared";
 
 export const DEFAULT_CONFIG_DATA: ConfigType = {
   rebuild_required: {

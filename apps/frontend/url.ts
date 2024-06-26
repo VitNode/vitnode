@@ -1,4 +1,4 @@
-import { removeSpecialCharacters } from "@vitnode/shared";
+import { removeSpecialCharacters } from "vitnode-shared";
 
 export const getIdFormString = (str: string[] | string) => {
   const value = Array.isArray(str) ? str[0] : str;

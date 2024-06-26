@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { formatBytes } from "@vitnode/shared";
+import { formatBytes } from "vitnode-shared";
 
 import { ItemListFilesFooterEditorProps } from "./item";
 

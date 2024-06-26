@@ -8,7 +8,7 @@ import {
   checkColorType,
   convertColor,
   isColorBrightness,
-} from "@vitnode/shared";
+} from "vitnode-shared";
 
 import { Input } from "./input";
 import {

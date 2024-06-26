@@ -1,4 +1,4 @@
-name: Build
+name: Lint
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ on:
       - synchronize
 
 jobs:
-  install:
+  linting:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,8 +32,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run config init
-        run: pnpm config:init
-
-      - name: Build
-        run: pnpm build
+      - name: Check formatting
+        run: pnpm lint
