@@ -5,10 +5,10 @@ import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 import { zodInput } from 'vitnode-frontend/helpers/zod';
 import { useDialog } from 'vitnode-frontend/components/ui/dialog';
+import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
 import { mutationCreateApi } from './create-mutation-api';
 import { ShowBlogCategories } from '@/graphql/hooks';
-import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
 
 interface Args {
   data?: ShowBlogCategories;

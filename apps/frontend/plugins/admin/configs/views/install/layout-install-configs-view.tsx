@@ -7,8 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from 'vitnode-frontend/components/ui/card';
+import { Steps, ItemStepProps } from 'vitnode-frontend/components/ui/steps';
 
-import { Steps, ItemStepProps } from '@/components/steps/steps';
 import { InstallConfigsView } from './steps/install-configs-view';
 import { InstallVitNodeContext } from './hooks/use-install-vitnode';
 import { LicenseInstallConfigsView } from './steps/license/license-install-configs-view';

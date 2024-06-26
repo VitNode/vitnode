@@ -9,10 +9,10 @@ import {
 import { Button } from 'vitnode-frontend/components/ui/button';
 import { Form } from 'vitnode-frontend/components/ui/form';
 import { Tabs, TabsTrigger } from 'vitnode-frontend/components/ui/tabs';
+import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
 import { useCreateEditCategoryBlogAdmin } from './hooks/use-create-edit-category-blog-admin';
 import { ShowBlogCategories } from '@/graphql/hooks';
-import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
 import { MainTabCreateEditCategoryBlogAdmin } from './tabs/main';
 import { PermissionsTabCreateEditCategoryBlogAdmin } from './tabs/permissions';
 

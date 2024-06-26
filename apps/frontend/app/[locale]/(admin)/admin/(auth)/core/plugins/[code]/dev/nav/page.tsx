@@ -3,8 +3,8 @@ import { getTranslations } from 'next-intl/server';
 import { flattenTree } from 'vitnode-frontend/helpers/flatten-tree';
 import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 import { Icon } from 'vitnode-frontend/components/icon/icon';
+import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
 
-import { HeaderContent } from '@/components/header-content/header-content';
 import {
   Admin__Core_Plugins__Nav__Show,
   Admin__Core_Plugins__Nav__ShowQuery,

@@ -5,8 +5,8 @@ import { keyBy, mapValues } from 'lodash';
 import { Input } from 'vitnode-frontend/components/ui/input';
 import { Switch } from 'vitnode-frontend/components/ui/switch';
 import { Loader } from 'vitnode-frontend/components/ui/loader';
+import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
-import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
 import { ShowAdminGroups } from '@/graphql/hooks';
 import { usePermissionsGroupsAdminAPI } from './use-permissions-table-api';
 

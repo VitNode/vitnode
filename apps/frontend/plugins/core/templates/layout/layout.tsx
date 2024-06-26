@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { PoweredByVitNode } from 'vitnode-frontend/views/global';
+import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
 import { Header } from './header/header';
 import { QuickMenu } from './quick-menu/quick-menu';
 import { TextLanguage } from '@/graphql/hooks';
-import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
 import './global.css';
 
 interface Props {

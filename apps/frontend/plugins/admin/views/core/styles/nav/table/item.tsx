@@ -1,9 +1,9 @@
 import { ExternalLink } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { FlatTree } from 'vitnode-frontend/helpers/flatten-tree';
+import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
 import { ShowCoreNav } from '@/graphql/hooks';
-import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
 import { ActionsTableNavAdmin } from './actions/actions';
 
 interface Props {

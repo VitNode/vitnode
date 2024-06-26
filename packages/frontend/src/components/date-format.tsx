@@ -1,14 +1,14 @@
 'use client';
 
 import * as React from 'react';
+
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from 'vitnode-frontend/components/ui/tooltip';
-
-import { useDateFormat } from './hooks/use-date-format';
+} from './ui/tooltip';
+import { useDateFormat } from './date-format-hooks/use-date-format';
 
 interface Props {
   date: Date;

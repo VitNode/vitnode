@@ -5,14 +5,14 @@ import { useTranslations } from 'next-intl';
 import { ColumnDef } from '@tanstack/react-table';
 import { ExternalLink } from 'lucide-react';
 import { Badge } from 'vitnode-frontend/components/ui/badge';
+import { DateFormat } from 'vitnode-frontend/components/date-format';
+import { DataTable } from 'vitnode-frontend/components/data-table/data-table';
+import { HeaderSortingDataTable } from 'vitnode-frontend/components/data-table/header';
 
 import {
   Admin__Core_Plugins__ShowQuery,
   ShowAdminPlugins,
 } from '@/graphql/hooks';
-import { HeaderSortingDataTable } from '@/components/data-table/header';
-import { DateFormat } from '@/components/date-format/date-format';
-import { DataTable } from '@/components/data-table/data-table';
 import { ActionsItemPluginsAdmin } from './table/actions/actions';
 
 export const PluginsCoreAdminView = ({

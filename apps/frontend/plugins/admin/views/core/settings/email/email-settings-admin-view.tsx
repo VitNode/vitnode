@@ -12,8 +12,8 @@ import { Button } from 'vitnode-frontend/components/ui/button';
 import { ColorInput } from 'vitnode-frontend/components/ui/color-input';
 import { Input } from 'vitnode-frontend/components/ui/input';
 import { Switch } from 'vitnode-frontend/components/ui/switch';
+import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
 
-import { HeaderContent } from '@/components/header-content/header-content';
 import { useEmailSettingsFormAdmin } from './hooks/use-email-settings-form-admin';
 import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/hooks';
 

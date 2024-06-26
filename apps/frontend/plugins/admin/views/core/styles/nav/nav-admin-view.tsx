@@ -3,8 +3,8 @@ import * as React from 'react';
 import { flattenTree } from 'vitnode-frontend/helpers/flatten-tree';
 import { Card } from 'vitnode-frontend/components/ui/card';
 import { Icon } from 'vitnode-frontend/components/icon/icon';
+import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
 
-import { HeaderContent } from '@/components/header-content/header-content';
 import { TableNavAdmin } from './table/table';
 import { Admin__Core_Nav__ShowQuery, ShowCoreNav } from '@/graphql/hooks';
 import { ActionsNavAdmin } from './actions/actions';

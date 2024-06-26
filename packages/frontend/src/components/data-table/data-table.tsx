@@ -1,6 +1,5 @@
 'use client';
 
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import {
   flexRender,
   getCoreRowModel,
@@ -12,6 +11,8 @@ import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import * as React from 'react';
 import { usePathname, useRouter } from 'vitnode-frontend/navigation';
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
+
 import {
   Table,
   TableBody,
@@ -19,25 +20,25 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from 'vitnode-frontend/components/ui/table';
+} from '../ui/table';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from 'vitnode-frontend/components/ui/tooltip';
+} from '../ui/tooltip';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from 'vitnode-frontend/components/ui/select';
-import { Button } from 'vitnode-frontend/components/ui/button';
-
+} from '../ui/select';
+import { Button } from '../ui/button';
 import { SkeletonDataTable } from './skeleton';
 import { ToolbarDataTable, ToolbarDataTableProps } from './toolbar/toolbar';
-import { PageInfo } from '@/graphql/hooks';
+
+import { PageInfo } from '../../graphql/hooks';
 
 interface TDataMin {
   id: number;

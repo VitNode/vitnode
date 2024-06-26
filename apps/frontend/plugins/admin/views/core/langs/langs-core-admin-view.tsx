@@ -4,12 +4,12 @@ import { useTranslations } from 'next-intl';
 import { ColumnDef } from '@tanstack/react-table';
 import * as React from 'react';
 import { Badge } from 'vitnode-frontend/components/ui/badge';
+import { DateFormat } from 'vitnode-frontend/components/date-format';
+import { DataTable } from 'vitnode-frontend/components/data-table/data-table';
+import { HeaderSortingDataTable } from 'vitnode-frontend/components/data-table/header';
 
 import { Core_Languages__ShowQuery, ShowCoreLanguages } from '@/graphql/hooks';
-import { HeaderSortingDataTable } from '@/components/data-table/header';
-import { DateFormat } from '@/components/date-format/date-format';
 import { ActionsTableLangsCoreAdmin } from './table/actions/actions';
-import { DataTable } from '@/components/data-table/data-table';
 import { EnabledRowTableLangsCoreAdmin } from './enabled-row';
 
 export interface LangsCoreAdminViewProps {

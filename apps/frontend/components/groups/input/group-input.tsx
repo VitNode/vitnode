@@ -10,11 +10,11 @@ import {
 import { Button } from 'vitnode-frontend/components/ui/button';
 import { Badge } from 'vitnode-frontend/components/ui/badge';
 import { Loader } from 'vitnode-frontend/components/ui/loader';
+import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
 import { GroupInputContent } from './content/content';
 
 import { TextLanguage } from '../../../graphql/hooks';
-import { useTextLang } from '../../../plugins/core/hooks/use-text-lang';
 
 export interface GroupInputItem {
   id: number;

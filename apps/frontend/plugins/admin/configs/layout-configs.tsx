@@ -3,8 +3,7 @@ import { useTranslations } from 'next-intl';
 import { Card } from 'vitnode-frontend/components/ui/card';
 import { LogoVitNode } from 'vitnode-frontend/components/logo-vitnode';
 import { PoweredByVitNode } from 'vitnode-frontend/views/global';
-
-import { DarkLightModeSwitcher } from '@/components/switchers/dark-light-mode-switcher';
+import { ThemeSwitcher } from 'vitnode-frontend/components/switchers/theme-switcher';
 
 interface Props {
   children: React.ReactNode;
@@ -28,7 +27,7 @@ export const LayoutConfigs = ({ children }: Props) => {
         <PoweredByVitNode />
 
         <div>
-          <DarkLightModeSwitcher />
+          <ThemeSwitcher />
         </div>
       </div>
     </div>

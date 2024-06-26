@@ -10,8 +10,7 @@ import {
 } from 'vitnode-frontend/components/ui/radio-group';
 import { Label } from 'vitnode-frontend/components/ui/label';
 import { Separator } from 'vitnode-frontend/components/ui/separator';
-
-import { HeaderContent } from '@/components/header-content/header-content';
+import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
 
 export const FilesSectionContentEditorAdmin = () => {
   const t = useTranslations('admin.core.styles.editor');

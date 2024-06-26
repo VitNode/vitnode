@@ -9,10 +9,10 @@ import {
 } from 'vitnode-frontend/components/ui/form';
 import { Input } from 'vitnode-frontend/components/ui/input';
 import { Button } from 'vitnode-frontend/components/ui/button';
+import { TextLanguageInput } from 'vitnode-frontend/components/ui/text-language-input';
 
 import { useSettingsCoreAdmin } from './hooks/use-settings-core-admin';
 import { Core_Main_Settings__ShowQuery } from '@/graphql/hooks';
-import { TextLanguageInput } from '@/components/text-language-input';
 
 export const GeneralSettingsCoreAdmin = (
   props: Core_Main_Settings__ShowQuery,

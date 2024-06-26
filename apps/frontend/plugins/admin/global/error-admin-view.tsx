@@ -10,7 +10,7 @@ import {
   CardHeader,
 } from 'vitnode-frontend/components/ui/card';
 
-import { ErrorViewProps } from '@/components/views/error-view-ssr';
+import { ErrorViewProps } from '@/plugins/core/templates/views/global/error/error-view';
 
 export const ErrorAdminView = ({ className, code }: ErrorViewProps) => {
   const t = useTranslations('core');

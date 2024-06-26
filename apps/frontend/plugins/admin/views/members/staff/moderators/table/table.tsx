@@ -5,11 +5,11 @@ import { ColumnDef } from '@tanstack/react-table';
 import * as React from 'react';
 import { InfinityIcon, ShieldAlert } from 'lucide-react';
 import { Badge } from 'vitnode-frontend/components/ui/badge';
+import { DateFormat } from 'vitnode-frontend/components/date-format';
+import { DataTable } from 'vitnode-frontend/components/data-table/data-table';
+import { HeaderSortingDataTable } from 'vitnode-frontend/components/data-table/header';
 
-import { DataTable } from '@/components/data-table/data-table';
 import { ShowAdminStaffModerators } from '@/graphql/hooks';
-import { DateFormat } from '@/components/date-format/date-format';
-import { HeaderSortingDataTable } from '@/components/data-table/header';
 import { UserLink } from '@/components/user/link/user-link';
 import { GroupFormat } from '@/components/groups/group-format';
 import { ModeratorsStaffAdminViewProps } from '../moderators-view';

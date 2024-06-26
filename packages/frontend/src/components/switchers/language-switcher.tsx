@@ -3,17 +3,19 @@
 
 import { Languages } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
-import { usePathname, useRouter } from 'vitnode-frontend/navigation';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from 'vitnode-frontend/components/ui/dropdown-menu';
-import { Button } from 'vitnode-frontend/components/ui/button';
-import { useGlobals } from 'vitnode-frontend/hooks/use-globals';
-import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
+} from '../ui/dropdown-menu';
+import { Button } from '../ui/button';
+
+import { useGlobals } from '../../hooks/use-globals';
+import { usePathname, useRouter } from '../../navigation';
+import { CONFIG } from '../../helpers/config-with-env';
 
 export const LanguageSwitcher = () => {
   const t = useTranslations('core');

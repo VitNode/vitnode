@@ -15,11 +15,11 @@ import {
 } from 'vitnode-frontend/components/ui/tooltip';
 import { buttonVariants } from 'vitnode-frontend/components/ui/button';
 import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
+import { DateFormat } from 'vitnode-frontend/components/date-format';
+import { DataTable } from 'vitnode-frontend/components/data-table/data-table';
+import { HeaderSortingDataTable } from 'vitnode-frontend/components/data-table/header';
 
-import { DataTable } from '@/components/data-table/data-table';
 import { Core_Members__Files__ShowQuery, ShowCoreFiles } from '@/graphql/hooks';
-import { DateFormat } from '@/components/date-format/date-format';
-import { HeaderSortingDataTable } from '@/components/data-table/header';
 
 export const ContentFilesSettings = ({
   core_files__show: { edges, pageInfo },

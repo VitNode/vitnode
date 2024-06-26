@@ -4,16 +4,17 @@ import { Moon, Sun } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import * as React from 'react';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from 'vitnode-frontend/components/ui/dropdown-menu';
-import { Button } from 'vitnode-frontend/components/ui/button';
+} from '../ui/dropdown-menu';
+import { Button } from '../ui/button';
 
-export const DarkLightModeSwitcher = () => {
+export const ThemeSwitcher = () => {
   const t = useTranslations('core.user-bar.dark_light_switcher');
   const { setTheme, theme } = useTheme();
 

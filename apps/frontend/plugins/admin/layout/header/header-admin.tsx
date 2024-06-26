@@ -1,10 +1,10 @@
 import { Link } from 'vitnode-frontend/navigation';
 import { LogoVitNode } from 'vitnode-frontend/components/logo-vitnode';
 import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
+import { ThemeSwitcher } from 'vitnode-frontend/components/switchers/theme-switcher';
+import { LanguageSwitcher } from 'vitnode-frontend/components/switchers/language-switcher';
 
 import { UserBarAdmin } from './user-bar/user-bar-admin';
-import { DarkLightModeSwitcher } from '@/components/switchers/dark-light-mode-switcher';
-import { LanguageSwitcher } from '@/components/switchers/language-switcher';
 import { NavAdmin } from '../nav/nav-admin';
 
 export const HeaderAdmin = () => {
@@ -30,7 +30,7 @@ export const HeaderAdmin = () => {
       <div className="flex h-full flex-1 items-center gap-5 px-5">
         <div className="ml-auto flex items-center justify-center gap-2">
           <LanguageSwitcher />
-          <DarkLightModeSwitcher />
+          <ThemeSwitcher />
           <UserBarAdmin navComponent={<NavAdmin />} />
         </div>
       </div>

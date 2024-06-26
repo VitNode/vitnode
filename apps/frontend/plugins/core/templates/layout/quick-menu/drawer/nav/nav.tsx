@@ -5,9 +5,9 @@ import { cn } from 'vitnode-frontend/helpers/classnames';
 import { buttonVariants } from 'vitnode-frontend/components/ui/button';
 import { Separator } from 'vitnode-frontend/components/ui/separator';
 import { useSession } from 'vitnode-frontend/hooks/use-session';
+import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
 import { ItemNavDrawerQuickMenu } from './item';
-import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
 import { classNameDrawerQuickMenu } from '../drawer';
 
 interface Props {

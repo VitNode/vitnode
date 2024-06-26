@@ -6,9 +6,9 @@ import * as React from 'react';
 import { Link, usePathname } from 'vitnode-frontend/navigation';
 import { cn } from 'vitnode-frontend/helpers/classnames';
 import { buttonVariants } from 'vitnode-frontend/components/ui/button';
+import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
 import { ShowCoreNav } from '@/graphql/hooks';
-import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
 
 interface Props extends Omit<ShowCoreNav, 'icon'> {
   icons: { icon: React.ReactNode; id: number }[];

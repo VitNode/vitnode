@@ -1,5 +1,6 @@
+import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
+
 import { TextLanguage } from '@/graphql/hooks';
-import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
 
 interface Props {
   group: {

@@ -2,8 +2,8 @@ import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 import { Card } from 'vitnode-frontend/components/ui/card';
 import { fetcher } from 'vitnode-frontend/graphql/fetcher';
+import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
 
-import { HeaderContent } from '@/components/header-content/header-content';
 import {
   Core_Main_Settings__Show,
   Core_Main_Settings__ShowQuery,

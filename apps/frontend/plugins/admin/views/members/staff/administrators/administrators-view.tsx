@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { Card } from 'vitnode-frontend/components/ui/card';
+import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
 
-import { HeaderContent } from '@/components/header-content/header-content';
 import { Admin__Core_Staff_Administrators__ShowQuery } from '@/graphql/hooks';
 import { TableAdministratorsStaffAdmin } from './table/table';
 import { ActionsAdministratorsStaffAdmin } from './actions/actions';

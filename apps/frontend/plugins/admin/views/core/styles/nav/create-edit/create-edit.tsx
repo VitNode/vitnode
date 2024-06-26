@@ -17,12 +17,12 @@ import {
   DialogTitle,
 } from 'vitnode-frontend/components/ui/dialog';
 import { IconInput } from 'vitnode-frontend/components/icon/input/icon-input';
+import { TextLanguageInput } from 'vitnode-frontend/components/ui/text-language-input';
 
 import {
   useCreateEditNavAdmin,
   CreateEditNavAdminArgs,
 } from './hooks/use-create-edit-nav-admin';
-import { TextLanguageInput } from '@/components/text-language-input';
 
 export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
   const t = useTranslations('admin.core.styles.nav');

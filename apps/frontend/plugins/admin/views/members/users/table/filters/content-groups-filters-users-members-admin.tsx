@@ -1,5 +1,6 @@
-import { ContentFilterToolbarDataTable } from '@/components/data-table/toolbar/filter/content/content';
-import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
+import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
+import { ContentFilterToolbarDataTable } from 'vitnode-frontend/components/data-table/toolbar/filter/content/content';
+
 import { useShortShowGroupsAdminAPI } from '@/plugins/admin/hooks/api/use-short-show-groups-admin-api';
 
 export const ContentGroupsFiltersUsersMembersAdmin = () => {

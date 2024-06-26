@@ -5,9 +5,9 @@ import { useTranslations } from 'next-intl';
 import * as z from 'zod';
 import { usePathname, useRouter } from 'vitnode-frontend/navigation';
 import { useAlertDialog } from 'vitnode-frontend/components/ui/alert-dialog';
+import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
 import { mutationApi } from './mutation-api';
-import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
 import { ShowAdminGroups } from '@/graphql/hooks';
 
 export const useDeleteGroupAdmin = ({
