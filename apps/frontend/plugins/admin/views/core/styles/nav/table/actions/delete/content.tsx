@@ -13,11 +13,11 @@ import {
   AlertTitle,
 } from 'vitnode-frontend/components/ui/alert';
 import { Button } from 'vitnode-frontend/components/ui/button';
+import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
 import { ShowCoreNav } from '@/graphql/hooks';
 import { useDeleteNavAdmin } from './hooks/use-delete-nav-admin';
 import { SubmitDeleteActionTableNavAdmin } from './submit';
-import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
 
 export const ContentDeleteActionTableNavAdmin = ({
   children,

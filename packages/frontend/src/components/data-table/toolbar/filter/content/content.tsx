@@ -3,8 +3,11 @@ import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import * as React from 'react';
 import { useDebouncedCallback } from 'use-debounce';
-import { usePathname, useRouter } from 'vitnode-frontend/navigation';
-import { cn } from 'vitnode-frontend/helpers/classnames';
+
+import { ListContentFilterToolbarDataTable } from './list';
+import { useFilterToolbarDataTable } from '../hooks/use-filter-toolbar-data-table';
+
+import { usePathname, useRouter } from '../../../../../navigation';
 import {
   Command,
   CommandEmpty,
@@ -14,11 +17,9 @@ import {
   CommandList,
   CommandSeparator,
   commandInputClassName,
-} from 'vitnode-frontend/components/ui/command';
-import { Input } from 'vitnode-frontend/components/ui/input';
-
-import { ListContentFilterToolbarDataTable } from './list';
-import { useFilterToolbarDataTable } from '../hooks/use-filter-toolbar-data-table';
+} from '../../../../ui/command';
+import { Input } from '../../../../ui/input';
+import { cn } from '../../../../../helpers/classnames';
 
 export interface ContentFilterToolbarDataTableProps {
   options: {

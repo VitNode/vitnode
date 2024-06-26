@@ -1,9 +1,9 @@
-import { ErrorViewSSR } from '@/components/views/error-view-ssr';
+import { ErrorView } from '@/plugins/core/templates/views/global/error/error-view';
 
 export default function NotFoundPage() {
   return (
     <div className="container">
-      <ErrorViewSSR code="404" />
+      <ErrorView code="404" />
     </div>
   );
 }

@@ -3,10 +3,10 @@ import { Link } from 'vitnode-frontend/navigation';
 import { buttonVariants } from 'vitnode-frontend/components/ui/button';
 import { DrawerClose } from 'vitnode-frontend/components/ui/drawer';
 import { useSession } from 'vitnode-frontend/hooks/use-session';
+import { ThemeSwitcher } from 'vitnode-frontend/components/switchers/theme-switcher';
+import { LanguageSwitcher } from 'vitnode-frontend/components/switchers/language-switcher';
 
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
-import { DarkLightModeSwitcher } from '@/components/switchers/dark-light-mode-switcher';
-import { LanguageSwitcher } from '@/components/switchers/language-switcher';
 
 export const HeaderDrawerQuickMenu = () => {
   const t = useTranslations('core');
@@ -42,7 +42,7 @@ export const HeaderDrawerQuickMenu = () => {
 
         <div className="mt-5 flex justify-center gap-2">
           <LanguageSwitcher />
-          <DarkLightModeSwitcher />
+          <ThemeSwitcher />
         </div>
       </div>
     );
@@ -61,7 +61,7 @@ export const HeaderDrawerQuickMenu = () => {
 
       <div className="flex gap-2">
         <LanguageSwitcher />
-        <DarkLightModeSwitcher />
+        <ThemeSwitcher />
       </div>
     </div>
   );

@@ -1,17 +1,14 @@
-import { PlusCircledIcon } from '@radix-ui/react-icons';
 import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from 'vitnode-frontend/components/ui/popover';
-import { Button } from 'vitnode-frontend/components/ui/button';
-import { Separator } from 'vitnode-frontend/components/ui/separator';
-import { Badge } from 'vitnode-frontend/components/ui/badge';
-import { Loader } from 'vitnode-frontend/components/ui/loader';
+import { PlusCircle } from 'lucide-react';
 
 import { FilterToolbarDataTableContext } from './hooks/use-filter-toolbar-data-table';
+
+import { Popover, PopoverContent, PopoverTrigger } from '../../../ui/popover';
+import { Button } from '../../../ui/button';
+import { Separator } from '../../../ui/separator';
+import { Badge } from '../../../ui/badge';
+import { Loader } from '../../../ui/loader';
 
 export interface FilterToolbarDataTableProps {
   children: React.ReactNode;
@@ -31,7 +28,7 @@ export function FilterToolbarDataTable({
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline" size="sm" className="h-10">
-          <PlusCircledIcon className="mr-2 size-4" />
+          <PlusCircle className="mr-2 size-4" />
           {title}
           {selectedValues.length > 0 && (
             <>

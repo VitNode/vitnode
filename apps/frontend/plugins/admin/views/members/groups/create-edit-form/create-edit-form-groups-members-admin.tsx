@@ -9,12 +9,12 @@ import {
 import { Button } from 'vitnode-frontend/components/ui/button';
 import { Form } from 'vitnode-frontend/components/ui/form';
 import { Tabs, TabsTrigger } from 'vitnode-frontend/components/ui/tabs';
+import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
 import {
   useCreateEditFormGroupsMembersAdmin,
   CreateEditFormGroupsMembersAdminArgs,
 } from './hooks/use-create-edit-form-groups-members-admin';
-import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
 import { MainContentCreateEditFormGroupsMembersAdmin } from './content/main';
 import { ContentContentCreateEditFormGroupsMembersAdmin } from './content/content';
 

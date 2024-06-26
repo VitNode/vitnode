@@ -12,8 +12,7 @@ import { Input } from 'vitnode-frontend/components/ui/input';
 import { Switch } from 'vitnode-frontend/components/ui/switch';
 import { Label } from 'vitnode-frontend/components/ui/label';
 import { Checkbox } from 'vitnode-frontend/components/ui/checkbox';
-
-import { HeaderContent } from '@/components/header-content/header-content';
+import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
 
 interface Props {
   isGuest?: boolean;

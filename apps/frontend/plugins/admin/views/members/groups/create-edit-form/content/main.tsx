@@ -10,8 +10,7 @@ import {
 import { ColorInput } from 'vitnode-frontend/components/ui/color-input';
 import { Separator } from 'vitnode-frontend/components/ui/separator';
 import { IconInput } from 'vitnode-frontend/components/icon/input/icon-input';
-
-import { TextLanguageInput } from '@/components/text-language-input';
+import { TextLanguageInput } from 'vitnode-frontend/components/ui/text-language-input';
 
 export const MainContentCreateEditFormGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.groups.create_edit');

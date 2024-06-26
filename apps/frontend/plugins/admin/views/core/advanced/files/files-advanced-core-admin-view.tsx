@@ -14,10 +14,10 @@ import {
   TooltipTrigger,
 } from 'vitnode-frontend/components/ui/tooltip';
 import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
+import { DateFormat } from 'vitnode-frontend/components/date-format';
+import { DataTable } from 'vitnode-frontend/components/data-table/data-table';
+import { HeaderSortingDataTable } from 'vitnode-frontend/components/data-table/header';
 
-import { DataTable } from '@/components/data-table/data-table';
-import { HeaderSortingDataTable } from '@/components/data-table/header';
-import { DateFormat } from '@/components/date-format/date-format';
 import { Admin__Core_Files__ShowQuery } from '@/graphql/hooks';
 import { ActionsFilesAdvancedCoreAdmin } from './actions/actions';
 

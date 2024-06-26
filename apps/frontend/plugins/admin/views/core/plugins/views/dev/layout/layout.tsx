@@ -4,10 +4,10 @@ import { ExternalLink } from 'lucide-react';
 import { Badge } from 'vitnode-frontend/components/ui/badge';
 import { Card } from 'vitnode-frontend/components/ui/card';
 import { Tabs, TabsTrigger } from 'vitnode-frontend/components/ui/tabs';
+import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
+import { DateFormat } from 'vitnode-frontend/components/date-format';
 
 import { Admin__Core_Plugins__Show__ItemQuery } from '@/graphql/hooks';
-import { HeaderContent } from '@/components/header-content/header-content';
-import { DateFormat } from '@/components/date-format/date-format';
 import { ActionsDevPluginAdmin } from './actions/actions';
 
 interface Props extends Admin__Core_Plugins__Show__ItemQuery {

@@ -6,6 +6,7 @@ import {
   CardHeader,
 } from 'vitnode-frontend/components/ui/card';
 import { fetcher } from 'vitnode-frontend/graphql/fetcher';
+import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
 
 import { CategoriesBlogAdminView } from '@/plugins/blog/admin/views/categories/categories-view';
 import {
@@ -13,7 +14,6 @@ import {
   Admin_Blog_Categories__ShowQuery,
   Admin_Blog_Categories__ShowQueryVariables,
 } from '@/graphql/hooks';
-import { HeaderContent } from '@/components/header-content/header-content';
 import { CreateCategoryBlogAdmin } from '@/plugins/blog/admin/views/categories/actions/create';
 
 const getData = async () => {

@@ -1,16 +1,14 @@
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
-import { CheckIcon } from '@radix-ui/react-icons';
-import { usePathname, useRouter } from 'vitnode-frontend/navigation';
-import { cn } from 'vitnode-frontend/helpers/classnames';
-import { Loader } from 'vitnode-frontend/components/ui/loader';
-import {
-  CommandGroup,
-  CommandItem,
-} from 'vitnode-frontend/components/ui/command';
+import { CheckIcon } from 'lucide-react';
 
 import { ContentFilterToolbarDataTableProps } from './content';
 import { useFilterToolbarDataTable } from '../hooks/use-filter-toolbar-data-table';
+
+import { Loader } from '../../../../ui/loader';
+import { usePathname, useRouter } from '../../../../../navigation';
+import { CommandGroup, CommandItem } from '../../../../ui/command';
+import { cn } from '../../../../../helpers/classnames';
 
 export const ListContentFilterToolbarDataTable = ({
   isFetching,

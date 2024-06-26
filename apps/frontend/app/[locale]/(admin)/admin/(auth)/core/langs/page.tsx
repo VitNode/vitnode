@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { Card } from 'vitnode-frontend/components/ui/card';
 import { fetcher } from 'vitnode-frontend/graphql/fetcher';
+import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
 
 import {
   Core_Languages__Show,
@@ -13,7 +14,6 @@ import {
   usePaginationAPISsr,
   SearchParamsPagination,
 } from '@/plugins/core/hooks/utils/use-pagination-api-ssr';
-import { HeaderContent } from '@/components/header-content/header-content';
 import { ActionsLangsAdmin } from '@/plugins/admin/views/core/langs/actions/actions';
 import { RebuildRequiredAdmin } from '@/plugins/admin/global/rebuild-required';
 import { LangsCoreAdminView } from '@/plugins/admin/views/core/langs/langs-core-admin-view';

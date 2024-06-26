@@ -8,8 +8,7 @@ import {
   FormMessage,
 } from 'vitnode-frontend/components/ui/form';
 import { ColorInput } from 'vitnode-frontend/components/ui/color-input';
-
-import { TextLanguageInput } from '@/components/text-language-input';
+import { TextLanguageInput } from 'vitnode-frontend/components/ui/text-language-input';
 
 export const MainTabCreateEditCategoryBlogAdmin = () => {
   const t = useTranslations('blog.admin.categories');

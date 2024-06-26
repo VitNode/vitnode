@@ -12,14 +12,14 @@ import {
   TooltipTrigger,
 } from 'vitnode-frontend/components/ui/tooltip';
 import { buttonVariants } from 'vitnode-frontend/components/ui/button';
+import { DateFormat } from 'vitnode-frontend/components/date-format';
+import { DataTable } from 'vitnode-frontend/components/data-table/data-table';
+import { HeaderSortingDataTable } from 'vitnode-frontend/components/data-table/header';
+import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
-import { DataTable } from '@/components/data-table/data-table';
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
-import { DateFormat } from '@/components/date-format/date-format';
 import { GroupsFiltersUsersMembersAdmin } from './filters/groups-filters-users-members-admin';
 import { AdvancedFiltersUsersMembersAdmin } from './filters/advanced/advanced-filters-users-members-admin';
-import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
-import { HeaderSortingDataTable } from '@/components/data-table/header';
 import { UsersMembersAdminViewProps } from '../users-members-admin-view';
 import { ShowAdminMembers } from '@/graphql/hooks';
 

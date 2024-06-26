@@ -6,9 +6,9 @@ import { toast } from 'sonner';
 import { zodInput } from 'vitnode-frontend/helpers/zod';
 import { useDialog } from 'vitnode-frontend/components/ui/dialog';
 import { ErrorType } from 'vitnode-frontend/graphql/fetcher';
+import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
 import { mutationApi } from './mutation-api';
-import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
 
 export const useFormCreateEditFormGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.staff');

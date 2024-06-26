@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { cn } from 'vitnode-frontend/helpers/classnames';
+
+import { cn } from '../../helpers/classnames';
 
 interface HeaderContentProps {
   children?: React.ReactNode;
