@@ -1,0 +1,197 @@
+import { Steps } from "nextra/components";
+import { Callout } from "nextra/components";
+
+# Dialog
+
+Dialog component is from [Shadcn UI](https://ui.shadcn.com/docs/components/dialog), but in VitNode, it is a little different. We're using [React Lazy](https://react.dev/reference/react/lazy) to lazy load the dialog content.
+
+## Example use
+
+<Steps>
+
+### Define trigger
+
+We're create `test.tsx` file as example.
+
+```tsx
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+
+export const Test = () => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="ghost" size="icon" ariaLabel="Edit">
+          <Pencil />
+        </Button>
+      </DialogTrigger>
+    </Dialog>
+  );
+};
+```
+
+### Define content
+
+```tsx
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+
+export const Test = () => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>...</DialogTrigger>
+
+      <DialogContent>
+        <div>Content</div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+```
+
+### Lazy load content
+
+To improve performance and reduce the size of the initial bundle use [React Lazy](https://react.dev/reference/react/lazy) to lazy load the dialog content.
+
+Your dialog content should be in a separate file, for example `modal-test.tsx`.
+
+```tsx
+import { DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+
+export const ModalTest = () => {
+  return (
+    <>
+     <DialogHeader>
+        <DialogTitle>This is title</DialogTitle>
+        <DialogDescription>This is description</DialogDescription>
+      </DialogHeader>
+
+      <div>Content</div>
+
+      <DialogFooter>
+        <DialogClose asChild>
+          <Button variant="ghost">
+            Close
+          </Button>
+        </DialogClose>
+      </DialogFooter>
+    <>
+  );
+};
+```
+
+And then, import it in `test.tsx` file with `Suspance` and `Loader` component.
+
+```tsx
+import { Suspense, lazy } from "react";
+
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Loader } from "@/components/loader/loader";
+
+const ModalTest = lazy(() =>
+  import("./modal-test").then(module => ({
+    default: module.ModalTest
+  }))
+);
+
+export const Test = () => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>...</DialogTrigger>
+
+      <DialogContent>
+        <Suspense fallback={<Loader />}>
+          <ModalTest />
+        </Suspense>
+      </DialogContent>
+    </Dialog>
+  );
+};
+```
+
+</Steps>
+
+<Callout type="info" emoji="ℹ️">
+  We're recomended to create each dialog in separate file. It's will help you to
+  manage your code. One for trigger dialog and one for content dialog.
+</Callout>
+
+## Tooltip with Dialog Trigger
+
+You can use `Tooltip` component to create tooltip with dialog trigger. Here is the example:
+
+```tsx
+import { Suspense, lazy } from "react";
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Loader } from "@/components/loader/loader";
+
+const ModalTest = lazy(() =>
+  import("./modal-test").then(module => ({
+    default: module.ModalTest
+  }))
+);
+
+export const Test = () => {
+  return (
+    <TooltipProvider>
+      <Dialog>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <DialogTrigger asChild>...</DialogTrigger>
+          </TooltipTrigger>
+
+          <DialogContent>
+            <Suspense fallback={<Loader />}>
+              <ModalTest />
+            </Suspense>
+          </DialogContent>
+
+          <TooltipContent>
+            <p>Tooltip Content</p>
+          </TooltipContent>
+        </Tooltip>
+      </Dialog>
+    </TooltipProvider>
+  );
+};
+```
+
+## Alert Dialog
+
+In this component rules are the same.
+
+## Hook State
+
+We're created context to control dialog state `open` and `setOpen`. You can use it as hook inside dialog component.
+
+import { Tabs } from 'nextra/components';
+ 
+<Tabs items={['Dialog', 'AlertDialog']}>
+  <Tabs.Tab>
+  
+  ```tsx
+  import { useDialog } from '@/components/ui/dialog';
+  
+  const { open, setOpen } = useDialog();
+  ```
+  
+  </Tabs.Tab>
+  <Tabs.Tab>
+  
+  ```tsx
+  import { useAlertDialog } from '@/components/ui/alert-dialog';
+  
+  const { open, setOpen } = useAlertDialog();
+  ```
+  
+  </Tabs.Tab>
+</Tabs
+
+>

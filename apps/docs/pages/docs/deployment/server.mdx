@@ -1,0 +1,214 @@
+import { Steps } from "nextra/components";
+import { Tabs } from "nextra/components";
+
+# Configuration Server
+
+Now let's configure the server to run the application.
+
+## Update & Download Packages
+
+<Tabs items={['Manual', 'Fast']}>
+  <Tabs.Tab>
+<Steps>
+### Update system
+
+```bash
+apt update && apt upgrade -d -y
+```
+
+### Install Nginx
+
+```bash
+apt install nginx -y
+```
+
+### Install sudo
+
+```bash
+apt install sudo -y
+```
+
+### Install Docker
+
+https://docs.docker.com/engine/install/debian/
+
+</Steps>
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+
+```bash
+apt update &&\
+ apt upgrade -d -y &&\
+ apt install nginx -y &&\
+ apt install sudo -y &&\
+ apt install ca-certificates curl &&\
+ install -m 0755 -d /etc/apt/keyrings &&\
+ curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc &&\
+ chmod a+r /etc/apt/keyrings/docker.asc &&\
+ echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  tee /etc/apt/sources.list.d/docker.list > /dev/null &&\
+  apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+```
+
+  </Tabs.Tab>
+</Tabs>
+
+## Swap Memory
+
+Swap memory is a space on a disk that is used when the amount of physical RAM memory is full. When a Linux system runs out of RAM, inactive pages are moved from the RAM to the swap space.
+
+<Tabs items={['Manual', 'Fast']}>
+  <Tabs.Tab>
+   <Steps>
+
+### Create swap file
+
+```bash
+fallocate -l 2G /swapfile
+```
+
+### Secure swap file
+
+```bash
+chmod 600 /swapfile
+```
+
+### Create swap area
+
+```bash
+mkswap /swapfile
+```
+
+### Active swap
+
+```bash
+swapon /swapfile
+```
+
+  </Steps>
+</Tabs.Tab>
+<Tabs.Tab>
+
+```bash
+fallocate -l 2G /swapfile &&\
+ chmod 600 /swapfile &&\
+ mkswap /swapfile &&\
+ swapon /swapfile
+```
+
+</Tabs.Tab>
+</Tabs>
+
+## Configuration Nginx
+
+<Steps>
+
+### Create config file
+
+Go to the `/etc/nginx/sites-available` directory and create a new file `vitnode.conf` with the following content:
+
+```nginx {7, 10-11, 26, 29-30, 42}
+server {
+  listen 443 ssl http2;
+
+  ssl_certificate         /etc/nginx/sites-available/ssl/cert-vitnode.pem;
+  ssl_certificate_key     /etc/nginx/sites-available/ssl/key-vitnode.pem;
+
+  server_name frontend.vitnode.com www.frontend.vitnode.com;
+
+  # Redirect from www to non-www
+  if ($host = www.frontend.vitnode.com) {
+    return 301 https://frontend.vitnode.com$request_uri;
+  }
+
+  location / {
+    proxy_pass http://localhost:3000;
+    proxy_set_header X-Forwarded-Host $host;
+  }
+}
+
+server {
+  listen 443 ssl http2;
+
+  ssl_certificate         /etc/nginx/sites-available/ssl/cert-vitnode.pem;
+  ssl_certificate_key     /etc/nginx/sites-available/ssl/key-vitnode.pem;
+
+  server_name backend.vitnode.com www.backend.vitnode.com;
+
+  # Redirect from www to non-www
+  if ($host = www.backend.vitnode.com) {
+    return 301 https://backend.vitnode.com$request_uri;
+  }
+
+  location / {
+    proxy_pass http://localhost:8080;
+    proxy_set_header X-Forwarded-Host $host;
+  }
+}
+
+server {
+  listen 80;
+
+  server_name frontend.vitnode.com www.frontend.vitnode.com backend.vitnode.com www.backend.vitnode.com;
+
+  return 301 https://$server_name$request_uri;
+}
+```
+
+Change `frontend.vitnode.com` to your domain for the frontend and `backend.vitnode.com` to your domain for the backend.
+
+### Finish configuration
+
+<Tabs items={['Manual', 'Fast']}>
+  <Tabs.Tab>
+
+Create a symbolic link to the `sites-enabled` directory:
+
+```bash
+ln -s /etc/nginx/sites-available/vitnode.conf /etc/nginx/sites-enabled/
+```
+
+Create a directory for SSL certificates:
+
+```bash
+mkdir /etc/nginx/sites-available/ssl
+```
+
+Remove the default configuration:
+
+```bash
+rm /etc/nginx/sites-enabled/default &&\
+  rm /etc/nginx/sites-available/default
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+
+```bash
+ln -s /etc/nginx/sites-available/vitnode.conf /etc/nginx/sites-enabled/ &&\
+  mkdir /etc/nginx/sites-available/ssl &&\
+  rm /etc/nginx/sites-enabled/default &&\
+  rm /etc/nginx/sites-available/default
+```
+
+    </Tabs.Tab>
+
+</Tabs>
+
+### Upload SSL certificate
+
+Open the `/etc/nginx/sites-available/ssl` directory and upload:
+
+- SSL certificate - `cert-vitnode.pem`,
+- Key - `key-vitnode.pem`
+
+### Restart Nginx
+
+```bash
+systemctl restart nginx
+```
+
+</Steps>

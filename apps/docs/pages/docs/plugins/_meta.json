@@ -1,0 +1,13 @@
+{
+  "overview": "Overview",
+  "git": "Git",
+  "database": "Database",
+  "authorization": "Authorization",
+  "i18n": "Internationalization (i18n)",
+  "admin-pages": "Admin Pages",
+  "pages": "Pages",
+  "sitemap": "Sitemap",
+  "files": "Files",
+  "emails": "Emails",
+  "backend-context": "Backend Context"
+}
