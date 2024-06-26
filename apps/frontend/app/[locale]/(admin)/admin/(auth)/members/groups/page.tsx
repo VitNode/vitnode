@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
 import {
   Admin__Core_Groups__Show,
@@ -11,7 +12,6 @@ import {
   usePaginationAPISsr,
   SearchParamsPagination,
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
-import { fetcher } from "@/graphql/fetcher";
 import { GroupsMembersAdminView } from "@/plugins/admin/views/members/groups/groups-members-admin-view";
 
 interface Props {

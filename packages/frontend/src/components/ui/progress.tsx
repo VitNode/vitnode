@@ -3,7 +3,7 @@
 import * as ProgressPrimitive from "@radix-ui/react-progress";
 import { ComponentPropsWithoutRef } from "react";
 
-import { cn } from "../../helpers";
+import { cn } from "../../helpers/classnames";
 
 const Progress = ({
   className,

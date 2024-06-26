@@ -6,11 +6,11 @@ import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "vitnode-frontend/navigation";
 import { zodInput } from "vitnode-frontend/helpers/zod";
 import { useDialog } from "vitnode-frontend/components/ui/dialog";
+import { ErrorType } from "vitnode-frontend/helpers/fetcher";
 
 import { mutationCreateApi } from "./mutation-create-api";
 import { ShowAdminPlugins } from "@/graphql/hooks";
 import { mutationEditApi } from "./mutation-edit-api";
-import { ErrorType } from "@/graphql/fetcher";
 import { useSessionAdmin } from "@/plugins/admin/hooks/use-session-admin";
 
 export const codePluginRegex = /^[a-z0-9-]*$/;

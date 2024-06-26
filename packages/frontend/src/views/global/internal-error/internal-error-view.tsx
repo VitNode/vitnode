@@ -7,7 +7,7 @@ import { mutationClearCache } from "./mutation-clear-cache";
 import { PoweredByVitNode } from "../powered-by";
 
 import { useRouter } from "../../../navigation";
-import { CONFIG } from "../../../helpers";
+import { CONFIG } from "../../../helpers/config-with-env";
 import {
   Card,
   CardContent,

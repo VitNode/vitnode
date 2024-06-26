@@ -7,7 +7,7 @@ import { Search } from "lucide-react";
 
 import { Dialog, DialogContent } from "./dialog";
 
-import { cn } from "../../helpers";
+import { cn } from "../../helpers/classnames";
 
 const Command = ({
   className,

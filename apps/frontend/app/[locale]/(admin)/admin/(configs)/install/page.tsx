@@ -1,7 +1,7 @@
 import { redirect } from "vitnode-frontend/navigation";
 import { InternalErrorView } from "vitnode-frontend/views/global";
 
-import { ErrorType, fetcher } from "@/graphql/fetcher";
+import { ErrorType, fetcher } from "vitnode-frontend/helpers/fetcher";
 import {
   Admin__Install__Layout,
   Admin__Install__LayoutQuery,

@@ -1,13 +1,13 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
 import {
   Admin__Core_Plugins__Nav__Change_Position,
   Admin__Core_Plugins__Nav__Change_PositionMutation,
   Admin__Core_Plugins__Nav__Change_PositionMutationVariables,
 } from "@/graphql/hooks";
-import { fetcher } from "@/graphql/fetcher";
 
 export const mutationChangePositionApi = async (
   variables: Admin__Core_Plugins__Nav__Change_PositionMutationVariables,

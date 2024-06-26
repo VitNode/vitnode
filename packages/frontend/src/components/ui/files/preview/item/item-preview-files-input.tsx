@@ -2,7 +2,7 @@ import * as React from "react";
 import { X } from "lucide-react";
 
 import { Img } from "../../../../img";
-import { acceptMimeTypeImage } from "../../../../../helpers";
+import { acceptMimeTypeImage } from "../../../../../helpers/files-support";
 
 interface Props {
   file: File;

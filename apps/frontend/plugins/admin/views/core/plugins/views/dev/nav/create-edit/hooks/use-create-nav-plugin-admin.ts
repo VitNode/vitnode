@@ -6,10 +6,10 @@ import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { zodInput } from "vitnode-frontend/helpers/zod";
 import { useDialog } from "vitnode-frontend/components/ui/dialog";
+import { ErrorType } from "vitnode-frontend/helpers/fetcher";
 
 import { createMutationApi } from "./create-mutation-api";
 import { editMutationApi } from "./edit-mutation-api";
-import { ErrorType } from "@/graphql/fetcher";
 import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
 
 interface Props {

@@ -1,9 +1,10 @@
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
+
 import {
   Core_Theme_Editor__Show,
   Core_Theme_Editor__ShowQuery,
   Core_Theme_Editor__ShowQueryVariables,
 } from "@/graphql/hooks";
-import { fetcher } from "@/graphql/fetcher";
 import { ThemeEditorView } from "@/plugins/admin/views/theme_editor/theme-editor-view";
 import { ErrorAdminView } from "@/plugins/admin/global/error-admin-view";
 import { getSessionData } from "@/graphql/get-session-data";

@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Card } from "vitnode-frontend/components/ui/card";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { EmailSettingsAdminView } from "@/plugins/admin/views/core/settings/email/email-settings-admin-view";
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Email_Settings__Show,
   Admin__Core_Email_Settings__ShowQuery,

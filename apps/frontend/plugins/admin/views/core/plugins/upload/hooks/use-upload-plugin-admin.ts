@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
 import { useDialog } from "vitnode-frontend/components/ui/dialog";
+import { ErrorType } from "vitnode-frontend/helpers/fetcher";
 
 import { mutationApi } from "./mutation-api";
 import { UploadPluginAdminProps } from "../upload";
-import { ErrorType } from "@/graphql/fetcher";
 
 export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
   const t = useTranslations("admin.core.plugins.upload");

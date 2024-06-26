@@ -73,7 +73,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@hookform/devtools": "^4.3.1",
     "@hookform/resolvers": "^3.6.0",
     "@next/bundle-analyzer": "15.0.0-rc.0",
     "@tailwindcss/container-queries": "^0.1.1",

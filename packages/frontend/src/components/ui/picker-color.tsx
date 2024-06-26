@@ -19,7 +19,7 @@ import {
 } from "./tooltip";
 import { Button } from "./button";
 
-import { cn } from "../../helpers";
+import { cn } from "../../helpers/classnames";
 
 const presetColors: { color: HslColor; name: string }[] = [
   {

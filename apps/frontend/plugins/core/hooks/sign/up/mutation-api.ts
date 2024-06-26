@@ -1,13 +1,13 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
 import {
   Core_Members__Sign_Up,
   Core_Members__Sign_UpMutation,
   Core_Members__Sign_UpMutationVariables,
 } from "@/graphql/hooks";
-import { fetcher } from "@/graphql/fetcher";
 
 export const mutationApi = async (
   variables: Core_Members__Sign_UpMutationVariables,

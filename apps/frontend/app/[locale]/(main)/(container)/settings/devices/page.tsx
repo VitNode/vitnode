@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cookies } from "next/headers";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
 import {
   Core_Sessions__Devices__Show,
@@ -7,7 +8,6 @@ import {
   Core_Sessions__Devices__ShowQueryVariables,
 } from "@/graphql/hooks";
 import { DevicesSettingsView } from "@/plugins/core/templates/views/settings/views/devices/devices-settings-view";
-import { fetcher } from "@/graphql/fetcher";
 
 const getData = async () => {
   const { data } = await fetcher<

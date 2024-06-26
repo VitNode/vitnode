@@ -5,7 +5,8 @@ import { toast } from "sonner";
 
 import { PreviewFilesInput } from "./files/preview/preview-files-input";
 
-import { cn, useMergeRefs } from "../../helpers";
+import { useMergeRefs } from "../../helpers/use-merge-refs";
+import { cn } from "../../helpers/classnames";
 
 export interface FilesInputInputProps
   extends Omit<

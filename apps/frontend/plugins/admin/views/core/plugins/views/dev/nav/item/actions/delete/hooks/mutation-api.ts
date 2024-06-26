@@ -1,13 +1,13 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
 import {
   Admin__Core_Plugins__Nav__Delete,
   Admin__Core_Plugins__Nav__DeleteMutation,
   Admin__Core_Plugins__Nav__DeleteMutationVariables,
 } from "@/graphql/hooks";
-import { fetcher } from "@/graphql/fetcher";
 
 interface Args extends Admin__Core_Plugins__Nav__DeleteMutationVariables {
   pluginCode: string;

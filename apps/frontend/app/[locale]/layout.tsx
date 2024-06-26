@@ -3,13 +3,13 @@ import { GeistSans } from "geist/font/sans";
 import { Metadata } from "next";
 import { RootLayout } from "vitnode-frontend/views/root-layout";
 import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
 import {
   Core_Middleware,
   Core_MiddlewareQuery,
   Core_MiddlewareQueryVariables,
 } from "@/graphql/hooks";
-import { fetcher } from "@/graphql/fetcher";
 import "@/app/[locale]/(admin)/admin/global.css";
 import "./global.css";
 

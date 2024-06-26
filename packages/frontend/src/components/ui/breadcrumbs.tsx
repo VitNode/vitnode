@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 
 import { buttonVariants } from "./button";
 
-import { cn } from "../../helpers";
+import { cn } from "../../helpers/classnames";
 import { Link } from "../../navigation";
 
 interface Props {

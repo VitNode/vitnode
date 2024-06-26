@@ -5,7 +5,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { cn } from "../../helpers";
+import { cn } from "../../helpers/classnames";
 
 interface DialogContextArgs {
   isDirty?: boolean;

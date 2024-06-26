@@ -6,7 +6,7 @@ import { VariantProps } from "class-variance-authority";
 
 import { toggleVariants } from "./toggle";
 
-import { cn } from "../../helpers";
+import { cn } from "../../helpers/classnames";
 
 const ToggleGroupContext = React.createContext<
   VariantProps<typeof toggleVariants>
