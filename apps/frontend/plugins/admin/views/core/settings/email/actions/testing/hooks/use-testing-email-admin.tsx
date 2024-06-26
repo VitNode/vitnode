@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
 import { useDialog } from 'vitnode-frontend/components/ui/dialog';
+import { useSessionAdmin } from 'vitnode-frontend/hooks/use-session-admin';
 
-import { useSessionAdmin } from '@/plugins/admin/hooks/use-session-admin';
 import { mutationApi } from './mutation-api';
 
 export const useTestingEmailAdmin = () => {

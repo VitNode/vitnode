@@ -1164,6 +1164,11 @@ export type Core_Editor_Files__UploadMutationVariables = Exact<{
 
 export type Core_Editor_Files__UploadMutation = { __typename?: 'Mutation', core_editor_files__upload: { __typename?: 'ShowCoreFiles', extension: string, file_name: string, file_size: number, mimetype: string, id: number, height?: number | null, width?: number | null, dir_folder: string, security_key?: string | null, file_alt?: string | null, file_name_original: string } };
 
+export type Admin__Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', version: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, nav: Array<{ __typename?: 'NavAdminPluginsAuthorization', code: string, nav: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, href: string, icon?: string | null, children?: Array<{ __typename?: 'ShowAdminNavPlugins', code: string, href: string }> | null }> }> } };
+
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1194,6 +1199,47 @@ export const Core_Editor_Files__Upload = gql`
     security_key
     file_alt
     file_name_original
+  }
+}
+    `;
+export const Admin__Sessions__Authorization = gql`
+    query Admin__sessions__authorization {
+  admin__sessions__authorization {
+    user {
+      email
+      id
+      name_seo
+      is_admin
+      is_mod
+      name
+      newsletter
+      avatar_color
+      avatar {
+        id
+        dir_folder
+        file_name
+      }
+      group {
+        name {
+          language_code
+          value
+        }
+        id
+      }
+    }
+    version
+    nav {
+      code
+      nav {
+        code
+        href
+        icon
+        children {
+          code
+          href
+        }
+      }
+    }
   }
 }
     `;

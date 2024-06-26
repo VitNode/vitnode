@@ -12,11 +12,11 @@ import {
   SheetHeader,
   SheetTrigger,
 } from 'vitnode-frontend/components/ui/sheet';
+import { useSessionAdmin } from 'vitnode-frontend/hooks/use-session-admin';
 
 import { AvatarUser } from '@/components/user/avatar/avatar-user';
 import { ItemUserBarAdmin } from './item-user-bar-admin';
 import { mutationApi } from './mutation-api';
-import { useSessionAdmin } from '@/plugins/admin/hooks/use-session-admin';
 
 interface Props {
   navComponent: React.ReactNode;
