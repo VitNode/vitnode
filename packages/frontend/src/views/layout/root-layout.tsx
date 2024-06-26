@@ -8,7 +8,7 @@ import { RootProviders } from './providers';
 
 import { getConfigFile } from '../../helpers/config';
 import { fetcher } from '../../graphql/fetcher';
-import { Core_Middleware, Core_MiddlewareQuery } from '../../graphql/hooks';
+import { Core_Middleware, Core_MiddlewareQuery } from '../../graphql/code';
 
 const getMiddlewareData = async () => {
   const { data } = await fetcher<Core_MiddlewareQuery>({

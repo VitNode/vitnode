@@ -5,8 +5,7 @@ import { DrawerClose } from 'vitnode-frontend/components/ui/drawer';
 import { useSession } from 'vitnode-frontend/hooks/use-session';
 import { ThemeSwitcher } from 'vitnode-frontend/components/switchers/theme-switcher';
 import { LanguageSwitcher } from 'vitnode-frontend/components/switchers/language-switcher';
-
-import { AvatarUser } from '@/components/user/avatar/avatar-user';
+import { AvatarUser } from 'vitnode-frontend/components/ui/user/avatar';
 
 export const HeaderDrawerQuickMenu = () => {
   const t = useTranslations('core');

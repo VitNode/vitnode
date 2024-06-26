@@ -16,8 +16,8 @@ import { DateFormat } from 'vitnode-frontend/components/date-format';
 import { DataTable } from 'vitnode-frontend/components/data-table/data-table';
 import { HeaderSortingDataTable } from 'vitnode-frontend/components/data-table/header';
 import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
+import { AvatarUser } from 'vitnode-frontend/components/ui/user/avatar';
 
-import { AvatarUser } from '@/components/user/avatar/avatar-user';
 import { GroupsFiltersUsersMembersAdmin } from './filters/groups-filters-users-members-admin';
 import { AdvancedFiltersUsersMembersAdmin } from './filters/advanced/advanced-filters-users-members-admin';
 import { UsersMembersAdminViewProps } from '../users-members-admin-view';

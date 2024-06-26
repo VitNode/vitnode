@@ -4,5 +4,5 @@
   "env": {
     "node": true
   },
-  "ignorePatterns": ["tailwind.config.ts", "src/graphql/hooks.ts"]
+  "ignorePatterns": ["tailwind.config.ts", "src/graphql/code.ts"]
 }

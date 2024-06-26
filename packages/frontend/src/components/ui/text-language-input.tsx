@@ -11,7 +11,7 @@ import {
 } from './select';
 import { FormControl } from './form';
 
-import { TextLanguage } from '../../graphql/hooks';
+import { TextLanguage } from '../../graphql/code';
 import { useGlobals } from '../../hooks/use-globals';
 import { cn } from '../../helpers/classnames';
 

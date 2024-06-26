@@ -15,8 +15,7 @@ import {
 import { Loader } from 'vitnode-frontend/components/ui/loader';
 import { Button } from 'vitnode-frontend/components/ui/button';
 import { useSession } from 'vitnode-frontend/hooks/use-session';
-
-import { AvatarUser } from '@/components/user/avatar/avatar-user';
+import { AvatarUser } from 'vitnode-frontend/components/ui/user/avatar';
 
 const ModalChangeAvatar = React.lazy(async () =>
   import('./modal/modal-change-avatar').then(module => ({

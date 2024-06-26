@@ -8,11 +8,11 @@ import { Badge } from 'vitnode-frontend/components/ui/badge';
 import { DateFormat } from 'vitnode-frontend/components/date-format';
 import { DataTable } from 'vitnode-frontend/components/data-table/data-table';
 import { HeaderSortingDataTable } from 'vitnode-frontend/components/data-table/header';
+import { UserLink } from 'vitnode-frontend/components/ui/user/link';
+import { GroupFormat } from 'vitnode-frontend/components/ui/user/group-format';
 
 import { AdministratorsStaffAdminViewProps } from '../administrators-view';
 import { ShowAdminStaffAdministrators } from '@/graphql/hooks';
-import { UserLink } from '@/components/user/link/user-link';
-import { GroupFormat } from '@/components/groups/group-format';
 import { ActionsTableAdministratorsStaffAdmin } from './actions/actions';
 
 export const TableAdministratorsStaffAdmin = ({

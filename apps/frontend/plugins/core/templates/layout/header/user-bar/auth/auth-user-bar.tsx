@@ -19,9 +19,9 @@ import {
 } from 'vitnode-frontend/components/ui/dropdown-menu';
 import { Button } from 'vitnode-frontend/components/ui/button';
 import { useSession } from 'vitnode-frontend/hooks/use-session';
+import { AvatarUser } from 'vitnode-frontend/components/ui/user/avatar';
 
 import { useSignOutAPI } from '@/plugins/core/hooks/sign/out/use-sign-out-api';
-import { AvatarUser } from '@/components/user/avatar/avatar-user';
 
 export const AuthUserBar = () => {
   const t = useTranslations('core');

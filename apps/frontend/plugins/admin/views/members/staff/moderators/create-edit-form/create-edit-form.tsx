@@ -20,10 +20,10 @@ import {
   RadioGroupItem,
 } from 'vitnode-frontend/components/ui/radio-group';
 import { Label } from 'vitnode-frontend/components/ui/label';
+import { GroupInput } from 'vitnode-frontend/components/ui/user/group-input';
+import { UserInput } from 'vitnode-frontend/components/ui/user/user-input';
 
 import { useFormCreateEditFormGroupsMembersAdmin } from './hooks/use-form';
-import { UserInput } from '@/components/user/inputs/user-input';
-import { GroupInput } from '@/components/groups/input/group-input';
 
 export const CreateEditFormModeratorsStaffAdmin = () => {
   const t = useTranslations('admin.members.staff');
